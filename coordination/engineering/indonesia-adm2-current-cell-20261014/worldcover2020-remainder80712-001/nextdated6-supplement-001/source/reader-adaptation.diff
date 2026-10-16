@@ -1,0 +1,35 @@
+--- preserved-original-reader
++++ bounded-next22-reader
+@@ -7,9 +7,9 @@
+ import rasterio
+ from rasterio.windows import Window
+ ROOT=Path(__file__).resolve().parent
+-PLAN=ROOT/'actual-first-date-native-block-plan778.json'
+-PLAN_SHA='3145162ef32ff4f686a6223afb25ea64789f1f0e65e7486695da925069cdc52f'
+-OUT=ROOT/'first-raw-native-observation-001'
++PLAN=ROOT/'next-distinct-native-block-plan22.json'
++PLAN_SHA='2be527b5ee1c06b0295ceaa177f9ea68a744e36778b7a04a2f57f715c8a81e01'
++OUT=ROOT/'next-distinct-raw-native-observation-001'
+ OUT.mkdir(exist_ok=True)
+ def utc():return datetime.datetime.now(datetime.timezone.utc).isoformat()
+ def pin(path):
+@@ -23,9 +23,9 @@
+  os.replace(temporary,path);return pin(path)
+ def identity(headers):return {k.lower():v for k,v in headers.items() if k.lower() in ('etag','content-length','last-modified','accept-ranges')}
+ raw=PLAN.read_bytes();assert hashlib.sha256(raw).hexdigest()==PLAN_SHA;plan=json.loads(raw)
+-assert plan['exact_original_scope']==778 and plan['total_asset_native_block_windows']==895
++assert plan['exact_original_scope']==22 and plan['total_asset_native_block_windows']==20
+ reader=pin(Path(__file__));start=time.monotonic();started=utc();remote_blocks=0;remote_data_calls=0;remote_mask_calls=0;reused_blocks=0;failures=[];complete_items=[]
+-atomic_json(OUT/'attempt-001.started.json',{'started_utc':started,'pid':os.getpid(),'plan_sha256':PLAN_SHA,'reader':reader,'phase':'rawDN+nativeMasks+SCL-only','Root_authorization':'Conditional Rootfirstvalueauthorization after distinct f9d57d96source-method-planreview','normalization_display_indices':False})
++atomic_json(OUT/'attempt-001.started.json',{'started_utc':started,'pid':os.getpid(),'plan_sha256':PLAN_SHA,'reader':reader,'phase':'rawDN+nativeMasks+SCL-only','Root_authorization':'Launch requires distinct complete new22 plan review and explicit parent instruction; original first-date f9d57d96 review is historical method context only','normalization_display_indices':False})
+ def status(state):
+  return atomic_json(OUT/'execution-status.json',{'state':state,'started_utc':started,'updated_utc':utc(),'elapsed_seconds':time.monotonic()-start,'pid':os.getpid(),'plan_sha256':PLAN_SHA,'reader':reader,'remote_value_block_calls':remote_data_calls,'remote_mask_block_calls':remote_mask_calls,'reused_complete_block_arrays':reused_blocks,'complete_items':complete_items,'failures':failures,'new_scientific_or_native_credit':0})
+ status('running')
+@@ -91,6 +91,6 @@
+     f.flush();os.fsync(f.fileno())
+    os.replace(temporary,observations);products.append(pin(observations));receipt={'plan_sha256':PLAN_SHA,'reader_sha256':reader['sha256'],'item_id':item['item_id'],'point_count':len(point_records),'asset_block_count':item_blocks,'products':products,'acquisition_datetime':item['acquisition_datetime'],'completed_utc':utc(),'physical_or_native_credit':0};atomic_json(done,receipt);complete_items.append(receipt);status('running');print(json.dumps({'event':'item-complete','item':item['item_id'],'points':len(point_records),'asset_blocks':item_blocks}),flush=True)
+ status('complete' if not failures else 'partial-with-actual-failures')
+-atomic_json(OUT/'attempt-001.execution.json',{'started_utc':started,'ended_utc':utc(),'elapsed_seconds':time.monotonic()-start,'plan_sha256':PLAN_SHA,'reader':reader,'complete_item_count':len(complete_items),'complete_points':sum(x['point_count'] for x in complete_items),'remote_data_block_calls':remote_data_calls,'remote_mask_block_calls':remote_mask_calls,'reused_blocks':reused_blocks,'failures':failures,'process_lifetime_peak_rss_bytes':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,'runtime':{'python':sys.version,'numpy':np.__version__,'rasterio':rasterio.__version__,'gdal':rasterio.__gdal_version__},'normalization_or_display_or_indices':False,'scientific_or_native_credit':0})
++atomic_json(OUT/'attempt-001.execution.json',{'started_utc':started,'ended_utc':utc(),'elapsed_seconds':time.monotonic()-start,'plan_sha256':PLAN_SHA,'reader':reader,'complete_item_count':len(complete_items),'complete_points':sum(x['point_count'] for x in complete_items),'remote_data_block_calls':remote_data_calls,'remote_mask_block_calls':remote_mask_calls,'reused_blocks':reused_blocks,'failures':failures,'process_lifetime_peak_rss_bytes':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*(1 if sys.platform=='darwin' else 1024),'runtime':{'platform':sys.platform,'python':sys.version,'numpy':np.__version__,'rasterio':rasterio.__version__,'gdal':rasterio.__gdal_version__},'normalization_or_display_or_indices':False,'scientific_or_native_credit':0})
+ print(json.dumps({'status':'complete' if not failures else 'partial','items':len(complete_items),'points':sum(x['point_count'] for x in complete_items),'remote_blocks':remote_blocks,'reused_blocks':reused_blocks,'failures':len(failures),'elapsed_seconds':time.monotonic()-start}),flush=True)
+ sys.exit(0 if not failures else 1)

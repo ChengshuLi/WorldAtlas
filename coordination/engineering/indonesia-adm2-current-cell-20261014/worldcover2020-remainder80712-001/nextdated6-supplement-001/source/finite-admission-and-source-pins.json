@@ -1,0 +1,219 @@
+{
+  "status": "FINITE_AUTHOR_ADMISSION_ESTIMATE_NO_NEW_POLICY_OR_HEAP_LIMIT",
+  "plan": {
+    "path": "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/0f0bb6420b8a7acb9fec7eb313216e39d9b15a0c1f51234aa558b7f5aa812c31/work/.cloud-work/bulungan-nodata22-nextdate-001/next-distinct-native-block-plan22.json",
+    "bytes": 235945,
+    "sha256": "2be527b5ee1c06b0295ceaa177f9ea68a744e36778b7a04a2f57f715c8a81e01"
+  },
+  "reader": {
+    "path": "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/0f0bb6420b8a7acb9fec7eb313216e39d9b15a0c1f51234aa558b7f5aa812c31/work/.cloud-work/bulungan-nodata22-nextdate-001/read_next_distinct_native_blocks.py",
+    "bytes": 11388,
+    "sha256": "e39f7e484f5e287afa5d4dad1bb41364d3dc39ba53a2d5492f839a47a7311c27"
+  },
+  "native_block_count": 20,
+  "exact_raw_array_values_plus_masks_bytes": 48793600,
+  "largest_single_array_values_plus_mask_bytes": 3145728,
+  "maximum_asset_arrays_held_together_bytes": 9437184,
+  "conservative_encoded_npz_output_admission_bytes": 67108864,
+  "conservative_other_metadata_output_admission_bytes": 4194304,
+  "descriptive_estimated_peak_process_rss_bytes": 536870912,
+  "rss_estimate_is_not_a_process_memory_override": true,
+  "memory_method": "Sequential item/assets; only one asset native-block dictionary retained. Largest such dictionary exact values+masks bound listed; codec/import/GDAL/Python allowance is a conservative descriptive estimate, actual peak recorded portably in bytes. No whole source TIFF download or context overread beyond planned complete native blocks.",
+  "unmodified_existing_evidence_policy": true,
+  "free_filesystem_bytes_at_check": 11656937472,
+  "minimum_free_floor_bytes": 10737418240,
+  "source_assets": [
+    {
+      "item_id": "S2A_50NNJ_20200719_0_L2A",
+      "asset": "red",
+      "source_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/50/N/NJ/2020/7/S2A_50NNJ_20200719_0_L2A/B04.tif",
+      "HEAD_identity": {
+        "last-modified": "Tue, 18 Aug 2020 10:16:18 GMT",
+        "etag": "\"a26c862c17d5496495d975b70bdd6482-16\"",
+        "accept-ranges": "bytes",
+        "content-length": "127137336"
+      },
+      "whole_remote_tiff_bytes_not_fully_fetched": 127137336,
+      "native_blocks": 3,
+      "decoded_value_plus_mask_bytes": 9437184,
+      "header_receipt": {
+        "file": "asset-headers-001/S2A_50NNJ_20200719_0_L2A.json",
+        "bytes": 17276,
+        "sha256": "8527a6887a91e531ab858f94e475358ecaaa1772700a3025d641a7776f7592d9"
+      }
+    },
+    {
+      "item_id": "S2A_50NNJ_20200719_0_L2A",
+      "asset": "green",
+      "source_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/50/N/NJ/2020/7/S2A_50NNJ_20200719_0_L2A/B03.tif",
+      "HEAD_identity": {
+        "last-modified": "Tue, 18 Aug 2020 10:15:39 GMT",
+        "etag": "\"5676167f32f4700e8593b5d1dcdd2348-16\"",
+        "accept-ranges": "bytes",
+        "content-length": "132196181"
+      },
+      "whole_remote_tiff_bytes_not_fully_fetched": 132196181,
+      "native_blocks": 3,
+      "decoded_value_plus_mask_bytes": 9437184,
+      "header_receipt": {
+        "file": "asset-headers-001/S2A_50NNJ_20200719_0_L2A.json",
+        "bytes": 17276,
+        "sha256": "8527a6887a91e531ab858f94e475358ecaaa1772700a3025d641a7776f7592d9"
+      }
+    },
+    {
+      "item_id": "S2A_50NNJ_20200719_0_L2A",
+      "asset": "blue",
+      "source_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/50/N/NJ/2020/7/S2A_50NNJ_20200719_0_L2A/B02.tif",
+      "HEAD_identity": {
+        "last-modified": "Tue, 18 Aug 2020 10:15:02 GMT",
+        "etag": "\"30d410686e54f7bfdf1f9c93114eef9e-15\"",
+        "accept-ranges": "bytes",
+        "content-length": "124564733"
+      },
+      "whole_remote_tiff_bytes_not_fully_fetched": 124564733,
+      "native_blocks": 3,
+      "decoded_value_plus_mask_bytes": 9437184,
+      "header_receipt": {
+        "file": "asset-headers-001/S2A_50NNJ_20200719_0_L2A.json",
+        "bytes": 17276,
+        "sha256": "8527a6887a91e531ab858f94e475358ecaaa1772700a3025d641a7776f7592d9"
+      }
+    },
+    {
+      "item_id": "S2A_50NNJ_20200719_0_L2A",
+      "asset": "nir",
+      "source_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/50/N/NJ/2020/7/S2A_50NNJ_20200719_0_L2A/B08.tif",
+      "HEAD_identity": {
+        "last-modified": "Tue, 18 Aug 2020 10:17:42 GMT",
+        "etag": "\"8d49b6174f7e524d62d08e327bb888ed-17\"",
+        "accept-ranges": "bytes",
+        "content-length": "142196754"
+      },
+      "whole_remote_tiff_bytes_not_fully_fetched": 142196754,
+      "native_blocks": 3,
+      "decoded_value_plus_mask_bytes": 9437184,
+      "header_receipt": {
+        "file": "asset-headers-001/S2A_50NNJ_20200719_0_L2A.json",
+        "bytes": 17276,
+        "sha256": "8527a6887a91e531ab858f94e475358ecaaa1772700a3025d641a7776f7592d9"
+      }
+    },
+    {
+      "item_id": "S2A_50NNJ_20200719_0_L2A",
+      "asset": "scl",
+      "source_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/50/N/NJ/2020/7/S2A_50NNJ_20200719_0_L2A/SCL.tif",
+      "HEAD_identity": {
+        "last-modified": "Tue, 18 Aug 2020 10:19:35 GMT",
+        "etag": "\"19216016f0fe5ea3c0cc2dfba03356e7\"",
+        "accept-ranges": "bytes",
+        "content-length": "2274451"
+      },
+      "whole_remote_tiff_bytes_not_fully_fetched": 2274451,
+      "native_blocks": 3,
+      "decoded_value_plus_mask_bytes": 1572864,
+      "header_receipt": {
+        "file": "asset-headers-001/S2A_50NNJ_20200719_0_L2A.json",
+        "bytes": 17276,
+        "sha256": "8527a6887a91e531ab858f94e475358ecaaa1772700a3025d641a7776f7592d9"
+      }
+    },
+    {
+      "item_id": "S2B_50NNK_20200316_1_L2A",
+      "asset": "red",
+      "source_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/50/N/NK/2020/3/S2B_50NNK_20200316_1_L2A/B04.tif",
+      "HEAD_identity": {
+        "last-modified": "Wed, 11 Oct 2023 19:38:07 GMT",
+        "etag": "\"08cede64189d6b7a5cdace9a6a915c93-21\"",
+        "accept-ranges": "bytes",
+        "content-length": "168685169"
+      },
+      "whole_remote_tiff_bytes_not_fully_fetched": 168685169,
+      "native_blocks": 1,
+      "decoded_value_plus_mask_bytes": 2273280,
+      "header_receipt": {
+        "file": "asset-headers-001/S2B_50NNK_20200316_1_L2A.json",
+        "bytes": 17494,
+        "sha256": "a95801857538291949f71f5e971bfbf0b4ffbaaf17fd3eb642b04cedd4982783"
+      }
+    },
+    {
+      "item_id": "S2B_50NNK_20200316_1_L2A",
+      "asset": "green",
+      "source_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/50/N/NK/2020/3/S2B_50NNK_20200316_1_L2A/B03.tif",
+      "HEAD_identity": {
+        "last-modified": "Wed, 11 Oct 2023 19:36:38 GMT",
+        "etag": "\"56aacc0c619b4ec7c5e2c3da1cde25c5-22\"",
+        "accept-ranges": "bytes",
+        "content-length": "176286583"
+      },
+      "whole_remote_tiff_bytes_not_fully_fetched": 176286583,
+      "native_blocks": 1,
+      "decoded_value_plus_mask_bytes": 2273280,
+      "header_receipt": {
+        "file": "asset-headers-001/S2B_50NNK_20200316_1_L2A.json",
+        "bytes": 17494,
+        "sha256": "a95801857538291949f71f5e971bfbf0b4ffbaaf17fd3eb642b04cedd4982783"
+      }
+    },
+    {
+      "item_id": "S2B_50NNK_20200316_1_L2A",
+      "asset": "blue",
+      "source_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/50/N/NK/2020/3/S2B_50NNK_20200316_1_L2A/B02.tif",
+      "HEAD_identity": {
+        "last-modified": "Wed, 11 Oct 2023 19:35:23 GMT",
+        "etag": "\"c3e43cedf1f0b67c6933676c0704234a-20\"",
+        "accept-ranges": "bytes",
+        "content-length": "164249990"
+      },
+      "whole_remote_tiff_bytes_not_fully_fetched": 164249990,
+      "native_blocks": 1,
+      "decoded_value_plus_mask_bytes": 2273280,
+      "header_receipt": {
+        "file": "asset-headers-001/S2B_50NNK_20200316_1_L2A.json",
+        "bytes": 17494,
+        "sha256": "a95801857538291949f71f5e971bfbf0b4ffbaaf17fd3eb642b04cedd4982783"
+      }
+    },
+    {
+      "item_id": "S2B_50NNK_20200316_1_L2A",
+      "asset": "nir",
+      "source_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/50/N/NK/2020/3/S2B_50NNK_20200316_1_L2A/B08.tif",
+      "HEAD_identity": {
+        "last-modified": "Wed, 11 Oct 2023 19:40:25 GMT",
+        "etag": "\"d4e6a241e0408c7e6e0c01187311486b-23\"",
+        "accept-ranges": "bytes",
+        "content-length": "190654224"
+      },
+      "whole_remote_tiff_bytes_not_fully_fetched": 190654224,
+      "native_blocks": 1,
+      "decoded_value_plus_mask_bytes": 2273280,
+      "header_receipt": {
+        "file": "asset-headers-001/S2B_50NNK_20200316_1_L2A.json",
+        "bytes": 17494,
+        "sha256": "a95801857538291949f71f5e971bfbf0b4ffbaaf17fd3eb642b04cedd4982783"
+      }
+    },
+    {
+      "item_id": "S2B_50NNK_20200316_1_L2A",
+      "asset": "scl",
+      "source_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/50/N/NK/2020/3/S2B_50NNK_20200316_1_L2A/SCL.tif",
+      "HEAD_identity": {
+        "last-modified": "Wed, 11 Oct 2023 19:43:37 GMT",
+        "etag": "\"778cdc5ff28d27489f144776be7cff58\"",
+        "accept-ranges": "bytes",
+        "content-length": "1884830"
+      },
+      "whole_remote_tiff_bytes_not_fully_fetched": 1884830,
+      "native_blocks": 1,
+      "decoded_value_plus_mask_bytes": 378880,
+      "header_receipt": {
+        "file": "asset-headers-001/S2B_50NNK_20200316_1_L2A.json",
+        "bytes": 17494,
+        "sha256": "a95801857538291949f71f5e971bfbf0b4ffbaaf17fd3eb642b04cedd4982783"
+      }
+    }
+  ],
+  "prior895_arrays_to_read_or_download": 0,
+  "value_and_mask_reads_so_far": 0
+}

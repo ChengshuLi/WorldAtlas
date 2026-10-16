@@ -1,0 +1,13 @@
+# Six additional original Indonesia physical answers
+
+This review-only continuation adopts the literal six distinct-reviewed original Bulungan keys: five dated coherent dark water-like body observations (points 2494, 2507, 3441, 3489, 3828) and visible vegetation/cover at point 3823. The original seven author proposals are retained unchanged. Point 3829 remains held because a dark brown basin interior does not adequately separate water from wet/drained floor; the other fifteen specific questions remain held.
+
+The original physical accounting is 133,296 prior answers + 6 = 133,302 of 133,846; 544 specific questions remain: Bulungan 63, Halmahera Selatan 85, Aru 159 and Batam 237. The original 778-key dated-follow-up cohort has 234 adopted answers and 544 holds. All 22 actual February 22 nodata observations are preserved unchanged; these six keys are answered by genuinely different March 16 or July 19 observations, not by reinterpreting nodata.
+
+The existing native-window reader was reused with the exact reviewed bounded plan. It acquired 20 new native blocks with literal values and masks in 80.999 seconds, with zero failures and 123,383,808 bytes descriptive peak RSS. All 22 new centres have valid non-nodata native values; this availability alone supplied no physical answer. All 20 new NPZ arrays are included with whole hashes and bounded decoded-member inventories. The original 895 arrays were not reread or reacquired and remain privately preserved. The prior source/version/location and accounting records are reused through immutable pins.
+
+Two accepted answers use qualitative, uncalibrated PB05 raw morphology only. All five new PB05 radiometry/offset conflicts and the 93 original Batam conflicts remain held. The displays apply no gain, offset, reflectance units or index; native 20 m SCL is shown separately as context, never as body truth. Original raw values, masks, transforms, fractional markers, complete available native windows, cloud/shadow and finite support limits remain explicit.
+
+These are dated visible body/cover and original-source-version location answers. They do not establish dry understory, permanent or present truth, hydrologic kind, tidal state, whole-Atlas-cell binary surface, legal jurisdiction, source applicability, parent correction, native authority or repair credit. All independent original source, owner, parent, geographic-portion and territorial holds remain unchanged. No main, selector, ownership or deployment change occurs. Issues 1884 and 1202 remain open.
+
+Contains modified Copernicus Sentinel data [2020]. Source legal notice: https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice.
