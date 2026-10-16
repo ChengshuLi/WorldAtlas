@@ -107,13 +107,13 @@ export class ImmutableReader {
   }
   descriptor(name,version=this.version) {
     demand(safe(name)&&commit(version),'Unsafe immutable path/commit');
+    const key=version+':'+name,previous=this.inventory.get(key);
+    if(previous)return previous;
     const row=this.git('ls-tree','-z',version,'--',name).toString();
     demand(/^100(644|755) blob [a-f0-9]{40}\t/.test(row)&&row.slice(row.indexOf('\t')+1)===name+'\0','Require whole ordinary Git input: '+name);
     const [mode,,blob]=row.slice(0,row.indexOf('\t')).split(' '),bytes=Number(this.git('cat-file','-s',blob));
     demand(Number.isSafeInteger(bytes)&&bytes>=0,'Invalid whole ordinary file size: '+name);
-    const key=version+':'+name,previous=this.inventory.get(key);
     const pin={commit:version,path:name,mode,git_blob_oid:blob,bytes};
-    if(previous){demand(previous.git_blob_oid===blob&&previous.bytes===bytes&&previous.mode===mode,'Immutable descriptor drift');return previous;}
     this.inventory.set(key,pin);return pin;
   }
   read(name,{version=this.version,expected}={}) {
