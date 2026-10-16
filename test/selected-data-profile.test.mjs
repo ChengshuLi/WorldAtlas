@@ -11,7 +11,7 @@ import {createHash} from 'node:crypto';
 import {verifyIssueScope} from '../scripts/issue-claim-contract.mjs';
 import {checkPremergeEvidence} from '../scripts/premerge-evidence.mjs';
 import {prepareIntegration, completeIntegration} from '../scripts/merge-integration.mjs';
-import {integrationProfile, selectedDataSelection, selectedDataCandidate, validateSelectedExpectations, SELECTED_SMOKE} from '../scripts/integration-profile.mjs';
+import {integrationProfile, selectedDataSelection, selectedDataCandidate, candidateGeographyCode, validateSelectedExpectations, SELECTED_SMOKE} from '../scripts/integration-profile.mjs';
 const prefix = 'coordination/engineering/fixture-delivery/';
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 // Real ordinary ZIP records exercise the existing authenticated fixed-member
@@ -1747,4 +1747,140 @@ test('historical physical reproduction cannot use an unavailable complete origin
   assert.equal(await f.run({metadataDiagnostics: diagnostics}), null);
   assert.match(diagnostics.failure, /incomplete tree inventory/);
   assert.equal(f.reads.includes(f.original.git_blob_oid), false, 'no unbound historical body read');
+});
+
+
+function retainedEvidenceFixture(name = 'execution/retained-helper.mjs', body = 'throw Error("must never execute");\n') {
+  const f = scientificManifestFixture(), member = f.packetPrefix + name;
+  const pin = f.put(member, body);
+  f.files.push({filename: member, status: 'added'});
+  return Object.assign(f, {retainedName: member, retainedPin: pin});
+}
+
+test('retained scientific helper/source formats use role-qualified DATA without executing or installing them', async () => {
+  const formats = [
+    ['execution/retained-helper.mjs', 'throw Error("must never execute");\n'],
+    ['execution/retained-helper.py', 'raise RuntimeError("must never execute")\n'],
+    ['execution/run.stdout.jsonl', ''],
+    ['execution/records.jsonl', '{"record":1}\n{"record":2}\n'],
+    ['source/metadata.json', '<?xml version="1.0"?><source>retained original response</source>\n'],
+    ['source/metadata.xml', '<!DOCTYPE x SYSTEM "https://invalid.example/"><x/>\n'],
+    ['source/source.geojson.lfs-pointer', 'version https://git-lfs.github.com/spec/v1\noid sha256:' + 'a'.repeat(64) + '\nsize 100\n'],
+    ['source/source.geojson.gz', gzipSync('{"type":"FeatureCollection","features":[]}')],
+    ['execution/native-row-latitudes.f64le.gz', gzipSync(Buffer.from([0,0,0,0,0,0,240,63]))]
+  ];
+  for (const [name, body] of formats) {
+    const f = retainedEvidenceFixture(name, body), diagnostics = {};
+    assert.equal(selectedDataCandidate(f.branch, f.files, f.reservation), true, name);
+    const result = await f.run({metadataDiagnostics: diagnostics});
+    assert.equal(result?.test_selection, 'selected-data', name + ': ' + diagnostics.failure);
+    assert(f.reads.includes(f.retainedPin.git_blob_oid), 'whole original body must be read: ' + name);
+    assert.equal(candidateGeographyCode('full', f.files, result.test_selection), false);
+  }
+  const prepared = await gateFixture(retainedEvidenceFixture()).select();
+  assert.deepEqual(prepared, {profile:'full', shards:[0], test_selection:'selected-data',
+    expectations_path:'coordination/engineering/retained-delivery/new-packet/selected-delivery-expectations.json',
+    geography_software:false});
+});
+
+test('retained helper eligibility requires complete base-role proof even without a manifest edit', async () => {
+  const f = retainedEvidenceFixture();
+  f.files = f.files.filter(row => row.filename !== f.manifestPath);
+  f.authored.entries.set(f.manifestPath, f.baseline.entries.get(f.manifestPath));
+  delete f.reservation.evidence_manifest;
+  assert.equal((await f.run())?.test_selection, 'selected-data');
+  f.blobs.delete(f.authored.entries.get(f.base.artifact_consumption.certificate.path).sha);
+  assert.equal(await f.run(), null, 'unavailable base routing must not imply absence of a current code role');
+});
+
+for (const [name, change] of Object.entries({
+  'exact package input': f => {f.definition.inputs.push(f.retainedName); f.put('.github/package-inputs.json', f.definition);},
+  'package directory': f => {f.definition.inputs.push(f.packetPrefix + 'execution/'); f.put('.github/package-inputs.json', f.definition);},
+  'package verification role': f => {f.policy.verification_paths.push(f.retainedName); f.definition.verification_paths.push(f.retainedName);
+    f.put('.github/package-inputs.json', f.policy, true); f.put('.github/package-inputs.json', f.definition);},
+  'selected logical role': f => {const side = f.put(f.packetPrefix + 'selection-sidecar.json', {...f.sidecarBody,
+    base_selection:f.base, logical_asset_map:{...f.sidecarBody.logical_asset_map, patch:f.retainedPin}});
+    f.put('data/ownership-selection.json', {...f.base, additive_release:{path:side.path,bytes:side.bytes,sha256:side.sha256}});},
+  'existing helper rewrite': f => {f.baseline.entries.set(f.retainedName, {...f.authored.entries.get(f.retainedName), sha:'f'.repeat(40)});
+    f.files.find(row => row.filename === f.retainedName).status = 'modified';},
+  'executable mode': f => {f.authored.entries.get(f.retainedName).mode = '100755';},
+  'symlink mode': f => {f.authored.entries.get(f.retainedName).mode = '120000';},
+  'tree body mismatch': f => {f.blobs.set(f.retainedPin.git_blob_oid, Buffer.from('different complete body'));},
+  'invalid UTF-8': f => {f.put(f.retainedName, Buffer.from([0xff]));},
+  'NUL text': f => {f.put(f.retainedName, Buffer.from('code\0body'));},
+  'foreign scope': f => {f.reservation.owned_paths = ['coordination/engineering/other/'];},
+  'mixed current software': f => {f.put('scripts/qualify-source-cohort.py', '# changed current code\n');
+    f.files.push({filename:'scripts/qualify-source-cohort.py',status:'modified'});},
+})) test('retained helper keeps full regression for ' + name, async () => {
+  const f = retainedEvidenceFixture(); change(f);
+  assert.equal(await f.run(), null, name);
+  assert.equal(candidateGeographyCode('full', f.files), true, 'failed qualification retains conservative software routing');
+});
+
+for (const name of ['setup.py', '__init__.py', 'sitecustomize.py', 'usercustomize.py', 'package.json', 'tsconfig.json'])
+  test('retained evidence cannot introduce loader/configuration file ' + name, async () => {
+    const f = retainedEvidenceFixture(name, '{}');
+    assert.equal(selectedDataCandidate(f.branch, f.files, f.reservation), false);
+    assert.equal(await f.run(), null);
+  });
+
+for (const role of ['critical_files', 'entry_critical_files', 'application_inputs'])
+  test('retained helper cannot be declared current ' + role, async () => {
+    let retainedName;
+    const f = baseRoutingManifestFixture(s => {
+      retainedName = s.f.packetPrefix + 'execution/retained-helper.mjs';
+      const pin = s.f.put(retainedName, 'throw Error("current executable");\n');
+      s.f.files.push({filename:retainedName,status:'added'});
+      if (role === 'critical_files') s.code.critical_files.push(pin);
+      else if (role === 'entry_critical_files') s.code.entry_critical_files = {'scripts/build-static-inner.mjs':[pin]};
+      else s.certificate.application_inputs.push(pin);
+    });
+    const diagnostics = {};
+    assert.equal(await f.run({metadataDiagnostics:diagnostics}), null);
+    assert.match(diagnostics.failure, /consumed base role/);
+  });
+
+test('retained whole gzip/JSONL bodies reject malformed evidence and keep exact per-row read bounds', async () => {
+  for (const [name, raw] of [
+    ['execution/run.jsonl', ''], ['execution/run.stdout.jsonl', 'not JSON\n'],
+    ['source/body.geojson.gz', gzipSync('not JSON')],
+    ['execution/native-row-latitudes.f64le.gz', gzipSync(Buffer.from('binary')).subarray(0, -1)]
+  ]) assert.equal(await retainedEvidenceFixture(name, raw).run(), null, name);
+  const f = retainedEvidenceFixture(), original = f.api, calls = [];
+  f.api = async (route, method, body, options) => {
+    const raw = f.blobs.get(route.split('/').at(-1));
+    assert.equal(options.expectedImmutableBytes, raw.length);
+    calls.push({oid:route.split('/').at(-1), ...options});
+    return original(route, method, body, options);
+  };
+  assert.equal((await f.run())?.test_selection, 'selected-data');
+  assert(calls.some(row => row.retainImmutableBlob === true));
+  assert(calls.some(row => row.oid === f.retainedPin.git_blob_oid && row.retainImmutableBlob === false));
+});
+
+test('retained XML under an original JSON name cannot become a current or packaged role', async () => {
+  for (const packageInput of [false, true]) {
+    const f = retainedEvidenceFixture('source/original-metadata.json', '<?xml version="1.0"?><source/>');
+    if (packageInput) {
+      f.definition.inputs.push(f.retainedName);
+      f.put('.github/package-inputs.json', f.definition);
+    } else {
+      const certificate = JSON.parse(f.blobs.get(f.base.artifact_consumption.certificate.git_blob_oid));
+      const code = JSON.parse(f.blobs.get(certificate.application_consumer_code.git_blob_oid));
+      // Candidate current-role metadata must be unchanged, not silently refreshed
+      // to launder the original response into the selected consumer.
+      code.critical_files.push(f.retainedPin);
+      f.put(certificate.application_consumer_code.path, code);
+    }
+    assert.equal(await f.run(), null);
+  }
+});
+
+test('retained evidence cannot use cached bytes to hide a conflicting tree size', async () => {
+  const f = retainedEvidenceFixture();
+  const original = f.authored.entries.get('data/ownership-selection.json');
+  f.authored.entries.set(f.retainedName, {...original, path:f.retainedName, size:original.size + 1});
+  const diagnostics = {};
+  assert.equal(await f.run({metadataDiagnostics:diagnostics}), null);
+  assert.match(diagnostics.failure, /cached blob size differs/);
 });
