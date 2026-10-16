@@ -1,0 +1,1769 @@
+{
+  "item": "S2A_47PLN_20200105_0_L2A",
+  "acquisition_datetime_producer": "2020-01-05T04:05:09.130795Z",
+  "acquisition_datetime_STAC": "2020-01-05T04:05:09.130000Z",
+  "native_retained_source_body": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/actual-native-blocks-001/S2A_47PLN_20200105_0_L2A/native-observations.json",
+    "bytes": 83330,
+    "sha256": "aa9feab8486872190c59b898296fb25d2d75ca174ba41e8ef5c5970cd584a871"
+  },
+  "original_package": "gb-MMR-ADM3--physical-interpretation",
+  "new_point_count": 3,
+  "points": [
+    {
+      "index": 0,
+      "original_key": {
+        "owner": 30350,
+        "y": 122715,
+        "x": 202449
+      },
+      "original_bulk_point_index": 11658,
+      "longitude": 97.99874888429468,
+      "latitude": 11.413799767346017,
+      "physical_block": [
+        3,
+        8
+      ],
+      "request_record_index": 7138,
+      "source_sids": [
+        44893,
+        44954,
+        45117
+      ],
+      "assets": {
+        "red": {
+          "value": 288,
+          "valid_mask": 255,
+          "source_pixel": [
+            3809,
+            9076
+          ],
+          "local_pixel": [
+            738,
+            885
+          ],
+          "neighbourhood": [
+            [
+              269,
+              281,
+              372
+            ],
+            [
+              255,
+              288,
+              372
+            ],
+            [
+              293,
+              340,
+              383
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "retained_data": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/red.tif",
+            "bytes": 1139117,
+            "sha256": "fca932b0b0a73167f64ba1ca732931221506c65d6f79c23bb9c68657a4203f5c"
+          },
+          "retained_source_mask": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/red-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "6a2ee661a206574639e24520a8e2b81fe503f883bdbd6443f44434d1196eed4d"
+          },
+          "local_window": [
+            884,
+            737,
+            3,
+            3
+          ]
+        },
+        "green": {
+          "value": 531,
+          "valid_mask": 255,
+          "source_pixel": [
+            3809,
+            9076
+          ],
+          "local_pixel": [
+            738,
+            885
+          ],
+          "neighbourhood": [
+            [
+              497,
+              533,
+              543
+            ],
+            [
+              467,
+              531,
+              568
+            ],
+            [
+              512,
+              570,
+              533
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "retained_data": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/green.tif",
+            "bytes": 1194877,
+            "sha256": "357990cbbcf799e79c8e729646aa2dd6b89f3a65e209d43a4927cbe93723a6ea"
+          },
+          "retained_source_mask": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/green-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "56c651c7d0c69dd6e6afc0bed5cdb030b56b6e2682f8daea4d0939256281f74d"
+          },
+          "local_window": [
+            884,
+            737,
+            3,
+            3
+          ]
+        },
+        "blue": {
+          "value": 301,
+          "valid_mask": 255,
+          "source_pixel": [
+            3809,
+            9076
+          ],
+          "local_pixel": [
+            738,
+            885
+          ],
+          "neighbourhood": [
+            [
+              276,
+              294,
+              343
+            ],
+            [
+              239,
+              301,
+              350
+            ],
+            [
+              257,
+              296,
+              350
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "retained_data": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/blue.tif",
+            "bytes": 1217281,
+            "sha256": "e11335621cf30a4eb73797071036d59414c4aab7d269ce7b4b7d849724b2220d"
+          },
+          "retained_source_mask": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/blue-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "d14c3d33deaff7f49428d44f968222b09d11253aa37951094ae8515f2098027e"
+          },
+          "local_window": [
+            884,
+            737,
+            3,
+            3
+          ]
+        },
+        "nir": {
+          "value": 3586,
+          "valid_mask": 255,
+          "source_pixel": [
+            3809,
+            9076
+          ],
+          "local_pixel": [
+            738,
+            885
+          ],
+          "neighbourhood": [
+            [
+              3662,
+              3560,
+              2334
+            ],
+            [
+              3560,
+              3586,
+              2298
+            ],
+            [
+              3610,
+              3566,
+              2044
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "retained_data": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/nir.tif",
+            "bytes": 1157755,
+            "sha256": "dafcef522da4a9b3a6b2558f42fc738df338816ae967d7f4dbdc1ac031e559d6"
+          },
+          "retained_source_mask": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/nir-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "2aedce4b3c14ed62c1120404c532449e4bfd745295088007a59540e4dcf57bcb"
+          },
+          "local_window": [
+            884,
+            737,
+            3,
+            3
+          ]
+        },
+        "scl": {
+          "value": 4,
+          "valid_mask": 255,
+          "source_pixel": [
+            1904,
+            4538
+          ],
+          "local_pixel": [
+            369,
+            443
+          ],
+          "neighbourhood": [
+            [
+              4,
+              4,
+              6
+            ],
+            [
+              4,
+              4,
+              6
+            ],
+            [
+              4,
+              4,
+              6
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "retained_data": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/scl.tif",
+            "bytes": 5917,
+            "sha256": "8ed0420a777aee3513065712cd2e9268dde70a650b78c42ed9d6fc791cb809ec"
+          },
+          "retained_source_mask": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/scl-source-mask.tif",
+            "bytes": 2753,
+            "sha256": "94e138d2b69cfc3dd73ab8c0f2f26c8bba6c25b9a3ec6d0efe2606f24e19d98f"
+          },
+          "local_window": [
+            442,
+            368,
+            3,
+            3
+          ]
+        }
+      },
+      "original_current_question_record": {
+        "point_index": 11658,
+        "original_key": {
+          "owner": 30350,
+          "y": 122715,
+          "x": 202449
+        },
+        "original_package": "gb-MMR-ADM3--physical-interpretation",
+        "original_record_unchanged": {
+          "original_block": 29,
+          "original_record_ordinal": 7138,
+          "original_owners": [
+            30350
+          ],
+          "original_SIDs": [
+            44893,
+            44954,
+            45117
+          ],
+          "original_class": "source-relative",
+          "original_interval": [
+            122715,
+            202448,
+            202450,
+            [
+              30350
+            ],
+            [
+              44893,
+              44954,
+              45117
+            ],
+            "source-relative"
+          ]
+        },
+        "unchanged_centre": {
+          "longitude": 97.99874888429468,
+          "latitude": 11.413799767346017,
+          "ideal_longitude_numerator": 25691940,
+          "ideal_longitude_denominator": 262166
+        },
+        "source_year": 2020,
+        "source_product": "ESA WorldCover2020v100 Map",
+        "source_observation": {
+          "coverage_status": "valid-native-value",
+          "class_code": 10,
+          "valid_mask": 255,
+          "nodata_match": false,
+          "neighbourhood_complete": true,
+          "neighbourhood_codes": [
+            [
+              10,
+              90,
+              90
+            ],
+            [
+              10,
+              10,
+              10
+            ],
+            [
+              10,
+              10,
+              10
+            ]
+          ],
+          "neighbourhood_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "centre_array": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-06-23.npz",
+          "source_object_identity": {
+            "last-modified": "Tue, 25 Oct 2022 13:31:55 GMT",
+            "etag": "\"0b65ab52512721af33f117fc70ea284e-2\"",
+            "accept-ranges": "bytes",
+            "content-length": "8619585"
+          }
+        },
+        "source_point_reference": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/point-observations.jsonl",
+          "jsonl_line_zero_based": 1865,
+          "source_point_index": 11658
+        },
+        "tile": "N09E096",
+        "native_row": 7034,
+        "native_col": 23984,
+        "positive_original_source_body_association": {
+          "original_key": {
+            "owner": 30350,
+            "y": 122715,
+            "x": 202449
+          },
+          "original_package": "gb-MMR-ADM3--physical-interpretation",
+          "original_interval_pointer": "/packages/2/rows/7138",
+          "source_sids": [
+            44893,
+            44954,
+            45117
+          ],
+          "owner_name": "Bokpyin",
+          "framework_province_id": "framework:province:kawthoung:25f2b1f750b9",
+          "original_owner_source_atom": "gb:MMR:ADM3:66882298B82483484204646",
+          "source_ADM3_member": {
+            "source_index": 45117,
+            "feature_ordinal": 146,
+            "source_id": "gb:MMR:ADM3:66882298B82483484204646",
+            "feature_name": "Bokpyin",
+            "feature_geometry_pointer": "/features/146/geometry"
+          },
+          "owner_complete_source_polygon_parts": [
+            {
+              "part_ordinal": 34,
+              "source_geometry_pointer": "/features/146/geometry/coordinates/34",
+              "contact": "interior",
+              "observation_pointer": "/operations/368"
+            }
+          ],
+          "whole_ADM2_source_contacts": [
+            {
+              "source_index": 44954,
+              "contact": "interior",
+              "source_geometry_pointer": "/features/57/geometry",
+              "observation_pointer": "/operations/488"
+            }
+          ],
+          "outside_all_whole_ADM2_source_features": false,
+          "other_original_source_sids": [
+            44893,
+            44954
+          ],
+          "foreign_original_source_sids": [],
+          "other_SID_observation_note": "Original source-candidate references are preserved. ADM1/foreign geometry is not newly observed in this association operation.",
+          "normative_centre": {
+            "latitude": 11.413799767346017,
+            "longitude_numerator": 25691940,
+            "longitude_denominator": 262166
+          },
+          "remaining_after_known2237_adopted_answers": true
+        },
+        "specific_annual_source_fact": "The annual2020 WorldCover v100 Map supports modeled tree canopy at this unchanged original-source-associated native location. Tree cover can include floodedforest; no dry-understorey or whole-cell claim.",
+        "proposed_bounded_answer": false,
+        "category": "unresolved-water-wet-cover-edge-location",
+        "proposed_answer": null,
+        "remaining_physical_question": "Actual native context contains a water/wet-cover transition. A more precise bank/shore/mixed-pixel/registration body relation is needed for this narrow adoption.",
+        "separate_unadopted_questions": [
+          "Annual2020 modeled source at the containing10m-scale pixel,not independent instantaneous/groundtruth or wholeAtlas-cell coverage.",
+          "Original2019 source-version body association is affirmative; not current/legal ownership,territorial clearance,source2019shoreline equivalence or native/repair authority.",
+          "Flooded understorey is not ruled out by tree canopy."
+        ],
+        "retained_native_observation": null,
+        "status": "OPEN SPECIFIC PHYSICAL QUESTION",
+        "authority_or_repair_credit": 0
+      }
+    },
+    {
+      "index": 1,
+      "original_key": {
+        "owner": 30350,
+        "y": 122721,
+        "x": 202444
+      },
+      "original_bulk_point_index": 11692,
+      "longitude": 97.99188300542403,
+      "latitude": 11.405723537150084,
+      "physical_block": [
+        3,
+        8
+      ],
+      "request_record_index": 7154,
+      "source_sids": [
+        44893,
+        44954,
+        45117
+      ],
+      "assets": {
+        "red": {
+          "value": 159,
+          "valid_mask": 255,
+          "source_pixel": [
+            3898,
+            9001
+          ],
+          "local_pixel": [
+            827,
+            810
+          ],
+          "neighbourhood": [
+            [
+              145,
+              143,
+              178
+            ],
+            [
+              129,
+              159,
+              196
+            ],
+            [
+              142,
+              205,
+              242
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "retained_data": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/red.tif",
+            "bytes": 1139117,
+            "sha256": "fca932b0b0a73167f64ba1ca732931221506c65d6f79c23bb9c68657a4203f5c"
+          },
+          "retained_source_mask": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/red-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "6a2ee661a206574639e24520a8e2b81fe503f883bdbd6443f44434d1196eed4d"
+          },
+          "local_window": [
+            809,
+            826,
+            3,
+            3
+          ]
+        },
+        "green": {
+          "value": 237,
+          "valid_mask": 255,
+          "source_pixel": [
+            3898,
+            9001
+          ],
+          "local_pixel": [
+            827,
+            810
+          ],
+          "neighbourhood": [
+            [
+              256,
+              266,
+              298
+            ],
+            [
+              232,
+              237,
+              271
+            ],
+            [
+              254,
+              320,
+              379
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "retained_data": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/green.tif",
+            "bytes": 1194877,
+            "sha256": "357990cbbcf799e79c8e729646aa2dd6b89f3a65e209d43a4927cbe93723a6ea"
+          },
+          "retained_source_mask": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/green-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "56c651c7d0c69dd6e6afc0bed5cdb030b56b6e2682f8daea4d0939256281f74d"
+          },
+          "local_window": [
+            809,
+            826,
+            3,
+            3
+          ]
+        },
+        "blue": {
+          "value": 172,
+          "valid_mask": 255,
+          "source_pixel": [
+            3898,
+            9001
+          ],
+          "local_pixel": [
+            827,
+            810
+          ],
+          "neighbourhood": [
+            [
+              212,
+              190,
+              225
+            ],
+            [
+              183,
+              172,
+              215
+            ],
+            [
+              186,
+              225,
+              271
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "retained_data": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/blue.tif",
+            "bytes": 1217281,
+            "sha256": "e11335621cf30a4eb73797071036d59414c4aab7d269ce7b4b7d849724b2220d"
+          },
+          "retained_source_mask": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/blue-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "d14c3d33deaff7f49428d44f968222b09d11253aa37951094ae8515f2098027e"
+          },
+          "local_window": [
+            809,
+            826,
+            3,
+            3
+          ]
+        },
+        "nir": {
+          "value": 508,
+          "valid_mask": 255,
+          "source_pixel": [
+            3898,
+            9001
+          ],
+          "local_pixel": [
+            827,
+            810
+          ],
+          "neighbourhood": [
+            [
+              197,
+              358,
+              683
+            ],
+            [
+              248,
+              508,
+              1064
+            ],
+            [
+              657,
+              1322,
+              2064
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "retained_data": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/nir.tif",
+            "bytes": 1157755,
+            "sha256": "dafcef522da4a9b3a6b2558f42fc738df338816ae967d7f4dbdc1ac031e559d6"
+          },
+          "retained_source_mask": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/nir-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "2aedce4b3c14ed62c1120404c532449e4bfd745295088007a59540e4dcf57bcb"
+          },
+          "local_window": [
+            809,
+            826,
+            3,
+            3
+          ]
+        },
+        "scl": {
+          "value": 2,
+          "valid_mask": 255,
+          "source_pixel": [
+            1949,
+            4500
+          ],
+          "local_pixel": [
+            414,
+            405
+          ],
+          "neighbourhood": [
+            [
+              2,
+              2,
+              4
+            ],
+            [
+              2,
+              2,
+              4
+            ],
+            [
+              4,
+              4,
+              4
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "retained_data": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/scl.tif",
+            "bytes": 5917,
+            "sha256": "8ed0420a777aee3513065712cd2e9268dde70a650b78c42ed9d6fc791cb809ec"
+          },
+          "retained_source_mask": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/scl-source-mask.tif",
+            "bytes": 2753,
+            "sha256": "94e138d2b69cfc3dd73ab8c0f2f26c8bba6c25b9a3ec6d0efe2606f24e19d98f"
+          },
+          "local_window": [
+            404,
+            413,
+            3,
+            3
+          ]
+        }
+      },
+      "original_current_question_record": {
+        "point_index": 11692,
+        "original_key": {
+          "owner": 30350,
+          "y": 122721,
+          "x": 202444
+        },
+        "original_package": "gb-MMR-ADM3--physical-interpretation",
+        "original_record_unchanged": {
+          "original_block": 29,
+          "original_record_ordinal": 7154,
+          "original_owners": [
+            30350
+          ],
+          "original_SIDs": [
+            44893,
+            44954,
+            45117
+          ],
+          "original_class": "source-relative",
+          "original_interval": [
+            122721,
+            202444,
+            202447,
+            [
+              30350
+            ],
+            [
+              44893,
+              44954,
+              45117
+            ],
+            "source-relative"
+          ]
+        },
+        "unchanged_centre": {
+          "longitude": 97.99188300542403,
+          "latitude": 11.405723537150084,
+          "ideal_longitude_numerator": 25690140,
+          "ideal_longitude_denominator": 262166
+        },
+        "source_year": 2020,
+        "source_product": "ESA WorldCover2020v100 Map",
+        "source_observation": {
+          "coverage_status": "valid-native-value",
+          "class_code": 10,
+          "valid_mask": 255,
+          "nodata_match": false,
+          "neighbourhood_complete": true,
+          "neighbourhood_codes": [
+            [
+              80,
+              10,
+              10
+            ],
+            [
+              80,
+              10,
+              10
+            ],
+            [
+              80,
+              10,
+              10
+            ]
+          ],
+          "neighbourhood_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "centre_array": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-06-23.npz",
+          "source_object_identity": {
+            "last-modified": "Tue, 25 Oct 2022 13:31:55 GMT",
+            "etag": "\"0b65ab52512721af33f117fc70ea284e-2\"",
+            "accept-ranges": "bytes",
+            "content-length": "8619585"
+          }
+        },
+        "source_point_reference": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/point-observations.jsonl",
+          "jsonl_line_zero_based": 1899,
+          "source_point_index": 11692
+        },
+        "tile": "N09E096",
+        "native_row": 7131,
+        "native_col": 23902,
+        "positive_original_source_body_association": {
+          "original_key": {
+            "owner": 30350,
+            "y": 122721,
+            "x": 202444
+          },
+          "original_package": "gb-MMR-ADM3--physical-interpretation",
+          "original_interval_pointer": "/packages/2/rows/7154",
+          "source_sids": [
+            44893,
+            44954,
+            45117
+          ],
+          "owner_name": "Bokpyin",
+          "framework_province_id": "framework:province:kawthoung:25f2b1f750b9",
+          "original_owner_source_atom": "gb:MMR:ADM3:66882298B82483484204646",
+          "source_ADM3_member": {
+            "source_index": 45117,
+            "feature_ordinal": 146,
+            "source_id": "gb:MMR:ADM3:66882298B82483484204646",
+            "feature_name": "Bokpyin",
+            "feature_geometry_pointer": "/features/146/geometry"
+          },
+          "owner_complete_source_polygon_parts": [
+            {
+              "part_ordinal": 34,
+              "source_geometry_pointer": "/features/146/geometry/coordinates/34",
+              "contact": "interior",
+              "observation_pointer": "/operations/368"
+            }
+          ],
+          "whole_ADM2_source_contacts": [
+            {
+              "source_index": 44954,
+              "contact": "interior",
+              "source_geometry_pointer": "/features/57/geometry",
+              "observation_pointer": "/operations/488"
+            }
+          ],
+          "outside_all_whole_ADM2_source_features": false,
+          "other_original_source_sids": [
+            44893,
+            44954
+          ],
+          "foreign_original_source_sids": [],
+          "other_SID_observation_note": "Original source-candidate references are preserved. ADM1/foreign geometry is not newly observed in this association operation.",
+          "normative_centre": {
+            "latitude": 11.405723537150084,
+            "longitude_numerator": 25690140,
+            "longitude_denominator": 262166
+          },
+          "remaining_after_known2237_adopted_answers": true
+        },
+        "specific_annual_source_fact": "The annual2020 WorldCover v100 Map supports modeled tree canopy at this unchanged original-source-associated native location. Tree cover can include floodedforest; no dry-understorey or whole-cell claim.",
+        "proposed_bounded_answer": false,
+        "category": "unresolved-water-wet-cover-edge-location",
+        "proposed_answer": null,
+        "remaining_physical_question": "Actual native context contains a water/wet-cover transition. A more precise bank/shore/mixed-pixel/registration body relation is needed for this narrow adoption.",
+        "separate_unadopted_questions": [
+          "Annual2020 modeled source at the containing10m-scale pixel,not independent instantaneous/groundtruth or wholeAtlas-cell coverage.",
+          "Original2019 source-version body association is affirmative; not current/legal ownership,territorial clearance,source2019shoreline equivalence or native/repair authority.",
+          "Flooded understorey is not ruled out by tree canopy."
+        ],
+        "retained_native_observation": null,
+        "status": "OPEN SPECIFIC PHYSICAL QUESTION",
+        "authority_or_repair_credit": 0
+      }
+    },
+    {
+      "index": 2,
+      "original_key": {
+        "owner": 30350,
+        "y": 122725,
+        "x": 202441
+      },
+      "original_bulk_point_index": 11733,
+      "longitude": 97.98776347810167,
+      "latitude": 11.400339256084147,
+      "physical_block": [
+        3,
+        8
+      ],
+      "request_record_index": 7171,
+      "source_sids": [
+        44893,
+        44954,
+        45117
+      ],
+      "assets": {
+        "red": {
+          "value": 136,
+          "valid_mask": 255,
+          "source_pixel": [
+            3958,
+            8956
+          ],
+          "local_pixel": [
+            887,
+            765
+          ],
+          "neighbourhood": [
+            [
+              163,
+              150,
+              152
+            ],
+            [
+              163,
+              136,
+              140
+            ],
+            [
+              189,
+              164,
+              160
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "retained_data": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/red.tif",
+            "bytes": 1139117,
+            "sha256": "fca932b0b0a73167f64ba1ca732931221506c65d6f79c23bb9c68657a4203f5c"
+          },
+          "retained_source_mask": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/red-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "6a2ee661a206574639e24520a8e2b81fe503f883bdbd6443f44434d1196eed4d"
+          },
+          "local_window": [
+            764,
+            886,
+            3,
+            3
+          ]
+        },
+        "green": {
+          "value": 228,
+          "valid_mask": 255,
+          "source_pixel": [
+            3958,
+            8956
+          ],
+          "local_pixel": [
+            887,
+            765
+          ],
+          "neighbourhood": [
+            [
+              252,
+              222,
+              242
+            ],
+            [
+              260,
+              228,
+              260
+            ],
+            [
+              254,
+              259,
+              290
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "retained_data": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/green.tif",
+            "bytes": 1194877,
+            "sha256": "357990cbbcf799e79c8e729646aa2dd6b89f3a65e209d43a4927cbe93723a6ea"
+          },
+          "retained_source_mask": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/green-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "56c651c7d0c69dd6e6afc0bed5cdb030b56b6e2682f8daea4d0939256281f74d"
+          },
+          "local_window": [
+            764,
+            886,
+            3,
+            3
+          ]
+        },
+        "blue": {
+          "value": 162,
+          "valid_mask": 255,
+          "source_pixel": [
+            3958,
+            8956
+          ],
+          "local_pixel": [
+            887,
+            765
+          ],
+          "neighbourhood": [
+            [
+              219,
+              203,
+              202
+            ],
+            [
+              194,
+              162,
+              208
+            ],
+            [
+              199,
+              223,
+              227
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "retained_data": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/blue.tif",
+            "bytes": 1217281,
+            "sha256": "e11335621cf30a4eb73797071036d59414c4aab7d269ce7b4b7d849724b2220d"
+          },
+          "retained_source_mask": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/blue-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "d14c3d33deaff7f49428d44f968222b09d11253aa37951094ae8515f2098027e"
+          },
+          "local_window": [
+            764,
+            886,
+            3,
+            3
+          ]
+        },
+        "nir": {
+          "value": 354,
+          "valid_mask": 255,
+          "source_pixel": [
+            3958,
+            8956
+          ],
+          "local_pixel": [
+            887,
+            765
+          ],
+          "neighbourhood": [
+            [
+              273,
+              341,
+              372
+            ],
+            [
+              456,
+              354,
+              397
+            ],
+            [
+              455,
+              476,
+              482
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "retained_data": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/nir.tif",
+            "bytes": 1157755,
+            "sha256": "dafcef522da4a9b3a6b2558f42fc738df338816ae967d7f4dbdc1ac031e559d6"
+          },
+          "retained_source_mask": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/nir-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "2aedce4b3c14ed62c1120404c532449e4bfd745295088007a59540e4dcf57bcb"
+          },
+          "local_window": [
+            764,
+            886,
+            3,
+            3
+          ]
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            1979,
+            4478
+          ],
+          "local_pixel": [
+            444,
+            383
+          ],
+          "neighbourhood": [
+            [
+              6,
+              6,
+              2
+            ],
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              4
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "retained_data": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/scl.tif",
+            "bytes": 5917,
+            "sha256": "8ed0420a777aee3513065712cd2e9268dde70a650b78c42ed9d6fc791cb809ec"
+          },
+          "retained_source_mask": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/scl-source-mask.tif",
+            "bytes": 2753,
+            "sha256": "94e138d2b69cfc3dd73ab8c0f2f26c8bba6c25b9a3ec6d0efe2606f24e19d98f"
+          },
+          "local_window": [
+            382,
+            443,
+            3,
+            3
+          ]
+        }
+      },
+      "original_current_question_record": {
+        "point_index": 11733,
+        "original_key": {
+          "owner": 30350,
+          "y": 122725,
+          "x": 202441
+        },
+        "original_package": "gb-MMR-ADM3--physical-interpretation",
+        "original_record_unchanged": {
+          "original_block": 29,
+          "original_record_ordinal": 7171,
+          "original_owners": [
+            30350
+          ],
+          "original_SIDs": [
+            44893,
+            44954,
+            45117
+          ],
+          "original_class": "source-relative",
+          "original_interval": [
+            122725,
+            202441,
+            202445,
+            [
+              30350
+            ],
+            [
+              44893,
+              44954,
+              45117
+            ],
+            "source-relative"
+          ]
+        },
+        "unchanged_centre": {
+          "longitude": 97.98776347810167,
+          "latitude": 11.400339256084147,
+          "ideal_longitude_numerator": 25689060,
+          "ideal_longitude_denominator": 262166
+        },
+        "source_year": 2020,
+        "source_product": "ESA WorldCover2020v100 Map",
+        "source_observation": {
+          "coverage_status": "valid-native-value",
+          "class_code": 10,
+          "valid_mask": 255,
+          "nodata_match": false,
+          "neighbourhood_complete": true,
+          "neighbourhood_codes": [
+            [
+              80,
+              10,
+              10
+            ],
+            [
+              10,
+              10,
+              10
+            ],
+            [
+              10,
+              10,
+              10
+            ]
+          ],
+          "neighbourhood_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "centre_array": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/new-block-07-23.npz",
+          "source_object_identity": {
+            "last-modified": "Tue, 25 Oct 2022 13:31:55 GMT",
+            "etag": "\"0b65ab52512721af33f117fc70ea284e-2\"",
+            "accept-ranges": "bytes",
+            "content-length": "8619585"
+          }
+        },
+        "source_point_reference": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/worldcover-native-001/tiles/N09E096/point-observations.jsonl",
+          "jsonl_line_zero_based": 1940,
+          "source_point_index": 11733
+        },
+        "tile": "N09E096",
+        "native_row": 7195,
+        "native_col": 23853,
+        "positive_original_source_body_association": {
+          "original_key": {
+            "owner": 30350,
+            "y": 122725,
+            "x": 202441
+          },
+          "original_package": "gb-MMR-ADM3--physical-interpretation",
+          "original_interval_pointer": "/packages/2/rows/7171",
+          "source_sids": [
+            44893,
+            44954,
+            45117
+          ],
+          "owner_name": "Bokpyin",
+          "framework_province_id": "framework:province:kawthoung:25f2b1f750b9",
+          "original_owner_source_atom": "gb:MMR:ADM3:66882298B82483484204646",
+          "source_ADM3_member": {
+            "source_index": 45117,
+            "feature_ordinal": 146,
+            "source_id": "gb:MMR:ADM3:66882298B82483484204646",
+            "feature_name": "Bokpyin",
+            "feature_geometry_pointer": "/features/146/geometry"
+          },
+          "owner_complete_source_polygon_parts": [
+            {
+              "part_ordinal": 34,
+              "source_geometry_pointer": "/features/146/geometry/coordinates/34",
+              "contact": "interior",
+              "observation_pointer": "/operations/368"
+            }
+          ],
+          "whole_ADM2_source_contacts": [
+            {
+              "source_index": 44954,
+              "contact": "interior",
+              "source_geometry_pointer": "/features/57/geometry",
+              "observation_pointer": "/operations/488"
+            }
+          ],
+          "outside_all_whole_ADM2_source_features": false,
+          "other_original_source_sids": [
+            44893,
+            44954
+          ],
+          "foreign_original_source_sids": [],
+          "other_SID_observation_note": "Original source-candidate references are preserved. ADM1/foreign geometry is not newly observed in this association operation.",
+          "normative_centre": {
+            "latitude": 11.400339256084147,
+            "longitude_numerator": 25689060,
+            "longitude_denominator": 262166
+          },
+          "remaining_after_known2237_adopted_answers": true
+        },
+        "specific_annual_source_fact": "The annual2020 WorldCover v100 Map supports modeled tree canopy at this unchanged original-source-associated native location. Tree cover can include floodedforest; no dry-understorey or whole-cell claim.",
+        "proposed_bounded_answer": false,
+        "category": "unresolved-water-wet-cover-edge-location",
+        "proposed_answer": null,
+        "remaining_physical_question": "Actual native context contains a water/wet-cover transition. A more precise bank/shore/mixed-pixel/registration body relation is needed for this narrow adoption.",
+        "separate_unadopted_questions": [
+          "Annual2020 modeled source at the containing10m-scale pixel,not independent instantaneous/groundtruth or wholeAtlas-cell coverage.",
+          "Original2019 source-version body association is affirmative; not current/legal ownership,territorial clearance,source2019shoreline equivalence or native/repair authority.",
+          "Flooded understorey is not ruled out by tree canopy."
+        ],
+        "retained_native_observation": null,
+        "status": "OPEN SPECIFIC PHYSICAL QUESTION",
+        "authority_or_repair_credit": 0
+      }
+    }
+  ],
+  "retained_source_blocks": [
+    {
+      "block": [
+        3,
+        8
+      ],
+      "indices": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "point_count": 6,
+      "assets": {
+        "red": {
+          "window": [
+            8191,
+            3071,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            381910.0,
+            0.0,
+            -10.0,
+            1269310.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/red.tif",
+            "bytes": 1139117,
+            "sha256": "fca932b0b0a73167f64ba1ca732931221506c65d6f79c23bb9c68657a4203f5c"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/red-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "6a2ee661a206574639e24520a8e2b81fe503f883bdbd6443f44434d1196eed4d"
+          }
+        },
+        "green": {
+          "window": [
+            8191,
+            3071,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            381910.0,
+            0.0,
+            -10.0,
+            1269310.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/green.tif",
+            "bytes": 1194877,
+            "sha256": "357990cbbcf799e79c8e729646aa2dd6b89f3a65e209d43a4927cbe93723a6ea"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/green-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "56c651c7d0c69dd6e6afc0bed5cdb030b56b6e2682f8daea4d0939256281f74d"
+          }
+        },
+        "blue": {
+          "window": [
+            8191,
+            3071,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            381910.0,
+            0.0,
+            -10.0,
+            1269310.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/blue.tif",
+            "bytes": 1217281,
+            "sha256": "e11335621cf30a4eb73797071036d59414c4aab7d269ce7b4b7d849724b2220d"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/blue-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "d14c3d33deaff7f49428d44f968222b09d11253aa37951094ae8515f2098027e"
+          }
+        },
+        "nir": {
+          "window": [
+            8191,
+            3071,
+            1026,
+            1026
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            381910.0,
+            0.0,
+            -10.0,
+            1269310.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 1052676,
+          "total_pixels": 1052676,
+          "output": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/nir.tif",
+            "bytes": 1157755,
+            "sha256": "dafcef522da4a9b3a6b2558f42fc738df338816ae967d7f4dbdc1ac031e559d6"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/nir-source-mask.tif",
+            "bytes": 7761,
+            "sha256": "2aedce4b3c14ed62c1120404c532449e4bfd745295088007a59540e4dcf57bcb"
+          }
+        },
+        "scl": {
+          "window": [
+            4095,
+            1535,
+            514,
+            514
+          ],
+          "transform": [
+            20.0,
+            0.0,
+            381900.0,
+            0.0,
+            -20.0,
+            1269320.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "valid_pixel_count": 264196,
+          "total_pixels": 264196,
+          "output": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/scl.tif",
+            "bytes": 5917,
+            "sha256": "8ed0420a777aee3513065712cd2e9268dde70a650b78c42ed9d6fc791cb809ec"
+          },
+          "source_mask_output": {
+            "path": "S2A_47PLN_20200105_0_L2A/block-03-08/scl-source-mask.tif",
+            "bytes": 2753,
+            "sha256": "94e138d2b69cfc3dd73ab8c0f2f26c8bba6c25b9a3ec6d0efe2606f24e19d98f"
+          }
+        }
+      },
+      "displays": [
+        {
+          "path": "S2A_47PLN_20200105_0_L2A/block-03-08/rgb-native.png",
+          "bytes": 1220161,
+          "sha256": "32afd1d40628b348c86de465bd7f09fd3952f12eaddc2d4d04261fdce9c65194"
+        },
+        {
+          "path": "S2A_47PLN_20200105_0_L2A/block-03-08/rgb-centres.png",
+          "bytes": 1220761,
+          "sha256": "cd53b0cfe24f683c3fbb0df4a8417e965e14adc3daff0372e7b73a6046f21210"
+        },
+        {
+          "path": "S2A_47PLN_20200105_0_L2A/block-03-08/nir-red-green-native.png",
+          "bytes": 1130778,
+          "sha256": "bac086683bb67ebd1658d87f3b7df42ae6298813c30ac34efc8dffd0d2e27632"
+        },
+        {
+          "path": "S2A_47PLN_20200105_0_L2A/block-03-08/nir-red-green-centres.png",
+          "bytes": 1131101,
+          "sha256": "db6221ace69822b4ea7bad3a324c0994a547ea7d082304bebb553dcc5ddee2f7"
+        }
+      ]
+    }
+  ],
+  "retained_native_data_mask_file_pins": [
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/actual-native-blocks-001/S2A_47PLN_20200105_0_L2A/block-03-08/red.tif",
+      "bytes": 1139117,
+      "sha256": "fca932b0b0a73167f64ba1ca732931221506c65d6f79c23bb9c68657a4203f5c"
+    },
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/actual-native-blocks-001/S2A_47PLN_20200105_0_L2A/block-03-08/red-source-mask.tif",
+      "bytes": 7761,
+      "sha256": "6a2ee661a206574639e24520a8e2b81fe503f883bdbd6443f44434d1196eed4d"
+    },
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/actual-native-blocks-001/S2A_47PLN_20200105_0_L2A/block-03-08/green.tif",
+      "bytes": 1194877,
+      "sha256": "357990cbbcf799e79c8e729646aa2dd6b89f3a65e209d43a4927cbe93723a6ea"
+    },
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/actual-native-blocks-001/S2A_47PLN_20200105_0_L2A/block-03-08/green-source-mask.tif",
+      "bytes": 7761,
+      "sha256": "56c651c7d0c69dd6e6afc0bed5cdb030b56b6e2682f8daea4d0939256281f74d"
+    },
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/actual-native-blocks-001/S2A_47PLN_20200105_0_L2A/block-03-08/blue.tif",
+      "bytes": 1217281,
+      "sha256": "e11335621cf30a4eb73797071036d59414c4aab7d269ce7b4b7d849724b2220d"
+    },
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/actual-native-blocks-001/S2A_47PLN_20200105_0_L2A/block-03-08/blue-source-mask.tif",
+      "bytes": 7761,
+      "sha256": "d14c3d33deaff7f49428d44f968222b09d11253aa37951094ae8515f2098027e"
+    },
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/actual-native-blocks-001/S2A_47PLN_20200105_0_L2A/block-03-08/nir.tif",
+      "bytes": 1157755,
+      "sha256": "dafcef522da4a9b3a6b2558f42fc738df338816ae967d7f4dbdc1ac031e559d6"
+    },
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/actual-native-blocks-001/S2A_47PLN_20200105_0_L2A/block-03-08/nir-source-mask.tif",
+      "bytes": 7761,
+      "sha256": "2aedce4b3c14ed62c1120404c532449e4bfd745295088007a59540e4dcf57bcb"
+    },
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/actual-native-blocks-001/S2A_47PLN_20200105_0_L2A/block-03-08/scl.tif",
+      "bytes": 5917,
+      "sha256": "8ed0420a777aee3513065712cd2e9268dde70a650b78c42ed9d6fc791cb809ec"
+    },
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/actual-native-blocks-001/S2A_47PLN_20200105_0_L2A/block-03-08/scl-source-mask.tif",
+      "bytes": 2753,
+      "sha256": "94e138d2b69cfc3dd73ab8c0f2f26c8bba6c25b9a3ec6d0efe2606f24e19d98f"
+    }
+  ],
+  "method": "ExistingRasterio/GDAL native3x3 actualstoredmasks method, authenticated retained local arrays, THREE previously unobserved original centres. No remote access/sourceblock replay/fullraster decode/oldpoint reclassification.",
+  "elapsed_seconds": 0.055385416955687106,
+  "source_calls": 0,
+  "remote_source_blocks": 0,
+  "old_completed_point_replays": 0,
+  "physical_answer_credit": 0,
+  "limits": [
+    "Validmasks notcloudclearance. Nativepixel/mixedcoastalregistration/time/quality requireauthor interpretation and distinctreview.",
+    "No vectorfootprint/currentlegal/native/repair/annualwater/wholecell/holdclearance inference."
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "verdict": "ACCEPT64 bounded dated facets; CUT q30/bulk11930; retain38 questions",
+  "original65_proposal_sha256": "b9ef658c31845b77c179cd91964bcb34573c60d1c8f97875c2408f21fda0d03d",
+  "exact_original_source_points": 102,
+  "all102_native_original_question_key_SID_body_association_display_joins": true,
+  "new_source_blocks": 28,
+  "old_PMN9_blocks_replayed": 0,
+  "metadata_and_source_affines_equal_prior_verified_PMN": true,
+  "adopted_PMM98_overlap": 0,
+  "actual_saved_frames_hashed": 56,
+  "actual_native3x3_display_pixel_comparisons": 1836,
+  "all102_paired_contexts_viewed": true,
+  "critical_enlarged_contexts_viewed": 35,
+  "accepted_facets": {
+    "dated-visible-vegetation": 53,
+    "dated-visible-bright-exposed-coastal-contribution": 8,
+    "dated-visible-water": 3
+  },
+  "cuts": [
+    {
+      "point_index": 30,
+      "original_bulk_point_index": 11930,
+      "original_key": {
+        "owner": 30350,
+        "y": 122742,
+        "x": 202640
+      },
+      "reason": "Grey/light beach-tip mixture at the actual centre does not clearly establish the proposed textured-green vegetation contribution; adjacent canopy,NIR and validSCL are insufficient."
+    }
+  ],
+  "source_native_raster_geometry_kernel_or_oldpoint_producer_replays": 0,
+  "Main_adoption": "pending",
+  "accepted_repair_or_native_credit": 0
+}

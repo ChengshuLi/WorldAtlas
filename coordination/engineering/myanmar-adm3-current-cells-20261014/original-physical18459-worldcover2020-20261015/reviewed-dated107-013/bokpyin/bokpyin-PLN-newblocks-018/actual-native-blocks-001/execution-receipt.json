@@ -1,0 +1,81 @@
+{
+  "started_utc": "2026-10-16T01:48:46.514935+00:00",
+  "ended_utc": "2026-10-16T01:49:22.572210+00:00",
+  "seconds": 36.05627970804926,
+  "observed_process_lifetime_peak_rss_bytes": 251559936,
+  "admission": {
+    "available": 1628438528,
+    "headroomBytes": 572882944,
+    "currentRssCreditBytes": 0,
+    "concurrentReservedBytes": 0,
+    "allowance": {
+      "phaseBytes": 805306368,
+      "rssBytes": 805306368
+    }
+  },
+  "prospective_live_carry": {
+    "existing_reader_numpy_files": 90300286,
+    "python": 18058560,
+    "node_preflight": 121304480,
+    "accepted_admission_code": 304941,
+    "frozen_input_bytes": 311914,
+    "parsed_input_carry": 67108864,
+    "per_date_point_observations": 100663296,
+    "source_block_decode": 83886080,
+    "native_arrays_and_masks": 25165824,
+    "gdal_cache": 16777216,
+    "rendering_live_carry": 100663296,
+    "output_write_hash_buffers": 16777216,
+    "metadata_manifest": 16777216,
+    "other_runtime": 25165824,
+    "other_expansion": 67108864
+  },
+  "prospective_total": 750373877,
+  "streamed_disk_bytes_before_final_receipt": 63891700,
+  "disk_cap": 2147483648,
+  "runtime": {
+    "python": "3.12.14 (main, Aug 25 2026, 13:50:33) [Clang 22.1.3 ]",
+    "rasterio": "1.4.3",
+    "gdal": "3.9.3",
+    "numpy": "2.3.5"
+  },
+  "dates": [
+    {
+      "item": "S2A_47PLN_20200105_0_L2A",
+      "result": {
+        "path": "S2A_47PLN_20200105_0_L2A/native-observations.json",
+        "bytes": 209316,
+        "sha256": "2df8dc97375ab8f75723034d2e43e4e288342f9d53ce1a66e8e2253597bd8922"
+      },
+      "summary": {
+        "count": 36,
+        "scl_centre_counts": {
+          "4": 17,
+          "3": 3,
+          "6": 12,
+          "2": 3,
+          "5": 1
+        },
+        "valid_centre_masks_by_band": {
+          "red": {
+            "255": 36
+          },
+          "green": {
+            "255": 36
+          },
+          "blue": {
+            "255": 36
+          },
+          "nir": {
+            "255": 36
+          },
+          "scl": {
+            "255": 36
+          }
+        },
+        "interpretation": "Literal source observations only, not physical completion or hold clearance."
+      }
+    }
+  ],
+  "method": "Existing native-GDAL window observation, source blocks streamed for one complete coherent original-key group; no new classifier."
+}
