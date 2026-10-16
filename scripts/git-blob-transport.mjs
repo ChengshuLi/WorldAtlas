@@ -3,8 +3,9 @@ import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {copyAPIFeatures} from './github-quota.mjs';
+import {addBytes} from './evidence-byte-bounds.mjs';
 
-const MAX_BYTES=272*1024*1024, MAX_ENTRIES=512, MAX_BLOB=32*1024*1024;
+const MAX_BYTES=272*1024*1024, MAX_ENTRIES=512;
 const oid=value=>/^[a-f0-9]{40}$/.test(value??'');
 // Fetch exact tree-bound blob OIDs into a disposable bare object store. No
 // candidate checkout, hooks, persistent credential or executable candidate code.
@@ -24,14 +25,14 @@ export function gitBlobTransport(api,{repo,token,directory,onFetch=()=>{},execut
   if(targetRepo!==repo||!Array.isArray(rows)||rows.length>MAX_ENTRIES)throw Error('Invalid immutable transport inventory');
   const pending=new Map();
   for(const row of rows){
-   if(!oid(row.sha)||!Number.isSafeInteger(row.size)||row.size<0||row.size>MAX_BLOB)throw Error('Invalid tree-bound immutable blob');
+   if(!oid(row.sha)||!Number.isSafeInteger(row.size)||row.size<0)throw Error('Invalid tree-bound immutable blob');
    const prior=known.get(row.sha)??pending.get(row.sha);
    if(prior!==undefined&&prior!==row.size)throw Error('Conflicting immutable tree sizes');
    if(!known.has(row.sha))pending.set(row.sha,row.size);
   }
   if(!pending.size)return;
-  const extra=[...pending.values()].reduce((a,b)=>a+b,0);
-  if(known.size+pending.size>MAX_ENTRIES||total+extra>MAX_BYTES)return; // Existing validators retain their REST fallback and original limits.
+  const extra=[...pending.values()].reduce((a,b)=>addBytes(a,b),0);
+  if(known.size+pending.size>MAX_ENTRIES||addBytes(total,extra)>MAX_BYTES)return; // Keep the bounded optimization; exact REST fallback retains validation.
   git(['-c','fetch.unpackLimit=1','fetch','--no-tags','--no-write-fetch-head','--recurse-submodules=no','--filter=blob:none',
     'https://github.com/'+repo+'.git',...[...pending.keys()]]);
   let storedBytes=0;
@@ -40,16 +41,18 @@ export function gitBlobTransport(api,{repo,token,directory,onFetch=()=>{},execut
   // Verify every object before publishing any success from this batch.
   for(const [sha,size] of pending){
    if(git(['cat-file','-t',sha]).toString().trim()!=='blob')throw Error('Immutable object is not a blob');
-   const content=git(['cat-file','blob',sha],MAX_BLOB+1024);
+   const content=git(['cat-file','blob',sha],Math.max(1,addBytes(size,1)));
    if(content.length!==size||createHash('sha1').update(`blob ${content.length}\0`).update(content).digest('hex')!==sha)throw Error('Immutable object bytes differ from tree binding');
   }
   for(const [sha,size] of pending)known.set(sha,size);
   total+=extra;onFetch({blob_count:pending.size,decoded_bytes:extra});
  };
- const wrapped=async(route,method='GET',body)=>{
+ const wrapped=async(route,method='GET',body,options)=>{
   const match=/^\/repos\/([-\w.]+\/[-\w.]+)\/git\/blobs\/([a-f0-9]{40})$/.exec(route);
-  if(method!=='GET'||body!==undefined||!match||match[1]!==repo||!known.has(match[2]))return api(route,method,body);
-  const bytes=git(['cat-file','blob',match[2]],MAX_BLOB+1024);
+  if(method!=='GET'||body!==undefined||!match||match[1]!==repo||!known.has(match[2]))return api(route,method,body,options);
+  const size=known.get(match[2]);
+  if(options?.expectedImmutableBytes!==undefined&&options.expectedImmutableBytes!==size)throw Error('Immutable transport tree size differs');
+  const bytes=git(['cat-file','blob',match[2]],Math.max(1,addBytes(size,1)));
   if(bytes.length!==known.get(match[2])||createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex')!==match[2])throw Error('Immutable transport object changed');
   return {sha:match[2],size:bytes.length,encoding:'base64',content:bytes.toString('base64')};
  };

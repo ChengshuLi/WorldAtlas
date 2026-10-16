@@ -146,6 +146,21 @@ function remoteFixture(f, extraContents = []) {
   };
   return {api, calls, bytes, tree, blobs};
 }
+
+test('hosted whole-manifest loading forwards exact large sizes through nested immutable REST readers',async()=>{
+ const f=fixture(),raw=Buffer.alloc(36065990,17),extras=[];
+ for(let i=0;i<8;i++){
+  const name='coordination/engineering/synthetic/large-'+i+'.bin';extras.push([name,raw]);
+  f.manifest.outputs.push(desc(name,raw));f.files.push({filename:name,status:'added'});f.manifest.change_receipts.push({path:name,status:'added'});
+ }
+ assert.ok(f.manifest.outputs.reduce((sum,file)=>sum+file.bytes,0)>256*1024*1024);f.pr.changed_files=f.files.length;
+ const remote=remoteFixture(f,extras),forwarded=[];
+ const api=memoizeImmutableGitBlobs(memoizeImmutableGitBlobs(async(...args)=>{forwarded.push(args);return remote.api(...args);}));
+ assert.equal((await checkPremergeEvidence({...f,api,repo:'test/repo',policy})).status,'bytes-verified');
+ assert.ok(forwarded.some(([, , ,options])=>options?.expectedImmutableBytes===raw.length&&Number.isSafeInteger(options.maxResponseBytes)));
+ const changed=remote.tree.find(row=>row.path===extras[0][0]);changed.size--;
+ await assert.rejects(checkPremergeEvidence({...f,api,repo:'test/repo',policy}),/Manifest\/tree evidence size differs/);
+});
 test('scientific byte checks need no duplicate review comment and do not certify review', async () => {
   const f = fixture(), remote = remoteFixture(f);
   const result = await checkPremergeEvidence({...f, api: remote.api, repo: 'test/repo', policy});

@@ -65,11 +65,12 @@ It rejects duplicate family IDs among complete records in that containing part.
 Original leading/trailing stream fragments cannot bind a subject; this binding
 never certifies completeness of the larger concatenated source stream.
 
-The complete encoded baseline, retained-source and output inventory plus unique
-record-source decoded bytes must fit the 256 MiB budget before any body read or
-decompression. Each ordinary encoded/decoded file and record retains the 32 MiB
-limit. Later whole-file checks, exact accounting, 512 descriptors and the existing
-ancestry gate still apply. A small compressed body cannot waive the decoded cap.
+The complete encoded baseline, retained-source and output inventory plus its
+declared decoded representations establishes one finite exact byte plan before
+body reads or decompression. All lengths and their sums must be nonnegative safe
+integers. Each record must fit its authenticated complete decoded source. Later
+whole-file checks, exact accounting, 512 descriptors and the existing ancestry
+gate still apply. A small compressed body cannot waive decoded size/hash checks.
 Candidate-generated registries cannot replace independent original source records.
 
 ## Historical files from multiple commits
@@ -153,6 +154,26 @@ node scripts/evidence-quality.mjs PATH/TO/evidence-quality.json
 node --test test/evidence-quality.test.mjs
 ```
 
-`bytes-verified` means the listed bytes and mechanical relationships match. `limited` means bytes/source evidence remain unverified; inspect the returned limits. Neither outcome means geographic accuracy, valid licenses, successful deployment or correct ancient history. Missing required bytes, wrong hashes, malformed pins, unsafe paths, unsupported stage claims and inconsistent summaries are errors. Default budgets are 32 MiB per input/decompressed output and 256 MiB total declared input bytes; exceptionally large lawful data needs an explicitly reviewed approach rather than disabling limits.
+`bytes-verified` means the listed bytes and mechanical relationships match. `limited` means bytes/source evidence remain unverified; inspect the returned limits. Neither outcome means geographic accuracy, valid licenses, successful deployment or correct ancient history. Missing required bytes, wrong hashes, malformed pins, unsafe paths, unsupported stage claims and inconsistent summaries are errors.
+
+Scientific byte verification derives finite per-file and complete-packet bounds
+from the exact reviewed descriptors, including declared decoded lengths. Fresh
+immutable Git-tree sizes must agree before hosted bodies are acquired; local
+readers use those exact descriptors and reject growth or truncation. Gzip with a
+decoded descriptor is limited to that exact size and checked against its decoded
+hash. Overflow, unknown or conflicting sizes fail before the applicable read or
+decode. Explicitly supplied smaller caller operating limits remain enforced.
+
+There is no universal scientific byte ceiling in this admission path. Actual
+memory, storage, provider and job limits still apply, and large inputs can need
+streaming or another reviewed execution approach. The existing 272 MiB immutable
+cache/object-store capacity, 512-entry inventory and HTTP/Git/job timeouts are not
+expanded. Cache overflow uses the authenticated REST fallback or stays uncached.
+Unplanned raw readers retain their legacy 32 MiB operating guard; legacy gzip
+without a declared decoded descriptor retains its bounded decoder. The metadata
+manifest bootstrap retains its separate 1 MiB envelope guard. These compatibility
+guards do not authorize omitting a required scientific body or its exact sizes.
+Producer/constructor operating contracts and scientific/publication approvals
+remain separate.
 
 Engineering provides shared tooling; geography/history workers populate their own manifests. Corrective packets retain superseded outputs and dates. Do not run generators against current main before pin checks, overwrite originals, silently repin a baseline, or grant unsupported exceptions. GitHub Issues tracks adoption and implementation status, not this document.

@@ -1,5 +1,6 @@
 import {copyAPIFeatures} from './github-quota.mjs';
 import {createHash} from 'node:crypto';
+import {finiteBytes, immutableResponseBytes, LEGACY_FILE_BYTES} from './evidence-byte-bounds.mjs';
 
 export const IMMUTABLE_CACHE_BYTES = 272 * 1024 * 1024;
 export const IMMUTABLE_CACHE_ENTRIES = 512;
@@ -13,10 +14,19 @@ export function memoizeImmutableGitBlobs(api, {maxBytes = IMMUTABLE_CACHE_BYTES,
   const wrapped = async (route, method = 'GET', body, options) => {
     const match = /^\/repos\/[\w.-]+\/[\w.-]+\/git\/blobs\/([a-f0-9]{40})$/.exec(route);
     if (!match || method !== 'GET' || body !== undefined) return api(route, method, body, options);
-    if (cache.has(route)) return cache.get(route);
-    const blob = await api(route, method, body, options);
+    const expected = options?.expectedImmutableBytes;
+    if (expected !== undefined) finiteBytes(expected, 'immutable blob size');
+    if (cache.has(route)) {
+      const value = cache.get(route);
+      if (expected === undefined ? value.size > LEGACY_FILE_BYTES : value.size !== expected) throw Error('Immutable Git blob differs from exact tree size');
+      return value;
+    }
+    const responseBound = immutableResponseBytes(expected ?? LEGACY_FILE_BYTES);
+    const maxResponseBytes = options?.maxResponseBytes === undefined ? responseBound
+      : Math.min(finiteBytes(options.maxResponseBytes, 'caller response budget'), responseBound);
+    const blob = await api(route, method, body, {...options, maxResponseBytes});
     if (blob?.encoding !== 'base64' || blob.sha !== match[1] || !Number.isSafeInteger(blob.size) || blob.size < 0 ||
-        blob.size > 32 * 1024 * 1024 || typeof blob.content !== 'string') throw Error('Incomplete or unsupported immutable Git blob');
+        (expected === undefined ? blob.size > LEGACY_FILE_BYTES : blob.size !== expected) || typeof blob.content !== 'string') throw Error('Incomplete or unsupported immutable Git blob');
     const encoded = blob.content.replace(/\s/g, '');
     if (encoded.length !== 4 * Math.ceil(blob.size / 3)) throw Error('Incomplete immutable Git blob encoding');
     const content = Buffer.from(encoded, 'base64');
