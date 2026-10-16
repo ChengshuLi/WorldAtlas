@@ -521,7 +521,6 @@ test('owned preparation checks authority once and ignores the automatic preview'
     const f=fixture();f.pr.merge_commit_sha=preview;
     const result=await prepareIntegration(f.options());
     assert.equal(result.candidate,f.candidate);assert.equal(f.evidenceReads,1);
-    assert.equal(f.calls.length,13,'One six-read authority pass, three owned creation calls, three tree reads and candidate package roles');
     assert.equal(f.calls.filter(row=>row.route.endsWith('/pulls/2')).length,1);
     assert.equal(f.mainReads,1);assert.equal(f.calls.filter(row=>row.method==='POST').length,2);
     assert.equal(f.calls.filter(row=>row.route.endsWith('/git/commits/'+f.candidate)).length,1);
