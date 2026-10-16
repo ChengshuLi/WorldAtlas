@@ -183,6 +183,24 @@ test('hosted whole-manifest loading forwards exact large sizes through nested im
  const changed=remote.tree.find(row=>row.path===extras[0][0]);changed.size--;
  await assert.rejects(checkPremergeEvidence({...f,api,repo:'test/repo',policy}),/Manifest\/tree evidence size differs/);
 });
+test('hosted manifests use exact tree sizes beyond 1 MiB and authenticate inventories beyond 512 files',async()=>{
+ const f=fixture(),extras=[];
+ for(let i=0;i<513;i++){
+  const name='coordination/engineering/synthetic/control-'+i+'.bin',raw=Buffer.from('control '+i);extras.push([name,raw]);
+  f.manifest.outputs.push(desc(name,raw));f.files.push({filename:name,status:'added'});f.manifest.change_receipts.push({path:name,status:'added'});
+ }
+ f.manifest.notes='x'.repeat(1024*1024);f.pr.changed_files=f.files.length;
+ const remote=remoteFixture(f,extras),forwarded=[],batches=[];
+ assert(remote.bytes.length>1024*1024);
+ const api=memoizeImmutableGitBlobs(async(...args)=>{forwarded.push(args);return remote.api(...args);});
+ api.prefetchGitBlobs=async(repo,rows)=>{assert.equal(repo,'test/repo');batches.push(rows);};
+ const result=await checkPremergeEvidence({...f,api,repo:'test/repo',policy});
+ assert.equal(result.status,'bytes-verified');assert.equal(result.checked.length,515);
+ assert(batches.some(rows=>rows.length>512));
+ assert(forwarded.some(([, , ,options])=>options?.expectedImmutableBytes===remote.bytes.length));
+ const last=remote.tree.find(row=>row.path===extras.at(-1)[0]);last.size--;
+ await assert.rejects(checkPremergeEvidence({...f,api,repo:'test/repo',policy}),/Manifest\/tree evidence size differs/);
+});
 test('scientific byte checks need no duplicate review comment and do not certify review', async () => {
   const f = fixture(), remote = remoteFixture(f);
   const result = await checkPremergeEvidence({...f, api: remote.api, repo: 'test/repo', policy});

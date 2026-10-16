@@ -54,10 +54,11 @@ test('empty inventory, alternate executed index and omitted preservation bytes r
 });
 
 
-test('trusted per-partition descriptor count remains bounded',()=>{
+test('complete partition evidence exceeds the old descriptor count without fragmenting its manifest',()=>{
  const f=fixture(),root=JSON.parse(f.bytes.get(f.rootPath));
- for(let i=0;i<512;i++){const name=`data/control-${i}.json`,raw=Buffer.from('control');f.bytes.set(name,raw);root.baseline.files.push(descriptor(name,raw));}
- f.bytes.set(f.rootPath,encode(root));assert.throws(()=>validateEvidencePartitions(f.index,f.options),/bounded review budget/);
+ for(let i=0;i<512;i++){const name=`data/control-${i}.json`,raw=Buffer.from('control');f.bytes.set(name,raw);root.outputs.push(descriptor(name,raw));}
+ f.bytes.set(f.rootPath,encode(root));assert.equal(validateEvidencePartitions(f.index,f.options).validated,true);
+ f.bytes.set('data/control-511.json',Buffer.from('corrupt'));assert.throws(()=>validateEvidencePartitions(f.index,f.options),/Input bytes mismatch/);
 });
 
 test('partition exact reviewed sizes admit a genuine body above the former default ceiling',()=>{
