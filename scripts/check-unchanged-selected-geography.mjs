@@ -1,6 +1,6 @@
 // Applicability only. The caller authenticates this module in its trusted checkout.
 // These explicit roles mirror the reviewed readers, including detached
-// SOURCE/NATIVE readers. No candidate module or scientific body is executed.
+// SOURCE/NATIVE readers. No data-vintage module or scientific body is executed.
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
@@ -29,8 +29,9 @@ const joined = async promises => {
 };
 
 // The trusted caller authenticates this collector and its readers together from
-// one reviewed checkout. EXECUTION_CODE below still binds every current reader
-// across baseline/candidate; typed routing schemas reject unknown input layouts.
+// one reviewed checkout. Current executable identity is independent of the two
+// data vintages: both operands use that same code. Typed routing schemas reject
+// unknown consumed input layouts; historical code remains pinned custody data.
 // A second manually maintained source-hash whitelist adds no execution authority.
 export const EXECUTION_CODE = Object.freeze([
   'scripts/run-geographic-check.py',
@@ -71,6 +72,11 @@ function createReader({repo, baseline, candidate, trusted, limits, acquisition})
   };
   const git = (...args) => runGit(args);
   function mergeBase() {
+    // Queue candidates authenticate their baseline as the literal first parent.
+    // That already establishes the merge base, even when a depth-one checkout
+    // omits the reviewed second parent and its unrelated ancestry.
+    const header = git('cat-file', 'commit', candidate).toString().split('\n\n', 1)[0];
+    if (header.split('\n').find(line => line.startsWith('parent ')) === 'parent ' + baseline) return Buffer.from(baseline + '\n');
     // A shallow baseline is already a valid common ancestor of a fresh source
     // branch. Do not traverse its intentionally absent parent in that case.
     try { return git('merge-base', baseline, candidate); }
@@ -150,6 +156,10 @@ function createReader({repo, baseline, candidate, trusted, limits, acquisition})
     const version = originExists(value.commit) ? value.commit : fallback ? fallbackCommit : null;
     if (!version) requireOrigin(value.commit);
     const actual = descriptor(version, value.path);
+    // A changed retained alias cannot stand in for its pinned original. Ask the
+    // existing metadata-only transport for that exact origin, then recheck the
+    // original path/mode/OID; never relabel the mismatching current body.
+    if (version !== value.commit && (actual.mode !== value.mode || actual.git_blob_oid !== (value.git_blob_oid ?? value.blob))) requireOrigin(value.commit);
     demand(actual.mode === value.mode && actual.git_blob_oid === (value.git_blob_oid ?? value.blob), 'historical-pin-identity');
     return actual;
   }
@@ -192,6 +202,10 @@ async function originalAuthority(reader, entry) {
     demand([1, 2].includes(evidence.version) && evidence.kind === 'source-target-native-evidence-v' + evidence.version
       && (dated ? evidence.dated_land_support !== undefined : evidence.dated_land_support === undefined),
       'unsupported-source-target-evidence');
+    // These optional roles introduce additional consumed provenance. Until this
+    // collector mirrors them completely, retain the cold checker for that layout.
+    demand(evidence.territorial_applicability === undefined && evidence.reference_metadata === undefined,
+      'unsupported-source-target-consumed-role');
     // Like the bound scientific reader, ignore extra descriptive evidence
     // fields. Only its versioned consumed roles select further file reads.
     for (const role of ['catalogue', 'native_latitudes', 'owner_roster', 'physical_evidence', 'physical_input', 'physical_reproduction']) reader.pinned(evidence[role]);
@@ -264,7 +278,8 @@ async function currentRebind(reader, pin, sourcePaths) {
   keys(certificate, 'authority_registry_sha256,base_selection,execution_commit,facts,kind,operating,publication,request,result,version', 'current-rebind');
   demand(certificate.version === 1 && certificate.kind === 'qualified-native-additive-current-bank-rebind-v1' && oid(certificate.execution_commit), 'unsupported-current-rebind');
   for (const role of ['request', 'facts', 'publication', 'operating', 'result']) reader.pinned(certificate[role], {fallback: false});
-  for (const name of REBIND_CODE) reader.equalCurrent(name);
+  // The rebind consumed historical executable bytes as custody. Both operands
+  // use the same current checker, independently of their data-vintage copies.
   const [request, operating] = await joined([reader.pinnedJson(certificate.request, {fallback: false}), reader.pinnedJson(certificate.operating, {fallback: false})]);
   // Scientific readers are materialized for actual geography, not for sparse
   // queue preparation, which only imports the exported path inventories.
@@ -350,8 +365,13 @@ async function checkpointRoutes(reader, selection, trusted) {
     // Its original census row is preserved; current policy is independently
     // bound by trustedJson(POLICY), not selected-vintage scientific equality.
     if (route.path === POLICY || route.path === ACCEPTED_CHECKPOINT_LOCATOR) continue;
-    const actual = reader.equalCurrent(route.path, true);
-    const tree = actual ? `${actual.mode} blob ${actual.git_blob_oid}\t${actual.path}\0` : '';
+    if (EXECUTION_CODE.includes(route.path) || REBIND_CODE.includes(route.path)) reader.descriptor(trusted, route.path, true);
+    else reader.equalCurrent(route.path, true);
+    // A census describes its historical selected tree, including executable
+    // copies. Preserve that custody identity without comparing old generation
+    // code to the one current checker used by BOTH data operands.
+    const archived = reader.descriptor(root.selected_commit, route.path, true);
+    const tree = archived ? `${archived.mode} blob ${archived.git_blob_oid}\t${archived.path}\0` : '';
     demand(route.tree === tree, 'checkpoint-route-identity:' + route.path);
   }
 }
@@ -387,7 +407,9 @@ async function collect(reader, {baseline, candidate, trusted, metadataPaths}) {
       reader.descriptor(candidate, name, true);
     }
   }
-  for (const name of EXECUTION_CODE) reader.equalCurrent(name);
+  for (const name of EXECUTION_CODE) reader.descriptor(trusted, name);
+  // The accepted catalogue is authority data, separate from executing software.
+  reader.equalCurrent(CHECKPOINTS);
   // Routing hints never authorize science, but any changed locator or retained
   // archive must reenter authenticated acquisition instead of inheriting a skip.
   const checkpointLocator = reader.equalCurrent(ACCEPTED_CHECKPOINT_LOCATOR, true);
@@ -395,8 +417,8 @@ async function collect(reader, {baseline, candidate, trusted, metadataPaths}) {
     const locator = validateAcceptedCheckpointLocator(await reader.jsonAt(checkpointLocator));
     if (locator.retained_artifact) reader.equalCurrent(locator.retained_artifact.path, true);
   }
-  for (const name of ['scripts/check-unchanged-selected-geography.mjs', 'scripts/geography-routing-metadata.mjs']) reader.equalCurrent(name, true);
-  reader.equalCurrent('scripts/geography-prefetch.mjs');
+  for (const name of ['scripts/check-unchanged-selected-geography.mjs', 'scripts/geography-routing-metadata.mjs']) reader.descriptor(trusted, name, true);
+  reader.descriptor(trusted, 'scripts/geography-prefetch.mjs');
   await joined([reader.trustedJson(POLICY), reader.trustedJson(CHECKPOINTS), ...[HANDOFFS, 'data/world-index.json', 'data/geographic-releases/current-manifest.json',
       'data/ownership-selection.json', 'scripts/native-ownership/verified-candidates.json'].map(name => reader.currentJson(name))]);
   // The original reader uses executing-checkout policy for BOTH selections.
@@ -503,7 +525,7 @@ export async function inspectUnchangedSelectedGeography({repo, baseline, candida
       }
     }
     const result = {...report, status: 'unchanged-selected-inputs', ...reader.summary(), metadata_acquisition: acquisition.summary(),
-      limits: ['Exact immutable input/code applicability only; no fresh native, polygon, source-authority, publication or consumer validation.',
+      limits: ['Exact immutable consumed-data applicability under one executing checkout only; no fresh native, polygon, source-authority, publication or consumer validation.',
         'Unknown reader layouts and changed or absent alternatives retain the original full checker.']};
     demand(Buffer.byteLength(JSON.stringify(result)) <= 2 * 1024 * 1024, 'identity-report-limit');
     return result;

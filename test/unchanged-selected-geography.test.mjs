@@ -23,7 +23,7 @@ const sha = value => createHash('sha256').update(body(value)).digest('hex');
 // These intentionally tiny opaque leaf bodies test immutable routing/equality,
 // not scientific validity. Historical collector replay is compared separately
 // with retained original full-reader logs; these leaf sentinels are not decoded.
-function fixture({missingOrigin = false, splitBaseline = false, rebind = true, missingStrictOrigin = false, checkpoint = false, sourceTarget = false, membership = false, dated = false, unknownSourceField = false, unknownSourceVersion = false, malformedDatedVersion = false, rebindCode = LEGACY_CURRENT_REBIND_CODE, historicalMetadataAbsent = false} = {}) {
+function fixture({missingOrigin = false, splitBaseline = false, rebind = true, missingStrictOrigin = false, checkpoint = false, sourceTarget = false, membership = false, dated = false, unknownSourceField = false, unknownSourceVersion = false, malformedDatedVersion = false, rebindCode = LEGACY_CURRENT_REBIND_CODE, historicalMetadataAbsent = false, consumedRole} = {}) {
   const cache = path.join(ROOT, '.cache/unchanged-selected-fixtures');
   fs.mkdirSync(cache, {recursive: true});
   const directory = fs.mkdtempSync(path.join(cache, 'case-'));
@@ -62,6 +62,7 @@ function fixture({missingOrigin = false, splitBaseline = false, rebind = true, m
   put('data/world-index.json', world);
   for (const name of ['data/geography/source.json', 'data/canonical-grid/bounds.json.gz', 'data/hierarchy.json', 'data/canonical-grid/manifest.json', 'data/geographic-releases/index.json', 'data/geographic-releases/current.json.gz']) put(name, 'opaque complete scientific leaf');
   for (const name of ['handoff', 'receipt', 'source-publication', 'source-inventory', 'source-operating', 'native-publication', 'native-inventory', 'native-operating', 'native-asset', 'source-facts', 'native-facts', 'original-ledger', 'original-manifest', 'rule', 'predecessor', 'code-source', 'terminal', 'stderr', 'stdout', 'source-catalogue', 'physical-input', 'physical-reproduction', 'physical-evidence', 'latitudes', 'source-part', 'membership-lineage', 'membership-index', 'membership-part', 'dated-adoption', 'dated-review', 'dated-observation', 'dated-frame']) put(P + name + '.json', {leaf: name});
+  if (checkpoint) put(P + 'checkpoint-routed', 'opaque checkpoint routed');
   put(P + 'original-source-map.json', {kind: 'complete-world-index-with-exact-encoded-overrides'});
   put('data/ownership-selection.json', {selected_geography: {kind: 'complete-world-index-with-exact-encoded-overrides', path: P + 'original-source-map.json'}});
   const metadataModules=['scripts/selected-reference-metadata.mjs','src/reference-metadata.js'];
@@ -109,6 +110,7 @@ function fixture({missingOrigin = false, splitBaseline = false, rebind = true, m
       const support = commit(files, requests);
       evidence.dated_land_support = pin(P + 'dated-support.json', support);
     }
+    if (consumedRole) evidence[consumedRole] = historical(P + 'source-part.json');
     if (unknownSourceField) {
       evidence.descriptive_metadata = {not_consumed_by_current_reader: true};
       evidence.families[0].description = 'Metadata ignored by the current scientific reader';
@@ -167,6 +169,7 @@ function fixture({missingOrigin = false, splitBaseline = false, rebind = true, m
     put(P + 'checkpoint-custody', {complete_cold_custody:[{facts:{selected_commit:original}, inventory:[pin(POLICY, original)]}]});
     const routes = [{path: POLICY, tree: `100644 blob ${git(['hash-object', '--stdin'], files[POLICY])}\t${POLICY}\0`}, {path: P + 'checkpoint-absent', tree: ''}, {path: P + 'checkpoint-routed',
       tree: `100644 blob ${git(['hash-object', '--stdin'], files[P + 'checkpoint-routed'])}\t${P}checkpoint-routed\0`}];
+    routes.push({path: 'src/ownership-codec.js', tree: `100644 blob ${git(['hash-object', '--stdin'], files['src/ownership-codec.js'])}\tsrc/ownership-codec.js\0`});
     put(P + 'checkpoint-routes', routes);
     const retained = commit(files, assets);
     catalogue.checkpoints.push({id: 'ordinary-retained-root', accepted_head: retained, selected_commit: original,
@@ -282,7 +285,7 @@ test('checkpoint trust is executing catalogue authority and rejects unknown root
   const f = fixture({checkpoint: true}); try {
     const unknownModule = 'coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
     const changedCode = f.commit({...f.files, [unknownModule]: body('changed checkpoint reader')}, f.baseline);
-    assert.match((await f.inspect(f.candidate, changedCode)).reason, /changed-current-input/);
+    assert.equal((await f.inspect(f.candidate, changedCode)).status, 'unchanged-selected-inputs');
     const changedCatalogue = f.commit({...f.files, [CHECKPOINTS]: body({candidate: 'cannot supply roster'})}, f.baseline);
     assert.match((await f.inspect(f.candidate, changedCatalogue)).reason, /changed-current-input/);
     const candidateCatalogue = JSON.parse(f.files[CHECKPOINTS]); candidateCatalogue.checkpoints = [];
@@ -341,7 +344,7 @@ test('native materialization absence, source map, transport and selected registr
   } finally { f.close(); }
 });
 
-test('ordinary queue docs and focused tests do not change selected science while consumed code still rejects', async () => {
+test('current executable changes do not change either operand data vintage', async () => {
   const f = fixture(); try {
     const unrelated = {'scripts/run-worker-merge.mjs':body('changed delivery queue'),
       'docs/WORKER_COORDINATION.md':body('updated review instructions'),
@@ -354,18 +357,21 @@ test('ordinary queue docs and focused tests do not change selected science while
     for (const name of ['scripts/check-effective-geographic-regression.mjs','src/native-grid.js',
       'src/ownership-codec.js','src/effective-footprint.js','scripts/selected-reference-metadata.mjs','src/reference-metadata.js','package.json','package-lock.json']) {
       const changed = f.commit({...f.files,...unrelated,[name]:body('changed consumed method or runtime')},f.baseline);
-      const rejected = await f.inspect(changed);
-      assert.equal(rejected.status,'full-check-required',name);
-      assert.equal(rejected.reason,'changed-current-input:'+name);
+      const accepted = await f.inspect(changed, f.baseline, {trusted: changed});
+      assert.equal(accepted.status,'unchanged-selected-inputs',accepted.reason);
+      assert.equal(accepted.trusted_reader_policy_commit, changed);
+      assert.equal(accepted.science_reexecuted, false);
     }
   } finally { f.close(); }
 });
 
-test('baseline-only relevant code differs even when candidate authored scope is only source', async () => {
+test('historical rebind code remains immutable custody when data-vintage executable copies differ', async () => {
   const f = fixture(); try {
     const baseline = f.commit({...f.files, 'src/effective-footprint.js': body('changed current custody code')}, f.baseline);
     const result = await f.inspect(f.candidate, baseline);
-    assert.equal(result.status, 'full-check-required'); assert.match(result.reason, /changed-current-input:src\/effective-footprint/);
+    assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+    const historical = result.immutable_descriptors.filter(p => p.path === 'src/effective-footprint.js');
+    assert(historical.some(p => p.commit === f.original));
   } finally { f.close(); }
 });
 
@@ -380,7 +386,7 @@ test('baseline-only unused programme-copy and source support changes do not alte
   } finally { f.close(); }
 });
 
-test('artifact transport code is equality-bound without a scientific reader hash whitelist', async () => {
+test('artifact transport belongs to the actual executing checkout rather than selected data identity', async () => {
   const f = fixture(); try {
     const code = 'scripts/geographic-report-artifact.mjs';
     assert(EXECUTION_CODE.includes(code));
@@ -391,11 +397,9 @@ test('artifact transport code is equality-bound without a scientific reader hash
     assert.equal(accepted.status, 'unchanged-selected-inputs', accepted.reason);
     const changed = f.commit({...f.candidateFiles, [code]: body('different candidate transport code')}, baseline);
     const refused = await f.inspect(changed, baseline);
-    assert.equal(refused.status, 'full-check-required');
-    assert.equal(refused.reason, 'changed-current-input:' + code);
+    assert.equal(refused.status, 'unchanged-selected-inputs', refused.reason);
     const differentBaseline = await f.inspect(f.candidate, baseline);
-    assert.equal(differentBaseline.status, 'full-check-required');
-    assert.equal(differentBaseline.reason, 'changed-current-input:' + code);
+    assert.equal(differentBaseline.status, 'unchanged-selected-inputs', differentBaseline.reason);
   } finally { f.close(); }
 });
 
@@ -409,7 +413,7 @@ test('reviewed equal readers need no hash catalogue; unsafe modes, limits and id
     const candidate = f.commit({...f.candidateFiles, [code]: body('reviewed reader update with unchanged routes')}, baseline);
     const accepted = await f.inspect(candidate, baseline);
     assert.equal(accepted.status, 'unchanged-selected-inputs', accepted.reason);
-    assert.match((await f.inspect(f.candidate, baseline)).reason, /changed-current-input/);
+    assert.equal((await f.inspect(f.candidate, baseline)).status, 'unchanged-selected-inputs');
     const symlink = f.commit(f.candidateFiles, f.baseline, {'research/geography/new-packet/source.json': '120000'});
     assert.match((await f.inspect(symlink)).reason, /nonordinary/);
   } finally { f.close(); }
@@ -463,9 +467,9 @@ function coldFixture(f, options = {}) {
   f.git(['config', 'uploadpack.allowFilter', 'true']);
   f.git(['update-ref', 'refs/heads/fixture', f.candidate]);
   f.git(['symbolic-ref', 'HEAD', 'refs/heads/fixture']);
-  if (options.shallowStart) {
+  if (options.shallowStart || options.shallowCandidate) {
     execFileSync('git', ['init', '--bare', destination], {env: f.env, stdio: ['ignore', 'pipe', 'pipe']});
-    for (const args of [['--depth=1', f.baseline], [f.candidate]]) {
+    for (const args of [['--depth=1', f.baseline], [...(options.shallowCandidate ? ['--depth=1'] : []), f.candidate]]) {
       execFileSync('git', ['-C', destination, 'fetch', '--filter=blob:none', '--no-tags', '--no-write-fetch-head',
         ...(args.length === 2 ? [args[0]] : []), pathToFileURL(f.directory).href, args.at(-1)],
         {env: f.env, stdio: ['ignore', 'pipe', 'pipe']});
@@ -557,6 +561,63 @@ test('shallow descendant admits its baseline without traversing an absent parent
   } finally { f.close(); }
 });
 
+test('true depth-one merge admits only its actual first parent without fetching the missing second parent', async () => {
+  const f = fixture(); try {
+    const reviewed = f.commit({...f.files, 'reviewed-head-note': body('reviewed branch')}, f.baseline);
+    const tree = f.git(['rev-parse', f.candidate + '^{tree}']);
+    const candidate = f.git(['commit-tree', tree, '-p', f.baseline, '-p', reviewed], 'combined candidate\n');
+    const cold = coldFixture({...f, candidate}, {shallowCandidate: true});
+    const missing = () => assert.equal(cold.git(['cat-file', '--batch-check'], reviewed + '\n'), reviewed + ' missing');
+    missing();
+    assert.throws(() => cold.git(['merge-base', f.baseline, candidate]));
+    assert.throws(() => execFileSync('git', ['-C', cold.destination, 'merge-base', f.baseline, candidate],
+      {env: {...f.env, GIT_SHALLOW_FILE: '/dev/null'}, stdio: ['ignore', 'pipe', 'pipe']}));
+    const shallow = fs.readFileSync(path.join(cold.destination, 'shallow'), 'utf8');
+    const result = await f.inspect(candidate, f.baseline, {repo: cold.destination, acquisition: cold.acquisition});
+    assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+    assert.equal(result.metadata_acquisition.scientific_leaf_imports, 0);
+    assert.equal(fs.readFileSync(path.join(cold.destination, 'shallow'), 'utf8'), shallow);
+    missing();
+
+    // A present same-data sibling is not the candidate's first parent. It must
+    // retain the existing ancestry query and decline when that history is absent.
+    const wrongBaseline = f.commit(f.files, f.baseline);
+    cold.git(['fetch', '--filter=blob:none', '--depth=1', '--no-tags', '--no-write-fetch-head',
+      pathToFileURL(f.directory).href, wrongBaseline]);
+    const before = cold.batches.length + cold.originBatches.length;
+    const rejected = await f.inspect(candidate, wrongBaseline, {repo: cold.destination, acquisition: cold.acquisition});
+    assert.equal(rejected.status, 'full-check-required');
+    assert.match(rejected.reason, /^immutable-object-unavailable:merge-base:/);
+    assert.equal(cold.batches.length + cold.originBatches.length, before);
+    missing();
+    const messageOnly = f.git(['commit-tree', tree, '-p', f.baseline, '-p', reviewed], 'parent ' + wrongBaseline + '\n');
+    cold.git(['fetch', '--filter=blob:none', '--depth=1', '--no-tags', '--no-write-fetch-head',
+      pathToFileURL(f.directory).href, messageOnly]);
+    const forged = await f.inspect(messageOnly, wrongBaseline, {repo: cold.destination, acquisition: cold.acquisition});
+    assert.equal(forged.status, 'full-check-required');
+    assert.match(forged.reason, /^immutable-object-unavailable:merge-base:/);
+    assert.equal(cold.batches.length + cold.originBatches.length, before);
+    missing();
+  } finally { f.close(); }
+});
+
+test('a differently cased first parent cannot make a lowercase second parent the direct-baseline proof', async () => {
+  const f = fixture(); try {
+    const first = f.commit({...f.files, 'docs/raw-parent.md': body('first')}, f.baseline);
+    const tree = f.git(['rev-parse', f.candidate + '^{tree}']);
+    const candidate = f.git(['hash-object', '-t', 'commit', '-w', '--stdin'],
+      `tree ${tree}\nparent ${first.toUpperCase()}\nparent ${f.baseline}\n`
+      + 'author fixture <fixture@example.invalid> 0 +0000\ncommitter fixture <fixture@example.invalid> 0 +0000\n\nraw parent header\n');
+    assert.equal(f.git(['rev-parse', candidate + '^1']), first);
+    const cold = coldFixture({...f, candidate}, {shallowCandidate: true});
+    assert.equal(cold.git(['cat-file', '--batch-check'], first + '\n'), first + ' missing');
+    const result = await f.inspect(candidate, f.baseline, {repo: cold.destination, acquisition: cold.acquisition});
+    assert.equal(result.status, 'full-check-required');
+    assert.match(result.reason, /^immutable-object-unavailable:merge-base:/);
+    assert.equal(cold.batches.length + cold.originBatches.length, 0);
+  } finally { f.close(); }
+});
+
 test('divergent shallow heads use present ancestry only and missing ancestry declines', async () => {
   const f = fixture(); try {
     const baseline = f.commit({...f.files, 'research/geography/baseline-only/readme': body('unrelated')}, f.baseline);
@@ -584,6 +645,31 @@ test('cold absent historical origins retain fallback versus strict semantics', a
       assert.equal(result.status, missingStrictOrigin ? 'full-check-required' : 'unchanged-selected-inputs', result.reason);
       if (missingStrictOrigin) assert.match(result.reason, /routing-strict-origin-acquisition-failed/);
       assert(!cold.batches.flat().includes('e'.repeat(40)));
+    } finally { f.close(); }
+  }
+});
+
+test('cold evolved same-path aliases acquire their exact original metadata instead of rebinding a pin', async () => {
+  for (const missingOrigin of [false, true]) {
+    const f = fixture({sourceTarget: true, missingOrigin}); try {
+      const name = P + 'physical-reproduction.json';
+      const files = {...f.files, [name]: body('current method differs from its retained historical custody')};
+      const baseline = f.commit(files, f.baseline);
+      const candidate = f.commit({...files, 'research/geography/new-packet/source.json': body('source only')}, baseline);
+      const cold = coldFixture({...f, baseline, candidate}, {shallowCandidate: true});
+      assert.equal(cold.git(['cat-file', '--batch-check'], f.original + '\n'), f.original + ' missing');
+      const result = await f.inspect(candidate, baseline, {repo: cold.destination, acquisition: cold.acquisition});
+      if (missingOrigin) {
+        assert.equal(result.status, 'full-check-required');
+        assert.match(result.reason, /routing-strict-origin-acquisition-failed/);
+      } else {
+        assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+        const pin = result.immutable_descriptors.find(p => p.path === name && p.commit === f.original);
+        assert(pin, 'historical identity is retained at its actual original commit');
+        assert.notEqual(pin.git_blob_oid, cold.git(['rev-parse', baseline + ':' + name]));
+        assert(cold.originBatches.flat().includes(f.original));
+        assert.equal(result.metadata_acquisition.scientific_leaf_imports, 0);
+      }
     } finally { f.close(); }
   }
 });
@@ -778,7 +864,7 @@ test('routing distinguishes literal historical rebind profiles from the expanded
   const f=fixture({rebindCode,historicalMetadataAbsent:rebindCode===LEGACY_CURRENT_REBIND_CODE});
   try{const result=await f.inspect(f.candidate,f.baseline);assert.equal(result.status,'unchanged-selected-inputs',result.reason);
    const requestPins=result.immutable_descriptors.filter(pin=>pin.path===P+'rebind-request.json');assert.ok(requestPins.length>0);
-   for(const name of ['scripts/selected-reference-metadata.mjs','src/reference-metadata.js'])assert(result.current_and_absent_alternatives.some(pin=>pin.path===name),name);
+   for(const name of ['scripts/selected-reference-metadata.mjs','src/reference-metadata.js'])assert(result.immutable_descriptors.some(pin=>pin.path===name&&pin.commit===f.baseline),name);
   }finally{f.close();}
  }
  for(const rebindCode of [CURRENT_REBIND_CODE.slice(0,-1),[...LEGACY_CURRENT_REBIND_CODE,'foreign.mjs'],[...CURRENT_REBIND_CODE].reverse()]){
@@ -786,4 +872,49 @@ test('routing distinguishes literal historical rebind profiles from the expanded
  }
  const falseCurrent=fixture({rebindCode:CURRENT_REBIND_CODE,historicalMetadataAbsent:true});
  try{const result=await falseCurrent.inspect(falseCurrent.candidate,falseCurrent.baseline);assert.equal(result.status,'full-check-required');assert.match(result.reason,/absent|missing|unavailable/);}finally{falseCurrent.close();}
+});
+
+test('unmirrored territorial and reference metadata consumption declines instead of skipping a scientific role', async () => {
+  for (const consumedRole of ['territorial_applicability', 'reference_metadata']) {
+    const f = fixture({sourceTarget: true, consumedRole}); try {
+      const result = await f.inspect();
+      assert.equal(result.status, 'full-check-required');
+      assert.equal(result.reason, 'unsupported-source-target-consumed-role');
+    } finally { f.close(); }
+  }
+});
+
+test('software applicability binds its actual executing checkout and keeps changed data cold', async () => {
+  const f = fixture({sourceTarget: true}); try {
+    const code = 'scripts/check-effective-geographic-regression.mjs';
+    const candidate = f.commit({...f.candidateFiles, [code]: body('reviewed current executable')}, f.baseline);
+    f.git(['update-ref', 'HEAD', candidate]);
+    const inspect = head => inspectExecutingSelectedGeography({repo: f.directory, baseline: f.baseline, candidate: head, trusted: head});
+    const accepted = await inspect(candidate);
+    assert.equal(accepted.status, 'unchanged-selected-inputs', accepted.reason);
+    assert.equal(accepted.trusted_reader_policy_commit, candidate);
+    assert.equal(accepted.science_reexecuted, false);
+    assert.equal(accepted.checkpoint, undefined);
+    const wrongCode = await inspectExecutingSelectedGeography({repo: f.directory, baseline: f.baseline, candidate, trusted: f.baseline});
+    assert.equal(wrongCode.reason, 'executing-checkout-mismatch');
+    for (const target of [P + 'native-bank/fragment.gz', P + 'source-part.json', P + 'registry.json', P + 'native/absent.bin.gz']) {
+      const changed = f.commit({...f.candidateFiles, [code]: body('reviewed current executable'), [target]: body('changed operand')}, f.baseline);
+      f.git(['update-ref', 'HEAD', changed]);
+      const rejected = await inspect(changed);
+      assert.equal(rejected.status, 'full-check-required', target);
+      assert.match(rejected.reason, /changed-current-input/, target);
+    }
+  } finally { f.close(); }
+});
+
+
+test('checkpoint census keeps archived generation code while both current data routes match', async () => {
+  const f = fixture({checkpoint: true}); try {
+    const code = 'src/ownership-codec.js';
+    const candidate = f.commit({...f.candidateFiles, [code]: body('current checker code differs from archived generation')}, f.baseline);
+    const result = await f.inspect(candidate, f.baseline, {trusted: candidate});
+    assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+    assert(result.immutable_descriptors.some(p => p.commit === f.original && p.path === code));
+    assert.equal(result.checkpoint, undefined);
+  } finally { f.close(); }
 });

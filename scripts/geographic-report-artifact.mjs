@@ -380,9 +380,18 @@ export function checkGeographicReport(geography, baseline, candidate, codeCommit
     geography.candidate_commit === candidate && geography.candidate_code_executed === (codeCommit !== baseline) &&
     geography.published === false && geography.source_approval === false && geography.gate_status === 'passed',
     'Geographic report does not bind exact trusted combined check');
-  if (codeCommit !== baseline) need(!geography.checkpoint && !geography.reused_baseline_proof && !geography.unchanged_selected_inputs &&
+  if (codeCommit !== baseline) need(!geography.checkpoint && !geography.reused_baseline_proof &&
     /^[a-f0-9]{64}$/.test(geography.trusted_code_inventory_sha256 ?? ''),
     'Software geography must bind actual execution inventory without baseline/checkpoint reuse');
+  if (geography.unchanged_selected_inputs) {
+    const proof = geography.unchanged_selected_inputs;
+    need(geography.status === 'not-applicable' && proof.version === 1 &&
+      proof.kind === 'trusted-unchanged-selected-geography-v1' && proof.status === 'unchanged-selected-inputs' &&
+      proof.baseline_commit === baseline && proof.candidate_commit === candidate &&
+      proof.trusted_reader_policy_commit === codeCommit && proof.candidate_code_executed === false &&
+      proof.science_reexecuted === false && proof.source_approval === false && proof.published === false,
+      'Unchanged geography applicability does not bind actual executing code and data');
+  }
   const nativePass = geography.status === 'no-new-native-loss' && geography.validation_scope === 'selected-native-map-cells'
     && geography.selected_native_report?.status === 'no-new-native-loss'
     && geography.selected_native_report.method === 'selected-native-owner-conservation-v1'

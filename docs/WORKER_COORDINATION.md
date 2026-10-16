@@ -258,9 +258,13 @@ come from the final queue.
 
 Full-profile changes to checker/producer code or its dependencies run the exact
 combined candidate checker, with
-checker-code identity separate from baseline and candidate data identities. It
-runs the genuine cold native-conservation and continuous-geometry comparisons;
-the actual final queue candidate executes this check once. Historical artifacts
+checker-code identity separate from baseline and candidate data identities. The existing bounded applicability collector first compares the complete consumed
+DATA identities under that one executing checkout. Identical inputs and complete
+present/absent routes make the differential check not applicable, including for
+software changes. Changed or unknown data/layouts retain the genuine cold
+native-conservation comparison; the actual final queue candidate executes this
+check once. Current executable changes do not change either data operand.
+Historical code consumed as custody remains authenticated at its original vintage. Historical artifacts
 cannot replace that current final job.
 There is no finite software hash exception, baseline self-comparison substitute,
 checkpoint reuse or new checkpoint authority for this route. Selected-data and
