@@ -1,0 +1,25 @@
+{
+  "review_kind": "actual final canonical candidate/source-role read, no consumer rerun",
+  "candidate_commit": "afaac0b5d8dfc320f8f2a8fb81fddb25092094ae",
+  "accepted_commit": "b6382262f8d03d9e7d33b26d8adb40a55197262b",
+  "only_noncoordination_changed_paths": [
+    ".github/package-inputs.json",
+    "data/ownership-selection.json"
+  ],
+  "canonical_base_selection_unchanged": true,
+  "actual_pinned_products_equal_reviewed_composition": {
+    "ledger": true,
+    "patch": true,
+    "authority_registry": true,
+    "runtime_envelope": true
+  },
+  "original_quartets": 9,
+  "dated671_support": {
+    "path": "coordination/engineering/vietnam-current-cell-20261014/dated-centre-support/cathai671-land-support-v1.json",
+    "bytes": 300759,
+    "records": 671,
+    "role": "committed reviewed evidence input only, no1233 runtime/authority/patch/hierarchy role",
+    "in_runtime_package_inputs": false
+  },
+  "actual_consumer_status": "pending author actual completed consumer"
+}
