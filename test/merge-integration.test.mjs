@@ -248,7 +248,7 @@ test('ordinary modified focused tests compose with coordination while unknown se
   }
   // These package-contract, asset-dependent and Python-helper tests are not
   // executed by the exact focused Node roster, even with ordinary tree proof.
-  for(const filename of ['test/deployment-budget-scope.test.mjs','test/package-inputs.test.mjs',
+  for(const filename of ['test/package-inputs.test.mjs',
     'test/package-build.test.mjs','test/deployment-budget.test.mjs','test/pr-gates.test.mjs',
     'test/canonical-compact-repack.test.mjs','test/source-cohort.test.py','test/physical-source-retention.test.py']) {
     assert.ok(!files.some(file=>file.filename===filename));
@@ -269,7 +269,7 @@ test('geography omission derives only non-scientific control and validated focus
   // including shared helpers that otherwise qualify for focused regression.
   for (const name of ['scripts/check-handoff-scope.mjs','scripts/evidence-policy.mjs',
     'scripts/evidence-quality.mjs','scripts/integration-proof.mjs','scripts/issue-claim-contract.mjs',
-    'scripts/worker-result.mjs','scripts/classify-deployment-budget.mjs','scripts/local-workspace.mjs',
+    'scripts/worker-result.mjs','scripts/local-workspace.mjs',
     'src/native-grid.js','data/hierarchy.json','data/ownership-selection.json',
     '.github/workflows/worker-merge.yml','.github/workflows/merge-integration-checks.yml',
     '.github/evidence-policy.json','docs/WORKER_COORDINATION.md','docs/unknown.md',

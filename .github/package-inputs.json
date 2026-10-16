@@ -278,12 +278,9 @@
     "drizzle-source/"
   ],
   "verification_paths": [
-    ".github/workflows/deployment-budget.yml",
-    "scripts/classify-deployment-budget.mjs",
     "scripts/package-inputs.mjs",
     "scripts/package-build.mjs",
     "scripts/package-python-runtime.py",
-    "test/deployment-budget-scope.test.mjs",
     "test/package-inputs.test.mjs",
     "test/package-build.test.mjs",
     "test/deployment-budget.test.mjs"
