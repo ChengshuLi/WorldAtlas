@@ -255,10 +255,15 @@ export function githubAPI(token, {fetchImpl = fetch, onRequest = () => {}, readW
    }
   }
  };
- // Only a fixed artifact API route can expose redirect headers. Delivery is
+ // Only fixed artifact/job-log API routes expose redirect headers. Delivery is
  // handled separately without credentials; no signed URL enters accounting.
  api.artifactRedirect=route=>{
   if(!/^\/repos\/[\w.-]+\/[\w.-]+\/actions\/artifacts\/[1-9]\d*\/zip$/.test(route??''))throw Error('Invalid artifact redirect route');
+  return request(route,'GET',undefined,()=>{},false,true);
+ };
+ // Retained original packages still authenticate their producer's job log.
+ api.jobLogRedirect=route=>{
+  if(!/^\/repos\/[\w.-]+\/[\w.-]+\/actions\/jobs\/[1-9]\d*\/logs$/.test(route??''))throw Error('Invalid job log redirect route');
   return request(route,'GET',undefined,()=>{},false,true);
  };
  // The protected floor is usable only for bounded owned-candidate cleanup

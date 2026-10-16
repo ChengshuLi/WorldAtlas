@@ -11,6 +11,7 @@ import {createPackageAssemblyScratch,packageAssemblyInvocation,findOriginalPacka
 import {execFileSync,spawnSync} from 'node:child_process';
 import {inspectPackageExecutionInputs,inspectPackageNodeRuntime,inspectPackageRuntime} from '../scripts/package-build.mjs';
 import {loadPackageInputs} from '../scripts/package-inputs.mjs';
+import {githubAPI} from '../scripts/issue-claim-contract.mjs';
 import {admitPackageInputTransition,committedPackageInputs,committedPackageProducer} from '../scripts/package-output-artifact.mjs';
 
 // Private execution must run in a plain child, but only its requested probe.
@@ -314,6 +315,51 @@ function originalDiscovery(t,{worker=false,queueOnly=false}={}){
   f.api.jobLogRedirect=originalAPI.jobLogRedirect;
   return {...f,s,before,rows,calls,sourceHead,workflowHead};
 }
+
+for(const worker of [false,true])test('real GitHub adapter discovers and authenticates '+(worker?'worker':'historical PR')+' original package output',async t=>{
+  const f=originalDiscovery(t,{worker}),oldFetch=globalThis.fetch,oldWarn=console.warn;
+  t.after(()=>{globalThis.fetch=oldFetch;console.warn=oldWarn;});console.warn=()=>{};
+  const manifest=JSON.parse(f.manifestRaw);manifest.source=f.before;
+  f.manifestRaw=Buffer.from(JSON.stringify(manifest)+'\n');
+  f.receipt.package_output_manifest_sha256=sha(f.manifestRaw);f.receipt.package_output_manifest_bytes=f.manifestRaw.length;
+  const logRoute=`/repos/${f.repo}/actions/jobs/${f.origin.job_id}/logs`,calls=[];
+  let logStatus=302,logURL='https://fixture.blob.core.windows.net/job-log',downloads=0,cancelled=0;
+  globalThis.fetch=async(url,options)=>{
+    assert.equal(String(url),'https://fixture.blob.core.windows.net/job-log');
+    assert.equal(options.headers,undefined);assert.equal(options.redirect,'error');downloads++;
+    return new Response(f.log());
+  };
+  const api=githubAPI('fixture-token',{conditionalReads:false,fetchImpl:async(url,options)=>{
+    const parsed=new URL(url);assert.equal(parsed.origin,'https://api.github.com');
+    const route=parsed.pathname+parsed.search;calls.push(route);
+    assert.equal(options.method,'GET');assert.equal(options.headers.Authorization,'Bearer fixture-token');
+    assert.equal(options.redirect,route===logRoute?'manual':'error');
+    if(route===logRoute){
+      if(logStatus!==302)return Response.json({message:'Original log unavailable'},{status:logStatus});
+      return new Response(new ReadableStream({cancel(){cancelled++;}}),{status:302,headers:{location:logURL}});
+    }
+    return Response.json(await f.api(route));
+  }});
+  const found=await findOriginalPackage({api,repo:f.repo,current:f.before,originalRunId:17});
+  assert.equal(found?.origin.head,f.sourceHead,'The real CLI adapter must admit the original instead of forcing a rebuild');
+  const admit=()=>authenticateOriginalPackageOutput({...f,api});
+  const token=await admit();assert.equal(requireOriginalPackageOutput(token).manifest.source.head,f.sourceHead);
+  assert.throws(()=>requireOriginalPackageOutput(structuredClone(token)),/Privately authenticated/);
+  assert.equal(downloads,2);assert.equal(cancelled,2);assert.equal(calls.filter(route=>route===logRoute).length,2);
+  const before=calls.length;
+  for(const route of [logRoute+'?foreign=1',logRoute.replace('/29/','/0/'),logRoute.replace('/logs','/artifacts'),
+    'https://api.github.com'+logRoute])assert.throws(()=>api.jobLogRedirect(route),/Invalid job log redirect route/);
+  assert.equal(calls.length,before,'Invalid redirects must fail before sending authenticated requests');
+  const receiptHash=f.receipt.package_output_manifest_sha256;
+  f.receipt.package_output_manifest_sha256='f'.repeat(64);
+  await assert.rejects(admit(),/Original package inventory differs/);f.receipt.package_output_manifest_sha256=receiptHash;
+  const originalLog=f.log;f.log=()=>'';await assert.rejects(admit(),/Missing or ambiguous/);f.log=originalLog;
+  logURL='https://foreign.invalid/job-log';const priorDownloads=downloads;
+  await assert.rejects(admit(),/Unsupported original job-log transport/);assert.equal(downloads,priorDownloads);
+  logStatus=404;const priorRequests=calls.length;
+  await assert.rejects(admit(),/HTTP 404/);assert.equal(calls.length-priorRequests,4,'An ordinary denial must not be retried');
+  assert.equal(downloads,priorDownloads);
+});
 
 test('original discovery ignores observer trees but refuses changed build inputs and workflow',async t=>{
   const f=originalDiscovery(t),old=globalThis.fetch;t.after(()=>{globalThis.fetch=old;});
