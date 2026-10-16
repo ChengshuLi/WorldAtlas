@@ -261,7 +261,7 @@ async function acquireDeliveryInputs(plan,root,{execute=execFileSync,token,onMat
  const acquisition=createAcquisition({repo:root,token,execute,loadDescriptor:async(version,name)=>{const p=descriptors.get(version+':'+name);need(p,'Undeclared acquisition metadata');return {type:'blob',mode:p.mode,sha:p.git_blob_oid??p.blob,size:p.bytes};}});
  const admitted=[];
  for(const p of rows)admitted.push(await acquisition.descriptor(p.commit,p.path,{mode:p.mode,git_blob_oid:p.git_blob_oid??p.blob,bytes:p.bytes,sha256:p.sha256}));
- acquisition.acquire(admitted); // Existing import checks and missing-OID resume.
+ acquisition.acquire(admitted); // Exact-OID import/resume; consumed bytes are authenticated below.
  const gitEnv=Object.fromEntries(Object.entries(process.env).filter(([key])=>!key.startsWith('GIT_')));
  Object.assign(gitEnv,{GIT_NO_LAZY_FETCH:'1',GIT_NO_REPLACE_OBJECTS:'1',GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_TERMINAL_PROMPT:'0'});
  const outcomes=[];let bodyReads=0;

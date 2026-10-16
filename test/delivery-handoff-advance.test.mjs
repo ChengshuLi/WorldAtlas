@@ -248,7 +248,7 @@ function fixture(){
   }
   if(args.includes('cat-file')&&args.includes('blob'))bodyReads.push(args.at(-1));
   const raw=execFileSync(command,args,options);
-  if(control.corruptRead&&args.includes('cat-file')&&args.includes('blob'))return Buffer.from('wrong bytes');return raw;
+  if((control.corruptRead||control.corruptOid===args.at(-1))&&args.includes('cat-file')&&args.includes('blob'))return Buffer.from('wrong bytes');return raw;
  };
  const options={execute,token:'',onMaterialized(event){writes.push(event.path);if(control.interruptFile){control.interruptFile=false;throw Error('fixture interruption after completed alias');}}};
  return {directory,origin,destination,plan,options,execute,control,fetchCalls,importedOids,writes,bodyReads,git,rawA,rawB,a,b,destA,destB,oidA,oidB,close(){fs.rmSync(directory,{recursive:true,force:true});}};
@@ -258,11 +258,11 @@ test('actual missing Git objects and repeated identities acquire once; complete 
  const f=fixture();try{
   const sourceSentinel=Buffer.from('Existing ordinary source-tree path is not a materialization target.\n');
   fs.writeFileSync(path.join(f.destination,f.a.path),sourceSentinel);
-  const result=await acquireDeliveryInputs(f.plan,f.destination,f.options);assert.equal(result.status,'complete');assert.equal(result.unique_objects,2);assert.equal(result.declarations,3);assert.equal(result.verified_import_objects,2);assert.equal(result.materialized_files,2);assert.equal(result.materialization_body_reads,2);assert.equal(f.bodyReads.length,4);
+  const result=await acquireDeliveryInputs(f.plan,f.destination,f.options);assert.equal(result.status,'complete');assert.equal(result.unique_objects,2);assert.equal(result.declarations,3);assert.equal(result.fetched_objects,2);assert.equal(result.materialized_files,2);assert.equal(result.materialization_body_reads,2);assert.equal(f.bodyReads.length,2);
   assert.equal(f.fetchCalls.length,1);assert.deepEqual(new Set(f.importedOids),new Set([f.oidA,f.oidB]));assert.equal(f.importedOids.length,2);assert.equal(f.writes.length,2);
   assert.deepEqual(fs.readFileSync(path.join(f.destination,f.destA)),f.rawA);assert.deepEqual(fs.readFileSync(path.join(f.destination,f.destB)),f.rawB);
-  for(let i=0;i<2;i++){const warm=await acquireDeliveryInputs(f.plan,f.destination,f.options);assert.equal(warm.verified_import_objects,0);assert.equal(warm.materialized_files,0);assert.equal(warm.resumed_files,2);assert.equal(warm.materialization_body_reads,2);}
-  assert.equal(f.bodyReads.length,12); // Complete per-invocation reauthentication is retained.
+  for(let i=0;i<2;i++){const warm=await acquireDeliveryInputs(f.plan,f.destination,f.options);assert.equal(warm.fetched_objects,0);assert.equal(warm.materialized_files,0);assert.equal(warm.resumed_files,2);assert.equal(warm.materialization_body_reads,2);}
+  assert.equal(f.bodyReads.length,6); // Complete per-invocation reauthentication is retained.
   assert.equal(f.fetchCalls.length,1);assert.equal(f.importedOids.length,2);assert.equal(f.writes.length,2);
   assert.deepEqual(fs.readFileSync(path.join(f.destination,f.a.path)),sourceSentinel);assert.equal(fs.existsSync(path.join(f.destination,f.b.path)),false);
  }finally{f.close();}
@@ -292,7 +292,7 @@ test('partial, corrupted and symlinked aliases are preserved and refused before 
 });
 
 test('wrong whole bytes or decoded gzip identities cannot produce a materialized receipt',async()=>{
- let f=fixture();try{f.control.corruptRead=true;await assert.rejects(acquireDeliveryInputs(f.plan,f.destination,f.options),/does not match tree/);assert.equal(f.writes.length,0);}finally{f.close();}
+ let f=fixture();try{f.control.corruptRead=true;await assert.rejects(acquireDeliveryInputs(f.plan,f.destination,f.options),/Acquired body changed before materialization/);assert.equal(f.writes.length,0);}finally{f.close();}
  f=fixture();try{const changed=structuredClone(f.plan);for(const p of changed.products.filter(p=>p.source.blob===f.oidA)){p.source.uncompressed_sha256='0'.repeat(64);p.identity=sha(json({mode:p.source.mode,bytes:p.source.bytes,sha256:p.source.sha256,uncompressed_bytes:p.source.uncompressed_bytes,uncompressed_sha256:p.source.uncompressed_sha256}));}
  await assert.rejects(acquireDeliveryInputs(changed,f.destination,f.options),/decoded identity/);assert.equal(f.writes.length,0);
  }finally{f.close();}
@@ -300,6 +300,20 @@ test('wrong whole bytes or decoded gzip identities cannot produce a materialized
 
 test('identity, destination and aggregate inventory failures occur before object fetches',async()=>{
  for(const edit of [p=>p.products[0].identity='0'.repeat(64),p=>p.products[0].destinations.push('../escape'),p=>p.products[0].destinations.push('data/unowned.json'),p=>p.unique_encoded_bytes++]){const f=fixture();try{const bad=structuredClone(f.plan);edit(bad);await assert.rejects(acquireDeliveryInputs(bad,f.destination,f.options));assert.equal(f.fetchCalls.length,0);assert.equal(f.writes.length,0);}finally{f.close();}}
+});
+
+test('later corrupt input cannot complete materialization; an earlier exact alias is safely resumed',async()=>{
+ const f=fixture();try{
+  f.control.corruptOid=f.oidB;
+  await assert.rejects(acquireDeliveryInputs(f.plan,f.destination,f.options),/Acquired body changed before materialization/);
+  assert.deepEqual(f.writes,[f.destA]);assert.deepEqual(fs.readFileSync(path.join(f.destination,f.destA)),f.rawA);
+  assert.equal(fs.existsSync(path.join(f.destination,f.destB)),false);
+  const before=fs.statSync(path.join(f.destination,f.destA));f.control.corruptOid=null;
+  const result=await acquireDeliveryInputs(f.plan,f.destination,f.options);
+  assert.equal(result.status,'complete');assert.equal(result.resumed_files,1);assert.equal(result.materialized_files,1);
+  assert.equal(fs.statSync(path.join(f.destination,f.destA)).ino,before.ino);
+  assert.deepEqual(fs.readFileSync(path.join(f.destination,f.destB)),f.rawB);assert.equal(f.fetchCalls.length,1);
+ }finally{f.close();}
 });
 
 test('plain materialize CLI authenticates a saved recipe index and resumes with identical receipt and zero writes', () => {

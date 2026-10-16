@@ -1,4 +1,4 @@
-// Acquisition only. No candidate module is imported and no validation is skipped.
+// Acquisition only. No candidate module is imported; actual readers authenticate their inputs.
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
@@ -25,10 +25,10 @@ export function createAcquisition({repo, loadTree, loadDescriptor, execute = exe
       stdio: ['pipe', expectedBytes === undefined ? 'ignore' : 'pipe', 'ignore']}); }
     catch { throw Error('Geography object acquisition failed'); }
   };
-  const trees = new Map(), inventory = new Map(), verified = new Set();
+  const trees = new Map(), inventory = new Map();
   const stats = {scope: 'declared-selected-bank-and-direct-additive-assets', complete_scientific_closure: false,
-    unique_objects: 0, declared_bytes: 0, verified_import_objects: 0, verified_import_bytes: 0, fetch_batches: 0,
-    tree_metadata_ms: 0, fetch_ms: 0, verification_ms: 0, declarations: 0};
+    unique_objects: 0, declared_bytes: 0, fetched_objects: 0, fetched_bytes: 0, fetch_batches: 0,
+    tree_metadata_ms: 0, fetch_ms: 0, declarations: 0};
   async function tree(version) {
     requireValue(oid(version), 'Invalid immutable geography commit');
     if (!trees.has(version)) {
@@ -108,25 +108,15 @@ export function createAcquisition({repo, loadTree, loadDescriptor, execute = exe
         '--filter=blob:none', '--stdin', 'https://github.com/' + repository + '.git'], missing.map(r => r.oid).join('\n') + '\n');
       stats.fetch_ms += Math.round(performance.now() - started);
       stats.fetch_batches++;
+      stats.fetched_objects += missing.length; stats.fetched_bytes += missing.reduce((n, r) => n + r.bytes, 0);
     }
-    const started = performance.now();
-    let acquired;
-    for (const row of rows) {
-      // Verify once per actual OID/hash binding, including multiple aliases.
-      const key = row.oid + ':' + (row.sha256 ?? '');
-      if (!verified.has(key)) {
-        const raw = body(row); verified.add(key);
-        if (rows.length === 1) acquired = raw;
-      }
-    }
-    stats.verification_ms += Math.round(performance.now() - started);
-    stats.verified_import_objects += missing.length; stats.verified_import_bytes += missing.reduce((n, r) => n + r.bytes, 0);
-    return acquired;
+    // Acquisition supplies objects, not verified scientific inputs. Each actual
+    // reader authenticates its consumed bytes, including the JSON reader below.
   }
   async function json(version, name, expected) {
     const row = await descriptor(version, name, expected);
-    const raw = acquire([row]) ?? body(row);
-    return JSON.parse(raw);
+    acquire([row]);
+    return JSON.parse(body(row));
   }
   return {tree, descriptor, pin, acquire, json, stats};
 }
