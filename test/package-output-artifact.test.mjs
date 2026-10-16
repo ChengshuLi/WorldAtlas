@@ -278,6 +278,32 @@ print(mode+': one authenticated archive pass; mutation/cleanup controls passed')
   }
 });
 
+
+test('authenticated archive metadata can exceed 8 MiB while exact sizes and hashes remain required', t => {
+  const f=fixture(t), note='retained original context '.repeat(360000);
+  const receipt=JSON.parse(fs.readFileSync(path.join(f.root,'.cache/package-input-build.json')));
+  f.write('.cache/package-input-build.json',{...receipt,retained_context:note});
+  const manifest=createPackageOutputManifest(f.root);manifest.retained_context=note;
+  const raw=Buffer.from(JSON.stringify(manifest)+'\n'), manifestPath=path.join(f.root,'manifest.json');fs.writeFileSync(manifestPath,raw);
+  assert(raw.length>8*1024*1024);assert(manifest.original_build_receipt.bytes>8*1024*1024);
+  const archive=path.join(f.root,'large-metadata.zip');
+  execFileSync('python3',['-I','-B','-c',`import json,pathlib,sys,zipfile
+root=pathlib.Path(sys.argv[1]);manifest=json.loads((root/'manifest.json').read_bytes())
+with zipfile.ZipFile(sys.argv[2],'w',compression=zipfile.ZIP_DEFLATED) as z:
+ for row in manifest['output']['files']: z.write(root/row['path'],row['path'])
+ z.write(root/'.cache/package-input-build.json','.cache/package-input-build.json')
+ z.write(root/'manifest.json','.cache/package-output-manifest.json')
+`,f.root,archive]);
+  const extractor=path.resolve('scripts/extract-package-output.py'), digest=hash(fs.readFileSync(archive)), target=path.join(f.root,'extracted');
+  execFileSync('python3',['-I','-B',extractor,'--manifest',archive,path.join(f.root,'read-manifest.json'),digest]);
+  assert.deepEqual(fs.readFileSync(path.join(f.root,'read-manifest.json')),raw);
+  execFileSync('python3',['-I','-B',extractor,archive,target,digest,hash(raw),String(raw.length)]);
+  assert.equal(verifyPackageOutput(target,manifest),true);
+  for(const [expectedHash,size]of [[hash(raw),raw.length+1],['0'.repeat(64),raw.length]]){
+    const wrong=path.join(f.root,'rejected');assert.throws(()=>execFileSync('python3',['-I','-B',extractor,archive,wrong,digest,expectedHash,String(size)],{stdio:'pipe'}));assert.equal(fs.existsSync(wrong),false);
+  }
+});
+
 test('source snapshot rejects untracked declared-directory inputs',t=>{
   const f=fixture(t),definition=JSON.parse(fs.readFileSync(path.join(f.root,'.github/package-inputs.json')));
   definition.inputs=definition.inputs.filter(name=>name!=='data/ownership-selection.json');definition.inputs.push('data/');
