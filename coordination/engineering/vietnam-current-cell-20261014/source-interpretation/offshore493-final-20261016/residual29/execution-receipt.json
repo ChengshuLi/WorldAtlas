@@ -1,0 +1,159 @@
+{
+  "status": "completed",
+  "complete": true,
+  "original_keys_recorded": 29,
+  "scenes_completed": 4,
+  "completed_blocks": 10,
+  "scenes": [
+    {
+      "item": "S2A_49QFU_20200330_0_L2A",
+      "result": {
+        "path": "products/S2A_49QFU_20200330_0_L2A/native-observations.json",
+        "bytes": 106429,
+        "sha256": "991f9d2c32bfede96e6e764e7add1af188c6bf9cfe80bae5aceaf893b70d9262"
+      },
+      "summary": {
+        "requested_original_keys": 17,
+        "actually_sampled_native_centres": 17,
+        "outside_native_frame_indices": [],
+        "scl_centre_counts": {
+          "6": 17
+        },
+        "valid_centre_masks_by_band": {
+          "red": {
+            "255": 17
+          },
+          "green": {
+            "255": 17
+          },
+          "blue": {
+            "255": 17
+          },
+          "nir": {
+            "255": 17
+          },
+          "scl": {
+            "255": 17
+          }
+        },
+        "physical_interpretation": null
+      }
+    },
+    {
+      "item": "S2B_49PHK_20200309_0_L2A",
+      "result": {
+        "path": "products/S2B_49PHK_20200309_0_L2A/native-observations.json",
+        "bytes": 65216,
+        "sha256": "00301a00b9a8ea6094eebe53483b3644929f044cdb91e1f596501ab84b84166d"
+      },
+      "summary": {
+        "requested_original_keys": 10,
+        "actually_sampled_native_centres": 10,
+        "outside_native_frame_indices": [],
+        "scl_centre_counts": {
+          "6": 9,
+          "9": 1
+        },
+        "valid_centre_masks_by_band": {
+          "red": {
+            "255": 10
+          },
+          "green": {
+            "255": 10
+          },
+          "blue": {
+            "255": 10
+          },
+          "nir": {
+            "255": 10
+          },
+          "scl": {
+            "255": 10
+          }
+        },
+        "physical_interpretation": null
+      }
+    },
+    {
+      "item": "S2B_50PMQ_20200316_0_L2A",
+      "result": {
+        "path": "products/S2B_50PMQ_20200316_0_L2A/native-observations.json",
+        "bytes": 12653,
+        "sha256": "c7c9ad6cd7da51c3ae70a9818bbd91ff31ad53a553a526f2c86f52182f30bb9d"
+      },
+      "summary": {
+        "requested_original_keys": 1,
+        "actually_sampled_native_centres": 1,
+        "outside_native_frame_indices": [],
+        "scl_centre_counts": {
+          "6": 1
+        },
+        "valid_centre_masks_by_band": {
+          "red": {
+            "255": 1
+          },
+          "green": {
+            "255": 1
+          },
+          "blue": {
+            "255": 1
+          },
+          "nir": {
+            "255": 1
+          },
+          "scl": {
+            "255": 1
+          }
+        },
+        "physical_interpretation": null
+      }
+    },
+    {
+      "item": "S2A_50PMR_20200331_0_L2A",
+      "result": {
+        "path": "products/S2A_50PMR_20200331_0_L2A/native-observations.json",
+        "bytes": 12611,
+        "sha256": "0977cad020b4c17e0cb7f6fce5cd59b7e0e9fd7da4c0bf80f2a748e6e3de34ca"
+      },
+      "summary": {
+        "requested_original_keys": 1,
+        "actually_sampled_native_centres": 1,
+        "outside_native_frame_indices": [],
+        "scl_centre_counts": {
+          "6": 1
+        },
+        "valid_centre_masks_by_band": {
+          "red": {
+            "255": 1
+          },
+          "green": {
+            "255": 1
+          },
+          "blue": {
+            "255": 1
+          },
+          "nir": {
+            "255": 1
+          },
+          "scl": {
+            "255": 1
+          }
+        },
+        "physical_interpretation": null
+      }
+    }
+  ],
+  "started_utc": "2026-10-16T00:08:58.198036+00:00",
+  "ended_utc": "2026-10-16T00:09:59.981290+00:00",
+  "seconds": 61.75987991702277,
+  "pid": 56058,
+  "observed_process_lifetime_peak_rss_bytes": 234323968,
+  "reads": {
+    "remote_data_windows": 50,
+    "remote_mask_windows": 50
+  },
+  "registered_output_bytes": 119717251,
+  "registered_output_files": 160,
+  "new_scientific_answers": 0,
+  "repair_or_owner_changes": 0
+}

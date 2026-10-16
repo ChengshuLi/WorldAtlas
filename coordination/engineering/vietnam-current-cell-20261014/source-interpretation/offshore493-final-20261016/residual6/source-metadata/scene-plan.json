@@ -1,0 +1,104 @@
+{
+  "scope": "Entire6genuinecloud residual afterthreeactualdatesperkey",
+  "exactkeys": 6,
+  "covered": 6,
+  "uncovered": [],
+  "catalogueitems": 595,
+  "selected_scenes": [
+    {
+      "item_id": "S2B_49PHK_20200816_0_L2A",
+      "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2B_49PHK_20200816_0_L2A",
+      "original_packet_indices": [
+        6440,
+        6446,
+        6447,
+        6459,
+        6467
+      ],
+      "keys": 5,
+      "properties": {
+        "proj:epsg": 32649,
+        "datetime": "2020-08-16T02:55:36.188000Z",
+        "mgrs:utm_zone": 49,
+        "mgrs:latitude_band": "P",
+        "eo:cloud_cover": 10.680757,
+        "mgrs:grid_square": "HK",
+        "s2:processing_baseline": "02.14",
+        "s2:nodata_pixel_percentage": 0
+      },
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              113.72852130255875,
+              9.036581050669458
+            ],
+            [
+              114.72594787726781,
+              9.02780365895448
+            ],
+            [
+              114.71634060980502,
+              8.036753756465858
+            ],
+            [
+              113.72147669961805,
+              8.044554551958662
+            ],
+            [
+              113.72852130255875,
+              9.036581050669458
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      }
+    },
+    {
+      "item_id": "S2B_49QFU_20200115_0_L2A",
+      "item_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2B_49QFU_20200115_0_L2A",
+      "original_packet_indices": [
+        12287
+      ],
+      "keys": 1,
+      "properties": {
+        "proj:epsg": 32649,
+        "datetime": "2020-01-15T03:13:12.882000Z",
+        "mgrs:utm_zone": 49,
+        "mgrs:latitude_band": "Q",
+        "eo:cloud_cover": 4.10931,
+        "mgrs:grid_square": "FU",
+        "s2:processing_baseline": "02.13",
+        "s2:nodata_pixel_percentage": 0
+      },
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              111.94035855635789,
+              17.182791762213984
+            ],
+            [
+              112.97251395918556,
+              17.175340777437757
+            ],
+            [
+              112.96236651929091,
+              16.183374048814915
+            ],
+            [
+              111.93551802491413,
+              16.19037106111459
+            ],
+            [
+              111.94035855635789,
+              17.182791762213984
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      }
+    }
+  ],
+  "method": "Full2020whole-public-tile catalogue WITHOUTcloudcap; actualgeometry+unuseddateperkey,legacy02offset0compatibility; no pixelclassification orwaterfromabsence."
+}

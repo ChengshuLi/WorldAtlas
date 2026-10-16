@@ -1,0 +1,45 @@
+{
+  "collections": [
+    "sentinel-2-l2a"
+  ],
+  "datetime": "2020-01-01T00:00:00Z/2020-12-31T23:59:59Z",
+  "limit": 1000,
+  "query": {
+    "mgrs:utm_zone": {
+      "eq": 49
+    },
+    "mgrs:latitude_band": {
+      "eq": "P"
+    },
+    "mgrs:grid_square": {
+      "eq": "HK"
+    }
+  },
+  "sortby": [
+    {
+      "field": "properties.eo:cloud_cover",
+      "direction": "asc"
+    }
+  ],
+  "fields": {
+    "include": [
+      "id",
+      "type",
+      "collection",
+      "geometry",
+      "bbox",
+      "properties.datetime",
+      "properties.eo:cloud_cover",
+      "properties.proj:epsg",
+      "properties.mgrs:utm_zone",
+      "properties.mgrs:latitude_band",
+      "properties.mgrs:grid_square",
+      "properties.s2:nodata_pixel_percentage",
+      "properties.s2:processing_baseline",
+      "links"
+    ],
+    "exclude": [
+      "assets"
+    ]
+  }
+}

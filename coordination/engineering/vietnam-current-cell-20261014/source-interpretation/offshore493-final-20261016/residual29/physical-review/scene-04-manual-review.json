@@ -1,0 +1,53 @@
+{
+  "scene_number": 4,
+  "item": "S2A_50PMR_20200331_0_L2A",
+  "date": "2020-03-31T02:45:10.247000Z",
+  "source_quality": {
+    "requested_original_keys": 1,
+    "actually_sampled_native_centres": 1,
+    "outside_native_frame_indices": [],
+    "scl_centre_counts": {
+      "6": 1
+    },
+    "valid_centre_masks_by_band": {
+      "red": {
+        "255": 1
+      },
+      "green": {
+        "255": 1
+      },
+      "blue": {
+        "255": 1
+      },
+      "nir": {
+        "255": 1
+      },
+      "scl": {
+        "255": 1
+      }
+    },
+    "physical_interpretation": null
+  },
+  "blocks": [
+    {
+      "block": [
+        2,
+        5
+      ],
+      "water_indices": [
+        28
+      ],
+      "reef_body_indices": [],
+      "unresolved_indices": [],
+      "finding": "Originalpacket index9705 now locates clear darkwater northeast of the small reef/lagoon chain in the actualMarch31nativeRGB/NIR frame. The earlierFeb3all-zero/mask0 wedge andApril20cloud-margin question remain sourcehistory, not evidence of water.",
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene04-block-02-05-native-crop.png",
+      "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene04-block-02-05-crop-locator.json",
+      "block_marker_pin": {
+        "path": "products/S2A_50PMR_20200331_0_L2A/block-02-05/block-observations.json",
+        "bytes": 12860,
+        "sha256": "a71942b45444860a38072dda2e5e9b610ce6cff2a158ca62fa33d3574d72b15b"
+      }
+    }
+  ],
+  "method": "Finite human visual nativeRGB/NIR bodylocality review, no spectral/SCL/classifier threshold or strictdrynessgate; genuinecloudretained."
+}

@@ -1,0 +1,99 @@
+{
+  "scene_number": 2,
+  "item": "S2B_49PHK_20200309_0_L2A",
+  "date": "2020-03-09T02:55:30.550000Z",
+  "source_quality": {
+    "requested_original_keys": 10,
+    "actually_sampled_native_centres": 10,
+    "outside_native_frame_indices": [],
+    "scl_centre_counts": {
+      "6": 9,
+      "9": 1
+    },
+    "valid_centre_masks_by_band": {
+      "red": {
+        "255": 10
+      },
+      "green": {
+        "255": 10
+      },
+      "blue": {
+        "255": 10
+      },
+      "nir": {
+        "255": 10
+      },
+      "scl": {
+        "255": 10
+      }
+    },
+    "physical_interpretation": null
+  },
+  "blocks": [
+    {
+      "block": [
+        1,
+        9
+      ],
+      "water_indices": [],
+      "reef_body_indices": [],
+      "unresolved_indices": [
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "finding": "All five requested centres lie in actual cumulus/cloud-shadow/fringe texture beside the reef; keep questions despite literalSCL6 atfour ofthefive.",
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene02-block-01-09-native-crop.png",
+      "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene02-block-01-09-crop-locator.json",
+      "block_marker_pin": {
+        "path": "products/S2B_49PHK_20200309_0_L2A/block-01-09/block-observations.json",
+        "bytes": 36200,
+        "sha256": "82a221a71f260784007a46038b5b70f6e55ec2ac1348c953e0043fe012ac6f62"
+      }
+    },
+    {
+      "block": [
+        1,
+        10
+      ],
+      "water_indices": [
+        17,
+        18
+      ],
+      "reef_body_indices": [],
+      "unresolved_indices": [],
+      "finding": "Both requested centres lie in exposed textured water between the separated cumulus and shadows.",
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene02-block-01-10-native-crop.png",
+      "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene02-block-01-10-crop-locator.json",
+      "block_marker_pin": {
+        "path": "products/S2B_49PHK_20200309_0_L2A/block-01-10/block-observations.json",
+        "bytes": 18655,
+        "sha256": "d3fb2d303659aebfb300ea45255f87d60e9d038188035e5fd7f344ae29095cdd"
+      }
+    },
+    {
+      "block": [
+        2,
+        4
+      ],
+      "water_indices": [
+        24,
+        25,
+        26
+      ],
+      "reef_body_indices": [],
+      "unresolved_indices": [],
+      "finding": "Three requested centres lie in clear darkwater in the open gap east of the cloud/shadow cluster; nativeRGB/NIR body context is coherent.",
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene02-block-02-04-native-crop.png",
+      "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene02-block-02-04-crop-locator.json",
+      "block_marker_pin": {
+        "path": "products/S2B_49PHK_20200309_0_L2A/block-02-04/block-observations.json",
+        "bytes": 24350,
+        "sha256": "4ef580c5bf010b0deca734a51929e7ea135f7881c5cc792999982b2c46930931"
+      }
+    }
+  ],
+  "method": "Finite human visual nativeRGB/NIR bodylocality review, no spectral/SCL/classifier threshold or strictdrynessgate; genuinecloudretained."
+}

@@ -1,0 +1,6379 @@
+{
+  "scope": "Onlyfinal6supported original493residual exactkeys, disjoint previous487proposals",
+  "count": 6,
+  "records": [
+    {
+      "index": 6440,
+      "original_key": {
+        "owner": 48238,
+        "y": 124600,
+        "x": 214556
+      },
+      "original_record_unchanged": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65788
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48238
+        ],
+        "declared_sids": [
+          65788
+        ],
+        "flags": [
+          "disputed-island-territory-research"
+        ],
+        "hold_reasons": [
+          "disputed-island-territory-research",
+          "foreign-reference-country",
+          "source-relative-physical-interpretation-unresolved"
+        ],
+        "owner": 48238,
+        "package": "physical-interpretation",
+        "physical": "source-relative",
+        "qualified": false,
+        "reference_countries": [],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "disputed-island-territory-research",
+          "foreign-reference-country"
+        ],
+        "x": 214556,
+        "y": 124600
+      },
+      "centre_unchanged": {
+        "longitude": 114.62378798166048,
+        "latitude": 8.866016121797234
+      },
+      "input_scope_array_index": 22907,
+      "original_source_array_index": 38552,
+      "original_interval_index": 9042,
+      "source_target_unchanged": "gb:VNM:ADM2:81297802B23443064350281",
+      "proposed_bounded_answer": true,
+      "source_review_kind": "dated_visible_water_body_location_through_thin_cirrus",
+      "actual_answer": "2020-08-16: All five unchanged centres are in a spatially continuous, visibly wave-textured water field west of the coherent reef complex. A thin translucent cirrus/veil crosses the scene, and literal SCL10 is recorded at every centre; nevertheless the actual nativeRGB andNIR frames expose the water texture and coherent water BODY at those exact positions. This is a positive dated water/body-locality observation THROUGH thin cirrus, not a cloud-free or exactsurface-reflectance assertion. The opaque cumulus/shadows are west of these centres. Original mapped locality/owner and sourceassociation remain attached.",
+      "answer_year": 2020,
+      "answer_dates": [
+        "2020-08-16T02:55:36.188000Z"
+      ],
+      "source_vintage_kind": "Actualdated2020 Sentinel2L2A10mRGB/NIR and20mSCL, not annualclass inference",
+      "remaining_physical_question": null,
+      "prior_dated_visibility_or_reef_question": {
+        "path": "bulk-completion/offshore13649-interpretation/worker1/scene-06-review.json",
+        "field": "disposition",
+        "literal_status": "unanswered"
+      },
+      "authoritative_prior_ledger": {
+        "path": "bulk-completion/offshore13649-proposed-adoption/current-unanswered-2742.json",
+        "index": 6440
+      },
+      "reviewed_source_observation": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/products/S2B_49PHK_20200816_0_L2A/native-observations.json",
+        "source_item": "S2B_49PHK_20200816_0_L2A",
+        "point_index": 0,
+        "original_packet_index": 6440,
+        "source_scene_marker_pin": {
+          "path": "products/S2B_49PHK_20200816_0_L2A/native-observations.json",
+          "bytes": 35865,
+          "sha256": "14859746e1ec2015ca1d3000de854c0340424df9c0a1cf8f4ed26801859a13e3"
+        },
+        "block_marker_pin": {
+          "path": "products/S2B_49PHK_20200816_0_L2A/block-01-09/block-observations.json",
+          "bytes": 36141,
+          "sha256": "a5180d1802765707510b4ca71fac64baa18aa37f1723b839381042b957266599"
+        },
+        "assets": {
+          "red": {
+            "value": 358,
+            "valid_mask": 255,
+            "source_pixel": [
+              1803,
+              9872
+            ],
+            "local_pixel": [
+              780,
+              657
+            ],
+            "neighbourhood": [
+              [
+                346,
+                339,
+                375
+              ],
+              [
+                379,
+                358,
+                367
+              ],
+              [
+                377,
+                378,
+                375
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "green": {
+            "value": 427,
+            "valid_mask": 255,
+            "source_pixel": [
+              1803,
+              9872
+            ],
+            "local_pixel": [
+              780,
+              657
+            ],
+            "neighbourhood": [
+              [
+                383,
+                412,
+                430
+              ],
+              [
+                393,
+                427,
+                435
+              ],
+              [
+                415,
+                437,
+                423
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "blue": {
+            "value": 586,
+            "valid_mask": 255,
+            "source_pixel": [
+              1803,
+              9872
+            ],
+            "local_pixel": [
+              780,
+              657
+            ],
+            "neighbourhood": [
+              [
+                524,
+                563,
+                607
+              ],
+              [
+                561,
+                586,
+                583
+              ],
+              [
+                583,
+                563,
+                536
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "nir": {
+            "value": 343,
+            "valid_mask": 255,
+            "source_pixel": [
+              1803,
+              9872
+            ],
+            "local_pixel": [
+              780,
+              657
+            ],
+            "neighbourhood": [
+              [
+                329,
+                342,
+                379
+              ],
+              [
+                336,
+                343,
+                346
+              ],
+              [
+                348,
+                358,
+                344
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "scl": {
+            "value": 10,
+            "valid_mask": 255,
+            "source_pixel": [
+              901,
+              4936
+            ],
+            "local_pixel": [
+              390,
+              329
+            ],
+            "neighbourhood": [
+              [
+                10,
+                10,
+                10
+              ],
+              [
+                10,
+                10,
+                10
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          }
+        },
+        "source_pixels": {
+          "red": [
+            1803,
+            9872
+          ],
+          "green": [
+            1803,
+            9872
+          ],
+          "blue": [
+            1803,
+            9872
+          ],
+          "nir": [
+            1803,
+            9872
+          ],
+          "scl": [
+            901,
+            4936
+          ]
+        },
+        "source_subpixels": {
+          "red": [
+            1803.5436758793658,
+            9872.542931332559
+          ],
+          "green": [
+            1803.5436758793658,
+            9872.542931332559
+          ],
+          "blue": [
+            1803.5436758793658,
+            9872.542931332559
+          ],
+          "nir": [
+            1803.5436758793658,
+            9872.542931332559
+          ],
+          "scl": [
+            901.7718379396829,
+            4936.271465666279
+          ]
+        },
+        "inside_native_frame": true
+      },
+      "specific_limits": [
+        "The earlier cloudy/shadowed/reef-margin RGB observation remains as dated source history; this annual interpretation does not expose those pixels.",
+        "A positive source class does not erase original source/owner/locality or territorial holds; water can belong to the nearby original locality.",
+        "WorldCover theme accuracy is not a per-point certainty or positional shoreline tolerance; native3x3 is context, not an invented majority/unanimity acceptance threshold."
+      ],
+      "authority_or_repair_credit": 0,
+      "prior_annual2020_unknown_observation": {
+        "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/point-observations.jsonl",
+        "point_index": 6440,
+        "tile": "N06E114",
+        "native_row": 1607,
+        "native_col": 7485,
+        "coverage_status": "nodata",
+        "literal_class_code": 0,
+        "valid_mask": 0,
+        "nodata_match": true,
+        "neighbourhood_complete": true,
+        "neighbourhood_codes": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "neighbourhood_masks": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "centre_array": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-01-07.npz",
+        "source_object_identity": {
+          "last-modified": "Tue, 25 Oct 2022 13:31:32 GMT",
+          "etag": "\"0788d2e15beaaf2f1824551409e59e80\"",
+          "accept-ranges": "bytes",
+          "content-length": "5456925"
+        },
+        "source_url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v100/2020/map/ESA_WorldCover_10m_2020_v100_N06E114_Map.tif"
+      },
+      "prior_annual2021_unknown_report": {
+        "path": "bulk-completion/offshore493-worldcover2021-001/source-observations.json",
+        "sha256": "ff343b83aecc89ac162b9c6094a147673157c7bd4024aa7e6f150caed5437d65",
+        "scope": "493unchangedkeys;490actualzero/noData and3missingN06E108;zero positive2021classes"
+      },
+      "alternate_read_index": 286,
+      "narrow_fine_surface_limit": "No exactsurface-reflectance, cloud-free condition, depth, tide, wholecellcover, annualpersistence, finepixel shoreline, ownerrepair or sovereignty is inferred; this answers the visible physical BODY/locality at the unchanged originalcentre.",
+      "reviewed_manual_finding": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/physical-review/scene-01-manual-review.json",
+        "finding": "All five unchanged centres are in a spatially continuous, visibly wave-textured water field west of the coherent reef complex. A thin translucent cirrus/veil crosses the scene, and literal SCL10 is recorded at every centre; nevertheless the actual nativeRGB andNIR frames expose the water texture and coherent water BODY at those exact positions. This is a positive dated water/body-locality observation THROUGH thin cirrus, not a cloud-free or exactsurface-reflectance assertion. The opaque cumulus/shadows are west of these centres.",
+        "images_viewed": [
+          "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/products/S2B_49PHK_20200816_0_L2A/block-01-09/rgb-centres.png",
+          "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/products/S2B_49PHK_20200816_0_L2A/block-01-09/nir-red-green-native.png"
+        ]
+      },
+      "native_qualified_or_accepted_credit": 0,
+      "previous_alternate_question_observation": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/products/S2B_49PHK_20200508_0_L2A/native-observations.json",
+        "source_item": "S2B_49PHK_20200508_0_L2A",
+        "point_index": 286,
+        "original_packet_index": 6440,
+        "source_scene_marker_pin": {
+          "path": "products/S2B_49PHK_20200508_0_L2A/native-observations.json",
+          "bytes": 297979,
+          "sha256": "88a8c4cbfd3d4dceb93bd887fdada0ff7f9e0f8309022dab205620c1d61aa94b"
+        },
+        "block_marker_pin": {
+          "path": "products/S2B_49PHK_20200508_0_L2A/block-01-09/block-observations.json",
+          "bytes": 152192,
+          "sha256": "736b3e8f89155881579791e983fa4c244e896bc6c7a5928e44e406cc6dfd9ea4"
+        },
+        "assets": {
+          "red": {
+            "value": 1,
+            "valid_mask": 255,
+            "source_pixel": [
+              1803,
+              9872
+            ],
+            "local_pixel": [
+              780,
+              657
+            ],
+            "neighbourhood": [
+              [
+                1,
+                1,
+                1
+              ],
+              [
+                1,
+                1,
+                1
+              ],
+              [
+                1,
+                1,
+                1
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "green": {
+            "value": 1,
+            "valid_mask": 255,
+            "source_pixel": [
+              1803,
+              9872
+            ],
+            "local_pixel": [
+              780,
+              657
+            ],
+            "neighbourhood": [
+              [
+                1,
+                1,
+                1
+              ],
+              [
+                1,
+                1,
+                1
+              ],
+              [
+                1,
+                1,
+                1
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "blue": {
+            "value": 1,
+            "valid_mask": 255,
+            "source_pixel": [
+              1803,
+              9872
+            ],
+            "local_pixel": [
+              780,
+              657
+            ],
+            "neighbourhood": [
+              [
+                56,
+                5,
+                1
+              ],
+              [
+                29,
+                1,
+                1
+              ],
+              [
+                2,
+                1,
+                1
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "nir": {
+            "value": 1,
+            "valid_mask": 255,
+            "source_pixel": [
+              1803,
+              9872
+            ],
+            "local_pixel": [
+              780,
+              657
+            ],
+            "neighbourhood": [
+              [
+                9,
+                1,
+                1
+              ],
+              [
+                10,
+                1,
+                1
+              ],
+              [
+                1,
+                1,
+                1
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "scl": {
+            "value": 6,
+            "valid_mask": 255,
+            "source_pixel": [
+              901,
+              4936
+            ],
+            "local_pixel": [
+              390,
+              329
+            ],
+            "neighbourhood": [
+              [
+                6,
+                6,
+                6
+              ],
+              [
+                6,
+                6,
+                6
+              ],
+              [
+                6,
+                6,
+                6
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          }
+        },
+        "source_pixels": {
+          "red": [
+            1803,
+            9872
+          ],
+          "green": [
+            1803,
+            9872
+          ],
+          "blue": [
+            1803,
+            9872
+          ],
+          "nir": [
+            1803,
+            9872
+          ],
+          "scl": [
+            901,
+            4936
+          ]
+        },
+        "source_subpixels": {
+          "red": [
+            1803.5436758793658,
+            9872.542931332559
+          ],
+          "green": [
+            1803.5436758793658,
+            9872.542931332559
+          ],
+          "blue": [
+            1803.5436758793658,
+            9872.542931332559
+          ],
+          "nir": [
+            1803.5436758793658,
+            9872.542931332559
+          ],
+          "scl": [
+            901.7718379396829,
+            4936.271465666279
+          ]
+        },
+        "inside_native_frame": true
+      },
+      "previous_alternate_question_finding": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene-04-manual-review.json",
+        "block": [
+          1,
+          9
+        ],
+        "finding": "Clear textured water at the upper group and most lower positions. Finite exceptions286/287/288/296/303 coincide with visible cloud-shadow or fringe context; extreme-dark literalDN1 values at286/288 remain valid-mask observations rather than proof of water.",
+        "images_viewed": [],
+        "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene04-block-01-09-native-crop.png",
+        "crop_locator": null
+      },
+      "residual29_read_index": 19,
+      "previous_second_alternate_question_observation": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/products/S2B_49PHK_20200309_0_L2A/native-observations.json",
+        "source_item": "S2B_49PHK_20200309_0_L2A",
+        "point_index": 19,
+        "original_packet_index": 6440,
+        "source_scene_marker_pin": {
+          "path": "products/S2B_49PHK_20200309_0_L2A/native-observations.json",
+          "bytes": 65216,
+          "sha256": "00301a00b9a8ea6094eebe53483b3644929f044cdb91e1f596501ab84b84166d"
+        },
+        "block_marker_pin": {
+          "path": "products/S2B_49PHK_20200309_0_L2A/block-01-09/block-observations.json",
+          "bytes": 36200,
+          "sha256": "82a221a71f260784007a46038b5b70f6e55ec2ac1348c953e0043fe012ac6f62"
+        },
+        "assets": {
+          "red": {
+            "value": 1080,
+            "valid_mask": 255,
+            "source_pixel": [
+              1803,
+              9872
+            ],
+            "local_pixel": [
+              780,
+              657
+            ],
+            "neighbourhood": [
+              [
+                326,
+                739,
+                1428
+              ],
+              [
+                579,
+                1080,
+                1628
+              ],
+              [
+                703,
+                1250,
+                1816
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "green": {
+            "value": 953,
+            "valid_mask": 255,
+            "source_pixel": [
+              1803,
+              9872
+            ],
+            "local_pixel": [
+              780,
+              657
+            ],
+            "neighbourhood": [
+              [
+                297,
+                554,
+                1452
+              ],
+              [
+                486,
+                953,
+                1576
+              ],
+              [
+                711,
+                1298,
+                1826
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "blue": {
+            "value": 797,
+            "valid_mask": 255,
+            "source_pixel": [
+              1803,
+              9872
+            ],
+            "local_pixel": [
+              780,
+              657
+            ],
+            "neighbourhood": [
+              [
+                280,
+                526,
+                1394
+              ],
+              [
+                426,
+                797,
+                1598
+              ],
+              [
+                706,
+                1248,
+                1872
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "nir": {
+            "value": 754,
+            "valid_mask": 255,
+            "source_pixel": [
+              1803,
+              9872
+            ],
+            "local_pixel": [
+              780,
+              657
+            ],
+            "neighbourhood": [
+              [
+                186,
+                464,
+                1166
+              ],
+              [
+                370,
+                754,
+                1372
+              ],
+              [
+                564,
+                1048,
+                1570
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "scl": {
+            "value": 6,
+            "valid_mask": 255,
+            "source_pixel": [
+              901,
+              4936
+            ],
+            "local_pixel": [
+              390,
+              329
+            ],
+            "neighbourhood": [
+              [
+                6,
+                6,
+                6
+              ],
+              [
+                6,
+                6,
+                8
+              ],
+              [
+                6,
+                6,
+                8
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          }
+        },
+        "source_pixels": {
+          "red": [
+            1803,
+            9872
+          ],
+          "green": [
+            1803,
+            9872
+          ],
+          "blue": [
+            1803,
+            9872
+          ],
+          "nir": [
+            1803,
+            9872
+          ],
+          "scl": [
+            901,
+            4936
+          ]
+        },
+        "source_subpixels": {
+          "red": [
+            1803.5436758793658,
+            9872.542931332559
+          ],
+          "green": [
+            1803.5436758793658,
+            9872.542931332559
+          ],
+          "blue": [
+            1803.5436758793658,
+            9872.542931332559
+          ],
+          "nir": [
+            1803.5436758793658,
+            9872.542931332559
+          ],
+          "scl": [
+            901.7718379396829,
+            4936.271465666279
+          ]
+        },
+        "inside_native_frame": true
+      },
+      "previous_second_alternate_question_finding": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene-02-manual-review.json",
+        "block": [
+          1,
+          9
+        ],
+        "finding": "All five requested centres lie in actual cumulus/cloud-shadow/fringe texture beside the reef; keep questions despite literalSCL6 atfour ofthefive.",
+        "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene02-block-01-09-native-crop.png",
+        "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene02-block-01-09-crop-locator.json"
+      },
+      "residual6_read_index": 0
+    },
+    {
+      "index": 6446,
+      "original_key": {
+        "owner": 48238,
+        "y": 124601,
+        "x": 214556
+      },
+      "original_record_unchanged": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65788
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48238
+        ],
+        "declared_sids": [
+          65788
+        ],
+        "flags": [
+          "disputed-island-territory-research"
+        ],
+        "hold_reasons": [
+          "disputed-island-territory-research",
+          "foreign-reference-country",
+          "source-relative-physical-interpretation-unresolved"
+        ],
+        "owner": 48238,
+        "package": "physical-interpretation",
+        "physical": "source-relative",
+        "qualified": false,
+        "reference_countries": [],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "disputed-island-territory-research",
+          "foreign-reference-country"
+        ],
+        "x": 214556,
+        "y": 124601
+      },
+      "centre_unchanged": {
+        "longitude": 114.62378798166048,
+        "latitude": 8.864659350969333
+      },
+      "input_scope_array_index": 22916,
+      "original_source_array_index": 38561,
+      "original_interval_index": 9048,
+      "source_target_unchanged": "gb:VNM:ADM2:81297802B23443064350281",
+      "proposed_bounded_answer": true,
+      "source_review_kind": "dated_visible_water_body_location_through_thin_cirrus",
+      "actual_answer": "2020-08-16: All five unchanged centres are in a spatially continuous, visibly wave-textured water field west of the coherent reef complex. A thin translucent cirrus/veil crosses the scene, and literal SCL10 is recorded at every centre; nevertheless the actual nativeRGB andNIR frames expose the water texture and coherent water BODY at those exact positions. This is a positive dated water/body-locality observation THROUGH thin cirrus, not a cloud-free or exactsurface-reflectance assertion. The opaque cumulus/shadows are west of these centres. Original mapped locality/owner and sourceassociation remain attached.",
+      "answer_year": 2020,
+      "answer_dates": [
+        "2020-08-16T02:55:36.188000Z"
+      ],
+      "source_vintage_kind": "Actualdated2020 Sentinel2L2A10mRGB/NIR and20mSCL, not annualclass inference",
+      "remaining_physical_question": null,
+      "prior_dated_visibility_or_reef_question": {
+        "path": "bulk-completion/offshore13649-interpretation/worker1/scene-06-review.json",
+        "field": "disposition",
+        "literal_status": "unanswered"
+      },
+      "authoritative_prior_ledger": {
+        "path": "bulk-completion/offshore13649-proposed-adoption/current-unanswered-2742.json",
+        "index": 6446
+      },
+      "reviewed_source_observation": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/products/S2B_49PHK_20200816_0_L2A/native-observations.json",
+        "source_item": "S2B_49PHK_20200816_0_L2A",
+        "point_index": 1,
+        "original_packet_index": 6446,
+        "source_scene_marker_pin": {
+          "path": "products/S2B_49PHK_20200816_0_L2A/native-observations.json",
+          "bytes": 35865,
+          "sha256": "14859746e1ec2015ca1d3000de854c0340424df9c0a1cf8f4ed26801859a13e3"
+        },
+        "block_marker_pin": {
+          "path": "products/S2B_49PHK_20200816_0_L2A/block-01-09/block-observations.json",
+          "bytes": 36141,
+          "sha256": "a5180d1802765707510b4ca71fac64baa18aa37f1723b839381042b957266599"
+        },
+        "assets": {
+          "red": {
+            "value": 350,
+            "valid_mask": 255,
+            "source_pixel": [
+              1818,
+              9872
+            ],
+            "local_pixel": [
+              795,
+              657
+            ],
+            "neighbourhood": [
+              [
+                346,
+                354,
+                388
+              ],
+              [
+                363,
+                350,
+                378
+              ],
+              [
+                354,
+                352,
+                352
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "green": {
+            "value": 407,
+            "valid_mask": 255,
+            "source_pixel": [
+              1818,
+              9872
+            ],
+            "local_pixel": [
+              795,
+              657
+            ],
+            "neighbourhood": [
+              [
+                386,
+                412,
+                423
+              ],
+              [
+                383,
+                407,
+                430
+              ],
+              [
+                396,
+                410,
+                422
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "blue": {
+            "value": 588,
+            "valid_mask": 255,
+            "source_pixel": [
+              1818,
+              9872
+            ],
+            "local_pixel": [
+              795,
+              657
+            ],
+            "neighbourhood": [
+              [
+                536,
+                572,
+                557
+              ],
+              [
+                553,
+                588,
+                589
+              ],
+              [
+                560,
+                539,
+                589
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "nir": {
+            "value": 339,
+            "valid_mask": 255,
+            "source_pixel": [
+              1818,
+              9872
+            ],
+            "local_pixel": [
+              795,
+              657
+            ],
+            "neighbourhood": [
+              [
+                323,
+                340,
+                344
+              ],
+              [
+                346,
+                339,
+                358
+              ],
+              [
+                335,
+                337,
+                362
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "scl": {
+            "value": 10,
+            "valid_mask": 255,
+            "source_pixel": [
+              909,
+              4936
+            ],
+            "local_pixel": [
+              398,
+              329
+            ],
+            "neighbourhood": [
+              [
+                10,
+                10,
+                10
+              ],
+              [
+                10,
+                10,
+                10
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          }
+        },
+        "source_pixels": {
+          "red": [
+            1818,
+            9872
+          ],
+          "green": [
+            1818,
+            9872
+          ],
+          "blue": [
+            1818,
+            9872
+          ],
+          "nir": [
+            1818,
+            9872
+          ],
+          "scl": [
+            909,
+            4936
+          ]
+        },
+        "source_subpixels": {
+          "red": [
+            1818.5724606536096,
+            9872.689618872653
+          ],
+          "green": [
+            1818.5724606536096,
+            9872.689618872653
+          ],
+          "blue": [
+            1818.5724606536096,
+            9872.689618872653
+          ],
+          "nir": [
+            1818.5724606536096,
+            9872.689618872653
+          ],
+          "scl": [
+            909.2862303268048,
+            4936.344809436327
+          ]
+        },
+        "inside_native_frame": true
+      },
+      "specific_limits": [
+        "The earlier cloudy/shadowed/reef-margin RGB observation remains as dated source history; this annual interpretation does not expose those pixels.",
+        "A positive source class does not erase original source/owner/locality or territorial holds; water can belong to the nearby original locality.",
+        "WorldCover theme accuracy is not a per-point certainty or positional shoreline tolerance; native3x3 is context, not an invented majority/unanimity acceptance threshold."
+      ],
+      "authority_or_repair_credit": 0,
+      "prior_annual2020_unknown_observation": {
+        "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/point-observations.jsonl",
+        "point_index": 6446,
+        "tile": "N06E114",
+        "native_row": 1624,
+        "native_col": 7485,
+        "coverage_status": "nodata",
+        "literal_class_code": 0,
+        "valid_mask": 0,
+        "nodata_match": true,
+        "neighbourhood_complete": true,
+        "neighbourhood_codes": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "neighbourhood_masks": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "centre_array": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-01-07.npz",
+        "source_object_identity": {
+          "last-modified": "Tue, 25 Oct 2022 13:31:32 GMT",
+          "etag": "\"0788d2e15beaaf2f1824551409e59e80\"",
+          "accept-ranges": "bytes",
+          "content-length": "5456925"
+        },
+        "source_url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v100/2020/map/ESA_WorldCover_10m_2020_v100_N06E114_Map.tif"
+      },
+      "prior_annual2021_unknown_report": {
+        "path": "bulk-completion/offshore493-worldcover2021-001/source-observations.json",
+        "sha256": "ff343b83aecc89ac162b9c6094a147673157c7bd4024aa7e6f150caed5437d65",
+        "scope": "493unchangedkeys;490actualzero/noData and3missingN06E108;zero positive2021classes"
+      },
+      "alternate_read_index": 287,
+      "narrow_fine_surface_limit": "No exactsurface-reflectance, cloud-free condition, depth, tide, wholecellcover, annualpersistence, finepixel shoreline, ownerrepair or sovereignty is inferred; this answers the visible physical BODY/locality at the unchanged originalcentre.",
+      "reviewed_manual_finding": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/physical-review/scene-01-manual-review.json",
+        "finding": "All five unchanged centres are in a spatially continuous, visibly wave-textured water field west of the coherent reef complex. A thin translucent cirrus/veil crosses the scene, and literal SCL10 is recorded at every centre; nevertheless the actual nativeRGB andNIR frames expose the water texture and coherent water BODY at those exact positions. This is a positive dated water/body-locality observation THROUGH thin cirrus, not a cloud-free or exactsurface-reflectance assertion. The opaque cumulus/shadows are west of these centres.",
+        "images_viewed": [
+          "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/products/S2B_49PHK_20200816_0_L2A/block-01-09/rgb-centres.png",
+          "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/products/S2B_49PHK_20200816_0_L2A/block-01-09/nir-red-green-native.png"
+        ]
+      },
+      "native_qualified_or_accepted_credit": 0,
+      "previous_alternate_question_observation": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/products/S2B_49PHK_20200508_0_L2A/native-observations.json",
+        "source_item": "S2B_49PHK_20200508_0_L2A",
+        "point_index": 287,
+        "original_packet_index": 6446,
+        "source_scene_marker_pin": {
+          "path": "products/S2B_49PHK_20200508_0_L2A/native-observations.json",
+          "bytes": 297979,
+          "sha256": "88a8c4cbfd3d4dceb93bd887fdada0ff7f9e0f8309022dab205620c1d61aa94b"
+        },
+        "block_marker_pin": {
+          "path": "products/S2B_49PHK_20200508_0_L2A/block-01-09/block-observations.json",
+          "bytes": 152192,
+          "sha256": "736b3e8f89155881579791e983fa4c244e896bc6c7a5928e44e406cc6dfd9ea4"
+        },
+        "assets": {
+          "red": {
+            "value": 501,
+            "valid_mask": 255,
+            "source_pixel": [
+              1818,
+              9872
+            ],
+            "local_pixel": [
+              795,
+              657
+            ],
+            "neighbourhood": [
+              [
+                381,
+                317,
+                234
+              ],
+              [
+                430,
+                501,
+                465
+              ],
+              [
+                509,
+                706,
+                824
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "green": {
+            "value": 501,
+            "valid_mask": 255,
+            "source_pixel": [
+              1818,
+              9872
+            ],
+            "local_pixel": [
+              795,
+              657
+            ],
+            "neighbourhood": [
+              [
+                398,
+                341,
+                214
+              ],
+              [
+                448,
+                501,
+                457
+              ],
+              [
+                511,
+                684,
+                808
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "blue": {
+            "value": 570,
+            "valid_mask": 255,
+            "source_pixel": [
+              1818,
+              9872
+            ],
+            "local_pixel": [
+              795,
+              657
+            ],
+            "neighbourhood": [
+              [
+                496,
+                431,
+                299
+              ],
+              [
+                520,
+                570,
+                565
+              ],
+              [
+                602,
+                741,
+                840
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "nir": {
+            "value": 422,
+            "valid_mask": 255,
+            "source_pixel": [
+              1818,
+              9872
+            ],
+            "local_pixel": [
+              795,
+              657
+            ],
+            "neighbourhood": [
+              [
+                340,
+                308,
+                231
+              ],
+              [
+                371,
+                422,
+                410
+              ],
+              [
+                436,
+                584,
+                687
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "scl": {
+            "value": 6,
+            "valid_mask": 255,
+            "source_pixel": [
+              909,
+              4936
+            ],
+            "local_pixel": [
+              398,
+              329
+            ],
+            "neighbourhood": [
+              [
+                6,
+                6,
+                6
+              ],
+              [
+                6,
+                6,
+                6
+              ],
+              [
+                6,
+                6,
+                6
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          }
+        },
+        "source_pixels": {
+          "red": [
+            1818,
+            9872
+          ],
+          "green": [
+            1818,
+            9872
+          ],
+          "blue": [
+            1818,
+            9872
+          ],
+          "nir": [
+            1818,
+            9872
+          ],
+          "scl": [
+            909,
+            4936
+          ]
+        },
+        "source_subpixels": {
+          "red": [
+            1818.5724606536096,
+            9872.689618872653
+          ],
+          "green": [
+            1818.5724606536096,
+            9872.689618872653
+          ],
+          "blue": [
+            1818.5724606536096,
+            9872.689618872653
+          ],
+          "nir": [
+            1818.5724606536096,
+            9872.689618872653
+          ],
+          "scl": [
+            909.2862303268048,
+            4936.344809436327
+          ]
+        },
+        "inside_native_frame": true
+      },
+      "previous_alternate_question_finding": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene-04-manual-review.json",
+        "block": [
+          1,
+          9
+        ],
+        "finding": "Clear textured water at the upper group and most lower positions. Finite exceptions286/287/288/296/303 coincide with visible cloud-shadow or fringe context; extreme-dark literalDN1 values at286/288 remain valid-mask observations rather than proof of water.",
+        "images_viewed": [],
+        "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene04-block-01-09-native-crop.png",
+        "crop_locator": null
+      },
+      "residual29_read_index": 20,
+      "previous_second_alternate_question_observation": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/products/S2B_49PHK_20200309_0_L2A/native-observations.json",
+        "source_item": "S2B_49PHK_20200309_0_L2A",
+        "point_index": 20,
+        "original_packet_index": 6446,
+        "source_scene_marker_pin": {
+          "path": "products/S2B_49PHK_20200309_0_L2A/native-observations.json",
+          "bytes": 65216,
+          "sha256": "00301a00b9a8ea6094eebe53483b3644929f044cdb91e1f596501ab84b84166d"
+        },
+        "block_marker_pin": {
+          "path": "products/S2B_49PHK_20200309_0_L2A/block-01-09/block-observations.json",
+          "bytes": 36200,
+          "sha256": "82a221a71f260784007a46038b5b70f6e55ec2ac1348c953e0043fe012ac6f62"
+        },
+        "assets": {
+          "red": {
+            "value": 604,
+            "valid_mask": 255,
+            "source_pixel": [
+              1818,
+              9872
+            ],
+            "local_pixel": [
+              795,
+              657
+            ],
+            "neighbourhood": [
+              [
+                822,
+                584,
+                496
+              ],
+              [
+                975,
+                604,
+                452
+              ],
+              [
+                1007,
+                679,
+                465
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "green": {
+            "value": 609,
+            "valid_mask": 255,
+            "source_pixel": [
+              1818,
+              9872
+            ],
+            "local_pixel": [
+              795,
+              657
+            ],
+            "neighbourhood": [
+              [
+                818,
+                688,
+                584
+              ],
+              [
+                993,
+                609,
+                501
+              ],
+              [
+                1134,
+                716,
+                506
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "blue": {
+            "value": 667,
+            "valid_mask": 255,
+            "source_pixel": [
+              1818,
+              9872
+            ],
+            "local_pixel": [
+              795,
+              657
+            ],
+            "neighbourhood": [
+              [
+                824,
+                785,
+                735
+              ],
+              [
+                977,
+                667,
+                597
+              ],
+              [
+                1174,
+                716,
+                569
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "nir": {
+            "value": 537,
+            "valid_mask": 255,
+            "source_pixel": [
+              1818,
+              9872
+            ],
+            "local_pixel": [
+              795,
+              657
+            ],
+            "neighbourhood": [
+              [
+                679,
+                588,
+                514
+              ],
+              [
+                832,
+                537,
+                433
+              ],
+              [
+                965,
+                588,
+                440
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "scl": {
+            "value": 6,
+            "valid_mask": 255,
+            "source_pixel": [
+              909,
+              4936
+            ],
+            "local_pixel": [
+              398,
+              329
+            ],
+            "neighbourhood": [
+              [
+                6,
+                6,
+                6
+              ],
+              [
+                6,
+                6,
+                6
+              ],
+              [
+                6,
+                6,
+                6
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          }
+        },
+        "source_pixels": {
+          "red": [
+            1818,
+            9872
+          ],
+          "green": [
+            1818,
+            9872
+          ],
+          "blue": [
+            1818,
+            9872
+          ],
+          "nir": [
+            1818,
+            9872
+          ],
+          "scl": [
+            909,
+            4936
+          ]
+        },
+        "source_subpixels": {
+          "red": [
+            1818.5724606536096,
+            9872.689618872653
+          ],
+          "green": [
+            1818.5724606536096,
+            9872.689618872653
+          ],
+          "blue": [
+            1818.5724606536096,
+            9872.689618872653
+          ],
+          "nir": [
+            1818.5724606536096,
+            9872.689618872653
+          ],
+          "scl": [
+            909.2862303268048,
+            4936.344809436327
+          ]
+        },
+        "inside_native_frame": true
+      },
+      "previous_second_alternate_question_finding": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene-02-manual-review.json",
+        "block": [
+          1,
+          9
+        ],
+        "finding": "All five requested centres lie in actual cumulus/cloud-shadow/fringe texture beside the reef; keep questions despite literalSCL6 atfour ofthefive.",
+        "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene02-block-01-09-native-crop.png",
+        "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene02-block-01-09-crop-locator.json"
+      },
+      "residual6_read_index": 1
+    },
+    {
+      "index": 6447,
+      "original_key": {
+        "owner": 48238,
+        "y": 124601,
+        "x": 214557
+      },
+      "original_record_unchanged": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65788
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48238
+        ],
+        "declared_sids": [
+          65788
+        ],
+        "flags": [
+          "disputed-island-territory-research"
+        ],
+        "hold_reasons": [
+          "disputed-island-territory-research",
+          "foreign-reference-country",
+          "source-relative-physical-interpretation-unresolved"
+        ],
+        "owner": 48238,
+        "package": "physical-interpretation",
+        "physical": "source-relative",
+        "qualified": false,
+        "reference_countries": [],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "disputed-island-territory-research",
+          "foreign-reference-country"
+        ],
+        "x": 214557,
+        "y": 124601
+      },
+      "centre_unchanged": {
+        "longitude": 114.6251611574346,
+        "latitude": 8.864659350969333
+      },
+      "input_scope_array_index": 22917,
+      "original_source_array_index": 38562,
+      "original_interval_index": 9048,
+      "source_target_unchanged": "gb:VNM:ADM2:81297802B23443064350281",
+      "proposed_bounded_answer": true,
+      "source_review_kind": "dated_visible_water_body_location_through_thin_cirrus",
+      "actual_answer": "2020-08-16: All five unchanged centres are in a spatially continuous, visibly wave-textured water field west of the coherent reef complex. A thin translucent cirrus/veil crosses the scene, and literal SCL10 is recorded at every centre; nevertheless the actual nativeRGB andNIR frames expose the water texture and coherent water BODY at those exact positions. This is a positive dated water/body-locality observation THROUGH thin cirrus, not a cloud-free or exactsurface-reflectance assertion. The opaque cumulus/shadows are west of these centres. Original mapped locality/owner and sourceassociation remain attached.",
+      "answer_year": 2020,
+      "answer_dates": [
+        "2020-08-16T02:55:36.188000Z"
+      ],
+      "source_vintage_kind": "Actualdated2020 Sentinel2L2A10mRGB/NIR and20mSCL, not annualclass inference",
+      "remaining_physical_question": null,
+      "prior_dated_visibility_or_reef_question": {
+        "path": "bulk-completion/offshore13649-interpretation/worker1/scene-06-review.json",
+        "field": "disposition",
+        "literal_status": "unanswered"
+      },
+      "authoritative_prior_ledger": {
+        "path": "bulk-completion/offshore13649-proposed-adoption/current-unanswered-2742.json",
+        "index": 6447
+      },
+      "reviewed_source_observation": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/products/S2B_49PHK_20200816_0_L2A/native-observations.json",
+        "source_item": "S2B_49PHK_20200816_0_L2A",
+        "point_index": 2,
+        "original_packet_index": 6447,
+        "source_scene_marker_pin": {
+          "path": "products/S2B_49PHK_20200816_0_L2A/native-observations.json",
+          "bytes": 35865,
+          "sha256": "14859746e1ec2015ca1d3000de854c0340424df9c0a1cf8f4ed26801859a13e3"
+        },
+        "block_marker_pin": {
+          "path": "products/S2B_49PHK_20200816_0_L2A/block-01-09/block-observations.json",
+          "bytes": 36141,
+          "sha256": "a5180d1802765707510b4ca71fac64baa18aa37f1723b839381042b957266599"
+        },
+        "assets": {
+          "red": {
+            "value": 356,
+            "valid_mask": 255,
+            "source_pixel": [
+              1818,
+              9887
+            ],
+            "local_pixel": [
+              795,
+              672
+            ],
+            "neighbourhood": [
+              [
+                380,
+                376,
+                372
+              ],
+              [
+                376,
+                356,
+                374
+              ],
+              [
+                361,
+                338,
+                386
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "green": {
+            "value": 419,
+            "valid_mask": 255,
+            "source_pixel": [
+              1818,
+              9887
+            ],
+            "local_pixel": [
+              795,
+              672
+            ],
+            "neighbourhood": [
+              [
+                430,
+                429,
+                403
+              ],
+              [
+                419,
+                419,
+                419
+              ],
+              [
+                404,
+                422,
+                432
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "blue": {
+            "value": 535,
+            "valid_mask": 255,
+            "source_pixel": [
+              1818,
+              9887
+            ],
+            "local_pixel": [
+              795,
+              672
+            ],
+            "neighbourhood": [
+              [
+                536,
+                541,
+                541
+              ],
+              [
+                533,
+                535,
+                540
+              ],
+              [
+                534,
+                551,
+                561
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "nir": {
+            "value": 320,
+            "valid_mask": 255,
+            "source_pixel": [
+              1818,
+              9887
+            ],
+            "local_pixel": [
+              795,
+              672
+            ],
+            "neighbourhood": [
+              [
+                349,
+                332,
+                345
+              ],
+              [
+                341,
+                320,
+                345
+              ],
+              [
+                322,
+                355,
+                372
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "scl": {
+            "value": 10,
+            "valid_mask": 255,
+            "source_pixel": [
+              909,
+              4943
+            ],
+            "local_pixel": [
+              398,
+              336
+            ],
+            "neighbourhood": [
+              [
+                10,
+                10,
+                10
+              ],
+              [
+                10,
+                10,
+                10
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          }
+        },
+        "source_pixels": {
+          "red": [
+            1818,
+            9887
+          ],
+          "green": [
+            1818,
+            9887
+          ],
+          "blue": [
+            1818,
+            9887
+          ],
+          "nir": [
+            1818,
+            9887
+          ],
+          "scl": [
+            909,
+            4943
+          ]
+        },
+        "source_subpixels": {
+          "red": [
+            1818.4247907715617,
+            9887.817323450145
+          ],
+          "green": [
+            1818.4247907715617,
+            9887.817323450145
+          ],
+          "blue": [
+            1818.4247907715617,
+            9887.817323450145
+          ],
+          "nir": [
+            1818.4247907715617,
+            9887.817323450145
+          ],
+          "scl": [
+            909.2123953857808,
+            4943.908661725072
+          ]
+        },
+        "inside_native_frame": true
+      },
+      "specific_limits": [
+        "The earlier cloudy/shadowed/reef-margin RGB observation remains as dated source history; this annual interpretation does not expose those pixels.",
+        "A positive source class does not erase original source/owner/locality or territorial holds; water can belong to the nearby original locality.",
+        "WorldCover theme accuracy is not a per-point certainty or positional shoreline tolerance; native3x3 is context, not an invented majority/unanimity acceptance threshold."
+      ],
+      "authority_or_repair_credit": 0,
+      "prior_annual2020_unknown_observation": {
+        "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/point-observations.jsonl",
+        "point_index": 6447,
+        "tile": "N06E114",
+        "native_row": 1624,
+        "native_col": 7501,
+        "coverage_status": "nodata",
+        "literal_class_code": 0,
+        "valid_mask": 0,
+        "nodata_match": true,
+        "neighbourhood_complete": true,
+        "neighbourhood_codes": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "neighbourhood_masks": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "centre_array": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-01-07.npz",
+        "source_object_identity": {
+          "last-modified": "Tue, 25 Oct 2022 13:31:32 GMT",
+          "etag": "\"0788d2e15beaaf2f1824551409e59e80\"",
+          "accept-ranges": "bytes",
+          "content-length": "5456925"
+        },
+        "source_url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v100/2020/map/ESA_WorldCover_10m_2020_v100_N06E114_Map.tif"
+      },
+      "prior_annual2021_unknown_report": {
+        "path": "bulk-completion/offshore493-worldcover2021-001/source-observations.json",
+        "sha256": "ff343b83aecc89ac162b9c6094a147673157c7bd4024aa7e6f150caed5437d65",
+        "scope": "493unchangedkeys;490actualzero/noData and3missingN06E108;zero positive2021classes"
+      },
+      "alternate_read_index": 288,
+      "narrow_fine_surface_limit": "No exactsurface-reflectance, cloud-free condition, depth, tide, wholecellcover, annualpersistence, finepixel shoreline, ownerrepair or sovereignty is inferred; this answers the visible physical BODY/locality at the unchanged originalcentre.",
+      "reviewed_manual_finding": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/physical-review/scene-01-manual-review.json",
+        "finding": "All five unchanged centres are in a spatially continuous, visibly wave-textured water field west of the coherent reef complex. A thin translucent cirrus/veil crosses the scene, and literal SCL10 is recorded at every centre; nevertheless the actual nativeRGB andNIR frames expose the water texture and coherent water BODY at those exact positions. This is a positive dated water/body-locality observation THROUGH thin cirrus, not a cloud-free or exactsurface-reflectance assertion. The opaque cumulus/shadows are west of these centres.",
+        "images_viewed": [
+          "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/products/S2B_49PHK_20200816_0_L2A/block-01-09/rgb-centres.png",
+          "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/products/S2B_49PHK_20200816_0_L2A/block-01-09/nir-red-green-native.png"
+        ]
+      },
+      "native_qualified_or_accepted_credit": 0,
+      "previous_alternate_question_observation": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/products/S2B_49PHK_20200508_0_L2A/native-observations.json",
+        "source_item": "S2B_49PHK_20200508_0_L2A",
+        "point_index": 288,
+        "original_packet_index": 6447,
+        "source_scene_marker_pin": {
+          "path": "products/S2B_49PHK_20200508_0_L2A/native-observations.json",
+          "bytes": 297979,
+          "sha256": "88a8c4cbfd3d4dceb93bd887fdada0ff7f9e0f8309022dab205620c1d61aa94b"
+        },
+        "block_marker_pin": {
+          "path": "products/S2B_49PHK_20200508_0_L2A/block-01-09/block-observations.json",
+          "bytes": 152192,
+          "sha256": "736b3e8f89155881579791e983fa4c244e896bc6c7a5928e44e406cc6dfd9ea4"
+        },
+        "assets": {
+          "red": {
+            "value": 1,
+            "valid_mask": 255,
+            "source_pixel": [
+              1818,
+              9887
+            ],
+            "local_pixel": [
+              795,
+              672
+            ],
+            "neighbourhood": [
+              [
+                1,
+                1,
+                1
+              ],
+              [
+                1,
+                1,
+                1
+              ],
+              [
+                1,
+                1,
+                1
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "green": {
+            "value": 1,
+            "valid_mask": 255,
+            "source_pixel": [
+              1818,
+              9887
+            ],
+            "local_pixel": [
+              795,
+              672
+            ],
+            "neighbourhood": [
+              [
+                1,
+                1,
+                1
+              ],
+              [
+                1,
+                1,
+                1
+              ],
+              [
+                1,
+                1,
+                1
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "blue": {
+            "value": 1,
+            "valid_mask": 255,
+            "source_pixel": [
+              1818,
+              9887
+            ],
+            "local_pixel": [
+              795,
+              672
+            ],
+            "neighbourhood": [
+              [
+                1,
+                1,
+                1
+              ],
+              [
+                1,
+                1,
+                1
+              ],
+              [
+                23,
+                12,
+                16
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "nir": {
+            "value": 1,
+            "valid_mask": 255,
+            "source_pixel": [
+              1818,
+              9887
+            ],
+            "local_pixel": [
+              795,
+              672
+            ],
+            "neighbourhood": [
+              [
+                5,
+                1,
+                1
+              ],
+              [
+                1,
+                1,
+                1
+              ],
+              [
+                4,
+                7,
+                9
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "scl": {
+            "value": 6,
+            "valid_mask": 255,
+            "source_pixel": [
+              909,
+              4943
+            ],
+            "local_pixel": [
+              398,
+              336
+            ],
+            "neighbourhood": [
+              [
+                6,
+                6,
+                6
+              ],
+              [
+                6,
+                6,
+                6
+              ],
+              [
+                6,
+                6,
+                6
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          }
+        },
+        "source_pixels": {
+          "red": [
+            1818,
+            9887
+          ],
+          "green": [
+            1818,
+            9887
+          ],
+          "blue": [
+            1818,
+            9887
+          ],
+          "nir": [
+            1818,
+            9887
+          ],
+          "scl": [
+            909,
+            4943
+          ]
+        },
+        "source_subpixels": {
+          "red": [
+            1818.4247907715617,
+            9887.817323450145
+          ],
+          "green": [
+            1818.4247907715617,
+            9887.817323450145
+          ],
+          "blue": [
+            1818.4247907715617,
+            9887.817323450145
+          ],
+          "nir": [
+            1818.4247907715617,
+            9887.817323450145
+          ],
+          "scl": [
+            909.2123953857808,
+            4943.908661725072
+          ]
+        },
+        "inside_native_frame": true
+      },
+      "previous_alternate_question_finding": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene-04-manual-review.json",
+        "block": [
+          1,
+          9
+        ],
+        "finding": "Clear textured water at the upper group and most lower positions. Finite exceptions286/287/288/296/303 coincide with visible cloud-shadow or fringe context; extreme-dark literalDN1 values at286/288 remain valid-mask observations rather than proof of water.",
+        "images_viewed": [],
+        "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene04-block-01-09-native-crop.png",
+        "crop_locator": null
+      },
+      "residual29_read_index": 21,
+      "previous_second_alternate_question_observation": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/products/S2B_49PHK_20200309_0_L2A/native-observations.json",
+        "source_item": "S2B_49PHK_20200309_0_L2A",
+        "point_index": 21,
+        "original_packet_index": 6447,
+        "source_scene_marker_pin": {
+          "path": "products/S2B_49PHK_20200309_0_L2A/native-observations.json",
+          "bytes": 65216,
+          "sha256": "00301a00b9a8ea6094eebe53483b3644929f044cdb91e1f596501ab84b84166d"
+        },
+        "block_marker_pin": {
+          "path": "products/S2B_49PHK_20200309_0_L2A/block-01-09/block-observations.json",
+          "bytes": 36200,
+          "sha256": "82a221a71f260784007a46038b5b70f6e55ec2ac1348c953e0043fe012ac6f62"
+        },
+        "assets": {
+          "red": {
+            "value": 4024,
+            "valid_mask": 255,
+            "source_pixel": [
+              1818,
+              9887
+            ],
+            "local_pixel": [
+              795,
+              672
+            ],
+            "neighbourhood": [
+              [
+                3480,
+                3860,
+                4296
+              ],
+              [
+                3716,
+                4024,
+                4228
+              ],
+              [
+                3880,
+                4048,
+                4196
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "green": {
+            "value": 4148,
+            "valid_mask": 255,
+            "source_pixel": [
+              1818,
+              9887
+            ],
+            "local_pixel": [
+              795,
+              672
+            ],
+            "neighbourhood": [
+              [
+                3508,
+                3970,
+                4492
+              ],
+              [
+                3702,
+                4148,
+                4444
+              ],
+              [
+                3980,
+                4188,
+                4340
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "blue": {
+            "value": 4264,
+            "valid_mask": 255,
+            "source_pixel": [
+              1818,
+              9887
+            ],
+            "local_pixel": [
+              795,
+              672
+            ],
+            "neighbourhood": [
+              [
+                3824,
+                4176,
+                4700
+              ],
+              [
+                3718,
+                4264,
+                4704
+              ],
+              [
+                4092,
+                4404,
+                4596
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "nir": {
+            "value": 3728,
+            "valid_mask": 255,
+            "source_pixel": [
+              1818,
+              9887
+            ],
+            "local_pixel": [
+              795,
+              672
+            ],
+            "neighbourhood": [
+              [
+                3308,
+                3588,
+                4046
+              ],
+              [
+                3356,
+                3728,
+                4080
+              ],
+              [
+                3574,
+                3796,
+                4012
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "scl": {
+            "value": 9,
+            "valid_mask": 255,
+            "source_pixel": [
+              909,
+              4943
+            ],
+            "local_pixel": [
+              398,
+              336
+            ],
+            "neighbourhood": [
+              [
+                9,
+                9,
+                9
+              ],
+              [
+                9,
+                9,
+                9
+              ],
+              [
+                9,
+                9,
+                9
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          }
+        },
+        "source_pixels": {
+          "red": [
+            1818,
+            9887
+          ],
+          "green": [
+            1818,
+            9887
+          ],
+          "blue": [
+            1818,
+            9887
+          ],
+          "nir": [
+            1818,
+            9887
+          ],
+          "scl": [
+            909,
+            4943
+          ]
+        },
+        "source_subpixels": {
+          "red": [
+            1818.4247907715617,
+            9887.817323450145
+          ],
+          "green": [
+            1818.4247907715617,
+            9887.817323450145
+          ],
+          "blue": [
+            1818.4247907715617,
+            9887.817323450145
+          ],
+          "nir": [
+            1818.4247907715617,
+            9887.817323450145
+          ],
+          "scl": [
+            909.2123953857808,
+            4943.908661725072
+          ]
+        },
+        "inside_native_frame": true
+      },
+      "previous_second_alternate_question_finding": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene-02-manual-review.json",
+        "block": [
+          1,
+          9
+        ],
+        "finding": "All five requested centres lie in actual cumulus/cloud-shadow/fringe texture beside the reef; keep questions despite literalSCL6 atfour ofthefive.",
+        "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene02-block-01-09-native-crop.png",
+        "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene02-block-01-09-crop-locator.json"
+      },
+      "residual6_read_index": 2
+    },
+    {
+      "index": 6459,
+      "original_key": {
+        "owner": 48238,
+        "y": 124603,
+        "x": 214557
+      },
+      "original_record_unchanged": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65788
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48238
+        ],
+        "declared_sids": [
+          65788
+        ],
+        "flags": [
+          "disputed-island-territory-research"
+        ],
+        "hold_reasons": [
+          "disputed-island-territory-research",
+          "foreign-reference-country",
+          "source-relative-physical-interpretation-unresolved"
+        ],
+        "owner": 48238,
+        "package": "physical-interpretation",
+        "physical": "source-relative",
+        "qualified": false,
+        "reference_countries": [],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "disputed-island-territory-research",
+          "foreign-reference-country"
+        ],
+        "x": 214557,
+        "y": 124603
+      },
+      "centre_unchanged": {
+        "longitude": 114.6251611574346,
+        "latitude": 8.861945794281558
+      },
+      "input_scope_array_index": 22935,
+      "original_source_array_index": 38580,
+      "original_interval_index": 9058,
+      "source_target_unchanged": "gb:VNM:ADM2:81297802B23443064350281",
+      "proposed_bounded_answer": true,
+      "source_review_kind": "dated_visible_water_body_location_through_thin_cirrus",
+      "actual_answer": "2020-08-16: All five unchanged centres are in a spatially continuous, visibly wave-textured water field west of the coherent reef complex. A thin translucent cirrus/veil crosses the scene, and literal SCL10 is recorded at every centre; nevertheless the actual nativeRGB andNIR frames expose the water texture and coherent water BODY at those exact positions. This is a positive dated water/body-locality observation THROUGH thin cirrus, not a cloud-free or exactsurface-reflectance assertion. The opaque cumulus/shadows are west of these centres. Original mapped locality/owner and sourceassociation remain attached.",
+      "answer_year": 2020,
+      "answer_dates": [
+        "2020-08-16T02:55:36.188000Z"
+      ],
+      "source_vintage_kind": "Actualdated2020 Sentinel2L2A10mRGB/NIR and20mSCL, not annualclass inference",
+      "remaining_physical_question": null,
+      "prior_dated_visibility_or_reef_question": {
+        "path": "bulk-completion/offshore13649-interpretation/worker1/scene-06-review.json",
+        "field": "disposition",
+        "literal_status": "unanswered"
+      },
+      "authoritative_prior_ledger": {
+        "path": "bulk-completion/offshore13649-proposed-adoption/current-unanswered-2742.json",
+        "index": 6459
+      },
+      "reviewed_source_observation": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/products/S2B_49PHK_20200816_0_L2A/native-observations.json",
+        "source_item": "S2B_49PHK_20200816_0_L2A",
+        "point_index": 3,
+        "original_packet_index": 6459,
+        "source_scene_marker_pin": {
+          "path": "products/S2B_49PHK_20200816_0_L2A/native-observations.json",
+          "bytes": 35865,
+          "sha256": "14859746e1ec2015ca1d3000de854c0340424df9c0a1cf8f4ed26801859a13e3"
+        },
+        "block_marker_pin": {
+          "path": "products/S2B_49PHK_20200816_0_L2A/block-01-09/block-observations.json",
+          "bytes": 36141,
+          "sha256": "a5180d1802765707510b4ca71fac64baa18aa37f1723b839381042b957266599"
+        },
+        "assets": {
+          "red": {
+            "value": 386,
+            "valid_mask": 255,
+            "source_pixel": [
+              1848,
+              9888
+            ],
+            "local_pixel": [
+              825,
+              673
+            ],
+            "neighbourhood": [
+              [
+                354,
+                418,
+                420
+              ],
+              [
+                365,
+                386,
+                400
+              ],
+              [
+                394,
+                356,
+                394
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "green": {
+            "value": 438,
+            "valid_mask": 255,
+            "source_pixel": [
+              1848,
+              9888
+            ],
+            "local_pixel": [
+              825,
+              673
+            ],
+            "neighbourhood": [
+              [
+                440,
+                467,
+                456
+              ],
+              [
+                412,
+                438,
+                474
+              ],
+              [
+                412,
+                422,
+                469
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "blue": {
+            "value": 597,
+            "valid_mask": 255,
+            "source_pixel": [
+              1848,
+              9888
+            ],
+            "local_pixel": [
+              825,
+              673
+            ],
+            "neighbourhood": [
+              [
+                630,
+                591,
+                573
+              ],
+              [
+                566,
+                597,
+                621
+              ],
+              [
+                505,
+                545,
+                642
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "nir": {
+            "value": 358,
+            "valid_mask": 255,
+            "source_pixel": [
+              1848,
+              9888
+            ],
+            "local_pixel": [
+              825,
+              673
+            ],
+            "neighbourhood": [
+              [
+                372,
+                386,
+                356
+              ],
+              [
+                343,
+                358,
+                398
+              ],
+              [
+                325,
+                340,
+                416
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "scl": {
+            "value": 10,
+            "valid_mask": 255,
+            "source_pixel": [
+              924,
+              4944
+            ],
+            "local_pixel": [
+              413,
+              337
+            ],
+            "neighbourhood": [
+              [
+                10,
+                10,
+                10
+              ],
+              [
+                10,
+                10,
+                10
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          }
+        },
+        "source_pixels": {
+          "red": [
+            1848,
+            9888
+          ],
+          "green": [
+            1848,
+            9888
+          ],
+          "blue": [
+            1848,
+            9888
+          ],
+          "nir": [
+            1848,
+            9888
+          ],
+          "scl": [
+            924,
+            4944
+          ]
+        },
+        "source_subpixels": {
+          "red": [
+            1848.4825686250551,
+            9888.11074520099
+          ],
+          "green": [
+            1848.4825686250551,
+            9888.11074520099
+          ],
+          "blue": [
+            1848.4825686250551,
+            9888.11074520099
+          ],
+          "nir": [
+            1848.4825686250551,
+            9888.11074520099
+          ],
+          "scl": [
+            924.2412843125276,
+            4944.055372600495
+          ]
+        },
+        "inside_native_frame": true
+      },
+      "specific_limits": [
+        "The earlier cloudy/shadowed/reef-margin RGB observation remains as dated source history; this annual interpretation does not expose those pixels.",
+        "A positive source class does not erase original source/owner/locality or territorial holds; water can belong to the nearby original locality.",
+        "WorldCover theme accuracy is not a per-point certainty or positional shoreline tolerance; native3x3 is context, not an invented majority/unanimity acceptance threshold."
+      ],
+      "authority_or_repair_credit": 0,
+      "prior_annual2020_unknown_observation": {
+        "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/point-observations.jsonl",
+        "point_index": 6459,
+        "tile": "N06E114",
+        "native_row": 1656,
+        "native_col": 7501,
+        "coverage_status": "nodata",
+        "literal_class_code": 0,
+        "valid_mask": 0,
+        "nodata_match": true,
+        "neighbourhood_complete": true,
+        "neighbourhood_codes": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "neighbourhood_masks": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "centre_array": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-01-07.npz",
+        "source_object_identity": {
+          "last-modified": "Tue, 25 Oct 2022 13:31:32 GMT",
+          "etag": "\"0788d2e15beaaf2f1824551409e59e80\"",
+          "accept-ranges": "bytes",
+          "content-length": "5456925"
+        },
+        "source_url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v100/2020/map/ESA_WorldCover_10m_2020_v100_N06E114_Map.tif"
+      },
+      "prior_annual2021_unknown_report": {
+        "path": "bulk-completion/offshore493-worldcover2021-001/source-observations.json",
+        "sha256": "ff343b83aecc89ac162b9c6094a147673157c7bd4024aa7e6f150caed5437d65",
+        "scope": "493unchangedkeys;490actualzero/noData and3missingN06E108;zero positive2021classes"
+      },
+      "alternate_read_index": 296,
+      "narrow_fine_surface_limit": "No exactsurface-reflectance, cloud-free condition, depth, tide, wholecellcover, annualpersistence, finepixel shoreline, ownerrepair or sovereignty is inferred; this answers the visible physical BODY/locality at the unchanged originalcentre.",
+      "reviewed_manual_finding": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/physical-review/scene-01-manual-review.json",
+        "finding": "All five unchanged centres are in a spatially continuous, visibly wave-textured water field west of the coherent reef complex. A thin translucent cirrus/veil crosses the scene, and literal SCL10 is recorded at every centre; nevertheless the actual nativeRGB andNIR frames expose the water texture and coherent water BODY at those exact positions. This is a positive dated water/body-locality observation THROUGH thin cirrus, not a cloud-free or exactsurface-reflectance assertion. The opaque cumulus/shadows are west of these centres.",
+        "images_viewed": [
+          "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/products/S2B_49PHK_20200816_0_L2A/block-01-09/rgb-centres.png",
+          "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/products/S2B_49PHK_20200816_0_L2A/block-01-09/nir-red-green-native.png"
+        ]
+      },
+      "native_qualified_or_accepted_credit": 0,
+      "previous_alternate_question_observation": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/products/S2B_49PHK_20200508_0_L2A/native-observations.json",
+        "source_item": "S2B_49PHK_20200508_0_L2A",
+        "point_index": 296,
+        "original_packet_index": 6459,
+        "source_scene_marker_pin": {
+          "path": "products/S2B_49PHK_20200508_0_L2A/native-observations.json",
+          "bytes": 297979,
+          "sha256": "88a8c4cbfd3d4dceb93bd887fdada0ff7f9e0f8309022dab205620c1d61aa94b"
+        },
+        "block_marker_pin": {
+          "path": "products/S2B_49PHK_20200508_0_L2A/block-01-09/block-observations.json",
+          "bytes": 152192,
+          "sha256": "736b3e8f89155881579791e983fa4c244e896bc6c7a5928e44e406cc6dfd9ea4"
+        },
+        "assets": {
+          "red": {
+            "value": 106,
+            "valid_mask": 255,
+            "source_pixel": [
+              1848,
+              9888
+            ],
+            "local_pixel": [
+              825,
+              673
+            ],
+            "neighbourhood": [
+              [
+                55,
+                108,
+                127
+              ],
+              [
+                173,
+                106,
+                63
+              ],
+              [
+                180,
+                94,
+                66
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "green": {
+            "value": 114,
+            "valid_mask": 255,
+            "source_pixel": [
+              1848,
+              9888
+            ],
+            "local_pixel": [
+              825,
+              673
+            ],
+            "neighbourhood": [
+              [
+                117,
+                127,
+                172
+              ],
+              [
+                145,
+                114,
+                69
+              ],
+              [
+                194,
+                132,
+                99
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "blue": {
+            "value": 215,
+            "valid_mask": 255,
+            "source_pixel": [
+              1848,
+              9888
+            ],
+            "local_pixel": [
+              825,
+              673
+            ],
+            "neighbourhood": [
+              [
+                221,
+                212,
+                226
+              ],
+              [
+                242,
+                215,
+                163
+              ],
+              [
+                221,
+                207,
+                235
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "nir": {
+            "value": 69,
+            "valid_mask": 255,
+            "source_pixel": [
+              1848,
+              9888
+            ],
+            "local_pixel": [
+              825,
+              673
+            ],
+            "neighbourhood": [
+              [
+                154,
+                97,
+                106
+              ],
+              [
+                102,
+                69,
+                73
+              ],
+              [
+                130,
+                75,
+                69
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "scl": {
+            "value": 6,
+            "valid_mask": 255,
+            "source_pixel": [
+              924,
+              4944
+            ],
+            "local_pixel": [
+              413,
+              337
+            ],
+            "neighbourhood": [
+              [
+                6,
+                6,
+                6
+              ],
+              [
+                6,
+                6,
+                6
+              ],
+              [
+                6,
+                6,
+                6
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          }
+        },
+        "source_pixels": {
+          "red": [
+            1848,
+            9888
+          ],
+          "green": [
+            1848,
+            9888
+          ],
+          "blue": [
+            1848,
+            9888
+          ],
+          "nir": [
+            1848,
+            9888
+          ],
+          "scl": [
+            924,
+            4944
+          ]
+        },
+        "source_subpixels": {
+          "red": [
+            1848.4825686250551,
+            9888.11074520099
+          ],
+          "green": [
+            1848.4825686250551,
+            9888.11074520099
+          ],
+          "blue": [
+            1848.4825686250551,
+            9888.11074520099
+          ],
+          "nir": [
+            1848.4825686250551,
+            9888.11074520099
+          ],
+          "scl": [
+            924.2412843125276,
+            4944.055372600495
+          ]
+        },
+        "inside_native_frame": true
+      },
+      "previous_alternate_question_finding": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene-04-manual-review.json",
+        "block": [
+          1,
+          9
+        ],
+        "finding": "Clear textured water at the upper group and most lower positions. Finite exceptions286/287/288/296/303 coincide with visible cloud-shadow or fringe context; extreme-dark literalDN1 values at286/288 remain valid-mask observations rather than proof of water.",
+        "images_viewed": [],
+        "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene04-block-01-09-native-crop.png",
+        "crop_locator": null
+      },
+      "residual29_read_index": 22,
+      "previous_second_alternate_question_observation": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/products/S2B_49PHK_20200309_0_L2A/native-observations.json",
+        "source_item": "S2B_49PHK_20200309_0_L2A",
+        "point_index": 22,
+        "original_packet_index": 6459,
+        "source_scene_marker_pin": {
+          "path": "products/S2B_49PHK_20200309_0_L2A/native-observations.json",
+          "bytes": 65216,
+          "sha256": "00301a00b9a8ea6094eebe53483b3644929f044cdb91e1f596501ab84b84166d"
+        },
+        "block_marker_pin": {
+          "path": "products/S2B_49PHK_20200309_0_L2A/block-01-09/block-observations.json",
+          "bytes": 36200,
+          "sha256": "82a221a71f260784007a46038b5b70f6e55ec2ac1348c953e0043fe012ac6f62"
+        },
+        "assets": {
+          "red": {
+            "value": 1452,
+            "valid_mask": 255,
+            "source_pixel": [
+              1848,
+              9888
+            ],
+            "local_pixel": [
+              825,
+              673
+            ],
+            "neighbourhood": [
+              [
+                1890,
+                1838,
+                1904
+              ],
+              [
+                1588,
+                1452,
+                1474
+              ],
+              [
+                1316,
+                1140,
+                1024
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "green": {
+            "value": 1688,
+            "valid_mask": 255,
+            "source_pixel": [
+              1848,
+              9888
+            ],
+            "local_pixel": [
+              825,
+              673
+            ],
+            "neighbourhood": [
+              [
+                2056,
+                2018,
+                1992
+              ],
+              [
+                1758,
+                1688,
+                1736
+              ],
+              [
+                1544,
+                1314,
+                1224
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "blue": {
+            "value": 1970,
+            "valid_mask": 255,
+            "source_pixel": [
+              1848,
+              9888
+            ],
+            "local_pixel": [
+              825,
+              673
+            ],
+            "neighbourhood": [
+              [
+                2216,
+                2208,
+                2088
+              ],
+              [
+                1998,
+                1970,
+                2088
+              ],
+              [
+                1780,
+                1576,
+                1570
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "nir": {
+            "value": 1598,
+            "valid_mask": 255,
+            "source_pixel": [
+              1848,
+              9888
+            ],
+            "local_pixel": [
+              825,
+              673
+            ],
+            "neighbourhood": [
+              [
+                1892,
+                1824,
+                1762
+              ],
+              [
+                1678,
+                1598,
+                1666
+              ],
+              [
+                1440,
+                1240,
+                1182
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "scl": {
+            "value": 6,
+            "valid_mask": 255,
+            "source_pixel": [
+              924,
+              4944
+            ],
+            "local_pixel": [
+              413,
+              337
+            ],
+            "neighbourhood": [
+              [
+                8,
+                8,
+                6
+              ],
+              [
+                6,
+                6,
+                6
+              ],
+              [
+                6,
+                6,
+                6
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          }
+        },
+        "source_pixels": {
+          "red": [
+            1848,
+            9888
+          ],
+          "green": [
+            1848,
+            9888
+          ],
+          "blue": [
+            1848,
+            9888
+          ],
+          "nir": [
+            1848,
+            9888
+          ],
+          "scl": [
+            924,
+            4944
+          ]
+        },
+        "source_subpixels": {
+          "red": [
+            1848.4825686250551,
+            9888.11074520099
+          ],
+          "green": [
+            1848.4825686250551,
+            9888.11074520099
+          ],
+          "blue": [
+            1848.4825686250551,
+            9888.11074520099
+          ],
+          "nir": [
+            1848.4825686250551,
+            9888.11074520099
+          ],
+          "scl": [
+            924.2412843125276,
+            4944.055372600495
+          ]
+        },
+        "inside_native_frame": true
+      },
+      "previous_second_alternate_question_finding": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene-02-manual-review.json",
+        "block": [
+          1,
+          9
+        ],
+        "finding": "All five requested centres lie in actual cumulus/cloud-shadow/fringe texture beside the reef; keep questions despite literalSCL6 atfour ofthefive.",
+        "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene02-block-01-09-native-crop.png",
+        "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene02-block-01-09-crop-locator.json"
+      },
+      "residual6_read_index": 3
+    },
+    {
+      "index": 6467,
+      "original_key": {
+        "owner": 48238,
+        "y": 124604,
+        "x": 214558
+      },
+      "original_record_unchanged": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65788
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48238
+        ],
+        "declared_sids": [
+          65788
+        ],
+        "flags": [
+          "disputed-island-territory-research"
+        ],
+        "hold_reasons": [
+          "disputed-island-territory-research",
+          "foreign-reference-country",
+          "source-relative-physical-interpretation-unresolved"
+        ],
+        "owner": 48238,
+        "package": "physical-interpretation",
+        "physical": "source-relative",
+        "qualified": false,
+        "reference_countries": [],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "disputed-island-territory-research",
+          "foreign-reference-country"
+        ],
+        "x": 214558,
+        "y": 124604
+      },
+      "centre_unchanged": {
+        "longitude": 114.62653433320872,
+        "latitude": 8.860589008423167
+      },
+      "input_scope_array_index": 22945,
+      "original_source_array_index": 38590,
+      "original_interval_index": 9062,
+      "source_target_unchanged": "gb:VNM:ADM2:81297802B23443064350281",
+      "proposed_bounded_answer": true,
+      "source_review_kind": "dated_visible_water_body_location_through_thin_cirrus",
+      "actual_answer": "2020-08-16: All five unchanged centres are in a spatially continuous, visibly wave-textured water field west of the coherent reef complex. A thin translucent cirrus/veil crosses the scene, and literal SCL10 is recorded at every centre; nevertheless the actual nativeRGB andNIR frames expose the water texture and coherent water BODY at those exact positions. This is a positive dated water/body-locality observation THROUGH thin cirrus, not a cloud-free or exactsurface-reflectance assertion. The opaque cumulus/shadows are west of these centres. Original mapped locality/owner and sourceassociation remain attached.",
+      "answer_year": 2020,
+      "answer_dates": [
+        "2020-08-16T02:55:36.188000Z"
+      ],
+      "source_vintage_kind": "Actualdated2020 Sentinel2L2A10mRGB/NIR and20mSCL, not annualclass inference",
+      "remaining_physical_question": null,
+      "prior_dated_visibility_or_reef_question": {
+        "path": "bulk-completion/offshore13649-interpretation/worker1/scene-06-review.json",
+        "field": "disposition",
+        "literal_status": "unanswered"
+      },
+      "authoritative_prior_ledger": {
+        "path": "bulk-completion/offshore13649-proposed-adoption/current-unanswered-2742.json",
+        "index": 6467
+      },
+      "reviewed_source_observation": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/products/S2B_49PHK_20200816_0_L2A/native-observations.json",
+        "source_item": "S2B_49PHK_20200816_0_L2A",
+        "point_index": 4,
+        "original_packet_index": 6467,
+        "source_scene_marker_pin": {
+          "path": "products/S2B_49PHK_20200816_0_L2A/native-observations.json",
+          "bytes": 35865,
+          "sha256": "14859746e1ec2015ca1d3000de854c0340424df9c0a1cf8f4ed26801859a13e3"
+        },
+        "block_marker_pin": {
+          "path": "products/S2B_49PHK_20200816_0_L2A/block-01-09/block-observations.json",
+          "bytes": 36141,
+          "sha256": "a5180d1802765707510b4ca71fac64baa18aa37f1723b839381042b957266599"
+        },
+        "assets": {
+          "red": {
+            "value": 457,
+            "valid_mask": 255,
+            "source_pixel": [
+              1863,
+              9903
+            ],
+            "local_pixel": [
+              840,
+              688
+            ],
+            "neighbourhood": [
+              [
+                487,
+                477,
+                473
+              ],
+              [
+                482,
+                457,
+                455
+              ],
+              [
+                473,
+                466,
+                486
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "green": {
+            "value": 517,
+            "valid_mask": 255,
+            "source_pixel": [
+              1863,
+              9903
+            ],
+            "local_pixel": [
+              840,
+              688
+            ],
+            "neighbourhood": [
+              [
+                539,
+                505,
+                527
+              ],
+              [
+                550,
+                517,
+                545
+              ],
+              [
+                543,
+                531,
+                543
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "blue": {
+            "value": 624,
+            "valid_mask": 255,
+            "source_pixel": [
+              1863,
+              9903
+            ],
+            "local_pixel": [
+              840,
+              688
+            ],
+            "neighbourhood": [
+              [
+                643,
+                629,
+                681
+              ],
+              [
+                645,
+                624,
+                673
+              ],
+              [
+                637,
+                661,
+                697
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "nir": {
+            "value": 404,
+            "valid_mask": 255,
+            "source_pixel": [
+              1863,
+              9903
+            ],
+            "local_pixel": [
+              840,
+              688
+            ],
+            "neighbourhood": [
+              [
+                421,
+                400,
+                438
+              ],
+              [
+                423,
+                404,
+                453
+              ],
+              [
+                437,
+                425,
+                456
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "scl": {
+            "value": 10,
+            "valid_mask": 255,
+            "source_pixel": [
+              931,
+              4951
+            ],
+            "local_pixel": [
+              420,
+              344
+            ],
+            "neighbourhood": [
+              [
+                10,
+                10,
+                10
+              ],
+              [
+                10,
+                10,
+                10
+              ],
+              [
+                10,
+                10,
+                10
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          }
+        },
+        "source_pixels": {
+          "red": [
+            1863,
+            9903
+          ],
+          "green": [
+            1863,
+            9903
+          ],
+          "blue": [
+            1863,
+            9903
+          ],
+          "nir": [
+            1863,
+            9903
+          ],
+          "scl": [
+            931,
+            4951
+          ]
+        },
+        "source_subpixels": {
+          "red": [
+            1863.363879268305,
+            9903.38531786263
+          ],
+          "green": [
+            1863.363879268305,
+            9903.38531786263
+          ],
+          "blue": [
+            1863.363879268305,
+            9903.38531786263
+          ],
+          "nir": [
+            1863.363879268305,
+            9903.38531786263
+          ],
+          "scl": [
+            931.6819396341525,
+            4951.692658931315
+          ]
+        },
+        "inside_native_frame": true
+      },
+      "specific_limits": [
+        "The earlier cloudy/shadowed/reef-margin RGB observation remains as dated source history; this annual interpretation does not expose those pixels.",
+        "A positive source class does not erase original source/owner/locality or territorial holds; water can belong to the nearby original locality.",
+        "WorldCover theme accuracy is not a per-point certainty or positional shoreline tolerance; native3x3 is context, not an invented majority/unanimity acceptance threshold."
+      ],
+      "authority_or_repair_credit": 0,
+      "prior_annual2020_unknown_observation": {
+        "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/point-observations.jsonl",
+        "point_index": 6467,
+        "tile": "N06E114",
+        "native_row": 1672,
+        "native_col": 7518,
+        "coverage_status": "nodata",
+        "literal_class_code": 0,
+        "valid_mask": 0,
+        "nodata_match": true,
+        "neighbourhood_complete": true,
+        "neighbourhood_codes": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "neighbourhood_masks": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "centre_array": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-01-07.npz",
+        "source_object_identity": {
+          "last-modified": "Tue, 25 Oct 2022 13:31:32 GMT",
+          "etag": "\"0788d2e15beaaf2f1824551409e59e80\"",
+          "accept-ranges": "bytes",
+          "content-length": "5456925"
+        },
+        "source_url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v100/2020/map/ESA_WorldCover_10m_2020_v100_N06E114_Map.tif"
+      },
+      "prior_annual2021_unknown_report": {
+        "path": "bulk-completion/offshore493-worldcover2021-001/source-observations.json",
+        "sha256": "ff343b83aecc89ac162b9c6094a147673157c7bd4024aa7e6f150caed5437d65",
+        "scope": "493unchangedkeys;490actualzero/noData and3missingN06E108;zero positive2021classes"
+      },
+      "alternate_read_index": 303,
+      "narrow_fine_surface_limit": "No exactsurface-reflectance, cloud-free condition, depth, tide, wholecellcover, annualpersistence, finepixel shoreline, ownerrepair or sovereignty is inferred; this answers the visible physical BODY/locality at the unchanged originalcentre.",
+      "reviewed_manual_finding": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/physical-review/scene-01-manual-review.json",
+        "finding": "All five unchanged centres are in a spatially continuous, visibly wave-textured water field west of the coherent reef complex. A thin translucent cirrus/veil crosses the scene, and literal SCL10 is recorded at every centre; nevertheless the actual nativeRGB andNIR frames expose the water texture and coherent water BODY at those exact positions. This is a positive dated water/body-locality observation THROUGH thin cirrus, not a cloud-free or exactsurface-reflectance assertion. The opaque cumulus/shadows are west of these centres.",
+        "images_viewed": [
+          "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/products/S2B_49PHK_20200816_0_L2A/block-01-09/rgb-centres.png",
+          "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/products/S2B_49PHK_20200816_0_L2A/block-01-09/nir-red-green-native.png"
+        ]
+      },
+      "native_qualified_or_accepted_credit": 0,
+      "previous_alternate_question_observation": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/products/S2B_49PHK_20200508_0_L2A/native-observations.json",
+        "source_item": "S2B_49PHK_20200508_0_L2A",
+        "point_index": 303,
+        "original_packet_index": 6467,
+        "source_scene_marker_pin": {
+          "path": "products/S2B_49PHK_20200508_0_L2A/native-observations.json",
+          "bytes": 297979,
+          "sha256": "88a8c4cbfd3d4dceb93bd887fdada0ff7f9e0f8309022dab205620c1d61aa94b"
+        },
+        "block_marker_pin": {
+          "path": "products/S2B_49PHK_20200508_0_L2A/block-01-09/block-observations.json",
+          "bytes": 152192,
+          "sha256": "736b3e8f89155881579791e983fa4c244e896bc6c7a5928e44e406cc6dfd9ea4"
+        },
+        "assets": {
+          "red": {
+            "value": 1,
+            "valid_mask": 255,
+            "source_pixel": [
+              1863,
+              9903
+            ],
+            "local_pixel": [
+              840,
+              688
+            ],
+            "neighbourhood": [
+              [
+                6,
+                41,
+                20
+              ],
+              [
+                1,
+                1,
+                1
+              ],
+              [
+                1,
+                1,
+                1
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "green": {
+            "value": 20,
+            "valid_mask": 255,
+            "source_pixel": [
+              1863,
+              9903
+            ],
+            "local_pixel": [
+              840,
+              688
+            ],
+            "neighbourhood": [
+              [
+                22,
+                59,
+                51
+              ],
+              [
+                36,
+                20,
+                42
+              ],
+              [
+                38,
+                1,
+                24
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "blue": {
+            "value": 91,
+            "valid_mask": 255,
+            "source_pixel": [
+              1863,
+              9903
+            ],
+            "local_pixel": [
+              840,
+              688
+            ],
+            "neighbourhood": [
+              [
+                130,
+                111,
+                142
+              ],
+              [
+                122,
+                91,
+                127
+              ],
+              [
+                136,
+                114,
+                122
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "nir": {
+            "value": 23,
+            "valid_mask": 255,
+            "source_pixel": [
+              1863,
+              9903
+            ],
+            "local_pixel": [
+              840,
+              688
+            ],
+            "neighbourhood": [
+              [
+                1,
+                1,
+                15
+              ],
+              [
+                18,
+                23,
+                9
+              ],
+              [
+                38,
+                28,
+                1
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "scl": {
+            "value": 6,
+            "valid_mask": 255,
+            "source_pixel": [
+              931,
+              4951
+            ],
+            "local_pixel": [
+              420,
+              344
+            ],
+            "neighbourhood": [
+              [
+                6,
+                6,
+                6
+              ],
+              [
+                6,
+                6,
+                6
+              ],
+              [
+                6,
+                6,
+                6
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          }
+        },
+        "source_pixels": {
+          "red": [
+            1863,
+            9903
+          ],
+          "green": [
+            1863,
+            9903
+          ],
+          "blue": [
+            1863,
+            9903
+          ],
+          "nir": [
+            1863,
+            9903
+          ],
+          "scl": [
+            931,
+            4951
+          ]
+        },
+        "source_subpixels": {
+          "red": [
+            1863.363879268305,
+            9903.38531786263
+          ],
+          "green": [
+            1863.363879268305,
+            9903.38531786263
+          ],
+          "blue": [
+            1863.363879268305,
+            9903.38531786263
+          ],
+          "nir": [
+            1863.363879268305,
+            9903.38531786263
+          ],
+          "scl": [
+            931.6819396341525,
+            4951.692658931315
+          ]
+        },
+        "inside_native_frame": true
+      },
+      "previous_alternate_question_finding": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene-04-manual-review.json",
+        "block": [
+          1,
+          9
+        ],
+        "finding": "Clear textured water at the upper group and most lower positions. Finite exceptions286/287/288/296/303 coincide with visible cloud-shadow or fringe context; extreme-dark literalDN1 values at286/288 remain valid-mask observations rather than proof of water.",
+        "images_viewed": [],
+        "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene04-block-01-09-native-crop.png",
+        "crop_locator": null
+      },
+      "residual29_read_index": 23,
+      "previous_second_alternate_question_observation": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/products/S2B_49PHK_20200309_0_L2A/native-observations.json",
+        "source_item": "S2B_49PHK_20200309_0_L2A",
+        "point_index": 23,
+        "original_packet_index": 6467,
+        "source_scene_marker_pin": {
+          "path": "products/S2B_49PHK_20200309_0_L2A/native-observations.json",
+          "bytes": 65216,
+          "sha256": "00301a00b9a8ea6094eebe53483b3644929f044cdb91e1f596501ab84b84166d"
+        },
+        "block_marker_pin": {
+          "path": "products/S2B_49PHK_20200309_0_L2A/block-01-09/block-observations.json",
+          "bytes": 36200,
+          "sha256": "82a221a71f260784007a46038b5b70f6e55ec2ac1348c953e0043fe012ac6f62"
+        },
+        "assets": {
+          "red": {
+            "value": 133,
+            "valid_mask": 255,
+            "source_pixel": [
+              1863,
+              9903
+            ],
+            "local_pixel": [
+              840,
+              688
+            ],
+            "neighbourhood": [
+              [
+                164,
+                131,
+                95
+              ],
+              [
+                149,
+                133,
+                104
+              ],
+              [
+                123,
+                111,
+                118
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "green": {
+            "value": 176,
+            "valid_mask": 255,
+            "source_pixel": [
+              1863,
+              9903
+            ],
+            "local_pixel": [
+              840,
+              688
+            ],
+            "neighbourhood": [
+              [
+                238,
+                203,
+                162
+              ],
+              [
+                199,
+                176,
+                154
+              ],
+              [
+                193,
+                176,
+                168
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "blue": {
+            "value": 271,
+            "valid_mask": 255,
+            "source_pixel": [
+              1863,
+              9903
+            ],
+            "local_pixel": [
+              840,
+              688
+            ],
+            "neighbourhood": [
+              [
+                313,
+                340,
+                237
+              ],
+              [
+                241,
+                271,
+                253
+              ],
+              [
+                286,
+                280,
+                275
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "nir": {
+            "value": 117,
+            "valid_mask": 255,
+            "source_pixel": [
+              1863,
+              9903
+            ],
+            "local_pixel": [
+              840,
+              688
+            ],
+            "neighbourhood": [
+              [
+                169,
+                158,
+                101
+              ],
+              [
+                136,
+                117,
+                93
+              ],
+              [
+                124,
+                110,
+                106
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "scl": {
+            "value": 6,
+            "valid_mask": 255,
+            "source_pixel": [
+              931,
+              4951
+            ],
+            "local_pixel": [
+              420,
+              344
+            ],
+            "neighbourhood": [
+              [
+                6,
+                6,
+                6
+              ],
+              [
+                6,
+                6,
+                6
+              ],
+              [
+                6,
+                6,
+                6
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          }
+        },
+        "source_pixels": {
+          "red": [
+            1863,
+            9903
+          ],
+          "green": [
+            1863,
+            9903
+          ],
+          "blue": [
+            1863,
+            9903
+          ],
+          "nir": [
+            1863,
+            9903
+          ],
+          "scl": [
+            931,
+            4951
+          ]
+        },
+        "source_subpixels": {
+          "red": [
+            1863.363879268305,
+            9903.38531786263
+          ],
+          "green": [
+            1863.363879268305,
+            9903.38531786263
+          ],
+          "blue": [
+            1863.363879268305,
+            9903.38531786263
+          ],
+          "nir": [
+            1863.363879268305,
+            9903.38531786263
+          ],
+          "scl": [
+            931.6819396341525,
+            4951.692658931315
+          ]
+        },
+        "inside_native_frame": true
+      },
+      "previous_second_alternate_question_finding": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene-02-manual-review.json",
+        "block": [
+          1,
+          9
+        ],
+        "finding": "All five requested centres lie in actual cumulus/cloud-shadow/fringe texture beside the reef; keep questions despite literalSCL6 atfour ofthefive.",
+        "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene02-block-01-09-native-crop.png",
+        "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene02-block-01-09-crop-locator.json"
+      },
+      "residual6_read_index": 4
+    },
+    {
+      "index": 12287,
+      "original_key": {
+        "owner": 48444,
+        "y": 119063,
+        "x": 212884
+      },
+      "original_record_unchanged": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65414
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48444
+        ],
+        "declared_sids": [
+          65414
+        ],
+        "flags": [
+          "disputed-island-territory-research"
+        ],
+        "hold_reasons": [
+          "disputed-island-territory-research",
+          "foreign-reference-country",
+          "source-relative-physical-interpretation-unresolved"
+        ],
+        "owner": 48444,
+        "package": "physical-interpretation",
+        "physical": "source-relative",
+        "qualified": false,
+        "reference_countries": [],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "disputed-island-territory-research",
+          "foreign-reference-country"
+        ],
+        "x": 212884,
+        "y": 119063
+      },
+      "centre_unchanged": {
+        "longitude": 112.32783808731875,
+        "latitude": 16.28124450013904
+      },
+      "input_scope_array_index": 10281,
+      "original_source_array_index": 25926,
+      "original_interval_index": 4254,
+      "source_target_unchanged": "gb:VNM:ADM2:81297802B51350923112403",
+      "proposed_bounded_answer": true,
+      "source_review_kind": "dated_native_rgb_nir_visible_water_body_location",
+      "actual_answer": "2020-01-15: The unchanged centre lies in the visible dark-blue textured water gap east/southeast of the small cloudlet and outside its visible southwest shadow. NativeRGB andNIR positively locate the continuous water BODY; surrounding clouds remain in the frame but do not cover this centre. Original mapped locality/owner and sourceassociation remain attached.",
+      "answer_year": 2020,
+      "answer_dates": [
+        "2020-01-15T03:13:12.882000Z"
+      ],
+      "source_vintage_kind": "Actualdated2020 Sentinel2L2A10mRGB/NIR and20mSCL, not annualclass inference",
+      "remaining_physical_question": null,
+      "prior_dated_visibility_or_reef_question": {
+        "path": "bulk-completion/offshore13649-interpretation/worker5/scene-32.json",
+        "field": "answered_bounded_question",
+        "literal_status": false
+      },
+      "authoritative_prior_ledger": {
+        "path": "bulk-completion/offshore13649-proposed-adoption/current-unanswered-2742.json",
+        "index": 12287
+      },
+      "reviewed_source_observation": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/products/S2B_49QFU_20200115_0_L2A/native-observations.json",
+        "source_item": "S2B_49QFU_20200115_0_L2A",
+        "point_index": 5,
+        "original_packet_index": 12287,
+        "source_scene_marker_pin": {
+          "path": "products/S2B_49QFU_20200115_0_L2A/native-observations.json",
+          "bytes": 12613,
+          "sha256": "6a3c6d45da0cad3dc3f7c25ac2a7b1b66fdcb5b165fa00249dc3812225efca4e"
+        },
+        "block_marker_pin": {
+          "path": "products/S2B_49QFU_20200115_0_L2A/block-09-04/block-observations.json",
+          "bytes": 12858,
+          "sha256": "9956e79bcdb2419d7b71d92054bb1ec6cdd05d51b9ec7b1ca1a990b10bceb046"
+        },
+        "assets": {
+          "red": {
+            "value": 281,
+            "valid_mask": 255,
+            "source_pixel": [
+              9951,
+              4187
+            ],
+            "local_pixel": [
+              736,
+              92
+            ],
+            "neighbourhood": [
+              [
+                285,
+                262,
+                257
+              ],
+              [
+                305,
+                281,
+                285
+              ],
+              [
+                309,
+                299,
+                301
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "green": {
+            "value": 392,
+            "valid_mask": 255,
+            "source_pixel": [
+              9951,
+              4187
+            ],
+            "local_pixel": [
+              736,
+              92
+            ],
+            "neighbourhood": [
+              [
+                384,
+                355,
+                370
+              ],
+              [
+                416,
+                392,
+                379
+              ],
+              [
+                422,
+                409,
+                406
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "blue": {
+            "value": 539,
+            "valid_mask": 255,
+            "source_pixel": [
+              9951,
+              4187
+            ],
+            "local_pixel": [
+              736,
+              92
+            ],
+            "neighbourhood": [
+              [
+                534,
+                511,
+                530
+              ],
+              [
+                517,
+                539,
+                570
+              ],
+              [
+                511,
+                517,
+                544
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "nir": {
+            "value": 262,
+            "valid_mask": 255,
+            "source_pixel": [
+              9951,
+              4187
+            ],
+            "local_pixel": [
+              736,
+              92
+            ],
+            "neighbourhood": [
+              [
+                226,
+                232,
+                217
+              ],
+              [
+                241,
+                262,
+                254
+              ],
+              [
+                245,
+                269,
+                241
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "scl": {
+            "value": 6,
+            "valid_mask": 255,
+            "source_pixel": [
+              4975,
+              2093
+            ],
+            "local_pixel": [
+              368,
+              46
+            ],
+            "neighbourhood": [
+              [
+                6,
+                6,
+                6
+              ],
+              [
+                6,
+                6,
+                6
+              ],
+              [
+                6,
+                6,
+                6
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          }
+        },
+        "source_pixels": {
+          "red": [
+            9951,
+            4187
+          ],
+          "green": [
+            9951,
+            4187
+          ],
+          "blue": [
+            9951,
+            4187
+          ],
+          "nir": [
+            9951,
+            4187
+          ],
+          "scl": [
+            4975,
+            2093
+          ]
+        },
+        "source_subpixels": {
+          "red": [
+            9951.35521541303,
+            4187.783097323489
+          ],
+          "green": [
+            9951.35521541303,
+            4187.783097323489
+          ],
+          "blue": [
+            9951.35521541303,
+            4187.783097323489
+          ],
+          "nir": [
+            9951.35521541303,
+            4187.783097323489
+          ],
+          "scl": [
+            4975.677607706515,
+            2093.8915486617443
+          ]
+        },
+        "inside_native_frame": true
+      },
+      "specific_limits": [
+        "The earlier cloudy/shadowed/reef-margin RGB observation remains as dated source history; this annual interpretation does not expose those pixels.",
+        "A positive source class does not erase original source/owner/locality or territorial holds; water can belong to the nearby original locality.",
+        "WorldCover theme accuracy is not a per-point certainty or positional shoreline tolerance; native3x3 is context, not an invented majority/unanimity acceptance threshold."
+      ],
+      "authority_or_repair_credit": 0,
+      "prior_annual2020_unknown_observation": {
+        "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/point-observations.jsonl",
+        "point_index": 12287,
+        "tile": "N15E111",
+        "native_row": 20625,
+        "native_col": 15934,
+        "coverage_status": "nodata",
+        "literal_class_code": 0,
+        "valid_mask": 0,
+        "nodata_match": true,
+        "neighbourhood_complete": true,
+        "neighbourhood_codes": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "neighbourhood_masks": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "centre_array": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-20-15.npz",
+        "source_object_identity": {
+          "last-modified": "Tue, 25 Oct 2022 13:32:37 GMT",
+          "etag": "\"846bc83698ec014669c1aef7ec554ea1\"",
+          "accept-ranges": "bytes",
+          "content-length": "2264104"
+        },
+        "source_url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v100/2020/map/ESA_WorldCover_10m_2020_v100_N15E111_Map.tif"
+      },
+      "prior_annual2021_unknown_report": {
+        "path": "bulk-completion/offshore493-worldcover2021-001/source-observations.json",
+        "sha256": "ff343b83aecc89ac162b9c6094a147673157c7bd4024aa7e6f150caed5437d65",
+        "scope": "493unchangedkeys;490actualzero/noData and3missingN06E108;zero positive2021classes"
+      },
+      "alternate_read_index": 107,
+      "narrow_fine_surface_limit": "No exactsurface-reflectance, cloud-free condition, depth, tide, wholecellcover, annualpersistence, finepixel shoreline, ownerrepair or sovereignty is inferred; this answers the visible physical BODY/locality at the unchanged originalcentre.",
+      "reviewed_manual_finding": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/physical-review/scene-02-manual-review.json",
+        "finding": "The unchanged centre lies in the visible dark-blue textured water gap east/southeast of the small cloudlet and outside its visible southwest shadow. NativeRGB andNIR positively locate the continuous water BODY; surrounding clouds remain in the frame but do not cover this centre.",
+        "images_viewed": [
+          "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/products/S2B_49QFU_20200115_0_L2A/block-09-04/rgb-centres.png",
+          "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/products/S2B_49QFU_20200115_0_L2A/block-09-04/nir-red-green-native.png"
+        ]
+      },
+      "native_qualified_or_accepted_credit": 0,
+      "previous_alternate_question_observation": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/products/S2A_49QFU_20200229_0_L2A/native-observations.json",
+        "source_item": "S2A_49QFU_20200229_0_L2A",
+        "point_index": 107,
+        "original_packet_index": 12287,
+        "source_scene_marker_pin": {
+          "path": "products/S2A_49QFU_20200229_0_L2A/native-observations.json",
+          "bytes": 670174,
+          "sha256": "3715cc3daba436a14cc138036c7117b00a96296cad29f6ae530bf35ad4f4a80f"
+        },
+        "block_marker_pin": {
+          "path": "products/S2A_49QFU_20200229_0_L2A/block-09-04/block-observations.json",
+          "bytes": 379062,
+          "sha256": "49f704181e846cf5ac3c4d012e3575f6caae9c889f2c8b20a35af74ce6dbc878"
+        },
+        "assets": {
+          "red": {
+            "value": 973,
+            "valid_mask": 255,
+            "source_pixel": [
+              9951,
+              4187
+            ],
+            "local_pixel": [
+              736,
+              92
+            ],
+            "neighbourhood": [
+              [
+                882,
+                879,
+                1040
+              ],
+              [
+                1012,
+                973,
+                1144
+              ],
+              [
+                1034,
+                1074,
+                1188
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "green": {
+            "value": 1076,
+            "valid_mask": 255,
+            "source_pixel": [
+              9951,
+              4187
+            ],
+            "local_pixel": [
+              736,
+              92
+            ],
+            "neighbourhood": [
+              [
+                1010,
+                962,
+                1086
+              ],
+              [
+                1088,
+                1076,
+                1224
+              ],
+              [
+                1100,
+                1220,
+                1246
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "blue": {
+            "value": 1320,
+            "valid_mask": 255,
+            "source_pixel": [
+              9951,
+              4187
+            ],
+            "local_pixel": [
+              736,
+              92
+            ],
+            "neighbourhood": [
+              [
+                1198,
+                1160,
+                1272
+              ],
+              [
+                1246,
+                1320,
+                1362
+              ],
+              [
+                1236,
+                1386,
+                1388
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "nir": {
+            "value": 904,
+            "valid_mask": 255,
+            "source_pixel": [
+              9951,
+              4187
+            ],
+            "local_pixel": [
+              736,
+              92
+            ],
+            "neighbourhood": [
+              [
+                837,
+                823,
+                907
+              ],
+              [
+                902,
+                904,
+                1016
+              ],
+              [
+                904,
+                970,
+                1048
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "scl": {
+            "value": 6,
+            "valid_mask": 255,
+            "source_pixel": [
+              4975,
+              2093
+            ],
+            "local_pixel": [
+              368,
+              46
+            ],
+            "neighbourhood": [
+              [
+                6,
+                6,
+                6
+              ],
+              [
+                6,
+                6,
+                6
+              ],
+              [
+                6,
+                6,
+                6
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          }
+        },
+        "source_pixels": {
+          "red": [
+            9951,
+            4187
+          ],
+          "green": [
+            9951,
+            4187
+          ],
+          "blue": [
+            9951,
+            4187
+          ],
+          "nir": [
+            9951,
+            4187
+          ],
+          "scl": [
+            4975,
+            2093
+          ]
+        },
+        "source_subpixels": {
+          "red": [
+            9951.35521541303,
+            4187.783097323489
+          ],
+          "green": [
+            9951.35521541303,
+            4187.783097323489
+          ],
+          "blue": [
+            9951.35521541303,
+            4187.783097323489
+          ],
+          "nir": [
+            9951.35521541303,
+            4187.783097323489
+          ],
+          "scl": [
+            4975.677607706515,
+            2093.8915486617443
+          ]
+        },
+        "inside_native_frame": true
+      },
+      "previous_alternate_question_finding": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene-01-manual-review.json",
+        "block": [
+          9,
+          4
+        ],
+        "finding": "Requested wave-textured dark-water cluster is clear at44\u2013106, with small cloudlets around it.107 touches a visible gray/white cloud fringe and remains unresolved.",
+        "images_viewed": [
+          "bulk-completion/offshore493-alternate2020-source-001/products/S2A_49QFU_20200229_0_L2A/block-09-04/rgb-centres.png",
+          "bulk-completion/offshore493-alternate2020-source-001/products/S2A_49QFU_20200229_0_L2A/block-09-04/nir-red-green-native.png"
+        ],
+        "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/physical-review/scene01-block-09-04-native-crop.png",
+        "crop_locator": null
+      },
+      "residual29_read_index": 10,
+      "previous_second_alternate_question_observation": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/products/S2A_49QFU_20200330_0_L2A/native-observations.json",
+        "source_item": "S2A_49QFU_20200330_0_L2A",
+        "point_index": 10,
+        "original_packet_index": 12287,
+        "source_scene_marker_pin": {
+          "path": "products/S2A_49QFU_20200330_0_L2A/native-observations.json",
+          "bytes": 106429,
+          "sha256": "991f9d2c32bfede96e6e764e7add1af188c6bf9cfe80bae5aceaf893b70d9262"
+        },
+        "block_marker_pin": {
+          "path": "products/S2A_49QFU_20200330_0_L2A/block-09-04/block-observations.json",
+          "bytes": 12858,
+          "sha256": "36ed94982e450738690c026e82957505152b6291d8ec5b6933fe4670880ccec3"
+        },
+        "assets": {
+          "red": {
+            "value": 436,
+            "valid_mask": 255,
+            "source_pixel": [
+              9951,
+              4187
+            ],
+            "local_pixel": [
+              736,
+              92
+            ],
+            "neighbourhood": [
+              [
+                332,
+                433,
+                436
+              ],
+              [
+                427,
+                436,
+                401
+              ],
+              [
+                416,
+                410,
+                412
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "green": {
+            "value": 498,
+            "valid_mask": 255,
+            "source_pixel": [
+              9951,
+              4187
+            ],
+            "local_pixel": [
+              736,
+              92
+            ],
+            "neighbourhood": [
+              [
+                369,
+                455,
+                498
+              ],
+              [
+                418,
+                498,
+                498
+              ],
+              [
+                429,
+                446,
+                467
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "blue": {
+            "value": 572,
+            "valid_mask": 255,
+            "source_pixel": [
+              9951,
+              4187
+            ],
+            "local_pixel": [
+              736,
+              92
+            ],
+            "neighbourhood": [
+              [
+                434,
+                500,
+                634
+              ],
+              [
+                465,
+                572,
+                601
+              ],
+              [
+                522,
+                572,
+                575
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "nir": {
+            "value": 390,
+            "valid_mask": 255,
+            "source_pixel": [
+              9951,
+              4187
+            ],
+            "local_pixel": [
+              736,
+              92
+            ],
+            "neighbourhood": [
+              [
+                256,
+                343,
+                393
+              ],
+              [
+                288,
+                390,
+                393
+              ],
+              [
+                323,
+                372,
+                372
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          },
+          "scl": {
+            "value": 6,
+            "valid_mask": 255,
+            "source_pixel": [
+              4975,
+              2093
+            ],
+            "local_pixel": [
+              368,
+              46
+            ],
+            "neighbourhood": [
+              [
+                6,
+                6,
+                6
+              ],
+              [
+                6,
+                6,
+                6
+              ],
+              [
+                6,
+                6,
+                6
+              ]
+            ],
+            "neighbour_masks": [
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "complete_3x3": true
+          }
+        },
+        "source_pixels": {
+          "red": [
+            9951,
+            4187
+          ],
+          "green": [
+            9951,
+            4187
+          ],
+          "blue": [
+            9951,
+            4187
+          ],
+          "nir": [
+            9951,
+            4187
+          ],
+          "scl": [
+            4975,
+            2093
+          ]
+        },
+        "source_subpixels": {
+          "red": [
+            9951.35521541303,
+            4187.783097323489
+          ],
+          "green": [
+            9951.35521541303,
+            4187.783097323489
+          ],
+          "blue": [
+            9951.35521541303,
+            4187.783097323489
+          ],
+          "nir": [
+            9951.35521541303,
+            4187.783097323489
+          ],
+          "scl": [
+            4975.677607706515,
+            2093.8915486617443
+          ]
+        },
+        "inside_native_frame": true
+      },
+      "previous_second_alternate_question_finding": {
+        "path": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene-01-manual-review.json",
+        "block": [
+          9,
+          4
+        ],
+        "finding": "The one requested centre still touches the visible small cloud-shadow/fringe cluster; SCL6 andmask255 do not settle its exposed surface.",
+        "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene01-block-09-04-native-crop.png",
+        "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene01-block-09-04-crop-locator.json"
+      },
+      "residual6_read_index": 5
+    }
+  ],
+  "limits": [
+    "LiteralSCL10 atfivePHKcentres retained; waterBODY visiblyread through thintranslucentcirrus,notcloudfree.",
+    "No originalowner/source/centrechange, no sovereignty/qualified/acceptedcredit."
+  ]
+}

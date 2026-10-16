@@ -1,0 +1,50 @@
+{
+  "scene_number": 1,
+  "item": "S2B_49PHK_20200816_0_L2A",
+  "date": "2020-08-16T02:55:36.188000Z",
+  "source_quality": {
+    "requested_original_keys": 5,
+    "actually_sampled_native_centres": 5,
+    "outside_native_frame_indices": [],
+    "scl_centre_counts": {
+      "10": 5
+    },
+    "valid_centre_masks_by_band": {
+      "red": {
+        "255": 5
+      },
+      "green": {
+        "255": 5
+      },
+      "blue": {
+        "255": 5
+      },
+      "nir": {
+        "255": 5
+      },
+      "scl": {
+        "255": 5
+      }
+    },
+    "physical_interpretation": null
+  },
+  "finding": "All five unchanged centres are in a spatially continuous, visibly wave-textured water field west of the coherent reef complex. A thin translucent cirrus/veil crosses the scene, and literal SCL10 is recorded at every centre; nevertheless the actual nativeRGB andNIR frames expose the water texture and coherent water BODY at those exact positions. This is a positive dated water/body-locality observation THROUGH thin cirrus, not a cloud-free or exactsurface-reflectance assertion. The opaque cumulus/shadows are west of these centres.",
+  "water_indices": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "unresolved_indices": [],
+  "images_viewed": [
+    "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/products/S2B_49PHK_20200816_0_L2A/block-01-09/rgb-centres.png",
+    "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/products/S2B_49PHK_20200816_0_L2A/block-01-09/nir-red-green-native.png"
+  ],
+  "block_marker_pin": {
+    "path": "products/S2B_49PHK_20200816_0_L2A/block-01-09/block-observations.json",
+    "bytes": 36141,
+    "sha256": "a5180d1802765707510b4ca71fac64baa18aa37f1723b839381042b957266599"
+  },
+  "method": "Human finite unchanged-centre nativeRGB/NIR visual body-locality interpretation. No spectral/SCL/classifier threshold or strictclear-sky/dryness gate; sourcecirrus kept explicit."
+}

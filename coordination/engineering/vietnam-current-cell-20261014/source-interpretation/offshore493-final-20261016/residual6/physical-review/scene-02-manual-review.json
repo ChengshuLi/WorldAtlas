@@ -1,0 +1,46 @@
+{
+  "scene_number": 2,
+  "item": "S2B_49QFU_20200115_0_L2A",
+  "date": "2020-01-15T03:13:12.882000Z",
+  "source_quality": {
+    "requested_original_keys": 1,
+    "actually_sampled_native_centres": 1,
+    "outside_native_frame_indices": [],
+    "scl_centre_counts": {
+      "6": 1
+    },
+    "valid_centre_masks_by_band": {
+      "red": {
+        "255": 1
+      },
+      "green": {
+        "255": 1
+      },
+      "blue": {
+        "255": 1
+      },
+      "nir": {
+        "255": 1
+      },
+      "scl": {
+        "255": 1
+      }
+    },
+    "physical_interpretation": null
+  },
+  "finding": "The unchanged centre lies in the visible dark-blue textured water gap east/southeast of the small cloudlet and outside its visible southwest shadow. NativeRGB andNIR positively locate the continuous water BODY; surrounding clouds remain in the frame but do not cover this centre.",
+  "water_indices": [
+    5
+  ],
+  "unresolved_indices": [],
+  "images_viewed": [
+    "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/products/S2B_49QFU_20200115_0_L2A/block-09-04/rgb-centres.png",
+    "bulk-completion/offshore493-alternate2020-source-001/residual6-alternate2020-003/products/S2B_49QFU_20200115_0_L2A/block-09-04/nir-red-green-native.png"
+  ],
+  "block_marker_pin": {
+    "path": "products/S2B_49QFU_20200115_0_L2A/block-09-04/block-observations.json",
+    "bytes": 12858,
+    "sha256": "9956e79bcdb2419d7b71d92054bb1ec6cdd05d51b9ec7b1ca1a990b10bceb046"
+  },
+  "method": "Human finite unchanged-centre nativeRGB/NIR visual body-locality interpretation. No spectral/SCL/classifier threshold or strictclear-sky/dryness gate; sourcecirrus kept explicit."
+}

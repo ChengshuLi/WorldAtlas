@@ -1,0 +1,1491 @@
+{
+  "item": "S2A_49QFU_20200330_0_L2A",
+  "source_metadata": {
+    "red": {
+      "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/49/Q/FU/2020/3/S2A_49QFU_20200330_0_L2A/B04.tif",
+      "shape": [
+        10980,
+        10980
+      ],
+      "transform": [
+        10.0,
+        0.0,
+        600000.0,
+        0.0,
+        -10.0,
+        1900020.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "blocks": [
+        [
+          1024,
+          1024
+        ]
+      ],
+      "dtype": "uint16",
+      "crs": "EPSG:32649",
+      "nodata": 0.0,
+      "raster_bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "bits_per_sample": 15,
+          "spatial_resolution": 10,
+          "scale": 0.0001,
+          "offset": 0
+        }
+      ]
+    },
+    "green": {
+      "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/49/Q/FU/2020/3/S2A_49QFU_20200330_0_L2A/B03.tif",
+      "shape": [
+        10980,
+        10980
+      ],
+      "transform": [
+        10.0,
+        0.0,
+        600000.0,
+        0.0,
+        -10.0,
+        1900020.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "blocks": [
+        [
+          1024,
+          1024
+        ]
+      ],
+      "dtype": "uint16",
+      "crs": "EPSG:32649",
+      "nodata": 0.0,
+      "raster_bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "bits_per_sample": 15,
+          "spatial_resolution": 10,
+          "scale": 0.0001,
+          "offset": 0
+        }
+      ]
+    },
+    "blue": {
+      "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/49/Q/FU/2020/3/S2A_49QFU_20200330_0_L2A/B02.tif",
+      "shape": [
+        10980,
+        10980
+      ],
+      "transform": [
+        10.0,
+        0.0,
+        600000.0,
+        0.0,
+        -10.0,
+        1900020.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "blocks": [
+        [
+          1024,
+          1024
+        ]
+      ],
+      "dtype": "uint16",
+      "crs": "EPSG:32649",
+      "nodata": 0.0,
+      "raster_bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "bits_per_sample": 15,
+          "spatial_resolution": 10,
+          "scale": 0.0001,
+          "offset": 0
+        }
+      ]
+    },
+    "nir": {
+      "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/49/Q/FU/2020/3/S2A_49QFU_20200330_0_L2A/B08.tif",
+      "shape": [
+        10980,
+        10980
+      ],
+      "transform": [
+        10.0,
+        0.0,
+        600000.0,
+        0.0,
+        -10.0,
+        1900020.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "blocks": [
+        [
+          1024,
+          1024
+        ]
+      ],
+      "dtype": "uint16",
+      "crs": "EPSG:32649",
+      "nodata": 0.0,
+      "raster_bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "bits_per_sample": 15,
+          "spatial_resolution": 10,
+          "scale": 0.0001,
+          "offset": 0
+        }
+      ]
+    },
+    "scl": {
+      "url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/49/Q/FU/2020/3/S2A_49QFU_20200330_0_L2A/SCL.tif",
+      "shape": [
+        5490,
+        5490
+      ],
+      "transform": [
+        20.0,
+        0.0,
+        600000.0,
+        0.0,
+        -20.0,
+        1900020.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "blocks": [
+        [
+          512,
+          512
+        ]
+      ],
+      "dtype": "uint8",
+      "crs": "EPSG:32649",
+      "nodata": 0.0,
+      "raster_bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint8",
+          "spatial_resolution": 20
+        }
+      ]
+    }
+  },
+  "points": [
+    {
+      "index": 0,
+      "original_key": {
+        "owner": 48444,
+        "y": 118955,
+        "x": 213007
+      },
+      "longitude": 112.49673870753645,
+      "latitude": 16.423548321769523,
+      "input_scope_array_index": 9610,
+      "original_source_array_index": 25255,
+      "original_interval_index": 4077,
+      "source_target": "gb:VNM:ADM2:81297802B51350923112403",
+      "original_packet_index": 11692,
+      "original_offshore_item": "S2A_49QFU_20200219_0_L2A",
+      "source_pixels": {
+        "red": [
+          8364,
+          5981
+        ],
+        "green": [
+          8364,
+          5981
+        ],
+        "blue": [
+          8364,
+          5981
+        ],
+        "nir": [
+          8364,
+          5981
+        ],
+        "scl": [
+          4182,
+          2990
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          8364.286510883918,
+          5981.210249217504
+        ],
+        "green": [
+          8364.286510883918,
+          5981.210249217504
+        ],
+        "blue": [
+          8364.286510883918,
+          5981.210249217504
+        ],
+        "nir": [
+          8364.286510883918,
+          5981.210249217504
+        ],
+        "scl": [
+          4182.143255441959,
+          2990.605124608752
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {},
+      "inside_native_frame": true,
+      "source_block": [
+        8,
+        5
+      ]
+    },
+    {
+      "index": 1,
+      "original_key": {
+        "owner": 48444,
+        "y": 118955,
+        "x": 213008
+      },
+      "longitude": 112.49811188331057,
+      "latitude": 16.423548321769523,
+      "input_scope_array_index": 9611,
+      "original_source_array_index": 25256,
+      "original_interval_index": 4077,
+      "source_target": "gb:VNM:ADM2:81297802B51350923112403",
+      "original_packet_index": 11693,
+      "original_offshore_item": "S2A_49QFU_20200219_0_L2A",
+      "source_pixels": {
+        "red": [
+          8364,
+          5995
+        ],
+        "green": [
+          8364,
+          5995
+        ],
+        "blue": [
+          8364,
+          5995
+        ],
+        "nir": [
+          8364,
+          5995
+        ],
+        "scl": [
+          4182,
+          2997
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          8364.178123864549,
+          5995.874959428023
+        ],
+        "green": [
+          8364.178123864549,
+          5995.874959428023
+        ],
+        "blue": [
+          8364.178123864549,
+          5995.874959428023
+        ],
+        "nir": [
+          8364.178123864549,
+          5995.874959428023
+        ],
+        "scl": [
+          4182.0890619322745,
+          2997.9374797140117
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {},
+      "inside_native_frame": true,
+      "source_block": [
+        8,
+        5
+      ]
+    },
+    {
+      "index": 2,
+      "original_key": {
+        "owner": 48444,
+        "y": 118955,
+        "x": 213009
+      },
+      "longitude": 112.49948505908469,
+      "latitude": 16.423548321769523,
+      "input_scope_array_index": 9612,
+      "original_source_array_index": 25257,
+      "original_interval_index": 4077,
+      "source_target": "gb:VNM:ADM2:81297802B51350923112403",
+      "original_packet_index": 11694,
+      "original_offshore_item": "S2A_49QFU_20200219_0_L2A",
+      "source_pixels": {
+        "red": [
+          8364,
+          6010
+        ],
+        "green": [
+          8364,
+          6010
+        ],
+        "blue": [
+          8364,
+          6010
+        ],
+        "nir": [
+          8364,
+          6010
+        ],
+        "scl": [
+          4182,
+          3005
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          8364.069637348031,
+          6010.539677412089
+        ],
+        "green": [
+          8364.069637348031,
+          6010.539677412089
+        ],
+        "blue": [
+          8364.069637348031,
+          6010.539677412089
+        ],
+        "nir": [
+          8364.069637348031,
+          6010.539677412089
+        ],
+        "scl": [
+          4182.034818674016,
+          3005.2698387060445
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {},
+      "inside_native_frame": true,
+      "source_block": [
+        8,
+        5
+      ]
+    },
+    {
+      "index": 3,
+      "original_key": {
+        "owner": 48444,
+        "y": 118956,
+        "x": 213008
+      },
+      "longitude": 112.49811188331057,
+      "latitude": 16.42223117005354,
+      "input_scope_array_index": 9615,
+      "original_source_array_index": 25260,
+      "original_interval_index": 4079,
+      "source_target": "gb:VNM:ADM2:81297802B51350923112403",
+      "original_packet_index": 11697,
+      "original_offshore_item": "S2A_49QFU_20200219_0_L2A",
+      "source_pixels": {
+        "red": [
+          8378,
+          5995
+        ],
+        "green": [
+          8378,
+          5995
+        ],
+        "blue": [
+          8378,
+          5995
+        ],
+        "nir": [
+          8378,
+          5995
+        ],
+        "scl": [
+          4189,
+          2997
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          8378.752514709835,
+          5995.982724107147
+        ],
+        "green": [
+          8378.752514709835,
+          5995.982724107147
+        ],
+        "blue": [
+          8378.752514709835,
+          5995.982724107147
+        ],
+        "nir": [
+          8378.752514709835,
+          5995.982724107147
+        ],
+        "scl": [
+          4189.3762573549175,
+          2997.9913620535735
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {},
+      "inside_native_frame": true,
+      "source_block": [
+        8,
+        5
+      ]
+    },
+    {
+      "index": 4,
+      "original_key": {
+        "owner": 48444,
+        "y": 118956,
+        "x": 213009
+      },
+      "longitude": 112.49948505908469,
+      "latitude": 16.42223117005354,
+      "input_scope_array_index": 9616,
+      "original_source_array_index": 25261,
+      "original_interval_index": 4079,
+      "source_target": "gb:VNM:ADM2:81297802B51350923112403",
+      "original_packet_index": 11698,
+      "original_offshore_item": "S2A_49QFU_20200219_0_L2A",
+      "source_pixels": {
+        "red": [
+          8378,
+          6010
+        ],
+        "green": [
+          8378,
+          6010
+        ],
+        "blue": [
+          8378,
+          6010
+        ],
+        "nir": [
+          8378,
+          6010
+        ],
+        "scl": [
+          4189,
+          3005
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          8378.644035922829,
+          6010.64754097187
+        ],
+        "green": [
+          8378.644035922829,
+          6010.64754097187
+        ],
+        "blue": [
+          8378.644035922829,
+          6010.64754097187
+        ],
+        "nir": [
+          8378.644035922829,
+          6010.64754097187
+        ],
+        "scl": [
+          4189.3220179614145,
+          3005.323770485935
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {},
+      "inside_native_frame": true,
+      "source_block": [
+        8,
+        5
+      ]
+    },
+    {
+      "index": 5,
+      "original_key": {
+        "owner": 48444,
+        "y": 118957,
+        "x": 213009
+      },
+      "longitude": 112.49948505908469,
+      "latitude": 16.420914009412993,
+      "input_scope_array_index": 9618,
+      "original_source_array_index": 25263,
+      "original_interval_index": 4081,
+      "source_target": "gb:VNM:ADM2:81297802B51350923112403",
+      "original_packet_index": 11700,
+      "original_offshore_item": "S2A_49QFU_20200219_0_L2A",
+      "source_pixels": {
+        "red": [
+          8393,
+          6010
+        ],
+        "green": [
+          8393,
+          6010
+        ],
+        "blue": [
+          8393,
+          6010
+        ],
+        "nir": [
+          8393,
+          6010
+        ],
+        "scl": [
+          4196,
+          3005
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          8393.218531548162,
+          6010.755396837121
+        ],
+        "green": [
+          8393.218531548162,
+          6010.755396837121
+        ],
+        "blue": [
+          8393.218531548162,
+          6010.755396837121
+        ],
+        "nir": [
+          8393.218531548162,
+          6010.755396837121
+        ],
+        "scl": [
+          4196.609265774081,
+          3005.3776984185606
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {},
+      "inside_native_frame": true,
+      "source_block": [
+        8,
+        5
+      ]
+    },
+    {
+      "index": 6,
+      "original_key": {
+        "owner": 48444,
+        "y": 119013,
+        "x": 212692
+      },
+      "longitude": 112.06418833868617,
+      "latitude": 16.347138789542182,
+      "input_scope_array_index": 9831,
+      "original_source_array_index": 25476,
+      "original_interval_index": 4152,
+      "source_target": "gb:VNM:ADM2:81297802B51350923112403",
+      "original_packet_index": 11913,
+      "original_offshore_item": "S2A_49QFU_20200219_0_L2A",
+      "source_pixels": {
+        "red": [
+          9238,
+          1366
+        ],
+        "green": [
+          9238,
+          1366
+        ],
+        "blue": [
+          9238,
+          1366
+        ],
+        "nir": [
+          9238,
+          1366
+        ],
+        "scl": [
+          4619,
+          683
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          9238.831509075739,
+          1366.6057125280859
+        ],
+        "green": [
+          9238.831509075739,
+          1366.6057125280859
+        ],
+        "blue": [
+          9238.831509075739,
+          1366.6057125280859
+        ],
+        "nir": [
+          9238.831509075739,
+          1366.6057125280859
+        ],
+        "scl": [
+          4619.415754537869,
+          683.3028562640429
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {},
+      "inside_native_frame": true,
+      "source_block": [
+        9,
+        1
+      ]
+    },
+    {
+      "index": 7,
+      "original_key": {
+        "owner": 48444,
+        "y": 119014,
+        "x": 212692
+      },
+      "longitude": 112.06418833868617,
+      "latitude": 16.34582112125224,
+      "input_scope_array_index": 9837,
+      "original_source_array_index": 25482,
+      "original_interval_index": 4155,
+      "source_target": "gb:VNM:ADM2:81297802B51350923112403",
+      "original_packet_index": 11917,
+      "original_offshore_item": "S2A_49QFU_20200219_0_L2A",
+      "source_pixels": {
+        "red": [
+          9253,
+          1366
+        ],
+        "green": [
+          9253,
+          1366
+        ],
+        "blue": [
+          9253,
+          1366
+        ],
+        "nir": [
+          9253,
+          1366
+        ],
+        "scl": [
+          4626,
+          683
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          9253.409425351041,
+          1366.681926750629
+        ],
+        "green": [
+          9253.409425351041,
+          1366.681926750629
+        ],
+        "blue": [
+          9253.409425351041,
+          1366.681926750629
+        ],
+        "nir": [
+          9253.409425351041,
+          1366.681926750629
+        ],
+        "scl": [
+          4626.704712675521,
+          683.3409633753145
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {},
+      "inside_native_frame": true,
+      "source_block": [
+        9,
+        1
+      ]
+    },
+    {
+      "index": 8,
+      "original_key": {
+        "owner": 48444,
+        "y": 119046,
+        "x": 213001
+      },
+      "longitude": 112.48849965289168,
+      "latitude": 16.303651046760486,
+      "input_scope_array_index": 9948,
+      "original_source_array_index": 25593,
+      "original_interval_index": 4209,
+      "source_target": "gb:VNM:ADM2:81297802B51350923112403",
+      "original_packet_index": 11983,
+      "original_offshore_item": "S2A_49QFU_20200219_0_L2A",
+      "source_pixels": {
+        "red": [
+          9691,
+          5902
+        ],
+        "green": [
+          9691,
+          5902
+        ],
+        "blue": [
+          9691,
+          5902
+        ],
+        "nir": [
+          9691,
+          5902
+        ],
+        "scl": [
+          4845,
+          2951
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          9691.595974147494,
+          5902.934438941869
+        ],
+        "green": [
+          9691.595974147494,
+          5902.934438941869
+        ],
+        "blue": [
+          9691.595974147494,
+          5902.934438941869
+        ],
+        "nir": [
+          9691.595974147494,
+          5902.934438941869
+        ],
+        "scl": [
+          4845.797987073747,
+          2951.4672194709347
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {},
+      "inside_native_frame": true,
+      "source_block": [
+        9,
+        5
+      ]
+    },
+    {
+      "index": 9,
+      "original_key": {
+        "owner": 48444,
+        "y": 119046,
+        "x": 213002
+      },
+      "longitude": 112.4898728286658,
+      "latitude": 16.303651046760486,
+      "input_scope_array_index": 9949,
+      "original_source_array_index": 25594,
+      "original_interval_index": 4209,
+      "source_target": "gb:VNM:ADM2:81297802B51350923112403",
+      "original_packet_index": 11984,
+      "original_offshore_item": "S2A_49QFU_20200219_0_L2A",
+      "source_pixels": {
+        "red": [
+          9691,
+          5917
+        ],
+        "green": [
+          9691,
+          5917
+        ],
+        "blue": [
+          9691,
+          5917
+        ],
+        "nir": [
+          9691,
+          5917
+        ],
+        "scl": [
+          4845,
+          2958
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          9691.488884113962,
+          5917.608071710318
+        ],
+        "green": [
+          9691.488884113962,
+          5917.608071710318
+        ],
+        "blue": [
+          9691.488884113962,
+          5917.608071710318
+        ],
+        "nir": [
+          9691.488884113962,
+          5917.608071710318
+        ],
+        "scl": [
+          4845.744442056981,
+          2958.804035855159
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {},
+      "inside_native_frame": true,
+      "source_block": [
+        9,
+        5
+      ]
+    },
+    {
+      "index": 10,
+      "original_key": {
+        "owner": 48444,
+        "y": 119063,
+        "x": 212884
+      },
+      "longitude": 112.32783808731875,
+      "latitude": 16.28124450013904,
+      "input_scope_array_index": 10281,
+      "original_source_array_index": 25926,
+      "original_interval_index": 4254,
+      "source_target": "gb:VNM:ADM2:81297802B51350923112403",
+      "original_packet_index": 12287,
+      "original_offshore_item": "S2A_49QFU_20200219_0_L2A",
+      "source_pixels": {
+        "red": [
+          9951,
+          4187
+        ],
+        "green": [
+          9951,
+          4187
+        ],
+        "blue": [
+          9951,
+          4187
+        ],
+        "nir": [
+          9951,
+          4187
+        ],
+        "scl": [
+          4975,
+          2093
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          9951.35521541303,
+          4187.783097323489
+        ],
+        "green": [
+          9951.35521541303,
+          4187.783097323489
+        ],
+        "blue": [
+          9951.35521541303,
+          4187.783097323489
+        ],
+        "nir": [
+          9951.35521541303,
+          4187.783097323489
+        ],
+        "scl": [
+          4975.677607706515,
+          2093.8915486617443
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {},
+      "inside_native_frame": true,
+      "source_block": [
+        9,
+        4
+      ]
+    },
+    {
+      "index": 11,
+      "original_key": {
+        "owner": 48444,
+        "y": 119064,
+        "x": 212875
+      },
+      "longitude": 112.31547950535156,
+      "latitude": 16.279926388246327,
+      "input_scope_array_index": 10304,
+      "original_source_array_index": 25949,
+      "original_interval_index": 4258,
+      "source_target": "gb:VNM:ADM2:81297802B51350923112403",
+      "original_packet_index": 12306,
+      "original_offshore_item": "S2A_49QFU_20200219_0_L2A",
+      "source_pixels": {
+        "red": [
+          9966,
+          4055
+        ],
+        "green": [
+          9966,
+          4055
+        ],
+        "blue": [
+          9966,
+          4055
+        ],
+        "nir": [
+          9966,
+          4055
+        ],
+        "scl": [
+          4983,
+          2027
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          9966.793324283208,
+          4055.807304819733
+        ],
+        "green": [
+          9966.793324283208,
+          4055.807304819733
+        ],
+        "blue": [
+          9966.793324283208,
+          4055.807304819733
+        ],
+        "nir": [
+          9966.793324283208,
+          4055.807304819733
+        ],
+        "scl": [
+          4983.396662141604,
+          2027.9036524098665
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {},
+      "inside_native_frame": true,
+      "source_block": [
+        9,
+        3
+      ]
+    },
+    {
+      "index": 12,
+      "original_key": {
+        "owner": 48444,
+        "y": 119064,
+        "x": 212876
+      },
+      "longitude": 112.31685268112568,
+      "latitude": 16.279926388246327,
+      "input_scope_array_index": 10305,
+      "original_source_array_index": 25950,
+      "original_interval_index": 4258,
+      "source_target": "gb:VNM:ADM2:81297802B51350923112403",
+      "original_packet_index": 12307,
+      "original_offshore_item": "S2A_49QFU_20200219_0_L2A",
+      "source_pixels": {
+        "red": [
+          9966,
+          4070
+        ],
+        "green": [
+          9966,
+          4070
+        ],
+        "blue": [
+          9966,
+          4070
+        ],
+        "nir": [
+          9966,
+          4070
+        ],
+        "scl": [
+          4983,
+          2035
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          9966.698809723719,
+          4070.4817840769465
+        ],
+        "green": [
+          9966.698809723719,
+          4070.4817840769465
+        ],
+        "blue": [
+          9966.698809723719,
+          4070.4817840769465
+        ],
+        "nir": [
+          9966.698809723719,
+          4070.4817840769465
+        ],
+        "scl": [
+          4983.3494048618595,
+          2035.2408920384732
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {},
+      "inside_native_frame": true,
+      "source_block": [
+        9,
+        3
+      ]
+    },
+    {
+      "index": 13,
+      "original_key": {
+        "owner": 48444,
+        "y": 119064,
+        "x": 212877
+      },
+      "longitude": 112.31822585689986,
+      "latitude": 16.279926388246327,
+      "input_scope_array_index": 10306,
+      "original_source_array_index": 25951,
+      "original_interval_index": 4258,
+      "source_target": "gb:VNM:ADM2:81297802B51350923112403",
+      "original_packet_index": 12308,
+      "original_offshore_item": "S2A_49QFU_20200219_0_L2A",
+      "source_pixels": {
+        "red": [
+          9966,
+          4085
+        ],
+        "green": [
+          9966,
+          4085
+        ],
+        "blue": [
+          9966,
+          4085
+        ],
+        "nir": [
+          9966,
+          4085
+        ],
+        "scl": [
+          4983,
+          2042
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          9966.604196476197,
+          4085.1562701941148
+        ],
+        "green": [
+          9966.604196476197,
+          4085.1562701941148
+        ],
+        "blue": [
+          9966.604196476197,
+          4085.1562701941148
+        ],
+        "nir": [
+          9966.604196476197,
+          4085.1562701941148
+        ],
+        "scl": [
+          4983.302098238099,
+          2042.5781350970574
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {},
+      "inside_native_frame": true,
+      "source_block": [
+        9,
+        3
+      ]
+    },
+    {
+      "index": 14,
+      "original_key": {
+        "owner": 48444,
+        "y": 119065,
+        "x": 212876
+      },
+      "longitude": 112.31685268112568,
+      "latitude": 16.278608267497823,
+      "input_scope_array_index": 10342,
+      "original_source_array_index": 25987,
+      "original_interval_index": 4262,
+      "source_target": "gb:VNM:ADM2:81297802B51350923112403",
+      "original_packet_index": 12343,
+      "original_offshore_item": "S2A_49QFU_20200219_0_L2A",
+      "source_pixels": {
+        "red": [
+          9981,
+          4070
+        ],
+        "green": [
+          9981,
+          4070
+        ],
+        "blue": [
+          9981,
+          4070
+        ],
+        "nir": [
+          9981,
+          4070
+        ],
+        "scl": [
+          4990,
+          2035
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          9981.282776267966,
+          4070.575760983251
+        ],
+        "green": [
+          9981.282776267966,
+          4070.575760983251
+        ],
+        "blue": [
+          9981.282776267966,
+          4070.575760983251
+        ],
+        "nir": [
+          9981.282776267966,
+          4070.575760983251
+        ],
+        "scl": [
+          4990.641388133983,
+          2035.2878804916254
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {},
+      "inside_native_frame": true,
+      "source_block": [
+        9,
+        3
+      ]
+    },
+    {
+      "index": 15,
+      "original_key": {
+        "owner": 48444,
+        "y": 119065,
+        "x": 212877
+      },
+      "longitude": 112.31822585689986,
+      "latitude": 16.278608267497823,
+      "input_scope_array_index": 10343,
+      "original_source_array_index": 25988,
+      "original_interval_index": 4262,
+      "source_target": "gb:VNM:ADM2:81297802B51350923112403",
+      "original_packet_index": 12344,
+      "original_offshore_item": "S2A_49QFU_20200219_0_L2A",
+      "source_pixels": {
+        "red": [
+          9981,
+          4085
+        ],
+        "green": [
+          9981,
+          4085
+        ],
+        "blue": [
+          9981,
+          4085
+        ],
+        "nir": [
+          9981,
+          4085
+        ],
+        "scl": [
+          4990,
+          2042
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          9981.188169841364,
+          4085.250345175984
+        ],
+        "green": [
+          9981.188169841364,
+          4085.250345175984
+        ],
+        "blue": [
+          9981.188169841364,
+          4085.250345175984
+        ],
+        "nir": [
+          9981.188169841364,
+          4085.250345175984
+        ],
+        "scl": [
+          4990.594084920682,
+          2042.625172587992
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {},
+      "inside_native_frame": true,
+      "source_block": [
+        9,
+        3
+      ]
+    },
+    {
+      "index": 16,
+      "original_key": {
+        "owner": 48444,
+        "y": 119066,
+        "x": 212877
+      },
+      "longitude": 112.31822585689986,
+      "latitude": 16.277290137894166,
+      "input_scope_array_index": 10365,
+      "original_source_array_index": 26010,
+      "original_interval_index": 4267,
+      "source_target": "gb:VNM:ADM2:81297802B51350923112403",
+      "original_packet_index": 12365,
+      "original_offshore_item": "S2A_49QFU_20200219_0_L2A",
+      "source_pixels": {
+        "red": [
+          9995,
+          4085
+        ],
+        "green": [
+          9995,
+          4085
+        ],
+        "blue": [
+          9995,
+          4085
+        ],
+        "nir": [
+          9995,
+          4085
+        ],
+        "scl": [
+          4997,
+          2042
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          9995.772239464102,
+          4085.3444133675657
+        ],
+        "green": [
+          9995.772239464102,
+          4085.3444133675657
+        ],
+        "blue": [
+          9995.772239464102,
+          4085.3444133675657
+        ],
+        "nir": [
+          9995.772239464102,
+          4085.3444133675657
+        ],
+        "scl": [
+          4997.886119732051,
+          2042.6722066837829
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {},
+      "inside_native_frame": true,
+      "source_block": [
+        9,
+        3
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "block": [
+        8,
+        5
+      ],
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "block": [
+        9,
+        1
+      ],
+      "indices": [
+        6,
+        7
+      ]
+    },
+    {
+      "block": [
+        9,
+        3
+      ],
+      "indices": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ]
+    },
+    {
+      "block": [
+        9,
+        4
+      ],
+      "indices": [
+        10
+      ]
+    },
+    {
+      "block": [
+        9,
+        5
+      ],
+      "indices": [
+        8,
+        9
+      ]
+    }
+  ],
+  "outside_native_frame_indices": [],
+  "method": "Existing GDAL projection of unchanged centres and inverse actual source affine; native block grouping only"
+}

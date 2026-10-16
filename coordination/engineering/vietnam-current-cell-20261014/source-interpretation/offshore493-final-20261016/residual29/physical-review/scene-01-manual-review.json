@@ -1,0 +1,141 @@
+{
+  "scene_number": 1,
+  "item": "S2A_49QFU_20200330_0_L2A",
+  "date": "2020-03-30T03:13:14.682000Z",
+  "source_quality": {
+    "requested_original_keys": 17,
+    "actually_sampled_native_centres": 17,
+    "outside_native_frame_indices": [],
+    "scl_centre_counts": {
+      "6": 17
+    },
+    "valid_centre_masks_by_band": {
+      "red": {
+        "255": 17
+      },
+      "green": {
+        "255": 17
+      },
+      "blue": {
+        "255": 17
+      },
+      "nir": {
+        "255": 17
+      },
+      "scl": {
+        "255": 17
+      }
+    },
+    "physical_interpretation": null
+  },
+  "blocks": [
+    {
+      "block": [
+        8,
+        5
+      ],
+      "water_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "reef_body_indices": [],
+      "unresolved_indices": [],
+      "finding": "Six exactcentres now locate visibly clear wave-textured water; the March30cumulus and shadows lie around the group, not on these centres.",
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene01-block-08-05-native-crop.png",
+      "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene01-block-08-05-crop-locator.json",
+      "block_marker_pin": {
+        "path": "products/S2A_49QFU_20200330_0_L2A/block-08-05/block-observations.json",
+        "bytes": 41919,
+        "sha256": "dab16018139512304882f09e812de4edbcc7c90e97eb59aa549283283a3e7fe3"
+      }
+    },
+    {
+      "block": [
+        9,
+        1
+      ],
+      "water_indices": [],
+      "reef_body_indices": [
+        6,
+        7
+      ],
+      "unresolved_indices": [],
+      "finding": "Both centres positively locate the coherent cyan reef/lagoon BODY in RGB and NIR-blue context; fine reefwetness/emergence stays undetermined.",
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene01-block-09-01-native-crop.png",
+      "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene01-block-09-01-crop-locator.json",
+      "block_marker_pin": {
+        "path": "products/S2A_49QFU_20200330_0_L2A/block-09-01/block-observations.json",
+        "bytes": 18724,
+        "sha256": "0d9fb177e944a06b39f98efb679b6df0163fd120f7d20754afb554c7ff251fc9"
+      }
+    },
+    {
+      "block": [
+        9,
+        3
+      ],
+      "water_indices": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "reef_body_indices": [],
+      "unresolved_indices": [],
+      "finding": "All six centres are visibly exposed water to the west of the cloud/shadow boundary, with continuous watertexture at their unchanged positions; previousFeb29occlusion remains history.",
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene01-block-09-03-native-crop.png",
+      "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene01-block-09-03-crop-locator.json",
+      "block_marker_pin": {
+        "path": "products/S2A_49QFU_20200330_0_L2A/block-09-03/block-observations.json",
+        "bytes": 41962,
+        "sha256": "abb3b92705f457a3af7e6a90dce10b8fb19f10d4a7d6a7289e0a3b9e245b9aed"
+      }
+    },
+    {
+      "block": [
+        9,
+        4
+      ],
+      "water_indices": [],
+      "reef_body_indices": [],
+      "unresolved_indices": [
+        10
+      ],
+      "finding": "The one requested centre still touches the visible small cloud-shadow/fringe cluster; SCL6 andmask255 do not settle its exposed surface.",
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene01-block-09-04-native-crop.png",
+      "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene01-block-09-04-crop-locator.json",
+      "block_marker_pin": {
+        "path": "products/S2A_49QFU_20200330_0_L2A/block-09-04/block-observations.json",
+        "bytes": 12858,
+        "sha256": "36ed94982e450738690c026e82957505152b6291d8ec5b6933fe4670880ccec3"
+      }
+    },
+    {
+      "block": [
+        9,
+        5
+      ],
+      "water_indices": [
+        8,
+        9
+      ],
+      "reef_body_indices": [],
+      "unresolved_indices": [],
+      "finding": "Both exactcentres lie in clear glinted wave-textured water between cloudlets; no opaque cloud or shadow covers the centres.",
+      "native_crop_viewed": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene01-block-09-05-native-crop.png",
+      "crop_locator": "bulk-completion/offshore493-alternate2020-source-001/residual29-alternate2020-002/physical-review/scene01-block-09-05-crop-locator.json",
+      "block_marker_pin": {
+        "path": "products/S2A_49QFU_20200330_0_L2A/block-09-05/block-observations.json",
+        "bytes": 18706,
+        "sha256": "8549c17b777e172d4e66830abf6f2833f7e6694e6bd7836873b3d50c3ceb378e"
+      }
+    }
+  ],
+  "method": "Finite human visual nativeRGB/NIR bodylocality review, no spectral/SCL/classifier threshold or strictdrynessgate; genuinecloudretained."
+}
