@@ -1461,6 +1461,7 @@ export async function nativeAuthority(config, reader, root, diagnostic = false) 
       component_ids: result.component_ids, rule_sha256: result.rule_sha256, ledger_rows: result.ledger_rows,
       limitations: result.limitations,
       ...(Object.hasOwn(result,'physical_context_hits') ? {physical_context_hits: result.physical_context_hits} : {}),
+      ...(Object.hasOwn(result,'split_source_competitors') ? {split_source_competitors: result.split_source_competitors} : {}),
       ...(Object.hasOwn(result,'territorial_contacts') ? {territorial_contacts: result.territorial_contacts} : {})})};
   }
   return {products, observation: {elapsed_seconds: (performance.now() - started) / 1000,

@@ -4,6 +4,7 @@ import {createHash} from 'node:crypto';
 import {deriveSourceTargetNativeDelta,nativeRowLatitudes,nativePolygonIntervals,polygonParts} from '../src/native-grid.js';
 import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
 import {constructOriginalAuthority} from '../scripts/delivery-handoff-advance.mjs';
+import {diagnoseSourceTargetNativeAuthority} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const rectangle=(left,right,bottom=-40,top=40)=>({type:'Polygon',coordinates:[[[left,bottom],[right,bottom],[right,top],[left,top],[left,bottom]]]});
 const feature=(id,pixelIndex,geometry,target_id)=>({id,pixelIndex,geometry,...(target_id?{target_id}:{})});
@@ -87,7 +88,10 @@ function constructorFixture(change=()=>{}){
   }
   const reader=()=>new FixtureReader('.',version);
   const locators={source_evidence:{commit:version,path:evidence.path},native_patch:{commit:version,path:patch.path}};
-  return {run:()=>constructOriginalAuthority(reader(),locators),files,byBlob,membership,reader,state};
+  const binding={version:1,kind:'source-target-native-custody-v1',source_evidence:evidence,native_patch:patch};
+  const preimage={...binding,kind:'source-target-native-rule-v1'};
+  return {run:()=>constructOriginalAuthority(reader(),locators),
+    diagnose:()=>diagnoseSourceTargetNativeAuthority(reader(),preimage,binding),files,byBlob,membership,reader,state};
 }
 test('actual constructor joins original member evidence into one accepted owner ledger',()=>{
   const fixture=constructorFixture(),result=fixture.run();
@@ -316,4 +320,78 @@ test('deleting one of two residual witnesses cannot omit the other operation',()
     result.issues.pop();
   });
   assert.throws(()=>fixture.run(),/Missing or mismatched complete physical residual witness/);
+});
+
+
+function splitCompetitorFixture(change=()=>{}) {
+  return constructorFixture(state=>{
+    directTarget(state);
+    state.originals[0].geometry=rectangle(.015,.035,-.02,.02);
+    state.originals[1].geometry=rectangle(-.06,-.05,-.02,.02);
+    state.roster.push({id:b,index:4});
+    state.roster[0].province_id='province:left';
+    state.roster[2].province_id='province:right';
+    const basis='Published geographic subdivision within a source rural district';
+    const source='https://example.org/retained-subdivision';
+    state.lineage.changes=['city','other-city'].map(id=>({id,replaces:[a],basis,source}));
+    state.accepted.features=['city','other-city'].map((id,i)=>({type:'Feature',id,
+      geometry:rectangle(.015+i*.01,.025+i*.01,-.02,.02),properties:{id,
+        parent_id:i?'province:right':'province:left',metadata:{source_member_ids:[a],
+          original_id:'A',location_basis:basis,source_url:source}}}));
+    change(state);
+  });
+}
+test('complete split original stays a veto-only competitor across distinct accepted parents',()=>{
+  const fixture=splitCompetitorFixture(),proof=fixture.run(),diagnostic=fixture.diagnose();
+  assert.equal(proof.ledger_rows.length,1);
+  assert.equal(proof.ledger_rows[0].target_id,c);
+  assert.equal(proof.ledger_rows[0].native_cells,1);
+  assert.deepEqual(proof.split_source_competitors,[{
+    source_id:a,geometry_sha256:digest(Buffer.from(JSON.stringify({coordinates:fixture.state.originals[0].geometry.coordinates,
+      type:fixture.state.originals[0].geometry.type})+'\n')),
+    descendants:[{target_id:'city',pixelIndex:1,parent_id:'province:left'},
+      {target_id:'other-city',pixelIndex:3,parent_id:'province:right'}]}]);
+  assert.equal(diagnostic.supported_cells,1);
+  assert.deepEqual(diagnostic.split_source_competitors,proof.split_source_competitors);
+  assert.deepEqual(fixture.state.physical.results.map(row=>row.target),[c]);
+});
+for(const [name,change,pattern]of [
+  ['missing membership',s=>s.membership=false,/accepted source membership/],
+  ['omitted semantic descendant',s=>s.lineage.changes.pop(),/split-source descendant inventory/],
+  ['omitted canonical descendant',s=>s.accepted.features.pop(),/split-source descendant/],
+  ['duplicate semantic descendant',s=>s.lineage.changes.push(s.lineage.changes[0]),/split-source descendant/],
+  ['foreign semantic descendant',s=>s.lineage.changes.push({id:'missing',replaces:[a]}),/split-source descendant/],
+  ['ambiguous child source membership',s=>s.accepted.features[0].properties.metadata.source_member_ids.push(b),/split-source descendant/],
+  ['wrong original source ID',s=>s.accepted.features[0].properties.metadata.original_id='B',/split-source descendant/],
+  ['wrong canonical identity',s=>s.accepted.features[0].properties.id='elsewhere',/split-source descendant/],
+  ['wrong canonical parent',s=>s.accepted.features[0].properties.parent_id='other-province',/parent or source identity/],
+  ['missing native parent',s=>delete s.roster[0].province_id,/parent or source identity/],
+  ['wrong subdivision basis',s=>s.accepted.features[0].properties.metadata.location_basis='other basis',/parent or source identity/],
+  ['wrong subdivision source',s=>s.accepted.features[0].properties.metadata.source_url='https://other.example/',/parent or source identity/],
+  ['split source requested positively',s=>{
+    const geometry=s.originals[0].geometry;
+    s.targets=[{id:a,target_id:'city',pixelIndex:1,source_family:family,base_geometry:geometry,
+      coverage_classes:['mapped_land_support']}];
+    s.measured=[{target:a,consumed:{geometry},selected:{id:'city',geometry}}];
+    s.physical.results=[{target:a,issues:[],support:{mapped_land_support:geometry}}];
+    s.proposed.rows[0].runs[0][2]=1;
+  },/ambiguous accepted source membership/],
+])test('split source rejects '+name+' after coherent body rehashing',()=>{
+  const fixture=splitCompetitorFixture(change);
+  assert.throws(()=>fixture.run(),pattern);
+  assert.throws(()=>fixture.diagnose(),pattern);
+});
+for(const [name,geometry,reason]of [
+  ['interior',()=>rectangle(.04,.06,-.02,.02),'territorial_exclusion_cells'],
+  ['boundary',()=>rectangle(.04,.06,latitudes[size/2],.02),'boundary_cells'],
+])test('whole split original '+name+' contact vetoes outside all child geometries',()=>{
+  const fixture=splitCompetitorFixture(state=>{
+    const x=state.proposed.rows[0].runs[0][0];
+    state.originals[0].geometry=geometry((x+.5)/size*360-180);
+  });
+  assert.throws(()=>fixture.run(),/lack unique source-target coverage/);
+  const result=fixture.diagnose();
+  assert.equal(result.supported_cells,0);
+  assert.equal(result.held_cells,1);
+  assert.equal(result.decision_rows[0].runs[0][3],reason);
 });
