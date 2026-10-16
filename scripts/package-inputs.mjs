@@ -66,6 +66,20 @@ export function fullCheckoutPatterns(definition) {
     .map(prefix => '!/' + prefix), ...scopedCheckoutPatterns('research/geography/', declared)];
 }
 
+// One fixture roster serves full, selected-data and focused regression. Keep
+// ordinary code discovery separate from the literal verification operands.
+export function focusedCheckoutPatterns(definition) {
+  validatePackageInputs(definition);
+  return [
+    'scripts', 'src', 'test', '.github', 'drizzle', 'hosted', '/*.mjs',
+    'coordination/engineering/**/*.mjs', 'coordination/engineering/**/*.js',
+    'coordination/engineering/**/*.cjs', 'coordination/engineering/**/*.py',
+    'coordination/engineering/**/package.json',
+    'package.json', 'package-lock.json', 'requirements.txt',
+    ...definition.verification_paths.map(name => '/' + name)
+  ];
+}
+
 function scopedCheckoutPatterns(prefix, paths) {
   if (paths.some(name => name.endsWith('/') && prefix.startsWith(name))) {
     return ['/' + prefix + '**'];
