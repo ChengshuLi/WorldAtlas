@@ -199,7 +199,7 @@
         "bytes": 4404456,
         "sha256": "bacfc99714f832aa4b5719b9fb4ae9837080b948f10df9e9be2b150b281e20d4",
         "hash_kind": "file-bytes",
-        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "commit": "b6382262f8d03d9e7d33b26d8adb40a55197262b",
         "uncompressed_bytes": 22336586,
         "uncompressed_sha256": "607372a1af11bebf58c24aa15bdfae1999fafc532bb65ab7d822c0c20b57a435",
         "role": "original-source"
@@ -209,7 +209,7 @@
         "bytes": 1754890,
         "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8",
         "hash_kind": "file-bytes",
-        "commit": "f7c358326d776398bc1cffe84df81eac7033091c"
+        "commit": "b6382262f8d03d9e7d33b26d8adb40a55197262b"
       },
       {
         "path": "data/ownership-selection.json",
@@ -267,11 +267,11 @@
     },
     "pin_files": {
       "queue": {
-        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "commit": "b6382262f8d03d9e7d33b26d8adb40a55197262b",
         "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json"
       },
       "lineage": {
-        "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "commit": "b6382262f8d03d9e7d33b26d8adb40a55197262b",
         "path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz"
       }
     }
@@ -1936,6 +1936,12 @@
       "bytes": 1569,
       "sha256": "771208b15939fc6ea70ee00b4b61c5574e7b61152dd5b88bbf872ab153b67481",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261016/combined1233/final-proof/actual-accepted-original-scope-copy-custody.json",
+      "bytes": 2686,
+      "sha256": "e7148d4d9eb31b5ad4029f03d9589c225190cd28d4b609c448e3f6a8a7f508bd",
+      "hash_kind": "file-bytes"
     }
   ],
   "change_receipts": [
@@ -2932,6 +2938,10 @@
     {
       "path": "coordination/engineering/vietnam-current-cell-20261016/combined1233/evidence-quality.json",
       "status": "added"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261016/combined1233/final-proof/actual-accepted-original-scope-copy-custody.json",
+      "status": "added"
     }
   ],
   "methods": [
@@ -3233,5 +3243,13 @@
     "CatHai671 is exact original dated supporting input only, with zero authority/native/parent-change credit.",
     "No fresh dated imagery, whole-cell dry-land, legal shore, sovereignty or historical approval claim.",
     "The full original source-evidence bodies are retained even where the current evidence checker rejects their size. No split, source-body deletion or checker override is used."
-  ]
+  ],
+  "original_scope_provenance": {
+    "original_recorded_commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+    "actual_new_PR_baseline_copy": "b6382262f8d03d9e7d33b26d8adb40a55197262b",
+    "custody_record": "coordination/engineering/vietnam-current-cell-20261016/combined1233/final-proof/actual-accepted-original-scope-copy-custody.json",
+    "source_hash_pins_unchanged": true,
+    "original_scientific_source_and_execution_pins_unchanged": true,
+    "limit": "Exit1 in this shallow local graph does not establish full historical non-ancestry. No deep fetch was performed. The new manifest uses the independently established actual b638 ancestor and identical same-path whole-file bodies; original f7 provenance remains historical."
+  }
 }
