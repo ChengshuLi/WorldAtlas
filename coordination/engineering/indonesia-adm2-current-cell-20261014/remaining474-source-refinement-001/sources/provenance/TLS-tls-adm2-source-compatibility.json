@@ -1,0 +1,79 @@
+{
+  "kind": "actual-TLS-ADM2-correct-original-level-source-compatibility-not-spatial-result",
+  "source": {
+    "path": "idn-remaining474-source-research-001/worker5-timor14/worker6-followup-001/geoBoundaries-TLS-ADM2.geojson",
+    "bytes": 5303288,
+    "sha256": "a437e47041dcc708e55a76ede2b5db3beec31da3521fbd2a847bf372e1662911"
+  },
+  "metadata": {
+    "boundaryID": "TLS-ADM2-22284137",
+    "boundaryISO": "TLS",
+    "boundaryYear": "2020",
+    "boundaryType": "ADM2",
+    "boundarySource": "WHO, OCHA ROAP",
+    "boundaryCanonical": "Administrative Posts",
+    "boundaryLicense": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licenseDetail": "",
+    "licenseSource": "https//data.humdata.org/dataset/timor-leste-administrative-boundaries-levels-0-3",
+    "boundarySourceURL": "https//data.humdata.org/dataset/timor-leste-administrative-boundaries-levels-0-3",
+    "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+    "buildDate": "Dec 12, 2023",
+    "admUnitCount": "65",
+    "meanVertices": "1824.0",
+    "minVertices": "360",
+    "maxVertices": "6662",
+    "meanPerimeterLengthKM": "83.74509932087298",
+    "maxPerimeterLengthKM": "162.69123997412566",
+    "minPerimeterLengthKM": "17.844244240959387",
+    "meanAreaSqKM": "229.11277627227736",
+    "minAreaSqKM": "5.131836622219308",
+    "maxAreaSqKM": "621.32307775753"
+  },
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "whole_feature_count": 65,
+  "all_original_feature_properties_identical": true,
+  "same_release_simplified_lfs_oid_matches_actual_original_family": true,
+  "five_conflict_centres_original_three_ADM2_features": [
+    {
+      "shapeID": "22284137B11881161065747",
+      "properties": {
+        "shapeName": "Fatumean",
+        "shapeISO": "",
+        "shapeID": "22284137B11881161065747",
+        "shapeGroup": "TLS",
+        "shapeType": "ADM2"
+      },
+      "geometry_changed": true
+    },
+    {
+      "shapeID": "22284137B39285760424005",
+      "properties": {
+        "shapeName": "Tilomar",
+        "shapeISO": "",
+        "shapeID": "22284137B39285760424005",
+        "shapeGroup": "TLS",
+        "shapeType": "ADM2"
+      },
+      "geometry_changed": true
+    },
+    {
+      "shapeID": "22284137B63057021325797",
+      "properties": {
+        "shapeName": "Balibo",
+        "shapeISO": "",
+        "shapeID": "22284137B63057021325797",
+        "shapeGroup": "TLS",
+        "shapeType": "ADM2"
+      },
+      "geometry_changed": true
+    }
+  ],
+  "source_or_native_predicate_executed": false,
+  "hold_change": false,
+  "interpretation": "Correct original ADM2 level WHO/OCHA2020 source, distinct from OSM2017 ADM1. Same release/schema/feature identities permit exact source-refinement comparison; no new ownership or automatic hold clearance."
+}
