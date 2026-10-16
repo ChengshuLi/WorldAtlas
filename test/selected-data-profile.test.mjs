@@ -1446,6 +1446,18 @@ test('selected-data fixed role walk retains exact territorial provenance with ei
     ({data})=>data.provenance[0].pin.git_blob_oid='0'.repeat(40)
   ])assert.equal(await sourceTargetRoleFixture({territorial:true,mutateInterpretation}).run(),null);
 });
+test('selected-data fixed role walk retains every ordered territorial source part',async()=>{
+  const change=({f,data})=>{const item=data.provenance[2];f.authored.entries.delete(item.pin.path);delete item.pin;
+    item.parts=[f.leaf('foreign-source-part-0.bin.gz',true),f.leaf('foreign-source-part-1.bin.gz',true)];};
+  const f=sourceTargetRoleFixture({territorial:true,mutateInterpretation:change}),diagnostics={};
+  assert.equal((await f.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
+  for(const mutate of [
+    item=>item.parts=[],item=>item.pin=item.parts[0],item=>item.parts[1].git_blob_oid='0'.repeat(40),
+    item=>item.role='scope'
+  ])assert.equal(await sourceTargetRoleFixture({territorial:true,mutateInterpretation:args=>{
+    change(args);mutate(args.data.provenance[2]);}}).run(),null);
+});
+
 test('source-target native roles reject a rehashed foreign rule join and incomplete family roles',async()=>{
   assert.equal(await sourceTargetRoleFixture({wrongRule:true}).run(),null);
   assert.equal(await sourceTargetRoleFixture({emptyFamily:true}).run(),null);

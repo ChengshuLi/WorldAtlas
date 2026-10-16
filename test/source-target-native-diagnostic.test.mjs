@@ -6,6 +6,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
+import {gzipSync} from 'node:zlib';
 import {deriveSourceTargetNativeDelta,nativeRowLatitudes,nativePolygonIntervals,polygonParts,witnessCellEffects,validateWitnessGeometry} from '../src/native-grid.js';
 import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
 import {constructOriginalAuthority} from '../scripts/delivery-handoff-advance.mjs';
@@ -70,6 +71,34 @@ const blob=raw=>createHash('sha1').update(`blob ${raw.length}\0`).update(raw).di
 const collection=features=>({type:'FeatureCollection',features});
 const rawFeature=(id,geometry)=>({type:'Feature',properties:{shapeID:id},geometry});
 
+test('multipart territorial sources join the complete ordered catalogue product before exact geometry use',()=>{
+  const chosen=state=>{
+    directTarget(state);
+    state.targets[0].territorial_exclusions=[structuredClone(state.originals[2].geometry)];
+  };
+  const accepted=constructorFixture(chosen,{multipart:true}),reader=accepted.reader();
+  const result=qualifySourceTargetNativeAuthority(reader,accepted.preimage,accepted.binding);
+  assert.equal(result.source_rows[0].native_cells,1);
+  assert.equal(result.territorial_contacts.length,1);
+  for(const name of ['negative-source-part-0.bin.gz','negative-source-part-1.bin.gz'])
+    assert.equal(reader.inventory.get(version+':'+name).whole_body_consumed,true,name);
+  for(const change of [
+    data=>data.provenance[2].parts.reverse(),
+    data=>data.provenance[2].parts.pop(),
+    data=>data.provenance[2].parts.push(structuredClone(data.provenance[2].parts[0])),
+    data=>data.provenance[2].parts[0].decoded_sha256='f'.repeat(64),
+    data=>data.provenance[2].pin=data.provenance[2].parts[0],
+    data=>data.provenance[2].role='adoption',
+    data=>data.records[0].original_source.pointer='/features/0/properties',
+    data=>data.records[0].x++
+  ])assert.throws(()=>constructorFixture(chosen,{multipart:true,change}).run(),
+    /territorial|Territorial|Source family|complete source|Duplicate|scope differs|provenance/);
+  for(const catalogue of [product=>product.original_sha256='f'.repeat(64),
+    product=>product.original_bytes++,product=>product.feature_count++])
+    assert.throws(()=>constructorFixture(chosen,{multipart:true,catalogue}).run(),
+      /Whole original consumed source product differs|Incomplete original source feature roster/);
+});
+
 test('historical programme reads use the original Git version and preserve the live helper',t=>{
   const root=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'atlas-original-programme-')));
   t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
@@ -113,7 +142,7 @@ function constructorFixture(change=()=>{},applicability){
   };
   const source=put('original-source.json',collection(state.originals)),roster=put('owners.json',state.roster);
   const physical=put('physical.json',state.physical),measured=put('measured.json',state.measured);
-  const catalogue=put('coordination/engineering/original-geography-source-corpus-20261006/catalogue.json',{
+  let catalogue=put('coordination/engineering/original-geography-source-corpus-20261006/catalogue.json',{
     products:[{key:family,parts:[{path:source.path,bytes:source.bytes,sha256:source.sha256}],
       feature_count:state.originals.length,original_bytes:source.bytes,original_sha256:source.sha256}]});
   const nativeLatitudes=put('latitudes.f64le',latitudeBytes);
@@ -133,6 +162,17 @@ function constructorFixture(change=()=>{},applicability){
         negative_ordinal:0,geometry_sha256:valueSha(geometry),
         original_source:{id:'source',pointer:'/features/0/geometry'},adoption:{id:'adoption',pointer:'/decision'},
         scope:{id:'scope',pointer:'/records/0',owner_pointer:'/owner'}}]};
+    if(applicability.multipart){
+      const raw=files.get(negative.path).raw,cut=Math.floor(raw.length/2),pieces=[raw.subarray(0,cut),raw.subarray(cut)];
+      const parts=pieces.map((piece,i)=>Object.assign(put('negative-source-part-'+i+'.bin.gz',gzipSync(piece)),
+        {decoded_bytes:piece.length,decoded_sha256:digest(piece)}));
+      const body=JSON.parse(files.get(catalogue.path).raw);
+      body.products.push({key:'negative-source',parts:parts.map(p=>({path:p.path,bytes:p.bytes,sha256:p.sha256,
+        uncompressed_bytes:p.decoded_bytes,uncompressed_sha256:p.decoded_sha256})),
+        original_bytes:raw.length,original_sha256:digest(raw),feature_count:1});
+      applicability.catalogue?.(body.products.at(-1));
+      catalogue=put(catalogue.path,body);data.provenance[2]={id:'source',role:'original-source',parts};
+    }
     applicability.change?.(data,state);
     const name='adopted-territorial-applicability.json';
     territorialApplicability=put(name,data);

@@ -453,7 +453,7 @@ test('finalization refuses a new identity at an accepted package path', () => {
 // Actual Git/plain-Node fixture for metadata assembly. The source interpretation
 // and native construction controls live in source-member-native-delivery.test;
 // this fixture exercises the consumed-role boundary without replaying science.
-function modernFinalizationFixture(t, {mixed = false, membership = true, dated = false, territorial = false} = {}) {
+function modernFinalizationFixture(t, {mixed = false, membership = true, dated = false, territorial = false, territorialParts = false} = {}) {
   const root = directory(t), owned = 'coordination/engineering/modern-finalize/';
   const git = (...args) => execFileSync('git', args, {cwd: root, stdio: ['pipe', 'pipe', 'pipe']}).toString().trim();
   git('init'); git('config', 'user.name', 'Finalizer fixture'); git('config', 'user.email', 'finalizer@example.invalid');
@@ -515,6 +515,12 @@ function modernFinalizationFixture(t, {mixed = false, membership = true, dated =
     });commitAll();
     const body = {version:1,kind:'adopted-native-territorial-applicability-v1',
       provenance:sources.map(({id,role,name})=>({id,role,pin:pin(name)})),records:[]};
+    if(territorialParts){
+      const raw=jsonBytes({type:'FeatureCollection',features:[]}),cut=Math.floor(raw.length/2);
+      const names=[inherited+'negative-part-0.bin.gz',inherited+'negative-part-1.bin.gz'];
+      save(names[0],gzipSync(raw.subarray(0,cut)));save(names[1],gzipSync(raw.subarray(cut)));commitAll();
+      body.provenance[2]={id:'original-source',role:'original-source',parts:names.map(name=>pin(name))};
+    }
     const name=inherited+'territorial-applicability.json';save(name,body);commitAll();
     territorialSupport={body,path:name,pin:pin(name)};evidenceBody.territorial_applicability=territorialSupport.pin;
   }
@@ -644,6 +650,22 @@ test('real v2 package command closes dated support and fixed provenance once wit
   assert.deepEqual(fs.readdirSync(path.join(f.root, destination)).sort(),
     ['package-roles.json', 'preparation.json', 'selected-delivery-expectations.json']);
   assert.ok(!projection.paths.some(pin => pin.path === f.incidental));
+});
+
+test('real package command retains every complete territorial source part without parsing a JSON chunk', t => {
+  const f=modernFinalizationFixture(t,{territorial:true,territorialParts:true}),destination='.cache/delivery-handoff/multipart';
+  const run=f.run('package',destination);assert.equal(run.status,0,run.stderr);
+  const projection=JSON.parse(fs.readFileSync(path.join(f.root,destination,'package-roles.json')));
+  for(const pin of f.territorialSupport.body.provenance[2].parts){
+    const paths=projection.paths.filter(p=>p.path===pin.path);assert.equal(paths.length,1);
+    assert.equal(paths[0].sha256,pin.sha256);assert.ok(paths[0].roles.includes('source-target territorial original-source'));
+  }
+  const evidence=structuredClone(f.evidenceBody),support=structuredClone(f.territorialSupport.body);
+  support.provenance[2].parts[1].sha256='0'.repeat(64);
+  f.save(f.territorialSupport.path,support);f.commitAll();evidence.territorial_applicability=f.pin(f.territorialSupport.path);
+  const output='.cache/delivery-handoff/refused-multipart';
+  const failed=f.run('package',output,[],f.withEvidence(evidence));assert.notEqual(failed.status,0);
+  assert.match(failed.stderr,/hash differs/);assert.equal(fs.existsSync(path.join(f.root,output)),false);
 });
 
 test('real package command retains territorial adoption, exact scope and original sources beside dated land roles', t => {

@@ -872,6 +872,20 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   coverageRowsByOwner.set(target.pixelIndex,rows);
  }
  // Optional adopted source applicability retains every original negative.
+ const readCompleteSource=(parts,record)=>{
+  demand(record&&Array.isArray(parts)&&parts.length===record.parts.length,
+   'Missing complete original source family');
+  const pieces=parts.map((pin,i)=>{
+   const expected=record.parts[i];demand(pin.path===expected.path&&pin.sha256===expected.sha256
+    &&pin.bytes===expected.bytes&&pin.decoded_bytes===expected.uncompressed_bytes
+    &&pin.decoded_sha256===expected.uncompressed_sha256,'Source family part differs from retained catalogue');return read(pin);
+  });
+  const raw=Buffer.concat(pieces);demand(raw.length===record.original_bytes&&sha(raw)===record.original_sha256,
+   'Whole original consumed source product differs');
+  const product=JSON.parse(raw);demand(product.features?.length===record.feature_count,'Incomplete original source feature roster');
+  return product;
+ };
+
  // Source semantics enter through the same executing-tree pin as dated land;
  // the native operator receives only exact member/operand/centre identities.
  const territorialApplicability=[],territorialContextHits=[],territorialOperands=new Map();
@@ -883,10 +897,21 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
    &&Array.isArray(data.records)&&data.records.length>0,'Incomplete adopted territorial applicability');
   const provenance=new Map(),loaded=new Map(),used=new Set(),seen=new Set();
   for(const item of data.provenance){
-   demand(keys(item,'id,role,pin')&&typeof item.id==='string'&&item.id&&!provenance.has(item.id)
+   const multipart=item.role==='original-source'&&keys(item,'id,role,parts');
+   demand((multipart||keys(item,'id,role,pin'))&&typeof item.id==='string'&&item.id&&!provenance.has(item.id)
     &&['adoption','scope','original-source'].includes(item.role),'Unknown or duplicate territorial provenance');
-   pinCheck(item.pin);const identity=valueSha(item.pin);
-   if(!loaded.has(identity))loaded.set(identity,JSON.parse(read(item.pin)));
+   const pins=multipart?item.parts:[item.pin];
+   demand(Array.isArray(pins)&&pins.length>0&&new Set(pins.map(valueSha)).size===pins.length,
+    'Duplicate or missing territorial source parts');for(const pin of pins)pinCheck(pin);
+   const identity=valueSha(multipart?{parts:pins}:item.pin);
+   if(!loaded.has(identity)){
+    if(multipart){
+     const matches=catalogue.products.filter(product=>product.parts.length===pins.length
+      &&product.parts.every((part,i)=>part.path===pins[i].path&&part.sha256===pins[i].sha256));
+     demand(matches.length===1,'Missing unique complete territorial source family');
+     loaded.set(identity,readCompleteSource(pins,matches[0]));
+    }else loaded.set(identity,JSON.parse(read(item.pin)));
+   }
    provenance.set(item.id,{...item,body:loaded.get(identity)});
   }
   const reference=(ref,role,fields='id,pointer')=>{
@@ -907,7 +932,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
     &&negative&&valueSha(negative)===record.geometry_sha256,'Territorial target or original negative differs');
    const original=reference(record.original_source,'original-source');
    demand(valueSha(original.value)===record.geometry_sha256,'Territorial complete source geometry differs');
-   const operand_sha256=valueSha({pin:original.item.pin,pointer:record.original_source.pointer});
+   const operand_sha256=valueSha({...('parts'in original.item?{parts:original.item.parts}:{pin:original.item.pin}),pointer:record.original_source.pointer});
    const operandKey=JSON.stringify([record.source_id,record.negative_ordinal]);
    demand(!territorialOperands.has(operandKey)||territorialOperands.get(operandKey)===operand_sha256,
     'Original territorial operand has conflicting provenance');territorialOperands.set(operandKey,operand_sha256);
@@ -937,14 +962,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   demand(typeof family.source_id==='string'&&!families.has(family.source_id),'Duplicate source family');families.add(family.source_id);
   const record=catalogue.products.find(product=>product.key===family.source_id);
   demand(record&&family.parts.length===record.parts.length,'Missing complete original source family');
-  const pieces=family.parts.map((pin,i)=>{
-   const expected=record.parts[i];demand(pin.path===expected.path&&pin.sha256===expected.sha256
-    &&pin.bytes===expected.bytes&&pin.decoded_bytes===expected.uncompressed_bytes
-    &&pin.decoded_sha256===expected.uncompressed_sha256,'Source family part differs from retained catalogue');return read(pin);
-  });
-  const raw=Buffer.concat(pieces);demand(raw.length===record.original_bytes&&sha(raw)===record.original_sha256,
-   'Whole original consumed source product differs');
-  const product=JSON.parse(raw);demand(product.features?.length===record.feature_count,'Incomplete original source feature roster');
+  const product=readCompleteSource(family.parts,record);
   const originals=new Map();
   for(const feature of product.features){
    const sourceId=feature.properties?.shapeID;

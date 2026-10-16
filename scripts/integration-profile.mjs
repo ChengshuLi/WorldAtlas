@@ -667,7 +667,12 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
           needSelected(body.version===1&&body.kind===typed.kind&&Array.isArray(body.provenance)
             &&body.provenance.length>0,'missing typed source provenance');
           for(const item of body.provenance){
-            needSelected(typed.roles.includes(item?.role),'unknown typed source provenance role');pin(item.pin);
+            needSelected(typed.roles.includes(item?.role),'unknown typed source provenance role');
+            const multipart=typed.kind==='adopted-native-territorial-applicability-v1'
+              &&item.role==='original-source'&&item.parts!==undefined;
+            needSelected(!multipart||keys(item,['id','role','parts'])&&Array.isArray(item.parts)
+              &&item.parts.length>0,'malformed territorial source parts');
+            for(const member of multipart?item.parts:[item.pin])pin(member);
           }
         }
         if(evidence.source_membership!==undefined){

@@ -819,7 +819,12 @@ export function packageProjection(config, reader, acceptedRegistry = null) {
         'Missing ' + typed.label + ' provenance roles');
         for (const provenance of support.provenance) {
           need(typed.roles.includes(provenance?.role), 'Unknown ' + typed.label + ' provenance role');
-          add(provenance.pin, 'source-target ' + typed.role + ' ' + provenance.role);
+          const multipart=typed.role==='territorial'&&provenance.role==='original-source'&&provenance.parts!==undefined;
+          need(!multipart||same(Object.keys(provenance).sort(),['id','parts','role'])
+            &&Array.isArray(provenance.parts)&&provenance.parts.length>0,
+          'Malformed territorial source parts');
+          for(const member of multipart?provenance.parts:[provenance.pin])
+            add(member, 'source-target ' + typed.role + ' ' + provenance.role);
         }
       }
       for (const family of evidence.families) {
