@@ -27,6 +27,61 @@ test('actual PostgreSQL forward DDL preserves every baseline byte and sequence, 
  await assert.rejects(f.owner.query('DELETE FROM worldatlas_schema_migrations'));await assert.rejects(f.owner.query('TRUNCATE worldatlas_schema_migrations'));
  }finally{await f.close();}});
 
+test('original collection scans occur only before and after DDL inside the advisory-locked transaction',async t=>{
+ const f=await fixture(),scans=[];let locked=false,applied=false;
+ const observe=(query,inTransaction)=>{
+  const table=/^SELECT .* FROM (atlas_\w+) ORDER BY .* LIMIT 200$/.exec(query)?.[1];
+  if(table)scans.push({table,inTransaction,locked,applied});
+ };
+ const driver={query:async(query,params)=>{observe(query,false);return f.owner.query(query,params);},
+  runTransaction:callback=>f.owner.runTransaction(tx=>callback({query:async(query,params)=>{
+   observe(query,true);const result=await tx.query(query,params);
+   if(query==='SELECT pg_advisory_xact_lock(807245315,1)')locked=true;
+   if(query.startsWith('INSERT INTO worldatlas_schema_migrations'))applied=true;
+   return result;
+  }}))};
+ try{
+  const result=await applyPostgresForwardMigrations({driver,sourceDirectory:f.directory,migrations:[migration],baselineTriggerHash:f.baseline.trigger_inventory_sha256,root});
+  assert.deepEqual(result.original_collections,f.baseline.collections);assert.equal(result.original_sequence_preserved,true);
+  t.diagnostic(JSON.stringify({collection_queries:scans.length,unlocked:scans.filter(row=>!row.inTransaction||!row.locked).length,
+   locked_before:scans.filter(row=>row.inTransaction&&row.locked&&!row.applied).length,locked_after:scans.filter(row=>row.inTransaction&&row.locked&&row.applied).length}));
+  assert.equal(scans.length,storageExportCollections.length*2);
+  assert(scans.every(row=>row.inTransaction&&row.locked));
+  const before=scans.filter(row=>!row.applied).map(row=>row.table).sort(),after=scans.filter(row=>row.applied).map(row=>row.table).sort();
+  assert.equal(new Set(before).size,storageExportCollections.length);assert.deepEqual(after,before);
+ }finally{await f.close();}
+});
+
+for(const phase of ['before DDL','after DDL'])for(const changed of ['original row','sequence'])
+ test('locked '+phase+' verification refuses changed '+changed+' and rolls back migration',async()=>{
+  const f=await fixture();let injected=false,locked=false;
+  const mutate=async tx=>{
+   if(changed==='sequence')await tx.query(`ALTER SEQUENCE atlas_ingestions_rowid_seq RESTART WITH ${f.baseline.sequence.next_rowid+1}`);
+   else{
+    await tx.query('ALTER TABLE atlas_sources DISABLE TRIGGER USER');
+    await tx.query("UPDATE atlas_sources SET name='changed isolated original' WHERE id='retained-source'");
+    await tx.query('ALTER TABLE atlas_sources ENABLE TRIGGER USER');
+   }
+   injected=true;
+  };
+  const driver={...f.owner,runTransaction:callback=>f.owner.runTransaction(tx=>callback({query:async(query,params)=>{
+   const result=await tx.query(query,params);
+   if(query==='SELECT pg_advisory_xact_lock(807245315,1)')locked=true;
+   if(!injected&&(phase==='before DDL'&&query==='SELECT pg_advisory_xact_lock(807245315,1)'||
+      phase==='after DDL'&&query.startsWith('INSERT INTO worldatlas_schema_migrations'))){assert(locked);await mutate(tx);}
+   return result;
+  }}))};
+  try{
+   await assert.rejects(applyPostgresForwardMigrations({driver,sourceDirectory:f.directory,migrations:[migration],baselineTriggerHash:f.baseline.trigger_inventory_sha256,root}),
+    error=>error.code==='forward-transaction-failed'&&error.commit_status==='rolled-back-or-not-started');
+   assert(injected&&locked,'The actual locked boundary must observe the changed original state');
+   assert.equal((await f.owner.query("SELECT to_regclass('public.worldatlas_schema_migrations') IS NULL absent")).rows[0].absent,true);
+   assert.equal((await f.owner.query("SELECT to_regclass('public.atlas_geographic_existence_records') IS NULL absent")).rows[0].absent,true);
+   const restored=await restorePostgresStorage({directory:f.directory,driver:f.owner,verifyOnly:true,receiptFile:null});
+   assert.deepEqual(restored.collections,f.baseline.collections);assert.deepEqual(restored.sequence,f.baseline.sequence);
+  }finally{await f.close();}
+ });
+
 test('forward failure rolls back DDL, registry and grants without changing original bytes',async()=>{const f=await fixture();try{const driver={...f.owner,runTransaction:callback=>f.owner.runTransaction(tx=>callback({query:async(query,params)=>{if(query.startsWith('GRANT SELECT,INSERT ON TABLE public.atlas_geographic_existence_records'))throw Object.assign(Error('Synthetic private driver detail must not escape'),{code:'40001'});return tx.query(query,params);}}))};await assert.rejects(applyPostgresForwardMigrations({driver,sourceDirectory:f.directory,migrations:[migration],baselineTriggerHash:f.baseline.trigger_inventory_sha256,root}),error=>error.code==='forward-transaction-failed'&&error.sqlstate==='40001'&&!error.message.includes('private driver detail'));assert.equal((await f.owner.query("SELECT to_regclass('public.worldatlas_schema_migrations') IS NULL absent")).rows[0].absent,true);assert.equal((await f.owner.query("SELECT to_regclass('public.atlas_geographic_existence_records') IS NULL absent")).rows[0].absent,true);const after=await restorePostgresStorage({directory:f.directory,driver:f.owner,verifyOnly:true,receiptFile:null});assert.deepEqual(after.collections,f.baseline.collections);
  }finally{await f.close();}});
 
