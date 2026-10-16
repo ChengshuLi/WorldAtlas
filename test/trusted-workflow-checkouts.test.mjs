@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {spawnSync, execFileSync} from 'node:child_process';
 import {checkGitScope} from '../scripts/check-handoff-scope.mjs';
-import {containsPackagePath,loadPackageInputs} from '../scripts/package-inputs.mjs';
+import {containsPackagePath,loadPackageInputs,focusedCheckoutPatterns} from '../scripts/package-inputs.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const workflows = ['issue-claims.yml', 'worker-merge.yml'];
@@ -54,8 +54,9 @@ for (const workflow of workflows) {
     const source = fs.readFileSync(path.join(root, '.github/workflows', workflow), 'utf8');
     const blocks = [...source.matchAll(/^          sparse-checkout: \|\n((?:            .+\n)+)/gm)];
     assert.ok(blocks.length > 0, 'expected explicit sparse checkout declarations');
-    for (const block of blocks) {
-      const directories = block[1].trim().split('\n').map(row => row.trim());
+    const checkouts=blocks.map(block=>block[1].trim().split('\n').map(row=>row.trim()));
+    if(workflow==='worker-merge.yml')checkouts.push(focusedCheckoutPatterns(loadPackageInputs(root)).map(name=>name.replace(/^\//,'')));
+    for (const directories of checkouts) {
       const result = probe(directories);
       assert.equal(result.status, 0, result.stderr);
     }
@@ -210,9 +211,8 @@ test('full-checkout canonical verification executes against real Git and refuses
 
 test('queue focused candidate includes the inputs of its nested actual-checkout probes', () => {
   const source = fs.readFileSync(path.join(root, '.github/workflows/worker-merge.yml'), 'utf8');
-  const candidate = source.match(/- name: Checkout only focused-test inputs for evidence regression[\s\S]*?sparse-checkout: \|\n((?:            .+\n)+)/);
-  assert.ok(candidate, 'actual focused queue checkout must be declared');
-  const directories = candidate[1].trim().split('\n').map(row => row.trim());
+  assert.match(source, /- name: Checkout only focused-test inputs for evidence regression[\s\S]*?sparse-checkout: \$\{\{ needs\.prepare\.outputs\.checkout_patterns \}\}/);
+  const directories = focusedCheckoutPatterns(loadPackageInputs(root)).map(name=>name.replace(/^\//,''));
   const definition=loadPackageInputs(root),declared=[...definition.inputs,...definition.verification_paths];
   for(const name of directories.filter(row=>row.startsWith('research/')))
     assert(containsPackagePath(declared,name)||declared.includes(name+'/'),
@@ -249,8 +249,8 @@ test('focused delivery tests receive their real Node/Python runtime without an a
   const build=integration.steps.find(step=>step.run==='npm run build:cloudflare');assert(build);
   assert.equal(workflowCondition(build.condition,queueContext({profile:'evidence'})),false);
   assert.equal(workflowCondition(build.condition,queueContext({profile:'full'})),true);
-  const match=source.match(/- name: Checkout only focused-test inputs for evidence regression[\s\S]*?sparse-checkout: \|\n((?:            .+\n)+)/);
-  assert(match);const inputs=new Set(match[1].trim().split('\n').map(line=>line.trim()));
+  assert.match(source,/- name: Checkout only focused-test inputs for evidence regression[\s\S]*?sparse-checkout: \$\{\{ needs\.prepare\.outputs\.checkout_patterns \}\}/);
+  const inputs=new Set(focusedCheckoutPatterns(loadPackageInputs(root)).map(name=>name.replace(/^\//,'')));
   for(const name of ['coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs',
     'coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz',
     'coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json',

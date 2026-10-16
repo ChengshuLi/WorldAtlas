@@ -1,0 +1,96 @@
+✔ locators derive descriptors and refuse handwritten hashes (2.294201ms)
+✔ removed advance CLI refuses before config reads or destination creation (113.52149ms)
+✔ removed status CLI refuses before config reads or destination creation (100.638075ms)
+✔ materialization report preflight refuses late collisions and changed postimages (4.043722ms)
+✔ actual missing Git objects and repeated identities acquire once; complete aliases are materialized once (121.236255ms)
+✔ interrupted real import resumes from actual object state without fetching the completed identity again (82.446638ms)
+✔ interruption after a complete file resumes without another fetch or overwriting the completed alias (79.780229ms)
+✔ partial, corrupted and symlinked aliases are preserved and refused before any fetch (115.491759ms)
+✔ wrong whole bytes or decoded gzip identities cannot produce a materialized receipt (127.208805ms)
+✔ identity, destination and aggregate inventory failures occur before object fetches (98.154412ms)
+✔ plain materialize CLI authenticates a saved recipe index and resumes with identical receipt and zero writes (398.981953ms)
+✔ cold acquisition reuses gh login ephemerally; warm and non-fetch reads never request credentials (81.622563ms)
+ACTUAL_SELECTED_LEDGER_WORK {"reads":1,"parses":1,"hashes":1}
+✔ SOURCE preparation preserves handoff order, methods/resources and complete whole handoff pin (5.758031ms)
+✔ accepted whole handoff target/order drift fails even when its new pin is coherent (1.196508ms)
+✔ writer resumes only exact complete bytes and rejects collisions, dangling symlinks and changed bindings (4.085354ms)
+✔ retention joins genuine terminal, request, facts and every published output; no completion from partial files (5.60926ms)
+✔ native preparation requires committed genuine SOURCE products and preserves immutable runtime/resource fields (2.471384ms)
+✔ composition invokes existing conservation logic and rejects duplicate original scope (14.421461ms)
+✔ immutable Git input reader rejects whole-body drift, missing objects and nonordinary pins (81.706604ms)
+✔ rebind commit phases require complete custody and publication-matching result pins (1.178402ms)
+✔ new request issuance authenticates v2 actual HEAD support/code pins (0.699555ms)
+✔ coherent SOURCE inventory changes and native preparation facts omissions are rejected against pinned scope/targets (6.318234ms)
+✔ native retention rejects a publication that omits the required ledger asset (2.397104ms)
+✔ native self-consistent target substitutions fail the independent immutable SOURCE join (5.573706ms)
+✔ selector finalization preserves insertion order and repeat bytes, including unsorted nested geography (0.823144ms)
+✔ final package appends preserve the entire accepted prefix and validate duplicates/overlaps (1.20394ms)
+✔ finalization joins genuine release metadata, stages fresh files, and repeats without changes (7.115809ms)
+✔ finalization rejects coherent foreign sidecar/base/ledger/envelope bindings before publication (17.062338ms)
+✔ finalization retains historical custody but packages only the six current consumer bodies (1.871823ms)
+✔ finalization refuses changed, absent or nonordinary inherited read identities (8.012422ms)
+✔ finalization checks the independent Git package baseline, not the role source commit (120.89382ms)
+✔ finalization admits only an exact committed restoration of absent canonical read roles (14.62859ms)
+✔ finalization refuses a new identity at an accepted package path (1.793416ms)
+✔ real finalizer supports modern roles, flat envelope aliases and exact resume (2507.076911ms)
+✔ real finalizer supports mixed legacy/modern roles, flat envelope aliases and exact resume (3095.569582ms)
+✔ real v2 package command closes dated support and fixed provenance once without original-role copies (1171.256362ms)
+✔ real package command retains every complete territorial source part without parsing a JSON chunk (1390.255597ms)
+✔ real package command retains territorial adoption, exact scope and original sources beside dated land roles (2422.02206ms)
+✔ v2 package refuses altered typed or declared provenance and unknown roles before publication (2102.668869ms)
+✔ real modern package command accepts absent optional membership and refuses omitted or altered consumed dependencies before publication (3557.861038ms)
+✔ real modern package command rejects changed whole dependency pins and incomplete accepted membership (5270.12134ms)
+✔ typed evidence transfers actual AUS counts and explicit request/evaluation vintages (4.259839ms)
+✔ typed evidence supports the concrete elapsed/bytes/emitted delivery measurements (1.157454ms)
+✔ typed evidence refuses wrong units/types, missing values and changed consumed/evaluation bindings (4.668191ms)
+✔ evidence CLI authenticates Git inputs and refuses malformed metrics before publication; immutable resume (985.678221ms)
+✔ delivery CLI retires review-freeze and queue-submission entry points before any mutation (195.72024ms)
+✔ late compose and finalize replace modern assembly and the separate sidecar commit (2970.116396ms)
+✔ late compose and finalize replace modern assembly and the separate sidecar commit with inherited legacy exceptions (3062.778063ms)
+✔ late modern composition refuses scope, source-contract, patch and occupied-cell changes before publication (5372.896877ms)
+✔ modern composition accepts compatible mapped members (1571.767277ms)
+✔ generated sidecar refuses foreign/colliding outputs and changed release joins before publication (2231.49931ms)
+✔ multiple modern originals compose once with separate custody and unchanged selected baseline (2770.106749ms)
+✔ multiple modern originals compose once with separate custody and unchanged selected baseline and legacy rows (3567.679228ms)
+✔ multiple modern originals reject mixed/empty groups, duplicate authorities/components and cross-original overlaps (4237.382387ms)
+✔ publication refuses nested original-role copies before creating output (0.583301ms)
+✔ flat publication preserves prior completed trees and refuses post-admission mutation (5.880232ms)
+✔ real package projection retains the provider-adoption leaf and its existing family/member roles (1548.226287ms)
+✔ finalizer authenticates and parses a shared cumulative selected ledger only once per invocation (808.768965ms)
+✔ finalizer selected snapshot isolates mutable reader bytes and authenticates anew on the next call (900.408162ms)
+✔ finalizer snapshot does not hide a changed selected-ledger role descriptor (476.875482ms)
+✔ cumulative snapshot retains coherent changed-row and rebind refusals (1219.747811ms)
+node:internal/modules/package_json_reader:301
+  throw new ERR_MODULE_NOT_FOUND(packageName, fileURLToPath(base), null);
+        ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@noble/hashes' imported from /workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/f530a366db78401a30482916bda62b3ab62d58315fa1747a73b705403460d0a7/work/src/effective-footprint.js
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:301:9)
+    at packageResolve (node:internal/modules/esm/resolve:768:81)
+    at moduleResolve (node:internal/modules/esm/resolve:859:18)
+    at defaultResolve (node:internal/modules/esm/resolve:992:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:701:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:721:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:759:56)
+    at #resolve (node:internal/modules/esm/loader:683:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:603:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+
+Node.js v24.19.0
+✖ test/selected-delivery-smoke.test.mjs (92.581327ms)
+ℹ tests 62
+ℹ suites 0
+ℹ pass 61
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 53916.27303
+
+✖ failing tests:
+
+test at test/selected-delivery-smoke.test.mjs:1:1
+✖ test/selected-delivery-smoke.test.mjs (92.581327ms)
+  'test failed'
