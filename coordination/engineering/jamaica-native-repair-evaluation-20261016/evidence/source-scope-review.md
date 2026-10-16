@@ -42,8 +42,8 @@ https://www.ecj.com.jm/ecj-presents-electoral-boundary-realignment-proposal-for-
 The parliamentary Joint Select Committee report is dated October 2021. Its
 printed page 12 says the committee could not decide the proposed boundaries,
 which were outside its terms of reference; printed page 21 discusses the section
-67 process and full legal effect. The report's proposed map is not the operative
-2025 instrument. The independent reviewer visually inspected these pages:
+67 process and full legal effect. This committee report is not the operative
+2025 boundary instrument. The independent reviewer visually inspected these pages:
 https://japarliament.gov.jm/attachments/article/2497/Report-of-the-Joint-Select-Committee-Appointed-to-Concider-And-Report-on-the-Motion-for-Consideration--of-a-Proposal-that-the-City-Municipality-of-Portmore-Becomes-the-15th-Parish-of-Jamaica.pdf
 
 No authenticated operative boundary/commencement instrument was obtained. That
