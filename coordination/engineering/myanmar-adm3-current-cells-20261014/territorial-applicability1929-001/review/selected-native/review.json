@@ -1,0 +1,46 @@
+{
+  "verdict": "ACCEPT actual selected-joint1929 result as reviewed UNMERGED capability; no accepted repair credit",
+  "executing_commit": "6d7f2550867f9dafaa8d497457de44c24081f7f0",
+  "executing_tree": "7bcc218864254084cf33d0eeac09264351274fec",
+  "baseline": "b6382262f8d03d9e7d33b26d8adb40a55197262b",
+  "candidate": "655a6b8ae76e0ebe54e721c1c6c9e5b6a9b7fe12",
+  "original_additive_cells_preserved": 281915,
+  "new_exact_qualified_cells": 1929,
+  "total_candidate_additive_cells": 283844,
+  "complete_changed_native_rows_guarded": 1180,
+  "lost_or_reassigned_cells": 0,
+  "new_components_with_separate_visibility_witness": 27,
+  "old_complete_ledger_rows_preserved": 691,
+  "new_complete_ledger_rows": 718,
+  "old_authorities_preserved": 83,
+  "new_authorities": 84,
+  "products": [
+    {
+      "path": "checkpoint-routes.json",
+      "bytes": 301862,
+      "sha256": "9ac34484cb604e75fa6c154124326aae7534ab0e8e0bfd4e52c0511fa412b9a6"
+    },
+    {
+      "path": "derived-certificate.json.gz",
+      "bytes": 7517568,
+      "sha256": "68775d769f07cb5746a7e3015cd3964cac8bc6bff961a01cb86e0e964e7a0add"
+    },
+    {
+      "path": "derived-facts.json",
+      "bytes": 422693,
+      "sha256": "fc499945f1d29c1fb34c781736107d80529294920fb429e85f67da4c0d6b42ef"
+    },
+    {
+      "path": "derived-publication.json",
+      "bytes": 660,
+      "sha256": "8e0119b0ae5c622f8838d0f2de891c96d28acbe039d3230cffd77ed523680512"
+    }
+  ],
+  "native_result_sha256": "a6ebfce1cc222d7cc2d8a3af032160d16a1d49fe406ac9011585b1b19d65dc58",
+  "candidate_code_executed": false,
+  "actual_native_or_source_replays_by_reviewer": 0,
+  "accepted_repair_or_selected_delivery_credit": 0,
+  "immutable_actual_product_commit": "01c0054f88259610b26342c7457aecbd2b0cdc45",
+  "immutable_actual_product_tree": "ccf970d2a3a0845f0a8e96b7514a2e75657416aa",
+  "actual_four_products_bound_verbatim_to_executing_root_parent_history": true
+}
