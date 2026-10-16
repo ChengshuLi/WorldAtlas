@@ -1,0 +1,3432 @@
+{
+  "summary": {
+    "kind": "exact14-government-positive-source-choice-proposal-authenticated-retained-observations",
+    "accepted_comparison_commit": "cd68e89523901acf477d0365470410b8b970bb48",
+    "original_scope_sha256": "dcdc0e875a8bdf49368be6d176e5692d8c40292175563cc480932ceae45fd537",
+    "phase1_manifest_sha256": "001e6b82f58b3f3ec59c49ee2a7dc271a4e138758e549581ec775fd6c5a86e3f",
+    "country108_observation_sha256": "6b878a305e334fdb4095bb51bb81780f681d7627514e1a1b9819d5142b416289",
+    "scope_keys": 14,
+    "distinct_government_positive_members": 5,
+    "distinct_existing_targets": 4,
+    "original_IDN_contrary_interior_keys": 14,
+    "same_release_full_IDN_contrary_interior_keys": 6,
+    "old_MYS_fine_positive_keys": 0,
+    "exclusive_MYS_country_keys": 14,
+    "current_owner_zero_keys": 14,
+    "unchanged_native_predicate_prefix": {
+      "bytes": 11939,
+      "sha256": "8598cbac45c1667f5e00e6927aa9164533588bee35381b4aa27e61380959ea5f",
+      "old_commit": "b6382262f8d03d9e7d33b26d8adb40a55197262b",
+      "new_commit": "cd68e89523901acf477d0365470410b8b970bb48"
+    },
+    "source_geometry_changes": 0,
+    "new_scientific_or_physical_runs": 0,
+    "adoption_credit": 0,
+    "qualification_credit": 0,
+    "acceptance_credit": 0
+  },
+  "pins": [
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/observations/idn-native-comparison-001/gb-IDN-ADM2.json.gz",
+      "git_blob_oid": "9f932c46513411470ffd0e1b3739e2ecae5bc333",
+      "bytes": 93905,
+      "sha256": "9a2dc222984859dafd4f47ce5526088295db6bb4fef64b2566eefcc3a789f0fd"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/observations/native-comparison-002/gb-MYS-ADM2.json",
+      "git_blob_oid": "b0925c0f45486ebd5d8a6d307ad620d6804d4b21",
+      "bytes": 266781,
+      "sha256": "43cfd77e3da7f7b5995b28769ccb8ed5786acbad316e41db6418f18bdb81f682"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/observations/native-comparison-002/gb-MYS-ADM1.json",
+      "git_blob_oid": "cf1801dbc82bb8f5f16ad2bd65f69a280ed3b230",
+      "bytes": 231952,
+      "sha256": "ac2b27cd0d7b8d5d17a1b571f8b153bb3ea31c534506fa41ae28a6dd8af2c61f"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/sources/original/gb-IDN-ADM2-original-consumed.json.gz",
+      "git_blob_oid": "1b3e6776331af28c84680f5108bea63cabf55b2c",
+      "bytes": 3109208,
+      "sha256": "6280c07bcf63abd3a9884f276ffc8e6f3f4f44a07fba6b423c6a0ee2b0bd31ee",
+      "authenticated_decoded": {
+        "bytes": 11002896,
+        "sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c"
+      }
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/sources/full/geoBoundaries-IDN-ADM2.geojson.gz",
+      "git_blob_oid": "2e88c8a2897fbe089377ed3ca7901186f024830d",
+      "bytes": 39807584,
+      "sha256": "2d2ef57d942757baba4da364108fabe04a9df8eea01df0f90044d16fc63c9eee",
+      "authenticated_decoded": {
+        "bytes": 158892831,
+        "sha256": "947cedc058888c0c2b2628071d289956c85fe279adb369dcf1327ce2236a5602"
+      }
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/sources/original/gb-MYS-ADM2-original-consumed.json.gz",
+      "git_blob_oid": "2b76da0287a3be8403f76ba55a6d97ae856944a2",
+      "bytes": 296491,
+      "sha256": "ea47c0a4546471fb53ba6e141eb158a634a06f0245e89030306d1ebd4cc2cbff",
+      "authenticated_decoded": {
+        "bytes": 1161210,
+        "sha256": "2370e1df1da8e8db2d582ea404d2bcb538127a01785dd994cbe4c1bbf33a951f"
+      }
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/sources/full/geoBoundaries-MYS-ADM2.geojson.gz",
+      "git_blob_oid": "ed4a8da0276a0b7f0054a497a59cb3fd72fb3793",
+      "bytes": 509744,
+      "sha256": "e22338a9151a8e914e15a9356877b61ead8e17ae33873ff3da183dc8fd7c202a",
+      "authenticated_decoded": {
+        "bytes": 1932621,
+        "sha256": "1a7db3b44563073171b02eba59b109fc1bc6256ab0b011531ea6d5053515e550"
+      }
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/sources/original/gb-MYS-ADM1-original-consumed.json.gz",
+      "git_blob_oid": "47d97052d8f6f360301fcb89ebcc511491f1fe15",
+      "bytes": 181184,
+      "sha256": "16f3ca89831b9309f7370363e84cb4e07952fa49f822aaa332b48a265bb3b455",
+      "authenticated_decoded": {
+        "bytes": 583194,
+        "sha256": "fb0f76f0f987c748b732ef02049113946db2dd5fc604130d4a0fbab4e74d4012"
+      }
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/sources/full/geoBoundaries-MYS-ADM1.geojson.gz",
+      "git_blob_oid": "2983f6f0c83285f8a4539c670328a0a87a88339a",
+      "bytes": 910763,
+      "sha256": "2da6bb1f6fdb4ff33e79347cab2bcce5e9e0777c102b0d1cdb84e26f524ef1f6",
+      "authenticated_decoded": {
+        "bytes": 3253284,
+        "sha256": "de8b44337315de60019951d76744765ebdd5efc9c5823e0933b4dc15a0ed20d4"
+      }
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-primary-source-001/observations/layer-9.json",
+      "git_blob_oid": "bac2211349a11b30d20bc580a860c3ed77a7febb",
+      "bytes": 133860,
+      "sha256": "8d3be2e80ff36ea61aa34d8a6beced4aa8cfb0cd6b10b4969322946cfa042b02"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-primary-source-001/primary/layer-9-DistrictCoverageSarawak-whole4326.geojson.gz",
+      "git_blob_oid": "63a98a113d01c9ba954f72cc0366d868a5304dd8",
+      "bytes": 2157614,
+      "sha256": "20446f8a5db39127ba8ea9c1d23219f7d741238394c558c5adb3b848fe8da31f",
+      "authenticated_decoded": {
+        "bytes": 5379842,
+        "sha256": "6ca083d7bc396417ae83e05830ad2eea7a63136010839f1f1341a0861cf7f941"
+      }
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-primary-source-001/observations/layer-10.json",
+      "git_blob_oid": "5ca93e844d7cef5e3c1d9d022e760695fd3fb84c",
+      "bytes": 122552,
+      "sha256": "16698ec197deae081800c942918306eb0d9fe20d05475dbca449e10f9b368660"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-primary-source-001/primary/layer-10-DistrictCoverageSabah-whole4326.geojson.gz",
+      "git_blob_oid": "3ded0641d304af68208f6316f9b67c2d992a9e2e",
+      "bytes": 1814454,
+      "sha256": "b1dda9c27d74f99b1bfea3167929439cce195b085300a1ed552ad79a8a27837d",
+      "authenticated_decoded": {
+        "bytes": 4499127,
+        "sha256": "d3c01612219c307f899d0f01c291e0db3067f972ea2cde1c7b22459a2d02f32b"
+      }
+    },
+    {
+      "commit": "b6382262f8d03d9e7d33b26d8adb40a55197262b",
+      "path": "src/native-grid.js",
+      "git_blob_oid": "1f3dc7193b2f791c8deb1ca34a182a3f402d7b5d",
+      "bytes": 37995,
+      "sha256": "78c1e2bc2df944f11b2b638645d20defa82511a1cb17debbf865921945b14740"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "src/native-grid.js",
+      "git_blob_oid": "eca2f633558770aacd12db8782217faa8e5abd95",
+      "bytes": 42965,
+      "sha256": "3ef6bc5ec66e3184c254ea66404add0824e3ee18e39c8658f234d2e236d840ad"
+    },
+    {
+      "oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+      "bytes": 4719659,
+      "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+      "kind": "country-observation-original-immutable-blob"
+    },
+    {
+      "oid": "de6905e162dc031b1b93248fae91190c39c4ad53",
+      "bytes": 1851757,
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+      "kind": "country-observation-original-immutable-blob"
+    }
+  ],
+  "complete_family_observation_inputs": {
+    "IDN": {
+      "key": "gb:IDN:ADM2",
+      "country": "IDN",
+      "original": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/gb-IDN-ADM2-original-consumed.json",
+        "bytes": 11002896,
+        "sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c"
+      },
+      "full": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/geoBoundaries-IDN-ADM2.geojson",
+        "bytes": 158892831,
+        "sha256": "947cedc058888c0c2b2628071d289956c85fe279adb369dcf1327ce2236a5602"
+      },
+      "actual_original_features": 519,
+      "actual_full_features": 519,
+      "all_feature_properties_identical": true,
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2_simplified.geojson",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "represented_year_claim": "2020"
+    },
+    "MYS2": {
+      "key": "gb:MYS:ADM2",
+      "country": "MYS",
+      "original": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/gb-MYS-ADM2-original-consumed.json",
+        "bytes": 1161210,
+        "sha256": "2370e1df1da8e8db2d582ea404d2bcb538127a01785dd994cbe4c1bbf33a951f"
+      },
+      "full": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/geoBoundaries-MYS-ADM2.geojson",
+        "bytes": 1932621,
+        "sha256": "1a7db3b44563073171b02eba59b109fc1bc6256ab0b011531ea6d5053515e550"
+      },
+      "original_corpus_part": {
+        "bytes": 293141,
+        "hash_kind": "file-bytes",
+        "offset": 0,
+        "ordinal": 0,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MYS-ADM2-000.bin.gz",
+        "sha256": "825f65a4ca40cdc12d5914e07f5153d606d2d0a06c7c76d4ac12c729c0920ee6",
+        "uncompressed_bytes": 1161210,
+        "uncompressed_sha256": "2370e1df1da8e8db2d582ea404d2bcb538127a01785dd994cbe4c1bbf33a951f"
+      },
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MYS/ADM2/geoBoundaries-MYS-ADM2_simplified.geojson",
+      "license": "Creative Commons Attribution 3.0 License",
+      "represented_year_claim": "2020",
+      "actual_original_features": 159,
+      "actual_full_features": 159,
+      "all_feature_properties_identical": true,
+      "advertised_feature_count": 160
+    },
+    "MYS1": {
+      "key": "gb:MYS:ADM1",
+      "country": "MYS",
+      "original": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/gb-MYS-ADM1-original-consumed.json",
+        "bytes": 583194,
+        "sha256": "fb0f76f0f987c748b732ef02049113946db2dd5fc604130d4a0fbab4e74d4012"
+      },
+      "full": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/geoBoundaries-MYS-ADM1.geojson",
+        "bytes": 3253284,
+        "sha256": "de8b44337315de60019951d76744765ebdd5efc9c5823e0933b4dc15a0ed20d4"
+      },
+      "original_corpus_part": {
+        "bytes": 180810,
+        "hash_kind": "file-bytes",
+        "offset": 0,
+        "ordinal": 0,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MYS-ADM1-000.bin.gz",
+        "sha256": "1382eb5fc945eeaa1a5c6e3aded15b940b40c59a7dfdbb4f5f739c597684bbff",
+        "uncompressed_bytes": 583194,
+        "uncompressed_sha256": "fb0f76f0f987c748b732ef02049113946db2dd5fc604130d4a0fbab4e74d4012"
+      },
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MYS/ADM1/geoBoundaries-MYS-ADM1_simplified.geojson",
+      "license": "Open Data Commons Open Database License 1.0",
+      "represented_year_claim": "2017",
+      "actual_original_features": 16,
+      "actual_full_features": 16,
+      "all_feature_properties_identical": true,
+      "advertised_feature_count": 16
+    }
+  },
+  "government_whole_family_context": [
+    {
+      "layer": 9,
+      "family": {
+        "key": "government:JMG:Demarcation:layer9",
+        "layer_id": 9,
+        "label": "DistrictCoverageSarawak",
+        "country": "MYS",
+        "provider": {
+          "path": "retained-task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/government-fine-whole-followup-003/layer-9-DistrictCoverageSarawak-whole4326.geojson",
+          "bytes": 5379842,
+          "sha256": "6ca083d7bc396417ae83e05830ad2eea7a63136010839f1f1341a0861cf7f941"
+        },
+        "actual_provider_record_count": 32,
+        "query_semantics": "whole_provider_polygon_membership;no_Atlas_owner_equivalence",
+        "nonspatial_placeholder_OBJECTIDs": [],
+        "url": "https://mygems.jmg.gov.my/server/rest/services/Demarcation_MIL1/MapServer/9/query?f=geojson&where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&orderByFields=OBJECTID"
+      },
+      "input": {
+        "path": "retained-task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/government-fine-whole-followup-003/layer-9-DistrictCoverageSarawak-whole4326.geojson",
+        "bytes": 5379842,
+        "sha256": "6ca083d7bc396417ae83e05830ad2eea7a63136010839f1f1341a0861cf7f941"
+      },
+      "complete_served_records": 32,
+      "all_OBJECTIDs": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        432
+      ]
+    },
+    {
+      "layer": 10,
+      "family": {
+        "key": "government:JMG:Demarcation:layer10",
+        "layer_id": 10,
+        "label": "DistrictCoverageSabah",
+        "country": "MYS",
+        "provider": {
+          "path": "retained-task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/government-fine-whole-followup-003/layer-10-DistrictCoverageSabah-whole4326.geojson",
+          "bytes": 4499127,
+          "sha256": "d3c01612219c307f899d0f01c291e0db3067f972ea2cde1c7b22459a2d02f32b"
+        },
+        "actual_provider_record_count": 25,
+        "query_semantics": "whole_provider_polygon_membership;no_Atlas_owner_equivalence",
+        "nonspatial_placeholder_OBJECTIDs": [],
+        "url": "https://mygems.jmg.gov.my/server/rest/services/Demarcation_MIL1/MapServer/10/query?f=geojson&where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&orderByFields=OBJECTID"
+      },
+      "input": {
+        "path": "retained-task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/government-fine-whole-followup-003/layer-10-DistrictCoverageSabah-whole4326.geojson",
+        "bytes": 4499127,
+        "sha256": "d3c01612219c307f899d0f01c291e0db3067f972ea2cde1c7b22459a2d02f32b"
+      },
+      "complete_served_records": 25,
+      "all_OBJECTIDs": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ]
+    }
+  ],
+  "records": [
+    {
+      "original": {
+        "id": "repair:22771:127883:215493",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 22771,
+        "y": 127883,
+        "x": 215493,
+        "original_held_interval": [
+          127883,
+          215493,
+          215494,
+          22771
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45976,
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "proposed_display_country": "MYS",
+      "proposed_target_id": "gb:MYS:ADM2:92858781B57526539682129",
+      "proposed_target_owner": 31111,
+      "positive_government_members": [
+        {
+          "source_id": "government:JMG:Demarcation:layer10:OBJECTID:6",
+          "feature_ordinal": 5,
+          "OBJECTID": 6,
+          "provider_name": "PENSIANGAN",
+          "kind": "interior"
+        }
+      ],
+      "contrary_original_IDN_fine": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+          "feature_ordinal": 372,
+          "shapeName": "Nunukan",
+          "kind": "interior"
+        }
+      ],
+      "contrary_same_release_full_IDN_fine": [],
+      "original_and_full_IDN_observation": {
+        "original_request_id": "repair:22771:127883:215493",
+        "y": 127883,
+        "x": 215493,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+            "feature_ordinal": 372,
+            "shapeName": "Nunukan",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": []
+      },
+      "complete_original_and_full_MYS_fine_observation": {
+        "original_request_id": "repair:22771:127883:215493",
+        "y": 127883,
+        "x": 215493,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "original_and_full_MYS_coarse_observation": {
+        "original_request_id": "repair:22771:127883:215493",
+        "y": 127883,
+        "x": 215493,
+        "original_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B50935235229272",
+            "feature_ordinal": 5,
+            "shapeName": "Sabah",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B50935235229272",
+            "feature_ordinal": 5,
+            "shapeName": "Sabah",
+            "kind": "interior"
+          }
+        ]
+      },
+      "government_observations_original": {
+        "request": {
+          "id": "repair:22771:127883:215493",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22771,
+          "y": 127883,
+          "x": 215493,
+          "original_held_interval": [
+            127883,
+            215493,
+            215494,
+            22771
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45976,
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "original_idn_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+            "feature_ordinal": 372,
+            "shapeName": "Nunukan",
+            "kind": "interior"
+          }
+        ],
+        "full_idn_memberships": [],
+        "full_private_MYS_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B50935235229272",
+            "feature_ordinal": 5,
+            "shapeName": "Sabah",
+            "kind": "interior"
+          }
+        ],
+        "cached_Gov_Sarawak_state_contacts": [],
+        "new_Gov_Sabah_state_contacts": [
+          {
+            "source_id": "government:JMG:Demarcation:layer12:OBJECTID:1",
+            "feature_ordinal": 0,
+            "OBJECTID": 1,
+            "provider_name": "SABAH",
+            "kind": "interior"
+          }
+        ],
+        "Gov_district_Sarawak_contacts": [],
+        "Gov_district_Sabah_contacts": [
+          {
+            "source_id": "government:JMG:Demarcation:layer10:OBJECTID:6",
+            "feature_ordinal": 5,
+            "OBJECTID": 6,
+            "provider_name": "PENSIANGAN",
+            "kind": "interior"
+          }
+        ],
+        "Gov_Sabah_line_incidence_only": [],
+        "scientific_observation_partition": "IDNfulloutside__Govstatepositive__Govdistrictpositive",
+        "owner_or_hold_changed": false,
+        "authority_or_repair_credit": 0
+      },
+      "exclusive_country_reference_observation": {
+        "original": {
+          "id": "repair:22771:127883:215493",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22771,
+          "y": 127883,
+          "x": 215493,
+          "original_held_interval": [
+            127883,
+            215493,
+            215494,
+            22771
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45976,
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_country_positive_no_existing_fine_source_coverage",
+        "latitude": 4.389176661660574,
+        "longitude_numerator": 30387780,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 1,
+            "ADM0_A3": "MYS",
+            "ADMIN": "Malaysia",
+            "ISO_A3_EH": "MYS"
+          }
+        ],
+        "country_ties": []
+      },
+      "current_native_owner": 0,
+      "current_cumulative_patch_contacts": [],
+      "current_owner_roster_target": {
+        "id": "gb:MYS:ADM2:92858781B57526539682129",
+        "index": 31111,
+        "bounds": [
+          215474.96363888888,
+          127339.28142908817,
+          216332.46493055555,
+          127965.71770022354
+        ],
+        "province_id": "framework:province:sabah:195a4dcb4f73",
+        "province_index": 4001
+      },
+      "source_choice_proposed": "Apply the existing unambiguous country-reference display convention to this genuine government district fine interior and unchanged contrary original IDN fine interior, after adopting the explicit government-member-to-existing-target association. Preserve all original operands and source identities.",
+      "source_choice_adopted": false,
+      "qualification_or_acceptance_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:22771:127896:215497",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 22771,
+        "y": 127896,
+        "x": 215497,
+        "original_held_interval": [
+          127896,
+          215497,
+          215498,
+          22771
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45976,
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "proposed_display_country": "MYS",
+      "proposed_target_id": "gb:MYS:ADM2:92858781B57526539682129",
+      "proposed_target_owner": 31111,
+      "positive_government_members": [
+        {
+          "source_id": "government:JMG:Demarcation:layer10:OBJECTID:6",
+          "feature_ordinal": 5,
+          "OBJECTID": 6,
+          "provider_name": "PENSIANGAN",
+          "kind": "interior"
+        }
+      ],
+      "contrary_original_IDN_fine": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+          "feature_ordinal": 372,
+          "shapeName": "Nunukan",
+          "kind": "interior"
+        }
+      ],
+      "contrary_same_release_full_IDN_fine": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+          "feature_ordinal": 372,
+          "shapeName": "Nunukan",
+          "kind": "interior"
+        }
+      ],
+      "original_and_full_IDN_observation": {
+        "original_request_id": "repair:22771:127896:215497",
+        "y": 127896,
+        "x": 215497,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+            "feature_ordinal": 372,
+            "shapeName": "Nunukan",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+            "feature_ordinal": 372,
+            "shapeName": "Nunukan",
+            "kind": "interior"
+          }
+        ]
+      },
+      "complete_original_and_full_MYS_fine_observation": {
+        "original_request_id": "repair:22771:127896:215497",
+        "y": 127896,
+        "x": 215497,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "original_and_full_MYS_coarse_observation": {
+        "original_request_id": "repair:22771:127896:215497",
+        "y": 127896,
+        "x": 215497,
+        "original_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B50935235229272",
+            "feature_ordinal": 5,
+            "shapeName": "Sabah",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B50935235229272",
+            "feature_ordinal": 5,
+            "shapeName": "Sabah",
+            "kind": "interior"
+          }
+        ]
+      },
+      "government_observations_original": {
+        "request": {
+          "id": "repair:22771:127896:215497",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22771,
+          "y": 127896,
+          "x": 215497,
+          "original_held_interval": [
+            127896,
+            215497,
+            215498,
+            22771
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45976,
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "original_idn_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+            "feature_ordinal": 372,
+            "shapeName": "Nunukan",
+            "kind": "interior"
+          }
+        ],
+        "full_idn_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+            "feature_ordinal": 372,
+            "shapeName": "Nunukan",
+            "kind": "interior"
+          }
+        ],
+        "full_private_MYS_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B50935235229272",
+            "feature_ordinal": 5,
+            "shapeName": "Sabah",
+            "kind": "interior"
+          }
+        ],
+        "cached_Gov_Sarawak_state_contacts": [],
+        "new_Gov_Sabah_state_contacts": [
+          {
+            "source_id": "government:JMG:Demarcation:layer12:OBJECTID:1",
+            "feature_ordinal": 0,
+            "OBJECTID": 1,
+            "provider_name": "SABAH",
+            "kind": "interior"
+          }
+        ],
+        "Gov_district_Sarawak_contacts": [],
+        "Gov_district_Sabah_contacts": [
+          {
+            "source_id": "government:JMG:Demarcation:layer10:OBJECTID:6",
+            "feature_ordinal": 5,
+            "OBJECTID": 6,
+            "provider_name": "PENSIANGAN",
+            "kind": "interior"
+          }
+        ],
+        "Gov_Sabah_line_incidence_only": [],
+        "scientific_observation_partition": "IDNfullpositive__Govstatepositive__Govdistrictpositive",
+        "owner_or_hold_changed": false,
+        "authority_or_repair_credit": 0
+      },
+      "exclusive_country_reference_observation": {
+        "original": {
+          "id": "repair:22771:127896:215497",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22771,
+          "y": 127896,
+          "x": 215497,
+          "original_held_interval": [
+            127896,
+            215497,
+            215498,
+            22771
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45976,
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_genuine_IDN_vs_government_country_overlap",
+        "latitude": 4.371377518449973,
+        "longitude_numerator": 30389220,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 1,
+            "ADM0_A3": "MYS",
+            "ADMIN": "Malaysia",
+            "ISO_A3_EH": "MYS"
+          }
+        ],
+        "country_ties": []
+      },
+      "current_native_owner": 0,
+      "current_cumulative_patch_contacts": [],
+      "current_owner_roster_target": {
+        "id": "gb:MYS:ADM2:92858781B57526539682129",
+        "index": 31111,
+        "bounds": [
+          215474.96363888888,
+          127339.28142908817,
+          216332.46493055555,
+          127965.71770022354
+        ],
+        "province_id": "framework:province:sabah:195a4dcb4f73",
+        "province_index": 4001
+      },
+      "source_choice_proposed": "Apply the existing unambiguous country-reference display convention to this genuine government district fine interior and unchanged contrary original IDN fine interior, after adopting the explicit government-member-to-existing-target association. Preserve all original operands and source identities.",
+      "source_choice_adopted": false,
+      "qualification_or_acceptance_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:22771:127897:215498",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 22771,
+        "y": 127897,
+        "x": 215498,
+        "original_held_interval": [
+          127897,
+          215498,
+          215499,
+          22771
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45976,
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "proposed_display_country": "MYS",
+      "proposed_target_id": "gb:MYS:ADM2:92858781B57526539682129",
+      "proposed_target_owner": 31111,
+      "positive_government_members": [
+        {
+          "source_id": "government:JMG:Demarcation:layer10:OBJECTID:6",
+          "feature_ordinal": 5,
+          "OBJECTID": 6,
+          "provider_name": "PENSIANGAN",
+          "kind": "interior"
+        }
+      ],
+      "contrary_original_IDN_fine": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+          "feature_ordinal": 372,
+          "shapeName": "Nunukan",
+          "kind": "interior"
+        }
+      ],
+      "contrary_same_release_full_IDN_fine": [],
+      "original_and_full_IDN_observation": {
+        "original_request_id": "repair:22771:127897:215498",
+        "y": 127897,
+        "x": 215498,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+            "feature_ordinal": 372,
+            "shapeName": "Nunukan",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": []
+      },
+      "complete_original_and_full_MYS_fine_observation": {
+        "original_request_id": "repair:22771:127897:215498",
+        "y": 127897,
+        "x": 215498,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "original_and_full_MYS_coarse_observation": {
+        "original_request_id": "repair:22771:127897:215498",
+        "y": 127897,
+        "x": 215498,
+        "original_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B50935235229272",
+            "feature_ordinal": 5,
+            "shapeName": "Sabah",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B50935235229272",
+            "feature_ordinal": 5,
+            "shapeName": "Sabah",
+            "kind": "interior"
+          }
+        ]
+      },
+      "government_observations_original": {
+        "request": {
+          "id": "repair:22771:127897:215498",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22771,
+          "y": 127897,
+          "x": 215498,
+          "original_held_interval": [
+            127897,
+            215498,
+            215499,
+            22771
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45976,
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "original_idn_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+            "feature_ordinal": 372,
+            "shapeName": "Nunukan",
+            "kind": "interior"
+          }
+        ],
+        "full_idn_memberships": [],
+        "full_private_MYS_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B50935235229272",
+            "feature_ordinal": 5,
+            "shapeName": "Sabah",
+            "kind": "interior"
+          }
+        ],
+        "cached_Gov_Sarawak_state_contacts": [],
+        "new_Gov_Sabah_state_contacts": [
+          {
+            "source_id": "government:JMG:Demarcation:layer12:OBJECTID:1",
+            "feature_ordinal": 0,
+            "OBJECTID": 1,
+            "provider_name": "SABAH",
+            "kind": "interior"
+          }
+        ],
+        "Gov_district_Sarawak_contacts": [],
+        "Gov_district_Sabah_contacts": [
+          {
+            "source_id": "government:JMG:Demarcation:layer10:OBJECTID:6",
+            "feature_ordinal": 5,
+            "OBJECTID": 6,
+            "provider_name": "PENSIANGAN",
+            "kind": "interior"
+          }
+        ],
+        "Gov_Sabah_line_incidence_only": [],
+        "scientific_observation_partition": "IDNfulloutside__Govstatepositive__Govdistrictpositive",
+        "owner_or_hold_changed": false,
+        "authority_or_repair_credit": 0
+      },
+      "exclusive_country_reference_observation": {
+        "original": {
+          "id": "repair:22771:127897:215498",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22771,
+          "y": 127897,
+          "x": 215498,
+          "original_held_interval": [
+            127897,
+            215498,
+            215499,
+            22771
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45976,
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_country_positive_no_existing_fine_source_coverage",
+        "latitude": 4.370008336057845,
+        "longitude_numerator": 30389580,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 1,
+            "ADM0_A3": "MYS",
+            "ADMIN": "Malaysia",
+            "ISO_A3_EH": "MYS"
+          }
+        ],
+        "country_ties": []
+      },
+      "current_native_owner": 0,
+      "current_cumulative_patch_contacts": [],
+      "current_owner_roster_target": {
+        "id": "gb:MYS:ADM2:92858781B57526539682129",
+        "index": 31111,
+        "bounds": [
+          215474.96363888888,
+          127339.28142908817,
+          216332.46493055555,
+          127965.71770022354
+        ],
+        "province_id": "framework:province:sabah:195a4dcb4f73",
+        "province_index": 4001
+      },
+      "source_choice_proposed": "Apply the existing unambiguous country-reference display convention to this genuine government district fine interior and unchanged contrary original IDN fine interior, after adopting the explicit government-member-to-existing-target association. Preserve all original operands and source identities.",
+      "source_choice_adopted": false,
+      "qualification_or_acceptance_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:22771:127898:215499",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 22771,
+        "y": 127898,
+        "x": 215499,
+        "original_held_interval": [
+          127898,
+          215499,
+          215500,
+          22771
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45976,
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "proposed_display_country": "MYS",
+      "proposed_target_id": "gb:MYS:ADM2:92858781B57526539682129",
+      "proposed_target_owner": 31111,
+      "positive_government_members": [
+        {
+          "source_id": "government:JMG:Demarcation:layer10:OBJECTID:6",
+          "feature_ordinal": 5,
+          "OBJECTID": 6,
+          "provider_name": "PENSIANGAN",
+          "kind": "interior"
+        }
+      ],
+      "contrary_original_IDN_fine": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+          "feature_ordinal": 372,
+          "shapeName": "Nunukan",
+          "kind": "interior"
+        }
+      ],
+      "contrary_same_release_full_IDN_fine": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+          "feature_ordinal": 372,
+          "shapeName": "Nunukan",
+          "kind": "interior"
+        }
+      ],
+      "original_and_full_IDN_observation": {
+        "original_request_id": "repair:22771:127898:215499",
+        "y": 127898,
+        "x": 215499,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+            "feature_ordinal": 372,
+            "shapeName": "Nunukan",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+            "feature_ordinal": 372,
+            "shapeName": "Nunukan",
+            "kind": "interior"
+          }
+        ]
+      },
+      "complete_original_and_full_MYS_fine_observation": {
+        "original_request_id": "repair:22771:127898:215499",
+        "y": 127898,
+        "x": 215499,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "original_and_full_MYS_coarse_observation": {
+        "original_request_id": "repair:22771:127898:215499",
+        "y": 127898,
+        "x": 215499,
+        "original_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B50935235229272",
+            "feature_ordinal": 5,
+            "shapeName": "Sabah",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B50935235229272",
+            "feature_ordinal": 5,
+            "shapeName": "Sabah",
+            "kind": "interior"
+          }
+        ]
+      },
+      "government_observations_original": {
+        "request": {
+          "id": "repair:22771:127898:215499",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22771,
+          "y": 127898,
+          "x": 215499,
+          "original_held_interval": [
+            127898,
+            215499,
+            215500,
+            22771
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45976,
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "original_idn_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+            "feature_ordinal": 372,
+            "shapeName": "Nunukan",
+            "kind": "interior"
+          }
+        ],
+        "full_idn_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+            "feature_ordinal": 372,
+            "shapeName": "Nunukan",
+            "kind": "interior"
+          }
+        ],
+        "full_private_MYS_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B50935235229272",
+            "feature_ordinal": 5,
+            "shapeName": "Sabah",
+            "kind": "interior"
+          }
+        ],
+        "cached_Gov_Sarawak_state_contacts": [],
+        "new_Gov_Sabah_state_contacts": [
+          {
+            "source_id": "government:JMG:Demarcation:layer12:OBJECTID:1",
+            "feature_ordinal": 0,
+            "OBJECTID": 1,
+            "provider_name": "SABAH",
+            "kind": "interior"
+          }
+        ],
+        "Gov_district_Sarawak_contacts": [],
+        "Gov_district_Sabah_contacts": [
+          {
+            "source_id": "government:JMG:Demarcation:layer10:OBJECTID:6",
+            "feature_ordinal": 5,
+            "OBJECTID": 6,
+            "provider_name": "PENSIANGAN",
+            "kind": "interior"
+          }
+        ],
+        "Gov_Sabah_line_incidence_only": [],
+        "scientific_observation_partition": "IDNfullpositive__Govstatepositive__Govdistrictpositive",
+        "owner_or_hold_changed": false,
+        "authority_or_repair_credit": 0
+      },
+      "exclusive_country_reference_observation": {
+        "original": {
+          "id": "repair:22771:127898:215499",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22771,
+          "y": 127898,
+          "x": 215499,
+          "original_held_interval": [
+            127898,
+            215499,
+            215500,
+            22771
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45976,
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_genuine_IDN_vs_government_country_overlap",
+        "latitude": 4.368639151165352,
+        "longitude_numerator": 30389940,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 1,
+            "ADM0_A3": "MYS",
+            "ADMIN": "Malaysia",
+            "ISO_A3_EH": "MYS"
+          }
+        ],
+        "country_ties": []
+      },
+      "current_native_owner": 0,
+      "current_cumulative_patch_contacts": [],
+      "current_owner_roster_target": {
+        "id": "gb:MYS:ADM2:92858781B57526539682129",
+        "index": 31111,
+        "bounds": [
+          215474.96363888888,
+          127339.28142908817,
+          216332.46493055555,
+          127965.71770022354
+        ],
+        "province_id": "framework:province:sabah:195a4dcb4f73",
+        "province_index": 4001
+      },
+      "source_choice_proposed": "Apply the existing unambiguous country-reference display convention to this genuine government district fine interior and unchanged contrary original IDN fine interior, after adopting the explicit government-member-to-existing-target association. Preserve all original operands and source identities.",
+      "source_choice_adopted": false,
+      "qualification_or_acceptance_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:22771:127900:215501",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 22771,
+        "y": 127900,
+        "x": 215501,
+        "original_held_interval": [
+          127900,
+          215501,
+          215502,
+          22771
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45976,
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "proposed_display_country": "MYS",
+      "proposed_target_id": "gb:MYS:ADM2:92858781B57526539682129",
+      "proposed_target_owner": 31111,
+      "positive_government_members": [
+        {
+          "source_id": "government:JMG:Demarcation:layer10:OBJECTID:6",
+          "feature_ordinal": 5,
+          "OBJECTID": 6,
+          "provider_name": "PENSIANGAN",
+          "kind": "interior"
+        }
+      ],
+      "contrary_original_IDN_fine": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+          "feature_ordinal": 372,
+          "shapeName": "Nunukan",
+          "kind": "interior"
+        }
+      ],
+      "contrary_same_release_full_IDN_fine": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+          "feature_ordinal": 372,
+          "shapeName": "Nunukan",
+          "kind": "interior"
+        }
+      ],
+      "original_and_full_IDN_observation": {
+        "original_request_id": "repair:22771:127900:215501",
+        "y": 127900,
+        "x": 215501,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+            "feature_ordinal": 372,
+            "shapeName": "Nunukan",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+            "feature_ordinal": 372,
+            "shapeName": "Nunukan",
+            "kind": "interior"
+          }
+        ]
+      },
+      "complete_original_and_full_MYS_fine_observation": {
+        "original_request_id": "repair:22771:127900:215501",
+        "y": 127900,
+        "x": 215501,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "original_and_full_MYS_coarse_observation": {
+        "original_request_id": "repair:22771:127900:215501",
+        "y": 127900,
+        "x": 215501,
+        "original_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B50935235229272",
+            "feature_ordinal": 5,
+            "shapeName": "Sabah",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B50935235229272",
+            "feature_ordinal": 5,
+            "shapeName": "Sabah",
+            "kind": "interior"
+          }
+        ]
+      },
+      "government_observations_original": {
+        "request": {
+          "id": "repair:22771:127900:215501",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22771,
+          "y": 127900,
+          "x": 215501,
+          "original_held_interval": [
+            127900,
+            215501,
+            215502,
+            22771
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45976,
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "original_idn_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+            "feature_ordinal": 372,
+            "shapeName": "Nunukan",
+            "kind": "interior"
+          }
+        ],
+        "full_idn_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+            "feature_ordinal": 372,
+            "shapeName": "Nunukan",
+            "kind": "interior"
+          }
+        ],
+        "full_private_MYS_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B50935235229272",
+            "feature_ordinal": 5,
+            "shapeName": "Sabah",
+            "kind": "interior"
+          }
+        ],
+        "cached_Gov_Sarawak_state_contacts": [],
+        "new_Gov_Sabah_state_contacts": [
+          {
+            "source_id": "government:JMG:Demarcation:layer12:OBJECTID:1",
+            "feature_ordinal": 0,
+            "OBJECTID": 1,
+            "provider_name": "SABAH",
+            "kind": "interior"
+          }
+        ],
+        "Gov_district_Sarawak_contacts": [],
+        "Gov_district_Sabah_contacts": [
+          {
+            "source_id": "government:JMG:Demarcation:layer10:OBJECTID:6",
+            "feature_ordinal": 5,
+            "OBJECTID": 6,
+            "provider_name": "PENSIANGAN",
+            "kind": "interior"
+          }
+        ],
+        "Gov_Sabah_line_incidence_only": [],
+        "scientific_observation_partition": "IDNfullpositive__Govstatepositive__Govdistrictpositive",
+        "owner_or_hold_changed": false,
+        "authority_or_repair_credit": 0
+      },
+      "exclusive_country_reference_observation": {
+        "original": {
+          "id": "repair:22771:127900:215501",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 22771,
+          "y": 127900,
+          "x": 215501,
+          "original_held_interval": [
+            127900,
+            215501,
+            215502,
+            22771
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45976,
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_genuine_IDN_vs_government_country_overlap",
+        "latitude": 4.365900773882375,
+        "longitude_numerator": 30390660,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 1,
+            "ADM0_A3": "MYS",
+            "ADMIN": "Malaysia",
+            "ISO_A3_EH": "MYS"
+          }
+        ],
+        "country_ties": []
+      },
+      "current_native_owner": 0,
+      "current_cumulative_patch_contacts": [],
+      "current_owner_roster_target": {
+        "id": "gb:MYS:ADM2:92858781B57526539682129",
+        "index": 31111,
+        "bounds": [
+          215474.96363888888,
+          127339.28142908817,
+          216332.46493055555,
+          127965.71770022354
+        ],
+        "province_id": "framework:province:sabah:195a4dcb4f73",
+        "province_index": 4001
+      },
+      "source_choice_proposed": "Apply the existing unambiguous country-reference display convention to this genuine government district fine interior and unchanged contrary original IDN fine interior, after adopting the explicit government-member-to-existing-target association. Preserve all original operands and source identities.",
+      "source_choice_adopted": false,
+      "qualification_or_acceptance_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:23144:129738:210880",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 23144,
+        "y": 129738,
+        "x": 210880,
+        "original_held_interval": [
+          129738,
+          210880,
+          210881,
+          23144
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "proposed_display_country": "MYS",
+      "proposed_target_id": "gb:MYS:ADM2:92858781B46549610571988",
+      "proposed_target_owner": 31086,
+      "positive_government_members": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:11",
+          "feature_ordinal": 9,
+          "OBJECTID": 11,
+          "provider_name": "Lundu",
+          "kind": "interior"
+        }
+      ],
+      "contrary_original_IDN_fine": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B87993072617697",
+          "feature_ordinal": 428,
+          "shapeName": "Sambas",
+          "kind": "interior"
+        }
+      ],
+      "contrary_same_release_full_IDN_fine": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B87993072617697",
+          "feature_ordinal": 428,
+          "shapeName": "Sambas",
+          "kind": "interior"
+        }
+      ],
+      "original_and_full_IDN_observation": {
+        "original_request_id": "repair:23144:129738:210880",
+        "y": 129738,
+        "x": 210880,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B87993072617697",
+            "feature_ordinal": 428,
+            "shapeName": "Sambas",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B87993072617697",
+            "feature_ordinal": 428,
+            "shapeName": "Sambas",
+            "kind": "interior"
+          }
+        ]
+      },
+      "complete_original_and_full_MYS_fine_observation": {
+        "original_request_id": "repair:23144:129738:210880",
+        "y": 129738,
+        "x": 210880,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "original_and_full_MYS_coarse_observation": {
+        "original_request_id": "repair:23144:129738:210880",
+        "y": 129738,
+        "x": 210880,
+        "original_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ]
+      },
+      "government_observations_original": {
+        "request": {
+          "id": "repair:23144:129738:210880",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 23144,
+          "y": 129738,
+          "x": 210880,
+          "original_held_interval": [
+            129738,
+            210880,
+            210881,
+            23144
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "original_idn_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B87993072617697",
+            "feature_ordinal": 428,
+            "shapeName": "Sambas",
+            "kind": "interior"
+          }
+        ],
+        "full_idn_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B87993072617697",
+            "feature_ordinal": 428,
+            "shapeName": "Sambas",
+            "kind": "interior"
+          }
+        ],
+        "full_private_MYS_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ],
+        "cached_Gov_Sarawak_state_contacts": [
+          "interior"
+        ],
+        "new_Gov_Sabah_state_contacts": [],
+        "Gov_district_Sarawak_contacts": [
+          {
+            "source_id": "government:JMG:Demarcation:layer9:OBJECTID:11",
+            "feature_ordinal": 9,
+            "OBJECTID": 11,
+            "provider_name": "Lundu",
+            "kind": "interior"
+          }
+        ],
+        "Gov_district_Sabah_contacts": [],
+        "Gov_Sabah_line_incidence_only": [],
+        "scientific_observation_partition": "IDNfullpositive__Govstatepositive__Govdistrictpositive",
+        "owner_or_hold_changed": false,
+        "authority_or_repair_credit": 0
+      },
+      "exclusive_country_reference_observation": {
+        "original": {
+          "id": "repair:23144:129738:210880",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 23144,
+          "y": 129738,
+          "x": 210880,
+          "original_held_interval": [
+            129738,
+            210880,
+            210881,
+            23144
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_genuine_IDN_vs_government_country_overlap",
+        "latitude": 1.8459154160494242,
+        "longitude_numerator": 28727100,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 1,
+            "ADM0_A3": "MYS",
+            "ADMIN": "Malaysia",
+            "ISO_A3_EH": "MYS"
+          }
+        ],
+        "country_ties": []
+      },
+      "current_native_owner": 0,
+      "current_cumulative_patch_contacts": [],
+      "current_owner_roster_target": {
+        "id": "gb:MYS:ADM2:92858781B46549610571988",
+        "index": 31086,
+        "bounds": [
+          210853.11224267128,
+          129593.79952625492,
+          211322.32702277778,
+          130052.94713066432
+        ],
+        "province_id": "framework:province:sarawak:8a5fb64d0d51",
+        "province_index": 4137
+      },
+      "source_choice_proposed": "Apply the existing unambiguous country-reference display convention to this genuine government district fine interior and unchanged contrary original IDN fine interior, after adopting the explicit government-member-to-existing-target association. Preserve all original operands and source identities.",
+      "source_choice_adopted": false,
+      "qualification_or_acceptance_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:23144:129739:210879",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 23144,
+        "y": 129739,
+        "x": 210879,
+        "original_held_interval": [
+          129739,
+          210879,
+          210880,
+          23144
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "proposed_display_country": "MYS",
+      "proposed_target_id": "gb:MYS:ADM2:92858781B46549610571988",
+      "proposed_target_owner": 31086,
+      "positive_government_members": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:11",
+          "feature_ordinal": 9,
+          "OBJECTID": 11,
+          "provider_name": "Lundu",
+          "kind": "interior"
+        }
+      ],
+      "contrary_original_IDN_fine": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B87993072617697",
+          "feature_ordinal": 428,
+          "shapeName": "Sambas",
+          "kind": "interior"
+        }
+      ],
+      "contrary_same_release_full_IDN_fine": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B87993072617697",
+          "feature_ordinal": 428,
+          "shapeName": "Sambas",
+          "kind": "interior"
+        }
+      ],
+      "original_and_full_IDN_observation": {
+        "original_request_id": "repair:23144:129739:210879",
+        "y": 129739,
+        "x": 210879,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B87993072617697",
+            "feature_ordinal": 428,
+            "shapeName": "Sambas",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B87993072617697",
+            "feature_ordinal": 428,
+            "shapeName": "Sambas",
+            "kind": "interior"
+          }
+        ]
+      },
+      "complete_original_and_full_MYS_fine_observation": {
+        "original_request_id": "repair:23144:129739:210879",
+        "y": 129739,
+        "x": 210879,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "original_and_full_MYS_coarse_observation": {
+        "original_request_id": "repair:23144:129739:210879",
+        "y": 129739,
+        "x": 210879,
+        "original_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ]
+      },
+      "government_observations_original": {
+        "request": {
+          "id": "repair:23144:129739:210879",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 23144,
+          "y": 129739,
+          "x": 210879,
+          "original_held_interval": [
+            129739,
+            210879,
+            210880,
+            23144
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "original_idn_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B87993072617697",
+            "feature_ordinal": 428,
+            "shapeName": "Sambas",
+            "kind": "interior"
+          }
+        ],
+        "full_idn_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B87993072617697",
+            "feature_ordinal": 428,
+            "shapeName": "Sambas",
+            "kind": "interior"
+          }
+        ],
+        "full_private_MYS_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ],
+        "cached_Gov_Sarawak_state_contacts": [
+          "interior"
+        ],
+        "new_Gov_Sabah_state_contacts": [],
+        "Gov_district_Sarawak_contacts": [
+          {
+            "source_id": "government:JMG:Demarcation:layer9:OBJECTID:11",
+            "feature_ordinal": 9,
+            "OBJECTID": 11,
+            "provider_name": "Lundu",
+            "kind": "interior"
+          }
+        ],
+        "Gov_district_Sabah_contacts": [],
+        "Gov_Sabah_line_incidence_only": [],
+        "scientific_observation_partition": "IDNfullpositive__Govstatepositive__Govdistrictpositive",
+        "owner_or_hold_changed": false,
+        "authority_or_repair_credit": 0
+      },
+      "exclusive_country_reference_observation": {
+        "original": {
+          "id": "repair:23144:129739:210879",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 23144,
+          "y": 129739,
+          "x": 210879,
+          "original_held_interval": [
+            129739,
+            210879,
+            210880,
+            23144
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_genuine_IDN_vs_government_country_overlap",
+        "latitude": 1.8445429523310242,
+        "longitude_numerator": 28726740,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 1,
+            "ADM0_A3": "MYS",
+            "ADMIN": "Malaysia",
+            "ISO_A3_EH": "MYS"
+          }
+        ],
+        "country_ties": []
+      },
+      "current_native_owner": 0,
+      "current_cumulative_patch_contacts": [],
+      "current_owner_roster_target": {
+        "id": "gb:MYS:ADM2:92858781B46549610571988",
+        "index": 31086,
+        "bounds": [
+          210853.11224267128,
+          129593.79952625492,
+          211322.32702277778,
+          130052.94713066432
+        ],
+        "province_id": "framework:province:sarawak:8a5fb64d0d51",
+        "province_index": 4137
+      },
+      "source_choice_proposed": "Apply the existing unambiguous country-reference display convention to this genuine government district fine interior and unchanged contrary original IDN fine interior, after adopting the explicit government-member-to-existing-target association. Preserve all original operands and source identities.",
+      "source_choice_adopted": false,
+      "qualification_or_acceptance_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:23144:129769:210922",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 23144,
+        "y": 129769,
+        "x": 210922,
+        "original_held_interval": [
+          129769,
+          210922,
+          210923,
+          23144
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "proposed_display_country": "MYS",
+      "proposed_target_id": "gb:MYS:ADM2:92858781B46549610571988",
+      "proposed_target_owner": 31086,
+      "positive_government_members": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:11",
+          "feature_ordinal": 9,
+          "OBJECTID": 11,
+          "provider_name": "Lundu",
+          "kind": "interior"
+        }
+      ],
+      "contrary_original_IDN_fine": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B87993072617697",
+          "feature_ordinal": 428,
+          "shapeName": "Sambas",
+          "kind": "interior"
+        }
+      ],
+      "contrary_same_release_full_IDN_fine": [],
+      "original_and_full_IDN_observation": {
+        "original_request_id": "repair:23144:129769:210922",
+        "y": 129769,
+        "x": 210922,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B87993072617697",
+            "feature_ordinal": 428,
+            "shapeName": "Sambas",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": []
+      },
+      "complete_original_and_full_MYS_fine_observation": {
+        "original_request_id": "repair:23144:129769:210922",
+        "y": 129769,
+        "x": 210922,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "original_and_full_MYS_coarse_observation": {
+        "original_request_id": "repair:23144:129769:210922",
+        "y": 129769,
+        "x": 210922,
+        "original_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ]
+      },
+      "government_observations_original": {
+        "request": {
+          "id": "repair:23144:129769:210922",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 23144,
+          "y": 129769,
+          "x": 210922,
+          "original_held_interval": [
+            129769,
+            210922,
+            210923,
+            23144
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "original_idn_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B87993072617697",
+            "feature_ordinal": 428,
+            "shapeName": "Sambas",
+            "kind": "interior"
+          }
+        ],
+        "full_idn_memberships": [],
+        "full_private_MYS_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ],
+        "cached_Gov_Sarawak_state_contacts": [
+          "interior"
+        ],
+        "new_Gov_Sabah_state_contacts": [],
+        "Gov_district_Sarawak_contacts": [
+          {
+            "source_id": "government:JMG:Demarcation:layer9:OBJECTID:11",
+            "feature_ordinal": 9,
+            "OBJECTID": 11,
+            "provider_name": "Lundu",
+            "kind": "interior"
+          }
+        ],
+        "Gov_district_Sabah_contacts": [],
+        "Gov_Sabah_line_incidence_only": [],
+        "scientific_observation_partition": "IDNfulloutside__Govstatepositive__Govdistrictpositive",
+        "owner_or_hold_changed": false,
+        "authority_or_repair_credit": 0
+      },
+      "exclusive_country_reference_observation": {
+        "original": {
+          "id": "repair:23144:129769:210922",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 23144,
+          "y": 129769,
+          "x": 210922,
+          "original_held_interval": [
+            129769,
+            210922,
+            210923,
+            23144
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_country_positive_no_existing_fine_source_coverage",
+        "latitude": 1.8033685519940845,
+        "longitude_numerator": 28742220,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 1,
+            "ADM0_A3": "MYS",
+            "ADMIN": "Malaysia",
+            "ISO_A3_EH": "MYS"
+          }
+        ],
+        "country_ties": []
+      },
+      "current_native_owner": 0,
+      "current_cumulative_patch_contacts": [],
+      "current_owner_roster_target": {
+        "id": "gb:MYS:ADM2:92858781B46549610571988",
+        "index": 31086,
+        "bounds": [
+          210853.11224267128,
+          129593.79952625492,
+          211322.32702277778,
+          130052.94713066432
+        ],
+        "province_id": "framework:province:sarawak:8a5fb64d0d51",
+        "province_index": 4137
+      },
+      "source_choice_proposed": "Apply the existing unambiguous country-reference display convention to this genuine government district fine interior and unchanged contrary original IDN fine interior, after adopting the explicit government-member-to-existing-target association. Preserve all original operands and source identities.",
+      "source_choice_adopted": false,
+      "qualification_or_acceptance_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:23144:129770:210921",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 23144,
+        "y": 129770,
+        "x": 210921,
+        "original_held_interval": [
+          129770,
+          210921,
+          210922,
+          23144
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "proposed_display_country": "MYS",
+      "proposed_target_id": "gb:MYS:ADM2:92858781B46549610571988",
+      "proposed_target_owner": 31086,
+      "positive_government_members": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:11",
+          "feature_ordinal": 9,
+          "OBJECTID": 11,
+          "provider_name": "Lundu",
+          "kind": "interior"
+        }
+      ],
+      "contrary_original_IDN_fine": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B87993072617697",
+          "feature_ordinal": 428,
+          "shapeName": "Sambas",
+          "kind": "interior"
+        }
+      ],
+      "contrary_same_release_full_IDN_fine": [],
+      "original_and_full_IDN_observation": {
+        "original_request_id": "repair:23144:129770:210921",
+        "y": 129770,
+        "x": 210921,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B87993072617697",
+            "feature_ordinal": 428,
+            "shapeName": "Sambas",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": []
+      },
+      "complete_original_and_full_MYS_fine_observation": {
+        "original_request_id": "repair:23144:129770:210921",
+        "y": 129770,
+        "x": 210921,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "original_and_full_MYS_coarse_observation": {
+        "original_request_id": "repair:23144:129770:210921",
+        "y": 129770,
+        "x": 210921,
+        "original_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ]
+      },
+      "government_observations_original": {
+        "request": {
+          "id": "repair:23144:129770:210921",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 23144,
+          "y": 129770,
+          "x": 210921,
+          "original_held_interval": [
+            129770,
+            210921,
+            210922,
+            23144
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "original_idn_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B87993072617697",
+            "feature_ordinal": 428,
+            "shapeName": "Sambas",
+            "kind": "interior"
+          }
+        ],
+        "full_idn_memberships": [],
+        "full_private_MYS_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ],
+        "cached_Gov_Sarawak_state_contacts": [
+          "interior"
+        ],
+        "new_Gov_Sabah_state_contacts": [],
+        "Gov_district_Sarawak_contacts": [
+          {
+            "source_id": "government:JMG:Demarcation:layer9:OBJECTID:11",
+            "feature_ordinal": 9,
+            "OBJECTID": 11,
+            "provider_name": "Lundu",
+            "kind": "interior"
+          }
+        ],
+        "Gov_district_Sabah_contacts": [],
+        "Gov_Sabah_line_incidence_only": [],
+        "scientific_observation_partition": "IDNfulloutside__Govstatepositive__Govdistrictpositive",
+        "owner_or_hold_changed": false,
+        "authority_or_repair_credit": 0
+      },
+      "exclusive_country_reference_observation": {
+        "original": {
+          "id": "repair:23144:129770:210921",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 23144,
+          "y": 129770,
+          "x": 210921,
+          "original_held_interval": [
+            129770,
+            210921,
+            210922,
+            23144
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_country_positive_no_existing_fine_source_coverage",
+        "latitude": 1.8019960558200934,
+        "longitude_numerator": 28741860,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 1,
+            "ADM0_A3": "MYS",
+            "ADMIN": "Malaysia",
+            "ISO_A3_EH": "MYS"
+          }
+        ],
+        "country_ties": []
+      },
+      "current_native_owner": 0,
+      "current_cumulative_patch_contacts": [],
+      "current_owner_roster_target": {
+        "id": "gb:MYS:ADM2:92858781B46549610571988",
+        "index": 31086,
+        "bounds": [
+          210853.11224267128,
+          129593.79952625492,
+          211322.32702277778,
+          130052.94713066432
+        ],
+        "province_id": "framework:province:sarawak:8a5fb64d0d51",
+        "province_index": 4137
+      },
+      "source_choice_proposed": "Apply the existing unambiguous country-reference display convention to this genuine government district fine interior and unchanged contrary original IDN fine interior, after adopting the explicit government-member-to-existing-target association. Preserve all original operands and source identities.",
+      "source_choice_adopted": false,
+      "qualification_or_acceptance_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:23144:129776:210891",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 23144,
+        "y": 129776,
+        "x": 210891,
+        "original_held_interval": [
+          129776,
+          210891,
+          210892,
+          23144
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "proposed_display_country": "MYS",
+      "proposed_target_id": "gb:MYS:ADM2:92858781B46549610571988",
+      "proposed_target_owner": 31086,
+      "positive_government_members": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:11",
+          "feature_ordinal": 9,
+          "OBJECTID": 11,
+          "provider_name": "Lundu",
+          "kind": "interior"
+        }
+      ],
+      "contrary_original_IDN_fine": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B87993072617697",
+          "feature_ordinal": 428,
+          "shapeName": "Sambas",
+          "kind": "interior"
+        }
+      ],
+      "contrary_same_release_full_IDN_fine": [],
+      "original_and_full_IDN_observation": {
+        "original_request_id": "repair:23144:129776:210891",
+        "y": 129776,
+        "x": 210891,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B87993072617697",
+            "feature_ordinal": 428,
+            "shapeName": "Sambas",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": []
+      },
+      "complete_original_and_full_MYS_fine_observation": {
+        "original_request_id": "repair:23144:129776:210891",
+        "y": 129776,
+        "x": 210891,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "original_and_full_MYS_coarse_observation": {
+        "original_request_id": "repair:23144:129776:210891",
+        "y": 129776,
+        "x": 210891,
+        "original_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ]
+      },
+      "government_observations_original": {
+        "request": {
+          "id": "repair:23144:129776:210891",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 23144,
+          "y": 129776,
+          "x": 210891,
+          "original_held_interval": [
+            129776,
+            210891,
+            210892,
+            23144
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "original_idn_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B87993072617697",
+            "feature_ordinal": 428,
+            "shapeName": "Sambas",
+            "kind": "interior"
+          }
+        ],
+        "full_idn_memberships": [],
+        "full_private_MYS_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ],
+        "cached_Gov_Sarawak_state_contacts": [
+          "interior"
+        ],
+        "new_Gov_Sabah_state_contacts": [],
+        "Gov_district_Sarawak_contacts": [
+          {
+            "source_id": "government:JMG:Demarcation:layer9:OBJECTID:11",
+            "feature_ordinal": 9,
+            "OBJECTID": 11,
+            "provider_name": "Lundu",
+            "kind": "interior"
+          }
+        ],
+        "Gov_district_Sabah_contacts": [],
+        "Gov_Sabah_line_incidence_only": [],
+        "scientific_observation_partition": "IDNfulloutside__Govstatepositive__Govdistrictpositive",
+        "owner_or_hold_changed": false,
+        "authority_or_repair_credit": 0
+      },
+      "exclusive_country_reference_observation": {
+        "original": {
+          "id": "repair:23144:129776:210891",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 23144,
+          "y": 129776,
+          "x": 210891,
+          "original_held_interval": [
+            129776,
+            210891,
+            210892,
+            23144
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_country_positive_no_existing_fine_source_coverage",
+        "latitude": 1.7937610570819915,
+        "longitude_numerator": 28731060,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 1,
+            "ADM0_A3": "MYS",
+            "ADMIN": "Malaysia",
+            "ISO_A3_EH": "MYS"
+          }
+        ],
+        "country_ties": []
+      },
+      "current_native_owner": 0,
+      "current_cumulative_patch_contacts": [],
+      "current_owner_roster_target": {
+        "id": "gb:MYS:ADM2:92858781B46549610571988",
+        "index": 31086,
+        "bounds": [
+          210853.11224267128,
+          129593.79952625492,
+          211322.32702277778,
+          130052.94713066432
+        ],
+        "province_id": "framework:province:sarawak:8a5fb64d0d51",
+        "province_index": 4137
+      },
+      "source_choice_proposed": "Apply the existing unambiguous country-reference display convention to this genuine government district fine interior and unchanged contrary original IDN fine interior, after adopting the explicit government-member-to-existing-target association. Preserve all original operands and source identities.",
+      "source_choice_adopted": false,
+      "qualification_or_acceptance_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:23115:130255:212687",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 23115,
+        "y": 130255,
+        "x": 212687,
+        "original_held_interval": [
+          130255,
+          212686,
+          212688,
+          23115
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "proposed_display_country": "MYS",
+      "proposed_target_id": "gb:MYS:ADM2:92858781B44551979255249",
+      "proposed_target_owner": 31082,
+      "positive_government_members": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:19",
+          "feature_ordinal": 17,
+          "OBJECTID": 19,
+          "provider_name": "Lubok Antu",
+          "kind": "interior"
+        },
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:32",
+          "feature_ordinal": 30,
+          "OBJECTID": 32,
+          "provider_name": "Lubok Antu",
+          "kind": "interior"
+        }
+      ],
+      "contrary_original_IDN_fine": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+          "feature_ordinal": 138,
+          "shapeName": "Kapuas Hulu",
+          "kind": "interior"
+        }
+      ],
+      "contrary_same_release_full_IDN_fine": [],
+      "original_and_full_IDN_observation": {
+        "original_request_id": "repair:23115:130255:212687",
+        "y": 130255,
+        "x": 212687,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+            "feature_ordinal": 138,
+            "shapeName": "Kapuas Hulu",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": []
+      },
+      "complete_original_and_full_MYS_fine_observation": {
+        "original_request_id": "repair:23115:130255:212687",
+        "y": 130255,
+        "x": 212687,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "original_and_full_MYS_coarse_observation": {
+        "original_request_id": "repair:23115:130255:212687",
+        "y": 130255,
+        "x": 212687,
+        "original_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ]
+      },
+      "government_observations_original": {
+        "request": {
+          "id": "repair:23115:130255:212687",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 23115,
+          "y": 130255,
+          "x": 212687,
+          "original_held_interval": [
+            130255,
+            212686,
+            212688,
+            23115
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "original_idn_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+            "feature_ordinal": 138,
+            "shapeName": "Kapuas Hulu",
+            "kind": "interior"
+          }
+        ],
+        "full_idn_memberships": [],
+        "full_private_MYS_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ],
+        "cached_Gov_Sarawak_state_contacts": [
+          "interior"
+        ],
+        "new_Gov_Sabah_state_contacts": [],
+        "Gov_district_Sarawak_contacts": [
+          {
+            "source_id": "government:JMG:Demarcation:layer9:OBJECTID:19",
+            "feature_ordinal": 17,
+            "OBJECTID": 19,
+            "provider_name": "Lubok Antu",
+            "kind": "interior"
+          },
+          {
+            "source_id": "government:JMG:Demarcation:layer9:OBJECTID:32",
+            "feature_ordinal": 30,
+            "OBJECTID": 32,
+            "provider_name": "Lubok Antu",
+            "kind": "interior"
+          }
+        ],
+        "Gov_district_Sabah_contacts": [],
+        "Gov_Sabah_line_incidence_only": [],
+        "scientific_observation_partition": "IDNfulloutside__Govstatepositive__Govdistrictpositive",
+        "owner_or_hold_changed": false,
+        "authority_or_repair_credit": 0
+      },
+      "exclusive_country_reference_observation": {
+        "original": {
+          "id": "repair:23115:130255:212687",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 23115,
+          "y": 130255,
+          "x": 212687,
+          "original_held_interval": [
+            130255,
+            212686,
+            212688,
+            23115
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_country_positive_no_existing_fine_source_coverage",
+        "latitude": 1.1362284724868077,
+        "longitude_numerator": 29377620,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 1,
+            "ADM0_A3": "MYS",
+            "ADMIN": "Malaysia",
+            "ISO_A3_EH": "MYS"
+          }
+        ],
+        "country_ties": []
+      },
+      "current_native_owner": 0,
+      "current_cumulative_patch_contacts": [],
+      "current_owner_roster_target": {
+        "id": "gb:MYS:ADM2:92858781B44551979255249",
+        "index": 31082,
+        "bounds": [
+          212273.69830722222,
+          129921.01751111785,
+          212806.91482166664,
+          130353.8501159761
+        ],
+        "province_id": "framework:province:sarawak:8a5fb64d0d51",
+        "province_index": 4137
+      },
+      "source_choice_proposed": "Apply the existing unambiguous country-reference display convention to this genuine government district fine interior and unchanged contrary original IDN fine interior, after adopting the explicit government-member-to-existing-target association. Preserve all original operands and source identities.",
+      "source_choice_adopted": false,
+      "qualification_or_acceptance_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:23115:130325:212397",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 23115,
+        "y": 130325,
+        "x": 212397,
+        "original_held_interval": [
+          130325,
+          212397,
+          212401,
+          23115
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "proposed_display_country": "MYS",
+      "proposed_target_id": "gb:MYS:ADM2:92858781B67044495158935",
+      "proposed_target_owner": 31127,
+      "positive_government_members": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:15",
+          "feature_ordinal": 13,
+          "OBJECTID": 15,
+          "provider_name": "Sri Aman",
+          "kind": "interior"
+        }
+      ],
+      "contrary_original_IDN_fine": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+          "feature_ordinal": 138,
+          "shapeName": "Kapuas Hulu",
+          "kind": "interior"
+        }
+      ],
+      "contrary_same_release_full_IDN_fine": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+          "feature_ordinal": 138,
+          "shapeName": "Kapuas Hulu",
+          "kind": "interior"
+        }
+      ],
+      "original_and_full_IDN_observation": {
+        "original_request_id": "repair:23115:130325:212397",
+        "y": 130325,
+        "x": 212397,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+            "feature_ordinal": 138,
+            "shapeName": "Kapuas Hulu",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+            "feature_ordinal": 138,
+            "shapeName": "Kapuas Hulu",
+            "kind": "interior"
+          }
+        ]
+      },
+      "complete_original_and_full_MYS_fine_observation": {
+        "original_request_id": "repair:23115:130325:212397",
+        "y": 130325,
+        "x": 212397,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "original_and_full_MYS_coarse_observation": {
+        "original_request_id": "repair:23115:130325:212397",
+        "y": 130325,
+        "x": 212397,
+        "original_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ]
+      },
+      "government_observations_original": {
+        "request": {
+          "id": "repair:23115:130325:212397",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 23115,
+          "y": 130325,
+          "x": 212397,
+          "original_held_interval": [
+            130325,
+            212397,
+            212401,
+            23115
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "original_idn_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+            "feature_ordinal": 138,
+            "shapeName": "Kapuas Hulu",
+            "kind": "interior"
+          }
+        ],
+        "full_idn_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+            "feature_ordinal": 138,
+            "shapeName": "Kapuas Hulu",
+            "kind": "interior"
+          }
+        ],
+        "full_private_MYS_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ],
+        "cached_Gov_Sarawak_state_contacts": [
+          "interior"
+        ],
+        "new_Gov_Sabah_state_contacts": [],
+        "Gov_district_Sarawak_contacts": [
+          {
+            "source_id": "government:JMG:Demarcation:layer9:OBJECTID:15",
+            "feature_ordinal": 13,
+            "OBJECTID": 15,
+            "provider_name": "Sri Aman",
+            "kind": "interior"
+          }
+        ],
+        "Gov_district_Sabah_contacts": [],
+        "Gov_Sabah_line_incidence_only": [],
+        "scientific_observation_partition": "IDNfullpositive__Govstatepositive__Govdistrictpositive",
+        "owner_or_hold_changed": false,
+        "authority_or_repair_credit": 0
+      },
+      "exclusive_country_reference_observation": {
+        "original": {
+          "id": "repair:23115:130325:212397",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 23115,
+          "y": 130325,
+          "x": 212397,
+          "original_held_interval": [
+            130325,
+            212397,
+            212401,
+            23115
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_genuine_IDN_vs_government_country_overlap",
+        "latitude": 1.040123514983152,
+        "longitude_numerator": 29273220,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 1,
+            "ADM0_A3": "MYS",
+            "ADMIN": "Malaysia",
+            "ISO_A3_EH": "MYS"
+          }
+        ],
+        "country_ties": []
+      },
+      "current_native_owner": 0,
+      "current_cumulative_patch_contacts": [],
+      "current_owner_roster_target": {
+        "id": "gb:MYS:ADM2:92858781B67044495158935",
+        "index": 31127,
+        "bounds": [
+          211881.3960177778,
+          129999.914337848,
+          212398.2999811111,
+          130389.68467575852
+        ],
+        "province_id": "framework:province:sarawak:8a5fb64d0d51",
+        "province_index": 4137
+      },
+      "source_choice_proposed": "Apply the existing unambiguous country-reference display convention to this genuine government district fine interior and unchanged contrary original IDN fine interior, after adopting the explicit government-member-to-existing-target association. Preserve all original operands and source identities.",
+      "source_choice_adopted": false,
+      "qualification_or_acceptance_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:23115:130339:212473",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 23115,
+        "y": 130339,
+        "x": 212473,
+        "original_held_interval": [
+          130339,
+          212473,
+          212474,
+          23115
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "proposed_display_country": "MYS",
+      "proposed_target_id": "gb:MYS:ADM2:92858781B44551979255249",
+      "proposed_target_owner": 31082,
+      "positive_government_members": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:19",
+          "feature_ordinal": 17,
+          "OBJECTID": 19,
+          "provider_name": "Lubok Antu",
+          "kind": "interior"
+        },
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:32",
+          "feature_ordinal": 30,
+          "OBJECTID": 32,
+          "provider_name": "Lubok Antu",
+          "kind": "interior"
+        }
+      ],
+      "contrary_original_IDN_fine": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+          "feature_ordinal": 138,
+          "shapeName": "Kapuas Hulu",
+          "kind": "interior"
+        }
+      ],
+      "contrary_same_release_full_IDN_fine": [],
+      "original_and_full_IDN_observation": {
+        "original_request_id": "repair:23115:130339:212473",
+        "y": 130339,
+        "x": 212473,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+            "feature_ordinal": 138,
+            "shapeName": "Kapuas Hulu",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": []
+      },
+      "complete_original_and_full_MYS_fine_observation": {
+        "original_request_id": "repair:23115:130339:212473",
+        "y": 130339,
+        "x": 212473,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "original_and_full_MYS_coarse_observation": {
+        "original_request_id": "repair:23115:130339:212473",
+        "y": 130339,
+        "x": 212473,
+        "original_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ]
+      },
+      "government_observations_original": {
+        "request": {
+          "id": "repair:23115:130339:212473",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 23115,
+          "y": 130339,
+          "x": 212473,
+          "original_held_interval": [
+            130339,
+            212473,
+            212474,
+            23115
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "original_idn_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+            "feature_ordinal": 138,
+            "shapeName": "Kapuas Hulu",
+            "kind": "interior"
+          }
+        ],
+        "full_idn_memberships": [],
+        "full_private_MYS_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ],
+        "cached_Gov_Sarawak_state_contacts": [
+          "interior"
+        ],
+        "new_Gov_Sabah_state_contacts": [],
+        "Gov_district_Sarawak_contacts": [
+          {
+            "source_id": "government:JMG:Demarcation:layer9:OBJECTID:19",
+            "feature_ordinal": 17,
+            "OBJECTID": 19,
+            "provider_name": "Lubok Antu",
+            "kind": "interior"
+          },
+          {
+            "source_id": "government:JMG:Demarcation:layer9:OBJECTID:32",
+            "feature_ordinal": 30,
+            "OBJECTID": 32,
+            "provider_name": "Lubok Antu",
+            "kind": "interior"
+          }
+        ],
+        "Gov_district_Sabah_contacts": [],
+        "Gov_Sabah_line_incidence_only": [],
+        "scientific_observation_partition": "IDNfulloutside__Govstatepositive__Govdistrictpositive",
+        "owner_or_hold_changed": false,
+        "authority_or_repair_credit": 0
+      },
+      "exclusive_country_reference_observation": {
+        "original": {
+          "id": "repair:23115:130339:212473",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 23115,
+          "y": 130339,
+          "x": 212473,
+          "original_held_interval": [
+            130339,
+            212473,
+            212474,
+            23115
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_country_positive_no_existing_fine_source_coverage",
+        "latitude": 1.0209021636170963,
+        "longitude_numerator": 29300580,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 1,
+            "ADM0_A3": "MYS",
+            "ADMIN": "Malaysia",
+            "ISO_A3_EH": "MYS"
+          }
+        ],
+        "country_ties": []
+      },
+      "current_native_owner": 0,
+      "current_cumulative_patch_contacts": [],
+      "current_owner_roster_target": {
+        "id": "gb:MYS:ADM2:92858781B44551979255249",
+        "index": 31082,
+        "bounds": [
+          212273.69830722222,
+          129921.01751111785,
+          212806.91482166664,
+          130353.8501159761
+        ],
+        "province_id": "framework:province:sarawak:8a5fb64d0d51",
+        "province_index": 4137
+      },
+      "source_choice_proposed": "Apply the existing unambiguous country-reference display convention to this genuine government district fine interior and unchanged contrary original IDN fine interior, after adopting the explicit government-member-to-existing-target association. Preserve all original operands and source identities.",
+      "source_choice_adopted": false,
+      "qualification_or_acceptance_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:23115:130346:212436",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 23115,
+        "y": 130346,
+        "x": 212436,
+        "original_held_interval": [
+          130346,
+          212436,
+          212437,
+          23115
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "proposed_display_country": "MYS",
+      "proposed_target_id": "gb:MYS:ADM2:92858781B44551979255249",
+      "proposed_target_owner": 31082,
+      "positive_government_members": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:19",
+          "feature_ordinal": 17,
+          "OBJECTID": 19,
+          "provider_name": "Lubok Antu",
+          "kind": "interior"
+        },
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:32",
+          "feature_ordinal": 30,
+          "OBJECTID": 32,
+          "provider_name": "Lubok Antu",
+          "kind": "interior"
+        }
+      ],
+      "contrary_original_IDN_fine": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+          "feature_ordinal": 138,
+          "shapeName": "Kapuas Hulu",
+          "kind": "interior"
+        }
+      ],
+      "contrary_same_release_full_IDN_fine": [],
+      "original_and_full_IDN_observation": {
+        "original_request_id": "repair:23115:130346:212436",
+        "y": 130346,
+        "x": 212436,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+            "feature_ordinal": 138,
+            "shapeName": "Kapuas Hulu",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": []
+      },
+      "complete_original_and_full_MYS_fine_observation": {
+        "original_request_id": "repair:23115:130346:212436",
+        "y": 130346,
+        "x": 212436,
+        "original_memberships": [],
+        "full_memberships": []
+      },
+      "original_and_full_MYS_coarse_observation": {
+        "original_request_id": "repair:23115:130346:212436",
+        "y": 130346,
+        "x": 212436,
+        "original_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ]
+      },
+      "government_observations_original": {
+        "request": {
+          "id": "repair:23115:130346:212436",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 23115,
+          "y": 130346,
+          "x": 212436,
+          "original_held_interval": [
+            130346,
+            212436,
+            212437,
+            23115
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "original_idn_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+            "feature_ordinal": 138,
+            "shapeName": "Kapuas Hulu",
+            "kind": "interior"
+          }
+        ],
+        "full_idn_memberships": [],
+        "full_private_MYS_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ],
+        "cached_Gov_Sarawak_state_contacts": [
+          "interior"
+        ],
+        "new_Gov_Sabah_state_contacts": [],
+        "Gov_district_Sarawak_contacts": [
+          {
+            "source_id": "government:JMG:Demarcation:layer9:OBJECTID:19",
+            "feature_ordinal": 17,
+            "OBJECTID": 19,
+            "provider_name": "Lubok Antu",
+            "kind": "interior"
+          },
+          {
+            "source_id": "government:JMG:Demarcation:layer9:OBJECTID:32",
+            "feature_ordinal": 30,
+            "OBJECTID": 32,
+            "provider_name": "Lubok Antu",
+            "kind": "interior"
+          }
+        ],
+        "Gov_district_Sabah_contacts": [],
+        "Gov_Sabah_line_incidence_only": [],
+        "scientific_observation_partition": "IDNfulloutside__Govstatepositive__Govdistrictpositive",
+        "owner_or_hold_changed": false,
+        "authority_or_repair_credit": 0
+      },
+      "exclusive_country_reference_observation": {
+        "original": {
+          "id": "repair:23115:130346:212436",
+          "original_package": "repair",
+          "country": "MYS",
+          "owner": 23115,
+          "y": 130346,
+          "x": 212436,
+          "original_held_interval": [
+            130346,
+            212436,
+            212437,
+            23115
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            45977
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "MYS_country_positive_no_existing_fine_source_coverage",
+        "latitude": 1.0112914447079018,
+        "longitude_numerator": 29287260,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 1,
+            "ADM0_A3": "MYS",
+            "ADMIN": "Malaysia",
+            "ISO_A3_EH": "MYS"
+          }
+        ],
+        "country_ties": []
+      },
+      "current_native_owner": 0,
+      "current_cumulative_patch_contacts": [],
+      "current_owner_roster_target": {
+        "id": "gb:MYS:ADM2:92858781B44551979255249",
+        "index": 31082,
+        "bounds": [
+          212273.69830722222,
+          129921.01751111785,
+          212806.91482166664,
+          130353.8501159761
+        ],
+        "province_id": "framework:province:sarawak:8a5fb64d0d51",
+        "province_index": 4137
+      },
+      "source_choice_proposed": "Apply the existing unambiguous country-reference display convention to this genuine government district fine interior and unchanged contrary original IDN fine interior, after adopting the explicit government-member-to-existing-target association. Preserve all original operands and source identities.",
+      "source_choice_adopted": false,
+      "qualification_or_acceptance_credit": 0
+    }
+  ],
+  "elapsed_seconds": 2.5141461770108435
+}

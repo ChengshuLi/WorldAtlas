@@ -1,0 +1,708 @@
+{
+  "kind": "one-key-full-provider-variant-source-choice-assessment",
+  "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+  "original_request_id": "repair:23115:130083:213613",
+  "accepted_credit": 0,
+  "pins": [
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/sources/full/geoBoundaries-MYS-ADM2.geojson.gz",
+      "bytes": 509744,
+      "sha256": "e22338a9151a8e914e15a9356877b61ead8e17ae33873ff3da183dc8fd7c202a"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MYS-ADM2-000.bin.gz",
+      "bytes": 293141,
+      "sha256": "825f65a4ca40cdc12d5914e07f5153d606d2d0a06c7c76d4ac12c729c0920ee6"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/sources/full/geoBoundaries-MYS-ADM2-metaData.json",
+      "bytes": 839,
+      "sha256": "1cdc5e134b66383ef59400b8d220fe14b0b5824cb4fcc2497f02b2cca16e2497"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/execution/same-provider-MYSADM2-acquisition.json",
+      "bytes": 1343,
+      "sha256": "7f48953b68b9fed38fc5bee9b5b81e389a5b96bdeea10cbce84b973836f42003"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/observations/idn-native-comparison-001/gb-IDN-ADM2.json.gz",
+      "bytes": 93905,
+      "sha256": "9a2dc222984859dafd4f47ce5526088295db6bb4fef64b2566eefcc3a789f0fd"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/observations/native-comparison-002/gb-MYS-ADM2.json",
+      "bytes": 266781,
+      "sha256": "43cfd77e3da7f7b5995b28769ccb8ed5786acbad316e41db6418f18bdb81f682"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/observations/native-comparison-002/gb-MYS-ADM1.json",
+      "bytes": 231952,
+      "sha256": "ac2b27cd0d7b8d5d17a1b571f8b153bb3ea31c534506fa41ae28a6dd8af2c61f"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-primary-source-001/observations/layer-9.json",
+      "bytes": 133860,
+      "sha256": "8d3be2e80ff36ea61aa34d8a6beced4aa8cfb0cd6b10b4969322946cfa042b02"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-primary-source-001/observations/layer-10.json",
+      "bytes": 122552,
+      "sha256": "16698ec197deae081800c942918306eb0d9fe20d05475dbca449e10f9b368660"
+    }
+  ],
+  "source_variants": [
+    {
+      "variant": "original-consumed",
+      "feature_ordinal": 114,
+      "properties": {
+        "shapeName": "Bukit Mabong",
+        "shapeISO": "",
+        "shapeID": "92858781B56085190058706",
+        "shapeGroup": "MYS",
+        "shapeType": "ADM2"
+      },
+      "geometry_sha256_canonical_json": "5b28b8a071da6242c4b93ee8a1bf3b82c31b057d0154e3638383b611113ff7ce",
+      "geometry_sha256_compact_json": "6cd505701913f117f816f9046f9bc193c527302353edac08926324370dc8a5b2",
+      "valid": true,
+      "validity": "Valid Geometry",
+      "bounds": [
+        112.84597001300006,
+        1.221984052000039,
+        114.89384194900003,
+        2.31674663900003
+      ]
+    },
+    {
+      "variant": "full-provider",
+      "feature_ordinal": 114,
+      "properties": {
+        "shapeName": "Bukit Mabong",
+        "shapeISO": "",
+        "shapeID": "92858781B56085190058706",
+        "shapeGroup": "MYS",
+        "shapeType": "ADM2"
+      },
+      "geometry_sha256_canonical_json": "5c57ad7c87b1bf0a749532ec1edc60d2c6b44e55cfb2e7ded5e47f5c30f21cf1",
+      "geometry_sha256_compact_json": "c510e47bb180a628a8132629e2668290d1b68d2e6c68a89c324b513992638727",
+      "valid": true,
+      "validity": "Valid Geometry",
+      "bounds": [
+        112.84597001300006,
+        1.221984052000039,
+        114.89384194900003,
+        2.31674663900003
+      ]
+    }
+  ],
+  "full_provider_acquisition": {
+    "observed_utc": "2026-10-15T23:12:47.542658+00:00",
+    "requests": [
+      {
+        "file": "geoBoundaries-MYS-ADM2-metaData.json",
+        "raw_pointer_url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/MYS/ADM2/geoBoundaries-MYS-ADM2-metaData.json",
+        "download_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/MYS/ADM2/geoBoundaries-MYS-ADM2-metaData.json",
+        "expected_lfs_sha256": "1cdc5e134b66383ef59400b8d220fe14b0b5824cb4fcc2497f02b2cca16e2497",
+        "expected_lfs_bytes": 839,
+        "exit": 0,
+        "bytes": 839,
+        "sha256": "1cdc5e134b66383ef59400b8d220fe14b0b5824cb4fcc2497f02b2cca16e2497"
+      },
+      {
+        "file": "geoBoundaries-MYS-ADM2.geojson",
+        "raw_pointer_url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/MYS/ADM2/geoBoundaries-MYS-ADM2.geojson",
+        "download_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/MYS/ADM2/geoBoundaries-MYS-ADM2.geojson",
+        "expected_lfs_sha256": "1a7db3b44563073171b02eba59b109fc1bc6256ab0b011531ea6d5053515e550",
+        "expected_lfs_bytes": 1932621,
+        "exit": 0,
+        "bytes": 1932621,
+        "sha256": "1a7db3b44563073171b02eba59b109fc1bc6256ab0b011531ea6d5053515e550"
+      }
+    ]
+  },
+  "full_provider_metadata": {
+    "boundaryID": "MYS-ADM2-92858781",
+    "boundaryISO": "MYS",
+    "boundaryYear": "2020",
+    "boundaryType": "ADM2",
+    "boundarySource": "geoBoundaries, citypopulation.de",
+    "boundaryCanonical": "Districts",
+    "boundaryLicense": "Creative Commons Attribution 3.0 License",
+    "licenseDetail": "",
+    "licenseSource": "https//www.citypopulation.de/en/help/termsofuse/",
+    "boundarySourceURL": "https//www.citypopulation.de/en/malaysia/admin/",
+    "sourceDataUpdateDate": "Wed May 3 23:31:31 2023",
+    "buildDate": "Dec 12, 2023",
+    "admUnitCount": "160",
+    "meanVertices": "271.0",
+    "minVertices": "56",
+    "maxVertices": "1953",
+    "meanPerimeterLengthKM": "239.6975556643762",
+    "maxPerimeterLengthKM": "713.6546989215581",
+    "minPerimeterLengthKM": "30.103754731237267",
+    "meanAreaSqKM": "2065.4564636626324",
+    "minAreaSqKM": "35.095067599104176",
+    "maxAreaSqKM": "16162.635611594958"
+  },
+  "actual_features_in_both_bodies": 159,
+  "metadata_claimed_features": "160",
+  "retained_observations": {
+    "IDN_fine": {
+      "input": {
+        "key": "gb:IDN:ADM2",
+        "country": "IDN",
+        "original": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/gb-IDN-ADM2-original-consumed.json",
+          "bytes": 11002896,
+          "sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c"
+        },
+        "full": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/geoBoundaries-IDN-ADM2.geojson",
+          "bytes": 158892831,
+          "sha256": "947cedc058888c0c2b2628071d289956c85fe279adb369dcf1327ce2236a5602"
+        },
+        "actual_original_features": 519,
+        "actual_full_features": 519,
+        "all_feature_properties_identical": true,
+        "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2_simplified.geojson",
+        "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+        "represented_year_claim": "2020"
+      },
+      "per_original_request": {
+        "original_request_id": "repair:23115:130083:213613",
+        "y": 130083,
+        "x": 213613,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+            "feature_ordinal": 138,
+            "shapeName": "Kapuas Hulu",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": []
+      }
+    },
+    "MYS_fine": {
+      "input": {
+        "key": "gb:MYS:ADM2",
+        "country": "MYS",
+        "original": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/gb-MYS-ADM2-original-consumed.json",
+          "bytes": 1161210,
+          "sha256": "2370e1df1da8e8db2d582ea404d2bcb538127a01785dd994cbe4c1bbf33a951f"
+        },
+        "full": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/geoBoundaries-MYS-ADM2.geojson",
+          "bytes": 1932621,
+          "sha256": "1a7db3b44563073171b02eba59b109fc1bc6256ab0b011531ea6d5053515e550"
+        },
+        "original_corpus_part": {
+          "bytes": 293141,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MYS-ADM2-000.bin.gz",
+          "sha256": "825f65a4ca40cdc12d5914e07f5153d606d2d0a06c7c76d4ac12c729c0920ee6",
+          "uncompressed_bytes": 1161210,
+          "uncompressed_sha256": "2370e1df1da8e8db2d582ea404d2bcb538127a01785dd994cbe4c1bbf33a951f"
+        },
+        "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MYS/ADM2/geoBoundaries-MYS-ADM2_simplified.geojson",
+        "license": "Creative Commons Attribution 3.0 License",
+        "represented_year_claim": "2020",
+        "actual_original_features": 159,
+        "actual_full_features": 159,
+        "all_feature_properties_identical": true,
+        "advertised_feature_count": 160
+      },
+      "per_original_request": {
+        "original_request_id": "repair:23115:130083:213613",
+        "y": 130083,
+        "x": 213613,
+        "original_memberships": [],
+        "full_memberships": [
+          {
+            "source_id": "gb:MYS:ADM2:92858781B56085190058706",
+            "feature_ordinal": 114,
+            "shapeName": "Bukit Mabong",
+            "kind": "interior"
+          }
+        ]
+      }
+    },
+    "MYS_coarse": {
+      "input": {
+        "key": "gb:MYS:ADM1",
+        "country": "MYS",
+        "original": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/gb-MYS-ADM1-original-consumed.json",
+          "bytes": 583194,
+          "sha256": "fb0f76f0f987c748b732ef02049113946db2dd5fc604130d4a0fbab4e74d4012"
+        },
+        "full": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/geoBoundaries-MYS-ADM1.geojson",
+          "bytes": 3253284,
+          "sha256": "de8b44337315de60019951d76744765ebdd5efc9c5823e0933b4dc15a0ed20d4"
+        },
+        "original_corpus_part": {
+          "bytes": 180810,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MYS-ADM1-000.bin.gz",
+          "sha256": "1382eb5fc945eeaa1a5c6e3aded15b940b40c59a7dfdbb4f5f739c597684bbff",
+          "uncompressed_bytes": 583194,
+          "uncompressed_sha256": "fb0f76f0f987c748b732ef02049113946db2dd5fc604130d4a0fbab4e74d4012"
+        },
+        "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MYS/ADM1/geoBoundaries-MYS-ADM1_simplified.geojson",
+        "license": "Open Data Commons Open Database License 1.0",
+        "represented_year_claim": "2017",
+        "actual_original_features": 16,
+        "actual_full_features": 16,
+        "all_feature_properties_identical": true,
+        "advertised_feature_count": 16
+      },
+      "per_original_request": {
+        "original_request_id": "repair:23115:130083:213613",
+        "y": 130083,
+        "x": 213613,
+        "original_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+            "feature_ordinal": 6,
+            "shapeName": "Sarawak",
+            "kind": "interior"
+          }
+        ]
+      }
+    },
+    "government_district_layer9": {
+      "input": {
+        "path": "retained-task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/government-fine-whole-followup-003/layer-9-DistrictCoverageSarawak-whole4326.geojson",
+        "bytes": 5379842,
+        "sha256": "6ca083d7bc396417ae83e05830ad2eea7a63136010839f1f1341a0861cf7f941"
+      },
+      "per_original_request": {
+        "original_request_id": "repair:23115:130083:213613",
+        "y": 130083,
+        "x": 213613,
+        "query_semantics": "whole_provider_polygon_membership;no_Atlas_owner_equivalence",
+        "provider_contacts": []
+      }
+    },
+    "government_district_layer10": {
+      "input": {
+        "path": "retained-task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/government-fine-whole-followup-003/layer-10-DistrictCoverageSabah-whole4326.geojson",
+        "bytes": 4499127,
+        "sha256": "d3c01612219c307f899d0f01c291e0db3067f972ea2cde1c7b22459a2d02f32b"
+      },
+      "per_original_request": {
+        "original_request_id": "repair:23115:130083:213613",
+        "y": 130083,
+        "x": 213613,
+        "query_semantics": "whole_provider_polygon_membership;no_Atlas_owner_equivalence",
+        "provider_contacts": []
+      }
+    }
+  },
+  "original_retained_record": {
+    "original_request_unchanged": {
+      "id": "repair:23115:130083:213613",
+      "original_package": "repair",
+      "country": "MYS",
+      "owner": 23115,
+      "y": 130083,
+      "x": 213613,
+      "original_held_interval": [
+        130083,
+        213613,
+        213614,
+        23115
+      ],
+      "original_request_custody": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+        "bytes": 11275,
+        "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+      },
+      "original_foreign_source_indices": [
+        45977
+      ],
+      "original_held_reason": "territorial_exclusion_cells"
+    },
+    "assessment_category": "MYS_full_fine_only_positive_corpus_gap",
+    "supported_fact": "All519 full IDN members are outside. Full MYS Bukit Mabong is interior but original consumed fine MYS member is outside; government Sarawak state also covers.",
+    "next_consequential_fact_or_existing_dependency": "An accepted positive-source/corpus membership route for actual existing Atlas31106 using the full fine source; own first whole physical exists, but it alone cannot fix original consumed positive coverage. Do not duplicate2057/2056 implementation.",
+    "ordinary_unmodified_authority_ready_now": false,
+    "original_full_family_observations_unchanged": {
+      "request": {
+        "id": "repair:23115:130083:213613",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 23115,
+        "y": 130083,
+        "x": 213613,
+        "original_held_interval": [
+          130083,
+          213613,
+          213614,
+          23115
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "original_idn_memberships": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+          "feature_ordinal": 138,
+          "shapeName": "Kapuas Hulu",
+          "kind": "interior"
+        }
+      ],
+      "full_idn_memberships": [],
+      "full_foreign_memberships": [
+        {
+          "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+          "feature_ordinal": 6,
+          "shapeName": "Sarawak",
+          "kind": "interior"
+        },
+        {
+          "source_id": "gb:MYS:ADM2:92858781B56085190058706",
+          "feature_ordinal": 114,
+          "shapeName": "Bukit Mabong",
+          "kind": "interior"
+        }
+      ],
+      "foreign_family_details": {
+        "gb:MYS:ADM1": {
+          "original_request_id": "repair:23115:130083:213613",
+          "y": 130083,
+          "x": 213613,
+          "original_memberships": [
+            {
+              "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+              "feature_ordinal": 6,
+              "shapeName": "Sarawak",
+              "kind": "interior"
+            }
+          ],
+          "full_memberships": [
+            {
+              "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+              "feature_ordinal": 6,
+              "shapeName": "Sarawak",
+              "kind": "interior"
+            }
+          ]
+        },
+        "gb:MYS:ADM2": {
+          "original_request_id": "repair:23115:130083:213613",
+          "y": 130083,
+          "x": 213613,
+          "original_memberships": [],
+          "full_memberships": [
+            {
+              "source_id": "gb:MYS:ADM2:92858781B56085190058706",
+              "feature_ordinal": 114,
+              "shapeName": "Bukit Mabong",
+              "kind": "interior"
+            }
+          ]
+        }
+      },
+      "symmetric_source_category": "IDN-full-outside__foreign-full-contact",
+      "source_applicability_or_owner_winner": null,
+      "hold_or_owner_changes": false,
+      "authority_or_repair_credit": 0
+    },
+    "government_observations_unchanged": {
+      "request": {
+        "id": "repair:23115:130083:213613",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 23115,
+        "y": 130083,
+        "x": 213613,
+        "original_held_interval": [
+          130083,
+          213613,
+          213614,
+          23115
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "original_idn_memberships": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+          "feature_ordinal": 138,
+          "shapeName": "Kapuas Hulu",
+          "kind": "interior"
+        }
+      ],
+      "full_idn_memberships": [],
+      "full_private_MYS_memberships": [
+        {
+          "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+          "feature_ordinal": 6,
+          "shapeName": "Sarawak",
+          "kind": "interior"
+        },
+        {
+          "source_id": "gb:MYS:ADM2:92858781B56085190058706",
+          "feature_ordinal": 114,
+          "shapeName": "Bukit Mabong",
+          "kind": "interior"
+        }
+      ],
+      "cached_Gov_Sarawak_state_contacts": [
+        "interior"
+      ],
+      "new_Gov_Sabah_state_contacts": [],
+      "Gov_district_Sarawak_contacts": [],
+      "Gov_district_Sabah_contacts": [],
+      "Gov_Sabah_line_incidence_only": [],
+      "scientific_observation_partition": "IDNfulloutside__Govstatepositive__Govdistrictoutside",
+      "owner_or_hold_changed": false,
+      "authority_or_repair_credit": 0
+    },
+    "fine_positive_original": [],
+    "fine_positive_full": [
+      {
+        "source_id": "gb:MYS:ADM2:92858781B56085190058706",
+        "feature_ordinal": 114,
+        "shapeName": "Bukit Mabong",
+        "kind": "interior"
+      }
+    ],
+    "owner_or_hold_change": false
+  },
+  "country_reference": {
+    "original": {
+      "id": "repair:23115:130083:213613",
+      "original_package": "repair",
+      "country": "MYS",
+      "owner": 23115,
+      "y": 130083,
+      "x": 213613,
+      "original_held_interval": [
+        130083,
+        213613,
+        213614,
+        23115
+      ],
+      "original_request_custody": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+        "bytes": 11275,
+        "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+      },
+      "original_foreign_source_indices": [
+        45977
+      ],
+      "original_held_reason": "territorial_exclusion_cells"
+    },
+    "assessment_category": "MYS_full_fine_only_positive_corpus_gap",
+    "latitude": 1.3723579457083712,
+    "longitude_numerator": 29710980,
+    "longitude_denominator": 262166,
+    "country_hits": [
+      {
+        "ordinal": 1,
+        "ADM0_A3": "MYS",
+        "ADMIN": "Malaysia",
+        "ISO_A3_EH": "MYS"
+      }
+    ],
+    "country_ties": []
+  },
+  "fresh_ownership": {
+    "external_artifact": "/workspace/scratch/127991fc8b8e/indonesia-mys-district-crosswalk-review-20261016/phase2-exact14-source-choice-001/exact14-plus-control1-current-ownership.json",
+    "bytes": 114891,
+    "sha256": "1de563e15de7504911ea72981abfe74eb72f7f819d264eb55c5e61622775013d",
+    "record": {
+      "check_group": "separate_original_fine_control1",
+      "original": {
+        "id": "repair:23115:130083:213613",
+        "original_package": "repair",
+        "country": "MYS",
+        "owner": 23115,
+        "y": 130083,
+        "x": 213613,
+        "original_held_interval": [
+          130083,
+          213613,
+          213614,
+          23115
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          45977
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "target": {
+        "id": "gb:MYS:ADM2:92858781B56085190058706",
+        "index": 31106,
+        "bounds": [
+          213283.40152666668,
+          129395.42906516371,
+          214748.76381888887,
+          130193.02460317116
+        ],
+        "province_id": "framework:province:sarawak:8a5fb64d0d51",
+        "province_index": 4137
+      },
+      "selected_properties": {
+        "id": "gb:MYS:ADM2:92858781B56085190058706",
+        "name": "Bukit Mabong",
+        "parent_id": "framework:province:sarawak:8a5fb64d0d51",
+        "reference_owner": "Malaysia",
+        "metadata": {
+          "source_id": "gb:MYS:ADM2",
+          "source_name": "geoBoundaries gbOpen",
+          "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MYS/ADM2/geoBoundaries-MYS-ADM2.geojson",
+          "license": "Creative Commons Attribution 3.0 License",
+          "reference_year": "2020",
+          "administrative_level": "ADM2",
+          "parent_source_level": "ADM1",
+          "granularity_version": 3,
+          "source_role": "Districts",
+          "selection_reason": "Named Districts territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+          "parent_match": "Named source administrative unit grouped within this geographic area",
+          "original_id": "92858781B56085190058706",
+          "representative_point": [
+            113.83413806480976,
+            1.7728408476508428
+          ],
+          "hierarchy_version": 4,
+          "hierarchy_source": "gb:MYS:ADM1",
+          "hierarchy_overlap": 0.995017,
+          "topology_version": 1,
+          "topology_reconciled": true,
+          "topology_conflicts": 3,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+          "original_geometry_sha256": "53cbe516605304667d0c1dc99412a3fc0955ea7cd5d4bae2ab9e66329233bf93",
+          "reference_version": 3,
+          "geographic_area_code": "BOR",
+          "geographic_region_code": 42,
+          "geographic_match": "largest source overlap",
+          "geographic_overlap": 1,
+          "coverage_version": 1,
+          "semantic_version": 1,
+          "remote_version": 1,
+          "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+          "framework_match": {
+            "source": "Natural Earth",
+            "id": "MYS-1187",
+            "overlap": 0.975051
+          },
+          "regional_match": {
+            "reference_iso": "MYS",
+            "source_id": "MYS-1187",
+            "overlap": 0.975051,
+            "method": "reference-territory-constrained overlap"
+          },
+          "reference_owner_id": "owner:Q833",
+          "reference_polity": "Malaysia",
+          "reference_polity_status": "reference",
+          "reference_polity_evidence": {
+            "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+            "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+            "reference_territory": "Malaysia",
+            "classification": "Sovereign country",
+            "note": null,
+            "uncertainty": false
+          },
+          "semantic_review": {
+            "status": "open",
+            "continent": "Asia",
+            "decision_index": 2022,
+            "evidence_file": "geographic-decisions"
+          }
+        }
+      },
+      "selected_geometry_sha256": "ec6a5969ef108a729859c8e9d05d0e2891a100a009df12dabf2f8e5d7bd60c34",
+      "base_owner": 0,
+      "patch_hits": [],
+      "effective_owner": 0,
+      "proposed_government_positive_sources": [],
+      "original_idn_evidence_retained": null
+    },
+    "native_asset_fragments_read": [
+      "run-1/chunk-00/part-000.bin.gz",
+      "run-1/chunk-01/part-000.bin.gz"
+    ]
+  },
+  "proposed_positive_source_identity": {
+    "provider_family": "geoBoundaries gbOpen MYS ADM2",
+    "provider_revision": "9469f09",
+    "variant": "full-provider-GeoJSON",
+    "body_decoded_bytes": 1932621,
+    "body_decoded_sha256": "1a7db3b44563073171b02eba59b109fc1bc6256ab0b011531ea6d5053515e550",
+    "feature_ordinal": 114,
+    "shapeID": "92858781B56085190058706",
+    "geometry_sha256_canonical_json": "5c57ad7c87b1bf0a749532ec1edc60d2c6b44e55cfb2e7ded5e47f5c30f21cf1",
+    "note": "Typed provenance tuple proposed for review, not an accepted corpus registration or substitute for the original consumed gb:MYS source geometry."
+  },
+  "proposed_target": {
+    "id": "gb:MYS:ADM2:92858781B56085190058706",
+    "index": 31106,
+    "bounds": [
+      213283.40152666668,
+      129395.42906516371,
+      214748.76381888887,
+      130193.02460317116
+    ],
+    "province_id": "framework:province:sarawak:8a5fb64d0d51",
+    "province_index": 4137
+  },
+  "proposal": "Choose full-provider Bukit Mabong source interior for display at this exact key, constrained to existing target31106 by same-provider identity and exclusive MYS reference, while preserving original-consumed MYS outside and original-consumed IDN interior as contrary observations.",
+  "integration_prerequisites": [
+    "Parent source-choice review.",
+    "Explicit accepted source/corpus route binding the full provider variant to existing target31106 without replacing or relabeling original-consumed geometry.",
+    "Locate and authenticate the whole-target physical receipt claimed in the original residual; its locator remains unresolved after owner searched12 public receipts. Do not repeat the physical producer based on absence of a locator.",
+    "Stock current competition, native authority, exact scope and conservation, emitted package/consumer qualification."
+  ],
+  "elapsed_seconds": 0.24706060701282695,
+  "new_scientific_producer_runs": 0,
+  "limits": [
+    "Sarawak country/state coverage cannot supply fine membership; the positive member is the literal full-provider Bukit Mabong polygon.",
+    "Full and original are distinct geometries despite identical properties. Neither original-source membership nor full-source membership is relabeled as the other.",
+    "All519 full IDN fine members outside is retained evidence, not a newly replayed full-IDN corpus observation.",
+    "No source geometry, selected vector geography, native ownership or scope is changed by this assessment."
+  ]
+}
