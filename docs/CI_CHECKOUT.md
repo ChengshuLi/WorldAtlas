@@ -7,13 +7,44 @@ and closes system/global Git configuration, hooks and credential helpers. No
 candidate programme runs during checkout. Evidence-only and geographic checkout
 roles remain separate.
 
-Trusted preparation already authenticates the candidate's parents and complete
-tree and compares reviewed bytes. It now emits that tree identity and the
+Trusted preparation authenticates the candidate's parents and complete tree.
+Cleanly composed changes are verified by the exact combined candidate checks. It now emits that tree identity and the
 existing sparse selection directly, removing the separate helper authentication,
 custom Git executor, staging/promotion protocol and legacy fallback branch.
 
-Complete regressions retain every existing test and omit only
-`data/regional-review/` and `research/campaigns/`. Selected-data requests retain
+Complete regressions retain every discovered test across the existing three
+shards and the actual hosted build/parity/runtime checks. In addition to the
+existing `data/regional-review/` and `research/campaigns/` exclusions, ordinary
+full checkout omits six historical engineering archive roots:
+
+- `coordination/engineering/global-source-comparisons-b-package3-20261006/`
+- `coordination/engineering/global-source-comparisons-a-20261006/`
+- `coordination/engineering/global-source-comparisons-a-001-20261006/`
+- `coordination/engineering/global-source-comparisons-b-20261006/`
+- `coordination/engineering/reference-source-custody-20261007/`
+- `coordination/engineering/complete-numeric-closure-diagnosis-20261007/`
+
+Those six engineering exclusions retain an entire root when a declared package
+or verification path intersects it. The research archive under
+`research/geography/` is omitted except for actual package and verification
+inputs. Its twelve current regression fixture paths are declared in the existing
+`.github/package-inputs.json` `verification_paths` list. Both complete and
+selected-data checkouts reuse the same stock sparse-pattern renderer; no new
+transport, validator, extension catalogue or archive-body rewrite is involved.
+Original files and history remain in Git. A new test consuming additional
+research data declares that dependency alongside its code change.
+
+The accepted `225e0d36` tree contains 7,499 research archive files totaling 2,796,658,781
+logical bytes. The twelve required fixture paths total 7,197,655 bytes. This removes
+2,789,461,126 logical bytes per full worktree, 99.74% of that namespace. These are
+not Git pack/wire bytes or measured hosted duration savings. The original bounded
+trace covered cat-file reads but missed git-show reads. Independent review of
+PR #2137 at `bfd2df0` found two missing original Ukraine bodies. Restoring those
+two exact bodies made all 299 controls at that frozen head pass in a cold,
+no-alternates Git object database. New composed heads require their current
+controls; that retained result does not cover every possible dynamic consumer.
+
+Selected-data requests retain
 the existing package/verification roles, ordinary engineering execution files
 and exact reviewed expectations. The existing selector is evaluated against the
 authenticated candidate tree; it grants no package, scientific or publication
@@ -40,7 +71,9 @@ logs do not distinguish network transfer, packing or filesystem work. Replacing
 the executor does not prove a speedup or diagnose the active Papua straggler.
 Measure the next ordinary adopted run honestly. A duplicate local full Papua
 checkout was declined because its exact retained files alone total 10.64 GB,
-which would breach the local storage floor before Git object storage.
+which exceeded the then-required local storage floor before Git object storage.
+That fixed allocator floor was subsequently removed; actual available space
+still limits duplicate full checkouts.
 
 Earlier custom-helper rollout failures at a fixed 420-second cutoff, and the
 later removal of that cutoff, remain historical evidence; they are not evidence
@@ -50,7 +83,7 @@ publication gates remain unchanged.
 Focused controls use Node 24:
 
 ```sh
-node --test test/ci-checkout.test.mjs
+node --test test/ci-checkout.test.mjs test/merge-integration.test.mjs test/merge-integration-entrypoint.test.mjs test/package-inputs.test.mjs
 node --test --test-name-pattern='stock checkout|canonical verification' test/trusted-workflow-checkouts.test.mjs
 ```
 
@@ -58,4 +91,13 @@ The first suite exercises the existing sparse role boundary with tiny real Git
 trees, exact tree preservation, directory ancestors and adverse input layouts.
 The second checks the actual workflow declarations and executes its real
 candidate/credential verification against positive and adverse repositories.
-These tests do not claim full-size action throughput or a new scientific run.
+Complete-profile controls also exercise every archive exclusion and neighboring
+root with stock non-cone Git, declared package/verification overrides, actual
+prepare outputs and all discovered three-shard test paths. They establish sparse
+selection and identity, not full-size action throughput or execution of those
+entire suites. Ordinary full hosted integration and the real package build remain
+required before accepting this checkout change; measure that run before claiming
+wall-clock savings. Preparation executes trusted main, so the omission change's
+own integration uses the previous patterns; its first subsequent ordinary full
+run establishes actual adoption. The earlier selected-data omission diagnostic was a bounded
+check, not exhaustive proof that no process could read an archived Git body.
