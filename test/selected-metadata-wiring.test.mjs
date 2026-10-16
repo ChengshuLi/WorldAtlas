@@ -125,7 +125,7 @@ async function compositionFixture(t,{prior='native'}={}){
   const binding={version:1,kind:'source-target-native-custody-v1',source_evidence:source,native_patch:candidatePin},preimage={...binding,kind:'source-target-native-rule-v1'};
   const bindingPin=await f.put('inputs/new-binding.json',jsonBytes(binding)),rulePin=await f.put('inputs/new-rule.json',jsonBytes(preimage));
   const {authority_sha256,rule_sha256,...literal}=oldRow,row={...literal,component_id:'source-target:'+sha(jsonBytes({target_id:'A',evidence:source.sha256})),native_rows:candidate.rows,native_cells:2};
-  const construction=await f.put('inputs/new-construction.json',{component_ids:[row.component_id],ledger_rows:[row],rule_sha256:rulePin.sha256});
+  const construction=await f.put('inputs/new-construction.json',{version:1,kind:'existing-source-target-native-constructor-result',inputs:Object.fromEntries(['source_evidence','native_patch'].map(role=>[role,{commit:binding[role].commit,path:binding[role].path}])),component_ids:[row.component_id],ledger_rows:[row],rule_sha256:rulePin.sha256});
   return {version:1,selector,rule_preimage:rulePin,source_authority:bindingPin,ledger:construction,native_patch:candidatePin,effective_release_id:'geography:next-effective'};
  }
  const config=await incoming();
