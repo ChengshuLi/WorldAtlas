@@ -249,10 +249,30 @@ export async function prepareInstall({data='data',geographyData='.cache/global-m
  const validation=sha(json(report));fs.mkdirSync(stage,{recursive:true});for(const [p,b]of writes){const target=safe(path.join(stage,'after'),p);fs.mkdirSync(path.dirname(target),{recursive:true});fs.writeFileSync(target,b);}fs.writeFileSync(path.join(stage,'report.json'),json({...report,validation_sha256:validation}));
  return {data,stage,report,repository,validation_sha256:validation};
 }
+function ordinaryInstallPath(base,file){
+ const directory=path.resolve(base);
+ if(!fs.lstatSync(directory).isDirectory()||fs.realpathSync(directory)!==directory)throw Error('Install root must be an ordinary directory');
+ const components=path.relative(directory,file).split(path.sep);let current=directory;
+ for(let i=0;i<components.length;i++){
+  current=path.join(current,components[i]);const entry=fs.lstatSync(current,{throwIfNoEntry:false});
+  if(entry&&!(i===components.length-1?entry.isFile():entry.isDirectory()))throw Error('Install paths must be ordinary files and directories');
+ }
+}
+function installDestinations({data,stage,report}){
+ const targets=Object.keys(report.writes).map(p=>safe(data,p)),temporaries=targets.map(p=>p+'.macro-tmp'),destinations=[...targets,...temporaries],unique=new Set(destinations);
+ if(unique.size!==destinations.length)throw Error('Install destinations overlap');
+ for(const destination of destinations)for(let parent=path.dirname(destination);parent!==path.dirname(parent);parent=path.dirname(parent))if(unique.has(parent))throw Error('Install destinations overlap');
+ for(const p of Object.keys(report.writes)){
+  const target=safe(data,p);ordinaryInstallPath(data,target);ordinaryInstallPath(stage,safe(path.join(stage,'after'),p));
+  if(fs.lstatSync(target+'.macro-tmp',{throwIfNoEntry:false}))throw Error('Install temporary destination already exists');
+ }
+}
 export function applyInstall(prepared,{expectedValidation,failAfter=Infinity}={}){
  if(!expectedValidation||expectedValidation!==prepared.validation_sha256)throw Error('Apply requires the exact reviewed validation hash');
- const {data,stage,report}=prepared,lock=path.join(data,'.macro-reference-install.lock');const fd=fs.openSync(lock,'wx'),backup=path.join(stage,'rollback-'+randomUUID()),done=[];fs.mkdirSync(backup,{recursive:true});
+ const {data,stage,report}=prepared,lock=path.join(data,'.macro-reference-install.lock');installDestinations(prepared);
+ const fd=fs.openSync(lock,'wx'),backup=path.join(stage,'rollback-'+randomUUID()),done=[],temporaries=new Set();
  try{
+  fs.mkdirSync(backup);
   if(report.native_reference&&!equal(selectedNativeReference(data,{proof:report.before_geography},report.native_reference.current_reference,prepared.repository??root),report.native_reference))throw Error('Original native reference changed after preparation');
   for(const asset of report.immutable_grid_parts)if(hashFile(safe(data,asset.path))!==asset.sha256)throw Error('Grid ownership bytes changed after preparation');
   for(const [p,pin]of Object.entries(report.preserved))if(hashFile(safe(data,p))!==pin)throw Error('Historical bytes changed after preparation');
@@ -262,11 +282,16 @@ export function applyInstall(prepared,{expectedValidation,failAfter=Infinity}={}
   // a lock and a durable journal identifying exact originals and staged bytes.
   for(const p of Object.keys(report.writes)){const target=safe(data,p),old=safe(backup,p);if(fs.existsSync(target)){fs.mkdirSync(path.dirname(old),{recursive:true});fs.copyFileSync(target,old);}}
   const journal={validation_sha256:expectedValidation,state:'committing',originals:report.originals,writes:report.writes,installed:done};const journalFile=path.join(backup,'journal.json');fs.writeFileSync(journalFile,json(journal));
-  for(const [p]of Object.entries(report.writes)){const target=safe(data,p),temporary=target+'.macro-tmp';fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(safe(path.join(stage,'after'),p),temporary);fs.renameSync(temporary,target);done.push(p);fs.writeFileSync(journalFile,json(journal));if(done.length===failAfter)throw Error('Injected metadata install failure');}
+  for(const [p]of Object.entries(report.writes)){
+   const target=safe(data,p),temporary=target+'.macro-tmp';fs.mkdirSync(path.dirname(target),{recursive:true});
+   const temporaryFD=fs.openSync(temporary,'wx');temporaries.add(temporary);
+   try{fs.writeFileSync(temporaryFD,fs.readFileSync(safe(path.join(stage,'after'),p)));}finally{fs.closeSync(temporaryFD);}
+   fs.renameSync(temporary,target);temporaries.delete(temporary);done.push(p);fs.writeFileSync(journalFile,json(journal));if(done.length===failAfter)throw Error('Injected metadata install failure');
+  }
 
   for(const [p,pin]of Object.entries(report.preserved))if(hashFile(safe(data,p))!==pin)throw Error('Historical bytes changed during install');
   fs.writeFileSync(path.join(backup,'commit.json'),json({validation_sha256:expectedValidation,installed:done,history_unchanged:true}));journal.state='committed';fs.writeFileSync(journalFile,json(journal));return {applied:true,validation_sha256:expectedValidation,rollback_archive:backup};
- }catch(error){for(const p of Object.keys(report.writes))fs.rmSync(safe(data,p)+'.macro-tmp',{force:true});for(const p of done.reverse()){const old=safe(backup,p),target=safe(data,p);if(fs.existsSync(old))fs.copyFileSync(old,target);else fs.rmSync(target,{force:true});}throw error;}finally{fs.closeSync(fd);fs.rmSync(lock,{force:true});}
+ }catch(error){for(const temporary of temporaries)fs.rmSync(temporary,{force:true});for(const p of done.reverse()){const old=safe(backup,p),target=safe(data,p);if(fs.existsSync(old))fs.copyFileSync(old,target);else fs.rmSync(target,{force:true});}throw error;}finally{fs.closeSync(fd);fs.rmSync(lock,{force:true});}
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  const options={},apply=process.argv.includes('--apply');let expected;for(let i=2;i<process.argv.length;i++){const arg=process.argv[i];if(arg==='--apply')continue;const value=process.argv[++i];if(!value)throw Error('Missing installer argument');if(arg==='--expected-validation')expected=value;else if(arg==='--data')options.data=value;else if(arg==='--geography-data')options.geographyData=value;else if(arg==='--release-data')options.releaseData=value;else if(arg==='--stage')options.stage=value;else throw Error('Unknown installer argument: '+arg);}

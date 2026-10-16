@@ -112,6 +112,55 @@ test('selected-native apply rejects changed selector, historical certificate and
  assert.deepEqual(fs.readFileSync(target),prior);assert.equal(fs.existsSync(path.join(data,'.macro-reference-install.lock')),false);
 }));
 
+function secondInstallTarget({data,stage,prepared}){
+ const name='later.json',target=path.join(data,name),raw='original later metadata\n',next='reviewed later metadata\n';
+ fs.writeFileSync(target,raw);fs.writeFileSync(path.join(stage,'after',name),next);prepared.report.originals[name]=sha(raw);prepared.report.writes[name]=sha(next);prepared.validation_sha256=sha(JSON.stringify(prepared.report));
+ return target;
+}
+
+test('all temporary destinations reject existing files and live or dangling symlinks before any replacement',()=>{
+ for(const kind of ['file','live-symlink','dangling-symlink'])nativeInstallFixture(fixture=>{
+  const {base,data,stage,target,prepared}=fixture,later=secondInstallTarget(fixture),temporary=later+'.macro-tmp',sentinel=path.join(base,'unrelated-sentinel'),prior=fs.readFileSync(target),laterPrior=fs.readFileSync(later);
+  fs.writeFileSync(sentinel,'unrelated original bytes\n');const sentinelPrior=fs.readFileSync(sentinel);
+  if(kind==='file')fs.writeFileSync(temporary,'existing temporary bytes\n');else fs.symlinkSync(kind==='live-symlink'?sentinel:path.join(base,'missing-sentinel'),temporary);
+  const temporaryPrior=kind==='file'?fs.readFileSync(temporary):fs.readlinkSync(temporary),stagePrior=fs.readdirSync(stage);
+  assert.throws(()=>applyInstall(prepared,{expectedValidation:prepared.validation_sha256}),/temporary destination already exists/);
+  assert.deepEqual(fs.readFileSync(target),prior);assert.deepEqual(fs.readFileSync(later),laterPrior);assert.deepEqual(fs.readFileSync(sentinel),sentinelPrior);
+  assert.deepEqual(kind==='file'?fs.readFileSync(temporary):fs.readlinkSync(temporary),temporaryPrior);
+  assert.deepEqual(fs.readdirSync(stage),stagePrior);assert.equal(fs.existsSync(path.join(data,'.macro-reference-install.lock')),false);assert.equal(fs.existsSync(target+'.macro-tmp'),false);
+ });
+});
+
+test('a temporary collision after admission preserves the unowned file and rolls back prior replacements',()=>nativeInstallFixture(fixture=>{
+ const {target,prepared,data}=fixture,later=secondInstallTarget(fixture),temporary=later+'.macro-tmp',prior=fs.readFileSync(target),laterPrior=fs.readFileSync(later),open=fs.openSync;
+ try{fs.openSync=function(file,flags,...args){if(file===temporary&&flags==='wx')fs.writeFileSync(temporary,'concurrent unowned bytes\n');return open.call(this,file,flags,...args);};
+  assert.throws(()=>applyInstall(prepared,{expectedValidation:prepared.validation_sha256}),/EEXIST/);
+ }finally{fs.openSync=open;}
+ assert.equal(fs.readFileSync(temporary,'utf8'),'concurrent unowned bytes\n');assert.deepEqual(fs.readFileSync(target),prior);assert.deepEqual(fs.readFileSync(later),laterPrior);
+ assert.equal(fs.existsSync(target+'.macro-tmp'),false);assert.equal(fs.existsSync(path.join(data,'.macro-reference-install.lock')),false);
+}));
+
+test('a failed write cleans only its exclusively created temporary and restores originals',()=>nativeInstallFixture(({target,prepared,data})=>{
+ const prior=fs.readFileSync(target),open=fs.openSync,write=fs.writeFileSync;let temporaryFD;
+ try{fs.openSync=function(file,flags,...args){const fd=open.call(this,file,flags,...args);if(file===target+'.macro-tmp')temporaryFD=fd;return fd;};
+  fs.writeFileSync=function(file,...args){if(file===temporaryFD)throw Error('Injected temporary write failure');return write.call(this,file,...args);};
+  assert.throws(()=>applyInstall(prepared,{expectedValidation:prepared.validation_sha256}),/Injected temporary write failure/);
+ }finally{fs.openSync=open;fs.writeFileSync=write;}
+ assert.deepEqual(fs.readFileSync(target),prior);assert.equal(fs.existsSync(target+'.macro-tmp'),false);assert.equal(fs.existsSync(path.join(data,'.macro-reference-install.lock')),false);
+}));
+
+test('installation refuses symlinked targets and parent directories without changing outside files',()=>{
+ for(const kind of ['target','parent'])nativeInstallFixture(({base,data,stage,target,prepared})=>{
+  const outside=path.join(base,'outside');fs.mkdirSync(outside);const sentinel=path.join(outside,'parent.json');fs.writeFileSync(sentinel,'outside original bytes\n');const prior=fs.readFileSync(sentinel);
+  if(kind==='target'){fs.unlinkSync(target);fs.symlinkSync(sentinel,target);}else{
+   fs.mkdirSync(path.join(stage,'after','nested'));fs.writeFileSync(path.join(stage,'after','nested/parent.json'),'replacement');fs.symlinkSync(outside,path.join(data,'nested'));
+   prepared.report.originals['nested/parent.json']=sha(prior);prepared.report.writes['nested/parent.json']=sha('replacement');prepared.validation_sha256=sha(JSON.stringify(prepared.report));
+  }
+  assert.throws(()=>applyInstall(prepared,{expectedValidation:prepared.validation_sha256}),/ordinary files and directories/);
+  assert.deepEqual(fs.readFileSync(sentinel),prior);assert.equal(fs.existsSync(path.join(data,'.macro-reference-install.lock')),false);
+ });
+});
+
 test('retaining historical macro review preserves pending status and exact files without old inspection bodies',()=>{
  const data=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'atlas-historical-macro-')));
  try{const files={'macro-foundation/macro-certificate.json':'{"status":"reference-compatible-pending-publication","reference_compatibility_verified":false}\n','macro-foundation/current-membership-projection.json.gz':'literal old projection bytes','macro-foundation/world-review-projection.json':'{"current_pins":{"footprints_sha256":"old"},"semantic_complete":false}\n','macro-foundation/current-membership-inventory.json.gz':'current inventory','research-geography-gate.json':'{"ready_for_location_attributes":false}\n'};
