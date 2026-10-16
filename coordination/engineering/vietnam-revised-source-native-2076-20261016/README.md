@@ -31,10 +31,7 @@ code, checks free memory/disk, and enforces a768MiB process-group RSS allowance,
 512MiB Node heap,120-second wall deadline and32MiB output/log allowance. Sampled
 peak RSS is explicitly not a continuous maximum. It removes no original files.
 
-The observer's output, resource receipt and applicability conclusions are not yet
-claimed here. The existing all258-country and708-VNM raw shared-interior proofs
-are reused rather than repeated. Current native ownership, qualification and
-conservation remain separate outstanding gates.
+The actual observation completed under captured code92070428a7e4e5537ef931f4dc11edc1fc0c3b6a in5.015 seconds. All49,625 current features were validated;36 exact-bounds survivors were scanned with the stock native rule. Across all365 original keys there were zero current canonical fine-interior contacts and zero boundary ties. The compact result and genuine prospective admission/execution receipt are retained in `current-fine365-001/`. Observed sampled process-group peak RSS was423,948,288 bytes under the768MiB enforced limit. These are actual observations, not qualification. The existing all258-country and708-VNM raw shared-interior proofs are reused rather than repeated. Current native ownership, qualification and conservation remain outstanding gates.
 
 Focused bounds controls:
 
