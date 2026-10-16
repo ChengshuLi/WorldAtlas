@@ -112,7 +112,22 @@
         "sha256": "d326aef83d771657a67a3e8abaf4ce6d0a583df328b10f29eff89a2a04457cf5"
       },
       "global_OGC_defect": "Self-intersection[80.5954 42.9033] disclosed, not repaired",
-      "edition_limit": "The old source metadata records feature ID, whole feature hash and2026-10-15 WFS response timestamp, but no independently authenticated dataset edition identifier. Complete unrepaired geometry is retained in the genuine old source evidence and reused by fresh diagnostics. The original4,004,905-byte WFS FeatureCollection itself has not been acquired or re-read in this cloud handoff."
+      "edition_limit": "The old source metadata records feature ID, whole feature hash and2026-10-15 WFS response timestamp, but no independently authenticated dataset edition identifier. Complete unrepaired geometry is retained in the genuine old source evidence and reused by fresh diagnostics. The original4,004,905-byte WFS FeatureCollection itself has not been acquired or re-read in this cloud handoff.",
+      "related_retained_line_product": {
+        "pin": {
+          "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm29-official-country-native9/source-bindings.json",
+          "commit": "aad3fbbbb04c0211bbad71172ea4fee79f66d330",
+          "mode": "100644",
+          "git_blob_oid": "925b2f2bf447393394b9ec09f88c666a1de293e5",
+          "bytes": 8443,
+          "sha256": "72401038fd52430e02c90ef313d364c439d7bb930ab911237ee4159b4d901d3b"
+        },
+        "table": "Department of State LSIB v11.4 24Feb2025",
+        "source_GPKG_publisher_bound_sha256": "1e2723fc1e699531353706e5c8f584d93547b6564417a6f59d2e990142ee1c12",
+        "VNM_World_Polygons_sha256": "1724066750315eb7ebfac7fcff7bebf41cf2c7004fa6c1775fa10d671a9f6ffb",
+        "link": "Same VNM whole country body hash as the northern official-country context. The retained distinct source9 review states LSIB11.4/WorldPolygons11.4beta, while distinguishing line precision from country-service serialization.",
+        "limit": "Related line/source9 bindings do not independently authenticate the separate CHN WFS country-product edition or rank it against Natural Earth. The originalCHN4MBFeatureCollection and old raw metadata were not included in the cloud handoff."
+      }
     }
   },
   "prior_display_convention": {
