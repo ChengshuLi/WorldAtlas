@@ -1,4 +1,4 @@
-import test from 'node:test';
+import test, {after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -686,6 +686,37 @@ test('accepted derived custody retains real physical and mixed-use logical sourc
 
 
 import {referenceCheckpointFixture} from './fixtures/selected-checkpoint.mjs';
+// Build immutable accepted history once; every adverse still has a private
+// repository, executing module, JSON objects, reader and qualified state.
+let referenceSeed;
+const referenceSeedCleanup=[];
+after(async()=>{for(const cleanup of referenceSeedCleanup.reverse())await cleanup();});
+async function referenceRefusalFixture(t){
+ const seed=await (referenceSeed??=referenceCheckpointFixture({after:cleanup=>referenceSeedCleanup.push(cleanup)}));
+ const repo=fs.mkdtempSync(path.join(path.dirname(seed.repo),'atlas-checkpoint-variant-'));
+ t.after(()=>fs.rmSync(repo,{recursive:true,force:true}));
+ fs.cpSync(seed.repo,repo,{recursive:true});
+ const git=(...args)=>execFileSync('git',['-C',repo,...args],{stdio:['ignore','pipe','pipe']}).toString().trim();
+ assert.equal(git('rev-parse','HEAD'),seed.candidate);
+ assert.equal(fs.existsSync(path.join(repo,'.git/objects/info/alternates')),false);
+ const write=(name,value)=>{const file=path.join(repo,name);fs.mkdirSync(path.dirname(file),{recursive:true});
+  fs.writeFileSync(file,Buffer.isBuffer(value)?value:Buffer.from(JSON.stringify(value)));};
+ const commit=()=>{git('add','.');git('commit','-m','Isolated checkpoint refusal');return git('rev-parse','HEAD');};
+ const pin=(name,version)=>{const raw=execFileSync('git',['-C',repo,'show',version+':'+name]);
+  const [mode,,git_blob_oid]=git('ls-tree',version,'--',name).split(/[ \t]/);
+  return {commit:version,path:name,mode,git_blob_oid,bytes:raw.length,sha256:sha(raw)};};
+ const projection=structuredClone(seed.projection),selection=JSON.parse(git('show',seed.candidate+':data/ownership-selection.json'));
+ const project=()=>{write('inputs/projection.json',projection);const raw=fs.readFileSync(path.join(repo,'inputs/projection.json'));
+  selection.reference_projection={path:'inputs/projection.json',bytes:raw.length,sha256:sha(raw)};
+  write('data/ownership-selection.json',selection);return commit();};
+ const api=await import(pathToFileURL(path.join(repo,MODULE))),native=await import(pathToFileURL(path.join(repo,'scripts/check-effective-geographic-regression.mjs')));
+ const reader=new native.ImmutableReader(repo,seed.selected),qualified=api.qualifyCheckpoint({reader});
+ assert.equal(qualified.available,true);t.after(()=>api.releaseCheckpoint(qualified.state));
+ assert.notStrictEqual(reader,seed.reader);assert.notStrictEqual(qualified.state,seed.state);
+ t.after(()=>{assert.equal(seed.git('rev-parse','HEAD'),seed.candidate);assert.equal(seed.git('status','--porcelain'),'');});
+ return {repo,git,write,commit,pin,projection,selection,project,api,native,reader,state:qualified.state,
+  currentFeatures:structuredClone(seed.currentFeatures),features:structuredClone(seed.features)};
+}
 for (const [name,mutate,reason] of [
  ['forged projection',f=>{f.projection.reference.id='geography:forged';return f.project();},/latest release/],
  ['changed geometry with rebound source pin',f=>{const body=structuredClone(f.currentFeatures);body[0].geometry.coordinates[0][1][0]+=.25;
@@ -698,7 +729,7 @@ for (const [name,mutate,reason] of [
  ['current hierarchy alias drift',f=>{f.write('data/hierarchy.json',[]);return f.commit();},/Current hierarchy differs/],
  ['wrong complete projection bytes',f=>{f.write('inputs/projection.json',{forged:true});return f.commit();},/projection whole identity|Whole immutable input/],
 ]) test('checkpoint reference application refuses '+name,async t=>{
- const f=await referenceCheckpointFixture(t),candidate=mutate(f);
+ const f=await referenceRefusalFixture(t),candidate=mutate(f);
  const reader=new f.native.ImmutableReader(f.repo,candidate,{invocation:f.reader.invocation});
  assert.throws(()=>f.api.qualifyTransition({state:f.state,reader}),reason);
 });

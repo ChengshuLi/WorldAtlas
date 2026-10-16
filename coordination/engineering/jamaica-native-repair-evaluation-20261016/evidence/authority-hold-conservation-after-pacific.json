@@ -1,0 +1,72 @@
+{
+  "status": "passed",
+  "baseline_commit": "5c65b213d005607e769af66d39bf03d4554882d6",
+  "candidate_commit": "5b443ff096cc2a0149bcad15f08e43c1aff815b8",
+  "prior_authorities": 152,
+  "current_authorities": 153,
+  "new_authorities": 1,
+  "inherited_authority_changes": 0,
+  "base_native_selection_unchanged": true,
+  "base_manifest_and_owner_roster_unchanged": true,
+  "holds": [
+    {
+      "id": "VUT",
+      "pin": {
+        "path": "coordination/engineering/vanuatu-native-repair-evaluation-20261016/evidence/queue-disposition.json",
+        "commit": "5b443ff096cc2a0149bcad15f08e43c1aff815b8",
+        "mode": "100644",
+        "git_blob_oid": "47d92f3d63618215142e3b0e7ad50ab19e718cd3",
+        "bytes": 42709,
+        "sha256": "c8e53b9bb7eb0e9935c9d05d310f1a9f5e774f235b2cc8b10596974794d7e3d5"
+      },
+      "retained_held_cells": 1203,
+      "unchanged": true,
+      "intersection_with_any_additive_owner": 0
+    },
+    {
+      "id": "KIR",
+      "pin": {
+        "path": "coordination/engineering/kiribati-repair-delivery-20261016/scope-002/source-component-disposition.json",
+        "commit": "5b443ff096cc2a0149bcad15f08e43c1aff815b8",
+        "mode": "100644",
+        "git_blob_oid": "77a0083bce6d06a18c5b0ba60ce396521490b100",
+        "bytes": 10415,
+        "sha256": "3762732e7a11262d7f41088ea5d6ad315b10988099286c52d533073ea2576452"
+      },
+      "retained_held_cells": 284,
+      "unchanged": true,
+      "intersection_with_any_additive_owner": 0
+    },
+    {
+      "id": "TON-physical",
+      "pin": {
+        "path": "coordination/engineering/tonga-physical-disposition-20261016/literal-cell-dispositions.json",
+        "commit": "5b443ff096cc2a0149bcad15f08e43c1aff815b8",
+        "mode": "100644",
+        "git_blob_oid": "e568b91e822aba70b29c4e955398f280972a8ac8",
+        "bytes": 766418,
+        "sha256": "aadc4371c3cbbc936e94755250e1ad2437c814d0080583f7e55f2f65940319a0"
+      },
+      "retained_held_cells": 1984,
+      "unchanged": true,
+      "intersection_with_any_additive_owner": 0
+    }
+  ],
+  "original_jamaica_scope": {
+    "candidate_cells": 2251,
+    "intervals": 767,
+    "source_features": 14,
+    "components": 15,
+    "proposed_cells": 2251,
+    "held_cells": 0
+  },
+  "original_jamaica_authority_pin": {
+    "path": "coordination/engineering/jamaica-native-repair-evaluation-20261016/authority-reference/constructor-result.json",
+    "commit": "2ef515677ffc37bce3af636a96cb452ccfc9016e",
+    "mode": "100644",
+    "git_blob_oid": "17be6f0fc504709f78860a81d46a7f537052deb8",
+    "bytes": 46751,
+    "sha256": "d19751ce88ccbc58732f19ae19b875020b1d37348475d4b7a3bd1f86cd96f3ff"
+  },
+  "limit": "Literal selected patch, authority and exact held-cell preservation only. Final actual emitted loader/picker/sampler and hosted integration remain required."
+}

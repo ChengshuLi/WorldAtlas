@@ -1,0 +1,38 @@
+{
+  "observed_at": "2026-10-16",
+  "upstream_source_archive": {
+    "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/sourceData/gbOpen/JAM_ADM1.zip",
+    "bytes": 269268,
+    "sha256": "20e0c093eea7ddee5c28b9ce1a6d9b2d0aff35f7eb3da4e4b833c008b37c6a39",
+    "members": [
+      {
+        "path": "meta.txt",
+        "bytes": 391,
+        "sha256": "bc9c6c8df00cced65f81239a67651021dcc09e1e42eb7cf7a4f9c5fe42200756"
+      },
+      {
+        "path": "license.PNG",
+        "bytes": 98075,
+        "sha256": "629299c5eafd6fbe6e36926ff95e261657a1c9347770c52acb0797fcfb4d4f92"
+      },
+      {
+        "path": "JAM_ADM1.shp.xml",
+        "bytes": 674,
+        "sha256": "e86d91694a5826c1511a235f66aeddc684c9033888779d33721b9cd20bd94f62"
+      }
+    ]
+  },
+  "release_citation": {
+    "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/JAM/ADM1/CITATION-AND-USE-geoBoundaries.txt",
+    "bytes": 4316,
+    "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+  },
+  "findings": [
+    "meta.txt declares CC BY-SA 2.0; bundled license.PNG states OSM data ODbL and documentation CC BY-SA 2.0.",
+    "JAM_ADM1.shp.xml records processing on 20171005; represented 2011 does not establish extraction date.",
+    "Release citation states geoBoundaries derivative works CC BY 4.0 and requires underlying source citations.",
+    "Original metadata declaration is preserved, discrepancy disclosed, attribution and applicable share-alike obligations retained. No verified-CC-BY-SA, pre-2012-extraction or silent relicensing claim."
+  ],
+  "raw_archive_redistributed": false,
+  "source_geometry_changed": false
+}
