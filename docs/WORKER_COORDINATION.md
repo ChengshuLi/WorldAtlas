@@ -625,7 +625,6 @@ could transfer before admission; the simpler default now places that single pass
 in the serialized lane. Measure actual lane occupancy and completed delivery time,
 including removed duplicate/reworked prequeue work, rather than adding job durations.
 
-The Cloudflare step does not measure the historical Sites archive reserve; the
-separate main-push Deployment package budget workflow retains its actual Sites
-build and file/archive accounting. Parallel build removal reduces runner work;
-no wall-time improvement is established merely by adding those job durations.
+The Cloudflare step does not measure the historical Site archive reserve. An
+explicit `npm run build:hosted` recovery build retains its actual file/archive
+budget check. Normal main pushes do not schedule a separate legacy Site build.

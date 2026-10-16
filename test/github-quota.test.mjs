@@ -152,25 +152,6 @@ test('unknown or wrong-resource headers cannot manufacture an observed repositor
  assert.equal(accounting.receipt().observed_repository_core,undefined);assert.equal(accounting.receipt().actual_http_attempts,3);
 });
 
-test('deployment classification quota refusal does not authorize a wasteful full-build fallback',async()=>{
- const {deploymentBudgetProfile,githubBudgetAPI}=await import('../scripts/classify-deployment-budget.mjs');
- const event={repository:{full_name:'a/b'},pull_request:{number:1,head:{sha:'a'.repeat(40)},base:{sha:'b'.repeat(40)}}};
- const run=remaining=>deploymentBudgetProfile({event,eventName:'pull_request',repository:'a/b',
-  api:route=>githubBudgetAPI(route,{token:'private',fetchImpl:async()=>response(403,remaining)})});
- const quota=await run('0');assert.equal(quota.blocked,true);assert.equal(quota.full,true);assert.equal(quota.api_error.rate_remaining,'0');
- assert.equal(quota.fallback,true);assert(quota.retry_at);
- const ordinary=await run('500');assert.equal(ordinary.blocked,undefined);assert.equal(ordinary.full,true);assert.equal(ordinary.fallback,true);
-});
-
-test('deployment transport ambiguity counts its attempt without inventing quota or retrying',async()=>{
- const {githubBudgetAPI}=await import('../scripts/classify-deployment-budget.mjs');
- const accounting=requestAccounting('deployment-classifier');let attempts=0;
- await assert.rejects(githubBudgetAPI('/repos/a/b',{token:'private',onRequest:accounting.observe,
-  fetchImpl:async()=>{attempts++;throw Error('transport lost');}}),/transport lost/);
- assert.equal(attempts,1);assert.equal(accounting.receipt().actual_http_attempts,1);
- assert.equal(accounting.receipt().counts['GET:repository-authority:transport-error'],1);
-});
-
 test('caller response admission bounds the real JSON stream while preserving request accounting',async()=>{
   const accounting=requestAccounting('bounded-metadata');let cancelled=false,pulls=0;
   const api=githubAPI('fixture',{onRequest:accounting.observe,fetchImpl:async()=>new Response(new ReadableStream({

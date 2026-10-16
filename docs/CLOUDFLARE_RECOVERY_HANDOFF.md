@@ -8,6 +8,10 @@ send ordinary publishers or visitors there. Historical deployments remain readab
 in the complete cross-provider registry. The #907 application delivery hold still
 applies: this handoff does not make latest main eligible for a new application build.
 
+For an explicit legacy Site recovery build, `npm run build:hosted` still checks
+the actual package and file budget. Normal main pushes do not rebuild the retired
+Site; the integration queue builds the Cloudflare application.
+
 ## Current destinations and proof
 
 Neon remains project weathered-lab-37571695, branch

@@ -6,7 +6,10 @@
 
 This is a cooperative build boundary, not an operating-system security sandbox. Deliberate absolute access to outside files, malicious dependencies and forged stage environment variables are not contained. It also does not guarantee a reproducible environment or pin remote network responses. Build jobs retain existing read-only credentials and deployment/import restrictions. Use the public package commands and review build changes under the normal independent-review gate.
 
-CI reads the declaration at trusted base and enumerates all changed paths, including rename/copy origins. Any declared input or verification path requires a package build and budget checks. Missing or malformed declaration, incomplete inventory, changing PR identity, API failure or capped comparisons conservatively require the build. Unchanged package inputs skip candidate checkout, dependency installation and package compilation; the receipt does not claim a new size measurement.
+The integration queue builds the Cloudflare application for full software profiles.
+The declaration also bounds selected-output reuse and its source inventory. Legacy
+Site package budget checks run when explicitly invoking `npm run build:hosted` for
+recovery, rather than through an automatic main-push workflow.
 
 Application regression selection remains a separate question. Unpublished geography packets and history campaigns run their focused scope/evidence/invariant checks. If a research file is explicitly included in the package, its changes also run package checks; they do not automatically require unrelated application tests. Runtime, schema and build-boundary changes retain application regression according to the integration profile.
 
@@ -63,7 +66,7 @@ new, or enable the separately reviewed final-worker adoption by itself.
 Local checks:
 
 ```sh
-node --test test/package-inputs.test.mjs test/package-build.test.mjs test/deployment-budget-scope.test.mjs
+node --test test/package-inputs.test.mjs test/package-build.test.mjs test/deployment-budget.test.mjs
 npm run build:cloudflare
 npm run build:hosted
 ```
