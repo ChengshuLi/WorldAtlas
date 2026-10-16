@@ -2,6 +2,7 @@
 // grant source authority: the committed selected reader authenticates registry.
 import {normaliseRetainedRepairLedger, compareVersionedRepairLedgers, valueSha, valueBytes}
   from '../../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {repairComponentKey,compareRepairComponents} from '../../../../src/native-grid.js';
 const demand=(ok,message)=>{if(!ok)throw Error(message);};
 const same=(a,b)=>valueBytes(a).equals(valueBytes(b));
 export function composeRetainedLedgers(members,registry) {
@@ -15,12 +16,13 @@ export function composeRetainedLedgers(members,registry) {
     demand(ledger.version===1&&entries.length===1,'Require an unambiguous original v1 member authority');
     const entry=entries[0];
     for(const row of ledger.rows){
-      demand(!rows.has(row.component_id),'Duplicate original component across complete scopes');
-      rows.set(row.component_id,normalized.rows.get(row.component_id)??{
+      const key=repairComponentKey({...row,authority_sha256:entry.authority_sha256});
+      demand(!rows.has(key),'Duplicate original component across complete scopes');
+      rows.set(key,normalized.rows.get(key)??{
         ...row,authority_sha256:entry.authority_sha256,rule_sha256:entry.rule_sha256});
     }
   }
-  const ordered=[...rows.values()].sort((a,b)=>a.component_id.localeCompare(b.component_id));
+  const ordered=[...rows.values()].sort(compareRepairComponents);
   const result={version:2,kind:'native-additive-repair-ledger-v2',
     authority_registry_sha256:valueSha(registry),parent_inventory:parent,
     scope_ids:ordered.map(row=>row.component_id),rows:ordered};

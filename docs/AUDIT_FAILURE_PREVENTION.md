@@ -109,10 +109,11 @@ current fixes before repeating a historical failure claim.
 
 Resource admission protects a future execution. Scientific review establishes
 what the actual inputs, method and result support. Neither replaces the other.
-The Python `Baseline`/`NewVintage` helper's 32 MiB file/decoded-file and 256 MiB
-phase ceilings are bounds of that implementation, not universal limits on an independently
-reviewed scientific operator. The generic premerge transport gate still enforces
-its own declared-file budgets. Existing command-bound execution contracts,
+The Python `Baseline`/`NewVintage` helper retains a 32 MiB file/decoded-file
+guard. Its complete cumulative inventory has no fixed ceiling;
+an explicitly supplied caller phase budget includes actual encoded, decoded and
+completion-receipt bytes. Cumulative bytes are not peak resident memory. The generic
+premerge transport gate uses exact declared-file bounds. Existing command-bound execution contracts,
 including SOURCE/NATIVE v2 qualified receipts, retain every required check.
 
 For a custom offline operator, review its actual complete encoded inputs, decoded
@@ -164,9 +165,9 @@ guarantee. Do not silently leave a legacy standalone writer in a new wrapper.
   No credentials, provider writes or unreviewed code execution are authorized.
 - `Baseline.subjects(ids)` reads the complete immutable world index, rejects duplicate
   raw IDs/parts and conflicting indexed identities, and returns actual containing-file
-  descriptors. Raw and decoded unique inputs count toward the complete 256 MiB phase;
-  ordinary/decoded files retain this helper's 32 MiB cap. Splitting a descriptor list while
-  executing the same oversized phase is not bounded partitioning.
+  descriptors. Raw and decoded unique inputs count toward any explicit caller phase
+  budget; ordinary/decoded files retain this helper's 32 MiB guard. Splitting a
+  descriptor list does not reset the same caller's explicit budget.
 - `exact_rows`, `join_rows` and `finite_metrics` in `evidence/contracts.py` derive
   uniqueness, coverage, correspondence and required finite fields from real records.
   References must be independent pinned source/baseline records, not the candidate's

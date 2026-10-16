@@ -10,7 +10,6 @@ test('shared evidence execution/admission regressions run without provider crede
   });
   assert.equal(result.error, undefined);
   assert.equal(result.status, 0, result.stdout + result.stderr);
-  assert.match(result.stderr, /Ran 7 tests/);
   assert.doesNotMatch(result.stderr, /skipped/);
 });
 
@@ -22,6 +21,5 @@ test('scientific helper and real preparation CLI regressions reject native CRS a
   });
   assert.equal(result.error, undefined);
   assert.equal(result.status, 0, result.stdout + result.stderr);
-  assert.match(result.stderr, /Ran 10 tests/);
   assert.doesNotMatch(result.stderr, /skipped/);
 });

@@ -8,12 +8,13 @@ import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {gunzipSync} from 'node:zlib';
 import {locate} from './delivery-handoff-advance.mjs';
+import {repairComponentKey, compareRepairComponents} from '../src/native-grid.js';
 import {scientificNativeSelection,originalNativeReference,validateReferenceMetadataHeader} from '../src/reference-metadata.js';
 import {prepareReferenceMetadataProjection,validateReferenceMetadataProjection} from './selected-reference-metadata.mjs';
 import {validatePackageInputs} from './package-inputs.mjs';
 import {baselineFiles, validateEvidence} from './evidence-quality.mjs';
 import {composeRetainedLedgers} from '../coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs';
-import {normaliseRetainedRepairLedger, compareVersionedRepairLedgers, verifyCurrentRebindExecution, CURRENT_REBIND_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {normaliseRetainedRepairLedger, compareVersionedRepairLedgers, verifyCompletedSourceTargetNativeAuthority, mergeCompletedNativePatches, verifyCurrentRebindExecution, CURRENT_REBIND_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const need = (ok, message) => { if (!ok) throw Error(message); };
 const hex = (value, size) => typeof value === 'string' && new RegExp(`^[a-f0-9]{${size}}$`).test(value);
@@ -196,11 +197,11 @@ export function prepareEvidence(config, reader) {
     const before = selected(d.baseline_commit), after = selected(d.candidate_commit);
     validateDeliverySelectionTransition(before, after, reader);
     need(Array.isArray(before.rows) && Array.isArray(after.rows), 'Delivery base/rows differ');
-    const prior = new Map(before.rows.map(row => [row.component_id, row]));
-    const current = new Map(after.rows.map(row => [row.component_id, row]));
+    const prior = new Map(before.rows.map(row => [repairComponentKey(row), row]));
+    const current = new Map(after.rows.map(row => [repairComponentKey(row), row]));
     need(prior.size === before.rows.length && current.size === after.rows.length
       && [...prior].every(([id, row]) => current.has(id) && same(row, current.get(id))), 'Inherited delivery row changed');
-    const targets = [...new Set(after.rows.filter(row => !prior.has(row.component_id)).map(row => row.target_id))].sort();
+    const targets = [...new Set(after.rows.filter(row => !prior.has(repairComponentKey(row))).map(row => row.target_id))].sort();
     need(same(targets, [...d.subject_ids].sort()), 'Delivery subjects differ from actual added rows');
     const baseline = {version: 2, commit: d.baseline_commit, files: [], pins: {}, pin_files: {}};
     const baselineRoles = {...before, package_inputs: reader.pin(d.baseline_commit, '.github/package-inputs.json')};
@@ -227,12 +228,14 @@ export function prepareEvidence(config, reader) {
         && same(constructed.component_ids, constructed.ledger_rows.map(row => row.component_id))
         && hex(constructed.rule_sha256, 64), 'Complete original constructor rows required');
       for (const row of constructed.ledger_rows) {
-        const selected = current.get(row.component_id);
-        need(selected && !prior.has(row.component_id) && !boundComponents.has(row.component_id), 'Original constructor scope differs');
+        const matches = after.rows.filter(selected => selected.component_id === row.component_id && selected.rule_sha256 === constructed.rule_sha256);
+        need(matches.length === 1, 'Original constructor identity is missing or ambiguous');
+        const selected = matches[0], key = repairComponentKey(selected);
+        need(selected && !prior.has(key) && !boundComponents.has(key), 'Original constructor scope differs');
         const {authority_sha256, rule_sha256, ...literal} = selected;
         need(hex(authority_sha256, 64) && rule_sha256 === constructed.rule_sha256 && same(literal, row),
           'Original constructor row differs from actual added row');
-        boundComponents.add(row.component_id);
+        boundComponents.add(key);
       }
       const source = d.sources.filter(source => source.id === original.id);
       need(source.length === 1 && source[0].retention === 'restoration-only'
@@ -633,7 +636,6 @@ export function composeAuthorities(config, reader) {
       && same(priorPatch.effective_reference, envelope.effective_reference), 'Prior cumulative patch bindings differ');
     const entries = [...priorRegistry.entries], addedRows = [], candidates = [];
     const authorityIds = new Set(entries.map(entry => entry.authority_sha256));
-    const oldIds = new Set(priorLedger.rows.map(row => row.component_id));
     for (const original of authorities) {
       const constructed = reader.json(original.ledger), candidate = reader.json(original.native_patch);
       const binding = reader.json(original.source_authority), preimage = reader.json(original.rule_preimage);
@@ -642,76 +644,31 @@ export function composeAuthorities(config, reader) {
       const rule = reader.pin(original.rule_preimage.commit, original.rule_preimage.path);
       const authority = {policy_id: 'retained-source-literal-additions', policy_version: 1, rule_preimage: rule,
         rule_sha256: rule.sha256, source_authority: reader.pin(original.source_authority.commit, original.source_authority.path)};
-      const entry = {authority_sha256: digest(jsonBytes(authority)), ...authority};
-      need(binding.version === 1 && binding.kind === 'source-target-native-custody-v1'
-        && same(Object.keys(binding).sort(), ['kind', 'native_patch', 'source_evidence', 'version'])
-        && same(preimage, {...binding, kind: 'source-target-native-rule-v1'}) && same(binding.native_patch, original.native_patch)
-        && entry.rule_sha256 === digest(jsonBytes(preimage)) && constructed.rule_sha256 === entry.rule_sha256 && unique(constructed.component_ids)
-        && same(constructed.component_ids, constructed.ledger_rows?.map(row => row.component_id)),
-      'Committed modern constructor scope/rule/patch differs');
-
+      const entry = {authority_sha256: digest(jsonBytes(authority)), ...authority,
+        completed_constructor: reader.pin(original.ledger.commit, original.ledger.path)};
+      need(same(binding.native_patch, original.native_patch) && entry.rule_sha256 === digest(jsonBytes(preimage)),
+        'Committed modern constructor scope/rule/patch differs');
       const evidence = reader.json(binding.source_evidence);
+      const proof = verifyCompletedSourceTargetNativeAuthority({constructed, binding, preimage, evidence, candidate});
       need(same(evidence.base_reference, references.native) && same(evidence.native_contract, contract)
         && assets.base_manifest.sha256 === selection.sha256 && assets.owner_roster.sha256 === manifest.original_assets?.bounds?.sha256,
       'Modern source changes the selected native baseline/contract');
       need(!authorityIds.has(entry.authority_sha256), 'Modern authority is already selected or duplicated');
       authorityIds.add(entry.authority_sha256);
       entries.push(entry);
-      need(unique(evidence.targets?.map(target => target.id)), 'Complete original source-target roster required');
-      const targets = new Map();
-      for (const target of evidence.targets) {
-        const id = target.target_id ?? target.id, prior = targets.get(id);
-        need(target.source_receipt_sha256 === evidence.physical_evidence?.sha256
-          && (!prior || prior.pixelIndex === target.pixelIndex && prior.source_family === target.source_family
-            && same(prior.base_geometry, target.base_geometry)), 'Conflicting original source target/family/receipt');
-        targets.set(id, target);
-      }
-      const added = constructed.ledger_rows.map(row => {
-        need(row.representation === 'native-cells' && row.component_id === 'source-target:' + digest(jsonBytes({target_id: row.target_id,
-          evidence: binding.source_evidence.sha256})) && !oldIds.has(row.component_id)
-          && !Object.hasOwn(row, 'authority_sha256') && !Object.hasOwn(row, 'rule_sha256'), 'Foreign or duplicate modern component');
-        const target = targets.get(row.target_id);
-        need(target?.pixelIndex === row.pixelIndex && same(target.base_geometry, row.base_geometry)
-          && target.source_receipt_sha256 === evidence.physical_evidence?.sha256 && row.source_receipt_sha256 === target.source_receipt_sha256,
-        'Modern row changes the original source target/owner/receipt');
-        oldIds.add(row.component_id);
+      const added = proof.original_ledger.rows.map(row => {
         return {...row, authority_sha256: entry.authority_sha256, rule_sha256: entry.rule_sha256};
       });
-      need(added.length === targets.size, 'Modern constructor omits an original source target');
       addedRows.push(...added);
       candidates.push({candidate, added});
     }
     const registry = {...priorRegistry, entries: entries.sort((a, b) => a.authority_sha256.localeCompare(b.authority_sha256))};
-    const rows = [...priorLedger.rows, ...addedRows].sort((a, b) => a.component_id.localeCompare(b.component_id));
+    const rows = [...priorLedger.rows, ...addedRows].sort(compareRepairComponents);
     const ledger = {...priorLedger, authority_registry_sha256: digest(jsonBytes(registry)), rows, scope_ids: rows.map(row => row.component_id)};
     compareVersionedRepairLedgers(priorLedger, ledger, {beforeRegistry: priorRegistry, afterRegistry: registry});
-    need(priorLedger.rows.every(row => same(row, rows.find(next => next.component_id === row.component_id))), 'Literal inherited row/exception changed');
+    need(priorLedger.rows.every(row => same(row, rows.find(next => repairComponentKey(next) === repairComponentKey(row)))), 'Literal inherited row/exception changed');
     const normalized = normaliseRetainedRepairLedger(ledger, registry), ledgerRaw = jsonBytes(ledger);
-    const union = patches => {
-      const byRow = new Map();
-      for (const patch of patches) {
-        need(Array.isArray(patch.rows), 'Complete native intervals required'); let previous = -1;
-        for (const row of patch.rows) {
-          need(Number.isSafeInteger(row.y) && row.y > previous && row.y < manifest.size && Array.isArray(row.runs) && row.runs.length,
-            'Invalid complete native row'); previous = row.y; let end = 0;
-          for (const run of row.runs) {
-            need(Array.isArray(run) && run.length === 3 && run.every(Number.isSafeInteger) && run[0] >= end
-              && run[1] > run[0] && run[1] <= manifest.size && run[2] > 0, 'Invalid complete native interval'); end = run[1];
-          }
-          const runs = byRow.get(row.y) ?? []; runs.push(...row.runs.map(run => [...run])); byRow.set(row.y, runs);
-        }
-      }
-      return [...byRow].sort((a, b) => a[0] - b[0]).map(([y, runs]) => {
-        runs.sort((a, b) => a[0] - b[0]); const merged = [];
-        for (const run of runs) {
-          const last = merged.at(-1); need(!last || run[0] >= last[1], 'Modern cells overlap the accepted cumulative patch or another original authority');
-          if (last && last[1] === run[0] && last[2] === run[2]) last[1] = run[1]; else merged.push(run);
-        }
-        return {y, runs: merged};
-      });
-    };
-    for (const {candidate, added} of candidates)
-      need(same(union([candidate]), union(added.map(row => ({rows: row.native_rows})))), 'Modern ledger intervals differ from original patch');
+    const union = patches => mergeCompletedNativePatches(patches, manifest.size);
     const patchRows = union([priorPatch, ...candidates.map(value => value.candidate)]);
     const currentBase = references.reference;
     const effective = {...(references.projectionPin ? currentBase : envelope.effective_reference), id: config.effective_release_id,
@@ -741,7 +698,7 @@ export function composeAuthorities(config, reader) {
     // Native outputs retain accepted handoff order. The existing composer uses
     // canonical component order. Preserve every raw row and the original pin;
     // only this in-memory view is ordered for its existing validator.
-    const rows = [...original.rows].sort((a, b) => a.component_id.localeCompare(b.component_id));
+    const rows = [...original.rows].sort(compareRepairComponents);
     return {...original, rows, scope_ids: rows.map(row => row.component_id)};
   });
   const ledger = composeRetainedLedgers(members, registry);
@@ -784,6 +741,7 @@ export function packageProjection(config, reader, acceptedRegistry = null) {
   let added = 0;
   for (const entry of incoming) {
     added++; add(entry.rule_preimage, 'authority rule preimage'); add(entry.source_authority, 'authority binding');
+    if (entry.completed_constructor !== undefined) add(entry.completed_constructor, 'completed constructor');
     const binding = reader.json(entry.source_authority);
     if (binding.kind === 'source-target-native-custody-v1') {
       const preimage = reader.json(entry.rule_preimage);
@@ -1252,7 +1210,9 @@ export function resumeSource(root, destination, config, binding, reader) {
   const physical = binding.phase === 'physical', phaseConfig = config[physical ? 'physical' : 'source'];
   const names = physical ? physicalProducts : sourceProducts;
   const receipt = JSON.parse(ordinary(root, destination + '/preparation.json'));
-  need(receipt.version === 1 && same(receipt.binding, binding) &&
+  // The entry hash describes the historical writer, not the scientific program.
+  // Unrelated entrypoint edits do not invalidate complete original science.
+  need(receipt.version === 1 && same({...receipt.binding, entry_sha256: binding.entry_sha256}, binding) &&
     same(Object.keys(receipt.outputs ?? {}).sort(), [...names].sort()), 'Source resume configuration/code/inventory differs');
   const products = {};
   for (const name of names) {
@@ -1273,7 +1233,7 @@ export function resumeSource(root, destination, config, binding, reader) {
     const raw = products[pin.path.slice(destination.length + 1)];
     need(raw && raw.length === pin.bytes && digest(raw) === pin.sha256, 'Source original execution product differs');
   }
-  return publish(root, destination, products, binding, true);
+  return publish(root, destination, products, receipt.binding, true);
 }
 
 // The source probe has one data-configured scientific implementation. Admission

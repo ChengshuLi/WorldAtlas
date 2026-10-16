@@ -38,9 +38,9 @@ test('complete package declarations retain exact whole immutable blob identity',
 });
 
 
-test('original output capture and runtime evidence use the declared source boundary',()=>{
+test('original output capture and actual Python execution use the declared source boundary',()=>{
   const definition=loadPackageInputs();
-  for(const name of ['scripts/package-output-artifact.mjs','scripts/package-node-runtime.mjs',
+  for(const name of ['scripts/package-output-artifact.mjs',
     'scripts/package-inputs.mjs','scripts/package-python-runtime.py'])
     assert(containsPackagePath(definition.inputs,name),name+' is a genuine capture dependency');
 });

@@ -915,8 +915,9 @@ function modernCompositionFixture(t, {mixed = true} = {}) {
     const binding = {version: 1, kind: 'source-target-native-custody-v1',
       source_evidence: f.pin(appendPrefix + 'source-evidence.json'), native_patch: f.pin(appendPrefix + 'native-patch.json')};
     f.save(appendPrefix + 'binding.json', binding); f.save(appendPrefix + 'rule.json', {...binding, kind: 'source-target-native-rule-v1'}); f.commitAll();
-    const constructed = {products: JSON.parse(JSON.stringify({'original-rule-preimage.json': jsonBytes({...binding, kind: 'source-target-native-rule-v1'}),
-      'authority-binding.json': jsonBytes(binding)})), component_ids: [row.component_id], ledger_rows: [row],
+    const constructed = {version:1,kind:'existing-source-target-native-constructor-result',
+      inputs:Object.fromEntries(['source_evidence','native_patch'].map(role=>[role,
+        {commit:binding[role].commit,path:binding[role].path}])), component_ids: [row.component_id], ledger_rows: [row],
       rule_sha256: f.pin(appendPrefix + 'rule.json').sha256, limitations: ['Actual current owner-zero remains separately required.']};
     f.save(appendPrefix + 'constructed-authority.json', constructed); f.commitAll();
     return {version: 1, selector, rule_preimage: f.pin(appendPrefix + 'rule.json'), source_authority: f.pin(appendPrefix + 'binding.json'),
@@ -945,7 +946,7 @@ for (const mixed of [false, true]) test('late compose and finalize replace moder
   const authority = {policy_id: 'retained-source-literal-additions', policy_version: 1, rule_preimage: f.config.rule_preimage,
     rule_sha256: f.config.rule_preimage.sha256, source_authority: f.config.source_authority};
   assert.deepEqual(registry.entries.find(entry => entry.authority_sha256 === digest(jsonBytes(authority))),
-    {authority_sha256: digest(jsonBytes(authority)), ...authority}, 'existing authority constructor policy/pin contract');
+    {authority_sha256: digest(jsonBytes(authority)), ...authority, completed_constructor:f.config.ledger}, 'original authority identity plus completed output custody');
   for (const entry of f.priorRegistry.entries) assert.deepEqual(registry.entries.find(next => next.authority_sha256 === entry.authority_sha256), entry);
   for (const row of f.priorLedger.rows) assert.deepEqual(ledger.rows.find(next => next.component_id === row.component_id), row);
   for (const name of ['parent_inventory', 'current_rebind', 'current_targets']) assert.deepEqual(ledger[name], f.priorLedger[name]);
@@ -1107,7 +1108,10 @@ test('multiple modern originals reject mixed/empty groups, duplicate authorities
   const sameEvidence = f.makeAppend(s => {
     s.native.rows = [{y: 3, runs: [[4, 5, 1]]}]; s.row.native_rows = structuredClone(s.native.rows); s.row.native_cells = 1;
   }, f.owned + 'same-source/');
-  refusal(modernGroups(f.config, [f.config, sameEvidence]), /Foreign or duplicate modern component/);
+  const sameLabel = composeAuthorities(modernGroups(f.config, [f.config, sameEvidence]), f.r);
+  const repeated = JSON.parse(sameLabel['selected-ledger.json']).rows.filter(row => row.component_id === f.r.json(f.config.ledger).component_ids[0]);
+  assert.equal(repeated.length, 2); assert.notEqual(repeated[0].authority_sha256, repeated[1].authority_sha256);
+  assert.deepEqual(repeated.map(row => row.native_cells).sort(), [1, 2]);
   for (const [change, pattern] of [
     [s => { s.native.rows = [{y: 3, runs: [[3, 5, 1]]}]; s.row.native_rows = structuredClone(s.native.rows); s.row.native_cells = 2; }, /overlap/],
     [s => { s.source.native_contract.method = 'wrong'; }, /baseline\/contract/],

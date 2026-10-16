@@ -7,7 +7,7 @@ import {gunzipSync} from 'node:zlib';
 import {fileURLToPath} from 'node:url';
 import {isDeepStrictEqual} from 'node:util';
 import {nativePolygonIntervals,NATIVE_GRID_METHOD} from '../src/native-grid.js';
-import {nativeOnlyComponent} from '../src/native-grid.js';
+import {repairComponentKey,nativeOnlyComponent} from '../src/native-grid.js';
 import {unshuffleOwnershipBytes} from '../src/ownership-codec.js';
 import {readSelectedAdditive,selectedAdditiveRows,compareVersionedRepairLedgers} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {validateReferenceMetadataProjection} from './selected-reference-metadata.mjs';
@@ -680,8 +680,8 @@ function indexCandidates(candidates) {
   demand(Array.isArray(candidates)&&candidates.length<=4096,'Bounded visibility candidate roster required');
   const ids=new Set();
   return candidates.map((candidate,i)=>{
-    demand(typeof candidate.component_id==='string'&&!ids.has(candidate.component_id),'Duplicate/missing visibility component');
-    ids.add(candidate.component_id);
+    demand(typeof candidate.component_id==='string'&&!ids.has(repairComponentKey(candidate)),'Duplicate/missing visibility component');
+    ids.add(repairComponentKey(candidate));
     const g=candidate.geometry;
     demand(['Polygon','MultiPolygon'].includes(g?.type),'Visibility requires the exact polygon primitive');
     const bounds=[Infinity,Infinity,-Infinity,-Infinity];let vertices=0;
@@ -780,11 +780,11 @@ export function screenNativeGapCandidates({candidates,size,latitudes,rows,rowSta
 // This applies at the requested baseline->candidate boundary only. Historical
 // checkpoint traversal and unchanged accepted zero-cell primitives remain valid.
 export function newVisibleRepairCandidates(before,after) {
-  const old=new Set(before.map(row=>row.component_id)),seen=new Set();
+  const old=new Set(before.map(repairComponentKey)),seen=new Set();
   const added=[];
   for(const row of after){
-    demand(!seen.has(row.component_id),'Duplicate candidate repair component');seen.add(row.component_id);
-    if(old.has(row.component_id))continue;
+    demand(!seen.has(repairComponentKey(row)),'Duplicate candidate repair component');seen.add(repairComponentKey(row));
+    if(old.has(repairComponentKey(row)))continue;
     if(!['assigned','zero-cell'].includes(row.disposition))continue;
     demand(row.disposition==='assigned'&&Number.isSafeInteger(row.native_cells)&&row.native_cells>0,
       'New gap repair must change map cells: '+row.component_id);
@@ -802,20 +802,21 @@ export function repairVisibilityWitnesses({candidates,size,latitudes,beforeRows,
   demand(JSON.stringify(ys)===JSON.stringify([...after.keys()]),'Visibility before/after row scope differs');
   const ids=new Set(),witnesses=new Map();
   for(const candidate of candidates){
-    demand(typeof candidate.component_id==='string'&&!ids.has(candidate.component_id),'Duplicate/missing visibility component');
-    ids.add(candidate.component_id);
+    demand(typeof candidate.component_id==='string'&&!ids.has(repairComponentKey(candidate)),'Duplicate/missing visibility component');
+    ids.add(repairComponentKey(candidate));
     if(candidate.representation!=='native-cells')continue;
     nativeOnlyComponent(candidate,visibilityDigest);
     for(const row of candidate.native_rows){
-      if(witnesses.has(candidate.component_id)||!before.has(row.y))continue;
+      if(witnesses.has(repairComponentKey(candidate))||!before.has(row.y))continue;
       for(const [start,end]of row.runs){
         for(const [left,right]of emptySpans(start,end,before.get(row.y))){
           const hit=after.get(row.y).find(run=>run[2]===candidate.pixelIndex&&Math.max(left,run[0])<Math.min(right,run[1]));
-          if(hit){witnesses.set(candidate.component_id,{component_id:candidate.component_id,
+          if(hit){witnesses.set(repairComponentKey(candidate),{component_id:candidate.component_id,
+            ...(candidate.authority_sha256?{authority_sha256:candidate.authority_sha256}:{}),
             native_rows_sha256:visibilityDigest(candidate.native_rows),x:Math.max(left,hit[0]),y:row.y,
             previous_owner:0,candidate_owner:hit[2]});break;}
         }
-        if(witnesses.has(candidate.component_id))break;
+        if(witnesses.has(repairComponentKey(candidate)))break;
       }
     }
   }
@@ -826,10 +827,11 @@ export function repairVisibilityWitnesses({candidates,size,latitudes,beforeRows,
     for(let n=k;n<end;n++){
       const y=ys[n];
       for(const span of native.rows.get(y)??[]){
-        const item=index[span.owner-1];if(witnesses.has(item.candidate.component_id))continue;
+        const item=index[span.owner-1];if(witnesses.has(repairComponentKey(item.candidate)))continue;
         for(const [left,right]of emptySpans(span.start,span.end,before.get(y))){
           const hit=after.get(y).find(run=>run[2]===item.candidate.pixelIndex&&Math.max(left,run[0])<Math.min(right,run[1]));
-          if(hit){witnesses.set(item.candidate.component_id,{component_id:item.candidate.component_id,
+          if(hit){witnesses.set(repairComponentKey(item.candidate),{component_id:item.candidate.component_id,
+            ...(item.candidate.authority_sha256?{authority_sha256:item.candidate.authority_sha256}:{}),
             geometry_sha256:item.geometry_sha256,x:Math.max(left,hit[0]),y,
             previous_owner:0,candidate_owner:hit[2]});break;}
         }
@@ -837,7 +839,7 @@ export function repairVisibilityWitnesses({candidates,size,latitudes,beforeRows,
     }
     k=end;
   }
-  return candidates.map(row=>witnesses.get(row.component_id)??null);
+  return candidates.map(row=>witnesses.get(repairComponentKey(row))??null);
 }
 
 export function selectedBootstrap(repo,baseline,candidate,{parentRuntimePath}={}) {
@@ -912,14 +914,14 @@ export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) 
       }checkedRows++;
     }
     if(visibilityCandidates.length){
-      const pending=visibilityCandidates.filter(row=>!visibilityWitnesses.has(row.component_id));
+      const pending=visibilityCandidates.filter(row=>!visibilityWitnesses.has(repairComponentKey(row)));
       for(const witness of repairVisibilityWitnesses({candidates:pending,size:a.size,latitudes:visibilityLatitudes,beforeRows:visibilityBefore,afterRows:visibilityAfter}))
-        if(witness)visibilityWitnesses.set(witness.component_id,witness);
+        if(witness)visibilityWitnesses.set(repairComponentKey(witness),witness);
     }
     phases.push({first_row:group[0],last_row:group.at(-1),rows:group.length,baseline:previous.custody,candidate:next.custody});
   }
   demand(checkedRows===affected.length&&groups.flat().every((y,i)=>y===affected[i]),'Incomplete affected native row comparison');
-  demand(visibilityCandidates.every(row=>visibilityWitnesses.has(row.component_id)),'New gap repair has no actual changed map-cell witness');
+  demand(visibilityCandidates.every(row=>visibilityWitnesses.has(repairComponentKey(row))),'New gap repair has no actual changed map-cell witness');
   return {version:1,method:'selected-native-owner-conservation-v1',repair_visibility:{new_components:visibilityCandidates.length,witnesses:[...visibilityWitnesses.values()]},status:losses.length?'native-regressions-found':'no-new-native-loss',baseline_selection:before.selection,candidate_selection:after.selection,baseline_receipt_provenance:before.receiptProvenance,candidate_receipt_provenance:after.receiptProvenance,additive_conservation:additiveConservation,affected_rows:affected.length,lost_or_reassigned_cells:lostCells,intervals:losses,phases,runtime,caller_runtime:callerRuntime,execution_runtimes:identities,execution_code_inventory:executionCode,input_inventory:[...beforeReader.inventory.values(),...afterReader.inventory.values()],candidate_code_executed:false,limits:['Native owner conservation is not sub-cell polygon coverage or source authority approval.','Only explicit authenticated committed additive hooks are consumed; proposal files never select a release. Continuous primitive-set coverage is enforced separately.']};
 }
 

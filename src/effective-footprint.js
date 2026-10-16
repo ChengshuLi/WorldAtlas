@@ -1,5 +1,5 @@
 import {compileNativeRuntime} from './native-runtime.js';
-import {nativeRuntimeIndex,polygonParts,nativeOnlyComponent as validateNativeOnlyComponent} from './native-grid.js';
+import {repairComponentKey,compareRepairComponents,nativeRuntimeIndex,polygonParts,nativeOnlyComponent as validateNativeOnlyComponent} from './native-grid.js';
 export {polygonParts} from './native-grid.js';
 import {compileNativeOwnership} from '../scripts/native-ownership/compile-native-ownership.mjs';
 import {sha256} from '@noble/hashes/sha2.js';
@@ -489,11 +489,11 @@ function versionedPrimitiveGeometries(feature) {
     require(hex.test(value[key]??''),'Missing versioned footprint binding: '+key);
   require(value.base_geometry_sha256===footprintValueSha256(feature.geometry),'Current retained base changed');
   require(Array.isArray(value.components)&&value.components.length>0,'Missing complete original components');
-  let previous='';const output=[feature.geometry];
+  let previous;const output=[feature.geometry];
   for(const row of value.components){
     if (nativeOnlyComponent(row)) {
-      require(row.component_id > previous && row.target_id === feature.id && row.pixelIndex === feature.pixelIndex,
-        'Foreign or unordered native component'); previous = row.component_id; continue;
+      require((!previous || compareRepairComponents(previous,row)<0) && row.target_id === feature.id && row.pixelIndex === feature.pixelIndex,
+        'Foreign or unordered native component'); previous = row; continue;
     }
     const componentKeys=['base_geometry','base_geometry_sha256','component_id','disposition','geometry','geometry_sha256','native_cells','pixelIndex','source_receipt_sha256','target_id','authority_sha256','rule_sha256'];
     const scoped=Object.hasOwn(row,'geometry_scope'),partial=row.geometry_scope==='supported-fragment';
@@ -520,8 +520,8 @@ function versionedPrimitiveGeometries(feature) {
       if(!originalNcl)require(hex.test(remainder.geometry_sha256??'')&&footprintValueSha256(remainder.geometry)===remainder.geometry_sha256,'Original remainder pointsets changed');
       require(footprintValueSha256(row.original_candidate.geometry)!==row.geometry_sha256,'Whole original candidate relabelled as supported fragment');
     }
-    require(typeof row.component_id==='string'&&row.component_id>previous&&row.target_id===feature.id&&row.pixelIndex===feature.pixelIndex,'Foreign/duplicate/unordered component owner');
-    previous=row.component_id;
+    require(typeof row.component_id==='string'&&row.component_id&&(!previous||compareRepairComponents(previous,row)<0)&&row.target_id===feature.id&&row.pixelIndex===feature.pixelIndex,'Foreign/duplicate/unordered component owner');
+    previous=row;
     for(const key of ['base_geometry_sha256','geometry_sha256','source_receipt_sha256','authority_sha256','rule_sha256'])
       require(hex.test(row[key]??''),'Incomplete original component authority: '+key);
     require(Number.isSafeInteger(row.native_cells)&&(['assigned','zero-cell'].includes(row.disposition))
@@ -547,11 +547,11 @@ function versionedReleaseFootprintDigest(baseReference,features) {
     require(value.baseline_release_sha256===baseReference.footprints_sha256,'Stale versioned base');
     if(ledger===undefined){ledger=value.ledger_sha256;registry=value.authority_registry_sha256;}
     require(value.ledger_sha256===ledger&&value.authority_registry_sha256===registry,'Mixed complete ledger/authority registry');
-    for(const row of value.components){require(!components.has(row.component_id),'Duplicate component across owners');components.set(row.component_id,row);}
+    for(const row of value.components){require(!components.has(repairComponentKey(row)),'Duplicate component across owners');components.set(repairComponentKey(row),row);}
   }
   return footprintValueSha256({domain:'worldatlas-effective-native-footprints:v2',base_reference:baseReference,
     authority_registry_sha256:registry,ledger_sha256:ledger,
-    components:[...components.values()].sort((a,b)=>a.component_id<b.component_id?-1:a.component_id>b.component_id?1:0)});
+    components:[...components.values()].sort(compareRepairComponents)});
 }
 
 function versionedCurrentTargets(ledger) {
@@ -597,11 +597,11 @@ function verifyVersionedLedgerSelection(ledger,features,patch) {
   require(Number.isSafeInteger(ledger.parent_inventory?.components)&&ledger.parent_inventory.components>=ledger.rows?.filter(row=>row.representation!=='native-cells').length
     &&hex.test(ledger.parent_inventory?.report_sha256)&&hex.test(ledger.parent_inventory?.roster_sha256),'Missing original complete inventory denominator');
   require(Array.isArray(ledger.scope_ids)&&Array.isArray(ledger.rows)&&ledger.scope_ids.length===ledger.rows.length,'Missing complete original versioned scope');
-  const targets=versionedCurrentTargets(ledger),wanted=new Map();let previous='';
+  const targets=versionedCurrentTargets(ledger),wanted=new Map();let previous;
   for(let i=0;i<ledger.rows.length;i++){
-    const row=ledger.rows[i];require(row.component_id===ledger.scope_ids[i]&&row.component_id>previous,'Foreign/duplicate/unordered original component');previous=row.component_id;
+    const row=ledger.rows[i];require(typeof row.component_id==='string'&&row.component_id&&row.component_id===ledger.scope_ids[i]&&(!previous||compareRepairComponents(previous,row)<0),'Foreign/duplicate/unordered original component');previous=row;
     require(['assigned','zero-cell','already-resolved','rejected','awaiting-evidence'].includes(row.disposition),'Unknown original component disposition');
-    if(['assigned','zero-cell'].includes(row.disposition))wanted.set(row.component_id,row);
+    if(['assigned','zero-cell'].includes(row.disposition))wanted.set(repairComponentKey(row),row);
   }
   const seen=new Set(),targetIds=new Set();
   for(const feature of features)if(Object.hasOwn(feature,'additiveFootprint')){
@@ -610,8 +610,8 @@ function verifyVersionedLedgerSelection(ledger,features,patch) {
     require(target&&target.pixelIndex===feature.pixelIndex&&target.geometry_sha256===value.base_geometry_sha256
       &&value.authority_registry_sha256===ledger.authority_registry_sha256&&value.ledger_sha256===patch.ledger_sha256
       &&value.baseline_release_sha256===patch.base_reference.footprints_sha256,'Foreign current target/registry/ledger/base binding');targetIds.add(feature.id);
-    for(const component of value.components){const original=wanted.get(component.component_id);
-      require(original&&!seen.has(component.component_id)&&footprintValueSha256(original)===footprintValueSha256(component),'Original component authority removed/rebound');seen.add(component.component_id);}
+    for(const component of value.components){const original=wanted.get(repairComponentKey(component));
+      require(original&&!seen.has(repairComponentKey(component))&&footprintValueSha256(original)===footprintValueSha256(component),'Original component authority removed/rebound');seen.add(repairComponentKey(component));}
   }
   require(seen.size===wanted.size&&targetIds.size===targets.size,'Incomplete selected original components/current target scope');
   const patchRows=new Map(patch.rows.map(row=>[row.y,row.runs]));

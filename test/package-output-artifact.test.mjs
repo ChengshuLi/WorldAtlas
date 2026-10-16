@@ -6,7 +6,7 @@ import os from 'node:os';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {createPackageOutputManifest, snapshotPackageOutputSource, inventoryPackageOutput, validatePackageOutputManifest,
-  verifyPackageOutput, streamedPackageFile, installedPackageIdentity, admitPackageInputTransition, admitPackageOutputTransition, committedPackageInputs, committedPackageProducer, packageWorkflowExecution} from '../scripts/package-output-artifact.mjs';
+  verifyPackageOutput, streamedPackageFile, admitPackageInputTransition, admitPackageOutputTransition, committedPackageInputs, committedPackageProducer, packageWorkflowExecution} from '../scripts/package-output-artifact.mjs';
 
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
@@ -15,12 +15,11 @@ function fixture(t,{author=true}={}) {
   t.after(() => fs.rmSync(root, {recursive: true, force: true}));
   const write = (name, value) => { fs.mkdirSync(path.dirname(path.join(root, name)), {recursive: true});
     fs.writeFileSync(path.join(root, name), typeof value === 'string' ? value : JSON.stringify(value)); };
-  const definition = {version: 1, inputs: ['.github/package-inputs.json','data/ownership-selection.json','package-lock.json','scripts/package-output-artifact.mjs','scripts/package-node-runtime.mjs'],
+  const definition = {version: 1, inputs: ['.github/package-inputs.json','data/ownership-selection.json','package-lock.json','scripts/package-output-artifact.mjs'],
     optional_inputs: [], verification_paths: [], generated_outputs: ['dist/']};
   write('.github/package-inputs.json', definition); write('data/ownership-selection.json', {version: 1});
   write('package-lock.json', {lockfileVersion: 3});
   write('scripts/package-output-artifact.mjs','synthetic capture writer');
-  write('scripts/package-node-runtime.mjs','synthetic runtime inventory');
   if(author)write('.github/workflows/merge-integration-checks.yml', 'genuine package build and immediate capture');
   write('.github/workflows/worker-merge.yml','genuine final-worker package producer');
   write('node_modules/example/index.js','original dependency body');
@@ -38,7 +37,7 @@ function fixture(t,{author=true}={}) {
 test('retains complete actual Cloudflare output and original input identity', t => {
   const {root, git} = fixture(t), manifest = createPackageOutputManifest(root);
   assert.equal(manifest.source.head, git('rev-parse','HEAD'));
-  assert.equal(manifest.source.files.length, 5); assert.equal(manifest.output.files.length, 4);
+  assert.equal(manifest.source.files.length, 4); assert.equal(manifest.output.files.length, 4);
   assert.equal(verifyPackageOutput(root, manifest), true);
   assert.match(manifest.semantics, /Original full/);
 });
@@ -66,28 +65,32 @@ test('queue-only captures bind their actual producer and cannot adopt historical
   assert.throws(()=>committedPackageProducer(current.root),/Complete package producer workflows/);
 });
 
-test('read-only output custody does not execute or upgrade original scientific runtime evidence', async t => {
+test('read-only output custody preserves historical runtime evidence without recreating it', t => {
   const f=fixture(t),manifest=createPackageOutputManifest(f.root);
-  // Output custody keeps these authenticated original bytes opaque. They cannot
-  // establish an installed-Python claim when a caller actually asks to use one.
-  manifest.runtime.installed.python={historical_evidence:'not current execution'};
-  const {validateInstalledPackageIdentity}=await import('../scripts/package-output-artifact.mjs');
-  const previous=process.env.PATH;
+  manifest.runtime.installed={version:2,node:{historical:'original executable'},
+    dependencies:{historical:'original installation'},python:{historical:'original science'}};
+  const original=JSON.stringify(manifest),previous=process.env.PATH;
   try {
     process.env.PATH='';
     assert.equal(validatePackageOutputManifest(manifest),manifest);
     assert.equal(verifyPackageOutput(f.root,manifest),true);
-    assert.throws(()=>validateInstalledPackageIdentity(manifest.runtime.installed),/Python installed identity failed/);
-    const changed=structuredClone(manifest);delete changed.runtime.installed.dependencies.inventory;
-    assert.throws(()=>validatePackageOutputManifest(changed),'Executing Node inventory remains mandatory');
+    assert.equal(JSON.stringify(manifest),original,'Custody must not rewrite original execution history');
   } finally {if(previous===undefined)delete process.env.PATH;else process.env.PATH=previous;}
 });
 
-test('minting original full output still validates the complete scientific installed identity',t=>{
+test('capture records actual build metadata without inventorying an installed environment',t=>{
   const f=fixture(t),source=JSON.parse(fs.readFileSync(path.join(f.root,'.cache/package-output-source.json')));
-  source.installed_runtime.python={historical_evidence:'cannot mint a current runtime claim'};
+  assert.equal(Object.hasOwn(source,'installed_runtime'),false);
+  // No dependency body, generated cache, or scientific installation is needed
+  // to inventory the output that the successful build actually produced.
+  fs.rmSync(path.join(f.root,'node_modules'),{recursive:true});
+  const manifest=createPackageOutputManifest(f.root);
+  assert.equal(Object.hasOwn(manifest.runtime,'installed'),false);
+  assert.equal(manifest.runtime.node,process.version);
+  assert.equal(verifyPackageOutput(f.root,manifest),true);
+  source.installed_runtime={historical_evidence:'original capture'};
   f.write('.cache/package-output-source.json',source);
-  assert.throws(()=>createPackageOutputManifest(f.root),/Python installed identity failed/);
+  assert.deepEqual(createPackageOutputManifest(f.root).runtime.installed,source.installed_runtime);
 });
 
 test('missing, extra, truncated and same-size substituted output cannot pass custody', t => {
@@ -289,71 +292,7 @@ test('source snapshot rejects untracked declared-directory inputs',t=>{
 });
 
 
-test('installed identity detects dependency body substitution under unchanged lock metadata',t=>{
-  const f=fixture(t),before=installedPackageIdentity(f.root);
-  f.write('node_modules/example/index.js','modified dependency body');
-  const after=installedPackageIdentity(f.root);
-  assert.deepEqual(before.node,after.node);
-  assert.notEqual(before.dependencies.sha256,after.dependencies.sha256);
-});
-
-
-test('original installed input identity is captured before generated consumer caches',t=>{
-  const f=fixture(t),before=JSON.parse(fs.readFileSync(path.join(f.root,'.cache/package-output-source.json'))).installed_runtime;
-  f.write('node_modules/.vite/deps/generated-cache.js','generated consumer cache');
-  const manifest=createPackageOutputManifest(f.root);
-  assert.deepEqual(manifest.runtime.installed,before);
-  assert.notDeepEqual(installedPackageIdentity(f.root),before,'Control establishes actual post-consumer tree differs');
-});
-
-
-test('installed identity admits ordinary scoped and punctuated filenames without weakening package paths', t => {
-  const f=fixture(t);
-  for (const name of ['@scope/package/index.js','@scope/package/LICENSE (MIT).txt',
-    'example/Unicode-é+file.js','example/file#?.json']) f.write('node_modules/'+name, name);
-  const before=installedPackageIdentity(f.root);
-  assert.equal(before.dependencies.files, 5);
-  f.write('node_modules/@scope/package/index.js', 'changed scoped dependency');
-  assert.notEqual(installedPackageIdentity(f.root).dependencies.sha256,before.dependencies.sha256);
-  assert.throws(()=>streamedPackageFile(f.root,'node_modules/@scope/package/index.js'),/Safe ordinary package path/);
-  fs.symlinkSync('/tmp',path.join(f.root,'node_modules/escape'));
-  assert.throws(()=>installedPackageIdentity(f.root),/link escapes/);
-});
-
-
-test('versioned runtime evidence requires complete bound inventories before summary equality',async t=>{
-  const {installedPackageDifferences,validateInstalledPackageIdentity}=await import('../scripts/package-output-artifact.mjs');
-  const f=fixture(t),identity=installedPackageIdentity(f.root);
-  assert.equal(identity.version,2);assert.equal(validateInstalledPackageIdentity(identity),identity);
-  assert.deepEqual(installedPackageDifferences(identity,structuredClone(identity)),[]);
-  const legacy={node:identity.node,dependencies:{files:identity.dependencies.files,sha256:identity.dependencies.sha256},python:null};
-  assert.equal(installedPackageDifferences(legacy,identity)[0].component,'identity-policy');
-  assert.throws(()=>installedPackageDifferences({...legacy,version:2},identity));
-  for(const mutate of [
-    value=>delete value.dependencies.inventory,
-    value=>value.dependencies.inventory[0].sha256='f'.repeat(64),
-    value=>value.dependencies.inventory.push(structuredClone(value.dependencies.inventory[0])),
-    value=>value.dependencies.files++,
-    value=>delete value.python,
-  ]){const changed=structuredClone(identity);mutate(changed);assert.throws(()=>installedPackageDifferences(changed,identity));}
-  f.write('node_modules/example/index.js','actually changed execution bytes');
-  const current=installedPackageIdentity(f.root),diff=installedPackageDifferences(identity,current);
-  assert.deepEqual(diff.map(row=>row.component),['dependencies']);
-  assert.deepEqual(diff[0].changed_files,['node_modules/example/index.js']);
-});
-
-test('scientific identity roots follow every exact declared requirement',async t=>{
-  const {declaredPackagePythonRoots}=await import('../scripts/package-output-artifact.mjs');
-  const f=fixture(t);assert.deepEqual(declaredPackagePythonRoots(f.root),[]);
-  f.write('requirements.txt','# scientific roots\nnumpy==2.3.5\nshapely==2.1.2\npyproj==3.7.2\nrasterio==1.4.3\nscipy==1.17.0\n');
-  assert.deepEqual(declaredPackagePythonRoots(f.root).map(row=>row.name),['numpy','shapely','pyproj','rasterio','scipy']);
-  for(const unknown of ['numpy>=2','-r elsewhere.txt','package @ https://example.invalid/file']){
-    f.write('requirements.txt',unknown);assert.throws(()=>declaredPackagePythonRoots(f.root),/Exact pinned/);
-  }
-});
-
-
-test('parent independently binds Python executable before any consumer identity process',async t=>{
+test('parent independently binds Python executable before archive extraction',async t=>{
   const {resolvePackagePythonExecutable}=await import('../scripts/package-output-artifact.mjs');
   const observed=resolvePackagePythonExecutable();assert.equal(resolvePackagePythonExecutable(observed.sha256).executable,observed.executable);
   const f=fixture(t),bin=path.join(f.root,'bin'),marker=path.join(f.root,'forged-executable-ran');fs.mkdirSync(bin);
@@ -363,13 +302,16 @@ test('parent independently binds Python executable before any consumer identity 
   finally{process.env.PATH=before;}
 });
 
-test('assembly admits original custody and actual Node bytes before current-product imports',()=>{
+test('assembly admits original custody and current locked dependencies before current-product imports',()=>{
   const source=fs.readFileSync(new URL('../scripts/assemble-selected-package.mjs',import.meta.url),'utf8');
-  const custody=source.indexOf('const original=await authenticateOriginalPackageOutput('),identity=source.indexOf('const installed={version:2,...installedNodeIdentity(root)'),admission=source.indexOf('if(differences.length)recordAndRequireRuntime();'),probe=source.indexOf('const runtime=inspectPackageNodeRuntime(root)');
-  assert.ok(custody>0&&identity>custody&&admission>identity&&probe>admission);
-  assert.doesNotMatch(source,/declaredPackagePythonRoots|installedPackageIdentity|expectedParser|expectedExecutable/);
+  const custody=source.indexOf('const original=await authenticateOriginalPackageOutput(');
+  const runtime=source.indexOf('const runtime=inspectPackageNodeRuntime(root)');
+  const admission=source.indexOf('need(runtime.errors.length===0');
+  const computation=source.indexOf("await import('./package-current-additive.mjs')");
+  assert.ok(custody>0&&runtime>custody&&admission>runtime&&computation>admission);
+  assert.doesNotMatch(source,/installedNodeIdentity|installedPackageDifferences|runtime_identity_version|runtime\.installed/);
   assert.match(source,/resolvePackagePythonExecutable\(python\.sha256\)/);
-  assert.ok(source.indexOf('if(runtime.errors.length)')<source.indexOf('const actualRuntime='));
+  assert.match(source,/same\(manifest\.configuration,packageBuildConfiguration\(\)\)/);
 });
 
 test('declared build image rejects real producer changes but ignores incidental programmes', t => {
@@ -394,12 +336,12 @@ test('declared build image rejects real producer changes but ignores incidental 
     f.write(name,'observer version two');commit();assert.doesNotThrow(()=>admitPackageOutputTransition(original,current()),name+' changed');
     fs.unlinkSync(path.join(f.root,name));commit();assert.doesNotThrow(()=>admitPackageOutputTransition(original,current()),name+' deleted');
   }
-  for(const name of [...Object.keys(inputs),'package-lock.json','scripts/package-output-artifact.mjs','scripts/package-node-runtime.mjs','.github/workflows/merge-integration-checks.yml','.github/workflows/worker-merge.yml']){
+  for(const name of [...Object.keys(inputs),'package-lock.json','scripts/package-output-artifact.mjs','.github/workflows/merge-integration-checks.yml','.github/workflows/worker-merge.yml']){
     const prior=fs.readFileSync(path.join(f.root,name));f.write(name,'changed consumed bytes');commit();
     assert.throws(()=>admitPackageOutputTransition(original,current()),/input changed|producer workflow required/,name);
     f.write(name,prior.toString());commit();
   }
-  for(const name of ['scripts/package-output-artifact.mjs','scripts/package-node-runtime.mjs']){
+  for(const name of ['scripts/package-output-artifact.mjs']){
     const prior=fs.readFileSync(path.join(f.root,name),'utf8');f.write(name,'dirty capture code');
     assert.throws(()=>snapshotPackageOutputSource(f.root),/complete immutable inventory/,name+' dirty');
     f.write(name,prior);

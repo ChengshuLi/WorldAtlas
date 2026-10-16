@@ -72,7 +72,6 @@ function fileDescriptor(file) {
 }
 
 /** Baseline v2 authenticates explicit file vintages; the enclosing manifest stays v1. */
-export const MAX_BASELINE_COMMITS = 16;
 export function baselineFiles(manifest) {
   const baseline = manifest.baseline;
   require(/^[a-f0-9]{40}$/.test(baseline?.commit ?? '') &&
@@ -89,8 +88,6 @@ export function baselineFiles(manifest) {
     require(!seen.has(key), 'Duplicate historical file descriptor'); seen.add(key);
     return {...file, commit};
   });
-  require(new Set([baseline.commit, ...files.map(file => file.commit)]).size <= MAX_BASELINE_COMMITS,
-    'Historical commit inventory exceeds bounded review budget');
   return files;
 }
 
@@ -286,8 +283,6 @@ export function validateEvidence(manifest, {readFile, expectedIssue, expectedSub
     'Subjects disagree with reviewed scope');
   require(Array.isArray(manifest.sources) && Array.isArray(manifest.outputs), 'Missing source/output inventory');
   require(manifest.sources.every(source => source.files === undefined || Array.isArray(source.files)), 'Invalid source file inventory');
-  require(Array.isArray(manifest.baseline?.files) && manifest.baseline.files.length + manifest.outputs.length +
-    manifest.sources.flatMap(source => source.files ?? []).length <= 512, 'Evidence file inventory exceeds bounded review budget');
   for (const source of manifest.sources) for (const file of source.files ?? [])
     require(!Object.hasOwn(file, 'commit'), 'Candidate source file cannot declare historical commit');
   const historicalFiles = baselineFiles(manifest);

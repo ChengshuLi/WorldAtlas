@@ -288,3 +288,29 @@ test('genuine startup native descriptor still rejects wrong encoded SHA and miss
   await assert.rejects(runSelectedDeliverySmoke(custody.options), /Missing whole-file asset pin/);
   assert.equal(fs.existsSync(custody.outputPath), false);
 });
+
+
+test('actual emitted smoke keeps distinct authority pointsets with the same original component label', async t => {
+  const f = fixture(t, {
+    ledger: ledger => {
+      ledger.rows[1].component_id = ledger.rows[0].component_id;
+      ledger.rows[1].authority_sha256 = 'f'.repeat(64);
+      ledger.scope_ids = ledger.rows.map(row => row.component_id);
+    },
+    expectations: expected => {
+      expected.cohorts = expected.cohorts[0].members.map((member, i) => ({
+        original_batch_id: 'retained-authority-scope:' + (i ? 'f' : 'c').repeat(64),
+        component_ids: [member.component_id], members: [member]
+      }));
+    }
+  });
+  const options = {root:f.root,emittedDirectory:f.emittedDirectory,expectationsPath:f.expectationsPath,outputPath:f.outputPath};
+  const report = await runSelectedDeliverySmoke(options);
+  assert.equal(report.expected_components_verified, 2);
+  assert.equal(report.cumulative_native_cells_picked_and_sampled, 2);
+  const args = await f.kernel();
+  const ambiguous = structuredClone(args.expectations); ambiguous.cohorts[0].original_batch_id = 'legacy-ambiguous';
+  assert.throws(() => verifySelectedDelivery({...args,expectations:ambiguous}), /ambiguous/);
+  const wrong = structuredClone(args.expectations); wrong.cohorts[0].original_batch_id = 'retained-authority-scope:' + 'a'.repeat(64);
+  assert.throws(() => verifySelectedDelivery({...args,expectations:wrong}), /ambiguous/);
+});
