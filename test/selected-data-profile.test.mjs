@@ -362,7 +362,15 @@ function actualSourceSpecimen() {
     if(typeof value.path==='string'&&Number.isSafeInteger(value.bytes)&&!value.path.startsWith('.')&&!value.path.startsWith('/'))paths.add(value.path);
     for(const child of Object.values(value))collect(child);
   };
-  for(const value of documents.values())collect(value);
+  // Keep the complete original metadata bodies above, but inventory only this
+  // specimen's declared roles. Recursing through the global catalogue/registry
+  // hydrates unrelated scientific blobs merely to ask Git for their sizes.
+  const native=documents.get(authority.original_pins.native_request.path).additive;
+  const sourceRoles=[native.publication_path,native.inventory_path,native.operating_path];
+  for(const value of [authority,issued.report,issued.source_rule.inputs,
+    native.inputs.filter(row=>sourceRoles.includes(row.path)),
+    [...handoff.consumed_inputs,...(handoff.reused_whole_product_inputs??[])].filter(row=>
+      /\/(?:components|sources)-\d{3}\.jsonl\.gz$/.test(row.path))])collect(value);
   const output=execFileSync('git',['ls-tree','-l','HEAD','--',...paths],{encoding:'utf8',maxBuffer:4*1024*1024,env:{...process.env,GIT_NO_LAZY_FETCH:'1'}});
   const entries=new Map();
   for(const line of output.trim().split('\n')) {
@@ -453,7 +461,7 @@ function retainedSourceFixture({format='v1',additionalRegistryEntries=[],mutate=
 }
 
 test('retained complete v1 SOURCE graph admits registry append and exact already-on-main package inputs',async()=>{
-  const f=retainedSourceFixture();assert.ok(await f.run());
+  const f=retainedSourceFixture(), diagnostics={};assert.ok(await f.run({metadataDiagnostics:diagnostics}),JSON.stringify(diagnostics));
   for(const name of f.sourceState.packageRoles)assert(f.baseline.entries.has(name));
   assert(f.sourceState.handoff.consumed_inputs.some(row=>row.path.endsWith('.py')),'negative executable example is present');
   assert(!f.sourceState.packageRoles.some(name=>name.startsWith('.cache/')||name.endsWith('.py')));
