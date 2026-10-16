@@ -1,0 +1,611 @@
+{
+  "kind": "human-visual-proposal-only-bulungan894",
+  "keys": 894,
+  "owner": 22698,
+  "manual_categories": {
+    "V": 584,
+    "A": 131,
+    "L": 69,
+    "W": 110
+  },
+  "categories": {
+    "annual2020-rgbnir-supported-vegetated-body-location": 584,
+    "unresolved-actual-pond-surface-or-fringe-placement": 131,
+    "annual2020-rgbnir-supported-exposed-or-constructed-surface-location": 69,
+    "annual2020-rgbnir-supported-visible-water-body-location": 110
+  },
+  "proposed_answers": 763,
+  "remaining": 131,
+  "perkey_proposal": {
+    "path": "proposed-bulungan894-physical-location-dispositions.jsonl.gz",
+    "bytes": 231574,
+    "sha256": "7003e7e3e97c1217f0fb87ab726a4ac7684ddf70d49615aa050655421d716460",
+    "decoded_bytes": 6000269,
+    "decoded_sha256": "13f2eceb1c8bd89ab453c8d9f6e0f48e4ab0951e5394697c2a4c3329f5230ffc"
+  },
+  "source_report": {
+    "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-source-observations.json",
+    "bytes": 113961,
+    "sha256": "da2c6ef6ee786541220486778bb74d428c794665d3582ae7d5bee2735205f5bd"
+  },
+  "manual_inputs": [
+    {
+      "path": "manual-panel-decisions-first-pass.json",
+      "bytes": 3196,
+      "sha256": "03bcb2bb0af00cdb7f2941ad4b5685a22dfb6d1dc3850bbf55b4b4a2ab8fe290"
+    },
+    {
+      "path": "manual-detail-decisions-final.json",
+      "bytes": 4432,
+      "sha256": "5999f0b0ad8a79b49029be3bbfd759ac79dd2a3c4b57b2d8eccd8b4a301c0e8f"
+    },
+    {
+      "path": "manual-provisional-v-adverse-decisions.json",
+      "bytes": 582,
+      "sha256": "7a6a464b961cfa6fcc7d61682584b76c76a2913fb34cc4bc05c54cda538dbc01"
+    }
+  ],
+  "view_inventories": [
+    {
+      "path": "native-centre-review-v2/contact-inventory.json",
+      "bytes": 905158,
+      "sha256": "6ab6b2755b514b09c7b48da2b5ee1760bd8b2e2061444398d283d8f285efbb6b"
+    },
+    {
+      "path": "native-detail-review/contact-inventory.json",
+      "bytes": 316622,
+      "sha256": "0e53f3eae85005484bb7376f6ac9ee6a321bcf6d11b3c92159d6e39cac113e0a"
+    },
+    {
+      "path": "native-provisional-v-adverse-review/contact-inventory.json",
+      "bytes": 47018,
+      "sha256": "26ffab4b5fcea2c6453d03f94d97ccc34904c3bd61ead39d9546c26dc833240e"
+    }
+  ],
+  "basis": "Human viewed all38 wide894 centre panels, all24 close280 panels, then all4 targeted41 adverse panels. Later explicit manual decisions override earlier ones. No threshold, automated confidence class, all-neighbour unanimity or Map95/90 binary conversion.",
+  "root_adoption": null,
+  "distinct_review": null,
+  "repair_credit": 0,
+  "examples": {
+    "2415": {
+      "kind": "V",
+      "original_key": {
+        "owner": 22698,
+        "y": 128467,
+        "x": 216621
+      },
+      "views": [
+        {
+          "path": "native-centre-review-v2/bulungan-centres-13.png",
+          "sha256": "09415ba9be1032302324fe57371f9fd0c4c17862e141202df255fa62e71254b8",
+          "page_1based": 13,
+          "panel_1based": 16,
+          "point_index": 2415,
+          "original_key": {
+            "owner": 22698,
+            "y": 128467,
+            "x": 216621
+          },
+          "retained_context_scope": "all-mangrove95",
+          "worldcover_class": 95,
+          "rgbnir_values": [
+            348,
+            587,
+            358,
+            2661
+          ],
+          "rgbnir_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "array": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-04-05.npz",
+          "crop_native_window": {
+            "row_off": 4905,
+            "col_off": 5488,
+            "height": 49,
+            "width": 49
+          },
+          "actual_composite_tile": "N03E117",
+          "fractional_centre_in_crop": {
+            "row": 24.702027000013913,
+            "col": 24.751462813699618
+          }
+        },
+        {
+          "path": "native-detail-review/bulungan-detail-08.png",
+          "sha256": "6d9a3cbbb34a897bee5f6f52d0e390f7c9fba6f41f3ac33712f0e1904a99bfe8",
+          "page_1based": 8,
+          "panel_1based": 3,
+          "wide_locator": {
+            "page_1based": 13,
+            "panel_1based": 16
+          },
+          "point_index": 2415,
+          "original_key": {
+            "owner": 22698,
+            "y": 128467,
+            "x": 216621
+          },
+          "retained_context_scope": "all-mangrove95",
+          "worldcover_class": 95,
+          "rgbnir_values": [
+            348,
+            587,
+            358,
+            2661
+          ],
+          "rgbnir_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "array": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-04-05.npz",
+          "crop_native_window": {
+            "row_off": 4921,
+            "col_off": 5504,
+            "height": 17,
+            "width": 17
+          },
+          "actual_composite_tile": "N03E117",
+          "fractional_centre_in_crop": {
+            "row": 8.702027000013913,
+            "col": 8.751462813699618
+          }
+        }
+      ]
+    },
+    "5198": {
+      "kind": "W",
+      "original_key": {
+        "owner": 22698,
+        "y": 128832,
+        "x": 216717
+      },
+      "views": [
+        {
+          "path": "native-centre-review-v2/bulungan-centres-31.png",
+          "sha256": "95f5e3c4e2dc41105981a716034d659f49bde2a38b7ac2e182f1aee0b90a578c",
+          "page_1based": 31,
+          "panel_1based": 22,
+          "point_index": 5198,
+          "original_key": {
+            "owner": 22698,
+            "y": 128832,
+            "x": 216717
+          },
+          "retained_context_scope": "all-mangrove95",
+          "worldcover_class": 95,
+          "rgbnir_values": [
+            416,
+            520,
+            399,
+            640
+          ],
+          "rgbnir_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "array": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-10-06.npz",
+          "crop_native_window": {
+            "row_off": 10909,
+            "col_off": 7070,
+            "height": 49,
+            "width": 49
+          },
+          "actual_composite_tile": "N03E117",
+          "fractional_centre_in_crop": {
+            "row": 24.982412491917785,
+            "col": 24.649954609107226
+          }
+        },
+        {
+          "path": "native-detail-review/bulungan-detail-22.png",
+          "sha256": "864b56c430ed3d6a9425aeca8884f5b832d7e882e9570122b859dd9f1512c584",
+          "page_1based": 22,
+          "panel_1based": 1,
+          "wide_locator": {
+            "page_1based": 31,
+            "panel_1based": 22
+          },
+          "point_index": 5198,
+          "original_key": {
+            "owner": 22698,
+            "y": 128832,
+            "x": 216717
+          },
+          "retained_context_scope": "all-mangrove95",
+          "worldcover_class": 95,
+          "rgbnir_values": [
+            416,
+            520,
+            399,
+            640
+          ],
+          "rgbnir_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "array": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-10-06.npz",
+          "crop_native_window": {
+            "row_off": 10925,
+            "col_off": 7086,
+            "height": 17,
+            "width": 17
+          },
+          "actual_composite_tile": "N03E117",
+          "fractional_centre_in_crop": {
+            "row": 8.982412491917785,
+            "col": 8.649954609107226
+          }
+        }
+      ]
+    },
+    "8611": {
+      "kind": "L",
+      "original_key": {
+        "owner": 22698,
+        "y": 129242,
+        "x": 216940
+      },
+      "views": [
+        {
+          "path": "native-centre-review-v2/bulungan-centres-13.png",
+          "sha256": "09415ba9be1032302324fe57371f9fd0c4c17862e141202df255fa62e71254b8",
+          "page_1based": 13,
+          "panel_1based": 14,
+          "point_index": 8611,
+          "original_key": {
+            "owner": 22698,
+            "y": 129242,
+            "x": 216940
+          },
+          "retained_context_scope": "other-centre-water-or-wet-edge",
+          "worldcover_class": 60,
+          "rgbnir_values": [
+            1452,
+            1343,
+            949,
+            991
+          ],
+          "rgbnir_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "array": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N02E117/block-05-10.npz",
+          "crop_native_window": {
+            "row_off": 5657,
+            "col_off": 10745,
+            "height": 49,
+            "width": 49
+          },
+          "actual_composite_tile": "N02E117",
+          "fractional_centre_in_crop": {
+            "row": 24.86998597566344,
+            "col": 24.268326174933463
+          }
+        },
+        {
+          "path": "native-provisional-v-adverse-review/bulungan-adverse-02.png",
+          "sha256": "6b6af3d202bacbc977eb47f4e7d9bd27773b989227f1509875fe7e582f51b2e3",
+          "page_1based": 2,
+          "panel_1based": 4,
+          "wide_locator": {
+            "page_1based": 13,
+            "panel_1based": 14
+          },
+          "point_index": 8611,
+          "original_key": {
+            "owner": 22698,
+            "y": 129242,
+            "x": 216940
+          },
+          "retained_context_scope": "other-centre-water-or-wet-edge",
+          "worldcover_class": 60,
+          "rgbnir_values": [
+            1452,
+            1343,
+            949,
+            991
+          ],
+          "rgbnir_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "array": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N02E117/block-05-10.npz",
+          "crop_native_window": {
+            "row_off": 5673,
+            "col_off": 10761,
+            "height": 17,
+            "width": 17
+          },
+          "actual_composite_tile": "N02E117",
+          "fractional_centre_in_crop": {
+            "row": 8.86998597566344,
+            "col": 8.268326174933463
+          }
+        }
+      ]
+    },
+    "5156": {
+      "kind": "V",
+      "original_key": {
+        "owner": 22698,
+        "y": 128831,
+        "x": 216726
+      },
+      "views": [
+        {
+          "path": "native-centre-review-v2/bulungan-centres-34.png",
+          "sha256": "9c3e76bde0b044cf350c6713c945068771f012980cc3093d3f7a568fbf68e757",
+          "page_1based": 34,
+          "panel_1based": 7,
+          "point_index": 5156,
+          "original_key": {
+            "owner": 22698,
+            "y": 128831,
+            "x": 216726
+          },
+          "retained_context_scope": "all-mangrove95",
+          "worldcover_class": 95,
+          "rgbnir_values": [
+            542,
+            568,
+            524,
+            1200
+          ],
+          "rgbnir_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "array": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-10-07.npz",
+          "crop_native_window": {
+            "row_off": 10893,
+            "col_off": 7218,
+            "height": 49,
+            "width": 49
+          },
+          "actual_composite_tile": "N03E117",
+          "fractional_centre_in_crop": {
+            "row": 24.5282533957361,
+            "col": 24.952938214875758
+          }
+        },
+        {
+          "path": "native-provisional-v-adverse-review/bulungan-adverse-04.png",
+          "sha256": "d181f2b7fa20eaab2f53b3ac75061eb81a61e6e3292eb42e4fe913c3e3d6793b",
+          "page_1based": 4,
+          "panel_1based": 3,
+          "wide_locator": {
+            "page_1based": 34,
+            "panel_1based": 7
+          },
+          "point_index": 5156,
+          "original_key": {
+            "owner": 22698,
+            "y": 128831,
+            "x": 216726
+          },
+          "retained_context_scope": "all-mangrove95",
+          "worldcover_class": 95,
+          "rgbnir_values": [
+            542,
+            568,
+            524,
+            1200
+          ],
+          "rgbnir_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "array": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-10-07.npz",
+          "crop_native_window": {
+            "row_off": 10909,
+            "col_off": 7234,
+            "height": 17,
+            "width": 17
+          },
+          "actual_composite_tile": "N03E117",
+          "fractional_centre_in_crop": {
+            "row": 8.528253395736101,
+            "col": 8.952938214875758
+          }
+        }
+      ]
+    },
+    "5381": {
+      "kind": "V",
+      "original_key": {
+        "owner": 22698,
+        "y": 128837,
+        "x": 216746
+      },
+      "views": [
+        {
+          "path": "native-centre-review-v2/bulungan-centres-34.png",
+          "sha256": "9c3e76bde0b044cf350c6713c945068771f012980cc3093d3f7a568fbf68e757",
+          "page_1based": 34,
+          "panel_1based": 15,
+          "point_index": 5381,
+          "original_key": {
+            "owner": 22698,
+            "y": 128837,
+            "x": 216746
+          },
+          "retained_context_scope": "all-mangrove95",
+          "worldcover_class": 95,
+          "rgbnir_values": [
+            354,
+            495,
+            354,
+            1480
+          ],
+          "rgbnir_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "array": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-10-07.npz",
+          "crop_native_window": {
+            "row_off": 10992,
+            "col_off": 7548,
+            "height": 49,
+            "width": 49
+          },
+          "actual_composite_tile": "N03E117",
+          "fractional_centre_in_crop": {
+            "row": 24.253526521766616,
+            "col": 24.515124005498365
+          }
+        },
+        {
+          "path": "native-provisional-v-adverse-review/bulungan-adverse-04.png",
+          "sha256": "d181f2b7fa20eaab2f53b3ac75061eb81a61e6e3292eb42e4fe913c3e3d6793b",
+          "page_1based": 4,
+          "panel_1based": 4,
+          "wide_locator": {
+            "page_1based": 34,
+            "panel_1based": 15
+          },
+          "point_index": 5381,
+          "original_key": {
+            "owner": 22698,
+            "y": 128837,
+            "x": 216746
+          },
+          "retained_context_scope": "all-mangrove95",
+          "worldcover_class": 95,
+          "rgbnir_values": [
+            354,
+            495,
+            354,
+            1480
+          ],
+          "rgbnir_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "array": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-10-07.npz",
+          "crop_native_window": {
+            "row_off": 11008,
+            "col_off": 7564,
+            "height": 17,
+            "width": 17
+          },
+          "actual_composite_tile": "N03E117",
+          "fractional_centre_in_crop": {
+            "row": 8.253526521766616,
+            "col": 8.515124005498365
+          }
+        }
+      ]
+    },
+    "5422": {
+      "kind": "V",
+      "original_key": {
+        "owner": 22698,
+        "y": 128839,
+        "x": 216746
+      },
+      "views": [
+        {
+          "path": "native-centre-review-v2/bulungan-centres-35.png",
+          "sha256": "f79ec5cc91cc705c678fd3020631ca297e1146bc237c58bf1f4aa3358bff7c96",
+          "page_1based": 35,
+          "panel_1based": 3,
+          "point_index": 5422,
+          "original_key": {
+            "owner": 22698,
+            "y": 128839,
+            "x": 216746
+          },
+          "retained_context_scope": "all-mangrove95",
+          "worldcover_class": 95,
+          "rgbnir_values": [
+            424,
+            526,
+            399,
+            1372
+          ],
+          "rgbnir_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "array": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-10-07.npz",
+          "crop_native_window": {
+            "row_off": 11025,
+            "col_off": 7548,
+            "height": 49,
+            "width": 49
+          },
+          "actual_composite_tile": "N03E117",
+          "fractional_centre_in_crop": {
+            "row": 24.162120614513697,
+            "col": 24.515124005498365
+          }
+        },
+        {
+          "path": "native-provisional-v-adverse-review/bulungan-adverse-04.png",
+          "sha256": "d181f2b7fa20eaab2f53b3ac75061eb81a61e6e3292eb42e4fe913c3e3d6793b",
+          "page_1based": 4,
+          "panel_1based": 5,
+          "wide_locator": {
+            "page_1based": 35,
+            "panel_1based": 3
+          },
+          "point_index": 5422,
+          "original_key": {
+            "owner": 22698,
+            "y": 128839,
+            "x": 216746
+          },
+          "retained_context_scope": "all-mangrove95",
+          "worldcover_class": 95,
+          "rgbnir_values": [
+            424,
+            526,
+            399,
+            1372
+          ],
+          "rgbnir_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "array": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-10-07.npz",
+          "crop_native_window": {
+            "row_off": 11041,
+            "col_off": 7564,
+            "height": 17,
+            "width": 17
+          },
+          "actual_composite_tile": "N03E117",
+          "fractional_centre_in_crop": {
+            "row": 8.162120614513697,
+            "col": 8.515124005498365
+          }
+        }
+      ]
+    }
+  }
+}

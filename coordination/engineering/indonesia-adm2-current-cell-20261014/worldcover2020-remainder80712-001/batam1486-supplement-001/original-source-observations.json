@@ -1,0 +1,3428 @@
+{
+  "kind": "unresolved-original-keys-annual2020-rgbnir-observations-not-answers",
+  "started_utc": "2026-10-15T23:09:52.899000+00:00",
+  "ended_utc": "2026-10-15T23:14:01.330693+00:00",
+  "elapsed_seconds": 248.43112312501762,
+  "process_peak_rss_bytes": 468369408,
+  "reader": {
+    "path": "idn-physical-largest-residuals-001/worker1-source/read_composite_windows.py",
+    "bytes": 9534,
+    "sha256": "c2c9dbd0fb5252c26e55d329cd81a7992f114a297e6d5f5aa06a392341aeb2eb"
+  },
+  "plan": {
+    "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-2020-native-block-plan.json",
+    "bytes": 2298535,
+    "sha256": "0b60d822014271282a7d8a96cff9fd6ba7a06874f1467ae3fbd57e2983590934"
+  },
+  "exact_residual_keys": {
+    "path": "idn-physical-largest-residuals-001/worker1-source/exact-residual-keys.jsonl",
+    "bytes": 33651079,
+    "sha256": "a4efa518c9259747746766d8d517893aec4d56a71f3763e71451848c94595f0b"
+  },
+  "requested_keys": 9332,
+  "observed_keys": 9332,
+  "complete": true,
+  "coverage_status_counts": {
+    "valid-native-bands": 9331,
+    "nodata": 1
+  },
+  "new_native_blocks_read": 297,
+  "reused_native_blocks": 0,
+  "sources": [
+    {
+      "tile": "N00E103",
+      "url": "https://esa-worldcover-s2.s3.eu-central-1.amazonaws.com/rgbnir/2020/N00/ESA_WorldCover_10m_2020_v100_N00E103_S2RGBNIR.tif",
+      "source_object_identity": {
+        "last-modified": "Tue, 24 Jan 2023 18:24:22 GMT",
+        "etag": "\"31bf2b15b11eb3dc022d1620b5dbee00-63\"",
+        "accept-ranges": "bytes",
+        "content-length": "523831241"
+      },
+      "http": {
+        "status": 200,
+        "headers": {
+          "x-amz-id-2": "n50nv9NSlmCB1IZzTi2AL3+RoFyU4HH3G/Q+DZkE9YM4J7Jr7OoWPKWu+5W3BXNVvCZhrVkORleQRIbAjDIFh+kum/OEi5eo",
+          "x-amz-request-id": "0YM3GTWM4C9VMQTT",
+          "Server": "AmazonS3",
+          "Date": "Thu, 15 Oct 2026 23:09:54 GMT",
+          "Last-Modified": "Tue, 24 Jan 2023 18:24:22 GMT",
+          "ETag": "\"31bf2b15b11eb3dc022d1620b5dbee00-63\"",
+          "x-amz-server-side-encryption": "AES256",
+          "Accept-Ranges": "bytes",
+          "Content-Length": "523831241",
+          "Content-Type": "binary/octet-stream",
+          "Connection": "close"
+        }
+      },
+      "crs": "EPSG:4326",
+      "transform": [
+        8.333333333333333e-05,
+        0.0,
+        103.0,
+        0.0,
+        -8.333333333333336e-05,
+        1.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "shape": [
+        12000,
+        12000
+      ],
+      "block_shapes": [
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ]
+      ],
+      "count": 4,
+      "dtypes": [
+        "uint16",
+        "uint16",
+        "uint16",
+        "uint16"
+      ],
+      "nodata": 0.0,
+      "band_descriptions": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "tags": {
+        "algorithm_version": "V1.0.0",
+        "bands": "Band 1: B04 (Red), Band 2: B03 (Green), Band 3: B02 (Blue), Band 4: B08 (Infrared)",
+        "copyright": "ESA WorldCover project 2020 / Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium",
+        "creation_time": "2023-01-24 16:06:56.340162",
+        "description": "The ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite is a color image made from images in Blue (B02), Green (B03), Red (B04) and Infrared (B08). ",
+        "license": "CC-BY 4.0 - https://creativecommons.org/licenses/by/4.0/",
+        "OVR_RESAMPLING_ALG": "NEAREST",
+        "product_crs": "EPSG:4326",
+        "product_grid": "1x1 degree tiling grid",
+        "product_tile": "N00E103",
+        "product_type": "Sentinel-2 median L2A (RGBNIR) composite",
+        "product_version": "V1.0.0",
+        "reference": "https://esa-worldcover.org",
+        "time_end": "2020-12-31T23:59:59Z",
+        "time_start": "2020-01-01T00:00:00Z",
+        "title": "ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite at 10m resolution for year 2020",
+        "AREA_OR_POINT": "Area"
+      },
+      "mask_flags": [
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ]
+      ],
+      "product": "annual2020 S2RGBNIR composite",
+      "band_order": [
+        "red",
+        "green",
+        "blue",
+        "nir"
+      ],
+      "scale": 0.0001,
+      "offset": 0,
+      "no_single_acquisition_or_tide": true,
+      "whole_remote_tiff_hash_claimed": false
+    },
+    {
+      "tile": "N00E104",
+      "url": "https://esa-worldcover-s2.s3.eu-central-1.amazonaws.com/rgbnir/2020/N00/ESA_WorldCover_10m_2020_v100_N00E104_S2RGBNIR.tif",
+      "source_object_identity": {
+        "last-modified": "Tue, 24 Jan 2023 18:22:37 GMT",
+        "etag": "\"9ad04171b125944df5a7b6f07d09bf83-37\"",
+        "accept-ranges": "bytes",
+        "content-length": "305945879"
+      },
+      "http": {
+        "status": 200,
+        "headers": {
+          "x-amz-id-2": "CsRuRnQm7iz9QqHLpEaCwvqBXCO8c04yOaS5DfyQlGABT1cMLOH6eyTuUiEmYpF5CmwZk1mjlJcWSfFSb32k/tcJCqQAU8cv",
+          "x-amz-request-id": "HMB1R67ZGZD33S2Q",
+          "Server": "AmazonS3",
+          "Date": "Thu, 15 Oct 2026 23:10:01 GMT",
+          "Last-Modified": "Tue, 24 Jan 2023 18:22:37 GMT",
+          "ETag": "\"9ad04171b125944df5a7b6f07d09bf83-37\"",
+          "x-amz-server-side-encryption": "AES256",
+          "Accept-Ranges": "bytes",
+          "Content-Length": "305945879",
+          "Content-Type": "binary/octet-stream",
+          "Connection": "close"
+        }
+      },
+      "crs": "EPSG:4326",
+      "transform": [
+        8.333333333333333e-05,
+        0.0,
+        104.0,
+        0.0,
+        -8.333333333333333e-05,
+        1.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "shape": [
+        12000,
+        12000
+      ],
+      "block_shapes": [
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ]
+      ],
+      "count": 4,
+      "dtypes": [
+        "uint16",
+        "uint16",
+        "uint16",
+        "uint16"
+      ],
+      "nodata": 0.0,
+      "band_descriptions": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "tags": {
+        "algorithm_version": "V1.0.0",
+        "bands": "Band 1: B04 (Red), Band 2: B03 (Green), Band 3: B02 (Blue), Band 4: B08 (Infrared)",
+        "copyright": "ESA WorldCover project 2020 / Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium",
+        "creation_time": "2023-01-24 16:06:56.340162",
+        "description": "The ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite is a color image made from images in Blue (B02), Green (B03), Red (B04) and Infrared (B08). ",
+        "license": "CC-BY 4.0 - https://creativecommons.org/licenses/by/4.0/",
+        "OVR_RESAMPLING_ALG": "NEAREST",
+        "product_crs": "EPSG:4326",
+        "product_grid": "1x1 degree tiling grid",
+        "product_tile": "N00E104",
+        "product_type": "Sentinel-2 median L2A (RGBNIR) composite",
+        "product_version": "V1.0.0",
+        "reference": "https://esa-worldcover.org",
+        "time_end": "2020-12-31T23:59:59Z",
+        "time_start": "2020-01-01T00:00:00Z",
+        "title": "ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite at 10m resolution for year 2020",
+        "AREA_OR_POINT": "Area"
+      },
+      "mask_flags": [
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ]
+      ],
+      "product": "annual2020 S2RGBNIR composite",
+      "band_order": [
+        "red",
+        "green",
+        "blue",
+        "nir"
+      ],
+      "scale": 0.0001,
+      "offset": 0,
+      "no_single_acquisition_or_tide": true,
+      "whole_remote_tiff_hash_claimed": false
+    },
+    {
+      "tile": "N00E127",
+      "url": "https://esa-worldcover-s2.s3.eu-central-1.amazonaws.com/rgbnir/2020/N00/ESA_WorldCover_10m_2020_v100_N00E127_S2RGBNIR.tif",
+      "source_object_identity": {
+        "last-modified": "Tue, 24 Jan 2023 18:06:22 GMT",
+        "etag": "\"5f2fd7ee4493fac61f3bb09f676eb87c-39\"",
+        "accept-ranges": "bytes",
+        "content-length": "324532962"
+      },
+      "http": {
+        "status": 200,
+        "headers": {
+          "x-amz-id-2": "dKlYD1Yjaca798ZH+6W3KguJ45XVx8ijfhyTrKnu6E0ugndguvomNU70HrueW1tSMitg7XjXctoDLziG0W7Tir4lmG37C0g7",
+          "x-amz-request-id": "JPN7HQ68J574Z7QQ",
+          "Server": "AmazonS3",
+          "Date": "Thu, 15 Oct 2026 23:10:21 GMT",
+          "Last-Modified": "Tue, 24 Jan 2023 18:06:22 GMT",
+          "ETag": "\"5f2fd7ee4493fac61f3bb09f676eb87c-39\"",
+          "x-amz-server-side-encryption": "AES256",
+          "Accept-Ranges": "bytes",
+          "Content-Length": "324532962",
+          "Content-Type": "binary/octet-stream",
+          "Connection": "close"
+        }
+      },
+      "crs": "EPSG:4326",
+      "transform": [
+        8.333333333333333e-05,
+        0.0,
+        127.0,
+        0.0,
+        -8.333333333333333e-05,
+        1.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "shape": [
+        12000,
+        12000
+      ],
+      "block_shapes": [
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ]
+      ],
+      "count": 4,
+      "dtypes": [
+        "uint16",
+        "uint16",
+        "uint16",
+        "uint16"
+      ],
+      "nodata": 0.0,
+      "band_descriptions": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "tags": {
+        "algorithm_version": "V1.0.0",
+        "bands": "Band 1: B04 (Red), Band 2: B03 (Green), Band 3: B02 (Blue), Band 4: B08 (Infrared)",
+        "copyright": "ESA WorldCover project 2020 / Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium",
+        "creation_time": "2023-01-24 16:06:56.340162",
+        "description": "The ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite is a color image made from images in Blue (B02), Green (B03), Red (B04) and Infrared (B08). ",
+        "license": "CC-BY 4.0 - https://creativecommons.org/licenses/by/4.0/",
+        "OVR_RESAMPLING_ALG": "NEAREST",
+        "product_crs": "EPSG:4326",
+        "product_grid": "1x1 degree tiling grid",
+        "product_tile": "N00E127",
+        "product_type": "Sentinel-2 median L2A (RGBNIR) composite",
+        "product_version": "V1.0.0",
+        "reference": "https://esa-worldcover.org",
+        "time_end": "2020-12-31T23:59:59Z",
+        "time_start": "2020-01-01T00:00:00Z",
+        "title": "ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite at 10m resolution for year 2020",
+        "AREA_OR_POINT": "Area"
+      },
+      "mask_flags": [
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ]
+      ],
+      "product": "annual2020 S2RGBNIR composite",
+      "band_order": [
+        "red",
+        "green",
+        "blue",
+        "nir"
+      ],
+      "scale": 0.0001,
+      "offset": 0,
+      "no_single_acquisition_or_tide": true,
+      "whole_remote_tiff_hash_claimed": false
+    },
+    {
+      "tile": "N01E103",
+      "url": "https://esa-worldcover-s2.s3.eu-central-1.amazonaws.com/rgbnir/2020/N01/ESA_WorldCover_10m_2020_v100_N01E103_S2RGBNIR.tif",
+      "source_object_identity": {
+        "last-modified": "Tue, 24 Jan 2023 18:19:11 GMT",
+        "etag": "\"de3f801afa73ba63c34200289516fc5d-59\"",
+        "accept-ranges": "bytes",
+        "content-length": "488687256"
+      },
+      "http": {
+        "status": 200,
+        "headers": {
+          "x-amz-id-2": "j0ax2zlw6RlHITBJcMYqb4EpXvzec5b8WjeaOTEJIPbaAKyViIo+2dpNv84tJp+Y+yyhXSs8jZcDcBH6I5sABRxudsFz14BF",
+          "x-amz-request-id": "GBHZ8MRA1SWPX7CS",
+          "Server": "AmazonS3",
+          "Date": "Thu, 15 Oct 2026 23:10:29 GMT",
+          "Last-Modified": "Tue, 24 Jan 2023 18:19:11 GMT",
+          "ETag": "\"de3f801afa73ba63c34200289516fc5d-59\"",
+          "x-amz-server-side-encryption": "AES256",
+          "Accept-Ranges": "bytes",
+          "Content-Length": "488687256",
+          "Content-Type": "binary/octet-stream",
+          "Connection": "close"
+        }
+      },
+      "crs": "EPSG:4326",
+      "transform": [
+        8.333333333333333e-05,
+        0.0,
+        103.0,
+        0.0,
+        -8.333333333333333e-05,
+        2.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "shape": [
+        12000,
+        12000
+      ],
+      "block_shapes": [
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ]
+      ],
+      "count": 4,
+      "dtypes": [
+        "uint16",
+        "uint16",
+        "uint16",
+        "uint16"
+      ],
+      "nodata": 0.0,
+      "band_descriptions": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "tags": {
+        "algorithm_version": "V1.0.0",
+        "bands": "Band 1: B04 (Red), Band 2: B03 (Green), Band 3: B02 (Blue), Band 4: B08 (Infrared)",
+        "copyright": "ESA WorldCover project 2020 / Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium",
+        "creation_time": "2023-01-24 16:06:56.340162",
+        "description": "The ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite is a color image made from images in Blue (B02), Green (B03), Red (B04) and Infrared (B08). ",
+        "license": "CC-BY 4.0 - https://creativecommons.org/licenses/by/4.0/",
+        "OVR_RESAMPLING_ALG": "NEAREST",
+        "product_crs": "EPSG:4326",
+        "product_grid": "1x1 degree tiling grid",
+        "product_tile": "N01E103",
+        "product_type": "Sentinel-2 median L2A (RGBNIR) composite",
+        "product_version": "V1.0.0",
+        "reference": "https://esa-worldcover.org",
+        "time_end": "2020-12-31T23:59:59Z",
+        "time_start": "2020-01-01T00:00:00Z",
+        "title": "ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite at 10m resolution for year 2020",
+        "AREA_OR_POINT": "Area"
+      },
+      "mask_flags": [
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ]
+      ],
+      "product": "annual2020 S2RGBNIR composite",
+      "band_order": [
+        "red",
+        "green",
+        "blue",
+        "nir"
+      ],
+      "scale": 0.0001,
+      "offset": 0,
+      "no_single_acquisition_or_tide": true,
+      "whole_remote_tiff_hash_claimed": false
+    },
+    {
+      "tile": "N01E104",
+      "url": "https://esa-worldcover-s2.s3.eu-central-1.amazonaws.com/rgbnir/2020/N01/ESA_WorldCover_10m_2020_v100_N01E104_S2RGBNIR.tif",
+      "source_object_identity": {
+        "last-modified": "Tue, 24 Jan 2023 18:24:23 GMT",
+        "etag": "\"73b3dbbb725bbd193abff6ec19ebff4e-29\"",
+        "accept-ranges": "bytes",
+        "content-length": "239515632"
+      },
+      "http": {
+        "status": 200,
+        "headers": {
+          "x-amz-id-2": "mohb2r2bQLnXmYF7RcPb8juNgnOvRbgJAUmCVu3gVC+zwWKkB4++dy567YTjQNTfPCeDXDTACB9gz17ZZ42qFxyyIUiclfQL",
+          "x-amz-request-id": "ETASE3PE5GTVEQA7",
+          "Server": "AmazonS3",
+          "Date": "Thu, 15 Oct 2026 23:10:37 GMT",
+          "Last-Modified": "Tue, 24 Jan 2023 18:24:23 GMT",
+          "ETag": "\"73b3dbbb725bbd193abff6ec19ebff4e-29\"",
+          "x-amz-server-side-encryption": "AES256",
+          "Accept-Ranges": "bytes",
+          "Content-Length": "239515632",
+          "Content-Type": "binary/octet-stream",
+          "Connection": "close"
+        }
+      },
+      "crs": "EPSG:4326",
+      "transform": [
+        8.333333333333333e-05,
+        0.0,
+        104.0,
+        0.0,
+        -8.333333333333336e-05,
+        2.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "shape": [
+        12000,
+        12000
+      ],
+      "block_shapes": [
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ]
+      ],
+      "count": 4,
+      "dtypes": [
+        "uint16",
+        "uint16",
+        "uint16",
+        "uint16"
+      ],
+      "nodata": 0.0,
+      "band_descriptions": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "tags": {
+        "algorithm_version": "V1.0.0",
+        "bands": "Band 1: B04 (Red), Band 2: B03 (Green), Band 3: B02 (Blue), Band 4: B08 (Infrared)",
+        "copyright": "ESA WorldCover project 2020 / Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium",
+        "creation_time": "2023-01-24 16:06:56.340162",
+        "description": "The ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite is a color image made from images in Blue (B02), Green (B03), Red (B04) and Infrared (B08). ",
+        "license": "CC-BY 4.0 - https://creativecommons.org/licenses/by/4.0/",
+        "OVR_RESAMPLING_ALG": "NEAREST",
+        "product_crs": "EPSG:4326",
+        "product_grid": "1x1 degree tiling grid",
+        "product_tile": "N01E104",
+        "product_type": "Sentinel-2 median L2A (RGBNIR) composite",
+        "product_version": "V1.0.0",
+        "reference": "https://esa-worldcover.org",
+        "time_end": "2020-12-31T23:59:59Z",
+        "time_start": "2020-01-01T00:00:00Z",
+        "title": "ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite at 10m resolution for year 2020",
+        "AREA_OR_POINT": "Area"
+      },
+      "mask_flags": [
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ]
+      ],
+      "product": "annual2020 S2RGBNIR composite",
+      "band_order": [
+        "red",
+        "green",
+        "blue",
+        "nir"
+      ],
+      "scale": 0.0001,
+      "offset": 0,
+      "no_single_acquisition_or_tide": true,
+      "whole_remote_tiff_hash_claimed": false
+    },
+    {
+      "tile": "N02E117",
+      "url": "https://esa-worldcover-s2.s3.eu-central-1.amazonaws.com/rgbnir/2020/N02/ESA_WorldCover_10m_2020_v100_N02E117_S2RGBNIR.tif",
+      "source_object_identity": {
+        "last-modified": "Tue, 24 Jan 2023 18:39:57 GMT",
+        "etag": "\"c0a44ade3dacf89fa84fb2214a270d17-76\"",
+        "accept-ranges": "bytes",
+        "content-length": "631067867"
+      },
+      "http": {
+        "status": 200,
+        "headers": {
+          "x-amz-id-2": "mh1f2sMaKdU8G2cSrfDIDy6lKvP9yaSBeFhkZOpux8XTYR0javaAeY94XeqYA4RM8iiyoVFow9iV08PfyWh1vM2vFHCC+7rw",
+          "x-amz-request-id": "QVYNSNYSFF41Q0VM",
+          "Server": "AmazonS3",
+          "Date": "Thu, 15 Oct 2026 23:10:43 GMT",
+          "Last-Modified": "Tue, 24 Jan 2023 18:39:57 GMT",
+          "ETag": "\"c0a44ade3dacf89fa84fb2214a270d17-76\"",
+          "x-amz-server-side-encryption": "AES256",
+          "Accept-Ranges": "bytes",
+          "Content-Length": "631067867",
+          "Content-Type": "binary/octet-stream",
+          "Connection": "close"
+        }
+      },
+      "crs": "EPSG:4326",
+      "transform": [
+        8.333333333333333e-05,
+        0.0,
+        117.0,
+        0.0,
+        -8.333333333333333e-05,
+        3.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "shape": [
+        12000,
+        12000
+      ],
+      "block_shapes": [
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ]
+      ],
+      "count": 4,
+      "dtypes": [
+        "uint16",
+        "uint16",
+        "uint16",
+        "uint16"
+      ],
+      "nodata": 0.0,
+      "band_descriptions": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "tags": {
+        "algorithm_version": "V1.0.0",
+        "bands": "Band 1: B04 (Red), Band 2: B03 (Green), Band 3: B02 (Blue), Band 4: B08 (Infrared)",
+        "copyright": "ESA WorldCover project 2020 / Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium",
+        "creation_time": "2023-01-24 16:06:56.340162",
+        "description": "The ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite is a color image made from images in Blue (B02), Green (B03), Red (B04) and Infrared (B08). ",
+        "license": "CC-BY 4.0 - https://creativecommons.org/licenses/by/4.0/",
+        "OVR_RESAMPLING_ALG": "NEAREST",
+        "product_crs": "EPSG:4326",
+        "product_grid": "1x1 degree tiling grid",
+        "product_tile": "N02E117",
+        "product_type": "Sentinel-2 median L2A (RGBNIR) composite",
+        "product_version": "V1.0.0",
+        "reference": "https://esa-worldcover.org",
+        "time_end": "2020-12-31T23:59:59Z",
+        "time_start": "2020-01-01T00:00:00Z",
+        "title": "ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite at 10m resolution for year 2020",
+        "AREA_OR_POINT": "Area"
+      },
+      "mask_flags": [
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ]
+      ],
+      "product": "annual2020 S2RGBNIR composite",
+      "band_order": [
+        "red",
+        "green",
+        "blue",
+        "nir"
+      ],
+      "scale": 0.0001,
+      "offset": 0,
+      "no_single_acquisition_or_tide": true,
+      "whole_remote_tiff_hash_claimed": false
+    },
+    {
+      "tile": "N03E117",
+      "url": "https://esa-worldcover-s2.s3.eu-central-1.amazonaws.com/rgbnir/2020/N03/ESA_WorldCover_10m_2020_v100_N03E117_S2RGBNIR.tif",
+      "source_object_identity": {
+        "last-modified": "Tue, 24 Jan 2023 18:42:38 GMT",
+        "etag": "\"ce47ee51194c427fd6a5ee2d2c7f9061-62\"",
+        "accept-ranges": "bytes",
+        "content-length": "516706171"
+      },
+      "http": {
+        "status": 200,
+        "headers": {
+          "x-amz-id-2": "3uHnKWfuLG6g8eQrEJHBEHyppY+XTWdaRGG6e1bS7zKC88RaQfWKyIYVWDynIf0EbNXv74L4tWBrXv4TYuRL0offkhWsel7z",
+          "x-amz-request-id": "PKFYMVWT0E9DCY1K",
+          "Server": "AmazonS3",
+          "Date": "Thu, 15 Oct 2026 23:10:53 GMT",
+          "Last-Modified": "Tue, 24 Jan 2023 18:42:38 GMT",
+          "ETag": "\"ce47ee51194c427fd6a5ee2d2c7f9061-62\"",
+          "x-amz-server-side-encryption": "AES256",
+          "Accept-Ranges": "bytes",
+          "Content-Length": "516706171",
+          "Content-Type": "binary/octet-stream",
+          "Connection": "close"
+        }
+      },
+      "crs": "EPSG:4326",
+      "transform": [
+        8.333333333333333e-05,
+        0.0,
+        117.0,
+        0.0,
+        -8.333333333333333e-05,
+        4.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "shape": [
+        12000,
+        12000
+      ],
+      "block_shapes": [
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ]
+      ],
+      "count": 4,
+      "dtypes": [
+        "uint16",
+        "uint16",
+        "uint16",
+        "uint16"
+      ],
+      "nodata": 0.0,
+      "band_descriptions": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "tags": {
+        "algorithm_version": "V1.0.0",
+        "bands": "Band 1: B04 (Red), Band 2: B03 (Green), Band 3: B02 (Blue), Band 4: B08 (Infrared)",
+        "copyright": "ESA WorldCover project 2020 / Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium",
+        "creation_time": "2023-01-24 16:06:56.340162",
+        "description": "The ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite is a color image made from images in Blue (B02), Green (B03), Red (B04) and Infrared (B08). ",
+        "license": "CC-BY 4.0 - https://creativecommons.org/licenses/by/4.0/",
+        "OVR_RESAMPLING_ALG": "NEAREST",
+        "product_crs": "EPSG:4326",
+        "product_grid": "1x1 degree tiling grid",
+        "product_tile": "N03E117",
+        "product_type": "Sentinel-2 median L2A (RGBNIR) composite",
+        "product_version": "V1.0.0",
+        "reference": "https://esa-worldcover.org",
+        "time_end": "2020-12-31T23:59:59Z",
+        "time_start": "2020-01-01T00:00:00Z",
+        "title": "ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite at 10m resolution for year 2020",
+        "AREA_OR_POINT": "Area"
+      },
+      "mask_flags": [
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ]
+      ],
+      "product": "annual2020 S2RGBNIR composite",
+      "band_order": [
+        "red",
+        "green",
+        "blue",
+        "nir"
+      ],
+      "scale": 0.0001,
+      "offset": 0,
+      "no_single_acquisition_or_tide": true,
+      "whole_remote_tiff_hash_claimed": false
+    },
+    {
+      "tile": "S01E127",
+      "url": "https://esa-worldcover-s2.s3.eu-central-1.amazonaws.com/rgbnir/2020/S01/ESA_WorldCover_10m_2020_v100_S01E127_S2RGBNIR.tif",
+      "source_object_identity": {
+        "last-modified": "Tue, 24 Jan 2023 17:58:03 GMT",
+        "etag": "\"e9bee8bda7494b1eacf0c59039b824bd-44\"",
+        "accept-ranges": "bytes",
+        "content-length": "363846301"
+      },
+      "http": {
+        "status": 200,
+        "headers": {
+          "x-amz-id-2": "TRTIqJKeEGo48WJFT3Q7Q1dgW3eINe1ms79WDVCwyHJgxn9j98q8PS7VnbQkKQz6BCiZKL1TJnnDJdYsw/WEJUuO6SlabgTb",
+          "x-amz-request-id": "F5R6F1DQVA7GDJY1",
+          "Server": "AmazonS3",
+          "Date": "Thu, 15 Oct 2026 23:11:09 GMT",
+          "Last-Modified": "Tue, 24 Jan 2023 17:58:03 GMT",
+          "ETag": "\"e9bee8bda7494b1eacf0c59039b824bd-44\"",
+          "x-amz-server-side-encryption": "AES256",
+          "Accept-Ranges": "bytes",
+          "Content-Length": "363846301",
+          "Content-Type": "binary/octet-stream",
+          "Connection": "close"
+        }
+      },
+      "crs": "EPSG:4326",
+      "transform": [
+        8.333333333333333e-05,
+        0.0,
+        127.0,
+        0.0,
+        -8.333333333333333e-05,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "shape": [
+        12000,
+        12000
+      ],
+      "block_shapes": [
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ]
+      ],
+      "count": 4,
+      "dtypes": [
+        "uint16",
+        "uint16",
+        "uint16",
+        "uint16"
+      ],
+      "nodata": 0.0,
+      "band_descriptions": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "tags": {
+        "algorithm_version": "V1.0.0",
+        "bands": "Band 1: B04 (Red), Band 2: B03 (Green), Band 3: B02 (Blue), Band 4: B08 (Infrared)",
+        "copyright": "ESA WorldCover project 2020 / Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium",
+        "creation_time": "2023-01-24 16:06:56.340162",
+        "description": "The ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite is a color image made from images in Blue (B02), Green (B03), Red (B04) and Infrared (B08). ",
+        "license": "CC-BY 4.0 - https://creativecommons.org/licenses/by/4.0/",
+        "OVR_RESAMPLING_ALG": "NEAREST",
+        "product_crs": "EPSG:4326",
+        "product_grid": "1x1 degree tiling grid",
+        "product_tile": "S01E127",
+        "product_type": "Sentinel-2 median L2A (RGBNIR) composite",
+        "product_version": "V1.0.0",
+        "reference": "https://esa-worldcover.org",
+        "time_end": "2020-12-31T23:59:59Z",
+        "time_start": "2020-01-01T00:00:00Z",
+        "title": "ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite at 10m resolution for year 2020",
+        "AREA_OR_POINT": "Area"
+      },
+      "mask_flags": [
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ]
+      ],
+      "product": "annual2020 S2RGBNIR composite",
+      "band_order": [
+        "red",
+        "green",
+        "blue",
+        "nir"
+      ],
+      "scale": 0.0001,
+      "offset": 0,
+      "no_single_acquisition_or_tide": true,
+      "whole_remote_tiff_hash_claimed": false
+    },
+    {
+      "tile": "S01E128",
+      "url": "https://esa-worldcover-s2.s3.eu-central-1.amazonaws.com/rgbnir/2020/S01/ESA_WorldCover_10m_2020_v100_S01E128_S2RGBNIR.tif",
+      "source_object_identity": {
+        "last-modified": "Tue, 24 Jan 2023 18:15:41 GMT",
+        "etag": "\"f31b2979ddfc92d66edb27546c169b8d-16\"",
+        "accept-ranges": "bytes",
+        "content-length": "131267308"
+      },
+      "http": {
+        "status": 200,
+        "headers": {
+          "x-amz-id-2": "EuSshqyWKpQlIRJwgSME69RxA7pqxnkFC851htJM3Yx10szVWNmshNbwansnaCOS0N9vX++x1IP1jn6quyit58ad2BIgVo4X",
+          "x-amz-request-id": "3HNZRZV9VASXYXJX",
+          "Server": "AmazonS3",
+          "Date": "Thu, 15 Oct 2026 23:11:50 GMT",
+          "Last-Modified": "Tue, 24 Jan 2023 18:15:41 GMT",
+          "ETag": "\"f31b2979ddfc92d66edb27546c169b8d-16\"",
+          "x-amz-server-side-encryption": "AES256",
+          "Accept-Ranges": "bytes",
+          "Content-Length": "131267308",
+          "Content-Type": "binary/octet-stream",
+          "Connection": "close"
+        }
+      },
+      "crs": "EPSG:4326",
+      "transform": [
+        8.333333333333333e-05,
+        0.0,
+        128.0,
+        0.0,
+        -8.333333333333336e-05,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "shape": [
+        12000,
+        12000
+      ],
+      "block_shapes": [
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ]
+      ],
+      "count": 4,
+      "dtypes": [
+        "uint16",
+        "uint16",
+        "uint16",
+        "uint16"
+      ],
+      "nodata": 0.0,
+      "band_descriptions": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "tags": {
+        "algorithm_version": "V1.0.0",
+        "bands": "Band 1: B04 (Red), Band 2: B03 (Green), Band 3: B02 (Blue), Band 4: B08 (Infrared)",
+        "copyright": "ESA WorldCover project 2020 / Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium",
+        "creation_time": "2023-01-24 16:06:56.340162",
+        "description": "The ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite is a color image made from images in Blue (B02), Green (B03), Red (B04) and Infrared (B08). ",
+        "license": "CC-BY 4.0 - https://creativecommons.org/licenses/by/4.0/",
+        "OVR_RESAMPLING_ALG": "NEAREST",
+        "product_crs": "EPSG:4326",
+        "product_grid": "1x1 degree tiling grid",
+        "product_tile": "S01E128",
+        "product_type": "Sentinel-2 median L2A (RGBNIR) composite",
+        "product_version": "V1.0.0",
+        "reference": "https://esa-worldcover.org",
+        "time_end": "2020-12-31T23:59:59Z",
+        "time_start": "2020-01-01T00:00:00Z",
+        "title": "ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite at 10m resolution for year 2020",
+        "AREA_OR_POINT": "Area"
+      },
+      "mask_flags": [
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ]
+      ],
+      "product": "annual2020 S2RGBNIR composite",
+      "band_order": [
+        "red",
+        "green",
+        "blue",
+        "nir"
+      ],
+      "scale": 0.0001,
+      "offset": 0,
+      "no_single_acquisition_or_tide": true,
+      "whole_remote_tiff_hash_claimed": false
+    },
+    {
+      "tile": "S02E127",
+      "url": "https://esa-worldcover-s2.s3.eu-central-1.amazonaws.com/rgbnir/2020/S02/ESA_WorldCover_10m_2020_v100_S02E127_S2RGBNIR.tif",
+      "source_object_identity": {
+        "last-modified": "Tue, 24 Jan 2023 17:54:04 GMT",
+        "etag": "\"4bcce1b3a4797b67a8cf680f51915c90-25\"",
+        "accept-ranges": "bytes",
+        "content-length": "202661764"
+      },
+      "http": {
+        "status": 200,
+        "headers": {
+          "x-amz-id-2": "6D2FrjklhNN6I1cYYa5iV6DRzCfCM1zsOUfKgBTMvV8AwU3Ziwz3HqskrBR9SE1v3T7O2xyl66fss7QVp5HjblPPtofe8y3g",
+          "x-amz-request-id": "QHTZWGMS6ZF5C1KT",
+          "Server": "AmazonS3",
+          "Date": "Thu, 15 Oct 2026 23:12:07 GMT",
+          "Last-Modified": "Tue, 24 Jan 2023 17:54:04 GMT",
+          "ETag": "\"4bcce1b3a4797b67a8cf680f51915c90-25\"",
+          "x-amz-server-side-encryption": "AES256",
+          "Accept-Ranges": "bytes",
+          "Content-Length": "202661764",
+          "Content-Type": "binary/octet-stream",
+          "Connection": "close"
+        }
+      },
+      "crs": "EPSG:4326",
+      "transform": [
+        8.333333333333333e-05,
+        0.0,
+        127.0,
+        0.0,
+        -8.333333333333333e-05,
+        -1.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "shape": [
+        12000,
+        12000
+      ],
+      "block_shapes": [
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ]
+      ],
+      "count": 4,
+      "dtypes": [
+        "uint16",
+        "uint16",
+        "uint16",
+        "uint16"
+      ],
+      "nodata": 0.0,
+      "band_descriptions": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "tags": {
+        "algorithm_version": "V1.0.0",
+        "bands": "Band 1: B04 (Red), Band 2: B03 (Green), Band 3: B02 (Blue), Band 4: B08 (Infrared)",
+        "copyright": "ESA WorldCover project 2020 / Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium",
+        "creation_time": "2023-01-24 16:06:56.340162",
+        "description": "The ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite is a color image made from images in Blue (B02), Green (B03), Red (B04) and Infrared (B08). ",
+        "license": "CC-BY 4.0 - https://creativecommons.org/licenses/by/4.0/",
+        "OVR_RESAMPLING_ALG": "NEAREST",
+        "product_crs": "EPSG:4326",
+        "product_grid": "1x1 degree tiling grid",
+        "product_tile": "S02E127",
+        "product_type": "Sentinel-2 median L2A (RGBNIR) composite",
+        "product_version": "V1.0.0",
+        "reference": "https://esa-worldcover.org",
+        "time_end": "2020-12-31T23:59:59Z",
+        "time_start": "2020-01-01T00:00:00Z",
+        "title": "ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite at 10m resolution for year 2020",
+        "AREA_OR_POINT": "Area"
+      },
+      "mask_flags": [
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ]
+      ],
+      "product": "annual2020 S2RGBNIR composite",
+      "band_order": [
+        "red",
+        "green",
+        "blue",
+        "nir"
+      ],
+      "scale": 0.0001,
+      "offset": 0,
+      "no_single_acquisition_or_tide": true,
+      "whole_remote_tiff_hash_claimed": false
+    },
+    {
+      "tile": "S02E128",
+      "url": "https://esa-worldcover-s2.s3.eu-central-1.amazonaws.com/rgbnir/2020/S02/ESA_WorldCover_10m_2020_v100_S02E128_S2RGBNIR.tif",
+      "source_object_identity": {
+        "last-modified": "Tue, 24 Jan 2023 17:59:11 GMT",
+        "etag": "\"76f9fe825bf930a94620e22fa5c3f27c-11\"",
+        "accept-ranges": "bytes",
+        "content-length": "90195861"
+      },
+      "http": {
+        "status": 200,
+        "headers": {
+          "x-amz-id-2": "6YI9Trt2AqHgy2FXpUGIABlGvQ7gJb03qx8eYolzGdr9xHPuHI/LTEGecNfC/88afG0W6CKIGE5Y8/ywuod3qE7d3O+7wFFG",
+          "x-amz-request-id": "JCD86B85978ZM5VP",
+          "Server": "AmazonS3",
+          "Date": "Thu, 15 Oct 2026 23:12:28 GMT",
+          "Last-Modified": "Tue, 24 Jan 2023 17:59:11 GMT",
+          "ETag": "\"76f9fe825bf930a94620e22fa5c3f27c-11\"",
+          "x-amz-server-side-encryption": "AES256",
+          "Accept-Ranges": "bytes",
+          "Content-Length": "90195861",
+          "Content-Type": "binary/octet-stream",
+          "Connection": "close"
+        }
+      },
+      "crs": "EPSG:4326",
+      "transform": [
+        8.333333333333333e-05,
+        0.0,
+        128.0,
+        0.0,
+        -8.333333333333333e-05,
+        -1.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "shape": [
+        12000,
+        12000
+      ],
+      "block_shapes": [
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ]
+      ],
+      "count": 4,
+      "dtypes": [
+        "uint16",
+        "uint16",
+        "uint16",
+        "uint16"
+      ],
+      "nodata": 0.0,
+      "band_descriptions": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "tags": {
+        "algorithm_version": "V1.0.0",
+        "bands": "Band 1: B04 (Red), Band 2: B03 (Green), Band 3: B02 (Blue), Band 4: B08 (Infrared)",
+        "copyright": "ESA WorldCover project 2020 / Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium",
+        "creation_time": "2023-01-24 16:06:56.340162",
+        "description": "The ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite is a color image made from images in Blue (B02), Green (B03), Red (B04) and Infrared (B08). ",
+        "license": "CC-BY 4.0 - https://creativecommons.org/licenses/by/4.0/",
+        "OVR_RESAMPLING_ALG": "NEAREST",
+        "product_crs": "EPSG:4326",
+        "product_grid": "1x1 degree tiling grid",
+        "product_tile": "S02E128",
+        "product_type": "Sentinel-2 median L2A (RGBNIR) composite",
+        "product_version": "V1.0.0",
+        "reference": "https://esa-worldcover.org",
+        "time_end": "2020-12-31T23:59:59Z",
+        "time_start": "2020-01-01T00:00:00Z",
+        "title": "ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite at 10m resolution for year 2020",
+        "AREA_OR_POINT": "Area"
+      },
+      "mask_flags": [
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ]
+      ],
+      "product": "annual2020 S2RGBNIR composite",
+      "band_order": [
+        "red",
+        "green",
+        "blue",
+        "nir"
+      ],
+      "scale": 0.0001,
+      "offset": 0,
+      "no_single_acquisition_or_tide": true,
+      "whole_remote_tiff_hash_claimed": false
+    },
+    {
+      "tile": "S06E134",
+      "url": "https://esa-worldcover-s2.s3.eu-central-1.amazonaws.com/rgbnir/2020/S06/ESA_WorldCover_10m_2020_v100_S06E134_S2RGBNIR.tif",
+      "source_object_identity": {
+        "last-modified": "Tue, 24 Jan 2023 17:31:05 GMT",
+        "etag": "\"a2f406052bfcaf6cab8c67450b9ae0f6-33\"",
+        "accept-ranges": "bytes",
+        "content-length": "270190300"
+      },
+      "http": {
+        "status": 200,
+        "headers": {
+          "x-amz-id-2": "2MfYl7sPQGLxFKUwPGIbKdZnNn3iKd6cCG2pGL5BbU2Fl7Exn3tHZgNHY/iPFavaaYLnOX17WvOrSII958S9HccTJ5z8y9zO",
+          "x-amz-request-id": "WSHBA3TAFQGDA77F",
+          "Server": "AmazonS3",
+          "Date": "Thu, 15 Oct 2026 23:12:38 GMT",
+          "Last-Modified": "Tue, 24 Jan 2023 17:31:05 GMT",
+          "ETag": "\"a2f406052bfcaf6cab8c67450b9ae0f6-33\"",
+          "x-amz-server-side-encryption": "AES256",
+          "Accept-Ranges": "bytes",
+          "Content-Length": "270190300",
+          "Content-Type": "binary/octet-stream",
+          "Connection": "close"
+        }
+      },
+      "crs": "EPSG:4326",
+      "transform": [
+        8.333333333333333e-05,
+        0.0,
+        134.0,
+        0.0,
+        -8.333333333333333e-05,
+        -5.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "shape": [
+        12000,
+        12000
+      ],
+      "block_shapes": [
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ]
+      ],
+      "count": 4,
+      "dtypes": [
+        "uint16",
+        "uint16",
+        "uint16",
+        "uint16"
+      ],
+      "nodata": 0.0,
+      "band_descriptions": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "tags": {
+        "algorithm_version": "V1.0.0",
+        "bands": "Band 1: B04 (Red), Band 2: B03 (Green), Band 3: B02 (Blue), Band 4: B08 (Infrared)",
+        "copyright": "ESA WorldCover project 2020 / Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium",
+        "creation_time": "2023-01-24 16:06:56.340162",
+        "description": "The ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite is a color image made from images in Blue (B02), Green (B03), Red (B04) and Infrared (B08). ",
+        "license": "CC-BY 4.0 - https://creativecommons.org/licenses/by/4.0/",
+        "OVR_RESAMPLING_ALG": "NEAREST",
+        "product_crs": "EPSG:4326",
+        "product_grid": "1x1 degree tiling grid",
+        "product_tile": "S06E134",
+        "product_type": "Sentinel-2 median L2A (RGBNIR) composite",
+        "product_version": "V1.0.0",
+        "reference": "https://esa-worldcover.org",
+        "time_end": "2020-12-31T23:59:59Z",
+        "time_start": "2020-01-01T00:00:00Z",
+        "title": "ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite at 10m resolution for year 2020",
+        "AREA_OR_POINT": "Area"
+      },
+      "mask_flags": [
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ]
+      ],
+      "product": "annual2020 S2RGBNIR composite",
+      "band_order": [
+        "red",
+        "green",
+        "blue",
+        "nir"
+      ],
+      "scale": 0.0001,
+      "offset": 0,
+      "no_single_acquisition_or_tide": true,
+      "whole_remote_tiff_hash_claimed": false
+    },
+    {
+      "tile": "S07E134",
+      "url": "https://esa-worldcover-s2.s3.eu-central-1.amazonaws.com/rgbnir/2020/S07/ESA_WorldCover_10m_2020_v100_S07E134_S2RGBNIR.tif",
+      "source_object_identity": {
+        "last-modified": "Tue, 24 Jan 2023 17:25:26 GMT",
+        "etag": "\"322bfbabb9821373c79fc1822fd258c0-61\"",
+        "accept-ranges": "bytes",
+        "content-length": "508269508"
+      },
+      "http": {
+        "status": 200,
+        "headers": {
+          "x-amz-id-2": "ybuln8IonONtTxl5ViM/6RbFWhhBZzUL8rXKZv35tpjmXbKYeNGhaagj6mqpRPACeedAfOTDXLLlIJ5pY3DrHsCRs43az2QO",
+          "x-amz-request-id": "PT1G452TQ4Q9QMVJ",
+          "Server": "AmazonS3",
+          "Date": "Thu, 15 Oct 2026 23:13:09 GMT",
+          "Last-Modified": "Tue, 24 Jan 2023 17:25:26 GMT",
+          "ETag": "\"322bfbabb9821373c79fc1822fd258c0-61\"",
+          "x-amz-server-side-encryption": "AES256",
+          "Accept-Ranges": "bytes",
+          "Content-Length": "508269508",
+          "Content-Type": "binary/octet-stream",
+          "Connection": "close"
+        }
+      },
+      "crs": "EPSG:4326",
+      "transform": [
+        8.333333333333333e-05,
+        0.0,
+        134.0,
+        0.0,
+        -8.333333333333333e-05,
+        -6.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "shape": [
+        12000,
+        12000
+      ],
+      "block_shapes": [
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ]
+      ],
+      "count": 4,
+      "dtypes": [
+        "uint16",
+        "uint16",
+        "uint16",
+        "uint16"
+      ],
+      "nodata": 0.0,
+      "band_descriptions": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "tags": {
+        "algorithm_version": "V1.0.0",
+        "bands": "Band 1: B04 (Red), Band 2: B03 (Green), Band 3: B02 (Blue), Band 4: B08 (Infrared)",
+        "copyright": "ESA WorldCover project 2020 / Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium",
+        "creation_time": "2023-01-24 16:06:56.340162",
+        "description": "The ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite is a color image made from images in Blue (B02), Green (B03), Red (B04) and Infrared (B08). ",
+        "license": "CC-BY 4.0 - https://creativecommons.org/licenses/by/4.0/",
+        "OVR_RESAMPLING_ALG": "NEAREST",
+        "product_crs": "EPSG:4326",
+        "product_grid": "1x1 degree tiling grid",
+        "product_tile": "S07E134",
+        "product_type": "Sentinel-2 median L2A (RGBNIR) composite",
+        "product_version": "V1.0.0",
+        "reference": "https://esa-worldcover.org",
+        "time_end": "2020-12-31T23:59:59Z",
+        "time_start": "2020-01-01T00:00:00Z",
+        "title": "ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite at 10m resolution for year 2020",
+        "AREA_OR_POINT": "Area"
+      },
+      "mask_flags": [
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ]
+      ],
+      "product": "annual2020 S2RGBNIR composite",
+      "band_order": [
+        "red",
+        "green",
+        "blue",
+        "nir"
+      ],
+      "scale": 0.0001,
+      "offset": 0,
+      "no_single_acquisition_or_tide": true,
+      "whole_remote_tiff_hash_claimed": false
+    },
+    {
+      "tile": "S08E134",
+      "url": "https://esa-worldcover-s2.s3.eu-central-1.amazonaws.com/rgbnir/2020/S08/ESA_WorldCover_10m_2020_v100_S08E134_S2RGBNIR.tif",
+      "source_object_identity": {
+        "last-modified": "Tue, 24 Jan 2023 17:15:45 GMT",
+        "etag": "\"13765d35e202949923d209f88e86a4a5-2\"",
+        "accept-ranges": "bytes",
+        "content-length": "14440141"
+      },
+      "http": {
+        "status": 200,
+        "headers": {
+          "x-amz-id-2": "QM7SBqOHIpIT/b3s1ESeWrqC7xjTUweitliVRj7yIOCl55UEaktKAplcv6iZyD7o4EbxJ5Jpz3f9kUIDaDRb+tVpCuhM2vB8",
+          "x-amz-request-id": "7W9FBJYQVMGKZKJB",
+          "Server": "AmazonS3",
+          "Date": "Thu, 15 Oct 2026 23:13:57 GMT",
+          "Last-Modified": "Tue, 24 Jan 2023 17:15:45 GMT",
+          "ETag": "\"13765d35e202949923d209f88e86a4a5-2\"",
+          "x-amz-server-side-encryption": "AES256",
+          "Accept-Ranges": "bytes",
+          "Content-Length": "14440141",
+          "Content-Type": "binary/octet-stream",
+          "Connection": "close"
+        }
+      },
+      "crs": "EPSG:4326",
+      "transform": [
+        8.333333333333333e-05,
+        0.0,
+        134.0,
+        0.0,
+        -8.333333333333333e-05,
+        -7.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "shape": [
+        12000,
+        12000
+      ],
+      "block_shapes": [
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ]
+      ],
+      "count": 4,
+      "dtypes": [
+        "uint16",
+        "uint16",
+        "uint16",
+        "uint16"
+      ],
+      "nodata": 0.0,
+      "band_descriptions": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "tags": {
+        "algorithm_version": "V1.0.0",
+        "bands": "Band 1: B04 (Red), Band 2: B03 (Green), Band 3: B02 (Blue), Band 4: B08 (Infrared)",
+        "copyright": "ESA WorldCover project 2020 / Contains modified Copernicus Sentinel data (2020) processed by ESA WorldCover consortium",
+        "creation_time": "2023-01-24 16:06:56.340162",
+        "description": "The ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite is a color image made from images in Blue (B02), Green (B03), Red (B04) and Infrared (B08). ",
+        "license": "CC-BY 4.0 - https://creativecommons.org/licenses/by/4.0/",
+        "OVR_RESAMPLING_ALG": "NEAREST",
+        "product_crs": "EPSG:4326",
+        "product_grid": "1x1 degree tiling grid",
+        "product_tile": "S08E134",
+        "product_type": "Sentinel-2 median L2A (RGBNIR) composite",
+        "product_version": "V1.0.0",
+        "reference": "https://esa-worldcover.org",
+        "time_end": "2020-12-31T23:59:59Z",
+        "time_start": "2020-01-01T00:00:00Z",
+        "title": "ESA WorldCover Sentinel-2 median L2A (RGBNIR) composite at 10m resolution for year 2020",
+        "AREA_OR_POINT": "Area"
+      },
+      "mask_flags": [
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ],
+        [
+          "8"
+        ]
+      ],
+      "product": "annual2020 S2RGBNIR composite",
+      "band_order": [
+        "red",
+        "green",
+        "blue",
+        "nir"
+      ],
+      "scale": 0.0001,
+      "offset": 0,
+      "no_single_acquisition_or_tide": true,
+      "whole_remote_tiff_hash_claimed": false
+    }
+  ],
+  "tile_products": [
+    {
+      "tile": "N00E103",
+      "keys": 142,
+      "observations": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E103/point-observations.jsonl",
+        "bytes": 690510,
+        "sha256": "ebf72b6f36715e3e33d65daf4261fc60239f109093f99c1ca7d237ea3f42df86"
+      },
+      "arrays": [
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E103/block-00-08.npz",
+          "bytes": 2340996,
+          "sha256": "6e7de68a090c9a98170a81897ee0435d5565ec085719e318526dd3f12f745006"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E103/block-00-09.npz",
+          "bytes": 2530663,
+          "sha256": "2bca07bfe845c8a99dec8acd23eddd173812feffb555f874cec53db90c72e629"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E103/block-00-10.npz",
+          "bytes": 2402080,
+          "sha256": "a0bfd1198a013cc09240792a76025c9d05a28e5a5f969900acb1152777ebd44a"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E103/block-00-11.npz",
+          "bytes": 1751151,
+          "sha256": "0f5ebef3988e613d254a2f4d6e19d2c76c9741eb465d15a5eaa0988772091be7"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E103/block-01-11.npz",
+          "bytes": 1569061,
+          "sha256": "6b8daad704394316b29539f450b4312a5c7d57cf0b1063f4ee7315ac8c9a8243"
+        }
+      ],
+      "source_header": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E103/source.json",
+        "bytes": 2334,
+        "sha256": "bdecde94067fce92dc7731bc32895723c9610742025476947c109bdd2da97d2b"
+      },
+      "incomplete_context_indices": []
+    },
+    {
+      "tile": "N00E104",
+      "keys": 629,
+      "observations": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E104/point-observations.jsonl",
+        "bytes": 3115387,
+        "sha256": "52c92205e452d3151a12f18ed0eaac9253de8796860da0e76cd0a3c6df5727bb"
+      },
+      "arrays": [
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E104/block-00-00.npz",
+          "bytes": 2742932,
+          "sha256": "80335eec9fc08bfab5b69da2ce66df6da3802d492d0dd2101807fda248991193"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E104/block-00-01.npz",
+          "bytes": 2804020,
+          "sha256": "85a1015f0660d2c2a5f4f1d6e23a8028335668b65e74be760c29bfb1674ce8ae"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E104/block-00-02.npz",
+          "bytes": 2159432,
+          "sha256": "3d3fe9d9f9f85e69e8ea0ed9103000a95bdc213565fc7525cc047165c7e030f3"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E104/block-01-00.npz",
+          "bytes": 2134306,
+          "sha256": "c2e7b6536f8232c980176187fc0c5c8e778b8cc580516da244df24266f98ab26"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E104/block-01-01.npz",
+          "bytes": 2970953,
+          "sha256": "781ba72e3749d7caa576112c3a8942cf081f7d0fd05bcb9270718d43b1044bbc"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E104/block-01-02.npz",
+          "bytes": 2714324,
+          "sha256": "08d4b54798d774ab38901a75ef5795b2ac39c0a70578b87ea35b585b1496668c"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E104/block-02-01.npz",
+          "bytes": 1947869,
+          "sha256": "8361d538363415aa6ab3bb12e25c6f28b78431d8f011f56ad98692d96364c0dc"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E104/block-02-02.npz",
+          "bytes": 2930133,
+          "sha256": "6030029f389f0b082870e2257da06ba1ea50b0ca112557f5cc5e5f02c1809bd6"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E104/block-02-03.npz",
+          "bytes": 2387293,
+          "sha256": "91f35cc07964ac62d3400742cc7006805ba0a87a6c01e2222372a741568e0c29"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E104/block-02-04.npz",
+          "bytes": 1897592,
+          "sha256": "833ad52866e29aae4f2ff872b7145461f8bb454a5e3cf29c47cfb031c1189f93"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E104/block-03-02.npz",
+          "bytes": 2905029,
+          "sha256": "87a75f2bd43a355c1eee3740748db504776ffe0e7af8d183c5d4cc8d0569921b"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E104/block-03-03.npz",
+          "bytes": 2687395,
+          "sha256": "5141475d50031ddf3ae446ff72115a2f720824be9a03175699f63dc086d6329a"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E104/block-03-04.npz",
+          "bytes": 1159107,
+          "sha256": "b4604962558ecc96c10e9448c7a19335627bdee07928454e44f05824cf149b46"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E104/block-04-00.npz",
+          "bytes": 1781540,
+          "sha256": "328df168a95d2c34f0d631d19db95facf3ced3ce8d70432257a60f688a2a78f2"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E104/block-04-01.npz",
+          "bytes": 2397011,
+          "sha256": "e56969dead7a9301430dbb3e278df92ccc06a6a3d63461de74323ed3cdbfe71a"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E104/block-04-02.npz",
+          "bytes": 2479205,
+          "sha256": "9550a4052217c4a836885a163f00a461efd1d3b56c3ed91b0a9701059829e7fd"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E104/block-04-03.npz",
+          "bytes": 2248956,
+          "sha256": "d4b27b292c07b8cadd50225ff750e061ee04266ea3a6f65be46782df652dd318"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E104/block-05-02.npz",
+          "bytes": 2063489,
+          "sha256": "67a389e9ca79254c4f74ff4fd0cac24ec144468935d4800395831130a81e53b0"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E104/block-05-03.npz",
+          "bytes": 1969658,
+          "sha256": "787b6d1e26421c96a3c5501b7c0b235a358d2f1992cec07e0ce842c0924bd9ce"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E104/block-06-03.npz",
+          "bytes": 1912485,
+          "sha256": "77c9c14090e14bcfcdfd68aa5d4f2b249111c0e841c9d0bfec9b9400a3907aa6"
+        }
+      ],
+      "source_header": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E104/source.json",
+        "bytes": 2334,
+        "sha256": "966d534ec839e63500426c4069801efd6e2eead7b618855657a4e2ae2c77cae9"
+      },
+      "incomplete_context_indices": []
+    },
+    {
+      "tile": "N00E127",
+      "keys": 152,
+      "observations": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E127/point-observations.jsonl",
+        "bytes": 736972,
+        "sha256": "fca781f175eb5019e3c24863468b5bc7a759e719d5e9ca23df28eecdf301f162"
+      },
+      "arrays": [
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E127/block-08-04.npz",
+          "bytes": 1332938,
+          "sha256": "fcbe6b85e87d232ffdb850fd3df02e0a0015c59d976ea1b1bc9f4624ea8b7bf3"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E127/block-09-01.npz",
+          "bytes": 308604,
+          "sha256": "4d184cef498bf622abfe3afe2b6603f8f0ab6e540cd1fc4f2640e0c6615e4062"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E127/block-09-05.npz",
+          "bytes": 164723,
+          "sha256": "4ef1aa90669d4a331320d1af0f87fe96a01d78ba8e88c70d37223c0f1707ae78"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E127/block-09-10.npz",
+          "bytes": 2672017,
+          "sha256": "92fc395cd7faf8247e97f6aae07f3e82363a6ec2e11f95303eb1297171ce5146"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E127/block-10-01.npz",
+          "bytes": 1148167,
+          "sha256": "5b40b44203dd5e92be202913bbd8e3a201a727229ffe75c816a87a4b8666876f"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E127/block-10-02.npz",
+          "bytes": 965217,
+          "sha256": "5a6d97c7b1c689f412b7a1a3bcbff34bed1fdab4ee3ec8ad30197a67a427872b"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E127/block-10-05.npz",
+          "bytes": 1152243,
+          "sha256": "83b53ea80bea6412e964ad92582b10e65320445042d3a83e0c3410c3c3c25853"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E127/block-10-10.npz",
+          "bytes": 1967053,
+          "sha256": "6d3ef775831a32fe49602f7fa01df6091d31a2d90dbec91c691f873987744610"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E127/block-11-02.npz",
+          "bytes": 782246,
+          "sha256": "f0c2ff9ff8332edf5d7d4390871be30139c7ec95a010e43631af8e1aeee0c49e"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E127/block-11-04.npz",
+          "bytes": 711154,
+          "sha256": "71a4c2111973f727fe3b6ad4f935e647c66435f769151aa7544751de44ab31f8"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E127/block-11-05.npz",
+          "bytes": 911849,
+          "sha256": "9abcd5d74d67bdcd1a2183841fb51990c893fbbe159f32de2d3c06cfab6d5810"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E127/block-11-10.npz",
+          "bytes": 1565612,
+          "sha256": "24c0913679480340efe7d4b0d3f0b6d0640e5bc48aa5976c151279cc5c09851e"
+        }
+      ],
+      "source_header": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E127/source.json",
+        "bytes": 2334,
+        "sha256": "64972c058fa2ad61dd99c4b8b3cb491b24c3661a95c5dc5f6909b37d6aac93da"
+      },
+      "incomplete_context_indices": []
+    },
+    {
+      "tile": "N01E103",
+      "keys": 551,
+      "observations": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N01E103/point-observations.jsonl",
+        "bytes": 2698548,
+        "sha256": "6438b11b4e3e58c972b8744d37d43718074ef37fc7c3c75a5baef346590bce7e"
+      },
+      "arrays": [
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N01E103/block-09-10.npz",
+          "bytes": 1496918,
+          "sha256": "775540139dcd326742265470711a47c97de33e770fe84ac46a90c1529dbf3d96"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N01E103/block-09-11.npz",
+          "bytes": 1180080,
+          "sha256": "e4a535a0aca4cdbc39ce36f937965dbadb3b9375e839612f53d995ef737eae8a"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N01E103/block-10-09.npz",
+          "bytes": 2303939,
+          "sha256": "5823cf33541d0c74dfe6f15cc4f9a9f76f8dce7c74826869c0e6bd5bbedf06b7"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N01E103/block-10-10.npz",
+          "bytes": 2278992,
+          "sha256": "a97a9fa1be7f95bc76c1dda95a80243a50e24a9b88250ec39280fb6861c9d587"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N01E103/block-10-11.npz",
+          "bytes": 2212147,
+          "sha256": "cbf0b5fc7afb93f5152e1d69c4075df0d07bdcc55391497b4d71b063230c84e0"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N01E103/block-11-08.npz",
+          "bytes": 1833804,
+          "sha256": "66182e9b945f096a62f32e38ac88051c753d259b74e151379702688b20705225"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N01E103/block-11-09.npz",
+          "bytes": 1981792,
+          "sha256": "7b840818e9f8b289fe138c78f18d46367c624616f58c30b4de29032b05ee157c"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N01E103/block-11-10.npz",
+          "bytes": 1968864,
+          "sha256": "9eb806533e3b7518923968ebd83cda6cc58ca24af227e45428c2fe06f0538090"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N01E103/block-11-11.npz",
+          "bytes": 1730435,
+          "sha256": "9e2eccc19c19ca105e2279927bc65f8874f1c62910d8dd2da4a55c170896ec6a"
+        }
+      ],
+      "source_header": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N01E103/source.json",
+        "bytes": 2334,
+        "sha256": "86b215914fbed9d35ce1e24ab5dfa4aef474042920f2947de93648cfaab90067"
+      },
+      "incomplete_context_indices": []
+    },
+    {
+      "tile": "N01E104",
+      "keys": 164,
+      "observations": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N01E104/point-observations.jsonl",
+        "bytes": 807680,
+        "sha256": "0256dca57b90b02d0a0f908a1fcf2687b32adf75f13498d043483f853e215312"
+      },
+      "arrays": [
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N01E104/block-09-00.npz",
+          "bytes": 2657231,
+          "sha256": "965d572b25cf90d008e0522b77894af0cf2b46fa7f9c9ffe4a29f764175c6621"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N01E104/block-10-00.npz",
+          "bytes": 3069318,
+          "sha256": "9fc4f866ca7cb382cec927ac6eafa341d992aa923e0aaf32408d45625be20119"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N01E104/block-10-01.npz",
+          "bytes": 2588732,
+          "sha256": "e611cb98b1f80ea330a3cbd3b8d5d261d2f62e3bfb07f42bb84bdabf267c48b4"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N01E104/block-10-02.npz",
+          "bytes": 1886949,
+          "sha256": "67e30438b10ccf82184ff06c5797630a1a0657cc7688dca0437e34f0f274cfcf"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N01E104/block-11-00.npz",
+          "bytes": 2359924,
+          "sha256": "b69b59360af0029a59eb9b32f3961e2e28813dbfab8c65fedb45993bea76cde7"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N01E104/block-11-01.npz",
+          "bytes": 1890642,
+          "sha256": "c9d1ecae8d8d3c8714ee50ae3d0811338c92c6b455f1113ee7b067f3373f05e2"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N01E104/block-11-02.npz",
+          "bytes": 1755715,
+          "sha256": "ae770d251cff20d5936cddb046bf997454bc5681cdc6668db7a76f5615e2938b"
+        }
+      ],
+      "source_header": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N01E104/source.json",
+        "bytes": 2334,
+        "sha256": "fd9fec7fc75b73af18609937a0a5a9aa0c3e68b964f505fc510e99aae36c186e"
+      },
+      "incomplete_context_indices": []
+    },
+    {
+      "tile": "N02E117",
+      "keys": 303,
+      "observations": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N02E117/point-observations.jsonl",
+        "bytes": 1456055,
+        "sha256": "9acf3a1340b661772cad967e49aa92af55395d191d318f9a290e6ce5e2113584"
+      },
+      "arrays": [
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N02E117/block-00-06.npz",
+          "bytes": 3194500,
+          "sha256": "71c0aef4f0d43c753a9ff6eb9120b00151cf59336ecc020d443d216661372597"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N02E117/block-00-07.npz",
+          "bytes": 3294823,
+          "sha256": "6ca60a59e8a46115b277f411ff05d6b23b74f9387d9400972f3b72a18481df1c"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N02E117/block-00-08.npz",
+          "bytes": 1421339,
+          "sha256": "425634839402791a8876f8aa0f556fb46d742313ac8a803bc347f4c78eaa97e7"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N02E117/block-01-06.npz",
+          "bytes": 3084986,
+          "sha256": "f47457bab4a8d4b3058a4cb0f853b13625cd0f6112743aca28f9ca1617a9b612"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N02E117/block-01-07.npz",
+          "bytes": 3386031,
+          "sha256": "f319a6100f14e08a273ce3bfbf17683d5dc7eb75115d0af9f8a5e5172e75c477"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N02E117/block-01-08.npz",
+          "bytes": 2321218,
+          "sha256": "e36380e89c5fbb0a31ab7992c566809f4540455426e60aa0d5bd64b46a71b8b8"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N02E117/block-02-07.npz",
+          "bytes": 2683867,
+          "sha256": "2d35ad573e06dfeb1ceb5d8c4b2b25d6110f1e82d5a29b7db7ea7c577bf1a5aa"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N02E117/block-02-08.npz",
+          "bytes": 2676275,
+          "sha256": "328c1550d1b0ff8fba9b82992692526bb707792d1994f614e7b8424bf8373234"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N02E117/block-02-09.npz",
+          "bytes": 1773275,
+          "sha256": "3e88cf0608787ed0fa995e359f4fd23c97e708e25150ec922ceb76445cb270c9"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N02E117/block-03-09.npz",
+          "bytes": 1577227,
+          "sha256": "3dd571367069dc29921ddbace08e4e6bcedfb031a2e9f4aa97fa98100f9a30b3"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N02E117/block-05-10.npz",
+          "bytes": 1819761,
+          "sha256": "47999d280bd78864c9ab0bc71920a208739a10d8be048cb1f20d0cbbe956ad90"
+        }
+      ],
+      "source_header": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N02E117/source.json",
+        "bytes": 2334,
+        "sha256": "9053d6b00f035faf528b3e5395ae369116cd05b990fba755990adc017d92de25"
+      },
+      "incomplete_context_indices": []
+    },
+    {
+      "tile": "N03E117",
+      "keys": 591,
+      "observations": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/point-observations.jsonl",
+        "bytes": 2855312,
+        "sha256": "12d23d1d554cc283c36b3785769690f57f3f428cfac0048d2c72d4fb0920ebaa"
+      },
+      "arrays": [
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-04-05.npz",
+          "bytes": 3069168,
+          "sha256": "4dcf2a1f69a716fa8a404d4e793b0bf853f1fc3d129e06743b98a17ef2206892"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-04-06.npz",
+          "bytes": 2488001,
+          "sha256": "81d042ebeb3c268a5cfb08d8166c1c1b09d64d3e3c7669014154e1bc9e7fb621"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-04-09.npz",
+          "bytes": 1423147,
+          "sha256": "535a0c6c3c4ed5c5976f106d30466b072d205209fa2ef8eec3b9d5868c94ff3b"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-04-10.npz",
+          "bytes": 631390,
+          "sha256": "7f62c45c94dc3391cd0d9df21d11d18cf103a6272eea7cf445af0ee6e206ed64"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-05-04.npz",
+          "bytes": 3386968,
+          "sha256": "60b8850cbb1a2634a846e2b619c3f6576953f972262afee157a970f06e112de5"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-05-06.npz",
+          "bytes": 2557401,
+          "sha256": "0c9989a7b8e718303b2e674f779f9587ee713c0adbaf8a5f4e70d860ab5ba928"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-05-07.npz",
+          "bytes": 2554930,
+          "sha256": "4998ecf95c45f95a35498a835788cc02a0faa1f8428549755ca6d9ecdd4e2d58"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-05-08.npz",
+          "bytes": 2273519,
+          "sha256": "6afd68d421fa4d035115dd1906fc4182fc992a8edd9ff1f0d87f545e470f1a95"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-05-09.npz",
+          "bytes": 3109849,
+          "sha256": "6b0e54853ee921c7bacaea023aa16fb51978153a40c97d14e5fce2ebda4906d1"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-07-05.npz",
+          "bytes": 2905131,
+          "sha256": "f7ddf00c62390565614c8444f5939b8cbd1b6273ff9f1c59b603ac01f023deda"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-08-04.npz",
+          "bytes": 3103904,
+          "sha256": "17dfe006f9770103451d3fc12d4d2eeecb8f7599c95c39ae519f3aaffd2c33c4"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-08-05.npz",
+          "bytes": 2307312,
+          "sha256": "50481f82d3ed658b6ea85d388a46a797a282bf229a256a39f335def99d766524"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-08-06.npz",
+          "bytes": 1500532,
+          "sha256": "5079f2e0ef22034c7a95b5739675c1d9435ae9ddff5d971979e28b397e603001"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-09-03.npz",
+          "bytes": 3148407,
+          "sha256": "e974d2f9b14eb7d002d298d6f8b45bda5e489562ee988e32cf6e16426126f5bb"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-09-04.npz",
+          "bytes": 2794797,
+          "sha256": "c416da615648805278ef00f08b8b0a5717d96282a3d9ad9f8e586f81d4d8aad1"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-10-05.npz",
+          "bytes": 3124907,
+          "sha256": "4380cf939aa91b8885179d8f44e3106182dcbf4eee28bc3a80bb5abd8ff5737b"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-10-06.npz",
+          "bytes": 2906962,
+          "sha256": "6037db184d6c80f6469d9d692163ead2980edecd1c452bc1502b387a56e83715"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/block-10-07.npz",
+          "bytes": 1476603,
+          "sha256": "f9801b535aeac081c1cfa97f63b7bdc8af4a968ee81c09c601277a21812849cf"
+        }
+      ],
+      "source_header": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/source.json",
+        "bytes": 2334,
+        "sha256": "4524a82c739a395a5924df66e2d099b8115cda92c2530b6fdde5366c87ab03e8"
+      },
+      "incomplete_context_indices": []
+    },
+    {
+      "tile": "S01E127",
+      "keys": 1018,
+      "observations": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/point-observations.jsonl",
+        "bytes": 4847092,
+        "sha256": "4c1e64b8caf49d444396c935716f48f46b6fd6bf00bd1c9b4d3d0f923389004b"
+      },
+      "arrays": [
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-00-02.npz",
+          "bytes": 1534473,
+          "sha256": "e1da13f679cb018dc9ca369aeaf8f3b7a55a1732740daed3346c1c95784935ba"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-00-03.npz",
+          "bytes": 466145,
+          "sha256": "73821f2cc2865bf36f0a62f594286c64ed5b7412a60af9871d257f555f7e51f5"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-00-04.npz",
+          "bytes": 1127930,
+          "sha256": "3528048c5ef308d799240c761d1b147d98794150a8479226b7c7585d061797c9"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-00-05.npz",
+          "bytes": 1391819,
+          "sha256": "00456422bfd0cc017b67e7c331aa701c5ddd821994617d7860b5b5acee0651bd"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-00-10.npz",
+          "bytes": 2650047,
+          "sha256": "d66433d798cba8345bd9f85763fda60ba1b6faba7f17adbec51ad55a02d6d5de"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-01-02.npz",
+          "bytes": 1626853,
+          "sha256": "95fab663c6d5f2854386ea755b01b8f4fcb3dcdf707306b4e3f8e176bdfd8b80"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-01-03.npz",
+          "bytes": 657658,
+          "sha256": "c24f34b6189d79c83fa4cd3e28b9a1b93b5382f640432b0540f5a96a4e065e5e"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-01-04.npz",
+          "bytes": 578665,
+          "sha256": "c9d9b16dc3d6dcfde55309cb4fdf2b771d6f027ccdaf8d93489bfdcd98e3ce52"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-01-05.npz",
+          "bytes": 560303,
+          "sha256": "63273952ae2e372b398aea434e743c2483b91deb52d67434c5ec4e02af8be339"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-01-07.npz",
+          "bytes": 407148,
+          "sha256": "8721ccd9b99d862df2261648bffcbbb503e76711b090595e86947503bcd78b16"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-02-00.npz",
+          "bytes": 1302278,
+          "sha256": "22474ce4ebadc90a102f47b6943ca6e23f1ae64b2083547de21e9e2670ef98a4"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-02-01.npz",
+          "bytes": 1872154,
+          "sha256": "4d933597df4ac0b005303334808efe9bf53dd51f3eba1ef0d46ddd06f3815148"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-02-03.npz",
+          "bytes": 899017,
+          "sha256": "a0810dfdab2412c7ba83e0b0f0873a65d0d2b5676f2632a9f5d04d947d108ff8"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-02-11.npz",
+          "bytes": 2045440,
+          "sha256": "a1497f13070f173f395b3956eb916f683b624ab2b2b309f5dd840160dc37dd04"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-03-00.npz",
+          "bytes": 1992375,
+          "sha256": "642e1910d24cfcb65087c93eadc5276797eb718e1020b64f15340915be569a5d"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-03-01.npz",
+          "bytes": 2541064,
+          "sha256": "19f08a6bfd3349c9253324f4895965b5b64d42759a9e930cef589ac6a26f37dc"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-03-02.npz",
+          "bytes": 3131550,
+          "sha256": "b518f154bb3b675d79001d13eb4e28fb7fcb15f65df30b9fac861dde80a4b9a7"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-03-03.npz",
+          "bytes": 1441851,
+          "sha256": "a62f7d34f396b859be44c0e8c7d1ef9e733c0d7b4002b622b48c61709220f149"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-03-04.npz",
+          "bytes": 1085712,
+          "sha256": "6584633ea5a973dd9e65e582dcbb1f2a43a645ac3eea6f4f3b121485933a0d39"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-03-05.npz",
+          "bytes": 766412,
+          "sha256": "6b66c26b937006c12c3601ed8e3e03b9b02665bb65604edb65d397e0adb69385"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-03-06.npz",
+          "bytes": 1627791,
+          "sha256": "7f8dc13cb992685d1fcdb4a3613b193814e51a180be99d00b585974c998856e0"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-03-08.npz",
+          "bytes": 2421035,
+          "sha256": "8e4dce69ed103f49d5bc03f670a14a901c677cb917b830aa49a75946b291470c"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-03-11.npz",
+          "bytes": 2252524,
+          "sha256": "23d434da4b374012863435b72aaf1873d6f8adca46fc4c84c582066c06e5c18c"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-04-01.npz",
+          "bytes": 2811702,
+          "sha256": "5a08d869ac02c9861f47c72fad1781c58cadfb07a0f36cff2b7628c7f197818e"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-04-03.npz",
+          "bytes": 2051617,
+          "sha256": "ca6dd673a240010f38bf2c1694cb0db18dcaf533c3ebd4d9e9e4ccb890276b27"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-04-04.npz",
+          "bytes": 3025488,
+          "sha256": "3bc8d3c51151cb7607489f7bc8ef9273055718160fad178ea6bd503caae73de4"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-04-05.npz",
+          "bytes": 2230369,
+          "sha256": "e1c54eb6d747555bd9770e55fc6775bccd99e1ffdad0e1d12dd9760b111c8af1"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-04-06.npz",
+          "bytes": 2908620,
+          "sha256": "720aa9841feca5952ef1d31790a2b4587299064f99f4d1c63268d37ba9121be8"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-04-07.npz",
+          "bytes": 1619548,
+          "sha256": "ed21f68e9c831e5d3d0d259fd795f3f2b379c90092dfb897c87cde2270987f3c"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-04-08.npz",
+          "bytes": 1667546,
+          "sha256": "5242bc6e8a3ed1f55c34693c6c16cffb658d41155476b35f1fd5ec7c1df846b2"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-05-01.npz",
+          "bytes": 2505145,
+          "sha256": "5bd9d00a96c10a10521969bd45b35dcdf5f7de12cb4536be82b814e9a715ef77"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-05-02.npz",
+          "bytes": 3246832,
+          "sha256": "939fa5a66af0ea846444b5497af137fff80e69b819621fc6b1adf01035b9fe39"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-05-03.npz",
+          "bytes": 2789663,
+          "sha256": "57eeeb914b5d144607941dbdd3a8a31c2abf96175cc729124fbe6579f05b4092"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-05-07.npz",
+          "bytes": 2879664,
+          "sha256": "df2cfc7f51963ee42277da0b88467c44efe48b5021c3d76ea62be38ac28d95f6"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-05-08.npz",
+          "bytes": 1271110,
+          "sha256": "7c00eabf37b67aa964dcbc9a1e6a0bbadefc8b00abbfc528d47f58cf5c49d3ad"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-06-01.npz",
+          "bytes": 988471,
+          "sha256": "372d3dc8b6e67b69a3586d72fb89d9a7bf4499f62a1d1a3babf892f00edfb57e"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-06-02.npz",
+          "bytes": 1384726,
+          "sha256": "fd367d24d11ff9793c4d43c92834f1084560f1633cdaf3ebd65248320d6afaeb"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-06-03.npz",
+          "bytes": 1450332,
+          "sha256": "418ba30f194c8d619c7fb7e948758287f4658564b4d55a0f2867aac7234c747c"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-06-07.npz",
+          "bytes": 1461123,
+          "sha256": "4b16928ab1d90fe287c2a0fe2b6f0d8c230b34006218d38bf69dd959d1e40f96"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-07-02.npz",
+          "bytes": 2435306,
+          "sha256": "a5191c369faaaa477840e977858d169c2e646b6a0ee1d17572b71881a8363276"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-07-03.npz",
+          "bytes": 1997894,
+          "sha256": "784e97bc9e895d7509f7f83de6bab5059a01c5c9ccdf2260f92d6230b97b01dc"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-07-04.npz",
+          "bytes": 2130783,
+          "sha256": "6a56fe94dcbc48e4496db70f184c6cc948b0e94751a0831a74c801707788e45f"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-07-05.npz",
+          "bytes": 2265611,
+          "sha256": "953290b4b25b62483cbb5b1aaf10296642e115635ab617ebf59ef65c6cc4134d"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-07-06.npz",
+          "bytes": 2603655,
+          "sha256": "ea3287c4f47d7cca4361e3708a48ec22b3636744bec52e8de01840394a19b929"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-07-07.npz",
+          "bytes": 1783886,
+          "sha256": "f6af51c7469625c13a82ccee88c99673c188d60ebe4d0d46971b0c115943a61e"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-07-09.npz",
+          "bytes": 576585,
+          "sha256": "34fef6dba87c58b474bbeee198208ff9ae4aa7ed1a64472d37b2079c2815e469"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-08-01.npz",
+          "bytes": 711736,
+          "sha256": "028a6873014a8abb4e0a7b84a394ea59a4433c4be690777870aa6f9f3ed3934f"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-08-02.npz",
+          "bytes": 2980824,
+          "sha256": "f397019f61835ce4784b2a2ff5919fbe0656387ee45fd33da288d93047245848"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-08-03.npz",
+          "bytes": 2117038,
+          "sha256": "e7aaadcdc58cc1b35324ea937014dd9d329041e48c524dbca6a30ffeb8da5248"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-08-07.npz",
+          "bytes": 2849437,
+          "sha256": "a8d227a58af80c11487dcde4cb27e44dfbe77be822dd7d2eebe5f305678c57e9"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-08-08.npz",
+          "bytes": 3024758,
+          "sha256": "909f1b769f2e3dc4f96e1f430ac7e7399af8360b190b12734bd130943685d24f"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-08-09.npz",
+          "bytes": 3134060,
+          "sha256": "865fb87bfe320ba1ae35e3504f9ee620eb1f2a355712bffbfed26db365b56451"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-08-10.npz",
+          "bytes": 1906934,
+          "sha256": "8c7380385a2c2e9a0d5ac4f51a95ffb9fad0acb3947822f722d9069d732a5c49"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-09-10.npz",
+          "bytes": 2099106,
+          "sha256": "65803531ef4239fe159e2471a6bb382ecde08bffee89b4f215014b7a3c146f29"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/block-10-08.npz",
+          "bytes": 1351896,
+          "sha256": "8a2df805d23ba9abc2d5ac74c3ea2eed1d737b42641e6e02c6e2c9bbc486d1d0"
+        }
+      ],
+      "source_header": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/source.json",
+        "bytes": 2334,
+        "sha256": "34ef29cc76f568e811eca026048751f57b903e7d0706810e5e02d1054965ae96"
+      },
+      "incomplete_context_indices": []
+    },
+    {
+      "tile": "S01E128",
+      "keys": 311,
+      "observations": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/point-observations.jsonl",
+        "bytes": 1479924,
+        "sha256": "ecd1862fb1b0c6e458b166d41bb92f00bdbfaf4107231e01a50f8b603bc45a45"
+      },
+      "arrays": [
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/block-03-00.npz",
+          "bytes": 1881901,
+          "sha256": "a7fe70a33bcd1eb75f620ac179b032626684e05ad12bd21ff8d037681e866105"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/block-04-00.npz",
+          "bytes": 2935296,
+          "sha256": "5a6be73b88d1c2ebe11c5d0e112ea8b8d370b8b2aad0e261264b401efc38494c"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/block-05-00.npz",
+          "bytes": 3346464,
+          "sha256": "99ebb53cb0c571fa7ab6c45e0166a22f638eed48e156e5cddae4e138e6998036"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/block-05-01.npz",
+          "bytes": 1795290,
+          "sha256": "77fcc22b947bd560297ad58bc5f9cc1eb1f5b7da2e5acb52b51094ad2a7340b6"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/block-06-01.npz",
+          "bytes": 2757752,
+          "sha256": "f965e59d9482ea32003a3d6295e553a5fbe88e951a5ae4e4b2f3ee3ae3cbc46b"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/block-06-03.npz",
+          "bytes": 1012180,
+          "sha256": "cbc2e7d6ab9846f46ff0f24bb327493c78efe90a31a316405ebedad0da757110"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/block-06-04.npz",
+          "bytes": 2399925,
+          "sha256": "ce484c35b5799ef191dc03fab983a89746125c9aa3ee02d0f1a84529f30876f0"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/block-06-05.npz",
+          "bytes": 1506739,
+          "sha256": "eb06b37d7d9f1ab83b7925b1475d41ba765194099d737f25ca5533b3420f7321"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/block-07-04.npz",
+          "bytes": 916634,
+          "sha256": "6f8fdbc62c85005769fb353562042acd621ecd04bc5f185865e7266ed616608f"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/block-07-05.npz",
+          "bytes": 1378358,
+          "sha256": "66588729c03bd2f1e1dd8faf3d1adadbf147d70e5553c2140d1862ac94d3bfe3"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/block-07-06.npz",
+          "bytes": 2517971,
+          "sha256": "7be621a063d1d50cb5abaded242926355138248c292c8c7a68cab05f537d6965"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/block-07-07.npz",
+          "bytes": 1250411,
+          "sha256": "1370d76742f48612151d2665c100ee8878e40ded99eebed4c80c4a6387ff5b3c"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/block-08-02.npz",
+          "bytes": 2898505,
+          "sha256": "1b2b84873fdce47897a98bf608c71e6a77c90fec1ae91ab971cabc93ba149ff3"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/block-08-06.npz",
+          "bytes": 1120328,
+          "sha256": "b587dcaf7795000c50b392884b6c7e197dfeae93b9f08e6e3c70d014915a51cd"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/block-09-01.npz",
+          "bytes": 1786296,
+          "sha256": "e4143ba5aa699f307b011efa40bd5cf131a07575ccbf36f24edb2cdb20cf7baa"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/block-09-02.npz",
+          "bytes": 1818956,
+          "sha256": "cd6a478959e8e34193584e4a8967cec5138c274aed63322eabfcb53a46e75b82"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/block-10-01.npz",
+          "bytes": 1298650,
+          "sha256": "00c6322c494d5cb3cb40eb36cfd922f244a0852ad5ef833dee3944eb1ee2b0cb"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/block-10-03.npz",
+          "bytes": 2126381,
+          "sha256": "e24f56bd439f6500a6cc73c09ff78cbc6539f38e830c3dc04a5d7f11c8f358e7"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/block-10-04.npz",
+          "bytes": 2183337,
+          "sha256": "92cb6fd6eacee791ac740137c22f73b3952331efbe65bedfc15dbff0dda845cf"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/block-10-05.npz",
+          "bytes": 1155607,
+          "sha256": "74abbe4bdf92dcbf38c9fb89e1d88db856e0e76bf72eeb03df271f6ac1f81049"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/block-11-01.npz",
+          "bytes": 80608,
+          "sha256": "b092dd27580e936b29ab945615a0b7fef9b78e8fb9df8cfe058103519796810d"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/block-11-02.npz",
+          "bytes": 70437,
+          "sha256": "7876ce0f033e3e03d5664234cefc38c6730756466e34ea84d916bb1ed7939949"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/block-11-03.npz",
+          "bytes": 1192881,
+          "sha256": "b282f92ad03228c98b69d1a19eb4f66f01e1e09b1082fc957a28f2fac588dd11"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/block-11-04.npz",
+          "bytes": 1573699,
+          "sha256": "7e2a988afb7cf3b0d0ac832c80a0eb91e09931995dcdce48c4d6662e0fcd4433"
+        }
+      ],
+      "source_header": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/source.json",
+        "bytes": 2334,
+        "sha256": "9eb8b463bb25104bce9bb69faaedb598dc792ab49fc049bcafa4f03a4babc1e1"
+      },
+      "incomplete_context_indices": []
+    },
+    {
+      "tile": "S02E127",
+      "keys": 387,
+      "observations": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/point-observations.jsonl",
+        "bytes": 1833491,
+        "sha256": "f9ffea7a366775575a88542c7f6485327e0c268d3f8ed21b4acaab8a5bf00e4f"
+      },
+      "arrays": [
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-01-04.npz",
+          "bytes": 810308,
+          "sha256": "8abe6cfd7b3163eb79671ab46858306c53a64d8a11acf9cc08de0d6c0652cac5"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-02-04.npz",
+          "bytes": 905924,
+          "sha256": "aa450fa04e7d0f44978ba5acd9877fa3a591396935fb7dbd25fba74a1917e33f"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-02-05.npz",
+          "bytes": 2078134,
+          "sha256": "bf9bafcf37fd042108c3652b119f9c7d035f4d004babd562614311aee9143e06"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-02-06.npz",
+          "bytes": 2681575,
+          "sha256": "1c049059fe9cb52573a819d94aef430661ae1e8a334ede7c3f854cdc13bc7acc"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-02-07.npz",
+          "bytes": 1932243,
+          "sha256": "b2b25dc6511b89e739c6fcb9edf1938a513b91c81248cd9ad7bdf4f6349069a9"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-03-04.npz",
+          "bytes": 1376158,
+          "sha256": "469392873471eaccaade8dd4c7d9995c389e16ab9160a6b75a8391c3d6457fc3"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-03-05.npz",
+          "bytes": 994337,
+          "sha256": "43f6973f0f4b5f4cc66503d8590aeefb7c532f4cb19f8df97d5d302a89751a22"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-03-06.npz",
+          "bytes": 633187,
+          "sha256": "da0c4d772ab6cd6cd95e5961cf8d5cc9b6714b4ba0c700eb245e57cdae071ab1"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-03-07.npz",
+          "bytes": 1592712,
+          "sha256": "e83ea7ef8b9e6c4aa13b4e81be92530117c572020b648e871ee026492b78c406"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-03-08.npz",
+          "bytes": 1309192,
+          "sha256": "f342f26286e53e49cba4d4d7205b2ff2958945586bc9f2cdf4ba4f37912e016b"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-04-03.npz",
+          "bytes": 1884102,
+          "sha256": "a46e6c72fcc7501bdfe92ab099c2dd868095f098b84ff06b80bd86c001711428"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-04-04.npz",
+          "bytes": 2045294,
+          "sha256": "ca8e03adb629708cc4f27cdd1294e733f4351a80bffb2063566418bb3a3e971c"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-04-05.npz",
+          "bytes": 1048220,
+          "sha256": "0117a09033d19174362fd12236d0abf52174865b7bd7e94cd0ad4d23c9746416"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-04-09.npz",
+          "bytes": 1641725,
+          "sha256": "152390b4cf517c06fcdf960ccc964f08446df9ea7fd2e5c6d79792111864f2c0"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-04-10.npz",
+          "bytes": 780986,
+          "sha256": "b85a7ce29283183e442203e7becd3de5146427cb9c0084c56bd75f19f6bec038"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-05-03.npz",
+          "bytes": 1221319,
+          "sha256": "c9f92fae1832f5c4b70debec2477820a7dda762bbda89d0cb37b42d587df9571"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-05-04.npz",
+          "bytes": 1560766,
+          "sha256": "8153224dac51ab31a6d30aa46e715968cc744f0f31d57230558e53d384ad4521"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-05-05.npz",
+          "bytes": 2679597,
+          "sha256": "dd8bc9406c71c7f1c07de3e3ba9351a07b01500bdfb80c7685ba437c6bc1c634"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-05-09.npz",
+          "bytes": 3214102,
+          "sha256": "3daa2906ba567678afec23dc06476aecc515bddb6b65960660111c2458ae90f9"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-05-10.npz",
+          "bytes": 2869655,
+          "sha256": "5f727f8a301d7f2b1ea0b8d22e1bd4f6c56c9b4e2d5e52aa6d1218955d9ff8ed"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-05-11.npz",
+          "bytes": 1754831,
+          "sha256": "292c2ddcb0869b57da7e94ee0771884d996edfe5ad7f9e5401a7156a36c03fc1"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-08-07.npz",
+          "bytes": 2269709,
+          "sha256": "060b0c333fd62ec60e5a8f0b79864b0d4ecc1f27ca35a1bb81ffbdedf986995b"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-08-08.npz",
+          "bytes": 1167792,
+          "sha256": "266d27617261a5a50fddc1e8b71a5e813b269a9d6dc99e7e58847cd8f9dc4dbe"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-08-09.npz",
+          "bytes": 890775,
+          "sha256": "f585cb8cc92ae8e0567d8663ce7a2e81c10d1f5b86180d3f002064a8bfa46242"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-08-10.npz",
+          "bytes": 1147654,
+          "sha256": "f690a5da0293c61d0292cf72bf6d09bbd8765b911cba03108d83d830f89c6bc8"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-08-11.npz",
+          "bytes": 1130196,
+          "sha256": "7aafa59a63abcf69d40155323bd00ec6cb48dc3dd812f399cb3f425ba3268362"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-09-07.npz",
+          "bytes": 1451013,
+          "sha256": "a4e97cc57bba88811f38e087c8a344e564a107186964d31503005bf4a75ef3be"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-10-06.npz",
+          "bytes": 375819,
+          "sha256": "02fadb1609fb0f202969e8df7d706b3bf71109fa5efcfbeee6af0af4acee1b1a"
+        }
+      ],
+      "source_header": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/source.json",
+        "bytes": 2335,
+        "sha256": "da74a18778581b7c107e4d6ade6443ab1be6f71e67771509c537e2c654e214ae"
+      },
+      "incomplete_context_indices": []
+    },
+    {
+      "tile": "S02E128",
+      "keys": 508,
+      "observations": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E128/point-observations.jsonl",
+        "bytes": 2426711,
+        "sha256": "3b1b261702ff6d9222d1477886e90234286bf868639e4dcb9245e814a7ec353a"
+      },
+      "arrays": [
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E128/block-00-02.npz",
+          "bytes": 1793658,
+          "sha256": "dbc06109bb3f24851003cc7b01742620b50c6d3f09e294bbb00139cf4b211430"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E128/block-00-04.npz",
+          "bytes": 2316951,
+          "sha256": "feacd229e619e5fd08fd6b45a2b2e1af4d48c1d4ccc485b9dd40fd8164b8aabb"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E128/block-01-03.npz",
+          "bytes": 1207648,
+          "sha256": "32eec78b733054a6fd721c89d467003d66cd0c2e19919f55722d55c5ce03cba5"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E128/block-01-04.npz",
+          "bytes": 2260077,
+          "sha256": "9a1f8d2e3431f61d5ec3aef03d0f9933cb742cc345b6594bb24544749923e58e"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E128/block-01-05.npz",
+          "bytes": 1110349,
+          "sha256": "54602fa53fbb1b7b7ecf7bc7840b75453e057b5c196d2a7231783756be796eea"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E128/block-06-00.npz",
+          "bytes": 2721767,
+          "sha256": "b518de17f91d92e11ce038b6580caed12e18f7ffa7e8d52929d75ef4fcc35a9c"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E128/block-06-01.npz",
+          "bytes": 1974938,
+          "sha256": "435de821bd61205aa48a24da6575dea2637af2f05b8d8a636f30387e08f43d42"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E128/block-07-01.npz",
+          "bytes": 3172944,
+          "sha256": "309b4dc2d6245bb069043382b2ecee67f89e7c467569fe4c27846795a96e6052"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E128/block-07-04.npz",
+          "bytes": 1203399,
+          "sha256": "dfe9509f538123dab09185c8f2a99ceb49cdee82547a601f9a148798d3182d53"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E128/block-08-01.npz",
+          "bytes": 1605620,
+          "sha256": "4d3ec2cc5c88ecc4d40db5843a37a71c58fd15e9410237ad9c396623c48ff57f"
+        }
+      ],
+      "source_header": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E128/source.json",
+        "bytes": 2333,
+        "sha256": "886309d90f997515f88ee362c7fee0d6302f2436774ff97216d30daf3038bea4"
+      },
+      "incomplete_context_indices": []
+    },
+    {
+      "tile": "S06E134",
+      "keys": 2534,
+      "observations": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/point-observations.jsonl",
+        "bytes": 12520680,
+        "sha256": "39e05ae5c1afee7d00eda9860e13abef913c41a9e4d5da3df9f0d14057cd3b34"
+      },
+      "arrays": [
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-03-05.npz",
+          "bytes": 913856,
+          "sha256": "ae1199a146030e58a62d2df389548765e5d6abbc7db43219cf84c8a4f8d45552"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-03-06.npz",
+          "bytes": 2198682,
+          "sha256": "66c28ef76be3270dfafc5cff8d71b7010529b7f42708202b090e9e0e771615bf"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-03-07.npz",
+          "bytes": 1384236,
+          "sha256": "55994255c28d70b8c414a00561860a2a0c6371b61b0fb22b535cd5bb7d4cb316"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-04-05.npz",
+          "bytes": 2210056,
+          "sha256": "5329c4931f0fdd6e872cd1aad92f0879f828e14a0bbb626237ffe85576bcad50"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-04-06.npz",
+          "bytes": 2977277,
+          "sha256": "6525e7e2d58a0bf95622db80457ecfc947f28bd16b6130d41e6c9adf21a5d08d"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-04-07.npz",
+          "bytes": 2418194,
+          "sha256": "7cfbaff82c3a3df3ea14aea4a4a0df7939ac3fdc7b5400457b2b39b990f32977"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-04-08.npz",
+          "bytes": 1232119,
+          "sha256": "43de7171a73a33db11abbf73ada4ab592d11f0a4575463c629fb99e62e308142"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-05-03.npz",
+          "bytes": 2277371,
+          "sha256": "039aff74b76ba40deb97552f7a43d574c100d4b5cac7605b81e92b8578022be7"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-05-05.npz",
+          "bytes": 2535030,
+          "sha256": "98ad69d29984ce51f2647c628492e252b1eecc7e39dbc48c1e3baf1e37efc20c"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-05-06.npz",
+          "bytes": 2963068,
+          "sha256": "dedba3a6eab46870a453a5df1724783c2a43bbce891a12a02c434eb50c791322"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-05-07.npz",
+          "bytes": 3229137,
+          "sha256": "7da9d5c4997abb6fa595242a225e0e43b20133d7fa825ee10a0d89342ebe6830"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-05-08.npz",
+          "bytes": 1897540,
+          "sha256": "69807a14a3cf7224c57419050462e949f861567febf0be6b86e1b3037d61c9da"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-06-03.npz",
+          "bytes": 2389431,
+          "sha256": "d022c626f1cd49d72db51b90044b458e58e27edb902e2ce4f598a7110ef5f08f"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-06-04.npz",
+          "bytes": 2094773,
+          "sha256": "b3dfb230eff3603cc0c95e38d890e7570e81a232d95a62b883d06fe006805847"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-06-05.npz",
+          "bytes": 2990291,
+          "sha256": "77b54c2ebab9c24d472c03acd41c8c9327ca254137aed1de1359b7a3b0630d51"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-06-07.npz",
+          "bytes": 3228304,
+          "sha256": "5ed9482f43ecf1895561853db0fd764cceaab509fa84fce40ff8983102653dba"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-06-08.npz",
+          "bytes": 2519759,
+          "sha256": "fb29aa6e8466afcce0f3d584a602fdbb35c954004c5d68b6f246cd5a1ccb5a6c"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-07-02.npz",
+          "bytes": 1816571,
+          "sha256": "6f9f3952bf46e4e2f666e7e0957d3fe04320cdc78416b94a96179a8fa1139953"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-07-03.npz",
+          "bytes": 2414901,
+          "sha256": "47e87d84e7daafcdff01c5fdce1c76b904733849849fc2f7c8a0d3cdb62406bc"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-07-08.npz",
+          "bytes": 3372951,
+          "sha256": "b6f305e014eaad3d756bc37a973a58983d5b5c4b9b8f892d52429f8915b09caf"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-07-09.npz",
+          "bytes": 2152513,
+          "sha256": "18437dbda1ec71a5ddf65036422d2a8781efba02bc2c0aa835933292af533233"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-08-02.npz",
+          "bytes": 2072068,
+          "sha256": "9799d97b95931e8b5b5ea5edb11318588208cd03e43b4dbb05589c94e6387da5"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-08-03.npz",
+          "bytes": 2903142,
+          "sha256": "d7410a8eeb6993ca5047e9b61f1ea2da89b9e0fd83fe3456b5cc48aba222fbf0"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-08-08.npz",
+          "bytes": 2922450,
+          "sha256": "78afc3b104ec9d84d02924dbcbda1a626d993d25ade36486514c4ccf96de010f"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-08-09.npz",
+          "bytes": 2159017,
+          "sha256": "b93cc8f8566c7d73734928a338a7f0a57ab83a38a5c579dab502254c0650fd20"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-09-02.npz",
+          "bytes": 2331439,
+          "sha256": "193073b813a6765b124a9d1f4d334f843f18e4da52ea77a31f82bf520549b7c3"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-09-03.npz",
+          "bytes": 2012176,
+          "sha256": "e010eb5b2a10b310e8b25079da5aebf89c27d3fc2b746f77d20fe22406545535"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-09-04.npz",
+          "bytes": 2872368,
+          "sha256": "fcb32b02ea3a5b853d98eba0073642ce266c38861cd4987b4312b0954a818502"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-09-08.npz",
+          "bytes": 3113711,
+          "sha256": "76c60cdf95c15ce0b9446222519bbeb7b1636322cd3443a0e90389565747ea43"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-09-09.npz",
+          "bytes": 2233427,
+          "sha256": "027b4868a3133cb45f2be6983a5c25bf33cdfc7b0b556374f3e5e957422611dd"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-10-01.npz",
+          "bytes": 1695564,
+          "sha256": "85eee1a8bc830b6c5a5b59db030b253385e811ee04179853a442b130b0d20519"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-10-07.npz",
+          "bytes": 2822084,
+          "sha256": "341f93f9e84fff709f2c29815531296fd4ef387fbcc9b1fbc77342fb7c26c94b"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-10-08.npz",
+          "bytes": 3024015,
+          "sha256": "70a994e5db2cca3ebe896290d1fcf526c62c705d318dcfebad7836670ba9b9ce"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-10-09.npz",
+          "bytes": 2623642,
+          "sha256": "be286951dfa321d6cc27c4e83ab7dfd970cf4ee4d7bb92226d4c6a446d8288fb"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-11-07.npz",
+          "bytes": 1748627,
+          "sha256": "4777f7c889c41174851b1326caf64ec7b6352635faf5432d5932b379b0079855"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-11-08.npz",
+          "bytes": 1833682,
+          "sha256": "71fb810b361aafc9345b7d1285e0163998fd36bb9abd18cab691738b8c252702"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-11-09.npz",
+          "bytes": 1971220,
+          "sha256": "0b55586104532c3a09f3493a98d00e6dff533a025e7d0a84690f088322ccc051"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/block-11-10.npz",
+          "bytes": 1458630,
+          "sha256": "ed45c48d491c8219ccb78309435f460bbbd3b64e7f315c5d35e36f32633a16dd"
+        }
+      ],
+      "source_header": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/source.json",
+        "bytes": 2335,
+        "sha256": "4e3ab91a0c0ab316fac4f57bb4034211edd845e5a6a5dbbe51df4bd6c60c8f5a"
+      },
+      "incomplete_context_indices": []
+    },
+    {
+      "tile": "S07E134",
+      "keys": 1887,
+      "observations": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/point-observations.jsonl",
+        "bytes": 9341473,
+        "sha256": "0eea5062ffc913484e49dd9ac7eed2f88c2638c2455d3df34e304c61c6af9c0e"
+      },
+      "arrays": [
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-00-01.npz",
+          "bytes": 2079201,
+          "sha256": "3bbc8e82d95f07b6a432ffc52894db9834b51603a0bf14e3f686931e42b5a327"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-00-02.npz",
+          "bytes": 2303293,
+          "sha256": "f337859f59730fe31c9a66c20481f408e72a64358a74878a798f2bf067255b73"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-00-03.npz",
+          "bytes": 2739903,
+          "sha256": "bca3295e8e72c6abc687d7122470034005f47f0a0a9cbf1999565fcf87cd7ef8"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-00-08.npz",
+          "bytes": 2541689,
+          "sha256": "d541f9c2f961f79f4465bb368059ec0c459254c98cd358fedefab321b3f1cbdb"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-00-10.npz",
+          "bytes": 2007881,
+          "sha256": "6164c5367d6e4572876c7fbdd822b9170ea2cd7ab51bf101c480587fff1d82bc"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-01-01.npz",
+          "bytes": 2314569,
+          "sha256": "e6ab618694afab77ac4147b4b79086c2cc1e54ce6841c518451612f6086745ae"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-01-02.npz",
+          "bytes": 2916677,
+          "sha256": "2977afc5a4a1eaa11d1325ae6288ae6d519f712594a8dec6e6a0e809f2aefbaf"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-01-03.npz",
+          "bytes": 3321693,
+          "sha256": "40b5d824d353ef4efaf19c0c13f667561cc1b6b0820738f70e12c679ea975e05"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-01-08.npz",
+          "bytes": 2823362,
+          "sha256": "027e080e276b43cd7b021c9eb7144cc2417cbbe90d6888027a7dac832c170e05"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-01-09.npz",
+          "bytes": 2333063,
+          "sha256": "26089a89fc071d65df86cab62ee39af4030d08b8575fc5bd4d92ad01fa8b2d33"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-01-10.npz",
+          "bytes": 1861077,
+          "sha256": "367baa537b077b8df2144a5dea618c64e798db8812a98300909efe7dde49e1ab"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-02-01.npz",
+          "bytes": 2677958,
+          "sha256": "e4b4c703fe664fa9ebd1292b97b772915b883863d5d90206deb9e8e961276426"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-02-02.npz",
+          "bytes": 2457704,
+          "sha256": "550a4aadc3dc578413f53970fd2a9f2f1807ff63c2067fc18642499cc38b677d"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-02-08.npz",
+          "bytes": 3068066,
+          "sha256": "511823640d43032b874781b6f2bf07a75f8a376dd80314d76333cd5ccd14d560"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-02-10.npz",
+          "bytes": 1988457,
+          "sha256": "5e40e7e0aef8d63e7c86f29265b0f66aa8a6d06b02887a94fe8f24fa6c5b9c79"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-03-08.npz",
+          "bytes": 3113114,
+          "sha256": "a35fcbc58ae5d87bd654d2d2c360e0318eb38d1c032f378dd9c668b10194e0a0"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-03-09.npz",
+          "bytes": 2687272,
+          "sha256": "060383309f919d26f7b949ea8c64d9965d74b7f3397ca16c8f9c1a278c4e3fab"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-03-10.npz",
+          "bytes": 1864552,
+          "sha256": "d7da6fab905e58a341fa46537aef969c0d1c7375f0afc5bd99e819863dbd64f7"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-04-06.npz",
+          "bytes": 3073804,
+          "sha256": "c4f7f6f781976481a67c25c97e595e421ff76e2b4f1f84845bbb18ce930bdb79"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-04-07.npz",
+          "bytes": 2578853,
+          "sha256": "82b58776c19b74305b21db4c3605404a86bf345f346ada37d7144b9e9312f086"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-04-08.npz",
+          "bytes": 3067276,
+          "sha256": "8618ca7439e7d986254b124b806df7af17d7947c226739758e40d31b22ac5c57"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-04-09.npz",
+          "bytes": 3390125,
+          "sha256": "3bab4ec6fd2f16ce5516cf1435cff1a55ad7346d9a49fc3b5221574df7076408"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-05-01.npz",
+          "bytes": 2621033,
+          "sha256": "6c44604557a500d6eea88c0d3106b2b4d375ebee6f84212184faa5cb2e178430"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-05-02.npz",
+          "bytes": 3414458,
+          "sha256": "0ec07665b890cf9c275eca14ebe7b64092f5bf0704a4f6ec7d8b89176c53112a"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-05-06.npz",
+          "bytes": 3153004,
+          "sha256": "a1f5181b7f1c1d9631915c908ba11aa4e351ed311c561f99f58f1501187a3a30"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-05-07.npz",
+          "bytes": 2963546,
+          "sha256": "73a38584299aa4bf6381b20d2b9bec9f820cbd83876de0de5201c1ddfbdcd930"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-05-08.npz",
+          "bytes": 2818080,
+          "sha256": "ef847b008599f9328c12d6b02daabf53d2fdc0018cf91e67286ed5571be1e732"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-05-09.npz",
+          "bytes": 2902899,
+          "sha256": "336a4c5ff92a8f2c35f96b3998612e7563196812ffa7d7d1bfd171636ca2934f"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-06-05.npz",
+          "bytes": 3192376,
+          "sha256": "bf329e1547204b1b90ffd470de1afe102778bffda5937606e860ce6c9fb76c85"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-06-06.npz",
+          "bytes": 2943348,
+          "sha256": "25b868d59cb7dee9f7e2ab6e73ee005cb086b53241ff3fe9c90fcc830bca84dc"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-06-07.npz",
+          "bytes": 2758378,
+          "sha256": "ef7ffd35e2d2cb6d9777d3599733a907ef99407453a2e31217a53d9c86930278"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-06-08.npz",
+          "bytes": 3137501,
+          "sha256": "fa638eeee3a8c5bf33be2858bfacf491c288b27c0482ccb3ec821ff440691f56"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-06-09.npz",
+          "bytes": 2189775,
+          "sha256": "dacdfdc0e221181ce5305ec734a2bfdd8965af7d831a2a9e43d4d0a15586411c"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-07-05.npz",
+          "bytes": 3073333,
+          "sha256": "f28bb108e4a1d263c616b43c3497a35d83e833170790dd4e746e9d4f36c6b4b6"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-07-06.npz",
+          "bytes": 2583838,
+          "sha256": "0ff056fd52f6ebacf9280fb2631c45c16c8b16b945b088a96ba3f2d98baf820e"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-07-07.npz",
+          "bytes": 2716441,
+          "sha256": "c367e9e78de53c37a03f927c888add71a7d04f302c77bb1a20a3df19acbffd55"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-07-08.npz",
+          "bytes": 3019508,
+          "sha256": "b30fb34eacd0fb6f01a3a829a82be03093c3f8eaab3f19a639dd2c350ed7528b"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-07-09.npz",
+          "bytes": 2154984,
+          "sha256": "fbc02630fdb0cd0c14a06019822716ff63eae3f980b09d655325caacf6f70f83"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-08-04.npz",
+          "bytes": 3043019,
+          "sha256": "03774fe5dc8601d146a9a75e717f263b1bb3ba2ad22b262e1250881882f4f1b9"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-08-05.npz",
+          "bytes": 2972737,
+          "sha256": "8472ad5f2b0106de3e70d915ed93d98ff26f2a838fd7c9329fb89c23994611ab"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-08-06.npz",
+          "bytes": 2766344,
+          "sha256": "4ef3094e5f1826e9b88b7be1ffdf0040b54126077a730a9e48990c50daae54a8"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-09-04.npz",
+          "bytes": 2561034,
+          "sha256": "812c2b4f32122c0a3ecdfb27e847763119cb1298497f4534673de511ed407471"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-09-05.npz",
+          "bytes": 3113922,
+          "sha256": "51c48b95a877c71aa798f4513dbb7fcb0157faa26d25a92433f59fd387cca69a"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-09-06.npz",
+          "bytes": 2949180,
+          "sha256": "9dc81dfd7d2e58dcfead152a6c477aa0b4eb4aba13d0d947b02bfb5f986b1f8f"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-09-07.npz",
+          "bytes": 2443760,
+          "sha256": "a6339a49032caf6b16fcf5607fde5077f17bc7d3e4b5c1f892dc6a17816e9a67"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-09-08.npz",
+          "bytes": 2062323,
+          "sha256": "da79912c934bf6c8873de8c848b251564fdfaaf3b6345a1d3a3d5ac50ee75dc5"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-10-02.npz",
+          "bytes": 2797274,
+          "sha256": "08c2a7b2b07860b16dc34dd15c35db71ce878231c0fd91f573ea0bab78bc61f4"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-10-03.npz",
+          "bytes": 1412848,
+          "sha256": "443567f200bcec074b5900a18e593916ad6e62b5caba49051b0ba97ed99cd976"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-10-05.npz",
+          "bytes": 1902954,
+          "sha256": "992e98e55ad78ac5ce0e189eea5b6ce8aa915b06f6fca5d02884e6a08ee4cef0"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-10-06.npz",
+          "bytes": 2483584,
+          "sha256": "e5b26d27b5d0a9f2f5b349967a90828bcedb445d465afc3744bcd43faf96f01c"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-10-07.npz",
+          "bytes": 1912283,
+          "sha256": "c689ead4e8d42ce8d977cceec07e2b342cad327502c65f08680b9ce1dcc07768"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-10-08.npz",
+          "bytes": 1156139,
+          "sha256": "b607cbb8d3731a4c9b40ebb6cd9a974f7098353a79e292e4c3fc830ca90b3db1"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-11-02.npz",
+          "bytes": 914796,
+          "sha256": "d4e2bfad0eecc8a0904e8c7cb848c778d124022385b4f58e7e27af0dbdc9bb12"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-11-05.npz",
+          "bytes": 887173,
+          "sha256": "0c8621ab27ecb4818995e1f19dd1ac067d5f2dd5cf2e877aa78a7afe9027d2e8"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/block-11-06.npz",
+          "bytes": 1283396,
+          "sha256": "e76805d21753b154947a680d34ccd37e0431db77b454b09da95029ad86d2c6af"
+        }
+      ],
+      "source_header": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/source.json",
+        "bytes": 2335,
+        "sha256": "ceb31342e89a3d90801b0e2e5f8d1be11feba5f8261b1ad2a4c4839ea482cf7c"
+      },
+      "incomplete_context_indices": [
+        68700
+      ]
+    },
+    {
+      "tile": "S08E134",
+      "keys": 155,
+      "observations": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S08E134/point-observations.jsonl",
+        "bytes": 769501,
+        "sha256": "a316c5cba154a1d39d0c6fe2022b667e565dd3e0ad6cf67bc271cec8444e34c0"
+      },
+      "arrays": [
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S08E134/block-00-05.npz",
+          "bytes": 1364908,
+          "sha256": "6f1fe2f47a9231a71e4288a600a802037d3b32098d3ed757ca2a8ef6f92973a6"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S08E134/block-00-06.npz",
+          "bytes": 1248390,
+          "sha256": "fb86c67505e1cc4e33c94bf2739f8aa57cd908ea4926a13a746bd2bebf7900b8"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S08E134/block-00-07.npz",
+          "bytes": 767809,
+          "sha256": "195d5542d33ceace1098ecc1ddc059f1c6f4034d2dfaf202c53c94e7665f5251"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S08E134/block-00-08.npz",
+          "bytes": 1248711,
+          "sha256": "38a6851e0abb7b185670f07aa65fa75faea901e14e95658188ba9b72769b9f68"
+        },
+        {
+          "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S08E134/block-01-06.npz",
+          "bytes": 1261886,
+          "sha256": "25c20f4ec492583d9e0adb113bbfe8aa3709f19fffc1d6d5e8657893c7a065ee"
+        }
+      ],
+      "source_header": {
+        "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S08E134/source.json",
+        "bytes": 2331,
+        "sha256": "99379c7e5f28f9b5d97501838557aa78e34d4c8639b19cedefe0ce40fd26d7e3"
+      },
+      "incomplete_context_indices": []
+    }
+  ],
+  "failures": [],
+  "license": "CC BY4.0",
+  "attribution": "ESA WorldCover project2020 / Contains modified Copernicus Sentinel data(2020) processed by ESA WorldCover consortium",
+  "runtime": {
+    "python": "3.12.14 (main, Aug 25 2026, 13:50:33) [Clang 22.1.3 ]",
+    "rasterio": "1.4.3",
+    "gdal": "3.9.3",
+    "numpy": "2.3.5"
+  },
+  "limits": [
+    "Annualcomposite has no single date or tide.",
+    "Masks/nodata are literal source validity, not confidence or ocean.",
+    "Nativecontext incomplete where neighboring block is outside existing297blockplan; no added values.",
+    "No classification, physical answer, territory/owner change, adoption or repair credit.",
+    "No whole remoteTIFFhash claim."
+  ]
+}

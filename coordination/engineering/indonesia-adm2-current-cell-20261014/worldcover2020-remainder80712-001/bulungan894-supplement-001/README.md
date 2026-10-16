@@ -1,0 +1,7 @@
+# Root-adopted Bulungan763 visible-body/location answers
+
+Root explicitly adopts763 of894 independently reviewed original Bulungan centres:584 vegetation/canopy,110 visible water,69 exposed/constructed surfaces.131 actual ambiguities remain. Prior99,367 adopted keys are unchanged; the known exact union is100,130 and the original133,846 denominator leaves33,716 specific residuals. No native binary, ownership, authority or repair credit follows.
+
+All38 wide,24 close-detail and4 adverse contact sheets are included with exact manual point/panel mappings.2415 supports the canopy strip;5198 supports pond water;8611 supports a narrow exposed/constructed corridor with exact water-edge uncertainty retained;7233 remains unknown. Annual median2020 imagery does not prove present conditions, permanent water/dryness, dry underlying soil, exact tide or legal jurisdiction. Original source/location associations, classes and holds remain unchanged.
+
+The proposal's scientific rows are frozen. Public projection substitutes local absolute task paths with relative locators; original raw hashes and projected hashes are both retained in adoption.json. Only root_adoption differs between the projected proposal and adopted copy. Raw NPZ arrays remain locally retained. Source: ESA WorldCover2020 annual median RGB/NIR, Contains modified Copernicus Sentinel data(2020), processed by ESA WorldCover consortium, CC BY4.0. https://esa-worldcover.org/en/data-access

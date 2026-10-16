@@ -1,0 +1,982 @@
+{
+  "authorization": {
+    "decision": "Root explicitly adopts exact763 independently reviewed Bulungan visible-body/location answers",
+    "recorded_utc": "2026-10-16T00:32:49.586522+00:00",
+    "proposal_original_raw": {
+      "bytes": 231574,
+      "sha256": "7003e7e3e97c1217f0fb87ab726a4ac7684ddf70d49615aa050655421d716460"
+    },
+    "distinct_review_original_raw": {
+      "bytes": 25929,
+      "sha256": "7cdc8c0b653717b9298360d808ea5b67e4c62ff34fa265ae7e01dc9e91daa665"
+    },
+    "scope": "Bounded annual2020 visible body/location only;131 actual unknowns retained. No binary native, ownership, authority or repair credit."
+  },
+  "owner": 22698,
+  "exact_scope": 894,
+  "new_adopted_answers": 763,
+  "specific_unknowns_retained": 131,
+  "previous_known_exact_adopted_union": 99367,
+  "combined_known_exact_adopted_union": 100130,
+  "specific_residual": 33716,
+  "original_physical_denominator": 133846,
+  "native_authority_or_repair_credit": 0,
+  "scientific_row_changes_in_adopted_copy": [
+    "root_adoption only"
+  ],
+  "path_projection": "Absolute local task paths become public relative locators before adoption metadata is added. Scientific values, coordinates, original association, manual decisions and per-key answers are frozen. Original raw file hashes retained; projected file hashes are distinct. Raw scientific NPZ arrays remain privately retained.",
+  "original_private_manifest": {
+    "bytes": 22842,
+    "sha256": "ab74c1fca1214759894e4411bd9d4df435be0c5676c3f47d27c2e1a9e3964faf"
+  },
+  "transform_map": [
+    {
+      "path": "proposed-bulungan894-physical-location-dispositions.jsonl.gz",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/proposed-bulungan894-physical-location-dispositions.jsonl.gz",
+        "bytes": 231574,
+        "sha256": "7003e7e3e97c1217f0fb87ab726a4ac7684ddf70d49615aa050655421d716460"
+      },
+      "public_projection": {
+        "bytes": 227234,
+        "sha256": "7b7df27b1821262baa63bf2cc0ceb32ebe9ac3325d05b17ce96c1576a82a977f"
+      }
+    },
+    {
+      "path": "proposed-bulungan894-summary.json",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/proposed-bulungan894-summary.json",
+        "bytes": 20427,
+        "sha256": "3a48aec2e09ff13b16e894cef654c376912ac955c69a9b1773a20f09a1405035"
+      },
+      "public_projection": {
+        "bytes": 17782,
+        "sha256": "1ab7cc2fdaf3e4b1d58279057fb1aa71817332cb620c8cd5d87b6f8324e6986d"
+      }
+    },
+    {
+      "path": "scientific-judgment.md",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/scientific-judgment.md",
+        "bytes": 4457,
+        "sha256": "9ab432e4ebbe1124521a352a7eab605cd52a77f8a6dd89aa4a880401bfccd83b"
+      },
+      "public_projection": {
+        "bytes": 4457,
+        "sha256": "9ab432e4ebbe1124521a352a7eab605cd52a77f8a6dd89aa4a880401bfccd83b"
+      }
+    },
+    {
+      "path": "manual-panel-decisions-first-pass.json",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/manual-panel-decisions-first-pass.json",
+        "bytes": 3196,
+        "sha256": "03bcb2bb0af00cdb7f2941ad4b5685a22dfb6d1dc3850bbf55b4b4a2ab8fe290"
+      },
+      "public_projection": {
+        "bytes": 10810,
+        "sha256": "e981bc1eb8bd481215098a2ced580af0159f77cef217c95349c656f9006f4954"
+      }
+    },
+    {
+      "path": "manual-detail-decisions-final.json",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/manual-detail-decisions-final.json",
+        "bytes": 4432,
+        "sha256": "5999f0b0ad8a79b49029be3bbfd759ac79dd2a3c4b57b2d8eccd8b4a301c0e8f"
+      },
+      "public_projection": {
+        "bytes": 4432,
+        "sha256": "5999f0b0ad8a79b49029be3bbfd759ac79dd2a3c4b57b2d8eccd8b4a301c0e8f"
+      }
+    },
+    {
+      "path": "manual-provisional-v-adverse-decisions.json",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/manual-provisional-v-adverse-decisions.json",
+        "bytes": 582,
+        "sha256": "7a6a464b961cfa6fcc7d61682584b76c76a2913fb34cc4bc05c54cda538dbc01"
+      },
+      "public_projection": {
+        "bytes": 582,
+        "sha256": "7a6a464b961cfa6fcc7d61682584b76c76a2913fb34cc4bc05c54cda538dbc01"
+      }
+    },
+    {
+      "path": "materialize_manual_bulungan_proposal.py",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/materialize_manual_bulungan_proposal.py",
+        "bytes": 6203,
+        "sha256": "28974cd273ae77ad29ce20c2c2f5b4b90b15f7496f2308e963a2d2d2c2b9827c"
+      },
+      "public_projection": {
+        "bytes": 6203,
+        "sha256": "28974cd273ae77ad29ce20c2c2f5b4b90b15f7496f2308e963a2d2d2c2b9827c"
+      }
+    },
+    {
+      "path": "render_bulungan_centres_v2.py",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/render_bulungan_centres_v2.py",
+        "bytes": 3597,
+        "sha256": "8b2bbeb29c07f33c3a000f19e8c7aa3a9584edc075f8364f899df9cbf57954a0"
+      },
+      "public_projection": {
+        "bytes": 3597,
+        "sha256": "8b2bbeb29c07f33c3a000f19e8c7aa3a9584edc075f8364f899df9cbf57954a0"
+      }
+    },
+    {
+      "path": "render_bulungan_details.py",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/render_bulungan_details.py",
+        "bytes": 4227,
+        "sha256": "3c194f69b13f0ee74fd9b6f614c3bd5ebfbba273f262a5dd89a86c0f8a7205e9"
+      },
+      "public_projection": {
+        "bytes": 4227,
+        "sha256": "3c194f69b13f0ee74fd9b6f614c3bd5ebfbba273f262a5dd89a86c0f8a7205e9"
+      }
+    },
+    {
+      "path": "render_provisional_v_adverse.py",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/render_provisional_v_adverse.py",
+        "bytes": 4254,
+        "sha256": "574f4977d21c5bfae54fa4cb262609b90b1498ce08bd3484a85ff44aa7e331cb"
+      },
+      "public_projection": {
+        "bytes": 4254,
+        "sha256": "574f4977d21c5bfae54fa4cb262609b90b1498ce08bd3484a85ff44aa7e331cb"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/contact-inventory.json",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/contact-inventory.json",
+        "bytes": 905158,
+        "sha256": "6ab6b2755b514b09c7b48da2b5ee1760bd8b2e2061444398d283d8f285efbb6b"
+      },
+      "public_projection": {
+        "bytes": 856468,
+        "sha256": "253ffc7a4fa3a1425ccc791a4b2c8a8e72d9fda62d1032646abdcd52d874faed"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-01.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-01.png",
+        "bytes": 225135,
+        "sha256": "90623056c9940d0b08719fa7e0696e78453061fe3e4de298c19241fb52c3f333"
+      },
+      "public_projection": {
+        "bytes": 225135,
+        "sha256": "90623056c9940d0b08719fa7e0696e78453061fe3e4de298c19241fb52c3f333"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-02.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-02.png",
+        "bytes": 211673,
+        "sha256": "5c612b30c6e0676d05955643e42e7a72494ba36269d082a5c5d48ecf5f4cad08"
+      },
+      "public_projection": {
+        "bytes": 211673,
+        "sha256": "5c612b30c6e0676d05955643e42e7a72494ba36269d082a5c5d48ecf5f4cad08"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-03.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-03.png",
+        "bytes": 186879,
+        "sha256": "1a21f6ff7005f05f03a5fb00d21569b9441b58b10de5efff73dd94e94683fa34"
+      },
+      "public_projection": {
+        "bytes": 186879,
+        "sha256": "1a21f6ff7005f05f03a5fb00d21569b9441b58b10de5efff73dd94e94683fa34"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-04.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-04.png",
+        "bytes": 168148,
+        "sha256": "d385e846bd3e4f47777aa2ba5b10bf9469d7a47ca5890f016afc906b42b0d65f"
+      },
+      "public_projection": {
+        "bytes": 168148,
+        "sha256": "d385e846bd3e4f47777aa2ba5b10bf9469d7a47ca5890f016afc906b42b0d65f"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-05.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-05.png",
+        "bytes": 124891,
+        "sha256": "34945512af04c5dc38f894613db222add60aea9fb77020493d82d8690798fabd"
+      },
+      "public_projection": {
+        "bytes": 124891,
+        "sha256": "34945512af04c5dc38f894613db222add60aea9fb77020493d82d8690798fabd"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-06.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-06.png",
+        "bytes": 197605,
+        "sha256": "1a0d939a484ef54fea4ddefe9e048027262b6d2185106795aa253acf8e681a5d"
+      },
+      "public_projection": {
+        "bytes": 197605,
+        "sha256": "1a0d939a484ef54fea4ddefe9e048027262b6d2185106795aa253acf8e681a5d"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-07.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-07.png",
+        "bytes": 220429,
+        "sha256": "6045d8bfce2336abeecabb144ded1302cdcc937f58efb031e5d7cda5e6dde7b1"
+      },
+      "public_projection": {
+        "bytes": 220429,
+        "sha256": "6045d8bfce2336abeecabb144ded1302cdcc937f58efb031e5d7cda5e6dde7b1"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-08.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-08.png",
+        "bytes": 211027,
+        "sha256": "aec591a515fc44ca8c69b666358f15120bd0402d7e7df5cbf56b811e6de21479"
+      },
+      "public_projection": {
+        "bytes": 211027,
+        "sha256": "aec591a515fc44ca8c69b666358f15120bd0402d7e7df5cbf56b811e6de21479"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-09.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-09.png",
+        "bytes": 219445,
+        "sha256": "bb4521503b93e615fa99367e02e8d85c17c7fe9df3397978bf26fb197af71bcc"
+      },
+      "public_projection": {
+        "bytes": 219445,
+        "sha256": "bb4521503b93e615fa99367e02e8d85c17c7fe9df3397978bf26fb197af71bcc"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-10.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-10.png",
+        "bytes": 203248,
+        "sha256": "fa58cb4ea3afdfc19d4f33f01622de07bfc30db7e03012ea0685c59fde90a447"
+      },
+      "public_projection": {
+        "bytes": 203248,
+        "sha256": "fa58cb4ea3afdfc19d4f33f01622de07bfc30db7e03012ea0685c59fde90a447"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-11.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-11.png",
+        "bytes": 178403,
+        "sha256": "3c8dff4bed72fc49975f3f75040eaf328c7132019ce0ebe3c756c97dfd89bdb6"
+      },
+      "public_projection": {
+        "bytes": 178403,
+        "sha256": "3c8dff4bed72fc49975f3f75040eaf328c7132019ce0ebe3c756c97dfd89bdb6"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-12.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-12.png",
+        "bytes": 204342,
+        "sha256": "d65a74d7f4b646a9c48ef357226bb34cfff56ea335bc43d8fda14c107ba9fb4e"
+      },
+      "public_projection": {
+        "bytes": 204342,
+        "sha256": "d65a74d7f4b646a9c48ef357226bb34cfff56ea335bc43d8fda14c107ba9fb4e"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-13.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-13.png",
+        "bytes": 232722,
+        "sha256": "09415ba9be1032302324fe57371f9fd0c4c17862e141202df255fa62e71254b8"
+      },
+      "public_projection": {
+        "bytes": 232722,
+        "sha256": "09415ba9be1032302324fe57371f9fd0c4c17862e141202df255fa62e71254b8"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-14.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-14.png",
+        "bytes": 250184,
+        "sha256": "ec2a8da474fc39389779dfdd8dc04f2055d960680fe500e472d2bd6c171a404a"
+      },
+      "public_projection": {
+        "bytes": 250184,
+        "sha256": "ec2a8da474fc39389779dfdd8dc04f2055d960680fe500e472d2bd6c171a404a"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-15.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-15.png",
+        "bytes": 252054,
+        "sha256": "1420ab1e5f77d8438f0ba6e633511ac07c1021645448ff1a9781155f3b20fe29"
+      },
+      "public_projection": {
+        "bytes": 252054,
+        "sha256": "1420ab1e5f77d8438f0ba6e633511ac07c1021645448ff1a9781155f3b20fe29"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-16.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-16.png",
+        "bytes": 237569,
+        "sha256": "a809c2d7e8a1408a0cd8e440ca5fd006b60120263d96cdef659630faf4fc6a27"
+      },
+      "public_projection": {
+        "bytes": 237569,
+        "sha256": "a809c2d7e8a1408a0cd8e440ca5fd006b60120263d96cdef659630faf4fc6a27"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-17.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-17.png",
+        "bytes": 244050,
+        "sha256": "f3220a7ab3ff4fe862c41b3580dbd237b92464bfd5b1f733236ee55c9f045ac7"
+      },
+      "public_projection": {
+        "bytes": 244050,
+        "sha256": "f3220a7ab3ff4fe862c41b3580dbd237b92464bfd5b1f733236ee55c9f045ac7"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-18.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-18.png",
+        "bytes": 231677,
+        "sha256": "430d97bebac597b5d46624a0291579122985c7ee4542a02d3dab210fad93dd23"
+      },
+      "public_projection": {
+        "bytes": 231677,
+        "sha256": "430d97bebac597b5d46624a0291579122985c7ee4542a02d3dab210fad93dd23"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-19.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-19.png",
+        "bytes": 202651,
+        "sha256": "912c0167cdee3cbcec7afd518c9069adc4e0da955556588d73ef4a1080dc4356"
+      },
+      "public_projection": {
+        "bytes": 202651,
+        "sha256": "912c0167cdee3cbcec7afd518c9069adc4e0da955556588d73ef4a1080dc4356"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-20.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-20.png",
+        "bytes": 186119,
+        "sha256": "62f1f390e64988695b672f382672f0d5c9047c2e9d6587398f642049dd573a45"
+      },
+      "public_projection": {
+        "bytes": 186119,
+        "sha256": "62f1f390e64988695b672f382672f0d5c9047c2e9d6587398f642049dd573a45"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-21.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-21.png",
+        "bytes": 227427,
+        "sha256": "78ee5e552094aa92b84b048e6302a9d97d05860e2daea1de7345407c59b7f7e6"
+      },
+      "public_projection": {
+        "bytes": 227427,
+        "sha256": "78ee5e552094aa92b84b048e6302a9d97d05860e2daea1de7345407c59b7f7e6"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-22.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-22.png",
+        "bytes": 206310,
+        "sha256": "250f4a6b9fe58c6a7afcc9e4bea6e4b2b919f541ac98660adb6343bad9e8ad9f"
+      },
+      "public_projection": {
+        "bytes": 206310,
+        "sha256": "250f4a6b9fe58c6a7afcc9e4bea6e4b2b919f541ac98660adb6343bad9e8ad9f"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-23.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-23.png",
+        "bytes": 207653,
+        "sha256": "fc8d2d2922c2d3f7415d0fe93312748ec277303961619f920ec9bc24b41eb9c8"
+      },
+      "public_projection": {
+        "bytes": 207653,
+        "sha256": "fc8d2d2922c2d3f7415d0fe93312748ec277303961619f920ec9bc24b41eb9c8"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-24.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-24.png",
+        "bytes": 207038,
+        "sha256": "ff4e4041c95506b826e7b15960d4efaba1338ad244ab113d94c0839fbcef45b1"
+      },
+      "public_projection": {
+        "bytes": 207038,
+        "sha256": "ff4e4041c95506b826e7b15960d4efaba1338ad244ab113d94c0839fbcef45b1"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-25.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-25.png",
+        "bytes": 192733,
+        "sha256": "aa14691fd895369778be72a3085d046841dc320d7797bf907f6bbf31730f8d57"
+      },
+      "public_projection": {
+        "bytes": 192733,
+        "sha256": "aa14691fd895369778be72a3085d046841dc320d7797bf907f6bbf31730f8d57"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-26.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-26.png",
+        "bytes": 220982,
+        "sha256": "a7b8f2b539e30c66da9152e992500edfcd4ec7f05832838b4938ceb6539eb471"
+      },
+      "public_projection": {
+        "bytes": 220982,
+        "sha256": "a7b8f2b539e30c66da9152e992500edfcd4ec7f05832838b4938ceb6539eb471"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-27.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-27.png",
+        "bytes": 184192,
+        "sha256": "d7147b80217e8c8faca794a9d61f75f371d3343d5f650ff4d755ebc2ec4a64b1"
+      },
+      "public_projection": {
+        "bytes": 184192,
+        "sha256": "d7147b80217e8c8faca794a9d61f75f371d3343d5f650ff4d755ebc2ec4a64b1"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-28.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-28.png",
+        "bytes": 220393,
+        "sha256": "96272365d0f96155019437adc49f9108dc0a4db1d446af0218f2d3a04538f655"
+      },
+      "public_projection": {
+        "bytes": 220393,
+        "sha256": "96272365d0f96155019437adc49f9108dc0a4db1d446af0218f2d3a04538f655"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-29.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-29.png",
+        "bytes": 185630,
+        "sha256": "268f8eacc8a14e221d468f1e3b028c4a8f01c99e26d83932fc7cc906ca9cdd01"
+      },
+      "public_projection": {
+        "bytes": 185630,
+        "sha256": "268f8eacc8a14e221d468f1e3b028c4a8f01c99e26d83932fc7cc906ca9cdd01"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-30.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-30.png",
+        "bytes": 188370,
+        "sha256": "d0dabe0e1bff9bbf590023587c353fd39810722145d7d2a83d7f4161dbe588b7"
+      },
+      "public_projection": {
+        "bytes": 188370,
+        "sha256": "d0dabe0e1bff9bbf590023587c353fd39810722145d7d2a83d7f4161dbe588b7"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-31.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-31.png",
+        "bytes": 208536,
+        "sha256": "95f5e3c4e2dc41105981a716034d659f49bde2a38b7ac2e182f1aee0b90a578c"
+      },
+      "public_projection": {
+        "bytes": 208536,
+        "sha256": "95f5e3c4e2dc41105981a716034d659f49bde2a38b7ac2e182f1aee0b90a578c"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-32.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-32.png",
+        "bytes": 226336,
+        "sha256": "2a3d3051904ffebf166e8dcd9d05a5c06640e51111e40290ed4ff8b7858841f9"
+      },
+      "public_projection": {
+        "bytes": 226336,
+        "sha256": "2a3d3051904ffebf166e8dcd9d05a5c06640e51111e40290ed4ff8b7858841f9"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-33.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-33.png",
+        "bytes": 205160,
+        "sha256": "96845e7a68acf4ca3edf5a6278dfbcb700453125cf71351549fff9680c30fef9"
+      },
+      "public_projection": {
+        "bytes": 205160,
+        "sha256": "96845e7a68acf4ca3edf5a6278dfbcb700453125cf71351549fff9680c30fef9"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-34.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-34.png",
+        "bytes": 193151,
+        "sha256": "9c3e76bde0b044cf350c6713c945068771f012980cc3093d3f7a568fbf68e757"
+      },
+      "public_projection": {
+        "bytes": 193151,
+        "sha256": "9c3e76bde0b044cf350c6713c945068771f012980cc3093d3f7a568fbf68e757"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-35.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-35.png",
+        "bytes": 172599,
+        "sha256": "f79ec5cc91cc705c678fd3020631ca297e1146bc237c58bf1f4aa3358bff7c96"
+      },
+      "public_projection": {
+        "bytes": 172599,
+        "sha256": "f79ec5cc91cc705c678fd3020631ca297e1146bc237c58bf1f4aa3358bff7c96"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-36.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-36.png",
+        "bytes": 182313,
+        "sha256": "4daff7f78916646a3e65e7fbc6ea59eadfb0c6506a29bd46924aef739ccaac40"
+      },
+      "public_projection": {
+        "bytes": 182313,
+        "sha256": "4daff7f78916646a3e65e7fbc6ea59eadfb0c6506a29bd46924aef739ccaac40"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-37.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-37.png",
+        "bytes": 175996,
+        "sha256": "6dd86a03f5c139aa79c8be2ec3b6bf722131dff599b2e89cc5a8090ed0b7c95c"
+      },
+      "public_projection": {
+        "bytes": 175996,
+        "sha256": "6dd86a03f5c139aa79c8be2ec3b6bf722131dff599b2e89cc5a8090ed0b7c95c"
+      }
+    },
+    {
+      "path": "native-centre-review-v2/bulungan-centres-38.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-38.png",
+        "bytes": 49934,
+        "sha256": "9735db2d90b04e335a7ec9a12882249e2a82846bd61ed1cd3af2f9ab83a40da4"
+      },
+      "public_projection": {
+        "bytes": 49934,
+        "sha256": "9735db2d90b04e335a7ec9a12882249e2a82846bd61ed1cd3af2f9ab83a40da4"
+      }
+    },
+    {
+      "path": "native-detail-review/contact-inventory.json",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/contact-inventory.json",
+        "bytes": 316622,
+        "sha256": "0e53f3eae85005484bb7376f6ac9ee6a321bcf6d11b3c92159d6e39cac113e0a"
+      },
+      "public_projection": {
+        "bytes": 300102,
+        "sha256": "e4aa454adbc9fdb76ce7ed5805188a064e77bc1f762361145f0c05e32e7dc54c"
+      }
+    },
+    {
+      "path": "native-detail-review/bulungan-detail-01.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-01.png",
+        "bytes": 30626,
+        "sha256": "534475581a9ce00f331a427ab45a348deabad3ac8a5cdb15552f7e563a8eee52"
+      },
+      "public_projection": {
+        "bytes": 30626,
+        "sha256": "534475581a9ce00f331a427ab45a348deabad3ac8a5cdb15552f7e563a8eee52"
+      }
+    },
+    {
+      "path": "native-detail-review/bulungan-detail-02.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-02.png",
+        "bytes": 30285,
+        "sha256": "41a8714b660532af94cabb66da4fc6dcf4deffb02c48c579e491ad8d6aeb6e3a"
+      },
+      "public_projection": {
+        "bytes": 30285,
+        "sha256": "41a8714b660532af94cabb66da4fc6dcf4deffb02c48c579e491ad8d6aeb6e3a"
+      }
+    },
+    {
+      "path": "native-detail-review/bulungan-detail-03.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-03.png",
+        "bytes": 28983,
+        "sha256": "398b431f8d30182b8e112f8eacf26144a3230b5886c749e54da9424678718ef6"
+      },
+      "public_projection": {
+        "bytes": 28983,
+        "sha256": "398b431f8d30182b8e112f8eacf26144a3230b5886c749e54da9424678718ef6"
+      }
+    },
+    {
+      "path": "native-detail-review/bulungan-detail-04.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-04.png",
+        "bytes": 29667,
+        "sha256": "f32aa1e208137c64a078ed3fd926446e1521b7acd58dc7a8af10a6cc9118c780"
+      },
+      "public_projection": {
+        "bytes": 29667,
+        "sha256": "f32aa1e208137c64a078ed3fd926446e1521b7acd58dc7a8af10a6cc9118c780"
+      }
+    },
+    {
+      "path": "native-detail-review/bulungan-detail-05.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-05.png",
+        "bytes": 31726,
+        "sha256": "6a8265bddda3c86dc2cf941f2cbb5267f255f6db1f83fa716a13f53b600876db"
+      },
+      "public_projection": {
+        "bytes": 31726,
+        "sha256": "6a8265bddda3c86dc2cf941f2cbb5267f255f6db1f83fa716a13f53b600876db"
+      }
+    },
+    {
+      "path": "native-detail-review/bulungan-detail-06.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-06.png",
+        "bytes": 29093,
+        "sha256": "53f0fcc5bac24c7192f78e08d1fd064241998b0d2e624d0e3d458d913a70fdf9"
+      },
+      "public_projection": {
+        "bytes": 29093,
+        "sha256": "53f0fcc5bac24c7192f78e08d1fd064241998b0d2e624d0e3d458d913a70fdf9"
+      }
+    },
+    {
+      "path": "native-detail-review/bulungan-detail-07.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-07.png",
+        "bytes": 28851,
+        "sha256": "67f6eea8bf3138c8c044345ebe9b2bd4becbe08f78340e5794044a4efb7a0e30"
+      },
+      "public_projection": {
+        "bytes": 28851,
+        "sha256": "67f6eea8bf3138c8c044345ebe9b2bd4becbe08f78340e5794044a4efb7a0e30"
+      }
+    },
+    {
+      "path": "native-detail-review/bulungan-detail-08.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-08.png",
+        "bytes": 30367,
+        "sha256": "6d9a3cbbb34a897bee5f6f52d0e390f7c9fba6f41f3ac33712f0e1904a99bfe8"
+      },
+      "public_projection": {
+        "bytes": 30367,
+        "sha256": "6d9a3cbbb34a897bee5f6f52d0e390f7c9fba6f41f3ac33712f0e1904a99bfe8"
+      }
+    },
+    {
+      "path": "native-detail-review/bulungan-detail-09.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-09.png",
+        "bytes": 30259,
+        "sha256": "f9cc508f39964c85b76cf0dd761ee40358d0c5a360c4f3f9f69dd146892d10fc"
+      },
+      "public_projection": {
+        "bytes": 30259,
+        "sha256": "f9cc508f39964c85b76cf0dd761ee40358d0c5a360c4f3f9f69dd146892d10fc"
+      }
+    },
+    {
+      "path": "native-detail-review/bulungan-detail-10.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-10.png",
+        "bytes": 30729,
+        "sha256": "36b69fd376c2555224c12bd62ce54af77179fb19dc63a3df4d86d31af4ee859e"
+      },
+      "public_projection": {
+        "bytes": 30729,
+        "sha256": "36b69fd376c2555224c12bd62ce54af77179fb19dc63a3df4d86d31af4ee859e"
+      }
+    },
+    {
+      "path": "native-detail-review/bulungan-detail-11.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-11.png",
+        "bytes": 32787,
+        "sha256": "75278782191c88a072f5d39da0f7d74efbbf739dfe11f19fe0690c4b4a79dd0b"
+      },
+      "public_projection": {
+        "bytes": 32787,
+        "sha256": "75278782191c88a072f5d39da0f7d74efbbf739dfe11f19fe0690c4b4a79dd0b"
+      }
+    },
+    {
+      "path": "native-detail-review/bulungan-detail-12.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-12.png",
+        "bytes": 30213,
+        "sha256": "170d3f47df7fe7433dff7a71d194ee9383ce62f31d6ebe1ff05a3943ccead7b8"
+      },
+      "public_projection": {
+        "bytes": 30213,
+        "sha256": "170d3f47df7fe7433dff7a71d194ee9383ce62f31d6ebe1ff05a3943ccead7b8"
+      }
+    },
+    {
+      "path": "native-detail-review/bulungan-detail-13.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-13.png",
+        "bytes": 29189,
+        "sha256": "f87098be9dc1e23f1215a297121a9dff4cb698124e4466c1de5e7b8f6eec623c"
+      },
+      "public_projection": {
+        "bytes": 29189,
+        "sha256": "f87098be9dc1e23f1215a297121a9dff4cb698124e4466c1de5e7b8f6eec623c"
+      }
+    },
+    {
+      "path": "native-detail-review/bulungan-detail-14.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-14.png",
+        "bytes": 28323,
+        "sha256": "1f936e5c73102dc1816fe2222387cf57d006b9a840cf9dbdc096422aa6f3ea17"
+      },
+      "public_projection": {
+        "bytes": 28323,
+        "sha256": "1f936e5c73102dc1816fe2222387cf57d006b9a840cf9dbdc096422aa6f3ea17"
+      }
+    },
+    {
+      "path": "native-detail-review/bulungan-detail-15.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-15.png",
+        "bytes": 29430,
+        "sha256": "f9234b15ee20c0faf13f0eff95b6d87f18f2cc43e94ba51f0a4a497a714fe77f"
+      },
+      "public_projection": {
+        "bytes": 29430,
+        "sha256": "f9234b15ee20c0faf13f0eff95b6d87f18f2cc43e94ba51f0a4a497a714fe77f"
+      }
+    },
+    {
+      "path": "native-detail-review/bulungan-detail-16.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-16.png",
+        "bytes": 29761,
+        "sha256": "198aee26ec30646e5f754e87df3d93852a591dad420b6e46753e911eb524057f"
+      },
+      "public_projection": {
+        "bytes": 29761,
+        "sha256": "198aee26ec30646e5f754e87df3d93852a591dad420b6e46753e911eb524057f"
+      }
+    },
+    {
+      "path": "native-detail-review/bulungan-detail-17.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-17.png",
+        "bytes": 30182,
+        "sha256": "0eb8a2b142a1e01809288af241715dda0addd55ab21951375e3b9936e8f90213"
+      },
+      "public_projection": {
+        "bytes": 30182,
+        "sha256": "0eb8a2b142a1e01809288af241715dda0addd55ab21951375e3b9936e8f90213"
+      }
+    },
+    {
+      "path": "native-detail-review/bulungan-detail-18.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-18.png",
+        "bytes": 29746,
+        "sha256": "f380fcc7a0fdc5c4554b8c45323d55a2ae06123c17897ccbd988c6e670054015"
+      },
+      "public_projection": {
+        "bytes": 29746,
+        "sha256": "f380fcc7a0fdc5c4554b8c45323d55a2ae06123c17897ccbd988c6e670054015"
+      }
+    },
+    {
+      "path": "native-detail-review/bulungan-detail-19.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-19.png",
+        "bytes": 30598,
+        "sha256": "56626f495ce728948cbb892d89d7554fe7b03516ee9f9cdedabda72ebcdb47dc"
+      },
+      "public_projection": {
+        "bytes": 30598,
+        "sha256": "56626f495ce728948cbb892d89d7554fe7b03516ee9f9cdedabda72ebcdb47dc"
+      }
+    },
+    {
+      "path": "native-detail-review/bulungan-detail-20.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-20.png",
+        "bytes": 29617,
+        "sha256": "c61b535dd1d0525f683bba0eac2c2fbef84d93967b88d6536dfd3215adb02ab3"
+      },
+      "public_projection": {
+        "bytes": 29617,
+        "sha256": "c61b535dd1d0525f683bba0eac2c2fbef84d93967b88d6536dfd3215adb02ab3"
+      }
+    },
+    {
+      "path": "native-detail-review/bulungan-detail-21.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-21.png",
+        "bytes": 29132,
+        "sha256": "05ef0b909690fba3cf05bf653bd519be074cd79818a272b5d47a05b7feb90f71"
+      },
+      "public_projection": {
+        "bytes": 29132,
+        "sha256": "05ef0b909690fba3cf05bf653bd519be074cd79818a272b5d47a05b7feb90f71"
+      }
+    },
+    {
+      "path": "native-detail-review/bulungan-detail-22.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-22.png",
+        "bytes": 30418,
+        "sha256": "864b56c430ed3d6a9425aeca8884f5b832d7e882e9570122b859dd9f1512c584"
+      },
+      "public_projection": {
+        "bytes": 30418,
+        "sha256": "864b56c430ed3d6a9425aeca8884f5b832d7e882e9570122b859dd9f1512c584"
+      }
+    },
+    {
+      "path": "native-detail-review/bulungan-detail-23.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-23.png",
+        "bytes": 31106,
+        "sha256": "910e22e838a1f1da6b727f0370c2169ef9e7418c2c6c3f217a699aefee1347be"
+      },
+      "public_projection": {
+        "bytes": 31106,
+        "sha256": "910e22e838a1f1da6b727f0370c2169ef9e7418c2c6c3f217a699aefee1347be"
+      }
+    },
+    {
+      "path": "native-detail-review/bulungan-detail-24.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-24.png",
+        "bytes": 15654,
+        "sha256": "bed41a7fcb2e43820fbb9070ea7e54a45cafc04b513b7601458678347bfe0b0f"
+      },
+      "public_projection": {
+        "bytes": 15654,
+        "sha256": "bed41a7fcb2e43820fbb9070ea7e54a45cafc04b513b7601458678347bfe0b0f"
+      }
+    },
+    {
+      "path": "native-provisional-v-adverse-review/contact-inventory.json",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-provisional-v-adverse-review/contact-inventory.json",
+        "bytes": 47018,
+        "sha256": "26ffab4b5fcea2c6453d03f94d97ccc34904c3bd61ead39d9546c26dc833240e"
+      },
+      "public_projection": {
+        "bytes": 44548,
+        "sha256": "724f499182409cbfcbb8f3d718f75d9510c801b7b3439cb9f5975ac83532c9c3"
+      }
+    },
+    {
+      "path": "native-provisional-v-adverse-review/bulungan-adverse-01.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-provisional-v-adverse-review/bulungan-adverse-01.png",
+        "bytes": 29197,
+        "sha256": "25b4c3f55abe1cc1a7fb2d1a8cdd6c7f2dc3351bc8c60d343c55f17198c84c72"
+      },
+      "public_projection": {
+        "bytes": 29197,
+        "sha256": "25b4c3f55abe1cc1a7fb2d1a8cdd6c7f2dc3351bc8c60d343c55f17198c84c72"
+      }
+    },
+    {
+      "path": "native-provisional-v-adverse-review/bulungan-adverse-02.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-provisional-v-adverse-review/bulungan-adverse-02.png",
+        "bytes": 29902,
+        "sha256": "6b6af3d202bacbc977eb47f4e7d9bd27773b989227f1509875fe7e582f51b2e3"
+      },
+      "public_projection": {
+        "bytes": 29902,
+        "sha256": "6b6af3d202bacbc977eb47f4e7d9bd27773b989227f1509875fe7e582f51b2e3"
+      }
+    },
+    {
+      "path": "native-provisional-v-adverse-review/bulungan-adverse-03.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-provisional-v-adverse-review/bulungan-adverse-03.png",
+        "bytes": 28901,
+        "sha256": "36030b28ee8bcaee4b20080d42a96e4bd9321b24aece638cd88bc100cd534f33"
+      },
+      "public_projection": {
+        "bytes": 28901,
+        "sha256": "36030b28ee8bcaee4b20080d42a96e4bd9321b24aece638cd88bc100cd534f33"
+      }
+    },
+    {
+      "path": "native-provisional-v-adverse-review/bulungan-adverse-04.png",
+      "original_raw": {
+        "task_relative_path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-provisional-v-adverse-review/bulungan-adverse-04.png",
+        "bytes": 16644,
+        "sha256": "d181f2b7fa20eaab2f53b3ac75061eb81a61e6e3292eb42e4fe913c3e3d6793b"
+      },
+      "public_projection": {
+        "bytes": 16644,
+        "sha256": "d181f2b7fa20eaab2f53b3ac75061eb81a61e6e3292eb42e4fe913c3e3d6793b"
+      }
+    }
+  ]
+}

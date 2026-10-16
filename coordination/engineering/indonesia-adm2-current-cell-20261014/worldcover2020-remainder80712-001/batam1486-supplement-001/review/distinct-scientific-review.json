@@ -1,0 +1,392 @@
+{
+  "reviewer": "/root/cell_method_review",
+  "disposition": "PASS exact1180 visible-surface/source-body-location proposal with retained limits; NOT adopted",
+  "candidate": {
+    "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-followup-proposal-001/proposed-batam1486-dispositions.jsonl.gz",
+    "bytes": 308415,
+    "sha256": "0174e5faac81612a734c4027acf30a4ca1563bcdc18e781436cd8003498e5c82"
+  },
+  "original9332_proposal": {
+    "path": "idn-physical-largest-residuals-001/worker1-source/proposed-rgbnir-physical-location-dispositions.jsonl.gz",
+    "bytes": 1621733,
+    "sha256": "a1b0ddb5824a2533979dbc5185adcd7e8193555ad7e02fdf4489fa54f8be2705"
+  },
+  "keys": 1486,
+  "all_original_saved_source_row_facts_unchanged": true,
+  "saved_source_row_inputs": [
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E103/point-observations.jsonl",
+      "bytes": 690510,
+      "sha256": "ebf72b6f36715e3e33d65daf4261fc60239f109093f99c1ca7d237ea3f42df86"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E104/point-observations.jsonl",
+      "bytes": 3115387,
+      "sha256": "52c92205e452d3151a12f18ed0eaac9253de8796860da0e76cd0a3c6df5727bb"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E127/point-observations.jsonl",
+      "bytes": 736972,
+      "sha256": "fca781f175eb5019e3c24863468b5bc7a759e719d5e9ca23df28eecdf301f162"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N01E103/point-observations.jsonl",
+      "bytes": 2698548,
+      "sha256": "6438b11b4e3e58c972b8744d37d43718074ef37fc7c3c75a5baef346590bce7e"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N01E104/point-observations.jsonl",
+      "bytes": 807680,
+      "sha256": "0256dca57b90b02d0a0f908a1fcf2687b32adf75f13498d043483f853e215312"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N02E117/point-observations.jsonl",
+      "bytes": 1456055,
+      "sha256": "9acf3a1340b661772cad967e49aa92af55395d191d318f9a290e6ce5e2113584"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/point-observations.jsonl",
+      "bytes": 2855312,
+      "sha256": "12d23d1d554cc283c36b3785769690f57f3f428cfac0048d2c72d4fb0920ebaa"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/point-observations.jsonl",
+      "bytes": 4847092,
+      "sha256": "4c1e64b8caf49d444396c935716f48f46b6fd6bf00bd1c9b4d3d0f923389004b"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/point-observations.jsonl",
+      "bytes": 1479924,
+      "sha256": "ecd1862fb1b0c6e458b166d41bb92f00bdbfaf4107231e01a50f8b603bc45a45"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/point-observations.jsonl",
+      "bytes": 1833491,
+      "sha256": "f9ffea7a366775575a88542c7f6485327e0c268d3f8ed21b4acaab8a5bf00e4f"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E128/point-observations.jsonl",
+      "bytes": 2426711,
+      "sha256": "3b1b261702ff6d9222d1477886e90234286bf868639e4dcb9245e814a7ec353a"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/point-observations.jsonl",
+      "bytes": 12520680,
+      "sha256": "39e05ae5c1afee7d00eda9860e13abef913c41a9e4d5da3df9f0d14057cd3b34"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/point-observations.jsonl",
+      "bytes": 9341473,
+      "sha256": "0eea5062ffc913484e49dd9ac7eed2f88c2638c2455d3df34e304c61c6af9c0e"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S08E134/point-observations.jsonl",
+      "bytes": 769501,
+      "sha256": "a316c5cba154a1d39d0c6fe2022b667e565dd3e0ad6cf67bc271cec8444e34c0"
+    }
+  ],
+  "new_followup_field_only": true,
+  "proposed_positive_keys": 1180,
+  "retained_specific_unknowns": 306,
+  "water_proposals": 0,
+  "literal_owner": 22727,
+  "source_SID": 36442,
+  "positive_vs_prior_adopted98187_overlap": 0,
+  "potential_union_only_if_Root_adopts": 99367,
+  "potential_original_residual_only_if_Root_adopts": 34479,
+  "class_breakdown": {
+    "80 unresolved": 79,
+    "80 positive": 28,
+    "95 positive": 1014,
+    "10 positive": 106,
+    "10 unresolved": 22,
+    "95 unresolved": 190,
+    "50 positive": 2,
+    "50 unresolved": 5,
+    "60 unresolved": 9,
+    "90 positive": 3,
+    "60 positive": 19,
+    "40 positive": 1,
+    "30 positive": 5,
+    "20 positive": 2,
+    "30 unresolved": 1
+  },
+  "source_association_context_flags": {
+    "parent_context": 0,
+    "selected_portion": 1486,
+    "other_claims": 0
+  },
+  "actual_visual_review": {
+    "corrected_fractional_point_pages_viewed": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31
+    ],
+    "enlarged_adverse_sheets_viewed": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "adverse_points_total": 63,
+    "adverse_points_reserved": 60,
+    "retained_bare_or_built_point_indices": [
+      12191,
+      12683,
+      16462
+    ],
+    "concrete_reviewer_flagged_points_now_reserved": [
+      14386,
+      14523,
+      14546
+    ],
+    "point12566": "retained unresolved narrow levee/causeway intersection; neither pond-water nor reliable-ground answer"
+  },
+  "source_report": {
+    "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-source-observations.json",
+    "bytes": 113961,
+    "sha256": "da2c6ef6ee786541220486778bb74d428c794665d3582ae7d5bee2735205f5bd"
+  },
+  "final_manual_decisions": {
+    "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-followup-proposal-001/final-manual-decisions.json",
+    "bytes": 79334,
+    "sha256": "5b97a5b67b62c4e930e2cdece1a0eb30534361d311e3f279eafecdd68a8da521"
+  },
+  "actual_view_inventory": {
+    "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/contact-inventory.json",
+    "bytes": 1236256,
+    "sha256": "829bbb8e416c54100dc1b87cd709c5d08cb93f1d312ebddf5d75ff7572cb47ea"
+  },
+  "actual_adverse_view_inventory": {
+    "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/low-signal-triage-inventory.json",
+    "bytes": 51033,
+    "sha256": "4d9ec062ce4c6d7706a1bef301fa0bd9d07ed4c858e9798d7d958ae98d2cfc8f"
+  },
+  "view_whole_file_pins": [
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-01.png",
+      "bytes": 444437,
+      "sha256": "f90339f98a5055bd88abae9b9686517e08cf5fd859a6fdcc5288c7fc971418be"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-02.png",
+      "bytes": 472282,
+      "sha256": "85001978d297ea117886ac5cf87b5ee9fdf7d25a7a7824d5a4d2248e89d4c741"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-03.png",
+      "bytes": 481213,
+      "sha256": "560affb14d40224d7ee1c0b4cb7a606cb95b30315c903668c1320aaa113e58dd"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-04.png",
+      "bytes": 476777,
+      "sha256": "81e129052e57a0e790f229ba62e96cf12a28714418c5ec68213fea5033ef7e7c"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-05.png",
+      "bytes": 445268,
+      "sha256": "e7a94d1a661f51d46029270e9635977576ea3497193ff1e68319ad7be3f09500"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-06.png",
+      "bytes": 454171,
+      "sha256": "5f512f8c4f29909e7b22e55fce67c39176b4faf36fc8053ca1ffc1614335869f"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-07.png",
+      "bytes": 460397,
+      "sha256": "13cc208a01a904d78547c5fda8ed5c562cd09c07c4206b2f8f0c28f0a18509a5"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-08.png",
+      "bytes": 459103,
+      "sha256": "cc4eb33070018847743ba51948cc37dbf101fc6041c93377ea30def304f5039d"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-09.png",
+      "bytes": 505733,
+      "sha256": "76751b93232b4bd461a423dfd94286a25b65968ecf009932e00b372b982f5029"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-10.png",
+      "bytes": 457896,
+      "sha256": "3f948b0dfc558c25f3e29017ac9de907bfc90f484ba239609f78fb1c3035f489"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-11.png",
+      "bytes": 463040,
+      "sha256": "0c5211b4c39574addacec2b2de8160001e68c08728e292ca8ff8eff09b8b19eb"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-12.png",
+      "bytes": 436198,
+      "sha256": "d222874d4882efca30b74ce0b30cbe1f7386b31d160f8e0cec100413b185209b"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-13.png",
+      "bytes": 452648,
+      "sha256": "f415a6f1d7275fb30e4d88c8eb9bfa2980209559191e49f08a3b4b028c06778f"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-14.png",
+      "bytes": 465786,
+      "sha256": "2c26d5b0c46bd4f32357f12823deea8bf4b857950f8e0f06593f8a8fab8e2be7"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-15.png",
+      "bytes": 505712,
+      "sha256": "9f000a4e43942ccb832ae5f6ac14a958f4458f5e80fc8f283da662131bf5136f"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-16.png",
+      "bytes": 515658,
+      "sha256": "4e4e737db739a19c038cda244bd0f880edeca5c36e707fa09503992ed3712d68"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-17.png",
+      "bytes": 419561,
+      "sha256": "39d2fac2400eb6ed94dd5917cd015dfb6421aa4f625095d04b2d7b37d5a38b53"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-18.png",
+      "bytes": 474758,
+      "sha256": "c9a74f4eef700c0a9acaffc6b988daf28c4c2fc2deb46a73dfcb12082624edcd"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-19.png",
+      "bytes": 421445,
+      "sha256": "c0535ce905038918d04eae619583880f29868ce90d63d436d39a57582fac56f0"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-20.png",
+      "bytes": 425749,
+      "sha256": "e081ab47c54435c8052d134a1c6aa366df5e8e3c18d6c24ad14ad86522d24e29"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-21.png",
+      "bytes": 403884,
+      "sha256": "7db43262295f0d1adb7d594e6863fd1a66027e8081d8a2d43924127321fb5ada"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-22.png",
+      "bytes": 435675,
+      "sha256": "f18ca03cbd4b98dac7131d399f7cb1bfc555fb7999e9e6fed96386e668f0e3bb"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-23.png",
+      "bytes": 417919,
+      "sha256": "4aa044c6041511056ba7708339e65b1b74a42f586f5736038d57b1f5df1a83f8"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-24.png",
+      "bytes": 437720,
+      "sha256": "7df1619587b7ed89275e71a9b3293dbb2b5270a4cc32b5911e625222ed2b756a"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-25.png",
+      "bytes": 439413,
+      "sha256": "4685d6cc3216c73a65ef6c6814c3b16df61738ce468eb578b92235227d8dc136"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-26.png",
+      "bytes": 447304,
+      "sha256": "4a726fe92c3b21ee4ffb42c727cc7d0ce0e446920e78eb13de93d546abed917c"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-27.png",
+      "bytes": 444024,
+      "sha256": "c937da5ac3faeb6fd726fdabd80da4ae5ebbbbd3fdb1f7983860640b6dbc1ef7"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-28.png",
+      "bytes": 447403,
+      "sha256": "202cec1bbb12378e7ce7bcb9dceffc3614c69ae54fb0d8b597b2f917ef64eb83"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-29.png",
+      "bytes": 430413,
+      "sha256": "313524bdab6892a6f71ba809404679b958ca6112e840eb102cbcd47e1fd3f7db"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-30.png",
+      "bytes": 400357,
+      "sha256": "4f12089df2febd9233251326e21d8c8c07cb8134049dde7bc16e34251ac5c06c"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/batam-centres-31.png",
+      "bytes": 368185,
+      "sha256": "bb776542048b076062cb4f7bb74c61f210025622c785f5d549ff57bac6c80587"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/low-signal-triage-01.png",
+      "bytes": 50510,
+      "sha256": "87c329f1529b43b9051e512942136ab05fd58c9976e593108ce3b699104905a9"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/low-signal-triage-02.png",
+      "bytes": 52737,
+      "sha256": "3656d9eb40dcd3464ab807a7214fe2e53ab399737cffc8b0b1243c1eeb40e89c"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/low-signal-triage-03.png",
+      "bytes": 53726,
+      "sha256": "02469ef2dae1839a542d1e61dd37e5e5f151e4d67e8f5542f79f511601850539"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/low-signal-triage-04.png",
+      "bytes": 47700,
+      "sha256": "91324f7f056e78ae2a7a2f9e5ffaab53b77f066316aa386a2420405d1fd25b31"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/low-signal-triage-05.png",
+      "bytes": 49433,
+      "sha256": "d253b8bbafa183d208ee35be2de508508211e3deeb2a4005b649ece6dc3b1c00"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/batam1486-native-review-v2/low-signal-triage-06.png",
+      "bytes": 18781,
+      "sha256": "b50bd62542ee85e394e4b32d15ad5844a85135202f3cf16014c0fb15983bf3b1"
+    }
+  ],
+  "scientific_judgment": "Actual RGB morphology and NIR contrast locate the approved marked centres on coherent visible canopy/islet, built or exposed surfaces. The60 adverse exclusions retain actual shoreline/shadow/developed-water-edge ambiguity; no consequential positive counterexample found in the exact final group. Neighbour mixture and low-relative NIR alone are not classification rules.",
+  "limits": [
+    "Annual2020 median composite is not a dated ground-truth scene, tide stage or present condition.",
+    "Visible canopy/body is not proof of permanently dry soil or absence of understorey water; built/exposed morphology does not certify long-term dry substrate.",
+    "Exactsourceinterval/member association is not a fresh strict-interior proof or completion of selected geographic portion, parent/territorial or current-ownership questions.",
+    "v1 marker was at native pixel corner; correctedv2 fractional-point display is the reviewed basis. Original values/indices/coordinates remain immutable; no source pixel resampling or class rewrite.",
+    "Original306 unknowns and original Map label/model-disagreement context remain; no pond, shore, bank or water identity is invented.",
+    "No Root adoption, native-authority/owner-zero/repair acceptance or public publication by this reviewer."
+  ],
+  "source_or_native_predicate_calls": 0
+}

@@ -1,0 +1,625 @@
+{
+  "reviewer": "/root/cell_method_review",
+  "reviewed_utc": "2026-10-16T00:29:34.200207+00:00",
+  "disposition": "PASS exact763 bounded visible-surface/body-location proposals with retained limits; NOT adopted",
+  "candidate": {
+    "path": "idn-physical-largest-residuals-001/worker6-bulungan894/proposed-bulungan894-physical-location-dispositions.jsonl.gz",
+    "bytes": 231574,
+    "sha256": "7003e7e3e97c1217f0fb87ab726a4ac7684ddf70d49615aa050655421d716460"
+  },
+  "decoded_sha256": "13f2eceb1c8bd89ab453c8d9f6e0f48e4ab0951e5394697c2a4c3329f5230ffc",
+  "source_report": {
+    "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-source-observations.json",
+    "bytes": 113961,
+    "sha256": "da2c6ef6ee786541220486778bb74d428c794665d3582ae7d5bee2735205f5bd"
+  },
+  "source_observation_inputs": [
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E103/point-observations.jsonl",
+      "bytes": 690510,
+      "sha256": "ebf72b6f36715e3e33d65daf4261fc60239f109093f99c1ca7d237ea3f42df86"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E104/point-observations.jsonl",
+      "bytes": 3115387,
+      "sha256": "52c92205e452d3151a12f18ed0eaac9253de8796860da0e76cd0a3c6df5727bb"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E127/point-observations.jsonl",
+      "bytes": 736972,
+      "sha256": "fca781f175eb5019e3c24863468b5bc7a759e719d5e9ca23df28eecdf301f162"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N01E103/point-observations.jsonl",
+      "bytes": 2698548,
+      "sha256": "6438b11b4e3e58c972b8744d37d43718074ef37fc7c3c75a5baef346590bce7e"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N01E104/point-observations.jsonl",
+      "bytes": 807680,
+      "sha256": "0256dca57b90b02d0a0f908a1fcf2687b32adf75f13498d043483f853e215312"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N02E117/point-observations.jsonl",
+      "bytes": 1456055,
+      "sha256": "9acf3a1340b661772cad967e49aa92af55395d191d318f9a290e6ce5e2113584"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/point-observations.jsonl",
+      "bytes": 2855312,
+      "sha256": "12d23d1d554cc283c36b3785769690f57f3f428cfac0048d2c72d4fb0920ebaa"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/point-observations.jsonl",
+      "bytes": 4847092,
+      "sha256": "4c1e64b8caf49d444396c935716f48f46b6fd6bf00bd1c9b4d3d0f923389004b"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/point-observations.jsonl",
+      "bytes": 1479924,
+      "sha256": "ecd1862fb1b0c6e458b166d41bb92f00bdbfaf4107231e01a50f8b603bc45a45"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/point-observations.jsonl",
+      "bytes": 1833491,
+      "sha256": "f9ffea7a366775575a88542c7f6485327e0c268d3f8ed21b4acaab8a5bf00e4f"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E128/point-observations.jsonl",
+      "bytes": 2426711,
+      "sha256": "3b1b261702ff6d9222d1477886e90234286bf868639e4dcb9245e814a7ec353a"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/point-observations.jsonl",
+      "bytes": 12520680,
+      "sha256": "39e05ae5c1afee7d00eda9860e13abef913c41a9e4d5da3df9f0d14057cd3b34"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/point-observations.jsonl",
+      "bytes": 9341473,
+      "sha256": "0eea5062ffc913484e49dd9ac7eed2f88c2638c2455d3df34e304c61c6af9c0e"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S08E134/point-observations.jsonl",
+      "bytes": 769501,
+      "sha256": "a316c5cba154a1d39d0c6fe2022b667e565dd3e0ad6cf67bc271cec8444e34c0"
+    }
+  ],
+  "full_original_saved_source_rows": 894,
+  "literal_owner": 22698,
+  "literal_source_sid": 36336,
+  "source_scientific_facts_unchanged": true,
+  "original_edited_interpretation_fields": [
+    "actual_answer",
+    "authority_or_repair_credit",
+    "category",
+    "completed_question_credit_proposed",
+    "formal_broader_original_question_closure",
+    "proposed_bounded_answer",
+    "remaining_physical_question",
+    "separate_unadopted_questions"
+  ],
+  "new_proposal_metadata_fields": [
+    "actual_native_views",
+    "distinct_review",
+    "manual_visual_disposition",
+    "prior_residual_disposition",
+    "root_adoption",
+    "scientific_scope"
+  ],
+  "original_categorical_cover_and_coordinates_and_source_member_association_unchanged": true,
+  "prior_three_residual_decision_fields_retained_per_row": true,
+  "manual_counts": {
+    "V": 584,
+    "W": 110,
+    "L": 69,
+    "A": 131
+  },
+  "new_proposed_answers": 763,
+  "retained_specific_unknowns": 131,
+  "prior_known_adopted_keys": 99367,
+  "candidate_cohort_overlap_with_prior_adopted": 0,
+  "prospective_union_only_if_Root_adopts": 100130,
+  "prospective_residual_only_if_Root_adopts": 33716,
+  "class_breakdown": {
+    "95 V": 558,
+    "95 W": 74,
+    "60 L": 5,
+    "60 V": 2,
+    "30 A": 1,
+    "80 L": 15,
+    "95 A": 105,
+    "95 L": 49,
+    "80 A": 16,
+    "10 W": 1,
+    "90 W": 6,
+    "80 W": 28,
+    "90 A": 5,
+    "80 V": 13,
+    "10 V": 7,
+    "60 W": 1,
+    "40 V": 1,
+    "60 A": 1,
+    "10 A": 2,
+    "90 V": 1,
+    "40 A": 1,
+    "20 V": 1,
+    "30 V": 1
+  },
+  "source_context_flags": {
+    "parent_discrepancy_claims": 0,
+    "documented_selected_geographic_portion": 0,
+    "other_recorded_source_claims": 0
+  },
+  "actual_visual_review": {
+    "wide_pages_viewed": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38
+    ],
+    "detail_pages_viewed": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24
+    ],
+    "adverse_pages_viewed": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "adverse_provisional_V_cases": 41,
+    "adverse_reserved": 33,
+    "adverse_retain_V": [
+      4571,
+      4820,
+      5156,
+      5381,
+      5422
+    ],
+    "adverse_corrected_W": [
+      2639,
+      3469
+    ],
+    "adverse_corrected_L": [
+      8611
+    ],
+    "specific_reviewer_canopy_objection7233": "Reserved for muted pond-centre/body uncertainty, no spectrum-only classification.",
+    "2415": "Marked centre on coherent canopy strip; nearby water does not veto visible canopy/body observation.",
+    "5198": "Marked centre within rectilinear pond-water body; no river kind, tide, chemistry or permanence claim.",
+    "8611": "Native-scale narrow constructed/exposed corridor; exact water edge and registration explicitly unresolved."
+  },
+  "manual_inputs": [
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/manual-panel-decisions-first-pass.json",
+      "bytes": 3196,
+      "sha256": "03bcb2bb0af00cdb7f2941ad4b5685a22dfb6d1dc3850bbf55b4b4a2ab8fe290"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/manual-detail-decisions-final.json",
+      "bytes": 4432,
+      "sha256": "5999f0b0ad8a79b49029be3bbfd759ac79dd2a3c4b57b2d8eccd8b4a301c0e8f"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/manual-provisional-v-adverse-decisions.json",
+      "bytes": 582,
+      "sha256": "7a6a464b961cfa6fcc7d61682584b76c76a2913fb34cc4bc05c54cda538dbc01"
+    }
+  ],
+  "view_inventories": [
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/contact-inventory.json",
+      "bytes": 905158,
+      "sha256": "6ab6b2755b514b09c7b48da2b5ee1760bd8b2e2061444398d283d8f285efbb6b"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/contact-inventory.json",
+      "bytes": 316622,
+      "sha256": "0e53f3eae85005484bb7376f6ac9ee6a321bcf6d11b3c92159d6e39cac113e0a"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-provisional-v-adverse-review/contact-inventory.json",
+      "bytes": 47018,
+      "sha256": "26ffab4b5fcea2c6453d03f94d97ccc34904c3bd61ead39d9546c26dc833240e"
+    }
+  ],
+  "view_whole_file_pins": [
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-01.png",
+      "bytes": 225135,
+      "sha256": "90623056c9940d0b08719fa7e0696e78453061fe3e4de298c19241fb52c3f333"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-02.png",
+      "bytes": 211673,
+      "sha256": "5c612b30c6e0676d05955643e42e7a72494ba36269d082a5c5d48ecf5f4cad08"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-03.png",
+      "bytes": 186879,
+      "sha256": "1a21f6ff7005f05f03a5fb00d21569b9441b58b10de5efff73dd94e94683fa34"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-04.png",
+      "bytes": 168148,
+      "sha256": "d385e846bd3e4f47777aa2ba5b10bf9469d7a47ca5890f016afc906b42b0d65f"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-05.png",
+      "bytes": 124891,
+      "sha256": "34945512af04c5dc38f894613db222add60aea9fb77020493d82d8690798fabd"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-06.png",
+      "bytes": 197605,
+      "sha256": "1a0d939a484ef54fea4ddefe9e048027262b6d2185106795aa253acf8e681a5d"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-07.png",
+      "bytes": 220429,
+      "sha256": "6045d8bfce2336abeecabb144ded1302cdcc937f58efb031e5d7cda5e6dde7b1"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-08.png",
+      "bytes": 211027,
+      "sha256": "aec591a515fc44ca8c69b666358f15120bd0402d7e7df5cbf56b811e6de21479"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-09.png",
+      "bytes": 219445,
+      "sha256": "bb4521503b93e615fa99367e02e8d85c17c7fe9df3397978bf26fb197af71bcc"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-10.png",
+      "bytes": 203248,
+      "sha256": "fa58cb4ea3afdfc19d4f33f01622de07bfc30db7e03012ea0685c59fde90a447"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-11.png",
+      "bytes": 178403,
+      "sha256": "3c8dff4bed72fc49975f3f75040eaf328c7132019ce0ebe3c756c97dfd89bdb6"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-12.png",
+      "bytes": 204342,
+      "sha256": "d65a74d7f4b646a9c48ef357226bb34cfff56ea335bc43d8fda14c107ba9fb4e"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-13.png",
+      "bytes": 232722,
+      "sha256": "09415ba9be1032302324fe57371f9fd0c4c17862e141202df255fa62e71254b8"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-14.png",
+      "bytes": 250184,
+      "sha256": "ec2a8da474fc39389779dfdd8dc04f2055d960680fe500e472d2bd6c171a404a"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-15.png",
+      "bytes": 252054,
+      "sha256": "1420ab1e5f77d8438f0ba6e633511ac07c1021645448ff1a9781155f3b20fe29"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-16.png",
+      "bytes": 237569,
+      "sha256": "a809c2d7e8a1408a0cd8e440ca5fd006b60120263d96cdef659630faf4fc6a27"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-17.png",
+      "bytes": 244050,
+      "sha256": "f3220a7ab3ff4fe862c41b3580dbd237b92464bfd5b1f733236ee55c9f045ac7"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-18.png",
+      "bytes": 231677,
+      "sha256": "430d97bebac597b5d46624a0291579122985c7ee4542a02d3dab210fad93dd23"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-19.png",
+      "bytes": 202651,
+      "sha256": "912c0167cdee3cbcec7afd518c9069adc4e0da955556588d73ef4a1080dc4356"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-20.png",
+      "bytes": 186119,
+      "sha256": "62f1f390e64988695b672f382672f0d5c9047c2e9d6587398f642049dd573a45"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-21.png",
+      "bytes": 227427,
+      "sha256": "78ee5e552094aa92b84b048e6302a9d97d05860e2daea1de7345407c59b7f7e6"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-22.png",
+      "bytes": 206310,
+      "sha256": "250f4a6b9fe58c6a7afcc9e4bea6e4b2b919f541ac98660adb6343bad9e8ad9f"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-23.png",
+      "bytes": 207653,
+      "sha256": "fc8d2d2922c2d3f7415d0fe93312748ec277303961619f920ec9bc24b41eb9c8"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-24.png",
+      "bytes": 207038,
+      "sha256": "ff4e4041c95506b826e7b15960d4efaba1338ad244ab113d94c0839fbcef45b1"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-25.png",
+      "bytes": 192733,
+      "sha256": "aa14691fd895369778be72a3085d046841dc320d7797bf907f6bbf31730f8d57"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-26.png",
+      "bytes": 220982,
+      "sha256": "a7b8f2b539e30c66da9152e992500edfcd4ec7f05832838b4938ceb6539eb471"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-27.png",
+      "bytes": 184192,
+      "sha256": "d7147b80217e8c8faca794a9d61f75f371d3343d5f650ff4d755ebc2ec4a64b1"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-28.png",
+      "bytes": 220393,
+      "sha256": "96272365d0f96155019437adc49f9108dc0a4db1d446af0218f2d3a04538f655"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-29.png",
+      "bytes": 185630,
+      "sha256": "268f8eacc8a14e221d468f1e3b028c4a8f01c99e26d83932fc7cc906ca9cdd01"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-30.png",
+      "bytes": 188370,
+      "sha256": "d0dabe0e1bff9bbf590023587c353fd39810722145d7d2a83d7f4161dbe588b7"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-31.png",
+      "bytes": 208536,
+      "sha256": "95f5e3c4e2dc41105981a716034d659f49bde2a38b7ac2e182f1aee0b90a578c"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-32.png",
+      "bytes": 226336,
+      "sha256": "2a3d3051904ffebf166e8dcd9d05a5c06640e51111e40290ed4ff8b7858841f9"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-33.png",
+      "bytes": 205160,
+      "sha256": "96845e7a68acf4ca3edf5a6278dfbcb700453125cf71351549fff9680c30fef9"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-34.png",
+      "bytes": 193151,
+      "sha256": "9c3e76bde0b044cf350c6713c945068771f012980cc3093d3f7a568fbf68e757"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-35.png",
+      "bytes": 172599,
+      "sha256": "f79ec5cc91cc705c678fd3020631ca297e1146bc237c58bf1f4aa3358bff7c96"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-36.png",
+      "bytes": 182313,
+      "sha256": "4daff7f78916646a3e65e7fbc6ea59eadfb0c6506a29bd46924aef739ccaac40"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-37.png",
+      "bytes": 175996,
+      "sha256": "6dd86a03f5c139aa79c8be2ec3b6bf722131dff599b2e89cc5a8090ed0b7c95c"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-centre-review-v2/bulungan-centres-38.png",
+      "bytes": 49934,
+      "sha256": "9735db2d90b04e335a7ec9a12882249e2a82846bd61ed1cd3af2f9ab83a40da4"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-01.png",
+      "bytes": 30626,
+      "sha256": "534475581a9ce00f331a427ab45a348deabad3ac8a5cdb15552f7e563a8eee52"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-02.png",
+      "bytes": 30285,
+      "sha256": "41a8714b660532af94cabb66da4fc6dcf4deffb02c48c579e491ad8d6aeb6e3a"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-03.png",
+      "bytes": 28983,
+      "sha256": "398b431f8d30182b8e112f8eacf26144a3230b5886c749e54da9424678718ef6"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-04.png",
+      "bytes": 29667,
+      "sha256": "f32aa1e208137c64a078ed3fd926446e1521b7acd58dc7a8af10a6cc9118c780"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-05.png",
+      "bytes": 31726,
+      "sha256": "6a8265bddda3c86dc2cf941f2cbb5267f255f6db1f83fa716a13f53b600876db"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-06.png",
+      "bytes": 29093,
+      "sha256": "53f0fcc5bac24c7192f78e08d1fd064241998b0d2e624d0e3d458d913a70fdf9"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-07.png",
+      "bytes": 28851,
+      "sha256": "67f6eea8bf3138c8c044345ebe9b2bd4becbe08f78340e5794044a4efb7a0e30"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-08.png",
+      "bytes": 30367,
+      "sha256": "6d9a3cbbb34a897bee5f6f52d0e390f7c9fba6f41f3ac33712f0e1904a99bfe8"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-09.png",
+      "bytes": 30259,
+      "sha256": "f9cc508f39964c85b76cf0dd761ee40358d0c5a360c4f3f9f69dd146892d10fc"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-10.png",
+      "bytes": 30729,
+      "sha256": "36b69fd376c2555224c12bd62ce54af77179fb19dc63a3df4d86d31af4ee859e"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-11.png",
+      "bytes": 32787,
+      "sha256": "75278782191c88a072f5d39da0f7d74efbbf739dfe11f19fe0690c4b4a79dd0b"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-12.png",
+      "bytes": 30213,
+      "sha256": "170d3f47df7fe7433dff7a71d194ee9383ce62f31d6ebe1ff05a3943ccead7b8"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-13.png",
+      "bytes": 29189,
+      "sha256": "f87098be9dc1e23f1215a297121a9dff4cb698124e4466c1de5e7b8f6eec623c"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-14.png",
+      "bytes": 28323,
+      "sha256": "1f936e5c73102dc1816fe2222387cf57d006b9a840cf9dbdc096422aa6f3ea17"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-15.png",
+      "bytes": 29430,
+      "sha256": "f9234b15ee20c0faf13f0eff95b6d87f18f2cc43e94ba51f0a4a497a714fe77f"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-16.png",
+      "bytes": 29761,
+      "sha256": "198aee26ec30646e5f754e87df3d93852a591dad420b6e46753e911eb524057f"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-17.png",
+      "bytes": 30182,
+      "sha256": "0eb8a2b142a1e01809288af241715dda0addd55ab21951375e3b9936e8f90213"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-18.png",
+      "bytes": 29746,
+      "sha256": "f380fcc7a0fdc5c4554b8c45323d55a2ae06123c17897ccbd988c6e670054015"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-19.png",
+      "bytes": 30598,
+      "sha256": "56626f495ce728948cbb892d89d7554fe7b03516ee9f9cdedabda72ebcdb47dc"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-20.png",
+      "bytes": 29617,
+      "sha256": "c61b535dd1d0525f683bba0eac2c2fbef84d93967b88d6536dfd3215adb02ab3"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-21.png",
+      "bytes": 29132,
+      "sha256": "05ef0b909690fba3cf05bf653bd519be074cd79818a272b5d47a05b7feb90f71"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-22.png",
+      "bytes": 30418,
+      "sha256": "864b56c430ed3d6a9425aeca8884f5b832d7e882e9570122b859dd9f1512c584"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-23.png",
+      "bytes": 31106,
+      "sha256": "910e22e838a1f1da6b727f0370c2169ef9e7418c2c6c3f217a699aefee1347be"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-detail-review/bulungan-detail-24.png",
+      "bytes": 15654,
+      "sha256": "bed41a7fcb2e43820fbb9070ea7e54a45cafc04b513b7601458678347bfe0b0f"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-provisional-v-adverse-review/bulungan-adverse-01.png",
+      "bytes": 29197,
+      "sha256": "25b4c3f55abe1cc1a7fb2d1a8cdd6c7f2dc3351bc8c60d343c55f17198c84c72"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-provisional-v-adverse-review/bulungan-adverse-02.png",
+      "bytes": 29902,
+      "sha256": "6b6af3d202bacbc977eb47f4e7d9bd27773b989227f1509875fe7e582f51b2e3"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-provisional-v-adverse-review/bulungan-adverse-03.png",
+      "bytes": 28901,
+      "sha256": "36030b28ee8bcaee4b20080d42a96e4bd9321b24aece638cd88bc100cd534f33"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-bulungan894/native-provisional-v-adverse-review/bulungan-adverse-04.png",
+      "bytes": 16644,
+      "sha256": "d181f2b7fa20eaab2f53b3ac75061eb81a61e6e3292eb42e4fe913c3e3d6793b"
+    }
+  ],
+  "scientific_judgment": "No remaining consequential positive counterexample identified in exact final candidate. Actual RGB morphology and NIR spatial context support the bounded visible canopy, exposed/constructed or pond/channel/river-water body placement; low signal and neighbour mixture are not standalone classification rules. Specific ambiguous pond-floor/fringe/wetness centres remain held.",
+  "limits": [
+    "Annual2020 composite is an annual median model of visible reflectance, not a single dated scene, exact tide, permanence or present-day truth.",
+    "Canopy observation does not establish permanently dry underlying soil or absence of inundation. Exposed/constructed morphology does not certify permanent dry substrate, material or surveyed banks.",
+    "Pond/channel/river-body water-like appearance does not select hydrologic kind, named river association or jurisdiction.",
+    "Original source interval/member association remains; no fresh strict-interior or selected geographic portion, parent, territorial, ownership or native repair proof.",
+    "All131 unknowns remain; original categorical model observations and other original holds preserved.",
+    "763 is a proposal pending explicit Root adoption. No native-authority, accepted map-cell or repair credit.",
+    "Known reconciled original133846 accounting only; no global historical unanswered-count claim."
+  ],
+  "no_source_native_or_predicate_replay": true
+}
