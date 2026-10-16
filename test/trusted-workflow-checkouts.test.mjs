@@ -11,17 +11,18 @@ const workflows = ['issue-claims.yml', 'worker-merge.yml'];
 
 // Reproduce each declared sparse tree, including cone-mode root files. Load
 // trusted modules without executing workflow entrypoints or contacting GitHub.
-function probe(directories, {geography = false, checkoutTests = false} = {}) {
+function probe(directories, {geography = false, sourceRoot = root, check} = {}) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'worldatlas-checkout-'));
   try {
-    fs.copyFileSync(path.join(root, 'package.json'), path.join(directory, 'package.json'));
+    fs.copyFileSync(path.join(sourceRoot, 'package.json'), path.join(directory, 'package.json'));
     for (const relative of directories) {
-      const source = path.join(root, relative);
+      const source = path.join(sourceRoot, relative);
       const destination = path.join(directory, relative);
       fs.mkdirSync(path.dirname(destination), {recursive: true});
       fs.cpSync(source, destination, {recursive: true});
     }
-    return spawnSync(process.execPath, checkoutTests ? ['--test', '--test-concurrency=1', '--test-name-pattern', 'actual sparse declarations include trusted module dependencies', 'test/trusted-workflow-checkouts.test.mjs'] : ['--input-type=module', '-e',
+    if (check) return check(directory);
+    return spawnSync(process.execPath, ['--input-type=module', '-e',
       "await import('./scripts/issue-claim-contract.mjs'); await import('./scripts/research-import-gate.mjs'); await import('./scripts/premerge-evidence.mjs');" +
       (geography ? "await import('./scripts/check-effective-geographic-regression.mjs'); await import('./coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs'); console.log('complete trusted geography closure imported');" : '')],
     {cwd: directory, encoding: 'utf8', env: {PATH: process.env.PATH}});
@@ -45,19 +46,6 @@ test('negative control: old geographic sparse tree omits mandatory coordinator b
   assert.match(result.stderr, /ERR_MODULE_NOT_FOUND/);
   assert.match(result.stderr, /selected-geography-effective-prevention-20261009/);
 });
-
-for (const workflow of workflows) {
-  test(`${workflow}: actual sparse declarations include trusted module dependencies`, () => {
-    const source = fs.readFileSync(path.join(root, '.github/workflows', workflow), 'utf8');
-    const blocks = [...source.matchAll(/^          sparse-checkout: \|\n((?:            .+\n)+)/gm)];
-    assert.ok(blocks.length > 0, 'expected explicit sparse checkout declarations');
-    for (const block of blocks) {
-      const directories = block[1].trim().split('\n').map(row => row.trim());
-      const result = probe(directories);
-      assert.equal(result.status, 0, result.stderr);
-    }
-  });
-}
 
 test('negative control: old scripts-only tree cannot load relocated regional gate', () => {
   const result = probe(['scripts', '.github']);
@@ -90,26 +78,6 @@ test('sparse candidate still detects changes and rename sources outside the work
     assert.throws(() => checkGitScope({branch: 'research/example', base, run}), /Research changes/);
   } finally { fs.rmSync(directory, {recursive: true, force: true}); }
 });
-
-
-for (const [workflow, expected] of [['worker-merge.yml', 1]]) {
-  test(`${workflow}: immutable normal routes build Cloudflare and retain the separate Site gate`, () => {
-    const source = fs.readFileSync(path.join(root, '.github/workflows', workflow), 'utf8');
-    const routes = [...source.matchAll(/^        run: (npm run build:cloudflare)$/gm)];
-    assert.equal(routes.length, expected, 'all actual package/shard routes must be covered');
-    assert.doesNotMatch(source, /WORLDATLAS_PACKAGE_PROFILE|run: npm run build:hosted/);
-    const site = fs.readFileSync(path.join(root, '.github/workflows/deployment-budget.yml'), 'utf8');
-    assert.match(site, /run: npm run build:hosted/);
-    const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'worldatlas-package-routing-'));
-    try {
-      fs.writeFileSync(path.join(directory, 'npm'), '#!/bin/sh\nprintf "%s\\n" "$*"\n', {mode: 0o755});
-      for (const route of routes) {
-        const result = spawnSync('/bin/bash', ['-c', route[1]], {encoding: 'utf8', env: {PATH: directory, WORLDATLAS_PACKAGE_PROFILE: 'foreign'}});
-        assert.equal(result.status, 0, result.stderr);assert.equal(result.stdout.trim(), 'run build:cloudflare');
-      }
-    } finally { fs.rmSync(directory, {recursive: true, force: true}); }
-  });
-}
 
 
 // Read the actual workflow declarations and shell bodies. These bounded controls
@@ -150,6 +118,8 @@ function packageStep(job,name){const found=job.steps.filter(step=>step.name===na
 
 test('normal package workflow closes full, shard and assembly branches without historical readback', () => {
  const {source,integration}=queueWorkflow();
+ assert.equal([...source.matchAll(/^        run: npm run build:cloudflare$/gm)].length,1);
+ assert.doesNotMatch(source,/WORLDATLAS_PACKAGE_PROFILE|run: npm run build:hosted/);
  assert.doesNotMatch(source,/Read back qualified native build outputs|native-normal-built-output\.json|--built-output-readback/);
  const names=['Snapshot original final-worker package inputs',
   'Build the combined application once before asset-dependent tests',
@@ -197,7 +167,7 @@ fs.appendFileSync(process.env.FIXTURE_CALLS,JSON.stringify(call)+'\\n');
    const effective=branch.assembled==='true'?'selected-output':branch.selection;
    for(const step of routes.filter(step=>workflowCondition(step.condition,context))){
     const result=spawnSync('/bin/bash',['-e','-o','pipefail','-c',step.run],{cwd:directory,encoding:'utf8',
-     env:{PATH:directory,INTEGRATION_PROFILE:'full',INTEGRATION_SHARD:String(branch.shard),
+     env:{PATH:directory,WORLDATLAS_PACKAGE_PROFILE:'foreign',INTEGRATION_PROFILE:'full',INTEGRATION_SHARD:String(branch.shard),
       INTEGRATION_TEST_SELECTION:effective,SELECTED_EXPECTATIONS_PATH:'current-expectations.json',FIXTURE_CALLS:calls}});
     assert.equal(result.status,0,step.name+': '+result.stderr);
    }
@@ -272,17 +242,29 @@ test('full-checkout canonical verification executes against real Git and refuses
   }
 });
 
-test('queue focused candidate includes the inputs of its nested actual-checkout probes', () => {
+test('queue focused candidate supports every distinct trusted sparse checkout', () => {
   const source = fs.readFileSync(path.join(root, '.github/workflows/worker-merge.yml'), 'utf8');
   const candidate = source.match(/- name: Checkout only focused-test inputs for evidence regression[\s\S]*?sparse-checkout: \|\n((?:            .+\n)+)/);
   assert.ok(candidate, 'actual focused queue checkout must be declared');
   const directories = candidate[1].trim().split('\n').map(row => row.trim());
-  const result = probe(directories, {checkoutTests: true});
-  assert.equal(result.status, 0, result.stdout + result.stderr);
-  const missing = probe(directories.filter(row => !row.includes('selected-checkpoint-reuse-20261012')), {checkoutTests: true});
-  assert.notEqual(missing.status, 0);
-  assert.match(missing.stdout + missing.stderr, /ENOENT/);
-  assert.match(missing.stdout + missing.stderr, /selected-checkpoint-reuse-20261012/);
+  // Run each distinct declared module closure once, using the focused candidate
+  // as its source tree. Missing nested fixtures still fail before imports.
+  const check = sourceRoot => {
+    const trees = new Set();
+    for (const workflow of workflows) {
+      const source = fs.readFileSync(path.join(sourceRoot, '.github/workflows', workflow), 'utf8');
+      const blocks = [...source.matchAll(/^          sparse-checkout: \|\n((?:            .+\n)+)/gm)];
+      assert.ok(blocks.length > 0, 'expected explicit sparse checkout declarations');
+      for (const block of blocks) trees.add(block[1]);
+    }
+    for (const tree of trees) {
+      const result = probe(tree.trim().split('\n').map(row => row.trim()), {sourceRoot});
+      assert.equal(result.status, 0, result.stderr);
+    }
+  };
+  assert.doesNotThrow(() => probe(directories, {check}));
+  assert.throws(() => probe(directories.filter(row => !row.includes('selected-checkpoint-reuse-20261012')),
+    {check}), /ENOENT.*selected-checkpoint-reuse-20261012/);
 });
 
 
