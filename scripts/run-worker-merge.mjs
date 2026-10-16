@@ -39,6 +39,8 @@ try {
       geographyReportLoader: ({api: reportAPI = api} = {}) => loadGeographicReport({api: reportAPI, repo,
         runId: process.env.GITHUB_RUN_ID,
         fresh: {run_attempt: Number(process.env.GITHUB_RUN_ATTEMPT),
+          artifact_id: Number(process.env.GEOGRAPHY_ARTIFACT_ID), artifact_digest: process.env.GEOGRAPHY_ARTIFACT_DIGEST,
+          report_bytes: Number(process.env.GEOGRAPHY_REPORT_BYTES),
           workflow_head: process.env.GITHUB_SHA, head: input.expected_head, baseline: process.env.TESTED_BASE,
           candidate_commit: process.env.TESTED_CANDIDATE, request_id: input.request_id},
         artifactName: process.env.GEOGRAPHY_ARTIFACT_NAME,
