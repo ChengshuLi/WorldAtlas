@@ -231,8 +231,8 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     const readRow = async (row, retain = true) => {
       needSelected(ordinary(row), 'missing ordinary role');
       if (!cache.has(row.sha)) {
-        // All required metadata shares this read cache. Supporting evidence
-        // is checked one complete member at a time and never accumulates here.
+        // Required metadata shares this read cache. Explicit transient roles
+        // are checked one complete member at a time without accumulating here.
         const blob = await api(`/repos/${repo}/git/blobs/${row.sha}`, 'GET', undefined, {retainImmutableBlob: retain, expectedImmutableBytes: row.size});
         needSelected(blob.encoding === 'base64' && typeof blob.content === 'string', 'missing blob bytes');
         const bytes = Buffer.from(blob.content, 'base64');
