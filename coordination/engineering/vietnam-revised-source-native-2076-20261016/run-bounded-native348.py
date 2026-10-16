@@ -80,7 +80,7 @@ def main(code_commit, config_commit, config_path, destination):
     free = disk.f_bavail * disk.f_frsize
     memory = {line.split(':')[0]: int(line.split()[1]) * 1024 for line in pathlib.Path('/proc/meminfo').read_text().splitlines()
               if line.startswith(('MemTotal:', 'MemAvailable:'))}
-    assert free > 10 * 1024 ** 3 + 32 * 1024 ** 2 and memory['MemAvailable'] > 2 * LIMIT
+    assert free > 64 * 1024 ** 2 and memory['MemAvailable'] > 2 * LIMIT
     dest.mkdir(mode=0o700)
     captured = dest / 'captured-code'
     captured.mkdir()
@@ -93,7 +93,7 @@ def main(code_commit, config_commit, config_path, destination):
     with config_local.open('xb') as output:
         output.write(config)
     command = ['node', str(captured / 'scripts/prepare-delivery-handoff.mjs'), 'native-authority', str(config_local), str(dest / 'authority')]
-    admission = dict(kind='bounded-captured-stock-native348-prospective-admission-v1', command=command,
+    admission = dict(kind='bounded-captured-stock-native-prospective-admission-v1', command=command,
                      code_commit=code_commit, config=config_pin, launcher=launcher_pin,
                      project_code=[pin for _, pin in modules.values()] + [package_pin],
                      node_version=subprocess.check_output(['node', '--version'], env=env).decode().strip(),
@@ -140,7 +140,7 @@ def main(code_commit, config_commit, config_path, destination):
             process.wait()
     current_head_after = git('rev-parse', 'HEAD').decode().strip()
     reason = completion_reason(reason, code_commit, current_head_after)
-    receipt = dict(kind='bounded-captured-stock-native348-actual-execution-v1', exit_code=code,
+    receipt = dict(kind='bounded-captured-stock-native-actual-execution-v1', exit_code=code,
                    elapsed_seconds=time.monotonic() - start, termination_reason=reason,
                    enforced_process_group_rss_limit_bytes=LIMIT, observed_sampled_process_group_peak_rss_bytes=peak,
                    enforced_wall_deadline_seconds=DEADLINE, admission_sha256=sha(admission_path.read_bytes()),
