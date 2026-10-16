@@ -1,0 +1,806 @@
+{
+  "kind": "Independent official whole-city source and first physical input review; no producer run",
+  "conclusion": "Supports FIRST whole-new-official-city source-relative physical observation at documented nominal coordinates; no conversion edge certainty, migration validation or revised native admission",
+  "reviewed_stage": {
+    "path": "bulk-completion/qijin12-first-official-physical-001/whole-new-official-city-stage-inputs.json",
+    "bytes": 1901913,
+    "sha256": "006bd83567f353c41efe6419f2925aa0dd842943ba577f8776df3f96fc981ed8"
+  },
+  "literal_sources": [
+    {
+      "source_id": "NLSC:TOWN_MOI_1120317:64000100",
+      "actual_dbf_record_0based": 319,
+      "actual_identity_attributes": {
+        "TOWNID": "E10",
+        "TOWNCODE": "64000100",
+        "COUNTYNAME": "高雄市",
+        "TOWNNAME": "旗津區",
+        "TOWNENG": "Qijin District",
+        "COUNTYID": "E",
+        "COUNTYCODE": "64000"
+      },
+      "literal_complete_rings": 17,
+      "literal_point_count": 6246,
+      "all_exterior_clockwise_rings": true,
+      "all_literal_rings_and_points_preserved_exactly": true,
+      "archive_components_equal_retained_originals": true,
+      "geometry_valid": true,
+      "actual_crs_authority": [
+        "EPSG",
+        "3824"
+      ],
+      "operation_noop": true,
+      "reported_operation_accuracy_m": 1.0,
+      "operation_area": {
+        "name": "Taiwan, Republic of China - onshore and offshore - Taiwan Island, Penghu (Pescadores) Islands.",
+        "west": 114.32,
+        "south": 17.36,
+        "east": 123.61,
+        "north": 26.96
+      },
+      "numeric_coordinates_unchanged": true
+    },
+    {
+      "source_id": "NLSC:COUNTY_MOI_1090820:64000",
+      "actual_dbf_record_0based": 15,
+      "actual_identity_attributes": {
+        "COUNTYID": "E",
+        "COUNTYCODE": "64000",
+        "COUNTYNAME": "高雄市",
+        "COUNTYENG": "Kaohsiung City"
+      },
+      "literal_complete_rings": 17,
+      "literal_point_count": 18202,
+      "all_exterior_clockwise_rings": true,
+      "all_literal_rings_and_points_preserved_exactly": true,
+      "archive_components_equal_retained_originals": true,
+      "geometry_valid": true,
+      "actual_crs_authority": [
+        "EPSG",
+        "3824"
+      ],
+      "operation_noop": true,
+      "reported_operation_accuracy_m": 1.0,
+      "operation_area": {
+        "name": "Taiwan, Republic of China - onshore and offshore - Taiwan Island, Penghu (Pescadores) Islands.",
+        "west": 114.32,
+        "south": 17.36,
+        "east": 123.61,
+        "north": 26.96
+      },
+      "numeric_coordinates_unchanged": true
+    }
+  ],
+  "source_purpose": "Official municipal/district administrative reference basemap; XML scale5000 and local-government confirmation/update process; not dated physical dryness or exclusive international title",
+  "source_versions": {
+    "township_xml": "2023-03-13",
+    "township_filename": "1120317",
+    "county_xml_and_filename": "2020-08-20",
+    "mirror_listing_date_not_geometry_vintage": "2025-11-18"
+  },
+  "license": "Official dataset7441 page explicitly Government Data Open Licensev1; archive XML expressly allows public browsing/download",
+  "license_page_pin": {
+    "path": "bulk-completion/territorial51-official-geometry-source-001/twn-dataset7441.html",
+    "bytes": 531889,
+    "sha256": "e3c31048c42564d6599db70615649dd1382edb30702fa71e9ec4870744a72455"
+  },
+  "verified_source_pins": [
+    {
+      "path": "bulk-completion/territorial51-official-geometry-source-001/nlsc-townships.zip",
+      "bytes": 12756907,
+      "sha256": "e028e5a750eee48cf7913330655e5e5c5bb1f176868fbd0afdfc661fca60557c"
+    },
+    {
+      "path": "bulk-completion/territorial51-official-geometry-source-001/nlsc-counties.zip",
+      "bytes": 3708666,
+      "sha256": "0c6fca34a92b92ef3e9a41957e403cb89e814bb64942ca7c7e51c746f913d49d"
+    },
+    {
+      "path": "bulk-completion/territorial51-official-geometry-source-001/twn-dataset7441.json",
+      "bytes": 2587,
+      "sha256": "bf4522b054569efad85d9251f57c4799285b626cb27f5a022e6ed3661d21d9ec"
+    },
+    {
+      "path": "bulk-completion/territorial51-official-geometry-source-001/twn-dataset7442.json",
+      "bytes": 3631,
+      "sha256": "f2b7cc0e41cb689ef6d941840bed3355de18f67147e2324af3bcac11976a55cc"
+    },
+    {
+      "path": "bulk-completion/territorial51-official-geometry-source-001/nlsc-download.html",
+      "bytes": 58727,
+      "sha256": "54f05a49994988c0db877e328e352951381dbec0efa0f7799434f2cb71329591"
+    },
+    {
+      "path": "bulk-completion/territorial51-official-geometry-source-001/official-cijin-original-rings.json",
+      "bytes": 451256,
+      "sha256": "f3752989d4e223606c0ab46f9ba23b5ca906889824035997e9fc4a27dcdd4874"
+    },
+    {
+      "path": "bulk-completion/territorial51-official-geometry-source-001/official-kaohsiung-original-rings.json",
+      "bytes": 709811,
+      "sha256": "f22d7f91cd06b2f9a92ab13f36fb5c8e5312184a84da42ad22347e6b13b73a5c"
+    },
+    {
+      "path": "bulk-completion/territorial51-official-geometry-source-001/nlsc-townships-original/TOWN_MOI_1120317.dbf",
+      "bytes": 35218,
+      "sha256": "61b998fbe2308ab9e41e0c7d2c85fae336ee7a0d11113adad29a9ba63cab99a6"
+    },
+    {
+      "path": "bulk-completion/territorial51-official-geometry-source-001/nlsc-townships-original/TOWN_MOI_1120317.prj",
+      "bytes": 148,
+      "sha256": "19bdad19fae40d895303a3ae7948ee1f8ee820488de97c7309a0a639da363ed4"
+    },
+    {
+      "path": "bulk-completion/territorial51-official-geometry-source-001/nlsc-townships-original/TOWN_MOI_1120317.shp",
+      "bytes": 18196500,
+      "sha256": "46ed31c1bd1ab963c34c068fcb82593506d0dfcf6ddd367198213fc4c47aca3a"
+    },
+    {
+      "path": "bulk-completion/territorial51-official-geometry-source-001/nlsc-townships-original/TOWN_MOI_1120317.shx",
+      "bytes": 3044,
+      "sha256": "ee93fddd41225d554535537cb0d58e2720ad0ba21ad317bb574ff3eebcf3a4a9"
+    },
+    {
+      "path": "bulk-completion/territorial51-official-geometry-source-001/nlsc-townships-original/TW-07-301000100G-614001.xml",
+      "bytes": 30695,
+      "sha256": "68c931edfe3e909a45ab4bd967da1afbc288bd79247262df4555e69cc9b46f9f"
+    },
+    {
+      "path": "bulk-completion/territorial51-official-geometry-source-001/nlsc-townships-original/Town_Majia_Sanhe.dbf",
+      "bytes": 353,
+      "sha256": "55e33952798235492a785a21b3a06e7365e5eb9417d6897062bae8affd04b132"
+    },
+    {
+      "path": "bulk-completion/territorial51-official-geometry-source-001/nlsc-townships-original/Town_Majia_Sanhe.prj",
+      "bytes": 148,
+      "sha256": "19bdad19fae40d895303a3ae7948ee1f8ee820488de97c7309a0a639da363ed4"
+    },
+    {
+      "path": "bulk-completion/territorial51-official-geometry-source-001/nlsc-townships-original/Town_Majia_Sanhe.shp",
+      "bytes": 46432,
+      "sha256": "17860cf05759054427c7f0b168929665563c06224287123a891b178cdaf741c6"
+    },
+    {
+      "path": "bulk-completion/territorial51-official-geometry-source-001/nlsc-townships-original/Town_Majia_Sanhe.shx",
+      "bytes": 108,
+      "sha256": "8f79077dc9e8450dd2c21a3bc0e3220692145384fa8db7e222c43bb4a570917c"
+    },
+    {
+      "path": "bulk-completion/territorial51-official-geometry-source-001/nlsc-counties-original/COUNTY_MOI_1090820.CPG",
+      "bytes": 5,
+      "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+    },
+    {
+      "path": "bulk-completion/territorial51-official-geometry-source-001/nlsc-counties-original/COUNTY_MOI_1090820.dbf",
+      "bytes": 1548,
+      "sha256": "7ba9e32f952ffdcf402931b02f6aa96f6029ec89353aa796f6fc4d9683c69912"
+    },
+    {
+      "path": "bulk-completion/territorial51-official-geometry-source-001/nlsc-counties-original/COUNTY_MOI_1090820.prj",
+      "bytes": 145,
+      "sha256": "f815d4e338f26bf3ca4c8418fc06489078748bd1154e9505c4f781d84ac500f0"
+    },
+    {
+      "path": "bulk-completion/territorial51-official-geometry-source-001/nlsc-counties-original/COUNTY_MOI_1090820.shp",
+      "bytes": 5258544,
+      "sha256": "f534543bc2e5f11bce439d76ab0ed0fde760ca50cf118e0c08fa1ab94ef396f7"
+    },
+    {
+      "path": "bulk-completion/territorial51-official-geometry-source-001/nlsc-counties-original/COUNTY_MOI_1090820.shx",
+      "bytes": 276,
+      "sha256": "19f89714b50dce8867532658f7011b411aa26d3757aaffc63d4a65f96b698b1a"
+    },
+    {
+      "path": "bulk-completion/territorial51-official-geometry-source-001/nlsc-counties-original/TW-01-301000100G-000017.xml",
+      "bytes": 27912,
+      "sha256": "6933aae21c7921a4e02cf3689a36995d570787489ef877f4c570872070d865cf"
+    },
+    {
+      "path": "bulk-completion/territorial102-global-existing-location/cijin-geography.html",
+      "bytes": 163522,
+      "sha256": "d2375aff263def32bfdeb841ead16a8015ccc9925a4eaf01f3c9eb6d357f5f2f"
+    },
+    {
+      "path": "bulk-completion/territorial102-global-existing-location/kalayaan-profile.html",
+      "bytes": 21244,
+      "sha256": "64f1d94ac96ac868fbb09e56dc5db8bcac24691d9dd2eacc0b9622d70b3a9fbf"
+    }
+  ],
+  "accepted_before_part": {
+    "path": "bulk-completion/territorial102-global-existing-location/accepted89ff-part-29-api.bin",
+    "bytes": 12932719,
+    "sha256": "723d16eb63b7f2dcd8260a516eac6571a7ef1eaaf9bff3c926e0c63235b98fd3"
+  },
+  "existing_location_identity": {
+    "id": "atlas:city:TWN-1156",
+    "stable_owner": 47,
+    "qijin_source_sid_identity_only": 59863,
+    "qijin_old_source_member": "gb:TWN:ADM2:52511910B42295955196197",
+    "aggregation_members": [
+      "gb:TWN:ADM2:52511910B31970606922462",
+      "gb:TWN:ADM2:52511910B69477070610060",
+      "gb:TWN:ADM2:52511910B46875128491",
+      "gb:TWN:ADM2:52511910B89557374460695",
+      "gb:TWN:ADM2:52511910B45067846009416",
+      "gb:TWN:ADM2:52511910B30663215399885",
+      "gb:TWN:ADM2:52511910B37639564414460",
+      "gb:TWN:ADM2:52511910B3606287647189",
+      "gb:TWN:ADM2:52511910B99923381863543",
+      "gb:TWN:ADM2:52511910B42295955196197",
+      "gb:TWN:ADM2:52511910B49699122775209",
+      "gb:TWN:ADM2:52511910B79940153361499",
+      "gb:TWN:ADM2:52511910B83654747413473",
+      "gb:TWN:ADM2:52511910B57885575775117",
+      "gb:TWN:ADM2:52511910B54123288304078",
+      "gb:TWN:ADM2:52511910B24425392494170",
+      "gb:TWN:ADM2:52511910B97258167764484",
+      "gb:TWN:ADM2:52511910B81672195550340",
+      "gb:TWN:ADM2:52511910B4874504546565",
+      "gb:TWN:ADM2:52511910B44183742195819",
+      "gb:TWN:ADM2:52511910B81270804246754",
+      "gb:TWN:ADM2:52511910B94409074074623",
+      "gb:TWN:ADM2:52511910B42739382471676",
+      "gb:TWN:ADM2:52511910B51671938708352",
+      "gb:TWN:ADM2:52511910B30715783231624",
+      "gb:TWN:ADM2:52511910B91354507826004",
+      "gb:TWN:ADM2:52511910B77588417233313",
+      "gb:TWN:ADM2:52511910B14985671444346",
+      "gb:TWN:ADM2:52511910B68600157990452",
+      "gb:TWN:ADM2:52511910B41569626445575",
+      "gb:TWN:ADM2:52511910B73336698759549",
+      "gb:TWN:ADM2:52511910B54132966107148",
+      "gb:TWN:ADM2:52511910B19330386236783",
+      "gb:TWN:ADM2:52511910B90052363141845",
+      "gb:TWN:ADM2:52511910B94488542881377",
+      "gb:TWN:ADM2:52511910B8366046265197",
+      "gb:TWN:ADM2:52511910B66300742055958",
+      "gb:TWN:ADM2:52511910B40932238962124"
+    ],
+    "complete_member_count": 38,
+    "old_properties_preserved_in_proposed_after": true
+  },
+  "all41_original_rows_preserved": true,
+  "nominal_both_source_outlines_positive": 12,
+  "nominal_both_source_outlines_outside": 29,
+  "exact_boundary_contacts": 0,
+  "all41_outside_declared_crs_operation_area": true,
+  "crs_limit": "Reported1m operationaccuracy belongs to declared operation area south17.36N and cannot be applied to Taiping~10.38N. Noop preserves official nominal coordinates; usable as explicitly bounded first source-relative physical operand, not verified1m edge conversion. Total source/registration/shoreline uncertainty not certified.",
+  "records": [
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123479,
+        "x": 214364
+      },
+      "longitude": 114.36013823302795,
+      "latitude": 10.38363116196794,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123479,
+        "x": 214365
+      },
+      "longitude": 114.36151140880207,
+      "latitude": 10.38363116196794,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123480,
+        "x": 214362
+      },
+      "longitude": 114.35739188147966,
+      "latitude": 10.38228047177192,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123480,
+        "x": 214363
+      },
+      "longitude": 114.35876505725383,
+      "latitude": 10.38228047177192,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123480,
+        "x": 214364
+      },
+      "longitude": 114.36013823302795,
+      "latitude": 10.38228047177192,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123480,
+        "x": 214365
+      },
+      "longitude": 114.36151140880207,
+      "latitude": 10.38228047177192,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123480,
+        "x": 214366
+      },
+      "longitude": 114.3628845845762,
+      "latitude": 10.38228047177192,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123481,
+        "x": 214362
+      },
+      "longitude": 114.35739188147966,
+      "latitude": 10.380929775742105,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123481,
+        "x": 214363
+      },
+      "longitude": 114.35876505725383,
+      "latitude": 10.380929775742105,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123481,
+        "x": 214364
+      },
+      "longitude": 114.36013823302795,
+      "latitude": 10.380929775742105,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123481,
+        "x": 214365
+      },
+      "longitude": 114.36151140880207,
+      "latitude": 10.380929775742105,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123481,
+        "x": 214366
+      },
+      "longitude": 114.3628845845762,
+      "latitude": 10.380929775742105,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123481,
+        "x": 214367
+      },
+      "longitude": 114.36425776035031,
+      "latitude": 10.380929775742105,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123481,
+        "x": 214368
+      },
+      "longitude": 114.36563093612443,
+      "latitude": 10.380929775742105,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123482,
+        "x": 214362
+      },
+      "longitude": 114.35739188147966,
+      "latitude": 10.379579073879222,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123482,
+        "x": 214363
+      },
+      "longitude": 114.35876505725383,
+      "latitude": 10.379579073879222,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123482,
+        "x": 214364
+      },
+      "longitude": 114.36013823302795,
+      "latitude": 10.379579073879222,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123482,
+        "x": 214365
+      },
+      "longitude": 114.36151140880207,
+      "latitude": 10.379579073879222,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123482,
+        "x": 214366
+      },
+      "longitude": 114.3628845845762,
+      "latitude": 10.379579073879222,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123482,
+        "x": 214367
+      },
+      "longitude": 114.36425776035031,
+      "latitude": 10.379579073879222,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123482,
+        "x": 214368
+      },
+      "longitude": 114.36563093612443,
+      "latitude": 10.379579073879222,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123483,
+        "x": 214362
+      },
+      "longitude": 114.35739188147966,
+      "latitude": 10.378228366183997,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123483,
+        "x": 214363
+      },
+      "longitude": 114.35876505725383,
+      "latitude": 10.378228366183997,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123483,
+        "x": 214364
+      },
+      "longitude": 114.36013823302795,
+      "latitude": 10.378228366183997,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123483,
+        "x": 214365
+      },
+      "longitude": 114.36151140880207,
+      "latitude": 10.378228366183997,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123483,
+        "x": 214366
+      },
+      "longitude": 114.3628845845762,
+      "latitude": 10.378228366183997,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123483,
+        "x": 214367
+      },
+      "longitude": 114.36425776035031,
+      "latitude": 10.378228366183997,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123483,
+        "x": 214368
+      },
+      "longitude": 114.36563093612443,
+      "latitude": 10.378228366183997,
+      "nominal_qijin_covers": true,
+      "nominal_whole_city_covers": true,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123483,
+        "x": 214369
+      },
+      "longitude": 114.36700411189861,
+      "latitude": 10.378228366183997,
+      "nominal_qijin_covers": true,
+      "nominal_whole_city_covers": true,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123484,
+        "x": 214363
+      },
+      "longitude": 114.35876505725383,
+      "latitude": 10.376877652657159,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123484,
+        "x": 214364
+      },
+      "longitude": 114.36013823302795,
+      "latitude": 10.376877652657159,
+      "nominal_qijin_covers": false,
+      "nominal_whole_city_covers": false,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123484,
+        "x": 214365
+      },
+      "longitude": 114.36151140880207,
+      "latitude": 10.376877652657159,
+      "nominal_qijin_covers": true,
+      "nominal_whole_city_covers": true,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123484,
+        "x": 214366
+      },
+      "longitude": 114.3628845845762,
+      "latitude": 10.376877652657159,
+      "nominal_qijin_covers": true,
+      "nominal_whole_city_covers": true,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123484,
+        "x": 214367
+      },
+      "longitude": 114.36425776035031,
+      "latitude": 10.376877652657159,
+      "nominal_qijin_covers": true,
+      "nominal_whole_city_covers": true,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123484,
+        "x": 214368
+      },
+      "longitude": 114.36563093612443,
+      "latitude": 10.376877652657159,
+      "nominal_qijin_covers": true,
+      "nominal_whole_city_covers": true,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123484,
+        "x": 214369
+      },
+      "longitude": 114.36700411189861,
+      "latitude": 10.376877652657159,
+      "nominal_qijin_covers": true,
+      "nominal_whole_city_covers": true,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123485,
+        "x": 214364
+      },
+      "longitude": 114.36013823302795,
+      "latitude": 10.375526933299428,
+      "nominal_qijin_covers": true,
+      "nominal_whole_city_covers": true,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123485,
+        "x": 214365
+      },
+      "longitude": 114.36151140880207,
+      "latitude": 10.375526933299428,
+      "nominal_qijin_covers": true,
+      "nominal_whole_city_covers": true,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123485,
+        "x": 214366
+      },
+      "longitude": 114.3628845845762,
+      "latitude": 10.375526933299428,
+      "nominal_qijin_covers": true,
+      "nominal_whole_city_covers": true,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123485,
+        "x": 214367
+      },
+      "longitude": 114.36425776035031,
+      "latitude": 10.375526933299428,
+      "nominal_qijin_covers": true,
+      "nominal_whole_city_covers": true,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 123485,
+        "x": 214368
+      },
+      "longitude": 114.36563093612443,
+      "latitude": 10.375526933299428,
+      "nominal_qijin_covers": true,
+      "nominal_whole_city_covers": true,
+      "boundary_contact": false,
+      "outside_declared_operation_area": true
+    }
+  ],
+  "geometry_stage_validated": false,
+  "new_native_authority_or_accepted_credit": 0,
+  "remaining_boundary": "Original native source selection requires fixed original GBfamily/literalconsumedgeometry; no recognized revisedNLSCsource/crosswalk interface; complete current competitors and metadata migration remain pending."
+}
