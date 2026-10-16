@@ -1,0 +1,93 @@
+{
+  "status": "passed",
+  "baseline_commit": "0dd8c2d7e6e6d44344feae589345d0457fc9b590",
+  "candidate_commit": "2344940cc8129851e526a03d31e5a1fa44a7e0dc",
+  "inputs": {
+    "before": {
+      "selector": {
+        "path": "data/ownership-selection.json",
+        "commit": "0dd8c2d7e6e6d44344feae589345d0457fc9b590",
+        "mode": "100644",
+        "git_blob_oid": "ef7081d4922be8acb021cd68189b35b12062d087",
+        "bytes": 1833,
+        "sha256": "6ff6cbac8e1b207ea8b49916c1f13a302e9b88ecb5f8b09112314ad7527bc6c7"
+      },
+      "sidecar": {
+        "path": "coordination/engineering/solomon-repair-delivery-20261016/ownership-selection-v2.json",
+        "commit": "0dd8c2d7e6e6d44344feae589345d0457fc9b590",
+        "mode": "100644",
+        "git_blob_oid": "9fb710d808ac9c2b17031213e81db81479368df2",
+        "bytes": 3442,
+        "sha256": "99a8b2017e907a8d8c29399793b8b4433f37ffc7345d3445019061eea745cba9"
+      },
+      "patch": {
+        "bytes": 2839786,
+        "commit": "d14adfbc5f6f4cae178ef66351ee25c446c0516a",
+        "git_blob_oid": "67dc3ad7c4c110fc32852154c5d49ed47e840efc",
+        "mode": "100644",
+        "path": "coordination/engineering/solomon-repair-delivery-20261016/composition-001/patch.json",
+        "sha256": "a3d3263db99bd851f952a618a82718713a8c433ad7835828309d599b2026e9fa"
+      },
+      "ledger": {
+        "bytes": 7841711,
+        "commit": "d14adfbc5f6f4cae178ef66351ee25c446c0516a",
+        "git_blob_oid": "838250f7bd46efb7e9fcc00a746ca26840c9db7c",
+        "mode": "100644",
+        "path": "coordination/engineering/solomon-repair-delivery-20261016/composition-001/selected-ledger.json",
+        "sha256": "c728679a2de77fb9426e2ff4dc5cde3d54a99c9232e82a6acfcdd62ee8170137"
+      }
+    },
+    "after": {
+      "selector": {
+        "path": "data/ownership-selection.json",
+        "commit": "2344940cc8129851e526a03d31e5a1fa44a7e0dc",
+        "mode": "100644",
+        "git_blob_oid": "0090f9afd86a84e1de1ea1bd757ff43e72e95c82",
+        "bytes": 1849,
+        "sha256": "8f64e06d626fbf272c06c5fad8e2157216e45a7f3b3f92bdd0385c88fdbce28a"
+      },
+      "sidecar": {
+        "path": "coordination/engineering/vanuatu-native-repair-evaluation-20261016/ownership-selection-after-slb.json",
+        "commit": "2344940cc8129851e526a03d31e5a1fa44a7e0dc",
+        "mode": "100644",
+        "git_blob_oid": "6c1e0c5a6af387fefcf259d0ea7dcaa35d46316a",
+        "bytes": 3502,
+        "sha256": "1a74d1175ed08a43414bf10658bf090aaab73d2dbb1fcffc3c9d666768c62be1"
+      },
+      "patch": {
+        "bytes": 2898066,
+        "commit": "17edf8f17b8d926c8d0d40462c0a0dedd04fdbf9",
+        "git_blob_oid": "fd5980a8eea59923631893f35453f65a50bacb0f",
+        "mode": "100644",
+        "path": "coordination/engineering/vanuatu-native-repair-evaluation-20261016/composition-after-slb/patch.json",
+        "sha256": "60b5b9a37bf55efc5938725c024840c33ffa8995ad33f9c6019d420d144caaef"
+      },
+      "ledger": {
+        "bytes": 7923584,
+        "commit": "17edf8f17b8d926c8d0d40462c0a0dedd04fdbf9",
+        "git_blob_oid": "2bc6eb6fe101e93b032546acfa213fbb2d975a8d",
+        "mode": "100644",
+        "path": "coordination/engineering/vanuatu-native-repair-evaluation-20261016/composition-after-slb/selected-ledger.json",
+        "sha256": "aa6d9775f8f2c4999b59e4b99304ccca33bd560b936111b98963daf53113b603"
+      }
+    },
+    "candidate": {
+      "path": "coordination/engineering/vanuatu-native-repair-evaluation-20261016/candidate-native-patch.json",
+      "commit": "2344940cc8129851e526a03d31e5a1fa44a7e0dc",
+      "mode": "100644",
+      "git_blob_oid": "60d11c38523594ffc99205f69eccef1d4f1c6a45",
+      "bytes": 58333,
+      "sha256": "cd0bcfdf86121bb98412fcb048a87c02044e3aede7689e2eb63624b9235f9c40"
+    }
+  },
+  "inherited_cells": 291213,
+  "proposed_cells": 3163,
+  "composed_cells": 294376,
+  "lost_cells": 0,
+  "reassigned_cells": 0,
+  "prior_candidate_intersection": 0,
+  "unexpected_new_cells": 0,
+  "inherited_rows": 886,
+  "composed_rows": 892,
+  "limit": "Literal native patch/ledger conservation only. Does not replace final actual native selected-output consumer, source review, hosted checks or integration."
+}
