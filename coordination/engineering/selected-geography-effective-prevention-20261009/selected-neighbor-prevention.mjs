@@ -6,7 +6,7 @@ import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {gunzipSync} from 'node:zlib';
 import {ImmutableReader, SelectedGeometrySources, NativeAssetImage, selectedBaseAssetAlias, selectedGeometrySourceAlias, selectedReferenceOwners, selectedNativeSourceMembership} from '../../../scripts/check-effective-geographic-regression.mjs';
-import {repairComponentKey, compareRepairComponents, nativeOnlyComponent, deriveSourceTargetNativeDelta, nativePolygonIntervals, polygonParts, witnessCellEffects, validateWitnessGeometry} from '../../../src/native-grid.js';
+import {repairComponentKey, compareRepairComponents, nativeOnlyComponent, deriveSourceTargetNativeDelta, nativePolygonIntervals, polygonParts, witnessCellEffects, validateWitnessGeometry, verifyNativeSeamView} from '../../../src/native-grid.js';
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
 import {scientificNativeSelection} from '../../../src/reference-metadata.js';
 const certificates=new WeakMap(), originalAuthorities=new WeakMap(), selectedAdditions=new WeakMap();
@@ -887,6 +887,54 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   }
   return value;
  };
+ // An explicit reviewed canonical view preserves original bytes and joins each
+ // changed operand to its complete authenticated source/physical body. It is
+ // not a relaxed coordinate parser: every view must prove identical complete
+ // native spans and exact boundary ties before the strict scanner sees it.
+ const seamViews=new Map(),usedSeamViews=new Set();
+ const seamKey=(role,id,pointer)=>JSON.stringify([role,id,pointer]);
+ if(evidence.canonical_seam_views!==undefined){
+  demand(!revised&&evidence.adopted_provider_families===undefined,
+   'Canonical seam views require retained original source families');
+  const data=readAdopted(evidence.canonical_seam_views,'Canonical seam views');
+  demand(keys(data,'version,kind,method,records')&&data.version===1
+   &&data.kind==='retained-periodic-native-views-v1'
+   &&keys(data.method,'pin,export')&&data.method.export==='canonical'
+   &&data.method.pin.path==='scripts/majority.py'
+   &&Array.isArray(data.records)&&data.records.length>0,'Incomplete canonical seam views');
+  pinCheck(data.method.pin);
+  const method=reader.descriptor(data.method.pin.path,reader.version);
+  demand(method.mode===data.method.pin.mode&&method.git_blob_oid===data.method.pin.git_blob_oid
+   &&method.bytes===data.method.pin.bytes,'Canonical seam method differs from selected implementation');
+  read(data.method.pin);
+  for(const record of data.records){
+   demand(keys(record,'role,source_id,pointer,original_geometry_sha256,geometry')
+    &&['source','physical'].includes(record.role)&&typeof record.source_id==='string'&&record.source_id
+    &&hash(record.original_geometry_sha256)&&typeof record.pointer==='string'
+    &&(record.role==='source'?record.pointer==='/geometry':
+     /^\/support\/(mapped_land_support|mapped_inland_water_support|outside_mapped_L1_context)$/.test(record.pointer)
+     ||/^\/query_relations\/(0|[1-9][0-9]*)\/witness_geometry$/.test(record.pointer)),
+    'Unknown canonical seam operand');
+   const key=seamKey(record.role,record.source_id,record.pointer);
+   demand(!seamViews.has(key),'Duplicate canonical seam operand');seamViews.set(key,record);
+  }
+ }
+ const nativeView=(role,id,path,original)=>{
+  const key=seamKey(role,id,path),record=seamViews.get(key);
+  if(!record)return original;
+  demand(valueSha(original)===record.original_geometry_sha256,'Canonical seam original geometry differs');
+  verifyNativeSeamView(original,record.geometry,{size:262166,latitudes});
+  usedSeamViews.add(key);return record.geometry;
+ };
+ for(const record of seamViews.values())if(record.role==='physical'){
+  const results=physical.results.filter(result=>result.target===record.source_id);
+  demand(results.length===1,'Missing or duplicate canonical seam physical target');
+  const original=pointer(results[0],record.pointer);
+  const geometry=nativeView('physical',record.source_id,record.pointer,original);
+  const parts=record.pointer.slice(1).split('/');
+  let parent=results[0];for(const part of parts.slice(0,-1))parent=parent[part];
+  parent[parts.at(-1)]=geometry;
+ }
  // New provider applicability is an explicit reviewed adoption decision, never an
  // extension of the frozen original catalogue or an authored owner guess.
  // The complete product is also an existing family-part read role, so this
@@ -1290,10 +1338,14 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
    demand(Array.isArray(target.territorial_exclusions),
     'General physical conflict qualification requires explicit territorial exclusions');
   }
+  // Form views for every original family member before spatial prefiltering,
+  // including omitted competitors. Raw originals above still bind custody.
+  const nativeOriginals=new Map([...originals].map(([id,feature])=>[id,
+   {...feature,geometry:nativeView('source',id,'/geometry',feature.geometry)}]));
   const bounds=selected.flatMap(target=>coordinateBounds(datedCentres.some(p=>p.source_id===target.id)
-   ?originals.get(target.id).geometry:target.coverage_geometry));
+   ?nativeOriginals.get(target.id).geometry:target.coverage_geometry));
   const intersects=(a,b)=>a[0]<=b[2]&&b[0]<=a[2]&&a[1]<=b[3]&&b[1]<=a[3];
-  const sourceFeatures=[...originals].filter(([id,feature])=>(!adopted||adopted.bindings.has(id))
+  const sourceFeatures=[...nativeOriginals].filter(([id,feature])=>(!adopted||adopted.bindings.has(id))
     &&coordinateBounds(feature.geometry).some(part=>bounds.some(box=>intersects(part,box))))
    .map(([id,feature])=>{
     const owner=resolve(id);
@@ -1439,6 +1491,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
    }
   }
  }
+ demand(usedSeamViews.size===seamViews.size,'Unused canonical seam operand');
  demand(checked.size===proposed.rows.reduce((n,row)=>n+row.runs.length,0),'Unqualified proposed native intervals');
  if(diagnostic){
   const decisions=[...diagnosticRows].sort((a,b)=>a[0]-b[0]).map(([y,runs])=>({y,runs:runs.sort((a,b)=>a[0]-b[0])}));

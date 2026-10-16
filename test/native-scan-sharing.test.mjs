@@ -20,11 +20,19 @@ const mask = (source_id, geometry) => ({id:'owner:A',pixelIndex:7,source_id,geom
 async function observedNative(t) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'native-scan-sharing-'));
   t.after(() => fs.rmSync(directory,{recursive:true,force:true}));
-  const signature = 'export function nativePolygonIntervals(index,{size,rowStart,rowEnd,latitudes}){';
+  // Observe the numerical scanner itself, whether it is the retained exported
+  // preimage or the current private body behind the strict public wrapper.
+  const signatures = [
+    'export function nativePolygonIntervals(index,{size,rowStart,rowEnd,latitudes}){',
+    'function scanNativePolygonIntervals(index,{size,rowStart,rowEnd,latitudes},longitudeLimit){'
+  ];
   const record = '\n__testScans.push({rowStart,rowEnd,index:index.map(item=>({index:item.index,polygons:item.polygons.map(p=>p.map(r=>Array.from(r)))}))});';
   const load = async (original,name) => {
     const source = fs.readFileSync(original,'utf8');
-    assert.equal(source.split(signature).length,2,'instrument the actual scanner exactly once');
+    const matches = signatures.flatMap(signature =>
+      Array.from({length:source.split(signature).length-1},()=>signature));
+    assert.equal(matches.length,1,'instrument the actual scanner exactly once');
+    const [signature] = matches;
     const instrumented = 'const __testScans=[];\n' + source.replace(signature,signature+record)
       + '\nexport {__testScans};\n';
     const filename = path.join(directory,name+'.mjs');

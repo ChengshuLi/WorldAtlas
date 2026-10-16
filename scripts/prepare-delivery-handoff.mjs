@@ -760,6 +760,14 @@ export function packageProjection(config, reader, acceptedRegistry = null) {
       // operands/native contracts are not a recursive package declaration.
       for (const role of ['catalogue', 'physical_input', 'physical_reproduction', 'physical_evidence', 'native_latitudes', 'owner_roster'])
         add(evidence[role], 'source-target ' + role);
+      if (evidence.canonical_seam_views !== undefined) {
+        add(evidence.canonical_seam_views, 'source-target canonical seam views');
+        const views = reader.json(evidence.canonical_seam_views);
+        need(views.version === 1 && views.kind === 'retained-periodic-native-views-v1'
+          && views.method?.export === 'canonical' && views.method.pin.path === 'scripts/majority.py',
+          'Missing canonical seam view method');
+        add(views.method.pin, 'source-target canonical seam method');
+      }
       if (evidence.version === 3) {
         add(evidence.revised_source_adoption, 'source-target revised source adoption');
         const adoption = reader.json(evidence.revised_source_adoption);
@@ -1363,6 +1371,7 @@ export async function sourceEvidence(config, reader) {
   if (config.source_evidence.version === 3) reader.read(config.source_evidence.revised_source_adoption);
   if (config.source_evidence.territorial_applicability !== undefined) reader.read(config.source_evidence.territorial_applicability);
   if (config.source_evidence.adopted_provider_families !== undefined) reader.read(config.source_evidence.adopted_provider_families);
+  if (config.source_evidence.canonical_seam_views !== undefined) reader.read(config.source_evidence.canonical_seam_views);
   const {locate} = await import('./delivery-handoff-advance.mjs');
   const selectorPin = locate(reader, config.selector);
   need(selectorPin.path === 'data/ownership-selection.json', 'Original accepted selector locator required');
