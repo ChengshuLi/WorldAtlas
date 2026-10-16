@@ -266,6 +266,19 @@ test('real selected prepare has no author proof and final merge accepts the fres
   const first=mergeFixture(),result=await first.complete();assert.equal(result.accepted,true);assert.equal(first.writes.length,1);
   assert(!first.mergeReads.some(route=>route.includes('/actions/')), 'No speculative proof or artifact discovery');
 });
+test('final checker choice skips selected-data classification when no candidate code path exists', async () => {
+  const f = mergeFixture(), diagnostics = {};
+  assert.equal(selectedDataCandidate(f.pr.head.ref, f.files), true);
+  assert.equal(candidateGeographyCode('full', f.files), false);
+  const result = await f.complete({metadataDiagnostics: diagnostics});
+  assert.equal(result.accepted, true);
+  assert.equal(result.geography.trusted_code_commit, f.base);
+  assert.deepEqual(diagnostics, {}, 'eligible classifier was never entered');
+  assert.equal(f.reads.length, 0, 'no classifier metadata or supporting bodies were read');
+  assert(!f.mergeReads.includes('/repos/owner/repo/git/commits/' + f.base), 'no classifier-only baseline tree');
+  assert.equal(f.writes.length, 1);
+});
+
 test('selected-data refuses absent, failed, skipped or stale final candidate checks before any merge',async()=>{
   for(const integrationResult of [undefined,'failure','cancelled','skipped']){
     const f=mergeFixture();await assert.rejects(f.complete({integrationResult}),/Integration tests|successful isolated/);assert.equal(f.writes.length,0);
@@ -1782,6 +1795,39 @@ test('retained scientific helper/source formats use role-qualified DATA without 
     geography_software:false});
 });
 
+test('final checker choice still authenticates the retained inert-code exception', async () => {
+  const f = mergeFixture({selectedFixture: retainedEvidenceFixture()}), diagnostics = {};
+  assert.equal(candidateGeographyCode('full', f.files), true);
+  const result = await f.complete({metadataDiagnostics: diagnostics});
+  assert.equal(result.accepted, true);
+  assert.equal(result.geography.trusted_code_commit, f.base);
+  assert(diagnostics.read_count > 0, 'candidate code requires real selection proof');
+  assert(f.reads.includes(f.retainedPin.git_blob_oid), 'the retained helper body was authenticated');
+});
+
+test('final checker choice fails closed when candidate-code classification is unavailable', async () => {
+  for (const failure of ['baseline tree', 'retained body']) {
+    const f = mergeFixture({selectedFixture: retainedEvidenceFixture()}), original = f.options.api;
+    if (failure === 'retained body') f.blobs.delete(f.retainedPin.git_blob_oid);
+    else f.options.api = async (route, ...args) => {
+      if (route === '/repos/owner/repo/git/commits/' + f.base) throw Error('Unavailable baseline tree');
+      return original(route, ...args);
+    };
+    assert.equal(candidateGeographyCode('full', f.files), true);
+    await assert.rejects(f.complete(), /exact trusted combined check/);
+    assert.equal(f.writes.length, 0, failure);
+    const result = await f.complete({geographyReportLoader: async () => ({
+      version: 1, method_id: 'worldatlas-trusted-geography-check-v1', baseline_commit: f.base,
+      trusted_code_commit: f.pr.merge_commit_sha, candidate_commit: f.pr.merge_commit_sha,
+      trusted_code_inventory_sha256: 'd'.repeat(64), candidate_code_executed: true,
+      published: false, source_approval: false, gate_status: 'passed', status: 'not-applicable'
+    })});
+    assert.equal(result.accepted, true, failure);
+    assert.equal(result.geography.trusted_code_commit, f.pr.merge_commit_sha);
+    assert.equal(f.writes.length, 1);
+  }
+});
+
 test('retained helper eligibility requires complete base-role proof even without a manifest edit', async () => {
   const f = retainedEvidenceFixture();
   f.files = f.files.filter(row => row.filename !== f.manifestPath);
@@ -1812,6 +1858,12 @@ for (const [name, change] of Object.entries({
   const f = retainedEvidenceFixture(); change(f);
   assert.equal(await f.run(), null, name);
   assert.equal(candidateGeographyCode('full', f.files), true, 'failed qualification retains conservative software routing');
+  // Exercise the final consumer too: rejected inert-code qualification must
+  // never authorize a report produced with only baseline checker code.
+  f.ownedPaths = f.reservation.owned_paths;
+  const final = mergeFixture({selectedFixture: f});
+  await assert.rejects(final.complete());
+  assert.equal(final.writes.length, 0);
 });
 
 for (const name of ['setup.py', '__init__.py', 'sitecustomize.py', 'usercustomize.py', 'package.json', 'tsconfig.json'])
@@ -1883,6 +1935,25 @@ test('retained evidence cannot use cached bytes to hide a conflicting tree size'
 });
 
 const actual2082 = JSON.parse(readFileSync(new URL('../coordination/engineering/remove-inert-evidence-format-gate/pr2082.json', import.meta.url)));
+test('actual PR2082 path inventory needs no final selected-data classification', async () => {
+  assert.equal(actual2082.files.length, 387);
+  assert.equal(selectedDataCandidate(actual2082.branch, actual2082.files, actual2082.reservation), true);
+  assert.equal(candidateGeographyCode('full', actual2082.files), false);
+  // Actual complete path/status inventory; bounded placeholder tree entries.
+  // Scientific evidence and whole original bodies retain their separate checks.
+  const source = fixture();
+  source.branch = actual2082.branch;
+  source.ownedPaths = actual2082.reservation.owned_paths;
+  source.files = actual2082.files;
+  source.authored.entries = new Map(actual2082.files.map(({filename}, index) => [filename,
+    {path: filename, type: 'blob', mode: '100644', size: 1, sha: index.toString(16).padStart(40, '0')}]));
+  const f = mergeFixture({selectedFixture: source}), diagnostics = {};
+  assert.equal((await f.complete({metadataDiagnostics: diagnostics})).accepted, true);
+  assert.deepEqual(diagnostics, {}, 'no selectedDataSelection invocation for the actual changed paths');
+  assert.equal(f.reads.length, 0);
+  assert.equal(f.writes.length, 1);
+});
+
 test('actual unchanged PR2082 complete 387-path candidate admits all 37 formerly rejected original bodies', async () => {
   assert.equal(actual2082.head, '41a6a586c1997508b029171289d2f13df802a5c9');
   assert.equal(actual2082.files.length, 387);
