@@ -1,0 +1,93 @@
+{
+  "status": "passed",
+  "baseline_commit": "a5f0214a899db981c5e5c0a6974aa8d3a76e1b41",
+  "candidate_commit": "1f0942db3ad997da5584f44678c2b3c3576b9280",
+  "inputs": {
+    "before": {
+      "selector": {
+        "path": "data/ownership-selection.json",
+        "commit": "a5f0214a899db981c5e5c0a6974aa8d3a76e1b41",
+        "mode": "100644",
+        "git_blob_oid": "acfae4d765463aba3a4a0af17d787f60cd8b2583",
+        "bytes": 1839,
+        "sha256": "dd158e344e3a2c05d6e3419e6385b99efdef366e689c9a4cf90b5d0a30464672"
+      },
+      "sidecar": {
+        "path": "coordination/engineering/preserved-geography-followups-20261016/ownership-selection-v2.json",
+        "commit": "a5f0214a899db981c5e5c0a6974aa8d3a76e1b41",
+        "mode": "100644",
+        "git_blob_oid": "a520012ea6964de7332f4218258dd3f410f4077b",
+        "bytes": 3450,
+        "sha256": "5e46d570dcaa68533db459986eff7b54afc57fe3d96974dd0880e210154f6d92"
+      },
+      "patch": {
+        "bytes": 2794969,
+        "commit": "3d0b6296baad84809d75b4412159ba80386e0eed",
+        "git_blob_oid": "f99af05041844397eda72ea2fac4331e3434ddfd",
+        "mode": "100644",
+        "path": "coordination/engineering/preserved-geography-followups-20261016/composition/patch.json",
+        "sha256": "2a7c635db4b05b52759f2b8ab34a4619603c7e588a7155f177bd1dbeb0ca8878"
+      },
+      "ledger": {
+        "bytes": 7741494,
+        "commit": "3d0b6296baad84809d75b4412159ba80386e0eed",
+        "git_blob_oid": "a683757fcf6264ba8141e88b3d43069f4d7c83ee",
+        "mode": "100644",
+        "path": "coordination/engineering/preserved-geography-followups-20261016/composition/selected-ledger.json",
+        "sha256": "c73eaf3060ff7f920ae4c595222265ef83bdc53bb805037965e66317de50741c"
+      }
+    },
+    "after": {
+      "selector": {
+        "path": "data/ownership-selection.json",
+        "commit": "1f0942db3ad997da5584f44678c2b3c3576b9280",
+        "mode": "100644",
+        "git_blob_oid": "6d59043fdc745dbac79c8df62da9888d772bffce",
+        "bytes": 1842,
+        "sha256": "1c2cf8b925ec4aa9a847c649df6806a24d257bfa75f5375eb46a24591e0c97cc"
+      },
+      "sidecar": {
+        "path": "coordination/engineering/vanuatu-native-repair-evaluation-20261016/ownership-selection-v2.json",
+        "commit": "1f0942db3ad997da5584f44678c2b3c3576b9280",
+        "mode": "100644",
+        "git_blob_oid": "738b1201bb11167f06e966ad15df486dd8bc4c6c",
+        "bytes": 3462,
+        "sha256": "fe9961ab5af69f8ceb781c0dcd48a9b30170079906714367f8a32ae7fef02cb4"
+      },
+      "patch": {
+        "bytes": 2853252,
+        "commit": "1c73ea49e747735f86324398f6347265d4ea5049",
+        "git_blob_oid": "ef469028c2b5cb3e55fcbc0f56a50354364e7c14",
+        "mode": "100644",
+        "path": "coordination/engineering/vanuatu-native-repair-evaluation-20261016/composition/patch.json",
+        "sha256": "13bc6fac97f174b7e7dd84a967677b64fb3edbf22fb2416be23a213404d970f6"
+      },
+      "ledger": {
+        "bytes": 7823367,
+        "commit": "1c73ea49e747735f86324398f6347265d4ea5049",
+        "git_blob_oid": "82fd7e3e324ed7bd5f327a584b2747734ea2dcc5",
+        "mode": "100644",
+        "path": "coordination/engineering/vanuatu-native-repair-evaluation-20261016/composition/selected-ledger.json",
+        "sha256": "b683d52171ae4e4f91f1d49742e25223bacc9309a5426db69878e7c070d7f399"
+      }
+    },
+    "candidate": {
+      "path": "coordination/engineering/vanuatu-native-repair-evaluation-20261016/candidate-native-patch.json",
+      "commit": "1f0942db3ad997da5584f44678c2b3c3576b9280",
+      "mode": "100644",
+      "git_blob_oid": "60d11c38523594ffc99205f69eccef1d4f1c6a45",
+      "bytes": 58333,
+      "sha256": "cd0bcfdf86121bb98412fcb048a87c02044e3aede7689e2eb63624b9235f9c40"
+    }
+  },
+  "inherited_cells": 287288,
+  "proposed_cells": 3163,
+  "composed_cells": 290451,
+  "lost_cells": 0,
+  "reassigned_cells": 0,
+  "prior_candidate_intersection": 0,
+  "unexpected_new_cells": 0,
+  "inherited_rows": 877,
+  "composed_rows": 883,
+  "limit": "Literal native patch/ledger conservation only. Does not replace final actual native selected-output consumer, source review, hosted checks or integration."
+}
