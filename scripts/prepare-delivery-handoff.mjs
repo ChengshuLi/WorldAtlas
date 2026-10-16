@@ -1230,7 +1230,9 @@ export function resumeSource(root, destination, config, binding, reader) {
   const physical = binding.phase === 'physical', phaseConfig = config[physical ? 'physical' : 'source'];
   const names = physical ? physicalProducts : sourceProducts;
   const receipt = JSON.parse(ordinary(root, destination + '/preparation.json'));
-  need(receipt.version === 1 && same(receipt.binding, binding) &&
+  // The entry hash describes the historical writer, not the scientific program.
+  // Unrelated entrypoint edits do not invalidate complete original science.
+  need(receipt.version === 1 && same({...receipt.binding, entry_sha256: binding.entry_sha256}, binding) &&
     same(Object.keys(receipt.outputs ?? {}).sort(), [...names].sort()), 'Source resume configuration/code/inventory differs');
   const products = {};
   for (const name of names) {
@@ -1251,7 +1253,7 @@ export function resumeSource(root, destination, config, binding, reader) {
     const raw = products[pin.path.slice(destination.length + 1)];
     need(raw && raw.length === pin.bytes && digest(raw) === pin.sha256, 'Source original execution product differs');
   }
-  return publish(root, destination, products, binding, true);
+  return publish(root, destination, products, receipt.binding, true);
 }
 
 // The source probe has one data-configured scientific implementation. Admission
