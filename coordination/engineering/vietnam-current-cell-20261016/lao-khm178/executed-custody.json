@@ -1,0 +1,76 @@
+{
+  "driver": {
+    "path": "bulk-completion/vn-lao-khm178/compare-existing-native-rule.mjs",
+    "bytes": 7484,
+    "sha256": "a50ba668a7f44d0715fa18d34eb66f096d0720c320e68606ca2b953c44282b8a"
+  },
+  "receipt": {
+    "path": "bulk-completion/vn-lao-khm178/actual-comparison-receipt.json",
+    "sha256": "34030a3014d9cc378ae8b0a67fb926e9ec5314c5e7a0fcecce70b74daa295844"
+  },
+  "science_runs": 1,
+  "prior_bootstrap_failure": "bootstrap-001.stderr; import failure before scientific reads",
+  "actual_task_guards": "OS alarm60s, driver55s and512MiB bounds existed at execution before parent correction; none triggered. Actual driver and receipt remain unchanged. No uncapped rerun or false relabel.",
+  "source_families": [
+    {
+      "country": "LAO",
+      "kind": "cod-adm0",
+      "features": 1,
+      "keys": 129,
+      "positive_keys": 11,
+      "tie_keys": 0,
+      "runs": 34,
+      "elapsed_ms": 198.41466699999998
+    },
+    {
+      "country": "LAO",
+      "kind": "cod-adm2",
+      "features": 148,
+      "keys": 129,
+      "positive_keys": 11,
+      "tie_keys": 0,
+      "runs": 34,
+      "elapsed_ms": 493.87925000000007
+    },
+    {
+      "country": "LAO",
+      "kind": "original-adm2",
+      "features": 148,
+      "keys": 129,
+      "positive_keys": 0,
+      "tie_keys": 0,
+      "runs": 34,
+      "elapsed_ms": 586.427625
+    },
+    {
+      "country": "KHM",
+      "kind": "cod-adm0",
+      "features": 1,
+      "keys": 49,
+      "positive_keys": 5,
+      "tie_keys": 0,
+      "runs": 16,
+      "elapsed_ms": 598.01125
+    },
+    {
+      "country": "KHM",
+      "kind": "cod-adm2",
+      "features": 197,
+      "keys": 49,
+      "positive_keys": 5,
+      "tie_keys": 0,
+      "runs": 16,
+      "elapsed_ms": 631.031833
+    },
+    {
+      "country": "KHM",
+      "kind": "original-adm2",
+      "features": 197,
+      "keys": 49,
+      "positive_keys": 0,
+      "tie_keys": 0,
+      "runs": 15,
+      "elapsed_ms": 653.139083
+    }
+  ]
+}

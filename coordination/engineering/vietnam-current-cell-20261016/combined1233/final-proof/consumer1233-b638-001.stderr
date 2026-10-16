@@ -1,0 +1,21 @@
+node:fs:1795
+  const stats = binding.stat(
+                        ^
+
+Error: ENOENT: no such file or directory, stat '/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/stock-b638-worktree/scripts/run-geographic-check.py'
+    at Object.statSync (node:fs:1795:25)
+    at file:///Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/stock-b638-worktree/scripts/check-effective-geographic-regression.mjs:754:84
+    at Array.map (<anonymous>)
+    at selectedBootstrap (file:///Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/stock-b638-worktree/scripts/check-effective-geographic-regression.mjs:754:29)
+    at inspectSelected (file:///Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/stock-b638-worktree/scripts/check-effective-geographic-regression.mjs:769:83)
+    at file:///Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/stock-b638-worktree/scripts/check-effective-geographic-regression.mjs:834:88
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'stat',
+  path: '/Users/chengshuli/Documents/Codex/2026-10-13/task/bulk-completion/vn-lao-khm178/stock-b638-worktree/scripts/run-geographic-check.py'
+}
+
+Node.js v24.19.0

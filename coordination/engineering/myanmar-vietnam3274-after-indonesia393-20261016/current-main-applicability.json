@@ -1,0 +1,699 @@
+{
+  "kind": "current-main-applicability-of-retained-selected-delivery",
+  "observed_at": "2026-10-16T05:22:30.048213+00:00",
+  "actual_metadata_execution_base": "34981099cd03677b9ba374a4de6bf73cf65b0646",
+  "current_accepted_main": "19d815756ab7f33866b215f9156818ac75a65108",
+  "accepted393_data_and_package_pins": [
+    {
+      "role": "baseline_selector",
+      "accepted393": {
+        "commit": "34981099cd03677b9ba374a4de6bf73cf65b0646",
+        "path": "data/ownership-selection.json",
+        "mode": "100644",
+        "git_blob_oid": "a8c84ec0549c5f120ebc3651125ae8b3d9d49f54",
+        "bytes": 1607,
+        "sha256": "c47702aadec2baa8075ab3375660a716dcd63fc76fd552d68f36ab6427e39d5d"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "data/ownership-selection.json",
+        "mode": "100644",
+        "git_blob_oid": "a8c84ec0549c5f120ebc3651125ae8b3d9d49f54",
+        "bytes": 1607,
+        "sha256": "c47702aadec2baa8075ab3375660a716dcd63fc76fd552d68f36ab6427e39d5d"
+      },
+      "whole_bytes_equal": true
+    },
+    {
+      "role": "baseline_package_inputs",
+      "accepted393": {
+        "commit": "34981099cd03677b9ba374a4de6bf73cf65b0646",
+        "path": ".github/package-inputs.json",
+        "mode": "100644",
+        "git_blob_oid": "4d476e8f1b5626d99c60aba7570c26581d31eade",
+        "bytes": 14906,
+        "sha256": "875265459a55e74b95de258712bfd637e903c0a3b87ee08918f7db650e3625f8"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": ".github/package-inputs.json",
+        "mode": "100644",
+        "git_blob_oid": "4d476e8f1b5626d99c60aba7570c26581d31eade",
+        "bytes": 14906,
+        "sha256": "875265459a55e74b95de258712bfd637e903c0a3b87ee08918f7db650e3625f8"
+      },
+      "whole_bytes_equal": true
+    },
+    {
+      "role": "baseline_selected_ledger",
+      "accepted393": {
+        "commit": "34981099cd03677b9ba374a4de6bf73cf65b0646",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/composition/selected-ledger.json",
+        "mode": "100644",
+        "git_blob_oid": "1cc8f8cc1be09b8f7cd3f2d0d2b0cf2fbc588bff",
+        "bytes": 6957873,
+        "sha256": "81edb7cc814bf8993988191ac76bf7d6ee44d66dbd25b5aa66da8e54f318408a"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/composition/selected-ledger.json",
+        "mode": "100644",
+        "git_blob_oid": "1cc8f8cc1be09b8f7cd3f2d0d2b0cf2fbc588bff",
+        "bytes": 6957873,
+        "sha256": "81edb7cc814bf8993988191ac76bf7d6ee44d66dbd25b5aa66da8e54f318408a"
+      },
+      "whole_bytes_equal": true
+    },
+    {
+      "role": "baseline_authority_registry",
+      "accepted393": {
+        "commit": "34981099cd03677b9ba374a4de6bf73cf65b0646",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/composition/authority-registry.json",
+        "mode": "100644",
+        "git_blob_oid": "7a1578b82a7f18eeeaa0871a25142e00f1c1ad80",
+        "bytes": 98905,
+        "sha256": "dccc2765bc382039f8845e9917d84a78ca37a4ddda2c7a1b97d1fa910a7bcf7c"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/composition/authority-registry.json",
+        "mode": "100644",
+        "git_blob_oid": "7a1578b82a7f18eeeaa0871a25142e00f1c1ad80",
+        "bytes": 98905,
+        "sha256": "dccc2765bc382039f8845e9917d84a78ca37a4ddda2c7a1b97d1fa910a7bcf7c"
+      },
+      "whole_bytes_equal": true
+    }
+  ],
+  "original_MMR_actual_execution": {
+    "executing_commit": "193c36b73ea1a47c370161189d83c260181eb256",
+    "baseline_commit": "b6382262f8d03d9e7d33b26d8adb40a55197262b",
+    "candidate_commit": "64906aa677fde4f35dbc13d3585b4b85d19f0977",
+    "accepted_checkpoint": false,
+    "candidate_code_executed": false
+  },
+  "consumed_role_occurrences": 24,
+  "unique_consumed_paths": 23,
+  "consumed_role_comparison": [
+    {
+      "occurrence": 0,
+      "path": "scripts/run-geographic-check.py",
+      "original_consumed": {
+        "commit": "193c36b73ea1a47c370161189d83c260181eb256",
+        "path": "scripts/run-geographic-check.py",
+        "mode": "100644",
+        "git_blob_oid": "65317d632f4081afa7431ffbdc474978956db7df",
+        "bytes": 30727,
+        "sha256": "3a27cc960eeb3f2465d2c498a5ffaedb930deac0449cd4280e52faeff4c03ee5"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "scripts/run-geographic-check.py",
+        "mode": "100644",
+        "git_blob_oid": "8a3e67115a32045bbda3ef4b3278b9e6207b1897",
+        "bytes": 30957,
+        "sha256": "5622cd92a94569c7b887a5707034c224e0145f55c1570d4625027c47ed5fdcd4"
+      },
+      "whole_bytes_equal": false
+    },
+    {
+      "occurrence": 1,
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "original_consumed": {
+        "commit": "193c36b73ea1a47c370161189d83c260181eb256",
+        "path": "scripts/check-effective-geographic-regression.mjs",
+        "mode": "100644",
+        "git_blob_oid": "f10e0f795c047f6a85e607be84e057d09a4f3ef5",
+        "bytes": 77588,
+        "sha256": "a800152549981ef1f40fb5632bf7c2af1cba6825b56584ebe59e69aade40450d"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "scripts/check-effective-geographic-regression.mjs",
+        "mode": "100644",
+        "git_blob_oid": "bd1b5b7301e576bd5393c0328da74654f74b2607",
+        "bytes": 84601,
+        "sha256": "0208626ecedb1644edae9b05141a1ec1f2f9edc15c949d4dc1f9397912e61339"
+      },
+      "whole_bytes_equal": false
+    },
+    {
+      "occurrence": 2,
+      "path": "scripts/selected-checkpoint-native.mjs",
+      "original_consumed": {
+        "commit": "193c36b73ea1a47c370161189d83c260181eb256",
+        "path": "scripts/selected-checkpoint-native.mjs",
+        "mode": "100644",
+        "git_blob_oid": "583025be008ddf34da8d4a3180e3a084bf9b8603",
+        "bytes": 7564,
+        "sha256": "ff99c3db5060bc3e80ef0e894fed98efe588ee75d1578eddd4cc47aed33d112a"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "scripts/selected-checkpoint-native.mjs",
+        "mode": "100644",
+        "git_blob_oid": "583025be008ddf34da8d4a3180e3a084bf9b8603",
+        "bytes": 7564,
+        "sha256": "ff99c3db5060bc3e80ef0e894fed98efe588ee75d1578eddd4cc47aed33d112a"
+      },
+      "whole_bytes_equal": true
+    },
+    {
+      "occurrence": 3,
+      "path": "src/native-grid.js",
+      "original_consumed": {
+        "commit": "193c36b73ea1a47c370161189d83c260181eb256",
+        "path": "src/native-grid.js",
+        "mode": "100644",
+        "git_blob_oid": "eca2f633558770aacd12db8782217faa8e5abd95",
+        "bytes": 42965,
+        "sha256": "3ef6bc5ec66e3184c254ea66404add0824e3ee18e39c8658f234d2e236d840ad"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "src/native-grid.js",
+        "mode": "100644",
+        "git_blob_oid": "eca2f633558770aacd12db8782217faa8e5abd95",
+        "bytes": 42965,
+        "sha256": "3ef6bc5ec66e3184c254ea66404add0824e3ee18e39c8658f234d2e236d840ad"
+      },
+      "whole_bytes_equal": true
+    },
+    {
+      "occurrence": 4,
+      "path": "src/ownership-codec.js",
+      "original_consumed": {
+        "commit": "193c36b73ea1a47c370161189d83c260181eb256",
+        "path": "src/ownership-codec.js",
+        "mode": "100644",
+        "git_blob_oid": "03eacc9bcb1bff03723a93c248ea6de5f2fed5e4",
+        "bytes": 2948,
+        "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "src/ownership-codec.js",
+        "mode": "100644",
+        "git_blob_oid": "03eacc9bcb1bff03723a93c248ea6de5f2fed5e4",
+        "bytes": 2948,
+        "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+      },
+      "whole_bytes_equal": true
+    },
+    {
+      "occurrence": 5,
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "original_consumed": {
+        "commit": "193c36b73ea1a47c370161189d83c260181eb256",
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+        "mode": "100644",
+        "git_blob_oid": "5827059a9671767cffdb52ff438fa7125ee99cf9",
+        "bytes": 169084,
+        "sha256": "77de6ba50639b75ffba860b59620f17443177fc1cbc75bf93b949f3a1e27c319"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+        "mode": "100644",
+        "git_blob_oid": "4383032ee618bbb03032c02b008f48bf57308e0d",
+        "bytes": 172096,
+        "sha256": "12d88d290c3f3cf516ced4bb899954356c6e5e097678b497b059c0b5249d5d60"
+      },
+      "whole_bytes_equal": false
+    },
+    {
+      "occurrence": 6,
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs",
+      "original_consumed": {
+        "commit": "193c36b73ea1a47c370161189d83c260181eb256",
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs",
+        "mode": "100644",
+        "git_blob_oid": "dd18bac6f6b0917db946f49a3e53f756fae22468",
+        "bytes": 80498,
+        "sha256": "ed56ee00e276f44b9caf487cfb17e5007767b713362e2b5de13ae468f71b5445"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs",
+        "mode": "100644",
+        "git_blob_oid": "dd18bac6f6b0917db946f49a3e53f756fae22468",
+        "bytes": 80498,
+        "sha256": "ed56ee00e276f44b9caf487cfb17e5007767b713362e2b5de13ae468f71b5445"
+      },
+      "whole_bytes_equal": true
+    },
+    {
+      "occurrence": 7,
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs",
+      "original_consumed": {
+        "commit": "193c36b73ea1a47c370161189d83c260181eb256",
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs",
+        "mode": "100644",
+        "git_blob_oid": "042e1ac167cedb32a1638cfd9b411284de6637cb",
+        "bytes": 12722,
+        "sha256": "528ef8a5c34016606c44dc588e91eedf9fffa81b9882982be77c9f991e482d91"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs",
+        "mode": "100644",
+        "git_blob_oid": "8e147415cc443be21f354882c8943a5bf99eb634",
+        "bytes": 12795,
+        "sha256": "b98e9bb78c639ab73205ed3ab5727e03d7a3fab5ee5f0e3e54d70a50064678ab"
+      },
+      "whole_bytes_equal": false
+    },
+    {
+      "occurrence": 8,
+      "path": "scripts/accepted-selected-checkpoint.mjs",
+      "original_consumed": {
+        "commit": "193c36b73ea1a47c370161189d83c260181eb256",
+        "path": "scripts/accepted-selected-checkpoint.mjs",
+        "mode": "100644",
+        "git_blob_oid": "d676a34915bd089f37589d762e0695d6907f4a10",
+        "bytes": 9967,
+        "sha256": "454fbf81c0ee3a1fcc135f1e3f50e81d16f735176b7af0945f4260e642193b21"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "scripts/accepted-selected-checkpoint.mjs",
+        "mode": "100644",
+        "git_blob_oid": "d676a34915bd089f37589d762e0695d6907f4a10",
+        "bytes": 9967,
+        "sha256": "454fbf81c0ee3a1fcc135f1e3f50e81d16f735176b7af0945f4260e642193b21"
+      },
+      "whole_bytes_equal": true
+    },
+    {
+      "occurrence": 9,
+      "path": "scripts/check-handoff-scope.mjs",
+      "original_consumed": {
+        "commit": "193c36b73ea1a47c370161189d83c260181eb256",
+        "path": "scripts/check-handoff-scope.mjs",
+        "mode": "100644",
+        "git_blob_oid": "47ebc13dce54bc3e7a8318c72c7265b08599dc07",
+        "bytes": 8179,
+        "sha256": "f2b4e03701182058fdd6864cac9ff65b270899914d7c030fb42d053fd400f693"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "scripts/check-handoff-scope.mjs",
+        "mode": "100644",
+        "git_blob_oid": "47ebc13dce54bc3e7a8318c72c7265b08599dc07",
+        "bytes": 8179,
+        "sha256": "f2b4e03701182058fdd6864cac9ff65b270899914d7c030fb42d053fd400f693"
+      },
+      "whole_bytes_equal": true
+    },
+    {
+      "occurrence": 10,
+      "path": "scripts/evidence-policy.mjs",
+      "original_consumed": {
+        "commit": "193c36b73ea1a47c370161189d83c260181eb256",
+        "path": "scripts/evidence-policy.mjs",
+        "mode": "100644",
+        "git_blob_oid": "b8d0468592c1c5f30dd1415a223f03bde98d0e2c",
+        "bytes": 2483,
+        "sha256": "684ad01c51c0626bafe4715c9ab5b46eeb901ee54bc9dcb6f439ef505f0f55b2"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "scripts/evidence-policy.mjs",
+        "mode": "100644",
+        "git_blob_oid": "b8d0468592c1c5f30dd1415a223f03bde98d0e2c",
+        "bytes": 2483,
+        "sha256": "684ad01c51c0626bafe4715c9ab5b46eeb901ee54bc9dcb6f439ef505f0f55b2"
+      },
+      "whole_bytes_equal": true
+    },
+    {
+      "occurrence": 11,
+      "path": "scripts/evidence-quality.mjs",
+      "original_consumed": {
+        "commit": "193c36b73ea1a47c370161189d83c260181eb256",
+        "path": "scripts/evidence-quality.mjs",
+        "mode": "100644",
+        "git_blob_oid": "3f8980f573af0a9fb48b763ed875026f0ce99199",
+        "bytes": 28506,
+        "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "scripts/evidence-quality.mjs",
+        "mode": "100644",
+        "git_blob_oid": "0c5dfab6fd00dbbfd37877b20883b26136f7b991",
+        "bytes": 33629,
+        "sha256": "c7af12aa5abb868d7271f063bd883439590c0bfddac9df4f7a99a27cdb1ff94c"
+      },
+      "whole_bytes_equal": false
+    },
+    {
+      "occurrence": 12,
+      "path": "scripts/geographic-report-artifact.mjs",
+      "original_consumed": {
+        "commit": "193c36b73ea1a47c370161189d83c260181eb256",
+        "path": "scripts/geographic-report-artifact.mjs",
+        "mode": "100644",
+        "git_blob_oid": "38b53b3171d0f9c4b21ad48c409a78b4375cb335",
+        "bytes": 26756,
+        "sha256": "d44944326735fedfeef77093a00d7a4ee722d24cc8140d641aee40fecbb942a5"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "scripts/geographic-report-artifact.mjs",
+        "mode": "100644",
+        "git_blob_oid": "69e3e7aef9c8b9180ea7ff2d9e7cf7acd4925a59",
+        "bytes": 27388,
+        "sha256": "a00dc940f59f07d682a6b6a01208e69ff2ca6969c29092f3afe14327a175e1c3"
+      },
+      "whole_bytes_equal": false
+    },
+    {
+      "occurrence": 13,
+      "path": "scripts/github-quota.mjs",
+      "original_consumed": {
+        "commit": "193c36b73ea1a47c370161189d83c260181eb256",
+        "path": "scripts/github-quota.mjs",
+        "mode": "100644",
+        "git_blob_oid": "65664b0cefc19b556f93160d9bd99330ce785191",
+        "bytes": 3378,
+        "sha256": "ba8503e32145f5563857f1015fb1516b1e65dcc451164a39930867e3a8d032b2"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "scripts/github-quota.mjs",
+        "mode": "100644",
+        "git_blob_oid": "65664b0cefc19b556f93160d9bd99330ce785191",
+        "bytes": 3378,
+        "sha256": "ba8503e32145f5563857f1015fb1516b1e65dcc451164a39930867e3a8d032b2"
+      },
+      "whole_bytes_equal": true
+    },
+    {
+      "occurrence": 14,
+      "path": "scripts/github-snapshots.mjs",
+      "original_consumed": {
+        "commit": "193c36b73ea1a47c370161189d83c260181eb256",
+        "path": "scripts/github-snapshots.mjs",
+        "mode": "100644",
+        "git_blob_oid": "77e10cc1dbad90d27312fbf1b9582326d74af8f0",
+        "bytes": 1595,
+        "sha256": "eaf2ca029adae4319ff6b0f1ce9ba75b7f965aeeab7fa7fe72548fa888f22afe"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "scripts/github-snapshots.mjs",
+        "mode": "100644",
+        "git_blob_oid": "77e10cc1dbad90d27312fbf1b9582326d74af8f0",
+        "bytes": 1595,
+        "sha256": "eaf2ca029adae4319ff6b0f1ce9ba75b7f965aeeab7fa7fe72548fa888f22afe"
+      },
+      "whole_bytes_equal": true
+    },
+    {
+      "occurrence": 15,
+      "path": "scripts/integration-proof.mjs",
+      "original_consumed": {
+        "commit": "193c36b73ea1a47c370161189d83c260181eb256",
+        "path": "scripts/integration-proof.mjs",
+        "mode": "100644",
+        "git_blob_oid": "078c4ba55dff74b5cbb53c89893a00b126d58700",
+        "bytes": 889,
+        "sha256": "f08e03c81efa756d36126812cfe415118cace433a1477cc25fdb60def19572ec"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "scripts/integration-proof.mjs",
+        "mode": "100644",
+        "git_blob_oid": "078c4ba55dff74b5cbb53c89893a00b126d58700",
+        "bytes": 889,
+        "sha256": "f08e03c81efa756d36126812cfe415118cace433a1477cc25fdb60def19572ec"
+      },
+      "whole_bytes_equal": true
+    },
+    {
+      "occurrence": 16,
+      "path": "scripts/issue-claim-contract.mjs",
+      "original_consumed": {
+        "commit": "193c36b73ea1a47c370161189d83c260181eb256",
+        "path": "scripts/issue-claim-contract.mjs",
+        "mode": "100644",
+        "git_blob_oid": "6fb39b3702eee2aec76e212d04dfbc800b779f78",
+        "bytes": 22476,
+        "sha256": "8968472336c4b804fe12ae2a90af8679ee2eff8702246fa4f63d6eae7c1e51a2"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "scripts/issue-claim-contract.mjs",
+        "mode": "100644",
+        "git_blob_oid": "6fb39b3702eee2aec76e212d04dfbc800b779f78",
+        "bytes": 22476,
+        "sha256": "8968472336c4b804fe12ae2a90af8679ee2eff8702246fa4f63d6eae7c1e51a2"
+      },
+      "whole_bytes_equal": true
+    },
+    {
+      "occurrence": 17,
+      "path": "scripts/research-import-gate.mjs",
+      "original_consumed": {
+        "commit": "193c36b73ea1a47c370161189d83c260181eb256",
+        "path": "scripts/research-import-gate.mjs",
+        "mode": "100644",
+        "git_blob_oid": "85387d9f8647c0d4374f1d1d43e02797c471fd7e",
+        "bytes": 335,
+        "sha256": "0079ee16f5cf1068a09be8d5b416ed6a22e33c33b0605b203cc213f4f6198905"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "scripts/research-import-gate.mjs",
+        "mode": "100644",
+        "git_blob_oid": "85387d9f8647c0d4374f1d1d43e02797c471fd7e",
+        "bytes": 335,
+        "sha256": "0079ee16f5cf1068a09be8d5b416ed6a22e33c33b0605b203cc213f4f6198905"
+      },
+      "whole_bytes_equal": true
+    },
+    {
+      "occurrence": 18,
+      "path": "scripts/worker-result.mjs",
+      "original_consumed": {
+        "commit": "193c36b73ea1a47c370161189d83c260181eb256",
+        "path": "scripts/worker-result.mjs",
+        "mode": "100644",
+        "git_blob_oid": "b2b414668ed1b4ff059237263fe2f4f8874be180",
+        "bytes": 1913,
+        "sha256": "21757f7bebf64513389c0bb97e9f79f556f145bafbb4ceae9d4889e68a43883f"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "scripts/worker-result.mjs",
+        "mode": "100644",
+        "git_blob_oid": "b2b414668ed1b4ff059237263fe2f4f8874be180",
+        "bytes": 1913,
+        "sha256": "21757f7bebf64513389c0bb97e9f79f556f145bafbb4ceae9d4889e68a43883f"
+      },
+      "whole_bytes_equal": true
+    },
+    {
+      "occurrence": 19,
+      "path": "src/regional-import-gate.js",
+      "original_consumed": {
+        "commit": "193c36b73ea1a47c370161189d83c260181eb256",
+        "path": "src/regional-import-gate.js",
+        "mode": "100644",
+        "git_blob_oid": "b6eabfb3da75ad8d0aa3ff6a5c7a0493773f0ead",
+        "bytes": 7292,
+        "sha256": "83215f326c85b6f95c21f5560c7f0477c581b1e37a1a4f52de4ef39741dabf7d"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "src/regional-import-gate.js",
+        "mode": "100644",
+        "git_blob_oid": "b6eabfb3da75ad8d0aa3ff6a5c7a0493773f0ead",
+        "bytes": 7292,
+        "sha256": "83215f326c85b6f95c21f5560c7f0477c581b1e37a1a4f52de4ef39741dabf7d"
+      },
+      "whole_bytes_equal": true
+    },
+    {
+      "occurrence": 20,
+      "path": "scripts/geographic_checkpoint_products.py",
+      "original_consumed": {
+        "commit": "193c36b73ea1a47c370161189d83c260181eb256",
+        "path": "scripts/geographic_checkpoint_products.py",
+        "mode": "100644",
+        "git_blob_oid": "10ca8af99e286798e28871907935aa9e27fd52ce",
+        "bytes": 6191,
+        "sha256": "d7d3a19233ae2b1b5b94d9226f4420d241b3dfbbebc825f56bad3b2a86838152"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "scripts/geographic_checkpoint_products.py",
+        "mode": "100644",
+        "git_blob_oid": "10ca8af99e286798e28871907935aa9e27fd52ce",
+        "bytes": 6191,
+        "sha256": "d7d3a19233ae2b1b5b94d9226f4420d241b3dfbbebc825f56bad3b2a86838152"
+      },
+      "whole_bytes_equal": true
+    },
+    {
+      "occurrence": 21,
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json",
+      "original_consumed": {
+        "commit": "193c36b73ea1a47c370161189d83c260181eb256",
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json",
+        "mode": "100644",
+        "git_blob_oid": "08c1f42ab8d9e9f894e64c8d1f0eee11a973dfe7",
+        "bytes": 252214,
+        "sha256": "633bf569788c97c2aa52c27c4cb919c7dd1021eb1cd78fc7b326fc7369d475a8"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json",
+        "mode": "100644",
+        "git_blob_oid": "08c1f42ab8d9e9f894e64c8d1f0eee11a973dfe7",
+        "bytes": 252214,
+        "sha256": "633bf569788c97c2aa52c27c4cb919c7dd1021eb1cd78fc7b326fc7369d475a8"
+      },
+      "whole_bytes_equal": true
+    },
+    {
+      "occurrence": 22,
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json",
+      "original_consumed": {
+        "commit": "193c36b73ea1a47c370161189d83c260181eb256",
+        "path": "coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json",
+        "mode": "100644",
+        "git_blob_oid": "cc4b4207ab56336955576383611f65b6493c3358",
+        "bytes": 10854,
+        "sha256": "3d953ff2889bb048719ea7751bb1eeb6dde9749413c5b59e84dc42071a274474"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json",
+        "mode": "100644",
+        "git_blob_oid": "cc4b4207ab56336955576383611f65b6493c3358",
+        "bytes": 10854,
+        "sha256": "3d953ff2889bb048719ea7751bb1eeb6dde9749413c5b59e84dc42071a274474"
+      },
+      "whole_bytes_equal": true
+    },
+    {
+      "occurrence": 23,
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json",
+      "original_consumed": {
+        "commit": "193c36b73ea1a47c370161189d83c260181eb256",
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json",
+        "mode": "100644",
+        "git_blob_oid": "08c1f42ab8d9e9f894e64c8d1f0eee11a973dfe7",
+        "bytes": 252214,
+        "sha256": "633bf569788c97c2aa52c27c4cb919c7dd1021eb1cd78fc7b326fc7369d475a8"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json",
+        "mode": "100644",
+        "git_blob_oid": "08c1f42ab8d9e9f894e64c8d1f0eee11a973dfe7",
+        "bytes": 252214,
+        "sha256": "633bf569788c97c2aa52c27c4cb919c7dd1021eb1cd78fc7b326fc7369d475a8"
+      },
+      "whole_bytes_equal": true
+    }
+  ],
+  "changed_consumed_paths": [
+    "coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs",
+    "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+    "scripts/check-effective-geographic-regression.mjs",
+    "scripts/evidence-quality.mjs",
+    "scripts/geographic-report-artifact.mjs",
+    "scripts/run-geographic-check.py"
+  ],
+  "unchanged_actual_compose_finalizer_code": [
+    {
+      "path": "scripts/prepare-delivery-handoff.mjs",
+      "actual349": {
+        "commit": "34981099cd03677b9ba374a4de6bf73cf65b0646",
+        "path": "scripts/prepare-delivery-handoff.mjs",
+        "mode": "100644",
+        "git_blob_oid": "9c835516e9c450332d67775d699e002f26afb5c9",
+        "bytes": 117291,
+        "sha256": "3681743d8eec4b93fe501847b9ae3c110ebbf4a315c7e4eda9dcd4d33ca16bab"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "scripts/prepare-delivery-handoff.mjs",
+        "mode": "100644",
+        "git_blob_oid": "9c835516e9c450332d67775d699e002f26afb5c9",
+        "bytes": 117291,
+        "sha256": "3681743d8eec4b93fe501847b9ae3c110ebbf4a315c7e4eda9dcd4d33ca16bab"
+      },
+      "whole_bytes_equal": true
+    },
+    {
+      "path": "scripts/delivery-handoff-advance.mjs",
+      "actual349": {
+        "commit": "34981099cd03677b9ba374a4de6bf73cf65b0646",
+        "path": "scripts/delivery-handoff-advance.mjs",
+        "mode": "100644",
+        "git_blob_oid": "d779062fa47e82530d3a043196bd0f4f0720ff55",
+        "bytes": 62641,
+        "sha256": "822daa7b0c13546f7deab0cdd59d4a746a7616b62df2d5ba93caf3ce291f2b2b"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "scripts/delivery-handoff-advance.mjs",
+        "mode": "100644",
+        "git_blob_oid": "d779062fa47e82530d3a043196bd0f4f0720ff55",
+        "bytes": 62641,
+        "sha256": "822daa7b0c13546f7deab0cdd59d4a746a7616b62df2d5ba93caf3ce291f2b2b"
+      },
+      "whole_bytes_equal": true
+    },
+    {
+      "path": "scripts/package-inputs.mjs",
+      "actual349": {
+        "commit": "34981099cd03677b9ba374a4de6bf73cf65b0646",
+        "path": "scripts/package-inputs.mjs",
+        "mode": "100644",
+        "git_blob_oid": "5b9300bf925516318c7a4641d008b97a8547d15e",
+        "bytes": 10053,
+        "sha256": "05d0844b7ae0058be185be2c57890ddd64d20bb4fa58eb147a7310be4778db1d"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "scripts/package-inputs.mjs",
+        "mode": "100644",
+        "git_blob_oid": "5b9300bf925516318c7a4641d008b97a8547d15e",
+        "bytes": 10053,
+        "sha256": "05d0844b7ae0058be185be2c57890ddd64d20bb4fa58eb147a7310be4778db1d"
+      },
+      "whole_bytes_equal": true
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs",
+      "actual349": {
+        "commit": "34981099cd03677b9ba374a4de6bf73cf65b0646",
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs",
+        "mode": "100644",
+        "git_blob_oid": "d1c5a11a0d4aaf2b73f6d6c36b0ab59a67ac84e3",
+        "bytes": 2279,
+        "sha256": "f4d5480d23ba6ae097a559d066b2a244ce388ba81aa6c486331e731be23e1813"
+      },
+      "current": {
+        "commit": "19d815756ab7f33866b215f9156818ac75a65108",
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs",
+        "mode": "100644",
+        "git_blob_oid": "d1c5a11a0d4aaf2b73f6d6c36b0ab59a67ac84e3",
+        "bytes": 2279,
+        "sha256": "f4d5480d23ba6ae097a559d066b2a244ce388ba81aa6c486331e731be23e1813"
+      },
+      "whole_bytes_equal": true
+    }
+  ],
+  "reference_projection_present": false,
+  "limits": [
+    "The four2057 metadata adapter/entry paths, the accepted2070 geographic-report applicability path, and accepted2071 evidence-quality byte validator differ from the genuine193c execution. Accepted2070 also extends the already-different run-geographic-check entry with a bounded unchanged-input path. This is current compatibility, never byte equality or a new consumer execution.",
+    "Actual349 composition/finalization is retained because current selector/package/ledger/registry and relevant stock composition/finalizer code remain byte-identical. The accepted2071 validator will actually execute for the new manifest.",
+    "Original source/native scientific proofs, raw source/negative arrays, broader country subject scopes, archived metrics and all execution/runtime identities remain literal. Independent exact-final-head review and trusted current-main integration checks remain required."
+  ]
+}
