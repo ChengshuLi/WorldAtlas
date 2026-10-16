@@ -1,0 +1,25 @@
+# Tonga exact source-relative native repair
+
+Issue #2232. Exactly the frozen `gb-TON-ADM1--repair-evaluation` cohort is selected: 2,302 land cells in 731 segments, blocks 34–36, owners 42236–42240. The 1,984-cell physical-interpretation companion is excluded. No country-total or full-family completion denominator is claimed.
+
+## Result and retained limits
+
+The accepted stock whole-physical producer and native constructor qualify all 2,302 requested cells, with zero held cells. The five genuine constructor rows preserve complete original source, physical and native-rule custody. 'Eua has nonempty missing- and extra-reconstruction MultiPolygon witnesses. Both remain literal in `physical-001/whole-target-support.json`; stock native screening found no requested-cell contact. No witness was erased or replaced to obtain qualification.
+
+Every requested literal center is uniquely covered by its recorded member of the complete five-feature original family. Original source and current geometries are valid and differ. Current sibling geometry covers none of these centers. All five current parent/source identities remain unchanged. Current Oceania location review 37 is open, with no explicit flags; current Tonga location changes, metadata changes and pixel geometry findings are absent. The empty package territorial-exclusion lists reflect those scoped checks, not approval of contemporary law or full semantic geography.
+
+The original source has 10,007 encoded bytes, SHA-256 `638e35c5cf6de869400843894a640efa65e8ec397b022417cf4f1ab628b51c61`, and 34,754 decoded bytes, SHA-256 `e4937a7fcb49cc344f2e32f4525b90dbbbb3ef7e81d311b2d4b91a348b1f6f9d`. Source: https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TON/ADM1/geoBoundaries-TON-ADM1_simplified.geojson . The represented year is 2017; retained metadata credits OpenStreetMap and Wambacher with Open Data Commons Open Database License 1.0 terms. geoBoundaries derivative/code work has its separate CC BY 4.0 attribution notice. Attribution: https://www.geoboundaries.org ; Runfola et al. (2020), https://doi.org/10.1371/journal.pone.0231866 . Preserve the underlying OSM/Wambacher credit and license. `shapeYear` is absent and `boundaryCanonical` is the empty string in original metadata, not an inferred null or "Unknown" source value. Historical #1541 remains separate provenance work; this delivery does not close it.
+
+## Exact proposed transition
+
+`verification/patch-conservation.json` compares the actual committed candidate with accepted baseline `e67e5518a68aa031c05573c487bb4a94804b94c0`. All 291,213 earlier additive assignments, 886 selected ledger rows and 146 authority entries remain literal. The disjoint 2,302 additions produce 293,515 proposed cumulative assignments, 891 rows and 147 authorities. Zero prior cells are removed or reassigned. Per-owner additions are Vava'u 981, Ha'apai 702, Niuas 69, Tongatapu 489 and 'Eua 61.
+
+Only the additive selector and package input roles change. Current display geometry, hierarchy, scientific native grid and reference metadata projection remain unchanged. These are candidate offline results until verified queue integration. No deployment, full-region approval, historical membership or GPU/Canvas publication claim is made.
+
+## Reproduction and checks
+
+Production phases use unchanged accepted `scripts/prepare-delivery-handoff.mjs`: physical with `config/physical-002.json`, source-evidence, native-diagnostic, native-authority, compose with `config/compose-002.json`, and finalize with `config/finalize-002.json`. Immutable preparation and execution receipts bind actual inputs, code, runtime and outputs. Retained earlier configurations describe rejected invocations, not successful alternatives: the first physical invocation had a nonplain Node environment; the next included an obsolete preparatory-script runtime path. Neither reached scientific execution. Composition initially supplied a different commit locator for identical patch bytes and was correctly rejected; the successful version retains the original constructor's exact patch pin. Finalization initially supplied a derived rebind descriptor instead of its required locator and was rejected before output.
+
+Bounded constructor, native diagnostic, registry, finalization, evidence and smoke controls contain 86 distinct tests. The initial suite passed 85 and failed one because its native-latitude fixture was absent from the sparse checkout. After materializing the exact accepted fixture, that complete four-test file passed. Logs retain both attempts. No full local global regression was run.
+
+Final acceptance requires independent substantive exact-head review, the normal hosted selected-geography/conservation pass, and an actually executed emitted selected-delivery picker/sampler smoke against the authenticated build artifact. Code-level smoke controls do not establish emitted output success. Until those are verified, no accepted Tonga repair credit or publication result is claimed.
