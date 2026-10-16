@@ -1,0 +1,32 @@
+--- reviewed91-renderer
++++ next81-scope-and-contract-labels-only
+@@ -4,7 +4,7 @@
+ import numpy as np
+ import rasterio
+ ROOT=Path(__file__).resolve().parent;OUT=ROOT/'native-rawDN-context-pages';OUT.mkdir(exist_ok=True)
+-plan=json.loads((ROOT/'next-distinct-native-block-plan91.json').read_text());items={i['item_id']:i for i in plan['items']};rows=[];held=[]
++plan=json.loads((ROOT/'next-distinct-native-block-plan81.json').read_text());items={i['item_id']:i for i in plan['items']};rows=[];held=[]
+ for folder in (ROOT/'next-distinct-raw-native-observation-001').glob('S2*'):
+  f=folder/'point-observations.jsonl'
+  if not f.exists():continue
+@@ -12,7 +12,7 @@
+   r=json.loads(l)
+   if r['original_key']['owner']!=22727:continue
+   rows.append(r)
+-assert len(rows)==91 and not held
++assert len(rows)==81 and not held
+ rows.sort(key=lambda p:(p['item_id'],p['assets']['red']['native_containing_pixel'],p['point_index']))
+ pages=[];pageimages=[];pageindex=[];page_number=0
+ cached_item=None;arrays={};all_source_array_pins={}
+@@ -73,8 +73,8 @@
+  if len(pageimages)==24 or global_index==len(rows)-1:
+   page_number+=1;canvas=np.full((1176,1536,3),255,np.uint8)
+   for n,im in enumerate(pageimages):canvas[(n//4)*196:(n//4)*196+192,(n%4)*384:(n%4)*384+384]=im
+-  f=OUT/f'batam91-rawDN-{page_number:02d}.png'
++  f=OUT/f'batam-next81-rawDN-{page_number:02d}.png'
+   with rasterio.open(f,'w',driver='PNG',width=1536,height=1176,count=3,dtype='uint8') as ds:ds.write(np.moveaxis(canvas,-1,0))
+   b=f.read_bytes();pages.append({'page_1based':page_number,'file':str(f.relative_to(OUT.parent)),'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest(),'panels':pageindex});pageimages=[];pageindex=[]
+-(OUT/'contact-inventory.json').write_text(json.dumps({'scope':91,'source_plan_sha256':__import__('hashlib').sha256((ROOT/'next-distinct-native-block-plan91.json').read_bytes()).hexdigest(),'current_original_Batam_held_scope':164,'prior_actual_cloud_haze_held_cohort':91,'new_PB05_raw_only_hold_count':0,'pages':pages,'all_loaded_source_array_pins':[all_source_array_pins[k]for k in sorted(all_source_array_pins)],'display':'4 columns x 6 rows; each panel left RGB, right NIR-R-G. Literal uncalibrated rawDN fixed RGB0..3000/FCC0..5000 qualitative display only for every point. No gain/offset, BOA units, indices or quantitative reflectance interpretation. The new source item has a PB02.13 metadata contract; it is retained without applying normalization in this display. All prior source radiometry limits remain unchanged. Nearest enlargement; hollow actual fractional-centre cross leaves centre unpainted. Magenta denotes an actual mask0 or absent source context; no clamp or imputation.','detail_images':'point-ID-native17-RGB-FCC-SCL25.png: left17-native RGB, middle17-native raw NIR-R-G, right separate25-native20m SCL. SCL is source context only, never body truth; native512px blocks indexed as512. Nearest enlargement with actual fractional marker; no cross-grid resampling.', 'new_physical_credit':0},indent=2)+'\n')
+-print(json.dumps({'qualitative_literal_rawDN91':True,'pages':len(pages),'loaded_arrays_whole_hash_verified':len(all_source_array_pins),'new_PB05radiometry_hold_count':0}))
++(OUT/'contact-inventory.json').write_text(json.dumps({'scope':81,'source_plan_sha256':__import__('hashlib').sha256((ROOT/'next-distinct-native-block-plan81.json').read_bytes()).hexdigest(),'current_original_Batam_held_scope':154,'prior_actual_cloud_haze_held_cohort':81,'new_PB05_raw_only_hold_count':70,'pages':pages,'all_loaded_source_array_pins':[all_source_array_pins[k]for k in sorted(all_source_array_pins)],'display':'4 columns x 6 rows; each panel left RGB, right NIR-R-G. Literal uncalibrated rawDN fixed RGB0..3000/FCC0..5000 qualitative display only for every point. No gain/offset, BOA units, indices or quantitative reflectance interpretation. The two source items retain distinct contracts:70 PB05 centres have the literal declared-offset/provider-applied conflict and are raw qualitative-only;11 PB02.13 centres also remain unnormalized in this display. No offset is silently applied or subtracted twice. All prior source radiometry limits remain unchanged. Nearest enlargement; hollow actual fractional-centre cross leaves centre unpainted. Magenta denotes an actual mask0 or absent source context; no clamp or imputation.','detail_images':'point-ID-native17-RGB-FCC-SCL25.png: left17-native RGB, middle17-native raw NIR-R-G, right separate25-native20m SCL. SCL is source context only, never body truth; native512px blocks indexed as512. Nearest enlargement with actual fractional marker; no cross-grid resampling.', 'new_physical_credit':0},indent=2)+'\n')
++print(json.dumps({'qualitative_literal_rawDN81':True,'pages':len(pages),'loaded_arrays_whole_hash_verified':len(all_source_array_pins),'new_PB05radiometry_hold_count':70}))

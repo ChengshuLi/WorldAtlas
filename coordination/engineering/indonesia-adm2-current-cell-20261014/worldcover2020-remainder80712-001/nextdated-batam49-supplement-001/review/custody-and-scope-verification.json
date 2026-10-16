@@ -1,0 +1,42 @@
+{
+  "verification": "PASS",
+  "verified_utc": "2026-10-16T08:09:04.856942+00:00",
+  "offline_only_no_source_operations": true,
+  "input_whole_file_count": 279,
+  "input_whole_file_bytes": 88759996,
+  "producer_whole_product_bodies_verified": 152,
+  "npz_count": 70,
+  "encoded_npz_bytes": 76629469,
+  "decoded_array_bytes": 172595200,
+  "decoded_npy_member_bytes_with_headers": 172613120,
+  "original_reuse_arrays_and_custody_verified": 15,
+  "native_detail_pixels_reproduced": 81,
+  "contact_page_pixels_reproduced": 4,
+  "exact_native_affine_and_marker_placements_recomputed_from_approved_projected_coordinates": 81,
+  "fresh_geographic_projection_or_predicate": false,
+  "all_five_centre_assets_valid": 81,
+  "all_prior_January1_January3_records_structurally_unchanged": 81,
+  "new_date_per_exact_key": "2020-01-06",
+  "scope_subset_current_held461": true,
+  "scope_disjoint_accepted10_and_union133385": true,
+  "accounting_inputs": [
+    {
+      "file": "specific-residual461-owner-y-x.jsonl.gz",
+      "bytes": 2071,
+      "sha256": "ac8f97e69274442bbdce1fc1531d8845a94947a9871c77443a27c4c118e1dd21"
+    },
+    {
+      "file": "adopted10-owner-y-x.jsonl.gz",
+      "bytes": 91,
+      "sha256": "511c8655e428eb59d565bdf155a956bfaac58192707af107ac704f26ea901f33"
+    },
+    {
+      "file": "known-exact-adopted-union133385-owner-y-x.jsonl.gz",
+      "bytes": 372027,
+      "sha256": "b70cb7a13a1f4f1588582038449bb4d24feaea8e4414dfd96fd3dce9b613b7ef"
+    }
+  ],
+  "failed_startup_empty_stdout_preserved": true,
+  "adoption_or_native_credit": 0,
+  "scientific_visual_judgments": "Separate independent review. Mechanical validity does not classify a surface."
+}

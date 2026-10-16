@@ -1,0 +1,27 @@
+--- reviewed91-reader
++++ next81-exact-key-reader-no-arbitrary-reserve
+@@ -2,13 +2,13 @@
+ No normalization, display, indices, physical classifier or authority predicate.
+ """
+ from pathlib import Path
+-import collections,contextlib,datetime,hashlib,json,os,resource,sys,time,urllib.request,shutil
++import collections,contextlib,datetime,hashlib,json,os,resource,sys,time,urllib.request
+ import numpy as np
+ import rasterio
+ from rasterio.windows import Window
+ ROOT=Path(__file__).resolve().parent
+-PLAN=ROOT/'next-distinct-native-block-plan91.json'
+-PLAN_SHA='6bf1cfeac003a93fb55b30fe5f7ecf85b135632cdf0b1f96d0c7ca2457a5dba9'
++PLAN=ROOT/'next-distinct-native-block-plan81.json'
++PLAN_SHA='e4507671448b253aefe5e3b6277d9720e124722c69b82eaf5e99689ebd049254'
+ OUT=ROOT/'next-distinct-raw-native-observation-001'
+ OUT.mkdir(exist_ok=True)
+ def utc():return datetime.datetime.now(datetime.timezone.utc).isoformat()
+@@ -57,7 +57,6 @@
+       h=asset['actual_header'];assert str(ds.crs)==h['crs'] and list(ds.transform)==h['transform'] and ds.width==h['width'] and ds.height==h['height'] and ds.count==1 and list(ds.dtypes)==h['dtypes'] and ds.nodata==h['nodata'] and [list(x) for x in ds.block_shapes]==h['block_shapes'] and list(ds.scales)==h['scales'] and list(ds.offsets)==h['offsets']
+       for block,meta,array in missing:
+        left,top,width,height=block['native_window'];window=Window(left,top,width,height)
+-       if shutil.disk_usage(ROOT).free < 10*1024**3+6*1024**2:raise RuntimeError('Insufficient actual disk for next whole block plus metadata safety above10GiB floor; stop entire item.')
+        values=ds.read(1,window=window);remote_data_calls+=1
+        mask=ds.read_masks(1,window=window);remote_mask_calls+=1
+        assert values.shape==mask.shape==(height,width) and str(values.dtype)==h['dtypes'][0] and str(mask.dtype)=='uint8'

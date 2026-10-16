@@ -1,0 +1,74 @@
+{
+  "kind": "literal-original-physical-completion-reconciliation-no-count-change",
+  "original_frozen_package": {
+    "blob_oid": "8c0d28db903b80d50908c2e98dafc54685256040",
+    "sha256": "9ec91c744592f5ed1fe9394fb03d43dd27fe0260d97c625384319d05de174b26",
+    "question": "Interpret unique territorial candidates outside the retained GSHHG land/inland-water classes using existing coast/river/local source evidence and source vintages.",
+    "completion": "Classify each interval with a reusable source interpretation or an explicit unresolved question. Physical-mask disagreement alone does not reject a source-backed river/location assignment."
+  },
+  "public663_baseline": {
+    "commit": "66303f7864362438b63833ae862be902134393fb",
+    "prefix": "coordination/engineering/indonesia-adm2-current-cell-20261014/worldcover2020-remainder80712-001/annual-other9393-supplement-001/",
+    "adoption_blob_oid": "73ea00943ac384c093a0d40fa31a687f7d77329b",
+    "adoption_sha256": "cd54ee52d48a746dc20fb31bdd40b56163ffdf183e887100c0516e6826c05a4c",
+    "adoption_scope": "Bounded annual2020 producer-category and original-source-version location only; never binary whole-cell,current water,title or native authority.",
+    "only_declared_changes": [
+      "proposed_bounded_answer -> adopted_bounded_answer (literal true retained)",
+      "completed_question_credit_proposed -> completed_question_credit (literal1 retained)",
+      "root_adoption:null -> actual Root authorization",
+      "distinct_review added exact reference",
+      "credit_scope truthful adopted facet; source/science/holds unchanged"
+    ],
+    "specific_prior_body_relation_question_retained_per_row": true,
+    "README_accounting_unit": "133068 adopted source-review keys; not all formal broader physical questions closed."
+  },
+  "public778_question_projection": {
+    "commit": "66303f7864362438b63833ae862be902134393fb",
+    "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/worldcover2020-remainder80712-001/annual-other9393-supplement-001/preserved-held778/held778-complete-original-questions.jsonl.gz",
+    "git_blob_oid": "6ad84975e62691c8c8eb563cdbfb64934c671818",
+    "bytes": 389805,
+    "sha256": "545f520b79c9e21411026452b3e0d64176b60a93e8a4c89eaaa7ab1303fd2715",
+    "decoded_bytes": 8082151,
+    "decoded_sha256": "adaebcfca02eabe4f4049801b2979af72574ea2603737b964085b9d8c64e1928",
+    "all778_future_answer_scope": "Only a supported local visible body/surface/canopy and original-source-version location; no requirement for9-neighbour unanimity, a tide/legal certificate, whole-cell truth or selected-geographic-portion completion. Genuine cloudy/shadow/nodata/body-edge ambiguity may remain unknown."
+  },
+  "prior10_and46_checks": [
+    {
+      "group": 10,
+      "public_commit": "93216ba1b371edf9c016237735d6ba6ad5b31244",
+      "whole_adopted_body": ".cloud-work/physical-batam10-packet-001/adopted10-full-original-proposals-and-decisions.jsonl.gz",
+      "bytes": 61792,
+      "git_blob_oid": "9e9ae2fd48254544f607207af6bd4a385bb197cf",
+      "sha256": "735069f69da30f4e1b484a84e96eaf4a07495e6b1ff62e50f51c4e62ef6a1c8a",
+      "rows": 10,
+      "all_rows_preserve_broader_closure_false": true
+    },
+    {
+      "group": 46,
+      "public_commit": "46f8b217ec2e7e633ad5369cd96e0a21f624ec53",
+      "whole_adopted_body": ".cloud-work/physical-batam46-packet-001/adopted46-full-original-proposals-and-decisions.jsonl.gz",
+      "bytes": 271687,
+      "git_blob_oid": "1cac16da223dbc093a7fa97dc7422c3d40ef244c",
+      "sha256": "44b7bc4e16f10c35e9b559e2938cacf3a8e372a25bfa1899e9408c6de073f23a",
+      "rows": 46,
+      "all_rows_preserve_broader_closure_false": true
+    }
+  ],
+  "literal105_key_comparison": {
+    "file": "literal105-key-comparison.jsonl",
+    "bytes": 150193,
+    "sha256": "583f84bce03883bb8d50f14c37f9033a9908f1f9855afe318449733e0bdfccb4"
+  },
+  "findings": [
+    "The original frozen package calls for reusable source interpretation, rather than whole-cell/hidden-surface/tidal closure.",
+    "Public663 counted9393 bounded annual category/location answers while explicitly retaining prior broader body-relation questions, before cloud takeover.",
+    "All778 frozen future-answer scopes expressly permit a supported local visible body/surface/canopy; nested older annual questions remain unchanged provenance.",
+    "Every prior10/46 adoption row claims one completed bounded dated question and keeps broader_original_question_closure:false.",
+    "New49 has distinct support for the same visible-facet unit; broader original questions remain unresolved. Broader-closure0 alone does not distinguish this cohort from prior56 or baseline663.",
+    "The data do not support declaring the nested older annual/interface questions formally closed. If the scorecard requires that different unit, prior10/46 and potentially earlier bounded annual credits require the same reclassification."
+  ],
+  "recommendation": "Keep the existing bounded source-review accounting unit explicit and consistent; do not silently change it for49 or conflate it with formal broader-question closure. Root decides adoption and scorecard interpretation.",
+  "current_public_union_untouched": 133385,
+  "new49_credit": 0,
+  "native_unchanged": 285582
+}

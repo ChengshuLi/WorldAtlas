@@ -1,0 +1,99 @@
+{
+  "reviewer": "review_january6_batam_facets",
+  "author": "finish_indonesia_packages",
+  "completed_utc": "2026-10-16T08:13:02.416397+00:00",
+  "scope": 81,
+  "accepted_bounded_dated_facets": 49,
+  "held": 32,
+  "class_counts": {
+    "dated_visible_vegetation_cover": 34,
+    "hold": 32,
+    "dated_visible_open_water_like_body": 7,
+    "dated_visible_exposed_or_constructed_ground_like_body": 8
+  },
+  "author_proposed_count": 52,
+  "author_holds_retained": 29,
+  "new_reviewer_holds_point_indices": [
+    16294,
+    17277,
+    17910
+  ],
+  "all_native_RGB_FCC_separate_SCL_details_visually_reviewed": 81,
+  "all_wide_contact_pages_visually_reviewed": 4,
+  "input_proposal": {
+    "file": "author-proposed81-nextdated-dispositions.jsonl",
+    "bytes": 4670839,
+    "sha256": "90c5719cafc9ba938464e4ab9f42747ed663f6e0ea917324734bc4d7fc97e76f"
+  },
+  "input_literal52": {
+    "file": "author-proposed52-owner-y-x.jsonl",
+    "bytes": 1144,
+    "sha256": "d89f9d5ef953cfbb795a66b644fe93511959a6b9996fb89d988baa7f90c5f78a"
+  },
+  "approved_plan": {
+    "file": "next-distinct-native-block-plan81.json",
+    "bytes": 606660,
+    "sha256": "e4507671448b253aefe5e3b6277d9720e124722c69b82eaf5e99689ebd049254"
+  },
+  "final_reader": {
+    "file": "read_next_distinct_native_blocks.py",
+    "bytes": 11770,
+    "sha256": "959a9355f3e137a6b14e6f8d2a4a907c587411b49a2e593ebbb72ddf48e43564"
+  },
+  "result_files": [
+    {
+      "file": "accepted49-owner-y-x.jsonl",
+      "bytes": 1078,
+      "sha256": "474981e5eb8aacac4ccdcaa11f82cc1f8f31d55cca2d0498c63ba83d3134e30a"
+    },
+    {
+      "file": "held32-owner-y-x.jsonl",
+      "bytes": 704,
+      "sha256": "23f6626a05e9b0a1b0acb904cca5c0bfee1d10df634c499ccf761843a664e7f8"
+    },
+    {
+      "file": "independent-keyed-decisions81.jsonl",
+      "bytes": 252158,
+      "sha256": "40db942e8511dd1d3d3d5294ef49e0b468e20d26d49f01f69a531507a50003b4"
+    },
+    {
+      "file": "custody-and-scope-verification.json",
+      "bytes": 1662,
+      "sha256": "76f9165832b76741e752d4d79cbaa634fb39a5d57cf59b2b8397a9a2ac7bfbda"
+    },
+    {
+      "file": "whole-input279-manifest.json",
+      "bytes": 55346,
+      "sha256": "f9738f53f47170538f14b26782297f9e4353bbb5a599daf1cb8e5aae143aea5c"
+    },
+    {
+      "file": "native-centre-verification81.json",
+      "bytes": 19524,
+      "sha256": "3d5b7f1726c315c47e30f3a1a1285c252e5ddded460f7572057b37b0c99c02a9"
+    },
+    {
+      "file": "independent-visual-reasons.json",
+      "bytes": 13671,
+      "sha256": "afdd45f4b5873f774e584ac18c2416b7aecc9cae38948332a86e36abe363099a"
+    }
+  ],
+  "source_operations_by_reviewer": 0,
+  "all_prior_January1_January3_chains_unchanged": true,
+  "failed_startup_history": "Initial producer reader failed at a redundant stale 91/60/1 assertion before attempt-start and source reads. Empty stdout, traceback, original reader and correction records remain in the 279-file input. Final reader is separately pinned; it completed 55 new data and 55 mask operations plus 15 authenticated whole-block reuses in 108.441916834 seconds, with zero execution failures.",
+  "review_verifier_history": "The first local audit attempt stopped on an unavailable rasterio import before verification/source operations. The final offline verifier uses existing numpy/Pillow and recomputes native affine placements from approved projected coordinates; no fresh geographic projection or geometry predicate is claimed. Final run passed.",
+  "custody_scope": "All 279 saved input files inventoried, all 152 producer-listed product bodies checked, all 70 NPZ encoded and decoded members checked. Original 15 reused arrays matched their original public Git blob OIDs and hashes; original local metadata bodies matched public pins and the unchanged custody embedded in compatibility sidecars. The parent authenticated the prior public packet; this review made no remote source replay or fresh full-scene COG authentication.",
+  "radiometry": "70 PB05 centres retain declared-offset/provider-applied contradiction and are qualitative raw-DN only. Eleven PB02.13 centres also remain unnormalized. Fixed RGB 0..3000/FCC 0..5000 display, nearest enlargement and no indices. Every SCL contradiction remains literal.",
+  "edge_case17294": "Accepted only the visible valid-centre ground-like strip. RGB/NIR49x40 of49x49 and SCL25x20 of25x25 remain incomplete; missing rows are mask0/magenta with no imputation.",
+  "scope_accounting": "All81 exact original keys are a subset of current held461 and disjoint from accepted10 and union133385. These49 are recommendations only. Root owns adoption and accounting; no accepted union or original ledger was changed.",
+  "closure_boundary": "Visible dated facets only. Formal broader original question closure, hidden-surface inference, whole-cell truth and native-authority/repair credit remain zero.",
+  "limitations": [
+    "Qualitative dated visible facet only; no calibrated reflectance, normalized BOA, spectral index or automated classification.",
+    "No hidden ground or understory, dryness, depth, inundation, exact tide, material, purity or whole-cell ground-truth conclusion.",
+    "Literal source SCL, cloud, shadow, fringe, masks and all earlier cloudy/nodata observations remain unchanged; SCL is context, not independent body truth.",
+    "Source association is the retained source-candidate/member relation, not a new strict-interior, boundary/tie or selected-footprint predicate.",
+    "All original independent source, owner, parent, selected geographic portion, jurisdiction and territorial holds remain; no native-authority or repair credit."
+  ],
+  "root_adoption_credit": 0,
+  "formal_broader_original_question_closure_count": 0,
+  "native_authority_or_repair_credit": 0
+}

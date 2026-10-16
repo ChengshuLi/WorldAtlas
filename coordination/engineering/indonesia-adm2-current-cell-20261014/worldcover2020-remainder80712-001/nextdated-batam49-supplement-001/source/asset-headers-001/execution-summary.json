@@ -1,0 +1,23 @@
+{
+  "kind": "actual-source-header-only-no-value-window-execution",
+  "input_plan_sha256": "87449557bc9d6397e9ebc670e6c8523ed8b57276e95f563afe680661d9edde0b",
+  "script_sha256": "295e3f58b1f0ddeb30e3c618fa0ad9ecf0650b0b67f02033950035acd6b2ae63",
+  "products": [
+    {
+      "file": "asset-headers-001/S2A_48NVF_20200106_1_L2A.json",
+      "bytes": 17479,
+      "sha256": "3e203559ba10a6e75c6f0cdaf1041678e5e1145ac0111c9733ea587f61ba56e2"
+    },
+    {
+      "file": "compatible-saved-headers/S2A_48NVG_20200106_0_L2A.json",
+      "bytes": 17217,
+      "sha256": "0ef0af16c60eaa1c5fcfd6fc5a6271b56a36ace1b07fcbeb103abfac73d59c42",
+      "reused_without_remote_reopen": true
+    }
+  ],
+  "item_count": 2,
+  "value_or_mask_reads": 0,
+  "rasterio_version": "1.4.3",
+  "gdal_version": "3.9.3",
+  "elapsed_seconds": 23.71030297598918
+}

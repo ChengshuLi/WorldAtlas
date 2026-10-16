@@ -1,0 +1,15 @@
+{
+  "public_projection": true,
+  "omitted_separate_duplicate_file": "original81-prior-complete-dated-stage-records.jsonl",
+  "original_bytes": 3626488,
+  "original_sha256": "2bacef2a73dca7e0d7b53d18ffe137f18c3e31816756c8f034b782ea03e9b218",
+  "lossless_reconstruction": {
+    "whole_author_body": "source/author-proposed81-nextdated-dispositions.jsonl",
+    "whole_sha256": "90c5719cafc9ba938464e4ab9f42747ed663f6e0ea917324734bc4d7fc97e76f",
+    "record_field": "prior_complete_dated_stage_record_unchanged",
+    "record_order": "unchanged author JSONL order",
+    "serialization": "json.dumps(record,separators=(comma,colon),ensure_ascii=True) plus newline per record",
+    "actual_reconstruction_byte_identical": true
+  },
+  "meaning": "All81 complete prior records remain embedded unchanged in the one whole canonical author body. No original observation is removed. The local reviewer279-file inventory remains historical; this explicitly declared public projection removes only the duplicate storage leaf."
+}
