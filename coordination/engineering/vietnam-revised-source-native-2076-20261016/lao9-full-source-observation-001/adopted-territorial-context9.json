@@ -1,0 +1,317 @@
+{
+  "version": 1,
+  "kind": "adopted-native-territorial-applicability-v1",
+  "provenance": [
+    {
+      "id": "original-gb:VNM:ADM1",
+      "role": "original-source",
+      "parts": [
+        {
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-VNM-ADM1-000.bin.gz",
+          "commit": "225e0d3628b35390a712365bf800f98a009a34e9",
+          "mode": "100644",
+          "git_blob_oid": "6ce239e0543eb49b944cee4d9fc45c28541f0130",
+          "bytes": 201064,
+          "sha256": "4b45b67591b65e311ab3b864f0157243c1e90d98568f5afc0f40d3641fdc00ac",
+          "decoded_bytes": 536751,
+          "decoded_sha256": "010bff8d3244064bc8001033ba79acc1215a1fb6e568f6f8a90da7ecec2c2fc5"
+        }
+      ]
+    },
+    {
+      "id": "original-gb:VNM:ADM2",
+      "role": "original-source",
+      "parts": [
+        {
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-VNM-ADM2-000.bin.gz",
+          "commit": "225e0d3628b35390a712365bf800f98a009a34e9",
+          "mode": "100644",
+          "git_blob_oid": "d6351672b369b2e6919b10b7c959b3b709a3040e",
+          "bytes": 1624579,
+          "sha256": "8fa769599000ab536b18b4a9d18c71fe0fecbe134d4443e36e6b2797b41273a8",
+          "decoded_bytes": 5273788,
+          "decoded_sha256": "2dff75b58e71f736ca9fd6ef7c859be40c6f9a9b7ae5cd0806b36fe8cfa4c4f6"
+        }
+      ]
+    },
+    {
+      "id": "parent-nine-choice",
+      "role": "adoption",
+      "pin": {
+        "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/lao9-full-source-observation-001/parent-source-choice-adoption9.json",
+        "commit": "776b4e37240960d8498daa5d3a956e46dd674cf0",
+        "mode": "100644",
+        "git_blob_oid": "e75fdd7e515fc361336441ade70de8a2ef84d69d",
+        "bytes": 1575,
+        "sha256": "e6e0ce3d54e399c65bbe612075d88f27dc43489f21931d5e5d8462e3ee6e3f09"
+      }
+    },
+    {
+      "id": "exact-nine-scope",
+      "role": "scope",
+      "pin": {
+        "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/lao9-full-source-observation-001/exact-adopted-native-scope9.json",
+        "commit": "db813343c9ef614294e47ed019e604fe406d72ed",
+        "mode": "100644",
+        "git_blob_oid": "670bd62dd78c9fbe32be15decca216b841a62df4",
+        "bytes": 5436,
+        "sha256": "79583b28a99391848d2afba91f250cb05936cb4853ec3494413a7e07daae689c"
+      }
+    }
+  ],
+  "records": [
+    {
+      "role": "contextual",
+      "source_id": "gb-full:LAO:ADM2:9469f09:54806243B58703699561211",
+      "target_id": "gb:LAO:ADM2:54806243B58703699561211",
+      "pixelIndex": 26855,
+      "y": 114786,
+      "x": 205956,
+      "negative_ordinal": 0,
+      "geometry_sha256": "ca4b8b1772e817aa3287b546a069ead4319026126b2f22af05eabdc38e9a5d98",
+      "original_source": {
+        "id": "original-gb:VNM:ADM1",
+        "pointer": "/features/18/geometry"
+      },
+      "adoption": {
+        "id": "parent-nine-choice",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "exact-nine-scope",
+        "pointer": "/records/0",
+        "owner_pointer": "/pixelIndex"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb-full:LAO:ADM2:9469f09:54806243B58703699561211",
+      "target_id": "gb:LAO:ADM2:54806243B58703699561211",
+      "pixelIndex": 26855,
+      "y": 114786,
+      "x": 205956,
+      "negative_ordinal": 2,
+      "geometry_sha256": "5a407f3833cfbf61cf82acfb50ac3dec0edcbad88e2045da95e5f807eb69fe7a",
+      "original_source": {
+        "id": "original-gb:VNM:ADM2",
+        "pointer": "/features/389/geometry"
+      },
+      "adoption": {
+        "id": "parent-nine-choice",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "exact-nine-scope",
+        "pointer": "/records/0",
+        "owner_pointer": "/pixelIndex"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb-full:LAO:ADM2:9469f09:54806243B58703699561211",
+      "target_id": "gb:LAO:ADM2:54806243B58703699561211",
+      "pixelIndex": 26855,
+      "y": 114861,
+      "x": 205963,
+      "negative_ordinal": 2,
+      "geometry_sha256": "5a407f3833cfbf61cf82acfb50ac3dec0edcbad88e2045da95e5f807eb69fe7a",
+      "original_source": {
+        "id": "original-gb:VNM:ADM2",
+        "pointer": "/features/389/geometry"
+      },
+      "adoption": {
+        "id": "parent-nine-choice",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "exact-nine-scope",
+        "pointer": "/records/1",
+        "owner_pointer": "/pixelIndex"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb-full:LAO:ADM2:9469f09:54806243B58703699561211",
+      "target_id": "gb:LAO:ADM2:54806243B58703699561211",
+      "pixelIndex": 26855,
+      "y": 115242,
+      "x": 205967,
+      "negative_ordinal": 0,
+      "geometry_sha256": "ca4b8b1772e817aa3287b546a069ead4319026126b2f22af05eabdc38e9a5d98",
+      "original_source": {
+        "id": "original-gb:VNM:ADM1",
+        "pointer": "/features/18/geometry"
+      },
+      "adoption": {
+        "id": "parent-nine-choice",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "exact-nine-scope",
+        "pointer": "/records/2",
+        "owner_pointer": "/pixelIndex"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb-full:LAO:ADM2:9469f09:54806243B58703699561211",
+      "target_id": "gb:LAO:ADM2:54806243B58703699561211",
+      "pixelIndex": 26855,
+      "y": 115242,
+      "x": 205967,
+      "negative_ordinal": 1,
+      "geometry_sha256": "7bba530c1ded6999e99c606fcbc6927d0bf3f0ffad5626f6e73541649fb34cab",
+      "original_source": {
+        "id": "original-gb:VNM:ADM2",
+        "pointer": "/features/163/geometry"
+      },
+      "adoption": {
+        "id": "parent-nine-choice",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "exact-nine-scope",
+        "pointer": "/records/2",
+        "owner_pointer": "/pixelIndex"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb-full:LAO:ADM2:9469f09:54806243B53408209397741",
+      "target_id": "gb:LAO:ADM2:54806243B53408209397741",
+      "pixelIndex": 26845,
+      "y": 116097,
+      "x": 207477,
+      "negative_ordinal": 0,
+      "geometry_sha256": "a505f9e95e4d4f33434fb5f18aa946be4abd5de3b05112ef1070e26658269a18",
+      "original_source": {
+        "id": "original-gb:VNM:ADM2",
+        "pointer": "/features/477/geometry"
+      },
+      "adoption": {
+        "id": "parent-nine-choice",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "exact-nine-scope",
+        "pointer": "/records/3",
+        "owner_pointer": "/pixelIndex"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb-full:LAO:ADM2:9469f09:54806243B53408209397741",
+      "target_id": "gb:LAO:ADM2:54806243B53408209397741",
+      "pixelIndex": 26845,
+      "y": 116098,
+      "x": 207474,
+      "negative_ordinal": 0,
+      "geometry_sha256": "a505f9e95e4d4f33434fb5f18aa946be4abd5de3b05112ef1070e26658269a18",
+      "original_source": {
+        "id": "original-gb:VNM:ADM2",
+        "pointer": "/features/477/geometry"
+      },
+      "adoption": {
+        "id": "parent-nine-choice",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "exact-nine-scope",
+        "pointer": "/records/4",
+        "owner_pointer": "/pixelIndex"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb-full:LAO:ADM2:9469f09:54806243B33031915083472",
+      "target_id": "gb:LAO:ADM2:54806243B33031915083472",
+      "pixelIndex": 26808,
+      "y": 119659,
+      "x": 209305,
+      "negative_ordinal": 1,
+      "geometry_sha256": "107c1534596693726bc0e3971114594fb764806af5753eeec04b409da3a3f42d",
+      "original_source": {
+        "id": "original-gb:VNM:ADM2",
+        "pointer": "/features/387/geometry"
+      },
+      "adoption": {
+        "id": "parent-nine-choice",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "exact-nine-scope",
+        "pointer": "/records/5",
+        "owner_pointer": "/pixelIndex"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb-full:LAO:ADM2:9469f09:54806243B33031915083472",
+      "target_id": "gb:LAO:ADM2:54806243B33031915083472",
+      "pixelIndex": 26808,
+      "y": 119660,
+      "x": 209302,
+      "negative_ordinal": 1,
+      "geometry_sha256": "107c1534596693726bc0e3971114594fb764806af5753eeec04b409da3a3f42d",
+      "original_source": {
+        "id": "original-gb:VNM:ADM2",
+        "pointer": "/features/387/geometry"
+      },
+      "adoption": {
+        "id": "parent-nine-choice",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "exact-nine-scope",
+        "pointer": "/records/6",
+        "owner_pointer": "/pixelIndex"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb-full:LAO:ADM2:9469f09:54806243B33031915083472",
+      "target_id": "gb:LAO:ADM2:54806243B33031915083472",
+      "pixelIndex": 26808,
+      "y": 119872,
+      "x": 209450,
+      "negative_ordinal": 0,
+      "geometry_sha256": "8f46de1ae36c21b5a9b6a8a15243664e77ec6e22fdd2fe726daab82a7564e02b",
+      "original_source": {
+        "id": "original-gb:VNM:ADM2",
+        "pointer": "/features/146/geometry"
+      },
+      "adoption": {
+        "id": "parent-nine-choice",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "exact-nine-scope",
+        "pointer": "/records/7",
+        "owner_pointer": "/pixelIndex"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb-full:LAO:ADM2:9469f09:54806243B33031915083472",
+      "target_id": "gb:LAO:ADM2:54806243B33031915083472",
+      "pixelIndex": 26808,
+      "y": 119872,
+      "x": 209455,
+      "negative_ordinal": 0,
+      "geometry_sha256": "8f46de1ae36c21b5a9b6a8a15243664e77ec6e22fdd2fe726daab82a7564e02b",
+      "original_source": {
+        "id": "original-gb:VNM:ADM2",
+        "pointer": "/features/146/geometry"
+      },
+      "adoption": {
+        "id": "parent-nine-choice",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "exact-nine-scope",
+        "pointer": "/records/8",
+        "owner_pointer": "/pixelIndex"
+      }
+    }
+  ]
+}
