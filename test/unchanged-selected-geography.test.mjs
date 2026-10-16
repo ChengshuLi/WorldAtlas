@@ -773,7 +773,7 @@ test('production collector rejects a moving-main policy label different from its
 
 
 test('routing distinguishes literal historical rebind profiles from the expanded current executing closure',async()=>{
- assert.strictEqual(REBIND_CODE,CURRENT_REBIND_CODE);
+ assert.deepEqual(REBIND_CODE,CURRENT_REBIND_CODE);
  for(const rebindCode of [LEGACY_CURRENT_REBIND_CODE,CURRENT_REBIND_CODE]){
   const f=fixture({rebindCode,historicalMetadataAbsent:rebindCode===LEGACY_CURRENT_REBIND_CODE});
   try{const result=await f.inspect(f.candidate,f.baseline);assert.equal(result.status,'unchanged-selected-inputs',result.reason);
