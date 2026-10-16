@@ -1,0 +1,803 @@
+{
+  "projection": "Only unnecessaryworkspace/runtime prefixes omitted from public copies. Scientificvalues/nativearrays/masks/alloriginalkeys/sourceSIDs/fullsourcebodyassociations/qualityflags/oldquestions unchanged. All72actualpointrecords/source3x3arrays retained whole in publiccopy; new70remote-centrecontexts18blocks +2novelcontextsfromexistingauthenticatedPMParrays. ExistingpairedPNGpages/crops copiedunchanged. FullnewsourceTIFFs/masks/nativePNGs remainprivatelyretained/inventoried,notallmirroredpublicly. Rawsourcepinsbelowpreservetheuneditedprivateoriginals. No newsource/raster/native/kernel/geometry/classifier/renderforpublication.",
+  "raw_original_pins": [
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMN-native-009/scene-item.json",
+      "bytes": 33799,
+      "sha256": "e24f05f8a8b50165cfa5c6cc33bbe893fedd5f7f7c42b7bf085281347628f7a7",
+      "git_blob_oid": "1b88a93a8f41c3721fcf77346fe78c09e44a83fc",
+      "public_destination": "pmn/source/scene-item.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMN-native-009/granule_metadata.xml",
+      "bytes": 553083,
+      "sha256": "0c7cee139eb6065540888250af927d53946dea862b463fbc7932317969a451df",
+      "git_blob_oid": "199ab4daf731b4c958551cc784232b9c51322e57",
+      "public_destination": "pmn/source/granule_metadata.xml"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMN-native-009/actual-primary-source-receipts.json",
+      "bytes": 7826,
+      "sha256": "7d5d7f940412f233780792e75f18046209c01e3cae22af5a3742c475bd63ef12",
+      "git_blob_oid": "46cf0171aa01fa3bf8a928cf064e510c92674031",
+      "public_destination": "pmn/source/actual-primary-source-receipts.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMN-native-009/primary-method-source-check.json",
+      "bytes": 2864,
+      "sha256": "f62e986fb80b7b56b778a977a09dd9da4bc9a652ec891bc780a9d5a1c96c8780",
+      "git_blob_oid": "ac297bad82341919c01e76ed8b35551e3d2e5730",
+      "public_destination": "pmn/source/primary-method-source-check.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMN-native-009/actual-native-blocks-001/S2A_47PMN_20200105_0_L2A/native-observations.json",
+      "bytes": 270477,
+      "sha256": "6fe293c94be50822b53e506eeede709cd55e9e61264e7f523c93029d0a32ce94",
+      "git_blob_oid": "67f1ce5c7adf19ec5129a0e13cc0853f6fa53c9b",
+      "public_destination": "pmn/actual-native-observations.json.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMN-native-009/native-block-plan.json",
+      "bytes": 41656,
+      "sha256": "940f7df1585139a296aa91ab48a6e2312e8684cb2ac32c48317082ec3cf99ecd",
+      "git_blob_oid": "b51746c637081ea3115db677483aaae4e578bcd9",
+      "public_destination": "pmn/native-block-plan.json.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMN-native-009/read_native_blocks.py",
+      "bytes": 13794,
+      "sha256": "d764ba55ff9a1f6a0e8defb1bdf27b9cbc3338d4244913f44fca26bcb134ca44",
+      "git_blob_oid": "2d49e1e214b08c12e6fbb8fb1a166ab7dad07daa",
+      "public_destination": "pmn/method/read_native_blocks.py"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMN-native-009/reader-adaptation.diff",
+      "bytes": 2178,
+      "sha256": "bf77e84c333ab064050869ea01a79d3f4d94bc7103b5451e46f8086fcaa782fb",
+      "git_blob_oid": "10ebba3ae542e52061e934fc39e21c8191fbfa32",
+      "public_destination": "pmn/method/reader-adaptation.diff"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMN-native-009/source-method-adaptation.json",
+      "bytes": 1030,
+      "sha256": "db4d5616b67aa202b8c61e171cb9ad66b8ef14b1e54d5bdb4feb38f79972747a",
+      "git_blob_oid": "ad821ab23bfdf34ad543f5135f698d84331ed376",
+      "public_destination": "pmn/method/source-method-adaptation.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMN-native-009/prepare-exact-native-inputs.py",
+      "bytes": 6089,
+      "sha256": "97bbee65f978dd0a1b7df1016d3ab7be4ba36951d90adfb99c3c345824fc46fa",
+      "git_blob_oid": "1d95d3408d10b80a4e5d07f5b86acd95c37f68b4",
+      "public_destination": "pmn/method/prepare-exact-native-inputs.py"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMN-native-009/display-actual47.py",
+      "bytes": 2841,
+      "sha256": "0b945181e35bc4d69872e82ce296e21885ea40d69b6a701c6944f1f5cab191da",
+      "git_blob_oid": "81f638c066e367b9563532fe0c4f25da9d027564",
+      "public_destination": "pmn/method/display-actual47.py"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMN-native-009/author-actual47.py",
+      "bytes": 7515,
+      "sha256": "f63079a6cd28d6850dda67008302c2eeb4d45df4a4b1ed44c7f17a7ce52ddb45",
+      "git_blob_oid": "35928f285d52d2184b958a150017ac77eb9dc1dd",
+      "public_destination": "pmn/method/author-actual47.py"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMN-native-009/actual-native-blocks-001/execution-receipt.json",
+      "bytes": 2311,
+      "sha256": "288c577b82815f5a6dd6ab990768c0173f2acac3e841c461a39f07038b0f80c5",
+      "git_blob_oid": "675a3e63cbd5f94dbc6d9091e4abea0574750bc1",
+      "public_destination": "pmn/operating-history/execution-receipt.json.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMN-native-009/actual-native-blocks-001/complete-output-inventory.json",
+      "bytes": 25188,
+      "sha256": "6e09fb06060d7600e31e5e07cd19048cf4449ad37b5e315c66c4b8135ff32894",
+      "git_blob_oid": "bc05232aa54f3e11ba3e64be28d2e9d1b4044a15",
+      "public_destination": "pmn/operating-history/complete-output-inventory.json.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMN-native-009/attempt-001.stdout.jsonl",
+      "bytes": 927,
+      "sha256": "f8f78e17b0d545ac1ec48feb667e223bf64128dc463d864bb82da29bc3e3b9d2",
+      "git_blob_oid": "21ffdddb695afeb9c4f13764c12f876cf74ecccc",
+      "public_destination": "pmn/operating-history/attempt-001.stdout.jsonl"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMN-native-009/attempt-001.stderr.log",
+      "bytes": 777,
+      "sha256": "ace6ba99b8e563477c7a1f73b6d18a7f6d023094c34d29535c239b76a2e173c1",
+      "git_blob_oid": "f5864325c5b892fc687210b4370362fac2d259cc",
+      "public_destination": "pmn/operating-history/attempt-001.stderr.log"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMN-native-009/actual-execution-summary.json",
+      "bytes": 1108,
+      "sha256": "b50895f8807ca69d8d53a116cb3f86bf84d9f0fb0731d42226cf2f7674fe6781",
+      "git_blob_oid": "22c22d23a77f3d6dd1da7c25f38f50dec1f960c8",
+      "public_destination": "pmn/operating-history/actual-execution-summary.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMN-native-009/authored-display47/manifest.json",
+      "bytes": 85575,
+      "sha256": "106d79e23e78de3230b28a905dc3dea42e8e1e9ce5ae389637f1595d40ef5a02",
+      "git_blob_oid": "f1a48737ac3ae334394b3f321fc52fddcd105c39",
+      "public_destination": "pmn/actual-context/manifest.json.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMN-native-009/authored-display47/page-00.png",
+      "bytes": 474334,
+      "sha256": "efd1131036e025720d4977822e43eba3fdabe9deed871d81d75b0891be8396f5",
+      "git_blob_oid": "a7623300864b57cca4b1c19c0923b0ad8e587e27",
+      "public_destination": "pmn/actual-context/page-00.png"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMN-native-009/authored-display47/page-01.png",
+      "bytes": 435374,
+      "sha256": "eaf222c5977cabd64ad9deb20944397b9ccc967618aba78a5e421359d9d315a3",
+      "git_blob_oid": "750f9a4cc5dd5e87e8cea943d8cea50285d22303",
+      "public_destination": "pmn/actual-context/page-01.png"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMN-native-009/authored-dated-surface-009/proposed-dated-surface-answers.jsonl.gz",
+      "bytes": 14804,
+      "sha256": "e8bd0a31e4943f595aef7bfd11716e0df265702515340fd369eb0997bf213b59",
+      "git_blob_oid": "c7b72422f6bcfb2d1d0b2299a92bb6ee364c09e4",
+      "public_destination": "pmn/author/proposed-dated-surface-answers.jsonl.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMN-native-009/authored-dated-surface-009/held-dated-surface-questions.jsonl.gz",
+      "bytes": 12786,
+      "sha256": "9c94126c91e702870796921f3660132690230d58e5a0032d0ab39752cce13771",
+      "git_blob_oid": "e19a09e58dc87ff2aad6e1ca9ad572117ef150e1",
+      "public_destination": "pmn/author/held-dated-surface-questions.jsonl.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMN-native-009/authored-dated-surface-009/authored-summary.json",
+      "bytes": 1783,
+      "sha256": "7a9f0628ad1e9605b61614f013d808c20078e5f1d21127d3737baf434cda68e2",
+      "git_blob_oid": "1e1df7cf627f8ec08b59ce12df9c4f3393fe020d",
+      "public_destination": "pmn/author/authored-summary.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMN-native-009/authored-dated-surface-009/main-pmn-dated-surface-adoption.json",
+      "bytes": 2111,
+      "sha256": "bb88a2ebca490a5f7fd441b99d28703c380541b319a386b156923d63fe75955b",
+      "git_blob_oid": "9f1518c0c601692d76ca9cd2d710d32c472a45b3",
+      "public_destination": "pmn/main-pmn-dated-surface-adoption.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker4-mmr-pmn47-review-001/authored26-review.json",
+      "bytes": 1506,
+      "sha256": "eadf0a7dc23b2d11b6f26ee0a09614de1b23e9053048d961fd64fb9a51237b26",
+      "git_blob_oid": "7623451a6d72285cf46eba82eb6c37d666b78ddd",
+      "public_destination": "pmn/review/authored26-review.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker4-mmr-pmn47-review-001/review.md",
+      "bytes": 4148,
+      "sha256": "4865e1faf2655ddba0be9af7c647caafa08203984f81b4b742a6f0dfa53b6f75",
+      "git_blob_oid": "f85521cab487b3d3ffb4439f4dde63d437c4e866",
+      "public_destination": "pmn/review/review.md"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker4-mmr-pmn47-review-001/saved-display-review.json",
+      "bytes": 276,
+      "sha256": "cedb4513e7289cc2cb2f7663176ba27a3117e03b072aec39e0b2daf245503171",
+      "git_blob_oid": "efe0e75c3eb9a03072dcb8bf193e503fd3b4bbef",
+      "public_destination": "pmn/review/saved-display-review.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker4-mmr-pmn47-review-001/source-result-review.json",
+      "bytes": 1178,
+      "sha256": "bd1021b89701de8a729fa7a9cb145e8619eb988d9dd05e4ce6a24f8e82b9e5e8",
+      "git_blob_oid": "7cf8135f3080be5e4a6276314a292d4f10403d4a",
+      "public_destination": "pmn/review/source-result-review.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/scene-item.json",
+      "bytes": 33790,
+      "sha256": "44bf413af9586ca0ca86eb493ebd17d289556a90f83d24ead8bebac70ae9b0fa",
+      "git_blob_oid": "80ae1daf9100ca5c9b2e440dd5c9f25ea81eaa2f",
+      "public_destination": "pln/source/scene-item.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/granule_metadata.xml",
+      "bytes": 553115,
+      "sha256": "2193aae1bc814cc3eb5d87cc39608a5034718561e29b94d26b4e20debe832ba9",
+      "git_blob_oid": "b0dfab42fc3771e6879cef5fa03ea728836272fe",
+      "public_destination": "pln/source/granule_metadata.xml"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/actual-primary-source-receipts.json",
+      "bytes": 7939,
+      "sha256": "06ae40dd070c8094e4337819116a7d2c722fdca71061500afc04453a26b2f9e4",
+      "git_blob_oid": "bd72bae7b66ae21b2607faae5ba18910e012c81c",
+      "public_destination": "pln/source/actual-primary-source-receipts.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/primary-method-source-check.json",
+      "bytes": 2668,
+      "sha256": "c4b11224612f343b5114bc33a93e16ff9c7cc96eeff5d9faaee7d0e4799245a4",
+      "git_blob_oid": "2026dd01d203e4bc1c0d20264071cb3d89c627c2",
+      "public_destination": "pln/source/primary-method-source-check.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/actual-native-blocks-001/S2A_47PLN_20200105_0_L2A/native-observations.json",
+      "bytes": 83330,
+      "sha256": "aa9feab8486872190c59b898296fb25d2d75ca174ba41e8ef5c5970cd584a871",
+      "git_blob_oid": "ab772930339b91287a63d196a401f67d3a4c38df",
+      "public_destination": "pln/actual-native-observations.json.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/native-block-plan.json",
+      "bytes": 11755,
+      "sha256": "880d1db2cb4c6f20ded1fbef8a4025256e9a8e9a88f517c4cb88e793cf06595c",
+      "git_blob_oid": "aad32e02e4067a7a657e00559b29ba3499c7de4b",
+      "public_destination": "pln/native-block-plan.json.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/read_native_blocks.py",
+      "bytes": 13794,
+      "sha256": "05d0cf731f72339f880ad27b28f881a8ebc4b3fd1fa0f73fd2ae8751ba603e3c",
+      "git_blob_oid": "e4ffd9f2e6923b481e9417b2f960a1fb7af33a97",
+      "public_destination": "pln/method/read_native_blocks.py"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/reader-adaptation.diff",
+      "bytes": 2178,
+      "sha256": "4a856f7201a85a1fa22e0bba1564733d30562b75dfe7dd5c198eeb7c9c38591b",
+      "git_blob_oid": "b12431f10f7a8443d94f7d668f5f31214c108587",
+      "public_destination": "pln/method/reader-adaptation.diff"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/source-method-adaptation.json",
+      "bytes": 1025,
+      "sha256": "0de33db619ebc6a8a47a1d09fe778674fbc4e81d36ff465bbf6d6dab46dfb9d5",
+      "git_blob_oid": "9037953d616e8445c4d7d25610f20b43f9f20066",
+      "public_destination": "pln/method/source-method-adaptation.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/prepare-exact-native-inputs.py",
+      "bytes": 6141,
+      "sha256": "e06d4dc33cd410415b7672bc9acde906016c0241db3baea551b413c9059bf6e2",
+      "git_blob_oid": "7a3e5a39f23323ded48a268f6d9e9dee1b7fbf6c",
+      "public_destination": "pln/method/prepare-exact-native-inputs.py"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/display-actual12.py",
+      "bytes": 2841,
+      "sha256": "4a658dbb8db1e9cadaff9ccff0c8ffd8bd7605ca2c4042f7842ed72529790cd3",
+      "git_blob_oid": "9574fb1e8632ac27229e41b006e26caa4b0ec15f",
+      "public_destination": "pln/method/display-actual12.py"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/author-actual12.py",
+      "bytes": 5128,
+      "sha256": "5e1ed35c84f388a11ff9e0825ab6a0bed514d7366fff22858231f4a08ae78f0f",
+      "git_blob_oid": "2b756150a029e914c06afbf5a868473afe269eca",
+      "public_destination": "pln/method/author-actual12.py"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/actual-native-blocks-001/execution-receipt.json",
+      "bytes": 2310,
+      "sha256": "0797da63f66a24fa5b06ed349244753476bedfce266cc1005615d90462417107",
+      "git_blob_oid": "eddc80d10020570096341b38e9564f011fc08924",
+      "public_destination": "pln/operating-history/execution-receipt.json.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/actual-native-blocks-001/complete-output-inventory.json",
+      "bytes": 11949,
+      "sha256": "fed1246af5b998632550ffa89aec3298d3d9a5ae2f39269aa14501606a88e2bd",
+      "git_blob_oid": "d7fda6e7a2e8214256ba95c44ef1aa450ce15f33",
+      "public_destination": "pln/operating-history/complete-output-inventory.json.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/attempt-001.stdout.jsonl",
+      "bytes": 530,
+      "sha256": "c919a86799d54156533548306fca62daefd1704185d93b20a0bc8729de2f085e",
+      "git_blob_oid": "3c477ce49a2f78c368d5a2fb25c2878420e6996e",
+      "public_destination": "pln/operating-history/attempt-001.stdout.jsonl"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/attempt-001.stderr.log",
+      "bytes": 777,
+      "sha256": "070b12db2a53b49f4c1dfd56ecf7d8b188d210e14a71a9e710a85e8585e288bf",
+      "git_blob_oid": "49fc6c73e4e60bf776194f203fe1e8f47ffd73ae",
+      "public_destination": "pln/operating-history/attempt-001.stderr.log"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/actual-execution-summary.json",
+      "bytes": 1107,
+      "sha256": "b583aa96b863ab1d57394564345c76b72ec88360dcb78738581355a66b1b57b6",
+      "git_blob_oid": "6cdb729f6bf9a9e2d1afb2dbecc759abb803a4a3",
+      "public_destination": "pln/operating-history/actual-execution-summary.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/authored-display12/manifest.json",
+      "bytes": 22194,
+      "sha256": "5b7dd36690120a0715528e64d9111052f2deb72f8a17b521502de40e4ab746ff",
+      "git_blob_oid": "3ad0a6524a9bce17e74063eca6da62c8daefd61c",
+      "public_destination": "pln/actual-context/manifest.json.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/authored-display12/page-00.png",
+      "bytes": 216470,
+      "sha256": "3556adb2e84042a751a826f253263d7a71dbfe0a91d61d089a2d6fb5c68847dd",
+      "git_blob_oid": "6edf6047ea02a86f13273babe87eccdfddba030c",
+      "public_destination": "pln/actual-context/page-00.png"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/authored-dated-surface-010/proposed-dated-surface-answers.jsonl.gz",
+      "bytes": 5395,
+      "sha256": "55fb3fd7e07fcbf935bb29b6a6b92663eee36e84a22a4dc7a2c81fa17b924b91",
+      "git_blob_oid": "06718c2260fc43b4ac98a6d4b1bd763b01b6e0dd",
+      "public_destination": "pln/author/proposed-dated-surface-answers.jsonl.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/authored-dated-surface-010/held-dated-surface-questions.jsonl.gz",
+      "bytes": 6063,
+      "sha256": "6e31b58eec64a0b19c3aa695aed8bf499af5eaec0bf375ef3e36effe7045683b",
+      "git_blob_oid": "2a8c2603b6db2530b2d8aa744046b65945d24f4c",
+      "public_destination": "pln/author/held-dated-surface-questions.jsonl.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/authored-dated-surface-010/authored-summary.json",
+      "bytes": 1601,
+      "sha256": "c12ea9c4e0a272dfa47531a94ea55e5384c0006fdb2aa185e756fa56c387e2d3",
+      "git_blob_oid": "78088709dc9392225a45a0e404439008f5e1c625",
+      "public_destination": "pln/author/authored-summary.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/authored-dated-surface-010/main-pln-dated-surface-adoption.json",
+      "bytes": 1835,
+      "sha256": "9adc1fa047ec188b25824637d6ad4ed6efa9909a027e4e36e6af33046d9ac09d",
+      "git_blob_oid": "61259520e620a8b07cb796a7bf474a6987986b78",
+      "public_destination": "pln/main-pln-dated-surface-adoption.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker4-mmr-pln12-review-001/authored5-review.json",
+      "bytes": 1476,
+      "sha256": "b49125e564818832ce09be71036a3fee1d3e4594c7a35fcaae350893502acf77",
+      "git_blob_oid": "0f0a4e9739bdd63a74848a2cccc1ff5fcdfa9d5c",
+      "public_destination": "pln/review/authored5-review.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker4-mmr-pln12-review-001/review.md",
+      "bytes": 3208,
+      "sha256": "1b3e7a0fe8dd4da8d2f04078b5df8df09caffaef390de9bc79e5406d1c7eedd8",
+      "git_blob_oid": "16d2ec4bf9d1b92e7202c8b122bc6b5baee0bc11",
+      "public_destination": "pln/review/review.md"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker4-mmr-pln12-review-001/saved-display-review.json",
+      "bytes": 275,
+      "sha256": "daf1347f0e6770981f88b2116fefd1f59ac336c5c6704f8ff6a00e45b29b1793",
+      "git_blob_oid": "eb6983f807d4be67d0800fec2f6f9c5bacd80017",
+      "public_destination": "pln/review/saved-display-review.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker4-mmr-pln12-review-001/source-result-review.json",
+      "bytes": 1175,
+      "sha256": "cbe5ec8312fb0d6928da9e02bc4f8bbbc28a8e601f7f96e0f02e9c83957970d4",
+      "git_blob_oid": "e477a63c31b2dcb3276811076225dee47edb8275",
+      "public_destination": "pln/review/source-result-review.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMQ-native-012/scene-item.json",
+      "bytes": 33793,
+      "sha256": "86d10a8e6feb8699576b0a6d8d1a88c13a2ed46bf120c270798e181c4d1d3398",
+      "git_blob_oid": "518d76a9d491face7bd128f4c6b411824dfbd30c",
+      "public_destination": "pmq/source/scene-item.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMQ-native-012/granule_metadata.xml",
+      "bytes": 553027,
+      "sha256": "ab03e680632b6d8d03953c3272c8753c46c0cce54a1877a21a5ea23053ef1f30",
+      "git_blob_oid": "cc7889ada82db99661e9a8d964a197227c196d84",
+      "public_destination": "pmq/source/granule_metadata.xml"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMQ-native-012/actual-primary-source-receipts.json",
+      "bytes": 7902,
+      "sha256": "9bdc09f9567f7d8504897617730c9eb96359d9f88e612e09518c81cbfbd2b5d4",
+      "git_blob_oid": "8b87aa1a703e168f52ea3c3406724476b249d5ba",
+      "public_destination": "pmq/source/actual-primary-source-receipts.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMQ-native-012/primary-method-source-check.json",
+      "bytes": 2686,
+      "sha256": "cd0b5864828283c10c63ec1d9aa9b902b1df958d1b3bcd6b135f558ac19fd02d",
+      "git_blob_oid": "52f0c7ee7e45c26d6ba420628d7575b34a514e57",
+      "public_destination": "pmq/source/primary-method-source-check.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMQ-native-012/actual-native-blocks-001/S2A_47PMQ_20200105_0_L2A/native-observations.json",
+      "bytes": 64225,
+      "sha256": "31244f6a857977064a6638ec7caa471fdd4fbcb1d76b01a3b80e57a73dacb7ea",
+      "git_blob_oid": "e065504b5baf543b390f30e07d49692831e16464",
+      "public_destination": "pmq/actual-native-observations.json.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMQ-native-012/native-block-plan.json",
+      "bytes": 9027,
+      "sha256": "c9b7b78e71f06627242f5b83de5d8db717deaa02a592322a7a6a74542db21630",
+      "git_blob_oid": "19d4730e015fd436d805bc829b55095db58b031f",
+      "public_destination": "pmq/native-block-plan.json.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMQ-native-012/read_native_blocks.py",
+      "bytes": 13790,
+      "sha256": "08184ae84f7a38e351e3ce5d855739432d633fb5a53a6ddcdfdb09ff348a4d0f",
+      "git_blob_oid": "9525a4b88213486b9b578d839e3c18108885cd16",
+      "public_destination": "pmq/method/read_native_blocks.py"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMQ-native-012/reader-adaptation.diff",
+      "bytes": 2174,
+      "sha256": "2cb79941d08239400ed2a8e3018ebb23c057e4dde6caf9c7471ded0482773ecc",
+      "git_blob_oid": "1e3deddac03ca42931abf7e0cbc18ca1472a8d5c",
+      "public_destination": "pmq/method/reader-adaptation.diff"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMQ-native-012/source-method-adaptation.json",
+      "bytes": 1024,
+      "sha256": "6bf01eb81701e8f7c2936f931386213a6e2654480b0ac3029673626f118365bb",
+      "git_blob_oid": "e6b16ef7a05897d63e60393da5632e67fda953c7",
+      "public_destination": "pmq/method/source-method-adaptation.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMQ-native-012/prepare-exact-native-inputs.py",
+      "bytes": 6354,
+      "sha256": "e313f3213794048feb45e06a297e934c9576b45948bd7ca3fa91bf5fbfaac23a",
+      "git_blob_oid": "cb357b120b4515b969dfd5b33baa8ee273791847",
+      "public_destination": "pmq/method/prepare-exact-native-inputs.py"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMQ-native-012/display-actual9.py",
+      "bytes": 2840,
+      "sha256": "d01e6667cbf855f1a8b823eade3fdffc34f861ab69ed1e086c6f31dc91daac0b",
+      "git_blob_oid": "cb60ea173a54f57b2d1acb2a82f9313e0167728e",
+      "public_destination": "pmq/method/display-actual9.py"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMQ-native-012/author-actual9.py",
+      "bytes": 5084,
+      "sha256": "c8b8a3aef6a139a34d559b530bd441667ae40fad753e17be1eb1c542dc5cc3cd",
+      "git_blob_oid": "95f017dcef971401d20fdebb5308026670e3517d",
+      "public_destination": "pmq/method/author-actual9.py"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMQ-native-012/actual-native-blocks-001/execution-receipt.json",
+      "bytes": 2285,
+      "sha256": "bdffefb1516255018b39f45d34c4abdb5c0c1b53992efef80263d527ad18656d",
+      "git_blob_oid": "44ec59484b226f976f11924cced4dcdec57ec6ae",
+      "public_destination": "pmq/operating-history/execution-receipt.json.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMQ-native-012/actual-native-blocks-001/complete-output-inventory.json",
+      "bytes": 9278,
+      "sha256": "4eb346f35bd8e3e18b7de862631e99426606bf1b5bc6c05800c3f1382108a8b5",
+      "git_blob_oid": "e9f18c6aaa15e04c50060c438e7d1bb4b939713d",
+      "public_destination": "pmq/operating-history/complete-output-inventory.json.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMQ-native-012/attempt-001.stdout.jsonl",
+      "bytes": 453,
+      "sha256": "2b17a8f90f959ec3ee9df4d32e951f8a040d12ca1dbbc036b4a0ca7b595b3ec9",
+      "git_blob_oid": "883383d2c770607e3a48a787446a486751a6a06d",
+      "public_destination": "pmq/operating-history/attempt-001.stdout.jsonl"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMQ-native-012/attempt-001.stderr.log",
+      "bytes": 777,
+      "sha256": "25634ac7f370cbdfafeb96dbe21e98723632d65bfd8409bc7009d36227de1d70",
+      "git_blob_oid": "1f15fa3e1facee23b6cf63606ad3c09fa0cbaa07",
+      "public_destination": "pmq/operating-history/attempt-001.stderr.log"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMQ-native-012/actual-execution-summary.json",
+      "bytes": 1085,
+      "sha256": "120f0a63c78348b74380f8c4de327a9c6d1bd4867599ae61fbe30bd4cbcd6286",
+      "git_blob_oid": "4f5606b3ccd81720be7e13c979958cbaa3139f3d",
+      "public_destination": "pmq/operating-history/actual-execution-summary.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMQ-native-012/authored-display9/manifest.json",
+      "bytes": 16755,
+      "sha256": "6957ad95a7979342b3237facba324bc505ec445e7237161c20a31e351190a19c",
+      "git_blob_oid": "31cda9825668a30a09fdf519060d4b314661cc37",
+      "public_destination": "pmq/actual-context/manifest.json.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMQ-native-012/authored-display9/page-00.png",
+      "bytes": 161632,
+      "sha256": "de59162da388b9372bf29bc513529122f7fcd6b498b9d4d9ef5c79199250cfc3",
+      "git_blob_oid": "e38ab2e50f127f165be6da36a2b58daf39896134",
+      "public_destination": "pmq/actual-context/page-00.png"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMQ-native-012/authored-dated-surface-012/proposed-dated-surface-answers.jsonl.gz",
+      "bytes": 4126,
+      "sha256": "3208cd8edea9d99500ee540872f274114a3c0df262b57c539f654db001fcde96",
+      "git_blob_oid": "67fad6c6d091cf8887e3e9d8600b0edf00c11f8a",
+      "public_destination": "pmq/author/proposed-dated-surface-answers.jsonl.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMQ-native-012/authored-dated-surface-012/held-dated-surface-questions.jsonl.gz",
+      "bytes": 5605,
+      "sha256": "c66ea2eeeb48820ca78bc237a484060bdb304b43ac5681e8122e5c53669110f3",
+      "git_blob_oid": "5bef49e26a6bdc6e94596dc8ad34a00fabb32465",
+      "public_destination": "pmq/author/held-dated-surface-questions.jsonl.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMQ-native-012/authored-dated-surface-012/authored-summary.json",
+      "bytes": 1550,
+      "sha256": "53c16eb1f64d6623590a24792555c0419a4f06646eded21c2085c83ba0dd18fa",
+      "git_blob_oid": "368c4f81cd64ba608a8278256e1a09f590880b2c",
+      "public_destination": "pmq/author/authored-summary.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PMQ-native-012/authored-dated-surface-012/main-pmq-dated-surface-adoption.json",
+      "bytes": 1640,
+      "sha256": "224106dc4dddbc5da72a3913f1c215b544af2a1e24bb88ebd837363bebf6468c",
+      "git_blob_oid": "624d4e4e22b590ef73c7fb534bf486aca595b718",
+      "public_destination": "pmq/main-pmq-dated-surface-adoption.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLQ-native-013/scene-item.json",
+      "bytes": 33779,
+      "sha256": "a8aef56fe4ace3e0feb066b45f32182d212297f7e924ba5778b4a54cb1bf6d35",
+      "git_blob_oid": "b5866cd18637ffbd897082a1ff69aa58c9dc85e6",
+      "public_destination": "plq/source/scene-item.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLQ-native-013/granule_metadata.xml",
+      "bytes": 552915,
+      "sha256": "ce5b9b1fbeac1b31df2dfc6fc9a2307f981cf387f5294c76e206e66a8622cb16",
+      "git_blob_oid": "1b42b0ac30c36d032ca0c1924f37c1ff061811aa",
+      "public_destination": "plq/source/granule_metadata.xml"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLQ-native-013/actual-primary-source-receipts.json",
+      "bytes": 7921,
+      "sha256": "449164665d91b6f52fb8b0f3cf99b3868ca248e2f0cab601fd8ba209a32d907c",
+      "git_blob_oid": "1e45e77044f83def42de9af1074c0182afa50c35",
+      "public_destination": "plq/source/actual-primary-source-receipts.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLQ-native-013/primary-method-source-check.json",
+      "bytes": 2691,
+      "sha256": "6868cf5dcfad914605f317d259960be0b4740df8b3e06a0d368eed769bf104db",
+      "git_blob_oid": "e9dcb56ad6d229d50735201c168503c2ef922d75",
+      "public_destination": "plq/source/primary-method-source-check.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLQ-native-013/actual-native-blocks-001/S2A_47PLQ_20200105_0_L2A/native-observations.json",
+      "bytes": 26700,
+      "sha256": "aa7ff884aa50a29bf98d7ab73201a5036dab79015a2da64235bdcca708b5bce0",
+      "git_blob_oid": "f3c7752e9edf9dfe49a28c6f0c8c0caa098f661a",
+      "public_destination": "plq/actual-native-observations.json.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLQ-native-013/native-block-plan.json",
+      "bytes": 3065,
+      "sha256": "062cef1b670c1e36d106c685734999159a47d6946e8c6df4546b56c3647bdad8",
+      "git_blob_oid": "d7ecd03f0703dc68a68b746f3e5067c4ce248edc",
+      "public_destination": "plq/native-block-plan.json.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLQ-native-013/read_native_blocks.py",
+      "bytes": 13790,
+      "sha256": "2b15ce6da2d7af9e261c70427fcdd3c41c11ee19a1d41bba21961f7471e484bc",
+      "git_blob_oid": "c6dcadec99d5b3cd5afb728701b276e200698c59",
+      "public_destination": "plq/method/read_native_blocks.py"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLQ-native-013/reader-adaptation.diff",
+      "bytes": 2174,
+      "sha256": "4df9f812d7f9e004013a102cb94e24bf0ef84b9b072441f23b04e266cbac7ee8",
+      "git_blob_oid": "a54a817014341ce24dbc325a21579c6784b234be",
+      "public_destination": "plq/method/reader-adaptation.diff"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLQ-native-013/source-method-adaptation.json",
+      "bytes": 1024,
+      "sha256": "043049777040027d37bff7cdfbe0986e18dadd04636e28921dda5e583a0b33b7",
+      "git_blob_oid": "33900335b6f402842fca95128c8193c65e8ec393",
+      "public_destination": "plq/method/source-method-adaptation.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLQ-native-013/prepare-exact-native-inputs.py",
+      "bytes": 6345,
+      "sha256": "ece12f61f53f981d9187b7bb0c9d9738d7fc30812bf2bed435e34599ac53b330",
+      "git_blob_oid": "ac99917b249a8efb434c953dbf6713282bd39e4f",
+      "public_destination": "plq/method/prepare-exact-native-inputs.py"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLQ-native-013/display-actual2.py",
+      "bytes": 2840,
+      "sha256": "ac3d2b3d8244ca57b780a2625db320f56a88484ec2c48000b0eb2764a05b2d43",
+      "git_blob_oid": "8363ab8a4d59f80f963fa17fbab16fb3866193a1",
+      "public_destination": "plq/method/display-actual2.py"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLQ-native-013/actual-native-blocks-001/execution-receipt.json",
+      "bytes": 2231,
+      "sha256": "6dc2550bc68f8c5f9df17243012d76886884a921bf101b40fd73aa463ddbf2cb",
+      "git_blob_oid": "036b5467315dc444284fbfd0e3cc1b8a6c18f48d",
+      "public_destination": "plq/operating-history/execution-receipt.json.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLQ-native-013/actual-native-blocks-001/complete-output-inventory.json",
+      "bytes": 6580,
+      "sha256": "8d36037799756bea9654bdcaebbbbf5fbbd0a4397cbddfe03ca36fb7daf0eb95",
+      "git_blob_oid": "ab403b9f12773c19b83041c9cd844b3e98320ce3",
+      "public_destination": "plq/operating-history/complete-output-inventory.json.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLQ-native-013/attempt-001.stdout.jsonl",
+      "bytes": 374,
+      "sha256": "1139f81d5bed3f5496a443610417dca68a48eeb85ab89f9d1b4b915c2494de94",
+      "git_blob_oid": "1bb8063b4965af580ecf751cb6b4493d382b6b25",
+      "public_destination": "plq/operating-history/attempt-001.stdout.jsonl"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLQ-native-013/attempt-001.stderr.log",
+      "bytes": 777,
+      "sha256": "1f2e308bdd6e5b54c7ef10348a606b21a915d63f85546b651344f141842e05f3",
+      "git_blob_oid": "e36b9c10e0cf1fa916cc2db7af53ec7540db5956",
+      "public_destination": "plq/operating-history/attempt-001.stderr.log"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLQ-native-013/actual-execution-summary.json",
+      "bytes": 1044,
+      "sha256": "070561327f309c97ee5b6227438a3e5dc005cd1837f3ec80454929e012b73e8f",
+      "git_blob_oid": "3060f9db64780fd89fc1d5b1b86ac039f101f631",
+      "public_destination": "plq/operating-history/actual-execution-summary.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLQ-native-013/authored-display2/manifest.json",
+      "bytes": 4099,
+      "sha256": "3b4454b782014197cc3fd8910670bb9b3d25950292920227ecf7626b1cf12000",
+      "git_blob_oid": "04af650c8b5e68be0dc31f99b2bca842d2406eb3",
+      "public_destination": "plq/actual-context/manifest.json.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLQ-native-013/authored-display2/page-00.png",
+      "bytes": 42925,
+      "sha256": "3d83a36465a7f55942da17bc0363705ffcddd01ee7ca2c1ed4e87d414a56756f",
+      "git_blob_oid": "e2d2842a6d2095268a1da9c7dc9078429968827c",
+      "public_destination": "plq/actual-context/page-00.png"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLQ-native-013/held-two-specific-source-questions.jsonl.gz",
+      "bytes": 3320,
+      "sha256": "34074ebb4b1ad4eccbc5742f8b492284a66b5ebd59dee61923464726319347de",
+      "git_blob_oid": "495b2452a519ea3a0465deba384d881fad7a115c",
+      "public_destination": "plq/author/held-two-specific-source-questions.jsonl.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLQ-native-013/authored-summary.json",
+      "bytes": 411,
+      "sha256": "67f35ca942d5cb67b8f91e7e400d5a8d4916e8bc62bcf708773a8a74f3016924",
+      "git_blob_oid": "308800c46a2de8f46eb0e31262a8fa60ea7ba2f3",
+      "public_destination": "plq/author/authored-summary.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/retained-PMP2-native-011/actual-two-native-contexts.json",
+      "bytes": 36440,
+      "sha256": "6ea69e796e33c2a15a75d2d0b6ee6105d216eee462444da9e21409fa6f674640",
+      "git_blob_oid": "1be27caf8f57cea99a9eac73554d2fe8032ae77e",
+      "public_destination": "retained-pmp2/actual-two-native-contexts.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/retained-PMP2-native-011/read-two-new-contexts.py",
+      "bytes": 4370,
+      "sha256": "f313c038f302b6e3f5858981da2876ed68041f2544179de68f795c600fb5a649",
+      "git_blob_oid": "348f3e57e3b1bf63a353cc41f29ea7ac4f3fa14e",
+      "public_destination": "retained-pmp2/read-two-new-contexts.py"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/retained-PMP2-native-011/display-two-existing-contexts.py",
+      "bytes": 2584,
+      "sha256": "59f7b3946f7bf8c7b700be66e1821dbc7bfd23f30e373fef8041046fab9347bb",
+      "git_blob_oid": "caa4ff982906c7ba996c70854f2a966df15aba55",
+      "public_destination": "retained-pmp2/display-two-existing-contexts.py"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/retained-PMP2-native-011/display-source-pins.json",
+      "bytes": 1767,
+      "sha256": "d9552c1ee27983a016babd4b84345d189da082c6ddaeccda3b5011c74de4ecd4",
+      "git_blob_oid": "dfb15890510bba9796acd602102c70f54716e3b4",
+      "public_destination": "retained-pmp2/display-source-pins.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/retained-PMP2-native-011/proposed-dated-vegetation1.jsonl.gz",
+      "bytes": 3912,
+      "sha256": "194489f8f10e957dc02482662e01371ded92167035283fab58782264d344c883",
+      "git_blob_oid": "77b0936942d33a4e80f29eb12517a3c308a48602",
+      "public_destination": "retained-pmp2/proposed-dated-vegetation1.jsonl.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/retained-PMP2-native-011/held-beach-interface1.jsonl.gz",
+      "bytes": 3852,
+      "sha256": "a50ffd9925ab47f64fc14caf9845376c9cdbe80fc8834d3df72d80699bcdf515",
+      "git_blob_oid": "3df9762b11d7360d46b84c17cb9773c965885ea3",
+      "public_destination": "retained-pmp2/held-beach-interface1.jsonl.gz"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/retained-PMP2-native-011/authored-summary.json",
+      "bytes": 838,
+      "sha256": "135f2611731468c903b48f74097571a16eaa59e7aabdcd79337c43ade7a380ca",
+      "git_blob_oid": "998b05b9c272e7c183d30e561d05695978c126a2",
+      "public_destination": "retained-pmp2/authored-summary.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/retained-PMP2-native-011/point-8056-existing-RGB-NIR.png",
+      "bytes": 24341,
+      "sha256": "28321b077a7f1f06627044b0e6d6b5bd4ec4e71fe84c2e60dcca30de6e95736c",
+      "git_blob_oid": "1f34122d7abfad2fc9c1d3cc0e6e7104c83ddab3",
+      "public_destination": "retained-pmp2/point-8056-existing-RGB-NIR.png"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/retained-PMP2-native-011/point-8082-existing-RGB-NIR.png",
+      "bytes": 23546,
+      "sha256": "47aa9f965cb6578b7250c4554c3a5d115d10633d53e7bb216eab54b98b79b09e",
+      "git_blob_oid": "f68dada3416de501b49f726f2d45dc7859ca6400",
+      "public_destination": "retained-pmp2/point-8082-existing-RGB-NIR.png"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/retained-PMP2-native-011/main-retained-pmp-dated-vegetation1-adoption.json",
+      "bytes": 1635,
+      "sha256": "82dd6667131a74854dc160934fa085880f031dc1c08f8addb8244dbfc407503a",
+      "git_blob_oid": "a45b00adcf5520c2b4fe08e054bf1a8927f933e6",
+      "public_destination": "retained-pmp2/main-retained-pmp-dated-vegetation1-adoption.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker4-mmr-retained-pmp2-review-001/review.json",
+      "bytes": 1035,
+      "sha256": "84523f70b127b4f227f89936e7426f51e89fc0f05ab5fd65693330ec2a2894d0",
+      "git_blob_oid": "630a47c38217d78bc32e7a86a0c734a209593a33",
+      "public_destination": "retained-pmp2/review/review.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker4-mmr-retained-pmp2-review-001/review.md",
+      "bytes": 2241,
+      "sha256": "7f7c03b7dff730f4917b9fb40b50a75124ce53058864d856d308b41639802a28",
+      "git_blob_oid": "2ff8ad416f1e36e4d956d0e7ee08c5e5219fcbbf",
+      "public_destination": "retained-pmp2/review/review.md"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/kyunsu72-public-provenance-009/actual-public-original72-provenance.json",
+      "bytes": 2936,
+      "sha256": "c772c488d1ad4948a4780c2c248b4e66895be55226acf01fb495a3392f90fe12",
+      "git_blob_oid": "cf65f9d9b415c7b6177910d10e202768ae120660",
+      "public_destination": "existing-public-original72-provenance.json"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker1-mmr-physical-followup-001/new-dated-source-001/first-native-observation-001/publication-preparation-001/payload/source/Sentinel_Data_Legal_Notice.pdf",
+      "bytes": 115881,
+      "sha256": "fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64",
+      "git_blob_oid": "4b703c755dd8bb2405350ff938dbba46316db9fd",
+      "public_destination": "source/Sentinel_Data_Legal_Notice.pdf"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker4-mmr-pmq9-plq2-review-001/review.md",
+      "bytes": 3204,
+      "sha256": "5be37e9e78fc4b617fe6a9b9e8ef73514d4effcd5f2142dec874877b2fb28354",
+      "git_blob_oid": "7cfb00fa018db7985bb6e3e46e2a2676329e74e9",
+      "public_destination": "review-pmq9-plq2/review.md"
+    },
+    {
+      "retained_private_source": "retained-private:.cache/worker4-mmr-pmq9-plq2-review-001/review.json",
+      "bytes": 1559,
+      "sha256": "438324dd49c55e33df1efe206c0487aebae6b2148479895fab1cf3d96bb0478c",
+      "git_blob_oid": "aab0984827eadc63aacaaea963fdf5604c6d16cf",
+      "public_destination": "review-pmq9-plq2/review.json"
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "producer_xml_sha256": "0c7cee139eb6065540888250af927d53946dea862b463fbc7932317969a451df",
+  "producer_facts": {
+    "SENSING_TIME": [
+      {
+        "text": "2020-01-05T04:05:05.717964Z",
+        "attributes": {
+          "metadataLevel": "Standard"
+        }
+      }
+    ],
+    "HORIZONTAL_CS_NAME": [
+      {
+        "text": "WGS84 / UTM zone 47N",
+        "attributes": {}
+      }
+    ],
+    "HORIZONTAL_CS_CODE": [
+      {
+        "text": "EPSG:32647",
+        "attributes": {}
+      }
+    ],
+    "NROWS": [
+      {
+        "text": "10980",
+        "attributes": {}
+      },
+      {
+        "text": "5490",
+        "attributes": {}
+      },
+      {
+        "text": "1830",
+        "attributes": {}
+      }
+    ],
+    "NCOLS": [
+      {
+        "text": "10980",
+        "attributes": {}
+      },
+      {
+        "text": "5490",
+        "attributes": {}
+      },
+      {
+        "text": "1830",
+        "attributes": {}
+      }
+    ],
+    "ULX": [
+      {
+        "text": "399960",
+        "attributes": {}
+      },
+      {
+        "text": "399960",
+        "attributes": {}
+      },
+      {
+        "text": "399960",
+        "attributes": {}
+      }
+    ],
+    "ULY": [
+      {
+        "text": "1300020",
+        "attributes": {}
+      },
+      {
+        "text": "1300020",
+        "attributes": {}
+      },
+      {
+        "text": "1300020",
+        "attributes": {}
+      }
+    ],
+    "XDIM": [
+      {
+        "text": "10",
+        "attributes": {}
+      },
+      {
+        "text": "20",
+        "attributes": {}
+      },
+      {
+        "text": "60",
+        "attributes": {}
+      }
+    ],
+    "YDIM": [
+      {
+        "text": "-10",
+        "attributes": {}
+      },
+      {
+        "text": "-20",
+        "attributes": {}
+      },
+      {
+        "text": "-60",
+        "attributes": {}
+      }
+    ],
+    "CLOUDY_PIXEL_PERCENTAGE": [
+      {
+        "text": "3.510967",
+        "attributes": {}
+      }
+    ],
+    "DEGRADED_MSI_DATA_PERCENTAGE": [
+      {
+        "text": "0",
+        "attributes": {}
+      }
+    ],
+    "NODATA_PIXEL_PERCENTAGE": [
+      {
+        "text": "0.000000",
+        "attributes": {}
+      }
+    ]
+  },
+  "STAC_native_affine": [
+    10,
+    0,
+    399960,
+    0,
+    -10,
+    1300020
+  ],
+  "STAC_native_shape": [
+    10980,
+    10980
+  ],
+  "STAC_source_year": 2020,
+  "STAC_rounded_datetime": "2020-01-05T04:05:05.717000Z",
+  "source_limit": "Nativeaffine/sourceassetsavailable; actualvalidpixels/cloud/localphysicalsurface notyetobserved. NoGEOS/vectorfootprintinference/annualwater/binarygroundtruth.",
+  "rights": "PublicCopernicusSentineldata; sameactualretainedLegalNoticepublic1e5checkpoint.",
+  "scope": "47exactoriginalcurrentlyunansweredKyunsukeysfrom72withoutdatedobservations;9newPMNblocks; all179previousPLPpointsand4adopted63Kyunsukeys excluded; no priorPMNnativeoutput found byretainedfileinventory."
+}

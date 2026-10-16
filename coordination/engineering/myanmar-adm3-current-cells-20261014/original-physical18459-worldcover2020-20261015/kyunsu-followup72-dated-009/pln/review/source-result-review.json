@@ -1,0 +1,28 @@
+{
+  "verdict": "PASS fresh12 source-result and original-key contract; scientific outcomes separate",
+  "source_observations": {
+    "path": "retained-private:.cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/actual-native-blocks-001/S2A_47PLN_20200105_0_L2A/native-observations.json",
+    "bytes": 83330,
+    "sha256": "aa9feab8486872190c59b898296fb25d2d75ca174ba41e8ef5c5970cd584a871"
+  },
+  "keys": 12,
+  "source_context_blocks": 4,
+  "all_new_no_prior_dated_pointer": true,
+  "all_original_keys_owner_SIDs_centres_intervalpointers_preserved": true,
+  "all_five_bands_centre_and9context_masks255": true,
+  "SCLcentre_literal_counts": {
+    "6": 1,
+    "4": 5,
+    "3": 3,
+    "9": 2,
+    "2": 1
+  },
+  "inventory_files_hashed": 58,
+  "inventory_bytes_hashed": 35689238,
+  "actual_native_affines": "EPSG32647 UL300000/1300020; RGBNIR10m10980, SCL20m5490",
+  "catalogue_datetime": "2020-01-05T04:05:09.130000Z",
+  "producer_datetime": "2020-01-05T04:05:09.130795Z",
+  "datetime_precision_difference_seconds": 0.000795,
+  "source_or_native_kernel_reruns": 0,
+  "new_answer_or_repair_credit": 0
+}

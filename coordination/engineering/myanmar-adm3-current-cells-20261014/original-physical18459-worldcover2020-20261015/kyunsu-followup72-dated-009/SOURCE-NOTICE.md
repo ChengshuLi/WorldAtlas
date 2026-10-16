@@ -1,0 +1,9 @@
+# Source attribution and legal notice
+
+Contains modified Copernicus Sentinel data (2020). The four new Sentinel-2A L2A items are from the same 5 January 2020 orbital pass, not four independent dates. Producer sensing times are PMN 04:05:05.717964Z, PLN 04:05:09.130795Z, PMQ 04:04:36.751985Z and PLQ 04:04:39.929437Z. Their official public asset URLs, producer XML, STAC items and actual HTTP receipts accompany the observations. The Sentinel Data Legal Notice is included.
+
+Two additional centres use authenticated arrays already retained from S2A_47PMP_20200105_0_L2A. Its original STAC time, 04:04:51.228000Z, is retained without a fresh claim about producer submillisecond precision. Paired displays use existing source PNG pixels; nearest-neighbor contextual assembly is disclosed. Source reflectance DN scale is0.0001, offset0, with BOA offset not applied.
+
+All72 original geographic centres, owners, SIDs, source-part associations and WorldCover context were already public at immutable a2fba641786a9fc8b180177288ced581a3cdc059. Fresh complete public-blob readbacks verify those original facts. The new Sentinel DN observations and interpretations are not represented as already public. These are reference-grid land-cover locations, not private human positions or fieldwork.
+
+Original body associations come from the retained Myanmar geoBoundaries ADM3 source version, represented2019. Their complete feature/member/part/SID provenance remains in each original question record. Association does not establish current or legal ownership. ESA WorldCover2020v100 context is CC BY4.0, Zanaga et al.2021, DOI10.5281/zenodo.5571936; official data access is https://esa-worldcover.org/en/data-access . Annual model labels are not independent dated ground truth. Full private source outputs remain retained and inventoried; this bounded packet does not mirror all full TIFFs or source PNGs.

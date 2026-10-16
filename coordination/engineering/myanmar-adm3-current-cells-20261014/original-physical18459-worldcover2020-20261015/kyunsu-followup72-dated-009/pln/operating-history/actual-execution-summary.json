@@ -1,0 +1,43 @@
+{
+  "numeric_exit": 0,
+  "summary": {
+    "count": 12,
+    "scl_centre_counts": {
+      "6": 1,
+      "4": 5,
+      "3": 3,
+      "9": 2,
+      "2": 1
+    },
+    "valid_centre_masks_by_band": {
+      "red": {
+        "255": 12
+      },
+      "green": {
+        "255": 12
+      },
+      "blue": {
+        "255": 12
+      },
+      "nir": {
+        "255": 12
+      },
+      "scl": {
+        "255": 12
+      }
+    },
+    "interpretation": "Literal source observations only, not physical completion or hold clearance."
+  },
+  "elapsed_seconds": 22.699308083974756,
+  "peak_rss_bytes": 249135104,
+  "native_body": {
+    "path": ".cache/worker1-mmr-bulk-physical-20261015-001/residual1279-next-006/kyunsu-next-PLN-native-010/actual-native-blocks-001/S2A_47PLN_20200105_0_L2A/native-observations.json",
+    "bytes": 83330,
+    "sha256": "aa9feab8486872190c59b898296fb25d2d75ca174ba41e8ef5c5970cd584a871"
+  },
+  "source_observations": 12,
+  "stored_native_context_blocks": 4,
+  "physical_answers": 0,
+  "awaiting": "actualscientificauthoring/distinctreview/Mainadoption",
+  "no_completed_sourceblock_replay": true
+}
