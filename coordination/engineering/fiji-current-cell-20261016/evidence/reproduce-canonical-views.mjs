@@ -7,25 +7,40 @@ import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {gunzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
-import {publish} from '../../../../scripts/prepare-delivery-handoff.mjs';
+import {publish,pinReader} from '../../../../scripts/prepare-delivery-handoff.mjs';
 import {verifyNativeSeamView} from '../../../../src/native-grid.js';
 import {valueSha} from '../../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 const here=path.dirname(fileURLToPath(import.meta.url)),root=path.resolve(here,'../../../..');
+export function authenticateLocalPinnedInput(reader,root,pin){
+ const expected=reader.read(pin),name=path.join(root,pin.path);
+ if(!fs.lstatSync(name).isFile()||fs.realpathSync(name)!==name)throw Error('Original local input must be an ordinary file');
+ const actual=fs.readFileSync(name);
+ if(!actual.equals(expected))throw Error('Original local input differs: '+pin.path);
+ return actual;
+}
+export function reproduceCanonicalViews(python,destination){
+ const reader=pinReader(root);
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
 const git=(...args)=>execFileSync('git',args,{cwd:root,maxBuffer:32*1024**2});
 const commit='ab0d2088bc66e0d9847b273eb8519a92c0f109b1';
 const pin=name=>{const raw=git('show',commit+':'+name),entry=git('ls-tree',commit,'--',name).toString().split(/\s+/);
  return {commit,path:name,mode:entry[0],git_blob_oid:entry[2],bytes:raw.length,sha256:sha(raw)};};
-const evidence=JSON.parse(fs.readFileSync(path.join(here,'../source-001/source-evidence.json')));
+const sourcePin=reader.pin('f0f7c3082ade4b1dfa302b9b5099f0ea04b89766',
+ 'coordination/engineering/fiji-current-cell-20261016/source-001/source-evidence.json');
+const evidence=JSON.parse(authenticateLocalPinnedInput(reader,root,sourcePin));
+for(const role of ['physical_input','physical_evidence'])authenticateLocalPinnedInput(reader,root,evidence[role]);
 const lp=evidence.native_latitudes;
-const raw=gunzipSync(git('show',lp.commit+':'+lp.path));
+const encoded=reader.read(lp);
+if(encoded.length!==lp.bytes||sha(encoded)!==lp.sha256)throw Error('Original encoded latitudes differ');
+const raw=gunzipSync(encoded,{maxOutputLength:lp.decoded_bytes});
 if(raw.length!==lp.decoded_bytes||sha(raw)!==lp.decoded_sha256)throw Error('Original normative latitudes differ');
 const latitudes=Float64Array.from({length:raw.length/8},(_,i)=>raw.readDoubleLE(i*8));
-const python=process.argv[2],destination=process.argv[3];
 if(!python||!destination)throw Error('Use PYTHON DESTINATION');
 const method=pin('scripts/majority.py');
 if(sha(fs.readFileSync(path.join(root,method.path)))!==method.sha256)throw Error('Executing canonical method differs');
-const receipt=JSON.parse(fs.readFileSync(path.join(here,'../physical-001/execution-receipt.json')));
+const receiptPin=reader.pin(evidence.physical_evidence.commit,
+ 'coordination/engineering/fiji-current-cell-20261016/physical-001/execution-receipt.json');
+const receiptRaw=authenticateLocalPinnedInput(reader,root,receiptPin),receipt=JSON.parse(receiptRaw);
 for(const file of receipt.fresh_admission.runtime_files){
  const body=fs.readFileSync(file.path);
  if(body.length!==file.bytes||sha(body)!==file.sha256)throw Error('Admitted GIS runtime changed: '+file.path);
@@ -47,5 +62,8 @@ publish(root,destination,{
 },{phase:'fiji-canonical-seam-view-reproduction',method_sha256:method.sha256,
  program_sha256:sha(fs.readFileSync(fileURLToPath(import.meta.url))),
  python_program_sha256:sha(fs.readFileSync(path.join(here,'reproduce-canonical-views.py'))),
- physical_execution_receipt_sha256:sha(fs.readFileSync(path.join(here,'../physical-001/execution-receipt.json')))});
+ physical_execution_receipt_sha256:sha(receiptRaw),source_evidence:sourcePin});
 console.log(JSON.stringify(proofs));
+}
+if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url))
+ reproduceCanonicalViews(process.argv[2],process.argv[3]);
