@@ -81,8 +81,8 @@ test('actual entry point logs the exact complete result when bot notification fa
   }
 });
 
-test('actual entry point saves owned-parent/head/conflict/base diagnostics when notification fails',()=>{
- for(const kind of ['parents','head','conflict','base']) {
+test('actual entry point saves owned-parent/conflict diagnostics when notification fails',()=>{
+ for(const kind of ['parents','conflict']) {
   const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-merge-diagnostics-'));
   const sha=c=>c.repeat(40),head=sha('a'),base=sha('b'),candidate=sha('c');
   fs.mkdirSync(path.join(directory,'.github'));
@@ -101,7 +101,6 @@ test('actual entry point saves owned-parent/head/conflict/base diagnostics when 
     ['/git/commits/'+candidate]:{sha:candidate,tree:{sha:sha('f')},parents:[{sha:kind==='parents'?sha('e'):base},{sha:head}]}
   };
   fs.writeFileSync(path.join(directory,'mock.mjs'),capacityShim+`import fs from 'node:fs';const routes=${JSON.stringify(routes)},refs=new Map();
-    let prReads=0,baseReads=0;
     globalThis.fetch=async(url,options)=>{
       const route=new URL(url).pathname.replace('/repos/owner/repo',''),body=options.body?JSON.parse(options.body):null;
       if(route==='/git/refs'&&options.method==='POST'){refs.set(body.ref.replace('refs/heads/',''),body.sha);return Response.json({ref:body.ref},{status:201});}
@@ -112,8 +111,6 @@ test('actual entry point saves owned-parent/head/conflict/base diagnostics when 
       }
       if(route.startsWith('/git/ref/heads/worldatlas-integration/'))return Response.json({object:{sha:refs.get(route.split('/git/ref/heads/')[1])}});
       if(options.method==='DELETE'){refs.delete(route.split('/git/refs/heads/')[1]);fs.writeFileSync('remaining-refs.json',JSON.stringify([...refs]));return new Response(null,{status:204});}
-      if(route==='/pulls/2'&&++prReads===2&&'${kind}'==='head')routes[route].head.sha='d'.repeat(40);
-      if(route==='/git/ref/heads/main'&&++baseReads===2&&'${kind}'==='base')routes[route].object.sha='d'.repeat(40);
       return Response.json(options.method==='POST'?{}:routes[route]??{},{status:options.method==='POST'?403:200});
     };`);
   try {
@@ -122,17 +119,17 @@ test('actual entry point saves owned-parent/head/conflict/base diagnostics when 
         GITHUB_EVENT_PATH:path.join(directory,'event.json'),GITHUB_OUTPUT:path.join(directory,'outputs'),GITHUB_STEP_SUMMARY:path.join(directory,'summary'),MERGE_PHASE:'prepare'}});
     const receipt=JSON.parse(fs.readFileSync(path.join(directory,'merge-result.json')));
     assert.notEqual(result.status,0);assert.match(result.stderr,/HTTP 403/);
-    assert.equal(receipt.retryable,kind==='parents'||kind==='base');
+    assert.equal(receipt.retryable,kind==='parents');
     assert.equal(receipt.candidate_diagnostics.expected_base,base);
     assert.equal(receipt.candidate_diagnostics.expected_head,head);
     assert.equal(receipt.candidate_diagnostics.candidate,kind==='conflict'?null:candidate);
     if(kind==='parents')assert.deepEqual(receipt.candidate_diagnostics.actual_parents,[sha('e'),head]);
     else {
-      assert.equal(receipt.candidate_diagnostics.reason,{head:'head-changed',conflict:'conflict',base:'base-advanced'}[kind]);
+      assert.equal(receipt.candidate_diagnostics.reason,'conflict');
       assert.ok(receipt.candidate_diagnostics.observed_at);
     }
     assert.deepEqual(JSON.parse(fs.readFileSync(path.join(directory,'remaining-refs.json'))),[]);
-    assert.match(fs.readFileSync(path.join(directory,'summary'),'utf8'),/exact current main|head changed|conflict|base advanced/);
+    assert.match(fs.readFileSync(path.join(directory,'summary'),'utf8'),/exact current main|conflict/);
   } finally {fs.rmSync(directory,{recursive:true,force:true});}
  }
 });

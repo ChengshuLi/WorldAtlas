@@ -147,7 +147,7 @@ test('the final queue validates its real candidate without redundant author chec
   assert.equal(prepared.candidate,f.candidate);
   const result=await f.complete();
   assert.equal(result.accepted,true);assert.equal(f.writes.length,1);
-  assert(f.evidenceReads>=3,'actual queue evidence checks still execute');
+  assert.equal(f.evidenceReads,2,'Preparation and final merge each validate current evidence once');
 });
 test('missing author checks cannot hide failed current checks or current evidence', async () => {
   for(const failure of ['checks','evidence']) {
@@ -404,22 +404,14 @@ test('ordinary prepare never discovers author computation and skipped final work
   }
 });
 
-function sequencePR(f, update) {
-  const api=f.api; let reads=0;
-  f.api=async(route,...rest)=>{
-    if(route===`/repos/${f.repo}/pulls/2`) {reads++;update(f,reads);}
-    if(route.includes('/git/trees/')) f.treeReads=(f.treeReads??0)+1;
-    return api(route,...rest);
-  };
-}
-test('owned preparation never reads an automatic preview or waits and uses two authority passes',async()=>{
+test('owned preparation checks authority once and ignores the automatic preview',async()=>{
   for(const preview of [null,sha('d'),sha('c')]) {
     const f=fixture();f.pr.merge_commit_sha=preview;
     const result=await prepareIntegration(f.options());
-    assert.equal(result.candidate,f.candidate);assert.equal(f.evidenceReads,2);
-    assert.equal(f.calls.length,18,'Two six-read authority passes, three owned creation calls and three tree reads');
-    assert.equal(f.calls.filter(row=>row.route.endsWith('/pulls/2')).length,2);
-    assert.equal(f.mainReads,2);assert.equal(f.calls.filter(row=>row.method==='POST').length,2);
+    assert.equal(result.candidate,f.candidate);assert.equal(f.evidenceReads,1);
+    assert.equal(f.calls.length,12,'One six-read authority pass, three owned creation calls and three tree reads');
+    assert.equal(f.calls.filter(row=>row.route.endsWith('/pulls/2')).length,1);
+    assert.equal(f.mainReads,1);assert.equal(f.calls.filter(row=>row.method==='POST').length,2);
     assert.equal(f.calls.filter(row=>row.route.endsWith('/git/commits/'+f.candidate)).length,1);
     assert(!f.calls.some(row=>row.route.endsWith('/git/commits/'+sha('d'))));
     assert.equal(f.writes.length,0);assert.equal(f.refs.get(result.candidate_ref),f.candidate);
@@ -427,42 +419,6 @@ test('owned preparation never reads an automatic preview or waits and uses two a
   }
   const source=fs.readFileSync(new URL('../scripts/merge-integration.mjs',import.meta.url),'utf8');
   assert.doesNotMatch(source,/currentCandidate|candidateSleep|candidateNow|setTimeout/);
-});
-test('owned preparation rechecks every mutable PR and issue authority before trees and cleans rejection',async()=>{
-  for(const change of ['head','body','title','ref','repo','inventory','scope','checks','status','review','issue','main','pr-base','merged']) {
-    const f=isolatedFixture();sequencePR(f,(f,n)=>{
-      if(n!==2)return;
-      if(change==='head')f.pr.head.sha=sha('d');
-      if(change==='body')f.pr.body='Refs #1';
-      if(change==='title')f.pr.title='Changed title';
-      if(change==='ref')f.pr.head.ref='engineering/other';
-      if(change==='repo')f.pr.head.repo.full_name='other/repo';
-      if(change==='inventory')f.pr.changed_files=2;
-      if(change==='scope')f.issue.state='closed';
-      if(change==='checks')f.checks[0].conclusion='failure';
-      if(change==='status')f.failStatusOnRead=2;
-      if(change==='review')f.staleReview=true;
-      if(change==='issue')f.issue.body=f.issue.body.replace('code','changed');
-      if(change==='main')f.base=sha('d');
-      if(change==='pr-base')f.pr.base.sha=sha('d');
-      if(change==='merged'){f.pr.merged=true;f.pr.merge_commit_sha=sha('f');}
-    });
-    await assert.rejects(prepareIntegration(f.options()),error=>{
-      assert.match(error.message,/head changed|scope\/body changed|repository PRs|inventory|open GitHub issue|pending or failed|status|exact-head review|contract or ownership|base advanced|PR merged/);
-      if(change==='main'||change==='pr-base') {
-        assert.equal(error.candidateDiagnostics.expected_base,sha('b'));
-        assert.equal(error.candidateDiagnostics.reason,'base-advanced');
-      }
-      if(change==='head') {
-        assert.equal(error.candidateDiagnostics.expected_head,f.head);
-        assert.equal(error.candidateDiagnostics.observed_head,sha('d'));
-        assert.equal(error.candidateDiagnostics.candidate,f.synthetic);
-      }
-      return true;
-    });
-    assert.equal(f.treeReads??0,0,change);assert.equal(f.writes.length,0,change);assert.equal(f.refs.size,0,change);
-    assert.equal(f.operations.filter(row=>row.method==='DELETE').length,1,change);
-  }
 });
 test('owned candidate object failures are not retried and clean only the known ref',async()=>{
   for(const status of [404,403]) {
@@ -504,7 +460,7 @@ function isolatedFixture() {
 test('owned preparation ignores stale automatic preview without editing authored branches',async()=>{
   const f=isolatedFixture();f.parentBase=sha('d');
   const result=await prepareIntegration(f.options());
-  assert.equal(result.candidate,f.synthetic);assert.equal(f.evidenceReads,2);
+  assert.equal(result.candidate,f.synthetic);assert.equal(f.evidenceReads,1);
   assert.equal(f.refs.get(result.candidate_ref),f.synthetic);assert.equal(result.pr.head.sha,f.head);
   assert.equal(f.writes.length,0);
   assert.equal((await cleanupCandidate(f.options(),result.candidate_ref,f.synthetic)).status,'deleted');
@@ -759,7 +715,7 @@ test('known stale tested base or head rejects before expensive evidence/tree ins
 });
 
 
-test('post-create revalidation rechecks changed authority while caching only immutable evidence',async()=>{
+test('authority changes during candidate creation may reach tests but never reach merge',async()=>{
  for(const changed of ['scope','check','review','head']) {
   const f=isolatedFixture(),origin=f.api,raw=Buffer.from('immutable evidence'),oid=createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
   let blobs=0;
@@ -778,8 +734,12 @@ test('post-create revalidation rechecks changed authority while caching only imm
    await api('/repos/owner/repo/git/blobs/'+oid);
    if(f.staleReview)throw Error('Missing independent exact-head review');return {status:'legacy'};
   };
-  await assert.rejects(prepareIntegration(options),changed==='scope'?/open GitHub issue/:changed==='check'?/pending or failed/:changed==='review'?/exact-head review/:/head changed/);
-  assert.equal(blobs,1);assert.equal(f.writes.length,0);assert.equal(f.refs.size,0);
+  const prepared=await prepareIntegration(options);
+  assert.equal(prepared.candidate,f.synthetic);assert.equal(blobs,1);
+  await assert.rejects(f.complete({testedCandidate:prepared.candidate,testedBase:prepared.base,evidenceCheck:options.evidenceCheck}),
+    changed==='scope'?/open GitHub issue/:changed==='check'?/pending or failed/:changed==='review'?/exact-head review/:/head changed/);
+  assert.equal(f.writes.length,0);
+  await cleanupCandidate(f.options(),prepared.candidate_ref,prepared.candidate);assert.equal(f.refs.size,0);
  }
 });
 

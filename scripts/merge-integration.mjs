@@ -55,13 +55,6 @@ export function checkCandidateParents(commit, base, head) {
       candidateDiagnostics(commit, base, head));
   }
 }
-function unchangedPR(fresh, original) {
-  need(fresh.head.sha === original.head.sha, 'PR head changed; review the new head');
-  need(fresh.state === 'open' && !fresh.draft && fresh.base.ref === 'main' &&
-    fresh.head.ref === original.head.ref && fresh.head.repo?.full_name === original.head.repo?.full_name &&
-    fresh.body === original.body && fresh.title === original.title && fresh.changed_files === original.changed_files,
-    'PR scope/body changed during candidate preparation; revalidate before resubmission');
-}
 function preparedBranch({number, integrationRequestId}) {
   need(Number.isSafeInteger(number) && number > 0 && /^[-a-zA-Z0-9]{16,160}$/.test(integrationRequestId ?? ''),
     'Invalid owned integration candidate request');
@@ -217,29 +210,9 @@ export async function prepareIntegration(options) {
   if (state.replayed) return state;
   const fresh = await createCandidate(options, state);
   try {
-    // The owned merge can outlive mutable scope, checks or review. Re-read
-    // their authority once before exposing the candidate to read-only tests.
-    let revalidated;
-    try { revalidated = await inspectMerge({...options, candidateContext: {base: fresh.base, candidate: fresh.candidate}}); }
-    catch (error) {
-      throw candidateFailure(error.message, error.candidateDiagnostics ?? candidateDiagnostics(fresh.object, fresh.base, state.pr.head.sha,
-        {candidate: commitID(fresh.candidate), reason: 'authority-revalidation-failed', observed_at: new Date().toISOString()}));
-    }
-    need(!revalidated.replayed, 'PR merged during candidate preparation; resubmit unchanged head');
-    const diagnostics = candidateDiagnostics(fresh.object, fresh.base, state.pr.head.sha, {
-      candidate: commitID(fresh.candidate), observed_head: commitID(revalidated.pr.head.sha),
-      observed_base: commitID(revalidated.base), observed_pr_base: commitID(revalidated.pr.base.sha),
-      inspected_pr_base: commitID(state.pr.base.sha), observed_at: new Date().toISOString()});
-    try { unchangedPR(revalidated.pr, state.pr); }
-    catch (error) { throw candidateFailure(error.message, {...diagnostics, reason: 'pr-scope-changed'}); }
-    if (revalidated.issue.body !== state.issue.body) {
-      throw candidateFailure('Issue contract or ownership changed during candidate preparation', {...diagnostics, reason: 'authority-changed'});
-    }
-    if (revalidated.base !== fresh.base || revalidated.pr.base.sha !== state.pr.base.sha) {
-      throw candidateFailure('Main or PR evidence base advanced during candidate preparation; resubmit unchanged head',
-        {...diagnostics, reason: 'base-advanced'});
-    }
-    Object.assign(state, revalidated);
+    // Preparation authenticates authority once. Candidate creation cannot grant
+    // merge permission: final integration rereads current scope, review, checks
+    // and main before the squash. A transient change may waste a test run.
     const candidate = fresh.candidate;
     const [authored, integrated] = await Promise.all([
       tree(options.api, options.repo, state.pr.head.sha), tree(options.api, options.repo, candidate, fresh.object)
