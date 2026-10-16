@@ -90,16 +90,23 @@ an untrusted locator suitable for the next batch's `data/selected-checkpoint.jso
 ```
 
 Keep both files in that batch's ordinary evidence. No per-batch executable or
-accepted-checkpoint catalogue change is needed. A retained ZIP is admitted only
-as an ordinary bounded file and is compared with the artifact hash in the actual
-accepted receipt. A newly computed local hash cannot grant authority. The exact
-retained copy may replace a missing/expired original artifact; access denials,
-contradictory metadata and corrupt copies do not trigger fallback.
+accepted-checkpoint catalogue change is needed. After authenticating the original
+accepted PR, run and successful job, acquisition checks a supplied retained ZIP
+first against the original receipt's complete length and SHA-256. Only an absent
+optional copy falls back to the exact artifact ID. A materialized nonordinary,
+corrupt or unreadable copy refuses; remote permission and transport errors also
+refuse. Unrelated artifacts and duplicate names do not affect this identity.
 
-The locator is excluded from scientific route equality but remains an explicit
-applicability/admission dependency. Changes to it or its retained whole archive
-force proper reauthentication, including baseline-only changes during an
-otherwise source-only PR. Unchanged selectors alone do not waive this boundary.
+Fresh queue runs forward the pinned upload action's native artifact ID and ZIP
+SHA-256, plus the checker's exact report length/hash, through job outputs. The
+merge job downloads that ID, verifies the whole ZIP and report, and retains the
+observed ZIP length in original custody. It never parses human job logs or lists
+all run artifacts. Historical accepted receipts remain literal. Fresh runs made
+with an older workflow lacking these outputs need normal redispatch after the
+workflow update; there is no log-parser fallback.
+
+When a checkpoint is actually used, its original source and complete bytes still
+require authentication; the hint itself grants no authority.
 
 ## Initial reviewed seed
 
