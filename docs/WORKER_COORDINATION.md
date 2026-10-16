@@ -266,6 +266,13 @@ native-conservation comparison; the actual final queue candidate executes this
 check once. Current executable changes do not change either data operand.
 Historical code consumed as custody remains authenticated at its original vintage. Historical artifacts
 cannot replace that current final job.
+The collector admits only its finite typed routing-body plan, using existing
+immutable descriptors and declared sizes. It retains at most 64 MiB of raw bodies
+with eviction, rather than treating cumulative legitimate reads as live memory.
+Every role still checks its own origin/path/mode/OID/length/SHA binding on cache
+hits and rereads. The 32 MiB member, 4096 descriptor and 120-second owned-process
+bounds remain; cumulative I/O, unique planned bytes and live-cache peaks are
+reported separately. The raw-cache bound is not a total process-RSS guarantee.
 There is no finite software hash exception, baseline self-comparison substitute,
 checkpoint reuse or new checkpoint authority for this route. Selected-data and
 source-only work, data-only full changes and unrelated application changes retain

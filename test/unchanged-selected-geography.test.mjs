@@ -419,6 +419,72 @@ test('reviewed equal readers need no hash catalogue; unsafe modes, limits and id
   } finally { f.close(); }
 });
 
+test('live raw cache evicts and rereads without rejecting a larger finite routing plan', async () => {
+  const f = fixture({sourceTarget: true, membership: true, dated: true}); try {
+    const ordinary = await f.inspect();
+    const limits = {member: 32 * 1024 * 1024, metadata: Math.max(...Object.values(f.files).map(raw => raw.length)), entries: 4096};
+    const result = await f.inspect(f.candidate, f.baseline, {limits});
+    assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+    assert.equal(result.identity_sha256, ordinary.identity_sha256);
+    assert(result.metadata_planned_bytes > limits.metadata);
+    assert(result.metadata_cache_peak_bytes <= limits.metadata);
+    assert(result.metadata_cache_bytes <= limits.metadata);
+    assert(result.metadata_cache_evictions > 0);
+    assert(result.metadata_bodies_read > result.metadata_unique_bodies, 'evicted roots are really reread');
+    assert(result.metadata_bytes_read > result.metadata_planned_bytes);
+    assert(result.metadata_planned_bytes <= result.metadata_unique_bodies * limits.member);
+    assert(result.metadata_unique_bodies <= limits.entries);
+
+    const cold = coldFixture(f, {limits});
+    const coldResult = await f.inspect(f.candidate, f.baseline, {limits, repo: cold.destination, acquisition: cold.acquisition});
+    assert.equal(coldResult.status, 'unchanged-selected-inputs', coldResult.reason);
+    // Cold recovery additionally records the initially attempted fallback
+    // commit. Its complete path/mode/OID closure and alternatives still match.
+    const consumed = report => [...new Set(report.immutable_descriptors.map(p => p.path + ':' + p.mode + ':' + p.git_blob_oid))].sort();
+    assert.deepEqual(consumed(coldResult), consumed(result));
+    assert.deepEqual(coldResult.current_and_absent_alternatives, result.current_and_absent_alternatives);
+    assert(coldResult.metadata_cache_evictions > 0);
+    assert(coldResult.metadata_cache_peak_bytes <= limits.metadata);
+    assert.equal(new Set(cold.batches.flat()).size, cold.batches.flat().length, 'eviction does not duplicate object acquisition');
+    assert.equal(coldResult.metadata_acquisition.scientific_leaf_imports, 0);
+  } finally { f.close(); }
+});
+
+test('OID cache reuse still authenticates each alias path, mode, length and SHA binding', async () => {
+  const f = fixture(); try {
+    const alias = P + 'same-body-binding-alias.json';
+    const files = {...f.files, [alias]: f.files[P + 'binding.json']};
+    const origin = f.commit(files, f.baseline);
+    const pin = {commit: origin, path: alias, mode: '100644', git_blob_oid: f.git(['hash-object', '--stdin'], files[alias]),
+      bytes: files[alias].length, sha256: sha(files[alias])};
+    for (const [mutation, reason] of [[{}, null], [{sha256: '0'.repeat(64)}, /metadata-pin-hash/],
+      [{bytes: pin.bytes + 1}, /metadata-pin-length/], [{mode: '100755'}, /historical-pin-identity/],
+      [{git_blob_oid: '0'.repeat(40)}, /historical-pin-identity/]]) {
+      const registry = JSON.parse(f.files[P + 'registry.json']);
+      registry.entries.push({...registry.entries[0], source_authority: {...pin, ...mutation}});
+      files[P + 'registry.json'] = body(registry);
+      const registryCommit = f.commit(files, origin);
+      const sidecar = JSON.parse(f.files[P + 'sidecar.json']);
+      sidecar.authority_registry = {commit: registryCommit, path: P + 'registry.json', mode: '100644',
+        git_blob_oid: f.git(['hash-object', '--stdin'], files[P + 'registry.json']), bytes: files[P + 'registry.json'].length, sha256: sha(registry)};
+      files[P + 'sidecar.json'] = body(sidecar);
+      const selection = JSON.parse(f.files['data/ownership-selection.json']);
+      selection.additive_release = {path: P + 'sidecar.json', bytes: files[P + 'sidecar.json'].length, sha256: sha(sidecar)};
+      files['data/ownership-selection.json'] = body(selection);
+      const baseline = f.commit(files, registryCommit), candidate = f.commit({...files, 'docs/cache-test.md': body('ordinary change')}, baseline);
+      const result = await f.inspect(candidate, baseline);
+      if (reason) {
+        assert.equal(result.status, 'full-check-required'); assert.match(result.reason, reason);
+      } else {
+        assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+        assert(result.immutable_descriptors.some(p => p.path === alias && p.git_blob_oid === pin.git_blob_oid));
+        assert(result.immutable_descriptors.some(p => p.path === P + 'binding.json' && p.git_blob_oid === pin.git_blob_oid));
+        assert.equal(result.metadata_bodies_read, result.metadata_unique_bodies, 'one raw read serves both authenticated aliases');
+      }
+    }
+  } finally { f.close(); }
+});
+
 test('invalid commits fail closed while unrelated engineering changes retain unchanged scientific identities', async () => {
   const f = fixture(); try {
     const output = execFileSync(process.execPath, [path.join(ROOT, 'scripts/check-unchanged-selected-geography.mjs'), f.directory, f.baseline, f.baseline]);
@@ -681,6 +747,19 @@ test('cold remote metadata identity declines before object acquisition', async (
     assert.equal(result.status, 'full-check-required');
     assert.equal(cold.batches.length, 0);
   } finally { f.close(); }
+});
+
+test('cold routing admission refuses oversized members and too many plan entries before fetching bodies', async () => {
+  for (const [limits, reason] of [[{member: 1, metadata: 64 * 1024 * 1024, entries: 4096}, /metadata-byte-limit/],
+    [{member: 32 * 1024 * 1024, metadata: 64 * 1024 * 1024, entries: 1}, /identity-entry-limit/]]) {
+    const f = fixture(); try {
+      const cold = coldFixture(f, {limits});
+      const result = await f.inspect(f.candidate, f.baseline, {repo: cold.destination, acquisition: cold.acquisition});
+      assert.equal(result.status, 'full-check-required'); assert.match(result.reason, reason);
+      assert.equal(cold.batches.length, 0);
+      assert.equal(cold.originBatches.length, 0);
+    } finally { f.close(); }
+  }
 });
 
 
