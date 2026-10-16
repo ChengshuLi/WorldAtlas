@@ -1,0 +1,4592 @@
+{
+  "status": "METADATA_ESTIMATE_ONLY_NO_ACTUAL_HEADER_PLAN_OR_SOURCE_READ",
+  "original_scope_actual_cloud_or_haze_questions": 197,
+  "candidate_points": 197,
+  "unplaced": [],
+  "selected_distinct_items": {
+    "S2A_48NUG_20200106_0_L2A": 72,
+    "S2A_48NVG_20200106_0_L2A": 29,
+    "S2A_48NVF_20200103_0_L2A": 91,
+    "S2A_48NUF_20200106_0_L2A": 5
+  },
+  "natural_source_item_estimates": {
+    "S2A_48NUF_20200106_0_L2A": {
+      "points": 5,
+      "native_blocks_estimate": 10,
+      "decoded_values_masks_estimate": 26214400,
+      "conservative_joint_estimate": 61120512,
+      "processing_baseline": "02.13",
+      "declared_cloud_context": 16.143964
+    },
+    "S2A_48NUG_20200106_0_L2A": {
+      "points": 72,
+      "native_blocks_estimate": 55,
+      "decoded_values_masks_estimate": 144179200,
+      "conservative_joint_estimate": 298414080,
+      "processing_baseline": "02.13",
+      "declared_cloud_context": 16.767735
+    },
+    "S2A_48NVF_20200103_0_L2A": {
+      "points": 91,
+      "native_blocks_estimate": 60,
+      "decoded_values_masks_estimate": 157286400,
+      "conservative_joint_estimate": 324780032,
+      "processing_baseline": "02.13",
+      "declared_cloud_context": 90.047073
+    },
+    "S2A_48NVG_20200106_0_L2A": {
+      "points": 29,
+      "native_blocks_estimate": 20,
+      "decoded_values_masks_estimate": 48793600,
+      "conservative_joint_estimate": 106545664,
+      "processing_baseline": "02.13",
+      "declared_cloud_context": 34.244709
+    }
+  },
+  "declared_grid_estimate_asset_native_blocks": 145,
+  "declared_grid_estimate_decoded_values_plus_masks_bytes": 376473600,
+  "conservative_estimated_encoded_npz_bytes": 380832256,
+  "conservative_estimated_joint_encoded_plus_decoded_and8MiBmetadata": 765694464,
+  "assumption_requiring_actual_header_check": "Existing provider native1024px RGBNIR and512px SCL block contract; declared grid/dtypes only, not yet an actual source-header finding.",
+  "actual_header_or_source_value_or_mask_calls": 0,
+  "original895_block_arrays_to_reacquire": 0,
+  "catalogue_pin": {
+    "file": "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/0f0bb6420b8a7acb9fec7eb313216e39d9b15a0c1f51234aa558b7f5aa812c31/work/.handoff-restored/idn-physical-dated778-plan-001/worker6-metadata/scene-catalogue/22727-no-cloud-gate-search-page001.json",
+    "bytes": 2138677,
+    "sha256": "6850a8e147d93a92569a24cedbd7023e679617b663263bb1ec695f7b43927be5"
+  },
+  "selection_rule": "Earliest later calendar-date acquisition among retained unfiltered catalogue bbox/native-frame metadata contacts; every prior15 observed item and all observed Batam calendar dates are excluded, including same-pass neighbouring granules or reprocessing variants. Tie scene cloud then literal item ID. Scene quality is context only. No agreement hunt or source polygon claim.",
+  "points": [
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130229,
+        "x": 206739
+      },
+      "point_index": 12136,
+      "centre_unchanged": {
+        "longitude": 103.88967295530313,
+        "latitude": 1.1719237997039145,
+        "ideal_longitude_numerator": 27236340,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        376466.2922262427,
+        129557.45639022173
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130235,
+        "x": 206732
+      },
+      "point_index": 12162,
+      "centre_unchanged": {
+        "longitude": 103.88006072488423,
+        "latitude": 1.163686456372936,
+        "ideal_longitude_numerator": 27233820,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        375396.347283829,
+        128647.22948079991
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130239,
+        "x": 206745
+      },
+      "point_index": 12192,
+      "centre_unchanged": {
+        "longitude": 103.8979120099479,
+        "latitude": 1.1581948807772395,
+        "ideal_longitude_numerator": 27238500,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        377382.48044448136,
+        128039.3475639373
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130240,
+        "x": 206736
+      },
+      "point_index": 12205,
+      "centre_unchanged": {
+        "longitude": 103.88555342798074,
+        "latitude": 1.1568219852136592,
+        "ideal_longitude_numerator": 27235260,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        376007.24034815375,
+        127888.10958482524
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130241,
+        "x": 206750
+      },
+      "point_index": 12219,
+      "centre_unchanged": {
+        "longitude": 103.90477788881853,
+        "latitude": 1.155449088985792,
+        "ideal_longitude_numerator": 27240300,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        378146.3499407795,
+        127735.50189696265
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130244,
+        "x": 206733
+      },
+      "point_index": 12242,
+      "centre_unchanged": {
+        "longitude": 103.88143390065837,
+        "latitude": 1.151330396324351,
+        "ideal_longitude_numerator": 27234180,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        375548.60660793417,
+        127281.18552695698
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130246,
+        "x": 206728
+      },
+      "point_index": 12256,
+      "centre_unchanged": {
+        "longitude": 103.87456802178772,
+        "latitude": 1.148584597909736,
+        "ideal_longitude_numerator": 27232380,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        374784.49237027887,
+        126977.93282170556
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130247,
+        "x": 206779
+      },
+      "point_index": 12276,
+      "centre_unchanged": {
+        "longitude": 103.94459998626824,
+        "latitude": 1.1472116977126958,
+        "ideal_longitude_numerator": 27250740,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        382577.1053523153,
+        126823.18641095833
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130247,
+        "x": 206800
+      },
+      "point_index": 12278,
+      "centre_unchanged": {
+        "longitude": 103.97343667752493,
+        "latitude": 1.1472116977126958,
+        "ideal_longitude_numerator": 27258300,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        385785.80096890405,
+        126822.01909166349
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130247,
+        "x": 206801
+      },
+      "point_index": 12279,
+      "centre_unchanged": {
+        "longitude": 103.97480985329905,
+        "latitude": 1.1472116977126958,
+        "ideal_longitude_numerator": 27258660,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        385938.5952657085,
+        126821.9643120501
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130249,
+        "x": 206726
+      },
+      "point_index": 12291,
+      "centre_unchanged": {
+        "longitude": 103.87182167023947,
+        "latitude": 1.144465895343091,
+        "ideal_longitude_numerator": 27231660,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        374478.7143283819,
+        126522.7223056981
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130249,
+        "x": 206809
+      },
+      "point_index": 12300,
+      "centre_unchanged": {
+        "longitude": 103.98579525949208,
+        "latitude": 1.144465895343091,
+        "ideal_longitude_numerator": 27261540,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        387160.8398159388,
+        126517.98599907524
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130250,
+        "x": 206739
+      },
+      "point_index": 12304,
+      "centre_unchanged": {
+        "longitude": 103.88967295530313,
+        "latitude": 1.143092993172102,
+        "ideal_longitude_numerator": 27236340,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        376465.04433514,
+        126370.17095567653
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130251,
+        "x": 206791
+      },
+      "point_index": 12318,
+      "centre_unchanged": {
+        "longitude": 103.96107809555778,
+        "latitude": 1.1417200903447056,
+        "ideal_longitude_numerator": 27255060,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        384410.4294226357,
+        126215.42496958919
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130254,
+        "x": 206872
+      },
+      "point_index": 12349,
+      "centre_unchanged": {
+        "longitude": 104.07230533326214,
+        "latitude": 1.1376013779319534,
+        "ideal_longitude_numerator": 27284220,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        396786.4841402756,
+        125755.88906119432
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130255,
+        "x": 206730
+      },
+      "point_index": 12354,
+      "centre_unchanged": {
+        "longitude": 103.87731437333598,
+        "latitude": 1.1362284724868077,
+        "ideal_longitude_numerator": 27233100,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        375089.5569869288,
+        125611.82027944268
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130255,
+        "x": 206870
+      },
+      "point_index": 12360,
+      "centre_unchanged": {
+        "longitude": 104.06955898171388,
+        "latitude": 1.1362284724868077,
+        "ideal_longitude_numerator": 27283500,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        396480.8544865162,
+        125604.2194138505
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130256,
+        "x": 206865
+      },
+      "point_index": 12374,
+      "centre_unchanged": {
+        "longitude": 104.06269310284324,
+        "latitude": 1.134855566389195,
+        "ideal_longitude_numerator": 27281700,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        395716.8520000357,
+        125452.69794968718
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130257,
+        "x": 206864
+      },
+      "point_index": 12388,
+      "centre_unchanged": {
+        "longitude": 104.0613199270691,
+        "latitude": 1.1334826596399024,
+        "ideal_longitude_numerator": 27281340,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        395564.0118715156,
+        125300.97896339928
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130262,
+        "x": 206739
+      },
+      "point_index": 12452,
+      "centre_unchanged": {
+        "longitude": 103.88967295530313,
+        "latitude": 1.1266181161458495,
+        "ideal_longitude_numerator": 27236340,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        376464.3452024694,
+        124548.85085170985
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130262,
+        "x": 206741
+      },
+      "point_index": 12454,
+      "centre_unchanged": {
+        "longitude": 103.89241930685138,
+        "latitude": 1.1266181161458495,
+        "ideal_longitude_numerator": 27237060,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        376769.9442678553,
+        124548.73453976493
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130262,
+        "x": 206742
+      },
+      "point_index": 12455,
+      "centre_unchanged": {
+        "longitude": 103.89379248262551,
+        "latitude": 1.1266181161458495,
+        "ideal_longitude_numerator": 27237420,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        376922.7436936724,
+        124548.6764918791
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130262,
+        "x": 206764
+      },
+      "point_index": 12456,
+      "centre_unchanged": {
+        "longitude": 103.92400234965632,
+        "latitude": 1.1266181161458495,
+        "ideal_longitude_numerator": 27245340,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        380284.31322127813,
+        124547.4176686425
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130263,
+        "x": 206729
+      },
+      "point_index": 12461,
+      "centre_unchanged": {
+        "longitude": 103.87594119756184,
+        "latitude": 1.1252452055030282,
+        "ideal_longitude_numerator": 27232740,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        374936.2870589902,
+        124397.65888806903
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130263,
+        "x": 206740
+      },
+      "point_index": 12467,
+      "centre_unchanged": {
+        "longitude": 103.89104613107726,
+        "latitude": 1.1252452055030282,
+        "ideal_longitude_numerator": 27236700,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        376617.087039195,
+        124397.01559731123
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130264,
+        "x": 206741
+      },
+      "point_index": 12479,
+      "centre_unchanged": {
+        "longitude": 103.89241930685138,
+        "latitude": 1.123872294214043,
+        "ideal_longitude_numerator": 27237060,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        376769.8290179439,
+        124245.18048649537
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130265,
+        "x": 206734
+      },
+      "point_index": 12493,
+      "centre_unchanged": {
+        "longitude": 103.88280707643248,
+        "latitude": 1.1224993822796827,
+        "ideal_longitude_numerator": 27234540,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        375700.1720181712,
+        124093.81021558058
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130266,
+        "x": 206755
+      },
+      "point_index": 12501,
+      "centre_unchanged": {
+        "longitude": 103.91164376768917,
+        "latitude": 1.1211264697007342,
+        "ideal_longitude_numerator": 27242100,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        378908.9035679399,
+        123940.82396748042
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130267,
+        "x": 206756
+      },
+      "point_index": 12516,
+      "centre_unchanged": {
+        "longitude": 103.9130169434633,
+        "latitude": 1.1197535564779866,
+        "ideal_longitude_numerator": 27242460,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        379061.64598024887,
+        123788.99098628532
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130272,
+        "x": 206749
+      },
+      "point_index": 12562,
+      "centre_unchanged": {
+        "longitude": 103.90340471304441,
+        "latitude": 1.1128889807348317,
+        "ideal_longitude_numerator": 27239940,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        377991.76994006505,
+        123030.5047476431
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130275,
+        "x": 206768
+      },
+      "point_index": 12581,
+      "centre_unchanged": {
+        "longitude": 103.92949505275284,
+        "latitude": 1.1087702276137743,
+        "ideal_longitude_numerator": 27246780,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        380894.78487882623,
+        122574.11062401897
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130276,
+        "x": 206768
+      },
+      "point_index": 12590,
+      "centre_unchanged": {
+        "longitude": 103.92949505275284,
+        "latitude": 1.1073973086322888,
+        "ideal_longitude_numerator": 27246780,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        380894.73003299127,
+        122422.33460657022
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130322,
+        "x": 206742
+      },
+      "point_index": 13278,
+      "centre_unchanged": {
+        "longitude": 103.89379248262551,
+        "latitude": 1.0442423608325655,
+        "ideal_longitude_numerator": 27237420,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        376919.4126136319,
+        115441.94016599131
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130323,
+        "x": 206742
+      },
+      "point_index": 13308,
+      "centre_unchanged": {
+        "longitude": 103.89379248262551,
+        "latitude": 1.0428694128147133,
+        "ideal_longitude_numerator": 27237420,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        376919.3592364752,
+        115290.15919308182
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130325,
+        "x": 206743
+      },
+      "point_index": 13394,
+      "centre_unchanged": {
+        "longitude": 103.89516565839963,
+        "latitude": 1.040123514983152,
+        "ideal_longitude_numerator": 27237780,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        377072.0563836531,
+        114986.5435257258
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130330,
+        "x": 206701
+      },
+      "point_index": 13522,
+      "centre_unchanged": {
+        "longitude": 103.83749227588628,
+        "latitude": 1.0332587599651946,
+        "ideal_longitude_numerator": 27222660,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        370653.9604623517,
+        114229.92759644486
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130331,
+        "x": 206701
+      },
+      "point_index": 13547,
+      "centre_unchanged": {
+        "longitude": 103.83749227588628,
+        "latitude": 1.0318858071783554,
+        "ideal_longitude_numerator": 27222660,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        370653.90495689743,
+        114078.14313531661
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130333,
+        "x": 206892
+      },
+      "point_index": 13610,
+      "centre_unchanged": {
+        "longitude": 104.09976884874469,
+        "latitude": 1.0291398998277554,
+        "ideal_longitude_numerator": 27291420,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        399838.7164985306,
+        113765.13714981353
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130335,
+        "x": 206949
+      },
+      "point_index": 13666,
+      "centre_unchanged": {
+        "longitude": 104.17803986786997,
+        "latitude": 1.0263939901131323,
+        "ideal_longitude_numerator": 27311940,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        408547.83782197686,
+        113459.24812909508
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130337,
+        "x": 206882
+      },
+      "point_index": 13709,
+      "centre_unchanged": {
+        "longitude": 104.0860370910034,
+        "latitude": 1.0236480780408106,
+        "ideal_longitude_numerator": 27287820,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        398310.59435642115,
+        113158.48068631276
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130338,
+        "x": 206882
+      },
+      "point_index": 13737,
+      "centre_unchanged": {
+        "longitude": 104.0860370910034,
+        "latitude": 1.0222751211224836,
+        "ideal_longitude_numerator": 27287820,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        398310.5511297895,
+        113006.70778205426
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130344,
+        "x": 206811
+      },
+      "point_index": 13932,
+      "centre_unchanged": {
+        "longitude": 103.98854161104033,
+        "latitude": 1.014037367311841,
+        "ideal_longitude_numerator": 27262260,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        387461.63267957314,
+        112099.29528674945
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130344,
+        "x": 206890
+      },
+      "point_index": 13936,
+      "centre_unchanged": {
+        "longitude": 104.09702249719643,
+        "latitude": 1.014037367311841,
+        "ideal_longitude_numerator": 27290700,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        399532.65808826825,
+        112095.72599121045
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130347,
+        "x": 206925
+      },
+      "point_index": 14103,
+      "centre_unchanged": {
+        "longitude": 104.14508364929091,
+        "latitude": 1.0099184825344054,
+        "ideal_longitude_numerator": 27303300,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        404880.34230669704,
+        111638.96107223317
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130347,
+        "x": 206926
+      },
+      "point_index": 14104,
+      "centre_unchanged": {
+        "longitude": 104.14645682506503,
+        "latitude": 1.0099184825344054,
+        "ideal_longitude_numerator": 27303660,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        405033.135898038,
+        111638.92091800914
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130350,
+        "x": 206797
+      },
+      "point_index": 14255,
+      "centre_unchanged": {
+        "longitude": 103.96931715020254,
+        "latitude": 1.0057995925372656,
+        "ideal_longitude_numerator": 27257220,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        385322.1337477248,
+        111189.29732701476
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130353,
+        "x": 206692
+      },
+      "point_index": 14348,
+      "centre_unchanged": {
+        "longitude": 103.82513369391911,
+        "latitude": 1.0016806973417016,
+        "ideal_longitude_numerator": 27219420,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        369277.4226566865,
+        110739.35935674515
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130353,
+        "x": 206793
+      },
+      "point_index": 14350,
+      "centre_unchanged": {
+        "longitude": 103.96382444710603,
+        "latitude": 1.0016806973417016,
+        "ideal_longitude_numerator": 27255780,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        384710.7826613993,
+        110734.15286964543
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130354,
+        "x": 206692
+      },
+      "point_index": 14371,
+      "centre_unchanged": {
+        "longitude": 103.82513369391911,
+        "latitude": 1.000307731124986,
+        "ideal_longitude_numerator": 27219420,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        369277.3682755636,
+        110587.57276748079
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130356,
+        "x": 206921
+      },
+      "point_index": 14410,
+      "centre_unchanged": {
+        "longitude": 104.1395909461944,
+        "latitude": 0.9975617969689924,
+        "ideal_longitude_numerator": 27301860,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        404268.8080345455,
+        110273.17814425917
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130358,
+        "x": 206922
+      },
+      "point_index": 14459,
+      "centre_unchanged": {
+        "longitude": 104.14096412196852,
+        "latitude": 0.9948158605215232,
+        "ideal_longitude_numerator": 27302220,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        404421.5232902225,
+        109969.59449725792
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130365,
+        "x": 206881
+      },
+      "point_index": 14605,
+      "centre_unchanged": {
+        "longitude": 104.08466391522929,
+        "latitude": 0.9852050650008136,
+        "ideal_longitude_numerator": 27287460,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        398156.6086976365,
+        108908.85753984468
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130366,
+        "x": 206790
+      },
+      "point_index": 14615,
+      "centre_unchanged": {
+        "longitude": 103.95970491978365,
+        "latitude": 0.9838320919427136,
+        "ideal_longitude_numerator": 27254700,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        384251.755492478,
+        108761.15775468155
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130367,
+        "x": 206873
+      },
+      "point_index": 14624,
+      "centre_unchanged": {
+        "longitude": 104.07367850903626,
+        "latitude": 0.9824591183196208,
+        "ideal_longitude_numerator": 27284580,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        396934.14442300063,
+        108605.64493188621
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130372,
+        "x": 206852
+      },
+      "point_index": 14741,
+      "centre_unchanged": {
+        "longitude": 104.04484181777957,
+        "latitude": 0.9755942417568572,
+        "ideal_longitude_numerator": 27277020,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        393725.15985365905,
+        107847.66491965475
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130372,
+        "x": 206947
+      },
+      "point_index": 14751,
+      "centre_unchanged": {
+        "longitude": 104.17529351632172,
+        "latitude": 0.9755942417568572,
+        "ideal_longitude_numerator": 27311220,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        408240.84246243135,
+        107843.82578413536
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130372,
+        "x": 206948
+      },
+      "point_index": 14752,
+      "centre_unchanged": {
+        "longitude": 104.17666669209585,
+        "latitude": 0.9755942417568572,
+        "ideal_longitude_numerator": 27311580,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        408393.6364428062,
+        107843.78836640231
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130373,
+        "x": 206926
+      },
+      "point_index": 14797,
+      "centre_unchanged": {
+        "longitude": 104.14645682506503,
+        "latitude": 0.9742212647603613,
+        "ideal_longitude_numerator": 27303660,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        405032.11801452714,
+        107692.85336925632
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130374,
+        "x": 206896
+      },
+      "point_index": 14833,
+      "centre_unchanged": {
+        "longitude": 104.1052615518412,
+        "latitude": 0.9728482872043903,
+        "ideal_longitude_numerator": 27292860,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        400448.1965802841,
+        107542.26819785414
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130375,
+        "x": 206881
+      },
+      "point_index": 14876,
+      "centre_unchanged": {
+        "longitude": 104.08466391522929,
+        "latitude": 0.9714753090897323,
+        "ideal_longitude_numerator": 27287460,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        398156.194657914,
+        107391.1076750698
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130375,
+        "x": 206883
+      },
+      "point_index": 14878,
+      "centre_unchanged": {
+        "longitude": 104.08741026677754,
+        "latitude": 0.9714753090897323,
+        "ideal_longitude_numerator": 27288180,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        398461.79031082796,
+        107391.02501818705
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130377,
+        "x": 206864
+      },
+      "point_index": 14966,
+      "centre_unchanged": {
+        "longitude": 104.0613199270691,
+        "latitude": 0.9687293511875074,
+        "ideal_longitude_numerator": 27281340,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        395558.53782354505,
+        107088.26757631774
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130378,
+        "x": 206882
+      },
+      "point_index": 14998,
+      "centre_unchanged": {
+        "longitude": 104.0860370910034,
+        "latitude": 0.9673563714015165,
+        "ideal_longitude_numerator": 27287820,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        398308.86961918883,
+        106935.74034845176
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130379,
+        "x": 206926
+      },
+      "point_index": 15031,
+      "centre_unchanged": {
+        "longitude": 104.14645682506503,
+        "latitude": 0.9659833910599922,
+        "ideal_longitude_numerator": 27303660,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        405031.88831768447,
+        106782.21652114368
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130380,
+        "x": 206883
+      },
+      "point_index": 15063,
+      "centre_unchanged": {
+        "longitude": 104.08741026677754,
+        "latitude": 0.964610410163721,
+        "ideal_longitude_numerator": 27288180,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        398461.58608395664,
+        106632.14839685147
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130382,
+        "x": 206870
+      },
+      "point_index": 15116,
+      "centre_unchanged": {
+        "longitude": 104.06955898171388,
+        "latitude": 0.9618644467101128,
+        "ideal_longitude_numerator": 27283500,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        396475.12323917524,
+        106329.13368164997
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130382,
+        "x": 206881
+      },
+      "point_index": 15117,
+      "centre_unchanged": {
+        "longitude": 104.08466391522929,
+        "latitude": 0.9618644467101128,
+        "ideal_longitude_numerator": 27287460,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        398155.90828607045,
+        106328.67916691078
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130383,
+        "x": 206882
+      },
+      "point_index": 15147,
+      "centre_unchanged": {
+        "longitude": 104.0860370910034,
+        "latitude": 0.9604914641543324,
+        "ideal_longitude_numerator": 27287820,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        398308.6659548373,
+        106176.86253353707
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130386,
+        "x": 206803
+      },
+      "point_index": 15215,
+      "centre_unchanged": {
+        "longitude": 103.9775562048473,
+        "latitude": 0.9563725131805818,
+        "ideal_longitude_numerator": 27259380,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        386237.2722702558,
+        105724.9401782968
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130386,
+        "x": 206878
+      },
+      "point_index": 15216,
+      "centre_unchanged": {
+        "longitude": 104.0805443879069,
+        "latitude": 0.9563725131805818,
+        "ideal_longitude_numerator": 27286380,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        397697.34998132795,
+        105721.69836046651
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130389,
+        "x": 206840
+      },
+      "point_index": 15268,
+      "centre_unchanged": {
+        "longitude": 104.02836370849005,
+        "latitude": 0.9522535572637714,
+        "ideal_longitude_numerator": 27272700,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        391890.8259008594,
+        105267.96235414453
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130389,
+        "x": 206953
+      },
+      "point_index": 15273,
+      "centre_unchanged": {
+        "longitude": 104.18353257096649,
+        "latitude": 0.9522535572637714,
+        "ideal_longitude_numerator": 27313380,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        409156.98698713083,
+        105263.48437208903
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130390,
+        "x": 206957
+      },
+      "point_index": 15299,
+      "centre_unchanged": {
+        "longitude": 104.189025274063,
+        "latitude": 0.9508805708633882,
+        "ideal_longitude_numerator": 27314820,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        409768.1298135557,
+        105111.56813990287
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130391,
+        "x": 206961
+      },
+      "point_index": 15327,
+      "centre_unchanged": {
+        "longitude": 104.1945179771595,
+        "latitude": 0.9495075839169287,
+        "ideal_longitude_numerator": 27316260,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        410379.27234005503,
+        104959.65323572244
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130392,
+        "x": 206649
+      },
+      "point_index": 15344,
+      "centre_unchanged": {
+        "longitude": 103.76608713563162,
+        "latitude": 0.9481345964251814,
+        "ideal_longitude_numerator": 27203940,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        362704.38606624515,
+        104821.92295263658
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130394,
+        "x": 206927
+      },
+      "point_index": 15378,
+      "centre_unchanged": {
+        "longitude": 104.14783000083916,
+        "latitude": 0.9453886198089755,
+        "ideal_longitude_numerator": 27304020,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        405184.11906078906,
+        104505.57744339376
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130396,
+        "x": 206652
+      },
+      "point_index": 15401,
+      "centre_unchanged": {
+        "longitude": 103.77020666295401,
+        "latitude": 0.9426426410210761,
+        "ideal_longitude_numerator": 27205020,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        363162.61552534066,
+        104214.59136266276
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130396,
+        "x": 206826
+      },
+      "point_index": 15404,
+      "centre_unchanged": {
+        "longitude": 104.00913924765226,
+        "latitude": 0.9426426410210761,
+        "ideal_longitude_numerator": 27267660,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        389751.29868694657,
+        104206.1134932849
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130396,
+        "x": 206853
+      },
+      "point_index": 15405,
+      "centre_unchanged": {
+        "longitude": 104.0462149935537,
+        "latitude": 0.9426426410210761,
+        "ideal_longitude_numerator": 27277380,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        393876.94414853264,
+        104204.96156032696
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130397,
+        "x": 206916
+      },
+      "point_index": 15430,
+      "centre_unchanged": {
+        "longitude": 104.13272506732376,
+        "latitude": 0.9412696508147116,
+        "ideal_longitude_numerator": 27300060,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        403503.241547346,
+        104050.67003084463
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130400,
+        "x": 206949
+      },
+      "point_index": 15482,
+      "centre_unchanged": {
+        "longitude": 104.17803986786997,
+        "latitude": 0.9371506769554191,
+        "ideal_longitude_numerator": 27311940,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        408545.4127330617,
+        103594.13014082158
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130401,
+        "x": 206927
+      },
+      "point_index": 15496,
+      "centre_unchanged": {
+        "longitude": 104.14783000083916,
+        "latitude": 0.9357776845915493,
+        "ideal_longitude_numerator": 27304020,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        405183.85965070734,
+        103443.15922064694
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130402,
+        "x": 206930
+      },
+      "point_index": 15514,
+      "centre_unchanged": {
+        "longitude": 104.15194952816155,
+        "latitude": 0.934404691690273,
+        "ideal_longitude_numerator": 27305100,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        405642.2132768715,
+        103291.27403416738
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130404,
+        "x": 206928
+      },
+      "point_index": 15542,
+      "centre_unchanged": {
+        "longitude": 104.14920317661328,
+        "latitude": 0.9316587042786564,
+        "ideal_longitude_numerator": 27304380,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        405336.5462821234,
+        102987.7993252526
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130404,
+        "x": 206954
+      },
+      "point_index": 15544,
+      "centre_unchanged": {
+        "longitude": 104.18490574674061,
+        "latitude": 0.9316587042786564,
+        "ideal_longitude_numerator": 27313740,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        409309.24923056155,
+        102986.86019379586
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130406,
+        "x": 206955
+      },
+      "point_index": 15572,
+      "centre_unchanged": {
+        "longitude": 104.18627892251475,
+        "latitude": 0.9289127147268941,
+        "ideal_longitude_numerator": 27314100,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        409461.97478278313,
+        102683.27892018289
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130410,
+        "x": 206782
+      },
+      "point_index": 15649,
+      "centre_unchanged": {
+        "longitude": 103.94871951359063,
+        "latitude": 0.9234207292280581,
+        "ideal_longitude_numerator": 27251820,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        383027.2893034189,
+        102083.1205226721
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130410,
+        "x": 206863
+      },
+      "point_index": 15651,
+      "centre_unchanged": {
+        "longitude": 104.05994675129499,
+        "latitude": 0.9234207292280581,
+        "ideal_longitude_numerator": 27280980,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        395404.3817895654,
+        102079.65384767167
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130413,
+        "x": 206859
+      },
+      "point_index": 15706,
+      "centre_unchanged": {
+        "longitude": 104.05445404819847,
+        "latitude": 0.9193017345328963,
+        "ideal_longitude_numerator": 27279540,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        394793.0561998234,
+        101624.4797029134
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130416,
+        "x": 206964
+      },
+      "point_index": 15744,
+      "centre_unchanged": {
+        "longitude": 104.1986375044819,
+        "latitude": 0.9151827350862095,
+        "ideal_longitude_numerator": 27317340,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        410836.791829741,
+        101165.2360842637
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130418,
+        "x": 206850
+      },
+      "point_index": 15766,
+      "centre_unchanged": {
+        "longitude": 104.04209546623132,
+        "latitude": 0.9124367328258585,
+        "ideal_longitude_numerator": 27276300,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        393417.63755015674,
+        100865.94861958863
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130418,
+        "x": 206964
+      },
+      "point_index": 15770,
+      "centre_unchanged": {
+        "longitude": 104.1986375044819,
+        "latitude": 0.9124367328258585,
+        "ideal_longitude_numerator": 27317340,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        410836.72411626537,
+        100861.68967835371
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130419,
+        "x": 206784
+      },
+      "point_index": 15786,
+      "centre_unchanged": {
+        "longitude": 103.95146586513889,
+        "latitude": 0.9110637309092794,
+        "ideal_longitude_numerator": 27252540,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        383332.50143474515,
+        100716.97698613933
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130420,
+        "x": 206962
+      },
+      "point_index": 15801,
+      "centre_unchanged": {
+        "longitude": 104.19589115293364,
+        "latitude": 0.9096907284694828,
+        "ideal_longitude_numerator": 27316620,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        410531.0645199624,
+        100558.21102417365
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130421,
+        "x": 206962
+      },
+      "point_index": 15817,
+      "centre_unchanged": {
+        "longitude": 104.19589115293364,
+        "latitude": 0.9083177255072562,
+        "ideal_longitude_numerator": 27316620,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        410531.0307257512,
+        100406.43752012117
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130422,
+        "x": 206962
+      },
+      "point_index": 15830,
+      "centre_unchanged": {
+        "longitude": 104.19589115293364,
+        "latitude": 0.9069447220233887,
+        "ideal_longitude_numerator": 27316620,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        410530.9969825676,
+        100254.66395954072
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130423,
+        "x": 206962
+      },
+      "point_index": 15846,
+      "centre_unchanged": {
+        "longitude": 104.19589115293364,
+        "latitude": 0.9055717180186682,
+        "ideal_longitude_numerator": 27316620,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        410530.9632904116,
+        100102.89034251774
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130424,
+        "x": 206960
+      },
+      "point_index": 15862,
+      "centre_unchanged": {
+        "longitude": 104.19314480138539,
+        "latitude": 0.9041987134938824,
+        "ideal_longitude_numerator": 27315900,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        410225.33689538465,
+        99951.18446898085
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130424,
+        "x": 206961
+      },
+      "point_index": 15863,
+      "centre_unchanged": {
+        "longitude": 104.1945179771595,
+        "latitude": 0.9041987134938824,
+        "ideal_longitude_numerator": 27316260,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        410378.1332982355,
+        99951.15054015345
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130425,
+        "x": 206851
+      },
+      "point_index": 15876,
+      "centre_unchanged": {
+        "longitude": 104.04346864200545,
+        "latitude": 0.9028257084498201,
+        "ideal_longitude_numerator": 27276660,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        393570.1588499957,
+        99803.4493410249
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130431,
+        "x": 206847
+      },
+      "point_index": 15989,
+      "centre_unchanged": {
+        "longitude": 104.03797593890893,
+        "latitude": 0.8945876673247996,
+        "ideal_longitude_numerator": 27275220,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:42.244000Z",
+      "new_distinct_candidate_item": "S2A_48NUG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:41.663000Z",
+      "declared_scene_cloud_cover_context_only": 16.767735,
+      "projected_coordinates": [
+        392958.70783139137,
+        98892.92811430072
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130442,
+        "x": 206967
+      },
+      "point_index": 16293,
+      "centre_unchanged": {
+        "longitude": 104.20275703180428,
+        "latitude": 0.8794845440152759,
+        "ideal_longitude_numerator": 27318420,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        411294.31891362777,
+        97219.01712445352
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130442,
+        "x": 206982
+      },
+      "point_index": 16294,
+      "centre_unchanged": {
+        "longitude": 104.22335466841619,
+        "latitude": 0.8794845440152759,
+        "ideal_longitude_numerator": 27323820,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        413586.269502573,
+        97218.53390664888
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130450,
+        "x": 206906
+      },
+      "point_index": 16487,
+      "centre_unchanged": {
+        "longitude": 104.11899330958248,
+        "latitude": 0.8685004158890318,
+        "ideal_longitude_numerator": 27296460,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        401973.31303815224,
+        96006.8890925
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130452,
+        "x": 206908
+      },
+      "point_index": 16531,
+      "centre_unchanged": {
+        "longitude": 104.12173966113073,
+        "latitude": 0.8657543788538883,
+        "ideal_longitude_numerator": 27297180,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVG_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:38.262000Z",
+      "declared_scene_cloud_cover_context_only": 34.244709,
+      "projected_coordinates": [
+        402278.8441485682,
+        95703.26178736052
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130474,
+        "x": 206930
+      },
+      "point_index": 16959,
+      "centre_unchanged": {
+        "longitude": 104.15194952816155,
+        "latitude": 0.835547841592579,
+        "ideal_longitude_numerator": 27305100,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        405639.71489320614,
+        92363.39113521163
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130484,
+        "x": 207024
+      },
+      "point_index": 17237,
+      "centre_unchanged": {
+        "longitude": 104.28102805092956,
+        "latitude": 0.8218175201003975,
+        "ideal_longitude_numerator": 27338940,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        420002.48471456446,
+        90842.79025424752
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130485,
+        "x": 207023
+      },
+      "point_index": 17258,
+      "centre_unchanged": {
+        "longitude": 104.27965487515543,
+        "latitude": 0.8204444853422848,
+        "ideal_longitude_numerator": 27338580,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        419849.6607674736,
+        90691.04380359076
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130486,
+        "x": 207023
+      },
+      "point_index": 17275,
+      "centre_unchanged": {
+        "longitude": 104.27965487515543,
+        "latitude": 0.8190714501129808,
+        "ideal_longitude_numerator": 27338580,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        419849.6334659427,
+        90539.26977362117
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130486,
+        "x": 207033
+      },
+      "point_index": 17277,
+      "centre_unchanged": {
+        "longitude": 104.29338663289671,
+        "latitude": 0.8190714501129808,
+        "ideal_longitude_numerator": 27342180,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        421377.59843595943,
+        90538.99776705835
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130486,
+        "x": 207034
+      },
+      "point_index": 17278,
+      "centre_unchanged": {
+        "longitude": 104.29475980867085,
+        "latitude": 0.8190714501129808,
+        "ideal_longitude_numerator": 27342540,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        421530.3946815275,
+        90538.97085440646
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130487,
+        "x": 206933
+      },
+      "point_index": 17294,
+      "centre_unchanged": {
+        "longitude": 104.15606905548393,
+        "latitude": 0.8176984144132745,
+        "ideal_longitude_numerator": 27306180,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        406097.69769769756,
+        90390.17490662602
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130488,
+        "x": 206932
+      },
+      "point_index": 17310,
+      "centre_unchanged": {
+        "longitude": 104.1546958797098,
+        "latitude": 0.816325378243954,
+        "ideal_longitude_numerator": 27305820,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        405944.86443162116,
+        90238.42837114344
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130502,
+        "x": 206975
+      },
+      "point_index": 17470,
+      "centre_unchanged": {
+        "longitude": 104.2137424379973,
+        "latitude": 0.7971028230054519,
+        "ideal_longitude_numerator": 27321300,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        412514.865535205,
+        88112.21998092343
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130503,
+        "x": 206999
+      },
+      "point_index": 17496,
+      "centre_unchanged": {
+        "longitude": 104.24669865657637,
+        "latitude": 0.7957297798865202,
+        "ideal_longitude_numerator": 27329940,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        416182.0204140341,
+        87959.75850857561
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130504,
+        "x": 206971
+      },
+      "point_index": 17521,
+      "centre_unchanged": {
+        "longitude": 104.20824973490079,
+        "latitude": 0.7943567363106082,
+        "ideal_longitude_numerator": 27319860,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        411903.6073745003,
+        87808.78223472927
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130505,
+        "x": 206965
+      },
+      "point_index": 17543,
+      "centre_unchanged": {
+        "longitude": 104.20001068025601,
+        "latitude": 0.7929836922784638,
+        "ideal_longitude_numerator": 27317700,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        410986.7760288722,
+        87657.18099798217
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130508,
+        "x": 206985
+      },
+      "point_index": 17595,
+      "centre_unchanged": {
+        "longitude": 104.22747419573858,
+        "latitude": 0.7888645574526405,
+        "ideal_longitude_numerator": 27324900,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        414042.6918201618,
+        87201.26988203287
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130508,
+        "x": 206988
+      },
+      "point_index": 17598,
+      "centre_unchanged": {
+        "longitude": 104.23159372306097,
+        "latitude": 0.7888645574526405,
+        "ideal_longitude_numerator": 27325980,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        414501.0906218372,
+        87201.18500950385
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130510,
+        "x": 206980
+      },
+      "point_index": 17626,
+      "centre_unchanged": {
+        "longitude": 104.22060831686794,
+        "latitude": 0.7861184653021505,
+        "ideal_longitude_numerator": 27323100,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        413278.6360669889,
+        86897.85781417177
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130510,
+        "x": 206981
+      },
+      "point_index": 17627,
+      "centre_unchanged": {
+        "longitude": 104.22198149264207,
+        "latitude": 0.7861184653021505,
+        "ideal_longitude_numerator": 27323460,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        413431.43606649677,
+        86897.82932021505
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130513,
+        "x": 206947
+      },
+      "point_index": 17659,
+      "centre_unchanged": {
+        "longitude": 104.17529351632172,
+        "latitude": 0.7819993236922712,
+        "ideal_longitude_numerator": 27311220,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        408236.1177368908,
+        86443.48907586854
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130527,
+        "x": 207044
+      },
+      "point_index": 17751,
+      "centre_unchanged": {
+        "longitude": 104.30849156641212,
+        "latitude": 0.7627766097452449,
+        "ideal_longitude_numerator": 27346140,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        423057.3179014764,
+        84315.96530875376
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130529,
+        "x": 207040
+      },
+      "point_index": 17766,
+      "centre_unchanged": {
+        "longitude": 104.30299886331561,
+        "latitude": 0.7600305006931021,
+        "ideal_longitude_numerator": 27344700,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        422446.0771398667,
+        84012.51320211963
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130537,
+        "x": 207050
+      },
+      "point_index": 17896,
+      "centre_unchanged": {
+        "longitude": 104.31673062105689,
+        "latitude": 0.7490460470874084,
+        "ideal_longitude_numerator": 27348300,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        423973.865305885,
+        82798.0678921456
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130538,
+        "x": 207070
+      },
+      "point_index": 17910,
+      "centre_unchanged": {
+        "longitude": 104.34419413653944,
+        "latitude": 0.7476729884425379,
+        "ideal_longitude_numerator": 27355500,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        427029.79489579017,
+        82645.82652495222
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130549,
+        "x": 206959
+      },
+      "point_index": 18059,
+      "centre_unchanged": {
+        "longitude": 104.19177162561125,
+        "latitude": 0.7325693151815335,
+        "ideal_longitude_numerator": 27315540,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        410068.71768230805,
+        80979.07463311988
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130555,
+        "x": 206963
+      },
+      "point_index": 18130,
+      "centre_unchanged": {
+        "longitude": 104.19726432870776,
+        "latitude": 0.7243309264237906,
+        "ideal_longitude_numerator": 27316980,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        410679.7669559634,
+        80068.28384769436
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130556,
+        "x": 206963
+      },
+      "point_index": 18136,
+      "centre_unchanged": {
+        "longitude": 104.19726432870776,
+        "latitude": 0.7229578601702161,
+        "ideal_longitude_numerator": 27316980,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        410679.7400972388,
+        79916.50353638218
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130557,
+        "x": 206977
+      },
+      "point_index": 18142,
+      "centre_unchanged": {
+        "longitude": 104.21648878954555,
+        "latitude": 0.721584793501426,
+        "ideal_longitude_numerator": 27322020,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        412818.9522277726,
+        79764.3502228542
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130561,
+        "x": 206973
+      },
+      "point_index": 18168,
+      "centre_unchanged": {
+        "longitude": 104.21099608644904,
+        "latitude": 0.7160925226898753,
+        "ideal_longitude_numerator": 27320580,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        412207.63722584274,
+        79157.33602009917
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130567,
+        "x": 207027
+      },
+      "point_index": 18214,
+      "centre_unchanged": {
+        "longitude": 104.28514757825195,
+        "latitude": 0.7078541041501079,
+        "ideal_longitude_numerator": 27340020,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        420458.77611865615,
+        78245.31706355508
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130567,
+        "x": 207038
+      },
+      "point_index": 18216,
+      "centre_unchanged": {
+        "longitude": 104.30025251176735,
+        "latitude": 0.7078541041501079,
+        "ideal_longitude_numerator": 27343980,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        422139.5785232969,
+        78245.06071536955
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130567,
+        "x": 207043
+      },
+      "point_index": 18218,
+      "centre_unchanged": {
+        "longitude": 104.307118390638,
+        "latitude": 0.7078541041501079,
+        "ideal_longitude_numerator": 27345780,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        422903.5778086678,
+        78244.94600367891
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130573,
+        "x": 206976
+      },
+      "point_index": 18276,
+      "centre_unchanged": {
+        "longitude": 104.21511561377143,
+        "latitude": 0.6996156709747898,
+        "ideal_longitude_numerator": 27321660,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        412665.7371694816,
+        77335.8953631257
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130575,
+        "x": 206997
+      },
+      "point_index": 18293,
+      "centre_unchanged": {
+        "longitude": 104.24395230502812,
+        "latitude": 0.6968695233601078,
+        "ideal_longitude_numerator": 27329220,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        415874.5445163244,
+        77031.8095830878
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130576,
+        "x": 206998
+      },
+      "point_index": 18302,
+      "centre_unchanged": {
+        "longitude": 104.24532548080224,
+        "latitude": 0.6954964489520192,
+        "ideal_longitude_numerator": 27329580,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        416027.3224458337,
+        76880.00562750963
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130577,
+        "x": 207001
+      },
+      "point_index": 18324,
+      "centre_unchanged": {
+        "longitude": 104.24944500812462,
+        "latitude": 0.6941233741444837,
+        "ideal_longitude_numerator": 27330660,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        416485.70484061906,
+        76728.15318009675
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130577,
+        "x": 207003
+      },
+      "point_index": 18326,
+      "centre_unchanged": {
+        "longitude": 104.25219135967288,
+        "latitude": 0.6941233741444837,
+        "ideal_longitude_numerator": 27331380,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        416791.309025064,
+        76728.10476814855
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130577,
+        "x": 207007
+      },
+      "point_index": 18328,
+      "centre_unchanged": {
+        "longitude": 104.25768406276939,
+        "latitude": 0.6941233741444837,
+        "ideal_longitude_numerator": 27332820,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        417402.5168173676,
+        76728.00847681
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130578,
+        "x": 207003
+      },
+      "point_index": 18342,
+      "centre_unchanged": {
+        "longitude": 104.25219135967288,
+        "latitude": 0.6927502989383093,
+        "ideal_longitude_numerator": 27331380,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        416791.28504892613,
+        76576.3254683384
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130578,
+        "x": 207008
+      },
+      "point_index": 18346,
+      "centre_unchanged": {
+        "longitude": 104.25905723854352,
+        "latitude": 0.6927502989383093,
+        "ideal_longitude_numerator": 27333180,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        417555.2948898956,
+        76576.20545294622
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130579,
+        "x": 206979
+      },
+      "point_index": 18353,
+      "centre_unchanged": {
+        "longitude": 104.2192351410938,
+        "latitude": 0.6913772233342449,
+        "ideal_longitude_numerator": 27322740,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        413123.99589244963,
+        76425.13644096188
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130581,
+        "x": 207020
+      },
+      "point_index": 18370,
+      "centre_unchanged": {
+        "longitude": 104.27553534783306,
+        "latitude": 0.6886310709356591,
+        "ideal_longitude_numerator": 27337500,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        419388.8442607769,
+        76120.58617501095
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130583,
+        "x": 207038
+      },
+      "point_index": 18394,
+      "centre_unchanged": {
+        "longitude": 104.30025251176735,
+        "latitude": 0.685884916955054,
+        "ideal_longitude_numerator": 27343980,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        422139.2177898162,
+        75816.61956317368
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130584,
+        "x": 207049
+      },
+      "point_index": 18404,
+      "centre_unchanged": {
+        "longitude": 104.31535744528276,
+        "latitude": 0.6845118393734655,
+        "ideal_longitude_numerator": 27347940,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        423820.0008468199,
+        75664.5990236108
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130584,
+        "x": 207060
+      },
+      "point_index": 18411,
+      "centre_unchanged": {
+        "longitude": 104.33046237879816,
+        "latitude": 0.6845118393734655,
+        "ideal_longitude_numerator": 27351900,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        425500.80074286513,
+        75664.36171774699
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130586,
+        "x": 207062
+      },
+      "point_index": 18441,
+      "centre_unchanged": {
+        "longitude": 104.33320873034643,
+        "latitude": 0.6817656830316583,
+        "ideal_longitude_numerator": 27352620,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        425806.35803954507,
+        75360.76523126167
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130589,
+        "x": 207042
+      },
+      "point_index": 18466,
+      "centre_unchanged": {
+        "longitude": 104.30574521486386,
+        "latitude": 0.6776464455841996,
+        "ideal_longitude_numerator": 27345420,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        422750.2888353282,
+        74905.8633547446
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130589,
+        "x": 207061
+      },
+      "point_index": 18467,
+      "centre_unchanged": {
+        "longitude": 104.3318355545723,
+        "latitude": 0.6776464455841996,
+        "ideal_longitude_numerator": 27352260,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        425653.49527177855,
+        74905.4551036506
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130589,
+        "x": 207071
+      },
+      "point_index": 18468,
+      "centre_unchanged": {
+        "longitude": 104.34556731231358,
+        "latitude": 0.6776464455841996,
+        "ideal_longitude_numerator": 27355860,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        427181.49238832295,
+        74905.24651649018
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130590,
+        "x": 207022
+      },
+      "point_index": 18474,
+      "centre_unchanged": {
+        "longitude": 104.27828169938131,
+        "latitude": 0.6762733656556011,
+        "ideal_longitude_numerator": 27338220,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        419694.24204058846,
+        74754.53106969233
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130590,
+        "x": 207041
+      },
+      "point_index": 18480,
+      "centre_unchanged": {
+        "longitude": 104.30437203908974,
+        "latitude": 0.6762733656556011,
+        "ideal_longitude_numerator": 27345060,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        422597.46628239006,
+        74754.10721587828
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130591,
+        "x": 207039
+      },
+      "point_index": 18498,
+      "centre_unchanged": {
+        "longitude": 104.30162568754149,
+        "latitude": 0.674900285338594,
+        "ideal_longitude_numerator": 27344340,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        422291.8426873938,
+        74602.37290687916
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130592,
+        "x": 207039
+      },
+      "point_index": 18521,
+      "centre_unchanged": {
+        "longitude": 104.30162568754149,
+        "latitude": 0.6735272046339666,
+        "ideal_longitude_numerator": 27344340,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        422291.82091721444,
+        74450.59467471454
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130592,
+        "x": 207061
+      },
+      "point_index": 18524,
+      "centre_unchanged": {
+        "longitude": 104.3318355545723,
+        "latitude": 0.6735272046339666,
+        "ideal_longitude_numerator": 27352260,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        425653.4326598373,
+        74450.123414896
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130592,
+        "x": 207068
+      },
+      "point_index": 18531,
+      "centre_unchanged": {
+        "longitude": 104.34144778499119,
+        "latitude": 0.6735272046339666,
+        "ideal_longitude_numerator": 27354780,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        426723.03198842873,
+        74449.97783916297
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130593,
+        "x": 207029
+      },
+      "point_index": 18540,
+      "centre_unchanged": {
+        "longitude": 104.2878939298002,
+        "latitude": 0.6721541235425074,
+        "ideal_longitude_numerator": 27340740,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        420763.78629462817,
+        74299.0370486883
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130593,
+        "x": 207033
+      },
+      "point_index": 18544,
+      "centre_unchanged": {
+        "longitude": 104.29338663289671,
+        "latitude": 0.6721541235425074,
+        "ideal_longitude_numerator": 27342180,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        421374.99199811026,
+        74298.94827378579
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130593,
+        "x": 207064
+      },
+      "point_index": 18547,
+      "centre_unchanged": {
+        "longitude": 104.33595508189468,
+        "latitude": 0.6721541235425074,
+        "ideal_longitude_numerator": 27353340,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        426111.8119705838,
+        74298.28358110963
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130593,
+        "x": 207065
+      },
+      "point_index": 18548,
+      "centre_unchanged": {
+        "longitude": 104.3373282576688,
+        "latitude": 0.6721541235425074,
+        "ideal_longitude_numerator": 27353700,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        426264.61191721744,
+        74298.2628269654
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130594,
+        "x": 207066
+      },
+      "point_index": 18566,
+      "centre_unchanged": {
+        "longitude": 104.33870143344294,
+        "latitude": 0.6707810420650048,
+        "ideal_longitude_numerator": 27354060,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        426417.3912910095,
+        74146.46497282537
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130594,
+        "x": 207067
+      },
+      "point_index": 18567,
+      "centre_unchanged": {
+        "longitude": 104.34007460921706,
+        "latitude": 0.6707810420650048,
+        "ideal_longitude_numerator": 27354420,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        426570.19119511085,
+        74146.4443468376
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130594,
+        "x": 207068
+      },
+      "point_index": 18568,
+      "centre_unchanged": {
+        "longitude": 104.34144778499119,
+        "latitude": 0.6707810420650048,
+        "ideal_longitude_numerator": 27354780,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        426722.99105676124,
+        74146.42376373343
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130596,
+        "x": 206981
+      },
+      "point_index": 18579,
+      "centre_unchanged": {
+        "longitude": 104.22198149264207,
+        "latitude": 0.6680348779550238,
+        "ideal_longitude_numerator": 27323460,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        413429.1867463612,
+        73844.81269909968
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130597,
+        "x": 206983
+      },
+      "point_index": 18583,
+      "centre_unchanged": {
+        "longitude": 104.22472784419033,
+        "latitude": 0.6666617953241223,
+        "ideal_longitude_numerator": 27324180,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        413734.7706157883,
+        73692.98332021879
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130598,
+        "x": 206984
+      },
+      "point_index": 18589,
+      "centre_unchanged": {
+        "longitude": 104.22610101996445,
+        "latitude": 0.6652887123103313,
+        "ideal_longitude_numerator": 27324540,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        413887.5506485659,
+        73541.17821353818
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130598,
+        "x": 206985
+      },
+      "point_index": 18590,
+      "centre_unchanged": {
+        "longitude": 104.22747419573858,
+        "latitude": 0.6652887123103313,
+        "ideal_longitude_numerator": 27324900,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        414040.35450428224,
+        73541.15426852113
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130598,
+        "x": 207053
+      },
+      "point_index": 18593,
+      "centre_unchanged": {
+        "longitude": 104.32085014837926,
+        "latitude": 0.6652887123103313,
+        "ideal_longitude_numerator": 27349380,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        424430.90472708526,
+        73539.62579761949
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130601,
+        "x": 207059
+      },
+      "point_index": 18611,
+      "centre_unchanged": {
+        "longitude": 104.32908920302404,
+        "latitude": 0.6611694609795064,
+        "ideal_longitude_numerator": 27351540,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        425347.6461576606,
+        73084.16730506517
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130602,
+        "x": 206994
+      },
+      "point_index": 18614,
+      "centre_unchanged": {
+        "longitude": 104.23983277770573,
+        "latitude": 0.6597963764420424,
+        "ideal_longitude_numerator": 27328140,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        415415.4938325018,
+        72933.81794650796
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130608,
+        "x": 206991
+      },
+      "point_index": 18694,
+      "centre_unchanged": {
+        "longitude": 104.23571325038334,
+        "latitude": 0.6515578612869872,
+        "ideal_longitude_numerator": 27327060,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        414956.9439226976,
+        72023.2019726356
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130617,
+        "x": 206997
+      },
+      "point_index": 18792,
+      "centre_unchanged": {
+        "longitude": 104.24395230502812,
+        "latitude": 0.639200063348006,
+        "ideal_longitude_numerator": 27329220,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        415873.5637088689,
+        70657.03422840804
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130617,
+        "x": 207009
+      },
+      "point_index": 18794,
+      "centre_unchanged": {
+        "longitude": 104.26043041431764,
+        "latitude": 0.639200063348006,
+        "ideal_longitude_numerator": 27333540,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        417707.20856665843,
+        70656.76722708857
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130618,
+        "x": 207000
+      },
+      "point_index": 18803,
+      "centre_unchanged": {
+        "longitude": 104.24807183235049,
+        "latitude": 0.6378269728420072,
+        "ideal_longitude_numerator": 27330300,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        416331.953374902,
+        70505.1858249202
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130621,
+        "x": 207008
+      },
+      "point_index": 18845,
+      "centre_unchanged": {
+        "longitude": 104.25905723854352,
+        "latitude": 0.633707699129177,
+        "ideal_longitude_numerator": 27333180,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        417554.31787576404,
+        70049.66613530688
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130623,
+        "x": 206844
+      },
+      "point_index": 18886,
+      "centre_unchanged": {
+        "longitude": 104.03385641158656,
+        "latitude": 0.6309615148328136,
+        "ideal_longitude_numerator": 27274140,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:56.787000Z",
+      "new_distinct_candidate_item": "S2A_48NUF_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:56.211000Z",
+      "declared_scene_cloud_cover_context_only": 16.143964,
+      "projected_coordinates": [
+        392493.75513937237,
+        69750.21582093541
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130623,
+        "x": 206845
+      },
+      "point_index": 18887,
+      "centre_unchanged": {
+        "longitude": 104.03522958736067,
+        "latitude": 0.6309615148328136,
+        "ideal_longitude_numerator": 27274500,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:56.787000Z",
+      "new_distinct_candidate_item": "S2A_48NUF_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:56.211000Z",
+      "declared_scene_cloud_cover_context_only": 16.143964,
+      "projected_coordinates": [
+        392646.56785468606,
+        69750.18746243918
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130632,
+        "x": 207023
+      },
+      "point_index": 19010,
+      "centre_unchanged": {
+        "longitude": 104.27965487515543,
+        "latitude": 0.6186036676520256,
+        "ideal_longitude_numerator": 27338580,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        419846.13805668737,
+        68379.75874285208
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130635,
+        "x": 206880
+      },
+      "point_index": 19039,
+      "centre_unchanged": {
+        "longitude": 104.08329073945515,
+        "latitude": 0.614484378834776,
+        "ideal_longitude_numerator": 27287100,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:56.787000Z",
+      "new_distinct_candidate_item": "S2A_48NUF_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:56.211000Z",
+      "declared_scene_cloud_cover_context_only": 16.143964,
+      "projected_coordinates": [
+        397994.6576554457,
+        67927.76493005775
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130639,
+        "x": 206882
+      },
+      "point_index": 19092,
+      "centre_unchanged": {
+        "longitude": 104.0860370910034,
+        "latitude": 0.6089919888078156,
+        "ideal_longitude_numerator": 27287820,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:56.787000Z",
+      "new_distinct_candidate_item": "S2A_48NUF_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:56.211000Z",
+      "declared_scene_cloud_cover_context_only": 16.143964,
+      "projected_coordinates": [
+        398300.17620530515,
+        67320.55999701764
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130643,
+        "x": 206881
+      },
+      "point_index": 19146,
+      "centre_unchanged": {
+        "longitude": 104.08466391522929,
+        "latitude": 0.6034995931844924,
+        "ideal_longitude_numerator": 27287460,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NUF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:56.787000Z",
+      "new_distinct_candidate_item": "S2A_48NUF_20200106_0_L2A",
+      "new_candidate_acquisition": "2020-01-06T03:37:56.211000Z",
+      "declared_scene_cloud_cover_context_only": 16.143964,
+      "projected_coordinates": [
+        398147.26245884964,
+        66713.43252107463
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130651,
+        "x": 206955
+      },
+      "point_index": 19205,
+      "centre_unchanged": {
+        "longitude": 104.18627892251475,
+        "latitude": 0.592514785350619,
+        "ideal_longitude_numerator": 27314100,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        409454.96270818985,
+        65497.35933063172
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130659,
+        "x": 206955
+      },
+      "point_index": 19284,
+      "centre_unchanged": {
+        "longitude": 104.18627892251475,
+        "latitude": 0.5815299557368998,
+        "ideal_longitude_numerator": 27314100,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        409454.7860127395,
+        64283.081069758526
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130660,
+        "x": 206955
+      },
+      "point_index": 19299,
+      "centre_unchanged": {
+        "longitude": 104.18627892251475,
+        "latitude": 0.5801568505238932,
+        "ideal_longitude_numerator": 27314100,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        409454.7641582625,
+        64131.29612337601
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130664,
+        "x": 206978
+      },
+      "point_index": 19368,
+      "centre_unchanged": {
+        "longitude": 104.21786196531968,
+        "latitude": 0.5746644263476157,
+        "ideal_longitude_numerator": 27322380,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        412969.2466806456,
+        63523.6650390802
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130667,
+        "x": 206985
+      },
+      "point_index": 19415,
+      "centre_unchanged": {
+        "longitude": 104.22747419573858,
+        "latitude": 0.5705451047470235,
+        "ideal_longitude_numerator": 27324900,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        414038.831550559,
+        63068.1685579948
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130674,
+        "x": 206959
+      },
+      "point_index": 19605,
+      "centre_unchanged": {
+        "longitude": 104.19177162561125,
+        "latitude": 0.5609333429131556,
+        "ideal_longitude_numerator": 27315540,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        410065.6964864039,
+        62006.21841768098
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130675,
+        "x": 206959
+      },
+      "point_index": 19618,
+      "centre_unchanged": {
+        "longitude": 104.19177162561125,
+        "latitude": 0.5595602327847415,
+        "ideal_longitude_numerator": 27315540,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        410065.67554912163,
+        61854.43314595335
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130677,
+        "x": 206988
+      },
+      "point_index": 19647,
+      "centre_unchanged": {
+        "longitude": 104.23159372306097,
+        "latitude": 0.5568140115645654,
+        "ideal_longitude_numerator": 27325980,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        414497.050670421,
+        61550.26994165748
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130677,
+        "x": 206989
+      },
+      "point_index": 19648,
+      "centre_unchanged": {
+        "longitude": 104.23296689883509,
+        "latitude": 0.5568140115645654,
+        "ideal_longitude_numerator": 27326340,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        414649.85739375884,
+        61550.25004272787
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130680,
+        "x": 206981
+      },
+      "point_index": 19699,
+      "centre_unchanged": {
+        "longitude": 104.22198149264207,
+        "latitude": 0.55269467733768,
+        "ideal_longitude_numerator": 27323460,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        413427.34234714054,
+        61095.057345039866
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130682,
+        "x": 206980
+      },
+      "point_index": 19711,
+      "centre_unchanged": {
+        "longitude": 104.22060831686794,
+        "latitude": 0.5499484529312288,
+        "ideal_longitude_numerator": 27323100,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        413274.49538326554,
+        60791.508517149596
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130685,
+        "x": 206980
+      },
+      "point_index": 19731,
+      "centre_unchanged": {
+        "longitude": 104.22060831686794,
+        "latitude": 0.5458291139545313,
+        "ideal_longitude_numerator": 27323100,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        413274.4361490894,
+        60336.154967140756
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130693,
+        "x": 206982
+      },
+      "point_index": 19782,
+      "centre_unchanged": {
+        "longitude": 104.22335466841619,
+        "latitude": 0.5348441962805031,
+        "ideal_longitude_numerator": 27323820,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        413579.8956702899,
+        59121.83860456202
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130699,
+        "x": 207026
+      },
+      "point_index": 19867,
+      "centre_unchanged": {
+        "longitude": 104.28377440247782,
+        "latitude": 0.5266054951008633,
+        "ideal_longitude_numerator": 27339660,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        420303.27754067845,
+        58210.32449039971
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130745,
+        "x": 207039
+      },
+      "point_index": 20875,
+      "centre_unchanged": {
+        "longitude": 104.30162568754149,
+        "latitude": 0.46344177022344146,
+        "ideal_longitude_numerator": 27344340,
+        "ideal_longitude_denominator": 262166
+      },
+      "prior_actual_item": "S2B_48NVF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:53.042000Z",
+      "new_distinct_candidate_item": "S2A_48NVF_20200103_0_L2A",
+      "new_candidate_acquisition": "2020-01-03T03:27:57.821000Z",
+      "declared_scene_cloud_cover_context_only": 90.047073,
+      "projected_coordinates": [
+        422289.0123462739,
+        51228.08236281075
+      ]
+    }
+  ]
+}

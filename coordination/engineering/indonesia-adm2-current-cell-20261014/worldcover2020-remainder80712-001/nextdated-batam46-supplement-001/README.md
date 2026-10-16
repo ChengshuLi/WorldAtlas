@@ -1,0 +1,13 @@
+# 46 additional original Indonesia physical answers
+
+This continuation adopts exactly 46 distinctly reviewed dated visible-facet answers from the complete 72-question S2A_48NUG_20200106_0_L2A group, preserving 26 holds. These 46 close their specific original cloud/haze body-placement questions under the established dated-visible-facet rule. All 72 actual observations, the original 49 author proposals, and the three distinctly rejected proposals 12388, 12467 and 12479 are retained. Original physical accounting is 133,329 + 46 = 133,375 of 133,846, with 471 questions remaining. The original 778-key dated-follow-up cohort has 307 adopted answers and 471 holds.
+
+The complete source item was frozen in the metadata-only 197-key next-date choices before any January 6 values were inspected: earliest genuinely later calendar date, excluding already-observed items for each key; cloud is context and tie-break only. The complete natural 72-key group was read without desired-result sampling or arbitrary splitting. An unnecessary compression-dependent guard was rejected before execution and replaced with a finite complete-item declaration and fail-fast custody. The final reviewed plan and reader, along with failed preparation history, are retained. No repository resource caps were changed. The 91-key natural group remains deferred.
+
+Actual acquisition took 74.154451 seconds: 55 native arrays, 55 value and 55 mask calls, zero failures, and 138,039,296 bytes descriptive peak RSS. All 55 arrays and decoded value/mask member identities are published. All 72 native centres have valid values; availability alone supplied no answer. The original 895 arrays were never reacquired and remain privately preserved. Earlier source and accounting operands are reused through exact immutable pins.
+
+The distinct reviewer inspected all 75 images. Fixed raw-DN RGB/FCC is qualitative, without gain, offset, indices or reflectance units. SCL is separate 20 m context only. All 93 original Batam and five later Bulungan PB05 radiometry conflicts remain. The new item is PB02.13. Historical cloud/haze observations and all independent source, owner, parent, geographic-portion and territorial holds remain unchanged.
+
+These are dated visible vegetation, ground-like-strip and water-like-body placements. They do not establish dry understory, whole-cell truth, permanence, present truth, tides, legal jurisdiction, source applicability, native authority or repair credit. No main, selector, ownership or deployment change occurs. Issues 1884 and 1202 remain open.
+
+Contains modified Copernicus Sentinel data [2020]. Legal notice: https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice.

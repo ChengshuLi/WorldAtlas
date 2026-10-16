@@ -1,0 +1,15 @@
+{
+  "status": "SUPERSEDED_NOT_EXECUTED",
+  "reason": "Distinct review found counter updates occurred after ancillary writes, permitting further reads after failure. Replaced the unnecessary compression-dependent stop protocol with honest full-item worst-case admission and fail-fast any-I/O handling. No new source values were acquired by the rejected reader.",
+  "plan": {
+    "path": "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/0f0bb6420b8a7acb9fec7eb313216e39d9b15a0c1f51234aa558b7f5aa812c31/work/.cloud-work/batam-cloud72-nextdate-001/next-distinct-native-block-plan72.json",
+    "bytes": 458385,
+    "sha256": "5227351eaa80118c0aacbdb8ab461889585fd878af010c8927c99f73657350cd"
+  },
+  "reader": {
+    "path": "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/0f0bb6420b8a7acb9fec7eb313216e39d9b15a0c1f51234aa558b7f5aa812c31/work/.cloud-work/batam-cloud72-nextdate-001/read_next_distinct_native_blocks.py",
+    "bytes": 13235,
+    "sha256": "04b36cdd5b7ea51dc51b42cf3797ddf36181eeff495ee200bd3a96404c7e90b7"
+  },
+  "source_value_or_mask_calls": 0
+}

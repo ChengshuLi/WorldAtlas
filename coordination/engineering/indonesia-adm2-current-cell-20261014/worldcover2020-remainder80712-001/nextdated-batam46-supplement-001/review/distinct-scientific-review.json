@@ -1,0 +1,102 @@
+{
+  "status": "SUPPORT_46_BOUNDED_DATED_VISIBLE_FACETS_KEEP_26_HELD_PENDING_ROOT",
+  "reviewer": "/root/review_batam72_visible_facets",
+  "complete_original_scope": 72,
+  "supported_facet_count": 46,
+  "retained_hold_count": 26,
+  "supported_class_counts": {
+    "dated_visible_exposed_or_constructed_ground_like_strip": 7,
+    "dated_visible_vegetation_cover": 35,
+    "dated_visible_open_water_like_body": 4
+  },
+  "original_author_proposal_count": 49,
+  "author_proposal_preserved": {
+    "file": "author-proposed72-nextdated-dispositions.jsonl",
+    "bytes": 3005149,
+    "sha256": "a8da0647cdd5c8fb4046d1a6bc4e5c60eb0dab7475578235adfbf0f131ffaef8"
+  },
+  "newly_retained_holds": [
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130257,
+        "x": 206864
+      },
+      "original_point_index": 12388,
+      "review_reason": "The fractional mark is on the muted grey-brown boundary below the bright tan patch and beside red canopy. Nearby red cover does not establish canopy at this marked native position; ground/wet/canopy fringe remains unresolved."
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130263,
+        "x": 206740
+      },
+      "original_point_index": 12467,
+      "review_reason": "A coherent blue/dark channel is visible nearby, but the actual mark is on its dark reddish upper margin adjoining canopy. The image does not adequately distinguish water-side placement from shadowed or mixed canopy fringe at the mark; SCL dark context is not a remedy."
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130264,
+        "x": 206741
+      },
+      "original_point_index": 12479,
+      "review_reason": "The mark lies on the dark reddish diagonal channel margin, with distinctly blue channel pixels immediately adjacent. Canopy/wet/shadow mixing at the marked position prevents a reliable water-like body answer."
+    }
+  ],
+  "original_specific_question": "Actual wide RGB and false-colour context remains cloud/haze obscured or locally low-contrast at the marked centre; a coherent ground, canopy or water placement is not sufficiently resolved.",
+  "rule": "A supported dated visible vegetation, exposed/constructed ground-like strip or water-like placement at the unchanged actual native centre resolves this bounded original cloud/haze/body-placement question. Nearby or merely complementary surface evidence does not resolve it. Historical cloudy observations and independent limits remain.",
+  "limits": [
+    "Dated visible appearance at the unchanged original coordinate and finite native 10 m support, not pure-pixel or whole-cell truth.",
+    "SCL is separate 20 m source context only and never supplies body truth; masks establish data validity, not clear-sky visibility.",
+    "No underneath/understory dryness, exact tide, surveyed shore/bank, material/use, annual persistence or current-surface conclusion.",
+    "All historical source observations and independent source, owner, parent, selected-portion and territorial/jurisdiction holds remain unchanged.",
+    "No source-native authority, accepted repair or implementation credit; Root scientific binding remains pending."
+  ],
+  "complete_custody_review": {
+    "file": "custody-review.json",
+    "bytes": 4215,
+    "sha256": "7e1e4db4622b9768d3fc02efbf59954eaa1530b6ceb212c361012945b62dba6b"
+  },
+  "verified_file_pins": {
+    "file": "verified-file-pins.json",
+    "bytes": 41111,
+    "sha256": "334efbe381ae93122cc8cde4abf75bb30f91cf3f48c3c65c3610010f019ad4af"
+  },
+  "dispositions": {
+    "file": "independent72-keyed-dispositions.jsonl",
+    "bytes": 125622,
+    "sha256": "c1fac70e01c4e257f5bed3fbcd22e5b5ea6a888b58389a940a66d2459a85c1b7"
+  },
+  "literal_supported_keys": {
+    "file": "supported46-owner-y-x.jsonl",
+    "bytes": 1012,
+    "sha256": "5fd615c4ffdf15cbd5c3cbfd65de9f0748ebc64cf23728f34d0b7c0394f461ea"
+  },
+  "held_reasons": {
+    "file": "held26-keyed-reasons.jsonl",
+    "bytes": 46646,
+    "sha256": "4b43b73c05eb6e58ecd8c6c6643ae519433ba4d9900c8c3f3b4b1f52b835beac"
+  },
+  "visual_inspection": {
+    "file": "visual-inspection-manifest.json",
+    "bytes": 25696,
+    "sha256": "c427cd9148ef6f4ee6fe3527a74cb2afa3c75436c50656f49d99739883c7689c"
+  },
+  "custody_verifier": {
+    "file": "verify_custody.py",
+    "bytes": 8901,
+    "sha256": "14f4b498d66a663b3a10f85e5c4c8d5e3a27d83f2bb625872ec1f54d4b2d569f"
+  },
+  "accepted_question_credit": 0,
+  "native_authority_or_repair_credit": 0,
+  "new_source_calls": 0,
+  "Root_adoption": null,
+  "public_projection": {
+    "omitted_local_transport_fields": [
+      "source_snapshot"
+    ],
+    "scientific_fields_unchanged": true,
+    "original_review_sha256": "e61b3e56e7e7f908dc1e203c727f3ffdb61c38ab78f8adc3685295a3b771f616"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "status": "PASS_LOCAL_CUSTODY_AND_EXACT_JOINS",
+  "prerequisite_review": {
+    "file": "/workspace/scratch/127991fc8b8e/batam72-independent-review/final-review.json",
+    "sha256": "7dcd1dab1d64b60e17dfbf5bbc43d81be3069d15944f672f6f1bbcc6d38dae8a",
+    "scope": "Reuse independently verified source/projection/frozen197 metadata selection. No new source reads."
+  },
+  "source_snapshot": "/workspace/scratch/127991fc8b8e/batam72-visible-facet-review/source-snapshot",
+  "checks": {
+    "hash_pin_references": 944,
+    "native_npz_and_member_sets": 55,
+    "block_receipt_plan_joins": 55,
+    "point_asset_value_mask_3x3_receipt_joins": 360,
+    "exact_original_prior_plan_observation_panel_proposal_joins": 72
+  },
+  "unique_hash_pinned_local_files": 204,
+  "whole_item_product_bodies": 116,
+  "native_arrays": 55,
+  "encoded_npz_bytes": 66860828,
+  "decoded_values_masks_bytes": 144179200,
+  "decoded_npy_members_with_headers_bytes": 144193280,
+  "actual_execution": {
+    "started_utc": "2026-10-16T05:25:03.360986+00:00",
+    "ended_utc": "2026-10-16T05:26:17.515423+00:00",
+    "elapsed_seconds": 74.15445053897565,
+    "plan_sha256": "e3b1689644c1bd30f928e24f91b19e349984d54e368318784280d8cb9e01e098",
+    "reader": {
+      "file": "read_next_distinct_native_blocks.py",
+      "bytes": 12094,
+      "sha256": "732199db84349482aabee2c8441edea24023ff44c2a968c8a3f724c5ea6f9ea4"
+    },
+    "complete_item_count": 1,
+    "complete_points": 72,
+    "remote_data_block_calls": 55,
+    "remote_mask_block_calls": 55,
+    "reused_blocks": 0,
+    "failures": [],
+    "process_lifetime_peak_rss_bytes": 138039296,
+    "runtime": {
+      "platform": "linux",
+      "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+      "numpy": "2.3.5",
+      "rasterio": "1.4.3",
+      "gdal": "3.9.3"
+    },
+    "normalization_or_display_or_indices": false,
+    "scientific_or_native_credit": 0,
+    "actual_saved_npz_encoded_bytes": 66860828,
+    "complete_item_resource_declaration": {
+      "operator": "Custom reviewed native Rasterio read and atomic NPZ custody; no Baseline/NewVintage helper or deployed asset package.",
+      "exact_all55_decoded_values_masks_bytes": 144179200,
+      "conservative_all55_npz_encoded_upper_bound_bytes": 165034650,
+      "largest_single_npz_encoded_upper_bound_bytes": 3598646,
+      "largest_single_decoded_values_masks_block_bytes": 3145728,
+      "largest_simultaneous_asset_array_dictionary_bytes": 34603008,
+      "decoded_npy_header_reserve_bytes": 112640,
+      "non_npz_encoded_output_reserve_bytes": 16777216,
+      "non_npz_additional_nested_decoded_reserve_bytes": 16777216,
+      "complete_encoded_plus_all_decoded_and_metadata_bound_bytes": 342880922,
+      "new_observation_disk_output_admission_bytes": 181811866,
+      "source_plus_authorGit_plus_independent_remoteGit_and_metadata_disk_admission_bytes": 545435598,
+      "minimum_free_filesystem_bytes": 10737418240,
+      "descriptive_peak_rss_estimate_bytes": 536870912,
+      "process_memory_override": false,
+      "compression_dependent_stop_protocol": false,
+      "source_block_order_unchanged": true,
+      "failure_rule": "Fail the entire item on the first source, mask, compression, metadata, status or storage error; preserve completed whole blocks and failure records. No partial natural-group scientific completion or adoption.",
+      "generic_helper_and_premerge_policy": "No repository limits changed. The256MiB generic evidence-preparation ceiling is an implementation bound, not a universal custom-operator bound (accepted docs/AUDIT_FAILURE_PREVENTION.md). Actual final packet bytes and any generic validator applicability will be reported separately; no unsupported generic-gate pass.",
+      "selection_rule_unchanged": "Frozen197 whole-item choice predates January6 values; all72 previous exact-key observations are January1. No arbitrary group splitting or desired-result sampling."
+    }
+  },
+  "original_key_count": 72,
+  "literal_author_answer_keys": 49,
+  "prior_original_records_unchanged": true,
+  "scientific_interpretation_automatically_inferred": false,
+  "raster_acquisition_or_render_replay": false,
+  "new_source_value_mask_calls": 0,
+  "authority_or_repair_credit": 0
+}

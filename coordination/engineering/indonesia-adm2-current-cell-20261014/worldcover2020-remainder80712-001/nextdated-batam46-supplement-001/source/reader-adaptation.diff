@@ -1,0 +1,66 @@
+--- .cloud-work/batam-cloud34-nextdate-001/read_next_distinct_native_blocks.py
++++ .cloud-work/batam-cloud72-wholeitem-002/read_next_distinct_native_blocks.py
+@@ -2,13 +2,13 @@
+ No normalization, display, indices, physical classifier or authority predicate.
+ """
+ from pathlib import Path
+-import collections,contextlib,datetime,hashlib,json,os,resource,sys,time,urllib.request
++import collections,contextlib,datetime,hashlib,json,os,resource,sys,time,urllib.request,shutil
+ import numpy as np
+ import rasterio
+ from rasterio.windows import Window
+ ROOT=Path(__file__).resolve().parent
+-PLAN=ROOT/'next-distinct-native-block-plan34.json'
+-PLAN_SHA='a90a24c3c8354e826268d0eb8f333e6aea10b55b30c91381a38c54d43e7c67c3'
++PLAN=ROOT/'next-distinct-native-block-plan72.json'
++PLAN_SHA='e3b1689644c1bd30f928e24f91b19e349984d54e368318784280d8cb9e01e098'
+ OUT=ROOT/'next-distinct-raw-native-observation-001'
+ OUT.mkdir(exist_ok=True)
+ def utc():return datetime.datetime.now(datetime.timezone.utc).isoformat()
+@@ -23,9 +23,9 @@
+  os.replace(temporary,path);return pin(path)
+ def identity(headers):return {k.lower():v for k,v in headers.items() if k.lower() in ('etag','content-length','last-modified','accept-ranges')}
+ raw=PLAN.read_bytes();assert hashlib.sha256(raw).hexdigest()==PLAN_SHA;plan=json.loads(raw)
+-assert plan['exact_original_scope']==34 and plan['total_asset_native_block_windows']==30
++assert plan['exact_original_scope']==72 and plan['total_asset_native_block_windows']==55 and len(plan['items'])==1
+ reader=pin(Path(__file__));start=time.monotonic();started=utc();remote_blocks=0;remote_data_calls=0;remote_mask_calls=0;reused_blocks=0;failures=[];complete_items=[]
+-atomic_json(OUT/'attempt-001.started.json',{'started_utc':started,'pid':os.getpid(),'plan_sha256':PLAN_SHA,'reader':reader,'phase':'rawDN+nativeMasks+SCL-only','Root_authorization':'Launch requires distinct complete new34 plan review and explicit parent instruction; original first-date f9d57d96 review is historical method context only','normalization_display_indices':False})
++atomic_json(OUT/'attempt-001.started.json',{'started_utc':started,'pid':os.getpid(),'plan_sha256':PLAN_SHA,'reader':reader,'phase':'rawDN+nativeMasks+SCL-only','Root_authorization':'Launch requires distinct complete whole72 plan review and explicit parent instruction; original first-date f9d57d96 review is historical method context only','normalization_display_indices':False})
+ def status(state):
+  return atomic_json(OUT/'execution-status.json',{'state':state,'started_utc':started,'updated_utc':utc(),'elapsed_seconds':time.monotonic()-start,'pid':os.getpid(),'plan_sha256':PLAN_SHA,'reader':reader,'remote_value_block_calls':remote_data_calls,'remote_mask_block_calls':remote_mask_calls,'reused_complete_block_arrays':reused_blocks,'complete_items':complete_items,'failures':failures,'new_scientific_or_native_credit':0})
+ status('running')
+@@ -47,7 +47,9 @@
+      br,bc=block['block'];meta=af/('block-%02d-%02d.json'%(br,bc));array=af/('block-%02d-%02d.npz'%(br,bc))
+      if meta.exists():
+       m=json.loads(meta.read_text());assert m['plan_sha256']==PLAN_SHA and m['reader_sha256']==reader['sha256'] and m['item_id']==item['item_id'] and m['asset']==asset_name and m['native_window']==block['native_window'] and m['source_url']==asset['source_url'] and m['source_object_identity']==asset['HEAD_identity'];assert pin(array)==m['array'];cached[(br,bc)]=m;reused_blocks+=1
+-     else:missing.append((block,meta,array))
++     else:
++      if array.exists() or array.with_suffix('.npz.partial').exists():raise RuntimeError('Orphan saved NPZ or partial custody lacks complete metadata; explicit preserved-byte recovery required, no source reacquisition or overwrite.')
++      missing.append((block,meta,array))
+     if missing:
+      with urllib.request.urlopen(urllib.request.Request(asset['source_url'],method='HEAD'),timeout=60) as response:
+       actual_identity=identity(dict(response.headers));assert response.status==200 and actual_identity==asset['HEAD_identity']
+@@ -55,6 +57,7 @@
+       h=asset['actual_header'];assert str(ds.crs)==h['crs'] and list(ds.transform)==h['transform'] and ds.width==h['width'] and ds.height==h['height'] and ds.count==1 and list(ds.dtypes)==h['dtypes'] and ds.nodata==h['nodata'] and [list(x) for x in ds.block_shapes]==h['block_shapes'] and list(ds.scales)==h['scales'] and list(ds.offsets)==h['offsets']
+       for block,meta,array in missing:
+        left,top,width,height=block['native_window'];window=Window(left,top,width,height)
++       if shutil.disk_usage(ROOT).free < 10*1024**3+6*1024**2:raise RuntimeError('Insufficient actual disk for next whole block plus metadata safety above10GiB floor; stop entire item.')
+        values=ds.read(1,window=window);remote_data_calls+=1
+        mask=ds.read_masks(1,window=window);remote_mask_calls+=1
+        assert values.shape==mask.shape==(height,width) and str(values.dtype)==h['dtypes'][0] and str(mask.dtype)=='uint8'
+@@ -83,6 +86,7 @@
+     products.append(atomic_json(af/'asset-complete.json',{'plan_sha256':PLAN_SHA,'reader_sha256':reader['sha256'],'item_id':item['item_id'],'asset':asset_name,'native_blocks':metadata_pins,'complete_point_records':len(item['points']),'source_object_identity':asset['HEAD_identity'],'status':'raw-native-blocks-complete'}))
+    except Exception as error:
+     failure={'item_id':item['item_id'],'asset':asset_name,'type':type(error).__name__,'error':str(error),'at_utc':utc()};failures.append(failure);atomic_json(af/'failure.json',failure);asset_failed=True;print(json.dumps({'event':'asset-failed',**failure}),flush=True);status('running')
++    break  # Any failure stops the complete natural item; no later asset reads.
+   if not asset_failed:
+    observations=folder/'point-observations.jsonl';temporary=observations.with_suffix('.jsonl.partial')
+    with temporary.open('wb') as f:
+@@ -91,6 +95,6 @@
+     f.flush();os.fsync(f.fileno())
+    os.replace(temporary,observations);products.append(pin(observations));receipt={'plan_sha256':PLAN_SHA,'reader_sha256':reader['sha256'],'item_id':item['item_id'],'point_count':len(point_records),'asset_block_count':item_blocks,'products':products,'acquisition_datetime':item['acquisition_datetime'],'completed_utc':utc(),'physical_or_native_credit':0};atomic_json(done,receipt);complete_items.append(receipt);status('running');print(json.dumps({'event':'item-complete','item':item['item_id'],'points':len(point_records),'asset_blocks':item_blocks}),flush=True)
+ status('complete' if not failures else 'partial-with-actual-failures')
+-atomic_json(OUT/'attempt-001.execution.json',{'started_utc':started,'ended_utc':utc(),'elapsed_seconds':time.monotonic()-start,'plan_sha256':PLAN_SHA,'reader':reader,'complete_item_count':len(complete_items),'complete_points':sum(x['point_count'] for x in complete_items),'remote_data_block_calls':remote_data_calls,'remote_mask_block_calls':remote_mask_calls,'reused_blocks':reused_blocks,'failures':failures,'process_lifetime_peak_rss_bytes':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*(1 if sys.platform=='darwin' else 1024),'runtime':{'platform':sys.platform,'python':sys.version,'numpy':np.__version__,'rasterio':rasterio.__version__,'gdal':rasterio.__gdal_version__},'normalization_or_display_or_indices':False,'scientific_or_native_credit':0})
++atomic_json(OUT/'attempt-001.execution.json',{'started_utc':started,'ended_utc':utc(),'elapsed_seconds':time.monotonic()-start,'plan_sha256':PLAN_SHA,'reader':reader,'complete_item_count':len(complete_items),'complete_points':sum(x['point_count'] for x in complete_items),'remote_data_block_calls':remote_data_calls,'remote_mask_block_calls':remote_mask_calls,'reused_blocks':reused_blocks,'failures':failures,'process_lifetime_peak_rss_bytes':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*(1 if sys.platform=='darwin' else 1024),'runtime':{'platform':sys.platform,'python':sys.version,'numpy':np.__version__,'rasterio':rasterio.__version__,'gdal':rasterio.__gdal_version__},'normalization_or_display_or_indices':False,'scientific_or_native_credit':0,'actual_saved_npz_encoded_bytes':sum(p.stat().st_size for p in OUT.rglob('*.npz')),'complete_item_resource_declaration':plan['complete_item_resource_declaration']})
+ print(json.dumps({'status':'complete' if not failures else 'partial','items':len(complete_items),'points':sum(x['point_count'] for x in complete_items),'remote_blocks':remote_blocks,'reused_blocks':reused_blocks,'failures':len(failures),'elapsed_seconds':time.monotonic()-start}),flush=True)
+ sys.exit(0 if not failures else 1)

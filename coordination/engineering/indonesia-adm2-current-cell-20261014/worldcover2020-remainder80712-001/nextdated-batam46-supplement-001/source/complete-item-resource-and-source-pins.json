@@ -1,0 +1,159 @@
+{
+  "kind": "honest-complete72-custom-offline-operator-resource-and-source-declaration",
+  "prepared_utc": "2026-10-16T05:21:06.771494+00:00",
+  "plan": {
+    "path": "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/0f0bb6420b8a7acb9fec7eb313216e39d9b15a0c1f51234aa558b7f5aa812c31/work/.cloud-work/batam-cloud72-wholeitem-002/next-distinct-native-block-plan72.json",
+    "bytes": 458768,
+    "sha256": "e3b1689644c1bd30f928e24f91b19e349984d54e368318784280d8cb9e01e098"
+  },
+  "reader": {
+    "path": "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/0f0bb6420b8a7acb9fec7eb313216e39d9b15a0c1f51234aa558b7f5aa812c31/work/.cloud-work/batam-cloud72-wholeitem-002/read_next_distinct_native_blocks.py",
+    "bytes": 12094,
+    "sha256": "732199db84349482aabee2c8441edea24023ff44c2a968c8a3f724c5ea6f9ea4"
+  },
+  "complete_natural_item_group": "S2A_48NUG_20200106_0_L2A",
+  "exact_original_keys": 72,
+  "current_public_held517": {
+    "commit": "479d8a12b21987b60bf95a377669de2b74813e8c",
+    "publication_path": "coordination/engineering/indonesia-adm2-current-cell-20261014/worldcover2020-remainder80712-001/nextdated-batam27-supplement-001/accounting/specific-residual517-owner-y-x.jsonl.gz",
+    "file": ".cloud-work/physical-batam27-packet-001/accounting/specific-residual517-owner-y-x.jsonl.gz",
+    "bytes": 2253,
+    "sha256": "8f91a116454717e376b9da288bcebd4a2ed1a4f9ef1d2d2a878ce73cf02eddf3",
+    "mode": "100644",
+    "git_blob_oid": "30eb6aaa5d45fe900b4a7c5fa58b1d7eafe1ca4e",
+    "decoded_bytes": 11374,
+    "decoded_sha256": "00901afc69493a19f6ad4c8bc1c5fdbb15b9229d0861dda7659c41c9ca373ee8"
+  },
+  "source_assets": [
+    {
+      "item_id": "S2A_48NUG_20200106_0_L2A",
+      "asset": "red",
+      "source_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/UG/2020/1/S2A_48NUG_20200106_0_L2A/B04.tif",
+      "HEAD_identity": {
+        "last-modified": "Mon, 21 Sep 2020 05:35:15 GMT",
+        "etag": "\"b972e14b3c790bb02cfde3488fbe4fab-26\"",
+        "accept-ranges": "bytes",
+        "content-length": "209780384"
+      },
+      "actual_header_receipt": {
+        "file": "asset-headers-001/S2A_48NUG_20200106_0_L2A.json",
+        "bytes": 17274,
+        "sha256": "25895227ed5cfeb763261d7428ab7d114c43e8c747c6356e09873311be45ca70"
+      },
+      "native_blocks": 11
+    },
+    {
+      "item_id": "S2A_48NUG_20200106_0_L2A",
+      "asset": "green",
+      "source_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/UG/2020/1/S2A_48NUG_20200106_0_L2A/B03.tif",
+      "HEAD_identity": {
+        "last-modified": "Mon, 21 Sep 2020 05:34:23 GMT",
+        "etag": "\"93efe6b3cf8ef1371f060caec19bd417-26\"",
+        "accept-ranges": "bytes",
+        "content-length": "211964718"
+      },
+      "actual_header_receipt": {
+        "file": "asset-headers-001/S2A_48NUG_20200106_0_L2A.json",
+        "bytes": 17274,
+        "sha256": "25895227ed5cfeb763261d7428ab7d114c43e8c747c6356e09873311be45ca70"
+      },
+      "native_blocks": 11
+    },
+    {
+      "item_id": "S2A_48NUG_20200106_0_L2A",
+      "asset": "blue",
+      "source_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/UG/2020/1/S2A_48NUG_20200106_0_L2A/B02.tif",
+      "HEAD_identity": {
+        "last-modified": "Mon, 21 Sep 2020 05:33:32 GMT",
+        "etag": "\"13f9dab682b00f4c4fc8f09db7c84d0e-25\"",
+        "accept-ranges": "bytes",
+        "content-length": "209432773"
+      },
+      "actual_header_receipt": {
+        "file": "asset-headers-001/S2A_48NUG_20200106_0_L2A.json",
+        "bytes": 17274,
+        "sha256": "25895227ed5cfeb763261d7428ab7d114c43e8c747c6356e09873311be45ca70"
+      },
+      "native_blocks": 11
+    },
+    {
+      "item_id": "S2A_48NUG_20200106_0_L2A",
+      "asset": "nir",
+      "source_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/UG/2020/1/S2A_48NUG_20200106_0_L2A/B08.tif",
+      "HEAD_identity": {
+        "last-modified": "Mon, 21 Sep 2020 05:36:48 GMT",
+        "etag": "\"73f5875241eecd275bbddd5bce452e0e-26\"",
+        "accept-ranges": "bytes",
+        "content-length": "217236126"
+      },
+      "actual_header_receipt": {
+        "file": "asset-headers-001/S2A_48NUG_20200106_0_L2A.json",
+        "bytes": 17274,
+        "sha256": "25895227ed5cfeb763261d7428ab7d114c43e8c747c6356e09873311be45ca70"
+      },
+      "native_blocks": 11
+    },
+    {
+      "item_id": "S2A_48NUG_20200106_0_L2A",
+      "asset": "scl",
+      "source_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/UG/2020/1/S2A_48NUG_20200106_0_L2A/SCL.tif",
+      "HEAD_identity": {
+        "last-modified": "Mon, 21 Sep 2020 05:38:46 GMT",
+        "etag": "\"496e01a7c8679b65593f2a18195fb7bb\"",
+        "accept-ranges": "bytes",
+        "content-length": "3295880"
+      },
+      "actual_header_receipt": {
+        "file": "asset-headers-001/S2A_48NUG_20200106_0_L2A.json",
+        "bytes": 17274,
+        "sha256": "25895227ed5cfeb763261d7428ab7d114c43e8c747c6356e09873311be45ca70"
+      },
+      "native_blocks": 11
+    }
+  ],
+  "resources": {
+    "operator": "Custom reviewed native Rasterio read and atomic NPZ custody; no Baseline/NewVintage helper or deployed asset package.",
+    "exact_all55_decoded_values_masks_bytes": 144179200,
+    "conservative_all55_npz_encoded_upper_bound_bytes": 165034650,
+    "largest_single_npz_encoded_upper_bound_bytes": 3598646,
+    "largest_single_decoded_values_masks_block_bytes": 3145728,
+    "largest_simultaneous_asset_array_dictionary_bytes": 34603008,
+    "decoded_npy_header_reserve_bytes": 112640,
+    "non_npz_encoded_output_reserve_bytes": 16777216,
+    "non_npz_additional_nested_decoded_reserve_bytes": 16777216,
+    "complete_encoded_plus_all_decoded_and_metadata_bound_bytes": 342880922,
+    "new_observation_disk_output_admission_bytes": 181811866,
+    "source_plus_authorGit_plus_independent_remoteGit_and_metadata_disk_admission_bytes": 545435598,
+    "minimum_free_filesystem_bytes": 10737418240,
+    "descriptive_peak_rss_estimate_bytes": 536870912,
+    "process_memory_override": false,
+    "compression_dependent_stop_protocol": false,
+    "source_block_order_unchanged": true,
+    "failure_rule": "Fail the entire item on the first source, mask, compression, metadata, status or storage error; preserve completed whole blocks and failure records. No partial natural-group scientific completion or adoption.",
+    "generic_helper_and_premerge_policy": "No repository limits changed. The256MiB generic evidence-preparation ceiling is an implementation bound, not a universal custom-operator bound (accepted docs/AUDIT_FAILURE_PREVENTION.md). Actual final packet bytes and any generic validator applicability will be reported separately; no unsupported generic-gate pass.",
+    "selection_rule_unchanged": "Frozen197 whole-item choice predates January6 values; all72 previous exact-key observations are January1. No arbitrary group splitting or desired-result sampling."
+  },
+  "actual_free_filesystem_bytes": 11349708800,
+  "observed_OS_memory": {
+    "MemTotal_bytes": 10451464192,
+    "MemAvailable_bytes": 7376580608,
+    "SwapTotal_bytes": 0
+  },
+  "memory_override": false,
+  "observed_memory_is_not_a_process_guarantee": true,
+  "current_accepted_custom_operator_policy": {
+    "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+    "path": "docs/AUDIT_FAILURE_PREVENTION.md",
+    "git_blob_oid": "4dc2646e62772fe44a35c56d90dc1dd34abfd458",
+    "bytes": 17745,
+    "sha256": "fc68667cceff2464f81677fc63bbf9ad2b21a7020a6d1d5628581b1aadebd3ce",
+    "applicable_section": "Scientific evidence and reproduction resources"
+  },
+  "previous_two_items_actual_npz_encoded_bytes": 32134138,
+  "previous_two_items_actual_decoded_values_masks_bytes": 75008000,
+  "expected72_encoded_at_previous_ratio_not_an_admission_or_selection_rule": 61767736,
+  "superseded_guard_preserved_not_executed": true,
+  "source_value_or_mask_calls": 0,
+  "scientific_credit": 0,
+  "orphan_custody_fail_closed_before_source_read": true
+}

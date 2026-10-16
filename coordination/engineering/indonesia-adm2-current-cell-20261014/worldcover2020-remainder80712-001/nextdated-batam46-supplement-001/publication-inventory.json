@@ -1,0 +1,2035 @@
+{
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 2707,
+      "sha256": "b9a93fce43ea25a44a097efb52b9bddb4e9fc8c787030e300e00f0419fa6d563"
+    },
+    {
+      "path": "accounting/adopted46-owner-y-x.jsonl.gz",
+      "bytes": 224,
+      "sha256": "909cafe97921541fba1d61d2e5aabc4a1fce2b728afc45447ae7e1728f5400f7",
+      "decoded_bytes": 1012,
+      "decoded_sha256": "5fd615c4ffdf15cbd5c3cbfd65de9f0748ebc64cf23728f34d0b7c0394f461ea"
+    },
+    {
+      "path": "accounting/exact-original-accounting.json",
+      "bytes": 1743,
+      "sha256": "9fed9fb255ac21ebd16dae173214b1c643355d7060e4af6affc9a47458a59dae"
+    },
+    {
+      "path": "accounting/known-exact-adopted-union133375-owner-y-x.jsonl.gz",
+      "bytes": 371999,
+      "sha256": "9378f54497c8d94100265cf176f1b4a6845e6f95819f3a941de8e2f775236da9",
+      "decoded_bytes": 2933935,
+      "decoded_sha256": "d64b4a7fe55a473e699b43d92cdc45a0be765c95728ee2580324f6cf36c833c9"
+    },
+    {
+      "path": "accounting/specific-residual471-owner-y-x.jsonl.gz",
+      "bytes": 2104,
+      "sha256": "f5bec252762b44bf12e119f5c90eead945a475369e9c8357357d8018d4257e4e",
+      "decoded_bytes": 10362,
+      "decoded_sha256": "8e28e1dcca1c042ef6d4659849fa5aa118b47fdafbf4d3eecb7df1e80e548d09"
+    },
+    {
+      "path": "adopted46-full-original-proposals-and-decisions.jsonl.gz",
+      "bytes": 271687,
+      "sha256": "44b7bc4e16f10c35e9b559e2938cacf3a8e372a25bfa1899e9408c6de073f23a",
+      "decoded_bytes": 2051836,
+      "decoded_sha256": "6862a68fb84894d0839a746a1f45602a08e7f67482c9448d19353e5f618b14d3"
+    },
+    {
+      "path": "complete-nextdated72-outcomes.jsonl.gz",
+      "bytes": 422869,
+      "sha256": "1456df45151ab876f7062854e68d57203f65b546153b8355e4c9d81242d7c0b3",
+      "decoded_bytes": 3219628,
+      "decoded_sha256": "9b84911a482a81f83ff1505de5411459e9cfb95c7081cdc82fd5f2808ceaf8ab"
+    },
+    {
+      "path": "review/custody-review.json",
+      "bytes": 4215,
+      "sha256": "7e1e4db4622b9768d3fc02efbf59954eaa1530b6ceb212c361012945b62dba6b"
+    },
+    {
+      "path": "review/custody-review.stdout.json",
+      "bytes": 1239,
+      "sha256": "b94aca0828cfc1b1b7b7a0b21e36db1ea033fa95b2dcdbf9cb7bca2cf1932264"
+    },
+    {
+      "path": "review/distinct-raw-acquisition-plan-review.json",
+      "bytes": 1238,
+      "sha256": "7dcd1dab1d64b60e17dfbf5bbc43d81be3069d15944f672f6f1bbcc6d38dae8a"
+    },
+    {
+      "path": "review/distinct-scientific-review.json",
+      "bytes": 4759,
+      "sha256": "ddb25c9b8b91740c6ccb51586324c51f36b61330965c986a9a5d80ead1766a1d"
+    },
+    {
+      "path": "review/held26-keyed-reasons.jsonl",
+      "bytes": 46646,
+      "sha256": "4b43b73c05eb6e58ecd8c6c6643ae519433ba4d9900c8c3f3b4b1f52b835beac"
+    },
+    {
+      "path": "review/independent72-keyed-dispositions.jsonl",
+      "bytes": 125622,
+      "sha256": "c1fac70e01c4e257f5bed3fbcd22e5b5ea6a888b58389a940a66d2459a85c1b7"
+    },
+    {
+      "path": "review/original-author-proposed49-owner-y-x.jsonl",
+      "bytes": 1078,
+      "sha256": "d6b695c26e471e695b61ab3ad1784fbaf79c034cc4b95956e5cafa3822580932"
+    },
+    {
+      "path": "review/original-author-proposed72.jsonl.gz",
+      "bytes": 386946,
+      "sha256": "0e72129f4e24c0b1d089d3a3eff9e1b7aca0d905fbfb057933d94722e53afe61",
+      "decoded_bytes": 3005149,
+      "decoded_sha256": "a8da0647cdd5c8fb4046d1a6bc4e5c60eb0dab7475578235adfbf0f131ffaef8"
+    },
+    {
+      "path": "review/original-review-byte-identity.json",
+      "bytes": 178,
+      "sha256": "9f6ac6a0e169211eb7c76066b3c556e128cad8a1137b66eb6f515735a11cdf15"
+    },
+    {
+      "path": "review/supported46-owner-y-x.jsonl",
+      "bytes": 1012,
+      "sha256": "5fd615c4ffdf15cbd5c3cbfd65de9f0748ebc64cf23728f34d0b7c0394f461ea"
+    },
+    {
+      "path": "review/verified-file-pins.json",
+      "bytes": 41111,
+      "sha256": "334efbe381ae93122cc8cde4abf75bb30f91cf3f48c3c65c3610010f019ad4af"
+    },
+    {
+      "path": "review/verify_custody.py",
+      "bytes": 8901,
+      "sha256": "14f4b498d66a663b3a10f85e5c4c8d5e3a27d83f2bb625872ec1f54d4b2d569f"
+    },
+    {
+      "path": "review/visual-inspection-manifest.json",
+      "bytes": 25696,
+      "sha256": "c427cd9148ef6f4ee6fe3527a74cb2afa3c75436c50656f49d99739883c7689c"
+    },
+    {
+      "path": "review/write_visual_review.py",
+      "bytes": 15801,
+      "sha256": "8fb56b17084e3588ce3845e1210fcfdb880d336814f5abb3429f1dfc289e53d3"
+    },
+    {
+      "path": "source/actual-observation-custody-verification.json",
+      "bytes": 35855,
+      "sha256": "e8513ff2baa0dfed4c9fa23f6d59c16ab22e43d66d6efd25334af563ada4d838"
+    },
+    {
+      "path": "source/assemble_native_block_plan.py",
+      "bytes": 9891,
+      "sha256": "482227d396b9e4a66bad359b5b633b63f7c72eb86baad13491388a92496fd3f0"
+    },
+    {
+      "path": "source/asset-headers-001/S2A_48NUG_20200106_0_L2A.json",
+      "bytes": 17274,
+      "sha256": "25895227ed5cfeb763261d7428ab7d114c43e8c747c6356e09873311be45ca70"
+    },
+    {
+      "path": "source/asset-headers-001/execution-summary.json",
+      "bytes": 595,
+      "sha256": "e96d1d2ae973f0812ba245e3807347c17cbebc88ebc431702cfd34882dcc483c"
+    },
+    {
+      "path": "source/author-native-view-decisions-in-progress.json",
+      "bytes": 14922,
+      "sha256": "0842c05e8db04bea11e068b1ea6bb604361fd8bad0e5b5a901f53ddbc16255e6"
+    },
+    {
+      "path": "source/author-proposed49-owner-y-x.jsonl",
+      "bytes": 1078,
+      "sha256": "d6b695c26e471e695b61ab3ad1784fbaf79c034cc4b95956e5cafa3822580932"
+    },
+    {
+      "path": "source/author-review-summary.json",
+      "bytes": 1067,
+      "sha256": "7db84792b8ac7d9126054f54103a43c4eadaa7fcb8566742920f7de21c56192f"
+    },
+    {
+      "path": "source/bind-author-review72.py",
+      "bytes": 4573,
+      "sha256": "3e8c4e77dd66dd726b7db9950f969b2ee084479b78aa75d651903063c2430613"
+    },
+    {
+      "path": "source/complete-item-resource-and-source-pins.json",
+      "bytes": 8062,
+      "sha256": "3b6060bd8a46429e3289434a788c40a252f4af1303e16f453268ef02e3d32e1a"
+    },
+    {
+      "path": "source/display-render.stderr.log",
+      "bytes": 349,
+      "sha256": "3dee0eb9b80cea35aa6696d51205661b72c764cffc366537f3286b2041eb7890"
+    },
+    {
+      "path": "source/display-render.stdout.json",
+      "bytes": 127,
+      "sha256": "5d081d57b270ab451844bf599dd63d2e5e713f879d9cbc5316d16b7fb1ae8f07"
+    },
+    {
+      "path": "source/header-inspection.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "source/header-inspection.stdout.jsonl",
+      "bytes": 513,
+      "sha256": "9c739c472b177555fdd6f591896c0c8f1e9ebce1381c93d8dc1d7ab887507396"
+    },
+    {
+      "path": "source/inspect_selected_asset_headers.py",
+      "bytes": 3677,
+      "sha256": "fafd5519881ec649ac8d6eaa5c3e42c227a51e3b3863cdc9b60a8239223d6ab4"
+    },
+    {
+      "path": "source/launch-review-and-admission.json",
+      "bytes": 1078,
+      "sha256": "5c60dea1de08d82b152802ff893f437cccf2835faa51c9a944dba12c365e0860"
+    },
+    {
+      "path": "source/metadata-coverage-plan.json",
+      "bytes": 117561,
+      "sha256": "60e5886e7fb12785b9cfc1e19184a487f374f0a6c0753dad47d1d247ed935fde"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/batam72-rawDN-01.png",
+      "bytes": 306755,
+      "sha256": "69cbf130777bc795eb1f78d6782cd5ff9d73287ddc7045c772cec5194e1156b9"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/batam72-rawDN-02.png",
+      "bytes": 311576,
+      "sha256": "730f667ba8eb522c130c8901f164ed219b595da73a51a7de3ec4500604cd1301"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/batam72-rawDN-03.png",
+      "bytes": 306756,
+      "sha256": "590151879b7fd463d2c5f57fde5725c82b1a9622e0fb140f97e473b967ecc686"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/contact-inventory.json",
+      "bytes": 158103,
+      "sha256": "1a5406848f939b64d740ad4bf77322e09da5821a65d84445d7bef03e23464fd7"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12136-native17-RGB-FCC-SCL25.png",
+      "bytes": 4283,
+      "sha256": "e6755086a7f67c92f3fd8258ff9a3b45bcb89b8a030e5433b49516dde3ed679e"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12162-native17-RGB-FCC-SCL25.png",
+      "bytes": 4193,
+      "sha256": "0df9e4d83b35b78b28c159a6b35bc3355f767653b77eb0361a56ae43115d9d34"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12192-native17-RGB-FCC-SCL25.png",
+      "bytes": 4803,
+      "sha256": "86c2b14907cd3c57de8d55e789ad4843caa632cc91eb1fcc8b41689049bba00f"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12205-native17-RGB-FCC-SCL25.png",
+      "bytes": 4421,
+      "sha256": "a15280832282f4f65145e2358835fdd76689fea5db15fb7343296e9e3bd3ef4f"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12219-native17-RGB-FCC-SCL25.png",
+      "bytes": 3841,
+      "sha256": "7deade4acaeaaa9282119f306ef82e42cc388a23c4510f70f62c3fd5587f57a2"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12242-native17-RGB-FCC-SCL25.png",
+      "bytes": 4413,
+      "sha256": "0efdd6b96beb108dfa07fff478c76571a8e20df8c5126024c39d12daf66883e2"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12256-native17-RGB-FCC-SCL25.png",
+      "bytes": 3498,
+      "sha256": "ab1640b60d70127624a2e5be1a285c9bc13f17f3df166277f705984841567de0"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12276-native17-RGB-FCC-SCL25.png",
+      "bytes": 3943,
+      "sha256": "f8c5a06788524bb571dfbdf06b4d140e5e9bd0dce480de40cfa90654f6e6f91e"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12278-native17-RGB-FCC-SCL25.png",
+      "bytes": 4270,
+      "sha256": "7c12cb6ad7487242e710b2f07b84d03bd9bdd23fb243443b1718954c18549335"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12279-native17-RGB-FCC-SCL25.png",
+      "bytes": 4461,
+      "sha256": "bdd73fc2caa25d7309a14156914b806649ac92bd3941a681d0350bee8c0b3c50"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12291-native17-RGB-FCC-SCL25.png",
+      "bytes": 4291,
+      "sha256": "1c79538ccf5aa7bf2333a5d77acf24683b294398828c2bad9f82ffd7ede56d8d"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12300-native17-RGB-FCC-SCL25.png",
+      "bytes": 4041,
+      "sha256": "48cdb1c4570fe5604f1da320a52344145044f06ad4409845fae77f4d89306c24"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12304-native17-RGB-FCC-SCL25.png",
+      "bytes": 4767,
+      "sha256": "d86a11f0c93d0d6abd39ed88502e29aa4f3997c69beea0e10db7810caeb509ea"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12318-native17-RGB-FCC-SCL25.png",
+      "bytes": 4346,
+      "sha256": "28e5e2c592defdc2de7bc1ef926a3be26f75226d9110b04379080434a3197bc4"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12349-native17-RGB-FCC-SCL25.png",
+      "bytes": 3655,
+      "sha256": "2f04702146556a812a853d6bcd4288dee9df528ce84918fa18ae61d51b9ca942"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12354-native17-RGB-FCC-SCL25.png",
+      "bytes": 3876,
+      "sha256": "1c54a6e716b8bf682cd158c2b36ec5cc0f96f6a5c590c7f79bb1dd8a22e9a0e2"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12360-native17-RGB-FCC-SCL25.png",
+      "bytes": 3610,
+      "sha256": "f40a8efa8af570019c471bb0864896fdeaa5d01cd18cadbdd9c7e15a3136c045"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12374-native17-RGB-FCC-SCL25.png",
+      "bytes": 4172,
+      "sha256": "1ae764663a473c647bc6bd50bcdd1a5a9fb84cbf9163193b079bb9bf7db04c2b"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12388-native17-RGB-FCC-SCL25.png",
+      "bytes": 4373,
+      "sha256": "2a01d0bd209a96d7c1adfaf3348d6ee6d5a77d5e384ce6d265b419ed18c82c02"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12452-native17-RGB-FCC-SCL25.png",
+      "bytes": 4223,
+      "sha256": "864f9e6eea530e1a7eacc2d66bd79b9dceb0904004c88b2e51e64293fd80d115"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12454-native17-RGB-FCC-SCL25.png",
+      "bytes": 3803,
+      "sha256": "8b028fc3d22eb8c50e060b74592c246a9ca963a4abece66c459317cb14f44d58"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12455-native17-RGB-FCC-SCL25.png",
+      "bytes": 3622,
+      "sha256": "098dd127a4abdc4509d0071379f94699104d8f5073a6fc33735364d0ab6d0acf"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12456-native17-RGB-FCC-SCL25.png",
+      "bytes": 4769,
+      "sha256": "29f6f841673a0d89ab5f3b98a12addf67082e7e570783050e42e6e519d6e5dea"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12461-native17-RGB-FCC-SCL25.png",
+      "bytes": 3640,
+      "sha256": "24cf5e62c7609d8218481ff6ff047317d830550590bf487937dd443463df1ecb"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12467-native17-RGB-FCC-SCL25.png",
+      "bytes": 3908,
+      "sha256": "3ddacd9eff2dc26b9ccfdebc24028cf199ca297775066765faa6dcadd262c225"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12479-native17-RGB-FCC-SCL25.png",
+      "bytes": 3774,
+      "sha256": "01eff69b56331c7dfebcf5ed3d91a57743be9153a6d76fb1e578132951326935"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12493-native17-RGB-FCC-SCL25.png",
+      "bytes": 4534,
+      "sha256": "c2ec281ab28b5c53edc134cfa936b199eedad396d9f1efa2e9cde886f8979a83"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12501-native17-RGB-FCC-SCL25.png",
+      "bytes": 5287,
+      "sha256": "13bab11cbdc45697a4085e6ad1f23617ca3fc20f325e039bd9fedff667cecde2"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12516-native17-RGB-FCC-SCL25.png",
+      "bytes": 4942,
+      "sha256": "295489187dccadca1a0dccf4c746b56455261cc39bd17b8be7d1a827de000106"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12562-native17-RGB-FCC-SCL25.png",
+      "bytes": 3888,
+      "sha256": "ebeb44ba539d3b1358881354f66c1a4e02bf4a8fc7e7df5dab19feae26e372ab"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12581-native17-RGB-FCC-SCL25.png",
+      "bytes": 3923,
+      "sha256": "31409389daae005625df66e956a38170c53582a70184916e69498de71344d564"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-12590-native17-RGB-FCC-SCL25.png",
+      "bytes": 4299,
+      "sha256": "b4c1d2ffec46144c29a9614f9563f81da5a6882ce732a5bb3a2047b0c3bd5c9c"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-13278-native17-RGB-FCC-SCL25.png",
+      "bytes": 4445,
+      "sha256": "59923f537f35eac081b1261db6fb85653ee62883a67c72f878b06d5c75c1d6d5"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-13308-native17-RGB-FCC-SCL25.png",
+      "bytes": 4211,
+      "sha256": "2db19a67057b3746b65cf80963bf39608911fafe46125802c577fdb9fe919c33"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-13394-native17-RGB-FCC-SCL25.png",
+      "bytes": 3867,
+      "sha256": "158c66bb3735e01573af8dc79dee8945030cdca3469b542cec7abfcdc55fda1f"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-13522-native17-RGB-FCC-SCL25.png",
+      "bytes": 3461,
+      "sha256": "97e0dc56572eaeead2ede8aa3839870c730d24a9373c62ad93f5139e64a85b68"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-13547-native17-RGB-FCC-SCL25.png",
+      "bytes": 3715,
+      "sha256": "6383961385cc7393a51c3c80d55a189a7091864e2182fdd5dd1ceb69c5633e19"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-13610-native17-RGB-FCC-SCL25.png",
+      "bytes": 4397,
+      "sha256": "301039f64315c2d245043ddec3a721ec2b14d836649525613288891362091c40"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-13709-native17-RGB-FCC-SCL25.png",
+      "bytes": 3676,
+      "sha256": "560b9c33ba35e9af71bd1a01a84a6d22a34ae092f881ee87d19377276800d4a0"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-13737-native17-RGB-FCC-SCL25.png",
+      "bytes": 3946,
+      "sha256": "e939ea528a8f495bb8e686ca586036d9741db6bf011d3711ed70de63848cec1c"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-13932-native17-RGB-FCC-SCL25.png",
+      "bytes": 3724,
+      "sha256": "f5271cd18a06876e4bce33340762e77c5a5c5c61f8a4fcb3e86ce4f9e5129d59"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-13936-native17-RGB-FCC-SCL25.png",
+      "bytes": 3427,
+      "sha256": "5253894081ef669509c6a83fc956f1c59fba8f0652918a30388484985abfea5e"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-14255-native17-RGB-FCC-SCL25.png",
+      "bytes": 4691,
+      "sha256": "3ef08bbe7a318cff92ef413ff9fb86cbbcdb816a07c93135a56710e8bbea74ca"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-14348-native17-RGB-FCC-SCL25.png",
+      "bytes": 3428,
+      "sha256": "357f9355b935b2f48a72f39bcc810c77b8daa47fa2d23272fb8729fd48b5681a"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-14350-native17-RGB-FCC-SCL25.png",
+      "bytes": 3498,
+      "sha256": "62ffcfe81e841251bbca0407251da8b5405f8a63a77f108c5d95146045b2410d"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-14371-native17-RGB-FCC-SCL25.png",
+      "bytes": 4127,
+      "sha256": "daa9a93e74b38d44120aed49492ff9fab3147dd9c7a8edcfb770e8115751ad30"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-14605-native17-RGB-FCC-SCL25.png",
+      "bytes": 3567,
+      "sha256": "62c3a5bdf58b26e1594b31d3c80050caa234e78ae39759efcb406ace1e55148d"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-14615-native17-RGB-FCC-SCL25.png",
+      "bytes": 3723,
+      "sha256": "e797fb0453e5c72f4a2a4dd3f9c0fc1747fe175c1c3686e0515d40c45108aa46"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-14624-native17-RGB-FCC-SCL25.png",
+      "bytes": 3688,
+      "sha256": "d6d1e6b22f50c1832a5749dcef6063b524cf89c74ac1448ef94bcfd534ab47a9"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-14741-native17-RGB-FCC-SCL25.png",
+      "bytes": 3758,
+      "sha256": "8cdd9d4df7907be7145a03a35af13d30b09848990c7f0b3e5c27c6b93ff9d8ef"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-14876-native17-RGB-FCC-SCL25.png",
+      "bytes": 3800,
+      "sha256": "ab76386212e1ae347272f020a9fd71c29645c9fcc638f56669a43aee586a67b5"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-14878-native17-RGB-FCC-SCL25.png",
+      "bytes": 3857,
+      "sha256": "8886b78a9929807eaae0633e8e039f35ca50375fc56c7a3f8b12f7dce3c09e97"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-14966-native17-RGB-FCC-SCL25.png",
+      "bytes": 4045,
+      "sha256": "38e9d0b92737786fae10110149134d3e9635ba7b1007400e06816c48e8684aad"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-14998-native17-RGB-FCC-SCL25.png",
+      "bytes": 3767,
+      "sha256": "7df6b8d030ecc496d609000f246fc1cf8c71bee97333eeda91541efe40a0ac86"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-15063-native17-RGB-FCC-SCL25.png",
+      "bytes": 3840,
+      "sha256": "9ff35490c50deb9233225d900d36dc8b93a038b0f51d0d2b865a396b96b20ec0"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-15116-native17-RGB-FCC-SCL25.png",
+      "bytes": 4710,
+      "sha256": "f8ea21916a21b50782f87127f2fb3c9c9dc38e0be3715c6e840037bbde6ee2d7"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-15117-native17-RGB-FCC-SCL25.png",
+      "bytes": 3691,
+      "sha256": "3d098a7d4fcbb04bc867459e6f3757a30ca6de148bf8f016d4276e091b0f32a2"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-15147-native17-RGB-FCC-SCL25.png",
+      "bytes": 3631,
+      "sha256": "dc517f4228c7e7dd6d35eb44bf26296f6d7ad30092d71423e535e8a97abb7034"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-15215-native17-RGB-FCC-SCL25.png",
+      "bytes": 3726,
+      "sha256": "ed16990dcd7430f2b3c9af5128ad36f768a5e5cbaa3cc8a1e309c77a60e4ac00"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-15216-native17-RGB-FCC-SCL25.png",
+      "bytes": 4620,
+      "sha256": "8ac798960131b6ab611f7467bc5544ff9bfeb53a7b5c1fdd82c82730d5c5d871"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-15268-native17-RGB-FCC-SCL25.png",
+      "bytes": 3552,
+      "sha256": "711978f19ec13da23d72f8e7d7ee77d245cf833f61bbdf670b86a75140a4a851"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-15344-native17-RGB-FCC-SCL25.png",
+      "bytes": 4399,
+      "sha256": "f9dcfbbea78b46c33c3c7d3ffdb1ec48e567bca9f9467618ab98e1e7f033bd50"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-15401-native17-RGB-FCC-SCL25.png",
+      "bytes": 4194,
+      "sha256": "92b5bd7aed104441102314b12d02cda4c0f0591c633e107b44cd2b64b8602ec1"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-15404-native17-RGB-FCC-SCL25.png",
+      "bytes": 3893,
+      "sha256": "c0f8e7c2d81c21cb7178e77c8c53251e806740a23b827e0a401349abc2b4b4a1"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-15405-native17-RGB-FCC-SCL25.png",
+      "bytes": 3936,
+      "sha256": "46c959f0cb12f35e6567ed273a6cce2603d56e584d03961528aa79e2f78227b6"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-15649-native17-RGB-FCC-SCL25.png",
+      "bytes": 3779,
+      "sha256": "058e5d206f82a957e619cc454fda61bda0b704a2b27b9ac6bb7367132c51c850"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-15651-native17-RGB-FCC-SCL25.png",
+      "bytes": 4724,
+      "sha256": "e4bb2d80b6676b61d91b79c64fc52d6195eca12eddd629707e2daf2b47861330"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-15706-native17-RGB-FCC-SCL25.png",
+      "bytes": 4067,
+      "sha256": "8ac3a04e7c0bcb8706208b9dd259c93b5059a419b2a9a0a9010631150c1940ac"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-15766-native17-RGB-FCC-SCL25.png",
+      "bytes": 3549,
+      "sha256": "95bbc15e50ad07220681829114d01ddd6faab751d111f2e5b519ed12cf512683"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-15786-native17-RGB-FCC-SCL25.png",
+      "bytes": 4707,
+      "sha256": "4d8cb9281d3cbcb41de545a87a6c31aa51314b571bbf567c82305277bebf051d"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-15876-native17-RGB-FCC-SCL25.png",
+      "bytes": 3606,
+      "sha256": "f71bdb311443fc8b1793ddd444a0841399c4d950e7b6b045086fef0cb3e315c5"
+    },
+    {
+      "path": "source/native-rawDN-context-pages/point-15989-native17-RGB-FCC-SCL25.png",
+      "bytes": 3994,
+      "sha256": "22b6600cf888cee913a9b9439bb43c2e85fcf99dc3b51834615cc846270c3bab"
+    },
+    {
+      "path": "source/next-distinct-metadata197-choice-plan.json",
+      "bytes": 151673,
+      "sha256": "f0d31423bca250a3664d36a9bb3b52a630d2e3e05c6e921556bdde54a2f32692"
+    },
+    {
+      "path": "source/next-distinct-native-block-plan72.json",
+      "bytes": 458768,
+      "sha256": "e3b1689644c1bd30f928e24f91b19e349984d54e368318784280d8cb9e01e098"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/blue/asset-complete.json",
+      "bytes": 2547,
+      "sha256": "5d8f052ef3748e77088f3caf27d7f05f74a984ae13ea2fa5043739d91d596555"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/blue/block-06-07.json",
+      "bytes": 1365,
+      "sha256": "d063f737e9063a6f7ee17150baace8a31555299f374b61e5bc6edd344ddebbb2"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/blue/block-06-07.npz",
+      "bytes": 1346745,
+      "sha256": "2b48f7493c86f93b8aa940adb80aea8b9ae9924a00b1c6ec639f2758f859b242",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "e8c49e93f3c64ba7bc47dc8ba7c7781fe855029b5871b9db4c7a47172941211e"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/blue/block-07-07.json",
+      "bytes": 1365,
+      "sha256": "d9c2e83f6af9b73aa07bd16f32018f16a16f539c883f0c4927501bf4af9a86bf"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/blue/block-07-07.npz",
+      "bytes": 1455113,
+      "sha256": "cdb4e3a86d3bfb63a9b00787134e50668ae0e782eaee00de6483ee6640031097",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "d118b34fb83d7bad23c038b9376622e61c6903afca0a5b195914f84b1ccebb65"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/blue/block-07-08.json",
+      "bytes": 1365,
+      "sha256": "2124e722e8877f7787a1f8d41ebf7fbff17e986650c0383bc5674c0ca9e53613"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/blue/block-07-08.npz",
+      "bytes": 1555513,
+      "sha256": "abfda85c623bebfa16bd8b37b33ee771d8607ba3bda87393063c36ce33721913",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "671d975a0f9ee0f70012774562942d3585ebef7994d3e9aa6a5aff6a8b825116"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/blue/block-07-09.json",
+      "bytes": 1365,
+      "sha256": "27702eebf7b4558465ed0d83a1ba2d951933ed769106a6d6f3ac1f65d4c7f07c"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/blue/block-07-09.npz",
+      "bytes": 1600762,
+      "sha256": "4dc3130ab1fbc0fa5df61dca28e2cb1423504821023bb9c113221198138976c3",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "f693385f20bd85144594049a45ab0133b565a8a7a5af7170c115d0b1ed0ad052"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/blue/block-08-06.json",
+      "bytes": 1365,
+      "sha256": "df3456aecc4f3d22db25fa93cf0723c7b562407d99b9a73b1d6251d79d27478b"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/blue/block-08-06.npz",
+      "bytes": 1439155,
+      "sha256": "e8c132047ce26bd98eb58236915ee21df3011323a2068e94a86c059613859eff",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "53fc70fe8707c4c194a42fe721648d76ab200e9d8ac1fc35f60c246dc7323a5e"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/blue/block-08-07.json",
+      "bytes": 1365,
+      "sha256": "9eab40f3ba50ea404ce2fe95d79ec1df13962ac18d2aac59358fc94d30d0c3cf"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/blue/block-08-07.npz",
+      "bytes": 1486287,
+      "sha256": "3baa6c17d318f6ca23b657a16e80f49f61ec0d168951db918edfd5f2a664bf90",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "886a5702efab1237058cc00dfa78d7c58e2baf0e5960b98af9872eee61ad3444"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/blue/block-08-08.json",
+      "bytes": 1365,
+      "sha256": "6aac60716e3c7fca52665cf5442e7073faef195c94cf13492d2c9e2359e216b5"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/blue/block-08-08.npz",
+      "bytes": 1605491,
+      "sha256": "901a3f6a7872d8f11a74079179843c51acb0f28aff0888aca7f15e39e8406909",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "9e88f8cf246d394469434bec6149dfad9f8ee2e2595613fe97b7d6a832303131"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/blue/block-08-09.json",
+      "bytes": 1365,
+      "sha256": "d09fdfd05d9db2ecbfde3579d2de2b61e31f5e016d2f7e63f24ff118f4a7ea95"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/blue/block-08-09.npz",
+      "bytes": 1580805,
+      "sha256": "736e8deaeb58e278e0a8ef846dc515e98ec322c3bbf6330889417d0dd20c5159",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "ea576f1d7f57b2936ab9ba38a365f3b6302f62685c3afe86fda163babe2221e9"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/blue/block-09-06.json",
+      "bytes": 1365,
+      "sha256": "a22e6c1c674a70d44b9436982beb914cc85439b056ed7b11c95487e3b6c0cd4a"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/blue/block-09-06.npz",
+      "bytes": 1502756,
+      "sha256": "b91493304a88e0cd370d057bdb8c73f9e8e3c8cc46c02dac7390dc9236794568",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "06e899f7bf70a2620efda0559aa05cd3d5b05e2635142aaca14b55193deda377"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/blue/block-09-08.json",
+      "bytes": 1365,
+      "sha256": "57ddc9d1041963eff861079d846db2ad85ea4be30a5c03d5edee2f09b9b34322"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/blue/block-09-08.npz",
+      "bytes": 1439875,
+      "sha256": "25b0ba890d169cc8ab2a4f16f8dc6b1fb51f585331698c8742faefd558b93796",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "1b2c184ef36f0f6a4b2e928101fcd54326c0a0567cd9ab37d041ab20acd40be9"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/blue/block-09-09.json",
+      "bytes": 1365,
+      "sha256": "cba4b5d8aab5a019bef2c5ed04d0e55043fcc4cb59e4837c4a507b592f151ecf"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/blue/block-09-09.npz",
+      "bytes": 1537574,
+      "sha256": "35cb6ad24213257b65f2270cd7887354ff7b7f348681617634d420a9b3baa187",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "3193bd41a86180d77cba566d36bfb64743ddf7622d6ab21a577fba6fd8932be2"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/green/asset-complete.json",
+      "bytes": 2559,
+      "sha256": "20d670572ca29f016cbc1ee7ccde10672d885e326763a21b8d8e0963d511cf3e"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/green/block-06-07.json",
+      "bytes": 1367,
+      "sha256": "59d6bfc3a33fb1a6a518158ae44e9ffbb5d0f27f246bceed8e07b50ac48c8c0e"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/green/block-06-07.npz",
+      "bytes": 1346600,
+      "sha256": "5dba3748140d40880b8e4e770a350b7818ed16d17b96858e505f6a57f6eeeecc",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "351d9013474ba6ad666567e4f4943b159f60cf73cc6a9c9989b2ceabe424a638"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/green/block-07-07.json",
+      "bytes": 1367,
+      "sha256": "5505c3b4eec4ebd9b0b20466f943f0d42f43c247b6a142f5edf1698d375c5ec0"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/green/block-07-07.npz",
+      "bytes": 1471559,
+      "sha256": "7942194c516c2c2a56438e7debdb20d97d13753b9eeef9835125f248a8703655",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "028bd29293062618f6aa34f5b411ec40908947e99e952f8ff757e68b415e0f37"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/green/block-07-08.json",
+      "bytes": 1367,
+      "sha256": "29c3a9adcb671b575ce7af96878c6b9c2325d3b0edc01d2e91cd5f21d99532be"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/green/block-07-08.npz",
+      "bytes": 1592617,
+      "sha256": "03f8289600482f48478b518b0a7bdfa5aeaa462ac642ac2b1d827bc98d0f654d",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "4927a7ba5d0e71706b89189987efa61f8f0e56f9ea70a9d9697981ec619fb127"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/green/block-07-09.json",
+      "bytes": 1367,
+      "sha256": "1d6d7e7b03ca3990d00d21cc01c01fc66fc4001b8af6fd124ddecd52173d79e0"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/green/block-07-09.npz",
+      "bytes": 1624601,
+      "sha256": "ff2b9f127d0fd292d1c5fcae5592c6f3cbd953b5a8f7d87c499cb38b60933851",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "84fdf652b0318363039af1d3d82661d60bf0d7ebd4db99d511f57545b49aaff0"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/green/block-08-06.json",
+      "bytes": 1367,
+      "sha256": "73e6ab8e85a01622803f16196fa84b9084114409bbcd83e5821314570d424392"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/green/block-08-06.npz",
+      "bytes": 1434179,
+      "sha256": "bd14d2c8d5d6af65c9552976a6c775ccb322709b1f8405a20f4de9f2845b609f",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "8ca0fed3647404a79fb56b6ce9075052a24c0ad6dceb4e50928135a09ae49f0b"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/green/block-08-07.json",
+      "bytes": 1367,
+      "sha256": "43188d3ba2dec235d588f95057008eeca39b1c25d941e5ff0bbb3757056ee7ae"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/green/block-08-07.npz",
+      "bytes": 1523177,
+      "sha256": "2ae79c89ffcb92e312e799965c82cc1d8a4eb1f8b8772d72eaaf289f5c364688",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "6895769cd869995d13654b2cf3bdebfb35f8d7a13bb5c2eb7fb0312fc9eefdf4"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/green/block-08-08.json",
+      "bytes": 1367,
+      "sha256": "d877aca1b9d0cfdcb1f16b692afde36911537dc107ddb728d477fafa853e780f"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/green/block-08-08.npz",
+      "bytes": 1623684,
+      "sha256": "ed933cfe71fc2f48f9e3647749f010ed327726e01187b11e988fa7d6de29b2f1",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "b75a0ea26e3558ad8b913f0c871e4000727e2132d7e5722e035690955888c406"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/green/block-08-09.json",
+      "bytes": 1367,
+      "sha256": "49a7302e2ae1196296b525d02d296f2db5f49ee12b624390c2ab3dd7a8cffaf1"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/green/block-08-09.npz",
+      "bytes": 1599329,
+      "sha256": "3d382f6e6873dfbe1a6dc6cd78db0bfa984eb7978d96b2260117a695ba58ae08",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "e36c4282cfa00fbb42d2ee97f17e8c6647709872b567a355b50c78542ded6cd4"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/green/block-09-06.json",
+      "bytes": 1367,
+      "sha256": "d7af192d0f8d556417e6ec5b653d541d6d8126d3a3859dae7262d65af0765539"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/green/block-09-06.npz",
+      "bytes": 1487734,
+      "sha256": "65679673dbd7abb356c90da72875c74b03b93152958e89cb6eea59ffa74a32e1",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "2e5b63d8b368da93c4042159c9016f941d6a88e8f04a33d6ce4feae9738059d1"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/green/block-09-08.json",
+      "bytes": 1367,
+      "sha256": "34d9e17835c3b845dfaebaf2c60c6e9255f1496c40e7ef9df8d9211e65378c0b"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/green/block-09-08.npz",
+      "bytes": 1454063,
+      "sha256": "0ca174e8d27bdaea6553a6d7fc7303d54cd4951a734523f9727368b1cc1493be",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "6208e2b3a5e1ad1e49fac287e89b0c92c06d2513f097550583baf38cf5cf85e3"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/green/block-09-09.json",
+      "bytes": 1367,
+      "sha256": "0677daeb4b4c5f70ce866f3d4c5a5f50408d537921bb8d52224edb04164253c1"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/green/block-09-09.npz",
+      "bytes": 1548878,
+      "sha256": "30a4d301d74ddbca9e184712e41b9031b758e785da32bcba9f935ae3c71a5173",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "9ed2d0a6bc7a39d6d39cbece3eec65d3d7edcd35ecf50215c030f8dd713d5db5"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/item-complete.json",
+      "bytes": 22259,
+      "sha256": "c579fa1b1e0eddf338dfefdcf372855138a5cf0fd7283221b447b9a5870e1107"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/nir/asset-complete.json",
+      "bytes": 2535,
+      "sha256": "770d295a2a7c42e1993f63857a2ec6cc104b570ba8703c657f3693fbfb54094b"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/nir/block-06-07.json",
+      "bytes": 1363,
+      "sha256": "ad89e4fe1fd97ec9a1ee54362c85c754bb0c7e3ebe5819d927750cccfd7e5047"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/nir/block-06-07.npz",
+      "bytes": 1276684,
+      "sha256": "93d3c20ebde5c49d4705e12d61df6ada4471063f4b6884d6101d3c9731f5bac9",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "262e2b7893fa9dc0f8558ef09e4353443800a402409bfcc9844e06f0c11288c4"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/nir/block-07-07.json",
+      "bytes": 1363,
+      "sha256": "5a4023c4d4b61d339029ce0a61f0ea562d7f43348bbd6939edffb47f26a8b222"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/nir/block-07-07.npz",
+      "bytes": 1419828,
+      "sha256": "15436ce48a5d5d6f9a61ce09715f1340d8ba4046388a4e3c9c13ede40af0cc01",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "828eabaec13303ad7e2d24d4a97ce646ccd0f397c71af6883943e3d2ff972020"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/nir/block-07-08.json",
+      "bytes": 1363,
+      "sha256": "34cfb3f8ad19394e8d2efb239232d907d3abae136eefb1257e81d7fc4aaf2ab1"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/nir/block-07-08.npz",
+      "bytes": 1599062,
+      "sha256": "f85b6454a59fcf822945af742bf074af07a1b03ee5c7e6d4ce89b5bdc3439743",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "941a5aec32a3f8fd329b3d3f579b05f6d990bb852e96495a2de0e509f37720b7"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/nir/block-07-09.json",
+      "bytes": 1363,
+      "sha256": "9247081f70a7f3b8fa43b73b68db6c43bb13640ade31ae62a39d0b0c4a270d79"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/nir/block-07-09.npz",
+      "bytes": 1637774,
+      "sha256": "a813a988633f33c1512c62cf1e8cdc9c7c45e05eb9d466fb109d80bef3ef2693",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "b2db60254ead2f43cc952e7c79d54e574cd7fbe222e62e173d2efa0864dcab18"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/nir/block-08-06.json",
+      "bytes": 1363,
+      "sha256": "3fe3be2ab2e1d190ae2281469375eff76b735466b2098d49f7e6a7bb0096b150"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/nir/block-08-06.npz",
+      "bytes": 1475561,
+      "sha256": "47c3e45498a2e133df839a9a09305fae3c07c7cd6bd2012f14ffc4c9ee7bc960",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "c0d1671b700fd43d35b79eb99062e6b06e4d7072437ea9922239f10e85e6296c"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/nir/block-08-07.json",
+      "bytes": 1363,
+      "sha256": "3054765232a441cf7fda5ddc46e22d9c91b6452cfa3fc79de9272b1b784b71a1"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/nir/block-08-07.npz",
+      "bytes": 1598628,
+      "sha256": "8a283d87f2ca5519c0ffb61329205b00494d06ecbff8c9ab1124383c1e39d78a",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "0e257c9246a54c797e02a548062d48386f3f31c03662c6492b6566f5c4d1178e"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/nir/block-08-08.json",
+      "bytes": 1363,
+      "sha256": "1c5ffe91cc75c51ad46dcfd06b163addc15a2861fd55d218b414e4143813182a"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/nir/block-08-08.npz",
+      "bytes": 1638415,
+      "sha256": "9dda1113b12e9a261a3ff7752d480a90dd32c57ed20e25449f274b33ca4ed4a9",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "8337349592b8dc524bd8c5a69dde35ab446da29f23cbf2fd202d7535322f77eb"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/nir/block-08-09.json",
+      "bytes": 1363,
+      "sha256": "b1c5c582c8b36c4292848a6e10f27b2b7fe3202fc1e9a964a95d981c2fd7378c"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/nir/block-08-09.npz",
+      "bytes": 1629118,
+      "sha256": "b6536ff735e208ad914fd62c0942545f3c78a4500adeca9ad27d1db30a1685b0",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "74e2c292918f3456e71bf0cc3eb2e4cfcb8a660e4b9f310ed2de70a27df67184"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/nir/block-09-06.json",
+      "bytes": 1363,
+      "sha256": "d8138789e36315a03dcf7c2de66db96f0ce1140c08a16748b062336955db174a"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/nir/block-09-06.npz",
+      "bytes": 1507422,
+      "sha256": "03ae76b73a632cd3a4c11e1faf76d140494ddf7fbc78f871ddde1aadac647052",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "14b91166f01f9fea2610bf5f74d7897e77493a48f18e3be5b41fc9929e9a30ef"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/nir/block-09-08.json",
+      "bytes": 1363,
+      "sha256": "db492347c9a546abd8502dbf0119ddd7328182879ad9ad034ce308670fecc10e"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/nir/block-09-08.npz",
+      "bytes": 1449459,
+      "sha256": "1ae01a0014a96dc237503f20ad50a1bb4ce983c4221155b1964a38862637fc18",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "aa48ae031a63133df39318f6e692a458dff0a6e20742ad2d0dd87a495471ef72"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/nir/block-09-09.json",
+      "bytes": 1363,
+      "sha256": "3ce8acc8773c4d9b7d567235cb6e7bed67104dd65cf99580d03081d7dd494dd9"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/nir/block-09-09.npz",
+      "bytes": 1556660,
+      "sha256": "25d6f913e5b17ae86075aac5cce96ad3f4cca5366600bc3ea6d048436f64d7c2",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "79577823ed1a382db37fa0f0b9844a8613605f080b55da51ba6cf3db514394f8"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/point-observations.jsonl",
+      "bytes": 803919,
+      "sha256": "6a6e4a979ab0bd4d684ae5ba0e82f6a69715b027e3fcd6b20d525fbce106db36"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/red/asset-complete.json",
+      "bytes": 2535,
+      "sha256": "3ea1afaf56b58c1b15d8c59e2090a65e0a2927853260c5d15767c29e5e5a3abb"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/red/block-06-07.json",
+      "bytes": 1363,
+      "sha256": "53196a0155a6295e0abf9609bde4ccd62c98ff4d480843852fdd7fe0299d9221"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/red/block-06-07.npz",
+      "bytes": 1307394,
+      "sha256": "a6a7a5a6ab7a0232320c15b17ca1e224596b9cdd61814d9abf1c5a7757d23826",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "f8060d749eb29a4664de944e3439b14441d680265c48be7ea7c4e1502d3545f3"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/red/block-07-07.json",
+      "bytes": 1363,
+      "sha256": "2ffa3fb49edf16b8a6c1266bc6ca1bbb5ab8d8daf456850bb9590643b6f0c62b"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/red/block-07-07.npz",
+      "bytes": 1451628,
+      "sha256": "4cc87d48975b1cf5c5512f050aeae0a3075c5de48af2883e5d6aa22dfe3a225b",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "6bc117446709333f6ac933e71cedbd65f541964c66a9d02ce65c790db7bb4dde"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/red/block-07-08.json",
+      "bytes": 1363,
+      "sha256": "3192db00ad315a770049ab03fb08eda27f6421d9f728312a240be0c3323ef8ca"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/red/block-07-08.npz",
+      "bytes": 1582786,
+      "sha256": "78274f7c7c1324f8b683b6fa107684c7ec8557539c26ff1d7ae56abd9b5df72b",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "9da0a7d6516c36acf6cae1e50976a197c25f1ff17e7b749791cc0ebcbd7d6ddb"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/red/block-07-09.json",
+      "bytes": 1363,
+      "sha256": "60278fde7ca0151154d6a78a66dccd8bf0ab15432f33d7dbc73a33c944194c1e"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/red/block-07-09.npz",
+      "bytes": 1647976,
+      "sha256": "dd8257fee3e56fe88d166ffa6bf02f200ccfb9e92de96ac681b78e4ca8873d0f",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "54b1ba72e125fd28c2c790493b626d72a2b99ae9acca1d3858457f612746ce55"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/red/block-08-06.json",
+      "bytes": 1363,
+      "sha256": "3d49c54c5679016bae8a8e77977553363a3d2a4248cf81f6503838b7d91c933a"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/red/block-08-06.npz",
+      "bytes": 1405409,
+      "sha256": "f8b7f83ae3fb388f2e22df86c2bf6dc623e8675005738d21225993aff8fcae32",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "70f6a458e2c4df26d13a9b19eadf0e7013ec82d4fd40228f45fa96fad492a2ad"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/red/block-08-07.json",
+      "bytes": 1363,
+      "sha256": "9531ea465035c0e591ec60e773c4035f91a277cf3ada47b7006614959f51f1ad"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/red/block-08-07.npz",
+      "bytes": 1515969,
+      "sha256": "0f240a9b79f3d3aff072f97cc72a0351977ff864bf67d64089d52dd269ba310f",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "9d75b878901288e66cdb14819e024a4e9abb5fec9072e255912cf76c161b01f0"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/red/block-08-08.json",
+      "bytes": 1363,
+      "sha256": "f1941ee307ecd31f89c3eb8f559f790ef88cb6e79104a038689f50a463220a83"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/red/block-08-08.npz",
+      "bytes": 1628581,
+      "sha256": "b28793dee33316cdd96c261be63345b7bad32fc2a8be6c82bc74c9df608a9b70",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "57ad23bb76bb4675dfe1fee31b5343b7af7eeb85f0aa377ca9b1377e716e5d32"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/red/block-08-09.json",
+      "bytes": 1363,
+      "sha256": "933e3dcc94e6c2e633712e944359c4550baa08b5a919aba2f28af314831a3b73"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/red/block-08-09.npz",
+      "bytes": 1597732,
+      "sha256": "a3253597b3a5740162ab1f391837a27e79730f689c41b6a10f29818b57329a04",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "206f54e770e274fdccd0d1b731b2aafaf46379789435c9e8bccd911b4c2a54fc"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/red/block-09-06.json",
+      "bytes": 1363,
+      "sha256": "4b3dd114d9514da0c3924458fe3c218993e498f41721fc4307bb15d5b51e849c"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/red/block-09-06.npz",
+      "bytes": 1492654,
+      "sha256": "2cc181208a79fe93895d85fb976166f71b5ff789e97c4cda2dd999192cc244d4",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "6c818bb98437aceac9b08af78806c3121ecdf7716670c71fb880b006ecc7509c"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/red/block-09-08.json",
+      "bytes": 1363,
+      "sha256": "6cdd4a9366d818fb6bbccf54b7e9eb9f8829e637ebdaff3f99205b5c0d36528a"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/red/block-09-08.npz",
+      "bytes": 1413857,
+      "sha256": "9d7ab6e02897ca854211db0567b6df52b61fd1012382e99ef03a2d2a1acf3e7b",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "d656c443992d21e7b5ca5d624793d4f38439af17c15d386b97a47dcbf85facd8"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/red/block-09-09.json",
+      "bytes": 1363,
+      "sha256": "086b362af83bd866ea9fba54ee11eb082e8b8ba2fac36be49f078c7581cbc381"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/red/block-09-09.npz",
+      "bytes": 1537184,
+      "sha256": "245efe8fdeb8a2823fe627879e06e4848eb69493e778044d353741afa436a2f1",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 2097280,
+          "sha256": "ff0f4f3af3a7913637a1d74fed6099cc4d186ae56c75c72be6cc95f4eedad7b5"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 1048704,
+          "sha256": "586587db33699154a985facbd5694342e29a665bd32d0ac7134e1a37a89679cd"
+        }
+      ],
+      "aggregate_decoded_bytes": 3145984
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/scl/asset-complete.json",
+      "bytes": 2530,
+      "sha256": "a30f3624aeeb707bf987ec7911b5485bb7a39d4f2aa39a835ac97d126f4db60d"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/scl/block-06-07.json",
+      "bytes": 1345,
+      "sha256": "1209ed2dbd2b775e5bed91516427bdc2cdf92b0bc7406c75eb68098da6032670"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/scl/block-06-07.npz",
+      "bytes": 6770,
+      "sha256": "6f6805b16f66c44df1f75e74cd2429f70259c7b07b111e1e2ae989f6f6ea6a5b",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 262272,
+          "sha256": "9a042f66f6382637e6b761484dfbeab2eb0a198de9697811be1c4121165ff490"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 262272,
+          "sha256": "280fbcdbbc1b9cf7f4873abf7758831d513cc3003d750f7e7fbcab7de81461fc"
+        }
+      ],
+      "aggregate_decoded_bytes": 524544
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/scl/block-07-07.json",
+      "bytes": 1346,
+      "sha256": "9ce92388d31910f4045ce76960e1d05f2e98683c157f1b785d1f3477296352b9"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/scl/block-07-07.npz",
+      "bytes": 18615,
+      "sha256": "3151daaf02d791b112564fc3c1bb10d47792c91d5a52917711d025ad77f6b16f",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 262272,
+          "sha256": "3a283be466cd55d4c1e07f562159324499d381a695051f72be81fb6e28a2e32b"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 262272,
+          "sha256": "280fbcdbbc1b9cf7f4873abf7758831d513cc3003d750f7e7fbcab7de81461fc"
+        }
+      ],
+      "aggregate_decoded_bytes": 524544
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/scl/block-07-08.json",
+      "bytes": 1346,
+      "sha256": "002d926915b53088bc948d40dab5dff5d5854735fdcc664d54ddcde5bbecd885"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/scl/block-07-08.npz",
+      "bytes": 26696,
+      "sha256": "60d9a159a9b99a3ce1c3dc275801da39059357eac6e9ec854b27238043f3bb36",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 262272,
+          "sha256": "9c28e70e3c5d873152dab01fe866863aeef7e2c3442a31892cd9ad412c13fde1"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 262272,
+          "sha256": "280fbcdbbc1b9cf7f4873abf7758831d513cc3003d750f7e7fbcab7de81461fc"
+        }
+      ],
+      "aggregate_decoded_bytes": 524544
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/scl/block-07-09.json",
+      "bytes": 1346,
+      "sha256": "32544ba6f80764655d5acd421f9222ee85cf00ce08894d3520fcef4d15c15761"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/scl/block-07-09.npz",
+      "bytes": 30710,
+      "sha256": "dcb1feaed7481af186a283c605f06a3168a0ecbf5dabdd77138f03779517f668",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 262272,
+          "sha256": "26ce5d2ecd972ca0ef3e76636c08ede0958d27fee918e07aa867b895c5c3f34f"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 262272,
+          "sha256": "280fbcdbbc1b9cf7f4873abf7758831d513cc3003d750f7e7fbcab7de81461fc"
+        }
+      ],
+      "aggregate_decoded_bytes": 524544
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/scl/block-08-06.json",
+      "bytes": 1346,
+      "sha256": "edaeeefae2389de59dd5e66620867ec32fdad795b89df54cdebb1d647b110489"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/scl/block-08-06.npz",
+      "bytes": 13214,
+      "sha256": "324d2f4c6780608418e887e71bf4987bf419e7ff4e7ff640bbd565df2d50f1d3",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 262272,
+          "sha256": "2ffc78816b26da66c3c3456c196c020285549a3c76d554fce641283e7e61a367"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 262272,
+          "sha256": "280fbcdbbc1b9cf7f4873abf7758831d513cc3003d750f7e7fbcab7de81461fc"
+        }
+      ],
+      "aggregate_decoded_bytes": 524544
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/scl/block-08-07.json",
+      "bytes": 1346,
+      "sha256": "514b0f42e640f194a940dbbc930f1a36c7c9f3a65c4e1d36ee8455a4f9d9fa11"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/scl/block-08-07.npz",
+      "bytes": 23747,
+      "sha256": "a4dc7b42f9c6d09599b6c7bea8658968f124a27a8caa290d00571b50fa19139f",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 262272,
+          "sha256": "08ab97668934a0cf7f8a5d13fcb3945fe708cbe2b43b917ab934f56a05dbbbac"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 262272,
+          "sha256": "280fbcdbbc1b9cf7f4873abf7758831d513cc3003d750f7e7fbcab7de81461fc"
+        }
+      ],
+      "aggregate_decoded_bytes": 524544
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/scl/block-08-08.json",
+      "bytes": 1346,
+      "sha256": "ece4d2ddec50dc885a81132514bdf99a6c4976902d82073dbb3a77b087cf1087"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/scl/block-08-08.npz",
+      "bytes": 32103,
+      "sha256": "6dc38dd1fc5ef4a1039b55707a5e613529c4fd2c1bc1b8ceb142962aebe5c221",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 262272,
+          "sha256": "7695983ef702911a1fa3bc3dc53b039203dad34e891051252fbb1f0f0d551171"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 262272,
+          "sha256": "280fbcdbbc1b9cf7f4873abf7758831d513cc3003d750f7e7fbcab7de81461fc"
+        }
+      ],
+      "aggregate_decoded_bytes": 524544
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/scl/block-08-09.json",
+      "bytes": 1346,
+      "sha256": "54a1d4b0974cd4a1b04bf82a8ccc2f5a0da19bcdf02a58d65c8323c9fc2cd578"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/scl/block-08-09.npz",
+      "bytes": 28044,
+      "sha256": "4d7ba0449edd261e1c3410b86798f81a6dec08dea1e437e631823231ac985625",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 262272,
+          "sha256": "4c901003dfd6941884dd2c017198c3dc27210ddbb3be4d355caf664f4fd14818"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 262272,
+          "sha256": "280fbcdbbc1b9cf7f4873abf7758831d513cc3003d750f7e7fbcab7de81461fc"
+        }
+      ],
+      "aggregate_decoded_bytes": 524544
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/scl/block-09-06.json",
+      "bytes": 1346,
+      "sha256": "0e0035641ea1c476f69cbb22e4944aa0a6c223a5e8805755b236a61e7539fa92"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/scl/block-09-06.npz",
+      "bytes": 17293,
+      "sha256": "94a18b3a17298b774a8b5547a86132d839b298f7f244b2685cee91e13793ae6c",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 262272,
+          "sha256": "588e5a79146e536d3ae1919bbf15e145dec8d7fbad4d4f7089bce00810bc9b43"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 262272,
+          "sha256": "280fbcdbbc1b9cf7f4873abf7758831d513cc3003d750f7e7fbcab7de81461fc"
+        }
+      ],
+      "aggregate_decoded_bytes": 524544
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/scl/block-09-08.json",
+      "bytes": 1346,
+      "sha256": "4b9a50e5ac84ff9d13d2d7e87644fc961932c0f3108d529db29eb88996aa0330"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/scl/block-09-08.npz",
+      "bytes": 13471,
+      "sha256": "57e8950cb4840f3a56b71bb1d8b0cc84d591e754649516e6d5ae607411d8a256",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 262272,
+          "sha256": "abaf2d9588750751fa207520fc3bab38276d3ab9ba326bca50e361f4bba18621"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 262272,
+          "sha256": "280fbcdbbc1b9cf7f4873abf7758831d513cc3003d750f7e7fbcab7de81461fc"
+        }
+      ],
+      "aggregate_decoded_bytes": 524544
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/scl/block-09-09.json",
+      "bytes": 1346,
+      "sha256": "320c3291d0f5bf97d81becc31a4b22c4f2c563eae5697364b6be8af59290fed1"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/S2A_48NUG_20200106_0_L2A/scl/block-09-09.npz",
+      "bytes": 23887,
+      "sha256": "53cb6d1798d3a7453b45b1a4fe2668102d325b2f9b0cfa8636033eb4cb738a28",
+      "encoding": "npz-zip",
+      "decoded_members": [
+        {
+          "path": "values.npy",
+          "bytes": 262272,
+          "sha256": "786f8e70ae130ecb3aff2db6cbf12ff5b55a42bbfd76d3ff65458ec72a4f1d58"
+        },
+        {
+          "path": "mask.npy",
+          "bytes": 262272,
+          "sha256": "280fbcdbbc1b9cf7f4873abf7758831d513cc3003d750f7e7fbcab7de81461fc"
+        }
+      ],
+      "aggregate_decoded_bytes": 524544
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/attempt-001.execution.json",
+      "bytes": 2609,
+      "sha256": "0d7f242fcf0a52f151e2f564187270685e64ce26fae1e2ceecdc6bda30adff4b"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/attempt-001.started.json",
+      "bytes": 541,
+      "sha256": "974bfa702b27520432a757acde3e798c10b1a54bb1513e12bc6e3caea5f43e4e"
+    },
+    {
+      "path": "source/next-distinct-raw-native-observation-001/execution-status.json",
+      "bytes": 22809,
+      "sha256": "675b475ce09cfea4cf9e3c7ba4f3341386ace0a8be714d7902db90edef707a7c"
+    },
+    {
+      "path": "source/original-retained-unfiltered-catalogue.json",
+      "bytes": 2138677,
+      "sha256": "6850a8e147d93a92569a24cedbd7023e679617b663263bb1ec695f7b43927be5"
+    },
+    {
+      "path": "source/original72-actual-prior-source-metadata.jsonl",
+      "bytes": 797886,
+      "sha256": "80362b1d545bd451b6764ceb07b7913b69ae15aaa20f32c17c70f46d04b04be1"
+    },
+    {
+      "path": "source/original72-prior-held-records.jsonl",
+      "bytes": 2070785,
+      "sha256": "84888e41fee690168e8d24c19c0bbaa2c7228fbed784fac711405d41415a053f"
+    },
+    {
+      "path": "source/original72-prior-source-container-pins.json",
+      "bytes": 302,
+      "sha256": "232a14e70c723b0ffb9679ba1819abe13a63b2c03163a141b82dbec958ebacce"
+    },
+    {
+      "path": "source/pinned-requirements.txt",
+      "bytes": 146,
+      "sha256": "1c3f3b9598e474af751e25ff0839cbf5c4a9931a59b4ffaaff1a56c6e2f0e2c9"
+    },
+    {
+      "path": "source/read_next_distinct_native_blocks.py",
+      "bytes": 12094,
+      "sha256": "732199db84349482aabee2c8441edea24023ff44c2a968c8a3f724c5ea6f9ea4"
+    },
+    {
+      "path": "source/reader-adaptation.diff",
+      "bytes": 8575,
+      "sha256": "5091cb262d8af47a99812d0d53346b4ceddfc2c2bc890b8c54ebd5b07b1e03aa"
+    },
+    {
+      "path": "source/render_saved_next72_rawDN.py",
+      "bytes": 8197,
+      "sha256": "86acbf797aec2571ec64878362edfdd1f1dfb3e71f1e168f45fb95a6c43354b9"
+    },
+    {
+      "path": "source/reused-public-input-pins.json",
+      "bytes": 1784,
+      "sha256": "9d603e55712d1fb3dae87d7b7f0897419cbee16faaf4c2f9faf8dd5be1409ed6"
+    },
+    {
+      "path": "source/superseded-compression-guard-attempt.json",
+      "bytes": 1104,
+      "sha256": "065552583e94c0b450a03133191d72dabb3c24f1445838394b569d744d74e654"
+    },
+    {
+      "path": "source/superseded-reader-before-orphan-check.py",
+      "bytes": 11853,
+      "sha256": "72f5b2216eae3a5ad1def1434a6f1dd43e68d40e8e6f397df623796328d88501"
+    },
+    {
+      "path": "source/value-read.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "source/value-read.stdout.jsonl",
+      "bytes": 559,
+      "sha256": "4b86cdc0b9cbd76ef76311a34e408103837bc0d9f5089a408d2a07288f19ac60"
+    }
+  ],
+  "payload_files": 248,
+  "aggregate_encoded_payload_bytes": 76791809,
+  "additional_decoded_gzip_and_npz_member_bytes": 155415202,
+  "actual_joint_encoded_plus_decoded_bytes": 232207011,
+  "individual_body_limit_bytes": 33554432,
+  "generic_joint_evidence_limit_bytes": 268435456,
+  "actual_packet_fits_existing_evidence_limit": true,
+  "honest_preacquisition_complete_item_worstcase_declared_separately": true,
+  "old895_raw_arrays_not_included": true
+}
