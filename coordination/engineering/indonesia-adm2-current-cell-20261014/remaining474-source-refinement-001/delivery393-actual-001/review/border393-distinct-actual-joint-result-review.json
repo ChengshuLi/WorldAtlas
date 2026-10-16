@@ -1,0 +1,376 @@
+{
+  "reviewer": "/root/physical_remainder_exact_scope",
+  "review_utc": "2026-10-16T02:09:17.931595+00:00",
+  "outcome": "PASS WITH LIMITS for actual selected393 ownerzero/conservation/native visibility",
+  "actual_execution": {
+    "path": "idn-border393-execution-001/joint-execution-001.json",
+    "bytes": 3078,
+    "sha256": "d2093b5a9bf949067ef72ca881f83d6f70f0fb067c3542b04fa5684b9f2118cc"
+  },
+  "acknowledgement": {
+    "path": "idn-border393-execution-001/joint-acknowledgement-001.json",
+    "bytes": 96529,
+    "sha256": "fb6de291060817dc5a78ce438bcba5b405c52f854ee2d510890a998c6cdc4a4d"
+  },
+  "executing_commit": "71d95f45ea0457d60d4b8263bf36ab78316cf0cc",
+  "baseline_commit": "675cf6285b8d1cdaed3a7d8915146e7d45ce9052",
+  "canonical_candidate_commit": "8fa52b146f6f53ca124e934522bf0f10b4355f68",
+  "actual_elapsed_seconds": 57.485543583054096,
+  "actual_completed_utc": "2026-10-16T02:04:52.735233+00:00",
+  "actual_mode": "authenticated-checkpoint-append-v1",
+  "actual_status": "no-new-native-loss",
+  "complete_products": [
+    {
+      "path": "idn-border393-execution-001/joint-products-001/derived-certificate.json.gz",
+      "bytes": 7517573,
+      "sha256": "7e19d52bea323f701435458efe607dff49546569e78726ff15dfe94d582bb76b"
+    },
+    {
+      "path": "idn-border393-execution-001/joint-products-001/derived-facts.json",
+      "bytes": 454755,
+      "sha256": "927a760097114bae6f7ee9fcda7dc23bba64795f25d433f47c3ea34c902528f7"
+    },
+    {
+      "path": "idn-border393-execution-001/joint-products-001/checkpoint-routes.json",
+      "bytes": 329313,
+      "sha256": "8adb0ca19aad05654c5358695a3c662deb1103a221ad90a94bb7a55c61436f83"
+    },
+    {
+      "path": "idn-border393-execution-001/joint-products-001/derived-publication.json",
+      "bytes": 660,
+      "sha256": "c9ec7f1415eb715d4c1d40abf91072e10051d4b922d3e45c28dea21299bbbde7"
+    }
+  ],
+  "derived_certificate_decoded": {
+    "bytes": 18418712,
+    "sha256": "2bda78fbd6f5dd79079ff847dec8bb57da0655de914a7d0d72d82a2113ff018f",
+    "entries": 49625,
+    "original_owner_index_parent_fields_unchanged": true
+  },
+  "actual_scope": {
+    "new_original_cells": 393,
+    "repair474": 368,
+    "conflict27": 25,
+    "inherited_accepted_cells": 281915,
+    "candidate_cumulative_cells": 282308,
+    "changed_rows": 202,
+    "shared_base_acquired_rows": 198,
+    "shared_base_authenticated_reused_rows": 4,
+    "lost_or_reassigned_cells": 0,
+    "loss_intervals": 0,
+    "new_components": 29,
+    "matched_actual_ownerzero_to_target_witnesses": 29
+  },
+  "owner_zero_basis": "All393 independently matched appended tuples lie within the actual202 changed rows. The trusted joint authenticates the complete unchanged original base, exact original18-authority append and entire cumulative patches. Actual applyNativeAdditiveRows rejects overlap with any assigned original base interval on all changed rows; qualifyTransition separately rejects overlap with all inherited additive intervals. Together with actual0loss and exact393 tuple custody, this proves ownerzero for the entire append, not just29 witness samples.198 acquired plus4 authenticated reused original-base rows exactly partition all202 changed rows.",
+  "conservation_basis": "Actual same-base cumulative-patch comparison reports0lost/reassigned cells and no intervals across all202 changed rows. Outside those rows the unchanged complete base and inherited cumulative patch are authenticated; original691 rawrows/83authorities and281915 tuples are independently preserved by the reused actual composition/canonical reviews.",
+  "witnesses": [
+    {
+      "component_id": "source-target:132826b4d4181bae023ca9ab46b0082e929bba0cdd1ac6135fafed494e49d830",
+      "native_rows_sha256": "1844c4e9b2de21840cd2e022e34b55bb426d0f39de4d913e3967af9610633aae",
+      "x": 222101,
+      "y": 137844,
+      "previous_owner": 0,
+      "candidate_owner": 42172
+    },
+    {
+      "component_id": "source-target:13669549b15ffd7b213cd6105f5a970328250162ce39d072dcc5afdb411786f0",
+      "native_rows_sha256": "786e87a6a47f367d371f4ae09da0081b675a281f5ce959acffb0b74c23f8278e",
+      "x": 212216,
+      "y": 130347,
+      "previous_owner": 0,
+      "candidate_owner": 23065
+    },
+    {
+      "component_id": "source-target:176bcca7fd2fbf1092a6eedee0a5571c58d8589798b9e5c71e57d4adef5ce3b7",
+      "native_rows_sha256": "53393e35f2e904933b5f02362f0aebeefedfe08dd49459817903aa2f6dc4c88a",
+      "x": 212968,
+      "y": 129957,
+      "previous_owner": 0,
+      "candidate_owner": 23115
+    },
+    {
+      "component_id": "source-target:2031523c4020c1c14dd56e927a6197ab258958dc4deca47fecd6b8a882734094",
+      "native_rows_sha256": "36eaf6cb366a3790bcd7abb4a593e5f5b8515b00d4d2e5ab06c4e9ac07a5d467",
+      "x": 214915,
+      "y": 129154,
+      "previous_owner": 0,
+      "candidate_owner": 22935
+    },
+    {
+      "component_id": "source-target:23aa32a2242669abfe82a7f1cc6ae2d25f4951423fd55545c84fedb52e39fc4f",
+      "native_rows_sha256": "2164c631e5d30b11e44508b76d74d99e308713ff9d8ec495baa3c5e744f662e3",
+      "x": 212813,
+      "y": 130021,
+      "previous_owner": 0,
+      "candidate_owner": 23115
+    },
+    {
+      "component_id": "source-target:34b758b9eeb2bfd9a42e712f2144d14287e7a7a5d4c50439cfa970de4e94a698",
+      "native_rows_sha256": "7998f45c9c26d127c8f20e435076568d3f7418afcd3338eb74b3375959e01d59",
+      "x": 215273,
+      "y": 128304,
+      "previous_owner": 0,
+      "candidate_owner": 22771
+    },
+    {
+      "component_id": "source-target:3f47ecf7ed9d26f1649b902f38cfa2652a090246bde42a336f10b7ba83c678df",
+      "native_rows_sha256": "4c47fbc857bae40f0de15717b180befdd4f70b78403403dab137a42c43ddc786",
+      "x": 221494,
+      "y": 137978,
+      "previous_owner": 0,
+      "candidate_owner": 23013
+    },
+    {
+      "component_id": "source-target:4d82d2c851a585f3e2f39edd6e87a203e420bbce3108a14af383f32225801fae",
+      "native_rows_sha256": "53a839f835ac604591a659e3e0f9d8e32511f92c826b845aafabc5f0a21f5c85",
+      "x": 222149,
+      "y": 137911,
+      "previous_owner": 0,
+      "candidate_owner": 22947
+    },
+    {
+      "component_id": "source-target:5ab17b620bb336c180a47f9f958d3d43e4875a9ff627716dd357480dc53ca268",
+      "native_rows_sha256": "b8f5264bb81ec2fe023481e122f857681dd94a2002826cab083d0016cd988cc2",
+      "x": 212977,
+      "y": 129947,
+      "previous_owner": 0,
+      "candidate_owner": 23115
+    },
+    {
+      "component_id": "source-target:7e893cf7c13e5f85f1d43916c1284f496bafd605a31b69a032d285ecd18a3935",
+      "native_rows_sha256": "dc142b642271431a6115c04c0c9322c13946f2bcc3efad560b5553d2b661256a",
+      "x": 215274,
+      "y": 128572,
+      "previous_owner": 0,
+      "candidate_owner": 22935
+    },
+    {
+      "component_id": "source-target:809de77c02b5e0cd9dce6c143a0b770d37801fde5a891fa3be4bb4a4960ef12f",
+      "native_rows_sha256": "6a1b5f1b0928c5e679b070f8db89dcf347509bc14030121c2e244d88601bc6f9",
+      "x": 222186,
+      "y": 137657,
+      "previous_owner": 0,
+      "candidate_owner": 22839
+    },
+    {
+      "component_id": "source-target:87ab736d23662de142cd3c63cf52c30019d070793c3e2075304975cbb05a0b56",
+      "native_rows_sha256": "6820b0eedf04adea0d30e2f0b6a9fc6ff0a544b01e26d24cb4b488188f096ac9",
+      "x": 212142,
+      "y": 130320,
+      "previous_owner": 0,
+      "candidate_owner": 23065
+    },
+    {
+      "component_id": "source-target:8dc89ad211cb80146beb30d5c308b7f0eee453d7ca2c35149cc921fe99838d26",
+      "native_rows_sha256": "0bcf0090d942726845459362435072b8e8a4cb35c2355162b3d5545e8ebda33d",
+      "x": 215667,
+      "y": 127919,
+      "previous_owner": 0,
+      "candidate_owner": 22771
+    },
+    {
+      "component_id": "source-target:9cca31b9fb24114896426b67914caecd3b9bc879ff771904ec5f229ead31cbbf",
+      "native_rows_sha256": "c4ab2b08d5b19a0c3a144c91851b04ff49479c3980528b5c89221f67d832ab4b",
+      "x": 211401,
+      "y": 130357,
+      "previous_owner": 0,
+      "candidate_owner": 23071
+    },
+    {
+      "component_id": "source-target:9da67875633537e437d161fdc57d8456fdb81c218ecb6cb2f71283fe3507a92d",
+      "native_rows_sha256": "73d120e2d0cd8873de7ca2b6553d9b96226e81310dce501682b2e72a2b37b42b",
+      "x": 215666,
+      "y": 127920,
+      "previous_owner": 0,
+      "candidate_owner": 22771
+    },
+    {
+      "component_id": "source-target:a2b174c0c4521a169c807b93c03b8a3dbc16b23267c8f85d17a0d55b19694389",
+      "native_rows_sha256": "349a6a325005e24009d94490765beab3f3743bd3074116a3e6a6a8d31f45a741",
+      "x": 222176,
+      "y": 138001,
+      "previous_owner": 0,
+      "candidate_owner": 22947
+    },
+    {
+      "component_id": "source-target:a8e27cf3d560508a1d6146c0aa89448493a76d514e817e9feb4c6ec28de029ef",
+      "native_rows_sha256": "10bd469b1ee0405fa38f4fff9e377d9a471459c06d8c432f74177e3b40225988",
+      "x": 222135,
+      "y": 137900,
+      "previous_owner": 0,
+      "candidate_owner": 22947
+    },
+    {
+      "component_id": "source-target:c0ed7b8f239c725fa552e73a51ed3a0516db714872850c0daa9e40f940689d60",
+      "native_rows_sha256": "ff00a6db46de05cc56325fbc8ca158adbecd54ae5a79641d4e32fd251c09621e",
+      "x": 211488,
+      "y": 130389,
+      "previous_owner": 0,
+      "candidate_owner": 31151
+    },
+    {
+      "component_id": "source-target:cc71058a45179005d762928c31c98cb4c34b89aa13d4e1078da968601f017313",
+      "native_rows_sha256": "9fabbca7fc5edf4b620b43b5cb5ac6be7c35897944d95a9bc62d662930ab0964",
+      "x": 222157,
+      "y": 137791,
+      "previous_owner": 0,
+      "candidate_owner": 22839
+    },
+    {
+      "component_id": "source-target:d3d3033d85442cda40bd877619ad741a43e298fc2c44f51abbe8de647f6d2dce",
+      "native_rows_sha256": "c6aab0a75904ae642b1ef5d8b307226a243a0bc7e0c3470b050b39a953a2526e",
+      "x": 222165,
+      "y": 137793,
+      "previous_owner": 0,
+      "candidate_owner": 22839
+    },
+    {
+      "component_id": "source-target:db60647ee1d808a7e57a00b04850076221090ef6977a2653bc38bc8dea4f3cf0",
+      "native_rows_sha256": "8c070458cf66c476bba3b2eff44863de4dda2a781a2937b0fe74d4cd7c927128",
+      "x": 211056,
+      "y": 130013,
+      "previous_owner": 0,
+      "candidate_owner": 23183
+    },
+    {
+      "component_id": "source-target:ddca65be9a05c4aabb836fd55a8250cdf6ecf5f46a9b2210832782761d4e7909",
+      "native_rows_sha256": "e66ec92107edc02eb9ef7628c6399d2eb2ff55c5c5b44a97230b24777d933bc5",
+      "x": 222103,
+      "y": 137710,
+      "previous_owner": 0,
+      "candidate_owner": 42215
+    },
+    {
+      "component_id": "source-target:de4b6f71ddd6d5b3909305804011d0c3535030a352ea1485a02af704b3766619",
+      "native_rows_sha256": "fc54b249475932d208cedac66fa66d15a07fb9afa637ec35e3e983cc9f7a6bff",
+      "x": 210887,
+      "y": 129759,
+      "previous_owner": 0,
+      "candidate_owner": 23144
+    },
+    {
+      "component_id": "source-target:e7c400121593ca36fea16200c26960b938fef110c1cf98d2e1cca907c2b16a15",
+      "native_rows_sha256": "ee72785a12114c21455adfafb114af8dfe73c2e5df76ba1b8c63178381177f4a",
+      "x": 211907,
+      "y": 130333,
+      "previous_owner": 0,
+      "candidate_owner": 23065
+    },
+    {
+      "component_id": "source-target:eae04571572e67875a31001349650179fe0d61004730f7feed67e233414e5bb2",
+      "native_rows_sha256": "bf03bf7fe1b66735281e16a5f65fd49e6d0cc6dd16af5732a6601c4b3b2a692a",
+      "x": 212814,
+      "y": 130021,
+      "previous_owner": 0,
+      "candidate_owner": 23115
+    },
+    {
+      "component_id": "source-target:ec66b8fd40135f4112316a50bf1ca087b003ad6773c9d8f36f879758ffdbffcd",
+      "native_rows_sha256": "909d866ee21cfef12361eea107bb3322fb4be14bc7d2e3ba8647dad680cfb431",
+      "x": 214382,
+      "y": 129990,
+      "previous_owner": 0,
+      "candidate_owner": 22807
+    },
+    {
+      "component_id": "source-target:ed8f8d222faeb79c3d8b22c4ea1c24c49e4224ce43e0bab10296540349e754ee",
+      "native_rows_sha256": "23ba6b57c1b7ddd30db7f747f6b96f1406f755f3a720429c0d425f91e59c9e88",
+      "x": 211402,
+      "y": 130356,
+      "previous_owner": 0,
+      "candidate_owner": 23071
+    },
+    {
+      "component_id": "source-target:fa6125369419a0f542a57df8f8b6f357d375c2da5a29ac8b2ba5a6f5a7314863",
+      "native_rows_sha256": "085450ebf9d051f1ea5be8dd8d4b72e6e557e5eca1cce90cd92f6c25f93a3529",
+      "x": 215167,
+      "y": 128878,
+      "previous_owner": 0,
+      "candidate_owner": 22935
+    },
+    {
+      "component_id": "source-target:fee1747b9d38752bae875f71c2c8f8a20ef14ce4cf2ef0c52953434fbc1e9c28",
+      "native_rows_sha256": "1106bdd1a0b951382000c920c3646c8f79bab01d400cc87194337d419a4e9bdc",
+      "x": 211489,
+      "y": 130390,
+      "previous_owner": 0,
+      "candidate_owner": 23071
+    }
+  ],
+  "candidate_bindings": {
+    "ledger_sha256": "81edb7cc814bf8993988191ac76bf7d6ee44d66dbd25b5aa66da8e54f318408a",
+    "manifest_sha256": "8b8f5f6f96b4f85b91929764edc2f5cf37530f0245cca066a9399de0de0ed35e",
+    "patch_sha256": "b88cd153fbf2a117cb2523761f5a807a672b17e65c8af76625b6332f59f7b633",
+    "registry_sha256": "dccc2765bc382039f8845e9917d84a78ca37a4ddda2c7a1b97d1fa910a7bcf7c"
+  },
+  "actual_reader_counts": {
+    "baseline": {
+      "descriptors": 341,
+      "explicit_whole_body_consumed": 334,
+      "metadata_descriptors_without_consumption_flag": 7,
+      "explicit_unconsumed": 0
+    },
+    "candidate": {
+      "descriptors": 116,
+      "explicit_whole_body_consumed": 106,
+      "metadata_descriptors_without_consumption_flag": 10,
+      "explicit_unconsumed": 0
+    }
+  },
+  "verified_metadata_only_descriptor_count": 17,
+  "recorded_execution_code_bodies_verified": 21,
+  "recorded_executing_authority_bodies_verified": 2,
+  "recorded_runtime_bodies_verified": 4,
+  "checkpoint_custody": {
+    "historical_accepted_checkpoint_pr": 2013,
+    "historical_accepted_head": "832191562d92440474acf5678de5f3ae2ec20369",
+    "actual_selected_baseline": "675cf6285b8d1cdaed3a7d8915146e7d45ce9052",
+    "note": "Nested historical PR2013 qualification custody is retained; it is not relabelled as the actual selected baseline675 or executing code71d.",
+    "new_whole_input_descriptors": 105,
+    "retained_native_input_descriptors": 18,
+    "transport_inputs": [
+      {
+        "bytes": 363,
+        "commit": "8fa52b146f6f53ca124e934522bf0f10b4355f68",
+        "git_blob_oid": "6b53ccc540ab917f3b82b2a36ef52d63ddb863c0",
+        "mode": "100644",
+        "path": "data/selected-checkpoint.json",
+        "present": true,
+        "sha256": "8e1313f21c19a77ae78fe7f18f67939df4aede957cc5a50f14e2e6ce08e4de3b",
+        "whole_body_consumed": true
+      },
+      {
+        "bytes": 7692445,
+        "commit": "8fa52b146f6f53ca124e934522bf0f10b4355f68",
+        "git_blob_oid": "98745af3fd3b639a3f459eef15f8d89ce5e2464c",
+        "mode": "100644",
+        "path": "coordination/engineering/accepted-checkpoint-2013-20261015/artifact-001/geography-artifact.zip",
+        "present": true,
+        "whole_body_consumed": false
+      }
+    ]
+  },
+  "reused_reviews": [
+    {
+      "path": "idn-physical-remainder80712-001/worker5-remainder-verification/border393-distinct-actual-compose-review.json",
+      "bytes": 4905,
+      "sha256": "9dd3a48fbd0377c8745cc8402e55bfbfe2fb6c913f5de64675e171d99c2bf326"
+    },
+    {
+      "path": "idn-physical-remainder80712-001/worker5-remainder-verification/border393-distinct-canonical-binding-review.json",
+      "bytes": 9756,
+      "sha256": "218dd6173c7ce43427e81bb98baeb18c6f2bad6eb8ec60bc8bceeda386c50360"
+    },
+    {
+      "path": "idn-physical-remainder80712-001/worker5-remainder-verification/expected393-original-authority-roster.json",
+      "bytes": 195086,
+      "sha256": "1601870bf0af151cc61472b4153707b04d071f83b7697c9599c52307d262f19d"
+    }
+  ],
+  "limits": [
+    "PASS establishes the actual trusted selected-native append proof for real8fa candidate versus675 baseline. Derived checkpoint remains accepted_checkpoint=false until ordinary review/acceptance; no393 accepted credit is granted by this review.",
+    "Native-cell visibility is not browser/GPU picking, sub-cell polygon coverage, new geographic/source jurisdiction, whole-parent certification, or legal/surveyed boundary proof. Source-priority, physical, original holds and datum/vintage limits remain unchanged.",
+    "341baseline/116candidate descriptors are not all relabelled full reads:334/106 explicitwholeconsumed,7/10 metadata-only descriptors verified as Git size/OID; optional retained archive has explicit whole_body_consumed=false. This preserves honest acquisition meaning.",
+    "No candidate code executed, cold fallback, deadline/cancellation, credential creation/change, source/physical/native producer or predicate/operator rerun by this reviewer;21 actual recorded code bodies are the exact71d originals."
+  ]
+}

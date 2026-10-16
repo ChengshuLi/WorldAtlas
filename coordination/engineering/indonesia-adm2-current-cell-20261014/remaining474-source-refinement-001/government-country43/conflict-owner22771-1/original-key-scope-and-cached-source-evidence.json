@@ -1,0 +1,222 @@
+{
+  "package": "conflict",
+  "owner": 22771,
+  "count": 1,
+  "records": [
+    {
+      "original_package": "conflict",
+      "owner": 22771,
+      "y": 127959,
+      "x": 215460,
+      "original_request_id": "conflict:Borneo:0:127959:215460",
+      "retained_actual_comparison": {
+        "original_conflict_record_unchanged": {
+          "original_request": {
+            "id": "conflict:Borneo:0:127959:215460",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 127959,
+            "x": 215460,
+            "original_record": {
+              "outcome_interval_index": 0,
+              "pair": [
+                "Nunukan",
+                "Sipitang"
+              ],
+              "stable_ids": [
+                "gb:IDN:ADM2:22746128B24707766174966",
+                "gb:MYS:ADM2:92858781B73026696392194"
+              ],
+              "y": 127959,
+              "x": 215460,
+              "longitude_rational": "15187950/131083",
+              "longitude_display": 115.86513888147205,
+              "latitude_native_f64": 4.285114175402365,
+              "latitude_hex": "0x1.123f4f86beaaap+2"
+            },
+            "original_request_custody": {
+              "path": "[machine-local locator omitted; original private body hash retained]",
+              "bytes": 10134,
+              "sha256": "7371905d83d903e8f84a66e6373de337985af0c1e8f301417f66c7a0852e2957"
+            }
+          },
+          "original_frozen_interval": {
+            "owners": [
+              22771,
+              31140
+            ],
+            "stable_ids": [
+              "gb:IDN:ADM2:22746128B24707766174966",
+              "gb:MYS:ADM2:92858781B73026696392194"
+            ],
+            "names": [
+              "Nunukan",
+              "Sipitang"
+            ],
+            "original_interval": {
+              "original_block": 31,
+              "original_record_ordinal": 0,
+              "original_row": [
+                127959,
+                215460,
+                215461,
+                [
+                  22771,
+                  31140
+                ],
+                [
+                  36257,
+                  36632,
+                  46110
+                ],
+                "land"
+              ],
+              "interval_id": "idn-source-conflict:127959:215460:215461",
+              "all_source_feature_ids": [
+                "gb:IDN:ADM1:65028918B52923737893214",
+                "gb:IDN:ADM2:22746128B24707766174966",
+                "gb:MYS:ADM2:92858781B73026696392194"
+              ]
+            }
+          },
+          "current_selected_owner_observation": {
+            "id": "conflict:Borneo:0:127959:215460",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 127959,
+            "x": 215460,
+            "original_owner": null,
+            "baseline_owner": 0,
+            "append_owner": 0,
+            "effective_owner": 0,
+            "owner_identity": null
+          },
+          "original_IDN_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+              "feature_ordinal": 372,
+              "shapeName": "Nunukan",
+              "kind": "interior"
+            }
+          ],
+          "full_IDN_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+              "feature_ordinal": 372,
+              "shapeName": "Nunukan",
+              "kind": "interior"
+            }
+          ],
+          "complete_foreign_family_memberships": {
+            "gb:MYS:ADM1": {
+              "original_request_id": "conflict:Borneo:0:127959:215460",
+              "y": 127959,
+              "x": 215460,
+              "original_memberships": [],
+              "full_memberships": []
+            },
+            "gb:MYS:ADM2": {
+              "original_request_id": "conflict:Borneo:0:127959:215460",
+              "y": 127959,
+              "x": 215460,
+              "original_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM2:92858781B73026696392194",
+                  "feature_ordinal": 123,
+                  "shapeName": "Sipitang",
+                  "kind": "interior"
+                }
+              ],
+              "full_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM2:92858781B73026696392194",
+                  "feature_ordinal": 123,
+                  "shapeName": "Sipitang",
+                  "kind": "interior"
+                }
+              ]
+            }
+          },
+          "full_foreign_fine_existing_Atlas_locations": [
+            {
+              "owner": 31140,
+              "id": "gb:MYS:ADM2:92858781B73026696392194",
+              "name": "Sipitang",
+              "parent_id": "framework:province:sabah:195a4dcb4f73",
+              "source_reference_year": "2020"
+            }
+          ],
+          "actual_JMG_Sarawak_contact_kinds": [],
+          "JMG_applicability": "Sarawakonly;notSabah",
+          "source_assessment_cohort": "both-full-Sabah-fine;Sarawak-comparator-inapplicable",
+          "chosen_owner": null,
+          "accepted_or_completed_credit": 0
+        },
+        "actual_new_government_comparison_unchanged": {
+          "request": {
+            "id": "conflict:Borneo:0:127959:215460",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 127959,
+            "x": 215460,
+            "original_record": {
+              "outcome_interval_index": 0,
+              "pair": [
+                "Nunukan",
+                "Sipitang"
+              ],
+              "stable_ids": [
+                "gb:IDN:ADM2:22746128B24707766174966",
+                "gb:MYS:ADM2:92858781B73026696392194"
+              ],
+              "y": 127959,
+              "x": 215460,
+              "longitude_rational": "15187950/131083",
+              "longitude_display": 115.86513888147205,
+              "latitude_native_f64": 4.285114175402365,
+              "latitude_hex": "0x1.123f4f86beaaap+2"
+            },
+            "original_request_custody": {
+              "path": "[machine-local locator omitted; original private body hash retained]",
+              "bytes": 10134,
+              "sha256": "7371905d83d903e8f84a66e6373de337985af0c1e8f301417f66c7a0852e2957"
+            }
+          },
+          "original_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+              "feature_ordinal": 372,
+              "shapeName": "Nunukan",
+              "kind": "interior"
+            }
+          ],
+          "full_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+              "feature_ordinal": 372,
+              "shapeName": "Nunukan",
+              "kind": "interior"
+            }
+          ],
+          "full_private_MYS_memberships": [
+            {
+              "source_id": "gb:MYS:ADM2:92858781B73026696392194",
+              "feature_ordinal": 123,
+              "shapeName": "Sipitang",
+              "kind": "interior"
+            }
+          ],
+          "cached_Gov_Sarawak_state_contacts": [],
+          "new_Gov_Sabah_state_contacts": [],
+          "Gov_district_Sarawak_contacts": [],
+          "Gov_district_Sabah_contacts": [],
+          "Gov_Sabah_line_incidence_only": [],
+          "scientific_observation_partition": "IDNfullpositive__Govstateoutside__Govdistrictoutside",
+          "owner_or_hold_changed": false,
+          "authority_or_repair_credit": 0
+        },
+        "review_scope": "Country-side negative operand source correction candidate, not direct ownership/physical qualification."
+      }
+    }
+  ]
+}

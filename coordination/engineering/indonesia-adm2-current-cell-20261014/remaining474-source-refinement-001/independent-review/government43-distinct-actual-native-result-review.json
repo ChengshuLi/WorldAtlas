@@ -1,0 +1,634 @@
+{
+  "reviewer": "/root/physical_remainder_exact_scope",
+  "review_utc": "2026-10-16T01:16:35.172582+00:00",
+  "outcome": "PASS WITH LIMITS for actual43 qualification contribution",
+  "manifest": {
+    "path": "idn-remaining474-source-research-001/worker2-malinau-mahakam105/resumed-001/qualified43-original-products-publication-001/root-publication-manifest.json",
+    "bytes": 37398,
+    "sha256": "1119f7177758dd4e2e137dc5569c87bb4713dc779712631881ea94e0f9329b9b"
+  },
+  "actual_group_results": [
+    {
+      "group": "repair-owner22771-23",
+      "original_package": "repair",
+      "qualified_cells": 23,
+      "exact_tuples": [
+        [
+          127919,
+          215667,
+          22771
+        ],
+        [
+          127919,
+          215668,
+          22771
+        ],
+        [
+          127920,
+          215665,
+          22771
+        ],
+        [
+          127921,
+          215661,
+          22771
+        ],
+        [
+          127921,
+          215662,
+          22771
+        ],
+        [
+          127921,
+          215663,
+          22771
+        ],
+        [
+          127921,
+          215664,
+          22771
+        ],
+        [
+          127922,
+          215661,
+          22771
+        ],
+        [
+          127922,
+          215662,
+          22771
+        ],
+        [
+          127922,
+          215663,
+          22771
+        ],
+        [
+          127922,
+          215664,
+          22771
+        ],
+        [
+          127923,
+          215661,
+          22771
+        ],
+        [
+          127923,
+          215662,
+          22771
+        ],
+        [
+          127952,
+          216532,
+          22771
+        ],
+        [
+          127981,
+          216581,
+          22771
+        ],
+        [
+          127982,
+          216583,
+          22771
+        ],
+        [
+          127985,
+          216586,
+          22771
+        ],
+        [
+          127986,
+          216587,
+          22771
+        ],
+        [
+          128000,
+          216599,
+          22771
+        ],
+        [
+          128001,
+          216599,
+          22771
+        ],
+        [
+          128003,
+          216599,
+          22771
+        ],
+        [
+          128041,
+          216644,
+          22771
+        ],
+        [
+          128041,
+          216718,
+          22771
+        ]
+      ],
+      "components": [
+        "source-target:8dc89ad211cb80146beb30d5c308b7f0eee453d7ca2c35149cc921fe99838d26"
+      ],
+      "actual_exit": 0,
+      "ended_at": "2026-10-16T01:12:54.780121+00:00",
+      "source_pin": {
+        "bytes": 16324729,
+        "commit": "50f9071ed1f564cd246a5b2c434bee43a508c40a",
+        "git_blob_oid": "906992ac32e75e1d4d4e63ef6077ce82dd55d134",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/sources/owner22771-source-evidence.json",
+        "sha256": "7e5b1a1fb262dc91fd1c243cb47c13d02e9ce5935d1a3c5389b95f574ba13b6f"
+      },
+      "patch_pin": {
+        "bytes": 649,
+        "commit": "3156ef28bd2e0472580c470a1590c3d78c54478f",
+        "git_blob_oid": "813dd7a703b35ce4ac995884287058c196390e72",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/repair-owner22771-23/candidate-native-patch.json",
+        "sha256": "fe3fdaf59619c81cb9aaa5def3933c650b237af63b2a5fb063e18d9c914fa2eb"
+      },
+      "constructor_sha256": "26ba3275630620a36a367f44844b46d4bb490af45052bbffc896fd4fd8fa8b8a",
+      "quartet": {
+        "authority-binding.json": {
+          "bytes": 868,
+          "sha256": "597c5da20d8a210b3c8007831aefb4d02b236ae5ac502f4551694de4be6e9398"
+        },
+        "constructor-result.json": {
+          "bytes": 15566,
+          "sha256": "26ba3275630620a36a367f44844b46d4bb490af45052bbffc896fd4fd8fa8b8a"
+        },
+        "original-rule-preimage.json": {
+          "bytes": 865,
+          "sha256": "97288cd5d371f32dc7df4f61b506c32d08226f635c8903b5cb8f52217586ea5c"
+        },
+        "preparation.json": {
+          "bytes": 501,
+          "sha256": "dcb9e80e7dcd8514d8e4e1d4c0d2ace14711de27f9890ee28bd856ba0b0144d1"
+        }
+      }
+    },
+    {
+      "group": "repair-owner22935-1",
+      "original_package": "repair",
+      "qualified_cells": 1,
+      "exact_tuples": [
+        [
+          129154,
+          214915,
+          22935
+        ]
+      ],
+      "components": [
+        "source-target:2031523c4020c1c14dd56e927a6197ab258958dc4deca47fecd6b8a882734094"
+      ],
+      "actual_exit": 0,
+      "ended_at": "2026-10-16T01:13:06.436956+00:00",
+      "source_pin": {
+        "bytes": 16322799,
+        "commit": "50f9071ed1f564cd246a5b2c434bee43a508c40a",
+        "git_blob_oid": "089cf99fa797e809979ad30d69c24da5a175ae7a",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/sources/owner22935-source-evidence.json",
+        "sha256": "f32466ee4bfcd9b9fd28a1b933e0421644fa56698ba5185091a17b60e75d60fd"
+      },
+      "patch_pin": {
+        "bytes": 55,
+        "commit": "3156ef28bd2e0472580c470a1590c3d78c54478f",
+        "git_blob_oid": "b055cd3df8ade91271ef726ef7f2ac1128192f9e",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/repair-owner22935-1/candidate-native-patch.json",
+        "sha256": "9b7f2abcd05892c89f5451c458b91f44571a3428faa62783878201d8d903b2bf"
+      },
+      "constructor_sha256": "7849b7b4ca20b580e9b0a3a84488dfa424c8fc47ab22280953092a02a6b7b875",
+      "quartet": {
+        "authority-binding.json": {
+          "bytes": 866,
+          "sha256": "3b8758467cd1081effb126ac7887640d28660286afc69dd514e35af7e5ff5a79"
+        },
+        "constructor-result.json": {
+          "bytes": 13040,
+          "sha256": "7849b7b4ca20b580e9b0a3a84488dfa424c8fc47ab22280953092a02a6b7b875"
+        },
+        "original-rule-preimage.json": {
+          "bytes": 863,
+          "sha256": "73a05f08a075e6ce47d241ac6421b3f3e2fc5abc7fcf9679529b70caacabf316"
+        },
+        "preparation.json": {
+          "bytes": 501,
+          "sha256": "12d82c373ab4ed55920ef2b05b0e18cc3ca1b912b627f4838f1fa5b57c544b31"
+        }
+      }
+    },
+    {
+      "group": "repair-owner23115-1",
+      "original_package": "repair",
+      "qualified_cells": 1,
+      "exact_tuples": [
+        [
+          130255,
+          212686,
+          23115
+        ]
+      ],
+      "components": [
+        "source-target:23aa32a2242669abfe82a7f1cc6ae2d25f4951423fd55545c84fedb52e39fc4f"
+      ],
+      "actual_exit": 0,
+      "ended_at": "2026-10-16T01:13:18.555774+00:00",
+      "source_pin": {
+        "bytes": 16322843,
+        "commit": "50f9071ed1f564cd246a5b2c434bee43a508c40a",
+        "git_blob_oid": "910521215a3799d898f589b15fb7fc87243136a9",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/sources/owner23115-source-evidence.json",
+        "sha256": "b27f3251289ba21e7cdb6c7681a174f3544ae15c9be3c47606d3580cdaec836f"
+      },
+      "patch_pin": {
+        "bytes": 55,
+        "commit": "3156ef28bd2e0472580c470a1590c3d78c54478f",
+        "git_blob_oid": "4514497846275880542c5c008dfb1157a6d99db9",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/repair-owner23115-1/candidate-native-patch.json",
+        "sha256": "28a0d5d67db14ec2be0c95090a4824ec30854d80daabece9f62220763e80ea44"
+      },
+      "constructor_sha256": "5f4426063037c2686a1eb0cf416c7deae47055643bf7e9f9fa67429390bd35fa",
+      "quartet": {
+        "authority-binding.json": {
+          "bytes": 866,
+          "sha256": "942fca5e7172a1a3df147eba54a512127f1d87262a73969a449f8c56ef04f0b0"
+        },
+        "constructor-result.json": {
+          "bytes": 13086,
+          "sha256": "5f4426063037c2686a1eb0cf416c7deae47055643bf7e9f9fa67429390bd35fa"
+        },
+        "original-rule-preimage.json": {
+          "bytes": 863,
+          "sha256": "fa6b843d62b9bd454a244083bc556f17173134dc4e4e9667c735323b29b07093"
+        },
+        "preparation.json": {
+          "bytes": 501,
+          "sha256": "7695bc155fd9c941647925bd20c52df448808607105eaec88ac2afb41ad34153"
+        }
+      }
+    },
+    {
+      "group": "conflict-owner22771-1",
+      "original_package": "conflict",
+      "qualified_cells": 1,
+      "exact_tuples": [
+        [
+          127959,
+          215460,
+          22771
+        ]
+      ],
+      "components": [
+        "source-target:8dc89ad211cb80146beb30d5c308b7f0eee453d7ca2c35149cc921fe99838d26"
+      ],
+      "actual_exit": 0,
+      "ended_at": "2026-10-16T01:13:30.467046+00:00",
+      "source_pin": {
+        "bytes": 16324729,
+        "commit": "50f9071ed1f564cd246a5b2c434bee43a508c40a",
+        "git_blob_oid": "906992ac32e75e1d4d4e63ef6077ce82dd55d134",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/sources/owner22771-source-evidence.json",
+        "sha256": "7e5b1a1fb262dc91fd1c243cb47c13d02e9ce5935d1a3c5389b95f574ba13b6f"
+      },
+      "patch_pin": {
+        "bytes": 55,
+        "commit": "3156ef28bd2e0472580c470a1590c3d78c54478f",
+        "git_blob_oid": "ef91087f6474e203a51995f27d34fc2299643e1e",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/conflict-owner22771-1/candidate-native-patch.json",
+        "sha256": "5b46d60e5945f792a1f95d6b7b638729d17bdf66330a2e9c6231261f705442bd"
+      },
+      "constructor_sha256": "f3cb845fff42aebf5c6041999270d465577e7816faf1bbad69da2c6105258ca3",
+      "quartet": {
+        "authority-binding.json": {
+          "bytes": 868,
+          "sha256": "f187d791332bac693da5f7179fcf88d0588a350a4ffb84ee8dcb0c68391083f8"
+        },
+        "constructor-result.json": {
+          "bytes": 14972,
+          "sha256": "f3cb845fff42aebf5c6041999270d465577e7816faf1bbad69da2c6105258ca3"
+        },
+        "original-rule-preimage.json": {
+          "bytes": 865,
+          "sha256": "3666a44d020015d8b08c5993edd2b159ac3c15807be1076d294349aa6666a5c6"
+        },
+        "preparation.json": {
+          "bytes": 501,
+          "sha256": "1e09043d9356f1b11446cffdcc24d938a036b7c0c42ce8ba2e58eb7bd964ced5"
+        }
+      }
+    },
+    {
+      "group": "conflict-owner22935-5",
+      "original_package": "conflict",
+      "qualified_cells": 5,
+      "exact_tuples": [
+        [
+          129422,
+          214785,
+          22935
+        ],
+        [
+          129730,
+          214628,
+          22935
+        ],
+        [
+          129732,
+          214627,
+          22935
+        ],
+        [
+          129733,
+          214627,
+          22935
+        ],
+        [
+          129734,
+          214627,
+          22935
+        ]
+      ],
+      "components": [
+        "source-target:2031523c4020c1c14dd56e927a6197ab258958dc4deca47fecd6b8a882734094"
+      ],
+      "actual_exit": 0,
+      "ended_at": "2026-10-16T01:13:44.962661+00:00",
+      "source_pin": {
+        "bytes": 16322799,
+        "commit": "50f9071ed1f564cd246a5b2c434bee43a508c40a",
+        "git_blob_oid": "089cf99fa797e809979ad30d69c24da5a175ae7a",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/sources/owner22935-source-evidence.json",
+        "sha256": "f32466ee4bfcd9b9fd28a1b933e0421644fa56698ba5185091a17b60e75d60fd"
+      },
+      "patch_pin": {
+        "bytes": 231,
+        "commit": "3156ef28bd2e0472580c470a1590c3d78c54478f",
+        "git_blob_oid": "3c6567856ebf524d5f54c63fccd258813985d6e8",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/conflict-owner22935-5/candidate-native-patch.json",
+        "sha256": "5003c6a45cf4ed940d519292c4b3e4d8d801eed1bf4beb874c4ab78a427d617c"
+      },
+      "constructor_sha256": "6347d0bacd378fac3215e15e35a00bbed8378bf84d607bde8f51aa2b966c2838",
+      "quartet": {
+        "authority-binding.json": {
+          "bytes": 869,
+          "sha256": "c527c8cabeca093fb4787e606d048458aaa22cffcc4c20474ec8246e93fba9d5"
+        },
+        "constructor-result.json": {
+          "bytes": 13219,
+          "sha256": "6347d0bacd378fac3215e15e35a00bbed8378bf84d607bde8f51aa2b966c2838"
+        },
+        "original-rule-preimage.json": {
+          "bytes": 866,
+          "sha256": "d579a3ab65bb748ad1c45eae32f6840d755c3972ba3ba7b1306433fa91e078e6"
+        },
+        "preparation.json": {
+          "bytes": 501,
+          "sha256": "eb361cac82c56e93a375db681af3d6e1c175face3b1d3846c502176bdd856f0c"
+        }
+      }
+    },
+    {
+      "group": "conflict-owner23065-4",
+      "original_package": "conflict",
+      "qualified_cells": 4,
+      "exact_tuples": [
+        [
+          130333,
+          211907,
+          23065
+        ],
+        [
+          130333,
+          211908,
+          23065
+        ],
+        [
+          130333,
+          211909,
+          23065
+        ],
+        [
+          130333,
+          211910,
+          23065
+        ]
+      ],
+      "components": [
+        "source-target:e7c400121593ca36fea16200c26960b938fef110c1cf98d2e1cca907c2b16a15"
+      ],
+      "actual_exit": 0,
+      "ended_at": "2026-10-16T01:13:57.636159+00:00",
+      "source_pin": {
+        "bytes": 16319440,
+        "commit": "50f9071ed1f564cd246a5b2c434bee43a508c40a",
+        "git_blob_oid": "54d08626c9023a500fc06141a4fd144ea49e0f19",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/sources/owner23065-source-evidence.json",
+        "sha256": "3a16d9d9b302b19365c045ae3bf0d019b8fdfc9afa36311ae8cabea058801f96"
+      },
+      "patch_pin": {
+        "bytes": 55,
+        "commit": "3156ef28bd2e0472580c470a1590c3d78c54478f",
+        "git_blob_oid": "da402ce7477da12fb5fca86ffe65451ef9d02f5d",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/conflict-owner23065-4/candidate-native-patch.json",
+        "sha256": "6569e8e5da676d63f116953a719e7b8aa4e18f70314794f4dafc32021ef4da21"
+      },
+      "constructor_sha256": "a8d9f3e04e60ff36e97a753848c44efc0ad0910629cb895cff83d4e1104c7969",
+      "quartet": {
+        "authority-binding.json": {
+          "bytes": 868,
+          "sha256": "63207c3afb204c9893ba4ccd31fc38f391e322a826c4ce4afaa789b463e4d94c"
+        },
+        "constructor-result.json": {
+          "bytes": 9684,
+          "sha256": "a8d9f3e04e60ff36e97a753848c44efc0ad0910629cb895cff83d4e1104c7969"
+        },
+        "original-rule-preimage.json": {
+          "bytes": 865,
+          "sha256": "08d4a8966a0821dbd3e5d180808425275dc8cba1d2300dcd15dc4a7538315f4f"
+        },
+        "preparation.json": {
+          "bytes": 500,
+          "sha256": "82bedfa01ac7ad37722cd85b1735f464b4c5fb400bc60ea97d82987d4397c954"
+        }
+      }
+    },
+    {
+      "group": "conflict-owner23071-6",
+      "original_package": "conflict",
+      "qualified_cells": 6,
+      "exact_tuples": [
+        [
+          130390,
+          211489,
+          23071
+        ],
+        [
+          130390,
+          211490,
+          23071
+        ],
+        [
+          130391,
+          211492,
+          23071
+        ],
+        [
+          130391,
+          211493,
+          23071
+        ],
+        [
+          130392,
+          211495,
+          23071
+        ],
+        [
+          130392,
+          211496,
+          23071
+        ]
+      ],
+      "components": [
+        "source-target:fee1747b9d38752bae875f71c2c8f8a20ef14ce4cf2ef0c52953434fbc1e9c28"
+      ],
+      "actual_exit": 0,
+      "ended_at": "2026-10-16T01:14:10.689329+00:00",
+      "source_pin": {
+        "bytes": 16318453,
+        "commit": "50f9071ed1f564cd246a5b2c434bee43a508c40a",
+        "git_blob_oid": "5326fc13d885052870f97c8901d75369f7942291",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/sources/owner23071-source-evidence.json",
+        "sha256": "fd4260436777a1f05009da8231aa8574fab8b2b853d0b91fbf89e62d1484c45b"
+      },
+      "patch_pin": {
+        "bytes": 143,
+        "commit": "3156ef28bd2e0472580c470a1590c3d78c54478f",
+        "git_blob_oid": "e73b39aaf91775001aba8348481af4d1d575bf1b",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/conflict-owner23071-6/candidate-native-patch.json",
+        "sha256": "c20d9b73dfb51007c2801830f707a93a08f512f0fb319c7fc5a6e86bc5239c4b"
+      },
+      "constructor_sha256": "48e4f7ed5fb226bca4f190c6f3004bc94292e00df228f8b81789c68ebc64c0e9",
+      "quartet": {
+        "authority-binding.json": {
+          "bytes": 869,
+          "sha256": "89a73e6f59c4b330bccdb10d26d00bb03143f8d15a6a5f1e2066003d1c841ec9"
+        },
+        "constructor-result.json": {
+          "bytes": 8780,
+          "sha256": "48e4f7ed5fb226bca4f190c6f3004bc94292e00df228f8b81789c68ebc64c0e9"
+        },
+        "original-rule-preimage.json": {
+          "bytes": 866,
+          "sha256": "db488b2ff4ac2d91e06b31c0d7a9114fae906ea17f7319b3f49915fda8dfd26d"
+        },
+        "preparation.json": {
+          "bytes": 500,
+          "sha256": "52748d7df49f371d694693c7c746c550b3cc0cbe3a300574e7d8a7a889e0c75d"
+        }
+      }
+    },
+    {
+      "group": "conflict-owner23115-2",
+      "original_package": "conflict",
+      "qualified_cells": 2,
+      "exact_tuples": [
+        [
+          130021,
+          212813,
+          23115
+        ],
+        [
+          130192,
+          213846,
+          23115
+        ]
+      ],
+      "components": [
+        "source-target:23aa32a2242669abfe82a7f1cc6ae2d25f4951423fd55545c84fedb52e39fc4f"
+      ],
+      "actual_exit": 0,
+      "ended_at": "2026-10-16T01:14:23.701310+00:00",
+      "source_pin": {
+        "bytes": 16322843,
+        "commit": "50f9071ed1f564cd246a5b2c434bee43a508c40a",
+        "git_blob_oid": "910521215a3799d898f589b15fb7fc87243136a9",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/sources/owner23115-source-evidence.json",
+        "sha256": "b27f3251289ba21e7cdb6c7681a174f3544ae15c9be3c47606d3580cdaec836f"
+      },
+      "patch_pin": {
+        "bytes": 99,
+        "commit": "3156ef28bd2e0472580c470a1590c3d78c54478f",
+        "git_blob_oid": "1ab04687407cc963538148292d8712f8b4c303b1",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/government-country43/conflict-owner23115-2/candidate-native-patch.json",
+        "sha256": "b452788c0718cfa7a1ac4c0c9a1c2675c3c8f483e9f77da42e1eddeb70c23cd9"
+      },
+      "constructor_sha256": "a5e79cbb646dfa03828e1074bc897ff936478b222fd25c489d7066f65325379e",
+      "quartet": {
+        "authority-binding.json": {
+          "bytes": 868,
+          "sha256": "84ee17fdd73c28c0435a391c50593b4e244b31385a6476f4233e949a4b886af9"
+        },
+        "constructor-result.json": {
+          "bytes": 13131,
+          "sha256": "a5e79cbb646dfa03828e1074bc897ff936478b222fd25c489d7066f65325379e"
+        },
+        "original-rule-preimage.json": {
+          "bytes": 865,
+          "sha256": "5df3a262a05f0eb9916dd8d810513f96981cda463bb270a5c148755cec5ac4ac"
+        },
+        "preparation.json": {
+          "bytes": 501,
+          "sha256": "53a9715bc552ec5fb24741db0258eb829e6effda5e838451a35bdc5ae69b98a6"
+        }
+      }
+    }
+  ],
+  "actual_qualification": {
+    "first_stock_calls": 8,
+    "executing_HEAD": "b6382262f8d03d9e7d33b26d8adb40a55197262b",
+    "source_commit": "50f9071ed1f564cd246a5b2c434bee43a508c40a",
+    "patch_commit": "3156ef28bd2e0472580c470a1590c3d78c54478f",
+    "qualified_cells": 43,
+    "original_repair474": 25,
+    "original_conflict27": 18,
+    "distinct_native_coordinates": 43,
+    "overlap_prior_composed282258": 0,
+    "overlap_Fatumean1": 0,
+    "new_accepted": 0
+  },
+  "consequential_findings": [
+    "All actual constructor source and patch bindings match the exact previously reviewed raw scientific templates and original-key scopes. The published raw JSON source representation changes neither decoded content nor source priority. All actual assigned cells match their original owner/key tuples and own unchanged physical receipt/base geometry.",
+    "Eight original successful stock quartets remain distinct. They have8 per-call result instances but5 unique source-target component IDs: Nunukan, Malinau and Kapuas Hulu IDs recur between repair and conflict calls because the whole positive source is shared. This is reported explicitly and not represented as8 unique components.",
+    "The25 original repairs and18 original conflicts remain separate. None overlaps the actual inherited-plus343 composed patch or later Fatumean1 key. Original conflict owners/SIDs/classes and contrary fine Malaysian claims remain in retained scope/predecessor evidence.",
+    "The earlier source-priority judgment is unchanged: active whole government country-side polygons supersede69 regional private negatives while106 other whole private polygons including both Labuan levels remain active. No positive/source/member, physical, grid or hierarchy evidence is relabelled by this actual result review."
+  ],
+  "reused_scientific_review": {
+    "path": "idn-physical-remainder80712-001/worker5-remainder-verification/government-country43-distinct-consequential-review.json",
+    "bytes": 17076,
+    "sha256": "64e3af2ad14d56ec92aac8aec829f24d268d1887d6a306d9ea87c7fcf1bb5b8b"
+  },
+  "composition_limit": "Ordinary subsequent composition must preserve all8 original quartets and43 tuple contributions under the accepted stock duplicate-component/authority rules. Shared component identities must not cause silent dropped tuples or discarded provenance. This review does not certify an unexecuted387/393 composition.",
+  "scientific_and_delivery_limits": [
+    "Government state/district agreement is correlated mapping-lineage evidence, not independent vote counting or a finer-district Atlas crosswalk. Native29873\u2192returned4326 transformation choice, represented boundary edition and positional accuracy remain literal unknowns. Original fine/coarse claims are preserved as predecessors.",
+    "NULL Sabah placeholder is nonspatial; country line is incidence-only. No topology, legal/treaty, current2026 or surveyed margin is inferred.",
+    "Actual qualification is not delivery acceptance or a fresh current native owner-zero/conservation check. Unchanged ordinary native consumers must establish those for any final delivery.",
+    "No source acquisition, geometry/native predicate, physical/source producer, native-authority replay or2057/2056/code modification occurred in this review."
+  ]
+}
