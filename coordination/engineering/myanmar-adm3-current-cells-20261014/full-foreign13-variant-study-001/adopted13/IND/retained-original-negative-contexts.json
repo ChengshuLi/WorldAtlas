@@ -1,0 +1,46 @@
+{
+  "parts": [
+    {
+      "bytes": 1396414,
+      "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+      "decoded_bytes": 4205367,
+      "decoded_sha256": "94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2",
+      "git_blob_oid": "6a91fcb22b44ae00401a0068a6c3e62bfed62374",
+      "mode": "100644",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+      "sha256": "57de50a588f418601412bb7a34cc2f43a3fd6d7d6f16635cb41b95e5ae505db6"
+    }
+  ],
+  "records": [
+    {
+      "role": "contextual",
+      "source_id": "gb-full:IND:ADM2:9469f09:76128533B70210707786180",
+      "target_id": "gb:IND:ADM2:76128533B70210707786180",
+      "pixelIndex": 23459,
+      "y": 114536,
+      "x": 198611,
+      "negative_ordinal": 0,
+      "geometry_sha256": "9bee18b47c770806b322c6728eff68976f6fa9218a7af807f619504d2c1684f4",
+      "original_source": {
+        "id": "complete-original-MMR-family",
+        "pointer": "/features/199/geometry"
+      },
+      "adoption_scope_index": 0
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb-full:IND:ADM2:9469f09:76128533B59855617266389",
+      "target_id": "gb:IND:ADM2:76128533B59855617266389",
+      "pixelIndex": 23411,
+      "y": 113132,
+      "x": 199536,
+      "negative_ordinal": 0,
+      "geometry_sha256": "20b4c42d76c3735ac1dbea5e3f08d2859012fb1da308d15aa3fc0e7f28c19f52",
+      "original_source": {
+        "id": "complete-original-MMR-family",
+        "pointer": "/features/191/geometry"
+      },
+      "adoption_scope_index": 1
+    }
+  ]
+}
