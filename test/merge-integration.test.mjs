@@ -244,16 +244,23 @@ test('workflow separates untrusted candidate tests from write credentials and se
   assert.doesNotMatch(integration,/concurrency:/);
   assert.match(integration,/permissions:\n      contents: read/);
   assert.doesNotMatch(integration,/GITHUB_TOKEN:|secrets\.|contents: write|issues: write|pull-requests: write/);
-  const authenticatedSteps=['Authenticate selected package installer inputs','Assemble unchanged base with current selected output'];
+  const authenticatedSteps=['Materialize exact prepared checkout inputs','Authenticate selected package installer inputs','Assemble unchanged base with current selected output'];
   const tokenSteps=integration.split(/(?=^      - )/m).filter(step=>/^\s+GH_TOKEN:/m.test(step));
   assert.equal(tokenSteps.length,authenticatedSteps.length);
   for(const [index,step] of tokenSteps.entries()){
     assert.ok(step.startsWith('      - name: '+authenticatedSteps[index]+'\n'));
     assert.equal((step.match(/^\s+GH_TOKEN:/gm)||[]).length,1);
     assert.match(step,/GH_TOKEN: \$\{\{ github\.token \}\}/);
-    assert.match(step,/SELECTED_PACKAGE_TRUSTED_BASE: \$\{\{ needs\.prepare\.outputs\.base \}\}/);
     assert.match(step,/python3 -I -S -B/);
-    assert.match(step,/needs\.prepare\.outputs\.test_selection == 'selected-data'/);
+    if(index===0){
+      assert.match(step,/CI_CHECKOUT_SHA: \$\{\{ needs\.prepare\.outputs\.candidate \}\}/);
+      assert.match(step,/os\.environ\.pop\('GH_TOKEN'\)/);
+      assert.match(step,/'sparse-checkout', 'set', '--no-cone', '--stdin'/);
+      assert.doesNotMatch(step,/importlib|node |npm |git.*config.*--local.*extraheader/);
+    }else{
+      assert.match(step,/SELECTED_PACKAGE_TRUSTED_BASE: \$\{\{ needs\.prepare\.outputs\.base \}\}/);
+      assert.match(step,/needs\.prepare\.outputs\.test_selection == 'selected-data'/);
+    }
   }
   const steps=integration.split(/\n(?=      - )/).slice(1);
   assert.doesNotMatch(integration,/Read back qualified native build outputs|native-normal-built-output\.json|--built-output-readback/);
@@ -265,7 +272,7 @@ test('workflow separates untrusted candidate tests from write credentials and se
   assert.equal(checkout.length,1);
   assert.match(checkout[0],/uses: actions\/checkout@d23441a48e516b6c34aea4fa41551a30e30af803/);
   assert.match(checkout[0],/ref: \$\{\{ needs\.prepare\.outputs\.candidate \}\}/);
-  assert.match(checkout[0],/sparse-checkout: \$\{\{ needs\.prepare\.outputs\.checkout_patterns \}\}/);
+  assert.match(checkout[0],/sparse-checkout: \|\n            \/\*\n            !\/\*\//);
   const verification=steps.filter(step=>/name: Checkout complete candidate for application regression\n/.test(step));
   assert.equal(verification.length,1);assert.match(verification[0],/HEAD\^\{tree\}/);assert.doesNotMatch(verification[0],/uses: actions\/checkout/);
   assert.match(verification[0],/CI_CHECKOUT_TREE: \$\{\{ needs\.prepare\.outputs\.candidate_tree \}\}/);
@@ -465,8 +472,10 @@ test('actual review-receipt PR 2010 paths use the complete applicable focused in
   for (const file of files.filter(file => file.filename.startsWith('test/')))
     assert(integrationTestFiles('evidence',0).includes(file.filename), file.filename);
   const yaml = fs.readFileSync('.github/workflows/worker-merge.yml','utf8');
-  const focused = yaml.split('      - name: Checkout only focused-test inputs for evidence regression\n')[1].split('      - uses:')[0];
-  assert.match(focused,/sparse-checkout: \$\{\{ needs\.prepare\.outputs\.checkout_patterns \}\}/);
+  const focused = yaml.split('      - name: Materialize exact prepared checkout inputs\n')[1].split('      - name:')[0];
+  assert.match(focused,/needs\.prepare\.outputs\.profile == 'evidence'/);
+  assert.match(focused,/needs\.prepare\.outputs\.checkout_patterns_base64/);
+  assert.match(focused,/'sparse-checkout', 'set', '--no-cone', '--stdin'/);
   assert(focusedCheckoutPatterns(loadPackageInputs()).includes('/coordination/engineering/coverage-gaps-907-20261005-local01/sources/natural-earth-lakes.geojson.gz'));
   const unknown = {filename:'test/new-emitted-asset.test.mjs',status:'added'};
   authored.set(unknown.filename,{type:'blob',mode:'100644',sha:'2'.repeat(40)});
