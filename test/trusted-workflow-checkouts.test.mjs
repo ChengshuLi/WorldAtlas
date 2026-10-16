@@ -301,6 +301,7 @@ test('both queue profiles share minimal checkout, stdin materialization and exac
   assert.equal(integration.steps.filter(step=>step.text.includes('uses: actions/checkout@')).length,1);
   assert.doesNotMatch(source,/sparse-checkout: \$\{\{|checkout_patterns<<|WORLDATLAS_CHECKOUT_PATTERNS/);
   assert.match(source,/checkout_patterns_base64: \$\{\{ steps\.prepare\.outputs\.checkout_patterns_base64 \}\}/);
+  assert.match(source.split('  prepare:\n')[1].split('  geography:\n')[0],/CHECKOUT_PATTERNS_FORMAT: wrapped-base64/);
   assert.match(materialize.run,/encoded = '''\$\{\{ needs\.prepare\.outputs\.checkout_patterns_base64 \}\}'''/);
   assert.match(materialize.run,/b64decode\(encoded\.replace\('\\n', ''\), validate=True\)/);
   assert.match(materialize.run,/'sparse-checkout', 'set', '--no-cone', '--stdin'\], input=patterns, env=env, check=True/);
@@ -311,6 +312,15 @@ test('both queue profiles share minimal checkout, stdin materialization and exac
     assert.equal(workflowCondition(step.condition,queueContext({profile:'unknown'})),false);
     assert.equal(workflowCondition(step.condition,queueContext(),{success:false}),false);
   }
+});
+
+test('new workflow consumes legacy single-line output from an older producer',()=>{
+  const patterns='/*\n!/*/\n/selected/input.txt',f=materializationFixture(patterns);
+  try {
+    const result=f.run({encoded:Buffer.from(patterns).toString('base64')});
+    assert.equal(result.status,0,result.stderr);
+    assert.equal(fs.readFileSync(path.join(f.directory,'.git/info/sparse-checkout'),'utf8'),patterns+'\n');
+  } finally {fs.rmSync(f.directory,{recursive:true,force:true});}
 });
 
 test('large prepared list reaches real Git as exact stdin bytes; hostile path text remains data',()=>{

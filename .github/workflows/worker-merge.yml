@@ -65,6 +65,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           MERGE_PHASE: prepare
+          CHECKOUT_PATTERNS_FORMAT: wrapped-base64
         run: node scripts/run-worker-merge.mjs
   geography:
     needs: prepare

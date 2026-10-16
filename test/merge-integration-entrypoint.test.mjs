@@ -166,7 +166,7 @@ test('actual final entry point cleans only its owned ref and retains successful 
   }
 });
 
-for(const notification of ['denied','transport']) test('actual owned prepare retains its candidate and outputs when notification is '+notification,()=>{
+for(const wrapped of [false,true]) for(const notification of ['denied','transport']) test(`actual owned prepare retains ${wrapped?'wrapped':'legacy'} outputs when notification is ${notification}`,()=>{
   const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-prepare-notify-cleanup-'));
   const sha=c=>c.repeat(40),head=sha('a'),base=sha('b'),candidate=sha('c'),owned=sha('e');
   const packageRaw=Buffer.from(JSON.stringify({version:1,inputs:['.github/package-inputs.json'],optional_inputs:[],verification_paths:[],generated_outputs:[]}));
@@ -206,7 +206,7 @@ for(const notification of ['denied','transport']) test('actual owned prepare ret
     };`);
   try {
     const result=spawnSync(process.execPath,['--import',path.join(directory,'mock.mjs'),path.join(root,'scripts/run-worker-merge.mjs')],{
-      cwd:directory,encoding:'utf8',env:{...process.env,GITHUB_ACTIONS:'false',GH_TOKEN:'synthetic-token',GITHUB_REPOSITORY:'owner/repo',GITHUB_REF:'refs/heads/main',GITHUB_RUN_ID:'1234',
+      cwd:directory,encoding:'utf8',env:{...process.env,GITHUB_ACTIONS:'false',GH_TOKEN:'synthetic-token',GITHUB_REPOSITORY:'owner/repo',GITHUB_REF:'refs/heads/main',GITHUB_RUN_ID:'1234',CHECKOUT_PATTERNS_FORMAT:wrapped?'wrapped-base64':'',
         GITHUB_EVENT_PATH:path.join(directory,'event.json'),GITHUB_OUTPUT:path.join(directory,'outputs'),GITHUB_STEP_SUMMARY:path.join(directory,'summary'),MERGE_PHASE:'prepare'}});
     const receipt=JSON.parse(fs.readFileSync(path.join(directory,'merge-result.json')));
     assert.equal(result.status,0,result.stderr);
@@ -217,9 +217,14 @@ for(const notification of ['denied','transport']) test('actual owned prepare ret
     const outputs=fs.readFileSync(path.join(directory,'outputs'),'utf8');
     assert.match(outputs,new RegExp('^candidate='+owned+'$','m'));assert.match(outputs,new RegExp('^base='+base+'$','m'));
     assert.match(outputs,/shards=\[0,1,2\]/);
-    const encoded=outputs.match(/^checkout_patterns_base64<<CHECKOUT_BASE64\n([A-Za-z0-9+/=\n]+)\nCHECKOUT_BASE64$/m)?.[1];assert(encoded);
-    assert(encoded.split('\n').every(line=>line.length<=76),'Encoded data uses short lines without limiting the complete payload');
+    const encoded=outputs.match(wrapped?/^checkout_patterns_base64<<CHECKOUT_BASE64\n([A-Za-z0-9+/=\n]+)\nCHECKOUT_BASE64$/m:/^checkout_patterns_base64=([A-Za-z0-9+/=]+)$/m)?.[1];assert(encoded);
+    if(wrapped)assert(encoded.split('\n').every(line=>line.length<=76),'Encoded data uses short lines without limiting the complete payload');
+    else assert(!encoded.includes('\n'),'Old queued workflow keeps its single-quoted decoder input');
     const patterns=Buffer.from(encoded.replaceAll('\n',''),'base64').toString();
+    if(!wrapped){
+      const legacy=spawnSync(process.env.PYTHON??'python3',['-c',"import base64,sys; sys.stdout.buffer.write(base64.b64decode('"+encoded+"', validate=True))"],{encoding:'utf8'});
+      assert.equal(legacy.status,0,legacy.stderr);assert.equal(legacy.stdout,patterns,'The queued legacy single-quoted decoder consumes the actual new producer output');
+    }
     assert.match(patterns,/^\/\*\n/);
     assert.match(patterns,/!\/coordination\/engineering\/reference-source-custody-20261007\//);
     assert.match(patterns,/!\/research\/geography\/\*/);
