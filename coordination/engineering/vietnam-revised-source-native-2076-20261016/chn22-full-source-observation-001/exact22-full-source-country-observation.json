@@ -1,0 +1,589 @@
+{
+  "kind": "bounded-exact22-whole-unsimplified-same-release-CHN-and-country-native-observation-v1",
+  "actual_execution_tree": "850e9ff04850750200f54b855779f47b6e70ff68",
+  "method": "native-linear-evenodd-first-owner-v1",
+  "source_upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+  "source_encoded": {
+    "bytes": 2327263,
+    "sha256": "7cce3af6072c38c3d1bcfced5ea30c9f8a9928fb1692d6eab893f81001a2c0ab"
+  },
+  "source_decoded": {
+    "bytes": 7618692,
+    "sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34"
+  },
+  "pins": [
+    {
+      "git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53",
+      "bytes": 1851757,
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147"
+    },
+    {
+      "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+      "bytes": 4719659,
+      "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075"
+    }
+  ],
+  "source_execution": {
+    "whole_feature_count": 2391,
+    "only_requested_rows": [
+      113647,
+      114010,
+      114061,
+      114062,
+      114064,
+      114066,
+      114069,
+      114071,
+      114075,
+      114076,
+      114077,
+      114082,
+      114134,
+      114202,
+      114203,
+      114209,
+      114237,
+      114383,
+      114581,
+      114637,
+      114668,
+      115004
+    ],
+    "requested_key_count": 22
+  },
+  "country_execution": {
+    "whole_feature_count": 258,
+    "only_requested_rows": [
+      113647,
+      114010,
+      114061,
+      114062,
+      114064,
+      114066,
+      114069,
+      114071,
+      114075,
+      114076,
+      114077,
+      114082,
+      114134,
+      114202,
+      114203,
+      114209,
+      114237,
+      114383,
+      114581,
+      114637,
+      114668,
+      115004
+    ],
+    "requested_key_count": 22
+  },
+  "records": [
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113647,
+        "x": 207879
+      },
+      "retained_source_features": [
+        65114,
+        65513
+      ],
+      "original_physical_class": "land",
+      "full_source_hits": [],
+      "full_source_ties": [],
+      "country_hits": [
+        {
+          "feature_ordinal": 9,
+          "ADM0_A3": "CHN",
+          "ADMIN": "China"
+        }
+      ],
+      "country_ties": [],
+      "unique_full_member": false
+    },
+    {
+      "original_key": {
+        "owner": 48773,
+        "y": 114010,
+        "x": 206937
+      },
+      "retained_source_features": [
+        15319,
+        65525
+      ],
+      "original_physical_class": "land",
+      "full_source_hits": [],
+      "full_source_ties": [],
+      "country_hits": [
+        {
+          "feature_ordinal": 9,
+          "ADM0_A3": "CHN",
+          "ADMIN": "China"
+        }
+      ],
+      "country_ties": [],
+      "unique_full_member": false
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114061,
+        "x": 205756
+      },
+      "retained_source_features": [
+        15319,
+        65530
+      ],
+      "original_physical_class": "land",
+      "full_source_hits": [],
+      "full_source_ties": [],
+      "country_hits": [
+        {
+          "feature_ordinal": 9,
+          "ADM0_A3": "CHN",
+          "ADMIN": "China"
+        }
+      ],
+      "country_ties": [],
+      "unique_full_member": false
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114062,
+        "x": 205757
+      },
+      "retained_source_features": [
+        15319,
+        65530
+      ],
+      "original_physical_class": "land",
+      "full_source_hits": [],
+      "full_source_ties": [],
+      "country_hits": [
+        {
+          "feature_ordinal": 9,
+          "ADM0_A3": "CHN",
+          "ADMIN": "China"
+        }
+      ],
+      "country_ties": [],
+      "unique_full_member": false
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114064,
+        "x": 205760
+      },
+      "retained_source_features": [
+        65530
+      ],
+      "original_physical_class": "land",
+      "full_source_hits": [],
+      "full_source_ties": [],
+      "country_hits": [
+        {
+          "feature_ordinal": 9,
+          "ADM0_A3": "CHN",
+          "ADMIN": "China"
+        }
+      ],
+      "country_ties": [],
+      "unique_full_member": false
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114066,
+        "x": 205762
+      },
+      "retained_source_features": [
+        65530
+      ],
+      "original_physical_class": "land",
+      "full_source_hits": [],
+      "full_source_ties": [],
+      "country_hits": [
+        {
+          "feature_ordinal": 9,
+          "ADM0_A3": "CHN",
+          "ADMIN": "China"
+        }
+      ],
+      "country_ties": [],
+      "unique_full_member": false
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114069,
+        "x": 205762
+      },
+      "retained_source_features": [
+        65530
+      ],
+      "original_physical_class": "land",
+      "full_source_hits": [],
+      "full_source_ties": [],
+      "country_hits": [
+        {
+          "feature_ordinal": 9,
+          "ADM0_A3": "CHN",
+          "ADMIN": "China"
+        }
+      ],
+      "country_ties": [],
+      "unique_full_member": false
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114071,
+        "x": 205763
+      },
+      "retained_source_features": [
+        65530
+      ],
+      "original_physical_class": "land",
+      "full_source_hits": [],
+      "full_source_ties": [],
+      "country_hits": [
+        {
+          "feature_ordinal": 9,
+          "ADM0_A3": "CHN",
+          "ADMIN": "China"
+        }
+      ],
+      "country_ties": [],
+      "unique_full_member": false
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114075,
+        "x": 205765
+      },
+      "retained_source_features": [
+        65530
+      ],
+      "original_physical_class": "land",
+      "full_source_hits": [],
+      "full_source_ties": [],
+      "country_hits": [
+        {
+          "feature_ordinal": 9,
+          "ADM0_A3": "CHN",
+          "ADMIN": "China"
+        }
+      ],
+      "country_ties": [],
+      "unique_full_member": false
+    },
+    {
+      "original_key": {
+        "owner": 48425,
+        "y": 114076,
+        "x": 206403
+      },
+      "retained_source_features": [
+        65127,
+        65589
+      ],
+      "original_physical_class": "land",
+      "full_source_hits": [],
+      "full_source_ties": [],
+      "country_hits": [
+        {
+          "feature_ordinal": 9,
+          "ADM0_A3": "CHN",
+          "ADMIN": "China"
+        }
+      ],
+      "country_ties": [],
+      "unique_full_member": false
+    },
+    {
+      "original_key": {
+        "owner": 48425,
+        "y": 114077,
+        "x": 206403
+      },
+      "retained_source_features": [
+        65589
+      ],
+      "original_physical_class": "land",
+      "full_source_hits": [],
+      "full_source_ties": [],
+      "country_hits": [
+        {
+          "feature_ordinal": 9,
+          "ADM0_A3": "CHN",
+          "ADMIN": "China"
+        }
+      ],
+      "country_ties": [],
+      "unique_full_member": false
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114082,
+        "x": 205773
+      },
+      "retained_source_features": [
+        65530
+      ],
+      "original_physical_class": "land",
+      "full_source_hits": [],
+      "full_source_ties": [],
+      "country_hits": [
+        {
+          "feature_ordinal": 9,
+          "ADM0_A3": "CHN",
+          "ADMIN": "China"
+        }
+      ],
+      "country_ties": [],
+      "unique_full_member": false
+    },
+    {
+      "original_key": {
+        "owner": 48156,
+        "y": 114134,
+        "x": 206671
+      },
+      "retained_source_features": [
+        65199
+      ],
+      "original_physical_class": "land",
+      "full_source_hits": [],
+      "full_source_ties": [],
+      "country_hits": [
+        {
+          "feature_ordinal": 9,
+          "ADM0_A3": "CHN",
+          "ADMIN": "China"
+        }
+      ],
+      "country_ties": [],
+      "unique_full_member": false
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114202,
+        "x": 206001
+      },
+      "retained_source_features": [
+        65530
+      ],
+      "original_physical_class": "land",
+      "full_source_hits": [],
+      "full_source_ties": [],
+      "country_hits": [
+        {
+          "feature_ordinal": 9,
+          "ADM0_A3": "CHN",
+          "ADMIN": "China"
+        }
+      ],
+      "country_ties": [],
+      "unique_full_member": false
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114203,
+        "x": 206002
+      },
+      "retained_source_features": [
+        65530
+      ],
+      "original_physical_class": "land",
+      "full_source_hits": [],
+      "full_source_ties": [],
+      "country_hits": [
+        {
+          "feature_ordinal": 9,
+          "ADM0_A3": "CHN",
+          "ADMIN": "China"
+        }
+      ],
+      "country_ties": [],
+      "unique_full_member": false
+    },
+    {
+      "original_key": {
+        "owner": 48773,
+        "y": 114209,
+        "x": 206829
+      },
+      "retained_source_features": [
+        15319,
+        65525
+      ],
+      "original_physical_class": "land",
+      "full_source_hits": [],
+      "full_source_ties": [],
+      "country_hits": [
+        {
+          "feature_ordinal": 55,
+          "ADM0_A3": "VNM",
+          "ADMIN": "Vietnam"
+        }
+      ],
+      "country_ties": [],
+      "unique_full_member": false
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114237,
+        "x": 206018
+      },
+      "retained_source_features": [
+        65530
+      ],
+      "original_physical_class": "land",
+      "full_source_hits": [],
+      "full_source_ties": [],
+      "country_hits": [
+        {
+          "feature_ordinal": 9,
+          "ADM0_A3": "CHN",
+          "ADMIN": "China"
+        }
+      ],
+      "country_ties": [],
+      "unique_full_member": false
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114383,
+        "x": 208704
+      },
+      "retained_source_features": [
+        65129,
+        65782
+      ],
+      "original_physical_class": "land",
+      "full_source_hits": [],
+      "full_source_ties": [],
+      "country_hits": [
+        {
+          "feature_ordinal": 9,
+          "ADM0_A3": "CHN",
+          "ADMIN": "China"
+        }
+      ],
+      "country_ties": [],
+      "unique_full_member": false
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114581,
+        "x": 208794
+      },
+      "retained_source_features": [
+        65129,
+        65814
+      ],
+      "original_physical_class": "land",
+      "full_source_hits": [],
+      "full_source_ties": [],
+      "country_hits": [
+        {
+          "feature_ordinal": 9,
+          "ADM0_A3": "CHN",
+          "ADMIN": "China"
+        }
+      ],
+      "country_ties": [],
+      "unique_full_member": false
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114637,
+        "x": 208787
+      },
+      "retained_source_features": [
+        65129,
+        65814
+      ],
+      "original_physical_class": "land",
+      "full_source_hits": [],
+      "full_source_ties": [],
+      "country_hits": [
+        {
+          "feature_ordinal": 9,
+          "ADM0_A3": "CHN",
+          "ADMIN": "China"
+        }
+      ],
+      "country_ties": [],
+      "unique_full_member": false
+    },
+    {
+      "original_key": {
+        "owner": 48756,
+        "y": 114668,
+        "x": 208919
+      },
+      "retained_source_features": [
+        65129,
+        65248
+      ],
+      "original_physical_class": "land",
+      "full_source_hits": [],
+      "full_source_ties": [],
+      "country_hits": [
+        {
+          "feature_ordinal": 9,
+          "ADM0_A3": "CHN",
+          "ADMIN": "China"
+        }
+      ],
+      "country_ties": [],
+      "unique_full_member": false
+    },
+    {
+      "original_key": {
+        "owner": 48578,
+        "y": 115004,
+        "x": 209694
+      },
+      "retained_source_features": [
+        65521
+      ],
+      "original_physical_class": "land",
+      "full_source_hits": [],
+      "full_source_ties": [],
+      "country_hits": [
+        {
+          "feature_ordinal": 9,
+          "ADM0_A3": "CHN",
+          "ADMIN": "China"
+        }
+      ],
+      "country_ties": [],
+      "unique_full_member": false
+    }
+  ],
+  "unique_full_member_keys": 0,
+  "source_boundary_tie_keys": 0,
+  "country_boundary_tie_keys": 0,
+  "elapsed_seconds": 0.9171859469999999,
+  "rss_after": 304443392,
+  "limits": [
+    "Full detailed geoBoundaries source keeps literal same-build shapeIDs; frozen simplified-source negatives remain unchanged.",
+    "No source adoption, physical result, native authority, complete current competitor, owner-zero, conservation or accepted repair credit.",
+    "Only22 exact original requests and complete2391 fine/258 country families observed. No owner or source choice is inferred. No bank or physical replay."
+  ],
+  "accepted_credit": 0
+}

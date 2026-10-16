@@ -1,0 +1,5 @@
+# Retained full Chinese fine-source observation at exact22 originals
+
+This is one genuinely missing source-membership check, using the cumulative composer's existing same-build full2391-member body. No source download or source bank replay. Actual code850e9ff048,1.019073800s, sampled process-group305,549,312B under768MiB/120s. Zero full fine contacts/ties at all22 originals; all258 country references give21exclusiveCHN and1exclusiveVNM, zero ties. No source choice, owner assignment, physical/native qualification or repair credit follows.
+
+The one exclusiveVNM key is MuongKhuong48773/114209/206829. Its original fine member81297802B9711168823282 and NEVNM are positive; wholeofficialChina and coarseYunnan remain contrary. A bounded original-v1 display preference could be considered, but is not adopted here. The other21 retain no positive Chinese fine member in either frozen simplified or same-build detailed variants. Unresolved170 assessment is refined accordingly; no case is silently cleared.
