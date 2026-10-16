@@ -697,29 +697,31 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
 
  // The executing accepted tree, not reader.version or a caller's review flag,
  // anchors the typed interpretation. Upstream public bodies retain their pins.
- const datedCentres=[];
- if(dated){
-  const pin=evidence.dated_land_support;pinCheck(pin);
-  const moduleRoot=fileURLToPath(new URL('../../../',import.meta.url));
+ const keys=(v,list)=>v&&typeof v==='object'&&!Array.isArray(v)&&Object.keys(v).sort().join(',')===list.split(',').sort().join(',');
+ const readAdopted=(pin,label)=>{
+  pinCheck(pin);const moduleRoot=fileURLToPath(new URL('../../../',import.meta.url));
   const currentVersion=execFileSync(reader.gitExecutable,['-c','core.hooksPath=/dev/null','-C',moduleRoot,'rev-parse','HEAD'],{encoding:'utf8'}).trim();
   const current=reader.descriptor(pin.path,currentVersion);
   demand(current.mode===pin.mode&&current.git_blob_oid===pin.git_blob_oid&&current.bytes===pin.bytes,
-   'Dated land support differs from executing accepted input');
-  const data=JSON.parse(read(pin));
-  const keys=(v,list)=>v&&typeof v==='object'&&!Array.isArray(v)&&Object.keys(v).sort().join(',')===list.split(',').sort().join(',');
+   label+' differs from executing accepted input');
+  return JSON.parse(read(pin));
+ };
+ const pointer=(body,name)=>{
+  demand(typeof name==='string'&&name.startsWith('/')&&!/~(?![01])/.test(name),'Invalid adopted evidence pointer');
+  let value=body;
+  for(const part of name.slice(1).split('/').map(p=>p.replace(/~1/g,'/').replace(/~0/g,'~'))){
+   demand(value&&typeof value==='object'&&Object.hasOwn(value,part),'Missing adopted evidence record');value=value[part];
+  }
+  return value;
+ };
+ const datedCentres=[];
+ if(dated){
+  const data=readAdopted(evidence.dated_land_support,'Dated land support');
   demand(keys(data,'version,kind,native_contract_sha256,provenance,records')&&data.version===1
    &&data.kind==='adopted-dated-native-centre-land-support-v1'
    &&data.native_contract_sha256===valueSha(evidence.native_contract)
    &&Array.isArray(data.provenance)&&data.provenance.length>0
    &&Array.isArray(data.records)&&data.records.length>0,'Incomplete adopted dated land support');
-  const pointer=(body,name)=>{
-   demand(typeof name==='string'&&name.startsWith('/')&&!/~(?![01])/.test(name),'Invalid dated evidence pointer');
-   let value=body;
-   for(const part of name.slice(1).split('/').map(p=>p.replace(/~1/g,'/').replace(/~0/g,'~'))){
-    demand(value&&typeof value==='object'&&Object.hasOwn(value,part),'Missing dated evidence record');value=value[part];
-   }
-   return value;
-  };
   const relative=(base,name,levels=1)=>{
    demand(typeof name==='string'&&!name.includes('\\')&&name.split('/').every(p=>p&&p!=='.'&&p!=='..'),
     'Unsafe dated evidence relative path');
@@ -892,6 +894,86 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   demand(!prior||same(prior,rows),'Conflicting sibling native coverage class bindings');
   coverageRowsByOwner.set(target.pixelIndex,rows);
  }
+ // Optional adopted source applicability retains every original negative.
+ const readCompleteSource=(parts,record)=>{
+  demand(record&&Array.isArray(parts)&&parts.length===record.parts.length,
+   'Missing complete original source family');
+  const pieces=parts.map((pin,i)=>{
+   const expected=record.parts[i];demand(pin.path===expected.path&&pin.sha256===expected.sha256
+    &&pin.bytes===expected.bytes&&pin.decoded_bytes===expected.uncompressed_bytes
+    &&pin.decoded_sha256===expected.uncompressed_sha256,'Source family part differs from retained catalogue');return read(pin);
+  });
+  const raw=Buffer.concat(pieces);demand(raw.length===record.original_bytes&&sha(raw)===record.original_sha256,
+   'Whole original consumed source product differs');
+  const product=JSON.parse(raw);demand(product.features?.length===record.feature_count,'Incomplete original source feature roster');
+  return product;
+ };
+
+ // Source semantics enter through the same executing-tree pin as dated land;
+ // the native operator receives only exact member/operand/centre identities.
+ const territorialApplicability=[],territorialContextHits=[],territorialOperands=new Map();
+ if(evidence.territorial_applicability!==undefined){
+  const data=readAdopted(evidence.territorial_applicability,'Territorial applicability');
+  demand(keys(data,'version,kind,provenance,records')&&data.version===1
+   &&data.kind==='adopted-native-territorial-applicability-v1'
+   &&Array.isArray(data.provenance)&&data.provenance.length>0
+   &&Array.isArray(data.records)&&data.records.length>0,'Incomplete adopted territorial applicability');
+  const provenance=new Map(),loaded=new Map(),used=new Set(),seen=new Set();
+  for(const item of data.provenance){
+   const multipart=item.role==='original-source'&&keys(item,'id,role,parts');
+   demand((multipart||keys(item,'id,role,pin'))&&typeof item.id==='string'&&item.id&&!provenance.has(item.id)
+    &&['adoption','scope','original-source'].includes(item.role),'Unknown or duplicate territorial provenance');
+   const pins=multipart?item.parts:[item.pin];
+   demand(Array.isArray(pins)&&pins.length>0&&new Set(pins.map(valueSha)).size===pins.length,
+    'Duplicate or missing territorial source parts');for(const pin of pins)pinCheck(pin);
+   const identity=valueSha(multipart?{parts:pins}:item.pin);
+   if(!loaded.has(identity)){
+    if(multipart){
+     const matches=catalogue.products.filter(product=>product.parts.length===pins.length
+      &&product.parts.every((part,i)=>part.path===pins[i].path&&part.sha256===pins[i].sha256));
+     demand(matches.length===1,'Missing unique complete territorial source family');
+     loaded.set(identity,readCompleteSource(pins,matches[0]));
+    }else loaded.set(identity,JSON.parse(read(item.pin)));
+   }
+   provenance.set(item.id,{...item,body:loaded.get(identity)});
+  }
+  const reference=(ref,role,fields='id,pointer')=>{
+   demand(keys(ref,fields),'Malformed territorial evidence reference');const item=provenance.get(ref.id);
+   demand(item?.role===role,'Missing territorial evidence role: '+role);used.add(item.id);
+   return {item,value:pointer(item.body,ref.pointer)};
+  };
+  for(const record of data.records){
+   demand(keys(record,'role,source_id,target_id,pixelIndex,y,x,negative_ordinal,geometry_sha256,original_source,adoption,scope')
+    &&record.role==='contextual'&&typeof record.source_id==='string'&&typeof record.target_id==='string'
+    &&Number.isSafeInteger(record.pixelIndex)&&record.pixelIndex>0
+    &&Number.isSafeInteger(record.y)&&record.y>=0&&record.y<262166
+    &&Number.isSafeInteger(record.x)&&record.x>=0&&record.x<262166
+    &&Number.isSafeInteger(record.negative_ordinal)&&record.negative_ordinal>=0&&hash(record.geometry_sha256),
+   'Invalid territorial applicability record');
+   const target=targets.get(record.source_id),negative=target?.territorial_exclusions?.[record.negative_ordinal];
+   demand(target&&target.pixelIndex===record.pixelIndex&&(target.target_id??target.id)===record.target_id
+    &&negative&&valueSha(negative)===record.geometry_sha256,'Territorial target or original negative differs');
+   const original=reference(record.original_source,'original-source');
+   demand(valueSha(original.value)===record.geometry_sha256,'Territorial complete source geometry differs');
+   const operand_sha256=valueSha({...('parts'in original.item?{parts:original.item.parts}:{pin:original.item.pin}),pointer:record.original_source.pointer});
+   const operandKey=JSON.stringify([record.source_id,record.negative_ordinal]);
+   demand(!territorialOperands.has(operandKey)||territorialOperands.get(operandKey)===operand_sha256,
+    'Original territorial operand has conflicting provenance');territorialOperands.set(operandKey,operand_sha256);
+   const adoption=reference(record.adoption,'adoption');
+   demand(typeof adoption.value==='string'&&adoption.value.trim(),'Missing explicit territorial applicability decision');
+   const scope=reference(record.scope,'scope','id,pointer,owner_pointer');
+   demand(scope.value?.y===record.y&&scope.value.x===record.x
+    &&pointer(scope.value,record.scope.owner_pointer)===record.pixelIndex,
+   'Territorial decision scope differs from exact native key');
+   demand((rowsByOwner.get(record.pixelIndex)??[]).some(row=>row.y===record.y
+    &&row.runs.some(run=>run[0]<=record.x&&record.x<run[1])),
+   'Territorial applicability is outside the requested native cells');
+   const identity=JSON.stringify([record.source_id,record.target_id,record.pixelIndex,record.y,record.x,record.negative_ordinal]);
+   demand(!seen.has(identity),'Duplicate territorial applicability record');seen.add(identity);
+   territorialApplicability.push({...record,operand_sha256,decision_sha256:valueSha({pin:adoption.item.pin,pointer:record.adoption.pointer})});
+  }
+  demand(used.size===provenance.size,'Unused territorial evidence provenance');
+ }
  const diagnosticRows=new Map(); let firstFailure=null;
  const recordDiagnostic=(y,start,end,owner,reason)=>{
   const runs=diagnosticRows.get(y)??[],prior=runs.at(-1);
@@ -903,14 +985,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   demand(typeof family.source_id==='string'&&!families.has(family.source_id),'Duplicate source family');families.add(family.source_id);
   const record=catalogue.products.find(product=>product.key===family.source_id);
   demand(record&&family.parts.length===record.parts.length,'Missing complete original source family');
-  const pieces=family.parts.map((pin,i)=>{
-   const expected=record.parts[i];demand(pin.path===expected.path&&pin.sha256===expected.sha256
-    &&pin.bytes===expected.bytes&&pin.decoded_bytes===expected.uncompressed_bytes
-    &&pin.decoded_sha256===expected.uncompressed_sha256,'Source family part differs from retained catalogue');return read(pin);
-  });
-  const raw=Buffer.concat(pieces);demand(raw.length===record.original_bytes&&sha(raw)===record.original_sha256,
-   'Whole original consumed source product differs');
-  const product=JSON.parse(raw);demand(product.features?.length===record.feature_count,'Incomplete original source feature roster');
+  const product=readCompleteSource(family.parts,record);
   const originals=new Map();
   for(const feature of product.features){
    const sourceId=feature.properties?.shapeID;
@@ -966,10 +1041,13 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
     const owner=reconcile(id,originals);
     return {id,target_id:owner.id,pixelIndex:owner.pixelIndex,geometry:feature.geometry};});
   const coverageFeatures=selected.filter(t=>t.coverage_geometry.coordinates.length).map(target=>({id:target.target_id??target.id,source_id:target.id,pixelIndex:target.pixelIndex,geometry:target.coverage_geometry}));
-  let exclusions=selected.flatMap(target=>(target.territorial_exclusions??[]).map(geometry=>({id:target.target_id??target.id,pixelIndex:target.pixelIndex,geometry})));
+  let exclusions=selected.flatMap(target=>(target.territorial_exclusions??[]).map((geometry,ordinal)=>({
+   id:target.target_id??target.id,pixelIndex:target.pixelIndex,geometry,
+   ...(evidence.territorial_applicability===undefined?{}:{source_id:target.id,negative_ordinal:ordinal,geometry_sha256:valueSha(geometry),
+    operand_sha256:territorialOperands.get(JSON.stringify([target.id,ordinal]))})})));
   // Qualification requires coverage; discard only whole exclusions proven
   // disjoint from every complete coverage part. Keep diagnostic reasons intact.
-  if(!diagnostic)exclusions=exclusions.filter(feature=>coordinateBounds(feature.geometry)
+  if(!diagnostic&&evidence.territorial_applicability===undefined)exclusions=exclusions.filter(feature=>coordinateBounds(feature.geometry)
    .some(part=>bounds.some(box=>intersects(part,box))));
   const blocks=new Map();
   for(const row of proposed.rows)if(row.runs.some(run=>selectedOwners.has(run[2]))){
@@ -1025,12 +1103,26 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
    // Empty rows here derive the permitted source/coverage domain, not a claim
    // about actual ownership. Actual current owner zero is enforced separately
    // by selectedAdditiveRows and the emitted native patch application.
+   const applicable=territorialApplicability.filter(record=>selected.some(t=>t.id===record.source_id)
+    &&record.y>=rowStart&&record.y<rowEnd).map(record=>{
+     const exclusion_index=exclusions.findIndex(feature=>feature.source_id===record.source_id
+      &&feature.negative_ordinal===record.negative_ordinal);
+     demand(exclusion_index>=0,'Missing original territorial operand');
+     return {source_id:record.source_id,pixelIndex:record.pixelIndex,y:record.y,x:record.x,exclusion_index,
+      exclusion_geometry_sha256:record.geometry_sha256,operand_sha256:record.operand_sha256,decision_sha256:record.decision_sha256};
+    });
    const allowed=deriveSourceTargetNativeDelta({targets:[...resolvedTargets.values()].filter(target=>target.source_family===family.source_id).map(({id,pixelIndex})=>({id,pixelIndex})),
     sourceFeatures,coverageFeatures,territorialExclusions:exclusions,size:262166,latitudes,rowStart,rowEnd,
+    ...(applicable.length?{territorialApplicability:applicable}:{}),
     ...(dated?{coverageCentres:blockCentres}:{}),
     ...(coverageFeatureGroups.length?{coverageFeatureGroups,...(dated?{coverageCentreGroups}:{})}:{}),
     ...(diagnostic?{diagnosticRows:rows.map(row=>({y:row.y,runs:row.runs.filter(r=>selectedOwners.has(r[2]))})).filter(row=>row.runs.length)}:{}),
     ownerRows:Array.from({length:rowEnd-rowStart},(_,i)=>({y:rowStart+i,complete_owner_intervals:[]}))});
+   for(const hit of allowed.territorial_contacts??[])territorialContextHits.push({...hit,
+    target_id:exclusions[hit.exclusion_index].id,negative_ordinal:exclusions[hit.exclusion_index].negative_ordinal,
+    original_source:territorialApplicability.find(record=>record.source_id===hit.source_id
+     &&record.pixelIndex===hit.pixelIndex&&record.y===hit.y&&record.x===hit.x
+     &&record.operand_sha256===hit.operand_sha256)?.original_source});
    const allowedRows=new Map(allowed.rows.map(row=>[row.y,row.runs]));
    // The native view reuses its existing complete source scan and decision;
    // owner equality alone never lets an active sibling lend its dated support.
@@ -1095,6 +1187,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
    requested_cells:requested,supported_cells:supportedCells,held_cells:heldCells,
    original_pins:{source_evidence:binding.source_evidence,native_patch:binding.native_patch},
    ...(dated?{physical_context_hits:physicalContextHits}:{}),
+   ...(evidence.territorial_applicability===undefined?{}:{territorial_contacts:territorialContextHits}),
    rule_sha256:valueSha(preimage),native_contract:evidence.native_contract,
    limitations:['Native diagnostic screening only; no authority products, current-owner-zero, acceptance or whole-source clearance.',
     'All original source, physical, query, witness and territorial limits remain retained.']};
@@ -1115,6 +1208,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   native_proof:{native_contract:evidence.native_contract,native_patches:[{base_reference:evidence.base_reference,rows:proposed.rows}]},
   original_pins:{source_evidence:binding.source_evidence,native_patch:binding.native_patch},
   ...(dated?{physical_context_hits:physicalContextHits}:{}),
+  ...(evidence.territorial_applicability===undefined?{}:{territorial_contacts:territorialContextHits}),
   limitations:['Physical interpretation and semantic reconciliation are retained reviewed source evidence; actual current owner-zero is checked by native consumers.',
    'Witness exclusion applies only to requested native centres. Original whole-source physical/hierarchy issues and historical source/resource limits remain retained; no whole-parent certification or acceptance is inferred.']};
 }
