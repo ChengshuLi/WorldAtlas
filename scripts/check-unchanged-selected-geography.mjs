@@ -10,16 +10,13 @@ import {ACCEPTED_CHECKPOINT_LOCATOR, ACCEPTED_CHECKPOINT_CODE, validateAcceptedC
 
 const PREFIX = 'coordination/engineering/selected-geography-effective-prevention-20261009/';
 const CHECKPOINTS = 'coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json';
-const FILE = 32 * 1024 * 1024, METADATA = 64 * 1024 * 1024, ENTRIES = 4096;
 const sha = body => createHash('sha256').update(body).digest('hex');
 const oid = value => typeof value === 'string' && /^[a-f0-9]{40}$/.test(value);
 const hash = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
 const safe = value => typeof value === 'string' && value && !value.includes('\\') && !value.includes('\0') && !path.posix.isAbsolute(value) && value.split('/').every(p => p && p !== '.' && p !== '..');
 const demand = (value, message) => { if (!value) throw Error(message); };
 const keys = (value, expected, role) => demand(value && typeof value === 'object' && !Array.isArray(value) && Object.keys(value).sort().join(',') === expected.split(',').sort().join(','), 'unsupported-' + role);
-const array = (value, role, minimum = 1) => { demand(Array.isArray(value) && value.length >= minimum && value.length <= 512, 'unsupported-' + role); return value; };
-const canonical = value => Array.isArray(value) ? value.map(canonical) : value && typeof value === 'object' ? Object.fromEntries(Object.keys(value).sort().map(k => [k, canonical(value[k])])) : value;
-const same = (a, b) => JSON.stringify(canonical(a)) === JSON.stringify(canonical(b));
+const array = (value, role, minimum = 1) => { demand(Array.isArray(value) && value.length >= minimum, 'unsupported-' + role); return value; };
 const joined = async promises => {
   const rows = await Promise.allSettled(promises), failure = rows.find(row => row.status === 'rejected');
   if (failure) throw failure.reason;
@@ -57,44 +54,28 @@ export const REBIND_CODE = Object.freeze([
   'scripts/selected-reference-metadata.mjs', 'src/reference-metadata.js'
 ]);
 
-function createReader({repo, baseline, candidate, limits, acquisition}) {
+function createReader({repo, baseline, candidate, acquisition}) {
   const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith('GIT_')));
   Object.assign(env, {GIT_NO_LAZY_FETCH: '1', GIT_NO_REPLACE_OBJECTS: '1', GIT_CONFIG_NOSYSTEM: '1',
     GIT_CONFIG_GLOBAL: '/dev/null', GIT_TERMINAL_PROMPT: '0', GIT_OPTIONAL_LOCKS: '0'});
   let gitCalls = 0;
-  const runGit = (args, ignoreShallow = false) => {
+  const runGit = (args, maxBuffer = Infinity) => {
     gitCalls++;
     try { return execFileSync('git', ['--no-replace-objects', '-c', 'core.hooksPath=/dev/null', '-c', 'credential.helper=', '-C', repo, ...args],
-      {env: ignoreShallow ? {...env, GIT_SHALLOW_FILE: '/dev/null'} : env, maxBuffer: limits.member + 1024, timeout: 30000, stdio: ['ignore', 'pipe', 'pipe']}); }
+      {env, maxBuffer, timeout: 30000, stdio: ['ignore', 'pipe', 'pipe']}); }
     catch { throw Error('immutable-object-unavailable:' + args.slice(0, 4).join(':')); }
   };
   const git = (...args) => runGit(args);
-  function mergeBase() {
-    // Queue candidates authenticate their baseline as the literal first parent.
-    // That already establishes the merge base, even when a depth-one checkout
-    // omits the reviewed second parent and its unrelated ancestry.
-    const header = git('cat-file', 'commit', candidate).toString().split('\n\n', 1)[0];
-    if (header.split('\n').find(line => line.startsWith('parent ')) === 'parent ' + baseline) return Buffer.from(baseline + '\n');
-    // A shallow baseline is already a valid common ancestor of a fresh source
-    // branch. Do not traverse its intentionally absent parent in that case.
-    try { return git('merge-base', baseline, candidate); }
-    catch {
-      // Divergent historical heads may already supply the hidden parents. This
-      // read-only fallback succeeds only with the necessary objects present;
-      // no ancestry fetch or shallow-file mutation is authorized here.
-      return runGit(['merge-base', baseline, candidate], true);
-    }
-  }
   const descriptors = new Map(), metadata = new Map(), pending = new Map(), plan = new Map(), origins = new Map(), current = new Map();
-  let metadataBytes = 0, metadataReads = 0, plannedBytes = 0, cacheBytes = 0, cachePeakBytes = 0, cacheEvictions = 0;
+  let metadataBytes = 0, metadataReads = 0, plannedBytes = 0;
   let currentChanges;
   function changedCurrentPaths() {
     if (!currentChanges) {
       // This exact tree delta authenticates unchanged paths, including modes and
-      // absences. It is independent of the authored merge-base scope below.
+      // absences, without inspecting unrelated paths or historical ancestry.
       const names = git('diff-tree', '--no-commit-id', '--name-only', '-r', '-z', '--no-renames', '--no-ext-diff', '--no-textconv', '--ignore-submodules=none', baseline, candidate)
         .toString().split('\0').filter(Boolean);
-      demand(names.length <= limits.entries && names.every(safe), 'identity-entry-limit');
+      demand(names.every(safe), 'invalid-changed-path-inventory');
       const ancestors = new Set();
       for (const name of names) {
         const parts = name.split('/');
@@ -113,7 +94,6 @@ function createReader({repo, baseline, candidate, limits, acquisition}) {
     demand(oid(commit) && safe(name), 'unsafe-immutable-locator');
     const key = commit + ':' + name;
     if (!descriptors.has(key)) {
-      demand(descriptors.size < limits.entries, 'identity-entry-limit');
       if (commit === candidate && descriptors.has(baseline + ':' + name) && unchangedCurrentPath(name)) {
         const before = descriptors.get(baseline + ':' + name);
         descriptors.set(key, before ? {...before, commit: candidate} : null);
@@ -139,21 +119,18 @@ function createReader({repo, baseline, candidate, limits, acquisition}) {
   }
   async function body(pin, expected) {
     // Each role still authenticates its own origin/path/mode and expected hash.
-    // Only the immutable raw body is shared by OID. Keep lifetime I/O separate
-    // from live retention: accepted routing JSON may contain large inline leaves.
+    // Only the immutable raw body is shared by OID within this invocation.
     const key = pin.git_blob_oid;
     function admit(size) {
-      demand(Number.isSafeInteger(size) && size > 0 && size <= limits.member && size <= limits.metadata, 'metadata-byte-limit');
+      demand(Number.isSafeInteger(size) && size > 0, 'invalid-metadata-length');
       demand(!plan.has(key) || plan.get(key) === size, 'metadata-pin-length');
       if (!plan.has(key)) {
-        demand(plan.size < limits.entries && Number.isSafeInteger(plannedBytes + size), 'identity-entry-limit');
+        demand(Number.isSafeInteger(plannedBytes + size), 'invalid-metadata-total');
         plan.set(key, size); plannedBytes += size;
       }
     }
     let raw = metadata.get(key);
-    if (raw) {
-      metadata.delete(key); metadata.set(key, raw);
-    } else {
+    if (!raw) {
       if (!pending.has(key)) pending.set(key, (async () => {
         // Existing parent-declared sizes admit pinned bodies before acquisition;
         // fixed roots without a size use the transport's exact tree-size admission.
@@ -165,17 +142,11 @@ function createReader({repo, baseline, candidate, limits, acquisition}) {
           size = Number(git('cat-file', '-s', pin.git_blob_oid));
         }
         admit(size);
-        while (cacheBytes + size > limits.metadata) {
-          const oldest = metadata.keys().next().value;
-          demand(oldest !== undefined, 'metadata-byte-limit');
-          cacheBytes -= metadata.get(oldest).length;
-          metadata.delete(oldest); cacheEvictions++;
-        }
-        const raw = git('cat-file', 'blob', pin.git_blob_oid);
+        const raw = runGit(['cat-file', 'blob', pin.git_blob_oid], size + 1);
         demand(raw.length === size, 'metadata-length-drift');
         demand(createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex') === pin.git_blob_oid, 'metadata-git-object-identity');
         metadataBytes += size; metadataReads++;
-        metadata.set(key, raw); cacheBytes += size; cachePeakBytes = Math.max(cachePeakBytes, cacheBytes);
+        metadata.set(key, raw);
         return raw;
       })());
       try { raw = await pending.get(key); }
@@ -195,7 +166,7 @@ function createReader({repo, baseline, candidate, limits, acquisition}) {
   }
   function pinned(value) {
     demand(value && oid(value.commit) && safe(value.path) && ['100644', '100755'].includes(value.mode)
-      && oid(value.git_blob_oid ?? value.blob) && Number.isSafeInteger(value.bytes) && value.bytes > 0 && value.bytes <= limits.member && hash(value.sha256), 'unsupported-historical-pin');
+      && oid(value.git_blob_oid ?? value.blob) && Number.isSafeInteger(value.bytes) && value.bytes > 0 && hash(value.sha256), 'unsupported-historical-pin');
     // Compare candidate-visible aliases, including absence. An unavailable
     // original can use the retained current copy only at its exact pinned OID.
     // Never acquire an old producer graph to prove an unchanged output.
@@ -207,12 +178,12 @@ function createReader({repo, baseline, candidate, limits, acquisition}) {
   const jsonAt = async (pin, expected) => JSON.parse(await body(pin, expected));
   const currentJson = (name, expected) => jsonAt(equalCurrent(name), expected);
   function currentPin(value) {
-    demand(value && safe(value.path) && Number.isSafeInteger(value.bytes) && value.bytes > 0 && value.bytes <= limits.member && hash(value.sha256), 'unsupported-current-pin');
+    demand(value && safe(value.path) && Number.isSafeInteger(value.bytes) && value.bytes > 0 && hash(value.sha256), 'unsupported-current-pin');
     const p = equalCurrent(value.path);
     demand(value.mode === undefined || value.mode === p.mode, 'current-pin-mode');
     return p;
   }
-  return {git, mergeBase, descriptor, equalCurrent, currentJson, currentPin, pinned, jsonAt, originExists,
+  return {git, descriptor, equalCurrent, currentJson, currentPin, pinned, jsonAt, originExists,
     summary() {
       const rows = [...descriptors.values()].filter(Boolean).sort((a, b) => (a.commit + ':' + a.path).localeCompare(b.commit + ':' + b.path));
       const alternatives = [...current.values()].sort((a, b) => a.path.localeCompare(b.path));
@@ -220,42 +191,13 @@ function createReader({repo, baseline, candidate, limits, acquisition}) {
         identity_sha256: sha(Buffer.from(JSON.stringify({rows, alternatives}))),
         git_calls: gitCalls, metadata_bytes_read: metadataBytes, metadata_bodies_read: metadataReads,
         metadata_unique_bodies: plan.size, metadata_planned_bytes: plannedBytes,
-        metadata_cache_bytes: cacheBytes, metadata_cache_peak_bytes: cachePeakBytes, metadata_cache_evictions: cacheEvictions,
         historical_commit_availability: [...origins].sort(([a], [b]) => a.localeCompare(b))};
     }};
 }
 
-async function collect(reader, {baseline, candidate, metadataPaths}) {
-  // This is an eligibility bound, not input equivalence. Compare the authored
-  // diff from its real merge base; all consumed identities below still compare
-  // the exact supplied baseline and candidate, including baseline-only changes.
-  // Prefer Git's real shallow boundary; consult already-present hidden ancestry
-  // only if the normal query fails. Missing required history still declines.
-  const mergeBase = reader.mergeBase().toString().trim();
-  demand(oid(mergeBase), 'source-scope-merge-base-unavailable');
-  const changed = reader.git('diff-tree', '--no-commit-id', '--name-only', '-r', '-z', '--no-renames', mergeBase, candidate).toString().split('\0').filter(Boolean);
-  if (metadataPaths !== undefined) {
-    // The trusted PR caller separately binds the issue-owned receiving packet,
-    // complete tree delta and original successful report. This option only
-    // widens scope admission: EVERY audited consumed route below still must
-    // have identical ordinary immutable bytes, including fallback absences.
-    demand(Array.isArray(metadataPaths) && metadataPaths.length > 0 && metadataPaths.length <= 2 &&
-      new Set(metadataPaths).size === metadataPaths.length && metadataPaths.every(name =>
-        /^coordination\/engineering\/[A-Za-z0-9_-]+\/(?:README\.md|evidence-quality\.json)$/.test(name)) &&
-      new Set(metadataPaths.map(name => name.slice(0, name.lastIndexOf('/')))).size === 1 &&
-      mergeBase === baseline && same([...changed].sort(), [...metadataPaths].sort()), 'outside-receiving-metadata-scope');
-    for (const name of changed) {
-      const before = reader.descriptor(baseline, name), after = reader.descriptor(candidate, name);
-      demand(before.mode === '100644' && after.mode === '100644', 'nonordinary-receiving-metadata');
-    }
-  } else {
-    demand(changed.length > 0 && changed.length <= 512 && changed.every(safe), 'invalid-changed-path-inventory');
-    for (const name of changed) {
-      // Unrelated ordinary changes do not alter the consumed scientific roles.
-      reader.descriptor(mergeBase, name, true);
-      reader.descriptor(candidate, name, true);
-    }
-  }
+async function collect(reader) {
+  // Only actual selected inputs determine applicability. Unrelated authored
+  // changes and their ancestry are not scientific operands.
   // The accepted catalogue is authority data, separate from executing software.
   reader.equalCurrent(CHECKPOINTS);
   // Routing hints never authorize science, but any changed locator or retained
@@ -341,21 +283,20 @@ async function collect(reader, {baseline, candidate, metadataPaths}) {
   }
 }
 
-export async function inspectUnchangedSelectedGeography({repo, baseline, candidate, trusted = baseline, acquisition, metadataPaths, verifyExecutingCheckout = false, limits = {member: FILE, metadata: METADATA, entries: ENTRIES}}) {
+export async function inspectUnchangedSelectedGeography({repo, baseline, candidate, trusted = baseline, acquisition, verifyExecutingCheckout = false}) {
   const report = {version: 1, kind: 'trusted-unchanged-selected-geography-v1', baseline_commit: baseline,
     candidate_commit: candidate, trusted_reader_policy_commit: trusted, candidate_code_executed: false,
     science_reexecuted: false, source_approval: false, published: false};
   try {
     demand(oid(baseline) && oid(candidate) && oid(trusted), 'require-immutable-commits');
     demand(baseline !== candidate, 'baseline-proof-requires-full-check');
-    acquisition ??= createRoutingMetadataAcquisition({repo, baseline, limits});
-    const reader = createReader({repo, baseline, candidate, limits, acquisition});
+    acquisition ??= createRoutingMetadataAcquisition({repo, baseline});
+    const reader = createReader({repo, baseline, candidate, acquisition});
     if (verifyExecutingCheckout) demand(reader.git('rev-parse', 'HEAD').toString().trim() === trusted, 'executing-checkout-mismatch');
-    await collect(reader, {baseline, candidate, metadataPaths});
+    await collect(reader);
     const result = {...report, status: 'unchanged-selected-inputs', ...reader.summary(), metadata_acquisition: acquisition.summary(),
       limits: ['Exact immutable selected-data applicability under one executing checkout only; no historical legality, fresh native, polygon, source-authority, publication or consumer validation.',
         'Changed selected data, unsupported selector/asset layouts and missing or mismatched bindings retain the original full checker.']};
-    demand(Buffer.byteLength(JSON.stringify(result)) <= 2 * 1024 * 1024, 'identity-report-limit');
     return result;
   } catch (error) {
     return {...report, status: 'full-check-required', ...(acquisition ? {metadata_acquisition: acquisition.summary()} : {}), reason: error instanceof SyntaxError ? 'invalid-routing-metadata' : String(error.message).slice(0, 512)};

@@ -173,27 +173,83 @@ test('software changes bind one actual executing checkout and do not certify its
   } finally { f.close(); }
 });
 
-test('receiving metadata remains exactly scoped and cannot exempt an actual selected output', async () => {
+test('a metadata-labelled file cannot exempt an actual selected output', async () => {
   const f = fixture(); try {
     const head = f.commit({...f.files, [RECEIVING]: body('updated metadata')}, f.baseline);
-    assert.equal((await f.inspect(head, f.baseline, {metadataPaths: [RECEIVING]})).status, 'unchanged-selected-inputs');
-    for (const metadataPaths of [[], [RECEIVING, RECEIVING], ['README.md'], [RECEIVING, P + 'evidence-quality.json']]) {
-      assert.equal((await f.inspect(head, f.baseline, {metadataPaths})).reason, 'outside-receiving-metadata-scope');
-    }
+    assert.equal((await f.inspect(head, f.baseline, {})).status, 'unchanged-selected-inputs');
     const bank = JSON.parse(f.files[P + 'source-bank.json']); bank.overrides[0] = f.pin(RECEIVING, f.original);
     const files = {...f.files, [P + 'source-bank.json']: body(bank)}, selection = JSON.parse(files['data/ownership-selection.json']);
     selection.selected_geography.bytes = files[P + 'source-bank.json'].length; selection.selected_geography.sha256 = sha(files[P + 'source-bank.json']);
     files['data/ownership-selection.json'] = body(selection);
     const baseline = f.commit(files, f.baseline), changed = f.commit({...files, [RECEIVING]: body('changed selected output')}, baseline);
-    assert.match((await f.inspect(changed, baseline, {metadataPaths: [RECEIVING]})).reason, /changed-current-input/);
+    assert.match((await f.inspect(changed, baseline, {})).reason, /changed-current-input/);
   } finally { f.close(); }
 });
 
-test('invalid/self comparisons and finite identity/metadata bounds retain the full route', async () => {
+test('invalid and self comparisons retain the full route', async () => {
   const f = fixture(); try {
     assert.match((await f.inspect(f.baseline)).reason, /baseline-proof/);
     assert.match((await f.inspect('not-a-commit')).reason, /require-immutable/);
-    assert.match((await f.inspect(f.candidate, f.baseline, {limits: {member: 1024 * 1024, metadata: 1, entries: 4096}})).reason, /metadata-byte-limit/);
-    assert.match((await f.inspect(f.candidate, f.baseline, {limits: {member: 1024 * 1024, metadata: 1024 * 1024, entries: 1}})).reason, /identity-entry-limit/);
+  } finally { f.close(); }
+});
+
+
+test('unrelated large authored diffs do not create selected-input descriptors', async () => {
+  const f = fixture(); try {
+    const prefix = 'unrelated/' + Array.from({length: 5}, () => 'p'.repeat(200)).join('/') + '/';
+    const additions = Object.fromEntries(Array.from({length: 2100}, (_, i) => [prefix + i + '.txt', body('ordinary change')]));
+    const head = f.commit({...f.files, ...additions}, f.baseline), result = await f.inspect(head);
+    console.log(JSON.stringify({fixture:'2100-unrelated-changed-paths',git_calls:result.git_calls,descriptors:result.immutable_descriptors?.length,proof_bytes:Buffer.byteLength(JSON.stringify(result))}));
+    assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+    assert(!result.immutable_descriptors.some(p => p.path.startsWith(prefix)));
+    assert(!result.current_and_absent_alternatives.some(p => p.path.startsWith(prefix)));
+    assert.equal(result.science_reexecuted, false); assert.deepEqual(f.calls, {acquire: 0, origins: 0});
+    const changed = f.commit({...f.files, ...additions, [P + 'patch.json']: body('changed selected output')}, f.baseline);
+    assert.match((await f.inspect(changed)).reason, /changed-current-input/);
+  } finally { f.close(); }
+});
+
+test('complete source arrays above the old count ceiling retain every member identity', async () => {
+  const f = fixture(); try {
+    const prefix = 'geography/' + Array.from({length: 5}, () => 'p'.repeat(200)).join('/') + '/';
+    const parts = Array.from({length: 2100}, (_, i) => prefix + i + '.json');
+    const files = {...f.files, 'data/world-index.json': body({parts}),
+      ...Object.fromEntries(parts.map(name => ['data/' + name, body('opaque exact source')]))};
+    const baseline = f.commit(files, f.baseline), head = f.commit({...files, 'unrelated.txt': body('new')}, baseline);
+    const result = await f.inspect(head, baseline);
+    assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+    for (const name of parts) assert(result.current_and_absent_alternatives.some(p => p.path === 'data/' + name));
+    assert(result.immutable_descriptors.length > 4096);
+    assert(Buffer.byteLength(JSON.stringify(result)) > 2 * 1024 * 1024);
+    const changed = f.commit({...files, 'unrelated.txt': body('new'), ['data/' + parts.at(-1)]: body('changed')}, baseline);
+    assert.match((await f.inspect(changed, baseline)).reason, /changed-current-input/);
+  } finally { f.close(); }
+});
+
+test('whole routing JSON above the old member and cache ceilings remains exactly bound', async () => {
+  const f = fixture(); try {
+    const name = P + 'source-bank.json', bank = {...JSON.parse(f.files[name]), note: 'x'.repeat(65 * 1024 * 1024)};
+    const files = {...f.files, [name]: body(bank)}, selection = JSON.parse(files['data/ownership-selection.json']);
+    selection.selected_geography.bytes = files[name].length; selection.selected_geography.sha256 = sha(files[name]);
+    files['data/ownership-selection.json'] = body(selection);
+    const baseline = f.commit(files, f.baseline), head = f.commit({...files, 'unrelated.txt': body('new')}, baseline);
+    const result = await f.inspect(head, baseline);
+    assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+    assert(result.metadata_bytes_read >= files[name].length); assert.equal(result.science_reexecuted, false);
+    selection.selected_geography.sha256 = 'f'.repeat(64); files['data/ownership-selection.json'] = body(selection);
+    const wrong = f.commit(files, baseline), changed = f.commit({...files, 'unrelated.txt': body('new')}, wrong);
+    assert.match((await f.inspect(changed, wrong)).reason, /metadata-pin-hash/);
+  } finally { f.close(); }
+});
+
+
+test('actual selected-input equality does not require shared authored ancestry or a nonempty diff', async () => {
+  const f = fixture(); try {
+    const orphan = f.commit(f.files), result = await f.inspect(orphan);
+    assert.notEqual(orphan, f.baseline);
+    assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+    assert.equal(result.science_reexecuted, false);
+    const changed = f.commit({...f.files, [P + 'patch.json']: body('changed selected output')});
+    assert.match((await f.inspect(changed)).reason, /changed-current-input/);
   } finally { f.close(); }
 });
