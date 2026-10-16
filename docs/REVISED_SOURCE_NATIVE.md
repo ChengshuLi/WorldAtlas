@@ -58,3 +58,14 @@ zero canonical interior contacts or native ties at those365 keys. Its genuine
 5.015-second execution and distinct compact delta review are retained under
 `coordination/engineering/vietnam-revised-source-native-2076-20261016/`.
 These source/comparison results alone supply no selected/native completion credit.
+
+The actual bounded stock constructor at `a02676b3` qualified exactly348 cells
+across12 components/214 literal rows in6.217 seconds, with a sampled process-group
+peak of208,277,504 bytes under an enforced768 MiB/120-second admission. Literal
+outputs, admission, execution log and exact key join are retained in
+`native348-actual-execution-002/`. The initial destination-namespace refusal is
+retained separately; it created no authority output. Subsequent launcher checks
+refuse symlink ancestors and mismatched executing-tree HEAD before invocation;
+seven admission-only controls verify those guards without repeating science.
+The genuine constructor receipt keeps its actual earlier code identity. Current
+owner-zero, predecessor conservation and selected acceptance are separate gates.

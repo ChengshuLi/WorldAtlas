@@ -19,14 +19,23 @@ def sha(body):
     return hashlib.sha256(body).hexdigest()
 
 
-def main(code_commit, config_commit, config_path, destination):
-    assert all(re.fullmatch('[a-f0-9]{40}', c) for c in [code_commit, config_commit])
-    assert re.fullmatch(r'[a-zA-Z0-9_./-]+', config_path) and '..' not in config_path.split('/')
+def admit_destination(destination):
     dest = pathlib.Path(destination)
     assert destination.startswith('.cache/delivery-handoff/') and '..' not in dest.parts and not os.path.lexists(dest)
     for ancestor in dest.parents:
-        if ancestor.exists():
+        if os.path.lexists(ancestor):
             assert ancestor.is_dir() and not ancestor.is_symlink() and ancestor.resolve() == ancestor.absolute()
+    return dest
+
+
+def require_current_head(git, code_commit):
+    assert git('rev-parse', 'HEAD').decode().strip() == code_commit, 'Executing adoption tree must match captured code commit'
+
+
+def main(code_commit, config_commit, config_path, destination):
+    assert all(re.fullmatch('[a-f0-9]{40}', c) for c in [code_commit, config_commit])
+    assert re.fullmatch(r'[a-zA-Z0-9_./-]+', config_path) and '..' not in config_path.split('/')
+    dest = admit_destination(destination)
     env = dict(os.environ, GIT_NO_LAZY_FETCH='1', GIT_NO_REPLACE_OBJECTS='1', GIT_TERMINAL_PROMPT='0')
     env.pop('NODE_PATH', None)
     env.pop('NODE_OPTIONS', None)
@@ -42,6 +51,7 @@ def main(code_commit, config_commit, config_path, destination):
         assert len(raw) == int(match[2]) and hashlib.sha1(b'blob ' + str(len(raw)).encode() + b'\0' + raw).hexdigest() == match[1].decode()
         return raw, dict(commit=commit, path=name, mode='100644', git_blob_oid=match[1].decode(), bytes=len(raw), sha256=sha(raw))
 
+    require_current_head(git, code_commit)
     launcher, launcher_pin = body(code_commit, PREFIX + 'run-bounded-native348.py')
     assert pathlib.Path(__file__).read_bytes() == launcher
     modules = {}
@@ -89,6 +99,7 @@ def main(code_commit, config_commit, config_path, destination):
     admission_path = dest / 'admission.json'
     with admission_path.open('x') as output:
         output.write(json.dumps(admission, indent=2) + '\n')
+    require_current_head(git, code_commit)
     start = time.monotonic()
     peak = 0
     reason = None
@@ -123,15 +134,18 @@ def main(code_commit, config_commit, config_path, destination):
         if process is not None and process.poll() is None:
             os.killpg(process.pid, signal.SIGKILL)
             process.wait()
+    current_head_after = git('rev-parse', 'HEAD').decode().strip()
     receipt = dict(kind='bounded-captured-stock-native348-actual-execution-v1', exit_code=code,
                    elapsed_seconds=time.monotonic() - start, termination_reason=reason,
                    enforced_process_group_rss_limit_bytes=LIMIT, observed_sampled_process_group_peak_rss_bytes=peak,
                    enforced_wall_deadline_seconds=DEADLINE, admission_sha256=sha(admission_path.read_bytes()),
+                   executing_tree_head_after=current_head_after,
                    current_owner_zero=False, predecessor_conservation=False, accepted_credit=0)
     with (dest / 'execution.json').open('x') as output:
         output.write(json.dumps(receipt, indent=2) + '\n')
     print(json.dumps(receipt))
     print((dest / 'execution.log').read_text())
+    assert current_head_after == code_commit, 'Executing adoption tree changed during captured invocation'
     assert code == 0 and reason is None, 'No successful native qualification execution'
 
 
