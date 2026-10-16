@@ -111,7 +111,7 @@ export function validatePremergeManifest(manifest, {readFile, files, manifestPat
   for (const output of manifest.outputs.filter(file => file.role === 'generated-table')) {
     const table = tables.find(table => table.path === output.path);
     need(table && Array.isArray(table.rows) && table.rows.length, 'Generated table needs ledger-bound rows');
-    const lines = readFile(output.path, 'candidate').toString('utf8').split('\n');
+    const lines = readFile(output.path, 'candidate', output).toString('utf8').split('\n');
     for (const row of table.rows) {
       const metric = manifest.metrics.find(metric => metric.id === row.metric_id);
       need(metric && Number.isSafeInteger(row.line) && row.line > 0 && typeof row.template === 'string' && row.template.includes('{value}') &&
@@ -139,7 +139,8 @@ export function validatePremergeManifest(manifest, {readFile, files, manifestPat
       ['positive-control', 'negative-control', 'reproducibility'].includes(control.kind) &&
       control.outcome === 'passed' && outputs.has(control.evidence_path), 'Invalid declared control');
     controlKeys.add(key);
-    const evidence = JSON.parse(readFile(control.evidence_path, 'candidate'));
+    const descriptor = manifest.outputs.find(file => file.path === control.evidence_path);
+    const evidence = JSON.parse(readFile(control.evidence_path, 'candidate', descriptor));
     need(evidence.method_id === control.method_id && evidence.kind === control.kind && evidence.outcome === 'passed', 'Control bytes do not match receipt');
     if (control.kind === 'reproducibility') need(evidence.run_one_sha256 === evidence.run_two_sha256 && /^[a-f0-9]{64}$/.test(evidence.run_one_sha256), 'Two-run reproducibility hashes differ');
   }

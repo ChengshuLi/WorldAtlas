@@ -46,6 +46,13 @@ test('declared decoded bounds above the old cutoff remain exact and wrong expans
   assert.throws(() => decodeEvidenceGzip(packed, {...file, uncompressed_sha256: 'f'.repeat(64)}), /bytes mismatch/);
   assert.throws(() => decodeEvidenceGzip(packed, file, {maxFileBytes: size - 1}), /budget/);
 });
+test('empty gzip declarations remain exact and invalid caller bounds fail', () => {
+  const empty = Buffer.alloc(0), packed = gzipSync(empty), file = {...descriptor('empty.gz', packed), uncompressed_bytes: 0, uncompressed_sha256: sha256(empty)};
+  assert.equal(decodeEvidenceGzip(packed, file).length, 0);
+  assert.throws(() => decodeEvidenceGzip(gzipSync(Buffer.from('x')), file), /bytes mismatch/);
+  for (const value of [-1, NaN, Infinity, Number.MAX_SAFE_INTEGER + 1])
+    assert.throws(() => decodeEvidenceGzip(packed, file, {maxFileBytes: value}), /finite/);
+});
 test('manifest arithmetic failures are rejected before any reader or decoder', () => {
   for (const mutate of [m => m.outputs[0].bytes = Number.MAX_SAFE_INTEGER, m => m.outputs[0].bytes = Infinity,
     m => {m.outputs[0].uncompressed_bytes = Number.MAX_SAFE_INTEGER; m.outputs[0].uncompressed_sha256 = 'a'.repeat(64);},
