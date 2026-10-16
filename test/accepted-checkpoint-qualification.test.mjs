@@ -683,3 +683,44 @@ test('accepted derived custody retains real physical and mixed-use logical sourc
   f.transport.releaseAcceptedCheckpoint(a.handle);
  }
 });
+
+
+import {referenceCheckpointFixture} from './fixtures/selected-checkpoint.mjs';
+for (const [name,mutate,reason] of [
+ ['forged projection',f=>{f.projection.reference.id='geography:forged';return f.project();},/latest release/],
+ ['changed geometry with rebound source pin',f=>{const body=structuredClone(f.currentFeatures);body[0].geometry.coordinates[0][1][0]+=.25;
+   f.write('data/geography/fixture.json',{type:'FeatureCollection',features:body});const c=f.commit();
+   f.projection.source_updates[0].after=f.pin('data/geography/fixture.json',c);return f.project();},/geometry|pointset|non-metadata/i],
+ ['replaced receipt',f=>{f.write('inputs/replacement-receipt.json',{reference_only:true});const c=f.commit();
+   f.projection.receipts=[f.pin('inputs/replacement-receipt.json',c)];return f.project();},/receipt|records/i],
+ ['changed original source pin',f=>{f.projection.source_updates[0].before=f.projection.source_updates[0].after;return f.project();},/actual selected source/],
+ ['current source alias drift',f=>{f.write('data/geography/fixture.json',{type:'FeatureCollection',features:f.features});return f.commit();},/Current complete source differs/],
+ ['current hierarchy alias drift',f=>{f.write('data/hierarchy.json',[]);return f.commit();},/Current hierarchy differs/],
+ ['wrong complete projection bytes',f=>{f.write('inputs/projection.json',{forged:true});return f.commit();},/projection whole identity|Whole immutable input/],
+]) test('checkpoint reference application refuses '+name,async t=>{
+ const f=await referenceCheckpointFixture(t),candidate=mutate(f);
+ const reader=new f.native.ImmutableReader(f.repo,candidate,{invocation:f.reader.invocation});
+ assert.throws(()=>f.api.qualifyTransition({state:f.state,reader}),reason);
+});
+
+test('successor checkpoint binds current metadata routes and keeps unchanged projection reuse local',async t=>{
+ const f=await referenceCheckpointFixture(t),reader=new f.native.ImmutableReader(f.repo,f.candidate,{invocation:f.reader.invocation});
+ const first=f.api.qualifyTransition({state:f.state,reader});assert.equal(first.available,true);
+ const calls=[],nextReader=new f.native.ImmutableReader(f.repo,f.candidate,{invocation:f.reader.invocation});
+ const read=nextReader.read.bind(nextReader);nextReader.read=(name,options)=>{calls.push(name);return read(name,options);};
+ const next=f.api.qualifyTransition({state:first.candidate,reader:nextReader});assert.equal(next.available,true);
+ assert.deepEqual(next.candidate.certificate,first.candidate.certificate);
+ assert(!calls.includes('inputs/projection.json'));
+ f.write('data/geography/fixture.json',{type:'FeatureCollection',features:f.features});const changed=f.commit();
+ const refused=f.api.qualifyTransition({state:first.candidate,reader:new f.native.ImmutableReader(f.repo,changed,{invocation:f.reader.invocation})});
+ assert.equal(refused.available,false);assert.match(refused.reason,/route changed/);
+});
+
+
+test('successor checkpoint refuses a changed newly introduced projection route',async t=>{
+ const f=await referenceCheckpointFixture(t),reader=new f.native.ImmutableReader(f.repo,f.candidate,{invocation:f.reader.invocation});
+ const first=f.api.qualifyTransition({state:f.state,reader});assert.equal(first.available,true);
+ f.write('inputs/projection.json',{forged:true});const changed=f.commit();
+ const refused=f.api.qualifyTransition({state:first.candidate,reader:new f.native.ImmutableReader(f.repo,changed,{invocation:f.reader.invocation})});
+ assert.equal(refused.available,false);assert.match(refused.reason,/route changed/);
+});

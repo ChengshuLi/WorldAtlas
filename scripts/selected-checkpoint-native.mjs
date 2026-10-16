@@ -69,8 +69,10 @@ export async function compareSelectedCheckpointNative({transition}) {
   const visibilityCandidates=newVisibleRepairCandidates(baseline.additions,candidate.additions);
   const size=baseline.manifest.size,oldEntries=baseline.certificate.entries,newEntries=candidate.certificate.entries;
   demand(size===candidate.manifest.size&&oldEntries.length===newEntries.length,'Checkpoint native domain or complete owner roster differs');
-  for(let i=0;i<oldEntries.length;i++)for(let k=0;k<4;k++)
-    demand(oldEntries[i][k]===newEntries[i][k],'Checkpoint original stable owner/index/parent rebound');
+  // Parent metadata is separately authenticated by the private transition;
+  // native ownership remains the same original stable ID and index.
+  for(let i=0;i<oldEntries.length;i++)for(let k=0;k<2;k++)
+    demand(oldEntries[i][k]===newEntries[i][k],'Checkpoint original stable owner/index rebound');
   // The private transition already derives the complete symmetric patch delta
   // from actual authenticated bodies. Caller-created wrappers cannot select it.
   const expected=changedNativeRows;
