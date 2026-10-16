@@ -1,0 +1,32 @@
+{
+  "command": [
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "native-authority",
+    "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability112-001/native-inputs-001/native-authority-config.json",
+    ".cache/delivery-handoff/worker5-mmr112-native-authority-001"
+  ],
+  "cwd": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/deffe01c536ee2f18f79ce6584ab3dc5127d53015f04a5988e18700e807b9c01/work",
+  "executing_commit": "193c36b73ea1a47c370161189d83c260181eb256",
+  "executing_status": "actual reviewed unmerged capability ROOT with genuine acceptedb638 ancestry and independently reviewed multipart extension",
+  "source_commit": "cb7e5bf99cb141014cf0c14a4f474867a8af5965",
+  "native_patch_commit": "8972782a77bf7ac069765b3d39cb14f2cd376db8",
+  "applicability_commit": "2919792f04ad4160dc4e96327f0b069dad67f567",
+  "started_utc": "2026-10-16T00:50:19.755545+00:00",
+  "timeout_or_memory_flags": false,
+  "source_or_physical_producer_replay": false,
+  "scope": {
+    "keys": 112,
+    "targets": 4,
+    "all_original_negative_operands_retained": 76,
+    "applicability_contacts": 194,
+    "disjoint_original1929": true
+  },
+  "exit_code": 0,
+  "elapsed_seconds": 22.69774275,
+  "ended_utc": "2026-10-16T00:50:42.456530+00:00",
+  "destination_exists": true,
+  "destination": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/deffe01c536ee2f18f79ce6584ab3dc5127d53015f04a5988e18700e807b9c01/work/.cache/delivery-handoff/worker5-mmr112-native-authority-001",
+  "root_head_after": "193c36b73ea1a47c370161189d83c260181eb256",
+  "accepted_or_selected_delivery_claimed": false
+}
