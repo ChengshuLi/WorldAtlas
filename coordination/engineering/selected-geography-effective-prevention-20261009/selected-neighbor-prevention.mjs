@@ -1646,9 +1646,12 @@ export function requirePriorAdditiveConservation(snapshot,registry,ledger) {
  demand(prior&&selectedAdditions.get(prior)?.snapshot===snapshot,
   'Require actual privately consumed prior additive selection');
  const proof=compareVersionedRepairLedgers(prior.ledger,ledger,{beforeRegistry:prior.registry,afterRegistry:registry});
- const byId=new Map(ledger.rows.map(row=>[repairComponentKey(row),row]));
- const legacyAuthority=prior.ledger.version===1?prior.registry.entries.find(entry=>entry.rule_sha256===prior.ledger.rule_sha256).authority_sha256:null;
- const priorKey=row=>repairComponentKey(legacyAuthority?{...row,authority_sha256:legacyAuthority}:row);
+ const identity=(body,authorities)=>{
+  const legacyAuthority=body.version===1?authorities.entries.find(entry=>entry.rule_sha256===body.rule_sha256).authority_sha256:null;
+  return row=>repairComponentKey(legacyAuthority?{...row,authority_sha256:legacyAuthority}:row);
+ };
+ const nextKey=identity(ledger,registry),priorKey=identity(prior.ledger,prior.registry);
+ const byId=new Map(ledger.rows.map(row=>[nextKey(row),row]));
  const literal=row=>{if(prior.ledger.version!==1)return row;const {authority_sha256,rule_sha256,...body}=row;return body;};
  for(const row of prior.ledger.rows)demand(byId.has(priorKey(row))&&same(literal(byId.get(priorKey(row))),literal(row)),
   'Previously selected complete row or exception changed');

@@ -1,4 +1,6 @@
 import test from 'node:test';
+import fs from 'node:fs';
+import vm from 'node:vm';
 import assert from 'node:assert/strict';
 import {repairComponentKey, compareRepairComponents} from '../src/native-grid.js';
 import {valueSha, normaliseRetainedRepairLedger, compareVersionedRepairLedgers} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
@@ -74,4 +76,46 @@ test('each same-label authority still needs its own actual changed-cell witness'
   assert.equal(inspect([afterRows[0],{y:afterRows[1].y,runs:[]}])[1],null);
   assert.throws(()=>newVisibleRepairCandidates([],[rows[0],rows[0]]),/Duplicate/);
   assert.deepEqual([...rows].reverse().sort(compareRepairComponents),rows);
+});
+
+// Exercise the exact private-boundary functions without adding production test
+// exports or constructing an apparent scientific execution. Only their completed
+// prior/authority inputs are fixtures; normalization and conservation are real.
+const demand=(value,message)=>{if(!value)throw Error(message);};
+const same=(a,b)=>valueSha(a)===valueSha(b);
+function sourceFunction(file,name,end,context) {
+  const source=fs.readFileSync(file,'utf8'),start=source.indexOf('function '+name+'('),stop=source.indexOf(end,start);
+  assert.ok(start>=0&&stop>start);
+  return vm.runInNewContext('('+source.slice(start,stop).trim()+')',context);
+}
+test('private prior conservation resolves both v1 generations and retains colliding v2 authorities',()=>{
+  const f=fixture(),registry={...f.registry,entries:[f.entries[0]]};
+  const {authority_sha256,rule_sha256,...row}=f.rows[0];
+  const exception={component_id:'zz-rejected',disposition:'rejected',reason:'original'};
+  const ledger={version:1,kind:'native-additive-repair-ledger-v1',rule_sha256,scope_ids:[row.component_id,exception.component_id],rows:[row,exception]};
+  const prior={ledger,registry},snapshot={selection:{additive_release:{}},additive:prior},selectedAdditions=new WeakMap([[prior,{snapshot}]]);
+  const conserve=sourceFunction('coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','requirePriorAdditiveConservation','\n// Literal historical',{selectedAdditions,demand,same,repairComponentKey,compareVersionedRepairLedgers});
+  assert.equal(conserve(snapshot,registry,ledger).prior_components,1);
+  const next={...f.ledger,rows:[...f.rows,{...exception,authority_sha256,rule_sha256}],scope_ids:[...f.ledger.scope_ids,exception.component_id]};
+  assert.equal(conserve(snapshot,f.registry,next).prior_components,1);
+  for(const after of [ledger,next]){
+    const changed=structuredClone(after);changed.rows.at(-1).reason='changed';
+    assert.throws(()=>conserve(snapshot,after===ledger?registry:f.registry,changed),/complete row or exception changed/);
+  }
+  assert.throws(()=>conserve({...snapshot},registry,ledger),/privately consumed/);
+  const wrong={...next,rows:next.rows.slice(1),scope_ids:next.scope_ids.slice(1)};
+  assert.throws(()=>conserve(snapshot,f.registry,wrong),/lost\/rebound/);
+});
+test('current rebind original operands preserve authority-scoped equal labels and reject substitutions',()=>{
+  const f=fixture(),proofs=f.rows.map(row=>{
+    const {authority_sha256,rule_sha256,...original}=row;
+    return {authority_sha256,rule_sha256,original_ledger:{rows:[original]},native_proof:{native_patches:[{rows:row.native_rows}]}};
+  });
+  const originalOperands=sourceFunction('coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs','originalOperands','\n// Ephemeral',{normaliseRetainedRepairLedger,repairComponentKey,demand,same,completedOriginalAuthority:(_,entry)=>proofs.find(proof=>proof.authority_sha256===entry.authority_sha256)});
+  const result=originalOperands({},f.registry,f.ledger);
+  assert.deepEqual(JSON.parse(JSON.stringify(result.rows)),f.rows);assert.equal(result.patches.length,2);
+  const changed=structuredClone(f.ledger);changed.rows[1].source_receipt_sha256='0'.repeat(64);
+  assert.throws(()=>originalOperands({},f.registry,changed),/changes original/);
+  const omitted={...f.ledger,rows:[f.rows[0]],scope_ids:[f.rows[0].component_id]};
+  assert.throws(()=>originalOperands({},f.registry,omitted),/changes original/);
 });
