@@ -1,0 +1,750 @@
+{
+  "kind": "independent_read_only_scientific_review_of_34_distinct_dated_native_observations",
+  "reviewed_utc": "2026-10-16T05:02:27.523711+00:00",
+  "status": "support_27_bounded_visible_facets_retain_7_holds_pending_root_adoption",
+  "source_proposal_sha256": "0ebb7c4ccb707f271f5e23f15abc649a2d432ec8b6e529767d4cf7365fd97ec6",
+  "supported_count": 27,
+  "held_count": 7,
+  "supported_original_keys": [
+    [
+      22727,
+      130335,
+      206949
+    ],
+    [
+      22727,
+      130347,
+      206925
+    ],
+    [
+      22727,
+      130347,
+      206926
+    ],
+    [
+      22727,
+      130356,
+      206921
+    ],
+    [
+      22727,
+      130372,
+      206947
+    ],
+    [
+      22727,
+      130374,
+      206896
+    ],
+    [
+      22727,
+      130379,
+      206926
+    ],
+    [
+      22727,
+      130389,
+      206953
+    ],
+    [
+      22727,
+      130391,
+      206961
+    ],
+    [
+      22727,
+      130397,
+      206916
+    ],
+    [
+      22727,
+      130400,
+      206949
+    ],
+    [
+      22727,
+      130401,
+      206927
+    ],
+    [
+      22727,
+      130402,
+      206930
+    ],
+    [
+      22727,
+      130404,
+      206928
+    ],
+    [
+      22727,
+      130404,
+      206954
+    ],
+    [
+      22727,
+      130406,
+      206955
+    ],
+    [
+      22727,
+      130416,
+      206964
+    ],
+    [
+      22727,
+      130418,
+      206964
+    ],
+    [
+      22727,
+      130420,
+      206962
+    ],
+    [
+      22727,
+      130421,
+      206962
+    ],
+    [
+      22727,
+      130422,
+      206962
+    ],
+    [
+      22727,
+      130423,
+      206962
+    ],
+    [
+      22727,
+      130450,
+      206906
+    ],
+    [
+      22727,
+      130623,
+      206844
+    ],
+    [
+      22727,
+      130635,
+      206880
+    ],
+    [
+      22727,
+      130639,
+      206882
+    ],
+    [
+      22727,
+      130643,
+      206881
+    ]
+  ],
+  "held_original_keys": [
+    [
+      22727,
+      130358,
+      206922
+    ],
+    [
+      22727,
+      130372,
+      206948
+    ],
+    [
+      22727,
+      130373,
+      206926
+    ],
+    [
+      22727,
+      130390,
+      206957
+    ],
+    [
+      22727,
+      130394,
+      206927
+    ],
+    [
+      22727,
+      130452,
+      206908
+    ],
+    [
+      22727,
+      130623,
+      206845
+    ]
+  ],
+  "supported_key_file": {
+    "file": "supported27-owner-y-x.jsonl",
+    "bytes": 594,
+    "sha256": "080026073fcf547a56763bee487c9629c1dc72461be1ac0df336ed771ee8e3c8"
+  },
+  "supported_facet_counts": {
+    "dated_visible_vegetation_cover": 22,
+    "dated_visible_water_like_body": 4,
+    "dated_visible_exposed_or_constructed_ground_strip": 1
+  },
+  "keyed_decisions": [
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130335,
+        "x": 206949
+      },
+      "point_index": 13666,
+      "supported": true,
+      "supported_facet": "dated_visible_vegetation_cover",
+      "actual_source_reason": "The hollow marker is inside the dark-green RGB mass and spatially coherent red FCC canopy. Surrounding water-like and brighter patches do not intersect the marker.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 4,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130347,
+        "x": 206925
+      },
+      "point_index": 14103,
+      "supported": true,
+      "supported_facet": "dated_visible_water_like_body",
+      "actual_source_reason": "At the marker the native RGB/FCC is continuous with the adjacent green-blue/dark-blue body, outside the red canopy. This supports a visible water-like body facet; exact shore position and body composition are not measured.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 6,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130347,
+        "x": 206926
+      },
+      "point_index": 14104,
+      "supported": true,
+      "supported_facet": "dated_visible_vegetation_cover",
+      "actual_source_reason": "The marked source position falls on dark-green RGB cover with red FCC response, with the pale linear patch and blue body offset from it.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 4,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130356,
+        "x": 206921
+      },
+      "point_index": 14410,
+      "supported": true,
+      "supported_facet": "dated_visible_exposed_or_constructed_ground_strip",
+      "actual_source_reason": "A narrow, coherent pale line passes through the marker in RGB and FCC and is traceable across the wider view. It supports a visible exposed/constructed-looking strip, without identifying material or land use. The source SCL value 8 remains a cloud-context caution rather than a substitute classifier.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 8,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130358,
+        "x": 206922
+      },
+      "point_index": 14459,
+      "supported": false,
+      "supported_facet": null,
+      "actual_source_reason": "The marker occupies the low-contrast narrow margin between the red canopy and dark/blue body. The current native sample cannot separate canopy fringe, shaded edge and exposed water at the exact centre; retain the hold.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 6,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130372,
+        "x": 206947
+      },
+      "point_index": 14751,
+      "supported": true,
+      "supported_facet": "dated_visible_vegetation_cover",
+      "actual_source_reason": "The marker is just on the canopy side below the coastal pale fringe: native RGB is dark green and FCC remains red at the marked position. This supports visible vegetation only; SCL 7 and nearby edge uncertainty remain.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 7,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130372,
+        "x": 206948
+      },
+      "point_index": 14752,
+      "supported": false,
+      "supported_facet": null,
+      "actual_source_reason": "The pale/grey fringe and muted canopy response cross the marked position, with a nearby bright/hazy feature. Mixed canopy, wet/exposed fringe and water cannot be separated at this centre; retain the hold.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 2,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130373,
+        "x": 206926
+      },
+      "point_index": 14797,
+      "supported": false,
+      "supported_facet": null,
+      "actual_source_reason": "The marker falls in the muted olive/brown transition separating red canopy from the dark body. A canopy margin, exposed/wet shoreline or water interpretation remains materially ambiguous; retain the hold.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 4,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130374,
+        "x": 206896
+      },
+      "point_index": 14833,
+      "supported": true,
+      "supported_facet": "dated_visible_water_like_body",
+      "actual_source_reason": "The marker lies in the connected dark-blue indentation beside the red canopy, supported by the wider body continuity. The answer is a dated water-like appearance only; precise canopy overhang, water depth and bank geometry remain unresolved.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 6,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130379,
+        "x": 206926
+      },
+      "point_index": 15031,
+      "supported": true,
+      "supported_facet": "dated_visible_vegetation_cover",
+      "actual_source_reason": "The marker is within a coherent red FCC strip and corresponding dark-green RGB cover, separated from the blue body by a visible margin.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 4,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130389,
+        "x": 206953
+      },
+      "point_index": 15273,
+      "supported": true,
+      "supported_facet": "dated_visible_vegetation_cover",
+      "actual_source_reason": "Dark-green RGB and red FCC cover occupy the marked position below the pale coast line. The adjacent bright strip does not justify exposed ground or dry understory at the marker.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 4,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130390,
+        "x": 206957
+      },
+      "point_index": 15299,
+      "supported": false,
+      "supported_facet": null,
+      "actual_source_reason": "The marked native sample intersects the pale shore band and muted red fringe. Exposed ground, vegetation and wet-margin mixtures are not distinguishable there; retain the hold.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 4,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130391,
+        "x": 206961
+      },
+      "point_index": 15327,
+      "supported": true,
+      "supported_facet": "dated_visible_vegetation_cover",
+      "actual_source_reason": "The marker is on red FCC/dark-green RGB cover immediately below the pale shore transition. Support is limited to visible vegetation; the edge and any water below cover are not resolved.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 4,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130394,
+        "x": 206927
+      },
+      "point_index": 15378,
+      "supported": false,
+      "supported_facet": null,
+      "actual_source_reason": "The marker lies at the lower-left edge of a bright patch within the canopy setting. The brightness boundary passes too close to distinguish exposed/constructed surface from canopy fringe at the centre; retain the hold.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 5,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130397,
+        "x": 206916
+      },
+      "point_index": 15430,
+      "supported": true,
+      "supported_facet": "dated_visible_vegetation_cover",
+      "actual_source_reason": "The native marker is within a coherent dark-green and red canopy patch below the dark coastal body; the visible edge remains outside it.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 4,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130400,
+        "x": 206949
+      },
+      "point_index": 15482,
+      "supported": true,
+      "supported_facet": "dated_visible_vegetation_cover",
+      "actual_source_reason": "The marked position is inside the continuous dark-green RGB/red FCC mass. The coastal boundary visible in the larger context does not cross it.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 4,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130401,
+        "x": 206927
+      },
+      "point_index": 15496,
+      "supported": true,
+      "supported_facet": "dated_visible_water_like_body",
+      "actual_source_reason": "The marker is on the blue/dark body immediately right of the narrow red canopy strip, with continuous water-like context in the wide view. This is a visible-body observation, not a pure-pixel, tide or permanent-water assertion.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 6,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130402,
+        "x": 206930
+      },
+      "point_index": 15514,
+      "supported": true,
+      "supported_facet": "dated_visible_vegetation_cover",
+      "actual_source_reason": "The hollow marker remains on the red FCC/dark-green RGB side of a close dark-body boundary. It supports visible canopy at the source position only; its proximity to the edge forbids a pure whole-cell, dry-understory or precise shore claim.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 4,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130404,
+        "x": 206928
+      },
+      "point_index": 15542,
+      "supported": true,
+      "supported_facet": "dated_visible_vegetation_cover",
+      "actual_source_reason": "The marker falls on the red FCC canopy with corresponding dark-green RGB response, to the right of the darker adjoining body.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 4,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130404,
+        "x": 206954
+      },
+      "point_index": 15544,
+      "supported": true,
+      "supported_facet": "dated_visible_water_like_body",
+      "actual_source_reason": "The marker is within the coherent dark, low-contrast body above the red canopy edge and connected to the larger body in the contact view. Support is limited to a water-like visible body; source SCL 2 dark/shadow context and water-versus-shadow uncertainty are retained.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 2,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130406,
+        "x": 206955
+      },
+      "point_index": 15572,
+      "supported": true,
+      "supported_facet": "dated_visible_vegetation_cover",
+      "actual_source_reason": "The marked source position is well within coherent red FCC/dark-green RGB canopy; no visible local margin intersects it.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 4,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130416,
+        "x": 206964
+      },
+      "point_index": 15744,
+      "supported": true,
+      "supported_facet": "dated_visible_vegetation_cover",
+      "actual_source_reason": "A red FCC/dark-green RGB strip occupies the marker beside the blue body. The paler local vegetation variation does not establish exposed ground.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 4,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130418,
+        "x": 206964
+      },
+      "point_index": 15770,
+      "supported": true,
+      "supported_facet": "dated_visible_vegetation_cover",
+      "actual_source_reason": "The marker lies inside a coherent red FCC and dark-green RGB canopy mass, distinct from the adjoining body.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 4,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130420,
+        "x": 206962
+      },
+      "point_index": 15801,
+      "supported": true,
+      "supported_facet": "dated_visible_vegetation_cover",
+      "actual_source_reason": "Coherent canopy response occupies the marker in both views. Small brighter patches lie elsewhere in the local context.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 4,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130421,
+        "x": 206962
+      },
+      "point_index": 15817,
+      "supported": true,
+      "supported_facet": "dated_visible_vegetation_cover",
+      "actual_source_reason": "The marked native position remains within dark-green RGB/red FCC canopy; the small pale patch is offset from it.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 4,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130422,
+        "x": 206962
+      },
+      "point_index": 15830,
+      "supported": true,
+      "supported_facet": "dated_visible_vegetation_cover",
+      "actual_source_reason": "The marker sits on the vegetated side of the nearby pale patch, with continuous red FCC and green RGB appearance at the marked position.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 4,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130423,
+        "x": 206962
+      },
+      "point_index": 15846,
+      "supported": true,
+      "supported_facet": "dated_visible_vegetation_cover",
+      "actual_source_reason": "The marked source position has coherent red FCC/dark-green RGB cover. The local paler patches do not require an exposed-ground interpretation at that point.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 4,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130450,
+        "x": 206906
+      },
+      "point_index": 16487,
+      "supported": true,
+      "supported_facet": "dated_visible_vegetation_cover",
+      "actual_source_reason": "The marker lies on the narrow red FCC/dark-green RGB canopy strip between the dark body and bright developed-looking area. The bright surface does not cross the marker.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 4,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130452,
+        "x": 206908
+      },
+      "point_index": 16531,
+      "supported": false,
+      "supported_facet": null,
+      "actual_source_reason": "The marker lies on a brown/olive linear transition beside red canopy and pale developed-looking surfaces. The current native view cannot settle vegetated versus exposed/constructed fringe at the centre; retain the hold.",
+      "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "retained_SCL_context_only": 5,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130623,
+        "x": 206844
+      },
+      "point_index": 18886,
+      "supported": true,
+      "supported_facet": "dated_visible_vegetation_cover",
+      "actual_source_reason": "The marked position is inside the coherent green RGB/red FCC island canopy, above its darker water-side margin.",
+      "acquisition_datetime": "2020-01-06T03:37:56.211000Z",
+      "item_id": "S2A_48NUF_20200106_0_L2A",
+      "retained_SCL_context_only": 4,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130623,
+        "x": 206845
+      },
+      "point_index": 18887,
+      "supported": false,
+      "supported_facet": null,
+      "actual_source_reason": "At the fractional marked position the canopy fades into a dark water-side fringe. The native view does not distinguish low-signal canopy from exposed water with sufficient confidence; retain the hold.",
+      "acquisition_datetime": "2020-01-06T03:37:56.211000Z",
+      "item_id": "S2A_48NUF_20200106_0_L2A",
+      "retained_SCL_context_only": 6,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130635,
+        "x": 206880
+      },
+      "point_index": 19039,
+      "supported": true,
+      "supported_facet": "dated_visible_vegetation_cover",
+      "actual_source_reason": "The marker falls on the red FCC/dark-green RGB canopy side of the coastal margin, with the pale strip and blue body to its left.",
+      "acquisition_datetime": "2020-01-06T03:37:56.211000Z",
+      "item_id": "S2A_48NUF_20200106_0_L2A",
+      "retained_SCL_context_only": 4,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130639,
+        "x": 206882
+      },
+      "point_index": 19092,
+      "supported": true,
+      "supported_facet": "dated_visible_vegetation_cover",
+      "actual_source_reason": "The marker is on red FCC/dark-green RGB cover just left of the pale shoreline strip. The SCL 10 cirrus context is retained; the evidence supports visible vegetation, not a cloud-free radiometric or dry-ground conclusion.",
+      "acquisition_datetime": "2020-01-06T03:37:56.211000Z",
+      "item_id": "S2A_48NUF_20200106_0_L2A",
+      "retained_SCL_context_only": 10,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130643,
+        "x": 206881
+      },
+      "point_index": 19146,
+      "supported": true,
+      "supported_facet": "dated_visible_vegetation_cover",
+      "actual_source_reason": "The marked position remains on the red FCC/dark-green RGB canopy side of the nearby body boundary. SCL 10 cirrus and edge context are retained; only visible vegetation cover is supported.",
+      "acquisition_datetime": "2020-01-06T03:37:56.211000Z",
+      "item_id": "S2A_48NUF_20200106_0_L2A",
+      "retained_SCL_context_only": 10,
+      "prior_observation_and_original_hold_preserved": true,
+      "whole_cell_ground_truth_or_authority_credit": 0
+    }
+  ],
+  "review_scope_and_limits": [
+    "All two contact sheets and all 34 native-detail images were independently viewed with view_image. Full local NPZ and NPY-member hashes were verified; all 36 displayed images were independently reconstructed pixel-exactly from native values and masks.",
+    "All 34 original owner/y/x keys and unchanged centres join exactly to the plan, actual observations and retained previous records. All 170 asset positions were independently projected; native centre and 3x3 value/mask joins and entire displayed contexts were checked.",
+    "All prior annual, composite and dated observations and original unresolved questions remain byte-content-equivalent inside the proposal. A new bounded dated observation does not rewrite those sources or close broader original questions.",
+    "Only source-associated visible vegetation, water-like body, or exposed/constructed-looking strip facets on 2020-01-06 are supported. None establishes whole-cell purity, exact shore geometry, dry ground under canopy, inundation/tide, permanent surface, current state, ownership or jurisdiction.",
+    "SCL is retained source context only and did not determine the decisions. In particular, SCL8 at point14410, SCL7 at point14751, SCL2 at point15544 and SCL10 at points19092/19146 remain explicit. Vegetation at shore-fringe points does not resolve water underneath; water-like appearance at point15544 does not exclude shadow contamination.",
+    "Raw display ranges are qualitative uncalibrated stretches. No gain/offset correction, physical reflectance, index, threshold classifier or cross-grid resampling is introduced.",
+    "Validation authenticates the local saved block bodies and their internal provenance joins, not every byte of remote source objects. No new source acquisition, author-workspace edit, scientific adoption, native authority or repair credit was performed."
+  ],
+  "custody_artifact": "independent-custody-review.json",
+  "join_artifact": "verified-point-joins.jsonl",
+  "new_adopted_scientific_or_native_credit": 0
+}

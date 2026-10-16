@@ -1,0 +1,49 @@
+{
+  "status": "passed",
+  "full_native_npz_count": 30,
+  "encoded_npz_bytes": 32134138,
+  "decoded_array_bytes": 75008000,
+  "decoded_npy_members_bytes": 75015680,
+  "original_exact_keys": 34,
+  "retained_prior_records_equal": 34,
+  "new_observation_records_equal": 34,
+  "reprojected_native_positions_and_exact_centre_mask_joins": 170,
+  "verified_3x3_value_mask_pairs": 1530,
+  "full_context_mask_values": {
+    "255": 347786
+  },
+  "pixel_exact_saved_images_verified": 36,
+  "all34_detail_and2_contact_images_visually_inspected": true,
+  "plan": {
+    "file": "next-distinct-native-block-plan34.json",
+    "bytes": 305877,
+    "sha256": "a90a24c3c8354e826268d0eb8f333e6aea10b55b30c91381a38c54d43e7c67c3"
+  },
+  "reader": {
+    "file": "read_next_distinct_native_blocks.py",
+    "bytes": 11388,
+    "sha256": "8ab11a0a6fce5f7b44d7718e888d6031ae2dce7b85b139f03b4a8f9101dd94e4"
+  },
+  "proposal": {
+    "file": "author-proposed34-nextdated-dispositions.jsonl",
+    "bytes": 1420141,
+    "sha256": "0ebb7c4ccb707f271f5e23f15abc649a2d432ec8b6e529767d4cf7365fd97ec6"
+  },
+  "proposed_keys": {
+    "file": "author-proposed27-owner-y-x.jsonl",
+    "bytes": 594,
+    "sha256": "080026073fcf547a56763bee487c9629c1dc72461be1ac0df336ed771ee8e3c8"
+  },
+  "prior": {
+    "file": "original34-prior-held-records.jsonl",
+    "bytes": 982207,
+    "sha256": "5ab3ec248116b79385e1aa65cedf41358c4a01f139ba7a1f5335aff42a5b6a01"
+  },
+  "inventory": {
+    "file": "native-rawDN-context-pages/contact-inventory.json",
+    "bytes": 76295,
+    "sha256": "cc928447af0c22092195ff2e8cd5d2c300592422e2fcf459738553c4cff86ffb"
+  },
+  "remote_whole_objects_authenticated": false,
+  "new_scientific_or_native_credit": 0
+}

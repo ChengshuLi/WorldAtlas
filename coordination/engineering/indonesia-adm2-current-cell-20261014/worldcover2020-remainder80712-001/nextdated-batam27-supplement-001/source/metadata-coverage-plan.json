@@ -1,0 +1,3905 @@
+{
+  "kind": "metadata-header-only-for-two-complete-natural-source-item-groups-in-original-Batam-cloud197",
+  "selected_items": [
+    {
+      "owner": 22727,
+      "item": {
+        "type": "Feature",
+        "stac_version": "1.0.0",
+        "id": "S2A_48NUF_20200106_0_L2A",
+        "properties": {
+          "created": "2022-11-05T18:52:16.744Z",
+          "platform": "sentinel-2a",
+          "constellation": "sentinel-2",
+          "instruments": [
+            "msi"
+          ],
+          "eo:cloud_cover": 16.143964,
+          "proj:epsg": 32648,
+          "mgrs:utm_zone": 48,
+          "mgrs:latitude_band": "N",
+          "mgrs:grid_square": "UF",
+          "grid:code": "MGRS-48NUF",
+          "view:sun_azimuth": 136.9931574605,
+          "view:sun_elevation": 57.7939561357612,
+          "s2:degraded_msi_data_percentage": 0,
+          "s2:nodata_pixel_percentage": 0,
+          "s2:saturated_defective_pixel_percentage": 0,
+          "s2:dark_features_percentage": 0.186808,
+          "s2:cloud_shadow_percentage": 0.943703,
+          "s2:vegetation_percentage": 25.351453,
+          "s2:not_vegetated_percentage": 1.409445,
+          "s2:water_percentage": 54.74965,
+          "s2:unclassified_percentage": 1.177886,
+          "s2:medium_proba_clouds_percentage": 1.405606,
+          "s2:high_proba_clouds_percentage": 5.927548,
+          "s2:thin_cirrus_percentage": 8.81081,
+          "s2:snow_ice_percentage": 0.037093,
+          "s2:product_type": "S2MSI2A",
+          "s2:processing_baseline": "02.13",
+          "s2:product_uri": "S2A_MSIL2A_20200106T032121_N0213_R118_T48NUF_20200106T070716.SAFE",
+          "s2:generation_time": "2020-01-06T07:07:16.000000Z",
+          "s2:datatake_id": "GS2A_20200106T032121_023710_N02.13",
+          "s2:datatake_type": "INS-NOBS",
+          "s2:datastrip_id": "S2A_OPER_MSI_L2A_DS_EPAE_20200106T070716_S20200106T032732_N02.13",
+          "s2:granule_id": "S2A_OPER_MSI_L2A_TL_EPAE_20200106T070716_A023710_T48NUF_N02.13",
+          "s2:mgrs_tile": "48NUF",
+          "s2:reflectance_conversion_factor": 1.03430766343869,
+          "datetime": "2020-01-06T03:37:56.211000Z",
+          "s2:sequence": "0",
+          "earthsearch:s3_path": "s3://sentinel-cogs/sentinel-s2-l2a-cogs/48/N/UF/2020/1/S2A_48NUF_20200106_0_L2A",
+          "earthsearch:payload_id": "roda-sentinel2/workflow-sentinel2-to-stac/f97f27b733b4ec7a7f187f274360e3d9",
+          "earthsearch:boa_offset_applied": false,
+          "processing:software": {
+            "sentinel2-to-stac": "0.1.0"
+          },
+          "updated": "2022-11-05T18:52:16.744Z"
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                103.2027336697916,
+                0.9044544277394649
+              ],
+              [
+                104.18931319357165,
+                0.9048113393346509
+              ],
+              [
+                104.18941264861633,
+                -0.08846476643670993
+              ],
+              [
+                103.2029540432274,
+                -0.08842987340901468
+              ],
+              [
+                103.2027336697916,
+                0.9044544277394649
+              ]
+            ]
+          ]
+        },
+        "links": [
+          {
+            "rel": "self",
+            "type": "application/geo+json",
+            "href": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_48NUF_20200106_0_L2A"
+          },
+          {
+            "rel": "canonical",
+            "href": "s3://sentinel-cogs/sentinel-s2-l2a-cogs/48/N/UF/2020/1/S2A_48NUF_20200106_0_L2A/S2A_48NUF_20200106_0_L2A.json",
+            "type": "application/json"
+          },
+          {
+            "rel": "license",
+            "href": "https://sentinel.esa.int/documents/247904/690755/Sentinel_Data_Legal_Notice"
+          },
+          {
+            "rel": "derived_from",
+            "href": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l1c/items/S2A_48NUF_20200106_0_L1C",
+            "type": "application/geo+json"
+          },
+          {
+            "rel": "parent",
+            "type": "application/json",
+            "href": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a"
+          },
+          {
+            "rel": "collection",
+            "type": "application/json",
+            "href": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a"
+          },
+          {
+            "rel": "root",
+            "type": "application/json",
+            "href": "https://earth-search.aws.element84.com/v1"
+          },
+          {
+            "rel": "thumbnail",
+            "href": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_48NUF_20200106_0_L2A/thumbnail"
+          }
+        ],
+        "assets": {
+          "aot": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/UF/2020/1/S2A_48NUF_20200106_0_L2A/AOT.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Aerosol optical thickness (AOT)",
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              300000,
+              0,
+              -20,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "blue": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/UF/2020/1/S2A_48NUF_20200106_0_L2A/B02.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Blue (band 2) - 10m",
+            "eo:bands": [
+              {
+                "name": "blue",
+                "common_name": "blue",
+                "description": "Blue (band 2)",
+                "center_wavelength": 0.49,
+                "full_width_half_max": 0.098
+              }
+            ],
+            "gsd": 10,
+            "proj:shape": [
+              10980,
+              10980
+            ],
+            "proj:transform": [
+              10,
+              0,
+              300000,
+              0,
+              -10,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 10,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "coastal": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/UF/2020/1/S2A_48NUF_20200106_0_L2A/B01.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Coastal aerosol (band 1) - 60m",
+            "eo:bands": [
+              {
+                "name": "coastal",
+                "common_name": "coastal",
+                "description": "Coastal aerosol (band 1)",
+                "center_wavelength": 0.443,
+                "full_width_half_max": 0.027
+              }
+            ],
+            "gsd": 60,
+            "proj:shape": [
+              1830,
+              1830
+            ],
+            "proj:transform": [
+              60,
+              0,
+              300000,
+              0,
+              -60,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 60,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "granule_metadata": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/UF/2020/1/S2A_48NUF_20200106_0_L2A/granule_metadata.xml",
+            "type": "application/xml",
+            "roles": [
+              "metadata"
+            ]
+          },
+          "green": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/UF/2020/1/S2A_48NUF_20200106_0_L2A/B03.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Green (band 3) - 10m",
+            "eo:bands": [
+              {
+                "name": "green",
+                "common_name": "green",
+                "description": "Green (band 3)",
+                "center_wavelength": 0.56,
+                "full_width_half_max": 0.045
+              }
+            ],
+            "gsd": 10,
+            "proj:shape": [
+              10980,
+              10980
+            ],
+            "proj:transform": [
+              10,
+              0,
+              300000,
+              0,
+              -10,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 10,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "nir": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/UF/2020/1/S2A_48NUF_20200106_0_L2A/B08.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "NIR 1 (band 8) - 10m",
+            "eo:bands": [
+              {
+                "name": "nir",
+                "common_name": "nir",
+                "description": "NIR 1 (band 8)",
+                "center_wavelength": 0.842,
+                "full_width_half_max": 0.145
+              }
+            ],
+            "gsd": 10,
+            "proj:shape": [
+              10980,
+              10980
+            ],
+            "proj:transform": [
+              10,
+              0,
+              300000,
+              0,
+              -10,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 10,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "nir08": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/UF/2020/1/S2A_48NUF_20200106_0_L2A/B8A.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "NIR 2 (band 8A) - 20m",
+            "eo:bands": [
+              {
+                "name": "nir08",
+                "common_name": "nir08",
+                "description": "NIR 2 (band 8A)",
+                "center_wavelength": 0.865,
+                "full_width_half_max": 0.033
+              }
+            ],
+            "gsd": 20,
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              300000,
+              0,
+              -20,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "nir09": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/UF/2020/1/S2A_48NUF_20200106_0_L2A/B09.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "NIR 3 (band 9) - 60m",
+            "eo:bands": [
+              {
+                "name": "nir09",
+                "common_name": "nir09",
+                "description": "NIR 3 (band 9)",
+                "center_wavelength": 0.945,
+                "full_width_half_max": 0.026
+              }
+            ],
+            "gsd": 60,
+            "proj:shape": [
+              1830,
+              1830
+            ],
+            "proj:transform": [
+              60,
+              0,
+              300000,
+              0,
+              -60,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 60,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "red": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/UF/2020/1/S2A_48NUF_20200106_0_L2A/B04.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Red (band 4) - 10m",
+            "eo:bands": [
+              {
+                "name": "red",
+                "common_name": "red",
+                "description": "Red (band 4)",
+                "center_wavelength": 0.665,
+                "full_width_half_max": 0.038
+              }
+            ],
+            "gsd": 10,
+            "proj:shape": [
+              10980,
+              10980
+            ],
+            "proj:transform": [
+              10,
+              0,
+              300000,
+              0,
+              -10,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 10,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "rededge1": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/UF/2020/1/S2A_48NUF_20200106_0_L2A/B05.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Red edge 1 (band 5) - 20m",
+            "eo:bands": [
+              {
+                "name": "rededge1",
+                "common_name": "rededge",
+                "description": "Red edge 1 (band 5)",
+                "center_wavelength": 0.704,
+                "full_width_half_max": 0.019
+              }
+            ],
+            "gsd": 20,
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              300000,
+              0,
+              -20,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "rededge2": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/UF/2020/1/S2A_48NUF_20200106_0_L2A/B06.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Red edge 2 (band 6) - 20m",
+            "eo:bands": [
+              {
+                "name": "rededge2",
+                "common_name": "rededge",
+                "description": "Red edge 2 (band 6)",
+                "center_wavelength": 0.74,
+                "full_width_half_max": 0.018
+              }
+            ],
+            "gsd": 20,
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              300000,
+              0,
+              -20,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "rededge3": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/UF/2020/1/S2A_48NUF_20200106_0_L2A/B07.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Red edge 3 (band 7) - 20m",
+            "eo:bands": [
+              {
+                "name": "rededge3",
+                "common_name": "rededge",
+                "description": "Red edge 3 (band 7)",
+                "center_wavelength": 0.783,
+                "full_width_half_max": 0.028
+              }
+            ],
+            "gsd": 20,
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              300000,
+              0,
+              -20,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "scl": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/UF/2020/1/S2A_48NUF_20200106_0_L2A/SCL.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Scene classification map (SCL)",
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              300000,
+              0,
+              -20,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint8",
+                "spatial_resolution": 20
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "swir16": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/UF/2020/1/S2A_48NUF_20200106_0_L2A/B11.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "SWIR 1 (band 11) - 20m",
+            "eo:bands": [
+              {
+                "name": "swir16",
+                "common_name": "swir16",
+                "description": "SWIR 1 (band 11)",
+                "center_wavelength": 1.61,
+                "full_width_half_max": 0.143
+              }
+            ],
+            "gsd": 20,
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              300000,
+              0,
+              -20,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "swir22": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/UF/2020/1/S2A_48NUF_20200106_0_L2A/B12.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "SWIR 2 (band 12) - 20m",
+            "eo:bands": [
+              {
+                "name": "swir22",
+                "common_name": "swir22",
+                "description": "SWIR 2 (band 12)",
+                "center_wavelength": 2.19,
+                "full_width_half_max": 0.242
+              }
+            ],
+            "gsd": 20,
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              300000,
+              0,
+              -20,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "thumbnail": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/UF/2020/1/S2A_48NUF_20200106_0_L2A/thumbnail.jpg",
+            "type": "image/jpeg",
+            "title": "Thumbnail image",
+            "roles": [
+              "thumbnail"
+            ]
+          },
+          "tileinfo_metadata": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/UF/2020/1/S2A_48NUF_20200106_0_L2A/tileinfo_metadata.json",
+            "type": "application/json",
+            "roles": [
+              "metadata"
+            ]
+          },
+          "visual": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/UF/2020/1/S2A_48NUF_20200106_0_L2A/TCI.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "True color image",
+            "eo:bands": [
+              {
+                "name": "red",
+                "common_name": "red",
+                "description": "Red (band 4)",
+                "center_wavelength": 0.665,
+                "full_width_half_max": 0.038
+              },
+              {
+                "name": "green",
+                "common_name": "green",
+                "description": "Green (band 3)",
+                "center_wavelength": 0.56,
+                "full_width_half_max": 0.045
+              },
+              {
+                "name": "blue",
+                "common_name": "blue",
+                "description": "Blue (band 2)",
+                "center_wavelength": 0.49,
+                "full_width_half_max": 0.098
+              }
+            ],
+            "proj:shape": [
+              10980,
+              10980
+            ],
+            "proj:transform": [
+              10,
+              0,
+              300000,
+              0,
+              -10,
+              100020
+            ],
+            "roles": [
+              "visual"
+            ]
+          },
+          "wvp": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/UF/2020/1/S2A_48NUF_20200106_0_L2A/WVP.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Water vapour (WVP)",
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              300000,
+              0,
+              -20,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "unit": "cm",
+                "scale": 0.001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "aot-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/UF/2020/1/6/0/R20m/AOT.jp2",
+            "type": "image/jp2",
+            "title": "Aerosol optical thickness (AOT)",
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              300000,
+              0,
+              -20,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "blue-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/UF/2020/1/6/0/R10m/B02.jp2",
+            "type": "image/jp2",
+            "title": "Blue (band 2) - 10m",
+            "eo:bands": [
+              {
+                "name": "blue",
+                "common_name": "blue",
+                "description": "Blue (band 2)",
+                "center_wavelength": 0.49,
+                "full_width_half_max": 0.098
+              }
+            ],
+            "gsd": 10,
+            "proj:shape": [
+              10980,
+              10980
+            ],
+            "proj:transform": [
+              10,
+              0,
+              300000,
+              0,
+              -10,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 10,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "coastal-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/UF/2020/1/6/0/R60m/B01.jp2",
+            "type": "image/jp2",
+            "title": "Coastal aerosol (band 1) - 60m",
+            "eo:bands": [
+              {
+                "name": "coastal",
+                "common_name": "coastal",
+                "description": "Coastal aerosol (band 1)",
+                "center_wavelength": 0.443,
+                "full_width_half_max": 0.027
+              }
+            ],
+            "gsd": 60,
+            "proj:shape": [
+              1830,
+              1830
+            ],
+            "proj:transform": [
+              60,
+              0,
+              300000,
+              0,
+              -60,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 60,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "green-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/UF/2020/1/6/0/R10m/B03.jp2",
+            "type": "image/jp2",
+            "title": "Green (band 3) - 10m",
+            "eo:bands": [
+              {
+                "name": "green",
+                "common_name": "green",
+                "description": "Green (band 3)",
+                "center_wavelength": 0.56,
+                "full_width_half_max": 0.045
+              }
+            ],
+            "gsd": 10,
+            "proj:shape": [
+              10980,
+              10980
+            ],
+            "proj:transform": [
+              10,
+              0,
+              300000,
+              0,
+              -10,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 10,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "nir-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/UF/2020/1/6/0/R10m/B08.jp2",
+            "type": "image/jp2",
+            "title": "NIR 1 (band 8) - 10m",
+            "eo:bands": [
+              {
+                "name": "nir",
+                "common_name": "nir",
+                "description": "NIR 1 (band 8)",
+                "center_wavelength": 0.842,
+                "full_width_half_max": 0.145
+              }
+            ],
+            "gsd": 10,
+            "proj:shape": [
+              10980,
+              10980
+            ],
+            "proj:transform": [
+              10,
+              0,
+              300000,
+              0,
+              -10,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 10,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "nir08-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/UF/2020/1/6/0/R20m/B8A.jp2",
+            "type": "image/jp2",
+            "title": "NIR 2 (band 8A) - 20m",
+            "eo:bands": [
+              {
+                "name": "nir08",
+                "common_name": "nir08",
+                "description": "NIR 2 (band 8A)",
+                "center_wavelength": 0.865,
+                "full_width_half_max": 0.033
+              }
+            ],
+            "gsd": 20,
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              300000,
+              0,
+              -20,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "nir09-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/UF/2020/1/6/0/R60m/B09.jp2",
+            "type": "image/jp2",
+            "title": "NIR 3 (band 9) - 60m",
+            "eo:bands": [
+              {
+                "name": "nir09",
+                "common_name": "nir09",
+                "description": "NIR 3 (band 9)",
+                "center_wavelength": 0.945,
+                "full_width_half_max": 0.026
+              }
+            ],
+            "gsd": 60,
+            "proj:shape": [
+              1830,
+              1830
+            ],
+            "proj:transform": [
+              60,
+              0,
+              300000,
+              0,
+              -60,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 60,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "red-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/UF/2020/1/6/0/R10m/B04.jp2",
+            "type": "image/jp2",
+            "title": "Red (band 4) - 10m",
+            "eo:bands": [
+              {
+                "name": "red",
+                "common_name": "red",
+                "description": "Red (band 4)",
+                "center_wavelength": 0.665,
+                "full_width_half_max": 0.038
+              }
+            ],
+            "gsd": 10,
+            "proj:shape": [
+              10980,
+              10980
+            ],
+            "proj:transform": [
+              10,
+              0,
+              300000,
+              0,
+              -10,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 10,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "rededge1-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/UF/2020/1/6/0/R20m/B05.jp2",
+            "type": "image/jp2",
+            "title": "Red edge 1 (band 5) - 20m",
+            "eo:bands": [
+              {
+                "name": "rededge1",
+                "common_name": "rededge",
+                "description": "Red edge 1 (band 5)",
+                "center_wavelength": 0.704,
+                "full_width_half_max": 0.019
+              }
+            ],
+            "gsd": 20,
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              300000,
+              0,
+              -20,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "rededge2-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/UF/2020/1/6/0/R20m/B06.jp2",
+            "type": "image/jp2",
+            "title": "Red edge 2 (band 6) - 20m",
+            "eo:bands": [
+              {
+                "name": "rededge2",
+                "common_name": "rededge",
+                "description": "Red edge 2 (band 6)",
+                "center_wavelength": 0.74,
+                "full_width_half_max": 0.018
+              }
+            ],
+            "gsd": 20,
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              300000,
+              0,
+              -20,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "rededge3-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/UF/2020/1/6/0/R20m/B07.jp2",
+            "type": "image/jp2",
+            "title": "Red edge 3 (band 7) - 20m",
+            "eo:bands": [
+              {
+                "name": "rededge3",
+                "common_name": "rededge",
+                "description": "Red edge 3 (band 7)",
+                "center_wavelength": 0.783,
+                "full_width_half_max": 0.028
+              }
+            ],
+            "gsd": 20,
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              300000,
+              0,
+              -20,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "scl-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/UF/2020/1/6/0/R20m/SCL.jp2",
+            "type": "image/jp2",
+            "title": "Scene classification map (SCL)",
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              300000,
+              0,
+              -20,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint8",
+                "spatial_resolution": 20
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "swir16-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/UF/2020/1/6/0/R20m/B11.jp2",
+            "type": "image/jp2",
+            "title": "SWIR 1 (band 11) - 20m",
+            "eo:bands": [
+              {
+                "name": "swir16",
+                "common_name": "swir16",
+                "description": "SWIR 1 (band 11)",
+                "center_wavelength": 1.61,
+                "full_width_half_max": 0.143
+              }
+            ],
+            "gsd": 20,
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              300000,
+              0,
+              -20,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "swir22-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/UF/2020/1/6/0/R20m/B12.jp2",
+            "type": "image/jp2",
+            "title": "SWIR 2 (band 12) - 20m",
+            "eo:bands": [
+              {
+                "name": "swir22",
+                "common_name": "swir22",
+                "description": "SWIR 2 (band 12)",
+                "center_wavelength": 2.19,
+                "full_width_half_max": 0.242
+              }
+            ],
+            "gsd": 20,
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              300000,
+              0,
+              -20,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "visual-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/UF/2020/1/6/0/R10m/TCI.jp2",
+            "type": "image/jp2",
+            "title": "True color image",
+            "eo:bands": [
+              {
+                "name": "red",
+                "common_name": "red",
+                "description": "Red (band 4)",
+                "center_wavelength": 0.665,
+                "full_width_half_max": 0.038
+              },
+              {
+                "name": "green",
+                "common_name": "green",
+                "description": "Green (band 3)",
+                "center_wavelength": 0.56,
+                "full_width_half_max": 0.045
+              },
+              {
+                "name": "blue",
+                "common_name": "blue",
+                "description": "Blue (band 2)",
+                "center_wavelength": 0.49,
+                "full_width_half_max": 0.098
+              }
+            ],
+            "proj:shape": [
+              10980,
+              10980
+            ],
+            "proj:transform": [
+              10,
+              0,
+              300000,
+              0,
+              -10,
+              100020
+            ],
+            "roles": [
+              "visual"
+            ]
+          },
+          "wvp-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/UF/2020/1/6/0/R20m/WVP.jp2",
+            "type": "image/jp2",
+            "title": "Water vapour (WVP)",
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              300000,
+              0,
+              -20,
+              100020
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "unit": "cm",
+                "scale": 0.001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          }
+        },
+        "bbox": [
+          103.2027336697916,
+          -0.08846476643670993,
+          104.18941264861633,
+          0.9048113393346509
+        ],
+        "stac_extensions": [
+          "https://stac-extensions.github.io/view/v1.0.0/schema.json",
+          "https://stac-extensions.github.io/grid/v1.0.0/schema.json",
+          "https://stac-extensions.github.io/mgrs/v1.0.0/schema.json",
+          "https://stac-extensions.github.io/raster/v1.1.0/schema.json",
+          "https://stac-extensions.github.io/processing/v1.1.0/schema.json",
+          "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+          "https://stac-extensions.github.io/eo/v1.0.0/schema.json"
+        ],
+        "collection": "sentinel-2-l2a"
+      }
+    },
+    {
+      "owner": 22727,
+      "item": {
+        "type": "Feature",
+        "stac_version": "1.0.0",
+        "id": "S2A_48NVG_20200106_0_L2A",
+        "properties": {
+          "created": "2022-11-06T11:24:21.681Z",
+          "platform": "sentinel-2a",
+          "constellation": "sentinel-2",
+          "instruments": [
+            "msi"
+          ],
+          "eo:cloud_cover": 34.244709,
+          "proj:epsg": 32648,
+          "mgrs:utm_zone": 48,
+          "mgrs:latitude_band": "N",
+          "mgrs:grid_square": "VG",
+          "grid:code": "MGRS-48NVG",
+          "view:sun_azimuth": 138.937630766015,
+          "view:sun_elevation": 57.6749059132795,
+          "s2:degraded_msi_data_percentage": 0,
+          "s2:nodata_pixel_percentage": 46.462199,
+          "s2:saturated_defective_pixel_percentage": 0,
+          "s2:dark_features_percentage": 0.425239,
+          "s2:cloud_shadow_percentage": 0.977762,
+          "s2:vegetation_percentage": 17.972897,
+          "s2:not_vegetated_percentage": 3.20593,
+          "s2:water_percentage": 41.497743,
+          "s2:unclassified_percentage": 1.636058,
+          "s2:medium_proba_clouds_percentage": 5.828891,
+          "s2:high_proba_clouds_percentage": 21.504812,
+          "s2:thin_cirrus_percentage": 6.911007,
+          "s2:snow_ice_percentage": 0.039662,
+          "s2:product_type": "S2MSI2A",
+          "s2:processing_baseline": "02.13",
+          "s2:product_uri": "S2A_MSIL2A_20200106T032121_N0213_R118_T48NVG_20200106T070716.SAFE",
+          "s2:generation_time": "2020-01-06T07:07:16.000000Z",
+          "s2:datatake_id": "GS2A_20200106T032121_023710_N02.13",
+          "s2:datatake_type": "INS-NOBS",
+          "s2:datastrip_id": "S2A_OPER_MSI_L2A_DS_EPAE_20200106T070716_S20200106T032732_N02.13",
+          "s2:granule_id": "S2A_OPER_MSI_L2A_TL_EPAE_20200106T070716_A023710_T48NVG_N02.13",
+          "s2:reflectance_conversion_factor": 1.03430766343869,
+          "datetime": "2020-01-06T03:37:38.262000Z",
+          "s2:sequence": "0",
+          "earthsearch:s3_path": "s3://sentinel-cogs/sentinel-s2-l2a-cogs/48/N/VG/2020/1/S2A_48NVG_20200106_0_L2A",
+          "earthsearch:payload_id": "roda-sentinel2/workflow-sentinel2-to-stac/0802f11965af7501b58c948840b954d8",
+          "earthsearch:boa_offset_applied": false,
+          "processing:software": {
+            "sentinel2-to-stac": "0.1.0"
+          },
+          "updated": "2022-11-06T11:24:21.681Z"
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                104.10056630813818,
+                1.8095851984763285
+              ],
+              [
+                104.73787420423868,
+                1.8097904867959982
+              ],
+              [
+                104.51859781028303,
+                0.8164090722698084
+              ],
+              [
+                104.10092124882556,
+                0.8163369008879892
+              ],
+              [
+                104.10056630813818,
+                1.8095851984763285
+              ]
+            ]
+          ]
+        },
+        "links": [
+          {
+            "rel": "self",
+            "type": "application/geo+json",
+            "href": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_48NVG_20200106_0_L2A"
+          },
+          {
+            "rel": "canonical",
+            "href": "s3://sentinel-cogs/sentinel-s2-l2a-cogs/48/N/VG/2020/1/S2A_48NVG_20200106_0_L2A/S2A_48NVG_20200106_0_L2A.json",
+            "type": "application/json"
+          },
+          {
+            "rel": "license",
+            "href": "https://sentinel.esa.int/documents/247904/690755/Sentinel_Data_Legal_Notice"
+          },
+          {
+            "rel": "derived_from",
+            "href": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l1c/items/S2A_48NVG_20200106_0_L1C",
+            "type": "application/geo+json"
+          },
+          {
+            "rel": "parent",
+            "type": "application/json",
+            "href": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a"
+          },
+          {
+            "rel": "collection",
+            "type": "application/json",
+            "href": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a"
+          },
+          {
+            "rel": "root",
+            "type": "application/json",
+            "href": "https://earth-search.aws.element84.com/v1"
+          },
+          {
+            "rel": "thumbnail",
+            "href": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_48NVG_20200106_0_L2A/thumbnail"
+          }
+        ],
+        "assets": {
+          "aot": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VG/2020/1/S2A_48NVG_20200106_0_L2A/AOT.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Aerosol optical thickness (AOT)",
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              399960,
+              0,
+              -20,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "blue": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VG/2020/1/S2A_48NVG_20200106_0_L2A/B02.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Blue (band 2) - 10m",
+            "eo:bands": [
+              {
+                "name": "blue",
+                "common_name": "blue",
+                "description": "Blue (band 2)",
+                "center_wavelength": 0.49,
+                "full_width_half_max": 0.098
+              }
+            ],
+            "gsd": 10,
+            "proj:shape": [
+              10980,
+              10980
+            ],
+            "proj:transform": [
+              10,
+              0,
+              399960,
+              0,
+              -10,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 10,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "coastal": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VG/2020/1/S2A_48NVG_20200106_0_L2A/B01.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Coastal aerosol (band 1) - 60m",
+            "eo:bands": [
+              {
+                "name": "coastal",
+                "common_name": "coastal",
+                "description": "Coastal aerosol (band 1)",
+                "center_wavelength": 0.443,
+                "full_width_half_max": 0.027
+              }
+            ],
+            "gsd": 60,
+            "proj:shape": [
+              1830,
+              1830
+            ],
+            "proj:transform": [
+              60,
+              0,
+              399960,
+              0,
+              -60,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 60,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "granule_metadata": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VG/2020/1/S2A_48NVG_20200106_0_L2A/granule_metadata.xml",
+            "type": "application/xml",
+            "roles": [
+              "metadata"
+            ]
+          },
+          "green": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VG/2020/1/S2A_48NVG_20200106_0_L2A/B03.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Green (band 3) - 10m",
+            "eo:bands": [
+              {
+                "name": "green",
+                "common_name": "green",
+                "description": "Green (band 3)",
+                "center_wavelength": 0.56,
+                "full_width_half_max": 0.045
+              }
+            ],
+            "gsd": 10,
+            "proj:shape": [
+              10980,
+              10980
+            ],
+            "proj:transform": [
+              10,
+              0,
+              399960,
+              0,
+              -10,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 10,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "nir": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VG/2020/1/S2A_48NVG_20200106_0_L2A/B08.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "NIR 1 (band 8) - 10m",
+            "eo:bands": [
+              {
+                "name": "nir",
+                "common_name": "nir",
+                "description": "NIR 1 (band 8)",
+                "center_wavelength": 0.842,
+                "full_width_half_max": 0.145
+              }
+            ],
+            "gsd": 10,
+            "proj:shape": [
+              10980,
+              10980
+            ],
+            "proj:transform": [
+              10,
+              0,
+              399960,
+              0,
+              -10,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 10,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "nir08": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VG/2020/1/S2A_48NVG_20200106_0_L2A/B8A.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "NIR 2 (band 8A) - 20m",
+            "eo:bands": [
+              {
+                "name": "nir08",
+                "common_name": "nir08",
+                "description": "NIR 2 (band 8A)",
+                "center_wavelength": 0.865,
+                "full_width_half_max": 0.033
+              }
+            ],
+            "gsd": 20,
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              399960,
+              0,
+              -20,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "nir09": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VG/2020/1/S2A_48NVG_20200106_0_L2A/B09.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "NIR 3 (band 9) - 60m",
+            "eo:bands": [
+              {
+                "name": "nir09",
+                "common_name": "nir09",
+                "description": "NIR 3 (band 9)",
+                "center_wavelength": 0.945,
+                "full_width_half_max": 0.026
+              }
+            ],
+            "gsd": 60,
+            "proj:shape": [
+              1830,
+              1830
+            ],
+            "proj:transform": [
+              60,
+              0,
+              399960,
+              0,
+              -60,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 60,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "red": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VG/2020/1/S2A_48NVG_20200106_0_L2A/B04.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Red (band 4) - 10m",
+            "eo:bands": [
+              {
+                "name": "red",
+                "common_name": "red",
+                "description": "Red (band 4)",
+                "center_wavelength": 0.665,
+                "full_width_half_max": 0.038
+              }
+            ],
+            "gsd": 10,
+            "proj:shape": [
+              10980,
+              10980
+            ],
+            "proj:transform": [
+              10,
+              0,
+              399960,
+              0,
+              -10,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 10,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "rededge1": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VG/2020/1/S2A_48NVG_20200106_0_L2A/B05.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Red edge 1 (band 5) - 20m",
+            "eo:bands": [
+              {
+                "name": "rededge1",
+                "common_name": "rededge",
+                "description": "Red edge 1 (band 5)",
+                "center_wavelength": 0.704,
+                "full_width_half_max": 0.019
+              }
+            ],
+            "gsd": 20,
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              399960,
+              0,
+              -20,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "rededge2": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VG/2020/1/S2A_48NVG_20200106_0_L2A/B06.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Red edge 2 (band 6) - 20m",
+            "eo:bands": [
+              {
+                "name": "rededge2",
+                "common_name": "rededge",
+                "description": "Red edge 2 (band 6)",
+                "center_wavelength": 0.74,
+                "full_width_half_max": 0.018
+              }
+            ],
+            "gsd": 20,
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              399960,
+              0,
+              -20,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "rededge3": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VG/2020/1/S2A_48NVG_20200106_0_L2A/B07.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Red edge 3 (band 7) - 20m",
+            "eo:bands": [
+              {
+                "name": "rededge3",
+                "common_name": "rededge",
+                "description": "Red edge 3 (band 7)",
+                "center_wavelength": 0.783,
+                "full_width_half_max": 0.028
+              }
+            ],
+            "gsd": 20,
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              399960,
+              0,
+              -20,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "scl": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VG/2020/1/S2A_48NVG_20200106_0_L2A/SCL.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Scene classification map (SCL)",
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              399960,
+              0,
+              -20,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint8",
+                "spatial_resolution": 20
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "swir16": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VG/2020/1/S2A_48NVG_20200106_0_L2A/B11.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "SWIR 1 (band 11) - 20m",
+            "eo:bands": [
+              {
+                "name": "swir16",
+                "common_name": "swir16",
+                "description": "SWIR 1 (band 11)",
+                "center_wavelength": 1.61,
+                "full_width_half_max": 0.143
+              }
+            ],
+            "gsd": 20,
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              399960,
+              0,
+              -20,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "swir22": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VG/2020/1/S2A_48NVG_20200106_0_L2A/B12.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "SWIR 2 (band 12) - 20m",
+            "eo:bands": [
+              {
+                "name": "swir22",
+                "common_name": "swir22",
+                "description": "SWIR 2 (band 12)",
+                "center_wavelength": 2.19,
+                "full_width_half_max": 0.242
+              }
+            ],
+            "gsd": 20,
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              399960,
+              0,
+              -20,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "thumbnail": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VG/2020/1/S2A_48NVG_20200106_0_L2A/thumbnail.jpg",
+            "type": "image/jpeg",
+            "title": "Thumbnail image",
+            "roles": [
+              "thumbnail"
+            ]
+          },
+          "tileinfo_metadata": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VG/2020/1/S2A_48NVG_20200106_0_L2A/tileinfo_metadata.json",
+            "type": "application/json",
+            "roles": [
+              "metadata"
+            ]
+          },
+          "visual": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VG/2020/1/S2A_48NVG_20200106_0_L2A/TCI.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "True color image",
+            "eo:bands": [
+              {
+                "name": "red",
+                "common_name": "red",
+                "description": "Red (band 4)",
+                "center_wavelength": 0.665,
+                "full_width_half_max": 0.038
+              },
+              {
+                "name": "green",
+                "common_name": "green",
+                "description": "Green (band 3)",
+                "center_wavelength": 0.56,
+                "full_width_half_max": 0.045
+              },
+              {
+                "name": "blue",
+                "common_name": "blue",
+                "description": "Blue (band 2)",
+                "center_wavelength": 0.49,
+                "full_width_half_max": 0.098
+              }
+            ],
+            "proj:shape": [
+              10980,
+              10980
+            ],
+            "proj:transform": [
+              10,
+              0,
+              399960,
+              0,
+              -10,
+              200040
+            ],
+            "roles": [
+              "visual"
+            ]
+          },
+          "wvp": {
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/N/VG/2020/1/S2A_48NVG_20200106_0_L2A/WVP.tif",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Water vapour (WVP)",
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              399960,
+              0,
+              -20,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "unit": "cm",
+                "scale": 0.001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "aot-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/VG/2020/1/6/0/AOT.jp2",
+            "type": "image/jp2",
+            "title": "Aerosol optical thickness (AOT)",
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              399960,
+              0,
+              -20,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "blue-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/VG/2020/1/6/0/B02.jp2",
+            "type": "image/jp2",
+            "title": "Blue (band 2) - 10m",
+            "eo:bands": [
+              {
+                "name": "blue",
+                "common_name": "blue",
+                "description": "Blue (band 2)",
+                "center_wavelength": 0.49,
+                "full_width_half_max": 0.098
+              }
+            ],
+            "gsd": 10,
+            "proj:shape": [
+              10980,
+              10980
+            ],
+            "proj:transform": [
+              10,
+              0,
+              399960,
+              0,
+              -10,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 10,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "coastal-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/VG/2020/1/6/0/B01.jp2",
+            "type": "image/jp2",
+            "title": "Coastal aerosol (band 1) - 60m",
+            "eo:bands": [
+              {
+                "name": "coastal",
+                "common_name": "coastal",
+                "description": "Coastal aerosol (band 1)",
+                "center_wavelength": 0.443,
+                "full_width_half_max": 0.027
+              }
+            ],
+            "gsd": 60,
+            "proj:shape": [
+              1830,
+              1830
+            ],
+            "proj:transform": [
+              60,
+              0,
+              399960,
+              0,
+              -60,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 60,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "green-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/VG/2020/1/6/0/B03.jp2",
+            "type": "image/jp2",
+            "title": "Green (band 3) - 10m",
+            "eo:bands": [
+              {
+                "name": "green",
+                "common_name": "green",
+                "description": "Green (band 3)",
+                "center_wavelength": 0.56,
+                "full_width_half_max": 0.045
+              }
+            ],
+            "gsd": 10,
+            "proj:shape": [
+              10980,
+              10980
+            ],
+            "proj:transform": [
+              10,
+              0,
+              399960,
+              0,
+              -10,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 10,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "nir-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/VG/2020/1/6/0/B08.jp2",
+            "type": "image/jp2",
+            "title": "NIR 1 (band 8) - 10m",
+            "eo:bands": [
+              {
+                "name": "nir",
+                "common_name": "nir",
+                "description": "NIR 1 (band 8)",
+                "center_wavelength": 0.842,
+                "full_width_half_max": 0.145
+              }
+            ],
+            "gsd": 10,
+            "proj:shape": [
+              10980,
+              10980
+            ],
+            "proj:transform": [
+              10,
+              0,
+              399960,
+              0,
+              -10,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 10,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "nir08-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/VG/2020/1/6/0/B8A.jp2",
+            "type": "image/jp2",
+            "title": "NIR 2 (band 8A) - 20m",
+            "eo:bands": [
+              {
+                "name": "nir08",
+                "common_name": "nir08",
+                "description": "NIR 2 (band 8A)",
+                "center_wavelength": 0.865,
+                "full_width_half_max": 0.033
+              }
+            ],
+            "gsd": 20,
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              399960,
+              0,
+              -20,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "nir09-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/VG/2020/1/6/0/B09.jp2",
+            "type": "image/jp2",
+            "title": "NIR 3 (band 9) - 60m",
+            "eo:bands": [
+              {
+                "name": "nir09",
+                "common_name": "nir09",
+                "description": "NIR 3 (band 9)",
+                "center_wavelength": 0.945,
+                "full_width_half_max": 0.026
+              }
+            ],
+            "gsd": 60,
+            "proj:shape": [
+              1830,
+              1830
+            ],
+            "proj:transform": [
+              60,
+              0,
+              399960,
+              0,
+              -60,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 60,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "red-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/VG/2020/1/6/0/B04.jp2",
+            "type": "image/jp2",
+            "title": "Red (band 4) - 10m",
+            "eo:bands": [
+              {
+                "name": "red",
+                "common_name": "red",
+                "description": "Red (band 4)",
+                "center_wavelength": 0.665,
+                "full_width_half_max": 0.038
+              }
+            ],
+            "gsd": 10,
+            "proj:shape": [
+              10980,
+              10980
+            ],
+            "proj:transform": [
+              10,
+              0,
+              399960,
+              0,
+              -10,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 10,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "rededge1-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/VG/2020/1/6/0/B05.jp2",
+            "type": "image/jp2",
+            "title": "Red edge 1 (band 5) - 20m",
+            "eo:bands": [
+              {
+                "name": "rededge1",
+                "common_name": "rededge",
+                "description": "Red edge 1 (band 5)",
+                "center_wavelength": 0.704,
+                "full_width_half_max": 0.019
+              }
+            ],
+            "gsd": 20,
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              399960,
+              0,
+              -20,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "rededge2-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/VG/2020/1/6/0/B06.jp2",
+            "type": "image/jp2",
+            "title": "Red edge 2 (band 6) - 20m",
+            "eo:bands": [
+              {
+                "name": "rededge2",
+                "common_name": "rededge",
+                "description": "Red edge 2 (band 6)",
+                "center_wavelength": 0.74,
+                "full_width_half_max": 0.018
+              }
+            ],
+            "gsd": 20,
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              399960,
+              0,
+              -20,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "rededge3-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/VG/2020/1/6/0/B07.jp2",
+            "type": "image/jp2",
+            "title": "Red edge 3 (band 7) - 20m",
+            "eo:bands": [
+              {
+                "name": "rededge3",
+                "common_name": "rededge",
+                "description": "Red edge 3 (band 7)",
+                "center_wavelength": 0.783,
+                "full_width_half_max": 0.028
+              }
+            ],
+            "gsd": 20,
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              399960,
+              0,
+              -20,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "scl-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/VG/2020/1/6/0/SCL.jp2",
+            "type": "image/jp2",
+            "title": "Scene classification map (SCL)",
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              399960,
+              0,
+              -20,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint8",
+                "spatial_resolution": 20
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "swir16-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/VG/2020/1/6/0/B11.jp2",
+            "type": "image/jp2",
+            "title": "SWIR 1 (band 11) - 20m",
+            "eo:bands": [
+              {
+                "name": "swir16",
+                "common_name": "swir16",
+                "description": "SWIR 1 (band 11)",
+                "center_wavelength": 1.61,
+                "full_width_half_max": 0.143
+              }
+            ],
+            "gsd": 20,
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              399960,
+              0,
+              -20,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "swir22-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/VG/2020/1/6/0/B12.jp2",
+            "type": "image/jp2",
+            "title": "SWIR 2 (band 12) - 20m",
+            "eo:bands": [
+              {
+                "name": "swir22",
+                "common_name": "swir22",
+                "description": "SWIR 2 (band 12)",
+                "center_wavelength": 2.19,
+                "full_width_half_max": 0.242
+              }
+            ],
+            "gsd": 20,
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              399960,
+              0,
+              -20,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "scale": 0.0001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          },
+          "visual-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/VG/2020/1/6/0/TCI.jp2",
+            "type": "image/jp2",
+            "title": "True color image",
+            "eo:bands": [
+              {
+                "name": "red",
+                "common_name": "red",
+                "description": "Red (band 4)",
+                "center_wavelength": 0.665,
+                "full_width_half_max": 0.038
+              },
+              {
+                "name": "green",
+                "common_name": "green",
+                "description": "Green (band 3)",
+                "center_wavelength": 0.56,
+                "full_width_half_max": 0.045
+              },
+              {
+                "name": "blue",
+                "common_name": "blue",
+                "description": "Blue (band 2)",
+                "center_wavelength": 0.49,
+                "full_width_half_max": 0.098
+              }
+            ],
+            "proj:shape": [
+              10980,
+              10980
+            ],
+            "proj:transform": [
+              10,
+              0,
+              399960,
+              0,
+              -10,
+              200040
+            ],
+            "roles": [
+              "visual"
+            ]
+          },
+          "wvp-jp2": {
+            "href": "s3://sentinel-s2-l2a/tiles/48/N/VG/2020/1/6/0/WVP.jp2",
+            "type": "image/jp2",
+            "title": "Water vapour (WVP)",
+            "proj:shape": [
+              5490,
+              5490
+            ],
+            "proj:transform": [
+              20,
+              0,
+              399960,
+              0,
+              -20,
+              200040
+            ],
+            "raster:bands": [
+              {
+                "nodata": 0,
+                "data_type": "uint16",
+                "bits_per_sample": 15,
+                "spatial_resolution": 20,
+                "unit": "cm",
+                "scale": 0.001,
+                "offset": 0
+              }
+            ],
+            "roles": [
+              "data",
+              "reflectance"
+            ]
+          }
+        },
+        "bbox": [
+          104.10056630813818,
+          0.8163369008879892,
+          104.73787420423868,
+          1.8097904867959982
+        ],
+        "stac_extensions": [
+          "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+          "https://stac-extensions.github.io/raster/v1.1.0/schema.json",
+          "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
+          "https://stac-extensions.github.io/mgrs/v1.0.0/schema.json",
+          "https://stac-extensions.github.io/view/v1.0.0/schema.json",
+          "https://stac-extensions.github.io/processing/v1.1.0/schema.json",
+          "https://stac-extensions.github.io/grid/v1.0.0/schema.json"
+        ],
+        "collection": "sentinel-2-l2a"
+      }
+    }
+  ],
+  "candidate_points": [
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130335,
+        "x": 206949
+      },
+      "point_index": 13666,
+      "centre_unchanged": {
+        "longitude": 104.17803986786997,
+        "latitude": 1.0263939901131323,
+        "ideal_longitude_numerator": 27311940,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        408547.83782197686,
+        113459.24812909508
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        8658,
+        858
+      ],
+      "native20m_SCL_containing_pixel": [
+        4329,
+        429
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130347,
+        "x": 206925
+      },
+      "point_index": 14103,
+      "centre_unchanged": {
+        "longitude": 104.14508364929091,
+        "latitude": 1.0099184825344054,
+        "ideal_longitude_numerator": 27303300,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        404880.34230669704,
+        111638.96107223317
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        8840,
+        492
+      ],
+      "native20m_SCL_containing_pixel": [
+        4420,
+        246
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130347,
+        "x": 206926
+      },
+      "point_index": 14104,
+      "centre_unchanged": {
+        "longitude": 104.14645682506503,
+        "latitude": 1.0099184825344054,
+        "ideal_longitude_numerator": 27303660,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        405033.135898038,
+        111638.92091800914
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        8840,
+        507
+      ],
+      "native20m_SCL_containing_pixel": [
+        4420,
+        253
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130356,
+        "x": 206921
+      },
+      "point_index": 14410,
+      "centre_unchanged": {
+        "longitude": 104.1395909461944,
+        "latitude": 0.9975617969689924,
+        "ideal_longitude_numerator": 27301860,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        404268.8080345455,
+        110273.17814425917
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        8976,
+        430
+      ],
+      "native20m_SCL_containing_pixel": [
+        4488,
+        215
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130358,
+        "x": 206922
+      },
+      "point_index": 14459,
+      "centre_unchanged": {
+        "longitude": 104.14096412196852,
+        "latitude": 0.9948158605215232,
+        "ideal_longitude_numerator": 27302220,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        404421.5232902225,
+        109969.59449725792
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        9007,
+        446
+      ],
+      "native20m_SCL_containing_pixel": [
+        4503,
+        223
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130372,
+        "x": 206947
+      },
+      "point_index": 14751,
+      "centre_unchanged": {
+        "longitude": 104.17529351632172,
+        "latitude": 0.9755942417568572,
+        "ideal_longitude_numerator": 27311220,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        408240.84246243135,
+        107843.82578413536
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        9219,
+        828
+      ],
+      "native20m_SCL_containing_pixel": [
+        4609,
+        414
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130372,
+        "x": 206948
+      },
+      "point_index": 14752,
+      "centre_unchanged": {
+        "longitude": 104.17666669209585,
+        "latitude": 0.9755942417568572,
+        "ideal_longitude_numerator": 27311580,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        408393.6364428062,
+        107843.78836640231
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        9219,
+        843
+      ],
+      "native20m_SCL_containing_pixel": [
+        4609,
+        421
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130373,
+        "x": 206926
+      },
+      "point_index": 14797,
+      "centre_unchanged": {
+        "longitude": 104.14645682506503,
+        "latitude": 0.9742212647603613,
+        "ideal_longitude_numerator": 27303660,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        405032.11801452714,
+        107692.85336925632
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        9234,
+        507
+      ],
+      "native20m_SCL_containing_pixel": [
+        4617,
+        253
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130374,
+        "x": 206896
+      },
+      "point_index": 14833,
+      "centre_unchanged": {
+        "longitude": 104.1052615518412,
+        "latitude": 0.9728482872043903,
+        "ideal_longitude_numerator": 27292860,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        400448.1965802841,
+        107542.26819785414
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        9249,
+        48
+      ],
+      "native20m_SCL_containing_pixel": [
+        4624,
+        24
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130379,
+        "x": 206926
+      },
+      "point_index": 15031,
+      "centre_unchanged": {
+        "longitude": 104.14645682506503,
+        "latitude": 0.9659833910599922,
+        "ideal_longitude_numerator": 27303660,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        405031.88831768447,
+        106782.21652114368
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        9325,
+        507
+      ],
+      "native20m_SCL_containing_pixel": [
+        4662,
+        253
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130389,
+        "x": 206953
+      },
+      "point_index": 15273,
+      "centre_unchanged": {
+        "longitude": 104.18353257096649,
+        "latitude": 0.9522535572637714,
+        "ideal_longitude_numerator": 27313380,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        409156.98698713083,
+        105263.48437208903
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        9477,
+        919
+      ],
+      "native20m_SCL_containing_pixel": [
+        4738,
+        459
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130390,
+        "x": 206957
+      },
+      "point_index": 15299,
+      "centre_unchanged": {
+        "longitude": 104.189025274063,
+        "latitude": 0.9508805708633882,
+        "ideal_longitude_numerator": 27314820,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        409768.1298135557,
+        105111.56813990287
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        9492,
+        980
+      ],
+      "native20m_SCL_containing_pixel": [
+        4746,
+        490
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130391,
+        "x": 206961
+      },
+      "point_index": 15327,
+      "centre_unchanged": {
+        "longitude": 104.1945179771595,
+        "latitude": 0.9495075839169287,
+        "ideal_longitude_numerator": 27316260,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        410379.27234005503,
+        104959.65323572244
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        9508,
+        1041
+      ],
+      "native20m_SCL_containing_pixel": [
+        4754,
+        520
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130394,
+        "x": 206927
+      },
+      "point_index": 15378,
+      "centre_unchanged": {
+        "longitude": 104.14783000083916,
+        "latitude": 0.9453886198089755,
+        "ideal_longitude_numerator": 27304020,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        405184.11906078906,
+        104505.57744339376
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        9553,
+        522
+      ],
+      "native20m_SCL_containing_pixel": [
+        4776,
+        261
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130397,
+        "x": 206916
+      },
+      "point_index": 15430,
+      "centre_unchanged": {
+        "longitude": 104.13272506732376,
+        "latitude": 0.9412696508147116,
+        "ideal_longitude_numerator": 27300060,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        403503.241547346,
+        104050.67003084463
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        9598,
+        354
+      ],
+      "native20m_SCL_containing_pixel": [
+        4799,
+        177
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130400,
+        "x": 206949
+      },
+      "point_index": 15482,
+      "centre_unchanged": {
+        "longitude": 104.17803986786997,
+        "latitude": 0.9371506769554191,
+        "ideal_longitude_numerator": 27311940,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        408545.4127330617,
+        103594.13014082158
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        9644,
+        858
+      ],
+      "native20m_SCL_containing_pixel": [
+        4822,
+        429
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130401,
+        "x": 206927
+      },
+      "point_index": 15496,
+      "centre_unchanged": {
+        "longitude": 104.14783000083916,
+        "latitude": 0.9357776845915493,
+        "ideal_longitude_numerator": 27304020,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        405183.85965070734,
+        103443.15922064694
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        9659,
+        522
+      ],
+      "native20m_SCL_containing_pixel": [
+        4829,
+        261
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130402,
+        "x": 206930
+      },
+      "point_index": 15514,
+      "centre_unchanged": {
+        "longitude": 104.15194952816155,
+        "latitude": 0.934404691690273,
+        "ideal_longitude_numerator": 27305100,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        405642.2132768715,
+        103291.27403416738
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        9674,
+        568
+      ],
+      "native20m_SCL_containing_pixel": [
+        4837,
+        284
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130404,
+        "x": 206928
+      },
+      "point_index": 15542,
+      "centre_unchanged": {
+        "longitude": 104.14920317661328,
+        "latitude": 0.9316587042786564,
+        "ideal_longitude_numerator": 27304380,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        405336.5462821234,
+        102987.7993252526
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        9705,
+        537
+      ],
+      "native20m_SCL_containing_pixel": [
+        4852,
+        268
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130404,
+        "x": 206954
+      },
+      "point_index": 15544,
+      "centre_unchanged": {
+        "longitude": 104.18490574674061,
+        "latitude": 0.9316587042786564,
+        "ideal_longitude_numerator": 27313740,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        409309.24923056155,
+        102986.86019379586
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        9705,
+        934
+      ],
+      "native20m_SCL_containing_pixel": [
+        4852,
+        467
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130406,
+        "x": 206955
+      },
+      "point_index": 15572,
+      "centre_unchanged": {
+        "longitude": 104.18627892251475,
+        "latitude": 0.9289127147268941,
+        "ideal_longitude_numerator": 27314100,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        409461.97478278313,
+        102683.27892018289
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        9735,
+        950
+      ],
+      "native20m_SCL_containing_pixel": [
+        4867,
+        475
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130416,
+        "x": 206964
+      },
+      "point_index": 15744,
+      "centre_unchanged": {
+        "longitude": 104.1986375044819,
+        "latitude": 0.9151827350862095,
+        "ideal_longitude_numerator": 27317340,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        410836.791829741,
+        101165.2360842637
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        9887,
+        1087
+      ],
+      "native20m_SCL_containing_pixel": [
+        4943,
+        543
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130418,
+        "x": 206964
+      },
+      "point_index": 15770,
+      "centre_unchanged": {
+        "longitude": 104.1986375044819,
+        "latitude": 0.9124367328258585,
+        "ideal_longitude_numerator": 27317340,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        410836.72411626537,
+        100861.68967835371
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        9917,
+        1087
+      ],
+      "native20m_SCL_containing_pixel": [
+        4958,
+        543
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130420,
+        "x": 206962
+      },
+      "point_index": 15801,
+      "centre_unchanged": {
+        "longitude": 104.19589115293364,
+        "latitude": 0.9096907284694828,
+        "ideal_longitude_numerator": 27316620,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        410531.0645199624,
+        100558.21102417365
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        9948,
+        1057
+      ],
+      "native20m_SCL_containing_pixel": [
+        4974,
+        528
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130421,
+        "x": 206962
+      },
+      "point_index": 15817,
+      "centre_unchanged": {
+        "longitude": 104.19589115293364,
+        "latitude": 0.9083177255072562,
+        "ideal_longitude_numerator": 27316620,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        410531.0307257512,
+        100406.43752012117
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        9963,
+        1057
+      ],
+      "native20m_SCL_containing_pixel": [
+        4981,
+        528
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130422,
+        "x": 206962
+      },
+      "point_index": 15830,
+      "centre_unchanged": {
+        "longitude": 104.19589115293364,
+        "latitude": 0.9069447220233887,
+        "ideal_longitude_numerator": 27316620,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        410530.9969825676,
+        100254.66395954072
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        9978,
+        1057
+      ],
+      "native20m_SCL_containing_pixel": [
+        4989,
+        528
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130423,
+        "x": 206962
+      },
+      "point_index": 15846,
+      "centre_unchanged": {
+        "longitude": 104.19589115293364,
+        "latitude": 0.9055717180186682,
+        "ideal_longitude_numerator": 27316620,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        410530.9632904116,
+        100102.89034251774
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        9993,
+        1057
+      ],
+      "native20m_SCL_containing_pixel": [
+        4996,
+        528
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130450,
+        "x": 206906
+      },
+      "point_index": 16487,
+      "centre_unchanged": {
+        "longitude": 104.11899330958248,
+        "latitude": 0.8685004158890318,
+        "ideal_longitude_numerator": 27296460,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        401973.31303815224,
+        96006.8890925
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        10403,
+        201
+      ],
+      "native20m_SCL_containing_pixel": [
+        5201,
+        100
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130452,
+        "x": 206908
+      },
+      "point_index": 16531,
+      "centre_unchanged": {
+        "longitude": 104.12173966113073,
+        "latitude": 0.8657543788538883,
+        "ideal_longitude_numerator": 27297180,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NVG_20200106_0_L2A",
+      "projected_coordinates": [
+        402278.8441485682,
+        95703.26178736052
+      ],
+      "prior_actual_observation": "S2B_48NVG_20200101_0_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:38.846000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        10433,
+        231
+      ],
+      "native20m_SCL_containing_pixel": [
+        5216,
+        115
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130623,
+        "x": 206844
+      },
+      "point_index": 18886,
+      "centre_unchanged": {
+        "longitude": 104.03385641158656,
+        "latitude": 0.6309615148328136,
+        "ideal_longitude_numerator": 27274140,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NUF_20200106_0_L2A",
+      "projected_coordinates": [
+        392493.75513937237,
+        69750.21582093541
+      ],
+      "prior_actual_observation": "S2B_48NUF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:56.787000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        3026,
+        9249
+      ],
+      "native20m_SCL_containing_pixel": [
+        1513,
+        4624
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130623,
+        "x": 206845
+      },
+      "point_index": 18887,
+      "centre_unchanged": {
+        "longitude": 104.03522958736067,
+        "latitude": 0.6309615148328136,
+        "ideal_longitude_numerator": 27274500,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NUF_20200106_0_L2A",
+      "projected_coordinates": [
+        392646.56785468606,
+        69750.18746243918
+      ],
+      "prior_actual_observation": "S2B_48NUF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:56.787000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        3026,
+        9264
+      ],
+      "native20m_SCL_containing_pixel": [
+        1513,
+        4632
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130635,
+        "x": 206880
+      },
+      "point_index": 19039,
+      "centre_unchanged": {
+        "longitude": 104.08329073945515,
+        "latitude": 0.614484378834776,
+        "ideal_longitude_numerator": 27287100,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NUF_20200106_0_L2A",
+      "projected_coordinates": [
+        397994.6576554457,
+        67927.76493005775
+      ],
+      "prior_actual_observation": "S2B_48NUF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:56.787000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        3209,
+        9799
+      ],
+      "native20m_SCL_containing_pixel": [
+        1604,
+        4899
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130639,
+        "x": 206882
+      },
+      "point_index": 19092,
+      "centre_unchanged": {
+        "longitude": 104.0860370910034,
+        "latitude": 0.6089919888078156,
+        "ideal_longitude_numerator": 27287820,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NUF_20200106_0_L2A",
+      "projected_coordinates": [
+        398300.17620530515,
+        67320.55999701764
+      ],
+      "prior_actual_observation": "S2B_48NUF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:56.787000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        3269,
+        9830
+      ],
+      "native20m_SCL_containing_pixel": [
+        1634,
+        4915
+      ]
+    },
+    {
+      "original_key": {
+        "owner": 22727,
+        "y": 130643,
+        "x": 206881
+      },
+      "point_index": 19146,
+      "centre_unchanged": {
+        "longitude": 104.08466391522929,
+        "latitude": 0.6034995931844924,
+        "ideal_longitude_numerator": 27287460,
+        "ideal_longitude_denominator": 262166
+      },
+      "item_id": "S2A_48NUF_20200106_0_L2A",
+      "projected_coordinates": [
+        398147.26245884964,
+        66713.43252107463
+      ],
+      "prior_actual_observation": "S2B_48NUF_20200101_1_L2A",
+      "prior_actual_acquisition": "2020-01-01T03:37:56.787000Z",
+      "new_distinct_acquisition_reason": "Actual previous native views remain cloud/haze obscured or locally low-contrast at this exact currently-held original centre; scene quality alone does not answer the body question.",
+      "native10m_containing_pixel": [
+        3330,
+        9814
+      ],
+      "native20m_SCL_containing_pixel": [
+        1665,
+        4907
+      ]
+    }
+  ],
+  "held_unplaced": [],
+  "owner_counts": {
+    "22727": 34
+  },
+  "selection_rule": "Earliest later calendar-date acquisition among retained unfiltered catalogue bbox/native-frame metadata contacts; every prior15 observed item and all observed Batam calendar dates are excluded, including same-pass neighbouring granules or reprocessing variants. Tie scene cloud then literal item ID. Scene quality is context only. No agreement hunt or source polygon claim.",
+  "natural_group_selection": "Complete disjoint5-point48NUF and29-point48NVG source-item groups. The72/91-point item groups are deferred under finite admission; no arbitrary slicing or desired-class selection.",
+  "current_public_held544": {
+    "commit": "a270bf04a561ab38c6aaaf9b627b17cd155298dd",
+    "publication_path": "coordination/engineering/indonesia-adm2-current-cell-20261014/worldcover2020-remainder80712-001/nextdated6-supplement-001/accounting/specific-residual544-owner-y-x.jsonl.gz",
+    "file": ".cloud-work/physical6-packet-001/accounting/specific-residual544-owner-y-x.jsonl.gz",
+    "bytes": 2359,
+    "sha256": "40d443581e908b7797e83d9b2527df24edd4f1484df8172f6dbc7c3cd8dfaa72",
+    "mode": "100644",
+    "git_blob_oid": "f1c1a8d189efde2e6dbe418d77fbfe75270f2307",
+    "decoded_bytes": 11968,
+    "decoded_sha256": "8eb5044074d03cffac35b421b9c533dc038b887b68bac9c09939846bad036414"
+  },
+  "original_catalogue_pin": {
+    "file": ".handoff-restored/idn-physical-dated778-plan-001/worker6-metadata/scene-catalogue/22727-no-cloud-gate-search-page001.json",
+    "bytes": 2138677,
+    "sha256": "6850a8e147d93a92569a24cedbd7023e679617b663263bb1ec695f7b43927be5"
+  },
+  "metadata197_choice_pin": {
+    "file": ".cloud-work/batam197-cloud-nextdate-metadata-estimate.json",
+    "bytes": 151673,
+    "sha256": "f0d31423bca250a3664d36a9bb3b52a630d2e3e05c6e921556bdde54a2f32692"
+  },
+  "excluded_observed17_item_ids": [
+    "S2A_50NNJ_20200719_0_L2A",
+    "S2A_52MBE_20200126_0_L2A",
+    "S2A_52MCD_20200126_0_L2A",
+    "S2A_52MDE_20200126_0_L2A",
+    "S2A_52NCF_20200126_0_L2A",
+    "S2A_53MMN_20200127_0_L2A",
+    "S2A_53MMP_20200127_0_L2A",
+    "S2B_48NUF_20200101_1_L2A",
+    "S2B_48NUG_20200101_0_L2A",
+    "S2B_48NVF_20200101_1_L2A",
+    "S2B_48NVG_20200101_0_L2A",
+    "S2B_50NNJ_20200222_0_L2A",
+    "S2B_50NNK_20200316_1_L2A",
+    "S2B_52MCE_20200410_0_L2A",
+    "S2B_52MDD_20200121_0_L2A",
+    "S2B_52NBF_20200121_0_L2A",
+    "S2B_53MMQ_20200122_0_L2A"
+  ],
+  "all_prior_cloud_observations_and_original_independent_holds_unchanged": true,
+  "new_source_value_or_mask_calls": 0,
+  "new_adopted_or_native_credit": 0
+}

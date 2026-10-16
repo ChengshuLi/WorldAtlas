@@ -1,0 +1,2186 @@
+{
+  "scope": 34,
+  "source_plan_sha256": "a90a24c3c8354e826268d0eb8f333e6aea10b55b30c91381a38c54d43e7c67c3",
+  "current_original_Batam_held_scope": 237,
+  "prior_actual_cloud_haze_held_cohort": 34,
+  "new_PB05_raw_only_hold_count": 0,
+  "pages": [
+    {
+      "page_1based": 1,
+      "file": "native-rawDN-context-pages/batam34-rawDN-01.png",
+      "bytes": 290312,
+      "sha256": "c7fd8c01c37eba6a94fba15286afe3bc3d64235ff615811b423f14c6ba479cb2",
+      "panels": [
+        {
+          "global_index_zero_based": 0,
+          "panel_1based": 1,
+          "point_index": 18886,
+          "original_key": {
+            "owner": 22727,
+            "y": 130623,
+            "x": 206844
+          },
+          "item_id": "S2A_48NUF_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:56.211000Z",
+          "raw_RGBNIR": [
+            176,
+            420,
+            144,
+            2710
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 4,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.97841790645907,
+            24.375513937236974
+          ],
+          "native_requested_window": [
+            9225,
+            3002,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/red/block-02-09.npz",
+              "bytes": 1176811,
+              "sha256": "c3cbc095f96cf8aed2fbacba2ec453c6c8d66ae9a5244fab2b0ebe9f12bb4d37"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/green/block-02-09.npz",
+              "bytes": 1211295,
+              "sha256": "741dd4eab88e7afbe6bc13ba3f0bbca04d75a6f5a30ac1819abfe4e0b7954d01"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/blue/block-02-09.npz",
+              "bytes": 1217797,
+              "sha256": "f23d95440589fcbefc098c34e0c8f27cb01df86bb6c48e414468bbc219176c74"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/nir/block-02-09.npz",
+              "bytes": 1149546,
+              "sha256": "137c99158c6ec09e003be8ef4da22da5e3d7b881545e637f4ede54b7e5aee62f"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 1,
+          "panel_1based": 2,
+          "point_index": 18887,
+          "original_key": {
+            "owner": 22727,
+            "y": 130623,
+            "x": 206845
+          },
+          "item_id": "S2A_48NUF_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:56.211000Z",
+          "raw_RGBNIR": [
+            355,
+            534,
+            347,
+            345
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 6,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.98125375608197,
+            24.656785468607268
+          ],
+          "native_requested_window": [
+            9240,
+            3002,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/red/block-02-09.npz",
+              "bytes": 1176811,
+              "sha256": "c3cbc095f96cf8aed2fbacba2ec453c6c8d66ae9a5244fab2b0ebe9f12bb4d37"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/green/block-02-09.npz",
+              "bytes": 1211295,
+              "sha256": "741dd4eab88e7afbe6bc13ba3f0bbca04d75a6f5a30ac1819abfe4e0b7954d01"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/blue/block-02-09.npz",
+              "bytes": 1217797,
+              "sha256": "f23d95440589fcbefc098c34e0c8f27cb01df86bb6c48e414468bbc219176c74"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/nir/block-02-09.npz",
+              "bytes": 1149546,
+              "sha256": "137c99158c6ec09e003be8ef4da22da5e3d7b881545e637f4ede54b7e5aee62f"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 2,
+          "panel_1based": 3,
+          "point_index": 19039,
+          "original_key": {
+            "owner": 22727,
+            "y": 130635,
+            "x": 206880
+          },
+          "item_id": "S2A_48NUF_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:56.211000Z",
+          "raw_RGBNIR": [
+            322,
+            496,
+            316,
+            2214
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 4,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.223506994225318,
+            24.465765544569877
+          ],
+          "native_requested_window": [
+            9775,
+            3185,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/red/block-03-09.npz",
+              "bytes": 1178647,
+              "sha256": "433b83f5383a00043b86ddcf8a6314d17705a7bf96142299930a247cb2353073"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/green/block-03-09.npz",
+              "bytes": 1208552,
+              "sha256": "9ca5e4e965f07605bbc3bddacda5e2ae89fae9fafe1d6647129c357c7036fcf7"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/blue/block-03-09.npz",
+              "bytes": 1223621,
+              "sha256": "f490d89b1624208cc1532cb3638c40f7edcfa579e65652123b13c4000f479d31"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/nir/block-03-09.npz",
+              "bytes": 1165650,
+              "sha256": "ebfedc730173046efebf06f078ff625bd402f27fe5d1c2e522183cb56367521f"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 3,
+          "panel_1based": 4,
+          "point_index": 19092,
+          "original_key": {
+            "owner": 22727,
+            "y": 130639,
+            "x": 206882
+          },
+          "item_id": "S2A_48NUF_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:56.211000Z",
+          "raw_RGBNIR": [
+            288,
+            430,
+            188,
+            3088
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 10,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.94400029823555,
+            24.01762053051789
+          ],
+          "native_requested_window": [
+            9806,
+            3245,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/red/block-03-09.npz",
+              "bytes": 1178647,
+              "sha256": "433b83f5383a00043b86ddcf8a6314d17705a7bf96142299930a247cb2353073"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/green/block-03-09.npz",
+              "bytes": 1208552,
+              "sha256": "9ca5e4e965f07605bbc3bddacda5e2ae89fae9fafe1d6647129c357c7036fcf7"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/blue/block-03-09.npz",
+              "bytes": 1223621,
+              "sha256": "f490d89b1624208cc1532cb3638c40f7edcfa579e65652123b13c4000f479d31"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/nir/block-03-09.npz",
+              "bytes": 1165650,
+              "sha256": "ebfedc730173046efebf06f078ff625bd402f27fe5d1c2e522183cb56367521f"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 4,
+          "panel_1based": 5,
+          "point_index": 19146,
+          "original_key": {
+            "owner": 22727,
+            "y": 130643,
+            "x": 206881
+          },
+          "item_id": "S2A_48NUF_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:56.211000Z",
+          "raw_RGBNIR": [
+            417,
+            584,
+            412,
+            1700
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 10,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.65674789253626,
+            24.726245884965465
+          ],
+          "native_requested_window": [
+            9790,
+            3306,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/red/block-03-09.npz",
+              "bytes": 1178647,
+              "sha256": "433b83f5383a00043b86ddcf8a6314d17705a7bf96142299930a247cb2353073"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/green/block-03-09.npz",
+              "bytes": 1208552,
+              "sha256": "9ca5e4e965f07605bbc3bddacda5e2ae89fae9fafe1d6647129c357c7036fcf7"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/blue/block-03-09.npz",
+              "bytes": 1223621,
+              "sha256": "f490d89b1624208cc1532cb3638c40f7edcfa579e65652123b13c4000f479d31"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/nir/block-03-09.npz",
+              "bytes": 1165650,
+              "sha256": "ebfedc730173046efebf06f078ff625bd402f27fe5d1c2e522183cb56367521f"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 5,
+          "panel_1based": 6,
+          "point_index": 13666,
+          "original_key": {
+            "owner": 22727,
+            "y": 130335,
+            "x": 206949
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            272,
+            415,
+            216,
+            2056
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 4,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.075187090491454,
+            24.783782197686378
+          ],
+          "native_requested_window": [
+            834,
+            8634,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-08-00.npz",
+              "bytes": 1556249,
+              "sha256": "9f452f1a310b53fbcc02f78f9a851f33a47aa4edfc624733f3fd1e1820108f3c"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-08-00.npz",
+              "bytes": 1575857,
+              "sha256": "4ef18c25e197bb0420ad0e5b6cb76736f2c45abf57fc33748865e28cc3b9cf36"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-08-00.npz",
+              "bytes": 1567218,
+              "sha256": "c96b38452b797b0f805169d22ac99b2d6e9f8d6097c0ce13144033226e235900"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-08-00.npz",
+              "bytes": 1573440,
+              "sha256": "e853ad1f38ac9b8b0109b27a7d4a5abe9ae00adee03acbf8934e5ee00c1f3184"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 6,
+          "panel_1based": 7,
+          "point_index": 14103,
+          "original_key": {
+            "owner": 22727,
+            "y": 130347,
+            "x": 206925
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            553,
+            765,
+            525,
+            188
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 6,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.103892776682187,
+            24.03423066970572
+          ],
+          "native_requested_window": [
+            468,
+            8816,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-08-00.npz",
+              "bytes": 1556249,
+              "sha256": "9f452f1a310b53fbcc02f78f9a851f33a47aa4edfc624733f3fd1e1820108f3c"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-08-00.npz",
+              "bytes": 1575857,
+              "sha256": "4ef18c25e197bb0420ad0e5b6cb76736f2c45abf57fc33748865e28cc3b9cf36"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-08-00.npz",
+              "bytes": 1567218,
+              "sha256": "c96b38452b797b0f805169d22ac99b2d6e9f8d6097c0ce13144033226e235900"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-08-00.npz",
+              "bytes": 1573440,
+              "sha256": "e853ad1f38ac9b8b0109b27a7d4a5abe9ae00adee03acbf8934e5ee00c1f3184"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 7,
+          "panel_1based": 8,
+          "point_index": 14104,
+          "original_key": {
+            "owner": 22727,
+            "y": 130347,
+            "x": 206926
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            210,
+            445,
+            195,
+            2398
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 4,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.107908199084704,
+            24.313589803801733
+          ],
+          "native_requested_window": [
+            483,
+            8816,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-08-00.npz",
+              "bytes": 1556249,
+              "sha256": "9f452f1a310b53fbcc02f78f9a851f33a47aa4edfc624733f3fd1e1820108f3c"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-08-00.npz",
+              "bytes": 1575857,
+              "sha256": "4ef18c25e197bb0420ad0e5b6cb76736f2c45abf57fc33748865e28cc3b9cf36"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-08-00.npz",
+              "bytes": 1567218,
+              "sha256": "c96b38452b797b0f805169d22ac99b2d6e9f8d6097c0ce13144033226e235900"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-08-00.npz",
+              "bytes": 1573440,
+              "sha256": "e853ad1f38ac9b8b0109b27a7d4a5abe9ae00adee03acbf8934e5ee00c1f3184"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 8,
+          "panel_1based": 9,
+          "point_index": 14410,
+          "original_key": {
+            "owner": 22727,
+            "y": 130356,
+            "x": 206921
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            1764,
+            1578,
+            1416,
+            2066
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 8,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.682185574081814,
+            24.880803454550914
+          ],
+          "native_requested_window": [
+            406,
+            8952,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-08-00.npz",
+              "bytes": 1556249,
+              "sha256": "9f452f1a310b53fbcc02f78f9a851f33a47aa4edfc624733f3fd1e1820108f3c"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-08-00.npz",
+              "bytes": 1575857,
+              "sha256": "4ef18c25e197bb0420ad0e5b6cb76736f2c45abf57fc33748865e28cc3b9cf36"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-08-00.npz",
+              "bytes": 1567218,
+              "sha256": "c96b38452b797b0f805169d22ac99b2d6e9f8d6097c0ce13144033226e235900"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-08-00.npz",
+              "bytes": 1573440,
+              "sha256": "e853ad1f38ac9b8b0109b27a7d4a5abe9ae00adee03acbf8934e5ee00c1f3184"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 9,
+          "panel_1based": 10,
+          "point_index": 14459,
+          "original_key": {
+            "owner": 22727,
+            "y": 130358,
+            "x": 206922
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            416,
+            473,
+            382,
+            340
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 6,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.040550274206907,
+            24.15232902225398
+          ],
+          "native_requested_window": [
+            422,
+            8983,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-08-00.npz",
+              "bytes": 1556249,
+              "sha256": "9f452f1a310b53fbcc02f78f9a851f33a47aa4edfc624733f3fd1e1820108f3c"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-08-00.npz",
+              "bytes": 1575857,
+              "sha256": "4ef18c25e197bb0420ad0e5b6cb76736f2c45abf57fc33748865e28cc3b9cf36"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-08-00.npz",
+              "bytes": 1567218,
+              "sha256": "c96b38452b797b0f805169d22ac99b2d6e9f8d6097c0ce13144033226e235900"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-08-00.npz",
+              "bytes": 1573440,
+              "sha256": "e853ad1f38ac9b8b0109b27a7d4a5abe9ae00adee03acbf8934e5ee00c1f3184"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 10,
+          "panel_1based": 11,
+          "point_index": 14751,
+          "original_key": {
+            "owner": 22727,
+            "y": 130372,
+            "x": 206947
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            581,
+            642,
+            350,
+            2426
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 7,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.617421586463024,
+            24.084246243139205
+          ],
+          "native_requested_window": [
+            804,
+            9195,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-09-00.npz",
+              "bytes": 1535599,
+              "sha256": "f47ffba760ac65a0511b3d893a0b8a92c93da7157af01664194a8cc91bd26a60"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-09-00.npz",
+              "bytes": 1545150,
+              "sha256": "5938c61e44c730983dc4e47ee8baedc8ed5c7609c98d1336ba61077d0f164119"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-09-00.npz",
+              "bytes": 1520914,
+              "sha256": "ea615feedcaa3761622d757267205d41ae8136b38d81648ba73cb51266a268b7"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-09-00.npz",
+              "bytes": 1575071,
+              "sha256": "dfe47b9f50f5c493b4e3106a47d885fb70af9ec0ff12b21938b566d77c682155"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 11,
+          "panel_1based": 12,
+          "point_index": 14752,
+          "original_key": {
+            "owner": 22727,
+            "y": 130372,
+            "x": 206948
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            617,
+            667,
+            451,
+            1506
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 2,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.621163359768616,
+            24.363644280623703
+          ],
+          "native_requested_window": [
+            819,
+            9195,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-09-00.npz",
+              "bytes": 1535599,
+              "sha256": "f47ffba760ac65a0511b3d893a0b8a92c93da7157af01664194a8cc91bd26a60"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-09-00.npz",
+              "bytes": 1545150,
+              "sha256": "5938c61e44c730983dc4e47ee8baedc8ed5c7609c98d1336ba61077d0f164119"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-09-00.npz",
+              "bytes": 1520914,
+              "sha256": "ea615feedcaa3761622d757267205d41ae8136b38d81648ba73cb51266a268b7"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-09-00.npz",
+              "bytes": 1575071,
+              "sha256": "dfe47b9f50f5c493b4e3106a47d885fb70af9ec0ff12b21938b566d77c682155"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 12,
+          "panel_1based": 13,
+          "point_index": 14797,
+          "original_key": {
+            "owner": 22727,
+            "y": 130373,
+            "x": 206926
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            642,
+            727,
+            548,
+            802
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 4,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.7146630743664,
+            24.211801452715008
+          ],
+          "native_requested_window": [
+            483,
+            9210,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-09-00.npz",
+              "bytes": 1535599,
+              "sha256": "f47ffba760ac65a0511b3d893a0b8a92c93da7157af01664194a8cc91bd26a60"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-09-00.npz",
+              "bytes": 1545150,
+              "sha256": "5938c61e44c730983dc4e47ee8baedc8ed5c7609c98d1336ba61077d0f164119"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-09-00.npz",
+              "bytes": 1520914,
+              "sha256": "ea615feedcaa3761622d757267205d41ae8136b38d81648ba73cb51266a268b7"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-09-00.npz",
+              "bytes": 1575071,
+              "sha256": "dfe47b9f50f5c493b4e3106a47d885fb70af9ec0ff12b21938b566d77c682155"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 13,
+          "panel_1based": 14,
+          "point_index": 14833,
+          "original_key": {
+            "owner": 22727,
+            "y": 130374,
+            "x": 206896
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            417,
+            569,
+            398,
+            264
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 6,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.77318021458632,
+            24.81965802841296
+          ],
+          "native_requested_window": [
+            24,
+            9225,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-09-00.npz",
+              "bytes": 1535599,
+              "sha256": "f47ffba760ac65a0511b3d893a0b8a92c93da7157af01664194a8cc91bd26a60"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-09-00.npz",
+              "bytes": 1545150,
+              "sha256": "5938c61e44c730983dc4e47ee8baedc8ed5c7609c98d1336ba61077d0f164119"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-09-00.npz",
+              "bytes": 1520914,
+              "sha256": "ea615feedcaa3761622d757267205d41ae8136b38d81648ba73cb51266a268b7"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-09-00.npz",
+              "bytes": 1575071,
+              "sha256": "dfe47b9f50f5c493b4e3106a47d885fb70af9ec0ff12b21938b566d77c682155"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 14,
+          "panel_1based": 15,
+          "point_index": 15031,
+          "original_key": {
+            "owner": 22727,
+            "y": 130379,
+            "x": 206926
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            167,
+            352,
+            144,
+            2940
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 4,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.778347885630865,
+            24.188831768449745
+          ],
+          "native_requested_window": [
+            483,
+            9301,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-09-00.npz",
+              "bytes": 1535599,
+              "sha256": "f47ffba760ac65a0511b3d893a0b8a92c93da7157af01664194a8cc91bd26a60"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-09-00.npz",
+              "bytes": 1545150,
+              "sha256": "5938c61e44c730983dc4e47ee8baedc8ed5c7609c98d1336ba61077d0f164119"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-09-00.npz",
+              "bytes": 1520914,
+              "sha256": "ea615feedcaa3761622d757267205d41ae8136b38d81648ba73cb51266a268b7"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-09-00.npz",
+              "bytes": 1575071,
+              "sha256": "dfe47b9f50f5c493b4e3106a47d885fb70af9ec0ff12b21938b566d77c682155"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 15,
+          "panel_1based": 16,
+          "point_index": 15273,
+          "original_key": {
+            "owner": 22727,
+            "y": 130389,
+            "x": 206953
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            560,
+            677,
+            335,
+            3028
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 4,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.651562791095785,
+            24.69869871308765
+          ],
+          "native_requested_window": [
+            895,
+            9453,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-09-00.npz",
+              "bytes": 1535599,
+              "sha256": "f47ffba760ac65a0511b3d893a0b8a92c93da7157af01664194a8cc91bd26a60"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-09-00.npz",
+              "bytes": 1545150,
+              "sha256": "5938c61e44c730983dc4e47ee8baedc8ed5c7609c98d1336ba61077d0f164119"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-09-00.npz",
+              "bytes": 1520914,
+              "sha256": "ea615feedcaa3761622d757267205d41ae8136b38d81648ba73cb51266a268b7"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-09-00.npz",
+              "bytes": 1575071,
+              "sha256": "dfe47b9f50f5c493b4e3106a47d885fb70af9ec0ff12b21938b566d77c682155"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 16,
+          "panel_1based": 17,
+          "point_index": 15299,
+          "original_key": {
+            "owner": 22727,
+            "y": 130390,
+            "x": 206957
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            1202,
+            1496,
+            990,
+            2200
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 4,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.843186009711644,
+            24.812981355571537
+          ],
+          "native_requested_window": [
+            956,
+            9468,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-09-00.npz",
+              "bytes": 1535599,
+              "sha256": "f47ffba760ac65a0511b3d893a0b8a92c93da7157af01664194a8cc91bd26a60"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-09-00.npz",
+              "bytes": 1545150,
+              "sha256": "5938c61e44c730983dc4e47ee8baedc8ed5c7609c98d1336ba61077d0f164119"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-09-00.npz",
+              "bytes": 1520914,
+              "sha256": "ea615feedcaa3761622d757267205d41ae8136b38d81648ba73cb51266a268b7"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-09-00.npz",
+              "bytes": 1575071,
+              "sha256": "dfe47b9f50f5c493b4e3106a47d885fb70af9ec0ff12b21938b566d77c682155"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 17,
+          "panel_1based": 18,
+          "point_index": 15327,
+          "original_key": {
+            "owner": 22727,
+            "y": 130391,
+            "x": 206961
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            271,
+            444,
+            194,
+            2588
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 4,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.034676427756494,
+            24.927234005503124
+          ],
+          "native_requested_window": [
+            1017,
+            9484,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-09-01.npz",
+              "bytes": 1364242,
+              "sha256": "708898e257ea2aabf30703e338d438d55cc3b060acb20fc53e6d7d9c77be3812"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-09-01.npz",
+              "bytes": 1408626,
+              "sha256": "0327f2b0c0b05da2bbd6b3a86fa77b32e6d2afeaa8d46a39a1bc8d54420f84da"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-09-01.npz",
+              "bytes": 1406573,
+              "sha256": "535a09b894373f8b41665688e04b0aa6cb3e59995f7341ad45d8cc9b9cc334c7"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-09-01.npz",
+              "bytes": 1349850,
+              "sha256": "0c8c172c9dbfb7652d8708e86d528d5cf190a6ddb4d1addadaf5a81665dec191"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 18,
+          "panel_1based": 19,
+          "point_index": 15378,
+          "original_key": {
+            "owner": 22727,
+            "y": 130394,
+            "x": 206927
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            948,
+            1144,
+            805,
+            3122
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 5,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.442255660622322,
+            24.41190607890894
+          ],
+          "native_requested_window": [
+            498,
+            9529,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-09-00.npz",
+              "bytes": 1535599,
+              "sha256": "f47ffba760ac65a0511b3d893a0b8a92c93da7157af01664194a8cc91bd26a60"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-09-00.npz",
+              "bytes": 1545150,
+              "sha256": "5938c61e44c730983dc4e47ee8baedc8ed5c7609c98d1336ba61077d0f164119"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-09-00.npz",
+              "bytes": 1520914,
+              "sha256": "ea615feedcaa3761622d757267205d41ae8136b38d81648ba73cb51266a268b7"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-09-00.npz",
+              "bytes": 1575071,
+              "sha256": "dfe47b9f50f5c493b4e3106a47d885fb70af9ec0ff12b21938b566d77c682155"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 19,
+          "panel_1based": 20,
+          "point_index": 15430,
+          "original_key": {
+            "owner": 22727,
+            "y": 130397,
+            "x": 206916
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            346,
+            532,
+            251,
+            2888
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 4,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.932996915536933,
+            24.324154734604235
+          ],
+          "native_requested_window": [
+            330,
+            9574,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-09-00.npz",
+              "bytes": 1535599,
+              "sha256": "f47ffba760ac65a0511b3d893a0b8a92c93da7157af01664194a8cc91bd26a60"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-09-00.npz",
+              "bytes": 1545150,
+              "sha256": "5938c61e44c730983dc4e47ee8baedc8ed5c7609c98d1336ba61077d0f164119"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-09-00.npz",
+              "bytes": 1520914,
+              "sha256": "ea615feedcaa3761622d757267205d41ae8136b38d81648ba73cb51266a268b7"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-09-00.npz",
+              "bytes": 1575071,
+              "sha256": "dfe47b9f50f5c493b4e3106a47d885fb70af9ec0ff12b21938b566d77c682155"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 20,
+          "panel_1based": 21,
+          "point_index": 15482,
+          "original_key": {
+            "owner": 22727,
+            "y": 130400,
+            "x": 206949
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            249,
+            483,
+            211,
+            2980
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 4,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.586985917841957,
+            24.541273306174844
+          ],
+          "native_requested_window": [
+            834,
+            9620,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-09-00.npz",
+              "bytes": 1535599,
+              "sha256": "f47ffba760ac65a0511b3d893a0b8a92c93da7157af01664194a8cc91bd26a60"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-09-00.npz",
+              "bytes": 1545150,
+              "sha256": "5938c61e44c730983dc4e47ee8baedc8ed5c7609c98d1336ba61077d0f164119"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-09-00.npz",
+              "bytes": 1520914,
+              "sha256": "ea615feedcaa3761622d757267205d41ae8136b38d81648ba73cb51266a268b7"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-09-00.npz",
+              "bytes": 1575071,
+              "sha256": "dfe47b9f50f5c493b4e3106a47d885fb70af9ec0ff12b21938b566d77c682155"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 21,
+          "panel_1based": 22,
+          "point_index": 15496,
+          "original_key": {
+            "owner": 22727,
+            "y": 130401,
+            "x": 206927
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            588,
+            796,
+            686,
+            397
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 6,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.68407793530605,
+            24.385965070738166
+          ],
+          "native_requested_window": [
+            498,
+            9635,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-09-00.npz",
+              "bytes": 1535599,
+              "sha256": "f47ffba760ac65a0511b3d893a0b8a92c93da7157af01664194a8cc91bd26a60"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-09-00.npz",
+              "bytes": 1545150,
+              "sha256": "5938c61e44c730983dc4e47ee8baedc8ed5c7609c98d1336ba61077d0f164119"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-09-00.npz",
+              "bytes": 1520914,
+              "sha256": "ea615feedcaa3761622d757267205d41ae8136b38d81648ba73cb51266a268b7"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-09-00.npz",
+              "bytes": 1575071,
+              "sha256": "dfe47b9f50f5c493b4e3106a47d885fb70af9ec0ff12b21938b566d77c682155"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 22,
+          "panel_1based": 23,
+          "point_index": 15514,
+          "original_key": {
+            "owner": 22727,
+            "y": 130402,
+            "x": 206930
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            288,
+            443,
+            290,
+            1806
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 4,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.87259658326184,
+            24.221327687148005
+          ],
+          "native_requested_window": [
+            544,
+            9650,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-09-00.npz",
+              "bytes": 1535599,
+              "sha256": "f47ffba760ac65a0511b3d893a0b8a92c93da7157af01664194a8cc91bd26a60"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-09-00.npz",
+              "bytes": 1545150,
+              "sha256": "5938c61e44c730983dc4e47ee8baedc8ed5c7609c98d1336ba61077d0f164119"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-09-00.npz",
+              "bytes": 1520914,
+              "sha256": "ea615feedcaa3761622d757267205d41ae8136b38d81648ba73cb51266a268b7"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-09-00.npz",
+              "bytes": 1575071,
+              "sha256": "dfe47b9f50f5c493b4e3106a47d885fb70af9ec0ff12b21938b566d77c682155"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 23,
+          "panel_1based": 24,
+          "point_index": 15542,
+          "original_key": {
+            "owner": 22727,
+            "y": 130404,
+            "x": 206928
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            223,
+            372,
+            204,
+            2084
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 4,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.220067474738244,
+            24.654628212345415
+          ],
+          "native_requested_window": [
+            513,
+            9681,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-09-00.npz",
+              "bytes": 1535599,
+              "sha256": "f47ffba760ac65a0511b3d893a0b8a92c93da7157af01664194a8cc91bd26a60"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-09-00.npz",
+              "bytes": 1545150,
+              "sha256": "5938c61e44c730983dc4e47ee8baedc8ed5c7609c98d1336ba61077d0f164119"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-09-00.npz",
+              "bytes": 1520914,
+              "sha256": "ea615feedcaa3761622d757267205d41ae8136b38d81648ba73cb51266a268b7"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-09-00.npz",
+              "bytes": 1575071,
+              "sha256": "dfe47b9f50f5c493b4e3106a47d885fb70af9ec0ff12b21938b566d77c682155"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_1based": 2,
+      "file": "native-rawDN-context-pages/batam34-rawDN-02.png",
+      "bytes": 135483,
+      "sha256": "7bd747ae1897443eb90ef82cdf19a2087c72f0ecd488867b487bfdf15430ca42",
+      "panels": [
+        {
+          "global_index_zero_based": 24,
+          "panel_1based": 1,
+          "point_index": 15544,
+          "original_key": {
+            "owner": 22727,
+            "y": 130404,
+            "x": 206954
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            572,
+            602,
+            556,
+            480
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 2,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.31398062041262,
+            24.924923056154512
+          ],
+          "native_requested_window": [
+            910,
+            9681,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-09-00.npz",
+              "bytes": 1535599,
+              "sha256": "f47ffba760ac65a0511b3d893a0b8a92c93da7157af01664194a8cc91bd26a60"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-09-00.npz",
+              "bytes": 1545150,
+              "sha256": "5938c61e44c730983dc4e47ee8baedc8ed5c7609c98d1336ba61077d0f164119"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-09-00.npz",
+              "bytes": 1520914,
+              "sha256": "ea615feedcaa3761622d757267205d41ae8136b38d81648ba73cb51266a268b7"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-09-00.npz",
+              "bytes": 1575071,
+              "sha256": "dfe47b9f50f5c493b4e3106a47d885fb70af9ec0ff12b21938b566d77c682155"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 25,
+          "panel_1based": 2,
+          "point_index": 15572,
+          "original_key": {
+            "owner": 22727,
+            "y": 130406,
+            "x": 206955
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            149,
+            326,
+            125,
+            2360
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 4,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.672107981710724,
+            24.19747827831452
+          ],
+          "native_requested_window": [
+            926,
+            9711,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-09-00.npz",
+              "bytes": 1535599,
+              "sha256": "f47ffba760ac65a0511b3d893a0b8a92c93da7157af01664194a8cc91bd26a60"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-09-00.npz",
+              "bytes": 1545150,
+              "sha256": "5938c61e44c730983dc4e47ee8baedc8ed5c7609c98d1336ba61077d0f164119"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-09-00.npz",
+              "bytes": 1520914,
+              "sha256": "ea615feedcaa3761622d757267205d41ae8136b38d81648ba73cb51266a268b7"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-09-00.npz",
+              "bytes": 1575071,
+              "sha256": "dfe47b9f50f5c493b4e3106a47d885fb70af9ec0ff12b21938b566d77c682155"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 26,
+          "panel_1based": 3,
+          "point_index": 15744,
+          "original_key": {
+            "owner": 22727,
+            "y": 130416,
+            "x": 206964
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            381,
+            576,
+            266,
+            2536
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 4,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.47639157362937,
+            24.679182974097785
+          ],
+          "native_requested_window": [
+            1063,
+            9863,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-09-01.npz",
+              "bytes": 1364242,
+              "sha256": "708898e257ea2aabf30703e338d438d55cc3b060acb20fc53e6d7d9c77be3812"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-09-01.npz",
+              "bytes": 1408626,
+              "sha256": "0327f2b0c0b05da2bbd6b3a86fa77b32e6d2afeaa8d46a39a1bc8d54420f84da"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-09-01.npz",
+              "bytes": 1406573,
+              "sha256": "535a09b894373f8b41665688e04b0aa6cb3e59995f7341ad45d8cc9b9cc334c7"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-09-01.npz",
+              "bytes": 1349850,
+              "sha256": "0c8c172c9dbfb7652d8708e86d528d5cf190a6ddb4d1addadaf5a81665dec191"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 27,
+          "panel_1based": 4,
+          "point_index": 15770,
+          "original_key": {
+            "owner": 22727,
+            "y": 130418,
+            "x": 206964
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            156,
+            316,
+            129,
+            2432
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 4,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.831032164627686,
+            24.672411626539542
+          ],
+          "native_requested_window": [
+            1063,
+            9893,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-09-01.npz",
+              "bytes": 1364242,
+              "sha256": "708898e257ea2aabf30703e338d438d55cc3b060acb20fc53e6d7d9c77be3812"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-09-01.npz",
+              "bytes": 1408626,
+              "sha256": "0327f2b0c0b05da2bbd6b3a86fa77b32e6d2afeaa8d46a39a1bc8d54420f84da"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-09-01.npz",
+              "bytes": 1406573,
+              "sha256": "535a09b894373f8b41665688e04b0aa6cb3e59995f7341ad45d8cc9b9cc334c7"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-09-01.npz",
+              "bytes": 1349850,
+              "sha256": "0c8c172c9dbfb7652d8708e86d528d5cf190a6ddb4d1addadaf5a81665dec191"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 28,
+          "panel_1based": 5,
+          "point_index": 15801,
+          "original_key": {
+            "owner": 22727,
+            "y": 130420,
+            "x": 206962
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            203,
+            381,
+            165,
+            2508
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 4,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.178897582634818,
+            24.106451996245596
+          ],
+          "native_requested_window": [
+            1033,
+            9924,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-09-01.npz",
+              "bytes": 1364242,
+              "sha256": "708898e257ea2aabf30703e338d438d55cc3b060acb20fc53e6d7d9c77be3812"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-09-01.npz",
+              "bytes": 1408626,
+              "sha256": "0327f2b0c0b05da2bbd6b3a86fa77b32e6d2afeaa8d46a39a1bc8d54420f84da"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-09-01.npz",
+              "bytes": 1406573,
+              "sha256": "535a09b894373f8b41665688e04b0aa6cb3e59995f7341ad45d8cc9b9cc334c7"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-09-01.npz",
+              "bytes": 1349850,
+              "sha256": "0c8c172c9dbfb7652d8708e86d528d5cf190a6ddb4d1addadaf5a81665dec191"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 29,
+          "panel_1based": 6,
+          "point_index": 15817,
+          "original_key": {
+            "owner": 22727,
+            "y": 130421,
+            "x": 206962
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            199,
+            396,
+            172,
+            2486
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 4,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.356247987881943,
+            24.10307257511886
+          ],
+          "native_requested_window": [
+            1033,
+            9939,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-09-01.npz",
+              "bytes": 1364242,
+              "sha256": "708898e257ea2aabf30703e338d438d55cc3b060acb20fc53e6d7d9c77be3812"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-09-01.npz",
+              "bytes": 1408626,
+              "sha256": "0327f2b0c0b05da2bbd6b3a86fa77b32e6d2afeaa8d46a39a1bc8d54420f84da"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-09-01.npz",
+              "bytes": 1406573,
+              "sha256": "535a09b894373f8b41665688e04b0aa6cb3e59995f7341ad45d8cc9b9cc334c7"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-09-01.npz",
+              "bytes": 1349850,
+              "sha256": "0c8c172c9dbfb7652d8708e86d528d5cf190a6ddb4d1addadaf5a81665dec191"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 30,
+          "panel_1based": 7,
+          "point_index": 15830,
+          "original_key": {
+            "owner": 22727,
+            "y": 130422,
+            "x": 206962
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            337,
+            540,
+            229,
+            2874
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 4,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.53360404592786,
+            24.09969825675944
+          ],
+          "native_requested_window": [
+            1033,
+            9954,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-09-01.npz",
+              "bytes": 1364242,
+              "sha256": "708898e257ea2aabf30703e338d438d55cc3b060acb20fc53e6d7d9c77be3812"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-09-01.npz",
+              "bytes": 1408626,
+              "sha256": "0327f2b0c0b05da2bbd6b3a86fa77b32e6d2afeaa8d46a39a1bc8d54420f84da"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-09-01.npz",
+              "bytes": 1406573,
+              "sha256": "535a09b894373f8b41665688e04b0aa6cb3e59995f7341ad45d8cc9b9cc334c7"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-09-01.npz",
+              "bytes": 1349850,
+              "sha256": "0c8c172c9dbfb7652d8708e86d528d5cf190a6ddb4d1addadaf5a81665dec191"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 31,
+          "panel_1based": 8,
+          "point_index": 15846,
+          "original_key": {
+            "owner": 22727,
+            "y": 130423,
+            "x": 206962
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            210,
+            375,
+            186,
+            2306
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 4,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.710965748225135,
+            24.09632904116006
+          ],
+          "native_requested_window": [
+            1033,
+            9969,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-09-01.npz",
+              "bytes": 1364242,
+              "sha256": "708898e257ea2aabf30703e338d438d55cc3b060acb20fc53e6d7d9c77be3812"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-09-01.npz",
+              "bytes": 1408626,
+              "sha256": "0327f2b0c0b05da2bbd6b3a86fa77b32e6d2afeaa8d46a39a1bc8d54420f84da"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-09-01.npz",
+              "bytes": 1406573,
+              "sha256": "535a09b894373f8b41665688e04b0aa6cb3e59995f7341ad45d8cc9b9cc334c7"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-09-01.npz",
+              "bytes": 1349850,
+              "sha256": "0c8c172c9dbfb7652d8708e86d528d5cf190a6ddb4d1addadaf5a81665dec191"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 32,
+          "panel_1based": 9,
+          "point_index": 16487,
+          "original_key": {
+            "owner": 22727,
+            "y": 130450,
+            "x": 206906
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            343,
+            511,
+            253,
+            2712
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 4,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.311090749999494,
+            24.33130381522642
+          ],
+          "native_requested_window": [
+            177,
+            10379,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-10-00.npz",
+              "bytes": 1137092,
+              "sha256": "21fc407f23be82d4cbd4dd3fd7b2a3b1596650004258af91229dcaee8e783a74"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-10-00.npz",
+              "bytes": 1132488,
+              "sha256": "fec22d681456512dfad3654781d893d47df19b60a964a5fae294f263d631cd43"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-10-00.npz",
+              "bytes": 1122312,
+              "sha256": "a54a79666faa9d29fe4d82f6929fdc7dbb01b7ea7fb240e5cf8d6e8829ed4a95"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-10-00.npz",
+              "bytes": 1154379,
+              "sha256": "f41fd4750c509a1a29e81135bbcb83ea9819fba5d1e6fb49357575c76ca47574"
+            }
+          ]
+        },
+        {
+          "global_index_zero_based": 33,
+          "panel_1based": 10,
+          "point_index": 16531,
+          "original_key": {
+            "owner": 22727,
+            "y": 130452,
+            "x": 206908
+          },
+          "item_id": "S2A_48NVG_20200106_0_L2A",
+          "acquisition_datetime": "2020-01-06T03:37:38.262000Z",
+          "raw_RGBNIR": [
+            871,
+            708,
+            502,
+            1370
+          ],
+          "raw_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "raw_SCL_value": 5,
+          "raw_SCL_mask": 255,
+          "fractional_centre_in_crop": [
+            24.673821263948412,
+            24.88441485682415
+          ],
+          "native_requested_window": [
+            207,
+            10409,
+            49,
+            49
+          ],
+          "context_complete": true,
+          "source_array_pins": [
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-10-00.npz",
+              "bytes": 1137092,
+              "sha256": "21fc407f23be82d4cbd4dd3fd7b2a3b1596650004258af91229dcaee8e783a74"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-10-00.npz",
+              "bytes": 1132488,
+              "sha256": "fec22d681456512dfad3654781d893d47df19b60a964a5fae294f263d631cd43"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-10-00.npz",
+              "bytes": 1122312,
+              "sha256": "a54a79666faa9d29fe4d82f6929fdc7dbb01b7ea7fb240e5cf8d6e8829ed4a95"
+            },
+            {
+              "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-10-00.npz",
+              "bytes": 1154379,
+              "sha256": "f41fd4750c509a1a29e81135bbcb83ea9819fba5d1e6fb49357575c76ca47574"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "all_loaded_source_array_pins": [
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/blue/block-02-09.npz",
+      "bytes": 1217797,
+      "sha256": "f23d95440589fcbefc098c34e0c8f27cb01df86bb6c48e414468bbc219176c74"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/blue/block-03-09.npz",
+      "bytes": 1223621,
+      "sha256": "f490d89b1624208cc1532cb3638c40f7edcfa579e65652123b13c4000f479d31"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/green/block-02-09.npz",
+      "bytes": 1211295,
+      "sha256": "741dd4eab88e7afbe6bc13ba3f0bbca04d75a6f5a30ac1819abfe4e0b7954d01"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/green/block-03-09.npz",
+      "bytes": 1208552,
+      "sha256": "9ca5e4e965f07605bbc3bddacda5e2ae89fae9fafe1d6647129c357c7036fcf7"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/nir/block-02-09.npz",
+      "bytes": 1149546,
+      "sha256": "137c99158c6ec09e003be8ef4da22da5e3d7b881545e637f4ede54b7e5aee62f"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/nir/block-03-09.npz",
+      "bytes": 1165650,
+      "sha256": "ebfedc730173046efebf06f078ff625bd402f27fe5d1c2e522183cb56367521f"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/red/block-02-09.npz",
+      "bytes": 1176811,
+      "sha256": "c3cbc095f96cf8aed2fbacba2ec453c6c8d66ae9a5244fab2b0ebe9f12bb4d37"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/red/block-03-09.npz",
+      "bytes": 1178647,
+      "sha256": "433b83f5383a00043b86ddcf8a6314d17705a7bf96142299930a247cb2353073"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/scl/block-02-09.npz",
+      "bytes": 2619,
+      "sha256": "f86aefa208fe4f3f3b538fb4d44895e8cbf46ef80394749c0658544c82c2c03c"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NUF_20200106_0_L2A/scl/block-03-09.npz",
+      "bytes": 5007,
+      "sha256": "f61b9c059ca8bddba7e16ab37700eb220d708fa5f92f133bcc44c1b2e8df5e95"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-08-00.npz",
+      "bytes": 1567218,
+      "sha256": "c96b38452b797b0f805169d22ac99b2d6e9f8d6097c0ce13144033226e235900"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-09-00.npz",
+      "bytes": 1520914,
+      "sha256": "ea615feedcaa3761622d757267205d41ae8136b38d81648ba73cb51266a268b7"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-09-01.npz",
+      "bytes": 1406573,
+      "sha256": "535a09b894373f8b41665688e04b0aa6cb3e59995f7341ad45d8cc9b9cc334c7"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/blue/block-10-00.npz",
+      "bytes": 1122312,
+      "sha256": "a54a79666faa9d29fe4d82f6929fdc7dbb01b7ea7fb240e5cf8d6e8829ed4a95"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-08-00.npz",
+      "bytes": 1575857,
+      "sha256": "4ef18c25e197bb0420ad0e5b6cb76736f2c45abf57fc33748865e28cc3b9cf36"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-09-00.npz",
+      "bytes": 1545150,
+      "sha256": "5938c61e44c730983dc4e47ee8baedc8ed5c7609c98d1336ba61077d0f164119"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-09-01.npz",
+      "bytes": 1408626,
+      "sha256": "0327f2b0c0b05da2bbd6b3a86fa77b32e6d2afeaa8d46a39a1bc8d54420f84da"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/green/block-10-00.npz",
+      "bytes": 1132488,
+      "sha256": "fec22d681456512dfad3654781d893d47df19b60a964a5fae294f263d631cd43"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-08-00.npz",
+      "bytes": 1573440,
+      "sha256": "e853ad1f38ac9b8b0109b27a7d4a5abe9ae00adee03acbf8934e5ee00c1f3184"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-09-00.npz",
+      "bytes": 1575071,
+      "sha256": "dfe47b9f50f5c493b4e3106a47d885fb70af9ec0ff12b21938b566d77c682155"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-09-01.npz",
+      "bytes": 1349850,
+      "sha256": "0c8c172c9dbfb7652d8708e86d528d5cf190a6ddb4d1addadaf5a81665dec191"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/nir/block-10-00.npz",
+      "bytes": 1154379,
+      "sha256": "f41fd4750c509a1a29e81135bbcb83ea9819fba5d1e6fb49357575c76ca47574"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-08-00.npz",
+      "bytes": 1556249,
+      "sha256": "9f452f1a310b53fbcc02f78f9a851f33a47aa4edfc624733f3fd1e1820108f3c"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-09-00.npz",
+      "bytes": 1535599,
+      "sha256": "f47ffba760ac65a0511b3d893a0b8a92c93da7157af01664194a8cc91bd26a60"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-09-01.npz",
+      "bytes": 1364242,
+      "sha256": "708898e257ea2aabf30703e338d438d55cc3b060acb20fc53e6d7d9c77be3812"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/red/block-10-00.npz",
+      "bytes": 1137092,
+      "sha256": "21fc407f23be82d4cbd4dd3fd7b2a3b1596650004258af91229dcaee8e783a74"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/scl/block-08-00.npz",
+      "bytes": 22414,
+      "sha256": "37099da09ef71dbad600a7e354f8aacf97a658dce6c2606a3251a2b525a14223"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/scl/block-09-00.npz",
+      "bytes": 22955,
+      "sha256": "164dfe5de12fca24dafb41efbd46010749d26a94d97dcf1612ccf6890d6b38b5"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/scl/block-09-01.npz",
+      "bytes": 7773,
+      "sha256": "364adaea175217754a202150411a4b7b7b019e8cf672d5a3b4e893b86fd9c297"
+    },
+    {
+      "file": "next-distinct-raw-native-observation-001/S2A_48NVG_20200106_0_L2A/scl/block-10-00.npz",
+      "bytes": 16391,
+      "sha256": "0be541aec645ec8c214598cfdb79883af48c1097d9f204f64df1e5e98b4bf6a6"
+    }
+  ],
+  "display": "4 columns x 6 rows; each panel left RGB, right NIR-R-G. Literal uncalibrated rawDN fixed RGB0..3000/FCC0..5000 qualitative display only for every point. No gain/offset, BOA units, indices or quantitative reflectance interpretation. Both new source items have PB02.13 metadata contracts; these are retained without applying normalization in this display. All prior source radiometry limits remain unchanged. Nearest enlargement; hollow actual fractional-centre cross leaves centre unpainted. Magenta denotes an actual mask0 or absent source context; no clamp or imputation.",
+  "detail_images": "point-ID-native17-RGB-FCC-SCL25.png: left17-native RGB, middle17-native raw NIR-R-G, right separate25-native20m SCL. SCL is source context only, never body truth; native512px blocks indexed as512. Nearest enlargement with actual fractional marker; no cross-grid resampling.",
+  "new_physical_credit": 0
+}
