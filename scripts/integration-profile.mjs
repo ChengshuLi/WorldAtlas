@@ -651,11 +651,21 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
           &&same(rule.source_evidence,authority.source_evidence)&&same(rule.native_patch,authority.native_patch),
           'source-target rule/input join differs');
         needSelected((evidence.version===1&&evidence.kind==='source-target-native-evidence-v1'
-          ||evidence.version===2&&evidence.kind==='source-target-native-evidence-v2')
+          ||evidence.version===2&&evidence.kind==='source-target-native-evidence-v2'
+          ||evidence.version===3&&evidence.kind==='source-target-native-evidence-v3')
           &&Array.isArray(evidence.families)&&evidence.families.length>0&&Array.isArray(evidence.targets)&&evidence.targets.length>0,
           'missing source-target evidence roles');
         for (const role of ['catalogue','physical_evidence','physical_input','owner_roster','native_latitudes']) pin(evidence[role]);
         await physicalReproduction(evidence.physical_reproduction);
+        if(evidence.version===3){
+          const adoption=await pinnedJSON(evidence.revised_source_adoption);
+          needSelected(adoption.version===1&&adoption.kind==='adopted-osm-revised-source-native-v1',
+            'unsupported revised source adoption');
+          for(const role of ['raw_source','source_stage','assessment','scope','parent_decision','attribution'])pin(adoption[role]);
+          const fine=await pinnedJSON(adoption.current_geography);
+          const index=fine.input_pins?.filter(p=>p.path==='data/world-index.json');
+          needSelected(index?.length===1,'missing revised source current index');pin(index[0]);
+        }
         // Match the closed whole-body source-reader roles, not arbitrary JSON pins.
         for (const typed of [
           ...(evidence.version === 2 ? [{pin: evidence.dated_land_support,

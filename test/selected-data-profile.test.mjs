@@ -1390,7 +1390,7 @@ test('unreachable accepted SOURCE declarations still require administrative cust
 
 // Structural role eligibility only; the source/native reader separately
 // authenticates whole products and actual map-cell ownership.
-function sourceTargetRoleFixture({wrongRule=false,emptyFamily=false,retainedRoles=false,sourceMembership,mutateRoles=()=>{},territorial=false,dated=false,mutateInterpretation=()=>{}}={}) {
+function sourceTargetRoleFixture({wrongRule=false,emptyFamily=false,retainedRoles=false,sourceMembership,mutateRoles=()=>{},territorial=false,dated=false,revised=false,mutateRevision=()=>{},mutateInterpretation=()=>{}}={}) {
   return fixture({mutate:f=>{
     const nativeRows=[{y:3,runs:[[4,5,1]]}];
     f.rows[1]={component_id:'new',target_id:'target-new',disposition:'assigned',native_cells:1,
@@ -1410,6 +1410,17 @@ function sourceTargetRoleFixture({wrongRule=false,emptyFamily=false,retainedRole
     }
     mutateRoles({f,roles,parts});
     const interpretations={};
+    if(revised){
+      const index=f.put('data/world-index.json',{parts:['geography/fixture.json']},true);
+      f.policy.inputs.push(index.path);f.put('.github/package-inputs.json',f.policy,true);
+      const fine={input_pins:[index]};
+      const adoption={version:1,kind:'adopted-osm-revised-source-native-v1',
+        ...Object.fromEntries(['raw_source','source_stage','assessment','scope','parent_decision','attribution']
+          .map(role=>[role,f.leaf('revised-'+role+'.json')]))};
+      mutateRevision({f,adoption,fine});
+      adoption.current_geography=f.put(prefix+'revised-current-geography.json',fine);
+      interpretations.revised_source_adoption=f.put(prefix+'revised-adoption.json',adoption);
+    }
     for(const typed of [
       ...(dated?[{field:'dated_land_support',kind:'adopted-dated-native-centre-land-support-v1',roles:['adoption','review','observation','frame']}]:[]),
       ...(territorial?[{field:'territorial_applicability',kind:'adopted-native-territorial-applicability-v1',roles:['adoption','scope','original-source']}]:[])
@@ -1419,7 +1430,7 @@ function sourceTargetRoleFixture({wrongRule=false,emptyFamily=false,retainedRole
       mutateInterpretation({f,data,field:typed.field});
       interpretations[typed.field]=f.put(prefix+typed.field+'.json',data);
     }
-    const evidence=f.put(prefix+'source-target-evidence.json',{version:dated?2:1,kind:'source-target-native-evidence-v'+(dated?2:1),...roles,...interpretations,
+    const evidence=f.put(prefix+'source-target-evidence.json',{version:revised?3:dated?2:1,kind:'source-target-native-evidence-v'+(revised?3:dated?2:1),...roles,...interpretations,
       targets:[{id:'target-new'}],families:[{source_id:'source-family',parts:emptyFamily?[]:parts}],
       ...(sourceMembership?{source_membership:sourceMembership(f)}:{})});
     const patch=f.leaf('source-target-native-patch.json');
@@ -1434,6 +1445,16 @@ function sourceTargetRoleFixture({wrongRule=false,emptyFamily=false,retainedRole
 }
 test('source-target native roles and literal native-row expectations use the existing selected-data route',async()=>{
   const diagnostics={};assert.ok(await sourceTargetRoleFixture().run({metadataDiagnostics:diagnostics}),diagnostics.failure);
+});
+test('selected-data v3 role walk binds whole adopted source provenance and the current index',async()=>{
+  const f=sourceTargetRoleFixture({revised:true}),diagnostics={};
+  assert.equal((await f.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
+  for(const mutateRevision of [
+    ({adoption})=>delete adoption.raw_source,
+    ({adoption})=>adoption.attribution.git_blob_oid='f'.repeat(40),
+    ({fine})=>fine.input_pins=[],
+    ({fine})=>fine.input_pins.push(structuredClone(fine.input_pins[0]))
+  ])assert.equal(await sourceTargetRoleFixture({revised:true,mutateRevision}).run(),null);
 });
 test('selected-data fixed role walk retains exact territorial provenance with either source evidence version',async()=>{
   for(const dated of [false,true]){

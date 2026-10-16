@@ -792,7 +792,8 @@ export function packageProjection(config, reader, acceptedRegistry = null) {
       add(binding.source_evidence, 'original source evidence'); add(binding.native_patch, 'original native patch');
       const evidence = reader.json(binding.source_evidence);
       need((evidence.version === 1 && evidence.kind === 'source-target-native-evidence-v1'
-        || evidence.version === 2 && evidence.kind === 'source-target-native-evidence-v2')
+        || evidence.version === 2 && evidence.kind === 'source-target-native-evidence-v2'
+        || evidence.version === 3 && evidence.kind === 'source-target-native-evidence-v3')
         && Array.isArray(evidence.targets) && evidence.targets.length > 0
         && Array.isArray(evidence.families) && evidence.families.length > 0, 'Missing source-target evidence roles');
       // Closed whole-body read roles of qualifySourceTargetNativeAuthority. Its
@@ -800,6 +801,18 @@ export function packageProjection(config, reader, acceptedRegistry = null) {
       // operands/native contracts are not a recursive package declaration.
       for (const role of ['catalogue', 'physical_input', 'physical_reproduction', 'physical_evidence', 'native_latitudes', 'owner_roster'])
         add(evidence[role], 'source-target ' + role);
+      if (evidence.version === 3) {
+        add(evidence.revised_source_adoption, 'source-target revised source adoption');
+        const adoption = reader.json(evidence.revised_source_adoption);
+        need(adoption.version === 1 && adoption.kind === 'adopted-osm-revised-source-native-v1',
+          'Missing adopted revised source roles');
+        for (const role of ['raw_source', 'source_stage', 'assessment', 'scope', 'parent_decision', 'current_geography', 'attribution'])
+          add(adoption[role], 'source-target revised ' + role);
+        const fine = reader.json(adoption.current_geography);
+        const indexes = fine.input_pins?.filter(pin => pin.path === 'data/world-index.json');
+        need(indexes?.length === 1, 'Missing revised source current index');
+        add(indexes[0], 'source-target revised current index');
+      }
       const interpretations = [
         ...(evidence.version === 2 ? [{pin: evidence.dated_land_support,
           kind: 'adopted-dated-native-centre-land-support-v1', role: 'dated', label: 'dated support',
@@ -1355,9 +1368,11 @@ export function publishCompletedSource(root, destination, result, binding, resum
 export async function sourceEvidence(config, reader) {
   need(config.version === 1 && (config.source_evidence?.version === 1
     && config.source_evidence.kind === 'source-target-native-evidence-v1'
-    || config.source_evidence?.version === 2 && config.source_evidence.kind === 'source-target-native-evidence-v2'),
+    || config.source_evidence?.version === 2 && config.source_evidence.kind === 'source-target-native-evidence-v2'
+    || config.source_evidence?.version === 3 && config.source_evidence.kind === 'source-target-native-evidence-v3'),
   'Explicit ordinary source evidence required');
   if (config.source_evidence.version === 2) reader.read(config.source_evidence.dated_land_support);
+  if (config.source_evidence.version === 3) reader.read(config.source_evidence.revised_source_adoption);
   if (config.source_evidence.territorial_applicability !== undefined) reader.read(config.source_evidence.territorial_applicability);
   const {locate} = await import('./delivery-handoff-advance.mjs');
   const selectorPin = locate(reader, config.selector);

@@ -1,0 +1,28 @@
+{
+  "kind": "bounded-current-fine365-prospective-admission-v1",
+  "code_commit": "92070428a7e4e5537ef931f4dc11edc1fc0c3b6a",
+  "launcher_sha256": "5d8f9fc5aa65cf3b17a58c51d9d2b70768d8cc6a94ab09759450027071957fe4",
+  "script_sha256": "63d09aadd8213c30bb1680091d2ab84417afb6ec9dc640c360ddf0b98637dd19",
+  "command": [
+    "node",
+    "--max-old-space-size=512",
+    "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/dda6ef44fc5bf26bb9ad5567433b4c1ac45920f1f1fc1ca27469c1f1e02b3af3/work/.cache/vietnam2076-current-fine-proof-001/captured-observe-current-fine365.mjs",
+    "92070428a7e4e5537ef931f4dc11edc1fc0c3b6a",
+    "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/dda6ef44fc5bf26bb9ad5567433b4c1ac45920f1f1fc1ca27469c1f1e02b3af3/work/.cache/vietnam2076-current-fine-proof-001/current-fine365-observation.json"
+  ],
+  "scope": "All36 indexed canonical parts/49625 features at cd68e895, all365 original keys; only missing current fine contacts/ties",
+  "complete_geography_encoded_bytes": 203282806,
+  "largest_part_encoded_bytes": 12932719,
+  "representation": "One immutable Git part at a time; validated complete ring bounds exclude only provably irrelevant features; stock exact-native predicates for every survivor",
+  "memory_rss_limit_bytes": 805306368,
+  "node_heap_limit_mib": 512,
+  "wall_deadline_seconds": 120,
+  "poll_seconds": 0.05,
+  "free_bytes_before": 10973859840,
+  "memory_before": {
+    "MemTotal": 10451464192,
+    "MemAvailable": 8027803648
+  },
+  "output_and_log_allowance_bytes": 33554432,
+  "sampled_peak_is_not_continuous_maximum": true
+}

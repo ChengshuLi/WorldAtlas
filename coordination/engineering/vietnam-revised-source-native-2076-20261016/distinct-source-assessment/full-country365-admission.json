@@ -1,0 +1,18 @@
+{
+  "kind": "bounded-independent365-country-source-observation-prospective-admission",
+  "memory_rss_limit_bytes": 805306368,
+  "wall_deadline_seconds": 120,
+  "poll_seconds": 0.05,
+  "free_bytes_before": 11157512192,
+  "memory_available_before": {
+    "MemTotal": 10451464192,
+    "MemAvailable": 6871007232
+  },
+  "script_sha256": "fa230644c5a84f660bcb34429919e50538dd575e9b588f4dde2cf039d759b5a0",
+  "command": [
+    "node",
+    "--max-old-space-size=512",
+    ".cache/source-assessment/observe-full-country365.mjs"
+  ],
+  "scope": "365 exact keys, complete retained global countries,12OSMwholefeatures; read-only all operands; no sourcebank replay"
+}
