@@ -12,8 +12,29 @@ tree and compares reviewed bytes. It now emits that tree identity and the
 existing sparse selection directly, removing the separate helper authentication,
 custom Git executor, staging/promotion protocol and legacy fallback branch.
 
-Complete regressions retain every existing test and omit only
-`data/regional-review/` and `research/campaigns/`. Selected-data requests retain
+Complete regressions retain every discovered test across the existing three
+shards and the actual hosted build/parity/runtime checks. In addition to the
+existing `data/regional-review/` and `research/campaigns/` exclusions, ordinary
+full checkout omits eight historical archive roots:
+
+- `coordination/engineering/global-source-comparisons-b-package3-20261006/`
+- `coordination/engineering/global-source-comparisons-a-20261006/`
+- `coordination/engineering/global-source-comparisons-a-001-20261006/`
+- `coordination/engineering/global-source-comparisons-b-20261006/`
+- `coordination/engineering/reference-source-custody-20261007/`
+- `coordination/engineering/complete-numeric-closure-diagnosis-20261007/`
+- `research/geography/lithuania-latvia-gap-source-fitness-20261007/`
+- `research/geography/shared-seam-prt-esp-20261006/`
+
+These are exact whole-directory exclusions, not broad research or engineering
+namespace filters. Their original files and history remain in Git; neighboring
+roots remain checked out. Trusted preparation reads the authenticated candidate's
+package definition and retains an entire archive root when any declared package
+or verification path intersects it, including directory ancestors. Unavailable
+or malformed definitions fail preparation. New actual regression consumers of
+these archives must restore the needed checkout inputs through review.
+
+Selected-data requests retain
 the existing package/verification roles, ordinary engineering execution files
 and exact reviewed expectations. The existing selector is evaluated against the
 authenticated candidate tree; it grants no package, scientific or publication
@@ -50,7 +71,7 @@ publication gates remain unchanged.
 Focused controls use Node 24:
 
 ```sh
-node --test test/ci-checkout.test.mjs
+node --test test/ci-checkout.test.mjs test/merge-integration.test.mjs test/merge-integration-entrypoint.test.mjs test/package-inputs.test.mjs
 node --test --test-name-pattern='stock checkout|canonical verification' test/trusted-workflow-checkouts.test.mjs
 ```
 
@@ -58,4 +79,13 @@ The first suite exercises the existing sparse role boundary with tiny real Git
 trees, exact tree preservation, directory ancestors and adverse input layouts.
 The second checks the actual workflow declarations and executes its real
 candidate/credential verification against positive and adverse repositories.
-These tests do not claim full-size action throughput or a new scientific run.
+Complete-profile controls also exercise every archive exclusion and neighboring
+root with stock non-cone Git, declared package/verification overrides, actual
+prepare outputs and all discovered three-shard test paths. They establish sparse
+selection and identity, not full-size action throughput or execution of those
+entire suites. Ordinary full hosted integration and the real package build remain
+required before accepting this checkout change; measure that run before claiming
+wall-clock savings. Preparation executes trusted main, so the omission change's
+own integration uses the previous patterns; its first subsequent ordinary full
+run establishes actual adoption. The earlier selected-data omission diagnostic was a bounded
+check, not exhaustive proof that no process could read an archived Git body.
