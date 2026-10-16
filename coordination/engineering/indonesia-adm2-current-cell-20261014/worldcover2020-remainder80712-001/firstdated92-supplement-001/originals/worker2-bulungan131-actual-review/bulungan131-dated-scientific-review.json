@@ -1,0 +1,116 @@
+{
+  "disposition": "SUPPORTED_WITH_LIMITS_FOR_ROOT_ADOPTION_REVIEW; NOT_ADOPTED",
+  "reviewer": "/root/cell_method_review",
+  "exact_scope": {
+    "original_remaining": 778,
+    "cohort": 131,
+    "owner": 22698,
+    "source_name": "Bulungan",
+    "source_shapeID": "gb:IDN:ADM2:22746128B10941975158621",
+    "sourceID": 36336
+  },
+  "proposed_answers": 63,
+  "proposed_partition": {
+    "vegetation_canopy": 29,
+    "visible_water_like_body": 21,
+    "exposed_constructed_surface_or_corridor": 13
+  },
+  "unresolved": 68,
+  "unresolved_partition": {
+    "actual_nodata": 22,
+    "valid_mask_real_body_cloud_or_placement_uncertainty": 46
+  },
+  "candidate": {
+    "path": "idn-physical-dated778-plan-001/worker2-bulungan131-actual-review/proposed-bulungan131-dated-dispositions.jsonl.gz",
+    "bytes": 116164,
+    "sha256": "2244fe3c1f44065fb7dbe8b110b4412a3f439e3d1820e0d51ca32ad4fa488df1",
+    "decoded_bytes": 2586767,
+    "decoded_sha256": "b29f6ebd2368b12da550b6f6650f1f8544d1aee5d378a809c50a4299c3fc34c4"
+  },
+  "positive_keys": {
+    "path": "idn-physical-dated778-plan-001/worker2-bulungan131-actual-review/proposed-positive63-owner-y-x.jsonl.gz",
+    "bytes": 287,
+    "sha256": "f320068151b5bce7dea4ac25d16893a6c3274bc711111929925981967825c5c5",
+    "decoded_bytes": 1386,
+    "decoded_sha256": "5ca97830347e5d395e28edd74f6e83909a62abf05061bc28f9a049d63ae33198"
+  },
+  "source_point_bank": {
+    "path": "idn-physical-dated778-plan-001/worker6-metadata/first-raw-native-observation-001/S2B_50NNJ_20200222_0_L2A/point-observations.jsonl",
+    "bytes": 1443183,
+    "sha256": "fe82200d1f934f0ff6b7b55bf0eec3fb127f561988c6a05948b8dfd753e590db"
+  },
+  "source_item_complete": {
+    "path": "idn-physical-dated778-plan-001/worker6-metadata/first-raw-native-observation-001/S2B_50NNJ_20200222_0_L2A/item-complete.json",
+    "bytes": 32121,
+    "sha256": "be54518ff2df67a37020fe2068c7a503297340140884992f8b04dc72dfa594fe"
+  },
+  "original_full_source_association_inventory": {
+    "path": "idn-physical-dated778-plan-001/worker6-metadata/exact778-original-source-coordinate-current-reason.jsonl.gz",
+    "bytes": 189628,
+    "sha256": "6159516f9ffcdaf35e8febbf89ff32f658151767ad9d7f04948e1aa3627d892c"
+  },
+  "plan_sha256": "3145162ef32ff4f686a6223afb25ea64789f1f0e65e7486695da925069cdc52f",
+  "reader_sha256": "60b54f6e38a1b171330ae46ee575701118346c2cc4f6052f41b08c69fcf25f6e",
+  "views": {
+    "overview_pages": 6,
+    "detail_pages": 10,
+    "all_personally_viewed": true,
+    "overview_inventory": {
+      "path": "idn-physical-dated778-plan-001/worker2-bulungan131-actual-review/native-context-pages/contact-inventory.json",
+      "bytes": 133547,
+      "sha256": "f6b26369376a9f8c677a7b58d20f45666f0f457f7e1693d17522f9ddcb8854e2"
+    },
+    "detail_inventory": {
+      "path": "idn-physical-dated778-plan-001/worker2-bulungan131-actual-review/native-detail-pages/contact-inventory.json",
+      "bytes": 116761,
+      "sha256": "6dfe7e47dfd051f5accde3c2ecd17a27292424dcc89c740a0d545b867c2c2568"
+    }
+  },
+  "source_method": {
+    "item": "S2B_50NNJ_20200222_0_L2A",
+    "acquisition_datetime": "2020-02-22T02:36:53.904000Z",
+    "processing_generation_time": "2020-02-22T06:17:38.000000Z",
+    "processing_baseline": "02.14",
+    "normalization": "DN * 0.0001 exactly once; offset 0; fixed RGB 0..0.30 / NIR-R-G 0..0.50 for display only",
+    "native_RGBNIR_resolution_m": 10,
+    "native_SCL_resolution_m": 20,
+    "license_provenance": "Copernicus Sentinel data 2020; Element84 Earth Search distribution; original ESA Sentinel Legal Notice retained in actual source metadata."
+  },
+  "substantive_findings": [
+    "63 actual dated centre/body placements supported by jointly viewed RGB/FCC spatial morphology, not annual category fallback.",
+    "22 actual all-band nodata centres remain unanswered; nonzero masks do not guarantee clear sky for the other 109.",
+    "Cloud/haze points 2672,3451,3473,6158,7164,7278 and shadow/body ambiguity points 2685,6135,6696,6898 remain unknown.",
+    "7233 and 7291 retain consequential centre/fringe uncertainty.",
+    "SCL contextual mismatches retained: 2644/3322 visible vegetation despite SCL6; 3430 vegetation despite SCL2; 6314/6763 vegetation despite SCL7; 5351/5439 water-like body despite SCL2."
+  ],
+  "exact_conservation": {
+    "current_known_adopted": 133068,
+    "current_residual": 778,
+    "known_pin": {
+      "path": "idn-physical-residual41305-policy-001/other9393-publication-preparation/files/coordination/engineering/indonesia-adm2-current-cell-20261014/worldcover2020-remainder80712-001/annual-other9393-supplement-001/accounting/known-exact-adopted-union133068-owner-y-x.jsonl.gz",
+      "bytes": 371239,
+      "sha256": "175e18ff0d08578a79fcf0173a1f720eac3ba1d19ea1c73cedace9d692c43042"
+    },
+    "residual_pin": {
+      "path": "idn-physical-residual41305-policy-001/other9393-publication-preparation/files/coordination/engineering/indonesia-adm2-current-cell-20261014/worldcover2020-remainder80712-001/annual-other9393-supplement-001/accounting/specific-residual-union778-owner-y-x.jsonl.gz",
+      "bytes": 3243,
+      "sha256": "a33de54912a84552546d27fe6bf5304a4c410114af01ed96889dc85c50305495"
+    },
+    "proposed_positive_overlap_known": 0,
+    "proposed_positive_outside_residual": 0,
+    "cohort_duplicate_keys": 0,
+    "conditional_only_if_Root_adopts": {
+      "known": 133131,
+      "residual": 715,
+      "original": 133846
+    }
+  },
+  "limits": [
+    "Reviewer proposes; Root has not adopted this delta.",
+    "No native qualification, owner-zero, binary whole-cell land/water, repair, integration or acceptance credit.",
+    "All 131 full original inventory/scientific records and separate holds unchanged; only dated_native_followup appended.",
+    "No source/network/value reread or native predicate execution in binding; rendering used saved local arrays only.",
+    "Complete original actual source receipt covers 85 item blocks; reviewer rendered 68 distinct RGBNIR arrays for overview and 56 for detail, not a claim of independently reading all 85 block values.",
+    "PB05 93-point offset ambiguity belongs to other cohorts; this PB02.14 cohort has no such normalization conflict."
+  ]
+}

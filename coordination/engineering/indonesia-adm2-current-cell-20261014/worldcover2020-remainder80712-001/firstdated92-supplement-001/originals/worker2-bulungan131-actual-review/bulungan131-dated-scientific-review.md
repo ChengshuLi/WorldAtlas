@@ -1,0 +1,13 @@
+# Bulungan131 actual dated interpretation review
+
+Independent reviewer: `/root/cell_method_review`. Supported with limits for Root review; no adoption or native credit.
+
+All 131 original remaining Bulungan points were reviewed on all six 49-pixel context sheets; all 109 mask-valid centres were also reviewed on ten 17-pixel detail sheets with the actual fractional centre. The 2020-02-22 Sentinel-2 PB02.14 observation supports **63 proposed bounded dated answers: 29 vegetation/canopy, 21 visible water-like bodies, and 13 exposed/constructed surfaces or corridors**. **68 remain unknown: 22 actual all-band nodata and 46 consequential cloud, shadow, pond-floor/body or narrow-edge ambiguities.**
+
+The distinction comes from actual centre/body placement in RGB and NIR-R-G context. Clear pond interiors at 6103/6113 differ from brown pond-floor/fringe cases; 7233 and 7291 remain questions. Actual cloud/haze at 2672/3451/3473/6158/7164/7278 blocks interpretation despite valid masks. SCL is retained contextual evidence, not truth: visible vegetation at 2644/3322 despite SCL6, vegetation at 3430 despite SCL2, and water-like bodies at 5351/5439 despite SCL2 demonstrate why no automatic SCL rule was used.
+
+Display used raw DN × 0.0001 once, zero offset, fixed RGB 0–0.30 and FCC 0–0.50 display ranges, nearest enlargement and unpainted fractional centres. No source resampling, spectral threshold, majority or unanimous-neighbour rule was used. Native SCL remains its separate 20 m product. This is one dated image, not an annual or current assertion; vegetation does not establish dry ground, and visible water does not establish permanence, water kind, tide, name or bank. Narrow corridors retain native-resolution/registration limits.
+
+Every output preserves the full original source association and scientific record, including independent territorial/relative/source holds, and appends only `dated_native_followup`. Original-source-version Bulungan membership is not a new jurisdiction or legal determination. The 63 unique proposed keys are within the exact 778 residual and disjoint from 133068 adopted keys. Only if Root adopts them would accounting become 133131 answered / 715 remaining of 133846. No native qualification, owner-zero, binary whole-cell status, repair, integration or acceptance claim is made.
+
+Exact candidate, input, source, view and key hashes are recorded in `bulungan131-dated-scientific-review.json`; all original raw point records are embedded unchanged in the follow-up. Binding and displays read saved local material only; no source acquisition or scientific operator replay occurred.
