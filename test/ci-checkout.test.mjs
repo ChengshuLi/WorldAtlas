@@ -19,7 +19,7 @@ const names = ['README.md', '.github/package-inputs.json', expectations,
 const entries = () => new Map(names.map(name => [name, {path:name, type:'blob',
   mode:name.endsWith('/executable.bin') ? '100755' : '100644', sha:'a'.repeat(40)}]));
 
-function checkout(patterns) {
+function checkout(patterns, filenames = names) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'atlas-stock-selection-'));
   const env = {...process.env, GIT_CONFIG_NOSYSTEM:'1', GIT_CONFIG_GLOBAL:os.devNull,
     GIT_NO_LAZY_FETCH:'1', GIT_TERMINAL_PROMPT:'0'};
@@ -28,17 +28,17 @@ function checkout(patterns) {
   {env, input, encoding:'utf8', stdio:['pipe','pipe','pipe']}).trim();
   try {
     git(['init','-q']);
-    for (const name of names) {
+    for (const name of filenames) {
       const target = path.join(directory,name); fs.mkdirSync(path.dirname(target),{recursive:true});
       fs.writeFileSync(target, name==='coordination/engineering/unconsumed/package.json' ? '{"type":"module"}\n' : name+'\n');
-      if (entries().get(name).mode==='100755') fs.chmodSync(target,0o755);
+      if (entries().get(name)?.mode==='100755') fs.chmodSync(target,0o755);
     }
     git(['add','.']); git(['commit','-qm','Tiny existing-role selection']);
     const head=git(['rev-parse','HEAD']), tree=git(['rev-parse','HEAD^{tree}']);
     git(['sparse-checkout','set','--no-cone','--stdin'], patterns.join('\n')+'\n');
     git(['checkout','--detach','-q',head]);
     assert.equal(git(['rev-parse','HEAD']),head); assert.equal(git(['rev-parse','HEAD^{tree}']),tree);
-    return names.filter(name=>fs.existsSync(path.join(directory,name)));
+    return filenames.filter(name=>fs.existsSync(path.join(directory,name)));
   } finally {fs.rmSync(directory,{recursive:true,force:true});}
 }
 
@@ -79,4 +79,12 @@ test('selected patterns reject nonordinary execution and untrusted expectations 
     assert.throws(()=>selectedDataCheckoutPatterns(definition,tree,expectations),/expectations/);
   }
   assert.throws(()=>selectedDataCheckoutPatterns({...definition,inputs:['../escape']},entries(),expectations));
+});
+
+
+test('actual focused code globs retain root and nested imports without archival body siblings',()=>{
+ const files=['root.mjs','coordination/engineering/fixture/deep/helper.mjs',
+  'coordination/engineering/fixture/package.json','coordination/engineering/fixture/archive.bin'];
+ const retained=checkout(['/*.mjs','coordination/engineering/**/*.mjs','coordination/engineering/**/package.json'],files);
+ assert.deepEqual(retained,files.slice(0,3));
 });

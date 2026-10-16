@@ -537,9 +537,10 @@ test('prepared queue keeps focused coordination routing through final ordinary-t
   assert.equal(prepared.profile,'evidence');
   assert.equal(prepared.geography_software,false);
   f.calls.length = 0;
-  const result = await f.complete();
+  const result = await f.complete({geographyResult:'skipped', geographyReportLoader:()=>{throw Error('Unrelated geography should be skipped');}});
   assert.equal(result.accepted,true);
-  assert.equal(result.geography.trusted_code_commit,f.options.baseline);
+  assert.equal(prepared.geography_required,false);
+  assert.equal(result.geography.status,'not-applicable');
   assert.deepEqual(f.treeReads(),[`/repos/owner/repo/git/trees/${'2'.repeat(40)}?recursive=1`]);
 });
 

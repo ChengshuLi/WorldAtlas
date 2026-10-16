@@ -15,7 +15,9 @@ function probe(directories, {geography = false, checkoutTests = false} = {}) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'worldatlas-checkout-'));
   try {
     fs.copyFileSync(path.join(root, 'package.json'), path.join(directory, 'package.json'));
-    for (const relative of directories) {
+    const paths = new Set(directories.flatMap(pattern => pattern.includes('*')
+      ? fs.globSync(pattern.replace(/^\//,''),{cwd:root}) : [pattern]));
+    for (const relative of paths) {
       const source = path.join(root, relative);
       const destination = path.join(directory, relative);
       fs.mkdirSync(path.dirname(destination), {recursive: true});
@@ -309,12 +311,14 @@ test('focused delivery tests receive their real Node/Python runtime without an a
   assert(match);const inputs=new Set(match[1].trim().split('\n').map(line=>line.trim()));
   for(const name of ['coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs',
     'coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz',
+    'coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json',
     'docs/LOCAL_WORKSPACES.md'])assert(inputs.has(name),name);
   assert(!inputs.has('research'),'no blanket scientific archive checkout');
   const checker=source.match(/- name: Checkout trusted geographic checker([\s\S]*?)(?=      - uses: actions\/setup-node)/)?.[1];
   assert(checker);assert.doesNotMatch(checker,/sparse-checkout-cone-mode: false/);
   for(const name of ['coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs',
     'coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz',
+    'coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json',
     'docs/LOCAL_WORKSPACES.md'])assert(!checker.includes(name),'ordinary leaves must not enter trusted cone checkout');
 
 });
