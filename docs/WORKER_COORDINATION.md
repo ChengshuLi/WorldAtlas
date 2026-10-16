@@ -92,9 +92,9 @@ No current acceptance, scientific authority or explicit human constraint is weak
 by this policy. A demonstrated wrong result or unsafe operation still blocks the
 corresponding delivery. An optional improvement is not a new acceptance criterion.
 
-## PR review size
+## Coherent PR scope
 
-Keep PRs focused on one issue or a coherent part. Aim for fewer than 1,000 changed non-test lines as a soft review target, not a hard cutoff. Larger focused PRs are allowed when splitting would make implementation, migration or validation harder to review safely; explain the reason in the PR description. Report generated-data changes separately. Do not compress code or documentation merely to meet a line budget. The soft target does not change lane ownership, required checks or serialized squash merges. Split oversized issue scopes into bounded children when needed, rather than fragmenting one coherent change just to meet a line count.
+Keep PRs focused on one issue or a coherent part, without numerical size targets or extra justification based on line count. Keep code and documentation readable. Report generated-data changes separately. Retain lane ownership, required checks and serialized squash merges. Split issue scopes only when their acceptance or independent work requires it; keep coherent changes together.
 
 ## Ordinary ownership and live-operation reservations
 
@@ -625,7 +625,6 @@ could transfer before admission; the simpler default now places that single pass
 in the serialized lane. Measure actual lane occupancy and completed delivery time,
 including removed duplicate/reworked prequeue work, rather than adding job durations.
 
-The Cloudflare step does not measure the historical Sites archive reserve; the
-separate main-push Deployment package budget workflow retains its actual Sites
-build and file/archive accounting. Parallel build removal reduces runner work;
-no wall-time improvement is established merely by adding those job durations.
+The Cloudflare step does not measure the historical Site archive reserve. An
+explicit `npm run build:hosted` recovery build retains its actual file/archive
+budget check. Normal main pushes do not schedule a separate legacy Site build.

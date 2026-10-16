@@ -6,7 +6,10 @@
 
 This is a cooperative build boundary, not an operating-system security sandbox. Deliberate absolute access to outside files, malicious dependencies and forged stage environment variables are not contained. It also does not guarantee a reproducible environment or pin remote network responses. Build jobs retain existing read-only credentials and deployment/import restrictions. Use the public package commands and review build changes under the normal independent-review gate.
 
-CI reads the declaration at trusted base and enumerates all changed paths, including rename/copy origins. Any declared input or verification path requires a package build and budget checks. Missing or malformed declaration, incomplete inventory, changing PR identity, API failure or capped comparisons conservatively require the build. Unchanged package inputs skip candidate checkout, dependency installation and package compilation; the receipt does not claim a new size measurement.
+The integration queue builds the Cloudflare application for full software profiles.
+The declaration also bounds selected-output reuse and its source inventory. Legacy
+Site package budget checks run when explicitly invoking `npm run build:hosted` for
+recovery, rather than through an automatic main-push workflow.
 
 Application regression selection remains a separate question. Unpublished geography packets and history campaigns run their focused scope/evidence/invariant checks. If a research file is explicitly included in the package, its changes also run package checks; they do not automatically require unrelated application tests. Runtime, schema and build-boundary changes retain application regression according to the integration profile.
 
@@ -26,10 +29,17 @@ captures retain their exact original two-workflow roster, including the removed
 source and executed workflow. Their producer identities must still match exactly
 before output reuse; deleting the author workflow requires a fresh queue-only
 full-build capture before a subsequent selected delivery can reuse it. The complete declared source image,
-installed dependencies/runtime and build configuration remain authoritative. The capture
-writer and Node runtime-inventory helper are explicit package inputs; their existing
-input/Python helpers were already declared. The ordinary pre-build snapshot therefore
-checks their actual bytes against Git as well as binding their committed identities.
+output bytes and build configuration remain authoritative. The capture writer and
+isolated Python execution helper are explicit package inputs; the ordinary pre-build
+snapshot checks their actual bytes against Git as well as binding their committed identities.
+
+Reuse does not recreate or compare the original installed environment. Historical
+runtime metadata stays literal in the original manifest. New captures record the actual
+build's runtime metadata without an installed-file inventory. Current assembly admits
+its locked Node dependencies, authenticates the archive extractor, and runs the current
+selected additive computation with its actual source/input/output bindings. Any new
+scientific execution uses the isolated Python launcher and records its own execution;
+retaining old output never establishes fresh runtime equivalence or a fresh full build.
 Tests, unrelated workflows and observer scripts outside the declared image do not
 invalidate those bytes merely because they changed. A declared observer remains a
 package input; this change does not guess which declared files are unused.
@@ -63,7 +73,7 @@ new, or enable the separately reviewed final-worker adoption by itself.
 Local checks:
 
 ```sh
-node --test test/package-inputs.test.mjs test/package-build.test.mjs test/deployment-budget-scope.test.mjs
+node --test test/package-inputs.test.mjs test/package-build.test.mjs test/deployment-budget.test.mjs
 npm run build:cloudflare
 npm run build:hosted
 ```

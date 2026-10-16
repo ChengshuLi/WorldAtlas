@@ -508,8 +508,9 @@ no hard deadline or process-tree containment is claimed.
 
 Explicit `--resume` verifies the complete output inventory, each whole product,
 its execution/configuration binding, original immutable inputs and unchanged
-shared entry/probe bytes. It reuses those original observations without rerunning
-the source operator; changed or partial output is refused. Resume is custody
+scientific probe bytes. Historical entrypoint metadata stays literal; unrelated
+entrypoint edits do not invalidate those products. It reuses observations without
+rerunning the source operator; changed or partial output is refused. Resume is custody
 verification, not another scientific qualification or approval.
 
 A replay can use a pinned `cohort-intervals-v1` retained cell set when the original
