@@ -1,0 +1,23 @@
+{
+  "exact_delta": [
+    {
+      "path": "reference-migrations/eastern-two-gap-repair-20261006/products/dated-reference-names/revalidation.json",
+      "before_009_sha256": "40e161f5695e7b99ab3a413e51c4a15187ffcc9d4638e4129fa25e8b3edc5cc9",
+      "after_010_sha256": "f6892cc712137855f42db414d4796293152ca51ad365d4a5c6aa8b2b74468575"
+    },
+    {
+      "path": "reference-migrations/eastern-two-gap-repair-20261006/products/demographic-evidence/revalidation.json",
+      "before_009_sha256": "a7abef7c42c6792a8b4af2836f1b88ea5158032bc9c7c8b648a302c01eb0574a",
+      "after_010_sha256": "13c0552fd117911207d73b1f71522c4114bae6613a98e4f32c3a46bc2dad96c6"
+    },
+    {
+      "path": "prepared-evidence/index.json",
+      "before_009_sha256": "048b615e3086f889b8052ea97173ba6a9beb51cfcb93245f87b91a345edde746",
+      "after_010_sha256": "b9bb23be40b1e3b2794bf82dad89cc0a5aacd1c7d5ad71c6e38923d97de1166a"
+    }
+  ],
+  "writes": 450,
+  "unchanged_from009": 447,
+  "native_source_geometry_release_body_changes": false,
+  "reason": "Exact complete-property validator changes the embedded installer source hash only."
+}

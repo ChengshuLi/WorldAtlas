@@ -1,0 +1,36 @@
+✔ JSON projection retains original nested formatting and appends bounded one-line entries (1.486875ms)
+✔ JSON projection handles changed array rows, escaped strings, empty containers and removals (0.265875ms)
+✔ province projection changes only province metadata and retains canonical cell/index bounds (1.154333ms)
+✔ append-only release retains original generations and drops regenerated baseline (1.079791ms)
+✔ evidence composes unchanged territory while preserving original supported facts (3.675833ms)
+✔ apply rejects unapproved hash and rolls back partial metadata transaction (3.77275ms)
+✔ immutable bytes changing after preparation block application (1.622875ms)
+✔ successful metadata install records a committed journal and retains rollback originals (3.104125ms)
+✔ compressed release append preserves prior descriptors and checks compressed/payload bytes (338.112583ms)
+✔ reference-only metadata mode validates exact archived group and source-backed parent merge (3.253542ms)
+✔ current metadata projection retains original fallback/history, geometry, owner indices and camera bytes (0.621667ms)
+✔ reference metadata cannot hide source edits, old-history edits or an unrelated correction append (0.917042ms)
+✔ complete reference projections reject missing, duplicate, foreign, stale and wrong-parent joins (0.389708ms)
+✔ whole metadata application authenticates actual source/hierarchy/receipts without replacing native qualification (17.864291ms)
+✔ whole metadata application rejects coherently repinned geometry, source metadata, incomplete scope and history transfer (7.395042ms)
+✔ current application retains every changed source property and only existing database defaults (0.370541ms)
+✔ raw nonfinite JSON numbers cannot masquerade as retained null source metadata (0.15775ms)
+✔ registered selected native reference authenticates without a legacy grid or rewriting scientific inputs (80.769458ms)
+✔ a forged checksum or coherently repinned unregistered native manifest cannot select the historical-independent route (36.512125ms)
+✔ selected native metadata still requires the actual complete baseline reference and safe paths (108.404125ms)
+✔ absence of a selection retains the original strict legacy installation path (0.703916ms)
+✔ an existing physical association continuation composes actual subject equality without relabeling the old receipt (1.619334ms)
+✔ continuation metadata cannot authorize changed subject territory, changed payloads or a false chronology (0.973917ms)
+✔ selected-native install rolls back an actual failed write and retains historical certificate bytes (150.944208ms)
+✔ selected-native apply rejects changed selector, historical certificate and staged metadata before writing (174.09275ms)
+✔ retaining historical macro review preserves pending status and exact files without old inspection bodies (1.666708ms)
+✔ complete candidate properties must equal the authenticated receipt, including literal correction history and source (4.470125ms)
+✔ an unchanged member cannot acquire unreceipted history while retaining its parent (0.828334ms)
+ℹ tests 28
+ℹ suites 0
+ℹ pass 28
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 637.409084

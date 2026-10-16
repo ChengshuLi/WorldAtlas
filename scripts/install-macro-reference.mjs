@@ -4,11 +4,16 @@ import path from 'node:path';
 import {createHash, randomUUID} from 'node:crypto';
 import {gzipSync, gunzipSync} from 'node:zlib';
 import {fileURLToPath} from 'node:url';
+import {execFileSync} from 'node:child_process';
 import {footprintHash} from './check-prepared.mjs';
 import {validateMetadataRelationships} from './prepare-geographic-release.mjs';
 import {preparedEvidenceJSON} from '../src/prepared-evidence.js';
 import {prepareMacroReviewProjection} from './prepare-macro-review-projection.mjs';
-import {assertReferenceOnlyFeatureChange,projectReferenceOwners} from '../src/reference-metadata.js';
+import {assertReferenceOnlyFeatureChange,projectReferenceOwners,originalNativeReference,validateReferenceMetadataHeader} from '../src/reference-metadata.js';
+import {ownershipMetadata,NATIVE_METHOD} from '../src/ownership-method.js';
+import {requireVerifiedNativeSelection} from './native-ownership/require-verified-selection.mjs';
+import {readPinnedBuildFile} from './native-ownership/read-pinned-build-file.mjs';
+import {validateReferenceMetadataProjection} from './selected-reference-metadata.mjs';
 import {readGeographicReleaseManifest,decodeGeographicReleaseBatch} from './read-geographic-release-manifest.mjs';
 import {validateEvidenceRevalidationChain} from './validate-evidence-revalidation-chain.mjs';
 import {prepareReferenceMacroBinding} from './prepare-reference-macro-binding.mjs';
@@ -52,6 +57,41 @@ function geography(data){
  const proof={hierarchy_sha256:hashFile(path.join(data,'hierarchy.json')),location_index_sha256:hashFile(path.join(data,'world-index.json')),footprints_sha256:footprintHash(features)};
  return {index,units,features,groups,locations,members,proof};
 }
+// Authenticate the selected N independently of the historical legacy grid.
+// Installation produces canonical M bytes; the existing N/M/E preparation
+// subsequently binds their actual canonical commit. It never rewrites N.
+export function selectedNativeReference(data,before,release,repository=root){
+ const file=path.join(data,'ownership-selection.json');if(!fs.existsSync(file))return null;
+ const selection=read(file),base=path.dirname(data);
+ if(selection.version!==1||selection.method!==NATIVE_METHOD||!/^data\/|^coordination\//.test(selection.manifest_path??'')||!/^geography:/.test(selection.release_id??'')||!/^[a-f0-9]{64}$/.test(selection.sha256??''))throw Error('Invalid current native ownership selection');
+ const load=name=>{
+  if(typeof name!=='string'||!/^[A-Za-z0-9_./-]+$/.test(name)||name.split('/').some(p=>!p||p==='.'||p==='..'))throw Error('Unsafe current native reference path');
+  const local=safe(base,name);
+  if(fs.existsSync(local)){if(!fs.lstatSync(local).isFile()||fs.realpathSync(local)!==local)throw Error('Native reference input must be an ordinary whole file');return fs.readFileSync(local);}
+  const args=['-c','protocol.allow=never','-C',repository],tree=execFileSync('git',[...args,'ls-tree','-z','HEAD','--',name],{encoding:'utf8'});
+  if(!/^100644 blob [a-f0-9]{40}\t/.test(tree)||tree.slice(tree.indexOf('\t')+1)!==name+'\0')throw Error('Missing immutable current native reference input');
+  return execFileSync('git',[...args,'cat-file','blob',tree.split(' ')[2].split('\t')[0]],{maxBuffer:32*1024*1024});
+ };
+ const raw=load(selection.manifest_path);if(sha(raw)!==selection.sha256)throw Error('Current native manifest checksum differs');
+ const manifest=JSON.parse(raw),native=originalNativeReference(manifest);if(selection.release_id!==native.id)throw Error('Current selector changes original native reference');
+ ownershipMetadata(manifest,{requireNative:true,expectedReference:native});
+ const verification=requireVerifiedNativeSelection(manifest,selection.sha256,repository);
+ let reference=native;
+ if(selection.reference_projection!==undefined){
+  const pointer=selection.reference_projection,bytes=load(pointer?.path);
+  if(bytes.length!==pointer.bytes||sha(bytes)!==pointer.sha256)throw Error('Current native metadata projection checksum differs');
+  const projection=JSON.parse(bytes);reference=validateReferenceMetadataHeader(projection,{selection,manifest}).reference;
+  const readPin=pin=>readPinnedBuildFile({root:repository,...pin});
+  const encoded=readPin(manifest.original_assets.bounds),owners=JSON.parse(gunzipSync(encoded,{maxOutputLength:32*1024*1024}));
+  const declared=selection.selected_geography,bankRaw=load(declared?.path);
+  if(bankRaw.length!==declared.bytes||sha(bankRaw)!==declared.sha256)throw Error('Current selected source bank checksum differs');
+  const bank=JSON.parse(bankRaw);if(bank.native_manifest_sha256!==selection.sha256||bank.release_id!==native.id)throw Error('Current source bank belongs to another native selection');
+  const originals=new Map([...bank.unchanged_files.map(pin=>[pin.path,pin]),...bank.overrides.map(pin=>[pin.logical_path,pin])]);
+  validateReferenceMetadataProjection({projection,selection,manifest,owners,read:readPin,originalSources:originals});
+ }
+ if(reference.id!==release.id||reference.footprints_sha256!==before.proof.footprints_sha256||reference.hierarchy_sha256!==before.proof.hierarchy_sha256||release.footprints_sha256!==reference.footprints_sha256||release.hierarchy_sha256!==reference.hierarchy_sha256)throw Error('Current native reference differs from complete installer baseline');
+ return {selection_sha256:hashFile(file),manifest_sha256:selection.sha256,manifest_path:selection.manifest_path,native_reference:native,current_reference:reference,verification,original_native_bytes_unchanged:true,canonical_metadata_commit_required:true,new_native_or_publication_approval:false};
+}
 export function validateMetadataStages(before,after,receiptFiles,{mode='macro'}={}){
  if(!['macro','reference-correction'].includes(mode))throw Error('Unknown metadata installation mode');
  if(mode==='macro'&&receiptFiles.length!==3)throw Error('Exactly three ordered macro receipts are required');
@@ -72,7 +112,7 @@ export function validateMetadataStages(before,after,receiptFiles,{mode='macro'}=
   for(const d of receipt.changed_location_properties){const old=locations.get(d.location_id);if(!equal({...old,kind:null,parent_id:null},{...d.before_properties,kind:null,parent_id:null}))throw Error('Original location properties changed');locations.set(d.location_id,{...d.after_properties,kind:'location'});}
  });
  if(!equal([...records].sort(),[...after.groups].sort()))throw Error('Candidate hierarchy contains unreceipted metadata');
- for(const [id,f]of after.locations)if(locations.get(id)?.parent_id!==f.properties.parent_id)throw Error('Unreceipted location parent');
+ for(const [id,f]of after.locations){const {kind,...properties}=locations.get(id)??{};if(!equal(properties,f.properties))throw Error('Unreceipted location properties');}
 }
 export function gridProjection(manifest,bounds,before,after){
  if(manifest.footprints_sha256!==before.proof.footprints_sha256||manifest.hierarchy_sha256!==before.proof.hierarchy_sha256||bounds.length!==after.locations.size)throw Error('Grid baseline is stale');
@@ -89,12 +129,16 @@ function protectedFiles(data){
  return Object.fromEntries([...names.flatMap(name=>tree(path.join(data,name)).filter(p=>!(name==='prepared-evidence'&&['index.json','imports/index.json'].includes(p))&&!(['demographic-evidence','dated-reference-names'].includes(name)&&p==='revalidation.json')).map(p=>[name+'/'+p,hashFile(safe(data,name+'/'+p))])),...immutableReviews.map(p=>[p,hashFile(safe(data,p))])]);
 }
 function entityProof(geo,id){const f=geo.locations.get(id),ids=f?[id]:geo.members.get(id);if(!ids?.length)throw Error('Evidence subject removed: '+id);return {kind:f?'location':geo.groups.get(id).level,members:ids.length,sha256:sha(preparedEvidenceJSON([...ids].sort().map(id=>[id,geo.locations.get(id).geometry])))};}
-export function composeEvidence(receipt,before,after,files){
- if(!equal(receipt.revalidated_geography,before.proof))throw Error('Previous evidence projection is stale');
+export function composeEvidence(receipt,before,after,files,{associationContinuation}={}){
+ const prior=receipt.revalidated_geography;
+ if(!equal(prior,before.proof)){
+  const c=associationContinuation;
+  if(!c||c.version!==1||c.kind!=='prepared-evidence'||!Number.isSafeInteger(c.issue)||c.issue<=0||!/^[a-f0-9]{64}$/.test(c.receipt_sha256??'')||c.history_transfer!=='none'||c.payloads_and_original_inputs_unchanged!==true||c.new_factual_import!==false||c.predecessor_footprints_sha256!==prior?.footprints_sha256||c.successor_footprints_sha256!==before.proof.footprints_sha256||prior.hierarchy_sha256!==before.proof.hierarchy_sha256||prior.location_index_sha256!==before.proof.location_index_sha256)throw Error('Previous evidence projection is stale');
+ }
  for(const file of receipt.source_product_files)if(hashFile(safe(files,file.path))!==file.sha256)throw Error('Original evidence source bytes changed');
  const entities=receipt.entities.map(row=>{const a=entityProof(before,row.entity_id),b=entityProof(after,row.entity_id);if(a.kind!==b.kind||a.members!==b.members||a.sha256!==b.sha256||a.sha256!==row.revalidated_footprint_sha256||row.original_footprint_sha256!==a.sha256)throw Error('Historical evidence territory changed: '+row.entity_id);return {...row,revalidated_footprint_sha256:b.sha256};});
  return {...receipt,revalidated_geography:after.proof,entities,historical_membership_assigned:false,
-  projection:{method:'Previous immutable-footprint proof composed with exact current-to-candidate membership/footprint equality',previous_revalidation_sha256:sha(json(receipt)),installer_sha256:hashFile(fileURLToPath(import.meta.url))}};
+  projection:{method:'Previous immutable-footprint proof composed with exact current-to-candidate membership/footprint equality',previous_revalidation_sha256:sha(json(receipt)),installer_sha256:hashFile(fileURLToPath(import.meta.url)),...(!equal(prior,before.proof)?{physical_association_continuation:associationContinuation,current_before_geography:before.proof}: {})}};
 }
 export function appendRelease(old,next,load,{compressed=false}={}){
  const release=next.releases.at(-1);if(release.version<=old.releases.at(-1).version||old.releases.some(r=>r.id===release.id))throw Error('Candidate release must be a new version');
@@ -114,31 +158,46 @@ export function appendRelease(old,next,load,{compressed=false}={}){
  }
  return {files,index:{...old,releases:[...old.releases,release],batches:[...old.batches,...batches],new_entities:old.new_entities+next.new_entities,total_memberships:old.total_memberships+next.total_memberships,changes:old.changes+next.changes,validated_geometry:next.validated_geometry,sources_batches:[...(old.sources_batches??['sources.json']),`sources-${release.version}.json${compressed?'.gz':''}`]}};
 }
-export async function prepareInstall({data='data',geographyData='.cache/global-macro-foundation/after',releaseData='.cache/global-macro-foundation/release',stage='.cache/global-macro-reference-install',receipts=null,metadataMode='macro'}={}){
+// An authenticated N-only correction does not relabel old macro inspections.
+export function retainHistoricalMacroReview(data){
+ const names=tree(path.join(data,'macro-foundation')).filter(name=>name!=='current-membership-inventory.json.gz').map(name=>'macro-foundation/'+name);
+ if(fs.existsSync(path.join(data,'research-geography-gate.json')))names.push('research-geography-gate.json');
+ return {files:Object.fromEntries(names.map(name=>[name,hashFile(safe(data,name))])),status:{status:'historical-proof-status-retained',current_macro_compatibility_asserted:false,membership_review_projection_updated:false,new_approval_created:false,published:false}};
+}
+export async function prepareInstall({data='data',geographyData='.cache/global-macro-foundation/after',releaseData='.cache/global-macro-foundation/release',stage='.cache/global-macro-reference-install',receipts=null,metadataMode='macro',repository=root}={}){
  data=path.resolve(data);geographyData=path.resolve(geographyData);releaseData=path.resolve(releaseData);stage=path.resolve(stage);if(stage===data||stage.startsWith(data+path.sep))throw Error('Install staging must be outside live data');
  receipts??=['repairs','areas','regions'].map(s=>path.join(data,'macro-foundation',`migration-${s}.json.gz`));
  const before=geography(data),after=geography(geographyData);validateMetadataStages(before,after,receipts,{mode:metadataMode});
  const release=read(path.join(releaseData,'index.json')),latest=release.releases.at(-1);if(latest.hierarchy_sha256!==after.proof.hierarchy_sha256||latest.footprints_sha256!==after.proof.footprints_sha256)throw Error('Candidate release/geography mismatch');
  const migrationPins=new Set(Object.values(latest.metadata?.metadata_migration_sha256??{}));if(receipts.some(p=>!migrationPins.has(hashFile(p))))throw Error('Candidate release does not pin every current metadata receipt');
- const oldReleases=readGeographicReleaseManifest(path.join(data,'geographic-releases'));for(const b of oldReleases.batches)decodeGeographicReleaseBatch(fs.readFileSync(safe(path.join(data,'geographic-releases'),b.path)),b);
+ const oldReleases=readGeographicReleaseManifest(path.join(data,'geographic-releases'));
+ const native=metadataMode==='reference-correction'?selectedNativeReference(data,before,oldReleases.releases.at(-1),repository):null;
+ if(!native)for(const b of oldReleases.batches)decodeGeographicReleaseBatch(fs.readFileSync(safe(path.join(data,'geographic-releases'),b.path)),b);
+ const historicalMacro=native?retainHistoricalMacroReview(data):null;
  const preserved=protectedFiles(data),writes=new Map(),put=(name,value)=>{const original=safe(data,name);writes.set(name,Buffer.isBuffer(value)?value:name.endsWith('.json')&&fs.existsSync(original)?Buffer.from(patchJSONText(fs.readFileSync(original,'utf8'),value)):json(value));};
- for(const batch of oldReleases.batches)preserved['geographic-releases/'+batch.path]=batch.sha256;
+ if(!native)for(const batch of oldReleases.batches)preserved['geographic-releases/'+batch.path]=batch.sha256;
+ else{
+  preserved['ownership-selection.json']=native.selection_sha256;
+  Object.assign(preserved,historicalMacro.files);
+ }
  if(fs.existsSync(path.join(data,'geographic-releases/current-manifest.json'))){
   preserved['geographic-releases/index.json']=hashFile(path.join(data,'geographic-releases/index.json'));
   const pointer=read(path.join(data,'geographic-releases/current-manifest.json'));
   preserved['geographic-releases/'+pointer.path]=pointer.sha256;
  }
- for(const p of ['hierarchy.json','world-index.json',...after.index.parts])put(p,fs.readFileSync(safe(geographyData,p)));
- const grid=read(path.join(data,'canonical-grid/manifest.json'));for(const part of grid.parts)if(hashFile(safe(path.join(data,'canonical-grid'),part.path))!==part.sha256)throw Error('Immutable ownership-grid part changed');
+ for(const p of ['hierarchy.json','world-index.json',...after.index.parts]){const bytes=fs.readFileSync(safe(geographyData,p));if(!native||!bytes.equals(fs.readFileSync(safe(data,p))))put(p,bytes);else preserved[p]=hashFile(safe(data,p));}
+ let grid={parts:[]};if(!native){
+ grid=read(path.join(data,'canonical-grid/manifest.json'));for(const part of grid.parts)if(hashFile(safe(path.join(data,'canonical-grid'),part.path))!==part.sha256)throw Error('Immutable ownership-grid part changed');
  if(hashFile(safe(path.join(data,'canonical-grid'),grid.bounds.path))!==grid.bounds.sha256||hashFile(safe(path.join(data,'canonical-grid'),grid.province_membership.path))!==grid.province_membership.sha256)throw Error('Grid metadata byte mismatch');
  const priorBounds=read(safe(path.join(data,'canonical-grid'),grid.bounds.path)),priorMembership=gunzipSync(fs.readFileSync(safe(path.join(data,'canonical-grid'),grid.province_membership.path)));if(priorMembership.length!==(priorBounds.length+1)*4||priorBounds.some(r=>priorMembership.readUInt32LE(r.index*4)!==r.province_index||grid.provinces[r.province_index-1]!==r.province_id))throw Error('Original province LUT disagrees with bounds');
  const projection=gridProjection(grid,priorBounds,before,after),bounds=gzipSync(json(projection.bounds),{mtime:0});
  put('canonical-grid/'+grid.bounds.path,bounds);put('canonical-grid/'+grid.province_membership.path,projection.membership);
  projection.manifest.bounds={...grid.bounds,sha256:sha(bounds)};projection.manifest.province_membership={...grid.province_membership,sha256:sha(projection.membership)};put('canonical-grid/manifest.json',projection.manifest);
- const pixel=read(path.join(data,'pixel-audit.json'));if(pixel.footprints_sha256!==before.proof.footprints_sha256||pixel.hierarchy_sha256!==before.proof.hierarchy_sha256)throw Error('Pixel audit stale');put('pixel-audit.json',{...pixel,hierarchy_sha256:after.proof.hierarchy_sha256,metadata_only_revalidation:{footprints_unchanged:true,grid_ownership_bytes_unchanged:true,semantic_complete:false}});
+ }
+ const pixel=read(path.join(data,'pixel-audit.json'));if(pixel.footprints_sha256!==before.proof.footprints_sha256||pixel.hierarchy_sha256!==before.proof.hierarchy_sha256||native&&(pixel.method!==NATIVE_METHOD||pixel.native_manifest?.sha256!==native.manifest_sha256))throw Error('Pixel audit stale');put('pixel-audit.json',{...pixel,hierarchy_sha256:after.proof.hierarchy_sha256,metadata_only_revalidation:{footprints_unchanged:true,grid_ownership_bytes_unchanged:true,semantic_complete:false,...(native?{native_reference:native.native_reference,current_reference:{id:latest.id,...after.proof},numerical_audit_repeated:false}: {})}});
  const audit=read(path.join(data,'granularity-audit.json'));if(audit.input_sha256['hierarchy.json']!==before.proof.hierarchy_sha256)throw Error('Granularity baseline stale');
  for(const key of ['locations_audited','coarse_units','small_units'])audit[key]=audit[key].map(r=>({...r,province_id:after.locations.get(r.id)?.properties.parent_id??r.province_id}));
- audit.counts=Object.fromEntries(tiers.slice(1).map(t=>[t,after.units.filter(u=>u.level===t).length]));for(const p of ['hierarchy.json','world-index.json',...after.index.parts])audit.input_sha256[p]=sha(writes.get(p));
+ audit.counts=Object.fromEntries(tiers.slice(1).map(t=>[t,after.units.filter(u=>u.level===t).length]));for(const p of ['hierarchy.json','world-index.json',...after.index.parts])audit.input_sha256[p]=writes.has(p)?sha(writes.get(p)):hashFile(safe(data,p));
  const inventory=after.units.map(u=>({id:u.id,name:u.name,level:u.level,parent_id:u.parent_id,member_location_ids:[...after.members.get(u.id)].sort()}));const inv=gzipSync(json(inventory),{mtime:0});put('macro-foundation/current-membership-inventory.json.gz',inv);audit.current_membership_inventory={path:'macro-foundation/current-membership-inventory.json.gz',sha256:sha(inv),semantic_complete:false};put('granularity-audit.json',audit);
  const appended=appendRelease(oldReleases,release,p=>fs.readFileSync(safe(releaseData,p)),{compressed:metadataMode==='reference-correction'});for(const [p,b]of appended.files)put('geographic-releases/'+p,b);
  if(fs.existsSync(path.join(data,'geographic-releases/current-manifest.json'))){
@@ -151,25 +210,33 @@ export async function prepareInstall({data='data',geographyData='.cache/global-m
  const prefix='reference-migrations/global-macro-reference-v'+latest.version+'/before';
  const evidence=read(path.join(data,'prepared-evidence/index.json'));for(const key of Object.keys(before.proof))if(evidence[key]!==before.proof[key])throw Error('Prepared evidence baseline stale');
  for(const product of evidence.products){
-  const name=product.directory+'/revalidation.json',raw=fs.readFileSync(safe(data,name)),old=JSON.parse(raw),next=composeEvidence(old,before,after,safe(data,product.directory));
+  const name=product.directory+'/revalidation.json',raw=fs.readFileSync(safe(data,name)),old=JSON.parse(raw),next=composeEvidence(old,before,after,safe(data,product.directory),native?{associationContinuation:evidence.physical_association_continuation}:{});
   next.projection.previous_revalidation_sha256=sha(raw);
   next.prior_revalidation={sha256:sha(raw),archive_path:'data/'+prefix+'/'+name+'.archive.gz',archive_sha256:sha(gzipSync(raw,{mtime:0})),compression:'gzip',revalidated_geography:old.revalidated_geography};
   next.migration_receipts=[...(old.migration_receipts??[]),...receipts.map(file=>({path:path.relative(path.dirname(data),file),sha256:hashFile(file)}))];
   put(name,next);const pin=sha(writes.get(name));product.revalidation.sha256=pin;for(const input of product.inputs)if(input.path==='revalidation.json')input.sha256=pin;
  }
  const imports=read(path.join(data,'prepared-evidence/imports/index.json'));put('prepared-evidence/imports/index.json',{...imports,...after.proof});evidence.imports.sha256=sha(writes.get('prepared-evidence/imports/index.json'));put('prepared-evidence/index.json',{...evidence,...after.proof});
- for(const [p,b]of await prepareMacroReviewProjection({data,before,after,receipts})){if(writes.has(p)||p in preserved)throw Error('Review projection overwrites an existing or immutable asset');safe(data,p);put(p,b);}
+ if(!native)for(const [p,b]of await prepareMacroReviewProjection({data,before,after,receipts})){if(writes.has(p)||p in preserved)throw Error('Review projection overwrites an existing or immutable asset');safe(data,p);put(p,b);}
  let macroCompatibility=null;
- if(metadataMode==='reference-correction'){
+ if(metadataMode==='reference-correction'&&!native){
   const macro=prepareReferenceMacroBinding({data,before,after,release:latest,receiptSha256:hashFile(receipts[0])});
   for(const [p,b]of macro.files){if(writes.has(p)||p in preserved)throw Error('Macro binding overwrites another staged or immutable asset');put(p,b);}
   macroCompatibility={groups:macro.binding.groups.length,macro_conventions_changed:false,published:false,new_approval_created:false};
  }
+ if(native)macroCompatibility=historicalMacro.status;
+ if(native&&[...writes.keys()].some(name=>name==='ownership-selection.json'||/^(?:canonical-grid|native-ownership|native-context-migration)\//.test(name)))throw Error('Reference correction changes immutable native or historical grid products');
  const archives=[];
  for(const [name]of [...writes])if(fs.existsSync(safe(data,name))&&!name.startsWith('geography/')){const archive=prefix+'/'+name+'.archive.gz',raw=fs.readFileSync(safe(data,name));put(archive,gzipSync(raw,{mtime:0}));archives.push({original_path:name,original_sha256:sha(raw),archive_path:archive,archive_sha256:sha(writes.get(archive))});}
  const evidenceChains={};
  if(metadataMode==='reference-correction')for(const product of evidence.products){
   const name=product.directory+'/revalidation.json';
+  if(native){
+   const current=JSON.parse(writes.get(name)),link=current.prior_revalidation,packed=writes.get(link.archive_path.replace(/^data\//,'')),raw=gunzipSync(packed),prior=JSON.parse(raw);
+   if(sha(packed)!==link.archive_sha256||sha(raw)!==link.sha256||current.projection.previous_revalidation_sha256!==link.sha256||!equal(prior.revalidated_geography,link.revalidated_geography)||!equal(current.original_geography,prior.original_geography)||!equal(current.source_product_files,prior.source_product_files)||!equal(current.entities,prior.entities)||current.records!==prior.records||!equal(current.migration_receipts.slice(0,(prior.migration_receipts??[]).length),prior.migration_receipts??[]))throw Error('Current evidence composition changes its exact archived predecessor');
+   evidenceChains[product.id]={validated_current_link:true,archived_predecessors:[{archive_path:link.archive_path,archive_sha256:link.archive_sha256,raw_sha256:link.sha256}],historical_predecessor_chain_revalidated:false,historical_claims_transferred:false,limits:['The exact prior receipt and its original proof status/older links are retained; this parent-only correction does not reconstruct or revalidate unrelated historical archives.']};
+   continue;
+  }
   evidenceChains[product.id]=validateEvidenceRevalidationChain(JSON.parse(writes.get(name)),{root:path.dirname(data),readFile:p=>{
    const absolute=safe(path.dirname(data),p);
    if(!absolute.startsWith(data+path.sep))throw Error('Evidence chain must remain within preserved atlas data');
@@ -178,14 +245,35 @@ export async function prepareInstall({data='data',geographyData='.cache/global-m
   }});
  }
  const originals=Object.fromEntries([...writes.keys()].map(p=>[p,fs.existsSync(safe(data,p))?hashFile(safe(data,p)):null]));
- const report={version:1,reference_only:true,release_id:latest.id,before_geography:before.proof,after_geography:after.proof,receipts:receipts.map(p=>({path:path.relative(path.dirname(data),p),sha256:hashFile(p)})),writes:Object.fromEntries([...writes].map(([p,b])=>[p,sha(b)])),originals,archives,preserved,evidence_chains:evidenceChains,macro_compatibility:macroCompatibility,immutable_grid_parts:grid.parts.map(p=>({path:'canonical-grid/'+p.path,sha256:p.sha256})),counts:latest.expected_counts,ownership_recompiled:false,historical_records_changed:false,semantic_complete:false};
+ const report={version:1,reference_only:true,release_id:latest.id,before_geography:before.proof,after_geography:after.proof,receipts:receipts.map(p=>({path:path.relative(path.dirname(data),p),sha256:hashFile(p)})),writes:Object.fromEntries([...writes].map(([p,b])=>[p,sha(b)])),originals,archives,preserved,evidence_chains:evidenceChains,macro_compatibility:macroCompatibility,...(native?{native_reference:native,historical_release_descriptors_preserved:true,historical_release_bodies_revalidated:false}:{}),immutable_grid_parts:grid.parts.map(p=>({path:'canonical-grid/'+p.path,sha256:p.sha256})),counts:latest.expected_counts,ownership_recompiled:false,historical_records_changed:false,semantic_complete:false};
  const validation=sha(json(report));fs.mkdirSync(stage,{recursive:true});for(const [p,b]of writes){const target=safe(path.join(stage,'after'),p);fs.mkdirSync(path.dirname(target),{recursive:true});fs.writeFileSync(target,b);}fs.writeFileSync(path.join(stage,'report.json'),json({...report,validation_sha256:validation}));
- return {data,stage,report,validation_sha256:validation};
+ return {data,stage,report,repository,validation_sha256:validation};
+}
+function ordinaryInstallPath(base,file){
+ const directory=path.resolve(base);
+ if(!fs.lstatSync(directory).isDirectory()||fs.realpathSync(directory)!==directory)throw Error('Install root must be an ordinary directory');
+ const components=path.relative(directory,file).split(path.sep);let current=directory;
+ for(let i=0;i<components.length;i++){
+  current=path.join(current,components[i]);const entry=fs.lstatSync(current,{throwIfNoEntry:false});
+  if(entry&&!(i===components.length-1?entry.isFile():entry.isDirectory()))throw Error('Install paths must be ordinary files and directories');
+ }
+}
+function installDestinations({data,stage,report}){
+ const targets=Object.keys(report.writes).map(p=>safe(data,p)),temporaries=targets.map(p=>p+'.macro-tmp'),destinations=[...targets,...temporaries],unique=new Set(destinations);
+ if(unique.size!==destinations.length)throw Error('Install destinations overlap');
+ for(const destination of destinations)for(let parent=path.dirname(destination);parent!==path.dirname(parent);parent=path.dirname(parent))if(unique.has(parent))throw Error('Install destinations overlap');
+ for(const p of Object.keys(report.writes)){
+  const target=safe(data,p);ordinaryInstallPath(data,target);ordinaryInstallPath(stage,safe(path.join(stage,'after'),p));
+  if(fs.lstatSync(target+'.macro-tmp',{throwIfNoEntry:false}))throw Error('Install temporary destination already exists');
+ }
 }
 export function applyInstall(prepared,{expectedValidation,failAfter=Infinity}={}){
  if(!expectedValidation||expectedValidation!==prepared.validation_sha256)throw Error('Apply requires the exact reviewed validation hash');
- const {data,stage,report}=prepared,lock=path.join(data,'.macro-reference-install.lock');const fd=fs.openSync(lock,'wx'),backup=path.join(stage,'rollback-'+randomUUID()),done=[];fs.mkdirSync(backup,{recursive:true});
+ const {data,stage,report}=prepared,lock=path.join(data,'.macro-reference-install.lock');installDestinations(prepared);
+ const fd=fs.openSync(lock,'wx'),backup=path.join(stage,'rollback-'+randomUUID()),done=[],temporaries=new Set();
  try{
+  fs.mkdirSync(backup);
+  if(report.native_reference&&!equal(selectedNativeReference(data,{proof:report.before_geography},report.native_reference.current_reference,prepared.repository??root),report.native_reference))throw Error('Original native reference changed after preparation');
   for(const asset of report.immutable_grid_parts)if(hashFile(safe(data,asset.path))!==asset.sha256)throw Error('Grid ownership bytes changed after preparation');
   for(const [p,pin]of Object.entries(report.preserved))if(hashFile(safe(data,p))!==pin)throw Error('Historical bytes changed after preparation');
   for(const [p,pin]of Object.entries(report.originals))if((fs.existsSync(safe(data,p))?hashFile(safe(data,p)):null)!==pin)throw Error('Original metadata changed after preparation');
@@ -194,11 +282,16 @@ export function applyInstall(prepared,{expectedValidation,failAfter=Infinity}={}
   // a lock and a durable journal identifying exact originals and staged bytes.
   for(const p of Object.keys(report.writes)){const target=safe(data,p),old=safe(backup,p);if(fs.existsSync(target)){fs.mkdirSync(path.dirname(old),{recursive:true});fs.copyFileSync(target,old);}}
   const journal={validation_sha256:expectedValidation,state:'committing',originals:report.originals,writes:report.writes,installed:done};const journalFile=path.join(backup,'journal.json');fs.writeFileSync(journalFile,json(journal));
-  for(const [p]of Object.entries(report.writes)){const target=safe(data,p),temporary=target+'.macro-tmp';fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(safe(path.join(stage,'after'),p),temporary);fs.renameSync(temporary,target);done.push(p);fs.writeFileSync(journalFile,json(journal));if(done.length===failAfter)throw Error('Injected metadata install failure');}
+  for(const [p]of Object.entries(report.writes)){
+   const target=safe(data,p),temporary=target+'.macro-tmp';fs.mkdirSync(path.dirname(target),{recursive:true});
+   const temporaryFD=fs.openSync(temporary,'wx');temporaries.add(temporary);
+   try{fs.writeFileSync(temporaryFD,fs.readFileSync(safe(path.join(stage,'after'),p)));}finally{fs.closeSync(temporaryFD);}
+   fs.renameSync(temporary,target);temporaries.delete(temporary);done.push(p);fs.writeFileSync(journalFile,json(journal));if(done.length===failAfter)throw Error('Injected metadata install failure');
+  }
 
   for(const [p,pin]of Object.entries(report.preserved))if(hashFile(safe(data,p))!==pin)throw Error('Historical bytes changed during install');
   fs.writeFileSync(path.join(backup,'commit.json'),json({validation_sha256:expectedValidation,installed:done,history_unchanged:true}));journal.state='committed';fs.writeFileSync(journalFile,json(journal));return {applied:true,validation_sha256:expectedValidation,rollback_archive:backup};
- }catch(error){for(const p of Object.keys(report.writes))fs.rmSync(safe(data,p)+'.macro-tmp',{force:true});for(const p of done.reverse()){const old=safe(backup,p),target=safe(data,p);if(fs.existsSync(old))fs.copyFileSync(old,target);else fs.rmSync(target,{force:true});}throw error;}finally{fs.closeSync(fd);fs.rmSync(lock,{force:true});}
+ }catch(error){for(const temporary of temporaries)fs.rmSync(temporary,{force:true});for(const p of done.reverse()){const old=safe(backup,p),target=safe(data,p);if(fs.existsSync(old))fs.copyFileSync(old,target);else fs.rmSync(target,{force:true});}throw error;}finally{fs.closeSync(fd);fs.rmSync(lock,{force:true});}
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  const options={},apply=process.argv.includes('--apply');let expected;for(let i=2;i<process.argv.length;i++){const arg=process.argv[i];if(arg==='--apply')continue;const value=process.argv[++i];if(!value)throw Error('Missing installer argument');if(arg==='--expected-validation')expected=value;else if(arg==='--data')options.data=value;else if(arg==='--geography-data')options.geographyData=value;else if(arg==='--release-data')options.releaseData=value;else if(arg==='--stage')options.stage=value;else throw Error('Unknown installer argument: '+arg);}

@@ -1,0 +1,112 @@
+{
+  "kind": "actual-current-selected-parent-only-installer-reproduction",
+  "code_base": "529b8be1088abb7b419a05758dd8804ad15e54ee",
+  "input_metadata_baseline": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+  "selected_state_or_primary_repository_mutated": false,
+  "canonical_result_commit": null,
+  "accepted_code_equivalence_review": false,
+  "preparation": {
+    "success": true,
+    "started_utc": "2026-10-16T02:06:38.863Z",
+    "ended_utc": "2026-10-16T02:07:26.247Z",
+    "seconds": 47.372474374999996,
+    "validation_sha256": "6f6032ffd449a3d95a61401daca86d3b27dcce0370fbe26bf9f114b12957dd99",
+    "writes": 450,
+    "native": {
+      "selection_sha256": "6a0d4c7596dc8cf5cddf17547621a2a73db66d67ddc0870d4709d1da8746bedb",
+      "manifest_sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "manifest_path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+      "native_reference": {
+        "id": "geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb",
+        "footprints_sha256": "2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9",
+        "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "current_reference": {
+        "id": "geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb",
+        "footprints_sha256": "2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9",
+        "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "verification": {
+        "commit": "77b345faf2fc02df8e6669ac4b6ea746e81a61cd",
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-selection-receipt.json",
+        "sha256": "dcc3533b9eea251b9d5a323a05da441816a2affe2889c2484174ec853e591691",
+        "role": "reviewed-exhaustive-native-rule-comparison",
+        "installation_approval": false,
+        "manifest_sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba"
+      },
+      "original_native_bytes_unchanged": true,
+      "canonical_metadata_commit_required": true,
+      "new_native_or_publication_approval": false
+    }
+  },
+  "apply": {
+    "success": true,
+    "started_utc": "2026-10-16T02:07:52.048Z",
+    "ended_utc": "2026-10-16T02:07:55.222Z",
+    "validation_sha256": "6f6032ffd449a3d95a61401daca86d3b27dcce0370fbe26bf9f114b12957dd99",
+    "writes": 450,
+    "existing_targets_isolated": 9,
+    "shared_source_bodies_unchanged": true,
+    "old_release_descriptors_exact_prefix": true,
+    "old_releases": 9,
+    "new_releases": 10,
+    "old_batches": 3385,
+    "new_batches": 3816,
+    "original_scientific_and_selected_bytes_unchanged": true,
+    "historical_macro_status_preserved": true,
+    "existing_effective_reference_binding_requires_actual_canonical_after_commit": true,
+    "applied": {
+      "applied": true,
+      "validation_sha256": "6f6032ffd449a3d95a61401daca86d3b27dcce0370fbe26bf9f114b12957dd99"
+    }
+  },
+  "rollback": {
+    "success": true,
+    "utc": "2026-10-16T02:07:53.489Z",
+    "validation_sha256": "6f6032ffd449a3d95a61401daca86d3b27dcce0370fbe26bf9f114b12957dd99",
+    "fail_after": 7,
+    "error": "Injected metadata install failure",
+    "all_originals_restored": true,
+    "all_preserved_unchanged": true,
+    "all_shared_source_bodies_unchanged": true,
+    "lock_released": true,
+    "checked_originals": 450,
+    "checked_preserved": 885
+  },
+  "encoder_transport": {
+    "scope": "Task-local invocation only; production encoder unchanged",
+    "input": "Exact literal JSON.stringify input bytes supplied by ordinary read-only FD0, avoiding a child-specific pipe EOF wait",
+    "python": "Existing bundled Python 3.12",
+    "canonical_encoder": "scripts/evidence/immutable.py canonical_json + deterministic_gzip",
+    "source_and_validation_predicates_changed": false,
+    "unchanged_stock_invocation_claimed": false,
+    "encoder_bug_fixed_claimed": false,
+    "literal_local_preload_sha256": "a35bbe54427b39d92009ca2ec720878ffb3864ebbe7eaf81c01f5b1cf94cc44d"
+  },
+  "source_receipt": {
+    "commit": "1bdea2f51598daa0cec045384537823506531b9e",
+    "path": "coordination/engineering/vietnam-current-cell-20261014/cathai-parent-reference-release-20261016/cathai-reference-migration-receipt.json.gz",
+    "bytes": 1015684,
+    "sha256": "93188024a4937986e5553b49b63e8cdfad8a38a9f46a6f599c41e0ffa4cbf6f5"
+  },
+  "limits": [
+    "The original native source bank, native manifest/scientific assets and selected ownership bytes remain literal.",
+    "Historical macro projections/certificates and older evidence-chain proof status are retained; no fresh compatibility or geographic approval is asserted.",
+    "The immutable current-link evidence composition checks every actual subject footprint and original product file; unrelated earlier archives are not reconstructed or revalidated.",
+    "The existing N/M/E binding still requires a genuine canonical hierarchy/source/release commit before its after pins can be bound.",
+    "Actual accepted71d current selector is used. The nine write preimages also match accepted71d; unrelated retained input metadata remains explicitly sourced from89ff. Final dependency acceptance and independent code-equivalence review remain separate."
+  ],
+  "code_dependency_head": "9b121653b4e775a34c5bb78a0ce5dea69c7dd656",
+  "executed_installer_sha256": "c20d54524658b81b0bb1f8d876afe08951074955a2a23e6a8b164ac8aa8390d8",
+  "code_worktree_head_at_execution": "826f5d87141a06f99ab19cffb2d5731b0b13878b",
+  "working_guard_patch_executed": true,
+  "current_selection_input": {
+    "commit": "71d95f45ea0457d60d4b8263bf36ab78316cf0cc",
+    "path": "data/ownership-selection.json",
+    "git_blob_oid": "b2abcfeb2ef1fded14f7c553cd324bffd6a43bd2",
+    "bytes": 1564,
+    "sha256": "6a0d4c7596dc8cf5cddf17547621a2a73db66d67ddc0870d4709d1da8746bedb"
+  },
+  "earlier_008_actual_canonical_commit": "29aca52fcc46b15067bd35e9689fad0a37c95fa4",
+  "all_complete_geography_inputs_guarded": true
+}
