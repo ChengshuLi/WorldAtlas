@@ -1,0 +1,248 @@
+{
+  "reviewer": "/root/cell_method_review",
+  "reviewed_utc": "2026-10-16T01:31:16.585297+00:00",
+  "disposition": "PASS WITH LIMITS for exact9393 bounded annual2020 category/source-body and original-source-version location proposals; NOT adopted",
+  "proposal": {
+    "path": "idn-physical-residual41305-policy-001/worker6-untouched9393-assessment/proposed-untouched9393-source-body-location-dispositions.jsonl.gz",
+    "bytes": 1869693,
+    "sha256": "620cced3a666f03450aedc60f45acf77b775e1e16af50eebe2cab75100744a71"
+  },
+  "decoded_sha256": "0e61a36209c7b9e269396ae90ad1f527dc73b31a11ee4512f1fbcc38cccce20a",
+  "exact_keyfile": {
+    "path": "idn-physical-residual41305-policy-001/worker6-untouched9393-assessment/exact-untouched9393-owner-y-x.jsonl.gz",
+    "bytes": 44996,
+    "sha256": "67659ee2954956f209bdb13c7b4a6ec9d35b217082c0cad467d39c107f3d9c7c"
+  },
+  "original_source_interpretation_inputs": [
+    {
+      "path": "idn-worldcover2020-53134-001/worker2-interpretation/proposed-physical-location-dispositions.jsonl.gz",
+      "bytes": 4673679,
+      "sha256": "91f1dd7a50dd66fbc971d42347e7d8dfa0c0acff98c6067aee23d6e15f573433"
+    },
+    {
+      "path": "idn-physical-remainder80712-001/worker2-interpretation/proposed-physical-location-dispositions.jsonl.gz",
+      "bytes": 5920626,
+      "sha256": "8f8efe8988f8e744570dd941f7e922b9bf57afd0e45b10ac673670ff10ad8590"
+    }
+  ],
+  "full_original_source_scientific_rows_and_associations_structurally_unchanged_except_declared_interpretation": true,
+  "prior_actual_body_relation_question_retained": true,
+  "classes": {
+    "60": 1311,
+    "80": 4554,
+    "40": 185,
+    "10": 2640,
+    "20": 47,
+    "30": 466,
+    "50": 190
+  },
+  "cohorts": {
+    "first53134": 4483,
+    "remainder80712": 4910
+  },
+  "counts": {
+    "original_mixed": 10551,
+    "proposed": 9393,
+    "RGB_excluded": 1158,
+    "already_adopted": 820
+  },
+  "separate_original_hold_flags": {
+    "parent_context": 65,
+    "selected_portion_context": 1726,
+    "recorded_other_claims": 0
+  },
+  "full_first_cohort_saved_native_context_bodies_bound": 1524,
+  "actual_context_pattern_groups": 127,
+  "source_context_patterns_informational_not_veto_or_classifier": true,
+  "geographic_examples": {
+    "60/first53134/4133": {
+      "key": {
+        "owner": 22815,
+        "y": 128907,
+        "x": 200549
+      },
+      "source_name": "Simeulue",
+      "source_target": "gb:IDN:ADM2:22746128B32199422560180",
+      "category": 60,
+      "context": [
+        [
+          80,
+          80,
+          80
+        ],
+        [
+          60,
+          60,
+          60
+        ],
+        [
+          60,
+          60,
+          60
+        ]
+      ],
+      "actual_answer": "ESA WorldCover2020 v100 positively predicts bare or sparsely vegetated cover at the containing native pixel of this unchanged original centre. Its affirmative retained Simeulue original-source-version association (gb:IDN:ADM2:22746128B32199422560180) supplies the independent geographic location component. Together these support the bounded annual2020 bare-or-sparse-cover source-body/location answer; neither permanently dry ground nor binary exposed-ground/open-water status is established."
+    },
+    "80/first53134/4144": {
+      "key": {
+        "owner": 22815,
+        "y": 128959,
+        "x": 200834
+      },
+      "source_name": "Simeulue",
+      "source_target": "gb:IDN:ADM2:22746128B32199422560180",
+      "category": 80,
+      "context": [
+        [
+          80,
+          80,
+          40
+        ],
+        [
+          80,
+          80,
+          40
+        ],
+        [
+          80,
+          80,
+          40
+        ]
+      ],
+      "actual_answer": "ESA WorldCover2020 v100 positively predicts the producer permanent/open-water category at the containing native pixel of this unchanged original centre. Its affirmative retained Simeulue original-source-version association (gb:IDN:ADM2:22746128B32199422560180) supplies the independent geographic location component. Together these support the bounded annual2020 annual-open-water source-body/location answer; neither permanently dry ground nor binary exposed-ground/open-water status is established."
+    },
+    "40/first53134/4166": {
+      "key": {
+        "owner": 22815,
+        "y": 128975,
+        "x": 200818
+      },
+      "source_name": "Simeulue",
+      "source_target": "gb:IDN:ADM2:22746128B32199422560180",
+      "category": 40,
+      "context": [
+        [
+          80,
+          40,
+          90
+        ],
+        [
+          80,
+          40,
+          90
+        ],
+        [
+          80,
+          90,
+          90
+        ]
+      ],
+      "actual_answer": "ESA WorldCover2020 v100 positively predicts cultivated cover/cropland at the containing native pixel of this unchanged original centre. Its affirmative retained Simeulue original-source-version association (gb:IDN:ADM2:22746128B32199422560180) supplies the independent geographic location component. Together these support the bounded annual2020 cropland source-body/location answer; neither permanently dry ground nor binary exposed-ground/open-water status is established."
+    },
+    "10/first53134/4248": {
+      "key": {
+        "owner": 22815,
+        "y": 129017,
+        "x": 200839
+      },
+      "source_name": "Simeulue",
+      "source_target": "gb:IDN:ADM2:22746128B32199422560180",
+      "category": 10,
+      "context": [
+        [
+          10,
+          10,
+          10
+        ],
+        [
+          10,
+          10,
+          10
+        ],
+        [
+          10,
+          10,
+          95
+        ]
+      ],
+      "actual_answer": "ESA WorldCover2020 v100 positively predicts tree canopy/cover at the containing native pixel of this unchanged original centre. Its affirmative retained Simeulue original-source-version association (gb:IDN:ADM2:22746128B32199422560180) supplies the independent geographic location component. Together these support the bounded annual2020 tree-canopy source-body/location answer; neither permanently dry ground nor binary exposed-ground/open-water status is established."
+    }
+  },
+  "category_meanings": {
+    "10": {
+      "kind": "tree-canopy",
+      "meaning": "tree canopy/cover",
+      "specific_limit": "Tree canopy can overlie flooded ground; this prediction does not rule out wet understorey.",
+      "VN_example_index": 54
+    },
+    "20": {
+      "kind": "shrubland",
+      "meaning": "shrub vegetation/cover",
+      "specific_limit": "Shrub cover does not establish dry substrate at a particular date.",
+      "VN_example_index": 6542
+    },
+    "30": {
+      "kind": "grassland",
+      "meaning": "grassland/grass cover",
+      "specific_limit": "Grass cover can occur on wet or seasonally flooded ground; permanent dryness is not established.",
+      "VN_example_index": 111
+    },
+    "40": {
+      "kind": "cropland",
+      "meaning": "cultivated cover/cropland",
+      "specific_limit": "Cropland can be seasonally flooded and does not distinguish a dry crop from flooded cultivation.",
+      "VN_example_index": 84
+    },
+    "50": {
+      "kind": "built-up",
+      "meaning": "built-up cover",
+      "specific_limit": "Built-up is the annual producer cover prediction, not a legal parcel, surveyed building or exact developed shoreline.",
+      "VN_example_index": 146
+    },
+    "60": {
+      "kind": "bare-or-sparse-cover",
+      "meaning": "bare or sparsely vegetated cover",
+      "specific_limit": "Bare/sparse cover is not a certificate of dry ground at a particular tide/date or a substrate-material identification.",
+      "VN_example_index": 23
+    },
+    "80": {
+      "kind": "annual-open-water",
+      "meaning": "the producer permanent/open-water category",
+      "specific_limit": "The producer permanent-water class models water for more than nine months, fresh or salt. This is not an independent dated persistence measurement, named river/sea, exact bank/thalweg or legal water boundary.",
+      "VN_example_index": 0
+    }
+  },
+  "actual_VN_original_body": {
+    "commit": "5d3b3ea950463ce0c5b9d8643f47cdb911b49320",
+    "sha256": "2f2566f62538ea174cf3a354b5290646cf088af476b7b7a3a89b91e45bba130a",
+    "all_seven_example_classes_authenticated": true,
+    "spatial_facts_transferred": false
+  },
+  "exact_conservation": {
+    "current_adopted": 123675,
+    "current_residual": 10171,
+    "new_proposed_disjoint": 9393,
+    "proposed_cohort_RGB9332_overlap": 0,
+    "proposed_cohort_current_adopted_overlap": 0,
+    "remaining778_exact_subset_RGB9332": true,
+    "prospective_adopted_only_if_Root_adopts": 133068,
+    "prospective_residual_only_if_Root_adopts": 778,
+    "original_denominator": 133846,
+    "original_union_preserved": true
+  },
+  "scientific_judgment": "The fixed annual source prediction and affirmative independent original-source-version association support the exact class-specific category/location facet. Mixed native context identifies heterogeneity and possible registration/mixing; it does not erase the containing-pixel observation or establish uniform body coverage. Water80 is affirmed as the producer annual permanent/open-water prediction, without claiming independently observed present water, whole-Atlas-cell status or bank/thalweg. Tree/shrub/grass/crop cover does not establish permanently dry underlying ground; bare/built cover is a thematic category, not a surveyed edge. This is the already adopted annual claim scope, not a new numerical classifier or automatic conversion to binary truth. All actual9332 imagery contradictions and778 unknowns remain excluded. No consequential defect found at the narrowly declared claim scope.",
+  "limits": [
+    "Annual2020 WorldCover v100 is credible thematic model-source evidence, not dated RGB, current truth, per-key certainty or an instantaneous wetness/tide observation.",
+    "Each class keeps its specific producer meaning: open water, tree canopy, shrub, grass, crop, built-up or bare/sparse cover. Non90/95 does not mean dry land, and no model label becomes binary or whole-cell truth.",
+    "The containing native source pixel supports this unchanged point-scale interpretation, not complete coverage of the larger Atlas cell, surveyed coastline/bank or a selected geographic portion.",
+    "Valid masks establish an actual source observation, not thematic correctness. Product-wide quality does not supply per-key accuracy or total positional error; source registration/mixing remains applicable.",
+    "Native3x3 is observed surrounding category context, not an acceptance, majority or unanimity rule. Mixed neighbours do not erase the centre observation.",
+    "Original source-version membership is affirmative retained numerical source evidence, not an independent current owner, strict-new-predicate, parent correction, treaty, shoreline/title or sovereignty finding.",
+    "Binary exposed ground versus open water, permanently dry substrate, water beneath canopy and instantaneous inundation are not established by this bounded category/location answer.",
+    "Every original source, foreign/coarse-parent, geographic-portion, territorial and ownership hold remains; no native-authority, current-selection or repair credit.",
+    "9393 remain proposed pending Root adoption; zero native-authority/accepted-map repair credit.",
+    "All778 actual RGB unknowns remain, including338 mixed-context and440 wetland; no original physical133846 global-closure claim."
+  ],
+  "authority_or_repair_credit": 0,
+  "source_native_predicate_or_API_execution": false
+}

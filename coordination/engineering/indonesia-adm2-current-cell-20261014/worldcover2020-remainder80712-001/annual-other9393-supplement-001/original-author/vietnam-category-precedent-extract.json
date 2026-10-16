@@ -1,0 +1,933 @@
+{
+  "kind": "existing-accepted-VN-nonwetland-category-semantics-only",
+  "commit": "5d3b3ea950463ce0c5b9d8643f47cdb911b49320",
+  "source_path": "coordination/engineering/vietnam-current-cell-20261014/source-interpretation/offshore13649-20261015/adoption/adopted-other8184-annual-physical-interpretations.json",
+  "original_bytes": 37889785,
+  "original_sha256": "2f2566f62538ea174cf3a354b5290646cf088af476b7b7a3a89b91e45bba130a",
+  "positive_class_counts": {
+    "80": 2770,
+    "95": 381,
+    "90": 20,
+    "60": 625,
+    "10": 3696,
+    "40": 64,
+    "30": 271,
+    "50": 342,
+    "20": 15
+  },
+  "examples": [
+    {
+      "index": 54,
+      "original_key": {
+        "owner": 48578,
+        "y": 115039,
+        "x": 209762
+      },
+      "original_record_unchanged": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65521
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48578
+        ],
+        "declared_sids": [
+          65521
+        ],
+        "flags": [],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "source-relative-physical-interpretation-unresolved"
+        ],
+        "owner": 48578,
+        "package": "physical-interpretation",
+        "physical": "source-relative",
+        "qualified": false,
+        "reference_countries": [],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 209762,
+        "y": 115039
+      },
+      "centre_unchanged": {
+        "longitude": 108.04078332049158,
+        "latitude": 21.506937237249346
+      },
+      "latitude_f64_le_hex_unchanged": "4c1c87a3c6813540",
+      "input_scope_array_index": 54,
+      "original_source_array_index": 15699,
+      "original_interval_index": 21,
+      "source_target_unchanged": "gb:VNM:ADM2:81297802B69562638547328",
+      "source_name_unchanged": "Mong Cai",
+      "source_atoms_unchanged": [
+        "gb:VNM:ADM2:81297802B69562638547328"
+      ],
+      "proposed_bounded_answer": true,
+      "source_review_kind": "annual_worldcover2020_tree_cover_sourcebody_location",
+      "actual_answer": "ESA WorldCover 2020 v100 positively predicts tree cover at the native containing pixel of this unchanged original centre. With its original Mong Cai source/locality association retained, this is a bounded annual tree cover sourcebody/location answer. Tree-cover prediction does not rule out flooded ground or understory.",
+      "answer_year": 2020,
+      "answer_dates": [],
+      "source_vintage_kind": "annual2020 model product; not exact dated RGB",
+      "remaining_physical_question": null,
+      "reviewed_source_observation": {
+        "path": "bulk-completion/remaining8184-annual-source-001/combined8184-source-observations.jsonl",
+        "index": 54,
+        "observation_route": "new-annual-key-native-read-from-retained-whole-TIFF",
+        "source_pointer": {
+          "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E108/point-observations.jsonl",
+          "point_index": 54
+        },
+        "source_url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v100/2020/map/ESA_WorldCover_10m_2020_v100_N21E108_Map.tif",
+        "tile": "N21E108",
+        "native_row": 29916,
+        "native_col": 489,
+        "coverage_status": "valid-native-value",
+        "class_code": 10,
+        "valid_mask": 255,
+        "nodata_match": false,
+        "neighbourhood_complete": true,
+        "neighbourhood_codes": [
+          [
+            10,
+            10,
+            10
+          ],
+          [
+            10,
+            10,
+            10
+          ],
+          [
+            10,
+            10,
+            10
+          ]
+        ],
+        "neighbourhood_masks": [
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ]
+        ],
+        "centre_array": "bulk-completion/remaining8184-annual-source-001/tiles/N21E108/new-block-29-00.npz",
+        "source_object_identity": {
+          "last-modified": "Tue, 25 Oct 2022 13:33:08 GMT",
+          "etag": "\"8f97ba8bdb355a00756ae8b28291464b-15\"",
+          "accept-ranges": "bytes",
+          "content-length": "118619421"
+        }
+      },
+      "specific_limits": [
+        "Original owner/source/locality and territorial/source holds remain attached; a river/water prediction does not reject the nearby locality or change ownership.",
+        "This settles the stated bounded annual-sourcebody/locality question, not whole-cell coverage, exact-date wetness, shoreline/title or sovereignty.",
+        "Earlier RGB visibility/reef questions and independent source/legal questions remain source history, not claims that the annual model exposed a cloudy dated pixel.",
+        "Native3x3 is observed category context, not a new majority/unanimity threshold. Global thematic accuracy is not local ground truth or a total positional error."
+      ],
+      "authority_or_repair_credit": 0,
+      "adopted_bounded_answer": true,
+      "root_adoption_status": "adopted-bounded-source-body-location",
+      "completed_question_credit": 1
+    },
+    {
+      "index": 6542,
+      "original_key": {
+        "owner": 48390,
+        "y": 116298,
+        "x": 208344
+      },
+      "original_record_unchanged": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65558
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48390
+        ],
+        "declared_sids": [
+          65558
+        ],
+        "flags": [],
+        "hold_reasons": [
+          "source-relative-physical-interpretation-unresolved"
+        ],
+        "owner": 48390,
+        "package": "physical-interpretation",
+        "physical": "source-relative",
+        "qualified": false,
+        "reference_countries": [],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [],
+        "x": 208344,
+        "y": 116298
+      },
+      "centre_unchanged": {
+        "longitude": 106.09362007277832,
+        "latitude": 19.889766558135438
+      },
+      "latitude_f64_le_hex_unchanged": "2544bcbdc7e33340",
+      "input_scope_array_index": 6542,
+      "original_source_array_index": 22187,
+      "original_interval_index": 3211,
+      "source_target_unchanged": "gb:VNM:ADM2:81297802B4294080644708",
+      "source_name_unchanged": "Nghia Hung",
+      "source_atoms_unchanged": [
+        "gb:VNM:ADM2:81297802B4294080644708"
+      ],
+      "proposed_bounded_answer": true,
+      "source_review_kind": "annual_worldcover2020_shrubland_sourcebody_location",
+      "actual_answer": "ESA WorldCover 2020 v100 positively predicts shrubland at the native containing pixel of this unchanged original centre. With its original Nghia Hung source/locality association retained, this is a bounded annual shrubland sourcebody/location answer. Shrub cover does not establish dry ground at a particular date.",
+      "answer_year": 2020,
+      "answer_dates": [],
+      "source_vintage_kind": "annual2020 model product; not exact dated RGB",
+      "remaining_physical_question": null,
+      "reviewed_source_observation": {
+        "path": "bulk-completion/remaining8184-annual-source-001/combined8184-source-observations.jsonl",
+        "index": 6542,
+        "observation_route": "new-annual-key-native-read-from-retained-whole-TIFF",
+        "source_pointer": {
+          "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/point-observations.jsonl",
+          "point_index": 6542
+        },
+        "source_url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v100/2020/map/ESA_WorldCover_10m_2020_v100_N18E105_Map.tif",
+        "tile": "N18E105",
+        "native_row": 13322,
+        "native_col": 13123,
+        "coverage_status": "valid-native-value",
+        "class_code": 20,
+        "valid_mask": 255,
+        "nodata_match": false,
+        "neighbourhood_complete": true,
+        "neighbourhood_codes": [
+          [
+            30,
+            40,
+            40
+          ],
+          [
+            20,
+            20,
+            40
+          ],
+          [
+            20,
+            30,
+            30
+          ]
+        ],
+        "neighbourhood_masks": [
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ]
+        ],
+        "centre_array": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-13-12.npz",
+        "source_object_identity": {
+          "last-modified": "Tue, 25 Oct 2022 13:32:52 GMT",
+          "etag": "\"f0b072767e39d123b0a000914e46fe21-6\"",
+          "accept-ranges": "bytes",
+          "content-length": "50015966"
+        }
+      },
+      "specific_limits": [
+        "Original owner/source/locality and territorial/source holds remain attached; a river/water prediction does not reject the nearby locality or change ownership.",
+        "This settles the stated bounded annual-sourcebody/locality question, not whole-cell coverage, exact-date wetness, shoreline/title or sovereignty.",
+        "Earlier RGB visibility/reef questions and independent source/legal questions remain source history, not claims that the annual model exposed a cloudy dated pixel.",
+        "Native3x3 is observed category context, not a new majority/unanimity threshold. Global thematic accuracy is not local ground truth or a total positional error."
+      ],
+      "authority_or_repair_credit": 0,
+      "adopted_bounded_answer": true,
+      "root_adoption_status": "adopted-bounded-source-body-location",
+      "completed_question_credit": 1
+    },
+    {
+      "index": 111,
+      "original_key": {
+        "owner": 48578,
+        "y": 115054,
+        "x": 209772
+      },
+      "original_record_unchanged": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65141,
+          65521
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48578
+        ],
+        "declared_sids": [
+          65141,
+          65521
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "source-relative-physical-interpretation-unresolved"
+        ],
+        "owner": 48578,
+        "package": "physical-interpretation",
+        "physical": "source-relative",
+        "qualified": false,
+        "reference_countries": [
+          "CHN"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 209772,
+        "y": 115054
+      },
+      "centre_unchanged": {
+        "longitude": 108.0545150782329,
+        "latitude": 21.487772485911503
+      },
+      "latitude_f64_le_hex_unchanged": "e7e05aa8de7c3540",
+      "input_scope_array_index": 111,
+      "original_source_array_index": 15756,
+      "original_interval_index": 39,
+      "source_target_unchanged": "gb:VNM:ADM2:81297802B69562638547328",
+      "source_name_unchanged": "Mong Cai",
+      "source_atoms_unchanged": [
+        "gb:VNM:ADM2:81297802B69562638547328"
+      ],
+      "proposed_bounded_answer": true,
+      "source_review_kind": "annual_worldcover2020_grassland_sourcebody_location",
+      "actual_answer": "ESA WorldCover 2020 v100 positively predicts grassland at the native containing pixel of this unchanged original centre. With its original Mong Cai source/locality association retained, this is a bounded annual grassland sourcebody/location answer. Grass cover does not establish dry ground at a particular date.",
+      "answer_year": 2020,
+      "answer_dates": [],
+      "source_vintage_kind": "annual2020 model product; not exact dated RGB",
+      "remaining_physical_question": null,
+      "reviewed_source_observation": {
+        "path": "bulk-completion/remaining8184-annual-source-001/combined8184-source-observations.jsonl",
+        "index": 111,
+        "observation_route": "new-annual-key-native-read-from-retained-whole-TIFF",
+        "source_pointer": {
+          "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E108/point-observations.jsonl",
+          "point_index": 111
+        },
+        "source_url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v100/2020/map/ESA_WorldCover_10m_2020_v100_N21E108_Map.tif",
+        "tile": "N21E108",
+        "native_row": 30146,
+        "native_col": 654,
+        "coverage_status": "valid-native-value",
+        "class_code": 30,
+        "valid_mask": 255,
+        "nodata_match": false,
+        "neighbourhood_complete": true,
+        "neighbourhood_codes": [
+          [
+            30,
+            30,
+            30
+          ],
+          [
+            30,
+            30,
+            30
+          ],
+          [
+            30,
+            30,
+            30
+          ]
+        ],
+        "neighbourhood_masks": [
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ]
+        ],
+        "centre_array": "bulk-completion/remaining8184-annual-source-001/tiles/N21E108/new-block-29-00.npz",
+        "source_object_identity": {
+          "last-modified": "Tue, 25 Oct 2022 13:33:08 GMT",
+          "etag": "\"8f97ba8bdb355a00756ae8b28291464b-15\"",
+          "accept-ranges": "bytes",
+          "content-length": "118619421"
+        }
+      },
+      "specific_limits": [
+        "Original owner/source/locality and territorial/source holds remain attached; a river/water prediction does not reject the nearby locality or change ownership.",
+        "This settles the stated bounded annual-sourcebody/locality question, not whole-cell coverage, exact-date wetness, shoreline/title or sovereignty.",
+        "Earlier RGB visibility/reef questions and independent source/legal questions remain source history, not claims that the annual model exposed a cloudy dated pixel.",
+        "Native3x3 is observed category context, not a new majority/unanimity threshold. Global thematic accuracy is not local ground truth or a total positional error."
+      ],
+      "authority_or_repair_credit": 0,
+      "adopted_bounded_answer": true,
+      "root_adoption_status": "adopted-bounded-source-body-location",
+      "completed_question_credit": 1
+    },
+    {
+      "index": 84,
+      "original_key": {
+        "owner": 48578,
+        "y": 115052,
+        "x": 209761
+      },
+      "original_record_unchanged": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65141,
+          65521
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48578
+        ],
+        "declared_sids": [
+          65141,
+          65521
+        ],
+        "flags": [],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "source-relative-physical-interpretation-unresolved"
+        ],
+        "owner": 48578,
+        "package": "physical-interpretation",
+        "physical": "source-relative",
+        "qualified": false,
+        "reference_countries": [],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 209761,
+        "y": 115052
+      },
+      "centre_unchanged": {
+        "longitude": 108.03941014471746,
+        "latitude": 21.490327931952915
+      },
+      "latitude_f64_le_hex_unchanged": "970da021867d3540",
+      "input_scope_array_index": 84,
+      "original_source_array_index": 15729,
+      "original_interval_index": 31,
+      "source_target_unchanged": "gb:VNM:ADM2:81297802B69562638547328",
+      "source_name_unchanged": "Mong Cai",
+      "source_atoms_unchanged": [
+        "gb:VNM:ADM2:81297802B69562638547328"
+      ],
+      "proposed_bounded_answer": true,
+      "source_review_kind": "annual_worldcover2020_cropland_sourcebody_location",
+      "actual_answer": "ESA WorldCover 2020 v100 positively predicts cropland at the native containing pixel of this unchanged original centre. With its original Mong Cai source/locality association retained, this is a bounded annual cropland sourcebody/location answer. Cropland may be seasonally flooded; this is a cover prediction.",
+      "answer_year": 2020,
+      "answer_dates": [],
+      "source_vintage_kind": "annual2020 model product; not exact dated RGB",
+      "remaining_physical_question": null,
+      "reviewed_source_observation": {
+        "path": "bulk-completion/remaining8184-annual-source-001/combined8184-source-observations.jsonl",
+        "index": 84,
+        "observation_route": "new-annual-key-native-read-from-retained-whole-TIFF",
+        "source_pointer": {
+          "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E108/point-observations.jsonl",
+          "point_index": 84
+        },
+        "source_url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v100/2020/map/ESA_WorldCover_10m_2020_v100_N21E108_Map.tif",
+        "tile": "N21E108",
+        "native_row": 30116,
+        "native_col": 472,
+        "coverage_status": "valid-native-value",
+        "class_code": 40,
+        "valid_mask": 255,
+        "nodata_match": false,
+        "neighbourhood_complete": true,
+        "neighbourhood_codes": [
+          [
+            40,
+            40,
+            40
+          ],
+          [
+            40,
+            40,
+            60
+          ],
+          [
+            60,
+            60,
+            60
+          ]
+        ],
+        "neighbourhood_masks": [
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ]
+        ],
+        "centre_array": "bulk-completion/remaining8184-annual-source-001/tiles/N21E108/new-block-29-00.npz",
+        "source_object_identity": {
+          "last-modified": "Tue, 25 Oct 2022 13:33:08 GMT",
+          "etag": "\"8f97ba8bdb355a00756ae8b28291464b-15\"",
+          "accept-ranges": "bytes",
+          "content-length": "118619421"
+        }
+      },
+      "specific_limits": [
+        "Original owner/source/locality and territorial/source holds remain attached; a river/water prediction does not reject the nearby locality or change ownership.",
+        "This settles the stated bounded annual-sourcebody/locality question, not whole-cell coverage, exact-date wetness, shoreline/title or sovereignty.",
+        "Earlier RGB visibility/reef questions and independent source/legal questions remain source history, not claims that the annual model exposed a cloudy dated pixel.",
+        "Native3x3 is observed category context, not a new majority/unanimity threshold. Global thematic accuracy is not local ground truth or a total positional error."
+      ],
+      "authority_or_repair_credit": 0,
+      "adopted_bounded_answer": true,
+      "root_adoption_status": "adopted-bounded-source-body-location",
+      "completed_question_credit": 1
+    },
+    {
+      "index": 146,
+      "original_key": {
+        "owner": 48578,
+        "y": 115055,
+        "x": 209773
+      },
+      "original_record_unchanged": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65141,
+          65521
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48578
+        ],
+        "declared_sids": [
+          65141,
+          65521
+        ],
+        "flags": [
+          "foreign-reference-country"
+        ],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "source-relative-physical-interpretation-unresolved"
+        ],
+        "owner": 48578,
+        "package": "physical-interpretation",
+        "physical": "source-relative",
+        "qualified": false,
+        "reference_countries": [
+          "CHN"
+        ],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 209773,
+        "y": 115055
+      },
+      "centre_unchanged": {
+        "longitude": 108.05588825400702,
+        "latitude": 21.486494746064743
+      },
+      "latitude_f64_le_hex_unchanged": "1e0670eb8a7c3540",
+      "input_scope_array_index": 146,
+      "original_source_array_index": 15791,
+      "original_interval_index": 43,
+      "source_target_unchanged": "gb:VNM:ADM2:81297802B69562638547328",
+      "source_name_unchanged": "Mong Cai",
+      "source_atoms_unchanged": [
+        "gb:VNM:ADM2:81297802B69562638547328"
+      ],
+      "proposed_bounded_answer": true,
+      "source_review_kind": "annual_worldcover2020_built_up_cover_sourcebody_location",
+      "actual_answer": "ESA WorldCover 2020 v100 positively predicts built-up cover at the native containing pixel of this unchanged original centre. With its original Mong Cai source/locality association retained, this is a bounded annual built-up cover sourcebody/location answer. Built-up is an annual cover prediction, not a legal parcel or surveyed structure boundary.",
+      "answer_year": 2020,
+      "answer_dates": [],
+      "source_vintage_kind": "annual2020 model product; not exact dated RGB",
+      "remaining_physical_question": null,
+      "reviewed_source_observation": {
+        "path": "bulk-completion/remaining8184-annual-source-001/combined8184-source-observations.jsonl",
+        "index": 146,
+        "observation_route": "new-annual-key-native-read-from-retained-whole-TIFF",
+        "source_pointer": {
+          "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E108/point-observations.jsonl",
+          "point_index": 146
+        },
+        "source_url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v100/2020/map/ESA_WorldCover_10m_2020_v100_N21E108_Map.tif",
+        "tile": "N21E108",
+        "native_row": 30162,
+        "native_col": 670,
+        "coverage_status": "valid-native-value",
+        "class_code": 50,
+        "valid_mask": 255,
+        "nodata_match": false,
+        "neighbourhood_complete": true,
+        "neighbourhood_codes": [
+          [
+            10,
+            10,
+            10
+          ],
+          [
+            10,
+            50,
+            50
+          ],
+          [
+            50,
+            50,
+            50
+          ]
+        ],
+        "neighbourhood_masks": [
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ]
+        ],
+        "centre_array": "bulk-completion/remaining8184-annual-source-001/tiles/N21E108/new-block-29-00.npz",
+        "source_object_identity": {
+          "last-modified": "Tue, 25 Oct 2022 13:33:08 GMT",
+          "etag": "\"8f97ba8bdb355a00756ae8b28291464b-15\"",
+          "accept-ranges": "bytes",
+          "content-length": "118619421"
+        }
+      },
+      "specific_limits": [
+        "Original owner/source/locality and territorial/source holds remain attached; a river/water prediction does not reject the nearby locality or change ownership.",
+        "This settles the stated bounded annual-sourcebody/locality question, not whole-cell coverage, exact-date wetness, shoreline/title or sovereignty.",
+        "Earlier RGB visibility/reef questions and independent source/legal questions remain source history, not claims that the annual model exposed a cloudy dated pixel.",
+        "Native3x3 is observed category context, not a new majority/unanimity threshold. Global thematic accuracy is not local ground truth or a total positional error."
+      ],
+      "authority_or_repair_credit": 0,
+      "adopted_bounded_answer": true,
+      "root_adoption_status": "adopted-bounded-source-body-location",
+      "completed_question_credit": 1
+    },
+    {
+      "index": 23,
+      "original_key": {
+        "owner": 48578,
+        "y": 115018,
+        "x": 209762
+      },
+      "original_record_unchanged": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65521
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48578
+        ],
+        "declared_sids": [
+          65521
+        ],
+        "flags": [],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "source-relative-physical-interpretation-unresolved"
+        ],
+        "owner": 48578,
+        "package": "physical-interpretation",
+        "physical": "source-relative",
+        "qualified": false,
+        "reference_countries": [],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 209762,
+        "y": 115018
+      },
+      "centre_unchanged": {
+        "longitude": 108.04078332049158,
+        "latitude": 21.53376364557547
+      },
+      "latitude_f64_le_hex_unchanged": "568af9bba4883540",
+      "input_scope_array_index": 23,
+      "original_source_array_index": 15668,
+      "original_interval_index": 6,
+      "source_target_unchanged": "gb:VNM:ADM2:81297802B69562638547328",
+      "source_name_unchanged": "Mong Cai",
+      "source_atoms_unchanged": [
+        "gb:VNM:ADM2:81297802B69562638547328"
+      ],
+      "proposed_bounded_answer": true,
+      "source_review_kind": "annual_worldcover2020_bare_or_sparsely_vegetated_cover_sourcebody_location",
+      "actual_answer": "ESA WorldCover 2020 v100 positively predicts bare or sparsely vegetated cover at the native containing pixel of this unchanged original centre. With its original Mong Cai source/locality association retained, this is a bounded annual bare or sparsely vegetated cover sourcebody/location answer. Bare/sparse cover is not a certificate of dry ground at a particular tide/date.",
+      "answer_year": 2020,
+      "answer_dates": [],
+      "source_vintage_kind": "annual2020 model product; not exact dated RGB",
+      "remaining_physical_question": null,
+      "reviewed_source_observation": {
+        "path": "bulk-completion/remaining8184-annual-source-001/combined8184-source-observations.jsonl",
+        "index": 23,
+        "observation_route": "new-annual-key-native-read-from-retained-whole-TIFF",
+        "source_pointer": {
+          "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E108/point-observations.jsonl",
+          "point_index": 23
+        },
+        "source_url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v100/2020/map/ESA_WorldCover_10m_2020_v100_N21E108_Map.tif",
+        "tile": "N21E108",
+        "native_row": 29594,
+        "native_col": 489,
+        "coverage_status": "valid-native-value",
+        "class_code": 60,
+        "valid_mask": 255,
+        "nodata_match": false,
+        "neighbourhood_complete": true,
+        "neighbourhood_codes": [
+          [
+            60,
+            60,
+            40
+          ],
+          [
+            60,
+            60,
+            95
+          ],
+          [
+            95,
+            95,
+            95
+          ]
+        ],
+        "neighbourhood_masks": [
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ]
+        ],
+        "centre_array": "bulk-completion/remaining8184-annual-source-001/tiles/N21E108/new-block-28-00.npz",
+        "source_object_identity": {
+          "last-modified": "Tue, 25 Oct 2022 13:33:08 GMT",
+          "etag": "\"8f97ba8bdb355a00756ae8b28291464b-15\"",
+          "accept-ranges": "bytes",
+          "content-length": "118619421"
+        }
+      },
+      "specific_limits": [
+        "Original owner/source/locality and territorial/source holds remain attached; a river/water prediction does not reject the nearby locality or change ownership.",
+        "This settles the stated bounded annual-sourcebody/locality question, not whole-cell coverage, exact-date wetness, shoreline/title or sovereignty.",
+        "Earlier RGB visibility/reef questions and independent source/legal questions remain source history, not claims that the annual model exposed a cloudy dated pixel.",
+        "Native3x3 is observed category context, not a new majority/unanimity threshold. Global thematic accuracy is not local ground truth or a total positional error."
+      ],
+      "authority_or_repair_credit": 0,
+      "adopted_bounded_answer": true,
+      "root_adoption_status": "adopted-bounded-source-body-location",
+      "completed_question_credit": 1
+    },
+    {
+      "index": 0,
+      "original_key": {
+        "owner": 48578,
+        "y": 115012,
+        "x": 209765
+      },
+      "original_record_unchanged": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65521
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48578
+        ],
+        "declared_sids": [
+          65521
+        ],
+        "flags": [],
+        "hold_reasons": [
+          "foreign-reference-country",
+          "source-relative-physical-interpretation-unresolved"
+        ],
+        "owner": 48578,
+        "package": "physical-interpretation",
+        "physical": "source-relative",
+        "qualified": false,
+        "reference_countries": [],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "foreign-reference-country"
+        ],
+        "x": 209765,
+        "y": 115012
+      },
+      "centre_unchanged": {
+        "longitude": 108.044902847814,
+        "latitude": 21.541427423728948
+      },
+      "latitude_f64_le_hex_unchanged": "c812d6fc9a8a3540",
+      "input_scope_array_index": 0,
+      "original_source_array_index": 15645,
+      "original_interval_index": 0,
+      "source_target_unchanged": "gb:VNM:ADM2:81297802B69562638547328",
+      "source_name_unchanged": "Mong Cai",
+      "source_atoms_unchanged": [
+        "gb:VNM:ADM2:81297802B69562638547328"
+      ],
+      "proposed_bounded_answer": true,
+      "source_review_kind": "annual_worldcover2020_permanent_water_sourcebody_location",
+      "actual_answer": "ESA WorldCover 2020 v100 positively predicts permanent water at the native containing pixel of this unchanged original centre. With its original Mong Cai source/locality association retained, this is a bounded annual permanent water sourcebody/location answer. The producer permanent-water class means water for more than nine months, fresh or salt; it does not name a river/sea or fix a legal water boundary.",
+      "answer_year": 2020,
+      "answer_dates": [],
+      "source_vintage_kind": "annual2020 model product; not exact dated RGB",
+      "remaining_physical_question": null,
+      "reviewed_source_observation": {
+        "path": "bulk-completion/remaining8184-annual-source-001/combined8184-source-observations.jsonl",
+        "index": 0,
+        "observation_route": "new-annual-key-native-read-from-retained-whole-TIFF",
+        "source_pointer": {
+          "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E108/point-observations.jsonl",
+          "point_index": 0
+        },
+        "source_url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v100/2020/map/ESA_WorldCover_10m_2020_v100_N21E108_Map.tif",
+        "tile": "N21E108",
+        "native_row": 29502,
+        "native_col": 538,
+        "coverage_status": "valid-native-value",
+        "class_code": 80,
+        "valid_mask": 255,
+        "nodata_match": false,
+        "neighbourhood_complete": true,
+        "neighbourhood_codes": [
+          [
+            80,
+            80,
+            80
+          ],
+          [
+            80,
+            80,
+            80
+          ],
+          [
+            80,
+            80,
+            80
+          ]
+        ],
+        "neighbourhood_masks": [
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ]
+        ],
+        "centre_array": "bulk-completion/remaining8184-annual-source-001/tiles/N21E108/new-block-28-00.npz",
+        "source_object_identity": {
+          "last-modified": "Tue, 25 Oct 2022 13:33:08 GMT",
+          "etag": "\"8f97ba8bdb355a00756ae8b28291464b-15\"",
+          "accept-ranges": "bytes",
+          "content-length": "118619421"
+        }
+      },
+      "specific_limits": [
+        "Original owner/source/locality and territorial/source holds remain attached; a river/water prediction does not reject the nearby locality or change ownership.",
+        "This settles the stated bounded annual-sourcebody/locality question, not whole-cell coverage, exact-date wetness, shoreline/title or sovereignty.",
+        "Earlier RGB visibility/reef questions and independent source/legal questions remain source history, not claims that the annual model exposed a cloudy dated pixel.",
+        "Native3x3 is observed category context, not a new majority/unanimity threshold. Global thematic accuracy is not local ground truth or a total positional error."
+      ],
+      "authority_or_repair_credit": 0,
+      "adopted_bounded_answer": true,
+      "root_adoption_status": "adopted-bounded-source-body-location",
+      "completed_question_credit": 1
+    }
+  ],
+  "limits": [
+    "Proposed only: Root substantive review/adoption pending. No adopted timestamp or adopted answer claim.",
+    "Dated exact-centre physical/locality facts only; no whole-cell class, annual persistence, exact reef emergence, legal shoreline, marine jurisdiction, sovereignty or title conclusion.",
+    "Every original record, flag, source-relative value, coordinate, source association and territorial/foreign-reference hold remains unchanged, including answered water locations.",
+    "Valid masks establish source presence; literal SCL remains model evidence and can conflict with visually read built/vegetated bodies. No SCL or spectral threshold decides these records.",
+    "Indices2641,2642,2643 remain explicitly unobserved outside the actual native frame; no absent pixel is called water.",
+    "Source custody reuses completed independent 3,512,899,648-byte hash verification; this transformation reads JSON identities and hashes reviewer reports only. No repeated full product hash pass, image/raster replay, remote read, new source, qualification, repair or publication.",
+    "Annual products are credible classified source-body/location evidence; they do not reveal earlier clouded RGB pixels or constitute exact shoreline, underwater depth, wet-ground or sovereignty proof.",
+    "Tree, mangrove, cropland, grass, wetland, built and bare classes preserve their specific source meanings; no generic strict dry-land conversion is made.",
+    "All original source purpose, owner association, country/territorial flags and holds remain unchanged. No authority/native/repair/selection/deployment credit.",
+    "Positive WorldCover observations are not an absence test: zero/noData and actual missing tiles remain unanswered."
+  ],
+  "Vietnam_spatial_facts_transferred_to_IDN": false
+}

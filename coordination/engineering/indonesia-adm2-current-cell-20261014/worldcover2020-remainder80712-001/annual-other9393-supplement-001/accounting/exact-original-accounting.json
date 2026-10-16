@@ -1,0 +1,78 @@
+{
+  "kind": "exact-original133846-source-review-adoption-accounting",
+  "prior_public_checkpoint": "be0e533d3dc879dab7ac960a093568086d166ac9",
+  "prior_key_pins": [
+    {
+      "commit": "be0e533d3dc879dab7ac960a093568086d166ac9",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/worldcover2020-remainder80712-001/annual-wetland22576-supplement-001/accounting/known-exact-adopted-union123675-owner-y-x.jsonl.gz",
+      "bytes": 347802,
+      "sha256": "e48688a30a8dd3f6267338cd23be2b82868c1049db345b08d70368b4fc1f69f2",
+      "git_blob_oid": "fc2f2c93b2a8b097dc18887c31d0f91faf182b83"
+    },
+    {
+      "commit": "be0e533d3dc879dab7ac960a093568086d166ac9",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/worldcover2020-remainder80712-001/annual-wetland22576-supplement-001/accounting/specific-residual-union10171-owner-y-x.jsonl.gz",
+      "bytes": 48320,
+      "sha256": "1178f2d677d11adad16621f579058b05b56e155496772dacbb784133b3825387",
+      "git_blob_oid": "3a5e37b5ee57d77c0756df15696d1bd25688e6f4"
+    }
+  ],
+  "original_denominator": 133846,
+  "prior_known_adopted": 123675,
+  "prior_specific_residual": 10171,
+  "new_exact_disjoint_adopted": 9393,
+  "classes": {
+    "60": 1311,
+    "80": 4554,
+    "40": 185,
+    "10": 2640,
+    "20": 47,
+    "30": 466,
+    "50": 190
+  },
+  "new_overlap_prior_adopted": 0,
+  "new_overlap_wholeRGB9332": 0,
+  "all_new_keys_in_prior_specific_residual": true,
+  "known_adopted": 133068,
+  "specific_residual": 778,
+  "adopted_residual_intersection": 0,
+  "original_key_union_preserved": true,
+  "all_remaining778_exactly_in_RGB9332": true,
+  "remaining_questions": {
+    "mixed_context": 338,
+    "wetland": 440,
+    "groups": {
+      "22698": 131,
+      "22727": 306,
+      "22734": 226,
+      "22796": 115
+    }
+  },
+  "complete_current778questions": {
+    "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/worldcover2020-remainder80712-001/annual-other9393-supplement-001/preserved-held778/held778-complete-original-questions.jsonl.gz",
+    "bytes": 389805,
+    "sha256": "545f520b79c9e21411026452b3e0d64176b60a93e8a4c89eaaa7ab1303fd2715",
+    "git_blob_oid": "6ad84975e62691c8c8eb563cdbfb64934c671818",
+    "portable_projection": "Complete existing projection copied byte-for-byte;3304 original local-path strings were previously substituted with portable provenance and disclosed, not a verbatim raw-source-body claim."
+  },
+  "key_products": [
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/worldcover2020-remainder80712-001/annual-other9393-supplement-001/accounting/known-exact-adopted-union133068-owner-y-x.jsonl.gz",
+      "keys": 133068,
+      "decoded_sha256": "da4dbc69a7d2dcdf5b24c404944811c2d0e2cda2ec2ef3b0cbcc6675d9fc9df5",
+      "bytes": 371239,
+      "sha256": "175e18ff0d08578a79fcf0173a1f720eac3ba1d19ea1c73cedace9d692c43042",
+      "git_blob_oid": "11583514f59987afd142b0e8bbcded16f8b6bfef"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/worldcover2020-remainder80712-001/annual-other9393-supplement-001/accounting/specific-residual-union778-owner-y-x.jsonl.gz",
+      "keys": 778,
+      "decoded_sha256": "3f655e7486780b36798b068f5ccd8659f8d7a153e68262859a472245cc31dc15",
+      "bytes": 3243,
+      "sha256": "a33de54912a84552546d27fe6bf5304a4c410114af01ed96889dc85c50305495",
+      "git_blob_oid": "a277653b30ddfe1d760fabc4f25cbf3a68ff5a77"
+    }
+  ],
+  "native_authority_or_accepted_repair_credit": 0,
+  "counter_unit": "Distinct literal [owner,y,x] keys from exact original physical133846 cohort; not all historical questions."
+}

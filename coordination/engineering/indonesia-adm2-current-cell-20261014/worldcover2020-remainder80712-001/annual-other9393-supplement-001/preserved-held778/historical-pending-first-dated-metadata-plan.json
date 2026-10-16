@@ -1,0 +1,273 @@
+{
+  "kind": "metadata-only-first-dated-Sentinel2-plan-pending-actual-catalogue-access",
+  "exact_scope": 778,
+  "groups": {
+    "22698": {
+      "name": "Bulungan",
+      "keys": 131,
+      "bbox": [
+        117.32070520204756,
+        2.7994774563377276,
+        117.78483861370277,
+        3.583709551843218
+      ]
+    },
+    "22796": {
+      "name": "Halmahera Selatan",
+      "keys": 115,
+      "bbox": [
+        127.02356522203489,
+        -1.7265071951372677,
+        128.59035878031477,
+        0.27669384300140426
+      ]
+    },
+    "22734": {
+      "name": "Kepulauan Aru",
+      "keys": 226,
+      "bbox": [
+        134.1311230289206,
+        -7.071002033024863,
+        134.8753842984979,
+        -5.326412689031849
+      ]
+    },
+    "22727": {
+      "name": "Kota Batam",
+      "keys": 306,
+      "bbox": [
+        103.75098220211622,
+        0.46344177022344146,
+        104.34556731231358,
+        1.195262807014483
+      ]
+    }
+  },
+  "source_inventory": {
+    "path": "idn-physical-dated778-plan-001/worker6-metadata/exact778-original-source-coordinate-current-reason.jsonl.gz",
+    "bytes": 189628,
+    "sha256": "6159516f9ffcdaf35e8febbf89ff32f658151767ad9d7f04948e1aa3627d892c",
+    "decoded_sha256": "0eb2d3741e2e1190a058f29793a273029a41a4c47721266890f48e632823c219"
+  },
+  "historical_method_references": [
+    {
+      "name": "read_native_windows.py",
+      "bytes": 9049,
+      "sha256": "5cbe2bbb656889165f9c856c46b710123c690d59c3a984e65ebc93cfe8306e4a",
+      "scope": "Historical scientific source-native method only; local machine locator omitted and old resource machinery not copied."
+    },
+    {
+      "name": "plan_native_blocks.py",
+      "bytes": 5186,
+      "sha256": "4f7fb5233eab6952ab9b4926b7a2d7308012f082d4998421164a1f921a9fd30e",
+      "scope": "Historical scientific source-native method only; local machine locator omitted and old resource machinery not copied."
+    },
+    {
+      "name": "scene-item.json",
+      "bytes": 33816,
+      "sha256": "7d1da04f2f37d7e83911a0d0a36ec938374db1c7ccee1f4dc080191e03cf4574",
+      "scope": "Historical scientific source-native method only; local machine locator omitted and old resource machinery not copied."
+    }
+  ],
+  "proposed_catalogue_requests_NOT_executed": [
+    {
+      "owner": 22698,
+      "name": "Bulungan",
+      "exact_centres": 131,
+      "endpoint": "https://earth-search.aws.element84.com/v1/search",
+      "method": "POST",
+      "proposed_body": {
+        "collections": [
+          "sentinel-2-l2a"
+        ],
+        "bbox": [
+          117.32070520204756,
+          2.7994774563377276,
+          117.78483861370277,
+          3.583709551843218
+        ],
+        "datetime": "2020-01-01T00:00:00Z/2020-12-31T23:59:59Z",
+        "query": {
+          "eo:cloud_cover": {
+            "lt": 10
+          }
+        },
+        "sortby": [
+          {
+            "field": "properties.datetime",
+            "direction": "asc"
+          }
+        ],
+        "limit": 100
+      },
+      "actual_response": null,
+      "status": "blocked-before-external-network-execution-by-automatic-approval-review"
+    },
+    {
+      "owner": 22796,
+      "name": "Halmahera Selatan",
+      "exact_centres": 115,
+      "endpoint": "https://earth-search.aws.element84.com/v1/search",
+      "method": "POST",
+      "proposed_body": {
+        "collections": [
+          "sentinel-2-l2a"
+        ],
+        "bbox": [
+          127.02356522203489,
+          -1.7265071951372677,
+          128.59035878031477,
+          0.27669384300140426
+        ],
+        "datetime": "2020-01-01T00:00:00Z/2020-12-31T23:59:59Z",
+        "query": {
+          "eo:cloud_cover": {
+            "lt": 10
+          }
+        },
+        "sortby": [
+          {
+            "field": "properties.datetime",
+            "direction": "asc"
+          }
+        ],
+        "limit": 100
+      },
+      "actual_response": null,
+      "status": "blocked-before-external-network-execution-by-automatic-approval-review"
+    },
+    {
+      "owner": 22734,
+      "name": "Kepulauan Aru",
+      "exact_centres": 226,
+      "endpoint": "https://earth-search.aws.element84.com/v1/search",
+      "method": "POST",
+      "proposed_body": {
+        "collections": [
+          "sentinel-2-l2a"
+        ],
+        "bbox": [
+          134.1311230289206,
+          -7.071002033024863,
+          134.8753842984979,
+          -5.326412689031849
+        ],
+        "datetime": "2020-01-01T00:00:00Z/2020-12-31T23:59:59Z",
+        "query": {
+          "eo:cloud_cover": {
+            "lt": 10
+          }
+        },
+        "sortby": [
+          {
+            "field": "properties.datetime",
+            "direction": "asc"
+          }
+        ],
+        "limit": 100
+      },
+      "actual_response": null,
+      "status": "blocked-before-external-network-execution-by-automatic-approval-review"
+    },
+    {
+      "owner": 22727,
+      "name": "Kota Batam",
+      "exact_centres": 306,
+      "endpoint": "https://earth-search.aws.element84.com/v1/search",
+      "method": "POST",
+      "proposed_body": {
+        "collections": [
+          "sentinel-2-l2a"
+        ],
+        "bbox": [
+          103.75098220211622,
+          0.46344177022344146,
+          104.34556731231358,
+          1.195262807014483
+        ],
+        "datetime": "2020-01-01T00:00:00Z/2020-12-31T23:59:59Z",
+        "query": {
+          "eo:cloud_cover": {
+            "lt": 10
+          }
+        },
+        "sortby": [
+          {
+            "field": "properties.datetime",
+            "direction": "asc"
+          }
+        ],
+        "limit": 100
+      },
+      "actual_response": null,
+      "status": "blocked-before-external-network-execution-by-automatic-approval-review"
+    }
+  ],
+  "date_selection_rule": "For each coherent scene footprint/tile covering these unchanged centres, inspect chronological2020 candidates and use the first suitable valid metadata/coverage observation. The catalogue cloud<10 filter is a scene-level search convenience, never per-centre truth, physical classification or whole-neighbourhood gate. Record cloud/shadow/nodata limits and any uncovered centres. Do not choose a scene because it agrees with a desired surface answer or hunt further agreeing scenes after an adequate first observation.",
+  "required_actual_scene_metadata": [
+    "Item id, acquisition datetime, full original metadata body/hash and returned footprint",
+    "Actual asset URLs for red/green/blue/NIR and native SCL; CRS/EPSG, grid shape, affine transform, data type, nodata, band scale/offset",
+    "Scene cloud/degraded/nodata/saturated/shadow quality metadata and processing baseline; these do not certify a centre clear",
+    "Per-centre actual native-frame containment using existing GDAL coordinate method; no fitted shift/clamp",
+    "Actual TIFF/COG block dimensions from a metadata-only header observation if later permitted; do not assume1024 from Vietnam",
+    "Asset HEAD opaque ETag/size/LastModified/range capability, without whole-COG hash claims"
+  ],
+  "native_block_plan_status": "Not constructible honestly until actual applicable IDN scene/grid/block metadata is available. No IDN scene, acquisition date, CRS, asset URL, affine, native index, coverage, block shape or quality observation has been invented.",
+  "native_block_method_once_actual_metadata_available": [
+    "Reuse existing rasterio.warp.transform EPSG4326\u2192actual source CRS and inverse native affine; preserve exact original centre and fractional position",
+    "Use floor native containing pixel with true source-frame bounds; retain outside-frame status and actual cross-scene coverage without clamp/resampling",
+    "Keep native10m red/green/blue/NIR and native20m SCL separate; never resample SCL into physical truth",
+    "Group required native pixels/context windows by actual COG block coordinates and de-duplicate source reads; record true cropped edge window dimensions",
+    "Save codes/reflectance and masks with exact native windows/source identities; show exact fractional centre in any subsequent display, with source values preserved",
+    "Cloud/shadow/nodata or remaining physical body ambiguity can remain unknown; no tide/legal/name/3x3-unanimity universal gate"
+  ],
+  "known_actual_RGB_nodata": [
+    {
+      "key": {
+        "owner": 22734,
+        "y": 136102,
+        "x": 229097
+      },
+      "point_index": 71456,
+      "values": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "masks": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "source_calls_successful": 0,
+  "raster_read_calls": 0,
+  "new_kernel_or_install": false,
+  "old_app_budget_or_custom_limiter_fields_copied": false,
+  "scientific_credit": 0,
+  "native_authority_or_repair_credit": 0,
+  "missing_actual_facts": [
+    "Authorized access to EarthSearch with the explicitly documented four source-derived geographical bounding-box payloads",
+    "Applicable2020 IDN item metadata and actual per-centre footprint/native-frame coverage",
+    "Actual asset/grid/quality/native-block metadata; therefore no complete dated read plan yet"
+  ],
+  "approval_refusal": {
+    "action": "PublicSTAC catalogue POST with four cohort bounding boxes",
+    "target": "https://earth-search.aws.element84.com/v1/search",
+    "state": "denied; tool command did not execute",
+    "reason": "The command exports bounding boxes for778 potentially nonpublic locations to an untrusted externalSTAC service; task authorizes metadata preparation but not this specific payload and destination.",
+    "first_sandbox_attempt": "Four URLError DNS resolution failures; no response/source bytes obtained",
+    "retry_or_workaround_after_denial": false,
+    "needed_for_retry": "Explicit human authorization for the documented bounding-box payloads and named catalogue destination, relayed by Root as trusted history",
+    "verbatim_automatic_review_refusal": "This action was rejected due to unacceptable risk.\nReason: The command exports bounding boxes for 778 potentially nonpublic locations to an untrusted external STAC service; the task authorizes metadata preparation but not this specific payload and destination.\nDo not bypass this rejection through a workaround or indirect execution. Continue with a safer alternative, or carry out checks to prove that the action is authorized or low risk before trying again. Complete unaffected work without asking for confirmation. Report anything that remains blocked, clarify why it was blocked by auto-review, inform the user of the risk and ask for approval."
+  },
+  "historical_snapshot_only": true,
+  "historical_private_plan_raw_binding": {
+    "bytes": 9826,
+    "sha256": "97f019da86440a9158a26506a32c90288e85126e98ba13b3768218fb34aa9e43"
+  },
+  "current_status_reference": "metadata-request-status.json"
+}
