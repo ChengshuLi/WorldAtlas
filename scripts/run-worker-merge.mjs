@@ -31,7 +31,9 @@ try {
       tested_base: state.base, tested_candidate: state.candidate, reviewed_head: input.expected_head, profile: state.profile, geography_required: state.geography_required, geography_software: state.geography_software, test_selection: state.test_selection ?? 'complete', expectations_path: state.expectations_path,
       candidate_ref: state.candidate_ref};
     // Only validated commit/tree IDs, owned refs and literal safe sparse patterns become job outputs.
-    fs.appendFileSync(process.env.GITHUB_OUTPUT, `geography_required=${state.geography_required !== false}\ngeography_software=${state.geography_software === true}\ncandidate_ref=${state.candidate_ref ?? ''}\ncandidate=${state.candidate ?? ''}\nbase=${state.base ?? ''}\nprofile=${state.profile ?? 'evidence'}\nshards=${JSON.stringify(state.shards ?? (state.profile === 'full' ? [0,1,2] : [0]))}\ntest_selection=${state.test_selection ?? 'complete'}\nexpectations_path=${state.expectations_path ?? ''}\ncandidate_tree=${state.candidate_tree ?? ''}\ncheckout_patterns_base64=${Buffer.from((state.checkout_patterns ?? []).join('\n')).toString('base64')}\n`);
+    // Wrap encoded data for runner handling; this never limits the decoded list.
+    const checkoutPatternsBase64 = (Buffer.from((state.checkout_patterns ?? []).join('\n')).toString('base64').match(/.{1,76}/g) ?? []).join('\n');
+    fs.appendFileSync(process.env.GITHUB_OUTPUT, `geography_required=${state.geography_required !== false}\ngeography_software=${state.geography_software === true}\ncandidate_ref=${state.candidate_ref ?? ''}\ncandidate=${state.candidate ?? ''}\nbase=${state.base ?? ''}\nprofile=${state.profile ?? 'evidence'}\nshards=${JSON.stringify(state.shards ?? (state.profile === 'full' ? [0,1,2] : [0]))}\ntest_selection=${state.test_selection ?? 'complete'}\nexpectations_path=${state.expectations_path ?? ''}\ncandidate_tree=${state.candidate_tree ?? ''}\ncheckout_patterns_base64<<CHECKOUT_BASE64\n${checkoutPatternsBase64}\nCHECKOUT_BASE64\n`);
   } else {
     const completed = await completeIntegration({...options, integrationResult: process.env.INTEGRATION_RESULT,
       geographyResult: process.env.GEOGRAPHY_RESULT,
