@@ -325,7 +325,7 @@ def inspect(repo, baseline, candidate, *, code_commit=None, prefetch=False, chec
         if applicability is not None:
             return {**report, 'status': 'not-applicable', 'regressions': None,
                     'unchanged_selected_inputs': applicability,
-                    'limits': ['Complete selected consumed-data identities are unchanged under the actual executing checker; applicability only, not fresh scientific validation or global gap clearance.',
+                    'limits': ['Actual immutable selected data is unchanged under one executing checker; applicability only, not historical legality, scientific validation of new code or global gap clearance.',
                                'Independent source quality, evidence, review and current combined-tree consumer gates remain required.']}
     selected = any(git(repo, 'ls-tree', '-z', version, '--', 'data/ownership-selection.json')
                    for version in [baseline, candidate])
