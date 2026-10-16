@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "selected_ledger_sha256": "d2d906322e2ebb363d056e1bed481b8588f64fba43f18c515d54595fcdb63f50",
-  "cumulative_native_cells": 293515,
+  "selected_ledger_sha256": "500c0f9c4b8ea5aeaeb821d32396f34df2208829fbd2d4219219bf2b3a99118c",
+  "cumulative_native_cells": 296678,
   "cohorts": [
     {
       "original_batch_id": "retained-authority-scope:0037ca1e3f6f3c91f641977f10e592da91fd068935cd3a0aa83ce6b895149140",
@@ -5551,6 +5551,55 @@
           "target_id": "atlas:physical:CAN-25:NUN",
           "disposition": "assigned",
           "geometry_sha256": "2990484791018f36fbabe86f2954670b7db4a785314ed43867cc958d43d3053a"
+        }
+      ]
+    },
+    {
+      "original_batch_id": "retained-authority-scope:ae2065c4427cd2b0548a77cae18b2383e0d9857ec3f869915815b7c5453bca26",
+      "component_ids": [
+        "source-target:1fe685cc07da0074b2361797ee6684ce179b34b070e3fafee0376f128afaee7f",
+        "source-target:26b0e1f8a325f01fc30a623821bf20610a272ae6e3a565a72df5b823a5d246cd",
+        "source-target:5f6941d3922dee643905db5ee976e42ed857880ed694ef30339e645e7fe6d386",
+        "source-target:8e3b56e88ecfb5ee053f6f9b9cc369e567448cf0723af3d0d928245939e0400e",
+        "source-target:df712107bb9062ce3f0d40eab85a0e10d7667e8d1cc013e398dbe71f211a7927",
+        "source-target:dfe8eb53a21001bd418f804c665f96046f1571a94e3d6e8df0b0f42edaa17420"
+      ],
+      "members": [
+        {
+          "component_id": "source-target:1fe685cc07da0074b2361797ee6684ce179b34b070e3fafee0376f128afaee7f",
+          "target_id": "gb:VUT:ADM1:32282491B61228346728599",
+          "disposition": "assigned",
+          "native_rows_sha256": "d7251fdeb349ed588bd6496dcbaa235802f56587c6f914cbb89f92f3f02460cb"
+        },
+        {
+          "component_id": "source-target:26b0e1f8a325f01fc30a623821bf20610a272ae6e3a565a72df5b823a5d246cd",
+          "target_id": "gb:VUT:ADM1:32282491B17169683382430",
+          "disposition": "assigned",
+          "native_rows_sha256": "4096dcbb539dfd67ade16ae182433c1eaa681245b72579d5b7e12e86db61c06d"
+        },
+        {
+          "component_id": "source-target:5f6941d3922dee643905db5ee976e42ed857880ed694ef30339e645e7fe6d386",
+          "target_id": "gb:VUT:ADM1:32282491B78905986242135",
+          "disposition": "assigned",
+          "native_rows_sha256": "12321a3197e1169a12d588fb36a7002b08ba9faf37eaa0fbe651b924c9921487"
+        },
+        {
+          "component_id": "source-target:8e3b56e88ecfb5ee053f6f9b9cc369e567448cf0723af3d0d928245939e0400e",
+          "target_id": "gb:VUT:ADM1:32282491B7486560380604",
+          "disposition": "assigned",
+          "native_rows_sha256": "2daf478a6f85b10d6c6a15e1c81bfa4163b81b2e5a948cc1c2dd48b6d7e0c5e3"
+        },
+        {
+          "component_id": "source-target:df712107bb9062ce3f0d40eab85a0e10d7667e8d1cc013e398dbe71f211a7927",
+          "target_id": "gb:VUT:ADM1:32282491B8417950609019",
+          "disposition": "assigned",
+          "native_rows_sha256": "11b8283409418733e71a3fd1f042b2052be6640e7e791b4ee1b3ae09fd3c16e6"
+        },
+        {
+          "component_id": "source-target:dfe8eb53a21001bd418f804c665f96046f1571a94e3d6e8df0b0f42edaa17420",
+          "target_id": "gb:VUT:ADM1:32282491B5439526076152",
+          "disposition": "assigned",
+          "native_rows_sha256": "6ca199fb022080e86f1fd8c665161f2a22dc4711aa455cc8da607e925ab77b5e"
         }
       ]
     },
