@@ -1,0 +1,1529 @@
+{
+  "version": 1,
+  "kind": "adopted-native-territorial-applicability-v1",
+  "provenance": [
+    {
+      "id": "original-main-adoption",
+      "role": "adoption",
+      "pin": {
+        "commit": "6627bc2bc9a6cb2134ad2a42b66277606e344331",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/source-conflict28-restoration-001/original/main-conflict28-source-choice-adoption.json",
+        "mode": "100644",
+        "git_blob_oid": "d35fdc8055fab544ae3648957db8bcb21b80563b",
+        "bytes": 17718,
+        "sha256": "9408d67a10c317be6b2360932f305581d50fa616a44ae2be601784fd1e36641a"
+      }
+    },
+    {
+      "id": "original28-mapping-scope",
+      "role": "scope",
+      "pin": {
+        "commit": "6627bc2bc9a6cb2134ad2a42b66277606e344331",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/source-conflict28-restoration-001/original/main-conflict28-source-choice-adoption.json",
+        "mode": "100644",
+        "git_blob_oid": "d35fdc8055fab544ae3648957db8bcb21b80563b",
+        "bytes": 17718,
+        "sha256": "9408d67a10c317be6b2360932f305581d50fa616a44ae2be601784fd1e36641a"
+      }
+    },
+    {
+      "id": "original-gb-MMR-ADM1",
+      "role": "original-source",
+      "parts": [
+        {
+          "bytes": 604071,
+          "commit": "34981099cd03677b9ba374a4de6bf73cf65b0646",
+          "decoded_bytes": 1566790,
+          "decoded_sha256": "b031c1be502e3eb73ec948e66e9824f1055e03fe8d14dcaf076ace94fe1158dc",
+          "git_blob_oid": "3ee6cbf401871f9e6fbba6a9d92b75ee7823d426",
+          "mode": "100644",
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM1-000.bin.gz",
+          "sha256": "ccb0a975eecbc6c2adafac2e5072879e38b70b7d5fe507c17a370af27af43320"
+        }
+      ]
+    },
+    {
+      "id": "original-gb-MMR-ADM2",
+      "role": "original-source",
+      "parts": [
+        {
+          "bytes": 971970,
+          "commit": "34981099cd03677b9ba374a4de6bf73cf65b0646",
+          "decoded_bytes": 2577505,
+          "decoded_sha256": "ac13eddca60dd54830e4951c3646d3898d8ec7ab086660dfb12d8f89579abf29",
+          "git_blob_oid": "c9bc1ded0ff18a5cecb2e91203b668c65dc804ac",
+          "mode": "100644",
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM2-000.bin.gz",
+          "sha256": "a094d21b2fef072c343dbbf0dd324a7bc016cbb6a540d16145ee1400cadaf8e2"
+        }
+      ]
+    },
+    {
+      "id": "original-gb-MMR-ADM3",
+      "role": "original-source",
+      "parts": [
+        {
+          "bytes": 1396414,
+          "commit": "34981099cd03677b9ba374a4de6bf73cf65b0646",
+          "decoded_bytes": 4205367,
+          "decoded_sha256": "94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2",
+          "git_blob_oid": "6a91fcb22b44ae00401a0068a6c3e62bfed62374",
+          "mode": "100644",
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+          "sha256": "57de50a588f418601412bb7a34cc2f43a3fd6d7d6f16635cb41b95e5ae505db6"
+        }
+      ]
+    }
+  ],
+  "records": [
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B58793256407954",
+      "target_id": "gb:THA:ADM2:78962969B58793256407954",
+      "pixelIndex": 41670,
+      "y": 118366,
+      "x": 202630,
+      "negative_ordinal": 0,
+      "geometry_sha256": "db303f165ef77752b1456394a5c043332220097b2d02764d6b7b737228af0df6",
+      "original_source": {
+        "id": "original-gb-MMR-ADM1",
+        "pointer": "/features/5/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/4",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B58793256407954",
+      "target_id": "gb:THA:ADM2:78962969B58793256407954",
+      "pixelIndex": 41670,
+      "y": 118366,
+      "x": 202630,
+      "negative_ordinal": 2,
+      "geometry_sha256": "5efbda623d6c546aaa56fa4c3ec42bd3423fba2c32de114fc77610623cbcedcc",
+      "original_source": {
+        "id": "original-gb-MMR-ADM2",
+        "pointer": "/features/19/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/4",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B58793256407954",
+      "target_id": "gb:THA:ADM2:78962969B58793256407954",
+      "pixelIndex": 41670,
+      "y": 118366,
+      "x": 202630,
+      "negative_ordinal": 6,
+      "geometry_sha256": "5586f86c6dd2a78a8ffd249c80a137732581c1ec851d020efc4f9b786d606102",
+      "original_source": {
+        "id": "original-gb-MMR-ADM3",
+        "pointer": "/features/151/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/4",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B58793256407954",
+      "target_id": "gb:THA:ADM2:78962969B58793256407954",
+      "pixelIndex": 41670,
+      "y": 118366,
+      "x": 202631,
+      "negative_ordinal": 0,
+      "geometry_sha256": "db303f165ef77752b1456394a5c043332220097b2d02764d6b7b737228af0df6",
+      "original_source": {
+        "id": "original-gb-MMR-ADM1",
+        "pointer": "/features/5/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/5",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B58793256407954",
+      "target_id": "gb:THA:ADM2:78962969B58793256407954",
+      "pixelIndex": 41670,
+      "y": 118366,
+      "x": 202631,
+      "negative_ordinal": 2,
+      "geometry_sha256": "5efbda623d6c546aaa56fa4c3ec42bd3423fba2c32de114fc77610623cbcedcc",
+      "original_source": {
+        "id": "original-gb-MMR-ADM2",
+        "pointer": "/features/19/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/5",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B58793256407954",
+      "target_id": "gb:THA:ADM2:78962969B58793256407954",
+      "pixelIndex": 41670,
+      "y": 118366,
+      "x": 202631,
+      "negative_ordinal": 6,
+      "geometry_sha256": "5586f86c6dd2a78a8ffd249c80a137732581c1ec851d020efc4f9b786d606102",
+      "original_source": {
+        "id": "original-gb-MMR-ADM3",
+        "pointer": "/features/151/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/5",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B58793256407954",
+      "target_id": "gb:THA:ADM2:78962969B58793256407954",
+      "pixelIndex": 41670,
+      "y": 118374,
+      "x": 202639,
+      "negative_ordinal": 0,
+      "geometry_sha256": "db303f165ef77752b1456394a5c043332220097b2d02764d6b7b737228af0df6",
+      "original_source": {
+        "id": "original-gb-MMR-ADM1",
+        "pointer": "/features/5/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/6",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B58793256407954",
+      "target_id": "gb:THA:ADM2:78962969B58793256407954",
+      "pixelIndex": 41670,
+      "y": 118374,
+      "x": 202639,
+      "negative_ordinal": 2,
+      "geometry_sha256": "5efbda623d6c546aaa56fa4c3ec42bd3423fba2c32de114fc77610623cbcedcc",
+      "original_source": {
+        "id": "original-gb-MMR-ADM2",
+        "pointer": "/features/19/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/6",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B58793256407954",
+      "target_id": "gb:THA:ADM2:78962969B58793256407954",
+      "pixelIndex": 41670,
+      "y": 118374,
+      "x": 202639,
+      "negative_ordinal": 6,
+      "geometry_sha256": "5586f86c6dd2a78a8ffd249c80a137732581c1ec851d020efc4f9b786d606102",
+      "original_source": {
+        "id": "original-gb-MMR-ADM3",
+        "pointer": "/features/151/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/6",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B58793256407954",
+      "target_id": "gb:THA:ADM2:78962969B58793256407954",
+      "pixelIndex": 41670,
+      "y": 118374,
+      "x": 202640,
+      "negative_ordinal": 0,
+      "geometry_sha256": "db303f165ef77752b1456394a5c043332220097b2d02764d6b7b737228af0df6",
+      "original_source": {
+        "id": "original-gb-MMR-ADM1",
+        "pointer": "/features/5/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/7",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B58793256407954",
+      "target_id": "gb:THA:ADM2:78962969B58793256407954",
+      "pixelIndex": 41670,
+      "y": 118374,
+      "x": 202640,
+      "negative_ordinal": 2,
+      "geometry_sha256": "5efbda623d6c546aaa56fa4c3ec42bd3423fba2c32de114fc77610623cbcedcc",
+      "original_source": {
+        "id": "original-gb-MMR-ADM2",
+        "pointer": "/features/19/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/7",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B58793256407954",
+      "target_id": "gb:THA:ADM2:78962969B58793256407954",
+      "pixelIndex": 41670,
+      "y": 118374,
+      "x": 202640,
+      "negative_ordinal": 6,
+      "geometry_sha256": "5586f86c6dd2a78a8ffd249c80a137732581c1ec851d020efc4f9b786d606102",
+      "original_source": {
+        "id": "original-gb-MMR-ADM3",
+        "pointer": "/features/151/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/7",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B58793256407954",
+      "target_id": "gb:THA:ADM2:78962969B58793256407954",
+      "pixelIndex": 41670,
+      "y": 118382,
+      "x": 202642,
+      "negative_ordinal": 0,
+      "geometry_sha256": "db303f165ef77752b1456394a5c043332220097b2d02764d6b7b737228af0df6",
+      "original_source": {
+        "id": "original-gb-MMR-ADM1",
+        "pointer": "/features/5/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/8",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B58793256407954",
+      "target_id": "gb:THA:ADM2:78962969B58793256407954",
+      "pixelIndex": 41670,
+      "y": 118382,
+      "x": 202642,
+      "negative_ordinal": 2,
+      "geometry_sha256": "5efbda623d6c546aaa56fa4c3ec42bd3423fba2c32de114fc77610623cbcedcc",
+      "original_source": {
+        "id": "original-gb-MMR-ADM2",
+        "pointer": "/features/19/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/8",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B58793256407954",
+      "target_id": "gb:THA:ADM2:78962969B58793256407954",
+      "pixelIndex": 41670,
+      "y": 118382,
+      "x": 202642,
+      "negative_ordinal": 6,
+      "geometry_sha256": "5586f86c6dd2a78a8ffd249c80a137732581c1ec851d020efc4f9b786d606102",
+      "original_source": {
+        "id": "original-gb-MMR-ADM3",
+        "pointer": "/features/151/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/8",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B58793256407954",
+      "target_id": "gb:THA:ADM2:78962969B58793256407954",
+      "pixelIndex": 41670,
+      "y": 118382,
+      "x": 202646,
+      "negative_ordinal": 0,
+      "geometry_sha256": "db303f165ef77752b1456394a5c043332220097b2d02764d6b7b737228af0df6",
+      "original_source": {
+        "id": "original-gb-MMR-ADM1",
+        "pointer": "/features/5/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/9",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B58793256407954",
+      "target_id": "gb:THA:ADM2:78962969B58793256407954",
+      "pixelIndex": 41670,
+      "y": 118382,
+      "x": 202646,
+      "negative_ordinal": 2,
+      "geometry_sha256": "5efbda623d6c546aaa56fa4c3ec42bd3423fba2c32de114fc77610623cbcedcc",
+      "original_source": {
+        "id": "original-gb-MMR-ADM2",
+        "pointer": "/features/19/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/9",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B58793256407954",
+      "target_id": "gb:THA:ADM2:78962969B58793256407954",
+      "pixelIndex": 41670,
+      "y": 118382,
+      "x": 202646,
+      "negative_ordinal": 6,
+      "geometry_sha256": "5586f86c6dd2a78a8ffd249c80a137732581c1ec851d020efc4f9b786d606102",
+      "original_source": {
+        "id": "original-gb-MMR-ADM3",
+        "pointer": "/features/151/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/9",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B58793256407954",
+      "target_id": "gb:THA:ADM2:78962969B58793256407954",
+      "pixelIndex": 41670,
+      "y": 118391,
+      "x": 202648,
+      "negative_ordinal": 0,
+      "geometry_sha256": "db303f165ef77752b1456394a5c043332220097b2d02764d6b7b737228af0df6",
+      "original_source": {
+        "id": "original-gb-MMR-ADM1",
+        "pointer": "/features/5/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/10",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B58793256407954",
+      "target_id": "gb:THA:ADM2:78962969B58793256407954",
+      "pixelIndex": 41670,
+      "y": 118391,
+      "x": 202648,
+      "negative_ordinal": 2,
+      "geometry_sha256": "5efbda623d6c546aaa56fa4c3ec42bd3423fba2c32de114fc77610623cbcedcc",
+      "original_source": {
+        "id": "original-gb-MMR-ADM2",
+        "pointer": "/features/19/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/10",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B58793256407954",
+      "target_id": "gb:THA:ADM2:78962969B58793256407954",
+      "pixelIndex": 41670,
+      "y": 118391,
+      "x": 202648,
+      "negative_ordinal": 6,
+      "geometry_sha256": "5586f86c6dd2a78a8ffd249c80a137732581c1ec851d020efc4f9b786d606102",
+      "original_source": {
+        "id": "original-gb-MMR-ADM3",
+        "pointer": "/features/151/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/10",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B58793256407954",
+      "target_id": "gb:THA:ADM2:78962969B58793256407954",
+      "pixelIndex": 41670,
+      "y": 118398,
+      "x": 202658,
+      "negative_ordinal": 0,
+      "geometry_sha256": "db303f165ef77752b1456394a5c043332220097b2d02764d6b7b737228af0df6",
+      "original_source": {
+        "id": "original-gb-MMR-ADM1",
+        "pointer": "/features/5/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/11",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B58793256407954",
+      "target_id": "gb:THA:ADM2:78962969B58793256407954",
+      "pixelIndex": 41670,
+      "y": 118398,
+      "x": 202658,
+      "negative_ordinal": 2,
+      "geometry_sha256": "5efbda623d6c546aaa56fa4c3ec42bd3423fba2c32de114fc77610623cbcedcc",
+      "original_source": {
+        "id": "original-gb-MMR-ADM2",
+        "pointer": "/features/19/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/11",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B58793256407954",
+      "target_id": "gb:THA:ADM2:78962969B58793256407954",
+      "pixelIndex": 41670,
+      "y": 118398,
+      "x": 202658,
+      "negative_ordinal": 6,
+      "geometry_sha256": "5586f86c6dd2a78a8ffd249c80a137732581c1ec851d020efc4f9b786d606102",
+      "original_source": {
+        "id": "original-gb-MMR-ADM3",
+        "pointer": "/features/151/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/11",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B38032656496356",
+      "target_id": "gb:THA:ADM2:78962969B38032656496356",
+      "pixelIndex": 41467,
+      "y": 119215,
+      "x": 202931,
+      "negative_ordinal": 0,
+      "geometry_sha256": "db303f165ef77752b1456394a5c043332220097b2d02764d6b7b737228af0df6",
+      "original_source": {
+        "id": "original-gb-MMR-ADM1",
+        "pointer": "/features/5/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/15",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B38032656496356",
+      "target_id": "gb:THA:ADM2:78962969B38032656496356",
+      "pixelIndex": 41467,
+      "y": 119215,
+      "x": 202931,
+      "negative_ordinal": 2,
+      "geometry_sha256": "95593536f365111b1ea05b6bcee4dbea703962a6d7aed706cd0b227b91a6d5c8",
+      "original_source": {
+        "id": "original-gb-MMR-ADM2",
+        "pointer": "/features/22/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/15",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B38032656496356",
+      "target_id": "gb:THA:ADM2:78962969B38032656496356",
+      "pixelIndex": 41467,
+      "y": 119215,
+      "x": 202931,
+      "negative_ordinal": 3,
+      "geometry_sha256": "1c621bcb0686b8209a961479d40f8b9d9a85d3df7bd457e6b317bf4f690e6877",
+      "original_source": {
+        "id": "original-gb-MMR-ADM3",
+        "pointer": "/features/153/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/15",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B38032656496356",
+      "target_id": "gb:THA:ADM2:78962969B38032656496356",
+      "pixelIndex": 41467,
+      "y": 119216,
+      "x": 202931,
+      "negative_ordinal": 0,
+      "geometry_sha256": "db303f165ef77752b1456394a5c043332220097b2d02764d6b7b737228af0df6",
+      "original_source": {
+        "id": "original-gb-MMR-ADM1",
+        "pointer": "/features/5/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/16",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B38032656496356",
+      "target_id": "gb:THA:ADM2:78962969B38032656496356",
+      "pixelIndex": 41467,
+      "y": 119216,
+      "x": 202931,
+      "negative_ordinal": 2,
+      "geometry_sha256": "95593536f365111b1ea05b6bcee4dbea703962a6d7aed706cd0b227b91a6d5c8",
+      "original_source": {
+        "id": "original-gb-MMR-ADM2",
+        "pointer": "/features/22/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/16",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B38032656496356",
+      "target_id": "gb:THA:ADM2:78962969B38032656496356",
+      "pixelIndex": 41467,
+      "y": 119216,
+      "x": 202931,
+      "negative_ordinal": 3,
+      "geometry_sha256": "1c621bcb0686b8209a961479d40f8b9d9a85d3df7bd457e6b317bf4f690e6877",
+      "original_source": {
+        "id": "original-gb-MMR-ADM3",
+        "pointer": "/features/153/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/16",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B38032656496356",
+      "target_id": "gb:THA:ADM2:78962969B38032656496356",
+      "pixelIndex": 41467,
+      "y": 119216,
+      "x": 202932,
+      "negative_ordinal": 0,
+      "geometry_sha256": "db303f165ef77752b1456394a5c043332220097b2d02764d6b7b737228af0df6",
+      "original_source": {
+        "id": "original-gb-MMR-ADM1",
+        "pointer": "/features/5/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/17",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B38032656496356",
+      "target_id": "gb:THA:ADM2:78962969B38032656496356",
+      "pixelIndex": 41467,
+      "y": 119216,
+      "x": 202932,
+      "negative_ordinal": 2,
+      "geometry_sha256": "95593536f365111b1ea05b6bcee4dbea703962a6d7aed706cd0b227b91a6d5c8",
+      "original_source": {
+        "id": "original-gb-MMR-ADM2",
+        "pointer": "/features/22/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/17",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B38032656496356",
+      "target_id": "gb:THA:ADM2:78962969B38032656496356",
+      "pixelIndex": 41467,
+      "y": 119216,
+      "x": 202932,
+      "negative_ordinal": 3,
+      "geometry_sha256": "1c621bcb0686b8209a961479d40f8b9d9a85d3df7bd457e6b317bf4f690e6877",
+      "original_source": {
+        "id": "original-gb-MMR-ADM3",
+        "pointer": "/features/153/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/17",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B56213444646576",
+      "target_id": "gb:THA:ADM2:78962969B56213444646576",
+      "pixelIndex": 41644,
+      "y": 121852,
+      "x": 203492,
+      "negative_ordinal": 0,
+      "geometry_sha256": "4b4790dd27ef3a53cadbfc43ce90153c51f39cf10496bf9b301d01ec2515b275",
+      "original_source": {
+        "id": "original-gb-MMR-ADM1",
+        "pointer": "/features/10/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/18",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B56213444646576",
+      "target_id": "gb:THA:ADM2:78962969B56213444646576",
+      "pixelIndex": 41644,
+      "y": 121852,
+      "x": 203492,
+      "negative_ordinal": 1,
+      "geometry_sha256": "76185cfcea413d44565e87a31f42b3492993d67fc4e43d4bb0505a44fb0d2784",
+      "original_source": {
+        "id": "original-gb-MMR-ADM2",
+        "pointer": "/features/58/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/18",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B56213444646576",
+      "target_id": "gb:THA:ADM2:78962969B56213444646576",
+      "pixelIndex": 41644,
+      "y": 121852,
+      "x": 203492,
+      "negative_ordinal": 2,
+      "geometry_sha256": "f9d8d80703e2a7935c443e5d0c355d538b6a96bc980dbbae30d4f9577d720138",
+      "original_source": {
+        "id": "original-gb-MMR-ADM3",
+        "pointer": "/features/165/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/18",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B3750900919123",
+      "target_id": "gb:THA:ADM2:78962969B3750900919123",
+      "pixelIndex": 41459,
+      "y": 122666,
+      "x": 203489,
+      "negative_ordinal": 0,
+      "geometry_sha256": "4b4790dd27ef3a53cadbfc43ce90153c51f39cf10496bf9b301d01ec2515b275",
+      "original_source": {
+        "id": "original-gb-MMR-ADM1",
+        "pointer": "/features/10/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/19",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B3750900919123",
+      "target_id": "gb:THA:ADM2:78962969B3750900919123",
+      "pixelIndex": 41459,
+      "y": 122666,
+      "x": 203489,
+      "negative_ordinal": 1,
+      "geometry_sha256": "76185cfcea413d44565e87a31f42b3492993d67fc4e43d4bb0505a44fb0d2784",
+      "original_source": {
+        "id": "original-gb-MMR-ADM2",
+        "pointer": "/features/58/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/19",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B3750900919123",
+      "target_id": "gb:THA:ADM2:78962969B3750900919123",
+      "pixelIndex": 41459,
+      "y": 122666,
+      "x": 203489,
+      "negative_ordinal": 2,
+      "geometry_sha256": "f9d8d80703e2a7935c443e5d0c355d538b6a96bc980dbbae30d4f9577d720138",
+      "original_source": {
+        "id": "original-gb-MMR-ADM3",
+        "pointer": "/features/165/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/19",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B3750900919123",
+      "target_id": "gb:THA:ADM2:78962969B3750900919123",
+      "pixelIndex": 41459,
+      "y": 122666,
+      "x": 203490,
+      "negative_ordinal": 0,
+      "geometry_sha256": "4b4790dd27ef3a53cadbfc43ce90153c51f39cf10496bf9b301d01ec2515b275",
+      "original_source": {
+        "id": "original-gb-MMR-ADM1",
+        "pointer": "/features/10/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/20",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B3750900919123",
+      "target_id": "gb:THA:ADM2:78962969B3750900919123",
+      "pixelIndex": 41459,
+      "y": 122666,
+      "x": 203490,
+      "negative_ordinal": 1,
+      "geometry_sha256": "76185cfcea413d44565e87a31f42b3492993d67fc4e43d4bb0505a44fb0d2784",
+      "original_source": {
+        "id": "original-gb-MMR-ADM2",
+        "pointer": "/features/58/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/20",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B3750900919123",
+      "target_id": "gb:THA:ADM2:78962969B3750900919123",
+      "pixelIndex": 41459,
+      "y": 122666,
+      "x": 203490,
+      "negative_ordinal": 2,
+      "geometry_sha256": "f9d8d80703e2a7935c443e5d0c355d538b6a96bc980dbbae30d4f9577d720138",
+      "original_source": {
+        "id": "original-gb-MMR-ADM3",
+        "pointer": "/features/165/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/20",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B3750900919123",
+      "target_id": "gb:THA:ADM2:78962969B3750900919123",
+      "pixelIndex": 41459,
+      "y": 122667,
+      "x": 203487,
+      "negative_ordinal": 0,
+      "geometry_sha256": "4b4790dd27ef3a53cadbfc43ce90153c51f39cf10496bf9b301d01ec2515b275",
+      "original_source": {
+        "id": "original-gb-MMR-ADM1",
+        "pointer": "/features/10/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/21",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B3750900919123",
+      "target_id": "gb:THA:ADM2:78962969B3750900919123",
+      "pixelIndex": 41459,
+      "y": 122667,
+      "x": 203487,
+      "negative_ordinal": 1,
+      "geometry_sha256": "76185cfcea413d44565e87a31f42b3492993d67fc4e43d4bb0505a44fb0d2784",
+      "original_source": {
+        "id": "original-gb-MMR-ADM2",
+        "pointer": "/features/58/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/21",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B3750900919123",
+      "target_id": "gb:THA:ADM2:78962969B3750900919123",
+      "pixelIndex": 41459,
+      "y": 122667,
+      "x": 203487,
+      "negative_ordinal": 2,
+      "geometry_sha256": "f9d8d80703e2a7935c443e5d0c355d538b6a96bc980dbbae30d4f9577d720138",
+      "original_source": {
+        "id": "original-gb-MMR-ADM3",
+        "pointer": "/features/165/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/21",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B53971782347722",
+      "target_id": "gb:THA:ADM2:78962969B53971782347722",
+      "pixelIndex": 41626,
+      "y": 122762,
+      "x": 203430,
+      "negative_ordinal": 0,
+      "geometry_sha256": "4b4790dd27ef3a53cadbfc43ce90153c51f39cf10496bf9b301d01ec2515b275",
+      "original_source": {
+        "id": "original-gb-MMR-ADM1",
+        "pointer": "/features/10/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/22",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B53971782347722",
+      "target_id": "gb:THA:ADM2:78962969B53971782347722",
+      "pixelIndex": 41626,
+      "y": 122762,
+      "x": 203430,
+      "negative_ordinal": 2,
+      "geometry_sha256": "76185cfcea413d44565e87a31f42b3492993d67fc4e43d4bb0505a44fb0d2784",
+      "original_source": {
+        "id": "original-gb-MMR-ADM2",
+        "pointer": "/features/58/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/22",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B53971782347722",
+      "target_id": "gb:THA:ADM2:78962969B53971782347722",
+      "pixelIndex": 41626,
+      "y": 122762,
+      "x": 203430,
+      "negative_ordinal": 4,
+      "geometry_sha256": "f9d8d80703e2a7935c443e5d0c355d538b6a96bc980dbbae30d4f9577d720138",
+      "original_source": {
+        "id": "original-gb-MMR-ADM3",
+        "pointer": "/features/165/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/22",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B56380938562562",
+      "target_id": "gb:THA:ADM2:78962969B56380938562562",
+      "pixelIndex": 41647,
+      "y": 123087,
+      "x": 203178,
+      "negative_ordinal": 0,
+      "geometry_sha256": "4b4790dd27ef3a53cadbfc43ce90153c51f39cf10496bf9b301d01ec2515b275",
+      "original_source": {
+        "id": "original-gb-MMR-ADM1",
+        "pointer": "/features/10/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/23",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B56380938562562",
+      "target_id": "gb:THA:ADM2:78962969B56380938562562",
+      "pixelIndex": 41647,
+      "y": 123087,
+      "x": 203178,
+      "negative_ordinal": 1,
+      "geometry_sha256": "35a653a19a698f851f40220a4729b0087e7001262e4982be0c71f74ca3360655",
+      "original_source": {
+        "id": "original-gb-MMR-ADM2",
+        "pointer": "/features/57/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/23",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B56380938562562",
+      "target_id": "gb:THA:ADM2:78962969B56380938562562",
+      "pixelIndex": 41647,
+      "y": 123087,
+      "x": 203178,
+      "negative_ordinal": 3,
+      "geometry_sha256": "e1a1a2fdf96fbdbe68051f66c1e77c27e4065374d1b198504c3a85b6796f18ea",
+      "original_source": {
+        "id": "original-gb-MMR-ADM3",
+        "pointer": "/features/146/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/23",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B56380938562562",
+      "target_id": "gb:THA:ADM2:78962969B56380938562562",
+      "pixelIndex": 41647,
+      "y": 123088,
+      "x": 203178,
+      "negative_ordinal": 0,
+      "geometry_sha256": "4b4790dd27ef3a53cadbfc43ce90153c51f39cf10496bf9b301d01ec2515b275",
+      "original_source": {
+        "id": "original-gb-MMR-ADM1",
+        "pointer": "/features/10/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/24",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B56380938562562",
+      "target_id": "gb:THA:ADM2:78962969B56380938562562",
+      "pixelIndex": 41647,
+      "y": 123088,
+      "x": 203178,
+      "negative_ordinal": 1,
+      "geometry_sha256": "35a653a19a698f851f40220a4729b0087e7001262e4982be0c71f74ca3360655",
+      "original_source": {
+        "id": "original-gb-MMR-ADM2",
+        "pointer": "/features/57/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/24",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B56380938562562",
+      "target_id": "gb:THA:ADM2:78962969B56380938562562",
+      "pixelIndex": 41647,
+      "y": 123088,
+      "x": 203178,
+      "negative_ordinal": 3,
+      "geometry_sha256": "e1a1a2fdf96fbdbe68051f66c1e77c27e4065374d1b198504c3a85b6796f18ea",
+      "original_source": {
+        "id": "original-gb-MMR-ADM3",
+        "pointer": "/features/146/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/24",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B56380938562562",
+      "target_id": "gb:THA:ADM2:78962969B56380938562562",
+      "pixelIndex": 41647,
+      "y": 123089,
+      "x": 203178,
+      "negative_ordinal": 0,
+      "geometry_sha256": "4b4790dd27ef3a53cadbfc43ce90153c51f39cf10496bf9b301d01ec2515b275",
+      "original_source": {
+        "id": "original-gb-MMR-ADM1",
+        "pointer": "/features/10/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/25",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B56380938562562",
+      "target_id": "gb:THA:ADM2:78962969B56380938562562",
+      "pixelIndex": 41647,
+      "y": 123089,
+      "x": 203178,
+      "negative_ordinal": 1,
+      "geometry_sha256": "35a653a19a698f851f40220a4729b0087e7001262e4982be0c71f74ca3360655",
+      "original_source": {
+        "id": "original-gb-MMR-ADM2",
+        "pointer": "/features/57/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/25",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B56380938562562",
+      "target_id": "gb:THA:ADM2:78962969B56380938562562",
+      "pixelIndex": 41647,
+      "y": 123089,
+      "x": 203178,
+      "negative_ordinal": 3,
+      "geometry_sha256": "e1a1a2fdf96fbdbe68051f66c1e77c27e4065374d1b198504c3a85b6796f18ea",
+      "original_source": {
+        "id": "original-gb-MMR-ADM3",
+        "pointer": "/features/146/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/25",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B56380938562562",
+      "target_id": "gb:THA:ADM2:78962969B56380938562562",
+      "pixelIndex": 41647,
+      "y": 123089,
+      "x": 203179,
+      "negative_ordinal": 0,
+      "geometry_sha256": "4b4790dd27ef3a53cadbfc43ce90153c51f39cf10496bf9b301d01ec2515b275",
+      "original_source": {
+        "id": "original-gb-MMR-ADM1",
+        "pointer": "/features/10/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/26",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B56380938562562",
+      "target_id": "gb:THA:ADM2:78962969B56380938562562",
+      "pixelIndex": 41647,
+      "y": 123089,
+      "x": 203179,
+      "negative_ordinal": 1,
+      "geometry_sha256": "35a653a19a698f851f40220a4729b0087e7001262e4982be0c71f74ca3360655",
+      "original_source": {
+        "id": "original-gb-MMR-ADM2",
+        "pointer": "/features/57/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/26",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B56380938562562",
+      "target_id": "gb:THA:ADM2:78962969B56380938562562",
+      "pixelIndex": 41647,
+      "y": 123089,
+      "x": 203179,
+      "negative_ordinal": 3,
+      "geometry_sha256": "e1a1a2fdf96fbdbe68051f66c1e77c27e4065374d1b198504c3a85b6796f18ea",
+      "original_source": {
+        "id": "original-gb-MMR-ADM3",
+        "pointer": "/features/146/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/26",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B56380938562562",
+      "target_id": "gb:THA:ADM2:78962969B56380938562562",
+      "pixelIndex": 41647,
+      "y": 123090,
+      "x": 203179,
+      "negative_ordinal": 0,
+      "geometry_sha256": "4b4790dd27ef3a53cadbfc43ce90153c51f39cf10496bf9b301d01ec2515b275",
+      "original_source": {
+        "id": "original-gb-MMR-ADM1",
+        "pointer": "/features/10/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/27",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B56380938562562",
+      "target_id": "gb:THA:ADM2:78962969B56380938562562",
+      "pixelIndex": 41647,
+      "y": 123090,
+      "x": 203179,
+      "negative_ordinal": 1,
+      "geometry_sha256": "35a653a19a698f851f40220a4729b0087e7001262e4982be0c71f74ca3360655",
+      "original_source": {
+        "id": "original-gb-MMR-ADM2",
+        "pointer": "/features/57/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/27",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    },
+    {
+      "role": "contextual",
+      "source_id": "gb:THA:ADM2:78962969B56380938562562",
+      "target_id": "gb:THA:ADM2:78962969B56380938562562",
+      "pixelIndex": 41647,
+      "y": 123090,
+      "x": 203179,
+      "negative_ordinal": 3,
+      "geometry_sha256": "e1a1a2fdf96fbdbe68051f66c1e77c27e4065374d1b198504c3a85b6796f18ea",
+      "original_source": {
+        "id": "original-gb-MMR-ADM3",
+        "pointer": "/features/146/geometry"
+      },
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "scope": {
+        "id": "original28-mapping-scope",
+        "pointer": "/mappings/27",
+        "owner_pointer": "/chosen_existing_location/index"
+      }
+    }
+  ]
+}

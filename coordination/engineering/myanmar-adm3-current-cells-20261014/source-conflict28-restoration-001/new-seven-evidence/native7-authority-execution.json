@@ -1,0 +1,18 @@
+{
+  "command": [
+    "node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "native-authority",
+    ".takeover/source28-native-feasibility/native7-authority-config.json",
+    ".cache/delivery-handoff/source28-mmr7-native-authority-6cd25c448c13"
+  ],
+  "actual_executing_tree_commit": "6cd25c448c1352b22e1d7c1dc83830984fc29f4b",
+  "accepted_operator_code_commit": "19d815756ab7f33866b215f9156818ac75a65108",
+  "ordinary_input_commit": "1d8d46b3c39599671138f44231d27fdb1fed9f64",
+  "ended_utc": "2026-10-16T05:32:28.262194+00:00",
+  "elapsed_seconds": 3.8152615959988907,
+  "max_rss_kib": 276372,
+  "exit_code": 0,
+  "timeout_seconds": 120,
+  "source_or_physical_producer_replay": false
+}

@@ -1,0 +1,317 @@
+{
+  "kind": "adopted-native-territorial-applicability-v1",
+  "provenance": [
+    {
+      "id": "original-main-adoption",
+      "pin": {
+        "bytes": 17718,
+        "commit": "6627bc2bc9a6cb2134ad2a42b66277606e344331",
+        "git_blob_oid": "d35fdc8055fab544ae3648957db8bcb21b80563b",
+        "mode": "100644",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/source-conflict28-restoration-001/original/main-conflict28-source-choice-adoption.json",
+        "sha256": "9408d67a10c317be6b2360932f305581d50fa616a44ae2be601784fd1e36641a"
+      },
+      "role": "adoption"
+    },
+    {
+      "id": "original28-mapping-scope",
+      "pin": {
+        "bytes": 17718,
+        "commit": "6627bc2bc9a6cb2134ad2a42b66277606e344331",
+        "git_blob_oid": "d35fdc8055fab544ae3648957db8bcb21b80563b",
+        "mode": "100644",
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/source-conflict28-restoration-001/original/main-conflict28-source-choice-adoption.json",
+        "sha256": "9408d67a10c317be6b2360932f305581d50fa616a44ae2be601784fd1e36641a"
+      },
+      "role": "scope"
+    },
+    {
+      "id": "original-gb-THA-ADM1",
+      "parts": [
+        {
+          "bytes": 314966,
+          "commit": "34981099cd03677b9ba374a4de6bf73cf65b0646",
+          "decoded_bytes": 1009970,
+          "decoded_sha256": "841f1250cac868fa966b2089863f01e9c9b4dc9b7fb0d9d6dce9a495e32b32a0",
+          "git_blob_oid": "697f84f9e9831d64a1a0a085df383663e1e3c932",
+          "mode": "100644",
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-THA-ADM1-000.bin.gz",
+          "sha256": "a0cbbd57b5fb847d36c418051c9e838bee5d9a4c06805a13495612d2cd9cf8e9"
+        }
+      ],
+      "role": "original-source"
+    },
+    {
+      "id": "original-gb-THA-ADM2",
+      "parts": [
+        {
+          "bytes": 2688274,
+          "commit": "34981099cd03677b9ba374a4de6bf73cf65b0646",
+          "decoded_bytes": 8461813,
+          "decoded_sha256": "faae0d9d6fe56b489a9cb3bd5b8fe100025aad99ec554bf7a9f49cbe2216bf10",
+          "git_blob_oid": "d43e07ca9416bf37067112b43950af9c10ce8ea6",
+          "mode": "100644",
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-THA-ADM2-000.bin.gz",
+          "sha256": "9ecb1bca78b481b24ed1e94d6a3c4230cde4b1c02c3618a45c784a77e6bcd4ed"
+        }
+      ],
+      "role": "original-source"
+    }
+  ],
+  "records": [
+    {
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "geometry_sha256": "76a5d6d54154357a6108b3213d867107f94f607a3899eb014198eec59c69090f",
+      "negative_ordinal": 10,
+      "original_source": {
+        "id": "original-gb-THA-ADM1",
+        "pointer": "/features/25/geometry"
+      },
+      "pixelIndex": 30113,
+      "role": "contextual",
+      "scope": {
+        "id": "original28-mapping-scope",
+        "owner_pointer": "/chosen_existing_location/index",
+        "pointer": "/mappings/0"
+      },
+      "source_id": "gb:MMR:ADM3:66882298B21195914889348",
+      "target_id": "gb:MMR:ADM3:66882298B21195914889348",
+      "x": 203920,
+      "y": 115893
+    },
+    {
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "geometry_sha256": "4c59f4ce8582b6abec06fe09187ca315af20ba12484bc5d780cf34595c307e30",
+      "negative_ordinal": 14,
+      "original_source": {
+        "id": "original-gb-THA-ADM2",
+        "pointer": "/features/368/geometry"
+      },
+      "pixelIndex": 30113,
+      "role": "contextual",
+      "scope": {
+        "id": "original28-mapping-scope",
+        "owner_pointer": "/chosen_existing_location/index",
+        "pointer": "/mappings/0"
+      },
+      "source_id": "gb:MMR:ADM3:66882298B21195914889348",
+      "target_id": "gb:MMR:ADM3:66882298B21195914889348",
+      "x": 203920,
+      "y": 115893
+    },
+    {
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "geometry_sha256": "46716931572e9f0841d1799ae36356bca707af123ba066684e9b53d52563bb33",
+      "negative_ordinal": 12,
+      "original_source": {
+        "id": "original-gb-THA-ADM2",
+        "pointer": "/features/139/geometry"
+      },
+      "pixelIndex": 30113,
+      "role": "contextual",
+      "scope": {
+        "id": "original28-mapping-scope",
+        "owner_pointer": "/chosen_existing_location/index",
+        "pointer": "/mappings/1"
+      },
+      "source_id": "gb:MMR:ADM3:66882298B21195914889348",
+      "target_id": "gb:MMR:ADM3:66882298B21195914889348",
+      "x": 203963,
+      "y": 115921
+    },
+    {
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "geometry_sha256": "46716931572e9f0841d1799ae36356bca707af123ba066684e9b53d52563bb33",
+      "negative_ordinal": 12,
+      "original_source": {
+        "id": "original-gb-THA-ADM2",
+        "pointer": "/features/139/geometry"
+      },
+      "pixelIndex": 30113,
+      "role": "contextual",
+      "scope": {
+        "id": "original28-mapping-scope",
+        "owner_pointer": "/chosen_existing_location/index",
+        "pointer": "/mappings/2"
+      },
+      "source_id": "gb:MMR:ADM3:66882298B21195914889348",
+      "target_id": "gb:MMR:ADM3:66882298B21195914889348",
+      "x": 203967,
+      "y": 115926
+    },
+    {
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "geometry_sha256": "76a5d6d54154357a6108b3213d867107f94f607a3899eb014198eec59c69090f",
+      "negative_ordinal": 10,
+      "original_source": {
+        "id": "original-gb-THA-ADM1",
+        "pointer": "/features/25/geometry"
+      },
+      "pixelIndex": 30113,
+      "role": "contextual",
+      "scope": {
+        "id": "original28-mapping-scope",
+        "owner_pointer": "/chosen_existing_location/index",
+        "pointer": "/mappings/3"
+      },
+      "source_id": "gb:MMR:ADM3:66882298B21195914889348",
+      "target_id": "gb:MMR:ADM3:66882298B21195914889348",
+      "x": 203968,
+      "y": 115927
+    },
+    {
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "geometry_sha256": "46716931572e9f0841d1799ae36356bca707af123ba066684e9b53d52563bb33",
+      "negative_ordinal": 12,
+      "original_source": {
+        "id": "original-gb-THA-ADM2",
+        "pointer": "/features/139/geometry"
+      },
+      "pixelIndex": 30113,
+      "role": "contextual",
+      "scope": {
+        "id": "original28-mapping-scope",
+        "owner_pointer": "/chosen_existing_location/index",
+        "pointer": "/mappings/3"
+      },
+      "source_id": "gb:MMR:ADM3:66882298B21195914889348",
+      "target_id": "gb:MMR:ADM3:66882298B21195914889348",
+      "x": 203968,
+      "y": 115927
+    },
+    {
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "geometry_sha256": "445bfa671955592074022ad01e555f1e28bacc6e2d98763ff0515ba3ddaaae1b",
+      "negative_ordinal": 2,
+      "original_source": {
+        "id": "original-gb-THA-ADM1",
+        "pointer": "/features/26/geometry"
+      },
+      "pixelIndex": 30263,
+      "role": "contextual",
+      "scope": {
+        "id": "original28-mapping-scope",
+        "owner_pointer": "/chosen_existing_location/index",
+        "pointer": "/mappings/12"
+      },
+      "source_id": "gb:MMR:ADM3:66882298B59879554977018",
+      "target_id": "gb:MMR:ADM3:66882298B59879554977018",
+      "x": 202810,
+      "y": 118676
+    },
+    {
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "geometry_sha256": "2dc79361f58ede2ede410fdb24e929cc9e6167a21206f59c01d8ff279fef3dd8",
+      "negative_ordinal": 5,
+      "original_source": {
+        "id": "original-gb-THA-ADM2",
+        "pointer": "/features/370/geometry"
+      },
+      "pixelIndex": 30263,
+      "role": "contextual",
+      "scope": {
+        "id": "original28-mapping-scope",
+        "owner_pointer": "/chosen_existing_location/index",
+        "pointer": "/mappings/12"
+      },
+      "source_id": "gb:MMR:ADM3:66882298B59879554977018",
+      "target_id": "gb:MMR:ADM3:66882298B59879554977018",
+      "x": 202810,
+      "y": 118676
+    },
+    {
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "geometry_sha256": "445bfa671955592074022ad01e555f1e28bacc6e2d98763ff0515ba3ddaaae1b",
+      "negative_ordinal": 2,
+      "original_source": {
+        "id": "original-gb-THA-ADM1",
+        "pointer": "/features/26/geometry"
+      },
+      "pixelIndex": 30263,
+      "role": "contextual",
+      "scope": {
+        "id": "original28-mapping-scope",
+        "owner_pointer": "/chosen_existing_location/index",
+        "pointer": "/mappings/13"
+      },
+      "source_id": "gb:MMR:ADM3:66882298B59879554977018",
+      "target_id": "gb:MMR:ADM3:66882298B59879554977018",
+      "x": 202807,
+      "y": 118677
+    },
+    {
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "geometry_sha256": "2dc79361f58ede2ede410fdb24e929cc9e6167a21206f59c01d8ff279fef3dd8",
+      "negative_ordinal": 5,
+      "original_source": {
+        "id": "original-gb-THA-ADM2",
+        "pointer": "/features/370/geometry"
+      },
+      "pixelIndex": 30263,
+      "role": "contextual",
+      "scope": {
+        "id": "original28-mapping-scope",
+        "owner_pointer": "/chosen_existing_location/index",
+        "pointer": "/mappings/13"
+      },
+      "source_id": "gb:MMR:ADM3:66882298B59879554977018",
+      "target_id": "gb:MMR:ADM3:66882298B59879554977018",
+      "x": 202807,
+      "y": 118677
+    },
+    {
+      "adoption": {
+        "id": "original-main-adoption",
+        "pointer": "/decision"
+      },
+      "geometry_sha256": "2dc79361f58ede2ede410fdb24e929cc9e6167a21206f59c01d8ff279fef3dd8",
+      "negative_ordinal": 5,
+      "original_source": {
+        "id": "original-gb-THA-ADM2",
+        "pointer": "/features/370/geometry"
+      },
+      "pixelIndex": 30263,
+      "role": "contextual",
+      "scope": {
+        "id": "original28-mapping-scope",
+        "owner_pointer": "/chosen_existing_location/index",
+        "pointer": "/mappings/14"
+      },
+      "source_id": "gb:MMR:ADM3:66882298B59879554977018",
+      "target_id": "gb:MMR:ADM3:66882298B59879554977018",
+      "x": 202808,
+      "y": 118677
+    }
+  ],
+  "version": 1
+}

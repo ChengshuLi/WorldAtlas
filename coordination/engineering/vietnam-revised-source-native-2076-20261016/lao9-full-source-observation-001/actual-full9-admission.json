@@ -1,0 +1,18 @@
+{
+  "kind": "bounded-independent-observation-prospective-admission",
+  "memory_rss_limit_bytes": 805306368,
+  "wall_deadline_seconds": 120,
+  "poll_seconds": 0.05,
+  "free_bytes_before": 8951414784,
+  "memory_available_before": {
+    "MemTotal": 10451464192,
+    "MemAvailable": 7953108992
+  },
+  "script_sha256": "7fde94154334247d82e790002703639b5e4a4eae74c06afbaf13230d829c35f3",
+  "command": [
+    "node",
+    "--max-old-space-size=512",
+    "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/dda6ef44fc5bf26bb9ad5567433b4c1ac45920f1f1fc1ca27469c1f1e02b3af3/work/coordination/engineering/vietnam-revised-source-native-2076-20261016/lao9-full-source-observation-001/observe-exact9-full-family.mjs"
+  ],
+  "scope": "Exact9 missing full same-release LAO148 and retained258-country native memberships/ties; read-only source observation; no source adoption or physical replay"
+}
