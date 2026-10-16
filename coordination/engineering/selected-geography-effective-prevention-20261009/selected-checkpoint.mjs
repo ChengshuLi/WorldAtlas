@@ -1008,7 +1008,9 @@ function qualifyAppendedAuthorities(session,reader,state,selected,prior,addedEnt
     const contract=Object.fromEntries(['size','coordinateBits','method','native_latitudes','hierarchy_sha256','original_assets'].map(k => [k,state.manifest[k]]));
     demand(same(proof.contract,contract) && (same(proof.ledger.parent_inventory,state.ledger.parent_inventory) || proof.nativeOnly && proof.ledger.parent_inventory===undefined),
       'Appended producer changed native contract or complete original source denominator');
-    if (proof.nativeOnly) demand(proof.patches.every(p=>same(p.base_reference,selected.envelope.base_reference)),
+    if (proof.nativeOnly) demand(proof.patches.every(p=>same(p.base_reference,selected.envelope.base_reference)
+      || selected.selection.reference_projection && same(p.base_reference,{id:state.manifest.geographic_release,
+        hierarchy_sha256:state.manifest.hierarchy_sha256,footprints_sha256:state.manifest.footprints_sha256})),
       'Native source-target authority belongs to a different selected base');
     for (const original of proof.ledger.rows) {
       demand(!oldRows.has(repairComponentKey({...original,authority_sha256:entry.authority_sha256})) && !expectedAdded.has(repairComponentKey({...original,authority_sha256:entry.authority_sha256})), 'Appended producer repeats original component');
@@ -1080,7 +1082,7 @@ function projectCheckpointMetadata(state,reader,selection) {
   const paths=new Set([selection.reference_projection.path,projection.hierarchy.after.path,
     'data/geographic-releases/current-manifest.json',path.posix.join('data/geographic-releases',pointer.path),
     ...projection.source_updates.map(update=>update.logical_path)]);
-  return {certificate:freeze(certificate),paths};
+  return {certificate:freeze(certificate),paths,reference:projection.reference,nativeReference:projection.native_reference};
 }
 
 /** Exhaustive actual append-only transition. Never reacquires a full selection.
@@ -1136,7 +1138,11 @@ export function qualifyTransition({state,reader}) {
       base_reference:selected.envelope.base_reference,authority_registry_sha256:valueSha(selected.registry),
       ledger_sha256:selected.sidecar.logical_asset_map.ledger.sha256,components:[...selected.normalized.rows.values()]}),
     'Candidate effective release does not bind the complete ledger/authority set');
-    demand(same(selected.envelope.base_reference,baseProof.selected.envelope.base_reference)
+    const priorReference=Object.fromEntries(['id','hierarchy_sha256','footprints_sha256'].map(k=>[k,state.certificate.binding.release[k]]));
+    demand((same(selected.envelope.base_reference,baseProof.selected.envelope.base_reference)
+      || metadata.reference && same(selected.envelope.base_reference,metadata.reference)
+        && same(baseProof.selected.envelope.base_reference,priorReference)
+        && priorReference.footprints_sha256===metadata.nativeReference.footprints_sha256)
       && selected.envelope.effective_reference.hierarchy_sha256===selected.envelope.base_reference.hierarchy_sha256,
     'Candidate silently changes complete base release or hierarchy');
     const {certificate,changedIds}=deriveCoordinateDelta({certificate:metadata.certificate,oldAdditions:state.additions,additions,selection:selected.selection});
