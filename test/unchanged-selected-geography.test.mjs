@@ -5,7 +5,9 @@ import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
+import {deflateSync} from 'node:zlib';
 import {inspectUnchangedSelectedGeography, inspectExecutingSelectedGeography} from '../scripts/check-unchanged-selected-geography.mjs';
+import {createRoutingMetadataAcquisition} from '../scripts/geography-routing-metadata.mjs';
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
 const P = 'coordination/engineering/selected-data-fixture/';
@@ -107,6 +109,60 @@ test('unchanged selected outputs need no historical legality or producer-schema 
     assert(!result.immutable_descriptors.some(p => p.path.includes('historical-authority')));
     assert(result.metadata_bytes_read < 10000); assert(result.git_calls < 200);
     assert.deepEqual(f.calls, {acquire: 0, origins: 0});
+  } finally { f.close(); }
+});
+
+for (const mode of ['valid', 'wrong declared hash', 'corrupt fetched object'])
+test('real cold routing transport leaves actual collector authentication intact: ' + mode, async () => {
+  const f = fixture(); try {
+    let baseline = f.baseline, candidate = f.candidate;
+    if (mode === 'wrong declared hash') {
+      const selection = JSON.parse(f.files['data/ownership-selection.json']); selection.sha256 = '0'.repeat(64);
+      const files = {...f.files, 'data/ownership-selection.json': body(selection)};
+      baseline = f.commit(files, f.baseline); candidate = f.commit({...files, 'unrelated.txt': body('changed')}, baseline);
+    }
+    const cold = path.join(f.directory, 'cold'); fs.mkdirSync(cold);
+    const git = (args, input) => execFileSync('git', ['-C', cold, ...args],
+      {input, env: {...process.env, GIT_NO_LAZY_FETCH: '1'}, stdio: ['pipe', 'pipe', 'pipe']});
+    git(['init', '--bare']);
+    // A real no-alternates object store starts with every exact commit/tree and
+    // no file bodies. Fetches below import only the requested locator OIDs.
+    for (const line of f.git(['cat-file', '--batch-all-objects', '--batch-check=%(objectname) %(objecttype)']).split('\n')) {
+      const [oid, type] = line.split(' ');
+      if (type === 'tree' || type === 'commit') git(['hash-object', '-w', '-t', type, '--stdin'],
+        execFileSync('git', ['-C', f.directory, 'cat-file', type, oid]));
+    }
+    let transportBodyReads = 0, corrupted = false;
+    const acquisition = createRoutingMetadataAcquisition({repo: cold, baseline, token: '',
+      loadTree: async (root, recursive) => ({sha: root, truncated: false,
+        tree: f.git(['ls-tree', '-l', ...(recursive ? ['-r'] : []), root]).split('\n').map(line => {
+          const match = line.match(/^(\d+) (\w+) ([a-f0-9]+)\s+(\d+|-)\t(.+)$/);
+          return {mode: match[1], type: match[2], sha: match[3], size: Number(match[4]), path: match[5]};
+        })}),
+      execute(command, args, options) {
+        if (args.includes('blob')) transportBodyReads++;
+        const result = execFileSync(command, args.map(arg => arg === 'https://github.com/ChengshuLi/WorldAtlas.git' ? f.directory : arg), options);
+        if (mode === 'corrupt fetched object' && args.includes('fetch') && !corrupted) {
+          const oid = options.input.trim().split('\n')[0], file = path.join(cold, 'objects', oid.slice(0, 2), oid.slice(2));
+          // Remove only this generated cold store's fetched pack, so a valid
+          // packed copy cannot shadow the deliberately damaged loose fixture.
+          for (const name of fs.readdirSync(path.join(cold, 'objects', 'pack')))
+            fs.unlinkSync(path.join(cold, 'objects', 'pack', name));
+          fs.mkdirSync(path.dirname(file), {recursive: true});
+          fs.writeFileSync(file, deflateSync(Buffer.from('blob 2\0{}'))); corrupted = true;
+          assert.equal(git(['cat-file', 'blob', oid]).toString(), '{}');
+        }
+        return result;
+      }});
+    const result = await inspectUnchangedSelectedGeography({repo: cold, baseline, candidate, acquisition});
+    assert.equal(transportBodyReads, 0); assert(acquisition.summary().fetched_objects > 0);
+    if (mode === 'valid') {
+      assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+      assert(result.metadata_bodies_read > 0); assert.equal(result.science_reexecuted, false);
+    } else {
+      assert.equal(result.status, 'full-check-required');
+      assert.match(result.reason, mode === 'wrong declared hash' ? /metadata-pin-hash/ : /metadata-git-object-identity/);
+    }
   } finally { f.close(); }
 });
 
