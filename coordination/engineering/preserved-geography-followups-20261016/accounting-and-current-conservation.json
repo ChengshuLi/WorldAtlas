@@ -1,0 +1,596 @@
+{
+  "kind": "preserved-673-physical-to-native-accounting-and-current-composition-check",
+  "baseline": "321960b916faee9fd0d48f9bcf8fd53aaec743d1",
+  "prepared_candidate": "4362b673e6505e288fce4419c5921d02901919ba",
+  "prior_cumulative_native_cells": 286615,
+  "proposed_added_native_cells": 673,
+  "proposed_cumulative_native_cells": 287288,
+  "prior_rows": 875,
+  "proposed_rows": 877,
+  "prior_authorities": 143,
+  "proposed_authorities": 145,
+  "all_inherited_cells_rows_and_authorities_unchanged": true,
+  "new_component_ids": [
+    "source-target:4bc01423e8e7c1bf11ec83feb1c2083d7749336b263f98f9043dfaea8f57b5be",
+    "source-target:8eaf07e5a739a7606b8a54b40f3d32f542b286dc321322d5c43287ebb45e1ac7"
+  ],
+  "original_eight_scope_join": {
+    "baseline": "321960b916faee9fd0d48f9bcf8fd53aaec743d1",
+    "original_queue_commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+    "cathai_patch_pin": {
+      "commit": "3cb28c8f74912f8809c32b96a3cb21eb0acc1790",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/dated-native-cathai671-20261015/native-patch.json",
+      "bytes": 13937,
+      "sha256": "d9057423900119f1aa28e4c72457faf5701065ca87707063aa492d34d604f67b"
+    },
+    "kyunsu_key_source": {
+      "commit": "9140c516be8b1a1fe5dc422782ef8cf8a64595f7",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/stock-source-evidence-001/candidate-native-patch.json",
+      "git_blob_oid": "7dc02b0f1bcebb422fa274529f3ce7dbd7acab8f",
+      "sha256": "d4189021223c14b3324ae5baa289b5921ffc3af7586b88583c98ec8b06bdd997"
+    },
+    "packages": [
+      {
+        "package_id": "gb-IDN-ADM2--physical-interpretation",
+        "original_cells": 133846,
+        "original_intervals": 66247,
+        "intersections": {
+          "CatHai671": {
+            "coordinates": 0,
+            "owner_aware": 0
+          },
+          "Kyunsu2": {
+            "coordinates": 0,
+            "owner_aware": 0
+          }
+        }
+      },
+      {
+        "package_id": "gb-IDN-ADM2--repair-evaluation",
+        "original_cells": 190849,
+        "original_intervals": 80256,
+        "intersections": {
+          "CatHai671": {
+            "coordinates": 0,
+            "owner_aware": 0
+          },
+          "Kyunsu2": {
+            "coordinates": 0,
+            "owner_aware": 0
+          }
+        }
+      },
+      {
+        "package_id": "gb-IDN-ADM2--source-conflict",
+        "original_cells": 27,
+        "original_intervals": 21,
+        "intersections": {
+          "CatHai671": {
+            "coordinates": 0,
+            "owner_aware": 0
+          },
+          "Kyunsu2": {
+            "coordinates": 0,
+            "owner_aware": 0
+          }
+        }
+      },
+      {
+        "package_id": "gb-MMR-ADM3--physical-interpretation",
+        "original_cells": 18459,
+        "original_intervals": 9162,
+        "intersections": {
+          "CatHai671": {
+            "coordinates": 0,
+            "owner_aware": 0
+          },
+          "Kyunsu2": {
+            "coordinates": 2,
+            "owner_aware": 2
+          }
+        }
+      },
+      {
+        "package_id": "gb-MMR-ADM3--repair-evaluation",
+        "original_cells": 39315,
+        "original_intervals": 15134,
+        "intersections": {
+          "CatHai671": {
+            "coordinates": 0,
+            "owner_aware": 0
+          },
+          "Kyunsu2": {
+            "coordinates": 0,
+            "owner_aware": 0
+          }
+        }
+      },
+      {
+        "package_id": "gb-MMR-ADM3--source-conflict",
+        "original_cells": 28,
+        "original_intervals": 23,
+        "intersections": {
+          "CatHai671": {
+            "coordinates": 0,
+            "owner_aware": 0
+          },
+          "Kyunsu2": {
+            "coordinates": 0,
+            "owner_aware": 0
+          }
+        }
+      },
+      {
+        "package_id": "gb-VNM-ADM2--physical-interpretation",
+        "original_cells": 24880,
+        "original_intervals": 9947,
+        "intersections": {
+          "CatHai671": {
+            "coordinates": 671,
+            "owner_aware": 671
+          },
+          "Kyunsu2": {
+            "coordinates": 0,
+            "owner_aware": 0
+          }
+        }
+      },
+      {
+        "package_id": "gb-VNM-ADM2--repair-evaluation",
+        "original_cells": 15645,
+        "original_intervals": 6821,
+        "intersections": {
+          "CatHai671": {
+            "coordinates": 0,
+            "owner_aware": 0
+          },
+          "Kyunsu2": {
+            "coordinates": 0,
+            "owner_aware": 0
+          }
+        }
+      }
+    ],
+    "followups": {
+      "CatHai671": {
+        "native_keys": 671,
+        "inside_original_coordinate_union": 671,
+        "inside_original_owner_aware_union": 671,
+        "outside_original_coordinate_union": 0,
+        "conclusion": "Existing original-package physical outcomes advancing to native assignment; no additional original-package outcome credit"
+      },
+      "Kyunsu2": {
+        "native_keys": 2,
+        "inside_original_coordinate_union": 2,
+        "inside_original_owner_aware_union": 2,
+        "outside_original_coordinate_union": 0,
+        "conclusion": "Existing original-package physical outcomes advancing to native assignment; no additional original-package outcome credit"
+      }
+    },
+    "original_eight_full_package_sum": 423049,
+    "original_eight_coordinate_union": 423049,
+    "initially_owned_repair_cells": 15072,
+    "unowned_repair_plus_conflict_and_physical_request_sum": 407977
+  },
+  "disposition_transitions": [
+    {
+      "name": "CatHai671",
+      "keys": 671,
+      "prior_bucket": "already-adopted positive dated-terrestrial physical interpretations within original Vietnam physical24880",
+      "new_unique_outcome_credit": 0
+    },
+    {
+      "name": "Kyunsu2",
+      "keys": 2,
+      "prior_bucket": "known2237 bounded-adopted source interpretation within Myanmar18165 positive physical interpretations",
+      "new_unique_outcome_credit": 0,
+      "original_record_joins": [
+        {
+          "key": [
+            30271,
+            122215,
+            202763
+          ],
+          "original_interval_ordinal": 5845,
+          "original_interval": [
+            122215,
+            202763,
+            202764,
+            [
+              30271
+            ],
+            [
+              44893,
+              44955,
+              45111
+            ],
+            "source-relative"
+          ],
+          "prior_disposition": {
+            "start": 202763,
+            "end": 202764,
+            "status": "bounded-adopted-source-interpretation",
+            "source_group": "known2237"
+          }
+        },
+        {
+          "key": [
+            30271,
+            122216,
+            202763
+          ],
+          "original_interval_ordinal": 5846,
+          "original_interval": [
+            122216,
+            202763,
+            202764,
+            [
+              30271
+            ],
+            [
+              44893,
+              44955,
+              45111
+            ],
+            "source-relative"
+          ],
+          "prior_disposition": {
+            "start": 202763,
+            "end": 202764,
+            "status": "bounded-adopted-source-interpretation",
+            "source_group": "known2237"
+          }
+        }
+      ]
+    }
+  ],
+  "unresolved_bucket_reduction": 0,
+  "original_request_denominator_unchanged": 407977,
+  "root_global_accepted_outcome_total_unchanged": 462921,
+  "global_total_note": "Parent accounting control, not re-derived here. Neither of these already-positive physical cohorts adds unique outcome credit.",
+  "canonical_geography_changed_members": 1,
+  "canonical_geography_geometry_changes": 0,
+  "corrected_member": "gb:VNM:ADM2:81297802B5756602808944",
+  "before_parent": "framework:province:quang-ninh:2ff0c77cb3e5",
+  "after_parent": "framework:province:hai-phong:9b1802d93923",
+  "hierarchy_changed_groups": [
+    {
+      "before": {
+        "id": "framework:province:hai-phong:9b1802d93923",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 12,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:vietnam:52cf854a517c. This declaration alone is not semantic approval.",
+                "title": "gb:VNM:ADM1",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:VNM:ADM2; role District; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Viet Nam",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 12 locations, roles {'District': 12}, source vintages {'2020': 12}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "members have source parent overlap below 0.8; full-parent validation required",
+              "Exact members requiring stronger parent correspondence: gb:VNM:ADM2:81297802B48433290328639, gb:VNM:ADM2:81297802B70010606578992, gb:VNM:ADM2:81297802B55266176914642"
+            ]
+          },
+          "source": "gb:VNM:ADM1",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "Hải Phòng",
+        "parent_id": "framework:area:vietnam:52cf854a517c"
+      },
+      "after": {
+        "id": "framework:province:hai-phong:9b1802d93923",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 13,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:vietnam:52cf854a517c. This declaration alone is not semantic approval.",
+                "title": "gb:VNM:ADM1",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:VNM:ADM2; role District; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Viet Nam",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 12 locations, roles {'District': 12}, source vintages {'2020': 12}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "members have source parent overlap below 0.8; full-parent validation required",
+              "Exact members requiring stronger parent correspondence: gb:VNM:ADM2:81297802B48433290328639, gb:VNM:ADM2:81297802B70010606578992, gb:VNM:ADM2:81297802B55266176914642"
+            ]
+          },
+          "source": "gb:VNM:ADM1",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "Hải Phòng",
+        "parent_id": "framework:area:vietnam:52cf854a517c"
+      }
+    },
+    {
+      "before": {
+        "id": "framework:province:quang-ninh:2ff0c77cb3e5",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 2,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:vietnam:52cf854a517c. This declaration alone is not semantic approval.",
+                "title": "Natural Earth admin-1",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:VNM:ADM2; role District; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Viet Nam",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 2 locations, roles {'District': 2}, source vintages {'2020': 2}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "members have source parent overlap below 0.8; full-parent validation required",
+              "declared parent source lacks geoBoundaries canonical registry; investigate source-specific role",
+              "parent canonical role unknown or unavailable; no ADM-number tier inference",
+              "Exact members requiring stronger parent correspondence: gb:VNM:ADM2:81297802B76384767601248"
+            ]
+          },
+          "source": "Natural Earth admin-1",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "Quảng Ninh",
+        "parent_id": "framework:area:vietnam:52cf854a517c"
+      },
+      "after": {
+        "id": "framework:province:quang-ninh:2ff0c77cb3e5",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 1,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:vietnam:52cf854a517c. This declaration alone is not semantic approval.",
+                "title": "Natural Earth admin-1",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:VNM:ADM2; role District; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Viet Nam",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 2 locations, roles {'District': 2}, source vintages {'2020': 2}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "members have source parent overlap below 0.8; full-parent validation required",
+              "declared parent source lacks geoBoundaries canonical registry; investigate source-specific role",
+              "parent canonical role unknown or unavailable; no ADM-number tier inference",
+              "Exact members requiring stronger parent correspondence: gb:VNM:ADM2:81297802B76384767601248"
+            ]
+          },
+          "source": "Natural Earth admin-1",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "Quảng Ninh",
+        "parent_id": "framework:area:vietnam:52cf854a517c"
+      }
+    }
+  ],
+  "scientific_native_selector_unchanged": true,
+  "genuine_M_projection_sha256": "f953d19abd30d78c3bf009427bb49eec3ccf50cc356fd8861ad1c4b9aab93536",
+  "package_inputs_before": 267,
+  "package_inputs_after": 272,
+  "limits": [
+    "Proposed current composition and byte/accounting verification only; actual current-owner-zero, emitted/picker verification, distinct review and accepted integration remain separate.",
+    "Original source/physical/constructor and stock installer execution identities remain unchanged; no scientific replay, publication, wider provincial-boundary resolution or new unique outcome credit."
+  ],
+  "pins": [
+    {
+      "commit": "321960b916faee9fd0d48f9bcf8fd53aaec743d1",
+      "path": "data/ownership-selection.json",
+      "mode": "100644",
+      "git_blob_oid": "7f9542828aa0b8b65f640553edecb7d180524e2b",
+      "bytes": 1571,
+      "sha256": "ad1811b4aec0c3e93700fbc9fbc45724b0aa5b9b4f83a627f8819c33660dd636"
+    },
+    {
+      "commit": "321960b916faee9fd0d48f9bcf8fd53aaec743d1",
+      "path": "coordination/engineering/native1033-after-joint3274-20261016/ownership-selection-v2.json",
+      "mode": "100644",
+      "git_blob_oid": "df5f3d61a835506769ca364802d9e6b420cdc0cc",
+      "bytes": 3438,
+      "sha256": "b2dcd9cfe64a2c9c788deb6c8a2af3a9baa41b2925cc837ed46592addef3a1a7"
+    },
+    {
+      "commit": "8a579397bb0ce8242cac1d539cb24a490c7ebca8",
+      "path": "coordination/engineering/native1033-after-joint3274-20261016/composition/authority-registry.json",
+      "mode": "100644",
+      "git_blob_oid": "9c398a60361e6c30075f297baf9c7ae09d974297",
+      "bytes": 151901,
+      "sha256": "21817a59643fef71acc734a0bf2ec98601a480dda64884bc1f197b94a2063390"
+    },
+    {
+      "commit": "8a579397bb0ce8242cac1d539cb24a490c7ebca8",
+      "path": "coordination/engineering/native1033-after-joint3274-20261016/composition/selected-ledger.json",
+      "mode": "100644",
+      "git_blob_oid": "1d4c41d32e934e62932e486d6bde761bd38f7031",
+      "bytes": 7714560,
+      "sha256": "ce9a4fb2a378f16ad099b8bff72b0602eae2dcb54201275ebfd3ac0c095d78bb"
+    },
+    {
+      "commit": "8a579397bb0ce8242cac1d539cb24a490c7ebca8",
+      "path": "coordination/engineering/native1033-after-joint3274-20261016/composition/patch.json",
+      "mode": "100644",
+      "git_blob_oid": "2e025c48a04dcbc3f4133a4b62b16204ba6b01a0",
+      "bytes": 2790216,
+      "sha256": "16ed506dc99227737e7dae017cf4006d123d901d634d42e5f292cfcbbc2a7000"
+    },
+    {
+      "commit": "4362b673e6505e288fce4419c5921d02901919ba",
+      "path": "data/ownership-selection.json",
+      "mode": "100644",
+      "git_blob_oid": "acfae4d765463aba3a4a0af17d787f60cd8b2583",
+      "bytes": 1839,
+      "sha256": "dd158e344e3a2c05d6e3419e6385b99efdef366e689c9a4cf90b5d0a30464672"
+    },
+    {
+      "commit": "4362b673e6505e288fce4419c5921d02901919ba",
+      "path": "coordination/engineering/preserved-geography-followups-20261016/ownership-selection-v2.json",
+      "mode": "100644",
+      "git_blob_oid": "a520012ea6964de7332f4218258dd3f410f4077b",
+      "bytes": 3450,
+      "sha256": "5e46d570dcaa68533db459986eff7b54afc57fe3d96974dd0880e210154f6d92"
+    },
+    {
+      "commit": "3d0b6296baad84809d75b4412159ba80386e0eed",
+      "path": "coordination/engineering/preserved-geography-followups-20261016/composition/authority-registry.json",
+      "mode": "100644",
+      "git_blob_oid": "1c26821de5aaf16bee225b93bb0de4ce4dfad048",
+      "bytes": 154806,
+      "sha256": "e78474d51134aab341bb45c023cb9f34adceedb0b31a8aad8af30cb9699de429"
+    },
+    {
+      "commit": "3d0b6296baad84809d75b4412159ba80386e0eed",
+      "path": "coordination/engineering/preserved-geography-followups-20261016/composition/selected-ledger.json",
+      "mode": "100644",
+      "git_blob_oid": "a683757fcf6264ba8141e88b3d43069f4d7c83ee",
+      "bytes": 7741494,
+      "sha256": "c73eaf3060ff7f920ae4c595222265ef83bdc53bb805037965e66317de50741c"
+    },
+    {
+      "commit": "3d0b6296baad84809d75b4412159ba80386e0eed",
+      "path": "coordination/engineering/preserved-geography-followups-20261016/composition/patch.json",
+      "mode": "100644",
+      "git_blob_oid": "f99af05041844397eda72ea2fac4331e3434ddfd",
+      "bytes": 2794969,
+      "sha256": "2a7c635db4b05b52759f2b8ab34a4619603c7e588a7155f177bd1dbeb0ca8878"
+    },
+    {
+      "commit": "3cb28c8f74912f8809c32b96a3cb21eb0acc1790",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/dated-native-cathai671-20261015/native-patch.json",
+      "mode": "100644",
+      "git_blob_oid": "ac03ecac07592b8aa3f3d5d149aef832c99ae944",
+      "bytes": 13937,
+      "sha256": "d9057423900119f1aa28e4c72457faf5701065ca87707063aa492d34d604f67b"
+    },
+    {
+      "commit": "9140c516be8b1a1fe5dc422782ef8cf8a64595f7",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/myeik-dated-physical2793-001/dated-terrestrial-pair-001/stock-source-evidence-001/candidate-native-patch.json",
+      "mode": "100644",
+      "git_blob_oid": "7dc02b0f1bcebb422fa274529f3ce7dbd7acab8f",
+      "bytes": 275,
+      "sha256": "d4189021223c14b3324ae5baa289b5921ffc3af7586b88583c98ec8b06bdd997"
+    },
+    {
+      "commit": "a8b093b8bfebd14ccbd5a2813a323eeb386e8006",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/source-interpretation/throughput-selection-20261015/cathai1032/adopted-cathai671-terrestrial-location.json",
+      "mode": "100644",
+      "git_blob_oid": "fb8fcfb4a6ee71a1cbfb381420f8b79e605283d8",
+      "bytes": 870277,
+      "sha256": "34a587fedcbd1d0d4edcc017dbd455d9bd9e48fb352888df899974418bb70f0c"
+    },
+    {
+      "commit": "82ee895c574eb7a019d36cf929798f0711ad09dd",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/original-physical18459-disposition-completion-001/physical18459-complete-disposition-coverage.json",
+      "mode": "100644",
+      "git_blob_oid": "f98b011794f3b9c092ef2dfa653cc4ba620bf10b",
+      "bytes": 4990141,
+      "sha256": "667c10e25a18e49ba22c4fd2d936e7887c96e7a64d23282e9aa8a7d5994236c6"
+    },
+    {
+      "commit": "321960b916faee9fd0d48f9bcf8fd53aaec743d1",
+      "path": "data/geography/part-27.json",
+      "mode": "100644",
+      "git_blob_oid": "a6a359c8c566462b280a461b4a5e1591e1f486c4",
+      "bytes": 4863162,
+      "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+    },
+    {
+      "commit": "4362b673e6505e288fce4419c5921d02901919ba",
+      "path": "data/geography/part-27.json",
+      "mode": "100644",
+      "git_blob_oid": "8f5eb1b821e880720a962b54d1e5dfdb413b8473",
+      "bytes": 4865691,
+      "sha256": "bdaa057e28a89bcfd3ddf9f9dbe677352b3fb259ff70e61da113cf8032d19b20"
+    },
+    {
+      "commit": "4362b673e6505e288fce4419c5921d02901919ba",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/cathai-current321-followup-20261016/reference-metadata.json",
+      "mode": "100644",
+      "git_blob_oid": "ecbdb4e3d0007f6a2dba0abf9eaa26c6d2b27e79",
+      "bytes": 249161,
+      "sha256": "f953d19abd30d78c3bf009427bb49eec3ccf50cc356fd8861ad1c4b9aab93536"
+    },
+    {
+      "commit": "321960b916faee9fd0d48f9bcf8fd53aaec743d1",
+      "path": ".github/package-inputs.json",
+      "mode": "100644",
+      "git_blob_oid": "ae618c1a06f4f648a6caf6385eb4144615bca27c",
+      "bytes": 15564,
+      "sha256": "7b59461213caebe18cc7b8bbe795b8a74d1bcc63235b3aea8d92b1dba96157d3"
+    },
+    {
+      "commit": "4362b673e6505e288fce4419c5921d02901919ba",
+      "path": ".github/package-inputs.json",
+      "mode": "100644",
+      "git_blob_oid": "4c469762f26a24853b3362de0668b66de70bf8e8",
+      "bytes": 16088,
+      "sha256": "dc07bb51c61434b1c3e17b9c4d0eef594cf4da8d78149f45339441b1986bcb56"
+    },
+    {
+      "commit": "321960b916faee9fd0d48f9bcf8fd53aaec743d1",
+      "path": "data/hierarchy.json",
+      "mode": "100644",
+      "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+      "bytes": 10164089,
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    },
+    {
+      "commit": "4362b673e6505e288fce4419c5921d02901919ba",
+      "path": "data/hierarchy.json",
+      "mode": "100644",
+      "git_blob_oid": "0ec8bae8e04140326d8b48f09a35ac66ae54deb0",
+      "bytes": 10164089,
+      "sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144"
+    }
+  ]
+}
