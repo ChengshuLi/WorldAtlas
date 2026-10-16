@@ -90,8 +90,8 @@ test('continuation metadata cannot authorize changed subject territory, changed 
 
 function nativeInstallFixture(run){return nativeFixture(({base,data,release,before,...rest})=>{
  const target=path.join(data,'parent.json'),certificate=path.join(data,'macro-certificate.json'),stage=path.join(base,'stage');fs.mkdirSync(path.join(stage,'after'),{recursive:true});
- fs.writeFileSync(target,'original parent metadata\n');fs.writeFileSync(certificate,'historical pending certificate\n');fs.writeFileSync(path.join(stage,'after','parent.json'),'reviewed parent metadata\n');
- const native=selectedNativeReference(data,before,release,base),report={native_reference:native,before_geography:before.proof,immutable_grid_parts:[],preserved:{'ownership-selection.json':sha(fs.readFileSync(path.join(data,'ownership-selection.json'))),'macro-certificate.json':sha(fs.readFileSync(certificate))},originals:{'parent.json':sha(fs.readFileSync(target))},writes:{'parent.json':sha(fs.readFileSync(path.join(stage,'after','parent.json')))}};
+ fs.writeFileSync(path.join(data,'world-index.json'),'unchanged index bytes\n');fs.writeFileSync(target,'original parent metadata\n');fs.writeFileSync(certificate,'historical pending certificate\n');fs.writeFileSync(path.join(stage,'after','parent.json'),'reviewed parent metadata\n');
+ const native=selectedNativeReference(data,before,release,base),report={native_reference:native,before_geography:before.proof,immutable_grid_parts:[],preserved:{'world-index.json':sha(fs.readFileSync(path.join(data,'world-index.json'))),'ownership-selection.json':sha(fs.readFileSync(path.join(data,'ownership-selection.json'))),'macro-certificate.json':sha(fs.readFileSync(certificate))},originals:{'parent.json':sha(fs.readFileSync(target))},writes:{'parent.json':sha(fs.readFileSync(path.join(stage,'after','parent.json')))}};
  const prepared={data,stage,repository:base,report,validation_sha256:sha(JSON.stringify(report))};return run({base,data,target,certificate,stage,prepared,...rest});
 });}
 
@@ -107,6 +107,7 @@ test('selected-native apply rejects changed selector, historical certificate and
  assert.throws(()=>applyInstall(prepared,{expectedValidation:'f'.repeat(64)}),/exact reviewed validation hash/);
  fs.writeFileSync(selector,JSON.stringify({...JSON.parse(selectionRaw),sha256:'f'.repeat(64)}));assert.throws(()=>applyInstall(prepared,{expectedValidation:prepared.validation_sha256}),/manifest checksum/);fs.writeFileSync(selector,selectionRaw);
  fs.writeFileSync(certificate,'forged current approval');assert.throws(()=>applyInstall(prepared,{expectedValidation:prepared.validation_sha256}),/Historical bytes changed/);fs.writeFileSync(certificate,historical);
+ const index=path.join(data,'world-index.json'),indexRaw=fs.readFileSync(index);fs.writeFileSync(index,'changed unchanged-index input');assert.throws(()=>applyInstall(prepared,{expectedValidation:prepared.validation_sha256}),/Historical bytes changed/);fs.writeFileSync(index,indexRaw);
  fs.writeFileSync(path.join(stage,'after','parent.json'),'unreviewed metadata');assert.throws(()=>applyInstall(prepared,{expectedValidation:prepared.validation_sha256}),/Staged install bytes changed/);
  assert.deepEqual(fs.readFileSync(target),prior);assert.equal(fs.existsSync(path.join(data,'.macro-reference-install.lock')),false);
 }));

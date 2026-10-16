@@ -185,7 +185,7 @@ export async function prepareInstall({data='data',geographyData='.cache/global-m
   const pointer=read(path.join(data,'geographic-releases/current-manifest.json'));
   preserved['geographic-releases/'+pointer.path]=pointer.sha256;
  }
- for(const p of ['hierarchy.json','world-index.json',...after.index.parts]){const bytes=fs.readFileSync(safe(geographyData,p));if(!native||!bytes.equals(fs.readFileSync(safe(data,p))))put(p,bytes);}
+ for(const p of ['hierarchy.json','world-index.json',...after.index.parts]){const bytes=fs.readFileSync(safe(geographyData,p));if(!native||!bytes.equals(fs.readFileSync(safe(data,p))))put(p,bytes);else preserved[p]=hashFile(safe(data,p));}
  let grid={parts:[]};if(!native){
  grid=read(path.join(data,'canonical-grid/manifest.json'));for(const part of grid.parts)if(hashFile(safe(path.join(data,'canonical-grid'),part.path))!==part.sha256)throw Error('Immutable ownership-grid part changed');
  if(hashFile(safe(path.join(data,'canonical-grid'),grid.bounds.path))!==grid.bounds.sha256||hashFile(safe(path.join(data,'canonical-grid'),grid.province_membership.path))!==grid.province_membership.sha256)throw Error('Grid metadata byte mismatch');
