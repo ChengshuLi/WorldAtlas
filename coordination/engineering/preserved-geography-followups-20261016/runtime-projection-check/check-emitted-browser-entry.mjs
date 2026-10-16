@@ -15,5 +15,5 @@ try{
  assert.equal(pickOwnership(loaded.ownership,202763,122215),30271);
  assert.equal(pickOwnership(loaded.ownership,202763,122216),30271);
  const report={passed:true,entry:'src/data-client.js loadGeography via Vite SSR using actual emitted assets',feature_count:loaded.features.length,asset_reads:reads.size,metadata_read:reads.has('reference-metadata/current.json'),cathai_parent:cathai.properties.parent_id,application_reference_revision:cathai.properties.metadata.reference_revision,kyunsu_two_picks:2,limits:'Actual browser module and emitted assets in Node/Vite SSR; GPU/Canvas rendering and deployed HTTP delivery are not exercised.'};
- await fs.writeFile('.followups/runtime-revision-emitted-browser-entry.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
+ console.log(JSON.stringify(report));
 }finally{globalThis.fetch=oldFetch;await server.close();}
