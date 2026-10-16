@@ -232,12 +232,21 @@ test('actual emitted selected additive cells retain exact owners and sampler out
   const published=whole(output,envelope[role]),original=whole(repo,sidecar.logical_asset_map[role]);
   assert.deepEqual(published,original);bodies[role]=JSON.parse(published);
  }
- const {ledger,patch,owner_roster:owners,base_manifest:manifest}=bodies;
+ const {ledger,patch,owner_roster:originalOwners,base_manifest:manifest}=bodies;
  assert.equal(envelope.base_manifest.sha256,selection.sha256);assert.equal(atlas.pixelMap.canonical_grid_sha256,selection.sha256);
  const {loadAdditiveNativePatch}=await import('../src/effective-footprint.js');
  const {selectedStableOwnerControls}=await import('../scripts/selected-delivery-smoke.mjs');
- const {additive_release,...baseSelection}=selection;
- assert.deepEqual(baseSelection,sidecar.base_selection);
+ const {scientificNativeSelection,validateReferenceMetadataHeader,projectReferenceOwners}=await import('../src/reference-metadata.js');
+ assert.deepEqual(scientificNativeSelection(selection),sidecar.base_selection);
+ let owners=originalOwners;
+ if(selection.reference_projection!==undefined){
+  const raw=whole(repo,selection.reference_projection),projection=JSON.parse(raw);
+  assert.deepEqual(whole(output,atlas.referenceMetadata.asset),raw);
+  const {native,reference}=validateReferenceMetadataHeader(projection,{selection,manifest});
+  assert.deepEqual(atlas.referenceMetadata.native_reference,native);
+  assert.deepEqual(atlas.referenceMetadata.reference,reference);
+  owners=projectReferenceOwners(originalOwners,projection.location_changes,projection.provinces);
+ }else assert.equal(atlas.referenceMetadata,undefined);
  const expectedCells=patch.rows.reduce((n,row)=>n+row.runs.reduce((sum,[start,end])=>sum+end-start,0),0);
  assert.ok(Number.isSafeInteger(expectedCells),'Selected current patch total exceeds exact integer range');
  assert.ok(owners.length>0&&owners.length<2**24);
