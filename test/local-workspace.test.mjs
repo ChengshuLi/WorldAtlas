@@ -212,7 +212,7 @@ test('allocation and free-space checks skip legacy usage traversals while report
     return {result, operations: {
       du: calls.filter(({command}) => command === 'du').length,
       worktreeList: calls.filter(({command, args}) => command === 'git'
-        && args.slice(2).join(' ') === 'worktree list --porcelain').length
+        && args.slice(2).join(' ') === 'worktree list --porcelain -z').length
     }};
   };
   const reported = observe(() => manager.report());
@@ -416,7 +416,7 @@ for (const scenario of ['before-add', 'created-branch', 'branch-race', 'partial-
         if (scenario === 'dangling-path') fs.symlinkSync(destination + '-absent', destination);
         throw Error('initial add failed');
       }
-      if (failed && scenario === 'unknown-inventory' && args.slice(2).join(' ') === 'worktree list --porcelain') throw Error('inventory unreadable');
+      if (failed && scenario === 'unknown-inventory' && args.slice(2).join(' ') === 'worktree list --porcelain -z') throw Error('inventory unreadable');
       return execute(command, args, ...options);
     });
     syncBuiltinESMExports();
@@ -440,6 +440,51 @@ for (const scenario of ['before-add', 'created-branch', 'branch-race', 'partial-
       assert.equal(retry.head, head);
       manager.release({worker: 'one', token: retry.token});
     }
+  });
+}
+
+test('a registered checkout under a newline-containing parent prevents reservation rollback', t => {
+  const fixtureState = fixture(t), parent = path.join(fixtureState.temporary, 'line\nbreak"\\tab\t');
+  fs.mkdirSync(parent);
+  const repo = path.join(parent, 'repo'); fs.renameSync(fixtureState.repo, repo);
+  const manager = workspaceManager(repo), execute = childProcess.execFileSync;
+  let destination;
+  t.mock.method(childProcess, 'execFileSync', (command, args, ...options) => {
+    const result = execute(command, args, ...options);
+    if (command === 'git' && args[2] === 'worktree' && args[3] === 'add') {
+      destination = args.at(-2);
+      fs.rmSync(destination, {recursive: true});
+      throw Error('initial add interrupted after Git registration');
+    }
+    return result;
+  });
+  syncBuiltinESMExports();
+  t.after(() => { t.mock.restoreAll(); syncBuiltinESMExports(); });
+  assert.throws(() => manager.allocate({worker: 'one', slot: 'review', commit: fixtureState.head}), /interrupted/);
+  const inventory = execFileSync('git', ['-C', repo, 'worktree', 'list', '--porcelain', '-z'], {encoding: 'utf8'});
+  assert.ok(inventory.includes('worktree ' + destination + '\0'));
+  assert.ok(!fs.existsSync(destination));
+  const entries = JSON.parse(fs.readFileSync(path.join(repo, '.git/worldatlas-local-workspaces/state.json'))).entries;
+  assert.equal(entries.length, 1);assert.equal(entries[0].path, destination);assert.equal(entries[0].status, 'preparing');
+  assert.throws(() => manager.release({worker: 'one', slot: 'review', token: entries[0].token}), /inspection/);
+});
+
+for (const malformed of ['unterminated', 'empty', 'duplicate-path-field']) {
+  test(`uncertain worktree inventory preserves the failed reservation: ${malformed}`, t => {
+    const {manager, head, repo} = fixture(t), execute = childProcess.execFileSync;
+    t.mock.method(childProcess, 'execFileSync', (command, args, ...options) => {
+      if (command === 'git' && args[2] === 'worktree' && args[3] === 'add') throw Error('initial add failed');
+      if (command === 'git' && args.slice(2).join(' ') === 'worktree list --porcelain -z') {
+        if (malformed === 'empty') return '';
+        return 'worktree ' + repo + (malformed === 'unterminated' ? '\0HEAD ' + head : '\0worktree /unknown\0\0');
+      }
+      return execute(command, args, ...options);
+    });
+    syncBuiltinESMExports();
+    t.after(() => { t.mock.restoreAll(); syncBuiltinESMExports(); });
+    assert.throws(() => manager.allocate({worker: 'one', slot: 'review', commit: head}), /operator inspection/);
+    const entries = JSON.parse(fs.readFileSync(path.join(repo, '.git/worldatlas-local-workspaces/state.json'))).entries;
+    assert.equal(entries.length, 1);assert.equal(entries[0].status, 'preparing');
   });
 }
 

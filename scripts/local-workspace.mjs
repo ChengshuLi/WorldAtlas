@@ -76,17 +76,21 @@ export function workspaceManager(repo, {freeBytes} = {}) {
     }
     try { return operation(); } finally { fs.rmdirSync(lock); }
   };
-  const worktrees = (measure = true) => git('worktree', 'list', '--porcelain').trim().split('\n\n').map(block => {
-    const lines = block.split('\n');
-    const directory = lines.find(line => line.startsWith('worktree '))?.slice(9);
-    if (!directory) throw Error('Incomplete worktree inventory');
-    ordinaryDirectory(directory);
-    if (!measure) return {path: directory};
-    // Missing/prunable paths need explicit inspection; they are not zero-cost proof.
-    const bytes = Number(execFileSync('du', ['-sk', directory], {encoding: 'utf8'}).split(/\s/)[0]) * 1024;
-    if (!Number.isSafeInteger(bytes) || bytes < 0) throw Error('Unknown checkout usage');
-    return {path: directory, bytes};
-  });
+  const worktrees = (measure = true) => {
+    const output = git('worktree', 'list', '--porcelain', '-z');
+    if (!output.endsWith('\0\0')) throw Error('Incomplete worktree inventory');
+    return output.slice(0, -2).split('\0\0').map(block => {
+      const [first, ...fields] = block.split('\0');
+      const directory = first.startsWith('worktree ') ? first.slice(9) : null;
+      if (!directory || !path.isAbsolute(directory) || fields.some(field => field.startsWith('worktree '))) throw Error('Incomplete worktree inventory');
+      ordinaryDirectory(directory);
+      if (!measure) return {path: directory};
+      // Missing/prunable paths need explicit inspection; they are not zero-cost proof.
+      const bytes = Number(execFileSync('du', ['-sk', directory], {encoding: 'utf8'}).split(/\s/)[0]) * 1024;
+      if (!Number.isSafeInteger(bytes) || bytes < 0) throw Error('Unknown checkout usage');
+      return {path: directory, bytes};
+    });
+  };
   const availableBytes = () => {
     const stats = fs.statfsSync(common);
     return freeBytes ? freeBytes() : stats.bavail * stats.bsize;
