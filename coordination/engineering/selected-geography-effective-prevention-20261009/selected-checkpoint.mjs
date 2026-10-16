@@ -56,9 +56,9 @@ function bindPhysicalLogicalSources(reader,certificate,inventory) {
   return new Set(inventory.map(p => p.path));
 }
 const sameScientificRoutes = (reader,routes,executablePaths,masked = new Set()) => routes.every(p => p.path === PROGRAMME_POLICY
-  || executablePaths.has(p.path) || masked.has(p.path) || treeRoute(reader,p.path) === p.tree);
+  || executablePaths.has(p.path) || masked.has(p.path) || reader.treeRoute(p.path) === p.tree);
 const currentMaskedRoutes = (reader,routes,masked) => routes.map(p => masked.has(p.path)
-  ? {...p,tree:treeRoute(reader,p.path)} : p);
+  ? {...p,tree:reader.treeRoute(p.path)} : p);
 // Older route censuses excluded .mjs/.py but also retained executable .js.
 // Keep the complete archived census. Identify code by its authenticated executed
 // role and whole bytes, never by an extension, changed-file list or new hashes.
@@ -174,10 +174,6 @@ function rootCatalogue(session, reader, {accepted = false} = {}) {
   demand(new Set(catalogue.checkpoints.map(p => p.id)).size === catalogue.checkpoints.length,
     'Duplicate accepted checkpoint identity');
   return {catalogue, trusted, archiveReader:executing};
-}
-function treeRoute(reader, name, version = reader.version) {
-  demand(safe(name), 'Unsafe checkpoint route');
-  return reader.git('ls-tree','-z',version,'--',name).toString();
 }
 function readSelection(session, reader) {
   const selection = readNamed(session, reader, 'data/ownership-selection.json');
@@ -706,7 +702,7 @@ export function checkpointRouteCensus({transition}) {
   // routes. Preserve those current bindings if a new authority now reads them.
   const old=new Map(after.routes.map(p=>[p.path,p.tree]));
   const routes=names.map(name=>({path:name,tree:old.has(name) && name!==PROGRAMME_POLICY
-    ? old.get(name) : treeRoute(reader,name)}));
+    ? old.get(name) : reader.treeRoute(name)}));
   demand(routes.every(validRoute), 'Unsupported scientific route entry');
   const result=freeze({version:1,kind:'selected-checkpoint-scientific-routes-v1',candidate_commit:reader.version,
     candidate_selection:genuine.candidate.selection,predecessor_paths:[...predecessor].sort(),routes});
@@ -780,7 +776,7 @@ function nativeContext(proof) {
 function nativeAsset(proof, pin, context) {
   const {session,reader} = proof, state = proof.state;
   const name = path.posix.join(path.posix.dirname(state.selection.manifest_path),pin.path);
-  const ordinary = treeRoute(reader,name).length > 0;
+  const ordinary = reader.treeRoute(name).length > 0;
 
   const encoded = ordinary ? reader.read(name,{expected:pin.sha256,decoded:pin.decoded_bytes}) : context.image.logical(name,pin);
   demand(encoded.length === pin.bytes && sha(encoded) === pin.sha256, 'Whole native encoded body differs');
@@ -899,7 +895,7 @@ function expectedNativeAcquisition(proof, neededRows) {
   const inputs=[...pins.values()].map(asset => {
     const name=path.posix.join(path.posix.dirname(state.selection.manifest_path),asset.path);
     let custody;
-    if (treeRoute(reader,name)) {
+    if (reader.treeRoute(name)) {
       const p=reader.descriptor(name);
       custody={kind:'ordinary-native-body',pin:{path:p.path,mode:p.mode,git_blob_oid:p.git_blob_oid,bytes:p.bytes,sha256:asset.sha256}};
     } else {

@@ -136,6 +136,7 @@ test('consumer reduction binds actual current head and trusted assembly receipt 
     origin:{run_id:17}}};
   fs.mkdirSync(path.join(root,'.cache'));const file=path.join(root,'.cache/package-input-build.json');
   const write=value=>{const raw=JSON.stringify(value);fs.writeFileSync(file,raw);return sha(raw);};
+  receipt.diagnostics='x'.repeat(9*1024*1024);
   const expected=write(receipt),admission=requireCurrentPackageAssembly({directory:root,expected});
   assert.equal(admission.origin.run_id,17);
   assert.equal(Object.hasOwn(admission,'base_tests_reused'),false,'Assembly identity must not manufacture original test coverage');
@@ -143,6 +144,9 @@ test('consumer reduction binds actual current head and trusted assembly receipt 
   fs.appendFileSync(file,' ');assert.throws(()=>requireCurrentPackageAssembly({directory:root,expected}),/digest differs/);
   receipt.assembly.current_execution.source_commit='f'.repeat(40);
   assert.throws(()=>requireCurrentPackageAssembly({directory:root,expected:write(receipt)}),/same-head/);
+  receipt.assembly.current_execution.source_commit=head;const original=write(receipt);
+  fs.renameSync(file,file+'.original');fs.symlinkSync(file+'.original',file);
+  assert.throws(()=>requireCurrentPackageAssembly({directory:root,expected:original}),/Ordinary assembly receipt/);
 });
 
 test('current assembly admits its Node runtime without scientific requirements or GIS imports',t=>{
