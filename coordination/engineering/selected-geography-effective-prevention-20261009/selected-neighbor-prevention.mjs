@@ -469,10 +469,11 @@ function authorityRegistry(registry) {
  demand(registry?.version===1&&registry.kind==='retained-rule-authority-registry-v1'&&Array.isArray(registry.entries)&&registry.entries.length>0,'Missing explicit retained authority registry');
  const byId=new Map();let previous='';
  for(const entry of registry.entries){
-  demand(entry&&Object.keys(entry).sort().join(',')==='authority_sha256,policy_id,policy_version,rule_preimage,rule_sha256,source_authority'&&hash(entry.authority_sha256)&&entry.authority_sha256>previous&&hash(entry.rule_sha256)&&typeof entry.policy_id==='string'&&entry.policy_id&&Number.isSafeInteger(entry.policy_version)&&entry.policy_version>0,'Foreign/duplicate/unordered authority entry');
+  demand(entry&&['authority_sha256,policy_id,policy_version,rule_preimage,rule_sha256,source_authority','authority_sha256,completed_constructor,policy_id,policy_version,rule_preimage,rule_sha256,source_authority'].includes(Object.keys(entry).sort().join(','))&&hash(entry.authority_sha256)&&entry.authority_sha256>previous&&hash(entry.rule_sha256)&&typeof entry.policy_id==='string'&&entry.policy_id&&Number.isSafeInteger(entry.policy_version)&&entry.policy_version>0,'Foreign/duplicate/unordered authority entry');
   pinCheck(entry.rule_preimage);pinCheck(entry.source_authority);
+  if(entry.completed_constructor!==undefined)pinCheck(entry.completed_constructor);
   demand(entry.rule_preimage.sha256===entry.rule_sha256,'Original full rule preimage differs');
-  const {authority_sha256,...preimage}=entry;demand(valueSha(preimage)===authority_sha256,'Whole authority entry changed');
+  const {authority_sha256,completed_constructor,...preimage}=entry;demand(valueSha(preimage)===authority_sha256,'Whole authority entry changed');
   byId.set(authority_sha256,entry);previous=authority_sha256;
  }
  return byId;
@@ -574,7 +575,7 @@ function reconstructionResidualPointsets(result, dated = false) {
 // Source-target evidence uses the same retained registry and literal native
 // patch route. It has no invented original-gap inventory or addition polygon.
 // Explicit OSM snapshot format adapter. The adopted body must already be in the
-// executing trusted tree; evidence supplied by a candidate cannot create it.
+// exact reviewed candidate; a copied or mismatched adoption cannot replace it.
 // All scientific review facts retain their own original, unchanged vintages.
 function readAdoptedOsmRevision({evidence,proposed,owners,latitudes,read,readAdopted,reader,physicalInputs,keys}) {
  const data=readAdopted(evidence.revised_source_adoption,'Revised source adoption');
@@ -741,6 +742,16 @@ function readAdoptedOsmRevision({evidence,proposed,owners,latitudes,read,readAdo
    return {id:member.target_id,pixelIndex:member.pixelIndex,feature:member.feature};}};
 }
 
+function readSourceTargetBody(reader,p) {
+  pinCheck(p);let version=p.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
+  const d=reader.descriptor(p.path,version);
+  demand(d.mode===p.mode&&d.git_blob_oid===p.git_blob_oid&&d.bytes===p.bytes,'Source-target whole identity differs');
+  const raw=reader.read(p.path,{version,expected:p.sha256});
+  if(p.decoded_bytes===undefined)return raw;
+  const decoded=gunzipSync(raw,{maxOutputLength:p.decoded_bytes});
+  demand(decoded.length===p.decoded_bytes&&sha(decoded)===p.decoded_sha256,'Source-target decoded body differs');return decoded;
+}
+
 export function qualifySourceTargetNativeAuthority(reader, preimage, binding, {snapshot}={}) {
  return evaluateSourceTargetNativeAuthority(reader, preimage, binding, false, snapshot);
 }
@@ -758,15 +769,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   &&Object.keys(binding).sort().join(',')==='kind,native_patch,source_evidence,version'
   &&same(preimage.source_evidence,binding.source_evidence)&&same(preimage.native_patch,binding.native_patch),
  'Source-target authority inputs differ');
- const read=p=>{
-  pinCheck(p);let version=p.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
-  const d=reader.descriptor(p.path,version);
-  demand(d.mode===p.mode&&d.git_blob_oid===p.git_blob_oid&&d.bytes===p.bytes,'Source-target whole identity differs');
-  const raw=reader.read(p.path,{version,expected:p.sha256});
-  if(p.decoded_bytes===undefined)return raw;
-  const decoded=gunzipSync(raw,{maxOutputLength:p.decoded_bytes});
-  demand(decoded.length===p.decoded_bytes&&sha(decoded)===p.decoded_sha256,'Source-target decoded body differs');return decoded;
- };
+ const read=p=>readSourceTargetBody(reader,p);
  const evidence=JSON.parse(read(binding.source_evidence)), proposed=JSON.parse(read(binding.native_patch));
  const dated = evidence?.version===2&&evidence.kind==='source-target-native-evidence-v2';
  const revised = evidence?.version===3&&evidence.kind==='source-target-native-evidence-v3';
@@ -884,7 +887,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   }
   return value;
  };
- // New provider applicability is an explicit accepted-tree decision, never an
+ // New provider applicability is an explicit reviewed adoption decision, never an
  // extension of the frozen original catalogue or an authored owner guess.
  // The complete product is also an existing family-part read role, so this
  // closed document introduces no hidden recursive scientific operands.
@@ -1479,6 +1482,79 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
    'Witness exclusion applies only to requested native centres. Original whole-source physical/hierarchy issues and historical source/resource limits remain retained; no whole-parent certification or acceptance is inferred.']};
 }
 
+export function mergeCompletedNativePatches(patches, size) {
+  const byRow = new Map();
+  for (const patch of patches) {
+    demand(Array.isArray(patch.rows), 'Complete native intervals required'); let previous = -1;
+    for (const row of patch.rows) {
+      demand(Number.isSafeInteger(row.y) && row.y > previous && row.y < size && Array.isArray(row.runs) && row.runs.length,
+        'Invalid complete native row'); previous = row.y; let end = 0;
+      for (const run of row.runs) {
+        demand(Array.isArray(run) && run.length === 3 && run.every(Number.isSafeInteger) && run[0] >= end
+          && run[1] > run[0] && run[1] <= size && run[2] > 0, 'Invalid complete native interval'); end = run[1];
+      }
+      const runs = byRow.get(row.y) ?? []; runs.push(...row.runs.map(run => [...run])); byRow.set(row.y, runs);
+    }
+  }
+  return [...byRow].sort((a, b) => a[0] - b[0]).map(([y, runs]) => {
+    runs.sort((a, b) => a[0] - b[0]); const merged = [];
+    for (const run of runs) {
+      const last = merged.at(-1); demand(!last || run[0] >= last[1], 'Modern cells overlap the accepted cumulative patch or another original authority');
+      if (last && last[1] === run[0] && last[2] === run[2]) last[1] = run[1]; else merged.push(run);
+    }
+    return {y, runs: merged};
+  });
+}
+
+// Reuse a reviewed completed qualification. These are the same metadata,
+// source/row joins and interval checks used by composition; no predicate replay
+// or new runtime attestation is claimed. Current owner-zero remains separate.
+export function verifyCompletedSourceTargetNativeAuthority({constructed,binding,preimage,evidence,candidate}) {
+ demand(binding?.version===1 && binding.kind==='source-target-native-custody-v1'
+  && same(Object.keys(binding).sort(), ['kind','native_patch','source_evidence','version'])
+  && same(preimage,{...binding,kind:'source-target-native-rule-v1'})
+  && constructed?.version===1 && constructed.kind==='existing-source-target-native-constructor-result'
+  && ['source_evidence','native_patch'].every(role=>constructed.inputs?.[role]?.commit===binding[role]?.commit
+   && constructed.inputs[role].path===binding[role].path)
+  && same(Object.keys(constructed.inputs??{}).sort(),['native_patch','source_evidence'])
+  && constructed.rule_sha256===valueSha(preimage)
+  && Array.isArray(constructed.component_ids) && constructed.component_ids.length>0
+  && new Set(constructed.component_ids).size===constructed.component_ids.length
+  && same(constructed.component_ids,constructed.ledger_rows?.map(row=>row.component_id)),
+ 'Committed modern constructor scope/rule/patch differs');
+ demand(Array.isArray(evidence.targets)&&evidence.targets.length>0
+  && new Set(evidence.targets.map(target=>target.id)).size===evidence.targets.length,
+ 'Complete original source-target roster required');
+ const targets=new Map();
+ for(const target of evidence.targets){
+  const id=target.target_id??target.id,prior=targets.get(id);
+  demand(target.source_receipt_sha256===evidence.physical_evidence?.sha256
+   &&(!prior||prior.pixelIndex===target.pixelIndex&&prior.source_family===target.source_family
+    &&same(prior.base_geometry,target.base_geometry)),'Conflicting original source target/family/receipt');
+  targets.set(id,target);
+ }
+ for(const row of constructed.ledger_rows){
+  demand(row.representation==='native-cells'
+   &&row.component_id==='source-target:'+valueSha({target_id:row.target_id,evidence:binding.source_evidence.sha256})
+   &&!Object.hasOwn(row,'authority_sha256')&&!Object.hasOwn(row,'rule_sha256'),'Foreign or duplicate modern component');
+  const target=targets.get(row.target_id);
+  demand(target?.pixelIndex===row.pixelIndex&&same(target.base_geometry,row.base_geometry)
+   &&target.source_receipt_sha256===evidence.physical_evidence?.sha256
+   &&row.source_receipt_sha256===target.source_receipt_sha256,'Modern row changes the original source target/owner/receipt');
+ }
+ demand(constructed.ledger_rows.length===targets.size,'Modern constructor omits an original source target');
+ const size=evidence.native_contract.size;
+ demand(same(mergeCompletedNativePatches([candidate],size),
+  mergeCompletedNativePatches(constructed.ledger_rows.map(row=>({rows:row.native_rows})),size)),
+ 'Modern ledger intervals differ from original patch');
+ return {source_scope_ids:constructed.component_ids,
+  original_ledger:{version:2,kind:'native-additive-repair-ledger-v2',scope_ids:constructed.component_ids,rows:constructed.ledger_rows},
+  source_rows:constructed.ledger_rows,
+  native_proof:{native_contract:evidence.native_contract,native_patches:[{base_reference:evidence.base_reference,rows:candidate.rows}]},
+  original_pins:{source_evidence:binding.source_evidence,native_patch:binding.native_patch},
+  limitations:constructed.limitations};
+}
+
 // One detached authority acquisition. The returned view cannot authorize a
 // selected release: the committed hook must additionally authenticate the
 // qualified native publication, operating proof and actual current bank.
@@ -1511,10 +1587,16 @@ export function readRetainedRegistryAuthority(reader, entry, observationReader, 
  const [preimage,binding]=admitted.map(({p,version})=>JSON.parse(reader.read(p.path,{version,expected:p.sha256})));
  demand(valueSha(preimage)===entry.rule_sha256,'Complete original registry preimage differs');
  if(binding?.kind==='source-target-native-custody-v1'){
-  const proof=qualifySourceTargetNativeAuthority(reader,preimage,binding,{snapshot});
+  const whole=p=>JSON.parse(readSourceTargetBody(reader,p));
+  const proof=entry.completed_constructor===undefined
+   ?qualifySourceTargetNativeAuthority(reader,preimage,binding,{snapshot})
+   :verifyCompletedSourceTargetNativeAuthority({constructed:whole(entry.completed_constructor),preimage,binding,
+     evidence:whole(binding.source_evidence),candidate:whole(binding.native_patch)});
   return observed(freeze({...proof,version:1,kind:'authenticated-registry-source-custody-v1',authority_sha256:entry.authority_sha256,
-   rule_sha256:entry.rule_sha256,policy_id:entry.policy_id,policy_version:entry.policy_version,pins}));
+   rule_sha256:entry.rule_sha256,policy_id:entry.policy_id,policy_version:entry.policy_version,
+   pins:entry.completed_constructor===undefined?pins:[...pins,entry.completed_constructor]}));
  }
+ demand(entry.completed_constructor===undefined,'Completed constructor requires a modern source-target authority');
  demand(binding?.version===1&&binding.kind==='original-issued-rule-source-custody-v1'&&['kind,native_proof,original_pins,version','kind,native_proof,original_pins,source_output_aliases,version'].includes(Object.keys(binding).sort().join(',')),'Unsupported original authority binding');
  const custody=readOriginalRuleAuthority(reader,binding.original_pins,binding.source_output_aliases??[]);
  demand(same(preimage,custody.rule_preimage)&&custody.rule_sha256===entry.rule_sha256,'Registry relabelled original executed rule');
