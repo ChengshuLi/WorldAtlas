@@ -170,7 +170,8 @@ Allocation is serialized by an exclusive local directory lock. There is no fixed
 free-space floor or reservation system. `report` inventories measured usage for
 registered worktrees, including legacy paths and the primary checkout's Git store;
 `check` is a cheap free-space report, returning only `freeBytes`. Existing registry
-reservation fields are ignored without rewriting other workers' entries.
+reservation fields are ignored without rewriting other workers' entries. New
+entries retain an inert zero field so older clients can still read and release them.
 
 Use actual available space and the operation's expected downloads, dependencies,
 decompression and output growth when planning work. Keep bounded scratch inside

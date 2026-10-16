@@ -193,7 +193,7 @@ export function workspaceManager(repo, {freeBytes} = {}) {
     const {sparsePatterns, missing} = inputInventory(head, profile, include);
     if (missing.length) throw Error(`Unknown input size; selected blobs must be available locally. Run inspect --commit ${head} with this same profile/include scope to list missing paths/OIDs.`);
     const entry = {worker, slot, path: destination, token: randomUUID(), head, branch: branch ?? null,
-      profile, include, status: 'preparing', createdAt: new Date().toISOString()};
+      profile, include, reservation: 0, status: 'preparing', createdAt: new Date().toISOString()};
     value.entries.push(entry);
     save(value); // Preserve interrupted attempts for inspection, even if Git fails below.
     fs.mkdirSync(path.dirname(destination), {recursive: true});
