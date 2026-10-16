@@ -18,7 +18,7 @@ const options={ownership:packOwnership(compileOwnership(createGridIndex(features
 const layer=new (location.search.includes('canvas')?PixelCanvasLayer:PixelLayer)(features,options).addTo(map);
 window.fixture={map,layer,L,options,setColor:value=>color=value};
 </script>`;
-const server=await createServer({cacheDir:'.cache/coverage-vite',server:{host:'127.0.0.1',port:0},plugins:[{name:'coverage-fixture',configureServer(server){server.middlewares.use('/fixture',(_req,res)=>{res.setHeader('Content-Type','text/html');res.end(html);});}}]});
+const server=await createServer({cacheDir:'.cache/coverage-vite',server:{watch:null,host:'127.0.0.1',port:0},plugins:[{name:'coverage-fixture',configureServer(server){server.middlewares.use('/fixture',(_req,res)=>{res.setHeader('Content-Type','text/html');res.end(html);});}}]});
 await server.listen();const port=server.httpServer.address().port,browser=await chromium.launch(process.env.ATLAS_TEST_CHROMIUM?{executablePath:process.env.ATLAS_TEST_CHROMIUM}:{});
 try{
  for(const renderer of ['gpu','canvas'])for(const unknown of [false,true]){
