@@ -589,8 +589,10 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     const sourceAuthorities = [];
     const roleEntries = [...registry.entries].sort((a, b) => Number(added.has(b.source_authority?.path)) - Number(added.has(a.source_authority?.path)));
     for (const entry of roleEntries) {
-      needSelected(keys(entry, ['authority_sha256','policy_id','policy_version','rule_preimage','rule_sha256','source_authority']), 'foreign registry fields');
+      needSelected(keys(entry, ['authority_sha256','policy_id','policy_version','rule_preimage','rule_sha256','source_authority',
+        ...(entry.completed_constructor === undefined ? [] : ['completed_constructor'])]), 'foreign registry fields');
       pin(entry.rule_preimage); pin(entry.source_authority);
+      if (entry.completed_constructor !== undefined) pin(entry.completed_constructor);
       const retained = !added.has(entry.source_authority.path);
       if (retained && ![...added].some(name => nativeOperandPath(name, branch, reservation) && !nativeOperands.has(name))) continue;
       const authority = await pinnedJSON(entry.source_authority);

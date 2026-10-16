@@ -304,9 +304,9 @@ for(const [name,change]of Object.entries({
  assert.throws(()=>constructorFixture(providerSetup,{changeAdoption:d=>change(d.families[0].bindings[0])}).run(),
   /adopted provider|Adopted provider|canonical target/i);
 });
-test('accepted provider decision cannot be coherently forged through the caller reader version',()=>{
+test('original provider pins cannot substitute a different adoption than the selected candidate',()=>{
  assert.throws(()=>constructorFixture(providerSetup,{forgeAdoption:d=>d.families[0].bindings[0].scope[0].x++}).run(),
-  /executing accepted input/);
+  /selected candidate input/);
 });
 test('complete provider member count, product read role and source identity are mandatory',()=>{
  for(const mutate of [
