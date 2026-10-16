@@ -582,6 +582,25 @@ class UnchangedSelectedApplicabilityControls(unittest.TestCase):
             self.assertIsNone(g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate,
                                                        code_commit=self.candidate))
 
+    def test_changed_selected_inputs_retain_the_existing_native_validation_route(self):
+        g = self.g
+        native = {'method': 'selected-native-owner-conservation-v1', 'status': 'no-new-native-loss',
+                  'candidate_code_executed': False, 'lost_or_reassigned_cells': 0, 'intervals': []}
+        with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='fixture'), \
+             self.mock.patch.object(g, 'inventory', return_value=['same raw world']), \
+             self.mock.patch.object(g, 'unchanged_selected_inputs', return_value=None), \
+             self.mock.patch.object(g, 'git', return_value=b'selected'), \
+             self.mock.patch.object(g, 'selected_joint', side_effect=AssertionError('software checkpoint reuse')), \
+             self.mock.patch.object(g, 'prefetch_declared_inputs') as prefetch, \
+             self.mock.patch.object(g.subprocess, 'check_output', return_value=json.dumps(native).encode()) as checker:
+            result = g.inspect(ROOT, self.baseline, self.candidate, code_commit=self.candidate, prefetch=True)
+        prefetch.assert_called_once_with(ROOT, self.baseline, self.candidate)
+        self.assertIn('scripts/check-effective-geographic-regression.mjs', checker.call_args.args[0][1])
+        self.assertEqual(checker.call_args.args[0][2:5], [str(ROOT), self.baseline, self.candidate])
+        self.assertEqual(result['selected_native_report'], native)
+        self.assertEqual(result['status'], 'no-new-native-loss')
+        self.assertNotIn('unchanged_selected_inputs', result)
+
     def test_changed_raw_inputs_never_consult_selected_shortcut(self):
         g = self.g
         with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='fixture'), \

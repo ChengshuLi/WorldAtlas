@@ -1,5 +1,5 @@
 // Transport only for the explicit locator bodies requested by the applicability
-// collector. Scientific leaf descriptors never reach this acquisition boundary.
+// collector. Historical producer graphs and scientific leaves are never acquired.
 import {execFileSync} from 'node:child_process';
 import path from 'node:path';
 import {createAcquisition, githubTree} from './geography-prefetch.mjs';
@@ -19,10 +19,7 @@ export function createRoutingMetadataAcquisition({repo, baseline, execute = exec
     catch { throw Error('routing-metadata-tree-unavailable'); }
   };
   const trees = new Map(), planned = new Map(); let index;
-  const stats = {tree_metadata_bytes: 0, tree_metadata_requests: 0, discovery_batches: 0,
-    strict_origin_commits: [], strict_origin_fetch_batches: 0, strict_origin_fetch_ms: 0,
-    graph_metadata_imported_objects: 0, graph_metadata_imported_bytes: 0, unexpected_graph_blob_imports: 0,
-    partial_import_possible: false};
+  const stats = {tree_metadata_bytes: 0, tree_metadata_requests: 0, discovery_batches: 0};
   function tree(root, recursive) {
     demand(oid(root), 'routing-metadata-invalid-tree');
     const key = root + ':' + recursive;
@@ -72,17 +69,6 @@ export function createRoutingMetadataAcquisition({repo, baseline, execute = exec
     planned.set(match[2], size);
     return {path: name, type: 'blob', mode: match[1], sha: match[2], size};
   }
-  function objectInventory() {
-    const result = {metadataObjects: 0, metadataBytes: 0, blobs: 0, blobBytes: 0};
-    for (const line of git(['cat-file', '--batch-all-objects', '--unordered', '--batch-check=%(objecttype) %(objectsize)']).split('\n')) {
-      const match = line.match(/^(blob|tree|commit|tag) (\d+)$/);
-      demand(match, 'routing-graph-inventory-unavailable');
-      const bytes = Number(match[2]); demand(Number.isSafeInteger(bytes), 'routing-graph-inventory-size');
-      if (match[1] === 'blob') { result.blobs++; result.blobBytes += bytes; }
-      else { result.metadataObjects++; result.metadataBytes += bytes; }
-    }
-    return result;
-  }
   const acquisition = createAcquisition({repo, loadDescriptor: descriptor, execute, token,
     limits: {member: limits.member, total: limits.metadata, entries: limits.entries}});
   let pending = [], scheduled = false;
@@ -102,33 +88,6 @@ export function createRoutingMetadataAcquisition({repo, baseline, execute = exec
       pending.push({pin, expected, resolve, reject});
       if (!scheduled) { scheduled = true; setImmediate(flush); }
     }); },
-    acquireOrigins(commits) {
-      demand(commits.length > 0 && commits.every(oid) && new Set(commits).size === commits.length
-        && stats.strict_origin_commits.length + commits.length <= 64 && stats.strict_origin_fetch_batches < 8,
-        'routing-strict-origin-limit');
-      const fetchEnv = {...env, GIT_CONFIG_COUNT: token ? '1' : '0'};
-      if (token) Object.assign(fetchEnv, {GIT_CONFIG_KEY_0: 'http.https://github.com/.extraheader',
-        GIT_CONFIG_VALUE_0: 'AUTHORIZATION: basic ' + Buffer.from('x-access-token:' + token).toString('base64')});
-      const before = objectInventory(), started = performance.now();
-      // Only exact strict roots, no refs/tags, no checkout, no shallow-boundary
-      // rewrite, and no scientific blob objects. Fallback origins are not asks.
-      stats.strict_origin_commits.push(...commits); stats.strict_origin_fetch_batches++;
-      try { execute('git', ['--no-replace-objects', '-c', 'core.hooksPath=/dev/null', '-c', 'credential.helper=', '-C', repo,
-        '-c', 'fetch.negotiationAlgorithm=noop', 'fetch', '--no-tags', '--no-write-fetch-head', '--no-recurse-submodules',
-        '--no-auto-maintenance', '--filter=blob:none', '--stdin', 'https://github.com/ChengshuLi/WorldAtlas.git'],
-        {env: fetchEnv, input: commits.join('\n') + '\n', maxBuffer: 1024 * 1024, timeout: 60000, stdio: ['pipe', 'pipe', 'pipe']}); }
-      catch { stats.partial_import_possible = true; throw Error('routing-strict-origin-acquisition-failed'); }
-      const after = objectInventory();
-      stats.graph_metadata_imported_objects += Math.max(0, after.metadataObjects - before.metadataObjects);
-      stats.graph_metadata_imported_bytes += Math.max(0, after.metadataBytes - before.metadataBytes);
-      // Record actual deduplicated Git metadata growth, never packed duplicate
-      // counts. This is a post-import guard, not a claimed prospective byte cap.
-      stats.unexpected_graph_blob_imports += Math.max(0, after.blobs - before.blobs);
-      demand(after.blobs === before.blobs && after.blobBytes === before.blobBytes, 'routing-strict-fetch-imported-blobs');
-      demand(stats.graph_metadata_imported_objects <= (limits.graphObjects ?? 8192) && stats.graph_metadata_imported_bytes <= (limits.graphBytes ?? TOTAL),
-        'routing-strict-graph-growth-limit');
-      stats.strict_origin_fetch_ms += Math.round(performance.now() - started);
-    },
-    summary() { return {...acquisition.stats, ...stats, scope: 'explicit-routing-metadata-only', scientific_leaf_imports: stats.unexpected_graph_blob_imports || stats.partial_import_possible ? null : 0}; }
+    summary() { return {...acquisition.stats, ...stats, scope: 'explicit-routing-metadata-only', scientific_leaf_imports: 0}; }
   };
 }
