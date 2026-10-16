@@ -126,7 +126,9 @@ export class ImmutableReader {
     // Chunk transport requests, not the admitted scope. No aggregate input cap.
     for(let offset=0;offset<versions.length;offset+=256){
       const group=versions.slice(offset,offset+256),input=group.map(v=>v+'^{commit}').join('\n')+'\n';
-      const output=this.gitBatch(['cat-file','--batch-check=%(objectname) %(objecttype) %(objectsize)'],input,group.length*128);
+      // Availability is local; a missing original uses only a fully bound current alias.
+      // Do not let a promisor fetch failure corrupt this optional metadata probe.
+      const output=this.gitBatch(['--no-lazy-fetch','cat-file','--batch-check=%(objectname) %(objecttype) %(objectsize)'],input,group.length*128);
       const rows=output.toString().split('\n');
       demand(rows.pop()===''&&rows.length===group.length,'Incomplete immutable commit batch');
       rows.forEach((row,i)=>{
