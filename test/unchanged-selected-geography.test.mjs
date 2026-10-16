@@ -23,7 +23,7 @@ const sha = value => createHash('sha256').update(body(value)).digest('hex');
 // These intentionally tiny opaque leaf bodies test immutable routing/equality,
 // not scientific validity. Historical collector replay is compared separately
 // with retained original full-reader logs; these leaf sentinels are not decoded.
-function fixture({missingOrigin = false, splitBaseline = false, rebind = true, missingStrictOrigin = false, checkpoint = false, sourceTarget = false, membership = false, dated = false, unknownSourceField = false, unknownSourceVersion = false, malformedDatedVersion = false, rebindCode = LEGACY_CURRENT_REBIND_CODE, historicalMetadataAbsent = false, consumedRole} = {}) {
+function fixture({missingOrigin = false, splitBaseline = false, rebind = true, missingStrictOrigin = false, checkpoint = false, sourceTarget = false, membership = false, dated = false, revised = false, unknownSourceField = false, unknownSourceVersion = false, malformedDatedVersion = false, rebindCode = LEGACY_CURRENT_REBIND_CODE, historicalMetadataAbsent = false, consumedRole} = {}) {
   const cache = path.join(ROOT, '.cache/unchanged-selected-fixtures');
   fs.mkdirSync(cache, {recursive: true});
   const directory = fs.mkdtempSync(path.join(cache, 'case-'));
@@ -62,6 +62,8 @@ function fixture({missingOrigin = false, splitBaseline = false, rebind = true, m
   put('data/world-index.json', world);
   for (const name of ['data/geography/source.json', 'data/canonical-grid/bounds.json.gz', 'data/hierarchy.json', 'data/canonical-grid/manifest.json', 'data/geographic-releases/index.json', 'data/geographic-releases/current.json.gz']) put(name, 'opaque complete scientific leaf');
   for (const name of ['handoff', 'receipt', 'source-publication', 'source-inventory', 'source-operating', 'native-publication', 'native-inventory', 'native-operating', 'native-asset', 'source-facts', 'native-facts', 'original-ledger', 'original-manifest', 'rule', 'predecessor', 'code-source', 'terminal', 'stderr', 'stdout', 'source-catalogue', 'physical-input', 'physical-reproduction', 'physical-evidence', 'latitudes', 'source-part', 'membership-lineage', 'membership-index', 'membership-part', 'dated-adoption', 'dated-review', 'dated-observation', 'dated-frame']) put(P + name + '.json', {leaf: name});
+  const revisedRoles = ['raw_source', 'source_stage', 'assessment', 'scope', 'parent_decision', 'attribution'];
+  for (const role of revisedRoles) put(P + 'revised-' + role + '.json', {opaque_scientific_leaf: role});
   if (checkpoint) put(P + 'checkpoint-routed', 'opaque checkpoint routed');
   put(P + 'original-source-map.json', {kind: 'complete-world-index-with-exact-encoded-overrides'});
   put('data/ownership-selection.json', {selected_geography: {kind: 'complete-world-index-with-exact-encoded-overrides', path: P + 'original-source-map.json'}});
@@ -110,12 +112,23 @@ function fixture({missingOrigin = false, splitBaseline = false, rebind = true, m
       const support = commit(files, requests);
       evidence.dated_land_support = pin(P + 'dated-support.json', support);
     }
+    if (revised) {
+      const fineName = P + 'revised-fine.json';
+      put(fineName, {input_pins: [historical('data/world-index.json')]});
+      const fineCommit = commit(files, requests);
+      put(P + 'revised-adoption.json', {version: 1, kind: 'adopted-osm-revised-source-native-v1',
+        ...Object.fromEntries(revisedRoles.map(role => [role, historical(P + 'revised-' + role + '.json')])),
+        current_geography: pin(fineName, fineCommit)});
+      const adoptionCommit = commit(files, fineCommit);
+      Object.assign(evidence, {version: 3, kind: 'source-target-native-evidence-v3',
+        revised_source_adoption: pin(P + 'revised-adoption.json', adoptionCommit)});
+    }
     if (consumedRole) evidence[consumedRole] = historical(P + 'source-part.json');
     if (unknownSourceField) {
       evidence.descriptive_metadata = {not_consumed_by_current_reader: true};
       evidence.families[0].description = 'Metadata ignored by the current scientific reader';
     }
-    if (unknownSourceVersion) { evidence.version = 3; evidence.kind = 'source-target-native-evidence-v3'; }
+    if (unknownSourceVersion) { evidence.version = 4; evidence.kind = 'source-target-native-evidence-v4'; }
     if (malformedDatedVersion) { evidence.version = 1; evidence.kind = 'source-target-native-evidence-v1'; evidence.dated_land_support = historical(P + 'source-part.json'); }
     put(P + 'source-target-evidence.json', evidence);
     const sourceEvidence = commit(files, requests);
@@ -226,6 +239,20 @@ test('current source-target authority keeps every nested leaf and current fallba
     assert(absent.current_and_absent_alternatives.some(p => p.path === target && p.absent));
     const added = f.commit({...baselineFiles, [target]: f.files[target]}, baseline);
     assert.equal((await f.inspect(added, baseline)).reason, 'changed-current-input:' + target);
+  } finally { f.close(); }
+});
+
+test('v3 unchanged-source collector binds every adopted OSM role and current index', async () => {
+  const f = fixture({sourceTarget: true, revised: true});
+  try {
+    const result = await f.inspect();
+    assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+    for (const name of ['raw_source', 'source_stage', 'assessment', 'scope', 'parent_decision', 'attribution', 'fine', 'adoption']) {
+      const target = P + 'revised-' + name + '.json';
+      assert.ok(result.current_and_absent_alternatives.some(row => row.path === target), target);
+      const changed = f.commit({...f.candidateFiles, [target]: body('changed actual revised-source role')}, f.baseline);
+      assert.equal((await f.inspect(changed)).reason, 'changed-current-input:' + target);
+    }
   } finally { f.close(); }
 });
 

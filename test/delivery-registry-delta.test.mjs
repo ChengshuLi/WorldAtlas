@@ -6,7 +6,7 @@ import {jsonBytes, digest, finalizeDelivery, packageProjection} from '../scripts
 // Small immutable metadata only. No authority qualification, native scans or GIS.
 const BASE = '1'.repeat(40), SOURCE = '2'.repeat(40), NEXT = '3'.repeat(40);
 const OWNED = 'coordination/engineering/joint-delta/';
-function fixture({count = 7, generated = true, cumulative = true, producerVintages = false, mixedProducer = false, corruptProducer = false} = {}) {
+function fixture({count = 7, generated = true, cumulative = true, producerVintages = false, mixedProducer = false, corruptProducer = false, revised = false, omitRevisedIndex = false} = {}) {
   const records = new Map(), reads = [];
   const reader = {
     add(name, value, commit = NEXT) {
@@ -29,6 +29,13 @@ function fixture({count = 7, generated = true, cumulative = true, producerVintag
   for (const role of ['catalogue', 'physical_input', 'physical_reproduction', 'physical_evidence', 'native_latitudes', 'owner_roster'])
     common[role] = reader.add('coordination/engineering/original-common/' + role + '.json', {retained: role}, BASE);
   const family = reader.add('coordination/engineering/original-common/family.json', {type: 'FeatureCollection', features: []}, BASE);
+  const revisionRoles = revised ? Object.fromEntries(['raw_source', 'source_stage', 'assessment', 'scope', 'parent_decision', 'attribution']
+    .map(role => [role, reader.add('coordination/engineering/original-common/revised-' + role + '.json', {retained: role}, BASE)])) : null;
+  const revisionIndex = revised ? reader.add('data/world-index.json', {parts: ['geography/original.json']}, BASE) : null;
+  if (revised) revisionRoles.current_geography = reader.add('coordination/engineering/original-common/revised-fine.json',
+    {input_pins: omitRevisedIndex ? [] : [revisionIndex]}, BASE);
+  const revision = revised ? reader.add('coordination/engineering/original-common/revised-adoption.json',
+    {version: 1, kind: 'adopted-osm-revised-source-native-v1', ...revisionRoles}, BASE) : null;
   const originals = [], restorations = [];
   const liveProducer = producerVintages ? reader.add('scripts/qualify-source-cohort.py', Buffer.from('# current accepted helper\n'), BASE) : null;
   const producers = [];
@@ -38,7 +45,8 @@ function fixture({count = 7, generated = true, cumulative = true, producerVintag
     if (historical) producers.push(historical);
     const originalRoles = historical ? {...common, physical_reproduction: corruptProducer ? {...historical, sha256: 'f'.repeat(64)} : historical,
       ...(mixedProducer ? {physical_input: historical} : {})} : common;
-    const evidence = reader.add(stem + 'source-evidence.json', {version: 1, kind: 'source-target-native-evidence-v1',
+    const evidence = reader.add(stem + 'source-evidence.json', {version: revised ? 3 : 1, kind: 'source-target-native-evidence-v' + (revised ? 3 : 1),
+      ...(revised ? {revised_source_adoption: revision} : {}),
       ...originalRoles, targets: [{id: 'original:' + ordinal}], families: [{source_id: 'original', parts: [family]}]}, commit);
     const native = reader.add(stem + 'native-patch.json', {rows: [{y: ordinal, runs: [[ordinal, ordinal + 1, 1]]}]}, commit);
     const binding = {version: 1, kind: 'source-target-native-custody-v1', source_evidence: evidence, native_patch: native};
@@ -107,8 +115,17 @@ function fixture({count = 7, generated = true, cumulative = true, producerVintag
       base_selection: base, authority_registry: config.registry, logical_asset_map: assets, runtime_envelope: config.runtime_envelope});
   };
   setRegistry([old.entry, ...additions.map(value => value.entry)]);
-  return {reader, config, old, additions, originals, priorRegistry, priorSidecar, accepted, setRegistry, reads, base, liveProducer, producers};
+  return {reader, config, old, additions, originals, priorRegistry, priorSidecar, accepted, setRegistry, reads, base, liveProducer, producers, revisionRoles, revisionIndex, revision};
 }
+
+test('v3 package projection retains every adopted revised-source body and the original current index', () => {
+  const f = fixture({count: 1, revised: true});
+  const roles = JSON.parse(packageProjection(f.config, f.reader, f.accepted)['package-roles.json']);
+  for (const pin of [f.revision, f.revisionIndex, ...Object.values(f.revisionRoles)])
+    assert.ok(roles.paths.some(row => row.path === pin.path && row.sha256 === pin.sha256), pin.path);
+  const missing = fixture({count: 1, revised: true, omitRevisedIndex: true});
+  assert.throws(() => packageProjection(missing.config, missing.reader, missing.accepted), /Missing revised source current index/);
+});
 
 for (const generated of [true, false]) test('cumulative finalizer discovers seven original-prefix authorities, preserving original custody (' + generated + ')', () => {
   const f = fixture({generated}), before = f.originals.map(pin => Buffer.from(f.reader.read(pin)));

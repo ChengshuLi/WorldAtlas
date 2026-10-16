@@ -573,6 +573,174 @@ function reconstructionResidualPointsets(result, dated = false) {
 
 // Source-target evidence uses the same retained registry and literal native
 // patch route. It has no invented original-gap inventory or addition polygon.
+// Explicit OSM snapshot format adapter. The adopted body must already be in the
+// executing trusted tree; evidence supplied by a candidate cannot create it.
+// All scientific review facts retain their own original, unchanged vintages.
+function readAdoptedOsmRevision({evidence,proposed,owners,latitudes,read,readAdopted,reader,physicalInputs,keys}) {
+ const data=readAdopted(evidence.revised_source_adoption,'Revised source adoption');
+ const roles=['raw_source','source_stage','assessment','scope','parent_decision','current_geography','attribution'];
+ demand(keys(data,'version,kind,source_id,'+roles.join(',')+',members,records')&&data.version===1
+  &&data.kind==='adopted-osm-revised-source-native-v1'&&typeof data.source_id==='string'&&data.source_id
+  &&Array.isArray(data.members)&&data.members.length>0&&Array.isArray(data.records)&&data.records.length>0
+  &&evidence.families.length===1,'Incomplete adopted revised source');
+ const loaded=Object.fromEntries(roles.map(role=>[role,JSON.parse(read(data[role]))]));
+ const {raw_source:raw,source_stage:stage,assessment,scope,parent_decision:decision,current_geography:fine,attribution}=loaded;
+ demand(Array.isArray(stage)&&stage.length===data.members.length&&same(stage,physicalInputs)
+  &&Array.isArray(raw.elements)&&typeof raw.osm3s?.timestamp_osm_base==='string'
+  &&Array.isArray(assessment.source_assessments)&&Array.isArray(scope.records)
+  &&Array.isArray(scope.supported_source_choice_keys),'Missing whole revised-source operands');
+ const relative=(pin,name)=>pin.path.slice(0,pin.path.lastIndexOf('/')+1)+name;
+ for(const [field,pin]of [['exact_roster',data.scope],['distinct_scientific_assessment',data.assessment]]){
+  const declared=decision[field];demand(declared&&relative(data.parent_decision,declared.path)===pin.path
+   &&declared.sha256===pin.sha256&&declared.bytes===pin.bytes,'Parent source decision differs from exact reviewed body');
+ }
+ demand(decision.kind==='bounded-parent-display-source-choice-adoption-v1'
+  &&typeof decision.decision==='string'&&decision.decision.trim()&&decision.native_qualification===false
+  &&decision.accepted_map_cells===0&&decision.whole_original_scope===data.records.length
+  &&decision.adopted_display_source_choice_keys===scope.supported_source_choice_keys.length
+  &&decision.blocked_proposed_CHN_keys===data.records.length-scope.supported_source_choice_keys.length,
+ 'Missing bounded parent source-choice decision');
+ demand(attribution.provider==='OpenStreetMap contributors'&&attribution.license==='ODbL'
+  &&attribution.license_url==='https://opendatacommons.org/licenses/odbl/1-0/'
+  &&typeof attribution.notice==='string'&&attribution.notice.includes('OpenStreetMap contributors')
+  &&attribution.source_snapshot===raw.osm3s.timestamp_osm_base&&attribution.stage_sha256===data.source_stage.sha256,
+ 'Revised OSM attribution or snapshot differs');
+ const byKey=rows=>{
+  demand(Array.isArray(rows),'Missing original source key roster');const map=new Map();
+  for(const row of rows){const p=row.original_key;
+   const key=p&&p.owner+':'+p.y+':'+p.x;
+   demand(keys(p,'owner,y,x')&&Number.isSafeInteger(p.owner)&&p.owner>0&&Number.isSafeInteger(p.y)&&p.y>=0&&p.y<262166
+    &&Number.isSafeInteger(p.x)&&p.x>=0&&p.x<262166&&!map.has(key),
+   'Duplicate or invalid original revised-source key');map.set(key,row);
+  }return map;
+ };
+ const scopeRows=byKey(scope.records),records=byKey(data.records),fineRows=byKey(fine.records);
+ const supported=new Set(scope.supported_source_choice_keys.map(key=>key.owner+':'+key.y+':'+key.x));
+ demand(supported.size===scope.supported_source_choice_keys.length&&records.size===scopeRows.size
+  &&fineRows.size===records.size&&[...scopeRows.keys()].every(key=>records.has(key)&&fineRows.has(key))
+  &&[...supported].every(key=>scopeRows.has(key)),'Revised source scope or current-geography key roster differs');
+ demand(fine.kind==='bounded-complete-current-fine-geography-exact-native365-observation-v1'
+  &&fine.feature_inventory?.index_parts>0&&fine.feature_inventory.features===owners.size
+  &&fine.native_rule?.size===262166&&fine.native_rule.latitude_sha256===evidence.native_latitudes.decoded_sha256,
+ 'Missing complete current-geography observation');
+ const currentPins=fine.input_pins.filter(pin=>pin.path==='data/world-index.json'||pin.path.startsWith('data/geography/'));
+ const indexes=currentPins.filter(pin=>pin.path==='data/world-index.json');
+ demand(indexes.length===1,'Missing unique complete current index');
+ const index=JSON.parse(read(indexes[0])),expectedPaths=['data/world-index.json',...index.parts.map(name=>'data/'+name)];
+ demand(new Set(expectedPaths).size===expectedPaths.length&&currentPins.length===expectedPaths.length
+  &&expectedPaths.every(name=>currentPins.filter(pin=>pin.path===name).length===1)
+  &&fine.feature_inventory.index_parts===index.parts.length,'Incomplete current-geography operand closure');
+ for(const pin of currentPins){const actual=reader.descriptor(pin.path);
+  demand(actual.mode===pin.mode&&actual.git_blob_oid===pin.git_blob_oid&&actual.bytes===pin.bytes,
+   'Current geography changed after revised-source comparison');
+ }
+ const members=new Map(),relationIds=new Set();
+ const segments=points=>{const result=new Map();for(let i=1;i<points.length;i++){
+  const ends=[points[i-1],points[i]].sort((a,b)=>a[0]-b[0]||a[1]-b[1]);
+  demand(ends.every(p=>Array.isArray(p)&&p.length===2&&p.every(Number.isFinite)
+   &&Math.abs(p[0])<=180&&Math.abs(p[1])<=90),'Invalid literal revised-source segment');
+  const id=JSON.stringify(ends);result.set(id,(result.get(id)??0)+1);
+ }return result;};
+ const addSegments=(target,source)=>{for(const [key,count]of source)target.set(key,(target.get(key)??0)+count);};
+ for(const member of data.members){
+  demand(keys(member,'source_id,target_id,pixelIndex,relation_id,relation_version,relation_timestamp,snapshot_timestamp,geometry_sha256,base_geometry_sha256')
+   &&member.source_id==='osm:relation:'+member.relation_id&&!members.has(member.source_id)
+   &&Number.isSafeInteger(member.relation_id)&&member.relation_id>0&&!relationIds.has(member.relation_id)
+   &&Number.isSafeInteger(member.relation_version)&&member.relation_version>0
+   &&owners.get(member.target_id)===member.pixelIndex&&hash(member.geometry_sha256)&&hash(member.base_geometry_sha256),
+  'Invalid revised source stable crosswalk');
+  const inputs=stage.filter(row=>row.target===member.source_id),relations=raw.elements.filter(row=>row.type==='relation'&&row.id===member.relation_id);
+  const reviews=assessment.source_assessments.filter(row=>row.source_id===member.source_id);
+  demand(inputs.length===1&&relations.length===1&&reviews.length===1,'Missing or duplicate whole revised source member');
+  const input=inputs[0],relation=relations[0],review=reviews[0],provenance=input.consumed.properties?.source_provenance;
+  demand(relation.version===member.relation_version&&relation.timestamp===member.relation_timestamp
+   &&member.snapshot_timestamp===raw.osm3s.timestamp_osm_base&&input.consumed.id===member.source_id
+   &&valueSha(input.consumed.geometry)===member.geometry_sha256
+   &&input.selected.id===member.target_id&&valueSha(input.selected.geometry)===member.base_geometry_sha256
+   &&provenance?.raw_source_body?.sha256===data.raw_source.sha256
+   &&provenance.raw_source_body.bytes===data.raw_source.bytes
+   &&provenance.relation_version===member.relation_version&&provenance.relation_timestamp===member.relation_timestamp
+   &&provenance.source_snapshot===member.snapshot_timestamp&&provenance.old_atlas_identity===member.target_id
+   &&provenance.old_stable_owner===member.pixelIndex&&review.target_id===member.target_id
+   &&review.stable_owner===member.pixelIndex&&review.relation_version===member.relation_version
+   &&review.relation_edit_timestamp===member.relation_timestamp&&review.snapshot===member.snapshot_timestamp
+   &&review.literal_segments_equal_raw_multiset===true&&review.valid_geometry===true
+   &&review.source_identity_and_administrative_role_supported===true,
+  'Revised source raw version, geometry, physical query or substantive review differs');
+  const rawSegments=new Map(),stageSegments=new Map();
+  for(const part of relation.members){
+   if(['subarea','admin_centre','label'].includes(part.role))continue;
+   demand(['outer','inner',''].includes(part.role)&&part.type==='way'&&Array.isArray(part.geometry)&&part.geometry.length>=2,
+    'Missing or unsupported whole OSM boundary member');
+   addSegments(rawSegments,segments(part.geometry.map(p=>[p.lon,p.lat])));
+  }
+  for(const polygon of polygonParts(input.consumed.geometry))for(const ring of polygon)addSegments(stageSegments,segments(ring));
+  demand(rawSegments.size>0&&same([...rawSegments].sort(),[...stageSegments].sort()),'Literal revised-source boundary segments differ');
+  members.set(member.source_id,{...member,feature:input.selected});relationIds.add(member.relation_id);
+ }
+ demand(new Set(data.members.map(row=>row.pixelIndex)).size===members.size,'Ambiguous revised-source stable target');
+ for(const [key,record]of records){
+  demand(keys(record,'original_key,source_id,target_id,pixelIndex,adopted_display_choice')
+   &&typeof record.adopted_display_choice==='boolean','Malformed adopted revised-source key');
+  const original=scopeRows.get(key),current=fineRows.get(key),member=members.get(record.source_id);
+  demand(member&&record.target_id===member.target_id&&record.pixelIndex===member.pixelIndex
+   &&original.new_source_identity===record.source_id&&original.target_id===record.target_id&&original.target_owner===record.pixelIndex
+   &&record.adopted_display_choice===supported.has(key)
+   &&(original.source_choice_disposition==='supported_for_parent_display_source_choice')===record.adopted_display_choice
+   &&current.proposed_source_id===record.source_id&&current.target_id===record.target_id&&current.target_owner===record.pixelIndex
+   &&Array.isArray(current.current_fine_contacts)&&current.current_fine_contacts.length===0
+   &&Array.isArray(current.current_fine_boundary_ties)&&current.current_fine_boundary_ties.length===0,
+  'Revised source display choice or current competitor scope differs');
+ }
+ const adopted=new Map();
+ for(const record of records.values())if(record.adopted_display_choice){
+  const key=record.pixelIndex+':'+record.original_key.y+':'+record.original_key.x;
+  demand(!adopted.has(key),'Duplicate adopted target native key');adopted.set(key,record);
+ }
+ // Other relations saved in this same acquisition are not silently promoted
+ // into the twelve-feature stage or dropped as potential new competitors.
+ // Exact rational centre/binary64 bounds may prove them wholly irrelevant;
+ // otherwise this narrow adapter refuses and requires their own full treatment.
+ const withinLongitude=(x,west,east)=>{
+  const centre=BigInt(360*x+180-180*262166),width=262166n;
+  const compare=value=>{
+   if(value===0)return centre<0n?-1:centre>0n?1:0;
+   const view=new DataView(new ArrayBuffer(8));view.setFloat64(0,value,false);
+   const word=view.getBigUint64(0,false),power=Number(word>>52n&2047n);
+   let n=(word&((1n<<52n)-1n))+(power?1n<<52n:0n),d=1n;
+   const exponent=power?power-1075:-1074;if(word>>63n)n=-n;
+   if(exponent>=0)n<<=BigInt(exponent);else d<<=BigInt(-exponent);
+   const difference=centre*d-n*width;return difference<0n?-1:difference>0n?1:0;
+  };return compare(west)>=0&&compare(east)<=0;
+ };
+ for(const relation of raw.elements.filter(row=>row.type==='relation'&&!relationIds.has(row.id))){
+  const boundary=relation.members.filter(part=>!['subarea','admin_centre','label'].includes(part.role));
+  demand(boundary.length>0&&boundary.every(part=>['outer','inner',''].includes(part.role)
+   &&part.type==='way'&&Array.isArray(part.geometry)&&part.geometry.length>=2),'Incomplete unselected raw relation');
+  const points=boundary.flatMap(part=>part.geometry.map(p=>[p.lon,p.lat]));
+  demand(points.every(p=>p.every(Number.isFinite)&&Math.abs(p[0])<=180&&Math.abs(p[1])<=90),
+   'Invalid unselected raw relation coordinates');
+  const west=Math.min(...points.map(p=>p[0])),east=Math.max(...points.map(p=>p[0]));
+  const south=Math.min(...points.map(p=>p[1])),north=Math.max(...points.map(p=>p[1]));
+  demand(!data.records.some(({original_key:p})=>latitudes[p.y]>=south&&latitudes[p.y]<=north
+   &&withinLongitude(p.x,west,east)),'Unadopted raw relation may compete at an original key');
+ }
+ let requested=0;
+ for(const row of proposed.rows)for(const run of row.runs){
+  demand(Array.isArray(run)&&run.length===3&&run.every(Number.isSafeInteger)&&run[1]>run[0]
+   &&run[1]-run[0]<=adopted.size,'Unbounded revised-source proposed interval');
+  for(let x=run[0];x<run[1];x++){
+   const record=adopted.get(run[2]+':'+row.y+':'+x);
+   demand(record&&evidence.targets.some(target=>target.id===record.source_id
+    &&target.pixelIndex===record.pixelIndex),'Requested native key lacks adopted revised-source choice');requested++;
+  }
+ }
+ demand(requested>0&&requested<=adopted.size,'Missing or duplicate adopted revised-source proposal');
+ return {sourceId:data.source_id,stagePin:data.source_stage,product:{features:stage.map(row=>row.consumed)},
+  resolve(id){const member=members.get(id);demand(member,'Missing revised source stable crosswalk');
+   return {id:member.target_id,pixelIndex:member.pixelIndex,feature:member.feature};}};
+}
+
 export function qualifySourceTargetNativeAuthority(reader, preimage, binding, {snapshot}={}) {
  return evaluateSourceTargetNativeAuthority(reader, preimage, binding, false, snapshot);
 }
@@ -601,8 +769,10 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
  };
  const evidence=JSON.parse(read(binding.source_evidence)), proposed=JSON.parse(read(binding.native_patch));
  const dated = evidence?.version===2&&evidence.kind==='source-target-native-evidence-v2';
- demand((dated||evidence?.version===1&&evidence.kind==='source-target-native-evidence-v1')
+ const revised = evidence?.version===3&&evidence.kind==='source-target-native-evidence-v3';
+ demand((dated||revised||evidence?.version===1&&evidence.kind==='source-target-native-evidence-v1')
   &&(dated?evidence.dated_land_support!==undefined:evidence.dated_land_support===undefined)
+  &&(revised?evidence.revised_source_adoption!==undefined:evidence.revised_source_adoption===undefined)
   &&Array.isArray(evidence.targets)&&evidence.targets.length>0&&Array.isArray(proposed.rows)
   &&Object.keys(proposed).join(',')==='rows',
  'Incomplete source-target evidence');
@@ -980,21 +1150,30 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   if(prior&&prior[1]===start&&prior[2]===owner&&prior[3]===reason)prior[1]=end;
   else runs.push([start,end,owner,reason]);diagnosticRows.set(y,runs);
  };
+ // A new source is deliberately separate from the retained shapeID catalogue.
+ // The opt-in executing-tree adoption binds the whole raw snapshot, explicit
+ // stable crosswalk and bounded original-key choice; it does not replace base
+ // county geometry or relax the v1/v2 original-source join.
+ const revision = revised ? readAdoptedOsmRevision({evidence,proposed,owners,latitudes,
+  read,readAdopted,reader,physicalInputs,keys}) : null;
  const checked=new Set(),families=new Set(),physicalContextHits=[];
  for(const family of evidence.families){
   demand(typeof family.source_id==='string'&&!families.has(family.source_id),'Duplicate source family');families.add(family.source_id);
   const record=catalogue.products.find(product=>product.key===family.source_id);
-  demand(record&&family.parts.length===record.parts.length,'Missing complete original source family');
-  const product=readCompleteSource(family.parts,record);
+  demand(revised?same(family.parts,[revision.stagePin])&&family.source_id===revision.sourceId
+   :record&&family.parts.length===record.parts.length,'Missing complete original or adopted source family');
+  const product=revised?revision.product:readCompleteSource(family.parts,record);
   const originals=new Map();
   for(const feature of product.features){
-   const sourceId=feature.properties?.shapeID;
-   demand(typeof sourceId==='string'&&sourceId&&!originals.has(family.source_id+':'+sourceId),
-    'Duplicate or missing original source feature identity');originals.set(family.source_id+':'+sourceId,feature);
+   const sourceId=revised?feature.id:feature.properties?.shapeID;
+   const id=revised?sourceId:family.source_id+':'+sourceId;
+   demand(typeof sourceId==='string'&&sourceId&&!originals.has(id),
+    'Duplicate or missing original source feature identity');originals.set(id,feature);
   }
+  const resolve=id=>revised?revision.resolve(id):reconcile(id,originals);
   const selected=evidence.targets.filter(target=>target.source_family===family.source_id);
   demand(selected.length>0,'Unused source family');
-  for(const target of selected){const original=originals.get(target.id),owner=reconcile(target.id,originals);
+  for(const target of selected){const original=originals.get(target.id),owner=resolve(target.id);
    const measured=physicalInputs.filter(input=>input.target===target.id);
    demand(owner.id===(target.target_id??target.id)&&owner.pixelIndex===target.pixelIndex,
     'Source member differs from accepted target mapping');
@@ -1008,13 +1187,13 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   // canonical base joins remain mandatory; it supplies no borrowed coverage.
   const selectedOwners=new Set(selected.map(t=>t.pixelIndex));
   for(const [id,original]of originals)if(!targets.has(id)){
-   const candidateOwner=selectedOwners.has(owners.get(id))
+   const candidateOwner=selectedOwners.has(revised?resolve(id).pixelIndex:owners.get(id))
     ||(memberOwners.get(id)??[]).some(change=>selected.some(t=>(t.target_id??t.id)===change.id));
    if(!candidateOwner)continue;
    const measured=physicalInputs.filter(input=>input.target===id);
    const results=physical.results.filter(result=>result.target===id);
    if(!measured.length&&!results.length)continue;
-   const owner=reconcile(id,originals),target=resolvedTargets.get(owner.id);
+   const owner=resolve(id),target=resolvedTargets.get(owner.id);
    demand(selectedOwners.has(owner.pixelIndex)&&target
     &&measured.length===1&&results.length===1,'Missing or duplicate measured sibling physical interpretation');
    demand(same(measured[0].consumed.geometry,original.geometry)&&measured[0].selected.id===owner.id
@@ -1037,8 +1216,8 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
    ?originals.get(target.id).geometry:target.coverage_geometry));
   const intersects=(a,b)=>a[0]<=b[2]&&b[0]<=a[2]&&a[1]<=b[3]&&b[1]<=a[3];
   const sourceFeatures=product.features.filter(feature=>coordinateBounds(feature.geometry).some(part=>bounds.some(box=>intersects(part,box))))
-   .map(feature=>{const id=family.source_id+':'+feature.properties.shapeID;
-    const owner=reconcile(id,originals);
+   .map(feature=>{const id=revised?feature.id:family.source_id+':'+feature.properties.shapeID;
+    const owner=resolve(id);
     return {id,target_id:owner.id,pixelIndex:owner.pixelIndex,geometry:feature.geometry};});
   const coverageFeatures=selected.filter(t=>t.coverage_geometry.coordinates.length).map(target=>({id:target.target_id??target.id,source_id:target.id,pixelIndex:target.pixelIndex,geometry:target.coverage_geometry}));
   let exclusions=selected.flatMap(target=>(target.territorial_exclusions??[]).map((geometry,ordinal)=>({

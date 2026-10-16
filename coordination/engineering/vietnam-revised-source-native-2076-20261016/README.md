@@ -40,3 +40,18 @@ Focused bounds controls:
 The two focused tests passed. These controls cover exact endpoint inclusion,
 empty column intervals, complete rings, holes, seam-conservative bounds and
 malformed/unsupported geometry refusal; they do not establish the real result.
+
+## Versioned adapter preparation
+
+`source-adoption.json` normalizes the actual twelve-member source crosswalk and
+all365 original-key dispositions from the frozen assessment/parent decision.
+It binds complete source/assessment/comparison bytes without changing their
+historical status fields. `osm-native-attribution.json` supplies the new OSM
+addition notice and machine-readable alteration-offer requirement.
+
+The opt-in source-evidence v3 implementation remains under independent
+engineering review. No new authority/native qualification or current ownership
+is claimed yet. The selected-data role changes were prepared by applying only
+the actual reviewed2074 delta to accepted cd68, in a separate dependency commit;
+no older-fork collector file replaced current behavior. Final accepted-base
+assembly must include the accepted2071/2074/2078 changes before integration.

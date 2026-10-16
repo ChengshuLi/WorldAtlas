@@ -199,8 +199,9 @@ async function originalAuthority(reader, entry) {
     reader.pinned(binding.native_patch);
     const evidence = await reader.pinnedJson(binding.source_evidence);
     const dated = evidence.version === 2;
-    demand([1, 2].includes(evidence.version) && evidence.kind === 'source-target-native-evidence-v' + evidence.version
-      && (dated ? evidence.dated_land_support !== undefined : evidence.dated_land_support === undefined),
+    demand([1, 2, 3].includes(evidence.version) && evidence.kind === 'source-target-native-evidence-v' + evidence.version
+      && (dated ? evidence.dated_land_support !== undefined : evidence.dated_land_support === undefined)
+      && (evidence.version === 3 ? evidence.revised_source_adoption !== undefined : evidence.revised_source_adoption === undefined),
       'unsupported-source-target-evidence');
     // These optional roles introduce additional consumed provenance. Until this
     // collector mirrors them completely, retain the cold checker for that layout.
@@ -209,6 +210,14 @@ async function originalAuthority(reader, entry) {
     // Like the bound scientific reader, ignore extra descriptive evidence
     // fields. Only its versioned consumed roles select further file reads.
     for (const role of ['catalogue', 'native_latitudes', 'owner_roster', 'physical_evidence', 'physical_input', 'physical_reproduction']) reader.pinned(evidence[role]);
+    if (evidence.version === 3) {
+      const adoption = await reader.pinnedJson(evidence.revised_source_adoption);
+      demand(adoption.version === 1 && adoption.kind === 'adopted-osm-revised-source-native-v1', 'unsupported-revised-source-adoption');
+      for (const role of ['raw_source', 'source_stage', 'assessment', 'scope', 'parent_decision', 'attribution']) reader.pinned(adoption[role]);
+      const fine = await reader.pinnedJson(adoption.current_geography);
+      const indexes = array(fine.input_pins, 'revised-source-current-pins').filter(pin => pin.path === 'data/world-index.json');
+      demand(indexes.length === 1, 'unsupported-revised-source-current-index'); reader.pinned(indexes[0]);
+    }
     for (const family of array(evidence.families, 'source-target-families')) {
       demand(typeof family?.source_id === 'string', 'unsupported-source-target-family');
       for (const pin of array(family.parts, 'source-target-parts')) reader.pinned(pin);
