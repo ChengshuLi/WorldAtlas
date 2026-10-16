@@ -948,12 +948,11 @@ test('actual final validation reads full evidence once and rejects changed bytes
 });
 function finalTransportFixture(mode = 'complete', f = finalMergeFixture()) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'final-validation-transport-'));
-  const origin = f.api, events = []; let admission, fetches = 0;
+  const origin = f.api, events = []; let fetches = 0;
   const http = async (route, method = 'GET', ...args) => {
-    admission?.({route, method}); events.push({kind: 'http', route});
+    events.push({kind: 'http', route});
     return origin(route, method, ...args);
   };
-  http.setHTTPAdmission = hook => {admission = hook; return () => {admission = null;};};
   const transport = gitBlobTransport(http, {repo: f.repo, token: 'synthetic-transport-token', directory,
     execute: (command, args, options) => {
       if (!args.includes('fetch')) {
@@ -970,8 +969,8 @@ function finalTransportFixture(mode = 'complete', f = finalMergeFixture()) {
       return Buffer.alloc(0);
     }});
   f.api = (...args) => transport.api(...args);
-  for (const name of ['setHTTPAdmission', 'prefetchGitBlobs']) {
-    if (mode === 'missing' && name !== 'setHTTPAdmission') continue;
+  for (const name of ['prefetchGitBlobs']) {
+    if (mode === 'missing') continue;
     f.api[name] = function (...args) {
       assert.equal(this, f.api, `${name} must preserve its original receiver through every wrapper`);
       if (mode === 'declined' && name === 'prefetchGitBlobs') return;
@@ -1012,13 +1011,13 @@ test('incomplete actual transport and changed mutable authority cannot reach mer
 
 // A real single-entry stored ZIP exercises the production report loader through
 // prepare and final integration; no GIS is executed.
-// Real HTTP admission and ETag revalidation, with only the network replaced.
-function quotaCompletionFixture({retry = false, deplete = false} = {}) {
+// Real HTTP failures and ETag revalidation, with only the network replaced.
+function quotaCompletionFixture({retry = false, refuse = false, headerless = false} = {}) {
   const f = finalMergeFixture(), original = f.api, attempts = [];
   let remaining = 2000, time = 0, retried = false, issueReads = 0;
-  const headers = () => ({'x-ratelimit-limit': '2000', 'x-ratelimit-remaining': String(remaining),
+  const headers = () => headerless ? {etag: '"unchanged"'} : ({'x-ratelimit-limit': '2000', 'x-ratelimit-remaining': String(remaining),
     'x-ratelimit-reset': '3600', 'x-ratelimit-resource': 'core', etag: '"unchanged"'});
-  f.api = githubAPI('synthetic-quota-token', {minimumRemaining: 16, readWaitMs: 60000,
+  f.api = githubAPI('synthetic-quota-token', {readWaitMs: 60000,
     now: () => time, sleep: async ms => {time += ms;}, deadlineRemaining: () => 100000 - time,
     onRequest: row => attempts.push({route: row.route, status: row.status, remaining: row.capacity.remaining}),
     fetchImpl: async (url, init) => {
@@ -1028,7 +1027,8 @@ function quotaCompletionFixture({retry = false, deplete = false} = {}) {
         return Response.json({message: 'secondary rate limit'}, {status: 403,
           headers: {...headers(), 'retry-after': '1'}});
       }
-      if (name.endsWith('/issues/1183') && ++issueReads === 2 && deplete) remaining = 16;
+      if (name.endsWith('/issues/1183') && ++issueReads === 2 && refuse)
+        return Response.json({message: 'Forbidden'}, {status: 403});
       if (init.headers['If-None-Match']) return new Response(null, {status: 304, headers: headers()});
       remaining--;
       const value = await original(route, init.method, init.body ? JSON.parse(init.body) : undefined);
@@ -1036,23 +1036,29 @@ function quotaCompletionFixture({retry = false, deplete = false} = {}) {
     }});
   return {f, attempts, complete: () => f.complete(), get remaining() {return remaining;}, get issueReads() {return issueReads;}};
 }
-for (const retry of [false, true]) test(`actual final HTTP uses fresh quota and retains 304/retry guards: ${retry}`, async t => {
+for (const retry of [false, true]) test(`actual final HTTP retains conditional authority and response-driven retry: ${retry}`, async t => {
   const q = quotaCompletionFixture({retry}), result = await q.complete();
   assert.equal(result.accepted, true);
   assert(q.attempts.some(row => row.status === 304), 'Authority was actually conditionally reread');
   assert.equal(q.attempts.filter(row => row.status === 403).length, retry ? 1 : 0);
   assert.equal(q.f.writes.filter(row => row.method === 'PUT').length, 1);
-  assert(q.remaining >= 16);
   assert(!q.attempts.some(row => row.route === '/rate_limit' || row.route === '/repos/o/r'));
   t.diagnostic(JSON.stringify({actual_http_attempts: q.attempts.length,
     conditional_revalidations: q.attempts.filter(row => row.status === 304).length,
     retry_rejections: q.attempts.filter(row => row.status === 403).length}));
 });
-test('actual final authority stops on newly observed concurrent depletion and preserves recovery', async () => {
-  const q = quotaCompletionFixture({deplete: true});
-  await assert.rejects(q.complete(), error => error.quotaAdmission?.remaining === 16);
-  assert.equal(q.issueReads, 2, 'Depletion is observed in the final current issue reread');
+test('actual final authority stops on a real current-issue HTTP refusal', async () => {
+  const q = quotaCompletionFixture({refuse: true});
+  await assert.rejects(q.complete(), error => error.github?.http_status === 403);
+  assert.equal(q.issueReads, 2, 'The final current issue reread actually refused');
   assert.equal(q.f.writes.length, 0);
+});
+
+test('actual final completion accepts successful responses without forecast headers', async () => {
+  const q = quotaCompletionFixture({headerless: true});
+  assert.equal((await q.complete()).accepted, true);
+  assert.equal(q.f.writes.filter(row => row.method === 'PUT').length, 1);
+  assert(q.attempts.some(row => row.status === 304));
 });
 
 }

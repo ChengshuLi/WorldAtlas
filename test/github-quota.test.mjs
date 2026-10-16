@@ -85,24 +85,6 @@ test('read retry respects its finite phase deadline and repeated concurrent exha
   await assert.rejects(api('/repos/a/b'),/HTTP 403/);assert(calls<=3);assert(time<101500);
  });
 });
-test('actual repository capacity overrides unrelated generic capacity',async()=>{
- const routes=[];
- await mocked(async url=>{routes.push(url);return response(403);},async()=>{
-  const api=githubAPI('private');const row=await api.readRepositoryCapacity('a/b');
-  assert.equal(row.remaining,0);assert.equal(row.limit,1000);assert.equal(routes.length,1);assert(routes[0].endsWith('/repos/a/b'));
- });
-});
-test('secondary limits cannot masquerade as positive capacity',async()=>{
- await mocked(async()=>response(403,'500',{'retry-after':'2'}),async()=>{
-  await assert.rejects(githubAPI('private').readRepositoryCapacity('a/b'),/HTTP 403/);
- });
-});
-test('invalid capacity headers fail closed and concurrent reads cannot replace probe headers',async()=>{
- await mocked(async url=>url.endsWith('/repos/a/b')?response(200,'12'):response(200,'900'),async()=>{
-  const api=githubAPI('private');const [row]=await Promise.all([api.readRepositoryCapacity('a/b'),api('/repos/a/b/pulls/1')]);assert.equal(row.remaining,12);
- });
- await mocked(async()=>new Response('{}'),async()=>{await assert.rejects(githubAPI('private').readRepositoryCapacity('a/b'),/Unavailable/);});
-});
 test('actual read quota rejection honors secondary retry-after within its finite deadline',async()=>{
  let time=0,calls=0;
  await mocked(async()=>response(++calls===1?403:200,'500',calls===1?{'retry-after':'2'}:{}),async()=>{
@@ -173,29 +155,12 @@ test('bounded metadata reads cannot use larger ETag snapshots or grant writes an
   assert.equal(seen.length,2);
   assert.deepEqual(await api('/repos/a/b/pulls/1','GET',undefined,{maxResponseBytes:128}),{value:'x'.repeat(64)});
 });
-test('a capped read keeps its byte allowance through the actual reset-capacity probe',async()=>{
-  let now=0;const routes=[];
-  const api=githubAPI('fixture',{minimumRemaining:16,now:()=>now,fetchImpl:async url=>{
-    routes.push(url);return new Response(routes.length===1?'{}':JSON.stringify({large:'x'.repeat(64)}),{
-      headers:{'x-ratelimit-resource':'core','x-ratelimit-limit':'5000','x-ratelimit-remaining':routes.length===1?'0':'5000','x-ratelimit-reset':'1'}});
-  }});
-  await api('/repos/a/b/pulls/1');now=2000;
-  await assert.rejects(api('/repos/a/b/pulls/2','GET',undefined,{maxResponseBytes:16}),/caller byte allowance/);
-  assert.deepEqual(routes,['https://api.github.com/repos/a/b/pulls/1','https://api.github.com/repos/a/b']);
-});
-
-test('existing final HTTP-admission hook composes with job timing rather than replacing it', async () => {
-  const old = globalThis.fetch;let calls = 0, left = 40_000, budget = 0;
-  globalThis.fetch = async () => {calls++;return new Response('{}', {status: 200});};
-  try {
-    const api = githubAPI('synthetic', {deadlineRemaining: () => left});
-    const dispose = api.setHTTPAdmission(() => {budget++;});
-    await api('/repos/a/b');assert.equal(calls, 1);assert.equal(budget, 1);
-    left = 20_000;await assert.rejects(api('/repos/a/b'), /deadline/);assert.equal(calls, 1);assert.equal(budget, 1);
-    dispose();left = 40_000;await api('/repos/a/b');assert.equal(calls, 2);assert.equal(budget, 1);
-    left = Infinity;await assert.rejects(api('/repos/a/b'), /Invalid job deadline/);assert.equal(calls, 2);
-    left = 40_000;const slowHook = githubAPI('synthetic', {deadlineRemaining: () => left});
-    slowHook.setHTTPAdmission(() => {left = 19_000;});
-    await assert.rejects(slowHook('/repos/a/b'), /deadline/);assert.equal(calls, 2);
-  } finally {globalThis.fetch = old;}
+test('each actual HTTP request requires a complete attempt within the caller deadline', async () => {
+  let calls = 0, left = 40_000;
+  const api = githubAPI('synthetic', {deadlineRemaining: () => left,
+    fetchImpl: async () => {calls++;return new Response('{}');}});
+  await api('/repos/a/b');assert.equal(calls, 1);
+  left = 20_000;await assert.rejects(api('/repos/a/b'), /deadline/);assert.equal(calls, 1);
+  left = 40_000;await api('/repos/a/b');assert.equal(calls, 2);
+  left = Infinity;await assert.rejects(api('/repos/a/b'), /Invalid job deadline/);assert.equal(calls, 2);
 });

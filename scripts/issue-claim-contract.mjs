@@ -108,53 +108,22 @@ export async function linkedPulls(api,repo,number){
  return completeReads([...ids].map(id=>api(`/repos/${repo}/pulls/${id}`)));
 }
 export function githubAPI(token, {fetchImpl = fetch, onRequest = () => {}, readWaitMs = 0, now = Date.now, sleep = ms => new Promise(resolve => setTimeout(resolve, ms)), deadlineRemaining,
- conditionalReads = true, snapshotBytes = 64 * 1024 * 1024, snapshotEntries = 128,
- minimumRemaining = process.env.GITHUB_ACTIONS==='true'&&[process.env.GH_TOKEN,process.env.GITHUB_TOKEN].includes(token)?16:0} = {}){
+ conditionalReads = true, snapshotBytes = 64 * 1024 * 1024, snapshotEntries = 128} = {}){
  if(!token)throw Error('Read/write GitHub token required');
- if(!Number.isSafeInteger(minimumRemaining)||minimumRemaining<0)throw Error('Invalid core recovery floor');
  if(deadlineRemaining!==undefined&&typeof deadlineRemaining!=='function')throw Error('Invalid job deadline');
  const remaining=()=>{const value=deadlineRemaining?deadlineRemaining():Infinity;if(deadlineRemaining&&!Number.isFinite(value))throw Error('Invalid job deadline');return value;};
  const admit=()=>{if(remaining()<=HTTP_ATTEMPT_MS)throw Object.assign(Error('Job deadline cannot admit another bounded HTTP attempt'),{jobDeadline:true});};
- const apiStarted=now();let httpAdmission=null;
+ const apiStarted=now();
  const snapshots=conditionalSnapshots({maxBytes:snapshotBytes,maxEntries:snapshotEntries});
- let capacityState,initialRequest,recoveryAttempts=0;
- const refuse=(floor=minimumRemaining)=>Object.assign(Error('GitHub request deferred to preserve core recovery capacity'),{
-  quotaAdmission:{...capacityState,minimum_remaining:floor}});
- const performRequest = async(route,method='GET',body,observeCapacity=()=>{},capacityProbe=false,artifactRedirect=false,recovery=false,maxResponseBytes)=>{
+ const request = async(route,method='GET',body,artifactRedirect=false,maxResponseBytes)=>{
   admit();
-  const floor=recovery?0:minimumRemaining;
-  if(minimumRemaining>0){
-   if(capacityState?.remaining<=floor){
-    if(now()<capacityState.reset*1000)throw refuse(floor);
-    // Reset time alone never grants capacity. Probe the actual repository first.
-    const repository=/^\/repos\/([\w.-]+\/[\w.-]+)(?:\/|\?|$)/.exec(route)?.[1];
-    if(!repository)throw refuse(floor);
-    if(!capacityProbe){
-     await performRequest(`/repos/${repository}`,'GET',undefined,()=>{},true,false,recovery,maxResponseBytes);
-     if(capacityState.remaining<=floor)throw refuse(floor);
-    }
-   }else if(!capacityState&&method!=='GET'&&!capacityProbe){
-    const repository=/^\/repos\/([\w.-]+\/[\w.-]+)(?:\/|\?|$)/.exec(route)?.[1];
-    if(!repository)throw Error('Cannot authenticate write capacity outside a repository');
-    await performRequest(`/repos/${repository}`,'GET',undefined,()=>{},true,false,recovery,maxResponseBytes);
-    if(capacityState.remaining<=floor)throw refuse(floor);
-   }
-  }
-  httpAdmission?.({route,method,capacityProbe});
-  admit();
-  const usesRecovery=recovery&&minimumRemaining>0&&capacityState?.remaining<=minimumRemaining;
-  if(usesRecovery&&recoveryAttempts>=4)throw Object.assign(Error('Bounded recovery allocation exhausted; preserve pending cleanup'),{recoveryBudget:true});
   // Immutable blobs already have independently bounded custody/transport caches.
   // Actions may retain a queued snapshot while the same job starts. Always
   // read this mutable inventory afresh; other authority routes retain ETags.
   const jobInventory=/^\/repos\/[^/]+\/[^/]+\/actions\/runs\/\d+\/attempts\/\d+\/jobs(?:\?|$)/.test(route);
-  const conditional=maxResponseBytes===undefined&&!jobInventory&&!artifactRedirect&&conditionalReads&&method==='GET'&&body===undefined&&!capacityProbe&&route!=='/rate_limit'&&!/\/git\/blobs\//.test(route);
+  const conditional=maxResponseBytes===undefined&&!jobInventory&&!artifactRedirect&&conditionalReads&&method==='GET'&&body===undefined&&route!=='/rate_limit'&&!/\/git\/blobs\//.test(route);
   const snapshot=conditional?snapshots.get(route):undefined;
-  // Charge the possible paid attempt conservatively. A genuine 304 refunds it;
-  // stale/higher response counters cannot repeatedly mint new request capacity.
-  if(minimumRemaining>0&&capacityState)capacityState={...capacityState,remaining:Math.max(0,capacityState.remaining-1)};
   let response;
-  if(usesRecovery)recoveryAttempts++;
   try {response=await fetchImpl('https://api.github.com'+route,{method,headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28',...(snapshot?{'If-None-Match':snapshot.etag}:{}),...(body?{'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(HTTP_ATTEMPT_MS),redirect:artifactRedirect?'manual':'error'});}
   catch(error){onRequest({route,method,status:'transport-error'});throw error;}
   // Optional caller-owned phase admission. Cap the actual stream before JSON
@@ -170,18 +139,6 @@ export function githubAPI(token, {fetchImpl = fetch, onRequest = () => {}, readW
   const headerNumber = name => {const value=response.headers.get(name);return /^\d{1,13}$/.test(value??'')?Number(value):undefined;};
   const capacity={limit:headerNumber('x-ratelimit-limit'),remaining:headerNumber('x-ratelimit-remaining'),reset:headerNumber('x-ratelimit-reset'),resource:response.headers.get('x-ratelimit-resource')};
   onRequest({route,method,status:response.status,capacity});
-  observeCapacity(capacity);
-  if(minimumRemaining>0){
-   const valid=capacity.resource==='core'&&['limit','remaining','reset'].every(key=>Number.isSafeInteger(capacity[key]))&&
-    capacity.limit>0&&capacity.remaining>=0&&capacity.remaining<=capacity.limit&&capacity.reset>0;
-   if(valid){
-    const predicted=capacityState&&response.status===304?{...capacityState,remaining:Math.min(capacityState.limit,capacityState.remaining+1)}:capacityState;
-    capacityState=!predicted||now()>=predicted.reset*1000?capacity:{...predicted,
-     remaining:Math.min(predicted.remaining,capacity.remaining)};
-   }else if(response.ok||artifactRedirect&&response.status===302){
-    await response.body?.cancel();throw Error('Missing actual core capacity headers; no further work admitted');
-   }
-  }
   if(artifactRedirect&&response.status===302){
    if(remaining()<=0){await response.body?.cancel();throw Object.assign(Error('Job deadline exhausted during artifact redirect'),{jobDeadline:true});}
    await response.body?.cancel();
@@ -219,28 +176,14 @@ export function githubAPI(token, {fetchImpl = fetch, onRequest = () => {}, readW
   }
   return finish(payload);
  };
- // Establish capacity through the first already-required request. Once known,
- // independent reads run concurrently: no fixed sleeps or routine FIFO gate.
- // Concurrent attempts reserve their possible charge synchronously above; 304
- // refunds exactly its own reservation, never another in-flight read's charge.
- const request=async(...args)=>{
-  if(minimumRemaining>0&&!capacityState){
-   if(initialRequest)await initialRequest;
-   else {
-    const pending=performRequest(...args);initialRequest=pending;
-    try{return await pending;}finally{if(initialRequest===pending)initialRequest=undefined;}
-   }
-  }
-  return performRequest(...args);
- };
  const api = async(route, method='GET', body, {maxResponseBytes} = {}) => {
   if(maxResponseBytes!==undefined&&(!Number.isSafeInteger(maxResponseBytes)||maxResponseBytes<=0||method!=='GET'||body!==undefined))
    throw Error('Invalid caller response-byte admission');
   let lastQuota;
   for(let attempt=0;;attempt++){
-   try{return await request(route,method,body,undefined,false,false,false,maxResponseBytes);}
+   try{return await request(route,method,body,false,maxResponseBytes);}
    catch(error){
-    if((error.requestBudget||error.jobDeadline)&&lastQuota)error.quotaCause=lastQuota;
+    if(error.jobDeadline&&lastQuota)error.quotaCause=lastQuota;
     const quota=quotaDelay(error,now());
     const delay=quota??([500,502,503,504].includes(error.github?.http_status)?1000*2**attempt:null);
     if(quota!==null)lastQuota=error;
@@ -259,15 +202,15 @@ export function githubAPI(token, {fetchImpl = fetch, onRequest = () => {}, readW
  // handled separately without credentials; no signed URL enters accounting.
  api.artifactRedirect=route=>{
   if(!/^\/repos\/[\w.-]+\/[\w.-]+\/actions\/artifacts\/[1-9]\d*\/zip$/.test(route??''))throw Error('Invalid artifact redirect route');
-  return request(route,'GET',undefined,()=>{},false,true);
+  return request(route,'GET',undefined,true);
  };
  // Retained original packages still authenticate their producer's job log.
  api.jobLogRedirect=route=>{
   if(!/^\/repos\/[\w.-]+\/[\w.-]+\/actions\/jobs\/[1-9]\d*\/logs$/.test(route??''))throw Error('Invalid job log redirect route');
-  return request(route,'GET',undefined,()=>{},false,true);
+  return request(route,'GET',undefined,true);
  };
- // The protected floor is usable only for bounded owned-candidate cleanup
- // and durable merge-result notification, not additional implementation reads.
+ // Cleanup and result notification use one attempt, without ordinary read
+ // retries. Real provider failure is left for the caller to reconcile.
  // Callers must prove exact ref ownership/SHA before deleting (cleanupCandidate).
  api.recovery=(route,method='GET',body)=>{
   const candidate=/^\/repos\/[\w.-]+\/[\w.-]+\/git\/(ref|refs)\/heads\/worldatlas-integration\/pr-[1-9]\d*-[-a-zA-Z0-9]{16,160}$/.exec(route??'');
@@ -275,21 +218,7 @@ export function githubAPI(token, {fetchImpl = fetch, onRequest = () => {}, readW
    typeof body?.body==='string'&&body.body.startsWith('**Merge result:**')&&body.body.includes('<!-- worldatlas-merge-result:v1');
   if(!(candidate&&body===undefined&&((candidate[1]==='ref'&&method==='GET')||(candidate[1]==='refs'&&method==='DELETE'))||notification))
    throw Error('Request is outside bounded merge recovery');
-  return request(route,method,body,()=>{},false,false,true);
- };
- api.setHTTPAdmission=handler=>{
-  if(handler!==null&&typeof handler!=='function')throw Error('Invalid HTTP admission hook');
-  if(httpAdmission&&handler!==null)throw Error('An HTTP admission budget is already active');
-  httpAdmission=handler;return ()=>{if(httpAdmission===handler)httpAdmission=null;};
- };
- api.readRepositoryCapacity=async repo=>{
-  if(!/^[-\w.]+\/[-\w.]+$/.test(repo))throw Error('Invalid capacity repository');
-  let observed;
-  try {await request(`/repos/${repo}`,'GET',undefined,row=>{observed=row;},true);}
-  catch(error){if(quotaDelay(error,now())===null||error.github?.rate_remaining!=='0')throw error;}
-  const row={...observed};
-  if(row.resource!=='core'||!['limit','remaining','reset'].every(key=>Number.isSafeInteger(row[key]))||row.limit<1||row.remaining<0||row.remaining>row.limit||row.reset<1)throw Error('Unavailable actual repository capacity');
-  return row;
+  return request(route,method,body);
  };
  return api;
 }
