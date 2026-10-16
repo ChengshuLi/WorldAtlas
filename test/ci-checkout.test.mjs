@@ -69,19 +69,18 @@ const archives = [
   'coordination/engineering/global-source-comparisons-a-001-20261006/',
   'coordination/engineering/global-source-comparisons-b-20261006/',
   'coordination/engineering/reference-source-custody-20261007/',
-  'coordination/engineering/complete-numeric-closure-diagnosis-20261007/',
-  'research/geography/lithuania-latvia-gap-source-fitness-20261007/',
-  'research/geography/shared-seam-prt-esp-20261006/'
+  'coordination/engineering/complete-numeric-closure-diagnosis-20261007/'
 ];
 const archiveFiles = archives.flatMap(prefix => [prefix+'body.json', prefix+'nested/body.bin',
   prefix+'historical-helper.py', prefix.slice(0,-1)+'-retained/body.json']);
 const sourceOnly = ['data/regional-review/','research/campaigns/'];
+const declaredResearch = [...definition.inputs, ...definition.verification_paths].filter(name=>name.startsWith('research/geography/'));
+const requiredResearch = name => !name.startsWith('research/geography/') || declaredResearch.includes(name);
 
-test('complete stock checkout omits only eight whole archives and existing source-only roots',()=>{
+test('complete stock checkout omits archive bulk while retaining exact declared research fixtures',()=>{
   const files=[...names,...archiveFiles], patterns=fullCheckoutPatterns(definition);
-  assert.deepEqual(patterns,['/*',...sourceOnly.map(prefix=>'!/'+prefix),...archives.map(prefix=>'!/'+prefix)]);
   const retained=checkout(patterns,files);
-  assert.deepEqual(retained.sort(),files.filter(name=>![...sourceOnly,...archives].some(prefix=>name.startsWith(prefix))).sort());
+  assert.deepEqual(retained.sort(),files.filter(name=>requiredResearch(name)&&![...sourceOnly,...archives].some(prefix=>name.startsWith(prefix))).sort());
 });
 
 for(const role of ['inputs','verification_paths']) {
@@ -91,10 +90,16 @@ for(const role of ['inputs','verification_paths']) {
       const policy={...definition,[role]:[...definition[role],...new Set(declared)]};
       if(kind==='ancestor')policy[role]=[...new Set(policy[role].filter(name=>!declared.some(parent=>name!==parent&&name.startsWith(parent))))];
       const files=[...names,...archiveFiles], retained=checkout(fullCheckoutPatterns(policy),files);
-      assert.deepEqual(retained.sort(),files.filter(name=>!sourceOnly.some(prefix=>name.startsWith(prefix))).sort());
+      assert.deepEqual(retained.sort(),files.filter(name=>requiredResearch(name)&&!sourceOnly.some(prefix=>name.startsWith(prefix))).sort());
     }
   });
 }
+
+for (const role of ['inputs','verification_paths']) test(`full checkout preserves declared research ancestor in ${role}`,()=>{
+  const policy={...definition,[role]:[...definition[role].filter(name=>!name.startsWith('research/')),'research/']};
+  const retained=checkout(fullCheckoutPatterns(policy));
+  for(const name of names.filter(name=>name.startsWith('research/geography/')))assert(retained.includes(name),name);
+});
 
 test('complete stock checkout keeps the complete actual three-shard inventory and package controls',()=>{
   const shards=[0,1,2].map(shard=>integrationTestFiles('full',shard));

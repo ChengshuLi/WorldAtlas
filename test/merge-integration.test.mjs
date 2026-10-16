@@ -122,7 +122,7 @@ test('actual full preparation emits archive patterns from the authenticated cand
   assert.equal(prepared.profile,'full');assert.equal(prepared.candidate,f.candidate);
   assert.equal(prepared.candidate_tree,'integrated');
   assert.deepEqual(prepared.checkout_patterns,fullCheckoutPatterns(f.packageInputs));
-  assert(!prepared.checkout_patterns.includes('!/research/geography/shared-seam-prt-esp-20261006/'));
+  assert(prepared.checkout_patterns.includes('/research/geography/shared-seam-prt-esp-20261006/required.json'));
   assert(prepared.checkout_patterns.includes('!/coordination/engineering/reference-source-custody-20261007/'));
   assert.equal(f.calls.filter(row=>row.route.includes('/contents/.github/package-inputs.json')).length,1);
 });
