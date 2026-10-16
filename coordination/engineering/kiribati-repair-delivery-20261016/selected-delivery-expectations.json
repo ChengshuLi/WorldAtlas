@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "selected_ledger_sha256": "61809f3d6730386546bd1780afe83eeeaad8ca1ea732ee260df5392a3a4c57ea",
-  "cumulative_native_cells": 297208,
+  "selected_ledger_sha256": "86ab3320958c455baa9b3695c69b800d757894ee127bd283f25f7baab9e9e4f3",
+  "cumulative_native_cells": 296928,
   "cohorts": [
     {
       "original_batch_id": "retained-authority-scope:0037ca1e3f6f3c91f641977f10e592da91fd068935cd3a0aa83ce6b895149140",
@@ -42,34 +42,6 @@
           "target_id": "atlas:city:VNM-491",
           "disposition": "assigned",
           "native_rows_sha256": "64e4f7a2d605af950c3c865f694c71b0a381b17d01fc11f7d2564464fbfdf784"
-        }
-      ]
-    },
-    {
-      "original_batch_id": "retained-authority-scope:04151bd859165f6eab5566995604ddd943dded091e155a2147cd6a9f4b110f68",
-      "component_ids": [
-        "source-target:5e83fdc9341883e5fca0e97919fb9c14f841f921965eef8d2744b162cf99e843",
-        "source-target:730cea7d93c10a7499b18c8dd70f544df28466a22302aa4bdcc9919804161f97",
-        "source-target:cfe64f8113598caa33e5c9f4411b41d780154f15a7c35d790869cb59fe238da6"
-      ],
-      "members": [
-        {
-          "component_id": "source-target:5e83fdc9341883e5fca0e97919fb9c14f841f921965eef8d2744b162cf99e843",
-          "target_id": "gb:KIR:ADM1:97431129B35506555718846",
-          "disposition": "assigned",
-          "native_rows_sha256": "63107c181767543084e0a0a9d6e20910f7cfb22cb32b4d101171328a5b8219f9"
-        },
-        {
-          "component_id": "source-target:730cea7d93c10a7499b18c8dd70f544df28466a22302aa4bdcc9919804161f97",
-          "target_id": "gb:KIR:ADM1:97431129B36644055464690",
-          "disposition": "assigned",
-          "native_rows_sha256": "a98a2b2eec6c61307ff505658b6ca75a25c76a3b8df288fccc8e1d17bddfa759"
-        },
-        {
-          "component_id": "source-target:cfe64f8113598caa33e5c9f4411b41d780154f15a7c35d790869cb59fe238da6",
-          "target_id": "gb:KIR:ADM1:97431129B55805139245338",
-          "disposition": "assigned",
-          "native_rows_sha256": "675d08601c0ee0a998b4f3b7cc3e19c49c191bca39fe4a1ef0ca814ae0261068"
         }
       ]
     },
@@ -2702,6 +2674,34 @@
           "target_id": "gb:GRC:ADM3:53547021B72748856763578",
           "disposition": "assigned",
           "geometry_sha256": "a63b534fc22678a8eb30a94d686c44d2cc2f837ae1d980a3c318b5d8bdc2619a"
+        }
+      ]
+    },
+    {
+      "original_batch_id": "retained-authority-scope:7eded2871004dc389334e01fa7c0b38af2396fae17d1d7260af18d8885efd335",
+      "component_ids": [
+        "source-target:09ff3cd79734a8ef8f2315e922a917db53035bead89e089ed93ac6a2806576a0",
+        "source-target:83ac9e1ca88ea227010393223a522cd0e2eb150aede5fc8965b73806b5e1440b",
+        "source-target:a51c3eb099ada4064df0adc03e2df4d6830305dca6e4ae94fed9970e2018d573"
+      ],
+      "members": [
+        {
+          "component_id": "source-target:09ff3cd79734a8ef8f2315e922a917db53035bead89e089ed93ac6a2806576a0",
+          "target_id": "gb:KIR:ADM1:97431129B35506555718846",
+          "disposition": "assigned",
+          "native_rows_sha256": "63107c181767543084e0a0a9d6e20910f7cfb22cb32b4d101171328a5b8219f9"
+        },
+        {
+          "component_id": "source-target:83ac9e1ca88ea227010393223a522cd0e2eb150aede5fc8965b73806b5e1440b",
+          "target_id": "gb:KIR:ADM1:97431129B36644055464690",
+          "disposition": "assigned",
+          "native_rows_sha256": "baa6ea2eec36278607e77f9298443c661a726ae8c166abdca761031fd7cdc34b"
+        },
+        {
+          "component_id": "source-target:a51c3eb099ada4064df0adc03e2df4d6830305dca6e4ae94fed9970e2018d573",
+          "target_id": "gb:KIR:ADM1:97431129B55805139245338",
+          "disposition": "assigned",
+          "native_rows_sha256": "675d08601c0ee0a998b4f3b7cc3e19c49c191bca39fe4a1ef0ca814ae0261068"
         }
       ]
     },
