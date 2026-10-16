@@ -36,20 +36,104 @@ const NATIVE_REGRESSION_INPUTS = [
   ]}
 ];
 export const NATIVE_REGRESSION_COMMITS = [...new Set(NATIVE_REGRESSION_INPUTS.flatMap(group=>group.commits))];
-export function prepareNativeRegressionInputs(profile,{files,exists=fs.existsSync,run=spawnSync}={}) {
+// Original body rosters already belong to these consumers' immutable metadata.
+// Acquisition does not authenticate science; the unchanged readers hash each
+// body when they consume it. Do not hydrate unrelated historical tree blobs.
+function nativeRegressionBodies(files,readFile) {
+  const has=name=>files.includes('test/'+name+'.test.mjs');
+  const read=name=>JSON.parse(readFile(name));
+  const pins=[];
+  let candidate,raw;
+  const manifest=()=>{
+    if(!candidate){raw=readFile('coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/manifest.json');candidate=JSON.parse(raw);}
+    return candidate;
+  };
+  if(has('select-build-ownership'))pins.push(manifest().original_assets.bounds);
+  if(has('select-build-ownership')||has('native-materialization-gate')){
+    manifest();
+    pins.push(read('scripts/native-ownership/verified-candidates.json').candidates[createHash('sha256').update(raw).digest('hex')]);
+  }
+  if(has('native-latitudes'))pins.push(manifest().native_latitudes);
+  if(has('pinned-native-package-inputs')){
+    const {baseline}=read('coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/evidence-quality.json');
+    pins.push(...baseline.files.filter(pin=>pin.path.startsWith('data/')).map(pin=>({...pin,commit:baseline.commit})),
+      {...manifest().native_latitudes,commit:baseline.commit});
+  }
+  if(has('physical-component-custody')||has('physical-component-report-binding')){
+    const root='coordination/engineering/physical-gap-components-1005-20261005-local19/';
+    for(const generation of read(root+'custody-v1/index.json').generations){
+      const commit=generation.executed_code_commit,prefix=root+'executed-code/'+commit+'/';
+      for(const pin of generation.code){
+        if(!pin.path.startsWith(prefix))throw Error('Original custody code path differs');
+        pins.push({...pin,commit,path:pin.path.slice(prefix.length)});
+      }
+    }
+  }
+  return pins;
+}
+export function prepareNativeRegressionInputs(profile,{files,exists=fs.existsSync,readFile=fs.readFileSync,run=spawnSync}={}) {
   if(profile!=='full'||!exists('scripts/native-ownership/validate-context-input-stage.mjs'))return {applicable:false,fetched:[]};
   if(files!==undefined&&(!Array.isArray(files)||!files.length||files.some(name=>typeof name!=='string'||!/^test\/[A-Za-z0-9_.-]+\.test\.mjs$/.test(name)||!exists(name))))
     throw Error('Actual regression file roster required');
-  // Unscoped callers retain every remaining regression dependency.
+  // Unscoped callers retain every remaining regression dependency and their
+  // original whole-commit fetch behavior. Scoped runs derive only consumed pins.
   const required=files===undefined?NATIVE_REGRESSION_COMMITS:[...new Set(NATIVE_REGRESSION_INPUTS
     .filter(group=>group.tests.some(name=>files.includes(name))).flatMap(group=>group.commits))];
-  const present=commit=>run('git',['cat-file','-e',commit+'^{commit}'],{encoding:'utf8'}).status===0;
-  const missing=required.filter(commit=>!present(commit));
-  if(missing.length){
-    const fetched=run('git',['fetch','--no-tags','--depth=1','origin',...missing],{encoding:'utf8',maxBuffer:4*1024*1024});
-    if(fetched.status!==0)throw Error('Immutable native regression fetch failed: '+(fetched.error?.message??fetched.stderr??''));
+  const pins=files===undefined?[]:nativeRegressionBodies(files,readFile);
+  const declared=new Map();
+  for(const pin of pins){
+    if(!pin||!required.includes(pin.commit)||typeof pin.path!=='string'||!pin.path||pin.path.includes('\\')||
+      /[\0\r\n]/.test(pin.path)||path.posix.isAbsolute(pin.path)||pin.path.split('/').some(part=>!part||part==='.'||part==='..')||
+      pin.bytes!==undefined&&(!Number.isSafeInteger(pin.bytes)||pin.bytes<0))throw Error('Invalid original regression input declaration');
+    const key=pin.commit+'\0'+pin.path,prior=declared.get(key);
+    if(prior&&['bytes','mode','git_blob_oid','sha256'].some(field=>prior[field]!==undefined&&pin[field]!==undefined&&prior[field]!==pin[field]))
+      throw Error('Conflicting original regression input declarations');
+    declared.set(key,{...prior,...pin});
   }
+  if(files!==undefined&&required.some(commit=>!pins.some(pin=>pin.commit===commit)))throw Error('Original regression input roster is incomplete');
+  const options={encoding:'utf8',maxBuffer:Infinity,env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_TERMINAL_PROMPT:'0'}};
+  const git=(args,input)=>{
+    const result=run('git',args,{...options,...(input===undefined?{}:{input})});
+    if(result.error||result.status!==0)throw Error('Immutable native regression command failed: '+(result.error?.message??result.stderr??''));
+    return result.stdout;
+  };
+  const present=commit=>{
+    const result=run('git',['cat-file','-e',commit+'^{commit}'],options);
+    if(result.error||result.status===null)throw Error('Immutable native regression commit inspection failed');
+    return result.status===0;
+  };
+  const missing=required.filter(commit=>!present(commit));
+  if(missing.length)git(['fetch','--no-tags','--depth=1',...(files===undefined?[]:['--filter=blob:none']),'origin',...missing]);
   if(required.some(commit=>!present(commit)))throw Error('Immutable native regression inputs remain unavailable');
+  const objects=new Map();
+  for(const pin of declared.values()){
+    const row=git(['ls-tree','-z',pin.commit,'--',pin.path]);
+    const match=typeof row==='string'&&/^(100644|100755) blob ([a-f0-9]{40})\t([^\0]+)\0$/.exec(row);
+    if(!match||match[3]!==pin.path||pin.mode!==undefined&&pin.mode!==match[1]||pin.git_blob_oid!==undefined&&pin.git_blob_oid!==match[2])
+      throw Error('Original regression tree identity differs: '+pin.path);
+    const oid=match[2],previous=objects.get(oid);
+    if(previous?.bytes!==undefined&&pin.bytes!==undefined&&previous.bytes!==pin.bytes)throw Error('Conflicting original regression input lengths');
+    objects.set(oid,{oid,bytes:pin.bytes??previous?.bytes});
+  }
+  const inventory=()=>{
+    if(!objects.size)return [];
+    const rows=git(['cat-file','--batch-check=%(objectname) %(objecttype) %(objectsize)'],[...objects.keys()].join('\n')+'\n');
+    const lines=typeof rows==='string'&&rows.endsWith('\n')?rows.slice(0,-1).split('\n'):[];
+    if(lines.length!==objects.size)throw Error('Incomplete original regression body inventory');
+    const absent=[];
+    [...objects.values()].forEach((pin,index)=>{
+      if(lines[index]===pin.oid+' missing'){absent.push(pin.oid);return;}
+      const fields=lines[index].split(' '),size=Number(fields[2]);
+      if(fields.length!==3||fields[0]!==pin.oid||fields[1]!=='blob'||!/^\d+$/.test(fields[2])||
+        !Number.isSafeInteger(size)||pin.bytes!==undefined&&size!==pin.bytes)throw Error('Original regression body type or length differs');
+    });
+    return absent;
+  };
+  const absent=inventory();
+  if(absent.length){
+    git(['fetch','--no-tags','--no-write-fetch-head','--no-recurse-submodules','--no-auto-maintenance','--filter=blob:none','--stdin','origin'],absent.join('\n')+'\n');
+    if(inventory().length)throw Error('Original regression bodies remain unavailable');
+  }
   return {applicable:true,fetched:missing};
 }
 
