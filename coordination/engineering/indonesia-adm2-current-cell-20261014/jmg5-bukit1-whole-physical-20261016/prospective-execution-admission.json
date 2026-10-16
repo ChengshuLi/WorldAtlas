@@ -1,0 +1,44 @@
+{
+  "kind": "six-whole-member-stock-physical-prospective-admission",
+  "command": [
+    "node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "physical",
+    ".cloud-work/jmg6-physical-001/physical-config.json",
+    "coordination/engineering/indonesia-adm2-current-cell-20261014/jmg5-bukit1-whole-physical-20261016/physical-result-001"
+  ],
+  "limits": {
+    "process_group_rss_bytes": 2147483648,
+    "wall_seconds": 180,
+    "per_file_bytes": 33554432,
+    "owned_physical_disk_bytes": 83886080,
+    "minimum_free_disk_bytes": 10737418240,
+    "poll_seconds": 0.05
+  },
+  "config_sha256": "7053cea1240214703ed4b6a4e247ec479863f9303846c8b39beaa435404eb8c6",
+  "supervisor_sha256": "4e0dfaad82cb7b0cb102928c953aad6b30cff7315a738ee8f5bcefe64c571c47",
+  "physical_program_sha256": "abc801b9a35d20c9f0dfe3bbc9bb2cb7dc107f1758414970d9cde11380574a18",
+  "entry_sha256": "3681743d8eec4b93fe501847b9ae3c110ebbf4a315c7e4eda9dcd4d33ca16bab",
+  "free_disk_bytes_before": 10872963072,
+  "owned_disk_bytes_before": 1324406,
+  "memory_before": {
+    "MemTotal": 10451464192,
+    "MemAvailable": 7733977088
+  },
+  "targets": [
+    "government:JMG:Demarcation:layer10:OBJECTID:6",
+    "government:JMG:Demarcation:layer9:OBJECTID:11",
+    "government:JMG:Demarcation:layer9:OBJECTID:19",
+    "government:JMG:Demarcation:layer9:OBJECTID:32",
+    "government:JMG:Demarcation:layer9:OBJECTID:15",
+    "gb-full:MYS:ADM2:9469f09:92858781B56085190058706"
+  ],
+  "complete_common_input_encoded_bytes": 85926037,
+  "complete_metadata_decoded_bytes": 123347986,
+  "complete_native_member_decoded_bytes": 95809336,
+  "limits_of_monitor": [
+    "RSS and disk are sampled, not a hermetic cgroup quota.",
+    "RLIMIT_FSIZE is enforced per file in the whole child process group.",
+    "The shared producer retains its stock scientific checks and exclusive publication."
+  ]
+}
