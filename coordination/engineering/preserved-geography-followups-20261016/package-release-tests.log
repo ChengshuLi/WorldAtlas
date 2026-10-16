@@ -1,0 +1,200 @@
+✔ legacy index remains unchanged; verified extension resolves new release (3.948179ms)
+✔ pointer rejects traversal, wrong digest and changed predecessor bytes (2.528187ms)
+✔ extension rejects altered predecessor release or batch metadata (1.236598ms)
+✔ extension rejects duplicate identities, decreasing versions and repeated batch paths (2.066587ms)
+✔ manifest pointers cannot load symbolic links (1.234068ms)
+✔ compressed transport retains exact JSON bytes and rejects transport or payload tampering (1.361429ms)
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Missing actual package-issued current execution
++ actual - expected
+
++ undefined
+- '.cache/current-context-execution.json'
+
+    at readPackageCurrentExecution (file:///tmp/atlas-package-boundary-L6ALb6/.cache/package-input-image-LUWEOi/coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs:105:9)
+    at file:///tmp/atlas-package-boundary-L6ALb6/.cache/package-input-image-LUWEOi/scripts/build-static-inner.mjs:2:14
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: undefined,
+  expected: '.cache/current-context-execution.json',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ '318f07ec8399725c21212b8d4ddfd85b661c7e07c6ccace713486f1946588c04'
+- '0000000000000000000000000000000000000000000000000000000000000000'
+
+    at readPackageCurrentExecution (file:///tmp/atlas-package-boundary-gHGGuh/.cache/package-input-image-syu2yj/coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs:106:98)
+    at file:///tmp/atlas-package-boundary-gHGGuh/.cache/package-input-image-syu2yj/scripts/build-static-inner.mjs:2:14
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: '318f07ec8399725c21212b8d4ddfd85b661c7e07c6ccace713486f1946588c04',
+  expected: '0000000000000000000000000000000000000000000000000000000000000000',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Wrong independently supplied source root
++ actual - expected
+
++ '/tmp/atlas-package-boundary-XgnuwL'
+- '/tmp/atlas-package-boundary-XgnuwL/.cache/package-input-image-vQBACv'
+
+    at authenticateCurrentExecution (file:///tmp/atlas-package-boundary-XgnuwL/.cache/package-input-image-vQBACv/coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs:89:9)
+    at readPackageCurrentExecution (file:///tmp/atlas-package-boundary-XgnuwL/.cache/package-input-image-vQBACv/coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs:107:9)
+    at file:///tmp/atlas-package-boundary-XgnuwL/.cache/package-input-image-vQBACv/scripts/build-static-inner.mjs:2:14
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: '/tmp/atlas-package-boundary-XgnuwL',
+  expected: '/tmp/atlas-package-boundary-XgnuwL/.cache/package-input-image-vQBACv',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Missing actual package-issued current execution
++ actual - expected
+
++ '../foreign.json'
+- '.cache/current-context-execution.json'
+
+    at readPackageCurrentExecution (file:///tmp/atlas-package-boundary-z8kW1t/.cache/package-input-image-KTDIcb/coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs:105:9)
+    at file:///tmp/atlas-package-boundary-z8kW1t/.cache/package-input-image-KTDIcb/scripts/build-static-inner.mjs:2:14
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: '../foreign.json',
+  expected: '.cache/current-context-execution.json',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+39 !== 31
+
+    at verifyFiles (file:///tmp/atlas-package-boundary-bXruqW/.cache/package-input-image-4oF3Pa/coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs:63:47)
+    at authenticateCurrentExecution (file:///tmp/atlas-package-boundary-bXruqW/.cache/package-input-image-4oF3Pa/coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs:94:2)
+    at readPackageCurrentExecution (file:///tmp/atlas-package-boundary-bXruqW/.cache/package-input-image-4oF3Pa/coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs:107:9)
+    at file:///tmp/atlas-package-boundary-bXruqW/.cache/package-input-image-4oF3Pa/scripts/build-static-inner.mjs:2:14
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 39,
+  expected: 31,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0
+✔ current-execution real plain-child package positives and hostile boundaries (3832.115764ms)
+✔ only declared files enter the source image; unrelated research cannot alter artifact bytes (142.717788ms)
+node:fs:622
+  return binding.open(
+                 ^
+
+Error: ENOENT: no such file or directory, open 'research/paper.json'
+    at Object.openSync (node:fs:622:18)
+    at Object.readFileSync (node:fs:488:35)
+    at file:///tmp/atlas-package-boundary-453HKA/.cache/package-input-image-bLwyKS/scripts/build-static-inner.mjs:1:30
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'research/paper.json'
+}
+
+Node.js v24.19.0
+node:internal/modules/esm/resolve:271
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/tmp/atlas-package-boundary-4mzSGh/.cache/package-input-image-9vLE4x/research/secret.mjs' imported from /tmp/atlas-package-boundary-4mzSGh/.cache/package-input-image-9vLE4x/scripts/build-static-inner.mjs
+    at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+    at moduleResolve (node:internal/modules/esm/resolve:865:10)
+    at defaultResolve (node:internal/modules/esm/resolve:992:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:701:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:721:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:759:56)
+    at #resolve (node:internal/modules/esm/loader:683:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:603:35)
+    at node:internal/modules/esm/loader:632:32
+    at TracingChannel.tracePromise (node:diagnostics_channel:362:14) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///tmp/atlas-package-boundary-4mzSGh/.cache/package-input-image-9vLE4x/research/secret.mjs'
+}
+
+Node.js v24.19.0
+✔ undeclared reads and imports fail before replacing caller outputs and clean the image (134.793513ms)
+✔ explicit research promotion makes the same read available (67.855929ms)
+✔ input symlinks, including ancestor aliases, cannot expose undeclared files (5.171895ms)
+✔ missing mandatory inputs fail; optional absent inputs are allowed (5.328909ms)
+✔ dependency links must stay within the installed dependency tree (3.306132ms)
+✔ output and cache ancestor links are rejected (3.66087ms)
+✔ private builder requires the actual declared image identity (0.459506ms)
+✔ producer and selected runtime probes genuinely import without Python startup hooks (141.120966ms)
+✔ stable release directory enters the actual isolated package for successive manifest pointers (177.99181ms)
+file:///tmp/atlas-package-release-zAta6N/.cache/package-input-image-6iLnRz/scripts/read-geographic-release-manifest.mjs:26
+ if(sha(compressed)!==pointer.sha256)throw Error('Geographic manifest extension hash mismatch');
+                                           ^
+
+Error: Geographic manifest extension hash mismatch
+    at readGeographicReleaseManifest (file:///tmp/atlas-package-release-zAta6N/.cache/package-input-image-6iLnRz/scripts/read-geographic-release-manifest.mjs:26:44)
+    at file:///tmp/atlas-package-release-zAta6N/.cache/package-input-image-6iLnRz/scripts/build-static-inner.mjs:3:16
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v24.19.0
+✔ the isolated package still rejects a corrupt current manifest and preserves prior output (161.790295ms)
+✔ declaration uses literal paths, precise directory membership and approved outputs (8.692757ms)
+✔ complete package declarations retain exact whole immutable blob identity (23.657005ms)
+✔ original output capture and actual Python execution use the declared source boundary (0.571113ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4437.572921
