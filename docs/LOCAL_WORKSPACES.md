@@ -22,7 +22,7 @@ node scripts/local-workspace.mjs report
 node scripts/local-workspace.mjs check
 node scripts/local-workspace.mjs allocate --worker YOUR-WORKER-ID --slot work \
   --branch geography/YOUR-FRESH-JOB --include data/regional-review/YOUR-PACKET \
-  --include data/hierarchy.json --reserve-gib 1
+  --include data/hierarchy.json
 node scripts/local-workspace.mjs allocate --worker YOUR-REVIEWER-ID --slot review \
   --commit EXACT_40_CHARACTER_REVIEW_HEAD --include data/regional-review/YOUR-PACKET
 ```
@@ -49,14 +49,13 @@ as literal `data/`, `research/` or `coordination/` paths. Include new owned pack
 paths too. Scope is a storage choice, not permission to omit required evidence or
 weaken a check. Resolve pinned baseline bytes with Git when a reproducer supports
 that; otherwise include their exact paths. Verify required inputs are present.
-Use `--profile full` only when the actual build/test needs it, with an adequate
-`--reserve-gib` estimate. There is no allocation-time limit bypass.
+Use `--profile full` only when the actual build/test needs it.
 
 Allocation reads tree metadata before sizing only the selected blobs in bounded
 no-lazy-fetch batches. Native `rev-list --missing=print --ignore-missing` probes
 disable fetch before object parsing, including on Git 2.39, before `cat-file`
 sizes locally present selected blobs. Excluded partial-clone blobs need not be present and are not
-hydrated for sizing. Missing selected blobs fail before a reservation, branch or
+hydrated for sizing. Missing selected blobs fail before a slot, branch or
 checkout is created; acquire only the explicitly required inputs through the
 coordinated import path, then retry normal allocation. This also applies to full
 profiles, which select every file.
@@ -146,9 +145,8 @@ not missing-blob rows. No object acquisition is automatic. On older Git,
 
 For a coordinated acquisition, authenticate each missing path/OID/type/size
 against the same immutable GitHub tree. Use the relevant subtree's metadata when
-needed; refuse truncated, conflicting or unknown descriptors. Run `check` before
-downloading and allow for the missing object bytes, the planned checkout
-reservation and other build/dependency needs above the existing free-space floor.
+needed; refuse truncated, conflicting or unknown descriptors. Compare actual free
+space with the missing object bytes, planned checkout and build/dependency growth.
 Only the verified `missing[].oid` list from this exact scope may be imported:
 
 ```sh
@@ -164,42 +162,30 @@ repository OIDs, global `ls-tree -l`, a full clone or automatic lazy fetching.
 This reuses the exact-object transport used by geography acquisition; its
 geography-specific CLI/declaration limits are unchanged and are not a universal
 workspace prefetch interface. Inspection does not resolve an undeclared required
-path: sparse inputs must still cover the actual checks, or use an adequately
-reserved full profile.
+path: sparse inputs must still cover the actual checks, or use a full profile when needed.
 
-## Storage admission and ongoing checks
+## Actual storage and operation sizing
 
-Allocation is serialized across this repository by an exclusive local directory
-lock. It requires at least **10 GiB free after the new reservation**. There is no
-fixed cap on combined checkout usage or on an individual reservation. Reservations
-must be positive, finite and represent safe integer byte counts. `report` still
-inventories all registered legacy worktrees, even outside the managed root, and
-the primary checkout's Git store. Each managed slot counts the greater of
-measured usage and its reserved future size; allocation reserves at least the
-selected Git input size and defaults to 1 GiB. Reserve for dependencies, downloads,
-decompression, generated data and build output before starting, rather than
-estimating source size alone. Missing selected inputs or unknown selected input sizes
-block allocation. Allocation checks real free space without traversing registered
-checkouts. `check` also reads filesystem free space directly and returns only
-`freeBytes` and `limits`; filesystem free space already reflects actual usage by
-all worktrees, the Git store and other applications. Missing worktree paths,
-unknown checkout measurements and invalid registry records still block `report`,
-which remains the inventory diagnostic, but do not block the floor-only `check`.
-Allocation and release retain their existing registry, ownership and isolation checks.
+Allocation is serialized by an exclusive local directory lock. There is no fixed
+free-space floor or reservation system. `report` inventories measured usage for
+registered worktrees, including legacy paths and the primary checkout's Git store;
+`check` is a cheap free-space report, returning only `freeBytes`. Existing registry
+reservation fields are ignored without rewriting other workers' entries.
 
-Run `check` before downloads, installations, reproductions/builds and at work
-milestones. A failure means stop new generation/installation and inspect `report`;
-release completed work, or record a storage blocker. Do not fall back to a full
-clone, unmanaged worktree, `git archive` extraction or another `/tmp` directory.
-Keep bounded scratch inside the slot so it is measured. Do not duplicate retained
-datasets for baseline experiments: use pinned Git inputs and small derived output.
+Use actual available space and the operation's expected downloads, dependencies,
+decompression and output growth when planning work. Keep bounded scratch inside
+the slot, reuse pinned Git inputs and avoid duplicating retained datasets. A small
+operation does not need a fixed multi-gigabyte reserve. Filesystem and Git failures
+propagate normally; an interrupted allocation stays recorded for inspection, never
+as a successfully prepared slot. Missing selected inputs still block allocation.
 
-These are cooperative admission/milestone gates, **not filesystem quotas**. A
-running generator, another application or a worker bypassing the tool can exceed
-the budget between checks. No daemon kills processes or deletes files under disk
-pressure. Disk free space accounts for other repositories/apps; the usage
-report inventories this repository only. Unregistered historical archives must
-be inspected during migration; the helper does not infer their ownership.
+These reports are observations, not filesystem quotas or promised capacity. Other
+workers and applications can consume space after measurement. Nothing kills
+processes or deletes files under disk pressure. `report` refuses missing worktree
+paths, unknown measurements and invalid registry records; `check` reads free space
+without traversing worktrees. Inspect actual failures and preserve unique work
+before releasing any completed owned slot. Ownership, isolation, sparse input and
+safe-release protections remain required.
 
 Reuse existing package download caches and browser binaries; install dependencies
 only for checks that need them. Share immutable dependency environments keyed by
@@ -244,7 +230,7 @@ original repository evidence, other workers' work or production data.
 
 The token changes on every allocation. Wrong/stale tokens, symlink directories,
 changed Git identity and an occupied slot fail closed. A failed/interrupted
-allocation remains `preparing` in the registry and consumes its reservation. A
+allocation remains `preparing` in the registry and occupies its slot. A
 crash may leave the local lock. Neither expiry nor a timeout authorizes deletion
 or lock breaking: inspect processes, `git worktree list`, the registry and actual
 files, preserve work and reconcile under one operator. There is intentionally no
@@ -257,6 +243,5 @@ existing author/reviewer/Auditor/publisher instructions to read this guide befor
 their next allocation. Finish active legacy jobs in place; do not move their live
 files. After a job is finished, inspect and preserve unique work before removing
 its completed legacy checkout with Git. `report` lists legacy usage; it never
-automatically deletes it. A breached budget may therefore block new allocations
-until legacy cleanup is safely completed. Managed paths and the registry are
+automatically deletes it. Actual disk exhaustion may therefore require safe legacy cleanup. Managed paths and the registry are
 local execution state, not another issue/status ledger.

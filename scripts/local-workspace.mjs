@@ -5,8 +5,6 @@ import {execFileSync, spawnSync} from 'node:child_process';
 import {createHash, randomUUID} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 
-export const GiB = 1024 ** 3;
-export const policy = {minimumFree: 10 * GiB};
 const support = ['docs', 'scripts', 'test', 'src', 'hosted', 'drizzle', '.github', '.agents', 'coordination/templates'];
 const engineeringCode = name => name.startsWith('coordination/engineering/') && /\.(?:mjs|js|cjs|py|sh)$/.test(name);
 const id = value => typeof value === 'string' && /^[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}$/.test(value);
@@ -14,7 +12,7 @@ const safeInclude = value => typeof value === 'string' && /^(data|research|coord
   && value.split('/').every(part => part && part !== '.' && part !== '..');
 
 // No shell, background mutations, timeout retries, or automatic lock breaking.
-export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
+export function workspaceManager(repo, {freeBytes} = {}) {
   const noLazyFetch = {...process.env, GIT_NO_LAZY_FETCH: '1', GIT_NO_REPLACE_OBJECTS: '1'};
   const git = (...args) => execFileSync('git', ['-C', repo, ...args], {encoding: 'utf8', maxBuffer: 32 * 1024 * 1024, env: noLazyFetch});
   const objectGit = (args, input, maxBuffer = 128 * 1024) => {
@@ -53,8 +51,7 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     if (value.version !== 1 || !Array.isArray(value.entries)) throw Error('Unknown workspace registry; inspect manually');
     for (const entry of value.entries) {
       if (!id(entry.worker) || !['work', 'review'].includes(entry.slot) || !id(entry.token)
-        || entry.path !== slotPath(entry.worker, entry.slot) || !Number.isSafeInteger(entry.reservation)
-        || entry.reservation < 0 || !/^[a-f0-9]{40}$/.test(entry.head)) throw Error('Invalid workspace registry; inspect manually');
+        || entry.path !== slotPath(entry.worker, entry.slot) || !/^[a-f0-9]{40}$/.test(entry.head)) throw Error('Invalid workspace registry; inspect manually');
     }
     if (new Set(value.entries.map(entry => entry.path)).size !== value.entries.length) throw Error('Duplicate workspace registry entries');
     return value;
@@ -100,13 +97,10 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     let checkoutBytes = 0;
     for (const item of inventory) {
       const entry = value.entries.find(entry => entry.path === item.path);
-      checkoutBytes += Math.max(item.bytes, entry?.reservation ?? 0);
+      checkoutBytes += item.bytes;
       item.managed = Boolean(entry);
     }
-    for (const entry of value.entries) {
-      if (!inventory.some(item => item.path === entry.path)) checkoutBytes += entry.reservation;
-    }
-    return {root, registry, freeBytes: availableBytes(), checkoutBytes, limits, entries: value.entries, worktrees: inventory};
+    return {root, registry, freeBytes: availableBytes(), checkoutBytes, entries: value.entries, worktrees: inventory};
   };
   const inputInventory = (head, profile, include) => {
     requireCommit(head);
@@ -168,7 +162,7 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
         }
         input.bytes = bytes.get(oid);
         estimated += input.bytes;
-        if (!Number.isSafeInteger(estimated)) throw Error('Reserve and selected inputs must represent a safe finite byte count');
+        if (!Number.isSafeInteger(estimated)) throw Error('Selected inputs must represent a safe finite byte count');
       }
     }
     const sparsePatterns = [...selected.map(prefix => `/${prefix}${tree.some(({name}) => name.startsWith(prefix + '/')) ? '/' : ''}`),
@@ -184,10 +178,9 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
       selectedBytes: missing.length ? null : estimated,
       inputs: inputs.map(({name, oid, bytes}) => ({path: name, oid, bytes})), missing};
   };
-  const allocate = ({worker, slot = 'work', branch, commit, profile = 'sparse', include = [], reserveGiB = 1}) => locked(() => {
+  const allocate = ({worker, slot = 'work', branch, commit, profile = 'sparse', include = []}) => locked(() => {
     if (!id(worker) || !['work', 'review'].includes(slot)) throw Error('Supply a safe unique worker ID and work/review slot');
     if (!['sparse', 'full'].includes(profile) || !Array.isArray(include) || !include.every(safeInclude)) throw Error('Use sparse/full profile and literal data/research/coordination paths without traversal or globs');
-    if (!Number.isFinite(reserveGiB) || reserveGiB <= 0 || !Number.isSafeInteger(Math.ceil(reserveGiB * GiB))) throw Error('Reserve must be positive and represent a safe finite byte count');
     if (slot === 'work' && (!/^(engineering|geography|research)\/[a-z0-9][a-z0-9-]{0,63}$/.test(branch ?? '') || commit)) throw Error('Work needs a fresh lane branch; main is fetched by the allocator');
     if (slot === 'review' && (branch || !/^[a-f0-9]{40}$/.test(commit ?? ''))) throw Error('Review needs an exact detached 40-character commit');
     const value = state();
@@ -197,13 +190,10 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     if (fs.existsSync(destination)) throw Error('Unregistered checkout directory exists; inspect instead of overwriting');
     if (slot === 'work') git('fetch', 'origin', 'main');
     const head = slot === 'work' ? git('rev-parse', '--verify', 'origin/main').trim() : commit;
-    const {sparsePatterns, estimated, missing} = inputInventory(head, profile, include);
+    const {sparsePatterns, missing} = inputInventory(head, profile, include);
     if (missing.length) throw Error(`Unknown input size; selected blobs must be available locally. Run inspect --commit ${head} with this same profile/include scope to list missing paths/OIDs.`);
-    const reservation = Math.max(Math.ceil(reserveGiB * GiB), estimated);
-    if (!Number.isSafeInteger(reservation)) throw Error('Reserve and selected inputs must represent a safe finite byte count');
-    if (availableBytes() - reservation < limits.minimumFree) throw Error('Insufficient disk headroom; release completed workspaces before allocation');
     const entry = {worker, slot, path: destination, token: randomUUID(), head, branch: branch ?? null,
-      profile, include, reservation, status: 'preparing', createdAt: new Date().toISOString()};
+      profile, include, status: 'preparing', createdAt: new Date().toISOString()};
     value.entries.push(entry);
     save(value); // Preserve interrupted attempts for inspection, even if Git fails below.
     fs.mkdirSync(path.dirname(destination), {recursive: true});
@@ -244,11 +234,7 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     save(value);
     return {released: true, path: entry.path, preservedRef, head};
   });
-  const check = () => {
-    const usage = {freeBytes: availableBytes(), limits};
-    if (usage.freeBytes < limits.minimumFree) throw Error('Local storage budget breached; stop new generation/installations and inspect report');
-    return usage;
-  };
+  const check = () => ({freeBytes: availableBytes()});
   return {report, check, inspect, allocate, release};
 }
 
@@ -258,12 +244,11 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     const options = {include: []};
     for (let index = 0; index < args.length; index += 2) {
       const key = args[index]?.replace(/^--/, '');
-      if (!['worker', 'slot', 'branch', 'commit', 'profile', 'include', 'token', 'reserve-gib'].includes(key) || !args[index + 1]) throw Error('Use report, inspect, allocate or release with documented --key value arguments');
+      if (!['worker', 'slot', 'branch', 'commit', 'profile', 'include', 'token'].includes(key) || !args[index + 1]) throw Error('Use report, inspect, allocate or release with documented --key value arguments');
       if (key === 'include') options.include.push(args[index + 1]);
       else if (Object.hasOwn(options, key)) throw Error(`Duplicate ${key}`);
       else options[key] = args[index + 1];
     }
-    if (options['reserve-gib']) options.reserveGiB = Number(options['reserve-gib']);
     if (action === 'allocate' && (options.slot ?? 'work') === 'work') assertAuthorWorkerIdentity(options.worker);
     const manager = workspaceManager(process.cwd());
     if (!['report', 'check', 'inspect', 'allocate', 'release'].includes(action)) throw Error('Choose report, check, inspect, allocate or release');
