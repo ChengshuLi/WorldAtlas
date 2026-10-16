@@ -18,6 +18,14 @@ export function authenticateLocalPinnedInput(reader,root,pin){
  if(!actual.equals(expected))throw Error('Original local input differs: '+pin.path);
  return actual;
 }
+export function captureCanonicalInputs(reader,root,evidence){
+ const inputs={};
+ for(const role of ['physical_input','physical_evidence']){
+  const body=authenticateLocalPinnedInput(reader,root,evidence[role]);
+  inputs[role]={bytes:body.length,sha256:createHash('sha256').update(body).digest('hex'),body_base64:body.toString('base64')};
+ }
+ return Buffer.from(JSON.stringify({version:1,inputs})+'\n');
+}
 export function reproduceCanonicalViews(python,destination){
  const reader=pinReader(root);
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
@@ -28,7 +36,7 @@ const pin=name=>{const raw=git('show',commit+':'+name),entry=git('ls-tree',commi
 const sourcePin=reader.pin('f0f7c3082ade4b1dfa302b9b5099f0ea04b89766',
  'coordination/engineering/fiji-current-cell-20261016/source-001/source-evidence.json');
 const evidence=JSON.parse(authenticateLocalPinnedInput(reader,root,sourcePin));
-for(const role of ['physical_input','physical_evidence'])authenticateLocalPinnedInput(reader,root,evidence[role]);
+const capturedInputs=captureCanonicalInputs(reader,root,evidence);
 const lp=evidence.native_latitudes;
 const encoded=reader.read(lp);
 if(encoded.length!==lp.bytes||sha(encoded)!==lp.sha256)throw Error('Original encoded latitudes differ');
@@ -48,7 +56,7 @@ for(const file of receipt.fresh_admission.runtime_files){
 const resolved=fs.realpathSync(python);
 if(!receipt.fresh_admission.runtime_files.some(file=>fs.realpathSync(file.path)===resolved))
  throw Error('Python is outside the authenticated physical runtime');
-const original=JSON.parse(execFileSync(python,[path.join(here,'reproduce-canonical-views.py')],{cwd:root,maxBuffer:32*1024**2}));
+const original=JSON.parse(execFileSync(python,[path.join(here,'reproduce-canonical-views.py')],{cwd:root,input:capturedInputs,maxBuffer:32*1024**2}));
 const records=[],proofs=[];
 for(const {original_geometry,...record} of original){
  records.push({...record,original_geometry_sha256:valueSha(original_geometry)});

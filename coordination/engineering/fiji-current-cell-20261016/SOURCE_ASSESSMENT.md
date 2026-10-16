@@ -97,18 +97,26 @@ existing reference-metadata projection remains unchanged.
 
 ## Controls and remaining acceptance
 
-The focused native, diagnostic, package/cold-role and constructor/entry suite has
-372 tests. Its first combined run had one environment-only missing dependency;
-the locked @noble/hashes 2.0.1 was copied to this owned test environment and all
-four affected delivery tests then passed. No skipped controls. Whole-view
-reproduction and stock source/native/compose/finalize phases passed. The shared
-fresh-vintage publisher now handles reproduction outputs; actual occupied
+The focused native, diagnostic, package/cold-role and constructor/entry suite
+passes all 373 tests in the resumed complete bounded run. No skipped controls.
+Whole-view reproduction and stock source/native/compose/finalize phases passed.
+The shared fresh-vintage publisher handles reproduction outputs; actual occupied
 destination, symlink destination and symlink ancestor controls reject before
 mutation and retain identical bytes. The three retained-report verifiers are
 read-only comparisons, not report overwriters. The actual-Fiji regression test
 authenticates the original encoded/decoded latitude bytes; it does not regenerate
-latitudes with platform math. Production and reproduction already used that
-exact normative table.
+latitudes with platform math. Production and reproduction use that exact table.
+
+The reproducer authenticates the original local source, physical evidence and
+execution receipt against their immutable Git pins, including the original
+encoded/decoded latitude identities and every admitted runtime file. It passes
+the captured source and physical bodies, with their exact byte lengths and
+SHA256s, to Python through stdin. Python verifies and consumes those captured
+bodies without reopening mutable geometry paths. The bounded transport test
+changes isolated local files after capture and proves the actual Python reader
+still consumes the captured originals; changed payload lengths, hashes and
+bodies fail. Fresh reproduction after this change is byte-identical to both
+retained canonical view and whole-native comparison products.
 
 This is local source/native qualification and exact literal conservation. Final
 hosted combined geographic verification and emitted selected-consumer smoke,
