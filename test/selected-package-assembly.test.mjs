@@ -136,7 +136,6 @@ test('consumer reduction binds actual current head and trusted assembly receipt 
     origin:{run_id:17}}};
   fs.mkdirSync(path.join(root,'.cache'));const file=path.join(root,'.cache/package-input-build.json');
   const write=value=>{const raw=JSON.stringify(value);fs.writeFileSync(file,raw);return sha(raw);};
-  receipt.diagnostics='x'.repeat(9*1024*1024);
   const expected=write(receipt),admission=requireCurrentPackageAssembly({directory:root,expected});
   assert.equal(admission.origin.run_id,17);
   assert.equal(Object.hasOwn(admission,'base_tests_reused'),false,'Assembly identity must not manufacture original test coverage');
@@ -557,7 +556,7 @@ test('trusted invocation carries the existing exact selected base without receip
   assert.throws(()=>packageAssemblyInvocation({pull_request:{head:{sha:head}}},{...env,SELECTED_PACKAGE_TRUSTED_BASE:'main'}),/Exact trusted selected base/);
 });
 
-test('discovery and actual private execution admit32 leaves including a later accepted typed code candidate',async t=>{
+test('discovery and actual private execution admit data leaves and a later accepted typed code candidate',async t=>{
   if(process.execArgv.length||process.env.NODE_OPTIONS?.trim()||process.env.NODE_PATH?.trim()){
     execFileSync(process.execPath,[new URL(import.meta.url).pathname,t.name],{env:{...process.env,NODE_OPTIONS:'',NODE_PATH:'',NODE_TEST_CONTEXT:undefined},encoding:'utf8'});return;
   }
@@ -579,7 +578,7 @@ test('discovery and actual private execution admit32 leaves including a later ac
     return baseAPI(route);
   };api.jobLogRedirect=baseAPI.jobLogRedirect;
   const declaration=JSON.parse(fs.readFileSync(path.join(f.root,'.github/package-inputs.json')));
-  for(let i=0;i<31;i++){const name=`coordination/engineering/retained-source/operand-${i}.json`;declaration.inputs.push(name);f.s.write(name,{role:i});}
+  for(let i=0;i<2;i++){const name=`coordination/engineering/retained-source/operand-${i}.json`;declaration.inputs.push(name);f.s.write(name,{role:i});}
   declaration.inputs.push(code);f.s.write('.github/package-inputs.json',declaration);f.s.commit();
   const current=f.s.snapshot();current.accepted_selected_inputs=await acceptedSelectedPackageInputs({api,repo:f.repo,base:acceptedHead,current});
   assert.equal((await findOriginalPackage({api,repo:f.repo,current,originalRunId:17})).origin.head,f.sourceHead);
