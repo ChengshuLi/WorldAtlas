@@ -2,7 +2,7 @@ import {collectGeographicApproval, bindingHash} from './geographic-adjudication-
 import {COORDINATION_PATHS, integrationProfile, selectedDataCandidate, selectedDataSelection, candidateGeographyCode} from './integration-profile.mjs';
 import {focusedIntegrationTest} from './run-integration-tests.mjs';
 import {EXECUTION_CODE, REBIND_CODE} from './check-unchanged-selected-geography.mjs';
-import {loadPackageInputs, packagePathRequired, readPackageInputs, selectedDataCheckoutPatterns, fullCheckoutPatterns} from './package-inputs.mjs';
+import {loadPackageInputs, packagePathRequired, readPackageInputs, selectedDataCheckoutPatterns, fullCheckoutPatterns, focusedCheckoutPatterns} from './package-inputs.mjs';
 import {githubPages, verifyIssueScope} from './issue-claim-contract.mjs';
 import {validateIssuePRBody, validateLanePaths} from './check-handoff-scope.mjs';
 import {checkPremergeEvidence} from './premerge-evidence.mjs';
@@ -223,12 +223,11 @@ export async function prepareIntegration(options) {
     }
     const geographyRequiredForCandidate = geographyRequired(state.pr.head.ref, state.files, state.reservation, authored.entries);
     const software = geographyRequiredForCandidate && candidateGeographyCode(profile, state.files, selection?.test_selection);
-    const packageInputs = profile === 'full'
-      ? await readPackageInputs({api: options.api, route: root(options.repo), base: candidate, maximumBytes: 8 * 1024 * 1024}) : null;
+    const packageInputs = await readPackageInputs({api: options.api, route: root(options.repo), base: candidate, maximumBytes: 8 * 1024 * 1024});
     const checkoutPatterns = selection?.test_selection === 'selected-data'
       ? selectedDataCheckoutPatterns(packageInputs, integrated.entries, selection.expectations_path)
       : profile === 'full' ? fullCheckoutPatterns(packageInputs)
-        : ['/*','!/data/regional-review/','!/research/campaigns/'];
+        : focusedCheckoutPatterns(packageInputs);
     return {...state, candidate, profile, ...selection, geography_software: software,
       geography_required: geographyRequiredForCandidate,
       candidate_tree: integrated.object.tree.sha, checkout_patterns: checkoutPatterns,

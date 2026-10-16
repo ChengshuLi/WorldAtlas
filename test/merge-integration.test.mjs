@@ -1,7 +1,7 @@
 import {execFileSync, spawnSync} from 'node:child_process';
 import {gitBlobTransport} from '../scripts/git-blob-transport.mjs';
 import {memoizeImmutableGitBlobs} from '../scripts/immutable-git-blobs.mjs';
-import {fullCheckoutPatterns} from '../scripts/package-inputs.mjs';
+import {fullCheckoutPatterns,focusedCheckoutPatterns,loadPackageInputs} from '../scripts/package-inputs.mjs';
 import {sha256, subjectsHash} from '../scripts/evidence-quality.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -411,8 +411,8 @@ function controlFixture() {
 test('actual prepare and complete omit unrelated geography without reading or fabricating a report', async () => {
   const f=controlFixture(), prepared=await prepareIntegration(f.options());
   assert.equal(prepared.profile,'evidence');assert.equal(prepared.geography_required,false);
-  assert.deepEqual(prepared.checkout_patterns,['/*','!/data/regional-review/','!/research/campaigns/']);
-  assert(!f.calls.some(row=>row.route.includes('/contents/.github/package-inputs.json')));
+  assert.deepEqual(prepared.checkout_patterns,focusedCheckoutPatterns(f.packageInputs));
+  assert(f.calls.some(row=>row.route.endsWith('/contents/.github/package-inputs.json?ref='+f.candidate)));
   const result=await f.complete({geographyResult:'skipped',geographyReportLoader:()=>{throw Error('Unrelated geography must not run');}});
   assert.equal(result.accepted,true);assert.equal(f.writes.length,1);
   assert.deepEqual(result.geography,{status:'not-applicable',reason:'non-geographic-controls'});
@@ -466,7 +466,8 @@ test('actual review-receipt PR 2010 paths use the complete applicable focused in
     assert(integrationTestFiles('evidence',0).includes(file.filename), file.filename);
   const yaml = fs.readFileSync('.github/workflows/worker-merge.yml','utf8');
   const focused = yaml.split('      - name: Checkout only focused-test inputs for evidence regression\n')[1].split('      - uses:')[0];
-  assert.match(focused,/coverage-gaps-907-20261005-local01\/sources\/natural-earth-lakes\.geojson\.gz/);
+  assert.match(focused,/sparse-checkout: \$\{\{ needs\.prepare\.outputs\.checkout_patterns \}\}/);
+  assert(focusedCheckoutPatterns(loadPackageInputs()).includes('/coordination/engineering/coverage-gaps-907-20261005-local01/sources/natural-earth-lakes.geojson.gz'));
   const unknown = {filename:'test/new-emitted-asset.test.mjs',status:'added'};
   authored.set(unknown.filename,{type:'blob',mode:'100644',sha:'2'.repeat(40)});
   assert.equal(integrationProfile('engineering/example',[...files,unknown],{},authored),'full');
