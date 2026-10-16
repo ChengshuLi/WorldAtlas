@@ -7,6 +7,7 @@ import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {gunzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
+import {publish} from '../../../../scripts/prepare-delivery-handoff.mjs';
 import {verifyNativeSeamView} from '../../../../src/native-grid.js';
 import {valueSha} from '../../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 const here=path.dirname(fileURLToPath(import.meta.url)),root=path.resolve(here,'../../../..');
@@ -40,7 +41,11 @@ for(const {original_geometry,...record} of original){
   ...verifyNativeSeamView(original_geometry,record.geometry,{size:latitudes.length,latitudes})});
 }
 const result={version:1,kind:'retained-periodic-native-views-v1',method:{pin:method,export:'canonical'},records};
-fs.mkdirSync(destination,{recursive:true});
-fs.writeFileSync(path.join(destination,'canonical-seam-views.json'),JSON.stringify(result)+'\n');
-fs.writeFileSync(path.join(destination,'canonical-native-equivalence.json'),JSON.stringify({version:1,method:'complete-native-span-and-boundary-tie-equality',proofs},null,2)+'\n');
+publish(root,destination,{
+ 'canonical-seam-views.json':Buffer.from(JSON.stringify(result)+'\n'),
+ 'canonical-native-equivalence.json':Buffer.from(JSON.stringify({version:1,method:'complete-native-span-and-boundary-tie-equality',proofs},null,2)+'\n')
+},{phase:'fiji-canonical-seam-view-reproduction',method_sha256:method.sha256,
+ program_sha256:sha(fs.readFileSync(fileURLToPath(import.meta.url))),
+ python_program_sha256:sha(fs.readFileSync(path.join(here,'reproduce-canonical-views.py'))),
+ physical_execution_receipt_sha256:sha(fs.readFileSync(path.join(here,'../physical-001/execution-receipt.json')))});
 console.log(JSON.stringify(proofs));

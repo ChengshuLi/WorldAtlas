@@ -40,5 +40,5 @@ const report={version:1,baseline,complete_families:families,exact_direct_source_
  limits:['ADM1 is complete reviewed source context only; no ADM1 assignment.',
  'The 2020 and 2006 fields are retained source vintage claims, not newly verified present-day legal applicability.',
  'The simplified consumed products remain distinct from full-resolution URLs in selected display metadata.']};
-fs.writeFileSync(prefix+'complete-source-context.json',JSON.stringify(report,null,2)+'\n');
+assert.deepEqual(JSON.parse(fs.readFileSync(prefix+'complete-source-context.json')),report,'Retained whole report differs');
 console.log(JSON.stringify({families:families.map(f=>({key:f.key,features:f.features})),direct_joins:stage.length,comparisons:comparisons.map(c=>({name:c.name,cells:c.native_cells}))}));

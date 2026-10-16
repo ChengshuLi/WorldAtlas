@@ -21,4 +21,4 @@ const report={version:1,baseline:base,source_constructor_commit:execFileSync('gi
  inherited_ledger_rows:old.rows.length,added_ledger_rows:added.length,inherited_authorities:oldReg.entries.length,added_authorities:reg.entries.length-oldReg.entries.length,
  inherited_literal_rows_unchanged:true,inherited_authorities_unchanged:true,exact_patch_union:true,prior_native_cells:count(oldPatch.rows),added_native_cells:count(native.rows),final_native_cells:count(patch.rows),metadata_projection_unchanged:true,
  limitations:['Literal composition and source qualification; hosted selected consumer and emitted smoke remain required.']};
-fs.writeFileSync(prefix+'literal-conservation.json',JSON.stringify(report,null,2)+'\n');console.log(report);
+assert.deepEqual(JSON.parse(fs.readFileSync(prefix+'literal-conservation.json')),report,'Retained whole report differs');console.log(report);

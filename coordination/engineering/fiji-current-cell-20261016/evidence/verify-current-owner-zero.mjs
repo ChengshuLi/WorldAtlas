@@ -18,4 +18,4 @@ const report={version:1,baseline,original_native_cells_checked:checked,native_ro
  native_base_manifest_sha256:snapshot.selection.sha256,original_base_overlap_cells:0,current_additive_overlap_cells:0,
  whole_native_parts:native.custody.whole_parts.map(p=>({path:p.path,bytes:p.bytes,sha256:p.sha256,decoded_sha256:p.decoded_sha256})),
  limitations:['Bounded actual selected base and cumulative-patch owner-zero proof; hosted final consumer and smoke remain required.']};
-fs.writeFileSync(prefix+'bounded-current-owner-zero.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({checked,rows:rows.length,parts:report.whole_native_parts.length}));
+assert.deepEqual(JSON.parse(fs.readFileSync(prefix+'bounded-current-owner-zero.json')),report,'Retained whole report differs');console.log(JSON.stringify({checked,rows:rows.length,parts:report.whole_native_parts.length}));

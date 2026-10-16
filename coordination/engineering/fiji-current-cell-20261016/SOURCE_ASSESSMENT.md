@@ -101,7 +101,11 @@ The focused native, diagnostic, package/cold-role and constructor/entry suite ha
 372 tests. Its first combined run had one environment-only missing dependency;
 the locked @noble/hashes 2.0.1 was copied to this owned test environment and all
 four affected delivery tests then passed. No skipped controls. Whole-view
-reproduction and stock source/native/compose/finalize phases passed.
+reproduction and stock source/native/compose/finalize phases passed. The shared
+fresh-vintage publisher now handles reproduction outputs; actual occupied
+destination, symlink destination and symlink ancestor controls reject before
+mutation and retain identical bytes. The three retained-report verifiers are
+read-only comparisons, not report overwriters.
 
 This is local source/native qualification and exact literal conservation. Final
 hosted combined geographic verification and emitted selected-consumer smoke,
