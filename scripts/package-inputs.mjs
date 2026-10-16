@@ -46,6 +46,28 @@ export function packagePathRequired(file, definition) {
   return containsPackagePath(definition.inputs, file) || containsPackagePath(definition.verification_paths, file);
 }
 
+// These whole historical archives have no complete-regression consumers. Keep
+// their originals in Git, and retain an entire root if package/verification roles
+// ever explicitly need a member or ancestor. Unlisted siblings remain included.
+export function fullCheckoutPatterns(definition) {
+  validatePackageInputs(definition);
+  const archives = [
+    'coordination/engineering/global-source-comparisons-b-package3-20261006/',
+    'coordination/engineering/global-source-comparisons-a-20261006/',
+    'coordination/engineering/global-source-comparisons-a-001-20261006/',
+    'coordination/engineering/global-source-comparisons-b-20261006/',
+    'coordination/engineering/reference-source-custody-20261007/',
+    'coordination/engineering/complete-numeric-closure-diagnosis-20261007/',
+    'research/geography/lithuania-latvia-gap-source-fitness-20261007/',
+    'research/geography/shared-seam-prt-esp-20261006/'
+  ];
+  const declared = [...definition.inputs, ...definition.verification_paths];
+  return ['/*','!/data/regional-review/','!/research/campaigns/', ...archives
+    .filter(prefix => !declared.some(name => name.startsWith(prefix) ||
+      name.endsWith('/') && prefix.startsWith(name)))
+    .map(prefix => '!/' + prefix)];
+}
+
 // Preserve the existing selected-data checkout boundary while the standard
 // checkout action owns transport and materialization. Preparation supplies the
 // authenticated complete candidate tree; package roles never authorize code.

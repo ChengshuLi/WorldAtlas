@@ -1,6 +1,7 @@
 import {execFileSync} from 'node:child_process';
 import {gitBlobTransport} from '../scripts/git-blob-transport.mjs';
 import {memoizeImmutableGitBlobs} from '../scripts/immutable-git-blobs.mjs';
+import {fullCheckoutPatterns} from '../scripts/package-inputs.mjs';
 import {sha256, subjectsHash} from '../scripts/evidence-quality.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -55,7 +56,8 @@ function fixture() {
     mergeable: true, merge_commit_sha: candidate};
   const claim = {version: 1, active: true, worker_id: 'worker', claim_id: 'nonce', branch:pr.head.ref,
     expires_at: new Date(Date.now()+3600000).toISOString()};
-  const f = {repo, pr, issue, head, base, candidate, claim, writes: [], mainReads: 0, calls: [], refs: new Map(),
+  const f = {repo, pr, issue, head, base, candidate, claim,
+    packageInputs: {version:1, inputs:['.github/package-inputs.json'], optional_inputs:[], verification_paths:[], generated_outputs:[]}, writes: [], mainReads: 0, calls: [], refs: new Map(),
     checks: [{id:1, name:'scope',app:{id:1},status:'completed',conclusion:'success'}],
     authored: [{path:'src/a.js',sha:'blob-a',mode:'100644',type:'blob'}],
     integrated: [{path:'src/a.js',sha:'blob-a',mode:'100644',type:'blob'}]};
@@ -73,6 +75,12 @@ function fixture() {
       if(method==='DELETE'){f.refs.delete(ref);return null;}return {object:{sha:f.refs.get(ref)}};
     }
     if (method==='PUT') {f.writes.push(body);return {merged:true,sha:sha('f')};}
+    if (p==='/contents/.github/package-inputs.json') {
+      assert.equal(new URL('https://fixture.invalid'+route).searchParams.get('ref'), f.synthetic ?? candidate);
+      const raw=Buffer.from(JSON.stringify(f.packageInputs));
+      return {type:'file',path:'.github/package-inputs.json',encoding:'base64',size:raw.length,
+        sha:createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex'),content:raw.toString('base64')};
+    }
     if (p==='/pulls/2') return structuredClone(f.pr);
     if (p==='/issues/1') return structuredClone(f.issue);
     if (p==='/issues/1/comments') return [{id:1,user:{login:'github-actions[bot]'},body:renderClaim(f.claim)}];
@@ -105,6 +113,33 @@ test('final queue rejects incomplete or duplicate current PR inventory before co
   await assert.rejects(prepareIntegration(f.options()),/Incomplete PR file inventory/);
   await assert.rejects(f.complete(),/Incomplete PR file inventory/);assert.equal(f.writes.length,0);
  }
+});
+
+test('actual full preparation emits archive patterns from the authenticated candidate package roles',async()=>{
+  const f=fixture();
+  f.packageInputs.verification_paths=['research/geography/shared-seam-prt-esp-20261006/required.json'];
+  const prepared=await prepareIntegration(f.options());
+  assert.equal(prepared.profile,'full');assert.equal(prepared.candidate,f.candidate);
+  assert.equal(prepared.candidate_tree,'integrated');
+  assert.deepEqual(prepared.checkout_patterns,fullCheckoutPatterns(f.packageInputs));
+  assert(!prepared.checkout_patterns.includes('!/research/geography/shared-seam-prt-esp-20261006/'));
+  assert(prepared.checkout_patterns.includes('!/coordination/engineering/reference-source-custody-20261007/'));
+  assert.equal(f.calls.filter(row=>row.route.includes('/contents/.github/package-inputs.json')).length,1);
+});
+
+test('full preparation rejects unavailable or malformed package roles and cleans its candidate',async()=>{
+  for(const kind of ['missing','malformed','wrong-bytes']){
+    const f=fixture(),api=f.api;
+    f.api=async(route,...args)=>{
+      if(!route.includes('/contents/.github/package-inputs.json'))return api(route,...args);
+      if(kind==='missing')throw Error('Package inputs unavailable');
+      if(kind==='malformed')f.packageInputs.inputs.push('../escape');
+      const result=await api(route,...args);
+      return kind==='wrong-bytes'?{...result,sha:'0'.repeat(40)}:result;
+    };
+    await assert.rejects(prepareIntegration(f.options()),/Package inputs unavailable|Invalid package|bytes changed/);
+    assert.equal(f.refs.size,0);assert.equal(f.writes.length,0);
+  }
 });
 
 test('two reviewed PRs sharing a base integrate serially without changing authored head', async () => {
@@ -296,6 +331,8 @@ function controlFixture() {
 test('actual prepare and complete omit unrelated geography without reading or fabricating a report', async () => {
   const f=controlFixture(), prepared=await prepareIntegration(f.options());
   assert.equal(prepared.profile,'evidence');assert.equal(prepared.geography_required,false);
+  assert.deepEqual(prepared.checkout_patterns,['/*','!/data/regional-review/','!/research/campaigns/']);
+  assert(!f.calls.some(row=>row.route.includes('/contents/.github/package-inputs.json')));
   const result=await f.complete({geographyResult:'skipped',geographyReportLoader:()=>{throw Error('Unrelated geography must not run');}});
   assert.equal(result.accepted,true);assert.equal(f.writes.length,1);
   assert.deepEqual(result.geography,{status:'not-applicable',reason:'non-geographic-controls'});
@@ -417,7 +454,7 @@ test('owned preparation never reads an automatic preview or waits and uses two a
     const f=fixture();f.pr.merge_commit_sha=preview;
     const result=await prepareIntegration(f.options());
     assert.equal(result.candidate,f.candidate);assert.equal(f.evidenceReads,2);
-    assert.equal(f.calls.length,18,'Two six-read authority passes, three owned creation calls and three tree reads');
+    assert.equal(f.calls.length,19,'Two six-read authority passes, three owned creation calls, three tree reads and candidate package roles');
     assert.equal(f.calls.filter(row=>row.route.endsWith('/pulls/2')).length,2);
     assert.equal(f.mainReads,2);assert.equal(f.calls.filter(row=>row.method==='POST').length,2);
     assert.equal(f.calls.filter(row=>row.route.endsWith('/git/commits/'+f.candidate)).length,1);
