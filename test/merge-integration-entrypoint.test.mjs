@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {renderClaim} from '../scripts/issue-claim-contract.mjs';
 
@@ -170,6 +171,9 @@ test('actual final entry point cleans only its owned ref and retains successful 
 test('actual owned prepare skips preview polling and cleans its ref when notification is denied',()=>{
   const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-prepare-notify-cleanup-'));
   const sha=c=>c.repeat(40),head=sha('a'),base=sha('b'),candidate=sha('c'),owned=sha('e');
+  const packageRaw=Buffer.from(JSON.stringify({version:1,inputs:['.github/package-inputs.json'],optional_inputs:[],verification_paths:[],generated_outputs:[]}));
+  const packageBlob={type:'file',path:'.github/package-inputs.json',encoding:'base64',size:packageRaw.length,
+    sha:createHash('sha1').update(`blob ${packageRaw.length}\0`).update(packageRaw).digest('hex'),content:packageRaw.toString('base64')};
   fs.mkdirSync(path.join(directory,'.github'));
   fs.copyFileSync(path.join(root,'.github/evidence-policy.json'),path.join(directory,'.github/evidence-policy.json'));
   fs.writeFileSync(path.join(directory,'event.json'),JSON.stringify({inputs:{pr_number:'2',expected_head:head,request_id:'notification-cleanup-test'}}));
@@ -184,6 +188,7 @@ test('actual owned prepare skips preview polling and cleans its ref when notific
     ['/commits/'+head+'/check-runs']:{check_runs:[{id:1,name:'scope',app:{id:1},status:'completed',conclusion:'success'}]},
     ['/commits/'+head+'/status']:{statuses:[]},'/git/ref/heads/main':{object:{sha:base}},
     ['/git/commits/'+candidate]:{sha:candidate,parents:[{sha:sha('d')},{sha:head}]},
+    '/contents/.github/package-inputs.json':packageBlob,
     ['/git/commits/'+owned]:{sha:owned,tree:{sha:sha('6')},parents:[{sha:base},{sha:head}]},
     ['/git/commits/'+head]:{tree:{sha:sha('6')}},
     ['/git/trees/'+sha('6')]:{truncated:false,tree:[{path:'src/a.js',sha:'blob',mode:'100644',type:'blob'}]}
@@ -209,6 +214,11 @@ test('actual owned prepare skips preview polling and cleans its ref when notific
     assert.notEqual(result.status,0);assert.match(result.stderr,/POST.*HTTP 403/);
     assert.equal(receipt.accepted,false);assert.equal(receipt.status,'testing');assert.equal(receipt.tested_candidate,owned);
     assert.match(receipt.notification_error,/HTTP 403/);assert.equal(receipt.candidate_cleanup.status,'deleted');
+    const output=fs.readFileSync(path.join(directory,'outputs'),'utf8');
+    assert.match(output,/shards=\[0,1,2\]/);
+    assert.match(output,/checkout_patterns<<WORLDATLAS_CHECKOUT_PATTERNS\n\/\*\n/);
+    assert.match(output,/!\/coordination\/engineering\/reference-source-custody-20261007\//);
+    assert.match(output,/!\/research\/geography\/shared-seam-prt-esp-20261006\//);
     assert.deepEqual(JSON.parse(fs.readFileSync(path.join(directory,'remaining-refs.json'))),[]);
   } finally {fs.rmSync(directory,{recursive:true,force:true});}
 });
