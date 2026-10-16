@@ -19,7 +19,7 @@ function fixture() {
   class ControlledReader extends ImmutableReader {
     git(...args) {
       this.calls.push(args);
-      if(args[0]==='ls-tree')return Buffer.from(`100644 blob ${this.blob}\t${name}\0`);
+      if(args[0]==='ls-tree')return Buffer.from(`${this.mode??'100644'} blob ${this.blob}\t${args[4]}\0`);
       if(args[0]==='cat-file'&&args[1]==='-s')return Buffer.from(String(this.declaredBytes));
       if(args[0]==='cat-file'&&args[1]==='blob')return this.body;
       throw Error('Unexpected fixture Git call: '+args.join(' '));
@@ -84,11 +84,37 @@ test('each call rereads and reauthenticates; a later same-size body drift preser
   assert.deepEqual(pin(reader),before);
 });
 
-test('descriptor drift is rejected before a second body read and leaves the original inventory intact',t=>{
+test('repeated immutable descriptors reuse their inventory entry while whole bodies are still read',t=>{
   const reader=fixture(),expected=hash(reader.body),algorithms=observeHashes(t);
-  reader.read(name,{expected});const before={...pin(reader)};
-  reader.blob='b'.repeat(40);
-  assert.throws(()=>reader.read(name,{expected}),/Immutable descriptor drift/);
-  assert.deepEqual(algorithms,['sha256']);assert.equal(wholeReads(reader),1);
-  assert.deepEqual(pin(reader),before);
+  const first=reader.descriptor(name);assert.equal(reader.descriptor(name),first);
+  reader.read(name,{expected});reader.read(name,{expected});
+  assert.equal(reader.calls.filter(args=>args[0]==='ls-tree').length,1);
+  assert.equal(reader.calls.filter(args=>args[0]==='cat-file'&&args[1]==='-s').length,1);
+  assert.equal(wholeReads(reader),2);assert.deepEqual(algorithms,['sha256','sha256']);
+});
+
+test('changed immutable commit or path gets fresh metadata and a separate descriptor',()=>{
+  const reader=fixture(),first=reader.descriptor(name);
+  reader.blob='b'.repeat(40);reader.mode='100755';
+  const other=reader.descriptor(name,'2'.repeat(40));
+  assert.notEqual(other,first);assert.equal(other.git_blob_oid,reader.blob);assert.equal(other.mode,'100755');
+  const another=reader.descriptor('tiny/other.json');assert.equal(another.path,'tiny/other.json');
+  assert.notEqual(another,first);assert.equal(reader.calls.filter(args=>args[0]==='ls-tree').length,3);
+  assert.equal(reader.descriptor(name),first);assert.equal(first.mode,'100644');
+});
+
+test('fresh readers authenticate independently and unsafe mutable refs never hit the cache',()=>{
+  const first=fixture();first.descriptor(name);
+  const second=fixture();second.descriptor(name);
+  assert.notEqual(first.inventory,second.inventory);assert.equal(second.calls.length,2);
+  first.inventory.set('main:'+name,pin(first));
+  assert.throws(()=>first.descriptor(name,'main'),/Unsafe immutable path\/commit/);
+  assert.throws(()=>first.descriptor('../body.json'),/Unsafe immutable path\/commit/);
+  assert.equal(first.calls.length,2);
+});
+
+for(const mode of ['120000','040000'])test(`fresh descriptor rejects non-ordinary mode ${mode}`,()=>{
+  const reader=fixture();reader.mode=mode;
+  assert.throws(()=>reader.descriptor(name),/Require whole ordinary Git input/);
+  assert.equal(reader.inventory.size,0);assert.equal(wholeReads(reader),0);
 });
