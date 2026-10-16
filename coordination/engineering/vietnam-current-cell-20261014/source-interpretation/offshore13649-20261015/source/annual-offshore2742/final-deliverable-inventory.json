@@ -1,0 +1,1465 @@
+{
+  "scope": "Task-local source/interpretation deliverables; inventory excludes itself and README. Existing reused external full sources and prior reports are separately pinned in input/source records.",
+  "files": [
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/cache-inputs.json",
+      "bytes": 285,
+      "sha256": "486b57484d6394a3aacaa598f69331f6cd261e5b94a043589a602758f94b5deb"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/input-scope-and-source-method.json",
+      "bytes": 9678,
+      "sha256": "24917e94e5dce0ac879b8f137adc8ad37a4697149c7594b83aa3e1344c8bda29"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/point-plan.jsonl",
+      "bytes": 4366863,
+      "sha256": "e772faa70f6275b51aa892c8b694adfa1f5d1b570695b6263f9ff940fd75970f"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/proposed-annual-original-dispositions.json",
+      "bytes": 12849149,
+      "sha256": "06fb1861da758248a4129d7b656c31c4d4d83a73eb49856529cfd47a15c2ba2a"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/read_points.py",
+      "bytes": 13110,
+      "sha256": "963f6e0acd516cf21cdd5fc52e66740e789f981b41ab0e31a9e4aefa314267fc"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/reader.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/reader.stdout.log",
+      "bytes": 17434,
+      "sha256": "7116142567177e79c5b17f58470afa7334d7ce56dc3bb39cec8a8934a6d96746"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/remaining493-original-input-records.json",
+      "bytes": 1129653,
+      "sha256": "0c14606c8bfb43a635c500091e4b19957b5b2cf75a9dda87c454a81c5ad7d226"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/source-observations.json",
+      "bytes": 34290,
+      "sha256": "471051e652b907b55d512ec5762b14b534fa6513259f29385c842699d762139c"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E108/point-observations.jsonl",
+      "bytes": 6118,
+      "sha256": "b1a7a06c7295aea4c678c50372cae87083f8437fd53509d427471c5305489c22"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E108/source.json",
+      "bytes": 499,
+      "sha256": "37ffe2c007ec348cbb112488237cc15811f90dd640d7099844db5cb95a0fe62e"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E108/tile-complete.json",
+      "bytes": 611,
+      "sha256": "b13ec8679874f7f6069974a7f996e894facad328af8f6df498467fa5d8d8d9f2"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-00-15.json",
+      "bytes": 719,
+      "sha256": "ae2b7b8d61bb1d7dba4c29aacda24aeb9a5c317fa93ddddf9ca0d97dfccde0cf"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-00-15.npz",
+      "bytes": 2617,
+      "sha256": "acb6f00e4980ad0ec50092f8e2e19323307c36c36ee9dddfd3438425039f3da0"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-00-31.json",
+      "bytes": 719,
+      "sha256": "65aa9ac106360dfcaa6f6b40dc64ea167aa61a5d778651c012b58b28f4100a99"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-00-31.npz",
+      "bytes": 2622,
+      "sha256": "c376b2b2057dd427c81850eddfd61861930584457b2fcb319c619a2e682cba79"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-01-14.json",
+      "bytes": 722,
+      "sha256": "3829fb8fb3a43680fd9a432a896c23b66ea5be943622c4a0a93a289d87451cf0"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-01-14.npz",
+      "bytes": 2889,
+      "sha256": "8694a2ed2169321ff9c738f741fa9d366b7c18fbe2606ce3a37112d5d5760232"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-01-18.json",
+      "bytes": 722,
+      "sha256": "3c27b1f9bd43a55dec4c980d52ff15a4b9fdb2e36a39ecbe20f25efea73a0a21"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-01-18.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-01-34.json",
+      "bytes": 722,
+      "sha256": "b8308b1745cb96c2c620a882a1bc8b59ab532673d52f32602551f198d6036fc3"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-01-34.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-01-35.json",
+      "bytes": 720,
+      "sha256": "689bd4ea0d55e2805ef25679fe98ad5ba5f9281681f61d1e3158e8218ea8b278"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-01-35.npz",
+      "bytes": 772,
+      "sha256": "ddebbd0725f88629f287814adce7fffe4cb34a1ae28f122500fbe1ba1cd0704c"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-02-18.json",
+      "bytes": 722,
+      "sha256": "beff685097b69186a8bbedd91bbaf0cc4f5c8b3b60db8674f1ba8431794e4d71"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-02-18.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-03-07.json",
+      "bytes": 720,
+      "sha256": "ca7ef2a881437cebc2260b86e619962a46d644fe7075f8fe4e4d80c6eb92e08b"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-03-07.npz",
+      "bytes": 3718,
+      "sha256": "3ebe92d847a8addd38dec30213e027a2c2fb68a49cec84e3b0f637a531a21ad4"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-09-26.json",
+      "bytes": 722,
+      "sha256": "f774c305deaf666cedd62ccad7eafd82764e2ed7cd4c84add4fa4ffc63db1cdb"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-09-26.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-09-27.json",
+      "bytes": 722,
+      "sha256": "56e7497c0c10f31e6838ea26af476853862db95f437411932c581f502f4c1dff"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-09-27.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-10-26.json",
+      "bytes": 724,
+      "sha256": "2c859acf7c00ebd57be5dd95dee14822db0e69349dd6ed04516d0b6e5c31843d"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-10-26.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-13-06.json",
+      "bytes": 722,
+      "sha256": "817c6b08c0c2122b2b6f99744118bad3d2c89d584f499217aac8e4950baef3fa"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-13-06.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-15-32.json",
+      "bytes": 724,
+      "sha256": "2d47d65b8130546a10ee117d0b3b6517802a71058d926f33a2d20824fde1112f"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-15-32.npz",
+      "bytes": 3731,
+      "sha256": "d525fa2915bc84b2d1ec5c2aa3b809bb38433c62beb8bef4984e86f901fb3e9b"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-15-33.json",
+      "bytes": 724,
+      "sha256": "c2484bcd5b1de5b432e68168fd5c558b67e571b0232ea8f2abcd48a8a9f54b64"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-15-33.npz",
+      "bytes": 6325,
+      "sha256": "7c03d19bf835fe49f9ee73f359087610c92d7b2b437505fe2803a542e6a8c445"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-16-32.json",
+      "bytes": 724,
+      "sha256": "23d9f4c64eccfd538911c1616d5b2dc957ca53f0871d3ecf6f5311240ce52efd"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-16-32.npz",
+      "bytes": 4654,
+      "sha256": "7f7be1ec27bd820cc9e3632cbb8c5d475b48dc28dd25ec183e0ca20029ddb4bb"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-16-33.json",
+      "bytes": 724,
+      "sha256": "e620c25512e59181fa023ab3c4cd25c4dd57816fe38fed730cf72e28abb0924b"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-16-33.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-16-34.json",
+      "bytes": 724,
+      "sha256": "c5d1e6ef8e70c6ead628ce1f60d3d30e93a6da05490c252c70b9aaa08f3c3df7"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/new-block-16-34.npz",
+      "bytes": 5047,
+      "sha256": "4f5c320478d482a1393354948058c3153d80790ec0ebc296f1f559001e0e831c"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/point-observations.jsonl",
+      "bytes": 523832,
+      "sha256": "d7e2f7726ca4d12b4c1bdea16fc6fd33f401b6e2ca8308afc53677e446582a58"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/source.json",
+      "bytes": 1992,
+      "sha256": "605ce79d720cbc1f1f5d3ff4483c3e58ee5170257add37f2db35b25c9dfa28c5"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E111/tile-complete.json",
+      "bytes": 3924,
+      "sha256": "16158a2df36c43d70042f3ad23f8958edce8a0f91a13a3e76df858b97acc44eb"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-00-07.json",
+      "bytes": 717,
+      "sha256": "8b7256e830fa4e65c5e623c86ce7519a328b2fbf62af4cff8b85a21d5c55f97b"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-00-07.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-00-26.json",
+      "bytes": 719,
+      "sha256": "47059c91b276905524b0a4cc913f2f343f0e7a2d2973c0d18c68913601ef2d81"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-00-26.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-01-07.json",
+      "bytes": 720,
+      "sha256": "abec0b15bf4591289bb42946f03c9e0ccf546c2c958b7fe14cc7c900f868ca9a"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-01-07.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-01-08.json",
+      "bytes": 720,
+      "sha256": "d8f922c47672d35e3d95f21fc6b0d1e800281f4d7469c17faa1e25c4677cd2d7"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-01-08.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-01-26.json",
+      "bytes": 722,
+      "sha256": "c49b6988bc0708d07d53fc52c5abf0f18689e8c11de26d5380f7c06b6da6677d"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-01-26.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-02-02.json",
+      "bytes": 720,
+      "sha256": "204739413a301bcf410dee051685e40f07b40cad9cec3a3df3234b7f7691b7f8"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-02-02.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-03-02.json",
+      "bytes": 720,
+      "sha256": "d225a8ee0c997839006087af1d82e1432dc8140bb6e24413cfc5e9470d9b1ade"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-03-02.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-06-14.json",
+      "bytes": 722,
+      "sha256": "3691d3bd477f576c67f7b5443bd32506e736304945f9eb3165721d2a66c5a775"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-06-14.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-07-13.json",
+      "bytes": 722,
+      "sha256": "fd707fded8b1126b9fbc1ddb82bb095570b4e1c52e7b456473935a3ee25c7a21"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-07-13.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-07-14.json",
+      "bytes": 722,
+      "sha256": "f2b8ae7e12392c948d7781e4fb0f058b476d5c95fe72d1efe0fcc569694341ff"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-07-14.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-09-06.json",
+      "bytes": 720,
+      "sha256": "7942a9ebc3d7b9af5eb30f1ffb7b6d2ce278b48f8cdd75538349d1018789c808"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-09-06.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-09-07.json",
+      "bytes": 720,
+      "sha256": "eb011e67a740651d184dcacef2186e606ef669b771de3d9c97148f69ae42e3f4"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-09-07.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-10-01.json",
+      "bytes": 722,
+      "sha256": "e193eef5b84ba8780c934ab3e4eb554bb73ed9b5544cd706d0ccfe9bb76baee5"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-10-01.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-17-11.json",
+      "bytes": 724,
+      "sha256": "a2be014fa8a8fb319b807e73065c743571090311375fab0fb83447c7ec268707"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/new-block-17-11.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/point-observations.jsonl",
+      "bytes": 268673,
+      "sha256": "8b1859220e4cb700ede9b26e396f4bf1aeb8ee6d393cbb6bf0d0485b04814703"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/source.json",
+      "bytes": 1952,
+      "sha256": "673f81be7cece235ccca2dcd950fe608ebcdfe1df1668f8e681f33c77b568ae2"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N06E114/tile-complete.json",
+      "bytes": 3059,
+      "sha256": "c77eaf4172cbd617568092a6e9b7a9f965a21894b20ab0f2a94629024ccf2642"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E111/new-block-22-33.json",
+      "bytes": 724,
+      "sha256": "d2c68a6991fa2164434940e7b0ed0349ece8762b0559c2357d6e36520a5df7d8"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E111/new-block-22-33.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E111/new-block-23-33.json",
+      "bytes": 724,
+      "sha256": "83180ddff0ded1987152ed7b28ddddb0c568a114f43589052b1cc2491c5d500b"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E111/new-block-23-33.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E111/new-block-27-22.json",
+      "bytes": 724,
+      "sha256": "d9937aac031e952976cf431c9c6a75e73d687e79722eea6547ad8b16a4a5a32e"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E111/new-block-27-22.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E111/new-block-27-23.json",
+      "bytes": 724,
+      "sha256": "5a0d13cd18dd8b1a66e26f0f10e0abe23565467671ab4f716ea6e3a3dc2b6d80"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E111/new-block-27-23.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E111/new-block-27-24.json",
+      "bytes": 724,
+      "sha256": "cd14f67ab6cd53c8edd1e8a3afac4dc9049d4ba17159feaf94792a85250ab1e0"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E111/new-block-27-24.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E111/new-block-28-22.json",
+      "bytes": 724,
+      "sha256": "ca3f218ef62cfcb8c768ffaf4d8c623a4fac13c3c1b3ef9ffb10e5e907286aba"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E111/new-block-28-22.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E111/point-observations.jsonl",
+      "bytes": 44693,
+      "sha256": "ae3d74d686d51a2357f48b25a289b4d8c22e1378cf751e2af826837aabc70ea9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E111/source.json",
+      "bytes": 1972,
+      "sha256": "60d7c18e4436b9e8ed1cbf3d6f8c43862a4269a17ee8a67160253808a8a5e511"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E111/tile-complete.json",
+      "bytes": 1549,
+      "sha256": "675f2b0ef7ca992aa82c65f73a1f70bafeab99437762303b44c07c697f2f7dbf"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-05-07.json",
+      "bytes": 721,
+      "sha256": "baa3d7e40e75e1fe6360ee5e6c48d924e9c59e0a3dda954705d14cb25b91ef2c"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-05-07.npz",
+      "bytes": 10990,
+      "sha256": "4ef31624855298f514001f9b599a1bd63e3fb5f2a6cd2f1007504248a49fd044"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-06-03.json",
+      "bytes": 720,
+      "sha256": "439262c723e2da48004c8204d099d3bdcbecdb6e9187ebe9c50ac9364c771e6b"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-06-03.npz",
+      "bytes": 3407,
+      "sha256": "d6564fdf446425c94f0b202ed91d7633f6c63f6363e42d5c163b2b865bc82239"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-06-04.json",
+      "bytes": 720,
+      "sha256": "a87b34a77c9eeb22e20db4afe7b543a58c656de5cd6b55b705c67e701f790dc7"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-06-04.npz",
+      "bytes": 2959,
+      "sha256": "b7a8b3deba36001eb04cd5a2643b2e0fb0c8ae4315f6c235c3191104a51d99b3"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-06-07.json",
+      "bytes": 720,
+      "sha256": "b6614a6a61fd033a8232e5a6636b751c660bff947dccc3e4a952ae7529432415"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-06-07.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-06-08.json",
+      "bytes": 720,
+      "sha256": "0d6138322850fb55675c24f67dd1465f05450e4cd799dfd4464071c86e2bc622"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-06-08.npz",
+      "bytes": 6944,
+      "sha256": "42bf090f1792837481198fb59071b68405d499c07a544da690683909b47cc722"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-07-06.json",
+      "bytes": 720,
+      "sha256": "3a440b1ffc543f38f4a49a79b65c61384a155114eb24ad77e1bc0e9ca267db65"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-07-06.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-10-02.json",
+      "bytes": 722,
+      "sha256": "9002aa95736cee6934a9d244d27dea7404c67e53d9f47099c35edd917717f212"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-10-02.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-10-03.json",
+      "bytes": 722,
+      "sha256": "994dc26502e39a9f8dfff1f994b0223953863a1c4276057f5dbb1bd1c589e4d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-10-03.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-10-04.json",
+      "bytes": 722,
+      "sha256": "ecda6d9ea7efc3192d3667ca6c70ffbf974d8e0b7b92b2bcc0c5df8854b0c791"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-10-04.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-10-11.json",
+      "bytes": 724,
+      "sha256": "1f34aae3f3bfcc476d9c8623b397c7a298c06b3086c4c7ec1ec49d80e87cfa32"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-10-11.npz",
+      "bytes": 2866,
+      "sha256": "9ba3a713053edb83dc978d15c8aeedd5639c202312098ab4f9218d119c69bcab"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-11-02.json",
+      "bytes": 722,
+      "sha256": "0a4c60ed28e34ddae93a3661d3018629491754c0b91797f47f025b8295e7fed5"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-11-02.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-11-03.json",
+      "bytes": 722,
+      "sha256": "4a30e2a718c484130c85dcc8c89fc67e234dd3395302320b04ea54ac3153bc8b"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-11-03.npz",
+      "bytes": 3535,
+      "sha256": "1a03bc8d0489dfb39dc3a2d4a34ce68e26f4a9e1b72512d027c957b8b0aa0ce5"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-11-08.json",
+      "bytes": 723,
+      "sha256": "84fe6815db97d36f32fc809b7e3d52099fb5824e2d0bb244fc6243abdf3e631a"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-11-08.npz",
+      "bytes": 15156,
+      "sha256": "55351f657f619f6b2378845413586e11c6b465ab61808c1e79d95a49863e368c"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-12-00.json",
+      "bytes": 719,
+      "sha256": "ad5674228d2e654b8f9450afdc3bf7aaa7e97d664499379dc7e726c94824b79d"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-12-00.npz",
+      "bytes": 5644,
+      "sha256": "6ffa1acccafb9673b75afc46b4f66f1efef5e23d64ef0f1ffa93c87f0a0e9411"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-12-01.json",
+      "bytes": 722,
+      "sha256": "ba87f3ca87e7428cfb5a095e21ff0eb2356c6a5056c6b39c1220f38280774a0c"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-12-01.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-12-11.json",
+      "bytes": 724,
+      "sha256": "286732370db229bbacdeadfe198e74672e004069831033a8bb32f9b7bac56123"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-12-11.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-13-01.json",
+      "bytes": 722,
+      "sha256": "8641d135ad04d93e552d7e326aa655a938dce5e1c1d9629d97bcc2aa62878dd8"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-13-01.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-13-05.json",
+      "bytes": 722,
+      "sha256": "1133ffdc69120d3c88c4d305f20ae0907bd340ae413693c01fc3be0ead3bd57e"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-13-05.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-13-09.json",
+      "bytes": 722,
+      "sha256": "a77f8b3b3796c97075ab8186294ce123f419155fba2d754361df246ffedeb2ce"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-13-09.npz",
+      "bytes": 7923,
+      "sha256": "7ac288984b09fc5783dde8d39da8b45b26269d377da53d2d78f9bcd2a5807b5e"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-13-10.json",
+      "bytes": 724,
+      "sha256": "88ee6d752c787fe175a270204e16ecccd2f4ebc0002d492d211935a7e78ae27c"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-13-10.npz",
+      "bytes": 7505,
+      "sha256": "c5ca958038414cea78e0f6076d39d34f8f446f610361e4dc64843707e119c2b5"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-13-21.json",
+      "bytes": 724,
+      "sha256": "af9f2e791b98622071d4934f2706a990abd1a26a24de65190f60af17f7f1a119"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-13-21.npz",
+      "bytes": 2560,
+      "sha256": "de10074f75b55df2761e2fac38e55bdeab138fe2e5b32b65f7d7ae1d2fbdabcb"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-14-05.json",
+      "bytes": 722,
+      "sha256": "fe221f89aa0908fbf06d81da7f600c202a342502542ce8fe8ae4408bee41968b"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-14-05.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-17-20.json",
+      "bytes": 724,
+      "sha256": "9748402ff8311a6716ab0132f05a50ffed5b89a1df9897505e79a2724c059335"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-17-20.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-17-21.json",
+      "bytes": 724,
+      "sha256": "e9d549cee3b1c5e7037b5ba4397ffc8ee5d6d101397273f09551d31b6fe7413d"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-17-21.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-17-30.json",
+      "bytes": 724,
+      "sha256": "237afe4d9a841814f9341150c7336c97c12acf4e8d7871c19213dd9ab038b91b"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-17-30.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-17-31.json",
+      "bytes": 724,
+      "sha256": "fea8596341386369914fb05048ce4343b311af9b31605cce752f7c718347ffa3"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-17-31.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-17-33.json",
+      "bytes": 724,
+      "sha256": "df214fc3f0e97257198f2b688ece05a7eb3a66f89857a22adb07c41183fecd6c"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-17-33.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-18-04.json",
+      "bytes": 722,
+      "sha256": "542353357ad2dc83871c7c7029683a8acecfe93b75cbf5d356209a1fa8a4d840"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-18-04.npz",
+      "bytes": 2690,
+      "sha256": "62113d9b174db8d4db22b04806db3d7cac006dffd59ec3f2083d4ca71520561f"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-18-05.json",
+      "bytes": 722,
+      "sha256": "8ad686de02c353d6d20f135672dbdb9bc819c7994c822eef00f28d86b1cd5dc8"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-18-05.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-18-06.json",
+      "bytes": 722,
+      "sha256": "b88baca79b99f4dc56af1bbf2b62097d4c3e6ceb4ef67e4bbef53d767516cb54"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-18-06.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-18-08.json",
+      "bytes": 722,
+      "sha256": "4f12482471ec7df09a23d6899d432a4971a9527f03fe1a8bbc64d949949238bd"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-18-08.npz",
+      "bytes": 6762,
+      "sha256": "5278fbd505ee957cd1f0552f3b1058111dfb41bfef7c282df087ed67ec46e013"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-19-03.json",
+      "bytes": 722,
+      "sha256": "ffd993a29cc87421e88f11a74eca6e1857f61189ba0ec99ffa0fa76f4fab6451"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-19-03.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-19-04.json",
+      "bytes": 722,
+      "sha256": "9cc75ca9c1c4f1403abf819e22834fc6fd80087bed6e20d733175eb748690154"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-19-04.npz",
+      "bytes": 3730,
+      "sha256": "54dfb9de5d6f9ae0817bae44fa7f6b023c194c078b9dad4774b0bb1155255ea7"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-19-05.json",
+      "bytes": 722,
+      "sha256": "b2724373739a087ad2fa2f09a5e4b5fe618fd3a71495c9c78a07110e04db3899"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-19-05.npz",
+      "bytes": 2822,
+      "sha256": "1961d3f7b0405c15fe039978451deb94839a0492deef9c91411e4416068ae327"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-19-08.json",
+      "bytes": 722,
+      "sha256": "e68faae670276cfff37f9f1e4c2bceb1362dbc9cc456a632490c5df1dd39dd8d"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-19-08.npz",
+      "bytes": 7264,
+      "sha256": "e6708011fc2687541feb4d168af7060e60e5e92248a9330324a27efbb1c189d6"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-20-02.json",
+      "bytes": 722,
+      "sha256": "43312af35dc3e32040357e5d6cf9bd241b278ae98636b590742bb34997211158"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-20-02.npz",
+      "bytes": 2749,
+      "sha256": "7a6af466993fa3e42ff8d1127936d00cf0614c8f5bb5684b48d2df6a1f7ed73a"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-20-03.json",
+      "bytes": 722,
+      "sha256": "4b3f6437e975e19c46cfd123ec23dd5471dc394b925ea5a904dfe60ca996d63d"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-20-03.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-20-04.json",
+      "bytes": 722,
+      "sha256": "ffccb432b12ce544d8f8060e9b463d952ffed0dfe72c843d38021059b5a86c16"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-20-04.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-20-06.json",
+      "bytes": 722,
+      "sha256": "692935ab2aa0b0be9ccaa6ee1d6b4a5986e62ff5d869e5b91932fe41ec27d5f3"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-20-06.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-20-07.json",
+      "bytes": 722,
+      "sha256": "4cbf550674ecb8508c5b9e98937564ce12a14c4fe3723b0fdabf8e307638e91c"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-20-07.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-21-02.json",
+      "bytes": 722,
+      "sha256": "1cb6311d05f2165d6a7792cff9351a9777e929290b7cd8d1344092a1cc06dd59"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-21-02.npz",
+      "bytes": 2964,
+      "sha256": "cd01d64ac508fc6820e85a70606920fcc9367972b72facf2a281b8c11e2b5ba3"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-21-03.json",
+      "bytes": 722,
+      "sha256": "3fa6f399111018b960b2caa63925691a65bfafea4921dc334bb822a560a43471"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-21-03.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-21-04.json",
+      "bytes": 722,
+      "sha256": "e2ea8a9a2d880ede39190c69e126d41026b01cf43bc6dc9e65cb72b73e39a101"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-21-04.npz",
+      "bytes": 2870,
+      "sha256": "f3d9fd98637fcc050a7eb106eb00652eae7b3199f4cdea08e00a64b2d43760f0"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-23-07.json",
+      "bytes": 722,
+      "sha256": "19106783e4f69451f0c2ecbe9b19ac61c4627d68d6b79a3ea489520490c24f54"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-23-07.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-24-04.json",
+      "bytes": 722,
+      "sha256": "e5b403601b5266fd9c2783f8105ab873d609f5fa2e434cc0553201e7ff6f582a"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-24-04.npz",
+      "bytes": 2595,
+      "sha256": "2a9581e50785354f690b367c6bf5cc827850bc05241776536d0c11ea1979e210"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-24-05.json",
+      "bytes": 722,
+      "sha256": "ecd9641287c16bba387e3d8e63157ef0e6a322a01b57d67bd79861c68cb0b145"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-24-05.npz",
+      "bytes": 2905,
+      "sha256": "4f41e098c2368d9d12a63713bdec62f6ccaaad70b647f04fa2e7ac09a3160666"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-24-06.json",
+      "bytes": 722,
+      "sha256": "aaf36307a86ed9f0b9426fb80e833c987000ae2276b79565d33630fdff5597a5"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-24-06.npz",
+      "bytes": 2646,
+      "sha256": "231f603b28a39be3ad502f92c98b32dce9457c9502ef9f671a7013a714c1b2e2"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-24-07.json",
+      "bytes": 722,
+      "sha256": "cfb9568ef2901e4b5544791b0e51b386d62a6cdf1357efc56ad3711c1707f835"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-24-07.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-25-03.json",
+      "bytes": 722,
+      "sha256": "7b10fdc1fb837fee0377f128d62de4b3a3db8e4e34e0f0dbe662b67c77885101"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-25-03.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-25-04.json",
+      "bytes": 722,
+      "sha256": "74648444704003e2a155671f086161fac241eab14200d2979daab28326b70dc0"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-25-04.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-25-28.json",
+      "bytes": 724,
+      "sha256": "a746a87a00edb4d6ec854da64fadffacc76e60019ae4c2cf09013948d01d9fee"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-25-28.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-25-29.json",
+      "bytes": 724,
+      "sha256": "f2021e056e03e595f944b86e6638b66d555272204220c46742b5761408948835"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-25-29.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-26-03.json",
+      "bytes": 722,
+      "sha256": "a37f2cfa322388d8869f0ea3e341be86695e6b016a2007471e8ed9eea2a4d772"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-26-03.npz",
+      "bytes": 2949,
+      "sha256": "e6ed094c688720216beb3adede984af241dfe5bd7564029a942fa74641e06851"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-26-04.json",
+      "bytes": 722,
+      "sha256": "40d23ecf2640a693d249c1fa6bf6a03cd627fba26eed97a6609ee61028ef5de4"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-26-04.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-26-30.json",
+      "bytes": 724,
+      "sha256": "3b3604ec6602bf5195e7248cdc9d888688fdf12bb6f2a331f80243099663e8b4"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-26-30.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-27-03.json",
+      "bytes": 722,
+      "sha256": "c0b07ede5372bf139fe7b88b64ff1b4e2e878994b41b6fd9c43a419f37b9a0df"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-27-03.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-28-25.json",
+      "bytes": 724,
+      "sha256": "ae573ee792f52e1accfd8bf42d2d217e852b9ebc628a7ce281c951608dc36301"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-28-25.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-33-28.json",
+      "bytes": 724,
+      "sha256": "0041c2740595a3c8c612187268a3155a23714f6e2a742c31f9890a9ced098edc"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/new-block-33-28.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/point-observations.jsonl",
+      "bytes": 3699079,
+      "sha256": "81f7a50c2dfebf769329444ef53299043a8fa7f21e6d493d02b9b67a16a61d75"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/source.json",
+      "bytes": 1994,
+      "sha256": "e35c731038a58b7864449f03d3fad6598df52aa2eaf6ef2135bfe6900176bfc4"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E114/tile-complete.json",
+      "bytes": 14689,
+      "sha256": "3518ed92cc88e4ffda92c4ef5ed0884ae4616b6c4afe130e2e8277973be71018"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E117/new-block-13-09.json",
+      "bytes": 722,
+      "sha256": "88d19134b120aff95644c8dc38aa7943c92185483ef3e0965bcde40a16125922"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E117/new-block-13-09.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E117/new-block-14-02.json",
+      "bytes": 722,
+      "sha256": "acd029f6977ecf4c4bd30c7703de4f3e9aaeabb6c8b8dc200f07d0a7d91f080b"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E117/new-block-14-02.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E117/new-block-14-09.json",
+      "bytes": 722,
+      "sha256": "a944ca9b61dba617b29212c35ec157a7bc42329ac051a53fdfcbff5398088b21"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E117/new-block-14-09.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E117/new-block-16-01.json",
+      "bytes": 722,
+      "sha256": "4d98082eb07cf6322c07744dfeb1420ebac1fbfefa5f30551f1ad0fb34ebd82f"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E117/new-block-16-01.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E117/new-block-16-02.json",
+      "bytes": 722,
+      "sha256": "5657810de102945a82d13215a116e0da60e6da948ecfe2fd922eca6d07a71aeb"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E117/new-block-16-02.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E117/new-block-19-02.json",
+      "bytes": 722,
+      "sha256": "af57cd4bdcf39f5d905e5cd8f66c4f208298fcf96ffe0213466e5f903cb232f6"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E117/new-block-19-02.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E117/new-block-19-03.json",
+      "bytes": 722,
+      "sha256": "17b1bbbf3ef5db65420fcc938c9f9273cd43fda804984f84bddb7715fb5c57cc"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E117/new-block-19-03.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E117/point-observations.jsonl",
+      "bytes": 195111,
+      "sha256": "5d8de24e5a5cc10f27c9fa807c545628a167777f8336ad05f0a76e01462fedbc"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E117/source.json",
+      "bytes": 1972,
+      "sha256": "c162dc4518b580a9f21539cce3ccce538e5ce6045d6ca3e25d50102715581977"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N09E117/tile-complete.json",
+      "bytes": 1945,
+      "sha256": "afd075df9c8b365429fba0f68be862e75d554432b2d62bfd52621ccfb558227e"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-10-06.json",
+      "bytes": 722,
+      "sha256": "143403143d25ec0d7f06303aee92b894aa48f36b14c0000c1fcfbc61b331e68c"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-10-06.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-11-14.json",
+      "bytes": 724,
+      "sha256": "575a13ed97a5ef0b12ec3ce0b87c959f0a4cbea62a1f6b3f0855eae54ba32d9f"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-11-14.npz",
+      "bytes": 4018,
+      "sha256": "4c103396fc5eb9c377734fa0a247892116005f1e2e93ffe3b6ad8986c4d2b2ac"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-12-13.json",
+      "bytes": 724,
+      "sha256": "e7b52cb28713db8961ebbad17ec37e02f4467e4902468c8cf6e062306bc0e355"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-12-13.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-12-14.json",
+      "bytes": 724,
+      "sha256": "c453bba541671c70eaad919c19d8778fe0b55377fba14cc87dc3454ca2c497f0"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-12-14.npz",
+      "bytes": 2499,
+      "sha256": "9ab7c0bee675e65ce0d973f90799b8657f357748fc9aa4bd6cbfc7ba1a030ef8"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-12-15.json",
+      "bytes": 724,
+      "sha256": "aeabddf0e354123755e5dc92f417b91d9919de0dea2a5129bde08cbc894ed182"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-12-15.npz",
+      "bytes": 4762,
+      "sha256": "e42d6c67ad8a2bb34d326f3e54467a7874d8c35d5f777a68b5d1380d7074a2fc"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-13-13.json",
+      "bytes": 724,
+      "sha256": "c9224eadec6988e26c514fa61a1f8017065bf39261d61e295180306bddd470c3"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-13-13.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-13-14.json",
+      "bytes": 724,
+      "sha256": "605724225db2f08bf5541de49ad3d4e4d9b1c4a9a501cc267b396fb2379c1f9e"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-13-14.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-13-15.json",
+      "bytes": 725,
+      "sha256": "248fa3ed83d68ee522c8a36c0c19ca5f744223270e4db2ba279c0cc97b3ebd32"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-13-15.npz",
+      "bytes": 10467,
+      "sha256": "6fd018c42db431c07c67b04bda971c67a2ae08c095639cd621489956cb8f17e1"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-14-13.json",
+      "bytes": 724,
+      "sha256": "abc81822ad0a3f0b40cae21d9d9409b19d857b365beead8c33d667b71a0460e8"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-14-13.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-14-14.json",
+      "bytes": 724,
+      "sha256": "3d04a4cbc8bad21521dc8d766ac28d84a8264ae94f4d4156ecd2bdbf839db121"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-14-14.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-16-08.json",
+      "bytes": 722,
+      "sha256": "bb492682cd4ab9186a0e2a5a214377fc0735a985f022f56b72e3e444e6595eac"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-16-08.npz",
+      "bytes": 2677,
+      "sha256": "fde03b3e9c6466bde3dbdf026036c3ae405d8d65bf33af30a2d68a79e2b887e8"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-17-06.json",
+      "bytes": 722,
+      "sha256": "07ab4c4a7e5cdd0a806fe786b9b432e49cfca6d0f0805e7b8e78b98596cbc909"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-17-06.npz",
+      "bytes": 3395,
+      "sha256": "586653a907a87ffaa7a54f31975dd0149869b0bc1059ccc908e77054d49d60de"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-17-07.json",
+      "bytes": 722,
+      "sha256": "68185a0e229203e5f9297b7cdb7262a6039322b9b186becba25c3aae7f19d13b"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-17-07.npz",
+      "bytes": 3476,
+      "sha256": "48811d789b3743f937dead9bb0a19c337dc6844c1e7e7df320d2cd1dc6f20ca2"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-17-08.json",
+      "bytes": 722,
+      "sha256": "3b40d3654e608f141ceccdf7b02b211d5ab6ed485b9c85efa4dd00a5f8ebbc5d"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-17-08.npz",
+      "bytes": 2822,
+      "sha256": "5171088856c4685edebdd8fa6f6a738da8933080fba85f59ca54b588fe436547"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-18-05.json",
+      "bytes": 722,
+      "sha256": "62be2f0200e42a1181606068244aeb1d07eba18b369e47058fc453dabf498299"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-18-05.npz",
+      "bytes": 3678,
+      "sha256": "8c5e5733eb942db186d57d70d336d52e2b32f3b1eef0283c2efcde091976c1ac"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-18-06.json",
+      "bytes": 722,
+      "sha256": "63cf93c43f3cafd35a15f0b6c07595b12c9660880335ea3afea0d93b7d0d8c4d"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-18-06.npz",
+      "bytes": 2655,
+      "sha256": "6a87de81453a48b3ce4c2b70350fe4003a60fb2014c5cf67316d189f3ba839ee"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-18-07.json",
+      "bytes": 722,
+      "sha256": "f2594bb0191ec4cfa84b92df44cc06e108c1278712a3c10e291508be6f7e17eb"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-18-07.npz",
+      "bytes": 2670,
+      "sha256": "8ba09f6464c251992a7db8aa138df66a3b85eb10509adef30d30130a0df1b022"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-18-17.json",
+      "bytes": 724,
+      "sha256": "99da717d1fab866713e4ffd6484fb8713ec5b6b4c5ab47759ce00970d7552264"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-18-17.npz",
+      "bytes": 5266,
+      "sha256": "0be129ba0238a16da05185ae013d3e8d1237a23b97fa6b510869e4777c6a63dd"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-19-12.json",
+      "bytes": 724,
+      "sha256": "001142cdef869fd89d8575270d388dbb8bc9b376a0f81533d0fe011a10c4a79b"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-19-12.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-19-15.json",
+      "bytes": 724,
+      "sha256": "e6a733cc27f4af3e520cc18b03a6f3e7df6d3bc6ea54e3e2bfde077ecaabbd31"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-19-15.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-19-17.json",
+      "bytes": 724,
+      "sha256": "ea0149470e3745d2ca349a0021869b6c6b225b7a3a0ea571287d16cc20162626"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-19-17.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-20-08.json",
+      "bytes": 722,
+      "sha256": "2d823ef095ed844e1a5f9b5d41edb2584f0194aa763b695c80d28dbf459d6921"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-20-08.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-20-09.json",
+      "bytes": 722,
+      "sha256": "1544fe1c3e99800095cb7df34677a1a2de5654bdd54726212a8822e80e1155b2"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-20-09.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-20-15.json",
+      "bytes": 724,
+      "sha256": "d85ff92a957beede566584abdd263728ee0b0fb22531cc157850f1f9e9c72680"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-20-15.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-21-06.json",
+      "bytes": 722,
+      "sha256": "1917334cc4cbb2eeb1dcc38485ee84c9ab842effad63c4430b1f89d4616916ae"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-21-06.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-21-07.json",
+      "bytes": 722,
+      "sha256": "70a7c8473e2545566fae6abcd4f99407342117fa35ce97118624993a43bebe87"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-21-07.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-23-16.json",
+      "bytes": 724,
+      "sha256": "dd2470dba34ed0b08c488c2bc667b0bf6ac3846301d215d101b08a45584cb49a"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-23-16.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-26-02.json",
+      "bytes": 722,
+      "sha256": "7dd6d780a4a7c83de9323befd84cf76cdd7b8dc2dac33bc385e9a953dce1db03"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-26-02.npz",
+      "bytes": 2534,
+      "sha256": "1bff8dcbe052a93bb3cd720cd266fc2cd2f533193e770b0709b75c551671d401"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-26-14.json",
+      "bytes": 724,
+      "sha256": "f2836d4c00a33e63f721da03de00377c546c0fe468a85f0f5281737a8accc83c"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/new-block-26-14.npz",
+      "bytes": 2484,
+      "sha256": "0744be026dde6da13e2fd6646df193fc8c5e746845720e38dae1e140138cb6ed"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/point-observations.jsonl",
+      "bytes": 2609693,
+      "sha256": "bf07a207b2c4e7ff7f793f42105dd35558c7fb69ac7acc5094eb80c7d8fb9926"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/source.json",
+      "bytes": 1993,
+      "sha256": "4057f6ab1e0c65dc8dfcfc619bd74b35447b19f59bc302c1983eff6a29922427"
+    },
+    {
+      "path": "bulk-completion/offshore-worldcover-followup-001/tiles/N15E111/tile-complete.json",
+      "bytes": 10325,
+      "sha256": "90b0cf87acb6ad37d169261fe50a0da4dc0ce0c748678c7bbd28bafdcb250c08"
+    }
+  ]
+}

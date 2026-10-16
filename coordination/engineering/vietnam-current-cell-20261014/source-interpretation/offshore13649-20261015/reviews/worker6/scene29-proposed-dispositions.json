@@ -1,0 +1,479 @@
+{
+  "scope": "Proposed ordinary original physical/location dispositions from actual saved observations; Root adoption pending.",
+  "scene_number_1based": 29,
+  "item": "S2A_49NEJ_20200327_0_L2A",
+  "acquired": "2020-03-27T03:05:48.121000Z",
+  "counts": {
+    "water": 3,
+    "question": 1
+  },
+  "groups": [
+    {
+      "block": "block-02-06",
+      "source_context": "bulk-completion/offshore13649-observation-001/products/S2A_49NEJ_20200327_0_L2A/block-02-06",
+      "requested": 1,
+      "proposed_water_indices": [],
+      "proposed_terrestrial_indices": [],
+      "question_indices": [
+        9819
+      ],
+      "basis": "All saved block RGB/NIR contexts reviewed together; native marked/full frames additionally inspected for detailed cases. Selection is a manual scene-specific visual-group judgment, SCL6 only corroborates/enumerates an already-read water group.",
+      "manual_group_limit": "All3full native RGB/NIR contexts inspected for4centres;9817/9818/9820are visibly clear continuous sea.9819lies beside a cloud in a dark shadow margin and remains unresolved despite SCL6/five valid masks."
+    },
+    {
+      "block": "block-02-07",
+      "source_context": "bulk-completion/offshore13649-observation-001/products/S2A_49NEJ_20200327_0_L2A/block-02-07",
+      "requested": 2,
+      "proposed_water_indices": [
+        9817,
+        9818
+      ],
+      "proposed_terrestrial_indices": [],
+      "question_indices": [],
+      "basis": "All saved block RGB/NIR contexts reviewed together; native marked/full frames additionally inspected for detailed cases. Selection is a manual scene-specific visual-group judgment, SCL6 only corroborates/enumerates an already-read water group.",
+      "manual_group_limit": "All3full native RGB/NIR contexts inspected for4centres;9817/9818/9820are visibly clear continuous sea.9819lies beside a cloud in a dark shadow margin and remains unresolved despite SCL6/five valid masks."
+    },
+    {
+      "block": "block-05-06",
+      "source_context": "bulk-completion/offshore13649-observation-001/products/S2A_49NEJ_20200327_0_L2A/block-05-06",
+      "requested": 1,
+      "proposed_water_indices": [
+        9820
+      ],
+      "proposed_terrestrial_indices": [],
+      "question_indices": [],
+      "basis": "All saved block RGB/NIR contexts reviewed together; native marked/full frames additionally inspected for detailed cases. Selection is a manual scene-specific visual-group judgment, SCL6 only corroborates/enumerates an already-read water group.",
+      "manual_group_limit": "All3full native RGB/NIR contexts inspected for4centres;9817/9818/9820are visibly clear continuous sea.9819lies beside a cloud in a dark shadow margin and remains unresolved despite SCL6/five valid masks."
+    }
+  ],
+  "records": [
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 125322,
+        "x": 212415
+      },
+      "index": 9817,
+      "input_scope_array_index": 24543,
+      "original_source_array_index": 40188,
+      "original_interval_index": 9774,
+      "original_record_unchanged": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65788
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48238
+        ],
+        "declared_sids": [
+          65788
+        ],
+        "flags": [
+          "disputed-island-territory-research"
+        ],
+        "hold_reasons": [
+          "disputed-island-territory-research",
+          "foreign-reference-country",
+          "source-relative-physical-interpretation-unresolved"
+        ],
+        "owner": 48238,
+        "package": "physical-interpretation",
+        "physical": "source-relative",
+        "qualified": false,
+        "reference_countries": [],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "disputed-island-territory-research",
+          "foreign-reference-country"
+        ],
+        "x": 212415,
+        "y": 125322
+      },
+      "centre_unchanged": {
+        "longitude": 111.68381864925277,
+        "latitude": 7.885169864744162
+      },
+      "source_target_unchanged": "gb:VNM:ADM2:81297802B23443064350281",
+      "proposed_bounded_answer": true,
+      "source_review_kind": "visible_dated_water_location",
+      "actual_answer": "The unchanged original centre is at a visible water-surface locality on 2020-03-27T03:05:48.121000Z. RGB/NIR context shows continuous water around the adjacent reef/sea feature; valid source samples and SCL6 corroborate that grouped visual reading. This is a bounded dated water/location answer, not annual persistence, whole-cell cover, exact reef emergence, administrative water or sovereignty.",
+      "answer_dates": [
+        "2020-03-27T03:05:48.121000Z"
+      ],
+      "remaining_physical_question": null,
+      "reviewed_source_observation": {
+        "path": "bulk-completion/offshore13649-observation-001/products/S2A_49NEJ_20200327_0_L2A/block-02-07/block-observations.json",
+        "point_index": 9817,
+        "source_pixels": {
+          "red": [
+            2833,
+            7539
+          ],
+          "green": [
+            2833,
+            7539
+          ],
+          "blue": [
+            2833,
+            7539
+          ],
+          "nir": [
+            2833,
+            7539
+          ],
+          "scl": [
+            1416,
+            3769
+          ]
+        },
+        "centre_values_masks": {
+          "red": {
+            "value": 192,
+            "valid_mask": 255
+          },
+          "green": {
+            "value": 267,
+            "valid_mask": 255
+          },
+          "blue": {
+            "value": 433,
+            "valid_mask": 255
+          },
+          "nir": {
+            "value": 228,
+            "valid_mask": 255
+          },
+          "scl": {
+            "value": 6,
+            "valid_mask": 255
+          }
+        }
+      },
+      "authority_or_repair_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 125327,
+        "x": 212407
+      },
+      "index": 9818,
+      "input_scope_array_index": 24555,
+      "original_source_array_index": 40200,
+      "original_interval_index": 9783,
+      "original_record_unchanged": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65788
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48238
+        ],
+        "declared_sids": [
+          65788
+        ],
+        "flags": [
+          "disputed-island-territory-research"
+        ],
+        "hold_reasons": [
+          "disputed-island-territory-research",
+          "foreign-reference-country",
+          "source-relative-physical-interpretation-unresolved"
+        ],
+        "owner": 48238,
+        "package": "physical-interpretation",
+        "physical": "source-relative",
+        "qualified": false,
+        "reference_countries": [],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "disputed-island-territory-research",
+          "foreign-reference-country"
+        ],
+        "x": 212407,
+        "y": 125327
+      },
+      "centre_unchanged": {
+        "longitude": 111.6728332430597,
+        "latitude": 7.878368846833912
+      },
+      "source_target_unchanged": "gb:VNM:ADM2:81297802B23443064350281",
+      "proposed_bounded_answer": true,
+      "source_review_kind": "visible_dated_water_location",
+      "actual_answer": "The unchanged original centre is at a visible water-surface locality on 2020-03-27T03:05:48.121000Z. RGB/NIR context shows continuous water around the adjacent reef/sea feature; valid source samples and SCL6 corroborate that grouped visual reading. This is a bounded dated water/location answer, not annual persistence, whole-cell cover, exact reef emergence, administrative water or sovereignty.",
+      "answer_dates": [
+        "2020-03-27T03:05:48.121000Z"
+      ],
+      "remaining_physical_question": null,
+      "reviewed_source_observation": {
+        "path": "bulk-completion/offshore13649-observation-001/products/S2A_49NEJ_20200327_0_L2A/block-02-07/block-observations.json",
+        "point_index": 9818,
+        "source_pixels": {
+          "red": [
+            2908,
+            7418
+          ],
+          "green": [
+            2908,
+            7418
+          ],
+          "blue": [
+            2908,
+            7418
+          ],
+          "nir": [
+            2908,
+            7418
+          ],
+          "scl": [
+            1454,
+            3709
+          ]
+        },
+        "centre_values_masks": {
+          "red": {
+            "value": 182,
+            "valid_mask": 255
+          },
+          "green": {
+            "value": 227,
+            "valid_mask": 255
+          },
+          "blue": {
+            "value": 379,
+            "valid_mask": 255
+          },
+          "nir": {
+            "value": 229,
+            "valid_mask": 255
+          },
+          "scl": {
+            "value": 6,
+            "valid_mask": 255
+          }
+        }
+      },
+      "authority_or_repair_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 125336,
+        "x": 212349
+      },
+      "index": 9819,
+      "input_scope_array_index": 24578,
+      "original_source_array_index": 40223,
+      "original_interval_index": 9790,
+      "original_record_unchanged": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65788
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48238
+        ],
+        "declared_sids": [
+          65788
+        ],
+        "flags": [
+          "disputed-island-territory-research"
+        ],
+        "hold_reasons": [
+          "disputed-island-territory-research",
+          "foreign-reference-country",
+          "source-relative-physical-interpretation-unresolved"
+        ],
+        "owner": 48238,
+        "package": "physical-interpretation",
+        "physical": "source-relative",
+        "qualified": false,
+        "reference_countries": [],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "disputed-island-territory-research",
+          "foreign-reference-country"
+        ],
+        "x": 212349,
+        "y": 125336
+      },
+      "centre_unchanged": {
+        "longitude": 111.59318904816035,
+        "latitude": 7.8661267331473725
+      },
+      "source_target_unchanged": "gb:VNM:ADM2:81297802B23443064350281",
+      "proposed_bounded_answer": false,
+      "source_review_kind": "unresolved_local_visibility_or_reef_surface",
+      "actual_answer": null,
+      "answer_dates": [],
+      "remaining_physical_question": "Actual centre9819 is in the dark cast-shadow margin beside the local cloud in block02-06. All five samples exist and SCL6 is recorded, but the original red/green/blue/NIR34/41/36/46 and native RGB/NIR context do not independently settle its exact surface through that shadow. Retain this specific visibility question.",
+      "reviewed_source_observation": {
+        "path": "bulk-completion/offshore13649-observation-001/products/S2A_49NEJ_20200327_0_L2A/block-02-06/block-observations.json",
+        "point_index": 9819,
+        "source_pixels": {
+          "red": [
+            3045,
+            6541
+          ],
+          "green": [
+            3045,
+            6541
+          ],
+          "blue": [
+            3045,
+            6541
+          ],
+          "nir": [
+            3045,
+            6541
+          ],
+          "scl": [
+            1522,
+            3270
+          ]
+        },
+        "centre_values_masks": {
+          "red": {
+            "value": 34,
+            "valid_mask": 255
+          },
+          "green": {
+            "value": 41,
+            "valid_mask": 255
+          },
+          "blue": {
+            "value": 36,
+            "valid_mask": 255
+          },
+          "nir": {
+            "value": 46,
+            "valid_mask": 255
+          },
+          "scl": {
+            "value": 6,
+            "valid_mask": 255
+          }
+        }
+      },
+      "authority_or_repair_credit": 0
+    },
+    {
+      "original_key": {
+        "owner": 48238,
+        "y": 125534,
+        "x": 212366
+      },
+      "index": 9820,
+      "input_scope_array_index": 24798,
+      "original_source_array_index": 40443,
+      "original_interval_index": 9907,
+      "original_record_unchanged": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65788
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48238
+        ],
+        "declared_sids": [
+          65788
+        ],
+        "flags": [
+          "disputed-island-territory-research"
+        ],
+        "hold_reasons": [
+          "disputed-island-territory-research",
+          "foreign-reference-country",
+          "source-relative-physical-interpretation-unresolved"
+        ],
+        "owner": 48238,
+        "package": "physical-interpretation",
+        "physical": "source-relative",
+        "qualified": false,
+        "reference_countries": [],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "disputed-island-territory-research",
+          "foreign-reference-country"
+        ],
+        "x": 212366,
+        "y": 125534
+      },
+      "centre_unchanged": {
+        "longitude": 111.6165330363205,
+        "latitude": 7.596709770877555
+      },
+      "source_target_unchanged": "gb:VNM:ADM2:81297802B23443064350281",
+      "proposed_bounded_answer": true,
+      "source_review_kind": "visible_dated_water_location",
+      "actual_answer": "The unchanged original centre is at a visible water-surface locality on 2020-03-27T03:05:48.121000Z. RGB/NIR context shows continuous water around the adjacent reef/sea feature; valid source samples and SCL6 corroborate that grouped visual reading. This is a bounded dated water/location answer, not annual persistence, whole-cell cover, exact reef emergence, administrative water or sovereignty.",
+      "answer_dates": [
+        "2020-03-27T03:05:48.121000Z"
+      ],
+      "remaining_physical_question": null,
+      "reviewed_source_observation": {
+        "path": "bulk-completion/offshore13649-observation-001/products/S2A_49NEJ_20200327_0_L2A/block-05-06/block-observations.json",
+        "point_index": 9820,
+        "source_pixels": {
+          "red": [
+            6023,
+            6802
+          ],
+          "green": [
+            6023,
+            6802
+          ],
+          "blue": [
+            6023,
+            6802
+          ],
+          "nir": [
+            6023,
+            6802
+          ],
+          "scl": [
+            3011,
+            3401
+          ]
+        },
+        "centre_values_masks": {
+          "red": {
+            "value": 291,
+            "valid_mask": 255
+          },
+          "green": {
+            "value": 433,
+            "valid_mask": 255
+          },
+          "blue": {
+            "value": 536,
+            "valid_mask": 255
+          },
+          "nir": {
+            "value": 300,
+            "valid_mask": 255
+          },
+          "scl": {
+            "value": 6,
+            "valid_mask": 255
+          }
+        }
+      },
+      "authority_or_repair_credit": 0
+    }
+  ],
+  "limits": [
+    "Original offshore location/source association and every territorial/source hold stay attached, including water answers.",
+    "Proposed bounded dated physical/location interpretations only; no native qualification or selected-package acceptance.",
+    "Question adoption is not a completed physical answer.",
+    "Contact sheets are review displays only; add no native source resolution."
+  ]
+}

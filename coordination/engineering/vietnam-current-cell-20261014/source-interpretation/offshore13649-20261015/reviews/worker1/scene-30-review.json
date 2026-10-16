@@ -1,0 +1,329 @@
+{
+  "kind": "actual-native-image-physical-interpretation-proposal-no-root-adoption",
+  "reviewer": "worker1",
+  "scene_number": 30,
+  "item": "S2B_49PDK_20200822_0_L2A",
+  "owner": 48238,
+  "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+  "acquisition_datetime": "2020-08-22T03:15:39.355000Z",
+  "processing_baseline": "02.14",
+  "native_support": {
+    "rgb_nir_m": 10,
+    "scl_m": 20,
+    "CRS_EPSG": 32649
+  },
+  "source_scene_observation_pin": {
+    "path": "bulk-completion/offshore13649-observation-001/products/S2B_49PDK_20200822_0_L2A/native-observations.json",
+    "bytes": 18191,
+    "sha256": "a38b46a6f82a2966c64dedcb55e5321cbf28bbe0efd5d32c8e30dbc59b986eda"
+  },
+  "counts": {
+    "original_keys": 2,
+    "native_blocks_reviewed": 1,
+    "dated-water-location": 2,
+    "answered_proposed": 2,
+    "root_adopted_here": 0,
+    "repair_credit": 0
+  },
+  "method": "The completed block read at unchanged native marked RGB positions and unmarked NIR context; actual literal pixel/asset/mask/SCL values retained. Finite human-defined visibility exceptions; no threshold/model classifier, source/imagery/raster operation or remote reread.",
+  "source_quality": "Both points in-frame/masks255; validity is not surface truth, and SCL6 at some visually cloudy/fringe positions is not a water decision.",
+  "blocks": [
+    {
+      "block": [
+        9,
+        5
+      ],
+      "points": 2,
+      "finding": "Both separated requested centres occupy visible wave-textured sea. Scattered cloud/shadow pairs lie elsewhere; none overlies the two positions. Bright ship-like points elsewhere are not assigned as terrestrial features.",
+      "water_indices": [
+        9821,
+        9822
+      ],
+      "terrestrial_indices": [],
+      "unresolved_cloud_shadow_fringe_indices": [],
+      "unresolved_fine_edge_indices": [],
+      "images_viewed": [
+        "bulk-completion/offshore13649-observation-001/products/S2B_49PDK_20200822_0_L2A/block-09-05/rgb-centres.png",
+        "bulk-completion/offshore13649-observation-001/products/S2B_49PDK_20200822_0_L2A/block-09-05/nir-red-green-native.png"
+      ],
+      "extra_views": [],
+      "source_block_observation_pin": {
+        "path": "bulk-completion/offshore13649-observation-001/products/S2B_49PDK_20200822_0_L2A/block-09-05/block-observations.json",
+        "bytes": 18493,
+        "sha256": "6a5e3883649336df0d9f742c378bd4c16dc414103754447cb4e91a11adb31922"
+      }
+    }
+  ],
+  "records": [
+    {
+      "index": 9821,
+      "original_key": {
+        "owner": 48238,
+        "y": 125108,
+        "x": 211596
+      },
+      "original_source_array_index": 39820,
+      "input_scope_array_index": 24175,
+      "original_interval_index": 9577,
+      "original_record_unchanged": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65788
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48238
+        ],
+        "declared_sids": [
+          65788
+        ],
+        "flags": [
+          "disputed-island-territory-research"
+        ],
+        "hold_reasons": [
+          "disputed-island-territory-research",
+          "foreign-reference-country",
+          "source-relative-physical-interpretation-unresolved"
+        ],
+        "owner": 48238,
+        "package": "physical-interpretation",
+        "physical": "source-relative",
+        "qualified": false,
+        "reference_countries": [],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "disputed-island-territory-research",
+          "foreign-reference-country"
+        ],
+        "x": 211596,
+        "y": 125108
+      },
+      "centre_unchanged": {
+        "longitude": 110.55918769024208,
+        "latitude": 8.176147408089152
+      },
+      "item": "S2B_49PDK_20200822_0_L2A",
+      "acquisition_datetime": "2020-08-22T03:15:39.355000Z",
+      "source_block": [
+        9,
+        5
+      ],
+      "native_10m_local_pixel": [
+        407,
+        29
+      ],
+      "disposition": "answered_bounded_physical_location",
+      "interpretation": "dated-water-location",
+      "actual_dated_location_fact": "The unchanged centre occupies visible water on 22 August 2020, read from actual wave, lagoon or submerged-reef morphology at its marked native position and the dark/blue NIR context. No depth, tide state, annual persistence, substrate use, exact legal shore or territorial-title conclusion is asserted.",
+      "material_remaining_physical_question": null,
+      "recommend_root_adoption": true,
+      "root_adoption_status": "pending",
+      "authority_or_repair_credit": 0,
+      "literal_quality_observations": {
+        "inside_native_frame": true,
+        "assets": {
+          "red": {
+            "value": 933,
+            "valid_mask": 255,
+            "source_pixel": [
+              9622,
+              5148
+            ],
+            "local_pixel": [
+              407,
+              29
+            ]
+          },
+          "green": {
+            "value": 892,
+            "valid_mask": 255,
+            "source_pixel": [
+              9622,
+              5148
+            ],
+            "local_pixel": [
+              407,
+              29
+            ]
+          },
+          "blue": {
+            "value": 1102,
+            "valid_mask": 255,
+            "source_pixel": [
+              9622,
+              5148
+            ],
+            "local_pixel": [
+              407,
+              29
+            ]
+          },
+          "nir": {
+            "value": 791,
+            "valid_mask": 255,
+            "source_pixel": [
+              9622,
+              5148
+            ],
+            "local_pixel": [
+              407,
+              29
+            ]
+          },
+          "scl": {
+            "value": 6,
+            "valid_mask": 255,
+            "source_pixel": [
+              4811,
+              2574
+            ],
+            "local_pixel": [
+              204,
+              15
+            ]
+          }
+        }
+      },
+      "complete_raw_observation_locator": "bulk-completion/offshore13649-observation-001/products/S2B_49PDK_20200822_0_L2A/block-09-05/block-observations.json#/points/0"
+    },
+    {
+      "index": 9822,
+      "original_key": {
+        "owner": 48238,
+        "y": 125118,
+        "x": 211623
+      },
+      "original_source_array_index": 39829,
+      "input_scope_array_index": 24184,
+      "original_interval_index": 9586,
+      "original_record_unchanged": {
+        "accepted_geometry_covers": false,
+        "accepted_hole_covers": false,
+        "actual_sids": [
+          65788
+        ],
+        "country_boundary_ids": [],
+        "covering_owners": [
+          48238
+        ],
+        "declared_sids": [
+          65788
+        ],
+        "flags": [
+          "disputed-island-territory-research"
+        ],
+        "hold_reasons": [
+          "disputed-island-territory-research",
+          "foreign-reference-country",
+          "source-relative-physical-interpretation-unresolved"
+        ],
+        "owner": 48238,
+        "package": "physical-interpretation",
+        "physical": "source-relative",
+        "qualified": false,
+        "reference_countries": [],
+        "source_boundary_ids": [],
+        "territorial_hold_reasons": [
+          "disputed-island-territory-research",
+          "foreign-reference-country"
+        ],
+        "x": 211623,
+        "y": 125118
+      },
+      "centre_unchanged": {
+        "longitude": 110.59626343614349,
+        "latitude": 8.162554994975833
+      },
+      "item": "S2B_49PDK_20200822_0_L2A",
+      "acquisition_datetime": "2020-08-22T03:15:39.355000Z",
+      "source_block": [
+        9,
+        5
+      ],
+      "native_10m_local_pixel": [
+        557,
+        437
+      ],
+      "disposition": "answered_bounded_physical_location",
+      "interpretation": "dated-water-location",
+      "actual_dated_location_fact": "The unchanged centre occupies visible water on 22 August 2020, read from actual wave, lagoon or submerged-reef morphology at its marked native position and the dark/blue NIR context. No depth, tide state, annual persistence, substrate use, exact legal shore or territorial-title conclusion is asserted.",
+      "material_remaining_physical_question": null,
+      "recommend_root_adoption": true,
+      "root_adoption_status": "pending",
+      "authority_or_repair_credit": 0,
+      "literal_quality_observations": {
+        "inside_native_frame": true,
+        "assets": {
+          "red": {
+            "value": 963,
+            "valid_mask": 255,
+            "source_pixel": [
+              9772,
+              5556
+            ],
+            "local_pixel": [
+              557,
+              437
+            ]
+          },
+          "green": {
+            "value": 966,
+            "valid_mask": 255,
+            "source_pixel": [
+              9772,
+              5556
+            ],
+            "local_pixel": [
+              557,
+              437
+            ]
+          },
+          "blue": {
+            "value": 1016,
+            "valid_mask": 255,
+            "source_pixel": [
+              9772,
+              5556
+            ],
+            "local_pixel": [
+              557,
+              437
+            ]
+          },
+          "nir": {
+            "value": 808,
+            "valid_mask": 255,
+            "source_pixel": [
+              9772,
+              5556
+            ],
+            "local_pixel": [
+              557,
+              437
+            ]
+          },
+          "scl": {
+            "value": 6,
+            "valid_mask": 255,
+            "source_pixel": [
+              4886,
+              2778
+            ],
+            "local_pixel": [
+              279,
+              219
+            ]
+          }
+        }
+      },
+      "complete_raw_observation_locator": "bulk-completion/offshore13649-observation-001/products/S2B_49PDK_20200822_0_L2A/block-09-05/block-observations.json#/points/1"
+    }
+  ],
+  "limits": [
+    "Root adoption remains pending; no repair/authority credit.",
+    "Dated centre/locality claim only, no full150m-cell coverage, dry reef, tide or annual persistence, legal shore, national ownership or sovereignty.",
+    "Original owner/y/x,sourceSID,source-relative/territorial flags/holds unchanged.",
+    "Cloud/fringe/shadow questions earn0completion credit; no blanket acquisition demand for the clear-water subset."
+  ]
+}

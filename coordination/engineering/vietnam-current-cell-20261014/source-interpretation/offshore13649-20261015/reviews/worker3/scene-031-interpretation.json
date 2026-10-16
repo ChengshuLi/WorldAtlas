@@ -1,0 +1,171 @@
+{
+  "scene_number_1based": 31,
+  "status": "completed-substantive-physical-interpretation-pending-root-adoption",
+  "item": "S2B_50PMS_20200129_0_L2A",
+  "acquired": "2020-01-29T02:54:47.069000Z",
+  "owner": 48238,
+  "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+  "record_count": 1,
+  "counts": {
+    "water-location": 1
+  },
+  "source_observations": {
+    "path": "bulk-completion/offshore13649-observation-001/products/S2B_50PMS_20200129_0_L2A/native-observations.json",
+    "bytes": 12485,
+    "sha256": "93e4ca2af43a34c535758590c5296d184982e17a59b23e5e10b76cff4b72411a"
+  },
+  "all_blocks_inspected": 1,
+  "frames_inspected": 3,
+  "attribution": "Copernicus Sentinel-2B2020 L2A via public Element84/AWS sentinel-cogs conversion; native10m RGB/NIR and20m SCL, processing baseline02.13; partial native windows, not whole remote COG authentication.",
+  "limits": [
+    "No remote reads, new raster/native producer, new classifier, pixel threshold or registration shift.",
+    "Water appearance retains the original source-relative location; it does not make a sovereignty, legal district-water or physical authority decision.",
+    "No annual persistence, tidal exposure, exact legal shore or whole150m-cell state is established.",
+    "Original dispute/foreign/reference and physical holds unchanged; rootadoption separate; repaircredit0."
+  ],
+  "block_readings": [
+    {
+      "block": "block-05-03",
+      "point_count": 1,
+      "visual_reading": "The single centre9823 lies in continuous visible wave-textured sea near the eastern side. Separate cloud/shadow pairs occur southwest and southeast, avoiding the marked point; no reef or terrestrial body intersects it.",
+      "images_viewed": [
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2B_50PMS_20200129_0_L2A/block-05-03/rgb-native.png",
+          "bytes": 1645857,
+          "sha256": "20ed829d47a916b24acea3dd002c6ae524a0827c3d338cd591136029c4acc60b",
+          "viewed": true
+        },
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2B_50PMS_20200129_0_L2A/block-05-03/nir-red-green-native.png",
+          "bytes": 1587016,
+          "sha256": "8e7170b7508e901ee38bb91118cdc301a095b5dc7dfbae47df54629dfda9632c",
+          "viewed": true
+        },
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2B_50PMS_20200129_0_L2A/block-05-03/rgb-centres.png",
+          "bytes": 1646553,
+          "sha256": "f6f8059ba2277f02069c58d41ca7b243bcdcba0f5fd102b0ad578fdd6f481336",
+          "viewed": true
+        }
+      ],
+      "raw_block_observations": {
+        "path": "products/S2B_50PMS_20200129_0_L2A/block-05-03/block-observations.json",
+        "bytes": 12779,
+        "sha256": "94153ffa66d26c8671c274679c52468ecc2b538bd33819892c22c3f63aefbecf"
+      }
+    }
+  ],
+  "records": [
+    {
+      "point_index": 9823,
+      "original_key": {
+        "owner": 48238,
+        "y": 123509,
+        "x": 215889
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 116.45423128857288,
+      "latitude": 10.343107921333118,
+      "input_scope_array_index": 16590,
+      "original_source_array_index": 32235,
+      "original_interval_index": 6793,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PMS_20200129_0_L2A",
+      "acquired": "2020-01-29T02:54:47.069000Z",
+      "source_block": [
+        5,
+        3
+      ],
+      "native_local_pixel": [
+        541,
+        957
+      ],
+      "source_pixels": {
+        "red": [
+          5660,
+          4028
+        ],
+        "green": [
+          5660,
+          4028
+        ],
+        "blue": [
+          5660,
+          4028
+        ],
+        "nir": [
+          5660,
+          4028
+        ],
+        "scl": [
+          2830,
+          2014
+        ]
+      },
+      "raw_centre_values": {
+        "red": 188,
+        "green": 224,
+        "blue": 320,
+        "nir": 167,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PMS_20200129_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre, supported by visible continuous water and wave/surface texture in both fully inspected native RGB/NIR frames and marked placement. Nearby separate clouds and dark streaks do not cover the exact centre.",
+      "unresolved_question": null,
+      "quality_limit": "All exact-centre masks valid and SCL6 retained as support, not a physical threshold. Dark marine surface patterns do not establish annual permanence, tidal exposure or legal shoreline.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    }
+  ]
+}

@@ -1,0 +1,3096 @@
+{
+  "scene_number_1based": 27,
+  "status": "completed-substantive-physical-interpretation-pending-root-adoption",
+  "item": "S2A_49NCJ_20200310_0_L2A",
+  "acquired": "2020-03-10T03:15:49.837000Z",
+  "owner": 48238,
+  "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+  "record_count": 26,
+  "counts": {
+    "water-location": 26
+  },
+  "source_observations": {
+    "path": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+    "bytes": 155933,
+    "sha256": "589502421e8b7be1213f896b8a72f1d392bec5f5239f1d2c6ee1ecffe0ebdc26"
+  },
+  "all_blocks_inspected": 6,
+  "frames_inspected": 18,
+  "attribution": "Copernicus Sentinel-2A2020 L2A via public Element84/AWS sentinel-cogs conversion; native10m RGB/NIR and20m SCL, processing baseline02.14; partial native windows, not whole remote COG authentication.",
+  "limits": [
+    "No remote reads, new raster/native producer, new classifier, pixel threshold or registration shift.",
+    "Water appearance retains the original source-relative location; it does not make a sovereignty, legal district-water or physical authority decision.",
+    "No annual persistence, tidal exposure, exact legal shore or whole150m-cell state is established.",
+    "Original dispute/foreign/reference and physical holds unchanged; rootadoption separate; repaircredit0."
+  ],
+  "block_readings": [
+    {
+      "block": "block-02-08",
+      "point_count": 20,
+      "visual_reading": "All20 marked southwest centres lie in dark continuous marine surface with broad wave/streak patterns. Small separate cloud patches north/west avoid the exact marked group.",
+      "images_viewed": [
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/block-02-08/rgb-native.png",
+          "bytes": 1204727,
+          "sha256": "406b6eb1007791a0616fbfe647cbae26d5a2ef594418b4f3fbed8e0fc5b46216",
+          "viewed": true
+        },
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/block-02-08/nir-red-green-native.png",
+          "bytes": 1112061,
+          "sha256": "b058508e80bde3b41c6bbc22b2fe38e872dc388f96ad74307fca5efec57ad860",
+          "viewed": true
+        },
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/block-02-08/rgb-centres.png",
+          "bytes": 1218090,
+          "sha256": "200926c1334e810716cee8641baa0bec1f90f4b2893b5f6eca75f40d93186111",
+          "viewed": true
+        }
+      ],
+      "raw_block_observations": {
+        "path": "products/S2A_49NCJ_20200310_0_L2A/block-02-08/block-observations.json",
+        "bytes": 121182,
+        "sha256": "5a0dd87a257addbf2d4c03b026baf72670c74b7c103937d70370befb27a0e64d"
+      }
+    },
+    {
+      "block": "block-03-07",
+      "point_count": 1,
+      "visual_reading": "The single centre9797 near the eastern edge lies in continuous dark water, away from western clouds and wake-like streaks.",
+      "images_viewed": [
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/block-03-07/rgb-native.png",
+          "bytes": 1291313,
+          "sha256": "d4754a43914fee0cab79199031133ec025ae8d263b809f9d7196acca4d427122",
+          "viewed": true
+        },
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/block-03-07/nir-red-green-native.png",
+          "bytes": 1209608,
+          "sha256": "ee8b3437f1404b64e77459d8e83e3072f705537e718809255e875df434b54a38",
+          "viewed": true
+        },
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/block-03-07/rgb-centres.png",
+          "bytes": 1292009,
+          "sha256": "b0b90771b9d3e0dbde664c564eb4cb6b39c5d11b621085b805193863f291ef6f",
+          "viewed": true
+        }
+      ],
+      "raw_block_observations": {
+        "path": "products/S2A_49NCJ_20200310_0_L2A/block-03-07/block-observations.json",
+        "bytes": 12776,
+        "sha256": "b1cf86bb7470098273f59679014545dbc0b426cbf8c5bcbe440e0ae370f836a3"
+      }
+    },
+    {
+      "block": "block-06-06",
+      "point_count": 1,
+      "visual_reading": "The sole centre9798 lies in uninterrupted dark sea-surface context; tiny separate bright features are away from it.",
+      "images_viewed": [
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/block-06-06/rgb-native.png",
+          "bytes": 1305845,
+          "sha256": "654782eefc84be8af175757112fa81afb55de212bb3074ac1212fd70ecebbbe6",
+          "viewed": true
+        },
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/block-06-06/nir-red-green-native.png",
+          "bytes": 1231802,
+          "sha256": "273f14ef3bbeed8ec0ae69041c11f2c375f61bf73ba0d68fa34a7cd3e97624e3",
+          "viewed": true
+        },
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/block-06-06/rgb-centres.png",
+          "bytes": 1306669,
+          "sha256": "e3bed5391ad00112a6bd041605cad14c86d96e2efe42fa9bb77f8ea44e10a531",
+          "viewed": true
+        }
+      ],
+      "raw_block_observations": {
+        "path": "products/S2A_49NCJ_20200310_0_L2A/block-06-06/block-observations.json",
+        "bytes": 12769,
+        "sha256": "ae4e0f4ae4b6b6e28091d25db8444a94a45b0bdae94099d75a82a423816612c6"
+      }
+    },
+    {
+      "block": "block-06-07",
+      "point_count": 2,
+      "visual_reading": "Both9799 and9800 lie in dark marine-water context; dark curved surface streaks and small bright features elsewhere do not establish land or obscure these exact centres.",
+      "images_viewed": [
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/block-06-07/rgb-native.png",
+          "bytes": 1341683,
+          "sha256": "bc7e0b5dba60ee629723598cfbc7c840c260985bf744c6daf5234cd7233c3466",
+          "viewed": true
+        },
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/block-06-07/nir-red-green-native.png",
+          "bytes": 1271654,
+          "sha256": "8048cec243fb7452d0e653316c3b65a772109b4fe404e25fb69a710cac846ade",
+          "viewed": true
+        },
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/block-06-07/rgb-centres.png",
+          "bytes": 1342952,
+          "sha256": "283dd251ef62cb97cb74de379cc22c45c31411629b777b42740689fa7ea57a6a",
+          "viewed": true
+        }
+      ],
+      "raw_block_observations": {
+        "path": "products/S2A_49NCJ_20200310_0_L2A/block-06-07/block-observations.json",
+        "bytes": 18432,
+        "sha256": "5e0a194cffe2644c2426d5ab5f1f510f7575617e64b8b719df557a0dec7e2aa5"
+      }
+    },
+    {
+      "block": "block-06-08",
+      "point_count": 1,
+      "visual_reading": "The sole centre9801 at the southwestern edge lies in continuous dark water; the nearest small cloud is farther northeast.",
+      "images_viewed": [
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/block-06-08/rgb-native.png",
+          "bytes": 1442473,
+          "sha256": "e44a5c34ed312af040d057cdd4d1f6aca33f9071cf0f21176fb09d7e324e0d4e",
+          "viewed": true
+        },
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/block-06-08/nir-red-green-native.png",
+          "bytes": 1387138,
+          "sha256": "fa5f2c6bb276bef30cc0dd18f20e37f516147f7746d2961fc9b29e4209540ca5",
+          "viewed": true
+        },
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/block-06-08/rgb-centres.png",
+          "bytes": 1443167,
+          "sha256": "1425399036c51986747f388bccd7fa9642a73fe2eb266506bcc9229678bf4942",
+          "viewed": true
+        }
+      ],
+      "raw_block_observations": {
+        "path": "products/S2A_49NCJ_20200310_0_L2A/block-06-08/block-observations.json",
+        "bytes": 12758,
+        "sha256": "43a9f13cd5816d675aa4eb341dc7af4848ecd634472358aa219d77846967fd10"
+      }
+    },
+    {
+      "block": "block-07-03",
+      "point_count": 1,
+      "visual_reading": "The sole centre9802 lies in dark wave-textured water, clear of the thin curved surface streaks and with no terrestrial feature at the exact placement.",
+      "images_viewed": [
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/block-07-03/rgb-native.png",
+          "bytes": 1226637,
+          "sha256": "800880144d40991d45977d0ea168a8315fb7fe490573839f8a88096730634ec0",
+          "viewed": true
+        },
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/block-07-03/nir-red-green-native.png",
+          "bytes": 1147858,
+          "sha256": "323bd20896768fd83180fdd240d25e4b7ea59205e2eb9b9f89e4a0796331d420",
+          "viewed": true
+        },
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/block-07-03/rgb-centres.png",
+          "bytes": 1227732,
+          "sha256": "804c2dce43817863ec5a3c1be0306e07871b5f150b0f16bafc92c9ea77944c7f",
+          "viewed": true
+        }
+      ],
+      "raw_block_observations": {
+        "path": "products/S2A_49NCJ_20200310_0_L2A/block-07-03/block-observations.json",
+        "bytes": 12772,
+        "sha256": "0bde0998ca1b76aaa9a317fb4ce1d5e7fb668df8002e05d7b6b80b2cf0c5aa00"
+      }
+    }
+  ],
+  "records": [
+    {
+      "point_index": 9777,
+      "original_key": {
+        "owner": 48238,
+        "y": 125317,
+        "x": 211153
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 109.95087082230344,
+      "latitude": 7.891970770849601,
+      "input_scope_array_index": 24532,
+      "original_source_array_index": 40177,
+      "original_interval_index": 9768,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2A_49NCJ_20200310_0_L2A",
+      "acquired": "2020-03-10T03:15:49.837000Z",
+      "source_block": [
+        2,
+        8
+      ],
+      "native_local_pixel": [
+        702,
+        244
+      ],
+      "source_pixels": {
+        "red": [
+          2749,
+          8435
+        ],
+        "green": [
+          2749,
+          8435
+        ],
+        "blue": [
+          2749,
+          8435
+        ],
+        "nir": [
+          2749,
+          8435
+        ],
+        "scl": [
+          1374,
+          4217
+        ]
+      },
+      "raw_centre_values": {
+        "red": 137,
+        "green": 222,
+        "blue": 344,
+        "nir": 134,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre, supported by visible continuous water and wave/surface texture in both fully inspected native RGB/NIR frames and marked placement. Nearby separate clouds and dark streaks do not cover the exact centre.",
+      "unresolved_question": null,
+      "quality_limit": "All exact-centre masks valid and SCL6 retained as support, not a physical threshold. Dark marine surface patterns do not establish annual permanence, tidal exposure or legal shoreline.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9778,
+      "original_key": {
+        "owner": 48238,
+        "y": 125318,
+        "x": 211151
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 109.94812447075515,
+      "latitude": 7.890610598577408,
+      "input_scope_array_index": 24533,
+      "original_source_array_index": 40178,
+      "original_interval_index": 9769,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2A_49NCJ_20200310_0_L2A",
+      "acquired": "2020-03-10T03:15:49.837000Z",
+      "source_block": [
+        2,
+        8
+      ],
+      "native_local_pixel": [
+        717,
+        213
+      ],
+      "source_pixels": {
+        "red": [
+          2764,
+          8404
+        ],
+        "green": [
+          2764,
+          8404
+        ],
+        "blue": [
+          2764,
+          8404
+        ],
+        "nir": [
+          2764,
+          8404
+        ],
+        "scl": [
+          1382,
+          4202
+        ]
+      },
+      "raw_centre_values": {
+        "red": 119,
+        "green": 162,
+        "blue": 278,
+        "nir": 98,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre, supported by visible continuous water and wave/surface texture in both fully inspected native RGB/NIR frames and marked placement. Nearby separate clouds and dark streaks do not cover the exact centre.",
+      "unresolved_question": null,
+      "quality_limit": "All exact-centre masks valid and SCL6 retained as support, not a physical threshold. Dark marine surface patterns do not establish annual permanence, tidal exposure or legal shoreline.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9779,
+      "original_key": {
+        "owner": 48238,
+        "y": 125318,
+        "x": 211152
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 109.94949764652932,
+      "latitude": 7.890610598577408,
+      "input_scope_array_index": 24534,
+      "original_source_array_index": 40179,
+      "original_interval_index": 9769,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2A_49NCJ_20200310_0_L2A",
+      "acquired": "2020-03-10T03:15:49.837000Z",
+      "source_block": [
+        2,
+        8
+      ],
+      "native_local_pixel": [
+        717,
+        228
+      ],
+      "source_pixels": {
+        "red": [
+          2764,
+          8419
+        ],
+        "green": [
+          2764,
+          8419
+        ],
+        "blue": [
+          2764,
+          8419
+        ],
+        "nir": [
+          2764,
+          8419
+        ],
+        "scl": [
+          1382,
+          4209
+        ]
+      },
+      "raw_centre_values": {
+        "red": 185,
+        "green": 234,
+        "blue": 356,
+        "nir": 149,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre, supported by visible continuous water and wave/surface texture in both fully inspected native RGB/NIR frames and marked placement. Nearby separate clouds and dark streaks do not cover the exact centre.",
+      "unresolved_question": null,
+      "quality_limit": "All exact-centre masks valid and SCL6 retained as support, not a physical threshold. Dark marine surface patterns do not establish annual permanence, tidal exposure or legal shoreline.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9780,
+      "original_key": {
+        "owner": 48238,
+        "y": 125319,
+        "x": 211149
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 109.94537811920691,
+      "latitude": 7.889250421830017,
+      "input_scope_array_index": 24535,
+      "original_source_array_index": 40180,
+      "original_interval_index": 9770,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2A_49NCJ_20200310_0_L2A",
+      "acquired": "2020-03-10T03:15:49.837000Z",
+      "source_block": [
+        2,
+        8
+      ],
+      "native_local_pixel": [
+        732,
+        183
+      ],
+      "source_pixels": {
+        "red": [
+          2779,
+          8374
+        ],
+        "green": [
+          2779,
+          8374
+        ],
+        "blue": [
+          2779,
+          8374
+        ],
+        "nir": [
+          2779,
+          8374
+        ],
+        "scl": [
+          1389,
+          4187
+        ]
+      },
+      "raw_centre_values": {
+        "red": 70,
+        "green": 125,
+        "blue": 214,
+        "nir": 44,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre, supported by visible continuous water and wave/surface texture in both fully inspected native RGB/NIR frames and marked placement. Nearby separate clouds and dark streaks do not cover the exact centre.",
+      "unresolved_question": null,
+      "quality_limit": "All exact-centre masks valid and SCL6 retained as support, not a physical threshold. Dark marine surface patterns do not establish annual permanence, tidal exposure or legal shoreline.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9781,
+      "original_key": {
+        "owner": 48238,
+        "y": 125319,
+        "x": 211150
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 109.94675129498103,
+      "latitude": 7.889250421830017,
+      "input_scope_array_index": 24536,
+      "original_source_array_index": 40181,
+      "original_interval_index": 9770,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2A_49NCJ_20200310_0_L2A",
+      "acquired": "2020-03-10T03:15:49.837000Z",
+      "source_block": [
+        2,
+        8
+      ],
+      "native_local_pixel": [
+        732,
+        198
+      ],
+      "source_pixels": {
+        "red": [
+          2779,
+          8389
+        ],
+        "green": [
+          2779,
+          8389
+        ],
+        "blue": [
+          2779,
+          8389
+        ],
+        "nir": [
+          2779,
+          8389
+        ],
+        "scl": [
+          1389,
+          4194
+        ]
+      },
+      "raw_centre_values": {
+        "red": 165,
+        "green": 230,
+        "blue": 305,
+        "nir": 130,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre, supported by visible continuous water and wave/surface texture in both fully inspected native RGB/NIR frames and marked placement. Nearby separate clouds and dark streaks do not cover the exact centre.",
+      "unresolved_question": null,
+      "quality_limit": "All exact-centre masks valid and SCL6 retained as support, not a physical threshold. Dark marine surface patterns do not establish annual permanence, tidal exposure or legal shoreline.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9782,
+      "original_key": {
+        "owner": 48238,
+        "y": 125320,
+        "x": 211148
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 109.94400494343279,
+      "latitude": 7.8878902406081775,
+      "input_scope_array_index": 24537,
+      "original_source_array_index": 40182,
+      "original_interval_index": 9771,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2A_49NCJ_20200310_0_L2A",
+      "acquired": "2020-03-10T03:15:49.837000Z",
+      "source_block": [
+        2,
+        8
+      ],
+      "native_local_pixel": [
+        747,
+        168
+      ],
+      "source_pixels": {
+        "red": [
+          2794,
+          8359
+        ],
+        "green": [
+          2794,
+          8359
+        ],
+        "blue": [
+          2794,
+          8359
+        ],
+        "nir": [
+          2794,
+          8359
+        ],
+        "scl": [
+          1397,
+          4179
+        ]
+      },
+      "raw_centre_values": {
+        "red": 123,
+        "green": 176,
+        "blue": 302,
+        "nir": 98,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre, supported by visible continuous water and wave/surface texture in both fully inspected native RGB/NIR frames and marked placement. Nearby separate clouds and dark streaks do not cover the exact centre.",
+      "unresolved_question": null,
+      "quality_limit": "All exact-centre masks valid and SCL6 retained as support, not a physical threshold. Dark marine surface patterns do not establish annual permanence, tidal exposure or legal shoreline.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9783,
+      "original_key": {
+        "owner": 48238,
+        "y": 125320,
+        "x": 211149
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 109.94537811920691,
+      "latitude": 7.8878902406081775,
+      "input_scope_array_index": 24538,
+      "original_source_array_index": 40183,
+      "original_interval_index": 9771,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2A_49NCJ_20200310_0_L2A",
+      "acquired": "2020-03-10T03:15:49.837000Z",
+      "source_block": [
+        2,
+        8
+      ],
+      "native_local_pixel": [
+        747,
+        183
+      ],
+      "source_pixels": {
+        "red": [
+          2794,
+          8374
+        ],
+        "green": [
+          2794,
+          8374
+        ],
+        "blue": [
+          2794,
+          8374
+        ],
+        "nir": [
+          2794,
+          8374
+        ],
+        "scl": [
+          1397,
+          4187
+        ]
+      },
+      "raw_centre_values": {
+        "red": 81,
+        "green": 150,
+        "blue": 240,
+        "nir": 54,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre, supported by visible continuous water and wave/surface texture in both fully inspected native RGB/NIR frames and marked placement. Nearby separate clouds and dark streaks do not cover the exact centre.",
+      "unresolved_question": null,
+      "quality_limit": "All exact-centre masks valid and SCL6 retained as support, not a physical threshold. Dark marine surface patterns do not establish annual permanence, tidal exposure or legal shoreline.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9784,
+      "original_key": {
+        "owner": 48238,
+        "y": 125321,
+        "x": 211147
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 109.94263176765867,
+      "latitude": 7.88653005491264,
+      "input_scope_array_index": 24539,
+      "original_source_array_index": 40184,
+      "original_interval_index": 9772,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2A_49NCJ_20200310_0_L2A",
+      "acquired": "2020-03-10T03:15:49.837000Z",
+      "source_block": [
+        2,
+        8
+      ],
+      "native_local_pixel": [
+        762,
+        153
+      ],
+      "source_pixels": {
+        "red": [
+          2809,
+          8344
+        ],
+        "green": [
+          2809,
+          8344
+        ],
+        "blue": [
+          2809,
+          8344
+        ],
+        "nir": [
+          2809,
+          8344
+        ],
+        "scl": [
+          1404,
+          4172
+        ]
+      },
+      "raw_centre_values": {
+        "red": 198,
+        "green": 243,
+        "blue": 346,
+        "nir": 169,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre, supported by visible continuous water and wave/surface texture in both fully inspected native RGB/NIR frames and marked placement. Nearby separate clouds and dark streaks do not cover the exact centre.",
+      "unresolved_question": null,
+      "quality_limit": "All exact-centre masks valid and SCL6 retained as support, not a physical threshold. Dark marine surface patterns do not establish annual permanence, tidal exposure or legal shoreline.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9785,
+      "original_key": {
+        "owner": 48238,
+        "y": 125321,
+        "x": 211148
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 109.94400494343279,
+      "latitude": 7.88653005491264,
+      "input_scope_array_index": 24540,
+      "original_source_array_index": 40185,
+      "original_interval_index": 9772,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2A_49NCJ_20200310_0_L2A",
+      "acquired": "2020-03-10T03:15:49.837000Z",
+      "source_block": [
+        2,
+        8
+      ],
+      "native_local_pixel": [
+        762,
+        168
+      ],
+      "source_pixels": {
+        "red": [
+          2809,
+          8359
+        ],
+        "green": [
+          2809,
+          8359
+        ],
+        "blue": [
+          2809,
+          8359
+        ],
+        "nir": [
+          2809,
+          8359
+        ],
+        "scl": [
+          1404,
+          4179
+        ]
+      },
+      "raw_centre_values": {
+        "red": 105,
+        "green": 185,
+        "blue": 272,
+        "nir": 75,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre, supported by visible continuous water and wave/surface texture in both fully inspected native RGB/NIR frames and marked placement. Nearby separate clouds and dark streaks do not cover the exact centre.",
+      "unresolved_question": null,
+      "quality_limit": "All exact-centre masks valid and SCL6 retained as support, not a physical threshold. Dark marine surface patterns do not establish annual permanence, tidal exposure or legal shoreline.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9786,
+      "original_key": {
+        "owner": 48238,
+        "y": 125322,
+        "x": 211146
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 109.94125859188455,
+      "latitude": 7.885169864744162,
+      "input_scope_array_index": 24541,
+      "original_source_array_index": 40186,
+      "original_interval_index": 9773,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2A_49NCJ_20200310_0_L2A",
+      "acquired": "2020-03-10T03:15:49.837000Z",
+      "source_block": [
+        2,
+        8
+      ],
+      "native_local_pixel": [
+        777,
+        137
+      ],
+      "source_pixels": {
+        "red": [
+          2824,
+          8328
+        ],
+        "green": [
+          2824,
+          8328
+        ],
+        "blue": [
+          2824,
+          8328
+        ],
+        "nir": [
+          2824,
+          8328
+        ],
+        "scl": [
+          1412,
+          4164
+        ]
+      },
+      "raw_centre_values": {
+        "red": 38,
+        "green": 101,
+        "blue": 214,
+        "nir": 7,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre, supported by visible continuous water and wave/surface texture in both fully inspected native RGB/NIR frames and marked placement. Nearby separate clouds and dark streaks do not cover the exact centre.",
+      "unresolved_question": null,
+      "quality_limit": "All exact-centre masks valid and SCL6 retained as support, not a physical threshold. Dark marine surface patterns do not establish annual permanence, tidal exposure or legal shoreline.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9787,
+      "original_key": {
+        "owner": 48238,
+        "y": 125322,
+        "x": 211147
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 109.94263176765867,
+      "latitude": 7.885169864744162,
+      "input_scope_array_index": 24542,
+      "original_source_array_index": 40187,
+      "original_interval_index": 9773,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2A_49NCJ_20200310_0_L2A",
+      "acquired": "2020-03-10T03:15:49.837000Z",
+      "source_block": [
+        2,
+        8
+      ],
+      "native_local_pixel": [
+        777,
+        153
+      ],
+      "source_pixels": {
+        "red": [
+          2824,
+          8344
+        ],
+        "green": [
+          2824,
+          8344
+        ],
+        "blue": [
+          2824,
+          8344
+        ],
+        "nir": [
+          2824,
+          8344
+        ],
+        "scl": [
+          1412,
+          4172
+        ]
+      },
+      "raw_centre_values": {
+        "red": 153,
+        "green": 199,
+        "blue": 347,
+        "nir": 126,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre, supported by visible continuous water and wave/surface texture in both fully inspected native RGB/NIR frames and marked placement. Nearby separate clouds and dark streaks do not cover the exact centre.",
+      "unresolved_question": null,
+      "quality_limit": "All exact-centre masks valid and SCL6 retained as support, not a physical threshold. Dark marine surface patterns do not establish annual permanence, tidal exposure or legal shoreline.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9788,
+      "original_key": {
+        "owner": 48238,
+        "y": 125323,
+        "x": 211145
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 109.93988541611037,
+      "latitude": 7.883809670103489,
+      "input_scope_array_index": 24544,
+      "original_source_array_index": 40189,
+      "original_interval_index": 9775,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2A_49NCJ_20200310_0_L2A",
+      "acquired": "2020-03-10T03:15:49.837000Z",
+      "source_block": [
+        2,
+        8
+      ],
+      "native_local_pixel": [
+        792,
+        122
+      ],
+      "source_pixels": {
+        "red": [
+          2839,
+          8313
+        ],
+        "green": [
+          2839,
+          8313
+        ],
+        "blue": [
+          2839,
+          8313
+        ],
+        "nir": [
+          2839,
+          8313
+        ],
+        "scl": [
+          1419,
+          4156
+        ]
+      },
+      "raw_centre_values": {
+        "red": 42,
+        "green": 127,
+        "blue": 215,
+        "nir": 23,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre, supported by visible continuous water and wave/surface texture in both fully inspected native RGB/NIR frames and marked placement. Nearby separate clouds and dark streaks do not cover the exact centre.",
+      "unresolved_question": null,
+      "quality_limit": "All exact-centre masks valid and SCL6 retained as support, not a physical threshold. Dark marine surface patterns do not establish annual permanence, tidal exposure or legal shoreline.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9789,
+      "original_key": {
+        "owner": 48238,
+        "y": 125323,
+        "x": 211146
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 109.94125859188455,
+      "latitude": 7.883809670103489,
+      "input_scope_array_index": 24545,
+      "original_source_array_index": 40190,
+      "original_interval_index": 9775,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2A_49NCJ_20200310_0_L2A",
+      "acquired": "2020-03-10T03:15:49.837000Z",
+      "source_block": [
+        2,
+        8
+      ],
+      "native_local_pixel": [
+        792,
+        137
+      ],
+      "source_pixels": {
+        "red": [
+          2839,
+          8328
+        ],
+        "green": [
+          2839,
+          8328
+        ],
+        "blue": [
+          2839,
+          8328
+        ],
+        "nir": [
+          2839,
+          8328
+        ],
+        "scl": [
+          1419,
+          4164
+        ]
+      },
+      "raw_centre_values": {
+        "red": 67,
+        "green": 147,
+        "blue": 230,
+        "nir": 29,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre, supported by visible continuous water and wave/surface texture in both fully inspected native RGB/NIR frames and marked placement. Nearby separate clouds and dark streaks do not cover the exact centre.",
+      "unresolved_question": null,
+      "quality_limit": "All exact-centre masks valid and SCL6 retained as support, not a physical threshold. Dark marine surface patterns do not establish annual permanence, tidal exposure or legal shoreline.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9790,
+      "original_key": {
+        "owner": 48238,
+        "y": 125324,
+        "x": 211144
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 109.93851224033625,
+      "latitude": 7.882449470991378,
+      "input_scope_array_index": 24546,
+      "original_source_array_index": 40191,
+      "original_interval_index": 9776,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2A_49NCJ_20200310_0_L2A",
+      "acquired": "2020-03-10T03:15:49.837000Z",
+      "source_block": [
+        2,
+        8
+      ],
+      "native_local_pixel": [
+        807,
+        107
+      ],
+      "source_pixels": {
+        "red": [
+          2854,
+          8298
+        ],
+        "green": [
+          2854,
+          8298
+        ],
+        "blue": [
+          2854,
+          8298
+        ],
+        "nir": [
+          2854,
+          8298
+        ],
+        "scl": [
+          1427,
+          4149
+        ]
+      },
+      "raw_centre_values": {
+        "red": 55,
+        "green": 114,
+        "blue": 251,
+        "nir": 31,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre, supported by visible continuous water and wave/surface texture in both fully inspected native RGB/NIR frames and marked placement. Nearby separate clouds and dark streaks do not cover the exact centre.",
+      "unresolved_question": null,
+      "quality_limit": "All exact-centre masks valid and SCL6 retained as support, not a physical threshold. Dark marine surface patterns do not establish annual permanence, tidal exposure or legal shoreline.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9791,
+      "original_key": {
+        "owner": 48238,
+        "y": 125324,
+        "x": 211145
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 109.93988541611037,
+      "latitude": 7.882449470991378,
+      "input_scope_array_index": 24547,
+      "original_source_array_index": 40192,
+      "original_interval_index": 9776,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2A_49NCJ_20200310_0_L2A",
+      "acquired": "2020-03-10T03:15:49.837000Z",
+      "source_block": [
+        2,
+        8
+      ],
+      "native_local_pixel": [
+        807,
+        122
+      ],
+      "source_pixels": {
+        "red": [
+          2854,
+          8313
+        ],
+        "green": [
+          2854,
+          8313
+        ],
+        "blue": [
+          2854,
+          8313
+        ],
+        "nir": [
+          2854,
+          8313
+        ],
+        "scl": [
+          1427,
+          4156
+        ]
+      },
+      "raw_centre_values": {
+        "red": 38,
+        "green": 99,
+        "blue": 194,
+        "nir": 23,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre, supported by visible continuous water and wave/surface texture in both fully inspected native RGB/NIR frames and marked placement. Nearby separate clouds and dark streaks do not cover the exact centre.",
+      "unresolved_question": null,
+      "quality_limit": "All exact-centre masks valid and SCL6 retained as support, not a physical threshold. Dark marine surface patterns do not establish annual permanence, tidal exposure or legal shoreline.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9792,
+      "original_key": {
+        "owner": 48238,
+        "y": 125325,
+        "x": 211144
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 109.93851224033625,
+      "latitude": 7.881089267408574,
+      "input_scope_array_index": 24549,
+      "original_source_array_index": 40194,
+      "original_interval_index": 9778,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2A_49NCJ_20200310_0_L2A",
+      "acquired": "2020-03-10T03:15:49.837000Z",
+      "source_block": [
+        2,
+        8
+      ],
+      "native_local_pixel": [
+        822,
+        107
+      ],
+      "source_pixels": {
+        "red": [
+          2869,
+          8298
+        ],
+        "green": [
+          2869,
+          8298
+        ],
+        "blue": [
+          2869,
+          8298
+        ],
+        "nir": [
+          2869,
+          8298
+        ],
+        "scl": [
+          1434,
+          4149
+        ]
+      },
+      "raw_centre_values": {
+        "red": 46,
+        "green": 107,
+        "blue": 235,
+        "nir": 15,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre, supported by visible continuous water and wave/surface texture in both fully inspected native RGB/NIR frames and marked placement. Nearby separate clouds and dark streaks do not cover the exact centre.",
+      "unresolved_question": null,
+      "quality_limit": "All exact-centre masks valid and SCL6 retained as support, not a physical threshold. Dark marine surface patterns do not establish annual permanence, tidal exposure or legal shoreline.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9793,
+      "original_key": {
+        "owner": 48238,
+        "y": 125326,
+        "x": 211143
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 109.93713906456213,
+      "latitude": 7.879729059355835,
+      "input_scope_array_index": 24551,
+      "original_source_array_index": 40196,
+      "original_interval_index": 9780,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2A_49NCJ_20200310_0_L2A",
+      "acquired": "2020-03-10T03:15:49.837000Z",
+      "source_block": [
+        2,
+        8
+      ],
+      "native_local_pixel": [
+        837,
+        92
+      ],
+      "source_pixels": {
+        "red": [
+          2884,
+          8283
+        ],
+        "green": [
+          2884,
+          8283
+        ],
+        "blue": [
+          2884,
+          8283
+        ],
+        "nir": [
+          2884,
+          8283
+        ],
+        "scl": [
+          1442,
+          4141
+        ]
+      },
+      "raw_centre_values": {
+        "red": 132,
+        "green": 188,
+        "blue": 332,
+        "nir": 98,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre, supported by visible continuous water and wave/surface texture in both fully inspected native RGB/NIR frames and marked placement. Nearby separate clouds and dark streaks do not cover the exact centre.",
+      "unresolved_question": null,
+      "quality_limit": "All exact-centre masks valid and SCL6 retained as support, not a physical threshold. Dark marine surface patterns do not establish annual permanence, tidal exposure or legal shoreline.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9794,
+      "original_key": {
+        "owner": 48238,
+        "y": 125327,
+        "x": 211142
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 109.93576588878801,
+      "latitude": 7.878368846833912,
+      "input_scope_array_index": 24554,
+      "original_source_array_index": 40199,
+      "original_interval_index": 9782,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2A_49NCJ_20200310_0_L2A",
+      "acquired": "2020-03-10T03:15:49.837000Z",
+      "source_block": [
+        2,
+        8
+      ],
+      "native_local_pixel": [
+        852,
+        77
+      ],
+      "source_pixels": {
+        "red": [
+          2899,
+          8268
+        ],
+        "green": [
+          2899,
+          8268
+        ],
+        "blue": [
+          2899,
+          8268
+        ],
+        "nir": [
+          2899,
+          8268
+        ],
+        "scl": [
+          1449,
+          4134
+        ]
+      },
+      "raw_centre_values": {
+        "red": 177,
+        "green": 234,
+        "blue": 346,
+        "nir": 147,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre, supported by visible continuous water and wave/surface texture in both fully inspected native RGB/NIR frames and marked placement. Nearby separate clouds and dark streaks do not cover the exact centre.",
+      "unresolved_question": null,
+      "quality_limit": "All exact-centre masks valid and SCL6 retained as support, not a physical threshold. Dark marine surface patterns do not establish annual permanence, tidal exposure or legal shoreline.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9795,
+      "original_key": {
+        "owner": 48238,
+        "y": 125328,
+        "x": 211141
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 109.93439271301389,
+      "latitude": 7.877008629843555,
+      "input_scope_array_index": 24560,
+      "original_source_array_index": 40205,
+      "original_interval_index": 9785,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2A_49NCJ_20200310_0_L2A",
+      "acquired": "2020-03-10T03:15:49.837000Z",
+      "source_block": [
+        2,
+        8
+      ],
+      "native_local_pixel": [
+        867,
+        61
+      ],
+      "source_pixels": {
+        "red": [
+          2914,
+          8252
+        ],
+        "green": [
+          2914,
+          8252
+        ],
+        "blue": [
+          2914,
+          8252
+        ],
+        "nir": [
+          2914,
+          8252
+        ],
+        "scl": [
+          1457,
+          4126
+        ]
+      },
+      "raw_centre_values": {
+        "red": 76,
+        "green": 130,
+        "blue": 228,
+        "nir": 46,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre, supported by visible continuous water and wave/surface texture in both fully inspected native RGB/NIR frames and marked placement. Nearby separate clouds and dark streaks do not cover the exact centre.",
+      "unresolved_question": null,
+      "quality_limit": "All exact-centre masks valid and SCL6 retained as support, not a physical threshold. Dark marine surface patterns do not establish annual permanence, tidal exposure or legal shoreline.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9796,
+      "original_key": {
+        "owner": 48238,
+        "y": 125329,
+        "x": 211140
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 109.93301953723977,
+      "latitude": 7.875648408385519,
+      "input_scope_array_index": 24566,
+      "original_source_array_index": 40211,
+      "original_interval_index": 9787,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2A_49NCJ_20200310_0_L2A",
+      "acquired": "2020-03-10T03:15:49.837000Z",
+      "source_block": [
+        2,
+        8
+      ],
+      "native_local_pixel": [
+        882,
+        46
+      ],
+      "source_pixels": {
+        "red": [
+          2929,
+          8237
+        ],
+        "green": [
+          2929,
+          8237
+        ],
+        "blue": [
+          2929,
+          8237
+        ],
+        "nir": [
+          2929,
+          8237
+        ],
+        "scl": [
+          1464,
+          4118
+        ]
+      },
+      "raw_centre_values": {
+        "red": 169,
+        "green": 215,
+        "blue": 274,
+        "nir": 117,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre, supported by visible continuous water and wave/surface texture in both fully inspected native RGB/NIR frames and marked placement. Nearby separate clouds and dark streaks do not cover the exact centre.",
+      "unresolved_question": null,
+      "quality_limit": "All exact-centre masks valid and SCL6 retained as support, not a physical threshold. Dark marine surface patterns do not establish annual permanence, tidal exposure or legal shoreline.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9797,
+      "original_key": {
+        "owner": 48238,
+        "y": 125351,
+        "x": 211136
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 109.92752683414324,
+      "latitude": 7.845722407507502,
+      "input_scope_array_index": 24606,
+      "original_source_array_index": 40251,
+      "original_interval_index": 9806,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2A_49NCJ_20200310_0_L2A",
+      "acquired": "2020-03-10T03:15:49.837000Z",
+      "source_block": [
+        3,
+        7
+      ],
+      "native_local_pixel": [
+        189,
+        1009
+      ],
+      "source_pixels": {
+        "red": [
+          3260,
+          8176
+        ],
+        "green": [
+          3260,
+          8176
+        ],
+        "blue": [
+          3260,
+          8176
+        ],
+        "nir": [
+          3260,
+          8176
+        ],
+        "scl": [
+          1630,
+          4088
+        ]
+      },
+      "raw_centre_values": {
+        "red": 201,
+        "green": 276,
+        "blue": 380,
+        "nir": 212,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre, supported by visible continuous water and wave/surface texture in both fully inspected native RGB/NIR frames and marked placement. Nearby separate clouds and dark streaks do not cover the exact centre.",
+      "unresolved_question": null,
+      "quality_limit": "All exact-centre masks valid and SCL6 retained as support, not a physical threshold. Dark marine surface patterns do not establish annual permanence, tidal exposure or legal shoreline.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9798,
+      "original_key": {
+        "owner": 48238,
+        "y": 125557,
+        "x": 211036
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 109.79020925673046,
+      "latitude": 7.565402789092971,
+      "input_scope_array_index": 24809,
+      "original_source_array_index": 40454,
+      "original_interval_index": 9915,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2A_49NCJ_20200310_0_L2A",
+      "acquired": "2020-03-10T03:15:49.837000Z",
+      "source_block": [
+        6,
+        6
+      ],
+      "native_local_pixel": [
+        213,
+        510
+      ],
+      "source_pixels": {
+        "red": [
+          6356,
+          6653
+        ],
+        "green": [
+          6356,
+          6653
+        ],
+        "blue": [
+          6356,
+          6653
+        ],
+        "nir": [
+          6356,
+          6653
+        ],
+        "scl": [
+          3178,
+          3326
+        ]
+      },
+      "raw_centre_values": {
+        "red": 197,
+        "green": 236,
+        "blue": 342,
+        "nir": 166,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre, supported by visible continuous water and wave/surface texture in both fully inspected native RGB/NIR frames and marked placement. Nearby separate clouds and dark streaks do not cover the exact centre.",
+      "unresolved_question": null,
+      "quality_limit": "All exact-centre masks valid and SCL6 retained as support, not a physical threshold. Dark marine surface patterns do not establish annual permanence, tidal exposure or legal shoreline.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9799,
+      "original_key": {
+        "owner": 48238,
+        "y": 125566,
+        "x": 211110
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 109.89182426401595,
+      "latitude": 7.553151611993146,
+      "input_scope_array_index": 24810,
+      "original_source_array_index": 40455,
+      "original_interval_index": 9916,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2A_49NCJ_20200310_0_L2A",
+      "acquired": "2020-03-10T03:15:49.837000Z",
+      "source_block": [
+        6,
+        7
+      ],
+      "native_local_pixel": [
+        351,
+        607
+      ],
+      "source_pixels": {
+        "red": [
+          6494,
+          7774
+        ],
+        "green": [
+          6494,
+          7774
+        ],
+        "blue": [
+          6494,
+          7774
+        ],
+        "nir": [
+          6494,
+          7774
+        ],
+        "scl": [
+          3247,
+          3887
+        ]
+      },
+      "raw_centre_values": {
+        "red": 75,
+        "green": 117,
+        "blue": 225,
+        "nir": 48,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre, supported by visible continuous water and wave/surface texture in both fully inspected native RGB/NIR frames and marked placement. Nearby separate clouds and dark streaks do not cover the exact centre.",
+      "unresolved_question": null,
+      "quality_limit": "All exact-centre masks valid and SCL6 retained as support, not a physical threshold. Dark marine surface patterns do not establish annual permanence, tidal exposure or legal shoreline.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9800,
+      "original_key": {
+        "owner": 48238,
+        "y": 125576,
+        "x": 211137
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 109.92890000991736,
+      "latitude": 7.5395387856224145,
+      "input_scope_array_index": 24811,
+      "original_source_array_index": 40456,
+      "original_interval_index": 9917,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2A_49NCJ_20200310_0_L2A",
+      "acquired": "2020-03-10T03:15:49.837000Z",
+      "source_block": [
+        6,
+        7
+      ],
+      "native_local_pixel": [
+        503,
+        1016
+      ],
+      "source_pixels": {
+        "red": [
+          6646,
+          8183
+        ],
+        "green": [
+          6646,
+          8183
+        ],
+        "blue": [
+          6646,
+          8183
+        ],
+        "nir": [
+          6646,
+          8183
+        ],
+        "scl": [
+          3323,
+          4091
+        ]
+      },
+      "raw_centre_values": {
+        "red": 29,
+        "green": 92,
+        "blue": 202,
+        "nir": 14,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre, supported by visible continuous water and wave/surface texture in both fully inspected native RGB/NIR frames and marked placement. Nearby separate clouds and dark streaks do not cover the exact centre.",
+      "unresolved_question": null,
+      "quality_limit": "All exact-centre masks valid and SCL6 retained as support, not a physical threshold. Dark marine surface patterns do not establish annual permanence, tidal exposure or legal shoreline.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9801,
+      "original_key": {
+        "owner": 48238,
+        "y": 125600,
+        "x": 211138
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 109.93027318569148,
+      "latitude": 7.506866257196898,
+      "input_scope_array_index": 24814,
+      "original_source_array_index": 40459,
+      "original_interval_index": 9920,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2A_49NCJ_20200310_0_L2A",
+      "acquired": "2020-03-10T03:15:49.837000Z",
+      "source_block": [
+        6,
+        8
+      ],
+      "native_local_pixel": [
+        864,
+        6
+      ],
+      "source_pixels": {
+        "red": [
+          7007,
+          8197
+        ],
+        "green": [
+          7007,
+          8197
+        ],
+        "blue": [
+          7007,
+          8197
+        ],
+        "nir": [
+          7007,
+          8197
+        ],
+        "scl": [
+          3503,
+          4098
+        ]
+      },
+      "raw_centre_values": {
+        "red": 186,
+        "green": 251,
+        "blue": 352,
+        "nir": 176,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre, supported by visible continuous water and wave/surface texture in both fully inspected native RGB/NIR frames and marked placement. Nearby separate clouds and dark streaks do not cover the exact centre.",
+      "unresolved_question": null,
+      "quality_limit": "All exact-centre masks valid and SCL6 retained as support, not a physical threshold. Dark marine surface patterns do not establish annual permanence, tidal exposure or legal shoreline.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9802,
+      "original_key": {
+        "owner": 48238,
+        "y": 125643,
+        "x": 210859
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 109.54715714470984,
+      "latitude": 7.448321843583129,
+      "input_scope_array_index": 24832,
+      "original_source_array_index": 40477,
+      "original_interval_index": 9928,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2A_49NCJ_20200310_0_L2A",
+      "acquired": "2020-03-10T03:15:49.837000Z",
+      "source_block": [
+        7,
+        3
+      ],
+      "native_local_pixel": [
+        475,
+        896
+      ],
+      "source_pixels": {
+        "red": [
+          7642,
+          3967
+        ],
+        "green": [
+          7642,
+          3967
+        ],
+        "blue": [
+          7642,
+          3967
+        ],
+        "nir": [
+          7642,
+          3967
+        ],
+        "scl": [
+          3821,
+          1983
+        ]
+      },
+      "raw_centre_values": {
+        "red": 207,
+        "green": 267,
+        "blue": 374,
+        "nir": 181,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre, supported by visible continuous water and wave/surface texture in both fully inspected native RGB/NIR frames and marked placement. Nearby separate clouds and dark streaks do not cover the exact centre.",
+      "unresolved_question": null,
+      "quality_limit": "All exact-centre masks valid and SCL6 retained as support, not a physical threshold. Dark marine surface patterns do not establish annual permanence, tidal exposure or legal shoreline.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    }
+  ]
+}

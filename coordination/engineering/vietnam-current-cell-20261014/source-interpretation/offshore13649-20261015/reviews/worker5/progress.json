@@ -1,0 +1,169 @@
+{
+  "kind": "worker5-completed-identity-check",
+  "completed": [
+    {
+      "scene": 4,
+      "item": "S2B_49PHL_20200508_0_L2A",
+      "count": 832,
+      "summary": {
+        "dated-water-location": 780,
+        "unresolved-cloud-or-halo": 50,
+        "unresolved-reef-emergence": 2
+      },
+      "blocks": 14,
+      "frames": 42
+    },
+    {
+      "scene": 8,
+      "item": "S2B_50PNS_20200215_0_L2A",
+      "count": 368,
+      "summary": {
+        "unresolved-reef-emergence": 67,
+        "dated-water-location": 293,
+        "unresolved-cloud-or-halo": 8
+      },
+      "blocks": 14,
+      "frames": 42
+    },
+    {
+      "scene": 12,
+      "item": "S2B_49PHN_20200421_0_L2A",
+      "count": 193,
+      "summary": {
+        "unresolved-reef-emergence": 22,
+        "unresolved-cloud-or-halo": 83,
+        "dated-water-location": 88
+      },
+      "blocks": 6,
+      "frames": 18
+    },
+    {
+      "scene": 16,
+      "item": "S2A_50PMS_20201116_0_L2A",
+      "count": 144,
+      "summary": {
+        "unresolved-cloud-or-halo": 67,
+        "dated-water-location": 58,
+        "unresolved-reef-emergence": 19
+      },
+      "blocks": 5,
+      "frames": 15
+    },
+    {
+      "scene": 20,
+      "item": "S2A_50NKP_20200403_0_L2A",
+      "count": 70,
+      "summary": {
+        "dated-water-location": 66,
+        "unresolved-cloud-or-halo": 4
+      },
+      "blocks": 5,
+      "frames": 15
+    },
+    {
+      "scene": 24,
+      "item": "S2B_49NDJ_20200325_0_L2A",
+      "count": 39,
+      "summary": {
+        "dated-water-location": 36,
+        "unresolved-cloud-or-halo": 3
+      },
+      "blocks": 2,
+      "frames": 6
+    },
+    {
+      "scene": 28,
+      "item": "S2A_50PLT_20200324_0_L2A",
+      "count": 14,
+      "summary": {
+        "dated-water-location": 8,
+        "unresolved-cloud-or-halo": 6
+      },
+      "blocks": 1,
+      "frames": 3
+    },
+    {
+      "scene": 32,
+      "item": "S2A_49QFU_20200219_0_L2A",
+      "count": 2556,
+      "summary": {
+        "unresolved-cloud-or-halo": 475,
+        "dated-water-location": 1741,
+        "unresolved-reef-emergence": 286,
+        "dated-terrestrial-location": 54
+      },
+      "blocks": 25,
+      "frames": 75
+    }
+  ],
+  "completed_key_count": 4216,
+  "summary": {
+    "dated-water-location": 3070,
+    "unresolved-cloud-or-halo": 696,
+    "unresolved-reef-emergence": 396,
+    "dated-terrestrial-location": 54
+  },
+  "owner_counts": {
+    "48238": 1660,
+    "48444": 2556
+  },
+  "whole_blocks_viewed": 72,
+  "native_frames_viewed": 216,
+  "unreviewed_assigned_scenes": [],
+  "input_identity": [
+    {
+      "path": "bulk-completion/offshore13649-observation-001/inputs/unchanged-original-points.json",
+      "bytes": 21067930,
+      "sha256": "2cc61879330a80da32b2a0d4f976b984250400d90ab204c5827e1762867c1e72"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/inputs/scenes.json",
+      "bytes": 205518,
+      "sha256": "78bdb147e2e10e53853b20f00aad20b82b82c95959005c7cee56a0e6e8533c37"
+    }
+  ],
+  "output_identity": [
+    {
+      "path": "bulk-completion/offshore13649-interpretation/worker5/scene-04.json",
+      "bytes": 6171769,
+      "sha256": "4a6da07351e7fd4358c53a7960c789230b0fe97399b63a3eb6c5680952fcbcc1"
+    },
+    {
+      "path": "bulk-completion/offshore13649-interpretation/worker5/scene-08.json",
+      "bytes": 2742210,
+      "sha256": "7b9aacff00803c41f2eb52ee1b48043d319b7e3db8cf5ec36b7b621c94d734b6"
+    },
+    {
+      "path": "bulk-completion/offshore13649-interpretation/worker5/scene-12.json",
+      "bytes": 1447705,
+      "sha256": "c0b45fe1c70212a08f4488247d9e79c64e6f09059a1453300ec54eb3b14bded2"
+    },
+    {
+      "path": "bulk-completion/offshore13649-interpretation/worker5/scene-16.json",
+      "bytes": 1075279,
+      "sha256": "48e9954a434c816efd576133a4676eefe5a2357a51a6e3b343919789539de52b"
+    },
+    {
+      "path": "bulk-completion/offshore13649-interpretation/worker5/scene-20.json",
+      "bytes": 524997,
+      "sha256": "ffe2398244ccbb65e6e4e09e42be305cce38d48fb576505f51fb7fb0482fc71b"
+    },
+    {
+      "path": "bulk-completion/offshore13649-interpretation/worker5/scene-24.json",
+      "bytes": 292509,
+      "sha256": "b34b9d7c304406fc9026b23f748c1af681280caa3c652bd7b2df1cea651ee869"
+    },
+    {
+      "path": "bulk-completion/offshore13649-interpretation/worker5/scene-28.json",
+      "bytes": 106072,
+      "sha256": "eb879781be2d6ff262c6a0db3fc5cbdfc7b881031e5ff6dd9bf206cc35dbcaf5"
+    },
+    {
+      "path": "bulk-completion/offshore13649-interpretation/worker5/scene-32.json",
+      "bytes": 19284295,
+      "sha256": "f43cdcb66c6073a29c2807706e5f76b4e9ce97aac875b9e2d5c6bdf52c48d08e"
+    }
+  ],
+  "identity_checks": "Original exact keys, centre coordinates, unchanged records, disjoint frozen-scene membership, literal retained observations, source pixels/subpixels/block identity, full native-observation bytes and all viewed frame/block-observation bytes and hashes verified. No native source reread.",
+  "adoption": "Root independent adoption pending; zero repair/ownership/territorial clearance."
+}

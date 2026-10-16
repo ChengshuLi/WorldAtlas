@@ -1,0 +1,5480 @@
+{
+  "complete": true,
+  "item": "S2A_50PKT_20200513_0_L2A",
+  "acquisition_datetime": "2020-05-13T02:54:51.924000Z",
+  "block": [
+    2,
+    5
+  ],
+  "indices": [
+    2689,
+    2701,
+    2708,
+    2716,
+    2717,
+    2726,
+    2736,
+    2737,
+    2747,
+    2748,
+    2758,
+    2759,
+    2770,
+    2771,
+    2783,
+    2784,
+    2796
+  ],
+  "points": [
+    {
+      "index": 2689,
+      "original_key": {
+        "owner": 48238,
+        "y": 122659,
+        "x": 214631
+      },
+      "longitude": 114.72677616472004,
+      "latitude": 11.48916681277882,
+      "input_scope_array_index": 12898,
+      "original_source_array_index": 28543,
+      "original_interval_index": 5382,
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "source_pixels": {
+        "red": [
+          2897,
+          5204
+        ],
+        "green": [
+          2897,
+          5204
+        ],
+        "blue": [
+          2897,
+          5204
+        ],
+        "nir": [
+          2897,
+          5204
+        ],
+        "scl": [
+          1448,
+          2602
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          2897.206508367439,
+          5204.244485618223
+        ],
+        "green": [
+          2897.206508367439,
+          5204.244485618223
+        ],
+        "blue": [
+          2897.206508367439,
+          5204.244485618223
+        ],
+        "nir": [
+          2897.206508367439,
+          5204.244485618223
+        ],
+        "scl": [
+          1448.6032541837194,
+          2602.1222428091114
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {
+        "red": {
+          "value": 323,
+          "valid_mask": 255,
+          "source_pixel": [
+            2897,
+            5204
+          ],
+          "local_pixel": [
+            850,
+            85
+          ],
+          "neighbourhood": [
+            [
+              300,
+              276,
+              305
+            ],
+            [
+              317,
+              323,
+              257
+            ],
+            [
+              336,
+              365,
+              269
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "green": {
+          "value": 388,
+          "valid_mask": 255,
+          "source_pixel": [
+            2897,
+            5204
+          ],
+          "local_pixel": [
+            850,
+            85
+          ],
+          "neighbourhood": [
+            [
+              310,
+              319,
+              319
+            ],
+            [
+              391,
+              388,
+              313
+            ],
+            [
+              384,
+              438,
+              342
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "blue": {
+          "value": 533,
+          "valid_mask": 255,
+          "source_pixel": [
+            2897,
+            5204
+          ],
+          "local_pixel": [
+            850,
+            85
+          ],
+          "neighbourhood": [
+            [
+              459,
+              469,
+              401
+            ],
+            [
+              458,
+              533,
+              442
+            ],
+            [
+              432,
+              523,
+              478
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "nir": {
+          "value": 316,
+          "valid_mask": 255,
+          "source_pixel": [
+            2897,
+            5204
+          ],
+          "local_pixel": [
+            850,
+            85
+          ],
+          "neighbourhood": [
+            [
+              267,
+              282,
+              246
+            ],
+            [
+              295,
+              316,
+              248
+            ],
+            [
+              269,
+              314,
+              269
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            1448,
+            2602
+          ],
+          "local_pixel": [
+            425,
+            43
+          ],
+          "neighbourhood": [
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        }
+      },
+      "inside_native_frame": true,
+      "source_block": [
+        2,
+        5
+      ]
+    },
+    {
+      "index": 2701,
+      "original_key": {
+        "owner": 48238,
+        "y": 122661,
+        "x": 214632
+      },
+      "longitude": 114.72814934049416,
+      "latitude": 11.486475478725652,
+      "input_scope_array_index": 12910,
+      "original_source_array_index": 28555,
+      "original_interval_index": 5387,
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "source_pixels": {
+        "red": [
+          2927,
+          5218
+        ],
+        "green": [
+          2927,
+          5218
+        ],
+        "blue": [
+          2927,
+          5218
+        ],
+        "nir": [
+          2927,
+          5218
+        ],
+        "scl": [
+          1463,
+          2609
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          2927.1058461494686,
+          5218.99592910767
+        ],
+        "green": [
+          2927.1058461494686,
+          5218.99592910767
+        ],
+        "blue": [
+          2927.1058461494686,
+          5218.99592910767
+        ],
+        "nir": [
+          2927.1058461494686,
+          5218.99592910767
+        ],
+        "scl": [
+          1463.5529230747343,
+          2609.497964553835
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {
+        "red": {
+          "value": 321,
+          "valid_mask": 255,
+          "source_pixel": [
+            2927,
+            5218
+          ],
+          "local_pixel": [
+            880,
+            99
+          ],
+          "neighbourhood": [
+            [
+              286,
+              347,
+              315
+            ],
+            [
+              309,
+              321,
+              309
+            ],
+            [
+              315,
+              321,
+              293
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "green": {
+          "value": 365,
+          "valid_mask": 255,
+          "source_pixel": [
+            2927,
+            5218
+          ],
+          "local_pixel": [
+            880,
+            99
+          ],
+          "neighbourhood": [
+            [
+              308,
+              351,
+              396
+            ],
+            [
+              323,
+              365,
+              347
+            ],
+            [
+              335,
+              360,
+              323
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "blue": {
+          "value": 464,
+          "valid_mask": 255,
+          "source_pixel": [
+            2927,
+            5218
+          ],
+          "local_pixel": [
+            880,
+            99
+          ],
+          "neighbourhood": [
+            [
+              384,
+              431,
+              482
+            ],
+            [
+              444,
+              464,
+              444
+            ],
+            [
+              466,
+              481,
+              472
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "nir": {
+          "value": 288,
+          "valid_mask": 255,
+          "source_pixel": [
+            2927,
+            5218
+          ],
+          "local_pixel": [
+            880,
+            99
+          ],
+          "neighbourhood": [
+            [
+              223,
+              256,
+              297
+            ],
+            [
+              257,
+              288,
+              259
+            ],
+            [
+              272,
+              276,
+              258
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            1463,
+            2609
+          ],
+          "local_pixel": [
+            440,
+            50
+          ],
+          "neighbourhood": [
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        }
+      },
+      "inside_native_frame": true,
+      "source_block": [
+        2,
+        5
+      ]
+    },
+    {
+      "index": 2708,
+      "original_key": {
+        "owner": 48238,
+        "y": 122662,
+        "x": 214633
+      },
+      "longitude": 114.72952251626833,
+      "latitude": 11.485129802065178,
+      "input_scope_array_index": 12917,
+      "original_source_array_index": 28562,
+      "original_interval_index": 5390,
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "source_pixels": {
+        "red": [
+          2942,
+          5233
+        ],
+        "green": [
+          2942,
+          5233
+        ],
+        "blue": [
+          2942,
+          5233
+        ],
+        "nir": [
+          2942,
+          5233
+        ],
+        "scl": [
+          1471,
+          2616
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          2942.114739838027,
+          5233.865244436503
+        ],
+        "green": [
+          2942.114739838027,
+          5233.865244436503
+        ],
+        "blue": [
+          2942.114739838027,
+          5233.865244436503
+        ],
+        "nir": [
+          2942.114739838027,
+          5233.865244436503
+        ],
+        "scl": [
+          1471.0573699190136,
+          2616.9326222182517
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {
+        "red": {
+          "value": 267,
+          "valid_mask": 255,
+          "source_pixel": [
+            2942,
+            5233
+          ],
+          "local_pixel": [
+            895,
+            114
+          ],
+          "neighbourhood": [
+            [
+              295,
+              267,
+              292
+            ],
+            [
+              296,
+              267,
+              306
+            ],
+            [
+              283,
+              249,
+              270
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "green": {
+          "value": 293,
+          "valid_mask": 255,
+          "source_pixel": [
+            2942,
+            5233
+          ],
+          "local_pixel": [
+            895,
+            114
+          ],
+          "neighbourhood": [
+            [
+              393,
+              302,
+              309
+            ],
+            [
+              346,
+              293,
+              311
+            ],
+            [
+              310,
+              285,
+              325
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "blue": {
+          "value": 406,
+          "valid_mask": 255,
+          "source_pixel": [
+            2942,
+            5233
+          ],
+          "local_pixel": [
+            895,
+            114
+          ],
+          "neighbourhood": [
+            [
+              458,
+              417,
+              437
+            ],
+            [
+              461,
+              406,
+              434
+            ],
+            [
+              403,
+              361,
+              430
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "nir": {
+          "value": 237,
+          "valid_mask": 255,
+          "source_pixel": [
+            2942,
+            5233
+          ],
+          "local_pixel": [
+            895,
+            114
+          ],
+          "neighbourhood": [
+            [
+              275,
+              217,
+              213
+            ],
+            [
+              259,
+              237,
+              242
+            ],
+            [
+              229,
+              198,
+              230
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            1471,
+            2616
+          ],
+          "local_pixel": [
+            448,
+            57
+          ],
+          "neighbourhood": [
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        }
+      },
+      "inside_native_frame": true,
+      "source_block": [
+        2,
+        5
+      ]
+    },
+    {
+      "index": 2716,
+      "original_key": {
+        "owner": 48238,
+        "y": 122663,
+        "x": 214633
+      },
+      "longitude": 114.72952251626833,
+      "latitude": 11.48378411898306,
+      "input_scope_array_index": 12925,
+      "original_source_array_index": 28570,
+      "original_interval_index": 5393,
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "source_pixels": {
+        "red": [
+          2957,
+          5233
+        ],
+        "green": [
+          2957,
+          5233
+        ],
+        "blue": [
+          2957,
+          5233
+        ],
+        "nir": [
+          2957,
+          5233
+        ],
+        "scl": [
+          1478,
+          2616
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          2957.0053393470007,
+          5233.74769670446
+        ],
+        "green": [
+          2957.0053393470007,
+          5233.74769670446
+        ],
+        "blue": [
+          2957.0053393470007,
+          5233.74769670446
+        ],
+        "nir": [
+          2957.0053393470007,
+          5233.74769670446
+        ],
+        "scl": [
+          1478.5026696735003,
+          2616.87384835223
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {
+        "red": {
+          "value": 267,
+          "valid_mask": 255,
+          "source_pixel": [
+            2957,
+            5233
+          ],
+          "local_pixel": [
+            910,
+            114
+          ],
+          "neighbourhood": [
+            [
+              235,
+              230,
+              281
+            ],
+            [
+              281,
+              267,
+              272
+            ],
+            [
+              295,
+              292,
+              275
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "green": {
+          "value": 334,
+          "valid_mask": 255,
+          "source_pixel": [
+            2957,
+            5233
+          ],
+          "local_pixel": [
+            910,
+            114
+          ],
+          "neighbourhood": [
+            [
+              283,
+              270,
+              305
+            ],
+            [
+              324,
+              334,
+              289
+            ],
+            [
+              296,
+              382,
+              291
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "blue": {
+          "value": 453,
+          "valid_mask": 255,
+          "source_pixel": [
+            2957,
+            5233
+          ],
+          "local_pixel": [
+            910,
+            114
+          ],
+          "neighbourhood": [
+            [
+              390,
+              384,
+              394
+            ],
+            [
+              390,
+              453,
+              416
+            ],
+            [
+              398,
+              470,
+              432
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "nir": {
+          "value": 239,
+          "valid_mask": 255,
+          "source_pixel": [
+            2957,
+            5233
+          ],
+          "local_pixel": [
+            910,
+            114
+          ],
+          "neighbourhood": [
+            [
+              226,
+              205,
+              213
+            ],
+            [
+              241,
+              239,
+              234
+            ],
+            [
+              237,
+              292,
+              238
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            1478,
+            2616
+          ],
+          "local_pixel": [
+            455,
+            57
+          ],
+          "neighbourhood": [
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        }
+      },
+      "inside_native_frame": true,
+      "source_block": [
+        2,
+        5
+      ]
+    },
+    {
+      "index": 2717,
+      "original_key": {
+        "owner": 48238,
+        "y": 122663,
+        "x": 214634
+      },
+      "longitude": 114.73089569204245,
+      "latitude": 11.48378411898306,
+      "input_scope_array_index": 12926,
+      "original_source_array_index": 28571,
+      "original_interval_index": 5393,
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "source_pixels": {
+        "red": [
+          2957,
+          5248
+        ],
+        "green": [
+          2957,
+          5248
+        ],
+        "blue": [
+          2957,
+          5248
+        ],
+        "nir": [
+          2957,
+          5248
+        ],
+        "scl": [
+          1478,
+          2624
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          2957.1236054654873,
+          5248.7347021542955
+        ],
+        "green": [
+          2957.1236054654873,
+          5248.7347021542955
+        ],
+        "blue": [
+          2957.1236054654873,
+          5248.7347021542955
+        ],
+        "nir": [
+          2957.1236054654873,
+          5248.7347021542955
+        ],
+        "scl": [
+          1478.5618027327437,
+          2624.3673510771478
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {
+        "red": {
+          "value": 309,
+          "valid_mask": 255,
+          "source_pixel": [
+            2957,
+            5248
+          ],
+          "local_pixel": [
+            910,
+            129
+          ],
+          "neighbourhood": [
+            [
+              336,
+              351,
+              329
+            ],
+            [
+              329,
+              309,
+              333
+            ],
+            [
+              296,
+              299,
+              337
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "green": {
+          "value": 379,
+          "valid_mask": 255,
+          "source_pixel": [
+            2957,
+            5248
+          ],
+          "local_pixel": [
+            910,
+            129
+          ],
+          "neighbourhood": [
+            [
+              390,
+              406,
+              360
+            ],
+            [
+              327,
+              379,
+              358
+            ],
+            [
+              372,
+              343,
+              354
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "blue": {
+          "value": 472,
+          "valid_mask": 255,
+          "source_pixel": [
+            2957,
+            5248
+          ],
+          "local_pixel": [
+            910,
+            129
+          ],
+          "neighbourhood": [
+            [
+              435,
+              504,
+              468
+            ],
+            [
+              437,
+              472,
+              454
+            ],
+            [
+              467,
+              461,
+              472
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "nir": {
+          "value": 296,
+          "valid_mask": 255,
+          "source_pixel": [
+            2957,
+            5248
+          ],
+          "local_pixel": [
+            910,
+            129
+          ],
+          "neighbourhood": [
+            [
+              281,
+              314,
+              273
+            ],
+            [
+              267,
+              296,
+              269
+            ],
+            [
+              284,
+              300,
+              290
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            1478,
+            2624
+          ],
+          "local_pixel": [
+            455,
+            65
+          ],
+          "neighbourhood": [
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        }
+      },
+      "inside_native_frame": true,
+      "source_block": [
+        2,
+        5
+      ]
+    },
+    {
+      "index": 2726,
+      "original_key": {
+        "owner": 48238,
+        "y": 122664,
+        "x": 214634
+      },
+      "longitude": 114.73089569204245,
+      "latitude": 11.48243842948001,
+      "input_scope_array_index": 12935,
+      "original_source_array_index": 28580,
+      "original_interval_index": 5396,
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "source_pixels": {
+        "red": [
+          2972,
+          5248
+        ],
+        "green": [
+          2972,
+          5248
+        ],
+        "blue": [
+          2972,
+          5248
+        ],
+        "nir": [
+          2972,
+          5248
+        ],
+        "scl": [
+          1486,
+          2624
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          2972.014261759876,
+          5248.617238722956
+        ],
+        "green": [
+          2972.014261759876,
+          5248.617238722956
+        ],
+        "blue": [
+          2972.014261759876,
+          5248.617238722956
+        ],
+        "nir": [
+          2972.014261759876,
+          5248.617238722956
+        ],
+        "scl": [
+          1486.007130879938,
+          2624.308619361478
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {
+        "red": {
+          "value": 275,
+          "valid_mask": 255,
+          "source_pixel": [
+            2972,
+            5248
+          ],
+          "local_pixel": [
+            925,
+            129
+          ],
+          "neighbourhood": [
+            [
+              366,
+              252,
+              257
+            ],
+            [
+              325,
+              275,
+              265
+            ],
+            [
+              317,
+              278,
+              262
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "green": {
+          "value": 355,
+          "valid_mask": 255,
+          "source_pixel": [
+            2972,
+            5248
+          ],
+          "local_pixel": [
+            925,
+            129
+          ],
+          "neighbourhood": [
+            [
+              404,
+              306,
+              296
+            ],
+            [
+              361,
+              355,
+              302
+            ],
+            [
+              331,
+              325,
+              294
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "blue": {
+          "value": 454,
+          "valid_mask": 255,
+          "source_pixel": [
+            2972,
+            5248
+          ],
+          "local_pixel": [
+            925,
+            129
+          ],
+          "neighbourhood": [
+            [
+              469,
+              465,
+              401
+            ],
+            [
+              459,
+              454,
+              420
+            ],
+            [
+              409,
+              429,
+              412
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "nir": {
+          "value": 276,
+          "valid_mask": 255,
+          "source_pixel": [
+            2972,
+            5248
+          ],
+          "local_pixel": [
+            925,
+            129
+          ],
+          "neighbourhood": [
+            [
+              286,
+              271,
+              239
+            ],
+            [
+              261,
+              276,
+              247
+            ],
+            [
+              246,
+              241,
+              232
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            1486,
+            2624
+          ],
+          "local_pixel": [
+            463,
+            65
+          ],
+          "neighbourhood": [
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        }
+      },
+      "inside_native_frame": true,
+      "source_block": [
+        2,
+        5
+      ]
+    },
+    {
+      "index": 2736,
+      "original_key": {
+        "owner": 48238,
+        "y": 122665,
+        "x": 214634
+      },
+      "longitude": 114.73089569204245,
+      "latitude": 11.481092733556743,
+      "input_scope_array_index": 12945,
+      "original_source_array_index": 28590,
+      "original_interval_index": 5400,
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "source_pixels": {
+        "red": [
+          2986,
+          5248
+        ],
+        "green": [
+          2986,
+          5248
+        ],
+        "blue": [
+          2986,
+          5248
+        ],
+        "nir": [
+          2986,
+          5248
+        ],
+        "scl": [
+          1493,
+          2624
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          2986.9049879419326,
+          5248.499788320987
+        ],
+        "green": [
+          2986.9049879419326,
+          5248.499788320987
+        ],
+        "blue": [
+          2986.9049879419326,
+          5248.499788320987
+        ],
+        "nir": [
+          2986.9049879419326,
+          5248.499788320987
+        ],
+        "scl": [
+          1493.4524939709663,
+          2624.2498941604936
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {
+        "red": {
+          "value": 256,
+          "valid_mask": 255,
+          "source_pixel": [
+            2986,
+            5248
+          ],
+          "local_pixel": [
+            939,
+            129
+          ],
+          "neighbourhood": [
+            [
+              272,
+              286,
+              269
+            ],
+            [
+              285,
+              256,
+              258
+            ],
+            [
+              310,
+              274,
+              282
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "green": {
+          "value": 310,
+          "valid_mask": 255,
+          "source_pixel": [
+            2986,
+            5248
+          ],
+          "local_pixel": [
+            939,
+            129
+          ],
+          "neighbourhood": [
+            [
+              297,
+              329,
+              352
+            ],
+            [
+              347,
+              310,
+              346
+            ],
+            [
+              363,
+              310,
+              309
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "blue": {
+          "value": 434,
+          "valid_mask": 255,
+          "source_pixel": [
+            2986,
+            5248
+          ],
+          "local_pixel": [
+            939,
+            129
+          ],
+          "neighbourhood": [
+            [
+              431,
+              439,
+              407
+            ],
+            [
+              473,
+              434,
+              409
+            ],
+            [
+              454,
+              385,
+              414
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "nir": {
+          "value": 232,
+          "valid_mask": 255,
+          "source_pixel": [
+            2986,
+            5248
+          ],
+          "local_pixel": [
+            939,
+            129
+          ],
+          "neighbourhood": [
+            [
+              258,
+              232,
+              261
+            ],
+            [
+              258,
+              232,
+              258
+            ],
+            [
+              279,
+              242,
+              229
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            1493,
+            2624
+          ],
+          "local_pixel": [
+            470,
+            65
+          ],
+          "neighbourhood": [
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        }
+      },
+      "inside_native_frame": true,
+      "source_block": [
+        2,
+        5
+      ]
+    },
+    {
+      "index": 2737,
+      "original_key": {
+        "owner": 48238,
+        "y": 122665,
+        "x": 214635
+      },
+      "longitude": 114.73226886781657,
+      "latitude": 11.481092733556743,
+      "input_scope_array_index": 12946,
+      "original_source_array_index": 28591,
+      "original_interval_index": 5400,
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "source_pixels": {
+        "red": [
+          2987,
+          5263
+        ],
+        "green": [
+          2987,
+          5263
+        ],
+        "blue": [
+          2987,
+          5263
+        ],
+        "nir": [
+          2987,
+          5263
+        ],
+        "scl": [
+          1493,
+          2631
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          2987.0231561266555,
+          5263.486923098768
+        ],
+        "green": [
+          2987.0231561266555,
+          5263.486923098768
+        ],
+        "blue": [
+          2987.0231561266555,
+          5263.486923098768
+        ],
+        "nir": [
+          2987.0231561266555,
+          5263.486923098768
+        ],
+        "scl": [
+          1493.5115780633278,
+          2631.743461549384
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {
+        "red": {
+          "value": 300,
+          "valid_mask": 255,
+          "source_pixel": [
+            2987,
+            5263
+          ],
+          "local_pixel": [
+            940,
+            144
+          ],
+          "neighbourhood": [
+            [
+              289,
+              269,
+              283
+            ],
+            [
+              281,
+              300,
+              264
+            ],
+            [
+              310,
+              283,
+              276
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "green": {
+          "value": 330,
+          "valid_mask": 255,
+          "source_pixel": [
+            2987,
+            5263
+          ],
+          "local_pixel": [
+            940,
+            144
+          ],
+          "neighbourhood": [
+            [
+              338,
+              301,
+              317
+            ],
+            [
+              306,
+              330,
+              290
+            ],
+            [
+              355,
+              313,
+              299
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "blue": {
+          "value": 422,
+          "valid_mask": 255,
+          "source_pixel": [
+            2987,
+            5263
+          ],
+          "local_pixel": [
+            940,
+            144
+          ],
+          "neighbourhood": [
+            [
+              430,
+              473,
+              411
+            ],
+            [
+              419,
+              422,
+              418
+            ],
+            [
+              457,
+              445,
+              418
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "nir": {
+          "value": 229,
+          "valid_mask": 255,
+          "source_pixel": [
+            2987,
+            5263
+          ],
+          "local_pixel": [
+            940,
+            144
+          ],
+          "neighbourhood": [
+            [
+              254,
+              243,
+              239
+            ],
+            [
+              263,
+              229,
+              229
+            ],
+            [
+              261,
+              248,
+              230
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            1493,
+            2631
+          ],
+          "local_pixel": [
+            470,
+            72
+          ],
+          "neighbourhood": [
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        }
+      },
+      "inside_native_frame": true,
+      "source_block": [
+        2,
+        5
+      ]
+    },
+    {
+      "index": 2747,
+      "original_key": {
+        "owner": 48238,
+        "y": 122666,
+        "x": 214635
+      },
+      "longitude": 114.73226886781657,
+      "latitude": 11.479747031213968,
+      "input_scope_array_index": 12956,
+      "original_source_array_index": 28601,
+      "original_interval_index": 5404,
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "source_pixels": {
+        "red": [
+          3001,
+          5263
+        ],
+        "green": [
+          3001,
+          5263
+        ],
+        "blue": [
+          3001,
+          5263
+        ],
+        "nir": [
+          3001,
+          5263
+        ],
+        "scl": [
+          1500,
+          2631
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          3001.9139390856144,
+          5263.369556974099
+        ],
+        "green": [
+          3001.9139390856144,
+          5263.369556974099
+        ],
+        "blue": [
+          3001.9139390856144,
+          5263.369556974099
+        ],
+        "nir": [
+          3001.9139390856144,
+          5263.369556974099
+        ],
+        "scl": [
+          1500.9569695428072,
+          2631.6847784870497
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {
+        "red": {
+          "value": 269,
+          "valid_mask": 255,
+          "source_pixel": [
+            3001,
+            5263
+          ],
+          "local_pixel": [
+            954,
+            144
+          ],
+          "neighbourhood": [
+            [
+              257,
+              255,
+              239
+            ],
+            [
+              288,
+              269,
+              228
+            ],
+            [
+              264,
+              305,
+              269
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "green": {
+          "value": 324,
+          "valid_mask": 255,
+          "source_pixel": [
+            3001,
+            5263
+          ],
+          "local_pixel": [
+            954,
+            144
+          ],
+          "neighbourhood": [
+            [
+              286,
+              278,
+              302
+            ],
+            [
+              313,
+              324,
+              302
+            ],
+            [
+              253,
+              342,
+              350
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "blue": {
+          "value": 440,
+          "valid_mask": 255,
+          "source_pixel": [
+            3001,
+            5263
+          ],
+          "local_pixel": [
+            954,
+            144
+          ],
+          "neighbourhood": [
+            [
+              384,
+              393,
+              426
+            ],
+            [
+              362,
+              440,
+              450
+            ],
+            [
+              358,
+              415,
+              465
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "nir": {
+          "value": 266,
+          "valid_mask": 255,
+          "source_pixel": [
+            3001,
+            5263
+          ],
+          "local_pixel": [
+            954,
+            144
+          ],
+          "neighbourhood": [
+            [
+              219,
+              227,
+              229
+            ],
+            [
+              219,
+              266,
+              234
+            ],
+            [
+              207,
+              259,
+              272
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            1500,
+            2631
+          ],
+          "local_pixel": [
+            477,
+            72
+          ],
+          "neighbourhood": [
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        }
+      },
+      "inside_native_frame": true,
+      "source_block": [
+        2,
+        5
+      ]
+    },
+    {
+      "index": 2748,
+      "original_key": {
+        "owner": 48238,
+        "y": 122666,
+        "x": 214636
+      },
+      "longitude": 114.73364204359069,
+      "latitude": 11.479747031213968,
+      "input_scope_array_index": 12957,
+      "original_source_array_index": 28602,
+      "original_interval_index": 5404,
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "source_pixels": {
+        "red": [
+          3002,
+          5278
+        ],
+        "green": [
+          3002,
+          5278
+        ],
+        "blue": [
+          3002,
+          5278
+        ],
+        "nir": [
+          3002,
+          5278
+        ],
+        "scl": [
+          1501,
+          2639
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          3002.0320224627794,
+          5278.356749815299
+        ],
+        "green": [
+          3002.0320224627794,
+          5278.356749815299
+        ],
+        "blue": [
+          3002.0320224627794,
+          5278.356749815299
+        ],
+        "nir": [
+          3002.0320224627794,
+          5278.356749815299
+        ],
+        "scl": [
+          1501.0160112313897,
+          2639.1783749076494
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {
+        "red": {
+          "value": 244,
+          "valid_mask": 255,
+          "source_pixel": [
+            3002,
+            5278
+          ],
+          "local_pixel": [
+            955,
+            159
+          ],
+          "neighbourhood": [
+            [
+              253,
+              278,
+              262
+            ],
+            [
+              241,
+              244,
+              282
+            ],
+            [
+              269,
+              218,
+              282
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "green": {
+          "value": 264,
+          "valid_mask": 255,
+          "source_pixel": [
+            3002,
+            5278
+          ],
+          "local_pixel": [
+            955,
+            159
+          ],
+          "neighbourhood": [
+            [
+              303,
+              308,
+              309
+            ],
+            [
+              281,
+              264,
+              342
+            ],
+            [
+              320,
+              261,
+              322
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "blue": {
+          "value": 364,
+          "valid_mask": 255,
+          "source_pixel": [
+            3002,
+            5278
+          ],
+          "local_pixel": [
+            955,
+            159
+          ],
+          "neighbourhood": [
+            [
+              368,
+              395,
+              436
+            ],
+            [
+              386,
+              364,
+              445
+            ],
+            [
+              430,
+              381,
+              354
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "nir": {
+          "value": 205,
+          "valid_mask": 255,
+          "source_pixel": [
+            3002,
+            5278
+          ],
+          "local_pixel": [
+            955,
+            159
+          ],
+          "neighbourhood": [
+            [
+              219,
+              223,
+              243
+            ],
+            [
+              233,
+              205,
+              253
+            ],
+            [
+              261,
+              225,
+              235
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            1501,
+            2639
+          ],
+          "local_pixel": [
+            478,
+            80
+          ],
+          "neighbourhood": [
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        }
+      },
+      "inside_native_frame": true,
+      "source_block": [
+        2,
+        5
+      ]
+    },
+    {
+      "index": 2758,
+      "original_key": {
+        "owner": 48238,
+        "y": 122667,
+        "x": 214635
+      },
+      "longitude": 114.73226886781657,
+      "latitude": 11.47840132245239,
+      "input_scope_array_index": 12967,
+      "original_source_array_index": 28612,
+      "original_interval_index": 5408,
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "source_pixels": {
+        "red": [
+          3016,
+          5263
+        ],
+        "green": [
+          3016,
+          5263
+        ],
+        "blue": [
+          3016,
+          5263
+        ],
+        "nir": [
+          3016,
+          5263
+        ],
+        "scl": [
+          1508,
+          2631
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          3016.804791916409,
+          5263.252203871554
+        ],
+        "green": [
+          3016.804791916409,
+          5263.252203871554
+        ],
+        "blue": [
+          3016.804791916409,
+          5263.252203871554
+        ],
+        "nir": [
+          3016.804791916409,
+          5263.252203871554
+        ],
+        "scl": [
+          1508.4023959582046,
+          2631.626101935777
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {
+        "red": {
+          "value": 243,
+          "valid_mask": 255,
+          "source_pixel": [
+            3016,
+            5263
+          ],
+          "local_pixel": [
+            969,
+            144
+          ],
+          "neighbourhood": [
+            [
+              263,
+              244,
+              240
+            ],
+            [
+              253,
+              243,
+              236
+            ],
+            [
+              252,
+              239,
+              239
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "green": {
+          "value": 276,
+          "valid_mask": 255,
+          "source_pixel": [
+            3016,
+            5263
+          ],
+          "local_pixel": [
+            969,
+            144
+          ],
+          "neighbourhood": [
+            [
+              296,
+              316,
+              285
+            ],
+            [
+              272,
+              276,
+              267
+            ],
+            [
+              305,
+              290,
+              287
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "blue": {
+          "value": 374,
+          "valid_mask": 255,
+          "source_pixel": [
+            3016,
+            5263
+          ],
+          "local_pixel": [
+            969,
+            144
+          ],
+          "neighbourhood": [
+            [
+              399,
+              402,
+              368
+            ],
+            [
+              371,
+              374,
+              380
+            ],
+            [
+              401,
+              393,
+              381
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "nir": {
+          "value": 225,
+          "valid_mask": 255,
+          "source_pixel": [
+            3016,
+            5263
+          ],
+          "local_pixel": [
+            969,
+            144
+          ],
+          "neighbourhood": [
+            [
+              225,
+              233,
+              218
+            ],
+            [
+              210,
+              225,
+              230
+            ],
+            [
+              241,
+              245,
+              241
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            1508,
+            2631
+          ],
+          "local_pixel": [
+            485,
+            72
+          ],
+          "neighbourhood": [
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        }
+      },
+      "inside_native_frame": true,
+      "source_block": [
+        2,
+        5
+      ]
+    },
+    {
+      "index": 2759,
+      "original_key": {
+        "owner": 48238,
+        "y": 122667,
+        "x": 214636
+      },
+      "longitude": 114.73364204359069,
+      "latitude": 11.47840132245239,
+      "input_scope_array_index": 12968,
+      "original_source_array_index": 28613,
+      "original_interval_index": 5408,
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "source_pixels": {
+        "red": [
+          3016,
+          5278
+        ],
+        "green": [
+          3016,
+          5278
+        ],
+        "blue": [
+          3016,
+          5278
+        ],
+        "nir": [
+          3016,
+          5278
+        ],
+        "scl": [
+          1508,
+          2639
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          3016.9228621982475,
+          5278.239467952109
+        ],
+        "green": [
+          3016.9228621982475,
+          5278.239467952109
+        ],
+        "blue": [
+          3016.9228621982475,
+          5278.239467952109
+        ],
+        "nir": [
+          3016.9228621982475,
+          5278.239467952109
+        ],
+        "scl": [
+          1508.4614310991237,
+          2639.1197339760547
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {
+        "red": {
+          "value": 299,
+          "valid_mask": 255,
+          "source_pixel": [
+            3016,
+            5278
+          ],
+          "local_pixel": [
+            969,
+            159
+          ],
+          "neighbourhood": [
+            [
+              252,
+              263,
+              300
+            ],
+            [
+              292,
+              299,
+              306
+            ],
+            [
+              299,
+              321,
+              300
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "green": {
+          "value": 316,
+          "valid_mask": 255,
+          "source_pixel": [
+            3016,
+            5278
+          ],
+          "local_pixel": [
+            969,
+            159
+          ],
+          "neighbourhood": [
+            [
+              329,
+              298,
+              361
+            ],
+            [
+              354,
+              316,
+              344
+            ],
+            [
+              332,
+              318,
+              350
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "blue": {
+          "value": 397,
+          "valid_mask": 255,
+          "source_pixel": [
+            3016,
+            5278
+          ],
+          "local_pixel": [
+            969,
+            159
+          ],
+          "neighbourhood": [
+            [
+              474,
+              410,
+              419
+            ],
+            [
+              475,
+              397,
+              453
+            ],
+            [
+              435,
+              408,
+              442
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "nir": {
+          "value": 261,
+          "valid_mask": 255,
+          "source_pixel": [
+            3016,
+            5278
+          ],
+          "local_pixel": [
+            969,
+            159
+          ],
+          "neighbourhood": [
+            [
+              251,
+              226,
+              230
+            ],
+            [
+              266,
+              261,
+              258
+            ],
+            [
+              259,
+              239,
+              278
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            1508,
+            2639
+          ],
+          "local_pixel": [
+            485,
+            80
+          ],
+          "neighbourhood": [
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        }
+      },
+      "inside_native_frame": true,
+      "source_block": [
+        2,
+        5
+      ]
+    },
+    {
+      "index": 2770,
+      "original_key": {
+        "owner": 48238,
+        "y": 122668,
+        "x": 214636
+      },
+      "longitude": 114.73364204359069,
+      "latitude": 11.477055607272733,
+      "input_scope_array_index": 12979,
+      "original_source_array_index": 28624,
+      "original_interval_index": 5412,
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "source_pixels": {
+        "red": [
+          3031,
+          5278
+        ],
+        "green": [
+          3031,
+          5278
+        ],
+        "blue": [
+          3031,
+          5278
+        ],
+        "nir": [
+          3031,
+          5278
+        ],
+        "scl": [
+          1515,
+          2639
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          3031.8137717973586,
+          5278.122199103444
+        ],
+        "green": [
+          3031.8137717973586,
+          5278.122199103444
+        ],
+        "blue": [
+          3031.8137717973586,
+          5278.122199103444
+        ],
+        "nir": [
+          3031.8137717973586,
+          5278.122199103444
+        ],
+        "scl": [
+          1515.9068858986793,
+          2639.061099551722
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {
+        "red": {
+          "value": 347,
+          "valid_mask": 255,
+          "source_pixel": [
+            3031,
+            5278
+          ],
+          "local_pixel": [
+            984,
+            159
+          ],
+          "neighbourhood": [
+            [
+              323,
+              316,
+              286
+            ],
+            [
+              316,
+              347,
+              325
+            ],
+            [
+              313,
+              350,
+              302
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "green": {
+          "value": 379,
+          "valid_mask": 255,
+          "source_pixel": [
+            3031,
+            5278
+          ],
+          "local_pixel": [
+            984,
+            159
+          ],
+          "neighbourhood": [
+            [
+              353,
+              382,
+              310
+            ],
+            [
+              353,
+              379,
+              341
+            ],
+            [
+              359,
+              343,
+              364
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "blue": {
+          "value": 482,
+          "valid_mask": 255,
+          "source_pixel": [
+            3031,
+            5278
+          ],
+          "local_pixel": [
+            984,
+            159
+          ],
+          "neighbourhood": [
+            [
+              424,
+              438,
+              424
+            ],
+            [
+              445,
+              482,
+              473
+            ],
+            [
+              459,
+              440,
+              445
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "nir": {
+          "value": 311,
+          "valid_mask": 255,
+          "source_pixel": [
+            3031,
+            5278
+          ],
+          "local_pixel": [
+            984,
+            159
+          ],
+          "neighbourhood": [
+            [
+              275,
+              295,
+              251
+            ],
+            [
+              267,
+              311,
+              263
+            ],
+            [
+              316,
+              282,
+              275
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            1515,
+            2639
+          ],
+          "local_pixel": [
+            492,
+            80
+          ],
+          "neighbourhood": [
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        }
+      },
+      "inside_native_frame": true,
+      "source_block": [
+        2,
+        5
+      ]
+    },
+    {
+      "index": 2771,
+      "original_key": {
+        "owner": 48238,
+        "y": 122668,
+        "x": 214637
+      },
+      "longitude": 114.73501521936481,
+      "latitude": 11.477055607272733,
+      "input_scope_array_index": 12980,
+      "original_source_array_index": 28625,
+      "original_interval_index": 5412,
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "source_pixels": {
+        "red": [
+          3031,
+          5293
+        ],
+        "green": [
+          3031,
+          5293
+        ],
+        "blue": [
+          3031,
+          5293
+        ],
+        "nir": [
+          3031,
+          5293
+        ],
+        "scl": [
+          1515,
+          2646
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          3031.931757295155,
+          5293.109521239177
+        ],
+        "green": [
+          3031.931757295155,
+          5293.109521239177
+        ],
+        "blue": [
+          3031.931757295155,
+          5293.109521239177
+        ],
+        "nir": [
+          3031.931757295155,
+          5293.109521239177
+        ],
+        "scl": [
+          1515.9658786475775,
+          2646.5547606195887
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {
+        "red": {
+          "value": 305,
+          "valid_mask": 255,
+          "source_pixel": [
+            3031,
+            5293
+          ],
+          "local_pixel": [
+            984,
+            174
+          ],
+          "neighbourhood": [
+            [
+              301,
+              293,
+              278
+            ],
+            [
+              275,
+              305,
+              272
+            ],
+            [
+              272,
+              290,
+              302
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "green": {
+          "value": 326,
+          "valid_mask": 255,
+          "source_pixel": [
+            3031,
+            5293
+          ],
+          "local_pixel": [
+            984,
+            174
+          ],
+          "neighbourhood": [
+            [
+              320,
+              336,
+              302
+            ],
+            [
+              304,
+              326,
+              321
+            ],
+            [
+              306,
+              336,
+              344
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "blue": {
+          "value": 404,
+          "valid_mask": 255,
+          "source_pixel": [
+            3031,
+            5293
+          ],
+          "local_pixel": [
+            984,
+            174
+          ],
+          "neighbourhood": [
+            [
+              416,
+              433,
+              421
+            ],
+            [
+              404,
+              404,
+              458
+            ],
+            [
+              455,
+              466,
+              466
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "nir": {
+          "value": 243,
+          "valid_mask": 255,
+          "source_pixel": [
+            3031,
+            5293
+          ],
+          "local_pixel": [
+            984,
+            174
+          ],
+          "neighbourhood": [
+            [
+              238,
+              266,
+              233
+            ],
+            [
+              251,
+              243,
+              259
+            ],
+            [
+              259,
+              261,
+              259
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            1515,
+            2646
+          ],
+          "local_pixel": [
+            492,
+            87
+          ],
+          "neighbourhood": [
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        }
+      },
+      "inside_native_frame": true,
+      "source_block": [
+        2,
+        5
+      ]
+    },
+    {
+      "index": 2783,
+      "original_key": {
+        "owner": 48238,
+        "y": 122669,
+        "x": 214636
+      },
+      "longitude": 114.73364204359069,
+      "latitude": 11.4757098856757,
+      "input_scope_array_index": 12992,
+      "original_source_array_index": 28637,
+      "original_interval_index": 5416,
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "source_pixels": {
+        "red": [
+          3046,
+          5278
+        ],
+        "green": [
+          3046,
+          5278
+        ],
+        "blue": [
+          3046,
+          5278
+        ],
+        "nir": [
+          3046,
+          5278
+        ],
+        "scl": [
+          1523,
+          2639
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          3046.704751252444,
+          5278.004943269625
+        ],
+        "green": [
+          3046.704751252444,
+          5278.004943269625
+        ],
+        "blue": [
+          3046.704751252444,
+          5278.004943269625
+        ],
+        "nir": [
+          3046.704751252444,
+          5278.004943269625
+        ],
+        "scl": [
+          1523.352375626222,
+          2639.0024716348125
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {
+        "red": {
+          "value": 311,
+          "valid_mask": 255,
+          "source_pixel": [
+            3046,
+            5278
+          ],
+          "local_pixel": [
+            999,
+            159
+          ],
+          "neighbourhood": [
+            [
+              323,
+              299,
+              321
+            ],
+            [
+              349,
+              311,
+              271
+            ],
+            [
+              337,
+              329,
+              281
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "green": {
+          "value": 348,
+          "valid_mask": 255,
+          "source_pixel": [
+            3046,
+            5278
+          ],
+          "local_pixel": [
+            999,
+            159
+          ],
+          "neighbourhood": [
+            [
+              381,
+              338,
+              322
+            ],
+            [
+              375,
+              348,
+              312
+            ],
+            [
+              349,
+              349,
+              382
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "blue": {
+          "value": 486,
+          "valid_mask": 255,
+          "source_pixel": [
+            3046,
+            5278
+          ],
+          "local_pixel": [
+            999,
+            159
+          ],
+          "neighbourhood": [
+            [
+              483,
+              484,
+              437
+            ],
+            [
+              479,
+              486,
+              442
+            ],
+            [
+              443,
+              434,
+              497
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "nir": {
+          "value": 274,
+          "valid_mask": 255,
+          "source_pixel": [
+            3046,
+            5278
+          ],
+          "local_pixel": [
+            999,
+            159
+          ],
+          "neighbourhood": [
+            [
+              296,
+              246,
+              262
+            ],
+            [
+              294,
+              274,
+              265
+            ],
+            [
+              261,
+              266,
+              290
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            1523,
+            2639
+          ],
+          "local_pixel": [
+            500,
+            80
+          ],
+          "neighbourhood": [
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        }
+      },
+      "inside_native_frame": true,
+      "source_block": [
+        2,
+        5
+      ]
+    },
+    {
+      "index": 2784,
+      "original_key": {
+        "owner": 48238,
+        "y": 122669,
+        "x": 214637
+      },
+      "longitude": 114.73501521936481,
+      "latitude": 11.4757098856757,
+      "input_scope_array_index": 12993,
+      "original_source_array_index": 28638,
+      "original_interval_index": 5416,
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "source_pixels": {
+        "red": [
+          3046,
+          5292
+        ],
+        "green": [
+          3046,
+          5292
+        ],
+        "blue": [
+          3046,
+          5292
+        ],
+        "nir": [
+          3046,
+          5292
+        ],
+        "scl": [
+          1523,
+          2646
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          3046.822723662219,
+          5292.992336628595
+        ],
+        "green": [
+          3046.822723662219,
+          5292.992336628595
+        ],
+        "blue": [
+          3046.822723662219,
+          5292.992336628595
+        ],
+        "nir": [
+          3046.822723662219,
+          5292.992336628595
+        ],
+        "scl": [
+          1523.4113618311094,
+          2646.4961683142974
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {
+        "red": {
+          "value": 309,
+          "valid_mask": 255,
+          "source_pixel": [
+            3046,
+            5292
+          ],
+          "local_pixel": [
+            999,
+            173
+          ],
+          "neighbourhood": [
+            [
+              275,
+              264,
+              274
+            ],
+            [
+              306,
+              309,
+              269
+            ],
+            [
+              306,
+              336,
+              266
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "green": {
+          "value": 340,
+          "valid_mask": 255,
+          "source_pixel": [
+            3046,
+            5292
+          ],
+          "local_pixel": [
+            999,
+            173
+          ],
+          "neighbourhood": [
+            [
+              332,
+              285,
+              298
+            ],
+            [
+              309,
+              340,
+              303
+            ],
+            [
+              311,
+              383,
+              343
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "blue": {
+          "value": 463,
+          "valid_mask": 255,
+          "source_pixel": [
+            3046,
+            5292
+          ],
+          "local_pixel": [
+            999,
+            173
+          ],
+          "neighbourhood": [
+            [
+              424,
+              441,
+              424
+            ],
+            [
+              395,
+              463,
+              445
+            ],
+            [
+              423,
+              455,
+              440
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "nir": {
+          "value": 259,
+          "valid_mask": 255,
+          "source_pixel": [
+            3046,
+            5292
+          ],
+          "local_pixel": [
+            999,
+            173
+          ],
+          "neighbourhood": [
+            [
+              226,
+              232,
+              233
+            ],
+            [
+              225,
+              259,
+              259
+            ],
+            [
+              253,
+              279,
+              297
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            1523,
+            2646
+          ],
+          "local_pixel": [
+            500,
+            87
+          ],
+          "neighbourhood": [
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        }
+      },
+      "inside_native_frame": true,
+      "source_block": [
+        2,
+        5
+      ]
+    },
+    {
+      "index": 2796,
+      "original_key": {
+        "owner": 48238,
+        "y": 122670,
+        "x": 214637
+      },
+      "longitude": 114.73501521936481,
+      "latitude": 11.474364157662006,
+      "input_scope_array_index": 13005,
+      "original_source_array_index": 28650,
+      "original_interval_index": 5420,
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "source_pixels": {
+        "red": [
+          3061,
+          5292
+        ],
+        "green": [
+          3061,
+          5292
+        ],
+        "blue": [
+          3061,
+          5292
+        ],
+        "nir": [
+          3061,
+          5292
+        ],
+        "scl": [
+          1530,
+          2646
+        ]
+      },
+      "source_subpixels": {
+        "red": [
+          3061.7137598771515,
+          5292.875165025278
+        ],
+        "green": [
+          3061.7137598771515,
+          5292.875165025278
+        ],
+        "blue": [
+          3061.7137598771515,
+          5292.875165025278
+        ],
+        "nir": [
+          3061.7137598771515,
+          5292.875165025278
+        ],
+        "scl": [
+          1530.8568799385757,
+          2646.437582512639
+        ]
+      },
+      "inside_native_assets": {
+        "red": true,
+        "green": true,
+        "blue": true,
+        "nir": true,
+        "scl": true
+      },
+      "assets": {
+        "red": {
+          "value": 282,
+          "valid_mask": 255,
+          "source_pixel": [
+            3061,
+            5292
+          ],
+          "local_pixel": [
+            1014,
+            173
+          ],
+          "neighbourhood": [
+            [
+              321,
+              290,
+              290
+            ],
+            [
+              312,
+              282,
+              294
+            ],
+            [
+              296,
+              292,
+              306
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "green": {
+          "value": 332,
+          "valid_mask": 255,
+          "source_pixel": [
+            3061,
+            5292
+          ],
+          "local_pixel": [
+            1014,
+            173
+          ],
+          "neighbourhood": [
+            [
+              351,
+              354,
+              315
+            ],
+            [
+              354,
+              332,
+              307
+            ],
+            [
+              331,
+              318,
+              321
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "blue": {
+          "value": 437,
+          "valid_mask": 255,
+          "source_pixel": [
+            3061,
+            5292
+          ],
+          "local_pixel": [
+            1014,
+            173
+          ],
+          "neighbourhood": [
+            [
+              417,
+              450,
+              430
+            ],
+            [
+              460,
+              437,
+              444
+            ],
+            [
+              442,
+              431,
+              411
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "nir": {
+          "value": 262,
+          "valid_mask": 255,
+          "source_pixel": [
+            3061,
+            5292
+          ],
+          "local_pixel": [
+            1014,
+            173
+          ],
+          "neighbourhood": [
+            [
+              265,
+              249,
+              246
+            ],
+            [
+              251,
+              262,
+              265
+            ],
+            [
+              237,
+              261,
+              246
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        },
+        "scl": {
+          "value": 6,
+          "valid_mask": 255,
+          "source_pixel": [
+            1530,
+            2646
+          ],
+          "local_pixel": [
+            507,
+            87
+          ],
+          "neighbourhood": [
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ],
+            [
+              6,
+              6,
+              6
+            ]
+          ],
+          "neighbour_masks": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "complete_3x3": true
+        }
+      },
+      "inside_native_frame": true,
+      "source_block": [
+        2,
+        5
+      ]
+    }
+  ],
+  "assets": {
+    "red": {
+      "window": [
+        5119,
+        2047,
+        1026,
+        1026
+      ],
+      "transform": [
+        10.0,
+        0.0,
+        251170.0,
+        0.0,
+        -10.0,
+        1279550.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "valid_pixel_count": 1052676,
+      "total_pixels": 1052676,
+      "output": {
+        "path": "products/S2A_50PKT_20200513_0_L2A/block-02-05/red.tif",
+        "bytes": 1349783,
+        "sha256": "c177d48280b63c97cc11f9e7b08be47633f1c9d7a8dd8ea68b55924a41319238"
+      },
+      "source_mask_output": {
+        "path": "products/S2A_50PKT_20200513_0_L2A/block-02-05/red-source-mask.tif",
+        "bytes": 7753,
+        "sha256": "56a49a769ae6aa2aa7c945691bee44aca0408bd7ff140fc42f38b9667fdb96c7"
+      }
+    },
+    "green": {
+      "window": [
+        5119,
+        2047,
+        1026,
+        1026
+      ],
+      "transform": [
+        10.0,
+        0.0,
+        251170.0,
+        0.0,
+        -10.0,
+        1279550.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "valid_pixel_count": 1052676,
+      "total_pixels": 1052676,
+      "output": {
+        "path": "products/S2A_50PKT_20200513_0_L2A/block-02-05/green.tif",
+        "bytes": 1334557,
+        "sha256": "e2702f8d51bc49f9d31158ba9fc98128dd252272fbceb390c510963b59ec62d3"
+      },
+      "source_mask_output": {
+        "path": "products/S2A_50PKT_20200513_0_L2A/block-02-05/green-source-mask.tif",
+        "bytes": 7753,
+        "sha256": "499ce42e82849ca425fd8bba19bbfd974a9829ad553bad5af19523719f337f43"
+      }
+    },
+    "blue": {
+      "window": [
+        5119,
+        2047,
+        1026,
+        1026
+      ],
+      "transform": [
+        10.0,
+        0.0,
+        251170.0,
+        0.0,
+        -10.0,
+        1279550.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "valid_pixel_count": 1052676,
+      "total_pixels": 1052676,
+      "output": {
+        "path": "products/S2A_50PKT_20200513_0_L2A/block-02-05/blue.tif",
+        "bytes": 1368375,
+        "sha256": "1b1126b70c41e509083b1e87d4fc6a32be1c4a65914922115fe0313d46c6e894"
+      },
+      "source_mask_output": {
+        "path": "products/S2A_50PKT_20200513_0_L2A/block-02-05/blue-source-mask.tif",
+        "bytes": 7753,
+        "sha256": "88659124aeafcff1b0179996ad205ea2adb7667376349847015f7792e0dc21fe"
+      }
+    },
+    "nir": {
+      "window": [
+        5119,
+        2047,
+        1026,
+        1026
+      ],
+      "transform": [
+        10.0,
+        0.0,
+        251170.0,
+        0.0,
+        -10.0,
+        1279550.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "valid_pixel_count": 1052676,
+      "total_pixels": 1052676,
+      "output": {
+        "path": "products/S2A_50PKT_20200513_0_L2A/block-02-05/nir.tif",
+        "bytes": 1344741,
+        "sha256": "fb4c40f2f7287c55d146bec66cd886af9825611037bdf785dbdabb8bfa653fca"
+      },
+      "source_mask_output": {
+        "path": "products/S2A_50PKT_20200513_0_L2A/block-02-05/nir-source-mask.tif",
+        "bytes": 7753,
+        "sha256": "07bb971228987187d729dcfde7c1b924e01f816e56c5aa8786b4d1566bd9e131"
+      }
+    },
+    "scl": {
+      "window": [
+        2559,
+        1023,
+        514,
+        514
+      ],
+      "transform": [
+        20.0,
+        0.0,
+        251160.0,
+        0.0,
+        -20.0,
+        1279560.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "valid_pixel_count": 264196,
+      "total_pixels": 264196,
+      "output": {
+        "path": "products/S2A_50PKT_20200513_0_L2A/block-02-05/scl.tif",
+        "bytes": 3085,
+        "sha256": "149ff3deb44b63982c8b575d68553c270debc641aaf8046c2ca927e487fe88b3"
+      },
+      "source_mask_output": {
+        "path": "products/S2A_50PKT_20200513_0_L2A/block-02-05/scl-source-mask.tif",
+        "bytes": 2745,
+        "sha256": "8dd3348836314ac8aadd6477b20b824b3467c705b8243a0fe48500592bf5d4fd"
+      }
+    }
+  },
+  "files": [
+    {
+      "path": "products/S2A_50PKT_20200513_0_L2A/block-02-05/red.tif",
+      "bytes": 1349783,
+      "sha256": "c177d48280b63c97cc11f9e7b08be47633f1c9d7a8dd8ea68b55924a41319238"
+    },
+    {
+      "path": "products/S2A_50PKT_20200513_0_L2A/block-02-05/red-source-mask.tif",
+      "bytes": 7753,
+      "sha256": "56a49a769ae6aa2aa7c945691bee44aca0408bd7ff140fc42f38b9667fdb96c7"
+    },
+    {
+      "path": "products/S2A_50PKT_20200513_0_L2A/block-02-05/green.tif",
+      "bytes": 1334557,
+      "sha256": "e2702f8d51bc49f9d31158ba9fc98128dd252272fbceb390c510963b59ec62d3"
+    },
+    {
+      "path": "products/S2A_50PKT_20200513_0_L2A/block-02-05/green-source-mask.tif",
+      "bytes": 7753,
+      "sha256": "499ce42e82849ca425fd8bba19bbfd974a9829ad553bad5af19523719f337f43"
+    },
+    {
+      "path": "products/S2A_50PKT_20200513_0_L2A/block-02-05/blue.tif",
+      "bytes": 1368375,
+      "sha256": "1b1126b70c41e509083b1e87d4fc6a32be1c4a65914922115fe0313d46c6e894"
+    },
+    {
+      "path": "products/S2A_50PKT_20200513_0_L2A/block-02-05/blue-source-mask.tif",
+      "bytes": 7753,
+      "sha256": "88659124aeafcff1b0179996ad205ea2adb7667376349847015f7792e0dc21fe"
+    },
+    {
+      "path": "products/S2A_50PKT_20200513_0_L2A/block-02-05/nir.tif",
+      "bytes": 1344741,
+      "sha256": "fb4c40f2f7287c55d146bec66cd886af9825611037bdf785dbdabb8bfa653fca"
+    },
+    {
+      "path": "products/S2A_50PKT_20200513_0_L2A/block-02-05/nir-source-mask.tif",
+      "bytes": 7753,
+      "sha256": "07bb971228987187d729dcfde7c1b924e01f816e56c5aa8786b4d1566bd9e131"
+    },
+    {
+      "path": "products/S2A_50PKT_20200513_0_L2A/block-02-05/scl.tif",
+      "bytes": 3085,
+      "sha256": "149ff3deb44b63982c8b575d68553c270debc641aaf8046c2ca927e487fe88b3"
+    },
+    {
+      "path": "products/S2A_50PKT_20200513_0_L2A/block-02-05/scl-source-mask.tif",
+      "bytes": 2745,
+      "sha256": "8dd3348836314ac8aadd6477b20b824b3467c705b8243a0fe48500592bf5d4fd"
+    },
+    {
+      "path": "products/S2A_50PKT_20200513_0_L2A/block-02-05/rgb-native.png",
+      "bytes": 1591537,
+      "sha256": "c0066db4bf3193742961668014653248602f4d8b289c430636f50c3b0d5f0dc1"
+    },
+    {
+      "path": "products/S2A_50PKT_20200513_0_L2A/block-02-05/rgb-centres.png",
+      "bytes": 1601498,
+      "sha256": "1a4b0eefcf4bb4ce57b243dec4cc8512fcff1457e60336ff0484c7d67382af07"
+    },
+    {
+      "path": "products/S2A_50PKT_20200513_0_L2A/block-02-05/nir-red-green-native.png",
+      "bytes": 1511522,
+      "sha256": "b72eb184b59a9d1bae7f25fea01688b59a9a4616da12cd9b061156ae504f6ad2"
+    },
+    {
+      "path": "products/S2A_50PKT_20200513_0_L2A/block-02-05/nir-red-green-centres.png",
+      "bytes": 1521816,
+      "sha256": "5d5a73f2126ba66a1427a0752d65b666af2bf805081d0dc0aa391ba3de34ee72"
+    }
+  ],
+  "display": "Native fixed DN0..3000 scaling, unchanged established RGB/NIR display; overlays only",
+  "interpretation": "Raw source observations and masks only; no physical or ownership classification"
+}

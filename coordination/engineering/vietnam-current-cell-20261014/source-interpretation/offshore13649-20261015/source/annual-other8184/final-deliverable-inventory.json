@@ -1,0 +1,2545 @@
+{
+  "scope": "Task-local source/interpretation deliverables; inventory excludes itself and README. Existing reused external full sources and prior reports are separately pinned in input/source records.",
+  "files": [
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/all8184-original-inputs.json",
+      "bytes": 11872426,
+      "sha256": "146b6e22f46cc8543bc1056d26e6a10daee82a08597f4ddc041da3f1047a3d7e"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/cache-inputs.json",
+      "bytes": 8912,
+      "sha256": "3217d02fdf84293470335df702ece195dfb510a47be8427adeb54c8c4c42032b"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/combined8184-completion-checks.json",
+      "bytes": 1729,
+      "sha256": "22584972325869110ed99dfe9c0d2fb3b3923e30ca660a3472b0bb6e7dc57694"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/combined8184-source-observations.jsonl",
+      "bytes": 17652926,
+      "sha256": "f48696f1fceaef98ff1772d2d7e750a1de50df15b50aab2c30c2497f4d51da1a"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/input-scope-and-source-method.json",
+      "bytes": 3019,
+      "sha256": "38a879ec913a14a865bd175d92372afab941c6ed8d0a35409b0ffdd18df661a4"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/point-plan.jsonl",
+      "bytes": 8241625,
+      "sha256": "8f17ee28dc9f8f28f1078e186397ac7bc1a543e3b1bf5c7cc9522d65d250a8e0"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/proposed-annual8184-original-dispositions.json",
+      "bytes": 37404841,
+      "sha256": "cc709925a4cd656e0ed67e0db0f83515796a81d6007aa30a1e2fb9273ed864e5"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/read_points.py",
+      "bytes": 13623,
+      "sha256": "04037ca4f1a6168f83d309dcc015300ec48f4ec87730f1e2b91468fe8d396396"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/reader.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/reader.stdout.log",
+      "bytes": 30464,
+      "sha256": "731a3f65c1c7b388cd4341fad80c0667da355d821932b21e315fafb288186a8d"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/retained-whole-sources.json",
+      "bytes": 8756,
+      "sha256": "09473abc5557e86a70b19ced10e8bdf6d9a20799c9548bd31a5b72cc028950ff"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/retained2125-annual-observations.json",
+      "bytes": 12002415,
+      "sha256": "7dcde8e06e5e6b1c8a7cfe4f528babfabab054ce5b9d2c38aa15648af24fcdfa"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/source-observations.json",
+      "bytes": 67081,
+      "sha256": "b1020a3d8f8bd54ca15933f84160dc26e0118c88c3e335eea21320f70aebd06b"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E102/new-block-00-32.json",
+      "bytes": 719,
+      "sha256": "e5d868623d3c4049966495f769bc42e6e958199eca686d690636f46e165e401b"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E102/new-block-00-32.npz",
+      "bytes": 17184,
+      "sha256": "5bf816c3172e97ad343aa183000dd10cfdbec9113581910e8d53f670d034f902"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E102/new-block-01-32.json",
+      "bytes": 722,
+      "sha256": "3b07b94dbe1566d48f456c36d512162667371501afc695c63301213891b04f15"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E102/new-block-01-32.npz",
+      "bytes": 31686,
+      "sha256": "45eadf14f0c3be3e128073a9c77142acfa0393dce978aafc979df5c421912089"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E102/new-block-02-32.json",
+      "bytes": 722,
+      "sha256": "026bfb1496085989023dc34419f4d8782e5926da12cd88eaf5bd522aaaf131ff"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E102/new-block-02-32.npz",
+      "bytes": 13029,
+      "sha256": "3dc1901ad391a428f8af1f3e82d583a17618fefbf7988f8a92af824bfd34076f"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E102/new-block-03-32.json",
+      "bytes": 722,
+      "sha256": "451ad573da315309d116d6a77fc081e7b3a5476d6bc6cee59ac720c35060ac1e"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E102/new-block-03-32.npz",
+      "bytes": 11252,
+      "sha256": "7e81783daa745574875773cf2c9630ce6859126b965b3e12bfabf394096ec204"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E102/new-block-04-31.json",
+      "bytes": 721,
+      "sha256": "e0ae6c4cae03576094d24beb789d8bea4428b18b647fa7f575dfab7092c54ad7"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E102/new-block-04-31.npz",
+      "bytes": 8153,
+      "sha256": "ed37ec74905ddc76765410823739d7d5efd8bc3681775a7b27be1a0d2702f293"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E102/new-block-04-32.json",
+      "bytes": 722,
+      "sha256": "6b7a1732ba8add9961207b6d7c3911d23f57e363ef755587ed8ae23b16c2a1b5"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E102/new-block-04-32.npz",
+      "bytes": 21649,
+      "sha256": "e2e72a2c469bbf23c179eeda81b8249052481c901f98e4b25322a988d7ddd877"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E102/new-block-06-33.json",
+      "bytes": 721,
+      "sha256": "9766f8efdf63791ca3ea50791cab039eeb67e1481715d17422e33b00d89fb415"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E102/new-block-06-33.npz",
+      "bytes": 5425,
+      "sha256": "37f23a734e38f40a280ff40f5cf3c58bc1d2db7ec03cd13acf752f76e86864ab"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E102/point-observations.jsonl",
+      "bytes": 531485,
+      "sha256": "475cccc7833f061aab5374fbad8f9e9ae9f0e16bcdac988302afbacdeb8f77f0"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E102/source.json",
+      "bytes": 2161,
+      "sha256": "72282ed4e5d6640a7a38ffe9b390b7e67491465f888a1f261e2999948e2db43e"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E102/tile-complete.json",
+      "bytes": 2903,
+      "sha256": "287b98decc8f28a9ab2706e03c991a6ed943cc523703d1e39db3e06ec1a7d56d"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E105/new-block-02-19.json",
+      "bytes": 721,
+      "sha256": "1fec10aab8a2b841a69ecb84fdb4e6563039b410a1dad9f57bfd99655ac89f06"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E105/new-block-02-19.npz",
+      "bytes": 5849,
+      "sha256": "6785515026bd3a3ed80e02717ad2b9a4c9cee12eabd9da7cbcd300de8f5e766b"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E105/new-block-03-18.json",
+      "bytes": 722,
+      "sha256": "87d538335678f3ebf4d79039f9db043aac46607ba766617b9504c30423fb359b"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E105/new-block-03-18.npz",
+      "bytes": 24972,
+      "sha256": "8890f1126b6ed631a2b00d25dfa93c58570fd1e810d2bd5ca40bcb997f5a8e56"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E105/new-block-03-19.json",
+      "bytes": 722,
+      "sha256": "e956903b9bfa3907f3b0abff749442effa8141e6e0f0728abec010695134fdb2"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E105/new-block-03-19.npz",
+      "bytes": 19807,
+      "sha256": "f820075c3705ccfb5bd946d2b6abe2a5f8448682df415bc1e3fe7c59b63af9fc"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E105/new-block-03-20.json",
+      "bytes": 721,
+      "sha256": "910ea4fd601bfd12f20f9621348f94e4c2444e3332220aa3bfa0bc167e50f1cb"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E105/new-block-03-20.npz",
+      "bytes": 4755,
+      "sha256": "3675c8fbdedbafd9cedffc9d6f49544d2b917d3b54c523e9db19c96ab2952219"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E105/new-block-04-18.json",
+      "bytes": 722,
+      "sha256": "35d2b9270e6692d847d8ff7166b02e81109d08b6dce151f43a7a79f1fd89fd21"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E105/new-block-04-18.npz",
+      "bytes": 10346,
+      "sha256": "79a52f8214032dd9d295450c09ccd48bc5a4a6ce1399daad2cf4d5024a18e06f"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E105/new-block-04-19.json",
+      "bytes": 721,
+      "sha256": "59aceb4344c9056719c37b0e244d369a1d5a1c471b7f3b6d03d20342413daa31"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E105/new-block-04-19.npz",
+      "bytes": 3824,
+      "sha256": "0423cdccf76efe4a64a8616e20813adaecc27b8cbf907ff6d79f6452957f9c9d"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E105/point-observations.jsonl",
+      "bytes": 635206,
+      "sha256": "aba0b05a7611561aceff10c93e19c24c079f784a590a463ceb9f273fe4647323"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E105/source.json",
+      "bytes": 2161,
+      "sha256": "4f563524a3bf55c744cc0597b4d718f40b725f95247f3ef056657d299c211c40"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N06E105/tile-complete.json",
+      "bytes": 3029,
+      "sha256": "2eb1fdb5ea290ae50f333b3f906e533ca91b1d1b9c3f369937e3008f32e79807"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-18-22.json",
+      "bytes": 726,
+      "sha256": "f207f65f0beb7ec7d7b1bcc245f106b974dc91a11002d4307baefefda93f2ac3"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-18-22.npz",
+      "bytes": 4591,
+      "sha256": "b0da98f1813d6d7cab8fe2b2972fef35a40c3b86ee9e0f31a0e91fe7c50db0c7"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-18-23.json",
+      "bytes": 727,
+      "sha256": "3311d35313c09090beb8b7dfe571c535ce874db12b7cc93eb565807ddfff9435"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-18-23.npz",
+      "bytes": 25619,
+      "sha256": "2d4bd7e0fe7f3061e0e16f51c71967cd4c0f99708612ccf6becf10dadc860dd0"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-18-24.json",
+      "bytes": 726,
+      "sha256": "d4628e719768fc3551e22d1a79d84c02c555f484f617f050d2f7008e23cc38f3"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-18-24.npz",
+      "bytes": 6106,
+      "sha256": "b41ead9d3a27328eba9d22239a8bd91925ce659b22af79435f49908d33928ea4"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-18-28.json",
+      "bytes": 727,
+      "sha256": "40724ab7e329ac0d1a443e6d671071f0a8f9c56157ad0ab543e368c4104b54fc"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-18-28.npz",
+      "bytes": 66871,
+      "sha256": "b7966cefa74e244e0fec1e10d1e07010aa49bf87beae359ea0496f2ea34715a5"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-19-21.json",
+      "bytes": 727,
+      "sha256": "4093f27b3219d277d41ed6406a385e9617728ec056170963958d5295f479f9d0"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-19-21.npz",
+      "bytes": 28781,
+      "sha256": "74c5c64b25003c33fd4ebcb8fd16223370e95b4f65c29116764b856f9aefb519"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-19-27.json",
+      "bytes": 726,
+      "sha256": "50df6b430bc480e3039e158c93945e741c29f3f14e4e3e7a30eae71064f5941d"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-19-27.npz",
+      "bytes": 5461,
+      "sha256": "5d520ac735c84753932223b99b93aaba17df9c1d5746511d03f2186847a6436b"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-19-28.json",
+      "bytes": 726,
+      "sha256": "135431857551139acf0ca43263b3eb5c284c62a65b643df87a186f98287463a8"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-19-28.npz",
+      "bytes": 6843,
+      "sha256": "cbfd9ba77135cc08f70c2c924d16099461d4b4d678e081b913ec8a5998940673"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-19-29.json",
+      "bytes": 727,
+      "sha256": "8b2208f02fab0ee32197f7441226c3d64e90d9d1daf18b18594e5ef6b2229ff0"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-19-29.npz",
+      "bytes": 70097,
+      "sha256": "6babadcb8df410c25fc09869f5fbf1a8d7d172e3e630d12dccd37e591c8f2a9a"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-20-22.json",
+      "bytes": 727,
+      "sha256": "9763e77efe7e917eb1c5adbbb61d0f13b34d5c4133310e69bbc4db776ac0d468"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-20-22.npz",
+      "bytes": 35768,
+      "sha256": "fb9396f2eae3035e216bc73e4465a80d2bf44f4ede1afecb222e48eb195e471c"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-20-27.json",
+      "bytes": 726,
+      "sha256": "34ac77f2f020f123bd66f03c2e229487ba5f117a9c2f75d31b282a3f6c19906a"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-20-27.npz",
+      "bytes": 3505,
+      "sha256": "f4d4aa09d5693b4313ec24b65ea1a7a00e361990f5df3239243f59414209bfd7"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-20-29.json",
+      "bytes": 726,
+      "sha256": "f904a970f026b543bb0a6d1e1f65681ad291e4921e8c12f3905a8e94272b52df"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-20-29.npz",
+      "bytes": 6201,
+      "sha256": "650f9de592f9ea43b1679a07219f2eb1587730b32481621e46538074f9bc303f"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-20-30.json",
+      "bytes": 728,
+      "sha256": "435b4dd27c1997444ad402e02a29e2fa9df50f7419f430cdc0aec1eb6cc74c85"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-20-30.npz",
+      "bytes": 108163,
+      "sha256": "21a139010c565ee470f17d232819576c0506175ed3827cafe7d4341cf7ac24be"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-20-32.json",
+      "bytes": 727,
+      "sha256": "615bcc67207845232990b90264e559c233034f6d44c47202a632b273c3340c49"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-20-32.npz",
+      "bytes": 68953,
+      "sha256": "5d3b51b3b15fd05439485280799605f68e8f1506a30d2703472d56d487feafdc"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-21-29.json",
+      "bytes": 726,
+      "sha256": "591ada86340a1d00efadf6a054dfbeeb7fd4cae66632a240e541a4b5be03e254"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-21-29.npz",
+      "bytes": 7248,
+      "sha256": "9808d645a29d9e31e0386d8b577fe3cc9ce1335da588ce3d8bca26061dbdc127"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-21-30.json",
+      "bytes": 727,
+      "sha256": "2b5cd4e15bae9c93d00af337a245f3a1c9d6b4b177bccfae1fd84f73e12f5315"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-21-30.npz",
+      "bytes": 55015,
+      "sha256": "d4940c12c24f97dfa6cc28a908e88f541f8e38dc63721f588f2e56253b75ece1"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-21-32.json",
+      "bytes": 726,
+      "sha256": "4be58e702de86b2a13698ca7ebd2f46f25a5cb5aee5be8d13093e968a35fae8e"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-21-32.npz",
+      "bytes": 7822,
+      "sha256": "3d307aea7d0945f518dd230d55601d394105a91219507e8792c3f417e0369289"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-21-33.json",
+      "bytes": 727,
+      "sha256": "a1316fb06601aef2aab58f7c6f71a6942f42f6d8a5d1fe66e56b37dbd5ee4558"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-21-33.npz",
+      "bytes": 47140,
+      "sha256": "be3a805d5d3488cf7ea5ee76534b2212089d93a2e982d387e2a8a8a70a54cf75"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-22-23.json",
+      "bytes": 727,
+      "sha256": "6fe5b83fb8642bda121449d97b84507d40c2a59c178ca99dd5e97b59da8bcf63"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-22-23.npz",
+      "bytes": 58614,
+      "sha256": "188205dd5bb9cce361d13b7c90b8ba8cf1ef7102bddbdd5d3543a0e61a6ece7f"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-22-29.json",
+      "bytes": 726,
+      "sha256": "7aecf93af8151e053c127e6b01f5bdf04a341c0270879a969075f8314165b954"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-22-29.npz",
+      "bytes": 3976,
+      "sha256": "0588a91fde0ee80c07576693585c90e99d459737ea175af61595cabea6bbfa2a"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-22-33.json",
+      "bytes": 727,
+      "sha256": "1b13a03a35cf1b42758d6decea10031b10ea787407cf076b464ea01dbbe2902e"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-22-33.npz",
+      "bytes": 21146,
+      "sha256": "e0bed3a7e49315655416e2926cfb1c830b483bc898761fe23f04143987df0886"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-22-34.json",
+      "bytes": 727,
+      "sha256": "cf4bcdc5406629810199e2a3d785944d647aeaf60cdb996bb20f3bc1e23db274"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-22-34.npz",
+      "bytes": 31635,
+      "sha256": "132a151b8bc0d8ac297b6c4d0119232f607dc6b19e57c316204a2a52ee357ad1"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-22-35.json",
+      "bytes": 725,
+      "sha256": "9e4efd6ef064bd2a51e025f81d2883132a018038836ab9bfda23158d6fd78f35"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-22-35.npz",
+      "bytes": 4376,
+      "sha256": "32dc0befe88a10a1ebe1d14693e85abcc4cc93217264e9c3e26da14b7f9830e2"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-23-23.json",
+      "bytes": 727,
+      "sha256": "cd9426277ad089ad7f72c4db549e83e4549d9a7f5cf00b897bb705fd141cc0f9"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-23-23.npz",
+      "bytes": 18227,
+      "sha256": "5718096ebb5a2d9c73dd2a14c0ef2676f49c8d0a560e7982022b1347b649d351"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-23-29.json",
+      "bytes": 726,
+      "sha256": "b0e3a9932cab42591faf0b6f979df6bdc6a3cf80af4497538cbaf691b1d4a02a"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-23-29.npz",
+      "bytes": 4515,
+      "sha256": "35566e587bea56672961a652a5cac0bc78f84f68cfd120276b4c77e8b4598aa8"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-23-33.json",
+      "bytes": 726,
+      "sha256": "1fb3b6b8291d9012f63c9ee6250a20830ba12d13bc4e052be7b50bcbda21d6b4"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-23-33.npz",
+      "bytes": 5884,
+      "sha256": "ad6ef4e07047c245affd488baaad1b1b581a19296968e619712a0b5c2fab25ec"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-24-23.json",
+      "bytes": 726,
+      "sha256": "e21512c45b87f6b9e6d268a479b6ac3c52dcd3a013366b05d1f6f4c866f18934"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-24-23.npz",
+      "bytes": 5590,
+      "sha256": "fc6ed31eab332b8c102a1e787aecc7e10d2c8738649f2644997efa9fda29e475"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-24-33.json",
+      "bytes": 726,
+      "sha256": "cd1d8ca352f39c0d1c652c610599b81132dda035aaa7b1a6df7db012d8d0e557"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-24-33.npz",
+      "bytes": 2665,
+      "sha256": "6a6256b608c0bf610287b290674f371062c23233c35008964fc61f7c7c65124d"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-24-35.json",
+      "bytes": 725,
+      "sha256": "0aa3d3a1092816f65f4fc3207bffda5a09b30901f17c3e5980cb4f01865327f8"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-24-35.npz",
+      "bytes": 5862,
+      "sha256": "216b36778f84b05d0afc3c22d2a3e51bf736e46b50c0cbf3d21310e61ded1f09"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-25-23.json",
+      "bytes": 726,
+      "sha256": "9ba2528d823fe32af809897fe9c98d93b79837eba6c4b68cfd640a8d7b60185b"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-25-23.npz",
+      "bytes": 2722,
+      "sha256": "7ca184584f771f2526e16ddef32c85427a0a1b5ad02b71f2050e7cbd50402b10"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-25-24.json",
+      "bytes": 726,
+      "sha256": "9872e6c8cb16f099fd95fb21ed15c942eaf7ea3d3cc727d4f3eb283ba25e9803"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-25-24.npz",
+      "bytes": 2873,
+      "sha256": "1ffcb4481a9962cb1d452076620c719dc128937b2f2d28cb9d869fdd08063196"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-25-30.json",
+      "bytes": 726,
+      "sha256": "dee2af2a4fde5de8f08609b14e991ab5a9ab9036b4590a2796ced000901ff1a1"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-25-30.npz",
+      "bytes": 7200,
+      "sha256": "d6d592511e8aec0a99c97d761d6e5f56fc4ffa5c05d5c1983d67a4e9c8846756"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-25-31.json",
+      "bytes": 726,
+      "sha256": "7095b48c84c1eba1b501e84e823d7732df538343115a065edfed33c980eb3b14"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-25-31.npz",
+      "bytes": 4321,
+      "sha256": "4a3bf3194c867b58d8fb24c54d6388c50ce1afd6bb975ca87c6fa45a3f7289e4"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-25-33.json",
+      "bytes": 727,
+      "sha256": "8a04be85eaf33372dec7bd3379a970e17acc6cf79dea1223c2d34d3143272ab9"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-25-33.npz",
+      "bytes": 23512,
+      "sha256": "8e0fd31e55362fb59420bb7fc8e98e51604570708b98c0d13bfc5057a3cddcdc"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-25-34.json",
+      "bytes": 728,
+      "sha256": "73f47a4ce3828eea8c0d50274bd161857552165964b914b14f29867b538c0dcc"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-25-34.npz",
+      "bytes": 124460,
+      "sha256": "cd203327c642c932b6fb4c2f084228fc8b3e78886e7678746aa00a5d3dbb6044"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-26-27.json",
+      "bytes": 726,
+      "sha256": "b8ed760f066c07d3ab5d1e1657a6f7f232f6db807fffdfc92e217210267b3b83"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-26-27.npz",
+      "bytes": 5412,
+      "sha256": "72a0cabb5f9fef9eaf06f8cb2e8bfc3606be762fe9f8448325e23ea015780625"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-26-33.json",
+      "bytes": 727,
+      "sha256": "4e2f6da71732a05f3d988e948b86053cd7c4564c592e4af489a280e912369fe0"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-26-33.npz",
+      "bytes": 80562,
+      "sha256": "d3cd252f70964a57276382d130c2dc29041f51ddf8eca5bd4e84ff9ee26fa755"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-27-27.json",
+      "bytes": 726,
+      "sha256": "8d69b40c6eb886732be0a92052ae61e18810c41058f006a1440a0bd76f57c228"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-27-27.npz",
+      "bytes": 8466,
+      "sha256": "52a8331ac02be425847ccabdd641eec14255d8f10e5d80124b1e3e8fd2d65749"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-27-28.json",
+      "bytes": 726,
+      "sha256": "9c407d62a1c6f6c4cfbccd576eea2f07949741e579d844bc7d8ef1e78d7ba053"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-27-28.npz",
+      "bytes": 6291,
+      "sha256": "f176a72b8ea9a6ed3899486312860b784faeba8c46eb4e558074480ec18dccfc"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-27-33.json",
+      "bytes": 728,
+      "sha256": "5a59956c6d701dd2cf25959cb68ff46354529f5456f1511800db18174c76c93a"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-27-33.npz",
+      "bytes": 102290,
+      "sha256": "7bf866171011af266294998103b9de477baa2176d53b5ef80a25863a56fd49cc"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-28-33.json",
+      "bytes": 728,
+      "sha256": "924d745a15467163a5c79602eadb8af22192f22ed7972883e843939ef1fda4ae"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-28-33.npz",
+      "bytes": 120877,
+      "sha256": "93086558c9fbb6079838c26f85ebca8c7d5e8772b95654d2b83ced52119c2b24"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-29-33.json",
+      "bytes": 728,
+      "sha256": "2a3e41ce98db5d01de66dd1b6bec5add77ca34d199a13e88c3001ac96b95f960"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-29-33.npz",
+      "bytes": 110073,
+      "sha256": "f2b30e788003814a32fb8347e590775dbf7d09c3b1fde15733e79c1d68a20490"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-31-13.json",
+      "bytes": 726,
+      "sha256": "f0f52a986b477a2ef53c09ad6f7ca4890e4a2d5b37c6d5b1ff7d14249ecc9363"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-31-13.npz",
+      "bytes": 6697,
+      "sha256": "a34ab8a2364730beb46c47e90017f8f4d85e6bcc01cc4c8cc960535448693b83"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-31-14.json",
+      "bytes": 726,
+      "sha256": "e84ebcfed74ec4253528f02a05e4bd6ccc9a7fc32bf8cd302088cc91a6723f7c"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-31-14.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-32-14.json",
+      "bytes": 726,
+      "sha256": "86b23151795ffc3d63a8d25aef97470a3e4c11064e30e60978abade819b6dd4c"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-32-14.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-33-32.json",
+      "bytes": 726,
+      "sha256": "2af0e40bdcddac178c10468a556c7c7aa172f94be5f3651965a7ade536a9cf1c"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/new-block-33-32.npz",
+      "bytes": 9737,
+      "sha256": "9920cb7a91f8470c95ec77a3667a2c97fde77365849ec25d959e9c82b1a264f8"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/point-observations.jsonl",
+      "bytes": 3069748,
+      "sha256": "8303e1521ebf8008b0fab423789a16cfa0817497ba0720053a4ed4f1045c96c1"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/source.json",
+      "bytes": 2129,
+      "sha256": "29e662c7ecfdbdd72d1136743d2228351f822b688663c10aa910bcbf6e6af70e"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E102/tile-complete.json",
+      "bytes": 14229,
+      "sha256": "32179a84e9c6762a0ea2d4d277d86fe5687a2c381fb1817bc5845a50e9ebc228"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-15-32.json",
+      "bytes": 730,
+      "sha256": "8474510229cce81b23f1111449a788de50657615f448e68f605967e5ef0bd2c7"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-15-32.npz",
+      "bytes": 110851,
+      "sha256": "113ea8c9b85b5a990bc710b22e7c3bb20faaac7c0abee5647cfabbe2d87c0515"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-15-34.json",
+      "bytes": 729,
+      "sha256": "3d3b62e994d1cf728389e5a3ce08dae275609e6e6f3b13564d199e7cf2e24f3e"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-15-34.npz",
+      "bytes": 18287,
+      "sha256": "3fa40866b35b04a5580c0ccf8e9685d7183f7531c660d6b581b488779687b003"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-17-23.json",
+      "bytes": 729,
+      "sha256": "40ebf0c015b55a4665e5015a9405a3618b1c22aa277f67b21b962f37f203d662"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-17-23.npz",
+      "bytes": 47070,
+      "sha256": "3dd122c4cef2eb4ffbad23ce63deff8cd186c0dfbb7dd39d9f785481ff914dc5"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-17-24.json",
+      "bytes": 730,
+      "sha256": "56802a101b158ef1455e9f7143ae12aa51c00c25f4bf19a5c6d91a5d746b7e37"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-17-24.npz",
+      "bytes": 115129,
+      "sha256": "2b9fa6b194b16dda721e9a8f998082ffc9781c8c2717f2bdfc3c5a9512153743"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-18-22.json",
+      "bytes": 729,
+      "sha256": "ea336e0ab44a44bcbb310d1acccbd5d5de9aff02d727681e25649a3cb4bc5572"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-18-22.npz",
+      "bytes": 53391,
+      "sha256": "c4669d589e843b1eb3fb6fdebb04be619844eed5fd4b031d74db1565e89411c6"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-18-23.json",
+      "bytes": 728,
+      "sha256": "a8d054dfcadfec374ecffdc3182cde0a8aeeaa07bd1e6ea5cfdca62b60b3b7f3"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-18-23.npz",
+      "bytes": 7238,
+      "sha256": "29242268d0b00dbe1e8009bb159a45f61cfaff350ab7fb2fc8b3c41a0b4844e9"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-18-24.json",
+      "bytes": 729,
+      "sha256": "651516b4f08116e11c2407112914fb547e38f684730af2192812b8d3f9258240"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-18-24.npz",
+      "bytes": 64847,
+      "sha256": "ecdb91f374889ed8a158e93ffb921d73de050a4af686a49e90d8c1811b40eda8"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-18-25.json",
+      "bytes": 729,
+      "sha256": "098863d77d5a25076d637252a44cbbe8afa6401ee4fbd43fe695521cf2e49bba"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-18-25.npz",
+      "bytes": 96058,
+      "sha256": "47b60901f774b48963848150d1675ee28cc84ed82b04bb913a0520ffb7b2d3a5"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-19-21.json",
+      "bytes": 728,
+      "sha256": "514ddf7bab8a462e8b130364758b8f2e5c133f989b774a22aad12dd990565e11"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-19-21.npz",
+      "bytes": 2574,
+      "sha256": "86ca18e515a6a8797413e12f8cc0437530281033acd5e2eba6bffce9697ccaaf"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-19-22.json",
+      "bytes": 728,
+      "sha256": "46ee73a62da6ad41a03781d2a8bb864be4fee64402cca054872e9b75764ce7db"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-19-22.npz",
+      "bytes": 3633,
+      "sha256": "c265dca14646b4dd2f967459c60d872733b56efa28405cbb1f2292f1ed065e75"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-19-24.json",
+      "bytes": 729,
+      "sha256": "c4121b25642dde40c9a2985240440f14422cefd56e67f3ff5e5a1c1be4897e89"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-19-24.npz",
+      "bytes": 36830,
+      "sha256": "eacb858f697e0ff45a1157420aebccbc93a070262506ab00ee9b1d49cc77bf04"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-20-20.json",
+      "bytes": 729,
+      "sha256": "9b0d546cbec32c322fb436a15bd99a3afd79690e222c3ef465057cae66880bb3"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-20-20.npz",
+      "bytes": 94876,
+      "sha256": "f2c1d29eebd4c274bb78f1765207261acccbc26c7ec1a5ab38d4028a4ff2dbe8"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-22-00.json",
+      "bytes": 724,
+      "sha256": "fee2149a538d958018d81aa2714a313f4f3256a2d847c99ef6619d8c84a8c4d0"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-22-00.npz",
+      "bytes": 57982,
+      "sha256": "78fe2e7cf54431f1da491e772c3250fd015a4e58a59fdabf884e8b36b88dc067"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-22-20.json",
+      "bytes": 730,
+      "sha256": "18b542add23f4409affb8dd5ccbda1b49e4173c6b5a294c03fdeee00f966bce5"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-22-20.npz",
+      "bytes": 105420,
+      "sha256": "33d7f0fcbddfb42207089140d6a04bb4ac2cb269d8b80d49af040ca3ca6c9586"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-23-00.json",
+      "bytes": 724,
+      "sha256": "60af6357a94bd5108be11c43504b9b48a5fc6a61775f8ec3055b05d5072e13ce"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-23-00.npz",
+      "bytes": 21338,
+      "sha256": "2aed035404de782e0be954e2b52667ff4b342ab7707fd360359af0ce496803fa"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-24-00.json",
+      "bytes": 725,
+      "sha256": "bc09f08280942e7d8d76a678aba074ad1c77839aefb13bf41558ee675ca768f9"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-24-00.npz",
+      "bytes": 103428,
+      "sha256": "00dee899994e0a4c4c40ddcde3d7be7d9df79d2591e2b8f1c0feab3a7f0f8515"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-24-19.json",
+      "bytes": 729,
+      "sha256": "f739d940fe59a60cc5d40a981b51b0209084aa58f2bd5faae6f5d13c54e0c44a"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-24-19.npz",
+      "bytes": 63126,
+      "sha256": "3cb2fd6c1c1beb8a5f158b521011c09996d1c787d02e9d4c34ef16d1c96a1023"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-25-18.json",
+      "bytes": 729,
+      "sha256": "1a4c0350ff47ea1922621162f07ea99ed8c5a95e6160d0d43f56d788b1a06761"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-25-18.npz",
+      "bytes": 60525,
+      "sha256": "21b0f01b20361225619c762de990dc02117d721c10e5c0d1d3c8e2faae4bbf15"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-25-19.json",
+      "bytes": 729,
+      "sha256": "8739b54e6df27a9aa6d5c4dcca4b1b0ea0b88c86c0fa08bb1e99485f4025a3c1"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-25-19.npz",
+      "bytes": 41146,
+      "sha256": "3344fb5016cbaf077c0c484a472e3f3fe0707baac6115c172d5aca4749b25f1f"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-28-15.json",
+      "bytes": 729,
+      "sha256": "d4dadfd51ccf6fcc7037a4856c144c3d9b03505ad33041106c0e69dfb01b0f32"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-28-15.npz",
+      "bytes": 65988,
+      "sha256": "9040ccccc99adbf9f623a09923b6e2bfe5e8f3ffca859d0591d1b9f123583245"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-28-16.json",
+      "bytes": 730,
+      "sha256": "cd7e83585e35897939c475a79c6707baca0c2cb5d4d82d3d5676d0d1c2840579"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-28-16.npz",
+      "bytes": 156583,
+      "sha256": "55f3d8f523be7684220a6e59fce636cac86b4fdd5e531969d5f23e4a5cc3394c"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-29-14.json",
+      "bytes": 729,
+      "sha256": "7cf04cf44a83fbef583300dd31a51515636f151903dae5d324addc7c33d800c3"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-29-14.npz",
+      "bytes": 42594,
+      "sha256": "b4721d16aee8ca3638d168468fa118ead0fa6c5cacdb78906f4fc3fa08caffb2"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-29-15.json",
+      "bytes": 728,
+      "sha256": "ca465010fa0b2a7b2f03bee0885be290afb94a4ea5616ef0eb156e373b0e5234"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-29-15.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-30-13.json",
+      "bytes": 730,
+      "sha256": "928207566dd6d66e3a12b879e39d35206896bc035d5b12aca9040a4751e20c5b"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-30-13.npz",
+      "bytes": 104478,
+      "sha256": "b8b353b7a0e31b596f0e8323724fc54c66e7ac0680c07af3c3ef1fb36e63fe96"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-31-12.json",
+      "bytes": 729,
+      "sha256": "dc027698747de9fc7d6b8c3e93da32bc49d471d96ea616efd56edc1d1b693c6a"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-31-12.npz",
+      "bytes": 53061,
+      "sha256": "c279463aaeb8d7ca86f4dad681dfc60a20b340b3e360d08b19993f214ec65b2f"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-31-13.json",
+      "bytes": 729,
+      "sha256": "5f6c3516249717eb6dfd6300b4cdfde6d98622fad615f5bf871980bfc2e883a4"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-31-13.npz",
+      "bytes": 15104,
+      "sha256": "b3099ca9f409aa7e842a419e8c1a47b3afad6eb3ed876d412235033bae3f1c06"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-32-08.json",
+      "bytes": 728,
+      "sha256": "7b9ec98d227e24e06f0dcae6a20b6b871bda43ac9d75236c3906e3b0c8cc6e16"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-32-08.npz",
+      "bytes": 120581,
+      "sha256": "b9b1360d319239a6e63dd33dd968df595e4c63f4a35d0976cc2b9f8d3b84b7cc"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-33-06.json",
+      "bytes": 727,
+      "sha256": "a71b67546bda8f8992a05cef668363647bbd7018e87eeb1592112b477e7c7bf6"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-33-06.npz",
+      "bytes": 82966,
+      "sha256": "e95d2e761777d91ddddbc00b71cd2ec5f093c2d0f6d205a0c6b1ca2b140b0faf"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-33-07.json",
+      "bytes": 727,
+      "sha256": "a2416e73ba802635c474ec0a53455d8157afb93a71adb8626ebc89576d595305"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/new-block-33-07.npz",
+      "bytes": 33580,
+      "sha256": "3db0d1802231d4cc761c50782e0eb8e8528317607153695e4d8fe170a67e0a29"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/point-observations.jsonl",
+      "bytes": 692476,
+      "sha256": "d287b160510ad64021be7d329d05cf3aad58d7f5ff6aa95819fcb0e908eb5802"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/source.json",
+      "bytes": 2132,
+      "sha256": "61d84300737bf38de2d90354273c78a9abbf3247c8907795fa999080daa8d9ce"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E105/tile-complete.json",
+      "bytes": 6258,
+      "sha256": "8b45b9d9c1510e64d1a3331d85ba21b729fb3ca949a9a2d08f5c4e08815291b1"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-00-14.json",
+      "bytes": 722,
+      "sha256": "6c19e69284cae97c057182ae12af149c1c4b792e66a14e1e8b6dc6dd2d3b9e2a"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-00-14.npz",
+      "bytes": 81487,
+      "sha256": "e8ea14d4ed5b9fab56968795a0159210b3f4308fc6de4a1de57e10c2babfe7f4"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-00-15.json",
+      "bytes": 721,
+      "sha256": "3fffa8a82fb482d6b2e635fa68467e25c5dc4b64bf574b7ae61f3c3013d80c8c"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-00-15.npz",
+      "bytes": 3154,
+      "sha256": "29b2db85ed0992e5e9a7e3af41977eb46379f8b38c3e3510e5b746ed0e7e212e"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-01-14.json",
+      "bytes": 725,
+      "sha256": "1ef56421c444a5ef8db7b82d989440c5a711e49cb9840cc098708433bb2eb7d3"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-01-14.npz",
+      "bytes": 47124,
+      "sha256": "99be80c4d7876e6a35bc2d0e3866f747bff9a2a492c536b12497a2f05b09b667"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-02-13.json",
+      "bytes": 725,
+      "sha256": "be9890dd1a8374c9ef5a2c398f869d9c0780ddb4bea98c93cedd4813faa9ab83"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-02-13.npz",
+      "bytes": 32255,
+      "sha256": "77b113c265d82c93f4715e753eacf716682f14f235ef4cfc2bff26e4e4f79397"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-02-14.json",
+      "bytes": 725,
+      "sha256": "6b710fd836310a90717ae0a82a575535364890dee03bb66959f87eec15c9274f"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-02-14.npz",
+      "bytes": 13162,
+      "sha256": "0562b84858ea8435df14ce8ef52b338db81ed61f7943aa9f693c220eac215fcc"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-03-14.json",
+      "bytes": 725,
+      "sha256": "bef25610f3c62f37351237ad451fa02a4bf91a5a79f60fe5f07b91dd618cdc12"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-03-14.npz",
+      "bytes": 10683,
+      "sha256": "86e0b5765af4bb1b290e1cf99872d4437271762ede3767b4717e0b42eb7dbbe0"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-04-13.json",
+      "bytes": 725,
+      "sha256": "b7375e375fed2874d42de17bf5464ba4daf65f4c4fa9766f867e39c242ea9e87"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-04-13.npz",
+      "bytes": 66597,
+      "sha256": "393c89a418b548a5a423f3758a6c92f276fadfa6de6c0197da7a056900596842"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-05-12.json",
+      "bytes": 724,
+      "sha256": "3c9202b44d66b89abe8ef6013ef69ccd8f06ae42aa0031445959498dd47a8c80"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-05-12.npz",
+      "bytes": 6063,
+      "sha256": "6929286f4f546635a0f8d5a40f6dfd649554ffcc1850fbc3fdb63320f86242fd"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-05-13.json",
+      "bytes": 724,
+      "sha256": "62ac3ebba1aa0dbddb0b399128ab8c75dbfa73367ceff78accb155f1275b6dec"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-05-13.npz",
+      "bytes": 3749,
+      "sha256": "33ec7d41a543f265217059335036d686b70141ff3d28f003c543e5abfc1194dd"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-07-09.json",
+      "bytes": 723,
+      "sha256": "259287d05b998088a1b36ccdb38116ded3a8715f97f9157bae810141a78eb5c8"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-07-09.npz",
+      "bytes": 41143,
+      "sha256": "6663e7f9fb04dd60aaf9f08bb5d60fcabda1e3a3d74a5b1e55c9ed8913fb49de"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-07-10.json",
+      "bytes": 725,
+      "sha256": "052144cb22bf22d5102306e4ecf76c644e0a6df4716d4a6945e6bd8fdea554e1"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-07-10.npz",
+      "bytes": 68703,
+      "sha256": "d387a461b065b3d0411057e229f4dfc38e050c8e275919db04120ad0ea67a3f6"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-08-10.json",
+      "bytes": 724,
+      "sha256": "11cc638799ebc15b2c3ad34d60e2ddbd0960379637bf237b62e98a05a490fe00"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-08-10.npz",
+      "bytes": 6007,
+      "sha256": "106204abda993e1a09672236ec4f1792c9c92d6670c2dbd4d1c6b4f7fe4e297f"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-09-06.json",
+      "bytes": 723,
+      "sha256": "8f192d2a0f0808cd988f93445037ec9f6a0b87f1b2615a944398e04f517f221c"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-09-06.npz",
+      "bytes": 82505,
+      "sha256": "b7ca871e787f366e286de15b12411db10885b9d92a6abcf28fab478a749c6dff"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-09-07.json",
+      "bytes": 723,
+      "sha256": "4f3adca4b77d28e28f119563b1e335fca99f4eed7e59a0b9426d0a1d463f1c3a"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-09-07.npz",
+      "bytes": 61857,
+      "sha256": "42aeee034a0c104dffc1b5cfa0bf80715d53e82841bbded9d96c0b09beca9b15"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-09-08.json",
+      "bytes": 723,
+      "sha256": "7447accac9c0d74cba9d40fbf50a9f6a8d81e164506b4f0d3022d7e60c84ea94"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-09-08.npz",
+      "bytes": 56593,
+      "sha256": "94c29497683be347c202afb7c1fe8a9de82266f01bb38ee4c567598e18e626cb"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-09-09.json",
+      "bytes": 722,
+      "sha256": "ddf3655f5e585e999a726a0f1e9e9498a2ace609ddee16803690f435085f044e"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-09-09.npz",
+      "bytes": 4070,
+      "sha256": "3543ce0cc8ecab9d0ed102ebae654cc7bf9db553d346f8c053a5089391cfe6a2"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-11-04.json",
+      "bytes": 725,
+      "sha256": "ea1ba75528c356150724db4fd0a947ee61750a23955e92ff942bdf4a68c9f01e"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-11-04.npz",
+      "bytes": 45331,
+      "sha256": "5f60116b53c29e747835dfddb8439688e358c74873fa7446b85d45b155ffa307"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-12-01.json",
+      "bytes": 725,
+      "sha256": "f8a4e8b0b3204affef00c95f889fd5d6911dc24a3094b00df61979dddb5a3a66"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-12-01.npz",
+      "bytes": 84674,
+      "sha256": "d9801a69e3a9b16b15ef4a8288198f21ffcf14a6848fef102f39729d5f56f2d8"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-12-03.json",
+      "bytes": 725,
+      "sha256": "7da1d87c91fa3159782227a75672bb146aee7ce5c2888b3079cab8133e1416d8"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-12-03.npz",
+      "bytes": 48125,
+      "sha256": "87aa577542dc00cec152531428475961543304ce81386c1689733322c803494f"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-16-10.json",
+      "bytes": 726,
+      "sha256": "c42ef80a8abc391265d5bfa5ba16125c19f28345ce9633e214428c56c73dfa26"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-16-10.npz",
+      "bytes": 3804,
+      "sha256": "1c78682b811065d13ac433128547c7b1882fe5a469ac531cd5cb7316c1594196"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-16-11.json",
+      "bytes": 726,
+      "sha256": "5de04cb200016917e863c4ffc7232851a5fc318a6f3e2604eae3ed81268c3b3e"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-16-11.npz",
+      "bytes": 3402,
+      "sha256": "288826f8322fb22d2d4ca34615e7625569e59e8ecae35942ec6fca0be9ac1589"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-17-10.json",
+      "bytes": 727,
+      "sha256": "bb7f7410628386059ff75e4e19fa6717917431230d92677f9950008957731836"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-17-10.npz",
+      "bytes": 11324,
+      "sha256": "58263aaa13db0b78f665ef70bd29e903257c53f40b4961b4e7a9f457bbf49503"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-17-11.json",
+      "bytes": 727,
+      "sha256": "54635d871ec66c7096bcab14a4f2e15a6efa0cf4809da7331bfdfc8705055e39"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/new-block-17-11.npz",
+      "bytes": 20329,
+      "sha256": "2617d2d67d84ba048e2ecf4d636ebd249a773c11011d8abbbbf655a1f01deae6"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/point-observations.jsonl",
+      "bytes": 967179,
+      "sha256": "3d9e14393f8a86d17af61c6d6fd55ed4aa5205690061903db91ae8dc3899423e"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/source.json",
+      "bytes": 2168,
+      "sha256": "cfbd0a5f5a3685c440c54af4402187dcada4423f26cd5270ea34d42cda42d0c9"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N09E108/tile-complete.json",
+      "bytes": 6127,
+      "sha256": "8afcba964e8192e08d0db8a3407f07b9235308f8bef3d03a2b525f927221a6be"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-01-11.json",
+      "bytes": 725,
+      "sha256": "39bc9e771448848cbcc35df753dfb31b6d5931396cb417664012ef7a8baffaa0"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-01-11.npz",
+      "bytes": 66292,
+      "sha256": "5544152ea4c5cd6febab744234f7f2a2d25cdbf6ec0fcea722c8351a3b8d1a94"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-02-11.json",
+      "bytes": 725,
+      "sha256": "38264f50adce2dca3387a4b694f75c8933c34396ce32d7c5753bf3191cb4a68a"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-02-11.npz",
+      "bytes": 99295,
+      "sha256": "6bf1697314a42c0f497906b28eee352aaf5a9eb598a46361b5b2b3f21e1d1ac0"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-03-12.json",
+      "bytes": 725,
+      "sha256": "f317c7034fb07db05d04428afa758a20839c37198116e3959f68fc8d4975b15b"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-03-12.npz",
+      "bytes": 49364,
+      "sha256": "01597cdc8b47f7bcd02d2d5f26723d96f04bd721b3bf488e25dec44ae8c6bf1d"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-04-12.json",
+      "bytes": 725,
+      "sha256": "3d4f895facd16c514e24917801e9166fbd4eb890aa9f9293d91edaac5cdaaa59"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-04-12.npz",
+      "bytes": 58523,
+      "sha256": "5b624cedc0513fa4894c97102d46216f19b8524ee2a5d2513daad5e4bf4d8a82"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-06-13.json",
+      "bytes": 725,
+      "sha256": "4086fb28b20d42f5a31da8deb3de3806d161f6186a8a7421d66b5d19d7408441"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-06-13.npz",
+      "bytes": 13449,
+      "sha256": "39c7457328f0a2b5f46992903c459f28d5a2354b9a239cc0862d68d5c64325e2"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-08-14.json",
+      "bytes": 724,
+      "sha256": "462e78cf99ccdcb70fece6205859110e7694abe8e1004901af46ce4e769a93ec"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-08-14.npz",
+      "bytes": 3615,
+      "sha256": "a3b409f16bdfc67a5835facfde8c3ab6c9a31f5979c74ba312813959492d037b"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-10-14.json",
+      "bytes": 727,
+      "sha256": "1f7a3c531cd0f92c47356e326516dfbcc0714a82ed86b311f6d80553cbceb590"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-10-14.npz",
+      "bytes": 29858,
+      "sha256": "a6407bb7b3105f0cb94854d1d63ae735fbfb72b09d3ad6134518ac52a13952c0"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-12-15.json",
+      "bytes": 726,
+      "sha256": "d197abc912d4ae06bde64e5eec1ddc249d82a92b84f33ecd6bb18db2c3625cc1"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-12-15.npz",
+      "bytes": 3248,
+      "sha256": "40f9efb97949abd8b773fb5fb9c21fd0827335fcc99fe1aaa4865334992f848c"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-13-15.json",
+      "bytes": 727,
+      "sha256": "034a95f739439d46a93d3c66acbef4007d21351ace570b11b29a93cf260fa737"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-13-15.npz",
+      "bytes": 23024,
+      "sha256": "ce20a28f5612f86d42fdb61cd9a1722a7fed1c088a7677d0555b296d2afa2644"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-14-14.json",
+      "bytes": 727,
+      "sha256": "7f0e2b88e5434945f71a5dfcd146b264b3a015b410995ebbeb30e2bcff1ce37f"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-14-14.npz",
+      "bytes": 45417,
+      "sha256": "e8946d4c707a5ac50050189bc9d0377f8bfc9eedd9be9bc8aba9a535c00b6088"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-14-15.json",
+      "bytes": 727,
+      "sha256": "39e76bf86d5b5b847439d4f591eea1a569ce63f246c54c1a6ed6a842465c9a9d"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-14-15.npz",
+      "bytes": 11896,
+      "sha256": "fa199178976bfd28e7a6820391ad5f08569c26c1334740f71005dcf85ff92af3"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-15-14.json",
+      "bytes": 727,
+      "sha256": "f1d3ba19e31af1b5d71b23ac2f476bb8704543629f5ad7851e7b79b8aa524be0"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-15-14.npz",
+      "bytes": 31915,
+      "sha256": "a0e6579c4221bfac9a475e5bf2e77316ab8a4d9a0d67f7c985d4dbc50d05e8e4"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-16-15.json",
+      "bytes": 727,
+      "sha256": "5ceacbb01ace303b42c3abbe7295e940188aeaefdfbc486ad75159116829d198"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-16-15.npz",
+      "bytes": 10998,
+      "sha256": "8a7bc30c90d554a018616138d0d6c7517acbde2b4ccf8ba65d7ff28d068f237b"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-16-16.json",
+      "bytes": 726,
+      "sha256": "70df9aa68ac159263c73089288fbb6585ec24eedd7bf9f080833f8d790751a49"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-16-16.npz",
+      "bytes": 2493,
+      "sha256": "ce94ff8e0f16c69450d84682b4744736e29c9846d065d2f8e077788613fb21f3"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-17-15.json",
+      "bytes": 727,
+      "sha256": "e962572aa6b6ae36f9e24f9f318b201eaeb41b056be7148d86c6967d8e88f478"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-17-15.npz",
+      "bytes": 18323,
+      "sha256": "69edc07102bab0761e958e4457b5cbfbb89659b8b5df096d3ada662e23b0e532"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-18-14.json",
+      "bytes": 727,
+      "sha256": "17f311ce2e1782d989bfa968b668aea4f8be31549b32fb44cfc5ea37620466e1"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-18-14.npz",
+      "bytes": 56374,
+      "sha256": "ac1d3518ed296d33e57f1cd2e4d958972397c48a9c05d5b4cf6ebb2f35626b9e"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-18-15.json",
+      "bytes": 727,
+      "sha256": "03b322b6140ed11923dd2367e1b52cf0e1e267bbef64a0a88c666f97905e3bcf"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-18-15.npz",
+      "bytes": 18438,
+      "sha256": "718174e3a0e67e828f0d70baa5d2fdbd926a865476d96757b47e2386aa5dca07"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-19-14.json",
+      "bytes": 727,
+      "sha256": "4ffa4d79ab8eb5263acf7b8e545203f1c7423439363140ae5f662fe2fc623e09"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-19-14.npz",
+      "bytes": 95800,
+      "sha256": "731b8b1c685275351b771685c4634084e2873c1381fb329d782d6d4895f85cc4"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-19-15.json",
+      "bytes": 727,
+      "sha256": "53ee961d4e101f0b986aa04018f0f525d060030523fc6de45259d3a090c9a6fb"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-19-15.npz",
+      "bytes": 15466,
+      "sha256": "9db83e0c7e7b0f238b36f26266463fe4be0533f074d0e4cc0429cce15d849172"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-20-15.json",
+      "bytes": 727,
+      "sha256": "31e99a94d6740f5ad488622c6a64d3ddf8f1418ef834d56e6f9f0a47f6e84864"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-20-15.npz",
+      "bytes": 42118,
+      "sha256": "bd745afc5bda034f82a72c89ac2606523b103a381afc20ea65938e5d79732708"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-21-15.json",
+      "bytes": 727,
+      "sha256": "a73f63891cc603d03ebe282b63aebd1ac004adab6d42defde43e71d56d626eee"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-21-15.npz",
+      "bytes": 36288,
+      "sha256": "097e7337dc534dc90150c3af9e133f003f797f1ea8f7c58daa09715caee9551a"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-22-15.json",
+      "bytes": 727,
+      "sha256": "00a60733b64401b53b3bf4e4878c5dffbc7c7b5201265aec022f64616bd525b3"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-22-15.npz",
+      "bytes": 82749,
+      "sha256": "442122e34bd4fb5d992241520648ca8f397ff86388a44d06942c841fe2de7759"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-24-16.json",
+      "bytes": 727,
+      "sha256": "7667c8f86949b1c7f329facb75c0d63c1c789b0e86fbc337046a9b212c995203"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-24-16.npz",
+      "bytes": 47969,
+      "sha256": "9939aceb4b26dbd1df37a3bb761ea1239dfa29e5403263d04d194f9625640bc2"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-25-16.json",
+      "bytes": 726,
+      "sha256": "d7bcf26cd545a701f5c609eadf70576a58923e3b082d5ab9ef3520d996f67db8"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-25-16.npz",
+      "bytes": 8499,
+      "sha256": "6221fa3942c50625f9dde77db9df489608402c47bc31d0535b03fb7492fc45ed"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-34-15.json",
+      "bytes": 726,
+      "sha256": "65c44fe2a41ac9f6160c03a3de49411c42494d02cf4f621180a3dcd43614ebb2"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-34-15.npz",
+      "bytes": 3682,
+      "sha256": "70c7e2e1de83ef43db411213472fb3cca4d18ce2c01b181dcd67584f6bad9ce0"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-35-15.json",
+      "bytes": 725,
+      "sha256": "123ea606a0376de66d092cddd910738c1af9bbc7b092960e279f8cb696241ee4"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/new-block-35-15.npz",
+      "bytes": 1030,
+      "sha256": "ea425b25be5a0e1a8a2a462c35ae020038e5bb634f1f8f3e6f1cbc7838084982"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/point-observations.jsonl",
+      "bytes": 1080494,
+      "sha256": "1434abe44ef0f71ce3754eb75c67cbd737de3a67afd069b7414020e539e5306c"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/source.json",
+      "bytes": 3952,
+      "sha256": "c53d996cc9b6b065d83c21c9327707bf4e48d083727db3599ec84af2d9eee76a"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N12E108/tile-complete.json",
+      "bytes": 6799,
+      "sha256": "f7827454069e498a9a16c0b0f2432e1db78f8b6ffe8277edd43a1deb6bd8d263"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E105/new-block-00-17.json",
+      "bytes": 722,
+      "sha256": "fec21fc8c10576d67838b6b7da2f54c307ca826d9d70d4a91af3280cb829d6e3"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E105/new-block-00-17.npz",
+      "bytes": 45218,
+      "sha256": "5341f56ee12893642a9d93b81a5223735b873016006d0b4909f882fd42d3a173"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E105/new-block-01-17.json",
+      "bytes": 725,
+      "sha256": "441c43f8e122ae1c5311ff52519c2052203e01acb471d838d7be585211f4d22a"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E105/new-block-01-17.npz",
+      "bytes": 18674,
+      "sha256": "3c29bb7f6d4ddbd896bd0e9b93ebc067a1a7e08960ce25edc3b98bc82b43214e"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E105/new-block-03-17.json",
+      "bytes": 725,
+      "sha256": "ad3bfb7a795eb3565980f986f68c8cfbf5390196eeda5ac746cc5449c03716ca"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E105/new-block-03-17.npz",
+      "bytes": 52652,
+      "sha256": "4c9ee5a90ef2a6fdba98857ac1e2a7f50bc75f43d313b1f96126c85b7ac0f33d"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E105/new-block-09-27.json",
+      "bytes": 724,
+      "sha256": "ef860ef510955cd15292cebc2ba12cb905a4e5f6fefb7a28f069642ede05ed28"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E105/new-block-09-27.npz",
+      "bytes": 6670,
+      "sha256": "60e8fcca40795cf357a6d101892e41d946166dd33544246cbe39176b6b571e43"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E105/new-block-19-34.json",
+      "bytes": 727,
+      "sha256": "1187929706682806096bcef701ebbf4b31bb3fd2fa2cd46bd3bbfd3a39b5d278"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E105/new-block-19-34.npz",
+      "bytes": 33868,
+      "sha256": "ea3abda685a778a5433b70c61440a7e314a8152681b547021526c55e59229a9c"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E105/point-observations.jsonl",
+      "bytes": 245426,
+      "sha256": "d21ebd2adfefeeb22c0934e5af10c291156fd88aaec689a3b60d47914c7326ea"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E105/source.json",
+      "bytes": 2148,
+      "sha256": "e5901d1771af68cbd76e4a4bedcdb220223781d2f56f06135494859f36c2af72"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E105/tile-complete.json",
+      "bytes": 1845,
+      "sha256": "653c197325aaec15e3201295c6637db6440f4e44fc9c2328059288e050c27d4d"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-19-00.json",
+      "bytes": 722,
+      "sha256": "2f2230f2c35a6c46838a10f6dc0983980a1e6b2dfd6749415fca3363e2014517"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-19-00.npz",
+      "bytes": 23995,
+      "sha256": "d1e22a30c0319659a27b6742084b60f2bd56d4f40faf6e6a51068ff991b5ecd7"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-20-01.json",
+      "bytes": 724,
+      "sha256": "2fa505b9b3ea8d28e7949a6f06c558e8ca1ecf57d7b7d116eb5b3acf9b70fcbd"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-20-01.npz",
+      "bytes": 7188,
+      "sha256": "3873eaa86205d3a9cb0d4a32e565ca7dbb70726cf32243ffc3f6c31ce67f9802"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-20-02.json",
+      "bytes": 724,
+      "sha256": "f4ea12ee52d10860362310195faaa14370ceb463b144ff9af52781c21c200100"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-20-02.npz",
+      "bytes": 4397,
+      "sha256": "8c8c6a5a3e8e91a4e9660504ea4466fa6c34b912c3a54066b0deee74584dd5c0"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-21-01.json",
+      "bytes": 725,
+      "sha256": "c72cb00ab87e25022f7d9389217811fb7655ac7a334fc49dff40d4db059fc612"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-21-01.npz",
+      "bytes": 24913,
+      "sha256": "220145f176a53b9b62349a3ab9ae3db17906bed763e196ae94db7315a76684e6"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-21-02.json",
+      "bytes": 724,
+      "sha256": "629e2bd2aacf15a729a1cfac60f4e3b26bd5f6099680134d2917e917c9f6cdec"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-21-02.npz",
+      "bytes": 7432,
+      "sha256": "2afc56aedfc746d3ad7bebc4d7ade664334df293c0368ab000f39cc83eac7913"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-21-03.json",
+      "bytes": 724,
+      "sha256": "0ec2158f7bdb88d8e274bb42a80aeb492bc2852df93ba84204fc1bb51e42ead1"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-21-03.npz",
+      "bytes": 7245,
+      "sha256": "48066da7e46812862ff501bcb0b1c4c072daab694d801010bb7d016a1c1f1a47"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-22-02.json",
+      "bytes": 725,
+      "sha256": "f3e83fedfd92311aa3585f5e6097e9123d7d6cce8f6205f1fc1ce636f62ed16a"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-22-02.npz",
+      "bytes": 59413,
+      "sha256": "5e949f4b1b3c5aaab0e437c18cd66615e1b60c321d12ceee36be00b81301a526"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-22-03.json",
+      "bytes": 725,
+      "sha256": "9f244d7d193181b2baa8343c0bae0ea95653cf9ba267eb7de3c5cd42a8d8cd7f"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-22-03.npz",
+      "bytes": 10280,
+      "sha256": "f6332d669ba2f3622b5f8e922d06340bcede22377d8a9360244b850c3ff10ff6"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-23-04.json",
+      "bytes": 724,
+      "sha256": "a792dbe6041d378a4f429f8e0e01a96350d28c52399406adc9b427c74c89ffd3"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-23-04.npz",
+      "bytes": 2693,
+      "sha256": "f4f4d46a6c7426c8f3e893f1bd1bc04597cdb6fa978a75bd0b6cc5769b3038c5"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-23-05.json",
+      "bytes": 724,
+      "sha256": "298e19a52a89542e7ca7f9a642b642f114297fdb3c113f456b82f1c9e213e1cf"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-23-05.npz",
+      "bytes": 8846,
+      "sha256": "60a3019525f0962da021ac4835d7e6fa63192f43c5ea3e28dc9d247e460f62ed"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-23-06.json",
+      "bytes": 724,
+      "sha256": "9bb31042c77110b9f084b51d636825017bbeba7fbff90a33318ebbd2bc2c6701"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-23-06.npz",
+      "bytes": 4482,
+      "sha256": "7ac59f933aa2cc032403cfe5b9f0bd1d8c82507f32fbf1ebab1c7aaa4f685350"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-24-05.json",
+      "bytes": 724,
+      "sha256": "306a9c01064ceef57f243f3dd0e0c631413ce3e7a1df6e05bd4f5917b9c7f4ee"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-24-05.npz",
+      "bytes": 3808,
+      "sha256": "0f1ac5141612b5fd269be4d91bd3ab1510a07333d6bc519a0b0191029ba16d59"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-24-06.json",
+      "bytes": 724,
+      "sha256": "53a87e453ca542b7dcf8c357237880ccbf26f4aefbac7fa52ac3ebe8b9089f35"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-24-06.npz",
+      "bytes": 8196,
+      "sha256": "aaae278c6208bc8c1e60ae4796977d4f67d7122d6c5150f05e92bd923ea1362f"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-25-08.json",
+      "bytes": 724,
+      "sha256": "23f0b7007cde6294a86a749349dd62829143862198b1fee2950428ba020c8f29"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-25-08.npz",
+      "bytes": 3327,
+      "sha256": "0f6631623d801d8fecc8c73675e0ccaea558692dd2c1d5629f66e46b7c2c1bd4"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-29-07.json",
+      "bytes": 725,
+      "sha256": "6f239a0c05898ec50186dff431bf805496349e0f42ec6f910557596aa6954131"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-29-07.npz",
+      "bytes": 82247,
+      "sha256": "388f54a38d8f1e73627b6f0e5ec70dc1035f70b678a008c9648ef6486a66eaf3"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-29-08.json",
+      "bytes": 725,
+      "sha256": "b05e5a7abc47805f80d3a7f2c8f60bb666348517e9ac702ff3177139eb5589a2"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-29-08.npz",
+      "bytes": 16881,
+      "sha256": "12fe823e449f8fa9bb314faf4ba0c26bf84c3ccbe9f55719c3c3fd11e7f8236a"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-30-09.json",
+      "bytes": 725,
+      "sha256": "be49342132b1aa7c45ab020cc1b9215e0ae8595d0b77fe34b5e740b9b9e63be6"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-30-09.npz",
+      "bytes": 57578,
+      "sha256": "c195f04f696b6f322cf11701e9d8056a7e3b5d21c163bcee30563b36acfa567f"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-30-12.json",
+      "bytes": 726,
+      "sha256": "c8dc5895c37dcfaa1db78c3ecb6f2ebd25edf62fd9b6dfbbde1806ec21b6a1fa"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-30-12.npz",
+      "bytes": 8783,
+      "sha256": "6cbec99930a30cd72d8b06408d09809f98ec7ecc0bdf37f38945a3a2a431d519"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-30-13.json",
+      "bytes": 727,
+      "sha256": "de7c70b34c877a85b788036fd47862879414e6c7fcb812dd6bd6a9e80abaf77f"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-30-13.npz",
+      "bytes": 15904,
+      "sha256": "7532e0fa3b7844b4993e3880d888777c1cfa7f09a079543e99133eeacac7f625"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-31-10.json",
+      "bytes": 727,
+      "sha256": "7bfe8e2d2ce78cede0189f80e3597bec7db27312bc01ec78fd71196f38e041bb"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-31-10.npz",
+      "bytes": 34722,
+      "sha256": "18f112844f6b0acd3bd9c8988c6cf3857251289e11c311199d212d782b387331"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-32-10.json",
+      "bytes": 727,
+      "sha256": "6fb6a6cedd6946f31d1d9467068e9b30b46740f9303e3b45ab2cf2046ace530b"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-32-10.npz",
+      "bytes": 87589,
+      "sha256": "b87adc68498463dc21bdcf9dd5760c0a6c84aaa69334190103ab1a818a789c4b"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-33-10.json",
+      "bytes": 727,
+      "sha256": "0532a3f9379d64d147eb0b0fddf0c27648d870971ac32ef2e7646939a08759b7"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/new-block-33-10.npz",
+      "bytes": 74199,
+      "sha256": "13a89fa9e7f7bc389ab5e24c843cf97f617a0a6b58c41874323319e6f90a644c"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/point-observations.jsonl",
+      "bytes": 1422876,
+      "sha256": "4799719d291416f793fc7ec53a190b6b79cf5568f7715f07f90fbfbeb564f777"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/source.json",
+      "bytes": 2128,
+      "sha256": "4471072b6a8e1c460d81924f589ad1af2666e533268c3730b3437a10a37bfa0d"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N15E108/tile-complete.json",
+      "bytes": 7024,
+      "sha256": "9968f2110562ae1bed1a75b212e19221db69f3716fd6d3ce364bd99e94b2f047"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-00-22.json",
+      "bytes": 722,
+      "sha256": "a5d55db014a081a8259baff5cf554b5518fde73f94bbc60b5634597d708325f2"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-00-22.npz",
+      "bytes": 72416,
+      "sha256": "3af25306e1624c706568e85469bf9db9c81eec8c1f9a4b8306baa597d59127be"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-00-23.json",
+      "bytes": 722,
+      "sha256": "defdf24867094793bc17295086ade11d3e94fd81a0429ec5a4302da9e6dd3e69"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-00-23.npz",
+      "bytes": 73803,
+      "sha256": "6e453faa6a696917e84dd1a31b9d8838221d80b99bc8015f8841fa55a6e21725"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-00-24.json",
+      "bytes": 722,
+      "sha256": "b7a23868cee02a724fae6b4cbdace474f9fd0af6ab73f90c83547823ddce8db0"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-00-24.npz",
+      "bytes": 72544,
+      "sha256": "061105c2fbb737e380cd29abe58dae3188a13e20b1cb18aa889a19deea1fccca"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-00-25.json",
+      "bytes": 722,
+      "sha256": "d0c3264965fe23d347b453ba67770d632847e2d71430fe10370552f6aa520fdd"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-00-25.npz",
+      "bytes": 68064,
+      "sha256": "075d269f2fe3cebf176706d397677a4d321245e4a2312741cbbf57e592e430aa"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-00-26.json",
+      "bytes": 722,
+      "sha256": "0456797763927d96a926c284207c306fe5f326e29f155ed2c458b0304d5d1ebc"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-00-26.npz",
+      "bytes": 21229,
+      "sha256": "bbbb1dd0599eeb87dbbbb954228fc1e0b3d74eab5416966f6dbc1901808b9d9a"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-00-27.json",
+      "bytes": 722,
+      "sha256": "b810cb792710f8ddb0e96d1e0a41487f850dbc95140b4cdae95cb10c294d8f00"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-00-27.npz",
+      "bytes": 22571,
+      "sha256": "6f12b83bedc5654bac58860b1381649c953497514132877e78723385f3ca3911"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-01-22.json",
+      "bytes": 725,
+      "sha256": "4d615d8375198b2a0a1a8a49d008942de5e1335f40d3723eaad2c2bb1c41d2b3"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-01-22.npz",
+      "bytes": 24709,
+      "sha256": "d755b4d419a8455514cba64e7864615e46e8e80bc5772848e4e86750818bda0f"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-01-26.json",
+      "bytes": 725,
+      "sha256": "83c6a7e58c02fc77b43e0c9dcc0d5fb8f4ccfa39b86a2a498e2636e4775dcd85"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-01-26.npz",
+      "bytes": 17959,
+      "sha256": "c5d1a6d12636f324dcd8e32b2108b6614c2267ebcc86e61451ffa0b3b29e620f"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-02-20.json",
+      "bytes": 726,
+      "sha256": "e6687feb6eef948bb01171c92d174e1e8b2234477cf5d65857a31fa61888df9b"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-02-20.npz",
+      "bytes": 126612,
+      "sha256": "f89489094908c4d389d252b0ebbe0e70360888ec298ad7a1de1801dbec30594c"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-03-20.json",
+      "bytes": 725,
+      "sha256": "f942537d7e3909d5b5651b24537fecc9e8f6c73d185aa1a759e80c154e0372ab"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-03-20.npz",
+      "bytes": 97687,
+      "sha256": "2e7d0713c288e84b11df8ff9a2a3cd736918de7b8aaac199fcc8bf2106622034"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-03-21.json",
+      "bytes": 725,
+      "sha256": "f4b2fa23672177c08993a1dc5c6d3c3fb317ac5e683cc58b2d588974b21d297f"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-03-21.npz",
+      "bytes": 11092,
+      "sha256": "57b77ed76fd778379a07eba65d55c975ebd2496779131ca0d0b2a4af8da02235"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-04-19.json",
+      "bytes": 725,
+      "sha256": "21802ac43e814d5a2baa6ee31a809ed94d9c4e293f67bc34bfe3a6fee03827f4"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-04-19.npz",
+      "bytes": 64061,
+      "sha256": "24ef290570c055955596e8d6a5f9fe8a4a50e1319b71b95182ec92e09f5c63de"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-05-18.json",
+      "bytes": 725,
+      "sha256": "031e3bc4e478dfa2fecf064ee467af991b2855612654f92b1b9fec0094dd78ce"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-05-18.npz",
+      "bytes": 83597,
+      "sha256": "d761b6e311ba4c5b095828c29711186e7f2e5447a9d1ceee58fc3a9323ba2b7c"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-06-18.json",
+      "bytes": 725,
+      "sha256": "d187990e1258f2ac8f10461e4424d1c136508afacd22fed896fffa48cce5eb1e"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-06-18.npz",
+      "bytes": 89193,
+      "sha256": "bbb0096a6053fde3062705841cfd31bed48dcd9d9c0e2733f5ac1153de09ffb7"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-06-19.json",
+      "bytes": 724,
+      "sha256": "b46b7cae9854c3e3a30444118e88f6bea8f8b65a75547974b063b79c1803db76"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-06-19.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-07-19.json",
+      "bytes": 724,
+      "sha256": "0c78eb4093913926d02b7abe23bec8ec1db784082e4f87dfe01e6f46636b5358"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-07-19.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-08-18.json",
+      "bytes": 725,
+      "sha256": "4a4142b73408f567f044fdb083988bab08014ebd9c61fa470f2137d475d3e56d"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-08-18.npz",
+      "bytes": 62872,
+      "sha256": "dbf89f7a4e853a30dedeafc4d6bc0f95f8deecc882d569270226bbab5ccaab94"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-09-17.json",
+      "bytes": 725,
+      "sha256": "96bf6b0287fec392ca869e3829846dc5f8c24ade7809622a4ea45805d37a7a75"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-09-17.npz",
+      "bytes": 17995,
+      "sha256": "dc01dfcb4d2faecbf4d92a0705a7ceec0c3277e489202bb21aa7bcc6e56d7f13"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-09-18.json",
+      "bytes": 724,
+      "sha256": "dd90220c4f48578ba12db059969432a8c4efc679aef3063cab7c79c3ad3992f8"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-09-18.npz",
+      "bytes": 9929,
+      "sha256": "76283841702290d416505adf6acd6d05c5af2e5754e40586677783fd8b3b91a0"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-10-31.json",
+      "bytes": 726,
+      "sha256": "d81f5f96d6e46eb870e09a3bd247970983a8286b5ae6524d22f98c78d8c5557e"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-10-31.npz",
+      "bytes": 5527,
+      "sha256": "8b85e0aa4a866c3a8743ac63b57fcdb909f1459795652358f17fcc482f485823"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-10-32.json",
+      "bytes": 726,
+      "sha256": "fd75ce661387dade376664bf7aef12b5c1909546ebfd230f0a8f888117b3f8f7"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-10-32.npz",
+      "bytes": 6184,
+      "sha256": "53e5ebbeb3888eb8b033988f36e6778b1459bb3a71af45eedfa70b82fb9a148b"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-12-12.json",
+      "bytes": 727,
+      "sha256": "a6966ed467300483ceaa66e03846524682ab442007c3d13da8eff319573f1738"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-12-12.npz",
+      "bytes": 52243,
+      "sha256": "5e42526c9d1ba2df63fb49b6090c98218dccd58d5e8fa9ab582922d08f0eab75"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-12-13.json",
+      "bytes": 727,
+      "sha256": "feec3e952496b62c066d33b9356e76d8dfa9660e9ece05d3171b4866a9adfd68"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-12-13.npz",
+      "bytes": 31887,
+      "sha256": "b9bf84a4bd198da737b29290a74a4670aac48a5a826ec90c79e15320f23d8ff7"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-13-11.json",
+      "bytes": 727,
+      "sha256": "ad3af8947f9721eddc20f9014527d36310095bf37cf2f0bfc2f6c1c9adc5e498"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-13-11.npz",
+      "bytes": 11510,
+      "sha256": "6bca3f5f276913d3660db6ddc73ffc9db0c5c1e510e450fe9fcd2ce937cd60ae"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-13-12.json",
+      "bytes": 726,
+      "sha256": "13351421b0217184d25d897884ff89ea39bc030c8c3379f8a578c26e962d9795"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-13-12.npz",
+      "bytes": 4600,
+      "sha256": "fc2533d4129cdb4700c2365c9898513c3297e42de76c12ab5eec382167e49689"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-14-10.json",
+      "bytes": 727,
+      "sha256": "29d4a7e79aa2733bcb9aac128c0b92e4a3deb9e8473b7e2da7b6606f57939ce3"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-14-10.npz",
+      "bytes": 84160,
+      "sha256": "4824b59508b41a4c18d6b00564b041159bbd9ced52637427fd71025f7a535730"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-14-11.json",
+      "bytes": 726,
+      "sha256": "cc5eb1734bfa92323d277cab84dbe831de4d93c8b775c9546bc912fca7691473"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-14-11.npz",
+      "bytes": 2486,
+      "sha256": "fe10c68e2c879e9fc7219623c37334a1fd6e87213a2512c647e513ddb99d90d9"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-18-09.json",
+      "bytes": 725,
+      "sha256": "3abf7a259869dc8a44d97d9bdf1bea29633136cea66530baec94a24a60a35762"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-18-09.npz",
+      "bytes": 54283,
+      "sha256": "b44f20f5817f0a4c9a4c428f710b35d3b7de9b311927b1f56d1aeb883c27b0ef"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-18-10.json",
+      "bytes": 726,
+      "sha256": "133122fa0f4fa07925149fe3b88fc82bc4454ac3c0ea571e3b4e7259fcb1385e"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-18-10.npz",
+      "bytes": 3145,
+      "sha256": "d14c80cb3bd050f47216d38775c61bf9ebe2ed3e8f6176026cb23f666e22e54f"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-19-09.json",
+      "bytes": 725,
+      "sha256": "7a8ce1728c06cde7f7a1a594d119a552654c573985ee82cb912ab3591eee0330"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-19-09.npz",
+      "bytes": 49263,
+      "sha256": "40df64a296d917f88eb21dfec993459e686fbffae9868b958e8314ae418ab925"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-19-10.json",
+      "bytes": 726,
+      "sha256": "19a49a859626af9558eeb4e8f594652b5d0bb39903d4e05392214117ecef109a"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-19-10.npz",
+      "bytes": 6124,
+      "sha256": "311f04a01dbac2dcea4c202dd04a9d5c6f509496d8286d4f48e8bd75ba8ecb8a"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-20-08.json",
+      "bytes": 726,
+      "sha256": "3f5c63999bc12284e99b9e8eb0d02f0b197c333ffecd1982ac84c90720ee7fc8"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-20-08.npz",
+      "bytes": 101373,
+      "sha256": "d41fd55fa89d43e86d7fc69f12c1e5146c5773a12a1ed845eb9a6837a1621d15"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-20-09.json",
+      "bytes": 725,
+      "sha256": "df331f41b7cfe7e96f18d854521d9b23b0a3d5f221f44f9ad2de8ec548da885e"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-20-09.npz",
+      "bytes": 15903,
+      "sha256": "330f5b8a3661e7f82fceaaf9262712546654f2df87323296d1cea048de37f2d5"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-22-08.json",
+      "bytes": 725,
+      "sha256": "d76cb8e2cabdd18017e85b190588beb4df7ca6e8e3f8840c6bec5d8172c17e1f"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-22-08.npz",
+      "bytes": 29932,
+      "sha256": "fbead080ccbbf2066ad55bc25814670e878ef011009340a94e9f943fe5ff74f4"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-24-07.json",
+      "bytes": 725,
+      "sha256": "b14324fd42c07f5dbf97c069ed5ea7303c1dba54223cb01dc2a66e92180a57c3"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-24-07.npz",
+      "bytes": 54683,
+      "sha256": "718a23b2d2700e4b87bd56f76f62bd3e93ddb4639b34f6f105223dd12abb5f96"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-24-08.json",
+      "bytes": 724,
+      "sha256": "9774f201452e18bee519e9ffe8c685cd243c9f2a7e5396fa738bd8cf6701b485"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-24-08.npz",
+      "bytes": 4357,
+      "sha256": "277890a21aec7b6de576bcd6031bf7bbfd05fddf807f7d2d64818edcb238d12d"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-25-08.json",
+      "bytes": 725,
+      "sha256": "5bf871e9c04be1962ba1770bdd2f5eed1339fd93681b76317dc909a56505908e"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-25-08.npz",
+      "bytes": 65532,
+      "sha256": "4e9d7b33081f85621186c85e8f5c53bc83da5545a91aee95b1d8496b02b16aad"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-25-09.json",
+      "bytes": 724,
+      "sha256": "1fdd32b23d9f9df9cdab54bd0b37b55ab558053a100f0365bf38a63b8f2bc64a"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-25-09.npz",
+      "bytes": 3522,
+      "sha256": "ba9a8bc4d2019a26466c74a85a82bcb2c6c5c87b531e23ec45e0dff3e33f7336"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-25-11.json",
+      "bytes": 726,
+      "sha256": "ce208c870d513e21aff277b66c77875ca3b5ff1df30b8c753c68691b5d187d5d"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-25-11.npz",
+      "bytes": 4011,
+      "sha256": "8858520895e8168b79915a8fe90dcf358f70d7623c548ec3fadb6ab6b47b5fa5"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-26-09.json",
+      "bytes": 725,
+      "sha256": "ea466033fd56542612d5b0680d2bb61f3d536d04a6c8ab88a50ba8e583de2d04"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-26-09.npz",
+      "bytes": 26847,
+      "sha256": "21b90f0947515de8b3f20578373334db8202e04f44cfe82122c21469ea1db441"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-29-10.json",
+      "bytes": 727,
+      "sha256": "076c6e1df0f46fd8a562dc0322248977ccb7feec83c012f8aa1154cf30be3273"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-29-10.npz",
+      "bytes": 70641,
+      "sha256": "96aa8324c8cfc105cfa564b5f6042b82e554b14a296051d663db04a3e1ad1e07"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-29-11.json",
+      "bytes": 726,
+      "sha256": "179899b7a8b7e7f304747e97a0003514f39931415a9734cfb5185205fa736d6d"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-29-11.npz",
+      "bytes": 5145,
+      "sha256": "89fa0eb778d21eb9af9f3d7c0efa11f245b485541160e80976afa0fe7ed58bbc"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-31-13.json",
+      "bytes": 726,
+      "sha256": "5e799c6f2d6e8c1d4178aa0634ea9f6f153091d3f01daee6b2a387f629db2056"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-31-13.npz",
+      "bytes": 2846,
+      "sha256": "4b62b7cd88b6731b7306ace73d262e5ef22e24cc9204da61109014f8af07d4d5"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-32-13.json",
+      "bytes": 727,
+      "sha256": "7752c550e7edc85576e83925990057401ead5530b087f5807841d84b3a2e244b"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-32-13.npz",
+      "bytes": 86538,
+      "sha256": "3301bda81b22ab233e228d073333635df8fab19824fae37d12e78796a3ba1893"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-32-14.json",
+      "bytes": 727,
+      "sha256": "3fd027a064e14c8ae9a2eb4e9078b1f48702b132705fc0d2f6c2ddeb8998852c"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-32-14.npz",
+      "bytes": 37777,
+      "sha256": "8e8230eb4b2b1e9054582080abb18855b2291e38bbfedce37465bf7d13a902b3"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-33-16.json",
+      "bytes": 726,
+      "sha256": "3d8bed76fb682e520c7c6c9b67a4e8ccec655c6bae9c97234a5cfdcf8fda8702"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-33-16.npz",
+      "bytes": 9051,
+      "sha256": "8b60ab5d3b6a23999ef56df1b7c2e96dc109daf0b84ce55790c4d450574ec001"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-33-17.json",
+      "bytes": 726,
+      "sha256": "a4b5bbc2c4dbcaedbe05db6056dc23a68cdf74604fba6f057039cfd069412925"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/new-block-33-17.npz",
+      "bytes": 3074,
+      "sha256": "f0292bfb8de7fed0778c43f6fa04453040cce0b1968ca204dd6f8cdfe9474a45"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/point-observations.jsonl",
+      "bytes": 2815768,
+      "sha256": "cd16ab02492ef48bb21e375607e380bb9013e312d4ccae4eb79431a4593f2d32"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/source.json",
+      "bytes": 3840,
+      "sha256": "497cbf192201f960d83dbe8f16ae9ca1386ba2708febcf19e74135f5aa6931a7"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N18E105/tile-complete.json",
+      "bytes": 12741,
+      "sha256": "3f464abdfbdc480e4f288213809a25a9eacf1bb2d4266d2a59162c2182f8f063"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-29-32.json",
+      "bytes": 729,
+      "sha256": "5113389fa5aa7a8b90975884ba7e0c82b65395889d6fa3fc2afe775d1ee96197"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-29-32.npz",
+      "bytes": 93862,
+      "sha256": "b75ea769c41181d7fd11b693d89691cc7b3276d2e286b155752e455f75a1d5fc"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-29-33.json",
+      "bytes": 729,
+      "sha256": "1ebf124e4b196ed70e79b8399b584e4c2a0133a5947c2f9c44f28f765ac7f8d3"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-29-33.npz",
+      "bytes": 34447,
+      "sha256": "5fcfb383279c4594f8a73841ac896117466a39969d3301f5b71b90f6bcf5ef74"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-29-34.json",
+      "bytes": 729,
+      "sha256": "7c82488d42f6f79688514ed2e5c21ee879384b5ebb3ba84bfd5ba52dc56d8a1e"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-29-34.npz",
+      "bytes": 88469,
+      "sha256": "72316ff23dfe97660dddba4b60617da71b66ac676aba05a18317e1d7df8a09b1"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-30-31.json",
+      "bytes": 729,
+      "sha256": "24a02f2bc3a5f95b2649b3de93f5b3d4c7aa142a9f8304b04db0a2130131eb19"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-30-31.npz",
+      "bytes": 68117,
+      "sha256": "c91f90f46e8989bfda8b2372b8f7ac59745006d01eceb4f1eea0d45902a50c0f"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-30-32.json",
+      "bytes": 729,
+      "sha256": "bb2382fc3a18dcce8bdef4bb5b96df4cb5053eb2003bcc0aa4edc0ed3e545792"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-30-32.npz",
+      "bytes": 28154,
+      "sha256": "d79d0773ad9f26f70ef3cb9d9a9eb4d4f11595c1eece48e3bfe724c8f403ec0a"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-30-33.json",
+      "bytes": 729,
+      "sha256": "df658010a017984b97dc7fa0acd7668525237b920749db54349bd377105b7c39"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-30-33.npz",
+      "bytes": 17283,
+      "sha256": "012145e67b1edf4d58af87b17d51f59721e57575c68ec65f5a1ebbb002a90ae1"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-30-34.json",
+      "bytes": 729,
+      "sha256": "0d01da145deb547ef4ce1e4d8edc4cccd12cbe6f91ffbe5fb5fd270dadee10cd"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-30-34.npz",
+      "bytes": 36874,
+      "sha256": "dd3012cb7ade8a971acdd3d6a5b22beecae890e84c57065778b347a12f7d92f9"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-30-35.json",
+      "bytes": 727,
+      "sha256": "c27871777d2c6cf5f4cac737d416a1b626dd516cd4f6c8c0771a653c9c5cee0a"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-30-35.npz",
+      "bytes": 1943,
+      "sha256": "e7d110074791c24352833c02233dcb53e925cb175f6aea9986592a5dbf538603"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-31-29.json",
+      "bytes": 729,
+      "sha256": "8c6dbba9b85131481cdef4b476c552bddbb5fa112b69be4088bc520773941572"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-31-29.npz",
+      "bytes": 75546,
+      "sha256": "b721f7a18747275e313555061916ce91b64d87a5515a8a09d1c197c4513c612d"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-31-30.json",
+      "bytes": 729,
+      "sha256": "42c6e25eb28904baba36529120e6b41c111e334eff4997a9a0b4a375a4dd7883"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-31-30.npz",
+      "bytes": 72683,
+      "sha256": "1e47c56b4dd0787cc044ac66735df99c1dd515c6716dbe2885e9ff2aee61c703"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-31-31.json",
+      "bytes": 728,
+      "sha256": "ec1b7646b3e4e56825fe977a9e3af596c2474aec8ed034c80dd5fd40b9c8c44b"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-31-31.npz",
+      "bytes": 8999,
+      "sha256": "8edb0f2e0f848c7fc25181cdc7600b41c13cd795f0be45aebcee1f588d06829d"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-31-32.json",
+      "bytes": 729,
+      "sha256": "b82ceeb45ee6e0819d8044bcb891820eed7d6972f91bb48f516d1a0f023bd9ac"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-31-32.npz",
+      "bytes": 17264,
+      "sha256": "a06f588cbf34dac5836fb8cbeae3e96b70510fdf4642a9ac310ff637068d7e95"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-31-33.json",
+      "bytes": 728,
+      "sha256": "208320685d3f25f21bbb6ade6ac99db2cc31084ad5a7d1b7a91cd418010194b6"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-31-33.npz",
+      "bytes": 5535,
+      "sha256": "a674de8173f4acab2bfd84df3df61bc3264db2acfbc076bc188876dcac4c769f"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-32-29.json",
+      "bytes": 729,
+      "sha256": "dfa67a6fd9a7e36784e8c6f219f609ef2bdfb64218aeb1d3628567826d0117f0"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-32-29.npz",
+      "bytes": 38878,
+      "sha256": "c61ea84dd88e598290150ea47bfbc0098394bb6fb3283d92c24761c61bbc72e2"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-32-30.json",
+      "bytes": 729,
+      "sha256": "693dd4a7e7b9fb7897aeb57a56d1c77c3509b6df48f4401a4d2831b86cccfc20"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-32-30.npz",
+      "bytes": 18174,
+      "sha256": "858df377b7156fc05d41a4aae0a7d11114874f23e381136381e5d9a903ba316a"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-32-31.json",
+      "bytes": 728,
+      "sha256": "eb9624f00dc285fbdcf30d823f09c6925373f89eda6eb2f48581f821ee68a939"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-32-31.npz",
+      "bytes": 5386,
+      "sha256": "f4677f7ac8366a7da68b083afd938cc49d8fdd73849886148906613f5163719b"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-34-27.json",
+      "bytes": 729,
+      "sha256": "1f7cf4019d29c18f34d3d4056a14862ad0cf36920428d961fbd4dd8a8bb3d4bd"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-34-27.npz",
+      "bytes": 84766,
+      "sha256": "817e9ee18d6c45f05c6900a2d2eaa0662517f5a19564ad8c82c5d3770d2ffa72"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-35-27.json",
+      "bytes": 728,
+      "sha256": "261512cf085946cc5c70679ef6e9f284a1e4f88d70682dae033e65a391d9285e"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/new-block-35-27.npz",
+      "bytes": 14600,
+      "sha256": "081bec67a8caedea7c7805a3dd241509cdefb70a36e2ba8fac44ddeb46980ebe"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/point-observations.jsonl",
+      "bytes": 3033270,
+      "sha256": "4f3fb5bd48032ef2a8d96d229b90742fbb17fab5b6bf985d6a3274da7e05712f"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/source.json",
+      "bytes": 3845,
+      "sha256": "48500facf9471e64dda4c85422f9a2e948d6d9f00d1324143762acfd339331e3"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E105/tile-complete.json",
+      "bytes": 8357,
+      "sha256": "a067f7e85c35fb63ecfe3fa8896876d4f22204279920f805a2a82df9e17e0453"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E108/new-block-28-00.json",
+      "bytes": 725,
+      "sha256": "b5597df6216fc20102d8c4f9716cdceaee37b6676d465d86076bc76a9bb5b10e"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E108/new-block-28-00.npz",
+      "bytes": 101301,
+      "sha256": "bfbde15210ea4f73f904d3e17c94f1e7101cd0667300dc31a51cd71226793c82"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E108/new-block-29-00.json",
+      "bytes": 724,
+      "sha256": "9eda8ceb584d8d14a4e6117c8d3289f9c8ce50777f41e5529ce087f1624d9e6d"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E108/new-block-29-00.npz",
+      "bytes": 40041,
+      "sha256": "aabef0bc83eecd82be3657d799b821447b0464cf54849a13bf69532e647f2ba7"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E108/new-block-29-01.json",
+      "bytes": 726,
+      "sha256": "9482cb5313551ec4c939bc34ad9b24af276db7222b0deacc97ba53bb96d4dcc5"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E108/new-block-29-01.npz",
+      "bytes": 6753,
+      "sha256": "6aac383669f52cedfb8e0168bac837ca6eb2dc9d94ba5abaa8c4151843351d76"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E108/point-observations.jsonl",
+      "bytes": 458882,
+      "sha256": "a65d8bf54659acc9d7aa787dab9a2f09c957cd30824cc8d1d2e091fe233d4fdf"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E108/source.json",
+      "bytes": 3884,
+      "sha256": "4dc76a48c4965ec6ffd3d7ddf5d7f54e53b854fbc5cc0817d85e079a122bb3ce"
+    },
+    {
+      "path": "bulk-completion/remaining8184-annual-source-001/tiles/N21E108/tile-complete.json",
+      "bytes": 1734,
+      "sha256": "7a31abb0d4ad408a183af377cabd64fb6c5d175749dc63a75bbddaccec4a9b4b"
+    }
+  ]
+}

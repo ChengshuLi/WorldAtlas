@@ -1,0 +1,5816 @@
+{
+  "scene_number_1based": 23,
+  "status": "completed-substantive-physical-interpretation-pending-root-adoption",
+  "item": "S2B_50PKQ_20200508_0_L2A",
+  "acquired": "2020-05-08T02:55:28.527000Z",
+  "owner": 48238,
+  "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+  "record_count": 51,
+  "counts": {
+    "unresolved": 30,
+    "water-location": 21
+  },
+  "source_observations": {
+    "path": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+    "bytes": 299638,
+    "sha256": "318677f9268c9a8d31d77dabd7c37db40628a0435bc8d87f429771f528b6d9b7"
+  },
+  "all_blocks_inspected": 4,
+  "frames_inspected": 12,
+  "attribution": "Copernicus Sentinel-2B2020 L2A via public Element84/AWS sentinel-cogs conversion; native10m RGB/NIR and20m SCL, processing baseline02.14; partial native windows, not whole remote COG authentication.",
+  "limits": [
+    "No remote reads, new raster/native producer, new classifier, pixel threshold or registration shift.",
+    "Water appearance retains the original source-relative location; it does not make a sovereignty, legal district-water or physical authority decision.",
+    "No annual persistence, tidal exposure, exact legal shore or whole150m-cell state is established.",
+    "Original dispute/foreign/reference and physical holds unchanged; rootadoption separate; repaircredit0."
+  ],
+  "unresolved_reason_counts": {
+    "cloud-edge-shadow": 12,
+    "reef-exposure-mixed": 18
+  },
+  "block_readings": [
+    {
+      "block": "block-06-09",
+      "point_count": 12,
+      "visual_reading": "Widespread separate cloud/shadow pairs cover parts of the frame. Six of12 southern-edge centres have cloud/edge/shadow visibility uncertainty;9619 and9622–9626 show wave-textured marine surface between them. SCL6 does not overrule visible cloud-edge/shadow problems.",
+      "images_viewed": [
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/block-06-09/rgb-native.png",
+          "bytes": 1799090,
+          "sha256": "2b4719d28dd6fc61c78a6dfc916ac655669f02421d3102aeee68bd018b48f757",
+          "viewed": true
+        },
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/block-06-09/nir-red-green-native.png",
+          "bytes": 1754038,
+          "sha256": "58dab8191fd1470db936d9f2e833a685bafbd5ba5d38d438db1a7415a37583e0",
+          "viewed": true
+        },
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/block-06-09/rgb-centres.png",
+          "bytes": 1802262,
+          "sha256": "4f9cfa8e6b57b3e78c542bcb34c2e911f605af2a42651d29492c282ce405ae95",
+          "viewed": true
+        }
+      ],
+      "raw_block_observations": {
+        "path": "products/S2B_50PKQ_20200508_0_L2A/block-06-09/block-observations.json",
+        "bytes": 75943,
+        "sha256": "ef661061b61e96a564984ca52529592845923a54be8971fe249b468cbe1fb499"
+      }
+    },
+    {
+      "block": "block-06-10",
+      "point_count": 2,
+      "visual_reading": "Both centres are unresolved for visibility:9615 lies on the northeastern cloud mass,9616 near the southern-left cloudy edge. Neither is accepted from the valid masks or the latter SCL6 label.",
+      "images_viewed": [
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/block-06-10/rgb-native.png",
+          "bytes": 1274956,
+          "sha256": "b29e4ddb50c9018c2d298d7e5ac23340b0c3d4e7fda610a4d45fb0e7dcf1a8ec",
+          "viewed": true
+        },
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/block-06-10/nir-red-green-native.png",
+          "bytes": 1241684,
+          "sha256": "9ba421cc06b6f99cfa6b82db8566211decfc705d93a1bc933d3ace33187891bc",
+          "viewed": true
+        },
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/block-06-10/rgb-centres.png",
+          "bytes": 1275763,
+          "sha256": "3f6a2474a795c600ab9edfebc90a9bff1660f09aa386dd6dafea2c703a8b1d8f",
+          "viewed": true
+        }
+      ],
+      "raw_block_observations": {
+        "path": "products/S2B_50PKQ_20200508_0_L2A/block-06-10/block-observations.json",
+        "bytes": 18564,
+        "sha256": "f67c65fad93b2ee30f73fca6520cb9100ab7f71216e2d1ce49db0a6f89e5f44d"
+      }
+    },
+    {
+      "block": "block-07-09",
+      "point_count": 36,
+      "visual_reading": "The marked chain runs from northern clouds/shadows onto the reef and then seaward.9630/9631/9634/9636 retain exact atmospheric visibility questions. Eighteen reef/inner-margin centres retain exposure/mixing questions. The remaining14 centres are visibly on marine surface, including9645 in blue lagoon context and9654/9657–9664 seaward.",
+      "images_viewed": [
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/block-07-09/rgb-native.png",
+          "bytes": 1735040,
+          "sha256": "77aed7bbcd54bf0a7f91d4be90e8d43cd7a8aefb2b2405a5b47e4fdb847617d3",
+          "viewed": true
+        },
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/block-07-09/nir-red-green-native.png",
+          "bytes": 1667467,
+          "sha256": "d8cb11851398e691d06ff21648af83f5b3a82ca074e6aae54ac0a66e863ff06d",
+          "viewed": true
+        },
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/block-07-09/rgb-centres.png",
+          "bytes": 1748817,
+          "sha256": "2f4836434233aa30cb11b78beb05bed3233757f44bdeebc3471e074c44975f5b",
+          "viewed": true
+        }
+      ],
+      "raw_block_observations": {
+        "path": "products/S2B_50PKQ_20200508_0_L2A/block-07-09/block-observations.json",
+        "bytes": 213648,
+        "sha256": "c8d597405b41763e0012c59fe401088390fb67a15bd5a44ca2f9bcd1d78b122c"
+      }
+    },
+    {
+      "block": "block-09-05",
+      "point_count": 1,
+      "visual_reading": "The only centre9665 lies northeast of the reef in continuous visible wave-textured water, between separate cloud/shadow pairs; no cloud or exposed reef covers the marked centre.",
+      "images_viewed": [
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/block-09-05/rgb-native.png",
+          "bytes": 1779951,
+          "sha256": "c053baa9d9a2a49c608d18bf28162eb4b3f88598d4e5aebd462a6cfba5c31c9d",
+          "viewed": true
+        },
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/block-09-05/nir-red-green-native.png",
+          "bytes": 1691198,
+          "sha256": "08415b897c74b9bdf741f5c8776527b606441c795fa563c48421d7a616592588",
+          "viewed": true
+        },
+        {
+          "path": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/block-09-05/rgb-centres.png",
+          "bytes": 1780552,
+          "sha256": "daa5e980b2608d22d32229287f28d1bc5083d3b3866ceaf7e18402084474506f",
+          "viewed": true
+        }
+      ],
+      "raw_block_observations": {
+        "path": "products/S2B_50PKQ_20200508_0_L2A/block-09-05/block-observations.json",
+        "bytes": 12763,
+        "sha256": "8c857ea66fc02a1d67c34cf38cf36170268d0d5edc0381b0a882f6ff9961d840"
+      }
+    }
+  ],
+  "records": [
+    {
+      "point_index": 9615,
+      "original_key": {
+        "owner": 48238,
+        "y": 124885,
+        "x": 215025
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.26780741972641,
+      "latitude": 8.47913648214732,
+      "input_scope_array_index": 23971,
+      "original_source_array_index": 39616,
+      "original_interval_index": 9475,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        6,
+        10
+      ],
+      "native_local_pixel": [
+        89,
+        694
+      ],
+      "source_pixels": {
+        "red": [
+          6232,
+          10933
+        ],
+        "green": [
+          6232,
+          10933
+        ],
+        "blue": [
+          6232,
+          10933
+        ],
+        "nir": [
+          6232,
+          10933
+        ],
+        "scl": [
+          3116,
+          5466
+        ]
+      },
+      "raw_centre_values": {
+        "red": 2304,
+        "green": 2286,
+        "blue": 2424,
+        "nir": 2072,
+        "scl": 8
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          8,
+          8
+        ],
+        [
+          8,
+          8,
+          6
+        ],
+        [
+          8,
+          8,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Cloud, diffuse cloud edge or associated shadow compromises exact-centre surface visibility; no land/water decision made from SCL alone.",
+      "unresolved_question": "What is the visible surface at this exact centre beneath/along the cloud or shadow? Need a clear co-registered dated observation.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9616,
+      "original_key": {
+        "owner": 48238,
+        "y": 124943,
+        "x": 214980
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.20601450989068,
+      "latitude": 8.400354779963754,
+      "input_scope_array_index": 24048,
+      "original_source_array_index": 39693,
+      "original_interval_index": 9500,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        6,
+        10
+      ],
+      "native_local_pixel": [
+        957,
+        10
+      ],
+      "source_pixels": {
+        "red": [
+          7100,
+          10249
+        ],
+        "green": [
+          7100,
+          10249
+        ],
+        "blue": [
+          7100,
+          10249
+        ],
+        "nir": [
+          7100,
+          10249
+        ],
+        "scl": [
+          3550,
+          5124
+        ]
+      },
+      "raw_centre_values": {
+        "red": 1009,
+        "green": 1104,
+        "blue": 1270,
+        "nir": 993,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Cloud, diffuse cloud edge or associated shadow compromises exact-centre surface visibility; no land/water decision made from SCL alone.",
+      "unresolved_question": "What is the visible surface at this exact centre beneath/along the cloud or shadow? Need a clear co-registered dated observation.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9617,
+      "original_key": {
+        "owner": 48238,
+        "y": 124944,
+        "x": 214978
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.20326815834244,
+      "latitude": 8.398996334026265,
+      "input_scope_array_index": 24049,
+      "original_source_array_index": 39694,
+      "original_interval_index": 9501,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        6,
+        9
+      ],
+      "native_local_pixel": [
+        972,
+        1003
+      ],
+      "source_pixels": {
+        "red": [
+          7115,
+          10218
+        ],
+        "green": [
+          7115,
+          10218
+        ],
+        "blue": [
+          7115,
+          10218
+        ],
+        "nir": [
+          7115,
+          10218
+        ],
+        "scl": [
+          3557,
+          5109
+        ]
+      },
+      "raw_centre_values": {
+        "red": 913,
+        "green": 894,
+        "blue": 966,
+        "nir": 814,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Cloud, diffuse cloud edge or associated shadow compromises exact-centre surface visibility; no land/water decision made from SCL alone.",
+      "unresolved_question": "What is the visible surface at this exact centre beneath/along the cloud or shadow? Need a clear co-registered dated observation.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9618,
+      "original_key": {
+        "owner": 48238,
+        "y": 124944,
+        "x": 214979
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.20464133411656,
+      "latitude": 8.398996334026265,
+      "input_scope_array_index": 24050,
+      "original_source_array_index": 39695,
+      "original_interval_index": 9501,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        6,
+        9
+      ],
+      "native_local_pixel": [
+        972,
+        1018
+      ],
+      "source_pixels": {
+        "red": [
+          7115,
+          10233
+        ],
+        "green": [
+          7115,
+          10233
+        ],
+        "blue": [
+          7115,
+          10233
+        ],
+        "nir": [
+          7115,
+          10233
+        ],
+        "scl": [
+          3557,
+          5116
+        ]
+      },
+      "raw_centre_values": {
+        "red": 3156,
+        "green": 3252,
+        "blue": 3474,
+        "nir": 2920,
+        "scl": 9
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          9,
+          9,
+          9
+        ],
+        [
+          9,
+          9,
+          9
+        ],
+        [
+          9,
+          9,
+          9
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Cloud, diffuse cloud edge or associated shadow compromises exact-centre surface visibility; no land/water decision made from SCL alone.",
+      "unresolved_question": "What is the visible surface at this exact centre beneath/along the cloud or shadow? Need a clear co-registered dated observation.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9619,
+      "original_key": {
+        "owner": 48238,
+        "y": 124945,
+        "x": 214976
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.20052180679414,
+      "latitude": 8.397637883333287,
+      "input_scope_array_index": 24051,
+      "original_source_array_index": 39696,
+      "original_interval_index": 9502,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        6,
+        9
+      ],
+      "native_local_pixel": [
+        987,
+        973
+      ],
+      "source_pixels": {
+        "red": [
+          7130,
+          10188
+        ],
+        "green": [
+          7130,
+          10188
+        ],
+        "blue": [
+          7130,
+          10188
+        ],
+        "nir": [
+          7130,
+          10188
+        ],
+        "scl": [
+          3565,
+          5094
+        ]
+      },
+      "raw_centre_values": {
+        "red": 532,
+        "green": 611,
+        "blue": 745,
+        "nir": 514,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre: native RGB/NIR and marker context show visible marine surface between nearby clouds/shadows or away from the reef.",
+      "unresolved_question": null,
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9620,
+      "original_key": {
+        "owner": 48238,
+        "y": 124945,
+        "x": 214977
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.20189498256826,
+      "latitude": 8.397637883333287,
+      "input_scope_array_index": 24052,
+      "original_source_array_index": 39697,
+      "original_interval_index": 9502,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        6,
+        9
+      ],
+      "native_local_pixel": [
+        987,
+        988
+      ],
+      "source_pixels": {
+        "red": [
+          7130,
+          10203
+        ],
+        "green": [
+          7130,
+          10203
+        ],
+        "blue": [
+          7130,
+          10203
+        ],
+        "nir": [
+          7130,
+          10203
+        ],
+        "scl": [
+          3565,
+          5101
+        ]
+      },
+      "raw_centre_values": {
+        "red": 80,
+        "green": 86,
+        "blue": 133,
+        "nir": 92,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Cloud, diffuse cloud edge or associated shadow compromises exact-centre surface visibility; no land/water decision made from SCL alone.",
+      "unresolved_question": "What is the visible surface at this exact centre beneath/along the cloud or shadow? Need a clear co-registered dated observation.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9621,
+      "original_key": {
+        "owner": 48238,
+        "y": 124945,
+        "x": 214978
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.20326815834244,
+      "latitude": 8.397637883333287,
+      "input_scope_array_index": 24053,
+      "original_source_array_index": 39698,
+      "original_interval_index": 9502,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        6,
+        9
+      ],
+      "native_local_pixel": [
+        987,
+        1003
+      ],
+      "source_pixels": {
+        "red": [
+          7130,
+          10218
+        ],
+        "green": [
+          7130,
+          10218
+        ],
+        "blue": [
+          7130,
+          10218
+        ],
+        "nir": [
+          7130,
+          10218
+        ],
+        "scl": [
+          3565,
+          5109
+        ]
+      },
+      "raw_centre_values": {
+        "red": 268,
+        "green": 292,
+        "blue": 350,
+        "nir": 254,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Cloud, diffuse cloud edge or associated shadow compromises exact-centre surface visibility; no land/water decision made from SCL alone.",
+      "unresolved_question": "What is the visible surface at this exact centre beneath/along the cloud or shadow? Need a clear co-registered dated observation.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9622,
+      "original_key": {
+        "owner": 48238,
+        "y": 124946,
+        "x": 214974
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.1977754552459,
+      "latitude": 8.396279427885576,
+      "input_scope_array_index": 24054,
+      "original_source_array_index": 39699,
+      "original_interval_index": 9503,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        6,
+        9
+      ],
+      "native_local_pixel": [
+        1002,
+        943
+      ],
+      "source_pixels": {
+        "red": [
+          7145,
+          10158
+        ],
+        "green": [
+          7145,
+          10158
+        ],
+        "blue": [
+          7145,
+          10158
+        ],
+        "nir": [
+          7145,
+          10158
+        ],
+        "scl": [
+          3572,
+          5079
+        ]
+      },
+      "raw_centre_values": {
+        "red": 566,
+        "green": 593,
+        "blue": 768,
+        "nir": 553,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre: native RGB/NIR and marker context show visible marine surface between nearby clouds/shadows or away from the reef.",
+      "unresolved_question": null,
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9623,
+      "original_key": {
+        "owner": 48238,
+        "y": 124946,
+        "x": 214975
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.19914863102002,
+      "latitude": 8.396279427885576,
+      "input_scope_array_index": 24055,
+      "original_source_array_index": 39700,
+      "original_interval_index": 9503,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        6,
+        9
+      ],
+      "native_local_pixel": [
+        1002,
+        958
+      ],
+      "source_pixels": {
+        "red": [
+          7145,
+          10173
+        ],
+        "green": [
+          7145,
+          10173
+        ],
+        "blue": [
+          7145,
+          10173
+        ],
+        "nir": [
+          7145,
+          10173
+        ],
+        "scl": [
+          3572,
+          5086
+        ]
+      },
+      "raw_centre_values": {
+        "red": 641,
+        "green": 664,
+        "blue": 806,
+        "nir": 633,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre: native RGB/NIR and marker context show visible marine surface between nearby clouds/shadows or away from the reef.",
+      "unresolved_question": null,
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9624,
+      "original_key": {
+        "owner": 48238,
+        "y": 124946,
+        "x": 214976
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.20052180679414,
+      "latitude": 8.396279427885576,
+      "input_scope_array_index": 24056,
+      "original_source_array_index": 39701,
+      "original_interval_index": 9503,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        6,
+        9
+      ],
+      "native_local_pixel": [
+        1002,
+        973
+      ],
+      "source_pixels": {
+        "red": [
+          7145,
+          10188
+        ],
+        "green": [
+          7145,
+          10188
+        ],
+        "blue": [
+          7145,
+          10188
+        ],
+        "nir": [
+          7145,
+          10188
+        ],
+        "scl": [
+          3572,
+          5094
+        ]
+      },
+      "raw_centre_values": {
+        "red": 546,
+        "green": 560,
+        "blue": 750,
+        "nir": 512,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre: native RGB/NIR and marker context show visible marine surface between nearby clouds/shadows or away from the reef.",
+      "unresolved_question": null,
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9625,
+      "original_key": {
+        "owner": 48238,
+        "y": 124947,
+        "x": 214972
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.19502910369766,
+      "latitude": 8.39492096768387,
+      "input_scope_array_index": 24057,
+      "original_source_array_index": 39702,
+      "original_interval_index": 9504,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        6,
+        9
+      ],
+      "native_local_pixel": [
+        1017,
+        912
+      ],
+      "source_pixels": {
+        "red": [
+          7160,
+          10127
+        ],
+        "green": [
+          7160,
+          10127
+        ],
+        "blue": [
+          7160,
+          10127
+        ],
+        "nir": [
+          7160,
+          10127
+        ],
+        "scl": [
+          3580,
+          5063
+        ]
+      },
+      "raw_centre_values": {
+        "red": 660,
+        "green": 648,
+        "blue": 825,
+        "nir": 600,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre: native RGB/NIR and marker context show visible marine surface between nearby clouds/shadows or away from the reef.",
+      "unresolved_question": null,
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9626,
+      "original_key": {
+        "owner": 48238,
+        "y": 124947,
+        "x": 214973
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.19640227947178,
+      "latitude": 8.39492096768387,
+      "input_scope_array_index": 24058,
+      "original_source_array_index": 39703,
+      "original_interval_index": 9504,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        6,
+        9
+      ],
+      "native_local_pixel": [
+        1017,
+        927
+      ],
+      "source_pixels": {
+        "red": [
+          7160,
+          10142
+        ],
+        "green": [
+          7160,
+          10142
+        ],
+        "blue": [
+          7160,
+          10142
+        ],
+        "nir": [
+          7160,
+          10142
+        ],
+        "scl": [
+          3580,
+          5071
+        ]
+      },
+      "raw_centre_values": {
+        "red": 635,
+        "green": 655,
+        "blue": 810,
+        "nir": 606,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre: native RGB/NIR and marker context show visible marine surface between nearby clouds/shadows or away from the reef.",
+      "unresolved_question": null,
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9627,
+      "original_key": {
+        "owner": 48238,
+        "y": 124947,
+        "x": 214974
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.1977754552459,
+      "latitude": 8.39492096768387,
+      "input_scope_array_index": 24059,
+      "original_source_array_index": 39704,
+      "original_interval_index": 9504,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        6,
+        9
+      ],
+      "native_local_pixel": [
+        1017,
+        943
+      ],
+      "source_pixels": {
+        "red": [
+          7160,
+          10158
+        ],
+        "green": [
+          7160,
+          10158
+        ],
+        "blue": [
+          7160,
+          10158
+        ],
+        "nir": [
+          7160,
+          10158
+        ],
+        "scl": [
+          3580,
+          5079
+        ]
+      },
+      "raw_centre_values": {
+        "red": 1160,
+        "green": 1298,
+        "blue": 1428,
+        "nir": 1176,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Cloud, diffuse cloud edge or associated shadow compromises exact-centre surface visibility; no land/water decision made from SCL alone.",
+      "unresolved_question": "What is the visible surface at this exact centre beneath/along the cloud or shadow? Need a clear co-registered dated observation.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9628,
+      "original_key": {
+        "owner": 48238,
+        "y": 124947,
+        "x": 214975
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.19914863102002,
+      "latitude": 8.39492096768387,
+      "input_scope_array_index": 24060,
+      "original_source_array_index": 39705,
+      "original_interval_index": 9504,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        6,
+        9
+      ],
+      "native_local_pixel": [
+        1017,
+        958
+      ],
+      "source_pixels": {
+        "red": [
+          7160,
+          10173
+        ],
+        "green": [
+          7160,
+          10173
+        ],
+        "blue": [
+          7160,
+          10173
+        ],
+        "nir": [
+          7160,
+          10173
+        ],
+        "scl": [
+          3580,
+          5086
+        ]
+      },
+      "raw_centre_values": {
+        "red": 1692,
+        "green": 1744,
+        "blue": 1848,
+        "nir": 1570,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Cloud, diffuse cloud edge or associated shadow compromises exact-centre surface visibility; no land/water decision made from SCL alone.",
+      "unresolved_question": "What is the visible surface at this exact centre beneath/along the cloud or shadow? Need a clear co-registered dated observation.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9629,
+      "original_key": {
+        "owner": 48238,
+        "y": 124948,
+        "x": 214972
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.19502910369766,
+      "latitude": 8.393562502728923,
+      "input_scope_array_index": 24061,
+      "original_source_array_index": 39706,
+      "original_interval_index": 9505,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        8,
+        912
+      ],
+      "source_pixels": {
+        "red": [
+          7175,
+          10127
+        ],
+        "green": [
+          7175,
+          10127
+        ],
+        "blue": [
+          7175,
+          10127
+        ],
+        "nir": [
+          7175,
+          10127
+        ],
+        "scl": [
+          3587,
+          5063
+        ]
+      },
+      "raw_centre_values": {
+        "red": 523,
+        "green": 548,
+        "blue": 723,
+        "nir": 520,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre: native RGB/NIR and marker context show visible marine surface between nearby clouds/shadows or away from the reef.",
+      "unresolved_question": null,
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9630,
+      "original_key": {
+        "owner": 48238,
+        "y": 124948,
+        "x": 214973
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.19640227947178,
+      "latitude": 8.393562502728923,
+      "input_scope_array_index": 24062,
+      "original_source_array_index": 39707,
+      "original_interval_index": 9505,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        8,
+        927
+      ],
+      "source_pixels": {
+        "red": [
+          7175,
+          10142
+        ],
+        "green": [
+          7175,
+          10142
+        ],
+        "blue": [
+          7175,
+          10142
+        ],
+        "nir": [
+          7175,
+          10142
+        ],
+        "scl": [
+          3587,
+          5071
+        ]
+      },
+      "raw_centre_values": {
+        "red": 617,
+        "green": 747,
+        "blue": 970,
+        "nir": 777,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          8
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Cloud, diffuse cloud edge or associated shadow compromises exact-centre surface visibility; no land/water decision made from SCL alone.",
+      "unresolved_question": "What is the visible surface at this exact centre beneath/along the cloud or shadow? Need a clear co-registered dated observation.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9631,
+      "original_key": {
+        "owner": 48238,
+        "y": 124948,
+        "x": 214974
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.1977754552459,
+      "latitude": 8.393562502728923,
+      "input_scope_array_index": 24063,
+      "original_source_array_index": 39708,
+      "original_interval_index": 9505,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        8,
+        942
+      ],
+      "source_pixels": {
+        "red": [
+          7175,
+          10157
+        ],
+        "green": [
+          7175,
+          10157
+        ],
+        "blue": [
+          7175,
+          10157
+        ],
+        "nir": [
+          7175,
+          10157
+        ],
+        "scl": [
+          3587,
+          5078
+        ]
+      },
+      "raw_centre_values": {
+        "red": 1120,
+        "green": 1094,
+        "blue": 1218,
+        "nir": 1072,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Cloud, diffuse cloud edge or associated shadow compromises exact-centre surface visibility; no land/water decision made from SCL alone.",
+      "unresolved_question": "What is the visible surface at this exact centre beneath/along the cloud or shadow? Need a clear co-registered dated observation.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9632,
+      "original_key": {
+        "owner": 48238,
+        "y": 124949,
+        "x": 214971
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.19365592792349,
+      "latitude": 8.392204033021473,
+      "input_scope_array_index": 24064,
+      "original_source_array_index": 39709,
+      "original_interval_index": 9506,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        23,
+        897
+      ],
+      "source_pixels": {
+        "red": [
+          7190,
+          10112
+        ],
+        "green": [
+          7190,
+          10112
+        ],
+        "blue": [
+          7190,
+          10112
+        ],
+        "nir": [
+          7190,
+          10112
+        ],
+        "scl": [
+          3595,
+          5056
+        ]
+      },
+      "raw_centre_values": {
+        "red": 557,
+        "green": 598,
+        "blue": 816,
+        "nir": 583,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre: native RGB/NIR and marker context show visible marine surface between nearby clouds/shadows or away from the reef.",
+      "unresolved_question": null,
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9633,
+      "original_key": {
+        "owner": 48238,
+        "y": 124949,
+        "x": 214972
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.19502910369766,
+      "latitude": 8.392204033021473,
+      "input_scope_array_index": 24065,
+      "original_source_array_index": 39710,
+      "original_interval_index": 9506,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        23,
+        912
+      ],
+      "source_pixels": {
+        "red": [
+          7190,
+          10127
+        ],
+        "green": [
+          7190,
+          10127
+        ],
+        "blue": [
+          7190,
+          10127
+        ],
+        "nir": [
+          7190,
+          10127
+        ],
+        "scl": [
+          3595,
+          5063
+        ]
+      },
+      "raw_centre_values": {
+        "red": 527,
+        "green": 558,
+        "blue": 646,
+        "nir": 520,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre: native RGB/NIR and marker context show visible marine surface between nearby clouds/shadows or away from the reef.",
+      "unresolved_question": null,
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9634,
+      "original_key": {
+        "owner": 48238,
+        "y": 124949,
+        "x": 214973
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.19640227947178,
+      "latitude": 8.392204033021473,
+      "input_scope_array_index": 24066,
+      "original_source_array_index": 39711,
+      "original_interval_index": 9506,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        23,
+        927
+      ],
+      "source_pixels": {
+        "red": [
+          7190,
+          10142
+        ],
+        "green": [
+          7190,
+          10142
+        ],
+        "blue": [
+          7190,
+          10142
+        ],
+        "nir": [
+          7190,
+          10142
+        ],
+        "scl": [
+          3595,
+          5071
+        ]
+      },
+      "raw_centre_values": {
+        "red": 81,
+        "green": 22,
+        "blue": 69,
+        "nir": 76,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Cloud, diffuse cloud edge or associated shadow compromises exact-centre surface visibility; no land/water decision made from SCL alone.",
+      "unresolved_question": "What is the visible surface at this exact centre beneath/along the cloud or shadow? Need a clear co-registered dated observation.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9635,
+      "original_key": {
+        "owner": 48238,
+        "y": 124950,
+        "x": 214970
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.19228275214937,
+      "latitude": 8.390845558562274,
+      "input_scope_array_index": 24067,
+      "original_source_array_index": 39712,
+      "original_interval_index": 9507,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        38,
+        882
+      ],
+      "source_pixels": {
+        "red": [
+          7205,
+          10097
+        ],
+        "green": [
+          7205,
+          10097
+        ],
+        "blue": [
+          7205,
+          10097
+        ],
+        "nir": [
+          7205,
+          10097
+        ],
+        "scl": [
+          3602,
+          5048
+        ]
+      },
+      "raw_centre_values": {
+        "red": 543,
+        "green": 643,
+        "blue": 720,
+        "nir": 509,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre: native RGB/NIR and marker context show visible marine surface between nearby clouds/shadows or away from the reef.",
+      "unresolved_question": null,
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9636,
+      "original_key": {
+        "owner": 48238,
+        "y": 124950,
+        "x": 214971
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.19365592792349,
+      "latitude": 8.390845558562274,
+      "input_scope_array_index": 24068,
+      "original_source_array_index": 39713,
+      "original_interval_index": 9507,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        38,
+        897
+      ],
+      "source_pixels": {
+        "red": [
+          7205,
+          10112
+        ],
+        "green": [
+          7205,
+          10112
+        ],
+        "blue": [
+          7205,
+          10112
+        ],
+        "nir": [
+          7205,
+          10112
+        ],
+        "scl": [
+          3602,
+          5056
+        ]
+      },
+      "raw_centre_values": {
+        "red": 2062,
+        "green": 2230,
+        "blue": 2358,
+        "nir": 1888,
+        "scl": 8
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          8,
+          8,
+          6
+        ],
+        [
+          8,
+          8,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Cloud, diffuse cloud edge or associated shadow compromises exact-centre surface visibility; no land/water decision made from SCL alone.",
+      "unresolved_question": "What is the visible surface at this exact centre beneath/along the cloud or shadow? Need a clear co-registered dated observation.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9637,
+      "original_key": {
+        "owner": 48238,
+        "y": 124951,
+        "x": 214969
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.19090957637525,
+      "latitude": 8.389487079352076,
+      "input_scope_array_index": 24069,
+      "original_source_array_index": 39714,
+      "original_interval_index": 9508,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        53,
+        867
+      ],
+      "source_pixels": {
+        "red": [
+          7220,
+          10082
+        ],
+        "green": [
+          7220,
+          10082
+        ],
+        "blue": [
+          7220,
+          10082
+        ],
+        "nir": [
+          7220,
+          10082
+        ],
+        "scl": [
+          3610,
+          5041
+        ]
+      },
+      "raw_centre_values": {
+        "red": 894,
+        "green": 1246,
+        "blue": 1010,
+        "nir": 609,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Exact centre encounters variegated shallow reef or inner/outer reef margin; cloud-rich context and native10m mixing do not securely establish emergence.",
+      "unresolved_question": "Is the exact centre submerged, exposed reef or mixed at acquisition? Need finer co-registered exposure evidence.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9638,
+      "original_key": {
+        "owner": 48238,
+        "y": 124951,
+        "x": 214970
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.19228275214937,
+      "latitude": 8.389487079352076,
+      "input_scope_array_index": 24070,
+      "original_source_array_index": 39715,
+      "original_interval_index": 9508,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        53,
+        882
+      ],
+      "source_pixels": {
+        "red": [
+          7220,
+          10097
+        ],
+        "green": [
+          7220,
+          10097
+        ],
+        "blue": [
+          7220,
+          10097
+        ],
+        "nir": [
+          7220,
+          10097
+        ],
+        "scl": [
+          3610,
+          5048
+        ]
+      },
+      "raw_centre_values": {
+        "red": 513,
+        "green": 866,
+        "blue": 619,
+        "nir": 299,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Exact centre encounters variegated shallow reef or inner/outer reef margin; cloud-rich context and native10m mixing do not securely establish emergence.",
+      "unresolved_question": "Is the exact centre submerged, exposed reef or mixed at acquisition? Need finer co-registered exposure evidence.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9639,
+      "original_key": {
+        "owner": 48238,
+        "y": 124952,
+        "x": 214968
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.18953640060113,
+      "latitude": 8.388128595391619,
+      "input_scope_array_index": 24071,
+      "original_source_array_index": 39716,
+      "original_interval_index": 9509,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        68,
+        851
+      ],
+      "source_pixels": {
+        "red": [
+          7235,
+          10066
+        ],
+        "green": [
+          7235,
+          10066
+        ],
+        "blue": [
+          7235,
+          10066
+        ],
+        "nir": [
+          7235,
+          10066
+        ],
+        "scl": [
+          3617,
+          5033
+        ]
+      },
+      "raw_centre_values": {
+        "red": 995,
+        "green": 1678,
+        "blue": 1406,
+        "nir": 505,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Exact centre encounters variegated shallow reef or inner/outer reef margin; cloud-rich context and native10m mixing do not securely establish emergence.",
+      "unresolved_question": "Is the exact centre submerged, exposed reef or mixed at acquisition? Need finer co-registered exposure evidence.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9640,
+      "original_key": {
+        "owner": 48238,
+        "y": 124952,
+        "x": 214969
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.19090957637525,
+      "latitude": 8.388128595391619,
+      "input_scope_array_index": 24072,
+      "original_source_array_index": 39717,
+      "original_interval_index": 9509,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        68,
+        867
+      ],
+      "source_pixels": {
+        "red": [
+          7235,
+          10082
+        ],
+        "green": [
+          7235,
+          10082
+        ],
+        "blue": [
+          7235,
+          10082
+        ],
+        "nir": [
+          7235,
+          10082
+        ],
+        "scl": [
+          3617,
+          5041
+        ]
+      },
+      "raw_centre_values": {
+        "red": 1014,
+        "green": 1606,
+        "blue": 1346,
+        "nir": 573,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Exact centre encounters variegated shallow reef or inner/outer reef margin; cloud-rich context and native10m mixing do not securely establish emergence.",
+      "unresolved_question": "Is the exact centre submerged, exposed reef or mixed at acquisition? Need finer co-registered exposure evidence.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9641,
+      "original_key": {
+        "owner": 48238,
+        "y": 124953,
+        "x": 214967
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.18816322482701,
+      "latitude": 8.386770106681652,
+      "input_scope_array_index": 24073,
+      "original_source_array_index": 39718,
+      "original_interval_index": 9510,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        83,
+        836
+      ],
+      "source_pixels": {
+        "red": [
+          7250,
+          10051
+        ],
+        "green": [
+          7250,
+          10051
+        ],
+        "blue": [
+          7250,
+          10051
+        ],
+        "nir": [
+          7250,
+          10051
+        ],
+        "scl": [
+          3625,
+          5025
+        ]
+      },
+      "raw_centre_values": {
+        "red": 723,
+        "green": 1086,
+        "blue": 834,
+        "nir": 487,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Exact centre encounters variegated shallow reef or inner/outer reef margin; cloud-rich context and native10m mixing do not securely establish emergence.",
+      "unresolved_question": "Is the exact centre submerged, exposed reef or mixed at acquisition? Need finer co-registered exposure evidence.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9642,
+      "original_key": {
+        "owner": 48238,
+        "y": 124953,
+        "x": 214968
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.18953640060113,
+      "latitude": 8.386770106681652,
+      "input_scope_array_index": 24074,
+      "original_source_array_index": 39719,
+      "original_interval_index": 9510,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        83,
+        851
+      ],
+      "source_pixels": {
+        "red": [
+          7250,
+          10066
+        ],
+        "green": [
+          7250,
+          10066
+        ],
+        "blue": [
+          7250,
+          10066
+        ],
+        "nir": [
+          7250,
+          10066
+        ],
+        "scl": [
+          3625,
+          5033
+        ]
+      },
+      "raw_centre_values": {
+        "red": 812,
+        "green": 1194,
+        "blue": 935,
+        "nir": 547,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Exact centre encounters variegated shallow reef or inner/outer reef margin; cloud-rich context and native10m mixing do not securely establish emergence.",
+      "unresolved_question": "Is the exact centre submerged, exposed reef or mixed at acquisition? Need finer co-registered exposure evidence.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9643,
+      "original_key": {
+        "owner": 48238,
+        "y": 124954,
+        "x": 214966
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.18679004905289,
+      "latitude": 8.38541161322292,
+      "input_scope_array_index": 24075,
+      "original_source_array_index": 39720,
+      "original_interval_index": 9511,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        98,
+        821
+      ],
+      "source_pixels": {
+        "red": [
+          7265,
+          10036
+        ],
+        "green": [
+          7265,
+          10036
+        ],
+        "blue": [
+          7265,
+          10036
+        ],
+        "nir": [
+          7265,
+          10036
+        ],
+        "scl": [
+          3632,
+          5018
+        ]
+      },
+      "raw_centre_values": {
+        "red": 816,
+        "green": 1382,
+        "blue": 1082,
+        "nir": 504,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Exact centre encounters variegated shallow reef or inner/outer reef margin; cloud-rich context and native10m mixing do not securely establish emergence.",
+      "unresolved_question": "Is the exact centre submerged, exposed reef or mixed at acquisition? Need finer co-registered exposure evidence.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9644,
+      "original_key": {
+        "owner": 48238,
+        "y": 124955,
+        "x": 214965
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.18541687327877,
+      "latitude": 8.38405311501618,
+      "input_scope_array_index": 24076,
+      "original_source_array_index": 39721,
+      "original_interval_index": 9512,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        113,
+        806
+      ],
+      "source_pixels": {
+        "red": [
+          7280,
+          10021
+        ],
+        "green": [
+          7280,
+          10021
+        ],
+        "blue": [
+          7280,
+          10021
+        ],
+        "nir": [
+          7280,
+          10021
+        ],
+        "scl": [
+          3640,
+          5010
+        ]
+      },
+      "raw_centre_values": {
+        "red": 872,
+        "green": 2330,
+        "blue": 2068,
+        "nir": 301,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Exact centre encounters variegated shallow reef or inner/outer reef margin; cloud-rich context and native10m mixing do not securely establish emergence.",
+      "unresolved_question": "Is the exact centre submerged, exposed reef or mixed at acquisition? Need finer co-registered exposure evidence.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9645,
+      "original_key": {
+        "owner": 48238,
+        "y": 124962,
+        "x": 214964
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.18404369750465,
+      "latitude": 8.374543494687314,
+      "input_scope_array_index": 24077,
+      "original_source_array_index": 39722,
+      "original_interval_index": 9513,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        218,
+        790
+      ],
+      "source_pixels": {
+        "red": [
+          7385,
+          10005
+        ],
+        "green": [
+          7385,
+          10005
+        ],
+        "blue": [
+          7385,
+          10005
+        ],
+        "nir": [
+          7385,
+          10005
+        ],
+        "scl": [
+          3692,
+          5002
+        ]
+      },
+      "raw_centre_values": {
+        "red": 482,
+        "green": 1132,
+        "blue": 1406,
+        "nir": 504,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre: native RGB/NIR and marker context show visible marine surface between nearby clouds/shadows or away from the reef.",
+      "unresolved_question": null,
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9646,
+      "original_key": {
+        "owner": 48238,
+        "y": 124963,
+        "x": 214964
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.18404369750465,
+      "latitude": 8.37318495852335,
+      "input_scope_array_index": 24078,
+      "original_source_array_index": 39723,
+      "original_interval_index": 9514,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        233,
+        790
+      ],
+      "source_pixels": {
+        "red": [
+          7400,
+          10005
+        ],
+        "green": [
+          7400,
+          10005
+        ],
+        "blue": [
+          7400,
+          10005
+        ],
+        "nir": [
+          7400,
+          10005
+        ],
+        "scl": [
+          3700,
+          5002
+        ]
+      },
+      "raw_centre_values": {
+        "red": 713,
+        "green": 1622,
+        "blue": 2014,
+        "nir": 676,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Exact centre encounters variegated shallow reef or inner/outer reef margin; cloud-rich context and native10m mixing do not securely establish emergence.",
+      "unresolved_question": "Is the exact centre submerged, exposed reef or mixed at acquisition? Need finer co-registered exposure evidence.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9647,
+      "original_key": {
+        "owner": 48238,
+        "y": 124964,
+        "x": 214964
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.18404369750465,
+      "latitude": 8.371826417618095,
+      "input_scope_array_index": 24079,
+      "original_source_array_index": 39724,
+      "original_interval_index": 9515,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        248,
+        790
+      ],
+      "source_pixels": {
+        "red": [
+          7415,
+          10005
+        ],
+        "green": [
+          7415,
+          10005
+        ],
+        "blue": [
+          7415,
+          10005
+        ],
+        "nir": [
+          7415,
+          10005
+        ],
+        "scl": [
+          3707,
+          5002
+        ]
+      },
+      "raw_centre_values": {
+        "red": 929,
+        "green": 1554,
+        "blue": 1416,
+        "nir": 708,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Exact centre encounters variegated shallow reef or inner/outer reef margin; cloud-rich context and native10m mixing do not securely establish emergence.",
+      "unresolved_question": "Is the exact centre submerged, exposed reef or mixed at acquisition? Need finer co-registered exposure evidence.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9648,
+      "original_key": {
+        "owner": 48238,
+        "y": 124965,
+        "x": 214964
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.18404369750465,
+      "latitude": 8.370467871972314,
+      "input_scope_array_index": 24080,
+      "original_source_array_index": 39725,
+      "original_interval_index": 9516,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        263,
+        790
+      ],
+      "source_pixels": {
+        "red": [
+          7430,
+          10005
+        ],
+        "green": [
+          7430,
+          10005
+        ],
+        "blue": [
+          7430,
+          10005
+        ],
+        "nir": [
+          7430,
+          10005
+        ],
+        "scl": [
+          3715,
+          5002
+        ]
+      },
+      "raw_centre_values": {
+        "red": 1040,
+        "green": 2820,
+        "blue": 2856,
+        "nir": 750,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Exact centre encounters variegated shallow reef or inner/outer reef margin; cloud-rich context and native10m mixing do not securely establish emergence.",
+      "unresolved_question": "Is the exact centre submerged, exposed reef or mixed at acquisition? Need finer co-registered exposure evidence.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9649,
+      "original_key": {
+        "owner": 48238,
+        "y": 124966,
+        "x": 214964
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.18404369750465,
+      "latitude": 8.369109321586716,
+      "input_scope_array_index": 24081,
+      "original_source_array_index": 39726,
+      "original_interval_index": 9517,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        278,
+        790
+      ],
+      "source_pixels": {
+        "red": [
+          7445,
+          10005
+        ],
+        "green": [
+          7445,
+          10005
+        ],
+        "blue": [
+          7445,
+          10005
+        ],
+        "nir": [
+          7445,
+          10005
+        ],
+        "scl": [
+          3722,
+          5002
+        ]
+      },
+      "raw_centre_values": {
+        "red": 935,
+        "green": 1422,
+        "blue": 1158,
+        "nir": 555,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Exact centre encounters variegated shallow reef or inner/outer reef margin; cloud-rich context and native10m mixing do not securely establish emergence.",
+      "unresolved_question": "Is the exact centre submerged, exposed reef or mixed at acquisition? Need finer co-registered exposure evidence.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9650,
+      "original_key": {
+        "owner": 48238,
+        "y": 124967,
+        "x": 214964
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.18404369750465,
+      "latitude": 8.367750766462073,
+      "input_scope_array_index": 24082,
+      "original_source_array_index": 39727,
+      "original_interval_index": 9518,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        293,
+        790
+      ],
+      "source_pixels": {
+        "red": [
+          7460,
+          10005
+        ],
+        "green": [
+          7460,
+          10005
+        ],
+        "blue": [
+          7460,
+          10005
+        ],
+        "nir": [
+          7460,
+          10005
+        ],
+        "scl": [
+          3730,
+          5002
+        ]
+      },
+      "raw_centre_values": {
+        "red": 1056,
+        "green": 1998,
+        "blue": 1720,
+        "nir": 560,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Exact centre encounters variegated shallow reef or inner/outer reef margin; cloud-rich context and native10m mixing do not securely establish emergence.",
+      "unresolved_question": "Is the exact centre submerged, exposed reef or mixed at acquisition? Need finer co-registered exposure evidence.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9651,
+      "original_key": {
+        "owner": 48238,
+        "y": 124967,
+        "x": 214965
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.18541687327877,
+      "latitude": 8.367750766462073,
+      "input_scope_array_index": 24083,
+      "original_source_array_index": 39728,
+      "original_interval_index": 9518,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        293,
+        805
+      ],
+      "source_pixels": {
+        "red": [
+          7460,
+          10020
+        ],
+        "green": [
+          7460,
+          10020
+        ],
+        "blue": [
+          7460,
+          10020
+        ],
+        "nir": [
+          7460,
+          10020
+        ],
+        "scl": [
+          3730,
+          5010
+        ]
+      },
+      "raw_centre_values": {
+        "red": 792,
+        "green": 1166,
+        "blue": 932,
+        "nir": 554,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Exact centre encounters variegated shallow reef or inner/outer reef margin; cloud-rich context and native10m mixing do not securely establish emergence.",
+      "unresolved_question": "Is the exact centre submerged, exposed reef or mixed at acquisition? Need finer co-registered exposure evidence.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9652,
+      "original_key": {
+        "owner": 48238,
+        "y": 124968,
+        "x": 214964
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.18404369750465,
+      "latitude": 8.36639220659913,
+      "input_scope_array_index": 24084,
+      "original_source_array_index": 39729,
+      "original_interval_index": 9519,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        308,
+        790
+      ],
+      "source_pixels": {
+        "red": [
+          7475,
+          10005
+        ],
+        "green": [
+          7475,
+          10005
+        ],
+        "blue": [
+          7475,
+          10005
+        ],
+        "nir": [
+          7475,
+          10005
+        ],
+        "scl": [
+          3737,
+          5002
+        ]
+      },
+      "raw_centre_values": {
+        "red": 975,
+        "green": 1644,
+        "blue": 1504,
+        "nir": 749,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Exact centre encounters variegated shallow reef or inner/outer reef margin; cloud-rich context and native10m mixing do not securely establish emergence.",
+      "unresolved_question": "Is the exact centre submerged, exposed reef or mixed at acquisition? Need finer co-registered exposure evidence.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9653,
+      "original_key": {
+        "owner": 48238,
+        "y": 124968,
+        "x": 214965
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.18541687327877,
+      "latitude": 8.36639220659913,
+      "input_scope_array_index": 24085,
+      "original_source_array_index": 39730,
+      "original_interval_index": 9519,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        308,
+        805
+      ],
+      "source_pixels": {
+        "red": [
+          7475,
+          10020
+        ],
+        "green": [
+          7475,
+          10020
+        ],
+        "blue": [
+          7475,
+          10020
+        ],
+        "nir": [
+          7475,
+          10020
+        ],
+        "scl": [
+          3737,
+          5010
+        ]
+      },
+      "raw_centre_values": {
+        "red": 960,
+        "green": 1864,
+        "blue": 1578,
+        "nir": 503,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Exact centre encounters variegated shallow reef or inner/outer reef margin; cloud-rich context and native10m mixing do not securely establish emergence.",
+      "unresolved_question": "Is the exact centre submerged, exposed reef or mixed at acquisition? Need finer co-registered exposure evidence.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9654,
+      "original_key": {
+        "owner": 48238,
+        "y": 124969,
+        "x": 214964
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.18404369750465,
+      "latitude": 8.365033641998629,
+      "input_scope_array_index": 24086,
+      "original_source_array_index": 39731,
+      "original_interval_index": 9520,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        323,
+        790
+      ],
+      "source_pixels": {
+        "red": [
+          7490,
+          10005
+        ],
+        "green": [
+          7490,
+          10005
+        ],
+        "blue": [
+          7490,
+          10005
+        ],
+        "nir": [
+          7490,
+          10005
+        ],
+        "scl": [
+          3745,
+          5002
+        ]
+      },
+      "raw_centre_values": {
+        "red": 505,
+        "green": 500,
+        "blue": 615,
+        "nir": 485,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre: native RGB/NIR and marker context show visible marine surface between nearby clouds/shadows or away from the reef.",
+      "unresolved_question": null,
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9655,
+      "original_key": {
+        "owner": 48238,
+        "y": 124969,
+        "x": 214965
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.18541687327877,
+      "latitude": 8.365033641998629,
+      "input_scope_array_index": 24087,
+      "original_source_array_index": 39732,
+      "original_interval_index": 9520,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        323,
+        805
+      ],
+      "source_pixels": {
+        "red": [
+          7490,
+          10020
+        ],
+        "green": [
+          7490,
+          10020
+        ],
+        "blue": [
+          7490,
+          10020
+        ],
+        "nir": [
+          7490,
+          10020
+        ],
+        "scl": [
+          3745,
+          5010
+        ]
+      },
+      "raw_centre_values": {
+        "red": 1015,
+        "green": 2032,
+        "blue": 1732,
+        "nir": 500,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Exact centre encounters variegated shallow reef or inner/outer reef margin; cloud-rich context and native10m mixing do not securely establish emergence.",
+      "unresolved_question": "Is the exact centre submerged, exposed reef or mixed at acquisition? Need finer co-registered exposure evidence.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9656,
+      "original_key": {
+        "owner": 48238,
+        "y": 124970,
+        "x": 214965
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.18541687327877,
+      "latitude": 8.363675072661323,
+      "input_scope_array_index": 24088,
+      "original_source_array_index": 39733,
+      "original_interval_index": 9521,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        338,
+        805
+      ],
+      "source_pixels": {
+        "red": [
+          7505,
+          10020
+        ],
+        "green": [
+          7505,
+          10020
+        ],
+        "blue": [
+          7505,
+          10020
+        ],
+        "nir": [
+          7505,
+          10020
+        ],
+        "scl": [
+          3752,
+          5010
+        ]
+      },
+      "raw_centre_values": {
+        "red": 916,
+        "green": 1132,
+        "blue": 1234,
+        "nir": 852,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "unresolved",
+      "physical_class": null,
+      "finding": "Exact centre encounters variegated shallow reef or inner/outer reef margin; cloud-rich context and native10m mixing do not securely establish emergence.",
+      "unresolved_question": "Is the exact centre submerged, exposed reef or mixed at acquisition? Need finer co-registered exposure evidence.",
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9657,
+      "original_key": {
+        "owner": 48238,
+        "y": 124971,
+        "x": 214965
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.18541687327877,
+      "latitude": 8.362316498587958,
+      "input_scope_array_index": 24089,
+      "original_source_array_index": 39734,
+      "original_interval_index": 9522,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        353,
+        805
+      ],
+      "source_pixels": {
+        "red": [
+          7520,
+          10020
+        ],
+        "green": [
+          7520,
+          10020
+        ],
+        "blue": [
+          7520,
+          10020
+        ],
+        "nir": [
+          7520,
+          10020
+        ],
+        "scl": [
+          3760,
+          5010
+        ]
+      },
+      "raw_centre_values": {
+        "red": 494,
+        "green": 511,
+        "blue": 607,
+        "nir": 463,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre: native RGB/NIR and marker context show visible marine surface between nearby clouds/shadows or away from the reef.",
+      "unresolved_question": null,
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9658,
+      "original_key": {
+        "owner": 48238,
+        "y": 124972,
+        "x": 214965
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.18541687327877,
+      "latitude": 8.360957919779281,
+      "input_scope_array_index": 24090,
+      "original_source_array_index": 39735,
+      "original_interval_index": 9523,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        368,
+        805
+      ],
+      "source_pixels": {
+        "red": [
+          7535,
+          10020
+        ],
+        "green": [
+          7535,
+          10020
+        ],
+        "blue": [
+          7535,
+          10020
+        ],
+        "nir": [
+          7535,
+          10020
+        ],
+        "scl": [
+          3767,
+          5010
+        ]
+      },
+      "raw_centre_values": {
+        "red": 503,
+        "green": 518,
+        "blue": 664,
+        "nir": 512,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre: native RGB/NIR and marker context show visible marine surface between nearby clouds/shadows or away from the reef.",
+      "unresolved_question": null,
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9659,
+      "original_key": {
+        "owner": 48238,
+        "y": 124973,
+        "x": 214966
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.18679004905289,
+      "latitude": 8.35959933623604,
+      "input_scope_array_index": 24091,
+      "original_source_array_index": 39736,
+      "original_interval_index": 9524,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        383,
+        820
+      ],
+      "source_pixels": {
+        "red": [
+          7550,
+          10035
+        ],
+        "green": [
+          7550,
+          10035
+        ],
+        "blue": [
+          7550,
+          10035
+        ],
+        "nir": [
+          7550,
+          10035
+        ],
+        "scl": [
+          3775,
+          5017
+        ]
+      },
+      "raw_centre_values": {
+        "red": 481,
+        "green": 483,
+        "blue": 634,
+        "nir": 475,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre: native RGB/NIR and marker context show visible marine surface between nearby clouds/shadows or away from the reef.",
+      "unresolved_question": null,
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9660,
+      "original_key": {
+        "owner": 48238,
+        "y": 124974,
+        "x": 214966
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.18679004905289,
+      "latitude": 8.358240747958979,
+      "input_scope_array_index": 24092,
+      "original_source_array_index": 39737,
+      "original_interval_index": 9525,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        398,
+        820
+      ],
+      "source_pixels": {
+        "red": [
+          7565,
+          10035
+        ],
+        "green": [
+          7565,
+          10035
+        ],
+        "blue": [
+          7565,
+          10035
+        ],
+        "nir": [
+          7565,
+          10035
+        ],
+        "scl": [
+          3782,
+          5017
+        ]
+      },
+      "raw_centre_values": {
+        "red": 572,
+        "green": 546,
+        "blue": 694,
+        "nir": 517,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre: native RGB/NIR and marker context show visible marine surface between nearby clouds/shadows or away from the reef.",
+      "unresolved_question": null,
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9661,
+      "original_key": {
+        "owner": 48238,
+        "y": 124975,
+        "x": 214966
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.18679004905289,
+      "latitude": 8.356882154948849,
+      "input_scope_array_index": 24093,
+      "original_source_array_index": 39738,
+      "original_interval_index": 9526,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        413,
+        820
+      ],
+      "source_pixels": {
+        "red": [
+          7580,
+          10035
+        ],
+        "green": [
+          7580,
+          10035
+        ],
+        "blue": [
+          7580,
+          10035
+        ],
+        "nir": [
+          7580,
+          10035
+        ],
+        "scl": [
+          3790,
+          5017
+        ]
+      },
+      "raw_centre_values": {
+        "red": 514,
+        "green": 509,
+        "blue": 641,
+        "nir": 475,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre: native RGB/NIR and marker context show visible marine surface between nearby clouds/shadows or away from the reef.",
+      "unresolved_question": null,
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9662,
+      "original_key": {
+        "owner": 48238,
+        "y": 124976,
+        "x": 214966
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.18679004905289,
+      "latitude": 8.355523557206398,
+      "input_scope_array_index": 24094,
+      "original_source_array_index": 39739,
+      "original_interval_index": 9527,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        428,
+        820
+      ],
+      "source_pixels": {
+        "red": [
+          7595,
+          10035
+        ],
+        "green": [
+          7595,
+          10035
+        ],
+        "blue": [
+          7595,
+          10035
+        ],
+        "nir": [
+          7595,
+          10035
+        ],
+        "scl": [
+          3797,
+          5017
+        ]
+      },
+      "raw_centre_values": {
+        "red": 498,
+        "green": 482,
+        "blue": 623,
+        "nir": 475,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre: native RGB/NIR and marker context show visible marine surface between nearby clouds/shadows or away from the reef.",
+      "unresolved_question": null,
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9663,
+      "original_key": {
+        "owner": 48238,
+        "y": 124978,
+        "x": 214967
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.18816322482701,
+      "latitude": 8.352806347527515,
+      "input_scope_array_index": 24095,
+      "original_source_array_index": 39740,
+      "original_interval_index": 9528,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        459,
+        835
+      ],
+      "source_pixels": {
+        "red": [
+          7626,
+          10050
+        ],
+        "green": [
+          7626,
+          10050
+        ],
+        "blue": [
+          7626,
+          10050
+        ],
+        "nir": [
+          7626,
+          10050
+        ],
+        "scl": [
+          3813,
+          5025
+        ]
+      },
+      "raw_centre_values": {
+        "red": 484,
+        "green": 548,
+        "blue": 720,
+        "nir": 518,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre: native RGB/NIR and marker context show visible marine surface between nearby clouds/shadows or away from the reef.",
+      "unresolved_question": null,
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9664,
+      "original_key": {
+        "owner": 48238,
+        "y": 124979,
+        "x": 214967
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 115.18816322482701,
+      "latitude": 8.351447735592581,
+      "input_scope_array_index": 24096,
+      "original_source_array_index": 39741,
+      "original_interval_index": 9529,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        7,
+        9
+      ],
+      "native_local_pixel": [
+        474,
+        834
+      ],
+      "source_pixels": {
+        "red": [
+          7641,
+          10049
+        ],
+        "green": [
+          7641,
+          10049
+        ],
+        "blue": [
+          7641,
+          10049
+        ],
+        "nir": [
+          7641,
+          10049
+        ],
+        "scl": [
+          3820,
+          5024
+        ]
+      },
+      "raw_centre_values": {
+        "red": 536,
+        "green": 549,
+        "blue": 714,
+        "nir": 519,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre: native RGB/NIR and marker context show visible marine surface between nearby clouds/shadows or away from the reef.",
+      "unresolved_question": null,
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    },
+    {
+      "point_index": 9665,
+      "original_key": {
+        "owner": 48238,
+        "y": 125124,
+        "x": 214692
+      },
+      "source_target": "gb:VNM:ADM2:81297802B23443064350281",
+      "longitude": 114.81053988694185,
+      "latitude": 8.154399325044979,
+      "input_scope_array_index": 24205,
+      "original_source_array_index": 39850,
+      "original_interval_index": 9590,
+      "original_flags": [
+        "disputed-island-territory-research"
+      ],
+      "original_hold_reasons": [
+        "disputed-island-territory-research",
+        "foreign-reference-country",
+        "source-relative-physical-interpretation-unresolved"
+      ],
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "acquired": "2020-05-08T02:55:28.527000Z",
+      "source_block": [
+        9,
+        5
+      ],
+      "native_local_pixel": [
+        584,
+        758
+      ],
+      "source_pixels": {
+        "red": [
+          9799,
+          5877
+        ],
+        "green": [
+          9799,
+          5877
+        ],
+        "blue": [
+          9799,
+          5877
+        ],
+        "nir": [
+          9799,
+          5877
+        ],
+        "scl": [
+          4899,
+          2938
+        ]
+      },
+      "raw_centre_values": {
+        "red": 379,
+        "green": 419,
+        "blue": 616,
+        "nir": 388,
+        "scl": 6
+      },
+      "raw_centre_masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      },
+      "raw_scl_neighbourhood": [
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ],
+        [
+          6,
+          6,
+          6
+        ]
+      ],
+      "raw_scl_neighbour_masks": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "recorded_assets": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "physical_status": "answered",
+      "physical_class": "water-location",
+      "finding": "Dated marine-water appearance at this unchanged exact centre: native RGB/NIR and marker context show visible marine surface between nearby clouds/shadows or away from the reef.",
+      "unresolved_question": null,
+      "quality_limit": "Cloud-rich scene; all51 masks valid but only3 centres carry SCL8/9. SCL6 does not remove the actual cloud/shadow or reef questions. Water answers are bounded to visibly clear exact-centre marine context.",
+      "location_retained": true,
+      "authority_or_sovereignty_approved": false,
+      "repair_credit": 0
+    }
+  ]
+}

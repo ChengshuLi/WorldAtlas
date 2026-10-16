@@ -1,0 +1,248 @@
+{
+  "kind": "actual-optical-read-count-handoff-not-physical-classification",
+  "created_utc": "2026-10-15T22:58:09.594612+00:00",
+  "process_exit_code": 0,
+  "seconds": 2229.38929166703,
+  "started_utc": "2026-10-15T22:20:20.969009+00:00",
+  "ended_utc": "2026-10-15T22:57:30.374120+00:00",
+  "counts": {
+    "recorded": 13649,
+    "actually_sampled": 13646,
+    "all_five_masks_nonzero": 13646,
+    "outside_native_frame": 3,
+    "sampled_any_invalid_mask": 0
+  },
+  "groups": {
+    "48238": {
+      "records": 9824,
+      "sampled": 9821,
+      "outside_native_frame": 3,
+      "valid_all_five_masks_nonzero": 9821,
+      "sampled_any_invalid_mask": 0,
+      "scenes": 31
+    },
+    "48444": {
+      "records": 3825,
+      "sampled": 3825,
+      "outside_native_frame": 0,
+      "valid_all_five_masks_nonzero": 3825,
+      "sampled_any_invalid_mask": 0,
+      "scenes": 4
+    }
+  },
+  "literal_scl_centre_counts": {
+    "6": 13041,
+    "9": 284,
+    "8": 130,
+    "10": 118,
+    "4": 32,
+    "7": 7,
+    "5": 34
+  },
+  "literal_valid_centre_masks_by_band": {
+    "red": {
+      "255": 13646
+    },
+    "green": {
+      "255": 13646
+    },
+    "blue": {
+      "255": 13646
+    },
+    "nir": {
+      "255": 13646
+    },
+    "scl": {
+      "255": 13646
+    }
+  },
+  "outside_native_frame_records": [
+    {
+      "item": "S2A_49PHM_20200513_0_L2A",
+      "index": 2641,
+      "original_key": {
+        "owner": 48238,
+        "y": 123878,
+        "x": 214459
+      },
+      "longitude": 114.49058993157007,
+      "latitude": 9.844250203839895,
+      "inside_native_assets": {
+        "red": false,
+        "green": false,
+        "blue": false,
+        "nir": false,
+        "scl": false
+      },
+      "reason": "Unchanged centre outside one or more actual native source frames; not water"
+    },
+    {
+      "item": "S2A_49PHM_20200513_0_L2A",
+      "index": 2642,
+      "original_key": {
+        "owner": 48238,
+        "y": 123878,
+        "x": 214460
+      },
+      "longitude": 114.49196310734419,
+      "latitude": 9.844250203839895,
+      "inside_native_assets": {
+        "red": false,
+        "green": false,
+        "blue": false,
+        "nir": false,
+        "scl": false
+      },
+      "reason": "Unchanged centre outside one or more actual native source frames; not water"
+    },
+    {
+      "item": "S2A_49PHM_20200513_0_L2A",
+      "index": 2643,
+      "original_key": {
+        "owner": 48238,
+        "y": 123878,
+        "x": 214461
+      },
+      "longitude": 114.49333628311831,
+      "latitude": 9.844250203839895,
+      "inside_native_assets": {
+        "red": false,
+        "green": false,
+        "blue": false,
+        "nir": false,
+        "scl": false
+      },
+      "reason": "Unchanged centre outside one or more actual native source frames; not water"
+    }
+  ],
+  "sampled_any_invalid_mask_records": [],
+  "completed_scenes": 35,
+  "completed_blocks": 289,
+  "reads": {
+    "remote_data_windows": 1445,
+    "remote_mask_windows": 1445
+  },
+  "registered_output_bytes": 3513804872,
+  "registered_output_files": 4407,
+  "observed_reader_peak_rss_bytes": 354287616,
+  "input_script_freeze": {
+    "path": "frozen-inputs.json",
+    "sha256": "e80d93371d936e3f93b74654961e6d3f3cd37f58bac0c57b3850bd9a3d7be01d",
+    "files": 40
+  },
+  "receipts": [
+    {
+      "path": "execution-receipt.json",
+      "bytes": 31397,
+      "sha256": "f5c77e663fe2f040ec4353ad26ac5c5df9df85e0f7650d8aecf3b614338552dc"
+    },
+    {
+      "path": "supervisor-exit.json",
+      "bytes": 822,
+      "sha256": "053eabb75f4e1141aab8a44f72db80d6a36eb3c8d2c67c61712136ad1eb4e8b5"
+    },
+    {
+      "path": "complete-output-inventory.json",
+      "bytes": 905224,
+      "sha256": "89ba4638c4d95ff8c6efb6fe42740ae5cf0fa5f6f8219040f8b6d857ac732fcc"
+    }
+  ],
+  "limits": [
+    "Recorded includes explicitly unobserved centres outside actual native frames.",
+    "Nonzero validity masks indicate source data presence, not cloud-free surface accuracy or land/water truth.",
+    "SCL is retained source classification only; no new threshold or physical classifier applied.",
+    "Partial native source windows only; remote wholeCOG bodies were not downloaded or whole-hashed.",
+    "No source-owner/location/territorial acceptance, repair credit or physical-answer adoption.",
+    "The complete-output-inventory lists products registered before itself/finalreceipt; this handoff is separate post-run metadata."
+  ],
+  "packaging_size_facts": {
+    "basis": "Existing complete-output-inventory.json file records only; no source/image reread or repeated product hashing.",
+    "inventory_listed": {
+      "files": 4406,
+      "bytes": 3512899648
+    },
+    "subsets": {
+      "json_metadata_in_inventory": {
+        "files": 360,
+        "bytes": 178408972
+      },
+      "raw_native_data_tiffs": {
+        "files": 1445,
+        "bytes": 1557593660
+      },
+      "literal_source_mask_tiffs": {
+        "files": 1445,
+        "bytes": 9638408
+      },
+      "unmarked_native_frame_pngs": {
+        "files": 578,
+        "bytes": 879398977
+      },
+      "marked_native_frame_pngs": {
+        "files": 578,
+        "bytes": 887859631
+      }
+    },
+    "all_frame_pngs": {
+      "files": 1156,
+      "bytes": 1767258608
+    },
+    "reader_registered_before_receipt": {
+      "files": 4407,
+      "bytes": 3513804872
+    },
+    "inventory_self": {
+      "path": "complete-output-inventory.json",
+      "bytes": 905224
+    },
+    "native_png_semantics": "Unmarked native RGB and NIR PNGs are fixed-display scientific frame products; centres PNGs are the distinct marked versions. All raw TIFF/masks remain retained.",
+    "count_scope": "Inventory-listed records exclude this inventory and final reader receipt. Reader registered totals additionally include the inventory itself; later supervisor/handoff/README and frozen input bytes are separate."
+  },
+  "sampled_nodata_and_mask_counts_by_band": {
+    "red": {
+      "sampled_centres": 13646,
+      "sampled_nodata_value_centres": 0,
+      "zero_source_mask_centres": 0,
+      "nonzero_source_mask_centres": 13646,
+      "source_nodata_values": [
+        0.0
+      ]
+    },
+    "green": {
+      "sampled_centres": 13646,
+      "sampled_nodata_value_centres": 0,
+      "zero_source_mask_centres": 0,
+      "nonzero_source_mask_centres": 13646,
+      "source_nodata_values": [
+        0.0
+      ]
+    },
+    "blue": {
+      "sampled_centres": 13646,
+      "sampled_nodata_value_centres": 0,
+      "zero_source_mask_centres": 0,
+      "nonzero_source_mask_centres": 13646,
+      "source_nodata_values": [
+        0.0
+      ]
+    },
+    "nir": {
+      "sampled_centres": 13646,
+      "sampled_nodata_value_centres": 0,
+      "zero_source_mask_centres": 0,
+      "nonzero_source_mask_centres": 13646,
+      "source_nodata_values": [
+        0.0
+      ]
+    },
+    "scl": {
+      "sampled_centres": 13646,
+      "sampled_nodata_value_centres": 0,
+      "zero_source_mask_centres": 0,
+      "nonzero_source_mask_centres": 13646,
+      "source_nodata_values": [
+        0.0
+      ]
+    }
+  }
+}

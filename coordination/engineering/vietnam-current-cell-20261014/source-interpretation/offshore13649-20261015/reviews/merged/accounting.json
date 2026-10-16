@@ -1,0 +1,840 @@
+{
+  "kind": "exact-proposal-conservation-and-schema-join",
+  "counts": {
+    "original_keys": 13649,
+    "proposed_bounded_answers": 10494,
+    "proposed_water": 10411,
+    "proposed_terrestrial": 83,
+    "specific_unresolved": 3155,
+    "unobserved_outside_actual_frame": 3,
+    "root_adopted_here": 0,
+    "authority_or_repair_credit": 0
+  },
+  "by_reviewer": {
+    "independent-results-verification": {
+      "question": 1584,
+      "water": 3340,
+      "terrestrial": 5
+    },
+    "worker1": {
+      "question": 314,
+      "water": 2246,
+      "terrestrial": 15
+    },
+    "worker3": {
+      "water": 1755,
+      "question": 165,
+      "terrestrial": 9
+    },
+    "worker5": {
+      "water": 3070,
+      "question": 1092,
+      "terrestrial": 54
+    }
+  },
+  "by_original_owner": {
+    "48238": {
+      "question": 2181,
+      "water": 7620,
+      "terrestrial": 23
+    },
+    "48444": {
+      "question": 974,
+      "water": 2791,
+      "terrestrial": 60
+    }
+  },
+  "checks": {
+    "all35_frozen_scenes_exactly_once": true,
+    "all13649_exact_keys_once": true,
+    "all13649_global_point_indices_once": true,
+    "scene_partition_exact": true,
+    "complete_original_records_flags_holds_coordinates_and_source_positions_preserved": true,
+    "all35_current_report_pins_match_frozen_completion_reports": true,
+    "every_proposed_answer_has_dated_fact_and_actual_valid_source_presence": true,
+    "every_unresolved_key_has_retained_specific_question": true,
+    "outside_actual_frame_indices_remain_questions": [
+      2641,
+      2642,
+      2643
+    ],
+    "repeated_whole_product_hash_pass": false
+  },
+  "frozen_inputs": [
+    {
+      "path": "bulk-completion/offshore13649-observation-001/inputs/unchanged-original-points.json",
+      "bytes": 21067930,
+      "sha256": "2cc61879330a80da32b2a0d4f976b984250400d90ab204c5827e1762867c1e72"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/inputs/scenes.json",
+      "bytes": 205518,
+      "sha256": "78bdb147e2e10e53853b20f00aad20b82b82c95959005c7cee56a0e6e8533c37"
+    }
+  ],
+  "completion_reports": [
+    {
+      "path": "bulk-completion/offshore13649-interpretation/worker1/summary.json",
+      "bytes": 7016,
+      "sha256": "06788d8d55eb6d5f4cfbd92dd2d8466afb13f886418035c9af46901f5ff456d3"
+    },
+    {
+      "path": "bulk-completion/offshore13649-interpretation/worker3/completion-reconciliation.json",
+      "bytes": 5416,
+      "sha256": "4ea54a15273c49e1439a05466e7ae54d3ef4e6b7accc81ca72dd81ae189e78c1"
+    },
+    {
+      "path": "bulk-completion/offshore13649-interpretation/worker5/identity-check.json",
+      "bytes": 5062,
+      "sha256": "caf15096c8b032faa204fca6a00587a99a1f7812ee6b7f5cba489c3987658473"
+    },
+    {
+      "path": "bulk-completion/independent-results-verification/reviewed-scene-packet-inventory.json",
+      "bytes": 3211,
+      "sha256": "a9d0ef144e8f85409f7da6089e325afcc86e88ddc11fe47cdcdfb65c7d3a9abb"
+    }
+  ],
+  "existing_independent_source_custody_verification": {
+    "path": "bulk-completion/independent-results-verification/operation-conservation-final.json",
+    "bytes": 11821,
+    "sha256": "686dc9c23e1f305ea71c381ba0faf9af65026cd13fdb0d26eb382d6209958a9c"
+  },
+  "source_inventory": {
+    "path": "bulk-completion/offshore13649-observation-001/complete-output-inventory.json",
+    "bytes": 905224,
+    "sha256": "89ba4638c4d95ff8c6efb6fe42740ae5cf0fa5f6f8219040f8b6d857ac732fcc"
+  },
+  "scene_source_pins_reused_from_verified_inventory": [
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2A_49PHM_20200513_0_L2A/native-observations.json",
+      "bytes": 15116400,
+      "sha256": "a2578736653ed190d16f16285063c7b5fe91e39e53872d5d913d55ebf6357ba3"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2A_50PKT_20200513_0_L2A/native-observations.json",
+      "bytes": 7390072,
+      "sha256": "3b7462f6338aeb6823b43248402ec17eb47abca293419b7f998df72dcfe7f547"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2A_49PGL_20200605_0_L2A/native-observations.json",
+      "bytes": 4915103,
+      "sha256": "e2ea358ec41f23679d1d939998993e109867e6775a2ce711a2017180c455db87"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2B_49PHL_20200508_0_L2A/native-observations.json",
+      "bytes": 4739415,
+      "sha256": "a321e8d8e8fe73fec7ba113ebe82a00bfb77d157d3c8d5923eaabe9a05faef99"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2A_50PLS_20200403_0_L2A/native-observations.json",
+      "bytes": 4089446,
+      "sha256": "28c6fa03fe2e6a40153ba8e9f7e5bbd230d569fc1e9624e4b5e32428ef8df003"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2A_49PHK_20200920_0_L2A/native-observations.json",
+      "bytes": 2585516,
+      "sha256": "f98e3ca096200c63f7aa21e1f19ee818e6c24a5afc6787c2de6503321be24913"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2A_49PFK_20200317_0_L2A/native-observations.json",
+      "bytes": 2548785,
+      "sha256": "4c64c1fa9e4d8920b0e899b4a4f586811c2c9e510c662d59ef6c497e7e96f3d5"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2B_50PNS_20200215_0_L2A/native-observations.json",
+      "bytes": 2103869,
+      "sha256": "593eddf0125ee2adc9b7b35310f91d84ab570c91b4d85462ccbd636bcd2567e2"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2A_49NHJ_20200403_0_L2A/native-observations.json",
+      "bytes": 1591125,
+      "sha256": "9bb4be2a7f1b57bedfd0d282ad07b88f9ddfd1c9a15c6fda07e6d8eb913d4c44"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2A_50PMR_20200203_1_L2A/native-observations.json",
+      "bytes": 1355503,
+      "sha256": "820476c9a010fe08758945093b01f39791c45f7773f52bb0a5416058852b99ed"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2B_50PNT_20200215_0_L2A/native-observations.json",
+      "bytes": 1198369,
+      "sha256": "185e823b88a94522d3cf90d118a2933c0e6045eb8eba79399b781256a49122c1"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2B_49PHN_20200421_0_L2A/native-observations.json",
+      "bytes": 1116467,
+      "sha256": "abb86b785778b552e751458f0cfaf8a24bbf60f6662878d62e08260ba1bcb3e5"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2B_49PGK_20200122_0_L2A/native-observations.json",
+      "bytes": 984990,
+      "sha256": "845190f5469d88ffe028a444decc47ffb78b5875ba685d117145a9708c126aa1"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2B_50PLR_20200309_0_L2A/native-observations.json",
+      "bytes": 956362,
+      "sha256": "b434a2c92ece85f53f878c60e0a1ce98729ede395906d13e7c1644073b34a56b"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2A_49PEK_20200516_0_L2A/native-observations.json",
+      "bytes": 895930,
+      "sha256": "e1970504143511cb1195bf472aea0641b4e176ee4fbb2112ea31b36616bb7c93"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2A_50PMS_20201116_0_L2A/native-observations.json",
+      "bytes": 829390,
+      "sha256": "9d00f3e8afbde8eae7bb139d1a9b2d4fc92040d583228e1b35682485681181f8"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2A_49PFL_20200605_0_L2A/native-observations.json",
+      "bytes": 634738,
+      "sha256": "943e7c2e36cd8389724e0b05131e4ef0244d3acfe2f6759b93e1799bce19e731"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2B_49NGJ_20200122_0_L2A/native-observations.json",
+      "bytes": 447001,
+      "sha256": "0ef40ee138084408b808a9284beaf110e185bc156310efa16ecb9043beb6d4b7"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2A_50PMQ_20200420_0_L2A/native-observations.json",
+      "bytes": 418061,
+      "sha256": "4a5c32355c4b279bfd7d4e31d8429fe9417e7cd6d6505cb1f6b4d44117e29e32"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2A_50NKP_20200403_0_L2A/native-observations.json",
+      "bytes": 407301,
+      "sha256": "092f0f19f99c4244fd071828e2e85d3ec5540683a2945bbde0abe2772569750b"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2A_49PGM_20200605_0_L2A/native-observations.json",
+      "bytes": 400907,
+      "sha256": "090966c991dae47e08e8fa9a73cdca911a986c096de0e66d2f41c04484f559ed"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2A_49PHM_20200127_0_L2A/native-observations.json",
+      "bytes": 338321,
+      "sha256": "55631eeda221e661899952bec0d0b40caa36b2244f5886dba6a7b309dd41d305"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2B_50PKQ_20200508_0_L2A/native-observations.json",
+      "bytes": 299638,
+      "sha256": "318677f9268c9a8d31d77dabd7c37db40628a0435bc8d87f429771f528b6d9b7"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2B_49NDJ_20200325_0_L2A/native-observations.json",
+      "bytes": 230092,
+      "sha256": "f91ed4e12609d19b51f5aa90df2035591460bb0c77179135810174533617299c"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2A_50PMR_20200420_0_L2A/native-observations.json",
+      "bytes": 230050,
+      "sha256": "6abebd696d2c6d22e9f5225b8efe9565ba510a8d1aef21473b7d86baaeb4140d"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2B_50PKS_20200508_0_L2A/native-observations.json",
+      "bytes": 194966,
+      "sha256": "8be7142d72624f449b6e5df0438c7bebfd6f15507cbe6c98b2824951d5f0aeba"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2A_49NCJ_20200310_0_L2A/native-observations.json",
+      "bytes": 155933,
+      "sha256": "589502421e8b7be1213f896b8a72f1d392bec5f5239f1d2c6ee1ecffe0ebdc26"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2A_50PLT_20200324_0_L2A/native-observations.json",
+      "bytes": 86845,
+      "sha256": "8c520753d35cb2b7adf0c562d2bbae6ecea6a01d911189db7d84e1596dca6e3e"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2A_49NEJ_20200327_0_L2A/native-observations.json",
+      "bytes": 29977,
+      "sha256": "21f4becddf672027f0fc3c02d4d33b198111a922414c4430d6cfca2d518daba7"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2B_49PDK_20200822_0_L2A/native-observations.json",
+      "bytes": 18191,
+      "sha256": "a38b46a6f82a2966c64dedcb55e5321cbf28bbe0efd5d32c8e30dbc59b986eda"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2B_50PMS_20200129_0_L2A/native-observations.json",
+      "bytes": 12485,
+      "sha256": "93e4ca2af43a34c535758590c5296d184982e17a59b23e5e10b76cff4b72411a"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2A_49QFU_20200219_0_L2A/native-observations.json",
+      "bytes": 14615426,
+      "sha256": "2f0409f02fc60148c9a5f88637cb96ed04b5f3aead70ba2fadd0f5890492dbdb"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2B_49QEU_20200115_0_L2A/native-observations.json",
+      "bytes": 5157489,
+      "sha256": "db8ec52a8b3db7596f45d2a0c38a4c107f9c3d68f5bbb28c169630361aa438ae"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2A_49PET_20200310_0_L2A/native-observations.json",
+      "bytes": 1494124,
+      "sha256": "f3da1e21f5a0cd09d94f77e1516cd92aba09a86047cf23dab61b83de448f471c"
+    },
+    {
+      "path": "bulk-completion/offshore13649-observation-001/products/S2A_49PFT_20200219_0_L2A/native-observations.json",
+      "bytes": 624966,
+      "sha256": "0596d2e9436f80d9269debab5a48d63eb7a26206a36b2a8db82fc56e9256328c"
+    }
+  ],
+  "scenes": [
+    {
+      "scene": 1,
+      "item": "S2A_49PHM_20200513_0_L2A",
+      "reviewer": "independent-results-verification",
+      "records": 2644,
+      "counts": {
+        "question": 1291,
+        "water": 1352,
+        "terrestrial": 1
+      },
+      "review_pin": {
+        "path": "bulk-completion/independent-results-verification/scene01-proposed-dispositions.json",
+        "bytes": 8409154,
+        "sha256": "5cd17a5bcf2f836e74c84e097ced18ca7aba5c7be4e0ffdb7b39f2040bbc4cd8"
+      }
+    },
+    {
+      "scene": 2,
+      "item": "S2A_50PKT_20200513_0_L2A",
+      "reviewer": "worker1",
+      "records": 1292,
+      "counts": {
+        "question": 195,
+        "water": 1085,
+        "terrestrial": 12
+      },
+      "review_pin": {
+        "path": "bulk-completion/offshore13649-interpretation/worker1/scene-02-review.json",
+        "bytes": 4894420,
+        "sha256": "d45dc42033dfab93261d3b80e61a8ea91e5171d090de4641aa8ae934c28e1739"
+      }
+    },
+    {
+      "scene": 3,
+      "item": "S2A_49PGL_20200605_0_L2A",
+      "reviewer": "worker3",
+      "records": 861,
+      "counts": {
+        "water": 829,
+        "question": 23,
+        "terrestrial": 9
+      },
+      "review_pin": {
+        "path": "bulk-completion/offshore13649-interpretation/worker3/scene-003-interpretation.json",
+        "bytes": 2325051,
+        "sha256": "eafb8edc838129f89895c8879b2a2a3514c54bd480a577f9a73148bbcf1e107f"
+      }
+    },
+    {
+      "scene": 4,
+      "item": "S2B_49PHL_20200508_0_L2A",
+      "reviewer": "worker5",
+      "records": 832,
+      "counts": {
+        "water": 780,
+        "question": 52
+      },
+      "review_pin": {
+        "path": "bulk-completion/offshore13649-interpretation/worker5/scene-04.json",
+        "bytes": 6171769,
+        "sha256": "4a6da07351e7fd4358c53a7960c789230b0fe97399b63a3eb6c5680952fcbcc1"
+      }
+    },
+    {
+      "scene": 5,
+      "item": "S2A_50PLS_20200403_0_L2A",
+      "reviewer": "independent-results-verification",
+      "records": 714,
+      "counts": {
+        "water": 706,
+        "question": 7,
+        "terrestrial": 1
+      },
+      "review_pin": {
+        "path": "bulk-completion/independent-results-verification/scene05-proposed-dispositions.json",
+        "bytes": 2277537,
+        "sha256": "8f049866d03ef92cdcdeaaf411cca80a3fb78ac8029ae56836355ef9e0b99597"
+      }
+    },
+    {
+      "scene": 6,
+      "item": "S2A_49PHK_20200920_0_L2A",
+      "reviewer": "worker1",
+      "records": 451,
+      "counts": {
+        "water": 392,
+        "question": 59
+      },
+      "review_pin": {
+        "path": "bulk-completion/offshore13649-interpretation/worker1/scene-06-review.json",
+        "bytes": 1707443,
+        "sha256": "9bc6623c2227d0305696d8e958880151c89497c255eb6a9b1eac583b64b5668a"
+      }
+    },
+    {
+      "scene": 7,
+      "item": "S2A_49PFK_20200317_0_L2A",
+      "reviewer": "worker3",
+      "records": 445,
+      "counts": {
+        "water": 389,
+        "question": 56
+      },
+      "review_pin": {
+        "path": "bulk-completion/offshore13649-interpretation/worker3/scene-007-interpretation.json",
+        "bytes": 1229599,
+        "sha256": "bb78e79dd3a891a8c7a93b02c0f822e907aabe8c7a658f8611e414f1b465b7df"
+      }
+    },
+    {
+      "scene": 8,
+      "item": "S2B_50PNS_20200215_0_L2A",
+      "reviewer": "worker5",
+      "records": 368,
+      "counts": {
+        "question": 75,
+        "water": 293
+      },
+      "review_pin": {
+        "path": "bulk-completion/offshore13649-interpretation/worker5/scene-08.json",
+        "bytes": 2742210,
+        "sha256": "7b9aacff00803c41f2eb52ee1b48043d319b7e3db8cf5ec36b7b621c94d734b6"
+      }
+    },
+    {
+      "scene": 9,
+      "item": "S2A_49NHJ_20200403_0_L2A",
+      "reviewer": "independent-results-verification",
+      "records": 277,
+      "counts": {
+        "water": 185,
+        "question": 92
+      },
+      "review_pin": {
+        "path": "bulk-completion/independent-results-verification/scene09-proposed-dispositions.json",
+        "bytes": 887545,
+        "sha256": "3a8e0c6c7d2f27417fc325ab39a69e7124e821f5335cd81587ec01312347ca32"
+      }
+    },
+    {
+      "scene": 10,
+      "item": "S2A_50PMR_20200203_1_L2A",
+      "reviewer": "worker1",
+      "records": 236,
+      "counts": {
+        "water": 208,
+        "question": 28
+      },
+      "review_pin": {
+        "path": "bulk-completion/offshore13649-interpretation/worker1/scene-10-review.json",
+        "bytes": 894509,
+        "sha256": "1fda38959becbeca9e621a0da8bd0a7b7e102efcadf08332a90d4f8d8b95bc80"
+      }
+    },
+    {
+      "scene": 11,
+      "item": "S2B_50PNT_20200215_0_L2A",
+      "reviewer": "worker3",
+      "records": 209,
+      "counts": {
+        "water": 209
+      },
+      "review_pin": {
+        "path": "bulk-completion/offshore13649-interpretation/worker3/scene-011-interpretation.json",
+        "bytes": 592976,
+        "sha256": "f5a5f1720e148647d1aea17617874ac042ab7b71bc87031f75b8339f0b307a0f"
+      }
+    },
+    {
+      "scene": 12,
+      "item": "S2B_49PHN_20200421_0_L2A",
+      "reviewer": "worker5",
+      "records": 193,
+      "counts": {
+        "question": 105,
+        "water": 88
+      },
+      "review_pin": {
+        "path": "bulk-completion/offshore13649-interpretation/worker5/scene-12.json",
+        "bytes": 1447705,
+        "sha256": "c0b45fe1c70212a08f4488247d9e79c64e6f09059a1453300ec54eb3b14bded2"
+      }
+    },
+    {
+      "scene": 13,
+      "item": "S2B_49PGK_20200122_0_L2A",
+      "reviewer": "independent-results-verification",
+      "records": 171,
+      "counts": {
+        "water": 150,
+        "question": 21
+      },
+      "review_pin": {
+        "path": "bulk-completion/independent-results-verification/scene13-proposed-dispositions.json",
+        "bytes": 545083,
+        "sha256": "72d41c2c25a1f185140615340230bc52f2fa3cd1a808d32c54cb4e177b9c5a14"
+      }
+    },
+    {
+      "scene": 14,
+      "item": "S2B_50PLR_20200309_0_L2A",
+      "reviewer": "worker1",
+      "records": 166,
+      "counts": {
+        "water": 166
+      },
+      "review_pin": {
+        "path": "bulk-completion/offshore13649-interpretation/worker1/scene-14-review.json",
+        "bytes": 634473,
+        "sha256": "cf1b7687c4d6f156b630785eb431421b1c40071d76ce630c644997dca5836c07"
+      }
+    },
+    {
+      "scene": 15,
+      "item": "S2A_49PEK_20200516_0_L2A",
+      "reviewer": "worker3",
+      "records": 156,
+      "counts": {
+        "water": 146,
+        "question": 10
+      },
+      "review_pin": {
+        "path": "bulk-completion/offshore13649-interpretation/worker3/scene-015-interpretation.json",
+        "bytes": 432268,
+        "sha256": "81d2697323620cff188987e8b6d2df13d1953aa0166641291e182dca6a43fb1c"
+      }
+    },
+    {
+      "scene": 16,
+      "item": "S2A_50PMS_20201116_0_L2A",
+      "reviewer": "worker5",
+      "records": 144,
+      "counts": {
+        "question": 86,
+        "water": 58
+      },
+      "review_pin": {
+        "path": "bulk-completion/offshore13649-interpretation/worker5/scene-16.json",
+        "bytes": 1075279,
+        "sha256": "48e9954a434c816efd576133a4676eefe5a2357a51a6e3b343919789539de52b"
+      }
+    },
+    {
+      "scene": 17,
+      "item": "S2A_49PFL_20200605_0_L2A",
+      "reviewer": "independent-results-verification",
+      "records": 110,
+      "counts": {
+        "water": 110
+      },
+      "review_pin": {
+        "path": "bulk-completion/independent-results-verification/scene17-proposed-dispositions.json",
+        "bytes": 351490,
+        "sha256": "7c2015d723ff43e7d8bbc3577b8b839729185569046cf739afa731524b2f4538"
+      }
+    },
+    {
+      "scene": 18,
+      "item": "S2B_49NGJ_20200122_0_L2A",
+      "reviewer": "worker1",
+      "records": 77,
+      "counts": {
+        "water": 77
+      },
+      "review_pin": {
+        "path": "bulk-completion/offshore13649-interpretation/worker1/scene-18-review.json",
+        "bytes": 294979,
+        "sha256": "9cddfd2aa33ac843770d9e711469e32c35349106174a0701bf91ffdce5412658"
+      }
+    },
+    {
+      "scene": 19,
+      "item": "S2A_50PMQ_20200420_0_L2A",
+      "reviewer": "worker3",
+      "records": 72,
+      "counts": {
+        "water": 58,
+        "question": 14
+      },
+      "review_pin": {
+        "path": "bulk-completion/offshore13649-interpretation/worker3/scene-019-interpretation.json",
+        "bytes": 199569,
+        "sha256": "3d8f105857285dff359e49fb8eea820e8fb56c37b281c525235e0588f2402309"
+      }
+    },
+    {
+      "scene": 20,
+      "item": "S2A_50NKP_20200403_0_L2A",
+      "reviewer": "worker5",
+      "records": 70,
+      "counts": {
+        "water": 66,
+        "question": 4
+      },
+      "review_pin": {
+        "path": "bulk-completion/offshore13649-interpretation/worker5/scene-20.json",
+        "bytes": 524997,
+        "sha256": "ffe2398244ccbb65e6e4e09e42be305cce38d48fb576505f51fb7fb0482fc71b"
+      }
+    },
+    {
+      "scene": 21,
+      "item": "S2A_49PGM_20200605_0_L2A",
+      "reviewer": "independent-results-verification",
+      "records": 69,
+      "counts": {
+        "water": 69
+      },
+      "review_pin": {
+        "path": "bulk-completion/independent-results-verification/scene21-proposed-dispositions.json",
+        "bytes": 220645,
+        "sha256": "8051b454847f8c9f35a8f047a8eecb2704d7a11531f3c80deb4fae135c64b677"
+      }
+    },
+    {
+      "scene": 22,
+      "item": "S2A_49PHM_20200127_0_L2A",
+      "reviewer": "worker1",
+      "records": 58,
+      "counts": {
+        "water": 55,
+        "question": 3
+      },
+      "review_pin": {
+        "path": "bulk-completion/offshore13649-interpretation/worker1/scene-22-review.json",
+        "bytes": 222771,
+        "sha256": "d4c47f01735909caa0735940fc0b6279274ab85943d3fe33811eed645344742a"
+      }
+    },
+    {
+      "scene": 23,
+      "item": "S2B_50PKQ_20200508_0_L2A",
+      "reviewer": "worker3",
+      "records": 51,
+      "counts": {
+        "question": 30,
+        "water": 21
+      },
+      "review_pin": {
+        "path": "bulk-completion/offshore13649-interpretation/worker3/scene-023-interpretation.json",
+        "bytes": 148734,
+        "sha256": "f563c9cccc0e7e2c0b16f76550fd7c0c04d8213efa80a304c77aaa01c4975af2"
+      }
+    },
+    {
+      "scene": 24,
+      "item": "S2B_49NDJ_20200325_0_L2A",
+      "reviewer": "worker5",
+      "records": 39,
+      "counts": {
+        "water": 36,
+        "question": 3
+      },
+      "review_pin": {
+        "path": "bulk-completion/offshore13649-interpretation/worker5/scene-24.json",
+        "bytes": 292509,
+        "sha256": "b34b9d7c304406fc9026b23f748c1af681280caa3c652bd7b2df1cea651ee869"
+      }
+    },
+    {
+      "scene": 25,
+      "item": "S2A_50PMR_20200420_0_L2A",
+      "reviewer": "independent-results-verification",
+      "records": 39,
+      "counts": {
+        "question": 15,
+        "water": 24
+      },
+      "review_pin": {
+        "path": "bulk-completion/independent-results-verification/scene25-proposed-dispositions.json",
+        "bytes": 126728,
+        "sha256": "50a536c1012d12d9c8617a5765ccacbd605b3c6e5b5b5a33f396d982c9f5e4e4"
+      }
+    },
+    {
+      "scene": 26,
+      "item": "S2B_50PKS_20200508_0_L2A",
+      "reviewer": "worker1",
+      "records": 33,
+      "counts": {
+        "water": 28,
+        "question": 5
+      },
+      "review_pin": {
+        "path": "bulk-completion/offshore13649-interpretation/worker1/scene-26-review.json",
+        "bytes": 126677,
+        "sha256": "2e164e9b1ac2d2cefca1b133b14c15348c69841807a7021fbe4d9eec820068ee"
+      }
+    },
+    {
+      "scene": 27,
+      "item": "S2A_49NCJ_20200310_0_L2A",
+      "reviewer": "worker3",
+      "records": 26,
+      "counts": {
+        "water": 26
+      },
+      "review_pin": {
+        "path": "bulk-completion/offshore13649-interpretation/worker3/scene-027-interpretation.json",
+        "bytes": 82207,
+        "sha256": "5491ba98550005d31fd99bda027380592593ba1416697cecd91920f9ca9e8f05"
+      }
+    },
+    {
+      "scene": 28,
+      "item": "S2A_50PLT_20200324_0_L2A",
+      "reviewer": "worker5",
+      "records": 14,
+      "counts": {
+        "water": 8,
+        "question": 6
+      },
+      "review_pin": {
+        "path": "bulk-completion/offshore13649-interpretation/worker5/scene-28.json",
+        "bytes": 106072,
+        "sha256": "eb879781be2d6ff262c6a0db3fc5cbdfc7b881031e5ff6dd9bf206cc35dbcaf5"
+      }
+    },
+    {
+      "scene": 29,
+      "item": "S2A_49NEJ_20200327_0_L2A",
+      "reviewer": "independent-results-verification",
+      "records": 4,
+      "counts": {
+        "water": 3,
+        "question": 1
+      },
+      "review_pin": {
+        "path": "bulk-completion/independent-results-verification/scene29-proposed-dispositions.json",
+        "bytes": 15710,
+        "sha256": "e9167e3b0528430bb117efe64ca2f8a9d7ccaab71a85d9599eb23a8793fdfa8a"
+      }
+    },
+    {
+      "scene": 30,
+      "item": "S2B_49PDK_20200822_0_L2A",
+      "reviewer": "worker1",
+      "records": 2,
+      "counts": {
+        "water": 2
+      },
+      "review_pin": {
+        "path": "bulk-completion/offshore13649-interpretation/worker1/scene-30-review.json",
+        "bytes": 10379,
+        "sha256": "9cc1f0e51b676074df5670aeff6f3395407040eadec5aeaf9bf50090ad44aeec"
+      }
+    },
+    {
+      "scene": 31,
+      "item": "S2B_50PMS_20200129_0_L2A",
+      "reviewer": "worker3",
+      "records": 1,
+      "counts": {
+        "water": 1
+      },
+      "review_pin": {
+        "path": "bulk-completion/offshore13649-interpretation/worker3/scene-031-interpretation.json",
+        "bytes": 5660,
+        "sha256": "e1f67e99b85a57849c2d6ab33cdb775d35e8cdc7969bde52d80fc1275e7fa533"
+      }
+    },
+    {
+      "scene": 32,
+      "item": "S2A_49QFU_20200219_0_L2A",
+      "reviewer": "worker5",
+      "records": 2556,
+      "counts": {
+        "question": 761,
+        "water": 1741,
+        "terrestrial": 54
+      },
+      "review_pin": {
+        "path": "bulk-completion/offshore13649-interpretation/worker5/scene-32.json",
+        "bytes": 19284295,
+        "sha256": "f43cdcb66c6073a29c2807706e5f76b4e9ce97aac875b9e2d5c6bdf52c48d08e"
+      }
+    },
+    {
+      "scene": 33,
+      "item": "S2B_49QEU_20200115_0_L2A",
+      "reviewer": "independent-results-verification",
+      "records": 901,
+      "counts": {
+        "water": 741,
+        "question": 157,
+        "terrestrial": 3
+      },
+      "review_pin": {
+        "path": "bulk-completion/independent-results-verification/scene33-proposed-dispositions.json",
+        "bytes": 2875368,
+        "sha256": "decf5ada774ad1ba26f0e5d7ab864ae3b52b091d0e70aa1383ca892394cbcba6"
+      }
+    },
+    {
+      "scene": 34,
+      "item": "S2A_49PET_20200310_0_L2A",
+      "reviewer": "worker1",
+      "records": 260,
+      "counts": {
+        "water": 233,
+        "question": 24,
+        "terrestrial": 3
+      },
+      "review_pin": {
+        "path": "bulk-completion/offshore13649-interpretation/worker1/scene-34-review.json",
+        "bytes": 987403,
+        "sha256": "9210530ffc92bf3b78030b8ea04ce1ee8c7bef62116388a479e4a25ad05d839e"
+      }
+    },
+    {
+      "scene": 35,
+      "item": "S2A_49PFT_20200219_0_L2A",
+      "reviewer": "worker3",
+      "records": 108,
+      "counts": {
+        "water": 76,
+        "question": 32
+      },
+      "review_pin": {
+        "path": "bulk-completion/offshore13649-interpretation/worker3/scene-035-interpretation.json",
+        "bytes": 310420,
+        "sha256": "6b80126e40aba790867323647d9442c356c116c72d9bd658f28d62eb3b64c733"
+      }
+    }
+  ],
+  "deliverables": [
+    {
+      "path": "bulk-completion/offshore13649-proposed-adoption/proposed-physical-interpretations.json",
+      "bytes": 76740284,
+      "sha256": "c87eebb4f733808670121daec797b3a0a5f810f7e6d0a121395ac28bd1eb0a92"
+    },
+    {
+      "path": "bulk-completion/offshore13649-proposed-adoption/unresolved-physical-questions.json",
+      "bytes": 17775584,
+      "sha256": "7621579e9afd0da913264bb959fc0e5e5068d62309562b06ac986b36c524ea3f"
+    },
+    {
+      "path": "bulk-completion/offshore13649-proposed-adoption/scene32-block03-04-root-review.json",
+      "bytes": 297452,
+      "sha256": "08d490e7f0dd3d097661a238f437a51d8b892ca73a964ea933f2d1ea4cc82cef"
+    },
+    {
+      "path": "bulk-completion/offshore13649-proposed-adoption/scene32-block03-04-exact54.csv",
+      "bytes": 4935,
+      "sha256": "0b7fef0b67e10a5ddedf644058d873a4fd3424a7a5b25a4e32d7ea2e0680fb58"
+    }
+  ],
+  "limits": [
+    "Proposed only: Root substantive review/adoption pending. No adopted timestamp or adopted answer claim.",
+    "Dated exact-centre physical/locality facts only; no whole-cell class, annual persistence, exact reef emergence, legal shoreline, marine jurisdiction, sovereignty or title conclusion.",
+    "Every original record, flag, source-relative value, coordinate, source association and territorial/foreign-reference hold remains unchanged, including answered water locations.",
+    "Valid masks establish source presence; literal SCL remains model evidence and can conflict with visually read built/vegetated bodies. No SCL or spectral threshold decides these records.",
+    "Indices2641,2642,2643 remain explicitly unobserved outside the actual native frame; no absent pixel is called water.",
+    "Source custody reuses completed independent 3,512,899,648-byte hash verification; this transformation reads JSON identities and hashes reviewer reports only. No repeated full product hash pass, image/raster replay, remote read, new source, qualification, repair or publication."
+  ]
+}

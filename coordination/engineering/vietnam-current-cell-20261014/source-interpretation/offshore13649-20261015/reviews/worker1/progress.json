@@ -1,0 +1,225 @@
+{
+  "reviewer": "worker1",
+  "assigned_scene_numbers": [
+    2,
+    6,
+    10,
+    14,
+    18,
+    22,
+    26,
+    30,
+    34
+  ],
+  "completed_scene_numbers": [
+    2,
+    6,
+    10,
+    14,
+    18,
+    22,
+    26,
+    30,
+    34
+  ],
+  "remaining_scene_numbers": [],
+  "original_keys_reviewed": 2575,
+  "native_blocks_reviewed": 71,
+  "interpretation_counts": {
+    "unresolved-local-cloud-shadow-or-fringe": 267,
+    "dated-water-location": 2246,
+    "unresolved-fine-reef-beach-harbour-or-shore": 17,
+    "dated-terrestrial-body-location": 15,
+    "unresolved-fine-reef-surf-edge": 30
+  },
+  "answered_proposed": 2261,
+  "unanswered": 314,
+  "root_adopted_here": 0,
+  "repair_credit": 0,
+  "validation": "Exact one-to-one frozen scene membership; no duplicates; unchanged original keys/records/coordinates; every answer has a dated fact and every unresolved key has a question; zero authority/repair credit; all image locators exist.",
+  "reports": [
+    {
+      "scene_number": 2,
+      "item": "S2A_50PKT_20200513_0_L2A",
+      "acquisition_datetime": "2020-05-13T02:54:51.924000Z",
+      "counts": {
+        "original_keys": 1292,
+        "native_blocks_reviewed": 22,
+        "unresolved-local-cloud-shadow-or-fringe": 178,
+        "dated-water-location": 1085,
+        "unresolved-fine-reef-beach-harbour-or-shore": 17,
+        "dated-terrestrial-body-location": 12,
+        "answered_proposed": 1097,
+        "root_adopted_here": 0,
+        "repair_credit": 0
+      },
+      "report": "scene-02-review.json"
+    },
+    {
+      "scene_number": 6,
+      "item": "S2A_49PHK_20200920_0_L2A",
+      "acquisition_datetime": "2020-09-20T02:55:37.524000Z",
+      "counts": {
+        "original_keys": 451,
+        "native_blocks_reviewed": 14,
+        "dated-water-location": 392,
+        "unresolved-local-cloud-shadow-or-fringe": 59,
+        "answered_proposed": 392,
+        "root_adopted_here": 0,
+        "repair_credit": 0
+      },
+      "report": "scene-06-review.json"
+    },
+    {
+      "scene_number": 10,
+      "item": "S2A_50PMR_20200203_1_L2A",
+      "acquisition_datetime": "2020-02-03T02:55:01.287000Z",
+      "counts": {
+        "original_keys": 236,
+        "native_blocks_reviewed": 7,
+        "dated-water-location": 208,
+        "unresolved-local-cloud-shadow-or-fringe": 25,
+        "unresolved-fine-reef-surf-edge": 3,
+        "answered_proposed": 208,
+        "root_adopted_here": 0,
+        "repair_credit": 0
+      },
+      "report": "scene-10-review.json"
+    },
+    {
+      "scene_number": 14,
+      "item": "S2B_50PLR_20200309_0_L2A",
+      "acquisition_datetime": "2020-03-09T02:55:10.737000Z",
+      "counts": {
+        "original_keys": 166,
+        "native_blocks_reviewed": 10,
+        "dated-water-location": 166,
+        "answered_proposed": 166,
+        "root_adopted_here": 0,
+        "repair_credit": 0
+      },
+      "report": "scene-14-review.json"
+    },
+    {
+      "scene_number": 18,
+      "item": "S2B_49NGJ_20200122_0_L2A",
+      "acquisition_datetime": "2020-01-22T03:05:38.627000Z",
+      "counts": {
+        "original_keys": 77,
+        "native_blocks_reviewed": 4,
+        "dated-water-location": 77,
+        "answered_proposed": 77,
+        "root_adopted_here": 0,
+        "repair_credit": 0
+      },
+      "report": "scene-18-review.json"
+    },
+    {
+      "scene_number": 22,
+      "item": "S2A_49PHM_20200127_0_L2A",
+      "acquisition_datetime": "2020-01-27T03:04:51.666000Z",
+      "counts": {
+        "original_keys": 58,
+        "native_blocks_reviewed": 3,
+        "dated-water-location": 55,
+        "unresolved-fine-reef-surf-edge": 3,
+        "answered_proposed": 55,
+        "root_adopted_here": 0,
+        "repair_credit": 0
+      },
+      "report": "scene-22-review.json"
+    },
+    {
+      "scene_number": 26,
+      "item": "S2B_50PKS_20200508_0_L2A",
+      "acquisition_datetime": "2020-05-08T02:54:59.422000Z",
+      "counts": {
+        "original_keys": 33,
+        "native_blocks_reviewed": 1,
+        "dated-water-location": 28,
+        "unresolved-local-cloud-shadow-or-fringe": 5,
+        "answered_proposed": 28,
+        "root_adopted_here": 0,
+        "repair_credit": 0
+      },
+      "report": "scene-26-review.json"
+    },
+    {
+      "scene_number": 30,
+      "item": "S2B_49PDK_20200822_0_L2A",
+      "acquisition_datetime": "2020-08-22T03:15:39.355000Z",
+      "counts": {
+        "original_keys": 2,
+        "native_blocks_reviewed": 1,
+        "dated-water-location": 2,
+        "answered_proposed": 2,
+        "root_adopted_here": 0,
+        "repair_credit": 0
+      },
+      "report": "scene-30-review.json"
+    },
+    {
+      "scene_number": 34,
+      "item": "S2A_49PET_20200310_0_L2A",
+      "acquisition_datetime": "2020-03-10T03:13:32.601000Z",
+      "counts": {
+        "original_keys": 260,
+        "native_blocks_reviewed": 9,
+        "dated-water-location": 233,
+        "unresolved-fine-reef-surf-edge": 24,
+        "dated-terrestrial-body-location": 3,
+        "answered_proposed": 236,
+        "root_adopted_here": 0,
+        "repair_credit": 0
+      },
+      "report": "scene-34-review.json"
+    }
+  ],
+  "report_pins": [
+    {
+      "path": "bulk-completion/offshore13649-interpretation/worker1/scene-02-review.json",
+      "bytes": 4894420,
+      "sha256": "d45dc42033dfab93261d3b80e61a8ea91e5171d090de4641aa8ae934c28e1739"
+    },
+    {
+      "path": "bulk-completion/offshore13649-interpretation/worker1/scene-06-review.json",
+      "bytes": 1707443,
+      "sha256": "9bc6623c2227d0305696d8e958880151c89497c255eb6a9b1eac583b64b5668a"
+    },
+    {
+      "path": "bulk-completion/offshore13649-interpretation/worker1/scene-10-review.json",
+      "bytes": 894509,
+      "sha256": "1fda38959becbeca9e621a0da8bd0a7b7e102efcadf08332a90d4f8d8b95bc80"
+    },
+    {
+      "path": "bulk-completion/offshore13649-interpretation/worker1/scene-14-review.json",
+      "bytes": 634473,
+      "sha256": "cf1b7687c4d6f156b630785eb431421b1c40071d76ce630c644997dca5836c07"
+    },
+    {
+      "path": "bulk-completion/offshore13649-interpretation/worker1/scene-18-review.json",
+      "bytes": 294979,
+      "sha256": "9cddfd2aa33ac843770d9e711469e32c35349106174a0701bf91ffdce5412658"
+    },
+    {
+      "path": "bulk-completion/offshore13649-interpretation/worker1/scene-22-review.json",
+      "bytes": 222771,
+      "sha256": "d4c47f01735909caa0735940fc0b6279274ab85943d3fe33811eed645344742a"
+    },
+    {
+      "path": "bulk-completion/offshore13649-interpretation/worker1/scene-26-review.json",
+      "bytes": 126677,
+      "sha256": "2e164e9b1ac2d2cefca1b133b14c15348c69841807a7021fbe4d9eec820068ee"
+    },
+    {
+      "path": "bulk-completion/offshore13649-interpretation/worker1/scene-30-review.json",
+      "bytes": 10379,
+      "sha256": "9cc1f0e51b676074df5670aeff6f3395407040eadec5aeaf9bf50090ad44aeec"
+    },
+    {
+      "path": "bulk-completion/offshore13649-interpretation/worker1/scene-34-review.json",
+      "bytes": 987403,
+      "sha256": "9210530ffc92bf3b78030b8ea04ce1ee8c7bef62116388a479e4a25ad05d839e"
+    }
+  ]
+}
