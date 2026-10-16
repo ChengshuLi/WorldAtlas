@@ -1,0 +1,31 @@
+✔ actual CLI checks complete mixed assigned/zero-cell cohort, every new cell and stable rows (211.977745ms)
+✔ smoke rejects wrong ledger hash without creating output (20.550681ms)
+✔ smoke rejects wrong cumulative count without creating output (106.074538ms)
+✔ smoke rejects duplicate member without creating output (18.287508ms)
+✔ smoke rejects missing member without creating output (15.942091ms)
+✔ smoke rejects duplicate roster without creating output (16.928201ms)
+✔ smoke rejects duplicate batch without creating output (15.255847ms)
+✔ smoke rejects wrong target without creating output (84.898339ms)
+✔ smoke rejects wrong disposition without creating output (78.34422ms)
+✔ smoke rejects wrong geometry without creating output (82.314505ms)
+✔ smoke rejects empty cohorts without creating output (17.276327ms)
+✔ smoke rejects undeclared field without creating output (15.27585ms)
+✔ actual kernel rejects missing/duplicate selected rows, target drift and omitted effective primitive (311.755369ms)
+✔ saved before-state controls reject real owner mutation without changing added cells (202.875479ms)
+✔ current base controls use every affected occupied row and a nonvacuous fallback (69.330962ms)
+✔ actual loaded target custody agrees with the current pinned roster (40.49963ms)
+✔ actual loader rejects additions over already occupied native cells (43.492834ms)
+✔ whole-file checks reject corrupted assets, absent assets, path traversal and symlinks (152.25902ms)
+✔ every output collision and symlink rejects before work and preserves originals (61.369118ms)
+✔ CLI fails on missing required arguments and duplicate/unknown options (318.422555ms)
+✔ genuine startup native descriptor without encoded bytes passes with actual whole-file hash and size (125.040197ms)
+✔ genuine startup native descriptor still rejects wrong encoded SHA and missing selected custody bytes (77.446322ms)
+✔ actual emitted smoke keeps distinct authority pointsets with the same original component label (197.551614ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2384.30454
