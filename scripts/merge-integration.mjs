@@ -334,7 +334,9 @@ export async function completeIntegration(options) {
     }
     const profile = integrationProfile(state.pr.head.ref, state.files, state.reservation, authored?.entries);
     let baseline, selection = null;
-    if (profile === 'full' && selectedDataCandidate(state.pr.head.ref, state.files, state.reservation)) {
+    // Selection can only exempt candidate checker code. When no changed path
+    // selects that code, another whole-data classification cannot affect it.
+    if (candidateGeographyCode(profile, state.files) && selectedDataCandidate(state.pr.head.ref, state.files, state.reservation)) {
       authored ??= await tree(options.api, options.repo, state.pr.head.sha);
       try {
         baseline = await tree(options.api, options.repo, state.base);
