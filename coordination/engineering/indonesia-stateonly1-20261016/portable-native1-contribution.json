@@ -43,8 +43,11 @@
     }
   ],
   "literal_keyset": {
+    "commit": "5d0a0716f52ed28610e2d547afcdcff49daf60c8",
     "path": "coordination/engineering/indonesia-stateonly1-20261016/qualified1-owner-y-x.jsonl",
-    "bytes": 20,
+    "mode": "100644",
+    "git_blob_oid": "7b4ab99c45e118a1fef2433e73cfc08e13d3daf1",
+    "bytes": 22,
     "sha256": "cb92842bc15eef46243a352799f119f2ad7b4c253dcf5da53cdaa9a4932898c0"
   },
   "original_request_to_native_owner_join": [
@@ -137,5 +140,14 @@
     "Current native base owner-zero proof is reused only with exact unchanged accepted base and selected target bytes; fresh whole accepted285582 patch has no hit.",
     "Prepared967 has no overlap, but is not accepted and is not modified.",
     "Final current competition/conservation, distinct output review, emitted consumer and accepted subsequent selected delivery remain required."
-  ]
+  ],
+  "original_request_to_native_owner_join_pin": {
+    "commit": "5d0a0716f52ed28610e2d547afcdcff49daf60c8",
+    "path": "coordination/engineering/indonesia-stateonly1-20261016/original1-request-to-native-owner.json",
+    "mode": "100644",
+    "git_blob_oid": "3a3d7968bf1ebe32facd24acdf90227aa68ef5c4",
+    "bytes": 244,
+    "sha256": "5d206ef66ee314d590e69bd5f3514e001a4b4882580129005395d6203a7b1275"
+  },
+  "portable_metadata_correction": "The initial unreviewed portable index declared20 bytes for its22-byte literal key file. This bounded correction derives the full immutable pin from actual Git bytes; scientific quartet and execution are unchanged."
 }
