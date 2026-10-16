@@ -40,7 +40,7 @@ test('actual committed CLI fixture produces two identical complete offline candi
     'native-candidate-manifest.mjs','native-preparation-guards.mjs','native-topology-binding.mjs','verify-native-candidate.mjs',
     'prepare-context-inputs.mjs','compact-context-inputs.mjs','verify-context-inputs.mjs'])
     put('scripts/native-ownership/' + name, fs.readFileSync(path.join(source, name)));
-  for (const name of ['src/native-grid.js','src/native-runtime.js','src/ownership-codec.js','src/ownership-assets.js','src/ownership-method.js','src/pixel-ownership.js','src/pixel-grid.js','scripts/audit-grid-intervals.mjs',latitudePath])
+  for (const name of ['src/native-grid.js','src/native-runtime.js','src/ownership-codec.js','src/ownership-assets.js','src/ownership-method.js','src/pixel-ownership.js','src/pixel-grid.js','scripts/audit-grid-intervals.mjs','scripts/selected-reference-metadata.mjs','src/reference-metadata.js',latitudePath])
     put(name, fs.readFileSync(path.join(atlas, name)));
   const feature = {type: 'Feature', id: 'fixture-location', properties: {name: 'Fixture', parent_id: 'province'},
     geometry: {type: 'Polygon', coordinates: [[[0,0],[1,0],[1,1],[0,1],[0,0]]]}};
@@ -135,6 +135,22 @@ test('actual committed context preparation and readback retain complete geometry
   const proof=JSON.parse(execFileSync(process.execPath,[verify,'one','two'],{cwd:repo,encoding:'utf8'}));
   assert.equal(proof.locations,1);assert.equal(proof.complete_original_ids_and_parents,true);assert.equal(proof.unchanged_original_point_sets,true);
   assert.equal(proof.run_one_sha256,proof.run_two_sha256);
+  const preparedInputs=JSON.parse(fs.readFileSync(path.join(repo,'.cache/native-context-inputs/one/inputs.json')));
+  for(const executed of [preparedInputs.executed_sources,proof.executed_sources]){
+    assert.equal(executed.length,11,'Current preparation and readback bind the complete code closure');
+    for(const name of ['scripts/selected-reference-metadata.mjs','src/reference-metadata.js'])
+      assert.equal(executed.filter(file=>file.path===name).length,1);
+  }
+  for(const name of ['scripts/selected-reference-metadata.mjs','src/reference-metadata.js']){
+    const helper=path.join(repo,name),original=fs.readFileSync(helper);
+    fs.appendFileSync(helper,'\n// changed executed helper\n');
+    try {
+      for(const [command,args] of [[prepare,[baseline,'changed-context-helper']],[verify,['one','two']]])
+        assert.throws(()=>execFileSync(process.execPath,[command,...args],{cwd:repo,stdio:'pipe'}),
+          error=>/Executed code differs from immutable bootstrap/.test(error.stderr?.toString()??''));
+      assert.equal(fs.existsSync(path.join(repo,'.cache/native-context-inputs/changed-context-helper')),false);
+    } finally {fs.writeFileSync(helper,original);}
+  }
   assert.throws(()=>execFileSync(process.execPath,[prepare,baseline,'one'],{cwd:repo,stdio:'pipe'}));
   const output=path.join(repo,'.cache/native-context-inputs/two'),reportFile=path.join(output,'inputs.json'),report=fs.readFileSync(reportFile);
   fs.unlinkSync(reportFile);

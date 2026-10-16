@@ -10,6 +10,7 @@ import {nativePolygonIntervals,NATIVE_GRID_METHOD} from '../src/native-grid.js';
 import {nativeOnlyComponent} from '../src/native-grid.js';
 import {unshuffleOwnershipBytes} from '../src/ownership-codec.js';
 import {readSelectedAdditive,selectedAdditiveRows,compareVersionedRepairLedgers} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {validateReferenceMetadataProjection} from './selected-reference-metadata.mjs';
 
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const demand=(v,m)=>{if(!v)throw Error(m);};
@@ -22,6 +23,7 @@ const same=isDeepStrictEqual;
 const freezeJson=value=>{if(value&&typeof value==='object'){Object.values(value).forEach(freezeJson);Object.freeze(value);}return value;};
 const installedRuntimes=new Map();
 const selectedSnapshots=new WeakMap();
+const sourceApplications=new WeakMap();
 // Reuse only a graph whose complete encoded/decoded body was authenticated by
 // the original selected-base acquisition. Ordinary alias bytes are still read.
 export function selectedBaseAssetAlias(snapshot,role,pin) {
@@ -49,7 +51,34 @@ export function selectedGeometrySourceAlias(snapshot) {
   demand(resolver.bank&&Object.isFrozen(resolver.bank)&&resolver.replacements instanceof Map
     &&resolver.replacements.size===resolver.bank.overrides.length
     &&resolver.bank.overrides.every(p=>resolver.replacements.get(p.logical_path)===p),'Selected source replacement roster drift');
+  demand(resolver.referenceOwners===accepted.referenceOwners&&resolver.metadataProjection===accepted.metadataProjection,
+    'Selected reference metadata application drift');
   return resolver;
+}
+// Never alias these projected parents to the original encoded owner bytes.
+// Stable scientific id/index/camera custody remains in snapshot.owners.
+export function selectedReferenceOwners(snapshot) {
+  const accepted=selectedSnapshots.get(snapshot);
+  demand(accepted&&snapshot.reader===accepted.reader&&snapshot.reader.version===accepted.readerVersion
+    &&snapshot.manifest===accepted.manifestObject&&snapshot.owners===accepted.ownerObject
+    &&accepted.selection===JSON.stringify(snapshot.selection)&&accepted.manifest===JSON.stringify(snapshot.manifest),
+    'Require unchanged authenticated original owner context');
+  if(!snapshot.selection.reference_projection)return snapshot.owners;
+  const resolver=selectedGeometrySourceAlias(snapshot);
+  demand(Object.isFrozen(resolver.referenceOwners),'Current reference owners must be immutable');
+  return resolver.referenceOwners;
+}
+// Explicit original scientific membership, separate from current application
+// sources. The selected resolver has already authenticated every M change.
+export function selectedNativeSourceMembership(snapshot,pin) {
+  const resolver=selectedGeometrySourceAlias(snapshot);
+  demand(snapshot.selection.reference_projection&&resolver.paths.includes(pin?.path),
+    'Source membership lacks actual selected metadata applicability');
+  const original=resolver.readNativeReferenceSource(pin.path);
+  demand(original.source.mode===pin.mode&&original.source.git_blob_oid===pin.git_blob_oid
+    &&original.source.bytes===pin.bytes&&original.whole_sha256===pin.sha256,
+    'Metadata application changes original scientific membership');
+  return original;
 }
 export function runtimeIdentity(executable=process.execPath) {
   const executablePath=fs.realpathSync(executable);
@@ -202,8 +231,11 @@ export class SelectedGeometrySources {
     const release=JSON.parse(ordinaryGzip(encoded));
     const entries=release.releases;
     demand(Array.isArray(entries)&&entries.length>0&&new Set(entries.map(r=>r.id)).size===entries.length,'Incomplete selected release roster');
-    this.release=entries.find(r=>r.id===snapshot.selection.release_id);
-    demand(this.release&&this.release===entries.at(-1)&&hash(this.release.footprints_sha256),'Native source differs from current selected geographic release');
+    this.nativeRelease=entries.find(r=>r.id===snapshot.selection.release_id);
+    this.release=entries.at(-1);
+    demand(this.nativeRelease&&hash(this.nativeRelease.footprints_sha256)
+      &&(snapshot.selection.reference_projection||this.nativeRelease===this.release),
+    'Native source differs from current selected geographic release');
     const index=this.reader.json('data/world-index.json');
     demand(Array.isArray(index.parts)&&index.parts.length>0&&new Set(index.parts).size===index.parts.length,'Incomplete whole source containing roster');
     this.paths=index.parts.map(p=>{demand(safe(p),'Unsafe world source part');return 'data/'+p;});
@@ -212,11 +244,48 @@ export class SelectedGeometrySources {
       demand(this.bank.footprints_sha256===this.release.footprints_sha256&&this.bank.locations===snapshot.owners.length,'Selected source full scope/digest differs');
       const original=this.readPinned(this.bank.world_index);demand(original.equals(this.reader.read('data/world-index.json')),'Source bank original index differs from current complete index');
       demand(Array.isArray(this.bank.unchanged_files)&&Array.isArray(this.bank.overrides),'Incomplete selected source map');
-      const roster=new Map();
-      for(const p of this.bank.unchanged_files){demand(pathSet.has(p.path)&&!roster.has(p.path),'Foreign/duplicate selected original containing source');this.checkPin(p);const actual=this.reader.descriptor(p.path);demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'Current original containing body differs from selected source map');roster.set(p.path,{...p,kind:'ordinary-immutable-git-source'});}
+      const roster=new Map(),drifted=new Set();
+      for(const p of this.bank.unchanged_files){demand(pathSet.has(p.path)&&!roster.has(p.path),'Foreign/duplicate selected original containing source');this.checkPin(p);const actual=this.reader.descriptor(p.path);if(!(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes))drifted.add(p.path);roster.set(p.path,{...p,kind:'ordinary-immutable-git-source'});}
       for(const p of this.bank.overrides){demand(pathSet.has(p.logical_path)&&!roster.has(p.logical_path)&&p.encoding==='gzip','Foreign/duplicate/unsupported selected source override');this.checkPin(p);demand(Number.isSafeInteger(p.decoded_bytes)&&p.decoded_bytes>0&&hash(p.decoded_sha256),'Unbounded whole source override');roster.set(p.logical_path,{...p,kind:'selected-exact-encoded-override'});}
       demand(roster.size===this.paths.length&&this.paths.every(p=>roster.has(p)),'Incomplete selected source containing inventory');
       this.sources=this.paths.map(p=>roster.get(p));this.replacements=new Map(this.bank.overrides.map(p=>[p.logical_path,p]));
+      const projectionPin=snapshot.selection.reference_projection;
+      if(projectionPin!==undefined){
+        demand(projectionPin&&same(Object.keys(projectionPin).sort(),['bytes','path','sha256'])&&safe(projectionPin.path)
+          &&hash(projectionPin.sha256)&&Number.isSafeInteger(projectionPin.bytes)&&projectionPin.bytes>0,
+        'Unsupported current reference metadata selector');
+        const descriptor=this.reader.descriptor(projectionPin.path);demand(descriptor.mode==='100644'
+          &&descriptor.bytes===projectionPin.bytes,'Current reference metadata projection whole identity differs');
+        const projection=this.reader.json(projectionPin.path,{expected:projectionPin.sha256});
+        const applied=validateReferenceMetadataProjection({projection,selection:snapshot.selection,manifest:snapshot.manifest,
+          owners:snapshot.owners,read:pin=>this.readPinned(pin),originalSources:roster});
+        demand(same(Object.fromEntries(['id','footprints_sha256','hierarchy_sha256'].map(key=>[key,this.nativeRelease[key]])),applied.nativeReference),
+          'Metadata application changes the original selected scientific reference');
+        demand(same(Object.fromEntries(['id','footprints_sha256','hierarchy_sha256'].map(key=>[key,this.release[key]])),applied.reference),
+          'Current reference metadata differs from the actual latest release');
+        const migrationPins=new Set(Object.values(this.release.metadata?.metadata_migration_sha256??{}));
+        demand(projection.receipts.every(pin=>migrationPins.has(pin.sha256)),
+          'Current reference release does not bind every applied metadata receipt');
+        const hierarchy=this.reader.descriptor('data/hierarchy.json');
+        demand(projection.hierarchy.after.path==='data/hierarchy.json'&&projection.hierarchy.after.encoding===undefined
+          &&hierarchy.mode===projection.hierarchy.after.mode&&hierarchy.git_blob_oid===projection.hierarchy.after.git_blob_oid
+          &&hierarchy.bytes===projection.hierarchy.after.bytes,'Current hierarchy differs from the metadata application');
+        for(const [name,update]of applied.sourceUpdates){
+          const current=this.reader.descriptor(name);
+          demand(pathSet.has(name)&&update.after.path===name&&update.after.encoding===undefined
+            &&current.mode===update.after.mode&&current.git_blob_oid===update.after.git_blob_oid&&current.bytes===update.after.bytes,
+          'Current complete source differs from the metadata application');
+        }
+        demand([...drifted].every(name=>applied.sourceUpdates.has(name)),
+          'Current original containing body differs from selected source map without a complete metadata application');
+        this.metadataProjection=freezeJson(projection);this.referenceOwners=freezeJson(applied.owners);
+        sourceApplications.set(this,{...applied,nativeSources:roster});
+        this.sources=this.paths.map(name=>{
+          const update=applied.sourceUpdates.get(name);
+          return update?{...update.after,kind:'metadata-projected-selected-source',logical_path:name,
+            original_source:roster.get(name),reference_projection:projectionPin}:roster.get(name);
+        });
+      }else demand(drifted.size===0,'Current original containing body differs from selected source map');
     }else{
       const replacements=this.image.map.logical_targets.filter(p=>p.target.startsWith('data/geography/'));
       demand(replacements.every(p=>pathSet.has(p.target)),'Selected bank contains unrostered source replacement');
@@ -227,7 +296,8 @@ export class SelectedGeometrySources {
         return {...this.reader.descriptor(name),kind:'ordinary-immutable-git-source'};
       });
     }
-    freezeJson(this.paths);freezeJson(this.sources);freezeJson(this.bank);freezeJson(this.release);Object.freeze(this);
+    this.referenceOwners??=snapshot.owners;
+    freezeJson(this.paths);freezeJson(this.sources);freezeJson(this.bank);freezeJson(this.nativeRelease);freezeJson(this.release);Object.freeze(this);
 
   }
   checkPin(p) {
@@ -244,11 +314,30 @@ export class SelectedGeometrySources {
     return raw;
   }
 
+  // Native applicability remains bound to the literal source bank that was
+  // scientifically qualified. The complete metadata application is validated
+  // first, including equality of every original geometry/non-metadata value.
+  // Current queries always use read(), which returns the actual current source.
+  readNativeReferenceSource(name) {
+    demand(this.paths.includes(name),'Foreign scientific source outside complete selected roster');
+    const application=sourceApplications.get(this),update=application?.sourceUpdates.get(name);
+    if(!update)return this.read(name);
+    const source=application.nativeSources.get(name),encoded=this.readPinned(update.before);
+    let raw=encoded;
+    if(update.before.encoding==='gzip'){
+      raw=ordinaryGzip(encoded,update.before.decoded_bytes);
+      demand(raw.length===update.before.decoded_bytes&&sha(raw)===update.before.decoded_sha256,
+        'Original scientific source inverse differs');
+    }
+    return this.collection(raw,source);
+  }
   read(name) {
     demand(this.paths.includes(name),'Foreign source outside complete selected roster');
     const replacement=this.replacements.get(name);
     const source=this.sources[this.paths.indexOf(name)];let raw;
-    if(this.bank){
+    const metadataUpdate=sourceApplications.get(this)?.sourceUpdates.get(name);
+    if(metadataUpdate){raw=this.readPinned(metadataUpdate.after);}
+    else if(this.bank){
       const encoded=this.readPinned(source);
       if(replacement){demand(encoded.length>=18&&encoded[0]===31&&encoded[1]===139&&encoded.readUInt32LE(encoded.length-4)===source.decoded_bytes%2**32,'Source override gzip size differs before decode');raw=ordinaryGzip(encoded,source.decoded_bytes);demand(raw.length===source.decoded_bytes&&sha(raw)===source.decoded_sha256,'Whole selected source override differs');}
       else raw=encoded;
@@ -403,9 +492,11 @@ function loadBaseSelection(reader) {
   const has=reader.git('ls-tree','-z',reader.version,'--','data/ownership-selection.json').length;
   if(!has)return null;
   const selection=reader.json('data/ownership-selection.json');
-  const selectionKeys=['manifest_path','method','release_id','sha256','version',...(selection.selected_geography?['selected_geography']:[]),...(Object.hasOwn(selection,'additive_release')?['additive_release']:[]),...(Object.hasOwn(selection,'artifact_consumption')?['artifact_consumption']:[])].sort();
+  const selectionKeys=['manifest_path','method','release_id','sha256','version',...(selection.selected_geography?['selected_geography']:[]),...(Object.hasOwn(selection,'additive_release')?['additive_release']:[]),...(Object.hasOwn(selection,'artifact_consumption')?['artifact_consumption']:[]),...(Object.hasOwn(selection,'reference_projection')?['reference_projection']:[])].sort();
   demand(same(Object.keys(selection).sort(),selectionKeys),'Unsupported committed additive/ownership selection; no proposal scanning');
   demand(selection.version===1&&selection.method==='native-linear-evenodd-first-owner-v1'&&safe(selection.manifest_path)&&hash(selection.sha256),'Unsupported ownership selection');
+  demand(selection.reference_projection===undefined||selection.selected_geography,
+    'Reference metadata application requires the explicit selected source bank');
   const manifest=reader.json(selection.manifest_path,{expected:selection.sha256});validateParts(manifest);
   const artifactConsumption=readArtifactConsumption(reader,selection,manifest);
   demand(selection.release_id===manifest.geographic_release,'Selected reference differs from native bank');
@@ -441,7 +532,9 @@ function loadBaseSelection(reader) {
     base_manifest:{mode:reader.inventory.get(reader.version+':'+selection.manifest_path).mode,bytes:reader.inventory.get(reader.version+':'+selection.manifest_path).bytes,sha256:selection.sha256},
     owner_roster:{mode:reader.inventory.get(bounds.commit+':'+bounds.path).mode,bytes:rawBounds.length,sha256:sha(rawBounds),decoded_bytes:decoded.length,decoded_sha256:sha(decoded)}
   }});
-  if(selection.selected_geography){snapshot.geometrySources=new SelectedGeometrySources(snapshot);selectedSnapshots.get(snapshot).geometrySources=snapshot.geometrySources;}
+  if(selection.selected_geography){snapshot.geometrySources=new SelectedGeometrySources(snapshot);Object.assign(selectedSnapshots.get(snapshot),{
+    geometrySources:snapshot.geometrySources,referenceOwners:snapshot.geometrySources.referenceOwners,
+    metadataProjection:snapshot.geometrySources.metadataProjection});}
   return snapshot;
 }
 
@@ -750,7 +843,7 @@ export function repairVisibilityWitnesses({candidates,size,latitudes,beforeRows,
 export function selectedBootstrap(repo,baseline,candidate,{parentRuntimePath}={}) {
   const runtimePaths=[fs.realpathSync(process.execPath),...(parentRuntimePath?[fs.realpathSync(parentRuntimePath)]:[])];
   const codeRoot=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-  const codePaths=['scripts/run-geographic-check.py','scripts/check-effective-geographic-regression.mjs','src/native-grid.js','src/ownership-codec.js','coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs'];
+  const codePaths=['scripts/run-geographic-check.py','scripts/check-effective-geographic-regression.mjs','src/native-grid.js','src/ownership-codec.js','coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/selected-reference-metadata.mjs','src/reference-metadata.js'];
   const codeStats=codePaths.map(name=>{const file=path.join(codeRoot,name),stat=fs.statSync(file);demand(stat.isFile()&&Number.isSafeInteger(stat.size)&&stat.size>0,'Nonordinary trusted execution code');return {name,file,stat};});
   const launchGit=(process.env.PATH??'').split(path.delimiter).map(p=>path.join(p,'git')).find(p=>{try{return fs.statSync(p).isFile();}catch{return false;}});
   demand(launchGit,'Missing installed Git');runtimePaths.push(fs.realpathSync(launchGit));

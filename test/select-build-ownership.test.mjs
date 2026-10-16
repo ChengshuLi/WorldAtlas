@@ -58,3 +58,25 @@ test('ordinary build selects its committed release, while explicit candidates re
   await fs.writeFile(path.join(root,'data/ownership-selection.json'),JSON.stringify({...selection,manifest_path:'../escape.json'}));
   await assert.rejects(readBuildOwnershipSelection({root,env:{}}),/Invalid committed/);
 });
+
+test('offline native selection keeps original qualified N and binds a pinned current metadata M separately',async()=>{
+  const selector={version:1,method:manifest.method,manifest_path:candidate,sha256,release_id:reference.id};
+  const current={...reference,id:'geography:review:current-metadata',hierarchy_sha256:'f'.repeat(64)};
+  const pin=(name,hash)=>({commit:'1'.repeat(40),path:name,mode:'100644',git_blob_oid:'2'.repeat(40),bytes:1,sha256:hash});
+  const projection={version:1,kind:'native-reference-metadata-projection-v1',native_selection:selector,native_reference:reference,reference:current,
+    original_owner_roster_sha256:manifest.original_assets.bounds.sha256,
+    hierarchy:{before:pin('data/hierarchy.json',reference.hierarchy_sha256),after:pin('data/hierarchy.json',current.hierarchy_sha256)},
+    receipts:[pin('data/receipt.json','3'.repeat(64))],source_updates:[],location_changes:[],group_changes:[],provinces:['fixture:province']};
+  const raw=Buffer.from(JSON.stringify(projection)),name='metadata-application.json',pointer={path:name,bytes:raw.length,sha256:createHash('sha256').update(raw).digest('hex')};
+  await fs.writeFile(path.join(root,name),raw);
+  const selected={...selector,reference_projection:pointer};
+  const input={root,manifestPath:candidate,expectedSha256:sha256,expectedReference:current,requireNative:true,referenceSelection:selected,referenceProjection:pointer};
+  const before=await selectBuildOwnership({manifestPath:candidate,expectedSha256:sha256,expectedReference:reference,requireNative:true}),after=await selectBuildOwnership(input);
+  assert.deepEqual(after.manifest,before.manifest);assert.deepEqual(after.bounds,before.bounds);assert.deepEqual(after.verification,before.verification);
+  assert.deepEqual(after.metadata,before.metadata);assert.deepEqual(after.nativeReference,reference);assert.deepEqual(after.applicationReference,current);
+  await assert.rejects(selectBuildOwnership({...input,expectedReference:{...current,id:'geography:foreign'}}),/current selected release/);
+  await assert.rejects(selectBuildOwnership({...input,referenceProjection:{...pointer,sha256:'0'.repeat(64)},referenceSelection:{...selected,reference_projection:{...pointer,sha256:'0'.repeat(64)}}}),/checksum differs/);
+  await assert.rejects(selectBuildOwnership({...input,referenceProjection:{...pointer,extra:true},referenceSelection:{...selected,reference_projection:{...pointer,extra:true}}}),/pointer/);
+  await fs.writeFile(path.join(root,'data/ownership-selection.json'),JSON.stringify(selected));
+  const option=await readBuildOwnershipSelection({root,env:{}});assert.deepEqual(option.referenceProjection,pointer);assert.deepEqual(option.referenceSelection,selected);
+});

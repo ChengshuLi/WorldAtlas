@@ -66,7 +66,7 @@ test('geography software route is derived from changed checker inputs, retaining
  for (const name of CURRENT_REBIND_CODE) assert.equal(candidateGeographyCode('full', changed(name)), true, name);
  for (const name of ['scripts/run-geographic-check.py', 'scripts/check-effective-geographic-regression.mjs',
   'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',
-  'src/ownership-codec.js', 'src/native-grid.js', 'requirements.txt']) {
+  'src/ownership-codec.js', 'src/native-grid.js', 'src/reference-metadata.js', 'requirements.txt']) {
   assert.equal(candidateGeographyCode('full', changed(name)), true, name);
   assert.equal(candidateGeographyCode('evidence', changed(name)), false, name);
   assert.equal(candidateGeographyCode('full', changed(name), 'selected-data'), false, name);

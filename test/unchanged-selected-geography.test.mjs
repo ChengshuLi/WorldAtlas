@@ -8,6 +8,7 @@ import {pathToFileURL, fileURLToPath} from 'node:url';
 import {createRoutingMetadataAcquisition} from '../scripts/geography-routing-metadata.mjs';
 import {inspectUnchangedSelectedGeography, inspectExecutingSelectedGeography, EXECUTION_CODE, REBIND_CODE} from '../scripts/check-unchanged-selected-geography.mjs';
 
+import {LEGACY_CURRENT_REBIND_CODE,CURRENT_REBIND_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
 const P = 'research/geography/selected-fixture/';
 const POLICY = 'coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
@@ -22,7 +23,7 @@ const sha = value => createHash('sha256').update(body(value)).digest('hex');
 // These intentionally tiny opaque leaf bodies test immutable routing/equality,
 // not scientific validity. Historical collector replay is compared separately
 // with retained original full-reader logs; these leaf sentinels are not decoded.
-function fixture({missingOrigin = false, splitBaseline = false, rebind = true, missingStrictOrigin = false, checkpoint = false, sourceTarget = false, membership = false, dated = false, unknownSourceField = false, unknownSourceVersion = false, malformedDatedVersion = false} = {}) {
+function fixture({missingOrigin = false, splitBaseline = false, rebind = true, missingStrictOrigin = false, checkpoint = false, sourceTarget = false, membership = false, dated = false, unknownSourceField = false, unknownSourceVersion = false, malformedDatedVersion = false, rebindCode = LEGACY_CURRENT_REBIND_CODE, historicalMetadataAbsent = false} = {}) {
   const cache = path.join(ROOT, '.cache/unchanged-selected-fixtures');
   fs.mkdirSync(cache, {recursive: true});
   const directory = fs.mkdtempSync(path.join(cache, 'case-'));
@@ -63,7 +64,11 @@ function fixture({missingOrigin = false, splitBaseline = false, rebind = true, m
   for (const name of ['handoff', 'receipt', 'source-publication', 'source-inventory', 'source-operating', 'native-publication', 'native-inventory', 'native-operating', 'native-asset', 'source-facts', 'native-facts', 'original-ledger', 'original-manifest', 'rule', 'predecessor', 'code-source', 'terminal', 'stderr', 'stdout', 'source-catalogue', 'physical-input', 'physical-reproduction', 'physical-evidence', 'latitudes', 'source-part', 'membership-lineage', 'membership-index', 'membership-part', 'dated-adoption', 'dated-review', 'dated-observation', 'dated-frame']) put(P + name + '.json', {leaf: name});
   put(P + 'original-source-map.json', {kind: 'complete-world-index-with-exact-encoded-overrides'});
   put('data/ownership-selection.json', {selected_geography: {kind: 'complete-world-index-with-exact-encoded-overrides', path: P + 'original-source-map.json'}});
+  const metadataModules=['scripts/selected-reference-metadata.mjs','src/reference-metadata.js'];
+  const retainedMetadata=Object.fromEntries(metadataModules.map(name=>[name,files[name]]));
+  if(historicalMetadataAbsent)for(const name of metadataModules)delete files[name];
   const original = commit();
+  if(historicalMetadataAbsent)Object.assign(files,retainedMetadata);
   const origin = missingOrigin ? 'f'.repeat(40) : original;
   const historical = name => pin(name, original, {commit: origin});
   const ordinaryBaseline = {version: 1, pins: []};
@@ -121,7 +126,7 @@ function fixture({missingOrigin = false, splitBaseline = false, rebind = true, m
   put(P + 'registry.json', {version: 1, kind: 'retained-rule-authority-registry-v1', entries: [entry]});
   const ledger = {version: 2, kind: 'native-additive-repair-ledger-v2'};
   if (rebind) {
-    put(P + 'rebind-request.json', {acquisition: {target_sources: [{target_id: 'one', path: 'data/geography/source.json'}], predecessor_proof: historical(P + 'predecessor.json')}});
+    put(P + 'rebind-request.json', {executed_code:rebindCode.map(path=>({path,bytes:(files[path]??body('foreign')).length,sha256:sha(files[path]??body('foreign'))})),acquisition: {target_sources: [{target_id: 'one', path: 'data/geography/source.json'}], predecessor_proof: historical(P + 'predecessor.json')}});
     put(P + 'issued-plan.json', {original_inputs: [pin(P + 'native-asset.json', original)]});
     const inputs = commit(files, bindings);
     const custody = Object.fromEntries(['code_source', 'terminal', 'stderr', 'stdout'].map(role => [role, pin(P + role.replace('_', '-') + '.json', original)]));
@@ -347,7 +352,7 @@ test('ordinary queue docs and focused tests do not change selected science while
     assert.equal(accepted.science_reexecuted,false);
     assert.equal(accepted.candidate_code_executed,false);
     for (const name of ['scripts/check-effective-geographic-regression.mjs','src/native-grid.js',
-      'src/ownership-codec.js','src/effective-footprint.js','package.json','package-lock.json']) {
+      'src/ownership-codec.js','src/effective-footprint.js','scripts/selected-reference-metadata.mjs','src/reference-metadata.js','package.json','package-lock.json']) {
       const changed = f.commit({...f.files,...unrelated,[name]:body('changed consumed method or runtime')},f.baseline);
       const rejected = await f.inspect(changed);
       assert.equal(rejected.status,'full-check-required',name);
@@ -764,4 +769,21 @@ test('production collector rejects a moving-main policy label different from its
     assert.equal(rejected.status, 'full-check-required');
     assert.equal(rejected.reason, 'executing-checkout-mismatch');
   } finally { f.close(); }
+});
+
+
+test('routing distinguishes literal historical rebind profiles from the expanded current executing closure',async()=>{
+ assert.strictEqual(REBIND_CODE,CURRENT_REBIND_CODE);
+ for(const rebindCode of [LEGACY_CURRENT_REBIND_CODE,CURRENT_REBIND_CODE]){
+  const f=fixture({rebindCode,historicalMetadataAbsent:rebindCode===LEGACY_CURRENT_REBIND_CODE});
+  try{const result=await f.inspect(f.candidate,f.baseline);assert.equal(result.status,'unchanged-selected-inputs',result.reason);
+   const requestPins=result.immutable_descriptors.filter(pin=>pin.path===P+'rebind-request.json');assert.ok(requestPins.length>0);
+   for(const name of ['scripts/selected-reference-metadata.mjs','src/reference-metadata.js'])assert(result.current_and_absent_alternatives.some(pin=>pin.path===name),name);
+  }finally{f.close();}
+ }
+ for(const rebindCode of [CURRENT_REBIND_CODE.slice(0,-1),[...LEGACY_CURRENT_REBIND_CODE,'foreign.mjs'],[...CURRENT_REBIND_CODE].reverse()]){
+  const f=fixture({rebindCode});try{const result=await f.inspect(f.candidate,f.baseline);assert.equal(result.status,'full-check-required');assert.match(result.reason,/Foreign\/incomplete current rebind execution code profile/);}finally{f.close();}
+ }
+ const falseCurrent=fixture({rebindCode:CURRENT_REBIND_CODE,historicalMetadataAbsent:true});
+ try{const result=await falseCurrent.inspect(falseCurrent.candidate,falseCurrent.baseline);assert.equal(result.status,'full-check-required');assert.match(result.reason,/absent|missing|unavailable/);}finally{falseCurrent.close();}
 });

@@ -40,12 +40,15 @@ const preparedEvidence=ownershipSelection.requireNative?await readPreparedEviden
 // Validate the complete retained context chain before allocating application geography.
 const releaseManifest=readGeographicReleaseManifest('data/geographic-releases');
 const geographicRelease=releaseManifest.releases.at(-1);
-if(ownershipSelection.releaseId&&ownershipSelection.releaseId!==geographicRelease.id)throw Error('Committed ownership selection belongs to another release');
+if(ownershipSelection.releaseId&&ownershipSelection.releaseId!==geographicRelease.id&&!ownershipSelection.referenceProjection)throw Error('Committed ownership selection belongs to another release');
 const fixedGridPath=ownershipSelection.manifestPath;
 const selectedGrid=await fs.access(fixedGridPath).then(()=>selectBuildOwnership({...ownershipSelection,expectedReference:geographicRelease}),()=>{if(ownershipSelection.requireNative)throw Error('Selected native grid is missing');return null;});
 const fixedGrid=selectedGrid?.manifest;
+// Scientific context/physical assets retain N; the explicit application projection
+// separately binds truthful current hierarchy/catalog metadata M.
+const nativeReference=selectedGrid?.nativeReference??geographicRelease;
 const currentContext=ownershipSelection.requireNative?JSON.parse(await fs.readFile('data/current-build-context.json')):null;
-if(currentContext&&(currentContext.native_manifest_sha256!==selectedGrid.sha256||currentContext.release_id!==geographicRelease.id||currentContext.footprints_sha256!==geographicRelease.footprints_sha256||currentContext.hierarchy_sha256!==geographicRelease.hierarchy_sha256))throw Error('Prepared current context differs from selected native reference; prepare and review matching products');
+if(currentContext&&(currentContext.native_manifest_sha256!==selectedGrid.sha256||currentContext.release_id!==nativeReference.id||currentContext.footprints_sha256!==nativeReference.footprints_sha256||currentContext.hierarchy_sha256!==nativeReference.hierarchy_sha256))throw Error('Prepared current context differs from selected native reference; prepare and review matching products');
 const nativeContextInputStage=currentContext?{status:'accepted-prepared-assets',native_manifest_sha256:selectedGrid.sha256,preparation:currentContext.nativeContextInputStage}:null;
 const db = openDatabase();
 try {
@@ -59,7 +62,7 @@ try {
   const boundarySourceReviews=currentContext?.boundarySourceReviews??{};
   let gridIndex,ownership;
   if(fixedGrid){
-    if(fixedGrid.footprints_sha256!==checkPrepared(reference.features)||fixedGrid.hierarchy_sha256!==createHash('sha256').update(await fs.readFile('data/hierarchy.json')).digest('hex'))throw Error('Precompiled canonical grid is stale');
+    if(fixedGrid.footprints_sha256!==checkPrepared(reference.features)||(selectedGrid.applicationReference?.hierarchy_sha256??fixedGrid.hierarchy_sha256)!==createHash('sha256').update(await fs.readFile('data/hierarchy.json')).digest('hex'))throw Error('Precompiled canonical grid is stale');
     const bytes=selectedGrid.bounds;
     if(createHash('sha256').update(bytes).digest('hex')!==fixedGrid.bounds.sha256)throw Error('Precompiled location bounds hash mismatch');
     const bounds=JSON.parse(gunzipSync(bytes)),byId=new Map(bounds.map(row=>[row.id,row]));
@@ -119,13 +122,13 @@ try {
     if(!fixedGrid)throw Error('Physical classification requires canonical grid');
     coverageClassification=currentContext?.coverageClassification??JSON.parse(await fs.readFile(coveragePath));
     const canonicalHash=selectedGrid.sha256;
-    await loadCoverageClassification(coverageClassification,{...fixedGrid,release_id:geographicRelease.id,canonical_grid_sha256:canonicalHash},async url=>new Response(await fs.readFile('data/'+url.replace(/^\.\//,''))));
+    await loadCoverageClassification(coverageClassification,{...fixedGrid,release_id:nativeReference.id,canonical_grid_sha256:canonicalHash},async url=>new Response(await fs.readFile('data/'+url.replace(/^\.\//,''))));
     pixelMap.canonical_grid_sha256=canonicalHash;
     await fs.mkdir('dist/coverage-classification',{recursive:true});
     for(const part of coverageClassification.parts)await fs.copyFile('data/'+part.path,'dist/'+part.path);
   }
   const referenceBundle=await packageReferenceBundle({source:'data/reference-attributes',destination:'dist/reference-attributes',expectedFootprints:geographicRelease.footprints_sha256});
-  await fs.writeFile('dist/atlas-geography.json', JSON.stringify({gridVerification:selectedGrid?.verification??null,nativeContextInputStage,coverageClassification,referenceAttributes:referenceBundle.descriptor,contentCapabilities:{mapSnapshots:1,datedGeography:1,datedFootprints:0,storageExport:2},type:reference.type,sourceQualityReviews:reference.sourceQualityReviews,boundarySourceReviews,reference_release:packageAdditive?.reference_release??geographicRelease,...(packageAdditive?{additiveRelease:packageAdditive.additiveRelease}:{}),preparedEvidence:{footprints_sha256:preparedEvidence.footprints_sha256,hierarchy_sha256:preparedEvidence.hierarchy_sha256,index_sha256:createHash('sha256').update(await fs.readFile('data/prepared-evidence/index.json')).digest('hex')},pixelMissing:reference.pixelMissing,units:reference.units,temporal:{history:[],links:reference.temporal.links},entityParts,temporalHistoryParts,parts:catalogParts,geometryParts:parts,pixelMap}));
+  await fs.writeFile('dist/atlas-geography.json', JSON.stringify({gridVerification:selectedGrid?.verification??null,nativeContextInputStage,coverageClassification,referenceAttributes:referenceBundle.descriptor,contentCapabilities:{mapSnapshots:1,datedGeography:1,datedFootprints:0,storageExport:2},type:reference.type,sourceQualityReviews:reference.sourceQualityReviews,boundarySourceReviews,reference_release:packageAdditive?.reference_release??geographicRelease,...(packageAdditive?{additiveRelease:packageAdditive.additiveRelease,...(packageAdditive.referenceMetadata?{referenceMetadata:packageAdditive.referenceMetadata}:{})}:{}),preparedEvidence:{footprints_sha256:preparedEvidence.footprints_sha256,hierarchy_sha256:preparedEvidence.hierarchy_sha256,index_sha256:createHash('sha256').update(await fs.readFile('data/prepared-evidence/index.json')).digest('hex')},pixelMissing:reference.pixelMissing,units:reference.units,temporal:{history:[],links:reference.temporal.links},entityParts,temporalHistoryParts,parts:catalogParts,geometryParts:parts,pixelMap}));
   await fs.writeFile('dist/atlas-history.json.gz',gzipSync(JSON.stringify(history)));
   await fs.writeFile('dist/environment-classifications.json',JSON.stringify({version:1,unknown:null,attributes:environmentClassifications}));
   await packageOwnershipHistory({source:'data/ownership-history',destination:'dist/ownership-history',hosted:process.env.ATLAS_HOSTED_BUILD==='1',compactReceipts:true});

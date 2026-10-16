@@ -6,16 +6,18 @@ import path from 'node:path';
 import {execFileSync,spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {gzipSync,gunzipSync} from 'node:zlib';
-import {ImmutableReader,NativeAssetImage,SelectedGeometrySources,loadBaseSelection,loadSelection,inspectSelected,compareIntervals,compareRepairLedgers,readArtifactConsumption,validateReleaseCatalogue,validateArtifactSourceMetadata,loadNativeRowTable,acquireNativeRows,validateNativeRowCarry} from '../scripts/check-effective-geographic-regression.mjs';
+import {ImmutableReader,NativeAssetImage,SelectedGeometrySources,loadBaseSelection,loadSelection,selectedReferenceOwners,selectedGeometrySourceAlias,selectedNativeSourceMembership,inspectSelected,compareIntervals,compareRepairLedgers,readArtifactConsumption,validateReleaseCatalogue,validateArtifactSourceMetadata,loadNativeRowTable,acquireNativeRows,validateNativeRowCarry} from '../scripts/check-effective-geographic-regression.mjs';
 import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
+import {prepareReferenceMetadataProjection} from '../scripts/selected-reference-metadata.mjs';
+import {projectReferenceFeatures} from '../src/reference-metadata.js';
 import {JOINT_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs';
-import {valueBytes,valueSha,readOriginalRuleAuthority,selectedCoordinateShard,joinSelectedCoordinateCertificate,acceptColdCoordinateCertificate,selectedAffectedPlan,possibleNeighbors,compareVersionedRepairLedgers} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {valueBytes,valueSha,readOriginalRuleAuthority,selectedCoordinateShard,joinSelectedCoordinateCertificate,acceptColdCoordinateCertificate,selectedAffectedPlan,possibleNeighbors,compareVersionedRepairLedgers,selectedCertificateAffectedPlan,acquireCurrentRebindOperands,sealColdCoordinateCertificate,reopenColdCoordinateCertificate} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const sha=b=>createHash('sha256').update(b).digest('hex'),root=process.cwd();
 const retained=process.env.WORLDATLAS_PREVENTION_CONTROLS;
 if(retained){assert.equal(fs.realpathSync(path.dirname(retained)),path.dirname(retained));assert.equal(fs.existsSync(retained),false);assert.throws(()=>fs.lstatSync(retained),{code:'ENOENT'});fs.mkdirSync(retained);}
 let fixtureOrdinal=0;
-function fixture(){
+function fixture({ownerRows}={}){
  const repo=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'selected-geography-fixture-')));
  const git=(...args)=>execFileSync('git',['-C',repo,...args],{stdio:['ignore','pipe','pipe']}).toString().trim();
  git('init');git('config','user.name','Fixture');git('config','user.email','fixture@example.invalid');
@@ -29,15 +31,15 @@ function fixture(){
  write('data/hierarchy.json',[]);write('data/canonical-grid/manifest.json',{version:1});write('data/geographic-releases/index.json',{});
  const release=write('data/geographic-releases/release.json',{id:'geography:review:fixture'});
  write('data/geographic-releases/current-manifest.json',{path:'release.json',sha256:sha(release)});
- const owners=[{index:1,id:'old-owner',province_id:'parent',province_index:1},{index:2,id:'other-owner',province_id:'parent',province_index:1}];
+ const owners=ownerRows??[{index:1,id:'old-owner',province_id:'parent',province_index:1},{index:2,id:'other-owner',province_id:'parent',province_index:1}];
  const bounds=write('data/canonical-grid/bounds.json.gz',gzipSync(Buffer.from(JSON.stringify(owners))));
  const origin=commit();
  const part=(kind,words)=>{const raw=Buffer.from(words.buffer),encoded=gzipSync(shuffleOwnershipBytes(words)),name=`native-v1/ownership/${kind}-0.bin.gz`;write('data/canonical-grid/fixture/'+name,encoded);return {kind,offset:0,words:words.length,path:name,bytes:encoded.length,sha256:sha(encoded),decoded_bytes:raw.length,decoded_sha256:sha(raw),encoding:'byte-shuffle'};};
- const select=(intervals,{extraSelection={},indices=false,badRows=false,transport=false,releaseId='geography:review:fixture'}={})=>{
+ const select=(intervals,{extraSelection={},indices=false,badRows=false,transport=false,releaseId='geography:review:fixture',reference=null}={})=>{
   const rows=new Uint32Array(8),words=[];let cursor=0;
   for(let y=0;y<4;y++){rows[y*2]=cursor;rows[y*2+1]=(intervals[y]??[]).length;for(const [start,end,owner]of intervals[y]??[]){words.push(owner*4+start,end-1);cursor++;}}
   if(badRows)rows[2]++;
-  const manifest={version:2,method:'native-linear-evenodd-first-owner-v1',size:4,coordinateBits:2,runWords:words.length,parts:[part('rows',rows),part('runs',Uint32Array.from(words))],geographic_release:releaseId,bounds:{sha256:sha(bounds),decoded_bytes:Buffer.byteLength(JSON.stringify(owners))},original_assets:{bounds:{role:'original-identity-parent-camera-context',commit:origin,path:'data/canonical-grid/bounds.json.gz',sha256:sha(bounds)}},native_latitudes:{sha256:'1'.repeat(64)}};
+  const manifest={version:2,method:'native-linear-evenodd-first-owner-v1',size:4,coordinateBits:2,runWords:words.length,parts:[part('rows',rows),part('runs',Uint32Array.from(words))],geographic_release:releaseId,bounds:{sha256:sha(bounds),decoded_bytes:Buffer.byteLength(JSON.stringify(owners))},original_assets:{bounds:{role:'original-identity-parent-camera-context',commit:origin,path:'data/canonical-grid/bounds.json.gz',sha256:sha(bounds)}},native_latitudes:{sha256:'1'.repeat(64)},...(reference?{footprints_sha256:reference.footprints_sha256,hierarchy_sha256:reference.hierarchy_sha256}:{})};
   const manifestPath=transport?'data/canonical-grid/transport/manifest.json':'data/canonical-grid/fixture/manifest.json';
   if(transport){
    let offset=0;const bodies=manifest.parts.map(p=>fs.readFileSync(path.join(repo,'data/canonical-grid/fixture',p.path)));
@@ -602,4 +604,90 @@ test('immutable reader distinguishes actual whole consumption from descriptors a
   assert.equal(other.inventory.get(version+':reader/complete.json').whole_body_consumed,undefined);
 
  }finally{f.cleanup();}
+});
+
+
+function selectedMetadataFixture(){
+ const owners=[{index:1,id:'member',province_id:'old',province_index:2},{index:2,id:'retained',province_id:'old',province_index:2},{index:3,id:'existing',province_id:'new',province_index:1}];
+ const f=fixture({ownerRows:owners});
+ const pin=(name,version)=>{const raw=execFileSync('git',['-C',f.repo,'show',version+':'+name]);const [mode,,oid]=f.git('ls-tree',version,'--',name).split(/[ \t]/);return {commit:version,path:name,mode,git_blob_oid:oid,bytes:raw.length,sha256:sha(raw)};};
+ const read=p=>execFileSync('git',['-C',f.repo,'show',p.commit+':'+p.path]);
+ const geometry={type:'Polygon',coordinates:[[[0,0],[1,0],[1,1],[0,0]]]};
+ const features=owners.map(owner=>({type:'Feature',id:owner.id,properties:{id:owner.id,name:owner.id,parent_id:owner.province_id,metadata:{source_id:'literal original',framework_match:{id:'fallback',overlap:.8}}},geometry}));
+ const units=[{id:'c',name:'C',level:'continent',parent_id:null},{id:'s',name:'S',level:'subcontinent',parent_id:'c'},
+  {id:'r',name:'R',level:'region',parent_id:'s'},{id:'a',name:'A',level:'area',parent_id:'r'},
+  {id:'old',name:'Old',level:'province',parent_id:'a',metadata:{child_count:2}},{id:'new',name:'New',level:'province',parent_id:'a',metadata:{child_count:1}}];
+ const afterUnits=structuredClone(units);afterUnits[4].metadata.child_count=1;afterUnits[5].metadata.child_count=2;
+ f.write('data/geography/fixture.json',{type:'FeatureCollection',features});const hierarchyBefore=f.write('data/hierarchy.json',units),before=f.commit();
+ const native={id:'geography:review:fixture',footprints_sha256:'b'.repeat(64),hierarchy_sha256:sha(hierarchyBefore)};
+ const nativeHead=f.select([[[0,1,1]],[[2,3,2]],[],[]],{reference:native});
+ const selection=JSON.parse(fs.readFileSync(path.join(f.repo,'data/ownership-selection.json'))),manifest=JSON.parse(fs.readFileSync(path.join(f.repo,selection.manifest_path)));
+ const bank={version:1,kind:'complete-world-index-with-exact-encoded-overrides',release_id:native.id,native_manifest_sha256:selection.sha256,footprints_sha256:native.footprints_sha256,locations:owners.length,world_index:pin('data/world-index.json',before),unchanged_files:[pin('data/geography/fixture.json',before)],overrides:[]};
+ const bankRaw=f.write('source/bank.json',bank),selected={...selection,selected_geography:{version:1,kind:bank.kind,path:'source/bank.json',bytes:bankRaw.length,sha256:sha(bankRaw)}};
+ const setRelease=releases=>{const raw=f.write('data/geographic-releases/selected.json.gz',gzipSync(Buffer.from(JSON.stringify({releases}))));f.write('data/geographic-releases/current-manifest.json',{path:'selected.json.gz',sha256:sha(raw)});};
+ setRelease([native]);f.write('data/ownership-selection.json',selected);const base=f.commit();
+ const afterProperties=structuredClone(features[0].properties);afterProperties.parent_id='new';afterProperties.metadata.reference_corrections=[{id:'member',action:'reparent',current_name:'member',current_parent_id:'old',new_parent_id:'new',rationale:'Exact inspected source parent.',evidence:[{url:'https://example.org/source',title:'Inspected source',inspected_fact:'The original member has this parent.'}]}];
+ const changes=[{location_id:'member',before_properties:features[0].properties,after_properties:afterProperties}];
+ const currentFeatures=projectReferenceFeatures(features,changes),hierarchyAfter=f.write('data/hierarchy.json',afterUnits);
+ f.write('data/geography/fixture.json',{type:'FeatureCollection',features:currentFeatures});
+ const reference={...native,id:'geography:current-metadata',hierarchy_sha256:sha(hierarchyAfter)};
+ const receipt={before_sha256:native.hierarchy_sha256,after_sha256:reference.hierarchy_sha256,footprints_sha256_before:native.footprints_sha256,footprints_sha256_after:native.footprints_sha256,reference_only:true,historical_claims_transferred:false,summary:{geometry_changes:0},relationships:[],before_units:units,retired_units:[],group_changes:[4,5].map(index=>({id:units[index].id,before:units[index],after:afterUnits[index]})),changed_location_properties:changes,source_evidence:[{url:'https://example.org/source',source_sha256:'c'.repeat(64)}]};
+ const receiptRaw=f.write('data/reference-correction.json',receipt);setRelease([native,{...reference,metadata:{metadata_migration_sha256:{correction:sha(receiptRaw)}}}]);const inputs=f.commit();
+ const projection=prepareReferenceMetadataProjection({selection:selected,manifest,owners,reference,hierarchy:{before:pin('data/hierarchy.json',before),after:pin('data/hierarchy.json',inputs)},receipts:[pin('data/reference-correction.json',inputs)],source_updates:[{logical_path:'data/geography/fixture.json',before:pin('data/geography/fixture.json',before),after:pin('data/geography/fixture.json',inputs)}],read});
+ const project=()=>{const raw=f.write('data/reference-projection.json',projection);f.write('data/ownership-selection.json',{...selected,reference_projection:{path:'data/reference-projection.json',bytes:raw.length,sha256:sha(raw)}});return f.commit();};
+ const current=project();return {...f,pin,read,owners,features,currentFeatures,native,reference,projection,selected,base,current,project,manifest};
+}
+
+test('selected metadata application exposes truthful current parents and literal native scientific inputs',()=>{
+ const f=selectedMetadataFixture();try{
+  const before=loadSelection(new ImmutableReader(f.repo,f.base)),after=loadSelection(new ImmutableReader(f.repo,f.current));
+  const resolver=selectedGeometrySourceAlias(after),old=before.geometrySources.read('data/geography/fixture.json');
+  assert.equal(after.manifest.hierarchy_sha256,f.native.hierarchy_sha256);assert.deepEqual(after.owners,f.owners);
+  assert.equal(selectedReferenceOwners(after)[0].province_id,'new');assert.equal(after.owners[0].province_id,'old');
+  const current=resolver.read('data/geography/fixture.json'),scientific=resolver.readNativeReferenceSource('data/geography/fixture.json');
+  assert.deepEqual(current.collection.features,f.currentFeatures);assert.equal(current.source.kind,'metadata-projected-selected-source');
+  assert.deepEqual(scientific,old,'Original scientific byte/source custody remains exact');
+  const originalPin=f.projection.source_updates[0].before;
+  assert.deepEqual(selectedNativeSourceMembership(after,originalPin),scientific);
+  assert.throws(()=>selectedNativeSourceMembership(after,f.projection.source_updates[0].after),/original scientific membership/);
+  assert.throws(()=>selectedNativeSourceMembership({...after},originalPin),/privately/);
+  assert.equal(current.collection.features[0].properties.metadata.framework_match.id,'fallback');
+  assert.throws(()=>selectedReferenceOwners({...after}),/authenticated/);
+  const certificate=snapshot=>joinSelectedCoordinateCertificate(snapshot.geometrySources,[selectedCoordinateShard(snapshot.geometrySources,snapshot.geometrySources.paths)]);
+  const a=certificate(before),b=certificate(after),plan=selectedCertificateAffectedPlan(a,b);
+  assert.equal(a.entries[0].parent_id,'old');assert.equal(b.entries[0].parent_id,'new');
+  assert.deepEqual(plan.changed_ids,[],'A parent correction does not fabricate changed physical geometry');
+  const persist=(snapshot,certificate)=>{
+   const facts={kind:'trusted-selected-coordinate-stage-v1',selected_commit:snapshot.reader.version,candidate_code_executed:false,binding:certificate.binding,complete_owners:certificate.entries.length,complete_sources:certificate.inputs.length};
+   const encoded=gzipSync(valueBytes(certificate)),encoded_sha256=sha(encoded),decoded_sha256=valueSha(certificate);
+   const publication={kind:facts.kind,complete:true,facts:{sha256:valueSha(facts)},certificate:{path:'certificate.json.gz',bytes:encoded.length,sha256:encoded_sha256,decoded_bytes:valueBytes(certificate).length,decoded_sha256}};
+   const product={certificate,facts,publication,encoded_sha256,decoded_sha256};
+   acceptColdCoordinateCertificate(snapshot.geometrySources,certificate,{...product,expectedPublication:publication});
+   const receipt=sealColdCoordinateCertificate(certificate,product);
+   assert.throws(()=>reopenColdCoordinateCertificate({...receipt},product),/private persisted custody/);
+   return reopenColdCoordinateCertificate(receipt,{...product,certificate:JSON.parse(JSON.stringify(certificate))});
+  };
+  const persistedPlan=selectedCertificateAffectedPlan(persist(before,a),persist(after,b));
+  assert.deepEqual(persistedPlan.changed_ids,[],'Detached cold metadata applicability survives exact private custody');
+
+  const request={version:1,kind:'retained-rule-authority-registry-v1',entries:[]};
+  const addition={type:'Polygon',coordinates:[[[2,0],[3,0],[3,1],[2,0]]]};
+  const originalRows=[{component_id:'original',target_id:'member',pixelIndex:1,disposition:'zero-cell',geometry:addition,geometry_sha256:valueSha(addition),base_geometry:f.features[0].geometry,base_geometry_sha256:valueSha(f.features[0].geometry)}];
+  const options={targetSources:[{target_id:'member',path:'data/geography/fixture.json'}]},patches=[{version:1,kind:'unassigned-native-cells-v1',rows:[{y:2,runs:[[2,3,1]]}]}];
+  const oldOperands=acquireCurrentRebindOperands(before,request,originalRows,patches,options),newOperands=acquireCurrentRebindOperands(after,request,originalRows,patches,options);
+  assert.deepEqual(newOperands.acquisition,oldOperands.acquisition,'No repinning or forged native execution after metadata-only change');
+  assert.deepEqual(newOperands.current_targets,oldOperands.current_targets);assert.deepEqual(newOperands.base_selection,oldOperands.base_selection);
+ }finally{f.cleanup();}
+});
+
+test('selected metadata application rejects absent selector, wrong actual current sources and coherent geometry drift',()=>{
+ for(const mutate of [
+  f=>f.write('data/ownership-selection.json',f.selected),
+  f=>{const value=structuredClone(f.currentFeatures);value[0].geometry.coordinates[0][1][0]=.9;f.write('data/geography/fixture.json',{type:'FeatureCollection',features:value});},
+  f=>f.write('data/hierarchy.json',[]),
+  f=>{f.projection.source_updates=[];f.project();},
+  f=>{f.projection.native_selection.sha256='0'.repeat(64);f.project();},
+ ]){
+  const f=selectedMetadataFixture();try{mutate(f);const bad=f.git('status','--porcelain')?f.commit():f.git('rev-parse','HEAD');assert.throws(()=>loadSelection(new ImmutableReader(f.repo,bad)),/Native source|source|hierarchy|original native selection|metadata/i);}finally{f.cleanup();}
+ }
 });

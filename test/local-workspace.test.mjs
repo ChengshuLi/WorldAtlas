@@ -100,6 +100,7 @@ test('cold stock delivery and selected-check entries resolve imports before ordi
   // Real entry/helper bytes, not substitute implementations or a dependency parser.
   const files = ['scripts/prepare-delivery-handoff.mjs', 'scripts/delivery-handoff-advance.mjs',
     'scripts/check-effective-geographic-regression.mjs', 'scripts/evidence-quality.mjs',
+    'scripts/selected-reference-metadata.mjs','src/reference-metadata.js',
     'scripts/geography-prefetch.mjs', 'scripts/native-ownership/native-preparation-guards.mjs',
     'scripts/package-inputs.mjs', 'scripts/run-geographic-check.py', 'src/native-grid.js', 'src/ownership-codec.js',
     'coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs',

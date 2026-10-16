@@ -1,5 +1,5 @@
 import {ImmutableReader,SelectedGeometrySources} from '../../../scripts/check-effective-geographic-regression.mjs';
-import {CURRENT_REBIND_CODE,nativeBaseSelection,requirePriorAdditiveConservation,normaliseRetainedRepairLedger,valueSha} from '../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {currentRebindCodePaths,nativeBaseSelection,requirePriorAdditiveConservation,normaliseRetainedRepairLedger,valueSha} from '../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {validateCurrentRebindPlan} from '../additive-native-composition-20261009/capture-current-rebind.mjs';
 
 const demand=(value,message)=>{if(!value)throw Error(message);};
@@ -48,8 +48,7 @@ export function prepareSupportedRebindPlan({reader,snapshot,executedCode,origina
     original_rows_sha256:valueSha(rows),original_patch_sha256s:originalPatches.map(valueSha),
     target_sources:bindings.source_bindings,predecessor_proof:{...predecessor,
       sha256:'d8af3b2eaf77f4fa948c01937ccb107f3d7eaa833ea4bac1d4480c633d509794'},limits};
-  demand(JSON.stringify(executedCode.map(p=>p.path))===JSON.stringify(CURRENT_REBIND_CODE),
-    'Existing exact cold code closure required');
+  currentRebindCodePaths(executedCode,{requireCurrent:true});
   validateCurrentRebindPlan(plan,{executionCommit:reader.version,baseSelection:nativeBaseSelection(snapshot.selection),
     registry,originalRows:rows,executedCode});
   return plan;
