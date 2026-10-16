@@ -5,6 +5,7 @@ import {safePackagePath,containsPackagePath,loadPackageInputs} from './package-i
 import {repositoryReader} from './evidence-quality.mjs';
 import {createHash} from 'node:crypto';
 import {ownershipMetadata, NATIVE_METHOD} from '../src/ownership-method.js';
+import {validateReferenceMetadataHeader} from '../src/reference-metadata.js';
 import {requireVerifiedNativeSelection} from './native-ownership/require-verified-selection.mjs';
 
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -24,13 +25,14 @@ export async function readBuildOwnershipSelection({root='.',env=process.env}={})
   if(selection.version!==1||selection.method!==NATIVE_METHOD||!safePackagePath(selection.manifest_path)||
     !/^[a-f0-9]{64}$/.test(selection.sha256??'')||!selection.release_id?.startsWith('geography:review:'))
     throw Error('Invalid committed ownership selection');
-  return {manifestPath:selection.manifest_path,expectedSha256:selection.sha256,requireNative:true,releaseId:selection.release_id};
+  return {manifestPath:selection.manifest_path,expectedSha256:selection.sha256,requireNative:true,releaseId:selection.release_id,
+    ...(Object.hasOwn(selection,'reference_projection')?{referenceSelection:selection,referenceProjection:selection.reference_projection,root}:{})};
 }
 
 // A native build is an explicit offline selection of a reviewed whole-file
 // candidate. The legacy default and all original release products remain intact.
 export async function selectBuildOwnership({manifestPath = 'data/canonical-grid/manifest.json',
-  expectedSha256, expectedReference, requireNative = false} = {}) {
+  expectedSha256, expectedReference, requireNative = false, referenceSelection, referenceProjection, root=process.cwd()} = {}) {
   const packaged = inPackageImage();
   let definition;
   if(packaged){
@@ -51,7 +53,28 @@ export async function selectBuildOwnership({manifestPath = 'data/canonical-grid/
   if (expectedSha256 && sha256 !== expectedSha256) throw Error('Selected grid manifest checksum mismatch');
   if (native && !/^[a-f0-9]{64}$/.test(expectedSha256 ?? ''))
     throw Error('Explicit native build requires the reviewed manifest checksum');
-  const metadata = ownershipMetadata(manifest, native ? {requireNative: true, expectedReference} : {});
+  let metadataProjection,nativeReference,applicationReference;
+  if(referenceProjection!==undefined){
+    if(!native||!referenceSelection||!referenceProjection||referenceSelection.manifest_path!==manifestPath
+      ||referenceSelection.sha256!==sha256||JSON.stringify(referenceSelection.reference_projection)!==JSON.stringify(referenceProjection)
+      ||Object.keys(referenceProjection).sort().join(',')!=='bytes,path,sha256'||!safePackagePath(referenceProjection.path)||referenceProjection.path.endsWith('/')
+      ||!Number.isSafeInteger(referenceProjection.bytes)||referenceProjection.bytes<=0||!/^[a-f0-9]{64}$/.test(referenceProjection.sha256??''))
+      throw Error('Invalid selected build reference metadata pointer');
+    if(packaged&&!containsPackagePath(definition.inputs,referenceProjection.path))
+      throw Error('Reference metadata projection must be a declared package input');
+    const file=path.resolve(root,referenceProjection.path),stat=await fs.lstat(file);
+    if(!stat.isFile()||await fs.realpath(file)!==file||stat.size!==referenceProjection.bytes)
+      throw Error('Build reference metadata must be a whole ordinary file');
+    const raw=packaged?repositoryReader(root)(referenceProjection.path,'candidate'):await fs.readFile(file);
+    if(raw.length!==referenceProjection.bytes||digest(raw)!==referenceProjection.sha256)
+      throw Error('Build reference metadata checksum differs');
+    metadataProjection=JSON.parse(raw);
+    const references=validateReferenceMetadataHeader(metadataProjection,{selection:referenceSelection,manifest});
+    nativeReference=references.native;applicationReference=references.reference;
+    if(!expectedReference||['id','footprints_sha256','hierarchy_sha256'].some(key=>applicationReference[key]!==expectedReference[key]))
+      throw Error('Build reference metadata differs from the current selected release');
+  }
+  const metadata = ownershipMetadata(manifest, native ? {requireNative: true, expectedReference:nativeReference??expectedReference} : {});
   if (!native && expectedReference && (manifest.footprints_sha256 !== expectedReference.footprints_sha256 ||
     manifest.hierarchy_sha256 !== expectedReference.hierarchy_sha256))
     throw Error('Legacy grid differs from selected source reference');
@@ -69,5 +92,5 @@ export async function selectBuildOwnership({manifestPath = 'data/canonical-grid/
   }
   if (digest(bounds) !== manifest.bounds.sha256) throw Error('Selected grid bounds checksum mismatch');
   const verification = native ? requireVerifiedNativeSelection(manifest, sha256) : null;
-  return {manifest, metadata, verification, manifestPath, source: path.dirname(manifestPath), sha256, bounds};
+  return {manifest, metadata, verification, manifestPath, source: path.dirname(manifestPath), sha256, bounds,...(metadataProjection?{metadataProjection,nativeReference,applicationReference}:{})};
 }

@@ -5,9 +5,10 @@ import fs from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {gunzipSync} from 'node:zlib';
-import {ImmutableReader, SelectedGeometrySources, NativeAssetImage, selectedBaseAssetAlias, selectedGeometrySourceAlias} from '../../../scripts/check-effective-geographic-regression.mjs';
+import {ImmutableReader, SelectedGeometrySources, NativeAssetImage, selectedBaseAssetAlias, selectedGeometrySourceAlias, selectedReferenceOwners, selectedNativeSourceMembership} from '../../../scripts/check-effective-geographic-regression.mjs';
 import {nativeOnlyComponent, deriveSourceTargetNativeDelta, nativePolygonIntervals, polygonParts, witnessCellEffects, validateWitnessGeometry} from '../../../src/native-grid.js';
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
+import {scientificNativeSelection} from '../../../src/reference-metadata.js';
 const certificates=new WeakMap(), originalAuthorities=new WeakMap(), selectedAdditions=new WeakMap();
 // Original accepted source/native programs. Case rosters are not policy IDs.
 // Changing a complete program requires ordinary trusted-code/rule review.
@@ -48,8 +49,8 @@ export function validateSupportedProgrammeCatalogue(catalogue) {
   demand(p&&Object.keys(p).sort().join(',')==='current_code,execution_commit,historical_code,independent_review_comment'
    &&/^[a-f0-9]{40}$/.test(p.execution_commit)&&Number.isSafeInteger(p.independent_review_comment)&&p.independent_review_comment>0,'Malformed exact rebind migration');
   vector(p.historical_code);vector(p.current_code);
-  demand(same(p.historical_code.map(p=>p.path),CURRENT_REBIND_CODE)&&same(p.current_code.map(p=>p.path),CURRENT_REBIND_CODE)
-   &&!same(p.historical_code,p.current_code),'Incomplete/identity rebind migration');
+  currentRebindCodePaths(p.historical_code);currentRebindCodePaths(p.current_code);
+  demand(!same(p.historical_code,p.current_code),'Incomplete/identity rebind migration');
   const key=valueSha([p.execution_commit,p.historical_code,p.current_code]);demand(!migrations.has(key),'Ambiguous exact rebind migration');migrations.add(key);
  }
  return catalogue;
@@ -129,9 +130,9 @@ export function selectedCoordinateShard(resolver,sourcePaths,{priorShards=[],onF
  demand(sourcePaths.every(p=>resolver.paths.includes(p)),'Foreign selected source shard');
  const snapshot=resolver.snapshot;
  const binding={version:1,kind:'selected-complete-coordinate-binding-v1',selection:snapshot.selection,release:resolver.release,
-   sources:resolver.sources,owners_sha256:valueSha(snapshot.owners),coordinate_domain:'complete-original-pointset-bounds:v1'};
+   sources:resolver.sources,owners_sha256:valueSha(selectedReferenceOwners(snapshot)),coordinate_domain:'complete-original-pointset-bounds:v1'};
  for(const shard of priorShards)demand(certificates.has(shard)&&same(shard.binding,binding),'Unqualified or foreign retained coordinate shard');
- const roster=new Map(snapshot.owners.map(r=>[r.id,r])),entries=[],seen=new Set(),inputFacts=[];
+ const roster=new Map(selectedReferenceOwners(snapshot).map(r=>[r.id,r])),entries=[],seen=new Set(),inputFacts=[];
  for(const name of sourcePaths){
   const actual=resolver.read(name);inputFacts.push({path:name,source:actual.source,whole_body_sha256:actual.whole_sha256,bytes:actual.body.length});
   for(let ordinal=0;ordinal<actual.collection.features.length;ordinal++){
@@ -184,9 +185,9 @@ export function acceptColdCoordinateCertificate(resolver,certificate,{facts,expe
  demand(encoded_sha256===publication.certificate.sha256&&decoded_sha256===publication.certificate.decoded_sha256,'Cold complete certificate bytes differ');
  demand(publication.facts&&valueSha(facts)===publication.facts.sha256,'Cold facts differ from genuine acknowledged publication');
  demand(facts.kind===publication.kind&&facts.selected_commit===resolver.reader.version&&facts.candidate_code_executed===false&&certificate.kind==='selected-coordinate-neighbor-certificate-v2','Foreign cold certificate execution/input');
- demand(same(certificate.binding.selection,resolver.snapshot.selection)&&same(certificate.binding.release,resolver.release)&&same(certificate.binding.sources,resolver.sources)&&certificate.binding.owners_sha256===valueSha(resolver.snapshot.owners)&&same(facts.binding,certificate.binding),'Cold certificate selected source/owner binding differs');
+ demand(same(certificate.binding.selection,resolver.snapshot.selection)&&same(certificate.binding.release,resolver.release)&&same(certificate.binding.sources,resolver.sources)&&certificate.binding.owners_sha256===valueSha(selectedReferenceOwners(resolver.snapshot))&&same(facts.binding,certificate.binding),'Cold certificate selected source/owner binding differs');
  bindCoordinateRows(certificate);
- const paths=new Set(resolver.paths),owners=new Map(resolver.snapshot.owners.map(r=>[r.id,r])),seen=new Set(),sources=new Set();
+ const paths=new Set(resolver.paths),owners=new Map(selectedReferenceOwners(resolver.snapshot).map(r=>[r.id,r])),seen=new Set(),sources=new Set();
  demand(Array.isArray(certificate.inputs)&&certificate.inputs.length===paths.size&&Array.isArray(certificate.entries)&&certificate.entries.length===owners.size,'Incomplete cold source/owner certificate');
  for(let i=0;i<certificate.inputs.length;i++){const input=certificate.inputs[i],expected=resolver.sources[i];
   demand(input.path===resolver.paths[i]&&!sources.has(input.path)&&sources.add(input.path)&&same(input.source,{...expected,...(input.source?.whole_encoded_alias?{whole_encoded_alias:input.source.whole_encoded_alias}:{})})&&hash(input.whole_body_sha256)&&Number.isSafeInteger(input.bytes)&&input.bytes>0,'Foreign/duplicate/reordered/drifted complete cold source');
@@ -214,21 +215,34 @@ export function sealColdCoordinateCertificate(certificate,product) {
  const inventory=[...proof.resolver.reader.inventory.values()].filter(pin=>pin.whole_body_consumed===true);
  demand(inventory.length>0,'Missing complete persisted cold acquisition custody');
  const receipt=JSON.parse(valueBytes({version:1,kind:'privately-validated-persisted-coordinate-receipt-v1',binding:certificate.binding,publication:product.publication,facts:product.facts,inventory,effective_additions:proof.resolver.snapshot.additive?.normalized_rows??[]}));
- freeze(receipt);coldReceipts.set(receipt,{decoded_sha256:product.decoded_sha256,encoded_sha256:product.encoded_sha256});
+ const metadataApplication={scientific_selection:nativeBaseSelection(proof.resolver.snapshot.selection),
+  projected:!!proof.resolver.snapshot.selection.reference_projection};
+ freeze(receipt);coldReceipts.set(receipt,{decoded_sha256:product.decoded_sha256,encoded_sha256:product.encoded_sha256,metadataApplication});
  // Shard proofs retain their resolver identity. Only the fully validated cold
 // certificate proof relinquishes the selected snapshot after its helper ends.
- certificates.set(certificate,{binding:certificate.binding,persisted:true});return receipt;
+ certificates.set(certificate,{binding:certificate.binding,persisted:true,metadataApplication});return receipt;
 }
 export function reopenColdCoordinateCertificate(receipt,product) {
  const proof=coldReceipts.get(receipt);
  demand(proof&&same(product.publication,receipt.publication)&&same(product.facts,receipt.facts)&&product.encoded_sha256===proof.encoded_sha256&&product.decoded_sha256===proof.decoded_sha256&&valueSha(product.certificate)===proof.decoded_sha256&&same(product.certificate.binding,receipt.binding),'Missing private persisted custody or changed whole cold product');
- bindCoordinateRows(product.certificate);freeze(product.certificate);certificates.set(product.certificate,{binding:receipt.binding,persisted:true});return product.certificate;
+ bindCoordinateRows(product.certificate);freeze(product.certificate);certificates.set(product.certificate,{binding:receipt.binding,persisted:true,metadataApplication:proof.metadataApplication});return product.certificate;
 }
 
 export function selectedCertificateAffectedPlan(before,after) {
  demand(certificates.has(before)&&certificates.has(after),'Require both complete cold source certificates');
  const old=new Map(before.entries.map(r=>[r.id,r])),next=new Map(after.entries.map(r=>[r.id,r]));
- demand(old.size===next.size&&[...old].every(([id,row])=>next.has(id)&&row.index===next.get(id).index&&row.parent_id===next.get(id).parent_id&&row.parent_index===next.get(id).parent_index),'Selected continuous identity/owner/parent roster changed');
+ demand(old.size===next.size&&[...old].every(([id,row])=>next.has(id)&&row.index===next.get(id).index),
+  'Selected continuous stable identity/owner roster changed');
+ const parentChanges=[...old].some(([id,row])=>row.parent_id!==next.get(id).parent_id||row.parent_index!==next.get(id).parent_index);
+ if(parentChanges){
+  const applicability=certificate=>{const proof=certificates.get(certificate);return proof.metadataApplication??{
+   scientific_selection:nativeBaseSelection(proof.resolver.snapshot.selection),
+   projected:!!proof.resolver.snapshot.selection.reference_projection};};
+  const prior=applicability(before),current=applicability(after);
+  demand((prior.projected||current.projected)&&same(prior.scientific_selection,current.scientific_selection),
+   'Selected continuous parent change lacks a validated metadata-only application');
+ }
+
  const changed=[...old.keys()].filter(id=>old.get(id).effective_geometry_sha256!==next.get(id).effective_geometry_sha256).sort(),needed=new Set(changed),pairs=new Set();
  const intersects=(a,b)=>a[0]<=b[2]&&b[0]<=a[2]&&a[1]<=b[3]&&b[1]<=a[3];
  for(const id of changed){const bounds=[...old.get(id).boxes,...next.get(id).boxes];
@@ -559,8 +573,8 @@ function reconstructionResidualPointsets(result, dated = false) {
 
 // Source-target evidence uses the same retained registry and literal native
 // patch route. It has no invented original-gap inventory or addition polygon.
-export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
- return evaluateSourceTargetNativeAuthority(reader, preimage, binding, false);
+export function qualifySourceTargetNativeAuthority(reader, preimage, binding, {snapshot}={}) {
+ return evaluateSourceTargetNativeAuthority(reader, preimage, binding, false, snapshot);
 }
 
 // Same authenticated preparation and predicates as qualification. This returns
@@ -569,7 +583,7 @@ export function diagnoseSourceTargetNativeAuthority(reader, preimage, binding) {
  return evaluateSourceTargetNativeAuthority(reader, preimage, binding, true);
 }
 
-function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnostic) {
+function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnostic, snapshot) {
  demand(preimage?.version===1&&preimage.kind==='source-target-native-rule-v1'
   &&Object.keys(preimage).sort().join(',')==='kind,native_patch,source_evidence,version'
   &&binding?.version===1&&binding.kind==='source-target-native-custody-v1'
@@ -629,8 +643,17 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
    &&Array.isArray(membership.parts)&&membership.parts.length>0,'Incomplete accepted source membership');
   const current=p=>{
    pinCheck(p);const actual=reader.descriptor(p.path);
-   demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,
-    'Source membership differs from selected canonical bytes');return JSON.parse(read(p));
+   const exact=actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes;
+   if(!exact){
+    // A current metadata application does not alter original aggregation
+    // membership or pointsets. Use only the privately validated N source view;
+    // actual M bytes and all non-parent properties were checked in full first.
+    demand(snapshot?.selection.reference_projection,'Source membership differs from selected canonical bytes');
+    demand(snapshot.reader.repo===reader.repo&&snapshot.reader.version===reader.version,
+     'Source membership belongs to another actual selected reader');
+    selectedNativeSourceMembership(snapshot,p);
+   }
+   return JSON.parse(read(p));
   };
   demand(membership.lineage.path==='data/semantic-report.json'&&membership.index.path==='data/world-index.json',
    'Require complete accepted aggregation lineage and world index');
@@ -1099,7 +1122,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
 // One detached authority acquisition. The returned view cannot authorize a
 // selected release: the committed hook must additionally authenticate the
 // qualified native publication, operating proof and actual current bank.
-export function readRetainedRegistryAuthority(reader, entry, observationReader) {
+export function readRetainedRegistryAuthority(reader, entry, observationReader, {snapshot}={}) {
  // Retain every actual whole input consumed by a detached authority reader.
  const observed=proof=>{
   if(observationReader!==undefined){
@@ -1128,7 +1151,7 @@ export function readRetainedRegistryAuthority(reader, entry, observationReader) 
  const [preimage,binding]=admitted.map(({p,version})=>JSON.parse(reader.read(p.path,{version,expected:p.sha256})));
  demand(valueSha(preimage)===entry.rule_sha256,'Complete original registry preimage differs');
  if(binding?.kind==='source-target-native-custody-v1'){
-  const proof=qualifySourceTargetNativeAuthority(reader,preimage,binding);
+  const proof=qualifySourceTargetNativeAuthority(reader,preimage,binding,{snapshot});
   return observed(freeze({...proof,version:1,kind:'authenticated-registry-source-custody-v1',authority_sha256:entry.authority_sha256,
    rule_sha256:entry.rule_sha256,policy_id:entry.policy_id,policy_version:entry.policy_version,pins}));
  }
@@ -1249,8 +1272,7 @@ const rebindReceiptKeys=(v,required,historical,m)=>{
 };
 export function nativeBaseSelection(selection) {
  demand(selection&&typeof selection==='object'&&!Array.isArray(selection),'Missing complete selected native identity');
- const {additive_release,...base}=selection;
- return base;
+ return scientificNativeSelection(selection);
 }
 
 // Only the actual checker-consumed prior view can establish earlier additions.
@@ -1269,7 +1291,9 @@ export function requirePriorAdditiveConservation(snapshot,registry,ledger) {
  return {prior_components:proof.preserved_components,prior_authorities:proof.preserved_authorities};
 }
 
-export const CURRENT_REBIND_CODE=Object.freeze([
+// Literal historical execution vectors retain their original path inventory.
+// Current production adds the metadata reader and its pure projection helper.
+export const LEGACY_CURRENT_REBIND_CODE=Object.freeze([
  'coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs',
  'coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry.mjs',
  'coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-rebind.mjs',
@@ -1299,6 +1323,18 @@ export const CURRENT_REBIND_CODE=Object.freeze([
  'scripts/local-workspace.mjs',
  'scripts/worker-identity.mjs',
 ]);
+export const CURRENT_REBIND_CODE=Object.freeze([...LEGACY_CURRENT_REBIND_CODE,
+ 'scripts/selected-reference-metadata.mjs','src/reference-metadata.js']);
+// Historical requests select only a known complete literal profile. Their
+// actual bytes are still authenticated at the original execution commit;
+// recognizing a path vector never repins or requalifies that execution.
+export function currentRebindCodePaths(code,{requireCurrent=false}={}) {
+ demand(Array.isArray(code)&&code.every(pin=>pin&&typeof pin.path==='string'),'Foreign/incomplete current rebind execution code profile');
+ const paths=code.map(pin=>pin.path);
+ const profiles=requireCurrent?[CURRENT_REBIND_CODE]:[LEGACY_CURRENT_REBIND_CODE,CURRENT_REBIND_CODE];
+ const profile=profiles.find(expected=>same(paths,expected));
+ demand(profile,'Foreign/incomplete current rebind execution code profile');return profile;
+}
 export function currentRebindResult({baseSelection,registry,originalRows,originalPatches,currentTargets,currentRows,size}) {
  demand(Array.isArray(originalRows)&&originalRows.length>0&&Array.isArray(currentTargets)&&currentTargets.length>0,'Missing complete rebind geometry operands');
  const byTarget=new Map();let prior='';
@@ -1447,7 +1483,7 @@ export function acquireCurrentRebindOperands(snapshot,registry,originalRows,orig
  // Each whole source frame completes before another starts. Only complete
  // selected targets and its exact whole input descriptor survive the frame.
  const sourceFrame=name=>{
-  const actual=resolver.read(name),found=[];
+  const actual=resolver.readNativeReferenceSource(name),found=[];
   for(const feature of actual.collection.features){const id=feature.id??feature.properties?.id,owner=targets.get(id);if(!owner)continue;
    demand(sourceByTarget.get(id)===name&&feature.properties?.parent_id===owner.province_id,'Current target containing source/parent differs');coordinateBounds(feature.geometry);
    found.push({target_id:id,pixelIndex:owner.index,geometry:feature.geometry,geometry_sha256:valueSha(feature.geometry)});}
@@ -1523,12 +1559,13 @@ export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,orig
  const earlyRoster=roster.filter(({name})=>name!=='result');
  for(const {name,p}of roster){const actual=reader.descriptor(p.path,p.commit);demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'Whole rebind product mode/OID/length differs');}
  demand(/^[a-f0-9]{40}$/.test(certificate.execution_commit),'Missing actual rebind execution identity');
- const historicalCode=CURRENT_REBIND_CODE.map(path=>reader.descriptor(path,certificate.execution_commit));
- // Authenticate what originally executed. Current wrapper bytes are not a
- // historical generation: current operands and complete results are recomputed
- // below under the current trusted validator, without a cross-vintage whitelist.
- const expectedCode=historicalCode.map(p=>({path:p.path,bytes:p.bytes,sha256:sha(reader.read(p.path,{version:p.commit}))}));
  const bodies=Object.fromEntries(earlyRoster.map(({name,p})=>[name,JSON.parse(reader.read(p.path,{version:p.commit,expected:p.sha256}))]));
+ const historicalPaths=currentRebindCodePaths(bodies.request.executed_code);
+ const historicalCode=historicalPaths.map(path=>reader.descriptor(path,certificate.execution_commit));
+ // Authenticate the complete vector that actually executed. Current wrapper
+ // bytes never relabel a historical generation; current operands and results
+ // are independently recomputed below under the current trusted validator.
+ const expectedCode=historicalCode.map(p=>({path:p.path,bytes:p.bytes,sha256:sha(reader.read(p.path,{version:p.commit}))}));
  // External custody verifies the original vector; current acquisition below
  // executes the current trusted closure without relabelling historical runs.
  demand(snapshot?.reader===reader,'Current rebind custody requires the actual privately authenticated selected snapshot');
@@ -1596,12 +1633,12 @@ export function readSelectedAdditive(snapshot) {
  if(!resolver){
   resolver=new SelectedGeometrySources(snapshot);snapshot.geometrySources=resolver;
  }
- demand(envelope.base_reference.id===selection.release_id&&envelope.base_reference.footprints_sha256===resolver.release.footprints_sha256,'Additive effective baseline differs from actual selected source bank');
+ demand(envelope.base_reference.id===resolver.release.id&&envelope.base_reference.footprints_sha256===resolver.release.footprints_sha256,'Additive effective baseline differs from actual selected source bank');
  const normalized=normaliseRetainedRepairLedger(named.ledger,registry),proofs=[];
  for(const entry of registry.entries){
   demand(entry.policy_id==='retained-source-literal-additions'&&entry.policy_version===1,'Unsupported source policy semantics/version');
   const child=new ImmutableReader(reader.repo,reader.version,{gitExecutable:reader.gitExecutable,invocation:reader.invocation});
-  const proof=readRetainedRegistryAuthority(child,entry,reader);
+  const proof=readRetainedRegistryAuthority(child,entry,reader,{snapshot});
   for(const row of normalized.rows.values())if(row.authority_sha256===entry.authority_sha256){
    const original=proof.original_ledger.rows.find(r=>r.component_id===row.component_id);
    demand(original&&['assigned','zero-cell'].includes(original.disposition)&&same({...original,authority_sha256:entry.authority_sha256,rule_sha256:entry.rule_sha256},row),'Selected component rebinds original full native/source primitive');
@@ -1653,7 +1690,9 @@ export function readSelectedAdditive(snapshot) {
  }else demand(!Object.hasOwn(named.ledger,'current_targets'),'Current targets require complete rebind custody');
  const expectedByRow=new Map();
  for(const original of originalPatches){
-  demand(rebind||same(original.base_reference,envelope.base_reference),'Original delta requires an actual qualified current-bank rebind');
+  demand(rebind||same(original.base_reference,envelope.base_reference)
+    ||(snapshot.selection.reference_projection&&same(original.base_reference,{id:resolver.nativeRelease.id,footprints_sha256:resolver.nativeRelease.footprints_sha256,hierarchy_sha256:resolver.nativeRelease.hierarchy_sha256})),
+    'Original delta requires an actual qualified current-bank rebind or validated metadata application');
   for(const row of original.rows){const all=expectedByRow.get(row.y)??[];all.push(...row.runs.map(r=>[...r]));expectedByRow.set(row.y,all);}
  }
  const expectedRows=[...expectedByRow].sort((a,b)=>a[0]-b[0]).map(([y,runs])=>{

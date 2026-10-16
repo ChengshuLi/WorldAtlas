@@ -1826,6 +1826,7 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
     'scripts/native-ownership/verified-candidates.json','scripts/evidence-quality.mjs','src/ownership-method.js',
     'scripts/check-effective-geographic-regression.mjs',
     'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',
+    'scripts/selected-reference-metadata.mjs','src/reference-metadata.js',
     'node_modules/@noble/hashes/package.json'];
   const projectNames = codeNames.filter(name=>!name.startsWith('node_modules/')).concat('package-lock.json');
   const project = committedPreparationFiles(sourceRoot,commit,projectNames);

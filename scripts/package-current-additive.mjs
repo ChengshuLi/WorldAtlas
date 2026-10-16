@@ -7,6 +7,7 @@ import {gunzipSync} from 'node:zlib';
 import {isDeepStrictEqual} from 'node:util';
 import {containsPackagePath,loadPackageInputs,safePackagePath} from './package-inputs.mjs';
 import {additiveBaseReference,bindAdditiveLedgerFeatures,verifyAdditiveLedgerSelection,additiveReleaseFootprintDigest,validateAdditivePatchFormat} from '../src/effective-footprint.js';
+import {scientificNativeSelection,validateReferenceMetadataHeader,projectReferenceOwners,assertAppliedReferenceProperties} from '../src/reference-metadata.js';
 
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const need=(ok,message)=>{if(!ok)throw Error(message);};
@@ -31,14 +32,27 @@ export async function prepareCurrentSelectedAdditive({root,selectedGrid,geograph
   }
   const sidecar=JSON.parse(await read(selection.additive_release));
   need(sidecar.version===2&&sidecar.kind==='retained-native-additive-selection-v2','Unsupported current additive selection');
-  const {additive_release,...baseSelection}=selection;
+  const baseSelection=scientificNativeSelection(selection);
   need(isDeepStrictEqual(sidecar.base_selection,baseSelection),'Current additive selection belongs to a different native base');
+  let projection,referenceMetadata,projectionAsset;
+  if(selection.reference_projection!==undefined){
+    // Preparation authenticated the receipt/source closure. Ordinary packaging
+    // binds this accepted whole product to original N and current metadata M.
+    const raw=await read(selection.reference_projection);
+    projection=JSON.parse(raw);
+    const {native,reference}=validateReferenceMetadataHeader(projection,{selection,manifest:selectedGrid.manifest});
+    need(isDeepStrictEqual(reference,Object.fromEntries(['id','footprints_sha256','hierarchy_sha256'].map(key=>[key,geographicRelease[key]]))),
+      'Current reference metadata differs from selected geographic release');
+    const asset={path:'reference-metadata/current.json',bytes:raw.length,sha256:sha(raw)};
+    referenceMetadata={version:1,asset,native_reference:native,reference};
+    projectionAsset={path:asset.path,raw};
+  }
   const wrapped=JSON.parse(await read(sidecar.runtime_envelope)),envelope=wrapped.additiveRelease??wrapped;
   const base=additiveBaseReference({additiveRelease:envelope,reference_release:envelope.effective_reference});
   need(isDeepStrictEqual(base,Object.fromEntries(['id','footprints_sha256','hierarchy_sha256'].map(key=>[key,geographicRelease[key]])))&&envelope.effective_reference.hierarchy_sha256===base.hierarchy_sha256,'Current additive reference differs from selected base');
-  need(selection.sha256===selectedGrid.sha256&&selection.release_id===geographicRelease.id,'Current additive native selection differs');
+  need(selection.sha256===selectedGrid.sha256&&selection.release_id===(referenceMetadata?.native_reference.id??geographicRelease.id),'Current additive native selection differs');
   need(Object.keys(sidecar.logical_asset_map??{}).sort().join(',')==='base_manifest,ledger,owner_roster,patch','Incomplete current additive asset roster');
-  const assets=[],decoded={};
+  const assets=projectionAsset?[projectionAsset]:[],decoded={};
   for(const role of ['base_manifest','ledger','owner_roster','patch']){
     const pin=sidecar.logical_asset_map[role],logical=envelope[role];
     need(pin.bytes===logical.bytes&&pin.sha256===logical.sha256&&(pin.decoded_bytes??pin.bytes)===(logical.decoded_bytes??logical.bytes)&&(pin.decoded_sha256??pin.sha256)===(logical.decoded_sha256??logical.sha256),'Current additive logical/source binding differs: '+role);
@@ -52,10 +66,12 @@ export async function prepareCurrentSelectedAdditive({root,selectedGrid,geograph
   }
   need(envelope.base_manifest.sha256===selectedGrid.sha256&&isDeepStrictEqual(decoded.base_manifest,selectedGrid.manifest),'Current additive base manifest differs');
   need(envelope.owner_roster.sha256===selectedGrid.manifest.original_assets.bounds.sha256&&assets.find(asset=>asset.path===envelope.owner_roster.path).raw.equals(selectedGrid.bounds),'Current additive owner roster differs from independently selected bounds');
-  const owners=decoded.owner_roster;
+  const originalOwners=decoded.owner_roster;
+  const owners=projection?projectReferenceOwners(originalOwners,projection.location_changes,projection.provinces):originalOwners;
   need(Array.isArray(owners)&&owners.length===features.length,'Incomplete current additive owners');
   const byId=new Map(features.map(feature=>[feature.id,feature])),indices=new Set(),ids=new Set();
   for(const owner of owners){const feature=byId.get(owner.id);need(feature&&!ids.has(owner.id)&&Number.isSafeInteger(owner.index)&&owner.index>0&&!indices.has(owner.index)&&feature.pixelIndex===owner.index&&feature.properties.parent_id===owner.province_id,'Current additive owner identity or parent differs');ids.add(owner.id);indices.add(owner.index);}
+  for(const change of projection?.location_changes??[])assertAppliedReferenceProperties(byId.get(change.location_id)?.properties,change.after_properties);
   const patch=decoded.patch,ledger=decoded.ledger;
   need(patch.kind==='unassigned-native-cells-v1'&&[1,2].includes(patch.version)&&isDeepStrictEqual(patch.base_reference,base)&&isDeepStrictEqual(patch.effective_reference,envelope.effective_reference)&&patch.ledger_sha256===envelope.ledger.sha256,'Current additive patch source/ledger differs');
   validateAdditivePatchFormat(patch,selectedGrid.manifest.size);
@@ -64,6 +80,7 @@ export async function prepareCurrentSelectedAdditive({root,selectedGrid,geograph
   verifyAdditiveLedgerSelection(ledger,effective,patch);
   need(additiveReleaseFootprintDigest(base,effective)===envelope.effective_reference.footprints_sha256,'Current additive effective footprint differs');
   return {selection,input_inventory:inputInventory,additiveRelease:envelope,reference_release:envelope.effective_reference,
+    ...(referenceMetadata?{referenceMetadata}:{}),
     async publish(destination){
       const target=path.resolve(destination);
       for(const asset of assets){

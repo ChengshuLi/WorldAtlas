@@ -11,7 +11,7 @@ import {loadCoverageClassification} from './coverage-classification.js';
 import {loadOwnershipAssets} from './ownership-assets.js';
 import {loadNativeLatitudes} from './native-latitudes.js';
 import {NATIVE_METHOD} from './ownership-method.js';
-import {additiveBaseReference,loadAdditiveNativePatch,loadedBaseFootprintSha256,additiveReleaseFootprintDigest,footprintValueSha256} from './effective-footprint.js';
+import {additiveBaseReference,nativeReferenceForData,loadAdditiveNativePatch,loadedBaseFootprintSha256,additiveReleaseFootprintDigest,footprintValueSha256} from './effective-footprint.js';
 import { validYear } from './model.js';
 import { validateHierarchy } from './hierarchy.js';
 
@@ -190,7 +190,7 @@ export async function loadGeography(initialSelection) {
   preparedEvidenceIndexRequest=null;preparedEvidenceRequests=new Map();
   const data=await readJSON(staticAtlas ? './atlas-geography.json' : '/api/geography');
   if(generation!==geographyGeneration)throw new DOMException('Geography superseded','AbortError');
-  const baseReference=additiveBaseReference(data);
+  const baseReference=additiveBaseReference(data),nativeReference=nativeReferenceForData(data);
   referenceAttributeBundle=data.referenceAttributes??null;
   referenceAttributeFootprints=baseReference?.footprints_sha256??data.preparedEvidence?.footprints_sha256;
   preparedEvidenceProof=data.preparedEvidence;
@@ -203,10 +203,10 @@ export async function loadGeography(initialSelection) {
   // Queue ownership rows before the catalog fan-out so decoding can overlap it.
   // Every required stream still completes before this generation is exposed.
   const nativeSelected=data.pixelMap?.method===NATIVE_METHOD;
-  const nativeOptions=nativeSelected?{requireNative:true,expectedReference:baseReference}:{};
+  const nativeOptions=nativeSelected?{requireNative:true,expectedReference:nativeReference}:{};
   const ownershipInput=data.parts&&data.pixelMap?loadOwnershipAssets(data.pixelMap,fetch,nativeOptions):null;
-  const latitudeInput=nativeSelected?loadNativeLatitudes(data.pixelMap,baseReference):null;
-  const coverageRequest=data.coverageClassification?loadCoverageClassification(data.coverageClassification,{...baseReference,release_id:baseReference?.id,canonical_grid_sha256:data.pixelMap?.canonical_grid_sha256,size:data.pixelMap?.size,coordinateBits:data.pixelMap?.coordinateBits}):null;
+  const latitudeInput=nativeSelected?loadNativeLatitudes(data.pixelMap,nativeReference):null;
+  const coverageRequest=data.coverageClassification?loadCoverageClassification(data.coverageClassification,{...nativeReference,release_id:nativeReference?.id,canonical_grid_sha256:data.pixelMap?.canonical_grid_sha256,size:data.pixelMap?.size,coordinateBits:data.pixelMap?.coordinateBits}):null;
   const coverageInput=nativeSelected?coverageRequest:coverageRequest?.catch(()=>null);
   // Fetch one pinned initial evidence selection while complete geography loads.
   // It is consumed only for that same year/examples pair, never another visit.

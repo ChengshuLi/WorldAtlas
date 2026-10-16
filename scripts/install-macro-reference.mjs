@@ -8,6 +8,7 @@ import {footprintHash} from './check-prepared.mjs';
 import {validateMetadataRelationships} from './prepare-geographic-release.mjs';
 import {preparedEvidenceJSON} from '../src/prepared-evidence.js';
 import {prepareMacroReviewProjection} from './prepare-macro-review-projection.mjs';
+import {assertReferenceOnlyFeatureChange,projectReferenceOwners} from '../src/reference-metadata.js';
 import {readGeographicReleaseManifest,decodeGeographicReleaseBatch} from './read-geographic-release-manifest.mjs';
 import {validateEvidenceRevalidationChain} from './validate-evidence-revalidation-chain.mjs';
 import {prepareReferenceMacroBinding} from './prepare-reference-macro-binding.mjs';
@@ -56,7 +57,7 @@ export function validateMetadataStages(before,after,receiptFiles,{mode='macro'}=
  if(mode==='macro'&&receiptFiles.length!==3)throw Error('Exactly three ordered macro receipts are required');
  if(mode==='reference-correction'&&receiptFiles.length!==1)throw Error('Exactly one rebased reference correction receipt required');
  if(before.proof.footprints_sha256!==after.proof.footprints_sha256||before.locations.size!==after.locations.size)throw Error('Metadata install changes canonical footprints/identities');
- for(const [id,f]of before.locations){const next=after.locations.get(id);if(!next||!equal(f.geometry,next.geometry)||!equal({...f.properties,parent_id:null},{...next.properties,parent_id:null}))throw Error('Non-parent location mutation');}
+ for(const [id,f]of before.locations){const next=after.locations.get(id);if(!next)throw Error('Metadata install removes a location');assertReferenceOnlyFeatureChange(f,next);}
  const records=new Map(before.groups),groups=new Map(before.units.map(u=>[u.id,{...u,kind:u.level}])),locations=new Map(before.features.map(f=>[f.id,{...f.properties,kind:'location'}]));
  receiptFiles.forEach((file,i)=>{
   const receipt=read(file);
@@ -76,7 +77,10 @@ export function validateMetadataStages(before,after,receiptFiles,{mode='macro'}=
 export function gridProjection(manifest,bounds,before,after){
  if(manifest.footprints_sha256!==before.proof.footprints_sha256||manifest.hierarchy_sha256!==before.proof.hierarchy_sha256||bounds.length!==after.locations.size)throw Error('Grid baseline is stale');
  const provinces=after.units.filter(u=>u.level==='province').map(u=>u.id).sort(),indices=new Map(provinces.map((id,i)=>[id,i+1])),seen=new Set(),seenIds=new Set(),membership=Buffer.alloc((bounds.length+1)*4);
- const projected=bounds.map(row=>{const prior=before.locations.get(row.id),next=after.locations.get(row.id);if(!prior||!next||row.province_id!==prior.properties.parent_id||!Number.isInteger(row.index)||row.index<1||row.index>bounds.length||seen.has(row.index)||seenIds.has(row.id))throw Error('Invalid original grid location/index');seen.add(row.index);seenIds.add(row.id);const province_index=indices.get(next.properties.parent_id);if(!province_index)throw Error('Missing grid province');membership.writeUInt32LE(province_index,row.index*4);return {...row,province_id:next.properties.parent_id,province_index};});
+ const changes=[];
+ for(const row of bounds){const prior=before.locations.get(row.id),next=after.locations.get(row.id);if(!prior||!next||row.province_id!==prior.properties.parent_id||!Number.isInteger(row.index)||row.index<1||row.index>bounds.length||seen.has(row.index)||seenIds.has(row.id))throw Error('Invalid original grid location/index');seen.add(row.index);seenIds.add(row.id);if(!equal(prior.properties,next.properties))changes.push({location_id:row.id,before_properties:prior.properties,after_properties:next.properties});}
+ const projected=projectReferenceOwners(bounds,changes,provinces);
+ for(const row of projected)membership.writeUInt32LE(row.province_index,row.index*4);
  return {provinces,bounds:projected,membership:gzipSync(membership,{mtime:0}),manifest:{...manifest,hierarchy_sha256:after.proof.hierarchy_sha256,provinces}};
 }
 function protectedFiles(data){

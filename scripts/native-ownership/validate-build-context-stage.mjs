@@ -18,7 +18,7 @@ export const BUILD_CONTEXT_VALIDATOR_SOURCES=[
  'scripts/native-ownership/read-pinned-build-file.mjs','scripts/native-ownership/native-preparation-guards.mjs',
  'scripts/native-ownership/compile-native-ownership.mjs','scripts/audit-grid-intervals.mjs','scripts/evidence-quality.mjs',
  'scripts/prepare-geographic-release.mjs','scripts/check-prepared.mjs','scripts/read-geographic-release-manifest.mjs',
- 'src/native-runtime.js','src/native-grid.js','hosted/geographic-releases.js'
+ 'src/native-runtime.js','src/native-grid.js','hosted/geographic-releases.js','src/reference-metadata.js'
 ];
 const fail=(ok,message)=>{if(!ok)throw Error(message);};
 export async function validateBuildContextStage({root=process.cwd(),expectedReference,

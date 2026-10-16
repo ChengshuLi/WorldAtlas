@@ -7,6 +7,7 @@ import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {createRoutingMetadataAcquisition} from './geography-routing-metadata.mjs';
 import {ACCEPTED_CHECKPOINT_LOCATOR, ACCEPTED_CHECKPOINT_CODE, validateAcceptedCheckpointLocator} from './accepted-selected-checkpoint.mjs';
+import {CURRENT_REBIND_CODE,currentRebindCodePaths} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const PREFIX = 'coordination/engineering/selected-geography-effective-prevention-20261009/';
 const POLICY = PREFIX + 'supported-programs.json';
@@ -38,23 +39,12 @@ export const EXECUTION_CODE = Object.freeze([
   'package.json', 'package-lock.json',
   PREFIX + 'selected-neighbor-prevention.mjs',
   PREFIX + 'selected-checkpoint.mjs', PREFIX + 'selected-joint-entry.mjs',
-  CHECKPOINTS, ...ACCEPTED_CHECKPOINT_CODE, 'scripts/geographic_checkpoint_products.py'
+  CHECKPOINTS, ...ACCEPTED_CHECKPOINT_CODE, 'scripts/geographic_checkpoint_products.py',
+  'scripts/selected-reference-metadata.mjs', 'src/reference-metadata.js'
 ]);
-export const REBIND_CODE = Object.freeze([
-  'coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs',
-  'coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry.mjs',
-  'coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-rebind.mjs',
-  PREFIX + 'selected-neighbor-prevention.mjs', 'src/effective-footprint.js',
-  'scripts/check-effective-geographic-regression.mjs', 'src/ownership-codec.js', 'package.json',
-  'src/native-runtime.js', 'scripts/native-ownership/compile-native-ownership.mjs', 'src/native-grid.js',
-  ...['package.json', 'sha2.js', '_md.js', '_u64.js', 'utils.js'].map(p => 'coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/' + p),
-  'scripts/audit-grid-intervals.mjs',
-  ...['capture-current-rebind.mjs', 'run-current-rebind.mjs', 'issue-current-rebind-execution.py',
-    'supervise-current-rebind.py', 'execution-contract.py', 'owned-group-original.py',
-    'owned-child-termination-original.py', 'mac-execution-runtime-original.json', 'execution-code-paths.json']
-    .map(p => 'coordination/engineering/additive-native-composition-20261009/' + p),
-  'scripts/local-workspace.mjs', 'scripts/worker-identity.mjs'
-]);
+// Current equality binds the complete executing closure. Historical execution
+// descriptors below follow only the request's authenticated literal profile.
+export const REBIND_CODE = CURRENT_REBIND_CODE;
 
 function createReader({repo, baseline, candidate, trusted, limits, acquisition}) {
   const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith('GIT_')));
@@ -260,8 +250,9 @@ async function currentRebind(reader, pin, sourcePaths) {
   keys(certificate, 'authority_registry_sha256,base_selection,execution_commit,facts,kind,operating,publication,request,result,version', 'current-rebind');
   demand(certificate.version === 1 && certificate.kind === 'qualified-native-additive-current-bank-rebind-v1' && oid(certificate.execution_commit), 'unsupported-current-rebind');
   for (const role of ['request', 'facts', 'publication', 'operating', 'result']) reader.pinned(certificate[role], {fallback: false});
-  for (const name of REBIND_CODE) { reader.equalCurrent(name); reader.descriptor(certificate.execution_commit, name); }
+  for (const name of REBIND_CODE) reader.equalCurrent(name);
   const [request, operating] = await joined([reader.pinnedJson(certificate.request, {fallback: false}), reader.pinnedJson(certificate.operating, {fallback: false})]);
+  for (const name of currentRebindCodePaths(request.executed_code)) reader.descriptor(certificate.execution_commit, name);
   keys(operating.execution_custody, 'code_source,terminal,stderr,stdout,issued_plan', 'external-custody');
   for (const p of Object.values(operating.execution_custody)) reader.pinned(p, {fallback: false});
   const plan = await reader.pinnedJson(operating.execution_custody.issued_plan, {fallback: false});

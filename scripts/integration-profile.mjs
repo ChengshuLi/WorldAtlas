@@ -82,7 +82,7 @@ export function candidateGeographyCode(profile, files, testSelection) {
   if (profile !== 'full' || testSelection === 'selected-data') return false;
   return files.some(file => [file.filename, file.previous_filename].filter(Boolean).some(name =>
     /^scripts\/.*\.(?:[cm]?js|[cm]?ts|py|wasm)$/.test(name) ||
-    /^src\/(?:native-|effective-footprint\.|ownership-codec\.|regional-import-gate\.)/.test(name) ||
+    /^src\/(?:native-|effective-footprint\.|ownership-codec\.|regional-import-gate\.|reference-metadata\.)/.test(name) ||
     /^coordination\/engineering\/.*\.(?:[cm]?js|[cm]?ts|py|wasm)$/.test(name) ||
     /(?:^|\/)(?:requirements\.txt|package(?:-lock)?\.json)$/.test(name) ||
     name === 'coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json' ||

@@ -221,6 +221,12 @@ export function readOriginalPackageGeography(original) {
   return {atlas,selectedGrid,geographicRelease,features};
 }
 
+// A metadata application needs newly prepared current catalog/hierarchy output.
+// Ordinary full builds consume it without rerunning original native science.
+export function requireAssemblyWithoutReferenceMetadata(selection) {
+  need(selection?.reference_projection===undefined,'Reference metadata application requires a full build');
+}
+
 export async function assembleSelectedPackage({api,repo,expectedHead,originalRunId,trustedBase}){
   const started=performance.now(),current=currentSource();need(current.head===expectedHead,'Actual selected head changed');
   const found=await findOriginalPackage({api,repo,current,originalRunId,trustedBase});if(!found)return {assembled:false,reason:'No applicable retained original output in bounded recent-result search'};
@@ -268,6 +274,8 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
     const stage=path.join(scratch,'assembly');fs.mkdirSync(stage);
     const execution=issuePackageAssemblyExecution({original,source:root,stage,executingRoot:root,
       acceptedInputs:current.accepted_selected_inputs});
+    requireAssemblyWithoutReferenceMetadata(current.selection);
+    requireAssemblyWithoutReferenceMetadata(manifest.source.selection);
     const {atlas,selectedGrid,geographicRelease,features}=readOriginalPackageGeography(original);
     // The authenticated execution closure includes this literal deferred import.
     // Installed bytes are admitted above; no dependency sees API credentials.

@@ -3,6 +3,7 @@ import {nativeRuntimeIndex,polygonParts,nativeOnlyComponent as validateNativeOnl
 export {polygonParts} from './native-grid.js';
 import {compileNativeOwnership} from '../scripts/native-ownership/compile-native-ownership.mjs';
 import {sha256} from '@noble/hashes/sha2.js';
+import {originalNativeReference,validateReferenceMetadataHeader,projectReferenceOwners,assertAppliedReferenceProperties} from './reference-metadata.js';
 
 export const EFFECTIVE_FOOTPRINT_KIND = 'retained-base-plus-additions';
 const hex = /^[a-f0-9]{64}$/;
@@ -231,6 +232,33 @@ export function additiveBaseReference(data) {
   return release.base_reference;
 }
 
+// A current metadata projection does not reselect immutable ownership words,
+// latitude inputs or physical coverage. Validate its transport descriptor and
+// original reference before any native loader uses the selection.
+export function nativeReferenceForData(data) {
+  const current=additiveBaseReference(data),metadata=data.referenceMetadata;
+  if(metadata===undefined)return current;
+  require(data.additiveRelease!==undefined,'Reference metadata requires an explicit selected native asset closure');
+  exactKeys(metadata,['version','asset','native_reference','reference'],'Reference metadata');
+  require(metadata.version===1,'Unsupported reference metadata');
+  exactKeys(metadata.asset,['path','bytes','sha256'],'Reference metadata asset');
+  require(metadata.asset.path==='reference-metadata/current.json'&&Number.isSafeInteger(metadata.asset.bytes)
+    &&metadata.asset.bytes>0&&metadata.asset.bytes<=32*1024*1024&&hex.test(metadata.asset.sha256),
+  'Unsafe/oversized reference metadata asset');
+  for(const reference of [metadata.native_reference,metadata.reference]){
+    exactKeys(reference,['id','footprints_sha256','hierarchy_sha256'],'Reference metadata reference');
+    require(typeof reference.id==='string'&&reference.id.startsWith('geography:')
+      &&hex.test(reference.footprints_sha256)&&hex.test(reference.hierarchy_sha256),'Incomplete reference metadata reference');
+  }
+  const same=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
+  require(same(metadata.reference,current)&&same(metadata.native_reference,originalNativeReference(data.pixelMap)),
+    'Reference metadata differs from the current or original native reference');
+  require(metadata.reference.footprints_sha256===metadata.native_reference.footprints_sha256
+    &&metadata.reference.hierarchy_sha256!==metadata.native_reference.hierarchy_sha256
+    &&metadata.reference.id!==metadata.native_reference.id,'Reference metadata changes native footprints or lacks a hierarchy transition');
+  return metadata.native_reference;
+}
+
 export function verifyAdditiveLedgerSelection(ledger,features,patch) {
   if(ledger?.version===2)return verifyVersionedLedgerSelection(ledger,features,patch);
   require(ledger?.version===1&&ledger.kind==='native-additive-repair-ledger-v1'&&hex.test(ledger.rule_sha256),'Unsupported additive selection ledger');
@@ -341,17 +369,23 @@ export function bindAdditiveLedgerFeatures(features,ledger,release,baseReference
 
 export async function loadAdditiveNativePatch(data,features,base,{fetcher=fetch,effectiveDigest}={}) {
   const hasAdditions=features.some(feature=>Object.hasOwn(feature,'additiveFootprint'));
-  if(data.additiveRelease===undefined){require(!hasAdditions,'Effective footprint requires an explicit selected additive release');return base;}
+  const nativeReference=nativeReferenceForData(data);
+  if(data.additiveRelease===undefined){
+    require(!hasAdditions,'Effective footprint requires an explicit selected additive release');
+    return base;
+  }
   const originalFeatures=features;features=[...features];
   const baseReference=additiveBaseReference(data),release=data.additiveRelease;
   require(effectiveDigest===undefined||effectiveDigest===data.reference_release.footprints_sha256,'Selected effective footprint digest mismatch');
   if(features.every(feature=>feature.geometry))require(loadedBaseFootprintSha256(features)===baseReference.footprints_sha256,'Complete loaded original base footprint differs from selected additive bank');
   require(hex.test(data.pixelMap?.canonical_grid_sha256)&&release.base_manifest.sha256===data.pixelMap.canonical_grid_sha256,'Additive original native manifest is not independently selected');
   const originalManifest=await readWholeAdditiveAsset(release.base_manifest,fetcher,'Original native manifest');
-  require(originalManifest.geographic_release===baseReference.id&&originalManifest.footprints_sha256===baseReference.footprints_sha256
-    &&originalManifest.hierarchy_sha256===baseReference.hierarchy_sha256&&originalManifest.method===base.method
+  require(originalManifest.geographic_release===nativeReference.id&&originalManifest.footprints_sha256===nativeReference.footprints_sha256
+    &&originalManifest.hierarchy_sha256===nativeReference.hierarchy_sha256&&originalManifest.method===base.method
     &&originalManifest.size===base.size&&originalManifest.coordinateBits===base.coordinateBits
     &&originalManifest.original_assets?.bounds?.sha256===release.owner_roster.sha256,'Selected owner roster differs from original native manifest');
+  require(base.geographic_release===nativeReference.id&&base.footprints_sha256===nativeReference.footprints_sha256
+    &&base.hierarchy_sha256===nativeReference.hierarchy_sha256,'Decoded native ownership differs from original selected reference');
   require(Array.isArray(originalManifest.parts)&&originalManifest.parts.length>0,'Missing original native asset closure');
   for(const kind of ['rows','runs']){
     const words=base[kind];require(words instanceof Uint32Array,'Missing actual decoded native asset');let offset=0;
@@ -375,8 +409,21 @@ export async function loadAdditiveNativePatch(data,features,base,{fetcher=fetch,
   // assertion or an inferred nearest owner, before adding metadata to its view.
   const roster=await readWholeAdditiveAsset(release.owner_roster,fetcher,'Native owner roster');
   require(Array.isArray(roster)&&roster.length===features.length,'Incomplete selected native owner roster');
+  let currentRoster=roster;
+  if(data.referenceMetadata!==undefined){
+    const metadata=data.referenceMetadata,projection=await readWholeAdditiveAsset(metadata.asset,fetcher,'Reference metadata projection');
+    const references=validateReferenceMetadataHeader(projection,{selection:projection.native_selection,manifest:originalManifest});
+    const same=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
+    require(projection.native_selection.sha256===data.pixelMap.canonical_grid_sha256
+      &&same(references.native,nativeReference)&&same(references.reference,baseReference),
+    'Reference metadata projection differs from the selected native manifest or current reference');
+    currentRoster=projectReferenceOwners(roster,projection.location_changes,projection.provinces);
+    const byId=new Map(features.map(feature=>[feature.id,feature]));
+    for(const change of projection.location_changes)assertAppliedReferenceProperties(byId.get(change.location_id)?.properties,change.after_properties);
+
+  }
   const byId=new Map(features.map(feature=>[feature.id,feature])),positions=new Map(features.map((feature,index)=>[feature.id,index])),indices=new Set(),ids=new Set();
-  for(const row of roster){
+  for(const row of currentRoster){
     const feature=byId.get(row.id);
     require(feature&&!ids.has(row.id)&&Number.isInteger(row.index)&&row.index>0&&!indices.has(row.index)
       &&feature.pixelIndex===row.index&&feature.properties?.parent_id===row.province_id,'Foreign/duplicate/changed selected native owner or parent');
@@ -387,7 +434,10 @@ export async function loadAdditiveNativePatch(data,features,base,{fetcher=fetch,
   const mapping=roster.map(row=>[row.index,row.id]).sort((a,b)=>a[0]-b[0]);
   const ownerDigest=Array.from(sha256(new TextEncoder().encode(JSON.stringify(mapping))),byte=>byte.toString(16).padStart(2,'0')).join('');
   require(base.reference_owner_sha256===undefined||base.reference_owner_sha256===ownerDigest,'Existing native owner binding differs from selected whole roster');
-  const boundBase={...base,reference_owner_sha256:ownerDigest,reference_owner_source_sha256:release.owner_roster.sha256};
+  // Bind only a fresh metadata view after authenticating N and every M parent.
+  // The additive application still requires the same M/E hierarchy.
+  const boundBase={...base,geographic_release:baseReference.id,hierarchy_sha256:baseReference.hierarchy_sha256,
+    reference_owner_sha256:ownerDigest,reference_owner_source_sha256:release.owner_roster.sha256};
   const installed=applyAdditiveNativePatch(boundBase,patch,{baseReference,effectiveReference:data.reference_release,features});
   for(let i=0;i<features.length;i++)originalFeatures[i]=features[i];
   return installed;

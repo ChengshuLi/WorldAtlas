@@ -84,7 +84,8 @@ TRUSTED_PATHS = ['scripts/run-geographic-check.py', 'scripts/check-geographic-re
                  'scripts/issue-claim-contract.mjs',
                  'scripts/research-import-gate.mjs',
                  'scripts/worker-result.mjs',
-                 'src/regional-import-gate.js']
+                 'src/regional-import-gate.js',
+                 'scripts/selected-reference-metadata.mjs', 'src/reference-metadata.js']
 PIN_PATHS = ['data/hierarchy.json', 'data/canonical-grid/manifest.json',
              'data/geographic-releases/index.json', 'data/geographic-releases/current-manifest.json']
 
