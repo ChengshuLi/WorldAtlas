@@ -220,6 +220,7 @@ test('canonical originals remain in the candidate while absent historical roles 
   const missing = f.commit();
   config.package_inputs = read().pin(missing, '.github/package-inputs.json');
   fs.writeFileSync(filename, raw, {flag: 'wx'});
+  f.write('coordination/engineering/unbound/snapshot-file.json', {unrelated: true});
   const restored = f.commit();
   config.restored_read_roles = {commit: restored, paths: [original.path]};
   const result = f.run(config, '.cache/delivery-handoff/restored');
@@ -227,6 +228,22 @@ test('canonical originals remain in the candidate while absent historical roles 
   const receipt = JSON.parse(fs.readFileSync(path.join(f.root, '.cache/delivery-handoff/restored/preparation.json')));
   assert.ok(Object.keys(receipt.outputs).every(name => !name.includes('/')));
   assert.deepEqual(fs.readFileSync(filename), raw);
+
+  const derivedConfig = {...config, restored_read_roles: {commit: restored}};
+  const derived = f.run(derivedConfig, '.cache/delivery-handoff/derived-restoration');
+  assert.equal(derived.status, 0, derived.stderr);
+  const derivedRoot = path.join(f.root, '.cache/delivery-handoff/derived-restoration');
+  const derivedReceipt = JSON.parse(fs.readFileSync(path.join(derivedRoot, 'preparation.json')));
+  assert.deepEqual(derivedReceipt.outputs, receipt.outputs);
+  for (const name of Object.keys(receipt.outputs))
+    assert.deepEqual(fs.readFileSync(path.join(derivedRoot, name)),
+      fs.readFileSync(path.join(f.root, '.cache/delivery-handoff/restored', name)));
+  assert.ok(!JSON.parse(fs.readFileSync(path.join(derivedRoot, 'package-roles.json'))).paths
+    .some(pin => pin.path.includes('/unbound/')));
+  const missingDerived = f.run({...derivedConfig, restored_read_roles: {commit: missing}},
+    '.cache/delivery-handoff/derived-missing');
+  assert.notEqual(missingDerived.status, 0);
+  assert.equal(fs.existsSync(path.join(f.root, '.cache/delivery-handoff/derived-missing')), false);
 
   const withoutSnapshot = {...config}; delete withoutSnapshot.restored_read_roles;
   const refused = f.run(withoutSnapshot, '.cache/delivery-handoff/missing-snapshot');
@@ -239,5 +256,17 @@ test('canonical originals remain in the candidate while absent historical roles 
   const divergent = f.run(config, '.cache/delivery-handoff/changed-snapshot');
   assert.notEqual(divergent.status, 0); assert.match(divergent.stderr, /Restored snapshot differs/);
   assert.equal(fs.existsSync(path.join(f.root, '.cache/delivery-handoff/changed-snapshot')), false);
+  assert.deepEqual(fs.readFileSync(filename), changedRaw);
+  const changedDerived = f.run({...derivedConfig, restored_read_roles: {commit: changed}},
+    '.cache/delivery-handoff/derived-changed');
+  assert.notEqual(changedDerived.status, 0);
+  assert.match(changedDerived.stderr, /Restored snapshot differs/);
+  assert.equal(fs.existsSync(path.join(f.root, '.cache/delivery-handoff/derived-changed')), false);
+
+  const currentConflict = f.run({...derivedConfig, package_inputs: read().pin(changed, '.github/package-inputs.json')},
+    '.cache/delivery-handoff/derived-current-conflict');
+  assert.notEqual(currentConflict.status, 0);
+  assert.match(currentConflict.stderr, /Original consumed role differs from accepted path/);
+  assert.equal(fs.existsSync(path.join(f.root, '.cache/delivery-handoff/derived-current-conflict')), false);
   assert.deepEqual(fs.readFileSync(filename), changedRaw);
 });

@@ -130,6 +130,43 @@ test('empty registry delta is valid and does not rediscover inherited authoritie
   assert.equal(JSON.parse(output['selected-delivery-expectations.json']).cumulative_native_cells, 1);
 });
 
+test('snapshot-only restoration uses one projection and preserves explicit-list outputs and reads', () => {
+  const f = fixture({count: 7, producerVintages: true});
+  f.reads.length = 0;
+  const explicit = finalizeDelivery(f.config, f.reader), explicitReads = [...f.reads];
+  const {commit} = f.config.restored_read_roles;
+  f.config.restored_read_roles = {commit};
+  const before = jsonBytes(f.config);
+  f.reader.add('coordination/engineering/unbound/snapshot-only.json', {unrelated: true}, NEXT);
+  f.reads.length = 0;
+  const derived = finalizeDelivery(f.config, f.reader);
+  assert.deepEqual(derived, explicit);
+  assert.deepEqual(f.reads, explicitReads, 'Derivation must not add another authenticated body traversal');
+  assert.deepEqual(jsonBytes(f.config), before, 'No handwritten path list is injected into caller configuration');
+  assert.ok(!JSON.parse(derived['package-roles.json']).paths.some(pin => pin.path.includes('/unbound/')));
+  assert.deepEqual(f.reader.read(f.liveProducer), Buffer.from('# current accepted helper\n'));
+});
+
+test('derived restoration preserves missing, changed, nonordinary and current-path refusals', () => {
+  for (const alter of [
+    f => { f.config.restored_read_roles.commit = 'f'.repeat(40); },
+    f => { const pin = f.originals.find(pin => pin.commit === SOURCE); f.reader.add(pin.path, {changed: true}, NEXT); },
+    f => { const original = f.reader.pin; f.reader.pin = (commit, name) =>
+      commit === NEXT && !name.startsWith(OWNED) ? {...original(commit, name), mode: '120000'} : original(commit, name); },
+    f => { const pin = f.originals.find(pin => pin.commit === SOURCE); f.reader.add(pin.path, {changed: true}, BASE); }
+  ]) {
+    const f = fixture({count: 1});
+    f.config.restored_read_roles = {commit: NEXT};
+    alter(f);
+    assert.throws(() => finalizeDelivery(f.config, f.reader), /accepted path identity/);
+  }
+  for (const bad of [{commit: NEXT, paths: []}, {commit: NEXT, paths: null},
+    {commit: NEXT, unexpected: true}, {commit: 'main'}]) {
+    const f = fixture({count: 1}); f.config.restored_read_roles = bad;
+    assert.throws(() => finalizeDelivery(f.config, f.reader), /Exact committed restored read-role inventory/);
+  }
+});
+
 test('standalone package and initial no-hook finalization retain prefix selection', () => {
   const f = fixture({generated: false, cumulative: false});
   assert.equal(JSON.parse(packageProjection(f.config, f.reader)['package-roles.json']).new_authorities, 1);
