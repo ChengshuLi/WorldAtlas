@@ -90,7 +90,7 @@ export async function verifyForwardRuntimeRole(driver,definitions){
  * verified before and after; no content import or credential rotation occurs. */
 export async function applyPostgresForwardMigrations({driver,sourceDirectory,migrations,root=process.cwd(),baselineTriggerHash,verifyOnly=false}){
  if(!validHash(baselineTriggerHash)||!driver?.query||!driver.runTransaction||hash(repoFile(root,'postgres/schema.sql',1024*1024))!==coreSHA)fail('verified-owner-forward-contract-required');const snapshot=readVerifiedStorageSnapshot(sourceDirectory),definitions=migrations.map((item,index)=>{const definition=forwardMigrationDefinitions[index];if(!definition||item.id!==definition.id||item.file!==definition.file||!validHash(item.sha256)||hash(repoFile(root,item.file,1024*1024))!==item.sha256)fail('forward-file-hash-or-order-mismatch');return definition;});if(!definitions.length)fail('missing-forward-migrations');
- const original=await restorePostgresStorage({directory:sourceDirectory,driver,verifyOnly:true,receiptFile:null});if(hash(JSON.stringify(await baseGuards(driver)))!==baselineTriggerHash)fail('original-core-guards-changed');const functionsBefore=hash(JSON.stringify(await retainedCoreFunctions(driver)));
+ if(hash(JSON.stringify(await baseGuards(driver)))!==baselineTriggerHash)fail('original-core-guards-changed');const functionsBefore=hash(JSON.stringify(await retainedCoreFunctions(driver)));
  let commitStatus='not-started';try{const result=await driver.runTransaction(async tx=>{
   await tx.query('SELECT pg_advisory_xact_lock(807245315,1)');
   const transactional={query:(query,params)=>tx.query(query,params),runTransaction:callback=>callback(tx)};
