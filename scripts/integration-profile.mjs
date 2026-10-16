@@ -777,10 +777,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       needSelected(ordinary(baseline.entries.get(updatedManifest)), 'nonordinary scientific manifest');
       supporting.add(updatedManifest);
     }
-    for (const name of supporting) {
-      needSelected(!nativeOperandPath(name, branch, reservation), 'unbound native operand');
-      if (name !== updatedManifest || !manifestChanged) await read(name, authored, false);
-    }
+    for (const name of supporting) needSelected(!nativeOperandPath(name, branch, reservation), 'unbound native operand');
     if (supporting.size) {
       // Issue ownership and a historical-looking filename establish no role.
       // Reuse the fixed base-reader walk for every newly admitted retained file,
