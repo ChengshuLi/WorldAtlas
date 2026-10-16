@@ -668,7 +668,6 @@
         "type": "MultiPolygon"
       },
       "coverage_classes": [
-        "mapped_land_support",
         "mapped_inland_water_support"
       ],
       "id": "gb:MMR:ADM3:66882298B17691670471295",
@@ -5024,6 +5023,43 @@
             ]
           ],
           "type": "MultiPolygon"
+        }
+      ],
+      "coverage_rows": [
+        {
+          "y": 116636,
+          "runs": [
+            [
+              199277,
+              199278,
+              "mapped_inland_water_support"
+            ]
+          ]
+        },
+        {
+          "y": 116637,
+          "runs": [
+            [
+              199276,
+              199277,
+              "mapped_inland_water_support"
+            ],
+            [
+              199277,
+              199278,
+              "mapped_inland_water_support"
+            ]
+          ]
+        },
+        {
+          "y": 116638,
+          "runs": [
+            [
+              199274,
+              199275,
+              "mapped_inland_water_support"
+            ]
+          ]
         }
       ]
     }
