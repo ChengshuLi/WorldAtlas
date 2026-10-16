@@ -1,0 +1,215 @@
+{
+  "version": 1,
+  "qualified_contribution_commit": "51790732e2ac5e09e2bb79272158ed6360f7025f",
+  "reviewed_executing_code_commit": "9fa67a901e6202622752e4487d9ffb5a7440b0f5",
+  "actual_executing_input_commit": "10dd423da556c6a715725072091f6ae8e5ed7397",
+  "qualified_cells": 15,
+  "original_repair_keys": 15,
+  "original_conflict_keys": 0,
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "51790732e2ac5e09e2bb79272158ed6360f7025f",
+        "path": "coordination/engineering/indonesia-provider15-20261016/jmg14/authority/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "baa82ed0f1ef525b7d1bf390c3540f38fa2ec07f",
+        "bytes": 709,
+        "sha256": "820965df7e8ad624d61e8de7921e10e051603b9496430aa44ed52c7a92b3b8f6"
+      },
+      "source_authority": {
+        "commit": "51790732e2ac5e09e2bb79272158ed6360f7025f",
+        "path": "coordination/engineering/indonesia-provider15-20261016/jmg14/authority/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "9bb56bd5599565b137949a48f5551286a106ddd0",
+        "bytes": 712,
+        "sha256": "85b64aa143475656799934dda2f7886803796ba43c82dae6c226e41c910ded00"
+      },
+      "ledger": {
+        "commit": "51790732e2ac5e09e2bb79272158ed6360f7025f",
+        "path": "coordination/engineering/indonesia-provider15-20261016/jmg14/authority/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "1fd8ee8e346e83638bc7b54138c245d769968dd5",
+        "bytes": 29701,
+        "sha256": "ff568e22381228027d748c49306cebff5f9d8736f5991382bd7ef3a7ce407ff5"
+      },
+      "native_patch": {
+        "bytes": 627,
+        "commit": "10dd423da556c6a715725072091f6ae8e5ed7397",
+        "git_blob_oid": "fc4d6da2620c518dac68f0b88b83fd1c08282f02",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-provider15-20261016/jmg14/candidate-native-patch.json",
+        "sha256": "f9025e6ec733ffa74669c0488010fb6cc144e88a615dd5d4bf2c95b82ca80b22"
+      }
+    },
+    {
+      "rule_preimage": {
+        "commit": "51790732e2ac5e09e2bb79272158ed6360f7025f",
+        "path": "coordination/engineering/indonesia-provider15-20261016/bukit1/authority/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "0313b7251ff599fd9c6eda7eac22a5b4b9e13088",
+        "bytes": 709,
+        "sha256": "936bc16d9456d3351a4e4360a3b460b75298819554a1ed8dc5ae90bb84ad0ce4"
+      },
+      "source_authority": {
+        "commit": "51790732e2ac5e09e2bb79272158ed6360f7025f",
+        "path": "coordination/engineering/indonesia-provider15-20261016/bukit1/authority/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "cfc722ddc7caf4ccebdfdf0ed338158207e5ac3f",
+        "bytes": 712,
+        "sha256": "e5717462e40e440f5b8399860a2c8002cd2e00dfb6983410c00451f21a97ce20"
+      },
+      "ledger": {
+        "commit": "51790732e2ac5e09e2bb79272158ed6360f7025f",
+        "path": "coordination/engineering/indonesia-provider15-20261016/bukit1/authority/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "85e0f398253e6ec397a51bc3b7bcf1ed6141cddb",
+        "bytes": 10637,
+        "sha256": "c2ca7157e355ae75bf1096a578d94784d36649ac57ad259d112cb37a110c4fb4"
+      },
+      "native_patch": {
+        "bytes": 55,
+        "commit": "10dd423da556c6a715725072091f6ae8e5ed7397",
+        "git_blob_oid": "c7e39ca81d1ad8c66b1be1ab7a0a30e08d87c276",
+        "mode": "100644",
+        "path": "coordination/engineering/indonesia-provider15-20261016/bukit1/candidate-native-patch.json",
+        "sha256": "560ae472a40a4758d5d8a0d201bdc118e5ea6cd35fbb68e0224610eb0ac36f61"
+      }
+    }
+  ],
+  "literal_keyset": {
+    "path": "coordination/engineering/indonesia-provider15-20261016/qualified15-owner-y-x.jsonl",
+    "bytes": 330,
+    "sha256": "7cbb29b2a61f72b50a04c0db78e72d8fbfb425f19b68c490e8e73af150b9405c"
+  },
+  "original_request_to_native_owner_join": {
+    "path": "coordination/engineering/indonesia-provider15-20261016/original15-request-to-qualified-native-owner.json",
+    "bytes": 5151,
+    "sha256": "9f0c129f37c86e4410d0bb702e7661999a963c9575bc1fb3640968174041bfeb"
+  },
+  "constructor_summary": [
+    {
+      "name": "jmg14",
+      "qualified_cells": 14,
+      "ledger_rows": 4,
+      "source_members": 5,
+      "actual_native_territorial_contact_records": 23,
+      "actual_execution": {
+        "commit": "51790732e2ac5e09e2bb79272158ed6360f7025f",
+        "path": "coordination/engineering/indonesia-provider15-20261016/jmg14/authority.actual-execution.json",
+        "mode": "100644",
+        "git_blob_oid": "2778e0d8028878e0fae3d3cb99c9001caf744f80",
+        "bytes": 760,
+        "sha256": "25d9ec8159f858157ff3d02b1f08b8a0b2480be10572fecb654436870f375add"
+      },
+      "current_owner_zero_or_selected_acceptance": false
+    },
+    {
+      "name": "bukit1",
+      "qualified_cells": 1,
+      "ledger_rows": 1,
+      "source_members": 1,
+      "actual_native_territorial_contact_records": 1,
+      "actual_execution": {
+        "commit": "51790732e2ac5e09e2bb79272158ed6360f7025f",
+        "path": "coordination/engineering/indonesia-provider15-20261016/bukit1/authority.actual-execution.json",
+        "mode": "100644",
+        "git_blob_oid": "b9b53512661c19225d9981e866c61683d7d04720",
+        "bytes": 764,
+        "sha256": "12f7d896c5e029e85aa1d048c2d677301b3cd8c1061255ff7a3f092dc9d8f77d"
+      },
+      "current_owner_zero_or_selected_acceptance": false
+    }
+  ],
+  "adopted_typed_and_restore_input_pins": [
+    {
+      "commit": "51790732e2ac5e09e2bb79272158ed6360f7025f",
+      "path": "coordination/engineering/indonesia-provider15-20261016/jmg14/adopted-provider-families.json",
+      "mode": "100644",
+      "git_blob_oid": "0a14e100f35e1d0f10082a24dd83f27e684e33ea",
+      "bytes": 5973,
+      "sha256": "ec21b190edf76fe683da6ddb93835fe837a5b6ad15cb7f8067620ce3fb63d4e9"
+    },
+    {
+      "commit": "51790732e2ac5e09e2bb79272158ed6360f7025f",
+      "path": "coordination/engineering/indonesia-provider15-20261016/jmg14/exact-adopted-source-choice.json",
+      "mode": "100644",
+      "git_blob_oid": "016a1540b242ed73640d1bb9c8c3aa5afb880512",
+      "bytes": 97148,
+      "sha256": "1084e5ef4ec6627feb2f0a50fc789003fc61e08c2dd1c5135ef7668dabc6d809"
+    },
+    {
+      "commit": "51790732e2ac5e09e2bb79272158ed6360f7025f",
+      "path": "coordination/engineering/indonesia-provider15-20261016/jmg14/territorial-applicability.json",
+      "mode": "100644",
+      "git_blob_oid": "aebdeedc86ab2d6c030eddcbd2ef47a9dc1c036d",
+      "bytes": 10534,
+      "sha256": "ff1f86a753255d0b74017117500b34919c6ade594bf51c56de227b0a14ea0ef2"
+    },
+    {
+      "commit": "51790732e2ac5e09e2bb79272158ed6360f7025f",
+      "path": "coordination/engineering/indonesia-provider15-20261016/jmg14/source-evidence.json",
+      "mode": "100644",
+      "git_blob_oid": "1f05d7bd37fcffe5bd501d2eaaa44b979bc6abad",
+      "bytes": 224455,
+      "sha256": "4416cb3f503c47072f0aa2c90d6df254dedc06d8b01aace4c2c4b4b79dd20661"
+    },
+    {
+      "commit": "51790732e2ac5e09e2bb79272158ed6360f7025f",
+      "path": "coordination/engineering/indonesia-provider15-20261016/jmg14/candidate-native-patch.json",
+      "mode": "100644",
+      "git_blob_oid": "fc4d6da2620c518dac68f0b88b83fd1c08282f02",
+      "bytes": 627,
+      "sha256": "f9025e6ec733ffa74669c0488010fb6cc144e88a615dd5d4bf2c95b82ca80b22"
+    },
+    {
+      "commit": "51790732e2ac5e09e2bb79272158ed6360f7025f",
+      "path": "coordination/engineering/indonesia-provider15-20261016/bukit1/adopted-provider-families.json",
+      "mode": "100644",
+      "git_blob_oid": "6a65d789e29e07239ab68b6d462ce5f1db483a70",
+      "bytes": 1487,
+      "sha256": "60e629a0e2df04daf65bf4354b9d89ecb77c7cf2c3d3049043b10a7b4b11a9aa"
+    },
+    {
+      "commit": "51790732e2ac5e09e2bb79272158ed6360f7025f",
+      "path": "coordination/engineering/indonesia-provider15-20261016/bukit1/exact-adopted-source-choice.json",
+      "mode": "100644",
+      "git_blob_oid": "5a1c00a5fc547ec48bf08df3d1f3beee1043212f",
+      "bytes": 24687,
+      "sha256": "e37e273b5463e7334e20bc0517438ed597db086cdf5c362eb3c4ef12eeeeac2a"
+    },
+    {
+      "commit": "51790732e2ac5e09e2bb79272158ed6360f7025f",
+      "path": "coordination/engineering/indonesia-provider15-20261016/bukit1/territorial-applicability.json",
+      "mode": "100644",
+      "git_blob_oid": "c915045afb80bc70828a5e15d4c737cb37bc2c04",
+      "bytes": 1901,
+      "sha256": "6f392ff8455a0a6c77987addc1e653845532281cd7f8a0ed0403d0867667839a"
+    },
+    {
+      "commit": "51790732e2ac5e09e2bb79272158ed6360f7025f",
+      "path": "coordination/engineering/indonesia-provider15-20261016/bukit1/source-evidence.json",
+      "mode": "100644",
+      "git_blob_oid": "4d39efffe33aaa877f214b63e322659690fd11c8",
+      "bytes": 56043,
+      "sha256": "e033c1b06b0831288b5459087cc14fcbc74b5ba9a2706346ee06ed662d2b201f"
+    },
+    {
+      "commit": "51790732e2ac5e09e2bb79272158ed6360f7025f",
+      "path": "coordination/engineering/indonesia-provider15-20261016/bukit1/candidate-native-patch.json",
+      "mode": "100644",
+      "git_blob_oid": "c7e39ca81d1ad8c66b1be1ab7a0a30e08d87c276",
+      "bytes": 55,
+      "sha256": "560ae472a40a4758d5d8a0d201bdc118e5ea6cd35fbb68e0224610eb0ac36f61"
+    }
+  ],
+  "new_reader_support_issue": 2088,
+  "selector_changed": false,
+  "accepted_native_credit": 0,
+  "limits": [
+    "Parent source choices and stock source/physical qualification only.",
+    "All complete new-provider and cross-family unmapped competitors, measured siblings and actual physical issue geometries retained.",
+    "Original request owner differs from the explicitly adopted native target on these15; mapping is literal, not a renamed source.",
+    "Current original unfinished intersection is106; actual selected owner-zero/conservation/emitted consumer and accepted reader support remain required.",
+    "No old source/physical producer replay. Actual source, operator, runtime and execution vintages stay distinct."
+  ]
+}
