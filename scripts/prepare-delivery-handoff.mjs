@@ -381,7 +381,7 @@ function qualifyTerminal(terminal, requestRaw, publicationRaw, request) {
   else need(terminal.publication_sha256 === digest(publicationRaw), 'Terminal publication binding differs');
 }
 
-function readInventory(raw, descriptor, reader) {
+function readInventory(raw, descriptor) {
   need(Number.isSafeInteger(descriptor.uncompressed_bytes) && descriptor.uncompressed_bytes > 0,
     'Nonempty decoded inventory identity required');
   const decoded = gunzipSync(raw, {maxOutputLength: descriptor.uncompressed_bytes});
@@ -394,7 +394,7 @@ function sourceNativeJoin(request, facts, publication, inventoryRaw, reader, pro
   const source = request.operation === 'retained-land-source-premises-v1';
   need(source || request.operation === 'unactivated-additive-native-batch-v1', 'Unsupported retained operator contract');
   const ids = source ? request.source_rule.expected_ids : request.additive.scope_ids;
-  const rows = readInventory(inventoryRaw, publication.inventory, reader);
+  const rows = readInventory(inventoryRaw, publication.inventory);
   need(unique(ids) && same(rows.map(row => row.component_id), ids) && facts.components === ids.length,
     'Inventory does not match complete issued scope/order/count');
   need(same(facts.executed_code, request.executed_code) && same(facts.installed_modules, request.installed_modules)
@@ -493,7 +493,8 @@ export function retainProducts(config, root, reader, readLocal = ordinary) {
   for (const row of rows) {
     need(safe(row.path) && !row.path.includes('/') && !Object.hasOwn(outputs, row.path), 'Unsafe/duplicate publication path');
     const raw = readLocal(root, config.output + '/' + row.path); need(raw.length === row.bytes && digest(raw) === row.sha256, 'Incomplete actual publication output: ' + row.path);
-    if (row.uncompressed_bytes !== undefined) {
+    // The source/native inventory is decoded and authenticated by sourceNativeJoin below.
+    if (row.uncompressed_bytes !== undefined && (publication.outputs || row.path !== 'inventory.jsonl.gz')) {
       need(Number.isSafeInteger(row.uncompressed_bytes) && row.uncompressed_bytes > 0, 'Invalid decoded output identity');
       const decoded = gunzipSync(raw, {maxOutputLength: row.uncompressed_bytes});
       need(decoded.length === row.uncompressed_bytes && digest(decoded) === row.uncompressed_sha256, 'Decoded output differs');

@@ -100,7 +100,7 @@ test('real missing-object fetches are batched, shared OIDs deduplicate, and cand
     assert.equal(result.status, 'scoped-prefetch-completed'); assert.equal(result.complete_scientific_closure, false);
     assert(f.batches.some(batch => batch.length >= 4));
     assert.equal(new Set(f.batches.flat()).size, f.batches.flat().length);
-    assert.equal(result.verified_import_objects, f.bodies.size);
+    assert.equal(result.fetched_objects, f.bodies.size);
     // The same unchanged reader of actual Git bytes sees the exact expected
     // differing source semantics; prefetch does not supply a replacement result.
     const consume = (repo, commit) => JSON.parse(f.git(repo, ['show', commit + ':data/source.json'])).features[0].points;
@@ -108,7 +108,7 @@ test('real missing-object fetches are batched, shared OIDs deduplicate, and cand
     assert.notDeepEqual(consume(f.destination, f.baseline), consume(f.destination, f.candidate));
     const count = f.batches.length;
     const warm = await prefetchSelectedGeography(f.acquisition(), f.baseline, f.candidate);
-    assert.equal(warm.verified_import_objects, 0); assert.equal(f.batches.length, count);
+    assert.equal(warm.fetched_objects, 0); assert.equal(f.batches.length, count);
   } finally { f.close(); }
 });
 
@@ -125,8 +125,7 @@ test('wrong tree, mode, size, OID and hash are not accepted as scoped completion
     await assert.rejects(a.descriptor(f.baseline, name, {mode: '120000'}), /identity/);
     await assert.rejects(a.descriptor(f.baseline, name, {git_blob_oid: '0'.repeat(40)}), /identity/);
     await assert.rejects(a.descriptor(f.baseline, '../outside'), /Unsafe/);
-    const p = await a.descriptor(f.baseline, name, {sha256: '0'.repeat(64)});
-    assert.throws(() => a.acquire([p]), /declared hash/);
+    await assert.rejects(a.json(f.baseline, name, {sha256: '0'.repeat(64)}), /declared hash/);
   } finally { f.close(); }
 });
 
@@ -164,7 +163,8 @@ for (const transport of [false, true]) test(`complete ${transport ? 'fragment-tr
     const expectedPaths = ['data/ownership-selection.json', 'native/manifest.json', 'source-bank.json', 'data/world-index.json',
       ...parts.map(p => 'native/' + p.path), ...sources.map(p => p.path), ...(transport ? ['native/index.json'] : [])];
     assert.deepEqual(paths.sort(), expectedPaths.sort());
-    assert.equal(bodyReads.length, result.unique_objects);
+    assert.equal(bodyReads.length, transport ? 4 : 3); // Only actual JSON consumers read bodies.
+    assert(bodyReads.length < result.unique_objects);
     assert.equal(new Set(bodyReads).size, bodyReads.length);
     assert.equal(new Set(f.batches.flat()).size, f.batches.flat().length);
     for (const name of [`native/${transport ? 'fragment' : 'run'}-0.json`, `native/${transport ? 'fragment' : 'run'}-1.json`, 'data/source-0.json', 'data/source-1.json']) {
@@ -221,7 +221,7 @@ test('wrong local object type and corrupted acquired bytes refuse completion', a
       return args.includes('blob') ? Buffer.from('truncated') : raw;
     }});
     await assert.rejects(damaged.json(f.baseline, row.path), /does not match tree/);
-    assert.equal(damaged.stats.verified_import_objects, 0);
+    assert.equal(damaged.stats.fetched_objects, 1); // Fetch success does not claim body authentication.
   } finally { f.close(); }
 });
 
@@ -311,7 +311,7 @@ else: raise AssertionError('checker resumed after unconfirmed cleanup')
 });
 
 
-test('cold routing acquisition authenticates complete object and tree metadata', async () => {
+test('cold routing acquisition supplies exact objects and authenticates tree metadata', async () => {
   const f = fixture(); try {
     const raw = 'complete routing body', head = f.commit({'routing.json': raw}); f.importMetadata();
     const metadata = f.maps.get(head), row = metadata.tree[0];
@@ -321,8 +321,9 @@ test('cold routing acquisition authenticates complete object and tree metadata',
       assert.equal(root, metadata.sha); return {...metadata, note: 'complete tree metadata'};
     }});
     await a.acquire(pin, {bytes: row.size, sha256: digest(raw)});
-    assert.equal(a.summary().verified_import_bytes, row.size); assert.equal(a.summary().fetch_batches, 1);
-    await assert.rejects(a.acquire(pin, {bytes: row.size, sha256: '0'.repeat(64)}), /declared hash/);
+    assert.equal(a.summary().fetched_bytes, row.size); assert.equal(a.summary().fetch_batches, 1);
+    await a.acquire(pin, {bytes: row.size, sha256: '0'.repeat(64)}); // The collector checks the consumed hash.
+    assert.equal(a.summary().complete_scientific_closure, false);
     for (const alter of [m => ({...m, truncated: true}), m => ({...m, sha: head}),
       m => ({...m, tree: [...m.tree, m.tree[0]]}),
       m => ({...m, tree: m.tree.map(r => ({...r, size: r.size + 1}))})]) {
