@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "baseline": "e67e5518a68aa031c05573c487bb4a94804b94c0",
+  "original_native_cells_checked": 3963,
+  "native_rows_checked": 1195,
+  "native_base_manifest_sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+  "original_base_overlap_cells": 0,
+  "current_additive_overlap_cells": 0,
+  "whole_native_parts": [
+    {
+      "path": "native-v1/ownership/runs-50331648.bin.gz",
+      "bytes": 877430,
+      "sha256": "7df616b4446cb3e213838c7e12b5a02e0880bc78a9170218cd29e745128d7e4d",
+      "decoded_sha256": "ab5a9ccd48789d4c872fa255559c555ea289d684868878eb807e650f007bc90c"
+    },
+    {
+      "path": "native-v1/ownership/runs-51380224.bin.gz",
+      "bytes": 859552,
+      "sha256": "f1de009e6b8fe062614b6f37498d46090ec30c09baf9c3a6e0af5ac61008fa68",
+      "decoded_sha256": "c326e7260acb44ae82f7f79e755151419a9bb8cd1fc25acab7289e57230b02d7"
+    },
+    {
+      "path": "native-v1/ownership/runs-52428800.bin.gz",
+      "bytes": 848562,
+      "sha256": "a9143cff7852fe32d40dccf7d79f0b438acb4b28db25e87e00908526722ba6e0",
+      "decoded_sha256": "41675431fa9f46bc7c2c144debb02f2100278e2a1dd56fb1804cc863083f092a"
+    }
+  ],
+  "limitations": [
+    "Bounded actual selected base and cumulative-patch owner-zero proof; hosted final consumer and smoke remain required."
+  ]
+}

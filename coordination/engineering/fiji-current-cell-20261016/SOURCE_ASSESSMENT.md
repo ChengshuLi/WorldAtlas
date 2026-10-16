@@ -3,7 +3,9 @@
 Issue #2219. Original package `gb-FJI-ADM2--repair-evaluation` contains exactly
 3,963 land cells, 1,882 half-open segments and 15 owners. No denominator was
 substituted. The original frozen selected vintage is a61b6f9e7f88b1da380e3a834f89d7509132ed71;
-current comparison baseline is ab0d2088bc66e0d9847b273eb8519a92c0f109b1.
+initial comparison baseline was ab0d2088bc66e0d9847b273eb8519a92c0f109b1.
+The current composition baseline is e67e5518a68aa031c05573c487bb4a94804b94c0,
+which includes the accepted Solomon Islands repair delivery.
 The retained source queue is authenticated by SHA256
 78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8.
 
@@ -86,14 +88,17 @@ contains 9,706 cells and remains unassigned and outside this denominator. The
 | Cakaudrove | 19904 | 685 |
 | Ba | 19905 | 315 |
 
-`bounded-current-owner-zero.json` authenticates the actual accepted native bank
-and all complete intervals on the 1,195 requested rows (three whole native run
-parts), proving all 3,963 cells have native owner zero. The accepted cumulative
-additive patch also has zero intersection. `literal-conservation.json` verifies
-all 877 inherited ledger rows and 145 authorities remain literal; 15 rows and one
-authority add exactly 3,963 disjoint keys. The provisional composition contains
-291,251 cumulative additive cells, compared with 287,288 at this baseline. The
-existing reference-metadata projection remains unchanged.
+The initial `bounded-current-owner-zero.json` and `literal-conservation.json`
+retain the original ab0d comparison. `current-checks-002` separately authenticates
+the current selected native bank and all complete intervals on the 1,195
+requested rows (three whole native run parts), proving all 3,963 cells still have
+native owner zero. The current cumulative additive patch has zero intersection.
+All 886 inherited ledger rows and 146 authorities remain literal; 15 rows and one
+authority add exactly 3,963 disjoint keys. Current `composition-002` contains
+295,176 cumulative additive cells, compared with 291,213 at this baseline. The
+existing reference-metadata projection remains unchanged. The original
+constructor at 0dc80808373b6437877933e808572792ab61bc6b is reused unchanged;
+no physical or source qualification was recomputed or reinterpreted.
 
 ## Controls and remaining acceptance
 

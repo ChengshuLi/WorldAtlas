@@ -1,6 +1,7 @@
-import fs from 'node:fs';import assert from 'node:assert/strict';
+import fs from 'node:fs';import assert from 'node:assert/strict';import path from 'node:path';import {fileURLToPath} from 'node:url';
 import {ImmutableReader,loadBaseSelection,loadNativeRowTable,acquireNativeRows} from '../../../../scripts/check-effective-geographic-regression.mjs';
-const baseline='ab0d2088bc66e0d9847b273eb8519a92c0f109b1',prefix='coordination/engineering/fiji-current-cell-20261016/';
+export function verifyCurrentOwnerZero(baseline='ab0d2088bc66e0d9847b273eb8519a92c0f109b1'){
+const prefix='coordination/engineering/fiji-current-cell-20261016/';
 const requested=JSON.parse(fs.readFileSync(prefix+'original-native-patch.json'));
 const reader=new ImmutableReader(process.cwd(),baseline),snapshot=loadBaseSelection(reader);
 console.log('authenticated selected base');
@@ -18,4 +19,11 @@ const report={version:1,baseline,original_native_cells_checked:checked,native_ro
  native_base_manifest_sha256:snapshot.selection.sha256,original_base_overlap_cells:0,current_additive_overlap_cells:0,
  whole_native_parts:native.custody.whole_parts.map(p=>({path:p.path,bytes:p.bytes,sha256:p.sha256,decoded_sha256:p.decoded_sha256})),
  limitations:['Bounded actual selected base and cumulative-patch owner-zero proof; hosted final consumer and smoke remain required.']};
-assert.deepEqual(JSON.parse(fs.readFileSync(prefix+'bounded-current-owner-zero.json')),report,'Retained whole report differs');console.log(JSON.stringify({checked,rows:rows.length,parts:report.whole_native_parts.length}));
+return report;
+}
+if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
+ const report=verifyCurrentOwnerZero(process.argv[2]);
+ const retained=process.argv[3]??'coordination/engineering/fiji-current-cell-20261016/bounded-current-owner-zero.json';
+ assert.deepEqual(JSON.parse(fs.readFileSync(retained)),report,'Retained whole report differs');
+ console.log(JSON.stringify({checked:report.original_native_cells_checked,rows:report.native_rows_checked,parts:report.whole_native_parts.length}));
+}
