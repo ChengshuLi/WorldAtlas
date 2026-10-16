@@ -270,8 +270,10 @@ The collector admits only its finite typed routing-body plan, using existing
 immutable descriptors and declared sizes. It retains at most 64 MiB of raw bodies
 with eviction, rather than treating cumulative legitimate reads as live memory.
 Every role still checks its own origin/path/mode/OID/length/SHA binding on cache
-hits and rereads. The 32 MiB member, 4096 descriptor and 120-second owned-process
-bounds remain; cumulative I/O, unique planned bytes and live-cache peaks are
+hits and rereads. The 32 MiB member, 4096 descriptor, per-operation and existing
+25-minute hosted-job bounds remain. There is no duplicate shortcut deadline that
+turns finite cold metadata acquisition into a longer scientific replay; owned
+process-group cleanup remains. Cumulative I/O, unique planned bytes and live-cache peaks are
 reported separately. The raw-cache bound is not a total process-RSS guarantee.
 One exact baseline-to-candidate tree delta lets unchanged candidate paths reuse
 already authenticated baseline descriptors; changed paths retain separate reads.

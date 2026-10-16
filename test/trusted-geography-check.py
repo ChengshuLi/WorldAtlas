@@ -517,6 +517,15 @@ class UnchangedSelectedApplicabilityControls(unittest.TestCase):
         self.assertEqual(json.loads(stream.getvalue())['geography_applicability']['reason'], 'collector-timeout')
         self.assertNotIn('secret', stream.getvalue())
 
+    def test_metadata_default_uses_outer_job_deadline_and_still_reaps_owned_group(self):
+        child = self.mock.Mock(pid=123456, returncode=0)
+        child.communicate.return_value = (json.dumps(self.proof).encode(), b'')
+        with self.mock.patch.object(self.g.subprocess, 'Popen', return_value=child), \
+             self.mock.patch.object(self.g.os, 'killpg') as kill:
+            self.assertEqual(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate), self.proof)
+        self.assertEqual(child.communicate.call_args_list, [self.mock.call(timeout=None), self.mock.call(timeout=5)])
+        kill.assert_called_once_with(child.pid, self.g.signal.SIGKILL)
+
     def test_metadata_timeout_reaps_owned_git_group_before_fallback(self):
         child = self.mock.Mock(pid=123456, returncode=-9)
         child.communicate.side_effect = [subprocess.TimeoutExpired('node', 60), (b'', b'')]
