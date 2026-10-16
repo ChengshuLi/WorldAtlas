@@ -601,6 +601,23 @@ test('true depth-one merge admits only its actual first parent without fetching 
   } finally { f.close(); }
 });
 
+test('a differently cased first parent cannot make a lowercase second parent the direct-baseline proof', async () => {
+  const f = fixture(); try {
+    const first = f.commit({...f.files, 'docs/raw-parent.md': body('first')}, f.baseline);
+    const tree = f.git(['rev-parse', f.candidate + '^{tree}']);
+    const candidate = f.git(['hash-object', '-t', 'commit', '-w', '--stdin'],
+      `tree ${tree}\nparent ${first.toUpperCase()}\nparent ${f.baseline}\n`
+      + 'author fixture <fixture@example.invalid> 0 +0000\ncommitter fixture <fixture@example.invalid> 0 +0000\n\nraw parent header\n');
+    assert.equal(f.git(['rev-parse', candidate + '^1']), first);
+    const cold = coldFixture({...f, candidate}, {shallowCandidate: true});
+    assert.equal(cold.git(['cat-file', '--batch-check'], first + '\n'), first + ' missing');
+    const result = await f.inspect(candidate, f.baseline, {repo: cold.destination, acquisition: cold.acquisition});
+    assert.equal(result.status, 'full-check-required');
+    assert.match(result.reason, /^immutable-object-unavailable:merge-base:/);
+    assert.equal(cold.batches.length + cold.originBatches.length, 0);
+  } finally { f.close(); }
+});
+
 test('divergent shallow heads use present ancestry only and missing ancestry declines', async () => {
   const f = fixture(); try {
     const baseline = f.commit({...f.files, 'research/geography/baseline-only/readme': body('unrelated')}, f.baseline);
@@ -628,6 +645,31 @@ test('cold absent historical origins retain fallback versus strict semantics', a
       assert.equal(result.status, missingStrictOrigin ? 'full-check-required' : 'unchanged-selected-inputs', result.reason);
       if (missingStrictOrigin) assert.match(result.reason, /routing-strict-origin-acquisition-failed/);
       assert(!cold.batches.flat().includes('e'.repeat(40)));
+    } finally { f.close(); }
+  }
+});
+
+test('cold evolved same-path aliases acquire their exact original metadata instead of rebinding a pin', async () => {
+  for (const missingOrigin of [false, true]) {
+    const f = fixture({sourceTarget: true, missingOrigin}); try {
+      const name = P + 'physical-reproduction.json';
+      const files = {...f.files, [name]: body('current method differs from its retained historical custody')};
+      const baseline = f.commit(files, f.baseline);
+      const candidate = f.commit({...files, 'research/geography/new-packet/source.json': body('source only')}, baseline);
+      const cold = coldFixture({...f, baseline, candidate}, {shallowCandidate: true});
+      assert.equal(cold.git(['cat-file', '--batch-check'], f.original + '\n'), f.original + ' missing');
+      const result = await f.inspect(candidate, baseline, {repo: cold.destination, acquisition: cold.acquisition});
+      if (missingOrigin) {
+        assert.equal(result.status, 'full-check-required');
+        assert.match(result.reason, /routing-strict-origin-acquisition-failed/);
+      } else {
+        assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+        const pin = result.immutable_descriptors.find(p => p.path === name && p.commit === f.original);
+        assert(pin, 'historical identity is retained at its actual original commit');
+        assert.notEqual(pin.git_blob_oid, cold.git(['rev-parse', baseline + ':' + name]));
+        assert(cold.originBatches.flat().includes(f.original));
+        assert.equal(result.metadata_acquisition.scientific_leaf_imports, 0);
+      }
     } finally { f.close(); }
   }
 });
