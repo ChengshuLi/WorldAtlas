@@ -1,0 +1,2651 @@
+{
+  "kind": "exact16-actual-foreign-ADM-conflict-source-choice-request",
+  "count": 16,
+  "source_only": true,
+  "source": {
+    "title": "Myanmar: Falam Township, Chin State (20 April 2020) [EN/MY]",
+    "producer": "Myanmar Information Management Unit (MIMU)",
+    "catalogue_url": "https://reliefweb.int/map/myanmar/falam-township-chin-state-myanmar-20-april-2020-enmy",
+    "body_url": "https://reliefweb.int/attachments/0bbcbd50-4f3d-4022-80cc-65b1cbbc6502/Tsp_Map_VL_Falam_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+    "local_pdf": "MIMU2020-Falam.pdf",
+    "bytes": 7404517,
+    "sha256": "fe535a0b9889177873211ab9bb26ca2a3c3fc8d441496e3aec3b624db981e365",
+    "printed_production_date": "2020-04-20",
+    "map_id": "MIMU154v05",
+    "projection_datum": "Geographic/WGS84",
+    "boundary_source_printed": "MIMU",
+    "map_country_context": "India is labelled across the western international border; Falam is the named Myanmar township.",
+    "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+  },
+  "requirements": "Consequentially review exact panels. If supported, explicitly choose this dated township border depiction over every contrary actual administrative/reference input listed per key, retaining raw contacts/pins as contextual disagreement. No country, state-name or administrative-level blanket priority.",
+  "native_accepted_repairs": 0,
+  "cleared_holds": 0,
+  "points": [
+    {
+      "local_index": 10,
+      "owner": 30341,
+      "y": 113591,
+      "x": 199071,
+      "original_interval": 1179,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1105/runs/0"
+      },
+      "inside": [
+        0,
+        5
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.36016111929084,
+      "longitude_exact_rational": "12237930/131083",
+      "latitude_degrees_north": 23.344818169952973,
+      "latitude_native_f64le_hex": "bc03eb0046583740",
+      "registered_pdf_point": [
+        94.53085085810744,
+        2008.3519813400198
+      ],
+      "render_scale1_pixel": [
+        95,
+        584
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        174,
+        176,
+        152
+      ],
+      "name": "Falam",
+      "review_order_rank": 0,
+      "source_point_interpretation": "Registered centre is depicted on the named Falam/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Falam-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 46,
+          "boundary": 0
+        },
+        {
+          "index": 5,
+          "hash": "80c5e5d692400fad9e6edf84259afec0624009e656a82f23855498653f560642",
+          "registry_index": 108,
+          "id": "gb:IND:ADM3:7132399B48249953431093",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4023",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 33,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70769,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B48249953431093",
+            "ordinal": 4023,
+            "owners": [],
+            "name": "Khawzawl",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Falam Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/falam-township-chin-state-myanmar-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/0bbcbd50-4f3d-4022-80cc-65b1cbbc6502/Tsp_Map_VL_Falam_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Falam.pdf",
+        "bytes": 7404517,
+        "sha256": "fe535a0b9889177873211ab9bb26ca2a3c3fc8d441496e3aec3b624db981e365",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Falam is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2385.733614349439,
+          "intercept_points": -222637.9437725136,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.09628295895527117,
+          "rms_residual_pdf_points": 0.06783505570668844,
+          "alternating_label_holdout_max_pdf_points": 0.1403746604337357
+        },
+        "N": {
+          "slope_points_per_degree": 2385.7750959123914,
+          "intercept_points": -53687.13382713687,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.10341302781307604,
+          "rms_residual_pdf_points": 0.06233779063101185,
+          "alternating_label_holdout_max_pdf_points": 0.10454050698172068
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.33333333333333,
+            94.0
+          ],
+          "target_degrees": 93.36016111929084,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.666666666666668,
+            23.5
+          ],
+          "target_degrees": 23.344818169952973,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Falam-010.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 16,
+      "owner": 30341,
+      "y": 113594,
+      "x": 199072,
+      "original_interval": 1182,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1108/runs/0"
+      },
+      "inside": [
+        0,
+        5
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.36153429506496,
+      "longitude_exact_rational": "12238110/131083",
+      "latitude_degrees_north": 23.341035826873885,
+      "latitude_native_f64le_hex": "0a30bb1f4e573740",
+      "registered_pdf_point": [
+        97.80688246083446,
+        1999.3281614177322
+      ],
+      "render_scale1_pixel": [
+        98,
+        593
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        199,
+        201,
+        177
+      ],
+      "name": "Falam",
+      "review_order_rank": 1,
+      "source_point_interpretation": "Registered centre is depicted on the named Falam/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Falam-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 46,
+          "boundary": 0
+        },
+        {
+          "index": 5,
+          "hash": "80c5e5d692400fad9e6edf84259afec0624009e656a82f23855498653f560642",
+          "registry_index": 108,
+          "id": "gb:IND:ADM3:7132399B48249953431093",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4023",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 33,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70769,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B48249953431093",
+            "ordinal": 4023,
+            "owners": [],
+            "name": "Khawzawl",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Falam Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/falam-township-chin-state-myanmar-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/0bbcbd50-4f3d-4022-80cc-65b1cbbc6502/Tsp_Map_VL_Falam_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Falam.pdf",
+        "bytes": 7404517,
+        "sha256": "fe535a0b9889177873211ab9bb26ca2a3c3fc8d441496e3aec3b624db981e365",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Falam is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2385.733614349439,
+          "intercept_points": -222637.9437725136,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.09628295895527117,
+          "rms_residual_pdf_points": 0.06783505570668844,
+          "alternating_label_holdout_max_pdf_points": 0.1403746604337357
+        },
+        "N": {
+          "slope_points_per_degree": 2385.7750959123914,
+          "intercept_points": -53687.13382713687,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.10341302781307604,
+          "rms_residual_pdf_points": 0.06233779063101185,
+          "alternating_label_holdout_max_pdf_points": 0.10454050698172068
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.33333333333333,
+            94.0
+          ],
+          "target_degrees": 93.36153429506496,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.666666666666668,
+            23.5
+          ],
+          "target_degrees": 23.341035826873885,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Falam-016.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 12,
+      "owner": 30341,
+      "y": 113592,
+      "x": 199071,
+      "original_interval": 1180,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1106/runs/0"
+      },
+      "inside": [
+        0,
+        5
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.36016111929084,
+      "longitude_exact_rational": "12237930/131083",
+      "latitude_degrees_north": 23.343557400899456,
+      "latitude_native_f64le_hex": "7429b960f3573740",
+      "registered_pdf_point": [
+        94.53085085810744,
+        2005.344069930441
+      ],
+      "render_scale1_pixel": [
+        95,
+        587
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        182,
+        184,
+        160
+      ],
+      "name": "Falam",
+      "review_order_rank": 2,
+      "source_point_interpretation": "Registered centre is depicted on the named Falam/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Falam-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 46,
+          "boundary": 0
+        },
+        {
+          "index": 5,
+          "hash": "80c5e5d692400fad9e6edf84259afec0624009e656a82f23855498653f560642",
+          "registry_index": 108,
+          "id": "gb:IND:ADM3:7132399B48249953431093",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4023",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 33,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70769,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B48249953431093",
+            "ordinal": 4023,
+            "owners": [],
+            "name": "Khawzawl",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Falam Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/falam-township-chin-state-myanmar-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/0bbcbd50-4f3d-4022-80cc-65b1cbbc6502/Tsp_Map_VL_Falam_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Falam.pdf",
+        "bytes": 7404517,
+        "sha256": "fe535a0b9889177873211ab9bb26ca2a3c3fc8d441496e3aec3b624db981e365",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Falam is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2385.733614349439,
+          "intercept_points": -222637.9437725136,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.09628295895527117,
+          "rms_residual_pdf_points": 0.06783505570668844,
+          "alternating_label_holdout_max_pdf_points": 0.1403746604337357
+        },
+        "N": {
+          "slope_points_per_degree": 2385.7750959123914,
+          "intercept_points": -53687.13382713687,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.10341302781307604,
+          "rms_residual_pdf_points": 0.06233779063101185,
+          "alternating_label_holdout_max_pdf_points": 0.10454050698172068
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.33333333333333,
+            94.0
+          ],
+          "target_degrees": 93.36016111929084,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.666666666666668,
+            23.5
+          ],
+          "target_degrees": 23.343557400899456,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Falam-012.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 21,
+      "owner": 30341,
+      "y": 113596,
+      "x": 199073,
+      "original_interval": 1185,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1110/runs/0"
+      },
+      "inside": [
+        0,
+        5
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.36290747083909,
+      "longitude_exact_rational": "12238290/131083",
+      "latitude_degrees_north": 23.33851420496024,
+      "latitude_native_f64le_hex": "2289efdda8563740",
+      "registered_pdf_point": [
+        101.08291406359058,
+        1993.3121386548519
+      ],
+      "render_scale1_pixel": [
+        101,
+        599
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        190,
+        192,
+        168
+      ],
+      "name": "Falam",
+      "review_order_rank": 3,
+      "source_point_interpretation": "Registered centre is depicted on the named Falam/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Falam-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 46,
+          "boundary": 0
+        },
+        {
+          "index": 5,
+          "hash": "80c5e5d692400fad9e6edf84259afec0624009e656a82f23855498653f560642",
+          "registry_index": 108,
+          "id": "gb:IND:ADM3:7132399B48249953431093",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4023",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 33,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70769,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B48249953431093",
+            "ordinal": 4023,
+            "owners": [],
+            "name": "Khawzawl",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Falam Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/falam-township-chin-state-myanmar-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/0bbcbd50-4f3d-4022-80cc-65b1cbbc6502/Tsp_Map_VL_Falam_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Falam.pdf",
+        "bytes": 7404517,
+        "sha256": "fe535a0b9889177873211ab9bb26ca2a3c3fc8d441496e3aec3b624db981e365",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Falam is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2385.733614349439,
+          "intercept_points": -222637.9437725136,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.09628295895527117,
+          "rms_residual_pdf_points": 0.06783505570668844,
+          "alternating_label_holdout_max_pdf_points": 0.1403746604337357
+        },
+        "N": {
+          "slope_points_per_degree": 2385.7750959123914,
+          "intercept_points": -53687.13382713687,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.10341302781307604,
+          "rms_residual_pdf_points": 0.06233779063101185,
+          "alternating_label_holdout_max_pdf_points": 0.10454050698172068
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.33333333333333,
+            94.0
+          ],
+          "target_degrees": 93.36290747083909,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.666666666666668,
+            23.5
+          ],
+          "target_degrees": 23.33851420496024,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Falam-021.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 18,
+      "owner": 30341,
+      "y": 113595,
+      "x": 199072,
+      "original_interval": 1183,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1109/runs/0"
+      },
+      "inside": [
+        0,
+        5
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.36153429506496,
+      "longitude_exact_rational": "12238110/131083",
+      "latitude_degrees_north": 23.339775021902827,
+      "latitude_native_f64le_hex": "0112ef7efb563740",
+      "registered_pdf_point": [
+        97.80688246083446,
+        1996.3201643169814
+      ],
+      "render_scale1_pixel": [
+        98,
+        596
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        216,
+        218,
+        194
+      ],
+      "name": "Falam",
+      "review_order_rank": 4,
+      "source_point_interpretation": "Registered centre is depicted on the named Falam/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Falam-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 46,
+          "boundary": 0
+        },
+        {
+          "index": 5,
+          "hash": "80c5e5d692400fad9e6edf84259afec0624009e656a82f23855498653f560642",
+          "registry_index": 108,
+          "id": "gb:IND:ADM3:7132399B48249953431093",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4023",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 33,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70769,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B48249953431093",
+            "ordinal": 4023,
+            "owners": [],
+            "name": "Khawzawl",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Falam Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/falam-township-chin-state-myanmar-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/0bbcbd50-4f3d-4022-80cc-65b1cbbc6502/Tsp_Map_VL_Falam_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Falam.pdf",
+        "bytes": 7404517,
+        "sha256": "fe535a0b9889177873211ab9bb26ca2a3c3fc8d441496e3aec3b624db981e365",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Falam is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2385.733614349439,
+          "intercept_points": -222637.9437725136,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.09628295895527117,
+          "rms_residual_pdf_points": 0.06783505570668844,
+          "alternating_label_holdout_max_pdf_points": 0.1403746604337357
+        },
+        "N": {
+          "slope_points_per_degree": 2385.7750959123914,
+          "intercept_points": -53687.13382713687,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.10341302781307604,
+          "rms_residual_pdf_points": 0.06233779063101185,
+          "alternating_label_holdout_max_pdf_points": 0.10454050698172068
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.33333333333333,
+            94.0
+          ],
+          "target_degrees": 93.36153429506496,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.666666666666668,
+            23.5
+          ],
+          "target_degrees": 23.339775021902827,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Falam-018.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 14,
+      "owner": 30341,
+      "y": 113593,
+      "x": 199071,
+      "original_interval": 1181,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1107/runs/0"
+      },
+      "inside": [
+        0,
+        5
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.36016111929084,
+      "longitude_exact_rational": "12237930/131083",
+      "latitude_degrees_north": 23.34229661987293,
+      "latitude_native_f64le_hex": "b5e253c0a0573740",
+      "registered_pdf_point": [
+        94.53085085810744,
+        2002.3361299559547
+      ],
+      "render_scale1_pixel": [
+        95,
+        590
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        197,
+        199,
+        175
+      ],
+      "name": "Falam",
+      "review_order_rank": 5,
+      "source_point_interpretation": "Registered centre is depicted on the named Falam/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Falam-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 46,
+          "boundary": 0
+        },
+        {
+          "index": 5,
+          "hash": "80c5e5d692400fad9e6edf84259afec0624009e656a82f23855498653f560642",
+          "registry_index": 108,
+          "id": "gb:IND:ADM3:7132399B48249953431093",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4023",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 33,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70769,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B48249953431093",
+            "ordinal": 4023,
+            "owners": [],
+            "name": "Khawzawl",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Falam Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/falam-township-chin-state-myanmar-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/0bbcbd50-4f3d-4022-80cc-65b1cbbc6502/Tsp_Map_VL_Falam_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Falam.pdf",
+        "bytes": 7404517,
+        "sha256": "fe535a0b9889177873211ab9bb26ca2a3c3fc8d441496e3aec3b624db981e365",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Falam is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2385.733614349439,
+          "intercept_points": -222637.9437725136,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.09628295895527117,
+          "rms_residual_pdf_points": 0.06783505570668844,
+          "alternating_label_holdout_max_pdf_points": 0.1403746604337357
+        },
+        "N": {
+          "slope_points_per_degree": 2385.7750959123914,
+          "intercept_points": -53687.13382713687,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.10341302781307604,
+          "rms_residual_pdf_points": 0.06233779063101185,
+          "alternating_label_holdout_max_pdf_points": 0.10454050698172068
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.33333333333333,
+            94.0
+          ],
+          "target_degrees": 93.36016111929084,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.666666666666668,
+            23.5
+          ],
+          "target_degrees": 23.34229661987293,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Falam-014.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 5,
+      "owner": 30341,
+      "y": 113589,
+      "x": 199070,
+      "original_interval": 1177,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1103/runs/0"
+      },
+      "inside": [
+        0,
+        5
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.3587879435167,
+      "longitude_exact_rational": "12237750/131083",
+      "latitude_degrees_north": 23.347339672138975,
+      "latitude_native_f64le_hex": "b570b440eb583740",
+      "registered_pdf_point": [
+        91.25481925535132,
+        2014.3677184596745
+      ],
+      "render_scale1_pixel": [
+        91,
+        578
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        207,
+        209,
+        185
+      ],
+      "name": "Falam",
+      "review_order_rank": 6,
+      "source_point_interpretation": "Registered centre is depicted on the named Falam/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Falam-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 46,
+          "boundary": 0
+        },
+        {
+          "index": 5,
+          "hash": "80c5e5d692400fad9e6edf84259afec0624009e656a82f23855498653f560642",
+          "registry_index": 108,
+          "id": "gb:IND:ADM3:7132399B48249953431093",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4023",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 33,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70769,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B48249953431093",
+            "ordinal": 4023,
+            "owners": [],
+            "name": "Khawzawl",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Falam Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/falam-township-chin-state-myanmar-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/0bbcbd50-4f3d-4022-80cc-65b1cbbc6502/Tsp_Map_VL_Falam_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Falam.pdf",
+        "bytes": 7404517,
+        "sha256": "fe535a0b9889177873211ab9bb26ca2a3c3fc8d441496e3aec3b624db981e365",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Falam is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2385.733614349439,
+          "intercept_points": -222637.9437725136,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.09628295895527117,
+          "rms_residual_pdf_points": 0.06783505570668844,
+          "alternating_label_holdout_max_pdf_points": 0.1403746604337357
+        },
+        "N": {
+          "slope_points_per_degree": 2385.7750959123914,
+          "intercept_points": -53687.13382713687,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.10341302781307604,
+          "rms_residual_pdf_points": 0.06233779063101185,
+          "alternating_label_holdout_max_pdf_points": 0.10454050698172068
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.33333333333333,
+            94.0
+          ],
+          "target_degrees": 93.3587879435167,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.666666666666668,
+            23.5
+          ],
+          "target_degrees": 23.347339672138975,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Falam-005.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 37,
+      "owner": 30341,
+      "y": 113662,
+      "x": 199079,
+      "original_interval": 1202,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1125/runs/0"
+      },
+      "inside": [
+        0,
+        2,
+        6
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.37114652548385,
+      "longitude_exact_rational": "12239370/131083",
+      "latitude_degrees_north": 23.255273842642293,
+      "latitude_native_f64le_hex": "43ac65a059413740",
+      "registered_pdf_point": [
+        120.73910368006909,
+        1794.719355261972
+      ],
+      "render_scale1_pixel": [
+        121,
+        797
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        225,
+        227,
+        203
+      ],
+      "name": "Falam",
+      "review_order_rank": 7,
+      "source_point_interpretation": "Registered centre is depicted on the named Falam/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Falam-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 46,
+          "boundary": 0
+        },
+        {
+          "index": 2,
+          "hash": "dc80ff501425e87baeaf2c8d6a46459a79e4ec3216ff6b33e32c18d2dac62221",
+          "registry_index": 6,
+          "id": "gb:IND:ADM1:1811400B49281905528064",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/18",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM1-000.bin.gz",
+              "git_blob_oid": "6c717053e0e9893cbe32ee9e09e4cba76760798a",
+              "mode": "100644",
+              "bytes": 2009868,
+              "sha256": "4a716fa04288d6742b1f43031ea90a26998c86becb1389f46acd3200b3acb1e0",
+              "decoded_bytes": 5103747,
+              "decoded_sha256": "4c63fe43294a391e8f2de4e9f86f3edb60f8688275b9fee90c61fb2aa0c26061"
+            }
+          ],
+          "inside": 17,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 36797,
+            "family_index": 154,
+            "source_id": "gb:IND:ADM1:1811400B49281905528064",
+            "ordinal": 18,
+            "owners": [],
+            "name": "Mizoram",
+            "geometry_status": "raw-native-supported"
+          }
+        },
+        {
+          "index": 6,
+          "hash": "64af9737cf8a419ab40b3eee8c08db3e9549127e3999a3ee7632c9e306d401a2",
+          "registry_index": 92,
+          "id": "gb:IND:ADM3:7132399B53855484051366",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4032",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 12,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70778,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B53855484051366",
+            "ordinal": 4032,
+            "owners": [],
+            "name": "Khawbung",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Falam Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/falam-township-chin-state-myanmar-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/0bbcbd50-4f3d-4022-80cc-65b1cbbc6502/Tsp_Map_VL_Falam_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Falam.pdf",
+        "bytes": 7404517,
+        "sha256": "fe535a0b9889177873211ab9bb26ca2a3c3fc8d441496e3aec3b624db981e365",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Falam is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2385.733614349439,
+          "intercept_points": -222637.9437725136,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.09628295895527117,
+          "rms_residual_pdf_points": 0.06783505570668844,
+          "alternating_label_holdout_max_pdf_points": 0.1403746604337357
+        },
+        "N": {
+          "slope_points_per_degree": 2385.7750959123914,
+          "intercept_points": -53687.13382713687,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.10341302781307604,
+          "rms_residual_pdf_points": 0.06233779063101185,
+          "alternating_label_holdout_max_pdf_points": 0.10454050698172068
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.33333333333333,
+            94.0
+          ],
+          "target_degrees": 93.37114652548385,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.666666666666668,
+            23.5
+          ],
+          "target_degrees": 23.255273842642293,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Falam-037.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 39,
+      "owner": 30341,
+      "y": 113663,
+      "x": 199079,
+      "original_interval": 1204,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1126/runs/0"
+      },
+      "inside": [
+        0,
+        6
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.37114652548385,
+      "longitude_exact_rational": "12239370/131083",
+      "latitude_degrees_north": 23.254012224741118,
+      "latitude_native_f64le_hex": "1c0cf6f106413740",
+      "registered_pdf_point": [
+        120.73910368006909,
+        1791.7094186927861
+      ],
+      "render_scale1_pixel": [
+        121,
+        800
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        241,
+        243,
+        219
+      ],
+      "name": "Falam",
+      "review_order_rank": 8,
+      "source_point_interpretation": "Registered centre is depicted on the named Falam/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Falam-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 46,
+          "boundary": 0
+        },
+        {
+          "index": 6,
+          "hash": "64af9737cf8a419ab40b3eee8c08db3e9549127e3999a3ee7632c9e306d401a2",
+          "registry_index": 92,
+          "id": "gb:IND:ADM3:7132399B53855484051366",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4032",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 12,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70778,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B53855484051366",
+            "ordinal": 4032,
+            "owners": [],
+            "name": "Khawbung",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Falam Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/falam-township-chin-state-myanmar-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/0bbcbd50-4f3d-4022-80cc-65b1cbbc6502/Tsp_Map_VL_Falam_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Falam.pdf",
+        "bytes": 7404517,
+        "sha256": "fe535a0b9889177873211ab9bb26ca2a3c3fc8d441496e3aec3b624db981e365",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Falam is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2385.733614349439,
+          "intercept_points": -222637.9437725136,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.09628295895527117,
+          "rms_residual_pdf_points": 0.06783505570668844,
+          "alternating_label_holdout_max_pdf_points": 0.1403746604337357
+        },
+        "N": {
+          "slope_points_per_degree": 2385.7750959123914,
+          "intercept_points": -53687.13382713687,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.10341302781307604,
+          "rms_residual_pdf_points": 0.06233779063101185,
+          "alternating_label_holdout_max_pdf_points": 0.10454050698172068
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.33333333333333,
+            94.0
+          ],
+          "target_degrees": 93.37114652548385,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.666666666666668,
+            23.5
+          ],
+          "target_degrees": 23.254012224741118,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Falam-039.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 7,
+      "owner": 30341,
+      "y": 113590,
+      "x": 199070,
+      "original_interval": 1178,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1104/runs/0"
+      },
+      "inside": [
+        0,
+        5
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.3587879435167,
+      "longitude_exact_rational": "12237750/131083",
+      "latitude_degrees_north": 23.346078927032984,
+      "latitude_native_f64le_hex": "0271e9a098583740",
+      "registered_pdf_point": [
+        91.25481925535132,
+        2011.3598641835051
+      ],
+      "render_scale1_pixel": [
+        91,
+        581
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        234,
+        236,
+        212
+      ],
+      "name": "Falam",
+      "review_order_rank": 9,
+      "source_point_interpretation": "Registered centre is depicted on the named Falam/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Falam-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 46,
+          "boundary": 0
+        },
+        {
+          "index": 5,
+          "hash": "80c5e5d692400fad9e6edf84259afec0624009e656a82f23855498653f560642",
+          "registry_index": 108,
+          "id": "gb:IND:ADM3:7132399B48249953431093",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4023",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 33,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70769,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B48249953431093",
+            "ordinal": 4023,
+            "owners": [],
+            "name": "Khawzawl",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Falam Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/falam-township-chin-state-myanmar-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/0bbcbd50-4f3d-4022-80cc-65b1cbbc6502/Tsp_Map_VL_Falam_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Falam.pdf",
+        "bytes": 7404517,
+        "sha256": "fe535a0b9889177873211ab9bb26ca2a3c3fc8d441496e3aec3b624db981e365",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Falam is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2385.733614349439,
+          "intercept_points": -222637.9437725136,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.09628295895527117,
+          "rms_residual_pdf_points": 0.06783505570668844,
+          "alternating_label_holdout_max_pdf_points": 0.1403746604337357
+        },
+        "N": {
+          "slope_points_per_degree": 2385.7750959123914,
+          "intercept_points": -53687.13382713687,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.10341302781307604,
+          "rms_residual_pdf_points": 0.06233779063101185,
+          "alternating_label_holdout_max_pdf_points": 0.10454050698172068
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.33333333333333,
+            94.0
+          ],
+          "target_degrees": 93.3587879435167,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.666666666666668,
+            23.5
+          ],
+          "target_degrees": 23.346078927032984,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Falam-007.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 23,
+      "owner": 30341,
+      "y": 113597,
+      "x": 199073,
+      "original_interval": 1187,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1111/runs/0"
+      },
+      "inside": [
+        0,
+        5
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.36290747083909,
+      "longitude_exact_rational": "12238290/131083",
+      "latitude_degrees_north": 23.33725337604664,
+      "latitude_native_f64le_hex": "fe95bc3c56563740",
+      "registered_pdf_point": [
+        101.08291406359058,
+        1990.3040844325806
+      ],
+      "render_scale1_pixel": [
+        101,
+        602
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        199,
+        201,
+        177
+      ],
+      "name": "Falam",
+      "review_order_rank": 10,
+      "source_point_interpretation": "Registered centre is depicted on the named Falam/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Falam-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 46,
+          "boundary": 0
+        },
+        {
+          "index": 5,
+          "hash": "80c5e5d692400fad9e6edf84259afec0624009e656a82f23855498653f560642",
+          "registry_index": 108,
+          "id": "gb:IND:ADM3:7132399B48249953431093",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4023",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 33,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70769,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B48249953431093",
+            "ordinal": 4023,
+            "owners": [],
+            "name": "Khawzawl",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Falam Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/falam-township-chin-state-myanmar-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/0bbcbd50-4f3d-4022-80cc-65b1cbbc6502/Tsp_Map_VL_Falam_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Falam.pdf",
+        "bytes": 7404517,
+        "sha256": "fe535a0b9889177873211ab9bb26ca2a3c3fc8d441496e3aec3b624db981e365",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Falam is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2385.733614349439,
+          "intercept_points": -222637.9437725136,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.09628295895527117,
+          "rms_residual_pdf_points": 0.06783505570668844,
+          "alternating_label_holdout_max_pdf_points": 0.1403746604337357
+        },
+        "N": {
+          "slope_points_per_degree": 2385.7750959123914,
+          "intercept_points": -53687.13382713687,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.10341302781307604,
+          "rms_residual_pdf_points": 0.06233779063101185,
+          "alternating_label_holdout_max_pdf_points": 0.10454050698172068
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.33333333333333,
+            94.0
+          ],
+          "target_degrees": 93.36290747083909,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.666666666666668,
+            23.5
+          ],
+          "target_degrees": 23.33725337604664,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Falam-023.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 9,
+      "owner": 30341,
+      "y": 113591,
+      "x": 199070,
+      "original_interval": 1179,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1105/runs/0"
+      },
+      "inside": [
+        0,
+        5
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.3587879435167,
+      "longitude_exact_rational": "12237750/131083",
+      "latitude_degrees_north": 23.344818169952973,
+      "latitude_native_f64le_hex": "bc03eb0046583740",
+      "registered_pdf_point": [
+        91.25481925535132,
+        2008.3519813400198
+      ],
+      "render_scale1_pixel": [
+        91,
+        584
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        212,
+        214,
+        190
+      ],
+      "name": "Falam",
+      "review_order_rank": 11,
+      "source_point_interpretation": "Registered centre is depicted on the named Falam/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Falam-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 46,
+          "boundary": 0
+        },
+        {
+          "index": 5,
+          "hash": "80c5e5d692400fad9e6edf84259afec0624009e656a82f23855498653f560642",
+          "registry_index": 108,
+          "id": "gb:IND:ADM3:7132399B48249953431093",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4023",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 33,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70769,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B48249953431093",
+            "ordinal": 4023,
+            "owners": [],
+            "name": "Khawzawl",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Falam Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/falam-township-chin-state-myanmar-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/0bbcbd50-4f3d-4022-80cc-65b1cbbc6502/Tsp_Map_VL_Falam_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Falam.pdf",
+        "bytes": 7404517,
+        "sha256": "fe535a0b9889177873211ab9bb26ca2a3c3fc8d441496e3aec3b624db981e365",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Falam is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2385.733614349439,
+          "intercept_points": -222637.9437725136,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.09628295895527117,
+          "rms_residual_pdf_points": 0.06783505570668844,
+          "alternating_label_holdout_max_pdf_points": 0.1403746604337357
+        },
+        "N": {
+          "slope_points_per_degree": 2385.7750959123914,
+          "intercept_points": -53687.13382713687,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.10341302781307604,
+          "rms_residual_pdf_points": 0.06233779063101185,
+          "alternating_label_holdout_max_pdf_points": 0.10454050698172068
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.33333333333333,
+            94.0
+          ],
+          "target_degrees": 93.3587879435167,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.666666666666668,
+            23.5
+          ],
+          "target_degrees": 23.344818169952973,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Falam-009.png",
+      "review_contact_sheet": "contact-00.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 15,
+      "owner": 30341,
+      "y": 113594,
+      "x": 199071,
+      "original_interval": 1182,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1108/runs/0"
+      },
+      "inside": [
+        0,
+        5
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.36016111929084,
+      "longitude_exact_rational": "12237930/131083",
+      "latitude_degrees_north": 23.341035826873885,
+      "latitude_native_f64le_hex": "0a30bb1f4e573740",
+      "registered_pdf_point": [
+        94.53085085810744,
+        1999.3281614177322
+      ],
+      "render_scale1_pixel": [
+        95,
+        593
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        206,
+        208,
+        184
+      ],
+      "name": "Falam",
+      "review_order_rank": 12,
+      "source_point_interpretation": "Registered centre is depicted on the named Falam/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Falam-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 46,
+          "boundary": 0
+        },
+        {
+          "index": 5,
+          "hash": "80c5e5d692400fad9e6edf84259afec0624009e656a82f23855498653f560642",
+          "registry_index": 108,
+          "id": "gb:IND:ADM3:7132399B48249953431093",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4023",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 33,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70769,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B48249953431093",
+            "ordinal": 4023,
+            "owners": [],
+            "name": "Khawzawl",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Falam Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/falam-township-chin-state-myanmar-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/0bbcbd50-4f3d-4022-80cc-65b1cbbc6502/Tsp_Map_VL_Falam_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Falam.pdf",
+        "bytes": 7404517,
+        "sha256": "fe535a0b9889177873211ab9bb26ca2a3c3fc8d441496e3aec3b624db981e365",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Falam is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2385.733614349439,
+          "intercept_points": -222637.9437725136,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.09628295895527117,
+          "rms_residual_pdf_points": 0.06783505570668844,
+          "alternating_label_holdout_max_pdf_points": 0.1403746604337357
+        },
+        "N": {
+          "slope_points_per_degree": 2385.7750959123914,
+          "intercept_points": -53687.13382713687,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.10341302781307604,
+          "rms_residual_pdf_points": 0.06233779063101185,
+          "alternating_label_holdout_max_pdf_points": 0.10454050698172068
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.33333333333333,
+            94.0
+          ],
+          "target_degrees": 93.36016111929084,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.666666666666668,
+            23.5
+          ],
+          "target_degrees": 23.341035826873885,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Falam-015.png",
+      "review_contact_sheet": "contact-01.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 20,
+      "owner": 30341,
+      "y": 113596,
+      "x": 199072,
+      "original_interval": 1185,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1110/runs/0"
+      },
+      "inside": [
+        0,
+        5
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.36153429506496,
+      "longitude_exact_rational": "12238110/131083",
+      "latitude_degrees_north": 23.33851420496024,
+      "latitude_native_f64le_hex": "2289efdda8563740",
+      "registered_pdf_point": [
+        97.80688246083446,
+        1993.3121386548519
+      ],
+      "render_scale1_pixel": [
+        98,
+        599
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        205,
+        207,
+        183
+      ],
+      "name": "Falam",
+      "review_order_rank": 13,
+      "source_point_interpretation": "Registered centre is depicted on the named Falam/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Falam-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 46,
+          "boundary": 0
+        },
+        {
+          "index": 5,
+          "hash": "80c5e5d692400fad9e6edf84259afec0624009e656a82f23855498653f560642",
+          "registry_index": 108,
+          "id": "gb:IND:ADM3:7132399B48249953431093",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4023",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 33,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70769,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B48249953431093",
+            "ordinal": 4023,
+            "owners": [],
+            "name": "Khawzawl",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Falam Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/falam-township-chin-state-myanmar-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/0bbcbd50-4f3d-4022-80cc-65b1cbbc6502/Tsp_Map_VL_Falam_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Falam.pdf",
+        "bytes": 7404517,
+        "sha256": "fe535a0b9889177873211ab9bb26ca2a3c3fc8d441496e3aec3b624db981e365",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Falam is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2385.733614349439,
+          "intercept_points": -222637.9437725136,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.09628295895527117,
+          "rms_residual_pdf_points": 0.06783505570668844,
+          "alternating_label_holdout_max_pdf_points": 0.1403746604337357
+        },
+        "N": {
+          "slope_points_per_degree": 2385.7750959123914,
+          "intercept_points": -53687.13382713687,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.10341302781307604,
+          "rms_residual_pdf_points": 0.06233779063101185,
+          "alternating_label_holdout_max_pdf_points": 0.10454050698172068
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.33333333333333,
+            94.0
+          ],
+          "target_degrees": 93.36153429506496,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.666666666666668,
+            23.5
+          ],
+          "target_degrees": 23.33851420496024,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Falam-020.png",
+      "review_contact_sheet": "contact-01.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 41,
+      "owner": 30341,
+      "y": 113664,
+      "x": 199079,
+      "original_interval": 1206,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1127/runs/0"
+      },
+      "inside": [
+        0,
+        6
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.37114652548385,
+      "longitude_exact_rational": "12239370/131083",
+      "latitude_degrees_north": 23.252750594902285,
+      "latitude_native_f64le_hex": "5d265343b4403740",
+      "registered_pdf_point": [
+        120.73910368006909,
+        1788.699453643043
+      ],
+      "render_scale1_pixel": [
+        121,
+        803
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        220,
+        222,
+        198
+      ],
+      "name": "Falam",
+      "review_order_rank": 14,
+      "source_point_interpretation": "Registered centre is depicted on the named Falam/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Falam-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 46,
+          "boundary": 0
+        },
+        {
+          "index": 6,
+          "hash": "64af9737cf8a419ab40b3eee8c08db3e9549127e3999a3ee7632c9e306d401a2",
+          "registry_index": 92,
+          "id": "gb:IND:ADM3:7132399B53855484051366",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4032",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 12,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70778,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B53855484051366",
+            "ordinal": 4032,
+            "owners": [],
+            "name": "Khawbung",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Falam Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/falam-township-chin-state-myanmar-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/0bbcbd50-4f3d-4022-80cc-65b1cbbc6502/Tsp_Map_VL_Falam_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Falam.pdf",
+        "bytes": 7404517,
+        "sha256": "fe535a0b9889177873211ab9bb26ca2a3c3fc8d441496e3aec3b624db981e365",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Falam is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2385.733614349439,
+          "intercept_points": -222637.9437725136,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.09628295895527117,
+          "rms_residual_pdf_points": 0.06783505570668844,
+          "alternating_label_holdout_max_pdf_points": 0.1403746604337357
+        },
+        "N": {
+          "slope_points_per_degree": 2385.7750959123914,
+          "intercept_points": -53687.13382713687,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.10341302781307604,
+          "rms_residual_pdf_points": 0.06233779063101185,
+          "alternating_label_holdout_max_pdf_points": 0.10454050698172068
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.33333333333333,
+            94.0
+          ],
+          "target_degrees": 93.37114652548385,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.666666666666668,
+            23.5
+          ],
+          "target_degrees": 23.252750594902285,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Falam-041.png",
+      "review_contact_sheet": "contact-01.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    },
+    {
+      "local_index": 26,
+      "owner": 30341,
+      "y": 113599,
+      "x": 199074,
+      "original_interval": 1189,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/1113/runs/0"
+      },
+      "inside": [
+        0,
+        2,
+        5
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 93.36428064661321,
+      "longitude_exact_rational": "12238470/131083",
+      "latitude_degrees_north": 23.33473168230835,
+      "latitude_native_f64le_hex": "0e73bcf9b0553740",
+      "registered_pdf_point": [
+        104.3589456663176,
+        1984.2878903122546
+      ],
+      "render_scale1_pixel": [
+        104,
+        608
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        185,
+        187,
+        168
+      ],
+      "name": "Falam",
+      "review_order_rank": 16,
+      "source_point_interpretation": "Registered centre is depicted on the named Falam/Myanmar side beyond the printed international-boundary stroke.",
+      "interpretation_disposition": "supported-Falam-Myanmar-side",
+      "interpretation_method": "Direct visual review of actual PDF4x source/point paired panel and contact sheet together with whole-map title, township region/name, India country label and international-boundary legend. Raw source-pixel observations assist ambiguous stroke inspection; no pixel-only owner classifier.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 46,
+          "boundary": 0
+        },
+        {
+          "index": 2,
+          "hash": "dc80ff501425e87baeaf2c8d6a46459a79e4ec3216ff6b33e32c18d2dac62221",
+          "registry_index": 6,
+          "id": "gb:IND:ADM1:1811400B49281905528064",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/18",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM1-000.bin.gz",
+              "git_blob_oid": "6c717053e0e9893cbe32ee9e09e4cba76760798a",
+              "mode": "100644",
+              "bytes": 2009868,
+              "sha256": "4a716fa04288d6742b1f43031ea90a26998c86becb1389f46acd3200b3acb1e0",
+              "decoded_bytes": 5103747,
+              "decoded_sha256": "4c63fe43294a391e8f2de4e9f86f3edb60f8688275b9fee90c61fb2aa0c26061"
+            }
+          ],
+          "inside": 17,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 36797,
+            "family_index": 154,
+            "source_id": "gb:IND:ADM1:1811400B49281905528064",
+            "ordinal": 18,
+            "owners": [],
+            "name": "Mizoram",
+            "geometry_status": "raw-native-supported"
+          }
+        },
+        {
+          "index": 5,
+          "hash": "80c5e5d692400fad9e6edf84259afec0624009e656a82f23855498653f560642",
+          "registry_index": 108,
+          "id": "gb:IND:ADM3:7132399B48249953431093",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4023",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-000.bin.gz",
+              "git_blob_oid": "51f650c7d70584f42cbc4f77ecf8a38547447ecf",
+              "mode": "100644",
+              "bytes": 11542134,
+              "sha256": "1335604d05f200a127a286810628eea7d425d398993eadd1ea5116464db52544",
+              "decoded_bytes": 33554432,
+              "decoded_sha256": "2589a386938b5e35495b863ad5541bc3654f76708477b1474a134137f8782297"
+            },
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IND-ADM3-001.bin.gz",
+              "git_blob_oid": "31f5db9c4c1c2704f7f2074866a17c7dbd60b5e6",
+              "mode": "100644",
+              "bytes": 2253028,
+              "sha256": "c22e3cb22595e4baa616f22e4f39fa6e3e3eabce7c836c0a634c3ff9e0d4c610",
+              "decoded_bytes": 6485570,
+              "decoded_sha256": "fe2fb58b8e23a4ef6d801c64d0320aa728e7d9078ae9b190f28f55d42cd53dbf"
+            }
+          ],
+          "inside": 33,
+          "boundary": 0,
+          "source_feature_identity": {
+            "source_index": 70769,
+            "family_index": 367,
+            "source_id": "gb:IND:ADM3:7132399B48249953431093",
+            "ordinal": 4023,
+            "owners": [],
+            "name": "Khawzawl",
+            "geometry_status": "raw-native-supported"
+          }
+        }
+      ],
+      "source": {
+        "title": "Myanmar: Falam Township, Chin State (20 April 2020) [EN/MY]",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "catalogue_url": "https://reliefweb.int/map/myanmar/falam-township-chin-state-myanmar-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/0bbcbd50-4f3d-4022-80cc-65b1cbbc6502/Tsp_Map_VL_Falam_-_Chin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "local_pdf": "MIMU2020-Falam.pdf",
+        "bytes": 7404517,
+        "sha256": "fe535a0b9889177873211ab9bb26ca2a3c3fc8d441496e3aec3b624db981e365",
+        "printed_production_date": "2020-04-20",
+        "map_id": "MIMU154v05",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "map_country_context": "India is labelled across the western international border; Falam is the named Myanmar township.",
+        "printed_limits": "Approximate boundary/village locations; informational purposes, not on-ground survey; no implied United Nations boundary endorsement."
+      },
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2385.733614349439,
+          "intercept_points": -222637.9437725136,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.09628295895527117,
+          "rms_residual_pdf_points": 0.06783505570668844,
+          "alternating_label_holdout_max_pdf_points": 0.1403746604337357
+        },
+        "N": {
+          "slope_points_per_degree": 2385.7750959123914,
+          "intercept_points": -53687.13382713687,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.10341302781307604,
+          "rms_residual_pdf_points": 0.06233779063101185,
+          "alternating_label_holdout_max_pdf_points": 0.10454050698172068
+        }
+      },
+      "source_registration_label_range_relation": {
+        "E": {
+          "fitted_label_range_degrees": [
+            93.33333333333333,
+            94.0
+          ],
+          "target_degrees": 93.36428064661321,
+          "extrapolation_beyond_label_range_degrees": 0
+        },
+        "N": {
+          "fitted_label_range_degrees": [
+            22.666666666666668,
+            23.5
+          ],
+          "target_degrees": 23.33473168230835,
+          "extrapolation_beyond_label_range_degrees": 0
+        }
+      },
+      "review_panel": "reviewed-Falam-026.png",
+      "review_contact_sheet": "contact-01.png",
+      "qualification": "UNQUALIFIED; preserve all original contacts and operands. Consequential review and Main source-applicability choice must precede bounded native checks."
+    }
+  ]
+}
