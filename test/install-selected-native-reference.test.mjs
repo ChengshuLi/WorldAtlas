@@ -6,7 +6,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
-import {selectedNativeReference,composeEvidence,applyInstall,retainHistoricalMacroReview} from '../scripts/install-macro-reference.mjs';
+import {selectedNativeReference,composeEvidence,applyInstall,retainHistoricalMacroReview,validateMetadataStages} from '../scripts/install-macro-reference.mjs';
 import {preparedEvidenceJSON} from '../src/prepared-evidence.js';
 
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
@@ -122,3 +122,31 @@ test('retaining historical macro review preserves pending status and exact files
  assert.equal(fs.existsSync(path.join(data,'macro-foundation/retained-inspections')),false);
  }finally{fs.rmSync(data,{recursive:true,force:true});}
 });
+
+function receiptedParentFixture(run){
+ const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-receipted-parent-'));
+ try{const units=[{id:'c',name:'C',level:'continent',parent_id:null},{id:'s',name:'S',level:'subcontinent',parent_id:'c'},{id:'r',name:'R',level:'region',parent_id:'s'},{id:'a',name:'A',level:'area',parent_id:'r'},{id:'old',name:'Old',level:'province',parent_id:'a',metadata:{child_count:2}},{id:'new',name:'New',level:'province',parent_id:'a',metadata:{child_count:1}}];
+ const correction=(id,from,to)=>({id,action:'reparent',current_name:id,current_parent_id:from,new_parent_id:to,rationale:'Literal inspected source correspondence',evidence:[{url:'https://example.org/literal-source',title:'Literal source',inspected_fact:'This exact member belongs to this parent.'}]});
+ const features=['member','retained','other'].map((id,i)=>({type:'Feature',id,properties:{id,name:id,parent_id:i===2?'new':'old',metadata:{source_id:'retained:'+id,framework_match:{id:'original fallback'},reference_corrections:[]}},geometry:{type:'Polygon',coordinates:[[[0,0],[1,0],[1,1],[0,0]]]}}));
+ const afterFeatures=structuredClone(features);afterFeatures[0].properties.parent_id='new';afterFeatures[0].properties.metadata.reference_corrections.push(correction('member','old','new'));
+ const afterUnits=structuredClone(units);afterUnits[4].metadata.child_count=1;afterUnits[5].metadata.child_count=2;
+ const geo=(rows,unitRows,hierarchy)=>({units:unitRows,groups:new Map(unitRows.map(row=>[row.id,row])),features:rows,locations:new Map(rows.map(row=>[row.id,row])),proof:{hierarchy_sha256:hierarchy,footprints_sha256:'unchanged footprints'}});
+ const before=geo(features,units,'before'),after=geo(afterFeatures,afterUnits,'after');
+ const receipt={before_sha256:'before',after_sha256:'after',footprints_sha256_before:'unchanged footprints',footprints_sha256_after:'unchanged footprints',reference_only:true,historical_claims_transferred:false,summary:{geometry_changes:0},relationships:[],before_units:units,retired_units:[],group_changes:[4,5].map(index=>({id:units[index].id,before:units[index],after:afterUnits[index]})),changed_location_properties:[{location_id:'member',before_properties:features[0].properties,after_properties:structuredClone(afterFeatures[0].properties)}],source_evidence:[{url:'https://example.org/literal-source',source_sha256:'a'.repeat(64)}]};
+ const file=path.join(directory,'receipt.json');fs.writeFileSync(file,JSON.stringify(receipt));return run({before,after,file,correction});
+ }finally{fs.rmSync(directory,{recursive:true,force:true});}
+}
+
+test('complete candidate properties must equal the authenticated receipt, including literal correction history and source',()=>{
+ receiptedParentFixture(({before,after,file})=>validateMetadataStages(before,after,[file],{mode:'reference-correction'}));
+ for(const mutate of [
+  row=>row.metadata.reference_corrections[0].rationale='Substituted rationale for the same parent',
+  row=>row.metadata.reference_corrections[0].evidence[0].url='https://example.org/substituted-source',
+  row=>row.metadata.reference_corrections.pop(),
+ ])receiptedParentFixture(({before,after,file})=>{mutate(after.features[0].properties);assert.equal(after.features[0].properties.parent_id,'new');assert.throws(()=>validateMetadataStages(before,after,[file],{mode:'reference-correction'}),/Unreceipted location properties/);});
+});
+
+test('an unchanged member cannot acquire unreceipted history while retaining its parent',()=>receiptedParentFixture(({before,after,file,correction})=>{
+ const row=after.features[1].properties;row.metadata.reference_corrections.push(correction('retained','old','new'),correction('retained','new','old'));assert.equal(row.parent_id,'old');
+ assert.throws(()=>validateMetadataStages(before,after,[file],{mode:'reference-correction'}),/Unreceipted location properties/);
+}));
