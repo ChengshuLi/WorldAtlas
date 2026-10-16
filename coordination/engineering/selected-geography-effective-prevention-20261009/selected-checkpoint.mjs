@@ -62,12 +62,27 @@ const currentMaskedRoutes = (reader,routes,masked) => routes.map(p => masked.has
 // Older route censuses excluded .mjs/.py but also retained executable .js.
 // Keep the complete archived census. Identify code by its authenticated executed
 // role and whole bytes, never by an extension, changed-file list or new hashes.
-function acceptedExecutablePaths(session,inventory,facts,policy) {
+function acceptedExecutablePaths(session,reader,routes,inventory,facts,policy,rebind) {
   const roles=[...facts.execution_code,...policy.programs.flatMap(p=>[...p.source_executed_code,...p.native_executed_code]),
     ...policy.current_rebind_migrations.flatMap(p=>[...p.historical_code,...p.current_code])];
   const identity=p=>valueSha([p.path,p.bytes,p.sha256]);
   const bodies=new Set(roles.map(identity));
   const paths=new Set(inventory.filter(p=>hash(p.sha256)&&bodies.has(identity(p))).map(p=>p.path));
+  // Derived inventories omit historical code bodies that the accepted parent
+  // reused. Recover only the exact archived route at an existing policy origin;
+  // reading it records truthful historical custody, never a fresh execution.
+  const recorded=new Set(inventory.map(p=>p.path));
+  const inherited=new Map(routes.filter(p=>!recorded.has(p.path)).map(p=>[p.path,p.tree]));
+  for (const p of rebind.request.executed_code??[]) {
+    if (!inherited.has(p.path) || !bodies.has(identity(p))) continue;
+    const version=rebind.certificate.execution_commit;
+    demand(rebind.request.execution_commit===version,'Accepted rebind execution identity differs');
+    const actual=reader.descriptor(p.path,version);
+    demand(`${actual.mode} blob ${actual.git_blob_oid}\t${p.path}\0`===inherited.get(p.path)
+      && actual.bytes===p.bytes,'Accepted inherited code route differs');
+    reader.read(p.path,{version,expected:p.sha256});
+    paths.add(p.path);
+  }
   return paths;
 }
 const same = (a,b) => a === undefined || b === undefined ? a === b : valueSha(a) === valueSha(b);
@@ -332,7 +347,7 @@ export function qualifyCheckpoint({reader,checkpointId}) {
       supported(priorPolicy[key].every(row => current.has(valueSha(row))),
         'Trusted producer policy no longer preserves accepted eligibility');
     }
-    session.executablePaths=acceptedExecutablePaths(session,retained.inventory,facts,priorPolicy);
+    session.executablePaths=acceptedExecutablePaths(session,reader,routes,retained.inventory,facts,priorPolicy,rebind);
     const physicalPaths = bindPhysicalLogicalSources(reader,certificate,retained.inventory);
     const masked = maskedLogicalSources(certificate,physicalPaths);
     supported(sameScientificRoutes(reader,routes,session.executablePaths,masked), 'Accepted checkpoint input or routing alternative changed');
@@ -637,7 +652,7 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
     supported(priorPolicy[key].every(row=>current.has(valueSha(row))),
       'Trusted producer policy no longer preserves accepted eligibility');
   }
-  session.executablePaths=acceptedExecutablePaths(session,Object.values(inventories).flat(),facts,priorPolicy);
+  session.executablePaths=acceptedExecutablePaths(session,reader,census.routes,Object.values(inventories).flat(),facts,priorPolicy,rebind);
   const physicalPaths = bindPhysicalLogicalSources(reader,certificate,Object.values(inventories).flat());
   const masked = maskedLogicalSources(certificate,physicalPaths);
   supported(sameScientificRoutes(reader,census.routes,session.executablePaths,masked), 'Accepted checkpoint input or routing alternative changed');
