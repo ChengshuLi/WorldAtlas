@@ -1,0 +1,859 @@
+{
+  "all44_historical_assessments_unchanged": true,
+  "all44_specific_categories_match_actual_memberships": true,
+  "counts": {
+    "MYS_private_coarse_vs_government_outside_no_fine_positive": 11,
+    "MYS_country_positive_no_existing_fine_source_coverage": 15,
+    "MYS_genuine_IDN_vs_government_country_overlap": 15,
+    "TLS_private_coarse_only_no_fine_country_or_IDN_full_support": 3
+  },
+  "all33_exact_original_centres_unchanged": true,
+  "all165_asset_grid_and_containing_block_joins": true,
+  "exceptions": [
+    {
+      "key": [
+        22771,
+        127922,
+        215660
+      ],
+      "category": "MYS_private_coarse_vs_government_outside_no_fine_positive",
+      "full_IDN_members": [],
+      "government_state_positive": false,
+      "government_district_contacts": [],
+      "crosswalk_status": null,
+      "question": "Resolve the coarse-country/government discrepancy or provide affirmative applicable fine-location support; no unassigned-cell country default."
+    },
+    {
+      "key": [
+        22771,
+        127941,
+        216511
+      ],
+      "category": "MYS_country_positive_no_existing_fine_source_coverage",
+      "full_IDN_members": [],
+      "government_state_positive": true,
+      "government_district_contacts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer10:OBJECTID:7",
+          "feature_ordinal": 6,
+          "OBJECTID": 7,
+          "provider_name": "TAWAU",
+          "kind": "interior"
+        }
+      ],
+      "crosswalk_status": "held_aggregate_or_partition_mismatch",
+      "question": "Credible whole fine-location source/member association and existing Atlas-location binding, not a government district-name guess. Coarse-country support alone does not select an absent fine positive."
+    },
+    {
+      "key": [
+        22771,
+        127942,
+        216512
+      ],
+      "category": "MYS_genuine_IDN_vs_government_country_overlap",
+      "full_IDN_members": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+          "feature_ordinal": 372,
+          "shapeName": "Nunukan",
+          "kind": "interior"
+        }
+      ],
+      "government_state_positive": true,
+      "government_district_contacts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer10:OBJECTID:7",
+          "feature_ordinal": 6,
+          "OBJECTID": 7,
+          "provider_name": "TAWAU",
+          "kind": "interior"
+        }
+      ],
+      "crosswalk_status": "held_aggregate_or_partition_mismatch",
+      "question": "A substantive country-side applicability correction at this actual overlap; government-positive cannot be removed under the outside-country refinement. No automatic IDN or foreign fine owner."
+    },
+    {
+      "key": [
+        22771,
+        127947,
+        216524
+      ],
+      "category": "MYS_country_positive_no_existing_fine_source_coverage",
+      "full_IDN_members": [],
+      "government_state_positive": true,
+      "government_district_contacts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer10:OBJECTID:7",
+          "feature_ordinal": 6,
+          "OBJECTID": 7,
+          "provider_name": "TAWAU",
+          "kind": "interior"
+        }
+      ],
+      "crosswalk_status": "held_aggregate_or_partition_mismatch",
+      "question": "Credible whole fine-location source/member association and existing Atlas-location binding, not a government district-name guess. Coarse-country support alone does not select an absent fine positive."
+    },
+    {
+      "key": [
+        22771,
+        127952,
+        216533
+      ],
+      "category": "MYS_genuine_IDN_vs_government_country_overlap",
+      "full_IDN_members": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+          "feature_ordinal": 372,
+          "shapeName": "Nunukan",
+          "kind": "interior"
+        }
+      ],
+      "government_state_positive": true,
+      "government_district_contacts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer10:OBJECTID:7",
+          "feature_ordinal": 6,
+          "OBJECTID": 7,
+          "provider_name": "TAWAU",
+          "kind": "interior"
+        }
+      ],
+      "crosswalk_status": "held_aggregate_or_partition_mismatch",
+      "question": "A substantive country-side applicability correction at this actual overlap; government-positive cannot be removed under the outside-country refinement. No automatic IDN or foreign fine owner."
+    },
+    {
+      "key": [
+        22771,
+        127953,
+        216534
+      ],
+      "category": "MYS_genuine_IDN_vs_government_country_overlap",
+      "full_IDN_members": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+          "feature_ordinal": 372,
+          "shapeName": "Nunukan",
+          "kind": "interior"
+        }
+      ],
+      "government_state_positive": true,
+      "government_district_contacts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer10:OBJECTID:7",
+          "feature_ordinal": 6,
+          "OBJECTID": 7,
+          "provider_name": "TAWAU",
+          "kind": "interior"
+        }
+      ],
+      "crosswalk_status": "held_aggregate_or_partition_mismatch",
+      "question": "A substantive country-side applicability correction at this actual overlap; government-positive cannot be removed under the outside-country refinement. No automatic IDN or foreign fine owner."
+    },
+    {
+      "key": [
+        22771,
+        127954,
+        216535
+      ],
+      "category": "MYS_genuine_IDN_vs_government_country_overlap",
+      "full_IDN_members": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+          "feature_ordinal": 372,
+          "shapeName": "Nunukan",
+          "kind": "interior"
+        }
+      ],
+      "government_state_positive": true,
+      "government_district_contacts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer10:OBJECTID:7",
+          "feature_ordinal": 6,
+          "OBJECTID": 7,
+          "provider_name": "TAWAU",
+          "kind": "interior"
+        }
+      ],
+      "crosswalk_status": "held_aggregate_or_partition_mismatch",
+      "question": "A substantive country-side applicability correction at this actual overlap; government-positive cannot be removed under the outside-country refinement. No automatic IDN or foreign fine owner."
+    },
+    {
+      "key": [
+        22771,
+        127966,
+        216559
+      ],
+      "category": "MYS_genuine_IDN_vs_government_country_overlap",
+      "full_IDN_members": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+          "feature_ordinal": 372,
+          "shapeName": "Nunukan",
+          "kind": "interior"
+        }
+      ],
+      "government_state_positive": true,
+      "government_district_contacts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer10:OBJECTID:7",
+          "feature_ordinal": 6,
+          "OBJECTID": 7,
+          "provider_name": "TAWAU",
+          "kind": "interior"
+        }
+      ],
+      "crosswalk_status": "held_aggregate_or_partition_mismatch",
+      "question": "A substantive country-side applicability correction at this actual overlap; government-positive cannot be removed under the outside-country refinement. No automatic IDN or foreign fine owner."
+    },
+    {
+      "key": [
+        22771,
+        127973,
+        216564
+      ],
+      "category": "MYS_genuine_IDN_vs_government_country_overlap",
+      "full_IDN_members": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+          "feature_ordinal": 372,
+          "shapeName": "Nunukan",
+          "kind": "interior"
+        }
+      ],
+      "government_state_positive": true,
+      "government_district_contacts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer10:OBJECTID:7",
+          "feature_ordinal": 6,
+          "OBJECTID": 7,
+          "provider_name": "TAWAU",
+          "kind": "interior"
+        }
+      ],
+      "crosswalk_status": "held_aggregate_or_partition_mismatch",
+      "question": "A substantive country-side applicability correction at this actual overlap; government-positive cannot be removed under the outside-country refinement. No automatic IDN or foreign fine owner."
+    },
+    {
+      "key": [
+        22771,
+        127974,
+        216565
+      ],
+      "category": "MYS_country_positive_no_existing_fine_source_coverage",
+      "full_IDN_members": [],
+      "government_state_positive": true,
+      "government_district_contacts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer10:OBJECTID:7",
+          "feature_ordinal": 6,
+          "OBJECTID": 7,
+          "provider_name": "TAWAU",
+          "kind": "interior"
+        }
+      ],
+      "crosswalk_status": "held_aggregate_or_partition_mismatch",
+      "question": "Credible whole fine-location source/member association and existing Atlas-location binding, not a government district-name guess. Coarse-country support alone does not select an absent fine positive."
+    },
+    {
+      "key": [
+        22771,
+        127979,
+        216577
+      ],
+      "category": "MYS_country_positive_no_existing_fine_source_coverage",
+      "full_IDN_members": [],
+      "government_state_positive": true,
+      "government_district_contacts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer10:OBJECTID:7",
+          "feature_ordinal": 6,
+          "OBJECTID": 7,
+          "provider_name": "TAWAU",
+          "kind": "interior"
+        }
+      ],
+      "crosswalk_status": "held_aggregate_or_partition_mismatch",
+      "question": "Credible whole fine-location source/member association and existing Atlas-location binding, not a government district-name guess. Coarse-country support alone does not select an absent fine positive."
+    },
+    {
+      "key": [
+        22771,
+        127983,
+        216584
+      ],
+      "category": "MYS_genuine_IDN_vs_government_country_overlap",
+      "full_IDN_members": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+          "feature_ordinal": 372,
+          "shapeName": "Nunukan",
+          "kind": "interior"
+        }
+      ],
+      "government_state_positive": true,
+      "government_district_contacts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer10:OBJECTID:7",
+          "feature_ordinal": 6,
+          "OBJECTID": 7,
+          "provider_name": "TAWAU",
+          "kind": "interior"
+        }
+      ],
+      "crosswalk_status": "held_aggregate_or_partition_mismatch",
+      "question": "A substantive country-side applicability correction at this actual overlap; government-positive cannot be removed under the outside-country refinement. No automatic IDN or foreign fine owner."
+    },
+    {
+      "key": [
+        22771,
+        127984,
+        216585
+      ],
+      "category": "MYS_genuine_IDN_vs_government_country_overlap",
+      "full_IDN_members": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B24707766174966",
+          "feature_ordinal": 372,
+          "shapeName": "Nunukan",
+          "kind": "interior"
+        }
+      ],
+      "government_state_positive": true,
+      "government_district_contacts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer10:OBJECTID:7",
+          "feature_ordinal": 6,
+          "OBJECTID": 7,
+          "provider_name": "TAWAU",
+          "kind": "interior"
+        }
+      ],
+      "crosswalk_status": "held_aggregate_or_partition_mismatch",
+      "question": "A substantive country-side applicability correction at this actual overlap; government-positive cannot be removed under the outside-country refinement. No automatic IDN or foreign fine owner."
+    },
+    {
+      "key": [
+        22771,
+        127998,
+        216598
+      ],
+      "category": "MYS_country_positive_no_existing_fine_source_coverage",
+      "full_IDN_members": [],
+      "government_state_positive": true,
+      "government_district_contacts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer10:OBJECTID:7",
+          "feature_ordinal": 6,
+          "OBJECTID": 7,
+          "provider_name": "TAWAU",
+          "kind": "interior"
+        }
+      ],
+      "crosswalk_status": "held_aggregate_or_partition_mismatch",
+      "question": "Credible whole fine-location source/member association and existing Atlas-location binding, not a government district-name guess. Coarse-country support alone does not select an absent fine positive."
+    },
+    {
+      "key": [
+        22771,
+        128299,
+        215275
+      ],
+      "category": "MYS_private_coarse_vs_government_outside_no_fine_positive",
+      "full_IDN_members": [],
+      "government_state_positive": false,
+      "government_district_contacts": [],
+      "crosswalk_status": null,
+      "question": "Resolve the coarse-country/government discrepancy or provide affirmative applicable fine-location support; no unassigned-cell country default."
+    },
+    {
+      "key": [
+        22839,
+        137792,
+        222213
+      ],
+      "category": "TLS_private_coarse_only_no_fine_country_or_IDN_full_support",
+      "full_IDN_members": [],
+      "government_state_positive": false,
+      "government_district_contacts": [],
+      "crosswalk_status": null,
+      "question": "An affirmative applicable country/fine-location source at the exact point, or a bounded source-priority disposition resolving this explicit country mapping gap; not automatic TLS ownership."
+    },
+    {
+      "key": [
+        22839,
+        137807,
+        222177
+      ],
+      "category": "TLS_private_coarse_only_no_fine_country_or_IDN_full_support",
+      "full_IDN_members": [],
+      "government_state_positive": false,
+      "government_district_contacts": [],
+      "crosswalk_status": null,
+      "question": "An affirmative applicable country/fine-location source at the exact point, or a bounded source-priority disposition resolving this explicit country mapping gap; not automatic TLS ownership."
+    },
+    {
+      "key": [
+        22935,
+        128863,
+        215201
+      ],
+      "category": "MYS_private_coarse_vs_government_outside_no_fine_positive",
+      "full_IDN_members": [],
+      "government_state_positive": false,
+      "government_district_contacts": [],
+      "crosswalk_status": null,
+      "question": "Resolve the coarse-country/government discrepancy or provide affirmative applicable fine-location support; no unassigned-cell country default."
+    },
+    {
+      "key": [
+        22935,
+        128870,
+        215195
+      ],
+      "category": "MYS_private_coarse_vs_government_outside_no_fine_positive",
+      "full_IDN_members": [],
+      "government_state_positive": false,
+      "government_district_contacts": [],
+      "crosswalk_status": null,
+      "question": "Resolve the coarse-country/government discrepancy or provide affirmative applicable fine-location support; no unassigned-cell country default."
+    },
+    {
+      "key": [
+        22935,
+        128882,
+        215055
+      ],
+      "category": "MYS_genuine_IDN_vs_government_country_overlap",
+      "full_IDN_members": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+          "feature_ordinal": 318,
+          "shapeName": "Malinau",
+          "kind": "interior"
+        }
+      ],
+      "government_state_positive": true,
+      "government_district_contacts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:3",
+          "feature_ordinal": 1,
+          "OBJECTID": 3,
+          "provider_name": "Marudi",
+          "kind": "interior"
+        }
+      ],
+      "crosswalk_status": "held_aggregate_or_partition_mismatch",
+      "question": "A substantive country-side applicability correction at this actual overlap; government-positive cannot be removed under the outside-country refinement. No automatic IDN or foreign fine owner."
+    },
+    {
+      "key": [
+        22935,
+        128883,
+        215060
+      ],
+      "category": "MYS_genuine_IDN_vs_government_country_overlap",
+      "full_IDN_members": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+          "feature_ordinal": 318,
+          "shapeName": "Malinau",
+          "kind": "interior"
+        }
+      ],
+      "government_state_positive": true,
+      "government_district_contacts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:3",
+          "feature_ordinal": 1,
+          "OBJECTID": 3,
+          "provider_name": "Marudi",
+          "kind": "interior"
+        }
+      ],
+      "crosswalk_status": "held_aggregate_or_partition_mismatch",
+      "question": "A substantive country-side applicability correction at this actual overlap; government-positive cannot be removed under the outside-country refinement. No automatic IDN or foreign fine owner."
+    },
+    {
+      "key": [
+        22935,
+        128884,
+        215061
+      ],
+      "category": "MYS_genuine_IDN_vs_government_country_overlap",
+      "full_IDN_members": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+          "feature_ordinal": 318,
+          "shapeName": "Malinau",
+          "kind": "interior"
+        }
+      ],
+      "government_state_positive": true,
+      "government_district_contacts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:3",
+          "feature_ordinal": 1,
+          "OBJECTID": 3,
+          "provider_name": "Marudi",
+          "kind": "interior"
+        }
+      ],
+      "crosswalk_status": "held_aggregate_or_partition_mismatch",
+      "question": "A substantive country-side applicability correction at this actual overlap; government-positive cannot be removed under the outside-country refinement. No automatic IDN or foreign fine owner."
+    },
+    {
+      "key": [
+        22935,
+        128885,
+        215062
+      ],
+      "category": "MYS_genuine_IDN_vs_government_country_overlap",
+      "full_IDN_members": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+          "feature_ordinal": 318,
+          "shapeName": "Malinau",
+          "kind": "interior"
+        }
+      ],
+      "government_state_positive": true,
+      "government_district_contacts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:3",
+          "feature_ordinal": 1,
+          "OBJECTID": 3,
+          "provider_name": "Marudi",
+          "kind": "interior"
+        }
+      ],
+      "crosswalk_status": "held_aggregate_or_partition_mismatch",
+      "question": "A substantive country-side applicability correction at this actual overlap; government-positive cannot be removed under the outside-country refinement. No automatic IDN or foreign fine owner."
+    },
+    {
+      "key": [
+        22935,
+        128886,
+        215063
+      ],
+      "category": "MYS_genuine_IDN_vs_government_country_overlap",
+      "full_IDN_members": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+          "feature_ordinal": 318,
+          "shapeName": "Malinau",
+          "kind": "interior"
+        }
+      ],
+      "government_state_positive": true,
+      "government_district_contacts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:3",
+          "feature_ordinal": 1,
+          "OBJECTID": 3,
+          "provider_name": "Marudi",
+          "kind": "interior"
+        }
+      ],
+      "crosswalk_status": "held_aggregate_or_partition_mismatch",
+      "question": "A substantive country-side applicability correction at this actual overlap; government-positive cannot be removed under the outside-country refinement. No automatic IDN or foreign fine owner."
+    },
+    {
+      "key": [
+        22935,
+        128886,
+        215141
+      ],
+      "category": "MYS_private_coarse_vs_government_outside_no_fine_positive",
+      "full_IDN_members": [],
+      "government_state_positive": false,
+      "government_district_contacts": [],
+      "crosswalk_status": null,
+      "question": "Resolve the coarse-country/government discrepancy or provide affirmative applicable fine-location support; no unassigned-cell country default."
+    },
+    {
+      "key": [
+        22935,
+        128887,
+        215064
+      ],
+      "category": "MYS_country_positive_no_existing_fine_source_coverage",
+      "full_IDN_members": [],
+      "government_state_positive": true,
+      "government_district_contacts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:3",
+          "feature_ordinal": 1,
+          "OBJECTID": 3,
+          "provider_name": "Marudi",
+          "kind": "interior"
+        }
+      ],
+      "crosswalk_status": "held_aggregate_or_partition_mismatch",
+      "question": "Credible whole fine-location source/member association and existing Atlas-location binding, not a government district-name guess. Coarse-country support alone does not select an absent fine positive."
+    },
+    {
+      "key": [
+        22935,
+        128910,
+        215093
+      ],
+      "category": "MYS_private_coarse_vs_government_outside_no_fine_positive",
+      "full_IDN_members": [],
+      "government_state_positive": false,
+      "government_district_contacts": [],
+      "crosswalk_status": null,
+      "question": "Resolve the coarse-country/government discrepancy or provide affirmative applicable fine-location support; no unassigned-cell country default."
+    },
+    {
+      "key": [
+        22935,
+        128914,
+        215075
+      ],
+      "category": "MYS_private_coarse_vs_government_outside_no_fine_positive",
+      "full_IDN_members": [],
+      "government_state_positive": false,
+      "government_district_contacts": [],
+      "crosswalk_status": null,
+      "question": "Resolve the coarse-country/government discrepancy or provide affirmative applicable fine-location support; no unassigned-cell country default."
+    },
+    {
+      "key": [
+        22935,
+        129360,
+        214813
+      ],
+      "category": "MYS_genuine_IDN_vs_government_country_overlap",
+      "full_IDN_members": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+          "feature_ordinal": 318,
+          "shapeName": "Malinau",
+          "kind": "interior"
+        }
+      ],
+      "government_state_positive": true,
+      "government_district_contacts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:8",
+          "feature_ordinal": 6,
+          "OBJECTID": 8,
+          "provider_name": "Belaga",
+          "kind": "interior"
+        }
+      ],
+      "crosswalk_status": "held_aggregate_or_partition_mismatch",
+      "question": "A substantive country-side applicability correction at this actual overlap; government-positive cannot be removed under the outside-country refinement. No automatic IDN or foreign fine owner."
+    },
+    {
+      "key": [
+        22935,
+        129361,
+        214813
+      ],
+      "category": "MYS_genuine_IDN_vs_government_country_overlap",
+      "full_IDN_members": [
+        {
+          "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+          "feature_ordinal": 318,
+          "shapeName": "Malinau",
+          "kind": "interior"
+        }
+      ],
+      "government_state_positive": true,
+      "government_district_contacts": [
+        {
+          "source_id": "government:JMG:Demarcation:layer9:OBJECTID:8",
+          "feature_ordinal": 6,
+          "OBJECTID": 8,
+          "provider_name": "Belaga",
+          "kind": "interior"
+        }
+      ],
+      "crosswalk_status": "held_aggregate_or_partition_mismatch",
+      "question": "A substantive country-side applicability correction at this actual overlap; government-positive cannot be removed under the outside-country refinement. No automatic IDN or foreign fine owner."
+    },
+    {
+      "key": [
+        22947,
+        137949,
+        222168
+      ],
+      "category": "TLS_private_coarse_only_no_fine_country_or_IDN_full_support",
+      "full_IDN_members": [],
+      "government_state_positive": false,
+      "government_district_contacts": [],
+      "crosswalk_status": null,
+      "question": "An affirmative applicable country/fine-location source at the exact point, or a bounded source-priority disposition resolving this explicit country mapping gap; not automatic TLS ownership."
+    },
+    {
+      "key": [
+        23115,
+        130052,
+        214050
+      ],
+      "category": "MYS_country_positive_no_existing_fine_source_coverage",
+      "full_IDN_members": [],
+      "government_state_positive": true,
+      "government_district_contacts": [],
+      "crosswalk_status": null,
+      "question": "Credible whole fine-location source/member association and existing Atlas-location binding, not a government district-name guess. Coarse-country support alone does not select an absent fine positive."
+    },
+    {
+      "key": [
+        23115,
+        130119,
+        213647
+      ],
+      "category": "MYS_country_positive_no_existing_fine_source_coverage",
+      "full_IDN_members": [],
+      "government_state_positive": true,
+      "government_district_contacts": [],
+      "crosswalk_status": null,
+      "question": "Credible whole fine-location source/member association and existing Atlas-location binding, not a government district-name guess. Coarse-country support alone does not select an absent fine positive."
+    },
+    {
+      "key": [
+        23115,
+        130120,
+        213762
+      ],
+      "category": "MYS_country_positive_no_existing_fine_source_coverage",
+      "full_IDN_members": [],
+      "government_state_positive": true,
+      "government_district_contacts": [],
+      "crosswalk_status": null,
+      "question": "Credible whole fine-location source/member association and existing Atlas-location binding, not a government district-name guess. Coarse-country support alone does not select an absent fine positive."
+    },
+    {
+      "key": [
+        23115,
+        130130,
+        213725
+      ],
+      "category": "MYS_country_positive_no_existing_fine_source_coverage",
+      "full_IDN_members": [],
+      "government_state_positive": true,
+      "government_district_contacts": [],
+      "crosswalk_status": null,
+      "question": "Credible whole fine-location source/member association and existing Atlas-location binding, not a government district-name guess. Coarse-country support alone does not select an absent fine positive."
+    },
+    {
+      "key": [
+        23115,
+        130130,
+        213728
+      ],
+      "category": "MYS_country_positive_no_existing_fine_source_coverage",
+      "full_IDN_members": [],
+      "government_state_positive": true,
+      "government_district_contacts": [],
+      "crosswalk_status": null,
+      "question": "Credible whole fine-location source/member association and existing Atlas-location binding, not a government district-name guess. Coarse-country support alone does not select an absent fine positive."
+    },
+    {
+      "key": [
+        23115,
+        130132,
+        213717
+      ],
+      "category": "MYS_country_positive_no_existing_fine_source_coverage",
+      "full_IDN_members": [],
+      "government_state_positive": true,
+      "government_district_contacts": [],
+      "crosswalk_status": null,
+      "question": "Credible whole fine-location source/member association and existing Atlas-location binding, not a government district-name guess. Coarse-country support alone does not select an absent fine positive."
+    },
+    {
+      "key": [
+        23115,
+        130145,
+        213933
+      ],
+      "category": "MYS_country_positive_no_existing_fine_source_coverage",
+      "full_IDN_members": [],
+      "government_state_positive": true,
+      "government_district_contacts": [],
+      "crosswalk_status": null,
+      "question": "Credible whole fine-location source/member association and existing Atlas-location binding, not a government district-name guess. Coarse-country support alone does not select an absent fine positive."
+    },
+    {
+      "key": [
+        23115,
+        130159,
+        213897
+      ],
+      "category": "MYS_country_positive_no_existing_fine_source_coverage",
+      "full_IDN_members": [],
+      "government_state_positive": true,
+      "government_district_contacts": [],
+      "crosswalk_status": null,
+      "question": "Credible whole fine-location source/member association and existing Atlas-location binding, not a government district-name guess. Coarse-country support alone does not select an absent fine positive."
+    },
+    {
+      "key": [
+        23115,
+        130172,
+        213879
+      ],
+      "category": "MYS_private_coarse_vs_government_outside_no_fine_positive",
+      "full_IDN_members": [],
+      "government_state_positive": false,
+      "government_district_contacts": [],
+      "crosswalk_status": null,
+      "question": "Resolve the coarse-country/government discrepancy or provide affirmative applicable fine-location support; no unassigned-cell country default."
+    },
+    {
+      "key": [
+        23115,
+        130184,
+        213862
+      ],
+      "category": "MYS_private_coarse_vs_government_outside_no_fine_positive",
+      "full_IDN_members": [],
+      "government_state_positive": false,
+      "government_district_contacts": [],
+      "crosswalk_status": null,
+      "question": "Resolve the coarse-country/government discrepancy or provide affirmative applicable fine-location support; no unassigned-cell country default."
+    },
+    {
+      "key": [
+        23115,
+        130184,
+        213863
+      ],
+      "category": "MYS_country_positive_no_existing_fine_source_coverage",
+      "full_IDN_members": [],
+      "government_state_positive": true,
+      "government_district_contacts": [],
+      "crosswalk_status": null,
+      "question": "Credible whole fine-location source/member association and existing Atlas-location binding, not a government district-name guess. Coarse-country support alone does not select an absent fine positive."
+    },
+    {
+      "key": [
+        23115,
+        130323,
+        212402
+      ],
+      "category": "MYS_private_coarse_vs_government_outside_no_fine_positive",
+      "full_IDN_members": [],
+      "government_state_positive": false,
+      "government_district_contacts": [],
+      "crosswalk_status": null,
+      "question": "Resolve the coarse-country/government discrepancy or provide affirmative applicable fine-location support; no unassigned-cell country default."
+    },
+    {
+      "key": [
+        23115,
+        130327,
+        212396
+      ],
+      "category": "MYS_private_coarse_vs_government_outside_no_fine_positive",
+      "full_IDN_members": [],
+      "government_state_positive": false,
+      "government_district_contacts": [],
+      "crosswalk_status": null,
+      "question": "Resolve the coarse-country/government discrepancy or provide affirmative applicable fine-location support; no unassigned-cell country default."
+    }
+  ]
+}

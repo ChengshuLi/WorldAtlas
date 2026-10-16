@@ -1,6 +1,11 @@
 {
-  "kind": "original-session-completion-review-proposed-whole-payloads",
+  "kind": "root-adopted-complete-original-dispositions-whole-payloads",
   "files": [
+    {
+      "path": "ADOPTION.md",
+      "bytes": 1695,
+      "sha256": "45ee60ace32d699917d4183f5d60cca09a963cc3097b76af23b759c62846cf6e"
+    },
     {
       "path": "README.md",
       "bytes": 1742,
@@ -12,6 +17,20 @@
       "sha256": "8e0a1df8295ac9a6bf3f43ad0e200bb9a57a69a0d9f96873218dbe9f958031a2",
       "decoded_bytes": 2935233,
       "decoded_sha256": "c4ab5bf76225d1aee4abff092cab49ba0f9927b2e703c8ac3013246567c356a5"
+    },
+    {
+      "path": "accounting/accepted-interpreted133440-owner-y-x.jsonl.gz",
+      "bytes": 372170,
+      "sha256": "1cc7a86f15ea86b452dcb832648a14f0c9c62b9f2374cf8de8dd6022c5adad42",
+      "decoded_bytes": 2935365,
+      "decoded_sha256": "3f359cc239f5e78a5b363eb820f2a632d00555abf59f450cf6977402850ad24f"
+    },
+    {
+      "path": "accounting/adopted-new6-owner-y-x.jsonl.gz",
+      "bytes": 80,
+      "sha256": "b2b1ac52b3dd70e946916e5a4baf4fec73505bbb0de2f651d8ccd61bac976148",
+      "decoded_bytes": 132,
+      "decoded_sha256": "1f361076d296592fe04d47a5c1c52a01e65793cdd9e97c6e4d26f41b9a3c2a2a"
     },
     {
       "path": "accounting/current-repair106-unaccepted-owner-y-x.jsonl.gz",
@@ -26,6 +45,13 @@
       "sha256": "41732e0801a47f1e910ded68161613343cf82f3bfce5a1b57e5a5e9e3a9b673b",
       "decoded_bytes": 4196268,
       "decoded_sha256": "dcb83f74b0d6863a2f3cb3f4fffb6d4d7bf358cad68c32a5170828380426341c"
+    },
+    {
+      "path": "accounting/explicit-unresolved406-owner-y-x.jsonl.gz",
+      "bytes": 1868,
+      "sha256": "153fccd9d50522242a9b4298af715d86e145a6d714a6cb2982801636dd43bed0",
+      "decoded_bytes": 8932,
+      "decoded_sha256": "8a2b6c603abad4c4f498c3ec3d8299a13974ca4603ba1ee31508001c34119dd6"
     },
     {
       "path": "accounting/original-physical133846-owner-y-x.jsonl.gz",
@@ -49,9 +75,58 @@
       "decoded_sha256": "bfb029978cc5eddfbaa1df49a87b8bd9ef8da4c8b7d79165331e556033f8dc87"
     },
     {
+      "path": "adopted-complete-physical412-dispositions.jsonl.gz",
+      "bytes": 44852,
+      "sha256": "cf2cd7584c64463f382c48cbcc6d34a0b1e3b1a94c84802644218a3f65828b78",
+      "decoded_bytes": 828907,
+      "decoded_sha256": "b1a0473c78c4df5b58217290f4fb8e42c5d8ef6daabe53d072ceacf0d2272f68"
+    },
+    {
+      "path": "adopted-repair44-documented-exceptions.jsonl.gz",
+      "bytes": 10096,
+      "sha256": "7809024e1ba29a42292743119bd6abe17d1c280a700dabf8b5e14c07f79a9529",
+      "decoded_bytes": 355904,
+      "decoded_sha256": "cfa9b1ad38dbb01383ba494f7ac37d10f03410fc6bb21a7a9d5577f35f171603"
+    },
+    {
       "path": "completion-coverage-summary.json",
       "bytes": 4279,
       "sha256": "1ef68544d8ae89579ca344c0a312ba5eb03fc9bf5cb860ad1a6619729a2c4190"
+    },
+    {
+      "path": "distinct-final-review/exception-and-coordinate-verification.json",
+      "bytes": 30858,
+      "sha256": "ebee000c90645f1fe2ed1f7be5a5cc7df561f29f5b9f9ebc0523ae54c85ea8b5"
+    },
+    {
+      "path": "distinct-final-review/review-supported6.json",
+      "bytes": 3356,
+      "sha256": "73b7572fec69de1fddde5be2aa89555b60b99ae07c0e0806cb89640a48962466"
+    },
+    {
+      "path": "distinct-final-review/review.md",
+      "bytes": 12701,
+      "sha256": "7b51dbba0f28bb3c667932f8a3b4b0c6fd08daee49568f67e89d820aac79b8fe"
+    },
+    {
+      "path": "distinct-final-review/verification.json",
+      "bytes": 15860,
+      "sha256": "6ccfe12d2565ebd84aa939dcc83282c8975cf4d128ba12d327f77bc0a1c07459"
+    },
+    {
+      "path": "distinct-final-review/verify-extra.py",
+      "bytes": 3789,
+      "sha256": "cf6d217c856cfccfc1a15b615206b409792e224c92425c35fb21bc9acf63ef9e"
+    },
+    {
+      "path": "distinct-final-review/verify.log",
+      "bytes": 6549,
+      "sha256": "c6d9b709656b1ac5ba848af2f9a02d3c8390e291d2cf960021a9bd1237c8586c"
+    },
+    {
+      "path": "distinct-final-review/verify.py",
+      "bytes": 8853,
+      "sha256": "470f85dcd761d9d6e73602dd4a41857357853ee12d94ba5f8f6304424f0aeaf8"
     },
     {
       "path": "input-custody-and-actual-vintages.json",
@@ -248,6 +323,21 @@
       "path": "review-navigation412.json",
       "bytes": 503107,
       "sha256": "d1934cc93864ab87fe08671295dd7821c1b5ab1fb2e992bd126bf8c7ec19d0b8"
+    },
+    {
+      "path": "reviewed-proposal-inventory-binding.json",
+      "bytes": 293,
+      "sha256": "e265b7430296306ff74cded00ee4d4fd13e047c5ac050e2e8fae486af0bd9844"
+    },
+    {
+      "path": "reviewed-proposal-publication-inventory.json",
+      "bytes": 73002,
+      "sha256": "ad89c9f36a3f5431d926d7a901e7f30a1b42e149d8b87e5aa3e8cef028030d3c"
+    },
+    {
+      "path": "root-adoption-and-current-accounting.json",
+      "bytes": 1539,
+      "sha256": "de59e23013b74990b435de4b4657145cb748092813bcc99951849f0e1298753c"
     },
     {
       "path": "saved-firstdated-views/aru/aru226-native-context-01.png",
@@ -1622,9 +1712,17 @@
       "path": "source-quality33/value-read.stdout.jsonl",
       "bytes": 1189,
       "sha256": "8447c240862fd9a9c271caac5043b505b54c8ab891b2800074a40424bde7d543"
+    },
+    {
+      "path": "target-aware-prepared62-original-repair-request-to-qualified-owner.json",
+      "bytes": 58938,
+      "sha256": "c8ccf56b63d5d3b500f4675618dac46eddaedddd160b16fe1b1e430b5b4cd4cd"
     }
   ],
-  "encoded_payload_bytes": 108708586,
-  "actual_finite_resource_basis": "Measured full payload and actual available storage; no arbitrary encoded+decoded ceiling. New75NPZ decoded members separately authenticated in actual-observation-custody-verification.",
-  "scientific_adoption_or_native_credit": 0
+  "encoded_payload_bytes": 109355085,
+  "actual_finite_resources": "Measured whole bytes and available capacity; no arbitrary encoded+decoded evidence ceiling. Raw75NPZ decoded NPY members are independently verified in retained custody.",
+  "new_positive_source_interpretations": 6,
+  "explicit_physical_unknowns": 406,
+  "accepted_repair_exceptions": 44,
+  "new_native_or_repaired_credit": 0
 }

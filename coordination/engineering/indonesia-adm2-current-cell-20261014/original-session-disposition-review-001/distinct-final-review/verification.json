@@ -1,0 +1,822 @@
+{
+  "head": "7f95faac8e729a3f199d28ae30cf317570c65ab9",
+  "tree": "2328140782d77e203d7a88288e31d6ce896744d9",
+  "files": 317,
+  "inventory_payload_bytes": 108708586,
+  "authenticated_frozen_and_public_pin_count": 18,
+  "physical_intervals": 66247,
+  "physical_keys": 133846,
+  "accepted_interpreted": 133434,
+  "explicit_pending_disposition_keys": 412,
+  "held_owner_counts": {
+    "22734": 159,
+    "22698": 63,
+    "22796": 85,
+    "22727": 105
+  },
+  "repair_intervals": 80256,
+  "repair_keys": 190849,
+  "actually_accepted_repair_keys_including_start_overlap": 190743,
+  "repair_pending": 106,
+  "documented_exceptions": 44,
+  "conflict_coordinates": 27,
+  "original_competitors": 54,
+  "accepted_conflicts": 25,
+  "new_quality_arrays": 75,
+  "new_quality_decoded_value_mask_bytes": 196608000,
+  "new_quality_centres": [
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130452,
+        "x": 206908
+      },
+      "point_index": 16531,
+      "item": "S2A_48NVF_20200126_0_L2A",
+      "baseline": "02.13",
+      "values": {
+        "red": 834,
+        "green": 780,
+        "blue": 568,
+        "nir": 1426,
+        "scl": 5
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130358,
+        "x": 206922
+      },
+      "point_index": 14459,
+      "item": "S2A_48NVG_20200126_1_L2A",
+      "baseline": "05.00",
+      "values": {
+        "red": 224,
+        "green": 390,
+        "blue": 504,
+        "nir": 151,
+        "scl": 6
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130372,
+        "x": 206948
+      },
+      "point_index": 14752,
+      "item": "S2A_48NVG_20200126_1_L2A",
+      "baseline": "05.00",
+      "values": {
+        "red": 662,
+        "green": 1096,
+        "blue": 1172,
+        "nir": 669,
+        "scl": 2
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130373,
+        "x": 206926
+      },
+      "point_index": 14797,
+      "item": "S2A_48NVG_20200126_1_L2A",
+      "baseline": "05.00",
+      "values": {
+        "red": 331,
+        "green": 598,
+        "blue": 787,
+        "nir": 314,
+        "scl": 2
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130390,
+        "x": 206957
+      },
+      "point_index": 15299,
+      "item": "S2A_48NVG_20200126_1_L2A",
+      "baseline": "05.00",
+      "values": {
+        "red": 1084,
+        "green": 668,
+        "blue": 972,
+        "nir": 447,
+        "scl": 6
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130394,
+        "x": 206927
+      },
+      "point_index": 15378,
+      "item": "S2A_48NVG_20200126_1_L2A",
+      "baseline": "05.00",
+      "values": {
+        "red": 342,
+        "green": 559,
+        "blue": 722,
+        "nir": 323,
+        "scl": 5
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130229,
+        "x": 206739
+      },
+      "point_index": 12136,
+      "item": "S2A_48NUG_20200205_0_L2A",
+      "baseline": "02.14",
+      "values": {
+        "red": 901,
+        "green": 965,
+        "blue": 579,
+        "nir": 2126,
+        "scl": 7
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130235,
+        "x": 206732
+      },
+      "point_index": 12162,
+      "item": "S2A_48NUG_20200205_0_L2A",
+      "baseline": "02.14",
+      "values": {
+        "red": 1198,
+        "green": 1212,
+        "blue": 821,
+        "nir": 1966,
+        "scl": 6
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130244,
+        "x": 206733
+      },
+      "point_index": 12242,
+      "item": "S2A_48NUG_20200205_0_L2A",
+      "baseline": "02.14",
+      "values": {
+        "red": 748,
+        "green": 703,
+        "blue": 582,
+        "nir": 1698,
+        "scl": 6
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130249,
+        "x": 206809
+      },
+      "point_index": 12300,
+      "item": "S2A_48NUG_20200205_0_L2A",
+      "baseline": "02.14",
+      "values": {
+        "red": 1017,
+        "green": 924,
+        "blue": 646,
+        "nir": 1970,
+        "scl": 5
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130250,
+        "x": 206739
+      },
+      "point_index": 12304,
+      "item": "S2A_48NUG_20200205_0_L2A",
+      "baseline": "02.14",
+      "values": {
+        "red": 794,
+        "green": 760,
+        "blue": 616,
+        "nir": 836,
+        "scl": 6
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130254,
+        "x": 206872
+      },
+      "point_index": 12349,
+      "item": "S2A_48NUG_20200205_0_L2A",
+      "baseline": "02.14",
+      "values": {
+        "red": 955,
+        "green": 962,
+        "blue": 762,
+        "nir": 1126,
+        "scl": 6
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130257,
+        "x": 206864
+      },
+      "point_index": 12388,
+      "item": "S2A_48NUG_20200205_0_L2A",
+      "baseline": "02.14",
+      "values": {
+        "red": 793,
+        "green": 745,
+        "blue": 535,
+        "nir": 1336,
+        "scl": 6
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130263,
+        "x": 206740
+      },
+      "point_index": 12467,
+      "item": "S2A_48NUG_20200205_0_L2A",
+      "baseline": "02.14",
+      "values": {
+        "red": 350,
+        "green": 549,
+        "blue": 410,
+        "nir": 749,
+        "scl": 2
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130264,
+        "x": 206741
+      },
+      "point_index": 12479,
+      "item": "S2A_48NUG_20200205_0_L2A",
+      "baseline": "02.14",
+      "values": {
+        "red": 330,
+        "green": 533,
+        "blue": 334,
+        "nir": 1166,
+        "scl": 6
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130265,
+        "x": 206734
+      },
+      "point_index": 12493,
+      "item": "S2A_48NUG_20200205_0_L2A",
+      "baseline": "02.14",
+      "values": {
+        "red": 1086,
+        "green": 1030,
+        "blue": 659,
+        "nir": 1760,
+        "scl": 7
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130276,
+        "x": 206768
+      },
+      "point_index": 12590,
+      "item": "S2A_48NUG_20200205_0_L2A",
+      "baseline": "02.14",
+      "values": {
+        "red": 877,
+        "green": 900,
+        "blue": 647,
+        "nir": 656,
+        "scl": 2
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130333,
+        "x": 206892
+      },
+      "point_index": 13610,
+      "item": "S2A_48NUG_20200205_0_L2A",
+      "baseline": "02.14",
+      "values": {
+        "red": 2362,
+        "green": 2554,
+        "blue": 2580,
+        "nir": 2836,
+        "scl": 8
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130350,
+        "x": 206797
+      },
+      "point_index": 14255,
+      "item": "S2A_48NUG_20200205_0_L2A",
+      "baseline": "02.14",
+      "values": {
+        "red": 410,
+        "green": 615,
+        "blue": 429,
+        "nir": 2408,
+        "scl": 4
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130353,
+        "x": 206692
+      },
+      "point_index": 14348,
+      "item": "S2A_48NUG_20200205_0_L2A",
+      "baseline": "02.14",
+      "values": {
+        "red": 388,
+        "green": 529,
+        "blue": 426,
+        "nir": 995,
+        "scl": 6
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130365,
+        "x": 206881
+      },
+      "point_index": 14605,
+      "item": "S2A_48NUG_20200205_0_L2A",
+      "baseline": "02.14",
+      "values": {
+        "red": 480,
+        "green": 656,
+        "blue": 514,
+        "nir": 1494,
+        "scl": 4
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130366,
+        "x": 206790
+      },
+      "point_index": 14615,
+      "item": "S2A_48NUG_20200205_0_L2A",
+      "baseline": "02.14",
+      "values": {
+        "red": 2630,
+        "green": 2724,
+        "blue": 2618,
+        "nir": 3044,
+        "scl": 9
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130372,
+        "x": 206852
+      },
+      "point_index": 14741,
+      "item": "S2A_48NUG_20200205_0_L2A",
+      "baseline": "02.14",
+      "values": {
+        "red": 1556,
+        "green": 1750,
+        "blue": 1584,
+        "nir": 1542,
+        "scl": 8
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130382,
+        "x": 206870
+      },
+      "point_index": 15116,
+      "item": "S2A_48NUG_20200205_0_L2A",
+      "baseline": "02.14",
+      "values": {
+        "red": 760,
+        "green": 1018,
+        "blue": 644,
+        "nir": 3298,
+        "scl": 4
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130386,
+        "x": 206878
+      },
+      "point_index": 15216,
+      "item": "S2A_48NUG_20200205_0_L2A",
+      "baseline": "02.14",
+      "values": {
+        "red": 5332,
+        "green": 5532,
+        "blue": 5620,
+        "nir": 5172,
+        "scl": 9
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130389,
+        "x": 206840
+      },
+      "point_index": 15268,
+      "item": "S2A_48NUG_20200205_0_L2A",
+      "baseline": "02.14",
+      "values": {
+        "red": 614,
+        "green": 830,
+        "blue": 759,
+        "nir": 479,
+        "scl": 10
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130392,
+        "x": 206649
+      },
+      "point_index": 15344,
+      "item": "S2A_48NUG_20200205_0_L2A",
+      "baseline": "02.14",
+      "values": {
+        "red": 618,
+        "green": 726,
+        "blue": 654,
+        "nir": 487,
+        "scl": 6
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130396,
+        "x": 206652
+      },
+      "point_index": 15401,
+      "item": "S2A_48NUG_20200205_0_L2A",
+      "baseline": "02.14",
+      "values": {
+        "red": 307,
+        "green": 447,
+        "blue": 336,
+        "nir": 275,
+        "scl": 6
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130396,
+        "x": 206826
+      },
+      "point_index": 15404,
+      "item": "S2A_48NUG_20200205_0_L2A",
+      "baseline": "02.14",
+      "values": {
+        "red": 557,
+        "green": 694,
+        "blue": 619,
+        "nir": 464,
+        "scl": 3
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130413,
+        "x": 206859
+      },
+      "point_index": 15706,
+      "item": "S2A_48NUG_20200205_0_L2A",
+      "baseline": "02.14",
+      "values": {
+        "red": 1136,
+        "green": 1390,
+        "blue": 1274,
+        "nir": 1192,
+        "scl": 7
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130419,
+        "x": 206784
+      },
+      "point_index": 15786,
+      "item": "S2A_48NUG_20200205_0_L2A",
+      "baseline": "02.14",
+      "values": {
+        "red": 844,
+        "green": 1064,
+        "blue": 949,
+        "nir": 978,
+        "scl": 10
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130425,
+        "x": 206851
+      },
+      "point_index": 15876,
+      "item": "S2A_48NUF_20200126_0_L2A",
+      "baseline": "02.13",
+      "values": {
+        "red": 1892,
+        "green": 1898,
+        "blue": 1698,
+        "nir": 2318,
+        "scl": 8
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    },
+    {
+      "key": {
+        "owner": 22727,
+        "y": 130623,
+        "x": 206845
+      },
+      "point_index": 18887,
+      "item": "S2A_48NUF_20200126_0_L2A",
+      "baseline": "02.13",
+      "values": {
+        "red": 362,
+        "green": 664,
+        "blue": 569,
+        "nir": 276,
+        "scl": 6
+      },
+      "masks": {
+        "red": 255,
+        "green": 255,
+        "blue": 255,
+        "nir": 255,
+        "scl": 255
+      }
+    }
+  ],
+  "all_assertions_passed": true
+}
