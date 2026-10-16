@@ -1,0 +1,769 @@
+{
+  "kind": "retained-source-observation-custody-and-exactTLS2-original-IDN-display-proposal",
+  "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+  "pins": [
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/observations/idn-native-comparison-001/gb-IDN-ADM2.json.gz",
+      "bytes": 93905,
+      "sha256": "9a2dc222984859dafd4f47ce5526088295db6bb4fef64b2566eefcc3a789f0fd"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/observations/native-comparison-002/gb-TLS-ADM2.json",
+      "bytes": 81924,
+      "sha256": "95585820df96a856b07864f600a670ae88dadda222a36910fa7793fb39f44308"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/observations/native-comparison-002/gb-TLS-ADM1.json",
+      "bytes": 24901,
+      "sha256": "4b706cd180e6b2db5b6c6ca58783c94a991a6aa258b23e34aa7fbe7c51288b3c"
+    },
+    {
+      "commit": "b6382262f8d03d9e7d33b26d8adb40a55197262b",
+      "path": "src/native-grid.js",
+      "bytes": 37995,
+      "sha256": "78c1e2bc2df944f11b2b638645d20defa82511a1cb17debbf865921945b14740"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "src/native-grid.js",
+      "bytes": 42965,
+      "sha256": "3ef6bc5ec66e3184c254ea66404add0824e3ee18e39c8658f234d2e236d840ad"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/sources/full/geoBoundaries-TLS-ADM2.geojson.gz",
+      "bytes": 1413120,
+      "sha256": "cb3ed8d51124be156295d92fe6abf3517afc4ee338fd8dbae20d24758633457f"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-TLS-ADM2-000.bin.gz",
+      "bytes": 93000,
+      "sha256": "0eafd96d14eb2084456da395b2acfcce26ee3a5a7a2e5cb3c2a7c9235f726359"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/sources/full/geoBoundaries-TLS-ADM2-metaData.json",
+      "bytes": 936,
+      "sha256": "fb8fa64988e99f1446cf3c26342941e73db5d25e1273f16c73d17e2a176bad30"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/remaining474-source-refinement-001/sources/full/geoBoundaries-TLS-ADM1-metaData.json",
+      "bytes": 869,
+      "sha256": "17d61e5cb4c4baa447c40729f508c42f3697ba6e0806818f559985b2584ac364"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz",
+      "bytes": 3051391,
+      "sha256": "ef394916ba97454b5592e66eba1df67199731ce7d9636cc3968843801ae904a8"
+    }
+  ],
+  "records": [
+    {
+      "original": {
+        "id": "repair:22839:137791:222217",
+        "original_package": "repair",
+        "country": "TLS",
+        "owner": 22839,
+        "y": 137791,
+        "x": 222217,
+        "original_held_interval": [
+          137791,
+          222217,
+          222218,
+          22839
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          58358,
+          58359
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "positive_original_IDN_and_contrary_full_IDN_outside": {
+        "original_request_id": "repair:22839:137791:222217",
+        "y": 137791,
+        "x": 222217,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B36840991830224",
+            "feature_ordinal": 46,
+            "shapeName": "Belu",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": []
+      },
+      "contrary_original_TLS_fine_outside_and_full_TLS_fine_interior": {
+        "original_request_id": "repair:22839:137791:222217",
+        "y": 137791,
+        "x": 222217,
+        "original_memberships": [],
+        "full_memberships": [
+          {
+            "source_id": "gb:TLS:ADM2:22284137B33809863123080",
+            "feature_ordinal": 17,
+            "shapeName": "Fatululic",
+            "kind": "interior"
+          }
+        ]
+      },
+      "contrary_original_and_full_TLS_coarse_interior": {
+        "original_request_id": "repair:22839:137791:222217",
+        "y": 137791,
+        "x": 222217,
+        "original_memberships": [
+          {
+            "source_id": "gb:TLS:ADM1:58719522B58123781478976",
+            "feature_ordinal": 5,
+            "shapeName": "Cova Lima",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:TLS:ADM1:58719522B58123781478976",
+            "feature_ordinal": 5,
+            "shapeName": "Cova Lima",
+            "kind": "interior"
+          }
+        ]
+      },
+      "reference": {
+        "original": {
+          "id": "repair:22839:137791:222217",
+          "original_package": "repair",
+          "country": "TLS",
+          "owner": 22839,
+          "y": 137791,
+          "x": 222217,
+          "original_held_interval": [
+            137791,
+            222217,
+            222218,
+            22839
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            58358,
+            58359
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "TLS_full_fine_only_positive_corpus_gap",
+        "latitude": -9.172516348627843,
+        "longitude_numerator": 32808420,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 0,
+            "ADM0_A3": "IDN",
+            "ADMIN": "Indonesia",
+            "ISO_A3_EH": "IDN"
+          }
+        ],
+        "country_ties": []
+      },
+      "recommended_display_target_id": "gb:IDN:ADM2:22746128B36840991830224",
+      "recommended_display_owner": 22839,
+      "original_retained_record": {
+        "original_request_unchanged": {
+          "id": "repair:22839:137791:222217",
+          "original_package": "repair",
+          "country": "TLS",
+          "owner": 22839,
+          "y": 137791,
+          "x": 222217,
+          "original_held_interval": [
+            137791,
+            222217,
+            222218,
+            22839
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            58358,
+            58359
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "TLS_full_fine_only_positive_corpus_gap",
+        "supported_fact": "All519 full IDN members outside; full WHO/OCHA fine TLS member interior, but every original consumed fine TLS member outside. Original/full coarse TLS agrees country side.",
+        "next_consequential_fact_or_existing_dependency": "Accepted full-positive membership/corpus route for existing Fatululic42184 or Nitibe42234 plus their own first whole-target physical support; neither is already prepared/qualified. No positive geometry substitution through a negative-only amendment.",
+        "ordinary_unmodified_authority_ready_now": false,
+        "original_full_family_observations_unchanged": {
+          "request": {
+            "id": "repair:22839:137791:222217",
+            "original_package": "repair",
+            "country": "TLS",
+            "owner": 22839,
+            "y": 137791,
+            "x": 222217,
+            "original_held_interval": [
+              137791,
+              222217,
+              222218,
+              22839
+            ],
+            "original_request_custody": {
+              "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+              "bytes": 11275,
+              "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+            },
+            "original_foreign_source_indices": [
+              58358,
+              58359
+            ],
+            "original_held_reason": "territorial_exclusion_cells"
+          },
+          "original_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B36840991830224",
+              "feature_ordinal": 46,
+              "shapeName": "Belu",
+              "kind": "interior"
+            }
+          ],
+          "full_idn_memberships": [],
+          "full_foreign_memberships": [
+            {
+              "source_id": "gb:TLS:ADM2:22284137B33809863123080",
+              "feature_ordinal": 17,
+              "shapeName": "Fatululic",
+              "kind": "interior"
+            },
+            {
+              "source_id": "gb:TLS:ADM1:58719522B58123781478976",
+              "feature_ordinal": 5,
+              "shapeName": "Cova Lima",
+              "kind": "interior"
+            }
+          ],
+          "foreign_family_details": {
+            "gb:TLS:ADM2": {
+              "original_request_id": "repair:22839:137791:222217",
+              "y": 137791,
+              "x": 222217,
+              "original_memberships": [],
+              "full_memberships": [
+                {
+                  "source_id": "gb:TLS:ADM2:22284137B33809863123080",
+                  "feature_ordinal": 17,
+                  "shapeName": "Fatululic",
+                  "kind": "interior"
+                }
+              ]
+            },
+            "gb:TLS:ADM1": {
+              "original_request_id": "repair:22839:137791:222217",
+              "y": 137791,
+              "x": 222217,
+              "original_memberships": [
+                {
+                  "source_id": "gb:TLS:ADM1:58719522B58123781478976",
+                  "feature_ordinal": 5,
+                  "shapeName": "Cova Lima",
+                  "kind": "interior"
+                }
+              ],
+              "full_memberships": [
+                {
+                  "source_id": "gb:TLS:ADM1:58719522B58123781478976",
+                  "feature_ordinal": 5,
+                  "shapeName": "Cova Lima",
+                  "kind": "interior"
+                }
+              ]
+            }
+          },
+          "symmetric_source_category": "IDN-full-outside__foreign-full-contact",
+          "source_applicability_or_owner_winner": null,
+          "hold_or_owner_changes": false,
+          "authority_or_repair_credit": 0
+        },
+        "government_observations_unchanged": null,
+        "fine_positive_original": [],
+        "fine_positive_full": [
+          {
+            "source_id": "gb:TLS:ADM2:22284137B33809863123080",
+            "feature_ordinal": 17,
+            "shapeName": "Fatululic",
+            "kind": "interior"
+          }
+        ],
+        "owner_or_hold_change": false
+      },
+      "accepted_credit": 0
+    },
+    {
+      "original": {
+        "id": "repair:23013:137973:221502",
+        "original_package": "repair",
+        "country": "TLS",
+        "owner": 23013,
+        "y": 137973,
+        "x": 221502,
+        "original_held_interval": [
+          137973,
+          221502,
+          221503,
+          23013
+        ],
+        "original_request_custody": {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+          "bytes": 11275,
+          "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+        },
+        "original_foreign_source_indices": [
+          58354
+        ],
+        "original_held_reason": "territorial_exclusion_cells"
+      },
+      "positive_original_IDN_and_contrary_full_IDN_outside": {
+        "original_request_id": "repair:23013:137973:221502",
+        "y": 137973,
+        "x": 221502,
+        "original_memberships": [
+          {
+            "source_id": "gb:IDN:ADM2:22746128B66987763142599",
+            "feature_ordinal": 498,
+            "shapeName": "Timor Tengah Utara",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": []
+      },
+      "contrary_original_TLS_fine_outside_and_full_TLS_fine_interior": {
+        "original_request_id": "repair:23013:137973:221502",
+        "y": 137973,
+        "x": 221502,
+        "original_memberships": [],
+        "full_memberships": [
+          {
+            "source_id": "gb:TLS:ADM2:22284137B96760248350473",
+            "feature_ordinal": 44,
+            "shapeName": "Nitibe",
+            "kind": "interior"
+          }
+        ]
+      },
+      "contrary_original_and_full_TLS_coarse_interior": {
+        "original_request_id": "repair:23013:137973:221502",
+        "y": 137973,
+        "x": 221502,
+        "original_memberships": [
+          {
+            "source_id": "gb:TLS:ADM1:58719522B69518090574338",
+            "feature_ordinal": 0,
+            "shapeName": "Oecusse",
+            "kind": "interior"
+          }
+        ],
+        "full_memberships": [
+          {
+            "source_id": "gb:TLS:ADM1:58719522B69518090574338",
+            "feature_ordinal": 0,
+            "shapeName": "Oecusse",
+            "kind": "interior"
+          }
+        ]
+      },
+      "reference": {
+        "original": {
+          "id": "repair:23013:137973:221502",
+          "original_package": "repair",
+          "country": "TLS",
+          "owner": 23013,
+          "y": 137973,
+          "x": 221502,
+          "original_held_interval": [
+            137973,
+            221502,
+            221503,
+            23013
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            58354
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "TLS_full_fine_only_positive_corpus_gap",
+        "latitude": -9.419152081751772,
+        "longitude_numerator": 32551020,
+        "longitude_denominator": 262166,
+        "country_hits": [
+          {
+            "ordinal": 0,
+            "ADM0_A3": "IDN",
+            "ADMIN": "Indonesia",
+            "ISO_A3_EH": "IDN"
+          }
+        ],
+        "country_ties": []
+      },
+      "recommended_display_target_id": "gb:IDN:ADM2:22746128B66987763142599",
+      "recommended_display_owner": 23013,
+      "original_retained_record": {
+        "original_request_unchanged": {
+          "id": "repair:23013:137973:221502",
+          "original_package": "repair",
+          "country": "TLS",
+          "owner": 23013,
+          "y": 137973,
+          "x": 221502,
+          "original_held_interval": [
+            137973,
+            221502,
+            221503,
+            23013
+          ],
+          "original_request_custody": {
+            "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+            "bytes": 11275,
+            "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+          },
+          "original_foreign_source_indices": [
+            58354
+          ],
+          "original_held_reason": "territorial_exclusion_cells"
+        },
+        "assessment_category": "TLS_full_fine_only_positive_corpus_gap",
+        "supported_fact": "All519 full IDN members outside; full WHO/OCHA fine TLS member interior, but every original consumed fine TLS member outside. Original/full coarse TLS agrees country side.",
+        "next_consequential_fact_or_existing_dependency": "Accepted full-positive membership/corpus route for existing Fatululic42184 or Nitibe42234 plus their own first whole-target physical support; neither is already prepared/qualified. No positive geometry substitution through a negative-only amendment.",
+        "ordinary_unmodified_authority_ready_now": false,
+        "original_full_family_observations_unchanged": {
+          "request": {
+            "id": "repair:23013:137973:221502",
+            "original_package": "repair",
+            "country": "TLS",
+            "owner": 23013,
+            "y": 137973,
+            "x": 221502,
+            "original_held_interval": [
+              137973,
+              221502,
+              221503,
+              23013
+            ],
+            "original_request_custody": {
+              "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining19590-native-preparation-001/foreign2924/held-original-rows.json",
+              "bytes": 11275,
+              "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+            },
+            "original_foreign_source_indices": [
+              58354
+            ],
+            "original_held_reason": "territorial_exclusion_cells"
+          },
+          "original_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B66987763142599",
+              "feature_ordinal": 498,
+              "shapeName": "Timor Tengah Utara",
+              "kind": "interior"
+            }
+          ],
+          "full_idn_memberships": [],
+          "full_foreign_memberships": [
+            {
+              "source_id": "gb:TLS:ADM2:22284137B96760248350473",
+              "feature_ordinal": 44,
+              "shapeName": "Nitibe",
+              "kind": "interior"
+            },
+            {
+              "source_id": "gb:TLS:ADM1:58719522B69518090574338",
+              "feature_ordinal": 0,
+              "shapeName": "Oecusse",
+              "kind": "interior"
+            }
+          ],
+          "foreign_family_details": {
+            "gb:TLS:ADM2": {
+              "original_request_id": "repair:23013:137973:221502",
+              "y": 137973,
+              "x": 221502,
+              "original_memberships": [],
+              "full_memberships": [
+                {
+                  "source_id": "gb:TLS:ADM2:22284137B96760248350473",
+                  "feature_ordinal": 44,
+                  "shapeName": "Nitibe",
+                  "kind": "interior"
+                }
+              ]
+            },
+            "gb:TLS:ADM1": {
+              "original_request_id": "repair:23013:137973:221502",
+              "y": 137973,
+              "x": 221502,
+              "original_memberships": [
+                {
+                  "source_id": "gb:TLS:ADM1:58719522B69518090574338",
+                  "feature_ordinal": 0,
+                  "shapeName": "Oecusse",
+                  "kind": "interior"
+                }
+              ],
+              "full_memberships": [
+                {
+                  "source_id": "gb:TLS:ADM1:58719522B69518090574338",
+                  "feature_ordinal": 0,
+                  "shapeName": "Oecusse",
+                  "kind": "interior"
+                }
+              ]
+            }
+          },
+          "symmetric_source_category": "IDN-full-outside__foreign-full-contact",
+          "source_applicability_or_owner_winner": null,
+          "hold_or_owner_changes": false,
+          "authority_or_repair_credit": 0
+        },
+        "government_observations_unchanged": null,
+        "fine_positive_original": [],
+        "fine_positive_full": [
+          {
+            "source_id": "gb:TLS:ADM2:22284137B96760248350473",
+            "feature_ordinal": 44,
+            "shapeName": "Nitibe",
+            "kind": "interior"
+          }
+        ],
+        "owner_or_hold_change": false
+      },
+      "accepted_credit": 0
+    }
+  ],
+  "source_input_context": {
+    "IDN_fine": {
+      "key": "gb:IDN:ADM2",
+      "country": "IDN",
+      "original": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/gb-IDN-ADM2-original-consumed.json",
+        "bytes": 11002896,
+        "sha256": "146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c"
+      },
+      "full": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/geoBoundaries-IDN-ADM2.geojson",
+        "bytes": 158892831,
+        "sha256": "947cedc058888c0c2b2628071d289956c85fe279adb369dcf1327ce2236a5602"
+      },
+      "actual_original_features": 519,
+      "actual_full_features": 519,
+      "all_feature_properties_identical": true,
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2_simplified.geojson",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "represented_year_claim": "2020"
+    },
+    "TLS_fine": {
+      "key": "gb:TLS:ADM2",
+      "country": "TLS",
+      "original": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/gb-TLS-ADM2-original-consumed.json",
+        "bytes": 335036,
+        "sha256": "84106c050c23cb5cedee5f4bc4823c3d3bfcd2400754c67ba4244c6b4c347177"
+      },
+      "full": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining474-source-research-001/worker5-timor14/worker6-followup-001/geoBoundaries-TLS-ADM2.geojson",
+        "bytes": 5303288,
+        "sha256": "a437e47041dcc708e55a76ede2b5db3beec31da3521fbd2a847bf372e1662911"
+      },
+      "original_corpus_part": {
+        "bytes": 93000,
+        "hash_kind": "file-bytes",
+        "offset": 0,
+        "ordinal": 0,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-TLS-ADM2-000.bin.gz",
+        "sha256": "0eafd96d14eb2084456da395b2acfcce26ee3a5a7a2e5cb3c2a7c9235f726359",
+        "uncompressed_bytes": 335036,
+        "uncompressed_sha256": "84106c050c23cb5cedee5f4bc4823c3d3bfcd2400754c67ba4244c6b4c347177"
+      },
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TLS/ADM2/geoBoundaries-TLS-ADM2_simplified.geojson",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "represented_year_claim": "2020",
+      "actual_original_features": 65,
+      "actual_full_features": 65,
+      "all_feature_properties_identical": true,
+      "advertised_feature_count": 65
+    },
+    "TLS_coarse": {
+      "key": "gb:TLS:ADM1",
+      "country": "TLS",
+      "original": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining474-source-research-001/worker1-kapuas257/competent-source-followup-002/gb-TLS-ADM1-original-consumed.json",
+        "bytes": 49457,
+        "sha256": "4d5aa62fe474123b5592e9f09aa119aefde6a004dca05ad1a3b1f20dddf21de1"
+      },
+      "full": {
+        "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-remaining474-source-research-001/worker5-timor14/worker6-followup-001/geoBoundaries-TLS-ADM1.geojson",
+        "bytes": 452378,
+        "sha256": "93f5059719b17c0d7ea475f79b53e2c6d7c6883726cb0e4464c656c3bdf31b95"
+      },
+      "original_corpus_part": {
+        "bytes": 14233,
+        "hash_kind": "file-bytes",
+        "offset": 0,
+        "ordinal": 0,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-TLS-ADM1-000.bin.gz",
+        "sha256": "a4a0436700d416affa9ca45251047d2c3144493c7f74f728caff5e6ad46f1460",
+        "uncompressed_bytes": 49457,
+        "uncompressed_sha256": "4d5aa62fe474123b5592e9f09aa119aefde6a004dca05ad1a3b1f20dddf21de1"
+      },
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TLS/ADM1/geoBoundaries-TLS-ADM1_simplified.geojson",
+      "license": "Open Data Commons Open Database License 1.0",
+      "represented_year_claim": "2017",
+      "actual_original_features": 13,
+      "actual_full_features": 13,
+      "all_feature_properties_identical": true,
+      "advertised_feature_count": 13
+    }
+  },
+  "TLS_fine_metadata": {
+    "boundaryID": "TLS-ADM2-22284137",
+    "boundaryISO": "TLS",
+    "boundaryYear": "2020",
+    "boundaryType": "ADM2",
+    "boundarySource": "WHO, OCHA ROAP",
+    "boundaryCanonical": "Administrative Posts",
+    "boundaryLicense": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licenseDetail": "",
+    "licenseSource": "https//data.humdata.org/dataset/timor-leste-administrative-boundaries-levels-0-3",
+    "boundarySourceURL": "https//data.humdata.org/dataset/timor-leste-administrative-boundaries-levels-0-3",
+    "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+    "buildDate": "Dec 12, 2023",
+    "admUnitCount": "65",
+    "meanVertices": "1824.0",
+    "minVertices": "360",
+    "maxVertices": "6662",
+    "meanPerimeterLengthKM": "83.74509932087298",
+    "maxPerimeterLengthKM": "162.69123997412566",
+    "minPerimeterLengthKM": "17.844244240959387",
+    "meanAreaSqKM": "229.11277627227736",
+    "minAreaSqKM": "5.131836622219308",
+    "maxAreaSqKM": "621.32307775753"
+  },
+  "TLS_coarse_metadata": {
+    "boundaryID": "TLS-ADM1-58719522",
+    "boundaryISO": "TLS",
+    "boundaryYear": "2017",
+    "boundaryType": "ADM1",
+    "boundarySource": "OpenStreetMap, Wambacher",
+    "boundaryCanonical": "Municipalities",
+    "boundaryLicense": "Open Data Commons Open Database License 1.0",
+    "licenseDetail": "Open Data Commons Open Database License 1.0",
+    "licenseSource": "https//www.openstreetmap.org/copyright",
+    "boundarySourceURL": "https//wambachers-osm.website/boundaries/",
+    "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+    "buildDate": "Dec 12, 2023",
+    "admUnitCount": "13",
+    "meanVertices": "1207.0",
+    "minVertices": "51",
+    "maxVertices": "5067",
+    "meanPerimeterLengthKM": "178.81124478100352",
+    "maxPerimeterLengthKM": "234.97774842088717",
+    "minPerimeterLengthKM": "124.59279214218161",
+    "meanAreaSqKM": "1145.3249931260707",
+    "minAreaSqKM": "345.66161266531384",
+    "maxAreaSqKM": "1952.5580021962242"
+  },
+  "actual_TLS_original_features": 65,
+  "actual_TLS_full_features": 65,
+  "all_TLS_feature_properties_identical": true,
+  "geometry_validities": [
+    {
+      "role": "contrary-full-TLS-fine",
+      "source_id": "gb:TLS:ADM2:22284137B33809863123080",
+      "feature_ordinal": 17,
+      "properties": {
+        "shapeName": "Fatululic",
+        "shapeISO": "",
+        "shapeID": "22284137B33809863123080",
+        "shapeGroup": "TLS",
+        "shapeType": "ADM2"
+      },
+      "geometry_sha256_canonical_json": "1ea49e09eb578d3333d64278b331fb6d42f4218a538b9904b8c2645db7e0a50a",
+      "valid": true,
+      "validity": "Valid Geometry"
+    },
+    {
+      "role": "contrary-full-TLS-fine",
+      "source_id": "gb:TLS:ADM2:22284137B96760248350473",
+      "feature_ordinal": 44,
+      "properties": {
+        "shapeName": "Nitibe",
+        "shapeISO": "",
+        "shapeID": "22284137B96760248350473",
+        "shapeGroup": "TLS",
+        "shapeType": "ADM2"
+      },
+      "geometry_sha256_canonical_json": "e3359d4a091eb676e02873513c1732e90cb7c954427a4ef061187ca08432beec",
+      "valid": true,
+      "validity": "Valid Geometry"
+    },
+    {
+      "role": "positive-original-IDN-fine",
+      "source_id": "gb:IDN:ADM2:22746128B36840991830224",
+      "properties": {
+        "shapeName": "Belu",
+        "shapeISO": "",
+        "shapeID": "22746128B36840991830224",
+        "shapeGroup": "IDN",
+        "shapeType": "ADM2"
+      },
+      "geometry_sha256_canonical_json": "c1f4d610dda7106deeb8ece77f455d5d32d80d77f71f34b52685ee2e32a7d4c8",
+      "valid": true,
+      "validity": "Valid Geometry"
+    },
+    {
+      "role": "positive-original-IDN-fine",
+      "source_id": "gb:IDN:ADM2:22746128B66987763142599",
+      "properties": {
+        "shapeName": "Timor Tengah Utara",
+        "shapeISO": "",
+        "shapeID": "22746128B66987763142599",
+        "shapeGroup": "IDN",
+        "shapeType": "ADM2"
+      },
+      "geometry_sha256_canonical_json": "ce9e8a9faeeef97b88c4b640910bc480ad21d88be5b874bf87b33ebbbd447d82",
+      "valid": true,
+      "validity": "Valid Geometry"
+    }
+  ],
+  "unchanged_native_predicate_prefix": {
+    "bytes": 11939,
+    "sha256": "8598cbac45c1667f5e00e6927aa9164533588bee35381b4aa27e61380959ea5f"
+  },
+  "limits": [
+    "Original positive IDN simplified members are interior, but all519 full IDN members outside at both keys.",
+    "Full TLS fine is an actual contrary fine member, unlike a country/state-only claim. Its source geometry remains unchanged and cannot be equated with the original TLS variant, which is outside.",
+    "WHO/OCHA fine metadata and older coarse source context remain separate; none proves a country jurisdiction ruling.",
+    "The three remaining TLS coarse-only keys are excluded, including their two exclusive-IDN-reference keys.",
+    "Parent source-choice acceptance and every stock qualification/conservation/delivery gate remain outstanding."
+  ],
+  "elapsed_seconds": 0.4965882840042468,
+  "new_scientific_producer_runs": 0,
+  "accepted_credit": 0
+}

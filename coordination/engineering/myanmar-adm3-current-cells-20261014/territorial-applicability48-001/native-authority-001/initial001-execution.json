@@ -1,0 +1,78 @@
+{
+  "command": [
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "native-authority",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/deffe01c536ee2f18f79ce6584ab3dc5127d53015f04a5988e18700e807b9c01/work/.cache/worker5-mmr48-native-authority-config.json",
+    ".cache/delivery-handoff/worker5-mmr48-native-authority-001"
+  ],
+  "cwd": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/deffe01c536ee2f18f79ce6584ab3dc5127d53015f04a5988e18700e807b9c01/work",
+  "executing_commit": "918061c88580fdba470989099bd814338a47b4b6",
+  "executing_tree": "7632b482b57c785f04ee6c5818fd77120e9a1277",
+  "input_history": {
+    "status": "GENUINE PRIVATE IMMUTABLE INPUTS; NOT QUALIFICATION",
+    "head": "918061c88580fdba470989099bd814338a47b4b6",
+    "tree": "7632b482b57c785f04ee6c5818fd77120e9a1277",
+    "base": "7d11f69e7c58ccbbbbdbadb761243d615a41d446",
+    "ref": "refs/heads/engineering/mmr-oldphysical48-input-history-20261016",
+    "adoption_commit": "ea19b2d88da865d6f836e341104bc0edd89213a1",
+    "original_source_base": {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability48-001/native-inputs-001/source-evidence-base.json",
+      "mode": "100644",
+      "git_blob_oid": "c92835d966773ede258f0c45a81305042aace5b7",
+      "bytes": 8356722,
+      "sha256": "9f3a7e5b8ad31cc94b87d8438ad956c52fe5a431fbd1bc3773cb7ba4fbbe38c2",
+      "commit": "ea19b2d88da865d6f836e341104bc0edd89213a1"
+    },
+    "payload": {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability48-001/native-inputs-001/adopted-territorial-applicability48-v1.json",
+      "mode": "100644",
+      "git_blob_oid": "4f7848f4c6f1df2700955acd391d060ea5670c41",
+      "bytes": 35975,
+      "sha256": "000afebde2978c31f0530e2c4c3e1b9198384acd280fdc6d0e22fde282d3a237",
+      "commit": "180290146b85f940d937e21332e8e9c65addbb44"
+    },
+    "source_evidence": {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability48-001/native-inputs-001/source-evidence.json",
+      "mode": "100644",
+      "git_blob_oid": "2dc4d281a771a994e48fa4af87f999f81629451e",
+      "bytes": 2200170,
+      "sha256": "fbdcb695802e63b59d174d686d12c81713656f571c9992dde2156869a2d109ea",
+      "commit": "582bc74c0449f58be7a679a95d4e253c36b982c1"
+    },
+    "native_patch": {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability48-001/native-inputs-001/candidate-native-patch.json",
+      "mode": "100644",
+      "git_blob_oid": "9c5a9837403e378e4915c815f6e6e7b45185fe76",
+      "bytes": 3987,
+      "sha256": "2f5753743c4e10572b9c14f0f0c3170a8a5e80ed569a5f8ec4d8abc65f685b8c",
+      "commit": "ea19b2d88da865d6f836e341104bc0edd89213a1"
+    },
+    "native_config": {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/territorial-applicability48-001/native-inputs-001/native-authority-config.json",
+      "mode": "100644",
+      "git_blob_oid": "5c671c0f50ccb5d54d62ae3f6c8dbb4543f682dd",
+      "bytes": 444,
+      "sha256": "1e1f7d45d46f589732e7e19a0513ee835c735713791f8a2e51a55f39ea09a65b",
+      "commit": "918061c88580fdba470989099bd814338a47b4b6"
+    },
+    "keys": 48,
+    "targets": 3,
+    "raw_contacts": 66,
+    "whole_original_negatives": 51,
+    "whole72physical_globals_unchanged": true,
+    "historical_and_typed_hash_encodings_distinct_valid": true,
+    "numeric_allowances": false,
+    "remote_pushed": false,
+    "accepted_repair_credit": 0
+  },
+  "started_utc": "2026-10-16T01:42:13.077076+00:00",
+  "timeout_or_memory_flags": false,
+  "source_or_physical_producer_replay": false,
+  "accepted_or_selected_delivery_claimed": false,
+  "exit_code": 1,
+  "elapsed_seconds": 0.05596941599999994,
+  "ended_utc": "2026-10-16T01:42:13.133623+00:00",
+  "destination": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/deffe01c536ee2f18f79ce6584ab3dc5127d53015f04a5988e18700e807b9c01/work/.cache/delivery-handoff/worker5-mmr48-native-authority-001",
+  "root_head_after": "918061c88580fdba470989099bd814338a47b4b6"
+}

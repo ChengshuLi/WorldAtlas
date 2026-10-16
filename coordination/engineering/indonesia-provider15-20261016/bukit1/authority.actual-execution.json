@@ -1,0 +1,18 @@
+{
+  "command": [
+    "node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "native-authority",
+    "coordination/engineering/indonesia-provider15-20261016/bukit1/authority-config.json",
+    "coordination/engineering/indonesia-provider15-20261016/bukit1/authority"
+  ],
+  "executing_input_head": "10dd423da556c6a715725072091f6ae8e5ed7397",
+  "reviewed_code_head": "9fa67a901e6202622752e4487d9ffb5a7440b0f5",
+  "elapsed_seconds": 4.242126928002108,
+  "exit_code": 0,
+  "maxrss_wait4_children_bytes": 396357632,
+  "rss_interpretation": "Maximum per-process child ru_maxrss reported by Linux wait4, not a sampled concurrent group sum. No memory cap/override.",
+  "user_seconds": 4.600744,
+  "system_seconds": 6.090204,
+  "new_source_or_physical_producer_calls": 0
+}
