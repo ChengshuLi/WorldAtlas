@@ -1,0 +1,8032 @@
+{
+  "status": "Completed-source/context and exact-original emitted-product review;finalcandidate/consumer stillpending",
+  "expected_cohorts": {
+    "LAO_KHM141": 141,
+    "CN_retained818": 818,
+    "CN_newwhole274": 274
+  },
+  "original_quartets": 9,
+  "constructor_rows": 41,
+  "unique_original_keys": 1233,
+  "unique_positions": 1233,
+  "physical_classes": {
+    "mapped_land_support": 1227,
+    "mapped_inland_water_support": 6
+  },
+  "water_keys": [
+    {
+      "owner": 48373,
+      "y": 123052,
+      "x": 207627
+    },
+    {
+      "owner": 48373,
+      "y": 123052,
+      "x": 207628
+    },
+    {
+      "owner": 48373,
+      "y": 123052,
+      "x": 207629
+    },
+    {
+      "owner": 48373,
+      "y": 123052,
+      "x": 207630
+    },
+    {
+      "owner": 48373,
+      "y": 123053,
+      "x": 207626
+    },
+    {
+      "owner": 48373,
+      "y": 123053,
+      "x": 207627
+    }
+  ],
+  "original_target_count": 41,
+  "cohort_union_exact": true,
+  "no_671_authority_or_patch_in_original_quartets": true,
+  "quartets": [
+    {
+      "quartet": 1,
+      "constructor": {
+        "commit": "1077a48ccc3278183ef5758d0630fa17d3e7baed",
+        "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-0b0247438ee1-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "4f5611403aa43a523073abd6b47cb6eec2e325e0",
+        "bytes": 48265,
+        "sha256": "94f6f08c871cce2cb3f93bfedf6c7a8f15eb0ae16ca6733656f8a5b314c7878c"
+      },
+      "original_rule": {
+        "commit": "1077a48ccc3278183ef5758d0630fa17d3e7baed",
+        "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-0b0247438ee1-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "9ad39dde8ea63560fdf41a5e3cbb0dfc305bd389",
+        "bytes": 817,
+        "sha256": "9760a88310715ff23b962243a04bb806a69c1dfc938374936a942107ede28e46"
+      },
+      "exact_keys": 112,
+      "owners": {
+        "48365": 12,
+        "48212": 41,
+        "48599": 3,
+        "48597": 28,
+        "48596": 4,
+        "48181": 3,
+        "48757": 2,
+        "48661": 6,
+        "48556": 3,
+        "48373": 6,
+        "48268": 3,
+        "48532": 1
+      },
+      "classes": {
+        "mapped_land_support": 106,
+        "mapped_inland_water_support": 6
+      },
+      "targets": [
+        {
+          "owner": 48181,
+          "target": "gb:VNM:ADM2:81297802B14510014839166",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48212,
+          "target": "gb:VNM:ADM2:81297802B20367953633835",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48268,
+          "target": "gb:VNM:ADM2:81297802B2701886719052",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48365,
+          "target": "gb:VNM:ADM2:81297802B39086824409595",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48373,
+          "target": "gb:VNM:ADM2:81297802B41294306698552",
+          "coverage_classes": [
+            "mapped_inland_water_support"
+          ]
+        },
+        {
+          "owner": 48532,
+          "target": "gb:VNM:ADM2:81297802B63375818356773",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48556,
+          "target": "gb:VNM:ADM2:81297802B66107700635107",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48596,
+          "target": "gb:VNM:ADM2:81297802B72423367852086",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48597,
+          "target": "gb:VNM:ADM2:81297802B72565329345275",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48599,
+          "target": "gb:VNM:ADM2:81297802B72882386082996",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48661,
+          "target": "gb:VNM:ADM2:81297802B81765499113898",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48757,
+          "target": "gb:VNM:ADM2:81297802B94706269623038",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        }
+      ]
+    },
+    {
+      "quartet": 2,
+      "constructor": {
+        "commit": "1077a48ccc3278183ef5758d0630fa17d3e7baed",
+        "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-31701e6f2811-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "012fe858a6955e5487d43abf4e40aeedf5e80fe6",
+        "bytes": 4265,
+        "sha256": "b65e9bea4ff54387d92625b86c182549675ac29bf4bcb956d5710d61dbfd369d"
+      },
+      "original_rule": {
+        "commit": "1077a48ccc3278183ef5758d0630fa17d3e7baed",
+        "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-31701e6f2811-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "636aac26740e6423e6072f7dcdd1768deb252dce",
+        "bytes": 815,
+        "sha256": "705cf936323882268a4717ebf6bea37f1e665376ec3dbd3ee5b7c0cb1ac87521"
+      },
+      "exact_keys": 1,
+      "owners": {
+        "48348": 1
+      },
+      "classes": {
+        "mapped_land_support": 1
+      },
+      "targets": [
+        {
+          "owner": 48348,
+          "target": "gb:VNM:ADM2:81297802B37103290877054",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        }
+      ]
+    },
+    {
+      "quartet": 3,
+      "constructor": {
+        "commit": "1077a48ccc3278183ef5758d0630fa17d3e7baed",
+        "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native18-4ade7d21d33e-v2-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "bfe7b83755ad5b53a82c8aadebcbaa1164b44543",
+        "bytes": 4991,
+        "sha256": "dbcc32f8285e634e56906601e85cb55fa8cbbe986bdda469465b5a4db911ae22"
+      },
+      "original_rule": {
+        "commit": "1077a48ccc3278183ef5758d0630fa17d3e7baed",
+        "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native18-4ade7d21d33e-v2-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "055753fa9448d5172250be8bdc3bc4f641559cce",
+        "bytes": 832,
+        "sha256": "7a1346b20fa55cdddc5cb6d21029f54568a29007da39c7cce43f3b7bb18be843"
+      },
+      "exact_keys": 18,
+      "owners": {
+        "48575": 18
+      },
+      "classes": {
+        "mapped_land_support": 18
+      },
+      "targets": [
+        {
+          "owner": 48575,
+          "target": "gb:VNM:ADM2:81297802B68440719308655",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        }
+      ]
+    },
+    {
+      "quartet": 4,
+      "constructor": {
+        "commit": "1077a48ccc3278183ef5758d0630fa17d3e7baed",
+        "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-ac86cd668766-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "5d3807e568c847bd36b45ea560f02f55a8c6fdc2",
+        "bytes": 11231,
+        "sha256": "cc39533a2bfec222078ec5975c3dbc0564b33591af99b3f087772cca14646a3b"
+      },
+      "original_rule": {
+        "commit": "1077a48ccc3278183ef5758d0630fa17d3e7baed",
+        "path": "coordination/engineering/vietnam-current-cell-20261016/lao-khm178/native141-input-checkpoint/actual-qualified138/native138-ac86cd668766-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "3a870f0da118d35e2a6030f7b93fd81e9aca82c1",
+        "bytes": 815,
+        "sha256": "0c12e1a440430ac855b3ed8b064ab2a50e822a6b2366011ec740e552f9292926"
+      },
+      "exact_keys": 7,
+      "owners": {
+        "48336": 6,
+        "48168": 1
+      },
+      "classes": {
+        "mapped_land_support": 7
+      },
+      "targets": [
+        {
+          "owner": 48168,
+          "target": "gb:VNM:ADM2:81297802B1284717956892",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48336,
+          "target": "gb:VNM:ADM2:81297802B35904575630157",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        }
+      ]
+    },
+    {
+      "quartet": 5,
+      "constructor": {
+        "commit": "ce348825d4bba7c1fc8adbb519fd55837268b7cd",
+        "path": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/next557/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "1b2bf6b0369d64715091c0a5cb6a28ec02317d5e",
+        "bytes": 8948,
+        "sha256": "398b51ed6007caede39658663116a92e38368c06d5a71bf71267a3afda4a38b8"
+      },
+      "original_rule": {
+        "commit": "ce348825d4bba7c1fc8adbb519fd55837268b7cd",
+        "path": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/next557/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "f6a37aafdade41f61021859da3e89098e520a869",
+        "bytes": 786,
+        "sha256": "55b24eaf3f7a583db0a424f9de1e2f07b83a2d1cdfcd33d45e8fce2e268e9180"
+      },
+      "exact_keys": 251,
+      "owners": {
+        "48578": 212,
+        "48156": 39
+      },
+      "classes": {
+        "mapped_land_support": 251
+      },
+      "targets": [
+        {
+          "owner": 48156,
+          "target": "gb:VNM:ADM2:81297802B11536853186467",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48578,
+          "target": "gb:VNM:ADM2:81297802B69562638547328",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        }
+      ]
+    },
+    {
+      "quartet": 6,
+      "constructor": {
+        "commit": "ce348825d4bba7c1fc8adbb519fd55837268b7cd",
+        "path": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/next351/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "46099a7a5b0b509653145ffece3defe1ccb63646",
+        "bytes": 27575,
+        "sha256": "efecf0132e194b63cf647b8c85cbfe7c1b9fd8edbb08fa9e8c22693f9e0f5069"
+      },
+      "original_rule": {
+        "commit": "ce348825d4bba7c1fc8adbb519fd55837268b7cd",
+        "path": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/next351/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "436a0b579c4ce6d369a6be1782862abaf9511757",
+        "bytes": 787,
+        "sha256": "9e4760347d4fb9923b6644efabe22bb4d32562e18e91aee567f7d3075947b8cb"
+      },
+      "exact_keys": 479,
+      "owners": {
+        "48681": 91,
+        "48535": 56,
+        "48619": 53,
+        "48600": 42,
+        "48183": 105,
+        "48308": 15,
+        "48460": 1,
+        "48756": 72,
+        "48439": 44
+      },
+      "classes": {
+        "mapped_land_support": 479
+      },
+      "targets": [
+        {
+          "owner": 48183,
+          "target": "gb:VNM:ADM2:81297802B14703404520131",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48308,
+          "target": "gb:VNM:ADM2:81297802B32838967164839",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48439,
+          "target": "gb:VNM:ADM2:81297802B50713424689894",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48460,
+          "target": "gb:VNM:ADM2:81297802B53696601888295",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48535,
+          "target": "gb:VNM:ADM2:81297802B6357673458882",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48600,
+          "target": "gb:VNM:ADM2:81297802B72919536287172",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48619,
+          "target": "gb:VNM:ADM2:81297802B75623207701482",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48681,
+          "target": "gb:VNM:ADM2:81297802B84784766195181",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48756,
+          "target": "gb:VNM:ADM2:81297802B94679881937971",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        }
+      ]
+    },
+    {
+      "quartet": 7,
+      "constructor": {
+        "commit": "ce348825d4bba7c1fc8adbb519fd55837268b7cd",
+        "path": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/missing235/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "3604e1b1c027f3b0af20dc9741aec0202f88f6e8",
+        "bytes": 19182,
+        "sha256": "4e624b3ebac723e2d799918e848f57d6b634fb009b6af163ca4758d6daf397cb"
+      },
+      "original_rule": {
+        "commit": "ce348825d4bba7c1fc8adbb519fd55837268b7cd",
+        "path": "coordination/engineering/vietnam-current-cell-20261016/chn818-native-authority/actual/missing235/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "5542e15d96ab74ade3e085c4ad03170de359f226",
+        "bytes": 793,
+        "sha256": "7facf52c8d1b2ef58b6d98a96ba859bc3f4c1eaf6e32cc0a188b60e80ad8f261"
+      },
+      "exact_keys": 88,
+      "owners": {
+        "48231": 6,
+        "48410": 9,
+        "48473": 22,
+        "48634": 21,
+        "48503": 11,
+        "48254": 12,
+        "48249": 3,
+        "48382": 4
+      },
+      "classes": {
+        "mapped_land_support": 88
+      },
+      "targets": [
+        {
+          "owner": 48231,
+          "target": "gb:VNM:ADM2:81297802B22471082550929",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48249,
+          "target": "gb:VNM:ADM2:81297802B24341511138047",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48254,
+          "target": "gb:VNM:ADM2:81297802B2489932619372",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48382,
+          "target": "gb:VNM:ADM2:81297802B42277751936117",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48410,
+          "target": "gb:VNM:ADM2:81297802B46332855119377",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48473,
+          "target": "gb:VNM:ADM2:81297802B55237865359696",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48503,
+          "target": "gb:VNM:ADM2:81297802B58374178577075",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48634,
+          "target": "gb:VNM:ADM2:81297802B7761745227660",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        }
+      ]
+    },
+    {
+      "quartet": 8,
+      "constructor": {
+        "commit": "7ad23c0827f915a6b9ae9ac70ec46577727476eb",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/border-chn274-20261016/native-authority-274-v1/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "c1681bb70a7b5af08241914277160e91137cc4f2",
+        "bytes": 18390,
+        "sha256": "5aa7ac6106aecbfab9b440c4cf7ccc4ad5d33eac1bb36cd657e7ba0b7e0d264a"
+      },
+      "original_rule": {
+        "commit": "7ad23c0827f915a6b9ae9ac70ec46577727476eb",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/border-chn274-20261016/native-authority-274-v1/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "71c672b08bd15c1f3cdb12dd6e1552b9f3ae20ab",
+        "bytes": 744,
+        "sha256": "405ac94b02427eaf43d651deb34ab1fbcb7f0569cb1d46539717f90d7e9e20b8"
+      },
+      "exact_keys": 274,
+      "owners": {
+        "48773": 9,
+        "48755": 152,
+        "48425": 20,
+        "48477": 92,
+        "48257": 1
+      },
+      "classes": {
+        "mapped_land_support": 274
+      },
+      "targets": [
+        {
+          "owner": 48257,
+          "target": "gb:VNM:ADM2:81297802B25560916681091",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48425,
+          "target": "gb:VNM:ADM2:81297802B47938422647464",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48477,
+          "target": "gb:VNM:ADM2:81297802B55460345655510",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48755,
+          "target": "gb:VNM:ADM2:81297802B94651516294700",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        },
+        {
+          "owner": 48773,
+          "target": "gb:VNM:ADM2:81297802B9711168823282",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        }
+      ]
+    },
+    {
+      "quartet": 9,
+      "constructor": {
+        "commit": "0fc54fc11599bc93052406573f34e6e00aff3c59",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/border-hongngu3-20261016/native-authority-3-v1/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "f891857668bb6b5e4bb6a2ce83faa2a2ead1f9b3",
+        "bytes": 2506,
+        "sha256": "edf24e4d2f57b234c3f171cf11ccb207b895924185910165e6a2f7b32b6006aa"
+      },
+      "original_rule": {
+        "commit": "0fc54fc11599bc93052406573f34e6e00aff3c59",
+        "path": "coordination/engineering/vietnam-current-cell-20261014/border-hongngu3-20261016/native-authority-3-v1/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "edb39ceeac6aab2137ab5ed18277f14d807da45c",
+        "bytes": 741,
+        "sha256": "10cd8db20a94e50d606ab7275fc20720c134f20c3641ad245b6b755718bd96b0"
+      },
+      "exact_keys": 3,
+      "owners": {
+        "48437": 3
+      },
+      "classes": {
+        "mapped_land_support": 3
+      },
+      "targets": [
+        {
+          "owner": 48437,
+          "target": "gb:VNM:ADM2:81297802B50587214410487",
+          "coverage_classes": [
+            "mapped_land_support"
+          ]
+        }
+      ]
+    }
+  ],
+  "expected_records": [
+    {
+      "owner": 48156,
+      "y": 114070,
+      "x": 206523,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114071,
+      "x": 206523,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114081,
+      "x": 206619,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114128,
+      "x": 206513,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114129,
+      "x": 206665,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114130,
+      "x": 206666,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114131,
+      "x": 206668,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114132,
+      "x": 206669,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114133,
+      "x": 206670,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114135,
+      "x": 206671,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114136,
+      "x": 206672,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114137,
+      "x": 206673,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114138,
+      "x": 206674,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114171,
+      "x": 206697,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114172,
+      "x": 206698,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114173,
+      "x": 206699,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114174,
+      "x": 206700,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114174,
+      "x": 206701,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114175,
+      "x": 206701,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114175,
+      "x": 206702,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114176,
+      "x": 206702,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114176,
+      "x": 206703,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114177,
+      "x": 206703,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114193,
+      "x": 206720,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114195,
+      "x": 206721,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114196,
+      "x": 206722,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114198,
+      "x": 206723,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114199,
+      "x": 206724,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114200,
+      "x": 206724,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114229,
+      "x": 206764,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114229,
+      "x": 206765,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114229,
+      "x": 206766,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114230,
+      "x": 206765,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114230,
+      "x": 206766,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114230,
+      "x": 206767,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114231,
+      "x": 206766,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114231,
+      "x": 206767,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114232,
+      "x": 206767,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48156,
+      "y": 114232,
+      "x": 206768,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48168,
+      "y": 115099,
+      "x": 205997,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48181,
+      "y": 122073,
+      "x": 209286,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48181,
+      "y": 122074,
+      "x": 209286,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48181,
+      "y": 122075,
+      "x": 209286,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114271,
+      "x": 206043,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114271,
+      "x": 206044,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114271,
+      "x": 206045,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114271,
+      "x": 206046,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114271,
+      "x": 206047,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114271,
+      "x": 206048,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114271,
+      "x": 206057,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114271,
+      "x": 206058,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114271,
+      "x": 206059,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114272,
+      "x": 206045,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114272,
+      "x": 206046,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114272,
+      "x": 206047,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114272,
+      "x": 206048,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114272,
+      "x": 206049,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114272,
+      "x": 206050,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114272,
+      "x": 206051,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114272,
+      "x": 206056,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114272,
+      "x": 206057,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114272,
+      "x": 206058,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114272,
+      "x": 206059,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114272,
+      "x": 206060,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114273,
+      "x": 206050,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114273,
+      "x": 206051,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114273,
+      "x": 206052,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114273,
+      "x": 206053,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114273,
+      "x": 206054,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114273,
+      "x": 206055,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114273,
+      "x": 206056,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114273,
+      "x": 206057,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114273,
+      "x": 206058,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114273,
+      "x": 206059,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114273,
+      "x": 206060,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114273,
+      "x": 206061,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114274,
+      "x": 206056,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114274,
+      "x": 206057,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114274,
+      "x": 206058,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114274,
+      "x": 206059,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114274,
+      "x": 206060,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114274,
+      "x": 206061,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114274,
+      "x": 206062,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114275,
+      "x": 206061,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114275,
+      "x": 206062,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114275,
+      "x": 206063,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114275,
+      "x": 206078,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114289,
+      "x": 206090,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114289,
+      "x": 206091,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114290,
+      "x": 206089,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114290,
+      "x": 206090,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114290,
+      "x": 206091,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114290,
+      "x": 206092,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114290,
+      "x": 206093,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114290,
+      "x": 206096,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114290,
+      "x": 206097,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114290,
+      "x": 206098,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114291,
+      "x": 206091,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114291,
+      "x": 206092,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114291,
+      "x": 206093,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114291,
+      "x": 206094,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114291,
+      "x": 206095,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114291,
+      "x": 206096,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114291,
+      "x": 206097,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114291,
+      "x": 206098,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114291,
+      "x": 206099,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114292,
+      "x": 206092,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114292,
+      "x": 206093,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114292,
+      "x": 206094,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114292,
+      "x": 206095,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114292,
+      "x": 206096,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114292,
+      "x": 206097,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114292,
+      "x": 206098,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114292,
+      "x": 206099,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114293,
+      "x": 206094,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114293,
+      "x": 206095,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114293,
+      "x": 206096,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114293,
+      "x": 206097,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114293,
+      "x": 206098,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114293,
+      "x": 206099,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114294,
+      "x": 206096,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114294,
+      "x": 206097,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114294,
+      "x": 206098,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114294,
+      "x": 206099,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114294,
+      "x": 206100,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114295,
+      "x": 206098,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114295,
+      "x": 206099,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114295,
+      "x": 206100,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114296,
+      "x": 206100,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114296,
+      "x": 206101,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114297,
+      "x": 206101,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114297,
+      "x": 206103,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114298,
+      "x": 206103,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114298,
+      "x": 206104,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114298,
+      "x": 206105,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114298,
+      "x": 206106,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114299,
+      "x": 206105,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114299,
+      "x": 206106,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114300,
+      "x": 206107,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114301,
+      "x": 206109,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114302,
+      "x": 206110,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114302,
+      "x": 206117,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114302,
+      "x": 206118,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114302,
+      "x": 206119,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114302,
+      "x": 206120,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114303,
+      "x": 206112,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114303,
+      "x": 206115,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48183,
+      "y": 114303,
+      "x": 206116,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119835,
+      "x": 209456,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119836,
+      "x": 209456,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119872,
+      "x": 209451,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119872,
+      "x": 209452,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119872,
+      "x": 209453,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119872,
+      "x": 209454,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119873,
+      "x": 209449,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119873,
+      "x": 209450,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119873,
+      "x": 209451,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119873,
+      "x": 209452,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119873,
+      "x": 209453,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119874,
+      "x": 209448,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119874,
+      "x": 209449,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119874,
+      "x": 209450,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119874,
+      "x": 209451,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119875,
+      "x": 209447,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119875,
+      "x": 209448,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119875,
+      "x": 209449,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119876,
+      "x": 209446,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119876,
+      "x": 209447,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119877,
+      "x": 209445,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119879,
+      "x": 209439,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119879,
+      "x": 209440,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119879,
+      "x": 209441,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119880,
+      "x": 209436,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119880,
+      "x": 209437,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119880,
+      "x": 209438,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119880,
+      "x": 209439,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119881,
+      "x": 209433,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119881,
+      "x": 209434,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119881,
+      "x": 209435,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119881,
+      "x": 209436,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119881,
+      "x": 209437,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119882,
+      "x": 209431,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119882,
+      "x": 209432,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119882,
+      "x": 209433,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119882,
+      "x": 209434,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119882,
+      "x": 209435,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119883,
+      "x": 209432,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 119883,
+      "x": 209433,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48212,
+      "y": 120026,
+      "x": 209345,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48231,
+      "y": 114799,
+      "x": 209040,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48231,
+      "y": 114801,
+      "x": 209046,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48231,
+      "y": 114802,
+      "x": 209049,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48231,
+      "y": 114810,
+      "x": 209072,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48231,
+      "y": 114836,
+      "x": 209104,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48231,
+      "y": 114837,
+      "x": 209105,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48249,
+      "y": 114314,
+      "x": 208689,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48249,
+      "y": 114317,
+      "x": 208687,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48249,
+      "y": 114319,
+      "x": 208686,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48254,
+      "y": 113648,
+      "x": 207880,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48254,
+      "y": 113649,
+      "x": 207881,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48254,
+      "y": 113650,
+      "x": 207882,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48254,
+      "y": 113651,
+      "x": 207883,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48254,
+      "y": 113652,
+      "x": 207883,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48254,
+      "y": 113652,
+      "x": 207884,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48254,
+      "y": 113653,
+      "x": 207884,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48254,
+      "y": 113654,
+      "x": 207885,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48254,
+      "y": 113655,
+      "x": 207886,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48254,
+      "y": 113694,
+      "x": 207908,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48254,
+      "y": 113698,
+      "x": 207910,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48254,
+      "y": 113736,
+      "x": 207962,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48257,
+      "y": 114214,
+      "x": 206827,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48268,
+      "y": 116456,
+      "x": 207051,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48268,
+      "y": 116457,
+      "x": 207052,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48268,
+      "y": 116458,
+      "x": 207052,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48308,
+      "y": 114239,
+      "x": 206776,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48308,
+      "y": 114239,
+      "x": 206777,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48308,
+      "y": 114239,
+      "x": 206778,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48308,
+      "y": 114239,
+      "x": 206779,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48308,
+      "y": 114240,
+      "x": 206777,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48308,
+      "y": 114240,
+      "x": 206778,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48308,
+      "y": 114240,
+      "x": 206779,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48308,
+      "y": 114240,
+      "x": 206780,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48308,
+      "y": 114241,
+      "x": 206778,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48308,
+      "y": 114241,
+      "x": 206779,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48308,
+      "y": 114241,
+      "x": 206780,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48308,
+      "y": 114242,
+      "x": 206780,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48308,
+      "y": 114242,
+      "x": 206781,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48308,
+      "y": 114243,
+      "x": 206781,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48308,
+      "y": 114244,
+      "x": 206782,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48336,
+      "y": 115573,
+      "x": 206283,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48336,
+      "y": 115602,
+      "x": 206372,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48336,
+      "y": 115602,
+      "x": 206373,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48336,
+      "y": 115602,
+      "x": 206374,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48336,
+      "y": 115602,
+      "x": 206375,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48336,
+      "y": 115602,
+      "x": 206376,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48348,
+      "y": 116254,
+      "x": 207452,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48365,
+      "y": 114786,
+      "x": 205955,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48365,
+      "y": 114787,
+      "x": 205955,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48365,
+      "y": 114788,
+      "x": 205954,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48365,
+      "y": 114861,
+      "x": 205962,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48365,
+      "y": 114862,
+      "x": 205959,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48365,
+      "y": 114862,
+      "x": 205960,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48365,
+      "y": 114862,
+      "x": 205961,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48365,
+      "y": 114863,
+      "x": 205960,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48365,
+      "y": 114869,
+      "x": 206033,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48365,
+      "y": 114870,
+      "x": 206030,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48365,
+      "y": 114887,
+      "x": 205931,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48365,
+      "y": 114893,
+      "x": 205927,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48373,
+      "y": 123052,
+      "x": 207627,
+      "physical_class": "mapped_inland_water_support"
+    },
+    {
+      "owner": 48373,
+      "y": 123052,
+      "x": 207628,
+      "physical_class": "mapped_inland_water_support"
+    },
+    {
+      "owner": 48373,
+      "y": 123052,
+      "x": 207629,
+      "physical_class": "mapped_inland_water_support"
+    },
+    {
+      "owner": 48373,
+      "y": 123052,
+      "x": 207630,
+      "physical_class": "mapped_inland_water_support"
+    },
+    {
+      "owner": 48373,
+      "y": 123053,
+      "x": 207626,
+      "physical_class": "mapped_inland_water_support"
+    },
+    {
+      "owner": 48373,
+      "y": 123053,
+      "x": 207627,
+      "physical_class": "mapped_inland_water_support"
+    },
+    {
+      "owner": 48382,
+      "y": 113926,
+      "x": 208683,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48382,
+      "y": 113926,
+      "x": 208684,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48382,
+      "y": 113926,
+      "x": 208685,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48382,
+      "y": 113927,
+      "x": 208686,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48410,
+      "y": 114192,
+      "x": 208718,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48410,
+      "y": 114192,
+      "x": 208719,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48410,
+      "y": 114193,
+      "x": 208718,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48410,
+      "y": 114193,
+      "x": 208719,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48410,
+      "y": 114194,
+      "x": 208718,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48410,
+      "y": 114194,
+      "x": 208719,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48410,
+      "y": 114195,
+      "x": 208718,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48410,
+      "y": 114195,
+      "x": 208719,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48410,
+      "y": 114196,
+      "x": 208718,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48425,
+      "y": 114031,
+      "x": 206371,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48425,
+      "y": 114032,
+      "x": 206372,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48425,
+      "y": 114079,
+      "x": 206404,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48425,
+      "y": 114080,
+      "x": 206404,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48425,
+      "y": 114081,
+      "x": 206404,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48425,
+      "y": 114082,
+      "x": 206404,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48425,
+      "y": 114083,
+      "x": 206404,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48425,
+      "y": 114084,
+      "x": 206404,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48425,
+      "y": 114092,
+      "x": 206406,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48425,
+      "y": 114093,
+      "x": 206406,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48425,
+      "y": 114095,
+      "x": 206406,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48425,
+      "y": 114096,
+      "x": 206406,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48425,
+      "y": 114097,
+      "x": 206406,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48425,
+      "y": 114098,
+      "x": 206406,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48425,
+      "y": 114136,
+      "x": 206426,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48425,
+      "y": 114137,
+      "x": 206427,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48425,
+      "y": 114138,
+      "x": 206428,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48425,
+      "y": 114138,
+      "x": 206429,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48425,
+      "y": 114139,
+      "x": 206429,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48425,
+      "y": 114158,
+      "x": 206444,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48437,
+      "y": 123106,
+      "x": 207754,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48437,
+      "y": 123107,
+      "x": 207756,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48437,
+      "y": 123108,
+      "x": 207758,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114018,
+      "x": 207201,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114019,
+      "x": 207199,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114019,
+      "x": 207200,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114019,
+      "x": 207201,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114020,
+      "x": 207199,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114020,
+      "x": 207200,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114021,
+      "x": 207199,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114021,
+      "x": 207200,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114022,
+      "x": 207199,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114023,
+      "x": 207199,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114034,
+      "x": 207184,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114034,
+      "x": 207185,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114034,
+      "x": 207186,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114034,
+      "x": 207187,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114035,
+      "x": 207183,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114035,
+      "x": 207184,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114035,
+      "x": 207185,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114035,
+      "x": 207186,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114036,
+      "x": 207183,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114036,
+      "x": 207184,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114036,
+      "x": 207185,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114037,
+      "x": 207183,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114037,
+      "x": 207184,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114041,
+      "x": 207178,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114041,
+      "x": 207179,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114042,
+      "x": 207177,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114042,
+      "x": 207178,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114043,
+      "x": 207176,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114043,
+      "x": 207177,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114044,
+      "x": 207176,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114045,
+      "x": 207175,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114046,
+      "x": 207174,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114066,
+      "x": 207141,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114066,
+      "x": 207142,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114067,
+      "x": 207138,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114067,
+      "x": 207139,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114068,
+      "x": 207136,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114068,
+      "x": 207137,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114069,
+      "x": 207135,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114070,
+      "x": 207133,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114071,
+      "x": 207131,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114072,
+      "x": 207129,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114073,
+      "x": 207127,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48439,
+      "y": 114108,
+      "x": 207081,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48460,
+      "y": 114955,
+      "x": 209366,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48473,
+      "y": 114322,
+      "x": 208686,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48473,
+      "y": 114323,
+      "x": 208687,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48473,
+      "y": 114324,
+      "x": 208687,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48473,
+      "y": 114328,
+      "x": 208689,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48473,
+      "y": 114332,
+      "x": 208691,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48473,
+      "y": 114381,
+      "x": 208695,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48473,
+      "y": 114382,
+      "x": 208694,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48473,
+      "y": 114382,
+      "x": 208695,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48473,
+      "y": 114382,
+      "x": 208696,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48473,
+      "y": 114383,
+      "x": 208693,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48473,
+      "y": 114383,
+      "x": 208694,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48473,
+      "y": 114383,
+      "x": 208695,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48473,
+      "y": 114383,
+      "x": 208696,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48473,
+      "y": 114383,
+      "x": 208705,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48473,
+      "y": 114450,
+      "x": 208778,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48473,
+      "y": 114451,
+      "x": 208778,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48473,
+      "y": 114452,
+      "x": 208778,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48473,
+      "y": 114459,
+      "x": 208780,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48473,
+      "y": 114460,
+      "x": 208780,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48473,
+      "y": 114478,
+      "x": 208787,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48473,
+      "y": 114479,
+      "x": 208787,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48473,
+      "y": 114488,
+      "x": 208784,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113989,
+      "x": 207274,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113989,
+      "x": 207275,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113990,
+      "x": 207272,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113990,
+      "x": 207273,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113990,
+      "x": 207274,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113990,
+      "x": 207275,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113991,
+      "x": 207272,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113991,
+      "x": 207273,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113991,
+      "x": 207274,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113991,
+      "x": 207275,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113992,
+      "x": 207272,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113992,
+      "x": 207273,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113992,
+      "x": 207274,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113992,
+      "x": 207275,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113992,
+      "x": 207276,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113993,
+      "x": 207271,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113993,
+      "x": 207272,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113993,
+      "x": 207273,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113993,
+      "x": 207274,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113993,
+      "x": 207275,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113993,
+      "x": 207276,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113993,
+      "x": 207277,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113994,
+      "x": 207271,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113994,
+      "x": 207272,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113994,
+      "x": 207273,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113994,
+      "x": 207274,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113994,
+      "x": 207275,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113994,
+      "x": 207276,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113994,
+      "x": 207277,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113994,
+      "x": 207278,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113995,
+      "x": 207271,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113995,
+      "x": 207272,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113995,
+      "x": 207273,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113995,
+      "x": 207274,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113995,
+      "x": 207275,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113995,
+      "x": 207276,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113995,
+      "x": 207277,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113995,
+      "x": 207278,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113995,
+      "x": 207279,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113995,
+      "x": 207289,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113995,
+      "x": 207290,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113995,
+      "x": 207291,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113996,
+      "x": 207272,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113996,
+      "x": 207273,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113996,
+      "x": 207274,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113996,
+      "x": 207275,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113996,
+      "x": 207276,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113996,
+      "x": 207277,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113996,
+      "x": 207278,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113996,
+      "x": 207279,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113996,
+      "x": 207280,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113996,
+      "x": 207281,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113996,
+      "x": 207282,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113996,
+      "x": 207286,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113996,
+      "x": 207287,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113996,
+      "x": 207288,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113996,
+      "x": 207289,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113996,
+      "x": 207290,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113996,
+      "x": 207291,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113996,
+      "x": 207292,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113996,
+      "x": 207293,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113996,
+      "x": 207294,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113996,
+      "x": 207295,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113998,
+      "x": 207299,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 113999,
+      "x": 207300,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 114000,
+      "x": 207301,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 114001,
+      "x": 207302,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 114002,
+      "x": 207303,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 114002,
+      "x": 207304,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 114003,
+      "x": 207304,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 114003,
+      "x": 207305,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 114004,
+      "x": 207305,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 114005,
+      "x": 207306,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 114006,
+      "x": 207209,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 114006,
+      "x": 207307,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 114007,
+      "x": 207208,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 114008,
+      "x": 207207,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 114008,
+      "x": 207208,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 114009,
+      "x": 207206,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 114009,
+      "x": 207207,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 114010,
+      "x": 207205,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 114010,
+      "x": 207206,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 114011,
+      "x": 207204,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 114011,
+      "x": 207205,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 114011,
+      "x": 207206,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 114012,
+      "x": 207204,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 114012,
+      "x": 207205,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 114013,
+      "x": 207204,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 114014,
+      "x": 207203,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 114014,
+      "x": 207204,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 114015,
+      "x": 207203,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48477,
+      "y": 114016,
+      "x": 207203,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48503,
+      "y": 113889,
+      "x": 208433,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48503,
+      "y": 113889,
+      "x": 208434,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48503,
+      "y": 113927,
+      "x": 208463,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48503,
+      "y": 113928,
+      "x": 208464,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48503,
+      "y": 113928,
+      "x": 208465,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48503,
+      "y": 113929,
+      "x": 208465,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48503,
+      "y": 113930,
+      "x": 208465,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48503,
+      "y": 113930,
+      "x": 208466,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48503,
+      "y": 113931,
+      "x": 208466,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48503,
+      "y": 113931,
+      "x": 208467,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48503,
+      "y": 113932,
+      "x": 208467,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48532,
+      "y": 118321,
+      "x": 208469,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113925,
+      "x": 207421,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113925,
+      "x": 207422,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113926,
+      "x": 207416,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113926,
+      "x": 207417,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113926,
+      "x": 207418,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113927,
+      "x": 207414,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113936,
+      "x": 207401,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113937,
+      "x": 207399,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113938,
+      "x": 207398,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113939,
+      "x": 207397,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113978,
+      "x": 207354,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113979,
+      "x": 207353,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113979,
+      "x": 207354,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113980,
+      "x": 207352,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113980,
+      "x": 207353,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113980,
+      "x": 207354,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113981,
+      "x": 207351,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113981,
+      "x": 207352,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113981,
+      "x": 207353,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113981,
+      "x": 207354,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113982,
+      "x": 207350,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113982,
+      "x": 207351,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113982,
+      "x": 207352,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113982,
+      "x": 207353,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113982,
+      "x": 207354,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113983,
+      "x": 207349,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113983,
+      "x": 207350,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113983,
+      "x": 207351,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113983,
+      "x": 207352,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113983,
+      "x": 207353,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113983,
+      "x": 207354,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113984,
+      "x": 207348,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113984,
+      "x": 207349,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113984,
+      "x": 207350,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113984,
+      "x": 207351,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113984,
+      "x": 207352,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113984,
+      "x": 207353,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113984,
+      "x": 207354,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113985,
+      "x": 207349,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113985,
+      "x": 207350,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113985,
+      "x": 207351,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113985,
+      "x": 207352,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113985,
+      "x": 207353,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113985,
+      "x": 207354,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113986,
+      "x": 207350,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113986,
+      "x": 207351,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113986,
+      "x": 207352,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113986,
+      "x": 207353,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113986,
+      "x": 207354,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113987,
+      "x": 207352,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113987,
+      "x": 207353,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113987,
+      "x": 207354,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113988,
+      "x": 207353,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113988,
+      "x": 207354,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113989,
+      "x": 207353,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48535,
+      "y": 113989,
+      "x": 207354,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48556,
+      "y": 117626,
+      "x": 207849,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48556,
+      "y": 117629,
+      "x": 207848,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48556,
+      "y": 117632,
+      "x": 207847,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48575,
+      "y": 122483,
+      "x": 208456,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48575,
+      "y": 122483,
+      "x": 208457,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48575,
+      "y": 122483,
+      "x": 208458,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48575,
+      "y": 122484,
+      "x": 208460,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48575,
+      "y": 122484,
+      "x": 208461,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48575,
+      "y": 122485,
+      "x": 208463,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48575,
+      "y": 122496,
+      "x": 208472,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48575,
+      "y": 122497,
+      "x": 208472,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48575,
+      "y": 122500,
+      "x": 208474,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48575,
+      "y": 122501,
+      "x": 208475,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48575,
+      "y": 122502,
+      "x": 208477,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48575,
+      "y": 122503,
+      "x": 208478,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48575,
+      "y": 122504,
+      "x": 208479,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48575,
+      "y": 122505,
+      "x": 208480,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48575,
+      "y": 122506,
+      "x": 208481,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48575,
+      "y": 122508,
+      "x": 208484,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48575,
+      "y": 122509,
+      "x": 208485,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48575,
+      "y": 122510,
+      "x": 208486,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114943,
+      "x": 209645,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114944,
+      "x": 209645,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114944,
+      "x": 209646,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114944,
+      "x": 209647,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114945,
+      "x": 209646,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114945,
+      "x": 209647,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114945,
+      "x": 209648,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114945,
+      "x": 209649,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114946,
+      "x": 209646,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114946,
+      "x": 209647,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114946,
+      "x": 209648,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114946,
+      "x": 209649,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114946,
+      "x": 209650,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114947,
+      "x": 209647,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114947,
+      "x": 209648,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114947,
+      "x": 209649,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114947,
+      "x": 209650,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114948,
+      "x": 209647,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114948,
+      "x": 209648,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114948,
+      "x": 209649,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114949,
+      "x": 209648,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114949,
+      "x": 209649,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114950,
+      "x": 209648,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114951,
+      "x": 209649,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114952,
+      "x": 209649,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114952,
+      "x": 209650,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114952,
+      "x": 209651,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114953,
+      "x": 209650,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114953,
+      "x": 209651,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114953,
+      "x": 209652,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114954,
+      "x": 209651,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114954,
+      "x": 209652,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114955,
+      "x": 209651,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114955,
+      "x": 209652,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114962,
+      "x": 209654,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114963,
+      "x": 209654,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114964,
+      "x": 209654,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 114971,
+      "x": 209658,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115013,
+      "x": 209711,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115013,
+      "x": 209712,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115014,
+      "x": 209711,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115049,
+      "x": 209771,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115049,
+      "x": 209772,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115049,
+      "x": 209773,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115049,
+      "x": 209775,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115049,
+      "x": 209776,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115049,
+      "x": 209777,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115049,
+      "x": 209778,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115049,
+      "x": 209779,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115049,
+      "x": 209780,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115050,
+      "x": 209767,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115050,
+      "x": 209768,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115050,
+      "x": 209769,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115050,
+      "x": 209770,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115050,
+      "x": 209771,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115050,
+      "x": 209772,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115050,
+      "x": 209773,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115050,
+      "x": 209774,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115050,
+      "x": 209775,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115050,
+      "x": 209776,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115050,
+      "x": 209777,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115050,
+      "x": 209778,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115050,
+      "x": 209779,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115050,
+      "x": 209780,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115050,
+      "x": 209781,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115050,
+      "x": 209782,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115051,
+      "x": 209765,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115051,
+      "x": 209766,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115051,
+      "x": 209767,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115051,
+      "x": 209768,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115051,
+      "x": 209769,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115051,
+      "x": 209770,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115051,
+      "x": 209771,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115051,
+      "x": 209772,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115051,
+      "x": 209773,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115051,
+      "x": 209774,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115051,
+      "x": 209775,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115051,
+      "x": 209776,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115051,
+      "x": 209777,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115051,
+      "x": 209778,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115051,
+      "x": 209779,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115051,
+      "x": 209780,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115051,
+      "x": 209781,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115051,
+      "x": 209782,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115052,
+      "x": 209763,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115052,
+      "x": 209764,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115052,
+      "x": 209765,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115052,
+      "x": 209766,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115052,
+      "x": 209767,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115052,
+      "x": 209768,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115052,
+      "x": 209769,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115052,
+      "x": 209770,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115052,
+      "x": 209771,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115052,
+      "x": 209772,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115052,
+      "x": 209773,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115052,
+      "x": 209774,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115052,
+      "x": 209775,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115052,
+      "x": 209776,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115052,
+      "x": 209777,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115052,
+      "x": 209778,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115052,
+      "x": 209779,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115052,
+      "x": 209780,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115052,
+      "x": 209781,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115052,
+      "x": 209782,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115053,
+      "x": 209761,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115053,
+      "x": 209762,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115053,
+      "x": 209763,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115053,
+      "x": 209764,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115053,
+      "x": 209765,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115053,
+      "x": 209766,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115053,
+      "x": 209767,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115053,
+      "x": 209768,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115053,
+      "x": 209769,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115053,
+      "x": 209770,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115053,
+      "x": 209771,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115053,
+      "x": 209772,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115053,
+      "x": 209773,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115053,
+      "x": 209774,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115053,
+      "x": 209775,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115053,
+      "x": 209776,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115053,
+      "x": 209777,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115053,
+      "x": 209778,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115053,
+      "x": 209779,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115053,
+      "x": 209780,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115053,
+      "x": 209781,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115053,
+      "x": 209782,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115054,
+      "x": 209757,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115054,
+      "x": 209758,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115054,
+      "x": 209759,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115054,
+      "x": 209760,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115054,
+      "x": 209761,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115054,
+      "x": 209762,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115054,
+      "x": 209763,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115054,
+      "x": 209764,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115054,
+      "x": 209765,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115054,
+      "x": 209766,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115054,
+      "x": 209767,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115054,
+      "x": 209768,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115054,
+      "x": 209769,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115054,
+      "x": 209770,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115054,
+      "x": 209771,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115055,
+      "x": 209755,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115055,
+      "x": 209756,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115055,
+      "x": 209757,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115055,
+      "x": 209758,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115055,
+      "x": 209759,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115055,
+      "x": 209760,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115055,
+      "x": 209761,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115055,
+      "x": 209762,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115055,
+      "x": 209763,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115055,
+      "x": 209764,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115055,
+      "x": 209765,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115055,
+      "x": 209766,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115055,
+      "x": 209767,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115056,
+      "x": 209753,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115056,
+      "x": 209754,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115056,
+      "x": 209755,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115056,
+      "x": 209756,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115056,
+      "x": 209757,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115056,
+      "x": 209758,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115056,
+      "x": 209759,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115056,
+      "x": 209760,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115056,
+      "x": 209761,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115056,
+      "x": 209762,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115056,
+      "x": 209763,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115057,
+      "x": 209751,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115057,
+      "x": 209752,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115057,
+      "x": 209753,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115057,
+      "x": 209754,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115057,
+      "x": 209755,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115057,
+      "x": 209756,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115057,
+      "x": 209757,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115057,
+      "x": 209758,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115057,
+      "x": 209759,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115057,
+      "x": 209760,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115057,
+      "x": 209761,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115058,
+      "x": 209750,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115058,
+      "x": 209751,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115058,
+      "x": 209752,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115058,
+      "x": 209753,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115058,
+      "x": 209754,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115058,
+      "x": 209755,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115058,
+      "x": 209756,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115058,
+      "x": 209757,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115058,
+      "x": 209758,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115059,
+      "x": 209749,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115059,
+      "x": 209750,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115059,
+      "x": 209751,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115059,
+      "x": 209752,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115059,
+      "x": 209753,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115059,
+      "x": 209754,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115059,
+      "x": 209755,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115059,
+      "x": 209756,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115060,
+      "x": 209748,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115060,
+      "x": 209749,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115060,
+      "x": 209750,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115060,
+      "x": 209751,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115060,
+      "x": 209752,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115060,
+      "x": 209753,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115061,
+      "x": 209747,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115061,
+      "x": 209748,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115061,
+      "x": 209749,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115061,
+      "x": 209750,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115062,
+      "x": 209746,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115062,
+      "x": 209747,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115062,
+      "x": 209748,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115063,
+      "x": 209745,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115063,
+      "x": 209746,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115064,
+      "x": 209744,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115065,
+      "x": 209742,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115065,
+      "x": 209743,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48578,
+      "y": 115066,
+      "x": 209741,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48596,
+      "y": 119486,
+      "x": 209188,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48596,
+      "y": 119659,
+      "x": 209303,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48596,
+      "y": 119659,
+      "x": 209304,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48596,
+      "y": 119660,
+      "x": 209303,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115834,
+      "x": 207102,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115834,
+      "x": 207103,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115834,
+      "x": 207104,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115835,
+      "x": 207102,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115835,
+      "x": 207103,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115835,
+      "x": 207104,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115835,
+      "x": 207105,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115836,
+      "x": 207102,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115836,
+      "x": 207103,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115836,
+      "x": 207104,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115837,
+      "x": 207104,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115843,
+      "x": 207101,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115844,
+      "x": 207100,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115845,
+      "x": 207099,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115846,
+      "x": 207097,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115846,
+      "x": 207098,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115847,
+      "x": 207096,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115848,
+      "x": 207094,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115848,
+      "x": 207095,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115849,
+      "x": 207094,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115898,
+      "x": 207204,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115918,
+      "x": 207177,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115919,
+      "x": 207176,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115920,
+      "x": 207174,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115921,
+      "x": 207173,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115922,
+      "x": 207172,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115923,
+      "x": 207170,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48597,
+      "y": 115924,
+      "x": 207169,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48599,
+      "y": 116207,
+      "x": 207487,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48599,
+      "y": 116207,
+      "x": 207488,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48599,
+      "y": 116208,
+      "x": 207487,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114898,
+      "x": 209251,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114898,
+      "x": 209252,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114898,
+      "x": 209253,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114898,
+      "x": 209254,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114899,
+      "x": 209252,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114899,
+      "x": 209253,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114899,
+      "x": 209254,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114899,
+      "x": 209255,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114900,
+      "x": 209253,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114900,
+      "x": 209254,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114900,
+      "x": 209255,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114900,
+      "x": 209256,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114901,
+      "x": 209254,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114901,
+      "x": 209255,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114901,
+      "x": 209256,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114901,
+      "x": 209257,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114902,
+      "x": 209255,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114902,
+      "x": 209256,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114902,
+      "x": 209257,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114903,
+      "x": 209256,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114903,
+      "x": 209257,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114917,
+      "x": 209266,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114931,
+      "x": 209267,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114932,
+      "x": 209267,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114933,
+      "x": 209268,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114934,
+      "x": 209268,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114935,
+      "x": 209268,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114935,
+      "x": 209269,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114936,
+      "x": 209268,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114937,
+      "x": 209268,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114949,
+      "x": 209264,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114950,
+      "x": 209264,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114950,
+      "x": 209265,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114951,
+      "x": 209265,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114952,
+      "x": 209265,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114952,
+      "x": 209266,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114953,
+      "x": 209265,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114953,
+      "x": 209266,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114954,
+      "x": 209265,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114956,
+      "x": 209266,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114957,
+      "x": 209266,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48600,
+      "y": 114958,
+      "x": 209266,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114000,
+      "x": 208831,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114000,
+      "x": 208832,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114001,
+      "x": 208832,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114001,
+      "x": 208833,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114001,
+      "x": 208834,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114002,
+      "x": 208833,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114002,
+      "x": 208834,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114002,
+      "x": 208835,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114003,
+      "x": 208834,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114003,
+      "x": 208835,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114004,
+      "x": 208835,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114010,
+      "x": 208843,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114010,
+      "x": 208844,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114011,
+      "x": 208849,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114011,
+      "x": 208850,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114011,
+      "x": 208851,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114011,
+      "x": 208852,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114065,
+      "x": 208841,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114066,
+      "x": 208839,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114066,
+      "x": 208840,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114072,
+      "x": 208835,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114073,
+      "x": 208835,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114091,
+      "x": 208837,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114091,
+      "x": 208838,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114092,
+      "x": 208837,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114092,
+      "x": 208838,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114092,
+      "x": 208839,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114092,
+      "x": 208840,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114093,
+      "x": 208837,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114093,
+      "x": 208838,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114093,
+      "x": 208839,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114093,
+      "x": 208840,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114093,
+      "x": 208841,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114093,
+      "x": 208842,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114094,
+      "x": 208836,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114094,
+      "x": 208837,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114094,
+      "x": 208838,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114094,
+      "x": 208839,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114094,
+      "x": 208840,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114094,
+      "x": 208841,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114094,
+      "x": 208842,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114095,
+      "x": 208836,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114095,
+      "x": 208837,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114095,
+      "x": 208838,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114095,
+      "x": 208839,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114095,
+      "x": 208840,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114095,
+      "x": 208841,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114096,
+      "x": 208836,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114199,
+      "x": 208755,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114199,
+      "x": 208756,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114199,
+      "x": 208757,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114199,
+      "x": 208758,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48619,
+      "y": 114199,
+      "x": 208759,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48634,
+      "y": 113912,
+      "x": 208177,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48634,
+      "y": 113913,
+      "x": 208178,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48634,
+      "y": 113913,
+      "x": 208179,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48634,
+      "y": 113914,
+      "x": 208178,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48634,
+      "y": 113914,
+      "x": 208179,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48634,
+      "y": 113914,
+      "x": 208180,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48634,
+      "y": 113915,
+      "x": 208179,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48634,
+      "y": 113915,
+      "x": 208180,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48634,
+      "y": 113916,
+      "x": 208179,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48634,
+      "y": 113916,
+      "x": 208180,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48634,
+      "y": 113916,
+      "x": 208181,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48634,
+      "y": 113917,
+      "x": 208180,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48634,
+      "y": 113917,
+      "x": 208181,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48634,
+      "y": 113917,
+      "x": 208182,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48634,
+      "y": 113918,
+      "x": 208180,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48634,
+      "y": 113918,
+      "x": 208181,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48634,
+      "y": 113918,
+      "x": 208182,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48634,
+      "y": 113919,
+      "x": 208181,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48634,
+      "y": 113919,
+      "x": 208182,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48634,
+      "y": 113920,
+      "x": 208181,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48634,
+      "y": 113920,
+      "x": 208182,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48661,
+      "y": 115954,
+      "x": 207270,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48661,
+      "y": 115966,
+      "x": 207270,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48661,
+      "y": 115967,
+      "x": 207270,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48661,
+      "y": 115968,
+      "x": 207270,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48661,
+      "y": 116021,
+      "x": 207266,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48661,
+      "y": 116097,
+      "x": 207476,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114511,
+      "x": 208767,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114512,
+      "x": 208768,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114524,
+      "x": 208778,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114524,
+      "x": 208786,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114524,
+      "x": 208787,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114525,
+      "x": 208779,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114525,
+      "x": 208780,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114525,
+      "x": 208783,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114525,
+      "x": 208784,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114525,
+      "x": 208785,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114525,
+      "x": 208786,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114525,
+      "x": 208787,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114525,
+      "x": 208788,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114526,
+      "x": 208780,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114526,
+      "x": 208781,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114526,
+      "x": 208782,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114526,
+      "x": 208783,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114526,
+      "x": 208784,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114526,
+      "x": 208785,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114526,
+      "x": 208786,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114526,
+      "x": 208787,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114526,
+      "x": 208788,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114526,
+      "x": 208789,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114527,
+      "x": 208781,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114527,
+      "x": 208782,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114527,
+      "x": 208783,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114527,
+      "x": 208784,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114527,
+      "x": 208785,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114527,
+      "x": 208786,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114527,
+      "x": 208787,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114527,
+      "x": 208788,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114527,
+      "x": 208789,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114527,
+      "x": 208790,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114528,
+      "x": 208782,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114528,
+      "x": 208783,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114528,
+      "x": 208784,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114528,
+      "x": 208785,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114528,
+      "x": 208786,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114528,
+      "x": 208787,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114528,
+      "x": 208788,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114528,
+      "x": 208789,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114528,
+      "x": 208790,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114529,
+      "x": 208782,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114529,
+      "x": 208783,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114529,
+      "x": 208784,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114529,
+      "x": 208785,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114529,
+      "x": 208786,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114529,
+      "x": 208787,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114529,
+      "x": 208788,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114529,
+      "x": 208789,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114530,
+      "x": 208783,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114530,
+      "x": 208784,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114530,
+      "x": 208785,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114530,
+      "x": 208786,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114530,
+      "x": 208788,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114530,
+      "x": 208789,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114531,
+      "x": 208784,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114575,
+      "x": 208793,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114576,
+      "x": 208793,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114576,
+      "x": 208794,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114577,
+      "x": 208793,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114577,
+      "x": 208794,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114577,
+      "x": 208795,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114578,
+      "x": 208793,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114578,
+      "x": 208794,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114579,
+      "x": 208793,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114580,
+      "x": 208792,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114580,
+      "x": 208793,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114580,
+      "x": 208794,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114581,
+      "x": 208792,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114581,
+      "x": 208793,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114582,
+      "x": 208792,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114582,
+      "x": 208793,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114583,
+      "x": 208792,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114584,
+      "x": 208792,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114613,
+      "x": 208785,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114622,
+      "x": 208789,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114623,
+      "x": 208789,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114624,
+      "x": 208789,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114633,
+      "x": 208791,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114638,
+      "x": 208786,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114639,
+      "x": 208785,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114640,
+      "x": 208784,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114640,
+      "x": 208785,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114641,
+      "x": 208783,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114641,
+      "x": 208784,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114644,
+      "x": 208779,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114645,
+      "x": 208778,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114646,
+      "x": 208777,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114647,
+      "x": 208776,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48681,
+      "y": 114670,
+      "x": 208778,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114038,
+      "x": 205723,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114038,
+      "x": 205724,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114039,
+      "x": 205720,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114039,
+      "x": 205721,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114039,
+      "x": 205722,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114039,
+      "x": 205723,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114039,
+      "x": 205724,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114039,
+      "x": 205725,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114039,
+      "x": 205726,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114039,
+      "x": 205727,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114039,
+      "x": 205728,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114063,
+      "x": 205757,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114063,
+      "x": 205758,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114064,
+      "x": 205758,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114064,
+      "x": 205759,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114065,
+      "x": 205759,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114065,
+      "x": 205760,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114065,
+      "x": 205761,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114065,
+      "x": 205762,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114066,
+      "x": 205759,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114066,
+      "x": 205760,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114066,
+      "x": 205761,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114067,
+      "x": 205760,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114067,
+      "x": 205761,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114068,
+      "x": 205761,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114069,
+      "x": 205761,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114070,
+      "x": 205762,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114071,
+      "x": 205762,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114072,
+      "x": 205763,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114077,
+      "x": 205768,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114078,
+      "x": 205769,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114079,
+      "x": 205770,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114080,
+      "x": 205771,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114081,
+      "x": 205772,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114101,
+      "x": 205833,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114102,
+      "x": 205834,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114102,
+      "x": 205835,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114103,
+      "x": 205835,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114103,
+      "x": 205836,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114104,
+      "x": 205836,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114104,
+      "x": 205837,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114105,
+      "x": 205837,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114105,
+      "x": 205838,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114106,
+      "x": 205838,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114107,
+      "x": 205839,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114108,
+      "x": 205667,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114108,
+      "x": 205668,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114108,
+      "x": 205669,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114108,
+      "x": 205670,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114109,
+      "x": 205666,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114109,
+      "x": 205667,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114109,
+      "x": 205668,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114110,
+      "x": 205665,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114110,
+      "x": 205666,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114111,
+      "x": 205664,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114117,
+      "x": 205882,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114117,
+      "x": 205883,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114117,
+      "x": 205884,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114118,
+      "x": 205884,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114118,
+      "x": 205885,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114119,
+      "x": 205885,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114119,
+      "x": 205886,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114119,
+      "x": 205887,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114119,
+      "x": 205888,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114119,
+      "x": 205889,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114119,
+      "x": 205890,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114120,
+      "x": 205887,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114120,
+      "x": 205888,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114120,
+      "x": 205889,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114120,
+      "x": 205890,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114120,
+      "x": 205891,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114121,
+      "x": 205888,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114121,
+      "x": 205889,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114121,
+      "x": 205890,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114121,
+      "x": 205891,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114122,
+      "x": 205890,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114122,
+      "x": 205891,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114123,
+      "x": 205892,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114124,
+      "x": 205893,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114160,
+      "x": 205941,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114161,
+      "x": 205950,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114161,
+      "x": 205951,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114161,
+      "x": 205952,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114162,
+      "x": 205953,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114162,
+      "x": 205954,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114162,
+      "x": 205955,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114174,
+      "x": 205989,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114174,
+      "x": 205990,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114174,
+      "x": 205991,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114175,
+      "x": 205989,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114175,
+      "x": 205990,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114176,
+      "x": 205990,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114183,
+      "x": 205997,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114184,
+      "x": 205998,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114184,
+      "x": 205999,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114184,
+      "x": 206000,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114185,
+      "x": 205999,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114185,
+      "x": 206000,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114186,
+      "x": 205999,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114186,
+      "x": 206000,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114187,
+      "x": 206000,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114187,
+      "x": 206001,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114188,
+      "x": 206001,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114200,
+      "x": 205998,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114201,
+      "x": 205998,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114201,
+      "x": 205999,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114202,
+      "x": 205999,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114202,
+      "x": 206000,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114203,
+      "x": 205999,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114203,
+      "x": 206000,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114203,
+      "x": 206001,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114204,
+      "x": 205999,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114204,
+      "x": 206000,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114204,
+      "x": 206001,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114204,
+      "x": 206002,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114204,
+      "x": 206003,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114205,
+      "x": 206000,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114205,
+      "x": 206001,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114205,
+      "x": 206002,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114205,
+      "x": 206003,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114205,
+      "x": 206004,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114205,
+      "x": 206005,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114206,
+      "x": 206000,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114206,
+      "x": 206001,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114206,
+      "x": 206002,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114206,
+      "x": 206003,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114206,
+      "x": 206004,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114206,
+      "x": 206005,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114207,
+      "x": 206000,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114207,
+      "x": 206001,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114207,
+      "x": 206002,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114207,
+      "x": 206003,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114207,
+      "x": 206004,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114208,
+      "x": 206001,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114208,
+      "x": 206002,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114208,
+      "x": 206003,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114208,
+      "x": 206004,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114209,
+      "x": 206001,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114209,
+      "x": 206002,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114209,
+      "x": 206003,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114209,
+      "x": 206004,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114210,
+      "x": 206002,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114210,
+      "x": 206003,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114211,
+      "x": 206002,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114212,
+      "x": 206002,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114219,
+      "x": 206010,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114220,
+      "x": 206012,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114221,
+      "x": 206013,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114234,
+      "x": 206015,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114235,
+      "x": 206016,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114235,
+      "x": 206017,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48755,
+      "y": 114236,
+      "x": 206017,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114659,
+      "x": 208854,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114659,
+      "x": 208855,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114666,
+      "x": 208884,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114666,
+      "x": 208885,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114666,
+      "x": 208903,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114666,
+      "x": 208907,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114668,
+      "x": 208918,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114669,
+      "x": 208921,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114671,
+      "x": 208925,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114671,
+      "x": 208926,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114672,
+      "x": 208927,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114672,
+      "x": 208928,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114672,
+      "x": 208929,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114672,
+      "x": 208941,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114673,
+      "x": 208930,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114673,
+      "x": 208942,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114674,
+      "x": 208932,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114674,
+      "x": 208942,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114674,
+      "x": 208943,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114674,
+      "x": 208944,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114675,
+      "x": 208942,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114675,
+      "x": 208943,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114675,
+      "x": 208944,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114675,
+      "x": 208945,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114676,
+      "x": 208943,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114676,
+      "x": 208944,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114676,
+      "x": 208945,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114677,
+      "x": 208943,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114677,
+      "x": 208944,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114677,
+      "x": 208945,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114677,
+      "x": 208946,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114678,
+      "x": 208944,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114678,
+      "x": 208945,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114678,
+      "x": 208946,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114679,
+      "x": 208944,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114679,
+      "x": 208945,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114679,
+      "x": 208946,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114679,
+      "x": 208947,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114680,
+      "x": 208945,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114680,
+      "x": 208946,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114680,
+      "x": 208947,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114681,
+      "x": 208945,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114681,
+      "x": 208946,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114681,
+      "x": 208947,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114681,
+      "x": 208948,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114682,
+      "x": 208945,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114682,
+      "x": 208946,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114682,
+      "x": 208947,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114682,
+      "x": 208948,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114683,
+      "x": 208946,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114683,
+      "x": 208947,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114683,
+      "x": 208948,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114684,
+      "x": 208946,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114684,
+      "x": 208947,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114685,
+      "x": 208947,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114686,
+      "x": 208947,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114696,
+      "x": 208951,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114698,
+      "x": 208952,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114741,
+      "x": 209044,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114742,
+      "x": 209043,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114742,
+      "x": 209044,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114743,
+      "x": 209042,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114743,
+      "x": 209043,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114744,
+      "x": 209041,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114744,
+      "x": 209042,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114744,
+      "x": 209043,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114745,
+      "x": 209039,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114745,
+      "x": 209040,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114745,
+      "x": 209041,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114746,
+      "x": 209038,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114746,
+      "x": 209039,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48756,
+      "y": 114746,
+      "x": 209040,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48757,
+      "y": 119223,
+      "x": 209296,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48757,
+      "y": 119227,
+      "x": 209295,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48773,
+      "y": 114043,
+      "x": 207006,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48773,
+      "y": 114045,
+      "x": 207007,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48773,
+      "y": 114046,
+      "x": 207007,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48773,
+      "y": 114047,
+      "x": 207007,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48773,
+      "y": 114209,
+      "x": 206830,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48773,
+      "y": 114210,
+      "x": 206827,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48773,
+      "y": 114210,
+      "x": 206828,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48773,
+      "y": 114210,
+      "x": 206829,
+      "physical_class": "mapped_land_support"
+    },
+    {
+      "owner": 48773,
+      "y": 114211,
+      "x": 206828,
+      "physical_class": "mapped_land_support"
+    }
+  ],
+  "source_limits": [
+    "LAO2019/KHM2018 completecountrymasks plusVNM2025countrylocation are adopted defined-sourceapplicability;original2020district/parent retained,notbackdatedsurvey.",
+    "CNmask remainswholeliteralofficialWorldPolygons11.4 matchedLSIB11.4 withremoteOGCdefect and4decimalprecision/localdisplacement retained;all118OSMcontraryfacts remain for1092keys.",
+    "PhysicalsupportGSHHG isoriginalsource-relative heterogeneousvintage,notdated2020image/currentriver/legalboundary.",
+    "HongNgu3 wholemixedwater/land contradiction/hierarchy pointsets remain;finite3qualifiedlandcentres are not whole-owner certification."
+  ],
+  "final_review_requirement": "Readactualclosed1233candidate andactualconsumer once available;verifycurrentownerzero/conflicts,accepted281915prefixconservation,1233exactdelta,classes,unchangedhierarchy/no671patch."
+}
