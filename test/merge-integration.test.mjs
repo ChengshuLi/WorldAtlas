@@ -8,11 +8,12 @@ import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 import os from 'node:os';
 import path from 'node:path';
-import {FOCUSED_INTEGRATION_TESTS, integrationTestFiles, integrationNeedsBrowser, prepareIntegrationTests} from '../scripts/run-integration-tests.mjs';
+import {focusedIntegrationTest, integrationTestFiles, integrationNeedsBrowser, prepareIntegrationTests} from '../scripts/run-integration-tests.mjs';
 import {renderClaim, githubAPI} from '../scripts/issue-claim-contract.mjs';
 import {prepareIntegration, completeIntegration, checkCurrentChecks, integrationProfile, geographyRequired, createCandidate, cleanupCandidate, cleanupMergedHead} from '../scripts/merge-integration.mjs';
 
 const sha = letter => letter.repeat(40);
+const FOCUSED_INTEGRATION_TESTS = integrationTestFiles('evidence', 0);
 
 test('actual sparse preparation imports method inventories without scientific coordination files', () => {
   const temporary = fs.mkdtempSync(path.join(os.tmpdir(), 'atlas-sparse-prepare-'));
@@ -247,27 +248,30 @@ test('trusted profile uses focused invariants only for isolated evidence and doc
  assert.equal(integrationProfile('research/example',[{filename:'research/example/a.json'}],{}),'full');
  for(const helper of ['scripts/prepare-delivery-handoff.mjs','scripts/delivery-handoff-advance.mjs']) {
    assert.equal(integrationProfile('engineering/example',[{filename:helper}],{}),'evidence');
-   for(const scientific of ['scripts/native-ownership/native-preparation-guards.mjs','scripts/native-ownership/validate-build-context-stage.mjs','scripts/native-ownership/chained-build-context.mjs','src/native-grid.js','coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs']) {
+   for(const scientific of ['scripts/native-ownership/native-preparation-guards.mjs','scripts/native-ownership/validate-build-context-stage.mjs','scripts/native-ownership/chained-build-context.mjs','src/native-grid.js']) {
      assert.equal(integrationProfile('engineering/example',[{filename:helper},{filename:scientific}],{}),'full');
      assert.equal(integrationProfile('engineering/example',[{filename:helper,previous_filename:scientific}],{}),'full');
    }
  }
  assert.equal(integrationProfile('engineering/example',[{filename:'docs/WORKER_COORDINATION.md'},{filename:'coordination/engineering/example/receipt.json'}],{}),'evidence');
- for(const filename of ['src/attributes.js','data/hierarchy.json','drizzle/0001.sql','scripts/build-hosted.mjs','scripts/run-integration-tests.mjs'])
+ for(const filename of ['src/attributes.js','data/hierarchy.json','drizzle/0001.sql','scripts/build-hosted.mjs'])
    assert.equal(integrationProfile('engineering/example',[{filename}],{}),'full');
  assert.equal(integrationProfile('engineering/example',[{filename:'docs/a.md',previous_filename:'src/attributes.js'}],{}),'full');
  assert.equal(integrationProfile('engineering/example',[{filename:'coordination/engineering/other/receipt.json'}],{}),'full');
 });
 
-test('ordinary modified focused tests compose with coordination while unknown setup stays full', () => {
+test('ordinary focused tests compose across additions and renames while unknown runtime stays full', () => {
   const files=integrationTestFiles('evidence',0).map(filename=>({filename,status:'modified'}));
   const tree=new Map(files.map(file=>[file.filename,{type:'blob',mode:'100644',sha:'1'.repeat(40)}]));
   assert.equal(integrationProfile('engineering/tests',files,{},tree),'evidence');
   for(const file of files) {
     assert.equal(integrationProfile('engineering/tests',[file],{},tree),'evidence');
-    for(const status of [undefined,'added','removed','renamed','copied'])
-      assert.equal(integrationProfile('engineering/tests',[{...file,status}],{},tree),'full');
-    for(const previous_filename of [file.filename,'src/native-grid.js','test/unknown.test.mjs'])
+    for(const status of [undefined,'added','modified','renamed','copied'])
+      assert.equal(integrationProfile('engineering/tests',[{...file,status}],{},tree),'evidence');
+    const removed=new Map(tree);removed.delete(file.filename);
+    assert.equal(integrationProfile('engineering/tests',[{...file,status:'removed'}],{},removed),'evidence');
+    assert.equal(integrationProfile('engineering/tests',[{...file,status:'removed'}],{},tree),'full');
+    for(const previous_filename of ['src/native-grid.js','test/unknown.test.mjs'])
       assert.equal(integrationProfile('engineering/tests',[{...file,previous_filename}],{},tree),'full');
     for(const entry of [undefined,{type:'blob',mode:'120000'},{type:'blob',mode:'100755'},{type:'tree',mode:'040000'},{type:'blob',mode:'100644'},{type:'blob',mode:'100644',sha:'unknown'}]) {
       const changed=new Map(tree);entry ? changed.set(file.filename,entry) : changed.delete(file.filename);
@@ -279,14 +283,13 @@ test('ordinary modified focused tests compose with coordination while unknown se
       assert.equal(integrationProfile('engineering/tests',[file,{filename,status:'modified'}],{},tree),'evidence');
     for(const filename of ['scripts/native-ownership/native-preparation-guards.mjs',
       'scripts/native-ownership/chained-build-context.mjs','src/native-grid.js','src/main.js','hosted/app.mjs',
-      'scripts/run-integration-tests.mjs','scripts/build-cloudflare.mjs','vite.config.js','package.json',
-      'package-lock.json','requirements.txt','.github/package-inputs.json','data/hierarchy.json','test/unknown.test.mjs'])
+      'scripts/build-cloudflare.mjs','vite.config.js','package.json',
+      'package-lock.json','requirements.txt','data/hierarchy.json','test/unknown.test.mjs'])
       assert.equal(integrationProfile('engineering/tests',[file,{filename,status:'modified'}],{},tree),'full');
   }
   // These package-contract, asset-dependent and Python-helper tests are not
   // executed by the exact focused Node roster, even with ordinary tree proof.
-  for(const filename of ['test/package-inputs.test.mjs',
-    'test/package-build.test.mjs','test/deployment-budget.test.mjs','test/pr-gates.test.mjs',
+  for(const filename of ['test/deployment-budget.test.mjs','test/pr-gates.test.mjs',
     'test/canonical-compact-repack.test.mjs','test/source-cohort.test.py','test/physical-source-retention.test.py']) {
     assert.ok(!files.some(file=>file.filename===filename));
     const ordinary=new Map([[filename,{type:'blob',mode:'100644',sha:'1'.repeat(40)}]]);
@@ -303,7 +306,7 @@ test('classifier repairs run their complete retained-input regression on the foc
   assert.equal(integrationProfile('engineering/classifier', files, {}, authored), 'evidence');
   assert.equal(geographyRequired('engineering/classifier', files, {}, authored), false);
   for (const filename of ['scripts/native-ownership/native-preparation-guards.mjs', 'src/native-grid.js',
-    'scripts/package-build.mjs', '.github/package-inputs.json', 'data/ownership-selection.json']) {
+    'scripts/build-static-inner.mjs', 'data/ownership-selection.json']) {
     const changed = [...files, {filename, status:'modified'}];
     const tree = new Map(authored).set(filename, {type:'blob', mode:'100644', sha:sha('b')});
     assert.equal(integrationProfile('engineering/classifier', changed, {}, tree), 'full', filename);
@@ -322,10 +325,9 @@ test('transport orchestration keeps whole-byte regressions without unrelated app
   assert.equal(integrationNeedsBrowser('evidence',0),false);
   assert.equal(integrationProfile('engineering/transport',files,{},authored),'evidence');
   assert.equal(geographyRequired('engineering/transport',files,{},authored),false);
-  for (const filename of ['src/main.js','scripts/package-build.mjs',
-    'scripts/native-ownership/native-preparation-guards.mjs','scripts/qualify-source-cohort.py','scripts/package-python-runtime.py',
-    'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',
-    'src/native-grid.js','data/ownership-selection.json','.github/package-inputs.json']) {
+  for (const filename of ['src/main.js','scripts/build-static-inner.mjs',
+    'scripts/native-ownership/native-preparation-guards.mjs','scripts/qualify-source-cohort.py',
+    'src/native-grid.js','data/ownership-selection.json']) {
     const tree = new Map(authored).set(filename,{type:'blob',mode:'100644',sha:sha('b')});
     for (const changed of [[...files,{filename,status:'modified'}],
       [{filename:controls[0],previous_filename:filename,status:'renamed'}]]) {
@@ -340,7 +342,7 @@ test('geography omission derives only non-scientific control and validated focus
   const required = (filename, extra = {}) => geographyRequired('engineering/controls',
     [{filename,status:'modified',...extra}],{},ordinary(filename));
   for (const name of ['scripts/merge-integration.mjs','scripts/run-worker-merge.mjs',
-    'scripts/integration-profile.mjs','scripts/prepare-delivery-handoff.mjs',...FOCUSED_INTEGRATION_TESTS])
+    'scripts/integration-profile.mjs','scripts/prepare-delivery-handoff.mjs'])
     assert.equal(required(name),false,name);
   // Existing checkpoint/current-method and package roles remain mandatory,
   // including shared helpers that otherwise qualify for focused regression.
@@ -352,10 +354,11 @@ test('geography omission derives only non-scientific control and validated focus
     '.github/evidence-policy.json','docs/WORKER_COORDINATION.md','docs/unknown.md',
     'coordination/engineering/controls/source.json','test/unknown.test.mjs'])
     assert.equal(required(name),true,name);
-  for (const status of ['added','removed','renamed','copied'])
-    assert.equal(required('test/merge-integration.test.mjs',{status}),true);
+  for (const status of ['added','modified','renamed','copied'])
+    assert.equal(required('test/merge-integration.test.mjs',{status}),false);
+  assert.equal(required('test/merge-integration.test.mjs',{status:'removed'}),true);
   assert.equal(required('scripts/merge-integration.mjs',{previous_filename:'scripts/evidence-quality.mjs'}),true);
-  assert.equal(required('test/merge-integration.test.mjs',{previous_filename:'scripts/merge-integration.mjs'}),true);
+  assert.equal(required('test/merge-integration.test.mjs',{previous_filename:'scripts/merge-integration.mjs'}),false);
   assert.equal(geographyRequired('engineering/controls',[]),true);
   assert.equal(geographyRequired('geography/controls',[{filename:'scripts/merge-integration.mjs'}]),true);
 });
@@ -389,12 +392,11 @@ test('omission never turns failed, cancelled or absent geography into success', 
 });
 
 test('final omission independently rechecks current method and ordinary focused-test applicability', async () => {
-  for (const kind of ['scientific','packet','test-mode','test-added','rename-origin']) {
+  for (const kind of ['scientific','packet','test-mode','rename-origin']) {
     const f=controlFixture();await prepareIntegration(f.options());
     if(kind==='scientific')f.files[0].filename='scripts/evidence-quality.mjs';
     if(kind==='packet')f.files[0].filename='coordination/engineering/test/source.json';
     if(kind==='test-mode')f.authored[1].mode='120000';
-    if(kind==='test-added')f.files[1].status='added';
     if(kind==='rename-origin')f.files[0].previous_filename='data/hierarchy.json';
     await assert.rejects(f.complete({geographyResult:'skipped'}));assert.equal(f.writes.length,0,kind);
   }
@@ -443,7 +445,7 @@ test('parallel full-regression shards cover each unit file once and focused prof
  }
  assert.deepEqual([...shards].sort(),expected);assert.equal(new Set(shards).size,expected.length);
  const focused=integrationTestFiles('evidence',0);
- assert.deepEqual(focused,FOCUSED_INTEGRATION_TESTS);
+ assert.deepEqual(focused,expected.filter(focusedIntegrationTest));
  assert.equal(new Set(focused).size,focused.length);
  for(const name of ['premerge-evidence','regional-research-gate','handoff-scope','merge-integration'])assert.ok(focused.includes(`test/${name}.test.mjs`));
  assert.throws(()=>integrationTestFiles('evidence',1),/Invalid/);
@@ -1048,4 +1050,13 @@ test('workflow candidate geography is selected by trusted profile output without
   assert.match(job, /GIT_CONFIG_GLOBAL: \/dev\/null/);
   assert.doesNotMatch(job, /secrets\.|contents: write|issues: write|pull-requests: write|id-token:/);
  }
+});
+
+
+test('focused Python controls follow their actual paired Node wrapper without a separate filename roster',()=>{
+ const child='test/source-cohort.test.py',wrapper='test/source-cohort.test.mjs';
+ const row={type:'blob',mode:'100644',sha:'a'.repeat(40)},tree=new Map([[child,row],[wrapper,row]]);
+ for(const status of ['added','modified'])assert.equal(integrationProfile('engineering/tests',[{filename:child,status}],{},tree),'evidence');
+ tree.delete(wrapper);assert.equal(integrationProfile('engineering/tests',[{filename:child,status:'added'}],{},tree),'full');
+ tree.delete(child);assert.equal(integrationProfile('engineering/tests',[{filename:child,status:'removed'}],{},tree),'evidence');
 });

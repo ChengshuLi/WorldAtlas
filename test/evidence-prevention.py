@@ -1,4 +1,5 @@
 """Compact regressions for recurring audit families; no provider access/data copies."""
+import gzip
 import json
 from pathlib import Path
 import subprocess
@@ -7,7 +8,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
-from evidence.immutable import Baseline, NewVintage, descriptor, canonical_json, write_new_vintage
+from evidence.immutable import Baseline, NewVintage, descriptor, canonical_json, deterministic_gzip, write_new_vintage
 from evidence.contracts import exact_rows, join_rows, finite_metrics, require_source_text
 
 
@@ -150,6 +151,82 @@ class Prevention(unittest.TestCase):
                 Baseline(self.root, self.commit, [pin], max_phase_bytes=limit)
         generous = Baseline(self.root, self.commit, [pin], max_phase_bytes=512 * 1024 * 1024)
         self.assertEqual(generous.max_phase_bytes, 512 * 1024 * 1024)
+
+    def test_whole_files_above_old_limit_keep_identity_and_explicit_budgets(self):
+        raw = b'x' * (32 * 1024 * 1024 + 1)
+        source = self.root / 'whole-source.bin'
+        source.write_bytes(raw)
+        self.git('add', 'whole-source.bin'); self.git('commit', '-qm', 'Whole source above old file ceiling')
+        commit = self.git('rev-parse', 'HEAD')
+        pin = descriptor('whole-source.bin', raw)
+        large = Baseline(self.root, commit, [pin], max_phase_bytes=128 * 1024 * 1024)
+        self.assertEqual(large.materialized_bytes(pin['path']), raw)
+        for changed in ({**pin, 'bytes': len(raw) - 1}, {**pin, 'sha256': '0' * 64}):
+            with self.assertRaisesRegex(ValueError, 'hash/size mismatch'):
+                Baseline(self.root, commit, [changed])
+        source.write_bytes(raw + b'x')
+        with self.assertRaisesRegex(ValueError, 'materialized.*drift'):
+            large.materialized_bytes(pin['path'])
+        with self.assertRaisesRegex(ValueError, 'execution phase'):
+            Baseline(self.root, commit, [pin], max_phase_bytes=len(raw) - 1)
+        for invalid in (-1, True, 1.5):
+            with self.assertRaisesRegex(ValueError, 'size'):
+                large.admit('invalid', invalid)
+        products = {'whole.bin': raw, 'whole.json.gz': deterministic_gzip(raw)}
+        run = NewVintage(large, self.owned, 'whole-output', list(products))
+        records = run.publish_bytes(products)
+        for record in records:
+            self.assertEqual(descriptor(record['path'], (self.root / record['path']).read_bytes()), record)
+        self.assertEqual(gzip.decompress((run.root / 'whole.json.gz').read_bytes()), raw)
+        value = {'value': raw.decode()}
+        json_run = NewVintage(large, self.owned, 'whole-json', ['whole.json'])
+        json_run.publish({'whole.json': value})
+        self.assertEqual(json.loads((json_run.root / 'whole.json').read_bytes()), value)
+        legacy = write_new_vintage(large, self.owned, 'whole-legacy', 'whole.json.gz', value)
+        self.assertEqual(json.loads(gzip.decompress((self.root / legacy['path']).read_bytes())), value)
+        small_pin = self.pins[0]
+        tight = Baseline(self.root, commit, [small_pin], max_phase_bytes=1000)
+        refused = NewVintage(tight, self.owned, 'decoded-too-large', ['whole.json.gz'])
+        with self.assertRaisesRegex(ValueError, 'including output'):
+            refused.publish_bytes({'whole.json.gz': products['whole.json.gz']})
+        self.assertFalse(refused.root.exists())
+        # The complete indexed original can exceed the old decoded-file ceiling too.
+        index = canonical_json({'parts': ['geography/whole.json.gz']})
+        part = canonical_json({'features': [{'id': 'whole', 'properties': {'original': raw.decode()}}]})
+        (self.root / 'data/world-index.json').write_bytes(index)
+        (self.root / 'data/geography/whole.json.gz').write_bytes(deterministic_gzip(part))
+        self.git('add', 'data'); self.git('commit', '-qm', 'Whole indexed decoded source')
+        indexed_commit = self.git('rev-parse', 'HEAD')
+        index_pin = descriptor('data/world-index.json', index)
+        indexed = Baseline(self.root, indexed_commit, [index_pin])
+        found, _ = indexed.subjects(['whole'])
+        self.assertEqual(found['whole']['properties']['original'].encode(), raw)
+        self.assertEqual(indexed.consumed['data/geography/whole.json.gz:decoded'], len(part))
+        tight = Baseline(self.root, indexed_commit, [index_pin], max_phase_bytes=1000)
+        with self.assertRaisesRegex(ValueError, 'execution phase'):
+            tight.subjects(['whole'])
+
+    def test_publication_reuses_completed_input_authentication(self):
+        # The actual operand is authenticated when read, before computation.
+        rows = json.loads(self.baseline.pinned_bytes('scope.json'))
+        value = {'rows': rows, 'count': len(rows)}
+        output = canonical_json(value)
+        run = NewVintage(self.baseline, self.owned, 'completed-inputs', ['rows.json'])
+        with patch.object(self.baseline, '_git', wraps=self.baseline._git) as reads:
+            records = run.publish({'rows.json': value})
+            legacy = write_new_vintage(self.baseline, self.owned, 'completed-legacy', 'rows.json', value)
+        self.assertEqual(reads.call_count, 0, 'Publication must not scan unchanged immutable inputs again')
+        for record in [*records, legacy]:
+            raw = (self.root / record['path']).read_bytes()
+            self.assertEqual(raw, output)
+            self.assertEqual(descriptor(record['path'], raw), record)
+        receipt = json.loads((run.root / 'publication.json').read_bytes())
+        self.assertEqual(receipt, {'version': 1, 'status': 'complete', 'outputs': records})
+        # A later actual read still authenticates its operands; publication does
+        # not turn a completed read into permission for changed source bytes.
+        with patch.object(self.baseline, 'read', return_value=b'changed source'):
+            with self.assertRaisesRegex(ValueError, 'immutable bytes disagree'):
+                self.baseline.pinned_bytes('scope.json')
 
     def test_fresh_runs_preserve_sentinels_and_reject_symlinks(self):
         outputs = {'one.json': self.rows, 'two.json': {'count': 2}}

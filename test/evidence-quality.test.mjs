@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {gzipSync} from 'node:zlib';
+import zlib, {gzipSync} from 'node:zlib';
+import {syncBuiltinESMExports} from 'node:module';
 import {validateEvidence, sha256, subjectsHash, safeEvidencePath, repositoryReader} from '../scripts/evidence-quality.mjs';
 
 const bytes = Buffer.from('synthetic control, not historical data\n');
@@ -185,4 +186,45 @@ test('prior inventory and candidate registry decode their declared gzip .bin des
   const wrong=JSON.parse(f.registry);wrong.features[0].properties.source_value='foreign';
   const rebound=gzipDescriptor('registry.bin',Buffer.from(JSON.stringify(wrong)));f.m.outputs=[rebound.file];
   assert.throws(()=>validateEvidence(f.m,{readFile:(name,vintage)=>name==='registry.bin'?rebound.packed:readFile(name,vintage)}),/registry/);
+});
+
+
+test('containing-file subject custody reuses one authenticated body/decode per exact file',()=>{
+  const f=mixedSubjectFixture(),counts=new Map(),original=zlib.gunzipSync;let gunzips=0;
+  const readFile=(name,vintage,pin)=>{const key=vintage+':'+name;counts.set(key,(counts.get(key)??0)+1);return f.readFile(name,vintage,pin);};
+  zlib.gunzipSync=(...args)=>{gunzips++;return original(...args);};syncBuiltinESMExports();
+  try{
+    assert.equal(validateEvidence(f.m,{readFile}).status,'bytes-verified');
+    assert.deepEqual([...counts.values()],[1,1]);assert.equal(gunzips,1);
+  }finally{zlib.gunzipSync=original;syncBuiltinESMExports();}
+});
+
+test('prior inventory and candidate registry reuse separate authenticated whole snapshots',()=>{
+  const f=inventoryFixture(),record=gzipDescriptor('prior-audit.bin',f.record),registry=gzipDescriptor('registry.bin',f.registry);
+  f.m.baseline.files=[record.file];f.m.outputs=[registry.file];f.m.baseline.subject_inventory.path='prior-audit.bin';f.m.baseline.subject_inventory.registry_path='registry.bin';
+  const counts=new Map(),original=zlib.gunzipSync;let gunzips=0;
+  const readFile=(name,vintage)=>{
+    const key=vintage+':'+name;counts.set(key,(counts.get(key)??0)+1);
+    if(name==='prior-audit.bin'){assert.equal(vintage,commit);return record.packed;}
+    assert.equal(name,'registry.bin');assert.equal(vintage,'candidate');return registry.packed;
+  };
+  zlib.gunzipSync=(...args)=>{gunzips++;return original(...args);};syncBuiltinESMExports();
+  try{assert.equal(validateEvidence(f.m,{readFile}).status,'limited');assert.deepEqual([...counts.values()],[1,1]);assert.equal(gunzips,2);}
+  finally{zlib.gunzipSync=original;syncBuiltinESMExports();}
+});
+
+test('subject reuse rejects descriptor/vintage drift and keeps no cross-call body trust',()=>{
+  let f=mixedSubjectFixture();
+  assert.throws(()=>validateEvidence(f.m,{readFile:f.readFile,onFileChecked(file){
+    if(file.path==='components.bin')f.m.baseline.files[0].uncompressed_sha256='0'.repeat(64);
+  }}),/Checked subject descriptor changed/);
+  f=mixedSubjectFixture();
+  assert.throws(()=>validateEvidence(f.m,{readFile:f.readFile,onFileChecked(file){
+    if(file.path==='components.bin')f.m.baseline.subject_files[f.m.subject_ids[0]]={path:'components.bin',commit:'b'.repeat(40)};
+  }}),/requires baseline version 2/);
+  f=mixedSubjectFixture();
+  assert.equal(validateEvidence(f.m,{readFile:f.readFile,onFileChecked(file){
+    if(file.path==='components.bin')f.packed.fill(0);
+  }}).status,'bytes-verified','same-call custody uses the inspector snapshot, not the mutable reader buffer');
+  assert.throws(()=>validateEvidence(f.m,{readFile:f.readFile}),/Input bytes mismatch/);
 });

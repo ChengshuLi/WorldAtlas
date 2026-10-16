@@ -13,12 +13,22 @@ changes use the audited evidence profile. Unknown paths, changes outside those
 scopes and rename origins fall back to full regression; invalid ownership or
 incomplete API inventories reject rather than establish a focused proof.
 
-The focused profile runs its complete audited test roster without application
-installation, browsers, canonical product restoration or world computation.
-The trusted handoff gate also runs historical evidence controls. Package selection
-uses `.github/package-inputs.json` independently: only its declared inputs and
-verification paths require rebuilding. Neither a fast job nor mechanical evidence
-validation grants scientific approval. No new exclusions are introduced here.
+The focused profile discovers the delivery-control test families through the same
+predicate used for routing their changes. Added and removed controls do not need
+a second filename-roster edit. Python controls use their paired Node wrapper.
+Runner, workspace and package custody changes run their actual focused consumers;
+application implementation, inner builds, runtime dependencies and unknown paths
+retain full regression. Scientific geography applicability remains independent.
+
+Focused CI installs the actual Node/Python test dependencies, but does not run the
+unrelated application build, browser or full three-shard suite. Its checkout keeps
+first-party code and the small fixtures consumed by these tests, rather than whole
+archival datasets. Package declarations can also use focused coverage. The real
+publication build still checks its complete isolated inputs before replacing any
+existing outputs; some missing-data errors may therefore first surface at that
+build instead of candidate CI. Neither routing nor passing tests grants scientific
+approval. Preparation uses accepted-main code, so a routing change cannot choose
+its own cheaper run.
 
 Full regression discovers every `test/*.test.mjs` file and assigns it exactly once
 to three shards. Packaged assets remain on shard 0, expensive database neighbors

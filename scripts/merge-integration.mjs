@@ -1,6 +1,6 @@
 import {collectGeographicApproval, bindingHash} from './geographic-adjudication-api.mjs';
 import {COORDINATION_PATHS, integrationProfile, selectedDataCandidate, selectedDataSelection, candidateGeographyCode} from './integration-profile.mjs';
-import {FOCUSED_INTEGRATION_TESTS} from './run-integration-tests.mjs';
+import {focusedIntegrationTest} from './run-integration-tests.mjs';
 import {EXECUTION_CODE, REBIND_CODE} from './check-unchanged-selected-geography.mjs';
 import {loadPackageInputs, packagePathRequired, readPackageInputs, selectedDataCheckoutPatterns} from './package-inputs.mjs';
 import {githubPages, verifyIssueScope} from './issue-claim-contract.mjs';
@@ -23,7 +23,7 @@ export function geographyRequired(branch, files, reservation = {}, authoredEntri
   try { definition = loadPackageInputs(); } catch { return true; }
   const methods = new Set([...EXECUTION_CODE, ...REBIND_CODE]);
   return files.some(file => [file.filename, ...(file.previous_filename ? [file.previous_filename] : [])].some(name =>
-    !(COORDINATION_PATHS.has(name) && name.startsWith('scripts/') || FOCUSED_INTEGRATION_TESTS.includes(name)) ||
+    !(COORDINATION_PATHS.has(name) && name.startsWith('scripts/') || focusedIntegrationTest(name)) ||
     methods.has(name) || packagePathRequired(name, definition)));
 }
 
@@ -216,16 +216,19 @@ export async function prepareIntegration(options) {
     if (profile === 'full' && selectedDataCandidate(state.pr.head.ref, state.files, state.reservation)) {
       try {
         baseline = await tree(options.api, options.repo, state.base);
-        selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files: state.files, reservation: state.reservation, baseline, authored});
+        // Applicability belongs to the actual combined candidate; older author
+        // snapshots need not reproduce accepted-main smoke or package edits.
+        selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files: state.files, reservation: state.reservation, baseline, authored: integrated});
       } catch { /* Unknown applicability retains the complete suite. */ }
     }
-    const software = candidateGeographyCode(profile, state.files, selection?.test_selection);
+    const geographyRequiredForCandidate = geographyRequired(state.pr.head.ref, state.files, state.reservation, authored.entries);
+    const software = geographyRequiredForCandidate && candidateGeographyCode(profile, state.files, selection?.test_selection);
     const checkoutPatterns = selection?.test_selection === 'selected-data'
       ? selectedDataCheckoutPatterns(await readPackageInputs({api: options.api, route: root(options.repo), base: candidate, maximumBytes: 8 * 1024 * 1024}),
         integrated.entries, selection.expectations_path)
       : ['/*','!/data/regional-review/','!/research/campaigns/'];
     return {...state, candidate, profile, ...selection, geography_software: software,
-      geography_required: geographyRequired(state.pr.head.ref, state.files, state.reservation, authored.entries),
+      geography_required: geographyRequiredForCandidate,
       candidate_tree: integrated.object.tree.sha, checkout_patterns: checkoutPatterns,
       candidate_ref: fresh.reference};
   } catch (error) {
@@ -265,7 +268,7 @@ export async function completeIntegration(options) {
   let authored;
   // Final applicability is derived again from current trusted scope and ordinary
   // authored test blobs. A preparation output cannot waive this decision.
-  if (state.files.some(file => FOCUSED_INTEGRATION_TESTS.includes(file.filename)))
+  if (state.files.some(file => focusedIntegrationTest(file.filename)))
     authored = await tree(options.api, options.repo, state.pr.head.sha);
   const omitGeography = options.geographyResult === 'skipped' &&
     !geographyRequired(state.pr.head.ref, state.files, state.reservation, authored?.entries);
@@ -293,11 +296,11 @@ export async function completeIntegration(options) {
     // Selection can only exempt candidate checker code. When no changed path
     // selects that code, another whole-data classification cannot affect it.
     if (candidateGeographyCode(profile, state.files) && selectedDataCandidate(state.pr.head.ref, state.files, state.reservation)) {
-      authored ??= await tree(options.api, options.repo, state.pr.head.sha);
       try {
         baseline = await tree(options.api, options.repo, state.base);
+        const integrated = await tree(options.api, options.repo, options.testedCandidate, candidate);
         selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files: state.files,
-          reservation: state.reservation, baseline, authored});
+          reservation: state.reservation, baseline, authored: integrated});
       } catch { /* Unknown applicability retains full software validation. */ }
     }
     const software = candidateGeographyCode(profile, state.files, selection?.test_selection);

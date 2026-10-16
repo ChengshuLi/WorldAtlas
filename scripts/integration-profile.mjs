@@ -1,8 +1,8 @@
 import {repairComponentKey} from '../src/native-grid.js';
-import {FOCUSED_INTEGRATION_TESTS} from './run-integration-tests.mjs';
+import {focusedIntegrationTest} from './run-integration-tests.mjs';
 
-// Only these coordination controls have an audited focused test inventory.
-// Unknown docs/scripts/workflows retain full regression, including rename origins.
+// These delivery controls use their actual focused consumers. Unknown runtime
+// implementation and rename origins retain full regression.
 export const COORDINATION_PATHS = new Set([
   // Delivery orchestration is not imported by the atlas builder. Shared native
   // operators and native-preparation-guards remain outside this exact list.
@@ -15,15 +15,21 @@ export const COORDINATION_PATHS = new Set([
   'scripts/geographic-adjudication-api.mjs',
   'scripts/git-blob-transport.mjs', 'scripts/immutable-git-blobs.mjs',
   'scripts/integration-profile.mjs',
-  // Test-runner changes require full regression to validate the real inventory.
+  // Runner, workspace and package custody have actual focused child consumers.
+  'scripts/run-integration-tests.mjs', 'scripts/ci-setup-observations.mjs',
+  'scripts/local-workspace.mjs', 'scripts/worker-identity.mjs', 'scripts/github-quota.mjs',
+  'scripts/package-inputs.mjs', 'scripts/package-build.mjs',
+  'scripts/package-output-artifact.mjs', 'scripts/package-python-runtime.py',
+  'scripts/assemble-selected-package.mjs', 'scripts/selected-package-bootstrap.py',
+  '.github/package-inputs.json', 'AGENTS.md',
+  'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',
   'scripts/run-worker-merge.mjs',
   '.github/workflows/handoff-scope.yml',
   '.github/workflows/worker-merge.yml',
   '.github/evidence-policy.json'
 ]);
-// Only the actual focused runner inventory may accompany coordination changes.
-// A provider filename/status alone cannot establish an ordinary candidate file.
-const FOCUSED_TEST_PATHS = new Set(FOCUSED_INTEGRATION_TESTS);
+// Existing tests are checked as ordinary current files. Added controls run by
+// the same discovery rule; removed controls need no replacement full suite.
 // Callers supply the current linked issue's validated lane and declared scope.
 // Candidate metadata is never an ownership source.
 function engineeringOwnedScopes(reservation) {
@@ -39,19 +45,32 @@ export function integrationProfile(branch, files, reservation = {}, authoredEntr
   const names = files.flatMap(file => [file.filename, ...(file.previous_filename ? [file.previous_filename] : [])]);
   if (!names.length) return 'full';
   // Validate each focused test before composing it with the existing route.
-  const focused = files.filter(file => [file.filename, file.previous_filename].some(name => FOCUSED_TEST_PATHS.has(name)));
+  const focused = files.filter(file => [file.filename, file.previous_filename].some(name => focusedIntegrationTest(name)));
   if (focused.length && !(branch.startsWith('engineering/') && authoredEntries instanceof Map &&
-      focused.every(file => FOCUSED_TEST_PATHS.has(file.filename) && file.status === 'modified' &&
-        file.previous_filename === undefined && authoredEntries.get(file.filename)?.type === 'blob' &&
-        authoredEntries.get(file.filename)?.mode === '100644' &&
-        /^[a-f0-9]{40}$/.test(authoredEntries.get(file.filename)?.sha ?? '')))) return 'full';
+      focused.every(file => focusedIntegrationTest(file.filename) && (file.status === 'removed'
+        ? !authoredEntries.has(file.filename)
+        : authoredEntries.get(file.filename)?.type === 'blob' &&
+          authoredEntries.get(file.filename)?.mode === '100644' &&
+          /^[a-f0-9]{40}$/.test(authoredEntries.get(file.filename)?.sha ?? '') &&
+          (!file.filename.endsWith('.py') || (() => {
+            const wrapper = authoredEntries.get(file.filename.replace(/\.py$/, '.mjs'));
+            return wrapper?.type === 'blob' && wrapper.mode === '100644' && /^[a-f0-9]{40}$/.test(wrapper.sha ?? '');
+          })()))))) return 'full';
 
   if (branch.startsWith('geography/') && Array.isArray(reservation.owned_paths) &&
       names.every(name => reservation.owned_paths.some(prefix => name.startsWith(prefix)))) return 'evidence';
   const job = branch.split('/').slice(1).join('/');
   if (branch.startsWith('research/') && names.every(name => name.startsWith(`research/campaigns/${job}/`))) return 'evidence';
   if (branch.startsWith('engineering/')) {
-    const legacy = name => COORDINATION_PATHS.has(name) || FOCUSED_TEST_PATHS.has(name) || (name.startsWith('docs/') && /\.(md|txt)$/.test(name)) ||
+    // Deleted controls outside the declared package need no application rebuild.
+    // Remaining focused consumers still execute and missing imports/calls fail.
+    // Declared runtime inputs and other unknown deletions retain full regression.
+    let currentPackage;
+    try { currentPackage = loadPackageInputs(); } catch { return 'full'; }
+    const removed = new Set(files.filter(file => file.status === 'removed' && !file.previous_filename &&
+      /^(?:scripts\/|test\/|\.github\/workflows\/)/.test(file.filename) &&
+      !packagePathRequired(file.filename, currentPackage)).map(file => file.filename));
+    const legacy = name => removed.has(name) || COORDINATION_PATHS.has(name) || focusedIntegrationTest(name) || (name.startsWith('docs/') && /\.(md|txt)$/.test(name)) ||
       name.startsWith(`coordination/engineering/${job}/`) || name === `coordination/engineering/${job}.json`;
     if (names.every(legacy)) return 'evidence';
     // A verified retained scope permits new packets, not edits to its existing
@@ -60,8 +79,7 @@ export function integrationProfile(branch, files, reservation = {}, authoredEntr
     // Exact restored files are considered only by the full selected-data walk.
     const scopes = engineeringOwnedScopes(reservation).filter(owned => owned.endsWith('/'));
     if (!scopes.length) return 'full';
-    let definition;
-    try { definition = loadPackageInputs(); } catch { return 'full'; }
+    const definition = currentPackage;
     const packet = name => /\.(?:md|txt|json|jsonl|jsonl\.gz|log|stdout|stderr|mjs|py|csv|tsv)$/.test(name) &&
       !/^(?:package(?:-lock)?\.json|npm-shrinkwrap\.json|(?:requirements|constraints)(?:[.-].*)?\.txt|pyproject\.toml|setup\.(?:py|cfg)|__init__\.py|(?:site|user)customize\.py|(?:js|ts)config(?:\.[^.]+)?\.json|import[-_.]?map\.json)$/i.test(name.split('/').at(-1));
     if (files.every(file => {
@@ -79,7 +97,7 @@ export function integrationProfile(branch, files, reservation = {}, authoredEntr
 // This is conservative path classification, not a programme/hash exemption.
 // Data-only full checks still use baseline code and authenticated adjudication.
 export function candidateGeographyCode(profile, files, testSelection) {
-  if (profile !== 'full' || testSelection === 'selected-data') return false;
+  if (!['full','evidence'].includes(profile) || testSelection === 'selected-data') return false;
   return files.some(file => [file.filename, file.previous_filename].filter(Boolean).some(name =>
     /^scripts\/.*\.(?:[cm]?js|[cm]?ts|py|wasm)$/.test(name) ||
     /^src\/(?:native-|effective-footprint\.|ownership-codec\.|regional-import-gate\.|reference-metadata\.)/.test(name) ||
@@ -276,11 +294,11 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       const before = baseline.entries.get(name), after = authored.entries.get(name);
       return ordinary(before) && ordinary(after) && before.sha === after.sha && before.size === after.size;
     };
-    // The fixed walk may retain accepted code or binary sources. Their exact
-    // unchanged tree identity, not their suffix, establishes that this PR adds
-    // no executable change. New leaves keep the inert/native-operand boundary.
+    // Fixed consumer roles establish how these bodies are read. Their filenames
+    // do not determine whether a source body is data; exact ordinary-object
+    // identity remains required and actual consumers validate their contents.
     const pin = value => {
-      needSelected(value && safe(value.path) && (unchangedRole(value.path) || /\.(?:json|jsonl\.gz|json\.gz|log)$/.test(value.path) || nativeOperands.has(value.path)) &&
+      needSelected(value && safe(value.path) &&
         hash(value.sha256) && Number.isSafeInteger(value.bytes) && value.bytes >= 0, 'invalid inert role pin');
       const row = authored.entries.get(value.path);
       needSelected(ordinary(row) && row.size === value.bytes &&

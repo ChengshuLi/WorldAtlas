@@ -56,13 +56,13 @@ try {
   const reference = geography(db);
   const pixelAudit=JSON.parse(await fs.readFile('data/pixel-audit.json','utf8'));
   reference.pixelMissing=pixelAudit.missing.map(f=>f.id);
-  checkPrepared(reference.features);
-  if(geographicRelease.hierarchy_sha256!==createHash('sha256').update(await fs.readFile('data/hierarchy.json')).digest('hex')||geographicRelease.footprints_sha256!==checkPrepared(reference.features))throw Error('Reference release does not match prepared map assets');
+  const preparedFootprints=checkPrepared(reference.features);
+  if(geographicRelease.hierarchy_sha256!==createHash('sha256').update(await fs.readFile('data/hierarchy.json')).digest('hex')||geographicRelease.footprints_sha256!==preparedFootprints)throw Error('Reference release does not match prepared map assets');
   validatePreparedEvidenceIndex(preparedEvidence,geographicRelease);
   const boundarySourceReviews=currentContext?.boundarySourceReviews??{};
   let gridIndex,ownership;
   if(fixedGrid){
-    if(fixedGrid.footprints_sha256!==checkPrepared(reference.features)||(selectedGrid.applicationReference?.hierarchy_sha256??fixedGrid.hierarchy_sha256)!==createHash('sha256').update(await fs.readFile('data/hierarchy.json')).digest('hex'))throw Error('Precompiled canonical grid is stale');
+    if(fixedGrid.footprints_sha256!==preparedFootprints||(selectedGrid.applicationReference?.hierarchy_sha256??fixedGrid.hierarchy_sha256)!==createHash('sha256').update(await fs.readFile('data/hierarchy.json')).digest('hex'))throw Error('Precompiled canonical grid is stale');
     const bytes=selectedGrid.bounds;
     if(createHash('sha256').update(bytes).digest('hex')!==fixedGrid.bounds.sha256)throw Error('Precompiled location bounds hash mismatch');
     const bounds=JSON.parse(gunzipSync(bytes)),byId=new Map(bounds.map(row=>[row.id,row]));

@@ -44,8 +44,8 @@ test('queue profile retains geography owned scope and full fallback outside it',
 
 test('package verification, builders and runners stay full', () => {
   for (const filename of ['scripts/build-hosted.mjs', 'scripts/build-static.mjs', 'scripts/deployment-budget.mjs',
-    'scripts/package-inputs.mjs', 'scripts/package-build.mjs', '.github/package-inputs.json',
-    'scripts/build-cloudflare-inner.mjs', 'test/package-build.test.mjs', 'scripts/run-integration-tests.mjs', 'src/main.js', 'data/hierarchy.json', 'drizzle/0002.sql']) {
+    
+    'scripts/build-cloudflare-inner.mjs', 'src/main.js', 'data/hierarchy.json', 'drizzle/0002.sql']) {
     assert.equal(integrationProfile('engineering/example', [{filename}]), 'full', filename);
   }
 });
@@ -58,7 +58,7 @@ test('geography software route is derived from changed checker inputs, retaining
   'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',
   'src/ownership-codec.js', 'src/native-grid.js', 'src/reference-metadata.js', 'requirements.txt']) {
   assert.equal(candidateGeographyCode('full', changed(name)), true, name);
-  assert.equal(candidateGeographyCode('evidence', changed(name)), false, name);
+  assert.equal(candidateGeographyCode('evidence', changed(name)), true, name);
   assert.equal(candidateGeographyCode('full', changed(name), 'selected-data'), false, name);
  }
  for (const name of ['data/geography/part-0.json', 'src/app.js', 'src/attributes.js',

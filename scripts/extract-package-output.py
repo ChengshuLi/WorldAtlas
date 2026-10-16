@@ -13,7 +13,6 @@ import stat
 import sys
 import zipfile
 
-MAX_METADATA = 8 * 1024 * 1024
 MAX_SAFE_INTEGER = 2**53 - 1
 CHUNK = 1024 * 1024
 
@@ -53,19 +52,19 @@ def authenticated_archive(archive, expected_digest):
 
 def manifest_bytes(package):
     matches = [row for row in package.infolist() if row.filename == '.cache/package-output-manifest.json']
-    need(len(matches) == 1 and 0 < matches[0].file_size <= MAX_METADATA
+    need(len(matches) == 1 and 0 < matches[0].file_size <= MAX_SAFE_INTEGER
          and not matches[0].flag_bits & 1
-         and stat.S_IFMT(matches[0].external_attr >> 16) in (0, stat.S_IFREG), 'Bounded unique original manifest required')
+         and stat.S_IFMT(matches[0].external_attr >> 16) in (0, stat.S_IFREG), 'Unique original manifest required')
     with package.open(matches[0]) as stream:
-        raw = stream.read(MAX_METADATA + 1)
-        need(len(raw) == matches[0].file_size and len(raw) <= MAX_METADATA, 'Whole bounded manifest required')
+        raw = stream.read(matches[0].file_size + 1)
+        need(len(raw) == matches[0].file_size, 'Whole manifest required')
     return raw
 
 
 def extract(archive, target, expected_archive_digest, expected_manifest_digest, expected_manifest_bytes):
     expected_manifest_bytes = int(expected_manifest_bytes)
     need(isinstance(expected_manifest_digest, str) and len(expected_manifest_digest) == 64
-         and 0 < expected_manifest_bytes <= MAX_METADATA, 'Exact authenticated original manifest required')
+         and 0 < expected_manifest_bytes <= MAX_SAFE_INTEGER, 'Exact authenticated original manifest required')
     target = Path(target)
     need(not target.exists() and not target.is_symlink(), 'Fresh owned extraction destination required')
     parent = target.parent.resolve(strict=True)
@@ -92,7 +91,7 @@ def extract(archive, target, expected_archive_digest, expected_manifest_digest, 
             expected['.cache/package-output-manifest.json'] = (len(raw), hashlib.sha256(raw).hexdigest())
             receipt = manifest['original_build_receipt']
             need(receipt['path'] == '.cache/package-input-build.json' and type(receipt['bytes']) is int
-                 and 0 < receipt['bytes'] <= MAX_METADATA, 'Exact original build receipt required')
+                 and 0 < receipt['bytes'] <= MAX_SAFE_INTEGER, 'Exact original build receipt required')
             expected[receipt['path']] = (receipt['bytes'], receipt['sha256'])
             allowed_directories = set()
             for name in expected:

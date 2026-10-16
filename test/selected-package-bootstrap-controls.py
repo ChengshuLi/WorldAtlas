@@ -184,6 +184,29 @@ class BootstrapTests(unittest.TestCase):
             return value
         self.alter_api=alter;self.rejected('Trusted Git object body differs')
 
+    def test_authenticated_source_body_can_exceed_old_metadata_and_blob_ceilings(self):
+        self.write('scripts/child.mjs', b'/*' + b'x' * (33 * 1024 * 1024) + b'*/\n')
+        self.trust_changes(); self.missing_objects(); self.accepted()
+        self.assertEqual(list((self.root/'.git/objects').iterdir()), [])
+
+    def test_authenticated_closure_can_exceed_512_modules_and_rejects_last_substitution(self):
+        self.write('scripts/assemble-selected-package.mjs', ''.join(f"import './member-{i}.mjs';\n" for i in range(513)))
+        for i in range(513): self.write(f'scripts/member-{i}.mjs', 'export const value=1;\n')
+        self.trust_changes()
+        # Cache only exact repeated parser inputs in this fixture. Every source
+        # still passes the actual bootstrap's Git/body/mode/path authentication.
+        actual=subprocess.check_output; parsed={}
+        def repeated_parse(args, **kwargs):
+            if '--experimental-vm-modules' not in args: return actual(args, **kwargs)
+            raw=kwargs['input']
+            if raw not in parsed: parsed[raw]=actual(args, **kwargs)
+            return parsed[raw]
+        with patch.object(bootstrap.subprocess, 'check_output', side_effect=repeated_parse):
+            self.accepted(); self.started=[]
+            self.write('scripts/member-0.mjs', 'export const value=2;\n')
+            self.rejected('Actual source differs')
+        self.assertEqual(len(parsed),2)
+
     def test_accept_intact_transitive_static_closure(self): self.accepted()
     def test_reject_direct_source_edit(self):
         self.write('scripts/assemble-selected-package.mjs', "import './child.mjs';\n// edited\n"); self.rejected('Actual source differs')

@@ -126,10 +126,10 @@ export function metricInput(manifest, metric) {
 
 // Subject JSON uses the same declared gzip transport as whole-file inspection.
 // Legacy .gz files remain supported; arbitrary binary files are never sniffed.
-function subjectJSON(file, name, vintage, readFile, maxFileBytes) {
-  const raw = readFile(name, vintage, file);
-  const compressed = file.uncompressed_sha256 !== undefined || name.endsWith('.gz');
-  return JSON.parse(compressed ? decodeEvidenceGzip(raw, file, {maxFileBytes}) : raw);
+function subjectJSON(file, vintage, checkedBody, maxFileBytes) {
+  const {raw, unpacked} = checkedBody(file, vintage);
+  const compressed = file.uncompressed_sha256 !== undefined || file.path.endsWith('.gz');
+  return JSON.parse(compressed ? unpacked ?? decodeEvidenceGzip(raw, file, {maxFileBytes}) : raw);
 }
 
 function subjectFileBinding(value, manifest) {
@@ -193,15 +193,12 @@ function composedSubjectIds(collection, binding) {
 // Original routing .bin.gz bodies are gzip JSONL byte-stream parts. Only complete
 // family records inside one authenticated part are eligible; split edge fragments
 // are never a subject reference. This is identity custody, not geographic approval.
-function familyRecordPart(file, readFile, maxFileBytes) {
+function familyRecordPart(file, body, maxFileBytes) {
   require(file.bytes <= maxFileBytes && file.uncompressed_bytes <= maxFileBytes,
     'Family record source exceeds ordinary decoded budget');
-  const raw = Buffer.from(readFile(file.path, file.commit, file));
-  require(raw.length === file.bytes && sha256(raw) === file.sha256,
-    'Family record whole encoded source drift');
-  const body = decodeEvidenceGzip(raw, file, {maxFileBytes});
-  require(body.length === file.uncompressed_bytes && sha256(body) === file.uncompressed_sha256,
-    'Family record whole decoded source drift');
+  // The inspector already authenticated this exact whole decoded snapshot.
+  // Individual complete records and their original byte offsets remain checked.
+  require(Buffer.isBuffer(body), 'Missing checked whole family body');
   const records = new Map(), ids = new Set();
   let start = 0;
   while (start < body.length) {
@@ -224,7 +221,7 @@ function familyRecordPart(file, readFile, maxFileBytes) {
 }
 
 /** Identity-only projection from retained prior evidence, never a geometry/source certification. */
-function verifySubjectInventory(manifest, readFile, maxFileBytes, limits) {
+function verifySubjectInventory(manifest, checkedBody, maxFileBytes, limits) {
   const inventory = manifest.baseline.subject_inventory;
   require(!manifest.baseline.subject_files, 'Subject inventory cannot replace a containing-file claim');
   require(inventory?.version === 1 && inventory.basis === 'prior-evidence' &&
@@ -238,12 +235,12 @@ function verifySubjectInventory(manifest, readFile, maxFileBytes, limits) {
   require(manifest.lane === 'geography' && manifest.stages?.geographic_approval !== 'approved',
     'Prior evidence cannot certify geography');
   limits.push(`Subject inventory uses retained prior evidence (${inventory.path}); original source membership and geometry were not independently validated by this inventory check`);
-  if (!readFile) return;
+  if (!checkedBody) return;
   const decode = (name, vintage) => {
     const files = vintage === 'candidate' ? manifest.outputs : manifest.baseline.files;
-    return subjectJSON(files.find(file => file.path === name), name, vintage, readFile, maxFileBytes);
+    return subjectJSON(files.find(file => file.path === name), vintage, checkedBody, maxFileBytes);
   };
-  let values = subjectJSON(historical, historical.path, historical.commit, readFile, maxFileBytes);
+  let values = subjectJSON(historical, historical.commit, checkedBody, maxFileBytes);
   for (const key of inventory.json_pointer.slice(1).split('/').map(key => key.replaceAll('~1', '/').replaceAll('~0', '~'))) {
     require(values && Object.hasOwn(values, key), 'Subject inventory pointer does not resolve');
     values = values[key];
@@ -267,9 +264,9 @@ function verifySubjectInventory(manifest, readFile, maxFileBytes, limits) {
   }
 }
 
-/** Reader returns bytes from an immutable baseline or candidate; never executes packet code. */
+/** Reader returns immutable baseline/candidate bytes; onFileChecked sees only authenticated whole bodies. */
 export function validateEvidence(manifest, {readFile, expectedIssue, expectedSubjects, expectedPins,
-  expectedLane, maxFileBytes, maxTotalBytes} = {}) {
+  expectedLane, maxFileBytes, maxTotalBytes, onFileChecked} = {}) {
   require(manifest?.version === 1, 'Unsupported evidence version');
   require(Number.isSafeInteger(manifest.issue) && manifest.issue > 0 &&
     (!expectedIssue || manifest.issue === expectedIssue), 'Wrong evidence issue');
@@ -329,6 +326,18 @@ export function validateEvidence(manifest, {readFile, expectedIssue, expectedSub
   const sources = manifest.sources;
   require(Array.isArray(sources) && new Set(sources.map(x => x.id)).size === sources.length, 'Duplicate/missing source inventory');
   const limits = [], checked = [], allPaths = new Set(); let total = 0;
+  const subjectPaths = new Set(manifest.lane === 'geography' ? [
+    ...Object.values(manifest.baseline.subject_files ?? {}).map(binding => typeof binding === 'string' ? binding : binding?.path),
+    manifest.baseline.subject_inventory?.path, manifest.baseline.subject_inventory?.registry_path
+  ] : []);
+  const subjectBodies = new Map();
+  const identity = file => JSON.stringify([file.path, file.bytes, file.sha256, file.hash_kind,
+    file.uncompressed_bytes, file.uncompressed_sha256]);
+  const checkedBody = (file, vintage) => {
+    const body = subjectBodies.get(JSON.stringify([vintage, file.path]));
+    require(body && body.identity === identity(file), 'Checked subject descriptor changed or vintage is absent');
+    return body;
+  };
   function inspect(file, vintage) {
     fileDescriptor(file);
     require(vintage !== 'candidate' || !Object.hasOwn(file, 'commit'), 'Candidate file cannot declare historical commit');
@@ -339,13 +348,17 @@ export function validateEvidence(manifest, {readFile, expectedIssue, expectedSub
     if (!readFile) { limits.push(`Bytes not checked: ${key}`); return; }
     const raw = Buffer.from(readFile(file.path, vintage, file));
     require(raw.length === file.bytes && sha256(raw) === file.sha256, `Input bytes mismatch: ${key}`);
+    let unpacked;
     if (file.uncompressed_sha256 !== undefined) {
       require(file.uncompressed_bytes <= maxFileBytes, 'Uncompressed file exceeds budget');
-      const unpacked = decodeEvidenceGzip(raw, file, {maxFileBytes: explicitMaxFileBytes});
+      unpacked = decodeEvidenceGzip(raw, file, {maxFileBytes: explicitMaxFileBytes});
       require(unpacked.length === file.uncompressed_bytes && sha256(unpacked) === file.uncompressed_sha256,
         `Uncompressed bytes mismatch: ${key}`);
     }
     checked.push(key);
+    if (subjectPaths.has(file.path)) subjectBodies.set(JSON.stringify([vintage, file.path]),
+      {identity: identity(file), raw, unpacked});
+    onFileChecked?.(file, vintage, raw, unpacked);
   }
   for (const file of historicalFiles) inspect(file, file.commit);
   require(!manifest.baseline.subject_inventory || manifest.lane === 'geography',
@@ -372,7 +385,7 @@ export function validateEvidence(manifest, {readFile, expectedIssue, expectedSub
           if (!recordParts.has(key)) {
             require(total + file.uncompressed_bytes <= maxTotalBytes, 'Complete original family record phase exceeds byte budget');
             total = addBytes(total, file.uncompressed_bytes);
-            recordParts.set(key, familyRecordPart(file, readFile, maxFileBytes));
+            recordParts.set(key, familyRecordPart(file, checkedBody(file, file.commit).unpacked, maxFileBytes));
           }
           const record = recordParts.get(key).get(binding.record_offset);
           require(record && record.id === id && record.bytes === binding.record_bytes &&
@@ -383,7 +396,7 @@ export function validateEvidence(manifest, {readFile, expectedIssue, expectedSub
         continue;
       }
       if (readFile) {
-        if (!parsed.has(key)) parsed.set(key, subjectJSON(file, file.path, file.commit, readFile, explicitMaxFileBytes));
+        if (!parsed.has(key)) parsed.set(key, subjectJSON(file, file.commit, checkedBody, explicitMaxFileBytes));
         if (binding.kind === 'direct') {
           require(parsed.get(key).features?.some(f => (f.id ?? f.properties?.id) === id),
             `Subject missing from claimed containing file: ${id}`);
@@ -422,7 +435,7 @@ export function validateEvidence(manifest, {readFile, expectedIssue, expectedSub
   }
   require(Array.isArray(manifest.outputs), 'Missing output inventory');
   for (const file of manifest.outputs) inspect(file, 'candidate');
-  if (manifest.baseline.subject_inventory) verifySubjectInventory(manifest, readFile, explicitMaxFileBytes, limits);
+  if (manifest.baseline.subject_inventory) verifySubjectInventory(manifest, readFile ? checkedBody : undefined, explicitMaxFileBytes, limits);
   require(Array.isArray(manifest.methods) && manifest.methods.every(x => text(x.id) && text(x.description) &&
     text(x.software) && text(x.units)), 'Missing method/environment');
   for (const method of manifest.methods) if (method.kind === 'geography') {

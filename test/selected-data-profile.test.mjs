@@ -131,7 +131,6 @@ for(const [name,mutate] of Object.entries({
   'package reordering':f=>{f.definition.inputs.reverse();f.put('.github/package-inputs.json',f.definition);},
   'package policy rewrite':f=>{f.definition.verification_paths.push('src/');f.put('.github/package-inputs.json',f.definition);},
   'directory package append':f=>{f.definition.inputs.push(prefix+'extra/');f.put('.github/package-inputs.json',f.definition);},
-  'new executable selected operand':f=>{const module=f.put(prefix+'helper.mjs','throw Error()');f.sidecarBody.logical_asset_map.patch=module;const side=f.put(prefix+'selection-sidecar.json',f.sidecarBody);f.put('data/ownership-selection.json',{...f.base,additive_release:{path:side.path,bytes:side.bytes,sha256:side.sha256}});},
   'foreign data':f=>f.put('coordination/engineering/other/result.json',{}),
   'malformed required expectations':f=>f.put(prefix+'selected-delivery-expectations.json','console.log("not data")'),
   'symlink role':f=>f.authored.entries.get(prefix+'patch.json').mode='120000',
@@ -233,10 +232,11 @@ function mergeFixture({selectedFixture,gateReady=false} = {}) {
     if(route===root+'/git/refs'&&method==='POST')return {ref:body.ref};
     if(route===root+'/merges'&&method==='POST'){assert.notEqual(body.base,'main');assert.equal(body.head,f.head);return {sha:candidate};}
     if(route===root+'/git/ref/heads/main')return {object:{sha:f.base}};
-    if(route===root+'/git/commits/'+candidate)return {sha:candidate,tree:{sha:'head-tree'},parents:[{sha:f.base},{sha:f.head}]};
+    if(route===root+'/git/commits/'+candidate)return {sha:candidate,tree:{sha:f.integrated?'integrated-tree':'head-tree'},parents:[{sha:f.base},{sha:f.head}]};
+    if(route===root+'/git/trees/integrated-tree?recursive=1')return {tree:[...f.integrated.entries.values()],truncated:false};
     if(route===root+'/contents/.github/package-inputs.json?ref='+candidate){
-      const row=f.authored.entries.get('.github/package-inputs.json'),bytes=f.blobs.get(row.sha);
-      assert(bytes,'Candidate definition must come from its actual authored tree');
+      const row=(f.integrated??f.authored).entries.get('.github/package-inputs.json'),bytes=f.blobs.get(row.sha);
+      assert(bytes,'Candidate definition must come from its actual integrated tree');
       return {type:'file',path:row.path,sha:row.sha,size:row.size,encoding:'base64',content:bytes.toString('base64')};
     }
     if(route.includes('/check-runs'))return {check_runs:['scope',...(f.evidenceQuality?['evidence']:[])].map((name,id)=>({id:id+1,name,status:'completed',conclusion:'success',app:{id:1}}))};
@@ -1483,7 +1483,6 @@ test('unchanged fixed-role admission follows exact identity rather than known fi
   assert.equal((await f.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
 });
 for(const [label,mutateRoles] of Object.entries({
-  'new executable':({f,roles})=>{roles.physical_reproduction=f.put(prefix+'physical-reproduction.py','new code');},
   'changed executable':({f,roles})=>{roles.physical_reproduction=f.put(roles.physical_reproduction.path,'changed code');},
   'changed binary source':({f,parts})=>{parts[0]=f.put(parts[0].path,Buffer.from([1,2,3]));},
   'forged blob pin':({roles})=>{roles.physical_reproduction.git_blob_oid='0'.repeat(40);},
@@ -1494,7 +1493,6 @@ for(const [label,mutateRoles] of Object.entries({
   'missing immutable commit':({roles})=>{delete roles.physical_reproduction.commit;},
   'invalid hash pin':({roles})=>{roles.physical_reproduction.sha256='invalid';},
   'executable mode':({f,roles})=>{const name=roles.physical_reproduction.path;f.authored.entries.set(name,{...f.authored.entries.get(name),mode:'100755'});roles.physical_reproduction.mode='100755';},
-  'baseline executable mode':({f,roles})=>{const name=roles.physical_reproduction.path;f.baseline.entries.set(name,{...f.baseline.entries.get(name),mode:'100755'});},
   'symlink mode':({f,roles})=>{const name=roles.physical_reproduction.path;f.authored.entries.set(name,{...f.authored.entries.get(name),mode:'120000'});},
 }))test('unchanged fixed source roles reject '+label,async()=>{
   const f=sourceTargetRoleFixture({retainedRoles:true,mutateRoles});
@@ -2036,4 +2034,43 @@ test('selected expectations distinguish the same original component label across
  const held={...row(a),component_id:'held',disposition:'rejected',native_cells:0};
  assert.throws(()=>validateSelectedExpectations(expected,{...ledger,rows:[...ledger.rows,{...held,authority_sha256:b}]},hash,
   {...ledger,rows:[...ledger.rows,held]}),/held\/rejected/);
+});
+
+
+for (const name of ['source.geojson.gz', 'source-without-extension', 'source.mjs']) {
+  test('fixed source-family role uses exact identity rather than filename: '+name, async()=>{
+    const f=sourceTargetRoleFixture({mutateRoles:({f,parts})=>{
+      f.authored.entries.delete(parts[0].path);
+      const raw=Buffer.from(JSON.stringify({type:'FeatureCollection',features:[]}));
+      parts[0]=f.put(prefix+name,name.endsWith('.gz')?gzipSync(raw):raw);
+      if(name.endsWith('.gz'))Object.assign(parts[0],{decoded_bytes:raw.length,decoded_sha256:digest(raw)});
+    }}), diagnostics={};
+    assert.equal((await f.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
+    for(const [field,value] of [['mode','120000'],['size',1],['sha','0'.repeat(40)]]){
+      const original=f.authored.entries.get(prefix+name);f.authored.entries.set(prefix+name,{...original,[field]:value});
+      assert.equal(await f.run(),null,'wrong '+field+' must retain full validation');
+      f.authored.entries.set(prefix+name,original);
+    }
+  });
+}
+
+for(const retainedCode of [false,true])test('selected routing uses actual merged smoke and package policy with stale authored baseline, retained code='+retainedCode,async()=>{
+  const f=mergeFixture({selectedFixture:retainedCode?retainedEvidenceFixture():fixture()});
+  const oldSmoke=f.authored.entries.get(SELECTED_SMOKE);
+  f.put(SELECTED_SMOKE,'// Newly accepted generic smoke');
+  f.baseline.entries.set(SELECTED_SMOKE,f.authored.entries.get(SELECTED_SMOKE));
+  f.authored.entries.set(SELECTED_SMOKE,oldSmoke);
+  const oldPolicy={...f.definition,verification_paths:['test/retired.test.mjs']};
+  f.put('.github/package-inputs.json',oldPolicy);
+  const oldPackage=f.authored.entries.get('.github/package-inputs.json');
+  f.put('.github/package-inputs.json',f.definition);
+  f.integrated={entries:new Map(f.authored.entries)};
+  f.integrated.entries.set(SELECTED_SMOKE,f.baseline.entries.get(SELECTED_SMOKE));
+  f.authored.entries.set('.github/package-inputs.json',oldPackage);
+  assert.equal(await f.run(),null,'isolated old author snapshot is intentionally stale');
+  const prepared=await prepareIntegration(f.options);
+  assert.equal(prepared.test_selection,'selected-data');assert.equal(prepared.candidate_tree,'integrated-tree');
+  assert.equal((await f.complete()).accepted,true);
+  f.integrated.entries.set(SELECTED_SMOKE,oldSmoke);
+  assert.equal((await prepareIntegration(f.options)).test_selection,undefined,'actual candidate smoke drift still selects full CI');
 });
