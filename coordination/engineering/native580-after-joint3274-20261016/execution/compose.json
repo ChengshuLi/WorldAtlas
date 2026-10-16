@@ -1,0 +1,20 @@
+{
+  "kind": "actual-stock-compose-native580-after-accepted2082",
+  "command": [
+    "node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "compose",
+    ".takeover/next-successor/actual2082-native580-compose-config.json",
+    ".cache/delivery-handoff/native580-after-accepted2082/composition"
+  ],
+  "actual_executing_tree": "fddace51e262faf39703e3328b94462c5ddc42db",
+  "accepted_numerical_predecessor": "7ef13f96c0005b6e181a640005bd867bbc2f63d0",
+  "conditional_VN348_code_prerequisite": 2083,
+  "source_observations_or_qualification_replayed": false,
+  "exit_code": 0,
+  "elapsed_seconds": 18.284476437984267,
+  "max_rss_kib": 444132,
+  "available_bytes_before": 10754379776,
+  "available_bytes_after": 10743668736,
+  "ended_utc": "2026-10-16T06:53:56.945661+00:00"
+}
