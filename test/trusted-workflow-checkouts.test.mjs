@@ -5,6 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {spawnSync, execFileSync} from 'node:child_process';
 import {checkGitScope} from '../scripts/check-handoff-scope.mjs';
+import {containsPackagePath,loadPackageInputs} from '../scripts/package-inputs.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const workflows = ['issue-claims.yml', 'worker-merge.yml'];
@@ -212,6 +213,10 @@ test('queue focused candidate includes the inputs of its nested actual-checkout 
   const candidate = source.match(/- name: Checkout only focused-test inputs for evidence regression[\s\S]*?sparse-checkout: \|\n((?:            .+\n)+)/);
   assert.ok(candidate, 'actual focused queue checkout must be declared');
   const directories = candidate[1].trim().split('\n').map(row => row.trim());
+  const definition=loadPackageInputs(root),declared=[...definition.inputs,...definition.verification_paths];
+  for(const name of directories.filter(row=>row.startsWith('research/')))
+    assert(containsPackagePath(declared,name)||declared.includes(name+'/'),
+      'Nested research fixture must be retained by the actual full checkout: '+name);
   const result = probe(directories, {checkoutTests: true});
   assert.equal(result.status, 0, result.stdout + result.stderr);
   const missing = probe(directories.filter(row => !row.includes('selected-checkpoint-reuse-20261012')), {checkoutTests: true});
