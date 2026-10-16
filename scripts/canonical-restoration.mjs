@@ -8,9 +8,6 @@ import {restoreWholeImage} from './evidence/restore-whole-image.mjs';
 import {applyBytePatch,verifyWholeBytes} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/byte-patch.mjs';
 import {gunzipSync} from 'node:zlib';
 import {applyEncodedBytePatch} from './evidence/captured-byte-patch.mjs';
-// Retain the immutable original in the actual import closure for authored-source custody.
-import * as originalRestoration from '../coordination/engineering/eastern-two-gap-repair-native-20261007/restore-canonical-products.mjs';
-export {originalRestoration};
 
 const sha = raw => createHash('sha256').update(raw).digest('hex');
 const canonicalIndex = 'b82b195d94530d9b1f48153f7e47616f8b841cb1438ddf59994ba4869a1d7876';
