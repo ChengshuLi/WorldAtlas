@@ -39,7 +39,7 @@ function run({readFails=false,commentFails=false,phase='prepare',merged=true,hea
 }
 test('actual trusted entry point preserves the original rejection before a denied comment',()=>{
   const {result,receipt,summary}=run({readFails:true,commentFails:true});
-  assert.notEqual(result.status,0);assert.match(result.stderr,/POST.*HTTP 403/);
+  assert.notEqual(result.status,0);
   assert.equal(receipt.accepted,false);assert.equal(receipt.status,'not-merged');
   assert.match(receipt.reason,/GET.*HTTP 418/);assert.match(summary,/GET.*HTTP 418/);
   assert.equal(receipt.api_error.http_status,418);assert.equal(receipt.notification_api_error.http_status,403);
@@ -118,7 +118,7 @@ test('actual entry point saves owned-parent/conflict diagnostics when notificati
       cwd:directory,encoding:'utf8',env:{...process.env,GITHUB_ACTIONS:'false',GH_TOKEN:'synthetic-token',GITHUB_REPOSITORY:'owner/repo',GITHUB_REF:'refs/heads/main',
         GITHUB_EVENT_PATH:path.join(directory,'event.json'),GITHUB_OUTPUT:path.join(directory,'outputs'),GITHUB_STEP_SUMMARY:path.join(directory,'summary'),MERGE_PHASE:'prepare'}});
     const receipt=JSON.parse(fs.readFileSync(path.join(directory,'merge-result.json')));
-    assert.notEqual(result.status,0);assert.match(result.stderr,/HTTP 403/);
+    assert.notEqual(result.status,0);assert.match(receipt.notification_error,/HTTP 403/);
     assert.equal(receipt.retryable,kind==='parents');
     assert.equal(receipt.candidate_diagnostics.expected_base,base);
     assert.equal(receipt.candidate_diagnostics.expected_head,head);
@@ -129,6 +129,7 @@ test('actual entry point saves owned-parent/conflict diagnostics when notificati
       assert.ok(receipt.candidate_diagnostics.observed_at);
     }
     assert.deepEqual(JSON.parse(fs.readFileSync(path.join(directory,'remaining-refs.json'))),[]);
+    assert.equal(fs.existsSync(path.join(directory,'outputs')),false,'Substantive preparation failure cannot publish candidate job outputs');
     assert.match(fs.readFileSync(path.join(directory,'summary'),'utf8'),/exact current main|conflict/);
   } finally {fs.rmSync(directory,{recursive:true,force:true});}
  }
@@ -164,7 +165,7 @@ test('actual final entry point cleans only its owned ref and retains successful 
   }
 });
 
-test('actual owned prepare skips preview polling and cleans its ref when notification is denied',()=>{
+for(const notification of ['denied','transport']) test('actual owned prepare retains its candidate and outputs when notification is '+notification,()=>{
   const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-prepare-notify-cleanup-'));
   const sha=c=>c.repeat(40),head=sha('a'),base=sha('b'),candidate=sha('c'),owned=sha('e');
   fs.mkdirSync(path.join(directory,'.github'));
@@ -195,7 +196,7 @@ test('actual owned prepare skips preview polling and cleans its ref when notific
       if(route==='/merges'&&options.method==='POST'){if(body.base==='main'||body.base==='engineering/test')throw Error('Protected branch update');refs.set(body.base,'${owned}');return Response.json({sha:'${owned}'},{status:201});}
       if(route.startsWith('/git/ref/heads/worldatlas-integration/'))return Response.json({object:{sha:refs.get(route.split('/git/ref/heads/')[1])}});
       if(options.method==='DELETE'){refs.delete(route.split('/git/refs/heads/')[1]);fs.writeFileSync('remaining-refs.json',JSON.stringify([...refs]));return new Response(null,{status:204});}
-      if(route==='/issues/2/comments'&&options.method==='POST')return Response.json({},{status:403});
+      if(route==='/issues/2/comments'&&options.method==='POST'){fs.writeFileSync('remaining-refs.json',JSON.stringify([...refs]));if('${notification}'==='transport')throw Error('Synthetic notification transport failure');return Response.json({},{status:403});}
       return Response.json(routes[route]??{});
     };`);
   try {
@@ -203,10 +204,13 @@ test('actual owned prepare skips preview polling and cleans its ref when notific
       cwd:directory,encoding:'utf8',env:{...process.env,GITHUB_ACTIONS:'false',GH_TOKEN:'synthetic-token',GITHUB_REPOSITORY:'owner/repo',GITHUB_REF:'refs/heads/main',GITHUB_RUN_ID:'1234',
         GITHUB_EVENT_PATH:path.join(directory,'event.json'),GITHUB_OUTPUT:path.join(directory,'outputs'),GITHUB_STEP_SUMMARY:path.join(directory,'summary'),MERGE_PHASE:'prepare'}});
     const receipt=JSON.parse(fs.readFileSync(path.join(directory,'merge-result.json')));
-    assert.notEqual(result.status,0);assert.match(result.stderr,/POST.*HTTP 403/);
+    assert.equal(result.status,0,result.stderr);
     assert.equal(receipt.accepted,false);assert.equal(receipt.status,'testing');assert.equal(receipt.tested_candidate,owned);
-    assert.match(receipt.notification_error,/HTTP 403/);assert.equal(receipt.candidate_cleanup.status,'deleted');
-    assert.deepEqual(JSON.parse(fs.readFileSync(path.join(directory,'remaining-refs.json'))),[]);
+    assert.match(receipt.notification_error,notification==='denied'?/HTTP 403/:/transport failure/);
+    assert.equal(receipt.candidate_cleanup,undefined);
+    assert.deepEqual(JSON.parse(fs.readFileSync(path.join(directory,'remaining-refs.json'))),[[receipt.candidate_ref,owned]]);
+    const outputs=fs.readFileSync(path.join(directory,'outputs'),'utf8');
+    assert.match(outputs,new RegExp('^candidate='+owned+'$','m'));assert.match(outputs,new RegExp('^base='+base+'$','m'));
   } finally {fs.rmSync(directory,{recursive:true,force:true});}
 });
 
