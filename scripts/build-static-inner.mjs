@@ -52,7 +52,7 @@ if(currentContext&&(currentContext.native_manifest_sha256!==selectedGrid.sha256|
 const nativeContextInputStage=currentContext?{status:'accepted-prepared-assets',native_manifest_sha256:selectedGrid.sha256,preparation:currentContext.nativeContextInputStage}:null;
 const db = openDatabase();
 try {
-  seedDatabase(db);
+  const {referenceRevision}=seedDatabase(db);
   const reference = geography(db);
   const pixelAudit=JSON.parse(await fs.readFile('data/pixel-audit.json','utf8'));
   reference.pixelMissing=pixelAudit.missing.map(f=>f.id);
@@ -70,7 +70,7 @@ try {
     gridIndex=createGridIndex(reference.features.map(feature=>({...feature,geometry:null,gridBounds:byId.get(feature.id).bounds,pixelIndex:byId.get(feature.id).index})));
   }else{gridIndex=createGridIndex(reference.features);ownership=packOwnership(compileOwnership(gridIndex));}
   const pixelIndices=new Map(gridIndex.map(({feature,index})=>[feature.id,index]));
-  const packageAdditive=ownershipSelection.requireNative?await prepareCurrentSelectedAdditive({root:process.cwd(),selectedGrid,geographicRelease,features:reference.features.map(feature=>({...feature,pixelIndex:pixelIndices.get(feature.id)}))}):null;
+  const packageAdditive=ownershipSelection.requireNative?await prepareCurrentSelectedAdditive({root:process.cwd(),selectedGrid,geographicRelease,referenceRevision,features:reference.features.map(feature=>({...feature,pixelIndex:pixelIndices.get(feature.id)}))}):null;
   const history = {
     attributes:db.prepare('SELECT * FROM attribute_records WHERE location_id IN (SELECT id FROM locations WHERE active=1)').all().map(r=>({...r,value:JSON.parse(r.value),metadata:JSON.parse(r.metadata)})),
     states: db.prepare('SELECT * FROM states WHERE location_id IN (SELECT id FROM locations WHERE active=1)').all(),

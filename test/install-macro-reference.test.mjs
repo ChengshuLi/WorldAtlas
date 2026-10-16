@@ -252,3 +252,19 @@ test('raw nonfinite JSON numbers cannot masquerade as retained null source metad
  assert.throws(()=>assertAppliedReferenceProperties(after,before),/Nonfinite/);
  assert.throws(()=>assertAppliedReferenceProperties({...before,missing:undefined},before),/missing/);
 });
+
+
+test('generated application revision requires its explicit migration result and keeps source-authored revisions literal',()=>{
+ const expected=parentProjectionFixture().after,revision='a'.repeat(64),actual=structuredClone(expected);
+ actual.metadata.reference_revision=revision;
+ const original=structuredClone(actual);
+ assert.doesNotThrow(()=>assertAppliedReferenceProperties(actual,expected,{referenceRevision:revision}));
+ assert.deepEqual(actual,original);
+ for(const referenceRevision of [undefined,'b'.repeat(64),'invalid'])assert.throws(()=>assertAppliedReferenceProperties(actual,expected,{referenceRevision}),/reference revision/);
+ for(const mutate of [p=>delete p.metadata.reference_corrections,p=>p.metadata.framework_match.id='changed',p=>p.name='changed',p=>p.parent_id='changed',p=>p.metadata.unexpected=true]){
+  const bad=structuredClone(actual);mutate(bad);assert.throws(()=>assertAppliedReferenceProperties(bad,expected,{referenceRevision:revision}),/complete applied source/);
+ }
+ const source={...expected,metadata:{...expected.metadata,reference_revision:'original source literal'}};
+ assert.doesNotThrow(()=>assertAppliedReferenceProperties(source,source,{referenceRevision:revision}));
+ assert.throws(()=>assertAppliedReferenceProperties({...source,metadata:{...source.metadata,reference_revision:revision}},source,{referenceRevision:revision}),/complete applied source/);
+});

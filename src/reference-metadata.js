@@ -135,10 +135,20 @@ export function assertReferenceOnlyLocationChange(before, after) {
 // Catalog/API rows retain all source properties, with only the database's
 // existing generated defaults. Never publish a corrected parent while dropping
 // its correction history, original fallback metadata or any source property.
-export function assertAppliedReferenceProperties(actual,expected) {
+export function assertAppliedReferenceProperties(actual,expected,{referenceRevision}={}) {
   need(actual&&expected&&typeof actual==='object'&&typeof expected==='object',
     'Current reference requires complete source properties');
+  need(referenceRevision===undefined||hash(referenceRevision),'Invalid application reference revision');
   const application={...actual};
+  // The database stamps the complete feature/hierarchy projection. Its caller
+  // must supply that actual migration result; a merely plausible hash is not
+  // evidence. A source-authored field remains part of the exact comparison.
+  if(!Object.hasOwn(expected.metadata??{},'reference_revision')&&Object.hasOwn(application.metadata??{},'reference_revision')){
+    need(hash(referenceRevision)&&application.metadata.reference_revision===referenceRevision,
+      'Generated reference revision differs from the actual application projection');
+    application.metadata={...application.metadata};
+    delete application.metadata.reference_revision;
+  }
   if(!Object.hasOwn(expected,'active')&&application.active===1)delete application.active;
   if(!Object.hasOwn(expected,'reference_owner')&&application.reference_owner===null)delete application.reference_owner;
   if(!Object.hasOwn(expected,'metadata')&&application.metadata!==undefined&&same(application.metadata,{}))delete application.metadata;

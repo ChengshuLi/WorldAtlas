@@ -353,3 +353,20 @@ test('actual native and geography loaders retain generated defaults and reject s
   }
  }finally{globalThis.fetch=oldFetch;await server.close();}
 });
+
+
+test('emitted metadata reader authenticates only the explicitly bound database revision',async()=>{
+ const f=await metadataRuntimeFixture(),revision='a'.repeat(64),features=structuredClone(f.currentFeatures);
+ for(const feature of features)feature.properties.metadata.reference_revision=revision;
+ f.data.referenceMetadata.application_reference_revision=revision;
+ const effective=await loadAdditiveNativePatch(f.data,features,f.base,{fetcher:f.fetcher});
+ assert.equal(pickOwnership(effective,3,3),1);
+ for(const referenceRevision of [undefined,'b'.repeat(64),'invalid']){
+  const data=structuredClone(f.data);if(referenceRevision===undefined)delete data.referenceMetadata.application_reference_revision;else data.referenceMetadata.application_reference_revision=referenceRevision;
+  await assert.rejects(loadAdditiveNativePatch(data,structuredClone(features),f.base,{fetcher:f.fetcher}),/reference revision/);
+ }
+ for(const mutate of [p=>delete p.metadata.reference_corrections,p=>p.metadata.source_id='changed',p=>p.metadata.framework_match.id='changed',p=>p.name='changed',p=>p.parent_id='old']){
+  const bad=structuredClone(features);mutate(bad[0].properties);
+  await assert.rejects(loadAdditiveNativePatch(f.data,bad,f.base,{fetcher:f.fetcher}),/complete applied source/);
+ }
+});

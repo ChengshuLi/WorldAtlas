@@ -96,7 +96,7 @@ export function seedDatabase(db) {
     const archive=new URL('./data/geographic-migration-archive.json.gz',import.meta.url);
     if(fs.existsSync(archive))restoreReferenceArchive(db,archive);
   }
-  migrateReference(db,read);
+  const referenceRevision=migrateReference(db,read);
   migrateHierarchy(db,read);
   migrateTopology(db,read);
   restoreGeographicRepairArchive(db);
@@ -120,6 +120,7 @@ export function seedDatabase(db) {
       db.exec('COMMIT');
     } catch(error) { db.exec('ROLLBACK'); throw error; }
   }
+  return {referenceRevision};
 }
 export function geography(db) {
   const units=db.prepare('WITH RECURSIVE used(id) AS (SELECT parent_id FROM locations WHERE active=1 UNION SELECT u.parent_id FROM units u JOIN used x ON u.id=x.id WHERE u.parent_id IS NOT NULL) SELECT * FROM units WHERE id IN (SELECT id FROM used)').all();

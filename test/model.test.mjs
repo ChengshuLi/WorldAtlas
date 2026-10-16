@@ -1,13 +1,17 @@
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+import {prepareCurrentSelectedAdditive} from '../scripts/package-current-additive.mjs';
+import {readGeographicReleaseManifest} from '../scripts/read-geographic-release-manifest.mjs';
+import {readPinnedBuildFile} from '../scripts/native-ownership/read-pinned-build-file.mjs';
 import {gunzipSync} from 'node:zlib';
 import { validateHierarchy } from '../hierarchy.mjs';
 import { openDatabase, seedDatabase, snapshot, importRecords, validateGeometry, geography } from '../database.mjs';
 import { parseYear, validYear, yearToTick, tickToYear, categoryColor, populationColor, levels } from '../src/model.js';
-let db;
+let db,referenceRevision;
 const createdSourceIds=new Set(JSON.parse(gunzipSync(fs.readFileSync('data/macro-improvements/combined-restoration/aggregate-source-receipt.json.gz'))).added_ids);
-before(()=>{ db=openDatabase(':memory:'); seedDatabase(db); });
+before(()=>{ db=openDatabase(':memory:'); ({referenceRevision}=seedDatabase(db)); });
 after(()=>db.close());
 test('new source land retains unknown owners and its original source metadata',()=>{
   const parts=JSON.parse(fs.readFileSync('data/world-index.json')).parts;
@@ -19,6 +23,31 @@ test('new source land retains unknown owners and its original source metadata',(
     assert.equal(JSON.parse(row.metadata).reference_version,feature.properties.metadata.reference_version);
   }
 });
+test('real seeded database exports the exact complete revision into current selected metadata packaging',async t=>{
+ const read=name=>JSON.parse(fs.readFileSync('data/'+name));
+ const selection=read('ownership-selection.json');
+ if(!selection.reference_projection){t.skip('Current selection has no metadata projection');return;}
+ const projection=JSON.parse(fs.readFileSync(selection.reference_projection.path));
+ assert.ok(projection.location_changes.length>0,'The current metadata comparison must be nonvacuous');
+ const source=read('world-index.json').parts.flatMap(name=>read(name).features);
+ const derived=createHash('sha256').update(JSON.stringify(source)).update(JSON.stringify(read('hierarchy.json'))).digest('hex');
+ assert.equal(referenceRevision,derived);
+ const manifest=JSON.parse(fs.readFileSync(selection.manifest_path));
+ const bounds=readPinnedBuildFile(manifest.original_assets.bounds),indices=new Map(JSON.parse(gunzipSync(bounds)).map(row=>[row.id,row.index]));
+ const features=geography(db).features.map(feature=>({...feature,pixelIndex:indices.get(feature.id)}));
+ const args={root:process.cwd(),selectedGrid:{manifest,sha256:selection.sha256,bounds},geographicRelease:readGeographicReleaseManifest().releases.at(-1),features,referenceRevision};
+ const packaged=await prepareCurrentSelectedAdditive(args);
+ assert.equal(packaged.referenceMetadata.application_reference_revision,derived);
+ assert.equal(packaged.referenceMetadata.asset.sha256,selection.reference_projection.sha256);
+ for(const revision of [undefined,'0'.repeat(64)])await assert.rejects(prepareCurrentSelectedAdditive({...args,referenceRevision:revision}),/reference revision/);
+ const id=projection.location_changes[0].location_id,index=features.findIndex(feature=>feature.id===id);
+ assert.ok(index>=0);assert.equal(features[index].properties.metadata.reference_revision,derived);
+ for(const mutate of [p=>delete p.metadata.reference_corrections,p=>p.metadata.source_id='changed',p=>p.name='changed',p=>p.parent_id='changed',p=>p.metadata.reference_revision='0'.repeat(64)]){
+  const bad=[...features];bad[index]=structuredClone(features[index]);mutate(bad[index].properties);
+  await assert.rejects(prepareCurrentSelectedAdditive({...args,features:bad}),/complete applied source|reference revision|owner identity or parent/);
+ }
+});
+
 test('year parsing supports BC/BCE/AD/CE and rejects invalid or out-of-range dates',()=>{
   for (const [input,want] of [['3000 BC',-3000],['44 bce',-44],['2026 AD',2026],['1 CE',1],['-1',-1],['1444',1444],['0',null],['3001 BC',null],['2027',null],['1.5',null],['-20 AD',null],['abc',null],['1e3',null]]) assert.equal(parseYear(input),want,input);
   for (let tick=0;tick<=5025;tick++) assert.equal(yearToTick(tickToYear(tick)),tick);

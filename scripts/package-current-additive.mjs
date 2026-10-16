@@ -11,7 +11,7 @@ import {scientificNativeSelection,validateReferenceMetadataHeader,projectReferen
 
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const need=(ok,message)=>{if(!ok)throw Error(message);};
-export async function prepareCurrentSelectedAdditive({root,selectedGrid,geographicRelease,features}) {
+export async function prepareCurrentSelectedAdditive({root,selectedGrid,geographicRelease,features,referenceRevision}) {
   root=await fs.realpath(root);
   const selectionFile=path.join(root,'data/ownership-selection.json'),selectionStat=await fs.lstat(selectionFile);
   need(selectionStat.isFile()&&await fs.realpath(selectionFile)===selectionFile,'Current selection must be ordinary');
@@ -44,7 +44,7 @@ export async function prepareCurrentSelectedAdditive({root,selectedGrid,geograph
     need(isDeepStrictEqual(reference,Object.fromEntries(['id','footprints_sha256','hierarchy_sha256'].map(key=>[key,geographicRelease[key]]))),
       'Current reference metadata differs from selected geographic release');
     const asset={path:'reference-metadata/current.json',bytes:raw.length,sha256:sha(raw)};
-    referenceMetadata={version:1,asset,native_reference:native,reference};
+    referenceMetadata={version:1,asset,native_reference:native,reference,...(referenceRevision!==undefined?{application_reference_revision:referenceRevision}:{})};
     projectionAsset={path:asset.path,raw};
   }
   const wrapped=JSON.parse(await read(sidecar.runtime_envelope)),envelope=wrapped.additiveRelease??wrapped;
@@ -71,7 +71,7 @@ export async function prepareCurrentSelectedAdditive({root,selectedGrid,geograph
   need(Array.isArray(owners)&&owners.length===features.length,'Incomplete current additive owners');
   const byId=new Map(features.map(feature=>[feature.id,feature])),indices=new Set(),ids=new Set();
   for(const owner of owners){const feature=byId.get(owner.id);need(feature&&!ids.has(owner.id)&&Number.isSafeInteger(owner.index)&&owner.index>0&&!indices.has(owner.index)&&feature.pixelIndex===owner.index&&feature.properties.parent_id===owner.province_id,'Current additive owner identity or parent differs');ids.add(owner.id);indices.add(owner.index);}
-  for(const change of projection?.location_changes??[])assertAppliedReferenceProperties(byId.get(change.location_id)?.properties,change.after_properties);
+  for(const change of projection?.location_changes??[])assertAppliedReferenceProperties(byId.get(change.location_id)?.properties,change.after_properties,{referenceRevision});
   const patch=decoded.patch,ledger=decoded.ledger;
   need(patch.kind==='unassigned-native-cells-v1'&&[1,2].includes(patch.version)&&isDeepStrictEqual(patch.base_reference,base)&&isDeepStrictEqual(patch.effective_reference,envelope.effective_reference)&&patch.ledger_sha256===envelope.ledger.sha256,'Current additive patch source/ledger differs');
   validateAdditivePatchFormat(patch,selectedGrid.manifest.size);
