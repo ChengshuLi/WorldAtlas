@@ -7,8 +7,8 @@ and closes system/global Git configuration, hooks and credential helpers. No
 candidate programme runs during checkout. Evidence-only and geographic checkout
 roles remain separate.
 
-Trusted preparation already authenticates the candidate's parents and complete
-tree and compares reviewed bytes. It now emits that tree identity and the
+Trusted preparation authenticates the candidate's parents and complete tree.
+Cleanly composed changes are verified by the exact combined candidate checks. It now emits that tree identity and the
 existing sparse selection directly, removing the separate helper authentication,
 custom Git executor, staging/promotion protocol and legacy fallback branch.
 
@@ -37,11 +37,12 @@ research data declares that dependency alongside its code change.
 The accepted `225e0d36` tree contains 7,499 research archive files totaling 2,796,658,781
 logical bytes. The twelve required fixture paths total 7,197,655 bytes. This removes
 2,789,461,126 logical bytes per full worktree, 99.74% of that namespace. These are
-not Git pack/wire bytes or measured hosted duration savings. The original bounded trace covered cat-file reads but missed git-show reads.
-Independent exact-head review found two original Ukraine bodies missing from
-that trace. With those literal paths retained, all 299 exact-head selected-data
-controls passed in a cold, no-alternates Git object database. This verifies the
-applicable roster rather than every possible future dynamic consumer.
+not Git pack/wire bytes or measured hosted duration savings. The original bounded
+trace covered cat-file reads but missed git-show reads. Independent review of
+PR #2137 at `bfd2df0` found two missing original Ukraine bodies. Restoring those
+two exact bodies made all 299 controls at that frozen head pass in a cold,
+no-alternates Git object database. New composed heads require their current
+controls; that retained result does not cover every possible dynamic consumer.
 
 Selected-data requests retain
 the existing package/verification roles, ordinary engineering execution files
@@ -70,7 +71,9 @@ logs do not distinguish network transfer, packing or filesystem work. Replacing
 the executor does not prove a speedup or diagnose the active Papua straggler.
 Measure the next ordinary adopted run honestly. A duplicate local full Papua
 checkout was declined because its exact retained files alone total 10.64 GB,
-which would breach the local storage floor before Git object storage.
+which exceeded the then-required local storage floor before Git object storage.
+That fixed allocator floor was subsequently removed; actual available space
+still limits duplicate full checkouts.
 
 Earlier custom-helper rollout failures at a fixed 420-second cutoff, and the
 later removal of that cutoff, remain historical evidence; they are not evidence
