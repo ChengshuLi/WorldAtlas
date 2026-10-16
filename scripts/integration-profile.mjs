@@ -176,6 +176,13 @@ function supportingText(name, branch, reservation) {
     /\.(?:md|txt)$/.test(name) &&
     !/\/(?:requirements|constraints)(?:[.-].*)?\.txt$/i.test(name);
 }
+// A historical source/helper copy is evidence only after the complete fixed
+// reader and package exclusions below. Suffixes admit a custody check, never
+// execution. Keep loader/configuration names out even in owned packet paths.
+function retainedSupportingEvidence(name) {
+  return /\.(?:mjs|py|jsonl|xml|lfs-pointer|geojson\.gz|f64le\.gz)$/.test(name) &&
+    !/^(?:setup\.py|__init__\.py|(?:site|user)customize\.py)$/i.test(name.split('/').at(-1));
+}
 function nativeOperandPath(name, branch, reservation) {
   return /^(?:rows|runs)-[0-9]+\.bin\.gz$/.test(name.split('/').at(-1)) &&
     (name === branchScope(branch) + 'native-operands/' + name.split('/').at(-1) ||
@@ -197,7 +204,7 @@ export function selectedDataCandidate(branch, files, reservation = {}) {
       ? ['added', 'modified'].includes(file.status) : [SELECTION, PACKAGE_INPUT_FILE, ADMINISTRATIVE_REGISTRY].includes(file.filename)
       ? file.status === 'modified' : file.filename === manifest && file.status === 'modified' || file.status === 'added' && inScope(file.filename, scopes) && safe(file.filename) &&
         (/\.(?:json|jsonl\.gz|json\.gz|log)$/.test(file.filename) || supportingText(file.filename, branch, reservation) ||
-          nativeOperandPath(file.filename, branch, reservation) || file.filename.endsWith('/geography-artifact.zip')) &&
+          retainedSupportingEvidence(file.filename) || nativeOperandPath(file.filename, branch, reservation) || file.filename.endsWith('/geography-artifact.zip')) &&
         !/(?:^|\/)(?:package(?:-lock)?|tsconfig|jsconfig|binding|deno|composer)\.json$/.test(file.filename)));
 }
 export async function integrationTree(api, repo, commit) {
@@ -236,7 +243,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       if (!cache.has(row.sha)) {
         // All required metadata shares this read cache. Supporting evidence
         // is checked one complete member at a time and never accumulates here.
-        const blob = await api(`/repos/${repo}/git/blobs/${row.sha}`, 'GET', undefined, {retainImmutableBlob: retain});
+        const blob = await api(`/repos/${repo}/git/blobs/${row.sha}`, 'GET', undefined, {retainImmutableBlob: retain, expectedImmutableBytes: row.size});
         needSelected(blob.encoding === 'base64' && typeof blob.content === 'string', 'missing blob bytes');
         const bytes = Buffer.from(blob.content, 'base64');
         needSelected(bytes.length === row.size && createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex') === row.sha,
@@ -249,7 +256,9 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         cache.set(row.sha, bytes);
         diagnostics.retained_bytes += bytes.length; diagnostics.retained_count = cache.size;
       }
-      return cache.get(row.sha);
+      const bytes = cache.get(row.sha);
+      needSelected(bytes.length === row.size, 'cached blob size differs from role tree');
+      return bytes;
     };
     const read = (name, tree = authored, retain = true) => readRow(tree.entries.get(name), retain);
     const parseJSON = bytes => {
@@ -815,21 +824,81 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       transport.add(ACCEPTED_CHECKPOINT_LOCATOR); transport.add(archive);
     }
     const updatedManifest = scientificManifest(branch, reservation);
-    if (updatedManifest && files.some(file => file.filename === updatedManifest && file.status === 'modified')) {
-      // Issue ownership is necessary, never proof that changed bytes are inert.
-      // The fixed selected-role walk and actual package boundary must exclude
-      // the receipt. Source/result meaning remains in the independent evidence gate.
-      needSelected(ordinary(baseline.entries.get(updatedManifest)) && !reachable.has(updatedManifest) &&
+    const manifestChanged = updatedManifest && files.some(file => file.filename === updatedManifest && file.status === 'modified');
+    const supporting = new Set([...added].filter(retainedSupportingEvidence));
+    if (manifestChanged) {
+      needSelected(ordinary(baseline.entries.get(updatedManifest)), 'nonordinary scientific manifest');
+      supporting.add(updatedManifest);
+    }
+    const manifest = `coordination/engineering/${branch.slice('engineering/'.length)}/evidence-quality.json`;
+    for (const name of added) {
+      if (retainedSupportingEvidence(name)) {
+        // Authenticate and discard each whole original body. Do not execute a
+        // retained module, follow XML entities/LFS pointers, or turn an archive
+        // into package input. Scientific interpretation stays with its validator.
+        let bytes = await read(name, authored, false);
+        if (name.endsWith('.gz')) {
+          bytes = gunzipSync(bytes);
+          diagnostics.decoded_bytes += bytes.length;
+        }
+        if (name.endsWith('.geojson.gz')) parseJSON(bytes);
+        else if (name.endsWith('.jsonl') && (bytes.length || !name.endsWith('.stdout.jsonl'))) jsonLines(bytes);
+        else if (!name.endsWith('.f64le.gz'))
+          needSelected(!bytes.includes(0) && isUtf8(bytes), 'nontext retained evidence');
+        continue;
+      }
+      if (supportingText(name, branch, reservation)) {
+        needSelected(!reachable.has(name) && !sourceDeclarations.has(name) &&
+          !packagePathRequired(name, validatePackageInputs(await json(PACKAGE_INPUT_FILE))), 'supporting text is a consumed role');
+        const bytes = await read(name, authored, false);
+        needSelected(!bytes.includes(0) && Buffer.from(bytes.toString('utf8')).equals(bytes), 'nontext packet documentation');
+        continue;
+      }
+      if (reachable.has(name) || transport.has(name) || name === expectationsPath || name === manifest) continue;
+      // Non-consumed supporting evidence cannot become package input. It must
+      // still be ordinary inert JSON/text, never a module, configuration or opaque archive.
+      // Validate syntax, then discard it: arbitrary preparation records confer no
+      // reader/package role and must not consume retained structural-metadata space.
+      if (name.endsWith('.json')) {
+        const bytes = await read(name, authored, false);
+        // Original HTTP metadata may be XML despite a retained .json name.
+        // Preserve that response verbatim; it earns only unconsumed custody,
+        // under the same base/package exclusion as a named XML source.
+        if (bytes.subarray(0, 5).equals(Buffer.from('<?xml'))) {
+          needSelected(!bytes.includes(0) && isUtf8(bytes), 'nontext retained XML response');
+          supporting.add(name);
+        } else parseJSON(bytes);
+      }
+      else if (/\.jsonl?\.gz$/.test(name)) {
+        const bytes = await read(name, authored, false);
+        // No decoded-size pin is declared for inert supporting evidence.
+        // The codec validates every complete gzip member, including concatenated
+        // members, before the whole decoded JSON/JSONL body is parsed.
+        const decoded=gunzipSync(bytes);
+        diagnostics.decoded_bytes += decoded.length;
+        if (name.endsWith('.json.gz')) parseJSON(decoded);
+        else jsonLines(decoded);
+      }
+      else {
+        needSelected(name.endsWith('.log'), 'unknown opaque evidence type');
+        const bytes = await read(name, authored, false);
+        needSelected(!bytes.includes(0) && Buffer.from(bytes.toString('utf8')).equals(bytes), 'nontext evidence log');
+      }
+    }
+    if (supporting.size) {
+      // Issue ownership and a historical-looking filename establish no role.
+      // Reuse the fixed base-reader walk for every newly admitted retained file,
+      // including helper copies. None may become current code or package input.
+      const definition = validatePackageInputs(await json(PACKAGE_INPUT_FILE));
+      for (const name of supporting) needSelected(!reachable.has(name) && !sourceDeclarations.has(name) &&
         ![selection.manifest_path, selection.selected_geography?.path, selection.artifact_consumption?.certificate?.path,
-          selection.artifact_consumption?.review?.path].includes(updatedManifest) &&
-        !sourceDeclarations.has(updatedManifest) &&
-        !packagePathRequired(updatedManifest, validatePackageInputs(await json(PACKAGE_INPUT_FILE))),
-        'scientific manifest is a consumed or nonordinary role');
+          selection.artifact_consumption?.review?.path].includes(name) && !packagePathRequired(name, definition),
+        'supporting evidence is a consumed role');
       // Accepted base metadata can still name current reader roles outside
       // package declarations. Read only those fixed routing roots, never their
       // scientific leaves or arbitrary nested pin/config objects.
       const role = name => {
-        needSelected(safe(name) && name !== updatedManifest, 'scientific manifest is a consumed base role');
+        needSelected(safe(name) && !supporting.has(name), 'supporting evidence is a consumed base role');
         return name;
       };
       const rolePin = value => {
@@ -894,38 +963,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
           !Array.isArray(code.entry_critical_files), 'unknown base entry source routing');
         for (const values of Object.values(code.entry_critical_files)) for (const value of roles(values)) rolePin(value);
       }
-      await json(updatedManifest, authored, false);
-    }
-    const manifest = `coordination/engineering/${branch.slice('engineering/'.length)}/evidence-quality.json`;
-    for (const name of added) {
-      if (supportingText(name, branch, reservation)) {
-        needSelected(!reachable.has(name) && !sourceDeclarations.has(name) &&
-          !packagePathRequired(name, validatePackageInputs(await json(PACKAGE_INPUT_FILE))), 'supporting text is a consumed role');
-        const bytes = await read(name, authored, false);
-        needSelected(!bytes.includes(0) && Buffer.from(bytes.toString('utf8')).equals(bytes), 'nontext packet documentation');
-        continue;
-      }
-      if (reachable.has(name) || transport.has(name) || name === expectationsPath || name === manifest) continue;
-      // Non-consumed supporting evidence cannot become package input. It must
-      // still be ordinary inert JSON/text, never a module, configuration or opaque archive.
-      // Validate syntax, then discard it: arbitrary preparation records confer no
-      // reader/package role and must not consume retained structural-metadata space.
-      if (name.endsWith('.json')) await json(name, authored, false);
-      else if (/\.jsonl?\.gz$/.test(name)) {
-        const bytes = await read(name, authored, false);
-        // No decoded-size pin is declared for inert supporting evidence.
-        // The codec validates every complete gzip member, including concatenated
-        // members, before the whole decoded JSON/JSONL body is parsed.
-        const decoded=gunzipSync(bytes);
-        diagnostics.decoded_bytes += decoded.length;
-        if (name.endsWith('.json.gz')) parseJSON(decoded);
-        else jsonLines(decoded);
-      }
-      else {
-        needSelected(name.endsWith('.log'), 'unknown opaque evidence type');
-        const bytes = await read(name, authored, false);
-        needSelected(!bytes.includes(0) && Buffer.from(bytes.toString('utf8')).equals(bytes), 'nontext evidence log');
-      }
+      if (manifestChanged) await json(updatedManifest, authored, false);
     }
     if (registryChanged) {
       const previous = registryEntries(await json(ADMINISTRATIVE_REGISTRY, baseline));
