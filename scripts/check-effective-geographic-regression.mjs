@@ -92,6 +92,7 @@ const NS='coordination/engineering/eastern-two-gap-repair-native-20261007/canoni
 const STOCK_INDEX='b82b195d94530d9b1f48153f7e47616f8b841cb1438ddf59994ba4869a1d7876';
 
 export class ImmutableReader {
+  #trees = new Map();
   constructor(repo,version,{gitExecutable='git',invocation}={}) {
     demand(commit(version),'Require immutable input commit');
     this.repo=repo;this.version=version;this.gitExecutable=gitExecutable;
@@ -104,6 +105,24 @@ export class ImmutableReader {
       demand(pin,'Missing immutable whole-body descriptor');options.maxBuffer=pin.bytes+1;
     }
     return execFileSync(this.gitExecutable,['-c','core.hooksPath=/dev/null','-C',this.repo,...args],options);
+  }
+  // Complete immutable tree metadata answers both present and absent routes.
+  // Keep nonordinary entries: a directory or symlink must never look absent.
+  treeRoute(name,version=this.version) {
+    demand(safe(name)&&commit(version),'Unsafe immutable path/commit');
+    let entries=this.#trees.get(version);
+    if(!entries){
+      const output=this.git('ls-tree','-rtz','--full-tree',version).toString();
+      demand(output===''||output.endsWith('\0'),'Incomplete immutable tree output');
+      entries=new Map();
+      for(const row of output.split('\0').slice(0,-1)){
+        const match=/^[0-7]{6} (?:blob|tree|commit) [a-f0-9]{40}\t([\s\S]+)$/.exec(row);
+        demand(match&&!entries.has(match[1]),'Invalid immutable tree entry');
+        entries.set(match[1],row+'\0');
+      }
+      this.#trees.set(version,entries);
+    }
+    return entries.get(name)??'';
   }
   descriptor(name,version=this.version) {
     demand(safe(name)&&commit(version),'Unsafe immutable path/commit');
