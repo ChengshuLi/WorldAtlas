@@ -453,3 +453,22 @@ test('actual visibility projection authenticates the selected whole normative la
  assert.ok([...f.reader.inventory.values()].some(p=>p.path==='data/latitudes.f64le.gz'&&p.whole_body_consumed));
  assert.throws(()=>f.api.projectVisibilityLatitudes({state:structuredClone(qualified.state)}),/private qualified/);
 });
+
+import {referenceCheckpointFixture} from './fixtures/selected-checkpoint.mjs';
+test('validated reference metadata changes parents while native owners and cells stay conserved',async t=>{
+ const f=await referenceCheckpointFixture(t),reader=new f.native.ImmutableReader(f.repo,f.candidate,{invocation:f.reader.invocation});
+ const transition=f.api.qualifyTransition({state:f.state,reader});
+ assert.equal(transition.available,true);
+ const before=transition.baseline.certificate,after=transition.candidate.certificate;
+ assert.equal(before.entries[0][2],'P');assert.equal(after.entries[0][2],'Q');
+ assert.deepEqual(after.entries.map(row=>[row[0],row[1],row[7],row[8],row[9]]),before.entries.map(row=>[row[0],row[1],row[7],row[8],row[9]]));
+ assert.notEqual(after.entries[0][6],before.entries[0][6]);
+ const projected=f.api.projectSourceFeatures({state:transition.candidate,ids:['A']});
+ assert.equal(projected.features[0].properties.parent_id,'Q');
+ const consumer=await import(pathToFileURL(path.join(f.repo,'scripts/selected-checkpoint-native.mjs')));
+ const result=await consumer.compareSelectedCheckpointNative({transition});
+ assert.equal(result.status,'no-new-native-loss');assert.equal(result.affected_rows,0);
+ const census=f.api.checkpointRouteCensus({transition});
+ for(const name of ['data/hierarchy.json','data/geography/fixture.json','data/geographic-releases/current-manifest.json'])
+  assert.equal(census.routes.find(p=>p.path===name).tree,reader.treeRoute(name));
+});
