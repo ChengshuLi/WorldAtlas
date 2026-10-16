@@ -1,0 +1,92 @@
+{
+  "package": "repair",
+  "owner": 23115,
+  "count": 1,
+  "records": [
+    {
+      "original_package": "repair",
+      "owner": 23115,
+      "y": 130255,
+      "x": 212686,
+      "original_request_id": "repair:23115:130255:212686",
+      "retained_actual_comparison": {
+        "original_observation": {
+          "request": {
+            "id": "repair:23115:130255:212686",
+            "original_package": "repair",
+            "country": "MYS",
+            "owner": 23115,
+            "y": 130255,
+            "x": 212686,
+            "original_held_interval": [
+              130255,
+              212686,
+              212688,
+              23115
+            ],
+            "original_request_custody": {
+              "path": "[machine-local locator omitted; original private body hash retained]",
+              "bytes": 11275,
+              "sha256": "174e2c7ec652bc03a30ab0fcb64faf31e6e64a5139ab3361c528009d22781305"
+            },
+            "original_foreign_source_indices": [
+              45977
+            ],
+            "original_held_reason": "territorial_exclusion_cells"
+          },
+          "original_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+              "feature_ordinal": 138,
+              "shapeName": "Kapuas Hulu",
+              "kind": "interior"
+            }
+          ],
+          "full_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B82886709098386",
+              "feature_ordinal": 138,
+              "shapeName": "Kapuas Hulu",
+              "kind": "interior"
+            }
+          ],
+          "full_private_MYS_memberships": [
+            {
+              "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+              "feature_ordinal": 6,
+              "shapeName": "Sarawak",
+              "kind": "interior"
+            },
+            {
+              "source_id": "gb:MYS:ADM2:92858781B44551979255249",
+              "feature_ordinal": 99,
+              "shapeName": "Lubok Antu",
+              "kind": "interior"
+            }
+          ],
+          "cached_Gov_Sarawak_state_contacts": [],
+          "new_Gov_Sabah_state_contacts": [],
+          "Gov_district_Sarawak_contacts": [],
+          "Gov_district_Sabah_contacts": [],
+          "Gov_Sabah_line_incidence_only": [],
+          "scientific_observation_partition": "IDNfullpositive__Govstateoutside__Govdistrictoutside",
+          "owner_or_hold_changed": false,
+          "authority_or_repair_credit": 0
+        },
+        "private_original_full_foreign_parent_regions": [
+          "Sarawak"
+        ],
+        "refinement_kind": "fine-Sarawak-country-footprint-sourcepriority",
+        "existing_foreign_fine_alternatives": [
+          {
+            "source_id": "gb:MYS:ADM2:92858781B44551979255249",
+            "feature_ordinal": 99,
+            "shapeName": "Lubok Antu",
+            "kind": "interior"
+          }
+        ],
+        "operator_or_source_change": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,1082 @@
+{
+  "package": "conflict",
+  "owner": 22935,
+  "count": 5,
+  "records": [
+    {
+      "original_package": "conflict",
+      "owner": 22935,
+      "y": 129422,
+      "x": 214785,
+      "original_request_id": "conflict:Borneo:1:129422:214785",
+      "retained_actual_comparison": {
+        "original_conflict_record_unchanged": {
+          "original_request": {
+            "id": "conflict:Borneo:1:129422:214785",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 129422,
+            "x": 214785,
+            "original_record": {
+              "outcome_interval_index": 1,
+              "pair": [
+                "Malinau",
+                "Belaga"
+              ],
+              "stable_ids": [
+                "gb:IDN:ADM2:22746128B54632748429230",
+                "gb:MYS:ADM2:92858781B14210888216544"
+              ],
+              "y": 129422,
+              "x": 214785,
+              "longitude_rational": "15066450/131083",
+              "longitude_display": 114.93824523393575,
+              "latitude_native_f64": 2.279556746912879,
+              "latitude_hex": "0x1.23c883f6aef8bp+1"
+            },
+            "original_request_custody": {
+              "path": "[machine-local locator omitted; original private body hash retained]",
+              "bytes": 10134,
+              "sha256": "7371905d83d903e8f84a66e6373de337985af0c1e8f301417f66c7a0852e2957"
+            }
+          },
+          "original_frozen_interval": {
+            "owners": [
+              22935,
+              31030
+            ],
+            "stable_ids": [
+              "gb:IDN:ADM2:22746128B54632748429230",
+              "gb:MYS:ADM2:92858781B14210888216544"
+            ],
+            "names": [
+              "Malinau",
+              "Belaga"
+            ],
+            "original_interval": {
+              "original_block": 31,
+              "original_record_ordinal": 1,
+              "original_row": [
+                129422,
+                214785,
+                214786,
+                [
+                  22935,
+                  31030
+                ],
+                [
+                  36257,
+                  36578,
+                  46102
+                ],
+                "land"
+              ],
+              "interval_id": "idn-source-conflict:129422:214785:214786",
+              "all_source_feature_ids": [
+                "gb:IDN:ADM1:65028918B52923737893214",
+                "gb:IDN:ADM2:22746128B54632748429230",
+                "gb:MYS:ADM2:92858781B14210888216544"
+              ]
+            }
+          },
+          "current_selected_owner_observation": {
+            "id": "conflict:Borneo:1:129422:214785",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 129422,
+            "x": 214785,
+            "original_owner": null,
+            "baseline_owner": 0,
+            "append_owner": 0,
+            "effective_owner": 0,
+            "owner_identity": null
+          },
+          "original_IDN_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+              "feature_ordinal": 318,
+              "shapeName": "Malinau",
+              "kind": "interior"
+            }
+          ],
+          "full_IDN_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+              "feature_ordinal": 318,
+              "shapeName": "Malinau",
+              "kind": "interior"
+            }
+          ],
+          "complete_foreign_family_memberships": {
+            "gb:MYS:ADM1": {
+              "original_request_id": "conflict:Borneo:1:129422:214785",
+              "y": 129422,
+              "x": 214785,
+              "original_memberships": [],
+              "full_memberships": []
+            },
+            "gb:MYS:ADM2": {
+              "original_request_id": "conflict:Borneo:1:129422:214785",
+              "y": 129422,
+              "x": 214785,
+              "original_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM2:92858781B14210888216544",
+                  "feature_ordinal": 115,
+                  "shapeName": "Belaga",
+                  "kind": "interior"
+                }
+              ],
+              "full_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM2:92858781B14210888216544",
+                  "feature_ordinal": 115,
+                  "shapeName": "Belaga",
+                  "kind": "interior"
+                }
+              ]
+            }
+          },
+          "full_foreign_fine_existing_Atlas_locations": [
+            {
+              "owner": 31030,
+              "id": "gb:MYS:ADM2:92858781B14210888216544",
+              "name": "Belaga",
+              "parent_id": "framework:province:sarawak:8a5fb64d0d51",
+              "source_reference_year": "2020"
+            }
+          ],
+          "actual_JMG_Sarawak_contact_kinds": [],
+          "JMG_applicability": "Sarawakonly;notSabah",
+          "source_assessment_cohort": "both-full-Sarawak-fine;government-country-footprint-disagreement",
+          "chosen_owner": null,
+          "accepted_or_completed_credit": 0
+        },
+        "actual_new_government_comparison_unchanged": {
+          "request": {
+            "id": "conflict:Borneo:1:129422:214785",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 129422,
+            "x": 214785,
+            "original_record": {
+              "outcome_interval_index": 1,
+              "pair": [
+                "Malinau",
+                "Belaga"
+              ],
+              "stable_ids": [
+                "gb:IDN:ADM2:22746128B54632748429230",
+                "gb:MYS:ADM2:92858781B14210888216544"
+              ],
+              "y": 129422,
+              "x": 214785,
+              "longitude_rational": "15066450/131083",
+              "longitude_display": 114.93824523393575,
+              "latitude_native_f64": 2.279556746912879,
+              "latitude_hex": "0x1.23c883f6aef8bp+1"
+            },
+            "original_request_custody": {
+              "path": "[machine-local locator omitted; original private body hash retained]",
+              "bytes": 10134,
+              "sha256": "7371905d83d903e8f84a66e6373de337985af0c1e8f301417f66c7a0852e2957"
+            }
+          },
+          "original_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+              "feature_ordinal": 318,
+              "shapeName": "Malinau",
+              "kind": "interior"
+            }
+          ],
+          "full_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+              "feature_ordinal": 318,
+              "shapeName": "Malinau",
+              "kind": "interior"
+            }
+          ],
+          "full_private_MYS_memberships": [
+            {
+              "source_id": "gb:MYS:ADM2:92858781B14210888216544",
+              "feature_ordinal": 115,
+              "shapeName": "Belaga",
+              "kind": "interior"
+            }
+          ],
+          "cached_Gov_Sarawak_state_contacts": [],
+          "new_Gov_Sabah_state_contacts": [],
+          "Gov_district_Sarawak_contacts": [],
+          "Gov_district_Sabah_contacts": [],
+          "Gov_Sabah_line_incidence_only": [],
+          "scientific_observation_partition": "IDNfullpositive__Govstateoutside__Govdistrictoutside",
+          "owner_or_hold_changed": false,
+          "authority_or_repair_credit": 0
+        },
+        "review_scope": "Country-side negative operand source correction candidate, not direct ownership/physical qualification."
+      }
+    },
+    {
+      "original_package": "conflict",
+      "owner": 22935,
+      "y": 129730,
+      "x": 214628,
+      "original_request_id": "conflict:Borneo:2:129730:214628",
+      "retained_actual_comparison": {
+        "original_conflict_record_unchanged": {
+          "original_request": {
+            "id": "conflict:Borneo:2:129730:214628",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 129730,
+            "x": 214628,
+            "original_record": {
+              "outcome_interval_index": 2,
+              "pair": [
+                "Malinau",
+                "Bukit Mabong"
+              ],
+              "stable_ids": [
+                "gb:IDN:ADM2:22746128B54632748429230",
+                "gb:MYS:ADM2:92858781B56085190058706"
+              ],
+              "y": 129730,
+              "x": 214628,
+              "longitude_rational": "15038190/131083",
+              "longitude_display": 114.72265663739768,
+              "latitude_native_f64": 1.8568950875870245,
+              "latitude_hex": "0x1.db5d79f94a114p+0"
+            },
+            "original_request_custody": {
+              "path": "[machine-local locator omitted; original private body hash retained]",
+              "bytes": 10134,
+              "sha256": "7371905d83d903e8f84a66e6373de337985af0c1e8f301417f66c7a0852e2957"
+            }
+          },
+          "original_frozen_interval": {
+            "owners": [
+              22935,
+              31106
+            ],
+            "stable_ids": [
+              "gb:IDN:ADM2:22746128B54632748429230",
+              "gb:MYS:ADM2:92858781B56085190058706"
+            ],
+            "names": [
+              "Malinau",
+              "Bukit Mabong"
+            ],
+            "original_interval": {
+              "original_block": 31,
+              "original_record_ordinal": 2,
+              "original_row": [
+                129730,
+                214628,
+                214629,
+                [
+                  22935,
+                  31106
+                ],
+                [
+                  36257,
+                  36578,
+                  46101
+                ],
+                "land"
+              ],
+              "interval_id": "idn-source-conflict:129730:214628:214629",
+              "all_source_feature_ids": [
+                "gb:IDN:ADM1:65028918B52923737893214",
+                "gb:IDN:ADM2:22746128B54632748429230",
+                "gb:MYS:ADM2:92858781B56085190058706"
+              ]
+            }
+          },
+          "current_selected_owner_observation": {
+            "id": "conflict:Borneo:2:129730:214628",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 129730,
+            "x": 214628,
+            "original_owner": null,
+            "baseline_owner": 0,
+            "append_owner": 0,
+            "effective_owner": 0,
+            "owner_identity": null
+          },
+          "original_IDN_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+              "feature_ordinal": 318,
+              "shapeName": "Malinau",
+              "kind": "interior"
+            }
+          ],
+          "full_IDN_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+              "feature_ordinal": 318,
+              "shapeName": "Malinau",
+              "kind": "interior"
+            }
+          ],
+          "complete_foreign_family_memberships": {
+            "gb:MYS:ADM1": {
+              "original_request_id": "conflict:Borneo:2:129730:214628",
+              "y": 129730,
+              "x": 214628,
+              "original_memberships": [],
+              "full_memberships": []
+            },
+            "gb:MYS:ADM2": {
+              "original_request_id": "conflict:Borneo:2:129730:214628",
+              "y": 129730,
+              "x": 214628,
+              "original_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM2:92858781B56085190058706",
+                  "feature_ordinal": 114,
+                  "shapeName": "Bukit Mabong",
+                  "kind": "interior"
+                }
+              ],
+              "full_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM2:92858781B56085190058706",
+                  "feature_ordinal": 114,
+                  "shapeName": "Bukit Mabong",
+                  "kind": "interior"
+                }
+              ]
+            }
+          },
+          "full_foreign_fine_existing_Atlas_locations": [
+            {
+              "owner": 31106,
+              "id": "gb:MYS:ADM2:92858781B56085190058706",
+              "name": "Bukit Mabong",
+              "parent_id": "framework:province:sarawak:8a5fb64d0d51",
+              "source_reference_year": "2020"
+            }
+          ],
+          "actual_JMG_Sarawak_contact_kinds": [],
+          "JMG_applicability": "Sarawakonly;notSabah",
+          "source_assessment_cohort": "both-full-Sarawak-fine;government-country-footprint-disagreement",
+          "chosen_owner": null,
+          "accepted_or_completed_credit": 0
+        },
+        "actual_new_government_comparison_unchanged": {
+          "request": {
+            "id": "conflict:Borneo:2:129730:214628",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 129730,
+            "x": 214628,
+            "original_record": {
+              "outcome_interval_index": 2,
+              "pair": [
+                "Malinau",
+                "Bukit Mabong"
+              ],
+              "stable_ids": [
+                "gb:IDN:ADM2:22746128B54632748429230",
+                "gb:MYS:ADM2:92858781B56085190058706"
+              ],
+              "y": 129730,
+              "x": 214628,
+              "longitude_rational": "15038190/131083",
+              "longitude_display": 114.72265663739768,
+              "latitude_native_f64": 1.8568950875870245,
+              "latitude_hex": "0x1.db5d79f94a114p+0"
+            },
+            "original_request_custody": {
+              "path": "[machine-local locator omitted; original private body hash retained]",
+              "bytes": 10134,
+              "sha256": "7371905d83d903e8f84a66e6373de337985af0c1e8f301417f66c7a0852e2957"
+            }
+          },
+          "original_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+              "feature_ordinal": 318,
+              "shapeName": "Malinau",
+              "kind": "interior"
+            }
+          ],
+          "full_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+              "feature_ordinal": 318,
+              "shapeName": "Malinau",
+              "kind": "interior"
+            }
+          ],
+          "full_private_MYS_memberships": [
+            {
+              "source_id": "gb:MYS:ADM2:92858781B56085190058706",
+              "feature_ordinal": 114,
+              "shapeName": "Bukit Mabong",
+              "kind": "interior"
+            }
+          ],
+          "cached_Gov_Sarawak_state_contacts": [],
+          "new_Gov_Sabah_state_contacts": [],
+          "Gov_district_Sarawak_contacts": [],
+          "Gov_district_Sabah_contacts": [],
+          "Gov_Sabah_line_incidence_only": [],
+          "scientific_observation_partition": "IDNfullpositive__Govstateoutside__Govdistrictoutside",
+          "owner_or_hold_changed": false,
+          "authority_or_repair_credit": 0
+        },
+        "review_scope": "Country-side negative operand source correction candidate, not direct ownership/physical qualification."
+      }
+    },
+    {
+      "original_package": "conflict",
+      "owner": 22935,
+      "y": 129732,
+      "x": 214627,
+      "original_request_id": "conflict:Borneo:3:129732:214627",
+      "retained_actual_comparison": {
+        "original_conflict_record_unchanged": {
+          "original_request": {
+            "id": "conflict:Borneo:3:129732:214627",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 129732,
+            "x": 214627,
+            "original_record": {
+              "outcome_interval_index": 3,
+              "pair": [
+                "Malinau",
+                "Bukit Mabong"
+              ],
+              "stable_ids": [
+                "gb:IDN:ADM2:22746128B54632748429230",
+                "gb:MYS:ADM2:92858781B56085190058706"
+              ],
+              "y": 129732,
+              "x": 214627,
+              "longitude_rational": "15038010/131083",
+              "longitude_display": 114.72128346162356,
+              "latitude_native_f64": 1.8541501760819041,
+              "latitude_hex": "0x1.daa9960024f8bp+0"
+            },
+            "original_request_custody": {
+              "path": "[machine-local locator omitted; original private body hash retained]",
+              "bytes": 10134,
+              "sha256": "7371905d83d903e8f84a66e6373de337985af0c1e8f301417f66c7a0852e2957"
+            }
+          },
+          "original_frozen_interval": {
+            "owners": [
+              22935,
+              31106
+            ],
+            "stable_ids": [
+              "gb:IDN:ADM2:22746128B54632748429230",
+              "gb:MYS:ADM2:92858781B56085190058706"
+            ],
+            "names": [
+              "Malinau",
+              "Bukit Mabong"
+            ],
+            "original_interval": {
+              "original_block": 31,
+              "original_record_ordinal": 3,
+              "original_row": [
+                129732,
+                214627,
+                214628,
+                [
+                  22935,
+                  31106
+                ],
+                [
+                  36257,
+                  36578,
+                  46101
+                ],
+                "land"
+              ],
+              "interval_id": "idn-source-conflict:129732:214627:214628",
+              "all_source_feature_ids": [
+                "gb:IDN:ADM1:65028918B52923737893214",
+                "gb:IDN:ADM2:22746128B54632748429230",
+                "gb:MYS:ADM2:92858781B56085190058706"
+              ]
+            }
+          },
+          "current_selected_owner_observation": {
+            "id": "conflict:Borneo:3:129732:214627",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 129732,
+            "x": 214627,
+            "original_owner": null,
+            "baseline_owner": 0,
+            "append_owner": 0,
+            "effective_owner": 0,
+            "owner_identity": null
+          },
+          "original_IDN_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+              "feature_ordinal": 318,
+              "shapeName": "Malinau",
+              "kind": "interior"
+            }
+          ],
+          "full_IDN_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+              "feature_ordinal": 318,
+              "shapeName": "Malinau",
+              "kind": "interior"
+            }
+          ],
+          "complete_foreign_family_memberships": {
+            "gb:MYS:ADM1": {
+              "original_request_id": "conflict:Borneo:3:129732:214627",
+              "y": 129732,
+              "x": 214627,
+              "original_memberships": [],
+              "full_memberships": []
+            },
+            "gb:MYS:ADM2": {
+              "original_request_id": "conflict:Borneo:3:129732:214627",
+              "y": 129732,
+              "x": 214627,
+              "original_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM2:92858781B56085190058706",
+                  "feature_ordinal": 114,
+                  "shapeName": "Bukit Mabong",
+                  "kind": "interior"
+                }
+              ],
+              "full_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM2:92858781B56085190058706",
+                  "feature_ordinal": 114,
+                  "shapeName": "Bukit Mabong",
+                  "kind": "interior"
+                }
+              ]
+            }
+          },
+          "full_foreign_fine_existing_Atlas_locations": [
+            {
+              "owner": 31106,
+              "id": "gb:MYS:ADM2:92858781B56085190058706",
+              "name": "Bukit Mabong",
+              "parent_id": "framework:province:sarawak:8a5fb64d0d51",
+              "source_reference_year": "2020"
+            }
+          ],
+          "actual_JMG_Sarawak_contact_kinds": [],
+          "JMG_applicability": "Sarawakonly;notSabah",
+          "source_assessment_cohort": "both-full-Sarawak-fine;government-country-footprint-disagreement",
+          "chosen_owner": null,
+          "accepted_or_completed_credit": 0
+        },
+        "actual_new_government_comparison_unchanged": {
+          "request": {
+            "id": "conflict:Borneo:3:129732:214627",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 129732,
+            "x": 214627,
+            "original_record": {
+              "outcome_interval_index": 3,
+              "pair": [
+                "Malinau",
+                "Bukit Mabong"
+              ],
+              "stable_ids": [
+                "gb:IDN:ADM2:22746128B54632748429230",
+                "gb:MYS:ADM2:92858781B56085190058706"
+              ],
+              "y": 129732,
+              "x": 214627,
+              "longitude_rational": "15038010/131083",
+              "longitude_display": 114.72128346162356,
+              "latitude_native_f64": 1.8541501760819041,
+              "latitude_hex": "0x1.daa9960024f8bp+0"
+            },
+            "original_request_custody": {
+              "path": "[machine-local locator omitted; original private body hash retained]",
+              "bytes": 10134,
+              "sha256": "7371905d83d903e8f84a66e6373de337985af0c1e8f301417f66c7a0852e2957"
+            }
+          },
+          "original_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+              "feature_ordinal": 318,
+              "shapeName": "Malinau",
+              "kind": "interior"
+            }
+          ],
+          "full_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+              "feature_ordinal": 318,
+              "shapeName": "Malinau",
+              "kind": "interior"
+            }
+          ],
+          "full_private_MYS_memberships": [
+            {
+              "source_id": "gb:MYS:ADM2:92858781B56085190058706",
+              "feature_ordinal": 114,
+              "shapeName": "Bukit Mabong",
+              "kind": "interior"
+            }
+          ],
+          "cached_Gov_Sarawak_state_contacts": [],
+          "new_Gov_Sabah_state_contacts": [],
+          "Gov_district_Sarawak_contacts": [],
+          "Gov_district_Sabah_contacts": [],
+          "Gov_Sabah_line_incidence_only": [],
+          "scientific_observation_partition": "IDNfullpositive__Govstateoutside__Govdistrictoutside",
+          "owner_or_hold_changed": false,
+          "authority_or_repair_credit": 0
+        },
+        "review_scope": "Country-side negative operand source correction candidate, not direct ownership/physical qualification."
+      }
+    },
+    {
+      "original_package": "conflict",
+      "owner": 22935,
+      "y": 129733,
+      "x": 214627,
+      "original_request_id": "conflict:Borneo:4:129733:214627",
+      "retained_actual_comparison": {
+        "original_conflict_record_unchanged": {
+          "original_request": {
+            "id": "conflict:Borneo:4:129733:214627",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 129733,
+            "x": 214627,
+            "original_record": {
+              "outcome_interval_index": 4,
+              "pair": [
+                "Malinau",
+                "Bukit Mabong"
+              ],
+              "stable_ids": [
+                "gb:IDN:ADM2:22746128B54632748429230",
+                "gb:MYS:ADM2:92858781B56085190058706"
+              ],
+              "y": 129733,
+              "x": 214627,
+              "longitude_rational": "15038010/131083",
+              "longitude_display": 114.72128346162356,
+              "latitude_native_f64": 1.8527777187325576,
+              "latitude_hex": "0x1.da4fa3fcb6bd0p+0"
+            },
+            "original_request_custody": {
+              "path": "[machine-local locator omitted; original private body hash retained]",
+              "bytes": 10134,
+              "sha256": "7371905d83d903e8f84a66e6373de337985af0c1e8f301417f66c7a0852e2957"
+            }
+          },
+          "original_frozen_interval": {
+            "owners": [
+              22935,
+              31106
+            ],
+            "stable_ids": [
+              "gb:IDN:ADM2:22746128B54632748429230",
+              "gb:MYS:ADM2:92858781B56085190058706"
+            ],
+            "names": [
+              "Malinau",
+              "Bukit Mabong"
+            ],
+            "original_interval": {
+              "original_block": 31,
+              "original_record_ordinal": 4,
+              "original_row": [
+                129733,
+                214627,
+                214628,
+                [
+                  22935,
+                  31106
+                ],
+                [
+                  36257,
+                  36578,
+                  46101
+                ],
+                "land"
+              ],
+              "interval_id": "idn-source-conflict:129733:214627:214628",
+              "all_source_feature_ids": [
+                "gb:IDN:ADM1:65028918B52923737893214",
+                "gb:IDN:ADM2:22746128B54632748429230",
+                "gb:MYS:ADM2:92858781B56085190058706"
+              ]
+            }
+          },
+          "current_selected_owner_observation": {
+            "id": "conflict:Borneo:4:129733:214627",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 129733,
+            "x": 214627,
+            "original_owner": null,
+            "baseline_owner": 0,
+            "append_owner": 0,
+            "effective_owner": 0,
+            "owner_identity": null
+          },
+          "original_IDN_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+              "feature_ordinal": 318,
+              "shapeName": "Malinau",
+              "kind": "interior"
+            }
+          ],
+          "full_IDN_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+              "feature_ordinal": 318,
+              "shapeName": "Malinau",
+              "kind": "interior"
+            }
+          ],
+          "complete_foreign_family_memberships": {
+            "gb:MYS:ADM1": {
+              "original_request_id": "conflict:Borneo:4:129733:214627",
+              "y": 129733,
+              "x": 214627,
+              "original_memberships": [],
+              "full_memberships": []
+            },
+            "gb:MYS:ADM2": {
+              "original_request_id": "conflict:Borneo:4:129733:214627",
+              "y": 129733,
+              "x": 214627,
+              "original_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM2:92858781B56085190058706",
+                  "feature_ordinal": 114,
+                  "shapeName": "Bukit Mabong",
+                  "kind": "interior"
+                }
+              ],
+              "full_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM2:92858781B56085190058706",
+                  "feature_ordinal": 114,
+                  "shapeName": "Bukit Mabong",
+                  "kind": "interior"
+                }
+              ]
+            }
+          },
+          "full_foreign_fine_existing_Atlas_locations": [
+            {
+              "owner": 31106,
+              "id": "gb:MYS:ADM2:92858781B56085190058706",
+              "name": "Bukit Mabong",
+              "parent_id": "framework:province:sarawak:8a5fb64d0d51",
+              "source_reference_year": "2020"
+            }
+          ],
+          "actual_JMG_Sarawak_contact_kinds": [],
+          "JMG_applicability": "Sarawakonly;notSabah",
+          "source_assessment_cohort": "both-full-Sarawak-fine;government-country-footprint-disagreement",
+          "chosen_owner": null,
+          "accepted_or_completed_credit": 0
+        },
+        "actual_new_government_comparison_unchanged": {
+          "request": {
+            "id": "conflict:Borneo:4:129733:214627",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 129733,
+            "x": 214627,
+            "original_record": {
+              "outcome_interval_index": 4,
+              "pair": [
+                "Malinau",
+                "Bukit Mabong"
+              ],
+              "stable_ids": [
+                "gb:IDN:ADM2:22746128B54632748429230",
+                "gb:MYS:ADM2:92858781B56085190058706"
+              ],
+              "y": 129733,
+              "x": 214627,
+              "longitude_rational": "15038010/131083",
+              "longitude_display": 114.72128346162356,
+              "latitude_native_f64": 1.8527777187325576,
+              "latitude_hex": "0x1.da4fa3fcb6bd0p+0"
+            },
+            "original_request_custody": {
+              "path": "[machine-local locator omitted; original private body hash retained]",
+              "bytes": 10134,
+              "sha256": "7371905d83d903e8f84a66e6373de337985af0c1e8f301417f66c7a0852e2957"
+            }
+          },
+          "original_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+              "feature_ordinal": 318,
+              "shapeName": "Malinau",
+              "kind": "interior"
+            }
+          ],
+          "full_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+              "feature_ordinal": 318,
+              "shapeName": "Malinau",
+              "kind": "interior"
+            }
+          ],
+          "full_private_MYS_memberships": [
+            {
+              "source_id": "gb:MYS:ADM2:92858781B56085190058706",
+              "feature_ordinal": 114,
+              "shapeName": "Bukit Mabong",
+              "kind": "interior"
+            }
+          ],
+          "cached_Gov_Sarawak_state_contacts": [],
+          "new_Gov_Sabah_state_contacts": [],
+          "Gov_district_Sarawak_contacts": [],
+          "Gov_district_Sabah_contacts": [],
+          "Gov_Sabah_line_incidence_only": [],
+          "scientific_observation_partition": "IDNfullpositive__Govstateoutside__Govdistrictoutside",
+          "owner_or_hold_changed": false,
+          "authority_or_repair_credit": 0
+        },
+        "review_scope": "Country-side negative operand source correction candidate, not direct ownership/physical qualification."
+      }
+    },
+    {
+      "original_package": "conflict",
+      "owner": 22935,
+      "y": 129734,
+      "x": 214627,
+      "original_request_id": "conflict:Borneo:5:129734:214627",
+      "retained_actual_comparison": {
+        "original_conflict_record_unchanged": {
+          "original_request": {
+            "id": "conflict:Borneo:5:129734:214627",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 129734,
+            "x": 214627,
+            "original_record": {
+              "outcome_interval_index": 5,
+              "pair": [
+                "Malinau",
+                "Bukit Mabong"
+              ],
+              "stable_ids": [
+                "gb:IDN:ADM2:22746128B54632748429230",
+                "gb:MYS:ADM2:92858781B56085190058706"
+              ],
+              "y": 129734,
+              "x": 214627,
+              "longitude_rational": "15038010/131083",
+              "longitude_display": 114.72128346162356,
+              "latitude_native_f64": 1.8514052603197357,
+              "latitude_hex": "0x1.d9f5b1f4b733ap+0"
+            },
+            "original_request_custody": {
+              "path": "[machine-local locator omitted; original private body hash retained]",
+              "bytes": 10134,
+              "sha256": "7371905d83d903e8f84a66e6373de337985af0c1e8f301417f66c7a0852e2957"
+            }
+          },
+          "original_frozen_interval": {
+            "owners": [
+              22935,
+              31106
+            ],
+            "stable_ids": [
+              "gb:IDN:ADM2:22746128B54632748429230",
+              "gb:MYS:ADM2:92858781B56085190058706"
+            ],
+            "names": [
+              "Malinau",
+              "Bukit Mabong"
+            ],
+            "original_interval": {
+              "original_block": 31,
+              "original_record_ordinal": 5,
+              "original_row": [
+                129734,
+                214627,
+                214628,
+                [
+                  22935,
+                  31106
+                ],
+                [
+                  36257,
+                  36578,
+                  46101
+                ],
+                "land"
+              ],
+              "interval_id": "idn-source-conflict:129734:214627:214628",
+              "all_source_feature_ids": [
+                "gb:IDN:ADM1:65028918B52923737893214",
+                "gb:IDN:ADM2:22746128B54632748429230",
+                "gb:MYS:ADM2:92858781B56085190058706"
+              ]
+            }
+          },
+          "current_selected_owner_observation": {
+            "id": "conflict:Borneo:5:129734:214627",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 129734,
+            "x": 214627,
+            "original_owner": null,
+            "baseline_owner": 0,
+            "append_owner": 0,
+            "effective_owner": 0,
+            "owner_identity": null
+          },
+          "original_IDN_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+              "feature_ordinal": 318,
+              "shapeName": "Malinau",
+              "kind": "interior"
+            }
+          ],
+          "full_IDN_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+              "feature_ordinal": 318,
+              "shapeName": "Malinau",
+              "kind": "interior"
+            }
+          ],
+          "complete_foreign_family_memberships": {
+            "gb:MYS:ADM1": {
+              "original_request_id": "conflict:Borneo:5:129734:214627",
+              "y": 129734,
+              "x": 214627,
+              "original_memberships": [],
+              "full_memberships": []
+            },
+            "gb:MYS:ADM2": {
+              "original_request_id": "conflict:Borneo:5:129734:214627",
+              "y": 129734,
+              "x": 214627,
+              "original_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM2:92858781B56085190058706",
+                  "feature_ordinal": 114,
+                  "shapeName": "Bukit Mabong",
+                  "kind": "interior"
+                }
+              ],
+              "full_memberships": [
+                {
+                  "source_id": "gb:MYS:ADM2:92858781B56085190058706",
+                  "feature_ordinal": 114,
+                  "shapeName": "Bukit Mabong",
+                  "kind": "interior"
+                }
+              ]
+            }
+          },
+          "full_foreign_fine_existing_Atlas_locations": [
+            {
+              "owner": 31106,
+              "id": "gb:MYS:ADM2:92858781B56085190058706",
+              "name": "Bukit Mabong",
+              "parent_id": "framework:province:sarawak:8a5fb64d0d51",
+              "source_reference_year": "2020"
+            }
+          ],
+          "actual_JMG_Sarawak_contact_kinds": [],
+          "JMG_applicability": "Sarawakonly;notSabah",
+          "source_assessment_cohort": "both-full-Sarawak-fine;government-country-footprint-disagreement",
+          "chosen_owner": null,
+          "accepted_or_completed_credit": 0
+        },
+        "actual_new_government_comparison_unchanged": {
+          "request": {
+            "id": "conflict:Borneo:5:129734:214627",
+            "original_package": "conflict",
+            "country": "MYS",
+            "y": 129734,
+            "x": 214627,
+            "original_record": {
+              "outcome_interval_index": 5,
+              "pair": [
+                "Malinau",
+                "Bukit Mabong"
+              ],
+              "stable_ids": [
+                "gb:IDN:ADM2:22746128B54632748429230",
+                "gb:MYS:ADM2:92858781B56085190058706"
+              ],
+              "y": 129734,
+              "x": 214627,
+              "longitude_rational": "15038010/131083",
+              "longitude_display": 114.72128346162356,
+              "latitude_native_f64": 1.8514052603197357,
+              "latitude_hex": "0x1.d9f5b1f4b733ap+0"
+            },
+            "original_request_custody": {
+              "path": "[machine-local locator omitted; original private body hash retained]",
+              "bytes": 10134,
+              "sha256": "7371905d83d903e8f84a66e6373de337985af0c1e8f301417f66c7a0852e2957"
+            }
+          },
+          "original_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+              "feature_ordinal": 318,
+              "shapeName": "Malinau",
+              "kind": "interior"
+            }
+          ],
+          "full_idn_memberships": [
+            {
+              "source_id": "gb:IDN:ADM2:22746128B54632748429230",
+              "feature_ordinal": 318,
+              "shapeName": "Malinau",
+              "kind": "interior"
+            }
+          ],
+          "full_private_MYS_memberships": [
+            {
+              "source_id": "gb:MYS:ADM2:92858781B56085190058706",
+              "feature_ordinal": 114,
+              "shapeName": "Bukit Mabong",
+              "kind": "interior"
+            }
+          ],
+          "cached_Gov_Sarawak_state_contacts": [],
+          "new_Gov_Sabah_state_contacts": [],
+          "Gov_district_Sarawak_contacts": [],
+          "Gov_district_Sabah_contacts": [],
+          "Gov_Sabah_line_incidence_only": [],
+          "scientific_observation_partition": "IDNfullpositive__Govstateoutside__Govdistrictoutside",
+          "owner_or_hold_changed": false,
+          "authority_or_repair_credit": 0
+        },
+        "review_scope": "Country-side negative operand source correction candidate, not direct ownership/physical qualification."
+      }
+    }
+  ]
+}
