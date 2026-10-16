@@ -865,15 +865,15 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   return {id:change.id,pixelIndex:owners.get(change.id),feature:accepted};
  };
 
- // The executing accepted tree, not reader.version or a caller's review flag,
- // anchors the typed interpretation. Upstream public bodies retain their pins.
+ // Adoption belongs to the exact selected candidate, independently of which
+ // accepted checkout supplies the checker. Original source pins still bind the
+ // complete reviewed body; a separate prior merge adds no scientific authority.
  const keys=(v,list)=>v&&typeof v==='object'&&!Array.isArray(v)&&Object.keys(v).sort().join(',')===list.split(',').sort().join(',');
  const readAdopted=(pin,label)=>{
-  pinCheck(pin);const moduleRoot=fileURLToPath(new URL('../../../',import.meta.url));
-  const currentVersion=execFileSync(reader.gitExecutable,['-c','core.hooksPath=/dev/null','-C',moduleRoot,'rev-parse','HEAD'],{encoding:'utf8'}).trim();
-  const current=reader.descriptor(pin.path,currentVersion);
+  pinCheck(pin);
+  const current=reader.descriptor(pin.path,reader.version);
   demand(current.mode===pin.mode&&current.git_blob_oid===pin.git_blob_oid&&current.bytes===pin.bytes,
-   label+' differs from executing accepted input');
+   label+' differs from selected candidate input');
   return JSON.parse(read(pin));
  };
  const pointer=(body,name)=>{

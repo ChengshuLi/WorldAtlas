@@ -88,7 +88,7 @@ function fixture(change = () => {}) {
       assert.ok(bodies.has(name), name);
       const pin = {...bodies.get(name).pin};
       if (name === part.path && state.currentGeometryChanged && selectedVersion === version) pin.git_blob_oid = 'f'.repeat(40);
-      if (name === adoption.path && state.currentAdoptionChanged && selectedVersion !== version) pin.git_blob_oid = 'f'.repeat(40);
+      if (name === adoption.path && state.currentAdoptionChanged && selectedVersion === version) pin.git_blob_oid = 'f'.repeat(40);
       return pin;
     },
     read(name, {expected}) { const {body} = bodies.get(name); assert.equal(digest(body), expected); reads.push(name); return body; }};
@@ -120,7 +120,7 @@ test('v3 rejects wrong original scope, raw version, geometry, license, competing
     'old target license substituted': s => { s.license = 'PDDL'; },
     'unselected raw relation may compete': s => { s.otherRelationOverlaps = true; },
     'current geometry changed': s => { s.currentGeometryChanged = true; },
-    'adoption absent from executing tree': s => { s.currentAdoptionChanged = true; },
+    'adoption differs from selected candidate': s => { s.currentAdoptionChanged = true; },
     'current indexed part omitted': s => { s.omitCurrentPart = true; },
     'new-source adoption smuggled into v1': s => { s.version = 1; },
   };
