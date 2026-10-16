@@ -1,0 +1,145 @@
+{
+  "kind": "bounded-captured-stock-native348-prospective-admission-v1",
+  "command": [
+    "node",
+    ".cache/delivery-handoff/vietnam2076-native348-002/captured-code/scripts/prepare-delivery-handoff.mjs",
+    "native-authority",
+    ".cache/delivery-handoff/vietnam2076-native348-002/captured-config.json",
+    ".cache/delivery-handoff/vietnam2076-native348-002/authority"
+  ],
+  "code_commit": "a02676b372741c536fefc05cb5cb8f0adf9adcce",
+  "config": {
+    "commit": "8c2f0e557af58caea1b921e6c98c1f95dc67dc16",
+    "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/native348-qualification-001/config-native-authority.json",
+    "mode": "100644",
+    "git_blob_oid": "e0c65e0751a669e023134e76846aff7f08acd5eb",
+    "bytes": 459,
+    "sha256": "1f369091f9e72a66d4eaa837242b08f1cf003b92033a7c3c3994c4eaaf666b00"
+  },
+  "launcher": {
+    "commit": "a02676b372741c536fefc05cb5cb8f0adf9adcce",
+    "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/run-bounded-native348.py",
+    "mode": "100644",
+    "git_blob_oid": "07ae3ddc59826facc800f9213dfae3183d94b9d4",
+    "bytes": 7172,
+    "sha256": "7736324846fc6d3b663adddece78e825b6136ce167700a9f80806f9eac6d8895"
+  },
+  "project_code": [
+    {
+      "commit": "a02676b372741c536fefc05cb5cb8f0adf9adcce",
+      "path": "scripts/prepare-delivery-handoff.mjs",
+      "mode": "100644",
+      "git_blob_oid": "f981091c0d19f300a864014fa2b420b1af130455",
+      "bytes": 118451,
+      "sha256": "9ebd885d6e0132670500a508bdc7b34844e32bb1029162cf0435bc26c30b53f6"
+    },
+    {
+      "commit": "a02676b372741c536fefc05cb5cb8f0adf9adcce",
+      "path": "scripts/delivery-handoff-advance.mjs",
+      "mode": "100644",
+      "git_blob_oid": "d779062fa47e82530d3a043196bd0f4f0720ff55",
+      "bytes": 62641,
+      "sha256": "822daa7b0c13546f7deab0cdd59d4a746a7616b62df2d5ba93caf3ce291f2b2b"
+    },
+    {
+      "commit": "a02676b372741c536fefc05cb5cb8f0adf9adcce",
+      "path": "scripts/geography-prefetch.mjs",
+      "mode": "100644",
+      "git_blob_oid": "4da9467bafbb3bc8f854f6d38b6e17d86c42cba2",
+      "bytes": 13473,
+      "sha256": "4d52e7e6ef27f8b5d368596ab52d1ac6a9a2224cd5b6a37b885ad90265b24851"
+    },
+    {
+      "commit": "a02676b372741c536fefc05cb5cb8f0adf9adcce",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "mode": "100644",
+      "git_blob_oid": "292ce563070ee1f5b0cb4c271edada18f61b2eda",
+      "bytes": 186291,
+      "sha256": "a3fc1a138add4a687ddae71daf133fff80e8fc7590c2ed852f45069c46a2d380"
+    },
+    {
+      "commit": "a02676b372741c536fefc05cb5cb8f0adf9adcce",
+      "path": "src/reference-metadata.js",
+      "mode": "100644",
+      "git_blob_oid": "90dd998f292636b001625737a07dc9887f1f97dc",
+      "bytes": 24979,
+      "sha256": "982391f05764962e69546fb257b3ce25361e6f848feefea2150b5e1bb877674e"
+    },
+    {
+      "commit": "a02676b372741c536fefc05cb5cb8f0adf9adcce",
+      "path": "src/ownership-codec.js",
+      "mode": "100644",
+      "git_blob_oid": "03eacc9bcb1bff03723a93c248ea6de5f2fed5e4",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+    },
+    {
+      "commit": "a02676b372741c536fefc05cb5cb8f0adf9adcce",
+      "path": "src/native-grid.js",
+      "mode": "100644",
+      "git_blob_oid": "eca2f633558770aacd12db8782217faa8e5abd95",
+      "bytes": 42965,
+      "sha256": "3ef6bc5ec66e3184c254ea66404add0824e3ee18e39c8658f234d2e236d840ad"
+    },
+    {
+      "commit": "a02676b372741c536fefc05cb5cb8f0adf9adcce",
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "mode": "100644",
+      "git_blob_oid": "bd1b5b7301e576bd5393c0328da74654f74b2607",
+      "bytes": 84601,
+      "sha256": "0208626ecedb1644edae9b05141a1ec1f2f9edc15c949d4dc1f9397912e61339"
+    },
+    {
+      "commit": "a02676b372741c536fefc05cb5cb8f0adf9adcce",
+      "path": "scripts/selected-reference-metadata.mjs",
+      "mode": "100644",
+      "git_blob_oid": "38c941e96aee6a0cc62615b7d797e51439570c42",
+      "bytes": 10403,
+      "sha256": "369352d4b78a862fd79ea88bcc6420fbec9ea8d80348dd2d3b6a122dc5dd2a5d"
+    },
+    {
+      "commit": "a02676b372741c536fefc05cb5cb8f0adf9adcce",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs",
+      "mode": "100644",
+      "git_blob_oid": "d1c5a11a0d4aaf2b73f6d6c36b0ab59a67ac84e3",
+      "bytes": 2279,
+      "sha256": "f4d5480d23ba6ae097a559d066b2a244ce388ba81aa6c486331e731be23e1813"
+    },
+    {
+      "commit": "a02676b372741c536fefc05cb5cb8f0adf9adcce",
+      "path": "scripts/evidence-quality.mjs",
+      "mode": "100644",
+      "git_blob_oid": "3f8980f573af0a9fb48b763ed875026f0ce99199",
+      "bytes": 28506,
+      "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97"
+    },
+    {
+      "commit": "a02676b372741c536fefc05cb5cb8f0adf9adcce",
+      "path": "scripts/package-inputs.mjs",
+      "mode": "100644",
+      "git_blob_oid": "5b9300bf925516318c7a4641d008b97a8547d15e",
+      "bytes": 10053,
+      "sha256": "05d0844b7ae0058be185be2c57890ddd64d20bb4fa58eb147a7310be4778db1d"
+    },
+    {
+      "commit": "a02676b372741c536fefc05cb5cb8f0adf9adcce",
+      "path": "package.json",
+      "mode": "100644",
+      "git_blob_oid": "318d842ee999da746956968c9d7e58f9e00cb9e4",
+      "bytes": 1417,
+      "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+    }
+  ],
+  "node_version": "v24.19.0",
+  "runtime_flags": [],
+  "memory_rss_limit_bytes": 805306368,
+  "wall_deadline_seconds": 120,
+  "poll_seconds": 0.05,
+  "free_bytes_before": 11242287104,
+  "memory_before": {
+    "MemTotal": 10451464192,
+    "MemAvailable": 7921131520
+  },
+  "source_bank_and_physical_replay": false,
+  "output_log_allowance_bytes": 33554432
+}

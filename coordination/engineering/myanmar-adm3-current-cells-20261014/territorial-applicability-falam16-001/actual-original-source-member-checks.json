@@ -1,0 +1,30 @@
+{
+  "status": "PASS all34 exact records, full encoded/decoded whole sources and original negative geometry identities",
+  "records": 34,
+  "source_products": [
+    {
+      "id": "original0",
+      "complete_parts": 1,
+      "whole_encoded_bytes": 4719659,
+      "decoded_bytes": 13287234,
+      "feature_count": 258
+    },
+    {
+      "id": "original1",
+      "complete_parts": 2,
+      "whole_encoded_bytes": 13795162,
+      "decoded_bytes": 40040002,
+      "feature_count": 6822
+    },
+    {
+      "id": "original2",
+      "complete_parts": 1,
+      "whole_encoded_bytes": 2009868,
+      "decoded_bytes": 5103747,
+      "feature_count": 36
+    }
+  ],
+  "whole_target_7_negative_geometries_unchanged": true,
+  "geometry_predicates": false,
+  "source_or_physical_replay": false
+}

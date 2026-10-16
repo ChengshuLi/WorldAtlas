@@ -1,0 +1,48 @@
+{
+  "kind": "retained-country-geometry-validity-read",
+  "countries": 258,
+  "invalid": [
+    {
+      "ordinal": 161,
+      "country": "EGY",
+      "reason": "Ring Self-intersection[35.621087 23.139293]",
+      "bounds": [
+        24.688343,
+        21.994369,
+        36.899181,
+        31.65648
+      ],
+      "outside_entire365_longitude_range": true
+    }
+  ],
+  "CHN_VNM": [
+    {
+      "ordinal": 9,
+      "country": "CHN",
+      "valid": true,
+      "reason": "Valid Geometry",
+      "bounds": [
+        73.602256,
+        15.775377,
+        134.772579,
+        53.569444
+      ]
+    },
+    {
+      "ordinal": 55,
+      "country": "VNM",
+      "valid": true,
+      "reason": "Valid Geometry",
+      "bounds": [
+        102.118655,
+        8.565579,
+        109.472423,
+        23.366275
+      ]
+    }
+  ],
+  "scope": "All258rawcountryfeatures; no repair or geometry edit; establishes whether accepted make_valid changes CHN/VNM masks.",
+  "rss_kib": 152240,
+  "retry": "First read failed before decoding because inherited768MiB virtual-address limit prevented Git pack mmap. Same exact4.7MBblob read before installing parsing-process address limit; no science output from failed attempt.",
+  "invalid_country_cannot_affect365": "The sole invalid country is Egypt, wholly west of these365centres. make_valid changes no valid CHN/VNM geometry, and cannot move Egypt points into the Vietnam-China window."
+}
