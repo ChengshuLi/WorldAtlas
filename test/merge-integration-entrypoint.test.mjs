@@ -217,8 +217,9 @@ for(const notification of ['denied','transport']) test('actual owned prepare ret
     const outputs=fs.readFileSync(path.join(directory,'outputs'),'utf8');
     assert.match(outputs,new RegExp('^candidate='+owned+'$','m'));assert.match(outputs,new RegExp('^base='+base+'$','m'));
     assert.match(outputs,/shards=\[0,1,2\]/);
-    const encoded=outputs.match(/^checkout_patterns_base64=([A-Za-z0-9+/=]+)$/m)?.[1];assert(encoded);
-    const patterns=Buffer.from(encoded,'base64').toString();
+    const encoded=outputs.match(/^checkout_patterns_base64<<CHECKOUT_BASE64\n([A-Za-z0-9+/=\n]+)\nCHECKOUT_BASE64$/m)?.[1];assert(encoded);
+    assert(encoded.split('\n').every(line=>line.length<=76),'Encoded data uses short lines without limiting the complete payload');
+    const patterns=Buffer.from(encoded.replaceAll('\n',''),'base64').toString();
     assert.match(patterns,/^\/\*\n/);
     assert.match(patterns,/!\/coordination\/engineering\/reference-source-custody-20261007\//);
     assert.match(patterns,/!\/research\/geography\/\*/);

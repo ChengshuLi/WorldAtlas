@@ -189,7 +189,8 @@ jobs:
           python3 -I -S -B - <<'CHECKOUT_INPUTS'
           import base64, os, re, subprocess
           # Trusted preparation emits only base64; decoded repository paths are data.
-          patterns = base64.b64decode('${{ needs.prepare.outputs.checkout_patterns_base64 }}', validate=True)
+          encoded = '''${{ needs.prepare.outputs.checkout_patterns_base64 }}'''
+          patterns = base64.b64decode(encoded.replace('\n', ''), validate=True)
           sha, tree, repo = (os.environ[key] for key in ('CI_CHECKOUT_SHA', 'CI_CHECKOUT_TREE', 'CI_CHECKOUT_REPOSITORY'))
           assert re.fullmatch('[0-9a-f]{40}', sha) and re.fullmatch('[0-9a-f]{40}', tree) and repo == 'ChengshuLi/WorldAtlas'
           token = os.environ.pop('GH_TOKEN')

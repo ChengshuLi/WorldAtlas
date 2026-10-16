@@ -284,7 +284,7 @@ function materializationFixture(patterns) {
   const env={...process.env,CI_CHECKOUT_REPOSITORY:'ChengshuLi/WorldAtlas',CI_CHECKOUT_SHA:sha,CI_CHECKOUT_TREE:tree,
     GH_TOKEN:'fixture-secret-never-print',GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_TERMINAL_PROMPT:'0',
     GIT_CONFIG_COUNT:'2',GIT_CONFIG_KEY_0:'core.hooksPath',GIT_CONFIG_VALUE_0:'/dev/null',GIT_CONFIG_KEY_1:'credential.helper',GIT_CONFIG_VALUE_1:''};
-  const run=({encoded=Buffer.from(patterns).toString('base64'),override={}}={})=>{
+  const run=({encoded=(Buffer.from(patterns).toString('base64').match(/.{1,76}/g)??[]).join('\n'),override={}}={})=>{
     // Match Actions: expressions are resolved into a file, then bash runs that file.
     const script=path.join(directory,'.git','materialize.sh');
     fs.writeFileSync(script,step.run.replace('${{ needs.prepare.outputs.checkout_patterns_base64 }}',encoded));
@@ -301,7 +301,8 @@ test('both queue profiles share minimal checkout, stdin materialization and exac
   assert.equal(integration.steps.filter(step=>step.text.includes('uses: actions/checkout@')).length,1);
   assert.doesNotMatch(source,/sparse-checkout: \$\{\{|checkout_patterns<<|WORLDATLAS_CHECKOUT_PATTERNS/);
   assert.match(source,/checkout_patterns_base64: \$\{\{ steps\.prepare\.outputs\.checkout_patterns_base64 \}\}/);
-  assert.match(materialize.run,/b64decode\('[^']*checkout_patterns_base64[^']*', validate=True\)/);
+  assert.match(materialize.run,/encoded = '''\$\{\{ needs\.prepare\.outputs\.checkout_patterns_base64 \}\}'''/);
+  assert.match(materialize.run,/b64decode\(encoded\.replace\('\\n', ''\), validate=True\)/);
   assert.match(materialize.run,/'sparse-checkout', 'set', '--no-cone', '--stdin'\], input=patterns, env=env, check=True/);
   assert(integration.steps.indexOf(checkout)<integration.steps.indexOf(materialize));
   assert(integration.steps.indexOf(materialize)<integration.steps.indexOf(verify));
@@ -335,6 +336,10 @@ if args[:1] == ['sparse-checkout']:
 os.execv(${JSON.stringify(realGit)}, [${JSON.stringify(realGit)}, *args])
 `,{mode:0o755});
     const result=f.run({override:{PATH:bin+path.delimiter+process.env.PATH}});assert.equal(result.status,0,result.stderr);
+    const rendered=fs.readFileSync(path.join(f.directory,'.git/materialize.sh'),'utf8');
+    const encoded=rendered.match(/encoded = '''([A-Za-z0-9+/=\n]+)'''/)[1];
+    assert(encoded.split('\n').length>1&&encoded.split('\n').every(line=>line.length<=76));
+    assert.equal(Buffer.from(encoded.replaceAll('\n',''),'base64').toString(),patterns);
     assert.deepEqual(JSON.parse(fs.readFileSync(path.join(f.directory,'.git/stdin-probe.json'))),{
       args:['sparse-checkout','set','--no-cone','--stdin'],stdin:patterns,token_environment:false,
       config_count:'3',auth_key:'http.https://github.com/.extraheader',has_auth:true});
@@ -349,12 +354,14 @@ os.execv(${JSON.stringify(realGit)}, [${JSON.stringify(realGit)}, *args])
   }finally{fs.rmSync(f.directory,{recursive:true,force:true});}
 });
 
-for(const kind of ['invalid-base64','wrong-head','wrong-tree','wrong-repository','wrong-remote','header','credential-helper','include','failed-git']){
+for(const kind of ['invalid-base64','truncated-base64','foreign-whitespace','wrong-head','wrong-tree','wrong-repository','wrong-remote','header','credential-helper','include','failed-git']){
   test(`prepared checkout refuses ${kind} without successful materialization`,()=>{
     const f=materializationFixture('/*\n!/*/\n/selected/input.txt');
     try{
       const override={},options={override};
       if(kind==='invalid-base64')options.encoded='not!base64';
+      if(kind==='truncated-base64')options.encoded=Buffer.from('/*\n!/*/\n/selected/input.txt').toString('base64').slice(0,-1);
+      if(kind==='foreign-whitespace')options.encoded='Lyo= ';
       if(kind==='wrong-head')override.CI_CHECKOUT_SHA='a'.repeat(40);
       if(kind==='wrong-tree')override.CI_CHECKOUT_TREE='b'.repeat(40);
       if(kind==='wrong-repository')override.CI_CHECKOUT_REPOSITORY='other/repo';
