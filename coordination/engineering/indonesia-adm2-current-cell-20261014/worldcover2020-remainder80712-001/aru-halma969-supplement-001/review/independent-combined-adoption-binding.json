@@ -1,0 +1,71 @@
+{
+  "reviewer": "/root/cell_method_review",
+  "recorded_utc": "2026-10-16T00:57:59.599802+00:00",
+  "disposition": "PASS exact allowed adoption-only transforms, complete original evidence copies, and literal key conservation",
+  "Aru_full_rows_compared": 623,
+  "Halmahera_full_rows_compared": 687,
+  "total_full_rows_compared": 1310,
+  "adopted_answers": 969,
+  "retained_in_scope_unknowns": 341,
+  "full_approved_rows_equal_after_reversing_only_declared_metadata_transforms": true,
+  "known_union": 101099,
+  "specific_residual": 32747,
+  "original_denominator": 133846,
+  "new_pairwise_and_prior_overlap": 0,
+  "source_or_native_replay": false,
+  "native_authority_or_accepted_repair_credit": 0,
+  "adopted_payloads": [
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/worldcover2020-remainder80712-001/aru-halma969-supplement-001/aru/adopted-aru623-dispositions.jsonl.gz",
+      "rows": 623,
+      "adopted_answers": 397,
+      "unresolved": 226,
+      "bytes": 163268,
+      "sha256": "8dcbc39b88c54d8d7b463c95d49852d9ba9b891558160900458416cbe464b1e8",
+      "git_blob_oid": "1123517104dcf598b28186ee8fc4702d01f452e2"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/worldcover2020-remainder80712-001/aru-halma969-supplement-001/halmahera/adopted-halmahera687-dispositions.jsonl.gz",
+      "rows": 687,
+      "adopted_answers": 572,
+      "unresolved": 115,
+      "bytes": 256566,
+      "sha256": "0c2ccec2fb48bf9e124b47a362997c1a55c52a87aa65cd8071573625c595673e",
+      "git_blob_oid": "9a6123aa7c8fe4a078ccb9e70519eae5535c849f"
+    }
+  ],
+  "key_products": [
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/worldcover2020-remainder80712-001/aru-halma969-supplement-001/accounting/newly-adopted-aru397-halma572-owner-y-x.jsonl.gz",
+      "keys": 969,
+      "decoded_sha256": "9d3b0dde98ac52cde4f46321d6ef2b4a4fb8c57ef71e17e762d6dc4b8a653770",
+      "bytes": 3922,
+      "sha256": "5202377c2d85b966241710abec4e4a721003f2016c9aaf529fe4c4dd75377ac9",
+      "git_blob_oid": "0c383ce32347f3c8a1cfa15251df0785f1f59f57"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/worldcover2020-remainder80712-001/aru-halma969-supplement-001/accounting/known-exact-adopted-union101099-owner-y-x.jsonl.gz",
+      "keys": 101099,
+      "decoded_sha256": "0ae978f02a52189e870de3c27326bc8e9fc3c554c738ab0c32f861442119b892",
+      "bytes": 288338,
+      "sha256": "3d75cb9f6a7ac059c9c5b3a0af0cd1634a7ba3f6d673ae6279687f9972d3b733",
+      "git_blob_oid": "50618ad2df16c14e2d03f655cadf4cd4a96e6848"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/worldcover2020-remainder80712-001/aru-halma969-supplement-001/accounting/specific-residual-union32747-owner-y-x.jsonl.gz",
+      "keys": 32747,
+      "decoded_sha256": "9859ebb26a4e6fac3410f8b3434034acdb11f336698cc2cf29ff62e656b02e04",
+      "bytes": 112475,
+      "sha256": "e61358d0c462a5d4bc1f855db428267f0f740db2da10cea01f1d15c4bccd5ca6",
+      "git_blob_oid": "f53502da358ac40747b12aa219354d04dfad7f7a"
+    }
+  ],
+  "limits": [
+    "Annual2020 median imagery, not a single dated scene, instantaneous tide/inundation or present truth.",
+    "Canopy does not certify dry underlying soil; visible water does not establish hydrologic kind/permanence/chemistry; exposed morphology does not certify permanent dryness or surveyed banks.",
+    "Original coordinates, class-model observations, source/member interval associations and territorial/admin/parent/portion/witness/selected-owner holds remain.",
+    "Specific ambiguous marked-centre placements and actual nodata remain unresolved; no spectral cutoff or whole-neighbourhood unanimity rule.",
+    "Known reconciled original133846 source-review key accounting only; no global historical answer census.",
+    "No native-authority, selected ownership, repair, accepted map-cell or whole-original-question completion credit."
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "kind": "Root-adoption-metadata-only-aru397-halma572",
+  "authorization": {
+    "authorized_by": "Root coordinator, explicit adoption instructions to distinct reviewer",
+    "recorded_utc": "2026-10-16T00:57:59.599802+00:00",
+    "time_semantics": "Package metadata recording time, not a fabricated source observation/adoption instant.",
+    "scope": "Only bounded annual2020 visible-surface/body-location review; no native-authority, repair or accepted selected-map credit.",
+    "original_denominator": 133846,
+    "Aru": {
+      "proposal_sha256": "6e274c779568018a6a1bac5e75ba3d34e261dbc996e1e2b2d9c59941aa5782d4",
+      "distinct_review_sha256": "6349ca6f062fccd051a2c33ec971e57e760eda39ff49a441956ec963f184caae",
+      "adopted_answers": 397,
+      "unresolved_in_review_scope": 226
+    },
+    "Halmahera": {
+      "proposal_sha256": "c7f848a120854c0bad9a85ac111ca189ca90c49bd1daede4cd4f2997f318bf16",
+      "distinct_review_sha256": "1aacb68c31c135067ed26261d09150ec994d525cd9f856f6dd28ad8c5c0c892d",
+      "adopted_answers": 572,
+      "unresolved_in_review_scope": 115,
+      "superseded603_draft_adopted": false
+    }
+  },
+  "adopted_payloads": [
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/worldcover2020-remainder80712-001/aru-halma969-supplement-001/aru/adopted-aru623-dispositions.jsonl.gz",
+      "rows": 623,
+      "adopted_answers": 397,
+      "unresolved": 226,
+      "bytes": 163268,
+      "sha256": "8dcbc39b88c54d8d7b463c95d49852d9ba9b891558160900458416cbe464b1e8",
+      "git_blob_oid": "1123517104dcf598b28186ee8fc4702d01f452e2"
+    },
+    {
+      "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/worldcover2020-remainder80712-001/aru-halma969-supplement-001/halmahera/adopted-halmahera687-dispositions.jsonl.gz",
+      "rows": 687,
+      "adopted_answers": 572,
+      "unresolved": 115,
+      "bytes": 256566,
+      "sha256": "0c2ccec2fb48bf9e124b47a362997c1a55c52a87aa65cd8071573625c595673e",
+      "git_blob_oid": "9a6123aa7c8fe4a078ccb9e70519eae5535c849f"
+    }
+  ],
+  "exact_original_proposal_copies_unchanged": true,
+  "allowed_transforms": {
+    "aru": [
+      "aru_saved_source_followup.status",
+      "aru_saved_source_followup.adopted_review_credit",
+      "aru_saved_source_followup.credit_scope (new)",
+      "aru_saved_source_followup.root_adoption (new)"
+    ],
+    "halmahera": [
+      "proposed_bounded_answer -> adopted_bounded_answer (same literal value)",
+      "completed_question_credit_proposed -> completed_question_credit (same literal value)",
+      "root_adoption:null -> actual Root authorization metadata",
+      "distinct_review:null -> exact independent review reference",
+      "credit_scope -> truthful adopted/remaining-unknown counter scope"
+    ]
+  },
+  "every_other_scientific_and_source_field_equal_approved_original": true,
+  "raw_local_paths": "Historical original source/view provenance is preserved verbatim. Public portable locators are mapped separately; no filesystem values were substituted into original scientific bodies.",
+  "limits": [
+    "Annual2020 median imagery, not a single dated scene, instantaneous tide/inundation or present truth.",
+    "Canopy does not certify dry underlying soil; visible water does not establish hydrologic kind/permanence/chemistry; exposed morphology does not certify permanent dryness or surveyed banks.",
+    "Original coordinates, class-model observations, source/member interval associations and territorial/admin/parent/portion/witness/selected-owner holds remain.",
+    "Specific ambiguous marked-centre placements and actual nodata remain unresolved; no spectral cutoff or whole-neighbourhood unanimity rule.",
+    "Known reconciled original133846 source-review key accounting only; no global historical answer census.",
+    "No native-authority, selected ownership, repair, accepted map-cell or whole-original-question completion credit."
+  ]
+}

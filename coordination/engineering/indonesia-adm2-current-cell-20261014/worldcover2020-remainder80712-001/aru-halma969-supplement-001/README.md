@@ -1,0 +1,7 @@
+# Aru397 and Halmahera572 adopted source-review supplement
+
+This packet preserves the full exact original proposals, distinct independent reviews and all77 actual saved centre-view sheets. Root explicitly adopted397 Aru and572 final Halmahera answers. All226 Aru and115 Halmahera unresolved centres retain zero answer credit. The superseded603-answer Halmahera draft is historical only and not adopted.
+
+`adoption.json` lists the only adoption metadata transforms; every other scientific/source field is unchanged. Original proposal pending-adoption wording is preserved as historical provenance in the verbatim originals. `portable-evidence-locators.json` maps historical local file provenance to this packet; raw source arrays remain authenticated through the original source report and prior source corpus rather than being acquired or replayed. `accounting/exact-original-accounting.json` pins exact predecessor key sets and deterministic literal owner/y/x unions.
+
+The known reconciled original133,846 cohort now contains101,099 adopted source-review keys and32,747 specific residuals. These counters do not imply native authority, current selected ownership, binary map status, territorial/legal resolution or accepted repair. Annual2020 median reflectance does not certify exact tide, present truth, dry understorey or permanent dry substrate. Actual nodata and ambiguous marked-centre body placements remain unresolved.

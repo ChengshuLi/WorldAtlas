@@ -1,0 +1,578 @@
+{
+  "reviewer": "/root/cell_method_review",
+  "reviewed_utc": "2026-10-16T00:55:13.620146+00:00",
+  "disposition": "PASS exact572 bounded visible-surface/body-location proposals with retained limits; NOT adopted",
+  "candidate": {
+    "path": "idn-physical-largest-residuals-001/worker6-halmahera687/proposed-halmahera687-physical-location-dispositions.jsonl.gz",
+    "bytes": 229326,
+    "sha256": "c7f848a120854c0bad9a85ac111ca189ca90c49bd1daede4cd4f2997f318bf16"
+  },
+  "decoded_sha256": "66333d57b23d67d67e8d3cbe3eb24bc767fd1cefe1090c8fd821ca406d0b0bc1",
+  "original9332_proposal": {
+    "path": "idn-physical-largest-residuals-001/worker1-source/proposed-rgbnir-physical-location-dispositions.jsonl.gz",
+    "bytes": 1621733,
+    "sha256": "a1b0ddb5824a2533979dbc5185adcd7e8193555ad7e02fdf4489fa54f8be2705"
+  },
+  "source_report": {
+    "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-source-observations.json",
+    "bytes": 113961,
+    "sha256": "da2c6ef6ee786541220486778bb74d428c794665d3582ae7d5bee2735205f5bd"
+  },
+  "source_observation_inputs": [
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E103/point-observations.jsonl",
+      "bytes": 690510,
+      "sha256": "ebf72b6f36715e3e33d65daf4261fc60239f109093f99c1ca7d237ea3f42df86"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E104/point-observations.jsonl",
+      "bytes": 3115387,
+      "sha256": "52c92205e452d3151a12f18ed0eaac9253de8796860da0e76cd0a3c6df5727bb"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E127/point-observations.jsonl",
+      "bytes": 736972,
+      "sha256": "fca781f175eb5019e3c24863468b5bc7a759e719d5e9ca23df28eecdf301f162"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N01E103/point-observations.jsonl",
+      "bytes": 2698548,
+      "sha256": "6438b11b4e3e58c972b8744d37d43718074ef37fc7c3c75a5baef346590bce7e"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N01E104/point-observations.jsonl",
+      "bytes": 807680,
+      "sha256": "0256dca57b90b02d0a0f908a1fcf2687b32adf75f13498d043483f853e215312"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N02E117/point-observations.jsonl",
+      "bytes": 1456055,
+      "sha256": "9acf3a1340b661772cad967e49aa92af55395d191d318f9a290e6ce5e2113584"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N03E117/point-observations.jsonl",
+      "bytes": 2855312,
+      "sha256": "12d23d1d554cc283c36b3785769690f57f3f428cfac0048d2c72d4fb0920ebaa"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E127/point-observations.jsonl",
+      "bytes": 4847092,
+      "sha256": "4c1e64b8caf49d444396c935716f48f46b6fd6bf00bd1c9b4d3d0f923389004b"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S01E128/point-observations.jsonl",
+      "bytes": 1479924,
+      "sha256": "ecd1862fb1b0c6e458b166d41bb92f00bdbfaf4107231e01a50f8b603bc45a45"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/point-observations.jsonl",
+      "bytes": 1833491,
+      "sha256": "f9ffea7a366775575a88542c7f6485327e0c268d3f8ed21b4acaab8a5bf00e4f"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E128/point-observations.jsonl",
+      "bytes": 2426711,
+      "sha256": "3b1b261702ff6d9222d1477886e90234286bf868639e4dcb9245e814a7ec353a"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S06E134/point-observations.jsonl",
+      "bytes": 12520680,
+      "sha256": "39e05ae5c1afee7d00eda9860e13abef913c41a9e4d5da3df9f0d14057cd3b34"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S07E134/point-observations.jsonl",
+      "bytes": 9341473,
+      "sha256": "0eea5062ffc913484e49dd9ac7eed2f88c2638c2455d3df34e304c61c6af9c0e"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S08E134/point-observations.jsonl",
+      "bytes": 769501,
+      "sha256": "a316c5cba154a1d39d0c6fe2022b667e565dd3e0ad6cf67bc271cec8444e34c0"
+    }
+  ],
+  "whole_original_unanswered_cohort": 687,
+  "literal_owner": 22796,
+  "literal_source_sid": 36375,
+  "source_coordinates_native_values_masks_categories_and_associations_unchanged": true,
+  "retained_original_decision_per_row": true,
+  "manual_counts": {
+    "V": 390,
+    "A": 115,
+    "W": 126,
+    "L": 56
+  },
+  "proposed_positive_keys": 572,
+  "remaining_specific_unknowns": 115,
+  "known_adopted_keys_before_candidate": 100527,
+  "cohort_overlap_with_known_adopted": 0,
+  "prospective_only_if_Root_adopts": {
+    "known_adopted": 101099,
+    "specific_original_residual": 32747,
+    "original_denominator": 133846
+  },
+  "class_breakdown": {
+    "10 V": 157,
+    "80 A": 57,
+    "80 V": 69,
+    "80 W": 61,
+    "95 V": 117,
+    "80 L": 34,
+    "60 A": 4,
+    "10 A": 13,
+    "90 V": 9,
+    "95 W": 47,
+    "50 L": 4,
+    "60 L": 7,
+    "95 A": 40,
+    "60 W": 7,
+    "30 V": 7,
+    "90 L": 1,
+    "10 W": 8,
+    "60 V": 30,
+    "30 L": 1,
+    "10 L": 4,
+    "95 L": 4,
+    "90 W": 3,
+    "90 A": 1,
+    "40 L": 1,
+    "20 V": 1
+  },
+  "source_context_flags": {
+    "parent_discrepancy_claims": 0,
+    "documented_selected_geographic_portion": 0,
+    "other_recorded_source_claims": 0
+  },
+  "actual_visual_review": {
+    "wide_pages_viewed": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29
+    ],
+    "initial_detail_pages_viewed": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25
+    ],
+    "canopy_adverse_pages_viewed": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "initial_detail_cases": 291,
+    "canopy_adverse_cases": 64,
+    "canopy_adverse_final_counts": {
+      "A": 31,
+      "V": 6,
+      "W": 26,
+      "L": 1
+    },
+    "retained_canopy_adverse_points": [
+      22638,
+      23545,
+      27283,
+      27868,
+      32533,
+      34124
+    ],
+    "corrected_exposed_adverse_point": 34222,
+    "24596": "Actual dark shore/body uncertainty retained; adjacent canopy does not establish centre canopy.",
+    "pre_adverse603_candidate": "Superseded; not approved by this review."
+  },
+  "manual_inputs": [
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/manual-wide-decisions-first-pass.json",
+      "bytes": 8760,
+      "sha256": "28195f7999b7142024d7881db03ed3ebdaaad193a76daf91657331e898bdd0bf"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/manual-detail-decisions-final.json",
+      "bytes": 4548,
+      "sha256": "6c37483c6525483ddb6cfb8c565295929dcd0db11d01c80c789556c045583f80"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/manual-canopy-adverse-decisions-final.json",
+      "bytes": 944,
+      "sha256": "cc7fc25289033904c59126279e328a0135df3aac6e0ef2570e3b07d25c3e59c5"
+    }
+  ],
+  "view_inventories": [
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/contact-inventory.json",
+      "bytes": 704129,
+      "sha256": "64592b5ca566b9fec644c4bac0c7889f9e63ce3c7c0fd4c2ab0c6c44c0e8e6ae"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-detail-review/contact-inventory.json",
+      "bytes": 332209,
+      "sha256": "2f6302c038627c49f1972da4b3e7224c9aad13a64c62eb78a4df1b67dffa3226"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-canopy-adverse-review/contact-inventory.json",
+      "bytes": 73509,
+      "sha256": "8fb9d0cc31fbb42ed3d2da17098af60b6fe553980a585d8d81f05f518cda74c0"
+    }
+  ],
+  "view_pins": [
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-01.png",
+      "bytes": 269680,
+      "sha256": "825a5882cfb3baa5ea8586e0b5faa3f0d3c5c9a96b7c8683c62e53ea7ae3a803"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-02.png",
+      "bytes": 264305,
+      "sha256": "48164f7e414a55ba039a5b0fe5bd6f7f2623551b2d651a1292ab33213205ffbc"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-03.png",
+      "bytes": 270864,
+      "sha256": "dcfab152d17603727642f7f8159356f2ebf8121e6f5ea52d28c6126ec4da0d46"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-04.png",
+      "bytes": 250281,
+      "sha256": "c96c993be826610b0bbc270163104cc652c70bb7ea1fb7264f168d95f920070b"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-05.png",
+      "bytes": 246580,
+      "sha256": "b09bb62dd39e433e73b10c9f9bed246d68ffded68803b3f51c051ea2933d981c"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-06.png",
+      "bytes": 259160,
+      "sha256": "a969e8cfeac367102fe67c3ca5c016b5b722cd36e7977ae75e8589dc367c852a"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-07.png",
+      "bytes": 263218,
+      "sha256": "ce39f971d3486f7ea00e3c7639cc34a7e51082f0d88a3568d1856e2dc34daac4"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-08.png",
+      "bytes": 254590,
+      "sha256": "f8d669b9a4e323f691ce69609d5574cc0b6e485510a323cff9f51ff3aaba731c"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-09.png",
+      "bytes": 237981,
+      "sha256": "bddb5aa21973c568f35c55b64c7d0037eaa4e9b00aaa1224a1f775c30f0f3d16"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-10.png",
+      "bytes": 249298,
+      "sha256": "ff22a00b4a8e39e4ce898fa209075acae6a0b851814b1747fb936a16bf0e146b"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-11.png",
+      "bytes": 241814,
+      "sha256": "b1f69001567468facb7e2fc957f46fb29a3c04c2d303a2261392e2f4fd261187"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-12.png",
+      "bytes": 246844,
+      "sha256": "f17fc5d27ccd4fc9d5c757f8ce8dc148cb8b6bbdc664a6b12c6a3aab251cf87b"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-13.png",
+      "bytes": 236693,
+      "sha256": "8b725c6d11f288b5d1e7f27bd28199e1d1fd89cd10c65617d807cf84a1ef3700"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-14.png",
+      "bytes": 234243,
+      "sha256": "fc9bbb5d47fff40218e0e394dab2e483ee0da0a3bcf168346cdc354fc16c055e"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-15.png",
+      "bytes": 236115,
+      "sha256": "bc22aa2fb51303fe3138ed70cf2674f4f64d1b16e30299ff055a373d165eb504"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-16.png",
+      "bytes": 242298,
+      "sha256": "a7d6f9eb1a0a39567a682eba27f46babae13c7bcad52d95d78234c7341ca74f3"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-17.png",
+      "bytes": 265473,
+      "sha256": "e456217bbc6744dbdb8f1c6d147000643cd2d2dca0ef9eacbe6d17e09dd6435a"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-18.png",
+      "bytes": 299574,
+      "sha256": "883f5fe1d981e2d18506793159fdd3ad7e3d61b80fb2e8d7a205a80c383f4577"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-19.png",
+      "bytes": 270541,
+      "sha256": "ca0cfb3a83e399183242f0d4d330206bb66c1c31c9ad61c1de02075a76e9df6d"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-20.png",
+      "bytes": 286188,
+      "sha256": "3b35357206eb1265a710690e43bb453ed98e9319f1f4a077ac87b5dbb1b62e92"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-21.png",
+      "bytes": 269615,
+      "sha256": "505a79cd4ddd715cfedffef690091abca0b3eff4e37b896c3c7e933d4b45a99f"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-22.png",
+      "bytes": 255887,
+      "sha256": "aef137710760e5f22d7b82db420c5376006e4d5a54cfc9dd31cb927069fbf767"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-23.png",
+      "bytes": 241453,
+      "sha256": "8e331ad125d370efed8e00b2fe7bb2b8b5659ecddce237e0e3a20ca771ef1107"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-24.png",
+      "bytes": 241404,
+      "sha256": "a41c7a443450b06dd06cd5c627d25f402c35260e7385e06adfe3bbc9483a31af"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-25.png",
+      "bytes": 243396,
+      "sha256": "36116e5b7af8b012ecd720c04a5dcff4d6611fda483a239e6e13da30d3eef85e"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-26.png",
+      "bytes": 253762,
+      "sha256": "c3796cf8c6a779fdc2f06a50c9b727b7710557201f0a7d86ed957f550be79e5e"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-27.png",
+      "bytes": 268918,
+      "sha256": "bbcc716b73239077e355cfbb83da51fdc14ab86ae914286109d680a1005c8843"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-28.png",
+      "bytes": 256698,
+      "sha256": "efe0cb78257089dd5552573963929a3d7848b28fbbcc80fe16dfe8ebfa0169fc"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-29.png",
+      "bytes": 169941,
+      "sha256": "99dd6dd6f9e71610f50ec66bf62c572c4637263b5e18156117f0f62c4ba535c0"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-detail-review/halmahera-detail-01.png",
+      "bytes": 32373,
+      "sha256": "5a3af45404ec8cfdbf8dfc3637b782393b369c85f2c899e81337a4df4a6f4c88"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-detail-review/halmahera-detail-02.png",
+      "bytes": 32891,
+      "sha256": "14c0feefc3eb3667b9c6bb0757b6d3db033ea5d0e5c68f33c7954e098f5dbe23"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-detail-review/halmahera-detail-03.png",
+      "bytes": 33262,
+      "sha256": "58b8e498efa8c65da884d8adeaca693d759a877a8418f4c728f1bb444b53ed5b"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-detail-review/halmahera-detail-04.png",
+      "bytes": 30484,
+      "sha256": "dc3d70bdcbba4999d98fd6a90d834a6fda7e2f48dceb464bf6dac1fc8d1d2fbd"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-detail-review/halmahera-detail-05.png",
+      "bytes": 32125,
+      "sha256": "4de2bd0077e24669ad8943b5ee9c4f21f6d556191beed48c4d839c36a15bed55"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-detail-review/halmahera-detail-06.png",
+      "bytes": 31028,
+      "sha256": "1a763538e642efa22a58b16fe0abe4a17c087b9ce9d2088f7e77f3ba37b25557"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-detail-review/halmahera-detail-07.png",
+      "bytes": 30872,
+      "sha256": "dd5e491e0980294bf1b7286b1e0db25b73763a8ff94abe445f38d6b772637bf5"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-detail-review/halmahera-detail-08.png",
+      "bytes": 30336,
+      "sha256": "69d52206d4703479bf599ae282239ac2abd12a691685f5f5496e1e765bda3275"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-detail-review/halmahera-detail-09.png",
+      "bytes": 29806,
+      "sha256": "f6629c54a02fc20e88132dc725014c3cd3ca75b5b694e044ea2073570c28abe5"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-detail-review/halmahera-detail-10.png",
+      "bytes": 30446,
+      "sha256": "756bb69e459f10f4ee400792e80dd9bc86dc4313efadfe9ade1c1803acb2cfef"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-detail-review/halmahera-detail-11.png",
+      "bytes": 28663,
+      "sha256": "e9d15c0e8e15421a81c0f2a83646645408c24d883db88dc93adb1348ab69ba41"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-detail-review/halmahera-detail-12.png",
+      "bytes": 32025,
+      "sha256": "86d6593aa8a85c28053ac3046dcabde8bd090d136024bc0f143f67ecefd9505d"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-detail-review/halmahera-detail-13.png",
+      "bytes": 34767,
+      "sha256": "7d9556bc425a07a52552fa37a91f38e5ccbb035cf7c9b60ef84916d3baebae0c"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-detail-review/halmahera-detail-14.png",
+      "bytes": 33635,
+      "sha256": "af967f64a99b4440e187e36395cebbc4ebd90fde2b38ee3105f70faf707a672d"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-detail-review/halmahera-detail-15.png",
+      "bytes": 30668,
+      "sha256": "b688a2fc405cbc7ce7167f89a1a3cfa454f619df303b61c64107f579ffaa0845"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-detail-review/halmahera-detail-16.png",
+      "bytes": 32364,
+      "sha256": "bf1dc33a87fde0c71b963d53610bd4db2c087aac69953496a26150bf0081f0f3"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-detail-review/halmahera-detail-17.png",
+      "bytes": 31904,
+      "sha256": "89b5680ef665423080fa57bb90cf78552aaef7bbb9498650d58a3fc0923ed5cb"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-detail-review/halmahera-detail-18.png",
+      "bytes": 31860,
+      "sha256": "938bcc93996cf74f00f6853e3614b93a6d6b9f130d298b5b9be1532a9394c4f6"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-detail-review/halmahera-detail-19.png",
+      "bytes": 29951,
+      "sha256": "c2380dadc727b4fffaa826d58a3c6e5f5011e138b7d540e5966a13e6a42b7996"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-detail-review/halmahera-detail-20.png",
+      "bytes": 30772,
+      "sha256": "da6b38b37e6117b620a5c6ae2e6cdd33281bae79501f96464c821646452992be"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-detail-review/halmahera-detail-21.png",
+      "bytes": 31010,
+      "sha256": "2b061fb357d8e767b9095461d81b9224c8f95d760799fae66af24f3d2ce36f28"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-detail-review/halmahera-detail-22.png",
+      "bytes": 32207,
+      "sha256": "fdeb12aa3db481539e34396e87697d33aaeaf869c97e3f5bd60190341ae8c9da"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-detail-review/halmahera-detail-23.png",
+      "bytes": 31522,
+      "sha256": "48abc6f810a812aa0be8ab1b20a577551ac4cbbe226e583e46a6277470d4f930"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-detail-review/halmahera-detail-24.png",
+      "bytes": 31519,
+      "sha256": "5d51102f2e42731030fd8ca5793981875dd929b871aa7a4eb31e0e13acdd6f9b"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-detail-review/halmahera-detail-25.png",
+      "bytes": 13852,
+      "sha256": "5fc352d2556f546eeb783491e14396a36b0d1fb9bd863c87f1dd68167ca27639"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-canopy-adverse-review/halmahera-adverse-01.png",
+      "bytes": 29022,
+      "sha256": "8dc90644d94fb3e7a581ecdf4e2ec6698f0409c3060093eac9d6ef38efe2836e"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-canopy-adverse-review/halmahera-adverse-02.png",
+      "bytes": 27708,
+      "sha256": "51cde30495784bf144e23c7e2bdce5063270b1b3e6813f66c33ab0137a7f2441"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-canopy-adverse-review/halmahera-adverse-03.png",
+      "bytes": 28469,
+      "sha256": "2534c09fbd3493f1524ddfaa19cfb5c7529ac4de1374285eb386a5c3e9efa287"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-canopy-adverse-review/halmahera-adverse-04.png",
+      "bytes": 28759,
+      "sha256": "cb6ef1a6dc88227815a4c858f39e6fb6f3434fdfb26235a0db88cc13e320a9c0"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-canopy-adverse-review/halmahera-adverse-05.png",
+      "bytes": 29833,
+      "sha256": "ff4ba64043ae3765b2c6e449ef3476d8f08099d3b443c3b59841aafb386464bc"
+    },
+    {
+      "path": "idn-physical-largest-residuals-001/worker6-halmahera687/native-canopy-adverse-review/halmahera-adverse-06.png",
+      "bytes": 14616,
+      "sha256": "db4a6684dc0fec762ce8eacbabc716995d8572df95d71f01e7169317163644b2"
+    }
+  ],
+  "scientific_judgment": "All60 saved images viewed. Final exact-centre body placement supports the572 coherent vegetation, visible water, and exposed/beach/constructed observations. All91 initial exposed candidates and200 initial uncertain cases received close inspection, retaining ambiguous bright reef/shoal/edge centres. The64 weak provisional canopy cases were individually assessed with morphology:26 actual water placements,31 uncertain,one exposed,six supported canopy. No cutoff or whole3x3 unanimity rule was applied. No remaining consequential positive counterexample identified in corrected final candidate.",
+  "limits": [
+    "Annual2020 median RGB/NIR; not a single dated scene, tide, instantaneous inundation or present truth.",
+    "Visible canopy does not prove dry underlying soil. Visible water-like bodies do not establish permanence, chemistry, hydrologic kind or surveyed banks. Exposed/constructed morphology does not certify permanently dry substrate.",
+    "Original full-source candidate/member association and portion limits remain; no fresh strict-interior, territorial/admin/parent, selected-owner, native binary status or accepted repair conclusion.",
+    "All115 genuine body-placement/shore/shadow/reef ambiguities remain unresolved; categorical Map observations and original holds retained.",
+    "572 is pending explicit Root adoption; zero native-authority/repair/accepted map-cell credit.",
+    "Counts concern only the exact known original133846 accounting, not all historical adoptions."
+  ],
+  "source_or_native_replay": false
+}

@@ -1,0 +1,157 @@
+{
+  "kind": "human-visual-proposal-only-halmahera687",
+  "keys": 687,
+  "owner": 22796,
+  "manual_categories": {
+    "V": 448,
+    "L": 55,
+    "A": 84,
+    "W": 100
+  },
+  "categories": {
+    "annual2020-rgbnir-supported-vegetated-body-location": 448,
+    "annual2020-rgbnir-supported-exposed-or-constructed-surface-location": 55,
+    "unresolved-actual-pond-surface-or-fringe-placement": 84,
+    "annual2020-rgbnir-supported-visible-water-body-location": 100
+  },
+  "proposed_answers": 603,
+  "remaining": 84,
+  "perkey_proposal": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-largest-residuals-001/worker6-halmahera687/proposed-halmahera687-physical-location-dispositions.jsonl.gz",
+    "bytes": 223592,
+    "sha256": "e3b592aeddbc26fc281f986e5860034c09b951e3680abaff740a94854c79ab11",
+    "decoded_bytes": 4959114,
+    "decoded_sha256": "0d835a9c8ed1ef43c341d5dcfa2e5c5dd02d833dfe1f12f77252da6f4f09b9a3"
+  },
+  "source_report": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-largest-residuals-001/worker1-source/rgbnir-source-observations.json",
+    "bytes": 113961,
+    "sha256": "da2c6ef6ee786541220486778bb74d428c794665d3582ae7d5bee2735205f5bd"
+  },
+  "manual_inputs": [
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-largest-residuals-001/worker6-halmahera687/manual-wide-decisions-first-pass.json",
+      "bytes": 8760,
+      "sha256": "28195f7999b7142024d7881db03ed3ebdaaad193a76daf91657331e898bdd0bf"
+    },
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-largest-residuals-001/worker6-halmahera687/manual-detail-decisions-final.json",
+      "bytes": 4548,
+      "sha256": "6c37483c6525483ddb6cfb8c565295929dcd0db11d01c80c789556c045583f80"
+    }
+  ],
+  "view_inventories": [
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/contact-inventory.json",
+      "bytes": 704129,
+      "sha256": "64592b5ca566b9fec644c4bac0c7889f9e63ce3c7c0fd4c2ab0c6c44c0e8e6ae"
+    },
+    {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-largest-residuals-001/worker6-halmahera687/native-detail-review/contact-inventory.json",
+      "bytes": 332209,
+      "sha256": "2f6302c038627c49f1972da4b3e7224c9aad13a64c62eb78a4df1b67dffa3226"
+    }
+  ],
+  "basis": "Human viewed all29 wide687 centre panels and all25 close291 panels (all200 initially uncertain and all91 preliminary exposed/constructed). Explicit close manual decisions override the wide first pass. No threshold, automated confidence class, all-neighbour unanimity or Map95/90 binary conversion.",
+  "root_adoption": null,
+  "distinct_review": null,
+  "repair_credit": 0,
+  "examples": {
+    "22056": {
+      "kind": "V",
+      "original_key": {
+        "owner": 22796,
+        "y": 130879,
+        "x": 223848
+      },
+      "views": [
+        {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-01.png",
+          "sha256": "825a5882cfb3baa5ea8586e0b5faa3f0d3c5c9a96b7c8683c62e53ea7ae3a803",
+          "page_1based": 1,
+          "panel_1based": 1,
+          "point_index": 22056,
+          "original_key": {
+            "owner": 22796,
+            "y": 130879,
+            "x": 223848
+          },
+          "retained_context_scope": "other-centre-water-or-wet-edge",
+          "worldcover_class": 10,
+          "rgbnir_values": [
+            437,
+            690,
+            390,
+            2229
+          ],
+          "rgbnir_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/N00E127/block-08-04.npz",
+          "crop_native_window": {
+            "row_off": 8622,
+            "col_off": 4576,
+            "height": 49,
+            "width": 49
+          },
+          "actual_composite_tile": "N00E127",
+          "fractional_centre_in_crop": {
+            "row": 24.718053521988622,
+            "col": 24.047298276564106
+          }
+        }
+      ]
+    },
+    "43831": {
+      "kind": "V",
+      "original_key": {
+        "owner": 22796,
+        "y": 132441,
+        "x": 223991
+      },
+      "views": [
+        {
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-largest-residuals-001/worker6-halmahera687/native-centre-review-v2/halmahera-centres-27.png",
+          "sha256": "bbcc716b73239077e355cfbb83da51fdc14ab86ae914286109d680a1005c8843",
+          "page_1based": 27,
+          "panel_1based": 3,
+          "point_index": 43831,
+          "original_key": {
+            "owner": 22796,
+            "y": 132441,
+            "x": 223991
+          },
+          "retained_context_scope": "other-centre-water-or-wet-edge",
+          "worldcover_class": 80,
+          "rgbnir_values": [
+            620,
+            1031,
+            758,
+            1533
+          ],
+          "rgbnir_masks": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "array": "/Users/chengshuli/Documents/Codex/2026-10-14/task/idn-physical-largest-residuals-001/worker1-source/rgbnir-tiles/S02E127/block-10-06.npz",
+          "crop_native_window": {
+            "row_off": 10357,
+            "col_off": 6932,
+            "height": 49,
+            "width": 49
+          },
+          "actual_composite_tile": "S02E127",
+          "fractional_centre_in_crop": {
+            "row": 24.557557965639717,
+            "col": 24.416926679899916
+          }
+        }
+      ]
+    }
+  }
+}
