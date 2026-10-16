@@ -1,77 +1,82 @@
-# Bounded Jamaica reference-parish repair
+# Jamaica original-reference parish repair
 
-Issue #2263 retains the whole original `gb-JAM-ADM1--repair-evaluation` package:
+Issue #2263 delivers the whole original `gb-JAM-ADM1--repair-evaluation` package:
 **2,251 land cells / 767 intervals, fourteen source features and fifteen polygon
-components**. This proposal adds **1,870 exact native cells** to thirteen existing
-2011-reference parish targets and retains **381 exact Saint Catherine cells** as
-unresolved source-feature holds. The separate 446-cell / 312-interval physical
-companion is excluded. No whole-package completion or publication is claimed.
+components**. The final proposal restores all 2,251 exact native cells to the
+unchanged 2011-reference parish identities, with **zero final holds**. The separate
+446-cell / 312-interval physical-interpretation companion remains excluded.
+Repository integration and website publication are separate outcomes.
 
-The Portmore amendment's passage, effective commencement, parish territory and
-2026 electoral implementation are distinct. Without an authenticated operative
-boundary/commencement instrument, the entire original Saint Catherine source
-geometry is conservatively excluded. It is not a Portmore boundary, and no claim
-is made that every held cell lies in Portmore or was materially changed.
-`evidence/source-scope-review.md` records the primary sources and limits.
+All 381 Saint Catherine cells uniquely join its unchanged original source ID
+and reference_year 2011, across both original components (173 + 208). Later
+Portmore legislation and 2026 electoral implementation require explicit limits,
+but no contradictory source-era ownership was found. Distinct source review
+confirmed that the established reference-restoration contract does not impose a
+new current-law certification gate. No Portmore polygon or current parish count
+is inferred, and no historic source identity is replaced.
 
-The source is the complete authentic simplified OSM/Wambacher/geoBoundaries
-Jamaica product, represented 2011, source update January 2023, build December
-2023, declared CC BY-SA 2.0. Metadata does not independently prove extraction
-vintage. All original source IDs/ordinals/owners/components join the existing
-reference parish targets. Joint Kingston/Saint Andrew municipal administration
-does not merge their two reference identities. Complete-family custody does not
-certify current legal boundaries, a current parish count or offshore completeness.
+The complete simplified OSM/Wambacher/geoBoundaries product is unchanged:
+represented 2011, source update January 2023, build December 2023. Its declared
+CC BY-SA 2.0 label conflicts with the exact upstream archive's screenshot stating
+ODbL for data and CC BY-SA for documentation; source processing includes 2017.
+No verified historical license/extraction claim is made. See `ATTRIBUTION.md`
+for source credits, linked terms, data availability and applicable share-alike
+obligations, and `evidence/license-provenance.json` for exact upstream hashes.
 
-## Actual checks
+## Verified local evidence
 
-- Fresh stock extraction: all 2,251 cells and 767 original intervals.
-- Original whole-target physical execution: all fourteen targets; all GSHHG
-  metadata/native custody and actual reconstruction/water/hierarchy witnesses
-  retained. The joined-input execution took approximately 8 seconds; exact timing
-  and runtime are in `evidence/physical-support-selected-inputs.json`.
-- Stock native diagnosis: all 2,251 pass source/physical predicates. With the
-  explicit whole-source Saint Catherine exclusion: 1,870 supported + 381 held.
-- Exact component conservation: fifteen candidate-bearing source components;
-  every original cell belongs to exactly one component and has exactly one
-  supported/held disposition. `evidence/queue-disposition.json` retains all 767
-  original intervals, including every held cell.
-- Authenticated current native acquisition: all 424 affected rows; zero occupied
-  base or accepted-additive intersection at b66316835ec65fc3f40d4f02d8bf1ffd0e7c93a0.
-- Genuine stock native authority: exactly 1,870 qualified cells. Full source
-  competitors and unchanged native predicates remain active.
-- Stock composition/finalization: accepted 294,376 additive cells + 1,870 =
-  296,246 proposed cumulative cells. All prior rows/authorities and Vanuatu's
-  1,203 held cells are preserved. This cumulative patch count is not a campaign
-  repair total. Final actual emitted-output and hosted checks remain required.
+- Fresh stock extraction retained all 2,251 cells and 767 intervals.
+- Original whole-target physical execution covered all fourteen targets. It
+  authenticated all 188,612 GSHHG metadata records and the complete native source
+  member. All six missing/extra reconstruction witnesses on three targets remain
+  in `evidence/physical-support-selected-inputs.json`; none contacts candidates.
+- Stock native diagnosis passed source/physical predicates for all 2,251 cells.
+  The final stock constructor in `authority-reference/` qualifies all 2,251,
+  retaining the complete original competitor family and unchanged predicates.
+- `evidence/queue-disposition-reference.json` conserves every original interval
+  and all fifteen candidate-bearing components, with zero membership mismatch,
+  zero omitted cells and zero final holds.
+- Authenticated selected native acquisition covered all 424 affected rows:
+  zero occupied-base or accepted-additive overlap at accepted main
+  b66316835ec65fc3f40d4f02d8bf1ffd0e7c93a0.
+- Stock `composition-reference/` and finalization preserve accepted 294,376
+  additive cells and add 2,251, for **296,627 proposed cumulative cells**.
+  Prior authorities, complete ledger rows and Vanuatu's 1,203 exact holds remain
+  intact. This is a cumulative patch count, not a campaign-wide repair total.
 
-`evidence/original-stage-inputs.json`, `physical-support.json` and
-`diagnostic-source-evidence.json` retain the first physical attempt before selected
-target records were added. Native diagnosis refused those incomplete joins;
-no authority came from that attempt. The joined-input stages, physical result and
-`diagnostic-source-evidence-v2.json` retain the successful fresh execution. The
-final `source-evidence.json` adds the explicit territorial exclusion and is bound
-by the genuine `authority/` preimage, binding and constructor.
+Final actual emitted loader/picker/sampler and hosted integration checks remain
+required. Constructor qualification, physical support and source custody alone
+do not establish delivered acceptance or publication.
 
-## Reproduction and remaining work
+## Reproduction and prior attempts
 
-Use stock `source-batch-intervals.mjs` for the original package. Physical
-reproduction uses the unchanged original
+Run stock `source-batch-intervals.mjs` for the original package. Physical execution
+uses the unchanged original
 `coordination/engineering/source-target-native-delivery-20261014/evidence/physical-reproduction.py`
 and `coordination/engineering/global-physical-comparison-20261006/comparison.py`.
-Place the joined `evidence/selected-stage-inputs.json` at a fresh
-`.cache/full-census/all-stage-inputs.json` and create a fresh `gshhg-direct/`
-destination. Original source and all whole physical witnesses must remain intact.
-Never overwrite an earlier execution's files.
+Place `evidence/selected-stage-inputs.json` at a fresh
+`.cache/full-census/all-stage-inputs.json`, preserve all original source bodies,
+and use a fresh `gshhg-direct/` destination. Exact runtime/timing are in the result.
 
-Run stock `prepare-delivery-handoff.mjs native-authority` with the two exact
-locators in `authority/constructor-result.json`, a fresh owned destination and
-its existing preparation allowance. Original rule/binding/constructor/patch pins
-feed stock `compose`; the original selector/package/rebind and committed composed
-ledger feed stock `finalize`. No package-specific delivery helper is introduced.
+Use stock `prepare-delivery-handoff.mjs native-authority` with the two exact
+locators in `authority-reference/constructor-result.json`, a fresh owned output
+and the existing preparation allowance. Those original rule/binding/constructor
+and native patch pins feed stock `compose`; the committed composed ledger and
+original selector/package/rebind feed stock `finalize`. The active sidecar is
+`ownership-selection-reference.json`. No country-specific delivery helper is added.
 
-Distinct exact-head source/geometry review and actual selected consumer checks
-are required before serial integration. Issue #2263 stays open for the exact
-381-cell hold; review the operative territorial evidence and source-relative
-intent before reevaluation. Regional #178/#179, whole-country completeness,
-regional approval, historical import permission and website publication remain
-separate. No existing Vanuatu or other source hold is resolved by this work.
+The first unjoined physical-input attempt is retained in
+`original-stage-inputs.json`, `physical-support.json` and the first diagnostic
+source evidence. Native diagnosis refused its incomplete selected-target join;
+no authority was produced from it. The fresh joined-input execution is the final
+physical evidence. The early 1,870/381 conservative proposal remains in
+`authority/`, `composition/`, `source-evidence.json`, `candidate-native-patch.json`,
+`ownership-selection-v2.json`, `native-diagnosis-held.json` and `queue-disposition.json`
+as **superseded, unselected review evidence only**. It is not an accepted hold set.
+The `*-reference` products are the final full-scope result.
+
+`evidence/source-scope-review.md` retains source, legal-vintage, licensing and
+coverage limits. Whole-country offshore completeness, current legal boundaries,
+regional #178/#179 approval, historical imports and publication remain outside
+this bounded repair. The final exact-head review and selected-output results are
+reported on the PR and original issue.
