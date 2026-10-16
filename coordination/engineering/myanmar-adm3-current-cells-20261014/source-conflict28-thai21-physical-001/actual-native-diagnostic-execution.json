@@ -1,0 +1,17 @@
+{
+  "command": [
+    "node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "native-diagnostic",
+    ".takeover/source28-thai21/stock-native-diagnostic-config.json",
+    ".cache/delivery-handoff/source28-thai21-native-diagnostic-001"
+  ],
+  "actual_executing_tree": "6cd25c448c1352b22e1d7c1dc83830984fc29f4b",
+  "unchanged_accepted_code": "64fc78d219cc0d4db062a7ebc27ffec6aa1dc18e",
+  "input_commit": "a99f603681aa994916a5fa5c9461574d73977c08",
+  "exit_code": 0,
+  "elapsed_seconds": 3.1441096139897127,
+  "max_rss_kib": 235824,
+  "ended_utc": "2026-10-16T06:33:38.822546+00:00",
+  "native_credit": 0
+}
