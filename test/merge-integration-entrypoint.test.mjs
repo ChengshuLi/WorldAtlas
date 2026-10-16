@@ -248,6 +248,9 @@ test('actual queue entry points omit geography only for independently rechecked 
   for (const phase of ['prepare','merge']) {
     const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-control-geography-'));
     const sha=c=>c.repeat(40), head=sha('a'),base=sha('b'),candidate=sha('c');
+    const packageRaw=Buffer.from(JSON.stringify({version:1,inputs:['.github/package-inputs.json'],optional_inputs:[],verification_paths:[],generated_outputs:[]}));
+    const packageBlob={type:'file',path:'.github/package-inputs.json',encoding:'base64',size:packageRaw.length,
+      sha:createHash('sha1').update(`blob ${packageRaw.length}\0`).update(packageRaw).digest('hex'),content:packageRaw.toString('base64')};
     const files=['scripts/merge-integration.mjs','test/merge-integration.test.mjs'].map(filename=>({filename,status:'modified'}));
     const rows=files.map(file=>({path:file.filename,sha:sha('e'),mode:'100644',type:'blob'}));
     const issue={number:1,state:'open',created_at:'2020-01-01T00:00:00Z',labels:['type:engineering','kind:work-item','status:ready'],
@@ -256,6 +259,7 @@ test('actual queue entry points omit geography only for independently rechecked 
       head:{sha:head,ref:'engineering/controls',repo:{full_name:'owner/repo'}},base:{ref:'main',sha:base},mergeable:true};
     const routes={
       '/pulls/2':pr,'/issues/1':issue,'/pulls/2/files':files,
+      '/contents/.github/package-inputs.json':packageBlob,
       ['/commits/'+head+'/check-runs']:{check_runs:[{id:1,name:'scope',app:{id:1},status:'completed',conclusion:'success'}]},
       ['/commits/'+head+'/status']:{statuses:[]},'/git/ref/heads/main':{object:{sha:base}},
       ['/git/commits/'+head]:{tree:{sha:sha('6')}},['/git/trees/'+sha('6')]:{truncated:false,tree:rows},
