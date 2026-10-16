@@ -6,7 +6,7 @@ import {jsonBytes, digest, finalizeDelivery, packageProjection} from '../scripts
 // Small immutable metadata only. No authority qualification, native scans or GIS.
 const BASE = '1'.repeat(40), SOURCE = '2'.repeat(40), NEXT = '3'.repeat(40);
 const OWNED = 'coordination/engineering/joint-delta/';
-function fixture({count = 7, generated = true, cumulative = true, producerVintages = false, mixedProducer = false, corruptProducer = false} = {}) {
+function fixture({count = 7, generated = true, cumulative = true, producerVintages = false, mixedProducer = false, corruptProducer = false, revised = false, omitRevisedIndex = false} = {}) {
   const records = new Map(), reads = [];
   const reader = {
     add(name, value, commit = NEXT) {
@@ -29,6 +29,13 @@ function fixture({count = 7, generated = true, cumulative = true, producerVintag
   for (const role of ['catalogue', 'physical_input', 'physical_reproduction', 'physical_evidence', 'native_latitudes', 'owner_roster'])
     common[role] = reader.add('coordination/engineering/original-common/' + role + '.json', {retained: role}, BASE);
   const family = reader.add('coordination/engineering/original-common/family.json', {type: 'FeatureCollection', features: []}, BASE);
+  const revisionRoles = revised ? Object.fromEntries(['raw_source', 'source_stage', 'assessment', 'scope', 'parent_decision', 'attribution']
+    .map(role => [role, reader.add('coordination/engineering/original-common/revised-' + role + '.json', {retained: role}, BASE)])) : null;
+  const revisionIndex = revised ? reader.add('data/world-index.json', {parts: ['geography/original.json']}, BASE) : null;
+  if (revised) revisionRoles.current_geography = reader.add('coordination/engineering/original-common/revised-fine.json',
+    {input_pins: omitRevisedIndex ? [] : [revisionIndex]}, BASE);
+  const revision = revised ? reader.add('coordination/engineering/original-common/revised-adoption.json',
+    {version: 1, kind: 'adopted-osm-revised-source-native-v1', ...revisionRoles}, BASE) : null;
   const originals = [], restorations = [];
   const liveProducer = producerVintages ? reader.add('scripts/qualify-source-cohort.py', Buffer.from('# current accepted helper\n'), BASE) : null;
   const producers = [];
@@ -38,7 +45,8 @@ function fixture({count = 7, generated = true, cumulative = true, producerVintag
     if (historical) producers.push(historical);
     const originalRoles = historical ? {...common, physical_reproduction: corruptProducer ? {...historical, sha256: 'f'.repeat(64)} : historical,
       ...(mixedProducer ? {physical_input: historical} : {})} : common;
-    const evidence = reader.add(stem + 'source-evidence.json', {version: 1, kind: 'source-target-native-evidence-v1',
+    const evidence = reader.add(stem + 'source-evidence.json', {version: revised ? 3 : 1, kind: 'source-target-native-evidence-v' + (revised ? 3 : 1),
+      ...(revised ? {revised_source_adoption: revision} : {}),
       ...originalRoles, targets: [{id: 'original:' + ordinal}], families: [{source_id: 'original', parts: [family]}]}, commit);
     const native = reader.add(stem + 'native-patch.json', {rows: [{y: ordinal, runs: [[ordinal, ordinal + 1, 1]]}]}, commit);
     const binding = {version: 1, kind: 'source-target-native-custody-v1', source_evidence: evidence, native_patch: native};
@@ -107,8 +115,17 @@ function fixture({count = 7, generated = true, cumulative = true, producerVintag
       base_selection: base, authority_registry: config.registry, logical_asset_map: assets, runtime_envelope: config.runtime_envelope});
   };
   setRegistry([old.entry, ...additions.map(value => value.entry)]);
-  return {reader, config, old, additions, originals, priorRegistry, priorSidecar, accepted, setRegistry, reads, base, liveProducer, producers};
+  return {reader, config, old, additions, originals, priorRegistry, priorSidecar, accepted, setRegistry, reads, base, liveProducer, producers, revisionRoles, revisionIndex, revision};
 }
+
+test('v3 package projection retains every adopted revised-source body and the original current index', () => {
+  const f = fixture({count: 1, revised: true});
+  const roles = JSON.parse(packageProjection(f.config, f.reader, f.accepted)['package-roles.json']);
+  for (const pin of [f.revision, f.revisionIndex, ...Object.values(f.revisionRoles)])
+    assert.ok(roles.paths.some(row => row.path === pin.path && row.sha256 === pin.sha256), pin.path);
+  const missing = fixture({count: 1, revised: true, omitRevisedIndex: true});
+  assert.throws(() => packageProjection(missing.config, missing.reader, missing.accepted), /Missing revised source current index/);
+});
 
 for (const generated of [true, false]) test('cumulative finalizer discovers seven original-prefix authorities, preserving original custody (' + generated + ')', () => {
   const f = fixture({generated}), before = f.originals.map(pin => Buffer.from(f.reader.read(pin)));
@@ -128,6 +145,43 @@ test('empty registry delta is valid and does not rediscover inherited authoritie
   const f = fixture({count: 0}), output = finalizeDelivery(f.config, f.reader);
   assert.equal(JSON.parse(output['package-roles.json']).new_authorities, 0);
   assert.equal(JSON.parse(output['selected-delivery-expectations.json']).cumulative_native_cells, 1);
+});
+
+test('snapshot-only restoration uses one projection and preserves explicit-list outputs and reads', () => {
+  const f = fixture({count: 7, producerVintages: true});
+  f.reads.length = 0;
+  const explicit = finalizeDelivery(f.config, f.reader), explicitReads = [...f.reads];
+  const {commit} = f.config.restored_read_roles;
+  f.config.restored_read_roles = {commit};
+  const before = jsonBytes(f.config);
+  f.reader.add('coordination/engineering/unbound/snapshot-only.json', {unrelated: true}, NEXT);
+  f.reads.length = 0;
+  const derived = finalizeDelivery(f.config, f.reader);
+  assert.deepEqual(derived, explicit);
+  assert.deepEqual(f.reads, explicitReads, 'Derivation must not add another authenticated body traversal');
+  assert.deepEqual(jsonBytes(f.config), before, 'No handwritten path list is injected into caller configuration');
+  assert.ok(!JSON.parse(derived['package-roles.json']).paths.some(pin => pin.path.includes('/unbound/')));
+  assert.deepEqual(f.reader.read(f.liveProducer), Buffer.from('# current accepted helper\n'));
+});
+
+test('derived restoration preserves missing, changed, nonordinary and current-path refusals', () => {
+  for (const alter of [
+    f => { f.config.restored_read_roles.commit = 'f'.repeat(40); },
+    f => { const pin = f.originals.find(pin => pin.commit === SOURCE); f.reader.add(pin.path, {changed: true}, NEXT); },
+    f => { const original = f.reader.pin; f.reader.pin = (commit, name) =>
+      commit === NEXT && !name.startsWith(OWNED) ? {...original(commit, name), mode: '120000'} : original(commit, name); },
+    f => { const pin = f.originals.find(pin => pin.commit === SOURCE); f.reader.add(pin.path, {changed: true}, BASE); }
+  ]) {
+    const f = fixture({count: 1});
+    f.config.restored_read_roles = {commit: NEXT};
+    alter(f);
+    assert.throws(() => finalizeDelivery(f.config, f.reader), /accepted path identity/);
+  }
+  for (const bad of [{commit: NEXT, paths: []}, {commit: NEXT, paths: null},
+    {commit: NEXT, unexpected: true}, {commit: 'main'}]) {
+    const f = fixture({count: 1}); f.config.restored_read_roles = bad;
+    assert.throws(() => finalizeDelivery(f.config, f.reader), /Exact committed restored read-role inventory/);
+  }
 });
 
 test('standalone package and initial no-hook finalization retain prefix selection', () => {

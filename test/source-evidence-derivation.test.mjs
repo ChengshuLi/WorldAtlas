@@ -122,6 +122,17 @@ test('v2 derivation authenticates and retains the exact dated-support pin with u
   await assert.rejects(sourceEvidence(f.config, f.reader));
 });
 
+test('v3 derivation authenticates the adopted revised-source pin without rewriting scientific operands', async () => {
+  const f = fixture(), adoption = f.reader.add(prefix + 'revised-source-adoption.json', {
+    version: 1, kind: 'adopted-osm-revised-source-native-v1', members: [], records: []});
+  Object.assign(f.config.source_evidence, {version: 3, kind: 'source-target-native-evidence-v3', revised_source_adoption: adoption});
+  const actual = await result(f);
+  assert.deepEqual(withoutBaseline(actual), f.config.source_evidence);
+  assert.ok(f.reader.reads.includes(adoption.path));
+  f.config.source_evidence.revised_source_adoption = {...adoption, sha256: '0'.repeat(64)};
+  await assert.rejects(sourceEvidence(f.config, f.reader), /Whole pin identity differs/);
+});
+
 test('every supplied baseline difference refuses, including the original nested descriptor contamination', async t => {
   const changes = {
     'Git mode inside normative latitudes': e => { e.native_contract.native_latitudes.mode = '100644'; },
@@ -305,4 +316,14 @@ test('cold Git fixture reconstructs all baseline fields and scientific claims wi
   invalid.source_evidence.native_contract.native_latitudes.mode = '100644';
   await assert.rejects(sourceEvidence(invalid, pinReader(root)), /Supplied source evidence changes accepted baseline/,
     'a present contaminated contract must fail through the real Git reader');
+});
+
+test('source preparation authenticates the exact provider-adoption leaf without rewriting source claims',async()=>{
+ const f=fixture(),pin=f.reader.add(prefix+'provider-adoption.json',{version:1,kind:'adopted-provider-source-families-v1',families:[]});
+ f.config.source_evidence.adopted_provider_families=pin;
+ const before=structuredClone(f.config),actual=await result(f);
+ assert.deepEqual(withoutBaseline(actual),before.source_evidence);
+ assert.ok(f.reader.reads.includes(pin.path));assert.deepEqual(f.config,before);
+ f.config.source_evidence.adopted_provider_families={...pin,sha256:'0'.repeat(64)};
+ await assert.rejects(result(f),/Whole pin identity differs/);
 });

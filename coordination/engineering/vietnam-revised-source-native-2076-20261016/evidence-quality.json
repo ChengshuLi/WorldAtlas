@@ -1,0 +1,979 @@
+{
+  "version": 1,
+  "issue": 2076,
+  "lane": "engineering",
+  "worker_id": "01a14283-182b-77f8-ac41-e9eae8723024",
+  "subject_ids": [
+    "gb:CHN:ADM2:17275852B12394774588724",
+    "gb:CHN:ADM2:17275852B24445486288332",
+    "gb:CHN:ADM2:17275852B24732894609656",
+    "gb:CHN:ADM2:17275852B29668080933041",
+    "gb:CHN:ADM2:17275852B31967187012085",
+    "gb:CHN:ADM2:17275852B32075492285057",
+    "gb:CHN:ADM2:17275852B38063051407977",
+    "gb:CHN:ADM2:17275852B43817460377390",
+    "gb:CHN:ADM2:17275852B45423289887647",
+    "gb:CHN:ADM2:17275852B46978756476047",
+    "gb:CHN:ADM2:17275852B76703841753402",
+    "gb:CHN:ADM2:17275852B87965925400106"
+  ],
+  "subject_ids_sha256": "19d6e108d56bc4a312967d6971348dfb08987b3755c075989f61f00e19b48163",
+  "baseline": {
+    "version": 2,
+    "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de",
+    "files": [
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "bytes": 1851757,
+        "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+        "bytes": 2663523,
+        "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "src/native-grid.js",
+        "bytes": 42965,
+        "sha256": "3ef6bc5ec66e3184c254ea66404add0824e3ee18e39c8658f234d2e236d840ad",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-1.json",
+        "bytes": 8060108,
+        "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-2.json",
+        "bytes": 6259307,
+        "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-3.json",
+        "bytes": 5153118,
+        "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-4.json",
+        "bytes": 4835479,
+        "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-5.json",
+        "bytes": 5226173,
+        "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-6.json",
+        "bytes": 4607953,
+        "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-7.json",
+        "bytes": 4257402,
+        "sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-8.json",
+        "bytes": 5097739,
+        "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-9.json",
+        "bytes": 5729632,
+        "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-10.json",
+        "bytes": 5144571,
+        "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-11.json",
+        "bytes": 5133018,
+        "sha256": "d1b2fb15c9427497de740eb33a529ef382b58cb319028f2aa38f5878de4c9b02",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-12.json",
+        "bytes": 4489493,
+        "sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-13.json",
+        "bytes": 5709487,
+        "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-14.json",
+        "bytes": 4355198,
+        "sha256": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-15.json",
+        "bytes": 5180426,
+        "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-16.json",
+        "bytes": 5213846,
+        "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-17.json",
+        "bytes": 4948066,
+        "sha256": "1ae1a9ef25c1f71b66084aadf57933132383d4271b888ab38866905da5678af3",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-18.json",
+        "bytes": 4909063,
+        "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-19.json",
+        "bytes": 4583022,
+        "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-20.json",
+        "bytes": 6570767,
+        "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-21.json",
+        "bytes": 6737781,
+        "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-22.json",
+        "bytes": 4746385,
+        "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-23.json",
+        "bytes": 4962410,
+        "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-24.json",
+        "bytes": 4816899,
+        "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-25.json",
+        "bytes": 4525239,
+        "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-26.json",
+        "bytes": 4608983,
+        "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-27.json",
+        "bytes": 4863162,
+        "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-29.json",
+        "bytes": 12932719,
+        "sha256": "723d16eb63b7f2dcd8260a516eac6571a7ef1eaaf9bff3c926e0c63235b98fd3",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-30.json",
+        "bytes": 11979437,
+        "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-31.json",
+        "bytes": 10086485,
+        "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-32.json",
+        "bytes": 10211739,
+        "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/part-33.json",
+        "bytes": 607984,
+        "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/source-restoration-additions.json",
+        "bytes": 1573576,
+        "sha256": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/geography/macro-loose-ends-v5-additions.json",
+        "bytes": 11393,
+        "sha256": "8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+        "bytes": 403376,
+        "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      },
+      {
+        "path": "data/ownership-selection.json",
+        "bytes": 1607,
+        "sha256": "c47702aadec2baa8075ab3375660a716dcd63fc76fd552d68f36ab6427e39d5d",
+        "hash_kind": "file-bytes",
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de"
+      }
+    ],
+    "pins": {
+      "world_index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    },
+    "pin_files": {
+      "world_index": {
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de",
+        "path": "data/world-index.json"
+      }
+    },
+    "subject_files": {
+      "gb:CHN:ADM2:17275852B12394774588724": {
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de",
+        "path": "data/geography/part-4.json"
+      },
+      "gb:CHN:ADM2:17275852B24445486288332": {
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de",
+        "path": "data/geography/part-4.json"
+      },
+      "gb:CHN:ADM2:17275852B24732894609656": {
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de",
+        "path": "data/geography/part-4.json"
+      },
+      "gb:CHN:ADM2:17275852B29668080933041": {
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de",
+        "path": "data/geography/part-4.json"
+      },
+      "gb:CHN:ADM2:17275852B31967187012085": {
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de",
+        "path": "data/geography/part-4.json"
+      },
+      "gb:CHN:ADM2:17275852B32075492285057": {
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de",
+        "path": "data/geography/part-4.json"
+      },
+      "gb:CHN:ADM2:17275852B38063051407977": {
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de",
+        "path": "data/geography/part-4.json"
+      },
+      "gb:CHN:ADM2:17275852B43817460377390": {
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de",
+        "path": "data/geography/part-4.json"
+      },
+      "gb:CHN:ADM2:17275852B45423289887647": {
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de",
+        "path": "data/geography/part-4.json"
+      },
+      "gb:CHN:ADM2:17275852B46978756476047": {
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de",
+        "path": "data/geography/part-4.json"
+      },
+      "gb:CHN:ADM2:17275852B76703841753402": {
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de",
+        "path": "data/geography/part-4.json"
+      },
+      "gb:CHN:ADM2:17275852B87965925400106": {
+        "commit": "b790b7d20d3248437fc57fc17e1883c8d10698de",
+        "path": "data/geography/part-4.json"
+      }
+    }
+  },
+  "sources": [
+    {
+      "id": "osm-twelve-county-snapshot",
+      "url": "https://www.openstreetmap.org/copyright",
+      "role": "Complete raw snapshot and literal staged boundary database; explicit new source identities for bounded native-source choice",
+      "vintage": "OSM snapshot2026-10-16T00:19:04Z; distinct relation versions and whole geometry hashes",
+      "retrieved_at": "2026-10-16",
+      "license": {
+        "status": "redistributable",
+        "terms": "ODbL1.0; retain attribution, share-alike and accessible complete alteration/method offer. New OSM-derived data are distinct from old PDDL targets."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/osm-full-county-relations.json",
+          "bytes": 1894713,
+          "sha256": "b625ee0e686f239dd8eecf3eb21799228371ca5a1eef1c34c79a38905cf2d692",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/whole-new-source-stage-inputs.json",
+          "bytes": 872634,
+          "sha256": "620c3aab733389f4511491ba5c1f916f22c9235188b6e00d6a20053ef1020988",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "retained-prior-physical-proof",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/2061",
+      "role": "Genuine previously executed whole-new-source physical receipt and original global contacts; reused without replay",
+      "vintage": "Original frozen f63c26ef/84fb physical execution and a61 native/source census; identities retained in assessment",
+      "retrieved_at": "2026-10-16",
+      "license": {
+        "status": "unknown",
+        "terms": "Each original product retains its original rights; new OSM data remain ODbL, not relabelled PDDL."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Use exact original Git pins and literal receipt/source bodies in the retained distinct assessment; no source bank reconstruction.",
+      "limit": "This PR does not repeat old source-bank/physical computations, certify whole-parent geography, deliver selected cells, or resolve the17 blocked Chinese proposals."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine-independent-review/current-fine365-admission.json",
+      "bytes": 1613,
+      "sha256": "b43aeaf404c5d2f69c1f3da4d5603100c3e50d849be83fd72facde15c25ca4ea",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine-independent-review/current-fine365-execution.json",
+      "bytes": 515,
+      "sha256": "191774e695b8d774d9d17fc7de357f5feba5bb5c1b732367791a22b69b0a4622",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine-independent-review/current-fine365-execution.log",
+      "bytes": 142,
+      "sha256": "964bbd42a1b89b2707ce632e52b73b00b5dfc962b3a61b2e00674d96a4cb80db",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine-independent-review/current-fine365-observation.json",
+      "bytes": 406578,
+      "sha256": "963f917f94e2e69144c6e091e76771e313d9b29995f987a1db18cf820408359a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine-independent-review/independent-current-competitor-delta-review.json",
+      "bytes": 25177,
+      "sha256": "10c9073fbe0e75cbdc2f324f982e0a8644407abe87cda1a126d69645ecc56ef2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine-independent-review/independent-current-competitor-delta-review.md",
+      "bytes": 8143,
+      "sha256": "4f58a738c19becdd834e05a2783c7ef538059e732f2a71136daf4eb66e9e6614",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine-independent-review/review-artifact-manifest.json",
+      "bytes": 2062,
+      "sha256": "d16f5fddc3fdb55526cd997144c6c7f7335dbce9cf532605b74c64c557384f6b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine-independent-review/reviewed-current-fine-input-plan.json",
+      "bytes": 8647,
+      "sha256": "cbbe7c1d21fd87d1e6e65d02abf63838e13d80ca149a841ba5eadc1939f0ca04",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine-input-plan.json",
+      "bytes": 8647,
+      "sha256": "cbbe7c1d21fd87d1e6e65d02abf63838e13d80ca149a841ba5eadc1939f0ca04",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine365-001/current-fine365-admission.json",
+      "bytes": 1613,
+      "sha256": "b43aeaf404c5d2f69c1f3da4d5603100c3e50d849be83fd72facde15c25ca4ea",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine365-001/current-fine365-execution.json",
+      "bytes": 515,
+      "sha256": "191774e695b8d774d9d17fc7de357f5feba5bb5c1b732367791a22b69b0a4622",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine365-001/current-fine365-execution.log",
+      "bytes": 142,
+      "sha256": "964bbd42a1b89b2707ce632e52b73b00b5dfc962b3a61b2e00674d96a4cb80db",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine365-001/current-fine365-observation.json",
+      "bytes": 406578,
+      "sha256": "963f917f94e2e69144c6e091e76771e313d9b29995f987a1db18cf820408359a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/actual-execution-publication-view.json",
+      "bytes": 14107,
+      "sha256": "6433f0fecd877c99c48a6d08007b6d19d586f141fefd595ae1c4d37d183dc0bf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/actual-first12-result-review.json",
+      "bytes": 345035,
+      "sha256": "09ae2569c5f07ce95f1a9f32866113839c06beb03e99d8ea9f0cef5af3061297",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/assessment-artifact-manifest.json",
+      "bytes": 7258,
+      "sha256": "b9c1e57c3f25eb3a9552b625f7d2b1f9c6a9a65bceb2820b7a6fba322ede4fcc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/attribution.json",
+      "bytes": 822,
+      "sha256": "e1d9efd5b13de83cc55fbc378b3032ee48757a82becf85d95e3420d066d58c59",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/exact365-new-source-identity-inputs.json",
+      "bytes": 119549,
+      "sha256": "53b6a1400802e8f73d25a2dcad6f14606e07add90ed54542f94b0895e4e1748b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/full-country365-admission.json",
+      "bytes": 655,
+      "sha256": "1a1555acebe7268b33614f06a587907f004df2dd4227d486f8a395957eb00cb1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/full-country365-exact-native-observation.json",
+      "bytes": 354254,
+      "sha256": "ed44a49fec93797b9bba24c3cba546b5a78d2a7313f38dfa2dae92b525124f03",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/full-country365-execution.json",
+      "bytes": 478,
+      "sha256": "7a3bcec32808f8a27c68e828311c063825dc298fb6173e84c4d9f9d2ddcc7ceb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/full-country365-execution.log",
+      "bytes": 183,
+      "sha256": "1f0417b30e5686cf2fdef513fdd7b768910702190304c522b25bfdcb4e85892d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/independent-source-assessment-final.json",
+      "bytes": 513862,
+      "sha256": "6d30df3a39bbdaccbf9f5584f72f1407a3b2814e7d5558b08b0276914d4439d6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/independent-source-assessment.json",
+      "bytes": 513557,
+      "sha256": "6b440c065e46eeac28b373ed7cd8d9d04b6bf460e7d75e2881e50f139abaa122",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/independent-source-read.log",
+      "bytes": 672,
+      "sha256": "7cdfd261a8523de365d1d5906952932e9c7c9eb4478e389ca0ea2e8785018f08",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/osm-full-county-relations-receipt.json",
+      "bytes": 797,
+      "sha256": "db2f61dadafa103871d9a046070e6304f2ec3c796fa185427b7bc66bb3a3a754",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/physical-phase-config.json",
+      "bytes": 10564,
+      "sha256": "0edc8b24c2ae73c3443c97647a52ffa27a285d1a3f0d6b384b33e3a36352348b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/retained-country-validity.json",
+      "bytes": 1412,
+      "sha256": "18b70277d0db35469a580b38d70f23f9556930cdaef6dc7e16a36b2a08f39689",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/scientific-source-assessment.md",
+      "bytes": 16662,
+      "sha256": "26d291e6d3d78324038aa826083cca254d67b9b78fc5f52d96144848406556be",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/scientific-source-choice-assessment.json",
+      "bytes": 661488,
+      "sha256": "ad251207682c8a9080385bc246d5b257da07733c8383a623bd906d7f70301088",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/scientific-source-choice-assessment.md",
+      "bytes": 18555,
+      "sha256": "c86b653472e5378b82caef041a9364c0e4f903a9e80aa6ba147df7c92ee0aa20",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/source-choice348-supported17-blocked.json",
+      "bytes": 620603,
+      "sha256": "15f0a3368358a6696888cd82a4402c4f97a47683274482a66074ddd723c838f2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/source-revision-provenance.json",
+      "bytes": 18063,
+      "sha256": "54a9d206d10ac8b461aca5945185935692eb67f5b934b3b8ee8d77892d0fd84d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/vnm-shared-interiors365-admission.json",
+      "bytes": 785,
+      "sha256": "f41f57bcc0ed817a0643f6431ad171e90b8270a9cb849e273d0fbf4a791df673",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/vnm-shared-interiors365-execution.json",
+      "bytes": 435,
+      "sha256": "2c6b3ea2527bcc11f6b193a39c8edf884088f456e262a3a9a064a09c4b2bf370",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/vnm-shared-interiors365-execution.log",
+      "bytes": 123,
+      "sha256": "ca5604a910cf8601b324101c9d7c54ce87e4f0e043ac12f1aecb16717cce4323",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/vnm-shared-interiors365-observation.json",
+      "bytes": 278115,
+      "sha256": "5c8b66215a9aae7e12697192c8c3ba029c807b89082b260fbcea0fd4b1529013",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/whole-target-support.json",
+      "bytes": 861435,
+      "sha256": "a3b6e2d42f5f136bf1ed4c23d0e6ee388ffddaefeb069fc92a0c4ac9f8c5cd66",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/launcher-admission-tests.log",
+      "bytes": 900,
+      "sha256": "eb6625b28bd8238296b6c16bff518baec513824e01fb78722df5ffe595e1dd64",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/native348-actual-execution-002/admission.json",
+      "bytes": 5839,
+      "sha256": "12c1839263252da05254aa810fa41718ec22c4129af69d84b8d0ced20c087546",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/native348-actual-execution-002/authority/authority-binding.json",
+      "bytes": 785,
+      "sha256": "99f5cbb7080b031ac1f9cd4609605cc110c29127761862f2c4adec202c77fbe5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/native348-actual-execution-002/authority/constructor-result.json",
+      "bytes": 41594,
+      "sha256": "561e655e24e452d1c852629d48b1995b1540c9921dd4a82431fa71957ed95da6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/native348-actual-execution-002/authority/original-rule-preimage.json",
+      "bytes": 782,
+      "sha256": "32194abb896836a417f07fa7e715381ca2534019cce0c9f831dfb5c55592fa19",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/native348-actual-execution-002/authority/preparation.json",
+      "bytes": 501,
+      "sha256": "2416d7915de5f74ecb49e69047d48f2a4b9b142223e5e40807a27998cf1e90d3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/native348-actual-execution-002/execution.json",
+      "bytes": 498,
+      "sha256": "7326c71f68aeb017304d741a0b4706f37307a2c5622f9f8f29bef4b841e7b530",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/native348-actual-execution-002/execution.log",
+      "bytes": 454,
+      "sha256": "30a68a9350de836eed401efe16577196f8f5970e5f9d84a0ac9e7ab5349bf2ac",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/native348-actual-execution-002/literal-key-join.json",
+      "bytes": 514,
+      "sha256": "4aeae37615dd3b320fc5245851f189728cd560031ece93784a8ff02518a1e4aa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/native348-actual-execution-002/retained-output-inventory.json",
+      "bytes": 1360,
+      "sha256": "58d3cd5ad962371c0f6b4540581ec6d548c85b52d3b79c731737f112a8e1978f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/native348-initial-destination-refusal-001/admission.json",
+      "bytes": 5788,
+      "sha256": "6241d935a448f8d12ae6d9a3b45056e497d4b8141dc712fa1ad3ba439a06d4ec",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/native348-initial-destination-refusal-001/execution.json",
+      "bytes": 498,
+      "sha256": "1d20032fce05008ba5ef7ce96c3c13cbe73fa61d1f623f81b2801b496a74810b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/native348-initial-destination-refusal-001/execution.log",
+      "bytes": 42,
+      "sha256": "7240aef0d655608f964f3ddf15ac41bb2f9d18c51dea09a0ef8d57ab9f694a4d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/native348-initial-destination-refusal-001/retained-output-inventory.json",
+      "bytes": 676,
+      "sha256": "040a4533f95a413b56871b23eca0b9f39201957c12b778cdfd954202bc1d58fd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/native348-qualification-001/candidate-native-patch.json",
+      "bytes": 28871,
+      "sha256": "7387f5fa5d94d65327080861adfea0a1de5b2e8f93d43d18687169d62a312933",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/native348-qualification-001/config-native-authority.json",
+      "bytes": 459,
+      "sha256": "1f369091f9e72a66d4eaa837242b08f1cf003b92033a7c3c3994c4eaaf666b00",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/native348-qualification-001/config-source-evidence.json",
+      "bytes": 100904,
+      "sha256": "23eeb5d02682f9233bb8ef99aa6ede01d13219aa8f6a70dbb8e2a2e378cfd6ef",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/native348-qualification-001/source-evidence-preparation.json",
+      "bytes": 262,
+      "sha256": "435cde9b6715b787e934f1f1ee6ce96586eda12d9f3ea8ed8e334bfea810186c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/native348-qualification-001/source-evidence.json",
+      "bytes": 32059,
+      "sha256": "d90fd168618beacd25b3b0ea2321acf89ef3c4873358bde34b61572d358e2a59",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/osm-native-attribution.json",
+      "bytes": 2288,
+      "sha256": "bb6af13459b221e0a0b80ed940ece2df61aea6667e071ee755bb1ffae7ab87ce",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/parent-source-choice-decision.json",
+      "bytes": 1845,
+      "sha256": "ef2ea91ae5402aabca0d7b0ca4694e38e3ae1e1f03311e9f7cfc9ff069f33892",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/source-adoption.json",
+      "bytes": 109757,
+      "sha256": "7c558bb111fb04db830daa42cbefbc9443c4f29f072c1fc467ce170b0f92e80f",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "distinct-source-choice",
+      "kind": "source",
+      "description": "Distinct twelve-source assessment with exact raw segments, original-owner crosswalk, all-country reference and708-feature VNM shared-interior join; parent accepted exactly348 source choices.",
+      "software": "Retained literal assessor scripts/admissions/executions and explicit parent decision; original vintages retained",
+      "units": "Original owner/y/x records; complete source geometry segments"
+    },
+    {
+      "id": "current-canonical-comparison",
+      "kind": "code",
+      "description": "Complete36-part current canonical inventory, exact rational native-column bounds and captured stock native point predicates; current b790 whole-body equality is verified, original cd68 execution is reused.",
+      "software": "Public observer92070428; original result a4c4bf38; distinct compact independent review",
+      "units": "Native centres, interior contacts and boundary ties"
+    },
+    {
+      "id": "stock-native-qualification",
+      "kind": "code",
+      "description": "Captured literal stock native constructor closure at a026; real finite prospective process-group admission and actual execution, all348 exact key joins. Later launcher admission controls do not relabel this execution.",
+      "software": "Node24.19.0; captured project closure/config hashes in admission;768MiB RSS and120s wall watchdog",
+      "units": "Qualified native-cell intervals; seconds; sampled bytes"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "original_keys",
+      "value": 365,
+      "unit": "original keys",
+      "vintage": "archived",
+      "input_sha256": "cbbe7c1d21fd87d1e6e65d02abf63838e13d80ca149a841ba5eadc1939f0ca04",
+      "input_file": {
+        "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine-input-plan.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "92070428a7e4e5537ef931f4dc11edc1fc0c3b6a"
+    },
+    {
+      "id": "supported_display_source_choices",
+      "value": 348,
+      "unit": "original keys",
+      "vintage": "archived",
+      "input_sha256": "cbbe7c1d21fd87d1e6e65d02abf63838e13d80ca149a841ba5eadc1939f0ca04",
+      "input_file": {
+        "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine-input-plan.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "92070428a7e4e5537ef931f4dc11edc1fc0c3b6a"
+    },
+    {
+      "id": "blocked_proposed_CHN_keys",
+      "value": 17,
+      "unit": "original keys",
+      "vintage": "archived",
+      "input_sha256": "cbbe7c1d21fd87d1e6e65d02abf63838e13d80ca149a841ba5eadc1939f0ca04",
+      "input_file": {
+        "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine-input-plan.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "92070428a7e4e5537ef931f4dc11edc1fc0c3b6a"
+    },
+    {
+      "id": "keys_with_current_fine_interior_contacts",
+      "value": 0,
+      "unit": "original keys",
+      "vintage": "archived",
+      "input_sha256": "cbbe7c1d21fd87d1e6e65d02abf63838e13d80ca149a841ba5eadc1939f0ca04",
+      "input_file": {
+        "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine-input-plan.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "92070428a7e4e5537ef931f4dc11edc1fc0c3b6a"
+    },
+    {
+      "id": "keys_with_current_fine_boundary_ties",
+      "value": 0,
+      "unit": "original keys",
+      "vintage": "archived",
+      "input_sha256": "cbbe7c1d21fd87d1e6e65d02abf63838e13d80ca149a841ba5eadc1939f0ca04",
+      "input_file": {
+        "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine-input-plan.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "92070428a7e4e5537ef931f4dc11edc1fc0c3b6a"
+    },
+    {
+      "id": "native348_elapsed_seconds",
+      "value": 6.2174693630076945,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "7387f5fa5d94d65327080861adfea0a1de5b2e8f93d43d18687169d62a312933",
+      "input_file": {
+        "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/native348-qualification-001/candidate-native-patch.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "a02676b372741c536fefc05cb5cb8f0adf9adcce"
+    },
+    {
+      "id": "native348_observed_sampled_process_group_peak_rss_bytes",
+      "value": 208277504,
+      "unit": "sampled bytes",
+      "vintage": "archived",
+      "input_sha256": "7387f5fa5d94d65327080861adfea0a1de5b2e8f93d43d18687169d62a312933",
+      "input_file": {
+        "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/native348-qualification-001/candidate-native-patch.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "a02676b372741c536fefc05cb5cb8f0adf9adcce"
+    },
+    {
+      "id": "native348_accepted_credit",
+      "value": 0,
+      "unit": "accepted cells",
+      "vintage": "archived",
+      "input_sha256": "7387f5fa5d94d65327080861adfea0a1de5b2e8f93d43d18687169d62a312933",
+      "input_file": {
+        "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/native348-qualification-001/candidate-native-patch.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "a02676b372741c536fefc05cb5cb8f0adf9adcce"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "original_keys",
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine365-001/current-fine365-observation.json",
+      "json_pointer": "/original_keys"
+    },
+    {
+      "metric_id": "supported_display_source_choices",
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine365-001/current-fine365-observation.json",
+      "json_pointer": "/supported_display_source_choices"
+    },
+    {
+      "metric_id": "blocked_proposed_CHN_keys",
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine365-001/current-fine365-observation.json",
+      "json_pointer": "/blocked_proposed_CHN_keys"
+    },
+    {
+      "metric_id": "keys_with_current_fine_interior_contacts",
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine365-001/current-fine365-observation.json",
+      "json_pointer": "/keys_with_current_fine_interior_contacts"
+    },
+    {
+      "metric_id": "keys_with_current_fine_boundary_ties",
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine365-001/current-fine365-observation.json",
+      "json_pointer": "/keys_with_current_fine_boundary_ties"
+    },
+    {
+      "metric_id": "native348_elapsed_seconds",
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/native348-actual-execution-002/execution.json",
+      "json_pointer": "/elapsed_seconds"
+    },
+    {
+      "metric_id": "native348_observed_sampled_process_group_peak_rss_bytes",
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/native348-actual-execution-002/execution.json",
+      "json_pointer": "/observed_sampled_process_group_peak_rss_bytes"
+    },
+    {
+      "metric_id": "native348_accepted_credit",
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/native348-actual-execution-002/execution.json",
+      "json_pointer": "/accepted_credit"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "The parent accepted source choice for exactly348 original keys after distinct assessment;17 proposed Chinese choices remain blocked, all contrary contacts retained.",
+      "status": "supported",
+      "source_ids": [
+        "osm-twelve-county-snapshot",
+        "retained-prior-physical-proof"
+      ]
+    },
+    {
+      "text": "Current canonical comparison found zero fine-interior contacts/ties at all365 keys. Actual native qualification covers348 supported keys only. This code/adoption PR changes no selected map cells.",
+      "status": "supported",
+      "source_ids": [
+        "osm-twelve-county-snapshot"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "Use the immutable captured observer/native launcher code/config pins and actual admissions for original executions; no rerun is claimed by moving archival outputs.",
+    "env -u NODE_PATH -u NODE_OPTIONS node --test test/revised-source-native.test.mjs test/source-evidence-derivation.test.mjs test/delivery-registry-delta.test.mjs test/selected-data-profile.test.mjs test/unchanged-selected-geography.test.mjs",
+    "python3 coordination/engineering/vietnam-revised-source-native-2076-20261016/test-bounded-native348.py"
+  ]
+}

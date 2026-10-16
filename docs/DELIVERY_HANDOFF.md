@@ -438,7 +438,10 @@ without a second staging/adoption pass.
 
 For historical or cross-prefix roles absent from the accepted package baseline,
 supply an exact committed `restored_read_roles` snapshot:
-`{"commit":"<exact commit>","paths":["<original role path>"]}`.
+`{"commit":"<exact commit>"}`. The finalizer derives missing paths from its
+already authenticated consumed-role projection; no separate package prepass or
+handwritten path inventory is needed. Unrelated snapshot files grant no read or
+write scope. The older explicit `paths` list remains supported and checked exactly.
 Declare the exact restored write paths in the ordinary issue scope. The snapshot
 must preserve each original ordinary mode, Git object, size and SHA-256. Duplicate,
 unbound, changed, nonordinary, missing or accepted-path-overwriting entries fail.

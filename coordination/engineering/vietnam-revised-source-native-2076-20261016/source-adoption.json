@@ -1,0 +1,4212 @@
+{
+  "version": 1,
+  "kind": "adopted-osm-revised-source-native-v1",
+  "source_id": "osm:whole-snapshot:b625ee0e686f239dd8eecf3eb21799228371ca5a1eef1c34c79a38905cf2d692",
+  "raw_source": {
+    "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/osm-full-county-relations.json",
+    "commit": "a4c4bf38d9f1c38ee4003da7db5cb6ed8153d679",
+    "mode": "100644",
+    "git_blob_oid": "d1344471a7a39f157de2509de52fb42400ab20c9",
+    "bytes": 1894713,
+    "sha256": "b625ee0e686f239dd8eecf3eb21799228371ca5a1eef1c34c79a38905cf2d692"
+  },
+  "source_stage": {
+    "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/whole-new-source-stage-inputs.json",
+    "commit": "a4c4bf38d9f1c38ee4003da7db5cb6ed8153d679",
+    "mode": "100644",
+    "git_blob_oid": "ff12987f4bfb1df9fabc13e474614a4a31604ef0",
+    "bytes": 872634,
+    "sha256": "620c3aab733389f4511491ba5c1f916f22c9235188b6e00d6a20053ef1020988"
+  },
+  "assessment": {
+    "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/scientific-source-choice-assessment.json",
+    "commit": "a4c4bf38d9f1c38ee4003da7db5cb6ed8153d679",
+    "mode": "100644",
+    "git_blob_oid": "13c86eea70b9b2ac69f27fcf031cff74f08d74d6",
+    "bytes": 661488,
+    "sha256": "ad251207682c8a9080385bc246d5b257da07733c8383a623bd906d7f70301088"
+  },
+  "scope": {
+    "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/distinct-source-assessment/source-choice348-supported17-blocked.json",
+    "commit": "a4c4bf38d9f1c38ee4003da7db5cb6ed8153d679",
+    "mode": "100644",
+    "git_blob_oid": "812be276f83659c250d80a5f9d77aaf710ec6434",
+    "bytes": 620603,
+    "sha256": "15f0a3368358a6696888cd82a4402c4f97a47683274482a66074ddd723c838f2"
+  },
+  "parent_decision": {
+    "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/parent-source-choice-decision.json",
+    "commit": "a4c4bf38d9f1c38ee4003da7db5cb6ed8153d679",
+    "mode": "100644",
+    "git_blob_oid": "e347fec81875deb392e5413ee73fff9f4dbe06e2",
+    "bytes": 1845,
+    "sha256": "ef2ea91ae5402aabca0d7b0ca4694e38e3ae1e1f03311e9f7cfc9ff069f33892"
+  },
+  "current_geography": {
+    "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine365-001/current-fine365-observation.json",
+    "commit": "a4c4bf38d9f1c38ee4003da7db5cb6ed8153d679",
+    "mode": "100644",
+    "git_blob_oid": "3e302c0b2bbdade92555f10104373b8aca9c4951",
+    "bytes": 406578,
+    "sha256": "963f917f94e2e69144c6e091e76771e313d9b29995f987a1db18cf820408359a"
+  },
+  "attribution": {
+    "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/osm-native-attribution.json",
+    "commit": "27062e51675f81e515dbd39da0216e6600d87cf3",
+    "mode": "100644",
+    "git_blob_oid": "9ac58abb6b1a0811cda1bb97c21234fcb5c6f935",
+    "bytes": 2288,
+    "sha256": "bb6af13459b221e0a0b80ed940ece2df61aea6667e071ee755bb1ffae7ab87ce"
+  },
+  "members": [
+    {
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "relation_id": 2723220,
+      "relation_version": 26,
+      "relation_timestamp": "2026-10-13T04:45:39Z",
+      "snapshot_timestamp": "2026-10-16T00:19:04Z",
+      "geometry_sha256": "0c81ffb24c865ba8cbced5803238786e9496fc28bb49d91e64325570cfc12ff1",
+      "base_geometry_sha256": "497f33b70f4157434159139bb53aa337c96780e455a3502f38c1af4a1d55c711"
+    },
+    {
+      "source_id": "osm:relation:2773869",
+      "target_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "pixelIndex": 11573,
+      "relation_id": 2773869,
+      "relation_version": 24,
+      "relation_timestamp": "2025-09-20T14:27:28Z",
+      "snapshot_timestamp": "2026-10-16T00:19:04Z",
+      "geometry_sha256": "cbd50e24c8eef8b2315ae28be9f7f9d76547884c9a40dd6b6f44f6a1aff8d7d7",
+      "base_geometry_sha256": "1a5c3e0ff1c728a22e2020efed4a55b2f77dd352b2df2c0208a18cd10d41728d"
+    },
+    {
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "relation_id": 2719410,
+      "relation_version": 32,
+      "relation_timestamp": "2025-12-16T10:06:59Z",
+      "snapshot_timestamp": "2026-10-16T00:19:04Z",
+      "geometry_sha256": "525e71d3d0716c5029d5bca13c1f286de823044d11407164c0e135bfa52c272b",
+      "base_geometry_sha256": "4af4e034b1d8b72ba0835e0ba3b7a09bc6bdc31518fb04572be9ce5417fdf4e2"
+    },
+    {
+      "source_id": "osm:relation:2719407",
+      "target_id": "gb:CHN:ADM2:17275852B29668080933041",
+      "pixelIndex": 11700,
+      "relation_id": 2719407,
+      "relation_version": 32,
+      "relation_timestamp": "2025-11-21T13:09:07Z",
+      "snapshot_timestamp": "2026-10-16T00:19:04Z",
+      "geometry_sha256": "99e3e21a278782940262dd345c24be35795b720fd039689b2983d1d7a8cf0bd4",
+      "base_geometry_sha256": "8c9edb8a7aba6c3b7fb0b552a2906300eae38c3d23f0d96ba2264a3a4da18453"
+    },
+    {
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "relation_id": 2773865,
+      "relation_version": 25,
+      "relation_timestamp": "2025-09-20T14:27:28Z",
+      "snapshot_timestamp": "2026-10-16T00:19:04Z",
+      "geometry_sha256": "a8397266bfac562652ea324c751397664e19b7cc1893daa48fd4d14ab8980f72",
+      "base_geometry_sha256": "679d84fe72a707dbb5f28d85874cec7f417773eee56cc93580f4028829865ce3"
+    },
+    {
+      "source_id": "osm:relation:2722419",
+      "target_id": "gb:CHN:ADM2:17275852B32075492285057",
+      "pixelIndex": 11764,
+      "relation_id": 2722419,
+      "relation_version": 26,
+      "relation_timestamp": "2026-02-28T04:59:07Z",
+      "snapshot_timestamp": "2026-10-16T00:19:04Z",
+      "geometry_sha256": "75514da93d18bc338a9750374ac213c3d098fb1585b0f3b0d6ec290729da9cb2",
+      "base_geometry_sha256": "c0ab88311e82ad1c8c2f5d3f00c313b77d0f73382383ae564d0d7932f21f981a"
+    },
+    {
+      "source_id": "osm:relation:2719413",
+      "target_id": "gb:CHN:ADM2:17275852B38063051407977",
+      "pixelIndex": 11930,
+      "relation_id": 2719413,
+      "relation_version": 18,
+      "relation_timestamp": "2025-08-06T09:28:42Z",
+      "snapshot_timestamp": "2026-10-16T00:19:04Z",
+      "geometry_sha256": "7a28bf8a7c574dc576ad2daa3bb0d823bffe27711b54ac10538a0bd9ad8575e3",
+      "base_geometry_sha256": "6b821629ec5fa011f874b2bad0537c8a00ef9623067f8bc31ae1fc564d61323e"
+    },
+    {
+      "source_id": "osm:relation:2723223",
+      "target_id": "gb:CHN:ADM2:17275852B43817460377390",
+      "pixelIndex": 12076,
+      "relation_id": 2723223,
+      "relation_version": 30,
+      "relation_timestamp": "2025-08-06T09:28:42Z",
+      "snapshot_timestamp": "2026-10-16T00:19:04Z",
+      "geometry_sha256": "52c29b97f6739b744d85a83a957bf6e14d96a17c4dacacc58f9004cffc1afb64",
+      "base_geometry_sha256": "6f7b34ff059f5f229117e8d97784dc5c9808e6e3f96169ba569d2f403d3993c3"
+    },
+    {
+      "source_id": "osm:relation:2773976",
+      "target_id": "gb:CHN:ADM2:17275852B45423289887647",
+      "pixelIndex": 12115,
+      "relation_id": 2773976,
+      "relation_version": 22,
+      "relation_timestamp": "2026-03-15T02:10:26Z",
+      "snapshot_timestamp": "2026-10-16T00:19:04Z",
+      "geometry_sha256": "e95848ba6513d3d4b4b1835574810e16f28aa2b19b897d053a3dccbc4e85af92",
+      "base_geometry_sha256": "0d5b183279e4866ce330b11fd0bfca14c62ce0b08fa4cd0aaf9759fdabbec18d"
+    },
+    {
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "relation_id": 2773868,
+      "relation_version": 21,
+      "relation_timestamp": "2026-03-29T08:31:11Z",
+      "snapshot_timestamp": "2026-10-16T00:19:04Z",
+      "geometry_sha256": "aae01a2a65deee37bea8af1b9a56e40dd471ecf20c56cc63ded31a96ac0c2426",
+      "base_geometry_sha256": "1e26a2c9273284008fc18541d387dcf68a7a93463c5d69097647816b7bb2e4e7"
+    },
+    {
+      "source_id": "osm:relation:2723222",
+      "target_id": "gb:CHN:ADM2:17275852B76703841753402",
+      "pixelIndex": 12908,
+      "relation_id": 2723222,
+      "relation_version": 27,
+      "relation_timestamp": "2025-08-06T09:28:42Z",
+      "snapshot_timestamp": "2026-10-16T00:19:04Z",
+      "geometry_sha256": "7c4fc33608e716813aff8e27382434011bb1ec0225d6d5a0b135f1c5a837bbd4",
+      "base_geometry_sha256": "0eb6e3d6dad30bcbcc694ad84bc3c79493db199d29a4976383354cbbb5df5743"
+    },
+    {
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "relation_id": 6881348,
+      "relation_version": 14,
+      "relation_timestamp": "2026-03-31T14:03:43Z",
+      "snapshot_timestamp": "2026-10-16T00:19:04Z",
+      "geometry_sha256": "7a73dc7fc0054b27bc54a1db6eb628182349d4b3896e8f4fb386964ef7d37c11",
+      "base_geometry_sha256": "b4184a2c61a94583d644f6b8f953ecabaf53927d294411a2437458d1bc840ed2"
+    }
+  ],
+  "records": [
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 113986,
+        "x": 208816
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 113987,
+        "x": 208817
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 113988,
+        "x": 208818
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114002,
+        "x": 208836
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114003,
+        "x": 208836
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114004,
+        "x": 208836
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114005,
+        "x": 208836
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114010,
+        "x": 208850
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114042,
+        "x": 208875
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114043,
+        "x": 208874
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114044,
+        "x": 208873
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114046,
+        "x": 208870
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114047,
+        "x": 208858
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114047,
+        "x": 208859
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114047,
+        "x": 208860
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114047,
+        "x": 208861
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114047,
+        "x": 208862
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114047,
+        "x": 208863
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114047,
+        "x": 208864
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114047,
+        "x": 208865
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114047,
+        "x": 208866
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114047,
+        "x": 208867
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114048,
+        "x": 208861
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114048,
+        "x": 208862
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114048,
+        "x": 208863
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114050,
+        "x": 208855
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114051,
+        "x": 208855
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114052,
+        "x": 208854
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114053,
+        "x": 208854
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114064,
+        "x": 208843
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114065,
+        "x": 208842
+      },
+      "source_id": "osm:relation:2773865",
+      "target_id": "gb:CHN:ADM2:17275852B31967187012085",
+      "pixelIndex": 11762,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114066,
+        "x": 208841
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114072,
+        "x": 208836
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114073,
+        "x": 208836
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114073,
+        "x": 208837
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114074,
+        "x": 208835
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114074,
+        "x": 208836
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114075,
+        "x": 208834
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114075,
+        "x": 208835
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114076,
+        "x": 208834
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114079,
+        "x": 208834
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114081,
+        "x": 208835
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114082,
+        "x": 208835
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114082,
+        "x": 208836
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114083,
+        "x": 208835
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114083,
+        "x": 208836
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114084,
+        "x": 208836
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114084,
+        "x": 208837
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114085,
+        "x": 208836
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114085,
+        "x": 208837
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114086,
+        "x": 208836
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114086,
+        "x": 208837
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114087,
+        "x": 208837
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114088,
+        "x": 208837
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114089,
+        "x": 208837
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114096,
+        "x": 208837
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114096,
+        "x": 208838
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114096,
+        "x": 208839
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114096,
+        "x": 208840
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114096,
+        "x": 208841
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114097,
+        "x": 208836
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114097,
+        "x": 208837
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114097,
+        "x": 208838
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114097,
+        "x": 208839
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114097,
+        "x": 208840
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114098,
+        "x": 208835
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114098,
+        "x": 208836
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114098,
+        "x": 208837
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114098,
+        "x": 208838
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114098,
+        "x": 208839
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114098,
+        "x": 208840
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114099,
+        "x": 208835
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114099,
+        "x": 208836
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114099,
+        "x": 208837
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114099,
+        "x": 208838
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114099,
+        "x": 208839
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114099,
+        "x": 208840
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114100,
+        "x": 208835
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114100,
+        "x": 208836
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114100,
+        "x": 208837
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114100,
+        "x": 208838
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114100,
+        "x": 208839
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114121,
+        "x": 208829
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114123,
+        "x": 208828
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114124,
+        "x": 208824
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114124,
+        "x": 208825
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114124,
+        "x": 208826
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114124,
+        "x": 208827
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114125,
+        "x": 208820
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114125,
+        "x": 208821
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114125,
+        "x": 208822
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114125,
+        "x": 208823
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114125,
+        "x": 208824
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114125,
+        "x": 208825
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114126,
+        "x": 208823
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114126,
+        "x": 208824
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114133,
+        "x": 208814
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114134,
+        "x": 208814
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114134,
+        "x": 208815
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114135,
+        "x": 208813
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114135,
+        "x": 208814
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114135,
+        "x": 208815
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114136,
+        "x": 208813
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114136,
+        "x": 208814
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114136,
+        "x": 208815
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114137,
+        "x": 208812
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114137,
+        "x": 208813
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114137,
+        "x": 208814
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114138,
+        "x": 208812
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114139,
+        "x": 208811
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114144,
+        "x": 208810
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114145,
+        "x": 208810
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114146,
+        "x": 208810
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114147,
+        "x": 208810
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114148,
+        "x": 208809
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114148,
+        "x": 208810
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114149,
+        "x": 208809
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114149,
+        "x": 208810
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114150,
+        "x": 208809
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114156,
+        "x": 208808
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114157,
+        "x": 208807
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114157,
+        "x": 208808
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114158,
+        "x": 208807
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114159,
+        "x": 208807
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114160,
+        "x": 208807
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114161,
+        "x": 208806
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114162,
+        "x": 208806
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114199,
+        "x": 208760
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": false
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114200,
+        "x": 208753
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": false
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114200,
+        "x": 208754
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": false
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114200,
+        "x": 208755
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": false
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114200,
+        "x": 208756
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": false
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114200,
+        "x": 208757
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": false
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114200,
+        "x": 208758
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": false
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114201,
+        "x": 208768
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114202,
+        "x": 208769
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114202,
+        "x": 208770
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114203,
+        "x": 208769
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114203,
+        "x": 208770
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114203,
+        "x": 208771
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48619,
+        "y": 114203,
+        "x": 208772
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114038,
+        "x": 205725
+      },
+      "source_id": "osm:relation:2719413",
+      "target_id": "gb:CHN:ADM2:17275852B38063051407977",
+      "pixelIndex": 11930,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114038,
+        "x": 205726
+      },
+      "source_id": "osm:relation:2719413",
+      "target_id": "gb:CHN:ADM2:17275852B38063051407977",
+      "pixelIndex": 11930,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114038,
+        "x": 205727
+      },
+      "source_id": "osm:relation:2719413",
+      "target_id": "gb:CHN:ADM2:17275852B38063051407977",
+      "pixelIndex": 11930,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114040,
+        "x": 205713
+      },
+      "source_id": "osm:relation:2719413",
+      "target_id": "gb:CHN:ADM2:17275852B38063051407977",
+      "pixelIndex": 11930,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114064,
+        "x": 205761
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114077,
+        "x": 205769
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114078,
+        "x": 205770
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114101,
+        "x": 205834
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114118,
+        "x": 205887
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114118,
+        "x": 205888
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114118,
+        "x": 205889
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114122,
+        "x": 205892
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114161,
+        "x": 205953
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114172,
+        "x": 205987
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114173,
+        "x": 205644
+      },
+      "source_id": "osm:relation:2719413",
+      "target_id": "gb:CHN:ADM2:17275852B38063051407977",
+      "pixelIndex": 11930,
+      "adopted_display_choice": false
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114173,
+        "x": 205988
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114173,
+        "x": 205989
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114204,
+        "x": 206004
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114220,
+        "x": 206013
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114233,
+        "x": 206014
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48755,
+        "y": 114257,
+        "x": 206035
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114524,
+        "x": 208788
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114525,
+        "x": 208781
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114525,
+        "x": 208789
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114529,
+        "x": 208790
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114530,
+        "x": 208787
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114573,
+        "x": 208793
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114574,
+        "x": 208793
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114575,
+        "x": 208794
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114579,
+        "x": 208794
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114583,
+        "x": 208793
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114597,
+        "x": 208792
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114598,
+        "x": 208792
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114598,
+        "x": 208793
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114599,
+        "x": 208792
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114599,
+        "x": 208793
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114600,
+        "x": 208792
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114600,
+        "x": 208793
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114601,
+        "x": 208791
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114601,
+        "x": 208792
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114601,
+        "x": 208793
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114611,
+        "x": 208784
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114634,
+        "x": 208790
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114635,
+        "x": 208789
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114636,
+        "x": 208788
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114642,
+        "x": 208782
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114642,
+        "x": 208783
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114643,
+        "x": 208781
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48681,
+        "y": 114644,
+        "x": 208780
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48183,
+        "y": 114272,
+        "x": 206052
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48183,
+        "y": 114289,
+        "x": 206089
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48183,
+        "y": 114297,
+        "x": 206102
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48183,
+        "y": 114297,
+        "x": 206104
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48183,
+        "y": 114299,
+        "x": 206107
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48183,
+        "y": 114300,
+        "x": 206108
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48183,
+        "y": 114302,
+        "x": 206111
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48477,
+        "y": 113990,
+        "x": 207276
+      },
+      "source_id": "osm:relation:2723223",
+      "target_id": "gb:CHN:ADM2:17275852B43817460377390",
+      "pixelIndex": 12076,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48477,
+        "y": 113991,
+        "x": 207276
+      },
+      "source_id": "osm:relation:2723223",
+      "target_id": "gb:CHN:ADM2:17275852B43817460377390",
+      "pixelIndex": 12076,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48477,
+        "y": 113992,
+        "x": 207277
+      },
+      "source_id": "osm:relation:2723223",
+      "target_id": "gb:CHN:ADM2:17275852B43817460377390",
+      "pixelIndex": 12076,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48477,
+        "y": 113996,
+        "x": 207271
+      },
+      "source_id": "osm:relation:2723222",
+      "target_id": "gb:CHN:ADM2:17275852B76703841753402",
+      "pixelIndex": 12908,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48756,
+        "y": 114661,
+        "x": 208860
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48756,
+        "y": 114666,
+        "x": 208883
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48756,
+        "y": 114671,
+        "x": 208927
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48756,
+        "y": 114747,
+        "x": 209037
+      },
+      "source_id": "osm:relation:2773869",
+      "target_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "pixelIndex": 11573,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48756,
+        "y": 114747,
+        "x": 209038
+      },
+      "source_id": "osm:relation:2773869",
+      "target_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "pixelIndex": 11573,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48535,
+        "y": 113896,
+        "x": 207441
+      },
+      "source_id": "osm:relation:2723223",
+      "target_id": "gb:CHN:ADM2:17275852B43817460377390",
+      "pixelIndex": 12076,
+      "adopted_display_choice": false
+    },
+    {
+      "original_key": {
+        "owner": 48535,
+        "y": 113898,
+        "x": 207442
+      },
+      "source_id": "osm:relation:2723223",
+      "target_id": "gb:CHN:ADM2:17275852B43817460377390",
+      "pixelIndex": 12076,
+      "adopted_display_choice": false
+    },
+    {
+      "original_key": {
+        "owner": 48535,
+        "y": 113900,
+        "x": 207443
+      },
+      "source_id": "osm:relation:2723223",
+      "target_id": "gb:CHN:ADM2:17275852B43817460377390",
+      "pixelIndex": 12076,
+      "adopted_display_choice": false
+    },
+    {
+      "original_key": {
+        "owner": 48535,
+        "y": 113902,
+        "x": 207444
+      },
+      "source_id": "osm:relation:2723223",
+      "target_id": "gb:CHN:ADM2:17275852B43817460377390",
+      "pixelIndex": 12076,
+      "adopted_display_choice": false
+    },
+    {
+      "original_key": {
+        "owner": 48535,
+        "y": 113986,
+        "x": 207349
+      },
+      "source_id": "osm:relation:2723223",
+      "target_id": "gb:CHN:ADM2:17275852B43817460377390",
+      "pixelIndex": 12076,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48535,
+        "y": 113987,
+        "x": 207350
+      },
+      "source_id": "osm:relation:2723223",
+      "target_id": "gb:CHN:ADM2:17275852B43817460377390",
+      "pixelIndex": 12076,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48535,
+        "y": 113987,
+        "x": 207351
+      },
+      "source_id": "osm:relation:2723223",
+      "target_id": "gb:CHN:ADM2:17275852B43817460377390",
+      "pixelIndex": 12076,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48535,
+        "y": 113988,
+        "x": 207351
+      },
+      "source_id": "osm:relation:2723223",
+      "target_id": "gb:CHN:ADM2:17275852B43817460377390",
+      "pixelIndex": 12076,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48535,
+        "y": 113988,
+        "x": 207352
+      },
+      "source_id": "osm:relation:2723223",
+      "target_id": "gb:CHN:ADM2:17275852B43817460377390",
+      "pixelIndex": 12076,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48535,
+        "y": 113989,
+        "x": 207352
+      },
+      "source_id": "osm:relation:2723223",
+      "target_id": "gb:CHN:ADM2:17275852B43817460377390",
+      "pixelIndex": 12076,
+      "adopted_display_choice": false
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113614,
+        "x": 207828
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113614,
+        "x": 207829
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113615,
+        "x": 207827
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113634,
+        "x": 207852
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113660,
+        "x": 207890
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113660,
+        "x": 207891
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113660,
+        "x": 207892
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113660,
+        "x": 207893
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113660,
+        "x": 207894
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113661,
+        "x": 207891
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113661,
+        "x": 207892
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113661,
+        "x": 207893
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113661,
+        "x": 207894
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113662,
+        "x": 207892
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113662,
+        "x": 207893
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113662,
+        "x": 207894
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113662,
+        "x": 207895
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113663,
+        "x": 207893
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113663,
+        "x": 207894
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113663,
+        "x": 207895
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113664,
+        "x": 207894
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113664,
+        "x": 207895
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113664,
+        "x": 207896
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113665,
+        "x": 207895
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113665,
+        "x": 207896
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113665,
+        "x": 207897
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113666,
+        "x": 207896
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113666,
+        "x": 207897
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113696,
+        "x": 207909
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113697,
+        "x": 207910
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113698,
+        "x": 207911
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113699,
+        "x": 207911
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113699,
+        "x": 207912
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113700,
+        "x": 207911
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113700,
+        "x": 207912
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113701,
+        "x": 207911
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113701,
+        "x": 207912
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113702,
+        "x": 207912
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48254,
+        "y": 113703,
+        "x": 207912
+      },
+      "source_id": "osm:relation:2723220",
+      "target_id": "gb:CHN:ADM2:17275852B12394774588724",
+      "pixelIndex": 11270,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48156,
+        "y": 114072,
+        "x": 206522
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": false
+    },
+    {
+      "original_key": {
+        "owner": 48156,
+        "y": 114073,
+        "x": 206522
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": false
+    },
+    {
+      "original_key": {
+        "owner": 48156,
+        "y": 114077,
+        "x": 206615
+      },
+      "source_id": "osm:relation:2719407",
+      "target_id": "gb:CHN:ADM2:17275852B29668080933041",
+      "pixelIndex": 11700,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48156,
+        "y": 114078,
+        "x": 206616
+      },
+      "source_id": "osm:relation:2719407",
+      "target_id": "gb:CHN:ADM2:17275852B29668080933041",
+      "pixelIndex": 11700,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48156,
+        "y": 114079,
+        "x": 206617
+      },
+      "source_id": "osm:relation:2719407",
+      "target_id": "gb:CHN:ADM2:17275852B29668080933041",
+      "pixelIndex": 11700,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48156,
+        "y": 114080,
+        "x": 206618
+      },
+      "source_id": "osm:relation:2719407",
+      "target_id": "gb:CHN:ADM2:17275852B29668080933041",
+      "pixelIndex": 11700,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48156,
+        "y": 114127,
+        "x": 206663
+      },
+      "source_id": "osm:relation:2719407",
+      "target_id": "gb:CHN:ADM2:17275852B29668080933041",
+      "pixelIndex": 11700,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48156,
+        "y": 114128,
+        "x": 206664
+      },
+      "source_id": "osm:relation:2719407",
+      "target_id": "gb:CHN:ADM2:17275852B29668080933041",
+      "pixelIndex": 11700,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48156,
+        "y": 114130,
+        "x": 206667
+      },
+      "source_id": "osm:relation:2719407",
+      "target_id": "gb:CHN:ADM2:17275852B29668080933041",
+      "pixelIndex": 11700,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48156,
+        "y": 114139,
+        "x": 206675
+      },
+      "source_id": "osm:relation:2719407",
+      "target_id": "gb:CHN:ADM2:17275852B29668080933041",
+      "pixelIndex": 11700,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48156,
+        "y": 114167,
+        "x": 206692
+      },
+      "source_id": "osm:relation:2719407",
+      "target_id": "gb:CHN:ADM2:17275852B29668080933041",
+      "pixelIndex": 11700,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48156,
+        "y": 114170,
+        "x": 206696
+      },
+      "source_id": "osm:relation:2719407",
+      "target_id": "gb:CHN:ADM2:17275852B29668080933041",
+      "pixelIndex": 11700,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114330,
+        "x": 208690
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114335,
+        "x": 208694
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114350,
+        "x": 208703
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114351,
+        "x": 208703
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114351,
+        "x": 208704
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114352,
+        "x": 208703
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114352,
+        "x": 208704
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114353,
+        "x": 208703
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114354,
+        "x": 208703
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114380,
+        "x": 208695
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114381,
+        "x": 208694
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114382,
+        "x": 208693
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114382,
+        "x": 208704
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114383,
+        "x": 208697
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114383,
+        "x": 208703
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114418,
+        "x": 208764
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114419,
+        "x": 208764
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114420,
+        "x": 208764
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114446,
+        "x": 208777
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114447,
+        "x": 208777
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114448,
+        "x": 208778
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114449,
+        "x": 208778
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114456,
+        "x": 208779
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114458,
+        "x": 208780
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114461,
+        "x": 208780
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114469,
+        "x": 208785
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114476,
+        "x": 208787
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48473,
+        "y": 114477,
+        "x": 208787
+      },
+      "source_id": "osm:relation:6881348",
+      "target_id": "gb:CHN:ADM2:17275852B87965925400106",
+      "pixelIndex": 13210,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48600,
+        "y": 114903,
+        "x": 209258
+      },
+      "source_id": "osm:relation:2773869",
+      "target_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "pixelIndex": 11573,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48600,
+        "y": 114927,
+        "x": 209267
+      },
+      "source_id": "osm:relation:2773869",
+      "target_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "pixelIndex": 11573,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48600,
+        "y": 114938,
+        "x": 209268
+      },
+      "source_id": "osm:relation:2773869",
+      "target_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "pixelIndex": 11573,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48600,
+        "y": 114951,
+        "x": 209266
+      },
+      "source_id": "osm:relation:2773869",
+      "target_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "pixelIndex": 11573,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48600,
+        "y": 114954,
+        "x": 209266
+      },
+      "source_id": "osm:relation:2773869",
+      "target_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "pixelIndex": 11573,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48439,
+        "y": 114029,
+        "x": 207192
+      },
+      "source_id": "osm:relation:2723222",
+      "target_id": "gb:CHN:ADM2:17275852B76703841753402",
+      "pixelIndex": 12908,
+      "adopted_display_choice": false
+    },
+    {
+      "original_key": {
+        "owner": 48439,
+        "y": 114030,
+        "x": 207191
+      },
+      "source_id": "osm:relation:2723222",
+      "target_id": "gb:CHN:ADM2:17275852B76703841753402",
+      "pixelIndex": 12908,
+      "adopted_display_choice": false
+    },
+    {
+      "original_key": {
+        "owner": 48410,
+        "y": 114193,
+        "x": 208720
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48410,
+        "y": 114194,
+        "x": 208720
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48410,
+        "y": 114195,
+        "x": 208720
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48410,
+        "y": 114196,
+        "x": 208719
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48410,
+        "y": 114196,
+        "x": 208720
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48410,
+        "y": 114197,
+        "x": 208718
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48410,
+        "y": 114206,
+        "x": 208716
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48410,
+        "y": 114207,
+        "x": 208716
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48410,
+        "y": 114208,
+        "x": 208716
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48410,
+        "y": 114209,
+        "x": 208716
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48410,
+        "y": 114210,
+        "x": 208716
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48410,
+        "y": 114211,
+        "x": 208716
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48410,
+        "y": 114213,
+        "x": 208715
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48410,
+        "y": 114214,
+        "x": 208715
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48410,
+        "y": 114215,
+        "x": 208715
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48410,
+        "y": 114280,
+        "x": 208702
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48410,
+        "y": 114289,
+        "x": 208687
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48410,
+        "y": 114290,
+        "x": 208687
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48410,
+        "y": 114291,
+        "x": 208687
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48410,
+        "y": 114292,
+        "x": 208687
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48410,
+        "y": 114292,
+        "x": 208688
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48410,
+        "y": 114293,
+        "x": 208686
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48410,
+        "y": 114293,
+        "x": 208687
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48410,
+        "y": 114294,
+        "x": 208686
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48425,
+        "y": 114078,
+        "x": 206404
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48425,
+        "y": 114091,
+        "x": 206405
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48425,
+        "y": 114094,
+        "x": 206406
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48425,
+        "y": 114137,
+        "x": 206428
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48425,
+        "y": 114157,
+        "x": 206443
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48425,
+        "y": 114159,
+        "x": 206445
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48425,
+        "y": 114160,
+        "x": 206445
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48425,
+        "y": 114162,
+        "x": 206446
+      },
+      "source_id": "osm:relation:2719410",
+      "target_id": "gb:CHN:ADM2:17275852B24732894609656",
+      "pixelIndex": 11584,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48634,
+        "y": 113915,
+        "x": 208181
+      },
+      "source_id": "osm:relation:2722419",
+      "target_id": "gb:CHN:ADM2:17275852B32075492285057",
+      "pixelIndex": 11764,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48634,
+        "y": 113916,
+        "x": 208182
+      },
+      "source_id": "osm:relation:2722419",
+      "target_id": "gb:CHN:ADM2:17275852B32075492285057",
+      "pixelIndex": 11764,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48634,
+        "y": 113917,
+        "x": 208183
+      },
+      "source_id": "osm:relation:2722419",
+      "target_id": "gb:CHN:ADM2:17275852B32075492285057",
+      "pixelIndex": 11764,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48634,
+        "y": 113918,
+        "x": 208183
+      },
+      "source_id": "osm:relation:2722419",
+      "target_id": "gb:CHN:ADM2:17275852B32075492285057",
+      "pixelIndex": 11764,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48634,
+        "y": 113919,
+        "x": 208183
+      },
+      "source_id": "osm:relation:2722419",
+      "target_id": "gb:CHN:ADM2:17275852B32075492285057",
+      "pixelIndex": 11764,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48634,
+        "y": 113921,
+        "x": 208182
+      },
+      "source_id": "osm:relation:2722419",
+      "target_id": "gb:CHN:ADM2:17275852B32075492285057",
+      "pixelIndex": 11764,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48231,
+        "y": 114796,
+        "x": 209030
+      },
+      "source_id": "osm:relation:2773869",
+      "target_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "pixelIndex": 11573,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48231,
+        "y": 114796,
+        "x": 209031
+      },
+      "source_id": "osm:relation:2773869",
+      "target_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "pixelIndex": 11573,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48231,
+        "y": 114796,
+        "x": 209032
+      },
+      "source_id": "osm:relation:2773869",
+      "target_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "pixelIndex": 11573,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48231,
+        "y": 114796,
+        "x": 209033
+      },
+      "source_id": "osm:relation:2773869",
+      "target_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "pixelIndex": 11573,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48231,
+        "y": 114796,
+        "x": 209034
+      },
+      "source_id": "osm:relation:2773869",
+      "target_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "pixelIndex": 11573,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48231,
+        "y": 114797,
+        "x": 209033
+      },
+      "source_id": "osm:relation:2773869",
+      "target_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "pixelIndex": 11573,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48231,
+        "y": 114797,
+        "x": 209034
+      },
+      "source_id": "osm:relation:2773869",
+      "target_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "pixelIndex": 11573,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48231,
+        "y": 114797,
+        "x": 209035
+      },
+      "source_id": "osm:relation:2773869",
+      "target_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "pixelIndex": 11573,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48231,
+        "y": 114797,
+        "x": 209036
+      },
+      "source_id": "osm:relation:2773869",
+      "target_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "pixelIndex": 11573,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48231,
+        "y": 114797,
+        "x": 209037
+      },
+      "source_id": "osm:relation:2773869",
+      "target_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "pixelIndex": 11573,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48231,
+        "y": 114798,
+        "x": 209037
+      },
+      "source_id": "osm:relation:2773869",
+      "target_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "pixelIndex": 11573,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48231,
+        "y": 114798,
+        "x": 209038
+      },
+      "source_id": "osm:relation:2773869",
+      "target_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "pixelIndex": 11573,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48231,
+        "y": 114798,
+        "x": 209039
+      },
+      "source_id": "osm:relation:2773869",
+      "target_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "pixelIndex": 11573,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48231,
+        "y": 114800,
+        "x": 209043
+      },
+      "source_id": "osm:relation:2773869",
+      "target_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "pixelIndex": 11573,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48231,
+        "y": 114822,
+        "x": 209091
+      },
+      "source_id": "osm:relation:2773869",
+      "target_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "pixelIndex": 11573,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48231,
+        "y": 114823,
+        "x": 209092
+      },
+      "source_id": "osm:relation:2773869",
+      "target_id": "gb:CHN:ADM2:17275852B24445486288332",
+      "pixelIndex": 11573,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48503,
+        "y": 113890,
+        "x": 208435
+      },
+      "source_id": "osm:relation:2773976",
+      "target_id": "gb:CHN:ADM2:17275852B45423289887647",
+      "pixelIndex": 12115,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48503,
+        "y": 113896,
+        "x": 208440
+      },
+      "source_id": "osm:relation:2773976",
+      "target_id": "gb:CHN:ADM2:17275852B45423289887647",
+      "pixelIndex": 12115,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48503,
+        "y": 113933,
+        "x": 208468
+      },
+      "source_id": "osm:relation:2773976",
+      "target_id": "gb:CHN:ADM2:17275852B45423289887647",
+      "pixelIndex": 12115,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48249,
+        "y": 114307,
+        "x": 208689
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48249,
+        "y": 114316,
+        "x": 208688
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48249,
+        "y": 114318,
+        "x": 208687
+      },
+      "source_id": "osm:relation:2773868",
+      "target_id": "gb:CHN:ADM2:17275852B46978756476047",
+      "pixelIndex": 12167,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48382,
+        "y": 113926,
+        "x": 208686
+      },
+      "source_id": "osm:relation:2773976",
+      "target_id": "gb:CHN:ADM2:17275852B45423289887647",
+      "pixelIndex": 12115,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48382,
+        "y": 113927,
+        "x": 208687
+      },
+      "source_id": "osm:relation:2773976",
+      "target_id": "gb:CHN:ADM2:17275852B45423289887647",
+      "pixelIndex": 12115,
+      "adopted_display_choice": true
+    },
+    {
+      "original_key": {
+        "owner": 48495,
+        "y": 113934,
+        "x": 208469
+      },
+      "source_id": "osm:relation:2773976",
+      "target_id": "gb:CHN:ADM2:17275852B45423289887647",
+      "pixelIndex": 12115,
+      "adopted_display_choice": true
+    }
+  ]
+}
