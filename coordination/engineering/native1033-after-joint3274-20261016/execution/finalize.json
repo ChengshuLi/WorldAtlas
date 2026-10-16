@@ -1,0 +1,18 @@
+{
+  "command": [
+    "node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "finalize",
+    ".takeover/native1033/native1033-finalize-config.json",
+    ".cache/delivery-handoff/native1033-finalized-001"
+  ],
+  "actual_execution_code": "72c1a1ba77fd23232c52e9bbb71d24473e45c020",
+  "actual_accepted_numerical_baseline": "ffe590afe39e14caafdf25f45c5b6bbb8a49fc1b",
+  "composition": "8a579397bb0ce8242cac1d539cb24a490c7ebca8",
+  "restoration_snapshot": "7ddaa964d00a317eb593711867c16755aadffc48",
+  "elapsed_seconds": 115.01978390500881,
+  "max_rss_kib": 810528,
+  "exit_code": 0,
+  "source_physical_or_constructor_replays": 0,
+  "author_packageProjection_prepass": false
+}

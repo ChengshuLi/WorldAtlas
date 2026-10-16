@@ -1,0 +1,16 @@
+{
+  "command": [
+    "node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "compose",
+    ".takeover/native1033/actual-ffe-native1033-compose-config.json",
+    ".cache/delivery-handoff/native1033-composition-001"
+  ],
+  "actual_execution_code": "72c1a1ba77fd23232c52e9bbb71d24473e45c020",
+  "reviewed_pending_PR": 2158,
+  "actual_accepted_numerical_baseline": "ffe590afe39e14caafdf25f45c5b6bbb8a49fc1b",
+  "elapsed_seconds": 31.523359838000033,
+  "max_rss_kib": 515992,
+  "exit_code": 0,
+  "original_constructor_source_or_physical_replays": 0
+}

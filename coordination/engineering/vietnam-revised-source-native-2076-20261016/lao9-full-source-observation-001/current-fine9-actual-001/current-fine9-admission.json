@@ -1,0 +1,28 @@
+{
+  "kind": "bounded-current-fine9-prospective-admission-v1",
+  "code_commit": "bbd6b15f04637d5c4b7f64dd9ec3bfd206db04f2",
+  "launcher_sha256": "c1dc8ff029d95d067470a2db9f9635b9bbb355b42abbd28c6d74cca9fe59cd82",
+  "script_sha256": "8573be04b928b93acf5456f193f5659c71c57e70b9140fc1e4e12ceb7c273f0a",
+  "command": [
+    "node",
+    "--max-old-space-size=512",
+    "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/dda6ef44fc5bf26bb9ad5567433b4c1ac45920f1f1fc1ca27469c1f1e02b3af3/work/.cache/delivery-handoff/vietnam-lao9-current-fine-001/captured-observe-current-fine9.mjs",
+    "bbd6b15f04637d5c4b7f64dd9ec3bfd206db04f2",
+    "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/dda6ef44fc5bf26bb9ad5567433b4c1ac45920f1f1fc1ca27469c1f1e02b3af3/work/.cache/delivery-handoff/vietnam-lao9-current-fine-001/current-fine9-observation.json"
+  ],
+  "scope": "All36 indexed canonical parts/49625 features at225e0d36, exact9 original keys; only missing current fine contacts/ties",
+  "complete_geography_encoded_bytes": 203282806,
+  "largest_part_encoded_bytes": 12932719,
+  "representation": "One immutable Git part at a time; validated complete ring bounds exclude only provably irrelevant features; stock exact-native predicates for every survivor",
+  "memory_rss_limit_bytes": 805306368,
+  "node_heap_limit_mib": 512,
+  "wall_deadline_seconds": 120,
+  "poll_seconds": 0.05,
+  "free_bytes_before": 8798724096,
+  "memory_before": {
+    "MemTotal": 10451464192,
+    "MemAvailable": 7965454336
+  },
+  "output_and_log_allowance_bytes": 33554432,
+  "sampled_peak_is_not_continuous_maximum": true
+}
