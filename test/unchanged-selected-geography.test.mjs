@@ -485,6 +485,34 @@ test('OID cache reuse still authenticates each alias path, mode, length and SHA 
   } finally { f.close(); }
 });
 
+test('shared candidate descriptors retain exact baseline-to-candidate modes, additions, deletions and divergent data', async () => {
+  const f = fixture(); try {
+    const target = P + 'native-asset.json';
+    const mode = f.commit(f.candidateFiles, f.baseline, {[target]: '100755'});
+    const removed = {...f.candidateFiles}; delete removed[target];
+    const deleted = f.commit(removed, f.baseline);
+    const absent = P + 'native/absent.bin.gz';
+    const added = f.commit({...f.candidateFiles, [absent]: body('now present')}, f.baseline);
+    for (const candidate of [mode, deleted, added]) {
+      const result = await f.inspect(candidate);
+      assert.equal(result.status, 'full-check-required'); assert.match(result.reason, /changed-current-input/);
+    }
+    const directory = f.commit({...f.candidateFiles, [absent + '/child.json']: body('nonordinary parent alias')}, f.baseline);
+    const changedAncestor = await f.inspect(directory);
+    assert.equal(changedAncestor.status, 'full-check-required'); assert.match(changedAncestor.reason, /nonordinary-immutable-input/);
+    const baseline = f.commit({...f.files, [target]: body('baseline-only consumed drift')}, f.baseline);
+    const divergent = await f.inspect(f.candidate, baseline);
+    assert.equal(divergent.status, 'full-check-required'); assert.match(divergent.reason, /changed-current-input/);
+    const accepted = await f.inspect();
+    assert.equal(accepted.status, 'unchanged-selected-inputs', accepted.reason);
+    const unchanged = accepted.immutable_descriptors.filter(p => p.path === target && [f.baseline, f.candidate].includes(p.commit));
+    assert.equal(unchanged.length, 2);
+    assert.equal(unchanged[0].mode, unchanged[1].mode);
+    assert.equal(unchanged[0].git_blob_oid, unchanged[1].git_blob_oid);
+    assert(accepted.current_and_absent_alternatives.some(p => p.path === absent && p.absent));
+  } finally { f.close(); }
+});
+
 test('invalid commits fail closed while unrelated engineering changes retain unchanged scientific identities', async () => {
   const f = fixture(); try {
     const output = execFileSync(process.execPath, [path.join(ROOT, 'scripts/check-unchanged-selected-geography.mjs'), f.directory, f.baseline, f.baseline]);

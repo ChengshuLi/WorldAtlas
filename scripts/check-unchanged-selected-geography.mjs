@@ -89,6 +89,28 @@ function createReader({repo, baseline, candidate, trusted, limits, acquisition})
   }
   const descriptors = new Map(), metadata = new Map(), pending = new Map(), plan = new Map(), origins = new Map(), current = new Map();
   let metadataBytes = 0, metadataReads = 0, plannedBytes = 0, cacheBytes = 0, cachePeakBytes = 0, cacheEvictions = 0;
+  let currentChanges;
+  function changedCurrentPaths() {
+    if (!currentChanges) {
+      // This exact tree delta authenticates unchanged paths, including modes and
+      // absences. It is independent of the authored merge-base scope below.
+      const names = git('diff-tree', '--no-commit-id', '--name-only', '-r', '-z', '--no-renames', '--no-ext-diff', '--no-textconv', '--ignore-submodules=none', baseline, candidate)
+        .toString().split('\0').filter(Boolean);
+      demand(names.length <= limits.entries && names.every(safe), 'identity-entry-limit');
+      const ancestors = new Set();
+      for (const name of names) {
+        const parts = name.split('/');
+        for (let i = 1; i < parts.length; i++) ancestors.add(parts.slice(0, i).join('/'));
+      }
+      currentChanges = {names: new Set(names), ancestors};
+    }
+    return currentChanges;
+  }
+  function unchangedCurrentPath(name) {
+    const changes = changedCurrentPaths(), parts = name.split('/');
+    return !changes.names.has(name) && !changes.ancestors.has(name)
+      && !parts.some((_, i) => i > 0 && changes.names.has(parts.slice(0, i).join('/')));
+  }
   const missingOrigins = new Set();
   function requireOrigin(commit) {
     missingOrigins.add(commit); throw Error('missing-strict-historical-commit:' + commit);
@@ -98,14 +120,19 @@ function createReader({repo, baseline, candidate, trusted, limits, acquisition})
     const key = commit + ':' + name;
     if (!descriptors.has(key)) {
       demand(descriptors.size < limits.entries, 'identity-entry-limit');
-      let raw;
-      try { raw = git('ls-tree', '-z', commit, '--', name).toString(); }
-      catch (error) { if (!originExists(commit)) requireOrigin(commit); throw error; }
-      if (!raw) descriptors.set(key, null);
-      else {
-        const match = raw.match(/^(100644|100755) blob ([a-f0-9]{40})\t([^\0]+)\0$/);
-        demand(match && match[3] === name, 'nonordinary-immutable-input');
-        descriptors.set(key, {commit, path: name, mode: match[1], git_blob_oid: match[2]});
+      if (commit === candidate && descriptors.has(baseline + ':' + name) && unchangedCurrentPath(name)) {
+        const before = descriptors.get(baseline + ':' + name);
+        descriptors.set(key, before ? {...before, commit: candidate} : null);
+      } else {
+        let raw;
+        try { raw = git('ls-tree', '-z', commit, '--', name).toString(); }
+        catch (error) { if (!originExists(commit)) requireOrigin(commit); throw error; }
+        if (!raw) descriptors.set(key, null);
+        else {
+          const match = raw.match(/^(100644|100755) blob ([a-f0-9]{40})\t([^\0]+)\0$/);
+          demand(match && match[3] === name, 'nonordinary-immutable-input');
+          descriptors.set(key, {commit, path: name, mode: match[1], git_blob_oid: match[2]});
+        }
       }
     }
     const result = descriptors.get(key);

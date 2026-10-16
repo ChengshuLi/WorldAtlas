@@ -273,6 +273,8 @@ Every role still checks its own origin/path/mode/OID/length/SHA binding on cache
 hits and rereads. The 32 MiB member, 4096 descriptor and 120-second owned-process
 bounds remain; cumulative I/O, unique planned bytes and live-cache peaks are
 reported separately. The raw-cache bound is not a total process-RSS guarantee.
+One exact baseline-to-candidate tree delta lets unchanged candidate paths reuse
+already authenticated baseline descriptors; changed paths retain separate reads.
 There is no finite software hash exception, baseline self-comparison substitute,
 checkpoint reuse or new checkpoint authority for this route. Selected-data and
 source-only work, data-only full changes and unrelated application changes retain
