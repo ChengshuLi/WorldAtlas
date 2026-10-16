@@ -1,0 +1,13 @@
+# Original Myanmar physical package disposition audit
+
+Prepared for distinct final coverage/contract review and parent adoption. No package closure or new accepted positive facet is claimed here.
+
+The immutable f7c3583 physical package completion criterion permits every interval to end in a reusable source interpretation OR an explicit unresolved question. The exact current partition is 18,165 interpreted keys and 294 evidence-backed unresolved keys across all 9,162 original intervals /18,459 keys. The audit reuses genuine prior source observations, source/body associations, scientific reviews and actual adoptions. No new imagery interpretation, source/physical producer, repair or geography mutation was performed.
+
+The old original independent review remains literal. Its historical statement that3,455 open questions prevented full18,459 physical completion described positive-answer coverage at that vintage. It must not be silently rewritten. The present proposal distinguishes completed original disposition work from positive answer coverage: the original contract explicitly allows retained unresolved questions. All294 questions remain open, and18,165 is the unchanged positive-interpretation count. Parent adoption of a final coverage review is still required.
+
+The263 current top-level reservation labels are not substituted for actual evidence. Each is bound to its unchanged nested original concrete question, actual native WorldCover2020 values/full3x3/masks and affirmative original2019 complete ADM3 source-body association at the exact original owner/interval/SID tuple.31 records additionally retain their actual independently reviewed annual-pattern questions. Only the previously disclosed machine-local versus retained-private centre-array prefix is normalized for comparison; all other observation fields, full body association and original source scope remain literal.
+
+physical18459-complete-disposition-coverage.json maps every original interval to gap-free outcome spans. physical294-evidence-backed-unresolved-dispositions.json gives the exact original questions, source values and body associations. The original interval extraction and unchanged current question file are included to make the coverage check portable. Prior positive-body groups and public completion records retain immutable identities; this packet does not imply their underlying uncertainties were eliminated.
+
+Review scope is the original issue1880 physical package only. The repair and source-conflict packages remain separate. No repair/native/map-fixed count increases, final selector, package policy, scientific source priority or deployment is changed.
