@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import fsSync, {constants} from 'node:fs';
 import path from 'node:path';
-import {fileURLToPath, pathToFileURL} from 'node:url';
+import {fileURLToPath} from 'node:url';
 import {spawn, spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {loadPackageInputs, validatePackageInputs, containsPackagePath} from './package-inputs.mjs';
@@ -146,19 +146,6 @@ export function inspectPackageInputs(root, definition) {
     materialized_bytes: materialized.reduce((n, row) => n + row.bytes, 0), missing_objects: missingObjects, errors};
 }
 
-export function inspectPackageAncestry(root, definition, requiredAncestors = []) {
-  const errors = [], ancestors = [...requiredAncestors];
-  // Only caller-required ancestry is checked. Historical qualified-source
-  // custody does not require a full ancestor graph in an ordinary shallow CI
-  // package checkout; its existing immutable reader authenticates those pins.
-  for (const commit of new Set(ancestors)) {
-    if (!/^[a-f0-9]{40}$/.test(commit ?? '')) { errors.push({kind: 'source-ancestry', detail: 'Invalid required ancestor'}); continue; }
-    const result = spawnSync('git', ['-C', root, '-c', 'protocol.allow=never', 'merge-base', '--is-ancestor', commit, 'HEAD'], {env: gitEnv(), encoding: 'utf8', timeout: 30000});
-    if (result.error || result.status !== 0) errors.push({kind: 'source-ancestry', commit, detail: result.error?.message ?? (result.status === 1 ? 'Not an ancestor of HEAD' : result.stderr.trim())});
-  }
-  return {required_ancestors: [...new Set(ancestors)], errors};
-}
-
 export function inspectPackageExecutionInputs(root, definition, kind = 'cloudflare') {
   if (!['static', 'hosted', 'cloudflare'].includes(kind)) throw Error('Unknown package build');
   const errors = [];let files = [];
@@ -221,31 +208,16 @@ export function inspectPackageRuntime(root, {python = 'python3'} = {}) {
   return {...result, errors};
 }
 
-export async function inspectPackageBrowser(root, mode = 'probe') {
-  if (!['probe', 'required', 'off'].includes(mode)) throw Error('Browser mode must be probe, required or off');
-  if (mode === 'off') return {mode, status: 'not-requested', limitation: 'No browser capability or GPU/Canvas check performed', errors: []};
-  try {
-    // Use the installed locked Playwright only. Never npx or download a browser.
-    const module = path.join(root, 'node_modules/playwright/index.mjs');
-    const source = `import {chromium} from ${JSON.stringify(pathToFileURL(module).href)};const browser=await chromium.launch({headless:true,timeout:5000});try{console.log(JSON.stringify({version:browser.version()}));}finally{await browser.close();}`;
-    const observed = JSON.parse(command(process.execPath, ['--input-type=module', '-e', source], {cwd: root, timeout: 10000, maxBuffer: 64 * 1024}));
-    return {mode, status: 'available', ...observed, limitation: 'Launch capability only; actual GPU/Canvas assertions remain separate', errors: []};
-  } catch (error) {
-    const detail = error.message.slice(0, 1600);
-    return {mode, status: 'unavailable', detail, errors: mode === 'required' ? [{kind: 'browser-capability', detail}] : []};
-  }
-}
-
-export async function preflightPackageBuild({root = process.cwd(), kind = 'cloudflare', browser = 'probe', python = 'python3', requiredAncestors = []} = {}) {
+export async function preflightPackageBuild({root = process.cwd(), kind = 'cloudflare', python = 'python3'} = {}) {
   const started = performance.now();
   root = fsSync.realpathSync(root);
   const definition = loadPackageInputs(root);
-  const inputs = inspectPackageInputs(root, definition), ancestry = inspectPackageAncestry(root, definition, requiredAncestors);
+  const inputs = inspectPackageInputs(root, definition);
   const execution = inspectPackageExecutionInputs(root, definition, kind);
-  const runtime = inspectPackageRuntime(root, {python}), browserCapability = await inspectPackageBrowser(root, browser);
-  const errors = [...inputs.errors, ...ancestry.errors, ...execution.errors, ...runtime.errors, ...browserCapability.errors];
+  const runtime = inspectPackageRuntime(root, {python});
+  const errors = [...inputs.errors, ...execution.errors, ...runtime.errors];
   return {version: 1, kind: 'package-build-preflight', passed: errors.length === 0, input_definition_sha256: sha(fsSync.readFileSync(path.join(root, '.github/package-inputs.json'))),
-    inputs, ancestry, execution, runtime, browser: browserCapability, errors, elapsed_seconds: (performance.now() - started) / 1000,
+    inputs, execution, runtime, errors, elapsed_seconds: (performance.now() - started) / 1000,
     limitation: 'Availability and runtime preflight only. Existing authenticated package/selected readers and applicable hosted tests remain authoritative; no scientific producer, fetch or installation invoked.'};
 }
 

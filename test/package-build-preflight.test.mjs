@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
-import {inspectPackageInputs, inspectPackageAncestry, inspectPackageRuntime, inspectPackageBrowser, inspectPackageExecutionInputs, preflightPackageBuild, requirePackagePreflight} from '../scripts/package-build-preflight.mjs';
+import {inspectPackageInputs, inspectPackageRuntime, inspectPackageExecutionInputs, preflightPackageBuild, requirePackagePreflight} from '../scripts/package-build.mjs';
 import {loadPackageInputs, containsPackagePath} from '../scripts/package-inputs.mjs';
 import {runPackageBuild} from '../scripts/package-build.mjs';
 
@@ -32,11 +32,15 @@ function fixture(t) {
   return {root, write, git, definition, python};
 }
 
-test('complete local object/materialization, ancestry and runtime preflight passes without downloads', async t => {
+test('complete input and runtime preflight passes without downloading or launching a browser', async t => {
   const f = fixture(t);
-  const report = await preflightPackageBuild({root: f.root, python: f.python, browser: 'off', requiredAncestors: [f.git('rev-parse', 'HEAD')]});
+  const browserLaunch = path.join(f.root, 'browser-launched');
+  f.write('node_modules/playwright/index.mjs', `import fs from 'node:fs';fs.writeFileSync(${JSON.stringify(browserLaunch)}, 'unexpected');throw Error('Browser probe must not run');`);
+  const report = await preflightPackageBuild({root: f.root, python: f.python});
   assert.equal(report.passed, true, JSON.stringify(report.errors));
-  assert.equal(report.runtime.npm_packages, 1); assert.equal(report.browser.status, 'not-requested');
+  assert.equal(report.runtime.npm_packages, 1);
+  assert.equal(fs.existsSync(browserLaunch), false);
+  assert.equal(Object.hasOwn(report, 'browser'), false);
   assert(report.inputs.committed_files >= 6); assert.equal(requirePackagePreflight(report), report);
 });
 
@@ -55,23 +59,16 @@ test('one pass reports all missing blobs and materialized inputs rather than fet
   assert.equal(fs.readdirSync(path.join(f.root, 'src')).length, 0);
 });
 
-test('missing declared paths, nonordinary input and unknown ancestry are reported together', async t => {
+test('missing declared paths and nonordinary inputs are reported together', async t => {
   const f = fixture(t);
   fs.unlinkSync(path.join(f.root, 'src/first.txt')); fs.symlinkSync('../package.json', path.join(f.root, 'src/first.txt'));
   fs.unlinkSync(path.join(f.root, 'requirements.txt'));
-  const report = await preflightPackageBuild({root: f.root, python: f.python, browser: 'off', requiredAncestors: ['f'.repeat(40)]});
+  const report = await preflightPackageBuild({root: f.root, python: f.python});
   assert.equal(report.passed, false);
   assert(report.errors.some(x => x.path === 'src/first.txt' && x.detail === 'symlink'));
   assert(report.errors.some(x => x.path === 'requirements.txt'));
-  assert(report.errors.some(x => x.kind === 'source-ancestry'));
 });
 
-test('known accepted source must be an actual ancestor, not merely a present commit', t => {
-  const f = fixture(t), first = f.git('rev-parse', 'HEAD');
-  f.write('src/third.txt', 'third'); f.git('add', '.'); f.git('-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '-qm', 'later');
-  const later = f.git('rev-parse', 'HEAD'); f.git('checkout', '-q', first);
-  assert.equal(inspectPackageAncestry(f.root, f.definition, [later]).errors[0].detail, 'Not an ancestor of HEAD');
-});
 
 test('lock mismatch and all Python import failures appear before a build', t => {
   const f = fixture(t);
@@ -89,12 +86,6 @@ test('platform-compatible optional runtime missing from npm installation fails',
   assert(inspectPackageRuntime(f.root, {python: f.python}).errors.some(x => x.path === 'node_modules/native-required'));
 });
 
-test('unavailable browser remains an explicit limit, and required-browser mode fails', async t => {
-  const f = fixture(t);
-  const probe = await inspectPackageBrowser(f.root, 'probe'), required = await inspectPackageBrowser(f.root, 'required');
-  assert.equal(probe.status, 'unavailable'); assert.equal(probe.errors.length, 0);
-  assert.equal(required.status, 'unavailable'); assert.equal(required.errors.length, 1);
-});
 
 test('failed preflight never starts image copying/build or alters prior output', async t => {
   const f = fixture(t); f.write('dist/previous', 'preserved'); let launched = false;
@@ -114,20 +105,10 @@ test('actual current package import closure rejects an undeclared new helper bef
   const actual = inspectPackageExecutionInputs(root, definition);
   assert.equal(actual.errors.length, 0, JSON.stringify(actual.errors));
   assert(actual.files.includes('scripts/package-build.mjs'));
-  assert(!actual.files.includes('scripts/package-build-preflight.mjs'));
   const missing = inspectPackageExecutionInputs(root, {...definition, inputs: definition.inputs.filter(x => x !== 'scripts/package-inputs.mjs')});
   assert(missing.errors.some(x => x.kind === 'execution-declaration' && x.path === 'scripts/package-inputs.mjs'));
 });
 
-test('CLI preserves occupied and dangling-symlink report destinations', t => {
-  const f = fixture(t), entry = path.resolve('scripts/package-build-preflight.mjs'), out = path.join(f.root, 'result.json');
-  fs.writeFileSync(out, 'sentinel');
-  assert.throws(() => execFileSync(process.execPath, [entry, '--root', f.root, '--out', out], {stdio: 'pipe'}));
-  assert.equal(fs.readFileSync(out, 'utf8'), 'sentinel');
-  fs.unlinkSync(out); fs.symlinkSync('absent', out);
-  assert.throws(() => execFileSync(process.execPath, [entry, '--root', f.root, '--browser', 'off', '--python', f.python, '--out', out], {stdio: 'pipe'}));
-  assert.equal(fs.readlinkSync(out), 'absent'); assert.equal(fs.existsSync(path.join(f.root, 'absent')), false);
-});
 
 test('all actual package entries expose their complete declared current import closures',()=>{
  const root=process.cwd(),definition=loadPackageInputs(root);
