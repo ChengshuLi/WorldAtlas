@@ -2010,7 +2010,8 @@ test('selected-data role walk binds the optional completed constructor as a cons
  const f=sourceTargetRoleFixture(),entry=f.registryBody.entries.at(-1);
  const completed=f.put(prefix+'reviewed-constructor-result.json',{kind:'fixture-result'});
  entry.completed_constructor=completed;refreshPins(f);
- f.definition.inputs.push(completed.path);f.put('.github/package-inputs.json',f.definition);
+ f.files=[...f.authored.entries].filter(([name,row])=>f.baseline.entries.get(name)?.sha!==row.sha)
+  .map(([filename])=>({filename,status:f.baseline.entries.has(filename)?'modified':'added'}));
  const diagnostics={};assert.equal((await f.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
  f.authored.entries.delete(completed.path);assert.equal(await f.run(),null);
 });
