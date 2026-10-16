@@ -1965,3 +1965,15 @@ test('historical and prospective expectations are inert, while one complete curr
   f.put(f.packetPrefix+'selected-delivery-expectations.json', {...f.expected, cohorts:[]});
   assert.equal(await f.run(), null, 'an incomplete current roster is never supporting custody');
 });
+
+test('selected-data role walk requires the exact new provider-adoption leaf and reuses complete family parts',async()=>{
+ const setup=({f,roles})=>{roles.adopted_provider_families=f.leaf('adopted-provider-families.json');};
+ const f=sourceTargetRoleFixture({mutateRoles:setup}),diagnostics={};
+ assert.equal((await f.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
+ for(const defect of ['missing','wrong-oid']){
+  const broken=sourceTargetRoleFixture({mutateRoles:args=>{setup(args);
+   if(defect==='missing')args.f.authored.entries.delete(args.roles.adopted_provider_families.path);
+   else args.roles.adopted_provider_families.git_blob_oid='0'.repeat(40);
+  }});assert.equal(await broken.run(),null,defect);
+ }
+});

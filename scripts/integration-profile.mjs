@@ -632,6 +632,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
           &&Array.isArray(evidence.families)&&evidence.families.length>0&&Array.isArray(evidence.targets)&&evidence.targets.length>0,
           'missing source-target evidence roles');
         for (const role of ['catalogue','physical_evidence','physical_input','owner_roster','native_latitudes']) pin(evidence[role]);
+        if(evidence.adopted_provider_families!==undefined)pin(evidence.adopted_provider_families);
         await physicalReproduction(evidence.physical_reproduction);
         if(evidence.version===3){
           const adoption=await pinnedJSON(evidence.revised_source_adoption);

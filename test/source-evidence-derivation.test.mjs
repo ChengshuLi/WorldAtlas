@@ -317,3 +317,13 @@ test('cold Git fixture reconstructs all baseline fields and scientific claims wi
   await assert.rejects(sourceEvidence(invalid, pinReader(root)), /Supplied source evidence changes accepted baseline/,
     'a present contaminated contract must fail through the real Git reader');
 });
+
+test('source preparation authenticates the exact provider-adoption leaf without rewriting source claims',async()=>{
+ const f=fixture(),pin=f.reader.add(prefix+'provider-adoption.json',{version:1,kind:'adopted-provider-source-families-v1',families:[]});
+ f.config.source_evidence.adopted_provider_families=pin;
+ const before=structuredClone(f.config),actual=await result(f);
+ assert.deepEqual(withoutBaseline(actual),before.source_evidence);
+ assert.ok(f.reader.reads.includes(pin.path));assert.deepEqual(f.config,before);
+ f.config.source_evidence.adopted_provider_families={...pin,sha256:'0'.repeat(64)};
+ await assert.rejects(result(f),/Whole pin identity differs/);
+});

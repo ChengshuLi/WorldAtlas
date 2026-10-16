@@ -884,6 +884,64 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   }
   return value;
  };
+ // New provider applicability is an explicit accepted-tree decision, never an
+ // extension of the frozen original catalogue or an authored owner guess.
+ // The complete product is also an existing family-part read role, so this
+ // closed document introduces no hidden recursive scientific operands.
+ const adoptedFamilies=new Map();
+ if(evidence.adopted_provider_families!==undefined){
+  demand(!revised,'Revised source evidence cannot combine provider-family adoption');
+  const data=readAdopted(evidence.adopted_provider_families,'Adopted provider families');
+  demand(keys(data,'version,kind,families')&&data.version===1&&data.kind==='adopted-provider-source-families-v1'
+   &&Array.isArray(data.families)&&data.families.length>0,'Incomplete adopted provider families');
+  for(const family of data.families){
+   demand(keys(family,'source_id,product,feature_count,id_property,id_prefix,bindings')
+    &&typeof family.source_id==='string'&&family.source_id&&!adoptedFamilies.has(family.source_id)
+    &&!catalogue.products.some(product=>product.key===family.source_id)
+    &&Number.isSafeInteger(family.feature_count)&&family.feature_count>0
+    &&typeof family.id_property==='string'&&family.id_property
+    &&typeof family.id_prefix==='string'&&family.id_prefix.startsWith(family.source_id+':')
+    &&Array.isArray(family.bindings)&&family.bindings.length>0,'Invalid or conflicting adopted provider family');
+   const declared=evidence.families.filter(item=>item.source_id===family.source_id);
+   demand(declared.length===1&&same(declared[0].parts,[family.product]),
+    'Adopted provider product differs from complete family read role');
+   const product=JSON.parse(read(family.product));
+   demand(product.type==='FeatureCollection'&&Array.isArray(product.features)
+    &&product.features.length===family.feature_count,'Incomplete adopted provider member roster');
+   const originals=new Map(),ordinals=new Map(),bindings=new Map();
+   for(const [ordinal,feature]of product.features.entries()){
+    const property=feature.properties?.[family.id_property];
+    demand(feature.type==='Feature'&&(typeof property==='string'&&property
+     ||Number.isSafeInteger(property)),'Missing adopted provider member property');
+    const id=family.id_prefix+property;
+    demand(!originals.has(id),'Duplicate adopted provider source identity');
+    coordinateBounds(feature.geometry);originals.set(id,feature);ordinals.set(id,ordinal);
+   }
+   for(const binding of family.bindings){
+    demand(keys(binding,'source_id,feature_ordinal,source_property,properties_sha256,geometry_sha256,target_id,pixelIndex,base_geometry_sha256,decision,scope')
+     &&typeof binding.source_id==='string'&&!bindings.has(binding.source_id)
+     &&Number.isSafeInteger(binding.feature_ordinal)&&binding.feature_ordinal>=0
+     &&hash(binding.properties_sha256)&&hash(binding.geometry_sha256)&&hash(binding.base_geometry_sha256)
+     &&typeof binding.decision==='string'&&binding.decision.trim()
+     &&Array.isArray(binding.scope)&&binding.scope.length>0,'Incomplete adopted provider binding');
+    const original=originals.get(binding.source_id),accepted=canonicalOwners.get(binding.target_id);
+    demand(original&&ordinals.get(binding.source_id)===binding.feature_ordinal
+     &&same(original.properties[family.id_property],binding.source_property)
+     &&valueSha(original.properties)===binding.properties_sha256&&valueSha(original.geometry)===binding.geometry_sha256,
+    'Adopted provider source member identity differs');
+    demand(accepted&&owners.get(binding.target_id)===binding.pixelIndex
+     &&valueSha(accepted.geometry)===binding.base_geometry_sha256,'Adopted provider canonical target differs');
+    const scope=new Set();
+    for(const point of binding.scope){
+     demand(keys(point,'y,x')&&Number.isSafeInteger(point.y)&&point.y>=0&&point.y<262166
+      &&Number.isSafeInteger(point.x)&&point.x>=0&&point.x<262166&&!scope.has(point.y+':'+point.x),
+     'Invalid or duplicate adopted provider native key');scope.add(point.y+':'+point.x);
+    }
+    bindings.set(binding.source_id,{...binding,scope,id:binding.target_id,feature:accepted});
+   }
+   adoptedFamilies.set(family.source_id,{product,originals,ordinals,bindings});
+  }
+ }
  const datedCentres=[];
  if(dated){
   const data=readAdopted(evidence.dated_land_support,'Dated land support');
@@ -1156,47 +1214,64 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
  // county geometry or relax the v1/v2 original-source join.
  const revision = revised ? readAdoptedOsmRevision({evidence,proposed,owners,latitudes,
   read,readAdopted,reader,physicalInputs,keys}) : null;
- const checked=new Set(),families=new Set(),physicalContextHits=[];
+ const checked=new Set(),families=new Set(),physicalContextHits=[],providerCompetitors=[],providerVetoes=[];
+ for(const [source_family,adopted]of adoptedFamilies)for(const [source_id,feature]of adopted.originals){
+  const bound=adopted.bindings.has(source_id);
+  const veto_targets=[...resolvedTargets.values()].filter(target=>!bound||target.source_family!==source_family)
+   .map(target=>({target_id:target.id,pixelIndex:target.pixelIndex}));
+  if(!veto_targets.length)continue;
+  const identity={source_family,source_id,feature_ordinal:adopted.ordinals.get(source_id),geometry_sha256:valueSha(feature.geometry)};
+  const product=evidence.families.find(family=>family.source_id===source_family).parts[0];
+  providerCompetitors.push({...identity,veto_targets});
+  providerVetoes.push({...identity,veto_targets,geometry:feature.geometry,operand_sha256:valueSha({product,...identity})});
+ }
  for(const family of evidence.families){
   demand(typeof family.source_id==='string'&&!families.has(family.source_id),'Duplicate source family');families.add(family.source_id);
+  const adopted=adoptedFamilies.get(family.source_id);
   const record=catalogue.products.find(product=>product.key===family.source_id);
   demand(revised?same(family.parts,[revision.stagePin])&&family.source_id===revision.sourceId
-   :record&&family.parts.length===record.parts.length,'Missing complete original or adopted source family');
-  const product=revised?revision.product:readCompleteSource(family.parts,record);
-  const originals=new Map();
-  for(const feature of product.features){
+   :adopted||record&&family.parts.length===record.parts.length,'Missing complete original or adopted source family');
+  const product=adopted?.product??(revised?revision.product:readCompleteSource(family.parts,record));
+  const originals=adopted?.originals??new Map();
+  if(!adopted)for(const feature of product.features){
    const sourceId=revised?feature.id:feature.properties?.shapeID;
    const id=revised?sourceId:family.source_id+':'+sourceId;
    demand(typeof sourceId==='string'&&sourceId&&!originals.has(id),
     'Duplicate or missing original source feature identity');originals.set(id,feature);
   }
-  const resolve=id=>revised?revision.resolve(id):reconcile(id,originals);
+  const resolve=id=>adopted?adopted.bindings.get(id):revised?revision.resolve(id):reconcile(id,originals);
   const selected=evidence.targets.filter(target=>target.source_family===family.source_id);
   demand(selected.length>0,'Unused source family');
+  const selectedOwners=new Set(selected.map(t=>t.pixelIndex));
+  if(adopted)for(const binding of adopted.bindings.values())if(selectedOwners.has(binding.pixelIndex)){
+   for(const row of rowsByOwner.get(binding.pixelIndex)??[])for(const run of row.runs)for(let x=run[0];x<run[1];x++)
+    demand(binding.scope.has(row.y+':'+x),'Requested native key lacks adopted provider member applicability');
+  }
   for(const target of selected){const original=originals.get(target.id),owner=resolve(target.id);
    const measured=physicalInputs.filter(input=>input.target===target.id);
-   demand(owner.id===(target.target_id??target.id)&&owner.pixelIndex===target.pixelIndex,
+   demand(owner&&owner.id===(target.target_id??target.id)&&owner.pixelIndex===target.pixelIndex,
     'Source member differs from accepted target mapping');
    demand(!owner.feature||same(owner.feature.geometry,target.base_geometry),'Accepted aggregate base geometry differs');
    demand(original&&measured.length===1&&same(measured[0].consumed.geometry,original.geometry)
+    &&(!adopted||same(measured[0].consumed,original))
     &&measured[0].selected.id===owner.id&&same(measured[0].selected.geometry,target.base_geometry),
     'Physical source query or selected target differs from measured whole inputs');
   }
   // A retained measured sibling cannot escape its owner's veto by being
   // omitted from the positive selected-target roster. Its complete source and
   // canonical base joins remain mandatory; it supplies no borrowed coverage.
-  const selectedOwners=new Set(selected.map(t=>t.pixelIndex));
   for(const [id,original]of originals)if(!targets.has(id)){
-   const candidateOwner=selectedOwners.has(revised?resolve(id).pixelIndex:owners.get(id))
+   const candidateOwner=adopted?selectedOwners.has(adopted.bindings.get(id)?.pixelIndex):selectedOwners.has(revised?resolve(id).pixelIndex:owners.get(id))
     ||(memberOwners.get(id)??[]).some(change=>selected.some(t=>(t.target_id??t.id)===change.id));
    if(!candidateOwner)continue;
    const measured=physicalInputs.filter(input=>input.target===id);
    const results=physical.results.filter(result=>result.target===id);
-   if(!measured.length&&!results.length)continue;
+   if(!adopted&&!measured.length&&!results.length)continue;
    const owner=resolve(id),target=resolvedTargets.get(owner.id);
    demand(selectedOwners.has(owner.pixelIndex)&&target
     &&measured.length===1&&results.length===1,'Missing or duplicate measured sibling physical interpretation');
    demand(same(measured[0].consumed.geometry,original.geometry)&&measured[0].selected.id===owner.id
+    &&(!adopted||same(measured[0].consumed,original))
     &&same(measured[0].selected.geometry,target.base_geometry)
     &&(!owner.feature||same(owner.feature.geometry,target.base_geometry)),
    'Measured sibling differs from complete original or accepted owner base');
@@ -1215,8 +1290,9 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   const bounds=selected.flatMap(target=>coordinateBounds(datedCentres.some(p=>p.source_id===target.id)
    ?originals.get(target.id).geometry:target.coverage_geometry));
   const intersects=(a,b)=>a[0]<=b[2]&&b[0]<=a[2]&&a[1]<=b[3]&&b[1]<=a[3];
-  const sourceFeatures=product.features.filter(feature=>coordinateBounds(feature.geometry).some(part=>bounds.some(box=>intersects(part,box))))
-   .map(feature=>{const id=revised?feature.id:family.source_id+':'+feature.properties.shapeID;
+  const sourceFeatures=[...originals].filter(([id,feature])=>(!adopted||adopted.bindings.has(id))
+    &&coordinateBounds(feature.geometry).some(part=>bounds.some(box=>intersects(part,box))))
+   .map(([id,feature])=>{
     const owner=resolve(id);
     return {id,target_id:owner.id,pixelIndex:owner.pixelIndex,geometry:feature.geometry};});
   const coverageFeatures=selected.filter(t=>t.coverage_geometry.coordinates.length).map(target=>({id:target.target_id??target.id,source_id:target.id,pixelIndex:target.pixelIndex,geometry:target.coverage_geometry}));
@@ -1224,6 +1300,14 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
    id:target.target_id??target.id,pixelIndex:target.pixelIndex,geometry,
    ...(evidence.territorial_applicability===undefined?{}:{source_id:target.id,negative_ordinal:ordinal,geometry_sha256:valueSha(geometry),
     operand_sha256:territorialOperands.get(JSON.stringify([target.id,ordinal]))})})));
+  for(const member of providerVetoes){
+   // This is a negative operand for an existing target, not a fabricated owner.
+   // It has no original negative ordinal and cannot match an applicability
+   // exception, including when another operand has identical geometry.
+   for(const target of member.veto_targets)if(selectedOwners.has(target.pixelIndex))exclusions.push({id:target.target_id,
+    pixelIndex:target.pixelIndex,geometry:member.geometry,provider_source_id:member.source_id,
+    negative_ordinal:null,geometry_sha256:member.geometry_sha256,operand_sha256:member.operand_sha256});
+  }
   // Qualification requires coverage; discard only whole exclusions proven
   // disjoint from every complete coverage part. Keep diagnostic reasons intact.
   if(!diagnostic&&evidence.territorial_applicability===undefined)exclusions=exclusions.filter(feature=>coordinateBounds(feature.geometry)
@@ -1299,6 +1383,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
     ownerRows:Array.from({length:rowEnd-rowStart},(_,i)=>({y:rowStart+i,complete_owner_intervals:[]}))});
    for(const hit of allowed.territorial_contacts??[])territorialContextHits.push({...hit,
     target_id:exclusions[hit.exclusion_index].id,negative_ordinal:exclusions[hit.exclusion_index].negative_ordinal,
+    ...(exclusions[hit.exclusion_index].provider_source_id?{provider_source_id:exclusions[hit.exclusion_index].provider_source_id}:{}),
     original_source:territorialApplicability.find(record=>record.source_id===hit.source_id
      &&record.pixelIndex===hit.pixelIndex&&record.y===hit.y&&record.x===hit.x
      &&record.operand_sha256===hit.operand_sha256)?.original_source});
@@ -1365,6 +1450,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
    supported_rows:supported,held_rows:held,decision_rows:decisions,first_failure:firstFailure,
    requested_cells:requested,supported_cells:supportedCells,held_cells:heldCells,
    original_pins:{source_evidence:binding.source_evidence,native_patch:binding.native_patch},
+   ...(adoptedFamilies.size?{provider_competitors:providerCompetitors}:{}),
    ...(dated?{physical_context_hits:physicalContextHits}:{}),
    ...(evidence.territorial_applicability===undefined?{}:{territorial_contacts:territorialContextHits}),
    rule_sha256:valueSha(preimage),native_contract:evidence.native_contract,
@@ -1386,6 +1472,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   scope_ids:ledgerRows.map(row=>row.component_id),rows:ledgerRows},source_rows:ledgerRows,
   native_proof:{native_contract:evidence.native_contract,native_patches:[{base_reference:evidence.base_reference,rows:proposed.rows}]},
   original_pins:{source_evidence:binding.source_evidence,native_patch:binding.native_patch},
+  ...(adoptedFamilies.size?{provider_competitors:providerCompetitors}:{}),
   ...(dated?{physical_context_hits:physicalContextHits}:{}),
   ...(evidence.territorial_applicability===undefined?{}:{territorial_contacts:territorialContextHits}),
   limitations:['Physical interpretation and semantic reconciliation are retained reviewed source evidence; actual current owner-zero is checked by native consumers.',

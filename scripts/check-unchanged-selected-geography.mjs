@@ -274,6 +274,7 @@ async function originalAuthority(reader, entry) {
       const indexes = array(fine.input_pins, 'revised-source-current-pins').filter(pin => pin.path === 'data/world-index.json');
       demand(indexes.length === 1, 'unsupported-revised-source-current-index'); reader.pinned(indexes[0]);
     }
+    if (evidence.adopted_provider_families !== undefined) reader.pinned(evidence.adopted_provider_families);
     for (const family of array(evidence.families, 'source-target-families')) {
       demand(typeof family?.source_id === 'string', 'unsupported-source-target-family');
       for (const pin of array(family.parts, 'source-target-parts')) reader.pinned(pin);

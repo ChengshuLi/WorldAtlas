@@ -1,9 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
 import {deriveSourceTargetNativeDelta,nativeRowLatitudes,nativePolygonIntervals,polygonParts,witnessCellEffects,validateWitnessGeometry} from '../src/native-grid.js';
 import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
 import {constructOriginalAuthority} from '../scripts/delivery-handoff-advance.mjs';
+import {valueSha,diagnoseSourceTargetNativeAuthority} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const rectangle=(left,right,bottom=-40,top=40)=>({type:'Polygon',coordinates:[[[left,bottom],[right,bottom],[right,top],[left,top],[left,bottom]]]});
 const feature=(id,pixelIndex,geometry,target_id)=>({id,pixelIndex,geometry,...(target_id?{target_id}:{})});
@@ -14,7 +16,8 @@ const digest=raw=>createHash('sha256').update(raw).digest('hex');
 const blob=raw=>createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
 const collection=features=>({type:'FeatureCollection',features});
 const rawFeature=(id,geometry)=>({type:'Feature',properties:{shapeID:id},geometry});
-function constructorFixture(change=()=>{}){
+const executingHead=execFileSync('git',['-c','protocol.allow=never','rev-parse','HEAD'],{encoding:'utf8'}).trim();
+function constructorFixture(change=()=>{},{changeAdoption=()=>{},forgeAdoption}={}){
   const first=rectangle(-.03,.006,-.02,.02),second=rectangle(.004,.03,-.02,.02);
   const cityGeometry={type:'MultiPolygon',coordinates:[first.coordinates,second.coordinates]};
   const direct=rectangle(.015,.06,-.02,.02);
@@ -32,10 +35,10 @@ function constructorFixture(change=()=>{}){
     membership:true};
   change(state);
   const files=new Map(),byBlob=new Map();
-  const put=(name,value)=>{
+  const put=(name,value,commit=version)=>{
     const raw=Buffer.isBuffer(value)?value:Buffer.from(JSON.stringify(value));
-    const pin={commit:version,path:name,mode:'100644',git_blob_oid:blob(raw),bytes:raw.length,sha256:digest(raw)};
-    files.set(name,{raw,pin});byBlob.set(pin.git_blob_oid,raw);return pin;
+    const pin={commit,path:name,mode:'100644',git_blob_oid:blob(raw),bytes:raw.length,sha256:digest(raw)};
+    files.set(commit+':'+name,{raw,pin});byBlob.set(pin.git_blob_oid,raw);return pin;
   };
   const source=put('original-source.json',collection(state.originals)),roster=put('owners.json',state.roster);
   const physical=put('physical.json',state.physical),measured=put('measured.json',state.measured);
@@ -45,17 +48,56 @@ function constructorFixture(change=()=>{}){
   const nativeLatitudes=put('latitudes.f64le',latitudeBytes);
   const membership={index:put('data/world-index.json',state.index),lineage:put('data/semantic-report.json',state.lineage),
     parts:[put('data/geography/part-0.json',state.accepted)]};
+  let adoption,provider,adopted,providerFamilies;
+  if(state.provider){
+    providerFamilies=(state.providers??[state.provider]).map((family,i)=>({family,
+      pin:put(i?'whole-provider-'+i+'.json':'whole-provider.json',collection(family.features))}));
+    provider=providerFamilies[0].pin;
+    adopted={version:1,kind:'adopted-provider-source-families-v1',families:providerFamilies.map(({family, pin})=>({
+      source_id:family.family,product:pin,feature_count:family.features.length,
+      id_property:family.id_property??'OBJECTID',id_prefix:family.id_prefix??family.family+':OBJECTID:',
+      bindings:family.bound.map(ordinal=>{
+        const feature=family.features[ordinal],property=feature.properties[family.id_property??'OBJECTID'];
+        const target_id=family.target_id??'city',pixelIndex=family.pixelIndex??1;
+        return {source_id:(family.id_prefix??family.family+':OBJECTID:')+property,
+          feature_ordinal:ordinal,source_property:property,
+          properties_sha256:valueSha(feature.properties),geometry_sha256:valueSha(feature.geometry),
+          target_id,pixelIndex,base_geometry_sha256:valueSha(state.accepted.features.find(f=>f.id===target_id).geometry),
+          decision:'Adopt this provider member for only these existing-target native keys; no native credit.',
+          scope:state.proposed.rows.flatMap(row=>row.runs.filter(run=>run[2]===pixelIndex)
+            .flatMap(run=>Array.from({length:run[1]-run[0]},(_,i)=>({y:row.y,x:run[0]+i}))))};
+      })}))};
+    changeAdoption(adopted,state);
+    adoption=put('adopted-provider-families.json',adopted);
+    put(adoption.path,adopted,executingHead);
+    if(forgeAdoption){const forged=structuredClone(adopted);forgeAdoption(forged);adoption=put(adoption.path,forged,'b'.repeat(40));}
+  }
+  let territorial;
+  if(state.territorial){
+    const decision=put('territorial-decision.json',{decision:'This original negative is contextual at only the adopted key.'});
+    const scope=put('territorial-scope.json',{record:{owner:1,y:state.proposed.rows[0].y,x:state.proposed.rows[0].runs[0][0]}});
+    const body={version:1,kind:'adopted-native-territorial-applicability-v1',provenance:[
+      {id:'decision',role:'adoption',pin:decision},{id:'scope',role:'scope',pin:scope},
+      {id:'original',role:'original-source',parts:[source]}],records:state.targets.map(target=>({
+       role:'contextual',source_id:target.id,target_id:'city',pixelIndex:1,y:state.proposed.rows[0].y,
+       x:state.proposed.rows[0].runs[0][0],negative_ordinal:0,geometry_sha256:valueSha(state.originals[0].geometry),
+       original_source:{id:'original',pointer:'/features/0/geometry'},adoption:{id:'decision',pointer:'/decision'},
+       scope:{id:'scope',pointer:'/record',owner_pointer:'/owner'}}))};
+    territorial=put('territorial-applicability.json',body);put(territorial.path,body,executingHead);
+  }
   const evidence=put('source-evidence.json',{version:1,kind:'source-target-native-evidence-v1',catalogue,
     owner_roster:roster,physical_evidence:physical,physical_input:measured,physical_reproduction:put('physical.py',Buffer.from('# retained fixture')),
     native_latitudes:nativeLatitudes,native_contract:{size,native_latitudes:nativeLatitudes,original_assets:{bounds:{sha256:roster.sha256}}},
-    base_reference:{id:'fixture-base'},families:[{source_id:family,parts:[source]}],
+    base_reference:{id:'fixture-base'},families:providerFamilies?.map(({family,pin})=>({source_id:family.family,parts:[pin]}))
+      ??[{source_id:family,parts:[source]}],
     targets:state.targets.map(target=>({...target,source_receipt_sha256:physical.sha256})),
-    ...(state.membership?{source_membership:membership}:{})});
+    ...(state.membership?{source_membership:membership}:{}),...(adoption?{adopted_provider_families:adoption}:{}),
+    ...(territorial?{territorial_applicability:territorial}:{})});
   const patch=put('patch.json',state.proposed);
   class FixtureReader extends ImmutableReader{
     git(...args){
       if(args[0]==='ls-tree'){
-        const name=args.at(-1),entry=files.get(name);assert.ok(entry,name);
+        const name=args.at(-1),entry=files.get(args[2]+':'+name);assert.ok(entry,name);
         return Buffer.from(`100644 blob ${entry.pin.git_blob_oid}\t${name}\0`);
       }
       if(args[0]==='cat-file'&&args[1]==='-e')return Buffer.alloc(0);
@@ -66,7 +108,9 @@ function constructorFixture(change=()=>{}){
   }
   const reader=()=>new FixtureReader('.',version);
   const locators={source_evidence:{commit:version,path:evidence.path},native_patch:{commit:version,path:patch.path}};
-  return {run:()=>constructOriginalAuthority(reader(),locators),files,byBlob,membership,reader,state};
+  const binding={version:1,kind:'source-target-native-custody-v1',source_evidence:evidence,native_patch:patch};
+  return {run:(inputReader=reader())=>constructOriginalAuthority(inputReader,locators),files,byBlob,membership,reader,state,adopted,provider,
+    diagnose:()=>diagnoseSourceTargetNativeAuthority(reader(),{...binding,kind:'source-target-native-rule-v1'},binding)};
 }
 function directTarget(state,{membership=true,overlap=false}={}){
   const geometry=state.originals[2].geometry;
@@ -205,4 +249,140 @@ for(const mode of ['missing','null'])test('new general conflict refuses '+mode+'
  assert.throws(()=>constructorFixture(s=>{exactBoundaryTarget(s);conflict(s,'contradictory_land_water_support',off);
  if(mode==='missing')delete s.targets[0].territorial_exclusions;else s.targets[0].territorial_exclusions=null;
  }).run(),/requires explicit territorial exclusions/);
+});
+
+// A complete, synthetic government family. Provider IDs have no original native
+// owners; only two explicitly adopted members share the existing canonical city.
+const providerFamily='government:TST:district',providerA=providerFamily+':OBJECTID:7',providerB=providerFamily+':OBJECTID:19';
+function providerSetup(s,{single=false,full=false}={}){
+ const geometry=rectangle(-90.03,-89.97,-.02,.02),base=rectangle(-90.02,-89.98,-.02,.02);
+ const sourceFamily=full?'gb-full:TST:ADM2:variant':providerFamily;
+ const id=ordinal=>full?sourceFamily+':'+['A','B','C'][ordinal]:sourceFamily+':OBJECTID:'+([7,19,32][ordinal]);
+ const features=[geometry,structuredClone(geometry),rectangle(-89.9,-89.8,-.02,.02)]
+  .map((geometry,i)=>full?rawFeature(['A','B','C'][i],geometry):
+   {type:'Feature',id:[7,19,32][i],properties:{OBJECTID:[7,19,32][i],name:['one','duplicate sibling','unmapped neighbor'][i]},geometry});
+ s.provider={family:sourceFamily,features,bound:[0,1],...(full?{id_property:'shapeID',id_prefix:sourceFamily+':'}:{})};
+ s.targets=[0,1].map(i=>({id:id(i),target_id:'city',pixelIndex:1,source_family:sourceFamily,
+  base_geometry:base,coverage_classes:['mapped_land_support'],territorial_exclusions:[]}));
+ s.accepted=collection([{type:'Feature',id:'city',geometry:base,properties:{metadata:{source_member_ids:[a,b]}}}]);
+ s.physical.results=[0,1].map(i=>({target:id(i),issues:[],support:{mapped_land_support:features[i].geometry}}));
+ s.measured=[0,1].map(i=>({target:id(i),consumed:features[i],selected:{id:'city',geometry:base}}));
+ s.proposed.rows=[{y,runs:[[x,x+1,1]]}];
+ if(single)s.targets=s.targets.slice(0,1);
+}
+test('actual constructor admits distinct provider and full-variant IDs only through adopted current canonical bindings',()=>{
+ for(const full of [false,true]){
+  const f=constructorFixture(s=>providerSetup(s,{full})),before=structuredClone(f.state),reader=f.reader();
+  const result=f.run();assert.equal(result.ledger_rows[0].target_id,'city');assert.equal(result.ledger_rows[0].native_cells,1);
+  assert.deepEqual(f.state,before);
+  const report=f.diagnose();assert.equal(report.supported_cells,1);
+  assert.deepEqual(report.provider_competitors.map(item=>[item.source_id,item.feature_ordinal,item.veto_targets]),
+   [[full?'gb-full:TST:ADM2:variant:C':providerFamily+':OBJECTID:32',2,[{target_id:'city',pixelIndex:1}]]]);
+  // Whole provider, canonical part and adopted decision are real consumed roles.
+  f.run(reader);
+  for(const path of ['whole-provider.json','adopted-provider-families.json','data/geography/part-0.json'])
+   assert.equal(reader.inventory.get(version+':'+path).whole_body_consumed,true,path);
+ }
+ assert.throws(()=>constructorFixture(s=>{providerSetup(s);s.membership=false;}).run(),/canonical target/);
+ assert.throws(()=>constructorFixture(s=>{providerSetup(s);for(const target of s.targets)target.base_geometry=s.provider.features[0].geometry;
+  for(const input of s.measured)input.selected.geometry=s.provider.features[0].geometry;}).run(),/base geometry/);
+});
+for(const [name,change]of Object.entries({
+ 'wrong source':b=>b.source_id=providerFamily+':OBJECTID:99',
+ 'wrong ordinal':b=>b.feature_ordinal=2,
+ 'wrong source property':b=>b.source_property=8,
+ 'wrong properties':b=>b.properties_sha256='0'.repeat(64),
+ 'wrong geometry':b=>b.geometry_sha256='0'.repeat(64),
+ 'wrong target':b=>b.target_id='other-city',
+ 'wrong owner':b=>b.pixelIndex=3,
+ 'wrong canonical geometry':b=>b.base_geometry_sha256='0'.repeat(64),
+ 'empty decision':b=>b.decision=' ',
+ 'unadopted key':b=>b.scope[0].x++,
+ 'duplicate key':b=>b.scope.push({...b.scope[0]}),
+ 'extra scope field':b=>b.scope[0].owner=1
+}))test('adopted provider refuses '+name,()=>{
+ assert.throws(()=>constructorFixture(providerSetup,{changeAdoption:d=>change(d.families[0].bindings[0])}).run(),
+  /adopted provider|Adopted provider|canonical target/i);
+});
+test('accepted provider decision cannot be coherently forged through the caller reader version',()=>{
+ assert.throws(()=>constructorFixture(providerSetup,{forgeAdoption:d=>d.families[0].bindings[0].scope[0].x++}).run(),
+  /executing accepted input/);
+});
+test('complete provider member count, product read role and source identity are mandatory',()=>{
+ for(const mutate of [
+  d=>d.families[0].feature_count--,
+  d=>d.families[0].product={...d.families[0].product,path:'subset.json'},
+  d=>d.families[0].source_id=family,
+  d=>d.families[0].id_prefix='invented:',
+  d=>d.families[0].bindings.push({...d.families[0].bindings[0]})
+ ])assert.throws(()=>constructorFixture(providerSetup,{changeAdoption:mutate}).run(),/provider|family|read role/i);
+ const missing=constructorFixture(providerSetup),raw=Buffer.from(JSON.stringify(collection(missing.state.provider.features.slice(0,2))));
+ missing.byBlob.set(missing.provider.git_blob_oid,raw);
+ assert.throws(()=>missing.run(),/whole|identity|body|hash|length/i);
+ assert.throws(()=>constructorFixture(s=>{providerSetup(s);s.provider.features[2].properties.OBJECTID=7;}).run(),/Duplicate adopted provider source identity/);
+ assert.throws(()=>constructorFixture(s=>{providerSetup(s);s.measured[0].consumed=structuredClone(s.measured[0].consumed);
+  s.measured[0].consumed.properties.name='wrong consumed member';}).run(),/measured whole inputs/);
+});
+for(const boundary of [false,true])test('unmapped whole provider member retains '+(boundary?'boundary':'interior')+' veto and its real source identity',()=>{
+ const f=constructorFixture(s=>{providerSetup(s);s.provider.features[2].geometry=rectangle(boundary?-90:-90.01,-89.99,-.01,.01);});
+ assert.throws(()=>f.run(),/unique source-target coverage/);
+ const report=f.diagnose();assert.equal(report.held_cells,1);
+ assert.equal(report.provider_competitors[0].source_id,providerFamily+':OBJECTID:32');
+ assert.equal(report.decision_rows[0].runs[0][3],boundary?'boundary_cells':'territorial_exclusion_cells');
+});
+test('both duplicate provider siblings remain measured when one is omitted from positive evidence',()=>{
+ const clean=constructorFixture(s=>providerSetup(s,{single:true}));assert.equal(clean.run().ledger_rows[0].native_cells,1);
+ for(const defect of ['both-physical-roles','result','input','unbound']){
+  const f=constructorFixture(s=>{providerSetup(s,{single:true});
+   if(defect==='both-physical-roles'){s.physical.results.pop();s.measured.pop();}
+   if(defect==='result')s.physical.results.pop();if(defect==='input')s.measured.pop();
+   if(defect==='unbound')s.provider.bound.pop();
+  });assert.throws(()=>f.run(),/sibling physical interpretation|unique source-target coverage/);
+ }
+ const veto=constructorFixture(s=>{providerSetup(s,{single:true});
+  conflict(s,'contradictory_land_water_support',{type:'MultiLineString',coordinates:[[[-90.01,latitude],[-89.99,latitude]]]},1);
+ });assert.throws(()=>veto.run(),/physical reconstruction residual or conflict witness/);
+ const residual=constructorFixture(s=>{providerSetup(s);withResiduals(s,[['extra_reconstruction',rectangle(-90.01,-89.99,-.01,.01)]]);});
+ assert.throws(()=>residual.run(),/physical reconstruction residual or conflict witness/);
+ const noBorrow=constructorFixture(s=>{providerSetup(s,{single:true});s.provider.features[0].geometry=rectangle(-89.99,-89.97,-.02,.02);});
+ assert.throws(()=>noBorrow.run(),/unique source-target coverage/);
+});
+
+test('a contextual original negative cannot clear an identical unmapped provider competitor',()=>{
+ const setup=s=>{providerSetup(s);s.territorial=true;
+  s.originals[0].geometry=rectangle(-90.01,-89.99,-.01,.01);
+  for(const target of s.targets)target.territorial_exclusions=[s.originals[0].geometry];
+ };
+ const clean=constructorFixture(setup);assert.equal(clean.run().ledger_rows[0].native_cells,1);
+ const held=constructorFixture(s=>{setup(s);s.provider.features[2].geometry=structuredClone(s.originals[0].geometry);});
+ assert.throws(()=>held.run(),/unique source-target coverage/);
+ const diagnostic=held.diagnose();assert.equal(diagnostic.held_cells,1);
+ const contacts=diagnostic.territorial_contacts.filter(hit=>hit.provider_source_id===providerFamily+':OBJECTID:32');
+ assert.ok(contacts.length>0);assert.ok(contacts.every(hit=>hit.resolution==='retained-territorial-veto'&&hit.negative_ordinal===null));
+});
+
+function twoProviderFamilies(s){
+ providerSetup(s);s.provider.features[2].geometry=rectangle(-89.7,-89.6,-.02,.02);
+ const family='government:TST:other',geometry=rectangle(-89.88,-89.82,-.02,.02);
+ const features=[geometry,rectangle(-89.4,-89.3,-.02,.02)].map((geometry,i)=>({type:'Feature',id:201+i,
+  properties:{OBJECTID:201+i},geometry}));
+ const other={family,features,bound:[0],target_id:'other-city',pixelIndex:3};s.providers=[s.provider,other];
+ s.accepted.features.push({type:'Feature',id:'other-city',geometry,properties:{}});
+ const id=family+':OBJECTID:201';
+ s.targets.push({id,target_id:'other-city',pixelIndex:3,source_family:family,base_geometry:geometry,
+  coverage_classes:['mapped_land_support'],territorial_exclusions:[]});
+ s.measured.push({target:id,consumed:features[0],selected:{id:'other-city',geometry}});
+ s.physical.results.push({target:id,issues:[],support:{mapped_land_support:geometry}});
+ const xx=Math.floor((-89.85+180)/360*size);s.proposed.rows[0].runs.push([xx,xx+1,3]);
+}
+test('complete provider vetoes cross family boundaries without fabricating a competing owner',()=>{
+ const clean=constructorFixture(twoProviderFamilies);assert.equal(clean.run().ledger_rows.length,2);
+ for(const bound of [false,true]){
+  const held=constructorFixture(s=>{twoProviderFamilies(s);const other=s.providers[1],contact=rectangle(-90.01,-89.99,-.01,.01);
+   other.features[bound?0:1].geometry=bound?{type:'MultiPolygon',coordinates:[other.features[0].geometry.coordinates,contact.coordinates]}:contact;
+  });assert.throws(()=>held.run(),/unique source-target coverage/);
+  const report=held.diagnose(),id='government:TST:other:OBJECTID:'+(bound?201:202);
+  assert.equal(report.held_cells,1);assert.equal(report.supported_cells,1);
+  assert.ok(report.provider_competitors.find(member=>member.source_id===id).veto_targets.some(t=>t.target_id==='city'));
+ }
 });

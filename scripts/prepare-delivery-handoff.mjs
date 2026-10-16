@@ -813,6 +813,10 @@ export function packageProjection(config, reader, acceptedRegistry = null) {
         need(indexes?.length === 1, 'Missing revised source current index');
         add(indexes[0], 'source-target revised current index');
       }
+      // Its product pins must equal existing complete family parts at the
+      // authority boundary; the adoption body is the sole new leaf read role.
+      if (evidence.adopted_provider_families !== undefined)
+        add(evidence.adopted_provider_families, 'source-target adopted provider families');
       const interpretations = [
         ...(evidence.version === 2 ? [{pin: evidence.dated_land_support,
           kind: 'adopted-dated-native-centre-land-support-v1', role: 'dated', label: 'dated support',
@@ -1374,6 +1378,7 @@ export async function sourceEvidence(config, reader) {
   if (config.source_evidence.version === 2) reader.read(config.source_evidence.dated_land_support);
   if (config.source_evidence.version === 3) reader.read(config.source_evidence.revised_source_adoption);
   if (config.source_evidence.territorial_applicability !== undefined) reader.read(config.source_evidence.territorial_applicability);
+  if (config.source_evidence.adopted_provider_families !== undefined) reader.read(config.source_evidence.adopted_provider_families);
   const {locate} = await import('./delivery-handoff-advance.mjs');
   const selectorPin = locate(reader, config.selector);
   need(selectorPin.path === 'data/ownership-selection.json', 'Original accepted selector locator required');

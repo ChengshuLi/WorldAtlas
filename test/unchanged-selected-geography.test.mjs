@@ -23,7 +23,7 @@ const sha = value => createHash('sha256').update(body(value)).digest('hex');
 // These intentionally tiny opaque leaf bodies test immutable routing/equality,
 // not scientific validity. Historical collector replay is compared separately
 // with retained original full-reader logs; these leaf sentinels are not decoded.
-function fixture({missingOrigin = false, splitBaseline = false, rebind = true, missingStrictOrigin = false, separatePublicationOrigin = false, checkpoint = false, sourceTarget = false, membership = false, dated = false, revised = false, unknownSourceField = false, unknownSourceVersion = false, malformedDatedVersion = false, rebindCode = LEGACY_CURRENT_REBIND_CODE, historicalMetadataAbsent = false, consumedRole} = {}) {
+function fixture({missingOrigin = false, splitBaseline = false, rebind = true, missingStrictOrigin = false, separatePublicationOrigin = false, checkpoint = false, sourceTarget = false, membership = false, dated = false, revised = false, provider = false, unknownSourceField = false, unknownSourceVersion = false, malformedDatedVersion = false, rebindCode = LEGACY_CURRENT_REBIND_CODE, historicalMetadataAbsent = false, consumedRole} = {}) {
   const cache = path.join(ROOT, '.cache/unchanged-selected-fixtures');
   fs.mkdirSync(cache, {recursive: true});
   const directory = fs.mkdtempSync(path.join(cache, 'case-'));
@@ -65,6 +65,7 @@ function fixture({missingOrigin = false, splitBaseline = false, rebind = true, m
   const revisedRoles = ['raw_source', 'source_stage', 'assessment', 'scope', 'parent_decision', 'attribution'];
   for (const role of revisedRoles) put(P + 'revised-' + role + '.json', {opaque_scientific_leaf: role});
   if (checkpoint) put(P + 'checkpoint-routed', 'opaque checkpoint routed');
+  if (provider) put(P + 'provider-adoption.json', {version:1,kind:'adopted-provider-source-families-v1',families:[]});
   put(P + 'original-source-map.json', {kind: 'complete-world-index-with-exact-encoded-overrides'});
   put('data/ownership-selection.json', {selected_geography: {kind: 'complete-world-index-with-exact-encoded-overrides', path: P + 'original-source-map.json'}});
   const metadataModules=['scripts/selected-reference-metadata.mjs','src/reference-metadata.js'];
@@ -106,6 +107,7 @@ function fixture({missingOrigin = false, splitBaseline = false, rebind = true, m
       families: [{source_id: 'fixture', parts: [historical(P + 'source-part.json')]}],
       ...Object.fromEntries(Object.entries(roles).map(([role, name]) => [role, historical(P + name + '.json')]))};
     if (membership) evidence.source_membership = {index: historical(P + 'membership-index.json'), lineage: historical(P + 'membership-lineage.json'), parts: [historical(P + 'membership-part.json')]};
+    if (provider) evidence.adopted_provider_families = historical(P + 'provider-adoption.json');
     if (dated) {
       put(P + 'dated-support.json', {version: 1, kind: 'adopted-dated-native-centre-land-support-v1', native_contract_sha256: 'a'.repeat(64), records: [{}],
         provenance: ['adoption', 'review', 'observation', 'frame'].map(role => ({id: role, role, pin: historical(P + 'dated-' + role + '.json'),
@@ -1067,4 +1069,17 @@ test('checkpoint census keeps archived generation code while both current data r
     assert(result.immutable_descriptors.some(p => p.commit === f.original && p.path === code));
     assert.equal(result.checkpoint, undefined);
   } finally { f.close(); }
+});
+
+test('unchanged-input closure includes provider adoption plus existing whole-family and canonical-member roles',async()=>{
+ const f=fixture({sourceTarget:true,membership:true,provider:true});try{
+  const result=await f.inspect();assert.equal(result.status,'unchanged-selected-inputs',result.reason);
+  for(const name of ['provider-adoption','source-part','membership-part']){
+   const target=P+name+'.json';assert.ok(result.immutable_descriptors.some(pin=>pin.path===target));
+   const changed=f.commit({...f.candidateFiles,[target]:body('changed consumed body')},f.baseline);
+   assert.equal((await f.inspect(changed)).status,'full-check-required',target);
+   const missing={...f.candidateFiles};delete missing[target];
+   assert.equal((await f.inspect(f.commit(missing,f.baseline))).status,'full-check-required',target);
+  }
+ }finally{f.close();}
 });
