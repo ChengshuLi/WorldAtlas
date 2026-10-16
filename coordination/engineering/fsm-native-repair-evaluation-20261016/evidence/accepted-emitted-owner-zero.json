@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "kind": "fsm-accepted-emitted-owner-zero-readback",
+  "accepted_commit": "b90b037def1e8f065483c3c342468a833c34a140",
+  "accepted_tree": "7bad7bfeb10b72e334aedd2b029b326a585cf69d",
+  "original_package_candidate": "78b21a1f744d2f514e8d7ed5085bc860eaa4616b",
+  "original_run_id": 38959401404,
+  "package_output_manifest_sha256": "c07ee25a9f33fc46bac2f6ef3244dea7ea31ad77b4f0cdc2105672408643e898",
+  "candidate_patch_sha256": "d868616151364175dea2cac7bffbc93cdff4dcd307e991b297a47007a1fa5767",
+  "candidate_cells": 1902,
+  "candidate_rows": 400,
+  "owner_counts": {
+    "20225": 660,
+    "20226": 793,
+    "20227": 363,
+    "20228": 86
+  },
+  "occupied_native_base_cells": 0,
+  "prior_additive_overlap_cells": 0,
+  "inherited_additive_cells": 294376,
+  "consumed_assets": [
+    {
+      "path": "dist/client/atlas-geography.json",
+      "bytes": 10527603,
+      "sha256": "066c781884a49ee731c16eaca99503d0b1af4d585338f3237a1876a119457902"
+    },
+    {
+      "path": "dist/client/additive-repairs/native-supplement-patch.json",
+      "bytes": 2898066,
+      "sha256": "60b5b9a37bf55efc5938725c024840c33ffa8995ad33f9c6019d420d144caaef"
+    },
+    {
+      "path": "dist/client/native-v1/ownership/rows-0.bin.gz",
+      "bytes": 306620,
+      "sha256": "89ed3564db641f992746bf4f6f01c1eed89cb470520734ac1b85ee95e9a70ba0"
+    },
+    {
+      "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-0.bin.gz",
+      "bytes": 3854096,
+      "sha256": "5e73bd6ee306f3be021c7f89bf336c590ae3c02021df1c436d22088ed4284171"
+    },
+    {
+      "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-4194304.bin.gz",
+      "bytes": 3428397,
+      "sha256": "da6498fc3c898adca6231896e9b1f2c734153064d78431bc5a311fec768c18f9"
+    },
+    {
+      "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-8388608.bin.gz",
+      "bytes": 3423683,
+      "sha256": "244e3da13a412b4a4ccbc652191a080495a5611df5d0ee2207c8d08ac27b929a"
+    },
+    {
+      "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-12582912.bin.gz",
+      "bytes": 3478667,
+      "sha256": "01012dd358291a9e4ee51888a1d2b618ab2003e06a6eebd3a236392ecdbbc015"
+    },
+    {
+      "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-16777216.bin.gz",
+      "bytes": 3289324,
+      "sha256": "d5ed4d7e1700fb60298a53cc37ad9943257f57f853e19cc786ef975ebc7f0cae"
+    },
+    {
+      "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-20971520.bin.gz",
+      "bytes": 3146696,
+      "sha256": "198daba78eaeed9f316f088a86f8a7c4cf8f7e868253fc09487870eceddaf58a"
+    },
+    {
+      "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-25165824.bin.gz",
+      "bytes": 3272873,
+      "sha256": "764a967753d010daa794b30ca597bee0503646e7cae6965b14df63f280b9c544"
+    },
+    {
+      "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-29360128.bin.gz",
+      "bytes": 3296575,
+      "sha256": "ff29a1956ae0dd99e4db155c9cdabf96c72155a1a772210910d5119845759cf8"
+    },
+    {
+      "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-33554432.bin.gz",
+      "bytes": 3521891,
+      "sha256": "826cffaf4b05286a68ae479bc6e6caba3b3b3993f7fa57eae08efe7f6089694b"
+    },
+    {
+      "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-37748736.bin.gz",
+      "bytes": 3497645,
+      "sha256": "18472136ceb94b95a17918acdfba32c56d13a2979043c66fb74cf615d81551ee"
+    },
+    {
+      "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-41943040.bin.gz",
+      "bytes": 3534601,
+      "sha256": "f4e7f8de92e3d709db9675386961fac934a8a21652bf6f34f8d122ed71c73c44"
+    },
+    {
+      "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-46137344.bin.gz",
+      "bytes": 3556931,
+      "sha256": "bb9b1ba3ace6229a338eee6c903e1d5db637a765c46ed60f957ceb6e34346101"
+    },
+    {
+      "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-50331648.bin.gz",
+      "bytes": 3397952,
+      "sha256": "09aaf4d9a115dea6a85ed2a853532045c627ea2408f259513ce9de8e616ef55d"
+    },
+    {
+      "path": "dist/client/ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-54525952.bin.gz",
+      "bytes": 2460609,
+      "sha256": "91bfddd9aa632dc18ecc2f487a71673b504f971d2795e7c4af9c9298f4fe4fbc"
+    }
+  ],
+  "limit": "Fresh exhaustive FSM candidate-centre readback from authenticated prior accepted emitted ownership assets, with exact accepted-tree equality. This is current before-state evidence, not a new package build, final candidate output or publication."
+}
