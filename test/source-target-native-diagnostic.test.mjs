@@ -180,12 +180,21 @@ function constructorFixture(change=()=>{},applicability){
     put(name,data,head);
     if(applicability.forge){const forged=structuredClone(data);applicability.forge(forged);territorialApplicability=put(name,forged,'b'.repeat(40));}
   }
+  let seamViews;
+  if(state.seamViews){
+    const data={version:1,kind:'retained-periodic-native-views-v1',
+      method:{pin:put('scripts/majority.py',Buffer.from('# retained canonical fixture')),export:'canonical'},
+      records:state.seamViews};
+    state.changeSeamViews?.(data);
+    seamViews=put('canonical-seam-views.json',data);
+  }
   const evidence=put('source-evidence.json',{version:1,kind:'source-target-native-evidence-v1',catalogue,
     owner_roster:roster,physical_evidence:physical,physical_input:measured,physical_reproduction:put('physical.py',Buffer.from('# retained fixture')),
     native_latitudes:nativeLatitudes,native_contract:{size,native_latitudes:nativeLatitudes,original_assets:{bounds:{sha256:roster.sha256}}},
     base_reference:{id:'fixture-base'},families:[{source_id:family,parts:[source]}],
     targets:state.targets.map(target=>({...target,source_receipt_sha256:physical.sha256})),
     ...(state.membership?{source_membership:membership}:{}),
+    ...(seamViews?{canonical_seam_views:seamViews}:{}),
     ...(territorialApplicability?{territorial_applicability:territorialApplicability}:{})});
   const patch=put('patch.json',state.proposed);
   class FixtureReader extends ImmutableReader{
@@ -458,4 +467,40 @@ test('requested-owner completed reuse keeps exact output roster and patch conser
   const context=structuredClone(evidence);context.targets.at(-1).source_receipt_sha256='0'.repeat(64);
   assert.throws(()=>run(constructed,context),/Conflicting original source target/);
   assert.throws(()=>run(constructed,evidence,{rows:[]}),/original source target/);
+});
+
+
+test('canonical seam views bind original custody and retain omitted whole-family competitors',()=>{
+  const prepare=state=>{
+    directTarget(state);
+    const original=rectangle(179.94,180.0000000000001,-.02,.02),view=rectangle(179.94,180,-.02,.02);
+    state.originals[1].geometry=original;
+    // Complete family member B is deliberately absent from selected targets.
+    // Its accepted owner remains city, so it vetoes target C at the dateline.
+    state.accepted.features[0].geometry={type:'MultiPolygon',coordinates:[state.originals[0].geometry.coordinates,view.coordinates]};
+    const target=rectangle(179.95,179.99,-.02,.02);
+    state.originals[2].geometry=target;state.targets[0].base_geometry=target;
+    state.measured[0].consumed.geometry=target;state.measured[0].selected.geometry=target;
+    state.physical.results[0].support.mapped_land_support=original;
+    state.proposed.rows=[{y:size/2,runs:[[size-20,size-19,2]]}];
+    state.seamViews=[{role:'source',source_id:b,pointer:'/geometry',original_geometry_sha256:valueSha(original),geometry:view},
+      {role:'physical',source_id:c,pointer:'/support/mapped_land_support',original_geometry_sha256:valueSha(original),geometry:view}];
+  };
+  const f=constructorFixture(prepare),reader=f.reader();
+  const report=diagnoseSourceTargetNativeAuthority(reader,f.preimage,f.binding);
+  assert.equal(report.supported_cells,0);assert.equal(report.held_cells,1);
+  assert.equal(report.decision_rows[0].runs[0][3],'ambiguous_owner_cells');
+  for(const name of ['canonical-seam-views.json','scripts/majority.py'])
+    assert.equal(reader.inventory.get(version+':'+name).whole_body_consumed,true,name);
+  assert.throws(()=>constructorFixture(state=>{prepare(state);delete state.seamViews;}).diagnose(),/Invalid complete lon\/lat/);
+  for(const change of [
+    data=>data.records[0].original_geometry_sha256='0'.repeat(64),
+    data=>data.records[0].source_id='unmatched',
+    data=>data.records[0].geometry=rectangle(179.90,180,-.02,.02),
+    data=>data.records.push(structuredClone(data.records[0])),
+    data=>data.records[1].pointer='/issues/0/geometry',
+    data=>data.method.export='unreviewed',
+    data=>data.method.pin.path='alternate.py'
+  ])assert.throws(()=>constructorFixture(state=>{prepare(state);state.changeSeamViews=change;}).diagnose(),
+    /Canonical seam|canonical seam|Invalid complete lon\/lat|Invalid\/nonfinite coordinate/);
 });

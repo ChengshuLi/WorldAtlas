@@ -22,6 +22,16 @@ if(raw.length!==lp.decoded_bytes||sha(raw)!==lp.decoded_sha256)throw Error('Orig
 const latitudes=Float64Array.from({length:raw.length/8},(_,i)=>raw.readDoubleLE(i*8));
 const python=process.argv[2],destination=process.argv[3];
 if(!python||!destination)throw Error('Use PYTHON DESTINATION');
+const method=pin('scripts/majority.py');
+if(sha(fs.readFileSync(path.join(root,method.path)))!==method.sha256)throw Error('Executing canonical method differs');
+const receipt=JSON.parse(fs.readFileSync(path.join(here,'../physical-001/execution-receipt.json')));
+for(const file of receipt.fresh_admission.runtime_files){
+ const body=fs.readFileSync(file.path);
+ if(body.length!==file.bytes||sha(body)!==file.sha256)throw Error('Admitted GIS runtime changed: '+file.path);
+}
+const resolved=fs.realpathSync(python);
+if(!receipt.fresh_admission.runtime_files.some(file=>fs.realpathSync(file.path)===resolved))
+ throw Error('Python is outside the authenticated physical runtime');
 const original=JSON.parse(execFileSync(python,[path.join(here,'reproduce-canonical-views.py')],{cwd:root,maxBuffer:32*1024**2}));
 const records=[],proofs=[];
 for(const {original_geometry,...record} of original){
@@ -29,7 +39,7 @@ for(const {original_geometry,...record} of original){
  proofs.push({role:record.role,source_id:record.source_id,pointer:record.pointer,
   ...verifyNativeSeamView(original_geometry,record.geometry,{size:latitudes.length,latitudes})});
 }
-const result={version:1,kind:'retained-periodic-native-views-v1',method:{pin:pin('scripts/majority.py'),export:'canonical'},records};
+const result={version:1,kind:'retained-periodic-native-views-v1',method:{pin:method,export:'canonical'},records};
 fs.mkdirSync(destination,{recursive:true});
 fs.writeFileSync(path.join(destination,'canonical-seam-views.json'),JSON.stringify(result)+'\n');
 fs.writeFileSync(path.join(destination,'canonical-native-equivalence.json'),JSON.stringify({version:1,method:'complete-native-span-and-boundary-tie-equality',proofs},null,2)+'\n');
