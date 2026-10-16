@@ -1,0 +1,1300 @@
+{
+  "kind": "main-exact24-dated-cartographic-source-applicability-adoption",
+  "adopted_at": "2026-10-15T23:36:24.362612+00:00",
+  "author_packet": {
+    "path": ".cache/worker2-mmr-conflict-followup-001/dated-map-positions-002/reviewed24-source-position-answers.json",
+    "bytes": 141444,
+    "sha256": "e4b329cf86a2854ae714e0ea03da7656c553a197a8508c72d9e1bc6cde628198"
+  },
+  "independent_review": {
+    "path": ".cache/worker6-mmr-24-map-applicability-review-001/review.json",
+    "sha256": "cb0f7e313dc7ceccae0417009563e171f6536db059d09f3606d8d6c029cd6382"
+  },
+  "scope": {
+    "original_remaining_repair": 3483,
+    "exact_centres": 24,
+    "reference_only": 16,
+    "reference_and_Yunnan": 8
+  },
+  "decision": "For these exact original native centres only, prefer the registered MIMU20April2020 named-township international-boundary depiction over the contrary coarse China reference, and over the retained Yunnan administrative geometry for the eight records identifying both contacts. Keep every contrary original geometry, raw contact and source pin as contextual disagreement, not erased input.",
+  "reasoning": "Direct locally relevant township map depiction, visible registered centre on township side beyond boundary stroke, complete map title/country/legend/source identity, and independently inspected exact panels provide a supported modern atlas centre-location choice. This is not a date-only or ADM-level priority, legal sovereignty conclusion or general country/source override.",
+  "source_limits": {
+    "all_inside_printed_map_frame": 24,
+    "outside_fitted_label_control_ranges": 22,
+    "max_east_extension_degrees": 0.09831429959135107,
+    "max_north_extension_degrees": 0.08101196318921566,
+    "small_internal_fit_residual_does_not_bound_real_boundary_accuracy": true,
+    "approximate_boundary_notice_retained": true,
+    "whole_Atlas_cell_not_certified": true
+  },
+  "records": [
+    {
+      "owner": 30286,
+      "name": "Chipwi",
+      "y": 111269,
+      "x": 202958,
+      "original_interval": 550,
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-076.png",
+      "decision": "matched original negative contact is contextual for this adopted modern atlas centre-location choice"
+    },
+    {
+      "owner": 30286,
+      "name": "Chipwi",
+      "y": 111269,
+      "x": 202959,
+      "original_interval": 550,
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-077.png",
+      "decision": "matched original negative contact is contextual for this adopted modern atlas centre-location choice"
+    },
+    {
+      "owner": 30286,
+      "name": "Chipwi",
+      "y": 111270,
+      "x": 202957,
+      "original_interval": 551,
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-080.png",
+      "decision": "matched original negative contact is contextual for this adopted modern atlas centre-location choice"
+    },
+    {
+      "owner": 30286,
+      "name": "Chipwi",
+      "y": 111353,
+      "x": 202970,
+      "original_interval": 575,
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        },
+        {
+          "index": 1,
+          "hash": "90053751d3adb3aaebb34a81be9c49f0ef6865d0e630906b3dfb386111cf2c4d",
+          "registry_index": 13,
+          "id": "gb:CHN:ADM1:43563684B84540832148656",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+              "git_blob_oid": "29edaa5770af7af9b72432cc407ca296bbde6e15",
+              "mode": "100644",
+              "bytes": 77377,
+              "sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d",
+              "decoded_bytes": 263343,
+              "decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623"
+            }
+          ],
+          "inside": 40,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-109.png",
+      "decision": "matched original negative contact is contextual for this adopted modern atlas centre-location choice"
+    },
+    {
+      "owner": 30164,
+      "name": "Tsawlaw",
+      "y": 110917,
+      "x": 203007,
+      "original_interval": 488,
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 33,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-tsawlaw-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/ebe80c12-c8e8-4f9b-9f0e-a1441f69d2c9/Tsp_Map_VL_Tsawlaw_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Tsawlaw Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Tsawlaw.pdf",
+        "bytes": 4941302,
+        "sha256": "6e17be57229058b55e9288871c397ed393f79a2dd05c9b67fa9b9f08371570ae",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Tsawlaw-020.png",
+      "decision": "matched original negative contact is contextual for this adopted modern atlas centre-location choice"
+    },
+    {
+      "owner": 30286,
+      "name": "Chipwi",
+      "y": 111797,
+      "x": 202720,
+      "original_interval": 642,
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-200.png",
+      "decision": "matched original negative contact is contextual for this adopted modern atlas centre-location choice"
+    },
+    {
+      "owner": 30286,
+      "name": "Chipwi",
+      "y": 111221,
+      "x": 202946,
+      "original_interval": 534,
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-038.png",
+      "decision": "matched original negative contact is contextual for this adopted modern atlas centre-location choice"
+    },
+    {
+      "owner": 30286,
+      "name": "Chipwi",
+      "y": 111269,
+      "x": 202957,
+      "original_interval": 550,
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-075.png",
+      "decision": "matched original negative contact is contextual for this adopted modern atlas centre-location choice"
+    },
+    {
+      "owner": 30286,
+      "name": "Chipwi",
+      "y": 111352,
+      "x": 202970,
+      "original_interval": 574,
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        },
+        {
+          "index": 1,
+          "hash": "90053751d3adb3aaebb34a81be9c49f0ef6865d0e630906b3dfb386111cf2c4d",
+          "registry_index": 13,
+          "id": "gb:CHN:ADM1:43563684B84540832148656",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+              "git_blob_oid": "29edaa5770af7af9b72432cc407ca296bbde6e15",
+              "mode": "100644",
+              "bytes": 77377,
+              "sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d",
+              "decoded_bytes": 263343,
+              "decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623"
+            }
+          ],
+          "inside": 40,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-107.png",
+      "decision": "matched original negative contact is contextual for this adopted modern atlas centre-location choice"
+    },
+    {
+      "owner": 30191,
+      "name": "Waingmaw",
+      "y": 112170,
+      "x": 202285,
+      "original_interval": 720,
+      "original_hit_operands": [
+        {
+          "index": 1,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 161,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-waingmaw-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/44447642-fc77-4170-8156-3a4300b336f0/Tsp_Map_VL_Waingmaw_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Waingmaw Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Waingmaw.pdf",
+        "bytes": 6108373,
+        "sha256": "13ee06385ff541e3239077119d07f9b786700c40408007685896213d611f5c88",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Waingmaw-081.png",
+      "decision": "matched original negative contact is contextual for this adopted modern atlas centre-location choice"
+    },
+    {
+      "owner": 30286,
+      "name": "Chipwi",
+      "y": 111222,
+      "x": 202946,
+      "original_interval": 535,
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-040.png",
+      "decision": "matched original negative contact is contextual for this adopted modern atlas centre-location choice"
+    },
+    {
+      "owner": 30286,
+      "name": "Chipwi",
+      "y": 111354,
+      "x": 202971,
+      "original_interval": 576,
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        },
+        {
+          "index": 1,
+          "hash": "90053751d3adb3aaebb34a81be9c49f0ef6865d0e630906b3dfb386111cf2c4d",
+          "registry_index": 13,
+          "id": "gb:CHN:ADM1:43563684B84540832148656",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+              "git_blob_oid": "29edaa5770af7af9b72432cc407ca296bbde6e15",
+              "mode": "100644",
+              "bytes": 77377,
+              "sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d",
+              "decoded_bytes": 263343,
+              "decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623"
+            }
+          ],
+          "inside": 40,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-112.png",
+      "decision": "matched original negative contact is contextual for this adopted modern atlas centre-location choice"
+    },
+    {
+      "owner": 30286,
+      "name": "Chipwi",
+      "y": 111355,
+      "x": 202971,
+      "original_interval": 577,
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        },
+        {
+          "index": 1,
+          "hash": "90053751d3adb3aaebb34a81be9c49f0ef6865d0e630906b3dfb386111cf2c4d",
+          "registry_index": 13,
+          "id": "gb:CHN:ADM1:43563684B84540832148656",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+              "git_blob_oid": "29edaa5770af7af9b72432cc407ca296bbde6e15",
+              "mode": "100644",
+              "bytes": 77377,
+              "sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d",
+              "decoded_bytes": 263343,
+              "decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623"
+            }
+          ],
+          "inside": 40,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-114.png",
+      "decision": "matched original negative contact is contextual for this adopted modern atlas centre-location choice"
+    },
+    {
+      "owner": 30164,
+      "name": "Tsawlaw",
+      "y": 110916,
+      "x": 203007,
+      "original_interval": 487,
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 33,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-tsawlaw-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/ebe80c12-c8e8-4f9b-9f0e-a1441f69d2c9/Tsp_Map_VL_Tsawlaw_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Tsawlaw Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Tsawlaw.pdf",
+        "bytes": 4941302,
+        "sha256": "6e17be57229058b55e9288871c397ed393f79a2dd05c9b67fa9b9f08371570ae",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Tsawlaw-018.png",
+      "decision": "matched original negative contact is contextual for this adopted modern atlas centre-location choice"
+    },
+    {
+      "owner": 30286,
+      "name": "Chipwi",
+      "y": 111798,
+      "x": 202720,
+      "original_interval": 643,
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-203.png",
+      "decision": "matched original negative contact is contextual for this adopted modern atlas centre-location choice"
+    },
+    {
+      "owner": 30286,
+      "name": "Chipwi",
+      "y": 111223,
+      "x": 202946,
+      "original_interval": 536,
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-042.png",
+      "decision": "matched original negative contact is contextual for this adopted modern atlas centre-location choice"
+    },
+    {
+      "owner": 30286,
+      "name": "Chipwi",
+      "y": 111226,
+      "x": 202945,
+      "original_interval": 539,
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-047.png",
+      "decision": "matched original negative contact is contextual for this adopted modern atlas centre-location choice"
+    },
+    {
+      "owner": 30286,
+      "name": "Chipwi",
+      "y": 111356,
+      "x": 202971,
+      "original_interval": 578,
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        },
+        {
+          "index": 1,
+          "hash": "90053751d3adb3aaebb34a81be9c49f0ef6865d0e630906b3dfb386111cf2c4d",
+          "registry_index": 13,
+          "id": "gb:CHN:ADM1:43563684B84540832148656",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+              "git_blob_oid": "29edaa5770af7af9b72432cc407ca296bbde6e15",
+              "mode": "100644",
+              "bytes": 77377,
+              "sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d",
+              "decoded_bytes": 263343,
+              "decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623"
+            }
+          ],
+          "inside": 40,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-116.png",
+      "decision": "matched original negative contact is contextual for this adopted modern atlas centre-location choice"
+    },
+    {
+      "owner": 30191,
+      "name": "Waingmaw",
+      "y": 112168,
+      "x": 202286,
+      "original_interval": 718,
+      "original_hit_operands": [
+        {
+          "index": 1,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 161,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-waingmaw-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/44447642-fc77-4170-8156-3a4300b336f0/Tsp_Map_VL_Waingmaw_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Waingmaw Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Waingmaw.pdf",
+        "bytes": 6108373,
+        "sha256": "13ee06385ff541e3239077119d07f9b786700c40408007685896213d611f5c88",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Waingmaw-077.png",
+      "decision": "matched original negative contact is contextual for this adopted modern atlas centre-location choice"
+    },
+    {
+      "owner": 30164,
+      "name": "Tsawlaw",
+      "y": 110919,
+      "x": 203006,
+      "original_interval": 490,
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 33,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-tsawlaw-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/ebe80c12-c8e8-4f9b-9f0e-a1441f69d2c9/Tsp_Map_VL_Tsawlaw_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Tsawlaw Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Tsawlaw.pdf",
+        "bytes": 4941302,
+        "sha256": "6e17be57229058b55e9288871c397ed393f79a2dd05c9b67fa9b9f08371570ae",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Tsawlaw-025.png",
+      "decision": "matched original negative contact is contextual for this adopted modern atlas centre-location choice"
+    },
+    {
+      "owner": 30286,
+      "name": "Chipwi",
+      "y": 111322,
+      "x": 202982,
+      "original_interval": 562,
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        },
+        {
+          "index": 1,
+          "hash": "90053751d3adb3aaebb34a81be9c49f0ef6865d0e630906b3dfb386111cf2c4d",
+          "registry_index": 13,
+          "id": "gb:CHN:ADM1:43563684B84540832148656",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+              "git_blob_oid": "29edaa5770af7af9b72432cc407ca296bbde6e15",
+              "mode": "100644",
+              "bytes": 77377,
+              "sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d",
+              "decoded_bytes": 263343,
+              "decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623"
+            }
+          ],
+          "inside": 40,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-092.png",
+      "decision": "matched original negative contact is contextual for this adopted modern atlas centre-location choice"
+    },
+    {
+      "owner": 30286,
+      "name": "Chipwi",
+      "y": 111351,
+      "x": 202970,
+      "original_interval": 573,
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        },
+        {
+          "index": 1,
+          "hash": "90053751d3adb3aaebb34a81be9c49f0ef6865d0e630906b3dfb386111cf2c4d",
+          "registry_index": 13,
+          "id": "gb:CHN:ADM1:43563684B84540832148656",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+              "git_blob_oid": "29edaa5770af7af9b72432cc407ca296bbde6e15",
+              "mode": "100644",
+              "bytes": 77377,
+              "sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d",
+              "decoded_bytes": 263343,
+              "decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623"
+            }
+          ],
+          "inside": 40,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-105.png",
+      "decision": "matched original negative contact is contextual for this adopted modern atlas centre-location choice"
+    },
+    {
+      "owner": 30286,
+      "name": "Chipwi",
+      "y": 111357,
+      "x": 202971,
+      "original_interval": 579,
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        },
+        {
+          "index": 1,
+          "hash": "90053751d3adb3aaebb34a81be9c49f0ef6865d0e630906b3dfb386111cf2c4d",
+          "registry_index": 13,
+          "id": "gb:CHN:ADM1:43563684B84540832148656",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+              "git_blob_oid": "29edaa5770af7af9b72432cc407ca296bbde6e15",
+              "mode": "100644",
+              "bytes": 77377,
+              "sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d",
+              "decoded_bytes": 263343,
+              "decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623"
+            }
+          ],
+          "inside": 40,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-118.png",
+      "decision": "matched original negative contact is contextual for this adopted modern atlas centre-location choice"
+    },
+    {
+      "owner": 30286,
+      "name": "Chipwi",
+      "y": 111518,
+      "x": 202950,
+      "original_interval": 592,
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-134.png",
+      "decision": "matched original negative contact is contextual for this adopted modern atlas centre-location choice"
+    }
+  ],
+  "next": "Truthfully represent exact adopted applicability with original negative custody retained, then ordinary current-owner-zero, all other negative, source/physical/native qualification and selected delivery.",
+  "cleared_native_holds": 0,
+  "accepted_repair_credit": 0,
+  "publication": "pending"
+}

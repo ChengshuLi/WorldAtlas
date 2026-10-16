@@ -1,0 +1,3036 @@
+{
+  "kind": "dated-primary-map-exact-position-source-interpretation",
+  "completion_state": "Completed acquisition, printed-grid registration of409 exact original centres, and direct visual interpretation of24 conservative inspected interior centres. Remaining385 centres are not assigned a positive source interpretation in this packet.",
+  "scope": {
+    "original_repair_remaining": 3483,
+    "owned_cohort": 409,
+    "owner_counts": {
+      "Tsawlaw": 33,
+      "Waingmaw": 164,
+      "Chipwi": 212
+    },
+    "Tanai6_excluded": true
+  },
+  "new_concrete_answer": "For these24 exact native centre positions, the MIMU20April2020 township map depicts Myanmar-township-side placement beyond the international-boundary stroke; this differs from the retained China reference classification, and8 also conflict with the retained Yunnan feature.",
+  "counts": {
+    "new_source_position_answers": 24,
+    "by_owner": {
+      "Chipwi": 19,
+      "Tsawlaw": 3,
+      "Waingmaw": 2
+    },
+    "by_original_operand_hit_class": {
+      "reference-only": 16,
+      "reference-and-foreign-administrative-source": 8
+    },
+    "native_accepted_repairs": 0,
+    "cleared_holds": 0,
+    "remaining_cohort_without_positive_interpretation": 385
+  },
+  "sources": {
+    "Waingmaw": {
+      "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-waingmaw-township-kachin-state-20-april-2020-enmy",
+      "body_url": "https://reliefweb.int/attachments/44447642-fc77-4170-8156-3a4300b336f0/Tsp_Map_VL_Waingmaw_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+      "title": "Myanmar: Waingmaw Township, Kachin State (20 April 2020)",
+      "producer": "Myanmar Information Management Unit (MIMU)",
+      "map_id": "MIMU154v05",
+      "printed_production_date": "2020-04-20",
+      "projection_datum": "Geographic/WGS84",
+      "boundary_source_printed": "MIMU",
+      "local_file": "MIMU2020-Waingmaw.pdf",
+      "bytes": 6108373,
+      "sha256": "13ee06385ff541e3239077119d07f9b786700c40408007685896213d611f5c88",
+      "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+    },
+    "Chipwi": {
+      "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+      "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+      "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+      "producer": "Myanmar Information Management Unit (MIMU)",
+      "map_id": "MIMU154v05",
+      "printed_production_date": "2020-04-20",
+      "projection_datum": "Geographic/WGS84",
+      "boundary_source_printed": "MIMU",
+      "local_file": "MIMU2020-Chipwi.pdf",
+      "bytes": 5966618,
+      "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+      "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+    },
+    "Tsawlaw": {
+      "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-tsawlaw-township-kachin-state-20-april-2020-enmy",
+      "body_url": "https://reliefweb.int/attachments/ebe80c12-c8e8-4f9b-9f0e-a1441f69d2c9/Tsp_Map_VL_Tsawlaw_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+      "title": "Myanmar: Tsawlaw Township, Kachin State (20 April 2020)",
+      "producer": "Myanmar Information Management Unit (MIMU)",
+      "map_id": "MIMU154v05",
+      "printed_production_date": "2020-04-20",
+      "projection_datum": "Geographic/WGS84",
+      "boundary_source_printed": "MIMU",
+      "local_file": "MIMU2020-Tsawlaw.pdf",
+      "bytes": 4941302,
+      "sha256": "6e17be57229058b55e9288871c397ed393f79a2dd05c9b67fa9b9f08371570ae",
+      "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+    }
+  },
+  "original_attribution_input": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/worker3-mmr3483-opportunity-001/attribution-002/operand-attribution.json",
+    "sha256": "32b8bd9f4814a1a5b57966dde05bd2cfe15061d31fc6908e795506767a601b43"
+  },
+  "all_original_owner_operands": [
+    {
+      "owner": 30164,
+      "name": "Tsawlaw",
+      "keys": 33,
+      "whole_remaining_owner": true,
+      "no_inside": 0,
+      "boundary": 0,
+      "multi_hit": 0,
+      "operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 33,
+          "boundary": 0
+        },
+        {
+          "index": 1,
+          "hash": "90053751d3adb3aaebb34a81be9c49f0ef6865d0e630906b3dfb386111cf2c4d",
+          "registry_index": 13,
+          "id": "gb:CHN:ADM1:43563684B84540832148656",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+              "git_blob_oid": "29edaa5770af7af9b72432cc407ca296bbde6e15",
+              "mode": "100644",
+              "bytes": 77377,
+              "sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d",
+              "decoded_bytes": 263343,
+              "decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623"
+            }
+          ],
+          "inside": 0,
+          "boundary": 0
+        },
+        {
+          "index": 2,
+          "hash": "fac084724a19ccfc95c555f0e7563b02ca0de87424fd80773bfe1eccb70b663f",
+          "registry_index": 17,
+          "id": "gb:CHN:ADM1:43563684B14397599951889",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/12",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+              "git_blob_oid": "29edaa5770af7af9b72432cc407ca296bbde6e15",
+              "mode": "100644",
+              "bytes": 77377,
+              "sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d",
+              "decoded_bytes": 263343,
+              "decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623"
+            }
+          ],
+          "inside": 0,
+          "boundary": 0
+        },
+        {
+          "index": 3,
+          "hash": "8ddba7be5e00d13a5d3f191bc3f036c5d127550de9ea6069f351e376af9c5810",
+          "registry_index": 42,
+          "id": "gb:CHN:ADM2:17275852B93044966780229",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/1795",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM2-000.bin.gz",
+              "git_blob_oid": "48bb210799d1ae8dae4fa23d4e74f9b2a15f4e87",
+              "mode": "100644",
+              "bytes": 2096437,
+              "sha256": "7bcd6bb51042f63c2f4f1717b25d701874cfcd6f12eb79dc36cdff29f3b62f30",
+              "decoded_bytes": 7018287,
+              "decoded_sha256": "8c7dfa8e40842f9162453d9b0b614276a48bf635559ba371c7982cb288e7b303"
+            }
+          ],
+          "inside": 0,
+          "boundary": 0
+        },
+        {
+          "index": 4,
+          "hash": "0ea7642392f2e09f7bb753a7415da126a6e391c02978d732002702a2ff8cfb45",
+          "registry_index": 95,
+          "id": "gb:CHN:ADM2:17275852B45194872627530",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/1904",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM2-000.bin.gz",
+              "git_blob_oid": "48bb210799d1ae8dae4fa23d4e74f9b2a15f4e87",
+              "mode": "100644",
+              "bytes": 2096437,
+              "sha256": "7bcd6bb51042f63c2f4f1717b25d701874cfcd6f12eb79dc36cdff29f3b62f30",
+              "decoded_bytes": 7018287,
+              "decoded_sha256": "8c7dfa8e40842f9162453d9b0b614276a48bf635559ba371c7982cb288e7b303"
+            }
+          ],
+          "inside": 0,
+          "boundary": 0
+        }
+      ]
+    },
+    {
+      "owner": 30191,
+      "name": "Waingmaw",
+      "keys": 164,
+      "whole_remaining_owner": true,
+      "no_inside": 0,
+      "boundary": 0,
+      "multi_hit": 5,
+      "operands": [
+        {
+          "index": 0,
+          "hash": "d967bc4b8ed1497e9e766721a5b767060e391747e1a626328d17f9fa5c3f39b6",
+          "registry_index": 0,
+          "id": "IND",
+          "kind": "retained-reference-country",
+          "pointer": "/features/8",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 0,
+          "boundary": 0
+        },
+        {
+          "index": 1,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 161,
+          "boundary": 0
+        },
+        {
+          "index": 2,
+          "hash": "90053751d3adb3aaebb34a81be9c49f0ef6865d0e630906b3dfb386111cf2c4d",
+          "registry_index": 13,
+          "id": "gb:CHN:ADM1:43563684B84540832148656",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+              "git_blob_oid": "29edaa5770af7af9b72432cc407ca296bbde6e15",
+              "mode": "100644",
+              "bytes": 77377,
+              "sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d",
+              "decoded_bytes": 263343,
+              "decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623"
+            }
+          ],
+          "inside": 8,
+          "boundary": 0
+        },
+        {
+          "index": 3,
+          "hash": "7ed34a92f8cef5e855237ce0aefbeb9441712e9bfdf312b79bfb0bc98d97534c",
+          "registry_index": 128,
+          "id": "gb:CHN:ADM2:17275852B50071782197016",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/1961",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM2-000.bin.gz",
+              "git_blob_oid": "48bb210799d1ae8dae4fa23d4e74f9b2a15f4e87",
+              "mode": "100644",
+              "bytes": 2096437,
+              "sha256": "7bcd6bb51042f63c2f4f1717b25d701874cfcd6f12eb79dc36cdff29f3b62f30",
+              "decoded_bytes": 7018287,
+              "decoded_sha256": "8c7dfa8e40842f9162453d9b0b614276a48bf635559ba371c7982cb288e7b303"
+            }
+          ],
+          "inside": 0,
+          "boundary": 0
+        },
+        {
+          "index": 4,
+          "hash": "31587579f2ea0dc21360c1cf2e216f35bfc763a8484cb70d330109d91a56ab8e",
+          "registry_index": 129,
+          "id": "gb:CHN:ADM2:17275852B59976310203554",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/2014",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM2-000.bin.gz",
+              "git_blob_oid": "48bb210799d1ae8dae4fa23d4e74f9b2a15f4e87",
+              "mode": "100644",
+              "bytes": 2096437,
+              "sha256": "7bcd6bb51042f63c2f4f1717b25d701874cfcd6f12eb79dc36cdff29f3b62f30",
+              "decoded_bytes": 7018287,
+              "decoded_sha256": "8c7dfa8e40842f9162453d9b0b614276a48bf635559ba371c7982cb288e7b303"
+            }
+          ],
+          "inside": 0,
+          "boundary": 0
+        },
+        {
+          "index": 5,
+          "hash": "f9009e424b128bece1fac368073f8f8f804df782709ae34c97f91989f14425f3",
+          "registry_index": 130,
+          "id": "gb:CHN:ADM2:17275852B85492016083287",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/2058",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM2-000.bin.gz",
+              "git_blob_oid": "48bb210799d1ae8dae4fa23d4e74f9b2a15f4e87",
+              "mode": "100644",
+              "bytes": 2096437,
+              "sha256": "7bcd6bb51042f63c2f4f1717b25d701874cfcd6f12eb79dc36cdff29f3b62f30",
+              "decoded_bytes": 7018287,
+              "decoded_sha256": "8c7dfa8e40842f9162453d9b0b614276a48bf635559ba371c7982cb288e7b303"
+            }
+          ],
+          "inside": 0,
+          "boundary": 0
+        }
+      ]
+    },
+    {
+      "owner": 30286,
+      "name": "Chipwi",
+      "keys": 212,
+      "whole_remaining_owner": true,
+      "no_inside": 0,
+      "boundary": 0,
+      "multi_hit": 40,
+      "operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        },
+        {
+          "index": 1,
+          "hash": "90053751d3adb3aaebb34a81be9c49f0ef6865d0e630906b3dfb386111cf2c4d",
+          "registry_index": 13,
+          "id": "gb:CHN:ADM1:43563684B84540832148656",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+              "git_blob_oid": "29edaa5770af7af9b72432cc407ca296bbde6e15",
+              "mode": "100644",
+              "bytes": 77377,
+              "sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d",
+              "decoded_bytes": 263343,
+              "decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623"
+            }
+          ],
+          "inside": 40,
+          "boundary": 0
+        },
+        {
+          "index": 2,
+          "hash": "fac084724a19ccfc95c555f0e7563b02ca0de87424fd80773bfe1eccb70b663f",
+          "registry_index": 17,
+          "id": "gb:CHN:ADM1:43563684B14397599951889",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/12",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+              "git_blob_oid": "29edaa5770af7af9b72432cc407ca296bbde6e15",
+              "mode": "100644",
+              "bytes": 77377,
+              "sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d",
+              "decoded_bytes": 263343,
+              "decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623"
+            }
+          ],
+          "inside": 0,
+          "boundary": 0
+        },
+        {
+          "index": 3,
+          "hash": "8ddba7be5e00d13a5d3f191bc3f036c5d127550de9ea6069f351e376af9c5810",
+          "registry_index": 42,
+          "id": "gb:CHN:ADM2:17275852B93044966780229",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/1795",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM2-000.bin.gz",
+              "git_blob_oid": "48bb210799d1ae8dae4fa23d4e74f9b2a15f4e87",
+              "mode": "100644",
+              "bytes": 2096437,
+              "sha256": "7bcd6bb51042f63c2f4f1717b25d701874cfcd6f12eb79dc36cdff29f3b62f30",
+              "decoded_bytes": 7018287,
+              "decoded_sha256": "8c7dfa8e40842f9162453d9b0b614276a48bf635559ba371c7982cb288e7b303"
+            }
+          ],
+          "inside": 0,
+          "boundary": 0
+        },
+        {
+          "index": 4,
+          "hash": "0ea7642392f2e09f7bb753a7415da126a6e391c02978d732002702a2ff8cfb45",
+          "registry_index": 95,
+          "id": "gb:CHN:ADM2:17275852B45194872627530",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/1904",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM2-000.bin.gz",
+              "git_blob_oid": "48bb210799d1ae8dae4fa23d4e74f9b2a15f4e87",
+              "mode": "100644",
+              "bytes": 2096437,
+              "sha256": "7bcd6bb51042f63c2f4f1717b25d701874cfcd6f12eb79dc36cdff29f3b62f30",
+              "decoded_bytes": 7018287,
+              "decoded_sha256": "8c7dfa8e40842f9162453d9b0b614276a48bf635559ba371c7982cb288e7b303"
+            }
+          ],
+          "inside": 0,
+          "boundary": 0
+        },
+        {
+          "index": 5,
+          "hash": "7ed34a92f8cef5e855237ce0aefbeb9441712e9bfdf312b79bfb0bc98d97534c",
+          "registry_index": 128,
+          "id": "gb:CHN:ADM2:17275852B50071782197016",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/1961",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM2-000.bin.gz",
+              "git_blob_oid": "48bb210799d1ae8dae4fa23d4e74f9b2a15f4e87",
+              "mode": "100644",
+              "bytes": 2096437,
+              "sha256": "7bcd6bb51042f63c2f4f1717b25d701874cfcd6f12eb79dc36cdff29f3b62f30",
+              "decoded_bytes": 7018287,
+              "decoded_sha256": "8c7dfa8e40842f9162453d9b0b614276a48bf635559ba371c7982cb288e7b303"
+            }
+          ],
+          "inside": 0,
+          "boundary": 0
+        },
+        {
+          "index": 6,
+          "hash": "b21acda7a32473183e01346f22fe334c0243fabe0fdffc106df5c0e118c308fc",
+          "registry_index": 145,
+          "id": "gb:CHN:ADM2:17275852B44348790088187",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/1993",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM2-000.bin.gz",
+              "git_blob_oid": "48bb210799d1ae8dae4fa23d4e74f9b2a15f4e87",
+              "mode": "100644",
+              "bytes": 2096437,
+              "sha256": "7bcd6bb51042f63c2f4f1717b25d701874cfcd6f12eb79dc36cdff29f3b62f30",
+              "decoded_bytes": 7018287,
+              "decoded_sha256": "8c7dfa8e40842f9162453d9b0b614276a48bf635559ba371c7982cb288e7b303"
+            }
+          ],
+          "inside": 0,
+          "boundary": 0
+        }
+      ]
+    }
+  ],
+  "whole409_registered_point_files": {
+    "Waingmaw": {
+      "path": "Waingmaw-registered-original-points.json",
+      "sha256": "2a5058c97f07b2f71af8b255fe14d3d5426656ab1d2e7a890bda36a5ff27bd05"
+    },
+    "Chipwi": {
+      "path": "Chipwi-registered-original-points.json",
+      "sha256": "a08625a6d994d85d24338c10d04019ff9747d44f2b8f45ddbd4986b13bad95fd"
+    },
+    "Tsawlaw": {
+      "path": "Tsawlaw-registered-original-points.json",
+      "sha256": "ea9ff72db5f6081ce905e95530f9851833f82d230edb752a0d3b4869d89f61fb"
+    }
+  },
+  "answer_limits": [
+    "The result is an exact dated cartographic source-position interpretation, not a legal sovereignty ruling.",
+    "Printed graticule residual below0.13PDFpoint measures internal registration consistency, not real-world boundary accuracy. The maps disclose approximate boundary locations.",
+    "The interpreted object is the retained native cell centre; the entire geographic cell footprint has not been certified as beyond the stroke.",
+    "No generalised territorial polygon or blanket owner/country override was created. Only these24 inspected positions receive this interpretation.",
+    "All original administrative, country-reference and source-feature operands remain in scope.",
+    "The8 positions hitting Yunnan require an explicit source choice addressing the Yunnan administrative geometry as well as the country reference.",
+    "Main must make the applicable map-versus-reference source choice for16 reference-only positions before any bounded qualification using all remaining original inputs. A map choice alone is not native repair acceptance."
+  ],
+  "points": [
+    {
+      "local_index": 76,
+      "owner": 30286,
+      "y": 111269,
+      "x": 202958,
+      "original_interval": 550,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/518/runs/1"
+      },
+      "inside": [
+        0
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 98.69769535332576,
+      "longitude_exact_rational": "12937590/131083",
+      "latitude_degrees_north": 26.239028881669924,
+      "latitude_native_f64le_hex": "60922dff303d3a40",
+      "registered_pdf_point": [
+        1563.4167327641335,
+        1792.1319174064192
+      ],
+      "render_scale1_pixel": [
+        1563,
+        800
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        148,
+        151,
+        128
+      ],
+      "name": "Chipwi",
+      "source_point_interpretation": "The registered native centre is depicted within the named Myanmar township, visibly on the township side beyond the international boundary printed stroke. China is the labelled grey region across that stroke.",
+      "interpretation_method": "Direct visual inspection of original source/point paired crop, read together with full map title, named township region, international-boundary legend and China country label. RGB-distance ranking selected crops for inspection; RGB values did not determine this disposition.",
+      "original_operand_hit_class": "reference-only",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-076.png",
+      "earlier_review_panel": "margin-Chipwi-076.png",
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2004.858618164119,
+          "intercept_points": -196311.50838928772,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0965850829379633,
+          "rms_residual_pdf_points": 0.05918193725209916,
+          "alternating_label_holdout_max_pdf_points": 0.10033035284141079
+        },
+        "N": {
+          "slope_points_per_degree": 2004.829875837032,
+          "intercept_points": -50812.65709751619,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.11035505023028236,
+          "rms_residual_pdf_points": 0.06399655597546076,
+          "alternating_label_holdout_max_pdf_points": 0.10116577146254713
+        }
+      },
+      "qualification": "UNQUALIFIED; no original operand removed; current-owner-zero/eligibility/native physical checks have not been run for a proposed source-choice fork."
+    },
+    {
+      "local_index": 77,
+      "owner": 30286,
+      "y": 111269,
+      "x": 202959,
+      "original_interval": 550,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/518/runs/1"
+      },
+      "inside": [
+        0
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 98.69906852909989,
+      "longitude_exact_rational": "12937770/131083",
+      "latitude_degrees_north": 26.239028881669924,
+      "latitude_native_f64le_hex": "60922dff303d3a40",
+      "registered_pdf_point": [
+        1566.1697560491739,
+        1792.1319174064192
+      ],
+      "render_scale1_pixel": [
+        1566,
+        800
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        148,
+        151,
+        128
+      ],
+      "name": "Chipwi",
+      "source_point_interpretation": "The registered native centre is depicted within the named Myanmar township, visibly on the township side beyond the international boundary printed stroke. China is the labelled grey region across that stroke.",
+      "interpretation_method": "Direct visual inspection of original source/point paired crop, read together with full map title, named township region, international-boundary legend and China country label. RGB-distance ranking selected crops for inspection; RGB values did not determine this disposition.",
+      "original_operand_hit_class": "reference-only",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-077.png",
+      "earlier_review_panel": "margin-Chipwi-077.png",
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2004.858618164119,
+          "intercept_points": -196311.50838928772,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0965850829379633,
+          "rms_residual_pdf_points": 0.05918193725209916,
+          "alternating_label_holdout_max_pdf_points": 0.10033035284141079
+        },
+        "N": {
+          "slope_points_per_degree": 2004.829875837032,
+          "intercept_points": -50812.65709751619,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.11035505023028236,
+          "rms_residual_pdf_points": 0.06399655597546076,
+          "alternating_label_holdout_max_pdf_points": 0.10116577146254713
+        }
+      },
+      "qualification": "UNQUALIFIED; no original operand removed; current-owner-zero/eligibility/native physical checks have not been run for a proposed source-choice fork."
+    },
+    {
+      "local_index": 80,
+      "owner": 30286,
+      "y": 111270,
+      "x": 202957,
+      "original_interval": 551,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/519/runs/0"
+      },
+      "inside": [
+        0
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 98.69632217755162,
+      "longitude_exact_rational": "12937410/131083",
+      "latitude_degrees_north": 26.23779719495122,
+      "latitude_native_f64le_hex": "6265e746e03c3a40",
+      "registered_pdf_point": [
+        1560.6637094791222,
+        1789.6625950750895
+      ],
+      "render_scale1_pixel": [
+        1561,
+        802
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        148,
+        151,
+        128
+      ],
+      "name": "Chipwi",
+      "source_point_interpretation": "The registered native centre is depicted within the named Myanmar township, visibly on the township side beyond the international boundary printed stroke. China is the labelled grey region across that stroke.",
+      "interpretation_method": "Direct visual inspection of original source/point paired crop, read together with full map title, named township region, international-boundary legend and China country label. RGB-distance ranking selected crops for inspection; RGB values did not determine this disposition.",
+      "original_operand_hit_class": "reference-only",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-080.png",
+      "earlier_review_panel": "margin-Chipwi-080.png",
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2004.858618164119,
+          "intercept_points": -196311.50838928772,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0965850829379633,
+          "rms_residual_pdf_points": 0.05918193725209916,
+          "alternating_label_holdout_max_pdf_points": 0.10033035284141079
+        },
+        "N": {
+          "slope_points_per_degree": 2004.829875837032,
+          "intercept_points": -50812.65709751619,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.11035505023028236,
+          "rms_residual_pdf_points": 0.06399655597546076,
+          "alternating_label_holdout_max_pdf_points": 0.10116577146254713
+        }
+      },
+      "qualification": "UNQUALIFIED; no original operand removed; current-owner-zero/eligibility/native physical checks have not been run for a proposed source-choice fork."
+    },
+    {
+      "local_index": 109,
+      "owner": 30286,
+      "y": 111353,
+      "x": 202970,
+      "original_interval": 575,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/542/runs/0"
+      },
+      "inside": [
+        0,
+        1
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 98.71417346261529,
+      "longitude_exact_rational": "12939750/131083",
+      "latitude_degrees_north": 26.135521744673092,
+      "latitude_native_f64le_hex": "8e44958db1223a40",
+      "registered_pdf_point": [
+        1596.4530121843272,
+        1584.617716792818
+      ],
+      "render_scale1_pixel": [
+        1596,
+        1007
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        197,
+        200,
+        177
+      ],
+      "name": "Chipwi",
+      "source_point_interpretation": "The registered native centre is depicted within the named Myanmar township, visibly on the township side beyond the international boundary printed stroke. China is the labelled grey region across that stroke.",
+      "interpretation_method": "Direct visual inspection of original source/point paired crop, read together with full map title, named township region, international-boundary legend and China country label. RGB-distance ranking selected crops for inspection; RGB values did not determine this disposition.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        },
+        {
+          "index": 1,
+          "hash": "90053751d3adb3aaebb34a81be9c49f0ef6865d0e630906b3dfb386111cf2c4d",
+          "registry_index": 13,
+          "id": "gb:CHN:ADM1:43563684B84540832148656",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+              "git_blob_oid": "29edaa5770af7af9b72432cc407ca296bbde6e15",
+              "mode": "100644",
+              "bytes": 77377,
+              "sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d",
+              "decoded_bytes": 263343,
+              "decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623"
+            }
+          ],
+          "inside": 40,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-109.png",
+      "earlier_review_panel": "margin-Chipwi-109.png",
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2004.858618164119,
+          "intercept_points": -196311.50838928772,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0965850829379633,
+          "rms_residual_pdf_points": 0.05918193725209916,
+          "alternating_label_holdout_max_pdf_points": 0.10033035284141079
+        },
+        "N": {
+          "slope_points_per_degree": 2004.829875837032,
+          "intercept_points": -50812.65709751619,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.11035505023028236,
+          "rms_residual_pdf_points": 0.06399655597546076,
+          "alternating_label_holdout_max_pdf_points": 0.10116577146254713
+        }
+      },
+      "qualification": "UNQUALIFIED; no original operand removed; current-owner-zero/eligibility/native physical checks have not been run for a proposed source-choice fork."
+    },
+    {
+      "local_index": 20,
+      "owner": 30164,
+      "y": 110917,
+      "x": 203007,
+      "original_interval": 488,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/456/runs/1"
+      },
+      "inside": [
+        0
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 98.76498096625802,
+      "longitude_exact_rational": "12946410/131083",
+      "latitude_degrees_north": 26.671768669990435,
+      "latitude_native_f64le_hex": "1a161408f9ab3a40",
+      "registered_pdf_point": [
+        1619.7064558865095,
+        1938.747119759646
+      ],
+      "render_scale1_pixel": [
+        1620,
+        653
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        241,
+        244,
+        221
+      ],
+      "name": "Tsawlaw",
+      "source_point_interpretation": "The registered native centre is depicted within the named Myanmar township, visibly on the township side beyond the international boundary printed stroke. China is the labelled grey region across that stroke.",
+      "interpretation_method": "Direct visual inspection of original source/point paired crop, read together with full map title, named township region, international-boundary legend and China country label. RGB-distance ranking selected crops for inspection; RGB values did not determine this disposition.",
+      "original_operand_hit_class": "reference-only",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 33,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-tsawlaw-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/ebe80c12-c8e8-4f9b-9f0e-a1441f69d2c9/Tsp_Map_VL_Tsawlaw_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Tsawlaw Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Tsawlaw.pdf",
+        "bytes": 4941302,
+        "sha256": "6e17be57229058b55e9288871c397ed393f79a2dd05c9b67fa9b9f08371570ae",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Tsawlaw-020.png",
+      "earlier_review_panel": "margin-Tsawlaw-020.png",
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2438.730523681702,
+          "intercept_points": -239241.46729736924,
+          "controls": 8,
+          "distinct_label_values": 4,
+          "max_residual_pdf_points": 0.07430725105223246,
+          "rms_residual_pdf_points": 0.05447263379300002,
+          "alternating_label_holdout_max_pdf_points": 0.1255035400390625
+        },
+        "N": {
+          "slope_points_per_degree": 2438.6700439453525,
+          "intercept_points": -63104.896154786205,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.07503662111412268,
+          "rms_residual_pdf_points": 0.061267144566822085,
+          "alternating_label_holdout_max_pdf_points": 0.12506103515625
+        }
+      },
+      "qualification": "UNQUALIFIED; no original operand removed; current-owner-zero/eligibility/native physical checks have not been run for a proposed source-choice fork."
+    },
+    {
+      "local_index": 200,
+      "owner": 30286,
+      "y": 111797,
+      "x": 202720,
+      "original_interval": 642,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/614/runs/0"
+      },
+      "inside": [
+        0
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 98.37087951908333,
+      "longitude_exact_rational": "12894750/131083",
+      "latitude_degrees_north": 25.586893220160217,
+      "latitude_native_f64le_hex": "0fd552a23e963940",
+      "registered_pdf_point": [
+        908.1971909307176,
+        484.7108601130167
+      ],
+      "render_scale1_pixel": [
+        908,
+        2107
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        175,
+        178,
+        155
+      ],
+      "name": "Chipwi",
+      "source_point_interpretation": "The registered native centre is depicted within the named Myanmar township, visibly on the township side beyond the international boundary printed stroke. China is the labelled grey region across that stroke.",
+      "interpretation_method": "Direct visual inspection of original source/point paired crop, read together with full map title, named township region, international-boundary legend and China country label. RGB-distance ranking selected crops for inspection; RGB values did not determine this disposition.",
+      "original_operand_hit_class": "reference-only",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-200.png",
+      "earlier_review_panel": "margin-Chipwi-200.png",
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2004.858618164119,
+          "intercept_points": -196311.50838928772,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0965850829379633,
+          "rms_residual_pdf_points": 0.05918193725209916,
+          "alternating_label_holdout_max_pdf_points": 0.10033035284141079
+        },
+        "N": {
+          "slope_points_per_degree": 2004.829875837032,
+          "intercept_points": -50812.65709751619,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.11035505023028236,
+          "rms_residual_pdf_points": 0.06399655597546076,
+          "alternating_label_holdout_max_pdf_points": 0.10116577146254713
+        }
+      },
+      "qualification": "UNQUALIFIED; no original operand removed; current-owner-zero/eligibility/native physical checks have not been run for a proposed source-choice fork."
+    },
+    {
+      "local_index": 38,
+      "owner": 30286,
+      "y": 111221,
+      "x": 202946,
+      "original_interval": 534,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/504/runs/0"
+      },
+      "inside": [
+        0
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 98.68121724403622,
+      "longitude_exact_rational": "12935430/131083",
+      "latitude_degrees_north": 26.29813448844196,
+      "latitude_native_f64le_hex": "fcaab58a524c3a40",
+      "registered_pdf_point": [
+        1530.3804533439688,
+        1910.628603692472
+      ],
+      "render_scale1_pixel": [
+        1530,
+        681
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        184,
+        187,
+        164
+      ],
+      "name": "Chipwi",
+      "source_point_interpretation": "The registered native centre is depicted within the named Myanmar township, visibly on the township side beyond the international boundary printed stroke. China is the labelled grey region across that stroke.",
+      "interpretation_method": "Direct visual inspection of original source/point paired crop, read together with full map title, named township region, international-boundary legend and China country label. RGB-distance ranking selected crops for inspection; RGB values did not determine this disposition.",
+      "original_operand_hit_class": "reference-only",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-038.png",
+      "earlier_review_panel": "margin-Chipwi-038.png",
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2004.858618164119,
+          "intercept_points": -196311.50838928772,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0965850829379633,
+          "rms_residual_pdf_points": 0.05918193725209916,
+          "alternating_label_holdout_max_pdf_points": 0.10033035284141079
+        },
+        "N": {
+          "slope_points_per_degree": 2004.829875837032,
+          "intercept_points": -50812.65709751619,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.11035505023028236,
+          "rms_residual_pdf_points": 0.06399655597546076,
+          "alternating_label_holdout_max_pdf_points": 0.10116577146254713
+        }
+      },
+      "qualification": "UNQUALIFIED; no original operand removed; current-owner-zero/eligibility/native physical checks have not been run for a proposed source-choice fork."
+    },
+    {
+      "local_index": 75,
+      "owner": 30286,
+      "y": 111269,
+      "x": 202957,
+      "original_interval": 550,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/518/runs/1"
+      },
+      "inside": [
+        0
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 98.69632217755162,
+      "longitude_exact_rational": "12937410/131083",
+      "latitude_degrees_north": 26.239028881669924,
+      "latitude_native_f64le_hex": "60922dff303d3a40",
+      "registered_pdf_point": [
+        1560.6637094791222,
+        1792.1319174064192
+      ],
+      "render_scale1_pixel": [
+        1561,
+        800
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        148,
+        151,
+        128
+      ],
+      "name": "Chipwi",
+      "source_point_interpretation": "The registered native centre is depicted within the named Myanmar township, visibly on the township side beyond the international boundary printed stroke. China is the labelled grey region across that stroke.",
+      "interpretation_method": "Direct visual inspection of original source/point paired crop, read together with full map title, named township region, international-boundary legend and China country label. RGB-distance ranking selected crops for inspection; RGB values did not determine this disposition.",
+      "original_operand_hit_class": "reference-only",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-075.png",
+      "earlier_review_panel": "margin-Chipwi-075.png",
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2004.858618164119,
+          "intercept_points": -196311.50838928772,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0965850829379633,
+          "rms_residual_pdf_points": 0.05918193725209916,
+          "alternating_label_holdout_max_pdf_points": 0.10033035284141079
+        },
+        "N": {
+          "slope_points_per_degree": 2004.829875837032,
+          "intercept_points": -50812.65709751619,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.11035505023028236,
+          "rms_residual_pdf_points": 0.06399655597546076,
+          "alternating_label_holdout_max_pdf_points": 0.10116577146254713
+        }
+      },
+      "qualification": "UNQUALIFIED; no original operand removed; current-owner-zero/eligibility/native physical checks have not been run for a proposed source-choice fork."
+    },
+    {
+      "local_index": 107,
+      "owner": 30286,
+      "y": 111352,
+      "x": 202970,
+      "original_interval": 574,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/541/runs/0"
+      },
+      "inside": [
+        0,
+        1
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 98.71417346261529,
+      "longitude_exact_rational": "12939750/131083",
+      "latitude_degrees_north": 26.136754513107032,
+      "latitude_native_f64le_hex": "0760015802233a40",
+      "registered_pdf_point": [
+        1596.4530121843272,
+        1587.089207779165
+      ],
+      "render_scale1_pixel": [
+        1596,
+        1005
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        178,
+        181,
+        158
+      ],
+      "name": "Chipwi",
+      "source_point_interpretation": "The registered native centre is depicted within the named Myanmar township, visibly on the township side beyond the international boundary printed stroke. China is the labelled grey region across that stroke.",
+      "interpretation_method": "Direct visual inspection of original source/point paired crop, read together with full map title, named township region, international-boundary legend and China country label. RGB-distance ranking selected crops for inspection; RGB values did not determine this disposition.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        },
+        {
+          "index": 1,
+          "hash": "90053751d3adb3aaebb34a81be9c49f0ef6865d0e630906b3dfb386111cf2c4d",
+          "registry_index": 13,
+          "id": "gb:CHN:ADM1:43563684B84540832148656",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+              "git_blob_oid": "29edaa5770af7af9b72432cc407ca296bbde6e15",
+              "mode": "100644",
+              "bytes": 77377,
+              "sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d",
+              "decoded_bytes": 263343,
+              "decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623"
+            }
+          ],
+          "inside": 40,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-107.png",
+      "earlier_review_panel": "margin-Chipwi-107.png",
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2004.858618164119,
+          "intercept_points": -196311.50838928772,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0965850829379633,
+          "rms_residual_pdf_points": 0.05918193725209916,
+          "alternating_label_holdout_max_pdf_points": 0.10033035284141079
+        },
+        "N": {
+          "slope_points_per_degree": 2004.829875837032,
+          "intercept_points": -50812.65709751619,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.11035505023028236,
+          "rms_residual_pdf_points": 0.06399655597546076,
+          "alternating_label_holdout_max_pdf_points": 0.10116577146254713
+        }
+      },
+      "qualification": "UNQUALIFIED; no original operand removed; current-owner-zero/eligibility/native physical checks have not been run for a proposed source-choice fork."
+    },
+    {
+      "local_index": 81,
+      "owner": 30191,
+      "y": 112170,
+      "x": 202285,
+      "original_interval": 720,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/693/runs/0"
+      },
+      "inside": [
+        1
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 97.77354805733772,
+      "longitude_exact_rational": "12816450/131083",
+      "latitude_degrees_north": 25.124040998014088,
+      "latitude_native_f64le_hex": "6ed59d26c11f3940",
+      "registered_pdf_point": [
+        955.2639440987841,
+        1192.6437531375195
+      ],
+      "render_scale1_pixel": [
+        955,
+        1399
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        154,
+        157,
+        134
+      ],
+      "name": "Waingmaw",
+      "source_point_interpretation": "The registered native centre is depicted within the named Myanmar township, visibly on the township side beyond the international boundary printed stroke. China is the labelled grey region across that stroke.",
+      "interpretation_method": "Direct visual inspection of original source/point paired crop, read together with full map title, named township region, international-boundary legend and China country label. RGB-distance ranking selected crops for inspection; RGB values did not determine this disposition.",
+      "original_operand_hit_class": "reference-only",
+      "original_hit_operands": [
+        {
+          "index": 1,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 161,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-waingmaw-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/44447642-fc77-4170-8156-3a4300b336f0/Tsp_Map_VL_Waingmaw_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Waingmaw Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Waingmaw.pdf",
+        "bytes": 6108373,
+        "sha256": "13ee06385ff541e3239077119d07f9b786700c40408007685896213d611f5c88",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Waingmaw-081.png",
+      "earlier_review_panel": "margin-Waingmaw-081.png",
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1754.9897487095764,
+          "intercept_points": -170636.31059149202,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.10354846762493253,
+          "rms_residual_pdf_points": 0.061709286275999774,
+          "alternating_label_holdout_max_pdf_points": 0.13428878781269304
+        },
+        "N": {
+          "slope_points_per_degree": 1755.2263968331426,
+          "intercept_points": -42905.736201694905,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.12873622347979108,
+          "rms_residual_pdf_points": 0.06651372958306744,
+          "alternating_label_holdout_max_pdf_points": 0.13189086913189385
+        }
+      },
+      "qualification": "UNQUALIFIED; no original operand removed; current-owner-zero/eligibility/native physical checks have not been run for a proposed source-choice fork."
+    },
+    {
+      "local_index": 40,
+      "owner": 30286,
+      "y": 111222,
+      "x": 202946,
+      "original_interval": 535,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/505/runs/0"
+      },
+      "inside": [
+        0
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 98.68121724403622,
+      "longitude_exact_rational": "12935430/131083",
+      "latitude_degrees_north": 26.29690342864933,
+      "latitude_native_f64le_hex": "801ef4dc014c3a40",
+      "registered_pdf_point": [
+        1530.3804533439688,
+        1908.1605382412672
+      ],
+      "render_scale1_pixel": [
+        1530,
+        684
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        238,
+        241,
+        218
+      ],
+      "name": "Chipwi",
+      "source_point_interpretation": "The registered native centre is depicted within the named Myanmar township, visibly on the township side beyond the international boundary printed stroke. China is the labelled grey region across that stroke.",
+      "interpretation_method": "Direct visual inspection of original source/point paired crop, read together with full map title, named township region, international-boundary legend and China country label. RGB-distance ranking selected crops for inspection; RGB values did not determine this disposition.",
+      "original_operand_hit_class": "reference-only",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-040.png",
+      "earlier_review_panel": "margin-Chipwi-040.png",
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2004.858618164119,
+          "intercept_points": -196311.50838928772,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0965850829379633,
+          "rms_residual_pdf_points": 0.05918193725209916,
+          "alternating_label_holdout_max_pdf_points": 0.10033035284141079
+        },
+        "N": {
+          "slope_points_per_degree": 2004.829875837032,
+          "intercept_points": -50812.65709751619,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.11035505023028236,
+          "rms_residual_pdf_points": 0.06399655597546076,
+          "alternating_label_holdout_max_pdf_points": 0.10116577146254713
+        }
+      },
+      "qualification": "UNQUALIFIED; no original operand removed; current-owner-zero/eligibility/native physical checks have not been run for a proposed source-choice fork."
+    },
+    {
+      "local_index": 112,
+      "owner": 30286,
+      "y": 111354,
+      "x": 202971,
+      "original_interval": 576,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/543/runs/0"
+      },
+      "inside": [
+        0,
+        1
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 98.71554663838941,
+      "longitude_exact_rational": "12939930/131083",
+      "latitude_degrees_north": 26.134288963224613,
+      "latitude_native_f64le_hex": "7243f1c260223a40",
+      "registered_pdf_point": [
+        1599.2060354693094,
+        1582.1461997145234
+      ],
+      "render_scale1_pixel": [
+        1599,
+        1010
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        210,
+        213,
+        190
+      ],
+      "name": "Chipwi",
+      "source_point_interpretation": "The registered native centre is depicted within the named Myanmar township, visibly on the township side beyond the international boundary printed stroke. China is the labelled grey region across that stroke.",
+      "interpretation_method": "Direct visual inspection of original source/point paired crop, read together with full map title, named township region, international-boundary legend and China country label. RGB-distance ranking selected crops for inspection; RGB values did not determine this disposition.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        },
+        {
+          "index": 1,
+          "hash": "90053751d3adb3aaebb34a81be9c49f0ef6865d0e630906b3dfb386111cf2c4d",
+          "registry_index": 13,
+          "id": "gb:CHN:ADM1:43563684B84540832148656",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+              "git_blob_oid": "29edaa5770af7af9b72432cc407ca296bbde6e15",
+              "mode": "100644",
+              "bytes": 77377,
+              "sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d",
+              "decoded_bytes": 263343,
+              "decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623"
+            }
+          ],
+          "inside": 40,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-112.png",
+      "earlier_review_panel": "margin-Chipwi-112.png",
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2004.858618164119,
+          "intercept_points": -196311.50838928772,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0965850829379633,
+          "rms_residual_pdf_points": 0.05918193725209916,
+          "alternating_label_holdout_max_pdf_points": 0.10033035284141079
+        },
+        "N": {
+          "slope_points_per_degree": 2004.829875837032,
+          "intercept_points": -50812.65709751619,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.11035505023028236,
+          "rms_residual_pdf_points": 0.06399655597546076,
+          "alternating_label_holdout_max_pdf_points": 0.10116577146254713
+        }
+      },
+      "qualification": "UNQUALIFIED; no original operand removed; current-owner-zero/eligibility/native physical checks have not been run for a proposed source-choice fork."
+    },
+    {
+      "local_index": 114,
+      "owner": 30286,
+      "y": 111355,
+      "x": 202971,
+      "original_interval": 577,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/544/runs/0"
+      },
+      "inside": [
+        0,
+        1
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 98.71554663838941,
+      "longitude_exact_rational": "12939930/131083",
+      "latitude_degrees_north": 26.133056168762007,
+      "latitude_native_f64le_hex": "275d15f80f223a40",
+      "registered_pdf_point": [
+        1599.2060354693094,
+        1579.674656545125
+      ],
+      "render_scale1_pixel": [
+        1599,
+        1012
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        201,
+        204,
+        181
+      ],
+      "name": "Chipwi",
+      "source_point_interpretation": "The registered native centre is depicted within the named Myanmar township, visibly on the township side beyond the international boundary printed stroke. China is the labelled grey region across that stroke.",
+      "interpretation_method": "Direct visual inspection of original source/point paired crop, read together with full map title, named township region, international-boundary legend and China country label. RGB-distance ranking selected crops for inspection; RGB values did not determine this disposition.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        },
+        {
+          "index": 1,
+          "hash": "90053751d3adb3aaebb34a81be9c49f0ef6865d0e630906b3dfb386111cf2c4d",
+          "registry_index": 13,
+          "id": "gb:CHN:ADM1:43563684B84540832148656",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+              "git_blob_oid": "29edaa5770af7af9b72432cc407ca296bbde6e15",
+              "mode": "100644",
+              "bytes": 77377,
+              "sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d",
+              "decoded_bytes": 263343,
+              "decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623"
+            }
+          ],
+          "inside": 40,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-114.png",
+      "earlier_review_panel": "margin-Chipwi-114.png",
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2004.858618164119,
+          "intercept_points": -196311.50838928772,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0965850829379633,
+          "rms_residual_pdf_points": 0.05918193725209916,
+          "alternating_label_holdout_max_pdf_points": 0.10033035284141079
+        },
+        "N": {
+          "slope_points_per_degree": 2004.829875837032,
+          "intercept_points": -50812.65709751619,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.11035505023028236,
+          "rms_residual_pdf_points": 0.06399655597546076,
+          "alternating_label_holdout_max_pdf_points": 0.10116577146254713
+        }
+      },
+      "qualification": "UNQUALIFIED; no original operand removed; current-owner-zero/eligibility/native physical checks have not been run for a proposed source-choice fork."
+    },
+    {
+      "local_index": 18,
+      "owner": 30164,
+      "y": 110916,
+      "x": 203007,
+      "original_interval": 487,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/455/runs/1"
+      },
+      "inside": [
+        0
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 98.76498096625802,
+      "longitude_exact_rational": "12946410/131083",
+      "latitude_degrees_north": 26.672995723200046,
+      "latitude_native_f64le_hex": "f87d9d7249ac3a40",
+      "registered_pdf_point": [
+        1619.7064558865095,
+        1941.7394976642536
+      ],
+      "render_scale1_pixel": [
+        1620,
+        650
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        244,
+        247,
+        224
+      ],
+      "name": "Tsawlaw",
+      "source_point_interpretation": "The registered native centre is depicted within the named Myanmar township, visibly on the township side beyond the international boundary printed stroke. China is the labelled grey region across that stroke.",
+      "interpretation_method": "Direct visual inspection of original source/point paired crop, read together with full map title, named township region, international-boundary legend and China country label. RGB-distance ranking selected crops for inspection; RGB values did not determine this disposition.",
+      "original_operand_hit_class": "reference-only",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 33,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-tsawlaw-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/ebe80c12-c8e8-4f9b-9f0e-a1441f69d2c9/Tsp_Map_VL_Tsawlaw_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Tsawlaw Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Tsawlaw.pdf",
+        "bytes": 4941302,
+        "sha256": "6e17be57229058b55e9288871c397ed393f79a2dd05c9b67fa9b9f08371570ae",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Tsawlaw-018.png",
+      "earlier_review_panel": "margin-Tsawlaw-018.png",
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2438.730523681702,
+          "intercept_points": -239241.46729736924,
+          "controls": 8,
+          "distinct_label_values": 4,
+          "max_residual_pdf_points": 0.07430725105223246,
+          "rms_residual_pdf_points": 0.05447263379300002,
+          "alternating_label_holdout_max_pdf_points": 0.1255035400390625
+        },
+        "N": {
+          "slope_points_per_degree": 2438.6700439453525,
+          "intercept_points": -63104.896154786205,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.07503662111412268,
+          "rms_residual_pdf_points": 0.061267144566822085,
+          "alternating_label_holdout_max_pdf_points": 0.12506103515625
+        }
+      },
+      "qualification": "UNQUALIFIED; no original operand removed; current-owner-zero/eligibility/native physical checks have not been run for a proposed source-choice fork."
+    },
+    {
+      "local_index": 203,
+      "owner": 30286,
+      "y": 111798,
+      "x": 202720,
+      "original_interval": 643,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/615/runs/0"
+      },
+      "inside": [
+        0
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 98.37087951908333,
+      "longitude_exact_rational": "12894750/131083",
+      "latitude_degrees_north": 25.585654703477452,
+      "latitude_native_f64le_hex": "2a2f7677ed953940",
+      "registered_pdf_point": [
+        908.1971909307176,
+        482.2278448656871
+      ],
+      "render_scale1_pixel": [
+        908,
+        2110
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        227,
+        230,
+        207
+      ],
+      "name": "Chipwi",
+      "source_point_interpretation": "The registered native centre is depicted within the named Myanmar township, visibly on the township side beyond the international boundary printed stroke. China is the labelled grey region across that stroke.",
+      "interpretation_method": "Direct visual inspection of original source/point paired crop, read together with full map title, named township region, international-boundary legend and China country label. RGB-distance ranking selected crops for inspection; RGB values did not determine this disposition.",
+      "original_operand_hit_class": "reference-only",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-203.png",
+      "earlier_review_panel": "margin-Chipwi-203.png",
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2004.858618164119,
+          "intercept_points": -196311.50838928772,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0965850829379633,
+          "rms_residual_pdf_points": 0.05918193725209916,
+          "alternating_label_holdout_max_pdf_points": 0.10033035284141079
+        },
+        "N": {
+          "slope_points_per_degree": 2004.829875837032,
+          "intercept_points": -50812.65709751619,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.11035505023028236,
+          "rms_residual_pdf_points": 0.06399655597546076,
+          "alternating_label_holdout_max_pdf_points": 0.10116577146254713
+        }
+      },
+      "qualification": "UNQUALIFIED; no original operand removed; current-owner-zero/eligibility/native physical checks have not been run for a proposed source-choice fork."
+    },
+    {
+      "local_index": 42,
+      "owner": 30286,
+      "y": 111223,
+      "x": 202946,
+      "original_interval": 536,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/506/runs/0"
+      },
+      "inside": [
+        0
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 98.68121724403622,
+      "longitude_exact_rational": "12935430/131083",
+      "latitude_degrees_north": 26.29567235578564,
+      "latitude_native_f64le_hex": "3c6efa2eb14b3a40",
+      "registered_pdf_point": [
+        1530.3804533439688,
+        1905.6924465848133
+      ],
+      "render_scale1_pixel": [
+        1530,
+        686
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        236,
+        239,
+        216
+      ],
+      "name": "Chipwi",
+      "source_point_interpretation": "The registered native centre is depicted within the named Myanmar township, visibly on the township side beyond the international boundary printed stroke. China is the labelled grey region across that stroke.",
+      "interpretation_method": "Direct visual inspection of original source/point paired crop, read together with full map title, named township region, international-boundary legend and China country label. RGB-distance ranking selected crops for inspection; RGB values did not determine this disposition.",
+      "original_operand_hit_class": "reference-only",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-042.png",
+      "earlier_review_panel": "margin-Chipwi-042.png",
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2004.858618164119,
+          "intercept_points": -196311.50838928772,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0965850829379633,
+          "rms_residual_pdf_points": 0.05918193725209916,
+          "alternating_label_holdout_max_pdf_points": 0.10033035284141079
+        },
+        "N": {
+          "slope_points_per_degree": 2004.829875837032,
+          "intercept_points": -50812.65709751619,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.11035505023028236,
+          "rms_residual_pdf_points": 0.06399655597546076,
+          "alternating_label_holdout_max_pdf_points": 0.10116577146254713
+        }
+      },
+      "qualification": "UNQUALIFIED; no original operand removed; current-owner-zero/eligibility/native physical checks have not been run for a proposed source-choice fork."
+    },
+    {
+      "local_index": 47,
+      "owner": 30286,
+      "y": 111226,
+      "x": 202945,
+      "original_interval": 539,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/509/runs/0"
+      },
+      "inside": [
+        0
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 98.6798440682621,
+      "longitude_exact_rational": "12935250/131083",
+      "latitude_degrees_north": 26.291979058772487,
+      "latitude_native_f64le_hex": "718bbc23bf4a3a40",
+      "registered_pdf_point": [
+        1527.6274300589575,
+        1898.2880143924995
+      ],
+      "render_scale1_pixel": [
+        1528,
+        694
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        250,
+        253,
+        230
+      ],
+      "name": "Chipwi",
+      "source_point_interpretation": "The registered native centre is depicted within the named Myanmar township, visibly on the township side beyond the international boundary printed stroke. China is the labelled grey region across that stroke.",
+      "interpretation_method": "Direct visual inspection of original source/point paired crop, read together with full map title, named township region, international-boundary legend and China country label. RGB-distance ranking selected crops for inspection; RGB values did not determine this disposition.",
+      "original_operand_hit_class": "reference-only",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-047.png",
+      "earlier_review_panel": "margin-Chipwi-047.png",
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2004.858618164119,
+          "intercept_points": -196311.50838928772,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0965850829379633,
+          "rms_residual_pdf_points": 0.05918193725209916,
+          "alternating_label_holdout_max_pdf_points": 0.10033035284141079
+        },
+        "N": {
+          "slope_points_per_degree": 2004.829875837032,
+          "intercept_points": -50812.65709751619,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.11035505023028236,
+          "rms_residual_pdf_points": 0.06399655597546076,
+          "alternating_label_holdout_max_pdf_points": 0.10116577146254713
+        }
+      },
+      "qualification": "UNQUALIFIED; no original operand removed; current-owner-zero/eligibility/native physical checks have not been run for a proposed source-choice fork."
+    },
+    {
+      "local_index": 116,
+      "owner": 30286,
+      "y": 111356,
+      "x": 202971,
+      "original_interval": 578,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/545/runs/0"
+      },
+      "inside": [
+        0,
+        1
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 98.71554663838941,
+      "longitude_exact_rational": "12939930/131083",
+      "latitude_degrees_north": 26.131823361285726,
+      "latitude_native_f64le_hex": "2c92012dbf213a40",
+      "registered_pdf_point": [
+        1599.2060354693094,
+        1577.2030872855248
+      ],
+      "render_scale1_pixel": [
+        1599,
+        1015
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        227,
+        230,
+        207
+      ],
+      "name": "Chipwi",
+      "source_point_interpretation": "The registered native centre is depicted within the named Myanmar township, visibly on the township side beyond the international boundary printed stroke. China is the labelled grey region across that stroke.",
+      "interpretation_method": "Direct visual inspection of original source/point paired crop, read together with full map title, named township region, international-boundary legend and China country label. RGB-distance ranking selected crops for inspection; RGB values did not determine this disposition.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        },
+        {
+          "index": 1,
+          "hash": "90053751d3adb3aaebb34a81be9c49f0ef6865d0e630906b3dfb386111cf2c4d",
+          "registry_index": 13,
+          "id": "gb:CHN:ADM1:43563684B84540832148656",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+              "git_blob_oid": "29edaa5770af7af9b72432cc407ca296bbde6e15",
+              "mode": "100644",
+              "bytes": 77377,
+              "sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d",
+              "decoded_bytes": 263343,
+              "decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623"
+            }
+          ],
+          "inside": 40,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-116.png",
+      "earlier_review_panel": "margin-Chipwi-116.png",
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2004.858618164119,
+          "intercept_points": -196311.50838928772,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0965850829379633,
+          "rms_residual_pdf_points": 0.05918193725209916,
+          "alternating_label_holdout_max_pdf_points": 0.10033035284141079
+        },
+        "N": {
+          "slope_points_per_degree": 2004.829875837032,
+          "intercept_points": -50812.65709751619,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.11035505023028236,
+          "rms_residual_pdf_points": 0.06399655597546076,
+          "alternating_label_holdout_max_pdf_points": 0.10116577146254713
+        }
+      },
+      "qualification": "UNQUALIFIED; no original operand removed; current-owner-zero/eligibility/native physical checks have not been run for a proposed source-choice fork."
+    },
+    {
+      "local_index": 77,
+      "owner": 30191,
+      "y": 112168,
+      "x": 202286,
+      "original_interval": 718,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/691/runs/0"
+      },
+      "inside": [
+        1
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 97.77492123311184,
+      "longitude_exact_rational": "12816630/131083",
+      "latitude_degrees_north": 25.12652749393781,
+      "latitude_native_f64le_hex": "fb81181b64203940",
+      "registered_pdf_point": [
+        957.6738535055483,
+        1197.0081164184521
+      ],
+      "render_scale1_pixel": [
+        958,
+        1395
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        157,
+        160,
+        137
+      ],
+      "name": "Waingmaw",
+      "source_point_interpretation": "The registered native centre is depicted within the named Myanmar township, visibly on the township side beyond the international boundary printed stroke. China is the labelled grey region across that stroke.",
+      "interpretation_method": "Direct visual inspection of original source/point paired crop, read together with full map title, named township region, international-boundary legend and China country label. RGB-distance ranking selected crops for inspection; RGB values did not determine this disposition.",
+      "original_operand_hit_class": "reference-only",
+      "original_hit_operands": [
+        {
+          "index": 1,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 161,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-waingmaw-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/44447642-fc77-4170-8156-3a4300b336f0/Tsp_Map_VL_Waingmaw_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Waingmaw Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Waingmaw.pdf",
+        "bytes": 6108373,
+        "sha256": "13ee06385ff541e3239077119d07f9b786700c40408007685896213d611f5c88",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Waingmaw-077.png",
+      "earlier_review_panel": "margin-Waingmaw-077.png",
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 1754.9897487095764,
+          "intercept_points": -170636.31059149202,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.10354846762493253,
+          "rms_residual_pdf_points": 0.061709286275999774,
+          "alternating_label_holdout_max_pdf_points": 0.13428878781269304
+        },
+        "N": {
+          "slope_points_per_degree": 1755.2263968331426,
+          "intercept_points": -42905.736201694905,
+          "controls": 14,
+          "distinct_label_values": 7,
+          "max_residual_pdf_points": 0.12873622347979108,
+          "rms_residual_pdf_points": 0.06651372958306744,
+          "alternating_label_holdout_max_pdf_points": 0.13189086913189385
+        }
+      },
+      "qualification": "UNQUALIFIED; no original operand removed; current-owner-zero/eligibility/native physical checks have not been run for a proposed source-choice fork."
+    },
+    {
+      "local_index": 25,
+      "owner": 30164,
+      "y": 110919,
+      "x": 203006,
+      "original_interval": 490,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/458/runs/0"
+      },
+      "inside": [
+        0
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 98.76360779048389,
+      "longitude_exact_rational": "12946230/131083",
+      "latitude_degrees_north": 26.669314523969426,
+      "latitude_native_f64le_hex": "be2f573258ab3a40",
+      "registered_pdf_point": [
+        1616.3576502117503,
+        1932.7622673747464
+      ],
+      "render_scale1_pixel": [
+        1616,
+        659
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        241,
+        244,
+        221
+      ],
+      "name": "Tsawlaw",
+      "source_point_interpretation": "The registered native centre is depicted within the named Myanmar township, visibly on the township side beyond the international boundary printed stroke. China is the labelled grey region across that stroke.",
+      "interpretation_method": "Direct visual inspection of original source/point paired crop, read together with full map title, named township region, international-boundary legend and China country label. RGB-distance ranking selected crops for inspection; RGB values did not determine this disposition.",
+      "original_operand_hit_class": "reference-only",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 33,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-tsawlaw-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/ebe80c12-c8e8-4f9b-9f0e-a1441f69d2c9/Tsp_Map_VL_Tsawlaw_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Tsawlaw Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Tsawlaw.pdf",
+        "bytes": 4941302,
+        "sha256": "6e17be57229058b55e9288871c397ed393f79a2dd05c9b67fa9b9f08371570ae",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Tsawlaw-025.png",
+      "earlier_review_panel": "margin-Tsawlaw-025.png",
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2438.730523681702,
+          "intercept_points": -239241.46729736924,
+          "controls": 8,
+          "distinct_label_values": 4,
+          "max_residual_pdf_points": 0.07430725105223246,
+          "rms_residual_pdf_points": 0.05447263379300002,
+          "alternating_label_holdout_max_pdf_points": 0.1255035400390625
+        },
+        "N": {
+          "slope_points_per_degree": 2438.6700439453525,
+          "intercept_points": -63104.896154786205,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.07503662111412268,
+          "rms_residual_pdf_points": 0.061267144566822085,
+          "alternating_label_holdout_max_pdf_points": 0.12506103515625
+        }
+      },
+      "qualification": "UNQUALIFIED; no original operand removed; current-owner-zero/eligibility/native physical checks have not been run for a proposed source-choice fork."
+    },
+    {
+      "local_index": 92,
+      "owner": 30286,
+      "y": 111322,
+      "x": 202982,
+      "original_interval": 562,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/529/runs/0"
+      },
+      "inside": [
+        0,
+        1
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 98.73065157190483,
+      "longitude_exact_rational": "12941910/131083",
+      "latitude_degrees_north": 26.173731512211976,
+      "latitude_native_f64le_hex": "2d3c1bab792c3a40",
+      "registered_pdf_point": [
+        1629.4892916044919,
+        1661.2218003035596
+      ],
+      "render_scale1_pixel": [
+        1629,
+        931
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        221,
+        224,
+        201
+      ],
+      "name": "Chipwi",
+      "source_point_interpretation": "The registered native centre is depicted within the named Myanmar township, visibly on the township side beyond the international boundary printed stroke. China is the labelled grey region across that stroke.",
+      "interpretation_method": "Direct visual inspection of original source/point paired crop, read together with full map title, named township region, international-boundary legend and China country label. RGB-distance ranking selected crops for inspection; RGB values did not determine this disposition.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        },
+        {
+          "index": 1,
+          "hash": "90053751d3adb3aaebb34a81be9c49f0ef6865d0e630906b3dfb386111cf2c4d",
+          "registry_index": 13,
+          "id": "gb:CHN:ADM1:43563684B84540832148656",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+              "git_blob_oid": "29edaa5770af7af9b72432cc407ca296bbde6e15",
+              "mode": "100644",
+              "bytes": 77377,
+              "sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d",
+              "decoded_bytes": 263343,
+              "decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623"
+            }
+          ],
+          "inside": 40,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-092.png",
+      "earlier_review_panel": "margin-Chipwi-092.png",
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2004.858618164119,
+          "intercept_points": -196311.50838928772,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0965850829379633,
+          "rms_residual_pdf_points": 0.05918193725209916,
+          "alternating_label_holdout_max_pdf_points": 0.10033035284141079
+        },
+        "N": {
+          "slope_points_per_degree": 2004.829875837032,
+          "intercept_points": -50812.65709751619,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.11035505023028236,
+          "rms_residual_pdf_points": 0.06399655597546076,
+          "alternating_label_holdout_max_pdf_points": 0.10116577146254713
+        }
+      },
+      "qualification": "UNQUALIFIED; no original operand removed; current-owner-zero/eligibility/native physical checks have not been run for a proposed source-choice fork."
+    },
+    {
+      "local_index": 105,
+      "owner": 30286,
+      "y": 111351,
+      "x": 202970,
+      "original_interval": 573,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/540/runs/0"
+      },
+      "inside": [
+        0,
+        1
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 98.71417346261529,
+      "longitude_exact_rational": "12939750/131083",
+      "latitude_degrees_north": 26.13798726852599,
+      "latitude_native_f64le_hex": "6095352253233a40",
+      "registered_pdf_point": [
+        1596.4530121843272,
+        1589.560672672691
+      ],
+      "render_scale1_pixel": [
+        1596,
+        1002
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        189,
+        192,
+        169
+      ],
+      "name": "Chipwi",
+      "source_point_interpretation": "The registered native centre is depicted within the named Myanmar township, visibly on the township side beyond the international boundary printed stroke. China is the labelled grey region across that stroke.",
+      "interpretation_method": "Direct visual inspection of original source/point paired crop, read together with full map title, named township region, international-boundary legend and China country label. RGB-distance ranking selected crops for inspection; RGB values did not determine this disposition.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        },
+        {
+          "index": 1,
+          "hash": "90053751d3adb3aaebb34a81be9c49f0ef6865d0e630906b3dfb386111cf2c4d",
+          "registry_index": 13,
+          "id": "gb:CHN:ADM1:43563684B84540832148656",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+              "git_blob_oid": "29edaa5770af7af9b72432cc407ca296bbde6e15",
+              "mode": "100644",
+              "bytes": 77377,
+              "sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d",
+              "decoded_bytes": 263343,
+              "decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623"
+            }
+          ],
+          "inside": 40,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-105.png",
+      "earlier_review_panel": "margin-Chipwi-105.png",
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2004.858618164119,
+          "intercept_points": -196311.50838928772,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0965850829379633,
+          "rms_residual_pdf_points": 0.05918193725209916,
+          "alternating_label_holdout_max_pdf_points": 0.10033035284141079
+        },
+        "N": {
+          "slope_points_per_degree": 2004.829875837032,
+          "intercept_points": -50812.65709751619,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.11035505023028236,
+          "rms_residual_pdf_points": 0.06399655597546076,
+          "alternating_label_holdout_max_pdf_points": 0.10116577146254713
+        }
+      },
+      "qualification": "UNQUALIFIED; no original operand removed; current-owner-zero/eligibility/native physical checks have not been run for a proposed source-choice fork."
+    },
+    {
+      "local_index": 118,
+      "owner": 30286,
+      "y": 111357,
+      "x": 202971,
+      "original_interval": 579,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/546/runs/0"
+      },
+      "inside": [
+        0,
+        1
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 98.71554663838941,
+      "longitude_exact_rational": "12939930/131083",
+      "latitude_degrees_north": 26.13059054079619,
+      "latitude_native_f64le_hex": "f8e2b5616e213a40",
+      "registered_pdf_point": [
+        1599.2060354693094,
+        1574.73149193656
+      ],
+      "render_scale1_pixel": [
+        1599,
+        1017
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        240,
+        243,
+        220
+      ],
+      "name": "Chipwi",
+      "source_point_interpretation": "The registered native centre is depicted within the named Myanmar township, visibly on the township side beyond the international boundary printed stroke. China is the labelled grey region across that stroke.",
+      "interpretation_method": "Direct visual inspection of original source/point paired crop, read together with full map title, named township region, international-boundary legend and China country label. RGB-distance ranking selected crops for inspection; RGB values did not determine this disposition.",
+      "original_operand_hit_class": "reference-and-foreign-administrative-source",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        },
+        {
+          "index": 1,
+          "hash": "90053751d3adb3aaebb34a81be9c49f0ef6865d0e630906b3dfb386111cf2c4d",
+          "registry_index": 13,
+          "id": "gb:CHN:ADM1:43563684B84540832148656",
+          "kind": "complete-retained-foreign-source-feature",
+          "pointer": "/features/4",
+          "source_pin": null,
+          "source_parts": [
+            {
+              "commit": "9431af7bce2729274500f6733843ebd5b1315117",
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM1-000.bin.gz",
+              "git_blob_oid": "29edaa5770af7af9b72432cc407ca296bbde6e15",
+              "mode": "100644",
+              "bytes": 77377,
+              "sha256": "ef7d65847af732f6e61430d6357a4909252f98771d9b00413d38bc3cb4eb767d",
+              "decoded_bytes": 263343,
+              "decoded_sha256": "bc4afc7eacf4351ae5b3ae7a612327987ce1123cb5deb8574fb49107091c6623"
+            }
+          ],
+          "inside": 40,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-118.png",
+      "earlier_review_panel": "margin-Chipwi-118.png",
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2004.858618164119,
+          "intercept_points": -196311.50838928772,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0965850829379633,
+          "rms_residual_pdf_points": 0.05918193725209916,
+          "alternating_label_holdout_max_pdf_points": 0.10033035284141079
+        },
+        "N": {
+          "slope_points_per_degree": 2004.829875837032,
+          "intercept_points": -50812.65709751619,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.11035505023028236,
+          "rms_residual_pdf_points": 0.06399655597546076,
+          "alternating_label_holdout_max_pdf_points": 0.10116577146254713
+        }
+      },
+      "qualification": "UNQUALIFIED; no original operand removed; current-owner-zero/eligibility/native physical checks have not been run for a proposed source-choice fork."
+    },
+    {
+      "local_index": 134,
+      "owner": 30286,
+      "y": 111518,
+      "x": 202950,
+      "original_interval": 592,
+      "diagnostic": {
+        "reason": "territorial_exclusion_cells",
+        "path": ".cache/mmr7479-native-actual-partitions-001/north-block26-27/native-diagnostic.json",
+        "pointer": "/decision_rows/559/runs/0"
+      },
+      "inside": [
+        0
+      ],
+      "boundary": [],
+      "longitude_degrees_east": 98.68670994713273,
+      "longitude_exact_rational": "12936150/131083",
+      "latitude_degrees_north": 25.93193704411273,
+      "latitude_native_f64le_hex": "2465166d93ee3940",
+      "registered_pdf_point": [
+        1541.392546484014,
+        1176.465026846061
+      ],
+      "render_scale1_pixel": [
+        1541,
+        1416
+      ],
+      "source_render_rgb_at_rounded_pixel": [
+        196,
+        199,
+        176
+      ],
+      "name": "Chipwi",
+      "source_point_interpretation": "The registered native centre is depicted within the named Myanmar township, visibly on the township side beyond the international boundary printed stroke. China is the labelled grey region across that stroke.",
+      "interpretation_method": "Direct visual inspection of original source/point paired crop, read together with full map title, named township region, international-boundary legend and China country label. RGB-distance ranking selected crops for inspection; RGB values did not determine this disposition.",
+      "original_operand_hit_class": "reference-only",
+      "original_hit_operands": [
+        {
+          "index": 0,
+          "hash": "97c02032eaa5b08f92584d39139cc8cc69da31e295afd32e96e97dfb50f69a02",
+          "registry_index": 1,
+          "id": "CHN",
+          "kind": "retained-reference-country",
+          "pointer": "/features/9",
+          "source_pin": {
+            "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+            "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+            "git_blob_oid": "235bf73f0890fa97c82d1471f840296f17cfcfca",
+            "bytes": 4719659,
+            "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+            "decoded_bytes": 13287234,
+            "decoded_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+          },
+          "source_parts": null,
+          "inside": 212,
+          "boundary": 0
+        }
+      ],
+      "source": {
+        "catalogue_url": "https://reliefweb.int/map/myanmar/myanmar-chipwi-township-kachin-state-20-april-2020-enmy",
+        "body_url": "https://reliefweb.int/attachments/96f57020-9c19-4ba9-909e-de1a9816f7ae/Tsp_Map_VL_Chipwi_-_Kachin_MIMU154v05_20Apr2020_A1_Eng.pdf",
+        "title": "Myanmar: Chipwi Township, Kachin State (20 April 2020)",
+        "producer": "Myanmar Information Management Unit (MIMU)",
+        "map_id": "MIMU154v05",
+        "printed_production_date": "2020-04-20",
+        "projection_datum": "Geographic/WGS84",
+        "boundary_source_printed": "MIMU",
+        "local_file": "MIMU2020-Chipwi.pdf",
+        "bytes": 5966618,
+        "sha256": "3b993ef86ce234e01cac8d153960ba3d9701b160fc11388e91d03ab5c2d4a3f9",
+        "printed_notice": "Informational purposes; approximate village and boundary locations; does not represent on-the-ground survey; no implied official endorsement or acceptance by United Nations."
+      },
+      "review_panel": "reviewed-Chipwi-134.png",
+      "earlier_review_panel": "margin-Chipwi-134.png",
+      "source_registration_fits": {
+        "E": {
+          "slope_points_per_degree": 2004.858618164119,
+          "intercept_points": -196311.50838928772,
+          "controls": 10,
+          "distinct_label_values": 5,
+          "max_residual_pdf_points": 0.0965850829379633,
+          "rms_residual_pdf_points": 0.05918193725209916,
+          "alternating_label_holdout_max_pdf_points": 0.10033035284141079
+        },
+        "N": {
+          "slope_points_per_degree": 2004.829875837032,
+          "intercept_points": -50812.65709751619,
+          "controls": 12,
+          "distinct_label_values": 6,
+          "max_residual_pdf_points": 0.11035505023028236,
+          "rms_residual_pdf_points": 0.06399655597546076,
+          "alternating_label_holdout_max_pdf_points": 0.10116577146254713
+        }
+      },
+      "qualification": "UNQUALIFIED; no original operand removed; current-owner-zero/eligibility/native physical checks have not been run for a proposed source-choice fork."
+    }
+  ]
+}
