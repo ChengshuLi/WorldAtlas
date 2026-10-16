@@ -288,12 +288,29 @@ class ScientificFixture(unittest.TestCase):
             self.assertTrue(pin['path'].startswith(destination+'/'))
             raw=(output/Path(pin['path']).name).read_bytes()
             self.assertEqual((len(raw),probe.sha(raw)),(pin['bytes'],pin['sha256']))
+        # Retained execution can have an older metadata entrypoint while its
+        # scientific algorithm, config, inputs and outputs remain identical.
+        encode = lambda value: (json.dumps(value, sort_keys=True, separators=(',', ':')) + '\n').encode()
+        preparation = output / 'preparation.json'
+        original = json.loads(preparation.read_bytes())
+        original['binding']['entry_sha256'] = '0' * 64
+        preparation.write_bytes(encode(original))
         before = {p.name: (p.read_bytes(), p.stat().st_mtime_ns) for p in output.iterdir()}
         resumed = subprocess.run(command + ['--resume'], cwd=root, env=env, capture_output=True, text=True, timeout=30)
         self.assertEqual(resumed.returncode, 0, resumed.stdout + resumed.stderr)
         self.assertTrue(json.loads(resumed.stdout)['resumed'])
         self.assertNotIn('observation', json.loads(resumed.stdout))
+        self.assertEqual(json.loads(resumed.stdout)['binding'], original['binding'])
         self.assertEqual(before, {p.name: (p.read_bytes(), p.stat().st_mtime_ns) for p in output.iterdir()})
+        for field in ('phase', 'program_sha256', 'config_sha256'):
+            changed = copy.deepcopy(original)
+            changed['binding'][field] = 'changed' if field == 'phase' else 'f' * 64
+            preparation.write_bytes(encode(changed))
+            refused = subprocess.run(command + ['--resume'], cwd=root, env=env, capture_output=True, text=True, timeout=30)
+            self.assertNotEqual(refused.returncode, 0)
+            self.assertIn('Source resume configuration/code/inventory differs', refused.stderr)
+            self.assertEqual(preparation.read_bytes(), encode(changed))
+        preparation.write_bytes(before['preparation.json'][0])
         # Every immutable output remains literal when the prior publication is
         # reused rather than rerunning the producer.
         damaged = output / 'source-qualification.json'

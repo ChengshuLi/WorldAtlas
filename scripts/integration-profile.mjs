@@ -14,8 +14,6 @@ export const COORDINATION_PATHS = new Set([
   'scripts/geographic-adjudication-api.mjs',
   'scripts/git-blob-transport.mjs', 'scripts/immutable-git-blobs.mjs',
   'scripts/integration-profile.mjs',
-  'scripts/classify-deployment-budget.mjs',
-  '.github/workflows/deployment-budget.yml',
   // Test-runner changes require full regression to validate the real inventory.
   'scripts/run-worker-merge.mjs',
   '.github/workflows/handoff-scope.yml',
@@ -170,12 +168,6 @@ export function validateSelectedExpectations(expected, ledger, ledgerHash, previ
 
 const branchScope = branch => `coordination/engineering/${branch.slice('engineering/'.length)}/`;
 const inScope = (name, scopes) => containsPackagePath(scopes, name);
-// Implicit loader/configuration files can change behavior merely by existing,
-// outside the explicit reader graph. Other owned ordinary blobs are eligible
-// for the complete unconsumed-role proof below; a suffix grants no authority.
-function implicitLoader(name) {
-  return /^(?:package(?:-lock)?\.json|npm-shrinkwrap\.json|(?:requirements|constraints)(?:[.-].*)?\.txt|pyproject\.toml|setup\.(?:py|cfg)|__init__\.py|(?:site|user)customize\.py|(?:js|ts)config(?:\.[^.]+)?\.json|import[-_.]?map\.json|binding\.gyp|(?:binding|deno|composer)\.json)$/i.test(name.split('/').at(-1));
-}
 function nativeOperandPath(name, branch, reservation) {
   return /^(?:rows|runs)-[0-9]+\.bin\.gz$/.test(name.split('/').at(-1)) &&
     (name === branchScope(branch) + 'native-operands/' + name.split('/').at(-1) ||
@@ -195,8 +187,7 @@ export function selectedDataCandidate(branch, files, reservation = {}) {
     files.some(file => file.filename === SELECTION && file.status === 'modified') &&
     files.every(file => !file.previous_filename && (file.filename === CHECKPOINT_LOCATOR
       ? ['added', 'modified'].includes(file.status) : [SELECTION, PACKAGE_INPUT_FILE, ADMINISTRATIVE_REGISTRY].includes(file.filename)
-      ? file.status === 'modified' : file.filename === manifest && file.status === 'modified' || file.status === 'added' && inScope(file.filename, scopes) && safe(file.filename) &&
-        !implicitLoader(file.filename)));
+      ? file.status === 'modified' : file.filename === manifest && file.status === 'modified' || file.status === 'added' && inScope(file.filename, scopes) && safe(file.filename)));
 }
 export async function integrationTree(api, repo, commit) {
   const object = await api(`/repos/${repo}/git/commits/${commit}`);
@@ -232,8 +223,8 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     const readRow = async (row, retain = true) => {
       needSelected(ordinary(row), 'missing ordinary role');
       if (!cache.has(row.sha)) {
-        // All required metadata shares this read cache. Supporting evidence
-        // is checked one complete member at a time and never accumulates here.
+        // Required metadata shares this read cache. Explicit transient roles
+        // are checked one complete member at a time without accumulating here.
         const blob = await api(`/repos/${repo}/git/blobs/${row.sha}`, 'GET', undefined, {retainImmutableBlob: retain, expectedImmutableBytes: row.size});
         needSelected(blob.encoding === 'base64' && typeof blob.content === 'string', 'missing blob bytes');
         const bytes = Buffer.from(blob.content, 'base64');
@@ -789,10 +780,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       needSelected(ordinary(baseline.entries.get(updatedManifest)), 'nonordinary scientific manifest');
       supporting.add(updatedManifest);
     }
-    for (const name of supporting) {
-      needSelected(!nativeOperandPath(name, branch, reservation), 'unbound native operand');
-      if (name !== updatedManifest || !manifestChanged) await read(name, authored, false);
-    }
+    for (const name of supporting) needSelected(!nativeOperandPath(name, branch, reservation), 'unbound native operand');
     if (supporting.size) {
       // Issue ownership and a historical-looking filename establish no role.
       // Reuse the fixed base-reader walk for every newly admitted retained file,
