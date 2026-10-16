@@ -1,0 +1,18 @@
+{
+  "kind": "actual-stock-finalize-native580-accepted7ef-data-reviewed3638-code",
+  "command": [
+    "node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "finalize",
+    ".takeover/next-successor/native580-finalize-config.json",
+    ".cache/delivery-handoff/native580-after-accepted2082/finalization"
+  ],
+  "actual_executing_code": "3638e4376fce2139899f626280bd40536f622c6b",
+  "code_acceptance_at_execution": "reviewed pending PR2083, not yet claimed accepted",
+  "accepted_numerical_baseline": "7ef13f96c0005b6e181a640005bd867bbc2f63d0",
+  "exit_code": 0,
+  "elapsed_seconds": 58.990267443004996,
+  "max_rss_kib": 566900,
+  "ended_utc": "2026-10-16T07:05:31.782888+00:00",
+  "source_or_qualification_replayed": false
+}
