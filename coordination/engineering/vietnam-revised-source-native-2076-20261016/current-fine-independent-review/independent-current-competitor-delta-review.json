@@ -1,0 +1,665 @@
+{
+  "kind": "independent-current-canonical-competitor-delta-review-original-Vietnam365",
+  "assessor": "/root/assess_vietnam_revised_sources",
+  "outcome": "pass-for-complete-current-canonical-fine-geography-contact-and-boundary-tie-requirement-at-pinned-base-only",
+  "geography_commit": "cd68e89523901acf477d0365470410b8b970bb48",
+  "executed_code_commit": "92070428a7e4e5537ef931f4dc11edc1fc0c3b6a",
+  "public_evidence_commit": "a4c4bf38d9f1c38ee4003da7db5cb6ed8153d679",
+  "public_commit_trees": {
+    "92070428a7e4e5537ef931f4dc11edc1fc0c3b6a": "bd2aa7bb6c6781209064c21428dfe30459aff159",
+    "a4c4bf38d9f1c38ee4003da7db5cb6ed8153d679": "500a564532086356e737def7b6959febdcd31250"
+  },
+  "public_commit_trees_verified_with_GitHub_API": true,
+  "reviewed_input_pins": [
+    {
+      "commit": "92070428a7e4e5537ef931f4dc11edc1fc0c3b6a",
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/observe-current-fine365.mjs",
+      "mode": "100644",
+      "git_blob_oid": "b1cf4f4c432a4af58c1380905191f7674367f35d",
+      "bytes": 14223,
+      "sha256": "63d09aadd8213c30bb1680091d2ab84417afb6ec9dc640c360ddf0b98637dd19"
+    },
+    {
+      "commit": "92070428a7e4e5537ef931f4dc11edc1fc0c3b6a",
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/run-current-fine365.py",
+      "mode": "100644",
+      "git_blob_oid": "ece21b8465ddc648fdf2a373bfd173b16eb41295",
+      "bytes": 5871,
+      "sha256": "5d8f9fc5aa65cf3b17a58c51d9d2b70768d8cc6a94ab09759450027071957fe4"
+    },
+    {
+      "commit": "92070428a7e4e5537ef931f4dc11edc1fc0c3b6a",
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine-input-plan.json",
+      "mode": "100644",
+      "git_blob_oid": "800cc480aa95f2501750c13cdda7623aa2e1fea7",
+      "bytes": 8647,
+      "sha256": "cbbe7c1d21fd87d1e6e65d02abf63838e13d80ca149a841ba5eadc1939f0ca04"
+    },
+    {
+      "commit": "a4c4bf38d9f1c38ee4003da7db5cb6ed8153d679",
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine365-001/current-fine365-observation.json",
+      "mode": "100644",
+      "git_blob_oid": "3e302c0b2bbdade92555f10104373b8aca9c4951",
+      "bytes": 406578,
+      "sha256": "963f917f94e2e69144c6e091e76771e313d9b29995f987a1db18cf820408359a"
+    },
+    {
+      "commit": "a4c4bf38d9f1c38ee4003da7db5cb6ed8153d679",
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine365-001/current-fine365-admission.json",
+      "mode": "100644",
+      "git_blob_oid": "3f121aceffe3e237f2d3b086d69b9ca459b95739",
+      "bytes": 1613,
+      "sha256": "b43aeaf404c5d2f69c1f3da4d5603100c3e50d849be83fd72facde15c25ca4ea"
+    },
+    {
+      "commit": "a4c4bf38d9f1c38ee4003da7db5cb6ed8153d679",
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine365-001/current-fine365-execution.json",
+      "mode": "100644",
+      "git_blob_oid": "63d8ab7eba20b4c9073731ce7d58437085bceb8b",
+      "bytes": 515,
+      "sha256": "191774e695b8d774d9d17fc7de357f5feba5bb5c1b732367791a22b69b0a4622"
+    },
+    {
+      "commit": "a4c4bf38d9f1c38ee4003da7db5cb6ed8153d679",
+      "path": "coordination/engineering/vietnam-revised-source-native-2076-20261016/current-fine365-001/current-fine365-execution.log",
+      "mode": "100644",
+      "git_blob_oid": "cfc1b25fdc362b6947681c4f62187b35b731b75b",
+      "bytes": 142,
+      "sha256": "964bbd42a1b89b2707ce632e52b73b00b5dfc962b3a61b2e00674d96a4cb80db"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/world-index.json",
+      "mode": "100644",
+      "git_blob_oid": "d4ca1f07f7f504484461007919f90af5c5732b61",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "mode": "100644",
+      "git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53",
+      "bytes": 1851757,
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-27.json",
+      "mode": "100644",
+      "git_blob_oid": "a6a359c8c566462b280a461b4a5e1591e1f486c4",
+      "bytes": 4863162,
+      "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-28.json",
+      "mode": "100644",
+      "git_blob_oid": "a9e03cb07194a73f643af85d1e6db94abe3b5fc9",
+      "bytes": 6613963,
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-4.json",
+      "mode": "100644",
+      "git_blob_oid": "ccdefbb55c62b317f11e6078cd9291dae5339693",
+      "bytes": 4835479,
+      "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c"
+    }
+  ],
+  "complete_current_inventory_descriptors_verified": [
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/world-index.json",
+      "mode": "100644",
+      "git_blob_oid": "d4ca1f07f7f504484461007919f90af5c5732b61",
+      "bytes": 944
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-0.json",
+      "mode": "100644",
+      "git_blob_oid": "85bdc3171a740db0bc756460dab5a50c6c54518d",
+      "bytes": 8539839
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-1.json",
+      "mode": "100644",
+      "git_blob_oid": "471e45dcd13904489bc434ae5115105fadba7ab9",
+      "bytes": 8060108
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-2.json",
+      "mode": "100644",
+      "git_blob_oid": "389e463dd5e44894fd221f53db584f55fff330d1",
+      "bytes": 6259307
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-3.json",
+      "mode": "100644",
+      "git_blob_oid": "e41c8f549f1cb2162f5adb30029bf4800e86c848",
+      "bytes": 5153118
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-4.json",
+      "mode": "100644",
+      "git_blob_oid": "ccdefbb55c62b317f11e6078cd9291dae5339693",
+      "bytes": 4835479
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-5.json",
+      "mode": "100644",
+      "git_blob_oid": "cf59e69b02ab2c9ad7344ddbf309a221a8be587b",
+      "bytes": 5226173
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-6.json",
+      "mode": "100644",
+      "git_blob_oid": "4be02d1d055a66c4e1606bab4f23ecda90350f34",
+      "bytes": 4607953
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-7.json",
+      "mode": "100644",
+      "git_blob_oid": "c88539c7899a0c257c48fc1a555895904832f0cc",
+      "bytes": 4257402
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-8.json",
+      "mode": "100644",
+      "git_blob_oid": "eec7163a536245c0249d1821fe81590aba2a1ded",
+      "bytes": 5097739
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-9.json",
+      "mode": "100644",
+      "git_blob_oid": "79a4f0cd17ca9f7007916be8419c2fa986fe7a61",
+      "bytes": 5729632
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-10.json",
+      "mode": "100644",
+      "git_blob_oid": "84b4cf537b801c7f6d3840173c49b7e4293a139d",
+      "bytes": 5144571
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-11.json",
+      "mode": "100644",
+      "git_blob_oid": "fd7d6f9f564a4b9b0ae7a56a2d7eb27e920017d8",
+      "bytes": 5133018
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-12.json",
+      "mode": "100644",
+      "git_blob_oid": "e8360aa55a8398d0fa841b5331febcabdc8588a2",
+      "bytes": 4489493
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-13.json",
+      "mode": "100644",
+      "git_blob_oid": "44f886df47aa3e313f0c2ce98faea045e2eba8ed",
+      "bytes": 5709487
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-14.json",
+      "mode": "100644",
+      "git_blob_oid": "2cd05a870d730c598eb463ac8be2300ca5be6e66",
+      "bytes": 4355198
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-15.json",
+      "mode": "100644",
+      "git_blob_oid": "4ef51307797f81b8cf7a647495f037a089f8b368",
+      "bytes": 5180426
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-16.json",
+      "mode": "100644",
+      "git_blob_oid": "02d53ca01dc014a3c9481eb1017a89487fc2bd89",
+      "bytes": 5213846
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-17.json",
+      "mode": "100644",
+      "git_blob_oid": "a2dc24c477fb10da8ebd5a1cff4765a8f34bd22a",
+      "bytes": 4948066
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-18.json",
+      "mode": "100644",
+      "git_blob_oid": "59012653b56da5a394e7692209b257e27883eab8",
+      "bytes": 4909063
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-19.json",
+      "mode": "100644",
+      "git_blob_oid": "306125db7012a9ac927bb4a169dea5166ef126e7",
+      "bytes": 4583022
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-20.json",
+      "mode": "100644",
+      "git_blob_oid": "efda4099740c3ef131ef631cdc6b6ecf345f226a",
+      "bytes": 6570767
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-21.json",
+      "mode": "100644",
+      "git_blob_oid": "28619c3c39b5808aae4b3f459b97c39de8b073b2",
+      "bytes": 6737781
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-22.json",
+      "mode": "100644",
+      "git_blob_oid": "b3b5cdd9c566e84bd32a2f64867e2bfe8986be2f",
+      "bytes": 4746385
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-23.json",
+      "mode": "100644",
+      "git_blob_oid": "371e95033d9c542bbf07c42afe7111074e35f246",
+      "bytes": 4962410
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-24.json",
+      "mode": "100644",
+      "git_blob_oid": "4110c75d7d0f5282e0a2bd263b430e8c1e78f0eb",
+      "bytes": 4816899
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-25.json",
+      "mode": "100644",
+      "git_blob_oid": "16ba4f38251d1bd99ac85f0ae7cca2f0424470f8",
+      "bytes": 4525239
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-26.json",
+      "mode": "100644",
+      "git_blob_oid": "5d61478ece9042cbd0791eabd2536e1054e26341",
+      "bytes": 4608983
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-27.json",
+      "mode": "100644",
+      "git_blob_oid": "a6a359c8c566462b280a461b4a5e1591e1f486c4",
+      "bytes": 4863162
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-28.json",
+      "mode": "100644",
+      "git_blob_oid": "a9e03cb07194a73f643af85d1e6db94abe3b5fc9",
+      "bytes": 6613963
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-29.json",
+      "mode": "100644",
+      "git_blob_oid": "b2375382c8e41ea4a6d11dd4337f5d73e424a879",
+      "bytes": 12932719
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-30.json",
+      "mode": "100644",
+      "git_blob_oid": "0deb9748357a854c5e7e6179f42d77a47a09ca9a",
+      "bytes": 11979437
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-31.json",
+      "mode": "100644",
+      "git_blob_oid": "1b89d7aef660ba0536acdb9b9f7a574b028ea01a",
+      "bytes": 10086485
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-32.json",
+      "mode": "100644",
+      "git_blob_oid": "6cf41fabbeddb18bbe426038251b86171c715ef7",
+      "bytes": 10211739
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/part-33.json",
+      "mode": "100644",
+      "git_blob_oid": "e8a8a8e8015cfc31005e85daa49fc2552ef1df9e",
+      "bytes": 607984
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/source-restoration-additions.json",
+      "mode": "100644",
+      "git_blob_oid": "18989f4f6b2789057a00eeda6c5c7e51f06e3caf",
+      "bytes": 1573576
+    },
+    {
+      "commit": "cd68e89523901acf477d0365470410b8b970bb48",
+      "path": "data/geography/macro-loose-ends-v5-additions.json",
+      "mode": "100644",
+      "git_blob_oid": "8f0e144d92e52ea473eecc7c2358c3464c648009",
+      "bytes": 11393
+    }
+  ],
+  "features": 49625,
+  "validated_vertices_from_actual_proof": 3968902,
+  "bounded_exclusions": 49589,
+  "stock_scanned_features": 36,
+  "independently_checked_survivor_bounds": [
+    {
+      "id": "gb:VNM:ADM2:81297802B7761745227660",
+      "part": "data/geography/part-27.json",
+      "candidate_keys": 6,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:VNM:ADM2:81297802B11536853186467",
+      "part": "data/geography/part-27.json",
+      "candidate_keys": 12,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:VNM:ADM2:81297802B53696601888295",
+      "part": "data/geography/part-27.json",
+      "candidate_keys": 4,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:VNM:ADM2:81297802B94679881937971",
+      "part": "data/geography/part-27.json",
+      "candidate_keys": 19,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:VNM:ADM2:81297802B72919536287172",
+      "part": "data/geography/part-27.json",
+      "candidate_keys": 4,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:VNM:ADM2:81297802B35887218353447",
+      "part": "data/geography/part-27.json",
+      "candidate_keys": 3,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:VNM:ADM2:81297802B75623207701482",
+      "part": "data/geography/part-27.json",
+      "candidate_keys": 147,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:VNM:ADM2:81297802B58374178577075",
+      "part": "data/geography/part-27.json",
+      "candidate_keys": 3,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:VNM:ADM2:81297802B55460345655510",
+      "part": "data/geography/part-27.json",
+      "candidate_keys": 10,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:VNM:ADM2:81297802B22471082550929",
+      "part": "data/geography/part-28.json",
+      "candidate_keys": 16,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:VNM:ADM2:81297802B2489932619372",
+      "part": "data/geography/part-28.json",
+      "candidate_keys": 39,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:VNM:ADM2:81297802B94651516294700",
+      "part": "data/geography/part-28.json",
+      "candidate_keys": 19,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:VNM:ADM2:81297802B14703404520131",
+      "part": "data/geography/part-28.json",
+      "candidate_keys": 7,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:VNM:ADM2:81297802B47938422647464",
+      "part": "data/geography/part-28.json",
+      "candidate_keys": 10,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:VNM:ADM2:81297802B46332855119377",
+      "part": "data/geography/part-28.json",
+      "candidate_keys": 20,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:VNM:ADM2:81297802B31175014332346",
+      "part": "data/geography/part-28.json",
+      "candidate_keys": 4,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:VNM:ADM2:81297802B24341511138047",
+      "part": "data/geography/part-28.json",
+      "candidate_keys": 12,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:VNM:ADM2:81297802B64889817574793",
+      "part": "data/geography/part-28.json",
+      "candidate_keys": 6,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:VNM:ADM2:81297802B5716614329371",
+      "part": "data/geography/part-28.json",
+      "candidate_keys": 1,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:VNM:ADM2:81297802B55237865359696",
+      "part": "data/geography/part-28.json",
+      "candidate_keys": 40,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:VNM:ADM2:81297802B42277751936117",
+      "part": "data/geography/part-28.json",
+      "candidate_keys": 2,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:VNM:ADM2:81297802B84784766195181",
+      "part": "data/geography/part-28.json",
+      "candidate_keys": 19,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:VNM:ADM2:81297802B6357673458882",
+      "part": "data/geography/part-28.json",
+      "candidate_keys": 4,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:VNM:ADM2:81297802B50713424689894",
+      "part": "data/geography/part-28.json",
+      "candidate_keys": 2,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:CHN:ADM2:17275852B12394774588724",
+      "part": "data/geography/part-4.json",
+      "candidate_keys": 33,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:CHN:ADM2:17275852B43817460377390",
+      "part": "data/geography/part-4.json",
+      "candidate_keys": 14,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:CHN:ADM2:17275852B45423289887647",
+      "part": "data/geography/part-4.json",
+      "candidate_keys": 6,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:CHN:ADM2:17275852B32075492285057",
+      "part": "data/geography/part-4.json",
+      "candidate_keys": 6,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:CHN:ADM2:17275852B38063051407977",
+      "part": "data/geography/part-4.json",
+      "candidate_keys": 8,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:CHN:ADM2:17275852B76703841753402",
+      "part": "data/geography/part-4.json",
+      "candidate_keys": 6,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:CHN:ADM2:17275852B24732894609656",
+      "part": "data/geography/part-4.json",
+      "candidate_keys": 27,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:CHN:ADM2:17275852B29668080933041",
+      "part": "data/geography/part-4.json",
+      "candidate_keys": 20,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:CHN:ADM2:17275852B31967187012085",
+      "part": "data/geography/part-4.json",
+      "candidate_keys": 131,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:CHN:ADM2:17275852B46978756476047",
+      "part": "data/geography/part-4.json",
+      "candidate_keys": 151,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:CHN:ADM2:17275852B24445486288332",
+      "part": "data/geography/part-4.json",
+      "candidate_keys": 23,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    },
+    {
+      "id": "gb:CHN:ADM2:17275852B87965925400106",
+      "part": "data/geography/part-4.json",
+      "candidate_keys": 24,
+      "literal_bounds_and_geometry_hash_match": true,
+      "independent_rational_bounds_count_match": true
+    }
+  ],
+  "whole_inventory_replay": false,
+  "native_predicate_replay": false,
+  "actual365_key_join_exact": true,
+  "all_original_contrary_contacts_retained_exactly": true,
+  "current_canonical_interior_contacts": 0,
+  "current_canonical_boundary_ties": 0,
+  "supported_display_choices": 348,
+  "blocked_proposed_CHN_assignments": 17,
+  "parent_source_choice_acceptance": "Root reports explicit acceptance of exact348 at2026-10-16T04:52Z; this review does not change that choice or17blocks.",
+  "actual_execution": {
+    "kind": "bounded-current-fine365-actual-execution-v1",
+    "exit_code": 0,
+    "code_commit": "92070428a7e4e5537ef931f4dc11edc1fc0c3b6a",
+    "enforced_process_group_rss_limit_bytes": 805306368,
+    "observed_sampled_process_group_peak_rss_bytes": 423948288,
+    "enforced_wall_deadline_seconds": 120,
+    "elapsed_seconds": 5.0154389909876045,
+    "termination_reason": null,
+    "admission_sha256": "b43aeaf404c5d2f69c1f3da4d5603100c3e50d849be83fd72facde15c25ca4ea",
+    "native_qualification": false,
+    "accepted_credit": 0
+  },
+  "review_retry_note": "An initial compact verifier compared Python JSON number formatting to a declared JavaScript JSON.stringify hash and failed on one equivalent Jinping geometry. All literal bounds/vertex counts matched. This verifier checks hashes with the declared serialization; no author scientific result was changed or rerun.",
+  "limitations": [
+    "The entire indexed36part canonical domain is covered by the authenticated actual proof; independent review checks its exhaustive code,37tree descriptors,all365joins,and36survivor literal bounds. It does not rerun the full203MBscan.",
+    "Original country-reference and raw-VNM proofs are reused unchanged; a missing current canonical contact does not erase365contrary original fine-source contacts.",
+    "No actual current native owner-zero, additive selected-row conservation, full native qualification, licensing implementation, or accepted repair credit is established.",
+    "The completeness claim is bounded to accepted canonical fine geography atcd68 and the separately retained country/raw-source operands, not every possible external geographic source."
+  ],
+  "owner_zero_validated": false,
+  "native_qualification": false,
+  "conservation_validated": false,
+  "accepted_credit": 0,
+  "review_elapsed_seconds": 2.126304217003053,
+  "review_process_max_rss_kib": 112648
+}
