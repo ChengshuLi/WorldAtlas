@@ -113,6 +113,43 @@ test('selected-data uses full setup with one narrow selection, exact package app
   for(const name of ['request.json','facts.json','result.json','patch.json'])assert(!f.reads.includes(f.authored.entries.get(prefix+name).sha),'opaque role was unnecessarily read');
   assert(!f.reads.includes(f.authored.entries.get('coordination/engineering/prior/authority.json').sha),'unchanged authority was reread');
 });
+function projectedFixture() {
+  return fixture({mutate:f=>{
+    const name='coordination/engineering/prior/reference-metadata.json';
+    const pin=f.put(name,{version:1,kind:'native-reference-metadata-projection-v1',native_selection:f.base},true);
+    const reference_projection={path:pin.path,bytes:pin.bytes,sha256:pin.sha256};
+    const selected=tree=>JSON.parse(f.blobs.get(tree.entries.get('data/ownership-selection.json').sha));
+    const before=selected(f.baseline),after=selected(f.authored);
+    f.put('data/ownership-selection.json',{...before,reference_projection},true);
+    f.put('data/ownership-selection.json',{...after,reference_projection});
+    f.referenceProjection=reference_projection;
+  }});
+}
+test('selected data keeps an unchanged reference projection separate from its native sidecar base',async()=>{
+  const f=projectedFixture();
+  assert.deepEqual(await f.run(),{test_selection:'selected-data',expectations_path:prefix+'selected-delivery-expectations.json',shards:[0]});
+  assert(f.reads.includes(f.authored.entries.get(f.referenceProjection.path).sha));
+});
+for(const [name,mutate]of Object.entries({
+  'native manifest':(f,s)=>{s.sha256='f'.repeat(64);},
+  'native source bank':(f,s)=>{s.selected_geography={path:'foreign.json',sha256:'f'.repeat(64)};},
+  'projection pointer':(f,s)=>{s.reference_projection={...s.reference_projection,sha256:'f'.repeat(64)};},
+  'removed projection':(f,s)=>{delete s.reference_projection;},
+  'combined projection body':f=>{f.put(f.referenceProjection.path,{forged:true});},
+  'missing projection body':f=>{f.authored.entries.delete(f.referenceProjection.path);},
+  'nonordinary projection':f=>{f.authored.entries.set(f.referenceProjection.path,{...f.authored.entries.get(f.referenceProjection.path),mode:'120000'});},
+  'forged retained pin':(f,s)=>{
+    s.reference_projection={...s.reference_projection,sha256:'f'.repeat(64)};
+    const before=JSON.parse(f.blobs.get(f.baseline.entries.get('data/ownership-selection.json').sha));
+    f.put('data/ownership-selection.json',{...before,reference_projection:s.reference_projection},true);
+  },
+}))test('selected data refuses '+name+' drift with a reference projection',async()=>{
+  const f=projectedFixture(),selected=JSON.parse(f.blobs.get(f.authored.entries.get('data/ownership-selection.json').sha));
+  mutate(f,selected);f.put('data/ownership-selection.json',selected);
+  // Keep the original author diff: the complete combined tree must also bind
+  // the retained projection, independently of the supplied changed-path list.
+  assert.equal(await f.run(),null);
+});
 test('inert evidence is not a license to append unreachable package data',async()=>{
   const f=fixture({mutate:f=>f.put(prefix+'assembly-receipt.json',{complete:true})});assert.ok(await f.run());
   f.definition.inputs.push(prefix+'assembly-receipt.json');f.put('.github/package-inputs.json',f.definition);assert.equal(await f.run(),null);
