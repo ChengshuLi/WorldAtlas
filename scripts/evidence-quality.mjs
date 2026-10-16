@@ -267,9 +267,9 @@ function verifySubjectInventory(manifest, readFile, maxFileBytes, limits) {
   }
 }
 
-/** Reader returns bytes from an immutable baseline or candidate; never executes packet code. */
+/** Reader returns immutable baseline/candidate bytes; onFileChecked sees only authenticated whole bodies. */
 export function validateEvidence(manifest, {readFile, expectedIssue, expectedSubjects, expectedPins,
-  expectedLane, maxFileBytes, maxTotalBytes} = {}) {
+  expectedLane, maxFileBytes, maxTotalBytes, onFileChecked} = {}) {
   require(manifest?.version === 1, 'Unsupported evidence version');
   require(Number.isSafeInteger(manifest.issue) && manifest.issue > 0 &&
     (!expectedIssue || manifest.issue === expectedIssue), 'Wrong evidence issue');
@@ -339,13 +339,15 @@ export function validateEvidence(manifest, {readFile, expectedIssue, expectedSub
     if (!readFile) { limits.push(`Bytes not checked: ${key}`); return; }
     const raw = Buffer.from(readFile(file.path, vintage, file));
     require(raw.length === file.bytes && sha256(raw) === file.sha256, `Input bytes mismatch: ${key}`);
+    let unpacked;
     if (file.uncompressed_sha256 !== undefined) {
       require(file.uncompressed_bytes <= maxFileBytes, 'Uncompressed file exceeds budget');
-      const unpacked = decodeEvidenceGzip(raw, file, {maxFileBytes: explicitMaxFileBytes});
+      unpacked = decodeEvidenceGzip(raw, file, {maxFileBytes: explicitMaxFileBytes});
       require(unpacked.length === file.uncompressed_bytes && sha256(unpacked) === file.uncompressed_sha256,
         `Uncompressed bytes mismatch: ${key}`);
     }
     checked.push(key);
+    onFileChecked?.(file, vintage, raw, unpacked);
   }
   for (const file of historicalFiles) inspect(file, file.commit);
   require(!manifest.baseline.subject_inventory || manifest.lane === 'geography',
