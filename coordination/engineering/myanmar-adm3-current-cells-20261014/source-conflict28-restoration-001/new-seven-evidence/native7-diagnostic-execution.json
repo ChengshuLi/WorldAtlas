@@ -1,0 +1,16 @@
+{
+  "command": [
+    "node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "native-diagnostic",
+    ".takeover/source28-native-feasibility/native7-diagnostic-config.json",
+    ".cache/delivery-handoff/source-conflict28-mmr7-native-diagnostic-349-001"
+  ],
+  "actual_executing_accepted_code_commit": "34981099cd03677b9ba374a4de6bf73cf65b0646",
+  "input_commit": "82a195a8585a4f13f7e6ac924a1ada090c4a377f",
+  "ended_utc": "2026-10-16T05:19:16.215471+00:00",
+  "elapsed_seconds": 2.0661438739916775,
+  "max_rss_kib": 200872,
+  "exit_code": 0,
+  "timeout_seconds": 120
+}
