@@ -4,6 +4,8 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
+import {deflateRawSync} from 'node:zlib';
+import {rehearsalReceiptFromZIP} from '../scripts/neon-storage-migration.mjs';
 import {spawnSync} from 'node:child_process';
 import {createLocalPostgres} from '../scripts/verify-postgres-schema.mjs';
 import {importBatch} from '../hosted/records.js';
@@ -37,17 +39,15 @@ test('reviewed forward operation requires an actual production baseline and exac
 
 test('fresh hash-pinned private Site maintenance attestation rejects stale, writable and mismatched context',()=>{const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-maintenance-test-')),now=Date.now(),operation={site_origin:'https://example.org',site_backend:'d1',source_revision:1321,source_snapshot_fingerprint:'a'.repeat(64)};try{const receipt={version:1,verification_method:'root-private-site-authenticated-read',site_origin:operation.site_origin,backend:'d1',source_revision:1321,source_snapshot_fingerprint:operation.source_snapshot_fingerprint,read_only:true,verified_at_utc:new Date(now).toISOString(),deployment_id:'isolated-test-deployment',environment_revision:1},write=value=>{const bytes=Buffer.from(JSON.stringify(value));fs.writeFileSync(path.join(directory,'maintenance.json'),bytes);operation.maintenance={receipt_file:'maintenance.json',receipt_sha256:hash(bytes)};};write(receipt);assert.equal(validateForwardMaintenance(operation,{root:directory,now}).runner_observed_site,false);for(const change of [{read_only:false},{backend:'postgres'},{source_revision:1322},{verified_at_utc:new Date(now-3600001).toISOString()},{verified_at_utc:new Date(now+30001).toISOString()}]){write({...receipt,...change});assert.throws(()=>validateForwardMaintenance(operation,{root:directory,now}),/maintenance/);}write(receipt);fs.appendFileSync(path.join(directory,'maintenance.json'),' ');assert.throws(()=>validateForwardMaintenance(operation,{root:directory,now}),/bytes/);}finally{fs.rmSync(directory,{recursive:true,force:true});}});
 
-test('management workflows require explicit manual dispatch and reject push selection',()=>{
+test('forward management workflow requires explicit manual dispatch and rejects push selection',()=>{
  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-manual-selector-'));
  try{
-  for(const name of ['neon-forward-migrations.yml','neon-storage-migration.yml']){
-   const workflow=fs.readFileSync(new URL('../.github/workflows/'+name,import.meta.url),'utf8'),body=workflow.match(/run: \|\n([\s\S]*?)\n      - name: Set up Node/)[1].split('\n').map(line=>line.replace(/^          /,'')).join('\n');
-   assert.ok(!/^  push:/m.test(workflow));
-   for(const [event,mode] of [['workflow_dispatch','production'],['workflow_dispatch','rehearsal'],['workflow_dispatch','verify-only'],['push','production'],['workflow_dispatch','invalid']]){
-    const output=path.join(directory,'output');fs.writeFileSync(output,'');const result=spawnSync('bash',['-c',body],{env:{PATH:'/usr/bin:/bin',GITHUB_OUTPUT:output,EVENT_NAME:event,REQUESTED_MODE:mode},encoding:'utf8'});
-    if(event==='push'||mode==='invalid'){assert.notEqual(result.status,0);assert.equal(fs.readFileSync(output,'utf8'),'');}
-    else{assert.equal(result.status,0,result.stderr);assert.ok(fs.readFileSync(output,'utf8').includes('mode='+mode+'\n'));}
-   }
+  const workflow=fs.readFileSync(new URL('../.github/workflows/neon-forward-migrations.yml',import.meta.url),'utf8'),body=workflow.match(/run: \|\n([\s\S]*?)\n      - name: Set up Node/)[1].split('\n').map(line=>line.replace(/^          /,'')).join('\n');
+  assert.ok(!/^  push:/m.test(workflow));
+  for(const [event,mode] of [['workflow_dispatch','production'],['workflow_dispatch','rehearsal'],['workflow_dispatch','verify-only'],['push','production'],['workflow_dispatch','invalid']]){
+   const output=path.join(directory,'output');fs.writeFileSync(output,'');const result=spawnSync('bash',['-c',body],{env:{PATH:'/usr/bin:/bin',GITHUB_OUTPUT:output,EVENT_NAME:event,REQUESTED_MODE:mode},encoding:'utf8'});
+   if(event==='push'||mode==='invalid'){assert.notEqual(result.status,0);assert.equal(fs.readFileSync(output,'utf8'),'');}
+   else{assert.equal(result.status,0,result.stderr);assert.ok(fs.readFileSync(output,'utf8').includes('mode='+mode+'\n'));}
   }
  }finally{fs.rmSync(directory,{recursive:true,force:true});}
 });
@@ -74,4 +74,18 @@ test('third reviewed forward migration installs typed runtime privileges without
   await f.owner.query('ALTER TABLE atlas_typed_retirements DISABLE TRIGGER atlas_typed_retirements_immutable');
   await assert.rejects(applyPostgresForwardMigrations(options),/registered-forward-contract|guard-disabled/);
  }finally{await f.close();}
+});
+
+function receiptZIP(raw){
+ const name=Buffer.from('receipt.json'),compressed=deflateRawSync(raw),local=Buffer.alloc(30),central=Buffer.alloc(46),end=Buffer.alloc(22);
+ local.writeUInt32LE(0x04034b50);local.writeUInt16LE(20,4);local.writeUInt16LE(8,8);local.writeUInt32LE(compressed.length,18);local.writeUInt32LE(raw.length,22);local.writeUInt16LE(name.length,26);
+ central.writeUInt32LE(0x02014b50);central.writeUInt16LE(20,4);central.writeUInt16LE(20,6);central.writeUInt16LE(8,10);central.writeUInt32LE(compressed.length,20);central.writeUInt32LE(raw.length,24);central.writeUInt16LE(name.length,28);
+ end.writeUInt32LE(0x06054b50);end.writeUInt16LE(1,8);end.writeUInt16LE(1,10);end.writeUInt32LE(central.length+name.length,12);end.writeUInt32LE(local.length+name.length+compressed.length,16);
+ return Buffer.concat([local,name,compressed,central,name,end]);
+}
+
+test('artifact reader accepts one bounded receipt without extracting paths and rejects malformed archive bytes',()=>{
+ const raw=Buffer.from('{"status":"fixture"}'),archive=receiptZIP(raw);assert.deepEqual(rehearsalReceiptFromZIP(archive),raw);
+ for(const invalid of [Buffer.alloc(0),archive.subarray(0,-1),Buffer.concat([archive,Buffer.from('extra')]),Buffer.alloc(2*1024*1024+1)])assert.throws(()=>rehearsalReceiptFromZIP(invalid));
+ const traversal=Buffer.from(archive);const original=Buffer.from('receipt.json');for(let at=0;(at=traversal.indexOf(original,at))>=0;at+=original.length)traversal.write('../evil.json',at,'utf8');assert.throws(()=>rehearsalReceiptFromZIP(traversal));
 });

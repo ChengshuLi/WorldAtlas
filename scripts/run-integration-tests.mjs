@@ -51,7 +51,7 @@ export function prepareNativeRegressionInputs(profile,{files,exists=fs.existsSyn
 export const DATABASE_NEIGHBOR_TESTS = [
   'test/temporal-geography.test.mjs', 'test/postgres-runtime-role.test.mjs',
   'test/reference-hierarchy-release.test.mjs', 'test/hosted-catalog.test.mjs',
-  'test/neon-storage-migration.test.mjs', 'test/postgres-restore.test.mjs',
+  'test/postgres-restore.test.mjs',
   'test/model-semantic-migration.test.mjs'
 ];
 export const MIGRATION_WORKER_TESTS = [
