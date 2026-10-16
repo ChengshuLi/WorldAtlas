@@ -1,0 +1,360 @@
+{
+  "version": 1,
+  "existing_before_data": "independent-data-plan/execution-base/data",
+  "additional_literal_accepted_inputs": [
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/global-refinement-report.json",
+      "mode": "100644",
+      "git_blob_oid": "51c0085db9c6f8fdf61254a2bfa338264ae91c69",
+      "bytes": 1197848,
+      "sha256": "dfacaa99108d3f2d767ab4f05c08784c6bd802c433860226c5b0eda4cb573723"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/macro-boundary-decisions.json",
+      "mode": "100644",
+      "git_blob_oid": "54296349516507836d8392b22025b11f66f636df",
+      "bytes": 6225710,
+      "sha256": "3ce19e1de536c2715012f7c87b739045d3cfd6c562b6686ec4de9f3a2f5d3427"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/ownership-selection.json",
+      "mode": "100644",
+      "git_blob_oid": "ed62e6e59d84fe0ed7f6b17ab032884df924c2d7",
+      "bytes": 1576,
+      "sha256": "1ae16fd4be5d6e69266894f5c4e3270b8466526a91f0f588740c435abfc6c064"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/coverage-report.json",
+      "mode": "100644",
+      "git_blob_oid": "43c40d8dd652890888db593f1463bdd456e0ffb3",
+      "bytes": 55220,
+      "sha256": "80854a0089d8d3df1325d9d42227812ab8e936cb4113958219cb7ad204936542"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/namibia-source-quality-annotations.json",
+      "mode": "100644",
+      "git_blob_oid": "27ffb1234878dc7c7f8a7217ab3aef5b5a95fb78",
+      "bytes": 440381,
+      "sha256": "d2ce3afb0fa73fcb619e652b8e88770a832d2d18ec5ef759583939aba86c9096"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/geographic-migration-archive.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "f1d7aebfe387f20fa3667b482728a7e6dac35efe",
+      "bytes": 10765139,
+      "sha256": "9e4ca20b4211795f90f1ab8cac59cfb1ff079396e22979bfb4d1fa9d3f5f55d1"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/pixel-audit.json",
+      "mode": "100644",
+      "git_blob_oid": "00cbccaaff373cfdd84bc4860a9492e3d11e75cf",
+      "bytes": 14325660,
+      "sha256": "fb87c4b48428579bb039337c3bd70180844ad6c5d0f14e03d57048215e99deda"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/granularity-audit.json",
+      "mode": "100644",
+      "git_blob_oid": "008e347b91fdba153fc898ed04aff713ba413ad9",
+      "bytes": 10365503,
+      "sha256": "a35635051a3347d396553124a15b0b3dcb2013e32051420f476ce34d8d548d15"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/research-geography-gate.json",
+      "mode": "100644",
+      "git_blob_oid": "5a5138b004c258bb090db73f36a6d4efe1fbd323",
+      "bytes": 4229,
+      "sha256": "3981e89f8a2022730b90a16d2a995036f71ff9ce6b9d69cf6be33f42549e57b7"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/granularity-review-evidence.json",
+      "mode": "100644",
+      "git_blob_oid": "7fdd574a7b42f791c8de95ef7b34f60b94b60eec",
+      "bytes": 7371203,
+      "sha256": "8cdcaef1e62eb46b6e75141ee8825e8f4df987d8d70ec18e1ec5537a61114dc7"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/administrative-sources.json",
+      "mode": "100644",
+      "git_blob_oid": "2747b845f0c5654765da3b951c9074e52f220077",
+      "bytes": 661416,
+      "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/semantic-sources.json",
+      "mode": "100644",
+      "git_blob_oid": "0a145187aab6a6b843e9370ae0bc369907e16c83",
+      "bytes": 4849,
+      "sha256": "287a7ae13787b9e9fb97051afb977c8ea054ca1a6fed389c6672d6455d24bf7e"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/semantic-report.json",
+      "mode": "100644",
+      "git_blob_oid": "db3e1ec83d764bc8183caa4779a94b3ad1db0456",
+      "bytes": 6091596,
+      "sha256": "266c4f0f6e91381a26bfa6868d3c0df22b30140fa7f8551977be10b423295831"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/namibia-source-review.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "c572198889b7dba8743623ed1123d5a8f40b80d8",
+      "bytes": 96318,
+      "sha256": "7c5c1cf5ec7fd2af52cc481d4ccd5a8caaa0bc364bdd4a2a87916bbd41015876"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/location-policy.json",
+      "mode": "100644",
+      "git_blob_oid": "ad2fc628684aa6ea1811daa5df02db689e4e5ba3",
+      "bytes": 69433,
+      "sha256": "efab4528fd4b7b180815ef82de93480f490ef8fa48ad9ef32d1f9d76a64b7fb9"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+      "mode": "100644",
+      "git_blob_oid": "31d970d0fe2bf8c899f020aad09a3826ea451790",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/global-sources/IND-ADM3-metadata.json",
+      "mode": "100644",
+      "git_blob_oid": "9d586b33d13c85800f98382d0c7fbaf2cb31ecd4",
+      "bytes": 2206,
+      "sha256": "f7bb99ddfcadaa1091c4b634b48c8843ee9d8b636af4f6da1cefccb0d424fc33"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/global-sources/IND-ADM3.geojson.gz",
+      "mode": "100644",
+      "git_blob_oid": "6ba8cbf303af0f931dfa11f129c98eecd981b649",
+      "bytes": 13794274,
+      "sha256": "211a72c2c80bb60d10214944fa8cc4764e9ba888116e802ce6d87084872f5301"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/macro-foundation/regional-handoffs.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "5f0e341fcb3a6206c8fbf4acb00e08c22dfee4af",
+      "bytes": 69866,
+      "sha256": "35b7c190a8425a29d24eec861d2e964534117143b707a5e80e907d9522d3ddb9"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/macro-foundation/macro-certificate.json",
+      "mode": "100644",
+      "git_blob_oid": "8aeace6fe5a3591d16e62b57bea2566ed5edf94e",
+      "bytes": 41125,
+      "sha256": "b3f4186de40f8c8ea0f5d3e0b4ae9ed5de6a9bd3f24db6f7789d1f421a8594a8"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/macro-foundation/world-review-projection.json",
+      "mode": "100644",
+      "git_blob_oid": "11b1f5d18bb82b955e225e552c96ba4e666b49b3",
+      "bytes": 7715259,
+      "sha256": "b959409f46b971a511d57cf0b05a2b49ee1247b52f53f81a5f71069632626d7d"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/macro-foundation/approved-boundary-decisions.json",
+      "mode": "100644",
+      "git_blob_oid": "f9433b1bced35ce7250dd6406ceb060d784fe31c",
+      "bytes": 634171,
+      "sha256": "b67d5a3bcf8101cffb089c0262286378a80bb642cd6dde33f7721419227e3f18"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/macro-foundation/current-membership-projection.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "852ac3de0c770a9538408cb900672bbd909fa037",
+      "bytes": 5010474,
+      "sha256": "c9f66e9801b6b29d9c72f806b33bff2a5025a74cf061b95d693ade8dbcc4fbc9"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/macro-foundation/review-index.json",
+      "mode": "100644",
+      "git_blob_oid": "25b8c3387ea7cda79f3120da3627536351f9aa83",
+      "bytes": 2383,
+      "sha256": "31dfd5cbfd8f3def829f655e7ddd855d2d2865e5ac63f9d1a97d1c08782910cf"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/retained-geographic-sources/namibia/natural-earth-land.geojson.gz",
+      "mode": "100644",
+      "git_blob_oid": "d2bd79b734bc771f4f7fe624a8f74cc320ae7d1c",
+      "bytes": 3569322,
+      "sha256": "6642c0dfdb15359c3fb5135bd525f76392ca01df7efd2a4652fa60c4cd961294"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/retained-geographic-sources/namibia/migration-receipt.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "609674b734b30ab7aa37738ed01c6c3a5de4a483",
+      "bytes": 72052,
+      "sha256": "ae6bbf96fb2c424ec81cb6c68c79fc7e752de5b2b4248c0cb9d36a4bd7ee5d28"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/retained-geographic-sources/namibia/manifest.json",
+      "mode": "100644",
+      "git_blob_oid": "e4e9c044589a3c73367a63b936933c7538021292",
+      "bytes": 10452,
+      "sha256": "aa50635f372959d7c36045648e8e426737da4d6039e7ebcb4309160fcc917894"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/retained-geographic-sources/namibia/coastal-concordance-receipt.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "5a8185ab71e1f60af31ef01dfcdf45af10c58877",
+      "bytes": 28834,
+      "sha256": "d453a5f5aa95d049f045e226db890475f0c51b5c5f3adb9cf277f82ea0989c6e"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/reference-migrations/eastern-two-gap-repair-20261006/products/demographic-evidence/categories.json",
+      "mode": "100644",
+      "git_blob_oid": "9848ad6df1fdf0e84c5229ba67539b6c3fd439c0",
+      "bytes": 3386,
+      "sha256": "a39185d7f12b11dd824caa6d5b3051a849c7233d52a0ff3c1aee6cd87f1eb0e9"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/reference-migrations/eastern-two-gap-repair-20261006/products/demographic-evidence/sources.json",
+      "mode": "100644",
+      "git_blob_oid": "81ffde50c0310285921b06476c62e2a786f559be",
+      "bytes": 2828,
+      "sha256": "1269ffee37a48cef61a5a3c7b49e90b1d504cc4713a2254e9d693ac2ed03239d"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/reference-migrations/eastern-two-gap-repair-20261006/products/demographic-evidence/religion-records.json",
+      "mode": "100644",
+      "git_blob_oid": "5478c521b4d77b2df16441f1f0422efdf232f1e3",
+      "bytes": 1151900,
+      "sha256": "6b8fcdafc3b57533898afd6b8ac1a22abd48552f3f7e15247578e1c1f868731a"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/reference-migrations/eastern-two-gap-repair-20261006/products/demographic-evidence/source-receipts.json",
+      "mode": "100644",
+      "git_blob_oid": "d94fa8310fa117cfefb8bb4ab75f50cdffcdcfbb",
+      "bytes": 1521,
+      "sha256": "464614f7370151045ab9288301724ff03d1348559aef6a5726695667dd5ad1b2"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/reference-migrations/eastern-two-gap-repair-20261006/products/demographic-evidence/revalidation.json",
+      "mode": "100644",
+      "git_blob_oid": "f2702d507670d3d6043ed5c94e1970b1ff11f257",
+      "bytes": 128904,
+      "sha256": "bbb78e4411a8435a749362f6277ddec6fcf34f74c5f22abb9b22b65c6ea8abf0"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/reference-migrations/eastern-two-gap-repair-20261006/products/demographic-evidence/location-crosswalk.json",
+      "mode": "100644",
+      "git_blob_oid": "fa791bd6623d141a1bba5947d25c2130e54da05b",
+      "bytes": 406882,
+      "sha256": "d8b67983a11740ab29715e93e26ae4b2a50d9dda30a5d570e9300474700e5153"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/reference-migrations/eastern-two-gap-repair-20261006/products/demographic-evidence/index.json",
+      "mode": "100644",
+      "git_blob_oid": "62a8960a626e0c537421dce7bf33331c6c2f9d07",
+      "bytes": 1792,
+      "sha256": "e944267b8c0f0cfdf57ab6f6e4571d4ad537e0e5121b6f0f5ced1a3e46c54280"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/reference-migrations/eastern-two-gap-repair-20261006/products/dated-reference-names/names.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "8305cf8e868a01ba5a4d999fbca0d25863c36b2f",
+      "bytes": 188794,
+      "sha256": "c729a964efb5b3ac9bca67bd1a314a83d33d7cd283d4733f52d2bd74216f91ed"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/reference-migrations/eastern-two-gap-repair-20261006/products/dated-reference-names/crosswalk.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "372f8912b297f189ba5f2b5e49f4c11ff171bcf3",
+      "bytes": 157944,
+      "sha256": "42de95ea95603a356ef70e2c97d4c8e6bbf2af481776b1e85942d2fca9f77336"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/reference-migrations/eastern-two-gap-repair-20261006/products/dated-reference-names/revalidation.json",
+      "mode": "100644",
+      "git_blob_oid": "5210cb94e84c5f52d2a73e76d0d1c23ea40f7206",
+      "bytes": 1135675,
+      "sha256": "2021469faa7e171be54077d174d9f4895e6cf2820fb40cc24c549b55a325cff9"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/reference-migrations/eastern-two-gap-repair-20261006/products/dated-reference-names/unmatched.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "2e1f03b0e3e503a2ad9d2c64e962c33f8079f6b7",
+      "bytes": 8816,
+      "sha256": "839f4ad576e918b74f23c28422a50baf04e897f747cb0acd664833418958266f"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/reference-migrations/eastern-two-gap-repair-20261006/products/dated-reference-names/index.json",
+      "mode": "100644",
+      "git_blob_oid": "bbcfd34f11c18610b32b8e05ada740713cf63cad",
+      "bytes": 2684,
+      "sha256": "fe96ce0766515b2b74a2377255f983df0e75e5b6480221fa5ab34254d2a8e75c"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/reference-migrations/eastern-two-gap-repair-20261006/products/dated-reference-names/proof.json",
+      "mode": "100644",
+      "git_blob_oid": "c1c99722191725aead1d18b08957ca399d526087",
+      "bytes": 1094,
+      "sha256": "a472baeb18b587f018658fbc5683fa33abaa2961dee3f1483bb11df04bd07e53"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/macro-improvements/combined-restoration/geometry-proofs.json",
+      "mode": "100644",
+      "git_blob_oid": "493b60f0700c4faa3171e67e5c9d5d38e4cfce51",
+      "bytes": 583,
+      "sha256": "df04ba0d0bf631a38301d267c766118f66eefb9e24d3e5439616fffc8fedd3ff"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/macro-improvements/combined-restoration/aggregate-source-receipt.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "2d95aff4058fa28fbcc70eb2ddd1df61ab2f3d13",
+      "bytes": 899853,
+      "sha256": "d526e1061e23bb6e78c02bccb0569087a6c20857871accf5160d868dad5710f8"
+    },
+    {
+      "commit": "89ff38674f0c2afbd7af0a5f9c33caf90a9d3481",
+      "path": "data/macro-improvements/loose-ends-v5/evidence/aggregate-source-receipt.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "b1b66cc01299ce28c467ff7d84e144d262e24d2d",
+      "bytes": 479123,
+      "sha256": "3eeaf8355b2b6c4ac2ee52d667ec4935d47efa1b6fcdee47735c7fd679d4ceab"
+    }
+  ],
+  "extra_files": 44,
+  "no_historical_release_batches_reconstructed": true
+}
