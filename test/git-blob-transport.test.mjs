@@ -7,12 +7,13 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {gitBlobTransport} from '../scripts/git-blob-transport.mjs';
 const binding=bytes=>({sha:createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex'),size:bytes.length});
-function fixture({corrupt=false,fail=false}={}){
+function fixture({corrupt=false,fail=false,count=2}={}){
  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'quota-transport-test-'));let rest=0,fetches=0;
- const bytes=[Buffer.from('source evidence'),Buffer.from('implementation evidence')];const rows=bytes.map(binding);
+ const bytes=Array.from({length:count},(_,i)=>Buffer.from('source evidence '+i));const rows=bytes.map(binding);
  const transport=gitBlobTransport(async()=>{rest++;return {mutable:rest};},{repo:'a/b',token:'private-test-token',directory,execute:(cmd,args,options)=>{
   if(args.includes('fetch')){
    fetches++;
+   assert(args.includes('--stdin'));assert.equal(options.input,rows.filter(row=>options.input.includes(row.sha)).map(row=>row.sha).join('\n')+'\n');assert(!args.some(arg=>/^[a-f0-9]{40}$/.test(arg)));
    assert.equal(options.env.GIT_TERMINAL_PROMPT,'0');assert.equal(options.env.GIT_CONFIG_VALUE_1,'');assert(!args.some(x=>x.includes('private-test-token')));
    if(fail)throw Error('sensitive private-test-token');
    for(const raw of bytes)execFileSync('git',[args[0],'hash-object','-w','--stdin'],{input:raw,env:options.env});
@@ -65,4 +66,26 @@ test('Git transport verifies an exact Vietnam-sized object and keeps large-inven
   const huge={sha:'f'.repeat(40),size:300*1024*1024};await transport.api.prefetchGitBlobs('a/b',[huge]);assert.equal(fetches,1);
   assert.deepEqual(await transport.api('/repos/a/b/git/blobs/'+huge.sha,'GET',undefined,{expectedImmutableBytes:huge.size}),{fallback:true});assert.equal(restOptions.expectedImmutableBytes,huge.size);
  }finally{transport.close();fs.rmdirSync(directory);}
+});
+
+test('complete inventories beyond 512 blobs use one stdin fetch and authenticate the last object',async()=>{
+ const f=fixture({count:513});try{
+  await f.transport.api.prefetchGitBlobs('a/b',f.rows);
+  assert.equal(f.fetches,1);
+  const last=f.rows.at(-1),result=await f.transport.api('/repos/a/b/git/blobs/'+last.sha);
+  assert.deepEqual(Buffer.from(result.content,'base64'),f.bytes.at(-1));assert.equal(f.rest,0);
+  await f.transport.api.prefetchGitBlobs('a/b',f.rows);assert.equal(f.fetches,1);
+ }finally{f.close();}
+});
+
+test('stdin OIDs execute through real Git fetch without an argv inventory',async()=>{
+ const directory=fs.mkdtempSync(path.join(os.tmpdir(),'quota-real-fetch-')),upstream=path.join(directory,'upstream.git');
+ execFileSync('git',['init','--bare','--quiet',upstream]);
+ const raw=Buffer.from('real stdin object'),row=binding(raw);
+ execFileSync('git',['--git-dir='+upstream,'hash-object','-w','--stdin'],{input:raw});
+ const transport=gitBlobTransport(async()=>{throw Error('Unexpected REST fallback');},{repo:'a/b',token:'synthetic-token',directory,
+  execute:(cmd,args,options)=>execFileSync(cmd,args.map(arg=>arg==='https://github.com/a/b.git'?upstream:arg),options)});
+ try{await transport.api.prefetchGitBlobs('a/b',[row]);const result=await transport.api('/repos/a/b/git/blobs/'+row.sha);
+  assert.deepEqual(Buffer.from(result.content,'base64'),raw);
+ }finally{transport.close();fs.rmSync(directory,{recursive:true});}
 });
