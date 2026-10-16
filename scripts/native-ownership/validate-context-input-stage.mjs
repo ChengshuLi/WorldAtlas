@@ -52,13 +52,35 @@ export async function validateContextInputStage({root=process.cwd(),readFile,
  const commonCode=['package.json','scripts/native-ownership/compact-context-inputs.mjs',
   'scripts/native-ownership/native-only-inputs.mjs','scripts/native-ownership/native-preparation-guards.mjs',
   'src/native-runtime.js','scripts/native-ownership/compile-native-ownership.mjs','src/native-grid.js','scripts/audit-grid-intervals.mjs'];
- for(const [inventory,entry] of [[inputs.executed_sources,'prepare-context-inputs.mjs'],[proof.executed_sources,'verify-context-inputs.mjs']]){
+ const metadataCode=['scripts/selected-reference-metadata.mjs','src/reference-metadata.js'];
+ const authenticateCode=(commit,file)=>{
+  const snapshots=manifest.immutable_snapshots.filter(pin=>pin.commit===commit&&pin.path===file.path);
+  need(snapshots.length===1&&snapshots[0].bytes===file.bytes&&snapshots[0].sha256===file.sha256,
+   'Executed context code lacks an exact immutable snapshot');
+  need(manifest.baseline.files.some(pin=>pin.path===file.path&&pin.bytes===file.bytes&&pin.sha256===file.sha256),
+   'Executed context code omitted from stage inventory');
+  const raw=readFile(file.path,commit);
+  need(raw.length===file.bytes&&sha256(raw)===file.sha256,'Executed context code differs');
+  return raw;
+ };
+ for(const [commit,inventory,entry] of [[inputs.execution_commit,inputs.executed_sources,'prepare-context-inputs.mjs'],
+  [proof.verification_commit,proof.executed_sources,'verify-context-inputs.mjs']]){
+  need(/^[a-f0-9]{40}$/.test(commit),'Missing immutable executed-code commit');
   need(Array.isArray(inventory),'Missing executed context code inventory');
-  assert.deepEqual(inventory.map(f=>f.path).sort(),[...commonCode,'scripts/native-ownership/'+entry].sort(),
+  const compact=inventory.filter(file=>file.path==='scripts/native-ownership/compact-context-inputs.mjs');
+  need(compact.length===1,'Incomplete or duplicate executed context code closure');
+  // Infer each known closure from its authenticated source vintage, never from
+  // the inventory it supplied. Static relative imports use the existing parser
+  // convention; an old preparation and current readback may differ here.
+  const raw=authenticateCode(commit,compact[0]);
+  const current=[...raw.toString('utf8').matchAll(/(?:from\s*|import\s*)['"]([^'"]+)['"]/g)]
+   .some(match=>match[1]==='../selected-reference-metadata.mjs');
+  assert.deepEqual(inventory.map(f=>f.path).sort(),[...commonCode,...(current?metadataCode:[]),'scripts/native-ownership/'+entry].sort(),
    'Incomplete or duplicate executed context code closure');
+  for(const file of inventory)authenticateCode(commit,file);
  }
  const expectedSnapshots=new Set([
-  ...manifest.baseline.files.map(f=>manifest.baseline.commit+':'+f.path),
+  ...manifest.baseline.files.map(f=>(f.commit??manifest.baseline.commit)+':'+f.path),
   ...inputs.source_files.map(f=>inputs.baseline_commit+':'+f.path),
   ...inputs.executed_sources.map(f=>inputs.execution_commit+':'+f.path),
   ...proof.executed_sources.map(f=>proof.verification_commit+':'+f.path)
@@ -71,15 +93,6 @@ export async function validateContextInputStage({root=process.cwd(),readFile,
  for(const source of original.sourceFiles){
   const descriptor=manifest.baseline.files.find(d=>d.path===source.path);
   need(descriptor&&descriptor.sha256===source.sha256&&descriptor.bytes===source.bytes,'Incomplete original context stage inventory');
- }
- for(const [commit,inventory] of [[inputs.execution_commit,inputs.executed_sources],[proof.verification_commit,proof.executed_sources]]){
-  need(/^[a-f0-9]{40}$/.test(commit),'Missing immutable executed-code commit');
-  for(const file of inventory){
-   const raw=readFile(file.path,commit);
-   need(raw.length===file.bytes&&sha256(raw)===file.sha256,'Executed context code differs');
-   need(manifest.baseline.files.some(d=>d.path===file.path&&d.sha256===file.sha256&&d.bytes===file.bytes),
-    'Executed context code omitted from stage inventory');
-  }
  }
  const features=[];let next=1;
  for(const part of inputs.parts){
