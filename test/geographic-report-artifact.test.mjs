@@ -109,12 +109,10 @@ test('real shared client accounts exact redirect, signed delivery remains token-
   assert.equal(delivery.length, 1); assert.equal(delivery[0].init.headers, undefined);
   assert(!JSON.stringify(accounting.receipt()).includes('private-secret'));
 });
-test('shared admission refusal stops artifact download before credential-free delivery', async () => {
+test('actual GitHub refusal stops artifact download before credential-free delivery', async () => {
   const f = transport(); let delivery = false;
-  const api = githubAPI(f.options.token, {fetchImpl: async () => Response.json({total_count: 1, artifacts: [f.artifact]})});
-  let budget = 0;
-  api.setHTTPAdmission(() => {if (!budget--) throw Error('shared admission refused');});
-  await assert.rejects(loadGeographicReport({...f.options, api, fetchImpl: async () => {delivery = true; return new Response(archive(report));}}), /shared admission refused/);
+  const api = githubAPI(f.options.token, {fetchImpl: async () => Response.json({message: 'Forbidden'}, {status: 403})});
+  await assert.rejects(loadGeographicReport({...f.options, api, fetchImpl: async () => {delivery = true; return new Response(archive(report));}}), /HTTP 403/);
   assert.equal(delivery, false);
 });
 

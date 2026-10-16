@@ -80,7 +80,7 @@ test('real bounded asset load authenticates whole patch and complete effective d
  transports.set('./native-v1/native-row-latitudes.f64le.gz',latRaw);
  transports.set('./geography/catalog.json',Buffer.from(JSON.stringify(normalFeatures.map(f=>({...f,geometry:null})))));
  transports.set('./geography/geometries.json',Buffer.from(JSON.stringify(normalFeatures.map(f=>({id:f.id,geometry:f.geometry})))))
- const server=await createServer({configFile:false,server:{middlewareMode:true},define:{'import.meta.env.VITE_STATIC_ATLAS':'"true"','import.meta.env.VITE_HOSTED_DATABASE':'"false"'}}),oldFetch=globalThis.fetch;
+ const server=await createServer({configFile:false,server:{middlewareMode:true,watch:null},define:{'import.meta.env.VITE_STATIC_ATLAS':'"true"','import.meta.env.VITE_HOSTED_DATABASE':'"false"'}}),oldFetch=globalThis.fetch;
  try{
   globalThis.fetch=async path=>path==='./atlas-geography.json'?new Response(JSON.stringify(normalData)):transports.has(path)?new Response(transports.get(path)):path.includes('base-native-manifest')?new Response(normalManifest):path.includes('owners1')?new Response(normalRosterEncoded):fetcher(path);
   let geometryReads=0;const fixtureFetch=globalThis.fetch;globalThis.fetch=async path=>{if(path==='./geography/geometries.json')geometryReads++;return fixtureFetch(path);};
@@ -256,7 +256,7 @@ async function metadataRuntimeFixture(){
 
 test('real geography entry keeps native words, latitudes and physical coverage at N while projecting catalog parents to M and adding E',async()=>{
  const f=await metadataRuntimeFixture(),{createServer}=await import('vite'),oldFetch=globalThis.fetch;
- const server=await createServer({configFile:false,server:{middlewareMode:true},define:{'import.meta.env.VITE_STATIC_ATLAS':'"true"','import.meta.env.VITE_HOSTED_DATABASE':'"false"'}});
+ const server=await createServer({configFile:false,server:{middlewareMode:true,watch:null},define:{'import.meta.env.VITE_STATIC_ATLAS':'"true"','import.meta.env.VITE_HOSTED_DATABASE':'"false"'}});
  try{
   let geometryReads=0;globalThis.fetch=async path=>{if(path==='./atlas-geography.json')return new Response(f.json(f.data));if(path==='./geography/geometries.json')geometryReads++;return f.fetcher(path);};
   const before=structuredClone(f.base),directFeatures=structuredClone(f.currentFeatures);
@@ -336,7 +336,7 @@ test('actual native and geography loaders retain generated defaults and reject s
  assert.equal(pickOwnership(output,3,3),1);assert.deepEqual(f.base,before);
  assert.deepEqual(features[0].properties,generated[0].properties);assert.equal(features[0].properties.metadata.reference_corrections.length,1);
  f.transports.set('./geography/catalog.json',f.json(generated.map(feature=>({...feature,geometry:null}))));
- const server=await createServer({configFile:false,server:{middlewareMode:true},define:{'import.meta.env.VITE_STATIC_ATLAS':'"true"','import.meta.env.VITE_HOSTED_DATABASE':'"false"'}});
+ const server=await createServer({configFile:false,server:{middlewareMode:true,watch:null},define:{'import.meta.env.VITE_STATIC_ATLAS':'"true"','import.meta.env.VITE_HOSTED_DATABASE':'"false"'}});
  try{
   globalThis.fetch=async path=>path==='./atlas-geography.json'?new Response(f.json(f.data)):f.fetcher(path);
   const client=await server.ssrLoadModule('/src/data-client.js'),loaded=await client.loadGeography();
