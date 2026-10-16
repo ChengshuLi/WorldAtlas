@@ -23,7 +23,7 @@ const sha = value => createHash('sha256').update(body(value)).digest('hex');
 // These intentionally tiny opaque leaf bodies test immutable routing/equality,
 // not scientific validity. Historical collector replay is compared separately
 // with retained original full-reader logs; these leaf sentinels are not decoded.
-function fixture({missingOrigin = false, splitBaseline = false, rebind = true, missingStrictOrigin = false, checkpoint = false, sourceTarget = false, membership = false, dated = false, unknownSourceField = false, unknownSourceVersion = false, malformedDatedVersion = false, rebindCode = LEGACY_CURRENT_REBIND_CODE, historicalMetadataAbsent = false, consumedRole} = {}) {
+function fixture({missingOrigin = false, splitBaseline = false, rebind = true, missingStrictOrigin = false, separatePublicationOrigin = false, checkpoint = false, sourceTarget = false, membership = false, dated = false, unknownSourceField = false, unknownSourceVersion = false, malformedDatedVersion = false, rebindCode = LEGACY_CURRENT_REBIND_CODE, historicalMetadataAbsent = false, consumedRole} = {}) {
   const cache = path.join(ROOT, '.cache/unchanged-selected-fixtures');
   fs.mkdirSync(cache, {recursive: true});
   const directory = fs.mkdtempSync(path.join(cache, 'case-'));
@@ -92,8 +92,9 @@ function fixture({missingOrigin = false, splitBaseline = false, rebind = true, m
   const originalPins = Object.fromEntries(['ledger', 'native_facts', 'native_manifest', 'source_facts'].map(role => [role, historical(P + ({ledger: 'original-ledger', native_facts: 'native-facts', native_manifest: 'original-manifest', source_facts: 'source-facts'}[role]) + '.json')]));
   originalPins.source_request = pin(P + 'source-request.json', requests);
   originalPins.native_request = pin(P + 'native-request.json', requests);
+  const publicationOrigin = separatePublicationOrigin ? commit({...files, [P + 'detached-publication-marker']: body('detached original')}, original) : original;
   let binding = {version: 1, kind: 'original-issued-rule-source-custody-v1', original_pins: originalPins,
-    source_output_aliases: [{original: aliasOriginal, published: pin(P + 'source-publication.json', original, missingStrictOrigin ? {commit: 'e'.repeat(40)} : {})}],
+    source_output_aliases: [{original: aliasOriginal, published: pin(P + 'source-publication.json', publicationOrigin, missingStrictOrigin ? {commit: 'e'.repeat(40)} : {})}],
     native_proof: {publication: historical(P + 'native-publication.json'), inventory: historical(P + 'native-inventory.json'), operating: historical(P + 'native-operating.json'), assets: [historical(P + 'native-asset.json')]}};
   if (sourceTarget) {
     const roles = {catalogue: 'source-catalogue', physical_input: 'physical-input', physical_reproduction: 'physical-reproduction',
@@ -419,6 +420,100 @@ test('reviewed equal readers need no hash catalogue; unsafe modes, limits and id
   } finally { f.close(); }
 });
 
+test('live raw cache evicts and rereads without rejecting a larger finite routing plan', async () => {
+  const f = fixture({sourceTarget: true, membership: true, dated: true}); try {
+    const ordinary = await f.inspect();
+    const limits = {member: 32 * 1024 * 1024, metadata: Math.max(...Object.values(f.files).map(raw => raw.length)), entries: 4096};
+    const result = await f.inspect(f.candidate, f.baseline, {limits});
+    assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+    assert.equal(result.identity_sha256, ordinary.identity_sha256);
+    assert(result.metadata_planned_bytes > limits.metadata);
+    assert(result.metadata_cache_peak_bytes <= limits.metadata);
+    assert(result.metadata_cache_bytes <= limits.metadata);
+    assert(result.metadata_cache_evictions > 0);
+    assert(result.metadata_bodies_read > result.metadata_unique_bodies, 'evicted roots are really reread');
+    assert(result.metadata_bytes_read > result.metadata_planned_bytes);
+    assert(result.metadata_planned_bytes <= result.metadata_unique_bodies * limits.member);
+    assert(result.metadata_unique_bodies <= limits.entries);
+
+    const cold = coldFixture(f, {limits});
+    const coldResult = await f.inspect(f.candidate, f.baseline, {limits, repo: cold.destination, acquisition: cold.acquisition});
+    assert.equal(coldResult.status, 'unchanged-selected-inputs', coldResult.reason);
+    // Cold recovery additionally records the initially attempted fallback
+    // commit. Its complete path/mode/OID closure and alternatives still match.
+    const consumed = report => [...new Set(report.immutable_descriptors.map(p => p.path + ':' + p.mode + ':' + p.git_blob_oid))].sort();
+    assert.deepEqual(consumed(coldResult), consumed(result));
+    assert.deepEqual(coldResult.current_and_absent_alternatives, result.current_and_absent_alternatives);
+    assert(coldResult.metadata_cache_evictions > 0);
+    assert(coldResult.metadata_cache_peak_bytes <= limits.metadata);
+    assert.equal(new Set(cold.batches.flat()).size, cold.batches.flat().length, 'eviction does not duplicate object acquisition');
+    assert.equal(coldResult.metadata_acquisition.scientific_leaf_imports, 0);
+  } finally { f.close(); }
+});
+
+test('OID cache reuse still authenticates each alias path, mode, length and SHA binding', async () => {
+  const f = fixture(); try {
+    const alias = P + 'same-body-binding-alias.json';
+    const files = {...f.files, [alias]: f.files[P + 'binding.json']};
+    const origin = f.commit(files, f.baseline);
+    const pin = {commit: origin, path: alias, mode: '100644', git_blob_oid: f.git(['hash-object', '--stdin'], files[alias]),
+      bytes: files[alias].length, sha256: sha(files[alias])};
+    for (const [mutation, reason] of [[{}, null], [{sha256: '0'.repeat(64)}, /metadata-pin-hash/],
+      [{bytes: pin.bytes + 1}, /metadata-pin-length/], [{mode: '100755'}, /historical-pin-identity/],
+      [{git_blob_oid: '0'.repeat(40)}, /historical-pin-identity/]]) {
+      const registry = JSON.parse(f.files[P + 'registry.json']);
+      registry.entries.push({...registry.entries[0], source_authority: {...pin, ...mutation}});
+      files[P + 'registry.json'] = body(registry);
+      const registryCommit = f.commit(files, origin);
+      const sidecar = JSON.parse(f.files[P + 'sidecar.json']);
+      sidecar.authority_registry = {commit: registryCommit, path: P + 'registry.json', mode: '100644',
+        git_blob_oid: f.git(['hash-object', '--stdin'], files[P + 'registry.json']), bytes: files[P + 'registry.json'].length, sha256: sha(registry)};
+      files[P + 'sidecar.json'] = body(sidecar);
+      const selection = JSON.parse(f.files['data/ownership-selection.json']);
+      selection.additive_release = {path: P + 'sidecar.json', bytes: files[P + 'sidecar.json'].length, sha256: sha(sidecar)};
+      files['data/ownership-selection.json'] = body(selection);
+      const baseline = f.commit(files, registryCommit), candidate = f.commit({...files, 'docs/cache-test.md': body('ordinary change')}, baseline);
+      const result = await f.inspect(candidate, baseline);
+      if (reason) {
+        assert.equal(result.status, 'full-check-required'); assert.match(result.reason, reason);
+      } else {
+        assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+        assert(result.immutable_descriptors.some(p => p.path === alias && p.git_blob_oid === pin.git_blob_oid));
+        assert(result.immutable_descriptors.some(p => p.path === P + 'binding.json' && p.git_blob_oid === pin.git_blob_oid));
+        assert.equal(result.metadata_bodies_read, result.metadata_unique_bodies, 'one raw read serves both authenticated aliases');
+      }
+    }
+  } finally { f.close(); }
+});
+
+test('shared candidate descriptors retain exact baseline-to-candidate modes, additions, deletions and divergent data', async () => {
+  const f = fixture(); try {
+    const target = P + 'native-asset.json';
+    const mode = f.commit(f.candidateFiles, f.baseline, {[target]: '100755'});
+    const removed = {...f.candidateFiles}; delete removed[target];
+    const deleted = f.commit(removed, f.baseline);
+    const absent = P + 'native/absent.bin.gz';
+    const added = f.commit({...f.candidateFiles, [absent]: body('now present')}, f.baseline);
+    for (const candidate of [mode, deleted, added]) {
+      const result = await f.inspect(candidate);
+      assert.equal(result.status, 'full-check-required'); assert.match(result.reason, /changed-current-input/);
+    }
+    const directory = f.commit({...f.candidateFiles, [absent + '/child.json']: body('nonordinary parent alias')}, f.baseline);
+    const changedAncestor = await f.inspect(directory);
+    assert.equal(changedAncestor.status, 'full-check-required'); assert.match(changedAncestor.reason, /nonordinary-immutable-input/);
+    const baseline = f.commit({...f.files, [target]: body('baseline-only consumed drift')}, f.baseline);
+    const divergent = await f.inspect(f.candidate, baseline);
+    assert.equal(divergent.status, 'full-check-required'); assert.match(divergent.reason, /changed-current-input/);
+    const accepted = await f.inspect();
+    assert.equal(accepted.status, 'unchanged-selected-inputs', accepted.reason);
+    const unchanged = accepted.immutable_descriptors.filter(p => p.path === target && [f.baseline, f.candidate].includes(p.commit));
+    assert.equal(unchanged.length, 2);
+    assert.equal(unchanged[0].mode, unchanged[1].mode);
+    assert.equal(unchanged[0].git_blob_oid, unchanged[1].git_blob_oid);
+    assert(accepted.current_and_absent_alternatives.some(p => p.path === absent && p.absent));
+  } finally { f.close(); }
+});
+
 test('invalid commits fail closed while unrelated engineering changes retain unchanged scientific identities', async () => {
   const f = fixture(); try {
     const output = execFileSync(process.execPath, [path.join(ROOT, 'scripts/check-unchanged-selected-geography.mjs'), f.directory, f.baseline, f.baseline]);
@@ -649,6 +744,21 @@ test('cold absent historical origins retain fallback versus strict semantics', a
   }
 });
 
+test('cold authority and rebind strict origins share the same independent discovery round', async () => {
+  const f = fixture({separatePublicationOrigin: true}); try {
+    const cold = coldFixture(f, {shallowCandidate: true});
+    const rebind = JSON.parse(f.files[P + 'ledger.json']).current_rebind.commit;
+    const publication = JSON.parse(f.files[P + 'binding.json']).source_output_aliases[0].published.commit;
+    for (const id of [publication, rebind]) assert.equal(cold.git(['cat-file', '--batch-check'], id + '\n'), id + ' missing');
+    const result = await f.inspect(f.candidate, f.baseline, {repo: cold.destination, acquisition: cold.acquisition});
+    assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+    assert(cold.originBatches.some(batch => batch.includes(publication) && batch.includes(rebind)));
+    assert(result.immutable_descriptors.some(p => p.commit === rebind && p.path === P + 'rebind-certificate.json'));
+    assert(result.immutable_descriptors.some(p => p.commit === publication && p.path === P + 'source-publication.json'));
+    assert.equal(result.metadata_acquisition.scientific_leaf_imports, 0);
+  } finally { f.close(); }
+});
+
 test('cold evolved same-path aliases acquire their exact original metadata instead of rebinding a pin', async () => {
   for (const missingOrigin of [false, true]) {
     const f = fixture({sourceTarget: true, missingOrigin}); try {
@@ -681,6 +791,19 @@ test('cold remote metadata identity declines before object acquisition', async (
     assert.equal(result.status, 'full-check-required');
     assert.equal(cold.batches.length, 0);
   } finally { f.close(); }
+});
+
+test('cold routing admission refuses oversized members and too many plan entries before fetching bodies', async () => {
+  for (const [limits, reason] of [[{member: 1, metadata: 64 * 1024 * 1024, entries: 4096}, /metadata-byte-limit/],
+    [{member: 32 * 1024 * 1024, metadata: 64 * 1024 * 1024, entries: 1}, /identity-entry-limit/]]) {
+    const f = fixture(); try {
+      const cold = coldFixture(f, {limits});
+      const result = await f.inspect(f.candidate, f.baseline, {repo: cold.destination, acquisition: cold.acquisition});
+      assert.equal(result.status, 'full-check-required'); assert.match(result.reason, reason);
+      assert.equal(cold.batches.length, 0);
+      assert.equal(cold.originBatches.length, 0);
+    } finally { f.close(); }
+  }
 });
 
 

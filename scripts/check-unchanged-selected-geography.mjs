@@ -87,8 +87,30 @@ function createReader({repo, baseline, candidate, trusted, limits, acquisition})
       return runGit(['merge-base', baseline, candidate], true);
     }
   }
-  const descriptors = new Map(), metadata = new Map(), origins = new Map(), current = new Map();
-  let metadataBytes = 0;
+  const descriptors = new Map(), metadata = new Map(), pending = new Map(), plan = new Map(), origins = new Map(), current = new Map();
+  let metadataBytes = 0, metadataReads = 0, plannedBytes = 0, cacheBytes = 0, cachePeakBytes = 0, cacheEvictions = 0;
+  let currentChanges;
+  function changedCurrentPaths() {
+    if (!currentChanges) {
+      // This exact tree delta authenticates unchanged paths, including modes and
+      // absences. It is independent of the authored merge-base scope below.
+      const names = git('diff-tree', '--no-commit-id', '--name-only', '-r', '-z', '--no-renames', '--no-ext-diff', '--no-textconv', '--ignore-submodules=none', baseline, candidate)
+        .toString().split('\0').filter(Boolean);
+      demand(names.length <= limits.entries && names.every(safe), 'identity-entry-limit');
+      const ancestors = new Set();
+      for (const name of names) {
+        const parts = name.split('/');
+        for (let i = 1; i < parts.length; i++) ancestors.add(parts.slice(0, i).join('/'));
+      }
+      currentChanges = {names: new Set(names), ancestors};
+    }
+    return currentChanges;
+  }
+  function unchangedCurrentPath(name) {
+    const changes = changedCurrentPaths(), parts = name.split('/');
+    return !changes.names.has(name) && !changes.ancestors.has(name)
+      && !parts.some((_, i) => i > 0 && changes.names.has(parts.slice(0, i).join('/')));
+  }
   const missingOrigins = new Set();
   function requireOrigin(commit) {
     missingOrigins.add(commit); throw Error('missing-strict-historical-commit:' + commit);
@@ -98,14 +120,19 @@ function createReader({repo, baseline, candidate, trusted, limits, acquisition})
     const key = commit + ':' + name;
     if (!descriptors.has(key)) {
       demand(descriptors.size < limits.entries, 'identity-entry-limit');
-      let raw;
-      try { raw = git('ls-tree', '-z', commit, '--', name).toString(); }
-      catch (error) { if (!originExists(commit)) requireOrigin(commit); throw error; }
-      if (!raw) descriptors.set(key, null);
-      else {
-        const match = raw.match(/^(100644|100755) blob ([a-f0-9]{40})\t([^\0]+)\0$/);
-        demand(match && match[3] === name, 'nonordinary-immutable-input');
-        descriptors.set(key, {commit, path: name, mode: match[1], git_blob_oid: match[2]});
+      if (commit === candidate && descriptors.has(baseline + ':' + name) && unchangedCurrentPath(name)) {
+        const before = descriptors.get(baseline + ':' + name);
+        descriptors.set(key, before ? {...before, commit: candidate} : null);
+      } else {
+        let raw;
+        try { raw = git('ls-tree', '-z', commit, '--', name).toString(); }
+        catch (error) { if (!originExists(commit)) requireOrigin(commit); throw error; }
+        if (!raw) descriptors.set(key, null);
+        else {
+          const match = raw.match(/^(100644|100755) blob ([a-f0-9]{40})\t([^\0]+)\0$/);
+          demand(match && match[3] === name, 'nonordinary-immutable-input');
+          descriptors.set(key, {commit, path: name, mode: match[1], git_blob_oid: match[2]});
+        }
       }
     }
     const result = descriptors.get(key);
@@ -119,22 +146,49 @@ function createReader({repo, baseline, candidate, trusted, limits, acquisition})
     return before;
   }
   async function body(pin, expected) {
-    const key = pin.commit + ':' + pin.path;
-    if (!metadata.has(key)) metadata.set(key, (async () => {
-      let size;
-      try { size = Number(git('cat-file', '-s', pin.git_blob_oid)); }
-      catch {
-        await acquisition.acquire(pin, expected);
-        size = Number(git('cat-file', '-s', pin.git_blob_oid));
+    // Each role still authenticates its own origin/path/mode and expected hash.
+    // Only the immutable raw body is shared by OID. Keep lifetime I/O separate
+    // from live retention: accepted routing JSON may contain large inline leaves.
+    const key = pin.git_blob_oid;
+    function admit(size) {
+      demand(Number.isSafeInteger(size) && size > 0 && size <= limits.member && size <= limits.metadata, 'metadata-byte-limit');
+      demand(!plan.has(key) || plan.get(key) === size, 'metadata-pin-length');
+      if (!plan.has(key)) {
+        demand(plan.size < limits.entries && Number.isSafeInteger(plannedBytes + size), 'identity-entry-limit');
+        plan.set(key, size); plannedBytes += size;
       }
-      demand(Number.isSafeInteger(size) && size > 0 && size <= limits.member && metadataBytes + size <= limits.metadata, 'metadata-byte-limit');
-      metadataBytes += size;
-      const raw = git('cat-file', 'blob', pin.git_blob_oid);
-      demand(raw.length === size, 'metadata-length-drift');
-      demand(createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex') === pin.git_blob_oid, 'metadata-git-object-identity');
-      return raw;
-    })());
-    const raw = await metadata.get(key);
+    }
+    let raw = metadata.get(key);
+    if (raw) {
+      metadata.delete(key); metadata.set(key, raw);
+    } else {
+      if (!pending.has(key)) pending.set(key, (async () => {
+        // Existing parent-declared sizes admit pinned bodies before acquisition;
+        // fixed roots without a size use the transport's exact tree-size admission.
+        if (expected?.bytes !== undefined) admit(expected.bytes);
+        let size;
+        try { size = Number(git('cat-file', '-s', pin.git_blob_oid)); }
+        catch {
+          await acquisition.acquire(pin, expected);
+          size = Number(git('cat-file', '-s', pin.git_blob_oid));
+        }
+        admit(size);
+        while (cacheBytes + size > limits.metadata) {
+          const oldest = metadata.keys().next().value;
+          demand(oldest !== undefined, 'metadata-byte-limit');
+          cacheBytes -= metadata.get(oldest).length;
+          metadata.delete(oldest); cacheEvictions++;
+        }
+        const raw = git('cat-file', 'blob', pin.git_blob_oid);
+        demand(raw.length === size, 'metadata-length-drift');
+        demand(createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex') === pin.git_blob_oid, 'metadata-git-object-identity');
+        metadataBytes += size; metadataReads++;
+        metadata.set(key, raw); cacheBytes += size; cachePeakBytes = Math.max(cachePeakBytes, cacheBytes);
+        return raw;
+      })());
+      try { raw = await pending.get(key); }
+      finally { pending.delete(key); }
+    }
     demand(!expected || expected.bytes === undefined || expected.bytes === raw.length, 'metadata-pin-length');
     demand(!expected || !expected.sha256 || hash(expected.sha256) && expected.sha256 === sha(raw), 'metadata-pin-hash');
     return raw;
@@ -181,7 +235,9 @@ function createReader({repo, baseline, candidate, trusted, limits, acquisition})
       const alternatives = [...current.values()].sort((a, b) => a.path.localeCompare(b.path));
       return {immutable_descriptors: rows, current_and_absent_alternatives: alternatives,
         identity_sha256: sha(Buffer.from(JSON.stringify({rows, alternatives}))),
-        metadata_bytes_read: metadataBytes, metadata_bodies_read: metadata.size,
+        metadata_bytes_read: metadataBytes, metadata_bodies_read: metadataReads,
+        metadata_unique_bodies: plan.size, metadata_planned_bytes: plannedBytes,
+        metadata_cache_bytes: cacheBytes, metadata_cache_peak_bytes: cachePeakBytes, metadata_cache_evictions: cacheEvictions,
         historical_commit_availability: [...origins].sort(([a], [b]) => a.localeCompare(b))};
     }};
 }
@@ -498,9 +554,11 @@ async function collect(reader, {baseline, candidate, trusted, metadataPaths}) {
     for (const p of [sidecar.runtime_envelope, ...Object.values(sidecar.logical_asset_map)]) reader.pinned(p);
     const [registry, ledger] = await joined([reader.pinnedJson(sidecar.authority_registry), reader.pinnedJson(sidecar.logical_asset_map.ledger)]);
     demand(registry.version === 1 && registry.kind === 'retained-rule-authority-registry-v1', 'unsupported-authority-registry');
-    await joined(array(registry.entries, 'authorities').map(entry => originalAuthority(reader, entry)));
     demand([1, 2].includes(ledger.version) && ledger.kind === 'native-additive-repair-ledger-v' + ledger.version, 'unsupported-selected-ledger');
-    if (Object.hasOwn(ledger, 'current_rebind')) await currentRebind(reader, ledger.current_rebind, parts.map(p => 'data/' + p));
+    // Independent typed branches share the existing discovery round. A strict
+    // rebind origin must not be discovered only after rereading every authority.
+    await joined([...array(registry.entries, 'authorities').map(entry => originalAuthority(reader, entry)),
+      ...(Object.hasOwn(ledger, 'current_rebind') ? [currentRebind(reader, ledger.current_rebind, parts.map(p => 'data/' + p))] : [])]);
   }
 }
 
