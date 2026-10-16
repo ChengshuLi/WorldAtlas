@@ -214,7 +214,7 @@ async function collect(reader) {
   demand(safe(pointer.path) && hash(pointer.sha256) && !pointer.path.startsWith('data/'), 'unsupported-release-pointer');
   reader.equalCurrent('data/geographic-releases/' + pointer.path);
   const selection = await reader.currentJson('data/ownership-selection.json');
-  keys(selection, 'manifest_path,method,release_id,sha256,version' + ['selected_geography', 'additive_release', 'artifact_consumption'].filter(k => Object.hasOwn(selection, k)).map(k => ',' + k).join(''), 'selection');
+  keys(selection, 'manifest_path,method,release_id,sha256,version' + ['selected_geography', 'additive_release', 'artifact_consumption', 'reference_projection'].filter(k => Object.hasOwn(selection, k)).map(k => ',' + k).join(''), 'selection');
   demand(selection.version === 1 && selection.method === 'native-linear-evenodd-first-owner-v1' && safe(selection.manifest_path), 'unsupported-selection');
   await joined([reader.currentJson(selection.manifest_path, {sha256: selection.sha256}),
     ...(selection.selected_geography ? [reader.currentJson(selection.selected_geography.path, selection.selected_geography)] : []),
@@ -253,6 +253,29 @@ async function collect(reader) {
   const bank = await reader.currentJson(declared.path, declared);
   demand(bank.version === 1 && bank.kind === declared.kind, 'unsupported-selected-source-bank');
   for (const p of [bank.world_index, ...array(bank.unchanged_files, 'unchanged-sources', 0), ...array(bank.overrides, 'source-overrides', 0)]) reader.pinned(p);
+  if (selection.reference_projection !== undefined) {
+    // Reference metadata is an existing selected input. Compare its complete
+    // body and every immutable operand/current alias used by the real reader;
+    // unchanged applicability does not repeat the metadata qualification.
+    const declared = selection.reference_projection;
+    keys(declared, 'bytes,path,sha256', 'reference-projection-pin');
+    const pin = reader.currentPin(declared);
+    demand(pin.mode === '100644', 'nonordinary-reference-projection');
+    const projection = await reader.jsonAt(pin, declared);
+    demand(projection.version === 1 && projection.kind === 'native-reference-metadata-projection-v1', 'unsupported-reference-projection');
+    keys(projection.hierarchy, 'before,after', 'reference-hierarchy');
+    const inputs = [...Object.values(projection.hierarchy), ...array(projection.receipts, 'reference-receipts')];
+    for (const update of array(projection.source_updates, 'reference-source-updates', 0)) {
+      keys(update, 'after,before,logical_path', 'reference-source-update');
+      demand(safe(update.logical_path), 'unsupported-reference-source-path');
+      reader.equalCurrent(update.logical_path);
+      inputs.push(update.before, update.after);
+    }
+    for (const input of inputs) {
+      demand(input?.mode === '100644', 'nonordinary-reference-input');
+      reader.pinned(input);
+    }
+  }
   if (selection.artifact_consumption !== undefined) {
     const hook = selection.artifact_consumption;
     keys(hook, 'certificate,review', 'artifact-hook');

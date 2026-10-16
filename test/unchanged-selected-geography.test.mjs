@@ -16,7 +16,7 @@ const sha = value => createHash('sha256').update(body(value)).digest('hex');
 
 // Opaque scientific outputs deliberately have no historical producer schema.
 // This fixture proves immutable data applicability, never scientific legality.
-function fixture() {
+function fixture({projection = false} = {}) {
   const cache = path.join(ROOT, '.cache/unchanged-selected-fixtures');
   fs.mkdirSync(cache, {recursive: true});
   const directory = fs.mkdtempSync(path.join(cache, 'case-'));
@@ -53,6 +53,7 @@ function fixture() {
     put(name, 'opaque selected output: ' + name);
   }
   put(RECEIVING, 'receiving metadata');
+  if (projection) for (const name of ['reference-before.json', 'reference-receipt.json', 'reference-source-before.json']) put(P + name, 'original metadata operand: ' + name);
   // A huge/unknown historical graph is not part of selected-data applicability.
   put(P + 'historical-authority.json', {unrecognized_producer: true, routes: Array.from({length: 5000}, (_, i) => 'old-' + i)});
   const original = commit();
@@ -70,6 +71,13 @@ function fixture() {
     manifest_path: P + 'manifest.json', sha256: sha(files[P + 'manifest.json']),
     selected_geography: {version: 1, kind: 'complete-world-index-with-exact-encoded-overrides', ...currentPin(P + 'source-bank.json')},
     artifact_consumption: {certificate: currentPin(P + 'artifact-certificate.json'), review: currentPin(P + 'review.json')}};
+  if (projection) {
+    put(P + 'reference-projection.json', {version: 1, kind: 'native-reference-metadata-projection-v1',
+      hierarchy: {before: historical(P + 'reference-before.json'), after: historical('data/hierarchy.json')},
+      receipts: [historical(P + 'reference-receipt.json')], source_updates: [{logical_path: 'data/geography/source.json',
+        before: historical(P + 'reference-source-before.json'), after: historical('data/geography/source.json')}]});
+    selection.reference_projection = currentPin(P + 'reference-projection.json');
+  }
   put(P + 'sidecar.json', {version: 2, kind: 'retained-native-additive-selection-v2', base_selection: selection,
     authority_registry: historical(P + 'registry.json'), runtime_envelope: historical(P + 'runtime.json'),
     logical_asset_map: {base_manifest: historical(P + 'base-manifest.json'), ledger: historical(P + 'ledger.json'),
@@ -288,4 +296,49 @@ test('checkpoint hints cannot exempt actual selected source, selector or consume
    assert.equal(result.status,'full-check-required',name);assert.match(result.reason,/changed-current-input/);
   }
  }finally{f.close();}
+});
+
+
+test('unchanged reference metadata binds its complete projection and all existing input roles', async () => {
+  const f = fixture({projection: true}); try {
+    const result = await f.inspect();
+    assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+    for (const name of ['reference-projection.json', 'reference-before.json', 'reference-receipt.json', 'reference-source-before.json'])
+      assert(result.current_and_absent_alternatives.some(row => row.path === P + name));
+    assert.equal(result.science_reexecuted, false);
+    assert.deepEqual(f.calls, {acquire: 0, origins: 0});
+    for (const name of ['reference-projection.json', 'reference-before.json', 'reference-receipt.json', 'reference-source-before.json']) {
+      const changed = f.commit({...f.candidateFiles, [P + name]: body('changed actual metadata input')}, f.baseline);
+      assert.match((await f.inspect(changed)).reason, /changed-current-input/, name);
+    }
+  } finally { f.close(); }
+});
+
+test('reference metadata applicability refuses missing, nonordinary or mismatched complete projection', async () => {
+  const f = fixture({projection: true}); try {
+    const name = P + 'reference-projection.json', absent = {...f.candidateFiles}; delete absent[name];
+    for (const head of [f.commit(absent, f.baseline), f.commit(f.candidateFiles, f.baseline, {[name]: '120000'}),
+      f.commit(f.candidateFiles, f.baseline, {[name]: '100755'})])
+      assert.equal((await f.inspect(head)).status, 'full-check-required');
+    for (const edit of [pin => pin.bytes++, pin => pin.sha256 = 'f'.repeat(64), pin => pin.unbound = true]) {
+      const selection = JSON.parse(f.files['data/ownership-selection.json']); edit(selection.reference_projection);
+      const values = {...f.files, 'data/ownership-selection.json': body(selection)};
+      const base = f.commit(values, f.baseline), head = f.commit({...values, unrelated: body('new')}, base);
+      assert.equal((await f.inspect(head, base)).status, 'full-check-required');
+    }
+  } finally { f.close(); }
+});
+
+test('reference metadata cannot omit or replace its declared operand locators', async () => {
+  const f = fixture({projection: true}); try {
+    for (const edit of [p => delete p.hierarchy.before, p => p.receipts = [],
+      p => p.source_updates[0].before.git_blob_oid = 'f'.repeat(40), p => p.receipts[0].mode = '100755']) {
+      const name = P + 'reference-projection.json', projection = JSON.parse(f.files[name]); edit(projection);
+      const selection = JSON.parse(f.files['data/ownership-selection.json']), raw = body(projection);
+      selection.reference_projection = {path: name, bytes: raw.length, sha256: sha(raw)};
+      const values = {...f.files, [name]: raw, 'data/ownership-selection.json': body(selection)};
+      const base = f.commit(values, f.baseline), head = f.commit({...values, unrelated: body('new')}, base);
+      assert.equal((await f.inspect(head, base)).status, 'full-check-required');
+    }
+  } finally { f.close(); }
 });
