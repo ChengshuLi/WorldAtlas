@@ -218,8 +218,8 @@ def selected_joint(repo, baseline, candidate, *, trusted=None, checkpoint_destin
 
 
 def run_applicability_collector(command, env, timeout=None):
-    # The hosted geography job owns the overall 25-minute deadline. A separate
-    # shortcut cutoff can turn finite cold acquisition into a much longer replay.
+    # The hosting provider bounds the overall job. A separate shortcut cutoff
+    # can turn finite cold acquisition into a much longer replay.
     # Keep explicit timeout injection for cleanup controls, and always reap Git's
     # owned group before ordinary prefetch/full checks can use the object store.
     if os.name != 'posix':

@@ -70,7 +70,6 @@ jobs:
     needs: prepare
     if: needs.prepare.outputs.candidate != '' && needs.prepare.outputs.geography_required != 'false'
     runs-on: ubuntu-latest
-    timeout-minutes: 25
     permissions:
       contents: read
       actions: read
