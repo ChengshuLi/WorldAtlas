@@ -193,7 +193,7 @@ export async function runSelectedDeliverySmoke({root = process.cwd(), emittedDir
   const assets = new Map(), nativeParts = new Set(atlas.pixelMap?.method === 'native-linear-evenodd-first-owner-v1'
     ? (atlas.pixelMap.parts ?? []).map(part => part.path) : []);
   for (const descriptor of [...(atlas.pixelMap?.parts ?? []), envelope.ledger, envelope.patch,
-    envelope.owner_roster, envelope.base_manifest]) {
+    envelope.owner_roster, envelope.base_manifest, ...(atlas.referenceMetadata?[atlas.referenceMetadata.asset]:[])]) {
     assert(descriptor && !assets.has(descriptor.path), 'Missing/duplicate emitted asset path');
     assets.set(descriptor.path, descriptor);
   }

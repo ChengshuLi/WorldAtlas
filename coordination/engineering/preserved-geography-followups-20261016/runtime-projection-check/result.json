@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "implementation_commit": "51c62d867ca17076e05491f8da1b2a5546a01b98",
+  "failed_run": 38899389415,
+  "failed_job": 116967824195,
+  "original_failure": "Current reference properties differ from the complete applied source",
+  "diagnosis": "Real seedDatabase/geography adds active=1 and the complete derived reference_revision. Every other complete source property matches.",
+  "application_reference_revision": "6778719a9c50889f317919fcf57eab07f3240892118ad135d1e8f9ae5df5b6b5",
+  "full_cloudflare_build_passed": true,
+  "real_seed_database_package_control_passed": true,
+  "actual_emitted_selected_smoke_passed": true,
+  "actual_emitted_browser_entry_passed": true,
+  "focused_tests_passed": 67,
+  "source_files": 4532,
+  "source_bytes": 1079952184,
+  "emitted_files": 485,
+  "emitted_bytes": 341604175,
+  "commands": [
+    "env -u NODE_PATH -u NODE_OPTIONS node --test test/install-macro-reference.test.mjs test/selected-metadata-wiring.test.mjs test/package-current-additive.test.mjs",
+    "env -u NODE_PATH -u NODE_OPTIONS node --test --test-name-pattern='metadata|real geography entry' test/additive-release.test.mjs",
+    "env -u NODE_PATH -u NODE_OPTIONS node --test --test-name-pattern='real seeded database exports' test/model.test.mjs",
+    "env -u NODE_PATH -u NODE_OPTIONS node --test test/selected-delivery-smoke.test.mjs",
+    "env -u NODE_PATH -u NODE_OPTIONS npm run build:cloudflare",
+    "env -u NODE_PATH -u NODE_OPTIONS node scripts/selected-delivery-smoke.mjs --expectations coordination/engineering/preserved-geography-followups-20261016/selected-delivery-expectations.json --output NEW_OUTPUT_JSON",
+    "env -u NODE_PATH -u NODE_OPTIONS node coordination/engineering/preserved-geography-followups-20261016/runtime-projection-check/check-emitted-browser-entry.mjs"
+  ],
+  "operating_setup": "Exact package closure and an additional model-test aggregate-source-receipt were materialized from immutable HEAD objects; dependencies match the committed lockfile. Existing verified Python environment supplies numpy2.3.5/Shapely2.1.2/pyproj3.7.2. No producer, source acquisition, installer or finalizer replay.",
+  "limits": [
+    "Application build and actual Node-compatible browser entry/asset loader/picker pass locally at the stated immutable implementation commit. Hosted integration remains required.",
+    "GPU/Canvas rendering and deployed HTTP delivery are not exercised.",
+    "Source-authored reference_revision remains part of the exact property comparison; this repair does not broaden source metadata or existing migration write semantics.",
+    "The first broader additive-release invocation lacked unrelated sparse historical fixture bodies; the complete metadata browser controls were rerun explicitly and passed. No claim is made that all historical additive tests were run locally."
+  ]
+}

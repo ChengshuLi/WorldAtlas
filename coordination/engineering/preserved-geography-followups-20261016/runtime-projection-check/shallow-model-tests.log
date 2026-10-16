@@ -1,0 +1,20 @@
+✔ new source land retains unknown owners and its original source metadata (1684.788992ms)
+✔ real seeded database exports the exact complete revision into current selected metadata packaging (11367.589159ms)
+✔ year parsing supports BC/BCE/AD/CE and rejects invalid or out-of-range dates (1.721213ms)
+✔ every location has exactly all six hierarchy levels (2320.356569ms)
+✔ seed is idempotent and missing history stays missing (20678.534142ms)
+✔ example intervals are opt-in and end-exclusive, including ownership changes (2617.201312ms)
+✔ atomic imports reject overlapping records, invalid populations, ranks, and parents (363.891457ms)
+✔ real records take precedence over examples, with no population interpolation (1060.808282ms)
+✔ boundary versions require polygons and sources, and resolve by date (2094.240334ms)
+✔ historical political records are dated, sourced, and do not extend into 2025 (1576.351189ms)
+✔ inserts and updates cannot skip hierarchy levels (1.566075ms)
+✔ post-reseed geography preserves owner colors, county parents, cross-owner regions, and city memberships (1855.957393ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 83409.947869

@@ -239,7 +239,8 @@ export function nativeReferenceForData(data) {
   const current=additiveBaseReference(data),metadata=data.referenceMetadata;
   if(metadata===undefined)return current;
   require(data.additiveRelease!==undefined,'Reference metadata requires an explicit selected native asset closure');
-  exactKeys(metadata,['version','asset','native_reference','reference'],'Reference metadata');
+  exactKeys(metadata,['version','asset','native_reference','reference',...(Object.hasOwn(metadata,'application_reference_revision')?['application_reference_revision']:[])],'Reference metadata');
+  require(metadata.application_reference_revision===undefined||hex.test(metadata.application_reference_revision),'Invalid application reference revision');
   require(metadata.version===1,'Unsupported reference metadata');
   exactKeys(metadata.asset,['path','bytes','sha256'],'Reference metadata asset');
   require(metadata.asset.path==='reference-metadata/current.json'&&Number.isSafeInteger(metadata.asset.bytes)
@@ -419,7 +420,7 @@ export async function loadAdditiveNativePatch(data,features,base,{fetcher=fetch,
     'Reference metadata projection differs from the selected native manifest or current reference');
     currentRoster=projectReferenceOwners(roster,projection.location_changes,projection.provinces);
     const byId=new Map(features.map(feature=>[feature.id,feature]));
-    for(const change of projection.location_changes)assertAppliedReferenceProperties(byId.get(change.location_id)?.properties,change.after_properties);
+    for(const change of projection.location_changes)assertAppliedReferenceProperties(byId.get(change.location_id)?.properties,change.after_properties,{referenceRevision:metadata.application_reference_revision});
 
   }
   const byId=new Map(features.map(feature=>[feature.id,feature])),positions=new Map(features.map((feature,index)=>[feature.id,index])),indices=new Set(),ids=new Set();

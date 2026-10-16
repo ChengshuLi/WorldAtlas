@@ -1,0 +1,9 @@
+Local browser adapter: /usr/bin/chromium (Debian Chromium154); test assertions unchanged
+✖ startup diagnostics expose caught app errors and distinguish delayed rendering from a stall (232.469473ms)
+✔ compact full coordinate range, split high owner bits, seam cells and owner capacity are exact (135.049127ms)
+✔ v1 and v2 asset loaders preserve gzip/raw words, split row chunks and reject ambiguous manifests (24.450555ms)
+✔ shuffled and row-local varint transports reconstruct every packed bit across chunk and empty-row boundaries (227.305061ms)
+✖ real WebGL framebuffer agrees for legacy/compact holes, odd runs, maximum coordinates and high IDs (147.019478ms)
+✖ packaged coverage supports all modes, gap explanations and unavailable-reference policy (1226.594402ms)
+{"kind":"actual-emitted-selected-additive-ownership","selected_envelope_sha256":"645d9273b191ee5a8e01430b7df47f2f6a39bff19d35dea853273b9b4a1b8a4b","owners":49625,"added_cells":287288,"patch_rows":22209,"owners_with_native_gain":704,"stable_before_controls":22209,"exact_picker_and_sampler_checks":309497}
+✔ actual emitted selected additive cells retain exact owners and sampler output (11027.244725ms)
