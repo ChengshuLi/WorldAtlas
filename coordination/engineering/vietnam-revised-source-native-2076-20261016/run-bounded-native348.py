@@ -23,7 +23,7 @@ def main(code_commit, config_commit, config_path, destination):
     assert all(re.fullmatch('[a-f0-9]{40}', c) for c in [code_commit, config_commit])
     assert re.fullmatch(r'[a-zA-Z0-9_./-]+', config_path) and '..' not in config_path.split('/')
     dest = pathlib.Path(destination)
-    assert destination.startswith('.cache/') and '..' not in dest.parts and not os.path.lexists(dest)
+    assert destination.startswith('.cache/delivery-handoff/') and '..' not in dest.parts and not os.path.lexists(dest)
     for ancestor in dest.parents:
         if ancestor.exists():
             assert ancestor.is_dir() and not ancestor.is_symlink() and ancestor.resolve() == ancestor.absolute()
