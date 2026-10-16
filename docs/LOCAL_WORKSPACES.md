@@ -28,8 +28,8 @@ node scripts/local-workspace.mjs allocate --worker YOUR-REVIEWER-ID --slot revie
 ```
 
 Replace placeholders and retain the returned path and ownership token locally.
-Work allocation fetches `origin/main` and pins its commit before creating a fresh
-lane branch. Review allocation detaches the exact locally available reviewed
+Work allocation rejects an existing branch, then fetches `origin/main` and pins
+its commit before acquiring the registry lock and creating a fresh lane branch. Review allocation detaches the exact locally available reviewed
 commit; fetch the PR head first if necessary. Do not allocate one review directory
 per revision: finish/release the previous review slot and allocate its replacement.
 Publisher/Auditor inspection that needs local execution also uses the detached review slot; API/blob-only inspection needs no checkout. Any
@@ -177,8 +177,10 @@ Use actual available space and the operation's expected downloads, dependencies,
 decompression and output growth when planning work. Keep bounded scratch inside
 the slot, reuse pinned Git inputs and avoid duplicating retained datasets. A small
 operation does not need a fixed multi-gigabyte reserve. Filesystem and Git failures
-propagate normally; an interrupted allocation stays recorded for inspection, never
-as a successfully prepared slot. Missing selected inputs still block allocation.
+propagate normally. If initial worktree creation fails, the allocator removes only
+its new reservation when both the filesystem and Git confirm no checkout exists.
+It never deletes a branch or files during that recovery. Partial checkouts and
+unknown or interrupted state stay recorded for inspection, never as ready slots. Missing selected inputs still block allocation.
 
 These reports are observations, not filesystem quotas or promised capacity. Other
 workers and applications can consume space after measurement. Nothing kills
@@ -231,8 +233,9 @@ original repository evidence, other workers' work or production data.
 
 The token changes on every allocation. Wrong/stale tokens, symlink directories,
 changed Git identity and an occupied slot fail closed. A failed/interrupted
-allocation remains `preparing` in the registry and occupies its slot. A
-crash may leave the local lock. Neither expiry nor a timeout authorizes deletion
+allocation with a partial checkout or unknown state remains `preparing` and
+occupies its slot. Fetch runs outside the registry lock; a crash during the
+locked mutation may still leave the local lock. Neither expiry nor a timeout authorizes deletion
 or lock breaking: inspect processes, `git worktree list`, the registry and actual
 files, preserve work and reconcile under one operator. There is intentionally no
 automatic stale-lock recovery or broad destructive sweep.

@@ -100,7 +100,7 @@ export function transitionClaim({issue,comments,prs=[],dependencies=[],request,n
  return {claim,previous:current};
 }
 export async function githubPages(api,route){
- const all=[];for(let page=1;page<=100;page++){const rows=await api(`${route}${route.includes('?')?'&':'?'}per_page=100&page=${page}`);const list=Array.isArray(rows)?rows:rows?.check_runs;if(!Array.isArray(list))throw Error('Invalid paginated GitHub response');all.push(...list);if(list.length<100)return all;}throw Error('GitHub pagination limit reached; stop rather than assume completeness');
+ const all=[];for(let page=1;;page++){const rows=await api(`${route}${route.includes('?')?'&':'?'}per_page=100&page=${page}`);const list=Array.isArray(rows)?rows:rows?.check_runs;if(!Array.isArray(list))throw Error('Invalid paginated GitHub response');all.push(...list);if(list.length<100)return all;}
 }
 export async function linkedPulls(api,repo,number){
  const timeline=await githubPages(api,`/repos/${repo}/issues/${number}/timeline`),ids=new Set();
