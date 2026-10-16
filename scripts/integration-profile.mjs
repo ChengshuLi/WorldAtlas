@@ -12,6 +12,7 @@ export const COORDINATION_PATHS = new Set([
   'scripts/evidence-quality.mjs', 'scripts/evidence-policy.mjs', 'scripts/premerge-evidence.mjs',
   'scripts/check-pr-evidence.mjs', 'scripts/merge-integration.mjs', 'scripts/integration-proof.mjs',
   'scripts/geographic-adjudication-api.mjs',
+  'scripts/git-blob-transport.mjs', 'scripts/immutable-git-blobs.mjs',
   'scripts/integration-profile.mjs',
   'scripts/classify-deployment-budget.mjs',
   '.github/workflows/deployment-budget.yml',

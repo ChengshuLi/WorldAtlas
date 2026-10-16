@@ -81,6 +81,7 @@ export const FOCUSED_INTEGRATION_TESTS = Object.freeze(['handoff-scope','issue-c
   'evidence-quality','historical-evidence','premerge-evidence','geographic-adjudication-api','trusted-workflow-checkouts','merge-integration','merge-integration-entrypoint','integration-proof',
   // Classification controls exercise their real retained-input routing cases.
   'selected-data-profile',
+  'git-blob-transport','immutable-git-blobs','pr-evidence-transport',
   // Actual delivery entry/advance consumers, including scientific dispatch guards.
   'delivery-evidence-derivation','delivery-finalize-config','delivery-handoff-advance','delivery-handoff','delivery-registry-delta','local-workspace','native-authority-entry','native-diagnostic-entry','native-witness-authority','physical-source-retention','source-cohort','source-completed-staging','source-evidence-derivation','source-member-native-delivery','source-target-native-delivery'].map(name => `test/${name}.test.mjs`));
 
