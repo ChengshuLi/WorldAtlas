@@ -6,7 +6,7 @@ import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {ImmutableReader, NativeAssetImage, decodeVisibilityLatitudes} from '../../../scripts/check-effective-geographic-regression.mjs';
-import {nativeOnlyComponent} from '../../../src/native-grid.js';
+import {repairComponentKey, nativeOnlyComponent} from '../../../src/native-grid.js';
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
 import {valueBytes, valueSha, coordinateBounds, nativeBaseSelection,
   normaliseRetainedRepairLedger, readRetainedRegistryAuthority, validateSupportedProgrammeCatalogue,
@@ -999,14 +999,14 @@ function qualifyAppendedAuthorities(session,reader,state,selected,prior,addedEnt
     if (proof.nativeOnly) demand(proof.patches.every(p=>same(p.base_reference,selected.envelope.base_reference)),
       'Native source-target authority belongs to a different selected base');
     for (const original of proof.ledger.rows) {
-      demand(!oldRows.has(original.component_id) && !expectedAdded.has(original.component_id), 'Appended producer repeats original component');
-      expectedAdded.set(original.component_id,{original,entry});
+      demand(!oldRows.has(repairComponentKey({...original,authority_sha256:entry.authority_sha256})) && !expectedAdded.has(repairComponentKey({...original,authority_sha256:entry.authority_sha256})), 'Appended producer repeats original component');
+      expectedAdded.set(repairComponentKey({...original,authority_sha256:entry.authority_sha256}),{original,entry});
     }
   }
-  const addedRows=selected.ledger.rows.filter(row => !oldRows.has(row.component_id));
+  const addedRows=selected.ledger.rows.filter(row => !oldRows.has(repairComponentKey(row)));
   demand(addedRows.length===expectedAdded.size,'Candidate omitted/invented complete appended ledger scope');
   for (const row of addedRows) {
-    const expected=expectedAdded.get(row.component_id), {authority_sha256,rule_sha256,...literal}=row;
+    const expected=expectedAdded.get(repairComponentKey(row)), {authority_sha256,rule_sha256,...literal}=row;
     demand(expected && authority_sha256===expected.entry.authority_sha256
       && (rule_sha256===undefined || rule_sha256===expected.entry.rule_sha256) && same(literal,expected.original),
     'Candidate changed original appended primitive or exception');
@@ -1031,8 +1031,8 @@ export function qualifyTransition({state,reader}) {
     for (const role of ['base_manifest','owner_roster'])
       supported(same(selected.sidecar.logical_asset_map[role],baseProof.selected.sidecar.logical_asset_map[role]), 'Selected original manifest/owner alias changed');
     demand(same(selected.ledger.parent_inventory,state.ledger.parent_inventory), 'Complete original source/scope denominator changed');
-    const oldRows=new Map(state.ledger.rows.map(row => [row.component_id,row]));
-    for (const row of state.ledger.rows) demand(same(row,selected.ledger.rows.find(p => p.component_id===row.component_id)),
+    const oldRows=new Map(state.ledger.rows.map(row => [repairComponentKey(row),row]));
+    for (const row of state.ledger.rows) demand(same(row,selected.ledger.rows.find(p => repairComponentKey(p)===repairComponentKey(row))),
       'Old complete ledger primitive, exception or native assignment removed/rebound');
     let authorities=new Map(baseProof.oldAuthorities);
     for (const entry of state.registry.entries) demand(same(entry,selected.registry.entries.find(p => p.authority_sha256===entry.authority_sha256)),
@@ -1106,19 +1106,19 @@ export function authenticateTransition({transition}) {
 // Pure arithmetic only. This function cannot mint a checkpoint, projector or
 // selected certificate capability; callers must still qualify all operands.
 export function deriveCoordinateDelta({certificate,oldAdditions,additions,selection}) {
-  const oldById=new Map(oldAdditions.map(row => [row.component_id,row]));
-  demand(oldById.size===oldAdditions.length && new Set(additions.map(row => row.component_id)).size===additions.length,
+  const oldById=new Map(oldAdditions.map(row => [repairComponentKey(row),row]));
+  demand(oldById.size===oldAdditions.length && new Set(additions.map(repairComponentKey)).size===additions.length,
     'Duplicate complete primitive identity');
-  for (const row of oldAdditions) demand(same(row,additions.find(p => p.component_id===row.component_id)),
+  for (const row of oldAdditions) demand(same(row,additions.find(p => repairComponentKey(p)===repairComponentKey(row))),
     'Old effective primitive/base geometry changed');
   const rows=new Map(certificate.entries.map(row => [row[0],row]));
   for (const row of additions) demand(rows.has(row.target_id) && row.pixelIndex===rows.get(row.target_id)[1]
     && row.base_geometry_sha256===rows.get(row.target_id)[7] && (nativeOnlyComponent(row,valueSha) || row.geometry_sha256===valueSha(row.geometry)),
   'Appended primitive targets a stale base, changed geometry or different owner');
-  const changedIds=new Set(additions.filter(row => !oldById.has(row.component_id)).map(row => row.target_id));
+  const changedIds=new Set(additions.filter(row => !oldById.has(repairComponentKey(row))).map(row => row.target_id));
   const entries=certificate.entries.map(row => {
     if (!changedIds.has(row[0])) return row;
-    const all=additions.filter(p => p.target_id===row[0]), added=all.filter(p => !oldById.has(p.component_id));
+    const all=additions.filter(p => p.target_id===row[0]), added=all.filter(p => !oldById.has(repairComponentKey(p)));
     const boxes=[...row[9],...added.flatMap(p => nativeOnlyComponent(p,valueSha)?[p.native_bounds]:coordinateBounds(p.geometry))];
     const next=[...row]; next[8]=valueSha({base_geometry_sha256:row[7],additions:all});
     next[9]=[boxes.reduce((a,b) => [Math.min(a[0],b[0]),Math.min(a[1],b[1]),Math.max(a[2],b[2]),Math.max(a[3],b[3])])];

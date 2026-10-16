@@ -1107,7 +1107,10 @@ test('multiple modern originals reject mixed/empty groups, duplicate authorities
   const sameEvidence = f.makeAppend(s => {
     s.native.rows = [{y: 3, runs: [[4, 5, 1]]}]; s.row.native_rows = structuredClone(s.native.rows); s.row.native_cells = 1;
   }, f.owned + 'same-source/');
-  refusal(modernGroups(f.config, [f.config, sameEvidence]), /Foreign or duplicate modern component/);
+  const sameLabel = composeAuthorities(modernGroups(f.config, [f.config, sameEvidence]), f.r);
+  const repeated = JSON.parse(sameLabel['selected-ledger.json']).rows.filter(row => row.component_id === f.r.json(f.config.ledger).component_ids[0]);
+  assert.equal(repeated.length, 2); assert.notEqual(repeated[0].authority_sha256, repeated[1].authority_sha256);
+  assert.deepEqual(repeated.map(row => row.native_cells).sort(), [1, 2]);
   for (const [change, pattern] of [
     [s => { s.native.rows = [{y: 3, runs: [[3, 5, 1]]}]; s.row.native_rows = structuredClone(s.native.rows); s.row.native_cells = 2; }, /overlap/],
     [s => { s.source.native_contract.method = 'wrong'; }, /baseline\/contract/],
