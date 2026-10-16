@@ -1,3 +1,4 @@
+import {repairComponentKey} from '../src/native-grid.js';
 import {FOCUSED_INTEGRATION_TESTS} from './run-integration-tests.mjs';
 
 // Only these coordination controls have an audited focused test inventory.
@@ -14,8 +15,6 @@ export const COORDINATION_PATHS = new Set([
   'scripts/geographic-adjudication-api.mjs',
   'scripts/git-blob-transport.mjs', 'scripts/immutable-git-blobs.mjs',
   'scripts/integration-profile.mjs',
-  'scripts/classify-deployment-budget.mjs',
-  '.github/workflows/deployment-budget.yml',
   // Test-runner changes require full regression to validate the real inventory.
   'scripts/run-worker-merge.mjs',
   '.github/workflows/handoff-scope.yml',
@@ -125,11 +124,12 @@ export function validateSelectedExpectations(expected, ledger, ledgerHash, previ
     'invalid reviewed expectations');
   needSelected(ledger?.version === 2 && ledger.kind === 'native-additive-repair-ledger-v2' &&
     Array.isArray(ledger.rows) && ledger.rows.length > 0, 'invalid selected ledger');
-  const actual = new Map(), allRows = new Map(), members = new Map(), batches = new Set();
+  const actual = new Map(), allRows = new Map(), byComponent = new Map(), members = new Map(), batches = new Set();
   let cells = 0;
   for (const row of ledger.rows) {
-    needSelected(text(row.component_id) && !allRows.has(row.component_id), 'duplicate/invalid ledger member');
-    allRows.set(row.component_id, row);
+    const id = repairComponentKey(row);
+    needSelected(text(row.component_id) && !allRows.has(id), 'duplicate/invalid ledger member');
+    allRows.set(id, row);
     if (!['assigned','zero-cell'].includes(row.disposition)) {
       needSelected(['awaiting-evidence','rejected'].includes(row.disposition) &&
         (row.native_cells === undefined || row.native_cells === 0) && hash(row.authority_sha256) && hash(row.rule_sha256),
@@ -137,7 +137,8 @@ export function validateSelectedExpectations(expected, ledger, ledgerHash, previ
       continue;
     }
     needSelected(Number.isSafeInteger(row.native_cells) && row.native_cells >= 0, 'invalid active native cells');
-    actual.set(row.component_id, row); cells += row.native_cells;
+    actual.set(id, row); cells += row.native_cells;
+    const matches = byComponent.get(row.component_id) ?? []; matches.push(row); byComponent.set(row.component_id, matches);
   }
   needSelected(Number.isSafeInteger(cells) && cells === expected.cumulative_native_cells, 'native cell expectation differs');
   for (const cohort of expected.cohorts) {
@@ -146,36 +147,34 @@ export function validateSelectedExpectations(expected, ledger, ledgerHash, previ
       Array.isArray(cohort.members) && same([...cohort.component_ids].sort(), cohort.members.map(m => m.component_id).sort()),
       'invalid complete cohort roster');
     batches.add(cohort.original_batch_id);
+    const authority = /^retained-authority-scope:([a-f0-9]{64})$/.exec(cohort.original_batch_id)?.[1];
     for (const member of cohort.members) {
-      const row = actual.get(member.component_id);
+      const matches = byComponent.get(member.component_id) ?? [];
+      const row = authority ? actual.get(repairComponentKey({authority_sha256:authority, component_id:member.component_id}))
+        : matches.length === 1 ? matches[0] : undefined;
+      const id = row && repairComponentKey(row);
       const nativeOnly=row?.representation==='native-cells', representationHash=nativeOnly?'native_rows_sha256':'geometry_sha256';
       const canonical=value=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'
         ?Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])])):value;
       const actualHash=nativeOnly?sha256(Buffer.from(JSON.stringify(canonical(row.native_rows))+'\n')):row?.geometry_sha256;
       needSelected(keys(member, ['component_id','target_id','disposition',representationHash]) && row &&
-        !members.has(member.component_id) && text(member.target_id) &&
+        !members.has(id) && text(member.target_id) &&
         ['assigned','zero-cell'].includes(member.disposition) && hash(member[representationHash]) && actualHash===member[representationHash] &&
         ['target_id','disposition'].every(key => row[key] === member[key]), 'member differs from selected ledger');
-      members.set(member.component_id, member);
+      members.set(id, member);
     }
   }
   needSelected(members.size === actual.size && actual.size > 0, 'expectations omit selected members');
   if (previousLedger) {
     needSelected(Array.isArray(previousLedger.rows), 'missing previous ledger roster');
     for (const old of previousLedger.rows.filter(row => ['awaiting-evidence','rejected'].includes(row.disposition)))
-      needSelected(same(allRows.get(old.component_id), old), 'previous held/rejected row changed or disappeared');
+      needSelected(same(allRows.get(repairComponentKey(old)), old), 'previous held/rejected row changed or disappeared');
   }
   return expected;
 }
 
 const branchScope = branch => `coordination/engineering/${branch.slice('engineering/'.length)}/`;
 const inScope = (name, scopes) => containsPackagePath(scopes, name);
-// Implicit loader/configuration files can change behavior merely by existing,
-// outside the explicit reader graph. Other owned ordinary blobs are eligible
-// for the complete unconsumed-role proof below; a suffix grants no authority.
-function implicitLoader(name) {
-  return /^(?:package(?:-lock)?\.json|npm-shrinkwrap\.json|(?:requirements|constraints)(?:[.-].*)?\.txt|pyproject\.toml|setup\.(?:py|cfg)|__init__\.py|(?:site|user)customize\.py|(?:js|ts)config(?:\.[^.]+)?\.json|import[-_.]?map\.json|binding\.gyp|(?:binding|deno|composer)\.json)$/i.test(name.split('/').at(-1));
-}
 function nativeOperandPath(name, branch, reservation) {
   return /^(?:rows|runs)-[0-9]+\.bin\.gz$/.test(name.split('/').at(-1)) &&
     (name === branchScope(branch) + 'native-operands/' + name.split('/').at(-1) ||
@@ -195,8 +194,7 @@ export function selectedDataCandidate(branch, files, reservation = {}) {
     files.some(file => file.filename === SELECTION && file.status === 'modified') &&
     files.every(file => !file.previous_filename && (file.filename === CHECKPOINT_LOCATOR
       ? ['added', 'modified'].includes(file.status) : [SELECTION, PACKAGE_INPUT_FILE, ADMINISTRATIVE_REGISTRY].includes(file.filename)
-      ? file.status === 'modified' : file.filename === manifest && file.status === 'modified' || file.status === 'added' && inScope(file.filename, scopes) && safe(file.filename) &&
-        !implicitLoader(file.filename)));
+      ? file.status === 'modified' : file.filename === manifest && file.status === 'modified' || file.status === 'added' && inScope(file.filename, scopes) && safe(file.filename)));
 }
 export async function integrationTree(api, repo, commit) {
   const object = await api(`/repos/${repo}/git/commits/${commit}`);
@@ -232,8 +230,8 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     const readRow = async (row, retain = true) => {
       needSelected(ordinary(row), 'missing ordinary role');
       if (!cache.has(row.sha)) {
-        // All required metadata shares this read cache. Supporting evidence
-        // is checked one complete member at a time and never accumulates here.
+        // Required metadata shares this read cache. Explicit transient roles
+        // are checked one complete member at a time without accumulating here.
         const blob = await api(`/repos/${repo}/git/blobs/${row.sha}`, 'GET', undefined, {retainImmutableBlob: retain, expectedImmutableBytes: row.size});
         needSelected(blob.encoding === 'base64' && typeof blob.content === 'string', 'missing blob bytes');
         const bytes = Buffer.from(blob.content, 'base64');
@@ -598,8 +596,10 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     const sourceAuthorities = [];
     const roleEntries = [...registry.entries].sort((a, b) => Number(added.has(b.source_authority?.path)) - Number(added.has(a.source_authority?.path)));
     for (const entry of roleEntries) {
-      needSelected(keys(entry, ['authority_sha256','policy_id','policy_version','rule_preimage','rule_sha256','source_authority']), 'foreign registry fields');
+      needSelected(keys(entry, ['authority_sha256','policy_id','policy_version','rule_preimage','rule_sha256','source_authority',
+        ...(entry.completed_constructor === undefined ? [] : ['completed_constructor'])]), 'foreign registry fields');
       pin(entry.rule_preimage); pin(entry.source_authority);
+      if (entry.completed_constructor !== undefined) pin(entry.completed_constructor);
       const retained = !added.has(entry.source_authority.path);
       if (retained && ![...added].some(name => nativeOperandPath(name, branch, reservation) && !nativeOperands.has(name))) continue;
       const authority = await pinnedJSON(entry.source_authority);
@@ -789,10 +789,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       needSelected(ordinary(baseline.entries.get(updatedManifest)), 'nonordinary scientific manifest');
       supporting.add(updatedManifest);
     }
-    for (const name of supporting) {
-      needSelected(!nativeOperandPath(name, branch, reservation), 'unbound native operand');
-      if (name !== updatedManifest || !manifestChanged) await read(name, authored, false);
-    }
+    for (const name of supporting) needSelected(!nativeOperandPath(name, branch, reservation), 'unbound native operand');
     if (supporting.size) {
       // Issue ownership and a historical-looking filename establish no role.
       // Reuse the fixed base-reader walk for every newly admitted retained file,

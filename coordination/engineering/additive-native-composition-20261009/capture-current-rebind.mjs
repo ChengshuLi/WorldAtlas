@@ -2,6 +2,7 @@
 // complete import/runtime closure before import and records external operation.
 // This module cannot issue an operating certificate or select a release.
 import fs from 'node:fs';import path from 'node:path';
+import {repairComponentKey} from '../../../src/native-grid.js';
 import {ImmutableReader} from '../../../scripts/check-effective-geographic-regression.mjs';
 import {currentRebindCodePaths,normaliseRetainedRepairLedger,nativeBaseSelection,requirePriorAdditiveConservation,readRetainedRegistryAuthority,acquireCurrentRebindOperands,currentRebindSourceView,valueBytes,valueSha} from '../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 const prepared=new WeakSet(),completedPrior=new WeakMap();
@@ -43,8 +44,8 @@ function originalOperands(reader,registry,ledger){
  for(const entry of registry.entries){
   proofs.push(completedOriginalAuthority(reader,entry));
  }
- const expected=new Map();for(const proof of proofs)for(const row of proof.original_ledger.rows){demand(!expected.has(row.component_id),'Repeated original complete authority component');expected.set(row.component_id,{row,proof});}
- demand(ledger.rows.length===expected.size&&ledger.rows.every(row=>{const prior=expected.get(row.component_id);if(!prior)return false;const {authority_sha256,rule_sha256,...literal}=row;return authority_sha256===prior.proof.authority_sha256&&rule_sha256===prior.proof.rule_sha256&&same(literal,prior.row); }),'Composed ledger changes original scope/exception/primitive authority');
+ const expected=new Map();for(const proof of proofs)for(const row of proof.original_ledger.rows){const key=repairComponentKey({...row,authority_sha256:proof.authority_sha256});demand(!expected.has(key),'Repeated original complete authority component');expected.set(key,{row,proof});}
+ demand(ledger.rows.length===expected.size&&ledger.rows.every(row=>{const prior=expected.get(repairComponentKey(row));if(!prior)return false;const {authority_sha256,rule_sha256,...literal}=row;return authority_sha256===prior.proof.authority_sha256&&rule_sha256===prior.proof.rule_sha256&&same(literal,prior.row); }),'Composed ledger changes original scope/exception/primitive authority');
  // Complete ledger/patch authentication above has finished. Duplicate original
  // ledgers and native presentation graphs do not escape this helper frame.
  return {rows:[...normalized.rows.values()],patches:proofs.flatMap(p=>p.native_proof.native_patches)};

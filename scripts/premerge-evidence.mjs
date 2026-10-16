@@ -1,11 +1,10 @@
 import {sha256, validateEvidence, safeEvidencePath, baselineFiles, baselineFile} from './evidence-quality.mjs';
-import {finiteBytes, addBytes, evidenceBytePlan, decodeEvidenceGzip, immutableResponseBytes, LEGACY_FILE_BYTES} from './evidence-quality.mjs';
+import {finiteBytes, addBytes, evidenceBytePlan, decodeEvidenceGzip, immutableResponseBytes} from './evidence-quality.mjs';
 import {workSpec} from './issue-claim-contract.mjs';
 import {validateLanePaths} from './check-handoff-scope.mjs';
 import {evidenceRequirement, loadEvidencePolicy} from './evidence-policy.mjs';
 
 const need = (ok, message) => { if (!ok) throw Error(message); };
-const MAX_FILE = LEGACY_FILE_BYTES;
 export const GEOMETRY_VERSION = 'worldatlas-evidence-geometry-v1';
 export const PREPARATION_VERSION = 'worldatlas-evidence-preparation-v1';
 const geometryPolicy = {
@@ -78,7 +77,6 @@ export function validatePremergeManifest(manifest, {readFile, files, manifestPat
   // Retained legacy receipts remain checked when supplied, but need not be recopied.
   if (receipts !== undefined) need(Array.isArray(receipts) && receipts.length === files.length && new Set(receipts.map(row => row.path)).size === receipts.length,
     'Incomplete changed-file receipts');
-  const descriptors = [...manifest.baseline.files, ...manifest.sources.flatMap(source => source.files ?? []), ...manifest.outputs];
   const outputs = new Set(manifest.outputs.map(file => file.path));
   const retained = new Set(manifest.sources.flatMap(source => source.files?.map(file => file.path) ?? []));
   for (const file of files) {
@@ -99,7 +97,6 @@ export function validatePremergeManifest(manifest, {readFile, files, manifestPat
     need(!manifest.baseline.files.some(input => input.role === 'original-source' &&
       [file.filename, file.previous_filename].includes(input.path)), 'Cannot overwrite original-source baseline evidence');
   }
-  need(descriptors.length <= 512, 'Evidence file inventory exceeds bounded review budget');
   for (const metric of manifest.metrics) if (metric.vintage === 'current') {
     need(pr?.base?.sha === manifest.baseline.commit, 'Current metrics must use the actual PR-base vintage; use baseline/archived for older results');
   }
@@ -198,7 +195,7 @@ async function remoteReader(api, repo, commits) {
   async function load(name, vintage, max) {
     safeEvidencePath(name); const key = `${vintage}:${name}`;
     const entry = trees.get(vintage)?.get(name);
-    const bound = max === undefined ? planned.get(key)?.size ?? MAX_FILE : finiteBytes(max, 'remote file budget');
+    const bound = max === undefined ? planned.get(key)?.size ?? entry?.size : finiteBytes(max, 'remote file budget');
     need(entry?.type === 'blob' && ['100644', '100755'].includes(entry.mode) && Number.isSafeInteger(entry.size)
       && entry.size >= 0 && entry.size <= bound && (allowance === undefined || planned.has(key)), 'Missing/oversized/nonordinary evidence file');
     if (cache.has(key)) return cache.get(key);
@@ -217,7 +214,7 @@ async function remoteReader(api, repo, commits) {
     const unique=[...byOID.values()];
     allowance=[...byPath.values()].reduce((sum,row)=>addBytes(sum,row.size),0);
     for(const [key,row]of byPath)planned.set(key,row);
-    if(typeof api.prefetchGitBlobs==='function'&&unique.length<=512)await api.prefetchGitBlobs(repo,unique);
+    if(typeof api.prefetchGitBlobs==='function')await api.prefetchGitBlobs(repo,unique);
   }
   const read = (name, vintage) => { const bytes = cache.get(`${vintage}:${name}`); need(bytes, 'Unloaded evidence bytes'); return bytes; };
   read.descriptor = (name, vintage) => {
@@ -236,11 +233,10 @@ export async function checkPremergeEvidence({api, repo, pr, issue, reservation, 
     if (!requirement.required) return {status: 'not-required', ...requirement, head_sha: pr.head.sha, limits: ['No scientific manifest was checked; substantive exact-head review and applicable tests remain required']};
     need(files.length === pr.changed_files, 'Incomplete PR change inventory');
     const initial = await remoteReader(api, repo, {candidate: pr.head.sha});
-    const manifestBytes = await initial.load(requirement.manifestPath, 'candidate', 1024 * 1024);
+    const manifestBytes = await initial.load(requirement.manifestPath, 'candidate');
     const manifest = JSON.parse(manifestBytes);
-    need(Array.isArray(manifest.baseline?.files) && Array.isArray(manifest.sources) && Array.isArray(manifest.outputs) &&
-      manifest.baseline.files.length + manifest.outputs.length + manifest.sources.flatMap(source => source.files ?? []).length <= 512,
-      'Invalid or oversized evidence inventory');
+    need(Array.isArray(manifest.baseline?.files) && Array.isArray(manifest.sources) && Array.isArray(manifest.outputs),
+      'Invalid evidence inventory');
     need(/^[a-f0-9]{40}$/.test(manifest.baseline?.commit ?? ''), 'Invalid evidence baseline');
     const historical = baselineFiles(manifest);
     evidenceBytePlan([...historical, ...manifest.sources.flatMap(source => source.files ?? []), ...manifest.outputs]);

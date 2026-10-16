@@ -177,6 +177,16 @@ export function polygonParts(geometry) {
   }
   return polygons;
 }
+// Component labels belong to their original authority; repeated labels do not
+// rename or merge the independently qualified original rows.
+export const repairComponentKey = row => JSON.stringify([row.authority_sha256 ?? null, row.component_id]);
+export function compareRepairComponents(a, b) {
+  for (const key of ['component_id', 'authority_sha256']) {
+    const x = a[key] ?? '', y = b[key] ?? '';
+    if (x !== y) return x < y ? -1 : 1;
+  }
+  return 0;
+}
 export function nativeOnlyComponent(row, hashValue) {
   if (row?.representation !== 'native-cells') return false;
   require(typeof hashValue==='function','Explicit canonical native component hash required');

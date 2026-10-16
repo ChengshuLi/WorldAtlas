@@ -14,6 +14,7 @@ import types
 
 VERSION = 'worldatlas-evidence-preparation-v1'
 MAX_FILE_BYTES = 32 * 1024 * 1024
+# Retained for historical transport callers; current callers choose any explicit budget.
 MAX_PHASE_BYTES = 256 * 1024 * 1024
 
 
@@ -44,12 +45,12 @@ def deterministic_gzip(raw):
 
 class Baseline:
     """A commit plus reviewed whole-file pins; never the mutable working tree."""
-    def __init__(self, repo, commit, files, *, max_phase_bytes=MAX_PHASE_BYTES):
+    def __init__(self, repo, commit, files, *, max_phase_bytes=None):
         if not re.fullmatch('[a-f0-9]{40}', commit):
             raise ValueError('An immutable 40-character baseline commit is required')
         self.repo, self.commit = str(Path(repo).resolve()), commit
         self.pins = {}
-        if not isinstance(max_phase_bytes, int) or not 0 < max_phase_bytes <= MAX_PHASE_BYTES:
+        if max_phase_bytes is not None and (type(max_phase_bytes) is not int or max_phase_bytes <= 0):
             raise ValueError('Invalid bounded phase budget')
         self.max_phase_bytes = max_phase_bytes
         self.consumed = {}
@@ -90,7 +91,7 @@ class Baseline:
         if previous is not None and previous != size:
             raise ValueError('Consumed input size changed')
         if previous is None:
-            if sum(self.consumed.values()) + size > self.max_phase_bytes:
+            if self.max_phase_bytes is not None and sum(self.consumed.values()) + size > self.max_phase_bytes:
                 raise ValueError('Complete execution phase exceeds byte budget')
             self.consumed[name] = size
 
@@ -274,12 +275,11 @@ class NewVintage:
                 if len(raw) > MAX_FILE_BYTES:
                     raise ValueError('Decoded output exceeds file byte budget')
                 decoded_output_bytes += len(raw)
-        if sum(self.baseline.consumed.values()) + sum(len(raw) for raw in payloads.values()) + decoded_output_bytes + 4096 > self.baseline.max_phase_bytes:
-            raise ValueError('Complete phase including output exceeds byte budget')
         records = [descriptor(str((self.root / name).relative_to(self.baseline.repo)), raw) for name, raw in payloads.items()]
         receipt = canonical_json({'version': 1, 'status': 'complete', 'outputs': records})
-        if len(receipt) > 4096:
-            raise ValueError('Completion receipt exceeds admitted reserve')
+        total = sum(self.baseline.consumed.values()) + sum(map(len, payloads.values())) + decoded_output_bytes + len(receipt)
+        if self.baseline.max_phase_bytes is not None and total > self.baseline.max_phase_bytes:
+            raise ValueError('Complete phase including output exceeds byte budget')
         # Check the entire set and all pins again immediately before first mutation.
         NewVintage(self.baseline, self.owned_path, self.vintage, self.filenames)
         for name in self.baseline.pins:
@@ -321,7 +321,9 @@ def write_new_vintage(baseline, owned_path, vintage, filename, value):
     raw = canonical_json(value)
     encoded = deterministic_gzip(raw) if filename.endswith('.gz') else raw
     output_bytes = len(encoded) + (len(raw) if filename.endswith('.gz') else 0)
-    if len(raw) > MAX_FILE_BYTES or len(encoded) > MAX_FILE_BYTES or sum(baseline.consumed.values()) + output_bytes > baseline.max_phase_bytes:
+    if len(raw) > MAX_FILE_BYTES or len(encoded) > MAX_FILE_BYTES or (
+        baseline.max_phase_bytes is not None and sum(baseline.consumed.values()) + output_bytes > baseline.max_phase_bytes
+    ):
         raise ValueError('Output exceeds complete byte budget')
     target.parent.mkdir(parents=True, exist_ok=True)
     temporary = None

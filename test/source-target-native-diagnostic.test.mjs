@@ -270,7 +270,7 @@ test('closed territorial reader consumes original geometry and exact adopted sco
     data=>data.provenance[0].role='unknown',data=>data.unknown=true
   ])assert.throws(()=>constructorFixture(chosen,{change}).run(),/territorial|Territorial|Duplicate|adopted/);
   assert.throws(()=>constructorFixture(chosen,{forge:data=>data.records[0].x++}).run(),
-    /executing accepted input/);
+    /selected candidate input/);
   const blocked=constructorFixture(state=>{chosen(state);
     state.targets[0].territorial_exclusions.push(structuredClone(state.originals[2].geometry));},{})
     .diagnose();

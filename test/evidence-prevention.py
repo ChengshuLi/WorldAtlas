@@ -7,7 +7,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
-from evidence.immutable import Baseline, NewVintage, descriptor, canonical_json
+from evidence.immutable import Baseline, NewVintage, descriptor, canonical_json, write_new_vintage
 from evidence.contracts import exact_rows, join_rows, finite_metrics, require_source_text
 
 
@@ -106,10 +106,50 @@ class Prevention(unittest.TestCase):
         with self.assertRaises(ValueError): vintage.publish({'one.json': {}})
         self.assertFalse(vintage.root.exists())
         pin = self.pins[0]
-        tight = Baseline(self.root, self.commit, [pin], max_phase_bytes=4096 + pin['bytes'])
+        tight = Baseline(self.root, self.commit, [pin], max_phase_bytes=pin['bytes'] + 100)
         with self.assertRaisesRegex(ValueError, 'including output'):
             NewVintage(tight, self.owned, 'oversize', ['one.json']).publish({'one.json': {'value': 'x' * 100}})
         self.assertFalse((self.root / 'coordination').exists())
+
+    def test_complete_large_inventory_and_exact_receipt_budget(self):
+        # Exercise cumulative admission without allocating a 256 MiB fixture.
+        for i in range(9):
+            self.baseline.admit('measured-input-' + str(i), 32 * 1024 * 1024)
+        self.assertGreater(sum(self.baseline.consumed.values()), 256 * 1024 * 1024)
+        legacy = write_new_vintage(self.baseline, self.owned, 'legacy', 'one.json', {'value': 1})
+        self.assertEqual(json.loads((self.root / legacy['path']).read_bytes()), {'value': 1})
+        products = {f'part-{i}.json': {'value': i} for i in range(40)}
+        run = NewVintage(self.baseline, self.owned, 'complete-inventory', list(products))
+        records = run.publish(products)
+        receipt = (run.root / 'publication.json').read_bytes()
+        self.assertGreater(len(receipt), 4096)
+        self.assertEqual(json.loads(receipt)['outputs'], records)
+        for record in records:
+            raw = (self.root / record['path']).read_bytes()
+            self.assertEqual(descriptor(record['path'], raw), record)
+        # Exact receipt size, rather than a fixed reserve, participates in an explicit allowance.
+        pin = self.pins[0]
+        value = {'one.json': {'value': 1}}
+        raw = canonical_json(value['one.json'])
+        name = self.owned + 'vintages/exact/one.json'
+        receipt_size = len(canonical_json({'version': 1, 'status': 'complete', 'outputs': [descriptor(name, raw)]}))
+        exact = pin['bytes'] + len(raw) + receipt_size
+        tight = Baseline(self.root, self.commit, [pin], max_phase_bytes=exact - 1)
+        refused = NewVintage(tight, self.owned, 'exact', list(value))
+        with self.assertRaisesRegex(ValueError, 'including output'):
+            refused.publish(value)
+        self.assertFalse(refused.root.exists())
+        tiny = Baseline(self.root, self.commit, [pin], max_phase_bytes=pin['bytes'] + len(raw) - 1)
+        with self.assertRaisesRegex(ValueError, 'Output exceeds'):
+            write_new_vintage(tiny, self.owned, 'legacy-refused', 'one.json', value['one.json'])
+        self.assertFalse((run.root.parent / 'legacy-refused').exists())
+        accepted = Baseline(self.root, self.commit, [pin], max_phase_bytes=exact)
+        NewVintage(accepted, self.owned, 'exact', list(value)).publish(value)
+        for limit in (0, -1, True, 1.5, float('inf')):
+            with self.assertRaisesRegex(ValueError, 'phase budget'):
+                Baseline(self.root, self.commit, [pin], max_phase_bytes=limit)
+        generous = Baseline(self.root, self.commit, [pin], max_phase_bytes=512 * 1024 * 1024)
+        self.assertEqual(generous.max_phase_bytes, 512 * 1024 * 1024)
 
     def test_fresh_runs_preserve_sentinels_and_reject_symlinks(self):
         outputs = {'one.json': self.rows, 'two.json': {'count': 2}}
