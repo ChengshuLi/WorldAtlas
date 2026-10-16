@@ -6,7 +6,7 @@ import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {createRoutingMetadataAcquisition} from './geography-routing-metadata.mjs';
-import {ACCEPTED_CHECKPOINT_LOCATOR, ACCEPTED_CHECKPOINT_CODE, validateAcceptedCheckpointLocator} from './accepted-selected-checkpoint.mjs';
+import {ACCEPTED_CHECKPOINT_CODE} from './accepted-selected-checkpoint.mjs';
 
 const PREFIX = 'coordination/engineering/selected-geography-effective-prevention-20261009/';
 const CHECKPOINTS = 'coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json';
@@ -258,13 +258,8 @@ async function collect(reader, {baseline, candidate, metadataPaths}) {
   }
   // The accepted catalogue is authority data, separate from executing software.
   reader.equalCurrent(CHECKPOINTS);
-  // Routing hints never authorize science, but any changed locator or retained
-  // archive must reenter authenticated acquisition instead of inheriting a skip.
-  const checkpointLocator = reader.equalCurrent(ACCEPTED_CHECKPOINT_LOCATOR, true);
-  if (checkpointLocator) {
-    const locator = validateAcceptedCheckpointLocator(await reader.jsonAt(checkpointLocator));
-    if (locator.retained_artifact) reader.equalCurrent(locator.retained_artifact.path, true);
-  }
+  // Optional checkpoint locators/archives choose reusable proof transport;
+  // they are not scientific operands. Actual use still authenticates acquisition.
   // These roots determine the actual selected source/native operands. Their
   // immutable bindings are sufficient for an applicability decision; historical
   // authority schemas, producer inputs and rebind execution are not operands.
