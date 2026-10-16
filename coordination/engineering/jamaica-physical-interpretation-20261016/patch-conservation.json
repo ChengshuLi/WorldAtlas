@@ -1,0 +1,37 @@
+{
+  "evaluation_commit": "5c65b213d005607e769af66d39bf03d4554882d6",
+  "package_id": "gb-JAM-ADM1--physical-interpretation",
+  "review_cells": 446,
+  "accepted_additive_cells": 306212,
+  "jamaica_repair_cells": 2251,
+  "accepted_intersection_cells": 0,
+  "jamaica_repair_intersection_cells": 0,
+  "union_intersection_cells": 0,
+  "input_pins": {
+    "accepted_selector": {
+      "commit": "5c65b213d005607e769af66d39bf03d4554882d6",
+      "path": "data/ownership-selection.json",
+      "bytes": 1836,
+      "sha256": "a2f02e2fa81405947a841cdfe66559d73b48f9a9de46ad3cd71345a70a246ca4"
+    },
+    "accepted_sidecar": {
+      "commit": "5c65b213d005607e769af66d39bf03d4554882d6",
+      "path": "coordination/engineering/pacific-repair-integration-20261016/ownership-selection-v3.json",
+      "bytes": 3454,
+      "sha256": "fa11ed7698a2795137384d9ac67642c5cdbac3ef14ed790c8f6bd0abf0aded10"
+    },
+    "accepted_patch": {
+      "commit": "5c65b213d005607e769af66d39bf03d4554882d6",
+      "path": "coordination/engineering/pacific-repair-integration-20261016/composition-003/patch.json",
+      "bytes": 3032311,
+      "sha256": "6d1a12add01d249ec79d14c7a9ef03f2ad87cd0fee492de0f9de6a5d0296fe2a"
+    },
+    "jamaica_repair_patch": {
+      "commit": "b6c1e5400f2b36e1e9e991f55668ed83ab4a271f",
+      "path": "coordination/engineering/jamaica-native-repair-evaluation-20261016/candidate-native-reference-patch.json",
+      "bytes": 24679,
+      "sha256": "8bd6ea6b67a57982a5a7b56cb1978065b9d992c5dfe7b57e08b7d8ba9a5b5eea"
+    }
+  },
+  "limit": "Literal accepted additive patch and original Jamaica repair intersection only. This does not certify base native owner-zero, a selected future composition or publication."
+}
