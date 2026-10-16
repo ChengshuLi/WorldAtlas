@@ -215,7 +215,7 @@ test('actual owned prepare skips preview polling and cleans its ref when notific
     assert.match(output,/shards=\[0,1,2\]/);
     assert.match(output,/checkout_patterns<<WORLDATLAS_CHECKOUT_PATTERNS\n\/\*\n/);
     assert.match(output,/!\/coordination\/engineering\/reference-source-custody-20261007\//);
-    assert.match(output,/!\/research\/geography\/shared-seam-prt-esp-20261006\//);
+    assert.match(output,/!\/research\/geography\/\*/);
     assert.deepEqual(JSON.parse(fs.readFileSync(path.join(directory,'remaining-refs.json'))),[]);
   } finally {fs.rmSync(directory,{recursive:true,force:true});}
 });
