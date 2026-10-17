@@ -1,0 +1,419 @@
+{
+  "accepted": "282d14b4682f738fed6a0e6f3ee0d0e4b775d611",
+  "source": {
+    "advertised_feature_count": 380,
+    "cohort": "administrative-registry",
+    "feature_count": 380,
+    "key": "gb:POL:ADM2",
+    "metadata_sha256": "465f6f974741af196df71f71c7dfc09dfb68111c6ea29ce89b68b978de861622",
+    "original_bytes": 2906313,
+    "original_metadata_file": "data/administrative-sources.json",
+    "original_sha256": "c19830763e611df9b4b56bab55c0c856a9a33dc7b80a6d28fe611f3462e1f3ce",
+    "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+    "parts": [
+      {
+        "bytes": 932377,
+        "hash_kind": "file-bytes",
+        "offset": 0,
+        "ordinal": 0,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-POL-ADM2-000.bin.gz",
+        "sha256": "d6ddf97bcf615136b4be684ca630f4eb12eb675f0dd054e409efa492054ff24f",
+        "uncompressed_bytes": 2906313,
+        "uncompressed_sha256": "c19830763e611df9b4b56bab55c0c856a9a33dc7b80a6d28fe611f3462e1f3ce"
+      }
+    ],
+    "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/POL/ADM2/geoBoundaries-POL-ADM2_simplified.geojson",
+    "recorded_license": "Open Data Commons Open Database License 1.0",
+    "source_represented_year_claim": "2017"
+  },
+  "all_380_valid_nonempty": true,
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "all_56_literal_identity_joins": true,
+  "owners": [
+    {
+      "owner": 35764,
+      "id": "gb:POL:ADM2:97123803B104288407243",
+      "source_atom": "gb:POL:ADM2:97123803B104288407243",
+      "name": "powiat braniewski"
+    },
+    {
+      "owner": 35796,
+      "id": "gb:POL:ADM2:97123803B18910214741105",
+      "source_atom": "gb:POL:ADM2:97123803B18910214741105",
+      "name": "powiat jaros\u0142awski"
+    },
+    {
+      "owner": 35802,
+      "id": "gb:POL:ADM2:97123803B20102954815459",
+      "source_atom": "gb:POL:ADM2:97123803B20102954815459",
+      "name": "powiat wa\u0142brzyski"
+    },
+    {
+      "owner": 35808,
+      "id": "gb:POL:ADM2:97123803B21410203609127",
+      "source_atom": "gb:POL:ADM2:97123803B21410203609127",
+      "name": "powiat s\u0142ubicki"
+    },
+    {
+      "owner": 35817,
+      "id": "gb:POL:ADM2:97123803B24100086136213",
+      "source_atom": "gb:POL:ADM2:97123803B24100086136213",
+      "name": "powiat che\u0142mski"
+    },
+    {
+      "owner": 35819,
+      "id": "gb:POL:ADM2:97123803B24432593603211",
+      "source_atom": "gb:POL:ADM2:97123803B24432593603211",
+      "name": "powiat nyski"
+    },
+    {
+      "owner": 35823,
+      "id": "gb:POL:ADM2:97123803B24930076129611",
+      "source_atom": "gb:POL:ADM2:97123803B24930076129611",
+      "name": "\u015awinouj\u015bcie"
+    },
+    {
+      "owner": 35825,
+      "id": "gb:POL:ADM2:97123803B25258564910474",
+      "source_atom": "gb:POL:ADM2:97123803B25258564910474",
+      "name": "powiat lubaczowski"
+    },
+    {
+      "owner": 35836,
+      "id": "gb:POL:ADM2:97123803B27824109524644",
+      "source_atom": "gb:POL:ADM2:97123803B27824109524644",
+      "name": "powiat tomaszowski"
+    },
+    {
+      "owner": 35843,
+      "id": "gb:POL:ADM2:97123803B2863655114461",
+      "source_atom": "gb:POL:ADM2:97123803B2863655114461",
+      "name": "powiat cieszy\u0144ski"
+    },
+    {
+      "owner": 35844,
+      "id": "gb:POL:ADM2:97123803B28643063272867",
+      "source_atom": "gb:POL:ADM2:97123803B28643063272867",
+      "name": "powiat my\u015bliborski"
+    },
+    {
+      "owner": 35851,
+      "id": "gb:POL:ADM2:97123803B29696285606985",
+      "source_atom": "gb:POL:ADM2:97123803B29696285606985",
+      "name": "Jastrz\u0119bie-Zdr\u00f3j"
+    },
+    {
+      "owner": 35857,
+      "id": "gb:POL:ADM2:97123803B31386338041940",
+      "source_atom": "gb:POL:ADM2:97123803B31386338041940",
+      "name": "powiat elbl\u0105ski"
+    },
+    {
+      "owner": 35861,
+      "id": "gb:POL:ADM2:97123803B3206067529972",
+      "source_atom": "gb:POL:ADM2:97123803B3206067529972",
+      "name": "powiat lw\u00f3wecki"
+    },
+    {
+      "owner": 35868,
+      "id": "gb:POL:ADM2:97123803B33088815311851",
+      "source_atom": "gb:POL:ADM2:97123803B33088815311851",
+      "name": "powiat w\u0142odawski"
+    },
+    {
+      "owner": 35877,
+      "id": "gb:POL:ADM2:97123803B34331119883408",
+      "source_atom": "gb:POL:ADM2:97123803B34331119883408",
+      "name": "powiat \u017cywiecki"
+    },
+    {
+      "owner": 35889,
+      "id": "gb:POL:ADM2:97123803B37662113992790",
+      "source_atom": "gb:POL:ADM2:97123803B37662113992790",
+      "name": "powiat prudnicki"
+    },
+    {
+      "owner": 35893,
+      "id": "gb:POL:ADM2:97123803B38262227952408",
+      "source_atom": "gb:POL:ADM2:97123803B38262227952408",
+      "name": "powiat k\u0142odzki"
+    },
+    {
+      "owner": 35898,
+      "id": "gb:POL:ADM2:97123803B393502808619",
+      "source_atom": "gb:POL:ADM2:97123803B393502808619",
+      "name": "powiat sejne\u0144ski"
+    },
+    {
+      "owner": 35916,
+      "id": "gb:POL:ADM2:97123803B43090666874983",
+      "source_atom": "gb:POL:ADM2:97123803B43090666874983",
+      "name": "powiat nowotarski"
+    },
+    {
+      "owner": 35921,
+      "id": "gb:POL:ADM2:97123803B44525837921198",
+      "source_atom": "gb:POL:ADM2:97123803B44525837921198",
+      "name": "powiat bieszczadzki"
+    },
+    {
+      "owner": 35928,
+      "id": "gb:POL:ADM2:97123803B46225545436038",
+      "source_atom": "gb:POL:ADM2:97123803B46225545436038",
+      "name": "powiat jasielski"
+    },
+    {
+      "owner": 35942,
+      "id": "gb:POL:ADM2:97123803B49859216732849",
+      "source_atom": "gb:POL:ADM2:97123803B49859216732849",
+      "name": "powiat kamie\u0144ski"
+    },
+    {
+      "owner": 35946,
+      "id": "gb:POL:ADM2:97123803B50879868693939",
+      "source_atom": "gb:POL:ADM2:97123803B50879868693939",
+      "name": "powiat policki"
+    },
+    {
+      "owner": 35949,
+      "id": "gb:POL:ADM2:97123803B51933701557072",
+      "source_atom": "gb:POL:ADM2:97123803B51933701557072",
+      "name": "powiat przemyski"
+    },
+    {
+      "owner": 35963,
+      "id": "gb:POL:ADM2:97123803B55709883056757",
+      "source_atom": "gb:POL:ADM2:97123803B55709883056757",
+      "name": "powiat hajnowski"
+    },
+    {
+      "owner": 35971,
+      "id": "gb:POL:ADM2:97123803B57551223261746",
+      "source_atom": "gb:POL:ADM2:97123803B57551223261746",
+      "name": "powiat kro\u015bnie\u0144ski"
+    },
+    {
+      "owner": 35979,
+      "id": "gb:POL:ADM2:97123803B5903122455577",
+      "source_atom": "gb:POL:ADM2:97123803B5903122455577",
+      "name": "powiat g\u0142ubczycki"
+    },
+    {
+      "owner": 35986,
+      "id": "gb:POL:ADM2:97123803B59477648790718",
+      "source_atom": "gb:POL:ADM2:97123803B59477648790718",
+      "name": "powiat jeleniog\u00f3rski"
+    },
+    {
+      "owner": 35987,
+      "id": "gb:POL:ADM2:97123803B59970252077286",
+      "source_atom": "gb:POL:ADM2:97123803B59970252077286",
+      "name": "Wodzis\u0142aw County"
+    },
+    {
+      "owner": 35990,
+      "id": "gb:POL:ADM2:97123803B60233039089314",
+      "source_atom": "gb:POL:ADM2:97123803B60233039089314",
+      "name": "Racib\u00f3rz County"
+    },
+    {
+      "owner": 35994,
+      "id": "gb:POL:ADM2:97123803B61924005765157",
+      "source_atom": "gb:POL:ADM2:97123803B61924005765157",
+      "name": "powiat l\u0119borski"
+    },
+    {
+      "owner": 36000,
+      "id": "gb:POL:ADM2:97123803B63407686971030",
+      "source_atom": "gb:POL:ADM2:97123803B63407686971030",
+      "name": "powiat kro\u015bnie\u0144ski"
+    },
+    {
+      "owner": 36002,
+      "id": "gb:POL:ADM2:97123803B64067295814001",
+      "source_atom": "gb:POL:ADM2:97123803B64067295814001",
+      "name": "powiat siemiatycki"
+    },
+    {
+      "owner": 36013,
+      "id": "gb:POL:ADM2:97123803B66371363243422",
+      "source_atom": "gb:POL:ADM2:97123803B66371363243422",
+      "name": "powiat hrubieszowski"
+    },
+    {
+      "owner": 36016,
+      "id": "gb:POL:ADM2:97123803B67009483077089",
+      "source_atom": "gb:POL:ADM2:97123803B67009483077089",
+      "name": "powiat nowodworski"
+    },
+    {
+      "owner": 36018,
+      "id": "gb:POL:ADM2:97123803B67167941663167",
+      "source_atom": "gb:POL:ADM2:97123803B67167941663167",
+      "name": "powiat gryficki"
+    },
+    {
+      "owner": 36020,
+      "id": "gb:POL:ADM2:97123803B67872000259077",
+      "source_atom": "gb:POL:ADM2:97123803B67872000259077",
+      "name": "Gdynia"
+    },
+    {
+      "owner": 36025,
+      "id": "gb:POL:ADM2:97123803B68694954952085",
+      "source_atom": "gb:POL:ADM2:97123803B68694954952085",
+      "name": "powiat bia\u0142ostocki"
+    },
+    {
+      "owner": 36027,
+      "id": "gb:POL:ADM2:97123803B69129905213834",
+      "source_atom": "gb:POL:ADM2:97123803B69129905213834",
+      "name": "powiat gorzowski"
+    },
+    {
+      "owner": 36048,
+      "id": "gb:POL:ADM2:97123803B74459669282553",
+      "source_atom": "gb:POL:ADM2:97123803B74459669282553",
+      "name": "powiat goleniowski"
+    },
+    {
+      "owner": 36049,
+      "id": "gb:POL:ADM2:97123803B74510844522195",
+      "source_atom": "gb:POL:ADM2:97123803B74510844522195",
+      "name": "powiat \u017carski"
+    },
+    {
+      "owner": 36052,
+      "id": "gb:POL:ADM2:97123803B75242533584038",
+      "source_atom": "gb:POL:ADM2:97123803B75242533584038",
+      "name": "powiat gryfi\u0144ski"
+    },
+    {
+      "owner": 36056,
+      "id": "gb:POL:ADM2:97123803B76375147596168",
+      "source_atom": "gb:POL:ADM2:97123803B76375147596168",
+      "name": "powiat koszali\u0144ski"
+    },
+    {
+      "owner": 36059,
+      "id": "gb:POL:ADM2:97123803B77431341295316",
+      "source_atom": "gb:POL:ADM2:97123803B77431341295316",
+      "name": "powiat luba\u0144ski"
+    },
+    {
+      "owner": 36064,
+      "id": "gb:POL:ADM2:97123803B79414858321091",
+      "source_atom": "gb:POL:ADM2:97123803B79414858321091",
+      "name": "powiat s\u0142awie\u0144ski"
+    },
+    {
+      "owner": 36065,
+      "id": "gb:POL:ADM2:97123803B79708855616920",
+      "source_atom": "gb:POL:ADM2:97123803B79708855616920",
+      "name": "powiat kamiennog\u00f3rski"
+    },
+    {
+      "owner": 36080,
+      "id": "gb:POL:ADM2:97123803B83735728250245",
+      "source_atom": "gb:POL:ADM2:97123803B83735728250245",
+      "name": "powiat wejherowski"
+    },
+    {
+      "owner": 36088,
+      "id": "gb:POL:ADM2:97123803B87488601780239",
+      "source_atom": "gb:POL:ADM2:97123803B87488601780239",
+      "name": "powiat sok\u00f3lski"
+    },
+    {
+      "owner": 36091,
+      "id": "gb:POL:ADM2:97123803B88726469838419",
+      "source_atom": "gb:POL:ADM2:97123803B88726469838419",
+      "name": "powiat s\u0142upski"
+    },
+    {
+      "owner": 36102,
+      "id": "gb:POL:ADM2:97123803B91990712218554",
+      "source_atom": "gb:POL:ADM2:97123803B91990712218554",
+      "name": "Colberg County"
+    },
+    {
+      "owner": 36115,
+      "id": "gb:POL:ADM2:97123803B94954094983099",
+      "source_atom": "gb:POL:ADM2:97123803B94954094983099",
+      "name": "Gda\u0144sk"
+    },
+    {
+      "owner": 36128,
+      "id": "gb:POL:ADM2:97123803B97411923276084",
+      "source_atom": "gb:POL:ADM2:97123803B97411923276084",
+      "name": "powiat bialski"
+    },
+    {
+      "owner": 36130,
+      "id": "gb:POL:ADM2:97123803B97733377596486",
+      "source_atom": "gb:POL:ADM2:97123803B97733377596486",
+      "name": "powiat w\u0119gorzewski"
+    },
+    {
+      "owner": 36132,
+      "id": "gb:POL:ADM2:97123803B98442274868812",
+      "source_atom": "gb:POL:ADM2:97123803B98442274868812",
+      "name": "powiat pucki"
+    },
+    {
+      "owner": 36137,
+      "id": "gb:POL:ADM2:97123803B9925498505997",
+      "source_atom": "gb:POL:ADM2:97123803B9925498505997",
+      "name": "powiat zgorzelecki"
+    }
+  ],
+  "upstream_zip": {
+    "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/sourceData/gbOpen/POL_ADM2.zip",
+    "bytes": 13704735,
+    "sha256": "2db635dd60ba700b99515e32c6bf58ca1a1ed2b99650cb26373c74c979122bdb",
+    "files": {
+      "license.png": {
+        "bytes": 528389,
+        "sha256": "77584291d4d2ccbb8c1d030ca29022347602d3ee4f2bead5955e99a7511df5b1"
+      },
+      "meta.txt": {
+        "bytes": 431,
+        "sha256": "d116deacce5ca19f69c53911367f642a3dae9b5f90a5b9f6c3b16811a7a6b3a8"
+      },
+      "POL_ADM2.cpg": {
+        "bytes": 5,
+        "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+      },
+      "POL_ADM2.dbf": {
+        "bytes": 16438,
+        "sha256": "54282e5714ab61e289fd97dd8188a9df21c7d27c6f482009ac4f0f56f78554a1"
+      },
+      "POL_ADM2.prj": {
+        "bytes": 145,
+        "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4"
+      },
+      "POL_ADM2.shp": {
+        "bytes": 17731748,
+        "sha256": "f2ee182701fd5cf06b06c3783c5f11bef8c3165aadc8e8971a02fa3bab9bf08e"
+      },
+      "POL_ADM2.shp.xml": {
+        "bytes": 464,
+        "sha256": "4890447e79c21550ee4da1b589839745899b00d0bf42dae92f8ff9d65c90020b"
+      },
+      "POL_ADM2.shx": {
+        "bytes": 3140,
+        "sha256": "8a11413d496cdc06a2506bae915f7a93d0bcccdfa22e7148f0508d0e6b4856d2"
+      }
+    }
+  },
+  "limits": [
+    "2017 source vintage is historical and does not assert present legal boundaries.",
+    "ODbL attribution and applicable share-alike/data-access obligations remain in force; geoBoundaries attribution does not replace the OSM source license.",
+    "Original source simplification remains distinct from upstream ZIP geometry."
+  ]
+}
