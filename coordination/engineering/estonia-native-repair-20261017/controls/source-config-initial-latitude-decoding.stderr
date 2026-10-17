@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/estonia-native-repair-20261017/method/prepare-native-evidence.py", line 32, in <module>
+    latpin=next(x for x in a['inputs'] if 'native-row-latitudes' in x['path']);lb=raw(latpin['path'],latpin['commit']);assert len(lb)==latpin['bytes'] and sha(lb)==latpin['sha256'];lat=np.frombuffer(lb,dtype='<f8');ys=collections.defaultdict(lambda:collections.defaultdict(list));keys=set()
+                                                                                                                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: buffer size must be a multiple of element size
