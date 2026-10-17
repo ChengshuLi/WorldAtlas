@@ -12,7 +12,6 @@ import {repairComponentKey, compareRepairComponents} from '../src/native-grid.js
 import {scientificNativeSelection,originalNativeReference,validateReferenceMetadataHeader} from '../src/reference-metadata.js';
 import {prepareReferenceMetadataProjection,validateReferenceMetadataProjection} from './selected-reference-metadata.mjs';
 import {validatePackageInputs} from './package-inputs.mjs';
-import {baselineFiles, validateEvidence} from './evidence-quality.mjs';
 import {composeRetainedLedgers} from '../coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs';
 import {coordinateBounds, normaliseRetainedRepairLedger, compareVersionedRepairLedgers, verifyCompletedSourceTargetNativeAuthority, mergeCompletedNativePatches, verifyCurrentRebindExecution, CURRENT_REBIND_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
@@ -129,184 +128,6 @@ export function admitPublication(root, destination, products, binding, resume = 
 
 export function publish(root, destination, products, binding, resume = false) {
   return admitPublication(root, destination, products, binding, resume)();
-}
-
-// These are producer fields, not guesses from names: additive-gap-repair counts
-// rejected/zero-cell components separately from assigned native cells. Keep this
-// roster limited to measured delivery outputs; new measurements need a reviewed
-// producer contract before this constructor can publish them.
-const deliveryMetricFields = Object.freeze({
-  components: {type: 'integer', unit: 'components'},
-  source_compatible: {type: 'integer', unit: 'components'},
-  assigned_components: {type: 'integer', unit: 'components'},
-  zero_cell_components: {type: 'integer', unit: 'components'},
-  native_conflicts: {type: 'integer', unit: 'components'},
-  source_exceptions: {type: 'integer', unit: 'components'},
-  assigned_cells: {type: 'integer', unit: 'native cells'},
-  removed_cells: {type: 'integer', unit: 'native cells'},
-  reassigned_cells: {type: 'integer', unit: 'native cells'},
-  candidate_cell_contributions: {type: 'integer', unit: 'native cells'},
-  shared_same_owner_cells: {type: 'integer', unit: 'native cells'},
-  elapsed_seconds: {type: 'number', unit: 'seconds'},
-  complete_phase_bytes: {type: 'integer', unit: 'bytes'},
-  expected_components_verified: {type: 'integer', unit: 'components'},
-  cumulative_native_cells_picked_and_sampled: {type: 'integer', unit: 'native cells'},
-  stable_owner_controls: {type: 'integer', unit: 'sampled occupied row controls'}
-});
-
-export function prepareEvidence(config, reader) {
-  let manifest;
-  if (config.delivery !== undefined) {
-    const d = config.delivery;
-    need(d && Object.keys(d).every(key => ['version', 'baseline_commit', 'candidate_commit', 'manifest_path', 'issue',
-      'worker_id', 'subject_ids', 'sources', 'limits', 'qualified_constructor_pins', 'pins', 'original_authorities',
-      'original_country_issues', 'validation'].includes(key)), 'Unknown delivery evidence field');
-    need(!config.template && d?.version === 1 && hex(d.baseline_commit, 40) && hex(d.candidate_commit, 40)
-      && safe(d.manifest_path) && Number.isSafeInteger(d.issue) && d.issue > 0
-      && typeof d.worker_id === 'string' && d.worker_id.trim() && unique(d.subject_ids)
-      && Array.isArray(d.sources) && d.sources.every(source => source.retention === 'restoration-only' && source.files === undefined)
-      && (d.validation === undefined || Array.isArray(d.validation)) && Array.isArray(d.limits) && d.limits.length
-      && d.limits.every(limit => typeof limit === 'string' && limit.trim())
-      && Array.isArray(d.qualified_constructor_pins) && d.qualified_constructor_pins.length,
-    'Explicit delivery scope, original scientific citations and limits required');
-    reader.git('merge-base', '--is-ancestor', d.baseline_commit, d.candidate_commit);
-    const descriptor = pin => ({path: pin.path, commit: d.baseline_commit,
-      bytes: pin.bytes, sha256: pin.sha256, hash_kind: 'file-bytes'});
-    const metadata = pin => {
-
-      return reader.json(pin);
-    };
-    const selected = commit => {
-      const selectorPin = reader.pin(commit, 'data/ownership-selection.json'), selection = metadata(selectorPin);
-      const hook = selection.additive_release;
-      need(hook && safe(hook.path), 'Existing selected additive delivery required');
-      const sidecarPin = reader.pin(commit, hook.path);
-      need(sidecarPin.bytes === hook.bytes && sidecarPin.sha256 === hook.sha256, 'Selected sidecar differs');
-      const sidecar = metadata(sidecarPin), base = scientificNativeSelection(selection);
-      need(sidecar.version === 2 && sidecar.kind === 'retained-native-additive-selection-v2'
-        && same(sidecar.base_selection, base), 'Selected base binding differs');
-      const registry = reader.pin(commit, sidecar.authority_registry.path);
-      const ledger = reader.pin(commit, sidecar.logical_asset_map.ledger.path);
-      for (const [actual, original] of [[registry, sidecar.authority_registry], [ledger, sidecar.logical_asset_map.ledger]]) {
-        reader.read(original);
-        need(actual.bytes === original.bytes && actual.sha256 === original.sha256
-          && actual.git_blob_oid === (original.git_blob_oid ?? original.blob), 'Selected original role differs');
-      }
-      return {selector: selectorPin, selection, sidecar, registry, ledger, rows: metadata(ledger).rows};
-    };
-    const before = selected(d.baseline_commit), after = selected(d.candidate_commit);
-    validateDeliverySelectionTransition(before, after, reader);
-    need(Array.isArray(before.rows) && Array.isArray(after.rows), 'Delivery base/rows differ');
-    const prior = new Map(before.rows.map(row => [repairComponentKey(row), row]));
-    const current = new Map(after.rows.map(row => [repairComponentKey(row), row]));
-    need(prior.size === before.rows.length && current.size === after.rows.length
-      && [...prior].every(([id, row]) => current.has(id) && same(row, current.get(id))), 'Inherited delivery row changed');
-    const targets = [...new Set(after.rows.filter(row => !prior.has(repairComponentKey(row))).map(row => row.target_id))].sort();
-    need(same(targets, [...d.subject_ids].sort()), 'Delivery subjects differ from actual added rows');
-    const baseline = {version: 2, commit: d.baseline_commit, files: [], pins: {}, pin_files: {}};
-    const baselineRoles = {...before, package_inputs: reader.pin(d.baseline_commit, '.github/package-inputs.json')};
-    for (const [name, role] of Object.entries({baseline_selector: 'selector', baseline_package_inputs: 'package_inputs',
-      baseline_selected_ledger: 'ledger', baseline_authority_registry: 'registry'})) {
-      const pin = baselineRoles[role]; reader.read(pin);
-      baseline.files.push(descriptor(pin)); baseline.pins[name] = pin.sha256;
-      baseline.pin_files[name] = {path: pin.path, commit: d.baseline_commit};
-    }
-    need(d.pins === undefined || same(d.pins, baseline.pins), 'Issue baseline pins differ from actual accepted baseline');
-    const names = reader.git('diff', '--name-only', '--diff-filter=ACMRT', '-z', d.baseline_commit, d.candidate_commit, '--')
-      .toString().split('\0').filter(name => name && name !== d.manifest_path);
-    need(new Set(names).size === names.length, 'Unique delivery outputs required');
-    const outputs = names.map(name => {
-      const pin = reader.pin(d.candidate_commit, name); reader.read(pin);
-      const {commit, ...file} = descriptor(pin); return file;
-    });
-    const ids = new Set(), boundComponents = new Set();
-    for (const original of d.qualified_constructor_pins) {
-      need(typeof original.id === 'string' && original.id && !ids.has(original.id), 'Unique original constructor references required');
-      ids.add(original.id);
-      const constructed = metadata(original.pin);
-      need(constructed.version === 1 && unique(constructed.component_ids) && Array.isArray(constructed.ledger_rows)
-        && same(constructed.component_ids, constructed.ledger_rows.map(row => row.component_id))
-        && hex(constructed.rule_sha256, 64), 'Complete original constructor rows required');
-      for (const row of constructed.ledger_rows) {
-        const matches = after.rows.filter(selected => selected.component_id === row.component_id && selected.rule_sha256 === constructed.rule_sha256);
-        need(matches.length === 1, 'Original constructor identity is missing or ambiguous');
-        const selected = matches[0], key = repairComponentKey(selected);
-        need(selected && !prior.has(key) && !boundComponents.has(key), 'Original constructor scope differs');
-        const {authority_sha256, rule_sha256, ...literal} = selected;
-        need(hex(authority_sha256, 64) && rule_sha256 === constructed.rule_sha256 && same(literal, row),
-          'Original constructor row differs from actual added row');
-        boundComponents.add(key);
-      }
-      const source = d.sources.filter(source => source.id === original.id);
-      need(source.length === 1 && source[0].retention === 'restoration-only'
-        && same(source[0].original_pin, original.pin), 'Complete original checkpoint citation required');
-    }
-    need(boundComponents.size === after.rows.length - before.rows.length, 'Incomplete original constructor coverage');
-    if (d.original_authorities !== undefined) need(Array.isArray(d.original_authorities)
-      && d.original_authorities.length === ids.size && new Set(d.original_authorities.map(row => row.id)).size === ids.size
-      && d.original_authorities.every(row => ids.has(row.id) && same(row.original_authority?.ledger,
-        d.qualified_constructor_pins.find(original => original.id === row.id).pin)), 'Original authority inventory differs');
-    manifest = {version: 1, issue: d.issue, lane: 'engineering', worker_id: d.worker_id,
-      subject_ids: d.subject_ids, subject_ids_sha256: digest(Buffer.from(JSON.stringify([...d.subject_ids].sort()))),
-      baseline, sources: d.sources, outputs, methods: [{id: 'retained-selected-delivery', kind: 'code',
-        description: 'Derive immutable accepted baseline and candidate byte inventory; original qualification is retained, not replayed.',
-        software: 'WorldAtlas prepare-delivery-handoff evidence', units: 'whole-file bytes and SHA-256'}],
-      metrics: [], metric_bindings: [], summaries: [], conclusions: [{status: 'unresolved',
-        text: 'Byte custody does not establish scientific approval, current-owner-zero, integration, acceptance or publication.',
-        source_ids: d.sources.map(source => source.id)}],
-      stages: {research: 'partial', implementation: 'proposed', geographic_approval: 'unapproved'}, commands: [],
-      qualified_constructor_pins: d.qualified_constructor_pins, limits: d.limits,
-      ...(d.validation ? {validation: d.validation} : {}),
-      ...(d.original_authorities ? {original_authorities: d.original_authorities} : {}),
-      ...(d.original_country_issues ? {original_country_issues: d.original_country_issues} : {})};
-  } else manifest = reader.json(config.template);
-  need(manifest.baseline?.version === 2 && Array.isArray(manifest.metrics) && !manifest.metrics.length
-    && (!manifest.metric_bindings || Array.isArray(manifest.metric_bindings) && !manifest.metric_bindings.length),
-  'Evidence construction requires a v2-baseline template with empty metrics/bindings');
-  need(Array.isArray(config.metric_sources) && (config.delivery !== undefined || config.metric_sources.length), 'Explicit measured delivery sources required');
-  manifest.metric_bindings = [];
-  const ids = new Set();
-  for (const source of config.metric_sources) {
-    const measured = reader.json(source.measurement);
-    // Authenticate the actual consumed input as well as the measured result.
-    reader.read(source.input);
-    need(hex(source.evaluation_commit, 40) && ['baseline', 'current', 'archived'].includes(source.vintage),
-      'Explicit measured evaluation commit/vintage required');
-    need(source.input_file?.path === source.input.path
-      && ['candidate', source.input.commit].includes(source.input_file.commit), 'Metric input selector differs from pinned input');
-    const inputs = [...baselineFiles(manifest), ...manifest.outputs.map(file => ({...file, commit: 'candidate'})),
-      ...manifest.sources.filter(source => source.retention === 'retained').flatMap(source => source.files ?? []).map(file => ({...file, commit: 'candidate'}))]
-      .filter(file => file.path === source.input_file.path && file.commit === source.input_file.commit);
-    need(inputs.length === 1 && inputs[0].bytes === source.input.bytes && inputs[0].sha256 === source.input.sha256,
-      'Consumed input differs from declared metric input');
-    const output = manifest.outputs?.filter(file => file.path === source.measurement.path);
-    need(output?.length === 1 && output[0].bytes === source.measurement.bytes && output[0].sha256 === source.measurement.sha256,
-      'Measured body differs from declared output');
-    if (measured.execution_commit !== undefined) need(measured.execution_commit === source.evaluation_commit, 'Measured evaluation commit differs');
-    if (measured.request !== undefined) need(measured.request.sha256 === source.input.sha256
-      && measured.request.bytes === source.input.bytes, 'Measured request differs from consumed input');
-    if (measured.request_sha256 !== undefined) need(measured.request_sha256 === source.input.sha256, 'Measured request hash differs from consumed input');
-    need(Array.isArray(source.fields) && source.fields.length, 'Explicit measured fields required');
-    const fields = new Set();
-    for (const entry of source.fields) {
-      need(entry && typeof entry.field === 'string' && Object.hasOwn(deliveryMetricFields, entry.field), 'Unknown delivery metric field');
-      const contract = deliveryMetricFields[entry.field];
-      need(entry.unit === undefined || entry.unit === contract.unit, 'Delivery metric unit differs: ' + entry.field);
-      need(entry.type === undefined || entry.type === contract.type, 'Delivery metric type differs: ' + entry.field);
-      need(typeof entry.id === 'string' && entry.id.trim() && !ids.has(entry.id) && !fields.has(entry.field), 'Duplicate/empty delivery metric identity or field');
-      const value = measured[entry.field];
-      need(Object.hasOwn(measured, entry.field) && Number.isFinite(value) && value >= 0
-        && (contract.type !== 'integer' || Number.isSafeInteger(value)), 'Missing/invalid measured value: ' + entry.field);
-      ids.add(entry.id); fields.add(entry.field);
-      manifest.metrics.push({id: entry.id, value, unit: contract.unit, vintage: source.vintage,
-        input_sha256: source.input.sha256, input_file: {...source.input_file}, evaluation_commit: source.evaluation_commit});
-      manifest.metric_bindings.push({metric_id: entry.id, path: source.measurement.path, json_pointer: '/' + entry.field});
-    }
-  }
-  // Shared schema validation includes exact input selectors, vintages and any
-  // summaries. Full byte/review/claim gates still run at the existing boundary.
-  validateEvidence(manifest);
-  return {'evidence-quality.json': jsonBytes(manifest)};
 }
 
 export function requestProfile(template, group, config, reader) {
@@ -945,18 +766,6 @@ export function qualifiedDeliveryReference(selection, manifest, reader, commit, 
   const projection = reader.json(references.projectionPin);
   validateReferenceMetadataProjection({projection, selection, manifest, owners: JSON.parse(decoded), read: pin => reader.read(pin)});
   return references;
-}
-
-export function validateDeliverySelectionTransition(before, after, reader) {
-  need(same(scientificNativeSelection(before.selection), scientificNativeSelection(after.selection)), 'Delivery base/rows differ');
-  if (!same(before.selection.reference_projection, after.selection.reference_projection)) {
-    for (const snapshot of [before, after]) if (snapshot.selection.reference_projection !== undefined) {
-      const assets = snapshot.sidecar.logical_asset_map;
-      need(assets?.base_manifest?.sha256 === snapshot.selection.sha256, 'Delivery metadata native manifest differs');
-      qualifiedDeliveryReference(snapshot.selection, reader.json(assets.base_manifest), reader,
-        snapshot.selector.commit, assets.owner_roster);
-    }
-  }
 }
 
 // Adapt existing stock correction/release products into one native application.
@@ -1632,8 +1441,8 @@ async function main(args) {
     console.log(JSON.stringify({...publishComplete(), acquisition: result, acquisition_ms: performance.now() - started}));
     return;
   }
-  need(['reference-metadata', 'source', 'physical', 'source-evidence', 'native-authority', 'native-diagnostic', 'requests', 'native-requests', 'retain', 'rebind-operating', 'rebind-certificate', 'compose', 'package', 'finalize', 'evidence'].includes(phase) && configFile && destination && flags.every(f => f === '--resume') && flags.length <= 1,
-    'Use prepare-delivery-handoff.mjs requests|native-requests|retain|rebind-operating|rebind-certificate|compose|package|finalize|evidence|source|physical|source-evidence|native-authority|native-diagnostic|reference-metadata CONFIG DESTINATION [--resume]');
+  need(['reference-metadata', 'source', 'physical', 'source-evidence', 'native-authority', 'native-diagnostic', 'requests', 'native-requests', 'retain', 'rebind-operating', 'rebind-certificate', 'compose', 'package', 'finalize'].includes(phase) && configFile && destination && flags.every(f => f === '--resume') && flags.length <= 1,
+    'Use prepare-delivery-handoff.mjs requests|native-requests|retain|rebind-operating|rebind-certificate|compose|package|finalize|source|physical|source-evidence|native-authority|native-diagnostic|reference-metadata CONFIG DESTINATION [--resume]');
   need(!process.execArgv.length && !process.env.NODE_OPTIONS?.trim() && !process.env.NODE_PATH?.trim(), 'Plain Node launch required');
   const root = fs.realpathSync(process.cwd()); admitDestination(root, destination, flags.includes('--resume'));
   const raw = ordinary(root, configFile), config = JSON.parse(raw), reader = pinReader(root);
@@ -1658,7 +1467,6 @@ async function main(args) {
   if (phase === 'compose') outputs = composeAuthorities(config, reader);
   if (phase === 'package') outputs = packageProjection(config, reader);
   if (phase === 'finalize') outputs = finalizeDelivery(config, reader);
-  if (phase === 'evidence') outputs = prepareEvidence(config, reader);
   console.log(JSON.stringify({...publish(root, destination, outputs, binding, flags.includes('--resume')), ...(observation ? {observation} : {})}));
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main(process.argv.slice(2)).catch(error => { console.error(error.message); process.exitCode = 1; });

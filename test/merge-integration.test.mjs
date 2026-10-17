@@ -381,7 +381,6 @@ test('immutable reader and checkpoint routing retains the complete actual consum
     "test/component-authority-identity.test.mjs",
     "test/current-rebind-product-custody.test.mjs",
     "test/dated-centre-authority.test.mjs",
-    "test/delivery-evidence-derivation.test.mjs",
     "test/delivery-finalize-config.test.mjs",
     "test/delivery-handoff-advance.test.mjs",
     "test/delivery-handoff.test.mjs",

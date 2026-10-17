@@ -380,32 +380,6 @@ retained current13 proof must run `WORLDATLAS_DELIVERY_FIXTURE=1` and establish
 zero skips; ordinary CI alone does not establish that proof. Absence of those
 bodies is a fixture availability limit, never a successful replay.
 
-## Typed measured evidence construction
-
-```sh
-node scripts/prepare-delivery-handoff.mjs evidence CONFIG DESTINATION
-```
-
-This uses the existing manifest and metric-binding schema. Supply a pinned
-manifest `template` with baseline version 2 and empty `metrics`/`metric_bindings`,
-plus nonempty `metric_sources`. Each source contains pinned `measurement` and
-consumed `input`, the manifest's exact `input_file` selector, original
-`evaluation_commit`, `vintage`, and explicit `fields` entries:
-
-```json
-{"id":"aus-native-zero_cell_components","field":"zero_cell_components","unit":"components","type":"integer"}
-```
-
-The fixed producer-field contract assigns components to `components`,
-`source_compatible`, `assigned_components`, `zero_cell_components`,
-`native_conflicts` and `source_exceptions`. Cell quantities use `native cells`;
-elapsed values use seconds and byte quantities use bytes. Field-name substrings
-never determine units. Optional unit/type assertions must match the fixed
-contract. Unknown fields, missing/nonfinite/negative values, noninteger counts,
-wrong units and conflicting input/result/evaluation bindings refuse before the
-existing exclusive publication writer creates output. Original metric vintages
-remain intact. This validates reporting, not the underlying geographic result.
-
 ## Explicit v2 subsets and immutable receipt qualification
 
 The recipe constructor accepts `mode: "explicit-groups"`. Each group names
@@ -725,14 +699,27 @@ Every query identity, predicate, witness, complete residual and native contact
 check remains mandatory. This method admission is separate from canonical seam
 views below and does not admit out-of-range coordinates or shift a witness again.
 
-## Derived selected-delivery evidence
+## Reuse actual delivery evidence
 
-The existing `evidence` phase also accepts `delivery` instead of a full `template`: supply `version:1`, exact `baseline_commit`/`candidate_commit`, the owned `manifest_path`, `issue`, `worker_id`, exact `subject_ids`, original `qualified_constructor_pins` (`{id,pin}`), complete restoration-only `sources` with matching `id`/`original_pin`, and explicit `limits`. It derives the four actual ancestor selector/package/selected-ledger/registry baseline pins and the immutable candidate diff's whole-byte outputs, excluding the manifest itself. Every authenticated full constructor row/component roster must cover the exact added ledger rows without omission or duplication. Unmerged original constructors remain cited with their full pins; they cannot stand in for ancestor baseline hashes. Optional `pins` must exactly match the derived issue baseline map. Source citation terms, uncertainties, original authority metadata and any supplied `validation` controls remain explicit; omitted controls are not called passed. This mode permits `metric_sources:[]`, while supplied measurements and the original template path keep their existing typed contracts. It does not replace original source/native qualification or current-owner, conservation, scientific review, exact-head and integration gates. The byte inventory is limited reporting, not new scientific approval.
+Ordinary delivery stops at the finalized candidate and its actual consumer checks.
+Do not generate another whole-change evidence manifest, copy producer metrics into
+a reporting wrapper, or make a third evidence-only commit. Cite the existing
+original source, native constructor, complete original-scope accounting and
+selected/emitted result records directly in the PR and independent review. Preserve
+their immutable pins, counts, units, uncertainties, source limits and held remainders.
+Source validity and acceptance still come from the actual consumers and substantive
+review, not from a generic inventory of every changed file.
 
-## Continue locally through the final evidence commit
+The old `evidence` preparation command is retired. Historical wrappers remain
+immutable evidence; no source record or previous result is removed. Specialized
+source-adjudication dossiers and explicit partition-review contracts retain their
+existing validators and authorization. The application’s prepared evidence bundle
+is a distinct consumed product and is unchanged.
 
-An already-qualified modern delivery needs three actual local snapshots, but
-not three pushes or separate operator waits. Run the existing commands and
+## Continue locally through the finalized candidate
+
+An already-qualified modern delivery needs two actual local snapshots, but
+not separate pushes or operator waits. Run the existing commands and
 ordinary scoped commits in one fail-fast shell sequence:
 
 1. Run `compose CONFIG OWNED_COMPOSE_DIRECTORY` and commit its four sibling
@@ -751,19 +738,13 @@ ordinary scoped commits in one fail-fast shell sequence:
    Finish intended candidate changes and commit the installed canonical tree.
    Capture `candidate_commit=$(git rev-parse HEAD)`. Run applicable checks at
    their ordinary working-tree or exact-commit boundaries.
-4. Set `delivery.candidate_commit` in the existing evidence config to that SHA;
-   retain the actual accepted baseline and explicit source citations, subjects
-   and limits. Run `evidence CONFIG .cache/delivery-handoff/evidence-UNIQUE`,
-   adopt its `evidence-quality.json`, then commit only the declared manifest.
 
-The two SHAs can be passed by ordinary JSON serialization in the same shell.
-Local Git bodies are sufficient; readers keep lazy fetching disabled. Keep the
-generated evidence config and staging receipt local: evidence inventories the
-preceding canonical snapshot and excludes only the manifest itself. Further
-candidate edits require a new snapshot and refreshed evidence, without replaying
-unchanged science.
+The composition SHA can be passed by ordinary JSON serialization in the same
+shell. Local Git bodies are sufficient; readers keep lazy fetching disabled.
+Further candidate edits require refreshed applicable consumer checks and exact-head
+review, while unchanged source/native evidence remains reusable.
 
-Publish once after all three local commits. With the expected owned branch in
+Publish once after both local commits. With the expected owned branch in
 `branch`, retain and verify the actual final head:
 
 ```sh
