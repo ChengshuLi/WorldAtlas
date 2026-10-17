@@ -13,6 +13,7 @@ a = argparse.ArgumentParser()
 a.add_argument('--repo', required=True)
 a.add_argument('--input-commit', required=True)
 a.add_argument('--output', required=True)
+a.add_argument('--include-authorities', action='store_true')
 args = a.parse_args()
 repo = Path(args.repo).resolve()
 assert len(args.input_commit) == 40 and all(c in '0123456789abcdef' for c in args.input_commit)
@@ -84,20 +85,42 @@ assert not supported.intersection(source_holds) and not held.intersection(source
 admin_pending = original.keys() - physical_original - source_holds.keys()
 assert len(admin_pending) == 293912
 assert set(original) == supported | held | source_holds.keys() | admin_pending
-categories = {'native_diagnostic_supported': supported, 'native_diagnostic_held': held,
+qualified = set()
+if args.include_authorities:
+    components = set()
+    for i in range(1, 6):
+        b = f'{i:03d}'
+        authority = read(f'aafc-native-authority-{b}/constructor-result.json')
+        diag = read(f'aafc-native-diagnostic-{b}/native-diagnostic.json')
+        assert authority['kind'] == 'existing-source-target-native-constructor-result'
+        assert authority['rule_sha256'] == diag['rule_sha256']
+        keys = set()
+        assert authority['component_ids'] == [r['component_id'] for r in authority['ledger_rows']]
+        for row in authority['ledger_rows']:
+            assert row['disposition'] == 'assigned' and row['component_id'] not in components
+            components.add(row['component_id'])
+            members = expand(row['native_rows'])
+            assert len(members) == row['native_cells'] and {k[2] for k in members} == {row['pixelIndex']}
+            assert not keys & members
+            keys.update(members)
+        assert keys == expand(diag['supported_rows'])
+        assert not qualified & keys
+        qualified.update(keys)
+    assert qualified == supported and len(components) == 72
+categories = {('native_authority_qualified' if args.include_authorities else 'native_diagnostic_supported'): supported, 'native_diagnostic_held': held,
               'explicit_source_hold': set(source_holds), 'administrative_native_pending': admin_pending}
 for name, keys in categories.items():
     for other, other_keys in categories.items():
         if name != other:
             assert not keys & other_keys
-result = {'kind': 'complete-original-Canada-AAFC-diagnostic-accounting', 'version': 1,
+result = {'kind': ('complete-original-Canada-AAFC-authority-accounting' if args.include_authorities else 'complete-original-Canada-AAFC-diagnostic-accounting'), 'version': 1,
           'input_commit': args.input_commit, 'original_cells': len(original), 'original_intervals': intervals,
           'original_targets': 209, 'physical_original_cells': len(physical_original),
           'physical_source_holds': len(physical_source_holds), 'batches': observations,
           'categories': {name: {'cells': len(keys), 'physical_classes': dict(sorted(Counter(original[k] for k in keys).items())),
                                'targets': len({k[2] for k in keys})} for name, keys in categories.items()},
           'source_hold_reasons': dict(sorted(Counter(source_holds.values()).items())),
-          'inputs': inputs, 'limits': ['Diagnostic accounting is not native authority, current-owner-zero or selected-output acceptance.',
+          'inputs': inputs, 'limits': [('Constructor qualification is not current-owner-zero or selected-output acceptance.' if args.include_authorities else 'Diagnostic accounting is not native authority, current-owner-zero or selected-output acceptance.'),
                                       'The complete original denominator is unchanged; administrative native work remains pending.']}
 output = Path(args.output)
 with output.open('x') as f:
