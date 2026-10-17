@@ -1915,3 +1915,17 @@ test('selected-data closes canonical seam view and method bodies without arbitra
     assert.equal(await sourceTargetRoleFixture({mutateRoles}).run(),null,defect);
   }
 });
+
+test('selected-data includes every explicit complete cohort pin without recursive reads',async()=>{
+ const membership=(f,mutate=()=>{})=>{
+  const role={index:f.leaf('member-index.json'),lineage:f.leaf('member-lineage.json'),parts:[f.leaf('member-geography.json')],
+   cohort_inventory:{index:f.leaf('cohort-index.json'),parts:[f.leaf('cohort-part.json.gz',true)]}};
+  mutate(role.cohort_inventory);return role;
+ };
+ const f=sourceTargetRoleFixture({sourceMembership:f=>membership(f)}),diagnostics={};
+ assert.equal((await f.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
+ for(const mutate of [role=>delete role.index,role=>role.parts=[],role=>role.parts[0].git_blob_oid='0'.repeat(40),
+  role=>role.index.git_blob_oid='0'.repeat(40),role=>role.extra=role.index]){
+  assert.equal(await sourceTargetRoleFixture({sourceMembership:f=>membership(f,mutate)}).run(),null);
+ }
+});

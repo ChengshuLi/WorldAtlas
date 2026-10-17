@@ -824,10 +824,18 @@ export function packageProjection(config, reader, acceptedRegistry = null) {
       }
       if (evidence.source_membership !== undefined) {
         const membership = evidence.source_membership;
-        need(membership && same(Object.keys(membership).sort(), ['index', 'lineage', 'parts'])
+        need(membership && same(Object.keys(membership).sort(), membership.cohort_inventory === undefined
+          ? ['index', 'lineage', 'parts'] : ['cohort_inventory', 'index', 'lineage', 'parts'])
           && Array.isArray(membership.parts) && membership.parts.length > 0, 'Missing accepted source membership roles');
         add(membership.index, 'source-target membership index'); add(membership.lineage, 'source-target membership lineage');
         for (const pin of membership.parts) add(pin, 'source-target membership part');
+        if (membership.cohort_inventory !== undefined) {
+          const inventory = membership.cohort_inventory;
+          need(inventory && same(Object.keys(inventory).sort(), ['index', 'parts'])
+            && Array.isArray(inventory.parts) && inventory.parts.length > 0, 'Missing complete canonical cohort roles');
+          add(inventory.index, 'source-target cohort index');
+          for (const pin of inventory.parts) add(pin, 'source-target cohort part');
+        }
       }
       continue;
     }

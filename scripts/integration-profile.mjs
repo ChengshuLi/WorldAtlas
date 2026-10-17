@@ -716,9 +716,15 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         }
         if(evidence.source_membership!==undefined){
           const membership=evidence.source_membership;
-          needSelected(keys(membership,['index','lineage','parts'])&&Array.isArray(membership.parts)&&membership.parts.length>0,
+          needSelected(keys(membership,membership.cohort_inventory===undefined?['index','lineage','parts']:['cohort_inventory','index','lineage','parts'])&&Array.isArray(membership.parts)&&membership.parts.length>0,
             'missing accepted source membership roles');
           pin(membership.index);pin(membership.lineage);for(const part of membership.parts)pin(part);
+          if(membership.cohort_inventory!==undefined){
+            const inventory=membership.cohort_inventory;
+            needSelected(keys(inventory,['index','parts'])&&Array.isArray(inventory.parts)&&inventory.parts.length>0,
+              'missing complete canonical cohort roles');
+            pin(inventory.index);for(const part of inventory.parts)pin(part);
+          }
         }
         for (const family of evidence.families) {
           needSelected(text(family.source_id)&&Array.isArray(family.parts)&&family.parts.length>0,'missing complete source family roles');

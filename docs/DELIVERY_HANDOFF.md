@@ -801,3 +801,41 @@ The shared package and cold-profile role walkers retain both the explicit view
 body and canonical method. A view is a reviewed derived operand, not a new source
 product or permission to clamp coordinates, omit vertices, change owner IDs,
 ignore physical holds or qualify cells outside the exact original claim.
+
+## Complete complex ancestry for negative original sources
+
+A retained original source with many-member or transitive accepted ancestry may
+be a negative competitor even when that ancestry cannot establish a unique
+positive owner. Positive source-member reconciliation is unchanged. The native
+operator still receives the complete original polygon and its original hash;
+accepted descendant polygons never replace or clip that veto operand.
+
+The complex route requires an explicit `source_membership.cohort_inventory`
+with `index` and `parts` pins in addition to the existing complete semantic
+lineage, world index and canonical parts. Pin
+`data/macro-foundation/world-review-projection.json` and **every** ordered
+`data/`-relative `location_parts` entry it names, including exact gzip decoded
+lengths and hashes. All pins must match the selected accepted bytes. The current
+projection's `location_index_sha256` must match the supplied world index, its
+complete unique ID set must equal the original native owner roster, and its
+published count must match. These metadata rows establish an inventory scope;
+they supply no positive ownership or scientific boundary authority.
+
+Cohort labels come from authenticated original-to-canonical or already-validated
+positive joins. Every current canonical record in those complete reference-owner
+cohorts must be present, including records with no surviving forward semantic
+edge. Reverse expansion and forward ancestry must agree on all current terminal
+IDs. Each node requires unique complete members; terminals retain the accepted
+canonical ID, owner, roster parent, source URL and location basis. Missing retired
+intermediaries, missing or extra descendants, foreign leaves, conflicting source
+metadata, duplicate edges and cycles fail closed. Unknown or opaque same-cohort
+ancestry is not treated as an unrelated family: mixed-family cohorts may therefore
+be conservatively rejected until they have separately reviewed complete support.
+The native geometry, boundary, physical and requested-cell checks still run.
+
+Legacy flat/single-original split inputs need no new inventory. Package assembly
+and selected-data dependency discovery include the explicit cohort pins; neither
+walks arbitrary nested metadata. Source-evidence preparation preserves these
+pinned fields. Commit the newly prepared source evidence before running the stock
+native diagnostic or constructor; do not replace original source evidence or
+claim ancestry closure as native qualification.
