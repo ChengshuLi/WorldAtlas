@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "kind": "original-qualified-authority-handoff",
+  "issue": "https://github.com/ChengshuLi/WorldAtlas/issues/2416",
+  "package_id": "gb-ZAF-ADM3--repair-evaluation",
+  "original_cells": 4804,
+  "original_intervals": 2542,
+  "original_owners": 68,
+  "complete_owner_source_atoms": 68,
+  "qualified_cells": 4777,
+  "components": 68,
+  "literal_ledger_rows": 68,
+  "territorial_held_cells": 27,
+  "new_accepted_map_cells": 0,
+  "executed_accepted_code": "282d14b4682f738fed6a0e6f3ee0d0e4b775d611",
+  "authorities": [
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/south-africa-original-repair-20261017/native-authority-supported-001/original-rule-preimage.json",
+        "commit": "062718442dad5a9e96dec56b8b9d0e155242656d",
+        "mode": "100644",
+        "git_blob_oid": "b8e6bceedc525a5d8c115eb3ceed51b521e58b23",
+        "bytes": 748,
+        "sha256": "e4177a8d15fb2d7b4e62ee5053715a3bfc83a718684455a1f1196f80d3282121"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/south-africa-original-repair-20261017/native-authority-supported-001/authority-binding.json",
+        "commit": "062718442dad5a9e96dec56b8b9d0e155242656d",
+        "mode": "100644",
+        "git_blob_oid": "95cb60d349443e0ca6f7d65bd265c6ba031b6129",
+        "bytes": 751,
+        "sha256": "743fe7c9b4bcd01ca6f15dd9dffecc8da26a9efedbc27cd5704d39811c0bf266"
+      },
+      "ledger": {
+        "path": "coordination/engineering/south-africa-original-repair-20261017/native-authority-supported-001/constructor-result.json",
+        "commit": "062718442dad5a9e96dec56b8b9d0e155242656d",
+        "mode": "100644",
+        "git_blob_oid": "a8d4b02390494fafb6d312f9efd9f86bc6374b19",
+        "bytes": 371757,
+        "sha256": "bbe285e05b90245bf47d0903e81120915771ba15761c478b4a1b4a997fdc7cb0"
+      },
+      "native_patch": {
+        "path": "coordination/engineering/south-africa-original-repair-20261017/supported-inputs-001/native-patch.json",
+        "commit": "8bd01d41a76251f3a7003b555c46cee5271b44c1",
+        "mode": "100644",
+        "git_blob_oid": "b00f5c7b38b95586f541ef9e0f92ddb98a5f6c35",
+        "bytes": 101827,
+        "sha256": "d6dade46231aaa11650978996f3d6bff0c1bf6da350af049285fc26a21330f62"
+      }
+    }
+  ],
+  "source_evidence": {
+    "path": "coordination/engineering/south-africa-original-repair-20261017/supported-inputs-001/source-evidence.json",
+    "commit": "8bd01d41a76251f3a7003b555c46cee5271b44c1",
+    "mode": "100644",
+    "git_blob_oid": "4fac17f3abc76ca00d4df470a6c5a7e20a4d13b9",
+    "bytes": 439411,
+    "sha256": "6f39681cc657d6ddac11eed2d9dcb9736ab39b1d62198333fbbec7a56a79fe03"
+  },
+  "original_scope_partition": {
+    "path": "coordination/engineering/south-africa-original-repair-20261017/supported-inputs-001/original-scope-partition.json",
+    "commit": "8bd01d41a76251f3a7003b555c46cee5271b44c1",
+    "mode": "100644",
+    "git_blob_oid": "58dd79fe5d37ae0b502f230d0f8802aa4656a906",
+    "bytes": 6769,
+    "sha256": "3e32e64981ebf34471660c81d9351e9a93356c692594b78792ddd9c407fd286a"
+  },
+  "held_original": {
+    "path": "coordination/engineering/south-africa-original-repair-20261017/supported-inputs-001/held-original.json",
+    "commit": "8bd01d41a76251f3a7003b555c46cee5271b44c1",
+    "mode": "100644",
+    "git_blob_oid": "e518de943691db64dfe277bda2321fca32583e43",
+    "bytes": 1691,
+    "sha256": "446c0057bfdb0931c8128666fdd15d7bf0d995cd957da6e924694f328c3f9865"
+  },
+  "actual_preparation": {
+    "path": "coordination/engineering/south-africa-original-repair-20261017/native-authority-supported-001/preparation.json",
+    "commit": "062718442dad5a9e96dec56b8b9d0e155242656d",
+    "mode": "100644",
+    "git_blob_oid": "6523df9d2c314b9da79c1e7dd0164ed0f1c386f8",
+    "bytes": 502,
+    "sha256": "b4356c38b3f92e45df85f4c4b260998c92bb9c988cfd67c5b127ec99c74f1d1b"
+  },
+  "actual_operating_observation": {
+    "path": "coordination/engineering/south-africa-original-repair-20261017/native-authority-supported-001/operating-observation.json",
+    "commit": "062718442dad5a9e96dec56b8b9d0e155242656d",
+    "mode": "100644",
+    "git_blob_oid": "dde348694ca4b0bf1c1df187abfea255483a2760",
+    "bytes": 1148,
+    "sha256": "6594a59fc93fc1675335ffc9d0ba19ef76b1f18bcf8a6fcd505695c177e762b4"
+  },
+  "scientific_interpretation": {
+    "path": "coordination/engineering/south-africa-original-repair-20261017/source-review/source-meaning.md",
+    "commit": "062718442dad5a9e96dec56b8b9d0e155242656d",
+    "mode": "100644",
+    "git_blob_oid": "fc75dd6db1a91b1437f0c66f054c3c69ebb62492",
+    "bytes": 4046,
+    "sha256": "aef7bf72400509b6dcbc308febe466a790ee63733d45a9b8dec579bf6c4957dc"
+  },
+  "remaining": [
+    "Distinct substantive scientific and exact-head review.",
+    "Ordinary composition preserving the then-actual accepted selector/package prefix.",
+    "Actual current-owner-zero, conservation, selected output and emitted picker/sampler verification.",
+    "Parent-owned ordinary integration; no acceptance or completed-package credit is conferred here."
+  ],
+  "limits": [
+    "All original source/physical/foreign operands and their witnesses remain pinned in the original authority; no copied binding or replacement registry is supplied.",
+    "The 27 territorial-exclusion holds remain unfinished original-package questions.",
+    "Source-relative native-centre qualification does not establish current legal boundaries, sovereignty, contemporary dry-land or whole-cell substrate."
+  ]
+}
