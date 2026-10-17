@@ -1,6 +1,6 @@
 {
-  "base": "282d14b4682f738fed6a0e6f3ee0d0e4b775d611",
-  "current": "coordination/engineering/tanzania-selected-delivery-20261017/ownership-selection-combined.json",
+  "base": "1330b938687e1c8255ae0e80bf4ad854e44c6d5e",
+  "current": "coordination/engineering/south-africa-selected-delivery-20261017/ownership-selection-combined.json",
   "paths": [
     {
       "role": "sidecar",
@@ -477,8 +477,92 @@
       "bytes": 27746914,
       "oid": "4c6617641a9bf0961e0a88b64ecb980c397a5b5e",
       "sidecar": "coordination/engineering/cuba-estonia-denmark-delivery-20261017/ownership-selection-combined.json"
+    },
+    {
+      "role": "sidecar",
+      "path": "coordination/engineering/tanzania-selected-delivery-20261017/ownership-selection-combined.json",
+      "bytes": 3456,
+      "oid": "603c789101c7c2a59ef7e3465c1b45ca7e53c6e4",
+      "sidecar": "coordination/engineering/tanzania-selected-delivery-20261017/ownership-selection-combined.json"
+    },
+    {
+      "role": "runtime_envelope",
+      "path": "coordination/engineering/tanzania-selected-delivery-20261017/composition-001/runtime-envelope.json",
+      "bytes": 1385,
+      "oid": "bda863a5b2f22165f33a2de83ae2645186ee29e3",
+      "sidecar": "coordination/engineering/tanzania-selected-delivery-20261017/ownership-selection-combined.json"
+    },
+    {
+      "role": "ledger",
+      "path": "coordination/engineering/tanzania-selected-delivery-20261017/composition-001/selected-ledger.json",
+      "bytes": 52695356,
+      "oid": "101e19a541d892b96dfe0a7a6c8463542e935c24",
+      "sidecar": "coordination/engineering/tanzania-selected-delivery-20261017/ownership-selection-combined.json"
+    },
+    {
+      "role": "patch",
+      "path": "coordination/engineering/tanzania-selected-delivery-20261017/composition-001/patch.json",
+      "bytes": 28010462,
+      "oid": "b8fceb40219de47fa9b129ed1708afddb1a93aeb",
+      "sidecar": "coordination/engineering/tanzania-selected-delivery-20261017/ownership-selection-combined.json"
+    },
+    {
+      "role": "sidecar",
+      "path": "coordination/engineering/sweden-germany-spain-selected-delivery-20261017/ownership-selection-combined.json",
+      "bytes": 3504,
+      "oid": "5f5ff6cb5b7286bc235aa62ca9fe2aaaaa85a265",
+      "sidecar": "coordination/engineering/sweden-germany-spain-selected-delivery-20261017/ownership-selection-combined.json"
+    },
+    {
+      "role": "runtime_envelope",
+      "path": "coordination/engineering/sweden-germany-spain-selected-delivery-20261017/composition-001/runtime-envelope.json",
+      "bytes": 1397,
+      "oid": "4265c4f7e035555796d27067d44af643b8f34a52",
+      "sidecar": "coordination/engineering/sweden-germany-spain-selected-delivery-20261017/ownership-selection-combined.json"
+    },
+    {
+      "role": "ledger",
+      "path": "coordination/engineering/sweden-germany-spain-selected-delivery-20261017/composition-001/selected-ledger.json",
+      "bytes": 54226789,
+      "oid": "70e3a22b94802b799ec02162a72931136eaefe33",
+      "sidecar": "coordination/engineering/sweden-germany-spain-selected-delivery-20261017/ownership-selection-combined.json"
+    },
+    {
+      "role": "patch",
+      "path": "coordination/engineering/sweden-germany-spain-selected-delivery-20261017/composition-001/patch.json",
+      "bytes": 28521034,
+      "oid": "f830a94cf6cbb932d60103380d2cf743b9441e24",
+      "sidecar": "coordination/engineering/sweden-germany-spain-selected-delivery-20261017/ownership-selection-combined.json"
+    },
+    {
+      "role": "sidecar",
+      "path": "coordination/engineering/poland-selected-delivery-20261017/ownership-selection-combined.json",
+      "bytes": 3448,
+      "oid": "97184bf253c6da7bfa3e540f614cdc85e1004abe",
+      "sidecar": "coordination/engineering/poland-selected-delivery-20261017/ownership-selection-combined.json"
+    },
+    {
+      "role": "runtime_envelope",
+      "path": "coordination/engineering/poland-selected-delivery-20261017/composition-001/runtime-envelope.json",
+      "bytes": 1382,
+      "oid": "7f09c2e6fff7b6ff336e8cf6a2d6cad536b4a111",
+      "sidecar": "coordination/engineering/poland-selected-delivery-20261017/ownership-selection-combined.json"
+    },
+    {
+      "role": "ledger",
+      "path": "coordination/engineering/poland-selected-delivery-20261017/composition-001/selected-ledger.json",
+      "bytes": 54474336,
+      "oid": "dd97d7d5a8c0582ddb11cdcf88e13aa6f2f34d39",
+      "sidecar": "coordination/engineering/poland-selected-delivery-20261017/ownership-selection-combined.json"
+    },
+    {
+      "role": "patch",
+      "path": "coordination/engineering/poland-selected-delivery-20261017/composition-001/patch.json",
+      "bytes": 28577229,
+      "oid": "b0efc8d8df6d82fda2dbb826757dc204347b82d2",
+      "sidecar": "coordination/engineering/poland-selected-delivery-20261017/ownership-selection-combined.json"
     }
   ],
-  "bytes": 434610304,
-  "count": 68
+  "logical_bytes": 681130082,
+  "proof": "Each retired quartet is authenticated by its historical selected sidecar; current quartet and all unrelated declarations are retained. Logical bytes are not measured transfer savings."
 }
