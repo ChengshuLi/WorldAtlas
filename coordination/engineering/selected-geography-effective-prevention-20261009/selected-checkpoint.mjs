@@ -491,13 +491,15 @@ function legacyRegistry(registry,authorities) {
   return {...registry,entries:registry.entries.filter(entry=>!authorities.get(entry.authority_sha256).nativeOnly)};
 }
 function checkpointAdditions(selected,currentTargets) {
-  return repairIndexValues(selected.normalized.rows).map(row=>{
+  const index=selected.normalized.rows,project=row=>{
     // Native cells bind their own current pointset and exact interval custody.
     if (nativeOnlyComponent(row,valueSha)) return row;
     const target=currentTargets.find(p=>p.target_id===row.target_id);
     demand(target && target.pixelIndex===row.pixelIndex,'Accepted current target identity omitted');
     return {...row,base_geometry:target.geometry,base_geometry_sha256:target.geometry_sha256};
-  });
+  };
+  return nativeSequence(index.size,function*(){for(const row of index.values())yield project(row);},
+    {entryAt:ordinal=>project(index.at(ordinal))});
 }
 function acceptedRebindCheck(selected,rebind,authorities,size,owners) {
   const legacy=[...authorities.values()].filter(proof=>!proof.nativeOnly).flatMap(proof=>proof.patches);
@@ -1446,22 +1448,33 @@ export function authenticateTransition({transition}) {
 // Pure arithmetic only. This function cannot mint a checkpoint, projector or
 // selected certificate capability; callers must still qualify all operands.
 export function deriveCoordinateDelta({certificate,oldAdditions,additions,selection}) {
-  const oldById=new Set(oldAdditions.map(repairComponentKey));
-  demand(oldById.size===oldAdditions.length && new Set(additions.map(repairComponentKey)).size===additions.length,
+  const oldById=new Set(oldAdditions.map(repairComponentKey)),ordinals=new Map();let ordinal=0;
+  for(const row of additions)ordinals.set(repairComponentKey(row),ordinal++);
+  demand(oldById.size===oldAdditions.length && ordinals.size===additions.length,
     'Duplicate complete primitive identity');
-  for (const row of oldAdditions) demand(same(row,additions.find(p => repairComponentKey(p)===repairComponentKey(row))),
-    'Old effective primitive/base geometry changed');
-  const rows=new Map(certificate.entries.map(row => [row[0],row]));
-  for (const row of additions) demand(rows.has(row.target_id) && row.pixelIndex===rows.get(row.target_id)[1]
-    && row.base_geometry_sha256===rows.get(row.target_id)[7] && (nativeOnlyComponent(row,valueSha) || row.geometry_sha256===valueSha(row.geometry)),
-  'Appended primitive targets a stale base, changed geometry or different owner');
-  const changedIds=new Set(additions.filter(row => !oldById.has(repairComponentKey(row))).map(row => row.target_id));
+  for (const row of oldAdditions) {
+    const at=ordinals.get(repairComponentKey(row));
+    demand(same(row,at===undefined?undefined:additions.at(at)),'Old effective primitive/base geometry changed');
+  }
+  const rows=new Map(certificate.entries.map(row => [row[0],row])),byTarget=new Map(),changedIds=new Set();
+  ordinal=0;
+  for (const row of additions) {
+    demand(rows.has(row.target_id) && row.pixelIndex===rows.get(row.target_id)[1]
+      && row.base_geometry_sha256===rows.get(row.target_id)[7] && (nativeOnlyComponent(row,valueSha) || row.geometry_sha256===valueSha(row.geometry)),
+    'Appended primitive targets a stale base, changed geometry or different owner');
+    let group=byTarget.get(row.target_id);if(!group){group={all:[],added:[]};byTarget.set(row.target_id,group);}
+    group.all.push(ordinal);
+    if(!oldById.has(repairComponentKey(row))){group.added.push(ordinal);changedIds.add(row.target_id);}
+    ordinal++;
+  }
   const entries=certificate.entries.map(row => {
     if (!changedIds.has(row[0])) return row;
-    const all=additions.filter(p => p.target_id===row[0]), added=all.filter(p => !oldById.has(repairComponentKey(p)));
+    const group=byTarget.get(row[0]),all=nativeSequence(group.all.length,
+      function*(){for(const at of group.all)yield additions.at(at);});
     const bounds=(a,b)=>[Math.min(a[0],b[0]),Math.min(a[1],b[1]),Math.max(a[2],b[2]),Math.max(a[3],b[3])];
     let box=row[9].reduce(bounds);
-    for(const p of added)for(const next of nativeOnlyComponent(p,valueSha)?[p.native_bounds]:coordinateBounds(p.geometry))box=bounds(box,next);
+    for(const at of group.added){const p=additions.at(at);
+      for(const next of nativeOnlyComponent(p,valueSha)?[p.native_bounds]:coordinateBounds(p.geometry))box=bounds(box,next);}
     const next=[...row]; next[8]=valueSha({base_geometry_sha256:row[7],additions:all});
     next[9]=[box];
     return next;

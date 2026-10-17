@@ -116,3 +116,15 @@ test('completed merge early row/interval return closes producers, including clea
   assert.equal(active,0);
  }
 });
+
+import {repairRowsIndex} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+test('repair index ordinals preserve filtered order and direct component identity',()=>{
+ const values=Array.from({length:8},(_,i)=>({component_id:String(i),authority_sha256:'a',assigned:i%2===0}));
+ let reads=0;
+ const source=nativeSequence(values.length,()=>values.values(),{entryAt:i=>{reads++;return values[i];}});
+ const index=repairRowsIndex(source,{include:row=>row.assigned,project:row=>({...row})});
+ assert.equal(index.size,4);
+ for(let i=0;i<index.size;i++)assert.deepEqual(index.at(i),values[i*2]);
+ assert.equal(reads,4);assert.equal(index.at(-1),undefined);assert.equal(index.at(4),undefined);
+ assert.throws(()=>index.at(.5),/ordinal/);assert.deepEqual([...index.values()],values.filter(row=>row.assigned));
+});

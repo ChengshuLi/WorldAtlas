@@ -801,3 +801,35 @@ test('genuine larger source geometry is reflected in certificate and original co
  const transition=await f.api.qualifyTransition({state:baseline.state,reader});assert.equal(transition.available,true);
  assert.deepEqual(nativeLiteral(transition.candidate.patch.rows),next.patch.rows);
 });
+
+import {createHash} from 'node:crypto';
+import {nativeSequence} from '../src/native-grid.js';
+import {deriveCoordinateDelta as eagerCoordinateDelta} from './fixtures/coordinate-delta-eager.mjs';
+test('indexed coordinate grouping preserves exact eager values, ordering and refusal messages',()=>{
+ assert.equal(createHash('sha256').update(fs.readFileSync(new URL('./fixtures/coordinate-delta-eager.mjs',import.meta.url))).digest('hex'),
+  'c98d006cde4f2eb6d323c899b530413b59fb1f6ead4337c436c962f0ffb31f89');
+ const {certificate}=fixtures();
+ const check=(oldAdditions,additions)=>{
+  const inputs={certificate,oldAdditions,additions,selection:{next:true}};
+  const stored={...inputs,oldAdditions:nativeSequence(oldAdditions.length,()=>oldAdditions.values(),{entryAt:i=>oldAdditions[i]}),
+   additions:nativeSequence(additions.length,()=>additions.values(),{entryAt:i=>additions[i]})};
+  let expected;try{expected=eagerCoordinateDelta(inputs);}catch(error){
+   for(const data of [inputs,stored])assert.throws(()=>deriveCoordinateDelta(data),{message:error.message});return;
+  }
+  for(const data of [inputs,stored])assert.deepEqual(deriveCoordinateDelta(data),expected);
+ };
+ for(let count=0;count<40;count++){
+  const additions=Array.from({length:count},(_,i)=>addition('component-'+i,['A','B','C'][i%3],i%3+1,certificate.entries[i%3][7],i/10));
+  check([],additions);check(additions.slice(0,Math.floor(count/2)),additions);
+  if(count){check([],additions.concat(additions[0]));check([additions[0]],additions.slice(1));
+   check([],[{...additions[0],pixelIndex:99},...additions.slice(1)]);
+   check([additions[0]],[{...additions[0],geometry:polygon(40)},...additions.slice(1)]);}
+ }
+});
+test('coordinate grouping reads indexed additions proportionally to components rather than owners times components',()=>{
+ const features=Array.from({length:64},(_,i)=>feature('T'+String(i).padStart(3,'0'),i)),{certificate}=fixtures(features);
+ const values=features.map((f,i)=>addition('component-'+i,f.id,i+1,certificate.entries[i][7],i+.3));let visits=0;
+ const additions=nativeSequence(values.length,function*(){for(const value of values){visits++;yield value;}},{entryAt:i=>{visits++;return values[i];}});
+ const result=deriveCoordinateDelta({certificate,oldAdditions:[],additions,selection:{}});
+ assert.deepEqual(result.changedIds,features.map(f=>f.id));assert(visits<=8*values.length,'repeated complete addition scans: '+visits);
+});

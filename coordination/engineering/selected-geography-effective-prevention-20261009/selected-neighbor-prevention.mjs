@@ -2085,12 +2085,16 @@ export function readRetainedRegistryAuthority(reader, entry, observationReader, 
 // Lookups reread one component at a time; geometry is never a Map value.
 export function repairRowsIndex(source,{project=row=>row,include=()=>true}={}) {
  demand(isNativeSequence(source),'Missing complete component sequence');
- let size=0,previous;
+ let size=0,previous,ordinal=0;const positions=[];
  for(const raw of source){const row=project(raw);
   demand(!previous||compareRepairComponents(previous,row)<0,'Foreign/duplicate/unordered component');
-  previous={component_id:row.component_id,authority_sha256:row.authority_sha256};if(include(row))size++;
+  previous={component_id:row.component_id,authority_sha256:row.authority_sha256};if(include(row)){positions.push(ordinal);size++;}ordinal++;
  }
  const index={size,
+  at(ordinal){
+   demand(Number.isSafeInteger(ordinal),'Invalid repair component ordinal');
+   return ordinal<0||ordinal>=size?undefined:project(source.at(positions[ordinal]));
+  },
   get(key){
    let identity;try{const [authority_sha256,component_id]=JSON.parse(key);identity={authority_sha256,component_id};}catch{return undefined;}
    let lo=0,hi=source.length;
