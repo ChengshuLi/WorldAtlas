@@ -1,0 +1,10 @@
+Command failed: /Users/chengshuli/.cache/worldatlas-python-envs/requirements-a911b499659c266373447ffef081b16be803c5b5b2cd22889cc5c7a22811c0ae-python-3.12.14-macos-arm64/bin/python -I -B /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0f3d792478426ce8bbf8f8646036980b6da5f3b0837c8945e0ba933be6452e8a/work/scripts/qualify-source-cohort.py --phase physical --repo /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0f3d792478426ce8bbf8f8646036980b6da5f3b0837c8945e0ba933be6452e8a/work --config /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0f3d792478426ce8bbf8f8646036980b6da5f3b0837c8945e0ba933be6452e8a/work/.cache/delivery-handoff/source-F2YnRx/source-config.json --admission /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0f3d792478426ce8bbf8f8646036980b6da5f3b0837c8945e0ba933be6452e8a/work/.cache/delivery-handoff/source-F2YnRx/admission.json --output /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0f3d792478426ce8bbf8f8646036980b6da5f3b0837c8945e0ba933be6452e8a/work/.cache/delivery-handoff/source-F2YnRx/products --publication-prefix coordination/engineering/eritrea-original-repair-20261017/physical-001
+Could not find platform dependent libraries <exec_prefix>
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0f3d792478426ce8bbf8f8646036980b6da5f3b0837c8945e0ba933be6452e8a/work/scripts/qualify-source-cohort.py", line 700, in <module>
+    print(json.dumps((run if args.phase=='source' else run_physical)(args.repo, args.config, args.admission, args.output, args.publication_prefix)))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0f3d792478426ce8bbf8f8646036980b6da5f3b0837c8945e0ba933be6452e8a/work/scripts/qualify-source-cohort.py", line 548, in run_physical
+    import shapely
+ModuleNotFoundError: No module named 'shapely'
+

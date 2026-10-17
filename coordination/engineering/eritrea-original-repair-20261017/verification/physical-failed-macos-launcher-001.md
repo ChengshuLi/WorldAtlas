@@ -1,0 +1,1 @@
+The initial Python-parent shell invocation exited1 before the physical operator because macOS recreated __PYVENV_LAUNCHER__ and isolated Python could not import Shapely. No output destination existed. The plain shell launch cleared that launcher context; the exact same interpreter/runtime inventory/configuration completed successfully. No scientific input or runtime file changed.
