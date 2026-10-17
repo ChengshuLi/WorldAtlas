@@ -421,17 +421,21 @@ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverage
     return coverage;
   };
   let coverage=withCentres(scanCoverage(coverageFeatures),coverageCentres);
-  let excluded;
-  if(territorialApplicability===undefined)excluded=scan(territorialExclusions,true);
-  else{
-    // Preserve every complete negative and its ordinal instead of losing
-    // operand identity in the owner union. The original ties remain vetoes.
-    excluded=scan(territorialExclusions.map((feature,i)=>({...feature,id:String(i),pixelIndex:i+1})));
-    for(const spans of excluded.rows.values())for(const span of spans){
-      span.exclusion_index=span.owner-1;span.owner=territorialExclusions[span.exclusion_index].pixelIndex;
-    }
-    for(const tie of excluded.ties){tie.exclusion_index=tie.owner-1;tie.owner=territorialExclusions[tie.exclusion_index].pixelIndex;}
+  // Complete-source references can share the same whole geometry. Scan that
+  // object once in this exact row block, then restore every owner/operand use.
+  // No claimed hash, cross-call state or caller-owned result is reused.
+  const negatives=new Map();
+  for(const [ordinal,feature]of territorialExclusions.entries()){
+    let item=negatives.get(feature.geometry);
+    if(!item){item={id:String(negatives.size),pixelIndex:negatives.size+1,
+      geometry:feature.geometry,uses:[]};negatives.set(feature.geometry,item);}
+    item.uses.push({owner:feature.pixelIndex,
+      ...(territorialApplicability===undefined?{}:{exclusion_index:ordinal})});
   }
+  const negativeShapes=[...negatives.values()],excluded=scan(negativeShapes);
+  const expandNegative=span=>negativeShapes[span.owner-1].uses.map(use=>({...span,...use}));
+  for(const [y,spans]of excluded.rows)excluded.rows.set(y,spans.flatMap(expandNegative));
+  excluded.ties=excluded.ties.flatMap(expandNegative);
   const current = new Map();
   for (const row of ownerRows) {
     require(Number.isSafeInteger(row.y) && row.y >= rowStart && row.y < rowEnd
