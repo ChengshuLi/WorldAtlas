@@ -3,7 +3,7 @@
 Issues #2407 and #2410. This branch starts from accepted Tanzania main 282d14b4682f738fed6a0e6f3ee0d0e4b775d611 and normally merges both independently reviewed source histories, preserving each source directory byte-for-byte:
 
 - Sweden a1a8c3060a97cfc0648a7412c1662e19fde83f76, source-only PR #2409, review https://github.com/ChengshuLi/WorldAtlas/pull/2409#pullrequestreview-5560026847.
-- Germany 9ebe37b375b46b06f2eed17302c746582e80a2aa, independently reviewed by worker 01a14b7a-618c-7470-8d82-dbc7ac4c7037. Its exact source review and public source PR are separate from final delivery review.
+- Germany 9ebe37b375b46b06f2eed17302c746582e80a2aa, independently reviewed by worker 01a14b7a-618c-7470-8d82-dbc7ac4c7037. Source-only PR #2412, exact review https://github.com/ChengshuLi/WorldAtlas/pull/2412#pullrequestreview-5560265678.
 
 The previously reviewed Sweden-only candidate daad9f06d4ce85a90bb1a94142ae0a62a951ca11 remains frozen. This combined branch uses only accepted engineering code and the existing multi-original composer. No unmerged machinery changes or source/physical/native producer replays are included.
 
