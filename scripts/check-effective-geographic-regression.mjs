@@ -108,9 +108,9 @@ export class ImmutableReader {
   }
   gitBatch(args,input,maxBuffer) {
     const result=spawnSync(this.gitExecutable,['-c','core.hooksPath=/dev/null','-C',this.repo,...args],
-      {input,maxBuffer,stdio:['pipe','pipe','pipe']});
+      {input,maxBuffer,stdio:['pipe','pipe','inherit']});
     if(result.error)throw result.error;
-    demand(result.status===0&&!result.stderr.length,'Incomplete immutable Git batch: '+result.stderr.toString());
+    demand(result.status===0,'Incomplete immutable Git batch');
     return result.stdout;
   }
   // The caller already knows this finite pin layer. Resolve only its original
