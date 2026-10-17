@@ -82,3 +82,37 @@ test('completed authority merge exactly matches retained eager values and refusa
  for(const rows of [[{y:-1,runs:[[0,1,1]]}],[{y:0,runs:[[0,33,1]]}],[{y:0,runs:[[2,1,1]]}],
   [{y:0,runs:[[0,1,0]]}],[{y:0,runs:[[0,2,1],[1,3,1]]}],[{y:0,runs:[[0,1,1]]},{y:0,runs:[[2,3,1]]}]])check([{rows}]);
 });
+
+test('completed merge closes every acquired cursor and preserves primary producer failures',()=>{
+ for(const layer of ['rows','runs'])for(const at of [0,1])for(const cleanupFailure of [false,true]){
+  const primary=Error('initial or midstream producer sentinel'),secondary=Error('cleanup sentinel');let active=0;
+  const tracked=(values,fail,cleanup)=>{let pass=0;return nativeSequence(values.length,function*(){
+   const current=++pass;active++;
+   try{for(let i=0;i<values.length;i++){if(fail&&current===2&&i===at)throw primary;yield values[i];}}
+   finally{active--;if(cleanup&&current===2)throw secondary;}
+  });};
+  const a=[{y:0,runs:[[0,1,1],[4,5,1]]},{y:1,runs:[[0,1,1]]}],b=[{y:0,runs:[[2,3,1],[6,7,1]]},{y:1,runs:[[2,3,1]]}];
+  const patches=layer==='rows'?[{rows:tracked(a,false,cleanupFailure)},{rows:tracked(b,true,false)}]:[
+   {rows:[{y:0,runs:tracked(a[0].runs,false,cleanupFailure)}]},
+   {rows:[{y:0,runs:tracked(b[0].runs,true,false)}]}];
+  assert.throws(()=>mergeCompletedNativePatches(patches,32),error=>error===primary);
+  assert.equal(active,0,layer+' '+at+' '+cleanupFailure);
+ }
+});
+
+test('completed merge early row/interval return closes producers, including cleanup failure',()=>{
+ for(const cleanupFailure of [false,true]){
+  const secondary=Error('early cleanup sentinel');let active=0,failCleanup=false;
+  const tracked=values=>nativeSequence(values.length,function*(){active++;try{yield* values;}finally{
+   active--;if(failCleanup)throw secondary;
+  }});
+  const patches=[{rows:tracked([{y:0,runs:tracked([[0,1,1],[2,3,1]])}])},
+   {rows:tracked([{y:0,runs:tracked([[4,5,1]])}])}];
+  const view=mergeCompletedNativePatches(patches,32);assert.equal(active,0);
+  const rows=view[Symbol.iterator](),row=rows.next().value,runs=row.runs[Symbol.iterator]();runs.next();
+  if(cleanupFailure){failCleanup=true;assert.throws(()=>runs.return(),error=>error===secondary);
+   assert.throws(()=>rows.return(),error=>error===secondary);}
+  else{runs.return();rows.return();}
+  assert.equal(active,0);
+ }
+});

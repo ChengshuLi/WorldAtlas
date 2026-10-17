@@ -1933,9 +1933,10 @@ export function mergeCompletedNativePatches(patches, size) {
     }
   }
   function* mergedRuns(group) {
-    const cursors=group.map(row=>{const iterator=row.runs[Symbol.iterator]();return {iterator,next:iterator.next()};});
-    let pending=null;
-    try {while(true){
+    const cursors=[];let pending=null,failed=false;
+    try {
+      for(const row of group){const cursor={iterator:row.runs[Symbol.iterator]()};cursors.push(cursor);cursor.next=cursor.iterator.next();}
+      while(true){
       let selected;
       for(const cursor of cursors)if(!cursor.next.done&&(!selected||cursor.next.value[0]<selected.next.value[0]))selected=cursor;
       if(!selected)break;
@@ -1944,18 +1945,24 @@ export function mergeCompletedNativePatches(patches, size) {
       if(pending&&pending[1]===run[0]&&pending[2]===run[2])pending[1]=run[1];
       else {if(pending)yield pending;pending=[...run];}
     }if(pending)yield pending;
-    }finally{for(const cursor of cursors)cursor.iterator.return?.();}
+    }catch(error){failed=true;throw error;}
+    finally{let cleanup;for(const cursor of cursors)try{cursor.iterator.return?.();}catch(error){cleanup??=error;}
+      if(!failed&&cleanup)throw cleanup;}
   }
   function* mergedRows() {
-    const cursors=patches.map(patch=>{const iterator=patch.rows[Symbol.iterator]();return {iterator,next:iterator.next()};});
-    try {while(true){
+    const cursors=[];let failed=false;
+    try {
+      for(const patch of patches){const cursor={iterator:patch.rows[Symbol.iterator]()};cursors.push(cursor);cursor.next=cursor.iterator.next();}
+      while(true){
       let y=Infinity;for(const cursor of cursors)if(!cursor.next.done)y=Math.min(y,cursor.next.value.y);
       if(y===Infinity)return;
       const active=cursors.filter(cursor=>!cursor.next.done&&cursor.next.value.y===y),group=active.map(cursor=>cursor.next.value);
       let count=0;for(const run of mergedRuns(group))count++;
       yield {y,runs:nativeSequence(count,()=>mergedRuns(group))};
       for(const cursor of active)cursor.next=cursor.iterator.next();
-    }}finally{for(const cursor of cursors)cursor.iterator.return?.();}
+    }}catch(error){failed=true;throw error;}
+    finally{let cleanup;for(const cursor of cursors)try{cursor.iterator.return?.();}catch(error){cleanup??=error;}
+      if(!failed&&cleanup)throw cleanup;}
   }
   let count=0;for(const row of mergedRows())count++;
   const result=nativeSequence(count,mergedRows);
