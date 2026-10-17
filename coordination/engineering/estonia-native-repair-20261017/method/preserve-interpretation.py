@@ -29,7 +29,7 @@ for ident,t in targets.items():
  roles[m['source_role']]+=1;role_cells[m['source_role']]+=t['candidate_cells']
  if t['display_name_differs']:
   r=next(r for r in decisions['location_changes'] if r['id']==ident);assert r['current_name']==t['raw_source_name'] and r['new_name']==t['name'] and t['raw_source_name'].encode('latin1').decode('utf8')==t['name'];corrections.append(r)
- for r in decisions['location_metadata_changes']:
+ for r in decisions.get('location_metadata_changes',[]):
   if r['id']==ident:assert all(m[k]==v for k,v in r['changes'].items());role_changes.append(r)
 review=[r for r in decisions['location_review'] if set(r['ids'])&set(targets)];follow_rows=[r for r in follow['locations'] if r['id'] in targets];assert {r['id'] for r in follow_rows}==set(targets)
 for r in follow_rows:assert r['source_id']=='gb:EST:ADM2'
