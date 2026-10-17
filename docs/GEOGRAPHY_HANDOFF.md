@@ -6,9 +6,13 @@ Geography workers research territorial boundaries, hierarchy purpose, source sui
 
 Choose one bounded `type:geography` issue with reviewed scope through [WORKER_COORDINATION.md](WORKER_COORDINATION.md). Post its worker ID, branch and planned checks in an ordinary comment. Branch from fresh `origin/main` as `geography/<job-id>` in an isolated checkout. Coordinate any overlap with the parent before implementation.
 
-Every geography issue declares an exact `owned_paths` array in its machine block. Permitted prefixes are `data/regional-review/<packet-id>/` and `research/geography/<campaign-id>/`. The current regional packets retain their existing evidence directories. Use the declared directory even when a later PR needs a fresh branch name. No undeclared, shared hierarchy, original-source, grid, application, hosted, schema, other worker or history-campaign edits are permitted. Ordinary files only: no symlinks or submodules. Engineering consumes these evidence files but preserves them.
-
-An issue-creation role verifies disjoint ownership before readiness. Declared ownership is retained in the issue. Preserve active work and coordinate any scope expansion before changing it. Git checks protect committed paths; they are not production authorization or isolation for arbitrary scripts. Local reproductions must write only to the owned directory or a private temporary/cache directory and must not modify the baseline or call live mutation APIs.
+Coordinate exact evidence directories and subjects with the parent before edits.
+Use `data/regional-review/<packet-id>/` or `research/geography/<campaign-id>/`,
+preserving existing packets and other workers' files. No machine owned-path block
+or readiness label is required. Do not modify shared hierarchy, original sources,
+grid/application code or history campaigns. Reproductions stay in owned destinations
+and never mutate the baseline or call live mutation APIs. Real source readers still
+require ordinary complete inputs and exact identity; directory names grant no authority.
 
 For regional reviews, read [MACRO_FOUNDATION_APPROVAL.md](MACRO_FOUNDATION_APPROVAL.md), [TOP_DOWN_GEOGRAPHY_WORKFLOW.md](TOP_DOWN_GEOGRAPHY_WORKFLOW.md), the issue's exact JSON subjects/release pins, and `data/macro-foundation/regional-handoffs.json.gz`. Verify every declared location and parent purpose against sourced administration, settlements or physical geography. Source metadata, administrative numbers and structural checks alone cannot certify semantics. Record vintage, role, license, original bytes or lawful retained extracts, retrieval dates and hashes, inspected facts, uncertainty, recommendations and unresolved findings.
 
@@ -18,14 +22,10 @@ If evidence reveals an inter-region inconsistency, open/link one coordinated pro
 
 M geography, N engineering and P history workers can proceed alongside issue creation. Independent UI/performance/infrastructure engineering and historical source-only collection do not wait for regional completion. Geography evidence/proposals lead to bounded engineering corrections and a validated published complete branch; only then may its history workers import permitted attributes.
 
-Each PR targets main, contains exactly one `Refs #N` or `Closes #N`, and meets the existing size/budget rules. Save the actual issue JSON for the local geography ownership check:
-
-```sh
-gh api repos/ChengshuLi/WorldAtlas/issues/ISSUE-NUMBER > /tmp/geography-issue.json
-node scripts/check-handoff-scope.mjs --branch geography/JOB-ID --base origin/main --pr-body-file /tmp/pr-body.md --issue-file /tmp/geography-issue.json
-```
-
-Trusted CI reads ownership from GitHub, not a PR-authored declaration. Submit validated PRs through the serialized squash merge queue. Reconcile the completed issue after merge and start a fresh branch for the next coordinated geography issue. Post milestone/source/validation evidence to the issue and report every 30 minutes during sustained work. A blocker requires a durable issue handover with exact branch, inputs, findings and next action; do not silently abandon or broaden the scope.
+Each coherent PR targets main and receives distinct-worker exact-head review.
+Issue links are optional and unrestricted in number/syntax. Submit through the
+serialized squash queue; reconcile remaining acceptance and preserve evidence.
+Post milestone/source/validation evidence to the issue and report every 30 minutes during sustained work. A blocker requires a durable issue handover with exact branch, inputs, findings and next action; do not silently abandon or broaden the scope.
 
 Public source research and local proposals need repository/public-internet access, not Site or Neon credentials. Geography does not perform live imports, execute migrations, publish, update branch certificates or rewrite research gates. Location-attribute imports still require engineering's complete published regional certificate with exact permitted subjects and current release pins; this lane introduces no additional import authorization.
 

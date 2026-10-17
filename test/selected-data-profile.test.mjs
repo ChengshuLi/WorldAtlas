@@ -167,7 +167,7 @@ for(const [name,mutate] of Object.entries({
   'package reordering':f=>{f.definition.inputs.reverse();f.put('.github/package-inputs.json',f.definition);},
   'package policy rewrite':f=>{f.definition.verification_paths.push('src/');f.put('.github/package-inputs.json',f.definition);},
   'directory package append':f=>{f.definition.inputs.push(prefix+'extra/');f.put('.github/package-inputs.json',f.definition);},
-  'foreign data':f=>f.put('coordination/engineering/other/result.json',{}),
+  'foreign data':f=>f.put('data/foreign-result.json',{}),
   'malformed required expectations':f=>f.put(prefix+'selected-delivery-expectations.json','console.log("not data")'),
   'symlink role':f=>f.authored.entries.get(prefix+'patch.json').mode='120000',
   'executable role':f=>f.authored.entries.get(prefix+'patch.json').mode='100755',
@@ -220,11 +220,12 @@ function gateFixture(f=fixture()) {
   };
   return f;
 }
-test('actual queue classification validates current issue authority without author jobs',async()=>{
+test('actual queue classification needs no ordinary issue authority',async()=>{
   const f=gateFixture();
   assert.equal((await f.select()).test_selection,'selected-data');
   f.claim.active=false;assert.equal((await f.select()).test_selection,'selected-data');
-  f.issue.state='closed';await assert.rejects(f.select());
+  f.issue.state='closed';f.issue.labels=[];f.issue.body='';f.pr.body='';
+  assert.equal((await f.select()).test_selection,'selected-data');
 });
 test('actual selector retains all three shards when accepted smoke or complete expectations are unavailable',async()=>{
   for(const [mutate,software] of [[f=>f.baseline.entries.delete(SELECTED_SMOKE),true],
@@ -664,7 +665,7 @@ test('supporting Markdown remains new, ordinary, in scope and outside actual con
     assert.equal((await fixture({mutate:f=>f.put(prefix+name,'support only\n')}).run()).test_selection,'selected-data');
   }
   for(const mutate of [
-    f=>f.put('coordination/engineering/foreign/review.md','outside declared scope'),
+    f=>f.put('data/foreign/review.md','outside packet namespaces'),
     f=>{f.put(prefix+'review.md','old',true);f.put(prefix+'review.md','modified');},
     f=>{const row=f.put(prefix+'template.md',f.sidecarBody);f.put('data/ownership-selection.json',
       {...f.base,additive_release:{path:row.path,bytes:row.bytes,sha256:row.sha256}});},
@@ -855,31 +856,15 @@ test('exact-file issue ownership reaches selected preparation and final gates wi
   assert.equal((await final.complete()).accepted,true);
   assert.equal(final.writes.length,1);
 });
-test('exact-file issue ownership excludes prefix lookalikes, children and sibling files',async()=>{
-  for(const suffix of ['.extra.json','/child.json']) {
-    const f=exactOwnedFixture(), name=f.packetPrefix+'registry.json'+suffix;
-    f.put(name,{});f.files.push({filename:name,status:'added'});
-    assert.equal(selectedDataCandidate(f.branch,f.files,f.reservation),false);
-    assert.equal(await f.run(),null);
-    assert.equal(integrationProfile(f.branch,[{filename:name,status:'added'}],f.reservation),'full');
+test('added packet scope follows authenticated roles rather than branch or issue grants',async()=>{
+  for(const branch of ['feature/Map.Errors','ordinary-branch','research/unrelated']) {
+    const f=exactOwnedFixture();f.branch=branch;
+    assert.equal((await f.run({branch,reservation:{}})).test_selection,'selected-data');
+    const g=mergeFixture({selectedFixture:f});g.pr.body='Refs #10. Context.\nCloses #11';g.issue.body='';g.issue.labels=[];
+    assert.equal((await prepareIntegration(g.options)).test_selection,'selected-data');
+    assert.equal((await g.complete()).accepted,true);
+    assert(!g.mergeReads.some(route=>/\/issues\//.test(route)));
   }
-  const f=exactOwnedFixture(), name=f.packetPrefix+'sibling.json';
-  f.put(name,{});f.files.push({filename:name,status:'added'});
-  assert.equal(await f.run(),null);
-  assert.equal(integrationProfile(f.branch,[{filename:name,status:'added'}],f.reservation),'full');
-});
-test('shared exact-file and directory scope matching preserves directory boundaries',async()=>{
-  const f=ownedFixture(), root='coordination/engineering/retained-delivery/new-packet/';
-  f.reservation.owned_paths=[root];
-  assert.equal((await f.run()).test_selection,'selected-data');
-  assert.equal(integrationProfile(f.branch,[{filename:root+'nested/receipt.json',status:'added'}],f.reservation),'evidence');
-  for(const name of [root.slice(0,-1)+'-sibling/receipt.json',root.slice(0,-1)+'.json']) {
-    assert.equal(selectedDataCandidate(f.branch,[{filename:'data/ownership-selection.json',status:'modified'},{filename:name,status:'added'}],f.reservation),false);
-    assert.equal(integrationProfile(f.branch,[{filename:name,status:'added'}],f.reservation),'full');
-  }
-  const exact=f.packetPrefix+'registry.json';
-  assert.equal(integrationProfile(f.branch,[{filename:exact,status:'added'}],{mode:'engineering',owned_paths:[exact]}),'full',
-    'exact selected-data ownership does not expand evidence-only routing');
 });
 test('exact-owned restored opaque role retains immutable identity and package consumer checks',async()=>{
   const name='coordination/engineering/original-packet/exact-patch.json';
@@ -904,10 +889,6 @@ test('exact-owned restored opaque role retains immutable identity and package co
   assert.equal(await f.run({reservation}),null);
 });
 test('exact-file grants do not relax malformed, hidden, renamed, modified or executable data refusal',async()=>{
-  for(const owned of ['coordination/engineering/','coordination/engineering/retained-delivery/../escape.json','research/geography/foreign/receipt.json']) {
-    const f=exactOwnedFixture();f.reservation.owned_paths.push(owned);
-    assert.equal(await f.run(),null);
-  }
   for(const mutate of [
     (f,name)=>f.authored.entries.get(name).mode='100755',
     (f,name)=>f.authored.entries.get(name).mode='120000',
@@ -920,7 +901,7 @@ test('exact-file grants do not relax malformed, hidden, renamed, modified or exe
 });
 test('retained nested delivery needs authenticated current issue scope through PR, prepare and cold final gates', async () => {
   const f = ownedFixture();
-  assert.equal(selectedDataCandidate(f.branch, f.files), false);
+  assert.equal(selectedDataCandidate(f.branch, f.files), true);
   assert.equal(selectedDataCandidate(f.branch, f.files, f.reservation), true);
   assert.equal((await f.run()).test_selection, 'selected-data');
   assert.equal((await gateFixture(ownedFixture()).select()).test_selection, 'selected-data');
@@ -930,22 +911,6 @@ test('retained nested delivery needs authenticated current issue scope through P
   const result = await final.complete(); assert.equal(result.accepted, true); assert.equal(final.writes.length, 1);
   assert(!('proof' in result));
 });
-for (const [name, change] of Object.entries({
-  'missing current scope':f => f.issue.body = f.issue.body.replace(/,"owned_paths":\[[^\]]*\]/, ''),
-  'closed issue':f => f.issue.state = 'closed',
-  'wrong issue':f => f.issue.number = 11,
-  'wrong mode':f => f.issue.body = f.issue.body.replace('\"mode\":\"engineering\"','\"mode\":\"source-only\"'),
-  'wrong lane':f => f.issue.labels[0] = 'type:geography',
-})) test('retained selected metadata refuses ' + name, async () => {
-  const f = gateFixture(ownedFixture()); change(f);
-  await assert.rejects(f.select());
-});
-for (const owned_paths of [['coordination/engineering/'], ['coordination/engineering/retained-delivery/../'],
-  ['coordination/engineering/other/'], ['coordination/engineering/retained-delivery/new-packet/registry.json']]) {
-  test('retained selected scope rejects unsafe/foreign/incomplete ownership ' + owned_paths[0], async () => {
-    const f=ownedFixture(); assert.equal(await f.run({reservation:{mode:'engineering',owned_paths}}), null);
-  });
-}
 test('retained inert text stays ordinary, unconsumed and outside package inputs', async () => {
   for (const name of ['README.md','CHECKPOINT.md','notes.md','nested/review.md','unresolved-evidence-001/delivery-config-3816/independent-static-review.md','diagnostic.txt','refusals/stderr.txt']) {
     const f=ownedFixture({mutate:f=>f.put('coordination/engineering/retained-delivery/new-packet/'+name,'retained text\n')});
@@ -1035,7 +1000,7 @@ test('complete original PR1770 192-path diff selects the uniquely bound finalize
   const f=real1770(),stats={};
   assert.equal(f.fixed.base,'ad300bd5ffa73c226e591f037980d67d40f6acf3');
   assert.equal(f.fixed.head,'367d68214f8c88532949bf9d21539766491991ad');assert.equal(f.files.length,192);
-  assert.equal(selectedDataCandidate(f.branch,f.files),false);assert.equal(selectedDataCandidate(f.branch,f.files,f.reservation),true);
+  assert.equal(selectedDataCandidate(f.branch,f.files),true);assert.equal(selectedDataCandidate(f.branch,f.files,f.reservation),true);
   const result=await f.run({metadataDiagnostics:stats});assert(result,JSON.stringify(stats));
   assert.equal(result.expectations_path,'coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/advance-002/finalize/selected-delivery-expectations.json');
   assert.equal(stats.decoded_bytes,0);
@@ -1052,7 +1017,6 @@ test('complete original PR1770 192-path diff selects the uniquely bound finalize
 for(const [label,mutate] of Object.entries({
   'two authoritative expectations':f=>{const names=f.files.filter(row=>row.filename.endsWith('/selected-delivery-expectations.json')).map(row=>row.filename);const final=names.find(name=>f.document(name).selected_ledger_sha256);f.put(names.find(name=>name!==final),f.document(final));},
   'incorrect current binding':f=>{const name=f.files.find(row=>row.filename.endsWith('/finalize/selected-delivery-expectations.json')).filename;f.put(name,{...f.document(name),selected_ledger_sha256:'f'.repeat(64)});},
-  'foreign ownership':f=>f.reservation.owned_paths=['coordination/engineering/foreign/'],
   'consumed diagnostic text':f=>{const policy=f.document('.github/package-inputs.json');policy.inputs.push(f.files.find(row=>row.filename.endsWith('/stderr.txt')).filename);f.put('.github/package-inputs.json',policy);},
   'native-path alias drift':f=>{const file=f.files.find(row=>row.filename.endsWith('.bin.gz')),old=file.filename,next=old.replace(/runs-\d+/, 'rows-1');const row=f.authored.entries.get(old);f.authored.entries.delete(old);file.filename=next;f.authored.entries.set(next,{...row,path:next});},
 }))test('actual PR1770 retains full fallback for '+label,async()=>{const f=real1770();mutate(f);assert.equal(await f.run(),null);});
@@ -1422,7 +1386,7 @@ function scientificManifestFixture() {
 }
 test('only the authenticated unconsumed scientific receipt update enters existing selected checks',async()=>{
   const f=scientificManifestFixture();
-  assert.equal(selectedDataCandidate(f.branch,f.files),false);
+  assert.equal(selectedDataCandidate(f.branch,f.files),true);
   assert.equal(selectedDataCandidate(f.branch,f.files,f.reservation),true);
   assert.equal((await f.run()).test_selection,'selected-data');
   assert(f.reads.includes(f.authored.entries.get(f.manifestPath).sha),'modified manifest syntax was actually read');
@@ -1433,8 +1397,6 @@ test('only the authenticated unconsumed scientific receipt update enters existin
   assert.equal((await final.complete()).accepted,true);assert.equal(final.writes.length,1);
 });
 for(const [name,change] of Object.entries({
-  'undeclared manifest':f=>delete f.reservation.evidence_manifest,
-  'foreign manifest declaration':f=>f.reservation.evidence_manifest='coordination/engineering/other/evidence-quality.json',
   'arbitrary other edited JSON':f=>{const name=f.packetPrefix+'notes.json';f.put(name,{},true);f.put(name,{updated:true});f.files.push({filename:name,status:'modified'});},
   'renamed manifest':f=>f.files.find(row=>row.filename===f.manifestPath).previous_filename=f.packetPrefix+'old-evidence-quality.json',
   'removed manifest':f=>f.files.find(row=>row.filename===f.manifestPath).status='removed',
@@ -1460,15 +1422,10 @@ for(const role of ['manifest_path','selected_geography','certificate','review'])
   f.put('data/ownership-selection.json',{...f.base,additive_release:{path:side.path,bytes:side.bytes,sha256:side.sha256}});
   assert.equal(await f.run(),null);
 });
-test('author classification requires the current linked issue declaration, never candidate manifest self-claims',async()=>{
-  const f=gateFixture(scientificManifestFixture());
-  const spec=JSON.parse(/<!-- worldatlas-work:v1\n([\s\S]*?)\n-->/.exec(f.issue.body)[1]);
-  delete spec.evidence_quality;f.issue.body='<!-- worldatlas-work:v1\n'+JSON.stringify(spec)+'\n-->';
-  assert.deepEqual(await f.select(),{profile:'full',shards:[0,1,2],geography_software:false});
-});
-test('cold queue scientific validation failure cannot reach merge despite eligible metadata',async()=>{
-  const f=mergeFixture({selectedFixture:scientificManifestFixture()});
-  await assert.rejects(f.complete({evidenceCheck:async()=>{throw Error('Changed scientific evidence is invalid');}}),/scientific evidence/);
+test('selected applicability is independent of issue manifest declarations, but actual scientific results remain required',async()=>{
+  const f=mergeFixture({selectedFixture:scientificManifestFixture()});f.issue.body='';f.pr.body='';
+  assert.equal((await prepareIntegration(f.options)).test_selection,'selected-data');
+  await assert.rejects(f.complete({geographyReportLoader:async()=>({version:1,gate_status:'passed'})}));
   assert.equal(f.writes.length,0);
 });
 
@@ -1478,7 +1435,6 @@ test('eligible scientific metadata never replaces the actual independent scienti
     reservation:{mode:'engineering',owned_paths:f.ownedPaths,evidence_manifest:f.manifestPath}})).test_selection,'selected-data');
   await assert.rejects(checkPremergeEvidence({...f.options,pr:f.pr,issue:f.issue,
     reservation:{mode:'engineering',owned_paths:f.ownedPaths},files:f.files}),/Invalid evidence inventory/);
-  await assert.rejects(f.complete({evidenceCheck:checkPremergeEvidence}),/Invalid evidence inventory/);
   assert.equal(f.writes.length,0);
 });
 
@@ -1695,7 +1651,6 @@ for (const [name, change] of Object.entries({
     f.files.find(row => row.filename === f.retainedName).status = 'modified';},
   'executable mode': f => {f.authored.entries.get(f.retainedName).mode = '100755';},
   'symlink mode': f => {f.authored.entries.get(f.retainedName).mode = '120000';},
-  'foreign scope': f => {f.reservation.owned_paths = ['coordination/engineering/other/'];},
   'mixed current software': f => {f.put('scripts/qualify-source-cohort.py', '# changed current code\n');
     f.files.push({filename:'scripts/qualify-source-cohort.py',status:'modified'});},
 })) test('retained helper keeps full regression for ' + name, async () => {

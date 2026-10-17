@@ -1,7 +1,8 @@
 # Bounded local workspaces
 
 Whenever an author, premerge reviewer, Auditor or publisher needs a new local checkout, use `scripts/local-workspace.mjs`
-for new local checkouts. Fresh branches do not require accumulating fresh directories.
+for new local checkouts. Fresh branches do not require accumulating fresh directories. Lane prefixes are optional;
+Git ref validity, unique fresh branches and exact worker/slot ownership remain enforced.
 Use Node 24 from any checkout of the same primary repository. Keep one stable worker ID for each chat across successive issues; a new job is not a new worker. Distinct reviewer agents keep their own worker IDs. One shared Git object
 store and registry serve all its worktrees. Each unique worker ID has at most one
 `work` slot and one `review` slot. Release a finished slot before allocating its
@@ -29,7 +30,7 @@ node scripts/local-workspace.mjs allocate --worker YOUR-REVIEWER-ID --slot revie
 
 Replace placeholders and retain the returned path and ownership token locally.
 Work allocation rejects an existing branch, then fetches `origin/main` and pins
-its commit before acquiring the registry lock and creating a fresh lane branch. Review allocation detaches the exact locally available reviewed
+its commit before acquiring the registry lock and creating a fresh branch. Review allocation detaches the exact locally available reviewed
 commit; fetch the PR head first if necessary. Do not allocate one review directory
 per revision: finish/release the previous review slot and allocate its replacement.
 Publisher/Auditor inspection that needs local execution also uses the detached review slot; API/blob-only inspection needs no checkout. Any

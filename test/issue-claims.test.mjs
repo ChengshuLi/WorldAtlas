@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
-import {transitionClaim,readClaim,renderClaim,verifyIssueScope,workSpec,githubPages,canonicalIssueNumber} from '../scripts/issue-claim-contract.mjs';
+import {transitionClaim,readClaim,renderClaim,verifyIssueScope,workSpec,githubPages,canonicalIssueNumber,linkedPulls} from '../scripts/issue-claim-contract.mjs';
 import {assertResearchImportsReady,assertResearchBundleApproved} from '../scripts/research-import-gate.mjs';
 
 const now=Date.parse('2026-10-02T12:00:00Z');
@@ -166,4 +166,17 @@ for(const failure of ['malformed','error'])test(`pagination propagates a late ${
   if(failure==='error')throw Error('provider denied page');return {check_runs:null};
  },'/comments'),failure==='error'?/provider denied page/:/Invalid paginated/);
  assert.equal(calls,101);
+});
+
+
+test('live-operation PR discovery uses native same-repository references without body syntax',async()=>{
+ const rows=['','Refs #1. Context.\nCloses #2','Edited after cross-reference'].map((body,i)=>({source:{issue:{number:i+3,body,pull_request:{url:`https://api.github.com/repos/a/b/pulls/${i+3}`}}}}));
+ rows.push(structuredClone(rows[0]),{source:{issue:{number:6,pull_request:{url:'https://api.github.com/repos/foreign/repo/pulls/6'}}}});
+ const reads=[],api=async route=>{reads.push(route);return route.includes('/timeline')?rows:{number:Number(route.split('/').at(-1)),state:'open'};};
+ assert.deepEqual((await linkedPulls(api,'a/b',1)).map(pr=>pr.number),[3,4,5]);
+ assert.equal(reads.length,4);assert(!reads.some(route=>route.endsWith('/pulls/6')));
+});
+test('unknown native cross-reference identity blocks live-operation admission conservatively',async()=>{
+ for(const source of [{number:3,pull_request:{}},{number:0,pull_request:{url:'https://api.github.com/repos/a/b/pulls/3'}},{number:3,pull_request:{url:'https://api.github.com/repos/a/b/pulls/4'}}])
+  await assert.rejects(linkedPulls(async()=>[{source:{issue:source}}],'a/b',1));
 });

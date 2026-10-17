@@ -1,12 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import fs from 'node:fs';
-import os from 'node:os';
-import path from 'node:path';
-import {execFileSync} from 'node:child_process';
-import {laneForBranch,validateLanePaths,validateIssueMetadata,checkGitScope,validateGeographyOwnedPaths} from '../scripts/check-handoff-scope.mjs';
+import {laneForBranch,validateLanePaths,validateIssueMetadata,validateGeographyOwnedPaths} from '../scripts/check-handoff-scope.mjs';
 import {workSpec,transitionClaim,readClaim,renderClaim,verifyIssueScope} from '../scripts/issue-claim-contract.mjs';
-import {checkLinkedIssue} from '../scripts/check-linked-github-issue.mjs';
 
 const owned=['data/regional-review/regional-review-packet-a/'],now=Date.parse('2026-10-02T22:00:00Z');
 const spec={max_prs:2,depends_on:[],mode:'geography',scope:'Review the exact published packet, retaining source evidence and recommendations only',owned_paths:owned};
@@ -45,28 +40,4 @@ test('geography scope comes from the issue without entering live-operation reser
  const legacy={version:1,active:true,worker_id:'legacy',claim_id:'legacy',branch:'geography/packet-a',expires_at:'2020-01-01',mode:'geography',owned_paths:owned};
  assert.deepEqual(readClaim([comment(legacy)]).owned_paths,owned);
  assert.throws(()=>readClaim([comment({...legacy,owned_paths:['data/']})]),/owned_paths/);
-});
-test('actual linked GitHub issue supplies geography ownership, not a PR-controlled declaration',async()=>{
- const event={repository:{full_name:'ChengshuLi/WorldAtlas'},pull_request:{body:'Refs #507\nUntrusted owned_paths: data/hierarchy.json'}};
- const result=await checkLinkedIssue({branch:'geography/packet-a',event,token:'test-only',fetchIssue:async()=>({ok:true,json:async()=>issue()})});
- assert.deepEqual(result.owned_paths,owned);assert.equal(result.issue_type,'type:geography');
- await assert.rejects(checkLinkedIssue({branch:'geography/packet-a',event,token:'test-only',fetchIssue:async()=>({ok:true,json:async()=>issue({...spec,owned_paths:['data/']})})}),/owned_paths/);
-});
-test('real geography Git scope checks renamed source paths, symlinks and issue-backed CLI ownership',async()=>{
- const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-geography-lane-')),git=args=>execFileSync('git',args,{cwd:directory,encoding:'utf8'}),run=(command,args,options)=>execFileSync(command,args,{...options,cwd:directory});
- try{
-  git(['init','-q']);git(['config','user.email','scope@example.com']);git(['config','user.name','Scope test']);fs.mkdirSync(path.join(directory,'src'));fs.writeFileSync(path.join(directory,'src/core.js'),'original\n');git(['add','.']);git(['commit','-qm','base']);const base=git(['rev-parse','HEAD']).trim();
-  fs.mkdirSync(path.join(directory,owned[0]),{recursive:true});git(['mv','src/core.js',owned[0]+'notes.js']);git(['commit','-qm','rename protected core']);
-  assert.throws(()=>checkGitScope({branch:'geography/packet-a',base,run,ownedPaths:owned}),/declared owned_paths/);
-  git(['reset','--hard',base]);fs.mkdirSync(path.join(directory,owned[0]),{recursive:true});fs.symlinkSync('../../../src/core.js',path.join(directory,owned[0]+'source.js'));git(['add','.']);git(['commit','-qm','unsafe link']);
-  assert.throws(()=>checkGitScope({branch:'geography/packet-a',base,run,ownedPaths:owned}),/not symlinks/);
-  git(['reset','--hard',base]);fs.mkdirSync(path.join(directory,owned[0]),{recursive:true});fs.writeFileSync(path.join(directory,owned[0]+'source.json'),'{}\n');git(['add','.']);git(['commit','-qm','scoped evidence']);
-  assert.equal(checkGitScope({branch:'geography/packet-a',base,run,ownedPaths:owned}).changed_files,1);
-  const actualIssue=path.join(directory,'actual-issue.json');fs.writeFileSync(actualIssue,JSON.stringify(issue()));
-  const checker=new URL('../scripts/check-handoff-scope.mjs',import.meta.url);
-  const cli=execFileSync(process.execPath,[checker.pathname,'--branch','geography/packet-a','--base',base,'--issue-file',actualIssue],{cwd:directory,encoding:'utf8'});
-  assert.equal(JSON.parse(cli).scope_check,'passed');
-  const remote=await checkLinkedIssue({branch:'geography/packet-a',base,run,event:{repository:{full_name:'ChengshuLi/WorldAtlas'},pull_request:{body:'Refs #507'}},token:'test-only',fetchIssue:async()=>({ok:true,json:async()=>issue()})});
-  assert.equal(remote.git_scope.changed_files,1);
- }finally{fs.rmSync(directory,{recursive:true,force:true});}
 });
