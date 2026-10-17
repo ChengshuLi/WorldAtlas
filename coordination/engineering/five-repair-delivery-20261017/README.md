@@ -1,8 +1,8 @@
-# Seven reviewed source packages, one selected delivery
+# Eight reviewed source packages, one selected delivery
 
 Assembly issue: https://github.com/ChengshuLi/WorldAtlas/issues/2362.
 
-The stock composer receives twelve literal reviewed authority quartets: Russia, Angola, Japan, six Canada quartets, UK, Philippines, and USA. Original source manifests and ancestry remain intact. Source-sidecar files are not rewritten for gzip transport.
+The stock composer receives thirteen literal reviewed authority quartets: Russia, Angola, Japan, six Canada quartets, UK, Philippines, USA, and New Zealand. Original source manifests and ancestry remain intact. Source-sidecar files are not rewritten for gzip transport.
 
 ## Original scope and limits
 
@@ -16,14 +16,16 @@ The stock composer receives twelve literal reviewed authority quartets: Russia, 
 
 - USA: 351 subjects; 107,131 original cells; 105,927 supported; 1,204 held, including six wholly held owners. The 604-key Maine physical hold remains conservative and unmeasured; original source and historical obligations remain.
 
-Together: 2,452 original subjects, 3,575,016 original cells, 3,534,320 supported and 40,696 held. The previously accepted 2,209,586 cells are preserved for a proposed cumulative 5,743,906. These were already active source packages; assembly does not alter the overall original denominator. Only Japan may complete after actual delivery acceptance.
+- New Zealand: 70 subjects; all 56,626 original cells supported; zero native holds. Its 22 role corrections, selected semantic follow-up, prior source issues and separate 20,477-cell physical companion remain unresolved/uncredited as applicable.
+
+Together: 2,522 original subjects, 3,631,642 original cells, 3,590,946 supported and 40,696 held. The previously accepted 2,209,586 cells are preserved for a proposed cumulative 5,800,532. These were already active source packages; assembly does not alter the overall original denominator. Japan and New Zealand are eligible for complete original source-relative cell delivery only after actual selected/native/emitted acceptance. New Zealand semantic and prior source issues remain open.
 
 ## Evidence boundaries
 
-`config/compose-seven.json` is the exact twelve-quartet stock composition input. `scripts/check-seven-conservation.py` compares original frozen intervals with their reviewed supported subsets, derives exact held complements, checks existing explicit held rows, and proves disjointness and complete prior ledger/authority/hold preservation. It does not rerun source or physical geometry. Reads authenticate immutable tree mode, object identity, exact byte length and hash. Measured memory is not a hard RSS bound.
+`config/compose-eight.json` is the exact thirteen-quartet stock composition input. `scripts/check-eight-conservation.py` compares original frozen intervals with their reviewed supported subsets, derives exact held complements, checks existing explicit held rows, and proves disjointness and complete prior ledger/authority/hold preservation. It does not rerun source or physical geometry. Reads authenticate immutable tree mode, object identity, exact byte length and hash. Measured memory is not a hard RSS bound.
 
-`config/compose.json`, `composition-001/` and `verification/combined-conservation.json` preserve the frozen five-package work. `composition-002/` and `verification/six-conservation-final.json` are the separate six-package composition and interval proof, with their distinct candidate pins. `composition-003/` and `verification/seven-conservation-final.json` add the seventh package while preserving both earlier proofs. The packet directory retains its original five-package name as a stable historical path. The final selected delivery expectations contain every assigned and zero-cell ledger member. Source-side expectation validation is not an emitted consumer test.
+`config/compose.json`, `composition-001/` and `verification/combined-conservation.json` preserve the frozen five-package work. `composition-002/` and `verification/six-conservation-final.json` are the separate six-package composition and interval proof, with their distinct candidate pins. `composition-003/` and `verification/seven-conservation-final.json` add the seventh package while preserving both earlier proofs. `composition-004/` and `verification/eight-conservation-final.json` add New Zealand while preserving the earlier compositions and proofs. The packet directory retains its original five-package name as a stable historical path. The final selected delivery expectations contain every assigned and zero-cell ledger member. Source-side expectation validation is not an emitted consumer test.
 
-The full seven-package emitted asset/GPU/Canvas smoke, actual current-owner-zero qualification and a distinct exact-head review remain mandatory before root-controlled queue acceptance. The old three-package PR #2342 and earlier failed #2325, their heads and logs remain unchanged. Neither old smoke nor prepared work establishes this delivery. Engineering changes are accepted separately before finalization; this packet does not introduce unaccepted implementation changes.
+The full eight-package emitted asset/GPU/Canvas smoke, actual current-owner-zero qualification and a distinct exact-head review remain mandatory before root-controlled queue acceptance. The old three-package PR #2342 and earlier failed #2325, their heads and logs remain unchanged. Neither old smoke nor prepared work establishes this delivery. Engineering changes are accepted separately before finalization; this packet does not introduce unaccepted implementation changes.
 
 No production publication, regional approval, contemporary legal jurisdiction certification or historical import is implied.
