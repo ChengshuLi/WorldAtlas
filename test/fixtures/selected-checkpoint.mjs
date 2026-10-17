@@ -268,7 +268,7 @@ export async function referenceCheckpointFixture(t) {
  const certificate=neighbors.joinSelectedCoordinateCertificate(resolver,[neighbors.selectedCoordinateShard(resolver,resolver.paths)]);
  const execution_code=CODE.map(name=>f.pin(name,selected)),runtime=[{path:process.execPath,bytes:fs.statSync(process.execPath).size,sha256:'f'.repeat(64)}];
  const facts={version:1,kind:'trusted-selected-coordinate-stage-v1',candidate_code_executed:false,selected_commit:selected,executing_commit:selected,
-  execution_code,runtime,binding:certificate.binding,complete_owners:features.length,complete_sources:1};
+  execution_code,runtime,binding:certificate.binding,complete_owners:certificate.entries.length,complete_sources:1};
  const compressed=gzipSync(valueBytes(certificate)),certificatePin=put('accepted/certificate.json.gz',compressed),factsPin=put('accepted/facts.json',facts);
  const output={version:1,kind:facts.kind,complete:true,facts:{path:'facts.json',bytes:factsPin.bytes,sha256:factsPin.sha256},
   certificate:{path:'certificate.json.gz',bytes:compressed.length,sha256:sha(compressed),decoded_bytes:valueBytes(certificate).length,decoded_sha256:valueSha(certificate)}};
