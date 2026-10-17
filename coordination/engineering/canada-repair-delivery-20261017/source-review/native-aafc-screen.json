@@ -1,0 +1,1485 @@
+{
+  "kind": "complete-AAFC-native-predicate-screening",
+  "baseline": "c4ffca9ba743f68c877fd8542698b28804cf07cf",
+  "method": {
+    "path": "src/native-grid.js",
+    "sha256": "fab520ead243d13efb9231fd8b15c567554274d343c3746dd5be06fb25ff20ee"
+  },
+  "source": {
+    "path": "data/regional-review/regional-review-a9f03b364bdefa4a/sources/aafc-baseline-arcgis-layer0.geojson",
+    "bytes": 12241679,
+    "sha256": "30e5e2fc80df6624ecc10d2a6714cf88339fad88e5a8577e41f9fb26e2c4a992",
+    "features": 218
+  },
+  "latitudes": {
+    "root": "repository",
+    "role": "immutable-normative-rule-input",
+    "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+    "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+    "bytes": 1851757,
+    "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+    "decoded_bytes": 2097328,
+    "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+  },
+  "scope": "All 144097 original physical-target repair candidates, all complete AAFC baseline source features as competitors, existing native even-odd predicate",
+  "totals": {
+    "all": 144097,
+    "intended_unique": 144049,
+    "outside_intended": 48,
+    "other_ecoregion": 37,
+    "no_ecoregion": 11,
+    "requested_boundary_ties": 0
+  },
+  "complete_source_boundary_ties": 0,
+  "targets": [
+    {
+      "index": 5760,
+      "id": "atlas:multipart:31ba3f8cfe5dec603858",
+      "ecoregion_id": 117,
+      "counts": {
+        "all": 237,
+        "intended_unique": 237,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 5780,
+      "id": "atlas:multipart:b584f34f0420c6386763",
+      "ecoregion_id": 75,
+      "counts": {
+        "all": 450,
+        "intended_unique": 450,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 5797,
+      "id": "atlas:multipart:eb54b54f2e8cdb87e6b1",
+      "ecoregion_id": 76,
+      "counts": {
+        "all": 3112,
+        "intended_unique": 3112,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6612,
+      "id": "atlas:physical:CAN-101:QUE",
+      "ecoregion_id": 101,
+      "counts": {
+        "all": 937,
+        "intended_unique": 937,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6613,
+      "id": "atlas:physical:CAN-102:QUE",
+      "ecoregion_id": 102,
+      "counts": {
+        "all": 1782,
+        "intended_unique": 1782,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6614,
+      "id": "atlas:physical:CAN-103:LAB",
+      "ecoregion_id": 103,
+      "counts": {
+        "all": 92,
+        "intended_unique": 92,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6615,
+      "id": "atlas:physical:CAN-103:QUE",
+      "ecoregion_id": 103,
+      "counts": {
+        "all": 19947,
+        "intended_unique": 19947,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6616,
+      "id": "atlas:physical:CAN-104:LAB",
+      "ecoregion_id": 104,
+      "counts": {
+        "all": 262,
+        "intended_unique": 262,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6617,
+      "id": "atlas:physical:CAN-105:LAB",
+      "ecoregion_id": 105,
+      "counts": {
+        "all": 35,
+        "intended_unique": 35,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6618,
+      "id": "atlas:physical:CAN-106:NFL",
+      "ecoregion_id": 106,
+      "counts": {
+        "all": 1358,
+        "intended_unique": 1358,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6619,
+      "id": "atlas:physical:CAN-107:NFL",
+      "ecoregion_id": 107,
+      "counts": {
+        "all": 2103,
+        "intended_unique": 2103,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6621,
+      "id": "atlas:physical:CAN-109:NFL",
+      "ecoregion_id": 109,
+      "counts": {
+        "all": 4016,
+        "intended_unique": 4016,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6624,
+      "id": "atlas:physical:CAN-112:NFL",
+      "ecoregion_id": 112,
+      "counts": {
+        "all": 1358,
+        "intended_unique": 1351,
+        "outside_intended": 7,
+        "other_ecoregion": 7,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6625,
+      "id": "atlas:physical:CAN-113:NFL",
+      "ecoregion_id": 113,
+      "counts": {
+        "all": 9734,
+        "intended_unique": 9734,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6626,
+      "id": "atlas:physical:CAN-114:NFL",
+      "ecoregion_id": 114,
+      "counts": {
+        "all": 23159,
+        "intended_unique": 23159,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6628,
+      "id": "atlas:physical:CAN-116:NFL",
+      "ecoregion_id": 116,
+      "counts": {
+        "all": 724,
+        "intended_unique": 724,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6630,
+      "id": "atlas:physical:CAN-118:QUE",
+      "ecoregion_id": 118,
+      "counts": {
+        "all": 23,
+        "intended_unique": 23,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6631,
+      "id": "atlas:physical:CAN-12:NUN",
+      "ecoregion_id": 12,
+      "counts": {
+        "all": 2058,
+        "intended_unique": 2058,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6634,
+      "id": "atlas:physical:CAN-122:NBR",
+      "ecoregion_id": 122,
+      "counts": {
+        "all": 159,
+        "intended_unique": 159,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6635,
+      "id": "atlas:physical:CAN-122:NSC",
+      "ecoregion_id": 122,
+      "counts": {
+        "all": 41,
+        "intended_unique": 41,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6636,
+      "id": "atlas:physical:CAN-123:NBR",
+      "ecoregion_id": 123,
+      "counts": {
+        "all": 445,
+        "intended_unique": 445,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6640,
+      "id": "atlas:physical:CAN-13:NUN",
+      "ecoregion_id": 13,
+      "counts": {
+        "all": 1238,
+        "intended_unique": 1238,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6641,
+      "id": "atlas:physical:CAN-130:PEI",
+      "ecoregion_id": 130,
+      "counts": {
+        "all": 636,
+        "intended_unique": 636,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6642,
+      "id": "atlas:physical:CAN-131:QUE",
+      "ecoregion_id": 131,
+      "counts": {
+        "all": 2310,
+        "intended_unique": 2300,
+        "outside_intended": 10,
+        "other_ecoregion": 0,
+        "no_ecoregion": 10,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6643,
+      "id": "atlas:physical:CAN-132:ONT",
+      "ecoregion_id": 132,
+      "counts": {
+        "all": 290,
+        "intended_unique": 290,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6644,
+      "id": "atlas:physical:CAN-132:QUE",
+      "ecoregion_id": 132,
+      "counts": {
+        "all": 2415,
+        "intended_unique": 2415,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6645,
+      "id": "atlas:physical:CAN-134:ONT",
+      "ecoregion_id": 134,
+      "counts": {
+        "all": 744,
+        "intended_unique": 744,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6670,
+      "id": "atlas:physical:CAN-156:MAN",
+      "ecoregion_id": 156,
+      "counts": {
+        "all": 417,
+        "intended_unique": 417,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6671,
+      "id": "atlas:physical:CAN-156:SAS",
+      "ecoregion_id": 156,
+      "counts": {
+        "all": 196,
+        "intended_unique": 196,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6673,
+      "id": "atlas:physical:CAN-157:SAS",
+      "ecoregion_id": 157,
+      "counts": {
+        "all": 212,
+        "intended_unique": 212,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6676,
+      "id": "atlas:physical:CAN-159:SAS",
+      "ecoregion_id": 159,
+      "counts": {
+        "all": 472,
+        "intended_unique": 472,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6677,
+      "id": "atlas:physical:CAN-16:NUN",
+      "ecoregion_id": 16,
+      "counts": {
+        "all": 887,
+        "intended_unique": 887,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6678,
+      "id": "atlas:physical:CAN-16:NWT",
+      "ecoregion_id": 16,
+      "counts": {
+        "all": 2581,
+        "intended_unique": 2581,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6707,
+      "id": "atlas:physical:CAN-18:NUN",
+      "ecoregion_id": 18,
+      "counts": {
+        "all": 430,
+        "intended_unique": 430,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6718,
+      "id": "atlas:physical:CAN-185:BRC",
+      "ecoregion_id": 185,
+      "counts": {
+        "all": 15,
+        "intended_unique": 14,
+        "outside_intended": 1,
+        "other_ecoregion": 0,
+        "no_ecoregion": 1,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6722,
+      "id": "atlas:physical:CAN-191:BRC",
+      "ecoregion_id": 191,
+      "counts": {
+        "all": 601,
+        "intended_unique": 601,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6723,
+      "id": "atlas:physical:CAN-192:BRC",
+      "ecoregion_id": 192,
+      "counts": {
+        "all": 39,
+        "intended_unique": 39,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6724,
+      "id": "atlas:physical:CAN-193:BRC",
+      "ecoregion_id": 193,
+      "counts": {
+        "all": 369,
+        "intended_unique": 369,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6725,
+      "id": "atlas:physical:CAN-194:BRC",
+      "ecoregion_id": 194,
+      "counts": {
+        "all": 56,
+        "intended_unique": 56,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6743,
+      "id": "atlas:physical:CAN-21:NUN",
+      "ecoregion_id": 21,
+      "counts": {
+        "all": 236,
+        "intended_unique": 236,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6744,
+      "id": "atlas:physical:CAN-213:BRC",
+      "ecoregion_id": 213,
+      "counts": {
+        "all": 58,
+        "intended_unique": 58,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6745,
+      "id": "atlas:physical:CAN-214:ABT",
+      "ecoregion_id": 214,
+      "counts": {
+        "all": 11,
+        "intended_unique": 11,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6747,
+      "id": "atlas:physical:CAN-215:MAN",
+      "ecoregion_id": 215,
+      "counts": {
+        "all": 8,
+        "intended_unique": 8,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6752,
+      "id": "atlas:physical:CAN-217:ONT",
+      "ecoregion_id": 217,
+      "counts": {
+        "all": 120,
+        "intended_unique": 120,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6753,
+      "id": "atlas:physical:CAN-217:QUE",
+      "ecoregion_id": 217,
+      "counts": {
+        "all": 128,
+        "intended_unique": 128,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6754,
+      "id": "atlas:physical:CAN-22:NUN",
+      "ecoregion_id": 22,
+      "counts": {
+        "all": 1723,
+        "intended_unique": 1723,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6757,
+      "id": "atlas:physical:CAN-25:NUN",
+      "ecoregion_id": 25,
+      "counts": {
+        "all": 3061,
+        "intended_unique": 3061,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6760,
+      "id": "atlas:physical:CAN-28:NUN",
+      "ecoregion_id": 28,
+      "counts": {
+        "all": 979,
+        "intended_unique": 979,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6762,
+      "id": "atlas:physical:CAN-30:NUN",
+      "ecoregion_id": 30,
+      "counts": {
+        "all": 3177,
+        "intended_unique": 3177,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6764,
+      "id": "atlas:physical:CAN-31:QUE",
+      "ecoregion_id": 31,
+      "counts": {
+        "all": 2658,
+        "intended_unique": 2658,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6767,
+      "id": "atlas:physical:CAN-33:NWT",
+      "ecoregion_id": 33,
+      "counts": {
+        "all": 954,
+        "intended_unique": 954,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6770,
+      "id": "atlas:physical:CAN-35:NWT",
+      "ecoregion_id": 35,
+      "counts": {
+        "all": 189,
+        "intended_unique": 189,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6771,
+      "id": "atlas:physical:CAN-36:NUN",
+      "ecoregion_id": 36,
+      "counts": {
+        "all": 2902,
+        "intended_unique": 2902,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6775,
+      "id": "atlas:physical:CAN-38:NUN",
+      "ecoregion_id": 38,
+      "counts": {
+        "all": 406,
+        "intended_unique": 406,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6776,
+      "id": "atlas:physical:CAN-39:NUN",
+      "ecoregion_id": 39,
+      "counts": {
+        "all": 1133,
+        "intended_unique": 1133,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6787,
+      "id": "atlas:physical:CAN-45:NUN",
+      "ecoregion_id": 45,
+      "counts": {
+        "all": 7427,
+        "intended_unique": 7427,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6788,
+      "id": "atlas:physical:CAN-46:NUN",
+      "ecoregion_id": 46,
+      "counts": {
+        "all": 225,
+        "intended_unique": 225,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6790,
+      "id": "atlas:physical:CAN-47:QUE",
+      "ecoregion_id": 47,
+      "counts": {
+        "all": 5707,
+        "intended_unique": 5707,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6792,
+      "id": "atlas:physical:CAN-49:NUN",
+      "ecoregion_id": 49,
+      "counts": {
+        "all": 2285,
+        "intended_unique": 2285,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6793,
+      "id": "atlas:physical:CAN-5:NUN",
+      "ecoregion_id": 5,
+      "counts": {
+        "all": 659,
+        "intended_unique": 659,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6807,
+      "id": "atlas:physical:CAN-6:NUN",
+      "ecoregion_id": 6,
+      "counts": {
+        "all": 600,
+        "intended_unique": 600,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6837,
+      "id": "atlas:physical:CAN-72:QUE",
+      "ecoregion_id": 72,
+      "counts": {
+        "all": 4159,
+        "intended_unique": 4159,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6843,
+      "id": "atlas:physical:CAN-77:LAB",
+      "ecoregion_id": 77,
+      "counts": {
+        "all": 28,
+        "intended_unique": 28,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6845,
+      "id": "atlas:physical:CAN-78:LAB",
+      "ecoregion_id": 78,
+      "counts": {
+        "all": 3,
+        "intended_unique": 3,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6847,
+      "id": "atlas:physical:CAN-79:LAB",
+      "ecoregion_id": 79,
+      "counts": {
+        "all": 881,
+        "intended_unique": 881,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6863,
+      "id": "atlas:physical:CAN-91:MAN",
+      "ecoregion_id": 91,
+      "counts": {
+        "all": 85,
+        "intended_unique": 85,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6864,
+      "id": "atlas:physical:CAN-91:ONT",
+      "ecoregion_id": 91,
+      "counts": {
+        "all": 4410,
+        "intended_unique": 4410,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6866,
+      "id": "atlas:physical:CAN-93:ONT",
+      "ecoregion_id": 93,
+      "counts": {
+        "all": 2692,
+        "intended_unique": 2692,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6867,
+      "id": "atlas:physical:CAN-94:ONT",
+      "ecoregion_id": 94,
+      "counts": {
+        "all": 1893,
+        "intended_unique": 1893,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6869,
+      "id": "atlas:physical:CAN-96:ONT",
+      "ecoregion_id": 96,
+      "counts": {
+        "all": 3,
+        "intended_unique": 3,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6871,
+      "id": "atlas:physical:CAN-97:ONT",
+      "ecoregion_id": 97,
+      "counts": {
+        "all": 431,
+        "intended_unique": 431,
+        "outside_intended": 0,
+        "other_ecoregion": 0,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    },
+    {
+      "index": 6872,
+      "id": "atlas:physical:CAN-98:ONT",
+      "ecoregion_id": 98,
+      "counts": {
+        "all": 8926,
+        "intended_unique": 8896,
+        "outside_intended": 30,
+        "other_ecoregion": 30,
+        "no_ecoregion": 0,
+        "requested_boundary_ties": 0
+      }
+    }
+  ],
+  "held": [
+    {
+      "y": 81655,
+      "x": 36407,
+      "owner": 6718,
+      "ecoregion_id": 185,
+      "matched_ecoregions": [],
+      "physical_class": "land",
+      "boundary_tie": false
+    },
+    {
+      "y": 89642,
+      "x": 91008,
+      "owner": 6624,
+      "ecoregion_id": 112,
+      "matched_ecoregions": [
+        113
+      ],
+      "physical_class": "land",
+      "boundary_tie": false
+    },
+    {
+      "y": 89642,
+      "x": 91009,
+      "owner": 6624,
+      "ecoregion_id": 112,
+      "matched_ecoregions": [
+        113
+      ],
+      "physical_class": "land",
+      "boundary_tie": false
+    },
+    {
+      "y": 89643,
+      "x": 91007,
+      "owner": 6624,
+      "ecoregion_id": 112,
+      "matched_ecoregions": [
+        113
+      ],
+      "physical_class": "land",
+      "boundary_tie": false
+    },
+    {
+      "y": 89643,
+      "x": 91008,
+      "owner": 6624,
+      "ecoregion_id": 112,
+      "matched_ecoregions": [
+        113
+      ],
+      "physical_class": "land",
+      "boundary_tie": false
+    },
+    {
+      "y": 89643,
+      "x": 91009,
+      "owner": 6624,
+      "ecoregion_id": 112,
+      "matched_ecoregions": [
+        113
+      ],
+      "physical_class": "land",
+      "boundary_tie": false
+    },
+    {
+      "y": 89644,
+      "x": 91008,
+      "owner": 6624,
+      "ecoregion_id": 112,
+      "matched_ecoregions": [
+        113
+      ],
+      "physical_class": "land",
+      "boundary_tie": false
+    },
+    {
+      "y": 89644,
+      "x": 91009,
+      "owner": 6624,
+      "ecoregion_id": 112,
+      "matched_ecoregions": [
+        113
+      ],
+      "physical_class": "land",
+      "boundary_tie": false
+    },
+    {
+      "y": 91307,
+      "x": 86554,
+      "owner": 6642,
+      "ecoregion_id": 131,
+      "matched_ecoregions": [],
+      "physical_class": "land",
+      "boundary_tie": false
+    },
+    {
+      "y": 91307,
+      "x": 86555,
+      "owner": 6642,
+      "ecoregion_id": 131,
+      "matched_ecoregions": [],
+      "physical_class": "land",
+      "boundary_tie": false
+    },
+    {
+      "y": 91307,
+      "x": 86556,
+      "owner": 6642,
+      "ecoregion_id": 131,
+      "matched_ecoregions": [],
+      "physical_class": "land",
+      "boundary_tie": false
+    },
+    {
+      "y": 91308,
+      "x": 86553,
+      "owner": 6642,
+      "ecoregion_id": 131,
+      "matched_ecoregions": [],
+      "physical_class": "land",
+      "boundary_tie": false
+    },
+    {
+      "y": 91308,
+      "x": 86554,
+      "owner": 6642,
+      "ecoregion_id": 131,
+      "matched_ecoregions": [],
+      "physical_class": "land",
+      "boundary_tie": false
+    },
+    {
+      "y": 91308,
+      "x": 86555,
+      "owner": 6642,
+      "ecoregion_id": 131,
+      "matched_ecoregions": [],
+      "physical_class": "land",
+      "boundary_tie": false
+    },
+    {
+      "y": 91308,
+      "x": 86556,
+      "owner": 6642,
+      "ecoregion_id": 131,
+      "matched_ecoregions": [],
+      "physical_class": "land",
+      "boundary_tie": false
+    },
+    {
+      "y": 91309,
+      "x": 86553,
+      "owner": 6642,
+      "ecoregion_id": 131,
+      "matched_ecoregions": [],
+      "physical_class": "land",
+      "boundary_tie": false
+    },
+    {
+      "y": 91309,
+      "x": 86554,
+      "owner": 6642,
+      "ecoregion_id": 131,
+      "matched_ecoregions": [],
+      "physical_class": "land",
+      "boundary_tie": false
+    },
+    {
+      "y": 91309,
+      "x": 86555,
+      "owner": 6642,
+      "ecoregion_id": 131,
+      "matched_ecoregions": [],
+      "physical_class": "land",
+      "boundary_tie": false
+    },
+    {
+      "y": 93128,
+      "x": 70384,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93128,
+      "x": 70385,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93129,
+      "x": 70384,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93129,
+      "x": 70385,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93129,
+      "x": 70386,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93129,
+      "x": 70387,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93129,
+      "x": 70388,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93130,
+      "x": 70385,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93130,
+      "x": 70386,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93130,
+      "x": 70387,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93130,
+      "x": 70388,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93130,
+      "x": 70389,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93130,
+      "x": 70390,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93130,
+      "x": 70391,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93131,
+      "x": 70385,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93131,
+      "x": 70386,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93131,
+      "x": 70387,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93131,
+      "x": 70388,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93131,
+      "x": 70389,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93131,
+      "x": 70390,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93131,
+      "x": 70391,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93132,
+      "x": 70386,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93132,
+      "x": 70387,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93132,
+      "x": 70388,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93132,
+      "x": 70389,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93132,
+      "x": 70390,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93133,
+      "x": 70387,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93133,
+      "x": 70388,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93133,
+      "x": 70389,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    },
+    {
+      "y": 93133,
+      "x": 70390,
+      "owner": 6872,
+      "ecoregion_id": 98,
+      "matched_ecoregions": [
+        134
+      ],
+      "physical_class": "inland-water",
+      "boundary_tie": false
+    }
+  ],
+  "requested_ties": [],
+  "limits": [
+    "Exact source predicate screening; does not establish GSHHG physical qualification, source applicability adoption, owner-zero, authority or selected-output acceptance.",
+    "Retained AAFC baseline source is not a new authoritative territorial clipping approval. Historical #887/#607/#609 obligations remain."
+  ]
+}
