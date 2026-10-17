@@ -1,0 +1,39 @@
+{
+  "original_source": {
+    "advertised_feature_count": 365,
+    "cohort": "administrative-registry",
+    "feature_count": 365,
+    "key": "gb:EGY:ADM2",
+    "metadata_sha256": "c86ac1bd3b7b5e905e2972579335f425a5d92b528be37882018134ec2a24be20",
+    "original_bytes": 1379010,
+    "original_metadata_file": "data/administrative-sources.json",
+    "original_sha256": "abd2e419ce95e1cdd46bb18025a4eccfa6f877956494a56da3ebed4bc6a153d9",
+    "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+    "parts": [
+      {
+        "bytes": 420055,
+        "hash_kind": "file-bytes",
+        "offset": 0,
+        "ordinal": 0,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-EGY-ADM2-000.bin.gz",
+        "sha256": "d38309a6d01706293d25a6a361ea99e447a5a0a2361762e8c4c8f0e3259dbaec",
+        "uncompressed_bytes": 1379010,
+        "uncompressed_sha256": "abd2e419ce95e1cdd46bb18025a4eccfa6f877956494a56da3ebed4bc6a153d9"
+      }
+    ],
+    "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/EGY/ADM2/geoBoundaries-EGY-ADM2_simplified.geojson",
+    "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "source_represented_year_claim": "2020"
+  },
+  "complete_feature_count": 365,
+  "complete_consumed_atom_count": 231,
+  "unmatched_atoms": [],
+  "source_body_root_keys": [
+    "type",
+    "crs",
+    "features"
+  ],
+  "geometry_predicates_executed": false,
+  "source_producer_executed": false,
+  "limits": "Identity/source-body screen only; this does not qualify geometry, physical class, ancestry transformation or present-day territory."
+}
