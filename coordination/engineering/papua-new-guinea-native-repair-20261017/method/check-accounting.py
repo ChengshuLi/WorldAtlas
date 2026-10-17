@@ -29,7 +29,7 @@ frozen=[]
 for b in range(32,35):frozen+=read(P+f'/frozen-queue/block-{b:03}.json.gz')
 original={(x,y,o[0]):kind for y,a,z,o,s,kind in frozen for x in range(a,z)};assert len(original)==56552==sum(z-a for y,a,z,*_ in frozen) and len(frozen)==20060
 scope=read(P+'/source-stage/source-scope-assessment.json');context=read(P+'/context-001/complete-context.json');historical=read(P+'/historical-001/historical-applicability.json');prior=read(P+'/prior-001/prior-melanesia-applicability.json');partition=read(P+'/qualified-native-inputs-002/original-scope-partition.json');interpretation=read(P+'/interpretation-001/construction-and-source-limits.json')
-diag=read(P+'/native-diagnostic-001/native-diagnostic.json');support=keys(diag['supported_rows']);dh=keys(diag['held_rows'],True);requested=keys(diag['requested_rows']);assert set(requested)==set(original) and not(set(support)&set(dh)) and set(support)|set(dh)==set(requested)
+diag=read(P+'/native-diagnostic-001/native-diagnostic.json');support=keys(diag['supported_rows']);dh={k:r for k,r in keys(diag['decision_rows'],True).items() if r!='assigned_cells'};assert set(dh)==set(keys(diag['held_rows']));requested=keys(diag['requested_rows']);assert set(requested)==set(original) and not(set(support)&set(dh)) and set(support)|set(dh)==set(requested)
 diagnostic_support=set(support)
 review=read(P+'/qualified-native-inputs-002/prior-source-fitness-holds.json');review_keys={tuple(k) for k in review['original_keys']}
 prior_keys={tuple(k) for r in prior['component_rows'] for k in r['provisional_source_fitness_hold_keys']};assert review_keys==prior_keys and len(review_keys)==prior['source_fitness_hold_cells']
