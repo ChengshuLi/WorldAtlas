@@ -194,6 +194,18 @@ test('reviewed lists cannot omit actual packaged consumers when package source c
   }
 });
 
+test('minimal reviewed package consumer derives real inputs without a changed package file',()=>{
+ const f=controlFixture({withContractBoundary:true});
+ const required='test/prepared-parity.test.mjs';
+ const entries=new Map([...f.integrated,{path:required,sha:sha('e'),type:'blob',mode:'100644'}].map(row=>[row.path,row]));
+ const context={base:f.base,head:f.head,entries,files:[],definition:f.packageInputs};
+ const packagePlan=reviewedTestPlan({base:f.base,head:f.head,files:[required]},context);
+ assert.equal(packagePlan.build,true);assert.deepEqual(packagePlan.files,[required]);
+ for(const name of f.packageInputs.inputs)assert(packagePlan.checkout_patterns.includes('/'+name));
+ const unitPlan=reviewedTestPlan({base:f.base,head:f.head,files:['test/merge-integration.test.mjs']},context);
+ assert.equal(unitPlan.build,false);assert.deepEqual(unitPlan.inputs,[...EXECUTION_CODE]);
+});
+
 test('full preparation rejects unavailable or malformed package roles and cleans its candidate',async()=>{
   for(const kind of ['missing','malformed','wrong-bytes']){
     const f=fixture(),api=f.api;

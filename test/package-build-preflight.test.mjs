@@ -4,8 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
-import {inspectPackageInputs, inspectPackageRuntime, inspectPackageExecutionInputs, preflightPackageBuild, requirePackagePreflight} from '../scripts/package-build.mjs';
-import {loadPackageInputs, containsPackagePath} from '../scripts/package-inputs.mjs';
+import {inspectPackageInputs, inspectPackageRuntime, preflightPackageBuild, requirePackagePreflight} from '../scripts/package-build.mjs';
 import {runPackageBuild} from '../scripts/package-build.mjs';
 
 function fixture(t) {
@@ -100,28 +99,10 @@ test('ordinary build always runs real preflight before creating its image', asyn
   assert.equal(launched, false); assert.equal(fs.existsSync(path.join(f.root, '.cache')), false);
 });
 
-test('actual current package import closure rejects an undeclared new helper before image creation', () => {
-  const root = process.cwd(), definition = loadPackageInputs(root);
-  const actual = inspectPackageExecutionInputs(root, definition);
-  assert.equal(actual.errors.length, 0, JSON.stringify(actual.errors));
-  assert(actual.files.includes('scripts/package-build.mjs'));
-  const missing = inspectPackageExecutionInputs(root, {...definition, inputs: definition.inputs.filter(x => x !== 'scripts/package-inputs.mjs')});
-  assert(missing.errors.some(x => x.kind === 'execution-declaration' && x.path === 'scripts/package-inputs.mjs'));
-});
 
 
-test('all actual package entries expose their complete declared current import closures',()=>{
- const root=process.cwd(),definition=loadPackageInputs(root);
- for(const kind of ['static','hosted','cloudflare']){
-  const actual=inspectPackageExecutionInputs(root,definition,kind),entry=`scripts/build-${kind}-inner.mjs`;
-  assert.deepEqual(actual.errors,[]);
-  assert(actual.files.includes(entry));assert(actual.files.includes('scripts/package-build.mjs'));
-  assert(actual.files.includes('scripts/package-current-additive.mjs'));
-  assert(!actual.files.includes('scripts/native-ownership/validate-build-context-stage.mjs'));
-  assert.deepEqual(actual.files,[...new Set(actual.files)].sort());
-  for(const name of actual.files)assert(containsPackagePath(definition.inputs,name),name);
- }
-});
+
+
 
 test('ambient Node injection is refused during runtime preflight',t=>{
  const f=fixture(t),before=process.env.NODE_OPTIONS;

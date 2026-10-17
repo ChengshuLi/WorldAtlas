@@ -158,3 +158,98 @@ test('default-map static and server exports preserve complete state and attribut
   }
  }finally{db.close();}
 });
+
+// These controls consume the actual package's current import closure. Keep them
+// in the existing packaged-asset boundary so even a minimal reviewed roster
+// derives its real inputs from the package definition and retains the build.
+import os from 'node:os';
+import {inspectPackageExecutionInputs} from '../scripts/package-build.mjs';
+import {loadPackageInputs, containsPackagePath} from '../scripts/package-inputs.mjs';
+import {currentExecutionClosure} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs';
+const ROOT=process.cwd();
+const COLD='scripts/check-effective-geographic-regression.mjs';
+const NATIVE='scripts/selected-checkpoint-native.mjs';
+const SHARED='coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
+test('focused comparison and checkpoint methods stay outside each actual builder execution closure',()=>{
+  const prefix='coordination/engineering/selected-geography-effective-prevention-20261009/';
+  const methods=['scripts/check-effective-geographic-regression.mjs','scripts/selected-checkpoint-native.mjs', 'scripts/run-geographic-check.py',
+    prefix+'selected-checkpoint.mjs',prefix+'selected-joint-entry.mjs','test/fixtures/selected-checkpoint.mjs'];
+  for(const entry of ['scripts/build-static-inner.mjs','scripts/build-hosted-inner.mjs','scripts/build-cloudflare-inner.mjs']) {
+    const closure=currentExecutionClosure(process.cwd(),entry);
+    for(const method of methods)assert(!closure.includes(method),entry+' now executes '+method);
+  }
+});
+
+test('actual current package import closure rejects an undeclared new helper before image creation', () => {
+  const root = process.cwd(), definition = loadPackageInputs(root);
+  const actual = inspectPackageExecutionInputs(root, definition);
+  assert.equal(actual.errors.length, 0, JSON.stringify(actual.errors));
+  assert(actual.files.includes('scripts/package-build.mjs'));
+  const missing = inspectPackageExecutionInputs(root, {...definition, inputs: definition.inputs.filter(x => x !== 'scripts/package-inputs.mjs')});
+  assert(missing.errors.some(x => x.kind === 'execution-declaration' && x.path === 'scripts/package-inputs.mjs'));
+});
+
+test('all actual package entries expose their complete declared current import closures',()=>{
+ const root=process.cwd(),definition=loadPackageInputs(root);
+ for(const kind of ['static','hosted','cloudflare']){
+  const actual=inspectPackageExecutionInputs(root,definition,kind),entry=`scripts/build-${kind}-inner.mjs`;
+  assert.deepEqual(actual.errors,[]);
+  assert(actual.files.includes(entry));assert(actual.files.includes('scripts/package-build.mjs'));
+  assert(actual.files.includes('scripts/package-current-additive.mjs'));
+  assert(!actual.files.includes('scripts/native-ownership/validate-build-context-stage.mjs'));
+  assert.deepEqual(actual.files,[...new Set(actual.files)].sort());
+  for(const name of actual.files)assert(containsPackagePath(definition.inputs,name),name);
+ }
+});
+
+test('all ordinary package entries declare their complete current consumer closure',()=>{
+ const definition=loadPackageInputs(ROOT);
+ for(const kind of ['static','hosted','cloudflare']){
+  const actual=inspectPackageExecutionInputs(ROOT,definition,kind);
+  assert.deepEqual(actual.errors,[]);
+  assert(actual.files.includes('scripts/package-current-additive.mjs'));
+  assert(actual.files.includes('src/native-grid.js'));
+  for(const name of [COLD,NATIVE,SHARED,'scripts/visible-gap-eligibility.mjs','scripts/native-ownership/validate-build-context-stage.mjs'])assert(!actual.files.includes(name),name);
+  assert(actual.files.includes(`scripts/build-${kind}-inner.mjs`));
+  assert.deepEqual(actual.files,[...new Set(actual.files)].sort());
+  for(const name of actual.files)assert(containsPackagePath(definition.inputs,name),name);
+ }
+});
+
+test('an undeclared import in the actual current consumer fails current-input preflight',t=>{
+ const definition=loadPackageInputs(ROOT), actual=inspectPackageExecutionInputs(ROOT,definition,'static');
+ assert.deepEqual(actual.errors,[]);
+ const root=fs.mkdtempSync(path.join(ROOT,'.joint-package-boundary-'));
+ t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+ for(const name of actual.files){const target=path.join(root,name);fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(path.join(ROOT,name),target,fs.constants.COPYFILE_EXCL);}
+ const undeclared='coordination/undeclared-acceptance-probe.mjs';
+ fs.mkdirSync(path.dirname(path.join(root,undeclared)),{recursive:true});
+ fs.writeFileSync(path.join(root,undeclared),'export const current = true;\n',{flag:'wx'});
+ fs.appendFileSync(path.join(root,'scripts/package-current-additive.mjs'),"\nawait import('../"+undeclared+"');\n");
+ const rejected=inspectPackageExecutionInputs(root,definition,'static');
+ assert(rejected.files.includes(undeclared));
+ assert(rejected.errors.some(e=>e.kind==='execution-declaration'&&e.path===undeclared));
+});
+
+test('shared selected-input admission covers actual builders and refuses undeclared imports',t=>{
+  const root=fs.realpathSync(process.cwd()),definition=loadPackageInputs(root),files=new Set();
+  for(const kind of ['static','hosted','cloudflare']){
+    const actual=inspectPackageExecutionInputs(root,definition,kind);
+    assert.deepEqual(actual.errors,[],'Actual '+kind+' preflight must include its complete current import closure');
+    assert(!actual.files.includes('scripts/package-output-artifact.mjs'));
+    for(const name of actual.files)files.add(name);
+  }
+  const fixture=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'atlas-output-role-closure-')));
+  t.after(()=>fs.rmSync(fixture,{recursive:true,force:true}));
+  for(const name of files){const dest=path.join(fixture,name);fs.mkdirSync(path.dirname(dest),{recursive:true});
+    fs.copyFileSync(path.join(root,name),dest,fs.constants.COPYFILE_EXCL);}
+  fs.writeFileSync(path.join(fixture,'undeclared-fixture.mjs'),'export const fixture=true;\n');
+  fs.appendFileSync(path.join(fixture,'scripts/package-current-additive.mjs'),
+    "\nimport '../undeclared-fixture.mjs';\n");
+  for(const kind of ['static','hosted','cloudflare']){
+    const rejected=inspectPackageExecutionInputs(fixture,definition,kind);
+    assert(rejected.files.includes('undeclared-fixture.mjs'));
+    assert(rejected.errors.some(error=>error.kind==='execution-declaration'&&error.path==='undeclared-fixture.mjs'),
+      'The real '+kind+' entry must refuse undeclared imports');
+  }
+});
