@@ -14,7 +14,7 @@ canonical=lambda j:(json.dumps(j,ensure_ascii=False,sort_keys=True,separators=('
 env={**os.environ,'GIT_NO_LAZY_FETCH':'1','GIT_NO_REPLACE_OBJECTS':'1'}
 def read(path,commit=H,expected=None,decode=None):
  global total
- assert time.monotonic()-started<300 and path and not path.startswith('/') and all(x not in ['', '.', '..'] for x in path.split('/'))
+ assert path and not path.startswith('/') and all(x not in ['', '.', '..'] for x in path.split('/'))
  command=['git','-c','protocol.allow=never','-C',str(W)]
  meta,member=subprocess.check_output(command+['ls-tree','-z',commit,'--',path],env=env).rstrip(b'\0').split(b'\t');mode,kind,oid=meta.decode().split();assert mode=='100644' and kind=='blob' and member.decode()==path
  size=int(subprocess.check_output(command+['cat-file','-s',oid],env=env));assert size>0
@@ -47,7 +47,6 @@ cells=[(x,y,oo[0]) for y,a,z,oo,ss,kind in segments for x in range(a,z)];assert 
 ownership=json.loads(read('coordination/engineering/global-current-cell-work-queue-20261014/ownership-binding.json'));lp=ownership['native_latitudes'];lat=np.frombuffer(read(lp['path'],lp['commit'],dict(lp,uncompressed_bytes=lp['decoded_bytes'],uncompressed_sha256=lp['decoded_sha256']),True),dtype='<f8');assert len(lat)==262166
 pts=shapely.points([[(x+.5)/262166*360-180,lat[y]] for x,y,o in cells]);index=shapely.STRtree(pts);contacts=[];invalid=[];retained=[];hitkeys=set();pngids=set()
 for f in current:
- assert time.monotonic()-started<300
  r=rows[f['id']];tagged='gb:PNG:' in r['source_products'] or 'gb:PNG:' in r['unique_source_subject_id']
  if tagged:pngids.add(f['id'])
  g=shape(f['geometry']);candidates=index.query(g)

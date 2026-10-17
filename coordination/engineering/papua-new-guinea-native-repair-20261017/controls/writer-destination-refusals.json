@@ -1,0 +1,142 @@
+{
+  "experiments": [
+    {
+      "writer": "prepare-stage.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/papua-new-guinea-native-repair-20261017/method/prepare-stage.py\", line 12, in <module>\n    assert W.is_dir() and O.parent.is_dir() and not O.exists()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "prepare-stage.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/papua-new-guinea-native-repair-20261017/method/prepare-stage.py\", line 13, in <module>\n    assert all(not p.is_symlink() for root in (W,O) for p in (root,*root.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "check-historical.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/papua-new-guinea-native-repair-20261017/method/check-historical.py\", line 10, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "check-historical.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/papua-new-guinea-native-repair-20261017/method/check-historical.py\", line 10, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "verify-complete-context.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/papua-new-guinea-native-repair-20261017/method/verify-complete-context.py\", line 8, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "verify-complete-context.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/papua-new-guinea-native-repair-20261017/method/verify-complete-context.py\", line 8, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "check-prior-melanesia.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/papua-new-guinea-native-repair-20261017/method/check-prior-melanesia.py\", line 9, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "check-prior-melanesia.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/papua-new-guinea-native-repair-20261017/method/check-prior-melanesia.py\", line 9, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "preserve-interpretation.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/papua-new-guinea-native-repair-20261017/method/preserve-interpretation.py\", line 6, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "preserve-interpretation.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/papua-new-guinea-native-repair-20261017/method/preserve-interpretation.py\", line 6, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "prepare-supported.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/papua-new-guinea-native-repair-20261017/method/prepare-supported.py\", line 6, in <module>\n    W=pathlib.Path(sys.argv[1]).absolute();H=sys.argv[2];O=pathlib.Path(sys.argv[3]).absolute();P='coordination/engineering/papua-new-guinea-native-repair-20261017';assert len(sys.argv)==4 and len(H)==40 and all(c in '0123456789abcdef' for c in H) and O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n                                                                                                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "prepare-supported.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/papua-new-guinea-native-repair-20261017/method/prepare-supported.py\", line 6, in <module>\n    W=pathlib.Path(sys.argv[1]).absolute();H=sys.argv[2];O=pathlib.Path(sys.argv[3]).absolute();P='coordination/engineering/papua-new-guinea-native-repair-20261017';assert len(sys.argv)==4 and len(H)==40 and all(c in '0123456789abcdef' for c in H) and O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n                                                                                                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "check-accounting.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/papua-new-guinea-native-repair-20261017/method/check-accounting.py\", line 7, in <module>\n    assert len(H)==40 and all(c in '0123456789abcdef' for c in H) and O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "check-accounting.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/papua-new-guinea-native-repair-20261017/method/check-accounting.py\", line 7, in <module>\n    assert len(H)==40 and all(c in '0123456789abcdef' for c in H) and O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "compact-negative-operands.mjs",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/papua-new-guinea-native-repair-20261017/method/compact-negative-operands.mjs:9\nconst need=(v,m)=>{if(!v)throw Error(m);};\n                               ^\n\nError: Fresh output directory required\n    at need (file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/papua-new-guinea-native-repair-20261017/method/compact-negative-operands.mjs:9:32)\n    at file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/papua-new-guinea-native-repair-20261017/method/compact-negative-operands.mjs:11:1\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0\n"
+    },
+    {
+      "writer": "compact-negative-operands.mjs",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/papua-new-guinea-native-repair-20261017/method/compact-negative-operands.mjs:9\nconst need=(v,m)=>{if(!v)throw Error(m);};\n                               ^\n\nError: Ordinary exact source required\n    at need (file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/papua-new-guinea-native-repair-20261017/method/compact-negative-operands.mjs:9:32)\n    at read (file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/papua-new-guinea-native-repair-20261017/method/compact-negative-operands.mjs:16:245)\n    at file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/papua-new-guinea-native-repair-20261017/method/compact-negative-operands.mjs:17:16\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0\n"
+    }
+  ],
+  "method_files": [
+    {
+      "path": "coordination/engineering/papua-new-guinea-native-repair-20261017/method/check-accounting.py",
+      "bytes": 11986,
+      "sha256": "9d0db0916723c4b25a9d3f25d596a3a0f05c166210824009572ca83f2cffe692"
+    },
+    {
+      "path": "coordination/engineering/papua-new-guinea-native-repair-20261017/method/check-historical.py",
+      "bytes": 7221,
+      "sha256": "324b3359d1a5ee952a630baf38b9e6199bb6cfae3c474cb871cb1ff45720faf9"
+    },
+    {
+      "path": "coordination/engineering/papua-new-guinea-native-repair-20261017/method/check-prior-melanesia.py",
+      "bytes": 10170,
+      "sha256": "8eaba3bbaad318b64d6bc2b7237597b1e59d5f436fc21e4e6832b926dad7de9d"
+    },
+    {
+      "path": "coordination/engineering/papua-new-guinea-native-repair-20261017/method/compact-negative-operands.mjs",
+      "bytes": 7717,
+      "sha256": "76ff48e9e25269190bb53ebde88d4d24934b1a736a14c58f212048a212b32de4"
+    },
+    {
+      "path": "coordination/engineering/papua-new-guinea-native-repair-20261017/method/prepare-stage.py",
+      "bytes": 15695,
+      "sha256": "aecf5e548ae69bc17b4c3690ff9fd745b954053043c664a13f0c2638b9bbfa70"
+    },
+    {
+      "path": "coordination/engineering/papua-new-guinea-native-repair-20261017/method/prepare-supported.py",
+      "bytes": 12758,
+      "sha256": "8707bca174e6dc0c799a3c903df9e37646eff89abafefcdd610f684e67afd0e7"
+    },
+    {
+      "path": "coordination/engineering/papua-new-guinea-native-repair-20261017/method/preserve-interpretation.py",
+      "bytes": 6800,
+      "sha256": "c6a13732d975891e1fc18384c01d3bae050a11461fa90959b02127c503b11b30"
+    },
+    {
+      "path": "coordination/engineering/papua-new-guinea-native-repair-20261017/method/verify-complete-context.py",
+      "bytes": 7776,
+      "sha256": "6ba6e7b2238e1fb01136f50d1ab49d16ce711b4c23deec603b6acf97afeeebf7"
+    }
+  ]
+}

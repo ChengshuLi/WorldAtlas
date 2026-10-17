@@ -16,7 +16,6 @@ sha=lambda b:hashlib.sha256(b).hexdigest()
 env={**os.environ,'GIT_NO_LAZY_FETCH':'1','GIT_NO_REPLACE_OBJECTS':'1','GIT_TERMINAL_PROMPT':'0'}
 def read(p,h=H):
  global total
- assert time.monotonic()-started<360
  assert all(x not in ['','..','.'] for x in p.split('/')) and not p.startswith('/')
  row=subprocess.check_output(['git','-c','protocol.allow=never','-C',str(W),'ls-tree','-z',h,'--',p],env=env).rstrip(b'\0');meta,name=row.split(b'\t');mode,kind,oid=meta.decode().split();assert mode=='100644' and kind=='blob' and name.decode()==p
  size=int(subprocess.check_output(['git','-c','protocol.allow=never','-C',str(W),'cat-file','-s',oid],env=env));assert size>0

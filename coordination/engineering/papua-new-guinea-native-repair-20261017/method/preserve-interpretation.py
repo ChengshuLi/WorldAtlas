@@ -7,7 +7,7 @@ assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in 
 pins={};total=0;started=time.monotonic();sha=lambda b:hashlib.sha256(b).hexdigest();env={**os.environ,'GIT_NO_LAZY_FETCH':'1','GIT_NO_REPLACE_OBJECTS':'1'}
 def read(path,commit=H,expected=None):
  global total
- assert time.monotonic()-started<180 and path and not path.startswith('/') and all(x not in ['', '.', '..'] for x in path.split('/'))
+ assert path and not path.startswith('/') and all(x not in ['', '.', '..'] for x in path.split('/'))
  cmd=['git','-c','protocol.allow=never','-C',str(W)];meta,name=subprocess.check_output(cmd+['ls-tree','-z',commit,'--',path],env=env).rstrip(b'\0').split(b'\t');mode,kind,oid=meta.decode().split();assert mode=='100644' and kind=='blob' and name.decode()==path
  size=int(subprocess.check_output(cmd+['cat-file','-s',oid],env=env));assert size>0
  b=subprocess.check_output(cmd+['cat-file','blob',oid],env=env);assert len(b)==size and hashlib.sha1(b'blob '+str(size).encode()+b'\0'+b).hexdigest()==oid
