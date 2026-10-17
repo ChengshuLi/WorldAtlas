@@ -8,7 +8,7 @@ import {fileURLToPath} from 'node:url';
 import {gzipSync} from 'node:zlib';
 import {sha256} from '../scripts/evidence-quality.mjs';
 import {runSelectedDeliverySmoke, checkEmittedSelectedDelivery, verifySelectedDelivery, selectedStableOwnerControls} from '../scripts/selected-delivery-smoke.mjs';
-import {packOwnership} from '../src/pixel-ownership.js';
+import {packOwnership, ownershipRun, pickOwnership, samplePackedOwnership} from '../src/pixel-ownership.js';
 import {loadOwnershipAssets} from '../src/ownership-assets.js';
 import {packageStartupOwnership} from '../scripts/package-startup-ownership.mjs';
 import {footprintValueSha256 as geometryHash, loadedBaseFootprintSha256,
@@ -32,8 +32,9 @@ function fixture(t, changes = {}) {
     const filename = path.join(base, name); fs.mkdirSync(path.dirname(filename), {recursive: true});
     fs.writeFileSync(filename, bytes); return asset(name, bytes);
   };
+  const owner = changes.owner ?? 1;
   const originalFeatures = [
-    {id: 'target', pixelIndex: 1, geometry: rectangle(0,0,1,1), properties: {parent_id: 'province-1'}},
+    {id: 'target', pixelIndex: owner, geometry: rectangle(0,0,1,1), properties: {parent_id: 'province-1'}},
     {id: 'stable', pixelIndex: 2, geometry: rectangle(5,0,6,1), properties: {parent_id: 'province-2'}}
   ];
   const baseReference = {id: 'geography:base', footprints_sha256: loadedBaseFootprintSha256(originalFeatures),
@@ -43,14 +44,14 @@ function fixture(t, changes = {}) {
   const components = [
     {component_id: 'component-a', disposition: 'assigned', native_cells: 2, geometry: rectangle(1,0,2,1)},
     {component_id: 'component-b', disposition: 'zero-cell', native_cells: 0, geometry: rectangle(3,0,4,1)}
-  ].map(row => ({...row, target_id: 'target', pixelIndex: 1, base_geometry: originalFeatures[0].geometry,
+  ].map(row => ({...row, target_id: 'target', pixelIndex: owner, base_geometry: originalFeatures[0].geometry,
     base_geometry_sha256: geometryHash(originalFeatures[0].geometry), geometry_sha256: geometryHash(row.geometry),
     source_receipt_sha256: 'b'.repeat(64), authority_sha256: 'c'.repeat(64), rule_sha256: 'd'.repeat(64)}));
   const ledger = {version: 2, kind: 'native-additive-repair-ledger-v2', authority_registry_sha256: 'e'.repeat(64),
     parent_inventory: {components: 2, report_sha256: 'f'.repeat(64), roster_sha256: '0'.repeat(64)},
     scope_ids: components.map(row => row.component_id), rows: components,
     current_rebind: pin('rebind/certificate.json', certificateBytes),
-    current_targets: [{target_id: 'target', pixelIndex: 1, geometry: originalFeatures[0].geometry,
+    current_targets: [{target_id: 'target', pixelIndex: owner, geometry: originalFeatures[0].geometry,
       geometry_sha256: geometryHash(originalFeatures[0].geometry)}]};
   changes.ledger?.(ledger);
   const rawLedger = json(ledger);
@@ -66,11 +67,11 @@ function fixture(t, changes = {}) {
     footprints_sha256: additiveReleaseFootprintDigest(baseReference, effectiveFeatures)};
   const patch = {version: 2, kind: 'unassigned-native-cells-v1', base_reference: baseReference,
     effective_reference: effectiveReference, ledger_sha256: ledgerPin.sha256,
-    authority_registry_sha256: ledger.authority_registry_sha256, rows: [{y: 3, runs: [[3,5,1]]}]};
+    authority_registry_sha256: ledger.authority_registry_sha256, rows: [{y: 3, runs: [[3,5,owner]]}]};
   changes.patch?.(patch);
   const patchPin = write(emittedDirectory, 'additive-repairs/patch.json', json(patch));
   const rows = Array(262166).fill(new Uint32Array());
-  rows[3] = Uint32Array.from([1,2,1,8,10,2]); rows[4] = Uint32Array.from([7,8,2]);
+  rows[3] = Uint32Array.from([1,2,owner,8,10,2]); rows[4] = Uint32Array.from([7,8,2]);
   const packed = packOwnership({size: rows.length, rows});
   const parts = ['rows', 'runs'].map(kind => {
     const bytes = Buffer.from(packed[kind].buffer);
@@ -408,4 +409,59 @@ test('selected-map CLI and kernel still require independent expectations',async 
  await assert.rejects(runSelectedDeliverySmoke({...f.options,expectationsPath:undefined}),/Missing expectations path/);
  assert.equal(fs.existsSync(f.outputPath),false);
  assert.throws(()=>verifySelectedDelivery({expectations:undefined}),/Expectations must be an object/);
+});
+
+for (const owner of [1, 2 ** 26 - 1]) test('bounded emitted frames preserve the one-cell oracle at odd, batch and extreme edges, owner=' + owner, async t => {
+  const size = 262166;
+  const rows = [{y: 0, runs: [[0,1,owner], [2,4098,owner], [4100,8197,owner]]},
+    {y: size - 1, runs: [[size - 5001,size,owner]]}];
+  const cells = rows.reduce((n,row) => n + row.runs.reduce((sum,[start,end]) => sum + end - start,0),0);
+  const f = fixture(t, {owner, ledger: ledger => { ledger.rows[0].native_cells = cells; },
+    patch: patch => { patch.rows = rows; }, expectations: expected => { expected.cumulative_native_cells = cells; }});
+  const state = await f.kernel();
+  for (const version of [1,2]) {
+    for (const role of ['base','effective']) {
+      const grid = state[role], unpacked = Array(grid.size).fill(new Uint32Array());
+      for (let y = 0; y < grid.size; y++) if (grid.rows[y * 2 + 1]) {
+        const words = [];
+        for (let i = grid.rows[y * 2]; i < grid.rows[y * 2] + grid.rows[y * 2 + 1]; i++) {
+          const {start,end,id} = ownershipRun(grid,i); words.push(start,end,id);
+        }
+        unpacked[y] = Uint32Array.from(words);
+      }
+      Object.assign(grid,packOwnership({size:grid.size,rows:unpacked},{version}));
+    }
+    let originalCount = 0;
+    // Exact former 1x1 sampling coordinates: no half-cell shift or new rounding.
+    for (const row of state.patch.rows) for (const [start,end,id] of row.runs) for (let x=start;x<end;x++) {
+      assert.equal(pickOwnership(state.base,x,row.y),0);
+      assert.equal(pickOwnership(state.effective,x,row.y),id);
+      assert.equal(samplePackedOwnership(state.effective,{x,y:row.y,width:1,height:1})[0],id);
+      originalCount++;
+    }
+    const NativeArray = globalThis.Uint32Array; let largestAllocation = 0, report;
+    try {
+      globalThis.Uint32Array = new Proxy(NativeArray, {construct(Target,args) {
+        if (typeof args[0] === 'number') largestAllocation = Math.max(largestAllocation,args[0]);
+        return Reflect.construct(Target,args);
+      }});
+      report = verifySelectedDelivery(state);
+    } finally { globalThis.Uint32Array = NativeArray; }
+    assert.equal(report.cumulative_native_cells_picked_and_sampled,originalCount);
+    assert.equal(largestAllocation,4096,'Long intervals must continue in bounded 16 KiB frames');
+    assert.equal(originalCount,cells);
+  }
+  // A wrong interior cell beyond the first frame must still be detected.
+  const grid = state.effective, unpacked = Array(grid.size).fill(new Uint32Array());
+  for(let y=0;y<grid.size;y++)if(grid.rows[y*2+1]){
+    const words=[];
+    for(let i=grid.rows[y*2];i<grid.rows[y*2]+grid.rows[y*2+1];i++){
+      const {start,end,id}=ownershipRun(grid,i);
+      if(y===0&&start<=8196&&end>8196)words.push(start,8196,id,8196,8197,2);
+      else words.push(start,end,id);
+    }
+    unpacked[y]=Uint32Array.from(words);
+  }
+  Object.assign(grid,packOwnership({size:grid.size,rows:unpacked}));
+  assert.throws(()=>verifySelectedDelivery(state),/Patched picker owner differs/);
 });

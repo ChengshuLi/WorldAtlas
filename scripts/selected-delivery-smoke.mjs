@@ -77,12 +77,21 @@ function verifyEmittedDelivery({ledger, ledgerSha256, patch, patchSha256,
   assert.equal(patch.ledger_sha256, ledgerSha256, 'Patch ledger differs');
   verifyAdditiveLedgerSelection(ledger, features, patch);
   let added = 0;
-  for (const row of patch.rows) for (const [start, end, id] of row.runs) for (let x = start; x < end; x++) {
-    assert.equal(pickOwnership(base, x, row.y), 0, 'Patch cell was already occupied');
-    assert.equal(pickOwnership(effective, x, row.y), id, 'Patched picker owner differs');
-    assert.equal(samplePackedOwnership(effective, {x, y: row.y, width: 1, height: 1})[0], id,
-      'Patched sampler owner differs');
-    added++;
+  // A bounded frame checks every original integer cell without allocating one
+  // TypedArray per cell. Longer intervals continue through subsequent frames.
+  const frameCells = 4096; // At most 16 KiB of sampled owners at a time.
+  for (const row of patch.rows) for (const [start, end, id] of row.runs) {
+    for (let first = start; first < end; first += frameCells) {
+      const width = Math.min(frameCells, end - first);
+      const sampled = samplePackedOwnership(effective, {x: first, y: row.y, width, height: 1});
+      for (let offset = 0; offset < width; offset++) {
+        const x = first + offset;
+        assert.equal(pickOwnership(base, x, row.y), 0, 'Patch cell was already occupied');
+        assert.equal(pickOwnership(effective, x, row.y), id, 'Patched picker owner differs');
+        assert.equal(sampled[offset], id, 'Patched sampler owner differs');
+        added++;
+      }
+    }
   }
   assert.equal(added, effective.additive_added_cells, 'Loaded effective native cell count differs');
   assert(Array.isArray(beforeControls) && beforeControls.length > 0, 'Missing occupied base owner control');
