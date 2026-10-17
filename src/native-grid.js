@@ -183,6 +183,8 @@ function scanNativePolygonIntervals(index,{size,rowStart,rowEnd,latitudes},longi
 // never as a general periodic-coordinate or approximate-geometry allowance.
 // Comparison covers the complete latitude extent, all native columns and all
 // exact boundary ties. Matching candidate cells alone would be insufficient.
+const mapGeometryArray=(values,visit)=>Array.isArray(values)?values.map(visit):Array.from(values,visit);
+
 export function verifyNativeSeamView(original,view,{size,latitudes}) {
   if(!Number.isSafeInteger(size)||size<2||size>2**31||latitudes?.length!==size)
     throw Error('Require explicit latitude table and valid canonical seam lattice');
@@ -195,9 +197,9 @@ export function verifyNativeSeamView(original,view,{size,latitudes}) {
       throw Error('Canonical seam view requires whole polygon geometry');
     const polygons=geometry.type==='Polygon'?[geometry.coordinates]:geometry.coordinates;
     if(!isNativeSequence(polygons)||!polygons.length)throw Error('Empty canonical seam view');
-    return [{index:1,polygons:Array.from(polygons,polygon=>{
+    return [{index:1,polygons:mapGeometryArray(polygons,polygon=>{
       if(!isNativeSequence(polygon)||!polygon.length)throw Error('Missing canonical seam rings');
-      return Array.from(polygon,ring=>{
+      return mapGeometryArray(polygon,ring=>{
         if(!isNativeSequence(ring))throw Error('Missing canonical seam ring');
         for(const point of ring){
           if(!Array.isArray(point)||point.length!==2||!point.every(Number.isFinite)
@@ -254,16 +256,17 @@ export function nativeRuntimeIndex(features) {
     if (!['Polygon','MultiPolygon'].includes(geometry?.type)) throw Error('Original native geometry required');
     const polygons=geometry.type==='Polygon'?[geometry.coordinates]:geometry.coordinates;
     if (!isNativeSequence(polygons) || !polygons.length) throw Error('Original native polygons required');
-    return {index:owner,polygons:Array.from(polygons,polygon=>{
+    return {index:owner,polygons:mapGeometryArray(polygons,polygon=>{
       if (!isNativeSequence(polygon) || !polygon.length) throw Error('Original native rings required');
-      return Array.from(polygon,ring=>{
+      return mapGeometryArray(polygon,ring=>{
         if (!isNativeSequence(ring) || ring.length<4) throw Error('Original native closed ring required');
         const result=new Float64Array(ring.length*2);
-        let i=0;for(const point of ring){
+        const visit=(point,i)=>{
           if (!Array.isArray(point) || point.length!==2 || !point.every(Number.isFinite) ||
               Math.abs(point[0])>180 || Math.abs(point[1])>90) throw Error('Original lon/lat coordinates required');
-          result.set(point,i++*2);
-        }
+          result.set(point,i*2);
+        };
+        if(Array.isArray(ring))ring.forEach(visit);else{let i=0;for(const point of ring)visit(point,i++);}
         if (result[0]!==result.at(-2) || result[1]!==result.at(-1)) throw Error('Original native closed ring required');
         return result;
       });
@@ -708,16 +711,16 @@ function primitives(geometry) {
   function line(value) {
     coordinateArray(value, 'Line positions');
     require(value.length >= 2, 'Incomplete line witness');
-    const positions = Array.from(value,point);
+    const positions = mapGeometryArray(value,point);
     for (let i = 1; i < positions.length; i++) segments.push([positions[i - 1], positions[i]]);
   }
   function polygon(value) {
     coordinateArray(value, 'Polygon rings');
     require(value.length > 0, 'Missing polygon rings');
-    const rings = Array.from(value,ring => {
+    const rings = mapGeometryArray(value,ring => {
       coordinateArray(ring, 'Ring positions');
       require(ring.length >= 4, 'Incomplete footprint ring in witness polygon');
-      const positions = Array.from(ring,point), first = positions[0], last = positions.at(-1);
+      const positions = mapGeometryArray(ring,point), first = positions[0], last = positions.at(-1);
       require(first[0] === last[0] && first[1] === last[1], 'Unclosed polygon witness');
       return positions.flat();
     });

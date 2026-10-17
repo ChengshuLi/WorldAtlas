@@ -226,3 +226,11 @@ test('spilled polygon and ring rosters preserve eager runtime materialization an
   assert.deepEqual(validateWitnessGeometry(stored),validateWitnessGeometry(geometry));store.close();
  }
 });
+
+test('coordinate cursor adaptation preserves existing literal runtime array behavior',()=>{
+ const ring=[[0,0],,[1,1],[0,0]],geometry={type:'Polygon',coordinates:[ring]};
+ const index=nativeRuntimeIndex([{id:'A',pixelIndex:1,geometry}]);
+ assert.deepEqual(index[0].polygons[0][0],new Float64Array([0,0,0,0,1,1,0,0]));
+ const polygons=new Array(1),multi=nativeRuntimeIndex([{id:'A',pixelIndex:1,geometry:{type:'MultiPolygon',coordinates:polygons}}]);
+ assert.equal(multi[0].polygons.length,1);assert.equal(Object.hasOwn(multi[0].polygons,0),false);
+});
