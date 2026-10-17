@@ -799,6 +799,7 @@ function nativeContext(proof) {
 }
 function nativeAsset(proof, pin, context) {
   const {session,reader} = proof, state = proof.state;
+  if (context.visitingWords?.has(pin.path)) return context.visitingWords.get(pin.path);
   const name = path.posix.join(path.posix.dirname(state.selection.manifest_path),pin.path);
   const ordinary = reader.treeRoute(name).length > 0;
 
@@ -813,6 +814,7 @@ function nativeAsset(proof, pin, context) {
     const p=reader.inventory.get(key); if (p?.whole_body_consumed) context.inputInventory.set(key,{...p});
   }
 
+  context.visitingWords?.set(pin.path,words);
   return words;
 }
 /** Complete native intervals. Genuine accepted whole rows are reused only under
@@ -1107,6 +1109,39 @@ function projectCheckpointMetadata(state,reader,selection) {
     ...projection.source_updates.map(update=>update.logical_path)]);
   return {certificate:freeze(certificate),paths,reference:projection.reference,nativeReference:projection.native_reference};
 }
+
+/** Visit complete authenticated row batches without retaining newly expanded
+ * triples. Whole decoded native containers are reused only within this visit;
+ * existing qualified rows and the ordinary projector API remain unchanged. */
+export function visitNativeRows({state,rows,visit}) {
+  const proof=getState(state); proof.state=state;
+  demand(typeof visit==='function','Native row visitor required');
+  demand(Array.isArray(rows)&&rows.every((y,i)=>Number.isSafeInteger(y)&&y>=0&&y<state.manifest.size&&(!i||y>rows[i-1])),
+    'Duplicate, incomplete or foreign native row scope');
+  if(!rows.length){const projected=projectNativeRows({state,rows});visit(projected.rows);return projected;}
+  const retained=new Set(proof.nativeRows.keys()),reused=[],acquired=[];
+  const context=nativeContext(proof);
+  demand(!context.visitingWords,'Nested native row visit');
+  context.visitingWords=new Map();
+  let last;
+  try {
+    // Even an empty scope goes through the genuine projection boundary.
+    for(let start=0;start<rows.length||start===0;start+=128){
+      const batch=rows.slice(start,start+128);
+      try {
+        last=projectNativeRows({state,rows:batch});
+        reused.push(...last.reused_rows); acquired.push(...last.acquired_rows);
+        visit(last.rows);
+      } finally {
+        for(const y of batch)if(!retained.has(y))proof.nativeRows.delete(y);
+      }
+    }
+    return {reused_rows:reused,acquired_rows:acquired,custody:last.custody};
+  } finally {
+    delete context.visitingWords;
+  }
+}
+
 
 /** Exhaustive actual append-only transition. Never reacquires a full selection.
  * A valid baseline remains usable when an unsupported candidate needs cold work. */

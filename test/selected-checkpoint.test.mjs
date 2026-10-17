@@ -654,3 +654,44 @@ test('miniature seed snapshots custom original patch rows and separates their hi
  assert.notEqual(same.selected,omitted.selected);
  assert.deepEqual(omitted.patch.rows,[{y:1,runs:[[2,3,1]]}]);
 });
+
+test('bounded native visitation preserves exact rows and custody without retaining new triples',async t=>{
+ const f=await trustedFixture(t),state=f.api.qualifyCheckpoint({reader:f.reader}).state;
+ const visited=[];
+ const result=f.api.visitNativeRows({state,rows:[0,1,2,3],visit:rows=>visited.push(...rows)});
+ assert.deepEqual(visited,[{y:0,runs:[[0,1,1]]},{y:1,runs:[[0,1,2]]},{y:2,runs:[[1,2,3]]},{y:3,runs:[]}]);
+ assert.deepEqual(result.reused_rows,[1]);assert.deepEqual(result.acquired_rows,[0,2,3]);
+ const next=f.api.projectNativeRows({state,rows:[0,1,2,3]});
+ assert.deepEqual(next.rows,visited);assert.deepEqual(next.acquired_rows,[0,2,3]);
+ assert.deepEqual(next.custody,result.custody);
+ assert.throws(()=>f.api.visitNativeRows({state,rows:[1,1],visit(){}}),/native row scope/);
+ assert.throws(()=>f.api.visitNativeRows({state:structuredClone(state),rows:[],visit(){}}),/private qualified/);
+ f.api.releaseCheckpoint(state);
+ assert.throws(()=>f.api.visitNativeRows({state,rows:[],visit(){}}),/private qualified|expired/);
+});
+
+test('throwing native visitor releases transient rows and packed-container cache',async t=>{
+ const f=await trustedFixture(t),state=f.api.qualifyCheckpoint({reader:f.reader}).state;
+ assert.throws(()=>f.api.visitNativeRows({state,rows:[0,1,2,3],visit(){throw Error('consumer failed');}}),/consumer failed/);
+ const next=f.api.visitNativeRows({state,rows:[0,1,2,3],visit(){}});
+ assert.deepEqual(next.reused_rows,[1]);assert.deepEqual(next.acquired_rows,[0,2,3]);
+});
+
+test('actual appended native consumer retains the eager conservation and exact first visibility witness',async t=>{
+ const f=await trustedFixture(t,{nativeAppend:true});
+ f.save('scripts/selected-checkpoint-native.mjs',fs.readFileSync('scripts/selected-checkpoint-native.mjs'));f.commit();
+ const baseline=f.api.qualifyCheckpoint({reader:f.reader});
+ const next=await appendNativeAuthority(f),reader=new f.native.ImmutableReader(f.root,next.candidate,{invocation:f.reader.invocation});
+ const transition=f.api.qualifyTransition({state:baseline.state,reader});assert.equal(transition.available,true);
+ const consumer=await import(pathToFileURL(path.join(f.root,'scripts/selected-checkpoint-native.mjs')));
+ const {newVisibleRepairCandidates,repairVisibilityWitnesses}=f.native;
+ const owners=baseline.state.certificate.entries.map(row=>({id:row[0],index:row[1]})),size=baseline.state.manifest.size;
+ const projection=f.api.projectNativeRows({state:transition.candidate,rows:transition.changedNativeRows});
+ const before=consumer.applyNativeAdditiveRows(projection.rows,transition.baseline.patch,{size,owners});
+ const after=consumer.applyNativeAdditiveRows(projection.rows,transition.candidate.patch,{size,owners});
+ const expected=repairVisibilityWitnesses({candidates:newVisibleRepairCandidates(transition.baseline.additions,transition.candidate.additions),size,
+   latitudes:f.api.projectVisibilityLatitudes({state:transition.candidate}),beforeRows:before,afterRows:after});
+ const actual=await consumer.compareSelectedCheckpointNative({transition});
+ assert.equal(actual.status,'no-new-native-loss');assert.equal(actual.affected_rows,1);
+ assert.deepEqual(actual.repair_visibility.witnesses,expected);assert.equal(expected.length,1);assert(expected[0]);
+});
