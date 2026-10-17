@@ -1,0 +1,59 @@
+{
+  "locator": {
+    "version": 1,
+    "kind": "accepted-selected-checkpoint-locator-v1",
+    "acceptance": {
+      "pr_number": 2285,
+      "request_id": "norway-repair-2285-a8c7476-20261016-002",
+      "head": "a8c74763b5300fe06bfb30c0f7de5764ced711e6"
+    },
+    "retained_artifact": {
+      "path": "coordination/engineering/finland-native-repair-20261016/checkpoint-norway/geography-artifact.zip"
+    }
+  },
+  "original_source": {
+    "run_id": 38983602868,
+    "run_attempt": 1,
+    "head": "a8c74763b5300fe06bfb30c0f7de5764ced711e6",
+    "baseline": "e055c0ca8a4b699fa32d7e043b0497242913e15c",
+    "candidate_commit": "b4dda6699bd2d9c73c75711c34a5ae04eb82c1b8",
+    "workflow_path": ".github/workflows/worker-merge.yml",
+    "event": "workflow_dispatch",
+    "workflow_head": "59158ee0b78a54c0c37f5f22ad4ef5850edfa6be",
+    "tree": "f79fa4bf544f61cb56335ca0c83a3272454979ff",
+    "job_id": 117252218222,
+    "artifact_name": "geography-norway-repair-2285-a8c7476-20261016-002-1",
+    "artifact_id": 12081838477,
+    "artifact_digest": "a7486e8bd6375b573f0255aba1a62dd3db3e374728f1e4244afc5d0a3584c252",
+    "report_sha256": "38f43a4f2e74b78682bace6c005e6a1902709d13ad8b49b77365fc7980635e3a",
+    "report_bytes": 424654,
+    "artifact_bytes": 7752375
+  },
+  "archive_origin": "retained-exact",
+  "accepted_merge": "9d564cf4083cb5499b00d6fb4ceb6fc724fdf01c",
+  "report_status": "no-new-native-loss",
+  "checkpoint_members": [
+    {
+      "bytes": 476454,
+      "name": "checkpoint-routes.json",
+      "sha256": "92ca60ccb55fcf6691c5a3c2c4ad79165c50f0087f3de7e2075933fc1cf8fb56"
+    },
+    {
+      "bytes": 7520215,
+      "decoded_bytes": 18424505,
+      "decoded_sha256": "e79a44d4b19a889f68d4440e69e7d7b1727f253f162626c51f9be57f96cc6378",
+      "name": "derived-certificate.json.gz",
+      "sha256": "f1134d3e05858f67bb13dc10dc1c6f59f813e6d944c3af9c6163318b78f53bd5"
+    },
+    {
+      "bytes": 436666,
+      "name": "derived-facts.json",
+      "sha256": "e6ccc120d1a5ad79a9d3b2b0d96de973cabd6d76ba7c90544a0bb26dd47bcb3f"
+    },
+    {
+      "bytes": 660,
+      "name": "derived-publication.json",
+      "sha256": "08865b1ddb917e26543b16a4597e8b513149e12735ad587e29be3726eb60dbf8"
+    }
+  ]
+}
