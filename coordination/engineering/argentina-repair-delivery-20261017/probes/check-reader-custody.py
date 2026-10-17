@@ -27,7 +27,7 @@ for name in methods:
    if'ls-tree'in aa:return f'{mode} blob {oid}\t{path}\0'.encode()
    if'-s'in aa:return(str(size)+'\n').encode()
    assert'cat-file'in aa and'blob'in aa;return given
-  ns=dict(C=C,W=W,R=W,total=0,inputs={},start=time.monotonic(),started=time.monotonic(),DEADLINE_SECONDS=300,hashlib=hashlib,gzip=gzip,time=time,os=os,env={},sha=sha,subprocess=types.SimpleNamespace(check_output=fake),git=fake)
+  ns=dict(C=C,H=C,W=W,R=W,total=0,inputs={},start=time.monotonic(),started=time.monotonic(),DEADLINE_SECONDS=300,hashlib=hashlib,gzip=gzip,time=time,os=os,env={},sha=sha,subprocess=types.SimpleNamespace(check_output=fake),git=fake)
   exec(compile(ast.Module(body=[fn],type_ignores=[]),name,'exec'),ns)
   try:
    if fname=='pin':pin,b=ns[fname](path,C);actual=gzip.decompress(b)if'gzip'in case else b
