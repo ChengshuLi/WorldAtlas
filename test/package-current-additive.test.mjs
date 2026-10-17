@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
-import {gzipSync} from 'node:zlib';
+import {gzipSync,gunzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
 import {prepareCurrentSelectedAdditive} from '../scripts/package-current-additive.mjs';
 import {additiveReleaseFootprintDigest,bindAdditiveLedgerFeatures,footprintValueSha256,loadedBaseFootprintSha256} from '../src/effective-footprint.js';
@@ -58,7 +58,14 @@ async function fixture(t,{metadata=false,ledgerBytes}={}){
 }
 async function assertPublished(f,result,out){
  await result.publish(out);
- for(const [role,pin]of Object.entries(f.sidecar.logical_asset_map))assert.deepEqual(await fs.readFile(path.join(out,result.additiveRelease[role].path)),await fs.readFile(path.join(f.root,pin.path)));
+ for(const [role,pin]of Object.entries(f.sidecar.logical_asset_map)){
+  const emitted=result.additiveRelease[role],raw=await fs.readFile(path.join(out,emitted.path)),source=await fs.readFile(path.join(f.root,pin.path));
+  assert.equal(raw.length,emitted.bytes);assert.equal(sha(raw),emitted.sha256);
+  if(['ledger','patch'].includes(role)){
+   const body=gunzipSync(raw),original=pin.encoding==='gzip'?gunzipSync(source):source;
+   assert.equal(emitted.encoding,'gzip');assert.equal(body.length,emitted.decoded_bytes);assert.equal(sha(body),emitted.decoded_sha256);assert.deepEqual(body,original);
+  }else assert.deepEqual(raw,source);
+ }
  assert.deepEqual(await fs.readFile(path.join(out,result.additiveRelease.base_manifest.path)),f.originalManifest);
  assert.deepEqual(await fs.readFile(path.join(out,result.additiveRelease.owner_roster.path)),f.originalBounds);
 }
@@ -167,13 +174,50 @@ test('current packaging accepts the 34920857-byte ledger with exact whole custod
  const ledger=result.input_inventory.find(row=>row.path===f.sidecar.logical_asset_map.ledger.path);
  assert.equal(ledger.bytes,34920857);assert.equal(ledger.whole_body_consumed,true);
  assert.equal(ledger.sha256,f.envelope.ledger.sha256);
- assert.equal(result.additiveRelease.ledger.bytes,34920857);
+ assert.equal(result.additiveRelease.ledger.decoded_bytes,34920857);
+ assert.equal(result.additiveRelease.ledger.decoded_sha256,ledger.sha256);
+ assert(result.additiveRelease.ledger.bytes<25*1024*1024);
  await result.publish(path.join(f.root,'published'));
- assert.equal((await fs.stat(path.join(f.root,'published',result.additiveRelease.ledger.path))).size,34920857);
+ const emitted=await fs.readFile(path.join(f.root,'published',result.additiveRelease.ledger.path));
+ assert.equal(emitted.length,result.additiveRelease.ledger.bytes);assert.equal(sha(gunzipSync(emitted)),ledger.sha256);
  const original=await fs.readFile(path.join(f.root,ledger.path));
  await fs.writeFile(path.join(f.root,ledger.path),original.subarray(0,-1));
  await assert.rejects(prepareCurrentSelectedAdditive(f),/whole length/);
  await fs.writeFile(path.join(f.root,ledger.path),original);
  original[original.length-1]=0x09;await fs.writeFile(path.join(f.root,ledger.path),original);
  await assert.rejects(prepareCurrentSelectedAdditive(f),/whole checksum/);
+});
+
+
+test('package-derived gzip preserves exact source bodies and effective identities deterministically',async t=>{
+ const f=await fixture(t),pins=[f.selection.additive_release,f.sidecar.runtime_envelope,...Object.values(f.sidecar.logical_asset_map)];
+ const original=await Promise.all(pins.map(pin=>fs.readFile(path.join(f.root,pin.path))));
+ const first=await prepareCurrentSelectedAdditive(f),second=await prepareCurrentSelectedAdditive(f);
+ assert.deepEqual(first.additiveRelease,second.additiveRelease);assert.deepEqual(first.reference_release,f.envelope.effective_reference);
+ await assertPublished(f,first,path.join(f.root,'first'));await assertPublished(f,second,path.join(f.root,'second'));
+ for(let i=0;i<pins.length;i++)assert.deepEqual(await fs.readFile(path.join(f.root,pins[i].path)),original[i]);
+ for(const role of ['ledger','patch']){
+  assert.equal(first.additiveRelease[role].decoded_sha256,f.envelope[role].sha256);
+  assert.equal(first.additiveRelease[role].path,f.envelope[role].path+'.gz');
+  assert.equal((await fs.stat(path.join(f.root,'first',f.envelope[role].path)).catch(()=>null)),null,'Raw delivery copy must not survive');
+ }
+});
+
+test('already encoded source ledger and patch retain their exact transport without recompression',async t=>{
+ const f=await fixture(t);
+ for(const role of ['ledger','patch']){
+  const source=f.sidecar.logical_asset_map[role],body=await fs.readFile(path.join(f.root,source.path)),encoded=gzipSync(body,{level:1});
+  const pin=await write(f.root,source.path,encoded),fields={encoding:'gzip',decoded_bytes:body.length,decoded_sha256:sha(body)};
+  f.sidecar.logical_asset_map[role]={...pin,...fields};f.envelope[role]={...logical(role+'.json.gz',pin),...fields};
+ }
+ await saveEnvelope(f);const result=await prepareCurrentSelectedAdditive(f);
+ assert.deepEqual(result.additiveRelease,f.envelope);await assertPublished(f,result,path.join(f.root,'out'));
+});
+
+test('derived gzip path collision fails before publication and source mutation',async t=>{
+ const f=await fixture(t);f.envelope.patch.path=f.envelope.ledger.path+'.gz';await saveEnvelope(f);
+ const original=await fs.readFile(path.join(f.root,f.sidecar.runtime_envelope.path));
+ await assert.rejects(prepareCurrentSelectedAdditive(f),/Duplicate native additive assets/);
+ assert.deepEqual(await fs.readFile(path.join(f.root,f.sidecar.runtime_envelope.path)),original);
+ assert.equal(await fs.stat(path.join(f.root,'out')).catch(()=>null),null);
 });

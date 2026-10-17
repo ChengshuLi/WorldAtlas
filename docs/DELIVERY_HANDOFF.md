@@ -919,9 +919,9 @@ exact-descriptor replacement; merely belonging to another format is insufficient
 - `selected-reference-metadata.mjs`: 32 MiB encoded/decoded original metadata
   source inputs. `prepare-delivery-handoff.mjs` still bounds the separate current
   release registry decode at 64 MiB and its small release pointer at 4 KiB.
-- The static-only builder rejects files above 25 MiB; the hosted build takes a
-  different branch. This is labelled a hosting constraint, but a specific
-  provider/product limit must be checked before treating it as necessary.
+- Cloudflare Workers Static Assets and Pages have a real 25 MiB (26,214,400
+  bytes) per-file limit. It applies to published encoded files, not decoded
+  scientific JSON. See the lossless transport boundary below.
 
 By contrast, safe-integer byte precision, exact decoded word counts, native
 coordinate packing dimensions and actual runtime allocation failures are
@@ -939,3 +939,36 @@ the final native row/run words are unchanged. This reduces avoidable object
 expansion without increasing a file ceiling or Node heap setting. Actual process
 memory still depends on the complete selected assets, native bank and consumers;
 measure that workload and keep failed runs as failures.
+
+
+### Lossless additive delivery transport
+
+Ordinary packaging authenticates the original selected envelope, source bodies,
+whole input inventory and semantic joins before deriving ledger and patch gzip
+files. Their emitted descriptors carry exact encoded path/length/SHA-256 plus
+original decoded length/SHA-256. Existing encoded sources retain their transport;
+plain source files and their immutable pins are never rewritten. The original
+base manifest and compressed owner-roster identities retain their separate
+meanings.
+
+Browser loading and emitted smoke authenticate both representations. Patch-to-
+ledger joins, feature ledger identity, effective-footprint digests and the smoke
+expectations/report retain the original decoded scientific hashes. Legacy plain
+transport remains readable. Compression is explicit asset data through the
+existing gzip decoder, with no Content-Encoding/header exception or backend
+switch. The complete original JSON bytes, including whitespace, must round-trip.
+
+Both the normal Cloudflare package wrapper and retained selected-output assembly
+check every new `dist/client` file before replacing caller output. Files up to
+26,214,400 bytes are admitted; larger static files fail. Historical package
+custody remains readable so an old raw ledger can be replaced by lossless gzip.
+The provider sources are [Workers Static Assets](https://developers.cloudflare.com/workers/platform/limits/#static-assets)
+and [Pages file size](https://developers.cloudflare.com/pages/platform/limits/#file-size).
+File-count allowances are plan-specific (20,000 free / 100,000 paid); this change
+does not infer an account plan or alter the separate file-count policy.
+
+Tests distinguish genuine source/transport round-trip and new-file platform
+admission from synthetic fixture capacity. Literal selected-ledger packaging,
+all-cell smoke and native-output identity proof must state their exact selected
+input and code hashes. Package/output verification does not establish a deployed
+version, live endpoint, or GPU/Canvas behavior; those remain publication checks.
