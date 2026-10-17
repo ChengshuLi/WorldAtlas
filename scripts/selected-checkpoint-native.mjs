@@ -1,4 +1,4 @@
-import {isNativeSequence,nativeRowAt} from '../src/native-sequence.js';
+import {isNativeSequence,nativeRowAt} from '../src/native-grid.js';
 // Joint-only native checkpoint consumer. Keep the cold/package import closure literal.
 import {compareIntervals,newVisibleRepairCandidates,repairVisibilityWitnesses,visibilityDigest} from './check-effective-geographic-regression.mjs';
 const demand=(v,m)=>{if(!v)throw Error(m);};
@@ -107,7 +107,7 @@ export async function compareSelectedCheckpointNative({transition}) {
   const oldPatch=baseline.patch?.rows??[];
   const newPatch=candidate.patch?.rows??[];
   const result={checked_rows:0,lost_or_reassigned_cells:0,intervals:[]};
-  const visibilityWitnesses=visibilityCandidates.map(()=>null);
+  const visibilityWitnesses=Array(visibilityCandidates.length).fill(null);
   // Both vintages share the same immutable base and stable owners. Once we
   // establish that BOTH patches are disjoint from that base, B cancels from
   // (B + old) \ (B + new). Comparing patch intervals gives exactly the same
@@ -125,17 +125,20 @@ export async function compareSelectedCheckpointNative({transition}) {
     // Base intervals have already been validated and need not be visited again.
     // These small batches contain references to patch rows, never copied runs.
     for(let start=0;start<expected.length;start+=128){
-      const rows=expected.slice(start,start+128),pendingIndices=[];
-      for(let i=0;i<visibilityCandidates.length;i++){
-        const item=visibilityCandidates[i];
-        if(!visibilityWitnesses[i]&&(item.representation!=='native-cells'
-          ||item.native_rows.at(0).y<=rows.at(-1)&&item.native_rows.at(-1).y>=rows[0]))pendingIndices.push(i);
-      }
-      if(pendingIndices.length){
-        const witnesses=repairVisibilityWitnesses({candidates:pendingIndices.map(i=>visibilityCandidates[i]),size,latitudes,
+      const rows=expected.slice(start,start+128);let pending=[],indices=[],i=0;
+      const visit=()=>{
+        const witnesses=repairVisibilityWitnesses({candidates:pending,size,latitudes,
           beforeRows:rows.map(y=>({y,runs:nativeRowAt(oldPatch,y)?.runs??[]})),afterRows:rows.map(y=>({y,runs:nativeRowAt(newPatch,y)?.runs??[]}))});
-        for(let n=0;n<pendingIndices.length;n++)visibilityWitnesses[pendingIndices[n]]=witnesses[n];
+        for(let n=0;n<indices.length;n++)visibilityWitnesses[indices[n]]=witnesses[n];
+        pending=[];indices=[];
+      };
+      for(const item of visibilityCandidates){
+        if(!visibilityWitnesses[i]&&(item.representation!=='native-cells'
+          ||item.native_rows.at(0).y<=rows.at(-1)&&item.native_rows.at(-1).y>=rows[0])){
+          pending.push(item);indices.push(i);if(pending.length===16)visit();
+        }i++;
       }
+      if(pending.length)visit();
     }
   }
   demand(visibilityWitnesses.length===visibilityCandidates.length&&visibilityWitnesses.every(Boolean),'New gap repair has no actual changed map-cell witness');

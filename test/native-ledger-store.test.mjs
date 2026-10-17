@@ -95,3 +95,17 @@ test('ledger component and dense-row ingestion retains bounded working graphs un
  assert.equal(result.status,0,result.stderr);const observed=JSON.parse(result.stdout);
  assert.equal(observed.count,400000);assert.equal(observed.componentCount,4);assert.equal(observed.canonical,observed.sha256);assert.deepEqual(fs.readdirSync(directory),[]);
 });
+
+test('component ordinal lookup equals complete iteration and rejects foreign or closed handles',async t=>{
+ const value={rows:[{component_id:'a',native_rows:[{y:1,runs:[[0,2,1]]}]},{component_id:'b',geometry:{type:'Polygon',coordinates:[]}}]};
+ const store=await open(temporary(t),JSON.stringify(value));
+ const sequential=[...store.componentEntries()];
+ for(let i=0;i<sequential.length;i++){
+  const lookup=store.componentAt(i);assert.deepEqual(lookup,sequential[i]);
+  assert.deepEqual(materialize(store,lookup),value.rows[i]);
+  assert.throws(()=>store.componentMetadata({...lookup}),/Foreign native component/);
+ }
+ assert.equal(store.componentAt(-1),undefined);assert.equal(store.componentAt(2),undefined);
+ assert.throws(()=>store.componentAt(0.5),/ordinal/);store.close();
+ assert.throws(()=>store.componentAt(0),/closed/);
+});

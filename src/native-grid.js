@@ -1,4 +1,48 @@
-import {isNativeSequence} from './native-sequence.js';
+// Browser-safe, explicitly branded repeatable sequence of native rows/intervals.
+// A sequence is storage, never scientific authority; consumers validate domains.
+const sequenceSources=new WeakMap();
+const requireSequence=(ok,message)=>{if(!ok)throw Error(message);};
+export function nativeSequence(length,entries,{rowAt,entryAt}={}) {
+  requireSequence(Number.isSafeInteger(length)&&length>=0&&typeof entries==='function','Invalid native sequence');
+  const sequence={length,
+    *[Symbol.iterator](){
+      let count=0;
+      for(const item of entries()){
+        requireSequence(count++<length,'Native sequence exceeds declared count');yield item;
+      }
+      requireSequence(count===length,'Native sequence omitted declared entries');
+    },
+    at(index){
+      requireSequence(Number.isSafeInteger(index),'Invalid native sequence index');
+      if(index<0)index+=length;
+      if(index<0||index>=length)return undefined;
+      if(entryAt)return entryAt(index);
+      let i=0;for(const item of sequence)if(i++===index)return item;
+    }};
+  Object.defineProperty(sequence,'at',{enumerable:false});
+  for(const [name,method] of Object.entries({
+    map(fn){return nativeSequence(length,function*(){let i=0;for(const item of sequence)yield fn(item,i++);});},
+    filter(fn){let count=0,i=0;for(const item of sequence)if(fn(item,i++))count++;
+      return nativeSequence(count,function*(){let i=0;for(const item of sequence)if(fn(item,i++))yield item;});},
+    find(fn){let i=0;for(const item of sequence)if(fn(item,i++))return item;},
+    some(fn){let i=0;for(const item of sequence)if(fn(item,i++))return true;return false;},
+    every(fn){let i=0;for(const item of sequence)if(!fn(item,i++))return false;return true;}
+  }))Object.defineProperty(sequence,name,{value:method});
+  Object.freeze(sequence);
+  sequenceSources.set(sequence,{rowAt});return sequence;
+}
+export const isNativeSequence=value=>Array.isArray(value)||sequenceSources.has(value);
+export function nativeRowAt(rows,y) {
+  requireSequence(isNativeSequence(rows),'Missing native row sequence');
+  const direct=sequenceSources.get(rows)?.rowAt;
+  if(direct){const row=direct(y);requireSequence(row===undefined||row.y===y,'Native sequence lookup changed row identity');return row;}
+  if(Array.isArray(rows)){
+    let lo=0,hi=rows.length;while(lo<hi){const mid=Math.floor((lo+hi)/2);if(rows[mid].y<y)lo=mid+1;else hi=mid;}
+    return rows[lo]?.y===y?rows[lo]:undefined;
+  }
+  for(const row of rows){if(row.y===y)return row;if(row.y>y)break;}
+}
+
 // Versioned offline rule. Existing projected grids keep their original meaning.
 export const NATIVE_GRID_METHOD='native-linear-evenodd-first-owner-v1';
 

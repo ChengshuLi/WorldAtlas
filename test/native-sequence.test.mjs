@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
-import {nativeSequence,isNativeSequence,nativeRowAt} from '../src/native-sequence.js';
+import {nativeSequence,isNativeSequence,nativeRowAt} from '../src/native-grid.js';
 import {valueBytes,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {compareIntervals} from '../scripts/check-effective-geographic-regression.mjs';
 
@@ -36,7 +36,7 @@ test('native interval consumers validate late malformed intervals and preserve l
 });
 
 test('dense interval comparison and canonical hashing stay streaming under a 48MiB child heap',()=>{
- const sequence=new URL('../src/native-sequence.js',import.meta.url).href;
+ const sequence=new URL('../src/native-grid.js',import.meta.url).href;
  const checker=new URL('../scripts/check-effective-geographic-regression.mjs',import.meta.url).href;
  const hash=new URL('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',import.meta.url).href;
  const code=`import {nativeSequence} from ${JSON.stringify(sequence)};import {compareIntervals} from ${JSON.stringify(checker)};import {valueSha} from ${JSON.stringify(hash)};
@@ -45,4 +45,14 @@ test('dense interval comparison and canonical hashing stay streaming under a 48M
  if(result.length)throw Error('invented loss');console.log(JSON.stringify({sha:valueSha(rows),rss:process.resourceUsage().maxRSS}));`;
  const result=spawnSync(process.execPath,['--max-old-space-size=48','--input-type=module','-e',code],{encoding:'utf8',timeout:60000});
  assert.equal(result.status,0,result.stderr);assert.match(JSON.parse(result.stdout).sha,/^[a-f0-9]{64}$/);
+});
+
+test('mapped and filtered component cursors are repeatable without retaining complete component values',()=>{
+ let live=0,closed=0;
+ const rows=nativeSequence(4,function*(){live++;try{for(let i=0;i<4;i++)yield {id:i,metadata:'x'.repeat(4096)};}finally{live--;closed++;}});
+ const selected=rows.filter(row=>row.id%2===0).map(row=>row.id);
+ assert.equal(selected.length,2);assert.deepEqual([...selected],[0,2]);assert.deepEqual([...selected],[0,2]);
+ assert.equal(selected.find(id=>id===2),2);assert(selected.some(id=>id===0));assert(selected.every(id=>id%2===0));
+ assert.equal(live,0);assert(closed>=6);
+ assert.throws(()=>rows.map(()=>{throw Error('consumer error');}).at(0),/consumer error/);assert.equal(live,0);
 });

@@ -1,7 +1,7 @@
 // #1569 prevention helper. Input pins/binding must be derived by the trusted
 // selected-bank resolver. These functions do not select/activate a release.
 import {createHash} from 'node:crypto';
-import {isNativeSequence} from '../../../src/native-sequence.js';
+import {isNativeSequence,nativeSequence} from '../../../src/native-grid.js';
 import fs from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
@@ -77,7 +77,7 @@ export function valueSha(value) {
  if(length)hash.update(parts.join(''));
  return hash.digest('hex');
 }
-const same=(a,b)=>valueBytes(a).equals(valueBytes(b));
+const same=(a,b)=>valueSha(a)===valueSha(b);
 const freeze=v=>{if(v&&typeof v==='object'){Object.values(v).forEach(freeze);Object.freeze(v);}return v;};
 // The executing checkout supplies policy authority. reader.version can be an
 // untrusted candidate and therefore must never choose the catalogue. Policy is
@@ -391,7 +391,7 @@ export function readOriginalRuleAuthority(reader, pins, sourceOutputAliases=[]) 
  const preimage=batch?{version:3,source_profile:issued.source_rule.profile,source_rule:issued.source_rule,representation:'literal-base-or-complete-additions',native_method:manifest.method,executed_code:request.executed_code}:
   {version:2,source_rule_body_sha256:issued.source_rule.review_body_sha256,representation:'literal-base-or-complete-additions',native_method:manifest.method,executed_code:request.executed_code};
  demand(valueSha(preimage)===ledger.rule_sha256,'Original complete executed rule preimage differs');
- demand(ledger.version===1&&ledger.kind==='native-additive-repair-ledger-v1'&&Array.isArray(ledger.scope_ids)&&Array.isArray(ledger.rows)&&ledger.rows.length===ledger.scope_ids.length&&new Set(ledger.scope_ids).size===ledger.rows.length&&ledger.rows.every((r,i)=>r.component_id===ledger.scope_ids[i]),'Original complete ledger scope changed');
+ demand(ledger.version===1&&ledger.kind==='native-additive-repair-ledger-v1'&&isNativeSequence(ledger.scope_ids)&&isNativeSequence(ledger.rows)&&ledger.rows.length===ledger.scope_ids.length&&new Set(ledger.scope_ids).size===ledger.rows.length&&ledger.rows.every((r,i)=>r.component_id===ledger.scope_ids[i]),'Original complete ledger scope changed');
  demand(Array.isArray(issued.source_rule.expected_ids)&&same([...issued.source_rule.expected_ids].sort(),[...ledger.scope_ids].sort())&&source.components===ledger.scope_ids.length,'Original complete source denominator differs');
  const selected=ledger.rows.filter(r=>['assigned','zero-cell'].includes(r.disposition));
  for(const row of selected){demand(row.source_receipt_sha256===pins.source_facts.sha256&&valueSha(row.geometry)===row.geometry_sha256,'Original whole primitive/source receipt changed');coordinateBounds(row.geometry);}
@@ -2038,24 +2038,53 @@ export function readRetainedRegistryAuthority(reader, entry, observationReader, 
   limitations:['Whole original preimage, issued requests and qualified source predecessor authenticated. Policy semantics and actual current selected-bank applicability remain separately required; this view cannot authorize selection.']}));
 }
 
+// Validated ordered component indexes retain only the source cursor and count.
+// Lookups reread one component at a time; geometry is never a Map value.
+export function repairRowsIndex(source,{project=row=>row,include=()=>true}={}) {
+ demand(isNativeSequence(source),'Missing complete component sequence');
+ let size=0,previous;
+ for(const raw of source){const row=project(raw);
+  demand(!previous||compareRepairComponents(previous,row)<0,'Foreign/duplicate/unordered component');
+  previous={component_id:row.component_id,authority_sha256:row.authority_sha256};if(include(row))size++;
+ }
+ const index={size,
+  get(key){
+   let identity;try{const [authority_sha256,component_id]=JSON.parse(key);identity={authority_sha256,component_id};}catch{return undefined;}
+   let lo=0,hi=source.length;
+   while(lo<hi){const mid=Math.floor((lo+hi)/2),row=project(source.at(mid));
+    if(compareRepairComponents(row,identity)<0)lo=mid+1;else hi=mid;}
+   if(lo===source.length)return undefined;const row=project(source.at(lo));
+   return repairComponentKey(row)===key&&include(row)?row:undefined;
+  },
+  has(key){return index.get(key)!==undefined;},
+  *values(){for(const raw of source){const row=project(raw);if(include(row))yield row;}},
+  *keys(){for(const row of index.values())yield repairComponentKey(row);},
+  *entries(){for(const row of index.values())yield [repairComponentKey(row),row];},
+  [Symbol.iterator](){return index.entries();}
+ };return Object.freeze(index);
+}
+export const repairIndexValues=index=>nativeSequence(index.size,()=>index.values());
+
 export function normaliseRetainedRepairLedger(ledger,registry) {
  const authorities=authorityRegistry(registry),legacy=ledger?.version===1&&ledger.kind==='native-additive-repair-ledger-v1';
  demand(legacy||ledger?.version===2&&ledger.kind==='native-additive-repair-ledger-v2'&&ledger.authority_registry_sha256===valueSha(registry),'Unsupported or unbound versioned repair ledger');
- demand(Array.isArray(ledger.scope_ids)&&Array.isArray(ledger.rows)&&ledger.scope_ids.length===ledger.rows.length,'Incomplete complete ledger scope');
+ demand(isNativeSequence(ledger.scope_ids)&&isNativeSequence(ledger.rows)&&ledger.scope_ids.length===ledger.rows.length,'Incomplete complete ledger scope');
  let legacyEntry;if(legacy){demand(hash(ledger.rule_sha256),'Missing original v1 rule');const matches=registry.entries.filter(e=>e.rule_sha256===ledger.rule_sha256);demand(matches.length===1,'Original v1 authority omitted or ambiguous');legacyEntry=matches[0];}
- const rows=new Map();let previous;
- for(let i=0;i<ledger.rows.length;i++){
-  const row=ledger.rows[i],identity=legacy?{...row,authority_sha256:legacyEntry.authority_sha256}:row;
-  demand(typeof row.component_id==='string'&&row.component_id&&row.component_id===ledger.scope_ids[i]
-   &&(!previous||compareRepairComponents(previous,identity)<0),'Foreign/duplicate/unordered component');previous=identity;
+ let previous,i=0;
+ for(const row of ledger.rows){
+  const identity=legacy?{...row,authority_sha256:legacyEntry.authority_sha256}:row;
+  demand(typeof row.component_id==='string'&&row.component_id&&row.component_id===ledger.scope_ids.at(i)
+   &&(!previous||compareRepairComponents(previous,identity)<0),'Foreign/duplicate/unordered component');previous={component_id:identity.component_id,authority_sha256:identity.authority_sha256};i++;
   demand(['assigned','zero-cell','already-resolved','rejected','awaiting-evidence'].includes(row.disposition),'Unknown original ledger disposition');
   if(!['assigned','zero-cell'].includes(row.disposition))continue;
   const entry=legacy?legacyEntry:authorities.get(row.authority_sha256);demand(entry&&(!Object.hasOwn(row,'rule_sha256')||row.rule_sha256===entry.rule_sha256),'Per-component original authority rebound');
-  if(nativeOnlyComponent({...row,rule_sha256:entry.rule_sha256,authority_sha256:entry.authority_sha256},valueSha)){rows.set(repairComponentKey({...row,authority_sha256:entry.authority_sha256}),{...row,rule_sha256:entry.rule_sha256,authority_sha256:entry.authority_sha256});continue;}
+  if(nativeOnlyComponent({...row,rule_sha256:entry.rule_sha256,authority_sha256:entry.authority_sha256},valueSha)){continue;}
   demand(typeof row.target_id==='string'&&Number.isSafeInteger(row.pixelIndex)&&row.pixelIndex>0&&hash(row.base_geometry_sha256)&&hash(row.geometry_sha256)&&hash(row.source_receipt_sha256)&&valueSha(row.geometry)===row.geometry_sha256,'Missing complete original primitive identity');
   coordinateBounds(row.geometry);demand(Number.isSafeInteger(row.native_cells)&&(row.disposition==='assigned'?row.native_cells>0:row.native_cells===0),'False original native contribution');
-  rows.set(repairComponentKey({...row,authority_sha256:entry.authority_sha256}),{...row,rule_sha256:entry.rule_sha256,authority_sha256:entry.authority_sha256});
  }
+ const rows=repairRowsIndex(ledger.rows,{include:row=>['assigned','zero-cell'].includes(row.disposition),
+  project:row=>{const entry=legacy?legacyEntry:authorities.get(row.authority_sha256);
+   return entry?{...row,rule_sha256:entry.rule_sha256,authority_sha256:entry.authority_sha256}:row;}});
  return {rows,authorities,registry_sha256:valueSha(registry)};
 }
 export function compareVersionedRepairLedgers(before,after,{beforeRegistry,afterRegistry}) {

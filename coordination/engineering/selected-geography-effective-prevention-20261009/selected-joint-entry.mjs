@@ -12,7 +12,7 @@ const P = 'coordination/engineering/selected-geography-effective-prevention-2026
 export const JOINT_CODE = Object.freeze([
   'scripts/run-geographic-check.py',
   'scripts/native-word-store.mjs','scripts/native-patch-store.mjs', 'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs',
-  'src/native-grid.js','src/native-sequence.js', 'src/ownership-codec.js',
+  'src/native-grid.js', 'src/ownership-codec.js',
   P + 'selected-neighbor-prevention.mjs', P + 'selected-checkpoint.mjs', P + 'selected-joint-entry.mjs',
   'scripts/accepted-selected-checkpoint.mjs', 'scripts/check-handoff-scope.mjs',
   'scripts/evidence-policy.mjs', 'scripts/evidence-quality.mjs', 'scripts/geographic-report-artifact.mjs',

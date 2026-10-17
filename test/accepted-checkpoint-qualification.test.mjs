@@ -18,7 +18,7 @@ const MODULE='coordination/engineering/selected-geography-effective-prevention-2
 const PROGRAMME='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
 const CATALOGUE='coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json';
 const CODE=[MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/native-word-store.mjs','scripts/native-patch-store.mjs','scripts/check-effective-geographic-regression.mjs',
-  'scripts/selected-reference-metadata.mjs','src/reference-metadata.js','src/native-grid.js','src/native-sequence.js','src/ownership-codec.js'];
+  'scripts/selected-reference-metadata.mjs','src/reference-metadata.js','src/native-grid.js','src/ownership-codec.js'];
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const polygon=(x,y=0)=>({type:'Polygon',coordinates:[[[x,y],[x+.2,y],[x+.2,y+.2],[x,y+.2],[x,y]]]});
 const feature=(id,x)=>({type:'Feature',id,properties:{id,parent_id:'parent'},geometry:polygon(x)});
@@ -412,8 +412,8 @@ test('accepted original archive admits a private successor without a catalogue r
   f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[]});f.commit();
   const result=await qualify(f,a);assert.equal(result.available,true);
   assert.equal(result.state.accepted_execution.kind,'accepted-selected-checkpoint-artifact-v1');
-  assert.equal(result.state.ledger.rows.length,2);assert.equal(result.state.ledger.rows[1].disposition,'rejected');
-  assert.deepEqual(f.api.projectNativeRows({state:result.state,rows:[1]}).rows,[{y:1,runs:[[0,1,2]]}]);
+  assert.equal(result.state.ledger.rows.length,2);assert.equal(result.state.ledger.rows.at(1).disposition,'rejected');
+  assert.deepEqual(nativeLiteral(f.api.projectNativeRows({state:result.state,rows:[1]}).rows),[{y:1,runs:[[0,1,2]]}]);
   assert.equal(f.api.projectSourceFeatures({state:result.state,ids:['A']}).features[0].id,'A');
   const candidateReader=new f.native.ImmutableReader(f.root,f.trusted,{invocation:a.reader.invocation});
   const transition=(await f.api.qualifyTransition({state:result.state,reader:candidateReader}));assert.equal(transition.available,true);
@@ -470,7 +470,7 @@ test('accepted admission authenticates committed helper edits without repinning 
   assert.deepEqual(fs.readFileSync(path.join(f.root,CATALOGUE)),catalogue);
   f.transport.releaseAcceptedCheckpoint(a.handle);
 });
-for(const method of ['scripts/evidence-policy.mjs','scripts/native-patch-store.mjs','scripts/native-word-store.mjs','src/native-sequence.js'])
+for(const method of ['scripts/evidence-policy.mjs','scripts/native-patch-store.mjs','scripts/native-word-store.mjs','src/native-grid.js'])
 test('actual executing code remains necessary at accepted admission: '+method,async t=>{
   const f=await acceptedProducts(t);
   fs.appendFileSync(path.join(f.root,method),'\n// uncommitted executable drift\n');

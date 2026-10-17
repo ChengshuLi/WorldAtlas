@@ -1,6 +1,6 @@
 // Trusted immutable data reader. Proposed project code is never imported.
 import fs from 'node:fs';
-import {isNativeSequence} from '../src/native-sequence.js';
+import {isNativeSequence} from '../src/native-grid.js';
 import path from 'node:path';
 import {execFileSync,spawnSync,spawn} from 'node:child_process';
 import {createHash} from 'node:crypto';
@@ -993,23 +993,21 @@ function screenNativeGapBatch({candidates,size,latitudes,rows,rowStart,rowEnd,se
 // checkpoint traversal and unchanged accepted zero-cell primitives remain valid.
 export function newVisibleRepairCandidates(before,after) {
   const old=new Set(before.map(repairComponentKey)),seen=new Set();
-  const added=[];
   for(const row of after){
     demand(!seen.has(repairComponentKey(row)),'Duplicate candidate repair component');seen.add(repairComponentKey(row));
     if(old.has(repairComponentKey(row)))continue;
     if(!['assigned','zero-cell'].includes(row.disposition))continue;
     demand(row.disposition==='assigned'&&Number.isSafeInteger(row.native_cells)&&row.native_cells>0,
       'New gap repair must change map cells: '+row.component_id);
-    added.push(row);
   }
-  return added;
+  return after.filter(row=>!old.has(repairComponentKey(row))&&['assigned','zero-cell'].includes(row.disposition));
 }
 
 // Every observed row is a complete actual before/after owner row. Find a literal
 // native sample inside each new primitive that changes from unowned to its owner.
 // A positive aggregate or a sibling's unrelated changed cell cannot pass.
 export function repairVisibilityWitnesses({candidates,size,latitudes,beforeRows,afterRows}) {
-  demand(Array.isArray(candidates),'Visibility candidate array required');
+  demand(isNativeSequence(candidates),'Visibility candidate array required');
   const before=ownerRows(beforeRows,size),after=ownerRows(afterRows,size),ys=[...before.keys()];
   demand(JSON.stringify(ys)===JSON.stringify([...after.keys()]),'Visibility before/after row scope differs');
   const ids=new Set(),witnesses=new Map();
@@ -1056,13 +1054,13 @@ export function repairVisibilityWitnesses({candidates,size,latitudes,beforeRows,
     k=end;
   }
   }
-  return candidates.map(row=>witnesses.get(repairComponentKey(row))??null);
+  return Array.from(candidates,row=>witnesses.get(repairComponentKey(row))??null);
 }
 
 export function selectedBootstrap(repo,baseline,candidate,{parentRuntimePath}={}) {
   const runtimePaths=[fs.realpathSync(process.execPath),...(parentRuntimePath?[fs.realpathSync(parentRuntimePath)]:[])];
   const codeRoot=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-  const codePaths=['scripts/run-geographic-check.py','scripts/check-effective-geographic-regression.mjs','src/native-grid.js','src/native-sequence.js','src/ownership-codec.js','coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/selected-reference-metadata.mjs','src/reference-metadata.js'];
+  const codePaths=['scripts/run-geographic-check.py','scripts/check-effective-geographic-regression.mjs','src/native-grid.js','src/ownership-codec.js','coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/selected-reference-metadata.mjs','src/reference-metadata.js'];
   const codeStats=codePaths.map(name=>{const file=path.join(codeRoot,name),stat=fs.statSync(file);demand(stat.isFile()&&Number.isSafeInteger(stat.size)&&stat.size>0,'Nonordinary trusted execution code');return {name,file,stat};});
   const launchGit=(process.env.PATH??'').split(path.delimiter).map(p=>path.join(p,'git')).find(p=>{try{return fs.statSync(p).isFile();}catch{return false;}});
   demand(launchGit,'Missing installed Git');runtimePaths.push(fs.realpathSync(launchGit));

@@ -28,7 +28,7 @@ const joined = async promises => {
 // a compatibility catalogue for historical producer schemas.
 export const EXECUTION_CODE = Object.freeze([
   'scripts/run-geographic-check.py',
-  'scripts/native-word-store.mjs', 'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs', 'src/native-grid.js', 'src/ownership-codec.js',
+  'scripts/native-word-store.mjs', 'scripts/native-patch-store.mjs',  'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs', 'src/native-grid.js', 'src/ownership-codec.js',
   'package.json', 'package-lock.json',
   PREFIX + 'selected-neighbor-prevention.mjs',
   PREFIX + 'selected-checkpoint.mjs', PREFIX + 'selected-joint-entry.mjs',

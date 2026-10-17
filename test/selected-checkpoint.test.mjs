@@ -57,13 +57,13 @@ test('native-only append uses exact native bounds and identity without an additi
 test('real catalogue entry qualifies a complete state, retains exceptions and projects exact feature/native rows',async t=>{
  const f=await trustedFixture(t), result=(await f.api.qualifyCheckpoint({reader:f.reader}));
  assert.equal(result.available,true);const state=result.state;
- assert.equal(state.ledger.rows.length,2);assert.equal(state.ledger.rows[1].disposition,'rejected');
+ assert.equal(state.ledger.rows.length,2);assert.equal(state.ledger.rows.at(1).disposition,'rejected');
  const sources=f.api.projectSourceFeatures({state,ids:['A','B']});
  assert.deepEqual(sources.features.map(p=>p.id),['A','B']);assert.equal(sources.inverse.length,2);
  const native=f.api.projectNativeRows({state,rows:[1]});
- assert.deepEqual(native.rows,[{y:1,runs:[[0,1,2]]}]);assert.deepEqual(native.acquired_rows,[]);
+ assert.deepEqual(nativeLiteral(native.rows),[{y:1,runs:[[0,1,2]]}]);assert.deepEqual(native.acquired_rows,[]);
  const fresh=f.api.projectNativeRows({state,rows:[0,1,2,3]});
- assert.deepEqual(fresh.rows,[{y:0,runs:[[0,1,1]]},{y:1,runs:[[0,1,2]]},{y:2,runs:[[1,2,3]]},{y:3,runs:[]}]);
+ assert.deepEqual(nativeLiteral(fresh.rows),[{y:0,runs:[[0,1,1]]},{y:1,runs:[[0,1,2]]},{y:2,runs:[[1,2,3]]},{y:3,runs:[]}]);
  assert.deepEqual(fresh.acquired_rows,[0,2,3]);assert.ok(fresh.custody.new_whole_inputs.length>=2);
  assert.throws(()=>f.api.projectNativeRows({state:JSON.parse(JSON.stringify(state)),rows:[1]}),/private qualified/);
  f.api.releaseCheckpoint(state);assert.throws(()=>f.api.projectSourceFeatures({state,ids:['A']}),/private qualified/);
@@ -126,7 +126,7 @@ test('actual transition rejects missing complete exception records and native ow
  const candidate=candidateProducts(f,{ledger});
  const reader=new f.native.ImmutableReader(f.root,candidate,{invocation:f.reader.invocation});
  await assert.rejects(async()=>(await f.api.qualifyTransition({state:result.state,reader})),/Old complete ledger/);
- assert.deepEqual(f.api.projectNativeRows({state:result.state,rows:[1]}).rows,[{y:1,runs:[[0,1,2]]}]);
+ assert.deepEqual(nativeLiteral(f.api.projectNativeRows({state:result.state,rows:[1]}).rows),[{y:1,runs:[[0,1,2]]}]);
 });
 test('actual transition rejects same-count changed native ownership without reacquiring original science',async t=>{
  const f=await trustedFixture(t), result=(await f.api.qualifyCheckpoint({reader:f.reader}));
@@ -244,7 +244,7 @@ test('archived child custody is retained in its actual parent inventory without 
  assert.notStrictEqual(secondReader.inventory,f.reader.inventory);assert.equal(secondReader.inventory.size,0);
  const second=(await f.api.qualifyCheckpoint({reader:secondReader}));assert.equal(second.available,true);
  assert.notStrictEqual(secondReader.inventory,f.reader.inventory);
- f.api.releaseCheckpoint(first.state);assert.deepEqual(f.api.projectNativeRows({state:second.state,rows:[1]}).rows,[{y:1,runs:[[0,1,2]]}]);
+ f.api.releaseCheckpoint(first.state);assert.deepEqual(nativeLiteral(f.api.projectNativeRows({state:second.state,rows:[1]}).rows),[{y:1,runs:[[0,1,2]]}]);
 });
 
 
@@ -298,7 +298,7 @@ for(const [name,options,expected] of [
  const f=await trustedFixture(t,{nativeAppend:true}),{state}=(await f.api.qualifyCheckpoint({reader:f.reader}));
  const next=await appendNativeAuthority(f,options),reader=new f.native.ImmutableReader(f.root,next.candidate,{invocation:f.reader.invocation});
  await assert.rejects(async()=>(await f.api.qualifyTransition({state,reader})),expected);
- assert.deepEqual(state.ledger.rows,f.ledger.rows);f.api.releaseCheckpoint(state);
+ assert.deepEqual(nativeLiteral(state.ledger.rows),f.ledger.rows);f.api.releaseCheckpoint(state);
 });
 
 test('failed complete literal check preserves authenticated baseline and permits a corrected retry',async t=>{
@@ -306,7 +306,7 @@ test('failed complete literal check preserves authenticated baseline and permits
  const next=await appendNativeAuthority(f,{mutateLedger:l=>{l.rows.at(-1).source_receipt_sha256='0'.repeat(64);}});
  const reader=new f.native.ImmutableReader(f.root,next.candidate,{invocation:f.reader.invocation});
  await assert.rejects(async()=>(await f.api.qualifyTransition({state,reader})),/changed original appended primitive/);
- assert.deepEqual(state.ledger.rows,f.ledger.rows);
+ assert.deepEqual(nativeLiteral(state.ledger.rows),f.ledger.rows);
  assert.deepEqual(f.api.projectSourceFeatures({state,ids:[]}).features,[]);
  const recovered=await appendNativeAuthority(f,{name:'recovered'}),retryReader=new f.native.ImmutableReader(f.root,recovered.candidate,{invocation:f.reader.invocation});
  assert.equal((await f.api.qualifyTransition({state,reader:retryReader})).available,true);
@@ -376,8 +376,9 @@ test('new actual physical use of a shadowed source revokes its next-transition e
 
 
 test('checkpoint admission, transition and census share one complete route tree',async t=>{
- const f=await trustedFixture(t),git=f.reader.git.bind(f.reader),calls=[],layers=[];
+ const f=await trustedFixture(t),git=f.reader.git.bind(f.reader),calls=[],layers=[],streamed=[];
  f.reader.git=(...args)=>{calls.push(args);return git(...args);};
+ const stream=f.reader.stream.bind(f.reader);f.reader.stream=(name,...args)=>{streamed.push(name);return stream(name,...args);};
  const readPinned=f.reader.readPinned.bind(f.reader);
  f.reader.readPinned=pins=>{layers.push(pins.map(p=>p.path));return readPinned(pins);};
  const qualified=(await f.api.qualifyCheckpoint({reader:f.reader}));assert.equal(qualified.available,true);
@@ -385,9 +386,11 @@ test('checkpoint admission, transition and census share one complete route tree'
  const census=f.api.checkpointRouteCensus({transition});
  for(const row of census.routes)assert.equal(row.tree,f.git('ls-tree','-z',f.selected,'--',row.path).toString());
  assert.equal(calls.filter(args=>args[0]==='ls-tree'&&args[1]==='-rtz').length,1);
- assert.deepEqual(layers.slice(0,4),[
+ assert.deepEqual(layers,[
   ['data/registry.json','data/envelope.json','data/manifest.json'],
-  ['original/binding.json'],['original/publication.json'],['original/patch-one.json']]);
+  ['original/binding.json'],['data/registry.json','data/envelope.json','data/manifest.json']]);
+ assert.deepEqual([...new Set(streamed)].sort(),['accepted-rebind/request.json','accepted-rebind/result.json','data/ledger.json','data/patch.json','original/patch-one.json']);
+ for(const name of streamed)assert([...f.reader.inventory.values()].some(p=>p.path===name&&p.whole_body_consumed===true),name+' retains actual whole-stream custody');
  f.api.releaseCheckpoint(qualified.state);
 });
 
@@ -482,7 +485,7 @@ test('complete checkpoint qualification uses exact rebind aliases without implic
  for(const commit of commits)fs.unlinkSync(path.join(f.root,'.git','objects',commit.slice(0,2),commit.slice(2)));
  const result=(await f.api.qualifyCheckpoint({reader:s.reader()}));
  assert.equal(result.available,true);assert.equal(result.state.ledger.rows.length,2);
- assert.deepEqual(f.api.projectNativeRows({state:result.state,rows:[1]}).rows,[{y:1,runs:[[0,1,2]]}]);
+ assert.deepEqual(nativeLiteral(f.api.projectNativeRows({state:result.state,rows:[1]}).rows),[{y:1,runs:[[0,1,2]]}]);
  assert.doesNotMatch(s.tracing(),remoteAttempt);
  f.api.releaseCheckpoint(result.state);
 });
@@ -660,10 +663,10 @@ test('bounded native visitation preserves exact rows and custody without retaini
  const f=await trustedFixture(t),state=(await f.api.qualifyCheckpoint({reader:f.reader})).state;
  const visited=[];
  const result=f.api.visitNativeRows({state,rows:[0,1,2,3],visit:rows=>visited.push(...rows)});
- assert.deepEqual(visited,[{y:0,runs:[[0,1,1]]},{y:1,runs:[[0,1,2]]},{y:2,runs:[[1,2,3]]},{y:3,runs:[]}]);
+ assert.deepEqual(nativeLiteral(visited),[{y:0,runs:[[0,1,1]]},{y:1,runs:[[0,1,2]]},{y:2,runs:[[1,2,3]]},{y:3,runs:[]}]);
  assert.deepEqual(result.reused_rows,[1]);assert.deepEqual(result.acquired_rows,[0,2,3]);
  const next=f.api.projectNativeRows({state,rows:[0,1,2,3]});
- assert.deepEqual(next.rows,visited);assert.deepEqual(next.acquired_rows,[0,2,3]);
+ assert.deepEqual(nativeLiteral(next.rows),nativeLiteral(visited));assert.deepEqual(next.acquired_rows,[0,2,3]);
  assert.deepEqual(next.custody,result.custody);
  assert.throws(()=>f.api.visitNativeRows({state,rows:[1,1],visit(){}}),/native row scope/);
  assert.throws(()=>f.api.visitNativeRows({state:structuredClone(state),rows:[],visit(){}}),/private qualified/);
