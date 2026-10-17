@@ -92,6 +92,12 @@ function executionGuard(repo, trusted) {
 export async function selectedJointStage(repo, trusted, baseline, candidate, destination, parentRuntimePath) {
   demand(commit(baseline) && commit(candidate), 'Joint comparison requires immutable selected commits');
   destination = path.resolve(destination); fresh(destination);
+  let phaseStarted = performance.now();
+  const phaseComplete = phase => {
+    const now = performance.now();
+    process.stderr.write(JSON.stringify({selected_joint_phase:phase, elapsed_ms:Math.round(now - phaseStarted)}) + '\n');
+    phaseStarted = now;
+  };
   const code = executionGuard(repo, trusted);
   const native = await import('../../../scripts/check-effective-geographic-regression.mjs');
   const {compareSelectedCheckpointNative} = await import('../../../scripts/selected-checkpoint-native.mjs');
@@ -102,6 +108,7 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
   let state, acceptedHandle;
   const accepted = await import('../../../scripts/accepted-selected-checkpoint.mjs');
   const transportInputs = [];
+  phaseComplete('trusted-startup');
   try {
     const locatorInput = checkpointTransportInput(afterReader, accepted.ACCEPTED_CHECKPOINT_LOCATOR);
     transportInputs.push(locatorInput.pin);
@@ -115,7 +122,10 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
         transportInputs.push(checkpointTransportInput(afterReader, archiveName, {consume:false}).pin);
       }
       const token = process.env.GH_TOKEN;
-      if (!token) return coldDecision({cold:'baseline-and-candidate', reason:'Accepted checkpoint authenticated API access unavailable'});
+      if (!token) {
+        phaseComplete('checkpoint-acquisition');
+        return coldDecision({cold:'baseline-and-candidate', reason:'Accepted checkpoint authenticated API access unavailable'});
+      }
       const proof = await accepted.acquireAcceptedCheckpoint({repo:process.env.GITHUB_REPOSITORY ?? 'ChengshuLi/WorldAtlas',
         locator:locator.acceptance, token,
         retainedArchive:archiveName ? () => {
@@ -123,16 +133,23 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
           transportInputs[archiveIndex] = input.pin;
           return input.body;
         } : undefined});
+      phaseComplete('checkpoint-acquisition');
       if (!proof.available) return coldDecision({cold:'baseline-and-candidate', reason:proof.reason});
       acceptedHandle = proof.handle;
       qualified = await checkpoint.qualifyAcceptedCheckpoint({reader:beforeReader, acceptedHandle});
-    } else qualified = checkpoint.qualifyCheckpoint({reader:beforeReader});
+    } else {
+      phaseComplete('checkpoint-acquisition');
+      qualified = checkpoint.qualifyCheckpoint({reader:beforeReader});
+    }
+    phaseComplete('baseline-qualification');
     if (!qualified.available) return coldDecision(qualified);
     state = qualified.state;
     const transition = checkpoint.qualifyTransition({state, reader:afterReader});
+    phaseComplete('candidate-qualification');
     if (!transition.available) return coldDecision(transition);
     checkpoint.authenticateTransition({transition});
     const nativeReport = await compareSelectedCheckpointNative({transition});
+    phaseComplete('native-comparison');
     demand(nativeReport && ['native-regressions-found', 'no-new-native-loss'].includes(nativeReport.status),
       'Joint native consumer did not complete an actual comparison');
     if (nativeReport.status === 'native-regressions-found') return result(nativeReport, null);
@@ -175,6 +192,7 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
     for (const [name, body] of [['derived-certificate.json.gz', certificateEncoded],
       ['derived-facts.json', derivedFacts], ['checkpoint-routes.json', routes], ['derived-publication.json', derivedPublicationBody]])
       fs.writeFileSync(path.join(destination, name), body, {flag:'wx', mode:0o644});
+    phaseComplete('checkpoint-output');
     return result(nativeReport, derivedPublication);
   } finally {
     if (state) checkpoint.releaseCheckpoint(state);
