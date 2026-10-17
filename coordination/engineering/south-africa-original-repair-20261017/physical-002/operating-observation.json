@@ -1,0 +1,34 @@
+{
+  "kind": "actual-stock-whole-physical-observation",
+  "accepted_code": "282d14b4682f738fed6a0e6f3ee0d0e4b775d611",
+  "source_stage_commit": "637587a507666dc777083097d0ee5348ab3532b3",
+  "actual_exit_code": 0,
+  "external_elapsed_seconds": 16.79,
+  "darwin_time_l_maximum_resident_set_size_bytes": 330563584,
+  "whole_targets": 68,
+  "issues": 20,
+  "issue_reasons": {
+    "contradictory_land_water_support": 5,
+    "L2-outside-L1": 1,
+    "missing_reconstruction": 3,
+    "extra_reconstruction": 11
+  },
+  "query_records": 272,
+  "runtime": {
+    "shapely": "2.1.2",
+    "geos": "3.13.1"
+  },
+  "physical_body_sha256": "e6b198ea35d9bc580a43426962ff4b076a16f3e879a3fea2eaa5a064277bf54f",
+  "failed_attempts": [
+    {
+      "attempt": "physical-001",
+      "exit_code": 1,
+      "reason": "Mac launcher inherited __PYVENV_LAUNCHER__; configured Python failed import before scientific input reads. Corrected only supervisor environment before Node exec; source/config/runtime bodies unchanged.",
+      "stderr_sha256": "15f048c397ae90690d7a68a78286eafa59378545ab58142338947286f84e9758"
+    }
+  ],
+  "limits": [
+    "All physical issues/witnesses are retained, not cleared by this observation.",
+    "No source/current legal approval, native qualification or accepted repair credit."
+  ]
+}
