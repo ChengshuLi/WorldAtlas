@@ -1,6 +1,5 @@
 import {execFileSync, spawnSync} from 'node:child_process';
 import {candidateGeographyCode} from '../scripts/integration-profile.mjs';
-import {gitBlobTransport} from '../scripts/git-blob-transport.mjs';
 import {memoizeImmutableGitBlobs} from '../scripts/immutable-git-blobs.mjs';
 import {fullCheckoutPatterns,focusedCheckoutPatterns,loadPackageInputs,packagePathRequired} from '../scripts/package-inputs.mjs';
 import {sha256, subjectsHash} from '../scripts/evidence-quality.mjs';
@@ -102,7 +101,7 @@ function fixture({head=sha('a'),base=sha('b'),candidate=sha('c')}={}) {
   };
   f.options = () => ({api:f.api,repo,number:2,expectedHead:head,policy:{version:1,mode:'enforce-new',activation_time:'2100-01-01T00:00:00Z'},
     integrationRequestId:'owned-candidate-test-request',
-    evidenceCheck:async()=>{f.evidenceReads=(f.evidenceReads??0)+1;if(f.staleReview)throw Error('Missing independent exact-head review');return {status:'legacy'};}});
+    evidenceCheck:async()=>{throw Error('Ordinary queue must not run the removed generic evidence traversal');}});
   f.complete = extra => completeIntegration({...f.options(),integrationResult:'success',geographyResult:'success',testedBase:base,testedCandidate:candidate,
     geographyReportLoader:async()=>({version:1,method_id:'worldatlas-trusted-geography-check-v1',
       baseline_commit:f.base,trusted_code_commit:f.base,candidate_commit:extra?.testedCandidate??candidate,candidate_code_executed:false,
@@ -256,11 +255,26 @@ test('stale merge object and truncated inventories fail closed', async () => {
   const a=fixture();a.parentBase=sha('e');await assert.rejects(prepareIntegration(a.options()),/exact current main/);
   const b=fixture();b.truncated=true;await assert.rejects(prepareIntegration(b.options()),/Incomplete integration tree/);
 });
-test('stale head, review or issue scope prohibit integration', async () => {
-  const a=fixture();a.pr.head.sha=sha('e');await assert.rejects(a.complete(),/head changed/);
-  const b=fixture();b.staleReview=true;await assert.rejects(b.complete(),/exact-head review/);
-  const c=fixture();c.issue.state='closed';await assert.rejects(c.complete(),/open GitHub issue/);
-  assert.equal(a.writes.length+b.writes.length+c.writes.length,0);
+test('changed reviewed head prohibits integration', async () => {
+  const f=fixture();f.pr.head.sha=sha('e');await assert.rejects(f.complete(),/head changed/);
+  assert.equal(f.writes.length,0);
+});
+test('ordinary metadata is not a queue gate or another remote evidence traversal', async () => {
+  for (const [body,branch] of [['','fix/Map.Errors_2026'],['Refs #1. Context.\nCloses #2\nCloses #3','feature/fixes'],['Unlinked reviewed change','plain-branch']]) {
+    const f=fixture();f.pr.body=body;f.pr.head.ref=branch;f.issue.state='closed';f.issue.labels=[];f.issue.body='no machine contract';
+    const prepared=await prepareIntegration(f.options());assert.equal(prepared.candidate,f.candidate);
+    assert.equal((await f.complete()).accepted,true);assert.equal(f.writes[0].sha,f.head);
+    assert.equal(f.calls.filter(row=>/\/issues\/|\/git\/blobs\//.test(row.route)).length,0);
+  }
+});
+test('editing prose during real report validation does not invalidate the reviewed code', async()=>{
+  const f=fixture(),loader=f.complete;
+  const result=await f.complete({geographyReportLoader:async()=>{
+    f.pr.title='Clearer title';f.pr.body='Closes #1, closes #2. Both completed.';
+    return {version:1,method_id:'worldatlas-trusted-geography-check-v1',baseline_commit:f.base,trusted_code_commit:f.base,
+      candidate_commit:f.candidate,candidate_code_executed:false,published:false,source_approval:false,gate_status:'passed',status:'not-applicable'};
+  }});
+  assert.equal(result.accepted,true);assert.equal(f.writes[0].commit_title,f.pr.title);assert.equal(f.writes[0].commit_message,f.pr.body);
 });
 test('failed or skipped candidate tests never merge an open PR', async () => {
   for(const integrationResult of ['failure','cancelled','skipped']) {
@@ -278,17 +292,12 @@ test('the final queue validates its real candidate without redundant author chec
   assert.equal(prepared.candidate,f.candidate);
   const result=await f.complete();
   assert.equal(result.accepted,true);assert.equal(f.writes.length,1);
-  assert.equal(f.evidenceReads,2,'Preparation and final merge each validate current evidence once');
+  assert.equal(f.calls.filter(row=>/\/issues\/|\/git\/blobs\//.test(row.route)).length,0);
 });
-test('missing author checks cannot hide failed current checks or current evidence', async () => {
-  for(const failure of ['checks','evidence']) {
-    const f=fixture();f.checks=[];
-    if(failure==='checks')f.checks=[{id:1,name:'external-validation',app:{id:2},status:'in_progress',conclusion:null}];
-    else f.staleReview=true;
-    await assert.rejects(prepareIntegration(f.options()),failure==='checks'?/pending or failed/:/exact-head review/);
-    await assert.rejects(f.complete(),failure==='checks'?/pending or failed/:/exact-head review/);
-    assert.equal(f.writes.length,0);
-  }
+test('missing author checks cannot hide failed current checks', async () => {
+  const f=fixture();f.checks=[{id:1,name:'external-validation',app:{id:2},status:'in_progress',conclusion:null}];
+  await assert.rejects(prepareIntegration(f.options()),/pending or failed/);
+  await assert.rejects(f.complete(),/pending or failed/);assert.equal(f.writes.length,0);
 });
 test('latest failed or pending check replaces old success', () => {
   const good={id:1,name:'scope',app:{id:1},status:'completed',conclusion:'success'};
@@ -353,7 +362,7 @@ test('trusted profile uses focused invariants only for isolated evidence and doc
      assert.equal(integrationProfile('engineering/example',[{filename:helper,previous_filename:scientific}],{}),'full');
    }
  }
- assert.equal(integrationProfile('engineering/example',[{filename:'docs/WORKER_COORDINATION.md'},{filename:'coordination/engineering/example/receipt.json'}],{}),'evidence');
+ assert.equal(integrationProfile('engineering/example',[{filename:'docs/WORKER_COORDINATION.md'},{filename:'coordination/engineering/example/receipt.json',status:'added'}],{}),'evidence');
  for(const filename of ['src/attributes.js','data/hierarchy.json','drizzle/0001.sql','scripts/build-hosted.mjs'])
    assert.equal(integrationProfile('engineering/example',[{filename}],{}),'full');
  assert.equal(integrationProfile('engineering/example',[{filename:'docs/a.md',previous_filename:'src/attributes.js'}],{}),'full');
@@ -460,7 +469,7 @@ test('ordinary focused tests and checkpoint fixture compose while unknown runtim
     }
     assert.equal(integrationProfile('engineering/tests',[file]),'full');
     for(const filename of ['scripts/prepare-delivery-handoff.mjs','docs/LOCAL_WORKSPACES.md',
-      'coordination/engineering/tests/receipt.json'])
+      'coordination/engineering/tests/evidence-quality.json'])
       assert.equal(integrationProfile('engineering/tests',[file,{filename,status:'modified'}],{},tree),'evidence');
     for(const filename of ['scripts/native-ownership/native-preparation-guards.mjs',
       'scripts/native-ownership/chained-build-context.mjs','src/native-grid.js','src/main.js','hosted/app.mjs',
@@ -530,7 +539,7 @@ test('classifier repairs run their complete retained-input regression on the foc
 
 test('transport orchestration keeps whole-byte regressions without unrelated application or scientific replay', () => {
   const controls = ['scripts/git-blob-transport.mjs','scripts/immutable-git-blobs.mjs'];
-  const tests = ['test/git-blob-transport.test.mjs','test/immutable-git-blobs.test.mjs','test/pr-evidence-transport.test.mjs'];
+  const tests = ['test/git-blob-transport.test.mjs','test/immutable-git-blobs.test.mjs'];
   const files = [...controls,...tests].map(filename => ({filename,status:'modified'}));
   const authored = new Map(files.map(file => [file.filename,{type:'blob',mode:'100644',sha:sha('a')}]));
   for (const name of tests) assert(integrationTestFiles('evidence',0).includes(name));
@@ -572,7 +581,7 @@ test('geography omission derives only non-scientific control and validated focus
   assert.equal(required('scripts/merge-integration.mjs',{previous_filename:'scripts/evidence-quality.mjs'}),true);
   assert.equal(required('test/merge-integration.test.mjs',{previous_filename:'scripts/merge-integration.mjs'}),false);
   assert.equal(geographyRequired('engineering/controls',[]),true);
-  assert.equal(geographyRequired('geography/controls',[{filename:'scripts/merge-integration.mjs'}]),true);
+  assert.equal(geographyRequired('geography/controls',[{filename:'scripts/merge-integration.mjs'}]),false);
 });
 
 function controlFixture() {
@@ -622,15 +631,15 @@ test('stale extra PR paths retain authored evidence but cannot select unrelated 
     f.baseline.push(accepted);f.integrated.push({...accepted});
   }
   f.pr.changed_files=f.files.length;
-  const evidence=[];let inventories=0;const original=f.api;
+  let inventories=0;const original=f.api;
   f.api=(route,...args)=>{if(route.includes('/pulls/2/files'))inventories++;return original(route,...args);};
-  const options={...f.options(),evidenceCheck:async({files})=>{evidence.push(structuredClone(files));return {status:'legacy'};}};
+  const options=f.options();
   const prepared=await prepareIntegration(options);
   assert.equal(integrationProfile(f.pr.head.ref,f.files,{},new Map(f.authored.map(row=>[row.path,row]))),'full');
   assert.equal(prepared.profile,'evidence');assert.equal(prepared.geography_required,false);
   assert.equal(prepared.geography_software,false);assert.deepEqual(prepared.files,f.files);
   assert.equal((await f.complete({evidenceCheck:options.evidenceCheck,geographyResult:'skipped'})).accepted,true);
-  assert.deepEqual(evidence,[f.files,f.files],'Both authority phases still inspect the full authored inventory');
+  assert.equal(f.calls.filter(row=>/\/issues\/|\/git\/blobs\//.test(row.route)).length,0);
   assert.equal(inventories,2);
   assert.equal(f.calls.filter(row=>row.route.includes('/git/trees/baseline')).length,2);
   assert.equal(f.calls.filter(row=>row.route.includes('/git/trees/integrated')).length,2);
@@ -718,13 +727,12 @@ test('final omission independently rechecks current method and ordinary focused-
 });
 
 test('omitted geography retains exact candidate, review, statuses and both main guards', async () => {
-  for (const kind of ['head','early-base','late-base','parents','review','status','integration']) {
+  for (const kind of ['head','early-base','late-base','parents','status','integration']) {
     const f=controlFixture(), options={geographyResult:'skipped'};
     if(kind==='head')f.pr.head.sha=sha('d');
     if(kind==='early-base')f.advanceOnRead=1;
     if(kind==='late-base')f.advanceOnRead=3;
     if(kind==='parents')f.parentBase=sha('d');
-    if(kind==='review')f.staleReview=true;
     if(kind==='status')f.failStatusOnRead=2;
     if(kind==='integration')options.integrationResult='skipped';
     await assert.rejects(f.complete(options));assert.equal(f.writes.length,0,kind);
@@ -803,7 +811,7 @@ test('owned preparation checks authority once and ignores the automatic preview'
   for(const preview of [null,sha('d'),sha('c')]) {
     const f=fixture();f.pr.merge_commit_sha=preview;
     const result=await prepareIntegration(f.options());
-    assert.equal(result.candidate,f.candidate);assert.equal(f.evidenceReads,1);
+    assert.equal(result.candidate,f.candidate);assert.equal(f.calls.filter(row=>/\/issues\//.test(row.route)).length,0);
     assert.equal(f.calls.filter(row=>row.route.endsWith('/pulls/2')).length,1);
     assert.equal(f.mainReads,1);assert.equal(f.calls.filter(row=>row.method==='POST').length,2);
     assert.equal(f.calls.filter(row=>row.route.endsWith('/git/commits/'+f.candidate)).length,1);
@@ -854,7 +862,7 @@ function isolatedFixture() {
 test('owned preparation ignores stale automatic preview without editing authored branches',async()=>{
   const f=isolatedFixture();f.parentBase=sha('d');
   const result=await prepareIntegration(f.options());
-  assert.equal(result.candidate,f.synthetic);assert.equal(f.evidenceReads,1);
+  assert.equal(result.candidate,f.synthetic);assert.equal(f.calls.filter(row=>/\/issues\//.test(row.route)).length,0);
   assert.equal(f.refs.get(result.candidate_ref),f.synthetic);assert.equal(result.pr.head.sha,f.head);
   assert.equal(f.writes.length,0);
   assert.equal((await cleanupCandidate(f.options(),result.candidate_ref,f.synthetic)).status,'deleted');
@@ -871,8 +879,8 @@ test('owned preparation retains complete candidate trees and current authority',
   const f=isolatedFixture();f.parentBase=sha('d');f.truncated=true;
   await assert.rejects(prepareIntegration(f.options()),/Incomplete integration tree/);
   assert.equal(f.refs.size,0);assert.equal(f.writes.length,0);
-  const g=isolatedFixture();g.parentBase=sha('d');g.staleReview=true;
-  await assert.rejects(prepareIntegration(g.options()),/exact-head review/);
+  const g=isolatedFixture();g.parentBase=sha('d');g.checks[0].conclusion='failure';
+  await assert.rejects(prepareIntegration(g.options()),/pending or failed/);
   assert.equal(g.operations.some(row=>row.method==='POST'),false);
 });
 test('cleanup refuses another request, main/worker refs and changed owned refs',async()=>{
@@ -899,7 +907,7 @@ test('isolated candidate follows the existing final tests/main/head merge guards
 });
 
 test('same-candidate failed-job retry survives owned ref cleanup and keeps final authority guards',async()=>{
-  for(const changed of [null,'base','head','parents','review','checks','integration','geography']){
+  for(const changed of [null,'base','head','parents','checks','integration','geography']){
     const f=isolatedFixture();f.parentBase=sha('d');
     const prepared=await prepareIntegration(f.options());
     await cleanupCandidate(f.options(),prepared.candidate_ref,prepared.candidate);
@@ -908,7 +916,6 @@ test('same-candidate failed-job retry survives owned ref cleanup and keeps final
     if(changed==='base')f.base=sha('d');
     if(changed==='head')f.pr.head.sha=sha('d');
     if(changed==='parents')f.wrongSyntheticParent=true;
-    if(changed==='review')f.staleReview=true;
     if(changed==='checks')f.checks[0].conclusion='failure';
     if(changed==='integration')options.integrationResult='failure';
     if(changed==='geography')options.geographyResult='failure';
@@ -1112,33 +1119,24 @@ test('known stale tested base or head rejects before expensive evidence/tree ins
  const changed=fixture();changed.pr.head.sha=sha('e');
  await assert.rejects(changed.complete(),/head changed/);
  assert.equal(changed.evidenceReads??0,0);assert.equal(changed.mainReads,0);assert.equal(changed.writes.length,0);
- const eligible=fixture();await eligible.complete();assert.ok(eligible.evidenceReads>0);assert.equal(eligible.writes.length,1);
+ const eligible=fixture();await eligible.complete();assert.equal(eligible.evidenceReads??0,0);assert.equal(eligible.writes.length,1);
 });
 
 
-test('authority changes during candidate creation may reach tests but never reach merge',async()=>{
- for(const changed of ['scope','check','review','head']) {
-  const f=isolatedFixture(),origin=f.api,raw=Buffer.from('immutable evidence'),oid=createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
-  let blobs=0;
+test('checks or reviewed head changing during candidate creation still refuse final merge',async()=>{
+ for(const changed of ['check','head']) {
+  const f=isolatedFixture(),origin=f.api;
   f.api=async(route,...rest)=>{
-   if(route.endsWith('/git/blobs/'+oid)){blobs++;return {sha:oid,size:raw.length,encoding:'base64',content:raw.toString('base64')};}
    const value=await origin(route,...rest);
    if(route.endsWith('/git/commits/'+f.synthetic)) {
-    if(changed==='scope')f.issue.state='closed';
     if(changed==='check')f.checks[0].conclusion='failure';
-    if(changed==='review')f.staleReview=true;
     if(changed==='head')f.pr.head.sha=sha('e');
    }
    return value;
   };
-  const options=f.options();options.evidenceCheck=async({api})=>{
-   await api('/repos/owner/repo/git/blobs/'+oid);
-   if(f.staleReview)throw Error('Missing independent exact-head review');return {status:'legacy'};
-  };
-  const prepared=await prepareIntegration(options);
-  assert.equal(prepared.candidate,f.synthetic);assert.equal(blobs,1);
-  await assert.rejects(f.complete({testedCandidate:prepared.candidate,testedBase:prepared.base,evidenceCheck:options.evidenceCheck}),
-    changed==='scope'?/open GitHub issue/:changed==='check'?/pending or failed/:changed==='review'?/exact-head review/:/head changed/);
+  const prepared=await prepareIntegration(f.options());assert.equal(prepared.candidate,f.synthetic);
+  await assert.rejects(f.complete({testedCandidate:prepared.candidate,testedBase:prepared.base}),
+    changed==='check'?/pending or failed/:/head changed/);
   assert.equal(f.writes.length,0);
   await cleanupCandidate(f.options(),prepared.candidate_ref,prepared.candidate);assert.equal(f.refs.size,0);
  }
@@ -1205,96 +1203,12 @@ function finalMergeFixture({software = false} = {}) {
   return f;
 }
 
-test('actual final validation reads full evidence once and rejects changed bytes and authority', async t => {
-  const f = finalMergeFixture(); const result = await f.complete();
-  assert.equal(result.accepted, true);
-  assert.equal(f.calls.filter(row => row.route.includes('/git/blobs/')).length, 3);
-  assert.equal(f.calls.filter(row => row.route.includes('/pulls/23/files?')).length, 1);
-  assert.equal(f.calls.filter(row => /\/(?:comments|reviews)\?/.test(row.route)).length, 0);
-  assert.equal(f.calls.filter(row => row.route.includes('/artifacts?') || row.route === '/rate_limit').length, 0);
-  assert.equal(f.writes.filter(row => row.method === 'PUT').length, 1);
-  t.diagnostic(JSON.stringify({actual_api_calls: f.calls.length, final_file_passes: 1, duplicate_review_receipt_reads: 0}));
-  for (const changed of ['bytes', 'issue', 'main']) {
-    const bad = finalMergeFixture(), original = bad.api;
-    if (changed === 'bytes') bad.blobs.get(bad.authored.find(row => row.path.endsWith('result.json')).sha).content = Buffer.from('different').toString('base64');
-    let reads = 0;
-    bad.api = async (route, ...args) => {
-      if (changed === 'issue' && route.endsWith('/issues/1183') && ++reads === 2) bad.issue.body += '\nChanged acceptance';
-      if (changed === 'main' && route.endsWith('/git/ref/heads/main') && ++reads === 3) return {object: {sha: 'e'.repeat(40)}};
-      return original(route, ...args);
-    };
-    await assert.rejects(bad.complete()); assert.equal(bad.writes.length, 0, changed);
-  }
-});
-function finalTransportFixture(mode = 'complete', f = finalMergeFixture()) {
-  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'final-validation-transport-'));
-  const origin = f.api, events = []; let fetches = 0;
-  const http = async (route, method = 'GET', ...args) => {
-    events.push({kind: 'http', route});
-    return origin(route, method, ...args);
-  };
-  const transport = gitBlobTransport(http, {repo: f.repo, token: 'synthetic-transport-token', directory,
-    execute: (command, args, options) => {
-      if (!args.includes('fetch')) {
-        if (mode === 'corrupt' && args.includes('blob')) return Buffer.from('changed evidence');
-        return execFileSync(command, args, options);
-      }
-      fetches++; events.push({kind: 'fetch'});
-      const requested = options.input.trimEnd().split('\n');
-      for (const sha of mode === 'incomplete' ? requested.slice(0, -1) : requested) {
-        const blob = f.blobs.get(sha); assert.ok(blob, 'fetch must request only the tree-bound inventory');
-        execFileSync('git', [args[0], 'hash-object', '-w', '--stdin'],
-          {input: Buffer.from(blob.content, 'base64'), env: options.env});
-      }
-      return Buffer.alloc(0);
-    }});
-  f.api = (...args) => transport.api(...args);
-  for (const name of ['prefetchGitBlobs']) {
-    if (mode === 'missing') continue;
-    f.api[name] = function (...args) {
-      assert.equal(this, f.api, `${name} must preserve its original receiver through every wrapper`);
-      if (mode === 'declined' && name === 'prefetchGitBlobs') return;
-      return transport.api[name](...args);
-    };
-  }
-  return {f, events, get fetches() {return fetches;}, close() {
-    transport.close(); assert.deepEqual(fs.readdirSync(directory), []); fs.rmdirSync(directory);
-  }};
-}
-
-test('actual final completion retains byte transport and safe REST fallback', async () => {
-  for (const mode of ['complete', 'missing', 'declined']) {
-    const t = finalTransportFixture(mode), {f} = t;
-    try {
-      const result = await f.complete();
-      assert.equal(result.accepted, true);
-      assert.equal(t.fetches, mode === 'complete' ? 1 : 0);
-      assert.equal(t.events.filter(row => row.kind === 'http' && row.route.includes('/git/blobs/')).length,
-        mode === 'complete' ? 1 : f.blobs.size);
-      assert.equal(f.writes.filter(row => row.route.endsWith('/merge')).length, 1);
-    } finally {t.close();}
-  }
-});
-
-test('incomplete actual transport and changed mutable authority cannot reach merge after feature forwarding', async () => {
-  for (const mode of ['incomplete', 'corrupt', 'complete']) {
-    const t = finalTransportFixture(mode), {f} = t;
-    try {
-      await assert.rejects(f.complete({geographyReportLoader: async () => {
-        f.issue.body += '\nChanged acceptance';
-        return {version: 1, method_id: 'worldatlas-trusted-geography-check-v1', baseline_commit: f.base, trusted_code_commit: f.base, candidate_commit: f.candidate, candidate_code_executed: false, published: false, source_approval: false, gate_status: 'passed', status: 'not-applicable'};
-      }}), mode === 'incomplete' ? /Exact immutable Git transport failed/ : mode === 'corrupt' ? /object changed/ : /Head\/body or issue contract changed/);
-      assert.equal(t.fetches, 1); assert.equal(f.writes.length, 0);
-    } finally {t.close();}
-  }
-});
-
 // A real single-entry stored ZIP exercises the production report loader through
 // prepare and final integration; no GIS is executed.
 // Real HTTP failures and ETag revalidation, with only the network replaced.
 function quotaCompletionFixture({retry = false, refuse = false, headerless = false} = {}) {
   const f = finalMergeFixture(), original = f.api, attempts = [];
-  let remaining = 2000, time = 0, retried = false, issueReads = 0;
+  let remaining = 2000, time = 0, retried = false, prReads = 0;
   const headers = () => headerless ? {etag: '"unchanged"'} : ({'x-ratelimit-limit': '2000', 'x-ratelimit-remaining': String(remaining),
     'x-ratelimit-reset': '3600', 'x-ratelimit-resource': 'core', etag: '"unchanged"'});
   f.api = githubAPI('synthetic-quota-token', {readWaitMs: 60000,
@@ -1307,14 +1221,14 @@ function quotaCompletionFixture({retry = false, refuse = false, headerless = fal
         return Response.json({message: 'secondary rate limit'}, {status: 403,
           headers: {...headers(), 'retry-after': '1'}});
       }
-      if (name.endsWith('/issues/1183') && ++issueReads === 2 && refuse)
+      if (name.endsWith('/pulls/23') && ++prReads === 3 && refuse)
         return Response.json({message: 'Forbidden'}, {status: 403});
       if (init.headers['If-None-Match']) return new Response(null, {status: 304, headers: headers()});
       remaining--;
       const value = await original(route, init.method, init.body ? JSON.parse(init.body) : undefined);
       return Response.json(value, {headers: headers()});
     }});
-  return {f, attempts, complete: () => f.complete(), get remaining() {return remaining;}, get issueReads() {return issueReads;}};
+  return {f, attempts, complete: () => f.complete(), get remaining() {return remaining;}, get prReads() {return prReads;}};
 }
 for (const retry of [false, true]) test(`actual final HTTP retains conditional authority and response-driven retry: ${retry}`, async t => {
   const q = quotaCompletionFixture({retry}), result = await q.complete();
@@ -1327,10 +1241,10 @@ for (const retry of [false, true]) test(`actual final HTTP retains conditional a
     conditional_revalidations: q.attempts.filter(row => row.status === 304).length,
     retry_rejections: q.attempts.filter(row => row.status === 403).length}));
 });
-test('actual final authority stops on a real current-issue HTTP refusal', async () => {
+test('actual final authority stops on a real current-PR HTTP refusal', async () => {
   const q = quotaCompletionFixture({refuse: true});
   await assert.rejects(q.complete(), error => error.github?.http_status === 403);
-  assert.equal(q.issueReads, 2, 'The final current issue reread actually refused');
+  assert.equal(q.prReads, 3, 'The final current PR reread actually refused');
   assert.equal(q.f.writes.length, 0);
 });
 
