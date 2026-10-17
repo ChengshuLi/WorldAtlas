@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/probes/reconcile-authority.py", line 7, in <module>
+    W=pathlib.Path(sys.argv[1]).absolute();C=sys.argv[2];O=pathlib.Path(sys.argv[3]).absolute();P='coordination/engineering/argentina-repair-delivery-20261017';assert len(C)==40 and all(c in '0121106789abcdef'for c in C)
+                                                                                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

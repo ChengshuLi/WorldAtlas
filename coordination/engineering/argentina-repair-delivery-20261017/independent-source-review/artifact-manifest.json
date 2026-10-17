@@ -1,0 +1,66 @@
+{
+  "kind": "retained-independent-Argentina-source-review",
+  "reviewer": "/root/review_argentina_source_scope",
+  "reviewed_checkpoint": "4feb54a3fab6a3dabda5a662523e52403eed77b1",
+  "artifacts": [
+    {
+      "path": "REVIEW.md",
+      "bytes": 9572,
+      "sha256": "e2a936879e6ce1550b8d2960f4a58637b29c46c19a3a1a6a59b0896f36a735a0"
+    },
+    {
+      "path": "audit.py",
+      "bytes": 4989,
+      "sha256": "18373d14fdd2f1289441e5a8750f27eb9cd37149da8d2e5f40e3cc5ac065b7d0"
+    },
+    {
+      "path": "corrected-foreign-check.json",
+      "bytes": 258,
+      "sha256": "2f547a030d975978c71eaad8e18ed70c2fd2385bb322811274534f053d596006"
+    },
+    {
+      "path": "foreign-custody-check.json",
+      "bytes": 322,
+      "sha256": "de30df3743b23da0fe9fbfda343a06e4f8ce2871b7799f6ef7ca897df8f62fdc"
+    },
+    {
+      "path": "review-stage.json",
+      "bytes": 12562,
+      "sha256": "085f614f8711a873e130c5639af0e48d3f7fff42a4dc7617568df4dbfde1ca2a"
+    },
+    {
+      "path": "scope-partition-check.json",
+      "bytes": 513,
+      "sha256": "58306e98e2976c129f7aea34d7ac6f5c4d00a93b2389c2a4cefd9100d7820b78"
+    },
+    {
+      "path": "source-bytes-verification.json",
+      "bytes": 590,
+      "sha256": "6b38bd79e68180570b2b6bd9d11200a338cb45214a2f24eb338051611907e7d4"
+    },
+    {
+      "path": "tdf-union.json",
+      "bytes": 291,
+      "sha256": "d4b4e09ec0eb357b240729d64257db71a7667a95a0adf64eeaa19d59ca008d0c"
+    },
+    {
+      "path": "verify-final-scope.py",
+      "bytes": 2266,
+      "sha256": "4c96e8287a88a48c0f3fd78f3b54bd981f7856f801dbd8ffd1f9dcdae0257528"
+    },
+    {
+      "path": "verify-foreign.py",
+      "bytes": 2926,
+      "sha256": "b8b755c455ffb5cab14fc53bac806563b9f83b7d526f5f6b5cdb921bf121ae0f"
+    },
+    {
+      "path": "verify-source.py",
+      "bytes": 2366,
+      "sha256": "9ea3980897d5e5e823ccb64f5d159eff975f802d2cc4afc976619f77a579e659"
+    }
+  ],
+  "limits": [
+    "Source-scope review only, not physical/native authority or selected delivery approval.",
+    "Original review probes retain their actual local environment paths; those paths are not claimed as portable stock delivery entry points."
+  ]
+}
