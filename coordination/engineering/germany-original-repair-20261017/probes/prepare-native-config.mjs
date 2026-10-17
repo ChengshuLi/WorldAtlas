@@ -18,7 +18,7 @@ const {pinReader}=await import(pathToFileURL(path.join(R,'scripts/prepare-delive
 const reader=pinReader(R),pins=new Map();
 function pin(p,c=H){const q=reader.pin(c,p);pins.set(c+':'+p,q);return q}
 function read(p,c=H){return reader.read(pin(p,c))}
-function json(p,c=H){const b=read(p,c);return JSON.parse(p.endsWith('.gz')?gunzipSync(b):b)}
+function json(p,c=H){const b=read(p,c);if(!p.endsWith('.gz'))return JSON.parse(b);const decoded=gunzipSync(b);pins.set(c+':'+p,{...pins.get(c+':'+p),decoded_bytes:decoded.length,decoded_sha256:sha(decoded)});return JSON.parse(decoded)}
 need(read(P+'/probes/prepare-native-config.mjs',C).equals(fs.readFileSync(fileURLToPath(import.meta.url))),'Method drift');
 const stages=json(P+'/source-stage-001/original-stage-inputs.json',C);
 const membership=json(P+'/source-stage-001/source-target-membership.json',C);
