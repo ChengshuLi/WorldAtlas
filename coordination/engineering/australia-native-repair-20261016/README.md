@@ -1,6 +1,6 @@
-# Australia ADM2 complete repair package: source checkpoint
+# Australia ADM2 complete source and native authority
 
-Issue #2286. Original scope: **125,117 retained-land native cells, 42,634 frozen intervals, 208 direct source owners, native blocks 33–40**. None is excluded. Stock frozen extraction reproduced the complete package. Source/native delivery remains unfinished; this checkpoint has no added-cell credit.
+Issue #2286. Original scope: **125,117 retained-land native cells, 42,634 frozen intervals, 208 direct source owners, native blocks 33–40**. None is excluded. Stock frozen extraction reproduced the complete package. Accepted-code native authority qualifies all125117 original cells. Cumulative selected delivery remains pending; this checkpoint alone has no delivered-cell credit.
 
 Complete original ABS / geoBoundaries AUS ADM1 (2021, nine features) and ADM2 (2022, 547 features) retain all 556 original features, original hashes, CRS84 derivative declarations and CC BY 4.0. The upstream ABS ADM1 original filename specifies GDA2020, while the ADM2 original filename specifies GDA94; neither datum is asserted equivalent to the consumed CRS84 derivative. Full selected-target identity and source membership agree at all 125,117 native centres. All source/target geometries are valid. There are zero candidate boundary ties. The 24,491 candidates in detached original components remain included.
 
@@ -27,3 +27,9 @@ The independently reviewed generic correction was accepted through PR #2298 at d
 `method/prepare-stage.py READ_ONLY_REPOSITORY FROZEN_QUEUE_DIRECTORY FRESH_OUTPUT` consumes exact pinned immutable Git inputs and validates the retained stock extraction. It uses the retained Python 3.12.14 / NumPy / Shapely 2.1.2 / GEOS 3.13.1 environment recorded in its output. `method/check-historical.mjs READ_ONLY_REPOSITORY FRESH_OUTPUT` reproduces the bounded old-hold crosswalk with pinned native code and original operands.
 
 Four actual source-stage admission/immutable-input controls refused an existing output, dangling symlink output, symlink ancestor, and coherently re-encoded wrong frozen owner. All pre-existing file hashes and sentinel bytes remained unchanged. Stock constructor refusal logs are retained under `validation/`. No failed run is counted as a completed authority.
+
+## Accepted native authority and joint delivery handoff
+
+The stock accepted constructor executed at174f2515c9f and completed in12.73seconds, qualifying all125117 cells into208 authority rows. `native-authority-001/` retains the exact original rule preimage, authority binding, constructor result and preparation record. Its native patch remains pinned literally to9c3213d9a8a82ba0faf5e25a2fd6e89907eb0168 and its source evidence to043bba6acde5a2292c7b121f9ecccc8dc259c503. Original source/physical outputs were not rerun. Nineteen split originals with257 authenticated descendants intersect complete requested target bounds and remain whole-geometry negative operands; the complete547-original family stays in custody. All nine native cells overlapping the old d23d0b3c whole-component unknown qualify cell-wise without changing that original continuous-candidate hold.
+
+Root requested one combined Finland/Chile/Australia stock composition and selected-output verification. This packet hands off the complete source/authority evidence; it does not claim current selected owner-zero, cumulative conservation or emitted output acceptance. The independent source review is https://github.com/ChengshuLi/WorldAtlas/issues/2286#issuecomment-6226741795.
