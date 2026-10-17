@@ -29,12 +29,15 @@ for owner in pkg['owners']:
 assert canonical(stages)==raw(P+'source-stage/original-stage-inputs.json')
 rows=[]
 for block in range(5,24):rows+=json.loads(gzip.decompress(raw(P+f'source-stage/frozen-block-{block:03d}.json.gz')))
-assert len(rows)==346353;native=collections.defaultdict(list);counts=collections.Counter();seen=set()
+assert len(rows)==346353;native=collections.defaultdict(list);counts=collections.Counter();seen=set();byindex={r['source_index']:r for r in roster};families=collections.Counter();foreign=[]
 for y,a,z,owners,originals,kind in rows:
  assert len(owners)==1 and owners[0] in pkg['owners'] and kind in ('land','inland-water') and a<z
- native[y].append([a,z,owners[0]]);counts[kind]+=z-a;seen.add(owners[0])
+ native[y].append([a,z,owners[0]]);counts[kind]+=z-a;seen.add(owners[0]);familyset=tuple(sorted({':'.join(byindex[s]['source_id'].split(':')[:3]) for s in originals}));families[familyset]+=z-a
+ others=[byindex[s]['source_id'] for s in originals if not byindex[s]['source_id'].startswith('gb:RUS:')]
+ if others:foreign.append([y,a,z,owners[0],others])
 for runs in native.values():
  runs.sort();assert all(left[1]<=right[0] for left,right in zip(runs,runs[1:]))
 assert counts=={'land':2515829,'inland-water':51138} and seen==set(pkg['owners'])
+competition=data(P+'source-review/source-competitor-native-counts.json');assert sorted(foreign)==sorted(competition['non_russian_original_competitor_intervals']);assert [{'families':list(k),'cells':v} for k,v in sorted(families.items())]==competition['cells_by_source_family_set'];assert sum(r[2]-r[1] for r in foreign)==9451
 patch={'rows':[{'y':y,'runs':runs} for y,runs in sorted(native.items())]};assert canonical(patch)==raw(P+'source-stage/native-patch.json')
-print(json.dumps({'byte_equal_original_stage':True,'byte_equal_native_patch':True,'whole_denominator':sum(counts.values()),'original_segments':len(rows),'targets':len(stages),'complete_source_families':len(custody['families']),'complete_source_features':count,'class_counts':dict(counts)}))
+print(json.dumps({'byte_equal_original_stage':True,'byte_equal_native_patch':True,'whole_denominator':sum(counts.values()),'original_segments':len(rows),'targets':len(stages),'complete_source_families':len(custody['families']),'complete_source_features':count,'foreign_source_contact_cells':sum(r[2]-r[1] for r in foreign),'class_counts':dict(counts)}))
