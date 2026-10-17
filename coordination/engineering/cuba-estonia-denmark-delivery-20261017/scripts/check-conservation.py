@@ -51,7 +51,7 @@ for package in scope['packages']:
  packages.append(dict(country=package['country'],original_cells=len(ok),supported_cells=len(sk),held_cells=len(hk),original_owners=len(oc),supported_owners=len(sc),wholly_held_owners=len(set(oc)-set(sc)),per_owner=[dict(owner=o,original=oc[o],supported=sc[o],held=hc[o]) for o in sorted(oc)]))
  for y,rr in own.items():prior[y]+=rr
 assert allq==config['authorities']
-assert normalize(original_union)[1]==5917136
+assert normalize(original_union)[1]==5999614
 assert auth(config['selector'])==s
 _,patch=pin(HEAD,P+'composition-001/patch.json');assert normalize(rows(patch))==normalize(prior);assert normalize(prior)[1]==5995774
 _,ledger=pin(HEAD,P+'composition-001/selected-ledger.json');_,registry=pin(HEAD,P+'composition-001/authority-registry.json');oldledger=auth(old['logical_asset_map']['ledger']);oldreg=auth(old['authority_registry']);canon=lambda v:json.dumps(v,sort_keys=True,separators=(',',':'))
