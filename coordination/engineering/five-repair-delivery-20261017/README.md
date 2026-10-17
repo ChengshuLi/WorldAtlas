@@ -29,3 +29,7 @@ Together: 2,522 original subjects, 3,631,642 original cells, 3,590,946 supported
 The full eight-package emitted asset/GPU/Canvas smoke, actual current-owner-zero qualification and a distinct exact-head review remain mandatory before root-controlled queue acceptance. The old three-package PR #2342 and earlier failed #2325, their heads and logs remain unchanged. Neither old smoke nor prepared work establishes this delivery. Engineering changes are accepted separately before finalization; this packet does not introduce unaccepted implementation changes.
 
 No production publication, regional approval, contemporary legal jurisdiction certification or historical import is implied.
+
+## Delivery file-mode exception
+
+The Canada audit helper `coordination/engineering/canada-repair-delivery-20261017/probes/reconcile-aafc-diagnostics.py` is normalized from source mode `100755` to delivery mode `100644` for ordinary selected-data admission. Its 7,434 bytes and Git blob remain identical. The original author confirmed explicit Python3 invocation is the intended supported reproduction; the historical shell command is not retained. No scientific executable-mode requirement or direct-exec consumer was found. `verification/canada-delivery-mode-exception.json` records this sole exception to literal source-tree preservation. Original reviewed ancestry and all frozen source/composition proofs remain intact.
