@@ -1,0 +1,26 @@
+[
+  {
+    "script": "prepare-stage.py",
+    "control": "occupied output",
+    "returncode": 1,
+    "sentinel_preserved": true
+  },
+  {
+    "script": "prepare-stage.py",
+    "control": "dangling output",
+    "returncode": 1,
+    "link_preserved": true
+  },
+  {
+    "script": "check-qualification.py",
+    "control": "occupied output",
+    "returncode": 1,
+    "sentinel_preserved": true
+  },
+  {
+    "script": "check-qualification.py",
+    "control": "dangling output",
+    "returncode": 1,
+    "link_preserved": true
+  }
+]

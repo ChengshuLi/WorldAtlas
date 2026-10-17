@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "selector": {
+    "path": "data/ownership-selection.json",
+    "commit": "c4ffca9ba743f68c877fd8542698b28804cf07cf",
+    "mode": "100644",
+    "git_blob_oid": "1c65c4017cfe19f49c176ecb7cd2eed5fedb0d74",
+    "bytes": 1850,
+    "sha256": "73cd741bc51a43faeda36cf8e034f3c49caf45ca7f7c60e042569551f4bb2716"
+  },
+  "effective_release_id": "geography:russia-angola-reviewed-supported-repairs-20261017",
+  "authorities": [
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/russia-repair-delivery-20261017/native-authority-001/original-rule-preimage.json",
+        "commit": "d3c74d563932b99deb695c5fff80a6e4dfb015a5",
+        "git_blob_oid": "35d6fdb9b2e2bfdc75f294089c37b0b78d148d6c",
+        "mode": "100644",
+        "bytes": 756,
+        "sha256": "2bf784e11562edf246bfdc6046c5216abe33ecff8ca8f264fc3872af6da70cb1"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/russia-repair-delivery-20261017/native-authority-001/authority-binding.json",
+        "commit": "d3c74d563932b99deb695c5fff80a6e4dfb015a5",
+        "git_blob_oid": "facf8cce6df16ae3f031942148e1c75dc3eb21d5",
+        "mode": "100644",
+        "bytes": 759,
+        "sha256": "a762e7f989ebd3ad44ca2bd9a6dd2c2acbffb6a53a7e3bd6d73679a8f0ff9e55"
+      },
+      "ledger": {
+        "path": "coordination/engineering/russia-repair-delivery-20261017/native-authority-001/constructor-result.json",
+        "commit": "d3c74d563932b99deb695c5fff80a6e4dfb015a5",
+        "git_blob_oid": "30dffd58e7acc8c585b3f5a66203f2aa29852518",
+        "mode": "100644",
+        "bytes": 12002975,
+        "sha256": "6fd958d1196502f76732e24fec8014504ce7b63602cce1ede1607e4605466fdd"
+      },
+      "native_patch": {
+        "path": "coordination/engineering/russia-repair-delivery-20261017/native-partition-preaccept-001/supported-native-patch.json",
+        "commit": "44b0b0d71e853ad0bebca4fffdd26b74c0a92e0c",
+        "git_blob_oid": "4c4585c02332a5741d0c41e3f4c489cebfdfd3c8",
+        "mode": "100644",
+        "bytes": 8813020,
+        "sha256": "0e5230943726aacc21e19788f211c4933caa910e6244b9a280ac49b394f21e9c"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/angola-repair-delivery-20261017/native-authority-002/original-rule-preimage.json",
+        "commit": "49e6aa8a90a15f692c4309ac2de2b62357bf41f6",
+        "mode": "100644",
+        "git_blob_oid": "8902b6420f07762ab28f58de7f803a9bb1253e00",
+        "bytes": 729,
+        "sha256": "7513a515d6473ccd4b586ff110765671051ddf184926987d4a05d33ef8e8e2b9"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/angola-repair-delivery-20261017/native-authority-002/authority-binding.json",
+        "commit": "49e6aa8a90a15f692c4309ac2de2b62357bf41f6",
+        "mode": "100644",
+        "git_blob_oid": "b2269d20c29351ef8f4e63068d83ca8717374980",
+        "bytes": 732,
+        "sha256": "160c5eacdf9bd68e8017a152e48dc5920b86ecf7bb83996392081124a3377f9e"
+      },
+      "ledger": {
+        "path": "coordination/engineering/angola-repair-delivery-20261017/native-authority-002/constructor-result.json",
+        "commit": "49e6aa8a90a15f692c4309ac2de2b62357bf41f6",
+        "mode": "100644",
+        "git_blob_oid": "6f1f24899a1531f1fe7c879d0f9423c6d54d3443",
+        "bytes": 724912,
+        "sha256": "e994777cfa44ceeadde0182da75e7aba568fd682eff31029184a7e402b24c3f9"
+      },
+      "native_patch": {
+        "bytes": 341436,
+        "commit": "a5e0e64e0b4c843f3821de13b46d7ad85cf3c265",
+        "git_blob_oid": "c7d18dd82b8e854df151786733646418971b4f8d",
+        "mode": "100644",
+        "path": "coordination/engineering/angola-repair-delivery-20261017/conservative-002/native-patch.json",
+        "sha256": "d671b222b2c6df00dcc1d8342ea756efab3f1ac476afdf7b7c41f9c540334973"
+      }
+    }
+  ]
+}
