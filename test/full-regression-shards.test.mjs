@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {fullRegressionShard, integrationTestFiles, PACKAGED_ASSET_TESTS, DATABASE_NEIGHBOR_TESTS, MIGRATION_WORKER_TESTS, COMPONENT_CONTROL_TEST} from '../scripts/run-integration-tests.mjs';
 import {integrationProfile} from '../scripts/integration-profile.mjs';
+import {currentExecutionClosure} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs';
 
 const inventory = fs.readdirSync('test').filter(name => name.endsWith('.test.mjs'))
   .map(name => `test/${name}`).sort();
@@ -54,4 +55,16 @@ test('ordinary selected delivery has no unit inventory while software and explic
   for(const file of PACKAGED_ASSET_TESTS)assert(integrationTestFiles('full',0,'complete').includes(file));
   for(const [profile,shard,selection] of [['evidence',0,'selected-data'],['full',1,'selected-data'],['full',0,'unknown']])
     assert.throws(()=>integrationTestFiles(profile,shard,selection),/Invalid trusted test selection/);
+});
+
+// Exercise the existing production closure, not a second import resolver. If a
+// builder starts consuming these methods, its focused-only route needs review.
+test('focused comparison and checkpoint methods stay outside each actual builder execution closure',()=>{
+  const prefix='coordination/engineering/selected-geography-effective-prevention-20261009/';
+  const methods=['scripts/check-effective-geographic-regression.mjs','scripts/selected-checkpoint-native.mjs',
+    prefix+'selected-checkpoint.mjs',prefix+'selected-joint-entry.mjs'];
+  for(const entry of ['scripts/build-static-inner.mjs','scripts/build-hosted-inner.mjs','scripts/build-cloudflare-inner.mjs']) {
+    const closure=currentExecutionClosure(process.cwd(),entry);
+    for(const method of methods)assert(!closure.includes(method),entry+' now executes '+method);
+  }
 });

@@ -1,4 +1,5 @@
 import {execFileSync, spawnSync} from 'node:child_process';
+import {candidateGeographyCode} from '../scripts/integration-profile.mjs';
 import {gitBlobTransport} from '../scripts/git-blob-transport.mjs';
 import {memoizeImmutableGitBlobs} from '../scripts/immutable-git-blobs.mjs';
 import {fullCheckoutPatterns,focusedCheckoutPatterns,loadPackageInputs} from '../scripts/package-inputs.mjs';
@@ -300,6 +301,87 @@ test('trusted profile uses focused invariants only for isolated evidence and doc
    assert.equal(integrationProfile('engineering/example',[{filename}],{}),'full');
  assert.equal(integrationProfile('engineering/example',[{filename:'docs/a.md',previous_filename:'src/attributes.js'}],{}),'full');
  assert.equal(integrationProfile('engineering/example',[{filename:'coordination/engineering/other/receipt.json'}],{}),'full');
+});
+
+test('immutable reader and checkpoint routing retains the complete actual consumer roster and geography gate', () => {
+  const prefix='coordination/engineering/selected-geography-effective-prevention-20261009/';
+  const methods=['scripts/check-effective-geographic-regression.mjs','scripts/selected-checkpoint-native.mjs',
+    prefix+'selected-checkpoint.mjs',prefix+'selected-joint-entry.mjs'];
+  const consumers=[
+    "test/accepted-checkpoint-qualification.test.mjs",
+    "test/accepted-joint-transport.test.mjs",
+    "test/additive-gap-repair.test.mjs",
+    "test/administrative-original-hashes.test.mjs",
+    "test/component-authority-identity.test.mjs",
+    "test/current-rebind-product-custody.test.mjs",
+    "test/dated-centre-authority.test.mjs",
+    "test/delivery-evidence-derivation.test.mjs",
+    "test/delivery-finalize-config.test.mjs",
+    "test/delivery-handoff-advance.test.mjs",
+    "test/delivery-handoff.test.mjs",
+    "test/delivery-registry-delta.test.mjs",
+    "test/effective-geographic-regression.test.mjs",
+    "test/evidence-byte-bounds.test.mjs",
+    "test/fiji-canonical-reproduction.test.mjs",
+    "test/geographic-adjudication-api.test.mjs",
+    "test/geographic-checkpoint-products.test.mjs",
+    "test/geographic-regression.test.mjs",
+    "test/geographic-report-artifact.test.mjs",
+    "test/geography-prefetch.test.mjs",
+    "test/github-admission.test.mjs",
+    "test/immutable-reader-read.test.mjs",
+    "test/installed-runtime-identity.test.mjs",
+    "test/integration-proof.test.mjs",
+    "test/local-workspace.test.mjs",
+    "test/map-cell-diagnosis.test.mjs",
+    "test/merge-integration.test.mjs",
+    "test/native-additions-order.test.mjs",
+    "test/native-authority-entry.test.mjs",
+    "test/native-checkpoint-consumer.test.mjs",
+    "test/native-diagnostic-entry.test.mjs",
+    "test/native-witness-authority.test.mjs",
+    "test/parallel-geography-comparison.test.mjs",
+    "test/physical-source-retention.test.mjs",
+    "test/qualification-exclusion-prefilter.test.mjs",
+    "test/revised-source-native.test.mjs",
+    "test/selected-checkpoint.test.mjs",
+    "test/selected-data-profile.test.mjs",
+    "test/selected-joint-check.test.mjs",
+    "test/selected-joint-entry.test.mjs",
+    "test/selected-joint-package-boundary.test.mjs",
+    "test/selected-metadata-wiring.test.mjs",
+    "test/source-completed-staging.test.mjs",
+    "test/source-evidence-derivation.test.mjs",
+    "test/source-member-native-delivery.test.mjs",
+    "test/source-target-native-delivery.test.mjs",
+    "test/source-target-native-diagnostic.test.mjs",
+    "test/supported-programs.test.mjs",
+    "test/trusted-geography-check.test.mjs",
+    "test/trusted-workflow-checkouts.test.mjs",
+    "test/unchanged-selected-geography.test.mjs",
+    "test/visible-gap-eligibility.test.mjs"
+];
+  const focused=integrationTestFiles('evidence',0), full=[0,1,2].flatMap(shard=>integrationTestFiles('full',shard));
+  for(const name of consumers) {
+    assert(focused.includes(name), 'Missing actual reader consumer: '+name);
+    assert.equal(full.filter(file=>file===name).length,1);
+  }
+  assert.equal(integrationNeedsBrowser('evidence',0),false);
+  const readerTest={filename:'test/immutable-reader-read.test.mjs',status:'modified'};
+  const tree=new Map([[readerTest.filename,{type:'blob',mode:'100644',sha:sha('a')}]]);
+  for(const filename of methods) {
+    const files=[{filename,status:'modified'},readerTest];
+    assert.equal(integrationProfile('engineering/reader',files,{},tree),'evidence',filename);
+    assert.equal(candidateGeographyCode('evidence',files,'complete'),true,filename);
+    assert.equal(geographyRequired('engineering/reader',files,{},tree),true,filename);
+    for(const outside of ['src/main.js','src/native-grid.js','src/effective-footprint.js',
+      'scripts/build-static-inner.mjs','scripts/native-ownership/native-preparation-guards.mjs',
+      'scripts/check-geographic-regression.py','data/ownership-selection.json','test/compact-ownership.test.mjs']) {
+      for(const changed of [[...files,{filename:outside,status:'modified'}],
+        [{filename,previous_filename:outside,status:'renamed'},readerTest]])
+        assert.equal(integrationProfile('engineering/reader',changed,{},tree),'full',outside);
+    }
+  }
 });
 
 test('ordinary focused tests compose across additions and renames while unknown runtime stays full', () => {
