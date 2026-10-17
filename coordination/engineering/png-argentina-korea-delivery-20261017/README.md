@@ -31,3 +31,7 @@ Argentina's 6,149 literal holds retain CABA 32, prior-fitness 4, Tierra del Fueg
 Korea retains 245 complete domestic source features, 120 atoms, four whole negative families, all 34 physical issues, explicit city crosswalks, and actual-228 versus advertised-229 ADM2 discrepancy. Zero native holds does not resolve source vintage/licensing or regional semantic issues.
 
 Only Korea is eligible for original source-relative package completion after all final gates are accepted. PNG and Argentina remain incomplete. No regional approval, legal-jurisdiction certification, present dry-land guarantee, history import or deployment is claimed. No additional countries are included. Root owns queue dispatch and merge.
+
+## Fresh accepted checkpoint
+
+The stock checkpoint helper independently authenticated PR #2377 acceptance, original run 39006904251, job, exact tested/accepted tree, report and original archive. `checkpoint-accepted-2377/` retains the exact 8,353,550-byte ZIP (SHA-256 bdd8cc3955dbfc805995a7a77b498441effb8e89fd0714efeeecbb46add32315); `data/selected-checkpoint.json` points to that accepted result. Actual checkpoint routes/facts equal the accepted baseline selector, and the new candidate preserves all non-additive fields. The source archive is reused unchanged; no scientific producer is replayed.
