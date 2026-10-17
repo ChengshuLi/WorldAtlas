@@ -1,0 +1,239 @@
+{
+  "status": "Read-only prospective plan, not acceptance or final composition",
+  "pending_baseline": {
+    "commit": "85010f0b006d69328dbdc8a89abaa763a1734492",
+    "path": "coordination/engineering/png-argentina-korea-delivery-20261017/composition-001/patch.json",
+    "mode": "100644",
+    "git_blob_oid": "e2116f86dc797c5cd0fde79883984407d86cc7cf",
+    "bytes": 27259282,
+    "sha256": "6b7e26eeeab957c1d6d743a62a4e7617231bf54acf2ae5739ec38c45013eb4c8"
+  },
+  "pending_baseline_cells": 5910911,
+  "packages": [
+    {
+      "country": "CUB",
+      "reviewed_head": "3d05f267323dcb382434dffacaa5dbfa5cc61ff6",
+      "review_comment": 6230478127,
+      "handoff": {
+        "commit": "3d05f267323dcb382434dffacaa5dbfa5cc61ff6",
+        "path": "coordination/engineering/cuba-repair-delivery-20261017/final-handoff-001/qualified-authority-handoff.json",
+        "mode": "100644",
+        "git_blob_oid": "eaef69982496917f430719a48288779268d71d03",
+        "bytes": 6446,
+        "sha256": "3880fd8a97e02f690a9080b8f6f936bdf00638b251dfb3c80f53bb6189818834"
+      },
+      "accounting": {
+        "commit": "3d05f267323dcb382434dffacaa5dbfa5cc61ff6",
+        "path": "coordination/engineering/cuba-repair-delivery-20261017/final-handoff-001/complete-native-authority-accounting.json",
+        "mode": "100644",
+        "git_blob_oid": "84dc4d04e41ec4527a96dc1d54425c947c76f99a",
+        "bytes": 24743,
+        "sha256": "c8a9d5b6576d8bc9221b4dde7b66c1032b3e9c84fb913f2c63fcc6ee444586f8"
+      },
+      "original_patch": {
+        "commit": "3d05f267323dcb382434dffacaa5dbfa5cc61ff6",
+        "path": "coordination/engineering/cuba-repair-delivery-20261017/source-stage-001/original-native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "b468afc735b1ef332197e905033d79bf2fedeaf6",
+        "bytes": 212889,
+        "sha256": "8963c112b4985c491cf8dcf527dc39f03c8a3d92c8257a70281048f805b3a559"
+      },
+      "literal_holds": null,
+      "quartets": [
+        {
+          "rule_preimage": {
+            "path": "coordination/engineering/cuba-repair-delivery-20261017/native-authority-001/original-rule-preimage.json",
+            "commit": "ea3f3e19dfc216f2937e4e91fd69ab9ddf727637",
+            "mode": "100644",
+            "git_blob_oid": "e7320014247a4324db0a637d25b792af45afdbdb",
+            "bytes": 736,
+            "sha256": "d92e84527aa58fbddfc0c6aec41ef28d778f06a9d9c63b757d2d9a91ff464472"
+          },
+          "source_authority": {
+            "path": "coordination/engineering/cuba-repair-delivery-20261017/native-authority-001/authority-binding.json",
+            "commit": "ea3f3e19dfc216f2937e4e91fd69ab9ddf727637",
+            "mode": "100644",
+            "git_blob_oid": "4ab94fe05deb4fe8da927861d7224598fdb68bf7",
+            "bytes": 739,
+            "sha256": "ee96843fc414e5beb261959f7b522606306296198d0613cc5bbdfbd2ed284ad1"
+          },
+          "ledger": {
+            "path": "coordination/engineering/cuba-repair-delivery-20261017/native-authority-001/constructor-result.json",
+            "commit": "ea3f3e19dfc216f2937e4e91fd69ab9ddf727637",
+            "mode": "100644",
+            "git_blob_oid": "324bbeb71408b68fa244b09ede7923f16733eb86",
+            "bytes": 423684,
+            "sha256": "190239c7bc59124573c6b287f5f7572e0930460db9e9402a9f3c31e8c2221eda"
+          },
+          "native_patch": {
+            "bytes": 212889,
+            "commit": "3ee18a039017b4f42a55eeba55c91236b5d655c7",
+            "git_blob_oid": "b468afc735b1ef332197e905033d79bf2fedeaf6",
+            "mode": "100644",
+            "path": "coordination/engineering/cuba-repair-delivery-20261017/native-config-001/native-requested-patch.json",
+            "sha256": "8963c112b4985c491cf8dcf527dc39f03c8a3d92c8257a70281048f805b3a559"
+          }
+        }
+      ],
+      "original_cells": 26459,
+      "supported_cells": 26459,
+      "held_cells": 0,
+      "supported_owners": 87
+    },
+    {
+      "country": "EST",
+      "reviewed_head": "2b5e89d160bd8b5231c7a94a377c3649239db8bc",
+      "review_comment": 6230493063,
+      "handoff": {
+        "commit": "2b5e89d160bd8b5231c7a94a377c3649239db8bc",
+        "path": "coordination/engineering/estonia-native-repair-20261017/handoff/native-authority-quartet.json",
+        "mode": "100644",
+        "git_blob_oid": "9920326301029ebd8734d3e89ab38bc2fe77bdf0",
+        "bytes": 1548,
+        "sha256": "38a9364b76766cd4c0c793bfbd315371f04a82a4a1c10c3a65c19c252c3a03b4"
+      },
+      "accounting": {
+        "commit": "2b5e89d160bd8b5231c7a94a377c3649239db8bc",
+        "path": "coordination/engineering/estonia-native-repair-20261017/accounting-001/original-scope-disposition.json",
+        "mode": "100644",
+        "git_blob_oid": "83a67c6129ef44411ce2e50fcbcba16d65cd34f1",
+        "bytes": 20364,
+        "sha256": "e67f44cbce0c27c1d0882106c59cb813654c7135f76cd8a668020911d85422e2"
+      },
+      "original_patch": {
+        "commit": "2b5e89d160bd8b5231c7a94a377c3649239db8bc",
+        "path": "coordination/engineering/estonia-native-repair-20261017/source-stage/native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "2818d52d2de533cd7c9666f02418888c0ecb28e7",
+        "bytes": 236546,
+        "sha256": "1c03c2ae853799035e2f5e126149db6029862eb8ec63a47fd8af1df8dc684ae0"
+      },
+      "literal_holds": {
+        "commit": "2b5e89d160bd8b5231c7a94a377c3649239db8bc",
+        "path": "coordination/engineering/estonia-native-repair-20261017/qualified-native-inputs-001/held-original.json",
+        "mode": "100644",
+        "git_blob_oid": "2b22cae93394cf3eb8b6a55fcb33792021b9b292",
+        "bytes": 86366,
+        "sha256": "0460d3659bf4a5d3606e3b0006b14a9d8bfcbd8d01965321cab752c15cf5500f"
+      },
+      "quartets": [
+        {
+          "rule_preimage": {
+            "path": "coordination/engineering/estonia-native-repair-20261017/native-authority-001/original-rule-preimage.json",
+            "commit": "7a6bcd928b1747b0d0b72216f4bdde05d4dced69",
+            "mode": "100644",
+            "git_blob_oid": "3f8fd8199f2a7275c65bf636d48c7e9c4c44873f",
+            "bytes": 749,
+            "sha256": "24bd8b4b2b28eca3321d5b989154e30f6bad393d6a691637f5f59c013d5892cf"
+          },
+          "source_authority": {
+            "path": "coordination/engineering/estonia-native-repair-20261017/native-authority-001/authority-binding.json",
+            "commit": "7a6bcd928b1747b0d0b72216f4bdde05d4dced69",
+            "mode": "100644",
+            "git_blob_oid": "9f6aabf792d0df982aed6359b75154673b4c4882",
+            "bytes": 752,
+            "sha256": "7188d2419741d820818d097c4a96afe32a9d948ad4858adb33d6ebb8e9eee6f5"
+          },
+          "ledger": {
+            "path": "coordination/engineering/estonia-native-repair-20261017/native-authority-001/constructor-result.json",
+            "commit": "7a6bcd928b1747b0d0b72216f4bdde05d4dced69",
+            "mode": "100644",
+            "git_blob_oid": "a5c41e5f8009780311f3fb087f1438d9d196211c",
+            "bytes": 375177,
+            "sha256": "23955c78f3d7c7e35034a8d57b2c032a15b8b640250e8f84053922371d716c9a"
+          },
+          "native_patch": {
+            "bytes": 214279,
+            "commit": "557f84269c836a2648cc6fa0503711dfd9a1903b",
+            "git_blob_oid": "398f70d26eabda9ccff616a0dfef61b2cc48f4ab",
+            "mode": "100644",
+            "path": "coordination/engineering/estonia-native-repair-20261017/qualified-native-inputs-001/native-patch.json",
+            "sha256": "fcbea313f00992c646fffadab9a77999fdad03cbe11cdca8c4fc96ced330b18e"
+          }
+        }
+      ],
+      "original_cells": 34461,
+      "supported_cells": 30621,
+      "held_cells": 3840,
+      "supported_owners": 82
+    },
+    {
+      "country": "DNK",
+      "reviewed_head": "39f34db026b70f9ed94db3cd05ae83445dc20a6e",
+      "review_comment": 6230523163,
+      "handoff": {
+        "commit": "39f34db026b70f9ed94db3cd05ae83445dc20a6e",
+        "path": "coordination/engineering/denmark-repair-delivery-20261017/final-handoff-001/qualified-authority-handoff.json",
+        "mode": "100644",
+        "git_blob_oid": "9005d866e92c6ed072347d0a8f206fafc7e3c5af",
+        "bytes": 5422,
+        "sha256": "c1d35d225c0b0e2fc54029e84aa3921d08e4932d8a68a8b97bc8a6ca3a3e4807"
+      },
+      "accounting": {
+        "commit": "39f34db026b70f9ed94db3cd05ae83445dc20a6e",
+        "path": "coordination/engineering/denmark-repair-delivery-20261017/final-handoff-001/complete-native-authority-accounting.json",
+        "mode": "100644",
+        "git_blob_oid": "a752ba253370f424118761ba811097b381288ee8",
+        "bytes": 21190,
+        "sha256": "46bb29b325b872602a364a4b141a5365df5737cb6c84388144436fdbe8dcd765"
+      },
+      "original_patch": {
+        "commit": "39f34db026b70f9ed94db3cd05ae83445dc20a6e",
+        "path": "coordination/engineering/denmark-repair-delivery-20261017/source-stage-001/original-native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "5114bd7ef4924e26b79880111c40ec9e4ececee9",
+        "bytes": 209915,
+        "sha256": "2372808997b6d30d701fa5e728bf1ed4dc668c8c31fefa3a37b6ebc719903766"
+      },
+      "literal_holds": null,
+      "quartets": [
+        {
+          "rule_preimage": {
+            "path": "coordination/engineering/denmark-repair-delivery-20261017/native-authority-001/original-rule-preimage.json",
+            "commit": "bb515d9f18207a9d7de3db603d5abbefc529f586",
+            "mode": "100644",
+            "git_blob_oid": "cb40ada084e11c33115cecdff8539531c4303863",
+            "bytes": 743,
+            "sha256": "f588108185db78ef5d9af0f72fcbf6653859a0df7bea2e8060783c07dc026cb0"
+          },
+          "source_authority": {
+            "path": "coordination/engineering/denmark-repair-delivery-20261017/native-authority-001/authority-binding.json",
+            "commit": "bb515d9f18207a9d7de3db603d5abbefc529f586",
+            "mode": "100644",
+            "git_blob_oid": "8320c29a448a79d9cd79daa2bf9cd3f7f0331910",
+            "bytes": 746,
+            "sha256": "5ebe6fc9da118fbcab98c9e94af4b01c95ecad16502003c9b002ca7d26ac8148"
+          },
+          "ledger": {
+            "path": "coordination/engineering/denmark-repair-delivery-20261017/native-authority-001/constructor-result.json",
+            "commit": "bb515d9f18207a9d7de3db603d5abbefc529f586",
+            "mode": "100644",
+            "git_blob_oid": "3ff55e3ca4d7315dc30668b1c666a5ab29b59836",
+            "bytes": 374944,
+            "sha256": "87ee5ff68ebfaba8ab4daea18cd2336b1f99e29a69a80517cef76e8d86c60c04"
+          },
+          "native_patch": {
+            "bytes": 209915,
+            "commit": "822bacf332f428485dd8ee75d8cb5f8920b30f59",
+            "git_blob_oid": "5114bd7ef4924e26b79880111c40ec9e4ececee9",
+            "mode": "100644",
+            "path": "coordination/engineering/denmark-repair-delivery-20261017/native-config-001/native-requested-patch.json",
+            "sha256": "2372808997b6d30d701fa5e728bf1ed4dc668c8c31fefa3a37b6ebc719903766"
+          }
+        }
+      ],
+      "original_cells": 27783,
+      "supported_cells": 27783,
+      "held_cells": 0,
+      "supported_owners": 69
+    }
+  ],
+  "new_original_cells": 88703,
+  "new_supported_cells": 84863,
+  "new_held_cells": 3840,
+  "prospective_native_cells": 5995774,
+  "exact_disjoint_union": true,
+  "complete_original_packages_disjoint_from_pending_patch": true,
+  "exact_literal_original_supported_held_partition": true,
+  "finalization_requires_actual_accepted_main_and_identical_reviewed_data_readback": true
+}
