@@ -11,6 +11,9 @@ import {syncBuiltinESMExports} from 'node:module';
 import {jsonBytes, digest, pinReader, publish, admitPublication, prepareRequests, retainProducts, nativeRequests,
   composeAuthorities, packageProjection, rebindCustody, requestProfile, finalizedSelection, finalizedPackageInputs, finalizeDelivery} from '../scripts/prepare-delivery-handoff.mjs';
 
+import {admitPackageInputTransition, PACKAGE_PRODUCER_KIND} from '../scripts/package-inputs.mjs';
+import {committedPackageInputs} from '../scripts/package-output-artifact.mjs';
+
 const commit = 'a'.repeat(40), prefix = 'coordination/engineering/control/';
 function memoryReader() {
   const bodies = new Map(), pins = new Map(); let ordinal = 0;
@@ -1275,6 +1278,13 @@ test('successive finalizations replace authenticated cumulative roots and preser
   const original=f.r.json(config.package_inputs);
   original.inputs.push(unrelated,optional);original.optional_inputs.push(optional);
   f.save('.github/package-inputs.json',original);f.commitAll();config={...config,package_inputs:f.pin('.github/package-inputs.json')};
+  const source = () => {
+    const definition=JSON.parse(fs.readFileSync(path.join(f.root,'.github/package-inputs.json')));
+    return {head:f.git('rev-parse','HEAD'),definition,files:committedPackageInputs(f.root,definition),
+      producer:{kind:PACKAGE_PRODUCER_KIND,workflows:[]},
+      selection:JSON.parse(fs.readFileSync(path.join(f.root,'data/ownership-selection.json')))};
+  };
+  const initial=source(), priorSidecarRaw=fs.readFileSync(path.join(f.root,initial.selection.additive_release.path));
   let expectedCount;
   for(let round=0;round<3;round++){
     const output=finalizeDelivery(config,f.r),definition=JSON.parse(output['package-inputs.json']),selector=JSON.parse(output['ownership-selection.json']);
@@ -1287,6 +1297,19 @@ test('successive finalizations replace authenticated cumulative roots and preser
       if(!Object.values(sidecar.logical_asset_map).some(p=>p.path===pin.path)&&sidecar.runtime_envelope.path!==pin.path)assert(!definition.inputs.includes(pin.path));
     f.save(config.sidecar_output,output[path.posix.basename(config.sidecar_output)]);
     f.save('data/ownership-selection.json',output['ownership-selection.json']);f.save('.github/package-inputs.json',output['package-inputs.json']);f.commitAll();
+    const current=source();
+    const admitted=admitPackageInputTransition(initial,current,{priorSidecarRaw});
+    assert(admitted.removed_selected_inputs.length>0);
+    assert.throws(()=>admitPackageInputTransition(initial,current),/authenticated prior cumulative/);
+    const changed=Buffer.from(priorSidecarRaw);changed[0]^=1;
+    assert.throws(()=>admitPackageInputTransition(initial,current,{priorSidecarRaw:changed}),/authenticated prior cumulative/);
+    const omitted=structuredClone(current);
+    omitted.definition.inputs=omitted.definition.inputs.filter(name=>name!==unrelated);
+    omitted.files=omitted.files.filter(row=>row.path!==unrelated);
+    assert.throws(()=>admitPackageInputTransition(initial,omitted,{priorSidecarRaw}),/not an authenticated prior cumulative role/);
+    const drift=structuredClone(initial);
+    drift.files.find(row=>admitted.removed_selected_inputs.includes(row.path)).oid='0'.repeat(40);
+    assert.throws(()=>admitPackageInputTransition(drift,current,{priorSidecarRaw}),/differs from original source inventory/);
     const next='coordination/engineering/repeated-'+round+'/';
     for(const [name,pin] of [['selected-ledger.json',config.selected_ledger],['patch.json',config.patch],['runtime-envelope.json',config.runtime_envelope]])f.save(next+name,f.r.read(pin));
     f.commitAll();config={...config,selector:f.pin('data/ownership-selection.json'),package_inputs:f.pin('.github/package-inputs.json'),new_prefix:next,sidecar_output:next+'selection-sidecar.json',selected_ledger:f.pin(next+'selected-ledger.json'),patch:f.pin(next+'patch.json'),runtime_envelope:f.pin(next+'runtime-envelope.json')};

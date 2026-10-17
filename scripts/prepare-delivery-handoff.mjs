@@ -11,7 +11,7 @@ import {locate} from './delivery-handoff-advance.mjs';
 import {repairComponentKey, compareRepairComponents} from '../src/native-grid.js';
 import {scientificNativeSelection,originalNativeReference,validateReferenceMetadataHeader} from '../src/reference-metadata.js';
 import {prepareReferenceMetadataProjection,validateReferenceMetadataProjection} from './selected-reference-metadata.mjs';
-import {validatePackageInputs} from './package-inputs.mjs';
+import {validatePackageInputs, selectedCumulativePackageRoles} from './package-inputs.mjs';
 import {composeRetainedLedgers} from '../coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs';
 import {coordinateBounds, normaliseRetainedRepairLedger, compareVersionedRepairLedgers, verifyCompletedSourceTargetNativeAuthority, mergeCompletedNativePatches, verifyCurrentRebindExecution, CURRENT_REBIND_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
@@ -1054,11 +1054,7 @@ export function finalizeDelivery(config, reader) {
   // The prior sidecar body was authenticated against the original selector
   // above. Its cumulative payload is superseded, not a transitive scientific
   // package input; packageProjection still retains complete custody evidence.
-  const priorSelectedPins = prior ? [prior.runtime_envelope, prior.logical_asset_map?.ledger, prior.logical_asset_map?.patch] : [];
-  need(priorSelectedPins.every(p => p && safe(p.path) && p.mode === '100644'
-    && hex(p.git_blob_oid ?? p.blob, 40) && Number.isSafeInteger(p.bytes) && p.bytes > 0 && hex(p.sha256, 64)),
-    'Complete authenticated prior cumulative package roles required');
-  const priorSelectedPaths = prior ? [selection.additive_release.path, ...priorSelectedPins.map(p => p.path)] : [];
+  const priorSelectedPaths = prior ? selectedCumulativePackageRoles(selection, reader.read(reader.pin(config.selector.commit, selection.additive_release.path))).map(pin => pin.path) : [];
   const packageInputs = appendPackageReadPaths(baselinePackage, paths, priorSelectedPaths);
   const expectation = JSON.parse(outputs['selected-delivery-expectations.json']);
   // Preserve the established final smoke-expectation presentation as well.
