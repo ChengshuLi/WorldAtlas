@@ -1,5 +1,5 @@
-import pathlib,subprocess,os,json,hashlib
-D=pathlib.Path(__file__).resolve().parent;W=pathlib.Path((D/'workspace.txt').read_text());PYTHON=str(D.parent/'reusable1922-preserved/cache-complete/source-python/bin/python');P='coordination/engineering/estonia-native-repair-20261017';R=D/'writer-controls';assert not R.exists() and not R.is_symlink();R.mkdir();out=[];H=subprocess.check_output(['git','-C',str(W),'rev-parse','HEAD'],text=True).strip()
+import sys,pathlib,subprocess,os,json,hashlib
+assert len(sys.argv)==3, 'Usage: python CONTROL.py READ_ONLY_REPO EXISTING_SCRATCH_DIRECTORY';W=pathlib.Path(sys.argv[1]).absolute();D=pathlib.Path(sys.argv[2]).absolute();assert W.is_dir() and D.is_dir();PYTHON=sys.executable;P='coordination/engineering/estonia-native-repair-20261017';R=D/'writer-controls';assert not R.exists() and not R.is_symlink();R.mkdir();out=[];H=subprocess.check_output(['git','-C',str(W),'rev-parse','HEAD'],text=True).strip()
 items=[('screen-original-scope.py',[H]),('prepare-stage.py',[]),('check-historical.py',[]),('verify-complete-context.py',[]),('preserve-interpretation.py',[]),('prepare-native-evidence.py',[H]),('check-source-fitness.py',[H]),('verify-native-preparation.py',[H]),('check-accounting.py',[H])]
 for script,extra in items:
  prefix=[PYTHON] if script.endswith('.py') else ['node'];args=[str(W),*extra];env=dict(os.environ);env.pop('NODE_OPTIONS',None);env.pop('NODE_PATH',None)
