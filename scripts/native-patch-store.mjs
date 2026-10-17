@@ -23,7 +23,8 @@ const freeze=value=>{if(value&&typeof value==='object'){Object.values(value).for
 // a complete dense row. Coordinate arrays use the same framed grammar and spill
 // vectors below. Other metadata arrays and individual scalars remain explicit terms.
 class Input {
- constructor(chunks,expected){
+ constructor(chunks,expected,syntaxErrors=false){
+  this.syntaxErrors=syntaxErrors;
   demand(Number.isSafeInteger(expected?.bytes)&&expected.bytes>=0&&/^[a-f0-9]{64}$/.test(expected.sha256),
    'Complete JSON stream identity required');
   this.iterator=chunks[Symbol.asyncIterator]?.()??chunks[Symbol.iterator]?.();
@@ -43,7 +44,8 @@ class Input {
  }
  async peek(){return await this.available()?this.buffer[this.at]:undefined;}
  async space(){while(await this.available()){while(this.at<this.buffer.length&&whitespace(this.buffer[this.at]))this.at++;if(this.at<this.buffer.length)return;}}
- async char(byte){await this.space();demand(await this.peek()===byte,'Malformed native JSON delimiter');this.at++;}
+ syntax(ok,message){if(!ok)throw this.syntaxErrors?new SyntaxError(message):Error(message);}
+ async char(byte){await this.space();this.syntax(await this.peek()===byte,'Malformed native JSON delimiter');this.at++;}
  async value({key=false}={}){
   await this.space();let quoted=false,escaped=false,pendingSpace=false;const stack=[],parts=[];
   let buffer=this.scalarBuffer,used=0;
@@ -58,14 +60,14 @@ class Input {
     if(quoted){if(escaped)escaped=false;else if(byte===92)escaped=true;else if(byte===34)quoted=false;}
     else if(byte===34)quoted=true;
     else if(byte===91||byte===123)stack.push(byte);
-    else if(byte===93||byte===125)demand(stack.pop()===(byte===93?91:123),'Malformed nested native JSON');
+    else if(byte===93||byte===125)this.syntax(stack.pop()===(byte===93?91:123),'Malformed nested native JSON');
    }
   }
   if(!parts.length)return JSON.parse(buffer.subarray(0,used));
   parts.push(buffer.subarray(0,used));return JSON.parse(Buffer.concat(parts));
  }
  async end(){
-  await this.space();demand(!await this.available(),'Unexpected data after complete native JSON');
+  await this.space();this.syntax(!await this.available(),'Unexpected data after complete native JSON');
   demand(this.bytes===this.expected.bytes&&this.hash.digest('hex')===this.expected.sha256,'Complete native JSON identity differs');
  }
  async close(){await this.iterator.return?.();}
@@ -97,7 +99,7 @@ async function array(input,visit){
 }
 async function object(input,visit){
  await input.char(123);await input.space();if(await input.peek()===125){input.at++;return;}
- while(true){const key=await input.value({key:true});demand(typeof key==='string','Native JSON object key must be a string');await input.char(58);
+ while(true){const key=await input.value({key:true});input.syntax(typeof key==='string','Native JSON object key must be a string');await input.char(58);
   await visit(key);await input.space();const next=await input.peek();if(next===125){input.at++;return;}await input.char(44);
  }
 }
@@ -172,19 +174,22 @@ function hashChunks(chunks){
  * The caller authenticates roles/modes/OIDs and passes the original byte stream.
  * Full syntax, exact bytes/hash and final row domains precede returned cursors.
  */
-async function admitStore({chunks,expected,directory,size,ownerCount,rowField='rows',envelopePaths},ledger){
- demand(Number.isSafeInteger(size)&&size>0&&size<=0xffffffff&&Number.isSafeInteger(ownerCount)
+async function admitStore({chunks,expected,directory,size,ownerCount,rowField='rows',envelopePaths,rawSyntaxOnly=false,metadataArrays=[]},ledger){
+ demand(!rawSyntaxOnly||(!ledger&&envelopePaths?.length===0),'Raw syntax admission cannot validate native rows');
+ demand(Array.isArray(metadataArrays)&&metadataArrays.every(key=>typeof key==='string'),'Invalid metadata array keys');
+ const spillKeys=new Set(metadataArrays);
+ if(!rawSyntaxOnly)demand(Number.isSafeInteger(size)&&size>0&&size<=0xffffffff&&Number.isSafeInteger(ownerCount)
   &&ownerCount>0&&ownerCount<=0xffffffff&&['rows','native_rows','ledger_rows'].includes(rowField),'Invalid native interval store domain');
  ordinaryDirectory(directory);
  let input,root,complete=false,closed=false;const fds=[];
  try {
-  root=fs.mkdtempSync(path.join(directory,'native-intervals-'));input=new Input(chunks,expected);
+  root=fs.mkdtempSync(path.join(directory,'native-intervals-'));input=new Input(chunks,expected,rawSyntaxOnly);
   const open=name=>{const fd=fs.openSync(path.join(root,name),'wx+',0o600);fds.push(fd);return fd;};
   const vectorFd=open('vectors.bin'),vectorIndexFd=open('vectors-index.bin'),vectors=new Writer(vectorFd),vectorIndex=new Writer(vectorIndexFd);
   const runsFd=open('runs.bin'),indexFd=open('rows.bin'),runs=new Writer(runsFd),index=new Writer(indexFd);
   const componentFd=ledger?open('components.bin'):null,metadataFd=ledger?open('metadata.bin'):null;
   const components=ledger?new Writer(componentFd):null,meta=ledger?new Writer(metadataFd):null;
-  const metadata=Object.create(null),admittedRows=new WeakSet(),admittedComponents=new WeakMap();
+  let metadata=Object.create(null);const admittedRows=new WeakSet(),admittedComponents=new WeakMap();
   let rowsSeen=false,rowsError=null,range={start:0,rowCount:0,runCount:0},componentCount=0;
   const active=()=>demand(!closed,'Native interval store is closed');
   // Private spill descriptors never come from input JSON. Coordinate arrays
@@ -198,6 +203,7 @@ async function admitStore({chunks,expected,directory,size,ownerCount,rowField='r
    const encode=(item,at=[])=>{
     const descriptor=item&&typeof item==='object'?coordinateDescriptors.get(item):undefined;
     if(descriptor){references.push([at,descriptor]);return null;}
+    if(rawSyntaxOnly&&typeof item==='number'&&!Number.isFinite(item)){references.push([at,{nonfinite:item>0?1:-1}]);return null;}
     if(Object.is(item,-0)){references.push([at,null]);return 0;}
     if(Array.isArray(item))return item.map((child,i)=>encode(child,[...at,i]));
     if(item&&typeof item==='object'){const out=Object.create(null);for(const key of Object.keys(item))out[key]=encode(item[key],[...at,key]);return out;}
@@ -208,7 +214,7 @@ async function admitStore({chunks,expected,directory,size,ownerCount,rowField='r
   const decodeMetadata=encoded=>{
    let value=encoded[0];
    for(let i=1;i<encoded.length;i++){
-    const [at,descriptor]=encoded[i],replacement=descriptor===null?-0:coordinateSequence(descriptor);
+    const [at,descriptor]=encoded[i],replacement=descriptor===null?-0:rawSyntaxOnly&&descriptor.nonfinite?descriptor.nonfinite*Infinity:coordinateSequence(descriptor);
     if(!at.length){value=replacement;continue;}
     let parent=value;for(const key of at.slice(0,-1))parent=parent[key];
     Object.defineProperty(parent,at.at(-1),{value:replacement,enumerable:true,writable:true,configurable:true});
@@ -245,14 +251,14 @@ async function admitStore({chunks,expected,directory,size,ownerCount,rowField='r
   async function metadataNode(coordinates=false,depth=0){
    await input.space();const byte=await input.peek();
    if(byte===123){const fields={};await object(input,async key=>{
-    Object.defineProperty(fields,key,{value:await metadataNode(coordinates||key==='coordinates',depth),enumerable:true,writable:true,configurable:true});
+    Object.defineProperty(fields,key,{value:await metadataNode((coordinates===true||key==='coordinates')?true:spillKeys.has(key)?'array':false,depth),enumerable:true,writable:true,configurable:true});
    });return fields;}
    if(byte!==91)return input.value();
    if(!coordinates){const values=[];await array(input,async()=>values.push(await metadataNode(false,depth)));return values;}
    const values=[],index=coordinateIndex(depth),start=index.position;let count=0,spilled=false,valueError;
    const append=value=>{let body;try{body=metadataBytes(value);}catch(error){valueError??=error.message;body=Buffer.from('[null]');}const record=Buffer.allocUnsafe(16);
     record.writeBigUInt64LE(BigInt(vectors.position),0);record.writeBigUInt64LE(BigInt(body.length),8);vectors.append(body);index.append(record);};
-   await array(input,async()=>{const value=await metadataNode(true,depth+1);count++;
+   await array(input,async()=>{const value=await metadataNode(coordinates==='array'?false:true,depth+1);count++;
     if(!spilled&&count<=32){values.push(value);return;}
     if(!spilled){for(const previous of values)append(previous);values.length=0;spilled=true;}append(value);
    });
@@ -377,7 +383,16 @@ async function admitStore({chunks,expected,directory,size,ownerCount,rowField='r
     }else fields[key]=await metadataValue();
    });return fields;
   }
-  if(envelopePaths)Object.assign(metadata,await envelopeObject());else
+  if(rawSyntaxOnly){
+   try{metadata=await metadataNode();await input.space();input.syntax(!await input.available(),'Unexpected data after complete native JSON');}
+   catch(error){
+    if(!(error instanceof SyntaxError))throw error;
+    // The eager read authenticates the whole body before JSON.parse. Preserve
+    // that precedence even for malformed early fields without retaining bytes.
+    while(await input.available())input.at=input.buffer.length;
+    await input.end();throw error;
+   }
+  }else if(envelopePaths)Object.assign(metadata,await envelopeObject());else
   await object(input,async key=>{
    if(key!==rowField){metadata[key]=await metadataValue();return;}
    rowsSeen=true;rowsError=null;componentCount=0;range={start:0,rowCount:0,runCount:0};runs.reset();index.reset();
@@ -387,7 +402,7 @@ async function admitStore({chunks,expected,directory,size,ownerCount,rowField='r
    await array(input,parseComponent);
   });
   await input.end();if(!envelopePaths)demand(rowsSeen&&!rowsError,rowsError??'Missing complete native rows');runs.flush();index.flush();components?.flush();meta?.flush();
-  const canonical_sha256=hashChunks((function*(){
+  const canonical_sha256=rawSyntaxOnly?null:hashChunks((function*(){
    if(envelopePaths){yield* canonicalChunks(metadata);yield '\n';return;}
    yield* canonicalObject(metadata,rowField,function*(){
     if(!ledger){yield* rowChunks(range);return;}
@@ -415,3 +430,7 @@ export const admitNativePatchStore=options=>admitStore(options,false);
 export const admitNativeLedgerStore=options=>admitStore({...options,rowField:options.rowField??'rows'},true);
 
 export const admitNativeEnvelopeStore=options=>admitStore({...options,envelopePaths:options.envelopePaths??[['current_rows'],['acquisition','predecessor_rows'],['native','rows']]},false);
+
+// Authenticate complete JSON bytes/syntax without claiming semantic canonical validity.
+// Consumers remain responsible for validating every field they actually use.
+export const admitNativeMetadataStore=options=>admitStore({...options,envelopePaths:[],rawSyntaxOnly:true},false);

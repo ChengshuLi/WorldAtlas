@@ -8,7 +8,7 @@ import {gunzipSync,createGunzip} from 'node:zlib';
 import {Readable} from 'node:stream';
 import {pipeline} from 'node:stream/promises';
 import os from 'node:os';
-import {admitNativePatchStore,admitNativeLedgerStore,admitNativeEnvelopeStore} from '../../../scripts/native-patch-store.mjs';
+import {admitNativePatchStore,admitNativeLedgerStore,admitNativeEnvelopeStore,admitNativeMetadataStore} from '../../../scripts/native-patch-store.mjs';
 import {nativeSequence,isNativeSequence,nativeRowAt} from '../../../src/native-grid.js';
 import {openNativeWordStore} from '../../../scripts/native-word-store.mjs';
 import {ImmutableReader, NativeAssetImage, decodeVisibilityLatitudes,
@@ -219,15 +219,36 @@ async function* decodedChunks(chunks) {
     const failure=await settled;if(complete&&failure)throw failure;
   }
 }
+// Legacy custody authenticates encoded bytes and the footer before inflation.
+// Stage only this transport layer; semantic JSON still uses the shared store.
+async function* custodyChunks(chunks,p) {
+  if(!p.decoded_bytes){yield* chunks;return;}
+  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'checkpoint-custody-'));
+  const file=path.join(directory,'encoded');let fd;
+  try{
+    fd=fs.openSync(file,'wx+',0o600);let bytes=0;
+    for await(const chunk of chunks){let at=0;while(at<chunk.length){const n=fs.writeSync(fd,chunk,at,chunk.length-at,bytes+at);demand(n>0,'Incomplete checkpoint custody spill');at+=n;}bytes+=chunk.length;}
+    const footer=Buffer.alloc(4);let read=0;
+    if(bytes>=18)while(read<4){const n=fs.readSync(fd,footer,read,4-read,bytes-4+read);demand(n>0,'Incomplete checkpoint custody spill');read+=n;}
+    demand(bytes>=18&&footer.readUInt32LE(0)===p.decoded_bytes,'Checkpoint gzip declared size differs before inflate');
+    fs.closeSync(fd);fd=undefined;let decoded=0;
+    for await(const chunk of decodedChunks(fs.createReadStream(file))){
+      decoded+=chunk.length;
+      if(decoded>p.decoded_bytes){const error=new RangeError('Cannot create a Buffer larger than '+p.decoded_bytes+' bytes');error.code='ERR_BUFFER_TOO_LARGE';throw error;}
+      yield chunk;
+    }
+  }finally{try{if(fd!==undefined)fs.closeSync(fd);}finally{fs.rmSync(directory,{recursive:true});}}
+}
 async function storedProduct(session,reader,p,domain,ledger) {
   const {version}=resolvePin(reader,p);
   let chunks=reader.stream(p.path,{version,expected:p.sha256});
-  if(p.decoded_bytes)chunks=decodedChunks(chunks);
-  const store=await (ledger==='envelope'?admitNativeEnvelopeStore:ledger?admitNativeLedgerStore:admitNativePatchStore)({chunks,
+  if(ledger==='custody')chunks=custodyChunks(chunks,p);else if(p.decoded_bytes)chunks=decodedChunks(chunks);
+  let store;try{store=await (ledger==='custody'?admitNativeMetadataStore:ledger==='envelope'?admitNativeEnvelopeStore:ledger?admitNativeLedgerStore:admitNativePatchStore)({chunks,
     expected:{bytes:p.decoded_bytes??p.bytes,sha256:p.decoded_sha256??p.sha256},
-    directory:os.tmpdir(),...domain,...(ledger==='constructor'?{rowField:'ledger_rows'}:{})});
+    directory:os.tmpdir(),...domain,...(ledger==='custody'?{metadataArrays:['complete_cold_custody','effective_additions','inventory']}:{}),...(ledger==='constructor'?{rowField:'ledger_rows'}:{})});
+  }catch(error){if(ledger==='custody'&&p.decoded_bytes&&error.message==='Complete native JSON identity differs')throw Error('Checkpoint whole decoded output is corrupt');throw error;}
   (session.stores??=new Set()).add(store);
-  if(ledger==='envelope')return store.metadata;
+  if(ledger==='envelope'||ledger==='custody')return store.metadata;
   const wrap=row=>Object.freeze({y:row.y,runs:nativeSequence(row.count,()=>store.intervals(row))});
   if(!ledger)return {...store.metadata,rows:nativeSequence(store.rowCount,
     function*(){for(const row of store.rowEntries())yield wrap(row);},
@@ -375,7 +396,7 @@ export async function qualifyCheckpoint({reader,checkpointId}) {
     keys(root,'id,accepted_head,selected_commit,selection_sha256,execution_commit,execution_code_sha256,runtime_sha256,facts,certificate,publication,custody,routes','Unknown accepted checkpoint registration');
     demand(commit(root.accepted_head) && commit(root.selected_commit) && commit(root.execution_commit), 'Incomplete original acceptance/execution identity');
     const facts = readBody(session,archiveReader,root.facts), publication = readBody(session,archiveReader,root.publication);
-    const certificate = readBody(session,archiveReader,root.certificate), custody = readBody(session,archiveReader,root.custody);
+    const certificate = readBody(session,archiveReader,root.certificate), custody = await storedProduct(session,archiveReader,root.custody,undefined,'custody');
     demand(facts.kind === 'trusted-selected-coordinate-stage-v1' && facts.candidate_code_executed === false
       && facts.selected_commit === root.selected_commit && facts.executing_commit === root.execution_commit
       && valueSha(facts.execution_code) === root.execution_code_sha256 && valueSha(facts.runtime) === root.runtime_sha256,
@@ -413,7 +434,7 @@ export async function qualifyCheckpoint({reader,checkpointId}) {
     // This is two small policy bodies, not any old source/native qualification.
     const policyPins=retained.inventory.filter(p => p.path===PROGRAMME_POLICY);
     demand(policyPins.length===1, 'Missing complete accepted programme policy custody');
-    const priorPolicy=validateSupportedProgrammeCatalogue(readBody(session,archiveReader,policyPins[0]));
+    const priorPolicy=validateSupportedProgrammeCatalogue(readBody(session,archiveReader,policyPins.at(0)));
     const currentPolicy=validateSupportedProgrammeCatalogue(readNamed(session,archiveReader,PROGRAMME_POLICY));
     for (const key of ['programs','current_rebind_migrations']) {
       const current=new Set(currentPolicy[key].map(valueSha));

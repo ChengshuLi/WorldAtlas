@@ -244,3 +244,31 @@ test('geometry closure is checked against consumed coordinates rather than an in
  assert.throws(()=>polygonParts(geometry),/Unclosed footprint ring/);
  assert.throws(()=>nativeRuntimeIndex([{id:'A',pixelIndex:1,geometry}]),/Original native closed ring required/);
 });
+
+test('raw metadata admission preserves JSON values and ignored nonfinite fields without canonical claims',async t=>{
+ const {admitNativeMetadataStore}=await import('../scripts/native-patch-store.mjs');
+ const {isNativeSequence}=await import('../src/native-grid.js');
+ const directory=temporary(t);
+ const expand=value=>isNativeSequence(value)?Array.from(value,expand):value&&typeof value==='object'?Object.fromEntries(Object.entries(value).map(([k,v])=>[k,expand(v)])):value;
+ for(const text of ['null','1e400','-1e400','-0','true','"x"','[1,null,-0]',
+  '{"ignored":1e400,"ignored":7,"__proto__":{"ok":true}}',
+  JSON.stringify({complete_cold_custody:Array.from({length:40},(_,i)=>({facts:{entries:[i]},inventory:[{path:'x'}],effective_additions:Array.from({length:40},()=>({coordinates:Array.from({length:40},()=>[-0,1])}))}))}).replace('"path":"x"','"path":"x","ignored":1e400'),
+  '{"coordinates":['+Array(40).fill('{"nonfinite":1,"depth":0,"start":0,"count":3,"x":-1e400}').join(',')+']}']){
+  const body=Buffer.from(text),store=await admitNativeMetadataStore({directory,chunks:chunks(body,7),expected:{bytes:body.length,sha256:hash(body)},metadataArrays:['complete_cold_custody','effective_additions','inventory']});
+  assert.equal(store.canonical_sha256,null);assert.deepEqual(expand(store.metadata),JSON.parse(text));
+  if(store.metadata?.complete_cold_custody)assert(Array.isArray(store.metadata.complete_cold_custody.at(0).facts.entries));
+  store.close();assert.deepEqual(fs.readdirSync(directory),[]);
+ }
+});
+
+test('raw metadata authenticates complete malformed bodies before syntax refusal and closes producers',async t=>{
+ const {admitNativeMetadataStore}=await import('../scripts/native-patch-store.mjs');const directory=temporary(t);
+ for(const text of ['{"a":[1,]}','{"a":1 "b":2}','[1,2','{1:2}','null true','{"coordinates":['+Array(40).fill('1e400').join(',')+'],"x":}']){
+  assert.throws(()=>JSON.parse(text),SyntaxError);const body=Buffer.from(text);let closed=0,seen=0;
+  const source=function*(){try{for(const chunk of chunks(body,3)){seen+=chunk.length;yield chunk;}}finally{closed++;}};
+  await assert.rejects(admitNativeMetadataStore({directory,chunks:source(),expected:{bytes:body.length,sha256:hash(body)}}),SyntaxError);
+  assert.equal(seen,body.length);assert.equal(closed,1);assert.deepEqual(fs.readdirSync(directory),[]);
+  await assert.rejects(admitNativeMetadataStore({directory,chunks:chunks(body,3),expected:{bytes:body.length,sha256:'0'.repeat(64)}}),/identity differs/);
+  assert.deepEqual(fs.readdirSync(directory),[]);
+ }
+});
