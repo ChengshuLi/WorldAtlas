@@ -1,0 +1,1567 @@
+{
+  "version": 1,
+  "kind": "complete-original-Mozambique-repair-claim",
+  "issue": null,
+  "accepted_commit": "b7ca15f8d88241b088699396d3df0ca58a9e0803",
+  "package_id": "gb-MOZ-ADM2--repair-evaluation",
+  "original_cells": 11163,
+  "original_intervals": 5808,
+  "land_cells": 11028,
+  "inland_water_cells": 135,
+  "owners": [
+    {
+      "id": "gb:MOZ:ADM2:85939544B11916103118899",
+      "index": 30771,
+      "bounds": [
+        156098.07865722224,
+        139569.77455555243,
+        156546.81946055553,
+        140994.6414253042
+      ],
+      "province_id": "framework:province:niassa:ccaf40c6a080",
+      "province_index": 3268,
+      "name": "Lago Niassa",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B11916103118899"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B12573256040215",
+      "index": 30774,
+      "bounds": [
+        155649.7019733333,
+        141670.9132933789,
+        156243.6529778599,
+        142247.88292081177
+      ],
+      "province_id": "framework:province:tete:e45f5dd5021c",
+      "province_index": 4568,
+      "name": "Angonia",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B12573256040215"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B15867606683535",
+      "index": 30777,
+      "bounds": [
+        153881.17383166667,
+        147413.47312774757,
+        154724.62011277777,
+        148765.41661475465
+      ],
+      "province_id": "framework:province:gaza:29bfb4a6033b",
+      "province_index": 1795,
+      "name": "Chicualacuala",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B15867606683535"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B17350721147016",
+      "index": 30781,
+      "bounds": [
+        156217.36418722224,
+        145310.48796495658,
+        156805.41708999997,
+        145729.44424360117
+      ],
+      "province_id": "framework:province:sofala:8f4ddef300af",
+      "province_index": 4281,
+      "name": "Dondo",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B17350721147016"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B17838134976629",
+      "index": 30782,
+      "bounds": [
+        159849.23717388892,
+        139004.75887506318,
+        160271.47008166666,
+        139502.88335939925
+      ],
+      "province_id": "framework:province:cabo-delgado:6fb56db3485a",
+      "province_index": 1124,
+      "name": "Nangade",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B17838134976629"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B19130781251351",
+      "index": 30783,
+      "bounds": [
+        155860.2358361111,
+        146699.1098878518,
+        156658.67695388888,
+        147261.26009756434
+      ],
+      "province_id": "framework:province:inhambane:5602ec2e3c47",
+      "province_index": 2166,
+      "name": "Govuro",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B19130781251351"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B19302565001464",
+      "index": 30784,
+      "bounds": [
+        156845.3245811111,
+        148921.51698832482,
+        156976.18910944444,
+        149069.88332640944
+      ],
+      "province_id": "framework:province:inhambane:5602ec2e3c47",
+      "province_index": 2166,
+      "name": "Cidade De Inhambane",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B19302565001464"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B2345621089228",
+      "index": 30788,
+      "bounds": [
+        160006.75524555557,
+        139645.61060595658,
+        160604.20243,
+        140181.3598368654
+      ],
+      "province_id": "framework:province:cabo-delgado:6fb56db3485a",
+      "province_index": 1124,
+      "name": "Macomia",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B2345621089228"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B23893317259127",
+      "index": 30789,
+      "bounds": [
+        155559.98294222224,
+        149621.3551650073,
+        155922.79155666666,
+        149985.1720580992
+      ],
+      "province_id": "framework:province:gaza:29bfb4a6033b",
+      "province_index": 1795,
+      "name": "Chongoene",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B23893317259127"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B24219595709494",
+      "index": 30790,
+      "bounds": [
+        155706.65025444445,
+        149152.80046692342,
+        156187.5792166667,
+        149888.78941985912
+      ],
+      "province_id": "framework:province:gaza:29bfb4a6033b",
+      "province_index": 1795,
+      "name": "Mandlakaze",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B24219595709494"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B24654814708458",
+      "index": 30791,
+      "bounds": [
+        156772.8648116667,
+        142745.10595965842,
+        157546.03604,
+        143383.74271367982
+      ],
+      "province_id": "framework:province:zambezia:50b5e3b5fddb",
+      "province_index": 5077,
+      "name": "Milange",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B24654814708458"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B24800488676804",
+      "index": 30792,
+      "bounds": [
+        154741.44243111112,
+        145975.0647056618,
+        155485.41128,
+        146664.5680820171
+      ],
+      "province_id": "framework:province:manica:63592fec6972",
+      "province_index": 2872,
+      "name": "Mossurize",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B24800488676804"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B24973508625893",
+      "index": 30793,
+      "bounds": [
+        157560.52799388889,
+        143777.56331903397,
+        158026.5280588889,
+        144394.79029550287
+      ],
+      "province_id": "framework:province:zambezia:50b5e3b5fddb",
+      "province_index": 5077,
+      "name": "Nicoadala",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B24973508625893"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B2591372162698",
+      "index": 30795,
+      "bounds": [
+        154787.83124833336,
+        150279.08449040525,
+        155096.89583277778,
+        150588.05128954
+      ],
+      "province_id": "framework:province:maputo:fbf9376e8f46",
+      "province_index": 2890,
+      "name": "Marracuene",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B2591372162698"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B26060528055494",
+      "index": 30796,
+      "bounds": [
+        153235.08028944445,
+        142602.048516864,
+        154497.84652277778,
+        143206.51544101402
+      ],
+      "province_id": "framework:province:tete:e45f5dd5021c",
+      "province_index": 4568,
+      "name": "Magoe",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B26060528055494"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B26201267157646",
+      "index": 30797,
+      "bounds": [
+        159373.04176444444,
+        142805.97037797645,
+        159868.53550444444,
+        143570.6993670183
+      ],
+      "province_id": "framework:province:nampula:ef47173f58c0",
+      "province_index": 3186,
+      "name": "Moma",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B26201267157646"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B26352047498043",
+      "index": 30799,
+      "bounds": [
+        158074.66464944446,
+        143662.51720404622,
+        158593.60768166668,
+        144157.96202308408
+      ],
+      "province_id": "framework:province:zambezia:50b5e3b5fddb",
+      "province_index": 5077,
+      "name": "Maganja Da Costa",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B26352047498043"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B26392807278532",
+      "index": 30800,
+      "bounds": [
+        157146.9611288889,
+        141680.16082487724,
+        157615.80132555554,
+        142495.9944889513
+      ],
+      "province_id": "framework:province:niassa:ccaf40c6a080",
+      "province_index": 3268,
+      "name": "Mecanhelas",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B26392807278532"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B28759712944697",
+      "index": 30804,
+      "bounds": [
+        159049.99499333333,
+        139152.3473682443,
+        160117.15626111111,
+        139974.93172792913
+      ],
+      "province_id": "framework:province:cabo-delgado:6fb56db3485a",
+      "province_index": 1124,
+      "name": "Mueda",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B28759712944697"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B28799715012212",
+      "index": 30805,
+      "bounds": [
+        159779.32624055556,
+        142673.29585139485,
+        160317.0578361111,
+        143247.28990598756
+      ],
+      "province_id": "framework:province:nampula:ef47173f58c0",
+      "province_index": 3186,
+      "name": "Angoche",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B28799715012212"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B28801965730987",
+      "index": 30806,
+      "bounds": [
+        160189.76167833334,
+        138753.1933429135,
+        160731.86270722223,
+        139325.9471877706
+      ],
+      "province_id": "framework:province:cabo-delgado:6fb56db3485a",
+      "province_index": 1124,
+      "name": "Palma",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B28801965730987"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B308430160587",
+      "index": 30809,
+      "bounds": [
+        154680.12471666667,
+        150455.1807404742,
+        154811.79030777776,
+        150697.44597793472
+      ],
+      "province_id": "framework:province:maputo:fbf9376e8f46",
+      "province_index": 2890,
+      "name": "Cidade Da Matola",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B308430160587"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B32725727804377",
+      "index": 30811,
+      "bounds": [
+        154894.88236500003,
+        144677.13977071413,
+        155319.88258055557,
+        145346.8837403652
+      ],
+      "province_id": "framework:province:manica:63592fec6972",
+      "province_index": 2872,
+      "name": "Manica",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B32725727804377"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B33364168787730",
+      "index": 30814,
+      "bounds": [
+        158681.870235,
+        142979.992358534,
+        159585.1049288889,
+        143876.76095259946
+      ],
+      "province_id": "framework:province:zambezia:50b5e3b5fddb",
+      "province_index": 5077,
+      "name": "Pebane",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B33364168787730"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B34189520387166",
+      "index": 30815,
+      "bounds": [
+        153087.3206188889,
+        141865.06858603752,
+        154115.59393,
+        142682.2986515218
+      ],
+      "province_id": "framework:province:tete:e45f5dd5021c",
+      "province_index": 4568,
+      "name": "Zumbu",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B34189520387166"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B35031207172791",
+      "index": 30816,
+      "bounds": [
+        160215.39568722222,
+        140115.38356928478,
+        160663.69954722223,
+        140515.53933299473
+      ],
+      "province_id": "framework:province:cabo-delgado:6fb56db3485a",
+      "province_index": 1124,
+      "name": "Quissanga",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B35031207172791"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B37446089230364",
+      "index": 30823,
+      "bounds": [
+        160582.42808722222,
+        142124.04749257307,
+        160731.64423555558,
+        142227.43820309886
+      ],
+      "province_id": "framework:province:nampula:ef47173f58c0",
+      "province_index": 3186,
+      "name": "Ilha De Mo\u00e7ambique",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B37446089230364"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B37735984540105",
+      "index": 30824,
+      "bounds": [
+        156741.55053944446,
+        148847.05575990496,
+        156846.92670666665,
+        149138.84336696583
+      ],
+      "province_id": "framework:province:inhambane:5602ec2e3c47",
+      "province_index": 2166,
+      "name": "Maxixe",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B37735984540105"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B38416709222197",
+      "index": 30825,
+      "bounds": [
+        158232.54684055556,
+        143293.62098082207,
+        158841.0632561111,
+        144008.93014381704
+      ],
+      "province_id": "framework:province:zambezia:50b5e3b5fddb",
+      "province_index": 5077,
+      "name": "Mocubela",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B38416709222197"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B38440784035247",
+      "index": 30826,
+      "bounds": [
+        154510.0809361111,
+        141381.86378917404,
+        155346.92601730538,
+        142453.23043617638
+      ],
+      "province_id": "framework:province:tete:e45f5dd5021c",
+      "province_index": 4568,
+      "name": "Chifunde",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B38440784035247"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B40669081557189",
+      "index": 30827,
+      "bounds": [
+        157908.84465444443,
+        144242.44173983994,
+        158002.49617555554,
+        144377.25882807976
+      ],
+      "province_id": "framework:province:zambezia:50b5e3b5fddb",
+      "province_index": 5077,
+      "name": "Cidade De Quelimane",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B40669081557189"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B41216917110496",
+      "index": 30828,
+      "bounds": [
+        156305.62674055557,
+        144302.71799702573,
+        157233.03896555555,
+        145270.09469090874
+      ],
+      "province_id": "framework:province:sofala:8f4ddef300af",
+      "province_index": 4281,
+      "name": "Cheringoma",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B41216917110496"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B42929876675904",
+      "index": 30829,
+      "bounds": [
+        156059.7732916667,
+        149463.4618863145,
+        156648.7000811111,
+        149785.43737734147
+      ],
+      "province_id": "framework:province:inhambane:5602ec2e3c47",
+      "province_index": 2166,
+      "name": "Zavala",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B42929876675904"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B43724113746926",
+      "index": 30831,
+      "bounds": [
+        160217.3619322222,
+        140412.34234534524,
+        160672.00147055555,
+        140737.06003778699
+      ],
+      "province_id": "framework:province:cabo-delgado:6fb56db3485a",
+      "province_index": 1124,
+      "name": "Metuge",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B43724113746926"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B48761792497071",
+      "index": 30836,
+      "bounds": [
+        156855.58275977772,
+        141222.29771626505,
+        157528.7039544444,
+        141887.6507841801
+      ],
+      "province_id": "framework:province:niassa:ccaf40c6a080",
+      "province_index": 3268,
+      "name": "Mandimba",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B48761792497071"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B50673994435668",
+      "index": 30839,
+      "bounds": [
+        156188.38027944445,
+        144905.0511726339,
+        157070.64169333334,
+        145589.97113219564
+      ],
+      "province_id": "framework:province:sofala:8f4ddef300af",
+      "province_index": 4281,
+      "name": "Muanza",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B50673994435668"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B50674606181773",
+      "index": 30840,
+      "bounds": [
+        155893.51635333334,
+        143085.32143565203,
+        156559.63646500002,
+        143613.3271870365
+      ],
+      "province_id": "framework:province:tete:e45f5dd5021c",
+      "province_index": 4568,
+      "name": "Doa",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B50674606181773"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B51879158696861",
+      "index": 30841,
+      "bounds": [
+        154370.25906944444,
+        149726.62219859782,
+        154841.35680666668,
+        150575.508462515
+      ],
+      "province_id": "framework:province:maputo:fbf9376e8f46",
+      "province_index": 2890,
+      "name": "Moamba",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B51879158696861"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B52795804394919",
+      "index": 30843,
+      "bounds": [
+        156338.83443388887,
+        139567.0892917697,
+        156875.0367277778,
+        140709.4676017194
+      ],
+      "province_id": "framework:province:niassa:ccaf40c6a080",
+      "province_index": 3268,
+      "name": "Lago",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B52795804394919"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B54758933622764",
+      "index": 30848,
+      "bounds": [
+        160059.98950833332,
+        139182.32218072718,
+        160559.41573833334,
+        139703.62169483915
+      ],
+      "province_id": "framework:province:cabo-delgado:6fb56db3485a",
+      "province_index": 1124,
+      "name": "Mocimboa Da Praia",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B54758933622764"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B55875453752427",
+      "index": 30852,
+      "bounds": [
+        155212.90428777778,
+        149722.45109247547,
+        155636.37520166664,
+        150113.6147163749
+      ],
+      "province_id": "framework:province:gaza:29bfb4a6033b",
+      "province_index": 1795,
+      "name": "Limpopo",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B55875453752427"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B56224707964526",
+      "index": 30853,
+      "bounds": [
+        157168.88111944444,
+        142330.6693442278,
+        157731.5913088889,
+        142962.70998810374
+      ],
+      "province_id": "framework:province:zambezia:50b5e3b5fddb",
+      "province_index": 5077,
+      "name": "Molumbo",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B56224707964526"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B58328889190937",
+      "index": 30854,
+      "bounds": [
+        156431.9033638889,
+        143462.74006429603,
+        156823.113295,
+        144184.56178568277
+      ],
+      "province_id": "framework:province:tete:e45f5dd5021c",
+      "province_index": 4568,
+      "name": "Mutarara",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B58328889190937"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B58572468312701",
+      "index": 30855,
+      "bounds": [
+        160552.86158833333,
+        140596.37424601553,
+        160641.12414166666,
+        140714.55207544548
+      ],
+      "province_id": "framework:province:cabo-delgado:6fb56db3485a",
+      "province_index": 1124,
+      "name": "Cidade De Pemba",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B58572468312701"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B58581363474884",
+      "index": 30856,
+      "bounds": [
+        156116.35745333336,
+        146998.79942990254,
+        156933.65995833336,
+        147585.3043600122
+      ],
+      "province_id": "framework:province:inhambane:5602ec2e3c47",
+      "province_index": 2166,
+      "name": "Inhassoro",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B58581363474884"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B59479814848654",
+      "index": 30857,
+      "bounds": [
+        154707.57932277775,
+        150549.3761082734,
+        155111.169315,
+        150779.79752801202
+      ],
+      "province_id": "framework:province:maputo:fbf9376e8f46",
+      "province_index": 2890,
+      "name": "Cidade De Maputo",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B59479814848654"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B61462515035200",
+      "index": 30858,
+      "bounds": [
+        156677.17422166665,
+        143157.55540473928,
+        157304.04225722223,
+        144149.93724364587
+      ],
+      "province_id": "framework:province:zambezia:50b5e3b5fddb",
+      "province_index": 5077,
+      "name": "Morrumbala",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B61462515035200"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B62807674730552",
+      "index": 30860,
+      "bounds": [
+        160018.0429483333,
+        142460.63397728433,
+        160455.13192944444,
+        142846.18147205087
+      ],
+      "province_id": "framework:province:nampula:ef47173f58c0",
+      "province_index": 3186,
+      "name": "Li\u00fapo",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B62807674730552"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B63223307878319",
+      "index": 30861,
+      "bounds": [
+        156572.0165261111,
+        149049.0051470964,
+        156951.50181111108,
+        149392.52263732118
+      ],
+      "province_id": "framework:province:inhambane:5602ec2e3c47",
+      "province_index": 2166,
+      "name": "Jangamo",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B63223307878319"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B64339198961844",
+      "index": 30864,
+      "bounds": [
+        160375.68106666667,
+        141777.32838252262,
+        160824.3490461111,
+        142522.36896531383
+      ],
+      "province_id": "framework:province:nampula:ef47173f58c0",
+      "province_index": 3186,
+      "name": "Mossuril",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B64339198961844"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B65123265698186",
+      "index": 30865,
+      "bounds": [
+        157969.5797777778,
+        144126.47700104758,
+        158170.93783055554,
+        144429.86005497648
+      ],
+      "province_id": "framework:province:zambezia:50b5e3b5fddb",
+      "province_index": 5077,
+      "name": "Maquival",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B65123265698186"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B66501899539367",
+      "index": 30867,
+      "bounds": [
+        155828.63026833333,
+        146350.72665785422,
+        156665.30392777777,
+        146977.30018837913
+      ],
+      "province_id": "framework:province:sofala:8f4ddef300af",
+      "province_index": 4281,
+      "name": "Machanga",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B66501899539367"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B68532442394498",
+      "index": 30872,
+      "bounds": [
+        160062.6839922222,
+        142206.6189627552,
+        160633.98740055558,
+        142713.01805266758
+      ],
+      "province_id": "framework:province:nampula:ef47173f58c0",
+      "province_index": 3186,
+      "name": "Mogincual",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B68532442394498"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B69199020344442",
+      "index": 30874,
+      "bounds": [
+        157218.32854,
+        139566.05781500274,
+        157990.26176222222,
+        140455.12267247966
+      ],
+      "province_id": "framework:province:niassa:ccaf40c6a080",
+      "province_index": 3268,
+      "name": "Mavago",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B69199020344442"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B69817996790019",
+      "index": 30875,
+      "bounds": [
+        155938.5215166667,
+        149259.73523408937,
+        156853.3352088889,
+        149583.7809386079
+      ],
+      "province_id": "framework:province:inhambane:5602ec2e3c47",
+      "province_index": 2166,
+      "name": "Inharrime",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B69817996790019"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B70195584825603",
+      "index": 30876,
+      "bounds": [
+        156214.59687944443,
+        147356.20241982376,
+        156967.37741888888,
+        148141.11128653385
+      ],
+      "province_id": "framework:province:inhambane:5602ec2e3c47",
+      "province_index": 2166,
+      "name": "Vilankulo",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B70195584825603"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B71238690131788",
+      "index": 30880,
+      "bounds": [
+        155130.17635000002,
+        141492.28374663627,
+        155898.32273,
+        142346.8241429821
+      ],
+      "province_id": "framework:province:tete:e45f5dd5021c",
+      "province_index": 4568,
+      "name": "Macanga",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B71238690131788"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B72266919853878",
+      "index": 30884,
+      "bounds": [
+        160610.17398888888,
+        140021.86207486587,
+        160664.71908166667,
+        140229.53291904504
+      ],
+      "province_id": "framework:province:cabo-delgado:6fb56db3485a",
+      "province_index": 1124,
+      "name": "Ibo",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B72266919853878"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B73793826279493",
+      "index": 30886,
+      "bounds": [
+        160336.64746222223,
+        140670.590970058,
+        160639.15789666667,
+        140990.74727925946
+      ],
+      "province_id": "framework:province:cabo-delgado:6fb56db3485a",
+      "province_index": 1124,
+      "name": "Mecufi",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B73793826279493"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B74893021327700",
+      "index": 30889,
+      "bounds": [
+        157874.54460277778,
+        143788.99684250035,
+        158293.13631611114,
+        144229.9002805524
+      ],
+      "province_id": "framework:province:zambezia:50b5e3b5fddb",
+      "province_index": 5077,
+      "name": "Namacurra",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B74893021327700"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B76219123027909",
+      "index": 30890,
+      "bounds": [
+        160225.37256000002,
+        140973.00003212568,
+        160751.37950944444,
+        141739.94376903618
+      ],
+      "province_id": "framework:province:nampula:ef47173f58c0",
+      "province_index": 3186,
+      "name": "Memba",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B76219123027909"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B78261911608408",
+      "index": 30891,
+      "bounds": [
+        160421.34164499998,
+        141639.03952358873,
+        160691.73674444444,
+        141959.70872375893
+      ],
+      "province_id": "framework:province:nampula:ef47173f58c0",
+      "province_index": 3186,
+      "name": "Nacala-A-Velha",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B78261911608408"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B78683919401949",
+      "index": 30892,
+      "bounds": [
+        156351.50579055556,
+        145656.9048740374,
+        156681.61647888887,
+        145838.72030006742
+      ],
+      "province_id": "framework:province:sofala:8f4ddef300af",
+      "province_index": 4281,
+      "name": "Cidade Da Beira",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B78683919401949"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B78941967379031",
+      "index": 30893,
+      "bounds": [
+        155069.51405055556,
+        143831.46143457523,
+        155519.34721222223,
+        144925.95775852242
+      ],
+      "province_id": "framework:province:manica:63592fec6972",
+      "province_index": 2872,
+      "name": "Barue",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B78941967379031"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B80255250880532",
+      "index": 30896,
+      "bounds": [
+        160657.4366927778,
+        141691.28861155035,
+        160818.59595888888,
+        141894.65189399166
+      ],
+      "province_id": "framework:province:nampula:ef47173f58c0",
+      "province_index": 3186,
+      "name": "Nacala",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B80255250880532"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B81104327117882",
+      "index": 30897,
+      "bounds": [
+        154952.04911777776,
+        145265.62446736047,
+        155733.74074111113,
+        146142.06209772106
+      ],
+      "province_id": "framework:province:manica:63592fec6972",
+      "province_index": 2872,
+      "name": "Sussundenga",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B81104327117882"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B81330952052148",
+      "index": 30898,
+      "bounds": [
+        154296.4156461111,
+        146972.3754746567,
+        155330.44204444444,
+        147652.75864884592
+      ],
+      "province_id": "framework:province:gaza:29bfb4a6033b",
+      "province_index": 1795,
+      "name": "Massangena",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B81330952052148"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B82585183947830",
+      "index": 30899,
+      "bounds": [
+        157367.54468833335,
+        144436.7525639756,
+        157903.01874333332,
+        145105.57015105826
+      ],
+      "province_id": "framework:province:zambezia:50b5e3b5fddb",
+      "province_index": 5077,
+      "name": "Chinde",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B82585183947830"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B84282844658581",
+      "index": 30904,
+      "bounds": [
+        156783.56992333336,
+        144302.71799702573,
+        157434.97960944445,
+        145149.4535223599
+      ],
+      "province_id": "framework:province:sofala:8f4ddef300af",
+      "province_index": 4281,
+      "name": "Marromeu",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B84282844658581"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B84899286441367",
+      "index": 30906,
+      "bounds": [
+        157777.03341555558,
+        144330.87645705199,
+        158001.4766411111,
+        144599.82525256765
+      ],
+      "province_id": "framework:province:zambezia:50b5e3b5fddb",
+      "province_index": 5077,
+      "name": "Inhassunge",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B84899286441367"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B85400452133709",
+      "index": 30907,
+      "bounds": [
+        156420.32436555554,
+        148335.6147809572,
+        156887.63526055554,
+        148936.39974142786
+      ],
+      "province_id": "framework:province:inhambane:5602ec2e3c47",
+      "province_index": 2166,
+      "name": "Morrumbene",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B85400452133709"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B86519405521682",
+      "index": 30912,
+      "bounds": [
+        157727.65881888889,
+        139337.30767649336,
+        159110.65729277776,
+        140391.0677666977
+      ],
+      "province_id": "framework:province:niassa:ccaf40c6a080",
+      "province_index": 3268,
+      "name": "Mecula",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B86519405521682"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B8789366603018",
+      "index": 30913,
+      "bounds": [
+        155836.5680722222,
+        141896.0069818909,
+        156295.50422,
+        142499.09269229285
+      ],
+      "province_id": "framework:province:tete:e45f5dd5021c",
+      "province_index": 4568,
+      "name": "Tsangano",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B8789366603018"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B88211826741163",
+      "index": 30914,
+      "bounds": [
+        154651.35928055554,
+        146176.2190899039,
+        155924.53933,
+        147186.28779131125
+      ],
+      "province_id": "framework:province:manica:63592fec6972",
+      "province_index": 2872,
+      "name": "Machaze",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B88211826741163"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B88728478280907",
+      "index": 30915,
+      "bounds": [
+        154336.3231372222,
+        150439.42314812815,
+        154677.7943522222,
+        151086.24612671242
+      ],
+      "province_id": "framework:province:maputo:fbf9376e8f46",
+      "province_index": 2890,
+      "name": "Namaacha",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B88728478280907"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B94790467869630",
+      "index": 30920,
+      "bounds": [
+        155380.98182333334,
+        142441.74808387883,
+        156172.77887302928,
+        143358.81309541754
+      ],
+      "province_id": "framework:province:tete:e45f5dd5021c",
+      "province_index": 4568,
+      "name": "Moatize",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B94790467869630"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B96154885816761",
+      "index": 30922,
+      "bounds": [
+        154898.96050277777,
+        142872.23727765467,
+        155692.37677222223,
+        143910.85962715192
+      ],
+      "province_id": "framework:province:tete:e45f5dd5021c",
+      "province_index": 4568,
+      "name": "Changara",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B96154885816761"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B96403406066950",
+      "index": 30923,
+      "bounds": [
+        156098.8068961111,
+        147674.85926551002,
+        157011.36304777776,
+        148686.9379652189
+      ],
+      "province_id": "framework:province:inhambane:5602ec2e3c47",
+      "province_index": 2166,
+      "name": "Massinga",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B96403406066950"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B97303459234614",
+      "index": 30925,
+      "bounds": [
+        154463.91059055555,
+        150730.99399987224,
+        155087.93849444445,
+        151407.74161340503
+      ],
+      "province_id": "framework:province:maputo:fbf9376e8f46",
+      "province_index": 2890,
+      "name": "Matutuine",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B97303459234614"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B98429522964184",
+      "index": 30926,
+      "bounds": [
+        155766.80278666667,
+        145630.4671575439,
+        156411.5854988889,
+        146392.6433444553
+      ],
+      "province_id": "framework:province:sofala:8f4ddef300af",
+      "province_index": 4281,
+      "name": "Buzi",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B98429522964184"
+      ]
+    },
+    {
+      "id": "gb:MOZ:ADM2:85939544B99370318353636",
+      "index": 30928,
+      "bounds": [
+        156545.58145444444,
+        139450.46841801543,
+        157510.0610388889,
+        140756.13040474418
+      ],
+      "province_id": "framework:province:niassa:ccaf40c6a080",
+      "province_index": 3268,
+      "name": "Sanga",
+      "reference_owner": "Mozambique",
+      "source_id": "gb:MOZ:ADM2",
+      "source_atoms": [
+        "gb:MOZ:ADM2:85939544B99370318353636"
+      ]
+    }
+  ],
+  "complete_source_atoms": [
+    "gb:MOZ:ADM2:85939544B11916103118899",
+    "gb:MOZ:ADM2:85939544B12573256040215",
+    "gb:MOZ:ADM2:85939544B15867606683535",
+    "gb:MOZ:ADM2:85939544B17350721147016",
+    "gb:MOZ:ADM2:85939544B17838134976629",
+    "gb:MOZ:ADM2:85939544B19130781251351",
+    "gb:MOZ:ADM2:85939544B19302565001464",
+    "gb:MOZ:ADM2:85939544B2345621089228",
+    "gb:MOZ:ADM2:85939544B23893317259127",
+    "gb:MOZ:ADM2:85939544B24219595709494",
+    "gb:MOZ:ADM2:85939544B24654814708458",
+    "gb:MOZ:ADM2:85939544B24800488676804",
+    "gb:MOZ:ADM2:85939544B24973508625893",
+    "gb:MOZ:ADM2:85939544B2591372162698",
+    "gb:MOZ:ADM2:85939544B26060528055494",
+    "gb:MOZ:ADM2:85939544B26201267157646",
+    "gb:MOZ:ADM2:85939544B26352047498043",
+    "gb:MOZ:ADM2:85939544B26392807278532",
+    "gb:MOZ:ADM2:85939544B28759712944697",
+    "gb:MOZ:ADM2:85939544B28799715012212",
+    "gb:MOZ:ADM2:85939544B28801965730987",
+    "gb:MOZ:ADM2:85939544B308430160587",
+    "gb:MOZ:ADM2:85939544B32725727804377",
+    "gb:MOZ:ADM2:85939544B33364168787730",
+    "gb:MOZ:ADM2:85939544B34189520387166",
+    "gb:MOZ:ADM2:85939544B35031207172791",
+    "gb:MOZ:ADM2:85939544B37446089230364",
+    "gb:MOZ:ADM2:85939544B37735984540105",
+    "gb:MOZ:ADM2:85939544B38416709222197",
+    "gb:MOZ:ADM2:85939544B38440784035247",
+    "gb:MOZ:ADM2:85939544B40669081557189",
+    "gb:MOZ:ADM2:85939544B41216917110496",
+    "gb:MOZ:ADM2:85939544B42929876675904",
+    "gb:MOZ:ADM2:85939544B43724113746926",
+    "gb:MOZ:ADM2:85939544B48761792497071",
+    "gb:MOZ:ADM2:85939544B50673994435668",
+    "gb:MOZ:ADM2:85939544B50674606181773",
+    "gb:MOZ:ADM2:85939544B51879158696861",
+    "gb:MOZ:ADM2:85939544B52795804394919",
+    "gb:MOZ:ADM2:85939544B54758933622764",
+    "gb:MOZ:ADM2:85939544B55875453752427",
+    "gb:MOZ:ADM2:85939544B56224707964526",
+    "gb:MOZ:ADM2:85939544B58328889190937",
+    "gb:MOZ:ADM2:85939544B58572468312701",
+    "gb:MOZ:ADM2:85939544B58581363474884",
+    "gb:MOZ:ADM2:85939544B59479814848654",
+    "gb:MOZ:ADM2:85939544B61462515035200",
+    "gb:MOZ:ADM2:85939544B62807674730552",
+    "gb:MOZ:ADM2:85939544B63223307878319",
+    "gb:MOZ:ADM2:85939544B64339198961844",
+    "gb:MOZ:ADM2:85939544B65123265698186",
+    "gb:MOZ:ADM2:85939544B66501899539367",
+    "gb:MOZ:ADM2:85939544B68532442394498",
+    "gb:MOZ:ADM2:85939544B69199020344442",
+    "gb:MOZ:ADM2:85939544B69817996790019",
+    "gb:MOZ:ADM2:85939544B70195584825603",
+    "gb:MOZ:ADM2:85939544B71238690131788",
+    "gb:MOZ:ADM2:85939544B72266919853878",
+    "gb:MOZ:ADM2:85939544B73793826279493",
+    "gb:MOZ:ADM2:85939544B74893021327700",
+    "gb:MOZ:ADM2:85939544B76219123027909",
+    "gb:MOZ:ADM2:85939544B78261911608408",
+    "gb:MOZ:ADM2:85939544B78683919401949",
+    "gb:MOZ:ADM2:85939544B78941967379031",
+    "gb:MOZ:ADM2:85939544B80255250880532",
+    "gb:MOZ:ADM2:85939544B81104327117882",
+    "gb:MOZ:ADM2:85939544B81330952052148",
+    "gb:MOZ:ADM2:85939544B82585183947830",
+    "gb:MOZ:ADM2:85939544B84282844658581",
+    "gb:MOZ:ADM2:85939544B84899286441367",
+    "gb:MOZ:ADM2:85939544B85400452133709",
+    "gb:MOZ:ADM2:85939544B86519405521682",
+    "gb:MOZ:ADM2:85939544B8789366603018",
+    "gb:MOZ:ADM2:85939544B88211826741163",
+    "gb:MOZ:ADM2:85939544B88728478280907",
+    "gb:MOZ:ADM2:85939544B94790467869630",
+    "gb:MOZ:ADM2:85939544B96154885816761",
+    "gb:MOZ:ADM2:85939544B96403406066950",
+    "gb:MOZ:ADM2:85939544B97303459234614",
+    "gb:MOZ:ADM2:85939544B98429522964184",
+    "gb:MOZ:ADM2:85939544B99370318353636"
+  ],
+  "complete_source_atom_count": 81,
+  "original_native_blocks": [
+    33,
+    34,
+    35,
+    36
+  ],
+  "source_rights_archive_sha256": "b7dceaebeaea695aed3d6cf36bbb9b08e78fed33ddd07f05c101931f8f59a858",
+  "new_accepted_credit": 0,
+  "limits": [
+    "Private proposed scope only; public issue action denied and not retried.",
+    "Current selector/pending-scope disjointness and source/physical/native execution remain pending."
+  ]
+}
