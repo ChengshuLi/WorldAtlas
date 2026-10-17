@@ -23,7 +23,59 @@ const canonical=v=>{
  demand((v===null||['number','string','boolean'].includes(typeof v))&&(typeof v!=='number'||Number.isFinite(v)),'Nonfinite/missing/non-JSON canonical value');return v;
 };
 export const valueBytes=v=>Buffer.from(JSON.stringify(canonical(v))+'\n');
-export const valueSha=v=>sha(valueBytes(v));
+// Hash the same canonical JSON bytes without cloning the complete value or
+// retaining its complete serialized string/Buffer. Only the current object's
+// key order, traversal ancestors and a small output chunk are additional state.
+export function valueSha(value) {
+ const hash=createHash('sha256'),ancestors=new Set();
+ let parts=[],length=0;
+ const write=text=>{
+  parts.push(text);length+=text.length;
+  if(length>=16384){hash.update(parts.join(''));parts=[];length=0;}
+ };
+ const string=value=>{
+  write('"');
+  for(let start=0;start<value.length;){
+   let end=Math.min(start+8192,value.length);
+   // JSON.stringify preserves paired surrogates; a chunk must not turn one
+   // into two independently escaped lone surrogates.
+   if(end<value.length&&value.charCodeAt(end-1)>=0xd800&&value.charCodeAt(end-1)<=0xdbff
+    &&value.charCodeAt(end)>=0xdc00&&value.charCodeAt(end)<=0xdfff)end--;
+   write(JSON.stringify(value.slice(start,end)).slice(1,-1));start=end;
+  }
+  write('"');
+ };
+ const index=key=>String(Number(key)>>>0)===key&&key!=='4294967295';
+ const visit=value=>{
+  if(value&&typeof value==='object'){
+   demand(!ancestors.has(value),'Circular canonical value');ancestors.add(value);
+   if(Array.isArray(value)){
+    write('[');
+    for(let i=0;i<value.length;i++){
+     if(i)write(',');
+     if(i in value)visit(value[i]);else write('null');
+    }
+    write(']');
+   }else{
+    // canonical() assigns lexically sorted keys into a new object. JSON then
+    // emits its array-index keys numerically before the other lexical keys.
+    const keys=Object.keys(value).sort((a,b)=>index(a)?index(b)?Number(a)-Number(b):-1:index(b)?1:a<b?-1:a>b?1:0);
+    write('{');
+    for(let i=0;i<keys.length;i++){
+     if(i)write(',');string(keys[i]);write(':');visit(value[keys[i]]);
+    }
+    write('}');
+   }
+   ancestors.delete(value);return;
+  }
+  demand((value===null||['number','string','boolean'].includes(typeof value))
+   &&(typeof value!=='number'||Number.isFinite(value)),'Nonfinite/missing/non-JSON canonical value');
+  if(typeof value==='string')string(value);else write(JSON.stringify(value));
+ };
+ visit(value);write('\n');
+ if(length)hash.update(parts.join(''));
+ return hash.digest('hex');
+}
 const same=(a,b)=>valueBytes(a).equals(valueBytes(b));
 const freeze=v=>{if(v&&typeof v==='object'){Object.values(v).forEach(freeze);Object.freeze(v);}return v;};
 // The executing checkout supplies policy authority. reader.version can be an
