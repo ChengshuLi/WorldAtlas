@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
-import {admitNativeLedgerStore} from '../scripts/native-patch-store.mjs';
+import {admitNativeLedgerStore,admitNativePatchStore} from '../scripts/native-patch-store.mjs';
 import {valueBytes} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 const hash=body=>createHash('sha256').update(body).digest('hex');
 const temporary=t=>{const dir=fs.mkdtempSync(path.join(os.tmpdir(),'ledger-store-test-'));t.after(()=>fs.rmSync(dir,{recursive:true,force:true}));return dir;};
@@ -361,4 +361,55 @@ test('bounded body reads preserve interleaved values and larger individual recor
  }
  assert.deepEqual(first,coordinates[0]);assert.deepEqual(second,coordinates[0]);assert.equal(a.next().done,true);
  assert.deepEqual(sequence.at(8192),coordinates[8192]);store.close();assert.throws(()=>b.next(),/closed/);assert.deepEqual(fs.readdirSync(directory),[]);
+});
+
+for(const [field,at] of [['metadata offset',0],['metadata length',8],['row start',16],['row count',24],['interval count',32]])test('component '+field+' extents refuse before oversized allocation or I/O',async t=>{
+ const directory=temporary(t);
+ for(const value of [9007199254740993n,0xffffffffffffffffn,1000000n]){
+  const store=await open(directory,JSON.stringify({rows:[{id:'A',native_rows:[{y:1,runs:[[0,2,1]]}]}]}));
+  const root=path.join(directory,fs.readdirSync(directory)[0]),file=path.join(root,'components.bin'),bytes=fs.readFileSync(file);
+  bytes.writeBigUInt64LE(value,at);fs.writeFileSync(file,bytes);
+  const alloc=Buffer.allocUnsafe,read=fs.readSync;let excessive=false;
+  Buffer.allocUnsafe=n=>{if(n>65536){excessive=true;throw Error('unsafe allocation reached');}return alloc(n);};
+  fs.readSync=(fd,buffer,offset,length,position)=>{assert(Number.isSafeInteger(position)&&position>=0);return read(fd,buffer,offset,length,position);};
+  try{assert.throws(()=>store.componentAt(0),/Invalid private/);assert.throws(()=>[...store.componentEntries()],/Invalid private/);assert.equal(excessive,false);}
+  finally{Buffer.allocUnsafe=alloc;fs.readSync=read;store.close();}
+  assert.deepEqual(fs.readdirSync(directory),[]);
+ }
+});
+
+test('row descriptors refuse unsafe, unaligned and foreign interval extents before read',async t=>{
+ const directory=temporary(t);
+ for(const kind of ['ledger','patch'])for(const [at,value] of [[4,9007199254740993n],[4,0xffffffffffffffffn],[4,1n],[4,24n],[12,0xffffffff]]){
+  const rows=[{y:1,runs:[[0,2,1]]},{y:2,runs:[[3,4,1]]}],body=Buffer.from(JSON.stringify({rows:kind==='ledger'?[{id:'A',native_rows:rows}]:rows}));
+  const store=await (kind==='ledger'?admitNativeLedgerStore:admitNativePatchStore)({directory,size:100,ownerCount:10,chunks:[body],expected:{bytes:body.length,sha256:hash(body)}});
+  const component=kind==='ledger'?store.componentAt(0):null,root=path.join(directory,fs.readdirSync(directory)[0]),file=path.join(root,'rows.bin'),bytes=fs.readFileSync(file);
+  if(at===4)bytes.writeBigUInt64LE(value,at);else bytes.writeUInt32LE(value,at);fs.writeFileSync(file,bytes);
+  const read=fs.readSync;fs.readSync=(fd,buffer,offset,length,position)=>{assert(Number.isSafeInteger(position)&&position>=0);return read(fd,buffer,offset,length,position);};
+  try{assert.throws(()=>[...(kind==='ledger'?store.componentRows(component):store.rowEntries())],/private native interval range/);if(kind==='patch')assert.throws(()=>store.rowAt(1),/private native interval range/);}
+  finally{fs.readSync=read;store.close();}
+  assert.deepEqual(fs.readdirSync(directory),[]);
+ }
+});
+
+for(const [field,before,after] of [['depth','"depth":0','"depth":9'],['start','"start":0','"start":9'],['count','"count":40','"count":99']])test('private coordinate '+field+' reference cannot address foreign index data',async t=>{
+ const directory=temporary(t),store=await open(directory,JSON.stringify({rows:[{geometry:{coordinates:Array.from({length:40},()=>[1,2])}}]}));
+ const root=path.join(directory,fs.readdirSync(directory)[0]),file=path.join(root,'metadata.bin'),body=fs.readFileSync(file,'utf8');assert(body.includes(before));
+ const files=fs.readdirSync(root),changed=body.replace(before,after);assert.equal(changed.length,body.length);fs.writeFileSync(file,changed);
+ assert.throws(()=>store.componentMetadata(store.componentAt(0)),/Invalid private coordinate index/);
+ assert.deepEqual(fs.readdirSync(root),files,'read-side faults must not create a new index');
+ store.close();assert.deepEqual(fs.readdirSync(directory),[]);
+});
+
+test('valid empty EOF ranges and large component records retain exact values',async t=>{
+ const directory=temporary(t),value={rows:[{id:'A',native_rows:[{y:1,runs:[[0,1,1]]}]},{id:'B',metadata:'x'.repeat(200000),native_rows:[{y:2,runs:[]}]},{id:'C'}]};
+ const store=await open(directory,JSON.stringify(value));assert.deepEqual([...store.componentEntries()].map(c=>materialize(store,c)),value.rows);
+ assert.equal(store.canonical_sha256,hash(valueBytes(value)));store.close();assert.deepEqual(fs.readdirSync(directory),[]);
+});
+
+for(const file of ['components.bin','metadata.bin','rows.bin','runs.bin'])test('truncated private '+file+' fails complete consumption and still releases storage',async t=>{
+ const directory=temporary(t),store=await open(directory,JSON.stringify({rows:[{id:'A',native_rows:[{y:1,runs:[[0,2,1]]}]}]}));
+ const root=path.join(directory,fs.readdirSync(directory)[0]);fs.truncateSync(path.join(root,file),0);
+ assert.throws(()=>[...store.componentEntries()].map(component=>materialize(store,component)),/Incomplete native interval store/);
+ store.close();assert.deepEqual(fs.readdirSync(directory),[]);
 });

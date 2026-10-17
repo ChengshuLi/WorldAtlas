@@ -10,7 +10,7 @@ const need=(value,message)=>{if(!value)throw Error(message);};
 export const NATIVE_WORD_WINDOW=16384;
 
 export async function openNativeWordStore(chunks,pin,{directory=process.cwd()}={}) {
-  need(Number.isSafeInteger(pin.words)&&pin.words>0&&pin.decoded_bytes===pin.words*4,
+  need(Number.isSafeInteger(pin.words)&&pin.words>0&&Number.isSafeInteger(pin.decoded_bytes)&&pin.decoded_bytes===pin.words*4,
     'Incomplete shuffled native word count');
   const root=fs.mkdtempSync(path.join(directory,'worldatlas-native-'));
   const file=path.join(root,'shuffled');let fd,closed=false,windowStart=-1,window,planes=Buffer.allocUnsafe(NATIVE_WORD_WINDOW*4),words=Buffer.allocUnsafe(NATIVE_WORD_WINDOW*4);

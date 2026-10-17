@@ -65,3 +65,11 @@ test('disk write failure rejects and closes the input instead of returning a par
   try{await reject(source(),pin,/synthetic ENOSPC/);}finally{fs.createWriteStream=original;}
   assert.equal(closed,true);
 });
+
+test('word-plane byte extent must be safe before creating a spool or consuming input',async()=>{
+ let consumed=false;const chunks={async *[Symbol.asyncIterator](){consumed=true;yield Buffer.alloc(0);}};
+ for(const words of [Number.MAX_SAFE_INTEGER,Math.floor(Number.MAX_SAFE_INTEGER/4)+1]){
+  await reject(chunks,{words,decoded_bytes:words*4},/Incomplete shuffled native word count/);
+ }
+ assert.equal(consumed,false);empty();
+});

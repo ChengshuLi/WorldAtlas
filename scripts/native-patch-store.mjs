@@ -91,7 +91,15 @@ function ordinaryDirectory(directory){
   if(p===path.dirname(p))break;
  }
 }
-function readExact(fd,buffer,length,position){
+// Validate logical extents before allocation or I/O. Subtraction avoids an
+// unchecked offset+length overflow; an empty range may sit exactly at EOF.
+function checkedExtent(offset,length,extent,message,{nonempty=false}={}){
+ demand(Number.isSafeInteger(offset)&&offset>=0&&Number.isSafeInteger(length)&&length>=(nonempty?1:0)
+  &&Number.isSafeInteger(extent)&&extent>=0&&offset<=extent-length,message);
+}
+function readExact(fd,buffer,length,position,extent){
+ checkedExtent(position,length,extent,'Invalid private storage read range');
+ checkedExtent(0,length,buffer.length,'Invalid private storage destination range');
  let at=0;while(at<length){const n=fs.readSync(fd,buffer,at,length-at,position+at);demand(n>0,'Incomplete native interval store');at+=n;}
 }
 
@@ -263,29 +271,32 @@ async function admitStore({chunks,expected,directory,size,ownerCount,rowField='r
   };
   const vectorRange=(record,at=0,out={})=>{
    const offset=Number(record.readBigUInt64LE(at)),length=Number(record.readBigUInt64LE(at+8));
-   demand(Number.isSafeInteger(offset)&&Number.isSafeInteger(length)&&length>0
-    &&Number.isSafeInteger(vectors.position)&&offset<=vectors.position-length,'Invalid private metadata vector range');
+   checkedExtent(offset,length,vectors.position,'Invalid private metadata vector range',{nonempty:true});
    out.offset=offset;out.length=length;return out;
   };
   function coordinateSequence(descriptor){
    const {depth,start,count}=descriptor;
+   demand(Number.isSafeInteger(depth)&&depth>=0&&depth<coordinateIndices.length&&coordinateIndices[depth],
+    'Invalid private coordinate index depth');
+   checkedExtent(start,count*16,coordinateIndices[depth].position,'Invalid private coordinate index range');
+   demand(start%16===0,'Unaligned private coordinate index range');
    const entryAt=ordinal=>{
     active();if(descriptor.error)throw new CanonicalValueError(descriptor.error);const record=Buffer.allocUnsafe(16),index=coordinateIndex(depth);
-    readExact(index.fd,record,16,start+ordinal*16);
+    readExact(index.fd,record,16,start+ordinal*16,index.position);
     const {offset,length}=vectorRange(record),body=Buffer.allocUnsafe(length);
-    readExact(vectorFd,body,length,offset);return decodeMetadataBytes(body);
+    readExact(vectorFd,body,length,offset,vectors.position);return decodeMetadataBytes(body);
    };
    function* entries(){
     active();if(descriptor.error)throw new CanonicalValueError(descriptor.error);const index=coordinateIndex(depth);
     const records=Buffer.allocUnsafe(16*Math.min(count,4096)),range={};
     for(let ordinal=0;ordinal<count;){
-     active();const n=Math.min(4096,count-ordinal);readExact(index.fd,records,n*16,start+ordinal*16);
+     active();const n=Math.min(4096,count-ordinal);readExact(index.fd,records,n*16,start+ordinal*16,index.position);
      for(let i=0;i<n;){
       vectorRange(records,i*16,range);const offset=range.offset;let end=i+1,bytes=range.length;
       while(end<n){vectorRange(records,end*16,range);const nextEnd=range.offset+range.length;
        demand(range.offset>=offset+bytes,'Unordered private metadata vector range');
        if(nextEnd-offset>65536)break;bytes=nextEnd-offset;end++;}
-      const body=Buffer.allocUnsafe(bytes);readExact(vectorFd,body,bytes,offset);
+      const body=Buffer.allocUnsafe(bytes);readExact(vectorFd,body,bytes,offset,vectors.position);
       for(;i<end;i++){active();const at=Number(records.readBigUInt64LE(i*16))-offset,length=Number(records.readBigUInt64LE(i*16+8));
        yield decodeMetadataBytes(body.subarray(at,at+length));}
      }
@@ -323,32 +334,35 @@ async function admitStore({chunks,expected,directory,size,ownerCount,rowField='r
    });
    vectors.flush();vectorIndex.flush();
    const entryAt=ordinal=>{
-    active();if(valueError)throw valueError;const record=Buffer.allocUnsafe(16);readExact(vectorIndexFd,record,16,start+ordinal*16);
+    active();if(valueError)throw valueError;const record=Buffer.allocUnsafe(16);readExact(vectorIndexFd,record,16,start+ordinal*16,vectorIndex.position);
     const {offset,length}=vectorRange(record),body=Buffer.allocUnsafe(length);
-    readExact(vectorFd,body,length,offset);return decodeMetadataBytes(body);
+    readExact(vectorFd,body,length,offset,vectors.position);return decodeMetadataBytes(body);
    };
    return nativeSequence(count,function*(){for(let i=0;i<count;i++)yield entryAt(i);},{entryAt});
   }
   const rowRecord=buffer=>{
    const row=Object.freeze({y:buffer.readUInt32LE(0),offset:Number(buffer.readBigUInt64LE(4)),count:buffer.readUInt32LE(12)});
+   checkedExtent(row.offset,row.count*12,runs.position,'Invalid private native interval range');
+   demand(row.offset%12===0,'Unaligned private native interval range');
    admittedRows.add(row);return row;
   };
+  const checkedRows=selected=>checkedExtent(selected.start,selected.rowCount,index.position/16,'Invalid private native row range');
   function* rowEntries(selected=range,{windowRecords=4096}={}){
-   active();demand(Number.isSafeInteger(windowRecords)&&windowRecords>0,'Invalid native cursor window');const buffer=Buffer.allocUnsafe(16*Math.min(windowRecords,selected.rowCount));
-   for(let at=0;at<selected.rowCount;){const count=Math.min(windowRecords,selected.rowCount-at);active();readExact(indexFd,buffer,count*16,(selected.start+at)*16);
+   active();checkedRows(selected);demand(Number.isSafeInteger(windowRecords)&&windowRecords>0,'Invalid native cursor window');const buffer=Buffer.allocUnsafe(16*Math.min(windowRecords,selected.rowCount));
+   for(let at=0;at<selected.rowCount;){const count=Math.min(windowRecords,selected.rowCount-at);active();readExact(indexFd,buffer,count*16,(selected.start+at)*16,index.position);
     for(let i=0;i<count;i++){active();yield rowRecord(buffer.subarray(i*16,i*16+16));}at+=count;
    }
   }
   function* intervals(row,{windowRecords=4096}={}){
    active();demand(Number.isSafeInteger(windowRecords)&&windowRecords>0,'Invalid native cursor window');demand(admittedRows.has(row),'Foreign native interval row');const buffer=Buffer.allocUnsafe(12*Math.min(windowRecords,row.count));
-   for(let at=0;at<row.count;){const count=Math.min(windowRecords,row.count-at);active();readExact(runsFd,buffer,count*12,row.offset+at*12);
+   for(let at=0;at<row.count;){const count=Math.min(windowRecords,row.count-at);active();readExact(runsFd,buffer,count*12,row.offset+at*12,runs.position);
     for(let i=0;i<count;i++){active();yield [buffer.readUInt32LE(i*12),buffer.readUInt32LE(i*12+4),buffer.readUInt32LE(i*12+8)];}at+=count;
    }
   }
   function rowAt(y,selected=range){
-   active();demand(Number.isSafeInteger(y)&&y>=0&&y<size,'Invalid native row lookup');const buffer=Buffer.allocUnsafe(16);let lo=0,hi=selected.rowCount;
-   while(lo<hi){const mid=Math.floor((lo+hi)/2);readExact(indexFd,buffer,16,(selected.start+mid)*16);if(buffer.readUInt32LE(0)<y)lo=mid+1;else hi=mid;}
-   if(lo===selected.rowCount)return null;readExact(indexFd,buffer,16,(selected.start+lo)*16);return buffer.readUInt32LE(0)===y?rowRecord(buffer):null;
+   active();checkedRows(selected);demand(Number.isSafeInteger(y)&&y>=0&&y<size,'Invalid native row lookup');const buffer=Buffer.allocUnsafe(16);let lo=0,hi=selected.rowCount;
+   while(lo<hi){const mid=Math.floor((lo+hi)/2);readExact(indexFd,buffer,16,(selected.start+mid)*16,index.position);if(buffer.readUInt32LE(0)<y)lo=mid+1;else hi=mid;}
+   if(lo===selected.rowCount)return null;readExact(indexFd,buffer,16,(selected.start+lo)*16,index.position);return buffer.readUInt32LE(0)===y?rowRecord(buffer):null;
   }
   function* rowChunks(selected){
    yield '[';let first=true;
@@ -363,24 +377,27 @@ async function admitStore({chunks,expected,directory,size,ownerCount,rowField='r
    const descriptor={metaOffset:Number(buffer.readBigUInt64LE(0)),metaBytes:Number(buffer.readBigUInt64LE(8)),
     start:Number(buffer.readBigUInt64LE(16)),rowCount:Number(buffer.readBigUInt64LE(24)),runCount:Number(buffer.readBigUInt64LE(32)),
     hasNativeRows:buffer.readUInt32LE(40)===1};
+   checkedExtent(descriptor.metaOffset,descriptor.metaBytes,meta.position,'Invalid private component metadata range',{nonempty:true});
+   checkedRows(descriptor);
+   checkedExtent(0,descriptor.runCount,runs.position/12,'Invalid private component interval count');
    const handle=Object.freeze({ordinal,canonical_sha256:buffer.subarray(48,80).toString('hex'),
     rowCount:descriptor.rowCount,runCount:descriptor.runCount,hasNativeRows:descriptor.hasNativeRows});
    admittedComponents.set(handle,descriptor);return handle;
   };
   function* componentEntries({windowRecords=512}={}){
    active();demand(Number.isSafeInteger(windowRecords)&&windowRecords>0,'Invalid native cursor window');const buffer=Buffer.allocUnsafe(80*Math.min(windowRecords,componentCount));
-   for(let at=0;at<componentCount;){const count=Math.min(windowRecords,componentCount-at);active();readExact(componentFd,buffer,count*80,at*80);
+   for(let at=0;at<componentCount;){const count=Math.min(windowRecords,componentCount-at);active();readExact(componentFd,buffer,count*80,at*80,components.position);
     for(let i=0;i<count;i++){active();yield componentRecord(buffer.subarray(i*80,i*80+80),at+i);}at+=count;
    }
   }
   function componentAt(ordinal){
    active();demand(Number.isSafeInteger(ordinal),'Invalid native component ordinal');
    if(ordinal<0||ordinal>=componentCount)return undefined;
-   const buffer=Buffer.allocUnsafe(80);readExact(componentFd,buffer,80,ordinal*80);return componentRecord(buffer,ordinal);
+   const buffer=Buffer.allocUnsafe(80);readExact(componentFd,buffer,80,ordinal*80,components.position);return componentRecord(buffer,ordinal);
   }
   const componentDescriptor=handle=>{active();const descriptor=admittedComponents.get(handle);demand(descriptor,'Foreign native component');return descriptor;};
   function componentMetadata(handle){
-   const {metaBytes,metaOffset}=componentDescriptor(handle),buffer=Buffer.allocUnsafe(metaBytes);readExact(metadataFd,buffer,metaBytes,metaOffset);
+   const {metaBytes,metaOffset}=componentDescriptor(handle),buffer=Buffer.allocUnsafe(metaBytes);readExact(metadataFd,buffer,metaBytes,metaOffset,meta.position);
    return decodeMetadataBytes(buffer);
   }
   function componentRows(handle,options){return rowEntries(componentDescriptor(handle),options);}
