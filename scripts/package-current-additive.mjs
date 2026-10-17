@@ -3,10 +3,10 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
-import {gunzipSync} from 'node:zlib';
+import {gunzipSync,gzipSync} from 'node:zlib';
 import {isDeepStrictEqual} from 'node:util';
 import {containsPackagePath,loadPackageInputs,safePackagePath} from './package-inputs.mjs';
-import {additiveBaseReference,bindAdditiveLedgerFeatures,verifyAdditiveLedgerSelection,additiveReleaseFootprintDigest,validateAdditivePatchFormat} from '../src/effective-footprint.js';
+import {decodedAdditiveAssetIdentity,additiveBaseReference,bindAdditiveLedgerFeatures,verifyAdditiveLedgerSelection,additiveReleaseFootprintDigest,validateAdditivePatchFormat} from '../src/effective-footprint.js';
 import {scientificNativeSelection,validateReferenceMetadataHeader,projectReferenceOwners,assertAppliedReferenceProperties} from '../src/reference-metadata.js';
 
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
@@ -52,7 +52,7 @@ export async function prepareCurrentSelectedAdditive({root,selectedGrid,geograph
   need(isDeepStrictEqual(base,Object.fromEntries(['id','footprints_sha256','hierarchy_sha256'].map(key=>[key,geographicRelease[key]])))&&envelope.effective_reference.hierarchy_sha256===base.hierarchy_sha256,'Current additive reference differs from selected base');
   need(selection.sha256===selectedGrid.sha256&&selection.release_id===(referenceMetadata?.native_reference.id??geographicRelease.id),'Current additive native selection differs');
   need(Object.keys(sidecar.logical_asset_map??{}).sort().join(',')==='base_manifest,ledger,owner_roster,patch','Incomplete current additive asset roster');
-  const assets=projectionAsset?[projectionAsset]:[],decoded={};
+  const assets=projectionAsset?[projectionAsset]:[],decoded={},bodies={};
   for(const role of ['base_manifest','ledger','owner_roster','patch']){
     const pin=sidecar.logical_asset_map[role],logical=envelope[role];
     need(pin.bytes===logical.bytes&&pin.sha256===logical.sha256&&(pin.decoded_bytes??pin.bytes)===(logical.decoded_bytes??logical.bytes)&&(pin.decoded_sha256??pin.sha256)===(logical.decoded_sha256??logical.sha256),'Current additive logical/source binding differs: '+role);
@@ -62,6 +62,7 @@ export async function prepareCurrentSelectedAdditive({root,selectedGrid,geograph
       body=gunzipSync(raw,{maxOutputLength:logical.decoded_bytes+1});
       need(body.length===logical.decoded_bytes&&sha(body)===logical.decoded_sha256,'Current additive decoded identity differs');
     }
+    if(role==='ledger'||role==='patch')bodies[role]=body;
     decoded[role]=JSON.parse(body);
   }
   need(envelope.base_manifest.sha256===selectedGrid.sha256&&isDeepStrictEqual(decoded.base_manifest,selectedGrid.manifest),'Current additive base manifest differs');
@@ -73,13 +74,23 @@ export async function prepareCurrentSelectedAdditive({root,selectedGrid,geograph
   for(const owner of owners){const feature=byId.get(owner.id);need(feature&&!ids.has(owner.id)&&Number.isSafeInteger(owner.index)&&owner.index>0&&!indices.has(owner.index)&&feature.pixelIndex===owner.index&&feature.properties.parent_id===owner.province_id,'Current additive owner identity or parent differs');ids.add(owner.id);indices.add(owner.index);}
   for(const change of projection?.location_changes??[])assertAppliedReferenceProperties(byId.get(change.location_id)?.properties,change.after_properties,{referenceRevision});
   const patch=decoded.patch,ledger=decoded.ledger;
-  need(patch.kind==='unassigned-native-cells-v1'&&[1,2].includes(patch.version)&&isDeepStrictEqual(patch.base_reference,base)&&isDeepStrictEqual(patch.effective_reference,envelope.effective_reference)&&patch.ledger_sha256===envelope.ledger.sha256,'Current additive patch source/ledger differs');
+  need(patch.kind==='unassigned-native-cells-v1'&&[1,2].includes(patch.version)&&isDeepStrictEqual(patch.base_reference,base)&&isDeepStrictEqual(patch.effective_reference,envelope.effective_reference)&&patch.ledger_sha256===decodedAdditiveAssetIdentity(envelope.ledger).sha256,'Current additive patch source/ledger differs');
   validateAdditivePatchFormat(patch,selectedGrid.manifest.size);
   need(patch.rows.every(row=>row.runs.every(run=>indices.has(run[2]))),'Current additive patch contains a foreign owner');
   const effective=bindAdditiveLedgerFeatures(features,ledger,envelope,base);
   verifyAdditiveLedgerSelection(ledger,effective,patch);
   need(additiveReleaseFootprintDigest(base,effective)===envelope.effective_reference.footprints_sha256,'Current additive effective footprint differs');
-  return {selection,input_inventory:inputInventory,additiveRelease:envelope,reference_release:envelope.effective_reference,
+  // Derive only delivery transport after authenticating the complete accepted
+  // source products. Their raw pins and all semantic joins above stay original.
+  const emitted=structuredClone(envelope);
+  for(const role of ['ledger','patch'])if(envelope[role].encoding!=='gzip'){
+    const body=bodies[role],raw=gzipSync(body,{level:9}),asset=assets.find(asset=>asset.path===envelope[role].path);
+    emitted[role]={path:envelope[role].path.replace(/\.json(?:\.gz)?$/,'.json.gz'),bytes:raw.length,sha256:sha(raw),
+      encoding:'gzip',decoded_bytes:body.length,decoded_sha256:sha(body)};
+    asset.path=emitted[role].path;asset.raw=raw;
+  }
+  additiveBaseReference({additiveRelease:emitted,reference_release:emitted.effective_reference});
+  return {selection,input_inventory:inputInventory,additiveRelease:emitted,reference_release:emitted.effective_reference,
     ...(referenceMetadata?{referenceMetadata}:{}),
     async publish(destination){
       const target=path.resolve(destination);

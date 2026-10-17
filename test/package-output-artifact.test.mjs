@@ -5,6 +5,7 @@ import path from 'node:path';
 import os from 'node:os';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
+import {assertCloudflareStaticAssets, CLOUDFLARE_STATIC_ASSET_BYTES} from '../scripts/package-build.mjs';
 import {createPackageOutputManifest, snapshotPackageOutputSource, inventoryPackageOutput, validatePackageOutputManifest,
   verifyPackageOutput, streamedPackageFile, admitPackageInputTransition, admitPackageOutputTransition, committedPackageInputs, committedPackageProducer, packageWorkflowExecution} from '../scripts/package-output-artifact.mjs';
 
@@ -496,4 +497,22 @@ test('all32 selected appends retain unchanged typed code across original/trusted
     changed.files.push({path:unsafe,mode:'100644',oid});
     assert.throws(()=>admitPackageOutputTransition(original,changed,{acceptedInputs,typedInputs}));
   }
+});
+
+
+test('new Cloudflare static files obey the exact provider boundary without rewriting historical custody',t=>{
+ const f=fixture(t),name=path.join(f.root,'dist/client/large.bin');
+ assert.equal(CLOUDFLARE_STATIC_ASSET_BYTES,26214400);
+ const fd=fs.openSync(name,'w');fs.ftruncateSync(fd,26214400);fs.closeSync(fd);
+ assert.doesNotThrow(()=>assertCloudflareStaticAssets(f.root));
+ fs.truncateSync(name,26214401);
+ // Old output must remain authenticatable so a subsequent assembly can replace
+ // its oversized raw ledger. New-output admission is an independent boundary.
+ const old=createPackageOutputManifest(f.root);assert.equal(verifyPackageOutput(f.root,old),true);
+ assert.throws(()=>assertCloudflareStaticAssets(f.root),/Cloudflare static asset exceeds 25 MiB/);
+ fs.unlinkSync(name);const worker=path.join(f.root,'dist/cloudflare/large-worker.bin');
+ const workerFd=fs.openSync(worker,'w');fs.ftruncateSync(workerFd,26214401);fs.closeSync(workerFd);
+ assert.doesNotThrow(()=>assertCloudflareStaticAssets(f.root),'Static-file ceiling is not a Worker-script limit');
+ fs.symlinkSync('../atlas-geography.json',path.join(f.root,'dist/client/assets/link'));
+ assert.throws(()=>assertCloudflareStaticAssets(f.root),/must be ordinary/);
 });
