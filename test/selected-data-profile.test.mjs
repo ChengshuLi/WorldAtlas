@@ -227,8 +227,9 @@ test('actual queue classification validates current issue authority without auth
   f.issue.state='closed';await assert.rejects(f.select());
 });
 test('actual selector retains all three shards when accepted smoke or complete expectations are unavailable',async()=>{
-  for(const mutate of [f=>f.baseline.entries.delete(SELECTED_SMOKE),f=>f.blobs.delete(f.authored.entries.get(prefix+'selected-delivery-expectations.json').sha)]){
-    const f=gateFixture();mutate(f);assert.deepEqual(await f.select(),{profile:'full',shards:[0,1,2],geography_software:false});
+  for(const [mutate,software] of [[f=>f.baseline.entries.delete(SELECTED_SMOKE),true],
+    [f=>f.blobs.delete(f.authored.entries.get(prefix+'selected-delivery-expectations.json').sha),false]]){
+    const f=gateFixture();mutate(f);assert.deepEqual(await f.select(),{profile:'full',shards:[0,1,2],geography_software:software});
   }
 });
 
@@ -309,7 +310,8 @@ test('final checker choice skips selected-data classification when no candidate 
   assert.equal(result.geography.trusted_code_commit, f.base);
   assert.deepEqual(diagnostics, {}, 'eligible classifier was never entered');
   assert.equal(f.reads.length, 0, 'no classifier metadata or supporting bodies were read');
-  assert(!f.mergeReads.includes('/repos/owner/repo/git/commits/' + f.base), 'no classifier-only baseline tree');
+  assert.equal(f.mergeReads.filter(route=>route==='/repos/owner/repo/git/commits/'+f.base).length,1, 'one baseline tree for actual execution routing');
+  assert.equal(f.mergeReads.filter(route=>route==='/repos/owner/repo/git/trees/base-tree?recursive=1').length,1);
   assert.equal(f.writes.length, 1);
 });
 
@@ -1651,14 +1653,20 @@ test('final checker choice fails closed when candidate-code classification is un
       return original(route, ...args);
     };
     assert.equal(candidateGeographyCode('full', f.files), true);
-    await assert.rejects(f.complete(), /exact trusted combined check/);
+    await assert.rejects(f.complete(), failure==='baseline tree'?/Unavailable baseline tree/:/exact trusted combined check/);
     assert.equal(f.writes.length, 0, failure);
-    const result = await f.complete({geographyReportLoader: async () => ({
+    const candidateReport = {geographyReportLoader: async () => ({
       version: 1, method_id: 'worldatlas-trusted-geography-check-v1', baseline_commit: f.base,
       trusted_code_commit: f.pr.merge_commit_sha, candidate_commit: f.pr.merge_commit_sha,
       trusted_code_inventory_sha256: 'd'.repeat(64), candidate_code_executed: true,
       published: false, source_approval: false, gate_status: 'passed', status: 'not-applicable'
-    })});
+    })};
+    if(failure==='baseline tree'){
+      await assert.rejects(f.complete(candidateReport),/Unavailable baseline tree/);
+      assert.equal(f.writes.length,0,'Neither report can replace unavailable routing identities');
+      continue;
+    }
+    const result=await f.complete(candidateReport);
     assert.equal(result.accepted, true, failure);
     assert.equal(result.geography.trusted_code_commit, f.pr.merge_commit_sha);
     assert.equal(f.writes.length, 1);
