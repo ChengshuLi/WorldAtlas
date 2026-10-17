@@ -157,16 +157,20 @@ export async function runSelectedDeliverySmoke({root = process.cwd(), emittedDir
   const output = admitOutput(outputPath), inputs = new Map();
   const readRoot = repositoryReader(root), readEmitted = repositoryReader(emittedDirectory);
   const read = (scope, name, pin, {nativePart = false} = {}) => {
-    const bytes = (scope === 'root' ? readRoot : readEmitted)(name, 'candidate');
+    // Authenticate the declaration before passing its exact size to the reader.
+    // Dropping it here silently reinstates the legacy unpinned-file ceiling.
+    const omittedNativeBytes = pin && nativePart && !Object.hasOwn(pin, 'bytes')
+      && hash(pin.decoded_sha256) && Number.isSafeInteger(pin.words) && pin.words > 0;
+    if (pin) assert(hash(pin.sha256)
+      && ((Number.isSafeInteger(pin.bytes) && pin.bytes >= 0) || omittedNativeBytes),
+    'Missing whole-file asset pin');
+    const bytes = (scope === 'root' ? readRoot : readEmitted)(name, 'candidate',
+      pin && !omittedNativeBytes ? pin : undefined);
     const descriptor = {scope, path: name, bytes: bytes.length, sha256: sha256(bytes)};
     if (pin) {
       // packageStartupOwnership omits encoded bytes on its native run
       // descriptors. The encoded hash remains mandatory; production loading
       // separately authenticates decoded words and their complete coverage.
-      const omittedNativeBytes = nativePart && !Object.hasOwn(pin, 'bytes')
-        && hash(pin.decoded_sha256) && Number.isSafeInteger(pin.words) && pin.words > 0;
-      assert(hash(pin.sha256) && (Number.isSafeInteger(pin.bytes) || omittedNativeBytes),
-        'Missing whole-file asset pin');
       if (!omittedNativeBytes) assert.equal(descriptor.bytes, pin.bytes, `Whole asset bytes differ: ${name}`);
       assert.equal(descriptor.sha256, pin.sha256, `Whole asset hash differs: ${name}`);
     }
