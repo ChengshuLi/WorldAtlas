@@ -1,6 +1,6 @@
 {
-  "base": "1330b938687e1c8255ae0e80bf4ad854e44c6d5e",
-  "current": "coordination/engineering/south-africa-selected-delivery-20261017/ownership-selection-combined.json",
+  "base": "b7ca15f8d88241b088699396d3df0ca58a9e0803",
+  "current": "coordination/engineering/czechia-selected-delivery-20261017/ownership-selection-combined.json",
   "paths": [
     {
       "role": "sidecar",
@@ -561,8 +561,36 @@
       "bytes": 28577229,
       "oid": "b0efc8d8df6d82fda2dbb826757dc204347b82d2",
       "sidecar": "coordination/engineering/poland-selected-delivery-20261017/ownership-selection-combined.json"
+    },
+    {
+      "role": "sidecar",
+      "path": "coordination/engineering/south-africa-selected-delivery-20261017/ownership-selection-combined.json",
+      "bytes": 3472,
+      "oid": "8c902e163efa31b5c1bb243b1a547a0b209355f9",
+      "sidecar": "coordination/engineering/south-africa-selected-delivery-20261017/ownership-selection-combined.json"
+    },
+    {
+      "role": "runtime_envelope",
+      "path": "coordination/engineering/south-africa-selected-delivery-20261017/composition-001/runtime-envelope.json",
+      "bytes": 1388,
+      "oid": "c51bfd97075d254a4570850433c38db08b7bbb54",
+      "sidecar": "coordination/engineering/south-africa-selected-delivery-20261017/ownership-selection-combined.json"
+    },
+    {
+      "role": "ledger",
+      "path": "coordination/engineering/south-africa-selected-delivery-20261017/composition-001/selected-ledger.json",
+      "bytes": 54856496,
+      "oid": "248dad3682ccf5e45a5d497a5566e735c8e89e39",
+      "sidecar": "coordination/engineering/south-africa-selected-delivery-20261017/ownership-selection-combined.json"
+    },
+    {
+      "role": "patch",
+      "path": "coordination/engineering/south-africa-selected-delivery-20261017/composition-001/patch.json",
+      "bytes": 28642685,
+      "oid": "52e761663c02f39b8d2133ff06a2063ea5709d47",
+      "sidecar": "coordination/engineering/south-africa-selected-delivery-20261017/ownership-selection-combined.json"
     }
   ],
-  "logical_bytes": 681130082,
+  "logical_bytes": 764634123,
   "proof": "Each retired quartet is authenticated by its historical selected sidecar; current quartet and all unrelated declarations are retained. Logical bytes are not measured transfer savings."
 }
