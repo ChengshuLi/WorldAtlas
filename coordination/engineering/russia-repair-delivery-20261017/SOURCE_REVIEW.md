@@ -1,0 +1,51 @@
+# Whole Russia ADM2 source review
+
+The original repair package is all 2,566,967 native cells, 346,353 interval segments, 334 direct owners, and blocks 005–023. This includes 2,515,829 land-class and 51,138 inland-water-class cells. No cell has yet been promoted to accepted delivery. The two original companion scopes are separate and receive no credit here.
+
+## Source custody and target intent
+
+`source-review/source-custody.json` authenticates all eight original queue products, 2,532 features and 41,208,506 decoded bytes. All original features are valid. The complete RUS ADM2 roster is 2,327 features in the consumed simplified transport, not the publisher's distinct unsimplified transport or the advertised 2,328 feature count (#1133 remains open). The source vintage is retained, not represented as current legal geography.
+
+All 334 positive targets are direct source IDs, retain the exact original names, have a single source atom, and are the sole reverse-lineage owner for that atom. Both target and source geometries are valid. Source-to-current-target area fractions are descriptive only; they neither define the denominator nor authorize filling all differences.
+
+The 21 geographic-portion flags comprise 16 Sakhalin and 5 Arkhangelsk targets. The pinned `scripts/geographic-regions.py` builds geographic province groups and sets a province's basis when its locations span multiple geographic area codes. It updates the location's parent and metadata, not its geometry. The pinned `scripts/rebuild-framework.py` copies the province basis to each location's `parent_match`; it does not cut these locations by that label. Thus this label is not itself a territorial exclusion. Each flagged target was separately checked against source identity, reverse lineage and accepted selected-bank geometry.
+
+Actual splitting is a separate, retained fact: the complete primary family has 39 split originals and 107 descendants. `source-review/complete-primary-membership.json` authenticates every mapped owner and the accepted semantic/index/part bindings. None of the 334 positive targets is one of those split originals. All complete split originals remain negative source competitors under the accepted helper, without selecting a descendant as a surrogate owner.
+
+Eighteen large-target scale reviews retain named source territories because finer physical coverage is insufficient or no substantial geographic subdivision is established. Those explicit retention decisions are kept. Generic source role labels and names such as urban district are not a new certification of current statutory roles. Administrative source boundaries and atlas grouping do not adjudicate sovereignty.
+
+## Retained display partition, validity repair and macro reference intent
+
+`source-review/retained-display-intent.json` and `scripts/check-retained-display-intent.py` authenticate the original writers, migration receipt and exact target metadata. This separately resolves intent beyond the 21 grouping-only portion labels:
+
+- 177 targets retain a real topology display partition. The writer cuts only shared intersections, using Natural Earth reference borders, then finer polygon/stable-ID priority; nonoverlapping coastlines must survive. Full original same-family competitors and unchanged whole foreign negatives prevent restoring contested source territory. Owner-zero conservation and no overrides remain required at final delivery. The stored `original_geometry_sha256` values describe pre-topology display geometry, after mapshaper 25% simplification/0.0001 precision and display repair; all 177 differ from consumed raw source geometry. They are not used to authenticate raw source bytes.
+- Zapolyarny retains `display_geometry_repaired`. The pinned writer applies polygonal MakeValid/union only to invalid or empty intermediate display geometry, before topology, without changing source identity or hierarchy. Both original consumed source and selected display geometry are valid. This is not a deliberate subdivision. The historical invalid intermediate is not reconstructed, and this package neither repairs source geometry nor replaces the retained display geometry.
+- Nine Ural targets retain reference-only whole-location macro assignments. The original migration writer asserts unchanged geometry, and its receipt reports zero geometry and history changes. All nine selected geometry hashes equal that immutable receipt, and assignment metadata matches exactly. No slicing, historical transfer, recomputed majority share or new macro convention is inferred.
+
+These dispositions retain the existing display convention and source uncertainty. Native gap eligibility is a narrower source-relative finding, not reversal of the topology partition or present legal/geographic semantic approval.
+
+## Whole-target physical evidence
+
+The stock physical phase measured all 334 complete original source/selected pairs together, with no geometry repair or clipping. It retained 236 issue records: 124 contradictory land/water, 43 L2 outside L1, 38 extra reconstruction, 24 missing reconstruction and 7 L3 outside L2. Issue counts are records, not cell counts. All supports, lower-dimensional witnesses, exact queries, method/runtime receipts and issue geometries remain original.
+
+The first native diagnostic stopped on authentic periodic physical conflict queries. Three original eastern-Russia targets have five -360 query records. Chukotsky and Iultinsky retain contradictory-support issues. The failed diagnostic is retained and does not support a native patch. Exact independently reviewed helper #2308 (`de0db630a759d5e1e7169d3ef10d97a52b746a4c`) then qualified the original authenticated producer frames in a clearly labeled local preparation diagnostic, without changing scientific bytes. Final authority still requires accepted helper integration and source review.
+
+## Original cross-family competition
+
+The complete frozen source interval roster contains 9,451 cells also covered by foreign ADM1 originals: China 8,980, Georgia 382, Ukraine 61, Kazakhstan 18, Mongolia 8 and Norway 2. `source-review/source-competitor-native-counts.json` retains every exact interval. These are source-relative competing claims, not an administrative or sovereignty judgment. `config/complete-negatives/complete-source-negative-bindings.json` authenticates all 122 complete foreign originals. Complete polygon-part bounding-box comparison of every original against every target source yields 230 whole-feature negative operands across 171 targets; all other originals are explicitly proved disjoint. Every original foreign-source contact is joined to an unchanged exact operand. No territorial applicability exception is allowed. `native-inputs-002/source-evidence.json` is the stock prepared input with these negatives; the physical and stage pins remain unchanged.
+
+## Historical component reconciliation
+
+The complete original 52 Kazakhstan–Russia and 48 Mongolia–Russia components and their dispositions remain in `historical-component-intersections.json`; exactly 135 current repair cells intersect five of these components. An independent read-only point probe uses all eight queue products plus complete Kazakhstan ADM2 (174 features), Mongolia ADM2 (339), and independent Mongolia MRIS/NSO ADM2 (339). Every one of the 135 centres is uniquely in its named Russian ADM2 and mapped-land support, with no foreign ADM2 coverage and no source-boundary contact. The method, full per-cell results, complete rosters and immutable body pins are in `scripts/check-historical-centres.py` and `historical-centre-corroboration.json`.
+
+The literal archived source-fitness assessment is retained in `historical-source-fitness-limits.json`, including absent MRIS service licenseInfo, uncertain authority/lineage/effective dates, and official documentary warnings that Buryatia municipal/OKTMO changes in 2025–2026 postdate the 2017 Russia source. The MRIS product is a negative comparator only and is not adopted or re-licensed. That narrower source-relative centre result does not close any whole-component source-fitness question. Registration-sensitive borders, source precision, observation vintage, unrecorded water and current legal interpretation remain unresolved. All 135 cells explicitly join to supported outcomes in the full-original preparation diagnostic. This is not accepted authority or closure of the whole historical components.
+
+## Read-only reproduction
+
+`python scripts/verify-original-stage.py REPO PACKET_COMMIT` byte-reconstructs the original stage and native patch from authenticated complete source transports, selected-bank target bodies and all 19 frozen blocks. It independently reproduces all 9,451 foreign-source interval contacts. `python scripts/bind-complete-source-negatives.py REPO INPUT_COMMIT OUTPUT_DIR` reconstructs the exact complete-source negative configuration and inventory without changing source geometry. The committed scripts live beneath this packet directory. Shared runtime identity is retained by the physical execution receipt.
+
+## Full original native preparation result
+
+`native-diagnostic-preaccept-001/` and `native-partition-preaccept-001/whole-scope-reconciliation.json` retain every original row and its exact decision. The complete 2,566,967-cell denominator partitions exhaustively and without overlap into 2,557,516 supported cells (2,506,594 land, 50,922 inland-water) and 9,451 held foreign contacts (9,235 land, 216 inland-water). Every original foreign-source contact is held; there are no additional physical or split-source hold reasons. All 334 original owners remain in the reconciliation. There are 327 owners with positive supported cells, 66 owners with held cells, and seven wholly held owners. The seven are retained subjects, not dropped scope. All 135 historical cells are supported at this narrow native diagnostic level.
+
+The stock whole-input diagnostic took 101.79 seconds and 1,322,772 KiB peak RSS. This preparation-only result is not native authority, accepted owner-zero proof or final emitted-output evidence. The original physical issues, complete competitors and original uncertainty are retained. Final delivery must use the stock authority/composition path after dependency acceptance and preserve the latest cumulative accepted selection.
