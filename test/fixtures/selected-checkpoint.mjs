@@ -59,9 +59,9 @@ function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,sourceO
  save('data/owners.json',[{id:'A',index:1},{id:'B',index:2},{id:'C',index:3}]);
  if(nativeAppend){
   const latitudes=nativeRowLatitudes(size),bytes=Buffer.alloc(size*8);
-  latitudes.forEach((v,i)=>bytes.writeDoubleLE(v,i*8));save('original/latitudes.f64le',bytes);
-  const initial=commit(),body=git('show',initial+':original/latitudes.f64le'),tree=git('ls-tree',initial,'--','original/latitudes.f64le').toString().split(/\s+/);
-  manifest.native_latitudes={commit:initial,path:'original/latitudes.f64le',mode:tree[0],git_blob_oid:tree[2],bytes:body.length,sha256:sha(body)};
+  latitudes.forEach((v,i)=>bytes.writeDoubleLE(v,i*8));save('original/latitudes.f64le.gz',gzipSync(bytes));
+  const initial=commit(),body=git('show',initial+':original/latitudes.f64le.gz'),tree=git('ls-tree',initial,'--','original/latitudes.f64le.gz').toString().split(/\s+/);
+  manifest.native_latitudes={root:'repository',commit:initial,path:'original/latitudes.f64le.gz',mode:tree[0],git_blob_oid:tree[2],bytes:body.length,sha256:sha(body),decoded_bytes:bytes.length,decoded_sha256:sha(bytes)};
   manifest.original_assets={bounds:{sha256:sha(fs.readFileSync(path.join(root,'data/owners.json')))}};
  }
  save('data/manifest.json',manifest);

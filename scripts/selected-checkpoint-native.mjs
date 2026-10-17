@@ -64,7 +64,7 @@ export function compareEffectiveNativeRows(beforeRows,afterRows,{size,ownersBefo
 // The joint launcher qualifies both states in one invocation and owns release.
 // Authentication stays in the shared projector, including the zero-row path.
 export async function compareSelectedCheckpointNative({transition}) {
-  const {authenticateTransition,projectNativeRows,projectVisibilityLatitudes}=await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs');
+  const {authenticateTransition,visitNativeRows,projectVisibilityLatitudes}=await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs');
   const {baseline,candidate,changedNativeRows}=authenticateTransition({transition});
   const visibilityCandidates=newVisibleRepairCandidates(baseline.additions,candidate.additions);
   const size=baseline.manifest.size,oldEntries=baseline.certificate.entries,newEntries=candidate.certificate.entries;
@@ -79,22 +79,41 @@ export async function compareSelectedCheckpointNative({transition}) {
 
   // qualifyTransition proves identical base selection and all native routes;
   // its candidate cache already contains newly qualified original base rows.
-  // Project once, then apply the two cumulative patches to that SAME base.
+  // Visit bounded batches and apply both cumulative patches to the SAME base.
   demand(same(baseline.baseSelection,candidate.baseSelection)&&baseline.selection.sha256===candidate.selection.sha256,
     'Checkpoint original native base/manifest binding differs');
-  const projection=projectNativeRows({state:candidate,rows:expected});
-  let result={checked_rows:0,lost_or_reassigned_cells:0,intervals:[]},visibilityWitnesses=[];
-  if(expected.length){
-
-    const owners=oldEntries.map(row=>({id:row[0],index:row[1],province_id:row[2],province_index:row[3]}));
-    const oldRows=applyNativeAdditiveRows(projection.rows,baseline.patch,{size,owners});
-    const newRows=applyNativeAdditiveRows(projection.rows,candidate.patch,{size,owners});
-    result=compareEffectiveNativeRows(oldRows,newRows,{size,ownersBefore:owners,ownersAfter:owners,rows:expected});
-    if(visibilityCandidates.length){
-
-      const latitudes=projectVisibilityLatitudes({state:candidate});
-      visibilityWitnesses=repairVisibilityWitnesses({candidates:visibilityCandidates,size,latitudes,beforeRows:oldRows,afterRows:newRows});
-    }
+  const owners=oldEntries.map(row=>({id:row[0],index:row[1],province_id:row[2],province_index:row[3]}));
+  const oldPatch=effectiveNativeRows(baseline.patch?.rows??[],size,owners);
+  const newPatch=effectiveNativeRows(candidate.patch?.rows??[],size,owners);
+  const result={checked_rows:0,lost_or_reassigned_cells:0,intervals:[]};
+  const visibilityWitnesses=visibilityCandidates.map(()=>null);
+  const projection=visitNativeRows({state:candidate,rows:expected,visit:baseRows=>{
+    const rows=baseRows.map(row=>row.y);
+    const patch=index=>({rows:rows.filter(y=>index.has(y)).map(y=>index.get(y))});
+    const oldRows=applyNativeAdditiveRows(baseRows,patch(oldPatch),{size,owners});
+    const newRows=applyNativeAdditiveRows(baseRows,patch(newPatch),{size,owners});
+    const part=compareEffectiveNativeRows(oldRows,newRows,{size,ownersBefore:owners,ownersAfter:owners,rows});
+    result.checked_rows+=part.checked_rows;
+    result.lost_or_reassigned_cells+=part.lost_or_reassigned_cells;
+    demand(Number.isSafeInteger(result.lost_or_reassigned_cells),'Native loss count exceeds exact integer domain');
+    for(const interval of part.intervals)result.intervals.push(interval);
+  }});
+  if(visibilityCandidates.length&&expected.length){
+    // Preserve the comparison's custody snapshot before latitude acquisition.
+    const latitudes=projectVisibilityLatitudes({state:candidate});
+    visitNativeRows({state:candidate,rows:expected,visit:baseRows=>{
+      const rows=baseRows.map(row=>row.y);
+      const pendingIndices=visibilityCandidates.flatMap((candidate,i)=>
+        !visibilityWitnesses[i]&&(candidate.representation!=='native-cells'
+          || candidate.native_rows[0].y<=rows.at(-1)&&candidate.native_rows.at(-1).y>=rows[0])?[i]:[]);
+      if(!pendingIndices.length)return;
+      const pending=pendingIndices.map(i=>visibilityCandidates[i]);
+      const patch=index=>({rows:rows.filter(y=>index.has(y)).map(y=>index.get(y))});
+      const oldRows=applyNativeAdditiveRows(baseRows,patch(oldPatch),{size,owners});
+      const newRows=applyNativeAdditiveRows(baseRows,patch(newPatch),{size,owners});
+      const witnesses=repairVisibilityWitnesses({candidates:pending,size,latitudes,beforeRows:oldRows,afterRows:newRows});
+      for(let n=0;n<pendingIndices.length;n++)visibilityWitnesses[pendingIndices[n]]=witnesses[n];
+    }});
   }
   demand(visibilityWitnesses.length===visibilityCandidates.length&&visibilityWitnesses.every(Boolean),'New gap repair has no actual changed map-cell witness');
   const report={version:1,repair_visibility:{new_components:visibilityCandidates.length,witnesses:visibilityWitnesses},method:'selected-native-owner-conservation-v1',
