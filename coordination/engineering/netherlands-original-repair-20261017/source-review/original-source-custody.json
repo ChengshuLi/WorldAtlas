@@ -1,0 +1,403 @@
+{
+  "accepted": "1330b938687e1c8255ae0e80bf4ad854e44c6d5e",
+  "source": {
+    "advertised_feature_count": 344,
+    "cohort": "administrative-registry",
+    "feature_count": 344,
+    "key": "gb:NLD:ADM2",
+    "metadata_sha256": "91b5804253293923366a68965454cf4c9ec10e2616521eb2ba23e592cb3ae701",
+    "original_bytes": 861643,
+    "original_metadata_file": "data/administrative-sources.json",
+    "original_sha256": "a973d6452362a29a8b8d364df0a377362e0cf68ce8f7da0298008c77c1c678c7",
+    "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+    "parts": [
+      {
+        "bytes": 241621,
+        "hash_kind": "file-bytes",
+        "offset": 0,
+        "ordinal": 0,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-NLD-ADM2-000.bin.gz",
+        "sha256": "de225c7cd7c40e9162d56209fe7e0ea6363d95430510ba08f28f2697c7365767",
+        "uncompressed_bytes": 861643,
+        "uncompressed_sha256": "a973d6452362a29a8b8d364df0a377362e0cf68ce8f7da0298008c77c1c678c7"
+      }
+    ],
+    "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/NLD/ADM2/geoBoundaries-NLD-ADM2_simplified.geojson",
+    "recorded_license": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+    "source_represented_year_claim": "2022"
+  },
+  "all_344_valid_nonempty": true,
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "all_39_literal_identity_joins": true,
+  "owners": [
+    {
+      "owner": 32482,
+      "id": "gb:NLD:ADM2:6326949B12614711390574",
+      "source_atom": "gb:NLD:ADM2:6326949B12614711390574",
+      "name": "Maasgouw",
+      "original_source_name": "Maasgouw",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32493,
+      "id": "gb:NLD:ADM2:6326949B15301037000239",
+      "source_atom": "gb:NLD:ADM2:6326949B15301037000239",
+      "name": "Gulpen-Wittem",
+      "original_source_name": "Gulpen-Wittem",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32500,
+      "id": "gb:NLD:ADM2:6326949B16829541191970",
+      "source_atom": "gb:NLD:ADM2:6326949B16829541191970",
+      "name": "Terneuzen",
+      "original_source_name": "Terneuzen",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32502,
+      "id": "gb:NLD:ADM2:6326949B17278408062250",
+      "source_atom": "gb:NLD:ADM2:6326949B17278408062250",
+      "name": "Vaals",
+      "original_source_name": "Vaals",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32506,
+      "id": "gb:NLD:ADM2:6326949B1825961321722",
+      "source_atom": "gb:NLD:ADM2:6326949B1825961321722",
+      "name": "Heerlen",
+      "original_source_name": "Heerlen",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32508,
+      "id": "gb:NLD:ADM2:6326949B19414277691711",
+      "source_atom": "gb:NLD:ADM2:6326949B19414277691711",
+      "name": "Sluis",
+      "original_source_name": "Sluis",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32518,
+      "id": "gb:NLD:ADM2:6326949B24247619759097",
+      "source_atom": "gb:NLD:ADM2:6326949B24247619759097",
+      "name": "Enschede",
+      "original_source_name": "Enschede",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32526,
+      "id": "gb:NLD:ADM2:6326949B26201619362436",
+      "source_atom": "gb:NLD:ADM2:6326949B26201619362436",
+      "name": "Baarle-Nassau",
+      "original_source_name": "Baarle-Nassau",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32527,
+      "id": "gb:NLD:ADM2:6326949B26439699205725",
+      "source_atom": "gb:NLD:ADM2:6326949B26439699205725",
+      "name": "Sittard-Geleen",
+      "original_source_name": "Sittard-Geleen",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32530,
+      "id": "gb:NLD:ADM2:6326949B27790410949004",
+      "source_atom": "gb:NLD:ADM2:6326949B27790410949004",
+      "name": "Haaksbergen",
+      "original_source_name": "Haaksbergen",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32532,
+      "id": "gb:NLD:ADM2:6326949B28559348449199",
+      "source_atom": "gb:NLD:ADM2:6326949B28559348449199",
+      "name": "Roosendaal",
+      "original_source_name": "Roosendaal",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32553,
+      "id": "gb:NLD:ADM2:6326949B31474052020182",
+      "source_atom": "gb:NLD:ADM2:6326949B31474052020182",
+      "name": "Emmen",
+      "original_source_name": "Emmen",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32569,
+      "id": "gb:NLD:ADM2:6326949B35085344325863",
+      "source_atom": "gb:NLD:ADM2:6326949B35085344325863",
+      "name": "Bergeijk",
+      "original_source_name": "Bergeijk",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32577,
+      "id": "gb:NLD:ADM2:6326949B3638629214663",
+      "source_atom": "gb:NLD:ADM2:6326949B3638629214663",
+      "name": "Hardenberg",
+      "original_source_name": "Hardenberg",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32582,
+      "id": "gb:NLD:ADM2:6326949B37702767177993",
+      "source_atom": "gb:NLD:ADM2:6326949B37702767177993",
+      "name": "Reusel-De Mierden",
+      "original_source_name": "Reusel-De Mierden",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32589,
+      "id": "gb:NLD:ADM2:6326949B39652859333828",
+      "source_atom": "gb:NLD:ADM2:6326949B39652859333828",
+      "name": "Roerdalen",
+      "original_source_name": "Roerdalen",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32595,
+      "id": "gb:NLD:ADM2:6326949B4245688321620",
+      "source_atom": "gb:NLD:ADM2:6326949B4245688321620",
+      "name": "Hulst",
+      "original_source_name": "Hulst",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32609,
+      "id": "gb:NLD:ADM2:6326949B44832169165427",
+      "source_atom": "gb:NLD:ADM2:6326949B44832169165427",
+      "name": "Weert",
+      "original_source_name": "Weert",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32612,
+      "id": "gb:NLD:ADM2:6326949B45872879397854",
+      "source_atom": "gb:NLD:ADM2:6326949B45872879397854",
+      "name": "Bergen (L)",
+      "original_source_name": "Bergen (L)",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32621,
+      "id": "gb:NLD:ADM2:6326949B49757096528968",
+      "source_atom": "gb:NLD:ADM2:6326949B49757096528968",
+      "name": "Berg en Dal",
+      "original_source_name": "Berg en Dal",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32631,
+      "id": "gb:NLD:ADM2:6326949B51666543137940",
+      "source_atom": "gb:NLD:ADM2:6326949B51666543137940",
+      "name": "Westerwolde",
+      "original_source_name": "Westerwolde",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32633,
+      "id": "gb:NLD:ADM2:6326949B5198989789548",
+      "source_atom": "gb:NLD:ADM2:6326949B5198989789548",
+      "name": "Zundert",
+      "original_source_name": "Zundert",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32645,
+      "id": "gb:NLD:ADM2:6326949B53909920900869",
+      "source_atom": "gb:NLD:ADM2:6326949B53909920900869",
+      "name": "Landgraaf",
+      "original_source_name": "Landgraaf",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32647,
+      "id": "gb:NLD:ADM2:6326949B5477842522812",
+      "source_atom": "gb:NLD:ADM2:6326949B5477842522812",
+      "name": "Kerkrade",
+      "original_source_name": "Kerkrade",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32656,
+      "id": "gb:NLD:ADM2:6326949B58523414379719",
+      "source_atom": "gb:NLD:ADM2:6326949B58523414379719",
+      "name": "Tubbergen",
+      "original_source_name": "Tubbergen",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32670,
+      "id": "gb:NLD:ADM2:6326949B61856453224086",
+      "source_atom": "gb:NLD:ADM2:6326949B61856453224086",
+      "name": "Oude IJsselstreek",
+      "original_source_name": "Oude IJsselstreek",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32671,
+      "id": "gb:NLD:ADM2:6326949B62006643577312",
+      "source_atom": "gb:NLD:ADM2:6326949B62006643577312",
+      "name": "Maastricht",
+      "original_source_name": "Maastricht",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32672,
+      "id": "gb:NLD:ADM2:6326949B62204677584458",
+      "source_atom": "gb:NLD:ADM2:6326949B62204677584458",
+      "name": "Roermond",
+      "original_source_name": "Roermond",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32674,
+      "id": "gb:NLD:ADM2:6326949B62614877207788",
+      "source_atom": "gb:NLD:ADM2:6326949B62614877207788",
+      "name": "Venlo",
+      "original_source_name": "Venlo",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32678,
+      "id": "gb:NLD:ADM2:6326949B6406677734864",
+      "source_atom": "gb:NLD:ADM2:6326949B6406677734864",
+      "name": "Aalten",
+      "original_source_name": "Aalten",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32698,
+      "id": "gb:NLD:ADM2:6326949B70373820713642",
+      "source_atom": "gb:NLD:ADM2:6326949B70373820713642",
+      "name": "Echt-Susteren",
+      "original_source_name": "Echt-Susteren",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32712,
+      "id": "gb:NLD:ADM2:6326949B72784129724607",
+      "source_atom": "gb:NLD:ADM2:6326949B72784129724607",
+      "name": "Oldambt",
+      "original_source_name": "Oldambt",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32740,
+      "id": "gb:NLD:ADM2:6326949B81495248212156",
+      "source_atom": "gb:NLD:ADM2:6326949B81495248212156",
+      "name": "Stein",
+      "original_source_name": "Stein",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32744,
+      "id": "gb:NLD:ADM2:6326949B82961432295226",
+      "source_atom": "gb:NLD:ADM2:6326949B82961432295226",
+      "name": "Losser",
+      "original_source_name": "Losser",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32748,
+      "id": "gb:NLD:ADM2:6326949B83177775989799",
+      "source_atom": "gb:NLD:ADM2:6326949B83177775989799",
+      "name": "Alphen-Chaam",
+      "original_source_name": "Alphen-Chaam",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32753,
+      "id": "gb:NLD:ADM2:6326949B84902170380829",
+      "source_atom": "gb:NLD:ADM2:6326949B84902170380829",
+      "name": "Coevorden",
+      "original_source_name": "Coevorden",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32775,
+      "id": "gb:NLD:ADM2:6326949B90977500398075",
+      "source_atom": "gb:NLD:ADM2:6326949B90977500398075",
+      "name": "Montferland",
+      "original_source_name": "Montferland",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32801,
+      "id": "gb:NLD:ADM2:6326949B97609854971564",
+      "source_atom": "gb:NLD:ADM2:6326949B97609854971564",
+      "name": "Leudal",
+      "original_source_name": "Leudal",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 32806,
+      "id": "gb:NLD:ADM2:6326949B98773621915630",
+      "source_atom": "gb:NLD:ADM2:6326949B98773621915630",
+      "name": "Eijsden-Margraten",
+      "original_source_name": "Eijsden-Margraten",
+      "accepted_name_crosswalk": null
+    }
+  ],
+  "upstream_zip": {
+    "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/sourceData/gbOpen/NLD_ADM2.zip",
+    "bytes": 8689155,
+    "sha256": "aa8e4c14dda4a19dd45d6be94f6ac349b003c95d6d8c7f161d9012133963f8a5",
+    "files": {
+      "license.PNG": {
+        "bytes": 539382,
+        "sha256": "93f539f5ea01ba47bc0d8d2407e48a8fcf88f18b2bf6cfebb57a940d6db3162c"
+      },
+      "meta.txt": {
+        "bytes": 570,
+        "sha256": "ca16eb37c80bc9c22f25ddb51370198b0871b9b97b6c3c3d4e74ec51b741ef54"
+      },
+      "NLD_ADM2.cpg": {
+        "bytes": 5,
+        "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+      },
+      "NLD_ADM2.dbf": {
+        "bytes": 47978,
+        "sha256": "d79a1cce2fe22231d0a2983de5827643268ecf8afb430a4db57a41bc1033ab1a"
+      },
+      "NLD_ADM2.prj": {
+        "bytes": 145,
+        "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4"
+      },
+      "NLD_ADM2.sbn": {
+        "bytes": 3628,
+        "sha256": "ab485b4ac7e1753ef03b4d627d0bcdee1db2290b84a119aa033b51de65419de9"
+      },
+      "NLD_ADM2.sbx": {
+        "bytes": 420,
+        "sha256": "520536ac0756c4e6a19fde7849874e304af7a1e3f5f1f6160a91f8d95efff31a"
+      },
+      "NLD_ADM2.shp": {
+        "bytes": 11179304,
+        "sha256": "9ac1e76d89505b7849046c174c45b7ea451595cce7768f864f3b35d901e647b0"
+      },
+      "NLD_ADM2.shp.xml": {
+        "bytes": 16906,
+        "sha256": "d8e0c24900dceee9442bf3f11938693431f9ee7c29b3ca419a417296d1e71754"
+      },
+      "NLD_ADM2.shx": {
+        "bytes": 2852,
+        "sha256": "f2f95782e99b3cab24a55fcbbd7820c6d240da5aa2efefd71bcbf805b12cb1ec"
+      }
+    }
+  },
+  "limits": [
+    "2022 source vintage is historical and does not assert present legal boundaries.",
+    "The historical official source is CC0; retain provider/vintage and geoBoundaries derivative attribution separately.",
+    "Original source simplification remains distinct from upstream ZIP geometry."
+  ]
+}

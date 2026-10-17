@@ -1,0 +1,871 @@
+{
+  "package": {
+    "package_id": "gb-NLD-ADM2--repair-evaluation",
+    "primary_source": "gb:NLD:ADM2",
+    "source_family_index": 243,
+    "category": "repair-evaluation",
+    "native_cells": 770,
+    "land_cells": 770,
+    "inland_water_cells": 0,
+    "source_relative_cells": 0,
+    "interval_segments": 352,
+    "owners": [
+      32482,
+      32493,
+      32500,
+      32502,
+      32506,
+      32508,
+      32518,
+      32526,
+      32527,
+      32530,
+      32532,
+      32553,
+      32569,
+      32577,
+      32582,
+      32589,
+      32595,
+      32609,
+      32612,
+      32621,
+      32631,
+      32633,
+      32645,
+      32647,
+      32656,
+      32670,
+      32671,
+      32672,
+      32674,
+      32678,
+      32698,
+      32712,
+      32740,
+      32744,
+      32748,
+      32753,
+      32775,
+      32801,
+      32806
+    ],
+    "source_features": [
+      2159,
+      2160,
+      2164,
+      2165,
+      2168,
+      20559,
+      20589,
+      47603,
+      47604,
+      47607,
+      47609,
+      47612,
+      47613,
+      47614,
+      47633,
+      47634,
+      47641,
+      47642,
+      47643,
+      47646,
+      47652,
+      47656,
+      47797,
+      47801,
+      47808,
+      47846,
+      47848,
+      47851,
+      47854,
+      47855,
+      47856,
+      47860,
+      47862,
+      47863,
+      47864,
+      47867,
+      47871,
+      47877,
+      47878,
+      47883,
+      47884,
+      47885,
+      47899,
+      47900,
+      47903,
+      47904,
+      47906,
+      47920,
+      47925,
+      47929,
+      47939,
+      47942,
+      47945
+    ],
+    "source_families": [
+      21,
+      22,
+      84,
+      85,
+      242,
+      243
+    ],
+    "native_blocks": [
+      20,
+      21
+    ],
+    "provinces": [
+      "framework:province:drenthe:3a60217a6be0",
+      "framework:province:gelderland:7fcbebabe644",
+      "framework:province:groningen:a53166c8c177",
+      "framework:province:limburg:96b8565daa39",
+      "framework:province:noord-brabant:86761ea929e6",
+      "framework:province:overijssel:27b633183e1b",
+      "framework:province:zeeland:6cb70a1dac04"
+    ],
+    "location_count": 39,
+    "source_feature_count": 53,
+    "locality_count": 7,
+    "cost": {
+      "primary_source_decoded_bytes": 861643,
+      "all_required_source_decoded_bytes": 4618994,
+      "primary_full_source_raster_measured_seconds": 0.268,
+      "source_interval_segments": 352,
+      "maximum_native_rows_per_execution_frame": 4096,
+      "observed_global_census_peak_rss_bytes": 884973568
+    },
+    "evidence": {
+      "selection": "ownership-binding.json",
+      "lineage": "lineage.json",
+      "territorial_source_catalogue": "retained-source-catalogue.json",
+      "territorial_catalogue_sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "source_features": "source-feature-roster.json",
+      "territorial_native_blocks": "source-candidates-block-NNN.json.gz",
+      "physical": "physical-unassigned-summary.json",
+      "source_domain_transform": []
+    },
+    "work": {
+      "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+      "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+      "priority": 1
+    },
+    "execution": {
+      "command": "node source-batch-intervals.mjs gb-NLD-ADM2--repair-evaluation OUTPUT_DIRECTORY",
+      "output_columns": [
+        "y",
+        "start",
+        "end",
+        "candidate_owner_indices",
+        "source_feature_indices",
+        "physical_class"
+      ]
+    }
+  },
+  "owners": [
+    {
+      "id": "gb:NLD:ADM2:6326949B12614711390574",
+      "index": 32482,
+      "bounds": [
+        135312.4658188889,
+        87516.74702061978,
+        135420.02670277777,
+        87651.90341004904
+      ],
+      "province_id": "framework:province:limburg:96b8565daa39",
+      "province_index": 2700,
+      "name": "Maasgouw",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B12614711390574"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B15301037000239",
+      "index": 32493,
+      "bounds": [
+        135320.91339,
+        87944.04072230642,
+        135440.41739166665,
+        88054.19143523656
+      ],
+      "province_id": "framework:province:limburg:96b8565daa39",
+      "province_index": 2700,
+      "name": "Gulpen-Wittem",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B15301037000239"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B16829541191970",
+      "index": 32500,
+      "bounds": [
+        133736.8481588889,
+        87305.20034525191,
+        134000.10651722222,
+        87535.11300881971
+      ],
+      "province_id": "framework:province:zeeland:6cb70a1dac04",
+      "province_index": 5094,
+      "name": "Terneuzen",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B16829541191970"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B17278408062250",
+      "index": 32502,
+      "bounds": [
+        135405.68039666666,
+        87994.30477412458,
+        135472.53272666666,
+        88052.57997388595
+      ],
+      "province_id": "framework:province:limburg:96b8565daa39",
+      "province_index": 2700,
+      "name": "Vaals",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B17278408062250"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B1825961321722",
+      "index": 32506,
+      "bounds": [
+        135376.25954555557,
+        87840.59812593853,
+        135469.69259499997,
+        87977.0173916854
+      ],
+      "province_id": "framework:province:limburg:96b8565daa39",
+      "province_index": 2700,
+      "name": "Heerlen",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B1825961321722"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B19414277691711",
+      "index": 32508,
+      "bounds": [
+        133528.71748444444,
+        87291.89245304474,
+        133786.51405111112,
+        87487.09241117472
+      ],
+      "province_id": "framework:province:zeeland:6cb70a1dac04",
+      "province_index": 5094,
+      "name": "Sluis",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B19414277691711"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B24247619759097",
+      "index": 32518,
+      "bounds": [
+        136002.90910944444,
+        86258.59851248036,
+        136166.90850722222,
+        86406.36604286871
+      ],
+      "province_id": "framework:province:overijssel:27b633183e1b",
+      "province_index": 3545,
+      "name": "Enschede",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B24247619759097"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B26201619362436",
+      "index": 32526,
+      "bounds": [
+        134554.22348777778,
+        87208.11665828511,
+        134731.8409527778,
+        87309.75228380748
+      ],
+      "province_id": "framework:province:noord-brabant:86761ea929e6",
+      "province_index": 3303,
+      "name": "Baarle-Nassau",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B26201619362436"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B26439699205725",
+      "index": 32527,
+      "bounds": [
+        135276.19952222222,
+        87683.32137621377,
+        135383.61475833334,
+        87826.7290802845
+      ],
+      "province_id": "framework:province:limburg:96b8565daa39",
+      "province_index": 2700,
+      "name": "Sittard-Geleen",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B26439699205725"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B27790410949004",
+      "index": 32530,
+      "bounds": [
+        135914.50090833334,
+        86352.79907168417,
+        136100.42029666668,
+        86457.26963901868
+      ],
+      "province_id": "framework:province:overijssel:27b633183e1b",
+      "province_index": 3545,
+      "name": "Haaksbergen",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B27790410949004"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B28559348449199",
+      "index": 32532,
+      "bounds": [
+        134227.53552222226,
+        87104.64673490498,
+        134376.97014222224,
+        87242.25043373564
+      ],
+      "province_id": "framework:province:noord-brabant:86761ea929e6",
+      "province_index": 3303,
+      "name": "Roosendaal",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B28559348449199"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B31474052020182",
+      "index": 32553,
+      "bounds": [
+        136054.2499511111,
+        85554.51043772814,
+        136248.17996722224,
+        85843.63907370016
+      ],
+      "province_id": "framework:province:drenthe:3a60217a6be0",
+      "province_index": 1580,
+      "name": "Emmen",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B31474052020182"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B35085344325863",
+      "index": 32569,
+      "bounds": [
+        134888.77643333332,
+        87321.77220483856,
+        135033.186205,
+        87463.93876410066
+      ],
+      "province_id": "framework:province:noord-brabant:86761ea929e6",
+      "province_index": 3303,
+      "name": "Bergeijk",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B35085344325863"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B3638629214663",
+      "index": 32577,
+      "bounds": [
+        135673.16254055555,
+        85794.06028937586,
+        136010.77408944446,
+        86043.75876145295
+      ],
+      "province_id": "framework:province:overijssel:27b633183e1b",
+      "province_index": 3545,
+      "name": "Hardenberg",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B3638629214663"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B37702767177993",
+      "index": 32582,
+      "bounds": [
+        134776.04505333334,
+        87264.7994744729,
+        134870.57046111109,
+        87407.001009212
+      ],
+      "province_id": "framework:province:noord-brabant:86761ea929e6",
+      "province_index": 3303,
+      "name": "Reusel-De Mierden",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B37702767177993"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B39652859333828",
+      "index": 32589,
+      "bounds": [
+        135389.731965,
+        87541.85337322256,
+        135584.02610055555,
+        87655.4982797064
+      ],
+      "province_id": "framework:province:limburg:96b8565daa39",
+      "province_index": 2700,
+      "name": "Roerdalen",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B39652859333828"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B4245688321620",
+      "index": 32595,
+      "bounds": [
+        133940.97351944447,
+        87276.71273670756,
+        134168.37510331746,
+        87487.32372972311
+      ],
+      "province_id": "framework:province:zeeland:6cb70a1dac04",
+      "province_index": 5094,
+      "name": "Hulst",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B4245688321620"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B44832169165427",
+      "index": 32609,
+      "bounds": [
+        135136.37765555555,
+        87429.94641592827,
+        135300.81399666666,
+        87556.14478722858
+      ],
+      "province_id": "framework:province:limburg:96b8565daa39",
+      "province_index": 2700,
+      "name": "Weert",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B44832169165427"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B45872879397854",
+      "index": 32612,
+      "bounds": [
+        135435.39254333332,
+        86979.01904770006,
+        135607.78549029218,
+        87181.91702850076
+      ],
+      "province_id": "framework:province:limburg:96b8565daa39",
+      "province_index": 2700,
+      "name": "Bergen (L)",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B45872879397854"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B49757096528968",
+      "index": 32621,
+      "bounds": [
+        135364.38925166667,
+        86737.96003837186,
+        135498.6765027778,
+        86902.159067313
+      ],
+      "province_id": "framework:province:gelderland:7fcbebabe644",
+      "province_index": 1808,
+      "name": "Berg en Dal",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B49757096528968"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B51666543137940",
+      "index": 32631,
+      "bounds": [
+        136191.45015777778,
+        85213.27961227672,
+        136335.78710555556,
+        85596.48067471158
+      ],
+      "province_id": "framework:province:groningen:a53166c8c177",
+      "province_index": 1894,
+      "name": "Westerwolde",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B51666543137940"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B5198989789548",
+      "index": 32633,
+      "bounds": [
+        134381.99499055557,
+        87127.25403672374,
+        134537.40116944446,
+        87275.54488739069
+      ],
+      "province_id": "framework:province:noord-brabant:86761ea929e6",
+      "province_index": 3303,
+      "name": "Zundert",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B5198989789548"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B53909920900869",
+      "index": 32645,
+      "bounds": [
+        135447.5541327778,
+        87842.7937299531,
+        135520.66931722223,
+        87916.92937423933
+      ],
+      "province_id": "framework:province:limburg:96b8565daa39",
+      "province_index": 2700,
+      "name": "Landgraaf",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B53909920900869"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B5477842522812",
+      "index": 32647,
+      "bounds": [
+        135452.87027666665,
+        87876.17896952214,
+        135516.59117944445,
+        87947.73142373991
+      ],
+      "province_id": "framework:province:limburg:96b8565daa39",
+      "province_index": 2700,
+      "name": "Kerkrade",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B5477842522812"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B58523414379719",
+      "index": 32656,
+      "bounds": [
+        135940.13491722223,
+        86028.8150379317,
+        136143.67768666666,
+        86203.09371942676
+      ],
+      "province_id": "framework:province:overijssel:27b633183e1b",
+      "province_index": 3545,
+      "name": "Tubbergen",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B58523414379719"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B61856453224086",
+      "index": 32670,
+      "bounds": [
+        135669.59417,
+        86623.16681969508,
+        135836.43369944443,
+        86801.27333683452
+      ],
+      "province_id": "framework:province:gelderland:7fcbebabe644",
+      "province_index": 1808,
+      "name": "Oude IJsselstreek",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B61856453224086"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B62006643577312",
+      "index": 32671,
+      "bounds": [
+        135191.50533944447,
+        87869.01848501721,
+        135279.62224499998,
+        87986.2380198165
+      ],
+      "province_id": "framework:province:limburg:96b8565daa39",
+      "province_index": 2700,
+      "name": "Maastricht",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B62006643577312"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B62204677584458",
+      "index": 32672,
+      "bounds": [
+        135395.33940444447,
+        87467.08080132541,
+        135514.87147632797,
+        87582.97445743633
+      ],
+      "province_id": "framework:province:limburg:96b8565daa39",
+      "province_index": 2700,
+      "name": "Roermond",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B62204677584458"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B62614877207788",
+      "index": 32674,
+      "bounds": [
+        135505.66759611113,
+        87176.45046762163,
+        135617.3066177778,
+        87445.19907994049
+      ],
+      "province_id": "framework:province:limburg:96b8565daa39",
+      "province_index": 2700,
+      "name": "Venlo",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B62614877207788"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B6406677734864",
+      "index": 32678,
+      "bounds": [
+        135790.62747333336,
+        86627.65929450814,
+        135939.40667833333,
+        86770.0387867365
+      ],
+      "province_id": "framework:province:gelderland:7fcbebabe644",
+      "province_index": 1808,
+      "name": "Aalten",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B6406677734864"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B70373820713642",
+      "index": 32698,
+      "bounds": [
+        135303.8726,
+        87610.71915767508,
+        135478.84507131443,
+        87733.71398374597
+      ],
+      "province_id": "framework:province:limburg:96b8565daa39",
+      "province_index": 2700,
+      "name": "Echt-Susteren",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B70373820713642"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B72784129724607",
+      "index": 32712,
+      "bounds": [
+        136116.07743277776,
+        84997.51457459792,
+        136345.66996057107,
+        85266.80859936826
+      ],
+      "province_id": "framework:province:groningen:a53166c8c177",
+      "province_index": 1894,
+      "name": "Oldambt",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B72784129724607"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B81495248212156",
+      "index": 32740,
+      "bounds": [
+        135248.38079666666,
+        87745.29180419896,
+        135298.11951277778,
+        87849.84216818318
+      ],
+      "province_id": "framework:province:limburg:96b8565daa39",
+      "province_index": 2700,
+      "name": "Stein",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B81495248212156"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B82961432295226",
+      "index": 32744,
+      "bounds": [
+        136135.15729166666,
+        86146.0988304481,
+        136233.25107,
+        86335.68419802614
+      ],
+      "province_id": "framework:province:overijssel:27b633183e1b",
+      "province_index": 3545,
+      "name": "Losser",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B82961432295226"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B83177775989799",
+      "index": 32748,
+      "bounds": [
+        134539.95000555555,
+        87118.46995549266,
+        134736.2103861111,
+        87235.82279608081
+      ],
+      "province_id": "framework:province:noord-brabant:86761ea929e6",
+      "province_index": 3303,
+      "name": "Alphen-Chaam",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B83177775989799"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B84902170380829",
+      "index": 32753,
+      "bounds": [
+        135880.27368055555,
+        85547.63279352251,
+        136080.10243166666,
+        85849.51819606667
+      ],
+      "province_id": "framework:province:drenthe:3a60217a6be0",
+      "province_index": 1580,
+      "name": "Coevorden",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B84902170380829"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B90977500398075",
+      "index": 32775,
+      "bounds": [
+        135518.26612888888,
+        86620.44750507908,
+        135688.74685277778,
+        86753.7659637867
+      ],
+      "province_id": "framework:province:gelderland:7fcbebabe644",
+      "province_index": 1808,
+      "name": "Montferland",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B90977500398075"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B97609854971564",
+      "index": 32801,
+      "bounds": [
+        135267.16936,
+        87399.66105920348,
+        135459.42442666666,
+        87591.91469540175
+      ],
+      "province_id": "framework:province:limburg:96b8565daa39",
+      "province_index": 2700,
+      "name": "Leudal",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B97609854971564"
+      ]
+    },
+    {
+      "id": "gb:NLD:ADM2:6326949B98773621915630",
+      "index": 32806,
+      "bounds": [
+        135220.92619055553,
+        87934.46678541407,
+        135353.46566833335,
+        88050.00048900102
+      ],
+      "province_id": "framework:province:limburg:96b8565daa39",
+      "province_index": 2700,
+      "name": "Eijsden-Margraten",
+      "reference_owner": "Netherlands",
+      "source_id": "gb:NLD:ADM2",
+      "source_atoms": [
+        "gb:NLD:ADM2:6326949B98773621915630"
+      ]
+    }
+  ]
+}
