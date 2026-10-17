@@ -1,0 +1,63 @@
+{
+  "baseline": "c4ffca9ba743f68c877fd8542698b28804cf07cf",
+  "source_originals": [
+    {
+      "key": "gb:CAN:ADM1",
+      "feature_count": 13,
+      "original_bytes": 26022306,
+      "original_sha256": "0c9e4fc56c8b9ce958960ffabd1556fbe7c3ec0deeea346a2b5b7dff05e35449",
+      "recorded_license": "Open Government Canada 2.0",
+      "source_represented_year_claim": "2023"
+    },
+    {
+      "key": "gb:CAN:ADM2",
+      "feature_count": 76,
+      "original_bytes": 18457238,
+      "original_sha256": "8b92b84ac3dda411e821fe6268bb310ab1b3bff01ae6b8d44ceb270b27bc5c92",
+      "recorded_license": "Open Government Canada 2.0",
+      "source_represented_year_claim": "2022"
+    },
+    {
+      "key": "gb:CAN:ADM3",
+      "feature_count": 5162,
+      "original_bytes": 28924424,
+      "original_sha256": "70a228935086c1bb9c30938b198cba33261fdf405658dc43540e7e1d1a18a7f9",
+      "recorded_license": "Open Data Commons Open Database License 1.0",
+      "source_represented_year_claim": "2016"
+    },
+    {
+      "key": "gb:USA:ADM1",
+      "feature_count": 56,
+      "original_bytes": 5469814,
+      "original_sha256": "9d7a32244a5c3c2868d039355db2fdd9eb903ef255cfda128decd20bedc0dfbe",
+      "recorded_license": "Public Domain",
+      "source_represented_year_claim": "2018"
+    }
+  ],
+  "territorial_original_features": 5307,
+  "territorial_original_bytes": 78873782,
+  "original_scope": {
+    "cells": 438062,
+    "intervals": 139042,
+    "owners": 209,
+    "physical_classes": {
+      "land": 375635,
+      "inland-water": 62427
+    },
+    "nonoverlapping_intervals": true
+  },
+  "current_accepted_cumulative_cells": 2209586,
+  "current_overlap_cells": 0,
+  "held_native_source_keys": {
+    "foreign": 55,
+    "physical_mismatch": 48,
+    "intersection": 0,
+    "union": 103,
+    "all_inside_original": true,
+    "shapely_native_agree": true
+  },
+  "limits": [
+    "Foreign and physical hold observations are independently reconciled against frozen original keys; this run authenticates complete territorial source bytes but does not repeat either geometry classifier.",
+    "438062 minus103 =437959 is only a preliminary ceiling, not a qualified repair total; remaining native physical/membership predicates remain mandatory."
+  ]
+}

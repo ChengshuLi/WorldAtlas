@@ -1,0 +1,24 @@
+{
+  "kind": "executed-stock-native-diagnostic-boundary",
+  "attempts": [
+    {
+      "configuration": "config/admin-native-diagnostic.json",
+      "source_evidence_commit": "74b3c7749a595c515f47f7aa430f6d2fdc6ee8f3",
+      "outcome": "rejected",
+      "error": "Unsupported whole primitive",
+      "disposition": "Corrected: member classes must exclude empty support primitives."
+    },
+    {
+      "configuration": "config/admin-native-diagnostic-002.json",
+      "source_evidence_commit": "68e28d58293f7c951378886fa40cf680a2c3694f",
+      "outcome": "rejected",
+      "error": "Missing or conflicting complete source aggregation member",
+      "disposition": "Unresolved stock constructor limitation: complete transitive negative lineage, independently reviewed separately."
+    }
+  ],
+  "authority_emitted": false,
+  "native_cells_accepted": 0,
+  "limits": [
+    "Successful source/physical preparation is not source ownership, native qualification or final delivery. Both rejections are actual stock whole-entry observations."
+  ]
+}

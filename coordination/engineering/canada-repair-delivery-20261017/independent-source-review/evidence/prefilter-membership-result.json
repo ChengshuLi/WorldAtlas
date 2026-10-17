@@ -1,0 +1,3329 @@
+{
+  "kind": "independent-complete-original-stock-prefilter-membership-probe",
+  "baseline": "c4ffca9ba743f68c877fd8542698b28804cf07cf",
+  "method": {
+    "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+    "sha256": "6f6910288a4d818778c5586797f902d1d909f0b861efaefbf8e6dfeb9ba9572f",
+    "start": 80289,
+    "end": 83701
+  },
+  "inputs": [
+    {
+      "path": "source-review/admin-source-target-membership.json",
+      "sha256": "504e5198a062ac899deac29000ad5dc690b2ab99f40b0f5de627b3554550ae44",
+      "bytes": 177913
+    },
+    {
+      "path": "admin-physical-001/whole-target-support.json",
+      "sha256": "b2057c31bcb1be478f08939b2ef6520c37fd5e4e947feeecdc8235d8444fe003",
+      "bytes": 27223540
+    }
+  ],
+  "originals": 5162,
+  "positive_sources": 1603,
+  "coverage_part_bounds": 5759,
+  "retained_after_stock_spatial_prefilter": 2036,
+  "counts": {
+    "Missing or conflicting complete source aggregation member": 59,
+    "resolved": 1942,
+    "Incomplete or ambiguous accepted split-source descendant": 32,
+    "Incomplete accepted split-source descendant inventory": 2,
+    "Incomplete accepted aggregation member set": 1
+  },
+  "failures": [
+    {
+      "source_id": "gb:CAN:ADM3:43193130B16017693159166",
+      "source_name": "Mount Pearl",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B39490029507097",
+        "owner": 10682,
+        "bounds": [
+          -53.03786824631181,
+          47.3310100101718,
+          -52.62169399999999,
+          47.63400677968905
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-114:NFL",
+          "member_count": 164,
+          "selected_owner": 6626
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-114:NFL",
+          "members": 164
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B4429853198510",
+      "source_name": "Petty Harbour-Maddox Cove",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B39490029507097",
+        "owner": 10682,
+        "bounds": [
+          -53.03786824631181,
+          47.3310100101718,
+          -52.62169399999999,
+          47.63400677968905
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-114:NFL",
+          "member_count": 164,
+          "selected_owner": 6626
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-114:NFL",
+          "members": 164
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B91483752868825",
+      "source_name": "Conception Bay South",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B39490029507097",
+        "owner": 10682,
+        "bounds": [
+          -53.03786824631181,
+          47.3310100101718,
+          -52.62169399999999,
+          47.63400677968905
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-114:NFL",
+          "member_count": 164,
+          "selected_owner": 6626
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-114:NFL",
+          "members": 164
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B78567535698344",
+      "source_name": "Division No.  1, Subd. R",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B39490029507097",
+        "owner": 10682,
+        "bounds": [
+          -53.03786824631181,
+          47.3310100101718,
+          -52.62169399999999,
+          47.63400677968905
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-114:NFL",
+          "member_count": 164,
+          "selected_owner": 6626
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-114:NFL",
+          "members": 164
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B1394156741434",
+      "source_name": "Wabana",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B39490029507097",
+        "owner": 10682,
+        "bounds": [
+          -53.03786824631181,
+          47.3310100101718,
+          -52.62169399999999,
+          47.63400677968905
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-114:NFL",
+          "member_count": 164,
+          "selected_owner": 6626
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-114:NFL",
+          "members": 164
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B19178880479510",
+      "source_name": "Portugal Cove-St. Philip's",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B39490029507097",
+        "owner": 10682,
+        "bounds": [
+          -53.03786824631181,
+          47.3310100101718,
+          -52.62169399999999,
+          47.63400677968905
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-114:NFL",
+          "member_count": 164,
+          "selected_owner": 6626
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-114:NFL",
+          "members": 164
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B17099896154230",
+      "source_name": "Torbay",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B39490029507097",
+        "owner": 10682,
+        "bounds": [
+          -53.03786824631181,
+          47.3310100101718,
+          -52.62169399999999,
+          47.63400677968905
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-114:NFL",
+          "member_count": 164,
+          "selected_owner": 6626
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-114:NFL",
+          "members": 164
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B20612879496893",
+      "source_name": "Logy Bay-Middle Cove-Outer Co*",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B39490029507097",
+        "owner": 10682,
+        "bounds": [
+          -53.03786824631181,
+          47.3310100101718,
+          -52.62169399999999,
+          47.63400677968905
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-114:NFL",
+          "member_count": 164,
+          "selected_owner": 6626
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-114:NFL",
+          "members": 164
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B63983439547282",
+      "source_name": "Paradise",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B39490029507097",
+        "owner": 10682,
+        "bounds": [
+          -53.03786824631181,
+          47.3310100101718,
+          -52.62169399999999,
+          47.63400677968905
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-114:NFL",
+          "member_count": 164,
+          "selected_owner": 6626
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-114:NFL",
+          "members": 164
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B48704404323367",
+      "source_name": "Bay Bulls",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B39490029507097",
+        "owner": 10682,
+        "bounds": [
+          -53.03786824631181,
+          47.3310100101718,
+          -52.62169399999999,
+          47.63400677968905
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-114:NFL",
+          "member_count": 164,
+          "selected_owner": 6626
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-114:NFL",
+          "members": 164
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B75473916787134",
+      "source_name": "Division No.  1, Subd. D",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B39490029507097",
+        "owner": 10682,
+        "bounds": [
+          -53.03786824631181,
+          47.3310100101718,
+          -52.62169399999999,
+          47.63400677968905
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-114:NFL",
+          "member_count": 164,
+          "selected_owner": 6626
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-114:NFL",
+          "members": 164
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B16194122367733",
+      "source_name": "RiviÃ¨re-Verte",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B17921886032899",
+        "owner": 600,
+        "bounds": [
+          -68.18684388584137,
+          47.28006422924569,
+          -67.76409592194808,
+          47.68347626333457
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-118:NBR",
+          "member_count": 3,
+          "selected_owner": 6629
+        },
+        {
+          "id": "atlas:physical:CAN-120:NBR",
+          "member_count": 1,
+          "selected_owner": 6633
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-118:NBR",
+          "members": 3
+        },
+        {
+          "id": "atlas:physical:CAN-120:NBR",
+          "members": 1
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B86213787610795",
+      "source_name": "Campbellton",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B17719033425648",
+        "owner": 601,
+        "bounds": [
+          -66.81882008067711,
+          47.869765948708775,
+          -66.58224665305599,
+          48.000830865325526
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-118:NBR",
+          "member_count": 3,
+          "selected_owner": 6629
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-118:NBR",
+          "members": 3
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B64841979132982",
+      "source_name": "Gesgapegiag",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B61965026115377",
+        "owner": 606,
+        "bounds": [
+          -66.10009818247016,
+          48.20594717333429,
+          -65.81349126386365,
+          48.32830875653137
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-118:QUE",
+          "member_count": 2,
+          "selected_owner": 6630
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-118:QUE",
+          "members": 2
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B17142997787707",
+      "source_name": "Escuminac",
+      "error": "Incomplete accepted split-source descendant inventory",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B77562756694408",
+        "owner": 601,
+        "bounds": [
+          -66.43002225756885,
+          48.02355016554165,
+          -66.3513822261157,
+          48.072917
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-117:QUE",
+          "member_count": 2,
+          "selected_owner": null
+        },
+        {
+          "id": "atlas:physical:CAN-118:QUE",
+          "member_count": 2,
+          "selected_owner": 6630
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-118:QUE",
+          "members": 2
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B95741274795313",
+      "source_name": "Notre-Dame-des-Sept-Douleurs",
+      "error": "Incomplete accepted aggregation member set",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B54373669065133",
+        "owner": 613,
+        "bounds": [
+          -69.42927032866078,
+          47.937308594740905,
+          -69.20662010500398,
+          48.083900896889375
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-117:QUE",
+          "member_count": 2,
+          "selected_owner": null
+        }
+      ],
+      "canonical": []
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B5005285829867",
+      "source_name": "Dalhousie",
+      "error": "Incomplete accepted split-source descendant inventory",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B17719033425648",
+        "owner": 601,
+        "bounds": [
+          -66.81882008067711,
+          47.869765948708775,
+          -66.58224665305599,
+          48.000830865325526
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-117:NBR",
+          "member_count": 1,
+          "selected_owner": null
+        },
+        {
+          "id": "atlas:physical:CAN-118:NBR",
+          "member_count": 3,
+          "selected_owner": 6629
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-118:NBR",
+          "members": 3
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B83366704828304",
+      "source_name": "Lalemant",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B56500917668398",
+        "owner": 617,
+        "bounds": [
+          -71.412327209296,
+          47.43170671528841,
+          -70.52556855965793,
+          48.00020165294224
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-99:QUE",
+          "member_count": 24,
+          "selected_owner": 6873
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-99:QUE",
+          "members": 24
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B28295747761376",
+      "source_name": "Lac-Ministuk",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B56500917668398",
+        "owner": 617,
+        "bounds": [
+          -71.412327209296,
+          47.43170671528841,
+          -70.52556855965793,
+          48.00020165294224
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-99:QUE",
+          "member_count": 24,
+          "selected_owner": 6873
+        },
+        {
+          "id": "atlas:physical:CAN-101:QUE",
+          "member_count": 53,
+          "selected_owner": 6612
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-99:QUE",
+          "members": 24
+        },
+        {
+          "id": "atlas:physical:CAN-101:QUE",
+          "members": 53
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B69049987712982",
+      "source_name": "Mont-Valin",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B41057681374170",
+        "owner": 684,
+        "bounds": [
+          -70.03487833657182,
+          48.25172504693344,
+          -68.70639907556017,
+          50.000038021538565
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-74:QUE",
+          "member_count": 6,
+          "selected_owner": 6841
+        },
+        {
+          "id": "atlas:physical:CAN-100:QUE",
+          "member_count": 17,
+          "selected_owner": 6610
+        },
+        {
+          "id": "atlas:physical:CAN-101:QUE",
+          "member_count": 53,
+          "selected_owner": 6612
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-74:QUE",
+          "members": 6
+        },
+        {
+          "id": "atlas:physical:CAN-100:QUE",
+          "members": 17
+        },
+        {
+          "id": "atlas:physical:CAN-101:QUE",
+          "members": 53
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B60137588214309",
+      "source_name": "Pessamit",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B28048013400239",
+        "owner": 684,
+        "bounds": [
+          -69.12683156794573,
+          48.768722,
+          -68.61840282870268,
+          48.98884857744766
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-101:QUE",
+          "member_count": 53,
+          "selected_owner": 6612
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-101:QUE",
+          "members": 53
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B57957250154331",
+      "source_name": "RiviÃ¨re-aux-Outardes",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B41057681374170",
+        "owner": 684,
+        "bounds": [
+          -70.03487833657182,
+          48.25172504693344,
+          -68.70639907556017,
+          50.000038021538565
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-101:QUE",
+          "member_count": 53,
+          "selected_owner": 6612
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-101:QUE",
+          "members": 53
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B12280723994995",
+      "source_name": "Killarney",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B26742523864441",
+        "owner": 719,
+        "bounds": [
+          -80.56764199870865,
+          45.954744067251205,
+          -80.52490518015254,
+          45.99508823345573
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-98:ONT",
+          "member_count": 32,
+          "selected_owner": 6872
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-98:ONT",
+          "members": 32
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B71674302191451",
+      "source_name": "Sudbury, Unorganized, North P*",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B78693692815911",
+        "owner": 719,
+        "bounds": [
+          -80.66641310003325,
+          45.643700734611706,
+          -79.52083486266754,
+          46.213863691650694
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-96:ONT",
+          "member_count": 32,
+          "selected_owner": 6869
+        },
+        {
+          "id": "atlas:physical:CAN-97:ONT",
+          "member_count": 25,
+          "selected_owner": 6871
+        },
+        {
+          "id": "atlas:physical:CAN-98:ONT",
+          "member_count": 32,
+          "selected_owner": 6872
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-96:ONT",
+          "members": 32
+        },
+        {
+          "id": "atlas:physical:CAN-97:ONT",
+          "members": 25
+        },
+        {
+          "id": "atlas:physical:CAN-98:ONT",
+          "members": 32
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B57202084672226",
+      "source_name": "Whitefish River (Part) 4",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B13532554903203",
+        "owner": 720,
+        "bounds": [
+          -81.95752979606233,
+          45.982222,
+          -81.79055600000004,
+          46.06288675116181
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-98:ONT",
+          "member_count": 32,
+          "selected_owner": 6872
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-98:ONT",
+          "members": 32
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B62640076314076",
+      "source_name": "La Tuque",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B97863533816363",
+        "owner": 622,
+        "bounds": [
+          -72.07393193201767,
+          47.094971763907914,
+          -70.74799423031514,
+          47.950241154397375
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-99:QUE",
+          "member_count": 24,
+          "selected_owner": 6873
+        },
+        {
+          "id": "atlas:physical:CAN-100:QUE",
+          "member_count": 17,
+          "selected_owner": 6610
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-99:QUE",
+          "members": 24
+        },
+        {
+          "id": "atlas:physical:CAN-100:QUE",
+          "members": 17
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B23182786120741",
+      "source_name": "Petit-Saguenay",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B52371366040560",
+        "owner": 616,
+        "bounds": [
+          -70.00126415152667,
+          47.9901631523077,
+          -69.70713229865912,
+          48.17104671302677
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-99:QUE",
+          "member_count": 24,
+          "selected_owner": 6873
+        },
+        {
+          "id": "atlas:physical:CAN-101:QUE",
+          "member_count": 53,
+          "selected_owner": 6612
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-99:QUE",
+          "members": 24
+        },
+        {
+          "id": "atlas:physical:CAN-101:QUE",
+          "members": 53
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B89950225013113",
+      "source_name": "L'Anse-Saint-Jean",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B44885321314414",
+        "owner": 616,
+        "bounds": [
+          -70.52949148779028,
+          47.71677232721639,
+          -70.00126415152667,
+          48.00020078165677
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-99:QUE",
+          "member_count": 24,
+          "selected_owner": 6873
+        },
+        {
+          "id": "atlas:physical:CAN-101:QUE",
+          "member_count": 53,
+          "selected_owner": 6612
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-99:QUE",
+          "members": 24
+        },
+        {
+          "id": "atlas:physical:CAN-101:QUE",
+          "members": 53
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B8501707198714",
+      "source_name": "RiviÃ¨re-ÃternitÃ©",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B71435470327193",
+        "owner": 616,
+        "bounds": [
+          -70.26362841803486,
+          47.99299978110139,
+          -69.95674838960105,
+          48.12473736488729
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-99:QUE",
+          "member_count": 24,
+          "selected_owner": 6873
+        },
+        {
+          "id": "atlas:physical:CAN-101:QUE",
+          "member_count": 53,
+          "selected_owner": 6612
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-99:QUE",
+          "members": 24
+        },
+        {
+          "id": "atlas:physical:CAN-101:QUE",
+          "members": 53
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B56727189006335",
+      "source_name": "Ferland-et-Boilleau",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B56500917668398",
+        "owner": 617,
+        "bounds": [
+          -71.412327209296,
+          47.43170671528841,
+          -70.52556855965793,
+          48.00020165294224
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-99:QUE",
+          "member_count": 24,
+          "selected_owner": 6873
+        },
+        {
+          "id": "atlas:physical:CAN-101:QUE",
+          "member_count": 53,
+          "selected_owner": 6612
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-99:QUE",
+          "members": 24
+        },
+        {
+          "id": "atlas:physical:CAN-101:QUE",
+          "members": 53
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B64999594920554",
+      "source_name": "French River / RiviÃ¨re des Fr",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B26742523864441",
+        "owner": 719,
+        "bounds": [
+          -80.5428713196969,
+          45.987595721104725,
+          -80.47857710748364,
+          46.03257088391494
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-98:ONT",
+          "member_count": 32,
+          "selected_owner": 6872
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-98:ONT",
+          "members": 32
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B44414015002673",
+      "source_name": "Lac-Ãdouard",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B14429693470002",
+        "owner": 633,
+        "bounds": [
+          -72.54756834459168,
+          47.10173213512576,
+          -72.24765883067214,
+          47.402317693709925
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-99:QUE",
+          "member_count": 24,
+          "selected_owner": 6873
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-99:QUE",
+          "members": 24
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B96589187120917",
+      "source_name": "Eeyou Istchee Baie-James",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B41057681374170",
+        "owner": 684,
+        "bounds": [
+          -70.03487833657182,
+          48.25172504693344,
+          -68.70639907556017,
+          50.000038021538565
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-72:QUE",
+          "member_count": 12,
+          "selected_owner": 6837
+        },
+        {
+          "id": "atlas:physical:CAN-74:QUE",
+          "member_count": 6,
+          "selected_owner": 6841
+        },
+        {
+          "id": "atlas:physical:CAN-96:QUE",
+          "member_count": 15,
+          "selected_owner": 6870
+        },
+        {
+          "id": "atlas:physical:CAN-99:QUE",
+          "member_count": 24,
+          "selected_owner": 6873
+        },
+        {
+          "id": "atlas:physical:CAN-100:QUE",
+          "member_count": 17,
+          "selected_owner": 6610
+        },
+        {
+          "id": "atlas:physical:CAN-101:QUE",
+          "member_count": 53,
+          "selected_owner": 6612
+        },
+        {
+          "id": "atlas:physical:CAN-217:QUE",
+          "member_count": 5,
+          "selected_owner": 6753
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-72:QUE",
+          "members": 12
+        },
+        {
+          "id": "atlas:physical:CAN-74:QUE",
+          "members": 6
+        },
+        {
+          "id": "atlas:physical:CAN-96:QUE",
+          "members": 15
+        },
+        {
+          "id": "atlas:physical:CAN-99:QUE",
+          "members": 24
+        },
+        {
+          "id": "atlas:physical:CAN-100:QUE",
+          "members": 17
+        },
+        {
+          "id": "atlas:physical:CAN-101:QUE",
+          "members": 53
+        },
+        {
+          "id": "atlas:physical:CAN-217:QUE",
+          "members": 5
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B42633615100143",
+      "source_name": "Penetanguishene",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B26516535428024",
+        "owner": 714,
+        "bounds": [
+          -79.88116417262948,
+          44.63266417736412,
+          -79.666462416842,
+          44.769840027925426
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-134:ONT",
+          "member_count": 8,
+          "selected_owner": 6645
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-134:ONT",
+          "members": 8
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B6508627938861",
+      "source_name": "Sables-Spanish Rivers",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B13532554903203",
+        "owner": 720,
+        "bounds": [
+          -81.83389395157877,
+          46.09104216348675,
+          -81.82782771692447,
+          46.094134737655004
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-98:ONT",
+          "member_count": 32,
+          "selected_owner": 6872
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-98:ONT",
+          "members": 32
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B58068993912528",
+      "source_name": "Christian Island 30A",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B28671960461105",
+        "owner": 714,
+        "bounds": [
+          -80.11846591446597,
+          44.56494679908611,
+          -79.82651874955293,
+          44.866417892972535
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-134:ONT",
+          "member_count": 8,
+          "selected_owner": 6645
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-134:ONT",
+          "members": 8
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B37033948829262",
+      "source_name": "Algoma, Unorganized, South Ea*",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B13532554903203",
+        "owner": 720,
+        "bounds": [
+          -82.06567074657721,
+          46.08693853354086,
+          -82.05692878633909,
+          46.09078743443642
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-98:ONT",
+          "member_count": 32,
+          "selected_owner": 6872
+        },
+        {
+          "id": "atlas:physical:CAN-134:ONT",
+          "member_count": 8,
+          "selected_owner": 6645
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-98:ONT",
+          "members": 32
+        },
+        {
+          "id": "atlas:physical:CAN-134:ONT",
+          "members": 8
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B63349423737126",
+      "source_name": "Parry Sound",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B17178297625426",
+        "owner": 719,
+        "bounds": [
+          -80.0475111149321,
+          45.16654139626088,
+          -79.59788257549137,
+          45.47480607275918
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-98:ONT",
+          "member_count": 32,
+          "selected_owner": 6872
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-98:ONT",
+          "members": 32
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B4299670732691",
+      "source_name": "Carling",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B21467255553808",
+        "owner": 719,
+        "bounds": [
+          -80.2258235839092,
+          45.23929694093355,
+          -80.06337659938913,
+          45.34413326195534
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-98:ONT",
+          "member_count": 32,
+          "selected_owner": 6872
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-98:ONT",
+          "members": 32
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B59318519941623",
+      "source_name": "Kenora, Unorganized",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B53887086083263",
+        "owner": 723,
+        "bounds": [
+          -94.35420446346812,
+          49.03691888882774,
+          -94.2522868883392,
+          49.07369248126149
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-89:ONT",
+          "member_count": 5,
+          "selected_owner": 6859
+        },
+        {
+          "id": "atlas:physical:CAN-90:ONT",
+          "member_count": 21,
+          "selected_owner": 6862
+        },
+        {
+          "id": "atlas:physical:CAN-91:ONT",
+          "member_count": 25,
+          "selected_owner": 6864
+        },
+        {
+          "id": "atlas:physical:CAN-93:ONT",
+          "member_count": 12,
+          "selected_owner": 6866
+        },
+        {
+          "id": "atlas:physical:CAN-94:ONT",
+          "member_count": 23,
+          "selected_owner": 6867
+        },
+        {
+          "id": "atlas:physical:CAN-95:ONT",
+          "member_count": 18,
+          "selected_owner": 6868
+        },
+        {
+          "id": "atlas:physical:CAN-215:ONT",
+          "member_count": 3,
+          "selected_owner": null
+        },
+        {
+          "id": "atlas:physical:CAN-216:ONT",
+          "member_count": 2,
+          "selected_owner": 6750
+        },
+        {
+          "id": "atlas:physical:CAN-217:ONT",
+          "member_count": 9,
+          "selected_owner": 6752
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-89:ONT",
+          "members": 5
+        },
+        {
+          "id": "atlas:physical:CAN-90:ONT",
+          "members": 21
+        },
+        {
+          "id": "atlas:physical:CAN-91:ONT",
+          "members": 25
+        },
+        {
+          "id": "atlas:physical:CAN-93:ONT",
+          "members": 12
+        },
+        {
+          "id": "atlas:physical:CAN-94:ONT",
+          "members": 23
+        },
+        {
+          "id": "atlas:physical:CAN-95:ONT",
+          "members": 18
+        },
+        {
+          "id": "atlas:physical:CAN-216:ONT",
+          "members": 2
+        },
+        {
+          "id": "atlas:physical:CAN-217:ONT",
+          "members": 9
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B54417785811460",
+      "source_name": "Moose Point 79",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B27478766033569",
+        "owner": 715,
+        "bounds": [
+          -80.06908774752584,
+          44.80056,
+          -79.62960534474881,
+          45.1686924215876
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-98:ONT",
+          "member_count": 32,
+          "selected_owner": 6872
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-98:ONT",
+          "members": 32
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B13118404500850",
+      "source_name": "Thunder Bay, Unorganized",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B91029850103497",
+        "owner": 723,
+        "bounds": [
+          -94.095735349549,
+          48.049492449195036,
+          -90.96495585320403,
+          49.10745110733424
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-90:ONT",
+          "member_count": 21,
+          "selected_owner": 6862
+        },
+        {
+          "id": "atlas:physical:CAN-93:ONT",
+          "member_count": 12,
+          "selected_owner": 6866
+        },
+        {
+          "id": "atlas:physical:CAN-94:ONT",
+          "member_count": 23,
+          "selected_owner": 6867
+        },
+        {
+          "id": "atlas:physical:CAN-95:ONT",
+          "member_count": 18,
+          "selected_owner": 6868
+        },
+        {
+          "id": "atlas:physical:CAN-96:ONT",
+          "member_count": 32,
+          "selected_owner": 6869
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-90:ONT",
+          "members": 21
+        },
+        {
+          "id": "atlas:physical:CAN-93:ONT",
+          "members": 12
+        },
+        {
+          "id": "atlas:physical:CAN-94:ONT",
+          "members": 23
+        },
+        {
+          "id": "atlas:physical:CAN-95:ONT",
+          "members": 18
+        },
+        {
+          "id": "atlas:physical:CAN-96:ONT",
+          "members": 32
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B91453307311897",
+      "source_name": "Louis Squinas Ranch 14",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B10278614896272",
+        "owner": 741,
+        "bounds": [
+          -126.64360555449163,
+          51.90081741400238,
+          -125.3437156211455,
+          52.65416824779337
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-202:BRC",
+          "member_count": 106,
+          "selected_owner": 6733
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-202:BRC",
+          "members": 106
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B9910073495452",
+      "source_name": "Saug-a-Gaw-Sing 1",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B72260605826603",
+        "owner": 723,
+        "bounds": [
+          -94.50000001271066,
+          48.91379603456978,
+          -94.22804668491915,
+          49.118610999999994
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-91:ONT",
+          "member_count": 25,
+          "selected_owner": 6864
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-91:ONT",
+          "members": 25
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B8029185636279",
+      "source_name": "Rainy Lake 18C",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B29457988559952",
+        "owner": 723,
+        "bounds": [
+          -93.4836954911679,
+          48.63142638771724,
+          -93.327222,
+          48.740185761250274
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-91:ONT",
+          "member_count": 25,
+          "selected_owner": 6864
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-91:ONT",
+          "members": 25
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B85120460974953",
+      "source_name": "Musqueam 2",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B33792912870",
+        "owner": 728,
+        "bounds": [
+          -123.2261465340719,
+          49.238777999999996,
+          -123.22562754271443,
+          49.239011667161286
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-196:BRC",
+          "member_count": 2,
+          "selected_owner": 6727
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-196:BRC",
+          "members": 2
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B36128118246159",
+      "source_name": "Sabaskong Bay (Part) 35C",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B62656436026484",
+        "owner": 723,
+        "bounds": [
+          -94.11009593895807,
+          49.17911252430498,
+          -94.09005618902506,
+          49.20099194823609
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-91:ONT",
+          "member_count": 25,
+          "selected_owner": 6864
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-91:ONT",
+          "members": 25
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B92775028449963",
+      "source_name": "Sioux Narrows-Nestor Falls",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B44799950758413",
+        "owner": 723,
+        "bounds": [
+          -94.25531803439289,
+          48.64397480085446,
+          -94.0947705135479,
+          49.00007638146014
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-91:ONT",
+          "member_count": 25,
+          "selected_owner": 6864
+        },
+        {
+          "id": "atlas:physical:CAN-92:ONT",
+          "member_count": 1,
+          "selected_owner": 6865
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-91:ONT",
+          "members": 25
+        },
+        {
+          "id": "atlas:physical:CAN-92:ONT",
+          "members": 1
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B52298394110987",
+      "source_name": "Improvement District No.  9 B*",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B53186536156139",
+        "owner": 724,
+        "bounds": [
+          -117.50160728863922,
+          49.69019804642074,
+          -116.44207214093423,
+          51.06606348196724
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-206:ABT",
+          "member_count": 5,
+          "selected_owner": 6737
+        },
+        {
+          "id": "atlas:physical:CAN-207:ABT",
+          "member_count": 13,
+          "selected_owner": 6739
+        },
+        {
+          "id": "atlas:physical:CAN-214:ABT",
+          "member_count": 17,
+          "selected_owner": 6745
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-206:ABT",
+          "members": 5
+        },
+        {
+          "id": "atlas:physical:CAN-207:ABT",
+          "members": 13
+        },
+        {
+          "id": "atlas:physical:CAN-214:ABT",
+          "members": 17
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B29221336238163",
+      "source_name": "East Kootenay C",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B69967818485045",
+        "owner": 724,
+        "bounds": [
+          -116.5911417150205,
+          49.000005605980235,
+          -116.02481205244437,
+          49.533660799898506
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-205:BRC",
+          "member_count": 29,
+          "selected_owner": 6736
+        },
+        {
+          "id": "atlas:physical:CAN-206:BRC",
+          "member_count": 12,
+          "selected_owner": 6738
+        },
+        {
+          "id": "atlas:physical:CAN-213:BRC",
+          "member_count": 23,
+          "selected_owner": 6744
+        },
+        {
+          "id": "atlas:physical:CAN-214:BRC",
+          "member_count": 7,
+          "selected_owner": 6746
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-205:BRC",
+          "members": 29
+        },
+        {
+          "id": "atlas:physical:CAN-206:BRC",
+          "members": 12
+        },
+        {
+          "id": "atlas:physical:CAN-213:BRC",
+          "members": 23
+        },
+        {
+          "id": "atlas:physical:CAN-214:BRC",
+          "members": 7
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B24863094875694",
+      "source_name": "East Kootenay E",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B3950523359460",
+        "owner": 724,
+        "bounds": [
+          -117.12066808242281,
+          49.154761710555924,
+          -116.68471847022323,
+          49.474690029730766
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-205:BRC",
+          "member_count": 29,
+          "selected_owner": 6736
+        },
+        {
+          "id": "atlas:physical:CAN-206:BRC",
+          "member_count": 12,
+          "selected_owner": 6738
+        },
+        {
+          "id": "atlas:physical:CAN-213:BRC",
+          "member_count": 23,
+          "selected_owner": 6744
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-205:BRC",
+          "members": 29
+        },
+        {
+          "id": "atlas:physical:CAN-206:BRC",
+          "members": 12
+        },
+        {
+          "id": "atlas:physical:CAN-213:BRC",
+          "members": 23
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B30257825910004",
+      "source_name": "East Kootenay F",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B53186536156139",
+        "owner": 724,
+        "bounds": [
+          -117.50160728863922,
+          49.69019804642074,
+          -116.44207214093423,
+          51.06606348196724
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-205:BRC",
+          "member_count": 29,
+          "selected_owner": 6736
+        },
+        {
+          "id": "atlas:physical:CAN-206:BRC",
+          "member_count": 12,
+          "selected_owner": 6738
+        },
+        {
+          "id": "atlas:physical:CAN-207:BRC",
+          "member_count": 6,
+          "selected_owner": 6740
+        },
+        {
+          "id": "atlas:physical:CAN-213:BRC",
+          "member_count": 23,
+          "selected_owner": 6744
+        },
+        {
+          "id": "atlas:physical:CAN-214:BRC",
+          "member_count": 7,
+          "selected_owner": 6746
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-205:BRC",
+          "members": 29
+        },
+        {
+          "id": "atlas:physical:CAN-206:BRC",
+          "members": 12
+        },
+        {
+          "id": "atlas:physical:CAN-207:BRC",
+          "members": 6
+        },
+        {
+          "id": "atlas:physical:CAN-213:BRC",
+          "members": 23
+        },
+        {
+          "id": "atlas:physical:CAN-214:BRC",
+          "members": 7
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B57392466500245",
+      "source_name": "East Kootenay G",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B53186536156139",
+        "owner": 724,
+        "bounds": [
+          -117.50160728863922,
+          49.69019804642074,
+          -116.44207214093423,
+          51.06606348196724
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-205:BRC",
+          "member_count": 29,
+          "selected_owner": 6736
+        },
+        {
+          "id": "atlas:physical:CAN-206:BRC",
+          "member_count": 12,
+          "selected_owner": 6738
+        },
+        {
+          "id": "atlas:physical:CAN-207:BRC",
+          "member_count": 6,
+          "selected_owner": 6740
+        },
+        {
+          "id": "atlas:physical:CAN-213:BRC",
+          "member_count": 23,
+          "selected_owner": 6744
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-205:BRC",
+          "members": 29
+        },
+        {
+          "id": "atlas:physical:CAN-206:BRC",
+          "members": 12
+        },
+        {
+          "id": "atlas:physical:CAN-207:BRC",
+          "members": 6
+        },
+        {
+          "id": "atlas:physical:CAN-213:BRC",
+          "members": 23
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B17024464609681",
+      "source_name": "Thompson-Nicola I (Blue Sky C*",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B23333222800138",
+        "owner": 727,
+        "bounds": [
+          -122.80579703700597,
+          49.19029159220977,
+          -121.53943537206155,
+          50.15368275836802
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-192:BRC",
+          "member_count": 6,
+          "selected_owner": 6723
+        },
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "member_count": 51,
+          "selected_owner": 6741
+        },
+        {
+          "id": "atlas:physical:CAN-209:BRC",
+          "member_count": 64,
+          "selected_owner": 6742
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-192:BRC",
+          "members": 6
+        },
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "members": 51
+        },
+        {
+          "id": "atlas:physical:CAN-209:BRC",
+          "members": 64
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B70652169865128",
+      "source_name": "Nickel Palm 4",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B79184557355684",
+        "owner": 737,
+        "bounds": [
+          -122.61844850490886,
+          50.228717897271075,
+          -121.62533767022066,
+          51.20939344632449
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "member_count": 51,
+          "selected_owner": 6741
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "members": 51
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B60882924053632",
+      "source_name": "Siska Flat",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B23333222800138",
+        "owner": 727,
+        "bounds": [
+          -122.80579703700597,
+          49.19029159220977,
+          -121.53943537206155,
+          50.15368275836802
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "member_count": 51,
+          "selected_owner": 6741
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "members": 51
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B22515580855059",
+      "source_name": "Seah 5",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B79184557355684",
+        "owner": 737,
+        "bounds": [
+          -122.61844850490886,
+          50.228717897271075,
+          -121.62533767022066,
+          51.20939344632449
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "member_count": 51,
+          "selected_owner": 6741
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "members": 51
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B3897782999124",
+      "source_name": "Halhalaeden",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B79184557355684",
+        "owner": 737,
+        "bounds": [
+          -122.61844850490886,
+          50.228717897271075,
+          -121.62533767022066,
+          51.20939344632449
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "member_count": 51,
+          "selected_owner": 6741
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "members": 51
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B69962346092014",
+      "source_name": "Lytton 4A",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B79184557355684",
+        "owner": 737,
+        "bounds": [
+          -122.61844850490886,
+          50.228717897271075,
+          -121.62533767022066,
+          51.20939344632449
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "member_count": 51,
+          "selected_owner": 6741
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "members": 51
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B86521938928255",
+      "source_name": "Lytton 4E",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B79184557355684",
+        "owner": 737,
+        "bounds": [
+          -122.61844850490886,
+          50.228717897271075,
+          -121.62533767022066,
+          51.20939344632449
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "member_count": 51,
+          "selected_owner": 6741
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "members": 51
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B76030891482110",
+      "source_name": "Lytton 9A",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B79184557355684",
+        "owner": 737,
+        "bounds": [
+          -122.61844850490886,
+          50.228717897271075,
+          -121.62533767022066,
+          51.20939344632449
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "member_count": 51,
+          "selected_owner": 6741
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "members": 51
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B82505254966114",
+      "source_name": "Lytton 9B",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B79184557355684",
+        "owner": 737,
+        "bounds": [
+          -122.61844850490886,
+          50.228717897271075,
+          -121.62533767022066,
+          51.20939344632449
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "member_count": 51,
+          "selected_owner": 6741
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "members": 51
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B16617410233123",
+      "source_name": "Dead Point 5",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B39626127268202",
+        "owner": 740,
+        "bounds": [
+          -126.68086100000002,
+          50.55187497318882,
+          -126.51029919846982,
+          50.593242208113054
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-192:BRC",
+          "member_count": 6,
+          "selected_owner": 6723
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-192:BRC",
+          "members": 6
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B48475263380890",
+      "source_name": "Thompson-Nicola M (Beautiful *",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B52890920887902",
+        "owner": 726,
+        "bounds": [
+          -121.10177332514013,
+          49.000076883016355,
+          -119.96700729746594,
+          49.91201160778157
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-209:BRC",
+          "member_count": 64,
+          "selected_owner": 6742
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-209:BRC",
+          "members": 64
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B34821168840681",
+      "source_name": "Thompson-Nicola N (Beautiful *",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B52890920887902",
+        "owner": 726,
+        "bounds": [
+          -121.10177332514013,
+          49.000076883016355,
+          -119.96700729746594,
+          49.91201160778157
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "member_count": 51,
+          "selected_owner": 6741
+        },
+        {
+          "id": "atlas:physical:CAN-209:BRC",
+          "member_count": 64,
+          "selected_owner": 6742
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "members": 51
+        },
+        {
+          "id": "atlas:physical:CAN-209:BRC",
+          "members": 64
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B1094622343375",
+      "source_name": "Cariboo J",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B31739426066903",
+        "owner": 733,
+        "bounds": [
+          -126.28425000000001,
+          50.307528,
+          -123.71402467142462,
+          51.400196023758696
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-191:BRC",
+          "member_count": 14,
+          "selected_owner": 6722
+        },
+        {
+          "id": "atlas:physical:CAN-192:BRC",
+          "member_count": 6,
+          "selected_owner": 6723
+        },
+        {
+          "id": "atlas:physical:CAN-202:BRC",
+          "member_count": 106,
+          "selected_owner": 6733
+        },
+        {
+          "id": "atlas:physical:CAN-204:BRC",
+          "member_count": 9,
+          "selected_owner": 6735
+        },
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "member_count": 51,
+          "selected_owner": 6741
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-191:BRC",
+          "members": 14
+        },
+        {
+          "id": "atlas:physical:CAN-192:BRC",
+          "members": 6
+        },
+        {
+          "id": "atlas:physical:CAN-202:BRC",
+          "members": 106
+        },
+        {
+          "id": "atlas:physical:CAN-204:BRC",
+          "members": 9
+        },
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "members": 51
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B27968774983157",
+      "source_name": "Cariboo K",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B31739426066903",
+        "owner": 733,
+        "bounds": [
+          -126.28425000000001,
+          50.307528,
+          -123.71402467142462,
+          51.400196023758696
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-202:BRC",
+          "member_count": 106,
+          "selected_owner": 6733
+        },
+        {
+          "id": "atlas:physical:CAN-203:BRC",
+          "member_count": 44,
+          "selected_owner": 6734
+        },
+        {
+          "id": "atlas:physical:CAN-204:BRC",
+          "member_count": 9,
+          "selected_owner": 6735
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-202:BRC",
+          "members": 106
+        },
+        {
+          "id": "atlas:physical:CAN-203:BRC",
+          "members": 44
+        },
+        {
+          "id": "atlas:physical:CAN-204:BRC",
+          "members": 9
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B28459139223389",
+      "source_name": "Gwayasdums 1",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B39626127268202",
+        "owner": 740,
+        "bounds": [
+          -126.61921304731739,
+          50.63781776533503,
+          -126.15509779882775,
+          50.834422088243656
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-192:BRC",
+          "member_count": 6,
+          "selected_owner": 6723
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-192:BRC",
+          "members": 6
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B77969401415885",
+      "source_name": "Hopetown 10A",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B39626127268202",
+        "owner": 740,
+        "bounds": [
+          -126.85925851707738,
+          50.92003615941617,
+          -126.77751657061373,
+          50.94765380979724
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-192:BRC",
+          "member_count": 6,
+          "selected_owner": 6723
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-192:BRC",
+          "members": 6
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B50149546696017",
+      "source_name": "Nimpkish 2",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B39626127268202",
+        "owner": 740,
+        "bounds": [
+          -127.74902686011166,
+          50.57321615576452,
+          -125.20366249196238,
+          52.01231246383088
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-191:BRC",
+          "member_count": 14,
+          "selected_owner": 6722
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-191:BRC",
+          "members": 14
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B86266094644291",
+      "source_name": "Alert Bay",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B39626127268202",
+        "owner": 740,
+        "bounds": [
+          -126.94406322415104,
+          50.595465208587655,
+          -126.9402698995826,
+          50.5977172726888
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-191:BRC",
+          "member_count": 14,
+          "selected_owner": 6722
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-191:BRC",
+          "members": 14
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B37346529103096",
+      "source_name": "Thomas Squinas Ranch 2A",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B10278614896272",
+        "owner": 741,
+        "bounds": [
+          -126.64360555449163,
+          51.90081741400238,
+          -125.3437156211455,
+          52.65416824779337
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-202:BRC",
+          "member_count": 106,
+          "selected_owner": 6733
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-202:BRC",
+          "members": 106
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B9554191930415",
+      "source_name": "Cahoose 10",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B10278614896272",
+        "owner": 741,
+        "bounds": [
+          -126.64360555449163,
+          51.90081741400238,
+          -125.3437156211455,
+          52.65416824779337
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-202:BRC",
+          "member_count": 106,
+          "selected_owner": 6733
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-202:BRC",
+          "members": 106
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B23624804631912",
+      "source_name": "Alert Bay",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B39626127268202",
+        "owner": 740,
+        "bounds": [
+          -126.91934398811861,
+          50.58317616795912,
+          -126.90780381455686,
+          50.59273940762731
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-191:BRC",
+          "member_count": 14,
+          "selected_owner": 6722
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-191:BRC",
+          "members": 14
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B57778683272046",
+      "source_name": "Spintlum Flat 3",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B79184557355684",
+        "owner": 737,
+        "bounds": [
+          -122.61844850490886,
+          50.228717897271075,
+          -121.62533767022066,
+          51.20939344632449
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "member_count": 51,
+          "selected_owner": 6741
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "members": 51
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B87678703551611",
+      "source_name": "Nkaih 10",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B79184557355684",
+        "owner": 737,
+        "bounds": [
+          -122.61844850490886,
+          50.228717897271075,
+          -121.62533767022066,
+          51.20939344632449
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "member_count": 51,
+          "selected_owner": 6741
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "members": 51
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B89912782384113",
+      "source_name": "Marble Canyon 3",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B79184557355684",
+        "owner": 737,
+        "bounds": [
+          -122.61844850490886,
+          50.228717897271075,
+          -121.62533767022066,
+          51.20939344632449
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "member_count": 51,
+          "selected_owner": 6741
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "members": 51
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B28574413992417",
+      "source_name": "Stryen 9",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B79184557355684",
+        "owner": 737,
+        "bounds": [
+          -122.61844850490886,
+          50.228717897271075,
+          -121.62533767022066,
+          51.20939344632449
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "member_count": 51,
+          "selected_owner": 6741
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "members": 51
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B46792084459674",
+      "source_name": "Tsaukan 12",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B79184557355684",
+        "owner": 737,
+        "bounds": [
+          -122.61844850490886,
+          50.228717897271075,
+          -121.62533767022066,
+          51.20939344632449
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "member_count": 51,
+          "selected_owner": 6741
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "members": 51
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B56152509480272",
+      "source_name": "Yawaucht 11",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B79184557355684",
+        "owner": 737,
+        "bounds": [
+          -122.61844850490886,
+          50.228717897271075,
+          -121.62533767022066,
+          51.20939344632449
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "member_count": 51,
+          "selected_owner": 6741
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "members": 51
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B10155031493897",
+      "source_name": "Zacht 5",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B23333222800138",
+        "owner": 727,
+        "bounds": [
+          -122.80579703700597,
+          49.19029159220977,
+          -121.53943537206155,
+          50.15368275836802
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "member_count": 51,
+          "selected_owner": 6741
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "members": 51
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B81230587398817",
+      "source_name": "Kanaka Bar",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B23333222800138",
+        "owner": 727,
+        "bounds": [
+          -122.80579703700597,
+          49.19029159220977,
+          -121.53943537206155,
+          50.15368275836802
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "member_count": 51,
+          "selected_owner": 6741
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "members": 51
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B12331816911664",
+      "source_name": "Nekliptum  1",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B23333222800138",
+        "owner": 727,
+        "bounds": [
+          -122.80579703700597,
+          49.19029159220977,
+          -121.53943537206155,
+          50.15368275836802
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "member_count": 51,
+          "selected_owner": 6741
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "members": 51
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B22817864334263",
+      "source_name": "Boothroyd 8A (Part)",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B23333222800138",
+        "owner": 727,
+        "bounds": [
+          -122.80579703700597,
+          49.19029159220977,
+          -121.53943537206155,
+          50.15368275836802
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "member_count": 51,
+          "selected_owner": 6741
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "members": 51
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B40862866098767",
+      "source_name": "Kitimat-Stikine A",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B95482261790988",
+        "owner": 742,
+        "bounds": [
+          -130.48731269020394,
+          54.187028,
+          -129.37111700501734,
+          54.74578763391283
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-185:BRC",
+          "member_count": 5,
+          "selected_owner": 6718
+        },
+        {
+          "id": "atlas:physical:CAN-187:BRC",
+          "member_count": 4,
+          "selected_owner": 6719
+        },
+        {
+          "id": "atlas:physical:CAN-190:BRC",
+          "member_count": 26,
+          "selected_owner": 6721
+        },
+        {
+          "id": "atlas:physical:CAN-191:BRC",
+          "member_count": 14,
+          "selected_owner": 6722
+        },
+        {
+          "id": "atlas:physical:CAN-198:BRC",
+          "member_count": 9,
+          "selected_owner": 6728
+        },
+        {
+          "id": "atlas:physical:CAN-199:BRC",
+          "member_count": 11,
+          "selected_owner": 6729
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-185:BRC",
+          "members": 5
+        },
+        {
+          "id": "atlas:physical:CAN-187:BRC",
+          "members": 4
+        },
+        {
+          "id": "atlas:physical:CAN-190:BRC",
+          "members": 26
+        },
+        {
+          "id": "atlas:physical:CAN-191:BRC",
+          "members": 14
+        },
+        {
+          "id": "atlas:physical:CAN-198:BRC",
+          "members": 9
+        },
+        {
+          "id": "atlas:physical:CAN-199:BRC",
+          "members": 11
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B44079158756317",
+      "source_name": "Columbia-Shuswap A",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B53186536156139",
+        "owner": 724,
+        "bounds": [
+          -117.50160728863922,
+          49.69019804642074,
+          -116.44207214093423,
+          51.06606348196724
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-205:BRC",
+          "member_count": 29,
+          "selected_owner": 6736
+        },
+        {
+          "id": "atlas:physical:CAN-206:BRC",
+          "member_count": 12,
+          "selected_owner": 6738
+        },
+        {
+          "id": "atlas:physical:CAN-207:BRC",
+          "member_count": 6,
+          "selected_owner": 6740
+        },
+        {
+          "id": "atlas:physical:CAN-213:BRC",
+          "member_count": 23,
+          "selected_owner": 6744
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-205:BRC",
+          "members": 29
+        },
+        {
+          "id": "atlas:physical:CAN-206:BRC",
+          "members": 12
+        },
+        {
+          "id": "atlas:physical:CAN-207:BRC",
+          "members": 6
+        },
+        {
+          "id": "atlas:physical:CAN-213:BRC",
+          "members": 23
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B51579035496041",
+      "source_name": "Columbia-Shuswap B",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B53186536156139",
+        "owner": 724,
+        "bounds": [
+          -117.50160728863922,
+          49.69019804642074,
+          -116.44207214093423,
+          51.06606348196724
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-205:BRC",
+          "member_count": 29,
+          "selected_owner": 6736
+        },
+        {
+          "id": "atlas:physical:CAN-206:BRC",
+          "member_count": 12,
+          "selected_owner": 6738
+        },
+        {
+          "id": "atlas:physical:CAN-213:BRC",
+          "member_count": 23,
+          "selected_owner": 6744
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-205:BRC",
+          "members": 29
+        },
+        {
+          "id": "atlas:physical:CAN-206:BRC",
+          "members": 12
+        },
+        {
+          "id": "atlas:physical:CAN-213:BRC",
+          "members": 23
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B19373598763103",
+      "source_name": "Thompson-Nicola E (Bonaparte *",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B24707891036972",
+        "owner": 737,
+        "bounds": [
+          -123.7582174748975,
+          50.54720997612285,
+          -122.09051950783439,
+          51.22007306100013
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-202:BRC",
+          "member_count": 106,
+          "selected_owner": 6733
+        },
+        {
+          "id": "atlas:physical:CAN-204:BRC",
+          "member_count": 9,
+          "selected_owner": 6735
+        },
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "member_count": 51,
+          "selected_owner": 6741
+        },
+        {
+          "id": "atlas:physical:CAN-209:BRC",
+          "member_count": 64,
+          "selected_owner": 6742
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-202:BRC",
+          "members": 106
+        },
+        {
+          "id": "atlas:physical:CAN-204:BRC",
+          "members": 9
+        },
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "members": 51
+        },
+        {
+          "id": "atlas:physical:CAN-209:BRC",
+          "members": 64
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B26295912107564",
+      "source_name": "Dolphin Island 1",
+      "error": "Missing or conflicting complete source aggregation member",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B67619845912536",
+        "owner": 742,
+        "bounds": [
+          -130.46109018900776,
+          53.777083,
+          -130.45424647383834,
+          53.781549892044104
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-191:BRC",
+          "member_count": 14,
+          "selected_owner": 6722
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-191:BRC",
+          "members": 14
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B86915956611276",
+      "source_name": "Kitimat-Stikine C (Part 1)",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B67619845912536",
+        "owner": 742,
+        "bounds": [
+          -130.29517221284436,
+          53.208749999999995,
+          -129.41856400096282,
+          53.91123699387045
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-190:BRC",
+          "member_count": 26,
+          "selected_owner": 6721
+        },
+        {
+          "id": "atlas:physical:CAN-191:BRC",
+          "member_count": 14,
+          "selected_owner": 6722
+        },
+        {
+          "id": "atlas:physical:CAN-201:BRC",
+          "member_count": 4,
+          "selected_owner": 6732
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-190:BRC",
+          "members": 26
+        },
+        {
+          "id": "atlas:physical:CAN-191:BRC",
+          "members": 14
+        },
+        {
+          "id": "atlas:physical:CAN-201:BRC",
+          "members": 4
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B60983062088441",
+      "source_name": "Kitimat-Stikine C (Part 2)",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B40331286113500",
+        "owner": 741,
+        "bounds": [
+          -128.47868061210582,
+          52.36179121126165,
+          -128.2669086966441,
+          52.4787685924515
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-190:BRC",
+          "member_count": 26,
+          "selected_owner": 6721
+        },
+        {
+          "id": "atlas:physical:CAN-191:BRC",
+          "member_count": 14,
+          "selected_owner": 6722
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-190:BRC",
+          "members": 26
+        },
+        {
+          "id": "atlas:physical:CAN-191:BRC",
+          "members": 14
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B98201226911229",
+      "source_name": "Bulkley-Nechako E",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B40331286113500",
+        "owner": 741,
+        "bounds": [
+          -128.37027038056428,
+          52.198269194361565,
+          -126.3335333223982,
+          53.30903267035671
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-191:BRC",
+          "member_count": 14,
+          "selected_owner": 6722
+        },
+        {
+          "id": "atlas:physical:CAN-202:BRC",
+          "member_count": 106,
+          "selected_owner": 6733
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-191:BRC",
+          "members": 14
+        },
+        {
+          "id": "atlas:physical:CAN-202:BRC",
+          "members": 106
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B49840681294826",
+      "source_name": "High Bar 1",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B79184557355684",
+        "owner": 737,
+        "bounds": [
+          -122.61844850490886,
+          50.228717897271075,
+          -121.62533767022066,
+          51.20939344632449
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-202:BRC",
+          "member_count": 106,
+          "selected_owner": 6733
+        },
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "member_count": 51,
+          "selected_owner": 6741
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-202:BRC",
+          "members": 106
+        },
+        {
+          "id": "atlas:physical:CAN-208:BRC",
+          "members": 51
+        }
+      ]
+    },
+    {
+      "source_id": "gb:CAN:ADM3:43193130B72471043106696",
+      "source_name": "Belcarra",
+      "error": "Incomplete or ambiguous accepted split-source descendant",
+      "bound_contact": {
+        "source": "gb:CAN:ADM3:43193130B83618898091381",
+        "owner": 727,
+        "bounds": [
+          -123.00248067139557,
+          49.17516113856299,
+          -122.00571375617773,
+          49.93617978479334
+        ]
+      },
+      "changes": [
+        {
+          "id": "atlas:physical:CAN-192:BRC",
+          "member_count": 6,
+          "selected_owner": 6723
+        },
+        {
+          "id": "atlas:physical:CAN-196:BRC",
+          "member_count": 2,
+          "selected_owner": 6727
+        }
+      ],
+      "canonical": [
+        {
+          "id": "atlas:physical:CAN-192:BRC",
+          "members": 6
+        },
+        {
+          "id": "atlas:physical:CAN-196:BRC",
+          "members": 2
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Runs exact stock reconcile/splitCompetitor bodies and production coordinateBounds with complete source and accepted ancestry, using both admitted physical classes. Not the whole authority constructor.",
+    "Bounding-box contact is the actual constructor admission, not geometric contact or exact native conflict. Failures cannot be translated into held-cell counts."
+  ]
+}
