@@ -194,11 +194,11 @@ export function verifyNativeSeamView(original,view,{size,latitudes}) {
     if(!geometry||!['Polygon','MultiPolygon'].includes(geometry.type))
       throw Error('Canonical seam view requires whole polygon geometry');
     const polygons=geometry.type==='Polygon'?[geometry.coordinates]:geometry.coordinates;
-    if(!Array.isArray(polygons)||!polygons.length)throw Error('Empty canonical seam view');
-    return [{index:1,polygons:polygons.map(polygon=>{
-      if(!Array.isArray(polygon)||!polygon.length)throw Error('Missing canonical seam rings');
-      return polygon.map(ring=>{
-        if(!Array.isArray(ring))throw Error('Missing canonical seam ring');
+    if(!isNativeSequence(polygons)||!polygons.length)throw Error('Empty canonical seam view');
+    return [{index:1,polygons:Array.from(polygons,polygon=>{
+      if(!isNativeSequence(polygon)||!polygon.length)throw Error('Missing canonical seam rings');
+      return Array.from(polygon,ring=>{
+        if(!isNativeSequence(ring))throw Error('Missing canonical seam ring');
         for(const point of ring){
           if(!Array.isArray(point)||point.length!==2||!point.every(Number.isFinite)
             ||Math.abs(point[0])>(originalFrame?limit:180)||Math.abs(point[1])>90)
@@ -206,7 +206,7 @@ export function verifyNativeSeamView(original,view,{size,latitudes}) {
           if(originalFrame&&Math.abs(point[0])>180)overruns++;
           south=Math.min(south,point[1]);north=Math.max(north,point[1]);
         }
-        return Float64Array.from(ring.flat());
+        const values=new Float64Array(ring.length*2);let i=0;for(const point of ring)values.set(point,i++*2);return values;
       });
     })}];
   }
@@ -254,9 +254,9 @@ export function nativeRuntimeIndex(features) {
     if (!['Polygon','MultiPolygon'].includes(geometry?.type)) throw Error('Original native geometry required');
     const polygons=geometry.type==='Polygon'?[geometry.coordinates]:geometry.coordinates;
     if (!isNativeSequence(polygons) || !polygons.length) throw Error('Original native polygons required');
-    return {index:owner,polygons:polygons.map(polygon=>{
+    return {index:owner,polygons:Array.from(polygons,polygon=>{
       if (!isNativeSequence(polygon) || !polygon.length) throw Error('Original native rings required');
-      return polygon.map(ring=>{
+      return Array.from(polygon,ring=>{
         if (!isNativeSequence(ring) || ring.length<4) throw Error('Original native closed ring required');
         const result=new Float64Array(ring.length*2);
         let i=0;for(const point of ring){
@@ -699,24 +699,25 @@ function requestedIndex(requestedRows, size, latitudes) {
 // Validate every supplied primitive before any stock scan or predicate work.
 // Empty top-level coordinates of a recognized type are explicit empty witnesses;
 // empty members inside a nonempty multi-primitive are rejected rather than dropped.
+function coordinateArray(value,name){return Array.isArray(value)?denseArray(value,name):(require(isNativeSequence(value),`${name} must be an array`),value);}
 function primitives(geometry) {
   const polygons = [], segments = [], points = [], stack = [{value: geometry}];
   const activeCollections = new WeakSet();
   let parts = 0, vertices = 0;
   function point(value) { vertices++; return position(value); }
   function line(value) {
-    denseArray(value, 'Line positions');
+    coordinateArray(value, 'Line positions');
     require(value.length >= 2, 'Incomplete line witness');
-    const positions = value.map(point);
+    const positions = Array.from(value,point);
     for (let i = 1; i < positions.length; i++) segments.push([positions[i - 1], positions[i]]);
   }
   function polygon(value) {
-    denseArray(value, 'Polygon rings');
+    coordinateArray(value, 'Polygon rings');
     require(value.length > 0, 'Missing polygon rings');
-    const rings = value.map(ring => {
-      denseArray(ring, 'Ring positions');
+    const rings = Array.from(value,ring => {
+      coordinateArray(ring, 'Ring positions');
       require(ring.length >= 4, 'Incomplete footprint ring in witness polygon');
-      const positions = ring.map(point), first = positions[0], last = positions.at(-1);
+      const positions = Array.from(ring,point), first = positions[0], last = positions.at(-1);
       require(first[0] === last[0] && first[1] === last[1], 'Unclosed polygon witness');
       return positions.flat();
     });
@@ -739,7 +740,7 @@ function primitives(geometry) {
     }
     require(['Point', 'MultiPoint', 'LineString', 'MultiLineString', 'Polygon', 'MultiPolygon'].includes(value.type), 'Unknown witness primitive');
     exactKeys(value, ['type', 'coordinates'], 'Witness geometry');
-    const coords = denseArray(value.coordinates, 'Witness coordinates');
+    const coords = coordinateArray(value.coordinates, 'Witness coordinates');
     if (coords.length === 0) continue;
     if (value.type === 'Point') points.push(point(coords));
     else if (value.type === 'MultiPoint') for (const member of coords) points.push(point(member));

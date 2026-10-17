@@ -67,3 +67,13 @@ formatting, duplicate keys, deferred overridden nonfinite values, complete hashe
 closed-store refusal, exact malformed-coordinate messages and a genuine 513-point
 source through completed append and numerical comparison. Geometry scale measurements
 against the immutable 6582 science are pending at this source checkpoint.
+
+The follow-up geometry consumer audit also covers every supported witness type
+(Point/MultiPoint/LineString/MultiLineString/Polygon/MultiPolygon/collections) and
+canonical seam views. Lazy coordinate sequences must not leak into the scanner's
+required eager polygon/ring roster: native runtime conversion explicitly materializes
+those output arrays, and witness accounting consumes every point before reporting
+counts. Tests compare complete exact cell predicates, malformed refusals, retained
+seam checks and full scanner results for large polygon/ring rosters. The four
+ledger/grid/witness/scanner suites pass 120 tests. These tests caught and fixed the
+initial successor's LineString admission and lazy-map witness-count gaps.

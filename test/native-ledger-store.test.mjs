@@ -181,3 +181,48 @@ test('private coordinate-reference lookalikes stay ordinary input and spill I/O 
  }
  assert.deepEqual(fs.readdirSync(directory),[]);
 });
+
+import {validateWitnessGeometry,witnessCellEffects,nativePolygonIntervals,nativeRowLatitudes,verifyNativeSeamView} from '../src/native-grid.js';
+test('stored coordinates preserve all witness primitive kinds and exact cell predicates',async t=>{
+ const directory=temporary(t),points=Array.from({length:40},(_,i)=>[i/10-2,i/20-1]),ring=[...points,points[0]];
+ const shapes=[{type:'Point',coordinates:[0,0]},{type:'MultiPoint',coordinates:points},{type:'LineString',coordinates:points},
+  {type:'MultiLineString',coordinates:[points,points.slice().reverse()]},{type:'Polygon',coordinates:[ring]},
+  {type:'MultiPolygon',coordinates:[[ring]]}];
+ shapes.push({type:'GeometryCollection',geometries:shapes.slice()});
+ const options={size:16,latitudes:nativeRowLatitudes(16),requestedRows:[{y:8,runs:[[0,16,1]]}],nativePolygonIntervals};
+ for(const geometry of shapes){
+  const store=await open(directory,JSON.stringify({rows:[{geometry}]})),stored=store.componentMetadata(store.componentAt(0)).geometry;
+  assert.deepEqual(validateWitnessGeometry(stored),validateWitnessGeometry(geometry));
+  assert.deepEqual(witnessCellEffects(stored,options),witnessCellEffects(geometry,options));store.close();
+ }
+ for(const geometry of [{type:'MultiPoint',coordinates:[...points,null]},{type:'LineString',coordinates:[...points,[181,0]]},
+  {type:'Polygon',coordinates:[points]},{type:'MultiPolygon',coordinates:[[points]]}]){
+  const store=await open(directory,JSON.stringify({rows:[{geometry}]})),stored=store.componentMetadata(store.componentAt(0)).geometry;
+  let expected;try{validateWitnessGeometry(geometry);}catch(error){expected=error.message;}assert(expected);
+  assert.throws(()=>validateWitnessGeometry(stored),{message:expected});store.close();
+ }
+ assert.deepEqual(fs.readdirSync(directory),[]);
+});
+
+test('stored seam coordinates preserve exact canonical-frame verification',async t=>{
+ const directory=temporary(t),epsilon=180.00000000000003;
+ const ring=Array.from({length:40},(_,i)=>[i%2?epsilon:179.99,i/100]);ring.push(ring[0]);
+ const original={type:'Polygon',coordinates:[ring]},view={type:'Polygon',coordinates:[ring.map(([x,y])=>[Math.min(180,x),y])]};
+ const store=await open(directory,JSON.stringify({rows:[{geometry:original},{geometry:view}]}));
+ const options={size:16,latitudes:nativeRowLatitudes(16)},a=store.componentMetadata(store.componentAt(0)).geometry,b=store.componentMetadata(store.componentAt(1)).geometry;
+ assert.deepEqual(verifyNativeSeamView(a,b,options),verifyNativeSeamView(original,view,options));store.close();
+});
+
+test('spilled polygon and ring rosters preserve eager runtime materialization and complete scans',async t=>{
+ const directory=temporary(t),ring=[[-20,-20],[20,-20],[20,20],[-20,20],[-20,-20]];
+ const shapes=[{type:'Polygon',coordinates:Array.from({length:41},()=>ring)},
+  {type:'MultiPolygon',coordinates:Array.from({length:41},()=>[ring])}];
+ for(const geometry of shapes){
+  const store=await open(directory,JSON.stringify({rows:[{geometry}]})),stored=store.componentMetadata(store.componentAt(0)).geometry;
+  const a=nativeRuntimeIndex([{id:'A',pixelIndex:1,geometry:stored}]),b=nativeRuntimeIndex([{id:'A',pixelIndex:1,geometry}]);
+  assert.deepEqual(a,b);assert(Array.isArray(a[0].polygons));assert(Array.isArray(a[0].polygons[0]));
+  const options={size:16,rowStart:0,rowEnd:16,latitudes:nativeRowLatitudes(16)};
+  assert.deepEqual(nativePolygonIntervals(a,options),nativePolygonIntervals(b,options));
+  assert.deepEqual(validateWitnessGeometry(stored),validateWitnessGeometry(geometry));store.close();
+ }
+});
