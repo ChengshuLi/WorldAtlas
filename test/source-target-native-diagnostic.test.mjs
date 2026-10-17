@@ -148,7 +148,7 @@ function constructorFixture(change=()=>{},applicability){
   const nativeLatitudes=put('latitudes.f64le',latitudeBytes);
   const membership={index:put('data/world-index.json',state.index),lineage:put('data/semantic-report.json',state.lineage),
     parts:[put('data/geography/part-0.json',state.accepted)]};
-  let territorialApplicability;
+  let territorialApplicability,exclusionSources;
   if(applicability){
     const target=state.targets[0],geometry=target.territorial_exclusions[0];
     const row=state.proposed.rows[0],x=row.runs[0][0],pixelIndex=target.pixelIndex;
@@ -172,6 +172,11 @@ function constructorFixture(change=()=>{},applicability){
         original_bytes:raw.length,original_sha256:digest(raw),feature_count:1});
       applicability.catalogue?.(body.products.at(-1));
       catalogue=put(catalogue.path,body);data.provenance[2]={id:'source',role:'original-source',parts};
+      if(applicability.compact){
+        exclusionSources=[{source_id:'negative-source',parts}];
+        target.territorial_exclusions=[{source_id:'negative-source:negative',feature_ordinal:0,
+          negative_ordinal:0,geometry_sha256:valueSha(geometry)}];
+      }
     }
     applicability.change?.(data,state);
     const name='adopted-territorial-applicability.json';
@@ -188,14 +193,37 @@ function constructorFixture(change=()=>{},applicability){
     state.changeSeamViews?.(data);
     seamViews=put('canonical-seam-views.json',data);
   }
-  const evidence=put('source-evidence.json',{version:1,kind:'source-target-native-evidence-v1',catalogue,
+  if(state.negativeOriginals){
+    const raw=Buffer.from(JSON.stringify(collection(state.negativeOriginals))),cut=Math.floor(raw.length/2),
+      pieces=[raw.subarray(0,cut),raw.subarray(cut)];
+    const parts=pieces.map((piece,i)=>Object.assign(put('original-negative-'+i+'.bin.gz',gzipSync(piece)),
+      {decoded_bytes:piece.length,decoded_sha256:digest(piece)}));
+    const body=JSON.parse(files.get(catalogue.path).raw);
+    const record={key:'negative',feature_count:state.negativeOriginals.length,
+      original_bytes:raw.length,original_sha256:digest(raw),parts:parts.map((p,i)=>({path:p.path,
+        bytes:p.bytes,sha256:p.sha256,ordinal:i,offset:i?cut:0,
+        uncompressed_bytes:p.decoded_bytes,uncompressed_sha256:p.decoded_sha256}))};
+    state.changeNegativeCatalogue?.(record);body.products.push(record);catalogue=put(catalogue.path,body);
+    if(state.compactExclusions){
+      exclusionSources=[{source_id:'negative',parts}];
+      for(const target of state.targets)target.territorial_exclusions=target.territorial_exclusions.map((geometry,negative_ordinal)=>{
+        const feature_ordinal=state.negativeOriginals.findIndex(f=>valueSha(f.geometry)===valueSha(geometry));
+        return feature_ordinal<0?geometry:{source_id:'negative:'+state.negativeOriginals[feature_ordinal].properties.shapeID,
+          feature_ordinal,negative_ordinal,geometry_sha256:valueSha(geometry)};
+      });
+    }
+  }
+  const evidenceBody={version:1,kind:'source-target-native-evidence-v1',catalogue,
     owner_roster:roster,physical_evidence:physical,physical_input:measured,physical_reproduction:put('physical.py',Buffer.from('# retained fixture')),
     native_latitudes:nativeLatitudes,native_contract:{size,native_latitudes:nativeLatitudes,original_assets:{bounds:{sha256:roster.sha256}}},
     base_reference:{id:'fixture-base'},families:[{source_id:family,parts:[source]}],
     targets:state.targets.map(target=>({...target,source_receipt_sha256:physical.sha256})),
     ...(state.membership?{source_membership:membership}:{}),
     ...(seamViews?{canonical_seam_views:seamViews}:{}),
-    ...(territorialApplicability?{territorial_applicability:territorialApplicability}:{})});
+    ...(territorialApplicability?{territorial_applicability:territorialApplicability}:{}),
+    ...(exclusionSources?{territorial_exclusion_sources:exclusionSources}:{})};
+  state.changeReferenceEvidence?.(evidenceBody);
+  const evidence=put('source-evidence.json',evidenceBody);
   const patch=put('patch.json',state.proposed);
   class FixtureReader extends ImmutableReader{
     git(...args){
@@ -503,4 +531,101 @@ test('canonical seam views bind original custody and retain omitted whole-family
     data=>data.method.pin.path='alternate.py'
   ])assert.throws(()=>constructorFixture(state=>{prepare(state);state.changeSeamViews=change;}).diagnose(),
     /Canonical seam|canonical seam|Invalid complete lon\/lat|Invalid\/nonfinite coordinate/);
+});
+
+function negativeReferenceFixture(compact,change=()=>{},kind='interior'){
+  return constructorFixture(state=>{
+    if(kind==='boundary')exactBoundaryTarget(state);else directTarget(state);
+    const geometry=kind==='boundary'?rectangle(-90,-89.98,-.02,.02):
+      kind==='disjoint'?rectangle(10,11,-.02,.02):rectangle(.04,.06,-.02,.02);
+    const detached=rectangle(40,41,-.02,.02);
+    const whole={type:'MultiPolygon',coordinates:[geometry.coordinates,detached.coordinates]};
+    state.negativeOriginals=[rawFeature('whole',whole),rawFeature('unused',rectangle(80,81,-.02,.02))];
+    state.targets[0].territorial_exclusions=[whole,whole,rectangle(60,61,-.02,.02)];
+    state.compactExclusions=compact;change(state);
+  });
+}
+const withoutCustodyComponent=rows=>rows.map(({component_id,...row})=>row);
+// Only custody identities change when an equivalent input encoding changes.
+const referenceDecision=({original_pins,rule_sha256,...decisions})=>decisions;
+const referenceConstruct=f=>constructOriginalAuthority(f.reader(),{
+  source_evidence:{commit:version,path:f.binding.source_evidence.path},
+  native_patch:{commit:version,path:f.binding.native_patch.path}});
+
+test('complete original references preserve genuine native interior, boundary and supported decisions',()=>{
+  for(const kind of ['interior','boundary','disjoint']){
+    const inline=negativeReferenceFixture(false,()=>{},kind),compact=negativeReferenceFixture(true,()=>{},kind),
+      expected=inline.diagnose(),actual=compact.diagnose();
+    assert.deepEqual(referenceDecision(actual),referenceDecision(expected),kind);
+    assert.ok(actual.decision_rows.length>0,'nonvacuous complete requested decisions');
+    if(kind==='disjoint'){
+      const left=inline.run(),right=compact.run();
+      assert.deepEqual(withoutCustodyComponent(right.source_rows),withoutCustodyComponent(left.source_rows));
+      assert.equal(right.source_rows[0].native_cells,1);
+      assert.deepEqual(right.territorial_contacts,left.territorial_contacts);
+      const inlineAuthority=referenceConstruct(inline),compactAuthority=referenceConstruct(compact);
+      assert.deepEqual(withoutCustodyComponent(compactAuthority.ledger_rows),withoutCustodyComponent(inlineAuthority.ledger_rows));
+      assert.deepEqual(compactAuthority.limitations,inlineAuthority.limitations);
+      assert.notEqual(compactAuthority.rule_sha256,inlineAuthority.rule_sha256);
+    }else{
+      assert.ok(actual.held_cells>0,kind);
+      assert.equal(actual.decision_rows[0].runs[0][3],kind==='boundary'?'boundary_cells':'territorial_exclusion_cells');
+      assert.throws(()=>compact.run(),/unique source-target coverage/);
+    }
+    const reader=compact.reader();diagnoseSourceTargetNativeAuthority(reader,compact.preimage,compact.binding);
+    for(const name of ['original-negative-0.bin.gz','original-negative-1.bin.gz'])
+      assert.equal(reader.inventory.get(version+':'+name).whole_body_consumed,true,name);
+  }
+});
+
+test('exact reference expansion retains typed contextual interpretation and its original ordinal',()=>{
+  const chosen=state=>{directTarget(state);state.targets[0].territorial_exclusions=[structuredClone(state.originals[2].geometry)];};
+  const inline=constructorFixture(chosen,{multipart:true}).run(),
+    compact=constructorFixture(chosen,{multipart:true,compact:true}).run();
+  assert.deepEqual(withoutCustodyComponent(compact.source_rows),withoutCustodyComponent(inline.source_rows));
+  assert.deepEqual(compact.territorial_contacts,inline.territorial_contacts);
+  assert.equal(compact.territorial_contacts.length,1);
+  const f=constructorFixture(chosen,{multipart:true,compact:true}),reader=f.reader(),git=reader.git.bind(reader),reads=new Map();
+  reader.git=(...args)=>{if(args[0]==='cat-file'&&args[1]==='blob')reads.set(args[2],(reads.get(args[2])??0)+1);return git(...args);};
+  qualifySourceTargetNativeAuthority(reader,f.preimage,f.binding);
+  for(const name of ['negative-source-part-0.bin.gz','negative-source-part-1.bin.gz'])
+    assert.equal(reads.get(f.files.get(name).pin.git_blob_oid),1,'shared exact original is read once across references and applicability');
+});
+
+test('native references reject missing, duplicate, shifted and mismatched whole-source custody',async t=>{
+  const changes={
+    'missing source descriptor':e=>delete e.territorial_exclusion_sources,
+    'missing complete source part':e=>e.territorial_exclusion_sources[0].parts.pop(),
+    'duplicate source descriptor':e=>e.territorial_exclusion_sources.push(e.territorial_exclusion_sources[0]),
+    'empty source roster':e=>e.territorial_exclusion_sources=[],
+    'unknown source family':e=>e.territorial_exclusion_sources[0].source_id='unknown',
+    'positive source family':e=>e.territorial_exclusion_sources[0].source_id=family,
+    'extra descriptor role':e=>e.territorial_exclusion_sources[0].owner=2,
+    'changed encoded source pin':e=>e.territorial_exclusion_sources[0].parts[0].sha256='f'.repeat(64),
+    'changed decoded source pin':e=>e.territorial_exclusion_sources[0].parts[0].decoded_sha256='f'.repeat(64),
+    'wrong source order':e=>e.territorial_exclusion_sources[0].parts.reverse(),
+    'missing source id':e=>delete e.targets[0].territorial_exclusions[0].source_id,
+    'unknown source id':e=>e.targets[0].territorial_exclusions[0].source_id='negative:absent',
+    'missing feature ordinal':e=>delete e.targets[0].territorial_exclusions[0].feature_ordinal,
+    'wrong feature ordinal':e=>e.targets[0].territorial_exclusions[0].feature_ordinal=1,
+    'negative feature ordinal':e=>e.targets[0].territorial_exclusions[0].feature_ordinal=-1,
+    'missing geometry hash':e=>delete e.targets[0].territorial_exclusions[0].geometry_sha256,
+    'wrong geometry hash':e=>e.targets[0].territorial_exclusions[0].geometry_sha256='f'.repeat(64),
+    'missing negative ordinal':e=>delete e.targets[0].territorial_exclusions[0].negative_ordinal,
+    'copied duplicate reference':e=>e.targets[0].territorial_exclusions[1]=e.targets[0].territorial_exclusions[0],
+    'moved reference':e=>e.targets[0].territorial_exclusions.reverse(),
+    'extra reference owner':e=>e.targets[0].territorial_exclusions[0].pixelIndex=2,
+    'null reference':e=>e.targets[0].territorial_exclusions[0]=null,
+    'positive authority from negative':e=>{e.targets[0].id='negative:whole';e.targets[0].source_family='negative';}
+  };
+  for(const [name,change]of Object.entries(changes))await t.test(name,()=>{
+    const f=negativeReferenceFixture(true,s=>s.changeReferenceEvidence=change);
+    assert.throws(()=>f.diagnose(),/territorial|Territorial|source|Source|geometry|Geometry|identity|Polygon/);
+  });
+  for(const [name,change]of Object.entries({
+    'duplicate original id':s=>s.negativeOriginals[1].properties.shapeID='whole',
+    'invalid unreferenced geometry':s=>s.negativeOriginals[1].geometry.coordinates[0].pop(),
+    'wrong complete original count':s=>s.changeNegativeCatalogue=r=>r.feature_count++,
+    'wrong whole product hash':s=>s.changeNegativeCatalogue=r=>r.original_sha256='f'.repeat(64)
+  }))await t.test(name,()=>assert.throws(()=>negativeReferenceFixture(true,change).diagnose()));
 });

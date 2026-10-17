@@ -1929,3 +1929,14 @@ test('selected-data includes every explicit complete cohort pin without recursiv
   assert.equal(await sourceTargetRoleFixture({sourceMembership:f=>membership(f,mutate)}).run(),null);
  }
 });
+
+test('selected-data declares every complete negative source reference part and rejects malformed roles',async()=>{
+ const setup=({f,roles})=>{roles.territorial_exclusion_sources=[{source_id:'negative',parts:[f.leaf('negative-source.bin.gz')]}];};
+ const accepted=sourceTargetRoleFixture({mutateRoles:setup}),diagnostics={};
+ assert.equal((await accepted.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
+ for(const mutate of [s=>s[0].parts=[],s=>s.push(s[0]),s=>s[0].source_id='',
+   s=>s[0].parts[0].git_blob_oid='0'.repeat(40),s=>s[0].extra=s[0].parts[0]]){
+  const broken=sourceTargetRoleFixture({mutateRoles:args=>{setup(args);mutate(args.roles.territorial_exclusion_sources);}});
+  assert.equal(await broken.run(),null);
+ }
+});
