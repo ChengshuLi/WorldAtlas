@@ -463,3 +463,41 @@ test('generated whole negative reaches the unchanged native operator as a veto o
   assert.equal(after.assigned_cells,0);assert.equal(after.territorial_exclusion_cells,1);
   assert.deepEqual(after.rows,[]);assert.deepEqual(input.sourceFeatures[0].geometry,geometry);
 });
+
+test('opt-in exact references preserve inline operands, duplicate instances and complete source descriptors',async()=>{
+  const f=territorialFixture();
+  // Retained manual instances may also be appended by the bounds generator.
+  f.config.source_evidence.targets[0].territorial_exclusions.push(f.negatives[0].geometry);
+  const before=structuredClone(f.config),legacy=await sourceEvidence(f.config,f.reader);
+  f.config.compact_territorial_exclusions=false;
+  assert.deepEqual(await sourceEvidence(f.config,f.reader),legacy);
+  f.config.compact_territorial_exclusions=true;
+  const compact=await sourceEvidence(f.config,f.reader),body=JSON.parse(compact['source-evidence.json']),
+    inline=JSON.parse(legacy['source-evidence.json']);
+  assert.deepEqual(compact['territorial-exclusion-provenance.json'],legacy['territorial-exclusion-provenance.json']);
+  assert.equal(body.territorial_exclusion_sources.length,1);
+  assert.equal(body.territorial_exclusion_sources[0].source_id,'negative');
+  assert.equal(body.territorial_exclusion_sources[0].parts.length,2);
+  const operands=body.targets[0].territorial_exclusions;
+  assert.deepEqual(operands[0],before.source_evidence.targets[0].territorial_exclusions[0]);
+  assert.deepEqual(operands.slice(1).map(r=>[r.source_id,r.feature_ordinal,r.negative_ordinal]),
+    [['negative:overlap',0,1],['negative:overlap',0,2],['negative:touch',1,3],['negative:multipart',3,4],['negative:seam',4,5]]);
+  for(const ref of operands.slice(1))assert.equal(ref.geometry_sha256,digest(jsonBytes(f.negatives[ref.feature_ordinal].geometry)));
+  body.targets[0].territorial_exclusions=operands.map(o=>o.type?o:f.negatives[o.feature_ordinal].geometry);
+  delete body.territorial_exclusion_sources;
+  assert.deepEqual(body,inline,'complete expanded body equals legacy output');
+  assert.deepEqual(f.config.source_evidence,before.source_evidence,'input originals remain unchanged');
+});
+
+test('compact preparation keeps ambiguous original geometry inline and rejects invalid opt-in',async()=>{
+  const ambiguous=territorialFixture({negatives:n=>n.push({...n[0],shapeID:'coincident'})});
+  ambiguous.config.compact_territorial_exclusions=true;
+  const body=JSON.parse((await sourceEvidence(ambiguous.config,ambiguous.reader))['source-evidence.json']);
+  assert.deepEqual(body.targets[0].territorial_exclusions[1],ambiguous.negatives[0].geometry);
+  assert.deepEqual(body.targets[0].territorial_exclusions.at(-1),ambiguous.negatives[0].geometry);
+  for(const mutation of [c=>c.compact_territorial_exclusions='yes',c=>c.compact_territorial_exclusions=null,
+    c=>{c.compact_territorial_exclusions=true;delete c.territorial_exclusion_families;},
+    c=>{c.compact_territorial_exclusions=true;c.source_evidence.territorial_exclusion_sources=[];}]){
+    const f=territorialFixture();mutation(f.config);await assert.rejects(sourceEvidence(f.config,f.reader),/territorial|Territorial/);
+  }
+});

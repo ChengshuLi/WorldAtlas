@@ -1372,9 +1372,12 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   coverageRowsByOwner.set(target.pixelIndex,rows);
  }
  // Optional adopted source applicability retains every original negative.
+ const completeOriginalSources=new Map();
  const readCompleteSource=(parts,record)=>{
   demand(record&&Array.isArray(parts)&&parts.length===record.parts.length,
    'Missing complete original source family');
+  const identity=valueSha({parts,record});
+  if(completeOriginalSources.has(identity))return completeOriginalSources.get(identity);
   const pieces=parts.map((pin,i)=>{
    const expected=record.parts[i];demand(pin.path===expected.path&&pin.sha256===expected.sha256
     &&pin.bytes===expected.bytes&&pin.decoded_bytes===expected.uncompressed_bytes
@@ -1383,8 +1386,49 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   const raw=Buffer.concat(pieces);demand(raw.length===record.original_bytes&&sha(raw)===record.original_sha256,
    'Whole original consumed source product differs');
   const product=JSON.parse(raw);demand(product.features?.length===record.feature_count,'Incomplete original source feature roster');
-  return product;
+  completeOriginalSources.set(identity,product);return product;
  };
+
+ // Optional references share authenticated complete originals, while retaining
+ // every per-target operand and ordinal. Expansion precedes the unchanged
+ // applicability and whole-geometry veto paths; it supplies no positive owner.
+ if(evidence.territorial_exclusion_sources!==undefined){
+  const sources=evidence.territorial_exclusion_sources,loaded=new Map(),seen=new Set();
+  demand(!revised&&evidence.adopted_provider_families===undefined
+   &&Array.isArray(sources)&&sources.length>0,'Complete original territorial sources required');
+  for(const family of sources){
+   demand(keys(family,'source_id,parts')&&typeof family.source_id==='string'&&family.source_id
+    &&!seen.has(family.source_id)&&!evidence.families.some(f=>f.source_id===family.source_id),
+   'Duplicate, positive or invalid territorial source family');seen.add(family.source_id);
+   const matches=catalogue.products.filter(record=>record.key===family.source_id);
+   demand(matches.length===1,'Missing unique complete territorial source family');
+   const product=readCompleteSource(family.parts,matches[0]);
+   demand(product.type==='FeatureCollection'&&product.features.length>0,'Incomplete territorial source collection');
+   for(const [feature_ordinal,feature]of product.features.entries()){
+    const shape=feature.properties?.shapeID,source_id=family.source_id+':'+shape;
+    demand(feature.type==='Feature'&&typeof shape==='string'&&shape&&!loaded.has(source_id),
+     'Missing or duplicate territorial original source identity');
+    coordinateBounds(feature.geometry);
+    loaded.set(source_id,{feature_ordinal,geometry_sha256:valueSha(feature.geometry),geometry:feature.geometry});
+   }
+  }
+  for(const target of targets.values()){
+   demand(target.territorial_exclusions===undefined||Array.isArray(target.territorial_exclusions),
+    'Malformed territorial exclusions');
+   if(target.territorial_exclusions===undefined)continue;
+   target.territorial_exclusions=target.territorial_exclusions.map((operand,negative_ordinal)=>{
+    if(['Polygon','MultiPolygon'].includes(operand?.type))return operand;
+    demand(keys(operand,'source_id,feature_ordinal,negative_ordinal,geometry_sha256')
+     &&typeof operand.source_id==='string'&&Number.isSafeInteger(operand.feature_ordinal)
+     &&operand.feature_ordinal>=0&&operand.negative_ordinal===negative_ordinal&&hash(operand.geometry_sha256),
+    'Malformed or duplicate territorial source reference');
+    const original=loaded.get(operand.source_id);
+    demand(original&&original.feature_ordinal===operand.feature_ordinal
+     &&original.geometry_sha256===operand.geometry_sha256,'Territorial reference differs from complete original');
+    return original.geometry;
+   });
+  }
+ }
 
  // Source semantics enter through the same executing-tree pin as dated land;
  // the native operator receives only exact member/operand/centre identities.

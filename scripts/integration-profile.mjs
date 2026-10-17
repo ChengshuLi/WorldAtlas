@@ -714,6 +714,16 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
             for(const member of multipart?item.parts:[item.pin])pin(member);
           }
         }
+        if(evidence.territorial_exclusion_sources!==undefined){
+          const sources=evidence.territorial_exclusion_sources;
+          needSelected(Array.isArray(sources)&&sources.length>0
+            &&new Set(sources.map(f=>f.source_id)).size===sources.length,'duplicate or missing territorial source roles');
+          for(const family of sources){
+            needSelected(keys(family,['source_id','parts'])&&text(family.source_id)
+              &&Array.isArray(family.parts)&&family.parts.length>0,'missing complete territorial source parts');
+            for(const part of family.parts)pin(part);
+          }
+        }
         if(evidence.source_membership!==undefined){
           const membership=evidence.source_membership;
           needSelected(keys(membership,membership.cohort_inventory===undefined?['index','lineage','parts']:['cohort_inventory','index','lineage','parts'])&&Array.isArray(membership.parts)&&membership.parts.length>0,

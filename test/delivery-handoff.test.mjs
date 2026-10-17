@@ -509,7 +509,7 @@ test('finalization refuses a new identity at an accepted package path', () => {
 // Actual Git/plain-Node fixture for metadata assembly. The source interpretation
 // and native construction controls live in source-member-native-delivery.test;
 // this fixture exercises the consumed-role boundary without replaying science.
-function modernFinalizationFixture(t, {mixed = false, membership = true, cohort = false, dated = false, territorial = false, territorialParts = false, provider = false, seam = false} = {}) {
+function modernFinalizationFixture(t, {mixed = false, membership = true, cohort = false, dated = false, territorial = false, territorialParts = false, provider = false, seam = false, negativeSources = false} = {}) {
   const root = directory(t), owned = 'coordination/engineering/modern-finalize/';
   const git = (...args) => execFileSync('git', args, {cwd: root, stdio: ['pipe', 'pipe', 'pipe']}).toString().trim();
   git('init'); git('config', 'user.name', 'Finalizer fixture'); git('config', 'user.email', 'finalizer@example.invalid');
@@ -594,6 +594,12 @@ function modernFinalizationFixture(t, {mixed = false, membership = true, cohort 
     const name=inherited+'canonical-seam-views.json',method=pin('scripts/majority.py');
     save(name,{version:1,kind:'retained-periodic-native-views-v1',method:{pin:method,export:'canonical'},records:[]});commitAll();
     seamViews={pin:pin(name),method};evidenceBody.canonical_seam_views=seamViews.pin;
+  }
+  if(negativeSources){
+    const raw=jsonBytes({type:'FeatureCollection',features:[]});
+    const name=inherited+'negative-original.bin.gz';save(name,gzipSync(raw));commitAll();
+    evidenceBody.territorial_exclusion_sources=[{source_id:'negative',parts:[{...pin(name),
+      decoded_bytes:raw.length,decoded_sha256:digest(raw)}]}];
   }
   save(owned + 'source-evidence.json', evidenceBody); save(owned + 'native-patch.json', {rows: [{y: 2, runs: [[2, 4, 1]]}]}); commitAll();
   const authority = binding => {
@@ -1329,5 +1335,22 @@ test('real package command preserves complete canonical cohort pins and rejects 
   const body=structuredClone(f.evidenceBody);mutate(body.source_membership.cohort_inventory);
   const result=f.run('package','.cache/delivery-handoff/cohort-rejected-'+ordinal++,[],f.withEvidence(body));
   assert.notEqual(result.status,0);assert.match(result.stderr,/cohort|hash differs/);
+ }
+});
+
+test('package closes exact complete negative reference sources without broad pin walking',t=>{
+ const f=modernFinalizationFixture(t,{negativeSources:true}),destination='.cache/delivery-handoff/negative-complete';
+ const accepted=f.run('package',destination);assert.equal(accepted.status,0,accepted.stderr);
+ const output=JSON.parse(fs.readFileSync(path.join(f.root,destination,'package-roles.json'))),
+   original=f.evidenceBody.territorial_exclusion_sources[0].parts[0];
+ assert.ok(output.paths.some(item=>item.path===original.path&&item.sha256===original.sha256
+   &&item.roles.includes('source-target territorial source part')));
+ let ordinal=0;
+ for(const mutate of [sources=>sources[0].parts=[],sources=>sources.push(sources[0]),
+   sources=>sources[0].source_id='',sources=>sources[0].parts[0].sha256='0'.repeat(64),
+   sources=>sources[0].extra=sources[0].parts[0]]){
+  const body=structuredClone(f.evidenceBody);mutate(body.territorial_exclusion_sources);
+  const result=f.run('package','.cache/delivery-handoff/negative-rejected-'+ordinal++,[],f.withEvidence(body));
+  assert.notEqual(result.status,0);assert.match(result.stderr,/territorial|hash differs/);
  }
 });

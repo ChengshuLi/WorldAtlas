@@ -822,6 +822,16 @@ export function packageProjection(config, reader, acceptedRegistry = null) {
           && family.parts.length > 0, 'Missing complete source family roles');
         for (const pin of family.parts) add(pin, 'source-target source family part');
       }
+      if (evidence.territorial_exclusion_sources !== undefined) {
+        const sources = evidence.territorial_exclusion_sources;
+        need(Array.isArray(sources) && sources.length > 0 && unique(sources.map(f => f.source_id)),
+          'Unique complete territorial source roles required');
+        for (const family of sources) {
+          need(same(Object.keys(family).sort(), ['parts', 'source_id']) && Array.isArray(family.parts)
+            && family.parts.length > 0, 'Missing complete territorial source parts');
+          for (const pin of family.parts) add(pin, 'source-target territorial source part');
+        }
+      }
       if (evidence.source_membership !== undefined) {
         const membership = evidence.source_membership;
         need(membership && same(Object.keys(membership).sort(), membership.cohort_inventory === undefined
@@ -1369,7 +1379,9 @@ export function publishCompletedSource(root, destination, result, binding, resum
 // Preparation only: the reviewed family list declares conservative negatives,
 // never positive owners or an applicability exception. The native constructor
 // still authenticates the selected source/owner joins and qualifies every cell.
-export function sourceTerritorialExclusions(evidence, families, reader) {
+export function sourceTerritorialExclusions(evidence, families, reader, compact = false) {
+  need(typeof compact === 'boolean', 'Explicit boolean compact territorial exclusions required');
+  need(evidence.territorial_exclusion_sources === undefined, 'Territorial exclusion source references are already prepared');
   need(unique(families), 'Explicit unique nonempty territorial exclusion families required');
   need([1, 2].includes(evidence.version) && evidence.adopted_provider_families === undefined,
     'Territorial exclusion preparation requires original catalogue sources');
@@ -1425,6 +1437,11 @@ export function sourceTerritorialExclusions(evidence, families, reader) {
   };
   const negatives = families.map(load), intersect = (a, b) =>
     a[0] <= b[2] && b[0] <= a[2] && a[1] <= b[3] && b[1] <= a[3];
+  const byGeometry = new Map();
+  if (compact) for (const family of negatives) for (const feature of family.features) {
+    const matches = byGeometry.get(feature.geometry_sha256) ?? [];
+    matches.push(feature); byGeometry.set(feature.geometry_sha256, matches);
+  }
   const bindings = [];
   const targets = evidence.targets.map(target => {
     need(positive.has(target.source_family) && Number.isSafeInteger(target.pixelIndex) && target.pixelIndex > 0,
@@ -1446,9 +1463,19 @@ export function sourceTerritorialExclusions(evidence, families, reader) {
     }
     bindings.push({source_id: target.id, target_id: target.target_id ?? target.id, pixelIndex: target.pixelIndex,
       prior_exclusions: target.territorial_exclusions?.length ?? 0, exclusions: selected, disjoint_source_ids: disjoint});
-    return {...target, territorial_exclusions: exclusions};
+    const operands = compact ? exclusions.map((geometry, negative_ordinal) => {
+      const matches = byGeometry.get(digest(jsonBytes(geometry))) ?? [];
+      // An existing manual operand is compacted only on one exact whole-original
+      // identity. Ambiguous or unrelated inline geometry stays literal.
+      if (matches.length !== 1 || !same(matches[0].geometry, geometry)) return geometry;
+      const {source_id, feature_ordinal, geometry_sha256} = matches[0];
+      return {source_id, feature_ordinal, negative_ordinal, geometry_sha256};
+    }) : exclusions;
+    return {...target, territorial_exclusions: operands};
   });
-  return {evidence: {...evidence, targets}, provenance: {version: 1, kind: 'whole-original-territorial-exclusions-v1',
+  const sources = compact ? {territorial_exclusion_sources: negatives.map(family =>
+    ({source_id: family.source_family, parts: family.parts}))} : {};
+  return {evidence: {...evidence, ...sources, targets}, provenance: {version: 1, kind: 'whole-original-territorial-exclusions-v1',
     catalogue: evidence.catalogue, physical_input: evidence.physical_input, negative_families: families,
     complete_sources: [...loaded.values()].map(({features, ...family}) => family), targets: bindings,
     limits: ['Reviewed negative scope is conservative disagreement, not legal sovereignty or an applicability exception.',
@@ -1528,8 +1555,12 @@ export async function sourceEvidence(config, reader) {
     need(!Object.hasOwn(config.source_evidence, key) || same(config.source_evidence[key], value),
       'Supplied source evidence changes accepted baseline: ' + key);
   const prepared = {...config.source_evidence, ...derived};
+  need(config.compact_territorial_exclusions === undefined || typeof config.compact_territorial_exclusions === 'boolean',
+    'Explicit boolean compact territorial exclusions required');
+  need(!config.compact_territorial_exclusions || config.territorial_exclusion_families !== undefined,
+    'Compact territorial exclusions require reviewed negative families');
   if (config.territorial_exclusion_families === undefined) return {'source-evidence.json': jsonBytes(prepared)};
-  const handoff = sourceTerritorialExclusions(prepared, config.territorial_exclusion_families, reader);
+  const handoff = sourceTerritorialExclusions(prepared, config.territorial_exclusion_families, reader, config.compact_territorial_exclusions ?? false);
   return {'source-evidence.json': jsonBytes(handoff.evidence),
     'territorial-exclusion-provenance.json': jsonBytes(handoff.provenance)};
 }
