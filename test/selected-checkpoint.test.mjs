@@ -536,3 +536,12 @@ for(const [name,shift,overlap] of [
   assert.deepEqual(state.patch.rows,originalPatchRows);
  } finally {f.api.releaseCheckpoint(state);}
 });
+
+
+for(const [name,originalPatchRows] of [
+ ['duplicate',[{y:1,runs:[[2,3,1]]},{y:1,runs:[[3,4,1]]}]],
+ ['decreasing',[{y:2,runs:[[2,3,1]]},{y:1,runs:[[3,4,1]]}]]
+])test('checkpoint admission rejects '+name+' baseline native row identities before indexing',async t=>{
+ const f=await trustedFixture(t,{originalPatchRows});
+ assert.throws(()=>f.api.qualifyCheckpoint({reader:f.reader}),/Duplicate, unordered or foreign native row/);
+});
