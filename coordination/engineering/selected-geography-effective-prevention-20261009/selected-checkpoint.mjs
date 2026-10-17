@@ -1134,8 +1134,9 @@ export function qualifyTransition({state,reader}) {
     const patches=selected.registry.entries.flatMap(entry => authorities.get(entry.authority_sha256).patches);
     const expectedPatch=mergePatchRows(patches,state.manifest.size,state.certificate.entries.length);
     demand(same(selected.patch.rows,expectedPatch),'Candidate patch omitted, invented or reassigned original native intervals');
+    const oldNative=new Map(state.patch.rows.map(row => [row.y,row.runs]));
     for (const entry of addedEntries) for (const row of authorities.get(entry.authority_sha256).patches.flatMap(p => p.rows))
-      for (const run of row.runs) for (const old of state.patch.rows.find(p => p.y===row.y)?.runs??[])
+      for (const run of row.runs) for (const old of oldNative.get(row.y)??[])
         demand(run[1]<=old[0] || run[0]>=old[1], 'New native assignment overlaps a previously selected owner');
     // Rebase only genuinely inert logical rows. Newly qualified authorities may
     // consume that ordinary file; retain their physical paths so the exemption
@@ -1174,7 +1175,7 @@ export function qualifyTransition({state,reader}) {
       {...operandProof,selected,oldAuthorities:authorities,
         physicalPaths:new Set([...physicalPaths,...[...reader.inventory.values()].map(p => p.path)])});
     const changed=new Set(changedIds);
-    const oldNative=new Map(state.patch.rows.map(row => [row.y,row.runs])), newNative=new Map(selected.patch.rows.map(row => [row.y,row.runs]));
+    const newNative=new Map(selected.patch.rows.map(row => [row.y,row.runs]));
     const changedNativeRows=[...new Set([...oldNative.keys(),...newNative.keys()])].sort((a,b) => a-b)
       .filter(y => !same(oldNative.get(y)??[],newNative.get(y)??[]));
 

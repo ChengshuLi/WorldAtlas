@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {after} from 'node:test';
 import fs from 'node:fs';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
@@ -25,15 +26,23 @@ function fixtures(){
 }
 function addition(id,target,index,base,x){const geometry=polygon(x);return {component_id:id,target_id:target,pixelIndex:index,base_geometry_sha256:base,geometry,geometry_sha256:valueSha(geometry)};}
 
-// This is a fresh miniature trusted repository, not a test-only authority hook.
-// The real entry reads its ordinary committed catalogue and products exactly as
-// production does. Candidate edits never control that executing catalogue.
-async function trustedFixture(t,{incompleteNative=false,codeRoutes=false,nativeAppend=false,sourceOverride=false,physicalLogicalSource=false,overrideLogicalPath='data/source.json'}={}){
- const root=fs.mkdtempSync(path.join(process.cwd(),'.checkpoint-test-'));
- t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+// Each consumer owns its complete physical repository and mutable helpers.
+function fixtureRepository(root){
  const git=(...a)=>execFileSync('git',['-c','core.hooksPath=/dev/null','-c','user.name=Checkpoint fixture','-c','user.email=checkpoint@example.invalid','-C',root,...a],{env:{...process.env,GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_NO_LAZY_FETCH:'1'},maxBuffer:33554433,stdio:['ignore','pipe','pipe']});
  const save=(name,value)=>{const f=path.join(root,name);fs.mkdirSync(path.dirname(f),{recursive:true});fs.writeFileSync(f,Buffer.isBuffer(value)?value:valueBytes(value));};
  const commit=()=>{git('add','.');git('commit','-qm','Checkpoint fixture');return git('rev-parse','HEAD').toString().trim();};
+ const pin=(name,at=git('rev-parse','HEAD').toString().trim())=>{const body=git('show',at+':'+name),tree=git('ls-tree',at,'--',name).toString().split(/\s+/);return {commit:at,path:name,mode:tree[0],git_blob_oid:tree[2],bytes:body.length,sha256:sha(body)};};
+ return {root,git,save,commit,pin};
+}
+
+// Keep the original miniature history construction in one private seed for each
+// normalized option set. No consumer imports a seed module or receives its data.
+// Seeds live only for this Node test invocation; copies never share Git objects.
+const trustedSeeds=new Map();
+after(()=>{for(const seed of trustedSeeds.values())fs.rmSync(seed.root,{recursive:true,force:true});});
+
+function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,sourceOverride,physicalLogicalSource,originalPatchRows,overrideLogicalPath}){
+ const {git,save,commit,pin}=fixtureRepository(root);
  git('init','-q');if(codeRoutes)save('data/scientific.js',{fixture:'scientific input, not executed code'});save(PROGRAMME,fs.readFileSync(PROGRAMME));for(const name of CODE)save(name,fs.readFileSync(name));save('package.json',{type:'module'});
  const {features,certificate}=fixtures(), source={type:'FeatureCollection',features};save('data/source.json',source);
  if(sourceOverride)save('data/selected-source.json.gz',gzipSync(valueBytes(source)));
@@ -58,9 +67,8 @@ async function trustedFixture(t,{incompleteNative=false,codeRoutes=false,nativeA
  save('data/manifest.json',manifest);
  const primitive=addition('old','A',1,certificate.entries[0][7],.3);
  const literal={...primitive,base_geometry:features[0].geometry,disposition:'assigned',native_cells:1,source_receipt_sha256:'c'.repeat(64)};
- const originalPatch={version:1,kind:'unassigned-native-cells-v1',rows:[{y:1,runs:[[2,3,1]]}]};
+ const originalPatch={version:1,kind:'unassigned-native-cells-v1',rows:originalPatchRows??[{y:1,runs:[[2,3,1]]}]};
  save('original/patch-one.json',originalPatch);save('original/rule.json',{version:1});const one=commit();
- const pin=(name,at=git('rev-parse','HEAD').toString().trim())=>{const body=git('show',at+':'+name),tree=git('ls-tree',at,'--',name).toString().split(/\s+/);return {commit:at,path:name,mode:tree[0],git_blob_oid:tree[2],bytes:body.length,sha256:sha(body)};};
  save('original/publication.json',{assets:[{path:'patch-one.json',bytes:pin('original/patch-one.json').bytes,sha256:pin('original/patch-one.json').sha256}]});
  const two=commit();save('original/binding.json',{native_proof:{publication:pin('original/publication.json'),assets:[pin('original/patch-one.json',one)]}});const three=commit();
  const entry={policy_id:'retained-source-literal-additions',policy_version:1,rule_preimage:pin('original/rule.json',one),rule_sha256:pin('original/rule.json',one).sha256,source_authority:pin('original/binding.json',three)};entry.authority_sha256=valueSha(entry);
@@ -95,9 +103,29 @@ async function trustedFixture(t,{incompleteNative=false,codeRoutes=false,nativeA
  save('accepted/routes.json',[...new Set([...inventory.map(p=>p.path),'data/source.json'])].sort().map(name=>({path:name,tree:git('ls-tree','-z',selected,'--',name).toString()})));const accepted=commit();
  const rootRow={id:'fixture',accepted_head:accepted,selected_commit:selected,selection_sha256:valueSha(selection),execution_commit:one,execution_code_sha256:valueSha(execution_code),runtime_sha256:valueSha(runtime),facts:pin('accepted/facts.json'),certificate:{...pin('accepted/certificate.json.gz'),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)},publication:pin('accepted/publication.json'),custody:pin('accepted/custody.json'),routes:pin('accepted/routes.json')};
  save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[rootRow]});commit();
+ return {root,data:{selected,ledger,patch,sidecar,envelope,selection,rootRow,manifest,features,registry}};
+}
+
+// The real entry reads each independent copy's ordinary committed catalogue and
+// products. Qualification, readers and private module state are always fresh.
+async function trustedFixture(t,{incompleteNative=false,codeRoutes=false,nativeAppend=false,sourceOverride=false,physicalLogicalSource=false,originalPatchRows,overrideLogicalPath='data/source.json'}={}){
+ // Snapshot caller-owned rows before both keying and building the private seed.
+ const options={incompleteNative,codeRoutes,nativeAppend,sourceOverride,physicalLogicalSource,
+  originalPatchRows:structuredClone(originalPatchRows??[{y:1,runs:[[2,3,1]]}]),overrideLogicalPath};
+ const key=JSON.stringify(options);
+ let seed=trustedSeeds.get(key);
+ if(!seed){
+  const root=fs.mkdtempSync(path.join(process.cwd(),'.checkpoint-seed-'));
+  try{seed=buildTrustedSeed(root,options);trustedSeeds.set(key,seed);}
+  catch(error){fs.rmSync(root,{recursive:true,force:true});throw error;}
+ }
+ const root=fs.mkdtempSync(path.join(process.cwd(),'.checkpoint-test-'));
+ t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+ fs.cpSync(seed.root,root,{recursive:true});
+ const data=structuredClone(seed.data);
  const api=await import(pathToFileURL(path.join(root,MODULE))),native=await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs')));
- const reader=new native.ImmutableReader(root,selected);
- return {api,native,reader,selected,root,git,save,commit,pin,ledger,patch,sidecar,envelope,selection,rootRow,manifest,features,registry};
+ const reader=new native.ImmutableReader(root,data.selected);
+ return {...data,...fixtureRepository(root),api,native,reader};
 }
 
 // Genuine pinned source/native qualification, followed by the public private-state
