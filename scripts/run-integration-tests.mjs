@@ -189,7 +189,7 @@ const FOCUSED_TEST_FAMILIES = [
   'effective-geographic-regression', 'evidence-byte-bounds', 'fiji-canonical-reproduction',
   'geographic-(?:checkpoint-products|regression)', 'geography-prefetch',
   'immutable-reader-read', 'installed-runtime-identity', 'map-cell-diagnosis',
-  'native-(?:additions-order|checkpoint-consumer|word-store|stream-custody|interval-stream)', 'canonical-value-hash', 'parallel-geography-comparison',
+  'native-(?:additions-order|checkpoint-consumer|word-store|stream-custody|interval-stream|interval-projection)', 'canonical-value-hash', 'parallel-geography-comparison',
   'qualification-exclusion-prefilter', 'selected-checkpoint',
   'selected-joint-(?:check|entry|package-boundary)', 'selected-metadata-wiring',
   'source-target-native-diagnostic', 'supported-programs', 'trusted-geography-check',

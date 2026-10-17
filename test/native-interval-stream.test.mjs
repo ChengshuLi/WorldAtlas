@@ -47,3 +47,15 @@ test('one original geometry larger than the preparation window remains fully che
  assert.deepEqual(visibility([candidate])[0],{component_id:candidate.component_id,geometry_sha256:candidate.geometry_sha256,x:0,y:1,previous_owner:0,candidate_owner:1});
  const changed={...candidate,geometry:{type:'Polygon',coordinates:[ring.map((p,i)=>i===ring.length-2?[181,85]:p)]}};assert.throws(()=>visibility([changed]),/binding differs/);
 });
+
+import {equalMergedPatchRows} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
+test('streamed authority union matches independent cell oracle for every pair of four-cell states',()=>{
+ const rows=cells=>{const runs=[];for(let x=0;x<cells.length;){const owner=cells[x];let end=x+1;while(end<cells.length&&cells[end]===owner)end++;if(owner)runs.push([x,end,owner]);x=end;}return [{y:0,runs}];};
+ const decode=n=>Array.from({length:4},()=>{const value=n%3;n=Math.floor(n/3);return value;});
+ for(let a=0;a<81;a++)for(let b=0;b<81;b++){
+  const left=decode(a),right=decode(b),patches=[{rows:rows(left)},{rows:rows(right)}],conflict=left.some((owner,x)=>owner&&right[x]&&owner!==right[x]);
+  const actual=rows(left.map((owner,x)=>owner||right[x]));
+  if(conflict){let admitted=false;try{admitted=equalMergedPatchRows(actual,patches,4,2);}catch(error){assert.match(error.message,/reassigns/);}assert.equal(admitted,false);}
+  else{assert.equal(equalMergedPatchRows(actual,patches,4,2),true);assert.equal(equalMergedPatchRows([],patches,4,2),false);}
+ }
+});

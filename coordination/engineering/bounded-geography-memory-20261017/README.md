@@ -80,3 +80,31 @@ Git nonzero exit after exact bytes, encoded/decoded corruption, source failure,
 ENOSPC, cancellation, closed stores, complete row consumption and private-state
 custody. Independent scaling uses fresh processes and disk-backed scratch; process
 RSS excludes filesystem page cache, and cgroup-wide accounting was unavailable.
+
+## Full actual trusted joint route
+
+Frozen code `20fec608099fa89505ad1da4355ae73561a27192` also completed the real
+accepted-checkpoint route, baseline `2223d85bbe8b18585c221cc1329d115e8e774a42`
+to authored candidate `0db52cf5a1b7c06a1b27989ec044face48c65286`, using the existing
+Greenland accepted archive. The corresponding hosted successful run 39006904251
+used combined tree `412a3718ed62be75ddf55897a7768e66042c6c75`. Their exact complete
+candidate ledger/patch/registry/manifest canonical bindings and selectors match;
+so do status, all losses, all 2,507 component witnesses and complete native row
+scope. `actual-joint-summary.json` records these identities and measured phases.
+
+The complete job peaked at **1,398,912 KiB RSS**. This is not comparable as a
+reduction or regression to the isolated native arithmetic's 1,100,084 KiB old
+measurement. It confirms substantial remaining parsed qualification/output
+retention and motivates the continuing JSON-backed interface work in #2396.
+The actual manifest bounds live native spill at 6,291,632 bytes (table + largest
+run container); this bound was derived, not sampled as a whole-job disk high-water.
+Scratch was empty after completion. The complete resulting checkpoint occupied
+about 8.1 MiB separately. No scientific producer or cold fallback was invoked.
+
+Reproduction uses the committed `selected-joint-entry.mjs` with six positional
+arguments: the trusted managed checkout, its exact committed HEAD, baseline,
+candidate, a fresh output directory and the actual parent Python runtime. Use
+normal authorized GitHub authentication for the accepted receipt; unset Node
+injection variables as required by the entry. The entire output was compared to
+the retained hosted `selected_native_report` and archived `derived-facts.json`.
+This local result is not a new hosted acceptance or publication authorization.
