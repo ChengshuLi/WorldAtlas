@@ -16,24 +16,87 @@ J = 'coordination/engineering/japan-native-repair-20261017/'
 RH = 'ec8dd6711677fb77586441bbd5ef2d34488df2b6'
 AH = '86b089e2b82a2e85264c96b11188854f2d1bce4a'
 JH = 'c76c45be06853204183bad2b858081ef37bd8d40'
-MAX_FILE = 64 * 1024**2
-MAX_TOTAL = 256 * 1024**2
-inputs = {}
-def raw(commit, name):
-    assert re.fullmatch('[a-f0-9]{40}', commit)
-    assert not name.startswith('/') and all(p not in ('', '.', '..') for p in name.split('/'))
-    row = subprocess.check_output(['git', '-c', 'protocol.allow=never', '-C', W, 'ls-tree', '-z', commit, '--', name]).rstrip(b'\0')
-    meta, actual_name = row.split(b'\t'); mode, kind, oid = meta.decode().split()
-    assert actual_name.decode() == name and mode == '100644' and kind == 'blob'
-    size = int(subprocess.check_output(['git', '-c', 'protocol.allow=never', '-C', W, 'cat-file', '-s', oid]))
-    assert 0 <= size <= MAX_FILE
-    key = commit + ':' + name
-    assert sum(x['bytes'] for x in inputs.values()) + (size if key not in inputs else 0) <= MAX_TOTAL
-    body = subprocess.check_output(['git', '-c', 'protocol.allow=never', '-C', W, 'cat-file', 'blob', oid])
-    assert len(body) == size and hashlib.sha1(('blob '+str(size)+'\0').encode()+body).hexdigest() == oid
-    desc = dict(commit=commit, path=name, mode=mode, git_blob_oid=oid, bytes=size, sha256=hashlib.sha256(body).hexdigest())
-    assert key not in inputs or inputs[key] == desc
-    inputs[key] = desc
+# This fixed finite job's complete read closure was observed from the original
+# immutable plan, then declared explicitly before reading any scientific body.
+# Fresh candidate/base aliases bind exact caller tree entries; producer operands
+# retain their actual literal commits. No file-size or dataset-size cap exists.
+PLANNED_INPUTS = [
+    (BASE, 'data/ownership-selection.json'),
+    (BASE, 'coordination/engineering/greenland-repair-delivery-20261017/ownership-selection-greenland-current.json'),
+    ('c8a5133bc78923b8ca78c6feeb992b87ceaa8c17', 'coordination/engineering/greenland-repair-delivery-20261017/composition-current-001/patch.json'),
+    ('c8a5133bc78923b8ca78c6feeb992b87ceaa8c17', 'coordination/engineering/greenland-repair-delivery-20261017/composition-current-001/selected-ledger.json'),
+    ('c8a5133bc78923b8ca78c6feeb992b87ceaa8c17', 'coordination/engineering/greenland-repair-delivery-20261017/composition-current-001/authority-registry.json'),
+    ('ec8dd6711677fb77586441bbd5ef2d34488df2b6', 'coordination/engineering/russia-repair-delivery-20261017/config/compose.json'),
+    ('86b089e2b82a2e85264c96b11188854f2d1bce4a', 'coordination/engineering/angola-repair-delivery-20261017/config/conservative-authority-quartet.json'),
+    ('c76c45be06853204183bad2b858081ef37bd8d40', 'coordination/engineering/japan-native-repair-20261017/handoff/native-authority-quartet.json'),
+    (HEAD, 'coordination/engineering/russia-angola-japan-delivery-20261017/config/compose.json'),
+    ('ec8dd6711677fb77586441bbd5ef2d34488df2b6', 'coordination/engineering/russia-repair-delivery-20261017/source-stage/native-patch.json'),
+    ('44b0b0d71e853ad0bebca4fffdd26b74c0a92e0c', 'coordination/engineering/russia-repair-delivery-20261017/native-partition-preaccept-001/supported-native-patch.json'),
+    ('ec8dd6711677fb77586441bbd5ef2d34488df2b6', 'coordination/engineering/russia-repair-delivery-20261017/native-partition-preaccept-001/held-native-patch.json'),
+    ('ec8dd6711677fb77586441bbd5ef2d34488df2b6', 'coordination/engineering/russia-repair-delivery-20261017/evidence-quality.json'),
+    ('d3c74d563932b99deb695c5fff80a6e4dfb015a5', 'coordination/engineering/russia-repair-delivery-20261017/native-authority-001/constructor-result.json'),
+    ('d3c74d563932b99deb695c5fff80a6e4dfb015a5', 'coordination/engineering/russia-repair-delivery-20261017/native-authority-001/original-rule-preimage.json'),
+    ('d3c74d563932b99deb695c5fff80a6e4dfb015a5', 'coordination/engineering/russia-repair-delivery-20261017/native-authority-001/authority-binding.json'),
+    ('86b089e2b82a2e85264c96b11188854f2d1bce4a', 'coordination/engineering/angola-repair-delivery-20261017/source-stage/native-patch.json'),
+    ('a5e0e64e0b4c843f3821de13b46d7ad85cf3c265', 'coordination/engineering/angola-repair-delivery-20261017/conservative-002/native-patch.json'),
+    ('86b089e2b82a2e85264c96b11188854f2d1bce4a', 'coordination/engineering/angola-repair-delivery-20261017/conservative-002/held-native-rows.json'),
+    ('86b089e2b82a2e85264c96b11188854f2d1bce4a', 'coordination/engineering/angola-repair-delivery-20261017/evidence-quality.json'),
+    ('49e6aa8a90a15f692c4309ac2de2b62357bf41f6', 'coordination/engineering/angola-repair-delivery-20261017/native-authority-002/constructor-result.json'),
+    ('49e6aa8a90a15f692c4309ac2de2b62357bf41f6', 'coordination/engineering/angola-repair-delivery-20261017/native-authority-002/original-rule-preimage.json'),
+    ('49e6aa8a90a15f692c4309ac2de2b62357bf41f6', 'coordination/engineering/angola-repair-delivery-20261017/native-authority-002/authority-binding.json'),
+    ('c76c45be06853204183bad2b858081ef37bd8d40', 'coordination/engineering/japan-native-repair-20261017/source-stage/native-patch.json'),
+    ('def4f95468aec4ede25beba6037ea7207e458622', 'coordination/engineering/japan-native-repair-20261017/source-stage/native-patch.json'),
+    ('c76c45be06853204183bad2b858081ef37bd8d40', 'coordination/engineering/japan-native-repair-20261017/evidence-quality.json'),
+    ('f6d7786d67a8b0ce76a525f63a055332f2e024b1', 'coordination/engineering/japan-native-repair-20261017/native-authority-001/constructor-result.json'),
+    ('f6d7786d67a8b0ce76a525f63a055332f2e024b1', 'coordination/engineering/japan-native-repair-20261017/native-authority-001/original-rule-preimage.json'),
+    ('f6d7786d67a8b0ce76a525f63a055332f2e024b1', 'coordination/engineering/japan-native-repair-20261017/native-authority-001/authority-binding.json'),
+]
+if MODE == 'final':
+    PLANNED_INPUTS += [(HEAD,P+p) for p in ('composition-001/patch.json','composition-001/selected-ledger.json','composition-001/authority-registry.json')]
+    PLANNED_INPUTS += [(HEAD,p) for p in ('data/ownership-selection.json','.github/package-inputs.json','data/selected-checkpoint.json')]
+    PLANNED_INPUTS += [(BASE,'.github/package-inputs.json'),(RH,'data/selected-checkpoint.json')]
+
+def tree_descriptor(commit,name):
+    assert re.fullmatch('[a-f0-9]{40}',commit)
+    assert not name.startswith('/') and all(p not in ('','.','..') for p in name.split('/'))
+    row=subprocess.check_output(['git','-c','protocol.allow=never','-C',W,'ls-tree','-z',commit,'--',name]).rstrip(b'\0')
+    meta,actual_name=row.split(b'\t');mode,kind,oid=meta.decode().split()
+    assert actual_name.decode()==name and mode=='100644' and kind=='blob'
+    size=int(subprocess.check_output(['git','-c','protocol.allow=never','-C',W,'cat-file','-s',oid]))
+    assert size>=0
+    return dict(commit=commit,path=name,mode=mode,git_blob_oid=oid,bytes=size)
+
+planned={c+':'+p:tree_descriptor(c,p) for c,p in PLANNED_INPUTS}
+planned_total=sum(x['bytes'] for x in planned.values());largest=max(x['bytes'] for x in planned.values())
+# Cooperative memory admission, not a scientific/data cap: immutable whole-byte
+# totals plus an explicit JSON/interval workspace estimate are compared with the
+# actual currently available memory. Peak process RSS is measured after the proof.
+import resource
+meminfo=dict(line.split(':',1) for line in pathlib.Path('/proc/meminfo').read_text().splitlines())
+available=int(meminfo['MemAvailable'].strip().split()[0])*1024
+cg=pathlib.Path('/sys/fs/cgroup')
+if (cg/'memory.max').exists() and (cg/'memory.current').exists():
+    cap=(cg/'memory.max').read_text().strip()
+    if cap!='max':available=min(available,max(0,int(cap)-int((cg/'memory.current').read_text())))
+initial_rss=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*1024
+estimated_workspace=planned_total*8+largest*4+initial_rss
+assert estimated_workspace<=available, 'Actual available memory does not admit the measured finite input plan and estimated interval workspace'
+print(json.dumps(dict(memory_admission='cooperative-measured-input-plan',planned_input_files=len(planned),planned_encoded_bytes=planned_total,largest_file_bytes=largest,estimated_workspace_bytes=estimated_workspace,available_memory_bytes=available)),flush=True)
+inputs={}
+def raw(commit,name):
+    key=commit+':'+name
+    assert key in planned,'Undeclared scientific input'
+    desc=planned[key]
+    assert tree_descriptor(commit,name)==desc,'Immutable input tree changed'
+    # Read exactly the authenticated immutable object size plus one overflow byte.
+    with subprocess.Popen(['git','-c','protocol.allow=never','-C',W,'cat-file','blob',desc['git_blob_oid']],stdout=subprocess.PIPE) as process:
+        body=process.stdout.read(desc['bytes']+1)
+        assert len(body)==desc['bytes'] and not process.stdout.read(1)
+        assert process.wait()==0
+    assert hashlib.sha1(('blob '+str(len(body))+'\0').encode()+body).hexdigest()==desc['git_blob_oid']
+    actual={**desc,'sha256':hashlib.sha256(body).hexdigest()}
+    assert key not in inputs or inputs[key]==actual
+    inputs[key]=actual
     return body
 
 def data(commit, name):
@@ -132,6 +195,10 @@ if MODE == 'final':
         literal_prior_rows_preserved=True,literal_prior_authorities_preserved=True,literal_prior_held_rows_preserved=True,
         nonadditive_selector_unchanged=True,package_declaration_prefix_preserved=True,authenticated_greenland_locator_preserved=True)
 report['inputs'] = list(inputs.values())
-report['bounded_input_bytes'] = sum(d['bytes'] for d in inputs.values())
+assert set(inputs)==set(planned), 'Planned input closure was not fully consumed'
+report['measured_input_bytes'] = sum(d['bytes'] for d in inputs.values())
+report['planned_input_files'] = len(planned)
+report['largest_input_bytes'] = largest
 with output.open('x') as f:json.dump(report,f,sort_keys=True,separators=(',',':'));f.write('\n')
 print(json.dumps({k:v for k,v in report.items() if k not in ('packages','inputs')}))
+print(json.dumps(dict(observed_process_peak_rss_bytes=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*1024)))
