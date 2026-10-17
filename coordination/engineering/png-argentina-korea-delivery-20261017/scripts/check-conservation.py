@@ -33,13 +33,14 @@ _,scope=pin(HEAD,P+'source-native-inputs.json')
 _,config=pin(HEAD,P+'config/compose.json')
 assert config['selector']['commit']==BASE
 s,old=selected(BASE);oldpatch=auth(old['logical_asset_map']['patch']);prior=rows(oldpatch);assert normalize(prior)[1]==5800532
-allq=[];packages=[]
+allq=[];packages=[];original_union=rows(oldpatch)
 for package in scope['packages']:
  qs=package['quartets'];allq+=qs;own=collections.defaultdict(list)
  for q in qs:
   for role in q:auth(q[role])
   for y,rr in rows(auth(q['native_patch'])).items():own[y]+=rr
  original=rows(auth(package['original_patch']))
+ for y,rr in original.items():original_union[y]+=rr
  keys=lambda d:{(y,x,o) for y,rr in d.items() for a,b,o in rr for x in range(a,b)}
  ok,sk=keys(original),keys(own);assert sk<=ok;hk=ok-sk
  if package['literal_holds']:
@@ -50,12 +51,14 @@ for package in scope['packages']:
  packages.append(dict(country=package['country'],original_cells=len(ok),supported_cells=len(sk),held_cells=len(hk),original_owners=len(oc),supported_owners=len(sc),wholly_held_owners=len(set(oc)-set(sc)),per_owner=[dict(owner=o,original=oc[o],supported=sc[o],held=hc[o]) for o in sorted(oc)]))
  for y,rr in own.items():prior[y]+=rr
 assert allq==config['authorities']
+assert normalize(original_union)[1]==5917136
+assert auth(config['selector'])==s
 _,patch=pin(HEAD,P+'composition-001/patch.json');assert normalize(rows(patch))==normalize(prior);assert normalize(prior)[1]==5910911
 _,ledger=pin(HEAD,P+'composition-001/selected-ledger.json');_,registry=pin(HEAD,P+'composition-001/authority-registry.json');oldledger=auth(old['logical_asset_map']['ledger']);oldreg=auth(old['authority_registry']);canon=lambda v:json.dumps(v,sort_keys=True,separators=(',',':'))
 for before,after in [(oldledger['rows'],ledger['rows']),(oldreg['entries'],registry['entries'])]:assert not(collections.Counter(map(canon,before))-collections.Counter(map(canon,after)))
 heldrows=lambda rr:[r for r in rr if r.get('disposition') not in ('assigned','zero-cell')]
 assert collections.Counter(map(canon,heldrows(oldledger['rows'])))==collections.Counter(map(canon,heldrows(ledger['rows'])))
-report=dict(kind='actual-native-and-original-hold-conservation',baseline_commit=BASE,candidate_commit=HEAD,packages=packages,original_cells=116604,new_supported_cells=110379,new_held_cells=6225,prior_native_cells=5800532,composed_native_cells=5910911,removed_cells=0,reassigned_cells=0,prior_ledger_rows=len(oldledger['rows']),composed_ledger_rows=len(ledger['rows']),prior_authorities=len(oldreg['entries']),composed_authorities=len(registry['entries']),prior_held_rows=len(heldrows(oldledger['rows'])),composed_held_rows=len(heldrows(ledger['rows'])),literal_prior_rows_authorities_holds_preserved=True,literal_reviewed_quartets_preserved=True,limits=['Immutable native/accounting evidence; no scientific producer replay. Current selected-owner-zero and actual emitted-consumer acceptance remain separate mandatory gates.','PNG and Argentina original holds and all whole-source limits remain. Korea alone is eligible for original source-relative package completion after final acceptance.'])
+report=dict(kind='actual-native-and-original-hold-conservation',baseline_commit=BASE,candidate_commit=HEAD,packages=packages,original_cells=116604,new_supported_cells=110379,new_held_cells=6225,prior_native_cells=5800532,composed_native_cells=5910911,removed_cells=0,reassigned_cells=0,prior_ledger_rows=len(oldledger['rows']),composed_ledger_rows=len(ledger['rows']),prior_authorities=len(oldreg['entries']),composed_authorities=len(registry['entries']),prior_held_rows=len(heldrows(oldledger['rows'])),composed_held_rows=len(heldrows(ledger['rows'])),literal_prior_rows_authorities_holds_preserved=True,literal_reviewed_quartets_preserved=True,complete_original_sets_disjoint_from_accepted_patch=True,limits=['Immutable native/accounting evidence; no scientific producer replay. Current selected-owner-zero and actual emitted-consumer acceptance remain separate mandatory gates.','PNG and Argentina original holds and all whole-source limits remain. Korea alone is eligible for original source-relative package completion after final acceptance.'])
 try:
  t,new=selected(HEAD)
  if t!=s:
