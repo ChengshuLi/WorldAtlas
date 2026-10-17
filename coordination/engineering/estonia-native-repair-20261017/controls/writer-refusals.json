@@ -1,0 +1,159 @@
+{
+  "experiments": [
+    {
+      "writer": "screen-original-scope.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/estonia-native-repair-20261017/method/screen-original-scope.py\", line 3, in <module>\n    W=pathlib.Path(sys.argv[1]).absolute();H=sys.argv[2];D=pathlib.Path(sys.argv[3]).absolute();assert len(H)==40 and D.parent.is_dir() and not D.exists() and all(not p.is_symlink() for p in (D,*D.parents));S='b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea';Q='coordination/engineering/global-current-cell-work-queue-20261014/';K='gb-EST-ADM2--repair-evaluation';pins=[];env={**os.environ,'GIT_NO_LAZY_FETCH':'1','GIT_NO_REPLACE_OBJECTS':'1'};sha=lambda b:hashlib.sha256(b).hexdigest()\n                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "screen-original-scope.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/estonia-native-repair-20261017/method/screen-original-scope.py\", line 3, in <module>\n    W=pathlib.Path(sys.argv[1]).absolute();H=sys.argv[2];D=pathlib.Path(sys.argv[3]).absolute();assert len(H)==40 and D.parent.is_dir() and not D.exists() and all(not p.is_symlink() for p in (D,*D.parents));S='b3914bbdd2b6fdcb5e4ae7c860494425fa2c27ea';Q='coordination/engineering/global-current-cell-work-queue-20261014/';K='gb-EST-ADM2--repair-evaluation';pins=[];env={**os.environ,'GIT_NO_LAZY_FETCH':'1','GIT_NO_REPLACE_OBJECTS':'1'};sha=lambda b:hashlib.sha256(b).hexdigest()\n                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "prepare-stage.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/estonia-native-repair-20261017/method/prepare-stage.py\", line 12, in <module>\n    assert W.is_dir() and O.parent.is_dir() and not O.exists()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "prepare-stage.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/estonia-native-repair-20261017/method/prepare-stage.py\", line 13, in <module>\n    assert all(not p.is_symlink() for root in (W,O) for p in (root,*root.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "check-historical.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/estonia-native-repair-20261017/method/check-historical.py\", line 10, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "check-historical.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/estonia-native-repair-20261017/method/check-historical.py\", line 10, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "verify-complete-context.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/estonia-native-repair-20261017/method/verify-complete-context.py\", line 8, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "verify-complete-context.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/estonia-native-repair-20261017/method/verify-complete-context.py\", line 8, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "preserve-interpretation.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/estonia-native-repair-20261017/method/preserve-interpretation.py\", line 6, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "preserve-interpretation.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/estonia-native-repair-20261017/method/preserve-interpretation.py\", line 6, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "prepare-native-evidence.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/estonia-native-repair-20261017/method/prepare-native-evidence.py\", line 10, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "prepare-native-evidence.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/estonia-native-repair-20261017/method/prepare-native-evidence.py\", line 10, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "check-source-fitness.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/estonia-native-repair-20261017/method/check-source-fitness.py\", line 8, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "check-source-fitness.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/estonia-native-repair-20261017/method/check-source-fitness.py\", line 8, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "verify-native-preparation.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/estonia-native-repair-20261017/method/verify-native-preparation.py\", line 8, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "verify-native-preparation.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/estonia-native-repair-20261017/method/verify-native-preparation.py\", line 8, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "check-accounting.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/estonia-native-repair-20261017/method/check-accounting.py\", line 7, in <module>\n    assert len(H)==40 and all(c in '0123456789abcdef' for c in H) and O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "check-accounting.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/estonia-native-repair-20261017/method/check-accounting.py\", line 7, in <module>\n    assert len(H)==40 and all(c in '0123456789abcdef' for c in H) and O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  ],
+  "method_files": [
+    {
+      "path": "coordination/engineering/estonia-native-repair-20261017/method/check-accounting.py",
+      "bytes": 12209,
+      "sha256": "12d2e5d13aee87e4f11969bf30bc9941617be2825eddd080e9435721d94254ac"
+    },
+    {
+      "path": "coordination/engineering/estonia-native-repair-20261017/method/check-historical.py",
+      "bytes": 7291,
+      "sha256": "1ad2f3f11ec59feb383afb3f2ac69015e3e6608e37e0a1e9b3f13dc171581d11"
+    },
+    {
+      "path": "coordination/engineering/estonia-native-repair-20261017/method/check-source-fitness.py",
+      "bytes": 10347,
+      "sha256": "8a3985dda864434962dac0ccd11f3d54aaa8d9b5722d2badeb4d5ecf8918e6e5"
+    },
+    {
+      "path": "coordination/engineering/estonia-native-repair-20261017/method/prepare-native-evidence.py",
+      "bytes": 9081,
+      "sha256": "f53d6ead42ee53cedeef762425f014616bac3fc04b7230e800980bc1849d1287"
+    },
+    {
+      "path": "coordination/engineering/estonia-native-repair-20261017/method/prepare-stage.py",
+      "bytes": 15901,
+      "sha256": "3b040f87276b2b44a56f33ee7b1aa8f3774aad2b5deeee76d504cccd637f7253"
+    },
+    {
+      "path": "coordination/engineering/estonia-native-repair-20261017/method/preserve-interpretation.py",
+      "bytes": 7239,
+      "sha256": "51dcdd6154d40a5b62923358df6541b3b5b3a5a264e47fdaa82e763550d81375"
+    },
+    {
+      "path": "coordination/engineering/estonia-native-repair-20261017/method/screen-original-scope.py",
+      "bytes": 7843,
+      "sha256": "79bd053c986675ce75ee90658c4f9bb30c521e534bf1579744a40f2d1e75c976"
+    },
+    {
+      "path": "coordination/engineering/estonia-native-repair-20261017/method/verify-complete-context.py",
+      "bytes": 7767,
+      "sha256": "76f907ebf61928ef4741bc3d407b0d62f3ae8c9a06863702333dbe4bdb0796b9"
+    },
+    {
+      "path": "coordination/engineering/estonia-native-repair-20261017/method/verify-native-preparation.py",
+      "bytes": 7470,
+      "sha256": "16a99741b7348614bc0917743a3843040bdca0c4567c1f6cc6f093583aed591c"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "method_sha256": "16a99741b7348614bc0917743a3843040bdca0c4567c1f6cc6f093583aed591c",
+  "experiments": [
+    {
+      "case": "deleted-retained-negative",
+      "base_commit": "7dfade05bceea9b6aec3bb647f59c9d597fa8ae8",
+      "mutant_commit": "3d396030d3d96a90c5f7822bcf608cd47425945d",
+      "coherent_config_and_preparation_hashes_refreshed": true,
+      "exit_code": 1,
+      "no_output_created": true,
+      "elapsed_seconds": 4.542087862966582,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/estonia-native-repair-20261017/method/verify-native-preparation.py\", line 46, in <module>\n    assert keep==row['retained_whole_negative_ordinals'] and omit==row['geometry_disjoint_whole_negative_ordinals'] and target['territorial_exclusions']==[negative[i]['geometry'] for i in keep];retained+=len(keep);omitted+=len(omit);rows.append({'source_id':ident,'owner':owner,'original_cells':len(actual),'retained_negative_ordinals':keep,'disjoint_negative_ordinals':omit})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "case": "changed-base-geometry",
+      "base_commit": "7dfade05bceea9b6aec3bb647f59c9d597fa8ae8",
+      "mutant_commit": "b49338462e4c0fd108d7ae01922e0e5abfa17984",
+      "coherent_config_and_preparation_hashes_refreshed": true,
+      "exit_code": 1,
+      "no_output_created": true,
+      "elapsed_seconds": 4.860793741012458,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/estonia-native-repair-20261017/method/verify-native-preparation.py\", line 41, in <module>\n    ident=stage['target'];owner=checks[ident]['pixelIndex'];assert target['id']==row['source_id']==ident and target['target_id']==row['target_id']==stage['selected']['id'] and target['pixelIndex']==row['pixelIndex']==owner and target['base_geometry']==stage['selected']['geometry']\n                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "case": "empty-equivalence-proof",
+      "base_commit": "7dfade05bceea9b6aec3bb647f59c9d597fa8ae8",
+      "mutant_commit": "08ef4101f0196a02dd3de9e55f0b11ff647d037d",
+      "coherent_config_and_preparation_hashes_refreshed": true,
+      "exit_code": 1,
+      "no_output_created": true,
+      "elapsed_seconds": 1.5125250020064414,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/estonia-native-repair-20261017/method/verify-native-preparation.py\", line 24, in <module>\n    assert evidence['targets']==config['source_evidence']['targets'];targets=evidence['targets'];assert len(targets)==len(stages)==len(proof['targets'])==len({t['id'] for t in targets})==90\n                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "case": "changed-owner",
+      "base_commit": "7dfade05bceea9b6aec3bb647f59c9d597fa8ae8",
+      "mutant_commit": "db812f96b29df7df565bd67df7fd7a8cf014705b",
+      "coherent_config_and_preparation_hashes_refreshed": true,
+      "exit_code": 1,
+      "no_output_created": true,
+      "elapsed_seconds": 4.722448866988998,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/estonia-native-repair-20261017/method/verify-native-preparation.py\", line 41, in <module>\n    ident=stage['target'];owner=checks[ident]['pixelIndex'];assert target['id']==row['source_id']==ident and target['target_id']==row['target_id']==stage['selected']['id'] and target['pixelIndex']==row['pixelIndex']==owner and target['base_geometry']==stage['selected']['geometry']\n                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  ]
+}
