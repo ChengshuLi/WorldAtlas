@@ -40,10 +40,12 @@ export function validateLanePaths(branch,paths,{ownedPaths}={}){
 export function validateIssuePRBody(body){
  if(typeof body!=='string')throw Error('Supply the PR body');
  const links=body.split('\n').filter(line=>/^\s*(?:refs?|close[sd]?|fix(?:e[sd])?|resolve[sd]?)\b/i.test(line));
- if(links.length!==1||!/^(Refs|Closes) #[1-9]\d*$/.test(links[0]))throw Error('One issue per PR: use exactly one Refs #<issue-number> for partial work or Closes #<issue-number> for final completion');
+ const binding=links.length===1?/^(Refs|Closes) #([1-9]\d*)(?=$|[^\w#])([^.!;]*)/.exec(links[0]):null;
+ // Other issue mentions may be context after a sentence/clause ends, not a binding list.
+ if(!binding||/#\d+/.test(binding[3])||[...body.matchAll(/\brefs?\s+#[1-9]\d*/gi)].length!==(binding[1]==='Refs'?1:0))throw Error('One issue per PR: use exactly one Refs #<issue-number> for partial work or Closes #<issue-number> for final completion');
  const automaticClosures=[...body.matchAll(/\b(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?)\s+#[1-9]\d*/gi)];
- if(automaticClosures.length!==(links[0].startsWith('Closes')?1:0))throw Error('Additional automatic issue closures are not allowed anywhere in the PR body');
- return {github_issue:Number(links[0].split('#')[1]),issue_action:links[0].startsWith('Closes')?'close':'reference'};
+ if(automaticClosures.length!==(binding[1]==='Closes'?1:0))throw Error('Additional automatic issue closures are not allowed anywhere in the PR body');
+ return {github_issue:Number(binding[2]),issue_action:binding[1]==='Closes'?'close':'reference'};
 }
 export function validateIssueMetadata(branch,issue){
  const {lane}=laneForBranch(branch),expected={engineering:'type:engineering',research:'type:history-research',geography:'type:geography'}[lane];
