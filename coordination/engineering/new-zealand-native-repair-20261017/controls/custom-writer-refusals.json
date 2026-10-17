@@ -1,0 +1,108 @@
+{
+  "experiments": [
+    {
+      "writer": "prepare-stage.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/new-zealand-native-repair-20261017/method/prepare-stage.py\", line 12, in <module>\n    assert W.is_dir() and O.parent.is_dir() and not O.exists()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "prepare-stage.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/new-zealand-native-repair-20261017/method/prepare-stage.py\", line 13, in <module>\n    assert all(not p.is_symlink() for root in (W,O) for p in (root,*root.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "check-historical.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/new-zealand-native-repair-20261017/method/check-historical.py\", line 10, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "check-historical.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/new-zealand-native-repair-20261017/method/check-historical.py\", line 10, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "verify-complete-context.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/new-zealand-native-repair-20261017/method/verify-complete-context.py\", line 8, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "verify-complete-context.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/new-zealand-native-repair-20261017/method/verify-complete-context.py\", line 8, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "check-prior-islands.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/new-zealand-native-repair-20261017/method/check-prior-islands.py\", line 10, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "check-prior-islands.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/new-zealand-native-repair-20261017/method/check-prior-islands.py\", line 10, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "preserve-interpretation.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/new-zealand-native-repair-20261017/method/preserve-interpretation.py\", line 6, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "preserve-interpretation.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/new-zealand-native-repair-20261017/method/preserve-interpretation.py\", line 6, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "check-accounting.py",
+      "case": "occupied",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/new-zealand-native-repair-20261017/method/check-accounting.py\", line 7, in <module>\n    assert len(H)==40 and all(c in '0123456789abcdef' for c in H) and O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "writer": "check-accounting.py",
+      "case": "dangling-symlink",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/56c856b8ef8d44c198a850dcd18edc9396063a96bbea75b128504cee2a35ef68/work/coordination/engineering/new-zealand-native-repair-20261017/method/check-accounting.py\", line 7, in <module>\n    assert len(H)==40 and all(c in '0123456789abcdef' for c in H) and O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  ],
+  "method_files": [
+    {
+      "path": "coordination/engineering/new-zealand-native-repair-20261017/method/check-accounting.py",
+      "bytes": 10270,
+      "sha256": "04aef43356fe597a6814614de6d3e5a4ab508fc8777bd3a7bcbf3bf78e8b8db1"
+    },
+    {
+      "path": "coordination/engineering/new-zealand-native-repair-20261017/method/check-historical.py",
+      "bytes": 7411,
+      "sha256": "06866fb22e0e79ec4d8d87b1ad0965193090e9b9ece780b4bb0b55d7a06d71fd"
+    },
+    {
+      "path": "coordination/engineering/new-zealand-native-repair-20261017/method/check-prior-islands.py",
+      "bytes": 7682,
+      "sha256": "8f8fa2e0166e5e5ef0441685db9575e690c1b15d4a8008b9b261484840fbc476"
+    },
+    {
+      "path": "coordination/engineering/new-zealand-native-repair-20261017/method/prepare-stage.py",
+      "bytes": 14431,
+      "sha256": "3ea49af470317aecdba11391b8bddd41237369e140e6883139e0cc6a2f01fcd1"
+    },
+    {
+      "path": "coordination/engineering/new-zealand-native-repair-20261017/method/preserve-interpretation.py",
+      "bytes": 7004,
+      "sha256": "5f15f5cf8244b45d7ceccb4bf964e06b490b617119ce2dd99a94314dc9a04c3a"
+    },
+    {
+      "path": "coordination/engineering/new-zealand-native-repair-20261017/method/verify-complete-context.py",
+      "bytes": 7752,
+      "sha256": "409dc6adfae91313baf90bb7b8002b12fd39ef142386c1dbc8563fa19b54f23d"
+    }
+  ]
+}
