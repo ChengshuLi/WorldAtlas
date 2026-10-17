@@ -716,9 +716,16 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         }
         if(evidence.source_membership!==undefined){
           const membership=evidence.source_membership;
-          needSelected(keys(membership,membership.cohort_inventory===undefined?['index','lineage','parts']:['cohort_inventory','index','lineage','parts'])&&Array.isArray(membership.parts)&&membership.parts.length>0,
+          needSelected(keys(membership,['index','lineage','parts',...(membership.cohort_inventory===undefined?[]:['cohort_inventory']),
+            ...(membership.negative_natural_earth===undefined?[]:['negative_natural_earth'])])&&Array.isArray(membership.parts)&&membership.parts.length>0,
             'missing accepted source membership roles');
           pin(membership.index);pin(membership.lineage);for(const part of membership.parts)pin(part);
+          if(membership.negative_natural_earth!==undefined){
+            const role=membership.negative_natural_earth;
+            needSelected(keys(role,['atoms','registry','source'])&&Array.isArray(role.atoms)&&role.atoms.length>0,
+              'missing negative Natural Earth roles');
+            pin(role.registry);pin(role.source);
+          }
           if(membership.cohort_inventory!==undefined){
             const inventory=membership.cohort_inventory;
             needSelected(keys(inventory,['index','parts'])&&Array.isArray(inventory.parts)&&inventory.parts.length>0,

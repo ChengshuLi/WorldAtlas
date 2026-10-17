@@ -824,11 +824,19 @@ export function packageProjection(config, reader, acceptedRegistry = null) {
       }
       if (evidence.source_membership !== undefined) {
         const membership = evidence.source_membership;
-        need(membership && same(Object.keys(membership).sort(), membership.cohort_inventory === undefined
-          ? ['index', 'lineage', 'parts'] : ['cohort_inventory', 'index', 'lineage', 'parts'])
+        need(membership && same(Object.keys(membership).sort(), ['index', 'lineage', 'parts',
+          ...(membership.cohort_inventory === undefined ? [] : ['cohort_inventory']),
+          ...(membership.negative_natural_earth === undefined ? [] : ['negative_natural_earth'])].sort())
           && Array.isArray(membership.parts) && membership.parts.length > 0, 'Missing accepted source membership roles');
         add(membership.index, 'source-target membership index'); add(membership.lineage, 'source-target membership lineage');
         for (const pin of membership.parts) add(pin, 'source-target membership part');
+        if (membership.negative_natural_earth !== undefined) {
+          const role = membership.negative_natural_earth;
+          need(role && same(Object.keys(role).sort(), ['atoms', 'registry', 'source'])
+            && Array.isArray(role.atoms) && role.atoms.length > 0, 'Missing negative Natural Earth roles');
+          add(role.registry, 'source-target negative Natural Earth registry');
+          add(role.source, 'source-target negative Natural Earth whole source');
+        }
         if (membership.cohort_inventory !== undefined) {
           const inventory = membership.cohort_inventory;
           need(inventory && same(Object.keys(inventory).sort(), ['index', 'parts'])
