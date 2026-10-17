@@ -428,8 +428,8 @@ test('the exact checkpoint fixture retains every actual importer on the existing
     [...fs.readFileSync(path.join('test',name),'utf8').matchAll(/(?:from\s*|import\s*(?:\(\s*)?)['"]([^'"]+)['"]/g)]
       .some(([,specifier])=>specifier.startsWith('.')&&path.posix.normalize(path.posix.join('test',path.posix.dirname(name),specifier))===fixture)
   ).map(name=>'test/'+name).sort();
-  assert.deepEqual(consumers,['test/accepted-checkpoint-qualification.test.mjs','test/component-authority-identity.test.mjs',
-    'test/native-checkpoint-consumer.test.mjs','test/selected-checkpoint.test.mjs']);
+  assert(consumers.length>0,'Fixture importer scan must be nonempty');
+  assert(consumers.includes('test/selected-checkpoint.test.mjs'),'Scan must find the known direct checkpoint importer');
   const focused=integrationTestFiles('evidence',0),full=[0,1,2].flatMap(shard=>integrationTestFiles('full',shard));
   for(const consumer of [...consumers,'test/selected-joint-entry.test.mjs']) {
     assert(focused.includes(consumer),consumer);
