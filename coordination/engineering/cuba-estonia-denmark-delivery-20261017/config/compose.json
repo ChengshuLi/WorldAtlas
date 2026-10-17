@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "selector": {
+    "commit": "0ae269650196956723d32b0c0e068f384b006b14",
+    "path": "data/ownership-selection.json",
+    "mode": "100644",
+    "git_blob_oid": "1772bf3e21e335cb3ba59ace48e16006379c65b0",
+    "bytes": 1844,
+    "sha256": "c9ac3734a69707bde70f3d41307123969b4b0bbb72cbfa758cdbe9aa774bc9cd"
+  },
+  "effective_release_id": "geography:cuba-estonia-denmark-supported-repairs-20261017",
+  "authorities": [
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/cuba-repair-delivery-20261017/native-authority-001/original-rule-preimage.json",
+        "commit": "ea3f3e19dfc216f2937e4e91fd69ab9ddf727637",
+        "mode": "100644",
+        "git_blob_oid": "e7320014247a4324db0a637d25b792af45afdbdb",
+        "bytes": 736,
+        "sha256": "d92e84527aa58fbddfc0c6aec41ef28d778f06a9d9c63b757d2d9a91ff464472"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/cuba-repair-delivery-20261017/native-authority-001/authority-binding.json",
+        "commit": "ea3f3e19dfc216f2937e4e91fd69ab9ddf727637",
+        "mode": "100644",
+        "git_blob_oid": "4ab94fe05deb4fe8da927861d7224598fdb68bf7",
+        "bytes": 739,
+        "sha256": "ee96843fc414e5beb261959f7b522606306296198d0613cc5bbdfbd2ed284ad1"
+      },
+      "ledger": {
+        "path": "coordination/engineering/cuba-repair-delivery-20261017/native-authority-001/constructor-result.json",
+        "commit": "ea3f3e19dfc216f2937e4e91fd69ab9ddf727637",
+        "mode": "100644",
+        "git_blob_oid": "324bbeb71408b68fa244b09ede7923f16733eb86",
+        "bytes": 423684,
+        "sha256": "190239c7bc59124573c6b287f5f7572e0930460db9e9402a9f3c31e8c2221eda"
+      },
+      "native_patch": {
+        "bytes": 212889,
+        "commit": "3ee18a039017b4f42a55eeba55c91236b5d655c7",
+        "git_blob_oid": "b468afc735b1ef332197e905033d79bf2fedeaf6",
+        "mode": "100644",
+        "path": "coordination/engineering/cuba-repair-delivery-20261017/native-config-001/native-requested-patch.json",
+        "sha256": "8963c112b4985c491cf8dcf527dc39f03c8a3d92c8257a70281048f805b3a559"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/estonia-native-repair-20261017/native-authority-001/original-rule-preimage.json",
+        "commit": "7a6bcd928b1747b0d0b72216f4bdde05d4dced69",
+        "mode": "100644",
+        "git_blob_oid": "3f8fd8199f2a7275c65bf636d48c7e9c4c44873f",
+        "bytes": 749,
+        "sha256": "24bd8b4b2b28eca3321d5b989154e30f6bad393d6a691637f5f59c013d5892cf"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/estonia-native-repair-20261017/native-authority-001/authority-binding.json",
+        "commit": "7a6bcd928b1747b0d0b72216f4bdde05d4dced69",
+        "mode": "100644",
+        "git_blob_oid": "9f6aabf792d0df982aed6359b75154673b4c4882",
+        "bytes": 752,
+        "sha256": "7188d2419741d820818d097c4a96afe32a9d948ad4858adb33d6ebb8e9eee6f5"
+      },
+      "ledger": {
+        "path": "coordination/engineering/estonia-native-repair-20261017/native-authority-001/constructor-result.json",
+        "commit": "7a6bcd928b1747b0d0b72216f4bdde05d4dced69",
+        "mode": "100644",
+        "git_blob_oid": "a5c41e5f8009780311f3fb087f1438d9d196211c",
+        "bytes": 375177,
+        "sha256": "23955c78f3d7c7e35034a8d57b2c032a15b8b640250e8f84053922371d716c9a"
+      },
+      "native_patch": {
+        "bytes": 214279,
+        "commit": "557f84269c836a2648cc6fa0503711dfd9a1903b",
+        "git_blob_oid": "398f70d26eabda9ccff616a0dfef61b2cc48f4ab",
+        "mode": "100644",
+        "path": "coordination/engineering/estonia-native-repair-20261017/qualified-native-inputs-001/native-patch.json",
+        "sha256": "fcbea313f00992c646fffadab9a77999fdad03cbe11cdca8c4fc96ced330b18e"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/denmark-repair-delivery-20261017/native-authority-001/original-rule-preimage.json",
+        "commit": "bb515d9f18207a9d7de3db603d5abbefc529f586",
+        "mode": "100644",
+        "git_blob_oid": "cb40ada084e11c33115cecdff8539531c4303863",
+        "bytes": 743,
+        "sha256": "f588108185db78ef5d9af0f72fcbf6653859a0df7bea2e8060783c07dc026cb0"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/denmark-repair-delivery-20261017/native-authority-001/authority-binding.json",
+        "commit": "bb515d9f18207a9d7de3db603d5abbefc529f586",
+        "mode": "100644",
+        "git_blob_oid": "8320c29a448a79d9cd79daa2bf9cd3f7f0331910",
+        "bytes": 746,
+        "sha256": "5ebe6fc9da118fbcab98c9e94af4b01c95ecad16502003c9b002ca7d26ac8148"
+      },
+      "ledger": {
+        "path": "coordination/engineering/denmark-repair-delivery-20261017/native-authority-001/constructor-result.json",
+        "commit": "bb515d9f18207a9d7de3db603d5abbefc529f586",
+        "mode": "100644",
+        "git_blob_oid": "3ff55e3ca4d7315dc30668b1c666a5ab29b59836",
+        "bytes": 374944,
+        "sha256": "87ee5ff68ebfaba8ab4daea18cd2336b1f99e29a69a80517cef76e8d86c60c04"
+      },
+      "native_patch": {
+        "bytes": 209915,
+        "commit": "822bacf332f428485dd8ee75d8cb5f8920b30f59",
+        "git_blob_oid": "5114bd7ef4924e26b79880111c40ec9e4ececee9",
+        "mode": "100644",
+        "path": "coordination/engineering/denmark-repair-delivery-20261017/native-config-001/native-requested-patch.json",
+        "sha256": "2372808997b6d30d701fa5e728bf1ed4dc668c8c31fefa3a37b6ebc719903766"
+      }
+    }
+  ]
+}
