@@ -1,0 +1,996 @@
+{
+  "products": [
+    {
+      "family": "gb:DZA:ADM1",
+      "features": 48,
+      "unique_native_ids": 48,
+      "coordinate_pairs_checked": 26216,
+      "nonfinite_or_out_of_range": 0,
+      "native_crs": {
+        "type": "name",
+        "properties": {
+          "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+      },
+      "all_package_atoms_present": null,
+      "atoms_covered": 0,
+      "properties_fields": [
+        "shapeGroup",
+        "shapeID",
+        "shapeISO",
+        "shapeName",
+        "shapeType"
+      ]
+    },
+    {
+      "family": "gb:DZA:ADM2",
+      "features": 1541,
+      "unique_native_ids": 1541,
+      "coordinate_pairs_checked": 116060,
+      "nonfinite_or_out_of_range": 0,
+      "native_crs": {
+        "type": "name",
+        "properties": {
+          "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+      },
+      "all_package_atoms_present": true,
+      "atoms_covered": 135,
+      "properties_fields": [
+        "shapeGroup",
+        "shapeID",
+        "shapeISO",
+        "shapeName",
+        "shapeType"
+      ]
+    }
+  ],
+  "owner_atom_contact_join": [
+    {
+      "owner_index": 16798,
+      "owner_id": "gb:DZA:ADM2:62766556B10046900779083",
+      "source_atom": "gb:DZA:ADM2:62766556B10046900779083",
+      "source_index": 22012,
+      "source_ordinal": 614
+    },
+    {
+      "owner_index": 16804,
+      "owner_id": "gb:DZA:ADM2:62766556B10141497634762",
+      "source_atom": "gb:DZA:ADM2:62766556B10141497634762",
+      "source_index": 22721,
+      "source_ordinal": 1323
+    },
+    {
+      "owner_index": 16827,
+      "owner_id": "gb:DZA:ADM2:62766556B10985097552427",
+      "source_atom": "gb:DZA:ADM2:62766556B10985097552427",
+      "source_index": 22299,
+      "source_ordinal": 901
+    },
+    {
+      "owner_index": 16839,
+      "owner_id": "gb:DZA:ADM2:62766556B11503982785465",
+      "source_atom": "gb:DZA:ADM2:62766556B11503982785465",
+      "source_index": 22383,
+      "source_ordinal": 985
+    },
+    {
+      "owner_index": 16842,
+      "owner_id": "gb:DZA:ADM2:62766556B11663121098498",
+      "source_atom": "gb:DZA:ADM2:62766556B11663121098498",
+      "source_index": 22387,
+      "source_ordinal": 989
+    },
+    {
+      "owner_index": 16844,
+      "owner_id": "gb:DZA:ADM2:62766556B11767738164301",
+      "source_atom": "gb:DZA:ADM2:62766556B11767738164301",
+      "source_index": 22906,
+      "source_ordinal": 1508
+    },
+    {
+      "owner_index": 16863,
+      "owner_id": "gb:DZA:ADM2:62766556B1284309563691",
+      "source_atom": "gb:DZA:ADM2:62766556B1284309563691",
+      "source_index": 21493,
+      "source_ordinal": 95
+    },
+    {
+      "owner_index": 16868,
+      "owner_id": "gb:DZA:ADM2:62766556B13068113348310",
+      "source_atom": "gb:DZA:ADM2:62766556B13068113348310",
+      "source_index": 22389,
+      "source_ordinal": 991
+    },
+    {
+      "owner_index": 16878,
+      "owner_id": "gb:DZA:ADM2:62766556B1378198519950",
+      "source_atom": "gb:DZA:ADM2:62766556B1378198519950",
+      "source_index": 21842,
+      "source_ordinal": 444
+    },
+    {
+      "owner_index": 16894,
+      "owner_id": "gb:DZA:ADM2:62766556B1507460041553",
+      "source_atom": "gb:DZA:ADM2:62766556B1507460041553",
+      "source_index": 22913,
+      "source_ordinal": 1515
+    },
+    {
+      "owner_index": 16895,
+      "owner_id": "gb:DZA:ADM2:62766556B15175350263565",
+      "source_atom": "gb:DZA:ADM2:62766556B15175350263565",
+      "source_index": 22319,
+      "source_ordinal": 921
+    },
+    {
+      "owner_index": 16904,
+      "owner_id": "gb:DZA:ADM2:62766556B15602495043405",
+      "source_atom": "gb:DZA:ADM2:62766556B15602495043405",
+      "source_index": 22305,
+      "source_ordinal": 907
+    },
+    {
+      "owner_index": 16925,
+      "owner_id": "gb:DZA:ADM2:62766556B16796573558489",
+      "source_atom": "gb:DZA:ADM2:62766556B16796573558489",
+      "source_index": 21481,
+      "source_ordinal": 83
+    },
+    {
+      "owner_index": 16926,
+      "owner_id": "gb:DZA:ADM2:62766556B16929607776651",
+      "source_atom": "gb:DZA:ADM2:62766556B16929607776651",
+      "source_index": 21496,
+      "source_ordinal": 98
+    },
+    {
+      "owner_index": 16941,
+      "owner_id": "gb:DZA:ADM2:62766556B17856589802561",
+      "source_atom": "gb:DZA:ADM2:62766556B17856589802561",
+      "source_index": 21895,
+      "source_ordinal": 497
+    },
+    {
+      "owner_index": 16963,
+      "owner_id": "gb:DZA:ADM2:62766556B19381665893302",
+      "source_atom": "gb:DZA:ADM2:62766556B19381665893302",
+      "source_index": 22018,
+      "source_ordinal": 620
+    },
+    {
+      "owner_index": 16967,
+      "owner_id": "gb:DZA:ADM2:62766556B19561679451797",
+      "source_atom": "gb:DZA:ADM2:62766556B19561679451797",
+      "source_index": 21483,
+      "source_ordinal": 85
+    },
+    {
+      "owner_index": 16978,
+      "owner_id": "gb:DZA:ADM2:62766556B20047078785905",
+      "source_atom": "gb:DZA:ADM2:62766556B20047078785905",
+      "source_index": 22315,
+      "source_ordinal": 917
+    },
+    {
+      "owner_index": 16999,
+      "owner_id": "gb:DZA:ADM2:62766556B21142080748891",
+      "source_atom": "gb:DZA:ADM2:62766556B21142080748891",
+      "source_index": 21994,
+      "source_ordinal": 596
+    },
+    {
+      "owner_index": 17002,
+      "owner_id": "gb:DZA:ADM2:62766556B2136195824961",
+      "source_atom": "gb:DZA:ADM2:62766556B2136195824961",
+      "source_index": 21419,
+      "source_ordinal": 21
+    },
+    {
+      "owner_index": 17003,
+      "owner_id": "gb:DZA:ADM2:62766556B21367170459683",
+      "source_atom": "gb:DZA:ADM2:62766556B21367170459683",
+      "source_index": 22701,
+      "source_ordinal": 1303
+    },
+    {
+      "owner_index": 17013,
+      "owner_id": "gb:DZA:ADM2:62766556B21934635736439",
+      "source_atom": "gb:DZA:ADM2:62766556B21934635736439",
+      "source_index": 22089,
+      "source_ordinal": 691
+    },
+    {
+      "owner_index": 17021,
+      "owner_id": "gb:DZA:ADM2:62766556B22578501246562",
+      "source_atom": "gb:DZA:ADM2:62766556B22578501246562",
+      "source_index": 22674,
+      "source_ordinal": 1276
+    },
+    {
+      "owner_index": 17027,
+      "owner_id": "gb:DZA:ADM2:62766556B22879930263421",
+      "source_atom": "gb:DZA:ADM2:62766556B22879930263421",
+      "source_index": 22895,
+      "source_ordinal": 1497
+    },
+    {
+      "owner_index": 17041,
+      "owner_id": "gb:DZA:ADM2:62766556B23460305557524",
+      "source_atom": "gb:DZA:ADM2:62766556B23460305557524",
+      "source_index": 22641,
+      "source_ordinal": 1243
+    },
+    {
+      "owner_index": 17045,
+      "owner_id": "gb:DZA:ADM2:62766556B23721693129971",
+      "source_atom": "gb:DZA:ADM2:62766556B23721693129971",
+      "source_index": 21484,
+      "source_ordinal": 86
+    },
+    {
+      "owner_index": 17049,
+      "owner_id": "gb:DZA:ADM2:62766556B23964678394278",
+      "source_atom": "gb:DZA:ADM2:62766556B23964678394278",
+      "source_index": 22657,
+      "source_ordinal": 1259
+    },
+    {
+      "owner_index": 17057,
+      "owner_id": "gb:DZA:ADM2:62766556B24498817748490",
+      "source_atom": "gb:DZA:ADM2:62766556B24498817748490",
+      "source_index": 22382,
+      "source_ordinal": 984
+    },
+    {
+      "owner_index": 17072,
+      "owner_id": "gb:DZA:ADM2:62766556B25457584432212",
+      "source_atom": "gb:DZA:ADM2:62766556B25457584432212",
+      "source_index": 22003,
+      "source_ordinal": 605
+    },
+    {
+      "owner_index": 17073,
+      "owner_id": "gb:DZA:ADM2:62766556B25465668984142",
+      "source_atom": "gb:DZA:ADM2:62766556B25465668984142",
+      "source_index": 21889,
+      "source_ordinal": 491
+    },
+    {
+      "owner_index": 17093,
+      "owner_id": "gb:DZA:ADM2:62766556B2659613025192",
+      "source_atom": "gb:DZA:ADM2:62766556B2659613025192",
+      "source_index": 21556,
+      "source_ordinal": 158
+    },
+    {
+      "owner_index": 17096,
+      "owner_id": "gb:DZA:ADM2:62766556B2675527202283",
+      "source_atom": "gb:DZA:ADM2:62766556B2675527202283",
+      "source_index": 21882,
+      "source_ordinal": 484
+    },
+    {
+      "owner_index": 17116,
+      "owner_id": "gb:DZA:ADM2:62766556B28162629006952",
+      "source_atom": "gb:DZA:ADM2:62766556B28162629006952",
+      "source_index": 22876,
+      "source_ordinal": 1478
+    },
+    {
+      "owner_index": 17126,
+      "owner_id": "gb:DZA:ADM2:62766556B28855926922793",
+      "source_atom": "gb:DZA:ADM2:62766556B28855926922793",
+      "source_index": 22916,
+      "source_ordinal": 1518
+    },
+    {
+      "owner_index": 17127,
+      "owner_id": "gb:DZA:ADM2:62766556B29077621259505",
+      "source_atom": "gb:DZA:ADM2:62766556B29077621259505",
+      "source_index": 22290,
+      "source_ordinal": 892
+    },
+    {
+      "owner_index": 17128,
+      "owner_id": "gb:DZA:ADM2:62766556B29286078714359",
+      "source_atom": "gb:DZA:ADM2:62766556B29286078714359",
+      "source_index": 22306,
+      "source_ordinal": 908
+    },
+    {
+      "owner_index": 17154,
+      "owner_id": "gb:DZA:ADM2:62766556B30970550157307",
+      "source_atom": "gb:DZA:ADM2:62766556B30970550157307",
+      "source_index": 22839,
+      "source_ordinal": 1441
+    },
+    {
+      "owner_index": 17158,
+      "owner_id": "gb:DZA:ADM2:62766556B3125034513379",
+      "source_atom": "gb:DZA:ADM2:62766556B3125034513379",
+      "source_index": 21506,
+      "source_ordinal": 108
+    },
+    {
+      "owner_index": 17159,
+      "owner_id": "gb:DZA:ADM2:62766556B3135524799170",
+      "source_atom": "gb:DZA:ADM2:62766556B3135524799170",
+      "source_index": 22708,
+      "source_ordinal": 1310
+    },
+    {
+      "owner_index": 17165,
+      "owner_id": "gb:DZA:ADM2:62766556B31755418045283",
+      "source_atom": "gb:DZA:ADM2:62766556B31755418045283",
+      "source_index": 21841,
+      "source_ordinal": 443
+    },
+    {
+      "owner_index": 17166,
+      "owner_id": "gb:DZA:ADM2:62766556B31805768685662",
+      "source_atom": "gb:DZA:ADM2:62766556B31805768685662",
+      "source_index": 21537,
+      "source_ordinal": 139
+    },
+    {
+      "owner_index": 17167,
+      "owner_id": "gb:DZA:ADM2:62766556B32023005978194",
+      "source_atom": "gb:DZA:ADM2:62766556B32023005978194",
+      "source_index": 22087,
+      "source_ordinal": 689
+    },
+    {
+      "owner_index": 17171,
+      "owner_id": "gb:DZA:ADM2:62766556B32286474357825",
+      "source_atom": "gb:DZA:ADM2:62766556B32286474357825",
+      "source_index": 22011,
+      "source_ordinal": 613
+    },
+    {
+      "owner_index": 17173,
+      "owner_id": "gb:DZA:ADM2:62766556B32462103945816",
+      "source_atom": "gb:DZA:ADM2:62766556B32462103945816",
+      "source_index": 21843,
+      "source_ordinal": 445
+    },
+    {
+      "owner_index": 17179,
+      "owner_id": "gb:DZA:ADM2:62766556B32649873949579",
+      "source_atom": "gb:DZA:ADM2:62766556B32649873949579",
+      "source_index": 22647,
+      "source_ordinal": 1249
+    },
+    {
+      "owner_index": 17185,
+      "owner_id": "gb:DZA:ADM2:62766556B33716754533311",
+      "source_atom": "gb:DZA:ADM2:62766556B33716754533311",
+      "source_index": 22651,
+      "source_ordinal": 1253
+    },
+    {
+      "owner_index": 17211,
+      "owner_id": "gb:DZA:ADM2:62766556B34846993929077",
+      "source_atom": "gb:DZA:ADM2:62766556B34846993929077",
+      "source_index": 22099,
+      "source_ordinal": 701
+    },
+    {
+      "owner_index": 17218,
+      "owner_id": "gb:DZA:ADM2:62766556B35160046519067",
+      "source_atom": "gb:DZA:ADM2:62766556B35160046519067",
+      "source_index": 22711,
+      "source_ordinal": 1313
+    },
+    {
+      "owner_index": 17233,
+      "owner_id": "gb:DZA:ADM2:62766556B36053902607727",
+      "source_atom": "gb:DZA:ADM2:62766556B36053902607727",
+      "source_index": 22796,
+      "source_ordinal": 1398
+    },
+    {
+      "owner_index": 17236,
+      "owner_id": "gb:DZA:ADM2:62766556B36124939228030",
+      "source_atom": "gb:DZA:ADM2:62766556B36124939228030",
+      "source_index": 22084,
+      "source_ordinal": 686
+    },
+    {
+      "owner_index": 17248,
+      "owner_id": "gb:DZA:ADM2:62766556B36754398122672",
+      "source_atom": "gb:DZA:ADM2:62766556B36754398122672",
+      "source_index": 21635,
+      "source_ordinal": 237
+    },
+    {
+      "owner_index": 17254,
+      "owner_id": "gb:DZA:ADM2:62766556B37072329708464",
+      "source_atom": "gb:DZA:ADM2:62766556B37072329708464",
+      "source_index": 21490,
+      "source_ordinal": 92
+    },
+    {
+      "owner_index": 17257,
+      "owner_id": "gb:DZA:ADM2:62766556B37201004475862",
+      "source_atom": "gb:DZA:ADM2:62766556B37201004475862",
+      "source_index": 21523,
+      "source_ordinal": 125
+    },
+    {
+      "owner_index": 17278,
+      "owner_id": "gb:DZA:ADM2:62766556B38636440628055",
+      "source_atom": "gb:DZA:ADM2:62766556B38636440628055",
+      "source_index": 22086,
+      "source_ordinal": 688
+    },
+    {
+      "owner_index": 17282,
+      "owner_id": "gb:DZA:ADM2:62766556B38790539922240",
+      "source_atom": "gb:DZA:ADM2:62766556B38790539922240",
+      "source_index": 22402,
+      "source_ordinal": 1004
+    },
+    {
+      "owner_index": 17312,
+      "owner_id": "gb:DZA:ADM2:62766556B40252535958299",
+      "source_atom": "gb:DZA:ADM2:62766556B40252535958299",
+      "source_index": 22101,
+      "source_ordinal": 703
+    },
+    {
+      "owner_index": 17337,
+      "owner_id": "gb:DZA:ADM2:62766556B4202316701611",
+      "source_atom": "gb:DZA:ADM2:62766556B4202316701611",
+      "source_index": 21855,
+      "source_ordinal": 457
+    },
+    {
+      "owner_index": 17359,
+      "owner_id": "gb:DZA:ADM2:62766556B42707117855638",
+      "source_atom": "gb:DZA:ADM2:62766556B42707117855638",
+      "source_index": 22395,
+      "source_ordinal": 997
+    },
+    {
+      "owner_index": 17363,
+      "owner_id": "gb:DZA:ADM2:62766556B42822090498150",
+      "source_atom": "gb:DZA:ADM2:62766556B42822090498150",
+      "source_index": 22391,
+      "source_ordinal": 993
+    },
+    {
+      "owner_index": 17378,
+      "owner_id": "gb:DZA:ADM2:62766556B44248180853423",
+      "source_atom": "gb:DZA:ADM2:62766556B44248180853423",
+      "source_index": 22372,
+      "source_ordinal": 974
+    },
+    {
+      "owner_index": 17388,
+      "owner_id": "gb:DZA:ADM2:62766556B44779675144302",
+      "source_atom": "gb:DZA:ADM2:62766556B44779675144302",
+      "source_index": 21873,
+      "source_ordinal": 475
+    },
+    {
+      "owner_index": 17438,
+      "owner_id": "gb:DZA:ADM2:62766556B47444990158138",
+      "source_atom": "gb:DZA:ADM2:62766556B47444990158138",
+      "source_index": 21858,
+      "source_ordinal": 460
+    },
+    {
+      "owner_index": 17464,
+      "owner_id": "gb:DZA:ADM2:62766556B49228165782861",
+      "source_atom": "gb:DZA:ADM2:62766556B49228165782861",
+      "source_index": 22369,
+      "source_ordinal": 971
+    },
+    {
+      "owner_index": 17537,
+      "owner_id": "gb:DZA:ADM2:62766556B53286855295022",
+      "source_atom": "gb:DZA:ADM2:62766556B53286855295022",
+      "source_index": 21652,
+      "source_ordinal": 254
+    },
+    {
+      "owner_index": 17554,
+      "owner_id": "gb:DZA:ADM2:62766556B54213311178934",
+      "source_atom": "gb:DZA:ADM2:62766556B54213311178934",
+      "source_index": 22920,
+      "source_ordinal": 1522
+    },
+    {
+      "owner_index": 17562,
+      "owner_id": "gb:DZA:ADM2:62766556B55031024142783",
+      "source_atom": "gb:DZA:ADM2:62766556B55031024142783",
+      "source_index": 21486,
+      "source_ordinal": 88
+    },
+    {
+      "owner_index": 17573,
+      "owner_id": "gb:DZA:ADM2:62766556B55641422418420",
+      "source_atom": "gb:DZA:ADM2:62766556B55641422418420",
+      "source_index": 21861,
+      "source_ordinal": 463
+    },
+    {
+      "owner_index": 17581,
+      "owner_id": "gb:DZA:ADM2:62766556B56070048916781",
+      "source_atom": "gb:DZA:ADM2:62766556B56070048916781",
+      "source_index": 22648,
+      "source_ordinal": 1250
+    },
+    {
+      "owner_index": 17585,
+      "owner_id": "gb:DZA:ADM2:62766556B5626344647283",
+      "source_atom": "gb:DZA:ADM2:62766556B5626344647283",
+      "source_index": 22777,
+      "source_ordinal": 1379
+    },
+    {
+      "owner_index": 17617,
+      "owner_id": "gb:DZA:ADM2:62766556B58207646228584",
+      "source_atom": "gb:DZA:ADM2:62766556B58207646228584",
+      "source_index": 22773,
+      "source_ordinal": 1375
+    },
+    {
+      "owner_index": 17628,
+      "owner_id": "gb:DZA:ADM2:62766556B59362108601239",
+      "source_atom": "gb:DZA:ADM2:62766556B59362108601239",
+      "source_index": 21544,
+      "source_ordinal": 146
+    },
+    {
+      "owner_index": 17663,
+      "owner_id": "gb:DZA:ADM2:62766556B61460577512009",
+      "source_atom": "gb:DZA:ADM2:62766556B61460577512009",
+      "source_index": 22001,
+      "source_ordinal": 603
+    },
+    {
+      "owner_index": 17666,
+      "owner_id": "gb:DZA:ADM2:62766556B61645564252970",
+      "source_atom": "gb:DZA:ADM2:62766556B61645564252970",
+      "source_index": 21555,
+      "source_ordinal": 157
+    },
+    {
+      "owner_index": 17668,
+      "owner_id": "gb:DZA:ADM2:62766556B61899111719290",
+      "source_atom": "gb:DZA:ADM2:62766556B61899111719290",
+      "source_index": 21402,
+      "source_ordinal": 4
+    },
+    {
+      "owner_index": 17703,
+      "owner_id": "gb:DZA:ADM2:62766556B63965458540383",
+      "source_atom": "gb:DZA:ADM2:62766556B63965458540383",
+      "source_index": 21491,
+      "source_ordinal": 93
+    },
+    {
+      "owner_index": 17704,
+      "owner_id": "gb:DZA:ADM2:62766556B6402800247080",
+      "source_atom": "gb:DZA:ADM2:62766556B6402800247080",
+      "source_index": 21648,
+      "source_ordinal": 250
+    },
+    {
+      "owner_index": 17707,
+      "owner_id": "gb:DZA:ADM2:62766556B64373814139082",
+      "source_atom": "gb:DZA:ADM2:62766556B64373814139082",
+      "source_index": 21830,
+      "source_ordinal": 432
+    },
+    {
+      "owner_index": 17709,
+      "owner_id": "gb:DZA:ADM2:62766556B64392427921562",
+      "source_atom": "gb:DZA:ADM2:62766556B64392427921562",
+      "source_index": 21627,
+      "source_ordinal": 229
+    },
+    {
+      "owner_index": 17724,
+      "owner_id": "gb:DZA:ADM2:62766556B64967255069812",
+      "source_atom": "gb:DZA:ADM2:62766556B64967255069812",
+      "source_index": 22867,
+      "source_ordinal": 1469
+    },
+    {
+      "owner_index": 17744,
+      "owner_id": "gb:DZA:ADM2:62766556B66001609274115",
+      "source_atom": "gb:DZA:ADM2:62766556B66001609274115",
+      "source_index": 21876,
+      "source_ordinal": 478
+    },
+    {
+      "owner_index": 17776,
+      "owner_id": "gb:DZA:ADM2:62766556B67624269860057",
+      "source_atom": "gb:DZA:ADM2:62766556B67624269860057",
+      "source_index": 22404,
+      "source_ordinal": 1006
+    },
+    {
+      "owner_index": 17782,
+      "owner_id": "gb:DZA:ADM2:62766556B67992845178003",
+      "source_atom": "gb:DZA:ADM2:62766556B67992845178003",
+      "source_index": 21525,
+      "source_ordinal": 127
+    },
+    {
+      "owner_index": 17785,
+      "owner_id": "gb:DZA:ADM2:62766556B68168357907177",
+      "source_atom": "gb:DZA:ADM2:62766556B68168357907177",
+      "source_index": 21548,
+      "source_ordinal": 150
+    },
+    {
+      "owner_index": 17788,
+      "owner_id": "gb:DZA:ADM2:62766556B68320901954726",
+      "source_atom": "gb:DZA:ADM2:62766556B68320901954726",
+      "source_index": 21624,
+      "source_ordinal": 226
+    },
+    {
+      "owner_index": 17800,
+      "owner_id": "gb:DZA:ADM2:62766556B6909575922089",
+      "source_atom": "gb:DZA:ADM2:62766556B6909575922089",
+      "source_index": 21670,
+      "source_ordinal": 272
+    },
+    {
+      "owner_index": 17806,
+      "owner_id": "gb:DZA:ADM2:62766556B69307512256308",
+      "source_atom": "gb:DZA:ADM2:62766556B69307512256308",
+      "source_index": 22658,
+      "source_ordinal": 1260
+    },
+    {
+      "owner_index": 17809,
+      "owner_id": "gb:DZA:ADM2:62766556B69399188379234",
+      "source_atom": "gb:DZA:ADM2:62766556B69399188379234",
+      "source_index": 21678,
+      "source_ordinal": 280
+    },
+    {
+      "owner_index": 17840,
+      "owner_id": "gb:DZA:ADM2:62766556B7106756535899",
+      "source_atom": "gb:DZA:ADM2:62766556B7106756535899",
+      "source_index": 21968,
+      "source_ordinal": 570
+    },
+    {
+      "owner_index": 17856,
+      "owner_id": "gb:DZA:ADM2:62766556B72170300362820",
+      "source_atom": "gb:DZA:ADM2:62766556B72170300362820",
+      "source_index": 22919,
+      "source_ordinal": 1521
+    },
+    {
+      "owner_index": 17870,
+      "owner_id": "gb:DZA:ADM2:62766556B72963562472246",
+      "source_atom": "gb:DZA:ADM2:62766556B72963562472246",
+      "source_index": 22301,
+      "source_ordinal": 903
+    },
+    {
+      "owner_index": 17871,
+      "owner_id": "gb:DZA:ADM2:62766556B72999881352121",
+      "source_atom": "gb:DZA:ADM2:62766556B72999881352121",
+      "source_index": 22780,
+      "source_ordinal": 1382
+    },
+    {
+      "owner_index": 17891,
+      "owner_id": "gb:DZA:ADM2:62766556B74502923067194",
+      "source_atom": "gb:DZA:ADM2:62766556B74502923067194",
+      "source_index": 22828,
+      "source_ordinal": 1430
+    },
+    {
+      "owner_index": 17893,
+      "owner_id": "gb:DZA:ADM2:62766556B74622028685359",
+      "source_atom": "gb:DZA:ADM2:62766556B74622028685359",
+      "source_index": 22091,
+      "source_ordinal": 693
+    },
+    {
+      "owner_index": 17897,
+      "owner_id": "gb:DZA:ADM2:62766556B74768797610739",
+      "source_atom": "gb:DZA:ADM2:62766556B74768797610739",
+      "source_index": 22787,
+      "source_ordinal": 1389
+    },
+    {
+      "owner_index": 17902,
+      "owner_id": "gb:DZA:ADM2:62766556B74962619032641",
+      "source_atom": "gb:DZA:ADM2:62766556B74962619032641",
+      "source_index": 21971,
+      "source_ordinal": 573
+    },
+    {
+      "owner_index": 17905,
+      "owner_id": "gb:DZA:ADM2:62766556B75170045426335",
+      "source_atom": "gb:DZA:ADM2:62766556B75170045426335",
+      "source_index": 21625,
+      "source_ordinal": 227
+    },
+    {
+      "owner_index": 17922,
+      "owner_id": "gb:DZA:ADM2:62766556B75902997056236",
+      "source_atom": "gb:DZA:ADM2:62766556B75902997056236",
+      "source_index": 22097,
+      "source_ordinal": 699
+    },
+    {
+      "owner_index": 17923,
+      "owner_id": "gb:DZA:ADM2:62766556B75915392104688",
+      "source_atom": "gb:DZA:ADM2:62766556B75915392104688",
+      "source_index": 22646,
+      "source_ordinal": 1248
+    },
+    {
+      "owner_index": 17934,
+      "owner_id": "gb:DZA:ADM2:62766556B76747669443988",
+      "source_atom": "gb:DZA:ADM2:62766556B76747669443988",
+      "source_index": 22626,
+      "source_ordinal": 1228
+    },
+    {
+      "owner_index": 17935,
+      "owner_id": "gb:DZA:ADM2:62766556B76836029671279",
+      "source_atom": "gb:DZA:ADM2:62766556B76836029671279",
+      "source_index": 22699,
+      "source_ordinal": 1301
+    },
+    {
+      "owner_index": 17943,
+      "owner_id": "gb:DZA:ADM2:62766556B7730452509065",
+      "source_atom": "gb:DZA:ADM2:62766556B7730452509065",
+      "source_index": 21521,
+      "source_ordinal": 123
+    },
+    {
+      "owner_index": 17947,
+      "owner_id": "gb:DZA:ADM2:62766556B77680370085326",
+      "source_atom": "gb:DZA:ADM2:62766556B77680370085326",
+      "source_index": 21482,
+      "source_ordinal": 84
+    },
+    {
+      "owner_index": 17951,
+      "owner_id": "gb:DZA:ADM2:62766556B77807182215851",
+      "source_atom": "gb:DZA:ADM2:62766556B77807182215851",
+      "source_index": 21504,
+      "source_ordinal": 106
+    },
+    {
+      "owner_index": 17974,
+      "owner_id": "gb:DZA:ADM2:62766556B79256569613236",
+      "source_atom": "gb:DZA:ADM2:62766556B79256569613236",
+      "source_index": 22400,
+      "source_ordinal": 1002
+    },
+    {
+      "owner_index": 17984,
+      "owner_id": "gb:DZA:ADM2:62766556B79848623912106",
+      "source_atom": "gb:DZA:ADM2:62766556B79848623912106",
+      "source_index": 21650,
+      "source_ordinal": 252
+    },
+    {
+      "owner_index": 17990,
+      "owner_id": "gb:DZA:ADM2:62766556B8038442743392",
+      "source_atom": "gb:DZA:ADM2:62766556B8038442743392",
+      "source_index": 21474,
+      "source_ordinal": 76
+    },
+    {
+      "owner_index": 17993,
+      "owner_id": "gb:DZA:ADM2:62766556B80654893130658",
+      "source_atom": "gb:DZA:ADM2:62766556B80654893130658",
+      "source_index": 22898,
+      "source_ordinal": 1500
+    },
+    {
+      "owner_index": 18011,
+      "owner_id": "gb:DZA:ADM2:62766556B81695508763864",
+      "source_atom": "gb:DZA:ADM2:62766556B81695508763864",
+      "source_index": 22636,
+      "source_ordinal": 1238
+    },
+    {
+      "owner_index": 18019,
+      "owner_id": "gb:DZA:ADM2:62766556B8212622627589",
+      "source_atom": "gb:DZA:ADM2:62766556B8212622627589",
+      "source_index": 21657,
+      "source_ordinal": 259
+    },
+    {
+      "owner_index": 18027,
+      "owner_id": "gb:DZA:ADM2:62766556B82618168639957",
+      "source_atom": "gb:DZA:ADM2:62766556B82618168639957",
+      "source_index": 22644,
+      "source_ordinal": 1246
+    },
+    {
+      "owner_index": 18030,
+      "owner_id": "gb:DZA:ADM2:62766556B82754533918545",
+      "source_atom": "gb:DZA:ADM2:62766556B82754533918545",
+      "source_index": 22707,
+      "source_ordinal": 1309
+    },
+    {
+      "owner_index": 18038,
+      "owner_id": "gb:DZA:ADM2:62766556B83269276747011",
+      "source_atom": "gb:DZA:ADM2:62766556B83269276747011",
+      "source_index": 22934,
+      "source_ordinal": 1536
+    },
+    {
+      "owner_index": 18043,
+      "owner_id": "gb:DZA:ADM2:62766556B83675944416770",
+      "source_atom": "gb:DZA:ADM2:62766556B83675944416770",
+      "source_index": 22793,
+      "source_ordinal": 1395
+    },
+    {
+      "owner_index": 18045,
+      "owner_id": "gb:DZA:ADM2:62766556B8381397516064",
+      "source_atom": "gb:DZA:ADM2:62766556B8381397516064",
+      "source_index": 22696,
+      "source_ordinal": 1298
+    },
+    {
+      "owner_index": 18048,
+      "owner_id": "gb:DZA:ADM2:62766556B84022352686452",
+      "source_atom": "gb:DZA:ADM2:62766556B84022352686452",
+      "source_index": 22309,
+      "source_ordinal": 911
+    },
+    {
+      "owner_index": 18070,
+      "owner_id": "gb:DZA:ADM2:62766556B85035644277171",
+      "source_atom": "gb:DZA:ADM2:62766556B85035644277171",
+      "source_index": 22781,
+      "source_ordinal": 1383
+    },
+    {
+      "owner_index": 18082,
+      "owner_id": "gb:DZA:ADM2:62766556B85473098771358",
+      "source_atom": "gb:DZA:ADM2:62766556B85473098771358",
+      "source_index": 21492,
+      "source_ordinal": 94
+    },
+    {
+      "owner_index": 18107,
+      "owner_id": "gb:DZA:ADM2:62766556B87341413202203",
+      "source_atom": "gb:DZA:ADM2:62766556B87341413202203",
+      "source_index": 21550,
+      "source_ordinal": 152
+    },
+    {
+      "owner_index": 18119,
+      "owner_id": "gb:DZA:ADM2:62766556B88218289988129",
+      "source_atom": "gb:DZA:ADM2:62766556B88218289988129",
+      "source_index": 21866,
+      "source_ordinal": 468
+    },
+    {
+      "owner_index": 18125,
+      "owner_id": "gb:DZA:ADM2:62766556B88629846321032",
+      "source_atom": "gb:DZA:ADM2:62766556B88629846321032",
+      "source_index": 22932,
+      "source_ordinal": 1534
+    },
+    {
+      "owner_index": 18126,
+      "owner_id": "gb:DZA:ADM2:62766556B88638756804582",
+      "source_atom": "gb:DZA:ADM2:62766556B88638756804582",
+      "source_index": 21505,
+      "source_ordinal": 107
+    },
+    {
+      "owner_index": 18133,
+      "owner_id": "gb:DZA:ADM2:62766556B89128410649214",
+      "source_atom": "gb:DZA:ADM2:62766556B89128410649214",
+      "source_index": 22411,
+      "source_ordinal": 1013
+    },
+    {
+      "owner_index": 18142,
+      "owner_id": "gb:DZA:ADM2:62766556B89546095538783",
+      "source_atom": "gb:DZA:ADM2:62766556B89546095538783",
+      "source_index": 21468,
+      "source_ordinal": 70
+    },
+    {
+      "owner_index": 18153,
+      "owner_id": "gb:DZA:ADM2:62766556B90283583968578",
+      "source_atom": "gb:DZA:ADM2:62766556B90283583968578",
+      "source_index": 22374,
+      "source_ordinal": 976
+    },
+    {
+      "owner_index": 18164,
+      "owner_id": "gb:DZA:ADM2:62766556B90996112528884",
+      "source_atom": "gb:DZA:ADM2:62766556B90996112528884",
+      "source_index": 22857,
+      "source_ordinal": 1459
+    },
+    {
+      "owner_index": 18183,
+      "owner_id": "gb:DZA:ADM2:62766556B91985430496523",
+      "source_atom": "gb:DZA:ADM2:62766556B91985430496523",
+      "source_index": 21692,
+      "source_ordinal": 294
+    },
+    {
+      "owner_index": 18196,
+      "owner_id": "gb:DZA:ADM2:62766556B92506205237755",
+      "source_atom": "gb:DZA:ADM2:62766556B92506205237755",
+      "source_index": 22917,
+      "source_ordinal": 1519
+    },
+    {
+      "owner_index": 18210,
+      "owner_id": "gb:DZA:ADM2:62766556B93518571997577",
+      "source_atom": "gb:DZA:ADM2:62766556B93518571997577",
+      "source_index": 22635,
+      "source_ordinal": 1237
+    },
+    {
+      "owner_index": 18220,
+      "owner_id": "gb:DZA:ADM2:62766556B9412520312721",
+      "source_atom": "gb:DZA:ADM2:62766556B9412520312721",
+      "source_index": 21467,
+      "source_ordinal": 69
+    },
+    {
+      "owner_index": 18234,
+      "owner_id": "gb:DZA:ADM2:62766556B9512400393768",
+      "source_atom": "gb:DZA:ADM2:62766556B9512400393768",
+      "source_index": 22384,
+      "source_ordinal": 986
+    },
+    {
+      "owner_index": 18247,
+      "owner_id": "gb:DZA:ADM2:62766556B9604477798186",
+      "source_atom": "gb:DZA:ADM2:62766556B9604477798186",
+      "source_index": 22697,
+      "source_ordinal": 1299
+    },
+    {
+      "owner_index": 18248,
+      "owner_id": "gb:DZA:ADM2:62766556B96067644291512",
+      "source_atom": "gb:DZA:ADM2:62766556B96067644291512",
+      "source_index": 22379,
+      "source_ordinal": 981
+    },
+    {
+      "owner_index": 18302,
+      "owner_id": "gb:DZA:ADM2:62766556B98971987911176",
+      "source_atom": "gb:DZA:ADM2:62766556B98971987911176",
+      "source_index": 22381,
+      "source_ordinal": 983
+    },
+    {
+      "owner_index": 18307,
+      "owner_id": "gb:DZA:ADM2:62766556B99166178180227",
+      "source_atom": "gb:DZA:ADM2:62766556B99166178180227",
+      "source_index": 22771,
+      "source_ordinal": 1373
+    },
+    {
+      "owner_index": 18319,
+      "owner_id": "gb:DZA:ADM2:62766556B99818224320365",
+      "source_atom": "gb:DZA:ADM2:62766556B99818224320365",
+      "source_index": 22637,
+      "source_ordinal": 1239
+    }
+  ],
+  "scope": "whole retained original DZA products; finite lon/lat coordinates and exact source ID joins; no topology/physical qualification"
+}
