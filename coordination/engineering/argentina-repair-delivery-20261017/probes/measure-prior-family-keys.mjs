@@ -61,7 +61,7 @@ const size = latbuf.length / 8, latitudes = Float64Array.from({ length: size }, 
 const original = JSON.parse(read(F, `${P}/original-scope/original-intervals.json.gz`, true));
 const byY = new Map(), keyInfo = new Map(), owners = new Set();
 for (const [y, a, z, oo, ss, k] of original) {
-  assert(oo.length === 1 && ['land', 'water'].includes(k) && z > a, 'Original row shape');
+  assert(oo.length === 1 && ['land', 'inland-water'].includes(k) && z > a, 'Original row shape');
   const rr = byY.get(y) ?? []; rr.push([a, z, oo[0]]); byY.set(y, rr); owners.add(oo[0]);
   for (let x = a; x < z; x++) {
     const key = `${y}:${x}`; assert(!keyInfo.has(key), 'Duplicate original key');
