@@ -9,6 +9,10 @@ on:
       expected_head:
         type: string
         required: true
+      reviewed_tests:
+        description: 'Optional exact reviewed test/fixture roster: JSON {base,head,files,inputs}; omitted uses normal regression'
+        type: string
+        required: false
       request_id:
         type: string
         required: true
@@ -45,6 +49,7 @@ jobs:
       geography_required: ${{ steps.prepare.outputs.geography_required }}
       shards: ${{ steps.prepare.outputs.shards }}
       test_selection: ${{ steps.prepare.outputs.test_selection }}
+      test_files_base64: ${{ steps.prepare.outputs.test_files_base64 }}
       expectations_path: ${{ steps.prepare.outputs.expectations_path }}
       candidate_tree: ${{ steps.prepare.outputs.candidate_tree }}
       checkout_patterns_base64: ${{ steps.prepare.outputs.checkout_patterns_base64 }}
@@ -325,6 +330,7 @@ jobs:
           INTEGRATION_PROFILE: ${{ needs.prepare.outputs.profile }}
           INTEGRATION_SHARD: ${{ matrix.shard }}
           INTEGRATION_TEST_SELECTION: ${{ steps.assembly.outputs.assembled == 'true' && 'selected-output' || needs.prepare.outputs.test_selection }}
+          INTEGRATION_TEST_FILES_BASE64: ${{ needs.prepare.outputs.test_files_base64 }}
           SELECTED_EXPECTATIONS_PATH: ${{ needs.prepare.outputs.expectations_path }}
         run: |
           if node --input-type=module -e "import {integrationNeedsBrowser} from './scripts/run-integration-tests.mjs'; process.exit(integrationNeedsBrowser(process.env.INTEGRATION_PROFILE, Number(process.env.INTEGRATION_SHARD), process.env.INTEGRATION_TEST_SELECTION || 'complete') ? 0 : 1)"; then
@@ -336,6 +342,7 @@ jobs:
           INTEGRATION_SHARD: ${{ matrix.shard }}
           INTEGRATION_TEST_SELECTION: ${{ steps.assembly.outputs.assembled == 'true' && 'selected-output' || needs.prepare.outputs.test_selection }}
           SELECTED_PACKAGE_ASSEMBLY_SHA256: ${{ steps.assembly.outputs.assembly_sha256 }}
+          INTEGRATION_TEST_FILES_BASE64: ${{ needs.prepare.outputs.test_files_base64 }}
           SELECTED_EXPECTATIONS_PATH: ${{ needs.prepare.outputs.expectations_path }}
         run: |
           if test "$INTEGRATION_TEST_SELECTION" = selected-data || test "$INTEGRATION_TEST_SELECTION" = selected-output; then

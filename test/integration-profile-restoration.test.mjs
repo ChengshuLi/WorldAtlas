@@ -88,8 +88,8 @@ export async function runSelectedDeliverySmoke({root,expectationsPath,emittedDir
   fs.writeFileSync(outputPath,'{"fixture_only":true}',{flag:'wx'});return {fixture_only:true};
 }`);
   }
-  return {root,expectations,run(profile=selected?'full':'evidence',shard='0') {
-    const env={...process.env,INTEGRATION_PROFILE:profile,INTEGRATION_SHARD:shard,INTEGRATION_TEST_SELECTION:selected?'selected-data':'complete',...(selected?{SELECTED_EXPECTATIONS_PATH:expectations}:{})};
+  return {root,expectations,run(profile=selected?'full':'evidence',shard='0',overrides={}) {
+    const env={...process.env,INTEGRATION_PROFILE:profile,INTEGRATION_SHARD:shard,INTEGRATION_TEST_SELECTION:selected?'selected-data':'complete',...(selected?{SELECTED_EXPECTATIONS_PATH:expectations}:{}),...overrides};
     // Match a plain CLI launch, rather than inheriting node:test's recursion tag.
     delete env.NODE_TEST_CONTEXT;
     return spawnSync('bash',['-e','-o','pipefail','-c',workflowCommand()],{
@@ -108,6 +108,16 @@ test('actual queue shell runs tests and propagates failure in both live profiles
   const invalid=fixture(t),result=invalid.run('invalid');
   assert.notEqual(result.status,0);
   assert(!fs.existsSync(path.join(invalid.root,'tests-reached-integration-fixture')));
+});
+
+test('actual reviewed queue shell executes only named consumers and needs no database or emitted output',t=>{
+  const f=fixture(t);
+  fs.writeFileSync(path.join(f.root,'test/unrelated.test.mjs'),"throw Error('Unrelated test must not execute');\n");
+  const result=f.run('evidence','0',{INTEGRATION_TEST_SELECTION:'reviewed',
+    INTEGRATION_TEST_FILES_BASE64:Buffer.from(JSON.stringify(['test/integration-fixture.test.mjs'])).toString('base64')});
+  assert.equal(result.status,0,result.stderr);assert(fs.existsSync(path.join(f.root,'tests-reached-integration-fixture')));
+  assert(!fs.existsSync(path.join(f.root,'dist')));assert(!fs.existsSync(path.join(f.root,'data')));
+  assert.match(result.stdout,/'?test_selection'?:\s*'?reviewed'?|"test_selection":"reviewed"/);
 });
 
 test('actual selected queue shell runs smoke and propagates its failure without unit regression',t=>{
