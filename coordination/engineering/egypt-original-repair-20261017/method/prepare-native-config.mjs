@@ -78,10 +78,11 @@ const targets = stages.map(stage => {
   const member = memberById.get(stage.target), support = physicalBySource.get(stage.target)?.support;
   need(member && member.target_id === stage.selected.id && classRows.has(member.pixelIndex)
     && support, 'Complete original source/owner/physical record join required');
-  // Preserve the original requested class at every owner centre. This declares
-  // the claim only; the stock authority must prove actual source/physical support
-  // or refuse. No missing water/land support is manufactured or pre-cleared.
-  const classes = [...new Set(classRows.get(member.pixelIndex).flatMap(row => row.runs.map(run => run[2])))].sort();
+  // Keep each member's actual positive class operands, as in the retained
+  // complete-member adapter. Empty water is not a positive polygon. The original
+  // owner classRows, including all474 requested water keys, remain unchanged.
+  const classes = ['mapped_land_support'];
+  if (support.mapped_inland_water_support?.coordinates?.length) classes.push('mapped_inland_water_support');
   return {id:stage.target, target_id:member.target_id, pixelIndex:member.pixelIndex,
     base_geometry:stage.selected.geometry, source_family:'gb:EGY:ADM2',
     source_receipt_sha256:physicalPin.sha256, coverage_classes:classes,
