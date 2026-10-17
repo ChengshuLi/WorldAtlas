@@ -824,11 +824,19 @@ export function packageProjection(config, reader, acceptedRegistry = null) {
       }
       if (evidence.source_membership !== undefined) {
         const membership = evidence.source_membership;
-        need(membership && same(Object.keys(membership).sort(), membership.cohort_inventory === undefined
-          ? ['index', 'lineage', 'parts'] : ['cohort_inventory', 'index', 'lineage', 'parts'])
+        need(membership && same(Object.keys(membership).sort(), ['index', 'lineage', 'parts',
+          ...(membership.cohort_inventory === undefined ? [] : ['cohort_inventory']),
+          ...(membership.negative_natural_earth === undefined ? [] : ['negative_natural_earth'])].sort())
           && Array.isArray(membership.parts) && membership.parts.length > 0, 'Missing accepted source membership roles');
         add(membership.index, 'source-target membership index'); add(membership.lineage, 'source-target membership lineage');
         for (const pin of membership.parts) add(pin, 'source-target membership part');
+        if (membership.negative_natural_earth !== undefined) {
+          const role = membership.negative_natural_earth;
+          need(role && same(Object.keys(role).sort(), ['atoms', 'registry', 'source'])
+            && Array.isArray(role.atoms) && role.atoms.length > 0, 'Missing negative Natural Earth roles');
+          add(role.registry, 'source-target negative Natural Earth registry');
+          add(role.source, 'source-target negative Natural Earth whole source');
+        }
         if (membership.cohort_inventory !== undefined) {
           const inventory = membership.cohort_inventory;
           need(inventory && same(Object.keys(inventory).sort(), ['index', 'parts'])
@@ -918,7 +926,7 @@ export function qualifiedDeliveryReference(selection, manifest, reader, commit, 
   let decoded = raw;
   if (raw[0] === 31 && raw[1] === 139) {
     need(Number.isSafeInteger(ownerPin.decoded_bytes) && ownerPin.decoded_bytes > 0
-      && ownerPin.decoded_bytes <= 32 * 1024 * 1024 && hex(ownerPin.decoded_sha256, 64),
+      && hex(ownerPin.decoded_sha256, 64),
     'Complete bounded delivery original owner decoding required');
     decoded = gunzipSync(raw, {maxOutputLength: ownerPin.decoded_bytes + 1});
     need(decoded.length === ownerPin.decoded_bytes && digest(decoded) === ownerPin.decoded_sha256,
@@ -955,7 +963,7 @@ export function prepareReferenceMetadata(config, reader) {
   function read(pin, role = 'reference metadata input') {
     need(pin && safe(pin.path) && hex(pin.commit, 40) && pin.mode === '100644'
       && hex(pin.git_blob_oid, 40) && Number.isSafeInteger(pin.bytes) && pin.bytes > 0
-      && pin.bytes <= 64 * 1024 * 1024 && hex(pin.sha256, 64), 'Complete ordinary reference preparation pin required');
+      && hex(pin.sha256, 64), 'Complete ordinary reference preparation pin required');
     const raw = reader.read(pin);
     need(Buffer.isBuffer(raw) && raw.length === pin.bytes && digest(raw) === pin.sha256
       && createHash('sha1').update('blob ' + raw.length + '\0').update(raw).digest('hex') === pin.git_blob_oid,
@@ -976,7 +984,7 @@ export function prepareReferenceMetadata(config, reader) {
   let ownersRaw = encodedOwners;
   if (encodedOwners[0] === 31 && encodedOwners[1] === 139) {
     need(Number.isSafeInteger(config.owner_roster.decoded_bytes) && config.owner_roster.decoded_bytes > 0
-      && config.owner_roster.decoded_bytes <= 32 * 1024 * 1024 && hex(config.owner_roster.decoded_sha256, 64),
+      && hex(config.owner_roster.decoded_sha256, 64),
     'Complete bounded original owner roster decoding required');
     ownersRaw = gunzipSync(encodedOwners, {maxOutputLength: config.owner_roster.decoded_bytes + 1});
     need(ownersRaw.length === config.owner_roster.decoded_bytes && digest(ownersRaw) === config.owner_roster.decoded_sha256,

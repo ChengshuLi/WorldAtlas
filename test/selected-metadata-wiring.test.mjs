@@ -7,14 +7,14 @@ import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import {prepareReferenceMetadataProjection} from '../scripts/selected-reference-metadata.mjs';
 import {scientificNativeSelection} from '../src/reference-metadata.js';
-import {selectedDeliveryReference,finalizedSelection,prepareReferenceMetadata,composeAuthorities,sourceEvidence,jsonBytes,validateDeliverySelectionTransition,finalizeDelivery} from '../scripts/prepare-delivery-handoff.mjs';
+import {selectedDeliveryReference,qualifiedDeliveryReference,finalizedSelection,prepareReferenceMetadata,composeAuthorities,sourceEvidence,jsonBytes,validateDeliverySelectionTransition,finalizeDelivery} from '../scripts/prepare-delivery-handoff.mjs';
 import {compactContextInputs} from '../scripts/native-ownership/compact-context-inputs.mjs';
 import {prepareCurrentSelectedAdditive} from '../scripts/package-current-additive.mjs';
 import {loadedBaseFootprintSha256,footprintValueSha256,bindAdditiveLedgerFeatures,additiveReleaseFootprintDigest} from '../src/effective-footprint.js';
 const sha=raw=>createHash('sha256').update(raw).digest('hex'),commit='a'.repeat(40);
 const plain=pin=>({path:pin.path,bytes:pin.bytes,sha256:pin.sha256});
 const rectangle=x=>({type:'Polygon',coordinates:[[[x,0],[x+1,0],[x+1,1],[x,1],[x,0]]]});
-async function fixture(t){
+async function fixture(t,{rosterBytes,rosterGzip=true}={}){
  const root=await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(),'atlas-metadata-wiring-')));t.after(()=>fs.rm(root,{recursive:true,force:true}));
  const bodies=new Map(),pins=new Map();
  async function put(name,value){const raw=Buffer.isBuffer(value)?value:Buffer.from(JSON.stringify(value));await fs.mkdir(path.dirname(path.join(root,name)),{recursive:true});await fs.writeFile(path.join(root,name),raw);const pin={commit,path:name,mode:'100644',git_blob_oid:createHash('sha1').update('blob '+raw.length+'\0').update(raw).digest('hex'),bytes:raw.length,sha256:sha(raw)};bodies.set(pin.sha256,raw);pins.set(name,pin);return pin;}
@@ -25,7 +25,8 @@ async function fixture(t){
  const afterGroups=structuredClone(beforeGroups);afterGroups.at(-1).name='Current Q';
  const beforeHierarchy=await put('inputs/hierarchy-before.json',beforeGroups),afterHierarchy=await put('inputs/hierarchy-after.json',afterGroups);
  const native={id:'geography:native',footprints_sha256:loadedBaseFootprintSha256(original),hierarchy_sha256:beforeHierarchy.sha256},current={...native,id:'geography:metadata',hierarchy_sha256:afterHierarchy.sha256};
- const rosterRaw=Buffer.from(JSON.stringify(owners)),roster=await put('inputs/owners.json.gz',gzipSync(rosterRaw));
+ const ownerJson=Buffer.from(JSON.stringify(owners)),rosterRaw=rosterBytes===undefined?ownerJson:Buffer.concat([ownerJson,Buffer.alloc(rosterBytes-ownerJson.length,32)]);
+ const roster=await put('inputs/owners.json.gz',rosterGzip?gzipSync(rosterRaw):rosterRaw);
  const latitudeRaw=Buffer.alloc(16*8),latitudePin=await put('inputs/latitudes.f64le.gz',gzipSync(latitudeRaw));
  const nativeLatitudes={...latitudePin,decoded_bytes:latitudeRaw.length,decoded_sha256:sha(latitudeRaw)};
  const manifest={coordinateBits:19,method:'native-linear-evenodd-first-owner-v1',native_latitudes:nativeLatitudes,geographic_release:native.id,footprints_sha256:native.footprints_sha256,hierarchy_sha256:native.hierarchy_sha256,size:16,original_assets:{bounds:{sha256:roster.sha256}}};
@@ -84,6 +85,36 @@ test('reference-metadata preparation derives one canonical application from stoc
  assert.equal(result.input_inventory.length,11);assert.ok(result.input_inventory.every(pin=>pin.whole_body_consumed&&pin.roles.length>0&&/^[a-f0-9]{40}$/.test(pin.git_blob_oid)));
  for(const name of ['data/ownership-selection.json','data/geographic-releases/current-manifest.json','data/geographic-releases/index.json','data/geographic-releases/releases-v2.json.gz','inputs/receipt.json','inputs/source-before.json','inputs/source-after.json'])assert.ok(result.input_inventory.some(pin=>pin.path===name),name);
  assert.deepEqual(prepareReferenceMetadata(f.preparationConfig,f.reader),result);
+});
+
+test('same owner roster admits exact large encoded/decoded bodies in both preparation paths',async t=>{
+ // Capacity fixtures with complete three-owner semantics; no geographic proof.
+ for(const options of [{rosterBytes:34920857},{rosterBytes:64*1024*1024+1,rosterGzip:false}]){
+  const f=await fixture(t,options),pin=f.preparationConfig.owner_roster,original=Buffer.from(f.reader.read(pin));
+  const prepared=prepareReferenceMetadata(f.preparationConfig,f.reader);
+  assert.deepEqual(JSON.parse(prepared.products['reference-metadata.json']),f.projection);
+  assert(prepared.input_inventory.some(row=>row.path===pin.path&&row.bytes===original.length&&row.whole_body_consumed));
+  assert.deepEqual(qualifiedDeliveryReference(f.selection,f.manifest,f.reader,commit,pin),
+   {native:f.native,reference:f.current,projectionPin:f.projectionPin});
+  for(const raw of [original.subarray(0,-1),Buffer.concat([original,Buffer.from(' ')])]){
+   const reader={...f.reader,read:p=>p.sha256===pin.sha256?raw:f.reader.read(p)};
+   assert.throws(()=>prepareReferenceMetadata(f.preparationConfig,reader),/Whole reference preparation input differs/);
+   assert.throws(()=>qualifiedDeliveryReference(f.selection,f.manifest,reader,commit,pin),/whole owner roster differs/);
+  }
+  const corrupt=Buffer.from(original);corrupt[0]^=1;
+  const reader={...f.reader,read:p=>p.sha256===pin.sha256?corrupt:f.reader.read(p)};
+  assert.throws(()=>prepareReferenceMetadata(f.preparationConfig,reader),/Whole reference preparation input differs/);
+  assert.throws(()=>qualifiedDeliveryReference(f.selection,f.manifest,reader,commit,pin),/whole owner roster differs/);
+  if(options.rosterGzip!==false)for(const change of [
+   {decoded_bytes:pin.decoded_bytes-1},{decoded_bytes:pin.decoded_bytes+1},{decoded_sha256:'0'.repeat(64)},
+   {decoded_bytes:0},{decoded_bytes:Number.MAX_SAFE_INTEGER+1}
+  ]){
+   const altered={...pin,...change},config={...f.preparationConfig,owner_roster:altered};
+   assert.throws(()=>prepareReferenceMetadata(config,f.reader));
+   assert.throws(()=>qualifiedDeliveryReference(f.selection,f.manifest,f.reader,commit,altered));
+  }
+  assert.deepEqual(f.reader.read(pin),original);
+ }
 });
 
 test('reference-metadata preparation rejects handwritten current identities, extra config, stale native/owner pins and incomplete source receipts',async t=>{

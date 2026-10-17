@@ -839,3 +839,105 @@ walks arbitrary nested metadata. Source-evidence preparation preserves these
 pinned fields. Commit the newly prepared source evidence before running the stock
 native diagnostic or constructor; do not replace original source evidence or
 claim ancestry closure as native qualification.
+
+## Exact additive asset sizes
+
+The four current additive assets (base manifest, ledger, owner roster and patch)
+are admitted by their exact positive safe-integer byte descriptors, paths and
+whole-file hashes. The gzip owner roster also binds its exact decoded length and
+hash. A fixed 32 MiB ceiling is not a scientific or transport contract and is not
+applied to these assets. Ordinary packaging checks actual file lengths before
+reading; the browser/Node streamed reader cancels an encoded or decoded body as
+soon as it exceeds its declared length and rejects truncation or hash drift.
+
+This does not promise unlimited inputs: JavaScript safe-integer precision, actual
+Buffer/typed-array allocation, UTF-8 decoding, engine string/JSON capacity and
+available process/browser resources still apply. Their failures propagate rather
+than producing a partial accepted result. A larger unrelated cap is not a remedy.
+The independent native-grid chunk, metadata and source-custody contracts are not
+changed by this additive transport correction. Final whole-output consumer proof
+remains required at the actual selected ledger and patch size.
+
+The same-asset consumer chain is explicit:
+
+- `additive-gap-repair.mjs` and `prepare-delivery-handoff.mjs` produce and retain
+  complete asset length/hash pins. The metadata qualification/preparation paths
+  also authenticate whole original owner-roster bytes and exact decoded pins;
+  neither imposes an extra fixed ceiling on that roster.
+- `package-current-additive.mjs`, called by both `build-static-inner.mjs` and
+  `assemble-selected-package.mjs`, checks safe paths, ordinary files, exact stat
+  size and whole hashes before packaging. Encoded and decoded roster pins agree.
+- `data-client.js` calls `loadAdditiveNativePatch` in `effective-footprint.js`;
+  its shared descriptor admission and exact-length streamed encoded/decoded
+  reader cover both Node-compatible and browser-facing consumption.
+- `selected-delivery-smoke.mjs` passes each supplied exact descriptor through to
+  `repositoryReader`, then checks the whole hash. Dropping the descriptor would
+  incorrectly apply that reader's legacy unpinned-file ceiling. Legacy native
+  startup parts without encoded-byte pins retain their separate decoded-word
+  contract and mandatory encoded hash.
+- `check-effective-geographic-regression.mjs` and `diagnose-map-cell.mjs` use
+  immutable exact-tree/byte/hash readers for this same selected ledger and patch.
+
+The 34,920,857-byte boundary tests use explicitly labelled same-size synthetic
+fixtures for package, browser-facing loader and emitted-smoke entry points.
+Literal selected-ledger probes are reported separately with their actual hashes;
+fixture success does not imply actual emitted-map or GPU/Canvas acceptance.
+
+### Remaining bounds outside this additive-asset correction
+
+This is not a claim that the application is free of arbitrary limits. The
+following remaining fixed guards need their own concrete justification or
+exact-descriptor replacement; merely belonging to another format is insufficient:
+
+- `effective-footprint.js`: 32 MiB on the reference-metadata asset, original
+  native manifest chunk decoded bytes, and the inert current-rebind custody pin.
+  Exact decoded native words and complete coverage are genuine integrity checks;
+  the additional 32 MiB constant is not established as an engine limit.
+- `selected-delivery-smoke.mjs`: 32 MiB decoded catalogue chunks, plus legacy
+  `repositoryReader` fallback for unpinned top-level files and native startup
+  parts without encoded byte declarations. These are policy defaults, not
+  proven platform limits.
+- `selected-reference-metadata.mjs`: 32 MiB encoded/decoded original metadata
+  source inputs. `prepare-delivery-handoff.mjs` still bounds the separate current
+  release registry decode at 64 MiB and its small release pointer at 4 KiB.
+- The static-only builder rejects files above 25 MiB; the hosted build takes a
+  different branch. This is labelled a hosting constraint, but a specific
+  provider/product limit must be checked before treating it as necessary.
+
+By contrast, safe-integer byte precision, exact decoded word counts, native
+coordinate packing dimensions and actual runtime allocation failures are
+concrete correctness/platform constraints. Any remaining limit cleanup must
+preserve their checks and exercise its own adjacent producer/consumer paths.
+
+### Packed native replacement rows
+
+`applyAdditiveNativePatch` retains each affected row as native `Uint32` words
+between row processing and final output assembly. Its temporary decoded intervals
+and coalescing remain row-local, rather than retaining one JavaScript triple-array
+for every old run across the entire affected world bank. The same ordering,
+occupied-cell, owner, complete-coverage and repeated-patch checks remain in place;
+the final native row/run words are unchanged. This reduces avoidable object
+expansion without increasing a file ceiling or Node heap setting. Actual process
+memory still depends on the complete selected assets, native bank and consumers;
+measure that workload and keep failed runs as failures.
+
+### External original atoms in negative-only ancestry
+
+When a complete accepted canonical cohort has a mixed-source ancestor, optional
+`source_membership.negative_natural_earth` may bind `{registry, source, atoms}`.
+The registry is the exact selected `data/sources.json`; its retained Natural Earth
+ADM1 digest must match the complete decoded source FeatureCollection. Every original
+feature must retain a unique `adm1_code` and valid whole geometry. An atom is exactly
+`{source_id, feature_ordinal, geometry_sha256}`, using the original bare native ID,
+zero-based position and canonical whole-geometry digest. Names and prefixed aliases
+are not joins. The complete source is consumed and packaged, including unused features.
+
+Only explicitly bound atoms can terminate negative ancestry. Each must participate
+in the complete current cohort and agree with all forward and reverse descendants;
+unknown leaves, missing members/edges, unused atoms, and current-owner or semantic
+node collisions fail closed. Each bound original also enters the unchanged whole
+territorial-veto route, including interior and boundary contacts. It has no contextual
+applicability exception and cannot grant positive ownership. Existing positive
+reconciliation and complete cohort/parent/source checks remain required. The role
+currently covers only the already retained Natural Earth ADM1 registry product,
+not a generic provider adapter or permission to omit another original family.
