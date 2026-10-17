@@ -156,11 +156,19 @@ test('native JSON hashes and parses the same snapshot when a producer later muta
 test('native scratch allocation and admission setup failures acquire no leaked producer or files',async t=>{
  const directory=temporary(t);let acquisitions=0;
  const source={[Symbol.iterator](){acquisitions++;return [Buffer.from('{"rows":[]}')][Symbol.iterator]();}};
- const original=fs.mkdtempSync;
  t.mock.method(fs,'mkdtempSync',()=>{throw Object.assign(Error('scratch full'),{code:'ENOSPC'});});
  await assert.rejects(open(directory,'{"rows":[]}',{chunks:source}),/scratch full/);
  assert.equal(acquisitions,0);assert.deepEqual(fs.readdirSync(directory),[]);
- t.mock.method(fs,'mkdtempSync',original);
+ t.mock.restoreAll();
  await assert.rejects(open(directory,'{"rows":[]}',{chunks:source,expected:{bytes:-1,sha256:'bad'}}),/identity/);
  assert.equal(acquisitions,0);assert.deepEqual(fs.readdirSync(directory),[]);
+});
+
+
+test('native merge cursors can share a fixed prefetch budget using single-record windows',async t=>{
+ const directory=temporary(t),value={rows:[{y:0,runs:[[0,1,1],[2,3,2]]},{y:2,runs:[[4,5,3]]}]};
+ const store=await open(directory,JSON.stringify(value));
+ const rows=[...store.rowEntries({windowRecords:1})].map(row=>({y:row.y,runs:[...store.intervals(row,{windowRecords:1})]}));
+ assert.deepEqual(rows,value.rows);assert.throws(()=>[...store.rowEntries({windowRecords:0})],/cursor window/);
+ store.close();assert.deepEqual(fs.readdirSync(directory),[]);
 });

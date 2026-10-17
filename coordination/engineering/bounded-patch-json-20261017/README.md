@@ -30,7 +30,8 @@ scientific lattice and owner bounds come from authenticated caller inputs.
 
 ## Evidence
 
-`node --test test/native-patch-store.test.mjs`: 12 tests pass, including 180
+`node --test test/native-patch-store.test.mjs test/native-ledger-store.test.mjs`:
+19 tests pass, including 180
 bounded differential patches, every byte split of Unicode/number fixtures,
 duplicate/overwritten fields, complete syntax and hash refusals, mutable chunks,
 ENOSPC setup, cursor corruption and a 250,000-triple dense row under a 64 MiB heap.
@@ -45,7 +46,43 @@ No scientific/native qualification was replayed.
 
 This bounds valid native row/interval storage, not every input/output term.
 The largest individual scalar/metadata/geometry value and caller input chunk are
-still materialized; root metadata remains resident. Ledger-wide component
-storage, source geometry, consumer output and qualification adapters remain work
+still materialized; root metadata remains resident. Source geometry, consumer output and qualification adapters remain work
 for the integrated bounded-memory change. A giant invalid single value can still
 occupy that individual-value term before rejection.
+
+
+## Ledger component storage
+
+`admitNativeLedgerStore` uses the same JSON parser and interval writer for ledger
+`rows[*].native_rows`. The result exposes `componentEntries()`,
+`componentMetadata(handle)`, `componentRows(handle)` and
+`componentCanonicalChunks(handle,{overrides,newline})`. Each component handle
+contains only ordinal, raw canonical SHA and row/run counts. Metadata, including
+geometry and unknown legacy fields, resides in a disk spool and is materialized
+one component at a time. Complete component canonical chunks include all original
+fields and can inject the existing registry fields for normalized identities.
+The storage layer never interprets those overrides as source authority.
+
+Duplicate root rows, native_rows, pixelIndex and disposition use only their final
+JSON values; previous domains/counts/offsets are reset. Scientific nativeOnly
+rules still belong to the existing consumer: exact fields, positive rows/runs,
+owner identity, native_cells and authenticated lattice. Empty rows remain legal
+at the storage boundary just as with the original completeRows function.
+
+All row, interval and component cursors accept a positive `windowRecords` tuning
+option. K-way merge consumers can divide a fixed total prefetch budget across
+active operands rather than retaining a default window for every authority.
+This tunes memory/throughput and never rejects a product by byte size.
+
+`actual-ledger.json` records complete direct admission/traversal of the exact
+48,584,265-byte candidate ledger under a 64 MiB heap: 4,191 ordered components,
+547,068 component rows and 1,108,298 intervals, with its original canonical SHA
+unchanged. Its 34,935,453-byte scratch store was removed immediately after the
+measurement. The largest single component/geometry remains an explicit memory
+term; the complete job is not yet migrated to these cursors.
+
+Independent bounded probes covered 7,841 patch cases and 6,188 ledger cases against
+JSON.parse, the original row-domain rules and canonical serialization; an
+8,000-component stream also passed under a 32 MiB heap. They found and led to fixes
+for an allocation-time iterator leak and test mock-restoration leakage. These
+are isolated data-store controls, not scientific source or consumer adoption.

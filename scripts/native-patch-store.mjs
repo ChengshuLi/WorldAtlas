@@ -25,7 +25,7 @@ class Input {
    'Complete JSON stream identity required');
   this.iterator=chunks[Symbol.asyncIterator]?.()??chunks[Symbol.iterator]?.();
   demand(this.iterator,'Complete JSON stream iterator required');
-  this.expected=expected;this.buffer=Buffer.alloc(0);this.at=0;this.bytes=0;this.hash=createHash('sha256');this.done=false;
+  this.scalarBuffer=Buffer.allocUnsafe(256);this.expected=expected;this.buffer=Buffer.alloc(0);this.at=0;this.bytes=0;this.hash=createHash('sha256');this.done=false;
  }
  async available(){
   while(this.at===this.buffer.length&&!this.done){
@@ -43,7 +43,7 @@ class Input {
  async char(byte){await this.space();demand(await this.peek()===byte,'Malformed native JSON delimiter');this.at++;}
  async value({key=false}={}){
   await this.space();let quoted=false,escaped=false,pendingSpace=false;const stack=[],parts=[];
-  let buffer=Buffer.allocUnsafe(256),used=0;
+  let buffer=this.scalarBuffer,used=0;
   const append=byte=>{if(used===buffer.length){parts.push(buffer);buffer=Buffer.allocUnsafe(8192);used=0;}buffer[used++]=byte;};
   outer:while(await this.available()){
    while(this.at<this.buffer.length){
@@ -58,6 +58,7 @@ class Input {
     else if(byte===93||byte===125)demand(stack.pop()===(byte===93?91:123),'Malformed nested native JSON');
    }
   }
+  if(!parts.length)return JSON.parse(buffer.subarray(0,used));
   parts.push(buffer.subarray(0,used));return JSON.parse(Buffer.concat(parts));
  }
  async end(){
@@ -69,7 +70,8 @@ class Input {
 class Writer {
  constructor(fd){this.fd=fd;this.buffer=Buffer.allocUnsafe(64*1024);this.used=0;this.bytes=0;}
  flush(){let at=0;while(at<this.used){const n=fs.writeSync(this.fd,this.buffer,at,this.used-at,this.bytes+at);demand(n>0,'Incomplete native interval write');at+=n;}this.bytes+=this.used;this.used=0;}
- append(record){if(this.used+record.length>this.buffer.length)this.flush();record.copy(this.buffer,this.used);this.used+=record.length;}
+ append(record){let at=0;while(at<record.length){if(this.used===this.buffer.length)this.flush();
+  const count=Math.min(this.buffer.length-this.used,record.length-at);record.copy(this.buffer,this.used,at,at+count);this.used+=count;at+=count;}}
  get position(){return this.bytes+this.used;}
  reset(position=0){this.flush();fs.ftruncateSync(this.fd,position);this.bytes=position;}
 }
@@ -84,118 +86,201 @@ function readExact(fd,buffer,length,position){
  let at=0;while(at<length){const n=fs.readSync(fd,buffer,at,length-at,position+at);demand(n>0,'Incomplete native interval store');at+=n;}
 }
 
-/** The caller authenticates source roles/modes/OIDs and supplies their byte stream.
- * No qualified state escapes before complete JSON syntax, exact bytes/hash and
- * all final row fields pass. Duplicate object keys retain JSON.parse last-wins.
- * rowField also supports an isolated ledger component's native_rows field.
- */
-export async function admitNativePatchStore({chunks,expected,directory,size,ownerCount,rowField='rows'}) {
- demand(Number.isSafeInteger(size)&&size>0&&size<=0xffffffff&&Number.isSafeInteger(ownerCount)
-  &&ownerCount>0&&ownerCount<=0xffffffff&&['rows','native_rows'].includes(rowField),'Invalid native interval store domain');
- ordinaryDirectory(directory);
- let input,root,runsFd,indexFd,complete=false;
- try {
-  root=fs.mkdtempSync(path.join(directory,'native-intervals-'));input=new Input(chunks,expected);
-  runsFd=fs.openSync(path.join(root,'runs.bin'),'wx+',0o600);indexFd=fs.openSync(path.join(root,'rows.bin'),'wx+',0o600);
-  const runs=new Writer(runsFd),index=new Writer(indexFd),metadata=Object.create(null);
-  let rowCount=0,runCount=0,rowsSeen=false,rowsError=null;
-  const array=async visit=>{
-   await input.char(91);await input.space();if(await input.peek()===93){input.at++;return;}
-   while(true){await visit();await input.space();const next=await input.peek();
-    if(next===93){input.at++;return;}await input.char(44);
-   }
-  };
-  const parseRuns=async()=>{
-   let error=null,count=0,end=0;
+async function array(input,visit){
+ await input.char(91);await input.space();if(await input.peek()===93){input.at++;return;}
+ while(true){await visit();await input.space();const next=await input.peek();
+  if(next===93){input.at++;return;}await input.char(44);
+ }
+}
+async function object(input,visit){
+ await input.char(123);await input.space();if(await input.peek()===125){input.at++;return;}
+ while(true){const key=await input.value({key:true});demand(typeof key==='string','Native JSON object key must be a string');await input.char(58);
+  await visit(key);await input.space();const next=await input.peek();if(next===125){input.at++;return;}await input.char(44);
+ }
+}
+
+// One parser for both cumulative patch rows and component native_rows. Errors in
+// domain fields are deferred until their final containing duplicate field wins.
+async function parseRows(input,runs,index,size,ownerCount){
+ const start=index.position/16,tripleRecord=Buffer.allocUnsafe(12),indexRecord=Buffer.allocUnsafe(16);let rowCount=0,runCount=0,error=null,previous=-1;
+ await input.space();
+ if(await input.peek()!==91){await input.value();return {start,rowCount,runCount,error:'Missing complete native rows'};}
+ await array(input,async()=>{
+  const offset=runs.position;let y,fields=new Set(),result={error:'Missing complete native runs',count:0};
+  await input.space();
+  if(await input.peek()!==123){await input.value();error??='Missing complete native row';return;}
+  await object(input,async key=>{
+   fields.add(key);
+   if(key!=='runs'){const value=await input.value();if(key==='y')y=value;return;}
+   runs.reset(offset);result={error:null,count:0};let end=0;
    await input.space();
-   if(await input.peek()!==91){await input.value();return {error:'Missing complete native intervals',count};}
-   await array(async()=>{
+   if(await input.peek()!==91){await input.value();result.error='Missing complete native intervals';return;}
+   await array(input,async()=>{
     const run=await input.value();
     if(!(Array.isArray(run)&&run.length===3&&run.every(Number.isSafeInteger)&&run[0]>=end
      &&run[1]>run[0]&&run[1]<=size&&run[2]>0&&run[2]<=ownerCount)){
-     error??='Invalid complete native interval/owner';return;
+     result.error??='Invalid complete native interval/owner';return;
     }
-    end=run[1];const record=Buffer.allocUnsafe(12);run.forEach((value,i)=>record.writeUInt32LE(value,i*4));
-    runs.append(record);count++;
+    end=run[1];run.forEach((value,i)=>tripleRecord.writeUInt32LE(value,i*4));
+    runs.append(tripleRecord);result.count++;
    });
-   return {error,count};
-  };
-  const parseRow=async previous=>{
-   const start=runs.position;let y,fields=new Set(),result={error:'Missing complete native runs',count:0};
-   await input.space();
-   if(await input.peek()!==123){await input.value();return {error:'Missing complete native row',y:previous};}
-   await object(async key=>{
-    fields.add(key);
-    if(key==='runs'){runs.reset(start);result=await parseRuns();}
-    else {const value=await input.value();if(key==='y')y=value;}
-   });
-   const error=fields.size!==2||!fields.has('y')||!fields.has('runs')?'Unknown native row shape':
-    !Number.isSafeInteger(y)||y<=previous||y>=size?'Duplicate, unordered or foreign native row':result.error;
-   if(error)return {error,y:previous};
-   demand(Number.isSafeInteger(start)&&result.count<=0xffffffff,'Native interval offset/count exceeds exact format');
-   const record=Buffer.allocUnsafe(16);record.writeUInt32LE(y,0);record.writeBigUInt64LE(BigInt(start),4);record.writeUInt32LE(result.count,12);
-   index.append(record);rowCount++;runCount+=result.count;return {y};
-  };
-  const object=async visit=>{
-   await input.char(123);await input.space();if(await input.peek()===125){input.at++;return;}
-   while(true){const key=await input.value({key:true});demand(typeof key==='string','Native JSON object key must be a string');await input.char(58);
-    await visit(key);await input.space();const next=await input.peek();if(next===125){input.at++;return;}await input.char(44);
-   }
-  };
-  await object(async key=>{
-   if(key!==rowField){metadata[key]=await input.value();return;}
-   rowsSeen=true;rowsError=null;rowCount=0;runCount=0;runs.reset();index.reset();let previous=-1;
-   await input.space();if(await input.peek()!==91){await input.value();rowsError='Missing complete native rows';return;}
-   await array(async()=>{const row=await parseRow(previous);rowsError??=row.error??null;previous=row.y;});
   });
-  await input.end();demand(rowsSeen&&!rowsError,rowsError??'Missing complete native rows');runs.flush();index.flush();
-  let closed=false;const admittedRows=new WeakSet();
+  const rowError=fields.size!==2||!fields.has('y')||!fields.has('runs')?'Unknown native row shape':
+   !Number.isSafeInteger(y)||y<=previous||y>=size?'Duplicate, unordered or foreign native row':result.error;
+  if(rowError){error??=rowError;return;}
+  demand(Number.isSafeInteger(offset)&&result.count<=0xffffffff,'Native interval offset/count exceeds exact format');
+  indexRecord.writeUInt32LE(y,0);indexRecord.writeBigUInt64LE(BigInt(offset),4);indexRecord.writeUInt32LE(result.count,12);
+  index.append(indexRecord);rowCount++;runCount+=result.count;previous=y;
+ });
+ return {start,rowCount,runCount,error};
+}
+function* canonicalObject(metadata,rowField,rowChunks,overrides={}){
+ demand(overrides&&typeof overrides==='object'&&!Array.isArray(overrides)&&(!rowField||!Object.hasOwn(overrides,rowField)),
+  'Canonical overrides cannot replace stored native rows');
+ const fields=Object.assign(Object.create(null),metadata,overrides),ordered=Object.create(null);
+ for(const key of [...Object.keys(fields),...(rowField?[rowField]:[])].sort())ordered[key]=null;
+ yield '{';let first=true;
+ for(const key of Object.keys(ordered)){
+  if(!first)yield ',';first=false;yield JSON.stringify(key)+':';
+  if(key===rowField)yield* rowChunks();else yield JSON.stringify(canonical(fields[key]));
+ }
+ yield '}';
+}
+function hashChunks(chunks){
+ const hash=createHash('sha256');let pending='';
+ for(const chunk of chunks){pending+=chunk;if(pending.length>=16384){hash.update(pending);pending='';}}
+ if(pending)hash.update(pending);return hash.digest('hex');
+}
+
+/** Parse original wire JSON into invocation-owned storage, never authority.
+ * The caller authenticates roles/modes/OIDs and passes the original byte stream.
+ * Full syntax, exact bytes/hash and final row domains precede returned cursors.
+ */
+async function admitStore({chunks,expected,directory,size,ownerCount,rowField='rows'},ledger){
+ demand(Number.isSafeInteger(size)&&size>0&&size<=0xffffffff&&Number.isSafeInteger(ownerCount)
+  &&ownerCount>0&&ownerCount<=0xffffffff&&['rows','native_rows'].includes(rowField),'Invalid native interval store domain');
+ ordinaryDirectory(directory);
+ let input,root,complete=false,closed=false;const fds=[];
+ try {
+  root=fs.mkdtempSync(path.join(directory,'native-intervals-'));input=new Input(chunks,expected);
+  const open=name=>{const fd=fs.openSync(path.join(root,name),'wx+',0o600);fds.push(fd);return fd;};
+  const runsFd=open('runs.bin'),indexFd=open('rows.bin'),runs=new Writer(runsFd),index=new Writer(indexFd);
+  const componentFd=ledger?open('components.bin'):null,metadataFd=ledger?open('metadata.bin'):null;
+  const components=ledger?new Writer(componentFd):null,meta=ledger?new Writer(metadataFd):null;
+  const metadata=Object.create(null),admittedRows=new WeakSet(),admittedComponents=new WeakMap();
+  let rowsSeen=false,rowsError=null,range={start:0,rowCount:0,runCount:0},componentCount=0;
   const active=()=>demand(!closed,'Native interval store is closed');
   const rowRecord=buffer=>{
    const row=Object.freeze({y:buffer.readUInt32LE(0),offset:Number(buffer.readBigUInt64LE(4)),count:buffer.readUInt32LE(12)});
    admittedRows.add(row);return row;
   };
-  function* rowEntries(){
-   active();const buffer=Buffer.allocUnsafe(16*Math.min(4096,rowCount));
-   for(let at=0;at<rowCount;){const count=Math.min(4096,rowCount-at);active();readExact(indexFd,buffer,count*16,at*16);
+  function* rowEntries(selected=range,{windowRecords=4096}={}){
+   active();demand(Number.isSafeInteger(windowRecords)&&windowRecords>0,'Invalid native cursor window');const buffer=Buffer.allocUnsafe(16*Math.min(windowRecords,selected.rowCount));
+   for(let at=0;at<selected.rowCount;){const count=Math.min(windowRecords,selected.rowCount-at);active();readExact(indexFd,buffer,count*16,(selected.start+at)*16);
     for(let i=0;i<count;i++){active();yield rowRecord(buffer.subarray(i*16,i*16+16));}at+=count;
    }
   }
-  function* intervals(row){
-   active();demand(admittedRows.has(row),'Foreign native interval row');const buffer=Buffer.allocUnsafe(12*Math.min(4096,row.count));
-   for(let at=0;at<row.count;){const count=Math.min(4096,row.count-at);active();readExact(runsFd,buffer,count*12,row.offset+at*12);
+  function* intervals(row,{windowRecords=4096}={}){
+   active();demand(Number.isSafeInteger(windowRecords)&&windowRecords>0,'Invalid native cursor window');demand(admittedRows.has(row),'Foreign native interval row');const buffer=Buffer.allocUnsafe(12*Math.min(windowRecords,row.count));
+   for(let at=0;at<row.count;){const count=Math.min(windowRecords,row.count-at);active();readExact(runsFd,buffer,count*12,row.offset+at*12);
     for(let i=0;i<count;i++){active();yield [buffer.readUInt32LE(i*12),buffer.readUInt32LE(i*12+4),buffer.readUInt32LE(i*12+8)];}at+=count;
    }
   }
   function rowAt(y){
-   active();demand(Number.isSafeInteger(y)&&y>=0&&y<size,'Invalid native row lookup');const buffer=Buffer.allocUnsafe(16);let lo=0,hi=rowCount;
+   active();demand(Number.isSafeInteger(y)&&y>=0&&y<size,'Invalid native row lookup');const buffer=Buffer.allocUnsafe(16);let lo=0,hi=range.rowCount;
    while(lo<hi){const mid=Math.floor((lo+hi)/2);readExact(indexFd,buffer,16,mid*16);if(buffer.readUInt32LE(0)<y)lo=mid+1;else hi=mid;}
-   if(lo===rowCount)return null;readExact(indexFd,buffer,16,lo*16);return buffer.readUInt32LE(0)===y?rowRecord(buffer):null;
+   if(lo===range.rowCount)return null;readExact(indexFd,buffer,16,lo*16);return buffer.readUInt32LE(0)===y?rowRecord(buffer):null;
   }
-  const hash=createHash('sha256');let pending='',length=0;
-  const write=text=>{pending+=text;length+=text.length;if(length>=16384){hash.update(pending);pending='';length=0;}};
-  const ordered=Object.create(null);
-  for(const key of [...Object.keys(metadata),rowField].sort())ordered[key]=null;
-  const keys=Object.keys(ordered);write('{');
-  for(let i=0;i<keys.length;i++){
-   const key=keys[i];if(i)write(',');write(JSON.stringify(key)+':');
-   if(key!==rowField){write(JSON.stringify(canonical(metadata[key])));continue;}
-   write('[');let first=true;
-   for(const row of rowEntries()){
-    if(!first)write(',');first=false;write('{"runs":[');let firstRun=true;
-    for(const run of intervals(row)){if(!firstRun)write(',');firstRun=false;write(JSON.stringify(run));}
-    write('],"y":'+row.y+'}');
+  function* rowChunks(selected){
+   yield '[';let first=true;
+   for(const row of rowEntries(selected)){
+    if(!first)yield ',';first=false;yield '{"runs":[';let firstRun=true;
+    for(const run of intervals(row)){if(!firstRun)yield ',';firstRun=false;yield JSON.stringify(run);}
+    yield '],"y":'+row.y+'}';
    }
-   write(']');
+   yield ']';
   }
-  write('}\n');if(length)hash.update(pending);
-  const canonical_sha256=hash.digest('hex');
-  const close=()=>{if(closed)return;closed=true;try{fs.closeSync(runsFd);}finally{try{fs.closeSync(indexFd);}finally{fs.rmSync(root,{recursive:true});}}};
-  complete=true;return Object.freeze({metadata:freeze(metadata),canonical_sha256,rowCount,runCount,
-   storedBytes:runs.position+index.position,rowEntries,intervals,rowAt,close,[Symbol.dispose]:close});
+  const componentRecord=(buffer,ordinal)=>{
+   const descriptor={metaOffset:Number(buffer.readBigUInt64LE(0)),metaBytes:Number(buffer.readBigUInt64LE(8)),
+    start:Number(buffer.readBigUInt64LE(16)),rowCount:Number(buffer.readBigUInt64LE(24)),runCount:Number(buffer.readBigUInt64LE(32)),
+    hasNativeRows:buffer.readUInt32LE(40)===1};
+   const handle=Object.freeze({ordinal,canonical_sha256:buffer.subarray(48,80).toString('hex'),
+    rowCount:descriptor.rowCount,runCount:descriptor.runCount,hasNativeRows:descriptor.hasNativeRows});
+   admittedComponents.set(handle,descriptor);return handle;
+  };
+  function* componentEntries({windowRecords=512}={}){
+   active();demand(Number.isSafeInteger(windowRecords)&&windowRecords>0,'Invalid native cursor window');const buffer=Buffer.allocUnsafe(80*Math.min(windowRecords,componentCount));
+   for(let at=0;at<componentCount;){const count=Math.min(windowRecords,componentCount-at);active();readExact(componentFd,buffer,count*80,at*80);
+    for(let i=0;i<count;i++){active();yield componentRecord(buffer.subarray(i*80,i*80+80),at+i);}at+=count;
+   }
+  }
+  const componentDescriptor=handle=>{active();const descriptor=admittedComponents.get(handle);demand(descriptor,'Foreign native component');return descriptor;};
+  function componentMetadata(handle){
+   const {metaBytes,metaOffset}=componentDescriptor(handle),buffer=Buffer.allocUnsafe(metaBytes);readExact(metadataFd,buffer,metaBytes,metaOffset);
+   return freeze(JSON.parse(buffer));
+  }
+  function componentRows(handle,options){return rowEntries(componentDescriptor(handle),options);}
+  function* componentCanonicalChunks(handle,{overrides={},newline=true}={}){
+   const selected=componentDescriptor(handle),fields=componentMetadata(handle);
+   demand(!Object.hasOwn(overrides,'native_rows'),'Canonical overrides cannot replace stored native rows');
+   yield* canonicalObject(fields,selected.hasNativeRows?'native_rows':null,()=>rowChunks(selected),overrides);
+   if(newline)yield '\n';
+  }
+  const parseComponent=async()=>{
+   const fields=Object.create(null),runStart=runs.position,indexStart=index.position;
+   let selected={start:indexStart/16,rowCount:0,runCount:0,error:null},hasNativeRows=false;
+   await input.space();
+   if(await input.peek()!==123){await input.value();rowsError??='Missing complete ledger component';return;}
+   await object(input,async key=>{
+    if(key!=='native_rows'){fields[key]=await input.value();return;}
+    hasNativeRows=true;runs.reset(runStart);index.reset(indexStart);selected=await parseRows(input,runs,index,size,ownerCount);
+   });
+   if(selected.error){rowsError??=selected.error;return;}
+   // Canonicalization can reject a domain value that a later duplicate root rows
+   // replaces. Keep parsing full syntax, but defer this error as for native rows.
+   let body;
+   try{body=Buffer.from(JSON.stringify(canonical(fields)));}
+   catch(error){rowsError??=error.message;return;}
+   runs.flush();index.flush();
+   const canonical_sha256=hashChunks((function*(){yield* canonicalObject(fields,hasNativeRows?'native_rows':null,()=>rowChunks(selected));yield '\n';})());
+   const record=Buffer.alloc(80),offset=meta.position;
+   for(const [i,value] of [offset,body.length,selected.start,selected.rowCount,selected.runCount].entries()){
+    demand(Number.isSafeInteger(value),'Native component offset/count exceeds exact format');record.writeBigUInt64LE(BigInt(value),i*8);
+   }
+   record.writeUInt32LE(hasNativeRows?1:0,40);Buffer.from(canonical_sha256,'hex').copy(record,48);
+   meta.append(body);components.append(record);componentCount++;range.rowCount+=selected.rowCount;range.runCount+=selected.runCount;
+  };
+  await object(input,async key=>{
+   if(key!==rowField){metadata[key]=await input.value();return;}
+   rowsSeen=true;rowsError=null;componentCount=0;range={start:0,rowCount:0,runCount:0};runs.reset();index.reset();
+   if(!ledger){range=await parseRows(input,runs,index,size,ownerCount);rowsError=range.error;return;}
+   components.reset();meta.reset();await input.space();
+   if(await input.peek()!==91){await input.value();rowsError='Missing complete ledger rows';return;}
+   await array(input,parseComponent);
+  });
+  await input.end();demand(rowsSeen&&!rowsError,rowsError??'Missing complete native rows');runs.flush();index.flush();components?.flush();meta?.flush();
+  const canonical_sha256=hashChunks((function*(){
+   yield* canonicalObject(metadata,rowField,function*(){
+    if(!ledger){yield* rowChunks(range);return;}
+    yield '[';let first=true;for(const component of componentEntries()){
+     if(!first)yield ',';first=false;yield* componentCanonicalChunks(component,{newline:false});
+    }yield ']';
+   });yield '\n';
+  })());
+  const close=()=>{if(closed)return;closed=true;let error;
+   for(const fd of fds)try{fs.closeSync(fd);}catch(e){error??=e;}
+   try{fs.rmSync(root,{recursive:true});}catch(e){error??=e;}if(error)throw error;
+  };
+  const common={metadata:freeze(metadata),canonical_sha256,runCount:range.runCount,
+   storedBytes:runs.position+index.position+(components?.position??0)+(meta?.position??0),intervals,close,[Symbol.dispose]:close};
+  complete=true;return Object.freeze(ledger?
+   {...common,componentCount,nativeRowCount:range.rowCount,componentEntries,componentMetadata,componentRows,componentCanonicalChunks}:
+   {...common,rowCount:range.rowCount,rowEntries:options=>rowEntries(range,options),rowAt});
  } finally {
   try {await input?.close();} catch(error){complete=false;throw error;}
-  finally {if(!complete){try{if(runsFd!==undefined)fs.closeSync(runsFd);}
-   finally{try{if(indexFd!==undefined)fs.closeSync(indexFd);}finally{if(root)fs.rmSync(root,{recursive:true});}}}}
+  finally {if(!complete){let error;for(const fd of fds)try{fs.closeSync(fd);}catch(e){error??=e;}
+   try{if(root)fs.rmSync(root,{recursive:true});}catch(e){error??=e;}if(error)throw error;}}
  }
 }
+export const admitNativePatchStore=options=>admitStore(options,false);
+export const admitNativeLedgerStore=options=>admitStore({...options,rowField:'rows'},true);
