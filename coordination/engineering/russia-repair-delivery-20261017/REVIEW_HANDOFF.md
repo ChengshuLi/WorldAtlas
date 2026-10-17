@@ -2,7 +2,7 @@
 
 Issue: #2302. Author branch: `engineering/russia-repair-delivery-20261017`.
 
-This checkpoint is ready for source/physical review, not selected delivery. No Russia cell is accepted and no native authority has been emitted yet. Original stage, complete sources, physical output and exact original denominator are retained. The independent periodic conflict-frame dependency is #2308; wait for accepted main before retrying native qualification.
+This checkpoint is ready for source/physical review, not selected delivery. No Russia cell is accepted and no native authority has been emitted yet. Original stage, complete sources, physical output and exact original denominator are retained. The independently reviewed periodic conflict-frame dependency is #2308. A root-authorized preparation-only whole-input diagnostic on exact reviewed helper `de0db630a759d5e1e7169d3ef10d97a52b746a4c` succeeded; no native authority may be emitted before accepted integration.
 
 ## Exact original scope
 
@@ -15,11 +15,11 @@ This checkpoint is ready for source/physical review, not selected delivery. No R
 
 ## Source questions to review
 
-`SOURCE_REVIEW.md` explains all 21 inherited portion flags, all 18 scale reviews, complete 39-original/107-descendant split-source membership, original transport count discrepancy, source licensing/vintage and remaining semantic uncertainty. All 334 positive targets are direct, exclusive original members. The complete originals of real splits elsewhere remain negative competitors.
+`SOURCE_REVIEW.md` explains all 21 inherited portion flags, all 18 scale reviews, complete 39-original/107-descendant split-source membership, original transport count discrepancy, source licensing/vintage and remaining semantic uncertainty. `source-review/retained-display-intent.json` additionally traces the 177 real topology partitions, Zapolyarny display validity repair and nine unchanged-footprint Ural macro assignments. All 334 positive targets are direct, exclusive original members. The complete originals of real splits elsewhere remain negative competitors.
 
 The eight original products contain 2,532 complete features. Frozen source intervals reveal 9,451 foreign ADM1 contacts. `config/complete-negatives/complete-source-negative-bindings.json` retains all 122 original foreign features and complete applicability evidence for all 334 targets: 230 whole, untouched operands across 171 targets. No exception or clipping is used. Every frozen contact joins to an exact negative operand. The complete-input denominator is unchanged.
 
-The full 52 Kazakhstan and 48 Mongolia original historical components/dispositions are retained. Five intersect the repair package at exactly 135 cells. Additional read-only corroboration uses complete Kazakhstan ADM2, Mongolia ADM2 and independent Mongolia MRIS/NSO rosters, as well as all eight queue products. All 135 centres have unique named Russian ADM2 and mapped-land support, zero foreign ADM2 cover and no source-boundary contacts. This does not close the original whole-component questions; eventual native outcomes still need joining to those exact intervals.
+The full 52 Kazakhstan and 48 Mongolia original historical components/dispositions are retained. Five intersect the repair package at exactly 135 cells. Additional read-only corroboration uses complete Kazakhstan ADM2, Mongolia ADM2 and independent Mongolia MRIS/NSO rosters, as well as all eight queue products. All 135 centres have unique named Russian ADM2 and mapped-land support, zero foreign ADM2 cover and no source-boundary contacts. This does not close the original whole-component questions; all 135 now join explicitly to supported preparation-diagnostic decisions, without closing those original questions.
 
 ## Reproduction
 
@@ -28,6 +28,11 @@ All scripts take a repository root and immutable input commit. Run with the exis
 - `scripts/verify-original-stage.py REPO PACKET_COMMIT`: byte-reproduces all 334 stage inputs and the complete 2,566,967-cell candidate patch; independently derives every foreign-source interval contact.
 - `scripts/bind-complete-source-negatives.py REPO c2cdef1279cba1526f5d65eb03ce134acd852866 OUTPUT_DIR`: repeats complete-original applicability and exact unchanged negative operands. The source-evidence config reproduced byte-for-byte; only the report's observed free-space scalar is time-dependent.
 - `scripts/check-historical-centres.py REPO a47428527bc7c59839ab27786179987725830a81 OUTPUT`: full original-roster corroboration of all 135 historical centre contacts.
-- After #2308 acceptance, plain Node (unset NODE_PATH and NODE_OPTIONS) runs `scripts/prepare-delivery-handoff.mjs native-diagnostic coordination/engineering/russia-repair-delivery-20261017/config/native-complete-negatives.json coordination/engineering/russia-repair-delivery-20261017/native-diagnostic-002`.
+- `scripts/check-retained-display-intent.py REPO 0a3edc0eab4f97c5884e7cf370383531f53e304b OUTPUT`: checks all 177 topology hash distinctions, Zapolyarny marker and all nine exact macro migration geometry/metadata joins against original writers/receipt.
+- `scripts/reconcile-native.py REPO DIAGNOSTIC_PATH OUTPUT_DIRECTORY`: reproduces the exhaustive original-row partition, all 9,451 foreign holds and 135 historical outcomes from the retained stock preparation diagnostic. It does not emit authority.
+
+## Preparation result awaiting accepted authority
+
+The full original denominator partitions into 2,557,516 supported and 9,451 held cells. The latter exactly preserve every foreign-source contact. All 334 original subjects remain: 327 have positive supported cells, 66 have holds, and seven are wholly held. See every per-owner and class count in `native-partition-preaccept-001/whole-scope-reconciliation.json`. The supported patch is an explicit outcome subset, not a redefinition of the package. The original physical producer and source inputs were not rerun or changed. Resource evidence is in `verification/native-diagnostic-preaccept-resource.json`.
 
 No cohort reduction or scientific rerun is planned. Source/physical uncertainty remains explicit. Cumulative accepted selection must be refreshed at delivery, preserving every literal prior assignment, authority and hold. Root owns independent review and normal queue dispatch.
