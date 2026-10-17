@@ -181,7 +181,7 @@ const FOCUSED_TEST_FAMILIES = [
   'evidence-quality', 'historical-evidence', 'premerge-evidence',
   'geographic-adjudication-api', 'geographic-report-artifact', 'trusted-workflow-checkouts',
   'merge-integration(?:-entrypoint)?', 'selected-data-profile', 'git-blob-transport',
-  'immutable-git-blobs', 'pr-evidence-transport', 'local-workspace',
+  'immutable-git-blobs', 'local-workspace',
   // Immutable reader, original-authority, checkpoint and wrapper consumers.
   // Scientific kernels and packaged/rendered output remain full regression.
   'accepted-(?:checkpoint-qualification|joint-transport)', 'additive-gap-repair',

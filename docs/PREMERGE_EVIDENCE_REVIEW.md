@@ -1,6 +1,6 @@
 # Trusted evidence and independent premerge review
 
-This is a preventive gate, not proof that every fact is true. Read `EVIDENCE_QUALITY.md` and, for geographic measurements or generators, `EVIDENCE_GEOGRAPHY_HELPERS.md`. CI reads immutable Git blobs with trusted base code and a read-only token; it never executes a packet's reproduction commands. The integration workflow repeats applicable scientific byte checks using trusted main. Every PR still needs a separate worker's substantive review of its exact head. Existing regional approval, import and publisher gates remain in force.
+This is a preventive gate, not proof that every fact is true. Read `EVIDENCE_QUALITY.md` and, for geographic measurements or generators, `EVIDENCE_GEOGRAPHY_HELPERS.md`. Actual scientific readers authenticate immutable inputs with trusted code. The queue does not replay the generic remote manifest walk. Retained validators support author/reviewer evidence checks and specialized source-exception authorization; they never execute a packet's reproduction commands. Every PR still needs a separate worker's substantive review of its exact head. Existing regional approval, import and publisher gates remain in force.
 
 ## Ordinary engineering and scientific evidence
 
@@ -24,25 +24,14 @@ records, original identities/vintages, consumed-input/result bindings and substa
 source interpretation. Declare a scientific manifest when the issue's result uses
 those bindings; engineering code changes do not acquire one merely by changing
 files. Unknown or changed consumed inputs still get the actual applicable checks.
-An explicitly declared manifest remains checked, including retained engineering
-contracts. Do not drop a scientific declaration to hide failed or missing proof.
+Review the actual manifest and its consumed-input/result bindings when applicable. Do not drop a scientific declaration to hide failed or missing proof.
 
-`.github/evidence-policy.json` preserves the original activation/legacy rules for
-geography and history work. Their new issues declare this field in the existing
-`worldatlas-work:v1` scope; older issues retain their original scopes unless they
-explicitly adopt it. Historical evidence and rollout inventories remain unchanged.
-
-```json
-"evidence_quality": {
-  "version": 1,
-  "manifest_path": "coordination/engineering/{job}/evidence-quality.json",
-  "subject_ids": [],
-  "pins": {},
-  "review_kind": "code"
-}
-```
-
-The example is a field fragment, not a replacement for max_prs, dependencies, mode or scope. `subject_ids` lists the exact geographic subjects if applicable; `pins` maps named release/scope/input hashes to actual baseline files. `review_kind` is `code`, `source`, `geometry` or `release`. Use geography's declared owned directory or history's campaign directory for those lanes. Engineering's `{job}` resolves to the branch ID, allowing a new owned manifest for each PR. The issue declares these scientific bindings before implementation; an as-yet unwritten manifest is not required to begin authoring. Missing issue creation timestamps cannot claim legacy status.
+Ordinary work needs no `worldatlas-work:v1` issue block. Existing scientific
+manifests and `.github/evidence-policy.json` remain supported by the retained
+validators and explicit special-operation contracts. Preserve historical evidence
+and rollout records. Review exact subjects, original pins, methods, results and
+limits in the scientific records themselves rather than duplicating them as issue
+readiness metadata.
 
 ## Preparing declared scientific evidence
 
@@ -54,7 +43,7 @@ Start with `coordination/templates/evidence-v1.json`, replace placeholders, and 
 - Every method declares kind `code`, `source`, `geography`, `generator` or `measurement`. Geographic methods use `helper_version: "worldatlas-evidence-geometry-v1"` and the exact shared helper method policy. Generator methods use `kind: "generator"` and `helper_version: "worldatlas-evidence-preparation-v1"`. Measurement methods use `kind: "measurement"`.
 - `validation` is optional retained control evidence, not a requirement to create JSON wrappers for tests. Applicable positive/adverse tests still establish changed behavior and independent review checks their substance. Cite actual test output in the PR/review; reuse applicable unchanged tests. Repeat a full execution only when needed for a changed repeatability claim, invalidated evidence or explicit acceptance. If supplied, each row has `method_id`, `kind`, `outcome: "passed"`, and `evidence_path` referring to a hashed JSON output with the same first three fields. Reproducibility outputs also record equal `run_one_sha256` and `run_two_sha256`. Review must assess whether checks are meaningful; typed receipts cannot prove an experiment was honestly performed. Omitting optional metadata never authorizes hiding a failed check or claiming unverified correctness.
 
-The gate checks scientific file hashes, subjects, supported vintages, method policy and result bindings; complete Git change accounting and exact-head review remain required. Existing v1 scientific manifests remain supported, including validation of their supplied optional scientific fields. Exact reviewed encoded/decoded lengths establish finite per-file and complete-packet bounds, with safe-integer/overflow admission before reads or decompression. Actual lengths and hashes must match, and fresh complete immutable Git trees must agree with the manifest before hosted acquisition. File and historical-vintage counts follow the actual complete evidence scope; the manifest wrapper is bounded by its exact immutable tree size. Actual memory, storage, provider and job limits still apply; large data may require streaming or a reviewed execution approach. The 272 MiB in-memory cache, timeouts and legacy unplanned-reader guards remain unchanged. Git prefetch streams the admitted exact-object inventory to disk without aggregate byte or entry-count cutoffs; whole-body type/length/OID verification and exact per-body buffers remain mandatory. A premerge manifest cannot certify a deployment or geographic approval. Initial research may be complete with unresolved facts; it cannot close a correction that remains unresolved.
+The retained evidence validator checks scientific file hashes, subjects, supported vintages, method policy and result bindings; complete Git change accounting and exact-head review remain required. Existing v1 scientific manifests remain supported, including validation of their supplied optional scientific fields. Exact reviewed encoded/decoded lengths establish finite per-file and complete-packet bounds, with safe-integer/overflow admission before reads or decompression. Actual lengths and hashes must match, and fresh complete immutable Git trees must agree with the manifest before hosted acquisition. File and historical-vintage counts follow the actual complete evidence scope; the manifest wrapper is bounded by its exact immutable tree size. Actual memory, storage, provider and job limits still apply; large data may require streaming or a reviewed execution approach. The 272 MiB in-memory cache, timeouts and legacy unplanned-reader guards remain unchanged. Git prefetch streams the admitted exact-object inventory to disk without aggregate byte or entry-count cutoffs; whole-body type/length/OID verification and exact per-body buffers remain mandatory. A premerge manifest cannot certify a deployment or geographic approval. Initial research may be complete with unresolved facts; it cannot close a correction that remains unresolved.
 
 ### Multiple historical file vintages
 
@@ -113,7 +102,7 @@ out of `baseline.files` into candidate source/output descriptors, bind baseline 
 to real files at the ancestor, and refresh affected metric vintages/bindings honestly.
 If the actual reviewed metric inputs differ from the chosen ancestor, retain those results
 as archived with their true evaluation commit; do not merely relabel them current. Then run
-the trusted hosted gate and obtain a fresh exact-head review including its new limits.
+the relevant scientific validator and obtain a fresh exact-head review including its new limits.
 
 Local self-check:
 
@@ -122,7 +111,7 @@ node scripts/evidence-quality.mjs PATH/TO/evidence-quality.json
 node --test test/evidence-quality.test.mjs test/premerge-evidence.test.mjs
 ```
 
-The trusted CI `evidence` job publishes `evidence-check.json`, stating checked scope and unavailable evidence. It runs with read-only rights. Its success is mechanical validation, not an independent review.
+Retained validator outputs state checked scope and unavailable evidence. Their success is mechanical validation, not independent review or source approval. Ordinary queue phases no longer repeat this generic evidence traversal.
 
 ## Independent reviewer
 
@@ -158,8 +147,8 @@ implementation/source/geometry/release claims and retains applicable evidence
 limits. Resolve every reviewer's outstanding objection; a green byte-check job,
 arbitrary comment or stale-head review cannot substitute for that examination.
 Scientific manifests still bind original inputs and results mechanically. The
-standard queue rereads the head, checks, issue contract and scientific bytes before
-a SHA-guarded squash merge; it does not certify the operator's review judgment.
+standard queue binds the reviewed head/current main, candidate tests and actual
+scientific reports before a SHA-guarded squash merge; it does not certify the operator's review judgment.
 
 The separate physical-water exception in [GEOGRAPHIC_GAP_ADJUDICATION.md](GEOGRAPHIC_GAP_ADJUDICATION.md)
 retains its structured exact-dossier source decision, latest-decision checks and

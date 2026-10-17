@@ -1,3 +1,5 @@
+Current ordinary delivery policy is in [WORKER_COORDINATION.md](WORKER_COORDINATION.md): coherent PRs, optional issue references/labels, human ownership coordination and actual candidate/scientific checks. Historical one-issue/branch/body policies below are superseded.
+
 # Current workflow update — 2026-10-02 America/Los_Angeles
 
 GitHub Issues is the single source of truth for TODOs, current status and dated work history, with `type:engineering`, `type:geography` and `type:history-research` labels. Handover documents/prompts remain architecture and workflow instructions. Each focused PR addresses one issue or part of it; large issues may use multiple PRs. Use `Refs #N` for partial work, `Closes #N` only for final verified acceptance, and squash merge with the PR title as commit title. Every PR starts from fresh main. Original tracker snapshots and completion dates are retained in `docs/archive/pre-github-issues-20261002/`; the immutable crosswalk is `data/validation/github-issues-migration.json`.

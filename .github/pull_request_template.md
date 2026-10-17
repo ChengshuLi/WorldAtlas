@@ -1,10 +1,7 @@
-<!-- Choose exactly ONE line: Refs #N for partial work, Closes #N for complete verified acceptance. Replace N and remove the unused line. -->
-Refs #N
+Describe the concrete problem, resulting behavior or supported research coverage, and any remaining acceptance. Link related issues when useful; use ordinary GitHub closure keywords only for work actually completed.
 
-Describe the concrete problem and resulting behavior or supported research coverage. If this is part of a larger issue, explain which acceptance criteria it completes and which remain.
+Validation: relevant checks, substantive exact-head review, scientific source/input/result evidence and actual deployment state when applicable.
 
-Validation: relevant checks, source/import/read-back evidence and live deployment state when applicable.
+Production acceptance (if applicable): original criteria, exact code/data/release/assets pins, checks and blockers. Keep unverified production scope open with `publisher-needed`; delivery is discovered from merged main.
 
-Production acceptance (if applicable): original issue criteria, exact code/data/release/assets pins, checks and blockers. Keep unverified production scope open with `publisher-needed`; ordinary delivery is discovered from merged main, without a #714 request. Use `Refs` when actual production criteria remain.
-
-Post dated progress/evidence on the linked GitHub issue. Keep closed issues as history. Squash merge with this PR title as the commit title; use a fresh branch from current main for the next PR.
+Preserve dated evidence and closed issues. Submit the reviewed head through the serialized squash queue; use a fresh branch from current main for the next coherent change.

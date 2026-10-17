@@ -25,14 +25,14 @@ explains which criteria it advances and what happens next. The independent revie
 checks these statements against actual changes and evidence alongside exact-head review.
 A partial implementation may merge without completing the whole issue.
 
-Use `Closes #N` only when every original criterion is proven, including required
+Issue links are optional and may name multiple related issues. Use GitHub closure keywords only when every original criterion is proven, including required
 production acceptance. Otherwise use `Refs #N`. Initial research may finish with
 explicit unknowns where its original promise permits that; correction or approval
 work cannot close merely because the uncertainty was documented. No closure grants
 geography approval, publication or import permission.
 
 Continue unfinished in-scope work on the original issue, regardless of merged PR
-count. The legacy `max_prs` field is a positive planning estimate, not an allowance.
+count. Ordinary work needs no `max_prs` field; historical contracts remain preserved.
 No budget bump or successor issue is needed. Review remaining obligations after
 meaningful results; split only for a distinct deliverable, ownership or genuine wait.
 Reuse an existing follow-up before creating another. Do not silently expand acceptance

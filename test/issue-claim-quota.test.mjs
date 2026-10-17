@@ -83,7 +83,7 @@ for (const change of ['stable', 'blocker', 'dependency', 'scope', 'holder', 'liv
    if(route==='/repos/a/b/issues/1')return structuredClone(issue);
    if(route.startsWith('/repos/a/b/issues/1/comments')){commentReads++;return structuredClone(comments);}
    if(route.startsWith('/repos/a/b/issues/1/timeline'))return linked?
-    [{source:{issue:{number:3,pull_request:{},body:'Refs #1'}}}]:[];
+    [{source:{issue:{number:3,pull_request:{url:'https://api.github.com/repos/a/b/pulls/3'},body:'Refs #1. Context. Closes #4'}}}]:[];
    if(route==='/repos/a/b/pulls/3')return {number:3,state:'open',head:{ref:branch}};
    if(route==='/repos/a/b/issues/2'){
     const response=structuredClone(dependency);
