@@ -72,7 +72,27 @@ const accounting = {version: 1, kind: 'original-angola-conservative-disposition-
     'Held centres exactly equal the independent whole foreign ADM1 overlap union. No held centre receives repair credit.',
     'This supported-patch extraction is not source qualification, current-owner-zero or selected/emitted-output acceptance.',
     'All full original geometries, source uncertainty, JRC contrary-water observations and separate packages remain retained.']};
-const products = {'native-patch.json': jsonBytes({rows: diagnostic.supported_rows}),
+// The constructor requires class rows to cover its exact requested patch.
+// Restrict only that query mask; never clip the original source/negative geometry.
+const sourceSubset = structuredClone(source);
+for (const target of sourceSubset.targets) {
+  const rows = [];
+  for (const row of target.coverage_rows) {
+    const runs = [];
+    for (const [start, end, kind] of row.runs) {
+      for (let x = start; x < end; x++) if (supported.get(`${row.y}:${x}`) === target.pixelIndex) {
+        const prior = runs.at(-1);
+        if (prior && prior[1] === x && prior[2] === kind) prior[1]++;
+        else runs.push([x, x + 1, kind]);
+      }
+    }
+    if (runs.length) rows.push({y: row.y, runs});
+  }
+  if (rows.length) target.coverage_rows = rows;
+  else { assert.equal(target.coverage_classes.length, 1); delete target.coverage_rows; }
+}
+const products = {'source-evidence.json': jsonBytes(sourceSubset),
+  'native-patch.json': jsonBytes({rows: diagnostic.supported_rows}),
   'held-native-rows.json': jsonBytes({rows: diagnostic.held_rows}),
   'original-scope-disposition.json': jsonBytes(accounting)};
 const result = admitPublication(root, destination, products,
