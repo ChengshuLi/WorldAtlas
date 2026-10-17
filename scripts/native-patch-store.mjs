@@ -277,17 +277,15 @@ async function admitStore({chunks,expected,directory,size,ownerCount,rowField='r
    };
    function* entries(){
     active();if(descriptor.error)throw new CanonicalValueError(descriptor.error);const index=coordinateIndex(depth);
-    const records=Buffer.allocUnsafe(16*Math.min(count,4096)),window=Buffer.allocUnsafe(65536),range={};
+    const records=Buffer.allocUnsafe(16*Math.min(count,4096)),range={};
     for(let ordinal=0;ordinal<count;){
      active();const n=Math.min(4096,count-ordinal);readExact(index.fd,records,n*16,start+ordinal*16);
      for(let i=0;i<n;){
       vectorRange(records,i*16,range);const offset=range.offset;let end=i+1,bytes=range.length;
       while(end<n){vectorRange(records,end*16,range);const nextEnd=range.offset+range.length;
        demand(range.offset>=offset+bytes,'Unordered private metadata vector range');
-       if(nextEnd-offset>window.length)break;bytes=nextEnd-offset;end++;}
-      // Values yielded below own their decoded scalars/objects; none borrow the
-      // body bytes. Reuse this iterator's window, never another iterator's data.
-      const body=bytes<=window.length?window:Buffer.allocUnsafe(bytes);readExact(vectorFd,body,bytes,offset);
+       if(nextEnd-offset>65536)break;bytes=nextEnd-offset;end++;}
+      const body=Buffer.allocUnsafe(bytes);readExact(vectorFd,body,bytes,offset);
       for(;i<end;i++){active();const at=Number(records.readBigUInt64LE(i*16))-offset,length=Number(records.readBigUInt64LE(i*16+8));
        yield decodeMetadataBytes(body.subarray(at,at+length));}
      }

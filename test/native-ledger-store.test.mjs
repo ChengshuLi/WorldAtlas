@@ -351,7 +351,7 @@ for(const kind of ['coordinates','root metadata'])test('private '+kind+' ranges 
  }
 });
 
-test('iterator-local body windows preserve interleaved values and larger individual records',async t=>{
+test('bounded body reads preserve interleaved values and larger individual records',async t=>{
  const directory=temporary(t),coordinates=Array.from({length:9000},(_,i)=>i===4100?'x'.repeat(70000):[i,i+1]);
  const store=await open(directory,JSON.stringify({rows:[{geometry:{coordinates}}]})),sequence=store.componentMetadata(store.componentAt(0)).geometry.coordinates;
  const a=sequence[Symbol.iterator](),b=sequence[Symbol.iterator](),first=a.next().value,second=b.next().value;
