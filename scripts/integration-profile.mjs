@@ -249,7 +249,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       [...added].every(name => !baseline.entries.has(name)), 'nonordinary or overwritten data');
     const expectedPaths = [...added].filter(name => name.endsWith('/selected-delivery-expectations.json'));
     needSelected(expectedPaths.length > 0, 'one reviewed expectations file required');
-    let expectationsPath;
+    let expectationsPath, expectationsBytes;
     const cache = new Map();
     const readRow = async (row, retain = true) => {
       needSelected(ordinary(row), 'missing ordinary role');
@@ -604,8 +604,11 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       // mandatory, just as for every other supporting blob.
       if (expected?.selected_ledger_sha256 !== sidecar.logical_asset_map.ledger.sha256) continue;
       validateSelectedExpectations(expected, ledger, sidecar.logical_asset_map.ledger.sha256, parseJSON(oldLedgerBytes));
-      needSelected(!expectationsPath, 'multiple authoritative expectations');
-      expectationsPath = name;
+      // Retained finalizations can preserve the exact current smoke input.
+      // Only identical bytes share its authority; duplicate paths still pass
+      // the supporting-evidence consumed-role and custody checks below.
+      needSelected(!expectationsBytes || expectationsBytes.equals(bytes), 'multiple authoritative expectations');
+      if (!expectationsPath) { expectationsPath = name; expectationsBytes = bytes; }
     }
     needSelected(expectationsPath, 'one reviewed expectations file required');
     const oldRegistryBytes = await read(oldRegistryPin.path, baseline);

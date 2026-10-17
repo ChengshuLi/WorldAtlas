@@ -158,7 +158,7 @@ for(const [name,mutate] of Object.entries({
   'missing accepted smoke':f=>f.baseline.entries.delete(SELECTED_SMOKE),
   'candidate helper substitution':f=>f.put(SELECTED_SMOKE,'// candidate replacement'),
   'missing expectations':f=>f.authored.entries.delete(prefix+'selected-delivery-expectations.json'),
-  'ambiguous expectations':f=>f.put(prefix+'other/selected-delivery-expectations.json',f.expected),
+  'ambiguous expectations':f=>f.put(prefix+'other/selected-delivery-expectations.json',JSON.stringify(f.expected)+'\n'),
   'incomplete expected roster':f=>{f.expected.cohorts[0].members.pop();f.expected.cohorts[0].component_ids.pop();f.put(prefix+'selected-delivery-expectations.json',f.expected);},
   'wrong expected target':f=>{f.expected.cohorts[0].members[0].target_id='wrong';f.put(prefix+'selected-delivery-expectations.json',f.expected);},
   'wrong expected cells':f=>{f.expected.cumulative_native_cells=1;f.put(prefix+'selected-delivery-expectations.json',f.expected);},
@@ -976,7 +976,7 @@ test('one current-bound expectation disambiguates an exact unconsumed package te
 });
 
 for (const [name,change] of Object.entries({
-  'two authoritative candidates':({f,directory})=>f.put(directory+'/selected-delivery-expectations.json',f.expected),
+  'two authoritative candidates':({f,directory})=>f.put(directory+'/selected-delivery-expectations.json',JSON.stringify(f.expected)+'\n'),
   'incorrect current ledger binding':({f,root})=>f.put(root+'selected-delivery-expectations.json',{...f.expected,selected_ledger_sha256:'f'.repeat(64)}),
   'no authoritative candidate':({f,root})=>f.authored.entries.delete(root+'selected-delivery-expectations.json'),
   'template becomes a package input':({f,directory})=>{f.definition.inputs.push(directory+'/selected-delivery-expectations.json');f.put('.github/package-inputs.json',f.definition);},
@@ -1048,7 +1048,7 @@ test('complete original PR1770 192-path diff selects the uniquely bound finalize
   for(const oid of f.gitReads)assert(reachable.has(oid),'every unsnapshotted original body must be reachable in shallow HEAD: '+oid);
 });
 for(const [label,mutate] of Object.entries({
-  'two authoritative expectations':f=>{const names=f.files.filter(row=>row.filename.endsWith('/selected-delivery-expectations.json')).map(row=>row.filename);const final=names.find(name=>f.document(name).selected_ledger_sha256);f.put(names.find(name=>name!==final),f.document(final));},
+  'two authoritative expectations':f=>{const names=f.files.filter(row=>row.filename.endsWith('/selected-delivery-expectations.json')).map(row=>row.filename);const final=names.find(name=>f.document(name).selected_ledger_sha256);f.put(names.find(name=>name!==final),JSON.stringify(f.document(final))+'\n');},
   'incorrect current binding':f=>{const name=f.files.find(row=>row.filename.endsWith('/finalize/selected-delivery-expectations.json')).filename;f.put(name,{...f.document(name),selected_ledger_sha256:'f'.repeat(64)});},
   'foreign ownership':f=>f.reservation.owned_paths=['coordination/engineering/foreign/'],
   'consumed diagnostic text':f=>{const policy=f.document('.github/package-inputs.json');policy.inputs.push(f.files.find(row=>row.filename.endsWith('/stderr.txt')).filename);f.put('.github/package-inputs.json',policy);},
@@ -1805,7 +1805,9 @@ test('historical and prospective expectations are inert, while one complete curr
   f.put(f.retainedName, {...f.expected, selected_ledger_sha256:null, cohorts:[]});
   assert.equal((await f.run()).test_selection, 'selected-data');
   f.put(f.retainedName, f.expected);
-  assert.equal(await f.run(), null, 'two current bound rosters are ambiguous');
+  assert.equal((await f.run()).test_selection, 'selected-data', 'identical current rosters share authority');
+  f.put(f.retainedName, JSON.stringify(f.expected)+'\n');
+  assert.equal(await f.run(), null, 'even equivalent JSON with different bytes remains ambiguous');
   f.put(f.retainedName, {...f.expected, selected_ledger_sha256:'f'.repeat(64)});
   f.put(f.packetPrefix+'selected-delivery-expectations.json', {...f.expected, cohorts:[]});
   assert.equal(await f.run(), null, 'an incomplete current roster is never supporting custody');
@@ -1939,4 +1941,22 @@ test('selected-data declares every complete negative source reference part and r
   const broken=sourceTargetRoleFixture({mutateRoles:args=>{setup(args);mutate(args.roles.territorial_exclusion_sources);}});
   assert.equal(await broken.run(),null);
  }
+});
+
+test('identical current expectations retain their files and must remain unconsumed supporting evidence', async () => {
+  const f = retainedEvidenceFixture('finalized/selected-delivery-expectations.json', fixture().expected);
+  // Bind the duplicate to this fixture's exact current ledger and serialization.
+  f.put(f.retainedName, f.expected);
+  const selected = await f.run();
+  assert.equal(selected?.test_selection, 'selected-data');
+  assert.equal(selected.expectations_path, f.packetPrefix+'selected-delivery-expectations.json');
+  assert(f.authored.entries.has(f.retainedName), 'the original evidence remains retained');
+  f.files.reverse();
+  assert.equal((await f.run()).expectations_path, f.retainedName, 'either identical file can supply the smoke role');
+  f.files.reverse();
+  f.put(f.retainedName, {...f.expected, cohorts:f.expected.cohorts.map(cohort=>({...cohort,original_batch_id:'different-batch'}))});
+  assert.equal(await f.run(), null, 'different valid current roster metadata cannot share authority');
+  f.put(f.retainedName, f.expected);
+  f.definition.inputs.push(f.retainedName); f.put('.github/package-inputs.json', f.definition);
+  assert.equal(await f.run(), null, 'identical content does not bypass consumed package roles');
 });
