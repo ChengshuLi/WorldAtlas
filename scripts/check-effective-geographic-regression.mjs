@@ -1,7 +1,7 @@
 // Trusted immutable data reader. Proposed project code is never imported.
 import fs from 'node:fs';
 import path from 'node:path';
-import {execFileSync} from 'node:child_process';
+import {execFileSync,spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {fileURLToPath} from 'node:url';
@@ -105,6 +105,105 @@ export class ImmutableReader {
       demand(pin,'Missing immutable whole-body descriptor');options.maxBuffer=pin.bytes+1;
     }
     return execFileSync(this.gitExecutable,['-c','core.hooksPath=/dev/null','-C',this.repo,...args],options);
+  }
+  gitBatch(args,input,maxBuffer) {
+    const result=spawnSync(this.gitExecutable,['-c','core.hooksPath=/dev/null','-C',this.repo,...args],
+      {input,maxBuffer,stdio:['pipe','pipe','pipe']});
+    if(result.error)throw result.error;
+    demand(result.status===0&&!result.stderr.length,'Incomplete immutable Git batch: '+result.stderr.toString());
+    return result.stdout;
+  }
+  // The caller already knows this finite pin layer. Resolve only its original
+  // commits and exact paths, then consume complete blobs. Nothing survives as a
+  // body/availability cache: a later fetch must recheck a previously absent origin.
+  readPinned(pins) {
+    demand(Array.isArray(pins),'Require immutable pin list');
+    for(const p of pins)demand(p&&commit(p.commit)&&safe(p.path)&&['100644','100755'].includes(p.mode)
+      &&/^[a-f0-9]{40}$/.test(p.git_blob_oid)&&Number.isSafeInteger(p.bytes)&&p.bytes>=0&&hash(p.sha256),
+      'Incomplete immutable read pin');
+    demand(commit(this.version),'Require immutable input commit');
+    const versions=[...new Set(pins.map(p=>p.commit))],available=new Set();
+    // Chunk transport requests, not the admitted scope. No aggregate input cap.
+    for(let offset=0;offset<versions.length;offset+=256){
+      const group=versions.slice(offset,offset+256),input=group.map(v=>v+'^{commit}').join('\n')+'\n';
+      // Availability is local; a missing original uses only a fully bound current alias.
+      // Do not let a promisor fetch failure corrupt this optional metadata probe.
+      const output=this.gitBatch(['--no-lazy-fetch','cat-file','--batch-check=%(objectname) %(objecttype) %(objectsize)'],input,group.length*128);
+      const rows=output.toString().split('\n');
+      demand(rows.pop()===''&&rows.length===group.length,'Incomplete immutable commit batch');
+      rows.forEach((row,i)=>{
+        if(row===group[i]+'^{commit} missing')return;
+        const match=/^([a-f0-9]{40}) commit (0|[1-9][0-9]*)$/.exec(row);
+        demand(match&&match[1]===group[i]&&Number.isSafeInteger(Number(match[2])),'Invalid immutable commit batch');
+        available.add(group[i]);
+      });
+    }
+    const requests=pins.map(p=>({pin:p,version:available.has(p.commit)?p.commit:this.version}));
+    const pending=new Map();
+    for(const {pin:p,version}of requests){
+      if(this.inventory.has(version+':'+p.path))continue;
+      if(!pending.has(version))pending.set(version,new Map());
+      pending.get(version).set(p.path,null);
+    }
+    const fresh=[];
+    for(const [version,paths]of pending){
+      const names=[...paths.keys()];
+      for(let offset=0;offset<names.length;offset+=128){
+        const group=names.slice(offset,offset+128),expected=new Set(group),seen=new Set();
+        const tree=this.#trees.get(version);
+        const output=tree?group.map(name=>tree.get(name)??'').join(''):
+          this.git('--literal-pathspecs','ls-tree','-z',version,'--',...group).toString();
+        demand(output===''||output.endsWith('\0'),'Incomplete immutable path batch');
+        for(const row of output.split('\0').slice(0,-1)){
+          const match=/^(100644|100755) blob ([a-f0-9]{40})\t([\s\S]+)$/.exec(row);
+          demand(match&&expected.has(match[3])&&!seen.has(match[3]),'Require exact whole ordinary Git batch input');
+          seen.add(match[3]);fresh.push({commit:version,path:match[3],mode:match[1],git_blob_oid:match[2]});
+        }
+        demand(seen.size===expected.size,'Missing whole ordinary Git batch input');
+      }
+    }
+    for(let offset=0;offset<fresh.length;offset+=256){
+      const group=fresh.slice(offset,offset+256),input=group.map(p=>p.git_blob_oid).join('\n')+'\n';
+      const output=this.gitBatch(['cat-file','--batch-check=%(objectname) %(objecttype) %(objectsize)'],input,group.length*128);
+      const rows=output.toString().split('\n');
+      demand(rows.pop()===''&&rows.length===group.length,'Incomplete immutable size batch');
+      rows.forEach((row,i)=>{
+        const match=/^([a-f0-9]{40}) blob (0|[1-9][0-9]*)$/.exec(row);
+        demand(match&&match[1]===group[i].git_blob_oid&&Number.isSafeInteger(Number(match[2])),
+          'Invalid immutable blob size batch');
+        group[i].bytes=Number(match[2]);
+      });
+    }
+    for(const p of fresh)this.inventory.set(p.commit+':'+p.path,p);
+    const actual=requests.map(({pin:p,version})=>{
+      const d=this.inventory.get(version+':'+p.path);
+      demand(d.mode===p.mode&&d.git_blob_oid===p.git_blob_oid&&d.bytes===p.bytes,
+        'Checkpoint whole mode/OID/size or historical alias changed: '+p.path);
+      return d;
+    });
+    const bodies=[];
+    for(let offset=0;offset<pins.length;){
+      let end=offset,bytes=0;
+      // Small pins share a process; a larger whole file is read alone, unchanged.
+      while(end<pins.length&&end-offset<256&&(end===offset||bytes+pins[end].bytes<=16*1024*1024))bytes+=pins[end++].bytes;
+      const group=actual.slice(offset,end),input=group.map(p=>p.git_blob_oid).join('\n')+'\n';
+      const output=this.gitBatch(['cat-file','--batch'],input,bytes+group.length*128);
+      let at=0;const accepted=[];
+      for(let i=0;i<group.length;i++){
+        const p=group[i],newline=output.indexOf(10,at);
+        demand(newline>=at&&output.subarray(at,newline).toString()===`${p.git_blob_oid} blob ${p.bytes}`,
+          'Invalid immutable whole-body batch header');
+        at=newline+1;
+        demand(at+p.bytes<output.length&&output[at+p.bytes]===10,'Incomplete immutable whole-body batch');
+        const body=Buffer.from(output.subarray(at,at+p.bytes)),digest=sha(body);at+=p.bytes+1;
+        demand(digest===pins[offset+i].sha256,'Whole immutable input differs: '+p.path);
+        accepted.push({p,body,digest});
+      }
+      demand(at===output.length,'Unexpected immutable whole-body batch output');
+      for(const {p,body,digest}of accepted){p.sha256=digest;p.whole_body_consumed=true;bodies.push(body);}
+      offset=end;
+    }
+    return bodies;
   }
   // Complete immutable tree metadata answers both present and absent routes.
   // Keep nonordinary entries: a directory or symlink must never look absent.

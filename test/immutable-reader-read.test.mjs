@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
 import os from 'node:os';
-import {execFileSync} from 'node:child_process';
+import {execFileSync,spawnSync} from 'node:child_process';
 import {syncBuiltinESMExports} from 'node:module';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
@@ -171,4 +171,217 @@ test('complete tree command failure and truncated or malformed output never esta
     assert.throws(()=>reader.treeRoute('missing'),/Incomplete immutable tree output|Invalid immutable tree entry/);
     reader.git=(...args)=>f.git(...args);assert.equal(reader.treeRoute('missing'),'');
   }
+});
+
+function batchFixture(t) {
+  const f=treeFixture(t);
+  const pin=(name,version=f.version)=>{
+    const body=f.git('show',version+':'+name),row=f.git('--literal-pathspecs','ls-tree','-z',version,'--',name).toString();
+    const [mode,,oid]=row.slice(0,row.indexOf('\t')).split(' ');
+    return {commit:version,path:name,mode,git_blob_oid:oid,bytes:body.length,sha256:hash(body)};
+  };
+  const calls=[],batch=f.reader.gitBatch.bind(f.reader);
+  f.reader.gitBatch=(args,input,maxBuffer)=>{calls.push({args,input,maxBuffer});return batch(args,input,maxBuffer);};
+  return {...f,pin,batches:calls};
+}
+
+test('known immutable pins share commit, exact-path, size and complete-body processes',t=>{
+  const f=batchFixture(t);
+  const inputs=['literal[1]','dir/ordinary','executable'].map(name=>f.pin(name));
+  const bodies=f.reader.readPinned(inputs);
+  assert.deepEqual(bodies,inputs.map(p=>f.git('show',p.commit+':'+p.path)));
+  assert.equal(f.calls.length,1);assert.deepEqual(f.calls[0],['--literal-pathspecs','ls-tree','-z',f.version,'--',...inputs.map(p=>p.path)]);
+  assert.equal(f.batches.length,3);
+  for(const p of inputs)assert.deepEqual(f.reader.inventory.get(p.commit+':'+p.path),{...p,whole_body_consumed:true});
+});
+
+test('only an already-loaded tree is reused and duplicate requests return independent mutable bodies',t=>{
+  const f=batchFixture(t),p=f.pin('dir/ordinary');f.reader.treeRoute(p.path);
+  const bodies=f.reader.readPinned([p,p]);assert.deepEqual(bodies,[Buffer.from('one'),Buffer.from('one')]);
+  bodies[0][0]=0;assert.equal(bodies[1].toString(),'one');
+  assert.equal(f.reader.readPinned([p])[0].toString(),'one');
+  assert.equal(f.calls.length,1,'No new tree preload or path process');
+  assert.equal(f.batches.filter(call=>call.args[1]==='--batch').length,2,'Every batch consumes fresh whole bytes');
+  const fresh=new ImmutableReader(f.root,f.version);let reads=0;const batch=fresh.gitBatch.bind(fresh);
+  fresh.gitBatch=(...args)=>{reads++;return batch(...args);};
+  assert.equal(fresh.readPinned([p])[0].toString(),'one');assert.equal(reads,3);
+});
+
+test('missing original uses only an exact current alias and rechecks after a real fetch',t=>{
+  const f=batchFixture(t),p=f.pin('dir/ordinary'),remote=path.join(f.root,'foreign');fs.mkdirSync(remote);
+  const git=(...args)=>execFileSync('git',['-c','user.name=Foreign fixture','-c','user.email=foreign@example.invalid','-C',remote,...args],{stdio:['ignore','pipe','pipe']});
+  git('init','-q');fs.mkdirSync(path.join(remote,'dir'));fs.writeFileSync(path.join(remote,p.path),'two');git('add','.');git('commit','-qm','Different original');
+  const original=git('rev-parse','HEAD').toString().trim(),historical={...p,commit:original};
+  assert.equal(f.reader.readPinned([historical])[0].toString(),'one');
+  f.git('fetch','--no-tags',remote,original);
+  assert.throws(()=>f.reader.readPinned([historical]),/mode\/OID\/size or historical alias changed/);
+  const absent={...p,path:'absent',commit:'0'.repeat(40)};
+  assert.throws(()=>f.reader.readPinned([absent]),/Missing whole ordinary/);
+});
+
+test('available original missing its path cannot fall back; changed versions authenticate independently',t=>{
+  const f=batchFixture(t),old=f.version,p=f.pin('dir/ordinary');
+  fs.writeFileSync(path.join(f.root,p.path),'two');fs.writeFileSync(path.join(f.root,'new-file'),'new');f.git('add','.');f.git('commit','-qm','New candidate');
+  const newer=f.git('rev-parse','HEAD').toString().trim(),newPin=f.pin(p.path,newer),newFile=f.pin('new-file',newer);
+  f.reader.version=newer;
+  assert.deepEqual(f.reader.readPinned([p,newPin]).map(b=>b.toString()),['one','two']);
+  assert.throws(()=>f.reader.readPinned([{...newFile,commit:old}]),/Missing whole ordinary/);
+  assert.throws(()=>f.reader.readPinned([{...p,commit:newer}]),/mode\/OID\/size or historical alias changed/);
+  assert.throws(()=>f.reader.readPinned([{...p,mode:'100755'}]),/mode\/OID\/size/);
+  assert.throws(()=>f.reader.readPinned([{...p,bytes:p.bytes+1}]),/mode\/OID\/size/);
+  assert.throws(()=>f.reader.readPinned([{...p,sha256:'0'.repeat(64)}]),/Whole immutable input differs/);
+  assert.throws(()=>f.reader.readPinned([{...p,commit:'HEAD'}]),/Incomplete immutable read pin/);
+  assert.throws(()=>f.reader.readPinned([{...p,path:'../outside'}]),/Incomplete immutable read pin/);
+});
+
+for(const name of ['dir','link','submodule'])test('batch refuses actual nonordinary tree entry '+name,t=>{
+  const f=batchFixture(t),p={...f.pin('dir/ordinary'),path:name};
+  assert.throws(()=>f.reader.readPinned([p]),/Require exact whole ordinary Git batch input/);
+  assert.equal(f.reader.inventory.size,0);
+});
+
+for(const stage of ['commit','path','size','body'])test('batch rejects malformed, truncated, duplicate and unexpected '+stage+' responses',t=>{
+  const f=batchFixture(t),pins=['dir/ordinary','executable'].map(name=>f.pin(name));
+  const alterations=stage==='body'?[
+    b=>Buffer.concat([Buffer.from('f'.repeat(40)),b.subarray(40)]),
+    b=>Buffer.from(b.toString().replace(' blob ',' tree ')),
+    b=>Buffer.from(b.toString().replace(' blob 3\n',' blob 4\n')),
+    b=>b.subarray(0,b.length-2),
+    b=>{const c=Buffer.from(b);c[c.indexOf(10)+1]^=1;return c;},
+    b=>Buffer.concat([b,b]),
+    b=>Buffer.concat([b,Buffer.from('unexpected\n')])
+  ]:[
+    b=>Buffer.from('malformed'+(stage==='path'?'\0':'\n')),
+    b=>b.subarray(0,b.length-1),
+    b=>Buffer.concat([b,b]),
+    b=>Buffer.concat([b,Buffer.from('unexpected'+(stage==='path'?'\0':'\n'))]),
+    b=>Buffer.from(b.toString().replace(/[a-f0-9]{40}/,'f'.repeat(40)))
+  ];
+  for(const alter of alterations){
+    const reader=new ImmutableReader(f.root,f.version),git=reader.git.bind(reader),batch=reader.gitBatch.bind(reader);
+    reader.git=(...args)=>{const result=git(...args);return stage==='path'?alter(result):result;};
+    reader.gitBatch=(args,input,maxBuffer)=>{
+      const result=batch(args,input,maxBuffer),current=args[1]==='--batch'?'body':input.includes('^{commit}')?'commit':'size';
+      return stage===current?alter(result):result;
+    };
+    assert.throws(()=>reader.readPinned(pins),/immutable|whole ordinary|historical alias/i,stage);
+    assert.ok([...reader.inventory.values()].every(p=>!p.whole_body_consumed),'No failed batch claims consumption');
+  }
+});
+
+test('Git batch nonzero exit and diagnostics fail without accepting partial stdout',t=>{
+  const f=batchFixture(t),script=path.join(f.root,'failed-git');
+  fs.writeFileSync(script,'#!/bin/sh\nprintf "partial\\n"\nexit 1\n');fs.chmodSync(script,0o755);
+  const reader=new ImmutableReader(f.root,f.version,{gitExecutable:script});
+  assert.throws(()=>reader.readPinned([f.pin('dir/ordinary')]),/Incomplete immutable Git batch/);
+  fs.writeFileSync(script,'#!/bin/sh\nprintf "partial\\n"\nprintf "corrupt\\n" >&2\n');
+  assert.throws(()=>reader.readPinned([f.pin('dir/ordinary')]),/Incomplete immutable Git batch/);
+  assert.equal(reader.inventory.size,0);
+});
+
+test('transport chunking accepts a larger complete pin list without an aggregate count cap',t=>{
+  const f=batchFixture(t),p=f.pin('dir/ordinary'),pins=Array.from({length:600},()=>p);
+  const bodies=f.reader.readPinned(pins);assert.equal(bodies.length,600);assert.ok(bodies.every(b=>b.toString()==='one'));
+  assert.equal(f.batches.filter(call=>call.args[1]==='--batch').length,3);
+});
+
+test('batch keeps literal tab/newline paths and authenticates an empty ordinary blob',t=>{
+  const f=batchFixture(t),name='literal\tline\n[2]';fs.writeFileSync(path.join(f.root,name),'');
+  f.git('add','.');f.git('commit','-qm','Empty literal path');const version=f.git('rev-parse','HEAD').toString().trim();
+  const p=f.pin(name,version);assert.equal(p.bytes,0);
+  const bodies=f.reader.readPinned([p]);assert.deepEqual(bodies,[Buffer.alloc(0)]);
+  assert.equal(f.reader.inventory.get(version+':'+name).sha256,hash(Buffer.alloc(0)));
+});
+
+test('an actually missing blob fails whole size authentication without claiming consumption',t=>{
+  const f=batchFixture(t),p=f.pin('dir/ordinary');
+  fs.unlinkSync(path.join(f.root,'.git','objects',p.git_blob_oid.slice(0,2),p.git_blob_oid.slice(2)));
+  assert.throws(()=>f.reader.readPinned([p]),/Invalid immutable blob size batch|Incomplete immutable Git batch/);
+  assert.equal(f.reader.inventory.size,0);
+});
+
+
+// A real promisor remote is essential here: an ordinary repository reports a
+// missing commit quietly and cannot reproduce the hosted availability failure.
+function promisorFixture(t,{populated=false}={}) {
+  const f=batchFixture(t),remote=path.join(f.root,'.git','promisor.git');
+  const executable=execFileSync('which',['git'],{encoding:'utf8'}).trim();
+  if(populated)execFileSync(executable,['clone','--bare','--quiet','--no-local',f.root,remote]);
+  else execFileSync(executable,['init','--bare','--quiet',remote]);
+  execFileSync(executable,['--git-dir',remote,'config','uploadpack.allowAnySHA1InWant','true']);
+  execFileSync(executable,['--git-dir',remote,'config','uploadpack.allowFilter','true']);
+  f.git('config','extensions.partialClone','origin');
+  f.git('config','remote.origin.url',remote);f.git('config','remote.origin.promisor','true');
+  f.git('config','remote.origin.partialclonefilter','blob:none');
+  const trace=path.join(f.root,'.git','reader-git.trace'),wrapper=path.join(f.root,'.git','traced-git');
+  fs.writeFileSync(wrapper,`#!/bin/sh\nGIT_NO_LAZY_FETCH=0 GIT_TRACE=${JSON.stringify(trace)} exec ${JSON.stringify(executable)} "$@"\n`,{mode:0o755});
+  f.reader.gitExecutable=wrapper;
+  const tracing=()=>fs.existsSync(trace)?fs.readFileSync(trace,'utf8'):'';
+  return {...f,remote,executable,trace,wrapper,tracing};
+}
+
+test('real promisor missing original never invokes remote transport before exact current alias admission',t=>{
+  const f=promisorFixture(t),p={...f.pin('dir/ordinary'),commit:'77be56dd849d1351b82f0e79d7d306c1080b2562'};
+  const old=spawnSync(f.wrapper,['-C',f.root,'cat-file','--batch-check=%(objectname) %(objecttype) %(objectsize)'],
+    {input:p.commit+'^{commit}\n',encoding:'utf8'});
+  assert.equal(old.status,0);assert.equal(old.stdout,p.commit+'^{commit} missing\n');
+  assert.match(old.stderr,/not our ref/);assert.match(f.tracing(),/fetch .*origin|upload-pack/);
+  fs.writeFileSync(f.trace,'');
+  assert.equal(f.reader.readPinned([p])[0].toString(),'one');
+  assert.doesNotMatch(f.tracing(),/fetch .*origin|upload-pack/,'The real remote helper must not be invoked');
+  assert.deepEqual(f.reader.inventory.get(f.version+':'+p.path),{...p,commit:f.version,whole_body_consumed:true});
+  assert.equal(f.reader.inventory.has(p.commit+':'+p.path),false,'Do not fabricate historical consumption');
+  for(const altered of [{...p,mode:'100755'},{...p,bytes:p.bytes+1},{...p,git_blob_oid:'f'.repeat(40)},
+    {...p,sha256:'0'.repeat(64)},{...p,path:'missing'}]){
+    const reader=new ImmutableReader(f.root,f.version,{gitExecutable:f.wrapper});
+    assert.throws(()=>reader.readPinned([altered]),/historical alias changed|Whole immutable input differs|Missing whole ordinary/);
+    assert.ok([...reader.inventory.values()].every(row=>!row.whole_body_consumed));
+  }
+  assert.doesNotMatch(f.tracing(),/fetch .*origin|upload-pack/);
+});
+
+test('promisor local original retains precedence over changed current bytes and a missing original path never falls back',t=>{
+  const f=promisorFixture(t),original=f.version,p=f.pin('dir/ordinary');
+  fs.writeFileSync(path.join(f.root,p.path),'two');fs.writeFileSync(path.join(f.root,'new-path'),'new');
+  f.git('add','.');f.git('commit','-qm','Changed current alias');
+  const current=f.git('rev-parse','HEAD').toString().trim();f.reader.version=current;
+  assert.equal(f.reader.readPinned([p])[0].toString(),'one');
+  assert.equal(f.reader.inventory.get(original+':'+p.path).commit,original);
+  const currentPin=f.pin(p.path,current),newPin=f.pin('new-path',current);
+  assert.throws(()=>f.reader.readPinned([{...currentPin,commit:original}]),/historical alias changed/);
+  assert.throws(()=>f.reader.readPinned([{...newPin,commit:original}]),/Missing whole ordinary/);
+  assert.doesNotMatch(f.tracing(),/fetch .*origin|upload-pack/);
+});
+
+test('nonfetching availability leaves actual missing-body promisor acquisition and authentication enabled',t=>{
+  const f=promisorFixture(t,{populated:true}),p=f.pin('dir/ordinary');
+  fs.unlinkSync(path.join(f.root,'.git','objects',p.git_blob_oid.slice(0,2),p.git_blob_oid.slice(2)));
+  assert.equal(f.reader.readPinned([p])[0].toString(),'one');
+  assert.match(f.tracing(),/fetch .*origin|upload-pack/,'The actual body still uses ordinary authenticated acquisition');
+  assert.equal(f.reader.inventory.get(p.commit+':'+p.path).whole_body_consumed,true);
+  assert.throws(()=>f.reader.readPinned([{...p,sha256:'0'.repeat(64)}]),/Whole immutable input differs/);
+});
+
+test('promisor missing-body failure is not reinterpreted as an unavailable original',t=>{
+  const f=promisorFixture(t),p=f.pin('dir/ordinary');
+  fs.unlinkSync(path.join(f.root,'.git','objects',p.git_blob_oid.slice(0,2),p.git_blob_oid.slice(2)));
+  assert.throws(()=>f.reader.readPinned([p]),/Incomplete immutable Git batch|ENOBUFS/);
+  assert.match(f.tracing(),/fetch .*origin|upload-pack/);
+  assert.ok([...f.reader.inventory.values()].every(row=>!row.whole_body_consumed));
+});
+
+test('remote-only original uses an exact alias, then rechecks the original after explicit acquisition',t=>{
+  const f=promisorFixture(t,{populated:true});
+  const remote=(args,input)=>execFileSync(f.executable,['--git-dir',f.remote,...args],{input,encoding:'utf8'}).trim();
+  const blob=remote(['hash-object','-w','--stdin'],'different original');
+  const dir=remote(['mktree'],`100644 blob ${blob}\tordinary\n`);
+  const tree=remote(['mktree'],`040000 tree ${dir}\tdir\n`);
+  const original=remote(['-c','user.name=Reader Test','-c','user.email=reader@example.invalid','commit-tree',tree], 'Remote original\n');
+  const p={...f.pin('dir/ordinary'),commit:original};
+  assert.equal(f.reader.readPinned([p])[0].toString(),'one');
+  assert.doesNotMatch(f.tracing(),/fetch .*origin|upload-pack/);
+  assert.equal(f.reader.inventory.has(original+':'+p.path),false);
+  f.git('fetch','--quiet','--no-tags',f.remote,original);
+  assert.throws(()=>f.reader.readPinned([p]),/historical alias changed/);
+  assert.ok(!f.reader.inventory.get(original+':'+p.path).whole_body_consumed);
 });
