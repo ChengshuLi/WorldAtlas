@@ -1,0 +1,17 @@
+[
+  {
+    "control": "occupied",
+    "exit_code": 1,
+    "stderr": "node:internal/modules/run_main:107\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Occupied destination\n    at file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/32cc74e59105c73c9a3fcc623197c7e1e8e361508f3708a7fe46eed99e3de716/work/coordination/engineering/angola-repair-delivery-20261017/method/prepare-conservative.mjs:20:1 {\n  generatedMessage: false,\n  code: 'ERR_ASSERTION',\n  actual: false,\n  expected: true,\n  operator: '==',\n  diff: 'simple'\n}\n\nNode.js v24.19.0\n"
+  },
+  {
+    "control": "dangling-symlink",
+    "exit_code": 1,
+    "stderr": "node:internal/modules/run_main:107\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Nonordinary destination\n    at file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/32cc74e59105c73c9a3fcc623197c7e1e8e361508f3708a7fe46eed99e3de716/work/coordination/engineering/angola-repair-delivery-20261017/method/prepare-conservative.mjs:18:13 {\n  generatedMessage: false,\n  code: 'ERR_ASSERTION',\n  actual: false,\n  expected: true,\n  operator: '==',\n  diff: 'simple'\n}\n\nNode.js v24.19.0\n"
+  },
+  {
+    "control": "wrong-original-denominator",
+    "exit_code": 1,
+    "stderr": "node:internal/modules/run_main:107\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   bytes: 411286,\n+   commit: 'e7c8e784a81f78e833bbe28382f4aa8d144bcb78',\n+   git_blob_oid: '1585a429a6d09da49d7c22e8a777dfc885d02425',\n-   bytes: 341436,\n-   commit: '88b26f9ecc1abac3b55be7cd64da2e60879b3fdc',\n-   git_blob_oid: 'c7d18dd82b8e854df151786733646418971b4f8d',\n    mode: '100644',\n+   path: 'coordination/engineering/angola-repair-delivery-20261017/source-stage/native-patch.json',\n+   sha256: '2dbf90aaafbcc13cdf723b9e4d8a11395280914ec50281fb07ed2bd68372479b'\n-   path: 'coordination/engineering/angola-repair-delivery-20261017/conservative-002/native-patch.json',\n-   sha256: 'd671b222b2c6df00dcc1d8342ea756efab3f1ac476afdf7b7c41f9c540334973'\n  }\n\n    at file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/32cc74e59105c73c9a3fcc623197c7e1e8e361508f3708a7fe46eed99e3de716/work/coordination/engineering/angola-repair-delivery-20261017/method/prepare-conservative.mjs:33:8 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: {\n    bytes: 411286,\n    commit: 'e7c8e784a81f78e833bbe28382f4aa8d144bcb78',\n    git_blob_oid: '1585a429a6d09da49d7c22e8a777dfc885d02425',\n    mode: '100644',\n    path: 'coordination/engineering/angola-repair-delivery-20261017/source-stage/native-patch.json',\n    sha256: '2dbf90aaafbcc13cdf723b9e4d8a11395280914ec50281fb07ed2bd68372479b'\n  },\n  expected: {\n    path: 'coordination/engineering/angola-repair-delivery-20261017/conservative-002/native-patch.json',\n    commit: '88b26f9ecc1abac3b55be7cd64da2e60879b3fdc',\n    mode: '100644',\n    git_blob_oid: 'c7d18dd82b8e854df151786733646418971b4f8d',\n    bytes: 341436,\n    sha256: 'd671b222b2c6df00dcc1d8342ea756efab3f1ac476afdf7b7c41f9c540334973'\n  },\n  operator: 'deepStrictEqual',\n  diff: 'simple'\n}\n\nNode.js v24.19.0\n"
+  }
+]
