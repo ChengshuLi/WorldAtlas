@@ -1,7 +1,7 @@
 # Greenland current selected-delivery handoff
 
 Issue: https://github.com/ChengshuLi/WorldAtlas/issues/2303
-Current author branch: `engineering/greenland-repair-current-20261017`
+Current author branch: `engineering/greenland-repair-checkpoint-20261017`
 Current accepted baseline: `579c2850ab0eb4bbcc1a6f41f8eb0563791208fe` (accepted map from `aa86126887af58d2c99f0eee91da26dd27010eb5`).
 Original complete source/physical/native authority checkpoint: `627e774149c0acb9b0197f1fd506ebb327b5f36e`. Original branch ancestry is retained by merge, with the accepted selector and package declaration preserved before current composition.
 
