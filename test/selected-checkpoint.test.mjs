@@ -775,3 +775,29 @@ for(const [name,mutate,message]of [
  await assert.rejects(()=>f.api.qualifyTransition({state:baseline.state,reader}),message);
  assert.deepEqual(nativeLiteral(baseline.state.ledger.rows),f.ledger.rows);
 });
+
+for(const count of [3,16,64])test('genuine completed source/owner/component growth remains fully joined: '+count,async t=>{
+ const sourceFeatures=[feature('A',0),feature('B',1),feature('C',5),
+  ...Array.from({length:count-3},(_,i)=>feature('D'+String(i).padStart(3,'0'),10+i))];
+ const f=await trustedFixture(t,{nativeAppend:true,sourceFeatures}),baseline=await f.api.qualifyCheckpoint({reader:f.reader});
+ assert.equal(baseline.state.certificate.entries.length,count);
+ const next=await appendNativeAuthority(f,{completedConstructor:true,targetOwners:Array.from({length:count},(_,i)=>i)});
+ assert.equal(next.proof.source_rows.length,count);
+ const reader=new f.native.ImmutableReader(f.root,next.candidate,{invocation:f.reader.invocation});
+ const transition=await f.api.qualifyTransition({state:baseline.state,reader});
+ assert.equal(transition.available,true);assert.deepEqual([...transition.changedIds].sort(),sourceFeatures.map(f=>f.id).sort());
+ assert.deepEqual(nativeLiteral(transition.candidate.ledger.rows),next.ledger.rows);
+ assert.deepEqual(nativeLiteral(transition.candidate.patch.rows),next.patch.rows);
+ assert.equal(new Set(next.proof.source_rows.map(row=>row.target_id)).size,count);
+});
+
+test('genuine larger source geometry is reflected in certificate and original constructor',async t=>{
+ const sourceFeatures=[feature('A',0),feature('B',1),feature('C',5)];
+ sourceFeatures[0].geometry={type:'Polygon',coordinates:[[[0,0],[.8,0],[.8,.8],[0,.8],[0,0]]]};
+ const f=await trustedFixture(t,{nativeAppend:true,sourceFeatures}),baseline=await f.api.qualifyCheckpoint({reader:f.reader});
+ const next=await appendNativeAuthority(f,{completedConstructor:true});
+ assert.deepEqual(next.proof.source_rows[0].base_geometry,sourceFeatures[0].geometry);
+ const reader=new f.native.ImmutableReader(f.root,next.candidate,{invocation:f.reader.invocation});
+ const transition=await f.api.qualifyTransition({state:baseline.state,reader});assert.equal(transition.available,true);
+ assert.deepEqual(nativeLiteral(transition.candidate.patch.rows),next.patch.rows);
+});
