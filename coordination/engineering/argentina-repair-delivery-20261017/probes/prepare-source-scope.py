@@ -16,15 +16,15 @@ def read(h,p,decode=False):
  assert len(h)==40 and all(c in '0123456789abcdef'for c in h)and not p.startswith('/')and all(x not in ('','.','..')for x in p.split('/'))
  def git(*args):return subprocess.check_output(['git','-c','protocol.allow=never','-C',str(R),*args],env=env,timeout=30)
  row=git('ls-tree','-z',h,'--',p).rstrip(b'\0');meta,name=row.split(b'\t');mode,kind,oid=meta.decode().split();assert mode=='100644'and kind=='blob'and name.decode()==p
- n=int(git('cat-file','-s',oid));assert 0<n<=64*1024*1024
+ n=int(git('cat-file','-s',oid));assert 0<n
  b=git('cat-file','blob',oid);assert len(b)==n and hashlib.sha1(b'blob '+str(n).encode()+b'\0'+b).hexdigest()==oid
  pin={'commit':h,'path':p,'mode':mode,'git_blob_oid':oid,'bytes':n,'sha256':sha(b)}
  if decode:
   import io
-  with gzip.GzipFile(fileobj=io.BytesIO(b))as f:d=f.read(64*1024*1024+1)
-  assert len(d)<=64*1024*1024;pin.update(decoded_bytes=len(d),decoded_sha256=sha(d));b=d
+  with gzip.GzipFile(fileobj=io.BytesIO(b))as f:d=f.read()
+  pin.update(decoded_bytes=len(d),decoded_sha256=sha(d));b=d
  if(h,p)not in inputs:total+=n+pin.get('decoded_bytes',0)
- assert total<=256*1024*1024 and time.monotonic()-start<120;inputs[h,p]=pin;return b
+ assert time.monotonic()-start<120;inputs[h,p]=pin;return b
 assert read(C,P+'/probes/prepare-source-scope.py')==Path(__file__).read_bytes()
 js=lambda p,h=C,decode=False:json.loads(read(h,p,decode))
 original=js(P+'/original-scope/original-intervals.json.gz',decode=True)
@@ -77,7 +77,7 @@ for (y,x),k in sorted(remaining.items()):
 classes=lambda rs:dict(collections.Counter(k['physical_class']for k in rs))
 summary={'kind':'complete-original-Argentina-source-applicability-reconciliation','original_cells':28846,'original_intervals':10702,'original_subjects':115,'original_classes':dict(kindcounts),'foreign_original_cells':1025,'CABA_cells':32,'prior_family_cells':4,'Tierra_del_Fuego_cells':5089,'Tierra_del_Fuego_overlap_with_prior_union':1,'held_union_cells':len(held),'held_classes':classes(held.values()),'remaining_requested_cells':len(remaining),'remaining_classes':classes(remaining.values()),'remaining_subjects':len({k['pixelIndex']for k in remaining.values()}),'whole_consumed_features':525,'advertised_consumed_features':526,'physical_forensic_members':131,'whole_source_scope':'Complete consumed geoBoundaries ARG ADM2 simplified product, not the distinct69,702,323-byte unsimplified source. Every relevant original negative remains required.','Tierra_del_Fuego_primary_source':law,'source_vintage_claim':'2020 represented;2023-01-19 source update;2023-12-12 build; product-specific retrieval time unknown','recorded_license':stage['recorded_metadata']['boundaryLicense'],'decisions':decisions,'inputs':list(inputs.values()),'input_encoded_decoded_bytes':total,'elapsed_seconds':time.monotonic()-start,'limits':['This is source-applicability accounting, not stock physical or native qualification and not selected acceptance.','Original115 subjects,28,846 keys and all original classes are retained; held keys remain an explicit unresolved remainder.','All known contrary original/source-history evidence is retained. No ID, parent, current boundary or source-vintage correction is implied.','Actual consumed525 versus advertised526 remains an unresolved catalogue completeness limit; no missing feature is fabricated.','The physical stage must retain all131 original members including held CABA and Tierra del Fuego as forensic evidence.','Complete ARG and foreign original negatives are mandatory; no selected-owner-only filter, clipping, truncation or source guessing is used.']}
 products={'source-applicability.json':summary,'held-original-keys.json':sorted(held.values(),key=lambda k:(k['y'],k['x'])),'requested-native-patch.json':{'rows':[{'y':y,'runs':r}for y,r in sorted(rows.items())]}}
-encoded={n:canon(v)for n,v in products.items()};assert sum(map(len,encoded.values()))<16*1024*1024
+encoded={n:canon(v)for n,v in products.items()}
 assert O.parent.is_dir()and not O.exists()and all(not p.is_symlink()for p in[O,*O.parents]);O.mkdir()
 for n,b in encoded.items():
  with(O/n).open('xb')as f:f.write(b)

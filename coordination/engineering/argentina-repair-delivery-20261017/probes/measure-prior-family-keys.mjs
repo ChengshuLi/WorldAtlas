@@ -28,25 +28,25 @@ assert(!fs.lstatSync(O, { throwIfNoEntry: false }), 'Fresh output required');
 const start = performance.now(), pins = new Map();
 let inputBytes = 0;
 const sha = b => createHash('sha256').update(b).digest('hex');
-const git = (...args) => execFileSync('git', ['-c', 'protocol.allow=never', '-C', R, ...args], {
-  maxBuffer: 64 * 1024 * 1024, timeout: 30000,
+const git = (expectedBytes, ...args) => execFileSync('git', ['-c', 'protocol.allow=never', '-C', R, ...args], {
+  maxBuffer: expectedBytes + 1, timeout: 30000,
   env: { ...process.env, GIT_NO_LAZY_FETCH: '1', GIT_NO_REPLACE_OBJECTS: '1', GIT_TERMINAL_PROMPT: '0' },
 });
 function read(c, p, decompress = false) {
   assert(/^[a-f0-9]{40}$/.test(c) && !p.startsWith('/') && !p.split('/').some(x => ['', '.', '..'].includes(x)), 'Exact ordinary pin required');
-  const row = git('ls-tree', '-z', c, '--', p).toString();
+  const row = git(Buffer.byteLength(`100644 blob ${'0'.repeat(40)}\t${p}\0`), 'ls-tree', '-z', c, '--', p).toString();
   const m = /^100644 blob ([a-f0-9]{40})\t([^\0]+)\0$/.exec(row);
   assert(m && m[2] === p, 'Ordinary complete blob required');
-  const n = Number(git('cat-file', '-s', m[1]).toString());
-  assert(n > 0 && n <= 64 * 1024 * 1024, 'Input resource bound');
-  const b = git('cat-file', 'blob', m[1]);
+  const n = Number(git(String(Number.MAX_SAFE_INTEGER).length + 1, 'cat-file', '-s', m[1]).toString());
+  assert(Number.isSafeInteger(n) && n > 0, 'Exact representable Git blob size');
+  const b = git(n, 'cat-file', 'blob', m[1]);
   assert(b.length === n && createHash('sha1').update(Buffer.from(`blob ${n}\0`)).update(b).digest('hex') === m[1], 'Blob integrity');
   const pin = { commit: c, path: p, mode: '100644', git_blob_oid: m[1], bytes: n, sha256: sha(b) };
-  const d = decompress ? gunzipSync(b, { maxOutputLength: 64 * 1024 * 1024 }) : b;
+  const d = decompress ? gunzipSync(b) : b;
   if (decompress) Object.assign(pin, { decoded_bytes: d.length, decoded_sha256: sha(d) });
   if (!pins.has(`${c}:${p}`)) inputBytes += n + (decompress ? d.length : 0);
   pins.set(`${c}:${p}`, pin);
-  assert(inputBytes <= 256 * 1024 * 1024 && performance.now() - start < 120000, 'Bounded whole-input read');
+  assert(performance.now() - start < 120000, 'Whole-input read deadline');
   return d;
 }
 assert(read(C, `${P}/probes/measure-prior-family-keys.mjs`).equals(fs.readFileSync(fileURLToPath(import.meta.url))), 'Executed method drift');
@@ -110,7 +110,6 @@ const result = {
   limits: ['This measures exact applicability of retained unresolved pointsets, not source fitness, physical/legal truth or native qualification.', 'Foreign contacts here remain the authenticated original complete-corpus census, not a fresh independent polygon screen.', 'Other historical identity, topology, source and physical obligations remain under review; this is not final qualified accounting.'],
 };
 const body = Buffer.from(JSON.stringify(result, null, 2) + '\n');
-assert(body.length < 16 * 1024 * 1024, 'Measured output resource bound');
 ordinaryAncestors(O); assert(!fs.lstatSync(O, { throwIfNoEntry: false }), 'Fresh output changed');
 fs.mkdirSync(O); fs.writeFileSync(path.join(O, 'exact-prior-family-keys.json'), body, { flag: 'wx' });
 console.log(JSON.stringify({ original_cells: result.original_cells, prior_family_cells: prior.size, prior_foreign_overlap: result.prior_foreign_overlap, prior_CABA_overlap: result.prior_CABA_overlap, held_union_cells: held.size, remaining: result.remaining_after_these_predicates, elapsed_seconds: result.elapsed_seconds, output_bytes: body.length, output_sha256: sha(body) }));

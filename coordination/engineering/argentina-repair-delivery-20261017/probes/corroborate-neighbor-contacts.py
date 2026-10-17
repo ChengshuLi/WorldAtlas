@@ -20,15 +20,15 @@ def read(h,p,decode=False):
  assert len(h)==40 and all(c in '0123456789abcdef'for c in h)and not p.startswith('/')and all(x not in ('','.','..')for x in p.split('/'))
  def git(*args):return subprocess.check_output(['git','-c','protocol.allow=never','-C',str(R),*args],env=env,timeout=30)
  row=git('ls-tree','-z',h,'--',p).rstrip(b'\0');meta,name=row.split(b'\t');mode,kind,oid=meta.decode().split();assert mode=='100644'and kind=='blob'and name.decode()==p
- n=int(git('cat-file','-s',oid));assert 0<n<=64*1024*1024
+ n=int(git('cat-file','-s',oid));assert 0<n
  b=git('cat-file','blob',oid);assert len(b)==n and hashlib.sha1(b'blob '+str(n).encode()+b'\0'+b).hexdigest()==oid
  pin={'commit':h,'path':p,'mode':mode,'git_blob_oid':oid,'bytes':n,'sha256':sha(b)}
  if decode:
   import io
-  with gzip.GzipFile(fileobj=io.BytesIO(b))as f:d=f.read(64*1024*1024+1)
-  assert len(d)<=64*1024*1024;pin.update(decoded_bytes=len(d),decoded_sha256=sha(d));b=d
+  with gzip.GzipFile(fileobj=io.BytesIO(b))as f:d=f.read()
+  pin.update(decoded_bytes=len(d),decoded_sha256=sha(d));b=d
  if(h,p)not in inputs:total+=n+pin.get('decoded_bytes',0)
- assert total<=256*1024*1024 and time.monotonic()-start<300;inputs[h,p]=pin;return b
+ assert time.monotonic()-start<300;inputs[h,p]=pin;return b
 assert read(C,P+'/probes/corroborate-neighbor-contacts.py')==Path(__file__).read_bytes()
 js=lambda p,h=H,decode=False:json.loads(read(h,p,decode))
 cat=js('coordination/engineering/original-geography-source-corpus-20261006/catalogue.json');assert len(cat['products'])==368
@@ -80,7 +80,7 @@ assert sum(len(k['boundary_source_ids'])for k in contacts)==sum(r['boundary_cell
 assert sum(len(k['source_ids'])for k in contacts)==sum(r['contact_cells']for r in source_rows)
 assert all(sorted(set(k['strict_interior_source_ids'])|set(k['boundary_source_ids']))==k['source_ids']and not set(k['strict_interior_source_ids'])&set(k['boundary_source_ids'])for k in contacts)
 result={'kind':'complete-neighbor-original-point-corroboration','original_cells':len(keys),'original_intervals':len(original),'original_owners':len({k['pixelIndex']for k in keys}),'complete_global_census_families':368,'complete_neighbor_products':len(families),'complete_neighbor_features':len(source_rows),'families':families,'sources':source_rows,'contacts':contacts,'foreign_original_contact_cells':len(actual),'contact_source_features':len({s for v in actual.values()for s in v}),'strict_interior_cells':strict_cells,'boundary_contact_cells':boundary_cells,'per_key_exact_source_id_census_equality':not differences,'differences':differences,'invalid_original_features':invalid,'invalid_original_contact_features':[r['source_id']for r in source_rows if not r['geometry_valid']and r['contact_cells']],'coordinate_convention':'Pinned native binary64 row latitudes and correctly rounded binary64 evaluation of exact rational longitude(360*x+180-180*size)/size; stock native authority retains exact rational predicates.','geometry_handling':'Every whole original feature from every retained level for BOL,BRA,CHL,PRY,URY; no owners filter, no geometry repair, no clipping or invalid-feature omission. Inclusive whole-feature bounds only prefilter point tests.','input_encoded_decoded_bytes':total,'inputs':list(inputs.values()),'runtime':{'python':sys.version,'numpy':np.__version__,'shapely':shapely.__version__,'geos':shapely.geos_version_string},'elapsed_seconds':time.monotonic()-start,'max_rss_bytes_linux':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*1024,'limits':['Supplementary corroboration of the complete368-family census; this regional screen is not the global exclusion scope.','Binary64 point predicates are not exact-rational stock native qualification. All boundary/difference/invalid outcomes are retained without correction or source approval.','All28,846 original keys are screened, including all held owners and classes.','Complete domestic ARG competitors and every whole foreign negative remain required in actual native construction.']}
-encoded=canon(result);assert len(encoded)<16*1024*1024 and time.monotonic()-start<300
+encoded=canon(result);assert time.monotonic()-start<300
 assert O.parent.is_dir()and not O.exists()and all(not p.is_symlink()for p in[O,*O.parents]);O.mkdir()
 with(O/'neighbor-point-corroboration.json').open('xb')as f:f.write(encoded)
 print(json.dumps({'original':28846,'neighbor_features':len(source_rows),'foreign_cells':len(actual),'features':result['contact_source_features'],'differences':len(differences),'invalid':len(invalid),'invalid_contacts':len(result['invalid_original_contact_features']),'output_bytes':len(encoded),'seconds':time.monotonic()-start}))

@@ -16,15 +16,15 @@ def read(h,p,decode=False):
  assert len(h)==40 and all(c in '0123456789abcdef'for c in h)and not p.startswith('/')and all(x not in ('','.','..')for x in p.split('/'))
  def git(*args):return subprocess.check_output(['git','-c','protocol.allow=never','-C',str(R),*args],env=env,timeout=30)
  row=git('ls-tree','-z',h,'--',p).rstrip(b'\0');meta,name=row.split(b'\t');mode,kind,oid=meta.decode().split();assert mode=='100644'and kind=='blob'and name.decode()==p
- n=int(git('cat-file','-s',oid));assert 0<n<=64*1024*1024
+ n=int(git('cat-file','-s',oid));assert 0<n
  b=git('cat-file','blob',oid);assert len(b)==n and hashlib.sha1(b'blob '+str(n).encode()+b'\0'+b).hexdigest()==oid
  pin={'commit':h,'path':p,'mode':mode,'git_blob_oid':oid,'bytes':n,'sha256':sha(b)}
  if decode:
   import io
-  with gzip.GzipFile(fileobj=io.BytesIO(b))as f:d=f.read(64*1024*1024+1)
-  assert len(d)<=64*1024*1024;pin.update(decoded_bytes=len(d),decoded_sha256=sha(d));b=d
+  with gzip.GzipFile(fileobj=io.BytesIO(b))as f:d=f.read()
+  pin.update(decoded_bytes=len(d),decoded_sha256=sha(d));b=d
  if(h,p)not in inputs:total+=n+pin.get('decoded_bytes',0)
- assert total<=256*1024*1024 and time.monotonic()-start<120;inputs[h,p]=pin;return b
+ assert time.monotonic()-start<120;inputs[h,p]=pin;return b
 assert read(C,P+'/probes/extract-prior-family.py')==Path(__file__).read_bytes()
 fpath='research/geography/argentina-gap-source-fitness-20261007/vintages/argentina-run-replay-20261007154702696203-8d548285/source-fit.json';fit=json.loads(read(H,fpath));expected={r['component']:r for r in fit['complete_component_source_rows_in_family_order']};wanted=fit['family_scope']['component_ids'];assert len(expected)==len(wanted)==7 and sorted(expected)==wanted and sha(canon(wanted))==fit['family_scope']['component_ids_sha256']
 assert all(r['original_component_commit']==M and r['current_component_relation']=='retained-full-original-feature-pointset'for r in expected.values())
@@ -38,7 +38,7 @@ for pin in inventory['complete_products']['components']:
 assert set(found)==set(expected)
 sp='coordination/engineering/worldwide-successor-1215-20261006/run-one/';report=json.loads(read(S,sp+'report.json'));pin=next(p for p in report['products']if p['path']=='components-delta.json.gz');d=read(S,sp+pin['path'],True);actual=inputs[S,sp+pin['path']];assert actual['bytes']==pin['bytes']and actual['sha256']==pin['sha256']and len(d)==pin['uncompressed_bytes']and sha(d)==pin['uncompressed_sha256'];delta=json.loads(d);assert not set(wanted)&set(delta['removed_ids'])and not set(wanted)&{f['id']for f in delta['upsert_records']}
 products={'candidate-components.geojson':{'type':'FeatureCollection','features':[found[i]for i in wanted]},'extraction.json':{'kind':'complete-original-seven-component-Argentina-family-extraction','family_id':fit['family_id'],'complete_component_ids':wanted,'source_fitness_assessment':fit['assessment'],'recorded_land_source_fitness_rows':fit['recorded_land_source_fitness_rows'],'input_encoded_decoded_bytes':total,'inputs':list(inputs.values()),'limits':['This authenticates complete retained original pointsets, not source fitness or native overlap.','The unresolved source-fitness prerequisite and all seven complete component dispositions remain retained.'],'elapsed_seconds':time.monotonic()-start}}
-encoded={n:canon(v)for n,v in products.items()};assert sum(map(len,encoded.values()))<8*1024*1024
+encoded={n:canon(v)for n,v in products.items()}
 assert O.parent.is_dir()and not O.exists()and all(not p.is_symlink()for p in[O,*O.parents]);O.mkdir()
 for n,b in encoded.items():
  with(O/n).open('xb')as f:f.write(b)

@@ -15,7 +15,7 @@ assert len(C)==40 and all(c in '0123456789abcdef'for c in C)
 assert W.is_dir() and O.parent.is_dir() and not O.exists() and all(not p.is_symlink()for root in(W,O)for p in(root,*root.parents))
 start=time.monotonic();inputs={};total=0
 # Finite admission for this actual small source phase, not a scientific byte ceiling.
-PHASE_BYTES=512*1024*1024;FILE_BYTES=128*1024*1024;OUTPUT_BYTES=64*1024*1024;DEADLINE_SECONDS=300
+DEADLINE_SECONDS=300
 sha=lambda b:hashlib.sha256(b).hexdigest()
 env={**os.environ,'GIT_NO_LAZY_FETCH':'1','GIT_NO_REPLACE_OBJECTS':'1','GIT_TERMINAL_PROMPT':'0'}
 def git(*args):return subprocess.check_output(['git','-c','protocol.allow=never','-C',str(W),*args],env=env,timeout=30)
@@ -23,15 +23,15 @@ def read(p,h=H):
  global total
  assert not p.startswith('/')and all(x not in('','.','..')for x in p.split('/'));assert time.monotonic()-start<DEADLINE_SECONDS
  row=git('ls-tree','-z',h,'--',p).rstrip(b'\0');meta,name=row.split(b'\t');mode,kind,oid=meta.decode().split();assert mode=='100644'and kind=='blob'and name.decode()==p
- size=int(git('cat-file','-s',oid));assert 0<size<=FILE_BYTES
+ size=int(git('cat-file','-s',oid));assert 0<size
  b=git('cat-file','blob',oid);assert len(b)==size and hashlib.sha1(b'blob '+str(size).encode()+b'\0'+b).hexdigest()==oid
  pin={'path':p,'commit':h,'mode':mode,'git_blob_oid':oid,'bytes':size,'sha256':sha(b)}
  if p.endswith('.gz'):
   import io
-  with gzip.GzipFile(fileobj=io.BytesIO(b))as f:d=f.read(FILE_BYTES+1)
-  assert len(d)<=FILE_BYTES;pin.update(decoded_bytes=len(d),decoded_sha256=sha(d));b=d
+  with gzip.GzipFile(fileobj=io.BytesIO(b))as f:d=f.read()
+  pin.update(decoded_bytes=len(d),decoded_sha256=sha(d));b=d
  if(h,p)not in inputs:total+=size+pin.get('decoded_bytes',0)
- assert total<=PHASE_BYTES;inputs[h,p]=pin;return b
+ inputs[h,p]=pin;return b
 js=lambda p,h=H:json.loads(read(p,h))
 def exact(rows,key):
  out={}
@@ -97,10 +97,10 @@ limits=['Complete consumed product is geoBoundaries-ARG-ADM2_simplified.geojson,
 assessment={'version':1,'issue':2373,'baseline_commit':H,'input_commit':C,'original_queue_commit':Q,'original_cells':len(keys),'original_intervals':len(rows),'original_owners':len(owners),'physical_classes':dict(kinds),'whole_source_feature_count':len(sources),'physical_source_members':len(stages),'positive_source_members':114,'positive_owners':114,'positive_requested_cells':28814,'identity_held_cells':32,'source_product':rec,'recorded_metadata':metadata,'source_inventory':source_inventory,'target_checks':checks,'existing_obligation_issues':[r['number']for r in obligations],'inputs':list(inputs.values()),'runtime':{'python':sys.version,'shapely':shapely.__version__,'geos':shapely.geos_version_string},'limits':limits,'elapsed_seconds':time.monotonic()-start}
 
 products={'original-stage-inputs.json':stages,'source-target-membership.json':mappings,'original-native-patch.json':patch(allnative),'positive-requested-native-patch.json':patch(positive),'identity-holds.json':identity_hold,'source-scope-assessment.json':assessment}
-encoded={n:(json.dumps(v,ensure_ascii=False,separators=(',',':'))+'\n').encode()for n,v in products.items()};assert sum(map(len,encoded.values()))<=OUTPUT_BYTES and total+sum(map(len,encoded.values()))<=PHASE_BYTES and time.monotonic()-start<DEADLINE_SECONDS
+encoded={n:(json.dumps(v,ensure_ascii=False,separators=(',',':'))+'\n').encode()for n,v in products.items()};assert time.monotonic()-start<DEADLINE_SECONDS
 assert O.parent.is_dir()and not O.exists()and all(not p.is_symlink()for p in(O,*O.parents));O.mkdir()
 for n,b in encoded.items():
  with(O/n).open('xb')as f:f.write(b)
-receipt={'complete':True,'source_native_authority':False,'input_encoded_decoded_bytes':total,'outputs':{n:{'bytes':len(b),'sha256':sha(b)}for n,b in encoded.items()},'operating_allowance':{'phase_bytes':PHASE_BYTES,'file_bytes':FILE_BYTES,'output_bytes':OUTPUT_BYTES,'deadline_seconds':DEADLINE_SECONDS},'elapsed_seconds':time.monotonic()-start}
+receipt={'complete':True,'source_native_authority':False,'input_encoded_decoded_bytes':total,'outputs':{n:{'bytes':len(b),'sha256':sha(b)}for n,b in encoded.items()},'operating_controls':{'immutable_exact_bytes':True,'complete_gzip_crc':True,'deadline_seconds':DEADLINE_SECONDS,'arbitrary_byte_ceiling':False},'elapsed_seconds':time.monotonic()-start}
 with(O/'preparation.json').open('x')as f:f.write(json.dumps(receipt,separators=(',',':'))+'\n')
 print(json.dumps(receipt))

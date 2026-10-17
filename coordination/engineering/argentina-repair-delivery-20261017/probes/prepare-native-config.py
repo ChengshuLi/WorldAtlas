@@ -7,21 +7,21 @@ import collections,gzip,hashlib,json,os,pathlib,subprocess,sys,time
 assert len(sys.argv)==4 and __debug__
 W=pathlib.Path(sys.argv[1]).absolute();C=sys.argv[2];O=pathlib.Path(sys.argv[3]).absolute();H='d4968ddc37aa3aa6105e9610c9e6fadbb368ba14';P='coordination/engineering/argentina-repair-delivery-20261017'
 assert len(C)==40 and all(c in '0123456789abcdef'for c in C)and O.parent.is_dir()and not O.exists()and all(not p.is_symlink()for root in(W,O)for p in(root,*root.parents))
-sha=lambda b:hashlib.sha256(b).hexdigest();inputs={};started=time.monotonic();total=0;PHASE_BYTES=512*1024*1024;OUTPUT_BYTES=64*1024*1024
+sha=lambda b:hashlib.sha256(b).hexdigest();inputs={};started=time.monotonic();total=0
 env={**os.environ,'GIT_NO_LAZY_FETCH':'1','GIT_NO_REPLACE_OBJECTS':'1','GIT_TERMINAL_PROMPT':'0'}
 def git(*args):return subprocess.check_output(['git','-c','protocol.allow=never','-C',str(W),*args],env=env,timeout=30)
 def read(p,c=C):
  global total
  assert not p.startswith('/')and all(x not in('','.','..')for x in p.split('/'))and time.monotonic()-started<300
  row=git('ls-tree','-z',c,'--',p).rstrip(b'\0');meta,name=row.split(b'\t');mode,kind,oid=meta.decode().split();assert mode=='100644'and kind=='blob'and name.decode()==p
- size=int(git('cat-file','-s',oid));assert 0<size<=128*1024*1024;b=git('cat-file','blob',oid);assert len(b)==size and hashlib.sha1(b'blob '+str(size).encode()+b'\0'+b).hexdigest()==oid
+ size=int(git('cat-file','-s',oid));assert 0<size;b=git('cat-file','blob',oid);assert len(b)==size and hashlib.sha1(b'blob '+str(size).encode()+b'\0'+b).hexdigest()==oid
  pin={'path':p,'commit':c,'mode':mode,'git_blob_oid':oid,'bytes':size,'sha256':sha(b)}
  if p.endswith('.gz'):
   import io
-  with gzip.GzipFile(fileobj=io.BytesIO(b))as f:d=f.read(128*1024*1024+1)
-  assert len(d)<=128*1024*1024;pin.update(decoded_bytes=len(d),decoded_sha256=sha(d));b=d
+  with gzip.GzipFile(fileobj=io.BytesIO(b))as f:d=f.read()
+  pin.update(decoded_bytes=len(d),decoded_sha256=sha(d));b=d
  if(c,p)not in inputs:total+=size+pin.get('decoded_bytes',0)
- assert total<=PHASE_BYTES;inputs[c,p]=pin;return b
+ inputs[c,p]=pin;return b
 js=lambda p,c=C:json.loads(read(p,c))
 def pin(p,c=C):read(p,c);return inputs[c,p]
 assert sha(read(P+'/probes/prepare-native-config.py'))==sha(pathlib.Path(__file__).read_bytes())
@@ -69,7 +69,7 @@ for stage in stages:
 assert len(targets)==111 and seen==set(wanted)
 config={'version':1,'selector':{'commit':H,'path':'data/ownership-selection.json'},'territorial_exclusion_families':['gb:BRA:ADM1','gb:CHL:ADM1','gb:CHL:ADM2','gb:PRY:ADM1'],'compact_territorial_exclusions':True,'source_evidence':{'version':1,'kind':'source-target-native-evidence-v1','catalogue':inputs[H,catp],'families':[{'source_id':'gb:ARG:ADM2','parts':sourceparts}],'physical_evidence':physical_pin,'physical_input':pin(P+'/source-stage-001/original-stage-inputs.json'),'physical_reproduction':pin('scripts/qualify-source-cohort.py',H),'source_membership':{'index':world,'lineage':pin('data/semantic-report.json',H),'parts':membership_parts,'cohort_inventory':{'index':inputs[H,projection_path],'parts':cohort_parts}},'targets':targets}}
 assessment={'kind':'Argentina-native-request-source-hold-adaptation','baseline':H,'input_commit':C,'original_keys':28846,'identity_and_existing_fitness_held_keys':5125,'native_requested_keys':23721,'foreign_keys_retained_for_actual_native_veto':1024,'source_applicability_ceiling':22697,'native_requested_owners':111,'whole_physical_source_members':131,'positive_native_source_members':111,'complete_Argentina_reference_owner_cohort':509,'complete_inventory_parts':len(cohort_parts),'complete_world_owner_ids':len(cohort_rows),'request_physical_classes':dict(collections.Counter({k:sum(z-a for y,a,z,ow,si,c in retained if c==k)for k in ['land','inland-water']})),'inputs':list(inputs.values()),'limits':['Original source/physical production is not repeated. No native or selected authority is asserted.','All1024 foreign-contact keys not already held for intended-scope reasons remain in the diagnostic request to exercise actual complete original-negative predicates. The one foreign/Tierra-del-Fuego overlap remains in its whole-owner hold.','CABA32, prior source-fitness4 and Tierra-del-Fuego5089 keys are omitted only from positive requested coverage, never the original denominator or whole physical source evidence.','Complete domestic ARG originals and four complete foreign families remain source-unique negative predicates. No selected-owner filter or geometry substitution is used.','Compact negative references use accepted #2344 at this baseline and require exact full-original native expansion.']}
-products={'source-evidence-config.json':config,'native-requested-patch.json':patch,'request-scope-accounting.json':assessment};encoded={n:(json.dumps(v,separators=(',',':'),ensure_ascii=False)+'\n').encode()for n,v in products.items()};assert sum(map(len,encoded.values()))<=OUTPUT_BYTES and total+sum(map(len,encoded.values()))<=PHASE_BYTES
+products={'source-evidence-config.json':config,'native-requested-patch.json':patch,'request-scope-accounting.json':assessment};encoded={n:(json.dumps(v,separators=(',',':'),ensure_ascii=False)+'\n').encode()for n,v in products.items()}
 assert not O.exists()and all(not p.is_symlink()for p in(O,*O.parents));O.mkdir()
 for n,b in encoded.items():
  with(O/n).open('xb')as f:f.write(b)
