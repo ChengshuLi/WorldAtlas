@@ -64,8 +64,16 @@ for family,count,year,license in [(f'gb:DEU:ADM{n}',count,'2021','Data license G
 selection=js('data/ownership-selection.json');bp=selection['selected_geography'];b=read(bp['path']);assert len(b)==bp['bytes'] and sha(b)==bp['sha256'];bank=json.loads(b)
 world=js('data/world-index.json');features={};whole_cohort=[];parts=['data/geography/part-6.json','data/geography/part-28.json','data/geography/part-29.json']
 for name in parts:
- assert name[5:] in world['parts'];pin=next(x for x in bank['unchanged_files'] if x['path']==name);b=read(name)
- assert len(b)==pin['bytes'] and sha(b)==pin['sha256'] and inputs[H,name]['git_blob_oid']==pin['git_blob_oid']
+ assert name[5:] in world['parts'];ordinary=[x for x in bank['unchanged_files'] if x['path']==name];override=[x for x in bank['overrides'] if x['logical_path']==name]
+ assert len(ordinary)+len(override)==1
+ if ordinary:
+  pin=ordinary[0];b=read(name);assert len(b)==pin['bytes'] and sha(b)==pin['sha256'] and inputs[H,name]['git_blob_oid']==pin['git_blob_oid']
+ else:
+  pin=override[0];assert pin['encoding']=='gzip';b=read(pin['path']);actual=inputs[H,pin['path']]
+  assert all(actual[k]==pin[k] for k in ['bytes','sha256','git_blob_oid','decoded_bytes','decoded_sha256'])
+  original={f['id']:f for f in js(name)['features']};selected=json.loads(b)['features']
+  for f in selected:
+   if f.get('properties',{}).get('reference_owner')=='Germany':assert f==original[f['id']] and f['id'] not in bank['changed_ids']
  fs=json.loads(b)['features'];assert not(set(features)&{f['id'] for f in fs});features.update({f['id']:f for f in fs})
  whole_cohort.extend(f['id'] for f in fs if f.get('properties',{}).get('reference_owner')=='Germany')
 assert len(whole_cohort)==len(set(whole_cohort))==409
