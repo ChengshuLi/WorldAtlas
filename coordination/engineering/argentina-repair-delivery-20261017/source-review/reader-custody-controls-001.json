@@ -1,0 +1,516 @@
+{
+  "kind": "actual-reader-function-small-custody-controls",
+  "method_commit": "3d80c380ef5117c669a5fdea475a69ea27fd51bf",
+  "cases": 72,
+  "results": [
+    {
+      "method": "prepare-source-stage.py",
+      "method_sha256": "0b99d330cb914400e7f1cab92911e7e3e3781be3fc117ce4b1f448b7082803ba",
+      "case": "valid-encoded",
+      "accepted": true,
+      "error": null
+    },
+    {
+      "method": "prepare-source-stage.py",
+      "method_sha256": "0b99d330cb914400e7f1cab92911e7e3e3781be3fc117ce4b1f448b7082803ba",
+      "case": "short-encoded",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "prepare-source-stage.py",
+      "method_sha256": "0b99d330cb914400e7f1cab92911e7e3e3781be3fc117ce4b1f448b7082803ba",
+      "case": "long-encoded",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "prepare-source-stage.py",
+      "method_sha256": "0b99d330cb914400e7f1cab92911e7e3e3781be3fc117ce4b1f448b7082803ba",
+      "case": "same-length-corrupt",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "prepare-source-stage.py",
+      "method_sha256": "0b99d330cb914400e7f1cab92911e7e3e3781be3fc117ce4b1f448b7082803ba",
+      "case": "wrong-mode",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "prepare-source-stage.py",
+      "method_sha256": "0b99d330cb914400e7f1cab92911e7e3e3781be3fc117ce4b1f448b7082803ba",
+      "case": "wrong-oid",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "prepare-source-stage.py",
+      "method_sha256": "0b99d330cb914400e7f1cab92911e7e3e3781be3fc117ce4b1f448b7082803ba",
+      "case": "valid-gzip",
+      "accepted": true,
+      "error": null
+    },
+    {
+      "method": "prepare-source-stage.py",
+      "method_sha256": "0b99d330cb914400e7f1cab92911e7e3e3781be3fc117ce4b1f448b7082803ba",
+      "case": "truncated-gzip",
+      "accepted": false,
+      "error": "EOFError"
+    },
+    {
+      "method": "prepare-source-stage.py",
+      "method_sha256": "0b99d330cb914400e7f1cab92911e7e3e3781be3fc117ce4b1f448b7082803ba",
+      "case": "corrupt-gzip-crc",
+      "accepted": false,
+      "error": "BadGzipFile"
+    },
+    {
+      "method": "extract-prior-family.py",
+      "method_sha256": "ff361c6a6fbe8992c5611be81f44b34fa803a047ea839080445669e350e4d8ee",
+      "case": "valid-encoded",
+      "accepted": true,
+      "error": null
+    },
+    {
+      "method": "extract-prior-family.py",
+      "method_sha256": "ff361c6a6fbe8992c5611be81f44b34fa803a047ea839080445669e350e4d8ee",
+      "case": "short-encoded",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "extract-prior-family.py",
+      "method_sha256": "ff361c6a6fbe8992c5611be81f44b34fa803a047ea839080445669e350e4d8ee",
+      "case": "long-encoded",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "extract-prior-family.py",
+      "method_sha256": "ff361c6a6fbe8992c5611be81f44b34fa803a047ea839080445669e350e4d8ee",
+      "case": "same-length-corrupt",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "extract-prior-family.py",
+      "method_sha256": "ff361c6a6fbe8992c5611be81f44b34fa803a047ea839080445669e350e4d8ee",
+      "case": "wrong-mode",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "extract-prior-family.py",
+      "method_sha256": "ff361c6a6fbe8992c5611be81f44b34fa803a047ea839080445669e350e4d8ee",
+      "case": "wrong-oid",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "extract-prior-family.py",
+      "method_sha256": "ff361c6a6fbe8992c5611be81f44b34fa803a047ea839080445669e350e4d8ee",
+      "case": "valid-gzip",
+      "accepted": true,
+      "error": null
+    },
+    {
+      "method": "extract-prior-family.py",
+      "method_sha256": "ff361c6a6fbe8992c5611be81f44b34fa803a047ea839080445669e350e4d8ee",
+      "case": "truncated-gzip",
+      "accepted": false,
+      "error": "EOFError"
+    },
+    {
+      "method": "extract-prior-family.py",
+      "method_sha256": "ff361c6a6fbe8992c5611be81f44b34fa803a047ea839080445669e350e4d8ee",
+      "case": "corrupt-gzip-crc",
+      "accepted": false,
+      "error": "BadGzipFile"
+    },
+    {
+      "method": "prepare-source-scope.py",
+      "method_sha256": "bc5cac72410bface3e45c11bf49762b5076b447b4704451772ea15fc3979457d",
+      "case": "valid-encoded",
+      "accepted": true,
+      "error": null
+    },
+    {
+      "method": "prepare-source-scope.py",
+      "method_sha256": "bc5cac72410bface3e45c11bf49762b5076b447b4704451772ea15fc3979457d",
+      "case": "short-encoded",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "prepare-source-scope.py",
+      "method_sha256": "bc5cac72410bface3e45c11bf49762b5076b447b4704451772ea15fc3979457d",
+      "case": "long-encoded",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "prepare-source-scope.py",
+      "method_sha256": "bc5cac72410bface3e45c11bf49762b5076b447b4704451772ea15fc3979457d",
+      "case": "same-length-corrupt",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "prepare-source-scope.py",
+      "method_sha256": "bc5cac72410bface3e45c11bf49762b5076b447b4704451772ea15fc3979457d",
+      "case": "wrong-mode",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "prepare-source-scope.py",
+      "method_sha256": "bc5cac72410bface3e45c11bf49762b5076b447b4704451772ea15fc3979457d",
+      "case": "wrong-oid",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "prepare-source-scope.py",
+      "method_sha256": "bc5cac72410bface3e45c11bf49762b5076b447b4704451772ea15fc3979457d",
+      "case": "valid-gzip",
+      "accepted": true,
+      "error": null
+    },
+    {
+      "method": "prepare-source-scope.py",
+      "method_sha256": "bc5cac72410bface3e45c11bf49762b5076b447b4704451772ea15fc3979457d",
+      "case": "truncated-gzip",
+      "accepted": false,
+      "error": "EOFError"
+    },
+    {
+      "method": "prepare-source-scope.py",
+      "method_sha256": "bc5cac72410bface3e45c11bf49762b5076b447b4704451772ea15fc3979457d",
+      "case": "corrupt-gzip-crc",
+      "accepted": false,
+      "error": "BadGzipFile"
+    },
+    {
+      "method": "corroborate-neighbor-contacts.py",
+      "method_sha256": "7e4b4b788970d3460935a0ac6c2fb1e5706fd0d53059ed718248f7214729296a",
+      "case": "valid-encoded",
+      "accepted": true,
+      "error": null
+    },
+    {
+      "method": "corroborate-neighbor-contacts.py",
+      "method_sha256": "7e4b4b788970d3460935a0ac6c2fb1e5706fd0d53059ed718248f7214729296a",
+      "case": "short-encoded",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "corroborate-neighbor-contacts.py",
+      "method_sha256": "7e4b4b788970d3460935a0ac6c2fb1e5706fd0d53059ed718248f7214729296a",
+      "case": "long-encoded",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "corroborate-neighbor-contacts.py",
+      "method_sha256": "7e4b4b788970d3460935a0ac6c2fb1e5706fd0d53059ed718248f7214729296a",
+      "case": "same-length-corrupt",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "corroborate-neighbor-contacts.py",
+      "method_sha256": "7e4b4b788970d3460935a0ac6c2fb1e5706fd0d53059ed718248f7214729296a",
+      "case": "wrong-mode",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "corroborate-neighbor-contacts.py",
+      "method_sha256": "7e4b4b788970d3460935a0ac6c2fb1e5706fd0d53059ed718248f7214729296a",
+      "case": "wrong-oid",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "corroborate-neighbor-contacts.py",
+      "method_sha256": "7e4b4b788970d3460935a0ac6c2fb1e5706fd0d53059ed718248f7214729296a",
+      "case": "valid-gzip",
+      "accepted": true,
+      "error": null
+    },
+    {
+      "method": "corroborate-neighbor-contacts.py",
+      "method_sha256": "7e4b4b788970d3460935a0ac6c2fb1e5706fd0d53059ed718248f7214729296a",
+      "case": "truncated-gzip",
+      "accepted": false,
+      "error": "EOFError"
+    },
+    {
+      "method": "corroborate-neighbor-contacts.py",
+      "method_sha256": "7e4b4b788970d3460935a0ac6c2fb1e5706fd0d53059ed718248f7214729296a",
+      "case": "corrupt-gzip-crc",
+      "accepted": false,
+      "error": "BadGzipFile"
+    },
+    {
+      "method": "prepare-native-config.py",
+      "method_sha256": "db0b5e82fba397b5e659ee13023ae5063e5cb7e754b1b83d950a28782f9626e5",
+      "case": "valid-encoded",
+      "accepted": true,
+      "error": null
+    },
+    {
+      "method": "prepare-native-config.py",
+      "method_sha256": "db0b5e82fba397b5e659ee13023ae5063e5cb7e754b1b83d950a28782f9626e5",
+      "case": "short-encoded",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "prepare-native-config.py",
+      "method_sha256": "db0b5e82fba397b5e659ee13023ae5063e5cb7e754b1b83d950a28782f9626e5",
+      "case": "long-encoded",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "prepare-native-config.py",
+      "method_sha256": "db0b5e82fba397b5e659ee13023ae5063e5cb7e754b1b83d950a28782f9626e5",
+      "case": "same-length-corrupt",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "prepare-native-config.py",
+      "method_sha256": "db0b5e82fba397b5e659ee13023ae5063e5cb7e754b1b83d950a28782f9626e5",
+      "case": "wrong-mode",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "prepare-native-config.py",
+      "method_sha256": "db0b5e82fba397b5e659ee13023ae5063e5cb7e754b1b83d950a28782f9626e5",
+      "case": "wrong-oid",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "prepare-native-config.py",
+      "method_sha256": "db0b5e82fba397b5e659ee13023ae5063e5cb7e754b1b83d950a28782f9626e5",
+      "case": "valid-gzip",
+      "accepted": true,
+      "error": null
+    },
+    {
+      "method": "prepare-native-config.py",
+      "method_sha256": "db0b5e82fba397b5e659ee13023ae5063e5cb7e754b1b83d950a28782f9626e5",
+      "case": "truncated-gzip",
+      "accepted": false,
+      "error": "EOFError"
+    },
+    {
+      "method": "prepare-native-config.py",
+      "method_sha256": "db0b5e82fba397b5e659ee13023ae5063e5cb7e754b1b83d950a28782f9626e5",
+      "case": "corrupt-gzip-crc",
+      "accepted": false,
+      "error": "BadGzipFile"
+    },
+    {
+      "method": "prepare-qualified-scope.py",
+      "method_sha256": "b427ca36ed794ebfbdbc3ef5ce75bd72a11ccb71998afd9357e3d992a36dd099",
+      "case": "valid-encoded",
+      "accepted": true,
+      "error": null
+    },
+    {
+      "method": "prepare-qualified-scope.py",
+      "method_sha256": "b427ca36ed794ebfbdbc3ef5ce75bd72a11ccb71998afd9357e3d992a36dd099",
+      "case": "short-encoded",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "prepare-qualified-scope.py",
+      "method_sha256": "b427ca36ed794ebfbdbc3ef5ce75bd72a11ccb71998afd9357e3d992a36dd099",
+      "case": "long-encoded",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "prepare-qualified-scope.py",
+      "method_sha256": "b427ca36ed794ebfbdbc3ef5ce75bd72a11ccb71998afd9357e3d992a36dd099",
+      "case": "same-length-corrupt",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "prepare-qualified-scope.py",
+      "method_sha256": "b427ca36ed794ebfbdbc3ef5ce75bd72a11ccb71998afd9357e3d992a36dd099",
+      "case": "wrong-mode",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "prepare-qualified-scope.py",
+      "method_sha256": "b427ca36ed794ebfbdbc3ef5ce75bd72a11ccb71998afd9357e3d992a36dd099",
+      "case": "wrong-oid",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "prepare-qualified-scope.py",
+      "method_sha256": "b427ca36ed794ebfbdbc3ef5ce75bd72a11ccb71998afd9357e3d992a36dd099",
+      "case": "valid-gzip",
+      "accepted": true,
+      "error": null
+    },
+    {
+      "method": "prepare-qualified-scope.py",
+      "method_sha256": "b427ca36ed794ebfbdbc3ef5ce75bd72a11ccb71998afd9357e3d992a36dd099",
+      "case": "truncated-gzip",
+      "accepted": false,
+      "error": "EOFError"
+    },
+    {
+      "method": "prepare-qualified-scope.py",
+      "method_sha256": "b427ca36ed794ebfbdbc3ef5ce75bd72a11ccb71998afd9357e3d992a36dd099",
+      "case": "corrupt-gzip-crc",
+      "accepted": false,
+      "error": "BadGzipFile"
+    },
+    {
+      "method": "verify-qualified-evidence.py",
+      "method_sha256": "0aca8333b33a731859dad9ae975e641b4fd1c5284bd6ce0138fe289244689548",
+      "case": "valid-encoded",
+      "accepted": true,
+      "error": null
+    },
+    {
+      "method": "verify-qualified-evidence.py",
+      "method_sha256": "0aca8333b33a731859dad9ae975e641b4fd1c5284bd6ce0138fe289244689548",
+      "case": "short-encoded",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "verify-qualified-evidence.py",
+      "method_sha256": "0aca8333b33a731859dad9ae975e641b4fd1c5284bd6ce0138fe289244689548",
+      "case": "long-encoded",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "verify-qualified-evidence.py",
+      "method_sha256": "0aca8333b33a731859dad9ae975e641b4fd1c5284bd6ce0138fe289244689548",
+      "case": "same-length-corrupt",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "verify-qualified-evidence.py",
+      "method_sha256": "0aca8333b33a731859dad9ae975e641b4fd1c5284bd6ce0138fe289244689548",
+      "case": "wrong-mode",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "verify-qualified-evidence.py",
+      "method_sha256": "0aca8333b33a731859dad9ae975e641b4fd1c5284bd6ce0138fe289244689548",
+      "case": "wrong-oid",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "verify-qualified-evidence.py",
+      "method_sha256": "0aca8333b33a731859dad9ae975e641b4fd1c5284bd6ce0138fe289244689548",
+      "case": "valid-gzip",
+      "accepted": true,
+      "error": null
+    },
+    {
+      "method": "verify-qualified-evidence.py",
+      "method_sha256": "0aca8333b33a731859dad9ae975e641b4fd1c5284bd6ce0138fe289244689548",
+      "case": "truncated-gzip",
+      "accepted": false,
+      "error": "EOFError"
+    },
+    {
+      "method": "verify-qualified-evidence.py",
+      "method_sha256": "0aca8333b33a731859dad9ae975e641b4fd1c5284bd6ce0138fe289244689548",
+      "case": "corrupt-gzip-crc",
+      "accepted": false,
+      "error": "BadGzipFile"
+    },
+    {
+      "method": "reconcile-authority.py",
+      "method_sha256": "709a4a75ba2116ce83368ca52a398cf02aa9105c10e157849952766c3f7f5766",
+      "case": "valid-encoded",
+      "accepted": true,
+      "error": null
+    },
+    {
+      "method": "reconcile-authority.py",
+      "method_sha256": "709a4a75ba2116ce83368ca52a398cf02aa9105c10e157849952766c3f7f5766",
+      "case": "short-encoded",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "reconcile-authority.py",
+      "method_sha256": "709a4a75ba2116ce83368ca52a398cf02aa9105c10e157849952766c3f7f5766",
+      "case": "long-encoded",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "reconcile-authority.py",
+      "method_sha256": "709a4a75ba2116ce83368ca52a398cf02aa9105c10e157849952766c3f7f5766",
+      "case": "same-length-corrupt",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "reconcile-authority.py",
+      "method_sha256": "709a4a75ba2116ce83368ca52a398cf02aa9105c10e157849952766c3f7f5766",
+      "case": "wrong-mode",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "reconcile-authority.py",
+      "method_sha256": "709a4a75ba2116ce83368ca52a398cf02aa9105c10e157849952766c3f7f5766",
+      "case": "wrong-oid",
+      "accepted": false,
+      "error": "AssertionError"
+    },
+    {
+      "method": "reconcile-authority.py",
+      "method_sha256": "709a4a75ba2116ce83368ca52a398cf02aa9105c10e157849952766c3f7f5766",
+      "case": "valid-gzip",
+      "accepted": true,
+      "error": null
+    },
+    {
+      "method": "reconcile-authority.py",
+      "method_sha256": "709a4a75ba2116ce83368ca52a398cf02aa9105c10e157849952766c3f7f5766",
+      "case": "truncated-gzip",
+      "accepted": false,
+      "error": "EOFError"
+    },
+    {
+      "method": "reconcile-authority.py",
+      "method_sha256": "709a4a75ba2116ce83368ca52a398cf02aa9105c10e157849952766c3f7f5766",
+      "case": "corrupt-gzip-crc",
+      "accepted": false,
+      "error": "BadGzipFile"
+    }
+  ],
+  "limits": [
+    "The unchanged read/pin function AST is executed against deterministic mocked Git responses. No scientific source predicate is rerun.",
+    "These small fixtures prove integrity refusal, complete gzip/CRC and measured decoded pins. They do not measure large-input performance or available memory.",
+    "Declared decoded product sizes/hashes remain exact assertions in each scientific caller. No arbitrary byte or cumulative-byte ceiling remains in these active readers/writers."
+  ]
+}

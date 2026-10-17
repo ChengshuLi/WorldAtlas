@@ -1,0 +1,218 @@
+{
+  "kind": "executed-Argentina-preparation-boundary-controls",
+  "method_commit": "3d80c380ef5117c669a5fdea475a69ea27fd51bf",
+  "cases": 27,
+  "results": [
+    {
+      "method": "prepare-source-stage.py",
+      "case": "occupied-output",
+      "returncode": 1,
+      "materialized_output_inventory_unchanged": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/probes/prepare-source-stage.py\", line 15, in <module>\n    assert W.is_dir() and O.parent.is_dir() and not O.exists() and all(not p.is_symlink()for root in(W,O)for p in(root,*root.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "prepare-source-stage.py",
+      "case": "dangling-output-symlink",
+      "returncode": 1,
+      "link_and_missing_target_unchanged": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/probes/prepare-source-stage.py\", line 15, in <module>\n    assert W.is_dir() and O.parent.is_dir() and not O.exists() and all(not p.is_symlink()for root in(W,O)for p in(root,*root.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "prepare-source-stage.py",
+      "case": "executed-method-drift",
+      "returncode": 1,
+      "output_absent": true,
+      "original_method_sha256": "0b99d330cb914400e7f1cab92911e7e3e3781be3fc117ce4b1f448b7082803ba",
+      "altered_method_sha256": "c2c8ca9a8bf77e5af4293f5e765b5a9c95ff4d8c6b57fc4025e4941a11899617",
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/source-review/argentina-preparation-controls-xdso65pu/prepare-source-stage.py\", line 40, in <module>\n    method=read(P+'/probes/prepare-source-stage.py',C);assert sha(method)==sha(pathlib.Path(__file__).read_bytes())\n                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "extract-prior-family.py",
+      "case": "occupied-output",
+      "returncode": 1,
+      "materialized_output_inventory_unchanged": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/probes/extract-prior-family.py\", line 10, in <module>\n    assert O.parent.is_dir()and not O.exists()and not O.is_symlink()and all(not p.is_symlink()for p in [R,O,*R.parents,*O.parents])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "extract-prior-family.py",
+      "case": "dangling-output-symlink",
+      "returncode": 1,
+      "link_and_missing_target_unchanged": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/probes/extract-prior-family.py\", line 10, in <module>\n    assert O.parent.is_dir()and not O.exists()and not O.is_symlink()and all(not p.is_symlink()for p in [R,O,*R.parents,*O.parents])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "extract-prior-family.py",
+      "case": "executed-method-drift",
+      "returncode": 1,
+      "output_absent": true,
+      "original_method_sha256": "ff361c6a6fbe8992c5611be81f44b34fa803a047ea839080445669e350e4d8ee",
+      "altered_method_sha256": "dd0ea1256e513661a395e9793e2fbbb99fe55ec905d96ddd2e3df8394a9fd2c0",
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/source-review/argentina-preparation-controls-xdso65pu/extract-prior-family.py\", line 28, in <module>\n    assert read(C,P+'/probes/extract-prior-family.py')==Path(__file__).read_bytes()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "measure-prior-family-keys.mjs",
+      "case": "occupied-output",
+      "returncode": 1,
+      "materialized_output_inventory_unchanged": true,
+      "stderr": "file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/probes/measure-prior-family-keys.mjs:16\nconst assert = (b, m) => { if (!b) throw Error(m); };\n                                         ^\n\nError: Fresh output required\n    at assert (file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/probes/measure-prior-family-keys.mjs:16:42)\n    at file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/probes/measure-prior-family-keys.mjs:27:1\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0\n"
+    },
+    {
+      "method": "measure-prior-family-keys.mjs",
+      "case": "dangling-output-symlink",
+      "returncode": 1,
+      "link_and_missing_target_unchanged": true,
+      "stderr": "file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/probes/measure-prior-family-keys.mjs:16\nconst assert = (b, m) => { if (!b) throw Error(m); };\n                                         ^\n\nError: Symlink refused: /workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/source-review/argentina-preparation-controls-xdso65pu/measure-prior-family-keys.mjs.link\n    at assert (file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/probes/measure-prior-family-keys.mjs:16:42)\n    at ordinaryAncestors (file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/probes/measure-prior-family-keys.mjs:21:5)\n    at file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/probes/measure-prior-family-keys.mjs:25:23\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0\n"
+    },
+    {
+      "method": "measure-prior-family-keys.mjs",
+      "case": "executed-method-drift",
+      "returncode": 1,
+      "output_absent": true,
+      "original_method_sha256": "24f2705a32cf49f0773aea823032819168f1b1fcc547de399d73e9e2c1da5093",
+      "altered_method_sha256": "b8f0242fdb524049c3695d8dcbb381ddf5a5f14cc82fcac7ed936f5fc1b002d1",
+      "stderr": "file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/source-review/argentina-preparation-controls-xdso65pu/measure-prior-family-keys.mjs:16\nconst assert = (b, m) => { if (!b) throw Error(m); };\n                                         ^\n\nError: Executed method drift\n    at assert (file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/source-review/argentina-preparation-controls-xdso65pu/measure-prior-family-keys.mjs:16:42)\n    at file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/source-review/argentina-preparation-controls-xdso65pu/measure-prior-family-keys.mjs:52:1\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0\n"
+    },
+    {
+      "method": "prepare-source-scope.py",
+      "case": "occupied-output",
+      "returncode": 1,
+      "materialized_output_inventory_unchanged": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/probes/prepare-source-scope.py\", line 10, in <module>\n    assert O.parent.is_dir()and not O.exists()and not O.is_symlink()and all(not p.is_symlink()for p in [R,O,*R.parents,*O.parents])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "prepare-source-scope.py",
+      "case": "dangling-output-symlink",
+      "returncode": 1,
+      "link_and_missing_target_unchanged": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/probes/prepare-source-scope.py\", line 10, in <module>\n    assert O.parent.is_dir()and not O.exists()and not O.is_symlink()and all(not p.is_symlink()for p in [R,O,*R.parents,*O.parents])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "prepare-source-scope.py",
+      "case": "executed-method-drift",
+      "returncode": 1,
+      "output_absent": true,
+      "original_method_sha256": "bc5cac72410bface3e45c11bf49762b5076b447b4704451772ea15fc3979457d",
+      "altered_method_sha256": "63c6a8fc77bd10b0a4e45631711766c3a4e531c6cd0fc1e6b848ac001bfa3076",
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/source-review/argentina-preparation-controls-xdso65pu/prepare-source-scope.py\", line 28, in <module>\n    assert read(C,P+'/probes/prepare-source-scope.py')==Path(__file__).read_bytes()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "corroborate-neighbor-contacts.py",
+      "case": "occupied-output",
+      "returncode": 1,
+      "materialized_output_inventory_unchanged": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/probes/corroborate-neighbor-contacts.py\", line 14, in <module>\n    assert O.parent.is_dir()and not O.exists()and not O.is_symlink()and all(not p.is_symlink()for p in [R,O,*R.parents,*O.parents])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "corroborate-neighbor-contacts.py",
+      "case": "dangling-output-symlink",
+      "returncode": 1,
+      "link_and_missing_target_unchanged": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/probes/corroborate-neighbor-contacts.py\", line 14, in <module>\n    assert O.parent.is_dir()and not O.exists()and not O.is_symlink()and all(not p.is_symlink()for p in [R,O,*R.parents,*O.parents])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "corroborate-neighbor-contacts.py",
+      "case": "executed-method-drift",
+      "returncode": 1,
+      "output_absent": true,
+      "original_method_sha256": "7e4b4b788970d3460935a0ac6c2fb1e5706fd0d53059ed718248f7214729296a",
+      "altered_method_sha256": "16737ccbc7e762ce08961c9f245365769ce31636a5a53d5f4c8429d0b70f0096",
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/source-review/argentina-preparation-controls-xdso65pu/corroborate-neighbor-contacts.py\", line 32, in <module>\n    assert read(C,P+'/probes/corroborate-neighbor-contacts.py')==Path(__file__).read_bytes()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "prepare-native-config.py",
+      "case": "occupied-output",
+      "returncode": 1,
+      "materialized_output_inventory_unchanged": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/probes/prepare-native-config.py\", line 9, in <module>\n    assert len(C)==40 and all(c in '0123456789abcdef'for c in C)and O.parent.is_dir()and not O.exists()and all(not p.is_symlink()for root in(W,O)for p in(root,*root.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "prepare-native-config.py",
+      "case": "dangling-output-symlink",
+      "returncode": 1,
+      "link_and_missing_target_unchanged": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/probes/prepare-native-config.py\", line 9, in <module>\n    assert len(C)==40 and all(c in '0123456789abcdef'for c in C)and O.parent.is_dir()and not O.exists()and all(not p.is_symlink()for root in(W,O)for p in(root,*root.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "prepare-native-config.py",
+      "case": "executed-method-drift",
+      "returncode": 1,
+      "output_absent": true,
+      "original_method_sha256": "db0b5e82fba397b5e659ee13023ae5063e5cb7e754b1b83d950a28782f9626e5",
+      "altered_method_sha256": "10e58e7aaa7b01499eb7b97f004b356d2ceb3c1e02b5523d74499082a674b4b5",
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/source-review/argentina-preparation-controls-xdso65pu/prepare-native-config.py\", line 27, in <module>\n    assert sha(read(P+'/probes/prepare-native-config.py'))==sha(pathlib.Path(__file__).read_bytes())\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "prepare-qualified-scope.py",
+      "case": "occupied-output",
+      "returncode": 1,
+      "materialized_output_inventory_unchanged": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/probes/prepare-qualified-scope.py\", line 8, in <module>\n    assert len(C)==40 and all(c in '0123456789abcdef'for c in C)and O.parent.is_dir()and not O.exists()and all(not p.is_symlink()for root in(W,O)for p in(root,*root.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "prepare-qualified-scope.py",
+      "case": "dangling-output-symlink",
+      "returncode": 1,
+      "link_and_missing_target_unchanged": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/probes/prepare-qualified-scope.py\", line 8, in <module>\n    assert len(C)==40 and all(c in '0123456789abcdef'for c in C)and O.parent.is_dir()and not O.exists()and all(not p.is_symlink()for root in(W,O)for p in(root,*root.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "prepare-qualified-scope.py",
+      "case": "executed-method-drift",
+      "returncode": 1,
+      "output_absent": true,
+      "original_method_sha256": "b427ca36ed794ebfbdbc3ef5ce75bd72a11ccb71998afd9357e3d992a36dd099",
+      "altered_method_sha256": "b9747aa2e99c004686f2804bbe28e0e79f29ba4600e733ad027b469853efb9c8",
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/source-review/argentina-preparation-controls-xdso65pu/prepare-qualified-scope.py\", line 26, in <module>\n    assert read(P+'/probes/prepare-qualified-scope.py')==pathlib.Path(__file__).read_bytes()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "verify-qualified-evidence.py",
+      "case": "occupied-output",
+      "returncode": 1,
+      "materialized_output_inventory_unchanged": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/probes/verify-qualified-evidence.py\", line 7, in <module>\n    assert len(C)==40 and all(c in '0123456789abcdef'for c in C)and O.parent.is_dir()and not O.exists()and all(not p.is_symlink()for root in(W,O)for p in(root,*root.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "verify-qualified-evidence.py",
+      "case": "dangling-output-symlink",
+      "returncode": 1,
+      "link_and_missing_target_unchanged": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/probes/verify-qualified-evidence.py\", line 7, in <module>\n    assert len(C)==40 and all(c in '0123456789abcdef'for c in C)and O.parent.is_dir()and not O.exists()and all(not p.is_symlink()for root in(W,O)for p in(root,*root.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "verify-qualified-evidence.py",
+      "case": "executed-method-drift",
+      "returncode": 1,
+      "output_absent": true,
+      "original_method_sha256": "0aca8333b33a731859dad9ae975e641b4fd1c5284bd6ce0138fe289244689548",
+      "altered_method_sha256": "8b18ad48a18d7828a4fbdb956f06e34ef93a2e33cfc2f52a28f8c527a8d0424c",
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/source-review/argentina-preparation-controls-xdso65pu/verify-qualified-evidence.py\", line 25, in <module>\n    assert read(P+'/probes/verify-qualified-evidence.py')==pathlib.Path(__file__).read_bytes()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "reconcile-authority.py",
+      "case": "occupied-output",
+      "returncode": 1,
+      "materialized_output_inventory_unchanged": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/probes/reconcile-authority.py\", line 8, in <module>\n    assert O.parent.is_dir()and not O.exists()and all(not p.is_symlink()for p in(O,*O.parents));inputs=[]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "reconcile-authority.py",
+      "case": "dangling-output-symlink",
+      "returncode": 1,
+      "link_and_missing_target_unchanged": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/probes/reconcile-authority.py\", line 8, in <module>\n    assert O.parent.is_dir()and not O.exists()and all(not p.is_symlink()for p in(O,*O.parents));inputs=[]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "reconcile-authority.py",
+      "case": "executed-method-drift",
+      "returncode": 1,
+      "output_absent": true,
+      "original_method_sha256": "709a4a75ba2116ce83368ca52a398cf02aa9105c10e157849952766c3f7f5766",
+      "altered_method_sha256": "984ded4fb5b9ec8e1a9bae9f0b0883b42305bc41de9edc5dab82a0fe3be9d496",
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/argentina-repair-delivery-20261017/source-review/argentina-preparation-controls-xdso65pu/reconcile-authority.py\", line 23, in <module>\n    assert pin(P+'/probes/reconcile-authority.py')[1]==pathlib.Path(__file__).read_bytes()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  ],
+  "limits": [
+    "Actual outputs and an existing exact method commit make these controls nonvacuous.",
+    "These controls exercise fresh-output and immutable executed-method boundaries; they do not establish scientific source suitability, physical support or selected delivery."
+  ]
+}
