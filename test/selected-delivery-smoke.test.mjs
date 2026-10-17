@@ -7,7 +7,7 @@ import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {gzipSync} from 'node:zlib';
 import {sha256} from '../scripts/evidence-quality.mjs';
-import {runSelectedDeliverySmoke, verifySelectedDelivery, selectedStableOwnerControls} from '../scripts/selected-delivery-smoke.mjs';
+import {runSelectedDeliverySmoke, checkEmittedSelectedDelivery, verifySelectedDelivery, selectedStableOwnerControls} from '../scripts/selected-delivery-smoke.mjs';
 import {packOwnership} from '../src/pixel-ownership.js';
 import {loadOwnershipAssets} from '../src/ownership-assets.js';
 import {packageStartupOwnership} from '../scripts/package-startup-ownership.mjs';
@@ -379,4 +379,33 @@ test('emitted gzip refuses changed source identity, encoded bytes, decoded bytes
   const atlas=structuredClone(original);change(atlas);fs.writeFileSync(atlasFile,json(atlas));await refuse(/differs/);
  }
  fs.writeFileSync(atlasFile,json(original));
+});
+
+
+for(const gzip of [false,true])test('shared full-output consumer authenticates actual cells without inventing reviewed expectations, gzip='+gzip,async t=>{
+ const f=fixture(t),source=fs.readFileSync(path.join(f.root,'selection/envelope.json'));
+ if(gzip)gzipEmittedLedgerPatch(f);
+ const options={root:f.root,emittedDirectory:f.emittedDirectory};
+ const generic=await checkEmittedSelectedDelivery(options);
+ assert.equal(generic.kind,'actual-emitted-additive-consumer');
+ assert.equal(generic.cumulative_native_cells_picked_and_sampled,2);
+ assert.equal(generic.stable_owner_controls,1);
+ assert.equal(generic.selected_ledger_sha256,f.expectations.selected_ledger_sha256);
+ for(const field of ['cohorts','expected_components_verified','expectations_sha256'])assert.equal(Object.hasOwn(generic,field),false);
+ assert.equal(fs.existsSync(f.outputPath),false,'Generic verification writes no receipt');
+ const reviewed=await runSelectedDeliverySmoke(f.options);
+ for(const field of ['feature_count','selected_ledger_sha256','selected_patch_sha256','cumulative_native_cells_picked_and_sampled','stable_owner_controls','inputs'])
+  assert.deepEqual(generic[field],reviewed[field]);
+ assert.equal(reviewed.expected_components_verified,2);
+ assert.deepEqual(fs.readFileSync(path.join(f.root,'selection/envelope.json')),source);
+ const descriptor=f.atlas.additiveRelease.ledger,filename=path.join(f.emittedDirectory,descriptor.path),body=fs.readFileSync(filename);
+ const corrupt=Buffer.from(body);corrupt[corrupt.length-1]^=1;fs.writeFileSync(filename,corrupt);
+ await assert.rejects(checkEmittedSelectedDelivery(options),/Whole asset hash differs/);
+});
+
+test('selected-map CLI and kernel still require independent expectations',async t=>{
+ const f=fixture(t);
+ await assert.rejects(runSelectedDeliverySmoke({...f.options,expectationsPath:undefined}),/Missing expectations path/);
+ assert.equal(fs.existsSync(f.outputPath),false);
+ assert.throws(()=>verifySelectedDelivery({expectations:undefined}),/Expectations must be an object/);
 });
