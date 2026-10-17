@@ -54,7 +54,7 @@ specs=[('Russia','ec8dd6711677fb77586441bbd5ef2d34488df2b6','russia-repair-deliv
 config=data(HEAD,P+'config/compose-six.json');allq=[];packages=[];all_original=[];all_supported=[];subjects=[]
 for name,h,folder,expected in specs:
  prefix='coordination/engineering/'+folder+'/'
- if name=='Russia':qs=data(h,prefix+'config/compose-six.json')['authorities']
+ if name=='Russia':qs=data(h,prefix+'config/compose.json')['authorities']
  elif name=='Angola':qs=[data(h,prefix+'config/conservative-authority-quartet.json')]
  elif name=='Canada':qs=data(h,prefix+'source-review/qualified-authority-handoff.json')['authorities']
  else:qs=[data(h,prefix+'handoff/native-authority-quartet.json')]
