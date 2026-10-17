@@ -23,6 +23,7 @@ The initial 608 whole-source physical results retain issues in 183 source target
 - Registry year 2017 is a represented-year claim. Recorded source update is January 19, 2023 and build is December 12, 2023; effective or observed 2017 geometry is not established.
 - ADM2 advertises 1,745 features but actual complete full/simplified bodies contain 1,742. The “Subprefectures” label is misleading; selected records explicitly identify municipality/city-ward scope.
 - Preserve underlying ADM2 OpenStreetMap/Wambacher CC BY-SA 2.0, ADM1 ODbL 1.0, and the distinct geoBoundaries product-citation CC BY 4.0. Consumed geometries explicitly declare CRS84 with longitude/latitude coordinates.
+- The original GSHHG archive COPYING and README conflict (v3-or-later versus v3-or-earlier wording) remains unresolved; no blanket LGPL version or new reuse approval is inferred.
 - Prior #1316, PR #1342, PR #1507 and open #1633 retain separate source, report and whole-candidate questions. Native MLIT N03 2017 is JGD2011 comparative data; its 242,211,059-byte archive was not restored or replayed here. GSI finite high-resolution applicability remains unavailable in prior evidence. The report's raw-duplicate validator defect remains open. This package checks its actual raw 28/28/9/3 reference cardinalities independently.
 - No contemporary legal jurisdiction, current physical coastline, historical affiliation, regional semantics, historical import, production publication or global geography approval is asserted.
 
