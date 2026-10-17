@@ -861,7 +861,9 @@ remains required at the actual selected ledger and patch size.
 The same-asset consumer chain is explicit:
 
 - `additive-gap-repair.mjs` and `prepare-delivery-handoff.mjs` produce and retain
-  complete asset length/hash pins; they impose no fixed additive asset ceiling.
+  complete asset length/hash pins. The metadata qualification/preparation paths
+  also authenticate whole original owner-roster bytes and exact decoded pins;
+  neither imposes an extra fixed ceiling on that roster.
 - `package-current-additive.mjs`, called by both `build-static-inner.mjs` and
   `assemble-selected-package.mjs`, checks safe paths, ordinary files, exact stat
   size and whole hashes before packaging. Encoded and decoded roster pins agree.
@@ -880,3 +882,29 @@ The 34,920,857-byte boundary tests use explicitly labelled same-size synthetic
 fixtures for package, browser-facing loader and emitted-smoke entry points.
 Literal selected-ledger probes are reported separately with their actual hashes;
 fixture success does not imply actual emitted-map or GPU/Canvas acceptance.
+
+### Remaining bounds outside this additive-asset correction
+
+This is not a claim that the application is free of arbitrary limits. The
+following remaining fixed guards need their own concrete justification or
+exact-descriptor replacement; merely belonging to another format is insufficient:
+
+- `effective-footprint.js`: 32 MiB on the reference-metadata asset, original
+  native manifest chunk decoded bytes, and the inert current-rebind custody pin.
+  Exact decoded native words and complete coverage are genuine integrity checks;
+  the additional 32 MiB constant is not established as an engine limit.
+- `selected-delivery-smoke.mjs`: 32 MiB decoded catalogue chunks, plus legacy
+  `repositoryReader` fallback for unpinned top-level files and native startup
+  parts without encoded byte declarations. These are policy defaults, not
+  proven platform limits.
+- `selected-reference-metadata.mjs`: 32 MiB encoded/decoded original metadata
+  source inputs. `prepare-delivery-handoff.mjs` still bounds the separate current
+  release registry decode at 64 MiB and its small release pointer at 4 KiB.
+- The static-only builder rejects files above 25 MiB; the hosted build takes a
+  different branch. This is labelled a hosting constraint, but a specific
+  provider/product limit must be checked before treating it as necessary.
+
+By contrast, safe-integer byte precision, exact decoded word counts, native
+coordinate packing dimensions and actual runtime allocation failures are
+concrete correctness/platform constraints. Any remaining limit cleanup must
+preserve their checks and exercise its own adjacent producer/consumer paths.
