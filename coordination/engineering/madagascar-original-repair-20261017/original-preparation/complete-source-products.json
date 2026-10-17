@@ -1,0 +1,54 @@
+[
+  {
+    "advertised_feature_count": 22,
+    "cohort": "administrative-registry",
+    "feature_count": 22,
+    "key": "gb:MDG:ADM1",
+    "metadata_sha256": "e5b71cc2097fc436c4ea7b41af1d5f71bdf093ccbc1724ee25c8546bc2bbc4d6",
+    "original_bytes": 758847,
+    "original_metadata_file": "data/administrative-sources.json",
+    "original_sha256": "f5e920b0fe2796d78d8b9da5643054cccfb5d1577dc2f6a23ae83ae28f074db4",
+    "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+    "parts": [
+      {
+        "bytes": 232414,
+        "hash_kind": "file-bytes",
+        "offset": 0,
+        "ordinal": 0,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MDG-ADM1-000.bin.gz",
+        "sha256": "425bc28421671a64ffd7ed6c6c3a0cdc5a049f22fce83e1f5e67f60645b8d26a",
+        "uncompressed_bytes": 758847,
+        "uncompressed_sha256": "f5e920b0fe2796d78d8b9da5643054cccfb5d1577dc2f6a23ae83ae28f074db4"
+      }
+    ],
+    "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MDG/ADM1/geoBoundaries-MDG-ADM1_simplified.geojson",
+    "recorded_license": "Open Data Commons Open Database License 1.0",
+    "source_represented_year_claim": "2017"
+  },
+  {
+    "advertised_feature_count": 119,
+    "cohort": "administrative-registry",
+    "feature_count": 119,
+    "key": "gb:MDG:ADM2",
+    "metadata_sha256": "89561dc548e483026180a728ef95a38a903c1665a08aaac39ffb5fb09820d869",
+    "original_bytes": 2483433,
+    "original_metadata_file": "data/administrative-sources.json",
+    "original_sha256": "0d8c2c12364a75c4d374540e35f1a9e5c52ff9c26ba198c5742d2ecd70f0bde8",
+    "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+    "parts": [
+      {
+        "bytes": 794190,
+        "hash_kind": "file-bytes",
+        "offset": 0,
+        "ordinal": 0,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MDG-ADM2-000.bin.gz",
+        "sha256": "27e12b62f554ce2289af09494b66a7e0331457c97131c57605f6a15127086252",
+        "uncompressed_bytes": 2483433,
+        "uncompressed_sha256": "0d8c2c12364a75c4d374540e35f1a9e5c52ff9c26ba198c5742d2ecd70f0bde8"
+      }
+    ],
+    "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MDG/ADM2/geoBoundaries-MDG-ADM2_simplified.geojson",
+    "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "source_represented_year_claim": "2020"
+  }
+]
