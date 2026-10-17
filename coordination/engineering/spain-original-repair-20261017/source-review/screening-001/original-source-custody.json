@@ -1,0 +1,37 @@
+{
+  "family": {
+    "advertised_feature_count": 8205,
+    "cohort": "administrative-registry",
+    "feature_count": 8205,
+    "key": "gb:ESP:ADM3",
+    "metadata_sha256": "d0ac91fc14544eca4e0ec9c59fa8d6907c1777d4b0b17f2e8d2cc781d2e82d9b",
+    "original_bytes": 18613175,
+    "original_metadata_file": "data/administrative-sources.json",
+    "original_sha256": "e5bfa1c3889ea763ca2bb82c7f1e8ff9eff715dcb99ce405293a03de7ac85862",
+    "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+    "parts": [
+      {
+        "bytes": 5048979,
+        "hash_kind": "file-bytes",
+        "offset": 0,
+        "ordinal": 0,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-ESP-ADM3-000.bin.gz",
+        "sha256": "2c79b3b7c2338733c7026f311148d10c20693facd06a635991e7fdf76204be62",
+        "uncompressed_bytes": 18613175,
+        "uncompressed_sha256": "e5bfa1c3889ea763ca2bb82c7f1e8ff9eff715dcb99ce405293a03de7ac85862"
+      }
+    ],
+    "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ESP/ADM3/geoBoundaries-ESP-ADM3_simplified.geojson",
+    "recorded_license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "source_represented_year_claim": "2018"
+  },
+  "consumed_feature_count": 8205,
+  "distinct_consumed_owner_atoms": 1829,
+  "all_atom_ids_found": true,
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  }
+}

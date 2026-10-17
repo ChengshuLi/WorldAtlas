@@ -1,0 +1,38 @@
+{
+  "package_id": "gb-DEU-ADM3--repair-evaluation",
+  "original_native_cells": 27555,
+  "land": 27043,
+  "inland_water": 512,
+  "intervals": 7499,
+  "owners": 82,
+  "localities": 21,
+  "primary_full_features": 428,
+  "source_sha256": "a711f65d1eafa075e24c9efe0b37af042567bea00e7b2b6d9e49d63f0a421ade",
+  "upstream_zip_ref": "9469f09",
+  "upstream_zip_sha256": "20b6aad172dbbf1cfa45805ebffad5cb16062b414393d7f08a3845c9d167dea8",
+  "upstream_zip_bytes": 6515218,
+  "claim_search": "Exact package-ID issues and PR search empty 2026-10-17 20:56 UTC; broad Germany results historical/regional/Denmark/Greenland only.",
+  "provenance_urls": [
+    "https://www.govdata.de/dl-de/by-2-0",
+    "https://gdz.bkg.bund.de/index.php/default/digitale-geodaten/verwaltungsgebiete/nuts-gebiete-1-250-000-stand-31-12-nuts250-31-12.html",
+    "https://daten.gdz.bkg.bund.de/produkte/vg/nuts250_1231/2021/"
+  ],
+  "pending": [
+    "Original extraction/identity",
+    "Current accepted and Sweden pending interval/owner overlap",
+    "Fresh live claims before claim"
+  ],
+  "claimed": false,
+  "historical_provenance": {
+    "checked": "2026-10-17T21:07:00Z",
+    "upstream_source_zip_verified": true,
+    "upstream_metadata_sha256": "30b9e215a12b395bddb27d3c1fae8b58f21eec39d56be3096496f1bc329b3ac7",
+    "official_2021_zip_url": "https://daten.gdz.bkg.bund.de/produkte/vg/nuts250_1231/2021/nuts250_12-31.utm32s.shape.zip",
+    "official_2021_zip_sha256": "9b9e5b357a8dbd39fb6d020b70bebbbe1de76d9e0f5abfe2423fda9043dd90ad",
+    "date_member": "31.12.2021",
+    "license": "Data licence Germany \u2013 attribution \u2013 version 2.0",
+    "attribution": "GeoBasis-DE / BKG, year of last data retrieval, changed-data notice; provider, dataset URI and license link",
+    "limitation": "This authenticates source/license provenance. It does not qualify native owners, geometry suitability or modern boundary status; current 2024+ PDF is not retroactively used. Upstream source metadata records original DHDN/Gauss-Kruger to WGS84 conversion with DHDN_To_WGS_1984_4_NTv2."
+  },
+  "source_suitability_note": "428 source records have 401 unique district names plus 27 duplicates. Official 2021 source has GF4 land401 and GF2 water27, with identical ordered names. GeoBoundaries conversion deleted GF/NUTS_CODE; polygon record structure differs in some records, so do not infer exact role mapping without geometry/identity evidence. Exact retained shape-ID joins, physical role and native owner resolution remain unverified."
+}

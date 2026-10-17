@@ -1,0 +1,24 @@
+{
+  "retrieved_utc": "2026-10-17",
+  "upstream_revision": "9469f09",
+  "source_zip_sha256": "e8febd229950506da7f1b17268fcf3ee121798ee92716c66fa9608adbbc599ff",
+  "source_zip_bytes": 298208,
+  "source_zip_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/sourceData/gbOpen/SWE_ADM2.zip",
+  "findings": [
+    {
+      "url": "https://commons.wikimedia.org/wiki/File:2017_Sweden_population_density_per_municipality-sv.svg",
+      "revision": 755866830,
+      "observation": "Source page records24September2017 creation; geodata attributed to Swedish National Land Survey open data; file CC0. Map population statistics are2016 and do not establish boundary vintage themselves."
+    },
+    {
+      "url": "https://commons.wikimedia.org/wiki/File:Municipalities_of_Stockholm.png",
+      "revision": 454065167,
+      "observation": "Source page describes Stockholm County municipalities, attributes source to Statistics Sweden and declares public domain; latest source file revision20June2005."
+    }
+  ],
+  "limits": [
+    "Exact geoBoundaries source ZIP says second source used for Stockholm county. Overall2017 field is not uniform vintage proof.",
+    "These are source-relative boundary representations, not current administrative law or fine-resolution boundary accuracy.",
+    "Source-specific rights declarations coexist with geoBoundaries derivative attribution; no source substitution or new legal agreement."
+  ]
+}

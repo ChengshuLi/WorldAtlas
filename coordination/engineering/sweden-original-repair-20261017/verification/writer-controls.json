@@ -1,0 +1,77 @@
+{
+  "executed": 12,
+  "results": [
+    {
+      "method": "prepare-native-config.mjs",
+      "case": "occupied",
+      "exit": 1,
+      "stderr": "-native-config.mjs:3:173)\n    at file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/4d616d92bcde5d70377059290d2ac378d97a8b105ef624f71eef2d218b69922c/work/coordination/engineering/sweden-original-repair-20261017/probes/prepare-native-config.mjs:3:486\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0\n"
+    },
+    {
+      "method": "prepare-native-config.mjs",
+      "case": "symlink",
+      "exit": 1,
+      "stderr": "-native-config.mjs:3:173)\n    at file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/4d616d92bcde5d70377059290d2ac378d97a8b105ef624f71eef2d218b69922c/work/coordination/engineering/sweden-original-repair-20261017/probes/prepare-native-config.mjs:3:382\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0\n"
+    },
+    {
+      "method": "prepare-native-config.mjs",
+      "case": "method-drift",
+      "exit": 1,
+      "stderr": "        ^\n\nError: method drift\n    at need (file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/4d616d92bcde5d70377059290d2ac378d97a8b105ef624f71eef2d218b69922c/work/.cache/sweden-controls/tmp3h1s9eg7/prepare-native-config.mjs:3:173)\n    at file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/4d616d92bcde5d70377059290d2ac378d97a8b105ef624f71eef2d218b69922c/work/.cache/sweden-controls/tmp3h1s9eg7/prepare-native-config.mjs:5:1\n\nNode.js v24.19.0\n"
+    },
+    {
+      "method": "prepare-original.py",
+      "case": "occupied",
+      "exit": 1,
+      "stderr": "cratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/4d616d92bcde5d70377059290d2ac378d97a8b105ef624f71eef2d218b69922c/work/coordination/engineering/sweden-original-repair-20261017/probes/prepare-original.py\", line 13, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for root in (W,O) for p in (root,*root.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "prepare-original.py",
+      "case": "symlink",
+      "exit": 1,
+      "stderr": "cratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/4d616d92bcde5d70377059290d2ac378d97a8b105ef624f71eef2d218b69922c/work/coordination/engineering/sweden-original-repair-20261017/probes/prepare-original.py\", line 13, in <module>\n    assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for root in (W,O) for p in (root,*root.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "prepare-original.py",
+      "case": "method-drift",
+      "exit": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/4d616d92bcde5d70377059290d2ac378d97a8b105ef624f71eef2d218b69922c/work/.cache/sweden-controls/tmpwi6dho94/prepare-original.py\", line 29, in <module>\n    assert read(P+'/probes/prepare-original.py',C)==pathlib.Path(__file__).read_bytes()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "reconcile-retained-periodic-negatives.mjs",
+      "case": "occupied",
+      "exit": 1,
+      "stderr": "js:5:288)\n    at file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/4d616d92bcde5d70377059290d2ac378d97a8b105ef624f71eef2d218b69922c/work/coordination/engineering/sweden-original-repair-20261017/probes/reconcile-retained-periodic-negatives.mjs:6:246\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0\n"
+    },
+    {
+      "method": "reconcile-retained-periodic-negatives.mjs",
+      "case": "symlink",
+      "exit": 1,
+      "stderr": "js:5:288)\n    at file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/4d616d92bcde5d70377059290d2ac378d97a8b105ef624f71eef2d218b69922c/work/coordination/engineering/sweden-original-repair-20261017/probes/reconcile-retained-periodic-negatives.mjs:6:142\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0\n"
+    },
+    {
+      "method": "reconcile-retained-periodic-negatives.mjs",
+      "case": "method-drift",
+      "exit": 1,
+      "stderr": "   at need (file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/4d616d92bcde5d70377059290d2ac378d97a8b105ef624f71eef2d218b69922c/work/.cache/sweden-controls/tmp2ngke5f3/reconcile-retained-periodic-negatives.mjs:5:288)\n    at file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/4d616d92bcde5d70377059290d2ac378d97a8b105ef624f71eef2d218b69922c/work/.cache/sweden-controls/tmp2ngke5f3/reconcile-retained-periodic-negatives.mjs:8:1\n\nNode.js v24.19.0\n"
+    },
+    {
+      "method": "screen-whole-foreign-bounds.mjs",
+      "case": "occupied",
+      "exit": 1,
+      "stderr": "n-bounds.mjs:6:218)\n    at file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/4d616d92bcde5d70377059290d2ac378d97a8b105ef624f71eef2d218b69922c/work/coordination/engineering/sweden-original-repair-20261017/probes/screen-whole-foreign-bounds.mjs:7:251\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0\n"
+    },
+    {
+      "method": "screen-whole-foreign-bounds.mjs",
+      "case": "symlink",
+      "exit": 1,
+      "stderr": "n-bounds.mjs:6:218)\n    at file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/4d616d92bcde5d70377059290d2ac378d97a8b105ef624f71eef2d218b69922c/work/coordination/engineering/sweden-original-repair-20261017/probes/screen-whole-foreign-bounds.mjs:7:147\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0\n"
+    },
+    {
+      "method": "screen-whole-foreign-bounds.mjs",
+      "case": "method-drift",
+      "exit": 1,
+      "stderr": "uted method drift\n    at need (file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/4d616d92bcde5d70377059290d2ac378d97a8b105ef624f71eef2d218b69922c/work/.cache/sweden-controls/tmphrcj1xkk/screen-whole-foreign-bounds.mjs:6:218)\n    at file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/4d616d92bcde5d70377059290d2ac378d97a8b105ef624f71eef2d218b69922c/work/.cache/sweden-controls/tmphrcj1xkk/screen-whole-foreign-bounds.mjs:14:1\n\nNode.js v24.19.0\n"
+    }
+  ]
+}

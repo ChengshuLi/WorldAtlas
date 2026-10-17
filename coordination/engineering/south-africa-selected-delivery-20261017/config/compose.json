@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "selector": {
+    "commit": "2013eb75fdaa4fdd7de311da09a5c0bd1fbf4f28",
+    "path": "data/ownership-selection.json",
+    "mode": "100644",
+    "git_blob_oid": "62546f65dfc1555a47ec72fd9ad001dc5c40815c",
+    "bytes": 1840,
+    "sha256": "585765b351b868ed14a41d7ab660d83b131aa9204209d2a73af4d37b80ce44d1"
+  },
+  "effective_release_id": "geography:south-africa-supported-repair-20261017",
+  "authorities": [
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/south-africa-original-repair-20261017/native-authority-supported-001/original-rule-preimage.json",
+        "commit": "062718442dad5a9e96dec56b8b9d0e155242656d",
+        "mode": "100644",
+        "git_blob_oid": "b8e6bceedc525a5d8c115eb3ceed51b521e58b23",
+        "bytes": 748,
+        "sha256": "e4177a8d15fb2d7b4e62ee5053715a3bfc83a718684455a1f1196f80d3282121"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/south-africa-original-repair-20261017/native-authority-supported-001/authority-binding.json",
+        "commit": "062718442dad5a9e96dec56b8b9d0e155242656d",
+        "mode": "100644",
+        "git_blob_oid": "95cb60d349443e0ca6f7d65bd265c6ba031b6129",
+        "bytes": 751,
+        "sha256": "743fe7c9b4bcd01ca6f15dd9dffecc8da26a9efedbc27cd5704d39811c0bf266"
+      },
+      "ledger": {
+        "path": "coordination/engineering/south-africa-original-repair-20261017/native-authority-supported-001/constructor-result.json",
+        "commit": "062718442dad5a9e96dec56b8b9d0e155242656d",
+        "mode": "100644",
+        "git_blob_oid": "a8d4b02390494fafb6d312f9efd9f86bc6374b19",
+        "bytes": 371757,
+        "sha256": "bbe285e05b90245bf47d0903e81120915771ba15761c478b4a1b4a997fdc7cb0"
+      },
+      "native_patch": {
+        "path": "coordination/engineering/south-africa-original-repair-20261017/supported-inputs-001/native-patch.json",
+        "commit": "8bd01d41a76251f3a7003b555c46cee5271b44c1",
+        "mode": "100644",
+        "git_blob_oid": "b00f5c7b38b95586f541ef9e0f92ddb98a5f6c35",
+        "bytes": 101827,
+        "sha256": "d6dade46231aaa11650978996f3d6bff0c1bf6da350af049285fc26a21330f62"
+      }
+    }
+  ]
+}
