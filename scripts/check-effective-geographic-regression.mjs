@@ -1,16 +1,18 @@
 // Trusted immutable data reader. Proposed project code is never imported.
 import fs from 'node:fs';
+import {isNativeSequence} from '../src/native-grid.js';
 import path from 'node:path';
 import {execFileSync,spawnSync,spawn} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {gunzipSync,createGunzip} from 'node:zlib';
 import {Readable} from 'node:stream';
+import {pipeline} from 'node:stream/promises';
 import {fileURLToPath} from 'node:url';
 import {isDeepStrictEqual} from 'node:util';
 import {nativePolygonIntervals,NATIVE_GRID_METHOD} from '../src/native-grid.js';
 import {repairComponentKey,nativeOnlyComponent} from '../src/native-grid.js';
 import {unshuffleOwnershipBytes} from '../src/ownership-codec.js';
-import {readSelectedAdditive,selectedAdditiveRows,compareVersionedRepairLedgers} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {readSelectedAdditive,selectedAdditiveRows,compareVersionedRepairLedgers,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {validateReferenceMetadataProjection} from './selected-reference-metadata.mjs';
 
 const sha=b=>createHash('sha256').update(b).digest('hex');
@@ -342,12 +344,23 @@ export class NativeAssetImage {
       if(!(p.offset<member.offset+member.bytes&&member.offset<p.offset+p.decoded_bytes))continue;
       let decoded=0,encoded=0;const whole=createHash('sha256'),reader=this.reader,directory=this.directory;
       async function* source(){for await(const chunk of reader.stream(path.posix.join(directory,p.path),{expected:p.sha256})){encoded+=chunk.length;yield chunk;}}
-      const stream=Readable.from(source()).compose(createGunzip());
-      for await(const raw of stream){
-        const offset=decoded;decoded+=raw.length;
-        demand(decoded<=p.decoded_bytes,'Native fragment decoded size exceeds pin');whole.update(raw);
-        const start=Math.max(member.offset,p.offset+offset),end=Math.min(member.offset+member.bytes,p.offset+decoded);
-        if(start<end){const chunk=raw.subarray(start-p.offset-offset,end-p.offset-offset);bytes+=chunk.length;hasher.update(chunk);yield chunk;}
+      const input=Readable.from(source()),stream=createGunzip();
+      // Observe failure immediately, including cancellation while the consumer is
+      // suspended at a yield. Join the entire producer before returning to it.
+      const settled=pipeline(input,stream).then(()=>null,error=>error);
+      let consumed=false;
+      try{
+        for await(const raw of stream){
+          const offset=decoded;decoded+=raw.length;
+          demand(decoded<=p.decoded_bytes,'Native fragment decoded size exceeds pin');whole.update(raw);
+          const start=Math.max(member.offset,p.offset+offset),end=Math.min(member.offset+member.bytes,p.offset+decoded);
+          if(start<end){const chunk=raw.subarray(start-p.offset-offset,end-p.offset-offset);bytes+=chunk.length;hasher.update(chunk);yield chunk;}
+        }
+        consumed=true;
+      }finally{
+        if(!consumed){input.destroy();stream.destroy();}
+        const failure=await settled;
+        if(consumed&&failure)throw failure;
       }
       // Consume the suffix outside this member too. Its hash still authenticates
       // the entire containing fragment, even when no more member bytes are due.
@@ -817,17 +830,26 @@ export function compareRepairLedgers(before,after) {
 export function compareIntervals(before,after,{row,ownersBefore,ownersAfter}) {
   const validate=(runs,owners)=>{let end=0;for(const r of runs){demand(Array.isArray(r)&&r.length===3&&r.every(Number.isSafeInteger)&&r[0]>=end&&r[1]>r[0]&&r[2]>0&&owners[r[2]-1],'Invalid complete owner interval');end=r[1];}};
   validate(before,ownersBefore);validate(after,ownersAfter);
-  const losses=[];let j=0;
-  for(const [start,end,owner]of before){let at=start;while(j<after.length&&after[j][1]<=at)j++;let k=j;while(at<end){const next=after[k];const stop=Math.min(end,next?(next[0]>at?next[0]:next[1]):end);demand(stop>at,'Nonadvancing owner interval');const actual=next&&next[0]<=at?ownersAfter[next[2]-1].id:null,expected=ownersBefore[owner-1].id;if(actual!==expected)losses.push({row,start:at,end:stop,previous_owner:expected,candidate_owner:actual});at=stop;if(next&&at>=next[1])k++;}}
+  const losses=[],iterator=after[Symbol.iterator]();let current=iterator.next();
+  try{for(const [start,end,owner]of before){
+    let at=start;
+    while(!current.done&&current.value[1]<=at)current=iterator.next();
+    while(at<end){
+      const next=current.done?null:current.value;
+      const stop=Math.min(end,next?(next[0]>at?next[0]:next[1]):end);
+      demand(stop>at,'Nonadvancing owner interval');
+      const actual=next&&next[0]<=at?ownersAfter[next[2]-1].id:null,expected=ownersBefore[owner-1].id;
+      if(actual!==expected)losses.push({row,start:at,end:stop,previous_owner:expected,candidate_owner:actual});
+      at=stop;if(next&&at>=next[1])current=iterator.next();
+    }
+  }}finally{iterator.return?.();}
   return losses;
 }
 
 // Eligibility belongs to the actual selected ownership validator. Keep one
 // implementation here, also exported for bounded inventory screening.
 // It only validates proposed repairs and does not change native compilation.
-const canonical=value=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'
-  ?Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])])):value;
-export const visibilityDigest=value=>sha(Buffer.from(JSON.stringify(canonical(value))+'\n'));
+export const visibilityDigest=value=>valueSha(value);
 export const VISIBILITY_METHOD='current-native-unassigned-cell-witness-v1';
 
 export function decodeVisibilityLatitudes(encoded,pin,size) {
@@ -876,7 +898,7 @@ function* visibilityCandidateBatches(candidates) {
 function ownerRows(rows,size) {
   const result=new Map();let previous=-1;
   for(const row of rows){
-    demand(Number.isInteger(row.y)&&row.y>previous&&row.y>=0&&row.y<size&&Array.isArray(row.runs),'Incomplete/unordered visibility owner row');
+    demand(Number.isInteger(row.y)&&row.y>previous&&row.y>=0&&row.y<size&&isNativeSequence(row.runs),'Incomplete/unordered visibility owner row');
     previous=row.y;let end=0;
     for(const run of row.runs){
       demand(run.length===3&&run.every(Number.isSafeInteger)&&run[0]>=end&&run[1]>run[0]
@@ -886,15 +908,16 @@ function ownerRows(rows,size) {
   }
   return result;
 }
-function emptySpans(start,end,owned) {
-  const result=[];let at=start;
+function* emptySpans(start,end,owned) {
+  let at=start;
   for(const [left,right]of owned){
     if(right<=at)continue;if(left>=end)break;
-    if(left>at)result.push([at,Math.min(left,end)]);
+    if(left>at)yield [at,Math.min(left,end)];
     at=Math.max(at,right);if(at>=end)break;
   }
-  if(at<end)result.push([at,end]);return result;
+  if(at<end)yield [at,end];
 }
+function findInterval(runs,predicate){for(const run of runs)if(predicate(run))return run;}
 function firstAtOrBelow(latitudes,value) {
   let lo=0,hi=latitudes.length;
   while(lo<hi){const mid=Math.floor((lo+hi)/2);if(latitudes[mid]>value)lo=mid+1;else hi=mid;}
@@ -970,23 +993,21 @@ function screenNativeGapBatch({candidates,size,latitudes,rows,rowStart,rowEnd,se
 // checkpoint traversal and unchanged accepted zero-cell primitives remain valid.
 export function newVisibleRepairCandidates(before,after) {
   const old=new Set(before.map(repairComponentKey)),seen=new Set();
-  const added=[];
   for(const row of after){
     demand(!seen.has(repairComponentKey(row)),'Duplicate candidate repair component');seen.add(repairComponentKey(row));
     if(old.has(repairComponentKey(row)))continue;
     if(!['assigned','zero-cell'].includes(row.disposition))continue;
     demand(row.disposition==='assigned'&&Number.isSafeInteger(row.native_cells)&&row.native_cells>0,
       'New gap repair must change map cells: '+row.component_id);
-    added.push(row);
   }
-  return added;
+  return after.filter(row=>!old.has(repairComponentKey(row))&&['assigned','zero-cell'].includes(row.disposition));
 }
 
 // Every observed row is a complete actual before/after owner row. Find a literal
 // native sample inside each new primitive that changes from unowned to its owner.
 // A positive aggregate or a sibling's unrelated changed cell cannot pass.
 export function repairVisibilityWitnesses({candidates,size,latitudes,beforeRows,afterRows}) {
-  demand(Array.isArray(candidates),'Visibility candidate array required');
+  demand(isNativeSequence(candidates),'Visibility candidate array required');
   const before=ownerRows(beforeRows,size),after=ownerRows(afterRows,size),ys=[...before.keys()];
   demand(JSON.stringify(ys)===JSON.stringify([...after.keys()]),'Visibility before/after row scope differs');
   const ids=new Set(),witnesses=new Map();
@@ -999,7 +1020,7 @@ export function repairVisibilityWitnesses({candidates,size,latitudes,beforeRows,
       if(witnesses.has(repairComponentKey(candidate))||!before.has(row.y))continue;
       for(const [start,end]of row.runs){
         for(const [left,right]of emptySpans(start,end,before.get(row.y))){
-          const hit=after.get(row.y).find(run=>run[2]===candidate.pixelIndex&&Math.max(left,run[0])<Math.min(right,run[1]));
+          const hit=findInterval(after.get(row.y),run=>run[2]===candidate.pixelIndex&&Math.max(left,run[0])<Math.min(right,run[1]));
           if(hit){witnesses.set(repairComponentKey(candidate),{component_id:candidate.component_id,
             ...(candidate.authority_sha256?{authority_sha256:candidate.authority_sha256}:{}),
             native_rows_sha256:visibilityDigest(candidate.native_rows),x:Math.max(left,hit[0]),y:row.y,
@@ -1022,7 +1043,7 @@ export function repairVisibilityWitnesses({candidates,size,latitudes,beforeRows,
       for(const span of native.rows.get(y)??[]){
         const item=index[span.owner-1];if(witnesses.has(repairComponentKey(item.candidate)))continue;
         for(const [left,right]of emptySpans(span.start,span.end,before.get(y))){
-          const hit=after.get(y).find(run=>run[2]===item.candidate.pixelIndex&&Math.max(left,run[0])<Math.min(right,run[1]));
+          const hit=findInterval(after.get(y),run=>run[2]===item.candidate.pixelIndex&&Math.max(left,run[0])<Math.min(right,run[1]));
           if(hit){witnesses.set(repairComponentKey(item.candidate),{component_id:item.candidate.component_id,
             ...(item.candidate.authority_sha256?{authority_sha256:item.candidate.authority_sha256}:{}),
             geometry_sha256:item.geometry_sha256,x:Math.max(left,hit[0]),y,
@@ -1033,7 +1054,7 @@ export function repairVisibilityWitnesses({candidates,size,latitudes,beforeRows,
     k=end;
   }
   }
-  return candidates.map(row=>witnesses.get(repairComponentKey(row))??null);
+  return Array.from(candidates,row=>witnesses.get(repairComponentKey(row))??null);
 }
 
 export function selectedBootstrap(repo,baseline,candidate,{parentRuntimePath}={}) {
