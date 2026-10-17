@@ -15,3 +15,9 @@ Complete source preparation passes all68 direct owner/source identities and reta
 The source-stage assessment inherits the word “district” in its generic intent string; the actual typed source role and this package are Local municipality / ZAF ADM3. No district/municipal identity equivalence or tier edit is asserted.
 
 Complete foreign screening and direct native qualification are still pending. Foreign001 hit its180-second OS deadline before complete publication; no partial completion is claimed. Foreign002 is the unchanged complete-corpus method with a360-second deadline grounded in that actual progress.
+
+## Complete foreign source screen
+
+Foreign002 completed the entire365-family/73,293-feature foreign corpus using unchanged stock whole-feature bounds:90 conservative contacts in11 complete foreign families; three original Fiji periodic-frame exceptions remain for reconciliation against the existing accepted proof. All other73,200 originals have disjoint complete bounds. No native or sovereign approval follows from those bounds. The prior partial180-second attempt remains uncredited; the complete attempt took225.060 seconds and retained all input identities.
+
+The existing accepted Fiji frame proof now reconciles all three exact unchanged exceptions: whole canonical bounds and all original South Africa rows are disjoint. No normalization or raster replay was performed. Final foreign coverage is73,200 raw-bounds disjoint +3 retained-periodic disjoint +90 conservative contacts=73,293; all11 whole contacting families are retained for the stock negative guard.
