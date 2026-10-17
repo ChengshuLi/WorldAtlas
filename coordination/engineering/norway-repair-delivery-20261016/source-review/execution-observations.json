@@ -1,0 +1,30 @@
+{
+  "before_generation": {
+    "available_memory_observed_gib": 7.9,
+    "free_storage_observed_bytes": 1474404352,
+    "finite_deadline_seconds_per_phase": 1200,
+    "forced_termination_grace_seconds": 15
+  },
+  "physical": {
+    "returncode": 0,
+    "elapsed_seconds": 72.12267358100507,
+    "lifetime_child_maxrss_kib_linux": 577736,
+    "limit": "Maximum child lifetime RSS is observational, not aggregate process-tree enforcement."
+  },
+  "native_diagnostic": {
+    "returncode": 0,
+    "elapsed_seconds": 15.078334865975194,
+    "lifetime_child_maxrss_kib_linux": 826040,
+    "limit": "Maximum child lifetime RSS is observational, not aggregate process-tree enforcement."
+  },
+  "native_constructor": {
+    "returncode": 0,
+    "elapsed_seconds": 14.741646179987583,
+    "lifetime_child_maxrss_kib_linux": 777064,
+    "limit": "Maximum child lifetime RSS is observational, not aggregate process-tree enforcement."
+  },
+  "preexecution_limits": [
+    "The initial command using /usr/bin/time could not start because that optional binary was absent. The initial native Node launch was refused before calculation because inherited NODE_PATH was nonempty. The corrected plain-node invocation ran once successfully.",
+    "Linux wait4 child lifetime maximum RSS is an observation, not live aggregate process-tree RSS enforcement. Existing stock operator admission and original scientific predicates were unchanged."
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "package": "gb-NOR-ADM2--repair-evaluation",
+  "exact_reproduced_cells": 649042,
+  "exact_reproduced_segments": 119818,
+  "original_extractor_sha256": "2589022806876f7faa645293fd9a0ea4b22d0c35a5a6a29fbdc30f5b730f5689",
+  "outputs": [
+    {
+      "path": "block-013.json.gz",
+      "bytes": 42645,
+      "sha256": "8ce3f12b27dec7b5e9d1ffbf51b08177297183fc1dbd8cdbeba0c46f8060dcb9"
+    },
+    {
+      "path": "block-014.json.gz",
+      "bytes": 168485,
+      "sha256": "731fa9f89dfceae94c34eb03bf17e4adff19143f591e8f0a591bda7ce0c3faa8"
+    },
+    {
+      "path": "block-015.json.gz",
+      "bytes": 102343,
+      "sha256": "d0bf9008574a98465be485914068caef4070ac8cfeaf4a2653ea4df89b8c80c5"
+    },
+    {
+      "path": "block-016.json.gz",
+      "bytes": 87180,
+      "sha256": "96a4b54770e1347cb59a4229065efa88fc36df0b7b989ea38fcea6baf2bae082"
+    },
+    {
+      "path": "block-017.json.gz",
+      "bytes": 108277,
+      "sha256": "6197295f553b3b95622130e86222f1dd9a8859c4eb914a5bfb2ef6a42a652334"
+    },
+    {
+      "path": "block-018.json.gz",
+      "bytes": 143162,
+      "sha256": "12cca1b6fe58448fb01e1a677f6686b7c025ba49eec3906aab11630e18b94993"
+    },
+    {
+      "path": "block-019.json.gz",
+      "bytes": 18671,
+      "sha256": "715f8f92b6c7dff85631b84ce3d67293911a56452b213bfb751ca7042c193701"
+    },
+    {
+      "path": "package.json",
+      "bytes": 9196,
+      "sha256": "b2cbda07624d9926ab0421ca7ac74cbe9fb0a341945b75dc1371381e07b6311d"
+    }
+  ],
+  "limits": [
+    "Extraction establishes the full frozen denominator; it is not physical or native qualification.",
+    "Source-stage package metadata uses deterministic sorted-key JSON with unchanged parsed object; original extraction bytes remain separately pinned."
+  ]
+}

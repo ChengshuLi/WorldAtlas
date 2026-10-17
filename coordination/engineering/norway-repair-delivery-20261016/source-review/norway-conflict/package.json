@@ -1,0 +1,69 @@
+{
+  "package_id": "gb-NOR-ADM2--source-conflict",
+  "primary_source": "gb:NOR:ADM2",
+  "source_family_index": 245,
+  "category": "source-conflict",
+  "native_cells": 1,
+  "land_cells": 1,
+  "inland_water_cells": 0,
+  "source_relative_cells": 0,
+  "interval_segments": 1,
+  "owners": [
+    33231,
+    38297
+  ],
+  "source_features": [
+    48385,
+    52689,
+    53105
+  ],
+  "source_families": [
+    245,
+    279,
+    280
+  ],
+  "native_blocks": [
+    14
+  ],
+  "provinces": [
+    "framework:province:murmansk-oblast:93dac80524db",
+    "framework:province:troms-og-finnmark:38859f82963b"
+  ],
+  "location_count": 2,
+  "source_feature_count": 3,
+  "locality_count": 2,
+  "cost": {
+    "primary_source_decoded_bytes": 4724258,
+    "all_required_source_decoded_bytes": 40789871,
+    "primary_full_source_raster_measured_seconds": 1.422,
+    "source_interval_segments": 1,
+    "maximum_native_rows_per_execution_frame": 4096,
+    "observed_global_census_peak_rss_bytes": 884973568
+  },
+  "evidence": {
+    "selection": "ownership-binding.json",
+    "lineage": "lineage.json",
+    "territorial_source_catalogue": "retained-source-catalogue.json",
+    "territorial_catalogue_sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+    "source_features": "source-feature-roster.json",
+    "territorial_native_blocks": "source-candidates-block-NNN.json.gz",
+    "physical": "physical-unassigned-summary.json",
+    "source_domain_transform": []
+  },
+  "work": {
+    "question": "Resolve overlapping retained source-feature mappings with no common current location, checking vintage, legitimate aggregation and actual territorial exclusions.",
+    "completion": "Retain competing source evidence, decide the applicable source mapping if supported, and rerun the affected intervals; do not silently select a source or call ancestry a jurisdiction dispute.",
+    "priority": 2
+  },
+  "execution": {
+    "command": "node source-batch-intervals.mjs gb-NOR-ADM2--source-conflict OUTPUT_DIRECTORY",
+    "output_columns": [
+      "y",
+      "start",
+      "end",
+      "candidate_owner_indices",
+      "source_feature_indices",
+      "physical_class"
+    ]
+  }
+}
