@@ -1,3 +1,23 @@
+# Russia whole-package delivery handoff
+
+Issue #2302. Continuation branch: `engineering/russia-repair-resume-20261017`. Accepted delivery baseline is Greenland-inclusive `c4ffca9ba743f68c877fd8542698b28804cf07cf`.
+
+The stock native constructor now qualifies 2,557,516 cells across 327 owners. The complete original denominator remains 2,566,967 cells and 334 owners, partitioned exactly into support plus 9,451 withheld foreign contacts, including seven wholly held owners. The supported request's optional class intervals were projected to its exact native patch; every other complete source, whole-target physical, same-family/split, negative and context field remains literal. The earlier full-class-request refusal is retained under verification. `verification/supported-request-binding-replay.json` rechecks the actual original and supported evidence bodies.
+
+Current stock native authority is committed at `d3c74d563932b99deb695c5fff80a6e4dfb015a5`. It uses accepted helper SHA-256 `6f6910288a4d818778c5586797f902d1d909f0b861efaefbf8e6dfeb9ba9572f`, completed in 61.39 seconds (61.76 seconds including process startup), and measured 1,204,040 KiB peak child RSS. Its receipt does not claim current-owner-zero or emitted-map acceptance.
+
+Composition at `26c420129a8465bd149dca31c62c6ce2e60afa07` preserves all 2,209,586 previously accepted additive cells and adds the supported Russia patch, for 4,767,102 cumulative cells. Exact interval conservation preserves all 1,684 prior ledger rows, 159 prior authorities and eight prior held rows; the candidate has 2,011 ledger rows and 160 authorities. Removed and reassigned cells are both zero. All 9,451 held intervals equal the complete original foreign ADM1 union. The 128,253 shared-lineage and 1,250,477 physical-interpretation companion cells receive no credit. All 100 historical whole-component questions remain unresolved.
+
+The unchanged stock finalizer stages canonical selector/package/sidecar/expectations. The accepted Greenland checkpoint was authenticated with the stock acquire/retain API from the already retained exact ZIP, without downloading or replaying original science: PR #2315, head `859b0d3b8f820000edcdffe6918e2d4272584698`, request `greenland-2315-859b0d3-20261017-001`, run 38989350754, artifact 12083979586, 7,764,893 bytes, SHA-256 `88d2d68df5caec8e3895d768ea4081a09171010b161ab4085b4709484eb2e488`. The stock API reported `archive_origin: retained-exact`. Its ordinary locator and archive are under `checkpoint-greenland/`.
+
+`verification/patch-conservation.json` records actual exact prior/current row comparison. Source-side smoke expectations bind all 160 cohorts and 4,767,102 cumulative cells. Genuine selected-native owner-zero/conservation and emitted asset/GPU/Canvas consumer verification remain required in root's normal hosted integration; no local source or constructor result claims those outcomes. No deployment, regional semantic approval, current border certification or historical import is included.
+
+The complete original source checkpoint ancestry, including `51e30b68dd04afb01c11300c5b79a9e6bd5c4c15`, remains an ancestor of this continuation. Original source/physical acceptance remains the distinct review at https://github.com/ChengshuLi/WorldAtlas/issues/2302#issuecomment-6227655544. The final exact-head review is separate.
+
+## Preserved pre-authority source handoff
+
+The following is the original source-review checkpoint history, with its pre-authority status preserved as historical context.
+
 # Russia source and physical checkpoint
 
 Issue: #2302. Author branch: `engineering/russia-repair-delivery-20261017`.
