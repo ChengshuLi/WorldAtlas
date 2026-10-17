@@ -1,0 +1,301 @@
+{
+  "accepted": "282d14b4682f738fed6a0e6f3ee0d0e4b775d611",
+  "source": {
+    "advertised_feature_count": 77,
+    "cohort": "administrative-registry",
+    "feature_count": 77,
+    "key": "gb:CZE:ADM2",
+    "metadata_sha256": "d4fc8300d5dbbf96db426ed1d4a6c8bcdf09131a23a14727e25d664ac63902a2",
+    "original_bytes": 933079,
+    "original_metadata_file": "data/administrative-sources.json",
+    "original_sha256": "3f5c8670210bdddf2d91290cbcebe5c92bcb2d57c94dd75379596a9344d6114f",
+    "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+    "parts": [
+      {
+        "bytes": 300439,
+        "hash_kind": "file-bytes",
+        "offset": 0,
+        "ordinal": 0,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CZE-ADM2-000.bin.gz",
+        "sha256": "fc0dbb33cdd091cb777072e9a54a6eb4ad79b22be3266ec2db699e7f1951d430",
+        "uncompressed_bytes": 933079,
+        "uncompressed_sha256": "3f5c8670210bdddf2d91290cbcebe5c92bcb2d57c94dd75379596a9344d6114f"
+      }
+    ],
+    "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CZE/ADM2/geoBoundaries-CZE-ADM2_simplified.geojson",
+    "recorded_license": "Public Domain",
+    "source_represented_year_claim": "2010"
+  },
+  "all_77_valid_nonempty": true,
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "all_35_literal_identity_joins": true,
+  "owners": [
+    {
+      "owner": 16066,
+      "id": "gb:CZE:ADM2:57006924B13474079400168",
+      "source_atom": "gb:CZE:ADM2:57006924B13474079400168",
+      "name": "Opava"
+    },
+    {
+      "owner": 16069,
+      "id": "gb:CZE:ADM2:57006924B14436380449594",
+      "source_atom": "gb:CZE:ADM2:57006924B14436380449594",
+      "name": "Uhersk\u00e9 Hradi\u0161t\u011b"
+    },
+    {
+      "owner": 16072,
+      "id": "gb:CZE:ADM2:57006924B20358302460191",
+      "source_atom": "gb:CZE:ADM2:57006924B20358302460191",
+      "name": "Sokolov"
+    },
+    {
+      "owner": 16073,
+      "id": "gb:CZE:ADM2:57006924B21154438881940",
+      "source_atom": "gb:CZE:ADM2:57006924B21154438881940",
+      "name": "\u010cesk\u00fd Krumlov"
+    },
+    {
+      "owner": 16077,
+      "id": "gb:CZE:ADM2:57006924B26083217891381",
+      "source_atom": "gb:CZE:ADM2:57006924B26083217891381",
+      "name": "\u010cesk\u00e1 L\u00edpa"
+    },
+    {
+      "owner": 16079,
+      "id": "gb:CZE:ADM2:57006924B26779967263881",
+      "source_atom": "gb:CZE:ADM2:57006924B26779967263881",
+      "name": "Semily"
+    },
+    {
+      "owner": 16081,
+      "id": "gb:CZE:ADM2:57006924B30982913442521",
+      "source_atom": "gb:CZE:ADM2:57006924B30982913442521",
+      "name": "\u00dast\u00ed nad Orlic\u00ed"
+    },
+    {
+      "owner": 16082,
+      "id": "gb:CZE:ADM2:57006924B32669310027153",
+      "source_atom": "gb:CZE:ADM2:57006924B32669310027153",
+      "name": "Chomutov"
+    },
+    {
+      "owner": 16084,
+      "id": "gb:CZE:ADM2:57006924B34464963037986",
+      "source_atom": "gb:CZE:ADM2:57006924B34464963037986",
+      "name": "Prachatice"
+    },
+    {
+      "owner": 16086,
+      "id": "gb:CZE:ADM2:57006924B3568693077695",
+      "source_atom": "gb:CZE:ADM2:57006924B3568693077695",
+      "name": "Liberec"
+    },
+    {
+      "owner": 16088,
+      "id": "gb:CZE:ADM2:57006924B40201864279221",
+      "source_atom": "gb:CZE:ADM2:57006924B40201864279221",
+      "name": "N\u00e1chod"
+    },
+    {
+      "owner": 16096,
+      "id": "gb:CZE:ADM2:57006924B50363024387408",
+      "source_atom": "gb:CZE:ADM2:57006924B50363024387408",
+      "name": "Trutnov"
+    },
+    {
+      "owner": 16097,
+      "id": "gb:CZE:ADM2:57006924B50757157558324",
+      "source_atom": "gb:CZE:ADM2:57006924B50757157558324",
+      "name": "Karlovy Vary"
+    },
+    {
+      "owner": 16098,
+      "id": "gb:CZE:ADM2:57006924B55732331485961",
+      "source_atom": "gb:CZE:ADM2:57006924B55732331485961",
+      "name": "Tachov"
+    },
+    {
+      "owner": 16099,
+      "id": "gb:CZE:ADM2:57006924B55772558323280",
+      "source_atom": "gb:CZE:ADM2:57006924B55772558323280",
+      "name": "Jablonec nad Nisou"
+    },
+    {
+      "owner": 16100,
+      "id": "gb:CZE:ADM2:57006924B56764577868008",
+      "source_atom": "gb:CZE:ADM2:57006924B56764577868008",
+      "name": "B\u0159eclav"
+    },
+    {
+      "owner": 16101,
+      "id": "gb:CZE:ADM2:57006924B57972685793284",
+      "source_atom": "gb:CZE:ADM2:57006924B57972685793284",
+      "name": "D\u011b\u010d\u00edn"
+    },
+    {
+      "owner": 16102,
+      "id": "gb:CZE:ADM2:57006924B5960993849333",
+      "source_atom": "gb:CZE:ADM2:57006924B5960993849333",
+      "name": "\u00dast\u00ed nad Labem"
+    },
+    {
+      "owner": 16105,
+      "id": "gb:CZE:ADM2:57006924B61075462930500",
+      "source_atom": "gb:CZE:ADM2:57006924B61075462930500",
+      "name": "\u0160umperk"
+    },
+    {
+      "owner": 16110,
+      "id": "gb:CZE:ADM2:57006924B63031935780571",
+      "source_atom": "gb:CZE:ADM2:57006924B63031935780571",
+      "name": "Karvin\u00e1"
+    },
+    {
+      "owner": 16111,
+      "id": "gb:CZE:ADM2:57006924B65385651307074",
+      "source_atom": "gb:CZE:ADM2:57006924B65385651307074",
+      "name": "Vset\u00edn"
+    },
+    {
+      "owner": 16112,
+      "id": "gb:CZE:ADM2:57006924B65826634483108",
+      "source_atom": "gb:CZE:ADM2:57006924B65826634483108",
+      "name": "Zl\u00edn"
+    },
+    {
+      "owner": 16113,
+      "id": "gb:CZE:ADM2:57006924B6655388448820",
+      "source_atom": "gb:CZE:ADM2:57006924B6655388448820",
+      "name": "Teplice"
+    },
+    {
+      "owner": 16114,
+      "id": "gb:CZE:ADM2:57006924B67004616478789",
+      "source_atom": "gb:CZE:ADM2:57006924B67004616478789",
+      "name": "Rychnov nad Kn\u011b\u017enou"
+    },
+    {
+      "owner": 16115,
+      "id": "gb:CZE:ADM2:57006924B67285149942805",
+      "source_atom": "gb:CZE:ADM2:57006924B67285149942805",
+      "name": "Jind\u0159ich\u016fv Hradec"
+    },
+    {
+      "owner": 16116,
+      "id": "gb:CZE:ADM2:57006924B71753966872420",
+      "source_atom": "gb:CZE:ADM2:57006924B71753966872420",
+      "name": "Most"
+    },
+    {
+      "owner": 16117,
+      "id": "gb:CZE:ADM2:57006924B72008682408189",
+      "source_atom": "gb:CZE:ADM2:57006924B72008682408189",
+      "name": "Klatovy"
+    },
+    {
+      "owner": 16119,
+      "id": "gb:CZE:ADM2:57006924B73132069516203",
+      "source_atom": "gb:CZE:ADM2:57006924B73132069516203",
+      "name": "\u010cesk\u00e9 Bud\u011bjovice"
+    },
+    {
+      "owner": 16121,
+      "id": "gb:CZE:ADM2:57006924B74936445485800",
+      "source_atom": "gb:CZE:ADM2:57006924B74936445485800",
+      "name": "Cheb"
+    },
+    {
+      "owner": 16124,
+      "id": "gb:CZE:ADM2:57006924B82111344983201",
+      "source_atom": "gb:CZE:ADM2:57006924B82111344983201",
+      "name": "Hodon\u00edn"
+    },
+    {
+      "owner": 16128,
+      "id": "gb:CZE:ADM2:57006924B8762756005554",
+      "source_atom": "gb:CZE:ADM2:57006924B8762756005554",
+      "name": "Jesen\u00edk"
+    },
+    {
+      "owner": 16132,
+      "id": "gb:CZE:ADM2:57006924B90452896246775",
+      "source_atom": "gb:CZE:ADM2:57006924B90452896246775",
+      "name": "Brunt\u00e1l"
+    },
+    {
+      "owner": 16134,
+      "id": "gb:CZE:ADM2:57006924B91865699855455",
+      "source_atom": "gb:CZE:ADM2:57006924B91865699855455",
+      "name": "Fr\u00fddek-M\u00edstek"
+    },
+    {
+      "owner": 16135,
+      "id": "gb:CZE:ADM2:57006924B92931687173289",
+      "source_atom": "gb:CZE:ADM2:57006924B92931687173289",
+      "name": "Doma\u017elice"
+    },
+    {
+      "owner": 16136,
+      "id": "gb:CZE:ADM2:57006924B95695201424764",
+      "source_atom": "gb:CZE:ADM2:57006924B95695201424764",
+      "name": "Znojmo"
+    }
+  ],
+  "upstream_zip": {
+    "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/sourceData/gbOpen/CZE_ADM2.zip",
+    "bytes": 492206,
+    "sha256": "973521dcddaf4ba1de1fc0449cddcb9d7df42a5e6edde8615fc4ac4e5e413b4c",
+    "files": {
+      "CZE_ADM2.cpg": {
+        "bytes": 5,
+        "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+      },
+      "CZE_ADM2.dbf": {
+        "bytes": 8645,
+        "sha256": "1e4b7d5b99df9cff089d42586ecfa725a3617145fd0f0cf3fcb0c0deb093f4e1"
+      },
+      "CZE_ADM2.prj": {
+        "bytes": 145,
+        "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4"
+      },
+      "CZE_ADM2.sbn": {
+        "bytes": 948,
+        "sha256": "510a8b872fbf100c6bdae74cffb7516b0ebd424ecc45e4d7f80de034b17bd9d8"
+      },
+      "CZE_ADM2.sbx": {
+        "bytes": 212,
+        "sha256": "16c78df9d94e7c0aaef89a133342a1a25ff1476a3dbc34e189061c3af3dac587"
+      },
+      "CZE_ADM2.shp": {
+        "bytes": 570220,
+        "sha256": "6ea5d90565d22619573f826fa73043aee7c2ff22508941a6d65e7ea481558065"
+      },
+      "CZE_ADM2.shp.xml": {
+        "bytes": 14079,
+        "sha256": "f4a2ea25dd9d3cfdccd12ead7ff7fd41a8ff339ef3100220152890451d48d772"
+      },
+      "CZE_ADM2.shx": {
+        "bytes": 716,
+        "sha256": "c49a59961be5c77dfa9dc5e489ea4ba8983bf457efdd0bec4a719672f959521e"
+      },
+      "license.PNG": {
+        "bytes": 152883,
+        "sha256": "694be0bd4dbf73ee4b50dcfdd8ea5f554d96f88c3e0cef913484d70ab0a13990"
+      },
+      "meta.txt": {
+        "bytes": 418,
+        "sha256": "c80f57454a27bd8080b93b2be3033430075642dec56639fcf4ef6c2a78f9db69"
+      }
+    }
+  },
+  "limits": [
+    "2010 source vintage is historical and does not assert present legal boundaries.",
+    "Wikimedia author public-domain dedication is separately verified; historical raster source precision and geoBoundaries vector processing remain limited.",
+    "Original source simplification remains distinct from upstream ZIP geometry."
+  ]
+}
