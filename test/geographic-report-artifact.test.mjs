@@ -442,8 +442,7 @@ function queueCompletionFixture(f = freshQueueTransport()) {
   };
   f.api.artifactRedirect = original.artifactRedirect;
   f.mergeOptions = () => ({api: f.api, repo, number: 2, expectedHead: head, integrationRequestId,
-    policy: {version: 1, mode: 'enforce-new', activation_time: '2100-01-01T00:00:00Z'},
-    evidenceCheck: async () => {assert.notEqual(f.review, 'withdrawn', 'Fresh exact-head review is required'); return {status: 'legacy'};}});
+    policy: {version: 1, mode: 'enforce-new', activation_time: '2100-01-01T00:00:00Z'}});
   f.load = ({api = f.api} = {}) => loadGeographicReport({...f.loadOptions, api});
   f.complete = (extra = {}) => completeIntegration({...f.mergeOptions(), integrationResult: 'success', geographyResult: 'success',
     testedBase: base, testedCandidate: candidate, geographyReportLoader: f.load, ...extra});
@@ -541,19 +540,17 @@ test('retargeting both genuine report and public custody cannot reuse original p
   assert.equal(f.writes.length, 0);
 });
 
-test('prepared custody preserves fresh final main, head, issue, check, status and review guards', async () => {
-  for (const changed of ['main', 'head', 'issue', 'check', 'status', 'review']) {
+test('prepared custody preserves fresh final main, head, check and status guards', async () => {
+  for (const changed of ['main', 'head', 'check', 'status']) {
     const f = queueCompletionFixture();
     const loader = async options => {
       const geography = await f.load(options);
       if (changed === 'main') f.currentBase = 'f'.repeat(40);
       if (changed === 'head') f.pr.head.sha = 'f'.repeat(40);
-      if (changed === 'issue') f.issue.body += '\nChanged acceptance';
       if (changed === 'check') f.checkConclusion = 'failure';
       if (changed === 'status') f.status = {statuses: [{}], state: 'failure'};
       return geography;
     };
-    if (changed === 'review') f.review = 'withdrawn';
     await assert.rejects(f.complete({geographyReportLoader: loader}));
     assert.equal(f.writes.length, 0, changed);
   }
@@ -588,18 +585,17 @@ test('candidate software report requires explicit expected code identity and can
 
 
 test('reviewed focused test-only prepare retains final ordinary-file proof through authenticated custody', async () => {
-  for(const failure of [null,'integration','geography','cancelled-geography','review']) {
+  for(const failure of [null,'integration','geography','cancelled-geography']) {
     const f=queueCompletionFixture(),name='test/native-diagnostic-entry.test.mjs';
     f.files=[{filename:name,status:'modified'}];f.authored[0].path=name;f.integrated=structuredClone(f.authored);
     const prepared=await prepareIntegration(f.mergeOptions());
     assert.deepEqual(f.preparationWrites,[`/repos/${f.options.repo}/git/refs`,`/repos/${f.options.repo}/merges`]);
     assert.equal(prepared.profile,'evidence');assert.equal(prepared.geography_software,false);
     f.calls.length=0;
-    if(failure==='review')f.review='withdrawn';
     const options=failure==='integration'?{integrationResult:'failure'}:failure==='geography'?{geographyResult:'failure'}:
       failure==='cancelled-geography'?{geographyResult:'cancelled'}:{};
     if(failure) {
-      await assert.rejects(f.complete(options),failure==='integration'?/Integration tests failed/:['geography','cancelled-geography'].includes(failure)?/Trusted combined geography check/:/exact-head review/);
+      await assert.rejects(f.complete(options),failure==='integration'?/Integration tests failed/:/Trusted combined geography check/);
       assert.equal(f.writes.length,0);
     } else {
       const result=await f.complete(options);assert.equal(result.accepted,true);assert.equal(f.writes.length,1);

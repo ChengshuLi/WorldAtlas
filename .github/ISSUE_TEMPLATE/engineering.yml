@@ -32,8 +32,3 @@ body:
       label: Original raised date, if known
       description: America/Los_Angeles date; use unknown when earlier history does not establish it. GitHub records creation separately.
       placeholder: YYYY-MM-DD or unknown
-  - type: textarea
-    id: coordination
-    attributes:
-      label: Work-item readiness (triage)
-      description: Before ready labeling, add a reviewed worldatlas-work:v1 scope block with max_prs (positive planning estimate, not a hard cap), depends_on and mode. History research is source-only until its complete published regional approval; geography evidence uses the separate geography form. See docs/WORKER_COORDINATION.md.
