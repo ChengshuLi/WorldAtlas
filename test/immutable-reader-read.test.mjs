@@ -271,10 +271,10 @@ for(const stage of ['commit','path','size','body'])test('batch rejects malformed
 
 test('Git batch nonzero exit and diagnostics fail without accepting partial stdout',t=>{
   const f=batchFixture(t),script=path.join(f.root,'failed-git');
-  fs.writeFileSync(script,'#!/bin/sh\nprintf "partial\\n"\nexit 1\n');fs.chmodSync(script,0o755);
+  fs.writeFileSync(script,'#!/bin/sh\ncat >/dev/null\nprintf "partial\\n"\nexit 1\n');fs.chmodSync(script,0o755);
   const reader=new ImmutableReader(f.root,f.version,{gitExecutable:script});
   assert.throws(()=>reader.readPinned([f.pin('dir/ordinary')]),/Incomplete immutable Git batch/);
-  fs.writeFileSync(script,'#!/bin/sh\nprintf "partial\\n"\nprintf "corrupt\\n" >&2\n');
+  fs.writeFileSync(script,'#!/bin/sh\ncat >/dev/null\nprintf "partial\\n"\nprintf "corrupt\\n" >&2\n');
   assert.throws(()=>reader.readPinned([f.pin('dir/ordinary')]),/Incomplete immutable Git batch/);
   assert.equal(reader.inventory.size,0);
 });
