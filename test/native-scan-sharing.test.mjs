@@ -104,9 +104,11 @@ for(const withExclusion of [false,true])test('sources and '+(withExclusion?'excl
   assert.equal(sharedScans.filter(s=>recordedSignature(s)===source).length,1);
   assert.equal(separateScans.filter(s=>recordedSignature(s)===source).length,3);
   if(withExclusion) {
-    const exclusion=scanSignature(native.nativeRuntimeIndex(v.territorialExclusions));
-    assert.equal(sharedScans.filter(s=>recordedSignature(s)===exclusion).length,1);
-    assert.equal(separateScans.filter(s=>recordedSignature(s)===exclusion).length,3);
+    const shapes=index=>JSON.stringify(index.map(item=>item.polygons));
+    const exclusion=shapes(native.nativeRuntimeIndex(v.territorialExclusions).map(item=>({
+      polygons:item.polygons.map(p=>p.map(r=>Array.from(r)))})));
+    assert.equal(sharedScans.filter(s=>shapes(s.index)===exclusion).length,1);
+    assert.equal(separateScans.filter(s=>shapes(s.index)===exclusion).length,3);
   }
   assert.equal(actual.assigned_cells,withExclusion?6:8);
   assert.deepEqual(actual.coverage_groups.map(g=>g.assigned_cells),withExclusion?[2,4]:[4,4]);
@@ -202,4 +204,98 @@ for(const [name,change,pattern] of [
 ])test('invalid additional '+name+' fails instead of dropping or accepting a group',async t=>{
   const native=await observedNative(t),v=input(native),{groups,...base}=v;
   assert.throws(()=>native.deriveSourceTargetNativeDelta({...base,coverageFeatureGroups:change(v)}),pattern);
+});
+
+function twoOwners(native) {
+  const a=feature('source:A',7,rectangle(-100,-1),'owner:A');
+  const b=feature('source:B',9,rectangle(1,100),'owner:B');
+  return {targets:[{id:'owner:A',pixelIndex:7},{id:'owner:B',pixelIndex:9}],
+    sourceFeatures:[a,b],coverageFeatures:[mask(a.id,a.geometry),
+      {id:'owner:B',pixelIndex:9,source_id:b.id,geometry:b.geometry}],
+    size:8,latitudes:native.nativeRowLatitudes(8),rowStart:0,rowEnd:8,
+    ownerRows:Array.from({length:8},(_,y)=>({y,complete_owner_intervals:[]})),
+    diagnosticRows:[{y:3,runs:[[2,4,7],[4,6,9]]},{y:4,runs:[[2,4,7],[4,6,9]]}]};
+}
+
+function compareNegatives(native,v) {
+  const before=structuredClone(v);
+  native.__testScans.length=0;
+  const actual=native.deriveSourceTargetNativeDelta(v);
+  const scans=structuredClone(native.__testScans);
+  // Separate literal copies exercise the unshared route. Local differential
+  // runs additionally execute the exact immutable preimage when supplied.
+  const separate={...v,territorialExclusions:v.territorialExclusions.map(f=>({
+    ...f,geometry:structuredClone(f.geometry)}))};
+  const expected=native.reference.deriveSourceTargetNativeDelta(separate);
+  assert.deepEqual(actual,expected,'all rows, reasons, counts and operand contacts equal unshared whole negatives');
+  assert.deepEqual(v,before,'whole inputs and every owner/ordinal binding stay unchanged');
+  return {actual,scans};
+}
+
+test('one shared whole negative is scanned once while every repeated and distinct owner veto remains',async t=>{
+  const native=await observedNative(t),v=twoOwners(native),geometry=rectangle(-60,60);
+  v.territorialExclusions=[feature('owner:A',7,geometry),feature('owner:B',9,geometry),feature('owner:A',7,geometry)];
+  const {actual,scans}=compareNegatives(native,v);
+  assert.equal(scans.length,3);
+  assert.equal(scans[2].index.length,1);
+  assert.equal(scans[2].index[0].polygons.length,1,'no repeated polygon copies hidden under one scan owner');
+  assert.equal(actual.territorial_exclusion_cells,4);
+  assert.equal(actual.assigned_cells,4);
+  assert.ok(actual.diagnostic_rows.every(row=>row.runs.some(run=>run[2]===7&&run[3]==='territorial_exclusion_cells')
+    &&row.runs.some(run=>run[2]===9&&run[3]==='territorial_exclusion_cells')));
+});
+
+for(const boundary of [false,true])test('shared negatives retain every applicability ordinal and '+(boundary?'boundary veto':'contrary interior decision'),async t=>{
+  const native=await observedNative(t),v=twoOwners(native),geometry=rectangle(-60,boundary?22.5:60);
+  const h='a'.repeat(64),operand='b'.repeat(64);
+  v.territorialExclusions=[feature('owner:A',7,geometry),feature('owner:B',9,geometry),feature('owner:A',7,geometry)]
+    .map(f=>({...f,geometry_sha256:h,operand_sha256:operand}));
+  v.territorialApplicability=[{source_id:'source:A',pixelIndex:7,y:3,x:3,exclusion_index:0,
+    exclusion_geometry_sha256:h,operand_sha256:operand,decision_sha256:'c'.repeat(64)},
+  {source_id:'source:B',pixelIndex:9,y:3,x:4,exclusion_index:1,
+    exclusion_geometry_sha256:h,operand_sha256:operand,decision_sha256:'d'.repeat(64)}];
+  const {actual,scans}=compareNegatives(native,v);
+  assert.equal(scans[2].index.length,1);
+  assert.deepEqual([...new Set(actual.territorial_contacts.map(hit=>hit.exclusion_index))].sort(),[0,1,2]);
+  assert.ok(actual.territorial_contacts.some(hit=>hit.exclusion_index===0&&hit.resolution==='contextual'));
+  assert.ok(actual.territorial_contacts.some(hit=>hit.exclusion_index===2&&hit.resolution==='contextual'));
+  if(boundary)assert.ok(actual.territorial_contacts.some(hit=>hit.exclusion_index===1&&hit.resolution==='retained-boundary-veto'));
+  else assert.ok(actual.territorial_contacts.some(hit=>hit.exclusion_index===1&&hit.resolution==='contextual'));
+  assert.ok(actual.diagnostic_rows.find(row=>row.y===4).runs.some(run=>run[3]==='territorial_exclusion_cells'),
+    'a contact interpretation never clears the same operand at another centre');
+});
+
+test('shared polygon holes, separate overlapping masks and class groups preserve complete negative geometry',async t=>{
+  const native=await observedNative(t),v=twoOwners(native);
+  const geometry={type:'MultiPolygon',coordinates:[[
+    rectangle(-80,80).coordinates[0],rectangle(-30,30).coordinates[0]],rectangle(-15,15).coordinates]};
+  v.territorialExclusions=[feature('owner:A',7,geometry),feature('owner:B',9,geometry),
+    feature('owner:A',7,rectangle(-55,-40))];
+  v.coverageFeatureGroups=[v.coverageFeatures];
+  const {actual,scans}=compareNegatives(native,v);
+  assert.equal(scans[2].index.length,2);
+  assert.equal(scans[2].index[0].polygons.length,2);
+  assert.deepEqual(actual.coverage_groups[0].rows,actual.rows);
+  assert.ok(actual.assigned_cells>0);
+});
+
+test('negative reuse never trusts a declared hash or survives changed geometry, result, latitude or block',async t=>{
+  const native=await observedNative(t),v=twoOwners(native),geometry=rectangle(-60,60);
+  v.territorialExclusions=[feature('owner:A',7,geometry),feature('owner:B',9,geometry),
+    {...feature('owner:A',7,rectangle(-99,-70)),geometry_sha256:'e'.repeat(64)}];
+  v.territorialExclusions[0].geometry_sha256='e'.repeat(64);
+  const first=compareNegatives(native,v);
+  assert.equal(first.scans[2].index.length,2,'same claimed hash cannot merge different actual geometries');
+  const original=structuredClone(first.actual);
+  first.actual.rows.length=0;
+  geometry.coordinates[0][1][0]=geometry.coordinates[0][2][0]=10;
+  const changed=compareNegatives(native,v);
+  assert.notDeepEqual(changed.actual,original);
+  assert.ok(changed.actual.assigned_cells>original.assigned_cells);
+  for(const [rowStart,rowEnd]of [[0,4],[4,8]])compareNegatives(native,{...v,rowStart,rowEnd,
+    ownerRows:v.ownerRows.slice(rowStart,rowEnd),diagnosticRows:v.diagnosticRows.filter(row=>row.y>=rowStart&&row.y<rowEnd)});
+  const otherTable={...v,latitudes:Float64Array.from(v.latitudes,value=>value/2)};
+  compareNegatives(native,otherTable);
+  geometry.coordinates[0][1][0]=181;
+  assert.throws(()=>native.deriveSourceTargetNativeDelta(v),/lon\/lat|native/,'changed malformed geometry must be read again');
 });

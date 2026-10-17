@@ -167,6 +167,22 @@ async function tree(api, repo, commit, knownObject) {
   return {object, entries: new Map(value.tree.map(row => [row.path, row]))};
 }
 
+// Execution routing follows the authenticated combined tree, not GitHub's PR
+// inventory (which can still include changes already accepted on main). The PR
+// inventory remains the authored scope/evidence authority in inspectMerge.
+export function integrationChanges(baseline, integrated) {
+  const files = [];
+  for (const filename of [...new Set([...baseline.keys(), ...integrated.keys()])].sort()) {
+    const before = baseline.get(filename), after = integrated.get(filename);
+    const old = before?.type === 'tree' ? undefined : before;
+    const next = after?.type === 'tree' ? undefined : after;
+    if (old?.type === next?.type && old?.mode === next?.mode && old?.sha === next?.sha) continue;
+    files.push({filename, status: !old ? 'added' : !next ? 'removed' : 'modified',
+      ...(next ? {mode: next.mode} : {})});
+  }
+  return files;
+}
+
 // All remote authorities and evidence are re-read in both trusted phases. No
 // candidate executable code is imported by this module or given a write token.
 export async function inspectMerge({api, repo, number, expectedHead, policy, evidenceCheck = checkPremergeEvidence, candidateContext}) {
@@ -207,22 +223,22 @@ export async function prepareIntegration(options) {
     // merge permission: final integration rereads current scope, review, checks
     // and main before the squash. A transient change may waste a test run.
     const candidate = fresh.candidate;
-    const [authored, integrated] = await Promise.all([
-      tree(options.api, options.repo, state.pr.head.sha), tree(options.api, options.repo, candidate, fresh.object)
+    const [baseline, integrated] = await Promise.all([
+      tree(options.api, options.repo, state.base), tree(options.api, options.repo, candidate, fresh.object)
     ]);
     checkCandidateParents(integrated.object, fresh.base, state.pr.head.sha);
-    const profile = integrationProfile(state.pr.head.ref, state.files, state.reservation, authored?.entries);
-    let baseline, selection = null;
-    if (profile === 'full' && selectedDataCandidate(state.pr.head.ref, state.files, state.reservation)) {
+    const files = integrationChanges(baseline.entries, integrated.entries);
+    const profile = integrationProfile(state.pr.head.ref, files, state.reservation, integrated.entries);
+    let selection = null;
+    if (profile === 'full' && selectedDataCandidate(state.pr.head.ref, files, state.reservation)) {
       try {
-        baseline = await tree(options.api, options.repo, state.base);
         // Applicability belongs to the actual combined candidate; older author
         // snapshots need not reproduce accepted-main smoke or package edits.
-        selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files: state.files, reservation: state.reservation, baseline, authored: integrated});
+        selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files, reservation: state.reservation, baseline, authored: integrated});
       } catch { /* Unknown applicability retains the complete suite. */ }
     }
-    const geographyRequiredForCandidate = geographyRequired(state.pr.head.ref, state.files, state.reservation, authored.entries);
-    const software = geographyRequiredForCandidate && candidateGeographyCode(profile, state.files, selection?.test_selection);
+    const geographyRequiredForCandidate = geographyRequired(state.pr.head.ref, files, state.reservation, integrated.entries);
+    const software = geographyRequiredForCandidate && candidateGeographyCode(profile, files, selection?.test_selection);
     const packageInputs = await readPackageInputs({api: options.api, route: root(options.repo), base: candidate, maximumBytes: 8 * 1024 * 1024});
     const checkoutPatterns = selection?.test_selection === 'selected-data'
       ? selectedDataCheckoutPatterns(packageInputs, integrated.entries, selection.expectations_path)
@@ -266,13 +282,14 @@ export async function completeIntegration(options) {
   need(candidate.sha === options.testedCandidate && candidate.tree?.sha,
     'Integration candidate identity or tree unavailable');
   checkCandidateParents(candidate, state.base, state.pr.head.sha);
-  let authored;
-  // Final applicability is derived again from current trusted scope and ordinary
-  // authored test blobs. A preparation output cannot waive this decision.
-  if (state.files.some(file => focusedIntegrationTest(file.filename)))
-    authored = await tree(options.api, options.repo, state.pr.head.sha);
+  // Independently rederive execution applicability from the exact tested pair.
+  // Neither preparation output nor a stale authored inventory can waive it.
+  const [baseline, integrated] = await Promise.all([
+    tree(options.api, options.repo, state.base), tree(options.api, options.repo, options.testedCandidate, candidate)
+  ]);
+  const files = integrationChanges(baseline.entries, integrated.entries);
   const omitGeography = options.geographyResult === 'skipped' &&
-    !geographyRequired(state.pr.head.ref, state.files, state.reservation, authored?.entries);
+    !geographyRequired(state.pr.head.ref, files, state.reservation, integrated.entries);
   let geography, geographicSource, waterPass = false;
   // Clean Git composition is verified by the combined candidate checks. Final
   // authority binds its parents and exact tested base/head, not whole-file
@@ -292,19 +309,17 @@ export async function completeIntegration(options) {
       preparedSource.event === 'workflow_dispatch' && preparedSource.candidate_commit === options.testedCandidate &&
       preparedSource.tree === candidate.tree.sha && preparedSource.head === state.pr.head.sha && preparedSource.baseline === state.base,
       'Prepared geographic source differs from accepted queue candidate');
-    const profile = integrationProfile(state.pr.head.ref, state.files, state.reservation, authored?.entries);
-    let baseline, selection = null;
+    const profile = integrationProfile(state.pr.head.ref, files, state.reservation, integrated.entries);
+    let selection = null;
     // Selection can only exempt candidate checker code. When no changed path
     // selects that code, another whole-data classification cannot affect it.
-    if (candidateGeographyCode(profile, state.files) && selectedDataCandidate(state.pr.head.ref, state.files, state.reservation)) {
+    if (candidateGeographyCode(profile, files) && selectedDataCandidate(state.pr.head.ref, files, state.reservation)) {
       try {
-        baseline = await tree(options.api, options.repo, state.base);
-        const integrated = await tree(options.api, options.repo, options.testedCandidate, candidate);
-        selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files: state.files,
+        selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files,
           reservation: state.reservation, baseline, authored: integrated});
       } catch { /* Unknown applicability retains full software validation. */ }
     }
-    const software = candidateGeographyCode(profile, state.files, selection?.test_selection);
+    const software = candidateGeographyCode(profile, files, selection?.test_selection);
     const codeCommit = software ? options.testedCandidate : state.base;
     waterPass = checkGeographicReport(geography, state.base, options.testedCandidate, codeCommit);
   }

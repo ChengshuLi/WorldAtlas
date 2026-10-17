@@ -12,7 +12,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {focusedIntegrationTest, integrationTestFiles, integrationNeedsBrowser, prepareIntegrationTests} from '../scripts/run-integration-tests.mjs';
 import {renderClaim, githubAPI} from '../scripts/issue-claim-contract.mjs';
-import {prepareIntegration, completeIntegration, checkCurrentChecks, integrationProfile, geographyRequired, createCandidate, cleanupCandidate, cleanupMergedHead} from '../scripts/merge-integration.mjs';
+import {prepareIntegration, completeIntegration, checkCurrentChecks, integrationProfile, integrationChanges, geographyRequired, createCandidate, cleanupCandidate, cleanupMergedHead} from '../scripts/merge-integration.mjs';
 
 const sha = letter => letter.repeat(40);
 const FOCUSED_INTEGRATION_TESTS = integrationTestFiles('evidence', 0);
@@ -61,6 +61,7 @@ function fixture({head=sha('a'),base=sha('b'),candidate=sha('c')}={}) {
   const f = {repo, pr, issue, head, base, candidate, claim,
     packageInputs: {version:1, inputs:['.github/package-inputs.json'], optional_inputs:[], verification_paths:[], generated_outputs:[]}, writes: [], mainReads: 0, calls: [], refs: new Map(),
     checks: [{id:1, name:'scope',app:{id:1},status:'completed',conclusion:'success'}],
+    baseline: [{path:'src/a.js',sha:'blob-before',mode:'100644',type:'blob'}],
     authored: [{path:'src/a.js',sha:'blob-a',mode:'100644',type:'blob'}],
     integrated: [{path:'src/a.js',sha:'blob-a',mode:'100644',type:'blob'}]};
   f.api = async (route, method='GET', body) => {
@@ -91,6 +92,8 @@ function fixture({head=sha('a'),base=sha('b'),candidate=sha('c')}={}) {
     if (p==='/commits/'+head+'/check-runs') return {check_runs:structuredClone(f.checks)};
     if (p==='/commits/'+head+'/status') {f.statusReads=(f.statusReads??0)+1;return f.failStatusOnRead===f.statusReads ? {statuses:[{}],state:'failure'} : {statuses:[]};}
     if (p==='/git/ref/heads/main') {f.mainReads++;return {object:{sha:f.advanceOnRead===f.mainReads?sha('d'):f.base}};}
+    if (p==='/git/commits/'+f.base) return {tree:{sha:'baseline'}};
+    if (p==='/git/trees/baseline') return {truncated:f.baselineTruncated??false,tree:f.baseline};
     if (p==='/git/commits/'+head) return {tree:{sha:'authored'}};
     if (p==='/git/commits/'+candidate) return {sha:candidate,tree:{sha:'integrated'},parents:[{sha:f.parentBase??f.base},{sha:head}]};
     if (p==='/git/trees/authored') return {truncated:false,tree:f.authored};
@@ -176,7 +179,7 @@ test('real clean disjoint same-file Git composition proceeds and actual conflict
   assert.equal(git('show',candidate+':src/a.js'),body(1,2).trim());
   assert.equal(git('show','-s','--format=%P',candidate),base+' '+head);
   const row=revision=>({path:'src/a.js',type:'blob',mode:'100644',sha:git('rev-parse',revision+':src/a.js')});
-  const f=fixture({head,base,candidate});f.authored=[row(head)];f.integrated=[row(candidate)];
+  const f=fixture({head,base,candidate});f.baseline=[row(base)];f.authored=[row(head)];f.integrated=[row(candidate)];
   assert.notEqual(f.authored[0].sha,f.integrated[0].sha,'Composition deliberately changes the whole authored blob');
   const prepared=await prepareIntegration(f.options());assert.equal(prepared.candidate,candidate);
   const verified=execFileSync(process.execPath,['--input-type=module','-e',
@@ -523,10 +526,111 @@ function controlFixture() {
   f.files=['scripts/merge-integration.mjs','test/merge-integration.test.mjs'].map(filename=>({filename,status:'modified'}));
   f.pr.changed_files=f.files.length;
   f.authored=f.files.map(file=>({path:file.filename,sha:sha('e'),mode:'100644',type:'blob'}));
+  f.baseline=f.authored.map(row=>({...row,sha:sha('d')}));
   f.integrated=structuredClone(f.authored);
   f.api=(route,...args)=>route.split('?')[0].endsWith('/pulls/2/files') ? structuredClone(f.files) : original(route,...args);
   return f;
 }
+
+
+test('paired-tree changes compare leaf identity, mode and type without directory or rename noise', () => {
+  const entry=(path,sha='a',mode='100644',type='blob')=>({path,sha,mode,type});
+  const baseline=[entry('unchanged'),entry('directory','old-tree','040000','tree'),
+    entry('directory/leaf'),entry('mode'),entry('kind'),entry('old-name'),
+    entry('file-to-directory'),entry('directory-to-file','old-tree','040000','tree'),
+    entry('directory-to-file/leaf'),entry('submodule','old-commit','160000','commit')];
+  const integrated=[entry('unchanged'),entry('directory','new-tree','040000','tree'),
+    entry('directory/leaf'),entry('mode','a','100755'),entry('kind','a','160000','commit'),
+    entry('new-name'),entry('file-to-directory','new-tree','040000','tree'),
+    entry('file-to-directory/leaf'),entry('directory-to-file'),entry('submodule','new-commit','160000','commit')];
+  const map=rows=>new Map(rows.map(row=>[row.path,row]));
+  assert.deepEqual(integrationChanges(map(baseline),map(integrated)),[
+    {filename:'directory-to-file',status:'added',mode:'100644'},
+    {filename:'directory-to-file/leaf',status:'removed'},
+    {filename:'file-to-directory',status:'removed'},
+    {filename:'file-to-directory/leaf',status:'added',mode:'100644'},
+    {filename:'kind',status:'modified',mode:'160000'},
+    {filename:'mode',status:'modified',mode:'100755'},
+    {filename:'new-name',status:'added',mode:'100644'},
+    {filename:'old-name',status:'removed'},
+    {filename:'submodule',status:'modified',mode:'160000'}
+  ]);
+  assert.deepEqual(integrationChanges(map(integrated),map(integrated)),[]);
+});
+
+test('stale extra PR paths retain authored evidence but cannot select unrelated runtime work', async () => {
+  const f=controlFixture();
+  const stale=['src/effective-footprint.js','scripts/selected-delivery-smoke.mjs'];
+  for(const path of stale){
+    f.files.push({filename:path,status:'modified'});
+    f.authored.push({path,sha:sha('f'),mode:'100644',type:'blob'});
+    const accepted={path,sha:sha('a'),mode:'100644',type:'blob'};
+    f.baseline.push(accepted);f.integrated.push({...accepted});
+  }
+  f.pr.changed_files=f.files.length;
+  const evidence=[];let inventories=0;const original=f.api;
+  f.api=(route,...args)=>{if(route.includes('/pulls/2/files'))inventories++;return original(route,...args);};
+  const options={...f.options(),evidenceCheck:async({files})=>{evidence.push(structuredClone(files));return {status:'legacy'};}};
+  const prepared=await prepareIntegration(options);
+  assert.equal(integrationProfile(f.pr.head.ref,f.files,{},new Map(f.authored.map(row=>[row.path,row]))),'full');
+  assert.equal(prepared.profile,'evidence');assert.equal(prepared.geography_required,false);
+  assert.equal(prepared.geography_software,false);assert.deepEqual(prepared.files,f.files);
+  assert.equal((await f.complete({evidenceCheck:options.evidenceCheck,geographyResult:'skipped'})).accepted,true);
+  assert.deepEqual(evidence,[f.files,f.files],'Both authority phases still inspect the full authored inventory');
+  assert.equal(inventories,2);
+  assert.equal(f.calls.filter(row=>row.route.includes('/git/trees/baseline')).length,2);
+  assert.equal(f.calls.filter(row=>row.route.includes('/git/trees/integrated')).length,2);
+  assert.equal(f.calls.filter(row=>row.route.includes('/git/trees/authored')).length,0);
+});
+
+test('missing API paths cannot hide changed native or unknown checker code at either phase', async () => {
+  for(const path of ['src/effective-footprint.js','scripts/previously-unknown-checker.py',
+    'coordination/engineering/unknown-packet/replay.mjs']) {
+    const f=controlFixture();
+    f.integrated.push({path,sha:sha('e'),mode:'100644',type:'blob'});
+    const prepared=await prepareIntegration(f.options());
+    assert.equal(prepared.profile,'full',path);assert.equal(prepared.geography_required,true,path);
+    assert.equal(prepared.geography_software,true,path);
+    await assert.rejects(f.complete({geographyResult:'skipped'}),/Trusted combined geography check/);
+    await assert.rejects(f.complete(),/exact trusted combined check/);
+    assert.equal(f.writes.length,0);
+    assert.equal((await f.complete({geographyReportLoader:async()=>({version:1,method_id:'worldatlas-trusted-geography-check-v1',
+      baseline_commit:f.base,trusted_code_commit:f.candidate,candidate_commit:f.candidate,candidate_code_executed:true,
+      trusted_code_inventory_sha256:'d'.repeat(64),published:false,source_approval:false,gate_status:'passed',status:'not-applicable'})})).accepted,true);
+  }
+});
+
+test('unchanged listed checker identities use baseline execution while mode changes retain candidate execution', async () => {
+  for(const changed of [false,true]){
+    const f=fixture(), path='scripts/check-geographic-regression.py';
+    const accepted={path,sha:sha('e'),mode:'100644',type:'blob'};
+    f.baseline.push(accepted);f.integrated.push({...accepted,...(changed?{mode:'100755'}:{})});
+    const original=f.api;
+    f.api=(route,...args)=>route.split('?')[0].endsWith('/pulls/2/files')?[{filename:path,status:'modified'}]:original(route,...args);
+    const prepared=await prepareIntegration(f.options());
+    assert.equal(prepared.profile,'full');assert.equal(prepared.geography_software,changed);
+    if(changed)await assert.rejects(f.complete(),/exact trusted combined check/);
+    else assert.equal((await f.complete()).accepted,true);
+  }
+});
+
+test('both routing trees must be complete at preparation and final admission', async () => {
+  for(const field of ['baselineTruncated','truncated']){
+    const f=controlFixture();f[field]=true;
+    await assert.rejects(prepareIntegration(f.options()),/Incomplete integration tree/);
+    await assert.rejects(f.complete({geographyResult:'skipped'}),/Incomplete integration tree/);
+    assert.equal(f.writes.length,0);
+  }
+});
+
+test('identical candidate and baseline retain the existing conservative no-op route', async () => {
+  const f=controlFixture();f.baseline=structuredClone(f.integrated);
+  const prepared=await prepareIntegration(f.options());
+  assert.equal(prepared.profile,'full');assert.equal(prepared.geography_required,true);
+  assert.equal(prepared.geography_software,false);
+  await assert.rejects(f.complete({geographyResult:'skipped'}),/Trusted combined geography check/);
+  assert.equal((await f.complete()).accepted,true);
+});
 
 test('actual prepare and complete omit unrelated geography without reading or fabricating a report', async () => {
   const f=controlFixture(), prepared=await prepareIntegration(f.options());
@@ -551,10 +655,10 @@ test('omission never turns failed, cancelled or absent geography into success', 
 test('final omission independently rechecks current method and ordinary focused-test applicability', async () => {
   for (const kind of ['scientific','packet','test-mode','rename-origin']) {
     const f=controlFixture();await prepareIntegration(f.options());
-    if(kind==='scientific')f.files[0].filename='scripts/evidence-quality.mjs';
-    if(kind==='packet')f.files[0].filename='coordination/engineering/test/source.json';
-    if(kind==='test-mode')f.authored[1].mode='120000';
-    if(kind==='rename-origin')f.files[0].previous_filename='data/hierarchy.json';
+    if(kind==='scientific')f.integrated[0].path='scripts/evidence-quality.mjs';
+    if(kind==='packet')f.integrated[0].path='coordination/engineering/test/source.json';
+    if(kind==='test-mode')f.integrated[1].mode='120000';
+    if(kind==='rename-origin')f.baseline[0].path='data/hierarchy.json';
     await assert.rejects(f.complete({geographyResult:'skipped'}));assert.equal(f.writes.length,0,kind);
   }
 });

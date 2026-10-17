@@ -187,6 +187,8 @@ for(const wrapped of [false,true]) for(const notification of ['denied','transpor
     ['/commits/'+head+'/status']:{statuses:[]},'/git/ref/heads/main':{object:{sha:base}},
     ['/git/commits/'+candidate]:{sha:candidate,parents:[{sha:sha('d')},{sha:head}]},
     '/contents/.github/package-inputs.json':packageBlob,
+    ['/git/commits/'+base]:{sha:base,tree:{sha:sha('5')}},
+    ['/git/trees/'+sha('5')]:{truncated:false,tree:[]},
     ['/git/commits/'+owned]:{sha:owned,tree:{sha:sha('6')},parents:[{sha:base},{sha:head}]},
     ['/git/commits/'+head]:{tree:{sha:sha('6')}},
     ['/git/trees/'+sha('6')]:{truncated:false,tree:[{path:'src/a.js',sha:'blob',mode:'100644',type:'blob'}]}
@@ -270,6 +272,8 @@ test('actual queue entry points omit geography only for independently rechecked 
       '/contents/.github/package-inputs.json':packageBlob,
       ['/commits/'+head+'/check-runs']:{check_runs:[{id:1,name:'scope',app:{id:1},status:'completed',conclusion:'success'}]},
       ['/commits/'+head+'/status']:{statuses:[]},'/git/ref/heads/main':{object:{sha:base}},
+      ['/git/commits/'+base]:{sha:base,tree:{sha:sha('5')}},
+      ['/git/trees/'+sha('5')]:{truncated:false,tree:[]},
       ['/git/commits/'+head]:{tree:{sha:sha('6')}},['/git/trees/'+sha('6')]:{truncated:false,tree:rows},
       ['/git/commits/'+candidate]:{sha:candidate,tree:{sha:sha('7')},parents:[{sha:base},{sha:head}]},
       ['/git/trees/'+sha('7')]:{truncated:false,tree:rows}

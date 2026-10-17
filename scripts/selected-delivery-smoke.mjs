@@ -8,7 +8,7 @@ import {gunzipSync} from 'node:zlib';
 import {repairComponentKey} from '../src/native-grid.js';
 import {repositoryReader, sha256} from './evidence-quality.mjs';
 import {loadOwnershipAssets} from '../src/ownership-assets.js';
-import {loadAdditiveNativePatch, effectivePrimitiveGeometries, footprintValueSha256,
+import {additiveBaseReference, decodedAdditiveAssetIdentity, loadAdditiveNativePatch, effectivePrimitiveGeometries, footprintValueSha256,
   verifyAdditiveLedgerSelection, nativeOnlyComponent} from '../src/effective-footprint.js';
 import {ownershipRun, pickOwnership, samplePackedOwnership} from '../src/pixel-ownership.js';
 
@@ -70,14 +70,42 @@ export function selectedStableOwnerControls(base, patch) {
   return controls;
 }
 
+// Shared actual cell consumer. Generic application regression has no reviewed
+// cohort expectations; selected-map admission adds those separately below.
+function verifyEmittedDelivery({ledger, ledgerSha256, patch, patchSha256,
+  features, base, effective, beforeControls}) {
+  assert.equal(patch.ledger_sha256, ledgerSha256, 'Patch ledger differs');
+  verifyAdditiveLedgerSelection(ledger, features, patch);
+  let added = 0;
+  for (const row of patch.rows) for (const [start, end, id] of row.runs) for (let x = start; x < end; x++) {
+    assert.equal(pickOwnership(base, x, row.y), 0, 'Patch cell was already occupied');
+    assert.equal(pickOwnership(effective, x, row.y), id, 'Patched picker owner differs');
+    assert.equal(samplePackedOwnership(effective, {x, y: row.y, width: 1, height: 1})[0], id,
+      'Patched sampler owner differs');
+    added++;
+  }
+  assert.equal(added, effective.additive_added_cells, 'Loaded effective native cell count differs');
+  assert(Array.isArray(beforeControls) && beforeControls.length > 0, 'Missing occupied base owner control');
+  for (const {x, y, id} of beforeControls) {
+    assert(Number.isInteger(x) && Number.isInteger(y) && Number.isInteger(id)
+      && x >= 0 && x < base.size && y >= 0 && y < base.size && id > 0, 'Invalid occupied base control');
+    assert.equal(pickOwnership(base, x, y), id, 'Stable base owner changed');
+    assert.equal(pickOwnership(effective, x, y), id, 'Stable effective owner changed');
+    assert.equal(samplePackedOwnership(effective, {x, y, width: 1, height: 1})[0], id,
+      'Stable sampled owner changed');
+  }
+  return {version: 1, kind: 'actual-emitted-additive-consumer', passed: true,
+    feature_count: features.length, selected_ledger_sha256: ledgerSha256, selected_patch_sha256: patchSha256,
+    cumulative_native_cells_picked_and_sampled: added, stable_owner_controls: beforeControls.length,
+    limitation: 'Production asset loader, picker and renderer sampler on every emitted additive cell, plus occupied base controls. GPU and Canvas execution still require hosted browser testing. No reviewed cohort or source approval is inferred.'};
+}
+
 // Exported kernel uses the actual production effective primitive, picker and
 // sampler entry points. The CLI obtains all arguments from authenticated bytes.
 export function verifySelectedDelivery({expectations, ledger, ledgerSha256, patch, patchSha256,
   features, base, effective, beforeControls}) {
   validateDeliveryExpectations(expectations);
   assert.equal(ledgerSha256, expectations.selected_ledger_sha256, 'Wrong selected ledger hash');
-  assert.equal(patch.ledger_sha256, ledgerSha256, 'Patch ledger differs');
-  verifyAdditiveLedgerSelection(ledger, features, patch);
   const selected = new Map(), loaded = new Map(), covered = new Set();
   for (const row of ledger.rows) {
     assert(!selected.has(repairComponentKey(row)), 'Duplicate selected component');
@@ -117,28 +145,10 @@ export function verifySelectedDelivery({expectations, ledger, ledgerSha256, patc
       return {...member, effective_primitive_verified: true};
     })
   }));
-  let added = 0;
-  for (const row of patch.rows) for (const [start, end, id] of row.runs) for (let x = start; x < end; x++) {
-    assert.equal(pickOwnership(base, x, row.y), 0, 'Patch cell was already occupied');
-    assert.equal(pickOwnership(effective, x, row.y), id, 'Patched picker owner differs');
-    assert.equal(samplePackedOwnership(effective, {x, y: row.y, width: 1, height: 1})[0], id,
-      'Patched sampler owner differs');
-    added++;
-  }
-  assert.equal(added, expectations.cumulative_native_cells, 'Wrong cumulative native cell count');
-  assert.equal(added, effective.additive_added_cells, 'Loaded effective native cell count differs');
-  assert(Array.isArray(beforeControls) && beforeControls.length > 0, 'Missing occupied base owner control');
-  for (const {x, y, id} of beforeControls) {
-    assert(Number.isInteger(x) && Number.isInteger(y) && Number.isInteger(id)
-      && x >= 0 && x < base.size && y >= 0 && y < base.size && id > 0, 'Invalid occupied base control');
-    assert.equal(pickOwnership(base, x, y), id, 'Stable base owner changed');
-    assert.equal(pickOwnership(effective, x, y), id, 'Stable effective owner changed');
-    assert.equal(samplePackedOwnership(effective, {x, y, width: 1, height: 1})[0], id,
-      'Stable sampled owner changed');
-  }
-  return {version: 1, kind: 'actual-emitted-selected-consumer', passed: true,
-    feature_count: features.length, selected_ledger_sha256: ledgerSha256, selected_patch_sha256: patchSha256,
-    cumulative_native_cells_picked_and_sampled: added, stable_owner_controls: beforeControls.length,
+  const report = verifyEmittedDelivery({ledger, ledgerSha256, patch, patchSha256,
+    features, base, effective, beforeControls});
+  assert.equal(report.cumulative_native_cells_picked_and_sampled, expectations.cumulative_native_cells, 'Wrong cumulative native cell count');
+  return {...report, kind: 'actual-emitted-selected-consumer',
     expected_components_verified: cohorts.reduce((n, cohort) => n + cohort.members.length, 0), cohorts,
     limitation: 'Production Node-compatible asset loader, effective primitive, picker and renderer-sampler entry points on actual emitted assets. GPU and Canvas execution still require hosted browser testing. Original batch IDs and complete rosters are supplied reviewed expectations, not independent source or whole-batch approval. Zero-cell inclusion is not visible-pixel gain. Emitted geometry chunks are not decoded here; catalog identities and selected ledger primitives are checked. Stable-owner controls sample one occupied emitted-base cell per affected nonempty row, or the first occupied base row when all affected rows are empty.'};
 }
@@ -152,9 +162,9 @@ function admitOutput(filename) {
   return output;
 }
 
-export async function runSelectedDeliverySmoke({root = process.cwd(), emittedDirectory = path.join(root, 'dist/client'),
-  expectationsPath, outputPath}) {
-  const output = admitOutput(outputPath), inputs = new Map();
+export async function checkEmittedSelectedDelivery({root = process.cwd(), emittedDirectory = path.join(root, 'dist/client'),
+  expectations} = {}) {
+  const inputs = new Map();
   const readRoot = repositoryReader(root), readEmitted = repositoryReader(emittedDirectory);
   const read = (scope, name, pin, {nativePart = false} = {}) => {
     // Authenticate the declaration before passing its exact size to the reader.
@@ -181,18 +191,32 @@ export async function runSelectedDeliverySmoke({root = process.cwd(), emittedDir
   };
   const whole = (scope, pin) => {
     assert(pin && typeof pin.path === 'string', 'Missing required asset');
-    return JSON.parse(read(scope, pin.path, pin));
+    let body=read(scope,pin.path,pin);
+    if(pin.encoding==='gzip'){
+      body=gunzipSync(body,{maxOutputLength:pin.decoded_bytes+1});
+      assert.equal(body.length,pin.decoded_bytes,'Decoded whole asset bytes differ: '+pin.path);
+      assert.equal(sha256(body),pin.decoded_sha256,'Decoded whole asset hash differs: '+pin.path);
+    }
+    return JSON.parse(body);
   };
-  assert(text(expectationsPath), 'Missing expectations path');
-  const expectationsFile = path.resolve(expectationsPath);
-  const expectationsBytes = repositoryReader(path.dirname(expectationsFile))(path.basename(expectationsFile), 'candidate');
-  const expectations = validateDeliveryExpectations(JSON.parse(expectationsBytes));
   const selection = JSON.parse(read('root', 'data/ownership-selection.json'));
   const sidecar = whole('root', selection.additive_release);
-  const envelope = whole('root', sidecar.runtime_envelope);
-  const atlas = JSON.parse(read('emitted', 'atlas-geography.json'));
-  assert.deepEqual(atlas.additiveRelease, envelope, 'Actual emitted envelope differs from selected release');
-  assert.equal(envelope.ledger.sha256, expectations.selected_ledger_sha256, 'Wrong selected ledger hash');
+  const wrapped = whole('root', sidecar.runtime_envelope),source=wrapped.additiveRelease??wrapped;
+  const atlas = JSON.parse(read('emitted', 'atlas-geography.json')),envelope=atlas.additiveRelease;
+  additiveBaseReference({additiveRelease:source,reference_release:source.effective_reference});
+  additiveBaseReference(atlas);
+  // Only ledger/patch transport may differ from the accepted source envelope.
+  // Original scientific JSON identities and every other field stay exact.
+  assert.deepEqual({...envelope,ledger:source.ledger,patch:source.patch},source,'Actual emitted envelope differs from selected release');
+  for(const role of ['ledger','patch']){
+    if(source[role].encoding==='gzip'||envelope[role].encoding===undefined)
+      assert.deepEqual(envelope[role],source[role],'Actual emitted asset differs from selected release: '+role);
+    else{
+      assert.equal(envelope[role].path,source[role].path.replace(/\.json(?:\.gz)?$/,'.json.gz'),'Derived transport path differs: '+role);
+      assert.deepEqual(decodedAdditiveAssetIdentity(envelope[role]),decodedAdditiveAssetIdentity(source[role]),'Decoded transport identity differs: '+role);
+    }
+  }
+  if (expectations !== undefined) assert.equal(decodedAdditiveAssetIdentity(envelope.ledger).sha256, expectations.selected_ledger_sha256, 'Wrong selected ledger hash');
   const ledger = whole('emitted', envelope.ledger), patch = whole('emitted', envelope.patch);
   const assets = new Map(), nativeParts = new Set(atlas.pixelMap?.method === 'native-linear-evenodd-first-owner-v1'
     ? (atlas.pixelMap.parts ?? []).map(part => part.path) : []);
@@ -220,10 +244,20 @@ export async function runSelectedDeliverySmoke({root = process.cwd(), emittedDir
     return rows;
   });
   const effective = await loadAdditiveNativePatch(atlas, features, base, {fetcher});
-  const report = verifySelectedDelivery({expectations, ledger, ledgerSha256: envelope.ledger.sha256,
-    patch, patchSha256: envelope.patch.sha256, features, base, effective, beforeControls});
-  report.expectations_sha256 = sha256(expectationsBytes);
+  const report = (expectations === undefined ? verifyEmittedDelivery : verifySelectedDelivery)({expectations, ledger, ledgerSha256: decodedAdditiveAssetIdentity(envelope.ledger).sha256,
+    patch, patchSha256: decodedAdditiveAssetIdentity(envelope.patch).sha256, features, base, effective, beforeControls});
   report.inputs = [...inputs.values()].sort((a, b) => `${a.scope}:${a.path}`.localeCompare(`${b.scope}:${b.path}`));
+  return report;
+}
+
+export async function runSelectedDeliverySmoke({expectationsPath, outputPath, ...options}) {
+  const output = admitOutput(outputPath);
+  assert(text(expectationsPath), 'Missing expectations path');
+  const expectationsFile = path.resolve(expectationsPath);
+  const expectationsBytes = repositoryReader(path.dirname(expectationsFile))(path.basename(expectationsFile), 'candidate');
+  const expectations = validateDeliveryExpectations(JSON.parse(expectationsBytes));
+  const report = await checkEmittedSelectedDelivery({...options, expectations});
+  report.expectations_sha256 = sha256(expectationsBytes);
   // Failures before this point create nothing. Exclusive creation rejects both
   // ordinary collisions and dangling symlinks; parent symlinks are refused too.
   admitOutput(output);

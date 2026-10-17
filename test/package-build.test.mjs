@@ -168,3 +168,19 @@ test('the actual build caller validates prepared products once and retains relea
   const projected=fixture();projected.fixedGrid.hierarchy_sha256='original';projected.selectedGrid.applicationReference={hierarchy_sha256:hierarchySHA};await run(projected);assert.equal(projected.calls,1);
   const invalid=fixture();invalid.checkPrepared=()=>{throw Error('actual prepared bytes changed');};await assert.rejects(run(invalid),/actual prepared bytes changed/);
 });
+
+
+test('actual fresh Cloudflare package admits 25 MiB and refuses one extra byte before replacing outputs',async t=>{
+ const {root,definition}=await fixture(t);
+ definition.inputs.push('scripts/build-cloudflare-inner.mjs');
+ await fs.writeFile(path.join(root,'.github/package-inputs.json'),JSON.stringify(definition));
+ const program=bytes=>`import fs from 'node:fs'; fs.mkdirSync('dist/client',{recursive:true}); const fd=fs.openSync('dist/client/asset.bin','w'); fs.ftruncateSync(fd,${bytes}); fs.closeSync(fd);`;
+ await fs.writeFile(path.join(root,'scripts/build-cloudflare-inner.mjs'),program(26214400));
+ await runPackageBuild('cloudflare',{root,preflight:fixturePreflight});
+ assert.equal((await fs.stat(path.join(root,'dist/client/asset.bin'))).size,26214400);
+ await fs.writeFile(path.join(root,'dist/client/preserved'),'accepted previous output');
+ await fs.writeFile(path.join(root,'scripts/build-cloudflare-inner.mjs'),program(26214401));
+ await assert.rejects(runPackageBuild('cloudflare',{root,preflight:fixturePreflight}),/Cloudflare static asset exceeds 25 MiB/);
+ assert.equal(await fs.readFile(path.join(root,'dist/client/preserved'),'utf8'),'accepted previous output');
+ assert.equal((await fs.stat(path.join(root,'dist/client/asset.bin'))).size,26214400);
+});

@@ -226,7 +226,7 @@ barriers, evidence/review validation, workflow checkout and integration controls
 Source-only owned research retains its focused controls. Every changed path and
 rename origin participates; unknown non-text documentation/scripts, application code, storage,
 atlas data, geometry, schema, imports, builds and deployment require full regression.
-The queue classifier runs trusted current-main code against GitHub's complete file list and verifies the reviewed head. Geography focused selection reads the linked issue and requires matching lane/mode and safe declared owned prefixes; missing or invalid scope fails rather than allowing reduced tests. Out-of-scope files or rename origins retain full regression;
+The queue uses GitHub's complete PR file inventory for authored scope and evidence review. Execution routing instead compares authenticated accepted-base and combined-candidate leaf identities, kinds and modes at both preparation and final admission. Already accepted changes in a stale PR inventory do not select unrelated execution; actual additions, removals and both sides of moves still participate. Ordinary focused-test checks use the executed candidate tree. Geography focused selection reads the linked issue and requires matching lane/mode and safe declared owned prefixes; missing or invalid scope fails rather than allowing reduced tests. Out-of-scope files or move origins retain full regression;
 Unknown applicability runs complete final regression. Full shards cover every test file
 exactly once, build actual packaged assets and reject skipped tests.
 
