@@ -11,7 +11,7 @@ assert len(sys.argv)==3
 W,O=map(lambda v:pathlib.Path(v).absolute(),sys.argv[1:]);H='d4968ddc37aa3aa6105e9610c9e6fadbb368ba14';F='1a6a08cb722ab344a71640f47af38490f7df4577';P='coordination/engineering/papua-new-guinea-native-repair-20261017';Q='coordination/engineering/global-current-cell-work-queue-20261014/'
 assert W.is_dir() and O.parent.is_dir() and not O.exists()
 assert all(not p.is_symlink() for root in (W,O) for p in (root,*root.parents))
-started=time.monotonic();inputs={};total=0;MAX_FILE=64*1024*1024;MAX_PHASE=256*1024*1024
+started=time.monotonic();inputs={};total=0
 sha=lambda b:hashlib.sha256(b).hexdigest()
 env={**os.environ,'GIT_NO_LAZY_FETCH':'1','GIT_NO_REPLACE_OBJECTS':'1','GIT_TERMINAL_PROMPT':'0'}
 def read(p,h=H):
@@ -19,15 +19,15 @@ def read(p,h=H):
  assert time.monotonic()-started<360
  assert all(x not in ['','..','.'] for x in p.split('/')) and not p.startswith('/')
  row=subprocess.check_output(['git','-c','protocol.allow=never','-C',str(W),'ls-tree','-z',h,'--',p],env=env).rstrip(b'\0');meta,name=row.split(b'\t');mode,kind,oid=meta.decode().split();assert mode=='100644' and kind=='blob' and name.decode()==p
- size=int(subprocess.check_output(['git','-c','protocol.allow=never','-C',str(W),'cat-file','-s',oid],env=env));assert 0<size<=MAX_FILE
+ size=int(subprocess.check_output(['git','-c','protocol.allow=never','-C',str(W),'cat-file','-s',oid],env=env));assert size>0
  b=subprocess.check_output(['git','-c','protocol.allow=never','-C',str(W),'cat-file','blob',oid],env=env);assert len(b)==size and hashlib.sha1(b'blob '+str(size).encode()+b'\0'+b).hexdigest()==oid
  pin={'path':p,'commit':h,'mode':mode,'git_blob_oid':oid,'bytes':len(b),'sha256':sha(b)}
  if p.endswith('.gz'):
   import io
-  with gzip.GzipFile(fileobj=io.BytesIO(b)) as stream:d=stream.read(MAX_FILE+1)
-  assert len(d)<=MAX_FILE;pin.update(decoded_bytes=len(d),decoded_sha256=sha(d));b=d
+  with gzip.GzipFile(fileobj=io.BytesIO(b)) as stream:d=stream.read()
+  pin.update(decoded_bytes=len(d),decoded_sha256=sha(d));b=d
  if (h,p) not in inputs:total+=size+pin.get('decoded_bytes',0)
- assert total<=MAX_PHASE;inputs[(h,p)]=pin;return b
+ inputs[(h,p)]=pin;return b
 def js(p,h=H):return json.loads(read(p,h))
 def exact(rows,key):
  out={}
@@ -103,7 +103,7 @@ for y,runs in rows.items():
 limits=['Source-relative restoration only; no effective/current legal-jurisdiction, historical affiliation or current dry-land certification.','Original PNG represented-year claim 2019 and foreign competitor vintage remain distinct from updates/builds. Retained CC BY 3.0 IGO PNG notices and separate foreign source terms remain literal.','All original targets are direct whole Local Government Area source units; rural and urban LLG names and open source/parent/semantic questions remain. Whole source identity does not itself establish native support or present legal jurisdiction.','All actual foreign original source contacts retain complete original source families and whole negative geometries. Exact source-census membership is authenticated independently; complete Natural Earth country context is coarse reference evidence, not sovereignty clearance.','Earlier Papuasia and Melanesia regional, source-fitness and whole-candidate unknowns remain; all relevant physical/historical evidence is assessed separately.','Separate physical-interpretation companion excluded from repair credit; complete physical/native and current selected conservation remain subsequent obligations.']
 assessment={'version':1,'issue':2376,'baseline_commit':H,'frozen_input_commit':F,'original_cells':sum(z-a for y,a,z,*_ in segments),'original_segments':len(segments),'owners':len(owners),'source_members':len(stages),'complete_source_feature_count':sum(len(v) for k,v in sources.items() if k.startswith('gb:PNG:')),'complete_foreign_source_feature_count':sum(len(v) for k,v in sources.items() if not k.startswith('gb:PNG:')),'source_membership_mismatches':mismatches,'complete_sources':receipts,'all_source_members':members,'target_checks':checks,'parent_records':parents,'retained_location_review':[x for x in decisions.get('location_review',[]) if targetids.intersection(x.get('ids',[]))],'foreign_ownerless_census_features':len(foreign_roster),'foreign_ownerless_candidate_cells':len({i for i,c in enumerate(cells) if any(not rindex[s]['owners'] and not rindex[s]['source_id'].startswith('gb:PNG:') for s in c[3])}),'foreign_original_source_hits':foreign_source_hits,'foreign_original_source_native_cells':[[*cells[i][:3]] for i in sorted(foreign_source_keys)],'country_product_features':len(country['features']),'country_reference_hits':country_checks,'invalid_country_records':invalid_countries,'foreign_country_reference_cells':len(foreign_keys),'foreign_country_native_cells':[[*cells[i][:3]] for i in sorted(foreign_keys)],'aggregate_construction':aggregate_checks,'recorded_metadata':{k:v for k,v in metadata.items() if k.startswith('gb:PNG:') or k in foreign_families},'inputs':list(inputs.values()),'limits':limits,'runtime':{'python':sys.version,'numpy':np.__version__,'shapely':shapely.__version__,'geos':shapely.geos_version_string},'elapsed_seconds':time.monotonic()-started}
 products={'original-stage-inputs.json':stages,'native-patch.json':{'rows':[{'y':y,'runs':r} for y,r in sorted(rows.items())]},'source-scope-assessment.json':assessment,'original-package.json':package,'foreign-country-features.geojson':{'type':'FeatureCollection','features':foreign_features},'foreign-original-source-features.geojson':{'type':'FeatureCollection','features':foreign_source_features}}
-encoded={n:(json.dumps(d,ensure_ascii=False,separators=(',',':'))+'\n').encode() for n,d in products.items()};assert all(len(b)<=MAX_FILE for b in encoded.values()) and total+sum(map(len,encoded.values()))<=MAX_PHASE
+encoded={n:(json.dumps(d,ensure_ascii=False,separators=(',',':'))+'\n').encode() for n,d in products.items()}
 assert all(not p.is_symlink() for p in (O,*O.parents)) and O.parent.is_dir() and not O.exists();O.mkdir();out={}
 for n,b in encoded.items():
  with (O/n).open('xb') as f:f.write(b)

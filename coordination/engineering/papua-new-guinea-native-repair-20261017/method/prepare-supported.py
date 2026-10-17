@@ -2,19 +2,19 @@
 Usage: python prepare-supported.py READ_ONLY_REPO DIAGNOSTIC_COMMIT FRESH_OUTPUT
 This does not construct authority. It preserves original holds and complete source inputs.
 """
-import collections,gzip,hashlib,io,json,os,pathlib,subprocess,sys
+import collections,gzip,hashlib,io,json,os,pathlib,subprocess,sys,math,struct
 W=pathlib.Path(sys.argv[1]).absolute();H=sys.argv[2];O=pathlib.Path(sys.argv[3]).absolute();P='coordination/engineering/papua-new-guinea-native-repair-20261017';assert len(sys.argv)==4 and len(H)==40 and all(c in '0123456789abcdef' for c in H) and O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))
 sha=lambda b:hashlib.sha256(b).hexdigest();pins=[];total=0;env={**os.environ,'GIT_NO_LAZY_FETCH':'1','GIT_NO_REPLACE_OBJECTS':'1'}
-def read(p):
+def read(p,c=H,parse=True):
  global total
  assert p and not p.startswith('/') and all(x not in ['', '.', '..'] for x in p.split('/'))
- cmd=['git','-c','protocol.allow=never','-C',str(W)];meta,name=subprocess.check_output(cmd+['ls-tree','-z',H,'--',p],env=env).rstrip(b'\0').split(b'\t');mode,kind,oid=meta.decode().split();assert mode=='100644' and kind=='blob' and name.decode()==p
+ cmd=['git','-c','protocol.allow=never','-C',str(W)];meta,name=subprocess.check_output(cmd+['ls-tree','-z',c,'--',p],env=env).rstrip(b'\0').split(b'\t');mode,kind,oid=meta.decode().split();assert mode=='100644' and kind=='blob' and name.decode()==p
  n=int(subprocess.check_output(cmd+['cat-file','-s',oid],env=env));assert n>0;b=subprocess.check_output(cmd+['cat-file','blob',oid],env=env);assert len(b)==n and hashlib.sha1(b'blob '+str(n).encode()+b'\0'+b).hexdigest()==oid
- pin={'commit':H,'path':p,'mode':mode,'git_blob_oid':oid,'bytes':n,'sha256':sha(b)}
+ pin={'commit':c,'path':p,'mode':mode,'git_blob_oid':oid,'bytes':n,'sha256':sha(b)}
  if p.endswith('.gz'):
   with gzip.GzipFile(fileobj=io.BytesIO(b)) as f:d=f.read()
   pin.update(decoded_bytes=len(d),decoded_sha256=sha(d));b=d
- total+=n+pin.get('decoded_bytes',0);pins.append(pin);return json.loads(b)
+ total+=n+pin.get('decoded_bytes',0);pins.append(pin);return json.loads(b) if parse else b
 frozen=[]
 for b in range(32,35):frozen+=read(P+f'/frozen-queue/block-{b:03}.json.gz')
 original={(x,y,o[0]):kind for y,a,z,o,s,kind in frozen for x in range(a,z)};assert len(original)==56552==sum(z-a for y,a,z,*_ in frozen) and len(frozen)==20060
@@ -28,8 +28,53 @@ for row in diag['decision_rows']:
   for x in range(a,z):assert (x,row['y'],o) not in held;held[(x,row['y'],o)]=reason
 assert set(held)=={(x,r['y'],o) for r in diag['held_rows'] for a,z,o in r['runs'] for x in range(a,z)}
 assert {(x,r['y'],o) for r in diag['requested_rows'] for a,z,o in r['runs'] for x in range(a,z)}==set(original)
-source_pin=equivalence['original_source']
-assert equivalence['all_other_source_fields_unchanged'] and equivalence['targets_count']==len(source['targets']) and equivalence['original_operands']==equivalence['retained_operands']+equivalence['omitted_whole_disjoint_operands']
+# Authenticate the transformation; a stale or forged proof cannot authorize changed operands.
+source_pin=equivalence['original_source'];prep=read(P+'/compaction-001/preparation.json')
+for name in ['source-evidence.json','whole-negative-equivalence.json']:
+ actual=next(p for p in pins if p['path']==P+'/compaction-001/'+name)
+ assert {k:actual[k] for k in ['bytes','sha256']}==prep['outputs'][name]
+fullsource=read(source_pin['path'],source_pin['commit']);assert pins[-1]==source_pin
+assert {k:v for k,v in source.items() if k!='targets'}=={k:v for k,v in fullsource.items() if k!='targets'}
+assert len(source['targets'])==len(fullsource['targets'])==equivalence['targets_count']
+physical_pin=fullsource['physical_input'];stages=read(physical_pin['path'],physical_pin['commit']);assert pins[-1]==physical_pin;stageby={s['target']:s for s in stages};assert len(stageby)==len(stages)
+lat_pin=fullsource['native_latitudes'];lat=read(lat_pin['path'],lat_pin['commit'],False);assert pins[-1]==lat_pin;size=fullsource['native_contract']['size'];assert len(lat)==8*size
+negative_geometries=[]
+for operand in equivalence['complete_negative_operands']:
+ pin=operand['pin'];fc=read(pin['path'],pin['commit']);assert pins[-1]==pin;negative_geometries.append(fc['features'][operand['feature_ordinal']]['geometry'])
+def bounds(g):
+ assert set(g)=={'type','coordinates'} and g['type'] in ['Polygon','MultiPolygon'];polys=[g['coordinates']] if g['type']=='Polygon' else g['coordinates'];assert polys;out=[]
+ for poly in polys:
+  assert poly;xs=[];ys=[];seam=False
+  for ring in poly:
+   assert len(ring)>=4 and ring[0]==ring[-1]
+   for i,p in enumerate(ring):
+    assert len(p)==2 and all(type(n) in [int,float] and math.isfinite(n) for n in p) and abs(p[0])<=180 and abs(p[1])<=90
+    xs.append(p[0]);ys.append(p[1]);seam|=i>0 and abs(p[0]-ring[i-1][0])>180
+  lo,hi=min(xs),max(xs)
+  if seam or hi-lo>180:lo,hi=-180,180
+  out.append([lo,min(ys),hi,max(ys)])
+ return out
+hit=lambda a,b:a[0]<=b[2] and b[0]<=a[2] and a[1]<=b[3] and b[1]<=a[3]
+kept=dropped=0
+for old,new,proof in zip(fullsource['targets'],source['targets'],equivalence['targets']):
+ assert old['id']==new['id']==proof['id'] and old['pixelIndex']==new['pixelIndex']==proof['pixelIndex']
+ assert {k:v for k,v in old.items() if k!='territorial_exclusions'}=={k:v for k,v in new.items() if k!='territorial_exclusions'}
+ stage=stageby[old['id']];assert stage['selected']['id']==old.get('target_id',old['id']) and stage['selected']['geometry']==old['base_geometry'] and stage['consumed']['properties']['shapeID']==old['id'].removeprefix(old['source_family']+':')
+ ob=bounds(stage['consumed']['geometry']);sb=bounds(old['base_geometry']);assert ob==proof['original_bounds'] and sb==proof['selected_bounds']
+ mb=[]
+ for row in old['coverage_rows']:
+  y=struct.unpack_from('<d',lat,row['y']*8)[0];assert math.isfinite(y)
+  for a,z,kind in row['runs']:assert 0<=a<z<=size;mb.append([(a+.5)*360/size-180,y,(z-.5)*360/size-180,y])
+ assert old['territorial_exclusions']==negative_geometries and len(proof['decisions'])==len(negative_geometries)
+ expected=[]
+ for ordinal,(g,decision,operand) in enumerate(zip(negative_geometries,proof['decisions'],equivalence['complete_negative_operands'])):
+  nb=bounds(g);assert nb==operand['bounds'];oc=any(hit(a,b) for a in nb for b in ob);sc=any(hit(a,b) for a in nb for b in sb);mc=any(hit(a,b) for a in nb for b in mb);retain=oc or sc or mc
+  assert decision['original_negative_ordinal']==ordinal and decision['original_whole_bounds_contact']==oc and decision['selected_whole_bounds_contact']==sc and decision['original_full_mask_bounds_contact']==mc and decision['new_negative_ordinal']==(len(expected) if retain else None)
+  assert decision['decision']==('retained_exact_whole_operand' if retain else 'omitted_proven_disjoint_whole_operand')
+  if retain:expected.append(g);kept+=1
+  else:dropped+=1
+ assert new['territorial_exclusions']==expected
+assert equivalence['all_other_source_fields_unchanged'] and equivalence['original_operands']==kept+dropped and equivalence['retained_operands']==kept and equivalence['omitted_whole_disjoint_operands']==dropped
 assert all(source_pin[k]==diag['original_pins']['source_evidence'][k] for k in ['path','bytes','sha256','git_blob_oid'])
 assert len(supported)==diag['supported_cells'] and len(held)==diag['held_cells'] and not (set(supported)&set(held)) and set(supported)|set(held)==set(original)
 # Keep specific unresolved independent source-fitness findings as exact original holds.
