@@ -8,7 +8,7 @@ import {gunzipSync} from 'node:zlib';
 import {repairComponentKey} from '../src/native-grid.js';
 import {repositoryReader, sha256} from './evidence-quality.mjs';
 import {loadOwnershipAssets} from '../src/ownership-assets.js';
-import {loadAdditiveNativePatch, effectivePrimitiveGeometries, footprintValueSha256,
+import {additiveBaseReference, decodedAdditiveAssetIdentity, loadAdditiveNativePatch, effectivePrimitiveGeometries, footprintValueSha256,
   verifyAdditiveLedgerSelection, nativeOnlyComponent} from '../src/effective-footprint.js';
 import {ownershipRun, pickOwnership, samplePackedOwnership} from '../src/pixel-ownership.js';
 
@@ -181,7 +181,13 @@ export async function runSelectedDeliverySmoke({root = process.cwd(), emittedDir
   };
   const whole = (scope, pin) => {
     assert(pin && typeof pin.path === 'string', 'Missing required asset');
-    return JSON.parse(read(scope, pin.path, pin));
+    let body=read(scope,pin.path,pin);
+    if(pin.encoding==='gzip'){
+      body=gunzipSync(body,{maxOutputLength:pin.decoded_bytes+1});
+      assert.equal(body.length,pin.decoded_bytes,'Decoded whole asset bytes differ: '+pin.path);
+      assert.equal(sha256(body),pin.decoded_sha256,'Decoded whole asset hash differs: '+pin.path);
+    }
+    return JSON.parse(body);
   };
   assert(text(expectationsPath), 'Missing expectations path');
   const expectationsFile = path.resolve(expectationsPath);
@@ -189,10 +195,22 @@ export async function runSelectedDeliverySmoke({root = process.cwd(), emittedDir
   const expectations = validateDeliveryExpectations(JSON.parse(expectationsBytes));
   const selection = JSON.parse(read('root', 'data/ownership-selection.json'));
   const sidecar = whole('root', selection.additive_release);
-  const envelope = whole('root', sidecar.runtime_envelope);
-  const atlas = JSON.parse(read('emitted', 'atlas-geography.json'));
-  assert.deepEqual(atlas.additiveRelease, envelope, 'Actual emitted envelope differs from selected release');
-  assert.equal(envelope.ledger.sha256, expectations.selected_ledger_sha256, 'Wrong selected ledger hash');
+  const wrapped = whole('root', sidecar.runtime_envelope),source=wrapped.additiveRelease??wrapped;
+  const atlas = JSON.parse(read('emitted', 'atlas-geography.json')),envelope=atlas.additiveRelease;
+  additiveBaseReference({additiveRelease:source,reference_release:source.effective_reference});
+  additiveBaseReference(atlas);
+  // Only ledger/patch transport may differ from the accepted source envelope.
+  // Original scientific JSON identities and every other field stay exact.
+  assert.deepEqual({...envelope,ledger:source.ledger,patch:source.patch},source,'Actual emitted envelope differs from selected release');
+  for(const role of ['ledger','patch']){
+    if(source[role].encoding==='gzip'||envelope[role].encoding===undefined)
+      assert.deepEqual(envelope[role],source[role],'Actual emitted asset differs from selected release: '+role);
+    else{
+      assert.equal(envelope[role].path,source[role].path.replace(/\.json(?:\.gz)?$/,'.json.gz'),'Derived transport path differs: '+role);
+      assert.deepEqual(decodedAdditiveAssetIdentity(envelope[role]),decodedAdditiveAssetIdentity(source[role]),'Decoded transport identity differs: '+role);
+    }
+  }
+  assert.equal(decodedAdditiveAssetIdentity(envelope.ledger).sha256, expectations.selected_ledger_sha256, 'Wrong selected ledger hash');
   const ledger = whole('emitted', envelope.ledger), patch = whole('emitted', envelope.patch);
   const assets = new Map(), nativeParts = new Set(atlas.pixelMap?.method === 'native-linear-evenodd-first-owner-v1'
     ? (atlas.pixelMap.parts ?? []).map(part => part.path) : []);
@@ -220,8 +238,8 @@ export async function runSelectedDeliverySmoke({root = process.cwd(), emittedDir
     return rows;
   });
   const effective = await loadAdditiveNativePatch(atlas, features, base, {fetcher});
-  const report = verifySelectedDelivery({expectations, ledger, ledgerSha256: envelope.ledger.sha256,
-    patch, patchSha256: envelope.patch.sha256, features, base, effective, beforeControls});
+  const report = verifySelectedDelivery({expectations, ledger, ledgerSha256: decodedAdditiveAssetIdentity(envelope.ledger).sha256,
+    patch, patchSha256: decodedAdditiveAssetIdentity(envelope.patch).sha256, features, base, effective, beforeControls});
   report.expectations_sha256 = sha256(expectationsBytes);
   report.inputs = [...inputs.values()].sort((a, b) => `${a.scope}:${a.path}`.localeCompare(`${b.scope}:${b.path}`));
   // Failures before this point create nothing. Exclusive creation rejects both

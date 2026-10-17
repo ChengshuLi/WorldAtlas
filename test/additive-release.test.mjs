@@ -443,7 +443,7 @@ test('additive asset descriptors reject unsafe identities and precision limits b
  }
  for(const value of [0,-1,1.5,Infinity,Number.MAX_SAFE_INTEGER+1]){
   const bad=structuredClone(f.data);bad.additiveRelease.owner_roster.decoded_bytes=value;
-  assert.throws(()=>additiveBaseReference(bad),/whole decoded native owner roster/);
+  assert.throws(()=>additiveBaseReference(bad),/whole decoded native additive asset/);
  }
  assert.equal(reads,0);
  // Real runtime/resource errors remain failures, without fabricated success or
@@ -451,4 +451,48 @@ test('additive asset descriptors reject unsafe identities and precision limits b
  const before=structuredClone(f.currentFeatures),failure=new RangeError('Array buffer allocation failed');
  await assert.rejects(loadAdditiveNativePatch(f.data,before,f.base,{fetcher:async()=>{throw failure;}}),error=>error===failure);
  assert.deepEqual(before,f.currentFeatures);
+});
+
+function encodeFixtureLedgerPatch(f){
+ for(const role of ['ledger','patch']){
+  const original=f.data.additiveRelease[role],key='./'+original.path,body=f.transports.get(key),encoded=gzipSync(body);
+  const descriptor={...f.asset(original.path+'.gz',encoded),encoding:'gzip',decoded_bytes:body.length,decoded_sha256:createHash('sha256').update(body).digest('hex')};
+  f.data.additiveRelease[role]=descriptor;f.transports.delete(key);f.transports.set('./'+descriptor.path,encoded);
+ }
+}
+
+test('gzip ledger and patch preserve complete native words and science identities through the real geography entry',async()=>{
+ const f=await metadataRuntimeFixture(),originalLedger=f.data.additiveRelease.ledger.sha256;
+ const plain=await loadAdditiveNativePatch(f.data,structuredClone(f.currentFeatures),f.base,{fetcher:f.fetcher});
+ const rows=f.base.rows.slice(),runs=f.base.runs.slice();encodeFixtureLedgerPatch(f);
+ const features=structuredClone(f.currentFeatures),encoded=await loadAdditiveNativePatch(f.data,features,f.base,{fetcher:f.fetcher});
+ assert.deepEqual(encoded.rows,plain.rows);assert.deepEqual(encoded.runs,plain.runs);assert.deepEqual(f.base.rows,rows);assert.deepEqual(f.base.runs,runs);
+ assert.equal(encoded.additive_ledger_sha256,originalLedger);assert.equal(features[0].additiveFootprint.ledger_sha256,originalLedger);
+ assert.equal(additiveReleaseFootprintDigest(f.reference,features),f.effective.footprints_sha256);
+ const {createServer}=await import('vite'),oldFetch=globalThis.fetch;
+ const server=await createServer({configFile:false,server:{middlewareMode:true,watch:null},define:{'import.meta.env.VITE_STATIC_ATLAS':'"true"','import.meta.env.VITE_HOSTED_DATABASE':'"false"'}});
+ try{
+  globalThis.fetch=async name=>name==='./atlas-geography.json'?new Response(f.json(f.data)):f.fetcher(name);
+  const client=await server.ssrLoadModule('/src/data-client.js'),loaded=await client.loadGeography();
+  assert.deepEqual(loaded.ownership.rows,plain.rows);assert.deepEqual(loaded.ownership.runs,plain.runs);
+  assert.equal(loaded.features[0].additiveFootprint.ledger_sha256,originalLedger);assert.equal(loaded.ownership.additive_added_cells,2);
+ }finally{globalThis.fetch=oldFetch;await server.close();}
+});
+
+test('gzip ledger and patch reject malformed descriptors, encoded and decoded drift, and a rebound ledger',async()=>{
+ const f=await metadataRuntimeFixture();encodeFixtureLedgerPatch(f);let reads=0;
+ for(const role of ['ledger','patch']){
+  for(const change of [x=>delete x.decoded_sha256,x=>delete x.encoding,x=>x.encoding='br',x=>x.decoded_bytes=0,x=>x.decoded_bytes=1.5,x=>x.decoded_sha256='bad']){
+   const data=structuredClone(f.data);change(data.additiveRelease[role]);
+   await assert.rejects(loadAdditiveNativePatch(data,structuredClone(f.currentFeatures),f.base,{fetcher:async()=>{reads++;throw Error('must not fetch');}}),/missing\/foreign|whole decoded/);
+  }
+  for(const [field,value,error] of [['bytes',f.data.additiveRelease[role].bytes-1,/exceeds declared whole bytes/],['bytes',f.data.additiveRelease[role].bytes+1,/Incomplete Native/],['sha256','0'.repeat(64),/whole checksum/],['decoded_bytes',f.data.additiveRelease[role].decoded_bytes-1,/exceeds declared whole decoded bytes/],['decoded_bytes',f.data.additiveRelease[role].decoded_bytes+1,/Incomplete decoded/],['decoded_sha256','0'.repeat(64),/whole decoded checksum/]]){
+   const data=structuredClone(f.data);data.additiveRelease[role][field]=value;
+   await assert.rejects(loadAdditiveNativePatch(data,structuredClone(f.currentFeatures),f.base,{fetcher:f.fetcher}),error);
+  }
+ }
+ assert.equal(reads,0);
+ const data=structuredClone(f.data),patch={...f.patch,ledger_sha256:data.additiveRelease.ledger.sha256},body=f.json(patch),raw=gzipSync(body),name=data.additiveRelease.patch.path;
+ data.additiveRelease.patch={...f.asset(name,raw),encoding:'gzip',decoded_bytes:body.length,decoded_sha256:createHash('sha256').update(body).digest('hex')};
+ await assert.rejects(loadAdditiveNativePatch(data,structuredClone(f.currentFeatures),f.base,{fetcher:async key=>key==='./'+name?new Response(raw):f.fetcher(key)}),/differs from selected whole ledger/);
 });

@@ -14,7 +14,7 @@ import {originalNativeReference,validateReferenceMetadataHeader} from '../src/re
 import {githubAPI, githubPages} from './issue-claim-contract.mjs';
 import {integrationTree} from './integration-profile.mjs';
 import {loadPackageInputs, readPackageInputs, containsPackagePath} from './package-inputs.mjs';
-import {inspectPackageNodeRuntime, verifyPackageDependencies} from './package-build.mjs';
+import {assertCloudflareStaticAssets, inspectPackageNodeRuntime, verifyPackageDependencies} from './package-build.mjs';
 import {committedPackageInputs, committedPackageProducer, PACKAGE_PRODUCER_WORKFLOWS, PACKAGE_PRODUCER_KIND, packageBuildConfiguration,
   validatePackageOutputManifest, admitPackageInputTransition, admitPackageOutputTransition, inertSelectedPackageInput, streamedPackageFile, resolvePackagePythonExecutable} from './package-output-artifact.mjs';
 import {authenticateOriginalPackageOutput, readOriginalPackageInventory, requireOriginalPackageOutput, issuePackageAssemblyExecution, requirePackageAssemblyExecution}
@@ -304,6 +304,7 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
     fs.mkdirSync(path.join(stage,'dist'));fs.renameSync(path.join(stage,'client'),path.join(stage,'dist/client'));
     fs.renameSync(path.join(originalRoot,'dist/cloudflare'),path.join(stage,'dist/cloudflare'));
     for(const pin of manifest.output.files)if(!mutable.has(pin.path))need(same(streamedPackageFile(stage,pin.path),pin),'Invariant output changed during assembly');
+    assertCloudflareStaticAssets(stage);
     requirePackageAssemblyExecution(execution);
     const assembly={kind:'retained-original-output-plus-current-additive',origin:found.origin,
       original_manifest_sha256:hash(manifestRaw),transition,current_execution:execution,
