@@ -1,10 +1,11 @@
-# Germany original ADM3 repair: source checkpoint
+# Germany complete-original source/native handoff
 
 Issue: https://github.com/ChengshuLi/WorldAtlas/issues/2410
 
-This checkpoint is **unqualified**. It preserves complete original inputs and
-source screening after the recovery interruption. It contains no accepted
-native authority or selected-delivery proposal.
+The genuine unchanged stock native constructor qualified **27,181 cells**.
+The complete original partition is **27,555 = 27,181 qualified + 374 held**.
+This is a source/native handoff pending independent exact-head review and a
+separate selected delivery. It is not accepted-map credit or package completion.
 
 ## Exact original scope
 
@@ -49,27 +50,75 @@ newer 2024-and-later terms PDF retroactively.
 There are 428 ADM3 records, but 401 distinct district names. Official NUTS3
 has 401 GF=4 land records and 27 GF=2 extensions into the North/Baltic Sea or
 Lake Constance. The geoBoundaries conversion deleted GF and NUTS codes.
-Ordered names and vertex/part counts agree with the official archive, but
-80 records have reordered polygon parts; this is not exact coordinate or
-water-role equivalence. The full all-atom geometry and physical roles still
-need reconciliation. Do not treat duplicate names as interchangeable shapes,
-or historical source membership as proof of present legal/physical truth.
+Independent comparison authenticated all 428 upstream records against the
+2021 official archive, including complete cyclic rings after the declared CRS
+transformation and reordered parts (maximum deviation 1.33e-08 degrees).
+The consumed geoBoundaries geometry is simplified, not vertex-literal: the
+maximum measured bidirectional vertex-to-boundary distance is 0.008397 degrees.
+All 54 duplicate-name records are geometrically closer to their matched original
+than the same-name alternative. Preserve this processing distinction.
 
-## Resume
+The 100 consumed atoms are 77 GF4 land records and 23 GF2 water extensions.
+All 18 two-atom owners share their official NUTS code across both atoms.
+Actual selected ancestry and all 409 German canonical owners were authenticated.
+Five original owners contain only GF2 atoms; their 94 original requests are all
+land class and are explicitly held: 16266:35, 16269:28, 16286:6, 16307:16,
+16503:9. Their administrative water polygons supply no positive land evidence.
+For the remaining 77 owners, 77 GF4 atoms supply class-specific physical support.
+Only the Konstanz GF2 atom (owner 5755, shapeID 24449704B63459347480292,
+NUTS DE138) has a permitted requested inland-water class. Its positive
+coverage_classes contains only mapped_inland_water_support. All sibling atoms
+and physical issues remain retained as complete stock negative/veto inputs.
+Full identical owner coverage rows are preserved across sibling positive atoms;
+stock class masks independently enforce the allowed physical classes.
 
-1. Authenticate current selected footprint/owner joins for all 82 owners and
-   their complete 100-atom unions; preserve original feature IDs.
-2. Reconcile source water extensions, complete foreign-original exclusions
-   and native frames without substituting a country-only classifier.
-3. Assemble complete original physical inputs and runtime custody, then use
-   the existing stock physical/source producers. Retain every unsupported
-   original cell explicitly.
-4. Construct genuine stock native authority only for supported cells; run
-   meaningful writer controls and focused tests.
-5. Obtain independent exact-head source review, then prepare a separate
-   selected delivery against actual accepted main. Only acceptance changes
-   delivered counts; held original cells keep the package unfinished.
+## Scientific results and exact custody
 
-The repository owns immutable source inputs; local dependencies and access
-credentials are deliberately excluded. No previous Sweden or Tanzania
-science was rerun for this screening.
+- source-stage-001: 100 complete literal atoms, 82 original owners, 27,555 keys.
+- physical-001: unchanged stock physical phase, 25 input pins, 207 runtime files,
+  100 members, 70 physical issues; 14.843 seconds including wrapper execution.
+- foreign-bounds-001: all 365 foreign families / 73,085 original features,
+  186 conservative contacts in 19 complete negative families, 22.588 seconds.
+- periodic-negatives-001: all three retained Fiji frame exceptions discharged
+  against accepted original/full-native proofs; no new geometry transform.
+- native-inputs-002: 27,461 requested keys / 77 owners / 78 positive atoms,
+  plus exactly 94 prior source-role-held keys. Complete decoded cohort pins.
+- source-evidence-002: stock selector/physical/source/territorial binding.
+- native-diagnostic-002: 27,461 = 27,181 supported + 280 held, 6.744 seconds.
+- supported-inputs-001: stock full-original partition including the 94 prior holds.
+- native-authority-001: genuine stock constructor, 27,181 cells, 6.815 seconds.
+- verification/writer-controls.json: 12 actual occupied, dangling-symlink and
+  method-drift controls across four preparation writers; every output preserved.
+
+The final 374 full-key holds are 181 territorial_exclusion_cells,
+99 unsupported_coverage_cells, and 94 unsupported_GF2_water_extension_land_role.
+Whole original inputs, physical conflicts, domestic competitors and all foreign
+negative operands remain pinned. No country-only source classifier was used.
+The generic physical phase is separate from the Indonesia-only source phase.
+
+The first physical admission correctly stopped before science for three missing
+standard-library inventory files; the repaired exact inventory passed. The first
+native diagnostic correctly stopped before classification for omitted decoded
+canonical-cohort identity; native-inputs-002 repaired those explicit pins without
+changing the scientific scope or role masks. Earlier preparation outputs remain
+as historical evidence; use only the final paths above for handoff.
+
+## Resume and reproduction
+
+Use the stock entry point scripts/prepare-delivery-handoff.mjs from the repository
+root with plain Node. Exact configs are retained under config/; physical runtime
+invocation is retained under verification/physical-runtime-invocation.json.
+All output destinations must be fresh; scientific producers need not be replayed
+for selected delivery. Prepare-native-config.mjs takes REPO EXACT_METHOD_COMMIT
+FRESH_OUTPUT and binds its executed bytes. Its final method commit is recorded
+in native-inputs-002/preparation.json. The native constructor uses the frozen
+supported source/patch pair, not the diagnostic request.
+
+Obtain independent exact-head source review, then use a fresh delivery branch
+from actual accepted main with a literal merge of this reviewed source history.
+Run ordinary stock compose/finalize with a fresh accepted CI checkpoint and
+recheck exact selected/native owner-zero scope. Only accepted delivery changes
+map counts. All 374 held keys keep this package unfinished.
+
+The repository owns immutable source inputs; dependency caches and credentials
+are excluded. No previous Sweden or Tanzania science was replayed.
