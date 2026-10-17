@@ -261,13 +261,23 @@ function coordinateCheck(certificate, facts, additions) {
   'Incomplete accepted coordinate product');
   const ids = new Set(), sources = new Map(certificate.inputs.map(p => [p.path,p]));
   demand(sources.size === certificate.inputs.length, 'Duplicate checkpoint source inventory');
+  let additionsByTarget;
   for (const [i,row] of certificate.entries.entries()) {
     demand(Array.isArray(row) && row.length === 10 && typeof row[0] === 'string' && !ids.has(row[0])
       && row[1] === i+1 && typeof row[2] === 'string' && Number.isSafeInteger(row[3])
       && sources.has(row[4]) && Number.isSafeInteger(row[5]) && row[5] >= 0
       && [row[6],row[7],row[8]].every(hash), 'Incomplete/duplicate checkpoint owner/index/parent identity');
     ids.add(row[0]);
-    const effective = additions.filter(p => p.target_id === row[0]);
+    // Build once, after the first owner passes its original identity checks.
+    // Buckets retain original references and order; no geometry is copied.
+    if (!additionsByTarget) {
+      additionsByTarget = new Map();
+      additions.forEach(addition => {
+        const target = addition.target_id, bucket = additionsByTarget.get(target);
+        if (bucket) bucket.push(addition); else additionsByTarget.set(target,[addition]);
+      });
+    }
+    const effective = additionsByTarget.get(row[0]) ?? [];
     demand(effective.every(p => p.pixelIndex === row[1] && p.base_geometry_sha256 === row[7])
       && row[8] === valueSha({base_geometry_sha256:row[7],additions:effective}), 'Checkpoint complete primitive set differs');
     demand(Array.isArray(row[9]) && row[9].length > 0 && row[9].every(b => Array.isArray(b) && b.length === 4
