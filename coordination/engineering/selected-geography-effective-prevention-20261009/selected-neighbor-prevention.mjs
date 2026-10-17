@@ -651,14 +651,14 @@ function reconstructionResidualPointsets(result, dated = false, candidateFrame) 
 // Explicit OSM snapshot format adapter. The adopted body must already be in the
 // exact reviewed candidate; a copied or mismatched adoption cannot replace it.
 // All scientific review facts retain their own original, unchanged vintages.
-function readAdoptedOsmRevision({evidence,proposed,owners,latitudes,read,readAdopted,reader,physicalInputs,keys}) {
- const data=readAdopted(evidence.revised_source_adoption,'Revised source adoption');
+function* readAdoptedOsmRevision({evidence,proposed,owners,latitudes,read,json,readAdopted,reader,physicalInputs,keys}) {
+ const data=yield* readAdopted(evidence.revised_source_adoption,'Revised source adoption');
  const roles=['raw_source','source_stage','assessment','scope','parent_decision','current_geography','attribution'];
  demand(keys(data,'version,kind,source_id,'+roles.join(',')+',members,records')&&data.version===1
   &&data.kind==='adopted-osm-revised-source-native-v1'&&typeof data.source_id==='string'&&data.source_id
   &&Array.isArray(data.members)&&data.members.length>0&&Array.isArray(data.records)&&data.records.length>0
   &&evidence.families.length===1,'Incomplete adopted revised source');
- const loaded=Object.fromEntries(roles.map(role=>[role,JSON.parse(read(data[role]))]));
+ const loaded={};for(const role of roles)loaded[role]=yield* json(data[role]);
  const {raw_source:raw,source_stage:stage,assessment,scope,parent_decision:decision,current_geography:fine,attribution}=loaded;
  demand(Array.isArray(stage)&&stage.length===data.members.length&&same(stage,physicalInputs)
   &&Array.isArray(raw.elements)&&typeof raw.osm3s?.timestamp_osm_base==='string'
@@ -701,7 +701,7 @@ function readAdoptedOsmRevision({evidence,proposed,owners,latitudes,read,readAdo
  const currentPins=fine.input_pins.filter(pin=>pin.path==='data/world-index.json'||pin.path.startsWith('data/geography/'));
  const indexes=currentPins.filter(pin=>pin.path==='data/world-index.json');
  demand(indexes.length===1,'Missing unique complete current index');
- const index=JSON.parse(read(indexes[0])),expectedPaths=['data/world-index.json',...index.parts.map(name=>'data/'+name)];
+ const index=yield* json(indexes[0]),expectedPaths=['data/world-index.json',...index.parts.map(name=>'data/'+name)];
  demand(new Set(expectedPaths).size===expectedPaths.length&&currentPins.length===expectedPaths.length
   &&expectedPaths.every(name=>currentPins.filter(pin=>pin.path===name).length===1)
   &&fine.feature_inventory.index_parts===index.parts.length,'Incomplete current-geography operand closure');
@@ -827,16 +827,27 @@ function readSourceTargetBody(reader,p) {
 }
 
 export function qualifySourceTargetNativeAuthority(reader, preimage, binding, {snapshot}={}) {
- return evaluateSourceTargetNativeAuthority(reader, preimage, binding, false, snapshot);
+ return driveSourceAuthority(evaluateSourceTargetNativeAuthority(reader, preimage, binding, false, snapshot));
 }
 
 // Same authenticated preparation and predicates as qualification. This returns
 // observations only, before any authority ledger or native proof construction.
 export function diagnoseSourceTargetNativeAuthority(reader, preimage, binding) {
- return evaluateSourceTargetNativeAuthority(reader, preimage, binding, true);
+ return driveSourceAuthority(evaluateSourceTargetNativeAuthority(reader, preimage, binding, true));
 }
 
-function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnostic, snapshot) {
+// Each requested body is acquired at its original semantic read point. The
+// driver advances the single evaluator only after that acquisition succeeds.
+function driveSourceAuthority(steps) {
+ let complete=false;
+ try {
+  let step=steps.next();
+  while(!step.done){let value;try{value=step.value.read();}catch(error){step=steps.throw(error);continue;}
+   step=steps.next(value);}
+  complete=true;return step.value;
+ }finally{if(!complete)steps.return();}
+}
+function* evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnostic, snapshot) {
  demand(preimage?.version===1&&preimage.kind==='source-target-native-rule-v1'
   &&Object.keys(preimage).sort().join(',')==='kind,native_patch,source_evidence,version'
   &&binding?.version===1&&binding.kind==='source-target-native-custody-v1'
@@ -844,7 +855,8 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   &&same(preimage.source_evidence,binding.source_evidence)&&same(preimage.native_patch,binding.native_patch),
  'Source-target authority inputs differ');
  const read=p=>readSourceTargetBody(reader,p);
- const evidence=JSON.parse(read(binding.source_evidence)), proposed=JSON.parse(read(binding.native_patch));
+ const json=function*(pin){return yield {kind:'json',pin,read:()=>JSON.parse(read(pin))};};
+ const evidence=(yield* json(binding.source_evidence)), proposed=(yield* json(binding.native_patch));
  const dated = evidence?.version===2&&evidence.kind==='source-target-native-evidence-v2';
  const revised = evidence?.version===3&&evidence.kind==='source-target-native-evidence-v3';
  demand((dated||revised||evidence?.version===1&&evidence.kind==='source-target-native-evidence-v1')
@@ -859,8 +871,8 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
  'Require retained original source catalogue');
  const currentCatalogue=reader.descriptor(evidence.catalogue.path);
  demand(currentCatalogue.git_blob_oid===evidence.catalogue.git_blob_oid,'Source catalogue differs from the selected retained corpus');
- const catalogue=JSON.parse(read(evidence.catalogue));
- const physicalInputs=JSON.parse(read(evidence.physical_input));
+ const catalogue=(yield* json(evidence.catalogue));
+ const physicalInputs=(yield* json(evidence.physical_input));
  const physicalProgram=read(evidence.physical_reproduction);
  const candidateFrame=evidence.physical_reproduction.path===candidateFramePhysicalProgram.path
   &&sha(physicalProgram)===candidateFramePhysicalProgram.sha256?candidateFramePhysicalProgram:null;
@@ -868,7 +880,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   &&evidence.native_latitudes.decoded_sha256===evidence.native_contract.native_latitudes.decoded_sha256,
  'Native source-target latitude contract differs');
  const latitudeRaw=read(evidence.native_latitudes);
- const physical=JSON.parse(read(evidence.physical_evidence));
+ const physical=(yield* json(evidence.physical_evidence));
  demand(evidence.native_contract.size===262166&&latitudeRaw.length===262166*8,
  'Unsupported source-target native lattice');
  const latitudes=Float64Array.from({length:262166},(_,i)=>latitudeRaw.readDoubleLE(i*8));
@@ -876,7 +888,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   &&(y===0||latitudes[y]<latitudes[y-1]),'Invalid decreasing source-target native latitude table');
  demand(evidence.owner_roster.sha256===evidence.native_contract.original_assets.bounds.sha256,
  'Source-target owner roster differs from original native identity asset');
- const roster=JSON.parse(read(evidence.owner_roster));
+ const roster=(yield* json(evidence.owner_roster));
  demand(Array.isArray(roster),'Missing original owner roster');
  const owners=new Map();
  for(const [i,owner]of roster.entries()){
@@ -895,7 +907,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
    ...(membership.cohort_inventory===undefined?[]:['cohort_inventory']),
    ...(membership.negative_natural_earth===undefined?[]:['negative_natural_earth'])].sort())
    &&Array.isArray(membership.parts)&&membership.parts.length>0,'Incomplete accepted source membership');
-  const current=p=>{
+  const current=function*(p){
    pinCheck(p);const actual=reader.descriptor(p.path);
    const exact=actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes;
    if(!exact){
@@ -907,7 +919,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
      'Source membership belongs to another actual selected reader');
     selectedNativeSourceMembership(snapshot,p);
    }
-   return JSON.parse(read(p));
+   return (yield* json(p));
   };
   // The accepted registry authenticates the entire Natural Earth original,
   // not a selected feature collection or a name-based crosswalk. These leaves
@@ -917,7 +929,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
    demand(role&&Object.keys(role).sort().join(',')==='atoms,registry,source'
     &&role.registry?.path==='data/sources.json'&&Array.isArray(role.atoms)&&role.atoms.length>0,
    'Invalid negative Natural Earth source role');
-   const registry=current(role.registry),raw=read(role.source);
+   const registry=(yield* current(role.registry)),raw=read(role.source);
    demand(hash(registry.hashes?.ne_10m_admin_1_states_provinces)
     &&sha(raw)===registry.hashes.ne_10m_admin_1_states_provinces,
    'Negative Natural Earth whole source differs from accepted registry');
@@ -946,7 +958,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   }
   demand(membership.lineage.path==='data/semantic-report.json'&&membership.index.path==='data/world-index.json',
    'Require complete accepted aggregation lineage and world index');
-  const lineage=current(membership.lineage),index=current(membership.index);
+  const lineage=(yield* current(membership.lineage)),index=(yield* current(membership.index));
   demand(Array.isArray(lineage.changes)&&Array.isArray(index.parts)&&index.parts.length>0
    &&new Set(index.parts).size===index.parts.length,'Incomplete accepted membership inventory');
   for(const change of lineage.changes){
@@ -961,7 +973,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   for(const pin of membership.parts){
    demand(index.parts.includes(pin.path.slice(5))&&pin.path.startsWith('data/')&&!paths.has(pin.path),
     'Foreign or duplicate accepted membership part');paths.add(pin.path);
-   const collection=current(pin);
+   const collection=(yield* current(pin));
    demand(collection.type==='FeatureCollection'&&Array.isArray(collection.features),'Incomplete accepted membership part');
    for(const feature of collection.features){
     demand(owners.has(feature.id)&&!canonicalOwners.has(feature.id),'Foreign or duplicate accepted membership owner');
@@ -974,9 +986,9 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
     &&inventory.index?.path==='data/macro-foundation/world-review-projection.json'
     &&Array.isArray(inventory.parts),'Invalid complete canonical cohort inventory');
    let rows;
-   completeCohort=(labels,cohort)=>{
+   completeCohort=function*(labels,cohort){
     if(!rows){
-     const projection=current(inventory.index);
+     const projection=(yield* current(inventory.index));
      demand(projection.version===1&&projection.kind==='current-membership-projection'
       &&projection.current_pins?.location_index_sha256===membership.index.sha256
       &&Number.isSafeInteger(projection.locations)&&projection.locations>0
@@ -988,7 +1000,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
      for(const pin of inventory.parts){
       demand(Number.isSafeInteger(pin.decoded_bytes)&&pin.decoded_bytes>0&&hash(pin.decoded_sha256),
        'Missing complete canonical cohort decoded identity');
-      const records=current(pin);demand(Array.isArray(records),'Malformed canonical cohort partition');
+      const records=(yield* current(pin));demand(Array.isArray(records),'Malformed canonical cohort partition');
       for(const record of records){
        demand(typeof record.id==='string'&&owners.has(record.id)&&!rows.has(record.id),
         'Foreign or duplicate canonical cohort identity');rows.set(record.id,record);
@@ -1065,7 +1077,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
  // flat positive reconciliation above unchanged; no descendant polygon stands
  // in for any part of the complete original source veto.
  const complexContexts=new WeakMap();
- const complexSourceCompetitor = (id, originals) => {
+ const complexSourceCompetitor = function*(id, originals) {
   if(owners.has(id)||evidence.targets.some(target=>target.id===id))return null;
   const changes=memberOwners.get(id)??[];
   const node=name=>{
@@ -1096,7 +1108,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
    const labels=new Set(seeds.map(feature=>feature.properties?.reference_owner)
     .filter(label=>typeof label==='string'&&label));
    const cohort=[...canonicalOwners.values()].filter(feature=>labels.has(feature.properties?.reference_owner));
-   if(completeCohort)completeCohort(labels,cohort);
+   if(completeCohort)yield* completeCohort(labels,cohort);
    const complex=cohort.some(feature=>{
     const members=feature.properties?.metadata?.source_member_ids;
     return Array.isArray(members)&&(members.some(member=>!originals.has(member))
@@ -1171,12 +1183,12 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
  // accepted checkout supplies the checker. Original source pins still bind the
  // complete reviewed body; a separate prior merge adds no scientific authority.
  const keys=(v,list)=>v&&typeof v==='object'&&!Array.isArray(v)&&Object.keys(v).sort().join(',')===list.split(',').sort().join(',');
- const readAdopted=(pin,label)=>{
+ const readAdopted=function*(pin,label){
   pinCheck(pin);
   const current=reader.descriptor(pin.path,reader.version);
   demand(current.mode===pin.mode&&current.git_blob_oid===pin.git_blob_oid&&current.bytes===pin.bytes,
    label+' differs from selected candidate input');
-  return JSON.parse(read(pin));
+  return (yield* json(pin));
  };
  const pointer=(body,name)=>{
   demand(typeof name==='string'&&name.startsWith('/')&&!/~(?![01])/.test(name),'Invalid adopted evidence pointer');
@@ -1195,7 +1207,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
  if(evidence.canonical_seam_views!==undefined){
   demand(!revised&&evidence.adopted_provider_families===undefined,
    'Canonical seam views require retained original source families');
-  const data=readAdopted(evidence.canonical_seam_views,'Canonical seam views');
+  const data=(yield* readAdopted(evidence.canonical_seam_views,'Canonical seam views'));
   demand(keys(data,'version,kind,method,records')&&data.version===1
    &&data.kind==='retained-periodic-native-views-v1'
    &&keys(data.method,'pin,export')&&data.method.export==='canonical'
@@ -1241,7 +1253,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
  const adoptedFamilies=new Map();
  if(evidence.adopted_provider_families!==undefined){
   demand(!revised,'Revised source evidence cannot combine provider-family adoption');
-  const data=readAdopted(evidence.adopted_provider_families,'Adopted provider families');
+  const data=(yield* readAdopted(evidence.adopted_provider_families,'Adopted provider families'));
   demand(keys(data,'version,kind,families')&&data.version===1&&data.kind==='adopted-provider-source-families-v1'
    &&Array.isArray(data.families)&&data.families.length>0,'Incomplete adopted provider families');
   for(const family of data.families){
@@ -1255,7 +1267,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
    const declared=evidence.families.filter(item=>item.source_id===family.source_id);
    demand(declared.length===1&&same(declared[0].parts,[family.product]),
     'Adopted provider product differs from complete family read role');
-   const product=JSON.parse(read(family.product));
+   const product=(yield* json(family.product));
    demand(product.type==='FeatureCollection'&&Array.isArray(product.features)
     &&product.features.length===family.feature_count,'Incomplete adopted provider member roster');
    const originals=new Map(),ordinals=new Map(),bindings=new Map();
@@ -1294,7 +1306,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
  }
  const datedCentres=[];
  if(dated){
-  const data=readAdopted(evidence.dated_land_support,'Dated land support');
+  const data=(yield* readAdopted(evidence.dated_land_support,'Dated land support'));
   demand(keys(data,'version,kind,native_contract_sha256,provenance,records')&&data.version===1
    &&data.kind==='adopted-dated-native-centre-land-support-v1'
    &&data.native_contract_sha256===valueSha(evidence.native_contract)
@@ -1474,11 +1486,12 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
  }
  // Optional adopted source applicability retains every original negative.
  const completeOriginalSources=new Map();
- const readCompleteSource=(parts,record)=>{
+ const readCompleteSource=function*(parts,record){
   demand(record&&Array.isArray(parts)&&parts.length===record.parts.length,
    'Missing complete original source family');
   const identity=valueSha({parts,record});
   if(completeOriginalSources.has(identity))return completeOriginalSources.get(identity);
+  const product=yield {kind:'source',parts,record,read:()=>{
   const pieces=parts.map((pin,i)=>{
    const expected=record.parts[i];demand(pin.path===expected.path&&pin.sha256===expected.sha256
     &&pin.bytes===expected.bytes&&pin.decoded_bytes===expected.uncompressed_bytes
@@ -1487,6 +1500,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   const raw=Buffer.concat(pieces);demand(raw.length===record.original_bytes&&sha(raw)===record.original_sha256,
    'Whole original consumed source product differs');
   const product=JSON.parse(raw);demand(product.features?.length===record.feature_count,'Incomplete original source feature roster');
+  return product;}};
   completeOriginalSources.set(identity,product);return product;
  };
 
@@ -1503,7 +1517,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
    'Duplicate, positive or invalid territorial source family');seen.add(family.source_id);
    const matches=catalogue.products.filter(record=>record.key===family.source_id);
    demand(matches.length===1,'Missing unique complete territorial source family');
-   const product=readCompleteSource(family.parts,matches[0]);
+   const product=(yield* readCompleteSource(family.parts,matches[0]));
    demand(product.type==='FeatureCollection'&&product.features.length>0,'Incomplete territorial source collection');
    for(const [feature_ordinal,feature]of product.features.entries()){
     const shape=feature.properties?.shapeID,source_id=family.source_id+':'+shape;
@@ -1535,7 +1549,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
  // the native operator receives only exact member/operand/centre identities.
  const territorialApplicability=[],territorialContextHits=[],territorialOperands=new Map();
  if(evidence.territorial_applicability!==undefined){
-  const data=readAdopted(evidence.territorial_applicability,'Territorial applicability');
+  const data=(yield* readAdopted(evidence.territorial_applicability,'Territorial applicability'));
   demand(keys(data,'version,kind,provenance,records')&&data.version===1
    &&data.kind==='adopted-native-territorial-applicability-v1'
    &&Array.isArray(data.provenance)&&data.provenance.length>0
@@ -1554,8 +1568,8 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
      const matches=catalogue.products.filter(product=>product.parts.length===pins.length
       &&product.parts.every((part,i)=>part.path===pins[i].path&&part.sha256===pins[i].sha256));
      demand(matches.length===1,'Missing unique complete territorial source family');
-     loaded.set(identity,readCompleteSource(pins,matches[0]));
-    }else loaded.set(identity,JSON.parse(read(item.pin)));
+     loaded.set(identity,(yield* readCompleteSource(pins,matches[0])));
+    }else loaded.set(identity,(yield* json(item.pin)));
    }
    provenance.set(item.id,{...item,body:loaded.get(identity)});
   }
@@ -1606,8 +1620,8 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
  // The opt-in executing-tree adoption binds the whole raw snapshot, explicit
  // stable crosswalk and bounded original-key choice; it does not replace base
  // county geometry or relax the v1/v2 original-source join.
- const revision = revised ? readAdoptedOsmRevision({evidence,proposed,owners,latitudes,
-  read,readAdopted,reader,physicalInputs,keys}) : null;
+ const revision = revised ? yield* readAdoptedOsmRevision({evidence,proposed,owners,latitudes,
+  read,json,readAdopted,reader,physicalInputs,keys}) : null;
  const checked=new Set(),families=new Set(),physicalContextHits=[],providerCompetitors=[],providerVetoes=[],splitCompetitors=[];
  for(const [source_family,adopted]of adoptedFamilies)for(const [source_id,feature]of adopted.originals){
   const bound=adopted.bindings.has(source_id);
@@ -1625,7 +1639,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   const record=catalogue.products.find(product=>product.key===family.source_id);
   demand(revised?same(family.parts,[revision.stagePin])&&family.source_id===revision.sourceId
    :adopted||record&&family.parts.length===record.parts.length,'Missing complete original or adopted source family');
-  const product=adopted?.product??(revised?revision.product:readCompleteSource(family.parts,record));
+  const product=adopted?.product??(revised?revision.product:(yield* readCompleteSource(family.parts,record)));
   const originals=adopted?.originals??new Map();
   if(!adopted)for(const feature of product.features){
    const sourceId=revised?feature.id:feature.properties?.shapeID;
@@ -1692,7 +1706,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   for(const [id,feature] of nativeOriginals){
    if(adopted&&!adopted.bindings.has(id))continue;
    if(!coordinateBounds(feature.geometry).some(part=>bounds.some(box=>intersects(part,box))))continue;
-   const split=!adopted&&!revised?(complexSourceCompetitor(id,originals)??splitCompetitor(id,originals)):null;
+   const split=!adopted&&!revised?((yield* complexSourceCompetitor(id,originals))??splitCompetitor(id,originals)):null;
    if(split){
     splitCompetitors.push(split);
     splitVetoes.push({...split,geometry:feature.geometry});
@@ -1707,7 +1721,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   for(const [id,original]of externalOriginals){
    if(!complexContexts.get(originals)?.reverse.has(id))continue;
    demand(!originals.has(id),'External original collides with a complete source family');
-   const split=complexSourceCompetitor(id,originals);
+   const split=(yield* complexSourceCompetitor(id,originals));
    demand(split,'External original lacks complete negative ancestry');
    if(!usedExternalOriginals.has(id))splitCompetitors.push({...split,
     source_family:'natural-earth:adm1',feature_ordinal:original.feature_ordinal});
