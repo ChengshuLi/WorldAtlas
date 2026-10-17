@@ -73,7 +73,7 @@ for f in country['features']:
   a,b,c,d=g.bounds;xy=shapely.get_coordinates(points);box=(xy[:,0]>=a)&(xy[:,0]<=c)&(xy[:,1]>=b)&(xy[:,1]<=d);invalid_countries.append({'code':code,'bounds':list(g.bounds),'candidate_centres_in_bounds':int(np.count_nonzero(box))});assert not np.any(box),'Invalid country source intersects candidate bounds';continue
  idx=np.flatnonzero(shapely.covers(g,points));n=len(idx)
  if n:country_checks.append({'code':code,'name':f['properties'].get('ADMIN'),'cells':n})
- if n and code!='PNG':foreign_features.append(f);foreign_keys.update(int(i) for i in idx)
+ if n and code!='EST':foreign_features.append(f);foreign_keys.update(int(i) for i in idx)
 # Authenticate explanatory methods and full original membership without replaying old preparation.
 methods={p:read(p).decode() for p in ['scripts/semantic-locations.py','scripts/geographic-regions.py','scripts/rebuild-framework.py']};assert 'union_all([geoms[i] for i in indices])' in methods['scripts/semantic-locations.py'];semantic=js('data/semantic-report.json');hierarchy=js('data/hierarchy.json');parents=[x for x in hierarchy if x['id'] in {o['province_id'] for o in owners.values()}];decisions=js('data/geographic-decisions/oceania.json');metadata=js('data/administrative-sources.json')
 stages=[];checks=[];aggregate_checks=[]
@@ -82,15 +82,15 @@ for index,o in sorted(owners.items()):
  if len(atoms)>1:
   change=next(c for c in semantic['changes'] if c['id']==o['id']);assert set(atoms)==set(m['source_member_ids'])==set(change['replaces']) and len(atoms)==len(m['source_member_ids'])==len(change['replaces'])
   scope='Whole explicit source-member city aggregate; original construction joins existing member geometries, not a presumed contemporary municipal boundary.'
-  union=shapely.union_all([shape(sources['gb:EST:ADM3'][a]['geometry']) for a in atoms]);aggregate_checks.append({'id':o['id'],'name':o['name'],'source_members':atoms,'semantic_change':change,'source_union_current_symmetric_difference_degrees2':shape(t['geometry']).symmetric_difference(union).area,'scope':scope,'limit':'Squared-degree geometry difference is a method diagnostic, not physical area or current legal boundary evidence.'})
+  union=shapely.union_all([shape(sources['gb:EST:ADM2'][a]['geometry']) for a in atoms]);aggregate_checks.append({'id':o['id'],'name':o['name'],'source_members':atoms,'semantic_change':change,'source_union_current_symmetric_difference_degrees2':shape(t['geometry']).symmetric_difference(union).area,'scope':scope,'limit':'Squared-degree geometry difference is a method diagnostic, not physical area or current legal boundary evidence.'})
  else:
-  assert atoms==[o['id']] and m['source_id']=='gb:EST:ADM3' and m['reference_year']=='2019' and m['source_role']=='Local Government Areas';assert m['original_id']==sources['gb:EST:ADM3'][o['id']]['properties']['shapeID'];scope='Whole direct original '+m['source_role']+'; exact source identity is retained. '+m['selection_reason']
+  assert atoms==[o['id']] and m['source_id']=='gb:EST:ADM2' and m['reference_year']=='2017' and m['source_role']=='Municipality';assert m['original_id']==sources['gb:EST:ADM2'][o['id']]['properties']['shapeID'];scope='Whole direct original '+m['source_role']+'; exact source identity is retained. '+m['selection_reason']
  for ident in atoms:
-  assert lineage['reverse'][ident]==[index] and roster[ident]['owners']==[index];source=sources['gb:EST:ADM3'][ident]
+  assert lineage['reverse'][ident]==[index] and roster[ident]['owners']==[index];source=sources['gb:EST:ADM2'][ident]
   assert len(atoms)==1;source_name=source['properties']['shapeName'] # Raw source spelling may contain retained mojibake; identity is exact shapeID, never name matching.
   stages.append({'target':ident,'consumed':source,'selected':t})
  checks.append({'id':o['id'],'pixelIndex':index,'name':o['name'],'source_atoms':atoms,'metadata':m,'candidate_cells':sum(z-a for y,a,z,oo,ss,c in segments if oo==[index]),'scope_decision':scope,'raw_source_name':source_name,'display_name_differs':source_name!=o['name']})
-assert len(stages)==len({s['target'] for s in stages})==sum(len(o['source_atoms']) for o in owners.values())==130 and len(aggregate_checks)==0
+assert len(stages)==len({s['target'] for s in stages})==sum(len(o['source_atoms']) for o in owners.values())==90 and len(aggregate_checks)==0
 rows=collections.defaultdict(list)
 for y,a,z,o,s,c in segments:rows[y].append([a,z,o[0]])
 for y,runs in rows.items():
