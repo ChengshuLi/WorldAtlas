@@ -16,7 +16,11 @@ const canonical=value=>{
  if(!((value===null||['string','number','boolean'].includes(typeof value))
   &&(typeof value!=='number'||Number.isFinite(value))))throw new CanonicalValueError('Nonfinite/missing/non-JSON canonical value');return value;
 };
-const freeze=value=>{if(value&&typeof value==='object'){Object.values(value).forEach(freeze);Object.freeze(value);}return value;};
+const freeze=value=>{
+ const pending=[value];while(pending.length){const item=pending.pop();if(!item||typeof item!=='object'||Object.isFrozen(item))continue;
+  Object.freeze(item);for(const child of Object.values(item))pending.push(child);
+ }return value;
+};
 
 // Frame complete scalar/metadata values, delegating their syntax and Unicode /
 // number semantics to JSON.parse. Domain arrays below frame each triple, never
@@ -199,11 +203,34 @@ async function admitStore({chunks,expected,directory,size,ownerCount,rowField='r
   const coordinateDescriptors=new WeakMap(),coordinateIndices=[];
   const coordinateIndex=depth=>coordinateIndices[depth]??=(new Writer(open('coordinates-'+depth+'.bin')));
   const metadataBytes=value=>{
+   // Raw syntax admits deeply nested ignored JSON too. Use an explicit stack,
+   // avoiding both recursive cloning and JSON.stringify's container depth cap.
+   if(rawSyntaxOnly){
+    const parts=['['],references=[],stack=[{value,at:null}];
+    const reference=(at,descriptor)=>{const path=[];for(let p=at;p;p=p.parent)path.push(p.key);references.push([path.reverse(),descriptor]);parts.push('null');};
+    while(stack.length){
+     const frame=stack.at(-1);
+     if(frame.container){
+      if(frame.next===frame.length){parts.push(frame.array?']':'}');stack.pop();continue;}
+      const key=frame.array?frame.next:frame.keys[frame.next];frame.next++;if(frame.next>1)parts.push(',');if(!frame.array)parts.push(JSON.stringify(key),':');
+      stack.push({value:frame.value[key],at:{parent:frame.at,key}});continue;
+     }
+     const item=frame.value,descriptor=item&&typeof item==='object'?coordinateDescriptors.get(item):undefined;
+     if(descriptor){reference(frame.at,descriptor);stack.pop();continue;}
+     if(typeof item==='number'&&(!Number.isFinite(item)||Object.is(item,-0))){reference(frame.at,Object.is(item,-0)?null:{nonfinite:item>0?1:-1});stack.pop();continue;}
+     if(item&&typeof item==='object'){
+      frame.container=true;frame.array=Array.isArray(item);frame.keys=frame.array?null:Object.keys(item);frame.length=frame.array?item.length:frame.keys.length;frame.next=0;
+      parts.push(frame.array?'[':'{');continue;
+     }
+     parts.push(JSON.stringify(item));stack.pop();
+    }
+    for(const reference of references)parts.push(',',JSON.stringify(reference));parts.push(']');
+    return Buffer.from(parts.join(''));
+   }
    const references=[];
    const encode=(item,at=[])=>{
     const descriptor=item&&typeof item==='object'?coordinateDescriptors.get(item):undefined;
     if(descriptor){references.push([at,descriptor]);return null;}
-    if(rawSyntaxOnly&&typeof item==='number'&&!Number.isFinite(item)){references.push([at,{nonfinite:item>0?1:-1}]);return null;}
     if(Object.is(item,-0)){references.push([at,null]);return 0;}
     if(Array.isArray(item))return item.map((child,i)=>encode(child,[...at,i]));
     if(item&&typeof item==='object'){const out=Object.create(null);for(const key of Object.keys(item))out[key]=encode(item[key],[...at,key]);return out;}

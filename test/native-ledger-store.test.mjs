@@ -272,3 +272,29 @@ test('raw metadata authenticates complete malformed bodies before syntax refusal
   assert.deepEqual(fs.readdirSync(directory),[]);
  }
 });
+
+test('raw ignored nesting has no extra recursive freeze or spill-serialization depth limit',async t=>{
+ const {admitNativeMetadataStore}=await import('../scripts/native-patch-store.mjs');const directory=temporary(t),depth=5000;
+ for(const spill of [false,true])for(const object of [false,true]){
+  const item='{"ignored":'+(object?'{"constructor":':'[').repeat(depth)+'-1e400'+(object?'}':']').repeat(depth)+'}';
+  const body=Buffer.from(spill?'{"inventory":['+Array(33).fill(item).join(',')+']}':item);JSON.parse(body);
+  const store=await admitNativeMetadataStore({directory,chunks:chunks(body,4096),metadataArrays:['inventory'],expected:{bytes:body.length,sha256:hash(body)}});
+  let value=(spill?store.metadata.inventory.at(32):store.metadata).ignored;
+  for(let i=0;i<depth;i++){assert(Object.isFrozen(value));value=object?value.constructor:value[0];}assert.equal(value,-Infinity);
+  store.close();assert.deepEqual(fs.readdirSync(directory),[]);
+ }
+});
+
+test('raw metadata preserves own special keys and freezes without consuming spilled values',async t=>{
+ const {admitNativeMetadataStore}=await import('../scripts/native-patch-store.mjs');const directory=temporary(t);
+ const item='{"__proto__":{"old":1},"__proto__":{"coordinates":['+Array(40).fill('[-0,1e400]').join(',')+']},"constructor":{"prototype":-0},"prototype":{"constructor":-1e400}}';
+ const body=Buffer.from('{"inventory":['+Array(33).fill(item).join(',')+']}'),literal=JSON.parse(item);
+ const read=fs.readSync;let reads=0;fs.readSync=(...args)=>{reads++;return read(...args);};let store;
+ try{store=await admitNativeMetadataStore({directory,chunks:chunks(body),metadataArrays:['inventory'],expected:{bytes:body.length,sha256:hash(body)}});assert.equal(reads,0,'freezing must not decode any spilled value');}finally{fs.readSync=read;}
+ const value=store.metadata.inventory.at(32);
+ assert.equal(Object.getPrototypeOf(value),Object.prototype);assert(Object.hasOwn(value,'__proto__'));
+ assert.deepEqual(Object.keys(value),Object.keys(literal));assert.equal(Object.getPrototypeOf(value.constructor),Object.prototype);
+ assert(Object.is(value.constructor.prototype,-0));assert.equal(value.prototype.constructor,-Infinity);
+ assert.deepEqual([...value.__proto__.coordinates],literal.__proto__.coordinates);
+ assert.equal(Object.prototype.old,undefined);store.close();assert.deepEqual(fs.readdirSync(directory),[]);
+});
