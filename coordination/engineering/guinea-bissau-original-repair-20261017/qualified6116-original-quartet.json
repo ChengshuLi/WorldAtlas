@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "kind": "original-qualified-authority-handoff",
+  "issue": "https://github.com/ChengshuLi/WorldAtlas/issues/2434",
+  "package_id": "gb-GNB-ADM2--repair-evaluation",
+  "original_cells": 6117,
+  "original_intervals": 1878,
+  "original_owners": 20,
+  "complete_owner_source_atoms": 20,
+  "qualified_cells": 6116,
+  "components": 20,
+  "literal_ledger_rows": 20,
+  "held_cells": 1,
+  "new_accepted_map_cells": 0,
+  "executed_accepted_code": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "58a628f48f23884b0a86b0fd1b8b963a03f4ec39",
+        "path": "coordination/engineering/guinea-bissau-original-repair-20261017/native-authority-supported-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "2892908806d7ef1b9aaa63af3b6043551d2f0fcf",
+        "bytes": 749,
+        "sha256": "455b38790d9245009c58eac6c374ac08ebd481470c4b8a97a6d496df097c84bb"
+      },
+      "source_authority": {
+        "commit": "58a628f48f23884b0a86b0fd1b8b963a03f4ec39",
+        "path": "coordination/engineering/guinea-bissau-original-repair-20261017/native-authority-supported-001/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "6ab4307d15f41f234da1b24efb8e3eab0598c171",
+        "bytes": 752,
+        "sha256": "fd527c68052d6a4929114a9720ee149cd764aaaed532c3e6c2871cf816b9ed52"
+      },
+      "ledger": {
+        "commit": "58a628f48f23884b0a86b0fd1b8b963a03f4ec39",
+        "path": "coordination/engineering/guinea-bissau-original-repair-20261017/native-authority-supported-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "0c9c118f64f380dc9fa59301668bebef0de0d074",
+        "bytes": 104274,
+        "sha256": "9a8f69a04b8b4b62683aea81777232a18d3e8e086af949e7a76d58a8fae88546"
+      },
+      "native_patch": {
+        "commit": "9a4a9d44af9e010b4b61a2b3e8f2a4e34ee2f990",
+        "path": "coordination/engineering/guinea-bissau-original-repair-20261017/supported-inputs-001/native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "b92fcc22802d12ef91312ca4bb20482342463f44",
+        "bytes": 54769,
+        "sha256": "f4089c06ad1c8846a2d6d73024786d30328484ea92763d7825f8d0523d023aea"
+      }
+    }
+  ],
+  "source_evidence": {
+    "commit": "9a4a9d44af9e010b4b61a2b3e8f2a4e34ee2f990",
+    "path": "coordination/engineering/guinea-bissau-original-repair-20261017/supported-inputs-001/source-evidence.json",
+    "mode": "100644",
+    "git_blob_oid": "76935fae3c6f8dbddaa4c5e5ec75118df33efdfd",
+    "bytes": 154071,
+    "sha256": "55d5afa7bf65a732487e6ed01c29ed6ad5be4c63567a2721498d6a402ef3b6a9"
+  },
+  "original_scope_partition": {
+    "commit": "9a4a9d44af9e010b4b61a2b3e8f2a4e34ee2f990",
+    "path": "coordination/engineering/guinea-bissau-original-repair-20261017/supported-inputs-001/original-scope-partition.json",
+    "mode": "100644",
+    "git_blob_oid": "260661abc56dd870a516bc3e2f334f26a36a50fe",
+    "bytes": 3330,
+    "sha256": "a5450eb01325cc88fe37cfbf7c9321cf5d14832140828084da68772fed53bd88"
+  },
+  "held_original": {
+    "commit": "9a4a9d44af9e010b4b61a2b3e8f2a4e34ee2f990",
+    "path": "coordination/engineering/guinea-bissau-original-repair-20261017/supported-inputs-001/held-original.json",
+    "mode": "100644",
+    "git_blob_oid": "268200e86b79ee8f9eeaf06907f0cb7de8d18b46",
+    "bytes": 85,
+    "sha256": "3904174a42468c7ce63b975d4c4545fdb409d25284241b9002cce0d9eda17ea8"
+  },
+  "limitations": [
+    "Native qualification is source-relative and is not present-day legal boundary or regional hierarchy approval.",
+    "Current owner-zero, selected conservation, emitted consumer checks and production publication remain pending on the parent coordinated delivery.",
+    "The original single held Pitche key y122077 x[121072,121073) owner20898 remains unchanged and excluded from positive authority."
+  ]
+}
