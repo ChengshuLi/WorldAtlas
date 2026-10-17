@@ -60,3 +60,10 @@ ownership/evidence errors before review, while long regressions and substantive
 independent review may proceed in parallel. The guide supplies practical helper and
 command details, meaningful adverse cases and existing-chat refresh text; author
 preflight does not replace independently derived reviewer expectations.
+
+For a reviewed change with a known consumer closure, the normal merge request may
+supply the exact base/head-bound `reviewed_tests` argument described in
+[Run the reviewed consumers](WORKER_COORDINATION.md#run-the-reviewed-consumers).
+Use actual transitive, child-process and Git-object fixture operands. This removes
+unrelated regression workers and their acquisition; applicable package, native,
+source and emitted checks remain compulsory. Unknown impact keeps normal routing.
