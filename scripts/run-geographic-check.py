@@ -212,7 +212,8 @@ def selected_joint(repo, baseline, candidate, *, trusted=None, checkpoint_destin
         if native.get('lost_or_reassigned_cells') != 0 or native.get('intervals') != []:
             raise ValueError('Successful native comparison contradicts conservation results')
         if checkpoint_destination is not None:
-            issued['checkpoint'] = products.retain_checkpoint_products(destination, checkpoint_destination, issued)
+            with stage_timing('selected-checkpoint-retention'):
+                issued['checkpoint'] = products.retain_checkpoint_products(destination, checkpoint_destination, issued)
         return issued
 
 
