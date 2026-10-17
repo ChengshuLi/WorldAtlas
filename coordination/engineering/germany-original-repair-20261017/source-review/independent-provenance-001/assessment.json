@@ -1,0 +1,27 @@
+{
+  "reviewer": "01a14b7a-618c-7470-8d82-dbc7ac4c7037",
+  "checkpoint": "eb06af616eb876b612fd433d81d632981642799b",
+  "license_source": "https://www.govdata.de/dl-de/by-2-0",
+  "license_assessment": "Historical retained license agrees with current official terms permitting reuse, modification and transmission with provider, dataset URI, license URI and changed-data notice. No concrete rights conflict found.",
+  "official_geometry_assessment": "All428 upstream records match official2021 EPSG25832 geometry after transformation, including complete cyclic ring correspondence, maximum1.3210133638211038e-08degrees.",
+  "retained_processing_assessment": "Retained source GeoJSON is simplified, including some ring loss. Full shape ID/ordered name mapping and bidirectional vertex-to-boundary distance are retained; all54same-name duplicate records are geometrically closer to matched upstream record than alternative. This is identity/role verification, not exact geometry equality.",
+  "consumed_roles": {
+    "4": 77,
+    "2": 23
+  },
+  "water_only_owners": [
+    16266,
+    16269,
+    16286,
+    16307,
+    16503
+  ],
+  "source_stage": "Exact100literal atoms,82owners,27555original keys and7499intervals independently checked. Selected base geometry may differ from source, as expected for source-relative repair; no exact equality requirement is imposed.",
+  "pending": [
+    "Independent selected ancestry and full original overlap checks",
+    "Complete physical/source diagnostics and foreign negatives",
+    "Genuine native authority and supported/held partition",
+    "Final immutable exact-head review"
+  ],
+  "approved_for_delivery": false
+}
