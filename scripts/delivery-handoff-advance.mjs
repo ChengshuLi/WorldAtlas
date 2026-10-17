@@ -126,6 +126,7 @@ function constructOriginalAuthority(reader, inputs) {
     return {products:{'original-rule-preimage.json':valueBytes(preimage),'authority-binding.json':valueBytes(binding)},
       component_ids:proof.source_scope_ids,ledger_rows:proof.original_ledger.rows,rule_sha256:valueSha(preimage),limitations:proof.limitations,
       ...(Object.hasOwn(proof,'physical_context_hits') ? {physical_context_hits:proof.physical_context_hits} : {}),
+      ...(Object.hasOwn(proof,'split_source_competitors') ? {split_source_competitors:proof.split_source_competitors} : {}),
       ...(Object.hasOwn(proof,'territorial_contacts') ? {territorial_contacts:proof.territorial_contacts} : {})};
   }
   const binding = deriveOriginalBinding(reader, inputs);
