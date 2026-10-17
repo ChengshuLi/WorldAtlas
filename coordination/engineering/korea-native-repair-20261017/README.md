@@ -18,4 +18,4 @@ Whole-source staging completed in 7.49 seconds; the complete original-negative s
 
 The initial physical command was refused by the plain-Node guard before science because injected Node environment options were present. Retrying with those options removed succeeded. No source result was bypassed.
 
-Twelve real adverse invocations across three preparation methods rejected existing outputs, dangling output symlinks, invalid commit identifiers and methods absent from the pinned commit, without publication or sentinel changes. Full application and emitted-consumer tests are not claimed. Independent exact-head source/native review is still required.
+Twenty real adverse invocations across five preparation methods rejected existing outputs, dangling output symlinks, invalid commit identifiers and methods absent from the pinned commit, without publication or sentinel changes. Full application and emitted-consumer tests are not claimed. Independent exact-head source/native review is still required.

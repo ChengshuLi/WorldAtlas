@@ -3,7 +3,7 @@ import pathlib,subprocess,sys,tempfile,unittest
 W=pathlib.Path(sys.argv.pop(1)).resolve();C=sys.argv.pop(1);P=W/'coordination/engineering/korea-native-repair-20261017'
 class BoundaryControls(unittest.TestCase):
  def test_refusals(self):
-  for name in ['prepare-stage.py','screen-foreign.py','prepare-native-config.py']:
+  for name in ['prepare-stage.py','screen-foreign.py','prepare-native-config.py','reconcile-authority.py','verify-original-scope.py']:
    for case in ['existing-output','dangling-output','invalid-commit','method-not-at-commit']:
     with self.subTest(method=name,case=case),tempfile.TemporaryDirectory(prefix='kor-controls-')as d:
      root=pathlib.Path(d);out=root/'output';commit=C
