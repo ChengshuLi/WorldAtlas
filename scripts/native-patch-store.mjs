@@ -193,21 +193,28 @@ async function admitStore({chunks,expected,directory,size,ownerCount,rowField='r
   // stay literal; long rings never become a complete JS coordinate graph.
   const coordinateDescriptors=new WeakMap(),coordinateIndices=[];
   const coordinateIndex=depth=>coordinateIndices[depth]??=(new Writer(open('coordinates-'+depth+'.bin')));
-  const encodeMetadata=value=>{
-   const descriptor=value&&typeof value==='object'?coordinateDescriptors.get(value):undefined;
-   if(descriptor)return [3,descriptor];
-   if(Array.isArray(value))return [2,value.map(encodeMetadata)];
-   if(value&&typeof value==='object')return [1,Object.keys(value).map(key=>[key,encodeMetadata(value[key])])];
-   canonical(value);return Object.is(value,-0)?[4]:[0,value];
+  const metadataBytes=value=>{
+   const references=[];
+   const encode=(item,at=[])=>{
+    const descriptor=item&&typeof item==='object'?coordinateDescriptors.get(item):undefined;
+    if(descriptor){references.push([at,descriptor]);return null;}
+    if(Object.is(item,-0)){references.push([at,null]);return 0;}
+    if(Array.isArray(item))return item.map((child,i)=>encode(child,[...at,i]));
+    if(item&&typeof item==='object'){const out=Object.create(null);for(const key of Object.keys(item))out[key]=encode(item[key],[...at,key]);return out;}
+    return canonical(item);
+   };
+   const body=encode(value);return Buffer.from(JSON.stringify([body,...references]));
   };
-  const decodeMetadata=node=>{
-   if(node[0]===3)return coordinateSequence(node[1]);
-   if(node[0]===4)return -0;
-   if(node[0]===2)return Object.freeze(node[1].map(decodeMetadata));
-   if(node[0]===1){const value={};for(const [key,child]of node[1])Object.defineProperty(value,key,{value:decodeMetadata(child),enumerable:true});return Object.freeze(value);}
-   return node[1];
+  const decodeMetadata=encoded=>{
+   let value=encoded[0];
+   for(let i=1;i<encoded.length;i++){
+    const [at,descriptor]=encoded[i],replacement=descriptor===null?-0:coordinateSequence(descriptor);
+    if(!at.length){value=replacement;continue;}
+    let parent=value;for(const key of at.slice(0,-1))parent=parent[key];
+    Object.defineProperty(parent,at.at(-1),{value:replacement,enumerable:true,writable:true,configurable:true});
+   }
+   return freeze(value);
   };
-  const metadataBytes=value=>Buffer.from(JSON.stringify(encodeMetadata(value)));
   function coordinateSequence(descriptor){
    const {depth,start,count}=descriptor;
    const entryAt=ordinal=>{
@@ -243,7 +250,7 @@ async function admitStore({chunks,expected,directory,size,ownerCount,rowField='r
    if(byte!==91)return input.value();
    if(!coordinates){const values=[];await array(input,async()=>values.push(await metadataNode(false,depth)));return values;}
    const values=[],index=coordinateIndex(depth),start=index.position;let count=0,spilled=false,valueError;
-   const append=value=>{let body;try{body=metadataBytes(value);}catch(error){valueError??=error.message;body=Buffer.from('[0,null]');}const record=Buffer.allocUnsafe(16);
+   const append=value=>{let body;try{body=metadataBytes(value);}catch(error){valueError??=error.message;body=Buffer.from('[null]');}const record=Buffer.allocUnsafe(16);
     record.writeBigUInt64LE(BigInt(vectors.position),0);record.writeBigUInt64LE(BigInt(body.length),8);vectors.append(body);index.append(record);};
    await array(input,async()=>{const value=await metadataNode(true,depth+1);count++;
     if(!spilled&&count<=32){values.push(value);return;}

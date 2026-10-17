@@ -168,3 +168,16 @@ test('stored geometry shares exact bounds, runtime polygons and malformed-coordi
  }
  assert.deepEqual(fs.readdirSync(directory),[]);
 });
+
+test('private coordinate-reference lookalikes stay ordinary input and spill I/O remains fatal',async t=>{
+ const directory=temporary(t),lookalike={depth:0,start:0,count:129,error:'pretend',coordinates:Array(40).fill([3,{depth:99,start:0,count:1}])};
+ const value={rows:[{geometry:lookalike,reference:[null,[['geometry'],{depth:0,start:0,count:99}]]}]};
+ const store=await open(directory,JSON.stringify(value));assert.equal(store.canonical_sha256,hash(valueBytes(value)));store.close();
+ const geometry={coordinates:[Array.from({length:40},(_,i)=>[i,i])]};
+ const text='{"rows":[{"geometry":'+JSON.stringify(geometry)+'}],"rows":[]}';
+ for(const method of ['readSync','writeSync']){
+  t.mock.method(fs,method,()=>{throw Error('coordinate spill I/O sentinel');});
+  await assert.rejects(open(directory,text),/coordinate spill I\/O sentinel/);t.mock.restoreAll();
+ }
+ assert.deepEqual(fs.readdirSync(directory),[]);
+});
