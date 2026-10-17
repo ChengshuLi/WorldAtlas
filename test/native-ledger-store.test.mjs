@@ -334,3 +334,31 @@ test('coordinate windows bound working reads without limiting complete input len
  assert(calls<=10,'complete pair scan should use bounded windows rather than per-record reads');assert(max<=65536);
  store.close();assert.deepEqual(fs.readdirSync(directory),[]);
 });
+
+for(const kind of ['coordinates','root metadata'])test('private '+kind+' ranges refuse unsafe or foreign extents before allocation',async t=>{
+ const directory=temporary(t);
+ for(const [field,value] of [['length',9007199254740993n],['offset',9007199254740993n],['length',0xffffffffffffffffn],['length',0n],['offset',1000000n],['length',1000000n]]){
+  const store=await open(directory,JSON.stringify({scope_ids:['A','B'],rows:[{geometry:{coordinates:Array.from({length:40},()=>[1,2])}}]}));
+  const sequence=kind==='coordinates'?store.componentMetadata(store.componentAt(0)).geometry.coordinates:store.metadata.scope_ids;
+  const root=path.join(directory,fs.readdirSync(directory)[0]),file=path.join(root,kind==='coordinates'?'coordinates-0.bin':'vectors-index.bin');
+  const bytes=fs.readFileSync(file);bytes.writeBigUInt64LE(value,field==='offset'?0:8);fs.writeFileSync(file,bytes);
+  const alloc=Buffer.allocUnsafe;let excessive=false;Buffer.allocUnsafe=size=>{if(size>65536){excessive=true;throw Error('advertised allocation reached');}return alloc(size);};
+  try{
+   assert.throws(()=>sequence.at(0),/Invalid private metadata vector range/);
+   assert.throws(()=>[...sequence],/Invalid private metadata vector range/);assert.equal(excessive,false);
+  }finally{Buffer.allocUnsafe=alloc;store.close();}
+  assert.deepEqual(fs.readdirSync(directory),[]);
+ }
+});
+
+test('iterator-local body windows preserve interleaved values and larger individual records',async t=>{
+ const directory=temporary(t),coordinates=Array.from({length:9000},(_,i)=>i===4100?'x'.repeat(70000):[i,i+1]);
+ const store=await open(directory,JSON.stringify({rows:[{geometry:{coordinates}}]})),sequence=store.componentMetadata(store.componentAt(0)).geometry.coordinates;
+ const a=sequence[Symbol.iterator](),b=sequence[Symbol.iterator](),first=a.next().value,second=b.next().value;
+ for(let i=1;i<coordinates.length;i++){
+  assert.deepEqual(a.next().value,coordinates[i]);
+  if(i<4103)assert.deepEqual(b.next().value,coordinates[i]);
+ }
+ assert.deepEqual(first,coordinates[0]);assert.deepEqual(second,coordinates[0]);assert.equal(a.next().done,true);
+ assert.deepEqual(sequence.at(8192),coordinates[8192]);store.close();assert.throws(()=>b.next(),/closed/);assert.deepEqual(fs.readdirSync(directory),[]);
+});
