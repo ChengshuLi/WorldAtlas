@@ -824,6 +824,13 @@ function readSourceTargetBody(reader,p) {
 function readSourceOperationStages(reader, membership) {
  const stages=membership.operation_stages;
  demand(Array.isArray(stages)&&stages.length>0,'Missing original source operation stages');
+ // Same-body membership aliases are allowed for custody, but their claimed
+ // ancestry is not an authority. Bind the consumed lineage to the immutable
+ // history actually being evaluated before trusting any earlier stage link.
+ if(membership.lineage.commit!==reader.version){
+  try{reader.git('merge-base','--is-ancestor',membership.lineage.commit,reader.version);}
+  catch{throw Error('Original source operation lineage is not an ancestor of authenticated consumed history');}
+ }
  const versions=new Set(),operations=new Map();
  const exact=p=>{
   pinCheck(p);const d=reader.descriptor(p.path,p.commit);

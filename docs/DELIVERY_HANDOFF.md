@@ -888,9 +888,12 @@ whole immutable pins to the **original earlier canonical output stages**.
 Each stage pins `data/world-index.json`, `data/semantic-report.json` and every
 ordered `data/`-relative geography part in that index, all at the same commit.
 That commit must be a distinct available ancestor of the consumed membership
-lineage commit. There is no fallback to current files when a historical object
-is absent. Actual path, ordinary mode, Git OID, size, whole SHA256 and declared
-gzip decoded identity remain mandatory.
+lineage commit. The lineage commit must itself belong to the actual immutable
+consumed reader history. Equal canonical bytes at a caller-supplied commit do not
+make its alternate history authoritative: a fabricated stage followed by a
+same-body lineage alias on an unrelated branch must refuse. There is no fallback
+to current files when a historical object is absent. Actual path, ordinary mode,
+Git OID, size, whole SHA256 and declared gzip decoded identity remain mandatory.
 
 For every retired operation in a chain using these stages, its original canonical
 feature and original stage change record must independently agree with the

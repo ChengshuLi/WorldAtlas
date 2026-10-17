@@ -759,7 +759,7 @@ test('mixed provider original operation proofs retain cycle and foreign-leaf ref
 });
 
 
-test('real Git operation ancestry accepts the original publication and rejects an unrelated identical-body history',t=>{
+test('real Git operation ancestry accepts original history and rejects same-body stage and lineage aliases',t=>{
  const f=operationStageFixture(),root=fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()),'native-operation-stage-'));
  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
  const git=(...args)=>execFileSync('git',['-c','protocol.allow=never','-C',root,...args],
@@ -786,6 +786,19 @@ test('real Git operation ancestry accepts the original publication and rejects a
   for(const pin of [stage.index,stage.lineage,...stage.parts])pin.commit=unrelated;
  write('source-evidence.json',JSON.stringify(evidence));head=commit('Coherently pinned unrelated source stage');
  assert.throws(construct,/Original source operation stage is not an available ancestor/);
+ // An attacker can graft the exact selected canonical tree onto that unrelated
+ // stage and coherently repin only the lineage commit. The stage then precedes
+ // the caller alias, but neither belongs to the actual consumed history.
+ const alias=git('commit-tree',git('rev-parse',canonical+'^{tree}'),'-p',unrelated,
+  '-m','Same selected bodies on fabricated stage history');
+ assert.equal(git('rev-parse',canonical+':data/semantic-report.json'),
+  git('rev-parse',alias+':data/semantic-report.json'));
+ evidence.source_membership.lineage.commit=alias;
+ write('source-evidence.json',JSON.stringify(evidence));head=commit('Repinned same-body lineage alias');
+ assert.equal(git('merge-base','--is-ancestor',unrelated,alias),'');
+ assert.throws(()=>git('merge-base','--is-ancestor',unrelated,canonical));
+ assert.throws(()=>git('merge-base','--is-ancestor',unrelated,head));
+ assert.throws(construct,/lineage is not an ancestor of authenticated consumed history/);
 });
 
 
