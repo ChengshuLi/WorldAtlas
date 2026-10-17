@@ -826,9 +826,10 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
  // authored source-to-owner guess. Canonical parts retain the accepted members
  // and base geometry; the complete lineage exposes omitted competing owners.
  const memberOwners=new Map(), canonicalOwners=new Map(), semanticOwners=new Map();
+ let completeCohort=null;
  if(evidence.source_membership!==undefined){
   const membership=evidence.source_membership;
-  demand(membership&&Object.keys(membership).sort().join(',')==='index,lineage,parts'
+  demand(membership&&Object.keys(membership).sort().join(',')===(membership.cohort_inventory===undefined?'index,lineage,parts':'cohort_inventory,index,lineage,parts')
    &&Array.isArray(membership.parts)&&membership.parts.length>0,'Incomplete accepted source membership');
   const current=p=>{
    pinCheck(p);const actual=reader.descriptor(p.path);
@@ -865,6 +866,41 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
     demand(owners.has(feature.id)&&!canonicalOwners.has(feature.id),'Foreign or duplicate accepted membership owner');
     canonicalOwners.set(feature.id,feature);
    }
+  }
+  if(membership.cohort_inventory!==undefined){
+   const inventory=membership.cohort_inventory;
+   demand(inventory&&Object.keys(inventory).sort().join(',')==='index,parts'
+    &&inventory.index?.path==='data/macro-foundation/world-review-projection.json'
+    &&Array.isArray(inventory.parts),'Invalid complete canonical cohort inventory');
+   let rows;
+   completeCohort=(labels,cohort)=>{
+    if(!rows){
+     const projection=current(inventory.index);
+     demand(projection.version===1&&projection.kind==='current-membership-projection'
+      &&projection.current_pins?.location_index_sha256===membership.index.sha256
+      &&Number.isSafeInteger(projection.locations)&&projection.locations>0
+      &&Array.isArray(projection.location_parts)&&projection.location_parts.length>0
+      &&new Set(projection.location_parts).size===projection.location_parts.length
+      &&same(inventory.parts.map(pin=>pin.path),projection.location_parts.map(name=>'data/'+name)),
+     'Stale or incomplete canonical cohort projection inventory');
+     rows=new Map();
+     for(const pin of inventory.parts){
+      demand(Number.isSafeInteger(pin.decoded_bytes)&&pin.decoded_bytes>0&&hash(pin.decoded_sha256),
+       'Missing complete canonical cohort decoded identity');
+      const records=current(pin);demand(Array.isArray(records),'Malformed canonical cohort partition');
+      for(const record of records){
+       demand(typeof record.id==='string'&&owners.has(record.id)&&!rows.has(record.id),
+        'Foreign or duplicate canonical cohort identity');rows.set(record.id,record);
+      }
+     }
+     demand(rows.size===projection.locations&&rows.size===owners.size,
+      'Incomplete complete-owner canonical cohort inventory');
+    }
+    const expected=[...rows.values()].filter(row=>labels.has(row.owner)).map(row=>row.id).sort();
+    demand(same(expected,cohort.map(feature=>feature.id).sort())
+     &&cohort.every(feature=>rows.get(feature.id)?.owner===feature.properties.reference_owner),
+    'Incomplete complex source canonical cohort parts');
+   };
   }
  }
  const reconcile=(id,originals)=>{
@@ -922,6 +958,112 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   return {source_id: id, geometry_sha256: valueSha(original.geometry),
    descendants: [...descendants].sort().map(target_id => ({target_id,
     pixelIndex: owners.get(target_id), parent_id: canonicalOwners.get(target_id).properties.parent_id}))};
+ };
+
+ // Complex accepted membership is only a negative ancestry witness. Keep the
+ // flat positive reconciliation above unchanged; no descendant polygon stands
+ // in for any part of the complete original source veto.
+ const complexContexts=new WeakMap();
+ const complexSourceCompetitor = (id, originals) => {
+  if(owners.has(id)||evidence.targets.some(target=>target.id===id))return null;
+  const changes=memberOwners.get(id)??[];
+  const node=name=>{
+   const records=semanticOwners.get(name),change=records?.[0];
+   demand(records?.length===1&&change.id===name&&Array.isArray(change.replaces)&&change.replaces.length>0
+    &&change.replaces.every(member=>typeof member==='string'&&member)
+    &&new Set(change.replaces).size===change.replaces.length
+    &&typeof change.source==='string'&&change.source&&typeof change.basis==='string'&&change.basis,
+   'Missing, duplicate or malformed complex split-source descendant ancestry');
+   return change;
+  };
+  const atoms=(name,trail=new Set())=>{
+   demand(!trail.has(name),'Cyclic complex source ancestry');
+   if(originals.has(name))return {members:new Set([name]),sources:new Set()};
+   const change=node(name),next=new Set([...trail,name]),members=new Set(),sources=new Set([change.source]);
+   for(const member of change.replaces){const child=atoms(member,next);
+    for(const atom of child.members)members.add(atom);for(const source of child.sources)sources.add(source);}
+   return {members,sources};
+  };
+  let context=complexContexts.get(originals);
+  if(context===undefined){
+   // These labels bound a completeness inventory, never ownership authority.
+   // Seed them from direct original identities or positive joins already
+   // authenticated above, independently of the surviving negative edges.
+   const seeds=[...canonicalOwners.values()].filter(feature=>originals.has(feature.id)
+    ||feature.properties?.metadata?.source_member_ids?.some(member=>originals.has(member))
+    ||evidence.targets.some(target=>originals.has(target.id)&&(target.target_id??target.id)===feature.id));
+   const labels=new Set(seeds.map(feature=>feature.properties?.reference_owner)
+    .filter(label=>typeof label==='string'&&label));
+   const cohort=[...canonicalOwners.values()].filter(feature=>labels.has(feature.properties?.reference_owner));
+   if(completeCohort)completeCohort(labels,cohort);
+   const complex=cohort.some(feature=>{
+    const members=feature.properties?.metadata?.source_member_ids;
+    return Array.isArray(members)&&(members.some(member=>!originals.has(member))
+     ||members.length>1&&members.some(member=>(memberOwners.get(member)??[]).length!==1
+      ||owners.has(member)&&member!==feature.id));
+   });
+   context=null;
+   if(complex){
+    demand(completeCohort&&labels.size>0,'Complex source ancestry requires a complete canonical cohort inventory');
+    const reverse=new Map();
+    for(const feature of cohort){
+     let leaves;
+     if(originals.has(feature.id)&&!semanticOwners.has(feature.id))leaves=new Set([feature.id]);
+     else{
+      const change=node(feature.id),members=feature.properties?.metadata?.source_member_ids;
+      demand(Array.isArray(members)&&members.length>0&&members.every(member=>typeof member==='string'&&member)
+       &&new Set(members).size===members.length&&same([...members].sort(),[...change.replaces].sort()),
+      'Incomplete complex split-source descendant canonical member inventory');
+      leaves=new Set();for(const member of members)for(const atom of atoms(member).members)leaves.add(atom);
+     }
+     for(const atom of leaves){const terminals=reverse.get(atom)??new Set();terminals.add(feature.id);reverse.set(atom,terminals);}
+    }
+    context={reverse};
+   }
+   complexContexts.set(originals,context);
+  }
+  if(!context||!changes.some(change=>!canonicalOwners.has(change.id)
+   ||Array.isArray(change.replaces)&&change.replaces.length>1&&change.replaces.some(member=>
+    !originals.has(member)||(memberOwners.get(member)??[]).length!==1
+    ||owners.has(member)&&member!==change.id)))return null;
+  const descendants=new Set();
+  const walk=(name,trail=new Set())=>{
+   demand(!trail.has(name),'Cyclic complex source descendants');
+   if(owners.has(name)){
+    const accepted=canonicalOwners.get(name),properties=accepted?.properties,metadata=properties?.metadata,
+     change=node(name),members=metadata?.source_member_ids;
+    demand(accepted&&properties.id===name&&Array.isArray(members)&&members.length>0
+     &&members.every(member=>typeof member==='string'&&member)&&new Set(members).size===members.length
+     &&same([...members].sort(),[...change.replaces].sort()),
+    'Incomplete complex split-source descendant canonical member inventory');
+    demand(typeof properties.parent_id==='string'&&properties.parent_id
+     &&roster[owners.get(name)-1]?.province_id===properties.parent_id
+     &&metadata.location_basis===change.basis&&metadata.source_url===change.source,
+    'Complex source descendant parent or source identity differs');
+    for(const member of members){const original=atoms(member);
+     demand([...original.sources].every(source=>source===change.source),
+      'Complex source intermediate provenance differs');}
+    if(metadata.original_id!==undefined)demand(members.length===1&&originals.has(members[0])
+     &&metadata.original_id===originals.get(members[0]).properties?.shapeID,
+    'Complex source original identity differs');
+    demand((memberOwners.get(name)??[]).every(change=>change.id===name),
+     'Current complex source descendant is also retired');
+    descendants.add(name);return;
+   }
+   const edges=memberOwners.get(name)??[];
+   demand(edges.length>0&&new Set(edges.map(change=>change.id)).size===edges.length,
+    'Missing or duplicate complex source descendant');
+   for(const edge of edges){const change=node(edge.id);
+    demand(change===edge&&change.replaces.includes(name),'Conflicting complex source ancestry edge');
+    walk(change.id,new Set([...trail,name]));}
+  };
+  walk(id);
+  const observed=[...(context.reverse.get(id)??[])];
+  demand(same([...descendants].sort(),observed.sort()),
+   'Incomplete complex source canonical descendant inventory');
+  return {source_id:id,geometry_sha256:valueSha(originals.get(id).geometry),
+   descendants:[...descendants].sort().map(target_id=>({target_id,pixelIndex:owners.get(target_id),
+    parent_id:canonicalOwners.get(target_id).properties.parent_id}))};
  };
 
  // Adoption belongs to the exact selected candidate, independently of which
@@ -1405,7 +1547,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   for(const [id,feature] of nativeOriginals){
    if(adopted&&!adopted.bindings.has(id))continue;
    if(!coordinateBounds(feature.geometry).some(part=>bounds.some(box=>intersects(part,box))))continue;
-   const split=!adopted&&!revised?splitCompetitor(id,originals):null;
+   const split=!adopted&&!revised?(complexSourceCompetitor(id,originals)??splitCompetitor(id,originals)):null;
    if(split){
     splitCompetitors.push(split);
     splitVetoes.push({...split,geometry:feature.geometry});

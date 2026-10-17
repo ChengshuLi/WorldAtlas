@@ -509,7 +509,7 @@ test('finalization refuses a new identity at an accepted package path', () => {
 // Actual Git/plain-Node fixture for metadata assembly. The source interpretation
 // and native construction controls live in source-member-native-delivery.test;
 // this fixture exercises the consumed-role boundary without replaying science.
-function modernFinalizationFixture(t, {mixed = false, membership = true, dated = false, territorial = false, territorialParts = false, provider = false, seam = false} = {}) {
+function modernFinalizationFixture(t, {mixed = false, membership = true, cohort = false, dated = false, territorial = false, territorialParts = false, provider = false, seam = false} = {}) {
   const root = directory(t), owned = 'coordination/engineering/modern-finalize/';
   const git = (...args) => execFileSync('git', args, {cwd: root, stdio: ['pipe', 'pipe', 'pipe']}).toString().trim();
   git('init'); git('config', 'user.name', 'Finalizer fixture'); git('config', 'user.email', 'finalizer@example.invalid');
@@ -524,7 +524,8 @@ function modernFinalizationFixture(t, {mixed = false, membership = true, dated =
   const familyPart = inherited + 'family-part.json.gz', familyRaw = jsonBytes({type: 'FeatureCollection', features: []});
   save(familyPart, gzipSync(familyRaw));
   const memberPaths = ['data/world-index.json', 'data/semantic-report.json', 'data/geography/part-0.json'];
-  for (const name of memberPaths) save(name, {retained: name});
+  if (cohort) memberPaths.push('data/macro-foundation/world-review-projection.json', 'data/macro-foundation/world-review-locations-0.json.gz');
+  for (const name of memberPaths) save(name, name.endsWith('.gz') ? gzipSync(jsonBytes([{retained:name}])) : {retained: name});
   const incidental = inherited + 'gshhg-never-consumed.json'; save(incidental, {not_a_selected_reader_operand: true});
   const geometry = {type: 'Polygon', coordinates: [[[0, 0], [1, 0], [0, 1], [0, 0]]]};
   const baseReference = {id: 'geography:base', footprints_sha256: 'b'.repeat(64), hierarchy_sha256: 'c'.repeat(64)};
@@ -548,7 +549,8 @@ function modernFinalizationFixture(t, {mixed = false, membership = true, dated =
     targets: [{id: 'source:A', target_id: 'target'}],
     families: [{source_id: 'source', parts: [{...pin(familyPart), decoded_bytes: familyRaw.length, decoded_sha256: digest(familyRaw)}]}],
     native_contract: {incidental_reproducer_operand: pin(incidental)},
-    ...(membership ? {source_membership: {index: pin(memberPaths[0]), lineage: pin(memberPaths[1]), parts: [pin(memberPaths[2])]}} : {})};
+    ...(membership ? {source_membership: {index: pin(memberPaths[0]), lineage: pin(memberPaths[1]), parts: [pin(memberPaths[2])],
+      ...(cohort ? {cohort_inventory:{index:pin(memberPaths[3]),parts:[pin(memberPaths[4])]}} : {})}} : {})};
   let datedSupport;
   if (dated) {
     const provenance = ['adoption', 'review', 'observation', 'frame'].map(role => {
@@ -1312,4 +1314,20 @@ test('package roles retain the explicit canonical seam table and exact retained 
   }
   for(const label of ['views','method'])assert.ok(projection.paths.some(entry=>
     entry.roles.includes('source-target canonical seam '+label)));
+});
+
+test('real package command preserves complete canonical cohort pins and rejects malformed roles',t=>{
+ const f=modernFinalizationFixture(t,{cohort:true});
+ const accepted=f.run('package','.cache/delivery-handoff/cohort-complete');
+ assert.equal(accepted.status,0,accepted.stderr);
+ const output=JSON.parse(fs.readFileSync(path.join(f.root,'.cache/delivery-handoff/cohort-complete/package-roles.json')));
+ for(const pin of [f.evidenceBody.source_membership.cohort_inventory.index,...f.evidenceBody.source_membership.cohort_inventory.parts])
+  assert(output.paths.some(item=>item.path===pin.path),'Missing cohort consumed path '+pin.path);
+ let ordinal=0;
+ for(const mutate of [role=>delete role.index,role=>role.parts=[],role=>role.index.sha256='0'.repeat(64),
+  role=>role.parts[0].sha256='0'.repeat(64),role=>role.extra=role.index]){
+  const body=structuredClone(f.evidenceBody);mutate(body.source_membership.cohort_inventory);
+  const result=f.run('package','.cache/delivery-handoff/cohort-rejected-'+ordinal++,[],f.withEvidence(body));
+  assert.notEqual(result.status,0);assert.match(result.stderr,/cohort|hash differs/);
+ }
 });

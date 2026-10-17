@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
+import {gzipSync} from 'node:zlib';
 import {deriveSourceTargetNativeDelta,nativeRowLatitudes,nativePolygonIntervals,polygonParts} from '../src/native-grid.js';
 import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
 import {constructOriginalAuthority} from '../scripts/delivery-handoff-advance.mjs';
@@ -67,6 +68,16 @@ function constructorFixture(change=()=>{}){
   const nativeLatitudes=put('latitudes.f64le',latitudeBytes);
   const membership={index:put('data/world-index.json',state.index),lineage:put('data/semantic-report.json',state.lineage),
     parts:[put('data/geography/part-0.json',state.accepted)]};
+  if(state.cohort){
+    const decoded=Buffer.from(JSON.stringify(state.cohort.rows)),raw=gzipSync(decoded);
+    const part={...put('data/macro-foundation/world-review-locations-0.json.gz',raw),
+      decoded_bytes:decoded.length,decoded_sha256:digest(decoded)};
+    membership.cohort_inventory={index:put('data/macro-foundation/world-review-projection.json',{
+      version:1,kind:'current-membership-projection',locations:state.cohort.rows.length,
+      current_pins:{location_index_sha256:membership.index.sha256},
+      location_parts:['macro-foundation/world-review-locations-0.json.gz'],...state.cohort.index}),parts:[part]};
+    state.cohort.mutate?.(membership.cohort_inventory);
+  }
   const evidence=put('source-evidence.json',{version:1,kind:'source-target-native-evidence-v1',catalogue,
     owner_roster:roster,physical_evidence:physical,physical_input:measured,physical_reproduction:put('physical.py',Buffer.from('# retained fixture')),
     native_latitudes:nativeLatitudes,native_contract:{size,native_latitudes:nativeLatitudes,original_assets:{bounds:{sha256:roster.sha256}}},
@@ -397,4 +408,133 @@ for(const [name,geometry,reason]of [
   assert.equal(result.supported_cells,0);
   assert.equal(result.held_cells,1);
   assert.equal(result.decision_rows[0].runs[0][3],reason);
+});
+
+function complexCompetitorFixture(change=()=>{},transitive=false){
+ return constructorFixture(state=>{
+  directTarget(state);
+  state.originals[0].geometry=rectangle(.015,.035,-.02,.02);
+  state.originals[1].geometry=rectangle(.018,.038,-.02,.02);
+  const source='https://example.org/complete-physical-source',basis='Original source intersection witnesses';
+  state.roster[0].province_id='province:left';state.roster[2].province_id='province:right';
+  state.lineage.changes=[{id:'city',replaces:transitive?['retired-region']:[a,b],basis,source},
+   {id:'other-city',replaces:[a,b],basis,source}];
+  if(transitive)state.lineage.changes.push({id:'retired-region',replaces:[a,b],basis:'Retained intermediate',source});
+  state.accepted.features=['city','other-city'].map((id,i)=>({type:'Feature',id,
+   geometry:rectangle(-.06+i*.005,-.055+i*.005,-.02,.02),properties:{id,
+    parent_id:i?'province:right':'province:left',reference_owner:'Test cohort',metadata:{source_member_ids:i?[a,b]:transitive?['retired-region']:[a,b],
+     location_basis:basis,source_url:source}}}));
+  state.accepted.features.push({type:'Feature',id:c,geometry:state.originals[2].geometry,
+   properties:{id:c,reference_owner:'Test cohort',metadata:{}}});
+  state.cohort={rows:state.accepted.features.map(feature=>({id:feature.id,owner:feature.properties.reference_owner}))};
+  change(state);
+ });
+}
+for(const transitive of [false,true])test('complete '+(transitive?'transitive':'many-member')+' ancestry supplies only whole-original negative vetoes',()=>{
+ const f=complexCompetitorFixture(()=>{},transitive),result=f.run(),diagnostic=f.diagnose();
+ assert.equal(result.ledger_rows.length,1);assert.equal(result.ledger_rows[0].target_id,c);
+ assert.equal(result.ledger_rows[0].native_cells,1);
+ assert.deepEqual(result.split_source_competitors.map(x=>[x.source_id,x.descendants]),[a,b].map(id=>[id,
+  [{target_id:'city',pixelIndex:1,parent_id:'province:left'},{target_id:'other-city',pixelIndex:3,parent_id:'province:right'}]]));
+ assert.deepEqual(diagnostic.split_source_competitors,result.split_source_competitors);
+ assert.deepEqual(f.state.physical.results.map(x=>x.target),[c]);
+ assert.equal(diagnostic.supported_cells,1);assert.equal(diagnostic.held_cells,0);
+});
+test('one descendant with shared complete source atoms remains a negative rather than an inferred positive owner',()=>{
+ const f=complexCompetitorFixture(s=>{
+  s.lineage.changes[1].replaces=[b];s.accepted.features[1].properties.metadata.source_member_ids=[b];
+ });
+ const result=f.run();assert.equal(result.split_source_competitors.find(x=>x.source_id===a).descendants.length,1);
+ assert.equal(result.ledger_rows[0].target_id,c);
+});
+for(const [name,change,pattern]of [
+ ['missing intermediary',s=>s.lineage.changes.pop(),/complex|split-source|source membership/],
+ ['removed terminal semantic change',s=>s.lineage.changes.splice(0,1),/complex/],
+ ['unresolved same-cohort foreign member',s=>{
+  const f=structuredClone(s.accepted.features[1]);f.id='foreign-current';f.properties.id='foreign-current';
+  f.properties.metadata.source_member_ids=['unresolved-foreign'];
+  s.roster.push({id:'foreign-current',index:4,province_id:'province:right'});s.accepted.features.push(f);
+  s.cohort.rows.push({id:f.id,owner:'Test cohort'});
+  s.lineage.changes.push({id:'foreign-current',replaces:['unresolved-foreign'],basis:f.properties.metadata.location_basis,source:f.properties.metadata.source_url});
+ },/complex/],
+ ['duplicate intermediate identity',s=>s.lineage.changes.push({...s.lineage.changes[2]}),/complex/],
+ ['duplicate intermediate edge',s=>s.lineage.changes[2].replaces.push(a),/complex/],
+ ['cycle through retired intermediates',s=>{
+  s.lineage.changes[2].replaces.push('cycle-node');
+  s.lineage.changes.push({id:'cycle-node',replaces:['retired-region'],basis:'Cycle',source:s.lineage.changes[2].source});
+ },/Cyclic|complex/],
+ ['foreign complete-family leaf',s=>s.lineage.changes[2].replaces.push('gb:OTHER:ADM2:UNKNOWN'),/complex/],
+ ['omitted original sibling',s=>s.originals.splice(1,1),/complex/],
+ ['removed current descendant',s=>s.accepted.features.splice(1,1),/complex/],
+ ['extra current canonical descendant',s=>{
+  const f=structuredClone(s.accepted.features[1]);f.id='extra-city';f.properties.id='extra-city';
+  s.roster.push({id:'extra-city',index:4,province_id:'province:right'});s.accepted.features.push(f);
+  s.cohort.rows.push({id:f.id,owner:'Test cohort'});
+ },/canonical descendant inventory|complex/],
+ ['canonical omitted full member',s=>s.accepted.features[1].properties.metadata.source_member_ids.pop(),/canonical member inventory/],
+ ['canonical duplicate member',s=>s.accepted.features[1].properties.metadata.source_member_ids.push(a),/canonical member inventory/],
+ ['canonical changed member',s=>s.accepted.features[1].properties.metadata.source_member_ids[1]='gb:FOREIGN:ADM2:X',/canonical member inventory/],
+ ['duplicate terminal semantic identity',s=>s.lineage.changes.push({...s.lineage.changes[0],replaces:['foreign']}),/complex/],
+ ['wrong canonical ID',s=>s.accepted.features[0].properties.id='foreign',/canonical member inventory/],
+ ['wrong canonical parent',s=>s.accepted.features[0].properties.parent_id='foreign-parent',/parent or source identity/],
+ ['wrong original owner parent',s=>s.roster[0].province_id='foreign-parent',/parent or source identity/],
+ ['missing original owner parent',s=>delete s.roster[0].province_id,/parent or source identity/],
+ ['wrong terminal source',s=>s.accepted.features[0].properties.metadata.source_url='https://different.example/',/parent or source identity/],
+ ['wrong terminal basis',s=>s.accepted.features[0].properties.metadata.location_basis='Different claim',/parent or source identity/],
+ ['wrong intermediate source',s=>s.lineage.changes[2].source='https://different.example/',/intermediate provenance/],
+ ['false original shape identity',s=>s.accepted.features[0].properties.metadata.original_id='A',/original identity/],
+ ['empty semantic members',s=>s.lineage.changes[2].replaces=[],/complex|source membership|split-source/],
+ ['phantom current terminal',s=>{
+  s.roster[0].id='unrelated-current';s.accepted.features=s.accepted.features.filter(f=>f.id!=='city');
+ },/complex|cohort/],
+])test('complex negative rejects '+name+' through constructor and diagnostic after coherent repinning',()=>{
+ const f=complexCompetitorFixture(change,true);assert.throws(()=>f.run(),pattern);assert.throws(()=>f.diagnose(),pattern);
+});
+for(const transitive of [false,true])test('complex '+(transitive?'transitive':'many-member')+' membership cannot become positive coverage',()=>{
+ const f=complexCompetitorFixture(s=>{
+  const geometry=s.originals[0].geometry,selected=s.accepted.features[0].geometry;
+  s.targets=[{id:a,target_id:'city',pixelIndex:1,source_family:family,base_geometry:selected,coverage_classes:['mapped_land_support']}];
+  s.measured=[{target:a,consumed:{geometry},selected:{id:'city',geometry:selected}}];
+  s.physical.results=[{target:a,issues:[],support:{mapped_land_support:geometry}}];s.proposed.rows[0].runs[0][2]=1;
+ },transitive);
+ assert.throws(()=>f.run(),/ambiguous accepted source membership/);assert.throws(()=>f.diagnose(),/ambiguous accepted source membership/);
+});
+for(const [name,geometry,reason]of [
+ ['interior',()=>rectangle(.04,.06,-.02,.02),'territorial_exclusion_cells'],
+ ['boundary',()=>rectangle(.04,.06,latitudes[size/2],.02),'boundary_cells'],
+])test('complete complex original '+name+' contact vetoes outside all descendant geometries',()=>{
+ const f=complexCompetitorFixture(s=>{s.originals[0].geometry=geometry();},true);
+ assert.throws(()=>f.run(),/lack unique source-target coverage/);
+ const result=f.diagnose();assert.equal(result.supported_cells,0);assert.equal(result.held_cells,1);
+ assert.equal(result.decision_rows[0].runs[0][3],reason);
+});
+
+test('direct original-to-canonical joins preserve complete cohort checking without a positive seed record',()=>{
+ const f=complexCompetitorFixture(s=>{
+  s.accepted.features=s.accepted.features.filter(feature=>feature.id!==c);s.lineage.changes.pop();
+ },true);
+ assert.throws(()=>f.run(),/complex/);assert.throws(()=>f.diagnose(),/complex/);
+});
+
+for(const [name,change]of [
+ ['missing complete cohort role',s=>delete s.cohort],
+ ['missing metadata partition',s=>s.cohort.mutate=role=>role.parts=[]],
+ ['duplicate metadata partition',s=>s.cohort.mutate=role=>role.parts.push(role.parts[0])],
+ ['wrong fixed projection path',s=>s.cohort.mutate=role=>role.index.path='data/world-review.json'],
+ ['stale world-index join',s=>s.cohort.index={current_pins:{location_index_sha256:'f'.repeat(64)}}],
+ ['wrong complete location count',s=>s.cohort.index={locations:4}],
+ ['unlisted metadata partition',s=>s.cohort.index={location_parts:['macro-foundation/missing.json.gz']}],
+ ['duplicate complete owner identity',s=>s.cohort.rows.push(s.cohort.rows[0])],
+ ['missing complete native owner',s=>s.cohort.rows.pop()],
+ ['foreign complete native owner',s=>s.cohort.rows[0].id='foreign'],
+ ['cohort label differs',s=>s.cohort.rows[0].owner='Foreign cohort'],
+ ['missing decoded metadata identity',s=>s.cohort.mutate=role=>delete role.parts[0].decoded_sha256],
+ ['wrong decoded metadata identity',s=>s.cohort.mutate=role=>role.parts[0].decoded_sha256='0'.repeat(64)],
+ ['wrong encoded metadata identity',s=>s.cohort.mutate=role=>role.parts[0].sha256='0'.repeat(64)],
+ ['coordinated removed canonical descendant and semantic edge',s=>{
+   s.accepted.features.splice(1,1);s.lineage.changes.splice(1,1);
+ }],
+])test('complex negative requires '+name+' to fail closed',()=>{
+ const f=complexCompetitorFixture(change,true);
+ assert.throws(()=>f.run(),/cohort|projection|bytes|body|immutable input/);assert.throws(()=>f.diagnose(),/cohort|projection|bytes|body|immutable input/);
 });
