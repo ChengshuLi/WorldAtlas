@@ -4,7 +4,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {pathToFileURL} from 'node:url';
-import {valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {nativeRowLatitudes} from '../src/native-grid.js';
+import {valueSha,mergeCompletedNativePatches} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {deriveCoordinateDelta,projectSourceFeatures,projectNativeRows,qualifyTransition} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 import {MODULE,PROGRAMME,CATALOGUE,CODE,polygon,feature,fixtures,addition,trustedFixture,appendNativeAuthority} from './fixtures/selected-checkpoint.mjs';
 
@@ -575,4 +576,72 @@ test('miniature seed keys retain every fixture option and normalize default opti
   assert.deepEqual(again.rootRow,first.rootRow);
  }
  assert.equal(new Set(heads).size,configurations.length,'Distinct option effects must not share a seed');
+});
+
+
+test('real appended overlap qualification does not search the complete baseline array per interval',async t=>{
+ const f=await trustedFixture(t,{nativeAppend:true}),{state}=f.api.qualifyCheckpoint({reader:f.reader});
+ const next=await appendNativeAuthority(f),reader=new f.native.ImmutableReader(f.root,next.candidate,{invocation:f.reader.invocation});
+ const original=Array.prototype.find;
+ Array.prototype.find=function(...args){
+  assert.notStrictEqual(this,state.patch.rows,'Repeated full baseline row search');
+  return Reflect.apply(original,this,args);
+ };
+ try {
+  const transition=f.api.qualifyTransition({state,reader});
+  assert.equal(transition.available,true);
+  assert.deepEqual(transition.candidate.patch.rows,next.patch.rows);
+  assert.deepEqual(transition.changedNativeRows,[next.y]);
+ } finally {Array.prototype.find=original;f.api.releaseCheckpoint(state);}
+});
+
+for(const [name,shift,overlap] of [
+ ['same-owner overlap',0,true],['left boundary touch',-1,false],['right boundary touch',1,false],['disjoint interval',3,false]
+])test('indexed append guard preserves '+name,async t=>{
+ const size=262166,y=nativeRowLatitudes(size).findIndex(v=>v<.1),x=Math.floor((.1+180)/360*size);
+ const originalPatchRows=[{y,runs:[[x+shift,x+shift+1,1]]}];
+ const f=await trustedFixture(t,{nativeAppend:true,originalPatchRows}),{state}=f.api.qualifyCheckpoint({reader:f.reader});
+ const next=await appendNativeAuthority(f,{mutatePatch:patch=>{patch.rows=overlap?structuredClone(originalPatchRows):mergeCompletedNativePatches(patch.rows.map(row=>({rows:[row]})),size);}});
+ const reader=new f.native.ImmutableReader(f.root,next.candidate,{invocation:f.reader.invocation});
+ try {
+  if(overlap)assert.throws(()=>f.api.qualifyTransition({state,reader}),/New native assignment overlaps a previously selected owner/);
+  else {
+   const transition=f.api.qualifyTransition({state,reader});
+   assert.equal(transition.available,true);
+   assert.deepEqual(transition.candidate.patch.rows,next.patch.rows);
+   assert.deepEqual(transition.changedNativeRows,[y]);
+  }
+  assert.deepEqual(state.patch.rows,originalPatchRows);
+ } finally {f.api.releaseCheckpoint(state);}
+});
+
+
+for(const [name,originalPatchRows] of [
+ ['duplicate',[{y:1,runs:[[2,3,1]]},{y:1,runs:[[3,4,1]]}]],
+ ['decreasing',[{y:2,runs:[[2,3,1]]},{y:1,runs:[[3,4,1]]}]]
+])test('checkpoint admission rejects '+name+' baseline native row identities before indexing',async t=>{
+ const f=await trustedFixture(t,{originalPatchRows});
+ assert.throws(()=>f.api.qualifyCheckpoint({reader:f.reader}),/Duplicate, unordered or foreign native row/);
+});
+
+
+test('miniature seed snapshots custom original patch rows and separates their histories',async t=>{
+ const originalPatchRows=[{y:2,runs:[[2,3,1]]}],expected=structuredClone(originalPatchRows);
+ const first=await trustedFixture(t,{originalPatchRows});
+ originalPatchRows[0].runs[0][0]=1;
+ assert.deepEqual(first.patch.rows,expected,'The caller cannot mutate the returned consumer');
+ first.patch.rows[0].runs[0][0]=0;
+ const same=await trustedFixture(t,{originalPatchRows:structuredClone(expected)});
+ const different=await trustedFixture(t,{originalPatchRows});
+ assert.deepEqual(same.patch.rows,expected,'Neither caller nor consumer mutation reaches the private seed');
+ assert.deepEqual(different.patch.rows,originalPatchRows,'Different row content gets its own history');
+ assert.notEqual(first.root,same.root);
+ assert.equal(first.selected,same.selected);
+ assert.notEqual(same.selected,different.selected);
+ const omitted=await trustedFixture(t),nullish=await trustedFixture(t,{originalPatchRows:null});
+ const explicit=await trustedFixture(t,{originalPatchRows:[{y:1,runs:[[2,3,1]]}]});
+ assert.equal(omitted.selected,nullish.selected);
+ assert.equal(omitted.selected,explicit.selected);
+ assert.notEqual(same.selected,omitted.selected);
+ assert.deepEqual(omitted.patch.rows,[{y:1,runs:[[2,3,1]]}]);
 });

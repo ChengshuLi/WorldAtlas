@@ -41,7 +41,7 @@ function fixtureRepository(root){
 const trustedSeeds=new Map();
 after(()=>{for(const seed of trustedSeeds.values())fs.rmSync(seed.root,{recursive:true,force:true});});
 
-function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,sourceOverride,physicalLogicalSource,overrideLogicalPath}){
+function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,sourceOverride,physicalLogicalSource,originalPatchRows,overrideLogicalPath}){
  const {git,save,commit,pin}=fixtureRepository(root);
  git('init','-q');if(codeRoutes)save('data/scientific.js',{fixture:'scientific input, not executed code'});save(PROGRAMME,fs.readFileSync(PROGRAMME));for(const name of CODE)save(name,fs.readFileSync(name));save('package.json',{type:'module'});
  const {features,certificate}=fixtures(), source={type:'FeatureCollection',features};save('data/source.json',source);
@@ -67,7 +67,7 @@ function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,sourceO
  save('data/manifest.json',manifest);
  const primitive=addition('old','A',1,certificate.entries[0][7],.3);
  const literal={...primitive,base_geometry:features[0].geometry,disposition:'assigned',native_cells:1,source_receipt_sha256:'c'.repeat(64)};
- const originalPatch={version:1,kind:'unassigned-native-cells-v1',rows:[{y:1,runs:[[2,3,1]]}]};
+ const originalPatch={version:1,kind:'unassigned-native-cells-v1',rows:originalPatchRows??[{y:1,runs:[[2,3,1]]}]};
  save('original/patch-one.json',originalPatch);save('original/rule.json',{version:1});const one=commit();
  save('original/publication.json',{assets:[{path:'patch-one.json',bytes:pin('original/patch-one.json').bytes,sha256:pin('original/patch-one.json').sha256}]});
  const two=commit();save('original/binding.json',{native_proof:{publication:pin('original/publication.json'),assets:[pin('original/patch-one.json',one)]}});const three=commit();
@@ -108,8 +108,10 @@ function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,sourceO
 
 // The real entry reads each independent copy's ordinary committed catalogue and
 // products. Qualification, readers and private module state are always fresh.
-async function trustedFixture(t,{incompleteNative=false,codeRoutes=false,nativeAppend=false,sourceOverride=false,physicalLogicalSource=false,overrideLogicalPath='data/source.json'}={}){
- const options={incompleteNative,codeRoutes,nativeAppend,sourceOverride,physicalLogicalSource,overrideLogicalPath};
+async function trustedFixture(t,{incompleteNative=false,codeRoutes=false,nativeAppend=false,sourceOverride=false,physicalLogicalSource=false,originalPatchRows,overrideLogicalPath='data/source.json'}={}){
+ // Snapshot caller-owned rows before both keying and building the private seed.
+ const options={incompleteNative,codeRoutes,nativeAppend,sourceOverride,physicalLogicalSource,
+  originalPatchRows:structuredClone(originalPatchRows??[{y:1,runs:[[2,3,1]]}]),overrideLogicalPath};
  const key=JSON.stringify(options);
  let seed=trustedSeeds.get(key);
  if(!seed){
