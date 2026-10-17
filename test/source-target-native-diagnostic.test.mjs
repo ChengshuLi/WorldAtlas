@@ -7,7 +7,7 @@ import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {gzipSync} from 'node:zlib';
-import {deriveSourceTargetNativeDelta,nativeRowLatitudes,nativePolygonIntervals,polygonParts,witnessCellEffects,validateWitnessGeometry} from '../src/native-grid.js';
+import {nativeSequence,deriveSourceTargetNativeDelta,nativeRowLatitudes,nativePolygonIntervals,polygonParts,witnessCellEffects,validateWitnessGeometry} from '../src/native-grid.js';
 import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
 import {constructOriginalAuthority} from '../scripts/delivery-handoff-advance.mjs';
 import {qualifySourceTargetNativeAuthority,diagnoseSourceTargetNativeAuthority,readRetainedRegistryAuthority,verifyCompletedSourceTargetNativeAuthority,valueBytes,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
@@ -479,8 +479,20 @@ test('requested-owner completed reuse keeps exact output roster and patch conser
   const constructed={version:1,kind:'existing-source-target-native-constructor-result',
     inputs:Object.fromEntries(['source_evidence','native_patch'].map(role=>[role,{commit:version,path:f.binding[role].path}])),
     rule_sha256:valueSha(f.preimage),component_ids:proof.source_scope_ids,ledger_rows:proof.source_rows,limitations:proof.limitations};
-  const run=(result=constructed,source=evidence,patch=candidate)=>verifyCompletedSourceTargetNativeAuthority({
-    constructed:result,binding:f.binding,preimage:f.preimage,evidence:source,candidate:patch});
+  const sequence=values=>nativeSequence(values.length,()=>values.values(),{entryAt:i=>values[i]});
+  const rows=values=>sequence(values.map(row=>({...row,runs:sequence(row.runs)})));
+  const run=(result=constructed,source=evidence,patch=candidate)=>{
+    const invoke=(constructed,evidence,candidate)=>verifyCompletedSourceTargetNativeAuthority({
+      constructed,binding:f.binding,preimage:f.preimage,evidence,candidate});
+    const storedResult={...result,component_ids:sequence(result.component_ids),
+      ledger_rows:sequence(result.ledger_rows.map(row=>({...row,native_rows:rows(row.native_rows)})))};
+    const storedSource={...source,targets:sequence(source.targets)},storedPatch={...patch,rows:rows(patch.rows)};
+    let literal;
+    try{literal=invoke(result,source,patch);}catch(error){
+      assert.throws(()=>invoke(storedResult,storedSource,storedPatch),{message:error.message});throw error;
+    }
+    assert.equal(valueSha(invoke(storedResult,storedSource,storedPatch)),valueSha(literal));return literal;
+  };
   assert.deepEqual(run().original_ledger.rows,proof.source_rows);
   const missing=structuredClone(constructed);missing.component_ids.pop();missing.ledger_rows.pop();
   assert.throws(()=>run(missing),/requested source target/);

@@ -138,25 +138,52 @@ export function selectedDataCheckoutPatterns(definition, entries, expectationsPa
 export const PACKAGE_PRODUCER_KIND = 'immediate-cloudflare-build-v1';
 export const inertSelectedPackageInput = name => typeof name === 'string' &&
   /^coordination\/engineering\/[^/]+\/.+\.(?:json|jsonl\.gz|json\.gz|log)$/.test(name);
-export function admitPackageInputTransition(before, current, {acceptedInputs, typedInputs, preliminary = false} = {}) {
+// The selector authenticates the sidecar body. Only its four cumulative roles
+// may be retired; this is the same contract used by finalization and reuse.
+export function selectedCumulativePackageRoles(selection, raw) {
+  const fail = () => { throw Error('Complete authenticated prior cumulative package roles required'); };
+  const hook = selection?.additive_release;
+  if (!hook || !safePackagePath(hook.path) || hook.path.endsWith('/') || !Buffer.isBuffer(raw) ||
+      raw.length !== hook.bytes || createHash('sha256').update(raw).digest('hex') !== hook.sha256) fail();
+  const sidecar = JSON.parse(raw);
+  if (sidecar.version !== 2 || sidecar.kind !== 'retained-native-additive-selection-v2') fail();
+  const pins = [sidecar.runtime_envelope, sidecar.logical_asset_map?.ledger, sidecar.logical_asset_map?.patch];
+  if (!pins.every(pin => pin && safePackagePath(pin.path) && !pin.path.endsWith('/') && pin.mode === '100644' &&
+      /^[a-f0-9]{40}$/.test(pin.git_blob_oid ?? pin.blob ?? '') && Number.isSafeInteger(pin.bytes) && pin.bytes > 0 &&
+      /^[a-f0-9]{64}$/.test(pin.sha256 ?? ''))) fail();
+  return [{...hook, mode: '100644', git_blob_oid: createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex')}, ...pins];
+}
+export function admitPackageInputTransition(before, current, {acceptedInputs, typedInputs, priorSidecarRaw, preliminary = false} = {}) {
   const need=(ok,message)=>{if(!ok)throw Error(message);};
   const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
   const commit=value=>/^[a-f0-9]{40}$/.test(value??'');
   validatePackageInputs(before.definition); validatePackageInputs(current.definition);
   need(before.producer?.kind===PACKAGE_PRODUCER_KIND&&same(before.producer,current.producer),
     'Immediate original build capture and unchanged producer workflow required');
-  const {inputs:oldInputs,...oldPolicy}=before.definition,{inputs:newInputs,...newPolicy}=current.definition;
-  need(same(oldPolicy,newPolicy)&&newInputs.length>=oldInputs.length&&same(oldInputs,newInputs.slice(0,oldInputs.length)),
-    'Package definition is not an append-only selected change');
+  const {inputs:oldInputs,optional_inputs:oldOptional,...oldPolicy}=before.definition,
+    {inputs:newInputs,optional_inputs:newOptional,...newPolicy}=current.definition;
+  const removed=oldInputs.filter(name=>!newInputs.includes(name));
+  const retired=new Map(removed.length ? selectedCumulativePackageRoles(before.selection,priorSidecarRaw).map(pin=>[pin.path,pin]) : []);
+  need(removed.every(name=>retired.has(name)), 'Removed package input is not an authenticated prior cumulative role');
+  const retainedInputs=oldInputs.filter(name=>!removed.includes(name));
+  need(same(oldPolicy,newPolicy)&&same(oldOptional.filter(name=>!removed.includes(name)),newOptional)&&
+    same(retainedInputs,newInputs.slice(0,retainedInputs.length)),
+    'Package definition is not an append-only selected change or authenticated cumulative replacement');
   const {additive_release:oldAdditive,...oldBase}=before.selection;
   const {additive_release:newAdditive,...newBase}=current.selection;
   need(same(oldBase,newBase)&&oldAdditive&&newAdditive,'Original invariant selection differs');
   const oldFiles=new Map(before.files.map(row=>[row.path,row])),newFiles=new Map(current.files.map(row=>[row.path,row]));
   need(oldFiles.size===before.files.length&&oldFiles.size>0&&newFiles.size===current.files.length,'Duplicate or incomplete source input inventory');
   const exceptions=new Set(['.github/package-inputs.json','data/ownership-selection.json']);
-  for(const [name,row] of oldFiles) need(newFiles.has(name)&&(exceptions.has(name)||same(row,newFiles.get(name))),
-    'Original invariant package input changed: '+name);
-  const newDeclarations=newInputs.slice(oldInputs.length),accepted=new Map(),retained=[];
+  for(const [name,row] of oldFiles) {
+    if(removed.includes(name)) {
+      need(row.mode==='100644'&&row.oid===(retired.get(name).git_blob_oid??retired.get(name).blob),
+        'Retired cumulative role differs from original source inventory: '+name);
+      need(!newFiles.has(name),'Retired declaration remains an implicit package input: '+name);
+    } else need(newFiles.has(name)&&(exceptions.has(name)||same(row,newFiles.get(name))),
+      'Original invariant package input changed: '+name);
+  }
+  const newDeclarations=newInputs.slice(retainedInputs.length),accepted=new Map(),retained=[];
   if(acceptedInputs!==undefined){
     need(commit(acceptedInputs?.commit)&&Array.isArray(acceptedInputs.files),'Exact trusted selected base required');
     for(const row of acceptedInputs.files){
@@ -185,7 +212,8 @@ export function admitPackageInputTransition(before, current, {acceptedInputs, ty
     need(row.mode==='100644'&&newDeclarations.includes(name),
       'Unadmitted new invariant/directory/optional package input: '+name);added.push(name);
   }
-  return {original_head:before.head,current_head:current.head,invariant_files:oldFiles.size-exceptions.size,
+  return {original_head:before.head,current_head:current.head,invariant_files:oldFiles.size-exceptions.size-removed.length,
+    removed_selected_inputs:removed,
     added_selected_inputs:added.sort(),base_selection:oldBase,
     ...(retained.length?{accepted_selected_inputs:{commit:acceptedInputs.commit,files:retained}}:{})};
 }

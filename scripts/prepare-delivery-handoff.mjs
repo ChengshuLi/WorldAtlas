@@ -11,7 +11,7 @@ import {locate} from './delivery-handoff-advance.mjs';
 import {repairComponentKey, compareRepairComponents} from '../src/native-grid.js';
 import {scientificNativeSelection,originalNativeReference,validateReferenceMetadataHeader} from '../src/reference-metadata.js';
 import {prepareReferenceMetadataProjection,validateReferenceMetadataProjection} from './selected-reference-metadata.mjs';
-import {validatePackageInputs} from './package-inputs.mjs';
+import {validatePackageInputs, selectedCumulativePackageRoles} from './package-inputs.mjs';
 import {composeRetainedLedgers} from '../coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs';
 import {coordinateBounds, normaliseRetainedRepairLedger, compareVersionedRepairLedgers, verifyCompletedSourceTargetNativeAuthority, mergeCompletedNativePatches, verifyCurrentRebindExecution, CURRENT_REBIND_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
@@ -871,13 +871,18 @@ export function finalizedPackageInputs(original, prefix, paths) {
   return appendPackageReadPaths(original, paths);
 }
 
-function appendPackageReadPaths(original, paths) {
+function appendPackageReadPaths(original, paths, priorSelectedPaths = []) {
   validatePackageInputs(original);
   need(unique(paths) && paths.every(safe), 'Exact package read paths required');
-  // Preserve the complete accepted declaration prefix. Already-covered roles
-  // need no redundant narrower declaration beneath an accepted directory.
-  const additions = paths.filter(p => !original.inputs.some(old => old === p || old.endsWith('/') && p.startsWith(old))).sort();
-  return validatePackageInputs({...original, inputs: [...original.inputs, ...additions]});
+  // Retire only exact prior cumulative roles authenticated by the selector.
+  // Never narrow a directory declaration or infer roles from filenames. Shared
+  // current assets and unrelated declarations retain their original order.
+  need(priorSelectedPaths.every(safe), 'Safe authenticated prior selected paths required');
+  const retired = new Set(priorSelectedPaths.filter(p => !paths.includes(p)));
+  const retained = original.inputs.filter(p => !retired.has(p));
+  const additions = paths.filter(p => !retained.some(old => old === p || old.endsWith('/') && p.startsWith(old))).sort();
+  return validatePackageInputs({...original, inputs: [...retained, ...additions],
+    optional_inputs: original.optional_inputs.filter(p => !retired.has(p))});
 }
 
 // The modern composer emits these four flat products at one real commit.
@@ -1046,7 +1051,11 @@ export function finalizeDelivery(config, reader) {
   for (const name of requested) if (!matched.has(name) && !conflicts.some(row => row.path === name))
     conflicts.push({path: name, reason: 'Unbound or non-restorable role in restoration inventory'});
   need(!conflicts.length, 'Final package role conflicts with accepted path identity: ' + JSON.stringify(conflicts));
-  const packageInputs = appendPackageReadPaths(baselinePackage, paths);
+  // The prior sidecar body was authenticated against the original selector
+  // above. Its cumulative payload is superseded, not a transitive scientific
+  // package input; packageProjection still retains complete custody evidence.
+  const priorSelectedPaths = prior ? selectedCumulativePackageRoles(selection, reader.read(reader.pin(config.selector.commit, selection.additive_release.path))).map(pin => pin.path) : [];
+  const packageInputs = appendPackageReadPaths(baselinePackage, paths, priorSelectedPaths);
   const expectation = JSON.parse(outputs['selected-delivery-expectations.json']);
   // Preserve the established final smoke-expectation presentation as well.
   const expectations = {version: expectation.version, selected_ledger_sha256: expectation.selected_ledger_sha256,

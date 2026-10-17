@@ -1,3 +1,4 @@
+import {checkpointTestAPI} from '../helpers/native-literal.mjs';
 import assert from 'node:assert/strict';
 import {after} from 'node:test';
 import fs from 'node:fs';
@@ -8,19 +9,19 @@ import {gzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
 import {shuffleOwnershipBytes} from '../../src/ownership-codec.js';
 import {nativeRowLatitudes} from '../../src/native-grid.js';
-import {valueBytes,valueSha,coordinateBounds} from '../../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {valueBytes,valueSha,coordinateBounds,mergeCompletedNativePatches} from '../../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {mapCellSelectionFixture} from './map-cell-selection.mjs';
 import {deriveCoordinateDelta} from '../../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const MODULE='coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const PROGRAMME='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
 const CATALOGUE='coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json';
-const CODE=[MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/native-word-store.mjs','scripts/check-effective-geographic-regression.mjs',
+const CODE=[MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/native-word-store.mjs','scripts/native-patch-store.mjs','scripts/check-effective-geographic-regression.mjs',
   'scripts/selected-reference-metadata.mjs','src/reference-metadata.js','src/native-grid.js','src/ownership-codec.js'];
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const polygon=(x,y=0)=>({type:'Polygon',coordinates:[[[x,y],[x+.2,y],[x+.2,y+.2],[x,y+.2],[x,y]]]});
 const feature=(id,x)=>({type:'Feature',id,properties:{id,parent_id:'parent'},geometry:polygon(x)});
-function fixtures(){
- const features=[feature('A',0),feature('B',1),feature('C',5)];
+function fixtures(sourceFeatures){
+ const features=structuredClone(sourceFeatures??[feature('A',0),feature('B',1),feature('C',5)]);
  const rows=features.map((f,i)=>[f.id,i+1,'parent',1,'data/source.json',i,valueSha(f),valueSha(f.geometry),valueSha({base_geometry_sha256:valueSha(f.geometry),additions:[]}),coordinateBounds(f.geometry)]);
  return {features,certificate:{version:2,kind:'selected-coordinate-neighbor-certificate-v2',entry_fields:['id','index','parent_id','parent_index','source','ordinal','whole_feature_sha256','geometry_sha256','effective_geometry_sha256','boxes'],binding:{selection:{old:true},sources:[],owners_sha256:valueSha(rows.map(r=>r.slice(0,4)))},entries:rows,inputs:[]}};
 }
@@ -41,10 +42,10 @@ function fixtureRepository(root){
 const trustedSeeds=new Map();
 after(()=>{for(const seed of trustedSeeds.values())fs.rmSync(seed.root,{recursive:true,force:true});});
 
-function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,sourceOverride,physicalLogicalSource,originalPatchRows,overrideLogicalPath,nativeLayout}){
+function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,sourceOverride,physicalLogicalSource,originalPatchRows,overrideLogicalPath,nativeLayout,sourceFeatures}){
  const {git,save,commit,pin}=fixtureRepository(root);
  git('init','-q');if(codeRoutes)save('data/scientific.js',{fixture:'scientific input, not executed code'});save(PROGRAMME,fs.readFileSync(PROGRAMME));for(const name of CODE)save(name,fs.readFileSync(name));save('package.json',{type:'module'});
- const {features,certificate}=fixtures(), source={type:'FeatureCollection',features};save('data/source.json',source);
+ const {features,certificate}=fixtures(sourceFeatures), source={type:'FeatureCollection',features};save('data/source.json',source);
  if(sourceOverride)save('data/selected-source.json.gz',gzipSync(valueBytes(source)));
  const reference={id:'geography:fixture',hierarchy_sha256:'a'.repeat(64),footprints_sha256:'b'.repeat(64)};
  const encode=(name,kind,values,offset=0)=>{const words=Uint32Array.from(values),canonical=Buffer.from(words.buffer),encoded=gzipSync(shuffleOwnershipBytes(words));save('data/'+name,encoded);return {path:name,kind,offset,bytes:encoded.length,sha256:sha(encoded),decoded_bytes:canonical.length,decoded_sha256:sha(canonical),words:words.length,encoding:'byte-shuffle'};};
@@ -62,7 +63,7 @@ function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,sourceO
  let assetOffset=0;
  const index={version:1,kind:'ordered-exact-original-byte-fragments',whole_bytes:whole.length,whole_sha256:sha(whole),files:parts.map(p=>{const offset=assetOffset;assetOffset+=p.bytes;return {path:p.path,mode:'100644',offset,bytes:p.bytes,sha256:p.sha256};}),parts:[{path:'fragment.gz',offset:0,bytes:fragment.length,sha256:sha(fragment),decoded_bytes:whole.length,decoded_sha256:sha(whole)}]};save('data/transport/index.json',index);
  const manifest={version:1,size,coordinateBits,method:'native-linear-evenodd-first-owner-v1',native_latitudes:[],hierarchy_sha256:reference.hierarchy_sha256,original_assets:{},parts,runWords:runs.length,native_asset_transport:{version:1,kind:index.kind,index:{path:'data/transport/index.json',bytes:valueBytes(index).length,sha256:valueSha(index)},logical_assets:parts.length,original_compressed_bytes:whole.length}};
- save('data/owners.json',[{id:'A',index:1},{id:'B',index:2},{id:'C',index:3}]);
+ save('data/owners.json',features.map((feature,index)=>({id:feature.id,index:index+1})));
  if(nativeAppend){
   const latitudes=nativeRowLatitudes(size),bytes=Buffer.alloc(size*8);
   latitudes.forEach((v,i)=>bytes.writeDoubleLE(v,i*8));save('original/latitudes.f64le.gz',gzipSync(bytes));
@@ -101,7 +102,7 @@ function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,sourceO
  const derived=deriveCoordinateDelta({certificate,oldAdditions:[],additions,selection}).certificate;
  const full={...derived,binding:{...derived.binding,release:reference,sources:[sourcePin]},inputs:[{path:'data/source.json',source:sourcePin,whole_body_sha256:sourcePin.decoded_sha256??sourcePin.sha256,bytes:sourcePin.decoded_bytes??sourcePin.bytes}]};
  const execution_code=CODE.map(name=>pin(name,one)),runtime=[{path:process.execPath,bytes:fs.statSync(process.execPath).size,sha256:'f'.repeat(64)}];
- const facts={version:1,kind:'trusted-selected-coordinate-stage-v1',candidate_code_executed:false,selected_commit:selected,executing_commit:one,execution_code,runtime,binding:full.binding,complete_owners:3,complete_sources:1};
+ const facts={version:1,kind:'trusted-selected-coordinate-stage-v1',candidate_code_executed:false,selected_commit:selected,executing_commit:one,execution_code,runtime,binding:full.binding,complete_owners:features.length,complete_sources:1};
  const compressed=gzipSync(valueBytes(full));save('accepted/certificate.json.gz',compressed);save('accepted/facts.json',facts);
  const publication={version:1,kind:facts.kind,complete:true,facts:{path:'facts.json',bytes:valueBytes(facts).length,sha256:valueSha(facts)},certificate:{path:'certificate.json.gz',bytes:compressed.length,sha256:sha(compressed),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)}};save('accepted/publication.json',publication);
  const inventory=[...(codeRoutes?['src/native-grid.js','data/scientific.js']:[]),PROGRAMME,...(sourceOverride?['data/selected-source.json.gz',...(physicalLogicalSource?['data/source.json']:[])]:['data/source.json']),'data/manifest.json','data/owners.json','data/registry.json','data/ledger.json','data/patch.json','data/sidecar.json','data/envelope.json',...parts.map(p=>'data/'+p.path)].map(name=>pin(name,selected));
@@ -114,10 +115,10 @@ function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,sourceO
 
 // The real entry reads each independent copy's ordinary committed catalogue and
 // products. Qualification, readers and private module state are always fresh.
-async function trustedFixture(t,{incompleteNative=false,codeRoutes=false,nativeAppend=false,sourceOverride=false,physicalLogicalSource=false,originalPatchRows,overrideLogicalPath='data/source.json',nativeLayout}={}){
+async function trustedFixture(t,{incompleteNative=false,codeRoutes=false,nativeAppend=false,sourceOverride=false,physicalLogicalSource=false,originalPatchRows,overrideLogicalPath='data/source.json',nativeLayout,sourceFeatures}={}){
  // Snapshot caller-owned rows before both keying and building the private seed.
  const options={incompleteNative,codeRoutes,nativeAppend,sourceOverride,physicalLogicalSource,
-  originalPatchRows:structuredClone(originalPatchRows??[{y:1,runs:[[2,3,1]]}]),overrideLogicalPath,nativeLayout:structuredClone(nativeLayout??null)};
+  originalPatchRows:structuredClone(originalPatchRows??[{y:1,runs:[[2,3,1]]}]),overrideLogicalPath,nativeLayout:structuredClone(nativeLayout??null),sourceFeatures:structuredClone(sourceFeatures??null)};
  const key=JSON.stringify(options);
  let seed=trustedSeeds.get(key);
  if(!seed){
@@ -129,7 +130,7 @@ async function trustedFixture(t,{incompleteNative=false,codeRoutes=false,nativeA
  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
  fs.cpSync(seed.root,root,{recursive:true});
  const data=structuredClone(seed.data);
- const api=await import(pathToFileURL(path.join(root,MODULE))),native=await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs')));
+ const api=checkpointTestAPI(t,await import(pathToFileURL(path.join(root,MODULE)))),native=await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs')));
  const reader=new native.ImmutableReader(root,data.selected);
  return {...data,...fixtureRepository(root),api,native,reader};
 }
@@ -137,23 +138,27 @@ async function trustedFixture(t,{incompleteNative=false,codeRoutes=false,nativeA
 // Genuine pinned source/native qualification, followed by the public private-state
 // admission and transition. The full lattice is a two-MiB normative input, while
 // the proposed and projected repair is one cell; no research result is invented.
-async function appendNativeAuthority(f,{owner=0,name='appended',mutateEvidence=()=>{},mutateLedger=()=>{},mutatePatch=()=>{},duplicateAuthority=false,membershipPath='data/geography/part-0.json'}={}) {
- const family='gb:TST:ADM2',feature=f.features[owner],target=family+':'+feature.id;
- const latitudes=nativeRowLatitudes(f.manifest.size),y=latitudes.findIndex(v=>v<.1);
- const x=Math.floor((owner+.1+180)/360*f.manifest.size);
+async function appendNativeAuthority(f,{owner=0,targetOwners,name='appended',completedConstructor=false,mutateConstructor=()=>{},nativePatchRows,mutateEvidence=()=>{},mutateLedger=()=>{},mutatePatch=()=>{},duplicateAuthority=false,membershipPath='data/geography/part-0.json'}={}) {
+ const family='gb:TST:ADM2',latitudes=nativeRowLatitudes(f.manifest.size);
+ const requested=(targetOwners??[owner]).map(owner=>{
+  const feature=f.features[owner],bounds=coordinateBounds(feature.geometry)[0],target=family+':'+feature.id;
+  const y=latitudes.findIndex(v=>v<(bounds[1]+bounds[3])/2),x=Math.floor(((bounds[0]+bounds[2])/2+180)/360*f.manifest.size);
+  return {owner,feature,target,y,x};
+ });
+ const {y,x}=requested[0];
  const raw={type:'FeatureCollection',features:f.features.map(p=>({type:'Feature',properties:{shapeID:p.id},geometry:p.geometry}))};
  f.save(name+'/source.json',raw);
  f.save('coordination/engineering/original-geography-source-corpus-20261006/catalogue.json',{
   products:[{key:family,parts:[{path:name+'/source.json',bytes:valueBytes(raw).length,sha256:valueSha(raw)}],
    feature_count:raw.features.length,original_bytes:valueBytes(raw).length,original_sha256:valueSha(raw)}]});
- f.save(name+'/physical.json',{results:[{target,issues:[],support:{mapped_land_support:feature.geometry}}]});
- f.save(name+'/measured.json',[{target,consumed:{geometry:feature.geometry},selected:{id:feature.id,geometry:feature.geometry}}]);
+ f.save(name+'/physical.json',{results:requested.map(({target,feature})=>({target,issues:[],support:{mapped_land_support:feature.geometry}}))});
+ f.save(name+'/measured.json',requested.map(({target,feature})=>({target,consumed:{geometry:feature.geometry},selected:{id:feature.id,geometry:feature.geometry}})));
  f.save(name+'/physical.py',Buffer.from('# immutable bounded fixture\n'));
  f.save('data/world-index.json',{parts:[membershipPath.slice('data/'.length)]});
  f.save('data/semantic-report.json',{changes:f.features.map(p=>({id:p.id,replaces:[family+':'+p.id]}))});
  f.save(membershipPath,{type:'FeatureCollection',features:f.features.map(p=>({...p,
   properties:{...p.properties,metadata:{source_member_ids:[family+':'+p.id]}}}))});
- f.save(name+'/native-patch.json',{rows:[{y,runs:[[x,x+1,owner+1]]}]});const originals=f.commit();
+ f.save(name+'/native-patch.json',{rows:nativePatchRows===undefined?mergeCompletedNativePatches(requested.map(({owner,x,y})=>({rows:[{y,runs:[[x,x+1,owner+1]]}]})),f.manifest.size):structuredClone(nativePatchRows)});const originals=f.commit();
  const evidence={version:1,kind:'source-target-native-evidence-v1',
   catalogue:f.pin('coordination/engineering/original-geography-source-corpus-20261006/catalogue.json',originals),
   owner_roster:f.pin('data/owners.json',originals),physical_evidence:f.pin(name+'/physical.json',originals),
@@ -161,8 +166,8 @@ async function appendNativeAuthority(f,{owner=0,name='appended',mutateEvidence=(
   native_latitudes:f.manifest.native_latitudes,
   native_contract:Object.fromEntries(['size','coordinateBits','method','native_latitudes','hierarchy_sha256','original_assets'].map(k=>[k,f.manifest[k]])),
   base_reference:f.envelope.base_reference,families:[{source_id:family,parts:[f.pin(name+'/source.json',originals)]}],
-  targets:[{id:target,target_id:feature.id,pixelIndex:owner+1,source_family:family,base_geometry:feature.geometry,
-   source_receipt_sha256:f.pin(name+'/physical.json',originals).sha256,coverage_classes:['mapped_land_support']}],
+  targets:requested.map(({target,feature,owner})=>({id:target,target_id:feature.id,pixelIndex:owner+1,source_family:family,base_geometry:feature.geometry,
+   source_receipt_sha256:f.pin(name+'/physical.json',originals).sha256,coverage_classes:['mapped_land_support']})),
   source_membership:{index:f.pin('data/world-index.json',originals),lineage:f.pin('data/semantic-report.json',originals),parts:[f.pin(membershipPath,originals)]}};
  mutateEvidence(evidence);f.save(name+'/evidence.json',evidence);const ev=f.commit();
  const operands={source_evidence:f.pin(name+'/evidence.json',ev),native_patch:f.pin(name+'/native-patch.json',originals)};
@@ -174,7 +179,15 @@ async function appendNativeAuthority(f,{owner=0,name='appended',mutateEvidence=(
  const {readRetainedRegistryAuthority}=await import(pathToFileURL(path.join(f.root,CODE[1])));
  const proof=readRetainedRegistryAuthority(reader,entry);
  assert(Object.isFrozen(proof));assert.strictEqual(proof.source_rows,proof.original_ledger.rows);
- assert.strictEqual(proof.original_ledger.rows[0].native_rows[0].runs[0],proof.native_proof.native_patches[0].rows[0].runs[0]);
+ for(const component of proof.original_ledger.rows)for(const row of component.native_rows)for(const run of row.runs)
+  assert(proof.native_proof.native_patches[0].rows.find(candidate=>candidate.y===row.y)?.runs.includes(run));
+ if(completedConstructor){
+  const constructed={version:1,kind:'existing-source-target-native-constructor-result',
+   inputs:Object.fromEntries(Object.entries(operands).map(([role,pin])=>[role,{commit:pin.commit,path:pin.path}])),
+   rule_sha256:entry.rule_sha256,component_ids:structuredClone(proof.source_scope_ids),ledger_rows:structuredClone(proof.source_rows),limitations:proof.limitations};
+  mutateConstructor(constructed);f.save(name+'/constructed.json',constructed);const completed=f.commit();
+  entry.completed_constructor=f.pin(name+'/constructed.json',completed);
+ }
  const entries=[...f.registry.entries,entry];
  if(duplicateAuthority){
   f.save(name+'/binding-duplicate.json',{version:1,kind:'source-target-native-custody-v1',...operands});const duplicate=f.commit();
@@ -249,13 +262,13 @@ export async function referenceCheckpointFixture(t) {
   logical_asset_map:assets,runtime_envelope:put('accepted/envelope.json',envelope)};
  const side=put('accepted/sidecar.json',sidecar),selection={...baseSelection,additive_release:{path:side.path,bytes:side.bytes,sha256:side.sha256}};
  f.write('data/ownership-selection.json',selection);const selected=f.commit();
- const api=await import(pathToFileURL(path.join(f.repo,MODULE))),native=await import(pathToFileURL(path.join(f.repo,'scripts/check-effective-geographic-regression.mjs')));
+ const api=checkpointTestAPI(t,await import(pathToFileURL(path.join(f.repo,MODULE)))),native=await import(pathToFileURL(path.join(f.repo,'scripts/check-effective-geographic-regression.mjs')));
  const neighbors=await import(pathToFileURL(path.join(f.repo,CODE[1]))),reader=new native.ImmutableReader(f.repo,selected);
  const snapshot=native.loadBaseSelection(reader),resolver=native.selectedGeometrySourceAlias(snapshot);
  const certificate=neighbors.joinSelectedCoordinateCertificate(resolver,[neighbors.selectedCoordinateShard(resolver,resolver.paths)]);
  const execution_code=CODE.map(name=>f.pin(name,selected)),runtime=[{path:process.execPath,bytes:fs.statSync(process.execPath).size,sha256:'f'.repeat(64)}];
  const facts={version:1,kind:'trusted-selected-coordinate-stage-v1',candidate_code_executed:false,selected_commit:selected,executing_commit:selected,
-  execution_code,runtime,binding:certificate.binding,complete_owners:3,complete_sources:1};
+  execution_code,runtime,binding:certificate.binding,complete_owners:certificate.entries.length,complete_sources:1};
  const compressed=gzipSync(valueBytes(certificate)),certificatePin=put('accepted/certificate.json.gz',compressed),factsPin=put('accepted/facts.json',facts);
  const output={version:1,kind:facts.kind,complete:true,facts:{path:'facts.json',bytes:factsPin.bytes,sha256:factsPin.sha256},
   certificate:{path:'certificate.json.gz',bytes:compressed.length,sha256:sha(compressed),decoded_bytes:valueBytes(certificate).length,decoded_sha256:valueSha(certificate)}};
@@ -270,7 +283,7 @@ export async function referenceCheckpointFixture(t) {
   execution_code_sha256:valueSha(execution_code),runtime_sha256:valueSha(runtime),facts:factsPin,
   certificate:{...certificatePin,decoded_bytes:valueBytes(certificate).length,decoded_sha256:valueSha(certificate)},publication:outputPin,custody,routes};
  put(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[rootRow]});
- const qualified=api.qualifyCheckpoint({reader});assert.equal(qualified.available,true);t.after(()=>api.releaseCheckpoint(qualified.state));
+ const qualified=(await api.qualifyCheckpoint({reader}));assert.equal(qualified.available,true);
  for(const name of ['data/hierarchy.json','data/geography/fixture.json','data/geographic-releases/current-manifest.json','data/geographic-releases/releases.json.gz'])f.write(name,raw(current,name));
  const currentReference=f.projection.reference;
  const currentEffective={...currentReference,footprints_sha256:valueSha({domain:'worldatlas-effective-native-footprints:v2',

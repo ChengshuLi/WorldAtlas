@@ -64,7 +64,7 @@ def prefetch_declared_inputs(repo, baseline, candidate, timeout=120):
 
 
 TRUSTED_PATHS = ['scripts/run-geographic-check.py', 'scripts/check-geographic-regression.py',
-                 'scripts/native-word-store.mjs', 'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs',  'src/native-grid.js', 'src/ownership-codec.js',
+                 'scripts/native-word-store.mjs','scripts/native-patch-store.mjs', 'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs',  'src/native-grid.js', 'src/ownership-codec.js',
                  'scripts/evidence/immutable.py', 'scripts/evidence/geometry.py',
                  'scripts/ellipsoidal_area.py', 'requirements.txt',
                  'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',

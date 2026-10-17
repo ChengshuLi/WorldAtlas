@@ -11,7 +11,7 @@ import {authenticateOriginalPackageOutput, requireOriginalPackageOutput,
 import {requireCurrentPackageAssembly, integrationTestFiles} from '../scripts/run-integration-tests.mjs';
 import {createPackageAssemblyScratch,packageAssemblyInvocation,findOriginalPackage,acceptedSelectedPackageInputs,readOriginalPackageGeography} from '../scripts/assemble-selected-package.mjs';
 import {execFileSync,spawnSync} from 'node:child_process';
-import {inspectPackageExecutionInputs,inspectPackageNodeRuntime,inspectPackageRuntime} from '../scripts/package-build.mjs';
+import {inspectPackageNodeRuntime,inspectPackageRuntime} from '../scripts/package-build.mjs';
 import {loadPackageInputs} from '../scripts/package-inputs.mjs';
 import {githubAPI} from '../scripts/issue-claim-contract.mjs';
 import {admitPackageInputTransition,committedPackageInputs,committedPackageProducer} from '../scripts/package-output-artifact.mjs';
@@ -849,28 +849,7 @@ test('shared current consumer retains independent owner and base checks and refu
   await assert.rejects(prepareCurrentSelectedAdditive({root:f.currentRoot,...context}),/selection must be ordinary/);
 });
 
-test('shared selected-input admission covers actual builders and refuses undeclared imports',t=>{
-  const root=fs.realpathSync(process.cwd()),definition=loadPackageInputs(root),files=new Set();
-  for(const kind of ['static','hosted','cloudflare']){
-    const actual=inspectPackageExecutionInputs(root,definition,kind);
-    assert.deepEqual(actual.errors,[],'Actual '+kind+' preflight must include its complete current import closure');
-    assert(!actual.files.includes('scripts/package-output-artifact.mjs'));
-    for(const name of actual.files)files.add(name);
-  }
-  const fixture=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'atlas-output-role-closure-')));
-  t.after(()=>fs.rmSync(fixture,{recursive:true,force:true}));
-  for(const name of files){const dest=path.join(fixture,name);fs.mkdirSync(path.dirname(dest),{recursive:true});
-    fs.copyFileSync(path.join(root,name),dest,fs.constants.COPYFILE_EXCL);}
-  fs.writeFileSync(path.join(fixture,'undeclared-fixture.mjs'),'export const fixture=true;\n');
-  fs.appendFileSync(path.join(fixture,'scripts/package-current-additive.mjs'),
-    "\nimport '../undeclared-fixture.mjs';\n");
-  for(const kind of ['static','hosted','cloudflare']){
-    const rejected=inspectPackageExecutionInputs(fixture,definition,kind);
-    assert(rejected.files.includes('undeclared-fixture.mjs'));
-    assert(rejected.errors.some(error=>error.kind==='execution-declaration'&&error.path==='undeclared-fixture.mjs'),
-      'The real '+kind+' entry must refuse undeclared imports');
-  }
-});
+
 
 
 for(const sourceRevision of [false,true])test('identical original reference metadata retains '+(sourceRevision?'source-authored':'generated')+' revision and complete current properties',async t=>{

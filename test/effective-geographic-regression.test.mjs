@@ -308,7 +308,7 @@ test('whole original rule custody derives actual issued preimage and refuses reb
 
 
 test('renewed immutable artifact entry binds complete catalogue and independent authority',()=>{
- const directory=path.join(root,'coordination/engineering/selected-geography-effective-prevention-20261009/artifact-interface-controls/latest-999db');
+ const directory=path.join(root,'test/fixtures/artifact-authority/latest-999db');
  const rows=JSON.parse(fs.readFileSync(path.join(directory,'original-inputs.json'))).pins;
  const read=name=>fs.readFileSync(path.join(directory,name));
  for(const p of rows)assert.equal(sha(read(p.copy)),p.sha256);
@@ -333,7 +333,7 @@ test('renewed immutable artifact entry binds complete catalogue and independent 
  ]) {const c=structuredClone(certificate),p=structuredClone(catalogue);change(c,p);assert.throws(()=>validateReleaseCatalogue(c,p,registry),pattern);}
  const f=fixture();try{
   for(const p of rows)f.write(p.path,read(p.copy));
-  const original=path.join(root,'coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/original-999');
+  const original=path.join(root,'test/fixtures/artifact-authority/original-999');
   for(const p of JSON.parse(fs.readFileSync(path.join(original,'original-inputs.json'))).pins)f.write(p.path,fs.readFileSync(path.join(original,p.copy)));const head=f.commit();
   const selection=JSON.parse(read('selection.json')),manifest=JSON.parse(read('manifest.json'));
   const open=()=>new ImmutableReader(f.repo,head);
@@ -366,7 +366,7 @@ test('renewed immutable artifact entry binds complete catalogue and independent 
 });
 
 test('registered 533-role authority derives complete whole-input custody',()=>{
- const directory=path.join(root,'coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-e177');
+ const directory=path.join(root,'test/fixtures/artifact-authority/latest-e177');
  const read=name=>fs.readFileSync(path.join(directory,name));
  const rows=JSON.parse(read('original-inputs.json')).pins;
  for(const p of rows)assert.equal(sha(read(p.copy)),p.sha256);
@@ -409,7 +409,7 @@ test('registered 533-role authority derives complete whole-input custody',()=>{
 
 
 test('Cloudflare fourth entry is explicit and cannot reinterpret historical profile shapes',()=>{
- const directory=path.join(root,'coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-e177');
+ const directory=path.join(root,'test/fixtures/artifact-authority/latest-e177');
  const read=name=>fs.readFileSync(path.join(directory,name));
  const certificate=JSON.parse(read('certificate.json')),code=JSON.parse(read('code.json')),qualification=JSON.parse(gunzipSync(read('qualification.json.gz')));
  const cloudflare='scripts/build-cloudflare-inner.mjs';
@@ -426,7 +426,7 @@ test('Cloudflare fourth entry is explicit and cannot reinterpret historical prof
 });
 
 
-for(const [title,relative]of [['genuine Cloudflare authority retains complete 533 roles and four explicit entry profiles','coordination/engineering/qualified-artifact-authority-admission-20261009/fixtures/latest-8832354'],['renewed installer authority retains genuine complete 533-role custody','coordination/engineering/selected-native-side-acquisition-20261009/authority-121149']])test(title,()=>{
+for(const [title,relative]of [['genuine Cloudflare authority retains complete 533 roles and four explicit entry profiles','test/fixtures/artifact-authority/latest-8832354'],['renewed installer authority retains genuine complete 533-role custody','test/fixtures/artifact-authority/authority-121149']])test(title,()=>{
  const directory=path.join(root,relative);
  const read=name=>fs.readFileSync(path.join(directory,name));
  const rows=JSON.parse(read('original-inputs.json')).pins;

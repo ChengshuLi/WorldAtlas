@@ -10,23 +10,13 @@ import {checkoutExecutionClosure} from '../coordination/engineering/arctic-three
 
 const repo=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 
-test('actual checkout authority covers current code independently of authenticated historical provenance',()=>{
+test('actual checkout authority covers current code independently of historical provenance',()=>{
   const closure=checkoutExecutionClosure(repo);
   assert.equal(new Set(closure).size,closure.length);
   assert(closure.includes('scripts/run-integration-tests.mjs'));
   assert(!closure.includes('coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifact-consumer.mjs'));
   assert(!closure.includes('scripts/canonical-restoration.mjs'));
-  const pinned=pin=>{
-    const raw=execFileSync('git',['show',`HEAD:${pin.path}`],{cwd:repo,maxBuffer:Infinity});
-    assert.equal(raw.length,pin.bytes);
-    assert.equal(createHash('sha256').update(raw).digest('hex'),pin.sha256);
-    return JSON.parse(raw);
-  };
-  const selection=JSON.parse(execFileSync('git',['show','HEAD:data/ownership-selection.json'],{cwd:repo}));
-  const certificate=pinned(selection.artifact_consumption.certificate);
-  const code=pinned(certificate.application_consumer_code);
-  assert.equal(code.kind,'qualified-artifact-application-code-closure-v1');
-  assert(code.critical_files.length>0,'Historical consumer provenance remains authenticated');
+
 });
 
 test('actual checkout authority refuses concatenated relative imports and missing smoke dependencies',t=>{

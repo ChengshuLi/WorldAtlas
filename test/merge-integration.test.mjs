@@ -13,6 +13,7 @@ import {focusedIntegrationTest, integrationTestFiles, integrationNeedsBrowser, p
 import {renderClaim, githubAPI} from '../scripts/issue-claim-contract.mjs';
 import {reviewedTestPlan, prepareIntegration, completeIntegration, checkCurrentChecks, integrationProfile, integrationChanges, geographyRequired, createCandidate, cleanupCandidate, cleanupMergedHead} from '../scripts/merge-integration.mjs';
 
+import {EXECUTION_CODE} from '../scripts/check-unchanged-selected-geography.mjs';
 const sha = letter => letter.repeat(40);
 const FOCUSED_INTEGRATION_TESTS = integrationTestFiles('evidence', 0);
 
@@ -132,13 +133,13 @@ test('actual full preparation emits archive patterns from the authenticated cand
 });
 
 test('reviewed tests bind both trusted phases without changing actual geography obligations', async () => {
-  const f=controlFixture(), files=['test/merge-integration.test.mjs'];
+  const f=controlFixture({withContractBoundary:true}), files=['test/merge-integration.test.mjs'];
   const request={base:f.base,head:f.head,files,inputs:[]};
   const prepared=await prepareIntegration({...f.options(),reviewedTests:JSON.stringify(request)});
   assert.equal(prepared.profile,'evidence');assert.equal(prepared.test_selection,'reviewed');
   assert.deepEqual(prepared.test_files,files);assert.deepEqual(prepared.shards,[0]);
   assert.equal(prepared.geography_required,false);
-  assert.deepEqual(prepared.checkout_patterns,focusedCheckoutPatterns(f.packageInputs,[]));
+  assert.deepEqual(prepared.checkout_patterns,focusedCheckoutPatterns(f.packageInputs,[...EXECUTION_CODE]));
   assert.equal((await f.complete({reviewedTests:request,geographyResult:'skipped'})).accepted,true);
   for(const changed of [{base:sha('0')},{head:sha('0')},{head:undefined}]) {
     const stale={...request,...changed};
@@ -151,29 +152,37 @@ test('reviewed tests bind both trusted phases without changing actual geography 
   await assert.rejects(f.complete({reviewedTests:request,geographyResult:'skipped'}),/Trusted combined geography/);
 });
 
-test('reviewed test and fixture operands are existing ordinary candidate paths', () => {
+test('reviewed tests derive the complete fixture and executing-policy boundary without manual operands', () => {
   const row=(mode='100644',type='blob')=>({sha:sha('e'),mode,type});
-  const entries=new Map([['test',row('040000','tree')],['test/example.test.mjs',row()],
-    ['data/fixture.json',row()],['data/directory/child.json',row()]]);
-  const plan={base:sha('a'),head:sha('b'),files:['test/example.test.mjs'],inputs:['data/fixture.json','data/directory/']};
+  const entries=new Map([...EXECUTION_CODE.map(name=>[name,row()]),['test',row('040000','tree')],
+    ['test/example.test.mjs',row()],['test/fixtures/contract/input.json',row()]]);
+  const plan={base:sha('a'),head:sha('b'),files:['test/example.test.mjs'],inputs:[]};
   const context={base:plan.base,head:plan.head,entries,files:[],definition:loadPackageInputs()};
   const result=reviewedTestPlan(plan,context);
-  assert.deepEqual(result.files,plan.files);assert.deepEqual(result.inputs,plan.inputs);assert.equal(result.build,false);
+  assert.deepEqual(result.files,plan.files);assert.deepEqual(result.inputs,[...EXECUTION_CODE]);assert.equal(result.build,false);
+  assert.deepEqual(reviewedTestPlan({...plan,inputs:undefined},context),result);
+  assert.deepEqual(reviewedTestPlan({...plan,inputs:result.inputs},context),result,'Derived compatibility envelope works unchanged');
   for(const files of [[],['test/missing.test.mjs'],['../escape.test.mjs'],['test/../escape.test.mjs'],[null]])
     assert.throws(()=>reviewedTestPlan({...plan,files},context),/roster|ordinary/);
-  for(const inputs of [undefined,['../escape'],['/etc/passwd'],['data\\fixture.json'],['data/missing/'],[null]])
-    assert.throws(()=>reviewedTestPlan({...plan,inputs},context),/fixture/);
+  for(const inputs of [['../escape'],['/etc/passwd'],['data/fixture.json'],[null]])
+    assert.throws(()=>reviewedTestPlan({...plan,inputs},context),/manual inputs/);
   for(const [name,mode,type] of [['test/example.test.mjs','120000','blob'],['test','120000','blob'],
-    ['data/fixture.json','160000','commit'],['data/directory/child.json','120000','blob'],['data/directory','120000','blob']]) {
+    ['test/fixtures/contract/input.json','120000','blob'],['test/fixtures/contract','120000','blob'],
+    [EXECUTION_CODE[0],'160000','commit']]) {
     const changed=new Map(entries);changed.set(name,row(mode,type));
-    assert.throws(()=>reviewedTestPlan(plan,{...context,entries:changed}),/ordinary/);
+    assert.throws(()=>reviewedTestPlan(plan,{...context,entries:changed}),/ordinary|unavailable/);
   }
+  const omitted=new Map(entries);omitted.delete(EXECUTION_CODE[0]);
+  assert.throws(()=>reviewedTestPlan(plan,{...context,entries:omitted}),/unavailable/);
+  const noFixtures=new Map(entries);noFixtures.delete('test/fixtures/contract/input.json');
+  assert.throws(()=>reviewedTestPlan(plan,{...context,entries:noFixtures}),/fixture boundary/);
   assert.equal(reviewedTestPlan(undefined,context),null);
 });
 
+
 test('reviewed lists cannot omit actual packaged consumers when package source changes or moves', async () => {
   for(const changed of [{filename:'src/a.js'}, {filename:'archive/a.js',previous_filename:'src/a.js'}]) {
-    const f=controlFixture();f.packageInputs.inputs.push('src/');
+    const f=controlFixture({withContractBoundary:true});f.packageInputs.inputs.push('src/');
     const required=['test/compact-ownership.test.mjs','test/prepared-parity.test.mjs'];
     const entries=new Map([...f.integrated,...required.map(path=>({path,sha:sha('e'),type:'blob',mode:'100644'}))].map(row=>[row.path,row]));
     const request={base:f.base,head:f.head,files:['test/merge-integration.test.mjs'],inputs:[]};
@@ -183,6 +192,18 @@ test('reviewed lists cannot omit actual packaged consumers when package source c
     assert(plan.checkout_patterns.includes('/src/'));
     entries.delete(required[0]);assert.throws(()=>reviewedTestPlan(request,context),/packaged consumer/);
   }
+});
+
+test('minimal reviewed package consumer derives real inputs without a changed package file',()=>{
+ const f=controlFixture({withContractBoundary:true});
+ const required='test/prepared-parity.test.mjs';
+ const entries=new Map([...f.integrated,{path:required,sha:sha('e'),type:'blob',mode:'100644'}].map(row=>[row.path,row]));
+ const context={base:f.base,head:f.head,entries,files:[],definition:f.packageInputs};
+ const packagePlan=reviewedTestPlan({base:f.base,head:f.head,files:[required]},context);
+ assert.equal(packagePlan.build,true);assert.deepEqual(packagePlan.files,[required]);
+ for(const name of f.packageInputs.inputs)assert(packagePlan.checkout_patterns.includes('/'+name));
+ const unitPlan=reviewedTestPlan({base:f.base,head:f.head,files:['test/merge-integration.test.mjs']},context);
+ assert.equal(unitPlan.build,false);assert.deepEqual(unitPlan.inputs,[...EXECUTION_CODE]);
 });
 
 test('full preparation rejects unavailable or malformed package roles and cleans its candidate',async()=>{
@@ -583,12 +604,15 @@ test('geography omission derives only non-scientific control and validated focus
   assert.equal(geographyRequired('geography/controls',[{filename:'scripts/merge-integration.mjs'}]),false);
 });
 
-function controlFixture() {
+function controlFixture({withContractBoundary=false}={}) {
   const f=fixture(), original=f.api;
   f.files=['scripts/merge-integration.mjs','test/merge-integration.test.mjs'].map(filename=>({filename,status:'modified'}));
   f.pr.changed_files=f.files.length;
   f.authored=f.files.map(file=>({path:file.filename,sha:sha('e'),mode:'100644',type:'blob'}));
   f.baseline=f.authored.map(row=>({...row,sha:sha('d')}));
+  const stable=(withContractBoundary?[...EXECUTION_CODE,'test/fixtures/contract/input.json']:[]).filter(name=>!f.authored.some(row=>row.path===name))
+    .map(path=>({path,sha:sha('c'),mode:'100644',type:'blob'}));
+  f.authored.push(...structuredClone(stable));f.baseline.push(...structuredClone(stable));
   f.integrated=structuredClone(f.authored);
   f.api=(route,...args)=>route.split('?')[0].endsWith('/pulls/2/files') ? structuredClone(f.files) : original(route,...args);
   return f;

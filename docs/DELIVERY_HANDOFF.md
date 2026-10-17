@@ -1009,3 +1009,23 @@ applicability exception and cannot grant positive ownership. Existing positive
 reconciliation and complete cohort/parent/source checks remain required. The role
 currently covers only the already retained Natural Earth ADM1 registry product,
 not a generic provider adapter or permission to omit another original family.
+
+
+## Replace superseded cumulative package roles
+
+Finalization authenticates the prior selected sidecar through the original
+selector, then replaces its explicitly declared cumulative ledger, patch,
+runtime envelope and sidecar roots with the current consumed roles. Shared
+current assets, unrelated declarations, directory declarations and verification
+roles remain unchanged. This changes package acquisition only; historical
+scientific bodies and the complete custody projection remain in Git. Repeated
+finalization must not accumulate another obsolete cumulative payload.
+
+The initial accepted-282d cleanup is inventoried in
+`coordination/engineering/selected-package-root-pruning-20261017/obsolete-cumulative-roles.json`.
+Each removed exact path is bound to an authenticated historical sidecar and the
+accepted-tree blob identity. Its 434,610,304 logical descriptor bytes are not a
+measurement of compressed transfer or elapsed-time savings. Current Tanzania
+roles and original scientific authority inputs are retained. If the selected
+release advances before integration, derive the cleanup again from that actual
+selection; do not replay this historical list over a newer selected quartet.

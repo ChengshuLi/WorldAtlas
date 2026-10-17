@@ -6,6 +6,7 @@ import {isDeepStrictEqual as same} from "node:util";
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
+import {selectedHistory} from './fixtures/selected-data-history.mjs';
 import {createHash} from 'node:crypto';
 import {checkPremergeEvidence} from '../scripts/premerge-evidence.mjs';
 import {prepareIntegration, completeIntegration} from '../scripts/merge-integration.mjs';
@@ -335,7 +336,7 @@ function retainedUKRFixture() {
   const blobs=new Map(), parsed=new Map(), pins=new Map();
   const readOriginal=name=>{
     if(parsed.has(name))return parsed.get(name);
-    const bytes=execFileSync('git',['show','HEAD:'+name],{maxBuffer:4*1024*1024,env:{...process.env,GIT_NO_LAZY_FETCH:'1'}});
+    const bytes=selectedHistory().readFile(name);
     const oid=createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex');blobs.set(oid,bytes);
     pins.set(name,{path:name,bytes:bytes.length,sha256:digest(bytes),git_blob_oid:oid,mode:'100644'});
     const value=JSON.parse(bytes);parsed.set(name,value);return value;
@@ -352,10 +353,10 @@ function retainedUKRFixture() {
     for(const child of Object.values(value))collect(child);
   };
   for(const value of [sidecar,ledger,registry,certificate])collect(value);
-  const names=[...pins.keys()],rows=execFileSync('git',['ls-tree','HEAD','--',...names],{encoding:'utf8',maxBuffer:1024*1024,env:{...process.env,GIT_NO_LAZY_FETCH:'1'}}).trim().split('\n');
   const baseline={entries:new Map()},authored={entries:new Map()};
-  for(const line of rows){const m=/^(\d+) (\w+) ([a-f0-9]+)\t(.+)$/.exec(line);assert(m,line);const pin=pins.get(m[4]);
-    assert.equal(m[1],pin.mode);assert.equal(m[3],pin.git_blob_oid);baseline.entries.set(m[4],{path:m[4],type:m[2],mode:m[1],sha:m[3],size:pin.bytes});}
+  for(const [name,pin] of pins) {const row=selectedHistory().entry(name);assert(row,name);
+    assert.equal(row.mode,pin.mode);assert.equal(row.sha,pin.git_blob_oid);assert.equal(row.size,pin.bytes);
+    baseline.entries.set(name,row);}
   for(const [name,row] of baseline.entries)authored.entries.set(name,{...row});
   const put=(name,value,old=false)=>{const bytes=Buffer.from(typeof value==='string'?value:JSON.stringify(value)),sha=createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex');
     blobs.set(sha,bytes);const row={path:name,mode:'100644',type:'blob',sha,size:bytes.length};authored.entries.set(name,row);if(old)baseline.entries.set(name,row);
@@ -395,7 +396,7 @@ function actualSourceSpecimen() {
   if (sourceSpecimen) return sourceSpecimen;
   const bodies = new Map(), documents = new Map(), paths = new Set();
   const raw = name => {
-    const bytes = execFileSync('git', ['show', 'HEAD:' + name], {maxBuffer:32*1024*1024, env:{...process.env,GIT_NO_LAZY_FETCH:'1'}});
+    const bytes = selectedHistory().readFile(name);
     bodies.set(createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex'), bytes);return bytes;
   };
   const json = name => {const value=JSON.parse(raw(name));documents.set(name,value);paths.add(name);return value;};
@@ -421,12 +422,8 @@ function actualSourceSpecimen() {
     native.inputs.filter(row=>sourceRoles.includes(row.path)),
     [...handoff.consumed_inputs,...(handoff.reused_whole_product_inputs??[])].filter(row=>
       /\/(?:components|sources)-\d{3}\.jsonl\.gz$/.test(row.path))])collect(value);
-  const output=execFileSync('git',['ls-tree','-l','HEAD','--',...paths],{encoding:'utf8',maxBuffer:4*1024*1024,env:{...process.env,GIT_NO_LAZY_FETCH:'1'}});
   const entries=new Map();
-  for(const line of output.trim().split('\n')) {
-    const match=/^(\d+) (\w+) ([a-f0-9]+)\s+(\d+)\t(.+)$/.exec(line);
-    if(match)entries.set(match[5],{path:match[5],mode:match[1],type:match[2],sha:match[3],size:Number(match[4])});
-  }
+  for(const name of paths) {const row=selectedHistory().entry(name);if(row)entries.set(name,row);}
   // The two whole restored bodies are encoded data, never decoded or executed.
   const physical=handoff.consumed_inputs.filter(row=>/\/(?:components|sources)-\d{3}\.jsonl\.gz$/.test(row.path));
   assert.equal(physical.length,2);for(const row of physical)raw(row.path);
@@ -594,22 +591,19 @@ test('registry changes preserve every original entry and cannot remove or rewrit
 });
 
 
-// Only mutable global metadata is snapshotted. Original delivery vintages stay
-// in their retained repository paths and are checked against actual Git bodies.
+// Mutable global metadata and immutable original roles are explicit fixtures.
+// The policy reader still authenticates every body it consumes against its role.
 const fixedRows=new Map(),fixedBlobs=new Map();
 function fixedDeliveryFixture({leanPackage=false,fixtureName='selected-native-role-ci-1726.json'}={}) {
   const fixed=JSON.parse(readFileSync(new URL('./fixtures/'+fixtureName,import.meta.url))),
     files=structuredClone(fixed.files),added=new Set(files.filter(row=>row.status==='added').map(row=>row.filename)),
     blobs=new Map(fixedBlobs),reads=[],root='/repos/owner/repo';
-  const git=(...args)=>execFileSync('git',args,{maxBuffer:32*1024*1024,env:{...process.env,GIT_NO_LAZY_FETCH:'1'}});
   const oid=bytes=>createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex');
   for(const snap of fixed.snapshots){const raw=Buffer.from(snap.body);assert.equal(raw.length,snap.bytes);assert.equal(digest(raw),snap.sha256);assert.equal(oid(raw),snap.git_blob_oid);blobs.set(snap.git_blob_oid,raw);}
   const rows=fixedRows;
   const repositoryRow=name=>{
     if(rows.has(name))return rows.get(name);
-    const raw=git('ls-tree','HEAD','--',name).toString('utf8').trim(),match=/^(\d+) (\w+) ([a-f0-9]+)\t(.+)$/.exec(raw);
-    if(!match)return undefined;
-    const row={path:match[4],mode:match[1],type:match[2],sha:match[3],size:fixed.retained_tree_rows?.find(row=>row.path===name&&row.sha===match[3])?.size??Number(git('cat-file','-s',match[3]).toString())};rows.set(name,row);return row;
+    const row=selectedHistory().entry(name);if(row)rows.set(name,row);return row;
   };
   class RoleTree extends Map {
     constructor(commit){super();this.commit=commit;}
@@ -625,7 +619,7 @@ function fixedDeliveryFixture({leanPackage=false,fixtureName='selected-native-ro
   const baseline={object:{sha:fixed.base},entries:new RoleTree(fixed.base)},authored={object:{sha:fixed.head},entries:new RoleTree(fixed.head)};
   for(const row of files){baseline.entries.get(row.filename);authored.entries.get(row.filename);}
   const api=async route=>{
-    if(route.includes('/git/blobs/')){const sha=route.split('/').at(-1);if(!blobs.has(sha)){const raw=git('cat-file','blob',sha);blobs.set(sha,raw);fixedBlobs.set(sha,raw);}const bytes=blobs.get(sha);reads.push(sha);return {sha,size:bytes.length,encoding:'base64',content:bytes.toString('base64')};}
+    if(route.includes('/git/blobs/')){const sha=route.split('/').at(-1);if(!blobs.has(sha)){const raw=selectedHistory().readBlob(sha);blobs.set(sha,raw);fixedBlobs.set(sha,raw);}const bytes=blobs.get(sha);reads.push(sha);return {sha,size:bytes.length,encoding:'base64',content:bytes.toString('base64')};}
     if(route.startsWith(root+'/compare/'))return {status:'ahead'};
     if(route.startsWith(root+'/git/commits/')){const sha=route.split('/').at(-1);const source=fixed.accepted_sources.find(row=>row.commit===sha);assert(source,route);return {sha,tree:{sha:source.tree}};}
     if(route.startsWith(root+'/git/trees/')){const sha=route.split('/').at(-1).split('?')[0],source=fixed.accepted_sources.find(row=>row.tree===sha);assert(source,route);return {truncated:false,tree:[source.entry]};}
@@ -636,7 +630,7 @@ function fixedDeliveryFixture({leanPackage=false,fixtureName='selected-native-ro
     const policy=JSON.parse(blobs.get(baseline.entries.get('.github/package-inputs.json').sha));
     put('.github/package-inputs.json',{...policy,inputs:[...policy.inputs,...fixed.prospective_lean_package.inputs]});
   }
-  const document=name=>{const row=authored.entries.get(name);if(!blobs.has(row.sha)){const raw=git('cat-file','blob',row.sha);blobs.set(row.sha,raw);fixedBlobs.set(row.sha,raw);}return JSON.parse(blobs.get(row.sha));};
+  const document=name=>{const row=authored.entries.get(name);if(!blobs.has(row.sha)){const raw=selectedHistory().readBlob(row.sha);blobs.set(row.sha,raw);fixedBlobs.set(row.sha,raw);}return JSON.parse(blobs.get(row.sha));};
   const f={fixed,files,branch:fixed.branch,baseline,authored,blobs,reads,api,put,document,sourceState:{}};
   f.run=(options={})=>selectedDataSelection({api:f.api,repo:'owner/repo',branch:f.branch,files:f.files,baseline,authored,...options});return f;
 }
@@ -948,16 +942,13 @@ for (const [name,change] of Object.entries({
 })) test('prospective expectation disambiguation rejects '+name,async()=>assert.equal(await templateFixture(change).run(),null));
 
 function real1770() {
-  const fixed=JSON.parse(readFileSync(new URL('../coordination/engineering/selected-owned-scope-20261012/pr1770.json',import.meta.url)));
+  const fixed=JSON.parse(readFileSync(new URL('../test/fixtures/selected-owned-scope/pr1770.json',import.meta.url)));
   const changedNames=new Set(fixed.files.map(row=>row.filename));
   class BaseRoleTree extends Map {
     get(name) {
       if(super.has(name)||changedNames.has(name))return super.get(name);
-      // Match fixedDeliveryFixture: unchanged base routing roots remain in HEAD.
-      // Exact hashes from the original selector/certificate authenticate them.
-      const line=execFileSync('git',['ls-tree','-l','HEAD','--',name],{encoding:'utf8',env:{...process.env,GIT_NO_LAZY_FETCH:'1'}}).trim();
-      const match=/^(\d+) (\w+) ([a-f0-9]+)\s+(\d+)\t(.+)$/.exec(line);
-      if(match)super.set(name,{path:match[5],mode:match[1],type:match[2],sha:match[3],size:Number(match[4])});
+      // Unchanged original role descriptors are frozen with the contract body set.
+      const row=selectedHistory().entry(name);if(row)super.set(name,row);
       return super.get(name);
     }
     has(name){return Boolean(this.get(name));}
@@ -968,10 +959,9 @@ function real1770() {
     if(row.before)baseline.entries.set(row.filename,{...row.before});else baseline.entries.delete(row.filename);
     authored.entries.set(row.filename,{...row.after});
   }
-  const blobs=new Map(), reads=[], gitReads=[], files=structuredClone(fixed.files);
+  const blobs=new Map(), reads=[], fixtureReads=[], files=structuredClone(fixed.files);
   const bytes=sha=>{
-    if(!blobs.has(sha)) {gitReads.push(sha);blobs.set(sha,execFileSync('git',['cat-file','blob',sha],{maxBuffer:32*1024*1024,
-      env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_TERMINAL_PROMPT:'0'}}));}
+    if(!blobs.has(sha)) {fixtureReads.push(sha);blobs.set(sha,selectedHistory().readBlob(sha));}
     return blobs.get(sha);
   };
   for(const row of fixed.snapshots) {
@@ -990,7 +980,7 @@ function real1770() {
     blobs.set(sha,raw);const row={path:name,mode:'100644',type:'blob',sha,size:raw.length};authored.entries.set(name,row);if(old)baseline.entries.set(name,row);
     return {path:name,bytes:raw.length,sha256:digest(raw),mode:'100644',git_blob_oid:sha,commit:'a'.repeat(40)};};
   const f={fixed,files,branch:fixed.branch,ownedPaths:fixed.owned_paths,reservation:{mode:'engineering',owned_paths:fixed.owned_paths},
-    sourceState:{},baseline,authored,blobs,reads,gitReads,api,put,document:name=>JSON.parse(bytes(authored.entries.get(name).sha))};
+    sourceState:{},baseline,authored,blobs,reads,fixtureReads,api,put,document:name=>JSON.parse(bytes(authored.entries.get(name).sha))};
   f.run=(options={})=>selectedDataSelection({api:f.api,repo:'owner/repo',branch:f.branch,files:f.files,baseline,authored,reservation:f.reservation,...options});
   return f;
 }
@@ -1006,11 +996,8 @@ test('complete original PR1770 192-path diff selects the uniquely bound finalize
   const historicalManifest=f.fixed.snapshots.find(row=>row.path.endsWith('/evidence-quality.json'));
   assert(historicalManifest,'final c753 changed the original added metadata blob');
   assert(!f.reads.includes(historicalManifest.git_blob_oid),'unconsumed historical manifest is not fetched for routing');
-  for(const row of f.fixed.snapshots)assert(!f.gitReads.includes(row.git_blob_oid),'historical mutable metadata must not require shallow Git history');
-  const reachable=new Set(execFileSync('git',['ls-tree','-r','HEAD'],{encoding:'utf8',maxBuffer:16*1024*1024,
-    env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_TERMINAL_PROMPT:'0'}})
-    .trim().split('\n').map(line=>line.split('\t')[0].split(' ')[2]));
-  for(const oid of f.gitReads)assert(reachable.has(oid),'every unsnapshotted original body must be reachable in shallow HEAD: '+oid);
+  for(const row of f.fixed.snapshots)assert(!f.fixtureReads.includes(row.git_blob_oid),'historical mutable metadata must be supplied by its captured original snapshot');
+  for(const oid of f.fixtureReads)assert(selectedHistory().hasBody(oid),'every consumed original body belongs to the isolated contract: '+oid);
 });
 for(const [label,mutate] of Object.entries({
   'two authoritative expectations':f=>{const names=f.files.filter(row=>row.filename.endsWith('/selected-delivery-expectations.json')).map(row=>row.filename);const final=names.find(name=>f.document(name).selected_ledger_sha256);f.put(names.find(name=>name!==final),JSON.stringify(f.document(final))+'\n');},
@@ -1174,8 +1161,7 @@ function legacySourceProofFixture() {
       ['source-qualified/000/inventory.jsonl.gz','4ad5edfd57eff2e06bbe97881d5f985f15f7871eba6c85e37024d63736505136'],
       ['native-source-operating/source000-derived-operating-view.json','eec862edb5f7dd1e55d1d1446b7dfa47c4be1b3c50cbba6edb86045bdef7a10e']];
     const pins=names.map(([name,originalHash])=>{
-      const bytes=execFileSync('git',['show','HEAD:'+stem+name],
-        {maxBuffer:32*1024*1024,env:{...process.env,GIT_NO_LAZY_FETCH:'1'}});
+      const bytes=selectedHistory().readFile(stem+name);
       assert.equal(digest(bytes),originalHash);
       return {...f.put(stem+name,bytes,true),commit:'36ce805d29e1cfd1da6f95d1aa0f4d20ab2ab92c'};
     });

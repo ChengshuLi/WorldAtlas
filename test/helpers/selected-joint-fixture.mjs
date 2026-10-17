@@ -1,3 +1,4 @@
+import {checkpointTestAPI} from './native-literal.mjs';
 // Consumer-owned ordinary Git fixture, derived from the shared checkpoint controls.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -94,7 +95,7 @@ export async function trustedFixture(t,{incompleteNative=false,nativeOnly=false}
  save('accepted/routes.json',inventory.map(p=>p.path).sort().map(name=>({path:name,tree:git('ls-tree','-z',selected,'--',name).toString()})));const accepted=commit();
  const rootRow={id:'fixture',accepted_head:accepted,selected_commit:selected,selection_sha256:valueSha(selection),execution_commit:one,execution_code_sha256:valueSha(execution_code),runtime_sha256:valueSha(runtime),facts:pin('accepted/facts.json'),certificate:{...pin('accepted/certificate.json.gz'),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)},publication:pin('accepted/publication.json'),custody:pin('accepted/custody.json'),routes:pin('accepted/routes.json')};
  save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[rootRow]});commit();
- const api=await import(pathToFileURL(path.join(root,MODULE))),native=await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs')));
+ const api=checkpointTestAPI(t,await import(pathToFileURL(path.join(root,MODULE)))),native=await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs')));
  const joint=await import(pathToFileURL(path.join(root, PREFIX+'selected-joint-entry.mjs')));
  const reader=new native.ImmutableReader(root,selected);
  return {api,native,joint,reader,selected,root,git,save,commit,pin,ledger,patch,sidecar,envelope,selection,rootRow};

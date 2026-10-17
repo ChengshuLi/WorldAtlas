@@ -40,14 +40,15 @@ function admitDisk(bytes,label){
 }
 const treeRows=tree=>ordered([...tree.entries.values()].filter(row=>row.type==='blob').map(row=>({path:row.path,mode:row.mode,oid:row.sha})));
 
-async function blobJSON(api,repo,tree,name){
+async function blobRaw(api,repo,tree,name){
   const row=tree.entries.get(name);need(row?.type==='blob'&&row.mode==='100644','Bounded ordinary original metadata required');
   const blob=await api(`/repos/${repo}/git/blobs/${row.sha}`);need(blob.encoding==='base64','Original metadata body unavailable');
   const raw=Buffer.from(blob.content,'base64');need(raw.length===row.size&&createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex')===row.sha,'Original metadata Git identity differs');
-  return JSON.parse(raw);
+  return raw;
 }
-function sourceCompatible(before,current){
-  try{admitPackageInputTransition(before,current,{acceptedInputs:current.accepted_selected_inputs,preliminary:true});return true;}
+async function blobJSON(api,repo,tree,name){ return JSON.parse(await blobRaw(api,repo,tree,name)); }
+function sourceCompatible(before,current,priorSidecarRaw){
+  try{admitPackageInputTransition(before,current,{acceptedInputs:current.accepted_selected_inputs,priorSidecarRaw,preliminary:true});return true;}
   catch{return false;}
 }
 
@@ -142,8 +143,10 @@ export async function findOriginalPackage({api,repo,current,originalRunId,truste
               ?acceptedInputsFromTree(trustedBase,tree,current)
               :await acceptedSelectedPackageInputs({api,repo,base:trustedBase,current});
           }
-          if(!sourceCompatible(source,{...current,accepted_selected_inputs:acceptedInputs}))continue;
-          return {source,origin,receipt,...(trustedCommit?{accepted_selected_inputs:acceptedInputs}:{})};
+          const priorSidecarRaw=source.definition.inputs.some(name=>!current.definition.inputs.includes(name))
+            ?await blobRaw(api,repo,tree,source.selection.additive_release?.path):undefined;
+          if(!sourceCompatible(source,{...current,accepted_selected_inputs:acceptedInputs},priorSidecarRaw))continue;
+          return {source,origin,receipt,priorSidecarRaw,...(trustedCommit?{accepted_selected_inputs:acceptedInputs}:{})};
         }catch(error){
           console.warn(`Skipped original package producer ${run.id}/${attempt}: ${String(error.message).replace(/https?:\/\/\S+/g,'[delivery address]').slice(0,300)}`);
         }
@@ -279,7 +282,7 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
       need(row&&row.mode===pin.mode&&row.oid===pin.git_blob_oid&&pin.whole_body_consumed===true,'Current additive input differs from actual source');
       return {...pin,commit:current.head};
     });
-    const transition=admitPackageOutputTransition(manifest,current,{acceptedInputs:current.accepted_selected_inputs,typedInputs:consumed});
+    const transition=admitPackageOutputTransition(manifest,current,{acceptedInputs:current.accepted_selected_inputs,typedInputs:consumed,priorSidecarRaw:found.priorSidecarRaw});
     const oldAssets=['base_manifest','ledger','owner_roster','patch'].map(role=>atlas.additiveRelease[role]);
     need(oldAssets.every(pin=>/^additive-repairs\/[A-Za-z0-9_.-]+$/.test(pin?.path??''))&&new Set(oldAssets.map(pin=>pin.path)).size===4,'Original four public additive assets required');
     for(const pin of oldAssets)need(same(streamedPackageFile(originalRoot,'dist/client/'+pin.path),{path:'dist/client/'+pin.path,bytes:pin.bytes,sha256:pin.sha256}),'Original additive output differs');
