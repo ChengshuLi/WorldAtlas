@@ -1,0 +1,62 @@
+{
+  "packages": [
+    {
+      "country": "South Africa",
+      "original_cells": 4804,
+      "supported_cells": 4777,
+      "held_cells": 27,
+      "quartets": [
+        {
+          "rule_preimage": {
+            "path": "coordination/engineering/south-africa-original-repair-20261017/native-authority-supported-001/original-rule-preimage.json",
+            "commit": "062718442dad5a9e96dec56b8b9d0e155242656d",
+            "mode": "100644",
+            "git_blob_oid": "b8e6bceedc525a5d8c115eb3ceed51b521e58b23",
+            "bytes": 748,
+            "sha256": "e4177a8d15fb2d7b4e62ee5053715a3bfc83a718684455a1f1196f80d3282121"
+          },
+          "source_authority": {
+            "path": "coordination/engineering/south-africa-original-repair-20261017/native-authority-supported-001/authority-binding.json",
+            "commit": "062718442dad5a9e96dec56b8b9d0e155242656d",
+            "mode": "100644",
+            "git_blob_oid": "95cb60d349443e0ca6f7d65bd265c6ba031b6129",
+            "bytes": 751,
+            "sha256": "743fe7c9b4bcd01ca6f15dd9dffecc8da26a9efedbc27cd5704d39811c0bf266"
+          },
+          "ledger": {
+            "path": "coordination/engineering/south-africa-original-repair-20261017/native-authority-supported-001/constructor-result.json",
+            "commit": "062718442dad5a9e96dec56b8b9d0e155242656d",
+            "mode": "100644",
+            "git_blob_oid": "a8d4b02390494fafb6d312f9efd9f86bc6374b19",
+            "bytes": 371757,
+            "sha256": "bbe285e05b90245bf47d0903e81120915771ba15761c478b4a1b4a997fdc7cb0"
+          },
+          "native_patch": {
+            "path": "coordination/engineering/south-africa-original-repair-20261017/supported-inputs-001/native-patch.json",
+            "commit": "8bd01d41a76251f3a7003b555c46cee5271b44c1",
+            "mode": "100644",
+            "git_blob_oid": "b00f5c7b38b95586f541ef9e0f92ddb98a5f6c35",
+            "bytes": 101827,
+            "sha256": "d6dade46231aaa11650978996f3d6bff0c1bf6da350af049285fc26a21330f62"
+          }
+        }
+      ],
+      "original_patch": {
+        "commit": "2c859136ee8a815ee256e625e6fc7e0601e573b0",
+        "path": "coordination/engineering/south-africa-original-repair-20261017/source-stage-001/original-native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "35a73956b5e165ad7d97264940935243e501e52f",
+        "bytes": 102685,
+        "sha256": "fcc602bb317e261cc62f475d337df01709eed16680c8330c170c64a8dbee0da8"
+      },
+      "literal_holds": {
+        "path": "coordination/engineering/south-africa-original-repair-20261017/supported-inputs-001/held-original.json",
+        "commit": "8bd01d41a76251f3a7003b555c46cee5271b44c1",
+        "mode": "100644",
+        "git_blob_oid": "e518de943691db64dfe277bda2321fca32583e43",
+        "bytes": 1691,
+        "sha256": "446c0057bfdb0931c8128666fdd15d7bf0d995cd957da6e924694f328c3f9865"
+      }
+    }
+  ]
+}
