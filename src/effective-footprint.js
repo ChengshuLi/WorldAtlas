@@ -193,9 +193,17 @@ export function applyAdditiveNativePatch(base,patch,{baseReference,effectiveRefe
     }
     const combined=[...old,...row.runs].sort((a,b)=>a[0]-b[0]),merged=[];
     for(const run of combined){const last=merged.at(-1);if(last&&last[1]===run[0]&&last[2]===run[2])last[1]=run[1];else merged.push([...run]);}
-    replacements.set(row.y,merged);
+    // Keep only native words between rows. Retaining one JS triple-array per
+    // old run across a large patch needlessly expands the complete base bank.
+    const packed=new Uint32Array(merged.length*2);
+    for(let i=0;i<merged.length;i++){
+      const [start,end,owner]=merged[i];
+      packed[i*2]=owner%ownerBase*2**bits+start;
+      packed[i*2+1]=Math.floor(owner/ownerBase)*2**bits+end-1;
+    }
+    replacements.set(row.y,packed);
   }
-  const count=base.runs.length/2+[...replacements].reduce((n,[y,runs])=>n+runs.length-base.rows[y*2+1],0);
+  const count=base.runs.length/2+[...replacements].reduce((n,[y,runs])=>n+runs.length/2-base.rows[y*2+1],0);
   require(Number.isSafeInteger(count)&&count>=0,'Invalid native additive output count');
   const rows=new Uint32Array(base.rows.length),runs=new Uint32Array(count*2);let cursor=0;
   for(let y=0;y<base.size;y++) {
@@ -203,8 +211,8 @@ export function applyAdditiveNativePatch(base,patch,{baseReference,effectiveRefe
     require(offset===(y?base.rows[(y-1)*2]+base.rows[(y-1)*2+1]:0)&&offset+length<=base.runs.length/2,'Incomplete/unreferenced base ownership');
     rows[y*2]=cursor;
     if(replacements.has(y)) {
-      const replacement=replacements.get(y);rows[y*2+1]=replacement.length;
-      for(const [start,end,owner] of replacement){runs[cursor*2]=owner%ownerBase*2**bits+start;runs[cursor*2+1]=Math.floor(owner/ownerBase)*2**bits+end-1;cursor++;}
+      const replacement=replacements.get(y);rows[y*2+1]=replacement.length/2;
+      runs.set(replacement,cursor*2);cursor+=replacement.length/2;
     }else{rows[y*2+1]=length;runs.set(base.runs.subarray(offset*2,(offset+length)*2),cursor*2);cursor+=length;}
   }
   require(base.rows.at(-2)+base.rows.at(-1)===base.runs.length/2&&cursor===count,'Unreferenced native base/output runs');

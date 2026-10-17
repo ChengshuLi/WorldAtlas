@@ -870,3 +870,15 @@ By contrast, safe-integer byte precision, exact decoded word counts, native
 coordinate packing dimensions and actual runtime allocation failures are
 concrete correctness/platform constraints. Any remaining limit cleanup must
 preserve their checks and exercise its own adjacent producer/consumer paths.
+
+### Packed native replacement rows
+
+`applyAdditiveNativePatch` retains each affected row as native `Uint32` words
+between row processing and final output assembly. Its temporary decoded intervals
+and coalescing remain row-local, rather than retaining one JavaScript triple-array
+for every old run across the entire affected world bank. The same ordering,
+occupied-cell, owner, complete-coverage and repeated-patch checks remain in place;
+the final native row/run words are unchanged. This reduces avoidable object
+expansion without increasing a file ceiling or Node heap setting. Actual process
+memory still depends on the complete selected assets, native bank and consumers;
+measure that workload and keep failed runs as failures.
