@@ -817,6 +817,66 @@ function readSourceTargetBody(reader,p) {
   demand(decoded.length===p.decoded_bytes&&sha(decoded)===p.decoded_sha256,'Source-target decoded body differs');return decoded;
 }
 
+// Retired operations must be evidenced by their original canonical output, not
+// by another copy of the present lineage assertion. A complete earlier world
+// snapshot provides that output and its independently retained semantic record.
+// These geometries are provenance only: they never become coverage or vetoes.
+function readSourceOperationStages(reader, membership) {
+ const stages=membership.operation_stages;
+ demand(Array.isArray(stages)&&stages.length>0,'Missing original source operation stages');
+ const versions=new Set(),operations=new Map();
+ const exact=p=>{
+  pinCheck(p);const d=reader.descriptor(p.path,p.commit);
+  demand(d.mode==='100644'&&p.mode===d.mode&&d.git_blob_oid===p.git_blob_oid&&d.bytes===p.bytes,
+   'Original source operation whole identity differs');
+  const raw=reader.read(p.path,{version:p.commit,expected:p.sha256});
+  if(p.decoded_bytes===undefined)return JSON.parse(raw);
+  const decoded=gunzipSync(raw,{maxOutputLength:p.decoded_bytes});
+  demand(decoded.length===p.decoded_bytes&&sha(decoded)===p.decoded_sha256,
+   'Original source operation decoded body differs');return JSON.parse(decoded);
+ };
+ for(const stage of stages){
+  demand(stage&&Object.keys(stage).sort().join(',')==='index,lineage,parts'
+   &&stage.index?.path==='data/world-index.json'&&stage.lineage?.path==='data/semantic-report.json'
+   &&Array.isArray(stage.parts)&&stage.parts.length>0,'Malformed original source operation stage');
+  const version=stage.index.commit;
+  demand(version!==membership.lineage.commit&&!versions.has(version),
+   'Original source operation stage must be distinct and earlier');versions.add(version);
+  for(const p of [stage.index,stage.lineage,...stage.parts]){
+   pinCheck(p);demand(p.commit===version,'Mixed original source operation stage commits');
+  }
+  // No best-effort Git lookup, fallback to present bytes or caller-supplied
+  // ancestry flag: unavailable or unrelated history is not an original stage.
+  try{reader.git('merge-base','--is-ancestor',version,membership.lineage.commit);}
+  catch{throw Error('Original source operation stage is not an available ancestor');}
+  const index=exact(stage.index),lineage=exact(stage.lineage);
+  demand(Array.isArray(index.parts)&&index.parts.length>0&&new Set(index.parts).size===index.parts.length
+   &&index.parts.every(name=>typeof name==='string'&&/^geography\/part-[0-9]+\.json$/.test(name))
+   &&same(stage.parts.map(p=>p.path),index.parts.map(name=>'data/'+name))
+   &&Array.isArray(lineage.changes),'Incomplete original source operation stage inventory');
+  const records=new Map(),ids=new Set();
+  for(const change of lineage.changes){
+   const rows=records.get(change.id)??[];rows.push(change);records.set(change.id,rows);
+  }
+  for(const part of stage.parts){
+   const collection=exact(part);
+   demand(collection.type==='FeatureCollection'&&Array.isArray(collection.features),
+    'Missing complete original source operation part');
+   for(const feature of collection.features){
+    const id=feature.id;
+    demand(feature.type==='Feature'&&typeof id==='string'&&id&&!ids.has(id),
+     'Missing or duplicate original source operation identity');ids.add(id);
+    // Original direct sources need no semantic change. Retired intermediate
+    // operations are checked on use, against BOTH the canonical output and the
+    // original stage's change record, including exact complete immediate members.
+    const entries=operations.get(id)??[];
+    entries.push({feature,changes:records.get(id)??[],stageChanges:records});operations.set(id,entries);
+   }
+  }
+ }
+ return operations;
+}
+
 export function qualifySourceTargetNativeAuthority(reader, preimage, binding, {snapshot}={}) {
  return evaluateSourceTargetNativeAuthority(reader, preimage, binding, false, snapshot);
 }
@@ -878,13 +938,15 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
  // authored source-to-owner guess. Canonical parts retain the accepted members
  // and base geometry; the complete lineage exposes omitted competing owners.
  const memberOwners=new Map(), canonicalOwners=new Map(), semanticOwners=new Map();
+ let operationStages=null;
  let completeCohort=null;
  const externalOriginals=new Map(),usedExternalOriginals=new Set();
  if(evidence.source_membership!==undefined){
   const membership=evidence.source_membership;
   demand(membership&&same(Object.keys(membership).sort(),['index','lineage','parts',
    ...(membership.cohort_inventory===undefined?[]:['cohort_inventory']),
-   ...(membership.negative_natural_earth===undefined?[]:['negative_natural_earth'])].sort())
+   ...(membership.negative_natural_earth===undefined?[]:['negative_natural_earth']),
+   ...(membership.operation_stages===undefined?[]:['operation_stages'])].sort())
    &&Array.isArray(membership.parts)&&membership.parts.length>0,'Incomplete accepted source membership');
   const current=p=>{
    pinCheck(p);const actual=reader.descriptor(p.path);
@@ -946,6 +1008,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
     const changes=memberOwners.get(member)??[];changes.push(change);memberOwners.set(member,changes);
    }
   }
+  if(membership.operation_stages!==undefined)operationStages=readSourceOperationStages(reader,membership);
   for(const id of externalOriginals.keys())demand(!semanticOwners.has(id),
    'External original shadows accepted semantic ancestry');
   const paths=new Set();
@@ -1070,11 +1133,11 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   };
   const atoms=(name,trail=new Set())=>{
    demand(!trail.has(name),'Cyclic complex source ancestry');
-   if(originals.has(name)||externalOriginals.has(name))return {members:new Set([name]),sources:new Set()};
-   const change=node(name),next=new Set([...trail,name]),members=new Set(),sources=new Set([change.source]);
+   if(originals.has(name)||externalOriginals.has(name))return {members:new Set([name]),operations:new Map()};
+   const change=node(name),next=new Set([...trail,name]),members=new Set(),operations=new Map([[name,change]]);
    for(const member of change.replaces){const child=atoms(member,next);
-    for(const atom of child.members)members.add(atom);for(const source of child.sources)sources.add(source);}
-   return {members,sources};
+    for(const atom of child.members)members.add(atom);for(const [id,operation]of child.operations)operations.set(id,operation);}
+   return {members,operations};
   };
   let context=complexContexts.get(originals);
   if(context===undefined){
@@ -1133,8 +1196,44 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
      &&metadata.location_basis===change.basis&&metadata.source_url===change.source,
     'Complex source descendant parent or source identity differs');
     for(const member of members){const original=atoms(member);
-     demand([...original.sources].every(source=>source===change.source),
-      'Complex source intermediate provenance differs');}
+     for(const operation of original.operations.values()){
+      if(!operationStages){
+       // Preserve the previously supported single-provider contract. A new
+       // provider requires independently retained original operation outputs.
+       demand(operation.source===change.source,'Complex source intermediate provenance differs');continue;
+      }
+      const anchors=operationStages.get(operation.id);
+      demand(anchors?.length>0,'Missing complex source intermediate original operation');
+      let geometryHash;
+      for(const anchor of anchors){
+       const originalChain=(id,trail=new Set())=>{
+        demand(!trail.has(id),'Cyclic original source operation ancestry');
+        if(originals.has(id)||externalOriginals.has(id))return;
+        const expected=node(id),records=anchor.stageChanges.get(id),prior=records?.[0];
+        demand(records?.length===1&&prior.id===id&&prior.source===expected.source&&prior.basis===expected.basis
+         &&Array.isArray(prior.replaces)&&same([...prior.replaces].sort(),[...expected.replaces].sort()),
+        'Original source operation chain link differs');
+        for(const member of prior.replaces)originalChain(member,new Set([...trail,id]));
+       };
+       originalChain(operation.id);
+       const p=anchor.feature.properties,m=p?.metadata,prior=anchor.changes[0],ids=m?.source_member_ids;
+       demand(anchor.changes.length===1&&p?.id===operation.id&&prior?.id===operation.id
+        &&Array.isArray(ids)&&ids.length>0&&ids.every(id=>typeof id==='string'&&id)
+        &&new Set(ids).size===ids.length&&Array.isArray(prior.replaces)
+        &&same([...ids].sort(),[...prior.replaces].sort())
+        &&same([...ids].sort(),[...operation.replaces].sort())
+        &&typeof m.source_url==='string'&&m.source_url&&m.source_url===prior.source
+        &&m.source_url===operation.source&&typeof m.location_basis==='string'&&m.location_basis
+        &&m.location_basis===prior.basis&&m.location_basis===operation.basis,
+       'Complex source intermediate original operation provenance differs');
+       demand(['Polygon','MultiPolygon'].includes(anchor.feature.geometry?.type),
+        'Missing complex source intermediate original geometry');coordinateBounds(anchor.feature.geometry);
+       const actual=valueSha(anchor.feature.geometry);
+       demand(geometryHash===undefined||geometryHash===actual,
+        'Conflicting complex source intermediate original geometries');geometryHash=actual;
+      }
+     }
+    }
     if(metadata.original_id!==undefined)demand(members.length===1&&originals.has(members[0])
      &&metadata.original_id===originals.get(members[0]).properties?.shapeID,
     'Complex source original identity differs');

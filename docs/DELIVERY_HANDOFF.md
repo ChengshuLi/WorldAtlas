@@ -875,6 +875,54 @@ pinned fields. Commit the newly prepared source evidence before running the stoc
 native diagnostic or constructor; do not replace original source evidence or
 claim ancestry closure as native qualification.
 
+### Different providers in an original operation chain
+
+A provider identifies an operation, not every earlier operation's provider.
+For example, an official regional aggregation and a later ecological subdivision
+can cite different publishers. This does not excuse a missing intermediate source
+or turn a negative competitor into positive membership.
+
+When the existing semantic chain crosses providers, supply optional
+`source_membership.operation_stages`: a nonempty array of `{index, lineage, parts}`
+whole immutable pins to the **original earlier canonical output stages**.
+Each stage pins `data/world-index.json`, `data/semantic-report.json` and every
+ordered `data/`-relative geography part in that index, all at the same commit.
+That commit must be a distinct available ancestor of the consumed membership
+lineage commit. There is no fallback to current files when a historical object
+is absent. Actual path, ordinary mode, Git OID, size, whole SHA256 and declared
+gzip decoded identity remain mandatory.
+
+For every retired operation in a chain using these stages, its original canonical
+feature and original stage change record must independently agree with the
+consumed chain's ID, complete unique immediate members, provider and location
+basis. Its earlier dependency chain must also appear unchanged in that original
+stage lineage; separately plausible outputs cannot be stitched into a different
+history. Missing, duplicate or inconsistent original records fail. Repeated records
+across different original stages must also preserve their whole geometry hash.
+The current terminal still joins its canonical identity, native roster parent,
+provider and basis. All existing cohort closure, foreign-leaf, cycle, geometry,
+physical and native-cell guards remain in force. An unknown original operation
+is not authorized by a nonempty provider URL or a same-name municipality match.
+
+These are original **operation outputs**, not a new assertion copied from the
+present semantic report. Their source vintage, rights, CRS, exact original
+identities/state/crosswalk and any deliberate member exclusions require the
+existing substantive source review. A historical Git relationship authenticates
+custody, not scientific correctness or acceptance of arbitrary branch history.
+Do not fabricate a historical stage or relabel current evidence to fill a gap.
+If an actual original operation output was not retained, this route stays blocked
+until independently reviewed source support exists. In particular, compatible
+municipality names inside an asserted region do not prove state attribution or
+completeness of a major-city exclusion.
+
+The stage geometries are provenance only. They never replace, clip or add to the
+complete original negative polygon, and never establish positive ownership.
+Existing same-provider inputs without these optional stages retain their existing
+contract. Preparation preserves the pins; fixed package and selected-data walkers
+include every declared stage input as exact historical Git custody, while live
+canonical files remain unchanged. No arbitrary nested metadata is walked and no
+historical body overwrites a current filesystem role.
+
 ## Exact additive asset sizes
 
 The four current additive assets (base manifest, ledger, owner roster and patch)

@@ -305,30 +305,30 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       needSelected(sha256(bytes) === value.sha256, 'role content hash differs');
       return parseJSON(bytes);
     };
-    // The modern constructor whole-reads this original programme as custody;
-    // it never executes or installs it. Keep the current helper unchanged and
-    // authenticate the original version instead of relabelling current bytes.
-    const physicalReproduction = async value => {
+    // Closed original programme/operation roles are whole-read through Git,
+    // never installed at their pathnames. Keep each current filesystem input
+    // unchanged and authenticate the exact original version.
+    const historicalOperand = async (value, label = 'historical reproduction') => {
       const current = authored.entries.get(value?.path);
       if (ordinary(current) && current.sha === value.git_blob_oid && current.size === value.bytes) return pin(value);
       needSelected(value && safe(value.path) && unchangedRole(value.path) && value.mode === '100644'
         && /^[a-f0-9]{40}$/.test(value.commit ?? '') && /^[a-f0-9]{40}$/.test(value.git_blob_oid ?? '')
         && Number.isSafeInteger(value.bytes) && value.bytes >= 0 && hash(value.sha256),
-      'historical reproduction requires unchanged current code and exact original pin');
+      label + ' requires unchanged current code and exact original pin');
       const vintage = await integrationTree(api, repo, value.commit);
-      needSelected(vintage.object?.sha === value.commit, 'historical reproduction commit differs');
+      needSelected(vintage.object?.sha === value.commit, label + ' commit differs');
       const original = vintage.entries.get(value.path);
       needSelected(ordinary(original) && original.mode === value.mode && original.sha === value.git_blob_oid
-        && original.size === value.bytes, 'historical reproduction commit/path identity differs');
+        && original.size === value.bytes, label + ' commit/path identity differs');
       const bytes = await readRow(original, false);
-      needSelected(sha256(bytes) === value.sha256, 'historical reproduction whole hash differs');
+      needSelected(sha256(bytes) === value.sha256, label + ' whole hash differs');
       if (value.decoded_bytes !== undefined) {
         needSelected(Number.isSafeInteger(value.decoded_bytes) && value.decoded_bytes > 0 && hash(value.decoded_sha256),
-          'historical reproduction decoded identity required');
+          label + ' decoded identity required');
         const decoded = gunzipSync(bytes, {maxOutputLength: value.decoded_bytes});
         diagnostics.decoded_bytes += decoded.length;
         needSelected(decoded.length === value.decoded_bytes && sha256(decoded) === value.decoded_sha256,
-          'historical reproduction decoded identity differs');
+          label + ' decoded identity differs');
       }
       reachable.add(value.path);
     };
@@ -651,7 +651,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
           pin(views.method.pin);
         }
         if(evidence.adopted_provider_families!==undefined)pin(evidence.adopted_provider_families);
-        await physicalReproduction(evidence.physical_reproduction);
+        await historicalOperand(evidence.physical_reproduction);
         if(evidence.version===3){
           const adoption=await pinnedJSON(evidence.revised_source_adoption);
           needSelected(adoption.version===1&&adoption.kind==='adopted-osm-revised-source-native-v1',
@@ -702,9 +702,22 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         if(evidence.source_membership!==undefined){
           const membership=evidence.source_membership;
           needSelected(keys(membership,['index','lineage','parts',...(membership.cohort_inventory===undefined?[]:['cohort_inventory']),
-            ...(membership.negative_natural_earth===undefined?[]:['negative_natural_earth'])])&&Array.isArray(membership.parts)&&membership.parts.length>0,
+            ...(membership.negative_natural_earth===undefined?[]:['negative_natural_earth']),
+            ...(membership.operation_stages===undefined?[]:['operation_stages'])])&&Array.isArray(membership.parts)&&membership.parts.length>0,
             'missing accepted source membership roles');
           pin(membership.index);pin(membership.lineage);for(const part of membership.parts)pin(part);
+          if(membership.operation_stages!==undefined){
+            needSelected(Array.isArray(membership.operation_stages)&&membership.operation_stages.length>0,
+              'missing original source operation stages');
+            for(const stage of membership.operation_stages){
+              needSelected(keys(stage,['index','lineage','parts'])&&stage.index?.path==='data/world-index.json'
+                &&stage.lineage?.path==='data/semantic-report.json'&&Array.isArray(stage.parts)&&stage.parts.length>0,
+                'malformed original source operation stage');
+              await historicalOperand(stage.index,'historical source operation');
+              await historicalOperand(stage.lineage,'historical source operation');
+              for(const part of stage.parts)await historicalOperand(part,'historical source operation');
+            }
+          }
           if(membership.negative_natural_earth!==undefined){
             const role=membership.negative_natural_earth;
             needSelected(keys(role,['atoms','registry','source'])&&Array.isArray(role.atoms)&&role.atoms.length>0,

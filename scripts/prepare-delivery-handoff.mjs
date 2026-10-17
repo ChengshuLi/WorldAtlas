@@ -534,11 +534,12 @@ export function packageProjection(config, reader, acceptedRegistry = null) {
   function add(pin, role) {
     need(pin && safe(pin.path), 'Missing whole consumed package role: ' + role);
     reader.read(pin);
-    // This closed modern role is consumed by exact versioned Git reads, never
+    // These closed modern roles are consumed by exact versioned Git reads, never
     // installed or executed at its pathname. Keep each original vintage while
     // current/filesystem roles retain their existing single-path identity.
-    const key = role === 'source-target physical_reproduction'
-      ? 'physical-reproduction\0' + jsonBytes(pin).toString('utf8') : pin.path;
+    const versioned = ['source-target physical_reproduction', 'source-target original operation index',
+      'source-target original operation lineage', 'source-target original operation part'].includes(role);
+    const key = versioned ? 'versioned-original\0' + jsonBytes(pin).toString('utf8') : pin.path;
     const prior = roles.get(key);
     need(!prior || prior.sha256 === pin.sha256 && prior.bytes === pin.bytes, 'Conflicting package path vintages');
     if (!prior) roles.set(key, {...pin, roles: []});
@@ -657,10 +658,23 @@ export function packageProjection(config, reader, acceptedRegistry = null) {
         const membership = evidence.source_membership;
         need(membership && same(Object.keys(membership).sort(), ['index', 'lineage', 'parts',
           ...(membership.cohort_inventory === undefined ? [] : ['cohort_inventory']),
-          ...(membership.negative_natural_earth === undefined ? [] : ['negative_natural_earth'])].sort())
+          ...(membership.negative_natural_earth === undefined ? [] : ['negative_natural_earth']),
+          ...(membership.operation_stages === undefined ? [] : ['operation_stages'])].sort())
           && Array.isArray(membership.parts) && membership.parts.length > 0, 'Missing accepted source membership roles');
         add(membership.index, 'source-target membership index'); add(membership.lineage, 'source-target membership lineage');
         for (const pin of membership.parts) add(pin, 'source-target membership part');
+        if (membership.operation_stages !== undefined) {
+          need(Array.isArray(membership.operation_stages) && membership.operation_stages.length > 0,
+            'Missing original source operation stages');
+          for (const stage of membership.operation_stages) {
+            need(stage && same(Object.keys(stage).sort(), ['index', 'lineage', 'parts'])
+              && stage.index?.path === 'data/world-index.json' && stage.lineage?.path === 'data/semantic-report.json'
+              && Array.isArray(stage.parts) && stage.parts.length > 0, 'Malformed original source operation stage');
+            add(stage.index, 'source-target original operation index');
+            add(stage.lineage, 'source-target original operation lineage');
+            for (const pin of stage.parts) add(pin, 'source-target original operation part');
+          }
+        }
         if (membership.negative_natural_earth !== undefined) {
           const role = membership.negative_natural_earth;
           need(role && same(Object.keys(role).sort(), ['atoms', 'registry', 'source'])
@@ -1023,12 +1037,14 @@ export function finalizeDelivery(config, reader) {
       // Snapshot-only intent derives its closed scope from this already
       // authenticated projection, without a second author traversal.
       if (missing && deriveRestorations) requested.add(pin.path);
-      if (!missing && pin.roles.length === 1 && pin.roles[0] === 'source-target physical_reproduction') {
+      if (!missing && pin.roles.every(role => ['source-target physical_reproduction',
+        'source-target original operation index', 'source-target original operation lineage',
+        'source-target original operation part'].includes(role))) {
         // packageProjection authenticated the original commit/path/body. The
-        // live accepted helper remains a separate unchanged filesystem input;
+        // live accepted path remains a separate unchanged filesystem input;
         // this historical read cannot replace it or grant another role access.
         const current = reader.pin(config.package_inputs.commit, pin.path);
-        need(current.mode === '100644', 'Current producer path is not ordinary');
+        need(current.mode === '100644', 'Current versioned-role path is not ordinary');
         need(!requested.has(pin.path), 'Restoration would overwrite an existing accepted path');
         continue;
       }

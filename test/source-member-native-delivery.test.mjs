@@ -2,6 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {execFileSync} from 'node:child_process';
 import {deriveSourceTargetNativeDelta,nativeRowLatitudes,nativePolygonIntervals,polygonParts} from '../src/native-grid.js';
 import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
 import {constructOriginalAuthority} from '../scripts/delivery-handoff-advance.mjs';
@@ -54,11 +58,12 @@ function constructorFixture(change=()=>{}){
     proposed:{rows:[{y:size/2,runs:[[Math.floor(size/2-.02/360*size),Math.floor(size/2-.02/360*size)+1,1]]}]},
     membership:true};
   change(state);
-  const files=new Map(),byBlob=new Map();
-  const put=(name,value)=>{
+  const files=new Map(),byBlob=new Map(),historicalFiles=new Map();
+  const put=(name,value,commit=version)=>{
     const raw=Buffer.isBuffer(value)?value:Buffer.from(JSON.stringify(value));
-    const pin={commit:version,path:name,mode:'100644',git_blob_oid:blob(raw),bytes:raw.length,sha256:digest(raw)};
-    files.set(name,{raw,pin});byBlob.set(pin.git_blob_oid,raw);return pin;
+    const pin={commit,path:name,mode:'100644',git_blob_oid:blob(raw),bytes:raw.length,sha256:digest(raw)};
+    (commit===version?files:historicalFiles).set(commit===version?name:commit+':'+name,{raw,pin:{...pin}});
+    byBlob.set(pin.git_blob_oid,raw);return pin;
   };
   const source=put('original-source.json',collection(state.originals)),roster=put('owners.json',state.roster);
   const physical=put('physical.json',state.physical),measured=put('measured.json',state.measured);
@@ -81,6 +86,13 @@ function constructorFixture(change=()=>{}){
       location_parts:['macro-foundation/world-review-locations-0.json.gz'],...state.cohort.index}),parts:[part]};
     state.cohort.mutate?.(membership.cohort_inventory);
   }
+  if(state.operationStages){
+    membership.operation_stages=state.operationStages.map(stage=>({
+      index:put('data/world-index.json',stage.index,stage.commit),
+      lineage:put('data/semantic-report.json',stage.lineage,stage.commit),
+      parts:stage.parts.map((part,i)=>put('data/geography/part-'+i+'.json',part,stage.commit))}));
+    state.mutateOperationPins?.(membership.operation_stages);
+  }
   if(state.external){
     const raw=Buffer.from(JSON.stringify(collection(state.external.features)));
     membership.negative_natural_earth={registry:put('data/sources.json',{
@@ -98,8 +110,12 @@ function constructorFixture(change=()=>{}){
   class FixtureReader extends ImmutableReader{
     git(...args){
       if(args[0]==='ls-tree'){
-        const name=args.at(-1),entry=files.get(name);assert.ok(entry,name);
+        const name=args.at(-1),entry=args[2]===version?files.get(name):historicalFiles.get(args[2]+':'+name);assert.ok(entry,name);
         return Buffer.from(`100644 blob ${entry.pin.git_blob_oid}\t${name}\0`);
+      }
+      if(args[0]==='merge-base'&&args[1]==='--is-ancestor'){
+        assert.equal(args[3],version);if(state.operationAncestor===false)throw Error('Unrelated stage');
+        assert.ok(state.operationStages.some(stage=>stage.commit===args[2]));return Buffer.alloc(0);
       }
       if(args[0]==='cat-file'&&args[1]==='-e')return Buffer.alloc(0);
       if(args[0]==='cat-file'&&args[1]==='-s')return Buffer.from(String(byBlob.get(args[2]).length));
@@ -112,7 +128,7 @@ function constructorFixture(change=()=>{}){
   const binding={version:1,kind:'source-target-native-custody-v1',source_evidence:evidence,native_patch:patch};
   const preimage={...binding,kind:'source-target-native-rule-v1'};
   return {run:()=>constructOriginalAuthority(reader(),locators),
-    diagnose:()=>diagnoseSourceTargetNativeAuthority(reader(),preimage,binding),files,byBlob,membership,reader,state};
+    diagnose:()=>diagnoseSourceTargetNativeAuthority(reader(),preimage,binding),files,byBlob,historicalFiles,membership,reader,state};
 }
 test('actual constructor joins original member evidence into one accepted owner ledger',()=>{
   const fixture=constructorFixture(),result=fixture.run();
@@ -637,4 +653,147 @@ test('authenticated external whole original veto also covers targets in another 
  assert.throws(()=>f.run(),/lack unique source-target coverage/);
  const d=f.diagnose();assert.equal(d.supported_cells,1);assert.equal(d.held_cells,1);
  assert.deepEqual(d.decision_rows.map(row=>row.runs[0].slice(2)),[[2,'assigned_cells'],[4,'territorial_exclusion_cells']]);
+});
+
+
+// The earlier canonical output and its own semantic record are built separately
+// from present lineage. Mutating/repinning present evidence cannot update these
+// original stage bodies implicitly. This is not a duplicated lineage assertion.
+function operationStageFixture(change=()=>{},nested=false){
+ return complexCompetitorFixture(s=>{
+  const source='https://provider.example/official-regions',basis='Official complete original aggregation';
+  const operation={id:'retired-region',replaces:[a,b],source,basis};
+  s.lineage.changes[2]={...operation};
+  const output={type:'Feature',id:operation.id,geometry:rectangle(-.03,.038,-.02,.02),
+   properties:{id:operation.id,metadata:{source_member_ids:[a,b],source_url:source,location_basis:basis}}};
+  s.operationStages=[{commit:'b'.repeat(40),index:{parts:['geography/part-0.json']},
+   lineage:{changes:[structuredClone(operation)]},parts:[collection([output])]}];
+  if(nested){
+   const next={id:'retired-physical-region',replaces:[operation.id],
+    source:'https://provider.example/ecological-zones',basis:'Published ecological subdivision'};
+   s.lineage.changes.push({...next});s.lineage.changes[0].replaces=[next.id];
+   s.accepted.features[0].properties.metadata.source_member_ids=[next.id];
+   const later=structuredClone(output);later.id=next.id;later.properties.id=next.id;
+   later.properties.metadata={source_member_ids:[operation.id],source_url:next.source,location_basis:next.basis};
+   s.operationStages.push({commit:'c'.repeat(40),index:{parts:['geography/part-0.json']},
+    lineage:{changes:[structuredClone(operation),structuredClone(next)]},parts:[collection([later])]});
+  }
+  change(s);
+ },true);
+}
+for(const nested of [false,true])test('original operation outputs authenticate '+(nested?'three':'two')+' provider negative ancestry',()=>{
+ const f=operationStageFixture(()=>{},nested),result=f.run(),diagnostic=f.diagnose();
+ assert.equal(result.ledger_rows[0].target_id,c);assert.equal(result.ledger_rows[0].native_cells,1);
+ assert.deepEqual(diagnostic.split_source_competitors,result.split_source_competitors);
+ assert.equal(diagnostic.supported_cells,1);assert.equal(diagnostic.held_cells,0);
+ for(const stage of f.membership.operation_stages)for(const pin of [stage.index,stage.lineage,...stage.parts])
+  assert(f.reader().read(pin.path,{version:pin.commit,expected:pin.sha256}));
+});
+for(const [name,change,pattern]of [
+ ['changed present intermediate source',s=>s.lineage.changes[2].source='https://wrong.example/',/Original source operation chain link differs/],
+ ['changed present intermediate basis',s=>s.lineage.changes[2].basis='Invented attribution',/Original source operation chain link differs/],
+ ['changed present intermediate members',s=>s.lineage.changes[2].replaces=[a],/Original source operation chain link differs/],
+ ['changed original stage metadata source',s=>s.operationStages[0].parts[0].features[0].properties.metadata.source_url='https://wrong.example/',/intermediate original operation provenance/],
+ ['changed original stage metadata basis',s=>s.operationStages[0].parts[0].features[0].properties.metadata.location_basis='Invented attribution',/intermediate original operation provenance/],
+ ['changed original stage metadata members',s=>s.operationStages[0].parts[0].features[0].properties.metadata.source_member_ids=[a],/intermediate original operation provenance/],
+ ['changed original stage semantic source',s=>s.operationStages[0].lineage.changes[0].source='https://wrong.example/',/Original source operation chain link differs/],
+ ['missing original operation change',s=>s.operationStages[0].lineage.changes=[],/Original source operation chain link differs/],
+ ['duplicate original operation change',s=>s.operationStages[0].lineage.changes.push(s.operationStages[0].lineage.changes[0]),/Original source operation chain link differs/],
+ ['missing original operation output',s=>s.operationStages[0].parts[0].features=[],/Missing complex source intermediate original operation/],
+ ['duplicate original output identity',s=>s.operationStages[0].parts[0].features.push(s.operationStages[0].parts[0].features[0]),/duplicate original source operation identity/],
+ ['wrong original output ID',s=>s.operationStages[0].parts[0].features[0].properties.id='fabricated',/intermediate original operation provenance/],
+ ['incomplete original stage index',s=>s.operationStages[0].index.parts.push('geography/part-1.json'),/stage inventory/],
+ ['unrelated original stage',s=>s.operationAncestor=false,/not an available ancestor/],
+ ['duplicate original stage',s=>s.operationStages.push(s.operationStages[0]),/distinct and earlier/],
+ ['same-vintage lineage duplicate',s=>s.mutateOperationPins=stages=>{for(const p of [stages[0].index,stages[0].lineage,...stages[0].parts])p.commit=version;},/distinct and earlier/],
+ ['missing intermediate stage geometry',s=>delete s.operationStages[0].parts[0].features[0].geometry,/original geometry/],
+ ['missing a chain link',s=>s.operationStages.pop(),/Missing complex source intermediate original operation/],
+ ['mixed stage commits',s=>s.mutateOperationPins=stages=>stages[0].lineage.commit='d'.repeat(40),/Mixed original source operation stage/],
+ ['wrong original body hash',s=>s.mutateOperationPins=stages=>stages[0].parts[0].sha256='0'.repeat(64),/Whole immutable input differs/],
+ ['wrong original body OID',s=>s.mutateOperationPins=stages=>stages[0].parts[0].git_blob_oid='0'.repeat(40),/whole identity differs/],
+ ['wrong original index path',s=>s.mutateOperationPins=stages=>stages[0].index.path='authored-index.json',/Malformed original source operation stage/],
+])test('mixed provider chain rejects '+name+' with coherent present repinning',()=>{
+ const f=operationStageFixture(change,name==='missing a chain link');
+ assert.throws(()=>f.run(),pattern);assert.throws(()=>f.diagnose(),pattern);
+});
+test('mixed provider ancestry retains complete original negative interior and boundary vetoes',()=>{
+ for(const boundary of [false,true]){
+  const f=operationStageFixture(s=>{
+   const y=s.proposed.rows[0].y,[x]=s.proposed.rows[0].runs[0],lon=(x+.5)/size*360-180,lat=latitudes[y];
+   s.originals[0].geometry=rectangle(boundary?lon:lon-.001,lon+.001,lat-.001,lat+.001);
+  });
+  assert.throws(()=>f.run(),/coverage|competitor|source/);
+  const diagnostic=f.diagnose();assert.equal(diagnostic.supported_cells,0);assert.equal(diagnostic.held_cells,1);
+ }
+});
+test('mixed provider provenance cannot turn complex original members into positive coverage',()=>{
+ const f=operationStageFixture(s=>{
+  const selected=s.accepted.features[0].geometry;
+  s.targets=[{id:a,target_id:'city',pixelIndex:1,source_family:family,base_geometry:selected,coverage_classes:['mapped_land_support']}];
+  s.measured=[{target:a,consumed:s.originals[0],selected:{id:'city',geometry:selected}}];
+  s.physical.results=[{target:a,issues:[],support:{mapped_land_support:s.originals[0].geometry}}];
+ });
+ assert.throws(()=>f.run(),/unique source membership|accepted source membership|source.target|source member/i);
+ assert.throws(()=>f.diagnose(),/unique source membership|accepted source membership|source.target|source member/i);
+});
+
+
+test('later original operation stage must retain every earlier chain link',()=>{
+ for(const mutation of [s=>s.operationStages[1].lineage.changes.shift(),
+  s=>s.operationStages[1].lineage.changes[0].source='https://wrong.example/',
+  s=>s.operationStages[1].lineage.changes[0].basis='wrong original operation',
+  s=>s.operationStages[1].lineage.changes[0].replaces=[a]]){
+  const f=operationStageFixture(mutation,true);
+  assert.throws(()=>f.run(),/Original source operation chain link differs/);
+  assert.throws(()=>f.diagnose(),/Original source operation chain link differs/);
+ }
+});
+test('mixed provider original operation proofs retain cycle and foreign-leaf refusals',()=>{
+ for(const mutation of [s=>s.lineage.changes[2].replaces.push('retired-region'),
+  s=>s.lineage.changes[2].replaces.push('gb:OTHER:ADM2:foreign'),
+  s=>s.lineage.changes[2].replaces.push(a)]){
+  const f=operationStageFixture(mutation);
+  assert.throws(()=>f.run(),/Cyclic|Missing|duplicate|malformed/);
+  assert.throws(()=>f.diagnose(),/Cyclic|Missing|duplicate|malformed/);
+ }
+});
+
+
+test('real Git operation ancestry accepts the original publication and rejects an unrelated identical-body history',t=>{
+ const f=operationStageFixture(),root=fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()),'native-operation-stage-'));
+ t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+ const git=(...args)=>execFileSync('git',['-c','protocol.allow=never','-C',root,...args],
+  {encoding:'utf8',env:{...process.env,GIT_NO_LAZY_FETCH:'1'},stdio:['pipe','pipe','pipe']}).trim();
+ const write=(name,body)=>{const file=path.join(root,name);fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,body);};
+ const commit=message=>{git('add','--all');git('commit','-qm',message);return git('rev-parse','HEAD');};
+ git('init');git('config','user.name','Original source operation fixture');git('config','user.email','source-operation@example.invalid');
+ for(const {pin,raw}of f.historicalFiles.values())write(pin.path,raw);
+ const original=commit('Original canonical operation output');
+ for(const [name,{raw}]of f.files)if(name!=='source-evidence.json')write(name,raw);
+ const canonical=commit('Later canonical subdivision');
+ const evidence=JSON.parse(f.files.get('source-evidence.json').raw);
+ evidence.source_membership.lineage.commit=canonical;
+ for(const stage of evidence.source_membership.operation_stages)
+  for(const pin of [stage.index,stage.lineage,...stage.parts])pin.commit=original;
+ write('source-evidence.json',JSON.stringify(evidence));let head=commit('Original source evidence custody');
+ const construct=()=>constructOriginalAuthority(new ImmutableReader(root,head),{
+  source_evidence:{commit:head,path:'source-evidence.json'},native_patch:{commit:head,path:'patch.json'}});
+ assert.equal(construct().ledger_rows[0].native_cells,1);
+ // Exact same original bodies, at a real commit with no ancestral link. All
+ // author-controlled source evidence pins are updated coherently before retry.
+ const unrelated=git('commit-tree',git('rev-parse',original+'^{tree}'),'-m','Unrelated original output');
+ for(const stage of evidence.source_membership.operation_stages)
+  for(const pin of [stage.index,stage.lineage,...stage.parts])pin.commit=unrelated;
+ write('source-evidence.json',JSON.stringify(evidence));head=commit('Coherently pinned unrelated source stage');
+ assert.throws(construct,/Original source operation stage is not an available ancestor/);
+});
+
+
+test('repeated original operation outputs must retain the same complete geometry',()=>{
+ const f=operationStageFixture(s=>{
+  const copy=structuredClone(s.operationStages[0]);copy.commit='c'.repeat(40);
+  copy.parts[0].features[0].geometry=rectangle(-.08,.08,-.02,.02);s.operationStages.push(copy);
+ });
+ assert.throws(()=>f.run(),/Conflicting complex source intermediate original geometries/);
+ assert.throws(()=>f.diagnose(),/Conflicting complex source intermediate original geometries/);
 });

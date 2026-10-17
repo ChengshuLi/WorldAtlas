@@ -507,7 +507,7 @@ test('finalization refuses a new identity at an accepted package path', () => {
 // Actual Git/plain-Node fixture for metadata assembly. The source interpretation
 // and native construction controls live in source-member-native-delivery.test;
 // this fixture exercises the consumed-role boundary without replaying science.
-function modernFinalizationFixture(t, {mixed = false, membership = true, cohort = false, external = false, dated = false, territorial = false, territorialParts = false, provider = false, seam = false, negativeSources = false} = {}) {
+function modernFinalizationFixture(t, {mixed = false, membership = true, cohort = false, external = false, dated = false, territorial = false, territorialParts = false, provider = false, seam = false, negativeSources = false, operationStages = false} = {}) {
   const root = directory(t), owned = 'coordination/engineering/modern-finalize/';
   const git = (...args) => execFileSync('git', args, {cwd: root, stdio: ['pipe', 'pipe', 'pipe']}).toString().trim();
   git('init'); git('config', 'user.name', 'Finalizer fixture'); git('config', 'user.email', 'finalizer@example.invalid');
@@ -525,6 +525,14 @@ function modernFinalizationFixture(t, {mixed = false, membership = true, cohort 
   if (cohort) memberPaths.push('data/macro-foundation/world-review-projection.json', 'data/macro-foundation/world-review-locations-0.json.gz');
   if (external) memberPaths.push('data/sources.json', 'data/retained-natural-earth.json');
   for (const name of memberPaths) save(name, name.endsWith('.gz') ? gzipSync(jsonBytes([{retained:name}])) : {retained: name});
+  let originalOperationStage;
+  if (operationStages) {
+    const originalStage = commitAll();
+    originalOperationStage = {index: r.pin(originalStage, memberPaths[0]),
+      lineage: r.pin(originalStage, memberPaths[1]), parts: [r.pin(originalStage, memberPaths[2])]};
+    // Distinct original and live bytes at the SAME paths must both survive.
+    for (const name of memberPaths.slice(0, 3)) save(name, {current: name});
+  }
   const incidental = inherited + 'gshhg-never-consumed.json'; save(incidental, {not_a_selected_reader_operand: true});
   const geometry = {type: 'Polygon', coordinates: [[[0, 0], [1, 0], [0, 1], [0, 0]]]};
   const baseReference = {id: 'geography:base', footprints_sha256: 'b'.repeat(64), hierarchy_sha256: 'c'.repeat(64)};
@@ -550,6 +558,7 @@ function modernFinalizationFixture(t, {mixed = false, membership = true, cohort 
     native_contract: {incidental_reproducer_operand: pin(incidental)},
     ...(membership ? {source_membership: {index: pin(memberPaths[0]), lineage: pin(memberPaths[1]), parts: [pin(memberPaths[2])],
       ...(cohort ? {cohort_inventory:{index:pin(memberPaths[3]),parts:[pin(memberPaths[4])]}} : {}),
+      ...(operationStages ? {operation_stages: [originalOperationStage]} : {}),
       ...(external ? {negative_natural_earth:{registry:pin('data/sources.json'),source:pin('data/retained-natural-earth.json'),
         atoms:[{source_id:'TST-1',feature_ordinal:0,geometry_sha256:'a'.repeat(64)}]}} : {})}} : {})};
   let datedSupport;
@@ -1257,4 +1266,29 @@ test('combined external ancestry and complete negative reference sources retain 
  for(const pin of [f.evidenceBody.territorial_exclusion_sources[0].parts[0],
   ...['registry','source'].map(key=>f.evidenceBody.source_membership.negative_natural_earth[key])])
   assert(output.paths.some(item=>item.path===pin.path&&item.sha256===pin.sha256),'Both complete negative role sets remain consumed');
+});
+
+
+test('real finalizer retains historical operation stages without overwriting live canonical paths',t=>{
+ const f=modernFinalizationFixture(t,{operationStages:true}),destination='.cache/delivery-handoff/operation-stages';
+ const stage=f.evidenceBody.source_membership.operation_stages[0],original=[stage.index,stage.lineage,...stage.parts];
+ const before=original.map(p=>fs.readFileSync(path.join(f.root,p.path)));
+ const result=f.run('finalize',destination);assert.equal(result.status,0,result.stderr);
+ const output=JSON.parse(fs.readFileSync(path.join(f.root,destination,'package-roles.json')));
+ for(const [i,pin]of original.entries()){
+  assert(output.paths.some(item=>item.path===pin.path&&item.sha256===pin.sha256
+    &&item.commit===pin.commit&&item.roles.some(role=>role.startsWith('source-target original operation'))));
+  assert.notEqual(f.pin(pin.path).sha256,pin.sha256,'fixture has genuinely different current bytes');
+  assert.deepEqual(fs.readFileSync(path.join(f.root,pin.path)),before[i]);
+ }
+});
+test('real package refuses missing, malformed and hash-drifted original operation roles',t=>{
+ const f=modernFinalizationFixture(t,{operationStages:true});let ordinal=0;
+ for(const mutate of [m=>m.operation_stages=[],m=>delete m.operation_stages[0].lineage,
+  m=>m.operation_stages[0].parts=[],m=>m.operation_stages[0].index.path='authored-index.json',
+  m=>m.operation_stages[0].parts[0].sha256='0'.repeat(64)]){
+  const body=structuredClone(f.evidenceBody);mutate(body.source_membership);
+  const result=f.run('package','.cache/delivery-handoff/operation-stages-reject-'+ordinal++,[],f.withEvidence(body));
+  assert.notEqual(result.status,0);assert.match(result.stderr,/operation|hash differs/);
+ }
 });
