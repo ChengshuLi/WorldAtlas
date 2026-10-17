@@ -145,6 +145,7 @@ async function parseRows(input,runs,index,size,ownerCount){
 }
 const storedRowChunks=new WeakMap();
 function* canonicalChunks(value){
+ if(Array.isArray(value)&&value.length===2&&Number.isFinite(value[0])&&Number.isFinite(value[1])){yield '['+value[0]+','+value[1]+']';return;}
  const rows=value&&typeof value==='object'?storedRowChunks.get(value):undefined;
  if(rows){yield* rows();return;}
  if(isNativeSequence(value)){
@@ -203,6 +204,11 @@ async function admitStore({chunks,expected,directory,size,ownerCount,rowField='r
   const coordinateDescriptors=new WeakMap(),coordinateIndices=[];
   const coordinateIndex=depth=>coordinateIndices[depth]??=(new Writer(open('coordinates-'+depth+'.bin')));
   const metadataBytes=value=>{
+   // Private finite-pair record: one tag byte and two little-endian IEEE754
+   // doubles. Input JSON never supplies these tags; signed zero survives.
+   if(Array.isArray(value)&&value.length===2&&Number.isFinite(value[0])&&Number.isFinite(value[1])){
+    const body=Buffer.allocUnsafe(17);body[0]=0;body.writeDoubleLE(value[0],1);body.writeDoubleLE(value[1],9);return body;
+   }
    // Raw syntax admits deeply nested ignored JSON too. Use an explicit stack,
    // avoiding both recursive cloning and JSON.stringify's container depth cap.
    if(rawSyntaxOnly){
@@ -248,26 +254,33 @@ async function admitStore({chunks,expected,directory,size,ownerCount,rowField='r
    }
    return freeze(value);
   };
+  const decodeMetadataBytes=body=>{
+   if(body[0]!==0)return decodeMetadata(JSON.parse(body));
+   demand(body.length===17,'Malformed private coordinate pair record');
+   const x=body.readDoubleLE(1),y=body.readDoubleLE(9);
+   demand(Number.isFinite(x)&&Number.isFinite(y),'Nonfinite private coordinate pair record');
+   return Object.freeze([x,y]);
+  };
   function coordinateSequence(descriptor){
    const {depth,start,count}=descriptor;
    const entryAt=ordinal=>{
     active();if(descriptor.error)throw new CanonicalValueError(descriptor.error);const record=Buffer.allocUnsafe(16),index=coordinateIndex(depth);
     readExact(index.fd,record,16,start+ordinal*16);
     const length=Number(record.readBigUInt64LE(8)),body=Buffer.allocUnsafe(length);
-    readExact(vectorFd,body,length,Number(record.readBigUInt64LE(0)));return decodeMetadata(JSON.parse(body));
+    readExact(vectorFd,body,length,Number(record.readBigUInt64LE(0)));return decodeMetadataBytes(body);
    };
    function* entries(){
     active();if(descriptor.error)throw new CanonicalValueError(descriptor.error);const index=coordinateIndex(depth);
-    const records=Buffer.allocUnsafe(16*Math.min(count,256));
+    const records=Buffer.allocUnsafe(16*Math.min(count,4096));
     for(let ordinal=0;ordinal<count;){
-     active();const n=Math.min(256,count-ordinal);readExact(index.fd,records,n*16,start+ordinal*16);
+     active();const n=Math.min(4096,count-ordinal);readExact(index.fd,records,n*16,start+ordinal*16);
      for(let i=0;i<n;){
       const offset=Number(records.readBigUInt64LE(i*16));let end=i+1,bytes=Number(records.readBigUInt64LE(i*16+8));
       while(end<n){const nextEnd=Number(records.readBigUInt64LE(end*16))+Number(records.readBigUInt64LE(end*16+8));
        if(nextEnd-offset>65536)break;bytes=nextEnd-offset;end++;}
       const body=Buffer.allocUnsafe(bytes);readExact(vectorFd,body,bytes,offset);
       for(;i<end;i++){active();const at=Number(records.readBigUInt64LE(i*16))-offset,length=Number(records.readBigUInt64LE(i*16+8));
-       yield decodeMetadata(JSON.parse(body.subarray(at,at+length)));}
+       yield decodeMetadataBytes(body.subarray(at,at+length));}
      }
      ordinal+=n;
     }
@@ -305,7 +318,7 @@ async function admitStore({chunks,expected,directory,size,ownerCount,rowField='r
    const entryAt=ordinal=>{
     active();if(valueError)throw valueError;const record=Buffer.allocUnsafe(16);readExact(vectorIndexFd,record,16,start+ordinal*16);
     const length=Number(record.readBigUInt64LE(8)),body=Buffer.allocUnsafe(length);
-    readExact(vectorFd,body,length,Number(record.readBigUInt64LE(0)));return decodeMetadata(JSON.parse(body));
+    readExact(vectorFd,body,length,Number(record.readBigUInt64LE(0)));return decodeMetadataBytes(body);
    };
    return nativeSequence(count,function*(){for(let i=0;i<count;i++)yield entryAt(i);},{entryAt});
   }
@@ -361,7 +374,7 @@ async function admitStore({chunks,expected,directory,size,ownerCount,rowField='r
   const componentDescriptor=handle=>{active();const descriptor=admittedComponents.get(handle);demand(descriptor,'Foreign native component');return descriptor;};
   function componentMetadata(handle){
    const {metaBytes,metaOffset}=componentDescriptor(handle),buffer=Buffer.allocUnsafe(metaBytes);readExact(metadataFd,buffer,metaBytes,metaOffset);
-   return decodeMetadata(JSON.parse(buffer));
+   return decodeMetadataBytes(buffer);
   }
   function componentRows(handle,options){return rowEntries(componentDescriptor(handle),options);}
   function* componentCanonicalChunks(handle,{overrides={},newline=true}={}){

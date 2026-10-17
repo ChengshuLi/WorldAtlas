@@ -298,3 +298,39 @@ test('raw metadata preserves own special keys and freezes without consuming spil
  assert.deepEqual([...value.__proto__.coordinates],literal.__proto__.coordinates);
  assert.equal(Object.prototype.old,undefined);store.close();assert.deepEqual(fs.readdirSync(directory),[]);
 });
+
+test('private binary coordinate pairs preserve finite IEEE doubles and semantic canonical hashes',async t=>{
+ const directory=temporary(t),numbers=[0,-0,Number.MIN_VALUE,-Number.MIN_VALUE,Number.MAX_VALUE,-Number.MAX_VALUE,1e-300,-1e300,Math.PI];
+ const coordinates=Array.from({length:81},(_,i)=>[numbers[i%numbers.length],numbers[Math.floor(i/numbers.length)]]);
+ // JSON text can spell negative zero even though canonical JSON writes zero.
+ const text='{"rows":[{"geometry":{"coordinates":['+coordinates.map(pair=>'['+pair.map(n=>Object.is(n,-0)?'-0':String(n)).join(',')+']').join(',')+']}}]}';
+ const store=await open(directory,text),component=store.componentAt(0),actual=store.componentMetadata(component).geometry.coordinates;
+ assert.deepEqual([...actual],coordinates);assert.deepEqual([...actual],coordinates);
+ for(let i=0;i<coordinates.length;i++)assert.deepEqual(actual.at(i),coordinates[i]);
+ assert.equal(store.canonical_sha256,hash(valueBytes(JSON.parse(text))));assert.equal(component.canonical_sha256,hash(valueBytes(JSON.parse(text).rows[0])));
+ const file=path.join(directory,fs.readdirSync(directory)[0],'vectors.bin'),bytes=fs.readFileSync(file);
+ assert.equal(bytes[0],0);assert.equal(bytes.readDoubleLE(1),0);assert.equal(bytes.readDoubleLE(9),0);
+ assert(Object.is(bytes.readDoubleLE(18),-0));store.close();assert.deepEqual(fs.readdirSync(directory),[]);
+});
+
+for(const mode of ['wrong tag','short record','truncated body','nonfinite double'])test('private coordinate records reject '+mode,async t=>{
+ const directory=temporary(t),store=await open(directory,JSON.stringify({rows:[{geometry:{coordinates:Array.from({length:40},()=>[1,2])}}]}));
+ const coordinates=store.componentMetadata(store.componentAt(0)).geometry.coordinates,root=path.join(directory,fs.readdirSync(directory)[0]),body=path.join(root,'vectors.bin');
+ if(mode==='truncated body')fs.truncateSync(body,16);
+ else if(mode==='short record'){
+  const file=path.join(root,'coordinates-0.bin'),bytes=fs.readFileSync(file);bytes.writeBigUInt64LE(16n,8);fs.writeFileSync(file,bytes);
+ }else{
+  const bytes=fs.readFileSync(body);if(mode==='wrong tag')bytes[0]=1;else bytes.writeDoubleLE(Infinity,1);fs.writeFileSync(body,bytes);
+ }
+ assert.throws(()=>coordinates.at(0),mode==='wrong tag'?SyntaxError:/Incomplete native interval store|Malformed private coordinate pair|Nonfinite private coordinate pair/);
+ store.close();assert.deepEqual(fs.readdirSync(directory),[]);
+});
+
+test('coordinate windows bound working reads without limiting complete input length',async t=>{
+ const directory=temporary(t),coordinates=Array.from({length:10000},(_,i)=>[i/10000,-i/10000]);
+ const store=await open(directory,JSON.stringify({rows:[{geometry:{coordinates}}]})),sequence=store.componentMetadata(store.componentAt(0)).geometry.coordinates;
+ const read=fs.readSync;let calls=0,max=0;fs.readSync=(fd,buffer,offset,length,position)=>{calls++;max=Math.max(max,length);return read(fd,buffer,offset,length,position);};
+ try{assert.deepEqual([...sequence],JSON.parse(JSON.stringify(coordinates)));}finally{fs.readSync=read;}
+ assert(calls<=10,'complete pair scan should use bounded windows rather than per-record reads');assert(max<=65536);
+ store.close();assert.deepEqual(fs.readdirSync(directory),[]);
+});

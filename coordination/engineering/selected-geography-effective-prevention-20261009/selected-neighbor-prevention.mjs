@@ -49,13 +49,13 @@ export function valueSha(value) {
  };
  const index=key=>String(Number(key)>>>0)===key&&key!=='4294967295';
  const visit=value=>{
-  // Native interval triples dominate complete selected hashes. This exact
+  // Native interval triples and coordinate pairs dominate selected hashes. This exact
   // scalar case preserves JSON number/-0 semantics without three recursive
   // visits or temporary whole-array serialization. Other arrays keep the
   // ordinary sparse/circular/nonfinite checks below.
-  if(Array.isArray(value)&&value.length===3&&Number.isFinite(value[0])
-    &&Number.isFinite(value[1])&&Number.isFinite(value[2])){
-   write('['+value[0]+','+value[1]+','+value[2]+']');return;
+  if(Array.isArray(value)&&(value.length===2||value.length===3)&&Number.isFinite(value[0])
+    &&Number.isFinite(value[1])&&(value.length===2||Number.isFinite(value[2]))){
+   write('['+value[0]+','+value[1]+(value.length===3?','+value[2]:'')+']');return;
   }
   if(value&&typeof value==='object'){
    demand(!ancestors.has(value),'Circular canonical value');ancestors.add(value);
