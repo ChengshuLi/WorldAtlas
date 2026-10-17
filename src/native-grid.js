@@ -703,28 +703,43 @@ function requestedIndex(requestedRows, size, latitudes) {
 // Empty top-level coordinates of a recognized type are explicit empty witnesses;
 // empty members inside a nonempty multi-primitive are rejected rather than dropped.
 function coordinateArray(value,name){return Array.isArray(value)?denseArray(value,name):(require(isNativeSequence(value),`${name} must be an array`),value);}
-function primitives(geometry) {
+function primitives(geometry, retain = true) {
   const polygons = [], segments = [], points = [], stack = [{value: geometry}];
   const activeCollections = new WeakSet();
-  let parts = 0, vertices = 0;
+  let parts = 0, vertices = 0, polygonCount = 0, segmentCount = 0, pointCount = 0;
+  // The same traversal validates both routes. Only the numerical consumer needs
+  // flattened polygons and retained point/segment graphs.
+  function visit(values, callback) {
+    if (retain) return mapGeometryArray(values, callback);
+    if (Array.isArray(values)) {
+      const length = values.length;
+      for (let i = 0; i < length; i++) if (i in values) callback(values[i], i);
+    } else for (const value of values) callback(value);
+  }
+  function addPoint(value) { const p = point(value); pointCount++; if (retain) points.push(p); }
   function point(value) { vertices++; return position(value); }
   function line(value) {
     coordinateArray(value, 'Line positions');
     require(value.length >= 2, 'Incomplete line witness');
-    const positions = mapGeometryArray(value,point);
-    for (let i = 1; i < positions.length; i++) segments.push([positions[i - 1], positions[i]]);
+    let count = 0;
+    const positions = visit(value, value => { count++; return point(value); });
+    segmentCount += count - 1;
+    if (retain) for (let i = 1; i < positions.length; i++) segments.push([positions[i - 1], positions[i]]);
   }
   function polygon(value) {
     coordinateArray(value, 'Polygon rings');
     require(value.length > 0, 'Missing polygon rings');
-    const rings = mapGeometryArray(value,ring => {
+    const rings = visit(value, ring => {
       coordinateArray(ring, 'Ring positions');
       require(ring.length >= 4, 'Incomplete footprint ring in witness polygon');
-      const positions = mapGeometryArray(ring,point), first = positions[0], last = positions.at(-1);
+      let first, last;
+      const positions = visit(ring, value => {
+        const p = point(value); first ??= p; last = p; return p;
+      });
       require(first[0] === last[0] && first[1] === last[1], 'Unclosed polygon witness');
-      return positions.flat();
+      return retain ? positions.flat() : undefined;
     });
-    polygons.push(rings);
+    polygonCount++; if (retain) polygons.push(rings);
   }
   while (stack.length) {
     const frame = stack.pop(), value = frame.value;
@@ -745,14 +760,14 @@ function primitives(geometry) {
     exactKeys(value, ['type', 'coordinates'], 'Witness geometry');
     const coords = coordinateArray(value.coordinates, 'Witness coordinates');
     if (coords.length === 0) continue;
-    if (value.type === 'Point') points.push(point(coords));
-    else if (value.type === 'MultiPoint') for (const member of coords) points.push(point(member));
+    if (value.type === 'Point') addPoint(coords);
+    else if (value.type === 'MultiPoint') for (const member of coords) addPoint(member);
     else if (value.type === 'LineString') line(coords);
     else if (value.type === 'MultiLineString') for (const member of coords) line(member);
     else if (value.type === 'Polygon') polygon(coords);
     else for (const member of coords) polygon(member);
   }
-  return {polygons, segments, points, parts, vertices};
+  return {polygons, segments, points, parts, vertices, polygonCount, segmentCount, pointCount};
 }
 
 /**
@@ -859,10 +874,10 @@ function witnessCellEffects(geometry, {size, latitudes, requestedRows, nativePol
 
 // Validation retains every recognized primitive, including empty and mixed parts.
 function validateWitnessGeometry(geometry) {
-  const p = primitives(geometry);
-  return {parts:p.parts, vertices:p.vertices, polygons:p.polygons.length,
-    segments:p.segments.length, points:p.points.length,
-    empty:p.polygons.length+p.segments.length+p.points.length===0};
+  const p = primitives(geometry, false);
+  return {parts:p.parts, vertices:p.vertices, polygons:p.polygonCount,
+    segments:p.segmentCount, points:p.pointCount,
+    empty:p.polygonCount+p.segmentCount+p.pointCount===0};
 }
 
 return {witnessCellEffects, validateWitnessGeometry};
