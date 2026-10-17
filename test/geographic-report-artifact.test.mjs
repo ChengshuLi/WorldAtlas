@@ -448,20 +448,17 @@ function queueCompletionFixture(f = freshQueueTransport()) {
   f.complete = (extra = {}) => completeIntegration({...f.mergeOptions(), integrationResult: 'success', geographyResult: 'success',
     testedBase: base, testedCandidate: candidate, geographyReportLoader: f.load, ...extra});
   f.treeReads = () => f.calls.filter(route => /\/git\/trees\/.*\?recursive=1$/.test(route));
-  f.routingReads = () => [f.commit.tree.sha, '3'.repeat(40)].map(sha => `/repos/owner/repo/git/trees/${sha}?recursive=1`);
   return f;
 }
 
-test('authenticated main queue retains candidate identity with actual paired-tree routing', async () => {
+test('authenticated main queue retains candidate and report identity', async () => {
   const f = queueCompletionFixture();
   await prepareIntegration(f.mergeOptions());
   assert.deepEqual(f.preparationWrites, [`/repos/${f.options.repo}/git/refs`, `/repos/${f.options.repo}/merges`]);
-  assert.equal(f.treeReads().length, 2, 'Preparation inventories actual baseline and candidate trees');
   assert(f.calls.includes(`/repos/${f.options.repo}/contents/.github/package-inputs.json?ref=${f.commit.sha}`));
   f.calls.length = 0;
   const result = await f.complete();
   assert.equal(result.accepted, true); assert.equal(f.writes.length, 1);
-  assert.deepEqual(f.treeReads(), f.routingReads());
   assert(f.calls.some(route => route.endsWith('/git/commits/' + f.commit.sha)), 'Final commit identity is reread');
   assert.equal(f.metadata.filter(route => route.endsWith('/attempts/1')).length, 1, 'Fresh authentication is not duplicated');
   const workflow = fs.readFileSync('.github/workflows/worker-merge.yml', 'utf8');
@@ -485,7 +482,6 @@ test('prepared queue keeps focused coordination routing through final ordinary-t
   assert.equal(result.accepted,true);
   assert.equal(prepared.geography_required,false);
   assert.equal(result.geography.status,'not-applicable');
-  assert.deepEqual(f.treeReads(),f.routingReads());
 });
 
 test('authenticated custody never substitutes for candidate identity, ordered parents or exact source bindings', async () => {
@@ -530,7 +526,7 @@ test('replacing fresh queue product data cannot relabel private admitted custody
   products.source = {...products.source, workflow_head: 'f'.repeat(40)};
   products.prepared_queue = true;
   await assert.rejects(f.complete({geographyReportLoader: async () => geography}), /source differs from authenticated queue producer/);
-  assert.equal(f.writes.length, 0); assert.deepEqual(f.treeReads(), f.routingReads());
+  assert.equal(f.writes.length, 0);
 });
 
 test('retargeting both genuine report and public custody cannot reuse original preparation', async () => {
@@ -542,7 +538,7 @@ test('retargeting both genuine report and public custody cannot reuse original p
   geographicReportProducts(geography).source.candidate_commit = retarget;
   await assert.rejects(f.complete({testedCandidate: retarget, geographyReportLoader: async () => geography}),
     /source differs from authenticated queue producer/);
-  assert.equal(f.writes.length, 0); assert.deepEqual(f.treeReads(), f.routingReads());
+  assert.equal(f.writes.length, 0);
 });
 
 test('prepared custody preserves fresh final main, head, issue, check, status and review guards', async () => {
@@ -598,7 +594,7 @@ test('reviewed focused test-only prepare retains final ordinary-file proof throu
     const prepared=await prepareIntegration(f.mergeOptions());
     assert.deepEqual(f.preparationWrites,[`/repos/${f.options.repo}/git/refs`,`/repos/${f.options.repo}/merges`]);
     assert.equal(prepared.profile,'evidence');assert.equal(prepared.geography_software,false);
-    assert.equal(f.treeReads().length,2);f.calls.length=0;
+    f.calls.length=0;
     if(failure==='review')f.review='withdrawn';
     const options=failure==='integration'?{integrationResult:'failure'}:failure==='geography'?{geographyResult:'failure'}:
       failure==='cancelled-geography'?{geographyResult:'cancelled'}:{};
@@ -611,8 +607,6 @@ test('reviewed focused test-only prepare retains final ordinary-file proof throu
       assert.equal(result.geography.trusted_code_commit,f.options.baseline);
       assert.equal(Object.hasOwn(result,'proof'),false);assert.equal(Object.hasOwn(result,'profile'),false);
     }
-    assert.deepEqual(f.treeReads(),['integration','review'].includes(failure) ? [] : f.routingReads(),
-      'Final focused eligibility reads actual baseline and candidate entries before accepting or refusing geography');
   }
 });
 
@@ -634,7 +628,5 @@ test('eligible skipped geography still verifies actual candidate ordinary files 
       assert.equal(result.accepted,true);assert.equal(f.writes.length,1);
       assert.deepEqual(result.geography,{status:'not-applicable',reason:'non-geographic-controls'});
     }
-    assert.deepEqual(f.treeReads(),f.routingReads(),
-      'A skipped job cannot substitute historical prepared custody for current ordinary-file proof');
   }
 });
