@@ -4,7 +4,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {pathToFileURL} from 'node:url';
-import {valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {nativeRowLatitudes} from '../src/native-grid.js';
+import {valueSha,mergeCompletedNativePatches} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {deriveCoordinateDelta,projectSourceFeatures,projectNativeRows,qualifyTransition} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 import {MODULE,PROGRAMME,CATALOGUE,CODE,polygon,feature,fixtures,addition,trustedFixture,appendNativeAuthority} from './fixtures/selected-checkpoint.mjs';
 
@@ -497,4 +498,41 @@ test('complete native authority authenticates retained source aliases without fe
  assert.deepEqual(proof.original_ledger,next.proof.original_ledger);
  assert.deepEqual(proof.native_proof.native_patches,next.proof.native_proof.native_patches);
  assert.doesNotMatch(s.tracing(),remoteAttempt);
+});
+
+
+test('real appended overlap qualification does not search the complete baseline array per interval',async t=>{
+ const f=await trustedFixture(t,{nativeAppend:true}),{state}=f.api.qualifyCheckpoint({reader:f.reader});
+ const next=await appendNativeAuthority(f),reader=new f.native.ImmutableReader(f.root,next.candidate,{invocation:f.reader.invocation});
+ const original=Array.prototype.find;
+ Array.prototype.find=function(...args){
+  assert.notStrictEqual(this,state.patch.rows,'Repeated full baseline row search');
+  return Reflect.apply(original,this,args);
+ };
+ try {
+  const transition=f.api.qualifyTransition({state,reader});
+  assert.equal(transition.available,true);
+  assert.deepEqual(transition.candidate.patch.rows,next.patch.rows);
+  assert.deepEqual(transition.changedNativeRows,[next.y]);
+ } finally {Array.prototype.find=original;f.api.releaseCheckpoint(state);}
+});
+
+for(const [name,shift,overlap] of [
+ ['same-owner overlap',0,true],['left boundary touch',-1,false],['right boundary touch',1,false],['disjoint interval',3,false]
+])test('indexed append guard preserves '+name,async t=>{
+ const size=262166,y=nativeRowLatitudes(size).findIndex(v=>v<.1),x=Math.floor((.1+180)/360*size);
+ const originalPatchRows=[{y,runs:[[x+shift,x+shift+1,1]]}];
+ const f=await trustedFixture(t,{nativeAppend:true,originalPatchRows}),{state}=f.api.qualifyCheckpoint({reader:f.reader});
+ const next=await appendNativeAuthority(f,{mutatePatch:patch=>{patch.rows=overlap?structuredClone(originalPatchRows):mergeCompletedNativePatches(patch.rows.map(row=>({rows:[row]})),size);}});
+ const reader=new f.native.ImmutableReader(f.root,next.candidate,{invocation:f.reader.invocation});
+ try {
+  if(overlap)assert.throws(()=>f.api.qualifyTransition({state,reader}),/New native assignment overlaps a previously selected owner/);
+  else {
+   const transition=f.api.qualifyTransition({state,reader});
+   assert.equal(transition.available,true);
+   assert.deepEqual(transition.candidate.patch.rows,next.patch.rows);
+   assert.deepEqual(transition.changedNativeRows,[y]);
+  }
+  assert.deepEqual(state.patch.rows,originalPatchRows);
+ } finally {f.api.releaseCheckpoint(state);}
 });
