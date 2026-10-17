@@ -16,7 +16,7 @@ The original complete 368-product census contains 73,567 source features. None o
 
 All 28 original historical Japan candidate geometries and nine complete families are preserved through their immutable original packet. Nine requested centres intersect three old candidates: two and three in formerly compatible-source cases, four in a partial/unbound whole-candidate case. The full and consumed simplified original ADM2 products give the same source memberships at all nine centres. All nine pass current stock source/physical native qualification. The old whole-candidate holds are unchanged; finite cell support does not approve the continuous candidate.
 
-The initial 608 whole-source physical results retain all reconstruction residuals, contradictory support and container disagreements. The stock diagnostic evaluates their actual native intersections; it does not turn their presence into a blanket owner hold or erase the original issues. No current dry-land assertion is made.
+The initial 608 whole-source physical results retain issues in 183 source targets: 138 missing-reconstruction, 167 extra-reconstruction, 18 contradictory-support and six L2-outside-L1 occurrences (categories overlap). The stock diagnostic evaluates their actual native intersections; it does not turn their presence into a blanket owner hold or erase the original issues. No current dry-land assertion is made.
 
 ## Source and authority limits
 
@@ -28,7 +28,7 @@ The initial 608 whole-source physical results retain all reconstruction residual
 
 ## Reproduction and handoff
 
-Use stock `scripts/prepare-delivery-handoff.mjs` with the retained physical, source-evidence and native-authority configs and a fresh owned destination. `handoff/native-authority-quartet.json` retains the literal source-evidence and native-patch pins; do not repin an inner constructor operand merely because a later commit has equal bytes. Preserve all source intermediate commits as ancestry when handing over.
+Use stock `scripts/prepare-delivery-handoff.mjs` with the retained physical, source-evidence and native-authority configs and a fresh owned destination. `handoff/native-authority-quartet.json` retains the literal source-evidence and native-patch pins; do not repin an inner constructor operand merely because a later commit has equal bytes. Preserve all source intermediate commits as ancestry when handing over. Older original physical/source commits outside this branch ancestry remain literal producer operands; `handoff/baseline-byte-equivalences.json` authenticates their identical ordinary main-baseline bodies for evidence-manifest custody only. It does not rewrite an actual producer pin.
 
 `method/prepare-stage.py` authenticates complete original Git bodies and exact source/target joins. `method/check-historical.py` compares only the nine overlapping native centres against the complete original full/simplified products. `method/check-accounting.py` compares complete original, patch, diagnostic and constructor cell/owner sets. Their argument contracts appear in the scripts. These are bounded custom inspection operators rather than claims to have run the shared ellipsoidal area helper: no areas, distances, datums or physical epochs are inferred. Immutable original source pins, explicit bytes/decoded bounds, duplicate checks, fresh outputs, exclusive file creation and completion-last publication preserve the applicable invariants. Occupied and dangling-output controls were executed for all three writers without modifying original sentinels or creating dangling targets.
 
