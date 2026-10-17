@@ -135,7 +135,10 @@ async function parseRows(input,runs,index,size,ownerCount){
  });
  return {start,rowCount,runCount,error};
 }
+const storedRowChunks=new WeakMap();
 function* canonicalChunks(value){
+ const rows=value&&typeof value==='object'?storedRowChunks.get(value):undefined;
+ if(rows){yield* rows();return;}
  if(isNativeSequence(value)){
   yield '[';let first=true;for(const item of value){if(!first)yield ',';first=false;yield* canonicalChunks(item);}yield ']';return;
  }
@@ -294,6 +297,7 @@ async function admitStore({chunks,expected,directory,size,ownerCount,rowField='r
      const check=()=>{active();demand(!selected.error,selected.error);};
      fields[key]=nativeSequence(selected.rowCount,function*(){check();for(const row of rowEntries(selected))yield wrap(row);},
       {rowAt:y=>{check();const row=rowAt(y,selected);return row?wrap(row):undefined;}});
+     storedRowChunks.set(fields[key],function*(){check();yield* rowChunks(selected);});
     }else if(matches.length){
      await input.space();fields[key]=await input.peek()===123?await envelopeObject(here):await metadataValue();
     }else fields[key]=await metadataValue();

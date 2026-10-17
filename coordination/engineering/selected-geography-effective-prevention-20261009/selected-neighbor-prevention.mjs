@@ -49,6 +49,14 @@ export function valueSha(value) {
  };
  const index=key=>String(Number(key)>>>0)===key&&key!=='4294967295';
  const visit=value=>{
+  // Native interval triples dominate complete selected hashes. This exact
+  // scalar case preserves JSON number/-0 semantics without three recursive
+  // visits or temporary whole-array serialization. Other arrays keep the
+  // ordinary sparse/circular/nonfinite checks below.
+  if(Array.isArray(value)&&value.length===3&&Number.isFinite(value[0])
+    &&Number.isFinite(value[1])&&Number.isFinite(value[2])){
+   write('['+value[0]+','+value[1]+','+value[2]+']');return;
+  }
   if(value&&typeof value==='object'){
    demand(!ancestors.has(value),'Circular canonical value');ancestors.add(value);
    if(isNativeSequence(value)){
@@ -391,7 +399,7 @@ export function readOriginalRuleAuthority(reader, pins, sourceOutputAliases=[]) 
  const preimage=batch?{version:3,source_profile:issued.source_rule.profile,source_rule:issued.source_rule,representation:'literal-base-or-complete-additions',native_method:manifest.method,executed_code:request.executed_code}:
   {version:2,source_rule_body_sha256:issued.source_rule.review_body_sha256,representation:'literal-base-or-complete-additions',native_method:manifest.method,executed_code:request.executed_code};
  demand(valueSha(preimage)===ledger.rule_sha256,'Original complete executed rule preimage differs');
- demand(ledger.version===1&&ledger.kind==='native-additive-repair-ledger-v1'&&isNativeSequence(ledger.scope_ids)&&isNativeSequence(ledger.rows)&&ledger.rows.length===ledger.scope_ids.length&&new Set(ledger.scope_ids).size===ledger.rows.length&&ledger.rows.every((r,i)=>r.component_id===ledger.scope_ids[i]),'Original complete ledger scope changed');
+ demand(ledger.version===1&&ledger.kind==='native-additive-repair-ledger-v1'&&Array.isArray(ledger.scope_ids)&&Array.isArray(ledger.rows)&&ledger.rows.length===ledger.scope_ids.length&&new Set(ledger.scope_ids).size===ledger.rows.length&&ledger.rows.every((r,i)=>r.component_id===ledger.scope_ids[i]),'Original complete ledger scope changed');
  demand(Array.isArray(issued.source_rule.expected_ids)&&same([...issued.source_rule.expected_ids].sort(),[...ledger.scope_ids].sort())&&source.components===ledger.scope_ids.length,'Original complete source denominator differs');
  const selected=ledger.rows.filter(r=>['assigned','zero-cell'].includes(r.disposition));
  for(const row of selected){demand(row.source_receipt_sha256===pins.source_facts.sha256&&valueSha(row.geometry)===row.geometry_sha256,'Original whole primitive/source receipt changed');coordinateBounds(row.geometry);}
