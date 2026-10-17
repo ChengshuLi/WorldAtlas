@@ -801,3 +801,44 @@ The shared package and cold-profile role walkers retain both the explicit view
 body and canonical method. A view is a reviewed derived operand, not a new source
 product or permission to clamp coordinates, omit vertices, change owner IDs,
 ignore physical holds or qualify cells outside the exact original claim.
+
+## Exact additive asset sizes
+
+The four current additive assets (base manifest, ledger, owner roster and patch)
+are admitted by their exact positive safe-integer byte descriptors, paths and
+whole-file hashes. The gzip owner roster also binds its exact decoded length and
+hash. A fixed 32 MiB ceiling is not a scientific or transport contract and is not
+applied to these assets. Ordinary packaging checks actual file lengths before
+reading; the browser/Node streamed reader cancels an encoded or decoded body as
+soon as it exceeds its declared length and rejects truncation or hash drift.
+
+This does not promise unlimited inputs: JavaScript safe-integer precision, actual
+Buffer/typed-array allocation, UTF-8 decoding, engine string/JSON capacity and
+available process/browser resources still apply. Their failures propagate rather
+than producing a partial accepted result. A larger unrelated cap is not a remedy.
+The independent native-grid chunk, metadata and source-custody contracts are not
+changed by this additive transport correction. Final whole-output consumer proof
+remains required at the actual selected ledger and patch size.
+
+The same-asset consumer chain is explicit:
+
+- `additive-gap-repair.mjs` and `prepare-delivery-handoff.mjs` produce and retain
+  complete asset length/hash pins; they impose no fixed additive asset ceiling.
+- `package-current-additive.mjs`, called by both `build-static-inner.mjs` and
+  `assemble-selected-package.mjs`, checks safe paths, ordinary files, exact stat
+  size and whole hashes before packaging. Encoded and decoded roster pins agree.
+- `data-client.js` calls `loadAdditiveNativePatch` in `effective-footprint.js`;
+  its shared descriptor admission and exact-length streamed encoded/decoded
+  reader cover both Node-compatible and browser-facing consumption.
+- `selected-delivery-smoke.mjs` passes each supplied exact descriptor through to
+  `repositoryReader`, then checks the whole hash. Dropping the descriptor would
+  incorrectly apply that reader's legacy unpinned-file ceiling. Legacy native
+  startup parts without encoded-byte pins retain their separate decoded-word
+  contract and mandatory encoded hash.
+- `check-effective-geographic-regression.mjs` and `diagnose-map-cell.mjs` use
+  immutable exact-tree/byte/hash readers for this same selected ledger and patch.
+
+The 34,920,857-byte boundary tests use explicitly labelled same-size synthetic
+fixtures for package, browser-facing loader and emitted-smoke entry points.
+Literal selected-ledger probes are reported separately with their actual hashes;
+fixture success does not imply actual emitted-map or GPU/Canvas acceptance.
