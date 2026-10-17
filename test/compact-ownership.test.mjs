@@ -213,8 +213,9 @@ test('actual emitted selected additive cells retain exact owners and sampler out
  // The real numerical-rule loader retains the former latitude transport check,
  // validating every row rather than constructing unused coordinates per cell.
  const {loadNativeLatitudes}=await import('../src/native-latitudes.js');
+ const {nativeReferenceForData}=await import('../src/effective-footprint.js');
  const atlas=JSON.parse(fs.readFileSync('dist/client/atlas-geography.json'));
- const latitudes=await loadNativeLatitudes(atlas.pixelMap,atlas.additiveRelease.base_reference,
+ const latitudes=await loadNativeLatitudes(atlas.pixelMap,nativeReferenceForData(atlas),
   async name=>new Response(fs.readFileSync('dist/client/'+name.replace(/^\.\//,''))));
  assert.equal(latitudes.length,atlas.pixelMap.size);
  console.log(JSON.stringify(report));
