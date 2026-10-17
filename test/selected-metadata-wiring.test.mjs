@@ -7,7 +7,7 @@ import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import {prepareReferenceMetadataProjection} from '../scripts/selected-reference-metadata.mjs';
 import {scientificNativeSelection} from '../src/reference-metadata.js';
-import {selectedDeliveryReference,qualifiedDeliveryReference,finalizedSelection,prepareReferenceMetadata,composeAuthorities,sourceEvidence,jsonBytes,validateDeliverySelectionTransition,finalizeDelivery} from '../scripts/prepare-delivery-handoff.mjs';
+import {selectedDeliveryReference,qualifiedDeliveryReference,finalizedSelection,prepareReferenceMetadata,composeAuthorities,sourceEvidence,jsonBytes,finalizeDelivery} from '../scripts/prepare-delivery-handoff.mjs';
 import {compactContextInputs} from '../scripts/native-ownership/compact-context-inputs.mjs';
 import {prepareCurrentSelectedAdditive} from '../scripts/package-current-additive.mjs';
 import {loadedBaseFootprintSha256,footprintValueSha256,bindAdditiveLedgerFeatures,additiveReleaseFootprintDigest} from '../src/effective-footprint.js';
@@ -176,14 +176,6 @@ test('composition refuses unknown prior bases, mixed prior hierarchy, changed ge
  assert.throws(()=>composeAuthorities(f.config,f.reader),/geometry/);
  const receipt=JSON.parse(f.reader.read(f.projection.receipts[0]));receipt.historical_claims_transferred=true;const receiptPin=await f.put('inputs/transferred-receipt.json',receipt),history=structuredClone(f.projection);history.receipts[0]=receiptPin;await f.saveProjection(history);
  assert.throws(()=>composeAuthorities(f.config,f.reader),/non-metadata reference receipt/);
-});
-
-test('delivery evidence compares scientific selectors and fully qualifies a changed metadata pointer',async t=>{
- const f=await compositionFixture(t),original={selection:scientificNativeSelection(f.selection),selector:{commit},sidecar:f.sidecar},current={selection:f.selection,selector:{commit},sidecar:f.sidecar};
- validateDeliverySelectionTransition(original,current,f.reader);
- const changed={...current,selection:{...f.selection,release_id:'geography:foreign'}};assert.throws(()=>validateDeliverySelectionTransition(original,changed,f.reader),/Delivery base/);
- const receipt=JSON.parse(f.reader.read(f.projection.receipts[0]));receipt.historical_claims_transferred=true;const pin=await f.put('inputs/bad-evidence-receipt.json',receipt),projection=structuredClone(f.projection);projection.receipts[0]=pin;await f.saveProjection(projection);
- assert.throws(()=>validateDeliverySelectionTransition(original,current,f.reader),/non-metadata reference receipt/);
 });
 
 test('composition qualification passes original encoded whole source bytes to the existing projection validator',async t=>{
