@@ -1,0 +1,98 @@
+{
+  "head": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+  "reviewer": "01a1474a-4fc5-76aa-ae6b-db83509eb031",
+  "method": "Independent complete original GSHHG binary record scan, GMT source-range coordinate decoding, all bounding query frames and predicates, exact witness and alternating-level geometry reconstruction. No stock comparison/qualification module executed.",
+  "member_bytes": 95809336,
+  "member_sha256": "af9215d58ebc525b2d09654a89959829f09e6edc457f3666759cded37be4ecf6",
+  "scanned_records": 188612,
+  "selected_records": 4108,
+  "container_steps_checked": 24,
+  "targets": [
+    {
+      "id": "gb:GRL:ADM1:42512837B15316814347491",
+      "queries": 2350,
+      "witness_types": {
+        "disjoint-after-explicit-predicate": 2216,
+        "complete-operation-pointset": 41,
+        "complete-source-record-reconstruction": 93
+      },
+      "explicit_witness_geometries_exact": 41,
+      "all_support_geometry_exact": true,
+      "all_issue_geometry_exact": true,
+      "contradiction_dimension": 1,
+      "contradiction_components": 1391
+    },
+    {
+      "id": "gb:GRL:ADM1:42512837B82481266018751",
+      "queries": 1759,
+      "witness_types": {
+        "complete-operation-pointset": 66,
+        "disjoint-after-explicit-predicate": 1618,
+        "complete-source-record-reconstruction": 75
+      },
+      "explicit_witness_geometries_exact": 66,
+      "all_support_geometry_exact": true,
+      "all_issue_geometry_exact": true,
+      "contradiction_dimension": 1,
+      "contradiction_components": 192
+    }
+  ],
+  "consumed": [
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/config/physical.json",
+      "bytes": 56683,
+      "sha256": "e73ec6205da249f77515377e89701148b48f4d6a684ea503cdd60d0a1f050e29",
+      "git_blob_oid": "cb64c9d2fb9901655315b9eef7305779ae80af04"
+    },
+    {
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/member-index.json",
+      "bytes": 5821,
+      "sha256": "1fc10fa094ebd128f21d6440152d391cec879a2ec6ded9d665667f9e42513d12",
+      "git_blob_oid": "a749382ae63a861a8f65a6275a851fea0e79c454"
+    },
+    {
+      "commit": "2455dc1b712cda6571eb66fc93b00c0af63d2ffe",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/original-stage-inputs.json",
+      "bytes": 487286,
+      "sha256": "b6d10966b99e981b02d42ddc6d10692810b438de36e50e9ca4525f352d54cc26",
+      "git_blob_oid": "9f8f4dfbc82391df92b3a76f290ec0e6d4e2ca0f"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/physical-001/whole-target-support.json",
+      "bytes": 5860234,
+      "sha256": "b3f2a0eec0ac8857cfe9578d8b9607ec54dc6d312d17fa33d561e55ba06eca1e",
+      "git_blob_oid": "ae267485559f696f391004dbb59688019502a49c"
+    },
+    {
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-00.bin.gz",
+      "bytes": 22743455,
+      "sha256": "99546c4a2bf41fe8f8a050fb425ab372c22e9c9821bf592d66ed9748b36301eb",
+      "git_blob_oid": "1ed08dd7fe8c237c34e9e02ac04c158960362436",
+      "decoded_bytes": 33554432,
+      "decoded_sha256": "020aa63a7bbd7e4945e99b96389f0e0580aad7204c91f631f4e92aeeddba3281"
+    },
+    {
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-01.bin.gz",
+      "bytes": 23286998,
+      "sha256": "c4a508d91e40bdd66e48f2533530916c773566e75277826c0806218c3997bcbf",
+      "git_blob_oid": "7f23a353abcf3dc23aafdcfd5644ff55d0271a7e",
+      "decoded_bytes": 33554432,
+      "decoded_sha256": "2460722a7cbbc6d8f383b64d39e0c49a50831ffc01f0241942f90975ee698e0c"
+    },
+    {
+      "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+      "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-02.bin.gz",
+      "bytes": 19571844,
+      "sha256": "b7070a55d8edfbead17c14a014ed0c430586606bf0f38ea10c0c1e038f31c7c0",
+      "git_blob_oid": "39ada13dc05a9b44b08c0221b71d00137fa6d11a",
+      "decoded_bytes": 28700472,
+      "decoded_sha256": "aae9796235376f1f520b9b216c3a887e60e1c0d91d3f12463db1d403b835ae0f"
+    }
+  ],
+  "unique_raw_plus_decoded_input_bytes": 167821657
+}

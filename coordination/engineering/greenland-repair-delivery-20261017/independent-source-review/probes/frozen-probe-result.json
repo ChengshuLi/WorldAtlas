@@ -1,0 +1,646 @@
+{
+  "head": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+  "reviewer": "01a1474a-4fc5-76aa-ae6b-db83509eb031",
+  "method": "Independent original frozen source-candidate interval/physical-support intersection, complete requested block input hashes, all target candidate rows; no stock extractor invoked",
+  "blocks": [
+    {
+      "block": 2,
+      "intervals": 3862,
+      "cells": 37090,
+      "literal_rows_match": true
+    },
+    {
+      "block": 3,
+      "intervals": 10032,
+      "cells": 117630,
+      "literal_rows_match": true
+    },
+    {
+      "block": 4,
+      "intervals": 8506,
+      "cells": 78524,
+      "literal_rows_match": true
+    },
+    {
+      "block": 5,
+      "intervals": 13625,
+      "cells": 112261,
+      "literal_rows_match": true
+    },
+    {
+      "block": 6,
+      "intervals": 3334,
+      "cells": 28241,
+      "literal_rows_match": true
+    },
+    {
+      "block": 7,
+      "intervals": 1361,
+      "cells": 13013,
+      "literal_rows_match": true
+    },
+    {
+      "block": 8,
+      "intervals": 302,
+      "cells": 3948,
+      "literal_rows_match": true
+    },
+    {
+      "block": 9,
+      "intervals": 3565,
+      "cells": 19958,
+      "literal_rows_match": true
+    },
+    {
+      "block": 10,
+      "intervals": 3428,
+      "cells": 20828,
+      "literal_rows_match": true
+    },
+    {
+      "block": 11,
+      "intervals": 3108,
+      "cells": 14100,
+      "literal_rows_match": true
+    },
+    {
+      "block": 12,
+      "intervals": 3687,
+      "cells": 16789,
+      "literal_rows_match": true
+    },
+    {
+      "block": 13,
+      "intervals": 1857,
+      "cells": 7012,
+      "literal_rows_match": true
+    },
+    {
+      "block": 14,
+      "intervals": 468,
+      "cells": 2471,
+      "literal_rows_match": true
+    },
+    {
+      "block": 15,
+      "intervals": 4961,
+      "cells": 30351,
+      "literal_rows_match": true
+    }
+  ],
+  "total_cells": 502216,
+  "total_intervals": 62096,
+  "consumed": [
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+      "bytes": 1754890,
+      "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8",
+      "git_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/package.json",
+      "bytes": 1952,
+      "sha256": "291f65cac911ac8427f4973d550da1098fd6b978550acad8115f0fcd52a8b6ce",
+      "git_blob_oid": "091cbbb71adde6cac8d4169c41694ff10a63c4d1"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-census-summary.json",
+      "bytes": 120963,
+      "sha256": "8a4a6792237259328e56e38d91d0cb22f977de4a35caf4781f0d605e3db1653d",
+      "git_blob_oid": "fa1e4d101edb54b02bd1ff42a240f2f80ac65832"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-unassigned-summary.json",
+      "bytes": 154672,
+      "sha256": "a82c56c1d92ff52c0b0e52c9bf329905a05bace4b6a27c12771509d419888501",
+      "git_blob_oid": "0c934cdaf4b007a741e66d4a080890154bdae53c"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "bytes": 1844315,
+      "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa",
+      "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+      "decoded_bytes": 13496995,
+      "decoded_sha256": "7fa99cbf064121e0130b66758c212ae22b2a7be5649f2e250e9cda89a9bd595e"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-002.json.gz",
+      "bytes": 28707,
+      "sha256": "580560e404705933a0bfe3dd20f1b5b6582a4b761f837e790f393e46f765c701",
+      "git_blob_oid": "de4f7e94942cc2a5e96a7db12825204656f6a817",
+      "decoded_bytes": 205716,
+      "decoded_sha256": "c183c95be14c80716068e2a138f8dc6c01ae25b753952d160e085ec2f6cc1880"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-002.json.gz",
+      "bytes": 29969,
+      "sha256": "6701a3007caa7ebb45e50f38b93e0a487735f67428b813f858dd18e941c843d5",
+      "git_blob_oid": "ee33db59569ac18eb31920804b336cf23b6fcab5",
+      "decoded_bytes": 162098,
+      "decoded_sha256": "7acf7ce959985537fa24d9b42e9a8a6e88abe1eed4a4d4c6e923123d2efe3729"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-002.json.gz",
+      "bytes": 23,
+      "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+      "git_blob_oid": "95890a0fc5a9cb9fb6bbd8f48425a8887b043a6e",
+      "decoded_bytes": 3,
+      "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-002.json.gz",
+      "bytes": 22181,
+      "sha256": "8e07213c3726a80b1d4d8c0c0575f409437637c5c2e348f87ff2075d22346916",
+      "git_blob_oid": "df22b12f7800b1a14618986f3fe0de865ebe5e2a",
+      "decoded_bytes": 173792,
+      "decoded_sha256": "2f1620c5fa309591ca1620a388f0fd255b0fe1184e3cac53e19fca9de3b4c9bc"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-003.json.gz",
+      "bytes": 230867,
+      "sha256": "2c908c618ad0b41ee44b5d0f1841c4029802708207c7d5899723a1353d8033b0",
+      "git_blob_oid": "ccb8353086758946164b37c82ae016ec25ceccbd",
+      "decoded_bytes": 4787516,
+      "decoded_sha256": "73b1b838723482af1bdcd048866621b00e892a6cce9ce7047c53981e7389f325"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-003.json.gz",
+      "bytes": 169128,
+      "sha256": "857c9bb90ac465b6ee8581f59b3cf8bddd483f1f705ab53c96dc7c52ce140137",
+      "git_blob_oid": "30a7922381a7fc9d5e1cc1f6855f402762793447",
+      "decoded_bytes": 743166,
+      "decoded_sha256": "ab3cb87c864518259878528186847649c32a60c6b7f1d472f4fea6e8c45c8bf3"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-003.json.gz",
+      "bytes": 2948,
+      "sha256": "e916579e6285edc3cecd929859964b240a2bd80bf0453085056f7e207456a882",
+      "git_blob_oid": "7abac53c574a0eadbc4c81946ac6310e4c40bc52",
+      "decoded_bytes": 19658,
+      "decoded_sha256": "dd76511613137b9e04dd6406a9d6c23ee72a42729ee70313a6f9ccd29e92d248"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-003.json.gz",
+      "bytes": 57591,
+      "sha256": "30d21710f79f5996e41e833ae1966391437d01cbc056b1bc4149a3fa059ab655",
+      "git_blob_oid": "2634bc1fdd22ac7d0d458990225ff151a891d36e",
+      "decoded_bytes": 446218,
+      "decoded_sha256": "c4c330eaeab316659a1ed28c57b8154d288cd629653999a30ba1a74ff063bd4d"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-004.json.gz",
+      "bytes": 205750,
+      "sha256": "d3152f6ffabe3a24231072c8f544317f0feed8dc158bb9e2c2237c6846cb7f6b",
+      "git_blob_oid": "ec28e5f9d16c72afab07a7f79cda120d03fb87a1",
+      "decoded_bytes": 4560521,
+      "decoded_sha256": "331f317c62c766cb6eef05dfabde8a4c54858c5c090578987205b363374774d7"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-004.json.gz",
+      "bytes": 147574,
+      "sha256": "d9da5577aefd5e9d839e73da265ca5b154857e7572669f14ca69d548669939f5",
+      "git_blob_oid": "5fb852ab4edc060a3e8b45945a4a7af5a48cea23",
+      "decoded_bytes": 700108,
+      "decoded_sha256": "d451b635d637b0fe040db7763f0f0385e81cc9c70c98bccc04b9e8cbf7b2cbca"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-004.json.gz",
+      "bytes": 1574,
+      "sha256": "9fe87bdc49e326d220503100c895f0734a97396f5ab77b9714fe846d8d8d3175",
+      "git_blob_oid": "b468ee56163cf8cb43047da177535af573a98e11",
+      "decoded_bytes": 12249,
+      "decoded_sha256": "429442d8c520896471f8d67f56d0ed6f0b98dee6c3f31274d005e7202c43f14d"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-004.json.gz",
+      "bytes": 44649,
+      "sha256": "1beda03d4b5a8c676f7c80a918aba028b1990422c2b24e128920a9b02d252ad4",
+      "git_blob_oid": "9f0a10c540a451c38cd487f7f017641f1c6e8ec6",
+      "decoded_bytes": 371657,
+      "decoded_sha256": "a03077ed5783f942f207daec8d375768a265126ea43dd24aee33f641145a30a6"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-005.json.gz",
+      "bytes": 347451,
+      "sha256": "37912004590ad82f4dfc6f694c1c2905cc8770075e0d7677e2e61074a62ea831",
+      "git_blob_oid": "65a344ffdbb8203fea25c096f2bb0314d806c854",
+      "decoded_bytes": 6370893,
+      "decoded_sha256": "d37d40a356335cdeb8773f035828faa6c65912612b4ba5e36de71b0fcc00c8cd"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-005.json.gz",
+      "bytes": 260720,
+      "sha256": "dc8b096fb95d33cf87baea588d30fe1300738c3671f60e5ccea631fd51715ef5",
+      "git_blob_oid": "90239df2846c16a2524ce04e9991ff0eba6c218b",
+      "decoded_bytes": 1186760,
+      "decoded_sha256": "0a9203e806e09f990383c7a14c64fec4a8b5bc16b8948a867a28c588b60c7586"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-005.json.gz",
+      "bytes": 1639,
+      "sha256": "08cb5fbf990b166b0f4b4f78523f9641c009952f8f46d58bfeb52bfcfddeb18b",
+      "git_blob_oid": "84dae85621dbd6f0680ce3877385a6cdc9fb7110",
+      "decoded_bytes": 11124,
+      "decoded_sha256": "a1f8d319465187927384a6e3dcfef3bfecc0a08e2dca148fd5616911073c46f5"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-005.json.gz",
+      "bytes": 72089,
+      "sha256": "3877697199128df89c5db521d827eeb40e6bfee84df838aa43dbfb78a0610b4d",
+      "git_blob_oid": "2f8aa2e7e88f1b31352496e73eaef783b5a6f5e5",
+      "decoded_bytes": 600833,
+      "decoded_sha256": "c1e2184915706831c1993fb9734d57a5214e72a04afee882908c7a04147a61a7"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-006.json.gz",
+      "bytes": 470231,
+      "sha256": "36772806dbb72ff25c8753f5f55ec647dd61c3bc041e2578d1f7d383fb09b8b6",
+      "git_blob_oid": "253be161270829f717f1dd68a186cb8c095163ae",
+      "decoded_bytes": 8181316,
+      "decoded_sha256": "4872bdab493843e98054a0de6734cbc2eecb572eb797ec338d857da3021baec3"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-006.json.gz",
+      "bytes": 386873,
+      "sha256": "e9ed0b47a072b61a9d34caf35fe83e9f23c48ffc0d6dcda03d735b4950c48e74",
+      "git_blob_oid": "80c46e00d1d4ffc14eb7c17c88304b3ba48a24da",
+      "decoded_bytes": 1792936,
+      "decoded_sha256": "4c0e2762d6ee39990756a1913e434472c9d1374683f1b2a046fdc0070dd0a8b6"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-006.json.gz",
+      "bytes": 23,
+      "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+      "git_blob_oid": "95890a0fc5a9cb9fb6bbd8f48425a8887b043a6e",
+      "decoded_bytes": 3,
+      "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-006.json.gz",
+      "bytes": 19469,
+      "sha256": "b9c121d142b11652973904142ea9f9ec841227cb2296dcee6e04cfd78dafd500",
+      "git_blob_oid": "7d5653f2026716c5504e030119ae29af7315e68b",
+      "decoded_bytes": 150032,
+      "decoded_sha256": "ef0be9c0b4610b35579c891ed79e25f1da1ccaf4a3ea741424c4c8cf2637eb14"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-007.json.gz",
+      "bytes": 433190,
+      "sha256": "e7c93757aff9b8cf8fa985316519a7261119c859369293b6527352659fba3b87",
+      "git_blob_oid": "c1e14278b113d917339a65e17409d1ab5cd52c79",
+      "decoded_bytes": 9422346,
+      "decoded_sha256": "8e1313ca8df4a2a59573348f8d196c21896ae0c771a92e38a20f47169ca66156"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-007.json.gz",
+      "bytes": 332784,
+      "sha256": "91127fcc99d946c1fa2e2d22d43b1709d15ccdb467424748cbf43416f82675a0",
+      "git_blob_oid": "f65d39b2b0c4e3f34d56df7e923cda91da9cd6ab",
+      "decoded_bytes": 1656728,
+      "decoded_sha256": "e618801f3e6dc0e40b97f8fade2fb7a01591716627319d1659b83733d85398ad"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-007.json.gz",
+      "bytes": 23,
+      "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+      "git_blob_oid": "95890a0fc5a9cb9fb6bbd8f48425a8887b043a6e",
+      "decoded_bytes": 3,
+      "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-007.json.gz",
+      "bytes": 7485,
+      "sha256": "a6d35825ead01f82a83c570a58ada838214979f0c3fcafaf1ab1c2943a739341",
+      "git_blob_oid": "222412713f8cf86ac2bb67a327e28b2fc61fc820",
+      "decoded_bytes": 61247,
+      "decoded_sha256": "b906bc8b456dbd25e942804eacedd72be1aba4b576753c7d316641f409558d41"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-008.json.gz",
+      "bytes": 461722,
+      "sha256": "398dcc59dff228e66275b3d05125cad83bd6195a2b902c062793ee534dcdd4f3",
+      "git_blob_oid": "ff405618e0e17c8690690bc0bea418d9cf3d86e4",
+      "decoded_bytes": 11375804,
+      "decoded_sha256": "cd05668da16d9e6b9c8380d3942a7647f78e449e81d848634435b9686434ba5f"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-008.json.gz",
+      "bytes": 334786,
+      "sha256": "ed20e80bdbe2ad95d9e08cadbf0708319329f31d596e3d315653f42fd545a7a3",
+      "git_blob_oid": "d292ad56969b8ef96ac5957d4598cfa86fc7065f",
+      "decoded_bytes": 1631970,
+      "decoded_sha256": "16eeba121bbf53d9c4aee3e386ac4281609ac35e50368eff478be98ded53cd22"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-008.json.gz",
+      "bytes": 23,
+      "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+      "git_blob_oid": "95890a0fc5a9cb9fb6bbd8f48425a8887b043a6e",
+      "decoded_bytes": 3,
+      "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-008.json.gz",
+      "bytes": 1769,
+      "sha256": "30bf05ea2b46d90b65308f5c6fa6791d8c8cb35322423a6f0477a026ac3be2de",
+      "git_blob_oid": "f39fcf95e2bf72853730dc6eeb7b1cec0d585b96",
+      "decoded_bytes": 13592,
+      "decoded_sha256": "91adbb4affdbf3912921a76c95405eadad5945d6c5fa272b2ca8a3580d171f1e"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-009.json.gz",
+      "bytes": 509509,
+      "sha256": "53462348ea75b5ef0edc1190d13c85f87a6b628883e51150bc7a23677ebac18a",
+      "git_blob_oid": "56657960787527705d7de0a2da2f88bcaf782ec2",
+      "decoded_bytes": 10877262,
+      "decoded_sha256": "3741437bd46c8a916e8270b47ba695406144a4d4eac42b0d315c81220758aab0"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-009.json.gz",
+      "bytes": 328989,
+      "sha256": "e18e0f4b7d511c976455e6595d98af739986afeefc982f4ac7848da0d96d4eca",
+      "git_blob_oid": "b150a0ecd0a7a4930c038450a3ff6775f51dc60c",
+      "decoded_bytes": 1506372,
+      "decoded_sha256": "aa1c18811f20b09e3b0e15f71fba489edda7aac818b0b11c1344f2e0433550f8"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-009.json.gz",
+      "bytes": 23,
+      "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+      "git_blob_oid": "95890a0fc5a9cb9fb6bbd8f48425a8887b043a6e",
+      "decoded_bytes": 3,
+      "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-009.json.gz",
+      "bytes": 19920,
+      "sha256": "89595e1b02d1b5f4176ef5c154c95fa6f19c6bef8ee93b1bb4905c2616395071",
+      "git_blob_oid": "93d14eb6010764037e89520d0b099e1571750afa",
+      "decoded_bytes": 160427,
+      "decoded_sha256": "b63007d772527db4a9f69c17405cc9f0bfe6e7cf39334e729bd67e915437f510"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-010.json.gz",
+      "bytes": 920206,
+      "sha256": "07d0dc431d91353ffbb6a1badc994a8e3dffb7a7c31aaaff5f893f1fcc994a95",
+      "git_blob_oid": "ae640fd1542f83da1d59da912d261b2d53aba23d",
+      "decoded_bytes": 19372669,
+      "decoded_sha256": "8041ceaf7f60fafa40c45934fbd372718140b6d46f6d12c400c41608e6f6e0f0"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-010.json.gz",
+      "bytes": 593305,
+      "sha256": "b928969be2b4fdd874a0a54a06f295685728834f9c5fd704a1e9460e513a0a40",
+      "git_blob_oid": "8c3b00c75cd9b81767b7c8609852b74db3fa72f9",
+      "decoded_bytes": 2640672,
+      "decoded_sha256": "581839fb7ba22a2bc7dd8f882af2674ede9e4cd4c0ee3ff3df58a2501ec349a4"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-010.json.gz",
+      "bytes": 23,
+      "sha256": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+      "git_blob_oid": "95890a0fc5a9cb9fb6bbd8f48425a8887b043a6e",
+      "decoded_bytes": 3,
+      "decoded_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-010.json.gz",
+      "bytes": 18953,
+      "sha256": "ab4aebbddcf9dcc361c7005eaa81735462e7ec9088400fb72a1123b5bce53289",
+      "git_blob_oid": "daf30dbb5300fc40bc9c68122f875ff4d870f3f8",
+      "decoded_bytes": 154262,
+      "decoded_sha256": "5f04e6e47c2ee8b7840a8acb331edd883def1f00af042c4c9425fae9863a5d13"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-011.json.gz",
+      "bytes": 512411,
+      "sha256": "c694a3a9246dd0ffbcb9c3f433e7afec770a4c2f6898cb954e54dbb2372b1043",
+      "git_blob_oid": "81fe8b7091d7864cd116fe41f5578963085cdbcb",
+      "decoded_bytes": 9701557,
+      "decoded_sha256": "f638e17b9322f5e43785cf37b752ba807bde2b35ec62b8af1ffab56482e61619"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-011.json.gz",
+      "bytes": 358177,
+      "sha256": "940c6660d62057b2bfbc51d544be400131b063a1e50c21868b5cbdb50b381ecd",
+      "git_blob_oid": "94a1df4919c70ab90a812b16732a6983dbbf11fa",
+      "decoded_bytes": 1666220,
+      "decoded_sha256": "ba1fc63b21e29ca803d7e23c2dd29cd4945d5981df7da150f5b829c952713ebe"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-011.json.gz",
+      "bytes": 55,
+      "sha256": "62ebab313327bdeca23a92cb18a358ee6f39d44797f961bd0453054e07df5b7a",
+      "git_blob_oid": "ec7e37adcd8e83b23f12de1c3af6443b53009f85",
+      "decoded_bytes": 39,
+      "decoded_sha256": "46f252f8b5a039bb8840d04858278263998d0cfb35f94bc3cb6722d6a2dd7d39"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-011.json.gz",
+      "bytes": 16959,
+      "sha256": "4405773c150e71a6a9353aba3b99c347b6b151cb540e3f76cf38556dcb4c5910",
+      "git_blob_oid": "f70079699fce65042e26206084ec47619ffbd4c7",
+      "decoded_bytes": 139862,
+      "decoded_sha256": "eda567a4d747decfa3eef7938d79e9522c3a1a7619f914118e1e212a5f579ade"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-012.json.gz",
+      "bytes": 966066,
+      "sha256": "ec1f3336b619c73012a2241c60099ab164b91e38703fc4e3429a1dc8496ac279",
+      "git_blob_oid": "434b7844664374789f8e5f7a198d6e83e1e369d9",
+      "decoded_bytes": 16433461,
+      "decoded_sha256": "80de2a08c5f80865f973a30c983f55809e6b1e1a0503fd404a5762b810e062b7"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-012.json.gz",
+      "bytes": 670078,
+      "sha256": "db2c7d209d2102f567911e10e0351e31456d4a0945c0f77bd18c2d3cc6903ad4",
+      "git_blob_oid": "8e2074a9351c8ccdea6670ab10400551ba784886",
+      "decoded_bytes": 3015356,
+      "decoded_sha256": "22ae0a63685e671812f82dd2138d547b17c966e6631c4142bf791d7d961072e4"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-012.json.gz",
+      "bytes": 5766,
+      "sha256": "9100b9290632bdec0c06d648c51f3808012ab8922ec89cadc15ebab3ef25b7b3",
+      "git_blob_oid": "f109a50eabe5c013b859b7b0515824235b06c578",
+      "decoded_bytes": 32211,
+      "decoded_sha256": "b10deeafe322c219a9e0e0d19ce7df5c9dc56bb18784f64e2f298c5e847656c7"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-012.json.gz",
+      "bytes": 22242,
+      "sha256": "bea233d825abc91a5ae59d1f3c4b62ed4f21fa785b938bebf3b2c4e61c637f72",
+      "git_blob_oid": "cefe5185c184b33a328741138a046cd378286aa8",
+      "decoded_bytes": 165815,
+      "decoded_sha256": "f98a7db1eb82d45f4d9adab5392f861ddcddfb62bcf64df7036d0a6da2d497e4"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-013.json.gz",
+      "bytes": 976499,
+      "sha256": "563096d699aa69e3bfeaac0ca35dcd0da25ada54676b93e30bb16314e26bae42",
+      "git_blob_oid": "154ef80ca81fef1b864d74db6dbb46dafc47fa95",
+      "decoded_bytes": 16735938,
+      "decoded_sha256": "5e01b030d234ce6b2c49a0894256226298aae12b7715310d4517bcd91117499c"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-013.json.gz",
+      "bytes": 721135,
+      "sha256": "e6356be77efc3ddaf0a41ccfb27944182469926e3e33085218650a0cb22aa11f",
+      "git_blob_oid": "8908762734187bf66a1096ee661ecfa834b8a247",
+      "decoded_bytes": 3326588,
+      "decoded_sha256": "6212359a4790dec28a840b07a9b37f03c70fab13535d8cb2212af424a5e6831d"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-013.json.gz",
+      "bytes": 6142,
+      "sha256": "02ed357cfc1ea2d8e7bb897f117f0702c337f6153a3235619396855c8a95aff8",
+      "git_blob_oid": "77547c2c8a84b1e268e9ebc61d51039cef6e719f",
+      "decoded_bytes": 42428,
+      "decoded_sha256": "6f6608b77a2c2200ad8b7a74e35e43383b036b073d90470b819f2b8d31fa3768"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-013.json.gz",
+      "bytes": 10306,
+      "sha256": "e1b49f7b59e61e2954de658db62eed8f189f699d9df219b0492f1e089abf03a8",
+      "git_blob_oid": "4d5c2a9a8e5f20f129bbb3b0650102b5e4c85935",
+      "decoded_bytes": 83407,
+      "decoded_sha256": "79f008c04dda86575cd7bf2cd6e059ecbf374f655d39ae59803cb7d2e0ee60df"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-014-part-000.json.gz",
+      "bytes": 790122,
+      "sha256": "53ec68f5afb022f56e81dfaf0b0a17f7064c0d7a4b46ba7e508d5026d12d6c38",
+      "git_blob_oid": "86ef6f100b631598e93f640a89dbe8d437c7d4cc",
+      "decoded_bytes": 15758694,
+      "decoded_sha256": "b0624ed2da744dc6c82983915624c822975ccd2c8251bdf1bdb7cb14373e1d02"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-014-part-001.json.gz",
+      "bytes": 1014913,
+      "sha256": "b2cbc1f3c10186931a7d59b4e919b9ea71fa466e2f724561fcbd5d95e47ea565",
+      "git_blob_oid": "7a78a0ddb53722ecf7360b32b1debe4b81b1507b",
+      "decoded_bytes": 19760700,
+      "decoded_sha256": "96032c207f98aad433735c2062cc8d1a87e444c97eb9b6b57e430df557bd0afd"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-014.json.gz",
+      "bytes": 1105893,
+      "sha256": "18385a3524f358141f4f7e9d4fd727ed17a50344296d257ff716db02bbf9cc05",
+      "git_blob_oid": "1c37c974de7a5e8aac7fceef61388d7c56742545",
+      "decoded_bytes": 4874565,
+      "decoded_sha256": "568c706ccc250da545440a81dfbb0778dad30153668c81c13180a837e8393b79"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-014.json.gz",
+      "bytes": 23717,
+      "sha256": "9b0ab91b715b1d63fbe3fd94a326c44c5111149bd503e546b3286b5e196e4552",
+      "git_blob_oid": "f37e132ce3c4a9b3eb0b2dcb3dbdada4be7450eb",
+      "decoded_bytes": 145647,
+      "decoded_sha256": "69dee27d303cb53cb5424cabf3bff301bf8eeee12e3b0a2ac986b937c3dfe79b"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-014.json.gz",
+      "bytes": 2643,
+      "sha256": "d64089cf4c55508cd4098550c80fca51a66f11eaaf1a55857d48de4ed4f068b4",
+      "git_blob_oid": "1399fb562370a3e7676a39ae024b8b4ee927027a",
+      "decoded_bytes": 20126,
+      "decoded_sha256": "3f64b078f75818f4c268626a01df7a376b18e5df34a5f7be47a5d60327f4082d"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-015.json.gz",
+      "bytes": 1545558,
+      "sha256": "2c7dc6f0b30c1c00159abc4a77cb0c2c1a6e5927579c6f0dd8da8c1ce3c11597",
+      "git_blob_oid": "21f986568e266aec95e5b307e49c302812706d9a",
+      "decoded_bytes": 27037650,
+      "decoded_sha256": "de64905278f667c818e3c6bebf61b471a169510c477ee015bdefdbf050eca7e9"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-015.json.gz",
+      "bytes": 902770,
+      "sha256": "aa4fa6664bb7a0647a03a65430d732d1d7b5ff01e6041912d0cd52fe010f0e45",
+      "git_blob_oid": "02b0d3fcaf10cc4f77935988653319c8f854b7dc",
+      "decoded_bytes": 4050072,
+      "decoded_sha256": "81382e2b7141aff98895e15b32147ada26b0e1bb70f42f92508f60640b93a1bb"
+    },
+    {
+      "commit": "defe4dea8d79963350f34bd09fe80d1825049ed5",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-015.json.gz",
+      "bytes": 4649,
+      "sha256": "5d82e9da3bc4c1989dccd12e13d1d93d1e717389dd194aca7dbdeb620f33ce17",
+      "git_blob_oid": "ac9e3d02c445e0bfd4a7a6c40b6d19f13f7bf26e",
+      "decoded_bytes": 27675,
+      "decoded_sha256": "27a3fbb8260a76324cedcb9881441341bfcdd2efc92f64017abe60ea57694721"
+    },
+    {
+      "commit": "19858cf7aa887efad5d0c6ba0736d5672bf0aef5",
+      "path": "coordination/engineering/greenland-repair-delivery-20261017/source-stage/frozen-block-015.json.gz",
+      "bytes": 28975,
+      "sha256": "290ce19501c3115f64fdd2203d2b4467e263c537c00c595154f67acd92f02c8a",
+      "git_blob_oid": "c0a04493e9e7b1aaf441640e2e1f949169e3d548",
+      "decoded_bytes": 213325,
+      "decoded_sha256": "20d588f745aba37851475e442ad3b4f6f3d15601192080b719e016a56646f6b3"
+    }
+  ],
+  "unique_raw_plus_decoded_input_bytes": 246102327
+}
