@@ -41,7 +41,7 @@ held=keys(read(P+'/qualified-native-inputs-002/held-original.json')['rows'],True
 assert len(diagnostic_support)==diag['supported_cells'] and len(dh)==diag['held_cells'] and len(patch)==partition['supported_cells'] and len(held)==partition['held_cells']
 support={k:v for k,v in support.items() if k not in review_keys}
 decisions=keys(diag['decision_rows'],True);assert set(decisions)==set(requested) and {k for k,r in decisions.items() if r=='assigned_cells'}==diagnostic_support and all(held[k]==decisions[k] for k in dh)
-source=read(P+'/qualified-compaction-001/source-evidence.json');fullsource=read(P+'/compaction-001/source-evidence.json');assert {k:v for k,v in source.items() if k!='targets'}=={k:v for k,v in fullsource.items() if k!='targets'}
+source=read(P+'/qualified-native-inputs-002/source-evidence.json');fullsource=read(P+'/compaction-001/source-evidence.json');assert {k:v for k,v in source.items() if k!='targets'}=={k:v for k,v in fullsource.items() if k!='targets'}
 fulltargets={t['id']:t for t in fullsource['targets']};targets={t['id']:t for t in source['targets']};assert len(targets)==len(source['targets']) and set(targets)=={t['id'] for t in fullsource['targets'] if t['pixelIndex'] in {k[2] for k in support}}
 classes={'land':'mapped_land_support','inland-water':'mapped_inland_water_support'};owner_targets=collections.defaultdict(list);owner_coverage={}
 for ident,t in targets.items():
@@ -54,7 +54,7 @@ con=read(P+'/native-authority-001/constructor-result.json');rows=con['ledger_row
 ak=keys([r for t in rows for r in t['native_rows']]);assert set(ak)==set(patch) and sum(t['native_cells'] for t in rows)==len(ak)
 for t in rows:
  own=keys(t['native_rows']);atoms=owner_targets[t['pixelIndex']];assert len(own)==t['native_cells'] and all(k[2]==t['pixelIndex'] for k in own) and all(t['target_id']==a.get('target_id',a['id']) and t['base_geometry']==a['base_geometry'] for a in atoms)
-for role,path in [('source_evidence',P+'/qualified-compaction-001/source-evidence.json'),('native_patch',P+'/qualified-native-inputs-002/native-patch.json')]:
+for role,path in [('source_evidence',P+'/qualified-native-inputs-002/source-evidence.json'),('native_patch',P+'/qualified-native-inputs-002/native-patch.json')]:
  locator=con['inputs'][role];assert locator['path']==path.replace('qualified-native-inputs-002','qualified-native-inputs-001');actual=read(locator['path'],locator['commit']);present=source if role=='source_evidence' else read(path);assert actual==present
 by={r['pixelIndex']:r for r in scope['target_checks']};counts=collections.Counter(k[2] for k in original);sc=collections.Counter(k[2] for k in support);hc=collections.Counter(k[2] for k in held);assert len(by)==130 and set(by)==set(counts) and all(counts[o]==r['candidate_cells'] for o,r in by.items())
 foreign={tuple(k) for f in context['foreign_natural_earth_hits'] for k in f['native_cells']}|{tuple(k) for k in scope['foreign_country_native_cells']}|{tuple(k) for k in scope['foreign_original_source_native_cells']};assert foreign==set(dh) and foreign<=set(held) and not foreign&set(support)

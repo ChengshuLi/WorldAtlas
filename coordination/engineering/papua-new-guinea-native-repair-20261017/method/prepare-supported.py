@@ -35,7 +35,8 @@ for name in ['source-evidence.json','whole-negative-equivalence.json']:
  assert {k:actual[k] for k in ['bytes','sha256']}==prep['outputs'][name]
 fullsource=read(source_pin['path'],source_pin['commit']);assert pins[-1]==source_pin
 assert {k:v for k,v in source.items() if k!='targets'}=={k:v for k,v in fullsource.items() if k!='targets'}
-assert len(source['targets'])==len(fullsource['targets'])==equivalence['targets_count']
+assert len(source['targets'])==len(fullsource['targets'])==len(equivalence['targets'])==equivalence['targets_count']
+assert equivalence['original_operands']==sum(len(t['territorial_exclusions']) for t in fullsource['targets'])
 physical_pin=fullsource['physical_input'];stages=read(physical_pin['path'],physical_pin['commit']);assert pins[-1]==physical_pin;stageby={s['target']:s for s in stages};assert len(stageby)==len(stages)
 lat_pin=fullsource['native_latitudes'];lat=read(lat_pin['path'],lat_pin['commit'],False);assert pins[-1]==lat_pin;size=fullsource['native_contract']['size'];assert len(lat)==8*size
 negative_geometries=[]
