@@ -159,9 +159,9 @@ export function coordinateBounds(g){
  demand(g&&['Polygon','MultiPolygon'].includes(g.type)&&same(Object.keys(g).sort(),['coordinates','type']),'Unsupported whole primitive');
  const polys=g.type==='Polygon'?[g.coordinates]:g.coordinates;demand(isNativeSequence(polys)&&polys.length>0,'Missing polygons');const boxes=[];
  for(const poly of polys){demand(isNativeSequence(poly)&&poly.length>0,'Missing rings');let lo=Infinity,hi=-Infinity,south=Infinity,north=-Infinity,seam=false;
-  for(const ring of poly){demand(isNativeSequence(ring)&&ring.length>=4,'Incomplete ring');let prior;
-   for(const p of ring){demand(Array.isArray(p)&&p.length===2&&p.every(Number.isFinite)&&Math.abs(p[0])<=180&&Math.abs(p[1])<=90,'Invalid/nonfinite coordinate');lo=Math.min(lo,p[0]);hi=Math.max(hi,p[0]);south=Math.min(south,p[1]);north=Math.max(north,p[1]);if(prior&&Math.abs(prior[0]-p[0])>180)seam=true;prior=p;}
-   demand(same(ring.at(0),ring.at(-1)),'Unclosed original ring');
+  for(const ring of poly){demand(isNativeSequence(ring)&&ring.length>=4,'Incomplete ring');let prior,first;
+   for(const p of ring){first??=p;demand(Array.isArray(p)&&p.length===2&&p.every(Number.isFinite)&&Math.abs(p[0])<=180&&Math.abs(p[1])<=90,'Invalid/nonfinite coordinate');lo=Math.min(lo,p[0]);hi=Math.max(hi,p[0]);south=Math.min(south,p[1]);north=Math.max(north,p[1]);if(prior&&Math.abs(prior[0]-p[0])>180)seam=true;prior=p;}
+   demand(same(first,prior),'Unclosed original ring');
   }
   if(seam||hi-lo>180){lo=-180;hi=180;}boxes.push([lo,south,hi,north]);
  }

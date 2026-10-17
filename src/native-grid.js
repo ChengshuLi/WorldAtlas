@@ -288,9 +288,9 @@ export function polygonParts(geometry) {
     require(isNativeSequence(polygon) && polygon.length > 0, 'Missing footprint rings');
     for (const ring of polygon) {
       require(isNativeSequence(ring) && ring.length >= 4, 'Incomplete footprint ring');
-      for (const point of ring) require(Array.isArray(point) && point.length === 2 && point.every(Number.isFinite)
-        && Math.abs(point[0]) <= 180 && Math.abs(point[1]) <= 90, 'Invalid native footprint coordinate');
-      require(ring.at(0)[0] === ring.at(-1)[0] && ring.at(0)[1] === ring.at(-1)[1], 'Unclosed footprint ring');
+      let first,last;for (const point of ring) {first??=point;last=point;require(Array.isArray(point) && point.length === 2 && point.every(Number.isFinite)
+        && Math.abs(point[0]) <= 180 && Math.abs(point[1]) <= 90, 'Invalid native footprint coordinate');}
+      require(first[0] === last[0] && first[1] === last[1], 'Unclosed footprint ring');
     }
   }
   return polygons;

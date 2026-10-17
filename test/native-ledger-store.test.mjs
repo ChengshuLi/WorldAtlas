@@ -150,7 +150,7 @@ test('nested coordinate cursor indices preserve multiple rings, polygons and las
  assert.deepEqual(fs.readdirSync(directory),[]);
 });
 
-import {nativeRuntimeIndex,polygonParts} from '../src/native-grid.js';
+import {nativeRuntimeIndex,polygonParts,nativeSequence} from '../src/native-grid.js';
 import {coordinateBounds,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 test('stored geometry shares exact bounds, runtime polygons and malformed-coordinate refusals with literals',async t=>{
  const directory=temporary(t),ring=Array.from({length:40},(_,i)=>[i/100,i/100]);ring.push(ring[0]);
@@ -233,4 +233,14 @@ test('coordinate cursor adaptation preserves existing literal runtime array beha
  assert.deepEqual(index[0].polygons[0][0],new Float64Array([0,0,0,0,1,1,0,0]));
  const polygons=new Array(1),multi=nativeRuntimeIndex([{id:'A',pixelIndex:1,geometry:{type:'MultiPolygon',coordinates:polygons}}]);
  assert.equal(multi[0].polygons.length,1);assert.equal(Object.hasOwn(multi[0].polygons,0),false);
+});
+
+
+test('geometry closure is checked against consumed coordinates rather than an inconsistent fast lookup',()=>{
+ const points=Array.from({length:40},(_,i)=>[i/100,i/100]);
+ const ring=nativeSequence(points.length,()=>points.values(),{entryAt:()=>points[0]});
+ const geometry={type:'Polygon',coordinates:[ring]};
+ assert.throws(()=>coordinateBounds(geometry),/Unclosed original ring/);
+ assert.throws(()=>polygonParts(geometry),/Unclosed footprint ring/);
+ assert.throws(()=>nativeRuntimeIndex([{id:'A',pixelIndex:1,geometry}]),/Original native closed ring required/);
 });
