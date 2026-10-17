@@ -552,6 +552,25 @@ conservatively. Existing exclusions and their ordinals, positive families,
 coverage rows and requested native denominators remain unchanged. Malformed
 originals fail even if their bounds would otherwise be disjoint.
 
+To avoid repeating large whole polygons, also set the top-level
+`compact_territorial_exclusions: true`. Each uniquely matching original operand
+becomes `{source_id, feature_ordinal, negative_ordinal, geometry_sha256}` at the
+same target position. The output's `territorial_exclusion_sources` contains each
+complete negative family as `{source_id, parts}` using the existing immutable
+encoded/decoded source pins. All original features remain authenticated, including
+unused/disjoint features. Unmatched or ambiguous manual geometries stay inline.
+Intentional repeated geometries retain distinct positions; copied or moved
+reference records fail their exact ordinal binding. Incomplete families, unknown
+source IDs, malformed references and ordinal/hash mismatches fail closed.
+
+The native reader expands these references to their unchanged complete original
+geometries before the existing applicability and veto checks. It does not derive
+positive ownership or a contextual exception. Legacy inline inputs remain valid;
+omitting the flag or setting it to `false` preserves literal inline output. New
+custody hashes and evidence-derived component IDs necessarily change with the
+encoding, while native requests, decisions, whole operands and source receipts do
+not. This option requires the explicit reviewed negative family list.
+
 The additional `territorial-exclusion-provenance.json` records the explicit scope,
 complete family pins, original feature ordinals/hashes, target exclusion ordinals
 and omitted disjoint source IDs. Retain it with the generated evidence. This is a
