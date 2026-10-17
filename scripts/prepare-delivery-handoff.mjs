@@ -1573,6 +1573,151 @@ export async function sourceEvidence(config, reader) {
     'territorial-exclusion-provenance.json': jsonBytes(handoff.provenance)};
 }
 
+// Narrow only a retained diagnostic's positive request. Whole source operands
+// remain in its original pin; surviving target records change only coverage rows.
+// This preparation never substitutes for the subsequent native constructor.
+export function supportedInputs(config, reader) {
+  need(config?.version === 1 && Object.keys(config).every(key =>
+    ['version', 'diagnostic', 'original_patch', 'prior_holds'].includes(key)), 'Explicit supported-input locators required');
+  const diagnosticPin = locate(reader, config.diagnostic), diagnostic = reader.json(diagnosticPin);
+  need(diagnostic?.version === 1 && diagnostic.kind === 'source-target-native-diagnostic-v1'
+    && same(Object.keys(diagnostic.original_pins ?? {}).sort(), ['native_patch', 'source_evidence']),
+  'Retained native diagnostic required');
+  const pins = diagnostic.original_pins, source = reader.json(pins.source_evidence), patch = reader.json(pins.native_patch);
+  need([1, 2, 3].includes(source.version) && source.kind === `source-target-native-evidence-v${source.version}`
+    && same(source.native_contract, diagnostic.native_contract)
+    && diagnostic.rule_sha256 === digest(jsonBytes({version: 1, kind: 'source-target-native-rule-v1', ...pins})),
+  'Diagnostic source/patch binding differs');
+  const size = source.native_contract?.size;
+  need(size === 262166, 'Normative native grid extent required');
+  const append = (runs, run) => {
+    const previous = runs.at(-1);
+    if (previous?.[1] === run[0] && same(previous.slice(2), run.slice(2))) previous[1] = run[1];
+    else runs.push([...run]);
+  };
+  const rows = (value, reasons = false) => {
+    need(Array.isArray(value), 'Complete native rows required');
+    let previousY = -1;
+    return value.map(row => {
+      need(row && same(Object.keys(row).sort(), ['runs', 'y']) && Number.isSafeInteger(row.y)
+        && row.y > previousY && row.y < size && Array.isArray(row.runs) && row.runs.length,
+      'Invalid or duplicate native row');
+      previousY = row.y; let end = 0; const runs = [];
+      for (const run of row.runs) {
+        need(Array.isArray(run) && run.length === (reasons ? 4 : 3)
+          && run.slice(0, 3).every(Number.isSafeInteger) && run[0] >= end && run[1] > run[0]
+          && run[1] <= size && run[2] > 0 && (!reasons || typeof run[3] === 'string' && run[3].length),
+        'Invalid, overlapping or foreign native interval');
+        end = run[1]; append(runs, run);
+      }
+      return {y: row.y, runs};
+    });
+  };
+  const partition = (decisions, accepted) => decisions.map(({y, runs}) => {
+    const selected = [];
+    for (const run of runs) if ((run[3] === 'assigned_cells') === accepted) append(selected, run.slice(0, 3));
+    return {y, runs: selected};
+  }).filter(row => row.runs.length);
+  const count = value => value.reduce((sum, row) => sum + row.runs.reduce((n, run) => n + run[1] - run[0], 0), 0);
+  const requested = rows(diagnostic.requested_rows), decisions = rows(diagnostic.decision_rows, true);
+  const supported = rows(diagnostic.supported_rows), held = rows(diagnostic.held_rows);
+  need(same(requested, rows(patch.rows)) && same(supported, partition(decisions, true))
+    && same(held, partition(decisions, false)) && same(requested, rows(decisions.map(({y, runs}) =>
+      ({y, runs: runs.map(run => run.slice(0, 3))})))), 'Diagnostic requested/supported/held partition differs');
+  need(requested.length && count(requested) === diagnostic.requested_cells && count(supported) === diagnostic.supported_cells
+    && count(held) === diagnostic.held_cells, 'Diagnostic counts differ from its complete rows');
+  const originalPin = config.original_patch ? locate(reader, config.original_patch) : pins.native_patch;
+  const original = config.original_patch ? rows(reader.json(originalPin).rows) : requested;
+  const priorPin = config.prior_holds ? locate(reader, config.prior_holds) : null;
+  const prior = priorPin ? rows(reader.json(priorPin).rows, true) : [];
+  need(prior.every(row => row.runs.every(run => run[3] !== 'assigned_cells')), 'Prior hold cannot claim assignment');
+  const maps = [original, decisions, prior].map(value => new Map(value.map(row => [row.y, row.runs])));
+  const ys = [...new Set(maps.flatMap(map => [...map.keys()]))].sort((a, b) => a - b);
+  const narrowed = [], withheld = [], owners = new Map(); let priorNativeHeld = 0;
+  for (const y of ys) {
+    const lists = maps.map(map => map.get(y) ?? []), offsets = [0, 0, 0];
+    const cuts = [...new Set(lists.flatMap(runs => runs.flatMap(run => run.slice(0, 2))))].sort((a, b) => a - b);
+    const keep = [], holds = [];
+    for (let i = 0; i + 1 < cuts.length; i++) {
+      const start = cuts[i], end = cuts[i + 1];
+      const spans = lists.map((runs, j) => {
+        while (offsets[j] < runs.length && runs[offsets[j]][1] <= start) offsets[j]++;
+        const run = runs[offsets[j]]; return run?.[0] <= start ? run : null;
+      });
+      const [full, native, previous] = spans;
+      if (!spans.some(Boolean)) continue;
+      need(full && (native || previous) && spans.every(run => !run || run[2] === full[2]),
+        'Original scope is not exactly diagnostic plus prior holds');
+      const owner = full[2], cells = end - start;
+      const record = owners.get(owner) ?? {owner, original_cells: 0, supported_cells: 0, held_cells: 0};
+      record.original_cells += cells;
+      if (native?.[3] === 'assigned_cells' && !previous) {
+        append(keep, [start, end, owner]); record.supported_cells += cells;
+      } else {
+        const nativeHeld = native && native[3] !== 'assigned_cells';
+        append(holds, [start, end, owner, nativeHeld ? native[3] : previous[3]]); record.held_cells += cells;
+        if (nativeHeld && previous) priorNativeHeld += cells;
+      }
+      owners.set(owner, record);
+    }
+    if (keep.length) narrowed.push({y, runs: keep});
+    if (holds.length) withheld.push({y, runs: holds});
+  }
+  const byOwner = value => {
+    const result = new Map();
+    for (const {y, runs} of value) for (const run of runs) {
+      const ownerRows = result.get(run[2]) ?? []; result.set(run[2], ownerRows);
+      if (ownerRows.at(-1)?.y !== y) ownerRows.push({y, runs: []});
+      append(ownerRows.at(-1).runs, run);
+    }
+    return result;
+  };
+  const requestedOwners = byOwner(requested), supportedOwners = byOwner(narrowed), seen = new Set(), classes = new Map();
+  need(Array.isArray(source.targets) && source.targets.length, 'Complete original source targets required');
+  const targets = [];
+  for (const target of source.targets) {
+    need(typeof target.id === 'string' && target.id && !seen.has(target.id)
+      && Number.isSafeInteger(target.pixelIndex) && target.pixelIndex > 0,
+      'Duplicate or foreign source target'); seen.add(target.id);
+    let coverage;
+    if (target.coverage_rows !== undefined) {
+      const ownerRows = rows(target.coverage_rows.map(({y, runs}) => ({y, runs: runs.map(run => {
+        need(Array.isArray(run) && run.length === 3
+          && ['mapped_land_support', 'mapped_inland_water_support'].includes(run[2]), 'Invalid original coverage class');
+        return [run[0], run[1], target.pixelIndex, run[2]];
+      })})), true);
+      need(same(rows(ownerRows.map(({y, runs}) => ({y, runs: runs.map(run => run.slice(0, 3))}))), requestedOwners.get(target.pixelIndex))
+        && (!classes.has(target.pixelIndex) || same(classes.get(target.pixelIndex), ownerRows)),
+      'Original coverage rows differ from complete requested owner');
+      classes.set(target.pixelIndex, ownerRows);
+      const classRows = new Map(ownerRows.map(row => [row.y, row.runs]));
+      coverage = (supportedOwners.get(target.pixelIndex) ?? []).map(({y, runs}) => {
+        const result = [], originalClasses = classRows.get(y); let offset = 0;
+        for (const [start, end] of runs) {
+          while (originalClasses[offset][1] <= start) offset++;
+          for (let j = offset; j < originalClasses.length && originalClasses[j][0] < end; j++) {
+            const [a, b, , kind] = originalClasses[j]; append(result, [Math.max(a, start), Math.min(b, end), kind]);
+          }
+        }
+        return {y, runs: result};
+      });
+    }
+    if (supportedOwners.has(target.pixelIndex)) targets.push(coverage ? {...target, coverage_rows: coverage} : target);
+  }
+  need([...requestedOwners.keys()].every(owner => source.targets.some(target => target.pixelIndex === owner)),
+    'Missing requested source owner');
+  const accounting = {version: 1, diagnostic: diagnosticPin, original_patch: originalPin,
+    ...(priorPin ? {prior_holds: priorPin} : {}), original_inputs: pins,
+    original_cells: count(original), supported_cells: count(narrowed), held_cells: count(withheld),
+    native_requested_cells: diagnostic.requested_cells, native_supported_cells: diagnostic.supported_cells,
+    native_held_cells: diagnostic.held_cells, prior_held_cells: count(prior), prior_already_native_held_cells: priorNativeHeld,
+    owners: [...owners.values()].sort((a, b) => a.owner - b.owner),
+    limits: ['Preparation only. Exact emitted source and patch still require genuine native authority.',
+      'Original source, physical and negative operands remain pinned; only positive coverage and wholly held owners are narrowed.']};
+  return {'source-evidence.json': jsonBytes({...source, targets}), 'native-patch.json': jsonBytes({rows: narrowed}),
+    'held-original.json': jsonBytes({rows: withheld}), 'original-scope-partition.json': jsonBytes(accounting)};
+}
+
 // Execute the existing modern constructor or its admitted read-only diagnostic,
 // rather than authoring a country wrapper. Only qualification emits authority.
 export async function nativeAuthority(config, reader, root, diagnostic = false) {
@@ -1632,8 +1777,8 @@ async function main(args) {
     console.log(JSON.stringify({...publishComplete(), acquisition: result, acquisition_ms: performance.now() - started}));
     return;
   }
-  need(['reference-metadata', 'source', 'physical', 'source-evidence', 'native-authority', 'native-diagnostic', 'requests', 'native-requests', 'retain', 'rebind-operating', 'rebind-certificate', 'compose', 'package', 'finalize', 'evidence'].includes(phase) && configFile && destination && flags.every(f => f === '--resume') && flags.length <= 1,
-    'Use prepare-delivery-handoff.mjs requests|native-requests|retain|rebind-operating|rebind-certificate|compose|package|finalize|evidence|source|physical|source-evidence|native-authority|native-diagnostic|reference-metadata CONFIG DESTINATION [--resume]');
+  need(['reference-metadata', 'source', 'physical', 'source-evidence', 'native-authority', 'native-diagnostic', 'supported-inputs', 'requests', 'native-requests', 'retain', 'rebind-operating', 'rebind-certificate', 'compose', 'package', 'finalize', 'evidence'].includes(phase) && configFile && destination && flags.every(f => f === '--resume') && flags.length <= 1,
+    'Use prepare-delivery-handoff.mjs requests|native-requests|retain|rebind-operating|rebind-certificate|compose|package|finalize|evidence|source|physical|source-evidence|native-authority|native-diagnostic|supported-inputs|reference-metadata CONFIG DESTINATION [--resume]');
   need(!process.execArgv.length && !process.env.NODE_OPTIONS?.trim() && !process.env.NODE_PATH?.trim(), 'Plain Node launch required');
   const root = fs.realpathSync(process.cwd()); admitDestination(root, destination, flags.includes('--resume'));
   const raw = ordinary(root, configFile), config = JSON.parse(raw), reader = pinReader(root);
@@ -1650,6 +1795,7 @@ async function main(args) {
   }
   if (['native-authority','native-diagnostic'].includes(phase)) { const result = await nativeAuthority(config, reader, root, phase === 'native-diagnostic'); outputs = result.products; observation = result.observation; }
   if (phase === 'reference-metadata') { const result = prepareReferenceMetadata(config, reader); outputs = result.products; binding.input_inventory = result.input_inventory; }
+  if (phase === 'supported-inputs') outputs = supportedInputs(config, reader);
   if (phase === 'source-evidence') outputs = await sourceEvidence(config, reader);
   if (phase === 'requests') outputs = prepareRequests(config, reader);
   if (phase === 'native-requests') outputs = nativeRequests(config, reader);

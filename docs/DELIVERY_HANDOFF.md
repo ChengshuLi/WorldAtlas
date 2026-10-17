@@ -626,6 +626,41 @@ bespoke producer or changing its predicates. It does not run source or physical
 producers. Exact `--resume` repeats screening and verifies unchanged product bytes
 through the existing safe publication path; timing observations can differ.
 
+### Reuse supported diagnostic inputs
+
+`node scripts/prepare-delivery-handoff.mjs supported-inputs CONFIG DESTINATION [--resume]`
+replaces a package-local post-diagnostic writer. Use version 1 and a `diagnostic`
+commit/path locator. The helper reads that retained result's exact original source
+and patch pins, checks its requested/supported/held decision partition, and emits
+`source-evidence.json`, `native-patch.json`, `held-original.json` and
+`original-scope-partition.json` through the existing exclusive publisher.
+
+When earlier source review held additional original cells, also supply
+`original_patch` and `prior_holds` commit/path locators. The original patch uses
+the existing `{rows: [{y, runs: [[start, end, owner]]}]}` representation. Prior
+holds use the existing held-output representation, with a fourth non-assignment
+reason on each run. Their complete retained assessment document stays pinned in
+the accounting; no copied proof boolean is accepted. Prior holds may overlap
+either native partition, but must belong to the original scope. All original
+cells must be accounted for by the diagnostic or prior holds. Native reasons
+remain on already-native-held cells; the prior pin preserves concurrent reasons.
+
+The original patch defaults to the diagnostic request. Only surviving targets'
+coverage rows are intersected with final supported keys, preserving each original
+land/water class. Every member atom of a surviving owner remains, together with
+all other target fields, whole source/physical descriptors and negative operands.
+Wholly held owners are removed only from the positive authority input; the pinned
+original source and complete per-owner accounting retain them. An all-held scope
+produces an empty positive request and complete held accounting, not authority.
+
+Commit these prepared products, then pass their exact locators to the distinct
+`native-authority` phase. Narrowing does not replay science, qualify cells,
+resolve prior holds or establish selected-output acceptance. Any separate whole-
+negative compaction needs its own applicable equivalence work; this command
+does not accept a replacement source operand. Frozen historical adapters and
+results remain reproducible; future authors should use this stock phase instead
+of copying readers, per-file caps, per-cell sets and output writers.
+
 ### Subsequent batch preparation
 
 For an unchanged accepted command, change the scientific input pins/configuration,
