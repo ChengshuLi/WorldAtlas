@@ -28,7 +28,7 @@ async function savePatch(f){
 // Bounded current-product model: three immutable owners and one additive run.
 // Receipts/source pins below deliberately have no files. Ordinary packaging
 // consumes the accepted whole projection, without reopening source authority.
-async function fixture(t,{metadata=false}={}){
+async function fixture(t,{metadata=false,ledgerBytes}={}){
  const root=await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(),'atlas-current-additive-')));
  t.after(()=>fs.rm(root,{recursive:true,force:true}));
  await write(root,'.github/package-inputs.json',{version:1,inputs:['.github/package-inputs.json','data/ownership-selection.json','inputs/'],optional_inputs:[],verification_paths:[],generated_outputs:[]});
@@ -47,7 +47,8 @@ async function fixture(t,{metadata=false}={}){
  const projection={version:1,kind:'native-reference-metadata-projection-v1',native_selection:structuredClone(selection),native_reference:native,reference:current,original_owner_roster_sha256:rosterPin.sha256,hierarchy:{before:acceptedPin('qualified/original-hierarchy.json',native.hierarchy_sha256),after:acceptedPin('qualified/current-hierarchy.json',current.hierarchy_sha256)},receipts:[acceptedPin('qualified/reference-receipt.json','4'.repeat(64))],source_updates:[{logical_path:'data/geography/original.json',before:acceptedPin('qualified/original-source.json','5'.repeat(64)),after:acceptedPin('qualified/current-source.json','6'.repeat(64))}],location_changes:[{location_id:'A',before_properties:structuredClone(before),after_properties:after}],group_changes:[],provinces:['P','Q']};
  const addition=rectangle(1,0,2,1),rule='d'.repeat(64);
  const ledger={version:1,kind:'native-additive-repair-ledger-v1',rule_sha256:rule,base_reference:current,parent_inventory:{components:1,report_sha256:'e'.repeat(64),roster_sha256:'f'.repeat(64)},scope_ids:['gap-1'],assigned_cells:2,rows:[{component_id:'gap-1',disposition:'assigned',target_id:'A',pixelIndex:1,base_geometry:features[0].geometry,base_geometry_sha256:footprintValueSha256(features[0].geometry),geometry:addition,geometry_sha256:footprintValueSha256(addition),source_receipt_sha256:'a'.repeat(64),native_cells:2}]};
- const ledgerPin=await write(root,'inputs/ledger.json',ledger);
+ const ledgerBody=Buffer.from(JSON.stringify(ledger));
+ const ledgerPin=await write(root,'inputs/ledger.json',ledgerBytes===undefined?ledgerBody:Buffer.concat([ledgerBody,Buffer.alloc(ledgerBytes-ledgerBody.length,0x20)]));
  const envelope={version:1,kind:'retained-native-base-plus-delta-v1',base_reference:current,effective_reference:{...current,id:'geography:effective'},base_manifest:logical('base-native-manifest.json',manifestPin),ledger:logical('ledger.json',ledgerPin),owner_roster:{...logical('owners.json.gz',rosterPin),encoding:'gzip',decoded_bytes:rosterRaw.length,decoded_sha256:sha(rosterRaw)}};
  envelope.effective_reference.footprints_sha256=additiveReleaseFootprintDigest(current,bindAdditiveLedgerFeatures(features,ledger,envelope,current));
  const patch={version:1,kind:'unassigned-native-cells-v1',base_reference:current,effective_reference:envelope.effective_reference,ledger_sha256:ledgerPin.sha256,rule_sha256:rule,rows:[{y:3,runs:[[3,5,1]]}]};
@@ -157,4 +158,22 @@ test('both projection and additive output use the same all-assets ordinary desti
 test('the selection itself must remain an ordinary file',async t=>{
  const f=await fixture(t),name=path.join(f.root,'data/ownership-selection.json');await fs.rename(name,name+'.retained');await fs.symlink(name+'.retained',name);
  await assert.rejects(prepareCurrentSelectedAdditive(f),/Current selection must be ordinary/);
+});
+
+// This exact byte boundary is the complete ledger rejected in hosted #2325.
+// Whitespace padding changes transport bytes, not the fixture's native scope.
+test('current packaging accepts the 34920857-byte ledger with exact whole custody',async t=>{
+ const f=await fixture(t,{ledgerBytes:34920857}),result=await prepareCurrentSelectedAdditive(f);
+ const ledger=result.input_inventory.find(row=>row.path===f.sidecar.logical_asset_map.ledger.path);
+ assert.equal(ledger.bytes,34920857);assert.equal(ledger.whole_body_consumed,true);
+ assert.equal(ledger.sha256,f.envelope.ledger.sha256);
+ assert.equal(result.additiveRelease.ledger.bytes,34920857);
+ await result.publish(path.join(f.root,'published'));
+ assert.equal((await fs.stat(path.join(f.root,'published',result.additiveRelease.ledger.path))).size,34920857);
+ const original=await fs.readFile(path.join(f.root,ledger.path));
+ await fs.writeFile(path.join(f.root,ledger.path),original.subarray(0,-1));
+ await assert.rejects(prepareCurrentSelectedAdditive(f),/whole length/);
+ await fs.writeFile(path.join(f.root,ledger.path),original);
+ original[original.length-1]=0x09;await fs.writeFile(path.join(f.root,ledger.path),original);
+ await assert.rejects(prepareCurrentSelectedAdditive(f),/whole checksum/);
 });

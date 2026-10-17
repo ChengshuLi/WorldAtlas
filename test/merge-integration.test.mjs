@@ -2,7 +2,7 @@ import {execFileSync, spawnSync} from 'node:child_process';
 import {candidateGeographyCode} from '../scripts/integration-profile.mjs';
 import {gitBlobTransport} from '../scripts/git-blob-transport.mjs';
 import {memoizeImmutableGitBlobs} from '../scripts/immutable-git-blobs.mjs';
-import {fullCheckoutPatterns,focusedCheckoutPatterns,loadPackageInputs} from '../scripts/package-inputs.mjs';
+import {fullCheckoutPatterns,focusedCheckoutPatterns,loadPackageInputs,packagePathRequired} from '../scripts/package-inputs.mjs';
 import {sha256, subjectsHash} from '../scripts/evidence-quality.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -384,8 +384,8 @@ test('immutable reader and checkpoint routing retains the complete actual consum
   }
 });
 
-test('ordinary focused tests compose across additions and renames while unknown runtime stays full', () => {
-  const files=integrationTestFiles('evidence',0).map(filename=>({filename,status:'modified'}));
+test('ordinary focused tests and checkpoint fixture compose while unknown runtime stays full', () => {
+  const files=[...integrationTestFiles('evidence',0),'test/fixtures/selected-checkpoint.mjs'].map(filename=>({filename,status:'modified'}));
   const tree=new Map(files.map(file=>[file.filename,{type:'blob',mode:'100644',sha:'1'.repeat(40)}]));
   assert.equal(integrationProfile('engineering/tests',files,{},tree),'evidence');
   for(const file of files) {
@@ -420,6 +420,37 @@ test('ordinary focused tests compose across additions and renames while unknown 
     assert.equal(integrationProfile('engineering/tests',[{filename,status:'modified'}],{},ordinary),'full');
   }
   assert.equal(integrationProfile('engineering/tests',[],{},tree),'full');
+});
+
+test('the exact checkpoint fixture retains every actual importer on the existing focused route', () => {
+  const fixture='test/fixtures/selected-checkpoint.mjs';
+  const consumers=fs.readdirSync('test',{recursive:true}).filter(name=>name.endsWith('.mjs')).filter(name=>
+    [...fs.readFileSync(path.join('test',name),'utf8').matchAll(/(?:from\s*|import\s*(?:\(\s*)?)['"]([^'"]+)['"]/g)]
+      .some(([,specifier])=>specifier.startsWith('.')&&path.posix.normalize(path.posix.join('test',path.posix.dirname(name),specifier))===fixture)
+  ).map(name=>'test/'+name).sort();
+  assert(consumers.length>0,'Fixture importer scan must be nonempty');
+  assert(consumers.includes('test/selected-checkpoint.test.mjs'),'Scan must find the known direct checkpoint importer');
+  const focused=integrationTestFiles('evidence',0),full=[0,1,2].flatMap(shard=>integrationTestFiles('full',shard));
+  for(const consumer of [...consumers,'test/selected-joint-entry.test.mjs']) {
+    assert(focused.includes(consumer),consumer);
+    assert.equal(full.filter(name=>name===consumer).length,1);
+  }
+  assert(!focused.includes(fixture),'Fixture is imported by tests, never a standalone test');
+  const definition=loadPackageInputs();
+  assert(focusedCheckoutPatterns(definition).includes('test'),'Canonical checkout retains the fixture namespace');
+  assert.equal(packagePathRequired(fixture,definition),false);
+  assert(fs.lstatSync(fixture).isFile());
+  const changed={filename:fixture,status:'modified'},tree=new Map([[fixture,{type:'blob',mode:'100644',sha:sha('a')}]]);
+  assert.equal(integrationProfile('engineering/fixture',[changed],{},tree),'evidence');
+  assert.equal(geographyRequired('engineering/fixture',[changed],{},tree),false);
+  for(const filename of ['test/fixtures/unknown.mjs','test/fixtures/selected-checkpoint-other.mjs','src/native-grid.js']) {
+    assert.equal(integrationProfile('engineering/fixture',[changed,{filename,status:'modified'}],{},tree),'full');
+    assert.equal(integrationProfile('engineering/fixture',[{...changed,previous_filename:filename}],{},tree),'full');
+  }
+  const method={filename:'coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs',status:'modified'};
+  assert.equal(integrationProfile('engineering/fixture',[changed,method],{},tree),'evidence');
+  assert.equal(geographyRequired('engineering/fixture',[changed,method],{},tree),true);
+  assert.equal(candidateGeographyCode('evidence',[changed,method],'complete'),true);
 });
 
 test('classifier repairs run their complete retained-input regression on the focused route', () => {

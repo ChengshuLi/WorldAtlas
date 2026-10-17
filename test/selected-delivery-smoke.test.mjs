@@ -53,7 +53,10 @@ function fixture(t, changes = {}) {
     current_targets: [{target_id: 'target', pixelIndex: 1, geometry: originalFeatures[0].geometry,
       geometry_sha256: geometryHash(originalFeatures[0].geometry)}]};
   changes.ledger?.(ledger);
-  const ledgerPin = write(emittedDirectory, 'additive-repairs/ledger.json', json(ledger));
+  const rawLedger = json(ledger);
+  const ledgerBody = changes.ledgerBytes === undefined ? rawLedger
+    : Buffer.concat([rawLedger, Buffer.alloc(changes.ledgerBytes - rawLedger.length, 32)]);
+  const ledgerPin = write(emittedDirectory, 'additive-repairs/ledger.json', ledgerBody);
   const effectiveFeatures = structuredClone(originalFeatures);
   effectiveFeatures[0].additiveFootprint = {version: 2, kind: 'retained-base-plus-additions',
     baseline_release_sha256: baseReference.footprints_sha256, base_geometry_sha256: components[0].base_geometry_sha256,
@@ -134,6 +137,33 @@ test('actual CLI checks complete mixed assigned/zero-cell cohort, every new cell
     assert.equal(input.bytes, bytes.length); assert.equal(input.sha256, sha256(bytes));
   }
   assert.match(report.limitation, /GPU and Canvas/); assert.match(report.limitation, /supplied reviewed expectations/);
+});
+
+test('actual CLI admits an exact 34920857-byte emitted ledger and refuses whole-file drift', async t => {
+  // Same-size synthetic ledger, padded with valid JSON whitespace. This tests
+  // transport/consumer capacity; it is not the reviewed geographic ledger.
+  const f = fixture(t, {ledgerBytes: 34920857});
+  execFileSync(process.execPath, [script, '--root', f.root, '--emitted-directory', f.emittedDirectory,
+    '--expectations', f.expectationsPath, '--output', f.outputPath], {stdio: 'pipe'});
+  const report = JSON.parse(fs.readFileSync(f.outputPath));
+  const name = 'additive-repairs/ledger.json', filename = path.join(f.emittedDirectory, name);
+  const original = fs.readFileSync(filename), input = report.inputs.find(row => row.path === name);
+  assert.equal(report.passed, true); assert.equal(report.cumulative_native_cells_picked_and_sampled, 2);
+  assert.equal(input.bytes, 34920857); assert.equal(input.sha256, sha256(original));
+  assert.equal(fs.existsSync(path.join(f.root, 'rebind')), false);
+  const corrupt = Buffer.from(original); corrupt[corrupt.length - 1] = 9;
+  for (const [label, body, error] of [
+    ['truncated', original.subarray(0, -1), /exact file budget/],
+    ['excess', Buffer.concat([original, Buffer.from(' ')]), /exact file budget/],
+    ['hash', corrupt, /Whole asset hash differs/]
+  ]) {
+    fs.writeFileSync(filename, body);
+    const outputPath = path.join(f.directory, label + '.json');
+    await assert.rejects(runSelectedDeliverySmoke({...f.options, outputPath}), error);
+    assert.equal(fs.existsSync(outputPath), false);
+  }
+  fs.writeFileSync(filename, original);
+  assert.equal(sha256(fs.readFileSync(filename)), input.sha256);
 });
 
 const invalidExpectations = [
