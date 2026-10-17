@@ -1,0 +1,80 @@
+[
+  {
+    "advertised_feature_count": 6,
+    "cohort": "administrative-registry",
+    "feature_count": 6,
+    "key": "gb:DJI:ADM1",
+    "metadata_sha256": "0aaf6193cdcddbf42867e5a15ee7eab5538b3b1ca02261d36aa5708a4ee65a3e",
+    "original_bytes": 14037,
+    "original_metadata_file": "data/administrative-sources.json",
+    "original_sha256": "8efa9ba614e219c8b8d02939bea559b2bd0aaa848c89cd0204d11a3c638f8bd2",
+    "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+    "parts": [
+      {
+        "bytes": 4939,
+        "hash_kind": "file-bytes",
+        "offset": 0,
+        "ordinal": 0,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-DJI-ADM1-000.bin.gz",
+        "sha256": "696fad95a4ad0ac686d745bf584db49438384bad127190a979b6c7a358a61663",
+        "uncompressed_bytes": 14037,
+        "uncompressed_sha256": "8efa9ba614e219c8b8d02939bea559b2bd0aaa848c89cd0204d11a3c638f8bd2"
+      }
+    ],
+    "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/DJI/ADM1/geoBoundaries-DJI-ADM1_simplified.geojson",
+    "recorded_license": "Public Domain",
+    "source_represented_year_claim": "2021"
+  },
+  {
+    "advertised_feature_count": 6,
+    "cohort": "administrative-registry",
+    "feature_count": 6,
+    "key": "gb:ERI:ADM1",
+    "metadata_sha256": "c0eaa80a6f253a91571396c9ad104d036428e83d79a6fe7e762eb4432b9180d5",
+    "original_bytes": 165298,
+    "original_metadata_file": "data/administrative-sources.json",
+    "original_sha256": "bd6d3c2f053314fcee17ab3aec8c5ab7c19533518c7aa5ccf38b1e15e0056bd1",
+    "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+    "parts": [
+      {
+        "bytes": 53181,
+        "hash_kind": "file-bytes",
+        "offset": 0,
+        "ordinal": 0,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-ERI-ADM1-000.bin.gz",
+        "sha256": "45438b9416d1b9ffd5cc92f06c4eaeef7d36b775c359bd6c87def604aa8d41e6",
+        "uncompressed_bytes": 165298,
+        "uncompressed_sha256": "bd6d3c2f053314fcee17ab3aec8c5ab7c19533518c7aa5ccf38b1e15e0056bd1"
+      }
+    ],
+    "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ERI/ADM1/geoBoundaries-ERI-ADM1_simplified.geojson",
+    "recorded_license": "Open Data Commons Open Database License 1.0",
+    "source_represented_year_claim": "2017"
+  },
+  {
+    "advertised_feature_count": 58,
+    "cohort": "administrative-registry",
+    "feature_count": 58,
+    "key": "gb:ERI:ADM2",
+    "metadata_sha256": "0c67d53dc40f81ff55f4360ad858f600ed50d901fa74bf596a3c14587ef31729",
+    "original_bytes": 610832,
+    "original_metadata_file": "data/administrative-sources.json",
+    "original_sha256": "a978e92ec9c1442b82b436cb39101387afc84ca9e4ddcec2ec08e4a9bf14e88f",
+    "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+    "parts": [
+      {
+        "bytes": 182436,
+        "hash_kind": "file-bytes",
+        "offset": 0,
+        "ordinal": 0,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-ERI-ADM2-000.bin.gz",
+        "sha256": "2e6dce28203d8c1aa00839ad64a56e05c2b799528f75ad4c88ce89e9af6f92a9",
+        "uncompressed_bytes": 610832,
+        "uncompressed_sha256": "a978e92ec9c1442b82b436cb39101387afc84ca9e4ddcec2ec08e4a9bf14e88f"
+      }
+    ],
+    "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ERI/ADM2/geoBoundaries-ERI-ADM2_simplified.geojson",
+    "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "source_represented_year_claim": "2020"
+  }
+]
