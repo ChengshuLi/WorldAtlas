@@ -1,0 +1,119 @@
+{
+  "status": "screened_unclaimed_pending_stock_allocation_and_source_fitness_review",
+  "original": {
+    "package": "gb-CZE-ADM2--repair-evaluation",
+    "cells": 3934,
+    "intervals": 1400,
+    "owners": 35,
+    "literal_atoms": 35,
+    "current_cohort": 77
+  },
+  "accepted_policy": {
+    "commit": "282d14b4682f738fed6a0e6f3ee0d0e4b775d611",
+    "path": "data/location-policy.json",
+    "sha256": "efab4528fd4b7b180815ef82de93480f490ef8fa48ad9ef32d1f9d76a64b7fb9",
+    "entry": {
+      "level": "ADM2",
+      "role": "District",
+      "reason": "Named District territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CZE/ADM2/geoBoundaries-CZE-ADM2.geojson"
+    }
+  },
+  "rights": {
+    "source": "https://commons.wikimedia.org/wiki/File:Okresy_%C4%8CR_2007.PNG",
+    "page_revision": 563119302,
+    "author": "Mapového náložník",
+    "grant": "Worldwide public-domain dedication with fallback permission for any purpose without conditions except law",
+    "geoBoundaries_derivative_attribution": "Preserved separately"
+  },
+  "fitness_limits": [
+    "Locator map original 2010; stated 2007 boundaries; source file history includes 2016 boundary revisions and 2017 size optimization.",
+    "Raster dimensions 1053x624; geoBoundaries metadata representative year 2010; 2022 vector processing documented in original XML. No surveyed accuracy or present legal boundaries inferred.",
+    "Current official CUZK evidence may challenge retained source; no current official geometry substituted silently."
+  ],
+  "official_alternative": {
+    "provider": "Czech Office for Surveying, Mapping and Cadastre",
+    "dataset": "INSPIRE Administrative Units",
+    "license": "CC BY 4.0 as explicitly linked on official Atom index",
+    "capabilities": "https://atom.cuzk.cz/getcapabilities.ashx",
+    "whole_geometry_url": "https://services.cuzk.gov.cz/gml/inspire/au/epsg-4258/1.zip",
+    "listed_size": "69.5 MB",
+    "listed_updated": "2026-10-17 09:06",
+    "crs": "ETRS89 EPSG:4258; not silently equated to retained CRS84",
+    "geometry_retrieved": true,
+    "zip_bytes": 72849710,
+    "zip_sha256": "22454f195dd7f7e2acd244b82b949c04a20eaf45a792bcfc8802260e9f03772c",
+    "inventory_counts": {
+      "AdministrativeUnit": 6350,
+      "AdministrativeBoundary": 47262
+    }
+  },
+  "evidence_files": [
+    {
+      "path": "candidate-scope.json",
+      "bytes": 16485,
+      "sha256": "d19557ae3c43db5cd9fd2ac8a1f141e2970b089b2a605a0322729a2c067b8fc6"
+    },
+    {
+      "path": "meta.txt",
+      "bytes": 418,
+      "sha256": "c80f57454a27bd8080b93b2be3033430075642dec56639fcf4ef6c2a78f9db69"
+    },
+    {
+      "path": "cuzk-atom-index.html",
+      "bytes": 17037,
+      "sha256": "6fde247b34fae334de52ffb87974502a522b84f81dd5ff500961d5c6ec93d29d"
+    },
+    {
+      "path": "owner-atoms-screen.json",
+      "bytes": 44542,
+      "sha256": "ccd90e27e62c4324a7d8d35ad21990ff482c28f929283f826a73c68e3075689c"
+    },
+    {
+      "path": "additional-pending-original-overlap.json",
+      "bytes": 168,
+      "sha256": "2fd77a188beaf7b92bebcd1c776e981c55dbc98db1ee03e0fb9acc6476532d7b"
+    },
+    {
+      "path": "original-overlap-screen.json",
+      "bytes": 3525,
+      "sha256": "ea415604e8146c7e3a99df7846f0fe57afcff86f2d2e605ed8d0a5158ab469de"
+    },
+    {
+      "path": "cuzk-au-etrs89-feed.xml",
+      "bytes": 1203,
+      "sha256": "72504395f0ac1a965b04be1c5b5670b19b96001525bcfe4405940b902578eefb"
+    },
+    {
+      "path": "selected-identity-check.json",
+      "bytes": 11066,
+      "sha256": "fb694eb2e2dec7ad49859170e09054700c2cae3eb0dbef31514d65bb2448972a"
+    },
+    {
+      "path": "cuzk-atom-capabilities.json",
+      "bytes": 115575,
+      "sha256": "62adadd628c79b2e8634c18190a222c9cd72ab428f6a3426b18c2b28c7f6655f"
+    },
+    {
+      "path": "original-source-custody.json",
+      "bytes": 9723,
+      "sha256": "10f4e1fbea14e44b4a9b69a025299b295a70ad04cf3a362baecd6ed28cfb8cf6"
+    },
+    {
+      "path": "wikimedia-source-rights.html",
+      "bytes": 105186,
+      "sha256": "41d78ed1c65afb5dfc96d0ff104cdaecb5ffbbfdd4436e43d2c273c931e51a80"
+    },
+    {
+      "path": "CZE_ADM2.zip",
+      "bytes": 492206,
+      "sha256": "973521dcddaf4ba1de1fc0449cddcb9d7df42a5e6edde8615fc4ac4e5e413b4c"
+    },
+    {
+      "path": "source-lfs-pointer.txt",
+      "bytes": 131,
+      "sha256": "fc17f72568828ee65fbea85a61a6b0671bc0351d3243446c6346301beb299b96"
+    }
+  ],
+  "claim_added_to_denominator": false
+}
