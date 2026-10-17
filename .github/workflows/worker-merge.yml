@@ -65,6 +65,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           MERGE_PHASE: prepare
+          CHECKOUT_PATTERNS_FORMAT: wrapped-base64
         run: node scripts/run-worker-merge.mjs
   geography:
     needs: prepare
@@ -189,7 +190,8 @@ jobs:
           python3 -I -S -B - <<'CHECKOUT_INPUTS'
           import base64, os, re, subprocess
           # Trusted preparation emits only base64; decoded repository paths are data.
-          patterns = base64.b64decode('${{ needs.prepare.outputs.checkout_patterns_base64 }}', validate=True)
+          encoded = '''${{ needs.prepare.outputs.checkout_patterns_base64 }}'''
+          patterns = base64.b64decode(encoded.replace('\n', ''), validate=True)
           sha, tree, repo = (os.environ[key] for key in ('CI_CHECKOUT_SHA', 'CI_CHECKOUT_TREE', 'CI_CHECKOUT_REPOSITORY'))
           assert re.fullmatch('[0-9a-f]{40}', sha) and re.fullmatch('[0-9a-f]{40}', tree) and repo == 'ChengshuLi/WorldAtlas'
           token = os.environ.pop('GH_TOKEN')
@@ -337,7 +339,7 @@ jobs:
           SELECTED_EXPECTATIONS_PATH: ${{ needs.prepare.outputs.expectations_path }}
         run: |
           if test "$INTEGRATION_TEST_SELECTION" = selected-data || test "$INTEGRATION_TEST_SELECTION" = selected-output; then
-            node --input-type=module -e 'import {selectedDeliverySmoke} from "./scripts/integration-profile.mjs"; console.log(JSON.stringify({selected_delivery_smoke:await selectedDeliverySmoke(process.env.SELECTED_EXPECTATIONS_PATH)}));'
+            node --input-type=module -e 'import {selectedDeliverySmoke} from "./scripts/integration-profile.mjs"; const report=await selectedDeliverySmoke(process.env.SELECTED_EXPECTATIONS_PATH); console.log(JSON.stringify({selected_delivery_smoke:Object.fromEntries(Object.entries(report).filter(([,value])=>value===null||typeof value!=="object"))}));'
           fi
           if test "$INTEGRATION_TEST_SELECTION" = selected-output; then
             node --input-type=module -e "import {requireCurrentPackageAssembly} from './scripts/run-integration-tests.mjs'; console.log(JSON.stringify({package_assembly:requireCurrentPackageAssembly()}))"
