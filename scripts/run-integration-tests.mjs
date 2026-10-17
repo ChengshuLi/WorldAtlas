@@ -189,7 +189,7 @@ const FOCUSED_TEST_FAMILIES = [
   'effective-geographic-regression', 'evidence-byte-bounds', 'fiji-canonical-reproduction',
   'geographic-(?:checkpoint-products|regression)', 'geography-prefetch',
   'immutable-reader-read', 'installed-runtime-identity', 'map-cell-diagnosis',
-  'native-(?:additions-order|checkpoint-consumer)', 'parallel-geography-comparison',
+  'native-(?:additions-order|checkpoint-consumer|word-store|stream-custody|interval-stream|interval-projection)', 'canonical-value-hash', 'parallel-geography-comparison',
   'qualification-exclusion-prefilter', 'selected-checkpoint',
   'selected-joint-(?:check|entry|package-boundary)', 'selected-metadata-wiring',
   'source-target-native-diagnostic', 'supported-programs', 'trusted-geography-check',
@@ -200,7 +200,7 @@ const FOCUSED_TEST_FAMILIES = [
 const focusedTest = new RegExp('^test/(?:' + FOCUSED_TEST_FAMILIES.join('|') + ')\\.test\\.(?:mjs|py)$');
 // This shared fixture has only focused consumers; reuse their ordinary-file
 // routing checks. Test execution still discovers only top-level *.test.mjs.
-export const focusedIntegrationTest = name => focusedTest.test(name) || name === 'test/fixtures/selected-checkpoint.mjs';
+export const focusedIntegrationTest = name => focusedTest.test(name) || ['test/fixtures/selected-checkpoint.mjs','test/fixtures/native-word-store.mjs'].includes(name);
 
 export function integrationTestFiles(profile, shard, testSelection = 'complete', reviewed = process.env.INTEGRATION_TEST_FILES_BASE64) {
   if (!['complete','selected-output','reviewed'].includes(testSelection) ||
