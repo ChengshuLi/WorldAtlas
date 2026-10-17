@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "original_stock_output": "territorial-exclusion-provenance.json",
+  "original_bytes": 43504537,
+  "original_sha256": "0621817e9bb825fe2bd930957e01cbce068297bf3a1e6319bb07c09f0a379382",
+  "codec": "contiguous original raw bytes; gzip transport, no JSON reserialization",
+  "parts": [
+    {
+      "path": "original-stock-provenance-000.bin.gz",
+      "ordinal": 0,
+      "offset": 0,
+      "bytes": 8201655,
+      "sha256": "e06ffa83b3babf3b39c32ae7b5a53ea320989e4277e9c1b809de5e772e5b092c",
+      "decoded_bytes": 33554432,
+      "decoded_sha256": "ea6605f158cbaa5cfc0dfa1c4b4aff560a33bcb07dc8b9fa2289afeaba5b8e4e"
+    },
+    {
+      "path": "original-stock-provenance-001.bin.gz",
+      "ordinal": 1,
+      "offset": 33554432,
+      "bytes": 2441844,
+      "sha256": "3c25184eee16dc0b14e860db19fae5a91e72915f0fd6d93184f97a2f601d1cc6",
+      "decoded_bytes": 9950105,
+      "decoded_sha256": "c01fb1a15cc4bc5bdd12cdaa1859b1d4acf53104e825ace9b97f1eb55716230a"
+    }
+  ],
+  "limits": [
+    "Transport preservation of the unchanged optional stock provenance. Native authority consumes source-evidence.json, not this transport index."
+  ]
+}
