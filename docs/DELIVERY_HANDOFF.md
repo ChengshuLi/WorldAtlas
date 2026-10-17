@@ -972,3 +972,24 @@ admission from synthetic fixture capacity. Literal selected-ledger packaging,
 all-cell smoke and native-output identity proof must state their exact selected
 input and code hashes. Package/output verification does not establish a deployed
 version, live endpoint, or GPU/Canvas behavior; those remain publication checks.
+
+### External original atoms in negative-only ancestry
+
+When a complete accepted canonical cohort has a mixed-source ancestor, optional
+`source_membership.negative_natural_earth` may bind `{registry, source, atoms}`.
+The registry is the exact selected `data/sources.json`; its retained Natural Earth
+ADM1 digest must match the complete decoded source FeatureCollection. Every original
+feature must retain a unique `adm1_code` and valid whole geometry. An atom is exactly
+`{source_id, feature_ordinal, geometry_sha256}`, using the original bare native ID,
+zero-based position and canonical whole-geometry digest. Names and prefixed aliases
+are not joins. The complete source is consumed and packaged, including unused features.
+
+Only explicitly bound atoms can terminate negative ancestry. Each must participate
+in the complete current cohort and agree with all forward and reverse descendants;
+unknown leaves, missing members/edges, unused atoms, and current-owner or semantic
+node collisions fail closed. Each bound original also enters the unchanged whole
+territorial-veto route, including interior and boundary contacts. It has no contextual
+applicability exception and cannot grant positive ownership. Existing positive
+reconciliation and complete cohort/parent/source checks remain required. The role
+currently covers only the already retained Natural Earth ADM1 registry product,
+not a generic provider adapter or permission to omit another original family.

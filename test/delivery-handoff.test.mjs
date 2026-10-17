@@ -509,7 +509,7 @@ test('finalization refuses a new identity at an accepted package path', () => {
 // Actual Git/plain-Node fixture for metadata assembly. The source interpretation
 // and native construction controls live in source-member-native-delivery.test;
 // this fixture exercises the consumed-role boundary without replaying science.
-function modernFinalizationFixture(t, {mixed = false, membership = true, cohort = false, dated = false, territorial = false, territorialParts = false, provider = false, seam = false, negativeSources = false} = {}) {
+function modernFinalizationFixture(t, {mixed = false, membership = true, cohort = false, external = false, dated = false, territorial = false, territorialParts = false, provider = false, seam = false, negativeSources = false} = {}) {
   const root = directory(t), owned = 'coordination/engineering/modern-finalize/';
   const git = (...args) => execFileSync('git', args, {cwd: root, stdio: ['pipe', 'pipe', 'pipe']}).toString().trim();
   git('init'); git('config', 'user.name', 'Finalizer fixture'); git('config', 'user.email', 'finalizer@example.invalid');
@@ -525,6 +525,7 @@ function modernFinalizationFixture(t, {mixed = false, membership = true, cohort 
   save(familyPart, gzipSync(familyRaw));
   const memberPaths = ['data/world-index.json', 'data/semantic-report.json', 'data/geography/part-0.json'];
   if (cohort) memberPaths.push('data/macro-foundation/world-review-projection.json', 'data/macro-foundation/world-review-locations-0.json.gz');
+  if (external) memberPaths.push('data/sources.json', 'data/retained-natural-earth.json');
   for (const name of memberPaths) save(name, name.endsWith('.gz') ? gzipSync(jsonBytes([{retained:name}])) : {retained: name});
   const incidental = inherited + 'gshhg-never-consumed.json'; save(incidental, {not_a_selected_reader_operand: true});
   const geometry = {type: 'Polygon', coordinates: [[[0, 0], [1, 0], [0, 1], [0, 0]]]};
@@ -550,7 +551,9 @@ function modernFinalizationFixture(t, {mixed = false, membership = true, cohort 
     families: [{source_id: 'source', parts: [{...pin(familyPart), decoded_bytes: familyRaw.length, decoded_sha256: digest(familyRaw)}]}],
     native_contract: {incidental_reproducer_operand: pin(incidental)},
     ...(membership ? {source_membership: {index: pin(memberPaths[0]), lineage: pin(memberPaths[1]), parts: [pin(memberPaths[2])],
-      ...(cohort ? {cohort_inventory:{index:pin(memberPaths[3]),parts:[pin(memberPaths[4])]}} : {})}} : {})};
+      ...(cohort ? {cohort_inventory:{index:pin(memberPaths[3]),parts:[pin(memberPaths[4])]}} : {}),
+      ...(external ? {negative_natural_earth:{registry:pin('data/sources.json'),source:pin('data/retained-natural-earth.json'),
+        atoms:[{source_id:'TST-1',feature_ordinal:0,geometry_sha256:'a'.repeat(64)}]}} : {})}} : {})};
   let datedSupport;
   if (dated) {
     const provenance = ['adoption', 'review', 'observation', 'frame'].map(role => {
@@ -1353,4 +1356,29 @@ test('package closes exact complete negative reference sources without broad pin
   const result=f.run('package','.cache/delivery-handoff/negative-rejected-'+ordinal++,[],f.withEvidence(body));
   assert.notEqual(result.status,0);assert.match(result.stderr,/territorial|hash differs/);
  }
+});
+
+test('real package command preserves complete external negative source roles and rejects malformed pins',t=>{
+ const f=modernFinalizationFixture(t,{external:true,cohort:true});
+ const accepted=f.run('package','.cache/delivery-handoff/negative-external-complete');
+ assert.equal(accepted.status,0,accepted.stderr);
+ const output=JSON.parse(fs.readFileSync(path.join(f.root,'.cache/delivery-handoff/negative-external-complete/package-roles.json')));
+ for(const key of ['registry','source'])assert(output.paths.some(item=>item.path===f.evidenceBody.source_membership.negative_natural_earth[key].path));
+ let ordinal=0;
+ for(const mutate of [role=>delete role.registry,role=>delete role.source,role=>role.atoms=[],
+  role=>role.source.sha256='0'.repeat(64),role=>role.registry.sha256='0'.repeat(64),role=>role.extra=role.source]){
+  const body=structuredClone(f.evidenceBody);mutate(body.source_membership.negative_natural_earth);
+  const result=f.run('package','.cache/delivery-handoff/negative-external-rejected-'+ordinal++,[],f.withEvidence(body));
+  assert.notEqual(result.status,0);assert.match(result.stderr,/Natural Earth|hash differs/);
+ }
+});
+
+test('combined external ancestry and complete negative reference sources retain both package roles',t=>{
+ const f=modernFinalizationFixture(t,{external:true,cohort:true,negativeSources:true});
+ const destination='.cache/delivery-handoff/combined-negative-roles',accepted=f.run('package',destination);
+ assert.equal(accepted.status,0,accepted.stderr);
+ const output=JSON.parse(fs.readFileSync(path.join(f.root,destination,'package-roles.json')));
+ for(const pin of [f.evidenceBody.territorial_exclusion_sources[0].parts[0],
+  ...['registry','source'].map(key=>f.evidenceBody.source_membership.negative_natural_earth[key])])
+  assert(output.paths.some(item=>item.path===pin.path&&item.sha256===pin.sha256),'Both complete negative role sets remain consumed');
 });

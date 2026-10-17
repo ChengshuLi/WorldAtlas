@@ -1960,3 +1960,17 @@ test('identical current expectations retain their files and must remain unconsum
   f.definition.inputs.push(f.retainedName); f.put('.github/package-inputs.json', f.definition);
   assert.equal(await f.run(), null, 'identical content does not bypass consumed package roles');
 });
+
+test('selected-data includes explicit whole external negative source pins without recursive reads',async()=>{
+ const membership=(f,mutate=()=>{})=>{
+  const role={index:f.leaf('member-index.json'),lineage:f.leaf('member-lineage.json'),parts:[f.leaf('member-geography.json')],
+   negative_natural_earth:{registry:f.leaf('source-registry.json'),source:f.leaf('whole-natural-earth.json.gz',true),
+    atoms:[{source_id:'TST-1',feature_ordinal:0,geometry_sha256:'a'.repeat(64)}]}};
+  mutate(role.negative_natural_earth);return role;
+ };
+ const f=sourceTargetRoleFixture({sourceMembership:f=>membership(f)}),diagnostics={};
+ assert.equal((await f.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
+ for(const mutate of [role=>delete role.registry,role=>delete role.source,role=>role.atoms=[],
+  role=>role.source.git_blob_oid='0'.repeat(40),role=>role.registry.git_blob_oid='0'.repeat(40),role=>role.extra=role.source])
+  assert.equal(await sourceTargetRoleFixture({sourceMembership:f=>membership(f,mutate)}).run(),null);
+});
