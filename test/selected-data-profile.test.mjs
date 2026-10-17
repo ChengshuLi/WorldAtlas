@@ -2004,3 +2004,60 @@ test('a public prepared flag or cloned report cannot reuse the trusted checker c
   assert.equal(result.accepted,true);assert(f.reads.length>0,'Unprivileged report retains original classification');
   assert.equal(result.geography.execution,undefined);
 });
+
+
+test('selected-data closes every explicit original operation role and rejects incomplete roles',async()=>{
+ const membership=(f,mutate=()=>{})=>{
+  const index=f.put('data/world-index.json',{retained:'original-world-index'},true),
+    lineage=f.put('data/semantic-report.json',{retained:'original-lineage'},true),
+    part=f.put('data/geography/part-0.json',{retained:'original-canonical-output'},true);
+  const role={index:f.leaf('member-index.json'),lineage:f.leaf('member-lineage.json'),parts:[f.leaf('member-geography.json')],
+    operation_stages:[{index,lineage,parts:[part]}]};
+  mutate(role.operation_stages);return role;
+ };
+ const f=sourceTargetRoleFixture({sourceMembership:g=>membership(g)}),diagnostics={};
+ assert.equal((await f.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
+ for(const mutate of [stages=>stages.splice(0),stages=>delete stages[0].index,
+  stages=>stages[0].parts=[],stages=>stages[0].parts[0].git_blob_oid='0'.repeat(40),
+  stages=>stages[0].index.path='foreign-index.json',stages=>stages[0].extra=stages[0].index]){
+  assert.equal(await sourceTargetRoleFixture({sourceMembership:g=>membership(g,mutate)}).run(),null);
+ }
+});
+
+
+function historicalOperationRoleFixture({mutateStage=()=>{},unavailableTree=false}={}){
+ let originals,stage;
+ const f=sourceTargetRoleFixture({sourceMembership:f=>{
+  originals=['data/world-index.json','data/semantic-report.json','data/geography/part-0.json'].map(name=>{
+   f.put(name,{current:name},true);
+   const raw=Buffer.from(JSON.stringify({original:name})),oid=createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
+   f.blobs.set(oid,raw);return {path:name,commit:'4'.repeat(40),mode:'100644',git_blob_oid:oid,bytes:raw.length,sha256:digest(raw)};
+  });
+  stage={index:{...originals[0]},lineage:{...originals[1]},parts:[{...originals[2]}]};mutateStage(stage);
+  return {index:f.leaf('member-index.json'),lineage:f.leaf('member-lineage.json'),parts:[f.leaf('member-geography.json')],operation_stages:[stage]};
+ }});
+ const ordinaryAPI=f.api;
+ f.api=async route=>{
+  if(route.endsWith('/git/commits/'+originals[0].commit))return {sha:originals[0].commit,tree:{sha:'original-operation-tree'}};
+  if(route.endsWith('/git/trees/original-operation-tree?recursive=1'))return {truncated:unavailableTree,
+   tree:originals.map(p=>({path:p.path,mode:p.mode,type:'blob',sha:p.git_blob_oid,size:p.bytes}))};
+  return ordinaryAPI(route);
+ };
+ return {...f,originals,stage};
+}
+test('historical operation transport authenticates all original bodies without replacing current canonical files',async()=>{
+ const f=historicalOperationRoleFixture(),before=f.originals.map(p=>({...f.authored.entries.get(p.path)})),diagnostics={};
+ assert.equal((await f.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
+ for(const [i,p]of f.originals.entries()){
+  assert(f.reads.includes(p.git_blob_oid),'whole original operation body consumed');
+  assert.deepEqual(f.authored.entries.get(p.path),before[i]);
+ }
+});
+test('historical operation transport cannot excuse hash drift, unavailable originals or changed live files',async()=>{
+ for(const mutateStage of [s=>s.index.sha256='f'.repeat(64),s=>s.parts[0].git_blob_oid='f'.repeat(40),
+  s=>s.lineage.bytes++,s=>s.index.mode='100755',s=>s.lineage.commit='5'.repeat(40)])
+  assert.equal(await historicalOperationRoleFixture({mutateStage}).run(),null);
+ assert.equal(await historicalOperationRoleFixture({unavailableTree:true}).run(),null);
+ const f=historicalOperationRoleFixture();f.put(f.originals[2].path,{changed:'live canonical data'});
+ assert.equal(await f.run(),null,'historical source role cannot exempt a changed current canonical input');
+});

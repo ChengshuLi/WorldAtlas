@@ -501,3 +501,15 @@ test('compact preparation keeps ambiguous original geometry inline and rejects i
     const f=territorialFixture();mutation(f.config);await assert.rejects(sourceEvidence(f.config,f.reader),/territorial|Territorial/);
   }
 });
+
+
+test('source-evidence derivation preserves original operation stages without rebinding their vintages',async()=>{
+ const f=fixture();
+ const stage={index:{commit:'b'.repeat(40),path:'data/world-index.json',sha256:'1'.repeat(64)},
+  lineage:{commit:'b'.repeat(40),path:'data/semantic-report.json',sha256:'2'.repeat(64)},
+  parts:[{commit:'b'.repeat(40),path:'data/geography/part-0.json',sha256:'3'.repeat(64)}]};
+ f.config.source_evidence.source_membership.operation_stages=[stage];
+ const actual=await result(f);
+ assert.deepEqual(actual.source_membership.operation_stages,[stage]);
+ assert.deepEqual(withoutBaseline(actual),f.config.source_evidence);
+});
