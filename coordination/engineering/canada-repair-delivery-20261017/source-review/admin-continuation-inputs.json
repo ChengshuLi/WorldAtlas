@@ -1,0 +1,41 @@
+{
+  "kind": "administrative-continuation-input-preservation",
+  "cohort_observation": {
+    "accepted_commit": "2d76e5c9cfe3bf189deea0376d76979cf95ac7ee",
+    "world_index_sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+    "complete_ids": 49625,
+    "parts": 34,
+    "encoded_part_bytes": 1325604,
+    "Canada_ids": 478
+  },
+  "config_observation": {
+    "original": {
+      "path": "coordination/engineering/canada-repair-delivery-20261017/config/admin-source-evidence-002.json",
+      "commit": "68e28d58293f7c951378886fa40cf680a2c3694f",
+      "mode": "100644",
+      "git_blob_oid": "560de1eab38a4e7153fb92bfe18d47f8933b1a84",
+      "bytes": 34069019,
+      "sha256": "8c032d1ee29a88facfb14f7a04a7b93050bde7770b36cea6124881297010c24b"
+    },
+    "output": "coordination/engineering/canada-repair-delivery-20261017/config/admin-source-evidence-003.json",
+    "bytes": 34081519,
+    "changes": [
+      "source_evidence.source_membership.cohort_inventory",
+      "territorial_exclusion_families"
+    ],
+    "limits": [
+      "The complete original 293965-cell request and every prior exclusion remain unchanged.",
+      "This prepares source-evidence inputs; it does not qualify native ownership."
+    ]
+  },
+  "original_request_cells": 293965,
+  "old_exclusion_instances_preserved": 153,
+  "requested_new_whole_exclusion_instances": 492,
+  "expected_output_bytes": 99406128,
+  "expected_provenance_bytes": 3768066,
+  "status": "configuration-prepared-source-evidence-publication-pending",
+  "limits": [
+    "Expected publication sizes are independently calculated, not a completed source publication.",
+    "No administrative native qualification is claimed."
+  ]
+}
