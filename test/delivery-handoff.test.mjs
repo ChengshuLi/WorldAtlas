@@ -920,7 +920,10 @@ for (const mixed of [false, true]) test('late compose and finalize replace moder
   const sidecar = JSON.parse(sidecarRaw), originalSidecar = f.r.json(f.r.pin(f.config.selector.commit, JSON.parse(f.accepted['ownership-selection.json']).additive_release.path));
   for (const role of ['base_manifest', 'owner_roster']) assert.deepEqual(sidecar.logical_asset_map[role], originalSidecar.logical_asset_map[role]);
   const inputs = JSON.parse(read('package-inputs.json')), priorInputs = JSON.parse(f.accepted['package-inputs.json']);
-  assert.deepEqual(inputs.inputs.slice(0, priorInputs.inputs.length), priorInputs.inputs);
+  const obsolete = [JSON.parse(f.accepted['ownership-selection.json']).additive_release.path, originalSidecar.runtime_envelope.path, originalSidecar.logical_asset_map.ledger.path, originalSidecar.logical_asset_map.patch.path];
+  const retained = priorInputs.inputs.filter(name => !obsolete.includes(name));
+  assert.deepEqual(inputs.inputs.slice(0, retained.length), retained);
+  assert(obsolete.every(name => !inputs.inputs.includes(name)));
   assert.ok(inputs.inputs.includes(finalConfig.sidecar_output)); assert.ok(!inputs.inputs.some(name => name.endsWith('selected-delivery-expectations.json')));
   assert.equal(JSON.parse(read('selected-delivery-expectations.json')).cumulative_native_cells, mixed ? 5 : 4);
   const roles = JSON.parse(read('package-roles.json')).paths.find(p => p.path === finalConfig.sidecar_output);
@@ -1038,8 +1041,11 @@ for (const mixed of [false, true]) test('multiple modern originals compose once 
   assert.equal(finalRead('selected-delivery-expectations.json').cumulative_native_cells, mixed ? 6 : 5);
   const finalSelector = finalRead('ownership-selection.json'); delete finalSelector.additive_release;
   assert.equal(JSON.stringify(finalSelector), JSON.stringify(JSON.parse(f.originalSelector)));
-  assert.deepEqual(finalRead('package-inputs.json').inputs.slice(0, JSON.parse(f.accepted['package-inputs.json']).inputs.length),
-    JSON.parse(f.accepted['package-inputs.json']).inputs);
+  const priorSelector = JSON.parse(f.accepted['ownership-selection.json']), priorSidecar = f.r.json(f.r.pin(f.config.selector.commit, priorSelector.additive_release.path));
+  const obsolete = [priorSelector.additive_release.path, priorSidecar.runtime_envelope.path, priorSidecar.logical_asset_map.ledger.path, priorSidecar.logical_asset_map.patch.path];
+  const retained = JSON.parse(f.accepted['package-inputs.json']).inputs.filter(name => !obsolete.includes(name));
+  assert.deepEqual(finalRead('package-inputs.json').inputs.slice(0, retained.length), retained);
+  assert(obsolete.every(name => !finalRead('package-inputs.json').inputs.includes(name)));
 });
 
 test('multiple modern originals reject mixed/empty groups, duplicate authorities/components and cross-original overlaps', t => {
@@ -1257,4 +1263,52 @@ test('combined external ancestry and complete negative reference sources retain 
  for(const pin of [f.evidenceBody.territorial_exclusion_sources[0].parts[0],
   ...['registry','source'].map(key=>f.evidenceBody.source_membership.negative_natural_earth[key])])
   assert(output.paths.some(item=>item.path===pin.path&&item.sha256===pin.sha256),'Both complete negative role sets remain consumed');
+});
+
+
+test('successive finalizations replace authenticated cumulative roots and preserve unrelated and shared inputs', t => {
+  const f=modernCompositionFixture(t), products=composeAuthorities(f.config,f.r);
+  let config=f.finalizeConfig(products);
+  const unrelated='coordination/engineering/unrelated/selected-ledger.json';
+  const optional='coordination/engineering/unrelated/patch.json';
+  f.save(unrelated,{unrelated:true});f.save(optional,{optional:true});
+  const original=f.r.json(config.package_inputs);
+  original.inputs.push(unrelated,optional);original.optional_inputs.push(optional);
+  f.save('.github/package-inputs.json',original);f.commitAll();config={...config,package_inputs:f.pin('.github/package-inputs.json')};
+  let expectedCount;
+  for(let round=0;round<3;round++){
+    const output=finalizeDelivery(config,f.r),definition=JSON.parse(output['package-inputs.json']),selector=JSON.parse(output['ownership-selection.json']);
+    expectedCount??=definition.inputs.length;assert.equal(definition.inputs.length,expectedCount);
+    assert(definition.inputs.includes(unrelated));assert(definition.inputs.includes(optional));assert(definition.optional_inputs.includes(optional));
+    const sidecar=JSON.parse(output[path.posix.basename(config.sidecar_output)]);
+    for(const role of ['base_manifest','owner_roster'])assert(definition.inputs.includes(sidecar.logical_asset_map[role].path));
+    const prior=f.r.json(f.r.pin(config.selector.commit,f.r.json(config.selector).additive_release.path));
+    for(const pin of [prior.runtime_envelope,prior.logical_asset_map.ledger,prior.logical_asset_map.patch])
+      if(!Object.values(sidecar.logical_asset_map).some(p=>p.path===pin.path)&&sidecar.runtime_envelope.path!==pin.path)assert(!definition.inputs.includes(pin.path));
+    f.save(config.sidecar_output,output[path.posix.basename(config.sidecar_output)]);
+    f.save('data/ownership-selection.json',output['ownership-selection.json']);f.save('.github/package-inputs.json',output['package-inputs.json']);f.commitAll();
+    const next='coordination/engineering/repeated-'+round+'/';
+    for(const [name,pin] of [['selected-ledger.json',config.selected_ledger],['patch.json',config.patch],['runtime-envelope.json',config.runtime_envelope]])f.save(next+name,f.r.read(pin));
+    f.commitAll();config={...config,selector:f.pin('data/ownership-selection.json'),package_inputs:f.pin('.github/package-inputs.json'),new_prefix:next,sidecar_output:next+'selection-sidecar.json',selected_ledger:f.pin(next+'selected-ledger.json'),patch:f.pin(next+'patch.json'),runtime_envelope:f.pin(next+'runtime-envelope.json')};
+  }
+});
+
+
+test('finalization does not narrow an unrelated accepted directory declaration',t=>{
+ const f=modernCompositionFixture(t),config=f.finalizeConfig(composeAuthorities(f.config,f.r));
+ const definition=f.r.json(config.package_inputs),selector=f.r.json(config.selector),prior=f.r.json(f.r.pin(config.selector.commit,selector.additive_release.path));
+ const directory=path.posix.dirname(selector.additive_release.path)+'/';
+ definition.inputs=definition.inputs.filter(p=>!p.startsWith(directory));definition.inputs.push(directory);
+ f.save('.github/package-inputs.json',definition);f.commitAll();
+ const output=finalizeDelivery({...config,package_inputs:f.pin('.github/package-inputs.json')},f.r);
+ assert(JSON.parse(output['package-inputs.json']).inputs.includes(directory));
+});
+
+test('malformed prior cumulative role cannot authorize package input removal',t=>{
+ const f=modernCompositionFixture(t),config=f.finalizeConfig(composeAuthorities(f.config,f.r));
+ const selector=f.r.json(config.selector),prior=f.r.json(f.r.pin(config.selector.commit,selector.additive_release.path));
+ prior.logical_asset_map.ledger.path='../unrelated.json';f.save(selector.additive_release.path,prior);f.commitAll();
+ const pin=f.pin(selector.additive_release.path);selector.additive_release={path:pin.path,bytes:pin.bytes,sha256:pin.sha256};
+ f.save('data/ownership-selection.json',selector);f.commitAll();
+ assert.throws(()=>finalizeDelivery({...config,selector:f.pin('data/ownership-selection.json')},f.r),/prior cumulative package roles/);
 });

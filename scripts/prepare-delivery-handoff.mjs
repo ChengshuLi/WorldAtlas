@@ -871,13 +871,18 @@ export function finalizedPackageInputs(original, prefix, paths) {
   return appendPackageReadPaths(original, paths);
 }
 
-function appendPackageReadPaths(original, paths) {
+function appendPackageReadPaths(original, paths, priorSelectedPaths = []) {
   validatePackageInputs(original);
   need(unique(paths) && paths.every(safe), 'Exact package read paths required');
-  // Preserve the complete accepted declaration prefix. Already-covered roles
-  // need no redundant narrower declaration beneath an accepted directory.
-  const additions = paths.filter(p => !original.inputs.some(old => old === p || old.endsWith('/') && p.startsWith(old))).sort();
-  return validatePackageInputs({...original, inputs: [...original.inputs, ...additions]});
+  // Retire only exact prior cumulative roles authenticated by the selector.
+  // Never narrow a directory declaration or infer roles from filenames. Shared
+  // current assets and unrelated declarations retain their original order.
+  need(priorSelectedPaths.every(safe), 'Safe authenticated prior selected paths required');
+  const retired = new Set(priorSelectedPaths.filter(p => !paths.includes(p)));
+  const retained = original.inputs.filter(p => !retired.has(p));
+  const additions = paths.filter(p => !retained.some(old => old === p || old.endsWith('/') && p.startsWith(old))).sort();
+  return validatePackageInputs({...original, inputs: [...retained, ...additions],
+    optional_inputs: original.optional_inputs.filter(p => !retired.has(p))});
 }
 
 // The modern composer emits these four flat products at one real commit.
@@ -1046,7 +1051,15 @@ export function finalizeDelivery(config, reader) {
   for (const name of requested) if (!matched.has(name) && !conflicts.some(row => row.path === name))
     conflicts.push({path: name, reason: 'Unbound or non-restorable role in restoration inventory'});
   need(!conflicts.length, 'Final package role conflicts with accepted path identity: ' + JSON.stringify(conflicts));
-  const packageInputs = appendPackageReadPaths(baselinePackage, paths);
+  // The prior sidecar body was authenticated against the original selector
+  // above. Its cumulative payload is superseded, not a transitive scientific
+  // package input; packageProjection still retains complete custody evidence.
+  const priorSelectedPins = prior ? [prior.runtime_envelope, prior.logical_asset_map?.ledger, prior.logical_asset_map?.patch] : [];
+  need(priorSelectedPins.every(p => p && safe(p.path) && p.mode === '100644'
+    && hex(p.git_blob_oid ?? p.blob, 40) && Number.isSafeInteger(p.bytes) && p.bytes > 0 && hex(p.sha256, 64)),
+    'Complete authenticated prior cumulative package roles required');
+  const priorSelectedPaths = prior ? [selection.additive_release.path, ...priorSelectedPins.map(p => p.path)] : [];
+  const packageInputs = appendPackageReadPaths(baselinePackage, paths, priorSelectedPaths);
   const expectation = JSON.parse(outputs['selected-delivery-expectations.json']);
   // Preserve the established final smoke-expectation presentation as well.
   const expectations = {version: expectation.version, selected_ledger_sha256: expectation.selected_ledger_sha256,
