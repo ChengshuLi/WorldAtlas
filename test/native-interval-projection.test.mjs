@@ -17,7 +17,7 @@ function scratchTrace(){
  return {live,get peak(){return peak;},get created(){return created;},restore(){fs.mkdtempSync=mkdir;fs.rmSync=remove;}};
 }
 for(const runPartWords of [1024,256,64])test(`private interval visitor crosses ${4096/runPartWords} dense-row containers with only table and one body live`,async t=>{
- const nativeLayout=layout(2048,runPartWords),f=await trustedFixture(t,{nativeLayout}),{state}=f.api.qualifyCheckpoint({reader:f.reader});
+ const nativeLayout=layout(2048,runPartWords),f=await trustedFixture(t,{nativeLayout}),{state}=(await f.api.qualifyCheckpoint({reader:f.reader}));
  const trace=scratchTrace(),stream=f.reader.stream.bind(f.reader),reads=[];
  f.reader.stream=function(name,options){reads.push(name);return stream(name,options);};
  try{
@@ -36,7 +36,7 @@ for(const runPartWords of [1024,256,64])test(`private interval visitor crosses $
  }finally{trace.restore();f.api.releaseCheckpoint(state);}
 });
 test('private interval visitor closes both stores on early return throw or corrupt later container',async t=>{
- const f=await trustedFixture(t,{nativeLayout:layout()}),{state}=f.api.qualifyCheckpoint({reader:f.reader}),trace=scratchTrace();
+ const f=await trustedFixture(t,{nativeLayout:layout()}),{state}=(await f.api.qualifyCheckpoint({reader:f.reader})),trace=scratchTrace();
  const stream=f.reader.stream.bind(f.reader);
  try{
   await assert.rejects(f.api.visitNativeIntervals({state,rows:[0],visit:async ({runs})=>{for await(const run of runs){assert.ok(run);break;}}}),/omitted complete row/);assert.equal(trace.live.size,0);
@@ -50,6 +50,6 @@ test('native layout seed snapshots caller words and separates distinct partition
  const nativeLayout=layout(16,8),pending=trustedFixture(t,{nativeLayout});nativeLayout.runs[0]=0;nativeLayout.rows[1]=0;
  const first=await pending,second=await trustedFixture(t,{nativeLayout:layout(16,8)}),third=await trustedFixture(t,{nativeLayout:layout(16,16)});
  assert.deepEqual(first.manifest,second.manifest);assert.notDeepEqual(first.manifest.parts,third.manifest.parts);
- const {state}=first.api.qualifyCheckpoint({reader:first.reader});let count=0;
+ const {state}=(await first.api.qualifyCheckpoint({reader:first.reader}));let count=0;
  try{await first.api.visitNativeIntervals({state,rows:[0],visit:async ({runs})=>{for await(const run of runs){assert.equal(run[0],count*2);count++;}}});assert.equal(count,16);}finally{first.api.releaseCheckpoint(state);}
 });

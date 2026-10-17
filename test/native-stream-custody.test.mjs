@@ -65,3 +65,27 @@ test('early logical-stream return cancels the physical reader without whole cust
   // no API here marks the unconsumed logical member as authenticated or returns a verified word store.
   assert.ok([...r.inventory.values()].every(p=>p.whole_body_consumed!==true||p.sha256));
 });
+
+test('logical cancellation joins delayed physical cleanup and preserves consumer errors',async()=>{
+  const f=fixture();
+  for(const throws of [false,true]){
+    const r=f.reader(),original=r.stream.bind(r);let active=0,closed=0;
+    r.stream=async function*(...args){
+      active++;
+      try{for await(const chunk of original(...args)){yield chunk;await new Promise(resolve=>setTimeout(resolve,15));}}
+      finally{await new Promise(resolve=>setTimeout(resolve,15));active--;closed++;}
+    };
+    const image=new NativeAssetImage(r,f.manifest,'native/manifest.json'),sentinel=Error('consumer cancellation sentinel');
+    const consume=async()=>{for await(const chunk of image.logicalStream('native/part0.gz',f.files[0])){assert.ok(chunk.length);if(throws)throw sentinel;break;}};
+    if(throws)await assert.rejects(consume(),error=>error===sentinel);else await consume();
+    assert.equal(active,0,'no physical producer may survive logical return');assert.equal(closed,1);
+  }
+});
+
+test('logical stream propagates a late physical-source failure after decoded bytes',async()=>{
+  const f=fixture(),r=f.reader(),original=r.stream.bind(r),sentinel=Error('late physical failure');let closed=false;
+  r.stream=async function*(...args){try{yield* original(...args);throw sentinel;}finally{closed=true;}};
+  const image=new NativeAssetImage(r,f.manifest,'native/manifest.json');
+  await assert.rejects(collect(image.logicalStream('native/part0.gz',f.files[0])),error=>error===sentinel);
+  assert.equal(closed,true);
+});

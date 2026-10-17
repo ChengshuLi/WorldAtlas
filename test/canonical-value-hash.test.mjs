@@ -67,3 +67,11 @@ test('bounded hash digests a large shared graph under the ordinary fixed child h
  assert.equal(result.status,0,result.stderr);assert.equal(result.signal,null);
  assert.equal(JSON.parse(result.stdout).digest,'4cf767734719dc5519eba8ce6de316f4f0a860882b21b240ff305045f3e3ec0c');
 });
+
+test('numeric triple fast path preserves JSON numeric formatting and generic refusals',()=>{
+ for(const triple of [[-0,0,1],[1e-7,1e21,5e-324],[Number.MAX_VALUE,-Number.MAX_VALUE,1.0000000000000002],[null,1,2],[,1,2],[1,,2],[1,2,]])equal(triple);
+ for(const bad of [[NaN,1,2],[1,Infinity,2],[1,2,undefined]]){
+  assert.throws(()=>valueBytes(bad),/Nonfinite\/missing\/non-JSON/);
+  assert.throws(()=>valueSha(bad),/Nonfinite\/missing\/non-JSON/);
+ }
+});
