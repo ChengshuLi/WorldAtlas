@@ -1,0 +1,85 @@
+{
+  "kind": "metadata-and-whole-geometry-inspection-only",
+  "shapely": "2.1.2",
+  "geos": "3.13.1",
+  "products": [
+    {
+      "product": "gb-DZA-ADM1.geojson",
+      "complete_features": 48,
+      "unique_shape_ids": 48,
+      "crs": {
+        "type": "name",
+        "properties": {
+          "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+      },
+      "invalid": [],
+      "empty": [],
+      "geometry_types": {
+        "Polygon": 48
+      },
+      "first_properties": [
+        {
+          "shapeName": "Tiaret",
+          "shapeISO": "DZ-14",
+          "shapeID": "43142294B97480278452280",
+          "shapeGroup": "DZA",
+          "shapeType": "ADM1"
+        }
+      ]
+    },
+    {
+      "product": "gb-TUN-ADM1.geojson",
+      "complete_features": 24,
+      "unique_shape_ids": 24,
+      "crs": {
+        "type": "name",
+        "properties": {
+          "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+      },
+      "invalid": [],
+      "empty": [],
+      "geometry_types": {
+        "Polygon": 19,
+        "MultiPolygon": 5
+      },
+      "first_properties": [
+        {
+          "shapeName": "Tunis",
+          "shapeISO": "TN-11",
+          "shapeID": "13205935B88806172084765",
+          "shapeGroup": "TUN",
+          "shapeType": "ADM1"
+        }
+      ]
+    },
+    {
+      "product": "gb-TUN-ADM2.geojson",
+      "complete_features": 264,
+      "unique_shape_ids": 264,
+      "crs": {
+        "type": "name",
+        "properties": {
+          "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+      },
+      "invalid": [],
+      "empty": [],
+      "geometry_types": {
+        "Polygon": 260,
+        "MultiPolygon": 4
+      },
+      "first_properties": [
+        {
+          "shapeName": "القصور",
+          "shapeISO": "",
+          "shapeID": "11933810B37215570160824",
+          "shapeGroup": "TUN",
+          "shapeType": "ADM2"
+        }
+      ],
+      "all_consumed_atom_membership": 88
+    }
+  ]
+}
