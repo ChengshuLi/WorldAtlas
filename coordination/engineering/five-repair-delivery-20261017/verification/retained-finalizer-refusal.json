@@ -1,0 +1,10 @@
+{
+  "kind": "retained-finalizer-refusal",
+  "candidate_commit": "fb7471f76d24fa7b75cabdf9d858c8e01d1a5e9b",
+  "accepted_implementation_commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+  "command": "env -u NODE_OPTIONS -u NODE_PATH node scripts/prepare-delivery-handoff.mjs finalize coordination/engineering/five-repair-delivery-20261017/config/finalize.json coordination/engineering/five-repair-delivery-20261017/finalized-001",
+  "exit_code": 1,
+  "stderr": "Missing accepted source membership roles\n",
+  "output_created": false,
+  "disposition": "Wait for separately accepted UK source-member helper in engineering PR2361, then retry stock finalizer. No substitute or science rewrite."
+}

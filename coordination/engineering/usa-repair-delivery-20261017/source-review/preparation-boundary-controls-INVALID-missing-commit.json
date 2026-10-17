@@ -1,0 +1,125 @@
+{
+  "kind": "executed-USA-preparation-boundary-controls",
+  "method_commit": "ec67b50c5b7c86458e4173ef2ec7a5d1003f4930",
+  "cases": 15,
+  "results": [
+    {
+      "method": "prepare-source-stage.py",
+      "case": "occupied-output",
+      "returncode": 1,
+      "original_inventory_unchanged": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/usa-repair-delivery-20261017/probes/prepare-source-stage.py\", line 15, in <module>\n    assert W.is_dir() and O.parent.is_dir() and not O.exists() and all(not p.is_symlink()for root in(W,O)for p in(root,*root.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "prepare-source-stage.py",
+      "case": "dangling-output-symlink",
+      "returncode": 1,
+      "link_and_missing_target_unchanged": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/usa-repair-delivery-20261017/probes/prepare-source-stage.py\", line 15, in <module>\n    assert W.is_dir() and O.parent.is_dir() and not O.exists() and all(not p.is_symlink()for root in(W,O)for p in(root,*root.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "prepare-source-stage.py",
+      "case": "executed-method-drift",
+      "returncode": 1,
+      "output_absent": true,
+      "original_method_sha256": "21706e0270bc6a2de176155ccde87dcdcf4e7c7147368357806cffa3cbfd5414",
+      "altered_method_sha256": "745272b510a4d0099512057679eeb2d32324763e0e0e757596dbc5a02d0046fd",
+      "stderr": "fatal: not a tree object\nTraceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/usa-repair-delivery-20261017/source-review/usa-preparation-controls-9j5qgkbk/prepare-source-stage.py\", line 40, in <module>\n    method=read(P+'/probes/prepare-source-stage.py',C);assert sha(method)==sha(pathlib.Path(__file__).read_bytes())\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/usa-repair-delivery-20261017/source-review/usa-preparation-controls-9j5qgkbk/prepare-source-stage.py\", line 25, in read\n    row=git('ls-tree','-z',h,'--',p).rstrip(b'\\0');meta,name=row.split(b'\\t');mode,kind,oid=meta.decode().split();assert mode=='100644'and kind=='blob'and name.decode()==p\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/usa-repair-delivery-20261017/source-review/usa-preparation-controls-9j5qgkbk/prepare-source-stage.py\", line 21, in git\n    def git(*args):return subprocess.check_output(['git','-c','protocol.allow=never','-C',str(W),*args],env=env,timeout=30)\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py\", line 466, in check_output\n    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py\", line 571, in run\n    raise CalledProcessError(retcode, process.args,\nsubprocess.CalledProcessError: Command '['git', '-c', 'protocol.allow=never', '-C', '/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work', 'ls-tree', '-z', 'ec67b50c5b7c86458e4173ef2ec7a5d1003f4930', '--', 'coordination/engineering/usa-repair-delivery-20261017/probes/prepare-source-stage.py']' returned non-zero exit status 128.\n"
+    },
+    {
+      "method": "prepare-native-config.py",
+      "case": "occupied-output",
+      "returncode": 1,
+      "original_inventory_unchanged": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/usa-repair-delivery-20261017/probes/prepare-native-config.py\", line 9, in <module>\n    assert len(C)==40 and all(c in '0123456789abcdef'for c in C)and O.parent.is_dir()and not O.exists()and all(not p.is_symlink()for root in(W,O)for p in(root,*root.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "prepare-native-config.py",
+      "case": "dangling-output-symlink",
+      "returncode": 1,
+      "link_and_missing_target_unchanged": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/usa-repair-delivery-20261017/probes/prepare-native-config.py\", line 9, in <module>\n    assert len(C)==40 and all(c in '0123456789abcdef'for c in C)and O.parent.is_dir()and not O.exists()and all(not p.is_symlink()for root in(W,O)for p in(root,*root.parents))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "prepare-native-config.py",
+      "case": "executed-method-drift",
+      "returncode": 1,
+      "output_absent": true,
+      "original_method_sha256": "99d2c41603a1f0ea591aa2c1553df7d2a94a5f9b457fd4ff9c4ebcf9fccb52b0",
+      "altered_method_sha256": "a3bb8ece30f402115065bd720959d890877fd3d0144866fb19ad4694732dc638",
+      "stderr": "fatal: not a tree object\nTraceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/usa-repair-delivery-20261017/source-review/usa-preparation-controls-9j5qgkbk/prepare-native-config.py\", line 27, in <module>\n    assert sha(read(P+'/probes/prepare-native-config.py'))==sha(pathlib.Path(__file__).read_bytes())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/usa-repair-delivery-20261017/source-review/usa-preparation-controls-9j5qgkbk/prepare-native-config.py\", line 16, in read\n    row=git('ls-tree','-z',c,'--',p).rstrip(b'\\0');meta,name=row.split(b'\\t');mode,kind,oid=meta.decode().split();assert mode=='100644'and kind=='blob'and name.decode()==p\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/usa-repair-delivery-20261017/source-review/usa-preparation-controls-9j5qgkbk/prepare-native-config.py\", line 12, in git\n    def git(*args):return subprocess.check_output(['git','-c','protocol.allow=never','-C',str(W),*args],env=env,timeout=30)\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py\", line 466, in check_output\n    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py\", line 571, in run\n    raise CalledProcessError(retcode, process.args,\nsubprocess.CalledProcessError: Command '['git', '-c', 'protocol.allow=never', '-C', '/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work', 'ls-tree', '-z', 'ec67b50c5b7c86458e4173ef2ec7a5d1003f4930', '--', 'coordination/engineering/usa-repair-delivery-20261017/probes/prepare-native-config.py']' returned non-zero exit status 128.\n"
+    },
+    {
+      "method": "hold-unsupported-physical.py",
+      "case": "occupied-output",
+      "returncode": 1,
+      "original_inventory_unchanged": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/usa-repair-delivery-20261017/probes/hold-unsupported-physical.py\", line 8, in <module>\n    assert O.parent.is_dir()and not O.exists()and all(not p.is_symlink()for p in(O,*O.parents));pins=[]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "hold-unsupported-physical.py",
+      "case": "dangling-output-symlink",
+      "returncode": 1,
+      "link_and_missing_target_unchanged": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/usa-repair-delivery-20261017/probes/hold-unsupported-physical.py\", line 8, in <module>\n    assert O.parent.is_dir()and not O.exists()and all(not p.is_symlink()for p in(O,*O.parents));pins=[]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "hold-unsupported-physical.py",
+      "case": "executed-method-drift",
+      "returncode": 1,
+      "output_absent": true,
+      "original_method_sha256": "559ab283e239b6c1c0053a05d752878a8fd58facf7d9529386b24213b753b81e",
+      "altered_method_sha256": "da9f04c053c98b7203023fa105b4b7ba226167e657e66c16c2fa230ce5e49af5",
+      "stderr": "fatal: path 'coordination/engineering/usa-repair-delivery-20261017/probes/hold-unsupported-physical.py' exists on disk, but not in 'ec67b50c5b7c86458e4173ef2ec7a5d1003f4930'\nTraceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/usa-repair-delivery-20261017/source-review/usa-preparation-controls-9j5qgkbk/hold-unsupported-physical.py\", line 12, in <module>\n    assert read(P+'/probes/hold-unsupported-physical.py')==pathlib.Path(__file__).read_bytes()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/usa-repair-delivery-20261017/source-review/usa-preparation-controls-9j5qgkbk/hold-unsupported-physical.py\", line 10, in read\n    b=subprocess.check_output(['git','-c','protocol.allow=never','-C',str(W),'show',C+':'+p],env={**os.environ,'GIT_NO_LAZY_FETCH':'1'},timeout=30);pins.append({'commit':C,'path':p,'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()});return b\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py\", line 466, in check_output\n    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py\", line 571, in run\n    raise CalledProcessError(retcode, process.args,\nsubprocess.CalledProcessError: Command '['git', '-c', 'protocol.allow=never', '-C', '/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work', 'show', 'ec67b50c5b7c86458e4173ef2ec7a5d1003f4930:coordination/engineering/usa-repair-delivery-20261017/probes/hold-unsupported-physical.py']' returned non-zero exit status 128.\n"
+    },
+    {
+      "method": "prepare-qualified-scope.py",
+      "case": "occupied-output",
+      "returncode": 1,
+      "original_inventory_unchanged": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/usa-repair-delivery-20261017/probes/prepare-qualified-scope.py\", line 7, in <module>\n    assert O.parent.is_dir()and not O.exists()and all(not p.is_symlink()for p in(O,*O.parents));pins=[]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "prepare-qualified-scope.py",
+      "case": "dangling-output-symlink",
+      "returncode": 1,
+      "link_and_missing_target_unchanged": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/usa-repair-delivery-20261017/probes/prepare-qualified-scope.py\", line 7, in <module>\n    assert O.parent.is_dir()and not O.exists()and all(not p.is_symlink()for p in(O,*O.parents));pins=[]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "prepare-qualified-scope.py",
+      "case": "executed-method-drift",
+      "returncode": 1,
+      "output_absent": true,
+      "original_method_sha256": "39e610dbf3021d56c6ecb2e0306b632e7a213e3073c8985d435eed2a5fa7766e",
+      "altered_method_sha256": "8c42074878a39672a5419c2e8eeaf72b6634b51ab683cd029cbe4ceebbddf823",
+      "stderr": "fatal: path 'coordination/engineering/usa-repair-delivery-20261017/probes/prepare-qualified-scope.py' exists on disk, but not in 'ec67b50c5b7c86458e4173ef2ec7a5d1003f4930'\nTraceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/usa-repair-delivery-20261017/source-review/usa-preparation-controls-9j5qgkbk/prepare-qualified-scope.py\", line 12, in <module>\n    assert raw(P+'/probes/prepare-qualified-scope.py')==pathlib.Path(__file__).read_bytes()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/usa-repair-delivery-20261017/source-review/usa-preparation-controls-9j5qgkbk/prepare-qualified-scope.py\", line 9, in raw\n    b=subprocess.check_output(['git','-c','protocol.allow=never','-C',str(W),'show',C+':'+p],env={**os.environ,'GIT_NO_LAZY_FETCH':'1'},timeout=30);pins.append({'commit':C,'path':p,'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()});return b\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py\", line 466, in check_output\n    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py\", line 571, in run\n    raise CalledProcessError(retcode, process.args,\nsubprocess.CalledProcessError: Command '['git', '-c', 'protocol.allow=never', '-C', '/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work', 'show', 'ec67b50c5b7c86458e4173ef2ec7a5d1003f4930:coordination/engineering/usa-repair-delivery-20261017/probes/prepare-qualified-scope.py']' returned non-zero exit status 128.\n"
+    },
+    {
+      "method": "reconcile-authority.py",
+      "case": "occupied-output",
+      "returncode": 1,
+      "original_inventory_unchanged": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/usa-repair-delivery-20261017/probes/reconcile-authority.py\", line 8, in <module>\n    assert O.parent.is_dir()and not O.exists()and all(not p.is_symlink()for p in(O,*O.parents));inputs=[]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "reconcile-authority.py",
+      "case": "dangling-output-symlink",
+      "returncode": 1,
+      "link_and_missing_target_unchanged": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/usa-repair-delivery-20261017/probes/reconcile-authority.py\", line 8, in <module>\n    assert O.parent.is_dir()and not O.exists()and all(not p.is_symlink()for p in(O,*O.parents));inputs=[]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "method": "reconcile-authority.py",
+      "case": "executed-method-drift",
+      "returncode": 1,
+      "output_absent": true,
+      "original_method_sha256": "0a9129378097ce09fd8e0e0e1afa9090cbc0dcb8966860bc92336feda3305e60",
+      "altered_method_sha256": "6d3b1a5973f871a66b00988a13d8f0fc8f20e664c87c9d8149d2daaad795afa9",
+      "stderr": "fatal: not a tree object\nTraceback (most recent call last):\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/usa-repair-delivery-20261017/source-review/usa-preparation-controls-9j5qgkbk/reconcile-authority.py\", line 23, in <module>\n    assert pin(P+'/probes/reconcile-authority.py')[1]==pathlib.Path(__file__).read_bytes()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work/coordination/engineering/usa-repair-delivery-20261017/source-review/usa-preparation-controls-9j5qgkbk/reconcile-authority.py\", line 10, in pin\n    row=subprocess.check_output(['git','-c','protocol.allow=never','-C',str(W),'ls-tree','-z',c,'--',p],env={**os.environ,'GIT_NO_LAZY_FETCH':'1'},timeout=30).rstrip(b'\\0');meta,name=row.split(b'\\t');mode,kind,oid=meta.decode().split();assert mode=='100644'and kind=='blob'and name.decode()==p\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py\", line 466, in check_output\n    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py\", line 571, in run\n    raise CalledProcessError(retcode, process.args,\nsubprocess.CalledProcessError: Command '['git', '-c', 'protocol.allow=never', '-C', '/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/1cc2515f6bbbab083d8e4b01386d50f3c1f8b7c106f5a62143e0c65c64acb7cb/work', 'ls-tree', '-z', 'ec67b50c5b7c86458e4173ef2ec7a5d1003f4930', '--', 'coordination/engineering/usa-repair-delivery-20261017/probes/reconcile-authority.py']' returned non-zero exit status 128.\n"
+    }
+  ],
+  "limits": [
+    "These controls exercise fresh-output and immutable executed-method boundaries. They do not establish scientific source suitability, physical support or current selected delivery."
+  ]
+}

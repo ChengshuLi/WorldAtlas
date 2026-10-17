@@ -1,0 +1,354 @@
+{
+  "version": 1,
+  "selector": {
+    "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+    "path": "data/ownership-selection.json",
+    "mode": "100644",
+    "git_blob_oid": "1c65c4017cfe19f49c176ecb7cd2eed5fedb0d74",
+    "bytes": 1850,
+    "sha256": "73cd741bc51a43faeda36cf8e034f3c49caf45ca7f7c60e042569551f4bb2716"
+  },
+  "effective_release_id": "geography:five-reviewed-supported-repairs-20261017",
+  "authorities": [
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/russia-repair-delivery-20261017/native-authority-001/original-rule-preimage.json",
+        "commit": "d3c74d563932b99deb695c5fff80a6e4dfb015a5",
+        "git_blob_oid": "35d6fdb9b2e2bfdc75f294089c37b0b78d148d6c",
+        "mode": "100644",
+        "bytes": 756,
+        "sha256": "2bf784e11562edf246bfdc6046c5216abe33ecff8ca8f264fc3872af6da70cb1"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/russia-repair-delivery-20261017/native-authority-001/authority-binding.json",
+        "commit": "d3c74d563932b99deb695c5fff80a6e4dfb015a5",
+        "git_blob_oid": "facf8cce6df16ae3f031942148e1c75dc3eb21d5",
+        "mode": "100644",
+        "bytes": 759,
+        "sha256": "a762e7f989ebd3ad44ca2bd9a6dd2c2acbffb6a53a7e3bd6d73679a8f0ff9e55"
+      },
+      "ledger": {
+        "path": "coordination/engineering/russia-repair-delivery-20261017/native-authority-001/constructor-result.json",
+        "commit": "d3c74d563932b99deb695c5fff80a6e4dfb015a5",
+        "git_blob_oid": "30dffd58e7acc8c585b3f5a66203f2aa29852518",
+        "mode": "100644",
+        "bytes": 12002975,
+        "sha256": "6fd958d1196502f76732e24fec8014504ce7b63602cce1ede1607e4605466fdd"
+      },
+      "native_patch": {
+        "path": "coordination/engineering/russia-repair-delivery-20261017/native-partition-preaccept-001/supported-native-patch.json",
+        "commit": "44b0b0d71e853ad0bebca4fffdd26b74c0a92e0c",
+        "git_blob_oid": "4c4585c02332a5741d0c41e3f4c489cebfdfd3c8",
+        "mode": "100644",
+        "bytes": 8813020,
+        "sha256": "0e5230943726aacc21e19788f211c4933caa910e6244b9a280ac49b394f21e9c"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/angola-repair-delivery-20261017/native-authority-002/original-rule-preimage.json",
+        "commit": "49e6aa8a90a15f692c4309ac2de2b62357bf41f6",
+        "mode": "100644",
+        "git_blob_oid": "8902b6420f07762ab28f58de7f803a9bb1253e00",
+        "bytes": 729,
+        "sha256": "7513a515d6473ccd4b586ff110765671051ddf184926987d4a05d33ef8e8e2b9"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/angola-repair-delivery-20261017/native-authority-002/authority-binding.json",
+        "commit": "49e6aa8a90a15f692c4309ac2de2b62357bf41f6",
+        "mode": "100644",
+        "git_blob_oid": "b2269d20c29351ef8f4e63068d83ca8717374980",
+        "bytes": 732,
+        "sha256": "160c5eacdf9bd68e8017a152e48dc5920b86ecf7bb83996392081124a3377f9e"
+      },
+      "ledger": {
+        "path": "coordination/engineering/angola-repair-delivery-20261017/native-authority-002/constructor-result.json",
+        "commit": "49e6aa8a90a15f692c4309ac2de2b62357bf41f6",
+        "mode": "100644",
+        "git_blob_oid": "6f1f24899a1531f1fe7c879d0f9423c6d54d3443",
+        "bytes": 724912,
+        "sha256": "e994777cfa44ceeadde0182da75e7aba568fd682eff31029184a7e402b24c3f9"
+      },
+      "native_patch": {
+        "bytes": 341436,
+        "commit": "a5e0e64e0b4c843f3821de13b46d7ad85cf3c265",
+        "git_blob_oid": "c7d18dd82b8e854df151786733646418971b4f8d",
+        "mode": "100644",
+        "path": "coordination/engineering/angola-repair-delivery-20261017/conservative-002/native-patch.json",
+        "sha256": "d671b222b2c6df00dcc1d8342ea756efab3f1ac476afdf7b7c41f9c540334973"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/japan-native-repair-20261017/native-authority-001/original-rule-preimage.json",
+        "commit": "f6d7786d67a8b0ce76a525f63a055332f2e024b1",
+        "mode": "100644",
+        "git_blob_oid": "505f5c3211b9f384456f775555afab60e05fc3af",
+        "bytes": 720,
+        "sha256": "cf8491fa8510ad6acdbd6afd3eb1e62ec4d099446a1fb4bb84e4e763c517cf5a"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/japan-native-repair-20261017/native-authority-001/authority-binding.json",
+        "commit": "f6d7786d67a8b0ce76a525f63a055332f2e024b1",
+        "mode": "100644",
+        "git_blob_oid": "306d2d99b372210ad70a77fbba025ffac54dd724",
+        "bytes": 723,
+        "sha256": "0d6c6a76ddcc16acee461a77c89c58249ee8a7551607ac6500d5e3f30b0f12f4"
+      },
+      "ledger": {
+        "path": "coordination/engineering/japan-native-repair-20261017/native-authority-001/constructor-result.json",
+        "commit": "f6d7786d67a8b0ce76a525f63a055332f2e024b1",
+        "mode": "100644",
+        "git_blob_oid": "0c17a75275aa350f7d2fae869505ea5b47bbc225",
+        "bytes": 1925785,
+        "sha256": "fbce3abe072cc26cd9996fad727c17e3b6ea0a89997361daddae6ae50e2a41eb"
+      },
+      "native_patch": {
+        "bytes": 955711,
+        "commit": "def4f95468aec4ede25beba6037ea7207e458622",
+        "git_blob_oid": "765d43f578b121d6ff229da555fbb0d4951d6f45",
+        "mode": "100644",
+        "path": "coordination/engineering/japan-native-repair-20261017/source-stage/native-patch.json",
+        "sha256": "620355e0762d2494462846270b287f37d00dc0f961f5747de408304ec8ba9a92"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-authority-001/original-rule-preimage.json",
+        "commit": "3a83e997a2943644eddc210355d9785e4d91bf12",
+        "mode": "100644",
+        "git_blob_oid": "9a3c90ba131f1ecf39ed09f87b39cbcb83efd100",
+        "bytes": 764,
+        "sha256": "923b4a2725ac73c918bfc4e926d25dcfe1608bfdc299813e658e8f9154ac0443"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-authority-001/authority-binding.json",
+        "commit": "3a83e997a2943644eddc210355d9785e4d91bf12",
+        "mode": "100644",
+        "git_blob_oid": "a7153e72dc6cd15c39a64496fa63b08f64e02910",
+        "bytes": 767,
+        "sha256": "db175d27d74458b5e5f8dd90c7fd4dd4cc458aa04fc374d06adcbd62114a85fe"
+      },
+      "ledger": {
+        "path": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-authority-001/constructor-result.json",
+        "commit": "3a83e997a2943644eddc210355d9785e4d91bf12",
+        "mode": "100644",
+        "git_blob_oid": "7526fa6989fa457bcb9ce952a4f7d246fb000023",
+        "bytes": 1034431,
+        "sha256": "66d5e7c5754b269bd69028b63f934ba5a5f7e205aee5308d9f9bf12f9a9be4b1"
+      },
+      "native_patch": {
+        "bytes": 446985,
+        "commit": "71be62f397b920a07bad4369347bd8591ccaab48",
+        "git_blob_oid": "b01b6acd29a2463cb5351a3b64b0d798ea142696",
+        "mode": "100644",
+        "path": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-operands-001/batch-001/requested-native-patch.json",
+        "sha256": "448b483712a14f37ecf7801365ee2afb14bc481f86d7195949cfcea97ac9a2c4"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-authority-002/original-rule-preimage.json",
+        "commit": "3a83e997a2943644eddc210355d9785e4d91bf12",
+        "mode": "100644",
+        "git_blob_oid": "109133c3bbd5292d1e3ab42701d21bd168e77517",
+        "bytes": 763,
+        "sha256": "be34b66f527f1bd831d9029496f33c7ce1e026eeb70b814eefa43e4b306b059f"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-authority-002/authority-binding.json",
+        "commit": "3a83e997a2943644eddc210355d9785e4d91bf12",
+        "mode": "100644",
+        "git_blob_oid": "d8a46b78b173a3b180d5e93cec10f71196bb39cb",
+        "bytes": 766,
+        "sha256": "7f795f3b59e1cc946769b8a7d36004b6160d673ede94669d2cb30dcf5611dc40"
+      },
+      "ledger": {
+        "path": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-authority-002/constructor-result.json",
+        "commit": "3a83e997a2943644eddc210355d9785e4d91bf12",
+        "mode": "100644",
+        "git_blob_oid": "f099c5b7641a793d45f22dc2ee097e8f69269f10",
+        "bytes": 118751,
+        "sha256": "30f0e328bef4f4bf6a23c9bfe88547b52c6b57dc71685cf4a36c8a10ec5df732"
+      },
+      "native_patch": {
+        "bytes": 16175,
+        "commit": "71be62f397b920a07bad4369347bd8591ccaab48",
+        "git_blob_oid": "dc17307ac62d463148bc307de7886eb91db9b635",
+        "mode": "100644",
+        "path": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-operands-001/batch-002/requested-native-patch.json",
+        "sha256": "d514e7d3e42ec46b0d96c2c3fdaa76f2d9dbbf49906061a8d9d15b350d1a4df2"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-authority-003/original-rule-preimage.json",
+        "commit": "3a83e997a2943644eddc210355d9785e4d91bf12",
+        "mode": "100644",
+        "git_blob_oid": "d38f3b190d3c64d085918583e3924f7a279ddd29",
+        "bytes": 764,
+        "sha256": "546efb0a18dc4fd7863d802e5b5118bf4bbb41c1e6ac1de2d7d37d989ee7263d"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-authority-003/authority-binding.json",
+        "commit": "3a83e997a2943644eddc210355d9785e4d91bf12",
+        "mode": "100644",
+        "git_blob_oid": "4847e83d3adbddf346ed2c023bebcf6f2e544761",
+        "bytes": 767,
+        "sha256": "bb8c9b349fc4553cb68973aba3c29c859788cae1c40b528ceaf7ea8b2733c2a3"
+      },
+      "ledger": {
+        "path": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-authority-003/constructor-result.json",
+        "commit": "3a83e997a2943644eddc210355d9785e4d91bf12",
+        "mode": "100644",
+        "git_blob_oid": "65fd080299e16fecbc18a7b5eccbb10c341735ec",
+        "bytes": 555729,
+        "sha256": "327afb737547d9c0c4d825b8a498bde35c1ca298b8126188f87a742f99bcc35c"
+      },
+      "native_patch": {
+        "bytes": 150617,
+        "commit": "71be62f397b920a07bad4369347bd8591ccaab48",
+        "git_blob_oid": "ece8d44c3abf95b8c09f46a81e2f7b54aee96e3e",
+        "mode": "100644",
+        "path": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-operands-001/batch-003/requested-native-patch.json",
+        "sha256": "8ead8203f7d0b842d54e8883106cc71bc3f8a8aad40b05d8b84246ddff864c0e"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-authority-004/original-rule-preimage.json",
+        "commit": "3a83e997a2943644eddc210355d9785e4d91bf12",
+        "mode": "100644",
+        "git_blob_oid": "49c871e724c356f6b61b047cc8f29b5ac3b1532e",
+        "bytes": 764,
+        "sha256": "2515da59e5a023315dc84041c0943d170251b75fa47d967dec3e02f3d2989926"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-authority-004/authority-binding.json",
+        "commit": "3a83e997a2943644eddc210355d9785e4d91bf12",
+        "mode": "100644",
+        "git_blob_oid": "de1744bdfffeb6eb2832df2bb500af605713390b",
+        "bytes": 767,
+        "sha256": "d60855b3313e6624b26d7afa629fde25a42e565d1b15813a60e37e3372aeef35"
+      },
+      "ledger": {
+        "path": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-authority-004/constructor-result.json",
+        "commit": "3a83e997a2943644eddc210355d9785e4d91bf12",
+        "mode": "100644",
+        "git_blob_oid": "cedb2958cb2941df6bee022752c1f4bbb868dbe0",
+        "bytes": 596859,
+        "sha256": "246684e7788875a5cf7ae92916f70280c7e4ea57ea6723e290385806bf5f4ff8"
+      },
+      "native_patch": {
+        "bytes": 221050,
+        "commit": "71be62f397b920a07bad4369347bd8591ccaab48",
+        "git_blob_oid": "e5fa64c2e79394855224c92974911285d8c603cb",
+        "mode": "100644",
+        "path": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-operands-001/batch-004/requested-native-patch.json",
+        "sha256": "ae96cf080152531e23ae4e56730562a482bf06154e54bacebcabf32977c5196c"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-authority-005/original-rule-preimage.json",
+        "commit": "3a83e997a2943644eddc210355d9785e4d91bf12",
+        "mode": "100644",
+        "git_blob_oid": "1c9094951a3b88716430e416369e36028bed4afe",
+        "bytes": 764,
+        "sha256": "1306adfe636a43508f4a297296d1673cffbb62ec2b90e12c9e821d4af3870ed9"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-authority-005/authority-binding.json",
+        "commit": "3a83e997a2943644eddc210355d9785e4d91bf12",
+        "mode": "100644",
+        "git_blob_oid": "4f67cf103820a0bc94611f7d8daa1533c1900a90",
+        "bytes": 767,
+        "sha256": "6699075f0bad5bab45d2c24b5a645d07f7c95edfc0edb20aab449e5717895f20"
+      },
+      "ledger": {
+        "path": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-authority-005/constructor-result.json",
+        "commit": "3a83e997a2943644eddc210355d9785e4d91bf12",
+        "mode": "100644",
+        "git_blob_oid": "46dcbeb3e1a789a48cfda3febf881604a60adc37",
+        "bytes": 353671,
+        "sha256": "34a51ddede32fc2ede7ca518f7e963da9b12db40e64311efc52efa646c9028a9"
+      },
+      "native_patch": {
+        "bytes": 219919,
+        "commit": "71be62f397b920a07bad4369347bd8591ccaab48",
+        "git_blob_oid": "672e41657f31fe8a1aaf58588a1273c52e846c75",
+        "mode": "100644",
+        "path": "coordination/engineering/canada-repair-delivery-20261017/aafc-native-operands-001/batch-005/requested-native-patch.json",
+        "sha256": "7956afc2d8edc845ef903a155ba28f80abe3e1e71e691961a0d39502098f89f3"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/canada-repair-delivery-20261017/admin-native-authority-004/original-rule-preimage.json",
+        "commit": "3a83e997a2943644eddc210355d9785e4d91bf12",
+        "mode": "100644",
+        "git_blob_oid": "ce5a542d715145fc627dc46dd495815ef2443cba",
+        "bytes": 741,
+        "sha256": "505a9773099f011c2658feb2453f9fa34ab58d9e5cb6fe6c516d6688e9cd1e13"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/canada-repair-delivery-20261017/admin-native-authority-004/authority-binding.json",
+        "commit": "3a83e997a2943644eddc210355d9785e4d91bf12",
+        "mode": "100644",
+        "git_blob_oid": "4d611d13eb757ff726713d203829679683b5b5d0",
+        "bytes": 744,
+        "sha256": "fe2a0e4b30ebb907c84a7f1c0c15b33ed12cfa33ec8c735a5ecb7fc76ab1f090"
+      },
+      "ledger": {
+        "path": "coordination/engineering/canada-repair-delivery-20261017/admin-native-authority-004/constructor-result.json",
+        "commit": "3a83e997a2943644eddc210355d9785e4d91bf12",
+        "mode": "100644",
+        "git_blob_oid": "9a6cf31b698e5c19647192d14f8f3d7b7989a77f",
+        "bytes": 2584104,
+        "sha256": "c2fe0ab60fce8f8208d720eede91bf5d8c95b534ca554a3e924e36dd573a0ff6"
+      },
+      "native_patch": {
+        "bytes": 1690491,
+        "commit": "c92e1cda31850de63b43e78a3a26cfad8b3ea35f",
+        "git_blob_oid": "4a3ed47788aab1334b5f5b321674af05d6d0ca6f",
+        "mode": "100644",
+        "path": "coordination/engineering/canada-repair-delivery-20261017/admin-supported-native-patch-003.json",
+        "sha256": "0f16f47dee6531663142bce3975f53a05c09f6f2776f1e32c15eac8b4f109dbd"
+      }
+    },
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/uk-native-repair-20261017/native-authority-001/original-rule-preimage.json",
+        "commit": "bcb561dff7f6d550eb7b619c1af566ae08f8858a",
+        "mode": "100644",
+        "git_blob_oid": "78c17e54d76d92e7c3e421d4030fa042350c1c50",
+        "bytes": 739,
+        "sha256": "a5a7241048c7eb01d7cef9432ad0b090a668744fc7bd56d69de6c9768dd2e5aa"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/uk-native-repair-20261017/native-authority-001/authority-binding.json",
+        "commit": "bcb561dff7f6d550eb7b619c1af566ae08f8858a",
+        "mode": "100644",
+        "git_blob_oid": "c6c15c409c8e8eeb334fc143590a103750305937",
+        "bytes": 742,
+        "sha256": "d97542cc411f377ac559405947ca4ca1709eb5ea0cc18a7ca51daf651a7c3cf1"
+      },
+      "ledger": {
+        "path": "coordination/engineering/uk-native-repair-20261017/native-authority-001/constructor-result.json",
+        "commit": "bcb561dff7f6d550eb7b619c1af566ae08f8858a",
+        "mode": "100644",
+        "git_blob_oid": "10abf66ffa8c2d15f1aa6f4d7080b888fe7d0f3b",
+        "bytes": 765656,
+        "sha256": "af9b4b210d9591f405b3a1f2029efcf8740300e7feddcded54a005e68b2cf758"
+      },
+      "native_patch": {
+        "bytes": 513443,
+        "commit": "5504e27930d30f08e10b47f8131cce87e0a84a58",
+        "git_blob_oid": "4cba768fef2aa5b61b04e54d1b715bf311fc2859",
+        "mode": "100644",
+        "path": "coordination/engineering/uk-native-repair-20261017/qualified-native-inputs-001/native-patch.json",
+        "sha256": "ec346909af094856be3b67af190922ae81864cf6865fae2d9dbcf854ac884076"
+      }
+    }
+  ]
+}

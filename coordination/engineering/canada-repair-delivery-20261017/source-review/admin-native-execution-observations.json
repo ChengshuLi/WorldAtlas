@@ -1,0 +1,166 @@
+{
+  "kind": "retained-actual-administrative-native-preparation-stdout",
+  "accepted_execution_commit": "a9f6ccadcc1bdea6185fcaf5eac7ec00f8c4551a",
+  "observations": [
+    {
+      "phase": "native-diagnostic",
+      "command": [
+        "node",
+        "scripts/prepare-delivery-handoff.mjs",
+        "native-diagnostic",
+        "coordination/engineering/canada-repair-delivery-20261017/config/admin-native-diagnostic-003.json",
+        "coordination/engineering/canada-repair-delivery-20261017/admin-native-diagnostic-003"
+      ],
+      "stdout": {
+        "destination": "coordination/engineering/canada-repair-delivery-20261017/admin-native-diagnostic-003",
+        "resumed": false,
+        "binding": {
+          "phase": "native-diagnostic",
+          "config_sha256": "71e7a6cd0c8612b7db7109b1eb7b97c248d04af96e78e1b5025f2d946cf7f7cb"
+        },
+        "observation": {
+          "elapsed_seconds": 60.154138623,
+          "requested_cells": 293965,
+          "supported_cells": 293912,
+          "held_cells": 53,
+          "limits": [
+            "Original source/physical producers are not replayed.",
+            "Diagnostic screening produces no authority, current-owner-zero or selected-output acceptance."
+          ]
+        }
+      },
+      "stdout_sha256": "e9e5b0b793f9329b4f1a27832526a54af546a35e539da33ffcba8c1f794fa4d0",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "phase": "source-evidence",
+      "command": [
+        "node",
+        "scripts/prepare-delivery-handoff.mjs",
+        "source-evidence",
+        "coordination/engineering/canada-repair-delivery-20261017/config/admin-source-evidence-004.json",
+        "coordination/engineering/canada-repair-delivery-20261017/admin-native-inputs-004"
+      ],
+      "stdout": {
+        "destination": "coordination/engineering/canada-repair-delivery-20261017/admin-native-inputs-004",
+        "resumed": false,
+        "binding": {
+          "phase": "source-evidence",
+          "config_sha256": "50a893600ef82c4c731c1bd10276870038dede42a46306cafd65c4100c2fe41f"
+        }
+      },
+      "stdout_sha256": "586bbd92161526959d3a1e54aa2c21f16743d39f59220bf71a9e7d648dc8f009",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "phase": "native-authority",
+      "command": [
+        "node",
+        "scripts/prepare-delivery-handoff.mjs",
+        "native-authority",
+        "coordination/engineering/canada-repair-delivery-20261017/config/admin-native-authority-004.json",
+        "coordination/engineering/canada-repair-delivery-20261017/admin-native-authority-004"
+      ],
+      "stdout": {
+        "destination": "coordination/engineering/canada-repair-delivery-20261017/admin-native-authority-004",
+        "resumed": false,
+        "binding": {
+          "phase": "native-authority",
+          "config_sha256": "51b18de31fe1e5f1e03e54a9c3e9bd9bf8c00fdc5e68f9b9b6f3b726aff584ed"
+        },
+        "observation": {
+          "elapsed_seconds": 57.37149616600001,
+          "qualified_cells": 293912,
+          "limits": [
+            "Original source/physical producers are not replayed.",
+            "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+          ]
+        }
+      },
+      "stdout_sha256": "b09f32da4344f10a3b8f718c7bed96ebad9b035e3a1797614560546ffd7a0627",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "entrypoint_static_import_closure": [
+    {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs",
+      "commit": "a9f6ccadcc1bdea6185fcaf5eac7ec00f8c4551a",
+      "bytes": 2389,
+      "sha256": "b40c3ec6030662edafc656b24a2c3c7a081a59dde71ec4500a9eaa83aecc082b"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "commit": "a9f6ccadcc1bdea6185fcaf5eac7ec00f8c4551a",
+      "bytes": 216143,
+      "sha256": "efe5e6df96a36b3d5ac1fc293edd8f1eebbfe4b8d40c6d687cc3569ea9931b05"
+    },
+    {
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "commit": "a9f6ccadcc1bdea6185fcaf5eac7ec00f8c4551a",
+      "bytes": 91666,
+      "sha256": "2383adb76514c737e3e8b0ef48f24fced00f1e5c7e6b34f292273d1e34357e61"
+    },
+    {
+      "path": "scripts/delivery-handoff-advance.mjs",
+      "commit": "a9f6ccadcc1bdea6185fcaf5eac7ec00f8c4551a",
+      "bytes": 21490,
+      "sha256": "ffc72039bc753a4a8457e54cbba8cec91c610663b6053ec8f355bc9a676261ce"
+    },
+    {
+      "path": "scripts/evidence-quality.mjs",
+      "commit": "a9f6ccadcc1bdea6185fcaf5eac7ec00f8c4551a",
+      "bytes": 34050,
+      "sha256": "d9749a72d15a5f248cd222260213990a2075321476822668068bd2ef3a0964cd"
+    },
+    {
+      "path": "scripts/geography-prefetch.mjs",
+      "commit": "a9f6ccadcc1bdea6185fcaf5eac7ec00f8c4551a",
+      "bytes": 13104,
+      "sha256": "9be7623e6d9fdb3e4e7493615b44cab5f003912367efa5c85bb67556f070cb1a"
+    },
+    {
+      "path": "scripts/package-inputs.mjs",
+      "commit": "a9f6ccadcc1bdea6185fcaf5eac7ec00f8c4551a",
+      "bytes": 11974,
+      "sha256": "69bf385719df9cd86b4762b0769136d7d815f1b1e473bd3dee0fd79acb2ea454"
+    },
+    {
+      "path": "scripts/prepare-delivery-handoff.mjs",
+      "commit": "a9f6ccadcc1bdea6185fcaf5eac7ec00f8c4551a",
+      "bytes": 126474,
+      "sha256": "7597c7a84d45eff646e9056478fcd85ab1d665233ae3ac1278354bbd4b0b6f95"
+    },
+    {
+      "path": "scripts/selected-reference-metadata.mjs",
+      "commit": "a9f6ccadcc1bdea6185fcaf5eac7ec00f8c4551a",
+      "bytes": 10403,
+      "sha256": "369352d4b78a862fd79ea88bcc6420fbec9ea8d80348dd2d3b6a122dc5dd2a5d"
+    },
+    {
+      "path": "src/native-grid.js",
+      "commit": "a9f6ccadcc1bdea6185fcaf5eac7ec00f8c4551a",
+      "bytes": 47443,
+      "sha256": "fab520ead243d13efb9231fd8b15c567554274d343c3746dd5be06fb25ff20ee"
+    },
+    {
+      "path": "src/ownership-codec.js",
+      "commit": "a9f6ccadcc1bdea6185fcaf5eac7ec00f8c4551a",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+    },
+    {
+      "path": "src/reference-metadata.js",
+      "commit": "a9f6ccadcc1bdea6185fcaf5eac7ec00f8c4551a",
+      "bytes": 25758,
+      "sha256": "15130cb6bb9cd0cb32879de01ca13d8e8d96490cce6fc2640e5e406bcfc6cf02"
+    }
+  ],
+  "limits": [
+    "Actual captured stock-entry-point stdout and empty stderr observations; not a fabricated supervisor terminal.",
+    "The complete static import closure was checked against accepted a9f6ccad after these runs; this is a conservative loaded-code inventory, not a pre-use/post-use execution-monitor claim.",
+    "Native qualification does not establish current-owner-zero or selected-output acceptance. The rejected authority-003 attempt is separately retained."
+  ]
+}

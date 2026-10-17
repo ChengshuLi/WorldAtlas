@@ -1,0 +1,13 @@
+{
+  "kind": "delivery-file-mode-normalization",
+  "previous_reviewed_delivery": "165139979b232bc752b2518c050eb560805d5acd",
+  "original_reviewed_source": "5329b46001c4423a042f2ec3d0845d56a4b43756",
+  "path": "coordination/engineering/canada-repair-delivery-20261017/probes/reconcile-aafc-diagnostics.py",
+  "original_mode": "100755",
+  "delivery_mode": "100644",
+  "bytes": 7434,
+  "git_blob_oid": "f1252b17f443218a4d06fa736942ecc4e852589e",
+  "sha256": "2ad67e54c14106a511c32e7c6b9b4d9e2fd9098cd2a7863aa48090d3593206b0",
+  "reason": "Selected-data admission requires ordinary non-executable leaves. Original author confirmed explicit Python3 invocation is the intended supported reproduction; historical shell invocation is not retained. No direct-exec consumer or scientific executable-mode pin was found. Original manifest /outputs/177 pins bytes only.",
+  "scope": "Delivery-only mode normalization; source bytes, literal quartets, frozen source/composition proofs and reviewed ancestry remain unchanged. Earlier literal tree-preservation claims apply to their frozen candidates; this is the one disclosed final-tree mode exception."
+}
