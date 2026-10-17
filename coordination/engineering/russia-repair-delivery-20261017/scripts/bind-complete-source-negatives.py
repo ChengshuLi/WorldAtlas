@@ -4,7 +4,7 @@ All 122 originals are considered for all 334 targets. Only complete part-bbox
 disjointness can omit an operand. Never clip, choose a claimant, or change scope.
 """
 import collections,gzip,hashlib,json,os,pathlib,subprocess,sys
-W=pathlib.Path(sys.argv[1]);H=sys.argv[2];O=pathlib.Path(sys.argv[3]);P='coordination/engineering/russia-repair-delivery-20261017/'
+W=pathlib.Path(sys.argv[1]);H=subprocess.check_output(['git','-C',str(W),'rev-parse',sys.argv[2]+'^{commit}']).decode().strip();O=pathlib.Path(sys.argv[3]);P='coordination/engineering/russia-repair-delivery-20261017/'
 def raw(p,h=H):return subprocess.check_output(['git','-c','protocol.allow=never','-C',str(W),'show',h+':'+p])
 def get(p):return json.loads(raw(P+p))
 def sha(b):return hashlib.sha256(b).hexdigest()

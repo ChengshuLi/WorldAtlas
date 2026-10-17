@@ -10,7 +10,7 @@ This checkpoint is ready for source/physical review, not selected delivery. No R
 - Classes: 2,515,829 land and 51,138 inland-water.
 - Original accepted selector/source baseline: `9d564cf4083cb5499b00d6fb4ceb6fc724fdf01c`.
 - Original candidate patch: `23784430fdb0f24d36827d3069b3621cb3231b16:coordination/engineering/russia-repair-delivery-20261017/source-stage/native-patch.json`.
-- Complete-source negative evidence: `a8c114c8296:coordination/engineering/russia-repair-delivery-20261017/native-inputs-002/source-evidence.json` (full immutable commit is in `config/native-complete-negatives.json`).
+- Complete-source negative evidence: `a8c114c829646ac2191e21bbb9f4f15fec710787:coordination/engineering/russia-repair-delivery-20261017/native-inputs-002/source-evidence.json` (full immutable commit is in `config/native-complete-negatives.json`).
 - Complete original physical execution and fresh admission are under `physical-001/`; executed inner config matches the original receipt SHA-256 exactly, without rerunning scientific operations.
 
 ## Source questions to review
@@ -26,7 +26,7 @@ The full 52 Kazakhstan and 48 Mongolia original historical components/dispositio
 All scripts take a repository root and immutable input commit. Run with the existing retained Python environment containing Shapely 2.1.2 / GEOS 3.13.1 / NumPy 2.3.5. No network or new source acquisition is needed.
 
 - `scripts/verify-original-stage.py REPO PACKET_COMMIT`: byte-reproduces all 334 stage inputs and the complete 2,566,967-cell candidate patch; independently derives every foreign-source interval contact.
-- `scripts/bind-complete-source-negatives.py REPO c2cdef1279c OUTPUT_DIR`: repeats complete-original applicability and exact unchanged negative operands. The source-evidence config reproduced byte-for-byte; only the report's observed free-space scalar is time-dependent.
+- `scripts/bind-complete-source-negatives.py REPO c2cdef1279cba1526f5d65eb03ce134acd852866 OUTPUT_DIR`: repeats complete-original applicability and exact unchanged negative operands. The source-evidence config reproduced byte-for-byte; only the report's observed free-space scalar is time-dependent.
 - `scripts/check-historical-centres.py REPO a47428527bc7c59839ab27786179987725830a81 OUTPUT`: full original-roster corroboration of all 135 historical centre contacts.
 - After #2308 acceptance, plain Node (unset NODE_PATH and NODE_OPTIONS) runs `scripts/prepare-delivery-handoff.mjs native-diagnostic coordination/engineering/russia-repair-delivery-20261017/config/native-complete-negatives.json coordination/engineering/russia-repair-delivery-20261017/native-diagnostic-002`.
 

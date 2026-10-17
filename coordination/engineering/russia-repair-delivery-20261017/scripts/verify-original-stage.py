@@ -3,7 +3,7 @@ Usage: Python verify-original-stage.py REPO PACKET_COMMIT
 Read-only immutable Git inputs. No network, clipping, geometry repair or writes.
 """
 import collections,gzip,hashlib,json,pathlib,subprocess,sys
-W=pathlib.Path(sys.argv[1]);H=sys.argv[2];P='coordination/engineering/russia-repair-delivery-20261017/';BASE='9d564cf4083cb5499b00d6fb4ceb6fc724fdf01c';Q='coordination/engineering/global-current-cell-work-queue-20261014/'
+W=pathlib.Path(sys.argv[1]);H=subprocess.check_output(['git','-C',str(W),'rev-parse',sys.argv[2]+'^{commit}']).decode().strip();P='coordination/engineering/russia-repair-delivery-20261017/';BASE='9d564cf4083cb5499b00d6fb4ceb6fc724fdf01c';Q='coordination/engineering/global-current-cell-work-queue-20261014/'
 def raw(p,h=H):return subprocess.check_output(['git','-c','protocol.allow=never','-C',str(W),'show',h+':'+p])
 def data(p,h=H):return json.loads(raw(p,h))
 def whole(pin):

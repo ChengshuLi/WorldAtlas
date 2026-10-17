@@ -5,7 +5,7 @@ import collections,gzip,hashlib,json,pathlib,subprocess,sys
 import numpy as np
 import shapely
 from shapely.geometry import shape
-W=pathlib.Path(sys.argv[1]);H=sys.argv[2];OUT=pathlib.Path(sys.argv[3]);P='coordination/engineering/russia-repair-delivery-20261017/';BASE='9d564cf4083cb5499b00d6fb4ceb6fc724fdf01c';pins=[]
+W=pathlib.Path(sys.argv[1]);H=subprocess.check_output(['git','-C',str(W),'rev-parse',sys.argv[2]+'^{commit}']).decode().strip();OUT=pathlib.Path(sys.argv[3]);P='coordination/engineering/russia-repair-delivery-20261017/';BASE='9d564cf4083cb5499b00d6fb4ceb6fc724fdf01c';pins=[]
 def raw(path,commit=H,expected=None):
  b=subprocess.check_output(['git','-C',str(W),'show',commit+':'+path]);h=hashlib.sha256(b).hexdigest()
  if expected:assert len(b)==expected['bytes'] and h==expected['sha256']
