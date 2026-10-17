@@ -1,0 +1,92 @@
+[
+  {
+    "id": "gb:RUS:ADM2:50074027B2401368915177",
+    "name": "Providensky urban district",
+    "candidate_cells": 7178,
+    "issue_reasons": [],
+    "nonzero_queries": [
+      {
+        "source_id": 0,
+        "periodic_offset": -360,
+        "source_covers_candidate": false,
+        "candidate_covers_source": false,
+        "intersects": true,
+        "disjoint": false,
+        "status": "checked",
+        "witness": "complete-operation-pointset"
+      }
+    ],
+    "all_query_offsets": {
+      "-360": 1,
+      "0": 21
+    }
+  },
+  {
+    "id": "gb:RUS:ADM2:50074027B3022028163112",
+    "name": "Chukotsky District",
+    "candidate_cells": 17219,
+    "issue_reasons": [
+      "contradictory_land_water_support"
+    ],
+    "nonzero_queries": [
+      {
+        "source_id": 0,
+        "periodic_offset": -360,
+        "source_covers_candidate": false,
+        "candidate_covers_source": false,
+        "intersects": true,
+        "disjoint": false,
+        "status": "checked",
+        "witness": "complete-operation-pointset"
+      }
+    ],
+    "all_query_offsets": {
+      "-360": 1,
+      "0": 20
+    }
+  },
+  {
+    "id": "gb:RUS:ADM2:50074027B76144209526439",
+    "name": "Iultinsky District\u200e",
+    "candidate_cells": 34246,
+    "issue_reasons": [
+      "contradictory_land_water_support"
+    ],
+    "nonzero_queries": [
+      {
+        "source_id": 0,
+        "periodic_offset": -360,
+        "source_covers_candidate": false,
+        "candidate_covers_source": false,
+        "intersects": true,
+        "disjoint": false,
+        "status": "checked",
+        "witness": "complete-operation-pointset"
+      },
+      {
+        "source_id": 97,
+        "periodic_offset": -360,
+        "source_covers_candidate": false,
+        "candidate_covers_source": false,
+        "intersects": true,
+        "disjoint": false,
+        "status": "checked",
+        "witness": "complete-operation-pointset"
+      },
+      {
+        "source_id": 182048,
+        "periodic_offset": -360,
+        "source_covers_candidate": false,
+        "candidate_covers_source": false,
+        "intersects": true,
+        "disjoint": false,
+        "status": "checked",
+        "witness": "complete-operation-pointset"
+      }
+    ],
+    "all_query_offsets": {
+      "-360": 3,
+      "0": 22952
+    }
+  }
+]
