@@ -1,0 +1,22 @@
+[
+  {
+    "probe": "accounting-existing",
+    "returncode": 1
+  },
+  {
+    "probe": "accounting-dangling",
+    "returncode": 1
+  },
+  {
+    "probe": "missing-constructor-row",
+    "head": "cc273e1576273fd2bd40eb4e945056f59c9ed9a8",
+    "returncode": 1,
+    "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 53, in <module>\nAssertionError\n"
+  },
+  {
+    "probe": "duplicate-constructor-row",
+    "head": "b5de120fbeb2c9cc1ea106f29e45d7567e3fb9e5",
+    "returncode": 1,
+    "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 53, in <module>\nAssertionError\n"
+  }
+]

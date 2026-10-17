@@ -1,0 +1,99 @@
+{
+  "kind": "actual-JS-reader-prelude-small-custody-controls",
+  "method_commit": "3d80c380ef5117c669a5fdea475a69ea27fd51bf",
+  "method_sha256": "24f2705a32cf49f0773aea823032819168f1b1fcc547de399d73e9e2c1da5093",
+  "cases": 9,
+  "results": [
+    {
+      "case": "valid-encoded",
+      "accepted": true,
+      "error": null,
+      "descriptor_derived_buffers": [
+        67,
+        18,
+        43
+      ]
+    },
+    {
+      "case": "short-encoded",
+      "accepted": false,
+      "error": "Error",
+      "descriptor_derived_buffers": [
+        67,
+        18,
+        43
+      ]
+    },
+    {
+      "case": "long-encoded",
+      "accepted": false,
+      "error": "Error",
+      "descriptor_derived_buffers": [
+        67,
+        18,
+        43
+      ]
+    },
+    {
+      "case": "same-length-corrupt",
+      "accepted": false,
+      "error": "Error",
+      "descriptor_derived_buffers": [
+        67,
+        18,
+        43
+      ]
+    },
+    {
+      "case": "wrong-mode",
+      "accepted": false,
+      "error": "Error",
+      "descriptor_derived_buffers": [
+        67
+      ]
+    },
+    {
+      "case": "wrong-oid",
+      "accepted": false,
+      "error": "Error",
+      "descriptor_derived_buffers": [
+        67,
+        18,
+        43
+      ]
+    },
+    {
+      "case": "valid-gzip",
+      "accepted": true,
+      "error": null,
+      "descriptor_derived_buffers": [
+        70,
+        18,
+        63
+      ]
+    },
+    {
+      "case": "truncated-gzip",
+      "accepted": false,
+      "error": "Error",
+      "descriptor_derived_buffers": [
+        70,
+        18,
+        60
+      ]
+    },
+    {
+      "case": "corrupt-gzip-crc",
+      "accepted": false,
+      "error": "Error",
+      "descriptor_derived_buffers": [
+        70,
+        18,
+        63
+      ]
+    }
+  ],
+  "limits": [
+    "Actual reader prelude evaluated against deterministic small mocked Git responses. No science replay or large-input performance claim."
+  ]
+}
