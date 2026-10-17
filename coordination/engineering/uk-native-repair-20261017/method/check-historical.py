@@ -10,7 +10,7 @@ W,O=map(lambda s:pathlib.Path(s).absolute(),sys.argv[1:]);H='a9f6ccadcc1bdea6185
 assert O.parent.is_dir() and not O.exists() and all(not p.is_symlink() for p in (O,*O.parents))
 started=time.monotonic();pins={};total=0;MAX=32*1024*1024;PHASE=768*1024*1024
 sha=lambda b:hashlib.sha256(b).hexdigest()
-canonical=lambda j:json.dumps(j,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()
+canonical=lambda j:(json.dumps(j,ensure_ascii=False,sort_keys=True,separators=(',',':'),allow_nan=False)+'\n').encode()
 env={**os.environ,'GIT_NO_LAZY_FETCH':'1','GIT_NO_REPLACE_OBJECTS':'1'}
 def read(path,commit=H,expected=None,decode=None):
  global total
