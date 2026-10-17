@@ -1,3 +1,4 @@
+import {normativeLatitudeBytes} from './native-latitudes.mjs';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -41,7 +42,7 @@ export function mapCellSelectionFixture(t) {
   write('data/geography/fixture.json', {type: 'FeatureCollection', features});
   const beforeHierarchy = write('data/hierarchy.json', units);
   const bounds = write('data/canonical-grid/bounds.json.gz', gzipSync(Buffer.from(JSON.stringify(owners))));
-  const latitudeBytes = write(latitudePath, fs.readFileSync(new URL('../../' + latitudePath, import.meta.url)));
+  const latitudeBytes = write(latitudePath, normativeLatitudeBytes());
   write('inputs/rule.json', {synthetic: 'diagnostic fixture'}); write('inputs/source-authority.json', {synthetic: true});
   const original = commit(), size = 262166, y = size / 2, x = size / 2;
   const rows = new Uint32Array(size * 2);

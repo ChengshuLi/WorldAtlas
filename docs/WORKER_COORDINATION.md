@@ -619,17 +619,28 @@ budget check. Normal main pushes do not schedule a separate legacy Site build.
 ### Run the reviewed consumers
 
 The existing merge dispatch accepts an optional `reviewed_tests` JSON object with
-`base`, `head`, `files` and `inputs`. The first two fields are exact 40-character
-accepted-main and reviewed-head commits. `files` is the nonempty list of actual
-`test/*.test.mjs` consumers identified during review. `inputs` lists their
-non-code fixture files or directories, including bodies read through Git rather
-than the working tree. Include imported Python/child-process fixtures too; a
-static JavaScript import list alone is insufficient. Ordinary code namespaces
-remain available. This is the existing review's execution argument, not a new
-approval, source authority, or claim that an arbitrary test list is complete.
+`base`, `head` and `files`. The first two fields are exact 40-character accepted-main
+and reviewed-head commits. `files` is the nonempty list of actual `test/*.test.mjs`
+consumers identified during review. There is no author-maintained transitive input
+list: preparation includes the complete `test/fixtures/` boundary, the existing
+executing-authority input contract, and genuine package declarations when packaged
+consumers apply. Ordinary code namespaces remain available.
+
+Unit and contract tests own self-contained fixtures. Captured scientific bodies
+retain their original pins and adverse authority checks. Policy tests use explicit authenticated metadata/body fixtures: a descriptor does
+not claim its unread body is present. Consumed bodies retain exact Git identities,
+and the reader has no repository or network fallback. Real Git transport is
+covered separately by small synthetic repositories and absent/corrupt-object controls. Real selected-data/package checks continue to use their
+existing authoritative readers and declarations rather than these contract fixtures.
+Do not repair a missing contract operand by adding a live-history path to dispatch.
+
+For rollout through older accepted preparation, `inputs` may contain the exact
+mechanically derived vector returned by `reviewedTestPlan`; the new planner also
+accepts an omitted or empty field. Arbitrary manual vectors are rejected. This is
+an execution argument, not source authority or proof that a test roster is complete.
 
 Preparation and final admission validate the same immutable pair and ordinary
-candidate paths. Stale base/head, missing tests/fixtures, escaping paths and
+candidate paths. Stale base/head, missing executing-policy inputs, missing fixture roots, escaping paths and
 symlinks fail clearly. Re-review the actual new pair before updating a stale
 request. With no argument, existing automatic routing and its conservative
 complete-regression fallback remain available.
@@ -643,8 +654,10 @@ existing packaged-asset consumers and retains the genuine package build and its
 inputs. Explicitly selecting either packaged consumer also requires that build.
 Otherwise the snapshot/build/output-retention stages are omitted. Browser setup
 continues to follow the actual selected consumers; migration preparation occurs
-only for its consuming test. Historical native inputs are still acquired by the
-existing per-consumer mechanism.
+only for its consuming test. Existing historical integration reproducers retain their
+authoritative original-input acquisition; normal routing remains available for those
+unconverted legacy consumers. The reviewed contract boundary cannot be expanded by
+a hand-written dispatch list.
 
 Record the exact selected files, complete fixture closure, stage count and actual
 elapsed results in the ordinary review/handoff. Distinguish a cold fixture probe,

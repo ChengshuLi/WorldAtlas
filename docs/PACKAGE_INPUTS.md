@@ -79,3 +79,13 @@ npm run build:hosted
 ```
 
 The hosted archive budget uses GNU tar and is verified on Ubuntu CI; macOS BSD tar is not an equivalent archive measurement. Cloudflare preparation creates local artifacts only, without deployment or live database changes.
+
+
+Cumulative selected roots use one authenticated role contract in finalization and
+retained-output admission. The original selector authenticates its sidecar's whole
+bytes; only the sidecar, runtime envelope, cumulative ledger and cumulative patch
+may be retired. Admission also matches each retired role to the original immutable
+source inventory. Shared current inputs and unrelated declarations remain required.
+Repeated finalization can therefore reuse the same genuine original build instead
+of failing an obsolete append-only declaration check. Producer workflow identity
+is still exact; changing that producer requires an applicable genuine capture.

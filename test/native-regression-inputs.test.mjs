@@ -142,9 +142,9 @@ test('a missing required archived object still fails after a scoped fetch, and p
 });
 
 
-test('remaining custody pins agree with the actual retained component generations',()=>{
+test('remaining custody pins agree with the captured authenticated component generations',()=>{
  const read=name=>JSON.parse(fs.readFileSync(name));
- const index=read('coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json');
+ const index=read('test/fixtures/native-custody/generations.json');
  assert.deepEqual(new Set(index.generations.map(generation=>generation.executed_code_commit)),new Set(custody));
 });
 

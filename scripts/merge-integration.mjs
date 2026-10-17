@@ -204,7 +204,7 @@ export async function inspectMerge({api, repo, number, expectedHead, candidateCo
   const base = (await api(`${root(repo)}/git/ref/heads/main`)).object.sha;
   return {pr, files, base};
 }
-// The operator supplies the consumers and fixture operands actually reviewed for
+// The operator supplies the consumers actually reviewed for
 // this immutable pair. This is an execution argument, not source approval or an
 // automated proof that an arbitrary roster is sufficient. Unknown impact uses
 // the complete suite; package and geography obligations remain independent.
@@ -213,8 +213,8 @@ export function reviewedTestPlan(request, {base, head, entries, files, definitio
   const plan = typeof request === 'string' ? JSON.parse(request) : request;
   need(plan && !Array.isArray(plan) && commitID(plan.base) && plan.base === base &&
     commitID(plan.head) && plan.head === head, 'Reviewed tests are stale or lack the exact base/head binding');
-  need(Array.isArray(plan.files) && plan.files.length > 0 && Array.isArray(plan.inputs),
-    'Reviewed tests require a nonempty test roster and explicit fixture inputs');
+  need(Array.isArray(plan.files) && plan.files.length > 0, 'Reviewed tests require a nonempty test roster');
+  // New requests do not maintain a shadow transitive fixture catalogue.
   const ordinary = (name, row) => row?.type === 'blob' && ['100644','100755'].includes(row.mode) && commitID(row.sha) &&
     name.split('/').slice(0,-1).every((_, index, parts) => {
       const parent = entries.get(parts.slice(0,index+1).join('/'));
@@ -223,13 +223,6 @@ export function reviewedTestPlan(request, {base, head, entries, files, definitio
   const tests = [...new Set(plan.files)];
   need(tests.every(name => typeof name === 'string' && /^test\/[A-Za-z0-9_.-]+\.test\.mjs$/.test(name) &&
     ordinary(name, entries.get(name))), 'Reviewed test is missing or not an ordinary candidate test file');
-  const inputs = [...new Set(plan.inputs)];
-  need(inputs.every(name => {
-    if (!safePackagePath(name)) return false;
-    if (!name.endsWith('/')) return ordinary(name, entries.get(name));
-    const members = [...entries].filter(([file,row]) => file.startsWith(name) && row.type !== 'tree');
-    return members.length > 0 && members.every(([file,row]) => ordinary(file,row));
-  }), 'Reviewed fixture is missing, escaping, or not an ordinary candidate input');
   const packageChanged = files.some(file => [file.filename, file.previous_filename].filter(Boolean)
     .some(name => containsPackagePath(definition.inputs, name)));
   if (packageChanged) for (const name of PACKAGED_ASSET_TESTS) {
@@ -237,6 +230,16 @@ export function reviewedTestPlan(request, {base, head, entries, files, definitio
     if (!tests.includes(name)) tests.push(name);
   }
   const build = tests.some(name => PACKAGED_ASSET_TESTS.includes(name));
+  // Contract fixtures are one stable complete source directory. Current policy
+  // comes from the existing executing-authority roster, and real package inputs
+  // come from the package definition consumed by the builder itself.
+  const inputs = [...EXECUTION_CODE];
+  need(plan.inputs === undefined || Array.isArray(plan.inputs) &&
+    (plan.inputs.length===0 || JSON.stringify(plan.inputs)===JSON.stringify(inputs)),
+    'Reviewed fixture operands are derived; manual inputs are unsupported');
+  for (const name of inputs) need(ordinary(name,entries.get(name)), 'Current executing authority input is unavailable: '+name);
+  const fixtures=[...entries].filter(([name,row])=>name.startsWith('test/fixtures/')&&row.type!=='tree');
+  need(fixtures.length>0&&fixtures.every(([name,row])=>ordinary(name,row)), 'Self-contained fixture boundary is missing or nonordinary');
   return {files:tests, inputs, build,
     checkout_patterns:focusedCheckoutPatterns(definition, [...inputs, ...(build ? definition.inputs : [])])};
 }
