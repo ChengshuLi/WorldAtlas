@@ -1,25 +1,27 @@
 // Invocation-local native interval storage. This parses data, never authority.
-// Keep original JSON wire products; only their large interval arrays live on disk.
+// Keep original JSON wire products; large intervals and coordinate arrays live on disk.
 import fs from 'node:fs';
 import {nativeSequence,isNativeSequence} from '../src/native-grid.js';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 
 const demand=(ok,message)=>{if(!ok)throw Error(message);};
+class CanonicalValueError extends Error {}
 const whitespace=b=>b===32||b===9||b===10||b===13;
 const canonical=value=>{
  if(Array.isArray(value))return value.map(canonical);
  if(value&&typeof value==='object'){
   const out=Object.create(null);for(const key of Object.keys(value).sort())out[key]=canonical(value[key]);return out;
  }
- demand((value===null||['string','number','boolean'].includes(typeof value))
-  &&(typeof value!=='number'||Number.isFinite(value)),'Nonfinite/missing/non-JSON canonical value');return value;
+ if(!((value===null||['string','number','boolean'].includes(typeof value))
+  &&(typeof value!=='number'||Number.isFinite(value))))throw new CanonicalValueError('Nonfinite/missing/non-JSON canonical value');return value;
 };
 const freeze=value=>{if(value&&typeof value==='object'){Object.values(value).forEach(freeze);Object.freeze(value);}return value;};
 
 // Frame complete scalar/metadata values, delegating their syntax and Unicode /
 // number semantics to JSON.parse. Domain arrays below frame each triple, never
-// a complete dense row. Metadata and an individual scalar remain explicit terms.
+// a complete dense row. Coordinate arrays use the same framed grammar and spill
+// vectors below. Other metadata arrays and individual scalars remain explicit terms.
 class Input {
  constructor(chunks,expected){
   demand(Number.isSafeInteger(expected?.bytes)&&expected.bytes>=0&&/^[a-f0-9]{64}$/.test(expected.sha256),
@@ -185,12 +187,77 @@ async function admitStore({chunks,expected,directory,size,ownerCount,rowField='r
   const metadata=Object.create(null),admittedRows=new WeakSet(),admittedComponents=new WeakMap();
   let rowsSeen=false,rowsError=null,range={start:0,rowCount:0,runCount:0},componentCount=0;
   const active=()=>demand(!closed,'Native interval store is closed');
+  // Private spill descriptors never come from input JSON. Coordinate arrays
+  // reuse the metadata vector bodies, with per-depth indices so nested arrays
+  // cannot interleave their parent's ordinal records. Small coordinate tuples
+  // stay literal; long rings never become a complete JS coordinate graph.
+  const coordinateDescriptors=new WeakMap(),coordinateIndices=[];
+  const coordinateIndex=depth=>coordinateIndices[depth]??=(new Writer(open('coordinates-'+depth+'.bin')));
+  const encodeMetadata=value=>{
+   const descriptor=value&&typeof value==='object'?coordinateDescriptors.get(value):undefined;
+   if(descriptor)return [3,descriptor];
+   if(Array.isArray(value))return [2,value.map(encodeMetadata)];
+   if(value&&typeof value==='object')return [1,Object.keys(value).map(key=>[key,encodeMetadata(value[key])])];
+   canonical(value);return Object.is(value,-0)?[4]:[0,value];
+  };
+  const decodeMetadata=node=>{
+   if(node[0]===3)return coordinateSequence(node[1]);
+   if(node[0]===4)return -0;
+   if(node[0]===2)return Object.freeze(node[1].map(decodeMetadata));
+   if(node[0]===1){const value={};for(const [key,child]of node[1])Object.defineProperty(value,key,{value:decodeMetadata(child),enumerable:true});return Object.freeze(value);}
+   return node[1];
+  };
+  const metadataBytes=value=>Buffer.from(JSON.stringify(encodeMetadata(value)));
+  function coordinateSequence(descriptor){
+   const {depth,start,count}=descriptor;
+   const entryAt=ordinal=>{
+    active();if(descriptor.error)throw new CanonicalValueError(descriptor.error);const record=Buffer.allocUnsafe(16),index=coordinateIndex(depth);
+    readExact(index.fd,record,16,start+ordinal*16);
+    const length=Number(record.readBigUInt64LE(8)),body=Buffer.allocUnsafe(length);
+    readExact(vectorFd,body,length,Number(record.readBigUInt64LE(0)));return decodeMetadata(JSON.parse(body));
+   };
+   function* entries(){
+    active();if(descriptor.error)throw new CanonicalValueError(descriptor.error);const index=coordinateIndex(depth);
+    const records=Buffer.allocUnsafe(16*Math.min(count,256));
+    for(let ordinal=0;ordinal<count;){
+     active();const n=Math.min(256,count-ordinal);readExact(index.fd,records,n*16,start+ordinal*16);
+     for(let i=0;i<n;){
+      const offset=Number(records.readBigUInt64LE(i*16));let end=i+1,bytes=Number(records.readBigUInt64LE(i*16+8));
+      while(end<n){const nextEnd=Number(records.readBigUInt64LE(end*16))+Number(records.readBigUInt64LE(end*16+8));
+       if(nextEnd-offset>65536)break;bytes=nextEnd-offset;end++;}
+      const body=Buffer.allocUnsafe(bytes);readExact(vectorFd,body,bytes,offset);
+      for(;i<end;i++){active();const at=Number(records.readBigUInt64LE(i*16))-offset,length=Number(records.readBigUInt64LE(i*16+8));
+       yield decodeMetadata(JSON.parse(body.subarray(at,at+length)));}
+     }
+     ordinal+=n;
+    }
+   }
+   const sequence=nativeSequence(count,entries,{entryAt});
+   coordinateDescriptors.set(sequence,descriptor);return sequence;
+  }
+  async function metadataNode(coordinates=false,depth=0){
+   await input.space();const byte=await input.peek();
+   if(byte===123){const fields={};await object(input,async key=>{
+    Object.defineProperty(fields,key,{value:await metadataNode(coordinates||key==='coordinates',depth),enumerable:true,writable:true,configurable:true});
+   });return fields;}
+   if(byte!==91)return input.value();
+   if(!coordinates){const values=[];await array(input,async()=>values.push(await metadataNode(false,depth)));return values;}
+   const values=[],index=coordinateIndex(depth),start=index.position;let count=0,spilled=false,valueError;
+   const append=value=>{let body;try{body=metadataBytes(value);}catch(error){valueError??=error.message;body=Buffer.from('[0,null]');}const record=Buffer.allocUnsafe(16);
+    record.writeBigUInt64LE(BigInt(vectors.position),0);record.writeBigUInt64LE(BigInt(body.length),8);vectors.append(body);index.append(record);};
+   await array(input,async()=>{const value=await metadataNode(true,depth+1);count++;
+    if(!spilled&&count<=32){values.push(value);return;}
+    if(!spilled){for(const previous of values)append(previous);values.length=0;spilled=true;}append(value);
+   });
+   if(!spilled)return values;
+   vectors.flush();index.flush();return coordinateSequence({depth,start,count,...(valueError?{error:valueError}:{})});
+  }
   async function metadataValue(){
-   await input.space();if(await input.peek()!==91)return input.value();
+   await input.space();if(await input.peek()!==91)return metadataNode();
    const start=vectorIndex.position,countRecord=Buffer.alloc(16);let count=0,valueError;
    await array(input,async()=>{
-    const value=await input.value();let body;
-    try{body=Buffer.from(JSON.stringify(canonical(value)));}catch(error){valueError??=error;body=Buffer.from('null');}
+    const value=await metadataNode();let body;
+    try{body=metadataBytes(value);}catch(error){valueError??=error;body=Buffer.from('null');}
     countRecord.writeBigUInt64LE(BigInt(vectors.position),0);countRecord.writeBigUInt64LE(BigInt(body.length),8);
     vectorIndex.append(countRecord);vectors.append(body);count++;
    });
@@ -198,7 +265,7 @@ async function admitStore({chunks,expected,directory,size,ownerCount,rowField='r
    const entryAt=ordinal=>{
     active();if(valueError)throw valueError;const record=Buffer.allocUnsafe(16);readExact(vectorIndexFd,record,16,start+ordinal*16);
     const length=Number(record.readBigUInt64LE(8)),body=Buffer.allocUnsafe(length);
-    readExact(vectorFd,body,length,Number(record.readBigUInt64LE(0)));return freeze(JSON.parse(body));
+    readExact(vectorFd,body,length,Number(record.readBigUInt64LE(0)));return decodeMetadata(JSON.parse(body));
    };
    return nativeSequence(count,function*(){for(let i=0;i<count;i++)yield entryAt(i);},{entryAt});
   }
@@ -254,7 +321,7 @@ async function admitStore({chunks,expected,directory,size,ownerCount,rowField='r
   const componentDescriptor=handle=>{active();const descriptor=admittedComponents.get(handle);demand(descriptor,'Foreign native component');return descriptor;};
   function componentMetadata(handle){
    const {metaBytes,metaOffset}=componentDescriptor(handle),buffer=Buffer.allocUnsafe(metaBytes);readExact(metadataFd,buffer,metaBytes,metaOffset);
-   return freeze(JSON.parse(buffer));
+   return decodeMetadata(JSON.parse(buffer));
   }
   function componentRows(handle,options){return rowEntries(componentDescriptor(handle),options);}
   function* componentCanonicalChunks(handle,{overrides={},newline=true}={}){
@@ -269,17 +336,17 @@ async function admitStore({chunks,expected,directory,size,ownerCount,rowField='r
    await input.space();
    if(await input.peek()!==123){await input.value();rowsError??='Missing complete ledger component';return;}
    await object(input,async key=>{
-    if(key!=='native_rows'){fields[key]=await input.value();return;}
+    if(key!=='native_rows'){fields[key]=await metadataNode(key==='coordinates');return;}
     hasNativeRows=true;runs.reset(runStart);index.reset(indexStart);selected=await parseRows(input,runs,index,size,ownerCount);
    });
    if(selected.error){rowsError??=selected.error;return;}
    // Canonicalization can reject a domain value that a later duplicate root rows
    // replaces. Keep parsing full syntax, but defer this error as for native rows.
    let body;
-   try{body=Buffer.from(JSON.stringify(canonical(fields)));}
+   try{body=metadataBytes(fields);}
    catch(error){rowsError??=error.message;return;}
    runs.flush();index.flush();
-   const canonical_sha256=hashChunks((function*(){yield* canonicalObject(fields,hasNativeRows?'native_rows':null,()=>rowChunks(selected));yield '\n';})());
+   let canonical_sha256;try{canonical_sha256=hashChunks((function*(){yield* canonicalObject(fields,hasNativeRows?'native_rows':null,()=>rowChunks(selected));yield '\n';})());}catch(error){if(!(error instanceof CanonicalValueError))throw error;rowsError??=error.message;return;}
    const record=Buffer.alloc(80),offset=meta.position;
    for(const [i,value] of [offset,body.length,selected.start,selected.rowCount,selected.runCount].entries()){
     demand(Number.isSafeInteger(value),'Native component offset/count exceeds exact format');record.writeBigUInt64LE(BigInt(value),i*8);
@@ -327,7 +394,7 @@ async function admitStore({chunks,expected,directory,size,ownerCount,rowField='r
    try{fs.rmSync(root,{recursive:true});}catch(e){error??=e;}if(error)throw error;
   };
   const common={metadata:freeze(metadata),canonical_sha256,runCount:range.runCount,
-   storedBytes:runs.position+index.position+vectors.position+vectorIndex.position+(components?.position??0)+(meta?.position??0),intervals,close,[Symbol.dispose]:close};
+   storedBytes:runs.position+index.position+vectors.position+vectorIndex.position+coordinateIndices.reduce((n,p)=>n+(p?.position??0),0)+(components?.position??0)+(meta?.position??0),intervals,close,[Symbol.dispose]:close};
   complete=true;return Object.freeze(ledger?
    {...common,componentCount,nativeRowCount:range.rowCount,componentEntries,componentAt,componentMetadata,componentRows,componentCanonicalChunks}:
    {...common,rowCount:range.rowCount,rowEntries:options=>rowEntries(range,options),rowAt});

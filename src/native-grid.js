@@ -253,17 +253,17 @@ export function nativeRuntimeIndex(features) {
     ids.add(feature.id);owners.add(owner);
     if (!['Polygon','MultiPolygon'].includes(geometry?.type)) throw Error('Original native geometry required');
     const polygons=geometry.type==='Polygon'?[geometry.coordinates]:geometry.coordinates;
-    if (!Array.isArray(polygons) || !polygons.length) throw Error('Original native polygons required');
+    if (!isNativeSequence(polygons) || !polygons.length) throw Error('Original native polygons required');
     return {index:owner,polygons:polygons.map(polygon=>{
-      if (!Array.isArray(polygon) || !polygon.length) throw Error('Original native rings required');
+      if (!isNativeSequence(polygon) || !polygon.length) throw Error('Original native rings required');
       return polygon.map(ring=>{
-        if (!Array.isArray(ring) || ring.length<4) throw Error('Original native closed ring required');
+        if (!isNativeSequence(ring) || ring.length<4) throw Error('Original native closed ring required');
         const result=new Float64Array(ring.length*2);
-        ring.forEach((point,i)=>{
+        let i=0;for(const point of ring){
           if (!Array.isArray(point) || point.length!==2 || !point.every(Number.isFinite) ||
               Math.abs(point[0])>180 || Math.abs(point[1])>90) throw Error('Original lon/lat coordinates required');
-          result.set(point,i*2);
-        });
+          result.set(point,i++*2);
+        }
         if (result[0]!==result.at(-2) || result[1]!==result.at(-1)) throw Error('Original native closed ring required');
         return result;
       });
@@ -280,14 +280,14 @@ export function polygonParts(geometry) {
   require(geometry && ['Polygon', 'MultiPolygon'].includes(geometry.type), 'Unsupported original native geometry / footprint primitive');
   exactKeys(geometry, ['type', 'coordinates'], 'Primitive geometry');
   const polygons = geometry.type === 'Polygon' ? [geometry.coordinates] : geometry.coordinates;
-  require(Array.isArray(polygons) && polygons.length > 0, 'Missing footprint polygons');
+  require(isNativeSequence(polygons) && polygons.length > 0, 'Missing footprint polygons');
   for (const polygon of polygons) {
-    require(Array.isArray(polygon) && polygon.length > 0, 'Missing footprint rings');
+    require(isNativeSequence(polygon) && polygon.length > 0, 'Missing footprint rings');
     for (const ring of polygon) {
-      require(Array.isArray(ring) && ring.length >= 4, 'Incomplete footprint ring');
+      require(isNativeSequence(ring) && ring.length >= 4, 'Incomplete footprint ring');
       for (const point of ring) require(Array.isArray(point) && point.length === 2 && point.every(Number.isFinite)
         && Math.abs(point[0]) <= 180 && Math.abs(point[1]) <= 90, 'Invalid native footprint coordinate');
-      require(ring[0][0] === ring.at(-1)[0] && ring[0][1] === ring.at(-1)[1], 'Unclosed footprint ring');
+      require(ring.at(0)[0] === ring.at(-1)[0] && ring.at(0)[1] === ring.at(-1)[1], 'Unclosed footprint ring');
     }
   }
   return polygons;

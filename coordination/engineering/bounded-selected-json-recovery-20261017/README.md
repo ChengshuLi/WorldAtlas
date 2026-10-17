@@ -44,3 +44,26 @@ Frozen 93d3 full-route measurements separated the terms: 131,072 supported inter
 The continuing fix adds selected ordinal access to the existing repair component index, preserves indexed access through checkpoint addition projection, and groups only ordinals by exact target once. It removes owner-times-component decoding/validation without retaining a geometry cache. The complete old coordinate-delta function is retained as a pinned eager oracle. Nine sequence/index controls and twelve targeted checkpoint/arithmetic controls pass, including exact value/refusal comparisons, a proportional-visit assertion, and genuine 3/16/64-owner transitions. New immutable same-input performance measurements remain pending at this commit.
 
 Largest-object limits remain: the frozen one-owner/one-interval 65,537-point ring case measured 5,873→6,456 ms and 311,840→321,016 KiB, with exact outputs. That shape had no measured memory benefit. These observations do not establish a universal OOM fix.
+
+## Coordinate-array successor (separate from frozen 6582)
+
+The same authenticated parser now spills long coordinate arrays into metadata
+vector bodies, using per-depth ordinal indices so nested rings cannot interleave
+parent records. Private tagged descriptors preserve JSON values and last-key-wins
+semantics; they are not wire-authority inputs. Small coordinate tuples remain
+literal, while sequential reads use at most 256 index records and a 64 KiB body
+window except an individually larger scalar/element. Hashes still traverse the
+semantic values, never substitute raw wire bytes for canonical JSON.
+
+The shared bounds, polygon and native-runtime validators accept branded coordinate
+sequences with unchanged numerical algorithms and refusal order. Runtime conversion
+still creates Float64 rings and the scanner retains active edge records. Noncoordinate
+metadata collections, very large scalars and original source-family acquisition
+remain explicit unresolved terms. No universal constant-memory claim is made.
+
+Author tests: 45 parser/grid/sequence controls and 13 genuine completed-entry and
+coordinate controls pass. New controls cover nested rings, noncanonical numeric
+formatting, duplicate keys, deferred overridden nonfinite values, complete hashes,
+closed-store refusal, exact malformed-coordinate messages and a genuine 513-point
+source through completed append and numerical comparison. Geometry scale measurements
+against the immutable 6582 science are pending at this source checkpoint.

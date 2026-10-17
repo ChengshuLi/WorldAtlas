@@ -121,3 +121,50 @@ test('constructor ledger_rows uses the same component store and complete canonic
  try{assert.equal(replaced.canonical_sha256,hash(valueBytes({ledger_rows:value.ledger_rows})));}finally{replaced.close();}
  assert.deepEqual(fs.readdirSync(directory),[]);
 });
+
+test('large coordinate rings use repeatable semantic cursors with exact canonical numbers and duplicate keys',async t=>{
+ const directory=temporary(t),ring=Array.from({length:129},(_,i)=>[i/10,-i/100]);ring.push(ring[0]);
+ const geometry={type:'Polygon',coordinates:[ring]},value={rows:[{component_id:'geometry',geometry}]};
+ const source=JSON.stringify(value).replace('"geometry":','"geometry":{"discarded":true},"geometry":').replace('[0,0]','[-0e0, 0.000]');
+ const store=await open(directory,source),component=store.componentAt(0),actual=store.componentMetadata(component);
+ const storedRing=actual.geometry.coordinates[0];assert.equal(Array.isArray(storedRing),false);
+ assert.equal(storedRing.length,ring.length);assert.deepEqual([...storedRing],JSON.parse(source).rows[0].geometry.coordinates[0]);
+ assert.deepEqual([...storedRing],[...storedRing]);assert.deepEqual(storedRing.at(64),ring[64]);
+ assert.equal(store.canonical_sha256,hash(valueBytes(JSON.parse(source))));
+ assert.equal([...store.componentCanonicalChunks(component)].join(''),valueBytes(value.rows[0]).toString());
+ store.close();assert.throws(()=>storedRing.at(0),/closed/);assert.deepEqual(fs.readdirSync(directory),[]);
+});
+
+test('nested coordinate cursor indices preserve multiple rings, polygons and last-key-wins errors',async t=>{
+ const directory=temporary(t),ring=n=>Array.from({length:70},(_,i)=>[i+n,i-n]);
+ const value={rows:[{geometry:{type:'MultiPolygon',coordinates:[[ring(0),ring(2)],[ring(4)]]}},{geometry:{type:'Polygon',coordinates:[ring(6)]}}]};
+ const store=await open(directory,JSON.stringify(value));
+ assert.equal(store.canonical_sha256,hash(valueBytes(value)));
+ for(const component of store.componentEntries())assert.equal([...store.componentCanonicalChunks(component)].join(''),valueBytes(value.rows[component.ordinal]).toString());
+ store.close();
+ const bad='{"coordinates":['+Array(40).fill('[1e400,0]').join(',')+']}';
+ for(const source of ['{"rows":[{"geometry":'+bad+'}],"rows":[]}','{"rows":[{"geometry":'+bad+',"geometry":{}}]}']){
+  const admitted=await open(directory,source);assert.equal(admitted.canonical_sha256,hash(valueBytes(JSON.parse(source))));admitted.close();
+ }
+ await assert.rejects(open(directory,'{"rows":[{"geometry":'+bad+'}]}'),/Nonfinite/);
+ assert.deepEqual(fs.readdirSync(directory),[]);
+});
+
+import {nativeRuntimeIndex,polygonParts} from '../src/native-grid.js';
+import {coordinateBounds,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+test('stored geometry shares exact bounds, runtime polygons and malformed-coordinate refusals with literals',async t=>{
+ const directory=temporary(t),ring=Array.from({length:40},(_,i)=>[i/100,i/100]);ring.push(ring[0]);
+ const geometries=[{type:'Polygon',coordinates:[ring]},...[
+  points=>points.slice(0,-1),points=>points.map((p,i)=>i===17?[181,0]:p),
+  points=>points.map((p,i)=>i===17?[0,0,0]:p),points=>points.map((p,i)=>i===17?null:p)
+ ].map(change=>({type:'Polygon',coordinates:[change(ring)]}))];
+ for(const geometry of geometries){
+  const store=await open(directory,JSON.stringify({rows:[{geometry}]})),stored=store.componentMetadata(store.componentAt(0)).geometry;
+  for(const fn of [coordinateBounds,polygonParts,g=>nativeRuntimeIndex([{id:'A',pixelIndex:1,geometry:g}])]){
+   let expected;try{expected=fn(geometry);}catch(error){assert.throws(()=>fn(stored),{message:error.message});continue;}
+   const actual=fn(stored);assert.equal(valueSha(actual),valueSha(expected));
+  }
+  store.close();
+ }
+ assert.deepEqual(fs.readdirSync(directory),[]);
+});

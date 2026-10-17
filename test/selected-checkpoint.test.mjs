@@ -833,3 +833,21 @@ test('coordinate grouping reads indexed additions proportionally to components r
  const result=deriveCoordinateDelta({certificate,oldAdditions:[],additions,selection:{}});
  assert.deepEqual(result.changedIds,features.map(f=>f.id));assert(visits<=8*values.length,'repeated complete addition scans: '+visits);
 });
+
+test('genuine dense-ring source survives completed authority and numerical comparison through coordinate cursors',async t=>{
+ const sourceFeatures=[feature('A',0),feature('B',1),feature('C',5)],ring=[];
+ const corners=[[0,0],[.8,0],[.8,.8],[0,.8]];
+ for(let edge=0;edge<4;edge++)for(let i=0;i<128;i++){
+  const a=corners[edge],b=corners[(edge+1)%4],q=i/128;ring.push([a[0]+(b[0]-a[0])*q,a[1]+(b[1]-a[1])*q]);
+ }ring.push(ring[0]);sourceFeatures[0].geometry={type:'Polygon',coordinates:[ring]};
+ const f=await trustedFixture(t,{nativeAppend:true,sourceFeatures}),baseline=await f.api.qualifyCheckpoint({reader:f.reader});
+ assert.equal(baseline.available,true);
+ const next=await appendNativeAuthority(f,{completedConstructor:true});
+ const reader=new f.native.ImmutableReader(f.root,next.candidate,{invocation:f.reader.invocation});
+ const transition=await f.api.qualifyTransition({state:baseline.state,reader});assert.equal(transition.available,true);
+ assert.deepEqual(nativeLiteral(transition.candidate.patch.rows),next.patch.rows);
+ assert.deepEqual(nativeLiteral(transition.candidate.ledger),next.ledger);
+ fs.writeFileSync(path.join(f.root,'scripts/selected-checkpoint-native.mjs'),fs.readFileSync('scripts/selected-checkpoint-native.mjs'));
+ const consumer=await import(pathToFileURL(path.join(f.root,'scripts/selected-checkpoint-native.mjs')));
+ const numerical=await consumer.compareSelectedCheckpointNative({transition});assert.equal(numerical.status,'no-new-native-loss');
+});
