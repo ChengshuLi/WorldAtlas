@@ -29,7 +29,7 @@ negative_paths=[P+'/source-stage/foreign-country-features.geojson',P+'/context-0
 for p in negative_paths:
  for ordinal,f in enumerate(js(p)['features']):negative.append({'input':inputs[(C,p)],'feature_ordinal':ordinal,'geometry_sha256':sha(encode(f['geometry'])),'feature':f})
 ng=[shape(n['feature']['geometry']) for n in negative];assert all(g.is_valid and not g.is_empty for g in ng)
-latpin=next(x for x in a['inputs'] if 'native-row-latitudes' in x['path']);lb=raw(latpin['path'],latpin['commit']);assert len(lb)==latpin['bytes'] and sha(lb)==latpin['sha256'];lat=np.frombuffer(lb,dtype='<f8');ys=collections.defaultdict(lambda:collections.defaultdict(list));keys=set()
+latpin=next(x for x in a['inputs'] if 'native-row-latitudes' in x['path']);lb=raw(latpin['path'],latpin['commit']);assert len(lb)==latpin['bytes'] and sha(lb)==latpin['sha256'];lb=gzip.decompress(lb) if latpin['path'].endswith('.gz') else lb;assert len(lb)==latpin.get('decoded_bytes',latpin['bytes']) and sha(lb)==latpin.get('decoded_sha256',latpin['sha256']);lat=np.frombuffer(lb,dtype='<f8');ys=collections.defaultdict(lambda:collections.defaultdict(list));keys=set()
 for block in range(18,20):
  for y,start,end,owners,sources,kind in js(P+f'/frozen-queue/block-{block:03}.json.gz'):
   assert len(owners)==1 and kind in ['land','inland-water'];owner=owners[0];ys[owner][y].append([start,end,{'land':'mapped_land_support','inland-water':'mapped_inland_water_support'}[kind]])
