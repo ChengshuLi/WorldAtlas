@@ -1,4 +1,4 @@
-import collections,gzip,hashlib,json,pathlib,subprocess,sys,resource
+import collections,gzip,hashlib,json,pathlib,subprocess,sys,resource,re
 W,BASE,HEAD,OUT=sys.argv[1:]
 output=pathlib.Path(OUT)
 assert output.parent.resolve(strict=True)==output.parent.absolute(), 'Ordinary output parent required'
@@ -6,6 +6,7 @@ assert not output.exists() and not output.is_symlink(), 'Fresh output required'
 P='coordination/engineering/five-repair-delivery-20261017/'
 inputs={}
 def raw(c,p):
+ assert re.fullmatch('[a-f0-9]{40}',c) and not p.startswith('/') and all(x not in ('','.','..') for x in p.split('/')), 'Exact commit and safe path required'
  row=subprocess.check_output(['git','-c','protocol.allow=never','-C',W,'ls-tree','-z',c,'--',p]).rstrip(b'\0');meta,name=row.split(b'\t');mode,kind,oid=meta.decode().split();assert mode=='100644' and kind=='blob' and name.decode()==p
  size=int(subprocess.check_output(['git','-c','protocol.allow=never','-C',W,'cat-file','-s',oid]))
  with subprocess.Popen(['git','-c','protocol.allow=never','-C',W,'cat-file','blob',oid],stdout=subprocess.PIPE) as proc:
