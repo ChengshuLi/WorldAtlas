@@ -247,6 +247,8 @@ export async function prepareIntegration(options) {
   }
 }
 export async function completeIntegration(options) {
+  need(options.preparedGeographySoftware === undefined || typeof options.preparedGeographySoftware === 'boolean',
+    'Invalid prepared geographic checker choice');
   options = {...options, api: memoizeImmutableGitBlobs(options.api)};
   // Duplicate/canceled executions reconcile the immutable reviewed head before
   // requiring now-inapplicable candidate jobs.
@@ -299,17 +301,25 @@ export async function completeIntegration(options) {
       preparedSource.event === 'workflow_dispatch' && preparedSource.candidate_commit === options.testedCandidate &&
       preparedSource.tree === candidate.tree.sha && preparedSource.head === state.pr.head.sha && preparedSource.baseline === state.base,
       'Prepared geographic source differs from accepted queue candidate');
-    const profile = integrationProfile(state.pr.head.ref, files, {}, integrated.entries);
-    let selection = null;
-    // Selection can only exempt candidate checker code. When no changed path
-    // selects that code, another whole-data classification cannot affect it.
-    if (candidateGeographyCode(profile, files) && selectedDataCandidate(state.pr.head.ref, files, {})) {
-      try {
-        selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files,
-          reservation: {}, baseline, authored: integrated});
-      } catch { /* Unknown applicability retains full software validation. */ }
+    let software;
+    if (preparedSource && options.preparedGeographySoftware !== undefined) {
+      // The same trusted prepare output already selected this authenticated
+      // queue job's checker. Exact candidate/source bindings above prevent
+      // transferring the choice; report text alone supplies no such authority.
+      software = options.preparedGeographySoftware;
+    } else {
+      // Older queued workflows and non-queue callers retain the original
+      // derivation. Missing preparation output never implies baseline code.
+      const profile = integrationProfile(state.pr.head.ref, files, {}, integrated.entries);
+      let selection = null;
+      if (candidateGeographyCode(profile, files) && selectedDataCandidate(state.pr.head.ref, files, {})) {
+        try {
+          selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files,
+            reservation: {}, baseline, authored: integrated});
+        } catch { /* Unknown applicability retains full software validation. */ }
+      }
+      software = candidateGeographyCode(profile, files, selection?.test_selection);
     }
-    const software = candidateGeographyCode(profile, files, selection?.test_selection);
     const codeCommit = software ? options.testedCandidate : state.base;
     waterPass = checkGeographicReport(geography, state.base, options.testedCandidate, codeCommit);
   }

@@ -39,8 +39,10 @@ try {
       : `checkout_patterns_base64=${checkoutPatternsBase64}\n`;
     fs.appendFileSync(process.env.GITHUB_OUTPUT, `geography_required=${state.geography_required !== false}\ngeography_software=${state.geography_software === true}\ncandidate_ref=${state.candidate_ref ?? ''}\ncandidate=${state.candidate ?? ''}\nbase=${state.base ?? ''}\nprofile=${state.profile ?? 'evidence'}\nshards=${JSON.stringify(state.shards ?? (state.profile === 'full' ? [0,1,2] : [0]))}\ntest_selection=${state.test_selection ?? 'complete'}\nexpectations_path=${state.expectations_path ?? ''}\ncandidate_tree=${state.candidate_tree ?? ''}\n${checkoutOutput}`);
   } else {
+    const preparedChoice = process.env.PREPARED_GEOGRAPHY_SOFTWARE;
     const completed = await completeIntegration({...options, integrationResult: process.env.INTEGRATION_RESULT,
       geographyResult: process.env.GEOGRAPHY_RESULT,
+      preparedGeographySoftware: preparedChoice === 'true' ? true : preparedChoice === 'false' ? false : preparedChoice,
       geographyReportHash: process.env.GEOGRAPHY_REPORT_SHA256,
       geographyReportLoader: ({api: reportAPI = api} = {}) => loadGeographicReport({api: reportAPI, repo,
         runId: process.env.GITHUB_RUN_ID,

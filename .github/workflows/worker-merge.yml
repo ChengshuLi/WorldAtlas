@@ -402,6 +402,7 @@ jobs:
           TESTED_CANDIDATE: ${{ needs.prepare.outputs.candidate }}
           INTEGRATION_RESULT: ${{ needs.integration.result }}
           GEOGRAPHY_RESULT: ${{ needs.geography.result }}
+          PREPARED_GEOGRAPHY_SOFTWARE: ${{ needs.prepare.outputs.geography_software }}
           GEOGRAPHY_REPORT_SHA256: ${{ needs.geography.outputs.report_sha256 }}
           GEOGRAPHY_ARTIFACT_NAME: ${{ needs.geography.outputs.artifact_name }}
           GEOGRAPHY_REPORT_BYTES: ${{ needs.geography.outputs.report_bytes }}
