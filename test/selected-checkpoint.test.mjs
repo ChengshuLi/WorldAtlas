@@ -498,3 +498,81 @@ test('complete native authority authenticates retained source aliases without fe
  assert.deepEqual(proof.native_proof.native_patches,next.proof.native_proof.native_patches);
  assert.doesNotMatch(s.tracing(),remoteAttempt);
 });
+
+function miniatureInventory(root,prefix=''){
+ return fs.readdirSync(path.join(root,prefix),{withFileTypes:true}).flatMap(entry=>{
+  const name=path.join(prefix,entry.name),file=path.join(root,name),stat=fs.lstatSync(file);
+  assert.equal(stat.isSymbolicLink(),false,`No shared symlink: ${name}`);
+  if(entry.isDirectory())return miniatureInventory(root,name);
+  assert.equal(stat.isFile(),true,`Ordinary copied file: ${name}`);
+  return [{name,mode:stat.mode,bytes:fs.readFileSync(file),device:stat.dev,inode:stat.ino}];
+ }).sort((a,b)=>a.name.localeCompare(b.name));
+}
+const miniatureBytes=inventory=>inventory.map(({device,inode,...file})=>file);
+
+for(const options of [{},{nativeAppend:true}])test(`miniature seed copies isolate all files and mutable state ${JSON.stringify(options)}`,async t=>{
+ const [a,b]=await Promise.all([trustedFixture(t,options),trustedFixture(t,options)]);
+ const original=miniatureInventory(a.root),other=miniatureInventory(b.root);
+ assert.deepEqual(miniatureBytes(original),miniatureBytes(other));
+ assert.ok(original.some(file=>/^\.git\/objects\/[a-f0-9]{2}\/[a-f0-9]{38}$/.test(file.name)));
+ assert.equal(fs.existsSync(path.join(a.root,'.git/objects/info/alternates')),false);
+ for(let i=0;i<original.length;i++)
+  assert.notEqual(`${original[i].device}:${original[i].inode}`,`${other[i].device}:${other[i].inode}`,original[i].name);
+ for(const key of ['api','native','reader','ledger','patch','sidecar','envelope','selection','rootRow','manifest','features','registry'])
+  assert.notStrictEqual(a[key],b[key],key);
+ assert.notStrictEqual(a.native.ImmutableReader,b.native.ImmutableReader);
+ assert.notStrictEqual(a.reader.invocation,b.reader.invocation);
+ const left=a.api.qualifyCheckpoint({reader:a.reader}),right=b.api.qualifyCheckpoint({reader:b.reader});
+ assert.equal(left.available,true);assert.equal(right.available,true);
+ assert.throws(()=>b.api.projectSourceFeatures({state:left.state,ids:['A']}),/private qualified/);
+ assert.throws(()=>a.api.projectNativeRows({state:right.state,rows:[1]}),/private qualified/);
+ a.api.releaseCheckpoint(left.state);
+ assert.throws(()=>a.api.projectSourceFeatures({state:left.state,ids:['A']}),/private qualified/);
+ assert.equal(b.api.projectSourceFeatures({state:right.state,ids:['A']}).features[0].id,'A');
+ b.api.releaseCheckpoint(right.state);
+ const originalData=structuredClone(Object.fromEntries(['ledger','patch','sidecar','envelope','selection','rootRow','manifest','features','registry'].map(key=>[key,b[key]])));
+ a.features[0].properties.id='only the first consumer';a.ledger.rows[0].target_id='wrong owner';
+ a.rootRow.certificate.decoded_sha256='0'.repeat(64);a.manifest.parts[0].sha256='0'.repeat(64);
+ const object=original.find(file=>/^\.git\/objects\/[a-f0-9]{2}\/[a-f0-9]{38}$/.test(file.name));
+ fs.chmodSync(path.join(a.root,object.name),0o644);
+ fs.writeFileSync(path.join(a.root,object.name),'corrupt only the first object');
+ fs.appendFileSync(path.join(a.root,'.git/config'),'\n# first consumer only\n');
+ a.save('data/source.json',{changed:'first consumer only'});
+ const c=await trustedFixture(t,options),third=miniatureInventory(c.root);
+ assert.deepEqual(miniatureBytes(miniatureInventory(b.root)),miniatureBytes(other));
+ assert.deepEqual(miniatureBytes(third),miniatureBytes(original),'The private seed remains pristine');
+ for(let i=0;i<third.length;i++)
+  assert.equal(new Set([original[i],other[i],third[i]].map(file=>`${file.device}:${file.inode}`)).size,3,third[i].name);
+ for(const key of Object.keys(originalData)){
+  assert.deepEqual(b[key],originalData[key],`Second metadata: ${key}`);
+  assert.deepEqual(c[key],originalData[key],`Fresh metadata: ${key}`);
+ }
+});
+
+test('miniature seed catalogue forgery in the first consumer cannot poison a later consumer',async t=>{
+ const first=await trustedFixture(t);
+ first.rootRow.certificate.decoded_sha256='0'.repeat(64);
+ first.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[first.rootRow]});first.commit();
+ assert.throws(()=>first.api.qualifyCheckpoint({reader:first.reader}),/decoded output is corrupt/);
+ const later=await trustedFixture(t),qualified=later.api.qualifyCheckpoint({reader:later.reader});
+ assert.equal(qualified.available,true);
+ assert.equal(later.api.projectSourceFeatures({state:qualified.state,ids:['A']}).features[0].id,'A');
+ later.api.releaseCheckpoint(qualified.state);
+});
+
+test('miniature seed keys retain every fixture option and normalize default option ordering',async t=>{
+ const configurations=[{},{incompleteNative:true},{codeRoutes:true},{nativeAppend:true},{sourceOverride:true},
+  {sourceOverride:true,physicalLogicalSource:true},{sourceOverride:true,overrideLogicalPath:'data/somewhere-else.json'},
+  {nativeAppend:true,sourceOverride:true}];
+ const heads=[];
+ for(const options of configurations){
+  const first=await trustedFixture(t,options);
+  const reversed=Object.fromEntries(Object.entries(options).reverse());
+  const again=await trustedFixture(t,{overrideLogicalPath:'data/source.json',physicalLogicalSource:false,
+   sourceOverride:false,nativeAppend:false,codeRoutes:false,incompleteNative:false,...reversed});
+  const head=first.git('rev-parse','HEAD').toString().trim();heads.push(head);
+  assert.equal(again.git('rev-parse','HEAD').toString().trim(),head);
+  assert.deepEqual(again.rootRow,first.rootRow);
+ }
+ assert.equal(new Set(heads).size,configurations.length,'Distinct option effects must not share a seed');
+});
