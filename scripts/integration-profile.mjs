@@ -109,7 +109,7 @@ const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
 const hash = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
 const safe = value => typeof value === 'string' && /^[A-Za-z0-9_./-]+$/.test(value) &&
   value.split('/').every(part => part && part !== '.' && part !== '..' && !part.startsWith('.'));
-const ordinary = row => row?.type === 'blob' && row.mode === '100644' &&
+const ordinary = (row, mode = '100644') => row?.type === 'blob' && row.mode === mode &&
   /^[a-f0-9]{40}$/.test(row.sha ?? '') && Number.isSafeInteger(row.size) && row.size >= 0;
 const needSelected = (value, message) => { if (!value) throw Error('Selected-data: ' + message); };
 const keys = (value, names) => value && typeof value === 'object' && !Array.isArray(value) &&
@@ -214,7 +214,10 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     needSelected(ordinary(approved) && approved.size > 0 && approved.sha === candidate?.sha && candidate.mode === approved.mode,
       'generic smoke is not accepted unchanged on baseline');
     const added = new Set(files.filter(file => file.status === 'added').map(file => file.filename));
-    needSelected(files.every(file => ordinary(authored.entries.get(file.filename))) &&
+    // New executable originals may be supporting custody. Every consumed role
+    // remains 100644; the complete role walk below must prove custody unconsumed.
+    needSelected(files.every(({filename}) => ordinary(authored.entries.get(filename)) ||
+      added.has(filename) && ordinary(authored.entries.get(filename), '100755')) &&
       [...added].every(name => !baseline.entries.has(name)), 'nonordinary or overwritten data');
     const expectedPaths = [...added].filter(name => name.endsWith('/selected-delivery-expectations.json'));
     needSelected(expectedPaths.length > 0, 'one reviewed expectations file required');
