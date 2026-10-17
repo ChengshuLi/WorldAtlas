@@ -1,0 +1,120 @@
+{
+  "package_id": "gb-GNB-ADM2--repair-evaluation",
+  "primary_source": "gb:GNB:ADM2",
+  "source_family_index": 131,
+  "category": "repair-evaluation",
+  "native_cells": 6117,
+  "land_cells": 6117,
+  "inland_water_cells": 0,
+  "source_relative_cells": 0,
+  "interval_segments": 1878,
+  "owners": [
+    20863,
+    20865,
+    20868,
+    20869,
+    20872,
+    20875,
+    20878,
+    20880,
+    20881,
+    20882,
+    20884,
+    20889,
+    20890,
+    20892,
+    20893,
+    20895,
+    20897,
+    20898,
+    20899,
+    20900
+  ],
+  "source_features": [
+    34098,
+    34197,
+    34198,
+    34199,
+    34200,
+    34201,
+    34202,
+    34203,
+    34204,
+    34205,
+    34208,
+    34211,
+    34212,
+    34215,
+    34216,
+    34217,
+    34219,
+    34220,
+    34221,
+    34222,
+    34230,
+    34232,
+    34233,
+    34234,
+    34237,
+    34238,
+    34240,
+    34241,
+    34242
+  ],
+  "source_families": [
+    126,
+    130,
+    131
+  ],
+  "native_blocks": [
+    29,
+    30
+  ],
+  "provinces": [
+    "framework:province:bafata:def125bd4ee9",
+    "framework:province:biombo:5213c731892e",
+    "framework:province:bolama:08258e19a5c1",
+    "framework:province:cacheu:8c70976871f9",
+    "framework:province:gabu:1496fb36508d",
+    "framework:province:oio:e1a310d50098",
+    "framework:province:quinara:a0e3b196a3a4",
+    "framework:province:tombali:692952bab6f4"
+  ],
+  "location_count": 20,
+  "source_feature_count": 29,
+  "locality_count": 8,
+  "cost": {
+    "primary_source_decoded_bytes": 273863,
+    "all_required_source_decoded_bytes": 640594,
+    "primary_full_source_raster_measured_seconds": 0.127,
+    "source_interval_segments": 1878,
+    "maximum_native_rows_per_execution_frame": 4096,
+    "observed_global_census_peak_rss_bytes": 884973568
+  },
+  "evidence": {
+    "selection": "ownership-binding.json",
+    "lineage": "lineage.json",
+    "territorial_source_catalogue": "retained-source-catalogue.json",
+    "territorial_catalogue_sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+    "source_features": "source-feature-roster.json",
+    "territorial_native_blocks": "source-candidates-block-NNN.json.gz",
+    "physical": "physical-unassigned-summary.json",
+    "source_domain_transform": []
+  },
+  "work": {
+    "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+    "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+    "priority": 1
+  },
+  "execution": {
+    "command": "node source-batch-intervals.mjs gb-GNB-ADM2--repair-evaluation OUTPUT_DIRECTORY",
+    "output_columns": [
+      "y",
+      "start",
+      "end",
+      "candidate_owner_indices",
+      "source_feature_indices",
+      "physical_class"
+    ]
+  }
+}
