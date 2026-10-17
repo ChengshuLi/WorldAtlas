@@ -5,7 +5,7 @@ import {gzipSync} from 'node:zlib';
 import {deriveSourceTargetNativeDelta,nativeRowLatitudes,nativePolygonIntervals,polygonParts} from '../src/native-grid.js';
 import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
 import {constructOriginalAuthority} from '../scripts/delivery-handoff-advance.mjs';
-import {diagnoseSourceTargetNativeAuthority} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {diagnoseSourceTargetNativeAuthority,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const rectangle=(left,right,bottom=-40,top=40)=>({type:'Polygon',coordinates:[[[left,bottom],[right,bottom],[right,top],[left,top],[left,bottom]]]});
 const feature=(id,pixelIndex,geometry,target_id)=>({id,pixelIndex,geometry,...(target_id?{target_id}:{})});
@@ -62,9 +62,12 @@ function constructorFixture(change=()=>{}){
   };
   const source=put('original-source.json',collection(state.originals)),roster=put('owners.json',state.roster);
   const physical=put('physical.json',state.physical),measured=put('measured.json',state.measured);
+  const extraSources=(state.extraFamilies??[]).map(f=>({...f,pin:put(f.source_id+'.json',collection(f.features))}));
   const catalogue=put('coordination/engineering/original-geography-source-corpus-20261006/catalogue.json',{
     products:[{key:family,parts:[{path:source.path,bytes:source.bytes,sha256:source.sha256}],
-      feature_count:state.originals.length,original_bytes:source.bytes,original_sha256:source.sha256}]});
+      feature_count:state.originals.length,original_bytes:source.bytes,original_sha256:source.sha256},
+      ...extraSources.map(f=>({key:f.source_id,parts:[{path:f.pin.path,bytes:f.pin.bytes,sha256:f.pin.sha256}],
+        feature_count:f.features.length,original_bytes:f.pin.bytes,original_sha256:f.pin.sha256}))]});
   const nativeLatitudes=put('latitudes.f64le',latitudeBytes);
   const membership={index:put('data/world-index.json',state.index),lineage:put('data/semantic-report.json',state.lineage),
     parts:[put('data/geography/part-0.json',state.accepted)]};
@@ -78,10 +81,17 @@ function constructorFixture(change=()=>{}){
       location_parts:['macro-foundation/world-review-locations-0.json.gz'],...state.cohort.index}),parts:[part]};
     state.cohort.mutate?.(membership.cohort_inventory);
   }
+  if(state.external){
+    const raw=Buffer.from(JSON.stringify(collection(state.external.features)));
+    membership.negative_natural_earth={registry:put('data/sources.json',{
+      hashes:{ne_10m_admin_1_states_provinces:state.external.registryHash??digest(raw)}}),source:put('whole-ne.json',raw),
+      atoms:state.external.atoms??[{source_id:'TST-1',feature_ordinal:0,geometry_sha256:valueSha(state.external.features[0].geometry)}]};
+    state.external.mutate?.(membership.negative_natural_earth);
+  }
   const evidence=put('source-evidence.json',{version:1,kind:'source-target-native-evidence-v1',catalogue,
     owner_roster:roster,physical_evidence:physical,physical_input:measured,physical_reproduction:put('physical.py',Buffer.from('# retained fixture')),
     native_latitudes:nativeLatitudes,native_contract:{size,native_latitudes:nativeLatitudes,original_assets:{bounds:{sha256:roster.sha256}}},
-    base_reference:{id:'fixture-base'},families:[{source_id:family,parts:[source]}],
+    base_reference:{id:'fixture-base'},families:[{source_id:family,parts:[source]},...extraSources.map(f=>({source_id:f.source_id,parts:[f.pin]}))],
     targets:state.targets.map(target=>({...target,source_receipt_sha256:physical.sha256})),
     ...(state.membership?{source_membership:membership}:{})});
   const patch=put('patch.json',state.proposed);
@@ -537,4 +547,94 @@ for(const [name,change]of [
 ])test('complex negative requires '+name+' to fail closed',()=>{
  const f=complexCompetitorFixture(change,true);
  assert.throws(()=>f.run(),/cohort|projection|bytes|body|immutable input/);assert.throws(()=>f.diagnose(),/cohort|projection|bytes|body|immutable input/);
+});
+
+function externalCompetitorFixture(change=()=>{}){
+ return complexCompetitorFixture(s=>{
+  s.external={features:[{type:'Feature',properties:{adm1_code:'TST-1',name:'Same display name'},geometry:rectangle(.02,.03,-.02,.02)},
+   {type:'Feature',properties:{adm1_code:'TST-2',name:'Same display name'},geometry:rectangle(1,2,1,2)}]};
+  s.lineage.changes[2].replaces.push('TST-1');change(s);
+ },true);
+}
+test('complete external Natural Earth atom joins only negative ancestry with whole original geometry',()=>{
+ const f=externalCompetitorFixture(),proof=f.run(),diagnostic=f.diagnose();
+ assert.equal(proof.ledger_rows[0].target_id,c);assert.equal(proof.ledger_rows[0].native_cells,1);
+ const external=proof.split_source_competitors.find(x=>x.source_id==='TST-1');
+ assert.deepEqual(external,{source_id:'TST-1',geometry_sha256:valueSha(f.state.external.features[0].geometry),
+  descendants:[{target_id:'city',pixelIndex:1,parent_id:'province:left'}],source_family:'natural-earth:adm1',feature_ordinal:0});
+ assert.deepEqual(diagnostic.split_source_competitors,proof.split_source_competitors);
+});
+for(const [name,geometry,reason]of [
+ ['interior',()=>rectangle(.04,.06,-.02,.02),'territorial_exclusion_cells'],
+ ['boundary',()=>rectangle(.04,.06,latitudes[size/2],.02),'boundary_cells'],
+])test('complete external original '+name+' remains a native veto outside every descendant',()=>{
+ const f=externalCompetitorFixture(s=>s.external.features[0].geometry=geometry());
+ assert.throws(()=>f.run(),/lack unique source-target coverage/);
+ const d=f.diagnose();assert.equal(d.supported_cells,0);assert.equal(d.held_cells,1);
+ assert.equal(d.decision_rows[0].runs[0][3],reason);
+});
+for(const [name,change,pattern]of [
+ ['missing explicit bridge',s=>delete s.external,/complex/],
+ ['empty atoms',s=>s.external.atoms=[],/Natural Earth source role/],
+ ['duplicate atom',s=>s.external.mutate=r=>r.atoms.push(r.atoms[0]),/duplicate negative/],
+ ['wrong native identity',s=>s.external.mutate=r=>r.atoms[0].source_id='natural-earth:adm1:TST-1',/original identity/],
+ ['same-name distinct identity',s=>s.external.mutate=r=>r.atoms[0].source_id='TST-2',/original identity/],
+ ['wrong ordinal',s=>s.external.mutate=r=>r.atoms[0].feature_ordinal=1,/original identity/],
+ ['wrong geometry hash',s=>s.external.mutate=r=>r.atoms[0].geometry_sha256='0'.repeat(64),/original identity/],
+ ['missing ordinal',s=>s.external.mutate=r=>delete r.atoms[0].feature_ordinal,/negative Natural Earth atom/],
+ ['foreign role key',s=>s.external.mutate=r=>r.guessed_owner='city',/Natural Earth source role/],
+ ['wrong registry path',s=>s.external.mutate=r=>r.registry.path='foreign-registry.json',/Natural Earth source role/],
+ ['corrupt whole source hash',s=>s.external.mutate=r=>r.source.sha256='0'.repeat(64),/hash differs|bytes differ|immutable input differs/],
+ ['corrupt registry hash',s=>s.external.mutate=r=>r.registry.sha256='0'.repeat(64),/hash differs|bytes differ|immutable input differs/],
+ ['complete source differs from selected registry',s=>s.external.registryHash='0'.repeat(64),/whole source differs/],
+ ['external leaf shadows an accepted intermediary',s=>s.lineage.changes.push({id:'TST-1',replaces:[b],source:'retained',basis:'retained'}),/shadows/],
+ ['duplicate unbound original',s=>s.external.features.push(s.external.features[1]),/duplicate negative Natural Earth native identity/],
+ ['missing unbound original identity',s=>delete s.external.features[1].properties.adm1_code,/native identity/],
+ ['invalid unbound whole geometry',s=>s.external.features[1].geometry.coordinates[0][0][0]=200,/coordinate/],
+ ['unclosed unbound whole ring',s=>s.external.features[1].geometry.coordinates[0].pop(),/ring/],
+ ['foreign unbound leaf',s=>s.lineage.changes[2].replaces.push('TST-2'),/complex/],
+ ['unused atom',s=>s.lineage.changes[2].replaces.pop(),/Unused negative/],
+ ['missing external semantic edge',s=>s.lineage.changes[2].replaces=['TST-2'],/complex/],
+ ['omitted complete canonical member',s=>s.accepted.features[0].properties.metadata.source_member_ids=[],/canonical member/],
+ ['removed current descendant',s=>s.accepted.features.splice(0,1),/cohort/],
+ ['external original as current owner',s=>s.roster.push({id:'TST-1',index:4}),/positive native owner/],
+ ['external original as positive source',s=>s.targets[0].id='TST-1',/positive native owner/],
+])test('negative external source rejects '+name+' through real constructor and diagnostic',()=>{
+ const f=externalCompetitorFixture(change);assert.throws(()=>f.run(),pattern);assert.throws(()=>f.diagnose(),pattern);
+});
+test('explicit external original never grants positive mixed-source ownership',()=>{
+ const f=externalCompetitorFixture(s=>{
+  s.lineage.changes[0].replaces=[a,'TST-1'];s.accepted.features[0].properties.metadata.source_member_ids=[a,'TST-1'];
+  s.lineage.changes[1].replaces=[b];s.accepted.features[1].properties.metadata.source_member_ids=[b];
+  s.lineage.changes.pop();
+  const geometry=s.originals[0].geometry,base=s.accepted.features[0].geometry;
+  s.targets=[{id:a,target_id:'city',pixelIndex:1,source_family:family,base_geometry:base,coverage_classes:['mapped_land_support']}];
+  s.measured=[{target:a,consumed:{geometry},selected:{id:'city',geometry:base}}];
+  s.physical.results=[{target:a,issues:[],support:{mapped_land_support:geometry}}];s.proposed.rows[0].runs[0][2]=1;
+ });
+ assert.throws(()=>f.run(),/Missing or conflicting complete source aggregation member/);
+ assert.throws(()=>f.diagnose(),/Missing or conflicting complete source aggregation member/);
+});
+
+test('external registry must match the actual selected immutable body',()=>{
+ const f=externalCompetitorFixture(),entry=f.files.get('data/sources.json'),raw=Buffer.from('{"hashes":{}}');
+ f.byBlob.set(blob(raw),raw);f.files.set('data/sources.json',{raw,pin:{...entry.pin,git_blob_oid:blob(raw),bytes:raw.length}});
+ assert.throws(()=>f.run(),/selected canonical bytes/);assert.throws(()=>f.diagnose(),/selected canonical bytes/);
+});
+
+test('authenticated external whole original veto also covers targets in another source family',()=>{
+ const f=externalCompetitorFixture(s=>{
+  const secondFamily='gb:OTHER:ADM2',id=secondFamily+':D',geometry=rectangle(.04,.06,-.02,.02),y=size/2+1;
+  s.extraFamilies=[{source_id:secondFamily,features:[rawFeature('D',geometry)]}];
+  s.roster.push({id,index:4});s.accepted.features.push({type:'Feature',id,geometry,
+   properties:{id,reference_owner:'Other cohort',metadata:{}}});s.cohort.rows.push({id,owner:'Other cohort'});
+  s.targets.push({id,pixelIndex:4,source_family:secondFamily,base_geometry:geometry,coverage_classes:['mapped_land_support']});
+  s.measured.push({target:id,consumed:{geometry},selected:{id,geometry}});
+  s.physical.results.push({target:id,issues:[],support:{mapped_land_support:geometry}});
+  s.proposed.rows.push({y,runs:[[...s.proposed.rows[0].runs[0].slice(0,2),4]]});
+  s.external.features[0].geometry=rectangle(.04,.06,latitudes[y]-.0001,latitudes[y]+.0001);
+ });
+ assert.throws(()=>f.run(),/lack unique source-target coverage/);
+ const d=f.diagnose();assert.equal(d.supported_cells,1);assert.equal(d.held_cells,1);
+ assert.deepEqual(d.decision_rows.map(row=>row.runs[0].slice(2)),[[2,'assigned_cells'],[4,'territorial_exclusion_cells']]);
 });

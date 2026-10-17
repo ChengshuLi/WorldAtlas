@@ -22,7 +22,7 @@ function reader(read) {
   return pin => {
     need(pin && /^[a-f0-9]{40}$/.test(pin.commit ?? '') && safe(pin.path) && pin.mode === '100644'
       && /^[a-f0-9]{40}$/.test(pin.git_blob_oid ?? '') && Number.isSafeInteger(pin.bytes)
-      && pin.bytes > 0 && pin.bytes <= 32 * 1024 * 1024 && hash(pin.sha256),
+      && pin.bytes > 0 && hash(pin.sha256),
     'Complete ordinary whole reference metadata pin required');
     const raw = read(pin);
     need(Buffer.isBuffer(raw) && raw.length === pin.bytes && sha(raw) === pin.sha256
@@ -31,9 +31,9 @@ function reader(read) {
     let decoded = raw;
     if (pin.encoding !== undefined) {
       need(pin.encoding === 'gzip' && Number.isSafeInteger(pin.decoded_bytes) && pin.decoded_bytes > 0
-        && pin.decoded_bytes <= 32 * 1024 * 1024 && hash(pin.decoded_sha256),
+        && hash(pin.decoded_sha256),
       'Bounded reference metadata decoding required');
-      decoded = gunzipSync(raw, {maxOutputLength: pin.decoded_bytes + 1});
+      decoded = gunzipSync(raw, {maxOutputLength: pin.decoded_bytes});
       need(decoded.length === pin.decoded_bytes && sha(decoded) === pin.decoded_sha256,
         'Whole decoded reference metadata differs');
     }

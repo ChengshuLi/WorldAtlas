@@ -100,7 +100,7 @@ def safe_path(value):
 
 
 def git(repo, *args):
-    return subprocess.check_output(['git', '-c', 'core.hooksPath=/dev/null', '-C', str(repo), *args], stderr=subprocess.PIPE)
+    return subprocess.check_output(['git', '-c', 'core.hooksPath=/dev/null', '-C', str(repo), *args])
 
 
 def entry(repo, commit, name):
@@ -348,7 +348,7 @@ def inspect(repo, baseline, candidate, *, code_commit=None, prefetch=False, chec
             with stage_timing('selected-native'):
                 native_raw = subprocess.check_output([
                     os.environ.get('NODE', 'node'), str(repo / 'scripts/check-effective-geographic-regression.mjs'),
-                    str(repo), baseline, candidate, sys.executable], stderr=subprocess.PIPE, env=env)
+                    str(repo), baseline, candidate, sys.executable], env=env)
 
             native = json.loads(native_raw)
         if (native.get('method') != 'selected-native-owner-conservation-v1'

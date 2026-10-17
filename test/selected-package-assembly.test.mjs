@@ -1,6 +1,7 @@
 import nodeTest from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {gunzipSync} from 'node:zlib';
 import os from 'node:os';
 import path from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
@@ -692,7 +693,7 @@ test('discovery and actual private execution admit data leaves and a later accep
 
 // A small real current-product fixture. It exercises the same consumer after
 // private original-output admission, without any scientific custody inputs.
-async function currentProductFixture(t,{changeCatalog=()=>{},changeGeometry=()=>{},reference=false,sourceRevision=false}={}) {
+async function currentProductFixture(t,{changeCatalog=()=>{},changeGeometry=()=>{},reference=false,sourceRevision=false,priorGzip=false}={}) {
   const {gzipSync}=await import('node:zlib');
   const {footprintHash}=await import('../scripts/check-prepared.mjs');
   const {footprintValueSha256,additiveReleaseFootprintDigest}=await import('../src/effective-footprint.js');
@@ -767,8 +768,13 @@ async function currentProductFixture(t,{changeCatalog=()=>{},changeGeometry=()=>
   const priorEffective={...base,id:'geography:prior-effective',footprints_sha256:additiveReleaseFootprintDigest(base,[priorFeature])};
   const priorPatchRaw=Buffer.from(JSON.stringify({version:1,kind:'unassigned-native-cells-v1',base_reference:base,
     effective_reference:priorEffective,ledger_sha256:sha(priorLedgerRaw),rule_sha256:ledger.rule_sha256,rows:[{y:3,runs:[[3,4,1]]}]}));
-  const priorBodies={...bodies,ledger:priorLedgerRaw,patch:priorPatchRaw},priorEnvelope={...envelope,effective_reference:priorEffective,
+  const priorSourceBodies={...bodies,ledger:priorLedgerRaw,patch:priorPatchRaw},priorSourceEnvelope={...envelope,effective_reference:priorEffective,
     ledger:pin(envelope.ledger.path,priorLedgerRaw),patch:pin(envelope.patch.path,priorPatchRaw)};
+  const priorBodies={...priorSourceBodies},priorEnvelope=structuredClone(priorSourceEnvelope);
+  if(priorGzip)for(const role of ['ledger','patch']){
+    const body=priorSourceBodies[role],raw=gzipSync(body);priorBodies[role]=raw;
+    priorEnvelope[role]={...pin(priorSourceEnvelope[role].path+'.gz',raw),encoding:'gzip',decoded_bytes:body.length,decoded_sha256:sha(body)};
+  }
   const catalog=[{...feature,geometry:null}],geometry=[{id:feature.id,geometry:feature.geometry}];changeCatalog(catalog);changeGeometry(geometry);
   const atlas={...(reference?{pixelMap:JSON.parse(manifestRaw),referenceMetadata}:{}),additiveRelease:priorEnvelope,reference_release:priorEffective,parts:['geography/catalog-0.json.gz'],geometryParts:['geography/part-0.json.gz']};
   const f=original(t,{bodies:{...(reference?{'dist/client/reference-metadata/current.json':projectionRaw}:{}),'dist/client/atlas-geography.json':JSON.stringify(atlas),
@@ -780,7 +786,7 @@ async function currentProductFixture(t,{changeCatalog=()=>{},changeGeometry=()=>
   f.manifestRaw=Buffer.from(JSON.stringify(captured)+'\n');
   f.receipt.package_output_manifest_sha256=sha(f.manifestRaw);f.receipt.package_output_manifest_bytes=f.manifestRaw.length;
   const originalToken=await authenticateOriginalPackageOutput(f);
-  return {f,currentRoot,originalToken,files,sidecar,currentSelection,feature,bodies,envelope,priorBodies,priorEnvelope,projection,projectionRaw,referenceRevision};
+  return {f,currentRoot,originalToken,files,sidecar,currentSelection,feature,bodies,envelope,priorBodies,priorEnvelope,priorSourceBodies,priorSourceEnvelope,projection,projectionRaw,referenceRevision};
 }
 
 test('shared current consumer publishes authenticated original context with historical custody entirely cold',async t=>{
@@ -812,7 +818,7 @@ test('shared current consumer publishes authenticated original context with hist
   for(const name of historicalNames)assert.equal(fs.existsSync(path.join(shallow,historicalDirectory,name)),false);
   assert.equal(git(shallow,'rev-parse','HEAD'),head);
   const out=path.join(f.currentRoot,'out');await publication.publish(out);
-  for(const [role,raw]of Object.entries(f.bodies))assert.deepEqual(fs.readFileSync(path.join(out,f.envelope[role].path)),raw);
+  for(const [role,raw]of Object.entries(f.bodies)){const actual=fs.readFileSync(path.join(out,publication.additiveRelease[role].path));assert.deepEqual(['ledger','patch'].includes(role)?gunzipSync(actual):actual,raw);}
   for(const pin of requireOriginalPackageOutput(f.originalToken).manifest.output.files)
     assert.equal(sha(fs.readFileSync(path.join(f.f.root,pin.path))),pin.sha256,'Original invariant/output remains intact: '+pin.path);
   await assert.rejects(publication.publish(out),/already exists/);
@@ -921,13 +927,13 @@ test('original reference metadata refuses coherent source, native, revision and 
 });
 
 
-test('actual assembly reuses identical reference output and updates only the four current additive assets and atlas',async t=>{
+for(const priorGzip of [false,true])test('actual '+(priorGzip?'gzip':'plain')+' retained assembly preserves invariants and emits current gzip',async t=>{
   if(process.execArgv.length||process.env.NODE_OPTIONS?.trim()||process.env.NODE_PATH?.trim()){
     execFileSync(process.execPath,[new URL(import.meta.url).pathname,t.name],{env:{...process.env,NODE_OPTIONS:'',NODE_PATH:'',NODE_TEST_CONTEXT:undefined},encoding:'utf8'});return;
   }
   const oldFetch=globalThis.fetch,oldEntry=process.argv[1];
   t.after(()=>{globalThis.fetch=oldFetch;process.argv[1]=oldEntry;});
-  const f=await currentProductFixture(t,{reference:true}),directory=f.currentRoot;
+  const f=await currentProductFixture(t,{reference:true,priorGzip}),directory=f.currentRoot;
   const sourceRoot=fileURLToPath(new URL('../',import.meta.url)),copied=new Set();
   const write=(name,raw)=>{fs.mkdirSync(path.dirname(path.join(directory,name)),{recursive:true});fs.writeFileSync(path.join(directory,name),raw);};
   const copy=name=>{
@@ -942,11 +948,11 @@ test('actual assembly reuses identical reference output and updates only the fou
   for(const name of ['merge-integration-checks.yml','worker-merge.yml'])write('.github/workflows/'+name,'unchanged original producer');
   const pin=(name,raw)=>({path:name,bytes:raw.length,sha256:sha(raw)}),prefix='coordination/engineering/prior-fixture/';
   const priorMap={};
-  for(const [role,raw]of Object.entries(f.priorBodies)){
-    const name=prefix+path.posix.basename(f.priorEnvelope[role].path);write(name,raw);
+  for(const [role,raw]of Object.entries(f.priorSourceBodies)){
+    const name=prefix+path.posix.basename(f.priorSourceEnvelope[role].path);write(name,raw);
     priorMap[role]={...pin(name,raw),...(role==='owner_roster'?{decoded_bytes:f.priorEnvelope[role].decoded_bytes,decoded_sha256:f.priorEnvelope[role].decoded_sha256}:{})};
   }
-  const priorEnvelopeRaw=Buffer.from(JSON.stringify(f.priorEnvelope)),priorEnvelopePin=pin(prefix+'envelope.json',priorEnvelopeRaw);write(priorEnvelopePin.path,priorEnvelopeRaw);
+  const priorEnvelopeRaw=Buffer.from(JSON.stringify(f.priorSourceEnvelope)),priorEnvelopePin=pin(prefix+'envelope.json',priorEnvelopeRaw);write(priorEnvelopePin.path,priorEnvelopeRaw);
   const priorSidecar={...f.sidecar,runtime_envelope:priorEnvelopePin,logical_asset_map:priorMap},priorSidecarRaw=Buffer.from(JSON.stringify(priorSidecar));
   const priorPin=pin(prefix+'sidecar.json',priorSidecarRaw);write(priorPin.path,priorSidecarRaw);
   const priorSelection={...f.currentSelection,additive_release:priorPin};write('data/ownership-selection.json',JSON.stringify(priorSelection));
@@ -1008,7 +1014,7 @@ with zipfile.ZipFile(sys.argv[2],'w',zipfile.ZIP_DEFLATED) as z:
   const atlas=JSON.parse(fs.readFileSync(path.join(directory,'dist/client/atlas-geography.json')));
   assert.deepEqual(atlas.referenceMetadata,JSON.parse(fs.readFileSync(path.join(f.f.root,'dist/client/atlas-geography.json'))).referenceMetadata);
   assert.deepEqual(atlas.reference_release,f.envelope.effective_reference);
-  for(const [role,raw]of Object.entries(f.bodies))assert.deepEqual(fs.readFileSync(path.join(directory,'dist/client',atlas.additiveRelease[role].path)),raw);
+  for(const [role,raw]of Object.entries(f.bodies)){const actual=fs.readFileSync(path.join(directory,'dist/client',atlas.additiveRelease[role].path));assert.deepEqual(['ledger','patch'].includes(role)?gunzipSync(actual):actual,raw);}
   const published=sha(fs.readFileSync(path.join(directory,'dist/client/atlas-geography.json')));
   // A later mutable staging write is still checked against the original whole
   // output inventory. Identical metadata is never added to the mutable set.
@@ -1022,15 +1028,27 @@ with zipfile.ZipFile(sys.argv[2],'w',zipfile.ZIP_DEFLATED) as z:
   finally{fs.promises.writeFile=writeFile;}
   assert.equal(downloads,2);
   assert.equal(sha(fs.readFileSync(path.join(directory,'dist/client/atlas-geography.json'))),published,'Failed staging preserves the previous publication');
+  // The actual assembly caller checks new static output before publication.
+  fs.promises.writeFile=async function(file,...args){
+    const result=await writeFile.call(this,file,...args);
+    if(String(file).endsWith('/assembly/dist/reference-metadata/current.json')){
+      const over=path.join(path.dirname(file),'oversize.bin'),fd=fs.openSync(over,'w');fs.ftruncateSync(fd,26214401);fs.closeSync(fd);
+    }
+    return result;
+  };
+  try{await assert.rejects(assemble(),/Cloudflare static asset exceeds 25 MiB/);}
+  finally{fs.promises.writeFile=writeFile;}
+  assert.equal(downloads,3);
+  assert.equal(sha(fs.readFileSync(path.join(directory,'dist/client/atlas-geography.json'))),published,'Oversized staging preserves the previous publication');
   for(const mutation of [selection=>selection.reference_projection.sha256='f'.repeat(64),selection=>delete selection.reference_projection,
     selection=>selection.reference_projection=null]){
     const selection=structuredClone(f.currentSelection);mutation(selection);write('data/ownership-selection.json',JSON.stringify(selection));commit();
-    assert.equal((await assemble()).assembled,false);assert.equal(downloads,2,'Changed projection must fail original compatibility before archive download');
+    assert.equal((await assemble()).assembled,false);assert.equal(downloads,3,'Changed projection must fail original compatibility before archive download');
     assert.equal(sha(fs.readFileSync(path.join(directory,'dist/client/atlas-geography.json'))),published);
   }
   write('data/ownership-selection.json',JSON.stringify(f.currentSelection));
   fs.appendFileSync(path.join(directory,f.currentSelection.reference_projection.path),' ');commit();
-  assert.equal((await assemble()).assembled,false);assert.equal(downloads,2,'Changed projection body remains an invariant source refusal');
+  assert.equal((await assemble()).assembled,false);assert.equal(downloads,3,'Changed projection body remains an invariant source refusal');
 });
 
 if(probeName&&!probeRegistered)throw Error('Unknown private assembly probe: '+probeName);

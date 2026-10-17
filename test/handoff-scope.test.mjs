@@ -14,8 +14,15 @@ test('partial and final PRs link one issue without needing a document tracker ID
  assert.deepEqual(validateIssuePRBody('Closes #12\n\nAll acceptance criteria verified.'),{github_issue:12,issue_action:'close'});
  for(const legacy of ['TODO: ENG-08','TODO: obsolete/id','TODO: ENG-01\nTODO: CAM:other:2'])assert.deepEqual(validateIssuePRBody(legacy+'\nCloses #12'),{github_issue:12,issue_action:'close'});
 });
+test('a unique binding accepts punctuation and explanatory prose, including the PR2342 incident',()=>{
+ const incident="Refs #2335. Draft combined delivery; actual selected/emitted acceptance and the serialized queue remain root-owned. Original #2302 and #2313 remain incomplete, and #2329 awaits accepted delivery.";
+ assert.deepEqual(validateIssuePRBody(incident),{github_issue:2335,issue_action:'reference'});
+ for(const action of ['Refs','Closes'])for(const suffix of ['.', '; completed checks', ': verified', ' for this focused change', '. Context from #13 remains separate.']){
+  assert.deepEqual(validateIssuePRBody(`${action} #12${suffix}`),{github_issue:12,issue_action:action==='Closes'?'close':'reference'});
+ }
+});
 test('PR policy rejects ambiguous issue links and accidental additional closures',()=>{
- for(const body of ['No issue','Refs #0','Refs #12\nCloses #13','Closes #12 and #13','Closes #12\nFixes #13','Fixes #12','Refs #12\nRefs #13','Refs #12\nThis fixes #13 too.','Closes #12\nThis also resolves #13.'])assert.throws(()=>validateIssuePRBody(body));
+ for(const body of ['No issue','Refs #0','Refs #12\nCloses #13','Closes #12 and #13','Closes #12\nFixes #13','Fixes #12','Refs #12\nRefs #13','Refs #12\nThis fixes #13 too.','Closes #12\nThis also resolves #13.','Refs #12 and #13','Refs #12, #13','Refs #12. Refs #13','Refs #12. Closes #13','Closes #12. Fixes #13','Refs #12abc','Refs #12#13','Refs #12\nRefs #12'])assert.throws(()=>validateIssuePRBody(body));
 });
 test('GitHub issue type agrees with its lane and references an open issue',()=>{
  validateIssueMetadata('engineering/grid',{state:'open',labels:[{name:'type:engineering'},{name:'kind:umbrella'}]});
@@ -44,7 +51,7 @@ test('another lane advancing work is not mistaken for this branch changing its f
 
 test('remote issue validation reads only the event repository and requires successful labeled issue metadata',async()=>{
  const {checkLinkedIssue}=await import('../scripts/check-linked-github-issue.mjs');
- const event={repository:{full_name:'ChengshuLi/WorldAtlas'},pull_request:{body:'Refs #12'}};
+ const event={repository:{full_name:'ChengshuLi/WorldAtlas'},pull_request:{body:'Refs #12. Partial work; source context is #13.'}};
  let requests=0;
  const fetchIssue=async(url,options)=>{requests++;assert.equal(url,'https://api.github.com/repos/ChengshuLi/WorldAtlas/issues/12');assert.equal(options.headers.Authorization,'Bearer test-only');return {ok:true,json:async()=>({number:12,state:'open',body:'<!-- worldatlas-work:v1\n{"max_prs":1,"depends_on":[],"mode":"source-only","scope":"Synthetic source-only fixture"}\n-->',labels:[{name:'type:history-research'}]})};};
  assert.deepEqual(await checkLinkedIssue({branch:'research/japan',event,token:'test-only',fetchIssue,evidencePolicy:{version:1,mode:'report-only'}}),{github_issue:12,issue_action:'reference',issue_type:'type:history-research',evidence_policy:{required:false,legacy:false,decision:'Reporting rollout: no declared evidence contract'}});

@@ -13,7 +13,7 @@ export function readPinnedBuildFile({root=process.cwd(),commit,path:original,sha
  safeEvidencePath(original);safeEvidencePath(snapshotPath);
  if(!/^[a-f0-9]{40}$/.test(commit??'')||!/^[a-f0-9]{64}$/.test(expected??''))throw Error('Immutable build file needs exact commit and whole-file pin');
  let raw;
- if(inPackageImage(root))raw=repositoryReader(root)(snapshotPath,'candidate');
+ if(inPackageImage(root))raw=repositoryReader(root)(snapshotPath,'candidate',bytes===undefined?undefined:{bytes});
  else{
   const mode=execFileSync('git',['-C',root,'ls-tree',commit,'--',original],{encoding:'utf8'});
   if(!mode.startsWith('100644 ')&&!mode.startsWith('100755 '))throw Error('Pinned original must be ordinary');
