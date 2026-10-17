@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "selector": {
+    "commit": "1330b938687e1c8255ae0e80bf4ad854e44c6d5e",
+    "path": "data/ownership-selection.json",
+    "mode": "100644",
+    "git_blob_oid": "42274e646cc7a9ced523d6afcdc4a6899eb2d90f",
+    "bytes": 1846,
+    "sha256": "7e16163600121c42533b1d5bf073ea4d062d7c144d54a9236c3d974e52db2803"
+  },
+  "effective_release_id": "geography:czechia-supported-repair-20261017",
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "cb333f83bd9996cc1f685a36c87872b8aea21a16",
+        "path": "coordination/engineering/czechia-original-repair-20261017/native-authority-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "a5c7492461b88908d56e8a8ba1095b36e12e3f11",
+        "bytes": 737,
+        "sha256": "b2ab6630aaa62bd226a3cb20c5213658b65361f7e4aae5b4fcc40e62e84e14fe"
+      },
+      "source_authority": {
+        "commit": "cb333f83bd9996cc1f685a36c87872b8aea21a16",
+        "path": "coordination/engineering/czechia-original-repair-20261017/native-authority-001/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "da6b7667423bab454849014f79eefdc4a4fb5469",
+        "bytes": 740,
+        "sha256": "f727ae8f3ed619bbc448fe8fd05f41215e8df8c6d2a4715f58e6303039ecb8d7"
+      },
+      "ledger": {
+        "commit": "cb333f83bd9996cc1f685a36c87872b8aea21a16",
+        "path": "coordination/engineering/czechia-original-repair-20261017/native-authority-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "bc3a00ddb0bbf4418e1c9885778645d4304f2ae0",
+        "bytes": 157849,
+        "sha256": "8ab0850c7e1d07db14fbaf3d0becb3e092b027c05034d2fab4b7c80ff272aedc"
+      },
+      "native_patch": {
+        "bytes": 51219,
+        "commit": "01dc1386510aef197ae6f1bfd6c59b92c114e810",
+        "git_blob_oid": "c886a407c98433e69bd919a3b3310da2560e5e23",
+        "mode": "100644",
+        "path": "coordination/engineering/czechia-original-repair-20261017/supported-inputs-001/native-patch.json",
+        "sha256": "9adbc1fd70c306b6a8a734091e67611ccf03d33d202aba63904f801b000d92c0"
+      }
+    }
+  ]
+}
