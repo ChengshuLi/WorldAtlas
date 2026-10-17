@@ -31,6 +31,21 @@ assert {(x,r['y'],o) for r in diag['requested_rows'] for a,z,o in r['runs'] for 
 source_pin=next(p for p in pins if p['path']==P+'/native-inputs-002/source-evidence.json')
 assert all(source_pin[k]==diag['original_pins']['source_evidence'][k] for k in ['path','bytes','sha256','git_blob_oid'])
 assert len(supported)==diag['supported_cells'] and len(held)==diag['held_cells'] and not (set(supported)&set(held)) and set(supported)|set(held)==set(original)
+# Keep specific unresolved independent source-fitness findings as exact original holds.
+# Derive membership from the authenticated complete prior packet, never a copied count.
+prior=read(P+'/prior-001/prior-record-applicability.json')
+assessments={r['component_id']:r for r in prior['complete_prior_component_assessments']['components']}
+assert len(assessments)==len(prior['complete_prior_component_assessments']['components'])
+review_holds={};review_components=[]
+for r in prior['prior_22_native_contacts']:
+ assessment=assessments[r['component_id']]
+ if not r['native_cells']:continue
+ assert assessment['source_fitness_result']=='unresolved' and assessment['physical_authority']=='unapproved' and assessment['what_is_unresolved']
+ review_components.append({'component_id':r['component_id'],'native_cells':r['native_cells'],'complete_original_assessment':assessment})
+ for cell in r['native_cells']:
+  k=tuple(cell);assert k in original and k in supported and k not in review_holds and k not in held
+  review_holds[k]='unresolved_prior_source_fitness';held[k]=review_holds[k];del supported[k]
+assert len(review_holds)==prior['prior_22_native_contact_cells']
 assert set(supported).isdisjoint(held) and set(supported)|set(held)==set(original)
 def pack(data,with_value):
  rows=collections.defaultdict(list)
@@ -51,8 +66,8 @@ for t in source['targets']:
  targets.append({**t,'coverage_rows':cr})
 assert {t['pixelIndex'] for t in targets}==owners;source['targets']=targets
 counts=collections.Counter(k[2] for k in original);sc=collections.Counter(k[2] for k in supported);hc=collections.Counter(k[2] for k in held);reasons=collections.Counter(held.values());scope=read(P+'/source-stage/source-scope-assessment.json');by={r['pixelIndex']:r for r in scope['target_checks']};assert set(by)==set(counts)
-summary={'version':1,'original_cells':len(original),'original_intervals':len(frozen),'original_owners':len(counts),'supported_cells':len(supported),'held_cells':len(held),'supported_owners':len(sc),'wholly_held_owners':len(set(counts)-set(sc)),'held_reason_counts':dict(reasons),'owner_counts':[{'owner':o,'id':by[o]['id'],'original_cells':counts[o],'supported_cells':sc[o],'held_cells':hc[o]} for o in sorted(counts)],'original_scope_conserved':True,'inputs':pins,'limits':['This diagnostic partition grants no native authority or accepted repair credit. The stock constructor must consume the exact emitted source and patch.','All original source/physical inputs and negative operands remain; source rows are restricted to the genuinely supported requested centres only.','Current selected owner-zero and final emitted conservation remain delivery obligations.']}
-products={'source-evidence.json':source,'native-patch.json':{'rows':pack(supported,False)},'held-original.json':{'rows':pack(held,True)},'original-scope-partition.json':summary};encoded={n:(json.dumps(j,ensure_ascii=False,separators=(',',':'))+'\n').encode() for n,j in products.items()};assert total+sum(map(len,encoded.values()))<=PHASE and all(len(b)<=MAX for b in encoded.values());assert not O.exists() and all(not p.is_symlink() for p in (O,*O.parents));O.mkdir()
+summary={'version':1,'original_cells':len(original),'original_intervals':len(frozen),'original_owners':len(counts),'supported_cells':len(supported),'held_cells':len(held),'supported_owners':len(sc),'wholly_held_owners':len(set(counts)-set(sc)),'held_reason_counts':dict(reasons),'native_diagnostic_supported_cells':diag['supported_cells'],'native_diagnostic_held_cells':diag['held_cells'],'prior_source_fitness_held_cells':len(review_holds),'owner_counts':[{'owner':o,'id':by[o]['id'],'original_cells':counts[o],'supported_cells':sc[o],'held_cells':hc[o]} for o in sorted(counts)],'original_scope_conserved':True,'inputs':pins,'limits':['This diagnostic and independent-review partition grants no native authority or accepted repair credit. The stock constructor must consume the exact emitted source and patch.','All original source/physical inputs and negative operands remain; source rows are restricted to the genuinely supported requested centres only.','Current selected owner-zero and final emitted conservation remain delivery obligations.']}
+products={'source-evidence.json':source,'native-patch.json':{'rows':pack(supported,False)},'held-original.json':{'rows':pack(held,True)},'prior-source-fitness-holds.json':{'reason':'unresolved_prior_source_fitness','original_keys':sorted(review_holds),'components':review_components,'review_urls':['https://github.com/ChengshuLi/WorldAtlas/pull/1333#issuecomment-6033728360','https://github.com/ChengshuLi/WorldAtlas/pull/1333#issuecomment-6066089262'],'limit':'The new source-relative geometric diagnostic does not resolve these exact prior observation/resolution/positional-fitness, narrow-channel/seasonal/intertidal/registration or processing-provenance questions. These original keys are held, not counted as supported delivery.'},'original-scope-partition.json':summary};encoded={n:(json.dumps(j,ensure_ascii=False,separators=(',',':'))+'\n').encode() for n,j in products.items()};assert total+sum(map(len,encoded.values()))<=PHASE and all(len(b)<=MAX for b in encoded.values());assert not O.exists() and all(not p.is_symlink() for p in (O,*O.parents));O.mkdir()
 for n,b in encoded.items():
  with (O/n).open('xb') as f:f.write(b)
 with (O/'preparation.json').open('x') as f:json.dump({'complete':True,'outputs':{n:{'bytes':len(b),'sha256':sha(b)} for n,b in encoded.items()}},f);f.write('\n')
