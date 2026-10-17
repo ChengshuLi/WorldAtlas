@@ -813,12 +813,16 @@ test('real modern package command accepts absent optional membership and refuses
 });
 
 
-test('real modern package command rejects changed whole dependency pins and incomplete accepted membership', t => {
+// Semantic refusal matrices use the exact projection/composition and publication
+// expression invoked by the CLI, with the real immutable Git reader. CLI launch,
+// configuration, resume and publication contracts remain exercised separately.
+test('modern package projection rejects changed whole dependency pins and incomplete accepted membership', t => {
   const f = modernFinalizationFixture(t); let ordinal = 0;
   const refused = body => {
     const destination = '.cache/delivery-handoff/changed-' + ordinal++;
-    const result = f.run('package', destination, [], f.withEvidence(body));
-    assert.notEqual(result.status, 0); assert.match(result.stderr, /hash differs|Missing.*membership|Missing.*family/);
+    const input = f.withEvidence(body);
+    assert.throws(() => publish(f.root, destination, packageProjection(input, f.r), {}),
+      /hash differs|Missing.*membership|Missing.*family/);
     assert.equal(fs.existsSync(path.join(f.root, destination)), false);
   };
   for (const mutate of [
@@ -955,17 +959,16 @@ test('late modern composition refuses scope, source-contract, patch and occupied
     [s => { s.row.native_rows[0].runs[0][0] = -1; }, /native-only|native-cell|interval|primitive identity/i],
   ]) {
     const config = f.makeAppend(change), destination = '.cache/delivery-handoff/refused-compose-' + ordinal++;
-    const result = f.run('compose', destination, [], config); assert.notEqual(result.status, 0); assert.match(result.stderr, pattern);
+    assert.throws(() => publish(f.root, destination, composeAuthorities(config, f.r), {}), pattern);
     assert.equal(fs.existsSync(path.join(f.root, destination)), false);
   }
   const config = f.makeAppend(), altered = {...config, native_patch: {...config.native_patch, sha256: '0'.repeat(64)}};
-  const result = f.run('compose', '.cache/delivery-handoff/refused-pin', [], altered);
-  assert.notEqual(result.status, 0); assert.match(result.stderr, /hash differs/);
+  assert.throws(() => publish(f.root, '.cache/delivery-handoff/refused-pin', composeAuthorities(altered, f.r), {}), /hash differs/);
   assert.equal(fs.existsSync(path.join(f.root, '.cache/delivery-handoff/refused-pin')), false);
   for (const role of ['rule_preimage', 'source_authority']) {
     const changed = {...config, [role]: {...config[role], sha256: '0'.repeat(64)}};
-    const destination = '.cache/delivery-handoff/refused-' + role, refused = f.run('compose', destination, [], changed);
-    assert.notEqual(refused.status, 0); assert.match(refused.stderr, /hash differs/);
+    const destination = '.cache/delivery-handoff/refused-' + role;
+    assert.throws(() => publish(f.root, destination, composeAuthorities(changed, f.r), {}), /hash differs/);
     assert.equal(fs.existsSync(path.join(f.root, destination)), false);
   }
 });
@@ -1057,7 +1060,7 @@ test('multiple modern originals reject mixed/empty groups, duplicate authorities
   const config = modernGroups(f.config, [f.config, second]);
   const refusal = (input, pattern) => {
     const destination = '.cache/delivery-handoff/multiple-refused-' + ordinal++;
-    const result = f.run('compose', destination, [], input); assert.notEqual(result.status, 0); assert.match(result.stderr, pattern);
+    assert.throws(() => publish(f.root, destination, composeAuthorities(input, f.r), {}), pattern);
     assert.equal(fs.existsSync(path.join(f.root, destination)), false);
   };
   refusal({...config, rule_preimage: f.config.rule_preimage}, /mix singleton/);
