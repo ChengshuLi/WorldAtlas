@@ -265,9 +265,9 @@ test('archived JavaScript execution roles can evolve while same-extension scient
  f.api.releaseCheckpoint(qualified.state);
 });
 
-test('actual appended authority survives complete checks, a subsequent transition and original native projection',async t=>{
+for(const completedConstructor of [false,true])test('actual appended authority survives complete checks, a subsequent transition and original native projection, completed='+completedConstructor,async t=>{
  const f=await trustedFixture(t,{nativeAppend:true}),baseline=(await f.api.qualifyCheckpoint({reader:f.reader}));
- const next=await appendNativeAuthority(f),reader=new f.native.ImmutableReader(f.root,next.candidate,{invocation:f.reader.invocation});
+ const next=await appendNativeAuthority(f,{completedConstructor}),reader=new f.native.ImmutableReader(f.root,next.candidate,{invocation:f.reader.invocation});
  const transition=(await f.api.qualifyTransition({state:baseline.state,reader}));
  assert.equal(transition.available,true);assert.deepEqual(transition.changedIds,['A']);assert.deepEqual(transition.changedNativeRows,[next.y]);
  assert.deepEqual(nativeLiteral(transition.candidate.ledger.rows),next.ledger.rows);assert.deepEqual(nativeLiteral(transition.candidate.patch.rows),next.patch.rows);
@@ -761,4 +761,17 @@ test('selected gzip ledger admission joins producers, rejects late errors and re
  assert.equal(result.available,true);assert.deepEqual(result.changedNativeRows,[]);
  assert.deepEqual(nativeLiteral(result.candidate.ledger),f.ledger);
  f.api.releaseCheckpoint(state);assert(roots.every(root=>!fs.existsSync(root)));
+});
+
+for(const [name,mutate,message]of [
+ ['scope',value=>value.component_ids.pop(),/scope\/rule\/patch/],
+ ['rows',value=>value.ledger_rows.pop(),/scope\/rule\/patch/],
+ ['intervals',value=>value.ledger_rows[0].native_rows[0].runs[0][1]++,/intervals differ/],
+ ['receipt',value=>value.ledger_rows[0].source_receipt_sha256='0'.repeat(64),/original source target\/owner\/receipt/]
+])test('stored completed authority rejects coherently pinned changed '+name,async t=>{
+ const f=await trustedFixture(t,{nativeAppend:true}),baseline=await f.api.qualifyCheckpoint({reader:f.reader});
+ const next=await appendNativeAuthority(f,{completedConstructor:true,mutateConstructor:mutate});
+ const reader=new f.native.ImmutableReader(f.root,next.candidate,{invocation:f.reader.invocation});
+ await assert.rejects(()=>f.api.qualifyTransition({state:baseline.state,reader}),message);
+ assert.deepEqual(nativeLiteral(baseline.state.ledger.rows),f.ledger.rows);
 });

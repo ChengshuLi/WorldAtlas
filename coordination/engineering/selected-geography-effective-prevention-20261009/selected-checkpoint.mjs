@@ -16,7 +16,7 @@ import {ImmutableReader, NativeAssetImage, decodeVisibilityLatitudes,
 import {repairComponentKey, nativeOnlyComponent} from '../../../src/native-grid.js';
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
 import {valueBytes, valueSha, coordinateBounds, nativeBaseSelection,
-  normaliseRetainedRepairLedger, repairRowsIndex, repairIndexValues, readRetainedRegistryAuthority, validateSupportedProgrammeCatalogue,
+  normaliseRetainedRepairLedger, repairRowsIndex, repairIndexValues, readRetainedRegistryAuthority, readRegistryAuthorityInputs, verifyCompletedSourceTargetNativeAuthority, validateSupportedProgrammeCatalogue,
   CURRENT_REBIND_CODE, verifyCurrentRebindExecution,
   currentRebindResult, currentRebindAcquisitionIdentity, retainedArcticNativeRows} from './selected-neighbor-prevention.mjs';
 
@@ -225,7 +225,7 @@ async function storedProduct(session,reader,p,domain,ledger) {
   if(p.decoded_bytes)chunks=decodedChunks(chunks);
   const store=await (ledger==='envelope'?admitNativeEnvelopeStore:ledger?admitNativeLedgerStore:admitNativePatchStore)({chunks,
     expected:{bytes:p.decoded_bytes??p.bytes,sha256:p.decoded_sha256??p.sha256},
-    directory:os.tmpdir(),...domain});
+    directory:os.tmpdir(),...domain,...(ledger==='constructor'?{rowField:'ledger_rows'}:{})});
   (session.stores??=new Set()).add(store);
   if(ledger==='envelope')return store.metadata;
   const wrap=row=>Object.freeze({y:row.y,runs:nativeSequence(row.count,()=>store.intervals(row))});
@@ -235,7 +235,7 @@ async function storedProduct(session,reader,p,domain,ledger) {
   const componentView=component=>Object.freeze({...store.componentMetadata(component),
     ...(component.hasNativeRows?{native_rows:nativeSequence(component.rowCount,
       function*(){for(const row of store.componentRows(component))yield wrap(row);})}:{})});
-  return {...store.metadata,rows:nativeSequence(store.componentCount,
+  return {...store.metadata,[ledger==='constructor'?'ledger_rows':'rows']:nativeSequence(store.componentCount,
     function*(){for(const component of store.componentEntries())yield componentView(component);},
     {entryAt:ordinal=>componentView(store.componentAt(ordinal))})};
 }
@@ -1028,10 +1028,20 @@ function disjointPatchRows(before,patches) {
   }
 }
 
-function appendAuthority(session, reader, entry) {
+async function appendAuthority(session, reader, entry, domain) {
   const child = new ImmutableReader(reader.repo,reader.version,{invocation:reader.invocation,gitExecutable:reader.gitExecutable});
   child.inventory=reader.inventory; // retain actual appended-producer inputs without reopening them
-  const proof = readRetainedRegistryAuthority(child,entry);
+  let proof;
+  if(entry.completed_constructor!==undefined){
+    const {preimage,binding}=readRegistryAuthorityInputs(child,entry);
+    if(binding?.kind==='source-target-native-custody-v1'){
+      const constructed=await storedProduct(session,child,entry.completed_constructor,domain,'constructor');
+      const evidence=await storedProduct(session,child,binding.source_evidence,domain,'envelope');
+      const candidate=await storedProduct(session,child,binding.native_patch,domain,false);
+      proof=verifyCompletedSourceTargetNativeAuthority({constructed,preimage,binding,evidence,candidate});
+    }
+  }
+  proof??=readRetainedRegistryAuthority(child,entry);
 
   return {entry,nativeOnly:proof.original_pins.source_evidence!==undefined,patches:proof.native_proof.native_patches,ledger:proof.original_ledger,
     contract:proof.native_proof.native_contract,source_scope_ids:proof.source_scope_ids};
@@ -1158,12 +1168,12 @@ function qualifyProjectedRebind(proof, selected, authorities, products) {
 
 // Full proof wrappers and expectedAdded's original-row aliases are temporary.
 // Retain original per-authority patches, exactly as for accepted seed entries.
-function qualifyAppendedAuthorities(session,reader,state,selected,prior,addedEntries,oldRows) {
+async function qualifyAppendedAuthorities(session,reader,state,selected,prior,addedEntries,oldRows) {
   const authorities=new Map(prior);
   const expectedAdded=new Map();
   for (const entry of addedEntries) {
     demand(entry.policy_id==='retained-source-literal-additions' && entry.policy_version===1, 'Unsupported appended source policy');
-    const proof=appendAuthority(session,reader,entry); authorities.set(entry.authority_sha256,proof);
+    const proof=await appendAuthority(session,reader,entry,{size:state.manifest.size,ownerCount:state.certificate.entries.length}); authorities.set(entry.authority_sha256,proof);
     const contract=Object.fromEntries(['size','coordinateBits','method','native_latitudes','hierarchy_sha256','original_assets'].map(k => [k,state.manifest[k]]));
     demand(same(proof.contract,contract) && (same(proof.ledger.parent_inventory,state.ledger.parent_inventory) || proof.nativeOnly && proof.ledger.parent_inventory===undefined),
       'Appended producer changed native contract or complete original source denominator');
@@ -1171,9 +1181,9 @@ function qualifyAppendedAuthorities(session,reader,state,selected,prior,addedEnt
       || selected.selection.reference_projection && same(p.base_reference,{id:state.manifest.geographic_release,
         hierarchy_sha256:state.manifest.hierarchy_sha256,footprints_sha256:state.manifest.footprints_sha256})),
       'Native source-target authority belongs to a different selected base');
-    for (const original of proof.ledger.rows) {
+    let ordinal=0;for (const original of proof.ledger.rows) {
       demand(!oldRows.has(repairComponentKey({...original,authority_sha256:entry.authority_sha256})) && !expectedAdded.has(repairComponentKey({...original,authority_sha256:entry.authority_sha256})), 'Appended producer repeats original component');
-      expectedAdded.set(repairComponentKey({...original,authority_sha256:entry.authority_sha256}),{original,entry});
+      expectedAdded.set(repairComponentKey({...original,authority_sha256:entry.authority_sha256}),{ordinal:ordinal++,ledger:proof.ledger,entry});
     }
   }
   const addedRows=selected.ledger.rows.filter(row => !oldRows.has(repairComponentKey(row)));
@@ -1181,7 +1191,7 @@ function qualifyAppendedAuthorities(session,reader,state,selected,prior,addedEnt
   for (const row of addedRows) {
     const expected=expectedAdded.get(repairComponentKey(row)), {authority_sha256,rule_sha256,...literal}=row;
     demand(expected && authority_sha256===expected.entry.authority_sha256
-      && (rule_sha256===undefined || rule_sha256===expected.entry.rule_sha256) && same(literal,expected.original),
+      && (rule_sha256===undefined || rule_sha256===expected.entry.rule_sha256) && same(literal,expected.ledger.rows.at(expected.ordinal)),
     'Candidate changed original appended primitive or exception');
   }
   for (const entry of addedEntries) {
@@ -1363,7 +1373,7 @@ export async function qualifyTransition({state,reader}) {
       'Old original authority removed/rebound');
     const addedEntries=selected.registry.entries.filter(entry => !authorities.has(entry.authority_sha256));
 
-    authorities=qualifyAppendedAuthorities(session,reader,state,selected,authorities,addedEntries,oldRows);
+    authorities=await qualifyAppendedAuthorities(session,reader,state,selected,authorities,addedEntries,oldRows);
     const patches=[state.patch,...addedEntries.flatMap(entry=>authorities.get(entry.authority_sha256).patches)];
 
     demand(equalMergedPatchRows(selected.patch.rows,patches,state.manifest.size,state.certificate.entries.length),'Candidate patch omitted, invented or reassigned original native intervals');

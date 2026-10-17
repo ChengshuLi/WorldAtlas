@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
 import {nativeSequence,isNativeSequence,nativeRowAt} from '../src/native-grid.js';
-import {valueBytes,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {mergeCompletedNativePatches,valueBytes,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {compareIntervals} from '../scripts/check-effective-geographic-regression.mjs';
 
 test('explicit native sequences retain exact canonical bytes and repeatable row lookup',()=>{
@@ -55,4 +55,30 @@ test('mapped and filtered component cursors are repeatable without retaining com
  assert.equal(selected.find(id=>id===2),2);assert(selected.some(id=>id===0));assert(selected.every(id=>id%2===0));
  assert.equal(live,0);assert(closed>=6);
  assert.throws(()=>rows.map(()=>{throw Error('consumer error');}).at(0),/consumer error/);assert.equal(live,0);
+});
+
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+import {mergeCompletedNativePatches as eagerMerge} from './fixtures/completed-native-merge-eager.mjs';
+
+test('completed authority merge exactly matches retained eager values and refusal ordering',()=>{
+ assert.equal(createHash('sha256').update(fs.readFileSync(new URL('./fixtures/completed-native-merge-eager.mjs',import.meta.url))).digest('hex'),'53e3f345e059e030a4e53f7a70be79c07ecc376c354bf1ccc5b7e39a5760dc41');
+ let seed=97637;const random=n=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed%n;};
+ const check=patches=>{
+  const stored=patches.map(patch=>({rows:nativeSequence(patch.rows.length,function*(){for(const row of patch.rows)
+   yield {...row,runs:nativeSequence(row.runs.length,()=>row.runs.values())};})}));
+  let expected;try{expected=eagerMerge(patches,32);}catch(error){
+   for(const value of [patches,stored])assert.throws(()=>mergeCompletedNativePatches(value,32),{message:error.message});return;
+  }
+  assert.deepEqual(mergeCompletedNativePatches(patches,32),expected);
+  const view=mergeCompletedNativePatches(stored,32);assert.equal(valueSha(view),valueSha(expected));assert.equal(valueSha(view),valueSha(expected));
+ };
+ for(let trial=0;trial<1000;trial++){
+  const patches=Array.from({length:random(5)},()=>({rows:Array.from({length:random(6)},(_,y)=>{
+   let end=0;const runs=[];for(let i=0,n=random(5);i<n;i++){
+    const start=end+random(3),stop=start+1+random(3);runs.push([start,stop,1+random(3)]);end=stop;
+   }return {y,runs};})}));check(patches);
+ }
+ for(const rows of [[{y:-1,runs:[[0,1,1]]}],[{y:0,runs:[[0,33,1]]}],[{y:0,runs:[[2,1,1]]}],
+  [{y:0,runs:[[0,1,0]]}],[{y:0,runs:[[0,2,1],[1,3,1]]}],[{y:0,runs:[[0,1,1]]},{y:0,runs:[[2,3,1]]}]])check([{rows}]);
 });

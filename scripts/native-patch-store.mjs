@@ -172,7 +172,7 @@ function hashChunks(chunks){
  */
 async function admitStore({chunks,expected,directory,size,ownerCount,rowField='rows',envelopePaths},ledger){
  demand(Number.isSafeInteger(size)&&size>0&&size<=0xffffffff&&Number.isSafeInteger(ownerCount)
-  &&ownerCount>0&&ownerCount<=0xffffffff&&['rows','native_rows'].includes(rowField),'Invalid native interval store domain');
+  &&ownerCount>0&&ownerCount<=0xffffffff&&['rows','native_rows','ledger_rows'].includes(rowField),'Invalid native interval store domain');
  ordinaryDirectory(directory);
  let input,root,complete=false,closed=false;const fds=[];
  try {
@@ -338,6 +338,6 @@ async function admitStore({chunks,expected,directory,size,ownerCount,rowField='r
  }
 }
 export const admitNativePatchStore=options=>admitStore(options,false);
-export const admitNativeLedgerStore=options=>admitStore({...options,rowField:'rows'},true);
+export const admitNativeLedgerStore=options=>admitStore({...options,rowField:options.rowField??'rows'},true);
 
 export const admitNativeEnvelopeStore=options=>admitStore({...options,envelopePaths:options.envelopePaths??[['current_rows'],['acquisition','predecessor_rows'],['native','rows']]},false);

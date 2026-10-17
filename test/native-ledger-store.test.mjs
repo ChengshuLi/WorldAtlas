@@ -109,3 +109,15 @@ test('component ordinal lookup equals complete iteration and rejects foreign or 
  assert.throws(()=>store.componentAt(0.5),/ordinal/);store.close();
  assert.throws(()=>store.componentAt(0),/closed/);
 });
+
+test('constructor ledger_rows uses the same component store and complete canonical identity',async t=>{
+ const value={component_ids:['A'],ledger_rows:[{component_id:'A',base_geometry:{type:'Polygon',coordinates:[]},native_rows:[{y:2,runs:[[1,3,2]]}]}]};
+ const directory=temporary(t),store=await open(directory,JSON.stringify(value),{rowField:'ledger_rows'});
+ try{
+  assert.equal(store.componentCount,1);assert.equal(store.canonical_sha256,hash(valueBytes(value)));
+  assert.deepEqual(materialize(store,store.componentAt(0)),value.ledger_rows[0]);
+ }finally{store.close();}
+ const replaced=await open(directory,'{"ledger_rows":false,"ledger_rows":'+JSON.stringify(value.ledger_rows)+'}',{rowField:'ledger_rows'});
+ try{assert.equal(replaced.canonical_sha256,hash(valueBytes({ledger_rows:value.ledger_rows})));}finally{replaced.close();}
+ assert.deepEqual(fs.readdirSync(directory),[]);
+});

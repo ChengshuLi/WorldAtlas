@@ -138,7 +138,7 @@ async function trustedFixture(t,{incompleteNative=false,codeRoutes=false,nativeA
 // Genuine pinned source/native qualification, followed by the public private-state
 // admission and transition. The full lattice is a two-MiB normative input, while
 // the proposed and projected repair is one cell; no research result is invented.
-async function appendNativeAuthority(f,{owner=0,name='appended',mutateEvidence=()=>{},mutateLedger=()=>{},mutatePatch=()=>{},duplicateAuthority=false,membershipPath='data/geography/part-0.json'}={}) {
+async function appendNativeAuthority(f,{owner=0,name='appended',completedConstructor=false,mutateConstructor=()=>{},nativePatchRows,mutateEvidence=()=>{},mutateLedger=()=>{},mutatePatch=()=>{},duplicateAuthority=false,membershipPath='data/geography/part-0.json'}={}) {
  const family='gb:TST:ADM2',feature=f.features[owner],target=family+':'+feature.id;
  const latitudes=nativeRowLatitudes(f.manifest.size),y=latitudes.findIndex(v=>v<.1);
  const x=Math.floor((owner+.1+180)/360*f.manifest.size);
@@ -154,7 +154,7 @@ async function appendNativeAuthority(f,{owner=0,name='appended',mutateEvidence=(
  f.save('data/semantic-report.json',{changes:f.features.map(p=>({id:p.id,replaces:[family+':'+p.id]}))});
  f.save(membershipPath,{type:'FeatureCollection',features:f.features.map(p=>({...p,
   properties:{...p.properties,metadata:{source_member_ids:[family+':'+p.id]}}}))});
- f.save(name+'/native-patch.json',{rows:[{y,runs:[[x,x+1,owner+1]]}]});const originals=f.commit();
+ f.save(name+'/native-patch.json',{rows:nativePatchRows===undefined?[{y,runs:[[x,x+1,owner+1]]}]:structuredClone(nativePatchRows)});const originals=f.commit();
  const evidence={version:1,kind:'source-target-native-evidence-v1',
   catalogue:f.pin('coordination/engineering/original-geography-source-corpus-20261006/catalogue.json',originals),
   owner_roster:f.pin('data/owners.json',originals),physical_evidence:f.pin(name+'/physical.json',originals),
@@ -176,6 +176,13 @@ async function appendNativeAuthority(f,{owner=0,name='appended',mutateEvidence=(
  const proof=readRetainedRegistryAuthority(reader,entry);
  assert(Object.isFrozen(proof));assert.strictEqual(proof.source_rows,proof.original_ledger.rows);
  assert.strictEqual(proof.original_ledger.rows[0].native_rows[0].runs[0],proof.native_proof.native_patches[0].rows[0].runs[0]);
+ if(completedConstructor){
+  const constructed={version:1,kind:'existing-source-target-native-constructor-result',
+   inputs:Object.fromEntries(Object.entries(operands).map(([role,pin])=>[role,{commit:pin.commit,path:pin.path}])),
+   rule_sha256:entry.rule_sha256,component_ids:structuredClone(proof.source_scope_ids),ledger_rows:structuredClone(proof.source_rows),limitations:proof.limitations};
+  mutateConstructor(constructed);f.save(name+'/constructed.json',constructed);const completed=f.commit();
+  entry.completed_constructor=f.pin(name+'/constructed.json',completed);
+ }
  const entries=[...f.registry.entries,entry];
  if(duplicateAuthority){
   f.save(name+'/binding-duplicate.json',{version:1,kind:'source-target-native-custody-v1',...operands});const duplicate=f.commit();
