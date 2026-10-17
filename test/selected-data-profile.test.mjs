@@ -1,6 +1,6 @@
 import {readFileSync} from 'node:fs';
 import {gzipSync, crc32} from 'node:zlib';
-import {CHECKPOINT_MEMBERS} from '../scripts/geographic-report-artifact.mjs';
+import {CHECKPOINT_MEMBERS, loadGeographicReport, preparedQueueSource} from '../scripts/geographic-report-artifact.mjs';
 import {renderWorkerResult} from '../scripts/worker-result.mjs';
 import {isDeepStrictEqual as same} from "node:util";
 import test from 'node:test';
@@ -1936,4 +1936,63 @@ test('selected-data includes explicit whole external negative source pins withou
  for(const mutate of [role=>delete role.registry,role=>delete role.source,role=>role.atoms=[],
   role=>role.source.git_blob_oid='0'.repeat(40),role=>role.registry.git_blob_oid='0'.repeat(40),role=>role.extra=role.source])
   assert.equal(await sourceTargetRoleFixture({sourceMembership:f=>membership(f,mutate)}).run(),null);
+});
+
+
+// The actual trusted prepare and final entry points share only job outputs,
+// never a body cache. Real ZIP/hash/run/job admission supplies private custody.
+function preparedSelectedFixture() {
+  const f=mergeFixture({selectedFixture:fixture({mutate:f=>f.put(prefix+'audit.py','# retained, unconsumed audit')})});
+  const candidate='9'.repeat(40), tree='7'.repeat(40), workflowHead='8'.repeat(40), root='/repos/owner/repo';
+  const original=f.options.api;
+  const api=async(route,...args)=>{
+    if(route===root+'/git/commits/'+candidate)return {sha:candidate,tree:{sha:tree},parents:[{sha:f.base},{sha:f.head}]};
+    if(route===root+'/git/trees/'+tree+'?recursive=1')return {truncated:false,tree:[...f.authored.entries.values()]};
+    if(route===root+'/actions/runs/123/attempts/1')return {id:123,run_attempt:1,head_sha:workflowHead,head_branch:'main',
+      event:'workflow_dispatch',path:'.github/workflows/worker-merge.yml',repository:{full_name:'owner/repo'},
+      head_repository:{full_name:'owner/repo'},status:'in_progress'};
+    if(route===root+'/actions/runs/123/attempts/1/jobs?per_page=100&page=1')return {jobs:[{id:55,run_id:123,run_attempt:1,
+      head_sha:workflowHead,name:'geography',status:'completed',conclusion:'success',steps:[]}]};
+    return original(route,...args);
+  };
+  api.artifactRedirect=async route=>{
+    assert.equal(route,root+'/actions/artifacts/456/zip');
+    return new Response(null,{status:302,headers:{location:'https://fixture.blob.core.windows.net/geography.zip'}});
+  };
+  f.options.api=api;
+  const body=Buffer.from(JSON.stringify({version:1,method_id:'worldatlas-trusted-geography-check-v1',
+    baseline_commit:f.base,trusted_code_commit:f.base,candidate_commit:candidate,candidate_code_executed:false,
+    published:false,source_approval:false,gate_status:'passed',status:'not-applicable'}));
+  const zip=checkpointZip([['geography-check.json',body]]);
+  f.load=({api:reader=api}={})=>loadGeographicReport({api:reader,repo:'owner/repo',runId:123,artifactName:'geography-selected-read-reuse-1',
+    expectedHash:digest(body),token:'synthetic-token',fresh:{run_attempt:1,artifact_id:456,artifact_digest:digest(zip),report_bytes:body.length,
+      workflow_head:workflowHead,head:f.head,baseline:f.base,candidate_commit:candidate,request_id:'selected-read-reuse'},
+    fetchImpl:async(url,options)=>{assert.equal(url,'https://fixture.blob.core.windows.net/geography.zip');
+      assert.equal(options.redirect,'error');return new Response(zip);}});
+  return f;
+}
+
+test('fresh selected final reuses genuine prepared checker choice without rereading immutable role bodies',async t=>{
+  for(const supplied of [false,undefined]) {
+    const f=preparedSelectedFixture(), prepared=await prepareIntegration(f.options);
+    assert.equal(prepared.test_selection,'selected-data');assert.equal(prepared.geography_software,false);
+    assert.equal(candidateGeographyCode('full',f.files),true,'Retained helper triggers legacy full-role derivation');
+    const originalReads=[...f.reads];assert(originalReads.length>0,'Actual prepare consumed role bodies');f.reads.length=0;
+    const stats={}, result=await f.complete({preparedGeographySoftware:supplied,geographyReportLoader:f.load,metadataDiagnostics:stats});
+    assert.equal(result.accepted,true);assert.equal(result.geography.execution,'fresh-queue');
+    if(supplied===false) {assert.equal(f.reads.length,0);assert.deepEqual(stats,{});}
+    else {assert(f.reads.length>0);assert(stats.read_count>0,'Old workflow still authenticates complete role bodies');}
+    t.diagnostic(JSON.stringify({prepared_choice:supplied??'absent',prepare_blob_reads:originalReads.length,
+      final_blob_reads:f.reads.length,final_blob_bytes:f.reads.reduce((n,oid)=>n+f.blobs.get(oid).length,0)}));
+  }
+});
+
+test('a public prepared flag or cloned report cannot reuse the trusted checker choice',async()=>{
+  const f=preparedSelectedFixture(),prepared=await prepareIntegration(f.options), admitted=await f.load();
+  assert(preparedQueueSource(admitted));
+  const clone=structuredClone(admitted);clone.prepared_queue=true;assert.equal(preparedQueueSource(clone),null);
+  f.reads.length=0;
+  const result=await f.complete({preparedGeographySoftware:prepared.geography_software,geographyReportLoader:async()=>clone});
+  assert.equal(result.accepted,true);assert(f.reads.length>0,'Unprivileged report retains original classification');
+  assert.equal(result.geography.execution,undefined);
 });

@@ -255,7 +255,7 @@ test('native Actions concurrency holds the full existing lifecycle without custo
 });
 
 test('actual queue entry points omit geography only for independently rechecked controls', () => {
-  for (const phase of ['prepare','merge']) {
+  for (const [phase,choice] of [['prepare',undefined],...[undefined,'false','true','','False','0','null'].map(choice=>['merge',choice])]) {
     const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-control-geography-'));
     const sha=c=>c.repeat(40), head=sha('a'),base=sha('b'),candidate=sha('c');
     const packageRaw=Buffer.from(JSON.stringify({version:1,inputs:['.github/package-inputs.json'],optional_inputs:[],verification_paths:[],generated_outputs:[]}));
@@ -297,9 +297,15 @@ test('actual queue entry points omit geography only for independently rechecked 
         cwd:directory,encoding:'utf8',env:{...process.env,GITHUB_ACTIONS:'false',GH_TOKEN:'synthetic-token',
           GITHUB_REPOSITORY:'owner/repo',GITHUB_REF:'refs/heads/main',GITHUB_EVENT_PATH:path.join(directory,'event.json'),
           GITHUB_OUTPUT:path.join(directory,'outputs'),GITHUB_STEP_SUMMARY:path.join(directory,'summary'),MERGE_PHASE:phase,
-          INTEGRATION_RESULT:'success',GEOGRAPHY_RESULT:'skipped',TESTED_BASE:base,TESTED_CANDIDATE:candidate,CANDIDATE_REF:''}});
-      assert.equal(result.status,0,result.stderr);
+          INTEGRATION_RESULT:'success',GEOGRAPHY_RESULT:'skipped',TESTED_BASE:base,TESTED_CANDIDATE:candidate,CANDIDATE_REF:'',
+          ...(choice===undefined?{}:{PREPARED_GEOGRAPHY_SOFTWARE:choice})}});
       const receipt=JSON.parse(fs.readFileSync(path.join(directory,'merge-result.json')));
+      if(choice!==undefined&&!['true','false'].includes(choice)) {
+        assert.notEqual(result.status,0);assert.equal(receipt.accepted,false);
+        assert.match(receipt.reason,/Invalid prepared geographic checker choice/);
+        assert.equal(fs.existsSync(path.join(directory,'merge-write.json')),false);continue;
+      }
+      assert.equal(result.status,0,result.stderr);
       if(phase==='prepare') {
         assert.equal(receipt.geography_required,false);
         assert.match(fs.readFileSync(path.join(directory,'outputs'),'utf8'),/^geography_required=false$/m);
