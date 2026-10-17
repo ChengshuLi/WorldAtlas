@@ -86,6 +86,50 @@ class TrustedCheckControls(unittest.TestCase):
     def tearDown(self):
         self.f.close()
 
+    def selected_native_child(self, program):
+        # A real child runs through the real selected-native CLI route. Only its
+        # scientific calculation is a small controlled program; stdout/stderr,
+        # immutable checkout validation and subprocess failure remain production.
+        self.f.write('data/ownership-selection.json', {})
+        (self.f.repo / 'scripts/check-effective-geographic-regression.mjs').write_text(program)
+        candidate = self.f.commit('selected-native-child-control')
+        return self.f.run(candidate, rewind=False, extra_env={'GEOGRAPHY_CODE_COMMIT': candidate})
+
+    def test_failed_selected_native_child_preserves_original_stderr_and_exit_behavior(self):
+        message = 'Original native refusal: complete source identity differs \u03c0\n'
+        result, report = self.selected_native_child(
+            'process.stderr.write(' + json.dumps(message) + ');\n'
+            'process.stdout.write("{\\"partial\\":true}\\n"); process.exit(7);\n')
+        self.assertEqual(result.returncode, 1)  # Unhandled CalledProcessError, as before.
+        self.assertIsNone(report)
+        self.assertEqual(result.stdout, '')
+        self.assertEqual(result.stderr.count(message), 1)
+        self.assertIn('returned non-zero exit status 7', result.stderr)
+        self.assertIn('selected-native', result.stderr)
+
+    def test_successful_selected_native_child_keeps_json_stdout_separate_from_stderr(self):
+        native = {'method': 'selected-native-owner-conservation-v1', 'status': 'no-new-native-loss',
+                  'candidate_code_executed': False, 'lost_or_reassigned_cells': 0, 'intervals': []}
+        message = 'Original native progress remains on stderr\n'
+        result, report = self.selected_native_child(
+            'process.stderr.write(' + json.dumps(message) + ');\n'
+            'console.log(' + json.dumps(json.dumps(native)) + ');\n')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(report['selected_native_report'], native)
+        self.assertEqual(report['status'], 'no-new-native-loss')
+        self.assertEqual(result.stderr.count(message), 1)
+        self.assertNotIn(message.strip(), result.stdout)
+        self.assertEqual(json.loads(result.stdout)['status'], 'no-new-native-loss')
+
+    def test_fatal_git_child_preserves_original_stderr_without_publishing_a_report(self):
+        result, report = self.f.run('f' * 40)
+        self.assertEqual(result.returncode, 1)
+        self.assertIsNone(report)
+        self.assertEqual(result.stdout, '')
+        self.assertIn('fatal:', result.stderr)
+        self.assertIn('f' * 40, result.stderr)
+        self.assertIn('returned non-zero exit status 128', result.stderr)
+
     def test_software_candidate_executes_its_exact_checker_and_distinct_data(self):
         checker = self.f.repo / 'scripts/check-geographic-regression.py'
         checker.write_text(checker.read_text() + "\n# Independently reviewed software change.\n")

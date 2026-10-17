@@ -486,18 +486,27 @@ test('complete checkpoint qualification uses exact rebind aliases without implic
  f.api.releaseCheckpoint(result.state);
 });
 
-test('complete native authority authenticates retained source aliases without fetching unavailable originals',async t=>{
- const f=await trustedFixture(t,{nativeAppend:true}),next=await appendNativeAuthority(f);
+for(const packed of [false,true])test('complete native authority authenticates retained source aliases without fetching unavailable originals, packed='+packed,async t=>{
+ const f=await trustedFixture(t,{nativeAppend:true});
+ const absent=['1','2','3'].map(value=>value.repeat(40));
+ for(const commit of absent)assert.throws(()=>f.git('cat-file','-e',commit),'Original must genuinely be absent');
+ const next=await appendNativeAuthority(f,{mutateEvidence:evidence=>{evidence.catalogue.commit=absent[0];}});
  const {readRetainedRegistryAuthority}=await import(pathToFileURL(path.join(f.root,CODE[1])));
  const binding=JSON.parse(f.git('show',next.entry.source_authority.commit+':'+next.entry.source_authority.path));
- const evidence=JSON.parse(f.git('show',binding.source_evidence.commit+':'+binding.source_evidence.path));
- const commits=new Set([next.entry.source_authority.commit,binding.source_evidence.commit,evidence.catalogue.commit]);
- const s=scalarPromisor(f);
- for(const commit of commits)fs.unlinkSync(path.join(f.root,'.git','objects',commit.slice(0,2),commit.slice(2)));
- const proof=readRetainedRegistryAuthority(s.reader(next.candidate),next.entry);
+ binding.source_evidence.commit=absent[1];
+ const rule=JSON.parse(f.git('show',next.entry.rule_preimage.commit+':'+next.entry.rule_preimage.path));
+ rule.source_evidence.commit=absent[1];
+ f.save(next.entry.source_authority.path,binding);f.save(next.entry.rule_preimage.path,rule);
+ const candidate=f.commit(),entry={...next.entry,
+  source_authority:{...f.pin(next.entry.source_authority.path,candidate),commit:absent[2]},
+  rule_preimage:{...f.pin(next.entry.rule_preimage.path,candidate),commit:absent[2]}};
+ entry.rule_sha256=entry.rule_preimage.sha256;delete entry.authority_sha256;entry.authority_sha256=valueSha(entry);
+ if(packed)f.git('repack','-ad');
+ const s=scalarPromisor(f),proof=readRetainedRegistryAuthority(s.reader(candidate),entry);
  assert.deepEqual(proof.original_ledger,next.proof.original_ledger);
  assert.deepEqual(proof.native_proof.native_patches,next.proof.native_proof.native_patches);
  assert.doesNotMatch(s.tracing(),remoteAttempt);
+ for(const commit of absent)assert.throws(()=>f.git('cat-file','-e',commit),'No original was fetched');
 });
 
 function miniatureInventory(root,prefix=''){

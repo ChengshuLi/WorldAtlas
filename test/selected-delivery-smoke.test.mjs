@@ -7,7 +7,7 @@ import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {gzipSync} from 'node:zlib';
 import {sha256} from '../scripts/evidence-quality.mjs';
-import {runSelectedDeliverySmoke, verifySelectedDelivery, selectedStableOwnerControls} from '../scripts/selected-delivery-smoke.mjs';
+import {runSelectedDeliverySmoke, checkEmittedSelectedDelivery, verifySelectedDelivery, selectedStableOwnerControls} from '../scripts/selected-delivery-smoke.mjs';
 import {packOwnership} from '../src/pixel-ownership.js';
 import {loadOwnershipAssets} from '../src/ownership-assets.js';
 import {packageStartupOwnership} from '../scripts/package-startup-ownership.mjs';
@@ -343,4 +343,69 @@ test('actual emitted smoke keeps distinct authority pointsets with the same orig
   assert.throws(() => verifySelectedDelivery({...args,expectations:ambiguous}), /ambiguous/);
   const wrong = structuredClone(args.expectations); wrong.cohorts[0].original_batch_id = 'retained-authority-scope:' + 'a'.repeat(64);
   assert.throws(() => verifySelectedDelivery({...args,expectations:wrong}), /ambiguous/);
+});
+
+function gzipEmittedLedgerPatch(f){
+ for(const role of ['ledger','patch']){
+  const original=f.atlas.additiveRelease[role],file=path.join(f.emittedDirectory,original.path),body=fs.readFileSync(file),raw=gzipSync(body),name=original.path+'.gz';
+  f.atlas.additiveRelease[role]={...asset(name,raw),encoding:'gzip',decoded_bytes:body.length,decoded_sha256:sha256(body)};
+  fs.writeFileSync(path.join(f.emittedDirectory,name),raw);fs.unlinkSync(file);
+ }
+ fs.writeFileSync(path.join(f.emittedDirectory,'atlas-geography.json'),json(f.atlas));
+}
+
+test('actual CLI authenticates derived gzip against unchanged selected science and all native cells',t=>{
+ const f=fixture(t),source=fs.readFileSync(path.join(f.root,'selection/envelope.json'));
+ gzipEmittedLedgerPatch(f);
+ const stdout=execFileSync(process.execPath,[script,'--root',f.root,'--emitted-directory',f.emittedDirectory,'--expectations',f.expectationsPath,'--output',f.outputPath],{encoding:'utf8'});
+ const report=JSON.parse(stdout);assert.equal(report.passed,true);assert.equal(report.cumulative_native_cells_picked_and_sampled,2);
+ assert.equal(report.selected_ledger_sha256,f.expectations.selected_ledger_sha256);
+ assert.deepEqual(fs.readFileSync(path.join(f.root,'selection/envelope.json')),source);
+ for(const role of ['ledger','patch'])assert(report.inputs.some(pin=>pin.path===f.atlas.additiveRelease[role].path&&pin.sha256===f.atlas.additiveRelease[role].sha256));
+});
+
+test('emitted gzip refuses changed source identity, encoded bytes, decoded bytes and semantic envelope',async t=>{
+ const f=fixture(t);gzipEmittedLedgerPatch(f);const atlasFile=path.join(f.emittedDirectory,'atlas-geography.json'),original=structuredClone(f.atlas);
+ const role='ledger',pin=original.additiveRelease[role],file=path.join(f.emittedDirectory,pin.path),encoded=fs.readFileSync(file),body=json(f.ledger);
+ let count=0;
+ const refuse=async error=>{const outputPath=path.join(f.directory,'refusal-'+(++count)+'.json');await assert.rejects(runSelectedDeliverySmoke({...f.options,outputPath}),error);assert.equal(fs.existsSync(outputPath),false);};
+ fs.writeFileSync(file,encoded.subarray(0,-1));await refuse(/exact file budget/);fs.writeFileSync(file,encoded);
+ for(const changed of [body.subarray(0,-1),Buffer.concat([body,Buffer.from(' ')]),Buffer.concat([body.subarray(0,-1),Buffer.from('\t')])]){
+  const raw=gzipSync(changed),atlas=structuredClone(original);Object.assign(atlas.additiveRelease.ledger,{bytes:raw.length,sha256:sha256(raw)});
+  fs.writeFileSync(file,raw);fs.writeFileSync(atlasFile,json(atlas));await refuse(/Decoded whole asset (bytes|hash) differ/);
+ }
+ fs.writeFileSync(file,encoded);
+ for(const change of [a=>a.additiveRelease.ledger.decoded_sha256='0'.repeat(64),a=>a.additiveRelease.ledger.path='additive-repairs/foreign.json.gz',a=>a.additiveRelease.base_reference.id='geography:foreign']){
+  const atlas=structuredClone(original);change(atlas);fs.writeFileSync(atlasFile,json(atlas));await refuse(/differs/);
+ }
+ fs.writeFileSync(atlasFile,json(original));
+});
+
+
+for(const gzip of [false,true])test('shared full-output consumer authenticates actual cells without inventing reviewed expectations, gzip='+gzip,async t=>{
+ const f=fixture(t),source=fs.readFileSync(path.join(f.root,'selection/envelope.json'));
+ if(gzip)gzipEmittedLedgerPatch(f);
+ const options={root:f.root,emittedDirectory:f.emittedDirectory};
+ const generic=await checkEmittedSelectedDelivery(options);
+ assert.equal(generic.kind,'actual-emitted-additive-consumer');
+ assert.equal(generic.cumulative_native_cells_picked_and_sampled,2);
+ assert.equal(generic.stable_owner_controls,1);
+ assert.equal(generic.selected_ledger_sha256,f.expectations.selected_ledger_sha256);
+ for(const field of ['cohorts','expected_components_verified','expectations_sha256'])assert.equal(Object.hasOwn(generic,field),false);
+ assert.equal(fs.existsSync(f.outputPath),false,'Generic verification writes no receipt');
+ const reviewed=await runSelectedDeliverySmoke(f.options);
+ for(const field of ['feature_count','selected_ledger_sha256','selected_patch_sha256','cumulative_native_cells_picked_and_sampled','stable_owner_controls','inputs'])
+  assert.deepEqual(generic[field],reviewed[field]);
+ assert.equal(reviewed.expected_components_verified,2);
+ assert.deepEqual(fs.readFileSync(path.join(f.root,'selection/envelope.json')),source);
+ const descriptor=f.atlas.additiveRelease.ledger,filename=path.join(f.emittedDirectory,descriptor.path),body=fs.readFileSync(filename);
+ const corrupt=Buffer.from(body);corrupt[corrupt.length-1]^=1;fs.writeFileSync(filename,corrupt);
+ await assert.rejects(checkEmittedSelectedDelivery(options),/Whole asset hash differs/);
+});
+
+test('selected-map CLI and kernel still require independent expectations',async t=>{
+ const f=fixture(t);
+ await assert.rejects(runSelectedDeliverySmoke({...f.options,expectationsPath:undefined}),/Missing expectations path/);
+ assert.equal(fs.existsSync(f.outputPath),false);
+ assert.throws(()=>verifySelectedDelivery({expectations:undefined}),/Expectations must be an object/);
 });

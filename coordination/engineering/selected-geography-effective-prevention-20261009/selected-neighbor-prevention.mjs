@@ -827,9 +827,12 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
  // and base geometry; the complete lineage exposes omitted competing owners.
  const memberOwners=new Map(), canonicalOwners=new Map(), semanticOwners=new Map();
  let completeCohort=null;
+ const externalOriginals=new Map(),usedExternalOriginals=new Set();
  if(evidence.source_membership!==undefined){
   const membership=evidence.source_membership;
-  demand(membership&&Object.keys(membership).sort().join(',')===(membership.cohort_inventory===undefined?'index,lineage,parts':'cohort_inventory,index,lineage,parts')
+  demand(membership&&same(Object.keys(membership).sort(),['index','lineage','parts',
+   ...(membership.cohort_inventory===undefined?[]:['cohort_inventory']),
+   ...(membership.negative_natural_earth===undefined?[]:['negative_natural_earth'])].sort())
    &&Array.isArray(membership.parts)&&membership.parts.length>0,'Incomplete accepted source membership');
   const current=p=>{
    pinCheck(p);const actual=reader.descriptor(p.path);
@@ -845,6 +848,41 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
    }
    return JSON.parse(read(p));
   };
+  // The accepted registry authenticates the entire Natural Earth original,
+  // not a selected feature collection or a name-based crosswalk. These leaves
+  // are available only to negative ancestry, never to positive reconciliation.
+  if(membership.negative_natural_earth!==undefined){
+   const role=membership.negative_natural_earth;
+   demand(role&&Object.keys(role).sort().join(',')==='atoms,registry,source'
+    &&role.registry?.path==='data/sources.json'&&Array.isArray(role.atoms)&&role.atoms.length>0,
+   'Invalid negative Natural Earth source role');
+   const registry=current(role.registry),raw=read(role.source);
+   demand(hash(registry.hashes?.ne_10m_admin_1_states_provinces)
+    &&sha(raw)===registry.hashes.ne_10m_admin_1_states_provinces,
+   'Negative Natural Earth whole source differs from accepted registry');
+   const product=JSON.parse(raw),originals=new Map();
+   demand(product.type==='FeatureCollection'&&Array.isArray(product.features)&&product.features.length>0,
+    'Missing complete negative Natural Earth collection');
+   for(const [ordinal,feature]of product.features.entries()){
+    const id=feature.properties?.adm1_code;
+    demand(feature.type==='Feature'&&typeof id==='string'&&id&&!originals.has(id),
+     'Missing or duplicate negative Natural Earth native identity');
+    coordinateBounds(feature.geometry);originals.set(id,{feature,ordinal});
+   }
+   for(const atom of role.atoms){
+    demand(atom&&Object.keys(atom).sort().join(',')==='feature_ordinal,geometry_sha256,source_id'
+     &&typeof atom.source_id==='string'&&Number.isSafeInteger(atom.feature_ordinal)&&atom.feature_ordinal>=0
+     &&hash(atom.geometry_sha256)&&!externalOriginals.has(atom.source_id),
+    'Invalid or duplicate negative Natural Earth atom');
+    const original=originals.get(atom.source_id);
+    demand(original&&original.ordinal===atom.feature_ordinal
+     &&valueSha(original.feature.geometry)===atom.geometry_sha256,
+    'Negative Natural Earth original identity or geometry differs');
+    demand(!owners.has(atom.source_id)&&!evidence.targets.some(target=>target.id===atom.source_id),
+     'External original cannot supply a positive native owner');
+    externalOriginals.set(atom.source_id,{...atom,geometry:original.feature.geometry});
+   }
+  }
   demand(membership.lineage.path==='data/semantic-report.json'&&membership.index.path==='data/world-index.json',
    'Require complete accepted aggregation lineage and world index');
   const lineage=current(membership.lineage),index=current(membership.index);
@@ -856,6 +894,8 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
     const changes=memberOwners.get(member)??[];changes.push(change);memberOwners.set(member,changes);
    }
   }
+  for(const id of externalOriginals.keys())demand(!semanticOwners.has(id),
+   'External original shadows accepted semantic ancestry');
   const paths=new Set();
   for(const pin of membership.parts){
    demand(index.parts.includes(pin.path.slice(5))&&pin.path.startsWith('data/')&&!paths.has(pin.path),
@@ -978,7 +1018,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   };
   const atoms=(name,trail=new Set())=>{
    demand(!trail.has(name),'Cyclic complex source ancestry');
-   if(originals.has(name))return {members:new Set([name]),sources:new Set()};
+   if(originals.has(name)||externalOriginals.has(name))return {members:new Set([name]),sources:new Set()};
    const change=node(name),next=new Set([...trail,name]),members=new Set(),sources=new Set([change.source]);
    for(const member of change.replaces){const child=atoms(member,next);
     for(const atom of child.members)members.add(atom);for(const source of child.sources)sources.add(source);}
@@ -1061,7 +1101,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   const observed=[...(context.reverse.get(id)??[])];
   demand(same([...descendants].sort(),observed.sort()),
    'Incomplete complex source canonical descendant inventory');
-  return {source_id:id,geometry_sha256:valueSha(originals.get(id).geometry),
+  return {source_id:id,geometry_sha256:valueSha((originals.get(id)??externalOriginals.get(id)).geometry),
    descendants:[...descendants].sort().map(target_id=>({target_id,pixelIndex:owners.get(target_id),
     parent_id:canonicalOwners.get(target_id).properties.parent_id}))};
  };
@@ -1587,7 +1627,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   const bounds=selected.flatMap(target=>coordinateBounds(datedCentres.some(p=>p.source_id===target.id)
    ?nativeOriginals.get(target.id).geometry:target.coverage_geometry));
   const intersects=(a,b)=>a[0]<=b[2]&&b[0]<=a[2]&&a[1]<=b[3]&&b[1]<=a[3];
-  const sourceFeatures=[],splitVetoes=[];
+  const sourceFeatures=[],splitVetoes=[...externalOriginals.values()];
   for(const [id,feature] of nativeOriginals){
    if(adopted&&!adopted.bindings.has(id))continue;
    if(!coordinateBounds(feature.geometry).some(part=>bounds.some(box=>intersects(part,box))))continue;
@@ -1599,6 +1639,18 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
     const owner=resolve(id);
     sourceFeatures.push({id,target_id:owner.id,pixelIndex:owner.pixelIndex,geometry:feature.geometry});
    }
+  }
+  // Authenticate both directions for each external leaf actually present in
+  // this complete cohort, even if its own geometry is disjoint. Whole external
+  // originals already enter every family’s conservative native veto route.
+  for(const [id,original]of externalOriginals){
+   if(!complexContexts.get(originals)?.reverse.has(id))continue;
+   demand(!originals.has(id),'External original collides with a complete source family');
+   const split=complexSourceCompetitor(id,originals);
+   demand(split,'External original lacks complete negative ancestry');
+   if(!usedExternalOriginals.has(id))splitCompetitors.push({...split,
+    source_family:'natural-earth:adm1',feature_ordinal:original.feature_ordinal});
+   usedExternalOriginals.add(id);
   }
   const coverageFeatures=selected.filter(t=>t.coverage_geometry.coordinates.length).map(target=>({id:target.target_id??target.id,source_id:target.id,pixelIndex:target.pixelIndex,geometry:target.coverage_geometry}));
   let exclusions=selected.flatMap(target=>(target.territorial_exclusions??[]).map((geometry,ordinal)=>({
@@ -1754,6 +1806,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
    }
   }
  }
+ demand(usedExternalOriginals.size===externalOriginals.size,'Unused negative Natural Earth atom');
  demand(usedSeamViews.size===seamViews.size,'Unused canonical seam operand');
  demand(checked.size===proposed.rows.reduce((n,row)=>n+row.runs.length,0),'Unqualified proposed native intervals');
  if(diagnostic){

@@ -205,86 +205,18 @@ test('packaged coverage supports all modes, gap explanations and unavailable-ref
 
 // Actual selected output probe in the existing shard0 route.
 test('actual emitted selected additive cells retain exact owners and sampler output', {timeout:240000},async t=>{
- const {createHash}=await import('node:crypto'),path=await import('node:path');
- const digest=raw=>createHash('sha256').update(raw).digest('hex');
- const repo=path.resolve('.'),output=path.resolve('dist/client');
- const whole=(root,pin)=>{
-  assert.ok(pin&&typeof pin.path==='string'&&!path.isAbsolute(pin.path)&&!pin.path.split('/').some(p=>!p||p==='.'||p==='..'));
-  let file=root;for(const part of pin.path.split('/')){file=path.join(file,part);assert.equal(fs.lstatSync(file).isSymbolicLink(),false);}
-  const first=fs.lstatSync(file);assert.ok(first.isFile());
-  if(pin.mode)assert.equal(first.mode&0o777,parseInt(pin.mode,8)&0o777);
-  const fd=fs.openSync(file,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);let raw;
-  try{raw=fs.readFileSync(fd);const held=fs.fstatSync(fd),last=fs.lstatSync(file);for(const k of ['dev','ino','size','mode','mtimeMs','ctimeMs'])assert.equal(first[k],held[k]),assert.equal(held[k],last[k]);}finally{fs.closeSync(fd);}
-  assert.equal(raw.length,pin.bytes);assert.equal(digest(raw),pin.sha256);
-  if(pin.encoding==='gzip'||pin.decoded_bytes!==undefined){const decoded=gunzipSync(raw,{maxOutputLength:pin.decoded_bytes});assert.equal(decoded.length,pin.decoded_bytes);assert.equal(digest(decoded),pin.decoded_sha256);return decoded;}
-  return raw;
- };
- const json=(root,pin)=>JSON.parse(whole(root,pin));
  const selection=JSON.parse(fs.readFileSync('data/ownership-selection.json'));
- assert.equal(selection.version,1);assert.equal(typeof selection.manifest_path,'string');
  if(selection.additive_release===undefined){t.skip('Actual selected bank has no additive release');return;}
- const sidecar=json(repo,selection.additive_release),envelope=json(repo,sidecar.runtime_envelope);
- assert.deepEqual(Object.keys(envelope).sort(),['base_manifest','base_reference','effective_reference','kind','ledger','owner_roster','patch','version'].sort());
- assert.equal(envelope.version,2);assert.equal(envelope.kind,'retained-native-base-plus-delta-v2');
- const atlas=JSON.parse(fs.readFileSync(path.join(output,'atlas-geography.json')));
- assert.deepEqual(atlas.additiveRelease,envelope);assert.deepEqual(atlas.reference_release,envelope.effective_reference);
- const bodies={};for(const role of ['base_manifest','ledger','owner_roster','patch']){
-  const published=whole(output,envelope[role]),original=whole(repo,sidecar.logical_asset_map[role]);
-  assert.deepEqual(published,original);bodies[role]=JSON.parse(published);
- }
- const {ledger,patch,owner_roster:originalOwners,base_manifest:manifest}=bodies;
- assert.equal(envelope.base_manifest.sha256,selection.sha256);assert.equal(atlas.pixelMap.canonical_grid_sha256,selection.sha256);
- const {loadAdditiveNativePatch}=await import('../src/effective-footprint.js');
- const {selectedStableOwnerControls}=await import('../scripts/selected-delivery-smoke.mjs');
- const {scientificNativeSelection,validateReferenceMetadataHeader,projectReferenceOwners}=await import('../src/reference-metadata.js');
- assert.deepEqual(scientificNativeSelection(selection),sidecar.base_selection);
- let owners=originalOwners;
- if(selection.reference_projection!==undefined){
-  const raw=whole(repo,selection.reference_projection),projection=JSON.parse(raw);
-  assert.deepEqual(whole(output,atlas.referenceMetadata.asset),raw);
-  const {native,reference}=validateReferenceMetadataHeader(projection,{selection,manifest});
-  assert.deepEqual(atlas.referenceMetadata.native_reference,native);
-  assert.deepEqual(atlas.referenceMetadata.reference,reference);
-  owners=projectReferenceOwners(originalOwners,projection.location_changes,projection.provinces);
- }else assert.equal(atlas.referenceMetadata,undefined);
- const expectedCells=patch.rows.reduce((n,row)=>n+row.runs.reduce((sum,[start,end])=>sum+end-start,0),0);
- assert.ok(Number.isSafeInteger(expectedCells),'Selected current patch total exceeds exact integer range');
- assert.ok(owners.length>0&&owners.length<2**24);
- assert.equal(manifest.original_assets.bounds.sha256,envelope.owner_roster.sha256);
- assert.deepEqual(owners.map(o=>o.index),owners.map((_,i)=>i+1));assert.equal(new Set(owners.map(o=>o.id)).size,owners.length);
- const latitudePin=atlas.pixelMap.native_latitudes;
- assert.equal(latitudePin.transport_path,'native-v1/native-row-latitudes.f64le.gz');
- const latitudes=whole(output,{...latitudePin,path:latitudePin.transport_path});
- assert.equal(latitudes.length,manifest.size*8);assert.equal(digest(latitudes),manifest.native_latitudes.decoded_sha256);
- const probes=[],addedKeys=new Set(),gainByOwner=new Map();
- for(const row of patch.rows)for(const [start,end,owner]of row.runs){
-  assert.ok(owners[owner-1]);for(let x=start;x<end;x++){
-   const key=x+'/'+row.y;assert.equal(addedKeys.has(key),false);addedKeys.add(key);
-   probes.push({x,y:row.y,before:0,after:owner,added:true});gainByOwner.set(owner,(gainByOwner.get(owner)??0)+1);
-  }
- }
- assert.ok(probes.length>0);assert.equal(probes.length,expectedCells,'Actual patch total differs from selected current patch');
- const fetcher=async name=>{
-  const relative=name.startsWith('./')?name.slice(2):name;
-  assert.ok(!path.isAbsolute(relative)&&!relative.split('/').some(p=>!p||p==='.'||p==='..'));
-  return new Response(fs.readFileSync(path.join(output,relative)));
- };
- const base=await loadOwnershipAssets(atlas.pixelMap,fetcher);
- const stableControls=selectedStableOwnerControls(base,patch);assert.ok(stableControls.length>0,'Missing authenticated base-owner controls');
- for(const {x,y,id} of stableControls)probes.push({x,y,before:id,after:id,added:false});
- for(const probe of probes){probe.lon=(probe.x+.5)/manifest.size*360-180;probe.lat=latitudes.readDoubleLE(probe.y*8);assert.ok(Number.isFinite(probe.lat));}
- const features=atlas.parts.flatMap(name=>{
-  const raw=fs.readFileSync(path.join(output,name));return JSON.parse(name.endsWith('.gz')?gunzipSync(raw):raw);
- });
- assert.deepEqual(features.map(f=>[f.id,f.pixelIndex,f.properties.parent_id]),owners.map(o=>[o.id,o.index,o.province_id]));
- const effective=await loadAdditiveNativePatch(atlas,features,base,{fetcher});
- assert.equal(effective.additive_added_cells,expectedCells,'Loaded effective cell total differs from selected current patch');
- for(const probe of probes){
-  assert.equal(pickOwnership(base,probe.x,probe.y),probe.before,'Actual base owner differs');
-  assert.equal(pickOwnership(effective,probe.x,probe.y),probe.after,'Actual selected owner differs');
-  assert.equal(samplePackedOwnership(effective,{x:probe.x,y:probe.y,width:1,height:1})[0],probe.after,'Actual renderer sampler differs');
- }
- console.log(JSON.stringify({kind:'actual-emitted-selected-additive-ownership',selected_envelope_sha256:sidecar.runtime_envelope.sha256,
-  owners:owners.length,added_cells:expectedCells,patch_rows:patch.rows.length,owners_with_native_gain:gainByOwner.size,
-  stable_before_controls:stableControls.length,exact_picker_and_sampler_checks:probes.length}));
+ const {checkEmittedSelectedDelivery}=await import('../scripts/selected-delivery-smoke.mjs');
+ const report=await checkEmittedSelectedDelivery();
+ assert.ok(report.cumulative_native_cells_picked_and_sampled>0);
+ // The real numerical-rule loader retains the former latitude transport check,
+ // validating every row rather than constructing unused coordinates per cell.
+ const {loadNativeLatitudes}=await import('../src/native-latitudes.js');
+ const {nativeReferenceForData}=await import('../src/effective-footprint.js');
+ const atlas=JSON.parse(fs.readFileSync('dist/client/atlas-geography.json'));
+ const latitudes=await loadNativeLatitudes(atlas.pixelMap,nativeReferenceForData(atlas),
+  async name=>new Response(fs.readFileSync('dist/client/'+name.replace(/^\.\//,''))));
+ assert.equal(latitudes.length,atlas.pixelMap.size);
+ console.log(JSON.stringify(report));
 });

@@ -291,6 +291,27 @@ export async function verifyPackageDependencies(directory) {
   return root;
 }
 
+// A real provider limit on new published static files, not decoded scientific
+// inputs or historical custody: https://developers.cloudflare.com/workers/platform/limits/#static-assets
+export const CLOUDFLARE_STATIC_ASSET_BYTES=25*1024*1024;
+export function assertCloudflareStaticAssets(root) {
+  root=fsSync.realpathSync(root);
+  for(const relative of ['dist','dist/client']){
+    const stat=fsSync.lstatSync(path.join(root,relative));
+    if(!stat.isDirectory()||stat.isSymbolicLink())throw Error('Cloudflare static asset directory must be ordinary: '+relative);
+  }
+  const visit=relative=>{
+    for(const name of fsSync.readdirSync(path.join(root,relative))){
+      const child=relative+'/'+name,stat=fsSync.lstatSync(path.join(root,child));
+      if(stat.isSymbolicLink())throw Error('Cloudflare static asset must be ordinary: '+child);
+      if(stat.isDirectory())visit(child);
+      else if(!stat.isFile()||stat.size>CLOUDFLARE_STATIC_ASSET_BYTES)
+        throw Error('Cloudflare static asset exceeds 25 MiB or is nonordinary: '+child);
+    }
+  };
+  visit('dist/client');
+}
+
 export function assertPackageStage(directory = repository) {
   const expected = process.env.WORLDATLAS_PACKAGE_STAGE;
   if (!expected || path.resolve(expected) !== path.resolve(directory)) throw Error('Private builder requires a declared input image; use build:static, build:hosted or build:cloudflare');
@@ -346,6 +367,7 @@ export async function runPackageBuild(kind, {root = repository, execute, preflig
     }
     pythonExecution?.verify();
     if(currentExecution)requireCurrentExecution(currentExecution);
+    if(kind==='cloudflare')assertCloudflareStaticAssets(stage);
     // Only explicit generated outputs return to the caller. Source archives and
     // unpublished research never get copied back or altered by this wrapper.
     for (const output of definition.generated_outputs) {
