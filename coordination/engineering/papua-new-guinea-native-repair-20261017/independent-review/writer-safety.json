@@ -1,0 +1,72 @@
+[
+  {
+    "writer": "check-historical.py",
+    "destination": "existing",
+    "refused": true,
+    "error": "AssertionError"
+  },
+  {
+    "writer": "check-historical.py",
+    "destination": "dangling",
+    "refused": true,
+    "error": "AssertionError"
+  },
+  {
+    "writer": "check-prior-melanesia.py",
+    "destination": "existing",
+    "refused": true,
+    "error": "AssertionError"
+  },
+  {
+    "writer": "check-prior-melanesia.py",
+    "destination": "dangling",
+    "refused": true,
+    "error": "AssertionError"
+  },
+  {
+    "writer": "prepare-stage.py",
+    "destination": "existing",
+    "refused": true,
+    "error": "AssertionError"
+  },
+  {
+    "writer": "prepare-stage.py",
+    "destination": "dangling",
+    "refused": true,
+    "error": "AssertionError"
+  },
+  {
+    "writer": "preserve-interpretation.py",
+    "destination": "existing",
+    "refused": true,
+    "error": "AssertionError"
+  },
+  {
+    "writer": "preserve-interpretation.py",
+    "destination": "dangling",
+    "refused": true,
+    "error": "AssertionError"
+  },
+  {
+    "writer": "verify-complete-context.py",
+    "destination": "existing",
+    "refused": true,
+    "error": "AssertionError"
+  },
+  {
+    "writer": "verify-complete-context.py",
+    "destination": "dangling",
+    "refused": true,
+    "error": "AssertionError"
+  },
+  {
+    "writer": "compact-negative-operands.mjs",
+    "destination": "existing",
+    "refused": true
+  },
+  {
+    "writer": "compact-negative-operands.mjs",
+    "destination": "dangling",
+    "refused": true
+  }
+]
