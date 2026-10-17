@@ -20,7 +20,7 @@ const rawAPI = githubAPI(process.env.GH_TOKEN, {onRequest: accounting.observe,
   readWaitMs: phase === 'merge' ? 61 * 60 * 1000 : 8 * 60 * 1000});
 const transport = gitBlobTransport(rawAPI, {repo, token: process.env.GH_TOKEN, directory: process.cwd(),
   onFetch: row => console.log(JSON.stringify({phase, immutable_transport: row}))});
-const api = transport.api, options = {api, repo, number, expectedHead: input.expected_head, policy: loadEvidencePolicy(),
+const api = transport.api, options = {api, repo, number, expectedHead: input.expected_head, policy: loadEvidencePolicy(), reviewedTests: input.reviewed_tests,
   integrationRequestId: input.request_id + (process.env.GITHUB_RUN_ID ? `-${process.env.GITHUB_RUN_ID}` : '')};
 let result = {accepted: false, request_id: input.request_id, pr_number: number, phase};
 try {
@@ -28,7 +28,7 @@ try {
     const state = await prepareIntegration(options);
     if (!state.replayed && !/^[a-f0-9]{40}$/.test(state.candidate_tree ?? '')) throw Error('Integration candidate tree unavailable');
     result = {...result, accepted: Boolean(state.replayed), ...(state.replayed ? {merge_commit: state.pr.merge_commit_sha} : {}), status: state.replayed ? 'already-merged' : 'testing',
-      tested_base: state.base, tested_candidate: state.candidate, reviewed_head: input.expected_head, profile: state.profile, geography_required: state.geography_required, geography_software: state.geography_software, test_selection: state.test_selection ?? 'complete', expectations_path: state.expectations_path,
+      tested_base: state.base, tested_candidate: state.candidate, reviewed_head: input.expected_head, profile: state.profile, geography_required: state.geography_required, geography_software: state.geography_software, test_selection: state.test_selection ?? 'complete', test_files: state.test_files, expectations_path: state.expectations_path,
       candidate_ref: state.candidate_ref};
     // Only validated commit/tree IDs, owned refs and literal safe sparse patterns become job outputs.
     // Queued workflow definitions can precede this ref:main producer. Only an
@@ -37,7 +37,7 @@ try {
     const checkoutOutput = process.env.CHECKOUT_PATTERNS_FORMAT === 'wrapped-base64'
       ? `checkout_patterns_base64<<CHECKOUT_BASE64\n${(checkoutPatternsBase64.match(/.{1,76}/g) ?? []).join('\n')}\nCHECKOUT_BASE64\n`
       : `checkout_patterns_base64=${checkoutPatternsBase64}\n`;
-    fs.appendFileSync(process.env.GITHUB_OUTPUT, `geography_required=${state.geography_required !== false}\ngeography_software=${state.geography_software === true}\ncandidate_ref=${state.candidate_ref ?? ''}\ncandidate=${state.candidate ?? ''}\nbase=${state.base ?? ''}\nprofile=${state.profile ?? 'evidence'}\nshards=${JSON.stringify(state.shards ?? (state.profile === 'full' ? [0,1,2] : [0]))}\ntest_selection=${state.test_selection ?? 'complete'}\nexpectations_path=${state.expectations_path ?? ''}\ncandidate_tree=${state.candidate_tree ?? ''}\n${checkoutOutput}`);
+    fs.appendFileSync(process.env.GITHUB_OUTPUT, `geography_required=${state.geography_required !== false}\ngeography_software=${state.geography_software === true}\ncandidate_ref=${state.candidate_ref ?? ''}\ncandidate=${state.candidate ?? ''}\nbase=${state.base ?? ''}\nprofile=${state.profile ?? 'evidence'}\nshards=${JSON.stringify(state.shards ?? (state.profile === 'full' ? [0,1,2] : [0]))}\ntest_selection=${state.test_selection ?? 'complete'}\ntest_files_base64=${Buffer.from(JSON.stringify(state.test_files ?? [])).toString('base64')}\nexpectations_path=${state.expectations_path ?? ''}\ncandidate_tree=${state.candidate_tree ?? ''}\n${checkoutOutput}`);
   } else {
     const completed = await completeIntegration({...options, integrationResult: process.env.INTEGRATION_RESULT,
       geographyResult: process.env.GEOGRAPHY_RESULT,

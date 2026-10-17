@@ -68,7 +68,7 @@ export function fullCheckoutPatterns(definition) {
 
 // One fixture roster serves full, selected-data and focused regression. Keep
 // ordinary code discovery separate from the literal verification operands.
-export function focusedCheckoutPatterns(definition) {
+export function focusedCheckoutPatterns(definition, verificationPaths = definition.verification_paths) {
   validatePackageInputs(definition);
   return [
     'scripts', 'src', 'test', '.github', 'drizzle', 'hosted', '/*.mjs',
@@ -76,7 +76,7 @@ export function focusedCheckoutPatterns(definition) {
     'coordination/engineering/**/*.cjs', 'coordination/engineering/**/*.py',
     'coordination/engineering/**/package.json',
     'package.json', 'package-lock.json', 'requirements.txt',
-    ...definition.verification_paths.map(name => '/' + name)
+    ...verificationPaths.map(name => '/' + name)
   ];
 }
 

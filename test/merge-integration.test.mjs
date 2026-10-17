@@ -12,7 +12,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {focusedIntegrationTest, integrationTestFiles, integrationNeedsBrowser, prepareIntegrationTests} from '../scripts/run-integration-tests.mjs';
 import {renderClaim, githubAPI} from '../scripts/issue-claim-contract.mjs';
-import {prepareIntegration, completeIntegration, checkCurrentChecks, integrationProfile, integrationChanges, geographyRequired, createCandidate, cleanupCandidate, cleanupMergedHead} from '../scripts/merge-integration.mjs';
+import {reviewedTestPlan, prepareIntegration, completeIntegration, checkCurrentChecks, integrationProfile, integrationChanges, geographyRequired, createCandidate, cleanupCandidate, cleanupMergedHead} from '../scripts/merge-integration.mjs';
 
 const sha = letter => letter.repeat(40);
 const FOCUSED_INTEGRATION_TESTS = integrationTestFiles('evidence', 0);
@@ -130,6 +130,60 @@ test('actual full preparation emits archive patterns from the authenticated cand
   assert(prepared.checkout_patterns.includes('/research/geography/shared-seam-prt-esp-20261006/required.json'));
   assert(prepared.checkout_patterns.includes('!/coordination/engineering/reference-source-custody-20261007/'));
   assert.equal(f.calls.filter(row=>row.route.includes('/contents/.github/package-inputs.json')).length,1);
+});
+
+test('reviewed tests bind both trusted phases without changing actual geography obligations', async () => {
+  const f=controlFixture(), files=['test/merge-integration.test.mjs'];
+  const request={base:f.base,head:f.head,files,inputs:[]};
+  const prepared=await prepareIntegration({...f.options(),reviewedTests:JSON.stringify(request)});
+  assert.equal(prepared.profile,'evidence');assert.equal(prepared.test_selection,'reviewed');
+  assert.deepEqual(prepared.test_files,files);assert.deepEqual(prepared.shards,[0]);
+  assert.equal(prepared.geography_required,false);
+  assert.deepEqual(prepared.checkout_patterns,focusedCheckoutPatterns(f.packageInputs,[]));
+  assert.equal((await f.complete({reviewedTests:request,geographyResult:'skipped'})).accepted,true);
+  for(const changed of [{base:sha('0')},{head:sha('0')},{head:undefined}]) {
+    const stale={...request,...changed};
+    await assert.rejects(prepareIntegration({...f.options(),reviewedTests:stale}),/stale|binding/);
+    await assert.rejects(f.complete({reviewedTests:stale,geographyResult:'skipped'}),/stale|binding/);
+  }
+  f.integrated.push({path:'scripts/unknown-checker.py',sha:sha('f'),type:'blob',mode:'100644'});
+  const unknown=await prepareIntegration({...f.options(),reviewedTests:request});
+  assert.equal(unknown.geography_required,true);assert.equal(unknown.geography_software,true);
+  await assert.rejects(f.complete({reviewedTests:request,geographyResult:'skipped'}),/Trusted combined geography/);
+});
+
+test('reviewed test and fixture operands are existing ordinary candidate paths', () => {
+  const row=(mode='100644',type='blob')=>({sha:sha('e'),mode,type});
+  const entries=new Map([['test',row('040000','tree')],['test/example.test.mjs',row()],
+    ['data/fixture.json',row()],['data/directory/child.json',row()]]);
+  const plan={base:sha('a'),head:sha('b'),files:['test/example.test.mjs'],inputs:['data/fixture.json','data/directory/']};
+  const context={base:plan.base,head:plan.head,entries,files:[],definition:loadPackageInputs()};
+  const result=reviewedTestPlan(plan,context);
+  assert.deepEqual(result.files,plan.files);assert.deepEqual(result.inputs,plan.inputs);assert.equal(result.build,false);
+  for(const files of [[],['test/missing.test.mjs'],['../escape.test.mjs'],['test/../escape.test.mjs'],[null]])
+    assert.throws(()=>reviewedTestPlan({...plan,files},context),/roster|ordinary/);
+  for(const inputs of [undefined,['../escape'],['/etc/passwd'],['data\\fixture.json'],['data/missing/'],[null]])
+    assert.throws(()=>reviewedTestPlan({...plan,inputs},context),/fixture/);
+  for(const [name,mode,type] of [['test/example.test.mjs','120000','blob'],['test','120000','blob'],
+    ['data/fixture.json','160000','commit'],['data/directory/child.json','120000','blob'],['data/directory','120000','blob']]) {
+    const changed=new Map(entries);changed.set(name,row(mode,type));
+    assert.throws(()=>reviewedTestPlan(plan,{...context,entries:changed}),/ordinary/);
+  }
+  assert.equal(reviewedTestPlan(undefined,context),null);
+});
+
+test('reviewed lists cannot omit actual packaged consumers when package source changes or moves', async () => {
+  for(const changed of [{filename:'src/a.js'}, {filename:'archive/a.js',previous_filename:'src/a.js'}]) {
+    const f=controlFixture();f.packageInputs.inputs.push('src/');
+    const required=['test/compact-ownership.test.mjs','test/prepared-parity.test.mjs'];
+    const entries=new Map([...f.integrated,...required.map(path=>({path,sha:sha('e'),type:'blob',mode:'100644'}))].map(row=>[row.path,row]));
+    const request={base:f.base,head:f.head,files:['test/merge-integration.test.mjs'],inputs:[]};
+    const context={base:f.base,head:f.head,entries,files:[changed],definition:f.packageInputs};
+    const plan=reviewedTestPlan(request,context);
+    assert.equal(plan.build,true);assert.deepEqual(plan.files,[...request.files,...required]);
+    assert(plan.checkout_patterns.includes('/src/'));
+    entries.delete(required[0]);assert.throws(()=>reviewedTestPlan(request,context),/packaged consumer/);
+  }
 });
 
 test('full preparation rejects unavailable or malformed package roles and cleans its candidate',async()=>{

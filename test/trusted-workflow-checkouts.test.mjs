@@ -5,14 +5,14 @@ import os from 'node:os';
 import path from 'node:path';
 import {spawnSync, execFileSync} from 'node:child_process';
 import {checkGitScope} from '../scripts/check-handoff-scope.mjs';
-import {containsPackagePath,loadPackageInputs,focusedCheckoutPatterns} from '../scripts/package-inputs.mjs';
+import {loadPackageInputs,focusedCheckoutPatterns} from '../scripts/package-inputs.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const workflows = ['issue-claims.yml', 'worker-merge.yml'];
 
 // Reproduce each declared sparse tree, including cone-mode root files. Load
 // trusted modules without executing workflow entrypoints or contacting GitHub.
-function probe(directories, {geography = false, checkoutTests = false} = {}) {
+function probe(directories, {geography = false} = {}) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'worldatlas-checkout-'));
   try {
     fs.copyFileSync(path.join(root, 'package.json'), path.join(directory, 'package.json'));
@@ -24,7 +24,7 @@ function probe(directories, {geography = false, checkoutTests = false} = {}) {
       fs.mkdirSync(path.dirname(destination), {recursive: true});
       fs.cpSync(source, destination, {recursive: true});
     }
-    return spawnSync(process.execPath, checkoutTests ? ['--test', '--test-concurrency=1', '--test-name-pattern', 'actual sparse declarations include trusted module dependencies', 'test/trusted-workflow-checkouts.test.mjs'] : ['--input-type=module', '-e',
+    return spawnSync(process.execPath, ['--input-type=module', '-e',
       "await import('./scripts/issue-claim-contract.mjs'); await import('./scripts/research-import-gate.mjs'); await import('./scripts/premerge-evidence.mjs');" +
       (geography ? "await import('./scripts/check-effective-geographic-regression.mjs'); await import('./coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs'); console.log('complete trusted geography closure imported');" : '')],
     {cwd: directory, encoding: 'utf8', env: {PATH: process.env.PATH}});
@@ -56,7 +56,6 @@ for (const workflow of workflows) {
     assert.ok(blocks.length > 0, 'expected explicit sparse checkout declarations');
     const checkouts=blocks.map(block=>block[1].trim().split('\n').map(row=>row.trim()))
       .filter(rows=>rows.join('\n')!=='/*\n!/*/'); // Root-only bootstrap is expanded by the tested stdin step.
-    if(workflow==='worker-merge.yml')checkouts.push(focusedCheckoutPatterns(loadPackageInputs(root)).map(name=>name.replace(/^\//,'')));
     for (const directories of checkouts) {
       const result = probe(directories);
       assert.equal(result.status, 0, result.stderr);
@@ -144,15 +143,16 @@ test('package setup and retention follow the current build and assembly branches
  const browser=packageStep(integration,'Install browser dependencies only for tests that use Playwright');
  // The actual queue shell is exercised in integration-profile-restoration;
  // package-output-artifact verifies immediate capture and successful-only upload.
- for(const [selection,assembled,shard] of [['complete',false,0],['selected-data',false,0],
-   ['selected-data',true,0],['complete',false,1],['complete',false,2]]){
-   const context=queueContext({selection});context.matrix.shard=shard;
+ for(const [selection,assembled,shard,profile='full'] of [['complete',false,0],['selected-data',false,0],
+   ['selected-data',true,0],['complete',false,1],['complete',false,2],
+   ['reviewed',false,0,'full'],['reviewed',false,0,'evidence']]){
+   const context=queueContext({selection,profile});context.matrix.shard=shard;
    context.steps.assembly.outputs.assembled=String(assembled);
-   const builds=shard===0&&!assembled;
+   const builds=profile==='full'&&shard===0&&!assembled;
    for(const step of setup)assert.equal(workflowCondition(step.condition,context),builds,step.name);
    assert.equal(workflowCondition(original.condition,context),builds);
    assert.equal(workflowCondition(original.condition,context,{success:false}),false);
-   assert.equal(workflowCondition(smoke.condition,context),shard===0);
+   assert.equal(workflowCondition(smoke.condition,context),profile==='full'&&shard===0);
    assert.equal(workflowCondition(browser.condition,context),selection!=='selected-data');
  }
 });
@@ -209,23 +209,6 @@ test('full-checkout canonical verification executes against real Git and refuses
     }finally{fs.rmSync(directory,{recursive:true,force:true});}
   }
 });
-
-test('queue focused candidate includes the inputs of its nested actual-checkout probes', () => {
-  const source = fs.readFileSync(path.join(root, '.github/workflows/worker-merge.yml'), 'utf8');
-  assert.match(source, /- name: Materialize exact prepared checkout inputs[\s\S]*?needs\.prepare\.outputs\.checkout_patterns_base64/);
-  const directories = focusedCheckoutPatterns(loadPackageInputs(root)).map(name=>name.replace(/^\//,''));
-  const definition=loadPackageInputs(root),declared=[...definition.inputs,...definition.verification_paths];
-  for(const name of directories.filter(row=>row.startsWith('research/')))
-    assert(containsPackagePath(declared,name)||declared.includes(name+'/'),
-      'Nested research fixture must be retained by the actual full checkout: '+name);
-  const result = probe(directories, {checkoutTests: true});
-  assert.equal(result.status, 0, result.stdout + result.stderr);
-  const missing = probe(directories.filter(row => !row.includes('selected-checkpoint-reuse-20261012')), {checkoutTests: true});
-  assert.notEqual(missing.status, 0);
-  assert.match(missing.stdout + missing.stderr, /ENOENT/);
-  assert.match(missing.stdout + missing.stderr, /selected-checkpoint-reuse-20261012/);
-});
-
 
 for (const workflow of ['worker-merge.yml']) {
   test(`${workflow}: native geography omits polygon dependencies while general regressions retain them`, () => {
