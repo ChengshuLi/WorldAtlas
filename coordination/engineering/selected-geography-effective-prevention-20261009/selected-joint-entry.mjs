@@ -11,7 +11,7 @@ const ROOT = fileURLToPath(new URL('../../../', import.meta.url));
 const P = 'coordination/engineering/selected-geography-effective-prevention-20261009/';
 export const JOINT_CODE = Object.freeze([
   'scripts/run-geographic-check.py',
-  'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs',
+  'scripts/native-word-store.mjs', 'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs',
   'src/native-grid.js', 'src/ownership-codec.js',
   P + 'selected-neighbor-prevention.mjs', P + 'selected-checkpoint.mjs', P + 'selected-joint-entry.mjs',
   'scripts/accepted-selected-checkpoint.mjs', 'scripts/check-handoff-scope.mjs',

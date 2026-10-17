@@ -1,9 +1,10 @@
 // Trusted immutable data reader. Proposed project code is never imported.
 import fs from 'node:fs';
 import path from 'node:path';
-import {execFileSync,spawnSync} from 'node:child_process';
+import {execFileSync,spawnSync,spawn} from 'node:child_process';
 import {createHash} from 'node:crypto';
-import {gunzipSync} from 'node:zlib';
+import {gunzipSync,createGunzip} from 'node:zlib';
+import {Readable} from 'node:stream';
 import {fileURLToPath} from 'node:url';
 import {isDeepStrictEqual} from 'node:util';
 import {nativePolygonIntervals,NATIVE_GRID_METHOD} from '../src/native-grid.js';
@@ -243,6 +244,26 @@ export class ImmutableReader {
     pin.sha256=actualSha;pin.whole_body_consumed=true;
     return body;
   }
+  // Stream one exact immutable blob. A consumer must reach EOF; partial reads
+  // never acquire a whole-body custody mark. Hash and child exit are both gates.
+  async *stream(name,{version=this.version,expected}={}) {
+    const pin=this.descriptor(name,version);
+    const child=spawn(this.gitExecutable,['-c','core.hooksPath=/dev/null','-C',this.repo,'cat-file','blob',pin.git_blob_oid],
+      {stdio:['ignore','pipe','inherit']});
+    let failed,complete=false,bytes=0;
+    const exited=new Promise(resolve=>{child.once('error',error=>{failed=error;resolve(null);});child.once('close',resolve);});
+    const hasher=createHash('sha256');
+    try {
+      for await(const chunk of child.stdout){
+        bytes+=chunk.length;demand(bytes<=pin.bytes,'Whole immutable input exceeds descriptor: '+name);
+        hasher.update(chunk);yield chunk;
+      }
+      const status=await exited;if(failed)throw failed;
+      demand(status===0&&bytes===pin.bytes,'Incomplete immutable streamed input: '+name);
+      const actual=hasher.digest('hex');demand(!expected||actual===expected,'Whole immutable input differs: '+name);
+      pin.sha256=actual;pin.whole_body_consumed=true;complete=true;
+    }finally{if(!complete){child.kill();await exited;}}
+  }
   json(name,options){return JSON.parse(this.read(name,options));}
 }
 
@@ -311,6 +332,29 @@ export class NativeAssetImage {
         names.add(p.path);offset+=length;
       }demand(offset===this.index.whole_bytes,'Native transport omitted complete bytes');
     }
+  }
+  async *logicalStream(name,pin) {
+    demand(name===path.posix.join(this.nativeRoot,pin.path),'Foreign selected native logical path');
+    const member=this.index.files.find(p=>p.path===pin.path);
+    demand(member&&member.bytes===pin.bytes&&member.sha256===pin.sha256,'Selected native asset differs from manifest-bound whole member');
+    const hasher=createHash('sha256');let bytes=0;
+    for(const p of this.index.parts){
+      if(!(p.offset<member.offset+member.bytes&&member.offset<p.offset+p.decoded_bytes))continue;
+      let decoded=0,encoded=0;const whole=createHash('sha256'),reader=this.reader,directory=this.directory;
+      async function* source(){for await(const chunk of reader.stream(path.posix.join(directory,p.path),{expected:p.sha256})){encoded+=chunk.length;yield chunk;}}
+      const stream=Readable.from(source()).compose(createGunzip());
+      for await(const raw of stream){
+        const offset=decoded;decoded+=raw.length;
+        demand(decoded<=p.decoded_bytes,'Native fragment decoded size exceeds pin');whole.update(raw);
+        const start=Math.max(member.offset,p.offset+offset),end=Math.min(member.offset+member.bytes,p.offset+decoded);
+        if(start<end){const chunk=raw.subarray(start-p.offset-offset,end-p.offset-offset);bytes+=chunk.length;hasher.update(chunk);yield chunk;}
+      }
+      // Consume the suffix outside this member too. Its hash still authenticates
+      // the entire containing fragment, even when no more member bytes are due.
+      demand(encoded===p.bytes&&decoded===p.decoded_bytes&&whole.digest('hex')===p.decoded_sha256,
+        'Whole native fragment decoded body differs');
+    }
+    demand(bytes===member.bytes&&hasher.digest('hex')===member.sha256,'Whole native member changed');
   }
   logical(name,pin) {
     demand(name===path.posix.join(this.nativeRoot,pin.path),'Foreign selected native logical path');
@@ -795,7 +839,7 @@ export function decodeVisibilityLatitudes(encoded,pin,size) {
 }
 
 function indexCandidates(candidates) {
-  demand(Array.isArray(candidates)&&candidates.length<=4096,'Bounded visibility candidate roster required');
+  demand(Array.isArray(candidates),'Visibility candidate roster required');
   const ids=new Set();
   return candidates.map((candidate,i)=>{
     demand(typeof candidate.component_id==='string'&&!ids.has(repairComponentKey(candidate)),'Duplicate/missing visibility component');
@@ -815,6 +859,19 @@ function indexCandidates(candidates) {
     demand(candidate.geometry_sha256===undefined||candidate.geometry_sha256===digest,'Visibility candidate geometry binding differs');
     return {index:i+1,polygons,bounds,vertices,candidate,geometry_sha256:digest};
   });
+}
+function* visibilityCandidateBatches(candidates) {
+  let batch=[],coordinates=0;
+  for(const candidate of candidates){
+    if(candidate.representation==='native-cells')continue;
+    const geometry=candidate.geometry,polygons=geometry?.type==='Polygon'?[geometry.coordinates]:geometry?.coordinates;
+    // Validation remains in indexCandidates. Count existing coordinate slots
+    // without serializing or copying the original geometry.
+    const size=Array.isArray(polygons)?polygons.reduce((n,p)=>n+(Array.isArray(p)?p.reduce((m,r)=>m+(Array.isArray(r)?r.length*2:0),0):0),0):0;
+    if(batch.length&&coordinates+size>65536){yield batch;batch=[];coordinates=0;}
+    batch.push(candidate);coordinates+=size;
+  }
+  if(batch.length)yield batch;
 }
 function ownerRows(rows,size) {
   const result=new Map();let previous=-1;
@@ -854,7 +911,21 @@ function mergeSpans(spans) {
 
 // Group candidates sharing one <=4096-row block to amortize latitude validation.
 // Archived representative cells may choose this block; failure never proves zero.
-export function screenNativeGapCandidates({candidates,size,latitudes,rows,rowStart,rowEnd,selection}) {
+export function screenNativeGapCandidates(options) {
+  const {candidates}=options;
+  demand(Array.isArray(candidates),'Visibility candidate roster required');
+  const ids=new Set();
+  for(const candidate of candidates){
+    const key=repairComponentKey(candidate);
+    demand(typeof candidate.component_id==='string'&&!ids.has(key),'Duplicate/missing visibility component');ids.add(key);
+    demand(['Polygon','MultiPolygon'].includes(candidate.geometry?.type),'Visibility requires the exact polygon primitive');
+  }
+  if(!candidates.length)return screenNativeGapBatch(options);
+  const result=[];
+  for(const batch of visibilityCandidateBatches(candidates))result.push(...screenNativeGapBatch({...options,candidates:batch}));
+  return result;
+}
+function screenNativeGapBatch({candidates,size,latitudes,rows,rowStart,rowEnd,selection}) {
   demand(selection&&/^[a-f0-9]{64}$/.test(selection.current_selection_sha256)
     &&/^[a-f0-9]{64}$/.test(selection.patch_sha256),'Current effective selection binding required');
   const index=indexCandidates(candidates),owned=ownerRows(rows,size);
@@ -938,7 +1009,11 @@ export function repairVisibilityWitnesses({candidates,size,latitudes,beforeRows,
       }
     }
   }
-  const index=indexCandidates(candidates.filter(row=>row.representation!=='native-cells'));
+  // Polygon membership is independent per primitive. Byte-sized preparation
+  // batches replace the arbitrary component-count admission ceiling. One large
+  // original geometry remains a disclosed maximum-primitive working term.
+  for(const batch of visibilityCandidateBatches(candidates)){
+    const index=indexCandidates(batch);
   for(let k=0;index.length&&k<ys.length;){
     const start=ys[k];let end=k+1;while(end<ys.length&&ys[end]-start<4096)end++;
     const native=nativePolygonIntervals(index,{size,latitudes,rowStart:start,rowEnd:ys[end-1]+1});
@@ -956,6 +1031,7 @@ export function repairVisibilityWitnesses({candidates,size,latitudes,beforeRows,
       }
     }
     k=end;
+  }
   }
   return candidates.map(row=>witnesses.get(repairComponentKey(row))??null);
 }

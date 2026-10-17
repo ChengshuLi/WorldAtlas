@@ -14,7 +14,7 @@ import {deriveCoordinateDelta} from '../../coordination/engineering/selected-geo
 const MODULE='coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const PROGRAMME='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
 const CATALOGUE='coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json';
-const CODE=[MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/check-effective-geographic-regression.mjs',
+const CODE=[MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/native-word-store.mjs','scripts/check-effective-geographic-regression.mjs',
   'scripts/selected-reference-metadata.mjs','src/reference-metadata.js','src/native-grid.js','src/ownership-codec.js'];
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const polygon=(x,y=0)=>({type:'Polygon',coordinates:[[[x,y],[x+.2,y],[x+.2,y+.2],[x,y+.2],[x,y]]]});
@@ -41,21 +41,27 @@ function fixtureRepository(root){
 const trustedSeeds=new Map();
 after(()=>{for(const seed of trustedSeeds.values())fs.rmSync(seed.root,{recursive:true,force:true});});
 
-function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,sourceOverride,physicalLogicalSource,originalPatchRows,overrideLogicalPath}){
+function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,sourceOverride,physicalLogicalSource,originalPatchRows,overrideLogicalPath,nativeLayout}){
  const {git,save,commit,pin}=fixtureRepository(root);
  git('init','-q');if(codeRoutes)save('data/scientific.js',{fixture:'scientific input, not executed code'});save(PROGRAMME,fs.readFileSync(PROGRAMME));for(const name of CODE)save(name,fs.readFileSync(name));save('package.json',{type:'module'});
  const {features,certificate}=fixtures(), source={type:'FeatureCollection',features};save('data/source.json',source);
  if(sourceOverride)save('data/selected-source.json.gz',gzipSync(valueBytes(source)));
  const reference={id:'geography:fixture',hierarchy_sha256:'a'.repeat(64),footprints_sha256:'b'.repeat(64)};
- const encode=(name,kind,values)=>{const words=Uint32Array.from(values),canonical=Buffer.from(words.buffer),encoded=gzipSync(shuffleOwnershipBytes(words));save('data/'+name,encoded);return {path:name,kind,offset:0,bytes:encoded.length,sha256:sha(encoded),decoded_bytes:canonical.length,decoded_sha256:sha(canonical),words:words.length,encoding:'byte-shuffle'};};
- const size=nativeAppend?262166:4,coordinateBits=Math.ceil(Math.log2(size));
- const table=nativeAppend?Array.from({length:size*2},(_,i)=>i%2?0:3):[0,1,incompleteNative?2:1,1,2,1,3,0];
- if(nativeAppend)table.splice(0,6,0,1,1,1,2,1);
- const parts=[encode('native/rows.bin.gz','rows',table),encode('native/runs.bin.gz','runs',[2**coordinateBits,0,2*2**coordinateBits,0,3*2**coordinateBits+1,1])];
+ const encode=(name,kind,values,offset=0)=>{const words=Uint32Array.from(values),canonical=Buffer.from(words.buffer),encoded=gzipSync(shuffleOwnershipBytes(words));save('data/'+name,encoded);return {path:name,kind,offset,bytes:encoded.length,sha256:sha(encoded),decoded_bytes:canonical.length,decoded_sha256:sha(canonical),words:words.length,encoding:'byte-shuffle'};};
+ const size=nativeLayout?.size??(nativeAppend?262166:4),coordinateBits=Math.ceil(Math.log2(size));
+ const table=nativeLayout?.rows??(nativeAppend?Array.from({length:size*2},(_,i)=>i%2?0:3):[0,1,incompleteNative?2:1,1,2,1,3,0]);
+ if(nativeAppend&&!nativeLayout)table.splice(0,6,0,1,1,1,2,1);
+ const runs=nativeLayout?.runs??[2**coordinateBits,0,2*2**coordinateBits,0,3*2**coordinateBits+1,1];
+ const partWords=nativeLayout?.runPartWords??runs.length;
+ if(!Number.isSafeInteger(partWords)||partWords<=0||partWords%2)throw Error('Fixture requires complete positive run-word partitions');
+ const parts=[encode('native/rows.bin.gz','rows',table)];
+ for(let offset=0;offset<runs.length;offset+=partWords)
+  parts.push(encode(nativeLayout?`native/runs-${offset}.bin.gz`:'native/runs.bin.gz','runs',runs.slice(offset,offset+partWords),offset));
  const compressedParts=parts.map(p=>fs.readFileSync(path.join(root,'data',p.path))),whole=Buffer.concat(compressedParts),fragment=gzipSync(whole);
  save('data/transport/fragment.gz',fragment);
- const index={version:1,kind:'ordered-exact-original-byte-fragments',whole_bytes:whole.length,whole_sha256:sha(whole),files:parts.map((p,i)=>({path:p.path,mode:'100644',offset:i?parts[0].bytes:0,bytes:p.bytes,sha256:p.sha256})),parts:[{path:'fragment.gz',offset:0,bytes:fragment.length,sha256:sha(fragment),decoded_bytes:whole.length,decoded_sha256:sha(whole)}]};save('data/transport/index.json',index);
- const manifest={version:1,size,coordinateBits,method:'native-linear-evenodd-first-owner-v1',native_latitudes:[],hierarchy_sha256:reference.hierarchy_sha256,original_assets:{},parts,runWords:6,native_asset_transport:{version:1,kind:index.kind,index:{path:'data/transport/index.json',bytes:valueBytes(index).length,sha256:valueSha(index)},logical_assets:2,original_compressed_bytes:whole.length}};
+ let assetOffset=0;
+ const index={version:1,kind:'ordered-exact-original-byte-fragments',whole_bytes:whole.length,whole_sha256:sha(whole),files:parts.map(p=>{const offset=assetOffset;assetOffset+=p.bytes;return {path:p.path,mode:'100644',offset,bytes:p.bytes,sha256:p.sha256};}),parts:[{path:'fragment.gz',offset:0,bytes:fragment.length,sha256:sha(fragment),decoded_bytes:whole.length,decoded_sha256:sha(whole)}]};save('data/transport/index.json',index);
+ const manifest={version:1,size,coordinateBits,method:'native-linear-evenodd-first-owner-v1',native_latitudes:[],hierarchy_sha256:reference.hierarchy_sha256,original_assets:{},parts,runWords:runs.length,native_asset_transport:{version:1,kind:index.kind,index:{path:'data/transport/index.json',bytes:valueBytes(index).length,sha256:valueSha(index)},logical_assets:parts.length,original_compressed_bytes:whole.length}};
  save('data/owners.json',[{id:'A',index:1},{id:'B',index:2},{id:'C',index:3}]);
  if(nativeAppend){
   const latitudes=nativeRowLatitudes(size),bytes=Buffer.alloc(size*8);
@@ -98,7 +104,7 @@ function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,sourceO
  const facts={version:1,kind:'trusted-selected-coordinate-stage-v1',candidate_code_executed:false,selected_commit:selected,executing_commit:one,execution_code,runtime,binding:full.binding,complete_owners:3,complete_sources:1};
  const compressed=gzipSync(valueBytes(full));save('accepted/certificate.json.gz',compressed);save('accepted/facts.json',facts);
  const publication={version:1,kind:facts.kind,complete:true,facts:{path:'facts.json',bytes:valueBytes(facts).length,sha256:valueSha(facts)},certificate:{path:'certificate.json.gz',bytes:compressed.length,sha256:sha(compressed),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)}};save('accepted/publication.json',publication);
- const inventory=[...(codeRoutes?['src/native-grid.js','data/scientific.js']:[]),PROGRAMME,...(sourceOverride?['data/selected-source.json.gz',...(physicalLogicalSource?['data/source.json']:[])]:['data/source.json']),'data/manifest.json','data/owners.json','data/registry.json','data/ledger.json','data/patch.json','data/sidecar.json','data/envelope.json','data/native/rows.bin.gz','data/native/runs.bin.gz'].map(name=>pin(name,selected));
+ const inventory=[...(codeRoutes?['src/native-grid.js','data/scientific.js']:[]),PROGRAMME,...(sourceOverride?['data/selected-source.json.gz',...(physicalLogicalSource?['data/source.json']:[])]:['data/source.json']),'data/manifest.json','data/owners.json','data/registry.json','data/ledger.json','data/patch.json','data/sidecar.json','data/envelope.json',...parts.map(p=>'data/'+p.path)].map(name=>pin(name,selected));
  save('accepted/custody.json',{complete_cold_custody:[{facts,publication,effective_additions:additions,inventory}]});
  save('accepted/routes.json',[...new Set([...inventory.map(p=>p.path),'data/source.json'])].sort().map(name=>({path:name,tree:git('ls-tree','-z',selected,'--',name).toString()})));const accepted=commit();
  const rootRow={id:'fixture',accepted_head:accepted,selected_commit:selected,selection_sha256:valueSha(selection),execution_commit:one,execution_code_sha256:valueSha(execution_code),runtime_sha256:valueSha(runtime),facts:pin('accepted/facts.json'),certificate:{...pin('accepted/certificate.json.gz'),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)},publication:pin('accepted/publication.json'),custody:pin('accepted/custody.json'),routes:pin('accepted/routes.json')};
@@ -108,10 +114,10 @@ function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,sourceO
 
 // The real entry reads each independent copy's ordinary committed catalogue and
 // products. Qualification, readers and private module state are always fresh.
-async function trustedFixture(t,{incompleteNative=false,codeRoutes=false,nativeAppend=false,sourceOverride=false,physicalLogicalSource=false,originalPatchRows,overrideLogicalPath='data/source.json'}={}){
+async function trustedFixture(t,{incompleteNative=false,codeRoutes=false,nativeAppend=false,sourceOverride=false,physicalLogicalSource=false,originalPatchRows,overrideLogicalPath='data/source.json',nativeLayout}={}){
  // Snapshot caller-owned rows before both keying and building the private seed.
  const options={incompleteNative,codeRoutes,nativeAppend,sourceOverride,physicalLogicalSource,
-  originalPatchRows:structuredClone(originalPatchRows??[{y:1,runs:[[2,3,1]]}]),overrideLogicalPath};
+  originalPatchRows:structuredClone(originalPatchRows??[{y:1,runs:[[2,3,1]]}]),overrideLogicalPath,nativeLayout:structuredClone(nativeLayout??null)};
  const key=JSON.stringify(options);
  let seed=trustedSeeds.get(key);
  if(!seed){
