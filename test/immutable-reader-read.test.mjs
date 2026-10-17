@@ -269,13 +269,46 @@ for(const stage of ['commit','path','size','body'])test('batch rejects malformed
   }
 });
 
-test('Git batch nonzero exit and diagnostics fail without accepting partial stdout',t=>{
+test('Git batch nonzero exit and malformed stdout refuse despite diagnostics',t=>{
   const f=batchFixture(t),script=path.join(f.root,'failed-git');
   fs.writeFileSync(script,'#!/bin/sh\ncat >/dev/null\nprintf "partial\\n"\nexit 1\n');fs.chmodSync(script,0o755);
   const reader=new ImmutableReader(f.root,f.version,{gitExecutable:script});
   assert.throws(()=>reader.readPinned([f.pin('dir/ordinary')]),/Incomplete immutable Git batch/);
-  fs.writeFileSync(script,'#!/bin/sh\ncat >/dev/null\nprintf "partial\\n"\nprintf "corrupt\\n" >&2\n');
-  assert.throws(()=>reader.readPinned([f.pin('dir/ordinary')]),/Incomplete immutable Git batch/);
+  fs.writeFileSync(script,'#!/bin/sh\ncat >/dev/null\nprintf "partial\\n"\nprintf "diagnostic\\n" >&2\n');
+  assert.throws(()=>reader.readPinned([f.pin('dir/ordinary')]),/Invalid immutable commit batch/);
+  assert.equal(reader.inventory.size,0);
+});
+
+test('actual successful Git diagnostics do not consume the exact stdout budget or waive pins',t=>{
+  const f=batchFixture(t),p=f.pin('dir/ordinary');
+  f.git('repack','-ad');f.git('prune-packed');
+  const absent=path.join(f.root,'unavailable-optional-alternate');
+  fs.writeFileSync(path.join(f.root,'.git/objects/info/alternates'),absent+'\n');
+  const probe=spawnSync('git',['--no-lazy-fetch','-C',f.root,'cat-file','--batch-check=%(objectname) %(objecttype) %(objectsize)'],
+    {input:f.version+'^{commit}\n',encoding:'utf8'});
+  assert.equal(probe.status,0);assert.match(probe.stdout,new RegExp('^'+f.version+' commit [0-9]+\\n$'));
+  assert.ok(probe.stderr.includes(absent));assert.ok(Buffer.byteLength(probe.stderr)>128);
+  assert.deepEqual(f.reader.readPinned([p]),[Buffer.from('one')]);
+  assert.deepEqual(f.reader.inventory.get(f.version+':'+p.path),{...p,whole_body_consumed:true});
+  const rejected=new ImmutableReader(f.root,f.version);
+  assert.throws(()=>rejected.readPinned([{...p,sha256:'0'.repeat(64)}]),/Whole immutable input differs/);
+  assert.ok([...rejected.inventory.values()].every(pin=>!pin.whole_body_consumed));
+});
+
+test('actual Git command and spawn failures still refuse before consumption',t=>{
+  const f=batchFixture(t);
+  assert.throws(()=>f.reader.gitBatch(['cat-file','--invalid-batch-mode'],'',128),/Incomplete immutable Git batch/);
+  assert.equal(f.reader.inventory.size,0);
+  const missing=new ImmutableReader(f.root,f.version,{gitExecutable:path.join(f.root,'absent-git')});
+  assert.throws(()=>missing.readPinned([f.pin('dir/ordinary')]),{code:'ENOENT'});
+  assert.equal(missing.inventory.size,0);
+});
+
+test('successful command with oversized stdout still fails the original response bound',t=>{
+  const f=batchFixture(t),script=path.join(f.root,'oversized-git');
+  fs.writeFileSync(script,'#!/bin/sh\ncat >/dev/null\nprintf "%0130d" 0\n');fs.chmodSync(script,0o755);
+  const reader=new ImmutableReader(f.root,f.version,{gitExecutable:script});
+  assert.throws(()=>reader.readPinned([f.pin('dir/ordinary')]),{code:'ENOBUFS'});
   assert.equal(reader.inventory.size,0);
 });
 
@@ -365,7 +398,7 @@ test('nonfetching availability leaves actual missing-body promisor acquisition a
 test('promisor missing-body failure is not reinterpreted as an unavailable original',t=>{
   const f=promisorFixture(t),p=f.pin('dir/ordinary');
   fs.unlinkSync(path.join(f.root,'.git','objects',p.git_blob_oid.slice(0,2),p.git_blob_oid.slice(2)));
-  assert.throws(()=>f.reader.readPinned([p]),/Incomplete immutable Git batch|ENOBUFS/);
+  assert.throws(()=>f.reader.readPinned([p]),/Incomplete immutable Git batch|Invalid immutable blob size batch/);
   assert.match(f.tracing(),/fetch .*origin|upload-pack/);
   assert.ok([...f.reader.inventory.values()].every(row=>!row.whole_body_consumed));
 });

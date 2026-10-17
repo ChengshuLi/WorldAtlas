@@ -669,6 +669,20 @@ country approval, native-cell qualification, ownership-zero proof or delivery.
 `--resume` verifies complete original products, code/configuration and input pins
 without repeating physical operations. Invalid or incomplete evidence refuses.
 
+The native constructor also recognizes the candidate-frame semantics of the
+retained `scripts/qualify-source-cohort.py` body with SHA-256
+`abc801b9a35d20c9f0dfe3bbc9bb2cb7dc107f1758414970d9cde11380574a18`.
+That exact program pins the original comparison method, translates each whole
+physical source by the recorded `-360`, `0` or `360` before the predicates, and
+leaves the candidate unchanged. Query witnesses, all support and all residual
+operations therefore remain in the candidate frame. The existing authenticated
+`physical_reproduction` role supplies this method identity; there is no new
+execution certificate, reprojection, geometry replacement or cell credit.
+Unknown or changed producers still cannot qualify nonzero conflict frames.
+Every query identity, predicate, witness, complete residual and native contact
+check remains mandatory. This method admission is separate from canonical seam
+views below and does not admit out-of-range coordinates or shift a witness again.
+
 ## Derived selected-delivery evidence
 
 The existing `evidence` phase also accepts `delivery` instead of a full `template`: supply `version:1`, exact `baseline_commit`/`candidate_commit`, the owned `manifest_path`, `issue`, `worker_id`, exact `subject_ids`, original `qualified_constructor_pins` (`{id,pin}`), complete restoration-only `sources` with matching `id`/`original_pin`, and explicit `limits`. It derives the four actual ancestor selector/package/selected-ledger/registry baseline pins and the immutable candidate diff's whole-byte outputs, excluding the manifest itself. Every authenticated full constructor row/component roster must cover the exact added ledger rows without omission or duplication. Unmerged original constructors remain cited with their full pins; they cannot stand in for ancestor baseline hashes. Optional `pins` must exactly match the derived issue baseline map. Source citation terms, uncertainties, original authority metadata and any supplied `validation` controls remain explicit; omitted controls are not called passed. This mode permits `metric_sources:[]`, while supplied measurements and the original template path keep their existing typed contracts. It does not replace original source/native qualification or current-owner, conservation, scientific review, exact-head and integration gates. The byte inventory is limited reporting, not new scientific approval.

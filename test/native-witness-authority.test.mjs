@@ -1,4 +1,5 @@
 import test from 'node:test';
+import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
@@ -86,7 +87,8 @@ function constructorFixture(change=()=>{},{changeAdoption=()=>{},forgeAdoption}=
     territorial=put('territorial-applicability.json',body);put(territorial.path,body,executingHead);
   }
   const evidence=put('source-evidence.json',{version:1,kind:'source-target-native-evidence-v1',catalogue,
-    owner_roster:roster,physical_evidence:physical,physical_input:measured,physical_reproduction:put('physical.py',Buffer.from('# retained fixture')),
+    owner_roster:roster,physical_evidence:physical,physical_input:measured,
+    physical_reproduction:put(state.physicalProgram?.path??'physical.py',state.physicalProgram?.body??Buffer.from('# retained fixture')),
     native_latitudes:nativeLatitudes,native_contract:{size,native_latitudes:nativeLatitudes,original_assets:{bounds:{sha256:roster.sha256}}},
     base_reference:{id:'fixture-base'},families:providerFamilies?.map(({family,pin})=>({source_id:family.family,parts:[pin]}))
       ??[{source_id:family,parts:[source]}],
@@ -385,4 +387,49 @@ test('complete provider vetoes cross family boundaries without fabricating a com
   assert.equal(report.held_cells,1);assert.equal(report.supported_cells,1);
   assert.ok(report.provider_competitors.find(member=>member.source_id===id).veto_targets.some(t=>t.target_id==='city'));
  }
+});
+
+// Original retained method bytes, authenticated through the existing role.
+// Caller-provided frame flags are never authority.
+const physicalProgram={path:'scripts/qualify-source-cohort.py',
+ body:fs.readFileSync(new URL('../scripts/qualify-source-cohort.py',import.meta.url))};
+function periodicConflict(state,offset=-360,geometry=off){
+ exactBoundaryTarget(state);state.physicalProgram=physicalProgram;
+ const r=conflict(state,'contradictory_land_water_support',geometry);
+ Object.assign(r.query_relations[0],{periodic_offset:offset,source_covers_candidate:false,
+  witness:'complete-operation-pointset',witness_geometry:rectangle(-90.02,-89.98,-.01,.01)});
+ return r;
+}
+for(const offset of [-360,360])test('reviewed candidate-frame method admits '+offset+' conflict without changing originals',()=>{
+ const f=constructorFixture(s=>periodicConflict(s,offset)),before=structuredClone(f.state.physical);
+ assert.equal(f.run().ledger_rows[0].native_cells,1);
+ assert.deepEqual(f.state.physical,before);
+ assert.equal(f.diagnose().kind,'source-target-native-diagnostic-v1');
+});
+for(const [name,change,pattern]of [
+ ['missing method',s=>delete s.physicalProgram,/Unqualified periodic/],
+ ['foreign method path',s=>s.physicalProgram={...physicalProgram,path:'foreign.py'},/Unqualified periodic/],
+ ['changed method',s=>s.physicalProgram={...physicalProgram,body:Buffer.concat([physicalProgram.body,Buffer.from('\n')])},/Unqualified periodic/],
+ ['unsupported offset',s=>s.physical.results[0].query_relations[0].periodic_offset=720,/Unknown or missing/],
+ ['missing offset',s=>delete s.physical.results[0].query_relations[0].periodic_offset,/Unknown or missing/],
+ ['untrusted frame flag',s=>s.physical.results[0].query_relations[0].candidate_frame=true,/foreign physical source query fields/],
+ ['wrong-frame operation witness',s=>Object.assign(s.physical.results[0].query_relations[0],{
+  source_covers_candidate:false,witness:'complete-operation-pointset',witness_geometry:{type:'Point',coordinates:[270,latitude]}}),/lon\/lat position/],
+ ['wrong-frame residual',s=>{const r=s.physical.results[0],g={type:'Point',coordinates:[270,latitude]};
+  r.issues[0].geometry=g;r.support.contradictory_land_water_support=g;},/lon\/lat position/]
+])test('reviewed periodic method refuses '+name,()=>{
+ const f=constructorFixture(s=>{periodicConflict(s);change(s);});
+ assert.throws(()=>f.run(),pattern);assert.throws(()=>f.diagnose(),pattern);
+});
+test('periodic candidate-frame conflict still vetoes exact native contact',()=>{
+ const f=constructorFixture(s=>periodicConflict(s,-360,{type:'Point',coordinates:[-90,latitude]}));
+ assert.throws(()=>f.run(),/intersect a physical reconstruction residual or conflict witness/);
+ assert.deepEqual(f.diagnose().supported_rows,[]);
+ assert.deepEqual(f.diagnose().held_rows,f.state.proposed.rows);
+});
+test('periodic measured sibling retains owner-wide residual veto',()=>{
+ const f=constructorFixture(s=>{s.targets=s.targets.slice(0,1);s.physicalProgram=physicalProgram;
+ const r=conflict(s,'contradictory_land_water_support',{type:'LineString',coordinates:[[-.03,latitude],[0,latitude]]},1);
+ r.query_relations[0].periodic_offset=-360;});
+ assert.throws(()=>f.run(),/intersect a physical reconstruction residual or conflict witness/);
 });

@@ -314,7 +314,7 @@ export function readOriginalRuleAuthority(reader, pins, sourceOutputAliases=[]) 
  // Authenticate every whole body before interpreting the original rule.
  for(const [key,p]of Object.entries(pins)){
   pinCheck(normal(p));let version=p.commit;
-  try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
+  try{reader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
   const actual=reader.descriptor(p.path,version);
   demand(actual.mode===p.mode&&actual.git_blob_oid===normal(p).git_blob_oid&&actual.bytes===p.bytes,'Original authority body mode/OID differs');
   admitted.set(key,{pin:p,version});
@@ -397,7 +397,7 @@ export function qualifyOriginalSourceAuthority(custody) {
  const {reader,bodies}=proof,{native_request:request,source_request:issued,source_facts:facts}=bodies,spec=request.additive;
  const keys=['publication_path','inventory_path','operating_path'];
  const pins=keys.map(key=>{const original=spec.inputs.find(p=>p.path===spec[key]);const p=proof.aliases.get(original?.path)??original;demand(p,'Omitted qualified source proof '+key);pinCheck({...p,git_blob_oid:p.git_blob_oid??p.blob});return p;});
- const admitted=pins.map(p=>{let version=p.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
+ const admitted=pins.map(p=>{let version=p.commit;try{reader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
   const actual=reader.descriptor(p.path,version);demand(actual.mode===p.mode&&actual.git_blob_oid===(p.git_blob_oid??p.blob)&&actual.bytes===p.bytes,'Qualified original proof mode/OID differs');return {p,version};});
  const raw=admitted.map(({p,version})=>{const encoded=reader.read(p.path,{version,expected:p.sha256});if(p.uncompressed_bytes===undefined)return encoded;
   demand(hash(p.uncompressed_sha256),'Missing complete decoded proof hash');const decoded=gunzipSync(encoded,{maxOutputLength:p.uncompressed_bytes});demand(decoded.length===p.uncompressed_bytes&&sha(decoded)===p.uncompressed_sha256,'Whole decoded original proof differs');return decoded;});
@@ -428,7 +428,7 @@ export function qualifyOriginalNativeAuthority(custody, pins) {
  const held={publication:null,operating:null,rows:[],nativePatches:[],nativeContracts:[]};
  const finishedMember=(p,consume)=>{
   const q={...p,git_blob_oid:p.git_blob_oid??p.blob,decoded_bytes:p.decoded_bytes??p.uncompressed_bytes,decoded_sha256:p.decoded_sha256??p.uncompressed_sha256};pinCheck(q);
-  let version=q.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
+  let version=q.commit;try{reader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
   const actual=reader.descriptor(q.path,version);demand(actual.mode===q.mode&&actual.git_blob_oid===q.git_blob_oid&&actual.bytes===q.bytes,'Original native proof whole mode/OID differs');
   const encoded=reader.read(q.path,{version,expected:q.sha256});
   let raw=encoded;
@@ -478,10 +478,22 @@ function authorityRegistry(registry) {
  }
  return byId;
 }
+// The authenticated physical-reproduction role supplies method identity, not a
+// new execution certificate. This reviewed producer translates the complete
+// physical source by periodic_offset before relation(candidate, translatedSource).
+// Its pinned comparison method reconstructs coverage shortcuts, intersections,
+// support and every residual in the unchanged candidate coordinate frame.
+// Unknown producers retain the zero-frame restriction for conflict qualification.
+// Whole-program identity intentionally fails closed on future method changes.
+const candidateFramePhysicalProgram = Object.freeze({
+ path:'scripts/qualify-source-cohort.py',
+ sha256:'abc801b9a35d20c9f0dfe3bbc9bb2cb7dc107f1758414970d9cde11380574a18'
+});
+
 // Admit retained whole query semantics before projecting any witness to cells.
 // Coverage shortcuts refer to the complete candidate/source record; no empty
 // replacement geometry is invented. Repeated source IDs require distinct frames.
-function physicalQueryAdmission(result, required) {
+function physicalQueryAdmission(result, required, candidateFrame) {
  const present=Object.hasOwn(result,'source_id_queries')||Object.hasOwn(result,'query_relations');
  demand(present||!required,'Unsupported original native geometry without complete source query evidence; Unresolved contradictory or hierarchy physical support');
  if(!present)return;
@@ -493,7 +505,8 @@ function physicalQueryAdmission(result, required) {
  for(const q of queries){
   demand(q&&expected.has(q.source_id)&&[-360,0,360].includes(q.periodic_offset)
    &&q.status==='checked','Unknown or missing physical source query');
-  demand(!required||q.periodic_offset===0,'Unqualified periodic physical conflict frame');
+  demand(!required||q.periodic_offset===0||candidateFrame===candidateFramePhysicalProgram,
+   'Unqualified periodic physical conflict frame');
   const identity=q.source_id+':'+q.periodic_offset;
   demand(!seen.has(identity),'Duplicate physical source query frame');seen.add(identity);joined.add(q.source_id);
   const bools=['source_covers_candidate','candidate_covers_source','intersects','disjoint'];
@@ -512,7 +525,7 @@ function physicalQueryAdmission(result, required) {
  }
  demand(joined.size===expected.size,'Incomplete physical source query identity join');
 }
-function reconstructionResidualPointsets(result, dated = false) {
+function reconstructionResidualPointsets(result, dated = false, candidateFrame) {
  demand(Array.isArray(result?.issues)&&result.support&&typeof result.support==='object',
   'Missing qualified physical source interpretation');
  const support=result.support,residualKeys=['missing_reconstruction','extra_reconstruction'];
@@ -530,7 +543,7 @@ function reconstructionResidualPointsets(result, dated = false) {
   ||Object.hasOwn(support,'hierarchy_disagreements')&&(!hierarchy||typeof hierarchy!=='object'
    ||Object.keys(hierarchy).sort().join(',')!==hierarchyKeys.join(',')
    ||Object.values(hierarchy).some(g=>!empty(g)));
- physicalQueryAdmission(result,false);
+ physicalQueryAdmission(result,false,candidateFrame);
  // Preserve genuine legacy issue-free evidence, while admitting every present
  // query/support primitive before returning. Unknown fields cannot hide issues.
  if(result.issues.length===0&&!observed){
@@ -551,7 +564,7 @@ function reconstructionResidualPointsets(result, dated = false) {
  for(const geometry of Object.values(operations))validateWitnessGeometry(geometry);
  const general=conflictKeys.some(k=>!empty(operations[k])&&(!residualKeys.includes(k)
   ||!['Polygon','MultiPolygon'].includes(operations[k].type)));
- physicalQueryAdmission(result,general);
+ physicalQueryAdmission(result,general,candidateFrame);
  const issues=new Map();
  for(const issue of result.issues){
   demand(issue&&Object.keys(issue).sort().join(',')==='geometry,reason'
@@ -743,7 +756,7 @@ function readAdoptedOsmRevision({evidence,proposed,owners,latitudes,read,readAdo
 }
 
 function readSourceTargetBody(reader,p) {
-  pinCheck(p);let version=p.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
+  pinCheck(p);let version=p.commit;try{reader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
   const d=reader.descriptor(p.path,version);
   demand(d.mode===p.mode&&d.git_blob_oid===p.git_blob_oid&&d.bytes===p.bytes,'Source-target whole identity differs');
   const raw=reader.read(p.path,{version,expected:p.sha256});
@@ -786,7 +799,10 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
  const currentCatalogue=reader.descriptor(evidence.catalogue.path);
  demand(currentCatalogue.git_blob_oid===evidence.catalogue.git_blob_oid,'Source catalogue differs from the selected retained corpus');
  const catalogue=JSON.parse(read(evidence.catalogue));
- const physicalInputs=JSON.parse(read(evidence.physical_input));read(evidence.physical_reproduction);
+ const physicalInputs=JSON.parse(read(evidence.physical_input));
+ const physicalProgram=read(evidence.physical_reproduction);
+ const candidateFrame=evidence.physical_reproduction.path===candidateFramePhysicalProgram.path
+  &&sha(physicalProgram)===candidateFramePhysicalProgram.sha256?candidateFramePhysicalProgram:null;
  demand(evidence.native_latitudes.sha256===evidence.native_contract.native_latitudes.sha256
   &&evidence.native_latitudes.decoded_sha256===evidence.native_contract.native_latitudes.decoded_sha256,
  'Native source-target latitude contract differs');
@@ -1056,7 +1072,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   // and no pixel-decoding or scientific reinterpretation is performed here.
   const readFrame=p=>{
    pinCheck(p);demand(p.decoded_bytes===undefined,'Native PNG context must be an ordinary encoded body');
-   let version=p.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
+   let version=p.commit;try{reader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
    const d=reader.descriptor(p.path,version);
    demand(d.mode===p.mode&&d.git_blob_oid===p.git_blob_oid&&d.bytes===p.bytes,'Dated frame whole identity differs');
    return reader.read(p.path,{version,expected:p.sha256});
@@ -1154,7 +1170,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
   demand(supports.length===1,'Missing or duplicate physical source member');const support=supports[0];
   demand(target.source_receipt_sha256===evidence.physical_evidence.sha256,
    'Missing qualified physical source interpretation');
-  const residuals=reconstructionResidualPointsets(support,dated);
+  const residuals=reconstructionResidualPointsets(support,dated,candidateFrame);
   const generalIssues=support.issues.some(i=>!['missing_reconstruction','extra_reconstruction'].includes(i.reason)
    ||!['Polygon','MultiPolygon'].includes(i.geometry?.type));
   if(generalIssues)generalOwners.add(target.pixelIndex);
@@ -1366,7 +1382,7 @@ function evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnost
     &&same(measured[0].selected.geometry,target.base_geometry)
     &&(!owner.feature||same(owner.feature.geometry,target.base_geometry)),
    'Measured sibling differs from complete original or accepted owner base');
-   const witnesses=reconstructionResidualPointsets(results[0],dated);
+   const witnesses=reconstructionResidualPointsets(results[0],dated,candidateFrame);
    if(results[0].issues.some(i=>!['missing_reconstruction','extra_reconstruction'].includes(i.reason)
     ||!['Polygon','MultiPolygon'].includes(i.geometry?.type)))generalOwners.add(owner.pixelIndex);
    if(witnesses.length){const item=residualsByOwner.get(owner.pixelIndex)??{index:owner.pixelIndex,witnesses:[]};
@@ -1698,7 +1714,7 @@ export function readRetainedRegistryAuthority(reader, entry, observationReader, 
  const pins=[entry.rule_preimage,entry.source_authority];
  const admitted=pins.map(p=>{
   pinCheck(p);let version=p.commit;
-  try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
+  try{reader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
   const actual=reader.descriptor(p.path,version);
   demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'Registry authority whole mode/OID differs');
   return {p,version};
@@ -2070,7 +2086,7 @@ export function acquireCurrentRebindOperands(snapshot,registry,originalRows,orig
  if(continuity?.issue===1520){
   demand(continuity.selected_old_new_rows===60&&continuity.added_cells===141&&continuity.removed_cells===0&&continuity.reassigned_cells===0,'Foreign selected Arctic continuation');
   pinCheck(predecessorProof);demand(predecessorProof.bytes===1990604&&predecessorProof.sha256==='d8af3b2eaf77f4fa948c01937ccb107f3d7eaa833ea4bac1d4480c633d509794'&&predecessorProof.decoded_bytes===undefined,'Missing exact whole qualified Arctic predecessor proof');
-  const predecessorFrame=()=>{let version=predecessorProof.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}const actual=reader.descriptor(predecessorProof.path,version);demand(actual.mode===predecessorProof.mode&&actual.git_blob_oid===predecessorProof.git_blob_oid&&actual.bytes===predecessorProof.bytes,'Predecessor whole original mode/OID/bytes differ');return retainedArcticNativeRows(JSON.parse(reader.read(predecessorProof.path,{version,expected:predecessorProof.sha256})));};
+  const predecessorFrame=()=>{let version=predecessorProof.commit;try{reader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}');}catch{version=reader.version;}const actual=reader.descriptor(predecessorProof.path,version);demand(actual.mode===predecessorProof.mode&&actual.git_blob_oid===predecessorProof.git_blob_oid&&actual.bytes===predecessorProof.bytes,'Predecessor whole original mode/OID/bytes differ');return retainedArcticNativeRows(JSON.parse(reader.read(predecessorProof.path,{version,expected:predecessorProof.sha256})));};
   predecessorRows=predecessorFrame();phases.push({kind:'complete-qualified-arctic-predecessor',path:predecessorProof.path,sha256:predecessorProof.sha256});
  }else demand(predecessorProof===null,'Invented predecessor conservation proof');
  const manifest=snapshot.manifest,root=snapshot.selection.manifest_path.slice(0,snapshot.selection.manifest_path.lastIndexOf('/')+1),image=snapshot.image;
@@ -2171,7 +2187,7 @@ export function readSelectedAdditive(snapshot) {
  const baseSelection=nativeBaseSelection(selection);
  demand(same(sidecar.base_selection,baseSelection),'Stale/foreign actual native base selection');
  const whole=({p,alias,role})=>{
-  pinCheck(p);let version=p.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
+  pinCheck(p);let version=p.commit;try{reader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
   const actual=reader.descriptor(p.path,version);demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'Selected additive ordinary whole identity differs');
   return {p,version,...(alias?{alias:true,role}:{})};
  };

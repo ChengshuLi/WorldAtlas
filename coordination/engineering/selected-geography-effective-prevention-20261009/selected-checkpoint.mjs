@@ -49,7 +49,7 @@ function bindPhysicalLogicalSources(reader,certificate,inventory) {
   // Otherwise a later derived checkpoint could mistake that path for inert.
   for (const p of inventory) if (logical.has(p.path)) {
     let version = p.commit;
-    try { reader.git('cat-file','-e',version+'^{commit}'); } catch { version = reader.version; }
+    try { reader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}'); } catch { version = reader.version; }
     const actual = reader.descriptor(p.path,version);
     demand(actual.mode === p.mode && actual.git_blob_oid === p.git_blob_oid && actual.bytes === p.bytes,
       'Accepted physical logical-source identity changed');
@@ -115,7 +115,7 @@ function pin(p) {
 function resolvePin(reader, p) {
   pin(p);
   let version = p.commit;
-  try { reader.git('cat-file','-e',version+'^{commit}'); } catch { version = reader.version; }
+  try { reader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}'); } catch { version = reader.version; }
   const actual = reader.descriptor(p.path, version);
   demand(actual.mode === p.mode && actual.git_blob_oid === p.git_blob_oid && actual.bytes === p.bytes,
     'Checkpoint whole mode/OID/size or historical alias changed: '+p.path);
@@ -740,7 +740,7 @@ export function projectVisibilityLatitudes({state}) {
   const {session,reader}=getState(state), p=state.manifest.native_latitudes;
   demand(p?.root==='repository'&&p.decoded_bytes===state.manifest.size*8,'Missing normative visibility latitude input');
 
-  let version=p.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
+  let version=p.commit;try{reader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
   const encoded=reader.read(p.path,{version,expected:p.sha256,decoded:p.decoded_bytes});
   const latitudes=decodeVisibilityLatitudes(encoded,p,state.manifest.size);
 
