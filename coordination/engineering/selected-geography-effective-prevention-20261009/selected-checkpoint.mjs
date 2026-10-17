@@ -5,6 +5,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
+import {openNativeWordStore} from '../../../scripts/native-word-store.mjs';
 import {ImmutableReader, NativeAssetImage, decodeVisibilityLatitudes,
   loadBaseSelection, selectedGeometrySourceAlias, selectedReferenceOwners} from '../../../scripts/check-effective-geographic-regression.mjs';
 import {repairComponentKey, nativeOnlyComponent} from '../../../src/native-grid.js';
@@ -129,7 +130,16 @@ function readBody(session, reader, p, {json = true} = {}) {
 }
 function readBodies(session,reader,pins) {
   pins.forEach(pin);
-  return reader.readPinned(pins).map((encoded,i)=>decodeBody(pins[i],encoded));
+  const values=[];
+  for(let start=0;start<pins.length;){
+    let end=start,bytes=0;
+    // Byte-sized transport batches, not a limit on admitted files or scope.
+    do{bytes+=pins[end++].bytes;}while(end<pins.length&&bytes+pins[end].bytes<=1024*1024);
+    const group=pins.slice(start,end),bodies=reader.readPinned(group);
+    for(let i=0;i<group.length;i++){values.push(decodeBody(group[i],bodies[i]));bodies[i]=null;}
+    start=end;
+  }
+  return values;
 }
 function decodeBody(p,encoded,{json = true} = {}) {
   const decoded=p.decoded_bytes??0;
@@ -372,12 +382,20 @@ export function qualifyCheckpoint({reader,checkpointId}) {
   }
 }
 
-function acceptedAuthorities(session,reader,selected) {
+function acceptedAuthorities(session,reader,selected,{metadataOnly=false}={}) {
   const oldAuthorities = new Map();
   // Read only original small patch products already accepted by the checkpoint.
   // No original source/native qualification or selected acquisition is repeated.
   const entries=selected.registry.entries;
   const bindings=readBodies(session,reader,entries.map(entry=>entry.source_authority));
+  if(metadataOnly){
+    for(let i=0;i<entries.length;i++){
+      const binding=bindings[i],nativeOnly=binding.kind==='source-target-native-custody-v1';
+      if(nativeOnly){keys(binding,'version,kind,source_evidence,native_patch','Unknown accepted native source custody');demand(binding.version===1,'Unknown accepted native source custody version');}
+      oldAuthorities.set(entries[i].authority_sha256,{entry:entries[i],nativeOnly});
+    }
+    return oldAuthorities;
+  }
   const productPins=bindings.map(binding=>{
     if (binding.kind === 'source-target-native-custody-v1') {
       keys(binding,'version,kind,source_evidence,native_patch','Unknown accepted native source custody');
@@ -427,18 +445,20 @@ function acceptedRebindCheck(selected,rebind,authorities,size,owners) {
   const legacy=[...authorities.values()].filter(proof=>!proof.nativeOnly).flatMap(proof=>proof.patches);
   demand(same(rebind.request.base_selection,nativeBaseSelection(selected.selection))
     && rebind.request.authority_registry_sha256===valueSha(legacyRegistry(selected.registry,authorities))
-    && same(rebind.result.native.rows,mergePatchRows(legacy,size,owners))
-    && same(selected.patch.rows,mergePatchRows([...authorities.values()].flatMap(proof=>proof.patches),size,owners)),
+    && equalMergedPatchRows(rebind.result.native.rows,legacy,size,owners)
+    && equalMergedPatchRows(selected.patch.rows,[...authorities.values()].flatMap(proof=>proof.patches),size,owners),
   'Accepted checkpoint rebind/native selection differs');
 }
-function finishCheckpoint(session,reader,{data,routes,physicalPaths,rebind,selected,root,oldAuthorities}) {
-  // Every authority patch remains live, including native-only bodies. Only
-  // the historical rebind denominator excludes native-only source custody.
-  const originalPatches = [...oldAuthorities.values()].flatMap(p => p.patches);
-  const legacyPatchHashes = [...oldAuthorities.values()].filter(p=>!p.nativeOnly).flatMap(p=>p.patches.map(valueSha));
+function finishCheckpoint(session,reader,{data,routes,physicalPaths,rebind,selected,root,oldAuthorities,acceptedAggregate=false}) {
+  // Derived accepted artifacts bind the entire cumulative patch directly.
+  // Legacy seeds still establish their original complete patch denominator.
+  if(!acceptedAggregate){
+    const hashes=[...oldAuthorities.values()].filter(p=>!p.nativeOnly).flatMap(p=>p.patches.map(valueSha));
+    demand(same(hashes,rebind.request.original_patch_sha256s),'Accepted complete original patch denominator differs');
+  }
+  oldAuthorities=new Map([...oldAuthorities].map(([key,p])=>[key,{entry:p.entry,nativeOnly:!!p.nativeOnly}]));
   const nativeRows = new Map(rebind.request.current_rows.map(p => [p.y,p]));
   for (const row of rebind.request.acquisition.predecessor_rows) nativeRows.set(row.y,row);
-  demand(same(legacyPatchHashes,rebind.request.original_patch_sha256s), 'Accepted complete original patch denominator differs');
   const state = newState(session,data,{reader,routes,physicalPaths,rebind,oldAuthorities,selected,root,
     nativeRows,sourceTargets:new Map(rebind.request.current_targets.map(p => [p.target_id,p]))});
   return Object.freeze({available:true,state});
@@ -604,8 +624,12 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
     patch_sha256:valueSha(selected.patch),manifest_sha256:valueSha(manifest)}),
   'Accepted checkpoint changed the complete ledger/registry/patch/manifest');
   const rebind=rebindProducts(session,reader,selected.ledger);
-  const oldAuthorities=acceptedAuthorities(session,reader,selected);
-  acceptedRebindCheck(selected,rebind,oldAuthorities,manifest.size,certificate.entries.length);
+  // The trusted accepted execution already proved this exact aggregate.
+  // Keep authority identities and full route custody, not historical patch copies.
+  const oldAuthorities=acceptedAuthorities(session,reader,selected,{metadataOnly:true});
+  demand(same(rebind.request.base_selection,nativeBaseSelection(selected.selection))
+    &&rebind.request.authority_registry_sha256===valueSha(legacyRegistry(selected.registry,oldAuthorities)),
+    'Accepted checkpoint rebind/native selection differs');
   demand(same(selected.ledger.current_targets,rebind.request.current_targets), 'Accepted complete target roster differs');
   const additions=checkpointAdditions(selected,rebind.request.current_targets);
   coordinateCheck(certificate,{binding:certificate.binding,complete_owners:certificate.entries.length,
@@ -688,7 +712,7 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
     additions,ledger:selected.ledger,registry:selected.registry,patch:selected.patch,manifest};
   // accepted products already belong to the explicitly carried transport
   // Retain newly acquired state/patch products without duplicating a resolver.
-  return finishCheckpoint(session,reader,{data,routes:currentMaskedRoutes(reader,census.routes,masked),physicalPaths,rebind,selected,root:null,oldAuthorities});
+  return finishCheckpoint(session,reader,{data,routes:currentMaskedRoutes(reader,census.routes,masked),physicalPaths,rebind,selected,root:null,oldAuthorities,acceptedAggregate:true});
 }
 
 /** Exact already-consumed executing policy, for durable successor custody. */
@@ -877,22 +901,34 @@ export function releaseCheckpoint(state) {
   session.handles.clear(); session.executingPolicy=null;
 }
 
-function mergePatchRows(patches, size, ownerCount) {
-  const byRow = new Map();
-  for (const patch of patches) {
-    completeRows(patch.rows,size,ownerCount);
-    for (const row of patch.rows) { const runs = byRow.get(row.y) ?? []; runs.push(...row.runs); byRow.set(row.y,runs); }
-  }
-  return [...byRow].sort((a,b) => a[0]-b[0]).map(([y,runs]) => {
-    const merged = [];
-    for (const r of [...runs].sort((a,b) => a[0]-b[0] || a[1]-b[1] || a[2]-b[2])) {
-      const last = merged.at(-1);
-      demand(!last || r[0] >= last[1] || r[2] === last[2], 'Native delta reassigns an existing owner');
-      if (last && r[2] === last[2] && r[0] <= last[1]) last[1] = Math.max(last[1],r[1]);
-      else merged.push([...r]);
+// Compare the canonical union directly. One cursor per authority and one
+// pending interval replace a complete duplicate expected-patch graph, including
+// the dense-row case. Inputs have already been authenticated; validate every row.
+export function equalMergedPatchRows(actual,patches,size,ownerCount) {
+  completeRows(actual,size,ownerCount);
+  for(const patch of patches)completeRows(patch.rows,size,ownerCount);
+  const cursors=patches.map(patch=>({rows:patch.rows,row:0,run:0}));let rowIndex=0;
+  while(true){
+    let y=Infinity;for(const cursor of cursors)if(cursor.row<cursor.rows.length)y=Math.min(y,cursor.rows[cursor.row].y);
+    if(y===Infinity)return rowIndex===actual.length;
+    if(actual[rowIndex]?.y!==y)return false;
+    const group=cursors.filter(cursor=>cursor.rows[cursor.row]?.y===y);
+    let pending=null,index=0;
+    const matches=run=>{const expected=actual[rowIndex].runs[index++];return expected&&run.every((n,i)=>n===expected[i]);};
+    while(true){
+      let selected=null,run=null;
+      for(const cursor of group){
+        const next=cursor.rows[cursor.row].runs[cursor.run];
+        if(next&&(!run||next[0]<run[0]||next[0]===run[0]&&(next[1]<run[1]||next[1]===run[1]&&next[2]<run[2]))){selected=cursor;run=next;}
+      }
+      if(!selected)break;selected.run++;
+      demand(!pending||run[0]>=pending[1]||run[2]===pending[2],'Native delta reassigns an existing owner');
+      if(pending&&run[2]===pending[2]&&run[0]<=pending[1])pending[1]=Math.max(pending[1],run[1]);
+      else{if(pending&&!matches(pending))return false;pending=[...run];}
     }
-    return {y,runs:merged};
-  });
+    if(pending&&!matches(pending)||index!==actual[rowIndex].runs.length)return false;
+    for(const cursor of group){cursor.row++;cursor.run=0;}rowIndex++;
+  }
 }
 function appendAuthority(session, reader, entry) {
   const child = new ImmutableReader(reader.repo,reader.version,{invocation:reader.invocation,gitExecutable:reader.gitExecutable});
@@ -1143,6 +1179,68 @@ export function visitNativeRows({state,rows,visit}) {
 }
 
 
+// Stream complete row intervals from bounded authenticated word windows. This
+// path never enters the expanded-row or decoded-container caches. The caller
+// must consume each complete row; only the finished visit returns custody.
+export async function visitNativeIntervals({state,rows,visit}) {
+  const proof=getState(state);proof.state=state;
+  demand(typeof visit==='function'&&Array.isArray(rows)&&rows.every((y,i)=>Number.isSafeInteger(y)&&y>=0&&y<state.manifest.size&&(!i||y>rows[i-1])),
+    'Duplicate, incomplete or foreign native row scope');
+  if(!rows.length){const result=projectNativeRows({state,rows});return {reused_rows:[],acquired_rows:[],custody:result.custody};}
+  const context=nativeContext(proof),manifest=state.manifest;
+  demand(!context.intervalVisit,'Nested native interval visit');context.intervalVisit=true;
+  let table,body,bodyPin,partIndex=0;const reused=[],acquired=[];
+  async function open(pin){
+    const name=path.posix.join(path.posix.dirname(state.selection.manifest_path),pin.path);
+    const chunks=proof.reader.treeRoute(name).length?proof.reader.stream(name,{expected:pin.sha256}):context.image.logicalStream(name,pin);
+    const store=await openNativeWordStore(chunks,pin);
+    for(const [key,p]of proof.reader.inventory)if(p.whole_body_consumed)context.inputInventory.set(key,{...p});
+    return store;
+  }
+  try {
+    const parts=manifest.parts.filter(p=>p.kind==='runs').sort((a,b)=>a.offset-b.offset);
+    for(const y of rows){
+      let complete=false;
+      async function* intervals(){
+        let end=0,count=0;
+        const retained=proof.nativeRows.get(y);
+        if(retained){reused.push(y);for(const run of retained.runs)yield run;complete=true;return;}
+        if(!table){
+          const pins=manifest.parts.filter(p=>p.kind==='rows');supported(pins.length===1,'Unsupported split native row table');
+          table=await open(pins[0]);demand(table.length===manifest.size*2,'Incomplete whole native row table');
+          let offset=0;for(let row=0;row<manifest.size;row++){
+            demand(table.get(row*2)===offset,'Native row partition omitted a range');offset+=table.get(row*2+1);
+          }demand(offset*2===manifest.runWords,'Native row partition omits complete runs');
+        }
+        const start=table.get(y*2)*2,stop=start+table.get(y*2+1)*2;
+        let at=start;
+        while(partIndex<parts.length&&parts[partIndex].offset+parts[partIndex].words<=start)partIndex++;
+        for(let index=partIndex;index<parts.length&&parts[index].offset<stop;index++){
+          const pin=parts[index];partIndex=index;
+          demand(pin.offset<=at&&pin.offset+pin.words>at,'Incomplete containing native interval range');
+          if(bodyPin!==pin){body?.close();body=null;body=await open(pin);bodyPin=pin;}
+          const limit=Math.min(stop,pin.offset+pin.words);
+          demand(at%2===0&&limit%2===0,'Split native interval words');
+          for(;at<limit;at+=2){
+            const a=body.get(at-pin.offset),b=body.get(at-pin.offset+1),bits=manifest.coordinateBits,mask=2**bits-1;
+            const run=[a&mask,(b&mask)+1,(a>>>bits)+(b>>>bits)*2**(32-bits)];
+            demand(run[0]>=end&&run[1]>run[0]&&run[1]<=manifest.size&&run[2]>0&&run[2]<=state.certificate.entries.length,
+              'Invalid complete effective native interval/owner');
+            end=run[1];count++;yield run;
+          }
+        }
+        demand(at===stop&&count===table.get(y*2+1),'Incomplete containing native interval range');
+        acquired.push(y);complete=true;
+      }
+      const iterator=intervals();
+      try{await visit({y,runs:iterator});demand(complete,'Native interval visitor omitted complete row');}
+      finally{await iterator.return();}
+    }
+    return {reused_rows:reused,acquired_rows:acquired,custody:{accepted_checkpoint:state.accepted_execution,
+      new_whole_inputs:[...context.inputInventory.values()],retained_native_inputs:proof.rebind.request.acquisition.native_inputs}};
+  }finally{body?.close();table?.close();delete context.intervalVisit;}
+}
+
 /** Exhaustive actual append-only transition. Never reacquires a full selection.
  * A valid baseline remains usable when an unsupported candidate needs cold work. */
 export function qualifyTransition({state,reader}) {
@@ -1158,17 +1256,19 @@ export function qualifyTransition({state,reader}) {
       supported(same(selected.sidecar.logical_asset_map[role],baseProof.selected.sidecar.logical_asset_map[role]), 'Selected original manifest/owner alias changed');
     demand(same(selected.ledger.parent_inventory,state.ledger.parent_inventory), 'Complete original source/scope denominator changed');
     const oldRows=new Map(state.ledger.rows.map(row => [repairComponentKey(row),row]));
-    for (const row of state.ledger.rows) demand(same(row,selected.ledger.rows.find(p => repairComponentKey(p)===repairComponentKey(row))),
+    const candidateRows=new Map(selected.ledger.rows.map(row=>[repairComponentKey(row),row]));
+    for (const row of state.ledger.rows) demand(same(row,candidateRows.get(repairComponentKey(row))),
       'Old complete ledger primitive, exception or native assignment removed/rebound');
     let authorities=new Map(baseProof.oldAuthorities);
-    for (const entry of state.registry.entries) demand(same(entry,selected.registry.entries.find(p => p.authority_sha256===entry.authority_sha256)),
+    const candidateEntries=new Map(selected.registry.entries.map(entry=>[entry.authority_sha256,entry]));
+    for (const entry of state.registry.entries) demand(same(entry,candidateEntries.get(entry.authority_sha256)),
       'Old original authority removed/rebound');
     const addedEntries=selected.registry.entries.filter(entry => !authorities.has(entry.authority_sha256));
 
     authorities=qualifyAppendedAuthorities(session,reader,state,selected,authorities,addedEntries,oldRows);
-    const patches=selected.registry.entries.flatMap(entry => authorities.get(entry.authority_sha256).patches);
-    const expectedPatch=mergePatchRows(patches,state.manifest.size,state.certificate.entries.length);
-    demand(same(selected.patch.rows,expectedPatch),'Candidate patch omitted, invented or reassigned original native intervals');
+    const patches=[state.patch,...addedEntries.flatMap(entry=>authorities.get(entry.authority_sha256).patches)];
+
+    demand(equalMergedPatchRows(selected.patch.rows,patches,state.manifest.size,state.certificate.entries.length),'Candidate patch omitted, invented or reassigned original native intervals');
     const oldNative=new Map(state.patch.rows.map(row => [row.y,row.runs]));
     for (const entry of addedEntries) for (const row of authorities.get(entry.authority_sha256).patches.flatMap(p => p.rows))
       for (const run of row.runs) for (const old of oldNative.get(row.y)??[])
@@ -1188,6 +1288,11 @@ export function qualifyTransition({state,reader}) {
       && same(selected.ledger.current_rebind,state.ledger.current_rebind)) currentTargets=baseProof.rebind.request.current_targets;
     else {
       const products=rebindProducts(session,reader,selected.ledger);
+      const missing=legacyRegistry(selected.registry,authorities).entries.filter(entry=>!authorities.get(entry.authority_sha256).patches);
+      if(missing.length){
+        const hydrated=acceptedAuthorities(session,reader,{registry:{entries:missing}});
+        for(const [key,value]of hydrated)authorities.set(key,value);
+      }
       currentTargets=qualifyProjectedRebind(operandProof,selected,authorities,products).currentTargets;
       operandProof.rebind=products;
     }
@@ -1207,7 +1312,7 @@ export function qualifyTransition({state,reader}) {
     const {certificate,changedIds}=deriveCoordinateDelta({certificate:metadata.certificate,oldAdditions:state.additions,additions,selection:selected.selection});
     const candidate=newState(session,{...state,selected_commit:reader.version,selection:selected.selection,certificate,
       additions,ledger:selected.ledger,registry:selected.registry,patch:selected.patch},
-      {...operandProof,selected,oldAuthorities:authorities,
+      {...operandProof,selected,oldAuthorities:new Map([...authorities].map(([key,p])=>[key,{entry:p.entry,nativeOnly:!!p.nativeOnly}])),
         physicalPaths:new Set([...physicalPaths,...[...reader.inventory.values()].map(p => p.path)])});
     const changed=new Set(changedIds);
     const newNative=new Map(selected.patch.rows.map(row => [row.y,row.runs]));

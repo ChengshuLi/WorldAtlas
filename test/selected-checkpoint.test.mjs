@@ -695,3 +695,30 @@ test('actual appended native consumer retains the eager conservation and exact f
  assert.equal(actual.status,'no-new-native-loss');assert.equal(actual.affected_rows,1);
  assert.deepEqual(actual.repair_visibility.witnesses,expected);assert.equal(expected.length,1);assert(expected[0]);
 });
+
+test('authenticated interval visit preserves complete rows without populating expanded-row caches',async t=>{
+ const f=await trustedFixture(t),{state}=f.api.qualifyCheckpoint({reader:f.reader}),actual=[];
+ const projection=await f.api.visitNativeIntervals({state,rows:[0,1,2,3],visit:async ({y,runs})=>{
+  const values=[];for await(const run of runs)values.push(run);actual.push({y,runs:values});
+ }});
+ assert.deepEqual(actual,[{y:0,runs:[[0,1,1]]},{y:1,runs:[[0,1,2]]},{y:2,runs:[[1,2,3]]},{y:3,runs:[]}]);
+ assert.deepEqual(projection.reused_rows,[1]);assert.deepEqual(projection.acquired_rows,[0,2,3]);
+ const again=await f.api.visitNativeIntervals({state,rows:[0,1,2,3],visit:async ({runs})=>{for await(const run of runs)void run;}});
+ assert.deepEqual(again.acquired_rows,[0,2,3]);
+ await assert.rejects(f.api.visitNativeIntervals({state,rows:[0],visit(){}}),/omitted complete row/);
+ await assert.rejects(f.api.visitNativeIntervals({state,rows:[0],visit(){throw Error('consumer failure');}}),/consumer failure/);
+ await f.api.visitNativeIntervals({state,rows:[0],visit:async ({runs})=>{for await(const run of runs)void run;}});
+ f.api.releaseCheckpoint(state);
+ await assert.rejects(f.api.visitNativeIntervals({state,rows:[],visit(){}}),/private qualified|expired/);
+});
+
+test('streamed authority union preserves coalescing, empty row presence and overlap refusal',async()=>{
+ const {equalMergedPatchRows}=await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs');
+ const a={rows:[{y:0,runs:[[0,2,1],[4,5,2]]},{y:2,runs:[]}]},b={rows:[{y:0,runs:[[1,3,1],[5,6,2]]}]};
+ const expected=[{y:0,runs:[[0,3,1],[4,6,2]]},{y:2,runs:[]}];
+ assert.equal(equalMergedPatchRows(expected,[a,b],8,2),true);
+ assert.equal(equalMergedPatchRows(expected.slice(0,1),[a,b],8,2),false);
+ assert.equal(equalMergedPatchRows([{y:0,runs:[[0,2,1],[4,6,2]]},{y:2,runs:[]}],[a,b],8,2),false);
+ assert.throws(()=>equalMergedPatchRows(expected,[a,{rows:[{y:0,runs:[[1,3,2]]}]}],8,2),/reassigns/);
+ assert.deepEqual(a.rows[0].runs,[[0,2,1],[4,5,2]]);
+});

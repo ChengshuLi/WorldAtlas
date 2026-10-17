@@ -15,7 +15,7 @@ import {deriveCoordinateDelta,projectSourceFeatures,projectNativeRows,qualifyTra
 const MODULE='coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const PROGRAMME='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
 const CATALOGUE='coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json';
-const CODE=[MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/check-effective-geographic-regression.mjs',
+const CODE=[MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/native-word-store.mjs','scripts/check-effective-geographic-regression.mjs',
   'scripts/selected-reference-metadata.mjs','src/reference-metadata.js','src/native-grid.js','src/ownership-codec.js'];
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const polygon=(x,y=0)=>({type:'Polygon',coordinates:[[[x,y],[x+.2,y],[x+.2,y+.2],[x,y+.2],[x,y]]]});
@@ -445,7 +445,9 @@ test('coherently rehashed omitted routes, stale selectors, old exception drift a
   const f=await acceptedProducts(t);
   for(const [mutate,reason] of [
     [p=>p.census.routes.pop(),/route census/],
-    [p=>p.facts.candidate_bindings.ledger_sha256='0'.repeat(64),/complete ledger/],
+    ...['ledger_sha256','registry_sha256','patch_sha256','manifest_sha256'].flatMap(key=>[
+      [p=>p.facts.candidate_bindings[key]='0'.repeat(64),/complete ledger/],
+      [p=>delete p.facts.candidate_bindings[key],/complete ledger/]]),
     [p=>p.facts.executing_policy.body+=' ',/policy identity differs/],
     [p=>p.facts.executing_policy.body=p.facts.executing_policy.body.replace('1','2'),/policy body differs/],
     [p=>p.facts.execution_code=p.facts.execution_code.filter(x=>x.path!=='scripts/selected-checkpoint-native.mjs'),/original native execution/],

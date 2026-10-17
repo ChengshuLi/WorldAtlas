@@ -14,7 +14,7 @@ import {deriveCoordinateDelta} from '../../coordination/engineering/selected-geo
 const MODULE='coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const PROGRAMME='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
 const CATALOGUE='coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json';
-const CODE=[MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/check-effective-geographic-regression.mjs',
+const CODE=[MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/native-word-store.mjs','scripts/check-effective-geographic-regression.mjs',
   'scripts/selected-reference-metadata.mjs','src/reference-metadata.js','src/native-grid.js','src/ownership-codec.js'];
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const polygon=(x,y=0)=>({type:'Polygon',coordinates:[[[x,y],[x+.2,y],[x+.2,y+.2],[x,y+.2],[x,y]]]});
