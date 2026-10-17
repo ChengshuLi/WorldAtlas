@@ -62,7 +62,7 @@ test('ordinary selected delivery has no unit inventory while software and explic
 test('focused comparison and checkpoint methods stay outside each actual builder execution closure',()=>{
   const prefix='coordination/engineering/selected-geography-effective-prevention-20261009/';
   const methods=['scripts/check-effective-geographic-regression.mjs','scripts/selected-checkpoint-native.mjs', 'scripts/run-geographic-check.py',
-    prefix+'selected-checkpoint.mjs',prefix+'selected-joint-entry.mjs'];
+    prefix+'selected-checkpoint.mjs',prefix+'selected-joint-entry.mjs','test/fixtures/selected-checkpoint.mjs'];
   for(const entry of ['scripts/build-static-inner.mjs','scripts/build-hosted-inner.mjs','scripts/build-cloudflare-inner.mjs']) {
     const closure=currentExecutionClosure(process.cwd(),entry);
     for(const method of methods)assert(!closure.includes(method),entry+' now executes '+method);

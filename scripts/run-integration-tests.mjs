@@ -198,7 +198,9 @@ const FOCUSED_TEST_FAMILIES = [
   'physical-source-retention', 'revised-source-native', 'dated-centre-authority', 'full-regression-shards'
 ];
 const focusedTest = new RegExp('^test/(?:' + FOCUSED_TEST_FAMILIES.join('|') + ')\\.test\\.(?:mjs|py)$');
-export const focusedIntegrationTest = name => focusedTest.test(name);
+// This shared fixture has only focused consumers; reuse their ordinary-file
+// routing checks. Test execution still discovers only top-level *.test.mjs.
+export const focusedIntegrationTest = name => focusedTest.test(name) || name === 'test/fixtures/selected-checkpoint.mjs';
 
 export function integrationTestFiles(profile, shard, testSelection = 'complete') {
   if (!['complete','selected-output'].includes(testSelection) ||
