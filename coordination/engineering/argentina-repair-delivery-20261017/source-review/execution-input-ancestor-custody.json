@@ -1,0 +1,3290 @@
+{
+  "kind": "identical-original-execution-input-ancestor-custody",
+  "aliases": [
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/comparison.py",
+        "bytes": 9834,
+        "sha256": "f9c226add23a37a39bf7fd34f5d8bdcb34a8d276b331fabf59bf9867b6f84bfe",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/comparison.py",
+        "bytes": 9834,
+        "sha256": "f9c226add23a37a39bf7fd34f5d8bdcb34a8d276b331fabf59bf9867b6f84bfe",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/transport-map.json",
+        "bytes": 56473,
+        "sha256": "644345be3d231431177c416b6ddbe3a1b2486597295af45fd5224857b5612d26",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/transport-map.json",
+        "bytes": 56473,
+        "sha256": "644345be3d231431177c416b6ddbe3a1b2486597295af45fd5224857b5612d26",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/member-index.json",
+        "bytes": 5821,
+        "sha256": "1fc10fa094ebd128f21d6440152d391cec879a2ec6ded9d665667f9e42513d12",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/member-index.json",
+        "bytes": 5821,
+        "sha256": "1fc10fa094ebd128f21d6440152d391cec879a2ec6ded9d665667f9e42513d12",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-000.jsonl.gz",
+        "bytes": 1257080,
+        "sha256": "c548e4465e2ad06647d456b74d17395fd6f2b6ad3ff146ecd6d21d61e51933e1",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7012839,
+        "uncompressed_sha256": "6221acc498dc62b6691624541c6e80ab789b8180bee2b51ecf6c7763c10457b2"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-000.jsonl.gz",
+        "bytes": 1257080,
+        "sha256": "c548e4465e2ad06647d456b74d17395fd6f2b6ad3ff146ecd6d21d61e51933e1",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7012839,
+        "uncompressed_sha256": "6221acc498dc62b6691624541c6e80ab789b8180bee2b51ecf6c7763c10457b2"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-001.jsonl.gz",
+        "bytes": 1208965,
+        "sha256": "0969ea1fbd0732c135f470089e3f83cb64a6d21446dc72e65a87a53f81548f9f",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7014642,
+        "uncompressed_sha256": "a73007a3b420340633aca019bd7cd1dd296d40555a4746215f10ad72bd2be6f6"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-001.jsonl.gz",
+        "bytes": 1208965,
+        "sha256": "0969ea1fbd0732c135f470089e3f83cb64a6d21446dc72e65a87a53f81548f9f",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7014642,
+        "uncompressed_sha256": "a73007a3b420340633aca019bd7cd1dd296d40555a4746215f10ad72bd2be6f6"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-002.jsonl.gz",
+        "bytes": 1191861,
+        "sha256": "cef9a67165d875695263e2c729b5379e329ccf906356a885dbbf114fa1abe264",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7014694,
+        "uncompressed_sha256": "3d897da85e15160acd6353a35a84d4267698182cad78bedab61cad0c0bd23668"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-002.jsonl.gz",
+        "bytes": 1191861,
+        "sha256": "cef9a67165d875695263e2c729b5379e329ccf906356a885dbbf114fa1abe264",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7014694,
+        "uncompressed_sha256": "3d897da85e15160acd6353a35a84d4267698182cad78bedab61cad0c0bd23668"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-003.jsonl.gz",
+        "bytes": 1177247,
+        "sha256": "f67073921a62be3e8d4f5433d1aa3f1690baf72a667820e44a40d2c2b817a32b",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7014749,
+        "uncompressed_sha256": "2e96abf8a8211ec815df65f24af98d6a1a03d26e8941baee61185d446483665f"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-003.jsonl.gz",
+        "bytes": 1177247,
+        "sha256": "f67073921a62be3e8d4f5433d1aa3f1690baf72a667820e44a40d2c2b817a32b",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7014749,
+        "uncompressed_sha256": "2e96abf8a8211ec815df65f24af98d6a1a03d26e8941baee61185d446483665f"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-004.jsonl.gz",
+        "bytes": 1164683,
+        "sha256": "58bc6035a98a29762527078ee91dafd3499804ccd9411f51c8b3b11980dbcf22",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7014199,
+        "uncompressed_sha256": "26fcb4f9da76f475f9f3315cc882f90f24ffabda0edbad869c477c6783bd63a1"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-004.jsonl.gz",
+        "bytes": 1164683,
+        "sha256": "58bc6035a98a29762527078ee91dafd3499804ccd9411f51c8b3b11980dbcf22",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7014199,
+        "uncompressed_sha256": "26fcb4f9da76f475f9f3315cc882f90f24ffabda0edbad869c477c6783bd63a1"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-005.jsonl.gz",
+        "bytes": 1155371,
+        "sha256": "ded396a5db78a6768a3c237568fd2c43b2753976d3bf67e1bbf3eb931f048f49",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7014174,
+        "uncompressed_sha256": "489d49bf2ce07498122d9f8dc6c8d1db5ad5dee1b7b4bc88d81ee5daaf0cac5a"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-005.jsonl.gz",
+        "bytes": 1155371,
+        "sha256": "ded396a5db78a6768a3c237568fd2c43b2753976d3bf67e1bbf3eb931f048f49",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7014174,
+        "uncompressed_sha256": "489d49bf2ce07498122d9f8dc6c8d1db5ad5dee1b7b4bc88d81ee5daaf0cac5a"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-006.jsonl.gz",
+        "bytes": 1148156,
+        "sha256": "c6410e64029a6e4beaf9adaa009060e55c71cf9f0cb8f06efed9f9fba0d8ef34",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7013520,
+        "uncompressed_sha256": "25c663cc296c1777fad7497bf6ca860d8aa340e90a86b72a7fce26a83da315b4"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-006.jsonl.gz",
+        "bytes": 1148156,
+        "sha256": "c6410e64029a6e4beaf9adaa009060e55c71cf9f0cb8f06efed9f9fba0d8ef34",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7013520,
+        "uncompressed_sha256": "25c663cc296c1777fad7497bf6ca860d8aa340e90a86b72a7fce26a83da315b4"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-007.jsonl.gz",
+        "bytes": 1140886,
+        "sha256": "341324e9950ff86b6d38205a7bdb6940ba87a779a7201d21b8a0ad146f87f319",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7012813,
+        "uncompressed_sha256": "7bdc09e3b789589c2074b3c5af8f5ede24fdd2e7bcc75a8f394ce284d91adeaf"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-007.jsonl.gz",
+        "bytes": 1140886,
+        "sha256": "341324e9950ff86b6d38205a7bdb6940ba87a779a7201d21b8a0ad146f87f319",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7012813,
+        "uncompressed_sha256": "7bdc09e3b789589c2074b3c5af8f5ede24fdd2e7bcc75a8f394ce284d91adeaf"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-008.jsonl.gz",
+        "bytes": 1141102,
+        "sha256": "343be75a5e6a7687f44cc51848216ea102e7fa8bfbe3942641312f1dfd66edde",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7012443,
+        "uncompressed_sha256": "57cab3c2c3bf49abab7b906343c28430cd65847f9463439392a3eaf633f94236"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-008.jsonl.gz",
+        "bytes": 1141102,
+        "sha256": "343be75a5e6a7687f44cc51848216ea102e7fa8bfbe3942641312f1dfd66edde",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7012443,
+        "uncompressed_sha256": "57cab3c2c3bf49abab7b906343c28430cd65847f9463439392a3eaf633f94236"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-009.jsonl.gz",
+        "bytes": 1132445,
+        "sha256": "a5ceddd483762da22405fd629a3a4a1b3182069de970524ceaf2a9c7599a7b14",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7015134,
+        "uncompressed_sha256": "6f036d9fb94b850f81de3c831429fbc10d135ebc3da22ecc6bea1c5dd0e986d3"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-009.jsonl.gz",
+        "bytes": 1132445,
+        "sha256": "a5ceddd483762da22405fd629a3a4a1b3182069de970524ceaf2a9c7599a7b14",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7015134,
+        "uncompressed_sha256": "6f036d9fb94b850f81de3c831429fbc10d135ebc3da22ecc6bea1c5dd0e986d3"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-010.jsonl.gz",
+        "bytes": 1128682,
+        "sha256": "87726c6fce692d786b0a8d14c1220d2e8db1c663e898b688b3b633dc10c1b66f",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7016591,
+        "uncompressed_sha256": "58d061b7e8cef2aa7f6d00e2531aa11d07f82d8f3880567e0d3e0380422b72fe"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-010.jsonl.gz",
+        "bytes": 1128682,
+        "sha256": "87726c6fce692d786b0a8d14c1220d2e8db1c663e898b688b3b633dc10c1b66f",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7016591,
+        "uncompressed_sha256": "58d061b7e8cef2aa7f6d00e2531aa11d07f82d8f3880567e0d3e0380422b72fe"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-011.jsonl.gz",
+        "bytes": 1125219,
+        "sha256": "457d4cc8279bd36eadaac16e1b5a2b7ed5d572040192f090edfd4933d4c6f8f1",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7016280,
+        "uncompressed_sha256": "7641a6edc182863b077b56490fbcb1e3ac5b442ed32457f01ea7d5963a1e864d"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-011.jsonl.gz",
+        "bytes": 1125219,
+        "sha256": "457d4cc8279bd36eadaac16e1b5a2b7ed5d572040192f090edfd4933d4c6f8f1",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7016280,
+        "uncompressed_sha256": "7641a6edc182863b077b56490fbcb1e3ac5b442ed32457f01ea7d5963a1e864d"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-012.jsonl.gz",
+        "bytes": 1121691,
+        "sha256": "c00491f50f55fdc7baca221394ad23aa2aa9a000f7b333733a9223fb8ddfe498",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7016007,
+        "uncompressed_sha256": "f9b0d86a82edd023e24aa812486ca07b9624dad18a173eb14b1ab8eafce445fa"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-012.jsonl.gz",
+        "bytes": 1121691,
+        "sha256": "c00491f50f55fdc7baca221394ad23aa2aa9a000f7b333733a9223fb8ddfe498",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7016007,
+        "uncompressed_sha256": "f9b0d86a82edd023e24aa812486ca07b9624dad18a173eb14b1ab8eafce445fa"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-013.jsonl.gz",
+        "bytes": 1120633,
+        "sha256": "0cd35cddcd698907ce1211429fa393086a29bc6bc1729bb68e711221ea737eb5",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7017004,
+        "uncompressed_sha256": "7cd8ba527146ce246c815ab2e7bdab31875d13e8652f2f782f2125a1cf7f39ef"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-013.jsonl.gz",
+        "bytes": 1120633,
+        "sha256": "0cd35cddcd698907ce1211429fa393086a29bc6bc1729bb68e711221ea737eb5",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7017004,
+        "uncompressed_sha256": "7cd8ba527146ce246c815ab2e7bdab31875d13e8652f2f782f2125a1cf7f39ef"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-014.jsonl.gz",
+        "bytes": 1113872,
+        "sha256": "fbc3a4810a36f33f0724e176d61ad13bdf6a36b741640aa65508130c8ebbf6fe",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7015008,
+        "uncompressed_sha256": "7760399c48419566282104e557c3bc8cc1ba4d616896b36daca163b65e8d4a3a"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-014.jsonl.gz",
+        "bytes": 1113872,
+        "sha256": "fbc3a4810a36f33f0724e176d61ad13bdf6a36b741640aa65508130c8ebbf6fe",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7015008,
+        "uncompressed_sha256": "7760399c48419566282104e557c3bc8cc1ba4d616896b36daca163b65e8d4a3a"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-015.jsonl.gz",
+        "bytes": 1107592,
+        "sha256": "df4d45b2c2b1f7d96c57ab30f9974b7849e16626deb0ad6aa50efc0acc102819",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7016846,
+        "uncompressed_sha256": "ea833e3041e389ed5be390aad1b5067a54835850abd3fca43c12695a55c21f1c"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-015.jsonl.gz",
+        "bytes": 1107592,
+        "sha256": "df4d45b2c2b1f7d96c57ab30f9974b7849e16626deb0ad6aa50efc0acc102819",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7016846,
+        "uncompressed_sha256": "ea833e3041e389ed5be390aad1b5067a54835850abd3fca43c12695a55c21f1c"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-016.jsonl.gz",
+        "bytes": 1117463,
+        "sha256": "c90919472ed35d2a4a223abcda6c253e6d529eff0070b23b933e42e7ff9dae0e",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7019678,
+        "uncompressed_sha256": "75f47541ccf2611712193d93664a6c58376ba2f2e1a3be1bedbaac5092f07b4a"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-016.jsonl.gz",
+        "bytes": 1117463,
+        "sha256": "c90919472ed35d2a4a223abcda6c253e6d529eff0070b23b933e42e7ff9dae0e",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7019678,
+        "uncompressed_sha256": "75f47541ccf2611712193d93664a6c58376ba2f2e1a3be1bedbaac5092f07b4a"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-017.jsonl.gz",
+        "bytes": 698664,
+        "sha256": "0015c9a348e6eebd18a4d5f6491a0cda7b60e89ee76cf8f4c6cc54a6a3986eff",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 4091365,
+        "uncompressed_sha256": "ec752ab13dd319e7bada205c154974b1bde2edcffea2adce401fb72277070afb"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-017.jsonl.gz",
+        "bytes": 698664,
+        "sha256": "0015c9a348e6eebd18a4d5f6491a0cda7b60e89ee76cf8f4c6cc54a6a3986eff",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 4091365,
+        "uncompressed_sha256": "ec752ab13dd319e7bada205c154974b1bde2edcffea2adce401fb72277070afb"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-00.bin.gz",
+        "bytes": 22743455,
+        "sha256": "99546c4a2bf41fe8f8a050fb425ab372c22e9c9821bf592d66ed9748b36301eb",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 33554432,
+        "uncompressed_sha256": "020aa63a7bbd7e4945e99b96389f0e0580aad7204c91f631f4e92aeeddba3281"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-00.bin.gz",
+        "bytes": 22743455,
+        "sha256": "99546c4a2bf41fe8f8a050fb425ab372c22e9c9821bf592d66ed9748b36301eb",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 33554432,
+        "uncompressed_sha256": "020aa63a7bbd7e4945e99b96389f0e0580aad7204c91f631f4e92aeeddba3281"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-01.bin.gz",
+        "bytes": 23286998,
+        "sha256": "c4a508d91e40bdd66e48f2533530916c773566e75277826c0806218c3997bcbf",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 33554432,
+        "uncompressed_sha256": "2460722a7cbbc6d8f383b64d39e0c49a50831ffc01f0241942f90975ee698e0c"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-01.bin.gz",
+        "bytes": 23286998,
+        "sha256": "c4a508d91e40bdd66e48f2533530916c773566e75277826c0806218c3997bcbf",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 33554432,
+        "uncompressed_sha256": "2460722a7cbbc6d8f383b64d39e0c49a50831ffc01f0241942f90975ee698e0c"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-02.bin.gz",
+        "bytes": 19571844,
+        "sha256": "b7070a55d8edfbead17c14a014ed0c430586606bf0f38ea10c0c1e038f31c7c0",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 28700472,
+        "uncompressed_sha256": "aae9796235376f1f520b9b216c3a887e60e1c0d91d3f12463db1d403b835ae0f"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-02.bin.gz",
+        "bytes": 19571844,
+        "sha256": "b7070a55d8edfbead17c14a014ed0c430586606bf0f38ea10c0c1e038f31c7c0",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 28700472,
+        "uncompressed_sha256": "aae9796235376f1f520b9b216c3a887e60e1c0d91d3f12463db1d403b835ae0f"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "bytes": 1851757,
+        "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+        "hash_kind": "file-bytes",
+        "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+        "uncompressed_bytes": 2097328,
+        "uncompressed_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "bytes": 1851757,
+        "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 2097328,
+        "uncompressed_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "bytes": 1851757,
+        "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+        "hash_kind": "file-bytes",
+        "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+        "uncompressed_bytes": 2097328,
+        "uncompressed_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "bytes": 1851757,
+        "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 2097328,
+        "uncompressed_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "bytes": 1851757,
+        "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+        "hash_kind": "file-bytes",
+        "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+        "uncompressed_bytes": 2097328,
+        "uncompressed_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "bytes": 1851757,
+        "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 2097328,
+        "uncompressed_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+        "bytes": 2663523,
+        "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+        "hash_kind": "file-bytes",
+        "commit": "7e423077552651d6ec1d6bf6b879c34e956f985a",
+        "uncompressed_bytes": 11096191,
+        "uncompressed_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+        "bytes": 2663523,
+        "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 11096191,
+        "uncompressed_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "bytes": 1851757,
+        "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+        "hash_kind": "file-bytes",
+        "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+        "uncompressed_bytes": 2097328,
+        "uncompressed_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "bytes": 1851757,
+        "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 2097328,
+        "uncompressed_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "bytes": 1851757,
+        "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+        "hash_kind": "file-bytes",
+        "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+        "uncompressed_bytes": 2097328,
+        "uncompressed_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "bytes": 1851757,
+        "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 2097328,
+        "uncompressed_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+        "bytes": 2663523,
+        "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+        "hash_kind": "file-bytes",
+        "commit": "7e423077552651d6ec1d6bf6b879c34e956f985a",
+        "uncompressed_bytes": 11096191,
+        "uncompressed_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+        "bytes": 2663523,
+        "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 11096191,
+        "uncompressed_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/greenland-repair-delivery-20261017/composition-current-001/patch.json",
+        "bytes": 12708346,
+        "sha256": "bb62deda4e1bf4b2d51a08baf6503b21ed13e54a9f1cf03e7c52e408b3518643",
+        "hash_kind": "file-bytes",
+        "commit": "c8a5133bc78923b8ca78c6feeb992b87ceaa8c17"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/greenland-repair-delivery-20261017/composition-current-001/patch.json",
+        "bytes": 12708346,
+        "sha256": "bb62deda4e1bf4b2d51a08baf6503b21ed13e54a9f1cf03e7c52e408b3518643",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/transport-map.json",
+        "bytes": 56473,
+        "sha256": "644345be3d231431177c416b6ddbe3a1b2486597295af45fd5224857b5612d26",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/transport-map.json",
+        "bytes": 56473,
+        "sha256": "644345be3d231431177c416b6ddbe3a1b2486597295af45fd5224857b5612d26",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-000.jsonl.gz",
+        "bytes": 1257080,
+        "sha256": "c548e4465e2ad06647d456b74d17395fd6f2b6ad3ff146ecd6d21d61e51933e1",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7012839,
+        "uncompressed_sha256": "6221acc498dc62b6691624541c6e80ab789b8180bee2b51ecf6c7763c10457b2"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-000.jsonl.gz",
+        "bytes": 1257080,
+        "sha256": "c548e4465e2ad06647d456b74d17395fd6f2b6ad3ff146ecd6d21d61e51933e1",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7012839,
+        "uncompressed_sha256": "6221acc498dc62b6691624541c6e80ab789b8180bee2b51ecf6c7763c10457b2"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-001.jsonl.gz",
+        "bytes": 1208965,
+        "sha256": "0969ea1fbd0732c135f470089e3f83cb64a6d21446dc72e65a87a53f81548f9f",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7014642,
+        "uncompressed_sha256": "a73007a3b420340633aca019bd7cd1dd296d40555a4746215f10ad72bd2be6f6"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-001.jsonl.gz",
+        "bytes": 1208965,
+        "sha256": "0969ea1fbd0732c135f470089e3f83cb64a6d21446dc72e65a87a53f81548f9f",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7014642,
+        "uncompressed_sha256": "a73007a3b420340633aca019bd7cd1dd296d40555a4746215f10ad72bd2be6f6"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-002.jsonl.gz",
+        "bytes": 1191861,
+        "sha256": "cef9a67165d875695263e2c729b5379e329ccf906356a885dbbf114fa1abe264",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7014694,
+        "uncompressed_sha256": "3d897da85e15160acd6353a35a84d4267698182cad78bedab61cad0c0bd23668"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-002.jsonl.gz",
+        "bytes": 1191861,
+        "sha256": "cef9a67165d875695263e2c729b5379e329ccf906356a885dbbf114fa1abe264",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7014694,
+        "uncompressed_sha256": "3d897da85e15160acd6353a35a84d4267698182cad78bedab61cad0c0bd23668"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-003.jsonl.gz",
+        "bytes": 1177247,
+        "sha256": "f67073921a62be3e8d4f5433d1aa3f1690baf72a667820e44a40d2c2b817a32b",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7014749,
+        "uncompressed_sha256": "2e96abf8a8211ec815df65f24af98d6a1a03d26e8941baee61185d446483665f"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-003.jsonl.gz",
+        "bytes": 1177247,
+        "sha256": "f67073921a62be3e8d4f5433d1aa3f1690baf72a667820e44a40d2c2b817a32b",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7014749,
+        "uncompressed_sha256": "2e96abf8a8211ec815df65f24af98d6a1a03d26e8941baee61185d446483665f"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-004.jsonl.gz",
+        "bytes": 1164683,
+        "sha256": "58bc6035a98a29762527078ee91dafd3499804ccd9411f51c8b3b11980dbcf22",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7014199,
+        "uncompressed_sha256": "26fcb4f9da76f475f9f3315cc882f90f24ffabda0edbad869c477c6783bd63a1"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-004.jsonl.gz",
+        "bytes": 1164683,
+        "sha256": "58bc6035a98a29762527078ee91dafd3499804ccd9411f51c8b3b11980dbcf22",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7014199,
+        "uncompressed_sha256": "26fcb4f9da76f475f9f3315cc882f90f24ffabda0edbad869c477c6783bd63a1"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-005.jsonl.gz",
+        "bytes": 1155371,
+        "sha256": "ded396a5db78a6768a3c237568fd2c43b2753976d3bf67e1bbf3eb931f048f49",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7014174,
+        "uncompressed_sha256": "489d49bf2ce07498122d9f8dc6c8d1db5ad5dee1b7b4bc88d81ee5daaf0cac5a"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-005.jsonl.gz",
+        "bytes": 1155371,
+        "sha256": "ded396a5db78a6768a3c237568fd2c43b2753976d3bf67e1bbf3eb931f048f49",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7014174,
+        "uncompressed_sha256": "489d49bf2ce07498122d9f8dc6c8d1db5ad5dee1b7b4bc88d81ee5daaf0cac5a"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-006.jsonl.gz",
+        "bytes": 1148156,
+        "sha256": "c6410e64029a6e4beaf9adaa009060e55c71cf9f0cb8f06efed9f9fba0d8ef34",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7013520,
+        "uncompressed_sha256": "25c663cc296c1777fad7497bf6ca860d8aa340e90a86b72a7fce26a83da315b4"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-006.jsonl.gz",
+        "bytes": 1148156,
+        "sha256": "c6410e64029a6e4beaf9adaa009060e55c71cf9f0cb8f06efed9f9fba0d8ef34",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7013520,
+        "uncompressed_sha256": "25c663cc296c1777fad7497bf6ca860d8aa340e90a86b72a7fce26a83da315b4"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-007.jsonl.gz",
+        "bytes": 1140886,
+        "sha256": "341324e9950ff86b6d38205a7bdb6940ba87a779a7201d21b8a0ad146f87f319",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7012813,
+        "uncompressed_sha256": "7bdc09e3b789589c2074b3c5af8f5ede24fdd2e7bcc75a8f394ce284d91adeaf"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-007.jsonl.gz",
+        "bytes": 1140886,
+        "sha256": "341324e9950ff86b6d38205a7bdb6940ba87a779a7201d21b8a0ad146f87f319",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7012813,
+        "uncompressed_sha256": "7bdc09e3b789589c2074b3c5af8f5ede24fdd2e7bcc75a8f394ce284d91adeaf"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-008.jsonl.gz",
+        "bytes": 1141102,
+        "sha256": "343be75a5e6a7687f44cc51848216ea102e7fa8bfbe3942641312f1dfd66edde",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7012443,
+        "uncompressed_sha256": "57cab3c2c3bf49abab7b906343c28430cd65847f9463439392a3eaf633f94236"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-008.jsonl.gz",
+        "bytes": 1141102,
+        "sha256": "343be75a5e6a7687f44cc51848216ea102e7fa8bfbe3942641312f1dfd66edde",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7012443,
+        "uncompressed_sha256": "57cab3c2c3bf49abab7b906343c28430cd65847f9463439392a3eaf633f94236"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-009.jsonl.gz",
+        "bytes": 1132445,
+        "sha256": "a5ceddd483762da22405fd629a3a4a1b3182069de970524ceaf2a9c7599a7b14",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7015134,
+        "uncompressed_sha256": "6f036d9fb94b850f81de3c831429fbc10d135ebc3da22ecc6bea1c5dd0e986d3"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-009.jsonl.gz",
+        "bytes": 1132445,
+        "sha256": "a5ceddd483762da22405fd629a3a4a1b3182069de970524ceaf2a9c7599a7b14",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7015134,
+        "uncompressed_sha256": "6f036d9fb94b850f81de3c831429fbc10d135ebc3da22ecc6bea1c5dd0e986d3"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-010.jsonl.gz",
+        "bytes": 1128682,
+        "sha256": "87726c6fce692d786b0a8d14c1220d2e8db1c663e898b688b3b633dc10c1b66f",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7016591,
+        "uncompressed_sha256": "58d061b7e8cef2aa7f6d00e2531aa11d07f82d8f3880567e0d3e0380422b72fe"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-010.jsonl.gz",
+        "bytes": 1128682,
+        "sha256": "87726c6fce692d786b0a8d14c1220d2e8db1c663e898b688b3b633dc10c1b66f",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7016591,
+        "uncompressed_sha256": "58d061b7e8cef2aa7f6d00e2531aa11d07f82d8f3880567e0d3e0380422b72fe"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-011.jsonl.gz",
+        "bytes": 1125219,
+        "sha256": "457d4cc8279bd36eadaac16e1b5a2b7ed5d572040192f090edfd4933d4c6f8f1",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7016280,
+        "uncompressed_sha256": "7641a6edc182863b077b56490fbcb1e3ac5b442ed32457f01ea7d5963a1e864d"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-011.jsonl.gz",
+        "bytes": 1125219,
+        "sha256": "457d4cc8279bd36eadaac16e1b5a2b7ed5d572040192f090edfd4933d4c6f8f1",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7016280,
+        "uncompressed_sha256": "7641a6edc182863b077b56490fbcb1e3ac5b442ed32457f01ea7d5963a1e864d"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-012.jsonl.gz",
+        "bytes": 1121691,
+        "sha256": "c00491f50f55fdc7baca221394ad23aa2aa9a000f7b333733a9223fb8ddfe498",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7016007,
+        "uncompressed_sha256": "f9b0d86a82edd023e24aa812486ca07b9624dad18a173eb14b1ab8eafce445fa"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-012.jsonl.gz",
+        "bytes": 1121691,
+        "sha256": "c00491f50f55fdc7baca221394ad23aa2aa9a000f7b333733a9223fb8ddfe498",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7016007,
+        "uncompressed_sha256": "f9b0d86a82edd023e24aa812486ca07b9624dad18a173eb14b1ab8eafce445fa"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-013.jsonl.gz",
+        "bytes": 1120633,
+        "sha256": "0cd35cddcd698907ce1211429fa393086a29bc6bc1729bb68e711221ea737eb5",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7017004,
+        "uncompressed_sha256": "7cd8ba527146ce246c815ab2e7bdab31875d13e8652f2f782f2125a1cf7f39ef"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-013.jsonl.gz",
+        "bytes": 1120633,
+        "sha256": "0cd35cddcd698907ce1211429fa393086a29bc6bc1729bb68e711221ea737eb5",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7017004,
+        "uncompressed_sha256": "7cd8ba527146ce246c815ab2e7bdab31875d13e8652f2f782f2125a1cf7f39ef"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-014.jsonl.gz",
+        "bytes": 1113872,
+        "sha256": "fbc3a4810a36f33f0724e176d61ad13bdf6a36b741640aa65508130c8ebbf6fe",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7015008,
+        "uncompressed_sha256": "7760399c48419566282104e557c3bc8cc1ba4d616896b36daca163b65e8d4a3a"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-014.jsonl.gz",
+        "bytes": 1113872,
+        "sha256": "fbc3a4810a36f33f0724e176d61ad13bdf6a36b741640aa65508130c8ebbf6fe",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7015008,
+        "uncompressed_sha256": "7760399c48419566282104e557c3bc8cc1ba4d616896b36daca163b65e8d4a3a"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-015.jsonl.gz",
+        "bytes": 1107592,
+        "sha256": "df4d45b2c2b1f7d96c57ab30f9974b7849e16626deb0ad6aa50efc0acc102819",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7016846,
+        "uncompressed_sha256": "ea833e3041e389ed5be390aad1b5067a54835850abd3fca43c12695a55c21f1c"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-015.jsonl.gz",
+        "bytes": 1107592,
+        "sha256": "df4d45b2c2b1f7d96c57ab30f9974b7849e16626deb0ad6aa50efc0acc102819",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7016846,
+        "uncompressed_sha256": "ea833e3041e389ed5be390aad1b5067a54835850abd3fca43c12695a55c21f1c"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-016.jsonl.gz",
+        "bytes": 1117463,
+        "sha256": "c90919472ed35d2a4a223abcda6c253e6d529eff0070b23b933e42e7ff9dae0e",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 7019678,
+        "uncompressed_sha256": "75f47541ccf2611712193d93664a6c58376ba2f2e1a3be1bedbaac5092f07b4a"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-016.jsonl.gz",
+        "bytes": 1117463,
+        "sha256": "c90919472ed35d2a4a223abcda6c253e6d529eff0070b23b933e42e7ff9dae0e",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7019678,
+        "uncompressed_sha256": "75f47541ccf2611712193d93664a6c58376ba2f2e1a3be1bedbaac5092f07b4a"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-017.jsonl.gz",
+        "bytes": 698664,
+        "sha256": "0015c9a348e6eebd18a4d5f6491a0cda7b60e89ee76cf8f4c6cc54a6a3986eff",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 4091365,
+        "uncompressed_sha256": "ec752ab13dd319e7bada205c154974b1bde2edcffea2adce401fb72277070afb"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-017.jsonl.gz",
+        "bytes": 698664,
+        "sha256": "0015c9a348e6eebd18a4d5f6491a0cda7b60e89ee76cf8f4c6cc54a6a3986eff",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 4091365,
+        "uncompressed_sha256": "ec752ab13dd319e7bada205c154974b1bde2edcffea2adce401fb72277070afb"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/member-index.json",
+        "bytes": 5821,
+        "sha256": "1fc10fa094ebd128f21d6440152d391cec879a2ec6ded9d665667f9e42513d12",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/member-index.json",
+        "bytes": 5821,
+        "sha256": "1fc10fa094ebd128f21d6440152d391cec879a2ec6ded9d665667f9e42513d12",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-00.bin.gz",
+        "bytes": 22743455,
+        "sha256": "99546c4a2bf41fe8f8a050fb425ab372c22e9c9821bf592d66ed9748b36301eb",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 33554432,
+        "uncompressed_sha256": "020aa63a7bbd7e4945e99b96389f0e0580aad7204c91f631f4e92aeeddba3281"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-00.bin.gz",
+        "bytes": 22743455,
+        "sha256": "99546c4a2bf41fe8f8a050fb425ab372c22e9c9821bf592d66ed9748b36301eb",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 33554432,
+        "uncompressed_sha256": "020aa63a7bbd7e4945e99b96389f0e0580aad7204c91f631f4e92aeeddba3281"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-01.bin.gz",
+        "bytes": 23286998,
+        "sha256": "c4a508d91e40bdd66e48f2533530916c773566e75277826c0806218c3997bcbf",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 33554432,
+        "uncompressed_sha256": "2460722a7cbbc6d8f383b64d39e0c49a50831ffc01f0241942f90975ee698e0c"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-01.bin.gz",
+        "bytes": 23286998,
+        "sha256": "c4a508d91e40bdd66e48f2533530916c773566e75277826c0806218c3997bcbf",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 33554432,
+        "uncompressed_sha256": "2460722a7cbbc6d8f383b64d39e0c49a50831ffc01f0241942f90975ee698e0c"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-02.bin.gz",
+        "bytes": 19571844,
+        "sha256": "b7070a55d8edfbead17c14a014ed0c430586606bf0f38ea10c0c1e038f31c7c0",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+        "uncompressed_bytes": 28700472,
+        "uncompressed_sha256": "aae9796235376f1f520b9b216c3a887e60e1c0d91d3f12463db1d403b835ae0f"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/native-02.bin.gz",
+        "bytes": 19571844,
+        "sha256": "b7070a55d8edfbead17c14a014ed0c430586606bf0f38ea10c0c1e038f31c7c0",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 28700472,
+        "uncompressed_sha256": "aae9796235376f1f520b9b216c3a887e60e1c0d91d3f12463db1d403b835ae0f"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/comparison.py",
+        "bytes": 9834,
+        "sha256": "f9c226add23a37a39bf7fd34f5d8bdcb34a8d276b331fabf59bf9867b6f84bfe",
+        "hash_kind": "file-bytes",
+        "commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/global-physical-comparison-20261006/comparison.py",
+        "bytes": 9834,
+        "sha256": "f9c226add23a37a39bf7fd34f5d8bdcb34a8d276b331fabf59bf9867b6f84bfe",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "bytes": 1851757,
+        "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+        "hash_kind": "file-bytes",
+        "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+        "uncompressed_bytes": 2097328,
+        "uncompressed_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "bytes": 1851757,
+        "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 2097328,
+        "uncompressed_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "bytes": 1851757,
+        "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+        "hash_kind": "file-bytes",
+        "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+        "uncompressed_bytes": 2097328,
+        "uncompressed_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "bytes": 1851757,
+        "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 2097328,
+        "uncompressed_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/worldwide-inventory-1164-20261006/run-one/report.json",
+        "bytes": 73547,
+        "sha256": "a5423b1e62b5a0793b83999d87d1f6d50916db482cf2ec74973f75555c2bda6c",
+        "hash_kind": "file-bytes",
+        "commit": "c6a26e1caba54e1b81a89fbda3a64fff56da323d"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/worldwide-inventory-1164-20261006/run-one/report.json",
+        "bytes": 73547,
+        "sha256": "a5423b1e62b5a0793b83999d87d1f6d50916db482cf2ec74973f75555c2bda6c",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+        "bytes": 2080037,
+        "sha256": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411",
+        "hash_kind": "file-bytes",
+        "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+        "bytes": 2080037,
+        "sha256": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+        "bytes": 2081609,
+        "sha256": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b",
+        "hash_kind": "file-bytes",
+        "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+        "bytes": 2081609,
+        "sha256": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+        "bytes": 2080126,
+        "sha256": "001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d",
+        "hash_kind": "file-bytes",
+        "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+        "bytes": 2080126,
+        "sha256": "001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+        "bytes": 2081831,
+        "sha256": "1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609",
+        "hash_kind": "file-bytes",
+        "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+        "bytes": 2081831,
+        "sha256": "1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+        "bytes": 2074475,
+        "sha256": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014",
+        "hash_kind": "file-bytes",
+        "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+        "bytes": 2074475,
+        "sha256": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+        "bytes": 2080606,
+        "sha256": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf",
+        "hash_kind": "file-bytes",
+        "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+        "bytes": 2080606,
+        "sha256": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+        "bytes": 2085907,
+        "sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+        "hash_kind": "file-bytes",
+        "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+        "bytes": 2085907,
+        "sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+        "bytes": 2079265,
+        "sha256": "654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca",
+        "hash_kind": "file-bytes",
+        "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+        "bytes": 2079265,
+        "sha256": "654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+        "bytes": 2085110,
+        "sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156",
+        "hash_kind": "file-bytes",
+        "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+        "bytes": 2085110,
+        "sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+        "bytes": 2079838,
+        "sha256": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f",
+        "hash_kind": "file-bytes",
+        "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+        "bytes": 2079838,
+        "sha256": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+        "bytes": 1714760,
+        "sha256": "e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a",
+        "hash_kind": "file-bytes",
+        "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+        "bytes": 1714760,
+        "sha256": "e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/report.json",
+        "bytes": 65206,
+        "sha256": "3d95a15d3797943290997c9a16fede48e6eb6e0941b0071a5fcd410375c49d46",
+        "hash_kind": "file-bytes",
+        "commit": "7c7cdf2388e0e7200b937c2cfb440b53165d9d98"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/report.json",
+        "bytes": 65206,
+        "sha256": "3d95a15d3797943290997c9a16fede48e6eb6e0941b0071a5fcd410375c49d46",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/components-delta.json.gz",
+        "bytes": 2335,
+        "sha256": "21ad3c832ef294cae76d5e6603e61313fc2890a1a5653667caef8665374de460",
+        "hash_kind": "file-bytes",
+        "commit": "7c7cdf2388e0e7200b937c2cfb440b53165d9d98",
+        "uncompressed_bytes": 7011,
+        "uncompressed_sha256": "4b554e0194f7b3782bc2a8b1557832eb46fe5f2130fbb363429c18e43816512c"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/components-delta.json.gz",
+        "bytes": 2335,
+        "sha256": "21ad3c832ef294cae76d5e6603e61313fc2890a1a5653667caef8665374de460",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 7011,
+        "uncompressed_sha256": "4b554e0194f7b3782bc2a8b1557832eb46fe5f2130fbb363429c18e43816512c"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "bytes": 1851757,
+        "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+        "hash_kind": "file-bytes",
+        "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+        "uncompressed_bytes": 2097328,
+        "uncompressed_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+      },
+      "current_ancestor_custody": {
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "bytes": 1851757,
+        "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14",
+        "uncompressed_bytes": 2097328,
+        "uncompressed_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    },
+    {
+      "original_execution_pin": {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "current_ancestor_custody": {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes",
+        "commit": "d4968ddc37aa3aa6105e9610c9e6fadbb368ba14"
+      }
+    }
+  ],
+  "limit": "Original actual execution locators remain unchanged in receipts. Manifest custody uses identical complete ancestor bytes if an execution locator is not an ancestor."
+}
