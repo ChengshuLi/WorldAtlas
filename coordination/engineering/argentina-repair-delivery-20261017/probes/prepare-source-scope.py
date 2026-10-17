@@ -56,9 +56,10 @@ old=set(held);tdf={key for key,k in bykey.items()if k['pixelIndex']in tdf_owners
 for key in tdf:add(key,'unresolved-pre-2020-Tierra-del-Fuego-unit-scope')
 assert len(old&tdf)==1 and len(held)==6149
 remaining={key:k for key,k in bykey.items()if key not in held};assert len(remaining)==22697 and set(remaining)|set(held)==set(bykey)and not set(remaining)&set(held)
-issue_ids={o['number']:set(re.findall(r'gb:ARG:ADM2:[A-Za-z0-9]+',o['body']))for o in obligations};decisions=[]
+issue_ids={o['number']:set(re.findall(r'(?:gb:ARG:ADM2|atlas:city):[A-Za-z0-9-]+',o['body']))for o in obligations};decisions=[]
 for i,o in sorted(owners.items()):
  sid=o['id'];issues=sorted(n for n,ids in issue_ids.items()if sid in ids);notes=[]
+ if i==7:assert 941 in issues
  if sid in tdf_ids:decision='held-unresolved-intended-department-scope';notes.append('The consumed product claims 2020, after the primary 2017 five-department law. Existing two subjects and low-IoU comparison do not provide an affirmative localized crosswalk. Hold every original key for these two owners, without asserting every key is wrong or creating/reparenting units.')
  elif i==7:decision='held-unresolved-CABA-membership';notes.append('Original17 whole members include15 communes plus Lanús and Avellaneda. The actual constructor selects by overlap or parent-name match and unions whole originals; it does not clip to the Federal District selection context. No city identity clearance is inferred.')
  else:decision='eligible-only-for-frozen-consumed-source-relative-restoration';notes.append('Exact source identity and whole consumed simplified pointset define the narrowly requested restoration. This does not establish current legal or historical department fitness. Complete source competitors and original physical class remain authoritative veto inputs.')
