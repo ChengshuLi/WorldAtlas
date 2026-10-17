@@ -16,7 +16,7 @@ J = 'coordination/engineering/japan-native-repair-20261017/'
 RH = 'ec8dd6711677fb77586441bbd5ef2d34488df2b6'
 AH = '86b089e2b82a2e85264c96b11188854f2d1bce4a'
 JH = 'c76c45be06853204183bad2b858081ef37bd8d40'
-MAX_FILE = 32 * 1024**2
+MAX_FILE = 64 * 1024**2
 MAX_TOTAL = 256 * 1024**2
 inputs = {}
 def raw(commit, name):
