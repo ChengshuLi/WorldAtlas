@@ -75,7 +75,7 @@ for f in country['features']:
  if n:country_checks.append({'code':code,'name':f['properties'].get('ADMIN'),'cells':n})
  if n and code!='EST':foreign_features.append(f);foreign_keys.update(int(i) for i in idx)
 # Authenticate explanatory methods and full original membership without replaying old preparation.
-methods={p:read(p).decode() for p in ['scripts/semantic-locations.py','scripts/geographic-regions.py','scripts/rebuild-framework.py']};assert 'union_all([geoms[i] for i in indices])' in methods['scripts/semantic-locations.py'];semantic=js('data/semantic-report.json');hierarchy=js('data/hierarchy.json');parents=[x for x in hierarchy if x['id'] in {o['province_id'] for o in owners.values()}];decisions=js('data/geographic-decisions/oceania.json');metadata=js('data/administrative-sources.json')
+methods={p:read(p).decode() for p in ['scripts/semantic-locations.py','scripts/geographic-regions.py','scripts/rebuild-framework.py']};assert 'union_all([geoms[i] for i in indices])' in methods['scripts/semantic-locations.py'];semantic=js('data/semantic-report.json');hierarchy=js('data/hierarchy.json');parents=[x for x in hierarchy if x['id'] in {o['province_id'] for o in owners.values()}];decisions=js('data/geographic-decisions/europe.json');metadata=js('data/administrative-sources.json')
 stages=[];checks=[];aggregate_checks=[]
 for index,o in sorted(owners.items()):
  t=targets[o['id']];m=t['properties']['metadata'];atoms=o['source_atoms'];assert t['properties']['parent_id']==o['province_id'] and t['properties']['reference_owner']=='Estonia' and t['properties']['name']==o['name'];assert shape(t['geometry']).is_valid
