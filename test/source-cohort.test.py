@@ -234,6 +234,84 @@ class ScientificFixture(unittest.TestCase):
         result=None if prepare_only else probe.run(root,config,admission,output,'coordination/engineering/test/source-001')
         return root,output,result
 
+    def test_stock_physical_periodic_queries_keep_candidate_frame(self):
+        # Exercise the actual stock physical entry point with original native
+        # source records. No query/frame receipt is authored by this test.
+        import gzip
+        import types
+        from shapely.geometry import box, mapping, shape
+        from shapely.affinity import translate
+        method_path = ROOT / 'coordination/engineering/global-physical-comparison-20261006/comparison.py'
+        method = method_path.read_bytes()
+        self.assertEqual(probe.sha(method), probe.PHYSICAL_COMPARISON_SHA)
+        comparison = types.ModuleType('physical_comparison')
+        exec(compile(method, str(method_path), 'exec'), comparison.__dict__)
+        temp = tempfile.TemporaryDirectory(); self.addCleanup(temp.cleanup)
+        root = Path(temp.name)
+        def git(*args):
+            return subprocess.check_output(['git', '-C', str(root), *args], stderr=subprocess.DEVNULL)
+        git('init'); git('config', 'user.email', 'fixture@example.invalid'); git('config', 'user.name', 'Fixture')
+        native = bytearray(); metadata = []
+        for ordinal, (ident, level, flag, parent, geometry) in enumerate([
+            (0, 1, 0, -1, box(180, -.02, 190, .02)),
+            (97, 2, 2 << 16, 0, box(185.5, -.005, 186.5, .005))
+        ]):
+            xy = self.np.rint(self.np.asarray(geometry.exterior.coords) * 1e6).astype('>i4')
+            points = xy.tobytes(); left, bottom, right, top = self.np.rint(self.np.asarray(geometry.bounds) * 1e6).astype(int)
+            header = comparison.HEADER.pack(ident, len(xy), flag | level, left, right, bottom, top, 0, 0, parent, parent)
+            meta, decoded = comparison.decode_record(header, points, ordinal, len(native))
+            self.assertFalse(meta['geometry_issues']); metadata.append(meta); native.extend(header + points)
+        encode = lambda value: (json.dumps(value, separators=(',', ':')) + '\n').encode()
+        candidate = box(-175, -.01, -168, .01)
+        bodies = {'stages.json': encode([dict(target='periodic-target', consumed=dict(geometry=mapping(candidate)))]),
+                  'comparison.py': method}
+        def fragment(name, data):
+            encoded = gzip.compress(data, mtime=0); bodies[name] = encoded
+            return dict(path=name, bytes=len(encoded), sha256=probe.sha(encoded),
+                        uncompressed_bytes=len(data), uncompressed_sha256=probe.sha(data))
+        meta_part = fragment('metadata.jsonl.gz', b''.join(encode(row) for row in metadata))
+        native_part = fragment('native.bin.gz', bytes(native))
+        bodies['transport.json'] = encode(dict(complete_sources=2, entries=[dict(kind='sources', delivered=meta_part)]))
+        bodies['native-index.json'] = encode(dict(record_count=2, member_bytes=len(native), member_sha256=probe.sha(native),
+                                                 parts=[dict(native_part, ordinal=0, offset=0)]))
+        # Prefixes name an ordinary containing directory, including the raw records.
+        inputs = root / 'inputs'; inputs.mkdir()
+        for name, body in bodies.items(): (inputs / name).write_bytes(body)
+        git('add', '.'); git('commit', '-qm', 'original periodic physical inputs')
+        commit = git('rev-parse', 'HEAD').decode().strip(); pins = []
+        for name, body in bodies.items():
+            pin = dict(path='inputs/' + name, commit=commit, bytes=len(body), sha256=probe.sha(body),
+                       git_blob_oid=git('rev-parse', commit + ':inputs/' + name).decode().strip())
+            if name.endswith('.gz'):
+                decoded = gzip.decompress(body); pin.update(decoded_bytes=len(decoded), decoded_sha256=probe.sha(decoded))
+            pins.append(pin)
+        config = dict(version=1, inputs=pins, roles=dict(stages='inputs/stages.json', transport='inputs/transport.json',
+                      native_index='inputs/native-index.json', comparison='inputs/comparison.py'),
+                      metadata_prefix='inputs', native_prefix='inputs', runtime=dict(python=sys.version,
+                      numpy=self.np.__version__, shapely=self.shapely.__version__, geos=self.shapely.geos_version_string))
+        config_path = root / 'config.json'; config_path.write_bytes(encode(config))
+        runtime = [dict(path=p, bytes=Path(p).stat().st_size, sha256=probe.sha(Path(p).read_bytes())) for p in probe.runtime_paths()]
+        admission = root / 'admission.json'; admission.write_bytes(encode(dict(version=1, runtime_files=runtime,
+            program_sha256=probe.sha(Path(probe.__file__).read_bytes()), config_sha256=probe.sha(config_path.read_bytes()))))
+        probe.run_physical(root, config_path, admission, root / 'output', 'coordination/engineering/fixture/physical')
+        result = json.loads((root / 'output/whole-target-support.json').read_bytes())['results'][0]
+        self.assertEqual([(q['source_id'], q['periodic_offset']) for q in result['query_relations']], [(0, -360), (97, -360)])
+        self.assertEqual(result['query_relations'][0]['witness'], 'complete-operation-pointset')
+        self.assertEqual(result['query_relations'][1]['witness'], 'complete-source-record-reconstruction')
+        self.assertEqual(shape(result['query_relations'][0]['witness_geometry']), candidate.intersection(box(-180, -.02, -170, .02)))
+        for q in result['query_relations']:
+            self.assertTrue(q['intersects']); self.assertFalse(q['disjoint'])
+        self.assertIn('contradictory_land_water_support', [issue['reason'] for issue in result['issues']])
+        for key, geometry in result['support'].items():
+            operands = geometry.values() if key == 'hierarchy_disagreements' else [geometry]
+            for operand in operands:
+                g = shape(operand)
+                if not g.is_empty: self.assertTrue(candidate.covers(g), key)
+        witness = shape(result['query_relations'][0]['witness_geometry'])
+        self.assertFalse(candidate.intersects(box(180, -.02, 190, .02)))
+        self.assertFalse(witness.equals_exact(translate(witness, xoff=360), 0))
+        self.assertEqual({name: (inputs / name).read_bytes() for name in bodies}, bodies)
+
     def test_reference_competitor_withheld_but_source_observations_survive(self):
         def mutate(data,c):
             data['countries.json']['features'].append(dict(geometry={'type':'Polygon','coordinates':[[[.002,-.01],[.0022,-.01],[.0022,.01],[.002,.01],[.002,-.01]]]},properties=dict(ADM0_A3='MYS',ADMIN='Malaysia')))
