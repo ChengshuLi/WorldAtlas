@@ -79,7 +79,10 @@ if (cg/'memory.max').exists() and (cg/'memory.current').exists():
     cap=(cg/'memory.max').read_text().strip()
     if cap!='max':available=min(available,max(0,int(cap)-int((cg/'memory.current').read_text())))
 initial_rss=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*1024
-estimated_workspace=planned_total*8+largest*4+initial_rss
+# Calibrated against the first complete 37-file proof: 1,524,166,656 peak RSS
+# for 129,799,362 immutable bytes. This is an admission estimate, not a hard
+# memory bound or a scientific file/dataset cap. The actual peak is reported.
+estimated_workspace=planned_total*12+largest*4+initial_rss
 assert estimated_workspace<=available, 'Actual available memory does not admit the measured finite input plan and estimated interval workspace'
 print(json.dumps(dict(memory_admission='cooperative-measured-input-plan',planned_input_files=len(planned),planned_encoded_bytes=planned_total,largest_file_bytes=largest,estimated_workspace_bytes=estimated_workspace,available_memory_bytes=available)),flush=True)
 inputs={}
