@@ -537,6 +537,29 @@ metadata belongs only to separate custody pins. Raw and decoded latitude/owner
 identities are verified before output. No template commit or scientific execution
 is needed for this mechanical assembly.
 
+For reviewed whole-original negative sources that have no native owner, opt in
+with a top-level `territorial_exclusion_families` array of exact original catalogue
+family keys. This explicit scope must be reviewed for the package; the helper does
+not infer foreign status or legal applicability from names, prefixes, or absent
+owners. It supports original v1/v2 source families, not revised/provider adoptions.
+
+The same `source-evidence` command authenticates the complete catalogue products,
+every ordered encoded/decoded part, original feature identities and complete
+physical source/selected-target joins. It appends unchanged whole original
+geometries whose complete bounds touch/intersect each consumed source member.
+Multipart components are retained together; seam-spanning bounds widen
+conservatively. Existing exclusions and their ordinals, positive families,
+coverage rows and requested native denominators remain unchanged. Malformed
+originals fail even if their bounds would otherwise be disjoint.
+
+The additional `territorial-exclusion-provenance.json` records the explicit scope,
+complete family pins, original feature ordinals/hashes, target exclusion ordinals
+and omitted disjoint source IDs. Retain it with the generated evidence. This is a
+conservative disagreement handoff, not a sovereignty decision, applicability
+exception, positive source/owner mapping or native acceptance. Run the unchanged
+full requested native diagnostic/qualification; do not delete held cells from the
+original request. Without the optional scope, ordinary preparation is unchanged.
+
 Commit the emitted ordinary `source-evidence.json` once, then pass its immutable
 locator to the existing `native-authority` command. This step does not qualify the
 scientific claims or replace their review. Choosing a different same-body custody
