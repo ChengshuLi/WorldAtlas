@@ -1,0 +1,183 @@
+{
+  "kind": "actual-native-and-original-hold-conservation",
+  "baseline_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+  "candidate_commit": "38c33aa49bf64a642e5c3afe36efeebf53613dd3",
+  "packages": [
+    {
+      "country": "Slovakia",
+      "original_cells": 1811,
+      "supported_cells": 1681,
+      "held_cells": 130,
+      "original_owners": 24,
+      "supported_owners": 21,
+      "wholly_held_owners": 3,
+      "per_owner": [
+        {
+          "owner": 40388,
+          "original": 8,
+          "supported": 8,
+          "held": 0
+        },
+        {
+          "owner": 40389,
+          "original": 225,
+          "supported": 225,
+          "held": 0
+        },
+        {
+          "owner": 40390,
+          "original": 42,
+          "supported": 0,
+          "held": 42
+        },
+        {
+          "owner": 40394,
+          "original": 168,
+          "supported": 163,
+          "held": 5
+        },
+        {
+          "owner": 40395,
+          "original": 17,
+          "supported": 17,
+          "held": 0
+        },
+        {
+          "owner": 40396,
+          "original": 15,
+          "supported": 15,
+          "held": 0
+        },
+        {
+          "owner": 40397,
+          "original": 56,
+          "supported": 56,
+          "held": 0
+        },
+        {
+          "owner": 40399,
+          "original": 15,
+          "supported": 15,
+          "held": 0
+        },
+        {
+          "owner": 40403,
+          "original": 239,
+          "supported": 232,
+          "held": 7
+        },
+        {
+          "owner": 40418,
+          "original": 26,
+          "supported": 26,
+          "held": 0
+        },
+        {
+          "owner": 40425,
+          "original": 49,
+          "supported": 0,
+          "held": 49
+        },
+        {
+          "owner": 40429,
+          "original": 2,
+          "supported": 1,
+          "held": 1
+        },
+        {
+          "owner": 40431,
+          "original": 222,
+          "supported": 218,
+          "held": 4
+        },
+        {
+          "owner": 40432,
+          "original": 24,
+          "supported": 24,
+          "held": 0
+        },
+        {
+          "owner": 40433,
+          "original": 34,
+          "supported": 33,
+          "held": 1
+        },
+        {
+          "owner": 40435,
+          "original": 2,
+          "supported": 2,
+          "held": 0
+        },
+        {
+          "owner": 40439,
+          "original": 106,
+          "supported": 104,
+          "held": 2
+        },
+        {
+          "owner": 40443,
+          "original": 1,
+          "supported": 0,
+          "held": 1
+        },
+        {
+          "owner": 40444,
+          "original": 202,
+          "supported": 200,
+          "held": 2
+        },
+        {
+          "owner": 40452,
+          "original": 71,
+          "supported": 71,
+          "held": 0
+        },
+        {
+          "owner": 40456,
+          "original": 19,
+          "supported": 5,
+          "held": 14
+        },
+        {
+          "owner": 40459,
+          "original": 235,
+          "supported": 235,
+          "held": 0
+        },
+        {
+          "owner": 40460,
+          "original": 23,
+          "supported": 23,
+          "held": 0
+        },
+        {
+          "owner": 40462,
+          "original": 10,
+          "supported": 8,
+          "held": 2
+        }
+      ]
+    }
+  ],
+  "original_cells": 1811,
+  "new_supported_cells": 1681,
+  "new_held_cells": 130,
+  "prior_native_cells": 6118769,
+  "composed_native_cells": 6120450,
+  "removed_cells": 0,
+  "reassigned_cells": 0,
+  "prior_ledger_rows": 5260,
+  "composed_ledger_rows": 5281,
+  "prior_authorities": 185,
+  "composed_authorities": 186,
+  "prior_held_rows": 8,
+  "composed_held_rows": 8,
+  "literal_prior_rows_authorities_holds_preserved": true,
+  "literal_reviewed_quartets_preserved": true,
+  "complete_original_sets_disjoint_from_accepted_patch": true,
+  "limits": [
+    "Immutable native/accounting evidence; no scientific producer replay. Current selected-owner-zero and actual emitted-consumer acceptance remain separate mandatory gates.",
+    "Slovakia retains 130 territorial-exclusion holds; the package remains incomplete."
+  ],
+  "final_selected_readback_matches_composition": true
+}
