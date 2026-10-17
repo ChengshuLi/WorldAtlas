@@ -1,0 +1,59 @@
+{
+  "locator": {
+    "version": 1,
+    "kind": "accepted-selected-checkpoint-locator-v1",
+    "acceptance": {
+      "pr_number": 2274,
+      "request_id": "iceland-repair-2274-497ece7-20261016-001",
+      "head": "497ece78d357432391eb0c5c809c9219e4dea9cf"
+    },
+    "retained_artifact": {
+      "path": "coordination/engineering/finland-native-repair-20261016/checkpoint-iceland/geography-artifact.zip"
+    }
+  },
+  "original_source": {
+    "run_id": 38979782180,
+    "run_attempt": 1,
+    "head": "497ece78d357432391eb0c5c809c9219e4dea9cf",
+    "baseline": "5322932b221248d5f5177bf91ea8c4c60a0b70a0",
+    "candidate_commit": "28a0a8eaa18135a79813b60c058816b487af3875",
+    "workflow_path": ".github/workflows/worker-merge.yml",
+    "event": "workflow_dispatch",
+    "workflow_head": "5322932b221248d5f5177bf91ea8c4c60a0b70a0",
+    "tree": "0913d2bd3099b6b4d31ea4e474d56b190efa4d55",
+    "job_id": 117238005000,
+    "artifact_name": "geography-iceland-repair-2274-497ece7-20261016-001-1",
+    "artifact_id": 12080891779,
+    "artifact_digest": "0055dfe228e61eb992c01e472fbf8278ba4f4b7dc24b3fbac6670d382997d1a4",
+    "report_sha256": "8c6cee7898acb294e61810d6fd190189961b7074d134b4a564f881e3775cb215",
+    "report_bytes": 137161,
+    "artifact_bytes": 7650587
+  },
+  "archive_origin": "retained-exact",
+  "accepted_merge": "79baf9c5bc484e9f82f9c7fccaf444d919bb071a",
+  "report_status": "no-new-native-loss",
+  "checkpoint_members": [
+    {
+      "bytes": 474843,
+      "name": "checkpoint-routes.json",
+      "sha256": "b5d22433dbe4911503168b2a6d556d0e42eddb206c89e0c4186c69bcf611d5d3"
+    },
+    {
+      "bytes": 7518620,
+      "decoded_bytes": 18421528,
+      "decoded_sha256": "eaea9122eb7c10b51ee51507bb18395aa62f36d3d1d4361ce08d60e72961636c",
+      "name": "derived-certificate.json.gz",
+      "sha256": "d26b23d633e66a02c763d4fe17dfac1df79bd865c4f42252a91f0ae393e53fa9"
+    },
+    {
+      "bytes": 433923,
+      "name": "derived-facts.json",
+      "sha256": "2993800259c5ced92dc8b93e544fc5eacf2a7e237d7f321fbd62166bfa1ccb1f"
+    },
+    {
+      "bytes": 660,
+      "name": "derived-publication.json",
+      "sha256": "467a3d0599ba7d706525edf59ec5f93f44637478d9d56f4600a19e02079d8614"
+    }
+  ]
+}

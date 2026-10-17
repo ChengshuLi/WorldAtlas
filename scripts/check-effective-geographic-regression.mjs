@@ -108,9 +108,9 @@ export class ImmutableReader {
   }
   gitBatch(args,input,maxBuffer) {
     const result=spawnSync(this.gitExecutable,['-c','core.hooksPath=/dev/null','-C',this.repo,...args],
-      {input,maxBuffer,stdio:['pipe','pipe','pipe']});
+      {input,maxBuffer,stdio:['pipe','pipe','inherit']});
     if(result.error)throw result.error;
-    demand(result.status===0&&!result.stderr.length,'Incomplete immutable Git batch: '+result.stderr.toString());
+    demand(result.status===0,'Incomplete immutable Git batch');
     return result.stdout;
   }
   // The caller already knows this finite pin layer. Resolve only its original
@@ -425,7 +425,7 @@ export class SelectedGeometrySources {
     this.checkPin(p);let version=p.commit;
     // Squash retention is allowed ONLY for the exact same original ordinary
     // path/mode/Git blob/full SHA. Actual consumed provenance remains explicit.
-    try{this.reader.git('cat-file','-e',version+'^{commit}');}catch{version=this.reader.version;}
+    try{this.reader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}');}catch{version=this.reader.version;}
     const actual=this.reader.descriptor(p.path,version);
     demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'Selected source original mode/OID/body differs');
     const raw=this.reader.read(p.path,{version,expected:p.sha256});
@@ -631,7 +631,7 @@ function loadBaseSelection(reader) {
   // Squash merges may omit the original producer commit from a clean clone.
   // Its independently registered WHOLE byte hash still binds the exact retained
   // same-path copy; consumed provenance never pretends to be the original commit.
-  try{reader.git('cat-file','-e',proof.commit+'^{commit}');}catch{proofVersion=reader.version;}
+  try{reader.git('--no-lazy-fetch','cat-file','-e',proof.commit+'^{commit}');}catch{proofVersion=reader.version;}
   const receipt=reader.json(proof.path,{version:proofVersion,expected:proof.sha256});
   const receiptProvenance={registered_origin:{commit:proof.commit,path:proof.path,sha256:proof.sha256},consumed:{...reader.inventory.get(proofVersion+':'+proof.path)},whole_body_alias:proofVersion!==proof.commit};
   demand(receipt.method===manifest.method&&receipt.baseline_commit===manifest.provenance?.baseline_commit&&receipt.preparation_commit===manifest.provenance?.evaluation_commit&&receipt.owned_cells===manifest.accounting?.owned_cells&&receipt.owners===manifest.accounting?.owners&&receipt.checked_rows===manifest.size&&receipt.checked_cells===manifest.size**2&&receipt.unchecked_cells===0&&receipt.checked_runs*2===manifest.runWords&&receipt.installation_ready===false,'Native registered comparison differs');
@@ -990,7 +990,7 @@ export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) 
   if(visibilityCandidates.length){
     const pin=a.native_latitudes;
     demand(pin?.root==='repository'&&pin.decoded_bytes===a.size*8,'Missing normative visibility latitude input');
-    let version=pin.commit;try{beforeReader.git('cat-file','-e',version+'^{commit}');}catch{version=baseline;}
+    let version=pin.commit;try{beforeReader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}');}catch{version=baseline;}
     visibilityLatitudes=decodeVisibilityLatitudes(beforeReader.read(pin.path,{version,expected:pin.sha256}),pin,a.size);
   }
   // A changed transport body with an unchanged declared selected member must

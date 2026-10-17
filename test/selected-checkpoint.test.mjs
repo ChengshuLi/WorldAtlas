@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import {execFileSync} from 'node:child_process';
 import {pathToFileURL} from 'node:url';
 import {valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {deriveCoordinateDelta,projectSourceFeatures,projectNativeRows,qualifyTransition} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
@@ -411,4 +412,89 @@ test('checkpoint route comparison refuses disappeared files, directories, symlin
   const result=f.api.qualifyCheckpoint({reader});assert.equal(result.available,false,kind);
   assert.match(result.reason,/routing alternative changed/);
  }
+});
+
+// Scalar consumers must exercise a real promisor: a plain missing commit does
+// not reveal Git's implicit remote fetch before the exact current-alias path.
+function scalarPromisor(f,{populated=false}={}) {
+ const executable=execFileSync('which',['git'],{encoding:'utf8'}).trim(),remote=path.join(f.root,'.git','promisor.git');
+ if(populated)execFileSync(executable,['clone','--bare','--quiet','--no-local',f.root,remote]);
+ else execFileSync(executable,['init','--bare','--quiet',remote]);
+ for(const [key,value]of [['uploadpack.allowAnySHA1InWant','true'],['uploadpack.allowFilter','true']])
+  execFileSync(executable,['--git-dir',remote,'config',key,value]);
+ f.git('config','extensions.partialClone','origin');f.git('config','remote.origin.url',remote);
+ f.git('config','remote.origin.promisor','true');f.git('config','remote.origin.partialclonefilter','blob:none');
+ const trace=path.join(f.root,'.git','scalar.trace'),wrapper=path.join(f.root,'.git','scalar-git');
+ fs.writeFileSync(wrapper,`#!/bin/sh\nGIT_NO_LAZY_FETCH=0 GIT_TRACE=${JSON.stringify(trace)} exec ${JSON.stringify(executable)} "$@"\n`,{mode:0o755});
+ const reader=(version=f.selected)=>new f.native.ImmutableReader(f.root,version,{gitExecutable:wrapper});
+ const readSource=(p,r=reader())=>f.native.SelectedGeometrySources.prototype.readPinned.call({reader:r,
+  checkPin:f.native.SelectedGeometrySources.prototype.checkPin},p);
+ const tracing=()=>fs.existsSync(trace)?fs.readFileSync(trace,'utf8'):'';
+ return {reader,readSource,trace,tracing,remote,executable,wrapper};
+}
+const remoteAttempt=/fetch .*origin|upload-pack/;
+
+test('scalar source aliases use no promisor transport and still reject incomplete or changed pins',async t=>{
+ const f=await trustedFixture(t),p={...f.pin('data/source.json',f.selected),commit:'77be56dd849d1351b82f0e79d7d306c1080b2562'},s=scalarPromisor(f);
+ assert.deepEqual(s.readSource(p),f.git('show',f.selected+':'+p.path));
+ for(const changed of [{...p,mode:'100755'},{...p,bytes:p.bytes+1},{...p,git_blob_oid:'f'.repeat(40)},
+  {...p,sha256:'0'.repeat(64)},{...p,path:'missing.json'}])
+  assert.throws(()=>s.readSource(changed),/Incomplete whole selected source pin|original mode\/OID\/body differs|Whole immutable input differs|Require whole ordinary/);
+ assert.doesNotMatch(s.tracing(),remoteAttempt);
+});
+
+test('scalar local originals take precedence and their missing paths never fall back',async t=>{
+ const f=await trustedFixture(t),p=f.pin('data/source.json',f.selected),s=scalarPromisor(f);
+ f.save(p.path,{different:true});f.save('new.json',{new:true});const current=f.commit();
+ assert.deepEqual(s.readSource(p,s.reader(current)),f.git('show',p.commit+':'+p.path));
+ assert.throws(()=>s.readSource({...f.pin(p.path,current),commit:p.commit},s.reader(current)),/original mode\/OID\/body differs/);
+ assert.throws(()=>s.readSource({...f.pin('new.json',current),commit:p.commit},s.reader(current)),/Require whole ordinary/);
+ assert.doesNotMatch(s.tracing(),remoteAttempt);
+});
+
+test('scalar availability rechecks a remote-only original after explicit acquisition',async t=>{
+ const f=await trustedFixture(t),s=scalarPromisor(f,{populated:true});
+ const remote=(args,input)=>execFileSync(s.executable,['--git-dir',s.remote,...args],{input,encoding:'utf8'}).trim();
+ const blob=remote(['hash-object','-w','--stdin'],'different original');
+ const dir=remote(['mktree'],`100644 blob ${blob}\tsource.json\n`),tree=remote(['mktree'],`040000 tree ${dir}\tdata\n`);
+ const original=remote(['-c','user.name=Scalar test','-c','user.email=scalar@example.invalid','commit-tree',tree],'Remote original\n');
+ const p={...f.pin('data/source.json',f.selected),commit:original},reader=s.reader();
+ assert.deepEqual(s.readSource(p,reader),f.git('show',f.selected+':'+p.path));
+ assert.doesNotMatch(s.tracing(),remoteAttempt);assert.equal(reader.inventory.has(original+':'+p.path),false);
+ f.git('fetch','--quiet','--no-tags',s.remote,original);
+ assert.throws(()=>s.readSource(p,reader),/original mode\/OID\/body differs/);
+});
+
+for(const populated of [true,false])test('scalar actual body acquisition remains '+(populated?'authenticated':'a failure, never an alias fallback'),async t=>{
+ const f=await trustedFixture(t),p=f.pin('data/source.json',f.selected),expected=f.git('show',p.commit+':'+p.path),s=scalarPromisor(f,{populated});
+ fs.unlinkSync(path.join(f.root,'.git','objects',p.git_blob_oid.slice(0,2),p.git_blob_oid.slice(2)));
+ if(populated){assert.deepEqual(s.readSource(p),expected);assert.throws(()=>s.readSource({...p,sha256:'0'.repeat(64)}),/Whole immutable input differs/);}
+ else assert.throws(()=>s.readSource(p),/Command failed|Require whole ordinary/);
+ assert.match(s.tracing(),remoteAttempt);
+});
+
+test('complete checkpoint qualification uses exact rebind aliases without implicit promisor fetches',async t=>{
+ const f=await trustedFixture(t),certificate=f.ledger.current_rebind,body=JSON.parse(f.git('show',certificate.commit+':'+certificate.path));
+ const commits=new Set([certificate.commit,...['request','facts','publication','operating','result'].map(k=>body[k].commit)]);
+ const s=scalarPromisor(f);
+ for(const commit of commits)fs.unlinkSync(path.join(f.root,'.git','objects',commit.slice(0,2),commit.slice(2)));
+ const result=f.api.qualifyCheckpoint({reader:s.reader()});
+ assert.equal(result.available,true);assert.equal(result.state.ledger.rows.length,2);
+ assert.deepEqual(f.api.projectNativeRows({state:result.state,rows:[1]}).rows,[{y:1,runs:[[0,1,2]]}]);
+ assert.doesNotMatch(s.tracing(),remoteAttempt);
+ f.api.releaseCheckpoint(result.state);
+});
+
+test('complete native authority authenticates retained source aliases without fetching unavailable originals',async t=>{
+ const f=await trustedFixture(t,{nativeAppend:true}),next=await appendNativeAuthority(f);
+ const {readRetainedRegistryAuthority}=await import(pathToFileURL(path.join(f.root,CODE[1])));
+ const binding=JSON.parse(f.git('show',next.entry.source_authority.commit+':'+next.entry.source_authority.path));
+ const evidence=JSON.parse(f.git('show',binding.source_evidence.commit+':'+binding.source_evidence.path));
+ const commits=new Set([next.entry.source_authority.commit,binding.source_evidence.commit,evidence.catalogue.commit]);
+ const s=scalarPromisor(f);
+ for(const commit of commits)fs.unlinkSync(path.join(f.root,'.git','objects',commit.slice(0,2),commit.slice(2)));
+ const proof=readRetainedRegistryAuthority(s.reader(next.candidate),next.entry);
+ assert.deepEqual(proof.original_ledger,next.proof.original_ledger);
+ assert.deepEqual(proof.native_proof.native_patches,next.proof.native_proof.native_patches);
+ assert.doesNotMatch(s.tracing(),remoteAttempt);
 });

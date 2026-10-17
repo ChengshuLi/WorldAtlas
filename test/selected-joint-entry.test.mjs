@@ -15,6 +15,19 @@ function run(f, baseline, candidate, destination = path.join(f.root, 'complete')
     baseline, candidate, destination], {encoding:'utf8', env, timeout:30000});
 }
 
+const PHASES = ['trusted-startup', 'checkpoint-acquisition', 'baseline-qualification',
+  'candidate-qualification', 'native-comparison', 'checkpoint-output'];
+function assertPhases(result, expected) {
+  const timings = result.stderr.trim().split('\n').filter(line => line.startsWith('{')).map(line => JSON.parse(line))
+    .filter(row => Object.hasOwn(row, 'selected_joint_phase'));
+  assert.deepEqual(timings.map(row => row.selected_joint_phase), expected);
+  for (const timing of timings) {
+    assert.deepEqual(Object.keys(timing).sort(), ['elapsed_ms', 'selected_joint_phase']);
+    assert(Number.isSafeInteger(timing.elapsed_ms) && timing.elapsed_ms >= 0);
+  }
+  assert.doesNotMatch(result.stdout, /selected_joint_phase|elapsed_ms/);
+}
+
 test('actual joint CLI reports unseeded baseline as explicit cold validation, never unchanged success', async t => {
   const f = await trustedFixture(t);
   f.save('data/ownership-selection.json', {version:1}); const selected = f.commit();
@@ -23,6 +36,7 @@ test('actual joint CLI reports unseeded baseline as explicit cold validation, ne
   const report = JSON.parse(result.stdout);
   assert.equal(report.mode, 'legacy-cold-required');
   assert.equal(report.reuse_unavailable.cold, 'baseline-and-candidate');
+  assertPhases(result, PHASES.slice(0, 3));
   assert.equal(Object.hasOwn(report, 'native'), false);
   assert.equal(fs.existsSync(path.join(f.root, 'complete')), false);
 });
@@ -35,6 +49,7 @@ test('actual joint CLI preserves a qualified baseline but requires cold validati
   const report = JSON.parse(result.stdout);
   assert.equal(report.mode, 'legacy-cold-required');
   assert.equal(report.reuse_unavailable.cold, 'candidate');
+  assertPhases(result, PHASES.slice(0, 4));
   assert.match(report.reuse_unavailable.reason, /route changed/);
   assert.equal(fs.existsSync(path.join(f.root, 'complete')), false);
 });
@@ -44,10 +59,12 @@ test('joint output collision and dangling symlink fail before qualification and 
   const sentinel = Buffer.from('original output sentinel'); fs.writeFileSync(destination, sentinel);
   let result = run(f, f.selected, f.selected, destination);
   assert.notEqual(result.status, 0); assert.match(result.stderr, /output already exists/);
+  assertPhases(result, []);
   assert.deepEqual(fs.readFileSync(destination), sentinel);
   fs.unlinkSync(destination); fs.symlinkSync(path.join(f.root, 'absent-target'), destination);
   result = run(f, f.selected, f.selected, destination);
   assert.notEqual(result.status, 0); assert.match(result.stderr, /output already exists/);
+  assertPhases(result, []);
   assert.equal(fs.readlinkSync(destination), path.join(f.root, 'absent-target'));
   assert.equal(fs.existsSync(path.join(f.root, 'absent-target')), false);
 });
@@ -57,6 +74,7 @@ test('joint launcher authenticates its additional consumer module before importi
   fs.appendFileSync(consumer, '\nthrow Error("unauthenticated consumer executed");\n');
   const result = run(f, f.selected, f.selected);
   assert.notEqual(result.status, 0); assert.match(result.stderr, /Joint code size differs/);
+  assertPhases(result, []);
   assert.doesNotMatch(result.stderr, /Error: unauthenticated consumer executed/);
   assert.equal(fs.existsSync(path.join(f.root, 'complete')), false);
 });
@@ -67,6 +85,7 @@ test('actual joint CLI qualifies once, runs the real native consumer and release
   assert.equal(result.status, 0, result.stderr);
   const report = JSON.parse(result.stdout);
   assert.equal(report.mode, 'authenticated-checkpoint-append-v1');
+  assertPhases(result, PHASES);
   assert.equal(report.native.status, 'no-new-native-loss');
   assert.equal(report.continuous, undefined);
   assert.deepEqual(fs.readdirSync(path.join(f.root,'complete')).sort(), ['checkpoint-routes.json','derived-certificate.json.gz','derived-facts.json','derived-publication.json']);
@@ -81,6 +100,11 @@ test('actual joint CLI qualifies once, runs the real native consumer and release
   assert.equal(createHash('sha256').update(decoded).digest('hex'), derived.certificate.decoded_sha256);
   assert.equal(certificate.entries.length, 3);
   const derivedFacts = JSON.parse(fs.readFileSync(path.join(f.root, 'complete', derived.facts.path)));
+  for (const name of fs.readdirSync(path.join(f.root, 'complete'))) {
+    const encodedBody = fs.readFileSync(path.join(f.root, 'complete', name));
+    const body = name.endsWith('.gz') ? gunzipSync(encodedBody) : encodedBody;
+    assert.doesNotMatch(body.toString(), /selected_joint_phase|elapsed_ms/);
+  }
   assert.equal(derivedFacts.baseline_commit, f.selected);
   assert.equal(derivedFacts.candidate_commit, f.selected);
   assert.deepEqual(derivedFacts.candidate_selection, f.selection);
@@ -140,5 +164,6 @@ test('actual warm native-only transition rejects coherently repinned same-count 
   const result=run(f,f.selected,candidate);
   assert.notEqual(result.status,0);
   assert.match(result.stderr,/Candidate patch omitted, invented or reassigned original native intervals/);
+  assertPhases(result, PHASES.slice(0, 3));
   assert.equal(fs.existsSync(path.join(f.root,'complete')),false);
 });

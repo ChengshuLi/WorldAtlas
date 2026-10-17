@@ -182,6 +182,18 @@ const FOCUSED_TEST_FAMILIES = [
   'geographic-adjudication-api', 'geographic-report-artifact', 'trusted-workflow-checkouts',
   'merge-integration(?:-entrypoint)?', 'selected-data-profile', 'git-blob-transport',
   'immutable-git-blobs', 'pr-evidence-transport', 'local-workspace',
+  // Immutable reader, original-authority, checkpoint and wrapper consumers.
+  // Scientific kernels and packaged/rendered output remain full regression.
+  'accepted-(?:checkpoint-qualification|joint-transport)', 'additive-gap-repair',
+  'administrative-original-hashes', 'component-authority-identity', 'current-rebind-product-custody',
+  'effective-geographic-regression', 'evidence-byte-bounds', 'fiji-canonical-reproduction',
+  'geographic-(?:checkpoint-products|regression)', 'geography-prefetch',
+  'immutable-reader-read', 'installed-runtime-identity', 'map-cell-diagnosis',
+  'native-(?:additions-order|checkpoint-consumer)', 'parallel-geography-comparison',
+  'qualification-exclusion-prefilter', 'selected-checkpoint',
+  'selected-joint-(?:check|entry|package-boundary)', 'selected-metadata-wiring',
+  'source-target-native-diagnostic', 'supported-programs', 'trusted-geography-check',
+  'unchanged-selected-geography', 'visible-gap-eligibility',
   'native-(?:authority-entry|diagnostic-entry|witness-authority|regression-inputs)',
   'physical-source-retention', 'revised-source-native', 'dated-centre-authority', 'full-regression-shards'
 ];

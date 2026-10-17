@@ -8,6 +8,11 @@ export const COORDINATION_PATHS = new Set([
   // Delivery orchestration is not imported by the atlas builder. Shared native
   // operators and native-preparation-guards remain outside this exact list.
   'scripts/prepare-delivery-handoff.mjs', 'scripts/delivery-handoff-advance.mjs',
+  // The immutable comparison/checkpoint family has no application or builder
+  // imports. Its complete focused consumers and candidate geography still run.
+  'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs', 'scripts/run-geographic-check.py',
+  'coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs',
+  'coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs',
   'docs/WORKER_COORDINATION.md', 'docs/PREMERGE_EVIDENCE_REVIEW.md',
   'scripts/issue-claim-contract.mjs', 'scripts/run-issue-claim.mjs',
   'scripts/worker-result.mjs', 'scripts/check-handoff-scope.mjs', 'scripts/check-linked-github-issue.mjs',
