@@ -1,3 +1,4 @@
+import {isNativeSequence} from './native-sequence.js';
 // Versioned offline rule. Existing projected grids keep their original meaning.
 export const NATIVE_GRID_METHOD='native-linear-evenodd-first-owner-v1';
 
@@ -271,12 +272,12 @@ export function nativeOnlyComponent(row, hashValue) {
     'Native component current base changed');
   for (const key of ['base_geometry_sha256','source_receipt_sha256','authority_sha256','rule_sha256'])
     require(hex.test(row[key] ?? ''), 'Missing native source-target custody');
-  require(Array.isArray(row.native_rows) && row.native_rows.length > 0, 'Missing native component rows');
+  require(isNativeSequence(row.native_rows) && row.native_rows.length > 0, 'Missing native component rows');
   let last = -1, cells = 0;
   for (const item of row.native_rows) {
     exactKeys(item, ['y','runs'], 'Native component row');
     require(Number.isSafeInteger(item.y) && item.y > last && item.y < 262166
-      && Array.isArray(item.runs) && item.runs.length > 0, 'Invalid native component row');
+      && isNativeSequence(item.runs) && item.runs.length > 0, 'Invalid native component row');
     last = item.y; let end = 0;
     for (const run of item.runs) {
       require(Array.isArray(run) && run.length === 3 && run.every(Number.isSafeInteger)

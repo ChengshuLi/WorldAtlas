@@ -1,3 +1,5 @@
+import {checkpointTestAPI} from './helpers/native-literal.mjs';
+import {nativeLiteral} from './helpers/native-literal.mjs';
 import test, {after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -15,8 +17,8 @@ import {deriveCoordinateDelta,projectSourceFeatures,projectNativeRows,qualifyTra
 const MODULE='coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const PROGRAMME='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
 const CATALOGUE='coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json';
-const CODE=[MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/native-word-store.mjs','scripts/check-effective-geographic-regression.mjs',
-  'scripts/selected-reference-metadata.mjs','src/reference-metadata.js','src/native-grid.js','src/ownership-codec.js'];
+const CODE=[MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/native-word-store.mjs','scripts/native-patch-store.mjs','scripts/check-effective-geographic-regression.mjs',
+  'scripts/selected-reference-metadata.mjs','src/reference-metadata.js','src/native-grid.js','src/native-sequence.js','src/ownership-codec.js'];
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const polygon=(x,y=0)=>({type:'Polygon',coordinates:[[[x,y],[x+.2,y],[x+.2,y+.2],[x,y+.2],[x,y]]]});
 const feature=(id,x)=>({type:'Feature',id,properties:{id,parent_id:'parent'},geometry:polygon(x)});
@@ -98,7 +100,7 @@ async function trustedFixture(t,{incompleteNative=false,sourcePaths,sourceOverri
  save('accepted/routes.json',[...new Set([...inventory.map(p=>p.path),...paths])].sort().map(name=>({path:name,tree:git('ls-tree','-z',selected,'--',name).toString()})));const accepted=commit();
  const rootRow={id:'fixture',accepted_head:accepted,selected_commit:selected,selection_sha256:valueSha(selection),execution_commit:one,execution_code_sha256:valueSha(execution_code),runtime_sha256:valueSha(runtime),facts:pin('accepted/facts.json'),certificate:{...pin('accepted/certificate.json.gz'),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)},publication:pin('accepted/publication.json'),custody:pin('accepted/custody.json'),routes:pin('accepted/routes.json')};
  save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[rootRow]});commit();
- const api=await import(pathToFileURL(path.join(root,MODULE))),native=await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs')));
+ const api=checkpointTestAPI(t,await import(pathToFileURL(path.join(root,MODULE)))),native=await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs')));
  const reader=new native.ImmutableReader(root,selected);
  return {api,native,reader,selected,root,git,save,commit,pin,ledger,patch,sidecar,envelope,selection,rootRow,inherited};
 }
@@ -257,9 +259,9 @@ async function acceptedProducts(t,{sourcePaths,actualProducer=false,nativeOnly=f
   if(f.inherited)f.save(f.inherited.path,{reviewed:'successor configuration'});
   const trusted=f.commit();
   const reader=new f.native.ImmutableReader(f.root,trusted);
-  const {state}=f.api.qualifyCheckpoint({reader});
+  const {state}=(await f.api.qualifyCheckpoint({reader}));
   const afterReader=new f.native.ImmutableReader(f.root,trusted,{invocation:reader.invocation});
-  const transition=f.api.qualifyTransition({state,reader:afterReader});
+  const transition=(await f.api.qualifyTransition({state,reader:afterReader}));
   const census=f.api.checkpointRouteCensus({transition});
   const certificate=transition.candidate.certificate;
   const inventory=r=>[...r.inventory.values()].sort((a,b)=>(a.commit+':'+a.path).localeCompare(b.commit+':'+b.path));
@@ -272,8 +274,8 @@ async function acceptedProducts(t,{sourcePaths,actualProducer=false,nativeOnly=f
       .map(name=>({...f.pin(name,trusted),whole_body_consumed:true})),
     actual_reader_inventories:{baseline:inventory(reader),candidate:inventory(afterReader)},
     baseline_commit:trusted,candidate_commit:trusted,baseline_selection:state.selection,candidate_selection:state.selection,
-    candidate_bindings:{ledger_sha256:valueSha(state.ledger),registry_sha256:valueSha(state.registry),
-      patch_sha256:valueSha(state.patch),manifest_sha256:valueSha(state.manifest)},
+    candidate_bindings:{ledger_sha256:valueSha(nativeLiteral(state.ledger)),registry_sha256:valueSha(state.registry),
+      patch_sha256:valueSha(nativeLiteral(state.patch)),manifest_sha256:valueSha(state.manifest)},
     native_result_sha256:valueSha(native),candidate_code_executed:false,executing_policy:f.api.checkpointExecutingPolicy({transition})};
   const products=structuredClone({facts,certificate,census,native});
   f.api.releaseCheckpoint(state);
@@ -355,7 +357,7 @@ test('accepted derived inventory recovers inherited executed roles from the orig
  assert.notEqual(pin.git_blob_oid,f.pin(f.inherited.path,f.trusted).git_blob_oid);
  assert(!f.products.facts.execution_code.some(p=>p.path===f.inherited.path));
  const candidate=new f.native.ImmutableReader(f.root,f.trusted,{invocation:a.reader.invocation});
- const transition=f.api.qualifyTransition({state:result.state,reader:candidate});assert.equal(transition.available,true);
+ const transition=(await f.api.qualifyTransition({state:result.state,reader:candidate}));assert.equal(transition.available,true);
  assert.equal(f.api.checkpointRouteCensus({transition}).routes.find(p=>p.path===f.inherited.path).tree,
   f.git('ls-tree','-z',f.inherited.commit,'--',f.inherited.path).toString());
  fs.appendFileSync(path.join(f.root,'src/native-grid.js'),'\n// Uncommitted actual execution drift.\n');
@@ -414,7 +416,7 @@ test('accepted original archive admits a private successor without a catalogue r
   assert.deepEqual(f.api.projectNativeRows({state:result.state,rows:[1]}).rows,[{y:1,runs:[[0,1,2]]}]);
   assert.equal(f.api.projectSourceFeatures({state:result.state,ids:['A']}).features[0].id,'A');
   const candidateReader=new f.native.ImmutableReader(f.root,f.trusted,{invocation:a.reader.invocation});
-  const transition=f.api.qualifyTransition({state:result.state,reader:candidateReader});assert.equal(transition.available,true);
+  const transition=(await f.api.qualifyTransition({state:result.state,reader:candidateReader}));assert.equal(transition.available,true);
   assert.deepEqual(f.api.checkpointRouteCensus({transition}).routes,f.products.census.routes);
   f.api.releaseCheckpoint(result.state);f.transport.releaseAcceptedCheckpoint(a.handle);
 });
@@ -468,14 +470,16 @@ test('accepted admission authenticates committed helper edits without repinning 
   assert.deepEqual(fs.readFileSync(path.join(f.root,CATALOGUE)),catalogue);
   f.transport.releaseAcceptedCheckpoint(a.handle);
 });
-test('actual executing code remains necessary at accepted admission',async t=>{
+for(const method of ['scripts/evidence-policy.mjs','scripts/native-patch-store.mjs','scripts/native-word-store.mjs','src/native-sequence.js'])
+test('actual executing code remains necessary at accepted admission: '+method,async t=>{
   const f=await acceptedProducts(t);
-  fs.appendFileSync(path.join(f.root,'scripts/evidence-policy.mjs'),'\n// uncommitted executable drift\n');
+  fs.appendFileSync(path.join(f.root,method),'\n// uncommitted executable drift\n');
   const b=await acquire(f);await assert.rejects(qualify(f,b),/changed executing checkpoint method/);
+  f.transport.releaseAcceptedCheckpoint(b.handle);
 });
 test('census retains complete unchanged/absent routes and rejects public transition wrappers',async t=>{
   const f=await acceptedProducts(t),a=await acquire(f),{state}=await qualify(f,a);
-  const transition=f.api.qualifyTransition({state,reader:a.reader});
+  const transition=(await f.api.qualifyTransition({state,reader:a.reader}));
   assert.throws(()=>f.api.checkpointRouteCensus({transition:{...transition}}),/private qualified selected transition/);
   const census=f.api.checkpointRouteCensus({transition});
   assert(census.routes.some(p=>p.path==='data/native/runs.bin.gz'));assert(census.routes.some(p=>p.path==='data/source.json'));
@@ -539,7 +543,7 @@ async function installSeed(f,{failedOperating=false,omitRoute=false,omitInherite
 }
 test('one trusted-main derived seed reuses the same admission with truthful distinct lineage',async t=>{
   const f=await acceptedProducts(t),a=await installSeed(f);
-  const q=f.api.qualifyCheckpoint(a);assert.equal(q.available,true);
+  const q=(await f.api.qualifyCheckpoint(a));assert.equal(q.available,true);
   assert.equal(q.state.accepted_execution.kind,'trusted-main-derived-selected-checkpoint-v1');
   assert.equal(q.state.accepted_execution.source,undefined);
   assert.equal(q.state.accepted_execution.checkpoint_id,'fixture-derived-seed');
@@ -547,9 +551,9 @@ test('one trusted-main derived seed reuses the same admission with truthful dist
 });
 test('trusted-main seed still requires original successful terminal custody and complete routes',async t=>{
   const f=await acceptedProducts(t);
-  const a=await installSeed(f,{failedOperating:true});assert.throws(()=>f.api.qualifyCheckpoint(a),/terminal custody/);
-  const b=await installSeed(f,{omitRoute:true});assert.throws(()=>f.api.qualifyCheckpoint(b),/route census/);
-  const c=await installSeed(f,{omitInherited:true});assert.throws(()=>f.api.qualifyCheckpoint(c),/complete inherited route census/);
+  const a=await installSeed(f,{failedOperating:true});await assert.rejects(async()=>(await f.api.qualifyCheckpoint(a)),/terminal custody/);
+  const b=await installSeed(f,{omitRoute:true});await assert.rejects(async()=>(await f.api.qualifyCheckpoint(b)),/route census/);
+  const c=await installSeed(f,{omitInherited:true});await assert.rejects(async()=>(await f.api.qualifyCheckpoint(c)),/complete inherited route census/);
 });
 
 
@@ -591,8 +595,8 @@ test('older accepted selector advances to actual baseline with zero cold reconst
     assert.equal(q.state.accepted_execution.historical_selected_commit,f.trusted);
     assert.equal(sourceReads.includes('data/source.json'),false);
     assert.equal(sourceReads.includes('data/native/runs.bin.gz'),false);
-    assert.equal(q.state.patch.rows[0].runs[0][1]-q.state.patch.rows[0].runs[0][0],1);
-    const transition=f.api.qualifyTransition({state:q.state,reader:a.reader});
+    assert.equal(nativeLiteral(q.state.patch.rows)[0].runs[0][1]-nativeLiteral(q.state.patch.rows)[0].runs[0][0],1);
+    const transition=(await f.api.qualifyTransition({state:q.state,reader:a.reader}));
     assert.equal(transition.available,true);assert.equal(transition.baseline.selected_commit,baseline);
     assert.deepEqual(transition.changedNativeRows,[]);
     const census=f.api.checkpointRouteCensus({transition});
@@ -607,7 +611,7 @@ test('intermediate newly consumed routes cannot change before the next candidate
   // ordinary route only. Its old immutable pin alone must not hide this change.
   successorSelector(f,'candidate/sidecar.json');
   f.save('successor/sidecar.json',{changed:true});const candidate=f.commit();
-  const result=f.api.qualifyTransition({state:q.state,reader:currentReader(f,a,candidate)});
+  const result=(await f.api.qualifyTransition({state:q.state,reader:currentReader(f,a,candidate)}));
   assert.equal(result.available,false);assert.match(result.reason,/route changed/);
   f.api.releaseCheckpoint(q.state);f.transport.releaseAcceptedCheckpoint(a.handle);
 });
@@ -644,12 +648,12 @@ test('actual native-only joint products survive Python retention and fresh accep
  assert.equal(result.state.accepted_execution.kind,'accepted-selected-checkpoint-artifact-v1');
  const native=result.state.additions.find(row=>row.representation==='native-cells');
  assert.equal(native.target_id,'B');assert.equal(Object.hasOwn(native,'geometry'),false);
- assert.deepEqual(native.native_rows,[{y:2,runs:[[2,3,2]]}]);
+ assert.deepEqual(nativeLiteral(native.native_rows),[{y:2,runs:[[2,3,2]]}]);
  assert.deepEqual(result.state.certificate,f.products.certificate);
  assert.deepEqual(result.state.certificate.entries.find(row=>row[0]==='B')[9],[[1,0,10,20]]);
- assert.deepEqual(result.state.patch.rows,[{y:1,runs:[[2,3,1]]},{y:2,runs:[[2,3,2]]}]);
+ assert.deepEqual(nativeLiteral(result.state.patch.rows),[{y:1,runs:[[2,3,1]]},{y:2,runs:[[2,3,2]]}]);
  const reader=new f.native.ImmutableReader(f.root,f.trusted,{invocation:a.reader.invocation});
- const transition=f.api.qualifyTransition({state:result.state,reader});
+ const transition=(await f.api.qualifyTransition({state:result.state,reader}));
  assert.equal(transition.available,true);assert.deepEqual(transition.changedNativeRows,[]);
  f.api.releaseCheckpoint(result.state);f.transport.releaseAcceptedCheckpoint(a.handle);
 });
@@ -660,7 +664,7 @@ test('accepted derived custody reuses an unchanged physical override after its i
  const reader=new f.native.ImmutableReader(f.root,candidate,{invocation:a.reader.invocation});
  const qualified=await f.api.qualifyAcceptedCheckpoint({reader,acceptedHandle:a.handle});
  assert.equal(qualified.available,true);
- const transition=f.api.qualifyTransition({state:qualified.state,reader});assert.equal(transition.available,true);
+ const transition=(await f.api.qualifyTransition({state:qualified.state,reader}));assert.equal(transition.available,true);
  assert.deepEqual(transition.changedNativeRows,[]);
  const census=f.api.checkpointRouteCensus({transition});
  assert.equal(census.routes.find(p=>p.path==='data/source.json').tree,f.git('ls-tree','-z',candidate,'--','data/source.json').toString());
@@ -711,9 +715,9 @@ async function referenceRefusalFixture(t){
  const project=()=>{write('inputs/projection.json',projection);const raw=fs.readFileSync(path.join(repo,'inputs/projection.json'));
   selection.reference_projection={path:'inputs/projection.json',bytes:raw.length,sha256:sha(raw)};
   write('data/ownership-selection.json',selection);return commit();};
- const api=await import(pathToFileURL(path.join(repo,MODULE))),native=await import(pathToFileURL(path.join(repo,'scripts/check-effective-geographic-regression.mjs')));
- const reader=new native.ImmutableReader(repo,seed.selected),qualified=api.qualifyCheckpoint({reader});
- assert.equal(qualified.available,true);t.after(()=>api.releaseCheckpoint(qualified.state));
+ const api=checkpointTestAPI(t,await import(pathToFileURL(path.join(repo,MODULE)))),native=await import(pathToFileURL(path.join(repo,'scripts/check-effective-geographic-regression.mjs')));
+ const reader=new native.ImmutableReader(repo,seed.selected),qualified=(await api.qualifyCheckpoint({reader}));
+ assert.equal(qualified.available,true);
  assert.notStrictEqual(reader,seed.reader);assert.notStrictEqual(qualified.state,seed.state);
  t.after(()=>{assert.equal(seed.git('rev-parse','HEAD'),seed.candidate);assert.equal(seed.git('status','--porcelain'),'');});
  return {repo,git,write,commit,pin,projection,selection,project,api,native,reader,state:qualified.state,
@@ -733,27 +737,27 @@ for (const [name,mutate,reason] of [
 ]) test('checkpoint reference application refuses '+name,async t=>{
  const f=await referenceRefusalFixture(t),candidate=mutate(f);
  const reader=new f.native.ImmutableReader(f.repo,candidate,{invocation:f.reader.invocation});
- assert.throws(()=>f.api.qualifyTransition({state:f.state,reader}),reason);
+ await assert.rejects(async()=>(await f.api.qualifyTransition({state:f.state,reader})),reason);
 });
 
 test('successor checkpoint binds current metadata routes and keeps unchanged projection reuse local',async t=>{
  const f=await referenceCheckpointFixture(t),reader=new f.native.ImmutableReader(f.repo,f.candidate,{invocation:f.reader.invocation});
- const first=f.api.qualifyTransition({state:f.state,reader});assert.equal(first.available,true);
+ const first=(await f.api.qualifyTransition({state:f.state,reader}));assert.equal(first.available,true);
  const calls=[],nextReader=new f.native.ImmutableReader(f.repo,f.candidate,{invocation:f.reader.invocation});
  const read=nextReader.read.bind(nextReader);nextReader.read=(name,options)=>{calls.push(name);return read(name,options);};
- const next=f.api.qualifyTransition({state:first.candidate,reader:nextReader});assert.equal(next.available,true);
+ const next=(await f.api.qualifyTransition({state:first.candidate,reader:nextReader}));assert.equal(next.available,true);
  assert.deepEqual(next.candidate.certificate,first.candidate.certificate);
  assert(!calls.includes('inputs/projection.json'));
  f.write('data/geography/fixture.json',{type:'FeatureCollection',features:f.features});const changed=f.commit();
- const refused=f.api.qualifyTransition({state:first.candidate,reader:new f.native.ImmutableReader(f.repo,changed,{invocation:f.reader.invocation})});
+ const refused=(await f.api.qualifyTransition({state:first.candidate,reader:new f.native.ImmutableReader(f.repo,changed,{invocation:f.reader.invocation})}));
  assert.equal(refused.available,false);assert.match(refused.reason,/route changed/);
 });
 
 
 test('successor checkpoint refuses a changed newly introduced projection route',async t=>{
  const f=await referenceCheckpointFixture(t),reader=new f.native.ImmutableReader(f.repo,f.candidate,{invocation:f.reader.invocation});
- const first=f.api.qualifyTransition({state:f.state,reader});assert.equal(first.available,true);
+ const first=(await f.api.qualifyTransition({state:f.state,reader}));assert.equal(first.available,true);
  f.write('inputs/projection.json',{forged:true});const changed=f.commit();
- const refused=f.api.qualifyTransition({state:first.candidate,reader:new f.native.ImmutableReader(f.repo,changed,{invocation:f.reader.invocation})});
+ const refused=(await f.api.qualifyTransition({state:first.candidate,reader:new f.native.ImmutableReader(f.repo,changed,{invocation:f.reader.invocation})}));
  assert.equal(refused.available,false);assert.match(refused.reason,/route changed/);
 });

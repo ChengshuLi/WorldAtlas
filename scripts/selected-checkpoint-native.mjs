@@ -1,17 +1,18 @@
+import {isNativeSequence,nativeRowAt} from '../src/native-sequence.js';
 // Joint-only native checkpoint consumer. Keep the cold/package import closure literal.
-import {compareIntervals,newVisibleRepairCandidates,repairVisibilityWitnesses} from './check-effective-geographic-regression.mjs';
+import {compareIntervals,newVisibleRepairCandidates,repairVisibilityWitnesses,visibilityDigest} from './check-effective-geographic-regression.mjs';
 const demand=(v,m)=>{if(!v)throw Error(m);};
-const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+const same=(a,b)=>visibilityDigest(a)===visibilityDigest(b);
 
 // Numerical consumers of complete row projections. These helpers do not issue
 // selection/checkpoint authority: the trusted shared reader must authenticate
 // each vintage, scope, owner/parent binding and complete native input custody.
 function effectiveNativeRows(rows,size,owners) {
   demand(Number.isSafeInteger(size)&&size>0&&Number.isSafeInteger(size*size),'Invalid effective native domain');
-  demand(Array.isArray(rows)&&Array.isArray(owners)&&owners.length>0,'Missing complete effective native projections');
+  demand(isNativeSequence(rows)&&Array.isArray(owners)&&owners.length>0,'Missing complete effective native projections');
   const indexed=new Map();let previous=-1;
   for(const row of rows){
-    demand(row&&Number.isSafeInteger(row.y)&&row.y>previous&&row.y<size&&Array.isArray(row.runs),'Duplicate/foreign/unordered effective native row');
+    demand(row&&Number.isSafeInteger(row.y)&&row.y>previous&&row.y<size&&isNativeSequence(row.runs),'Duplicate/foreign/unordered effective native row');
     previous=row.y;let end=0;
     for(const run of row.runs){
       demand(Array.isArray(run)&&run.length===3&&run.every(Number.isSafeInteger)&&run[0]>=end&&run[1]>run[0]&&run[1]<=size&&run[2]>0
@@ -30,7 +31,7 @@ export function applyNativeAdditiveRows(baseRows,patch,{size,owners}) {
   const additions=effectiveNativeRows(patch==null?[]:patch.rows,size,owners);
   const rows=[];
   for(const [y,row]of base){
-    const runs=[...row.runs.map(run=>[...run]),...(additions.get(y)?.runs??[]).map(run=>[...run])].sort((a,b)=>a[0]-b[0]);
+    const runs=[...Array.from(row.runs,run=>[...run]),...Array.from(additions.get(y)?.runs??[],run=>[...run])].sort((a,b)=>a[0]-b[0]);
     let end=0;
     for(const run of runs){demand(run[0]>=end,'Selected additive delta overlaps preexisting assigned native cells');end=run[1];}
     rows.push({y,runs});
@@ -46,7 +47,8 @@ export function deriveEffectiveNativeRowDelta(beforeRows,afterRows,{size,ownersB
     if(!old||!next||!same(old.runs,next.runs))return true;
     // Stable indices are independently checked by the acquisition boundary;
     // do not let this pure helper hide an ID change behind an equal run count.
-    return old.runs.some(run=>ownersBefore[run[2]-1].id!==ownersAfter[run[2]-1].id);
+    for(const run of old.runs)if(ownersBefore[run[2]-1].id!==ownersAfter[run[2]-1].id)return true;
+    return false;
   });
 }
 
@@ -67,15 +69,15 @@ export function compareEffectiveNativeRows(beforeRows,afterRows,{size,ownersBefo
 export async function compareNativeAdditiveIntervals(runs,{y,before,after,size,owners}) {
   effectiveNativeRows([{y,runs:before}],size,owners);
   effectiveNativeRows([{y,runs:after}],size,owners);
-  let i=0,j=0,end=0;
-  for await(const run of runs){
+  const old=before[Symbol.iterator](),next=after[Symbol.iterator]();let a=old.next(),b=next.next(),end=0;
+  try{for await(const run of runs){
     demand(Array.isArray(run)&&run.length===3&&run.every(Number.isSafeInteger)&&run[0]>=end&&run[1]>run[0]
       &&run[1]<=size&&run[2]>0&&owners[run[2]-1],'Invalid complete effective native interval/owner');end=run[1];
-    while(i<before.length&&before[i][1]<=run[0])i++;
-    while(j<after.length&&after[j][1]<=run[0])j++;
-    demand(!(before[i]&&before[i][0]<run[1])&&!(after[j]&&after[j][0]<run[1]),
+    while(!a.done&&a.value[1]<=run[0])a=old.next();
+    while(!b.done&&b.value[1]<=run[0])b=next.next();
+    demand((a.done||a.value[0]>=run[1])&&(b.done||b.value[0]>=run[1]),
       'Selected additive delta overlaps preexisting assigned native cells');
-  }
+  }}finally{old.return?.();next.return?.();}
   const intervals=compareIntervals(before,after,{row:y,ownersBefore:owners,ownersAfter:owners});
   return {checked_rows:1,lost_or_reassigned_cells:intervals.reduce((n,loss)=>n+loss.end-loss.start,0),intervals};
 }
@@ -102,8 +104,8 @@ export async function compareSelectedCheckpointNative({transition}) {
   demand(same(baseline.baseSelection,candidate.baseSelection)&&baseline.selection.sha256===candidate.selection.sha256,
     'Checkpoint original native base/manifest binding differs');
   const owners=oldEntries.map(row=>({id:row[0],index:row[1],province_id:row[2],province_index:row[3]}));
-  const oldPatch=effectiveNativeRows(baseline.patch?.rows??[],size,owners);
-  const newPatch=effectiveNativeRows(candidate.patch?.rows??[],size,owners);
+  const oldPatch=baseline.patch?.rows??[];
+  const newPatch=candidate.patch?.rows??[];
   const result={checked_rows:0,lost_or_reassigned_cells:0,intervals:[]};
   const visibilityWitnesses=visibilityCandidates.map(()=>null);
   // Both vintages share the same immutable base and stable owners. Once we
@@ -111,7 +113,7 @@ export async function compareSelectedCheckpointNative({transition}) {
   // (B + old) \ (B + new). Comparing patch intervals gives exactly the same
   // loss segmentation and visibility witnesses without ever expanding B.
   const projection=await visitNativeIntervals({state:candidate,rows:expected,visit:async ({y,runs})=>{
-    const old=oldPatch.get(y)?.runs??[],next=newPatch.get(y)?.runs??[];
+    const old=nativeRowAt(oldPatch,y)?.runs??[],next=nativeRowAt(newPatch,y)?.runs??[];
     const part=await compareNativeAdditiveIntervals(runs,{y,before:old,after:next,size,owners});
     result.checked_rows++;
     result.lost_or_reassigned_cells+=part.lost_or_reassigned_cells;
@@ -127,11 +129,11 @@ export async function compareSelectedCheckpointNative({transition}) {
       for(let i=0;i<visibilityCandidates.length;i++){
         const item=visibilityCandidates[i];
         if(!visibilityWitnesses[i]&&(item.representation!=='native-cells'
-          ||item.native_rows[0].y<=rows.at(-1)&&item.native_rows.at(-1).y>=rows[0]))pendingIndices.push(i);
+          ||item.native_rows.at(0).y<=rows.at(-1)&&item.native_rows.at(-1).y>=rows[0]))pendingIndices.push(i);
       }
       if(pendingIndices.length){
         const witnesses=repairVisibilityWitnesses({candidates:pendingIndices.map(i=>visibilityCandidates[i]),size,latitudes,
-          beforeRows:rows.map(y=>({y,runs:oldPatch.get(y)?.runs??[]})),afterRows:rows.map(y=>({y,runs:newPatch.get(y)?.runs??[]}))});
+          beforeRows:rows.map(y=>({y,runs:nativeRowAt(oldPatch,y)?.runs??[]})),afterRows:rows.map(y=>({y,runs:nativeRowAt(newPatch,y)?.runs??[]}))});
         for(let n=0;n<pendingIndices.length;n++)visibilityWitnesses[pendingIndices[n]]=witnesses[n];
       }
     }

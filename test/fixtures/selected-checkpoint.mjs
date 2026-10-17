@@ -1,3 +1,4 @@
+import {checkpointTestAPI} from '../helpers/native-literal.mjs';
 import assert from 'node:assert/strict';
 import {after} from 'node:test';
 import fs from 'node:fs';
@@ -14,8 +15,8 @@ import {deriveCoordinateDelta} from '../../coordination/engineering/selected-geo
 const MODULE='coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const PROGRAMME='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
 const CATALOGUE='coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json';
-const CODE=[MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/native-word-store.mjs','scripts/check-effective-geographic-regression.mjs',
-  'scripts/selected-reference-metadata.mjs','src/reference-metadata.js','src/native-grid.js','src/ownership-codec.js'];
+const CODE=[MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/native-word-store.mjs','scripts/native-patch-store.mjs','scripts/check-effective-geographic-regression.mjs',
+  'scripts/selected-reference-metadata.mjs','src/reference-metadata.js','src/native-grid.js','src/native-sequence.js','src/ownership-codec.js'];
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const polygon=(x,y=0)=>({type:'Polygon',coordinates:[[[x,y],[x+.2,y],[x+.2,y+.2],[x,y+.2],[x,y]]]});
 const feature=(id,x)=>({type:'Feature',id,properties:{id,parent_id:'parent'},geometry:polygon(x)});
@@ -129,7 +130,7 @@ async function trustedFixture(t,{incompleteNative=false,codeRoutes=false,nativeA
  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
  fs.cpSync(seed.root,root,{recursive:true});
  const data=structuredClone(seed.data);
- const api=await import(pathToFileURL(path.join(root,MODULE))),native=await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs')));
+ const api=checkpointTestAPI(t,await import(pathToFileURL(path.join(root,MODULE)))),native=await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs')));
  const reader=new native.ImmutableReader(root,data.selected);
  return {...data,...fixtureRepository(root),api,native,reader};
 }
@@ -249,7 +250,7 @@ export async function referenceCheckpointFixture(t) {
   logical_asset_map:assets,runtime_envelope:put('accepted/envelope.json',envelope)};
  const side=put('accepted/sidecar.json',sidecar),selection={...baseSelection,additive_release:{path:side.path,bytes:side.bytes,sha256:side.sha256}};
  f.write('data/ownership-selection.json',selection);const selected=f.commit();
- const api=await import(pathToFileURL(path.join(f.repo,MODULE))),native=await import(pathToFileURL(path.join(f.repo,'scripts/check-effective-geographic-regression.mjs')));
+ const api=checkpointTestAPI(t,await import(pathToFileURL(path.join(f.repo,MODULE)))),native=await import(pathToFileURL(path.join(f.repo,'scripts/check-effective-geographic-regression.mjs')));
  const neighbors=await import(pathToFileURL(path.join(f.repo,CODE[1]))),reader=new native.ImmutableReader(f.repo,selected);
  const snapshot=native.loadBaseSelection(reader),resolver=native.selectedGeometrySourceAlias(snapshot);
  const certificate=neighbors.joinSelectedCoordinateCertificate(resolver,[neighbors.selectedCoordinateShard(resolver,resolver.paths)]);
@@ -270,7 +271,7 @@ export async function referenceCheckpointFixture(t) {
   execution_code_sha256:valueSha(execution_code),runtime_sha256:valueSha(runtime),facts:factsPin,
   certificate:{...certificatePin,decoded_bytes:valueBytes(certificate).length,decoded_sha256:valueSha(certificate)},publication:outputPin,custody,routes};
  put(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[rootRow]});
- const qualified=api.qualifyCheckpoint({reader});assert.equal(qualified.available,true);t.after(()=>api.releaseCheckpoint(qualified.state));
+ const qualified=(await api.qualifyCheckpoint({reader}));assert.equal(qualified.available,true);
  for(const name of ['data/hierarchy.json','data/geography/fixture.json','data/geographic-releases/current-manifest.json','data/geographic-releases/releases.json.gz'])f.write(name,raw(current,name));
  const currentReference=f.projection.reference;
  const currentEffective={...currentReference,footprints_sha256:valueSha({domain:'worldatlas-effective-native-footprints:v2',

@@ -1,0 +1,9 @@
+# Bounded selected JSON integration (work in progress)
+
+The exact six-file parser donor is 7bd9f145923826df056b4e4cb29ca5fc5a58a8f2, recovered in f0072ee0. This integration reuses that parser and its authenticated disk store for selected cumulative patches and ledger native rows. The same native validator and canonical hash logic consume repeatable browser-safe sequences. No Node storage code enters package `src`.
+
+The stream producer lifecycle fix was contributed by the CI recovery worker and independently reviewed by the coordinating root. Donor v2 SHA-256: 8fee61131fa80308e4e850fa6433674495b1c9dfd28505d06056cb515552ff70. The contributor reproduced the original intermittent abort on repetition 7, supplied a deterministic negative control, and ran 40 fixed process suites (360 assertions); the added late physical failure control also passes. Local integrated tests preserve full EOF authentication and join producer cleanup after early consumer exit.
+
+Evidence so far: original donor 19/19; native canonical/consumer 32/32; sequence 4/4 including 500,000 intervals under a 48 MiB V8 heap; execution-byte mutation refusal 4/4. Combined checkpoint suite initially 121/128, with the seven remaining failures identified as duplicate test cleanup hooks and corrected separately. Final full integrated evidence remains required. A selected compressed-ledger control checks malformed late JSON, wrong decoded hash, exact accepted values, unchanged baseline, producer cleanup and scratch release.
+
+This is a recoverable implementation checkpoint, not completion of issue 2396. Component metadata and geometry, root scope/source envelopes, and appended source-proof bodies still require measured retention boundaries. Input streaming does not imply constant total memory; largest component/scalar and requested output size must be reported separately. Genuine package build, browser closure, geography and expanded consumer controls remain mandatory.

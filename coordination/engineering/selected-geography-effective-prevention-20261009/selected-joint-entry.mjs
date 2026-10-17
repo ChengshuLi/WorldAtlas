@@ -11,8 +11,8 @@ const ROOT = fileURLToPath(new URL('../../../', import.meta.url));
 const P = 'coordination/engineering/selected-geography-effective-prevention-20261009/';
 export const JOINT_CODE = Object.freeze([
   'scripts/run-geographic-check.py',
-  'scripts/native-word-store.mjs', 'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs',
-  'src/native-grid.js', 'src/ownership-codec.js',
+  'scripts/native-word-store.mjs','scripts/native-patch-store.mjs', 'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs',
+  'src/native-grid.js','src/native-sequence.js', 'src/ownership-codec.js',
   P + 'selected-neighbor-prevention.mjs', P + 'selected-checkpoint.mjs', P + 'selected-joint-entry.mjs',
   'scripts/accepted-selected-checkpoint.mjs', 'scripts/check-handoff-scope.mjs',
   'scripts/evidence-policy.mjs', 'scripts/evidence-quality.mjs', 'scripts/geographic-report-artifact.mjs',
@@ -139,12 +139,12 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
       qualified = await checkpoint.qualifyAcceptedCheckpoint({reader:beforeReader, acceptedHandle});
     } else {
       phaseComplete('checkpoint-acquisition');
-      qualified = checkpoint.qualifyCheckpoint({reader:beforeReader});
+      qualified = await checkpoint.qualifyCheckpoint({reader:beforeReader});
     }
     phaseComplete('baseline-qualification');
     if (!qualified.available) return coldDecision(qualified);
     state = qualified.state;
-    const transition = checkpoint.qualifyTransition({state, reader:afterReader});
+    const transition = await checkpoint.qualifyTransition({state, reader:afterReader});
     phaseComplete('candidate-qualification');
     if (!transition.available) return coldDecision(transition);
     checkpoint.authenticateTransition({transition});

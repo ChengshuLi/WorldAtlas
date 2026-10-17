@@ -1,3 +1,4 @@
+import {checkpointTestAPI} from './helpers/native-literal.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
@@ -24,7 +25,7 @@ const compare=(before,after,rows,extra={})=>compareEffectiveNativeRows(before,af
 const noLoss=checked_rows=>({checked_rows,lost_or_reassigned_cells:0,intervals:[]});
 
 // The expected delta is derived from concrete row bodies, never aggregate counts.
-test('synthetic exact unchanged complete rows yield zero numerical delta',()=>{
+test('synthetic exact unchanged complete rows yield zero numerical delta',async ()=>{
  const before=[row(0),row(3,[[1,4,1],[8,10,2]]),row(15,[[0,16,1]])];
  const after=clone(before);
  assert.deepEqual(delta(before,after),[]);
@@ -33,7 +34,7 @@ test('synthetic exact unchanged complete rows yield zero numerical delta',()=>{
  assert.deepEqual(after,before);
 });
 
-test('synthetic append derives only actual new rows and preserves prior owners',()=>{
+test('synthetic append derives only actual new rows and preserves prior owners',async ()=>{
  const before=[row(2,[[1,3,1]]),row(4,[[8,9,2]])];
  const after=[...clone(before),row(7,[[5,6,1]])];
  assert.deepEqual(delta(before,after),[7]);
@@ -42,7 +43,7 @@ test('synthetic append derives only actual new rows and preserves prior owners',
  assert.deepEqual(compare([row(7)],[after[2]],[7]),noLoss(1));
 });
 
-test('synthetic same-count reassignment and mutation cannot hide behind counts',()=>{
+test('synthetic same-count reassignment and mutation cannot hide behind counts',async ()=>{
  const before=[row(3,[[1,4,1]]),row(9,[[7,9,2]])];
  const after=[row(3,[[1,4,2]]),row(9,[[8,10,2]])];
  assert.deepEqual(delta(before,after),[3,9]);
@@ -52,7 +53,7 @@ test('synthetic same-count reassignment and mutation cannot hide behind counts',
    {row:9,start:7,end:8,previous_owner:'beta',candidate_owner:null}]});
 });
 
-test('synthetic removals require symmetric row delta and explicit empty projection',()=>{
+test('synthetic removals require symmetric row delta and explicit empty projection',async ()=>{
  const before=[row(2,[[0,3,1]]),row(8,[[10,12,2]])];
  const after=[row(2,[[0,2,1]])];
  assert.deepEqual(delta(before,after),[2,8]);
@@ -63,7 +64,7 @@ test('synthetic removals require symmetric row delta and explicit empty projecti
    {row:8,start:10,end:12,previous_owner:'beta',candidate_owner:null}]});
 });
 
-test('synthetic absent versus explicit empty row remains a presence delta',()=>{
+test('synthetic absent versus explicit empty row remains a presence delta',async ()=>{
  assert.deepEqual(delta([], [row(0)]),[0]);
  assert.deepEqual(delta([row(0)], []),[0]);
  assert.deepEqual(delta([row(0)], [row(0)]),[]);
@@ -72,7 +73,7 @@ test('synthetic absent versus explicit empty row remains a presence delta',()=>{
  assert.throws(()=>compare([],[row(0)],[0]));
 });
 
-test('synthetic split intervals preserve owners while exact content delta remains visible',()=>{
+test('synthetic split intervals preserve owners while exact content delta remains visible',async ()=>{
  const before=[row(5,[[0,6,1]])],after=[row(5,[[0,2,1],[2,6,1]])];
  assert.deepEqual(delta(before,after),[5]);
  assert.deepEqual(compare(before,after,[5]),noLoss(1));
@@ -84,7 +85,7 @@ test('synthetic split intervals preserve owners while exact content delta remain
    {row:5,start:5,end:6,previous_owner:'alpha',candidate_owner:null}]});
 });
 
-test('synthetic repeated, unordered and foreign rows are rejected on both sides',()=>{
+test('synthetic repeated, unordered and foreign rows are rejected on both sides',async ()=>{
  const invalid=[null,{},[row(1),row(1)],[row(2),row(1)],
   [row(-1)],[row(16)],[row(1.5)],[row(Number.NaN)],
   [{y:1}],[{y:1,runs:null}]];
@@ -96,7 +97,7 @@ test('synthetic repeated, unordered and foreign rows are rejected on both sides'
  }
 });
 
-test('synthetic complete interval validation rejects malformed or foreign ownership',()=>{
+test('synthetic complete interval validation rejects malformed or foreign ownership',async ()=>{
  const invalidRuns=[null,{},[[0,1]],[[0,1,1,4]],[[0,0,1]],[[2,1,1]],
   [[-1,1,1]],[[0,17,1]],[[0,1.5,1]],[[0,1,0]],[[0,1,-1]],
   [[0,1,3]],[[0,1,1.5]],[[0,1,Number.NaN]],
@@ -114,7 +115,7 @@ test('synthetic complete interval validation rejects malformed or foreign owners
  }
 });
 
-test('synthetic requested scope rejects omission, clipping, unknown IDs and duplicate rows',()=>{
+test('synthetic requested scope rejects omission, clipping, unknown IDs and duplicate rows',async ()=>{
  const before=[row(1,[[0,2,1]]),row(3,[[4,5,2]])],after=clone(before);
  for(const rows of [undefined,null,{},[],[1],[3],[1,2,3],[3,1],[1,1,3],[-1,1,3],[1,3,16]]){
   assert.throws(()=>compare(before,after,rows));
@@ -124,7 +125,7 @@ test('synthetic requested scope rejects omission, clipping, unknown IDs and dupl
  assert.deepEqual(compare(before,after,[1,3]),noLoss(2));
 });
 
-test('synthetic owner identity changes cannot be classified as unchanged',()=>{
+test('synthetic owner identity changes cannot be classified as unchanged',async ()=>{
  const before=[row(1,[[0,2,1]])],after=clone(before);
  const changedOwners=[{...owners[0],id:'replacement'},owners[1]];
  // A helper may reject roster drift or conservatively include the row.
@@ -139,7 +140,7 @@ test('synthetic owner identity changes cannot be classified as unchanged',()=>{
 });
 
 
-test('synthetic missing owner rosters and owner identities fail complete projections',()=>{
+test('synthetic missing owner rosters and owner identities fail complete projections',async ()=>{
  const rows=[row(1,[[0,2,1]])];
  for(const roster of [null,{},[],[null],[{}],[{id:''}],[{id:7}]]){
   for(const key of ['ownersBefore','ownersAfter']){
@@ -149,7 +150,7 @@ test('synthetic missing owner rosters and owner identities fail complete project
  }
 });
 
-test('synthetic exhaustive three-cell oracle independently checks 729 conservation pairs',()=>{
+test('synthetic exhaustive three-cell oracle independently checks 729 conservation pairs',async ()=>{
  const size=3;
  const states=Array.from({length:27},(_,n)=>Array.from({length:size},(_,x)=>Math.floor(n/3**x)%3));
  const intervals=cells=>{
@@ -185,7 +186,7 @@ const freeze=value=>{
 };
 const assignedCells=rows=>rows.reduce((sum,{runs})=>sum+runs.reduce((n,[start,end])=>n+end-start,0),0);
 
-test('synthetic cumulative before and candidate patches each apply once to original native rows',()=>{
+test('synthetic cumulative before and candidate patches each apply once to original native rows',async ()=>{
  const base=freeze([row(2,[[0,2,1],[12,16,2]]),row(6)]);
  const beforePatch=freeze({rows:[row(2,[[4,6,1]])]});
  const candidatePatch=freeze({rows:[row(2,[[4,6,1],[8,10,2]]),row(6,[[1,3,1]])]});
@@ -200,7 +201,7 @@ test('synthetic cumulative before and candidate patches each apply once to origi
  assert.deepEqual({base,beforePatch,candidatePatch},original);
 });
 
-test('synthetic repeated cumulative application rejects same-owner assignments',()=>{
+test('synthetic repeated cumulative application rejects same-owner assignments',async ()=>{
  const base=[row(2,[[0,2,1]])],patch={rows:[row(2,[[4,6,1]])]};
  const once=apply(base,patch);
  assert.equal(assignedCells(once),4);
@@ -209,7 +210,7 @@ test('synthetic repeated cumulative application rejects same-owner assignments',
  assert.throws(()=>apply(once,{rows:[row(2,[[4,6,1],[8,10,2]])]}));
 });
 
-test('synthetic additive overlap rejects identical, partial, contained and enclosing runs for either owner',()=>{
+test('synthetic additive overlap rejects identical, partial, contained and enclosing runs for either owner',async ()=>{
  const base=freeze([row(3,[[4,8,1]])]);
  for(const owner of [1,2])for(const [start,end] of [[4,8],[2,5],[7,10],[5,7],[2,10]]){
   assert.throws(()=>apply(base,freeze({rows:[row(3,[[start,end,owner]])]})));
@@ -220,7 +221,7 @@ test('synthetic additive overlap rejects identical, partial, contained and enclo
  assert.equal(assignedCells(adjacent),8);
 });
 
-test('synthetic complete cumulative patch validates rows even outside requested projection scope',()=>{
+test('synthetic complete cumulative patch validates rows even outside requested projection scope',async ()=>{
  const base=[row(2,[[0,2,1]])];
  const invalidRows=[null,{},[row(1),row(1)],[row(3),row(1)],
   [row(-1)],[row(16)],[row(1.5)],[row(Number.NaN)],
@@ -232,7 +233,7 @@ test('synthetic complete cumulative patch validates rows even outside requested 
  for(const patch of [{}, {rows:undefined}])assert.throws(()=>apply(base,patch));
 });
 
-test('synthetic additive intervals validate all raw bounds and ownership before scope selection',()=>{
+test('synthetic additive intervals validate all raw bounds and ownership before scope selection',async ()=>{
  const invalidRuns=[null,{},[[0,1]],[[0,1,1,4]],[[0,0,1]],[[2,1,1]],
   [[-1,1,1]],[[0,17,1]],[[0,1.5,1]],[[0,1,0]],[[0,1,-1]],
   [[0,1,3]],[[0,1,1.5]],[[0,1,Number.NaN]],
@@ -251,7 +252,7 @@ test('synthetic additive intervals validate all raw bounds and ownership before 
  }
 });
 
-test('synthetic out-of-scope valid patch rows do not invent native projections',()=>{
+test('synthetic out-of-scope valid patch rows do not invent native projections',async ()=>{
  const patch=freeze({rows:[row(1,[[2,4,1]]),row(7,[[8,10,2]])]});
  assert.deepEqual(apply([],patch),[]);
  assert.deepEqual(apply([row(3,[[0,16,2]])],patch),[row(3,[[0,16,2]])]);
@@ -260,7 +261,7 @@ test('synthetic out-of-scope valid patch rows do not invent native projections',
  assert.equal(assignedCells(scoped),18);
 });
 
-test('synthetic missing native row remains missing while explicit empty rows accept additive cells',()=>{
+test('synthetic missing native row remains missing while explicit empty rows accept additive cells',async ()=>{
  const patch={rows:[row(5,[[2,4,1]])]};
  const missing=apply([],patch),explicit=apply([row(5)],patch);
  assert.deepEqual(missing,[]);
@@ -270,7 +271,7 @@ test('synthetic missing native row remains missing while explicit empty rows acc
  assert.deepEqual(compare([row(5)],explicit,[5]),noLoss(1));
 });
 
-test('synthetic returned rows and intervals do not alias original base or cumulative patch',()=>{
+test('synthetic returned rows and intervals do not alias original base or cumulative patch',async ()=>{
  const base=freeze([row(1,[[0,2,1]]),row(3,[[8,10,2]]),row(5)]);
  const patch=freeze({rows:[row(1,[[4,6,2]])]});
  const original=clone({base,patch});
@@ -288,7 +289,7 @@ test('synthetic returned rows and intervals do not alias original base or cumula
 });
 
 
-test('synthetic no-additive state preserves complete native rows with fresh copies',()=>{
+test('synthetic no-additive state preserves complete native rows with fresh copies',async ()=>{
  const base=freeze([row(1,[[0,2,1],[4,6,2]]),row(3)]);
  for(const patch of [null,undefined]){
   const result=apply(base,patch);
@@ -309,8 +310,8 @@ test('synthetic no-additive state preserves complete native rows with fresh copi
 const MODULE='coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const CATALOGUE='coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json';
 const PROGRAMME='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
-const CODE=[MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/native-word-store.mjs','scripts/check-effective-geographic-regression.mjs',
-  'scripts/selected-reference-metadata.mjs','src/reference-metadata.js','src/native-grid.js','src/ownership-codec.js'];
+const CODE=[MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/native-word-store.mjs','scripts/native-patch-store.mjs','scripts/check-effective-geographic-regression.mjs',
+  'scripts/selected-reference-metadata.mjs','src/reference-metadata.js','src/native-grid.js','src/native-sequence.js','src/ownership-codec.js'];
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const polygon=(x,y=0)=>({type:'Polygon',coordinates:[[[x,y],[x+.2,y],[x+.2,y+.2],[x,y+.2],[x,y]]]});
 const feature=(id,x)=>({type:'Feature',id,properties:{id,parent_id:'parent'},geometry:polygon(x)});
@@ -380,7 +381,7 @@ async function trustedFixture(t,{incompleteNative=false}={}){
  save('accepted/routes.json',inventory.map(p=>p.path).sort().map(name=>({path:name,tree:git('ls-tree','-z',selected,'--',name).toString()})));const accepted=commit();
  const rootRow={id:'fixture',accepted_head:accepted,selected_commit:selected,selection_sha256:valueSha(selection),execution_commit:one,execution_code_sha256:valueSha(execution_code),runtime_sha256:valueSha(runtime),facts:pin('accepted/facts.json'),certificate:{...pin('accepted/certificate.json.gz'),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)},publication:pin('accepted/publication.json'),custody:pin('accepted/custody.json'),routes:pin('accepted/routes.json')};
  save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[rootRow]});commit();
- const api=await import(pathToFileURL(path.join(root,MODULE))),native={...await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs'))),...await import(pathToFileURL(path.join(root,'scripts/selected-checkpoint-native.mjs')))};
+ const api=checkpointTestAPI(t,await import(pathToFileURL(path.join(root,MODULE)))),native={...await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs'))),...await import(pathToFileURL(path.join(root,'scripts/selected-checkpoint-native.mjs')))};
  const reader=new native.ImmutableReader(root,selected);
  return {api,native,reader,selected,root,git,save,commit,pin,ledger,patch,sidecar,envelope,selection,rootRow};
 }
@@ -396,10 +397,10 @@ function candidateProducts(f,{ledger=f.ledger,patch=f.patch}={}){
 }
 
 async function nativeTransition(f,candidate=f.selected){
- const qualified=f.api.qualifyCheckpoint({reader:f.reader});
+ const qualified=(await f.api.qualifyCheckpoint({reader:f.reader}));
  assert.equal(qualified.available,true);
  const reader=new f.native.ImmutableReader(f.root,candidate,{invocation:f.reader.invocation});
- const transition=f.api.qualifyTransition({state:qualified.state,reader});
+ const transition=(await f.api.qualifyTransition({state:qualified.state,reader}));
  return {transition,reader};
 }
 
@@ -422,7 +423,7 @@ test('actual native consumer rejects forged, foreign-invocation and expired zero
   await assert.rejects(f.native.compareSelectedCheckpointNative({transition:fake}),/private qualified selected transition/);
  }
  const foreignReader=new f.native.ImmutableReader(f.root,f.selected);
- assert.throws(()=>f.api.qualifyTransition({state:transition.baseline,reader:foreignReader}),/Foreign or expired checkpoint invocation/);
+ await assert.rejects(async()=>(await f.api.qualifyTransition({state:transition.baseline,reader:foreignReader})),/Foreign or expired checkpoint invocation/);
  assert.throws(()=>transition.changedNativeRows.push(1),TypeError);
  f.api.releaseCheckpoint(transition.baseline);
  await assert.rejects(f.native.compareSelectedCheckpointNative({transition}),/private qualified selected transition/);
@@ -446,7 +447,7 @@ test('actual changed transport bytes with unchanged declarations require explici
 
 
 test('actual visibility projection authenticates the selected whole normative latitude table',async t=>{
- const f=await trustedFixture(t),qualified=f.api.qualifyCheckpoint({reader:f.reader});
+ const f=await trustedFixture(t),qualified=(await f.api.qualifyCheckpoint({reader:f.reader}));
  assert.equal(qualified.available,true);
  const result=f.api.projectVisibilityLatitudes({state:qualified.state});
  assert.deepEqual([...result],[...nativeRowLatitudes(4)]);
@@ -457,7 +458,7 @@ test('actual visibility projection authenticates the selected whole normative la
 import {referenceCheckpointFixture} from './fixtures/selected-checkpoint.mjs';
 test('validated reference metadata changes parents while native owners and cells stay conserved',async t=>{
  const f=await referenceCheckpointFixture(t),reader=new f.native.ImmutableReader(f.repo,f.candidate,{invocation:f.reader.invocation});
- const transition=f.api.qualifyTransition({state:f.state,reader});
+ const transition=(await f.api.qualifyTransition({state:f.state,reader}));
  assert.equal(transition.available,true);
  const before=transition.baseline.certificate,after=transition.candidate.certificate;
  assert.equal(before.entries[0][2],'P');assert.equal(after.entries[0][2],'Q');

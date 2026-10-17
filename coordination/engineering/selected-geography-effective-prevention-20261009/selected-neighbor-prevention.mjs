@@ -1,6 +1,7 @@
 // #1569 prevention helper. Input pins/binding must be derived by the trusted
 // selected-bank resolver. These functions do not select/activate a release.
 import {createHash} from 'node:crypto';
+import {isNativeSequence} from '../../../src/native-sequence.js';
 import fs from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
@@ -19,6 +20,7 @@ const hash=v=>typeof v==='string'&&/^[a-f0-9]{64}$/.test(v);
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const canonical=v=>{
  if(Array.isArray(v))return v.map(canonical);
+ if(isNativeSequence(v))return Array.from(v,canonical);
  if(v&&typeof v==='object'){const out=Object.create(null);for(const k of Object.keys(v).sort())out[k]=canonical(v[k]);return out;}
  demand((v===null||['number','string','boolean'].includes(typeof v))&&(typeof v!=='number'||Number.isFinite(v)),'Nonfinite/missing/non-JSON canonical value');return v;
 };
@@ -49,12 +51,11 @@ export function valueSha(value) {
  const visit=value=>{
   if(value&&typeof value==='object'){
    demand(!ancestors.has(value),'Circular canonical value');ancestors.add(value);
-   if(Array.isArray(value)){
+   if(isNativeSequence(value)){
     write('[');
-    for(let i=0;i<value.length;i++){
-     if(i)write(',');
-     if(i in value)visit(value[i]);else write('null');
-    }
+    if(Array.isArray(value)){
+     for(let i=0;i<value.length;i++){if(i)write(',');if(i in value)visit(value[i]);else write('null');}
+    }else{let first=true;for(const item of value){if(!first)write(',');first=false;visit(item);}}
     write(']');
    }else{
     // canonical() assigns lexically sorted keys into a new object. JSON then

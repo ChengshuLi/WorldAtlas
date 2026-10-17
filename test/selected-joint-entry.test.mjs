@@ -1,3 +1,4 @@
+import {nativeLiteral} from './helpers/native-literal.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -143,11 +144,11 @@ test('actual warm joint entry reuses native-only custody without requiring addit
   const certificate=JSON.parse(gunzipSync(fs.readFileSync(path.join(f.root,'complete/derived-certificate.json.gz'))));
   assert.deepEqual(certificate.entries.find(row=>row[0]==='B')[9],[[1,0,10,20]]);
   assert.equal(f.ledger.current_targets.some(row=>row.target_id==='B'),false);
-  const qualified=f.api.qualifyCheckpoint({reader:f.reader});
+  const qualified=(await f.api.qualifyCheckpoint({reader:f.reader}));
   assert.equal(qualified.available,true);
   const row=qualified.state.additions.find(row=>row.representation==='native-cells');
   assert.equal(Object.hasOwn(row,'geometry'),false);
-  assert.deepEqual(row.native_rows,[{y:2,runs:[[2,3,2]]}]);
+  assert.deepEqual(nativeLiteral(row.native_rows),[{y:2,runs:[[2,3,2]]}]);
   f.api.releaseCheckpoint(qualified.state);
 });
 
