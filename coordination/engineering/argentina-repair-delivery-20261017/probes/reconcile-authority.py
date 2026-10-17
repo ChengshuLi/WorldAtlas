@@ -4,7 +4,7 @@ No source, physical or native science is replayed by this accounting method.
 """
 import json,gzip,pathlib,subprocess,hashlib,collections,sys,os
 assert len(sys.argv)==4 and __debug__
-W=pathlib.Path(sys.argv[1]).absolute();C=sys.argv[2];O=pathlib.Path(sys.argv[3]).absolute();P='coordination/engineering/argentina-repair-delivery-20261017';assert len(C)==40 and all(c in '0121106789abcdef'for c in C)
+W=pathlib.Path(sys.argv[1]).absolute();C=sys.argv[2];O=pathlib.Path(sys.argv[3]).absolute();P='coordination/engineering/argentina-repair-delivery-20261017';assert len(C)==40 and all(c in '0123456789abcdef'for c in C)
 assert O.parent.is_dir()and not O.exists()and all(not p.is_symlink()for p in(O,*O.parents));inputs=[]
 def pin(p,c=C):
  row=subprocess.check_output(['git','-c','protocol.allow=never','-C',str(W),'ls-tree','-z',c,'--',p],env={**os.environ,'GIT_NO_LAZY_FETCH':'1'},timeout=30).rstrip(b'\0');meta,name=row.split(b'\t');mode,kind,oid=meta.decode().split();assert mode=='100644'and kind=='blob'and name.decode()==p
