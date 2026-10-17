@@ -1,0 +1,16 @@
+{
+  "kind": "lossless-stock-output-encoding",
+  "producer_output": {
+    "path": "whole-target-support.json",
+    "bytes": 129585464,
+    "sha256": "5b5748bdf7c35f0bd855cc775575b91a1e2379d095c30da4ed286ee6c9640161"
+  },
+  "retained_encoded": {
+    "path": "whole-target-support.json.gz",
+    "bytes": 25323990,
+    "sha256": "bfb8ec30e188aa82580d12c11053c08a0e8e12f3ca4c4ddbe283807775a0c04c",
+    "decoded_bytes": 129585464,
+    "decoded_sha256": "5b5748bdf7c35f0bd855cc775575b91a1e2379d095c30da4ed286ee6c9640161"
+  },
+  "limit": "Storage encoding only; every original producer byte is retained and restores exactly. No source, physical context, issue or result record was changed."
+}
