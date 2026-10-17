@@ -1,7 +1,7 @@
 import {quotaDelay,completeReads} from './github-quota.mjs';
 import {conditionalSnapshots} from './github-snapshots.mjs';
 import {evidenceRequirement} from './evidence-policy.mjs';
-import {laneForBranch,validateIssueMetadata,validateIssuePRBody,validateGeographyOwnedPaths,validateEngineeringOwnedPaths,validateLanePaths} from './check-handoff-scope.mjs';
+import {laneForBranch,validateIssueMetadata,validateGeographyOwnedPaths,validateEngineeringOwnedPaths,validateLanePaths} from './check-handoff-scope.mjs';
 
 const HTTP_ATTEMPT_MS = 20_000;
 
@@ -104,7 +104,14 @@ export async function githubPages(api,route){
 }
 export async function linkedPulls(api,repo,number){
  const timeline=await githubPages(api,`/repos/${repo}/issues/${number}/timeline`),ids=new Set();
- for(const event of timeline){const source=event.source?.issue;if(!source?.pull_request)continue;try{if(validateIssuePRBody(source.body??'').github_issue===number)ids.add(source.number);}catch{}}
+ // Live-operation release must see native cross-references even when ordinary
+ // PRs have multiple links, prose punctuation or subsequently edited bodies.
+ for(const event of timeline){
+  const source=event.source?.issue;if(!source?.pull_request)continue;
+  const id=canonicalIssueNumber(source.number),url=source.pull_request.url;
+  if(typeof url!=='string'||!/^https:\/\/api\.github\.com\/repos\/[^/]+\/[^/]+\/pulls\/[1-9]\d*$/.test(url)||!url.endsWith(`/pulls/${id}`))throw Error('Incomplete cross-referenced PR identity');
+  if(url===`https://api.github.com/repos/${repo}/pulls/${id}`)ids.add(id);
+ }
  return completeReads([...ids].map(id=>api(`/repos/${repo}/pulls/${id}`)));
 }
 export function githubAPI(token, {fetchImpl = fetch, onRequest = () => {}, readWaitMs = 0, now = Date.now, sleep = ms => new Promise(resolve => setTimeout(resolve, ms)), deadlineRemaining,

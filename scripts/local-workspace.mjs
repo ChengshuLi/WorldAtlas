@@ -185,11 +185,12 @@ export function workspaceManager(repo, {freeBytes} = {}) {
   const allocate = ({worker, slot = 'work', branch, commit, profile = 'sparse', include = []}) => {
     if (!id(worker) || !['work', 'review'].includes(slot)) throw Error('Supply a safe unique worker ID and work/review slot');
     if (!['sparse', 'full'].includes(profile) || !Array.isArray(include) || !include.every(safeInclude)) throw Error('Use sparse/full profile and literal data/research/coordination paths without traversal or globs');
-    if (slot === 'work' && (!/^(engineering|geography|research)\/[a-z0-9][a-z0-9-]{0,63}$/.test(branch ?? '') || commit)) throw Error('Work needs a fresh lane branch; main is fetched by the allocator');
+    if (slot === 'work' && (typeof branch !== 'string' || !branch || branch.startsWith('-') || branch === 'main' || commit)) throw Error('Work needs a fresh branch; main is fetched by the allocator');
+    if (slot === 'work') git('check-ref-format', `refs/heads/${branch}`);
     if (slot === 'review' && (branch || !/^[a-f0-9]{40}$/.test(commit ?? ''))) throw Error('Review needs an exact detached 40-character commit');
     if (slot === 'work') {
       if (git('for-each-ref', '--format=%(refname)', `refs/heads/${branch}`).split('\n').includes(`refs/heads/${branch}`)) {
-        throw Error('Fresh lane branch already exists; choose a new branch without changing its history');
+        throw Error('Fresh branch already exists; choose a new branch without changing its history');
       }
       // Network interruption must not strand the registry lock. Freeze the
       // fetched commit before reserving; later ref movement cannot change it.

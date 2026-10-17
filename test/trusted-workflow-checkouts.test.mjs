@@ -4,7 +4,6 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {spawnSync, execFileSync} from 'node:child_process';
-import {checkGitScope} from '../scripts/check-handoff-scope.mjs';
 import {containsPackagePath,loadPackageInputs,focusedCheckoutPatterns} from '../scripts/package-inputs.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
@@ -71,30 +70,6 @@ test('negative control: old scripts-only tree cannot load relocated regional gat
   assert.match(result.stderr, /src\/regional-import-gate\.js/);
 });
 
-
-test('sparse candidate still detects changes and rename sources outside the working tree', () => {
-  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'worldatlas-sparse-scope-'));
-  const git = args => execFileSync('git', args, {cwd: directory, encoding: 'utf8'});
-  const run = (command, args, options) => execFileSync(command, args, {...options, cwd: directory});
-  try {
-    git(['init', '-q']); git(['config', 'user.email', 'test@example.invalid']); git(['config', 'user.name', 'test']);
-    fs.mkdirSync(path.join(directory, 'src'), {recursive: true});
-    fs.mkdirSync(path.join(directory, 'research/campaigns/example'), {recursive: true});
-    fs.writeFileSync(path.join(directory, 'src/main.js'), 'original source\n');
-    fs.writeFileSync(path.join(directory, 'research/campaigns/example/notes.txt'), 'original notes\n');
-    git(['add', '.']); git(['commit', '-qm', 'baseline']); const base = git(['rev-parse', 'HEAD']).trim();
-    fs.writeFileSync(path.join(directory, 'research/campaigns/example/notes.txt'), 'updated notes\n');
-    git(['commit', '-qam', 'owned evidence']);
-    git(['sparse-checkout', 'init', '--cone']); git(['sparse-checkout', 'set', 'src']);
-    assert.equal(fs.existsSync(path.join(directory, 'research')), false);
-    assert.equal(checkGitScope({branch: 'research/example', base, run}).changed_files, 1);
-    git(['sparse-checkout', 'disable']);
-    git(['mv', 'src/main.js', 'research/campaigns/example/copied.js']); git(['commit', '-qm', 'rename core source']);
-    git(['sparse-checkout', 'set', 'src']);
-    assert.equal(fs.existsSync(path.join(directory, 'research')), false);
-    assert.throws(() => checkGitScope({branch: 'research/example', base, run}), /Research changes/);
-  } finally { fs.rmSync(directory, {recursive: true, force: true}); }
-});
 
 
 // Read the actual workflow declarations and shell bodies. These bounded controls

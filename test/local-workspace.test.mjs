@@ -29,6 +29,16 @@ function fixture(t, overrides = {}) {
   return {repo, git, manager, head, temporary};
 }
 
+test('ordinary branch names need only Git validity and fresh isolated ownership', t => {
+  const {manager}=fixture(t);
+  const entry=manager.allocate({worker:'worker-one',branch:'feature/Map.Errors_2026'});
+  assert.equal(entry.branch,'feature/Map.Errors_2026');
+  manager.release({worker:'worker-one',slot:'work',token:entry.token});
+  for(const branch of ['bad..name','../escape','x:bad','bad name','-option'])
+    assert.throws(()=>manager.allocate({worker:'worker-two',branch}));
+  assert.equal(manager.report().entries.length,0);
+});
+
 test('sparse work is isolated and contains required directories and individual inputs only', t => {
   const {manager, head, git} = fixture(t);
   const entry = manager.allocate({worker: 'worker-one', branch: 'geography/first', include: ['data/needed', 'data/one.json']});
@@ -316,7 +326,7 @@ test('invalid scopes and identities are rejected', t => {
   }
   assert.throws(() => manager.allocate({worker: '../other', branch: 'engineering/a'}), /worker/);
   assert.throws(() => manager.allocate({worker: 'one', slot: 'extra', branch: 'engineering/a'}), /worker/);
-  assert.throws(() => manager.allocate({worker: 'one', branch: 'main'}), /fresh lane/);
+  assert.throws(() => manager.allocate({worker: 'one', branch: 'main'}), /fresh branch/);
   assert.throws(() => manager.allocate({worker: 'one', slot: 'review', commit: 'main'}), /exact detached/);
 });
 

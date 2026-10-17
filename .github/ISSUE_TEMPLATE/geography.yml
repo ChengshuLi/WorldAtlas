@@ -21,11 +21,6 @@ body:
     attributes:
       label: Sources, retained evidence and dependencies
       description: Link inspected sources, original hashes, claims and related work. No credentials.
-  - type: textarea
-    id: coordination
-    attributes:
-      label: Reviewed readiness and ownership (triage)
-      description: Add one worldatlas-work:v1 block with max_prs, depends_on, scope, mode geography and disjoint owned_paths limited to data/regional-review/<packet-id>/ or research/geography/<campaign-id>/. See docs/GEOGRAPHY_HANDOFF.md.
   - type: input
     id: raised
     attributes:
