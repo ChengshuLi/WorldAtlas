@@ -222,12 +222,15 @@ export function additiveBaseReference(data) {
   require((release.version===1&&release.kind==='retained-native-base-plus-delta-v1')
     ||(release.version===2&&release.kind==='retained-native-base-plus-delta-v2'),'Unsupported additive release');
   require(JSON.stringify(canonicalValue(release.effective_reference))===JSON.stringify(canonicalValue(data.reference_release)),'Selected additive reference mismatch');
+  // Whole descriptors bound consumption, not an unrelated fixed file-size cap.
+  // Packaging and streamed readers authenticate exact lengths/hashes; actual
+  // allocation, decoding and JSON runtime failures remain fatal.
   for(const asset of [release.patch,release.ledger,release.owner_roster,release.base_manifest]){
     exactKeys(asset,asset===release.owner_roster?['path','bytes','sha256','encoding','decoded_bytes','decoded_sha256']:['path','bytes','sha256'],'Native additive asset');
     require(/^additive-repairs\/[a-zA-Z0-9_-]+\.json(?:\.gz)?$/.test(asset.path)&&Number.isSafeInteger(asset.bytes)
-      &&asset.bytes>0&&asset.bytes<=32*1024*1024&&hex.test(asset.sha256),'Unsafe/oversized native additive asset');
+      &&asset.bytes>0&&hex.test(asset.sha256),'Unsafe native additive asset');
   }
-  require(release.owner_roster.encoding==='gzip'&&Number.isSafeInteger(release.owner_roster.decoded_bytes)&&release.owner_roster.decoded_bytes>0&&release.owner_roster.decoded_bytes<=32*1024*1024&&hex.test(release.owner_roster.decoded_sha256),'Incomplete whole decoded native owner roster');
+  require(release.owner_roster.encoding==='gzip'&&Number.isSafeInteger(release.owner_roster.decoded_bytes)&&release.owner_roster.decoded_bytes>0&&hex.test(release.owner_roster.decoded_sha256),'Incomplete whole decoded native owner roster');
   require(new Set([release.patch.path,release.ledger.path,release.owner_roster.path,release.base_manifest.path]).size===4,'Duplicate native additive assets');
   return release.base_reference;
 }
