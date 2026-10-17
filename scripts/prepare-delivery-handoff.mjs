@@ -14,7 +14,7 @@ import {prepareReferenceMetadataProjection,validateReferenceMetadataProjection} 
 import {validatePackageInputs} from './package-inputs.mjs';
 import {baselineFiles, validateEvidence} from './evidence-quality.mjs';
 import {composeRetainedLedgers} from '../coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs';
-import {normaliseRetainedRepairLedger, compareVersionedRepairLedgers, verifyCompletedSourceTargetNativeAuthority, mergeCompletedNativePatches, verifyCurrentRebindExecution, CURRENT_REBIND_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {coordinateBounds, normaliseRetainedRepairLedger, compareVersionedRepairLedgers, verifyCompletedSourceTargetNativeAuthority, mergeCompletedNativePatches, verifyCurrentRebindExecution, CURRENT_REBIND_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const need = (ok, message) => { if (!ok) throw Error(message); };
 const hex = (value, size) => typeof value === 'string' && new RegExp(`^[a-f0-9]{${size}}$`).test(value);
@@ -1358,6 +1358,96 @@ export function publishCompletedSource(root, destination, result, binding, resum
   return publication;
 }
 
+// Preparation only: the reviewed family list declares conservative negatives,
+// never positive owners or an applicability exception. The native constructor
+// still authenticates the selected source/owner joins and qualifies every cell.
+export function sourceTerritorialExclusions(evidence, families, reader) {
+  need(unique(families), 'Explicit unique nonempty territorial exclusion families required');
+  need([1, 2].includes(evidence.version) && evidence.adopted_provider_families === undefined,
+    'Territorial exclusion preparation requires original catalogue sources');
+  const catalogue = reader.json(evidence.catalogue), stages = reader.json(evidence.physical_input);
+  need(catalogue.version === 1 && Array.isArray(catalogue.products)
+    && unique(catalogue.products.map(p => p.key)), 'Complete unique original catalogue required');
+  need(Array.isArray(stages) && unique(stages.map(s => s.target)), 'Unique whole physical source inputs required');
+  need(Array.isArray(evidence.targets) && unique(evidence.targets.map(t => t.id))
+    && Array.isArray(evidence.families) && unique(evidence.families.map(f => f.source_id)),
+  'Unique positive source members and families required');
+  const positive = new Map(evidence.families.map(f => [f.source_id, f]));
+  need(families.every(id => !positive.has(id)), 'Negative source family is also a positive family');
+  const loaded = new Map();
+  const load = id => {
+    if (loaded.has(id)) return loaded.get(id);
+    const record = catalogue.products.find(p => p.key === id);
+    need(record && Number.isSafeInteger(record.feature_count) && record.feature_count > 0
+      && Number.isSafeInteger(record.original_bytes) && record.original_bytes > 0
+      && hex(record.original_sha256, 64) && Array.isArray(record.parts) && record.parts.length > 0,
+    'Missing complete original territorial source family: ' + id);
+    const supplied = positive.get(id)?.parts;
+    need(!supplied || supplied.length === record.parts.length, 'Incomplete positive source family');
+    let offset = 0;
+    const pins = [], pieces = record.parts.map((part, ordinal) => {
+      need(part.ordinal === ordinal && part.offset === offset && safe(part.path)
+        && Number.isSafeInteger(part.bytes) && part.bytes > 0 && hex(part.sha256, 64)
+        && Number.isSafeInteger(part.uncompressed_bytes) && part.uncompressed_bytes > 0
+        && hex(part.uncompressed_sha256, 64), 'Malformed original territorial source part');
+      offset += part.uncompressed_bytes;
+      need(Number.isSafeInteger(offset) && offset <= record.original_bytes, 'Original source parts exceed complete body');
+      const pin = supplied?.[ordinal] ?? {...reader.pin(evidence.catalogue.commit, part.path),
+        decoded_bytes: part.uncompressed_bytes, decoded_sha256: part.uncompressed_sha256};
+      need(pin.path === part.path && pin.bytes === part.bytes && pin.sha256 === part.sha256
+        && pin.decoded_bytes === part.uncompressed_bytes && pin.decoded_sha256 === part.uncompressed_sha256,
+      'Territorial source pin differs from original catalogue');
+      const decoded = gunzipSync(reader.read(pin), {maxOutputLength: part.uncompressed_bytes});
+      need(decoded.length === part.uncompressed_bytes && digest(decoded) === part.uncompressed_sha256,
+        'Decoded original territorial source differs');
+      pins.push(pin); return decoded;
+    });
+    const raw = Buffer.concat(pieces);
+    need(raw.length === record.original_bytes && digest(raw) === record.original_sha256,
+      'Incomplete whole original territorial source');
+    const product = JSON.parse(raw);
+    need(product.type === 'FeatureCollection' && product.features?.length === record.feature_count
+      && unique(product.features.map(f => f.properties?.shapeID)), 'Incomplete or duplicate original source feature identities');
+    const features = product.features.map((feature, ordinal) => ({source_id: id + ':' + feature.properties.shapeID,
+      feature_ordinal: ordinal, geometry_sha256: digest(jsonBytes(feature.geometry)),
+      geometry: feature.geometry, bounds: coordinateBounds(feature.geometry)}));
+    const result = {source_family: id, original_bytes: raw.length, original_sha256: digest(raw),
+      feature_count: features.length, parts: pins, features};
+    loaded.set(id, result); return result;
+  };
+  const negatives = families.map(load), intersect = (a, b) =>
+    a[0] <= b[2] && b[0] <= a[2] && a[1] <= b[3] && b[1] <= a[3];
+  const bindings = [];
+  const targets = evidence.targets.map(target => {
+    need(positive.has(target.source_family) && Number.isSafeInteger(target.pixelIndex) && target.pixelIndex > 0,
+      'Missing positive source family or target owner');
+    const original = load(target.source_family).features.find(f => f.source_id === target.id);
+    const stage = stages.find(s => s.target === target.id);
+    need(original && stage && same(stage.consumed?.geometry, original.geometry)
+      && stage.consumed?.properties?.shapeID === target.id.slice(target.source_family.length + 1)
+      && stage.selected?.id === (target.target_id ?? target.id)
+      && same(stage.selected.geometry, target.base_geometry), 'Whole original source or selected target join differs');
+    need(target.territorial_exclusions === undefined || Array.isArray(target.territorial_exclusions),
+      'Malformed existing territorial exclusions');
+    const exclusions = [...(target.territorial_exclusions ?? [])], selected = [], disjoint = [];
+    for (const family of negatives) for (const feature of family.features) {
+      const identity = {source_family: family.source_family, source_id: feature.source_id,
+        feature_ordinal: feature.feature_ordinal, geometry_sha256: feature.geometry_sha256};
+      if (!feature.bounds.some(a => original.bounds.some(b => intersect(a, b)))) { disjoint.push(feature.source_id); continue; }
+      selected.push({...identity, negative_ordinal: exclusions.length}); exclusions.push(feature.geometry);
+    }
+    bindings.push({source_id: target.id, target_id: target.target_id ?? target.id, pixelIndex: target.pixelIndex,
+      prior_exclusions: target.territorial_exclusions?.length ?? 0, exclusions: selected, disjoint_source_ids: disjoint});
+    return {...target, territorial_exclusions: exclusions};
+  });
+  return {evidence: {...evidence, targets}, provenance: {version: 1, kind: 'whole-original-territorial-exclusions-v1',
+    catalogue: evidence.catalogue, physical_input: evidence.physical_input, negative_families: families,
+    complete_sources: [...loaded.values()].map(({features, ...family}) => family), targets: bindings,
+    limits: ['Reviewed negative scope is conservative disagreement, not legal sovereignty or an applicability exception.',
+      'Whole originals are unchanged; only disjoint complete bounds omit an operand. No requested native cell is removed.',
+      'Native source, owner, physical, geometry and full-scope qualification remain required.']}};
+}
+
 // Fill only the accepted baseline block of ordinary source evidence. Scientific
 // claims stay explicit; this metadata preparation does not qualify their support.
 // In particular, the normative manifest descriptor is not a Git custody pin.
@@ -1429,7 +1519,11 @@ export async function sourceEvidence(config, reader) {
   for (const [key, value] of Object.entries(derived))
     need(!Object.hasOwn(config.source_evidence, key) || same(config.source_evidence[key], value),
       'Supplied source evidence changes accepted baseline: ' + key);
-  return {'source-evidence.json': jsonBytes({...config.source_evidence, ...derived})};
+  const prepared = {...config.source_evidence, ...derived};
+  if (config.territorial_exclusion_families === undefined) return {'source-evidence.json': jsonBytes(prepared)};
+  const handoff = sourceTerritorialExclusions(prepared, config.territorial_exclusion_families, reader);
+  return {'source-evidence.json': jsonBytes(handoff.evidence),
+    'territorial-exclusion-provenance.json': jsonBytes(handoff.provenance)};
 }
 
 // Execute the existing modern constructor or its admitted read-only diagnostic,

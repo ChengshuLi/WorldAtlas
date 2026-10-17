@@ -7,7 +7,7 @@ import {fileURLToPath} from 'node:url';
 import {execFileSync, spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
-import {digest, jsonBytes, pinReader, sourceEvidence} from '../scripts/prepare-delivery-handoff.mjs';
+import {digest, jsonBytes, pinReader, sourceEvidence, publish} from '../scripts/prepare-delivery-handoff.mjs';
 
 const helper = fileURLToPath(new URL('../scripts/prepare-delivery-handoff.mjs', import.meta.url));
 const commit = 'a'.repeat(40), original = 'b'.repeat(40), prefix = 'coordination/engineering/control/';
@@ -326,4 +326,140 @@ test('source preparation authenticates the exact provider-adoption leaf without 
  assert.ok(f.reader.reads.includes(pin.path));assert.deepEqual(f.config,before);
  f.config.source_evidence.adopted_provider_families={...pin,sha256:'0'.repeat(64)};
  await assert.rejects(result(f),/Whole pin identity differs/);
+});
+
+function territorialFixture(change = {}) {
+  const f = fixture(), ring = (x0, y0, x1, y1) => [[x0,y0],[x1,y0],[x1,y1],[x0,y1],[x0,y0]],
+    box = (x0,y0,x1,y1) => ({type: 'Polygon', coordinates: [ring(x0,y0,x1,y1)]});
+  const originals = [{shapeID: 'member', geometry: box(0,0,10,10)}];
+  const negatives = [{shapeID: 'overlap', geometry: box(5,5,15,15)},
+    {shapeID: 'touch', geometry: box(10,1,11,2)}, {shapeID: 'disjoint', geometry: box(20,20,21,21)},
+    {shapeID: 'multipart', geometry: {type: 'MultiPolygon', coordinates: [[ring(7,7,8,8)], [ring(40,40,41,41)]]}},
+    {shapeID: 'seam', geometry: box(179,3,-179,4)}];
+  change.originals?.(originals); change.negatives?.(negatives);
+  const catalogue = {version: 1, products: []}, positive = [];
+  for (const [id, features] of [['positive', originals], ['negative', negatives]]) {
+    const raw = jsonBytes({type: 'FeatureCollection', features: features.map(({shapeID, geometry}) =>
+      ({type:'Feature', properties:{shapeID}, geometry}))}), midpoint = Math.floor(raw.length / 2), parts = [];
+    for (const [ordinal, piece] of [raw.subarray(0,midpoint), raw.subarray(midpoint)].entries()) {
+      const pin = f.reader.add(prefix + id + '-' + ordinal + '.bin.gz', gzipSync(piece), original);
+      parts.push({...pin, decoded_bytes:piece.length, decoded_sha256:digest(piece)});
+    }
+    if (id === 'positive') positive.push({source_id:id, parts});
+    catalogue.products.push({key:id, feature_count:features.length, original_bytes:raw.length, original_sha256:digest(raw),
+      parts:parts.map((p,i)=>({path:p.path, bytes:p.bytes, sha256:p.sha256, ordinal:i, offset:i ? midpoint : 0,
+        uncompressed_bytes:p.decoded_bytes, uncompressed_sha256:p.decoded_sha256}))});
+  }
+  change.catalogue?.(catalogue);
+  const consumed = {type:'Feature',properties:{shapeID:'member'},geometry:originals[0].geometry},
+    selected = {id:'literal-owner-a',geometry:box(1,1,2,2)},
+    stages = [{target:'positive:member',consumed,selected}];
+  change.stages?.(stages);
+  const evidence = f.config.source_evidence;
+  evidence.catalogue = f.reader.add(prefix+'territorial-catalogue.json', catalogue, original);
+  evidence.physical_input = f.reader.add(prefix+'whole-stage.json', stages);
+  evidence.families = positive;
+  evidence.targets = [{id:'positive:member',target_id:'literal-owner-a',pixelIndex:1,source_family:'positive',
+    base_geometry:box(1,1,2,2),coverage_rows:[{y:2,runs:[[0,3,'mapped_land_support']]}],
+    territorial_exclusions:[box(-5,-5,-4,-4)]}];
+  f.config.territorial_exclusion_families = ['negative'];
+  change.config?.(f.config); return {...f, negatives, catalogue, stages};
+}
+
+test('reviewed whole-original negatives reach the actual evidence entry without owners or clipping', async () => {
+  const f=territorialFixture(), before=structuredClone(f.config), outputs=await sourceEvidence(f.config,f.reader),
+    evidence=JSON.parse(outputs['source-evidence.json']), provenance=JSON.parse(outputs['territorial-exclusion-provenance.json']);
+  assert.deepEqual(f.config,before);
+  const expected=f.negatives.filter(n=>n.shapeID!=='disjoint').map(n=>n.geometry);
+  assert.deepEqual(evidence.targets[0].territorial_exclusions,[...before.source_evidence.targets[0].territorial_exclusions,...expected]);
+  assert.deepEqual(evidence.targets[0].coverage_rows,before.source_evidence.targets[0].coverage_rows);
+  assert.deepEqual(evidence.families,before.source_evidence.families);
+  assert.deepEqual(provenance.targets[0].exclusions.map(x=>[x.source_id,x.feature_ordinal,x.negative_ordinal]),
+    [['negative:overlap',0,1],['negative:touch',1,2],['negative:multipart',3,3],['negative:seam',4,4]]);
+  assert.deepEqual(provenance.targets[0].disjoint_source_ids,['negative:disjoint']);
+  for(const binding of provenance.targets[0].exclusions)
+    assert.equal(binding.geometry_sha256,digest(jsonBytes(evidence.targets[0].territorial_exclusions[binding.negative_ordinal])));
+  assert.equal(provenance.complete_sources.find(f=>f.source_family==='negative').feature_count,5);
+  assert.equal(provenance.complete_sources.find(f=>f.source_family==='negative').parts.length,2);
+  // The detached second multipart component and full seam ring survive unchanged.
+  assert.deepEqual(evidence.targets[0].territorial_exclusions[3],f.negatives[3].geometry);
+  assert.ok(f.reader.reads.includes(prefix+'negative-1.bin.gz'));
+});
+
+test('negative preparation rejects incomplete, ambiguous and coherently repinned invalid originals', async t => {
+  const cases = {
+    'empty review scope': {config:c=>{c.territorial_exclusion_families=[];}},
+    'duplicate review scope': {config:c=>{c.territorial_exclusion_families=['negative','negative'];}},
+    'unknown review family': {config:c=>{c.territorial_exclusion_families=['missing'];}},
+    'positive as negative': {config:c=>{c.territorial_exclusion_families=['positive'];}},
+    'duplicate catalogue': {catalogue:c=>{c.products.push(c.products[1]);}},
+    'omitted part': {catalogue:c=>{c.products[1].parts.pop();}},
+    'wrong original hash': {catalogue:c=>{c.products[1].original_sha256='0'.repeat(64);}},
+    'wrong complete count': {catalogue:c=>{c.products[1].feature_count++;}},
+    'wrong part ordinal': {catalogue:c=>{c.products[1].parts[1].ordinal=0;}},
+    'wrong part offset': {catalogue:c=>{c.products[1].parts[1].offset++;}},
+    'wrong decoded hash': {catalogue:c=>{c.products[1].parts[0].uncompressed_sha256='0'.repeat(64);}},
+    'duplicate source identity': {negatives:n=>{n[4].shapeID=n[0].shapeID;}},
+    'missing source identity': {negatives:n=>{delete n[4].shapeID;}},
+    'invalid disjoint geometry': {negatives:n=>{n[2].geometry.coordinates[0].pop();}},
+    'nonfinite original coordinate': {negatives:n=>{n[2].geometry.coordinates[0][0][0]=Infinity;}},
+    'duplicate stage': {stages:s=>{s.push(s[0]);}},
+    'wrong consumed original': {stages:s=>{s[0].consumed={...s[0].consumed,geometry:s[0].selected.geometry};}},
+    'wrong consumed identity': {stages:s=>{s[0].consumed.properties.shapeID='other';}},
+    'wrong selected identity': {stages:s=>{s[0].selected.id='foreign';}},
+    'wrong selected geometry': {stages:s=>{s[0].selected.geometry=s[0].consumed.geometry;}},
+    'duplicate target': {config:c=>{c.source_evidence.targets.push(c.source_evidence.targets[0]);}},
+    'missing positive part': {config:c=>{c.source_evidence.families[0].parts.pop();}},
+    'changed positive part': {config:c=>{c.source_evidence.families[0].parts[0].sha256='0'.repeat(64);}},
+    'null existing exclusions': {config:c=>{c.source_evidence.targets[0].territorial_exclusions=null;}}
+  };
+  for(const [name,change] of Object.entries(cases)) await t.test(name,async()=>{
+    const f=territorialFixture(change);await assert.rejects(sourceEvidence(f.config,f.reader));
+  });
+});
+
+test('negative source pin corruption rejects and explicit opt-out leaves ordinary evidence untouched',async()=>{
+  const f=territorialFixture(), key=original+':'+prefix+'negative-1.bin.gz';
+  f.reader.bodies.get(key)[0]^=1;
+  await assert.rejects(sourceEvidence(f.config,f.reader));
+  delete f.config.territorial_exclusion_families;
+  const outputs=await sourceEvidence(f.config,f.reader);
+  assert.deepEqual(Object.keys(outputs),['source-evidence.json']);
+  assert.deepEqual(withoutBaseline(JSON.parse(outputs['source-evidence.json'])),f.config.source_evidence);
+});
+
+
+test('whole-negative evidence and provenance publish together and preserve both on collision or resume drift',async t=>{
+  const root=directory(t), f=territorialFixture(), outputs=await sourceEvidence(f.config,f.reader),
+    destination='.cache/delivery-handoff/negatives', binding={phase:'source-evidence',config_sha256:digest(jsonBytes(f.config))};
+  publish(root,destination,outputs,binding);
+  const files=fs.readdirSync(path.join(root,destination)).sort();
+  assert.deepEqual(files,['preparation.json','source-evidence.json','territorial-exclusion-provenance.json']);
+  assert.equal(publish(root,destination,outputs,binding,true).resumed,true);
+  assert.throws(()=>publish(root,destination,outputs,binding),/Occupied/);
+  const changed={...outputs,'territorial-exclusion-provenance.json':jsonBytes({omitted:true})};
+  assert.throws(()=>publish(root,destination,changed,binding,true),/Resumed bytes/);
+  for(const [name,raw] of Object.entries(outputs))assert.deepEqual(fs.readFileSync(path.join(root,destination,name)),raw);
+  fs.symlinkSync('/missing-negative-control',path.join(root,'.cache/delivery-handoff/link'));
+  assert.throws(()=>publish(root,'.cache/delivery-handoff/link',outputs,binding),/Nonordinary/);
+  assert.equal(fs.readlinkSync(path.join(root,'.cache/delivery-handoff/link')),'/missing-negative-control');
+});
+
+test('generated whole negative reaches the unchanged native operator as a veto only',async()=>{
+  const {deriveSourceTargetNativeDelta}=await import('../src/native-grid.js');
+  const f=territorialFixture({negatives:n=>{n.splice(0,n.length,{shapeID:'veto',geometry:{type:'Polygon',
+    coordinates:[[[4,4],[6,4],[6,6],[4,6],[4,4]]]}});}});
+  const outputs=await sourceEvidence(f.config,f.reader),target=JSON.parse(outputs['source-evidence.json']).targets[0],
+    geometry=f.stages[0].consumed.geometry,row=12,size=36;
+  const input={targets:[{id:target.target_id,pixelIndex:target.pixelIndex}],
+    sourceFeatures:[{id:target.id,target_id:target.target_id,pixelIndex:target.pixelIndex,geometry}],
+    coverageFeatures:[{id:target.target_id,source_id:target.id,pixelIndex:target.pixelIndex,geometry}],
+    ownerRows:[{y:row,complete_owner_intervals:[]}],size,
+    latitudes:Float64Array.from({length:size},(_,i)=>18-i-.5),rowStart:row,rowEnd:row+1};
+  const before=deriveSourceTargetNativeDelta(input);
+  assert.deepEqual(before.rows,[{y:row,runs:[[18,19,1]]}]);
+  const after=deriveSourceTargetNativeDelta({...input,territorialExclusions:target.territorial_exclusions.map(geometry=>
+    ({id:target.target_id,pixelIndex:target.pixelIndex,geometry}))});
+  assert.equal(after.assigned_cells,0);assert.equal(after.territorial_exclusion_cells,1);
+  assert.deepEqual(after.rows,[]);assert.deepEqual(input.sourceFeatures[0].geometry,geometry);
 });
