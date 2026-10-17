@@ -615,3 +615,39 @@ including removed duplicate/reworked prequeue work, rather than adding job durat
 The Cloudflare step does not measure the historical Site archive reserve. An
 explicit `npm run build:hosted` recovery build retains its actual file/archive
 budget check. Normal main pushes do not schedule a separate legacy Site build.
+
+### Run the reviewed consumers
+
+The existing merge dispatch accepts an optional `reviewed_tests` JSON object with
+`base`, `head`, `files` and `inputs`. The first two fields are exact 40-character
+accepted-main and reviewed-head commits. `files` is the nonempty list of actual
+`test/*.test.mjs` consumers identified during review. `inputs` lists their
+non-code fixture files or directories, including bodies read through Git rather
+than the working tree. Include imported Python/child-process fixtures too; a
+static JavaScript import list alone is insufficient. Ordinary code namespaces
+remain available. This is the existing review's execution argument, not a new
+approval, source authority, or claim that an arbitrary test list is complete.
+
+Preparation and final admission validate the same immutable pair and ordinary
+candidate paths. Stale base/head, missing tests/fixtures, escaping paths and
+symlinks fail clearly. Re-review the actual new pair before updating a stale
+request. With no argument, existing automatic routing and its conservative
+complete-regression fallback remain available.
+
+A reviewed list uses one isolated regression worker and acquires only its code
+and fixture inputs. It does not change geography applicability, trusted checker
+selection, native/source validation or the selected-data emitted smoke. Selected
+data keeps its existing mandatory route rather than accepting this override.
+Any actual change to a declared package input, including a move away, adds both
+existing packaged-asset consumers and retains the genuine package build and its
+inputs. Explicitly selecting either packaged consumer also requires that build.
+Otherwise the snapshot/build/output-retention stages are omitted. Browser setup
+continues to follow the actual selected consumers; migration preparation occurs
+only for its consuming test. Historical native inputs are still acquired by the
+existing per-consumer mechanism.
+
+Record the exact selected files, complete fixture closure, stage count and actual
+elapsed results in the ordinary review/handoff. Distinguish a cold fixture probe,
+local tests and hosted execution; do not count skipped work as scientific or
+publication acceptance. No additional issue, certificate or approval step is
+introduced.

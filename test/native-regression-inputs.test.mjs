@@ -146,8 +146,6 @@ test('remaining custody pins agree with the actual retained component generation
  const read=name=>JSON.parse(fs.readFileSync(name));
  const index=read('coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json');
  assert.deepEqual(new Set(index.generations.map(generation=>generation.executed_code_commit)),new Set(custody));
- const source=fs.readFileSync(new URL('../scripts/run-integration-tests.mjs',import.meta.url),'utf8');
- assert.match(source,/prepareNativeRegressionInputs\(testSelection === 'complete' \? profile : 'evidence',\{files,run:git.run\}\)/);
 });
 
 

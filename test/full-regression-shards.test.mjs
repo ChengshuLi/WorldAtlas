@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 import {fullRegressionShard, integrationTestFiles, PACKAGED_ASSET_TESTS, DATABASE_NEIGHBOR_TESTS, MIGRATION_WORKER_TESTS, COMPONENT_CONTROL_TEST} from '../scripts/run-integration-tests.mjs';
 import {integrationProfile} from '../scripts/integration-profile.mjs';
 import {currentExecutionClosure} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs';
@@ -67,4 +69,23 @@ test('focused comparison and checkpoint methods stay outside each actual builder
     const closure=currentExecutionClosure(process.cwd(),entry);
     for(const method of methods)assert(!closure.includes(method),entry+' now executes '+method);
   }
+});
+
+test('reviewed selection runs only its actual ordinary roster and rejects accidental empty or escaping input', () => {
+  const cwd=process.cwd(),directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-reviewed-tests-'));
+  const encoded=files=>Buffer.from(JSON.stringify(files)).toString('base64');
+  try {
+    fs.mkdirSync(path.join(directory,'test'));fs.writeFileSync(path.join(directory,'test/one.test.mjs'),'');
+    fs.writeFileSync(path.join(directory,'test/unrelated.test.mjs'),'');process.chdir(directory);
+    assert.deepEqual(integrationTestFiles('evidence',0,'reviewed',encoded(['test/one.test.mjs'])),['test/one.test.mjs']);
+    assert.deepEqual(integrationTestFiles('full',0,'reviewed',encoded(['test/one.test.mjs'])),['test/one.test.mjs']);
+    for(const files of [[],['test/missing.test.mjs'],['../one.test.mjs'],['test/one.test.mjs','test/one.test.mjs'],[null]])
+      assert.throws(()=>integrationTestFiles('evidence',0,'reviewed',encoded(files)),/reviewed/);
+    assert.throws(()=>integrationTestFiles('evidence',0,'reviewed',''),/roster/);
+    assert.throws(()=>integrationTestFiles('full',1,'reviewed',encoded(['test/one.test.mjs'])),/selection/);
+    fs.symlinkSync('one.test.mjs','test/link.test.mjs');
+    assert.throws(()=>integrationTestFiles('evidence',0,'reviewed',encoded(['test/link.test.mjs'])),/reviewed/);
+    fs.renameSync('test','real-tests');fs.symlinkSync('real-tests','test');
+    assert.throws(()=>integrationTestFiles('evidence',0,'reviewed',encoded(['test/one.test.mjs'])),/reviewed/);
+  } finally {process.chdir(cwd);fs.rmSync(directory,{recursive:true,force:true});}
 });

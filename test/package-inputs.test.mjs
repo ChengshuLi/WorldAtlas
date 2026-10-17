@@ -50,14 +50,14 @@ test('original output capture and actual Python execution use the declared sourc
 });
 
 
-function selectedByGit(definition, names) {
+function selectedByGit(definition, names, inputs) {
   const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'focused-package-patterns-'));
   try {
     const git=(args,options={})=>execFileSync('git',args,{cwd:temporary,encoding:'utf8',...options});
     git(['init','-q']);
     for(const name of names){const file=path.join(temporary,name);fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,'fixture\n');}
     git(['add','.']);git(['-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','fixture']);
-    git(['sparse-checkout','set','--no-cone','--stdin'],{input:focusedCheckoutPatterns(definition).join('\n')+'\n'});
+    git(['sparse-checkout','set','--no-cone','--stdin'],{input:focusedCheckoutPatterns(definition,inputs).join('\n')+'\n'});
     return names.filter(name=>fs.existsSync(path.join(temporary,name)));
   } finally { fs.rmSync(temporary,{recursive:true,force:true}); }
 }
@@ -73,6 +73,8 @@ test('focused checkout follows canonical verification operands and ordinary code
   assert.throws(()=>focusedCheckoutPatterns({...definition,verification_paths:['../outside']}),/Invalid package verification_paths/);
   const changed={...definition,verification_paths:[...definition.verification_paths,excluded[0]]};
   assert.deepEqual(selectedByGit(changed,excluded),[excluded[0]],'one declaration changes the actual Git checkout');
+  assert.deepEqual(selectedByGit(definition,[...required,...excluded],[excluded[0]]),
+    [...required.slice(0,3),excluded[0]],'an exact reviewed fixture list omits unrelated verification operands');
 });
 
 test('focused checkout retains every original body exposed by the cold delivery controls',()=>{

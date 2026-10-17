@@ -1,9 +1,37 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {spawnSync} from 'node:child_process';
 import {verifyNeonCapacity} from '../scripts/verify-neon-capacity.mjs';
 import {expectedNeonProjectId} from '../scripts/verify-neon-project.mjs';
 
 const key = 'synthetic-key-never-retained';
+
+test('metadata workflow executes its actual entry points from only the declared code', t => {
+  const root = path.resolve(import.meta.dirname, '..');
+  const workflow = fs.readFileSync(path.join(root, '.github/workflows/neon-verify.yml'), 'utf8');
+  const block = workflow.match(/sparse-checkout: \|\n((?:            .+\n)+)/);
+  assert.ok(block);
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'neon-metadata-checkout-'));
+  t.after(() => fs.rmSync(directory, {recursive:true, force:true}));
+  for (const name of block[1].trim().split('\n').map(row => row.trim().replace(/^\//, ''))) {
+    const destination = path.join(directory, name);
+    fs.mkdirSync(path.dirname(destination), {recursive:true});
+    fs.copyFileSync(path.join(root, name), destination);
+  }
+  const commands = [...workflow.matchAll(/run: node ([^\s]+) ([^\s]+)/g)];
+  assert.ok(commands.length);
+  for (const [, entry, output] of commands) {
+    const result = spawnSync(process.execPath, [entry, output], {cwd:directory, encoding:'utf8', env:{PATH:process.env.PATH}});
+    assert.equal(result.status, 1, result.stderr);
+    const receipt = JSON.parse(fs.readFileSync(path.join(directory, output), 'utf8'));
+    assert.equal(receipt.error_code, 'missing-or-invalid-api-key');
+    assert.equal(receipt.read_only, true);
+  }
+});
+
 function fixture({organizationStatus = 200, quota = {logical_size_bytes: 1000000000, active_time_seconds: 0}, org = true} = {}) {
   const requests = [];
   const project = {id: expectedNeonProjectId, ...(org ? {org_id: 'org-example'} : {}),

@@ -93,6 +93,28 @@ test('native-diagnostic CLI publishes an exact mixed partition and cannot substi
   fs.unlinkSync(path.join(directory,'native-diagnostic.json'));
   fs.writeFileSync(path.join(directory,'native-diagnostic.json'),raw);
   f.git('add',output);f.git('commit','-qm','Retained diagnostic is observation only');
+  // Consume the genuine retained diagnostic through the ordinary narrowing CLI.
+  // Its emitted source/patch still go through the distinct authority constructor.
+  const diagnosticCommit=f.git('rev-parse','HEAD'),narrowed='coordination/engineering/fixture/supported';
+  f.save('supported-config.json',jsonBytes({version:1,diagnostic:{commit:diagnosticCommit,path:output+'/native-diagnostic.json'}}));
+  const narrow=flags=>spawnSync(process.execPath,[script,'supported-inputs','supported-config.json',narrowed,...flags],
+    {cwd:f.root,encoding:'utf8',timeout:30000,env:{...process.env,NODE_OPTIONS:'',NODE_PATH:''}});
+  const prepared=narrow([]);assert.equal(prepared.status,0,prepared.stderr);
+  const product=name=>JSON.parse(fs.readFileSync(path.join(f.root,narrowed,name)));
+  assert.deepEqual(product('native-patch.json'),{rows:result.supported_rows});
+  assert.deepEqual(product('source-evidence.json'),f.reader.json(result.original_pins.source_evidence));
+  assert.equal(product('original-scope-partition.json').held_cells,1);
+  assert.equal(product('original-scope-partition.json').original_cells,2);
+  assert(!fs.existsSync(path.join(f.root,narrowed,'authority-binding.json')));
+  assert.equal(narrow(['--resume']).status,0);
+  const occupied=narrow([]);assert.notEqual(occupied.status,0);assert.match(occupied.stderr,/Occupied destination/);
+  f.git('add',narrowed);f.git('commit','-qm','Narrowed original diagnostic inputs');
+  const supportedCommit=f.git('rev-parse','HEAD');
+  f.config.source_evidence={commit:supportedCommit,path:narrowed+'/source-evidence.json'};
+  f.config.native_patch={commit:supportedCommit,path:narrowed+'/native-patch.json'};
+  const authority=f.run('native-authority','coordination/engineering/fixture/qualified');
+  assert.equal(authority.status,0,authority.stderr);
+  assert.equal(JSON.parse(authority.stdout).observation.qualified_cells,1);
   f.config.source_evidence={commit:f.git('rev-parse','HEAD'),path:output+'/native-diagnostic.json'};
   const destination='coordination/engineering/fixture/rejected-authority',rejected=f.run('native-authority',destination);
   assert.notEqual(rejected.status,0);assert.match(rejected.stderr,/Incomplete source-target evidence/);assert(!fs.existsSync(path.join(f.root,destination)));

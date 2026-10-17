@@ -202,11 +202,20 @@ const focusedTest = new RegExp('^test/(?:' + FOCUSED_TEST_FAMILIES.join('|') + '
 // routing checks. Test execution still discovers only top-level *.test.mjs.
 export const focusedIntegrationTest = name => focusedTest.test(name) || ['test/fixtures/selected-checkpoint.mjs','test/fixtures/native-word-store.mjs'].includes(name);
 
-export function integrationTestFiles(profile, shard, testSelection = 'complete') {
-  if (!['complete','selected-output'].includes(testSelection) ||
-      (testSelection !== 'complete' && (profile !== 'full' || shard !== 0))) throw Error('Invalid trusted test selection');
+export function integrationTestFiles(profile, shard, testSelection = 'complete', reviewed = process.env.INTEGRATION_TEST_FILES_BASE64) {
+  if (!['complete','selected-output','reviewed'].includes(testSelection) ||
+      (testSelection === 'selected-output' && profile !== 'full') || (testSelection !== 'complete' && shard !== 0)) throw Error('Invalid trusted test selection');
   if (!['full','evidence'].includes(profile) || !Number.isInteger(shard) || shard < 0 || shard > 2 ||
       (profile === 'evidence' && shard !== 0)) throw Error('Invalid trusted integration test profile');
+  if (testSelection === 'reviewed') {
+    if (typeof reviewed !== 'string' || !/^[A-Za-z0-9+/]+={0,2}$/.test(reviewed)) throw Error('Missing reviewed test roster');
+    const files = JSON.parse(Buffer.from(reviewed, 'base64').toString('utf8'));
+    if (!Array.isArray(files) || !files.length || new Set(files).size !== files.length ||
+        !fs.lstatSync('test').isDirectory() || files.some(name => typeof name !== 'string' ||
+          !/^test\/[A-Za-z0-9_.-]+\.test\.mjs$/.test(name) || !fs.existsSync(name) || !fs.lstatSync(name).isFile()))
+      throw Error('Invalid or missing reviewed candidate test file');
+    return files;
+  }
   const inventory = fs.readdirSync('test').filter(name => name.endsWith('.test.mjs')).sort().map(name=>`test/${name}`);
   const files = testSelection === 'selected-output' ? ['test/compact-ownership.test.mjs']
     : profile === 'full' ? fullRegressionShard(inventory, shard) : inventory.filter(focusedIntegrationTest);
@@ -298,7 +307,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const retained=testSelection==='selected-output'?requireCurrentPackageAssembly():null;
   if(retained)console.log(JSON.stringify({package_assembly:retained}));
   const git=measuredGitSetup();
-  const nativeInputs=await observeSetupPhase('immutable-regression-inputs',()=>prepareNativeRegressionInputs(testSelection === 'complete' ? profile : 'evidence',{files,run:git.run}),{counters:git.snapshot});
+  const nativeInputs=await observeSetupPhase('immutable-regression-inputs',()=>prepareNativeRegressionInputs(testSelection === 'reviewed' ? 'full' : testSelection === 'complete' ? profile : 'evidence',{files,run:git.run}),{counters:git.snapshot});
   console.log(JSON.stringify({native_inputs:nativeInputs}));
   // Current prepared products are committed inputs. Historical restoration is
   // explicit reproduction, never a mutation of ordinary regression inputs.

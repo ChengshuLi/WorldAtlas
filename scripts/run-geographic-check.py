@@ -487,8 +487,6 @@ def main():
             if git(repo, 'remote', 'get-url', remote).decode().strip() not in [
                     'https://github.com/ChengshuLi/WorldAtlas', 'https://github.com/ChengshuLi/WorldAtlas.git']:
                 raise ValueError('Candidate acquisition requires the anonymous public repository remote')
-    with stage_timing('trusted-checkout-initial'):
-        verify_trusted_checkout(repo, args.code_commit)
     if args.fetch:
         with stage_timing('candidate-fetch'):
             fetch_candidate(repo, args.candidate)

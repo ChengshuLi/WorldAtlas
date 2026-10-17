@@ -488,14 +488,14 @@ test('authenticated custody never substitutes for candidate identity, ordered pa
     const f = queueCompletionFixture(), geography = await f.load();
     geographicReportProducts(geography).source[field] = field === 'workflow_path'
       ? '.github/workflows/merge-integration-checks.yml' : field === 'event' ? 'pull_request' : 'f'.repeat(40);
-    await assert.rejects(f.complete({geographyReportLoader: async () => geography}), /source differs/);
+    await assert.rejects(f.complete({preparedGeographySoftware:false,geographyReportLoader: async () => geography}), /source differs/);
     assert.equal(f.writes.length, 0, field);
   }
   for (const mutate of [f => {f.commit.sha = 'f'.repeat(40);}, f => {delete f.commit.tree;},
     f => {f.commit.parents.reverse();}, f => {f.commit.parents.pop();},
     f => {f.commit.parents[0].sha = 'f'.repeat(40);}, f => {f.commit.parents[1].sha = 'f'.repeat(40); }]) {
     const f = queueCompletionFixture(); mutate(f);
-    await assert.rejects(f.complete(), /candidate identity|exact current main/);
+    await assert.rejects(f.complete({preparedGeographySoftware:false}), /candidate identity|exact current main/);
     assert.equal(f.writes.length, 0); assert.deepEqual(f.treeReads(), []);
   }
 });
@@ -551,7 +551,7 @@ test('prepared custody preserves fresh final main, head, check and status guards
       if (changed === 'status') f.status = {statuses: [{}], state: 'failure'};
       return geography;
     };
-    await assert.rejects(f.complete({geographyReportLoader: loader}));
+    await assert.rejects(f.complete({preparedGeographySoftware:false,geographyReportLoader: loader}));
     assert.equal(f.writes.length, 0, changed);
   }
 });
@@ -625,4 +625,57 @@ test('eligible skipped geography still verifies actual candidate ordinary files 
       assert.deepEqual(result.geography,{status:'not-applicable',reason:'non-geographic-controls'});
     }
   }
+});
+
+
+test('prepared checker choice rejects malformed explicit values without granting merge authority',async()=>{
+  for(const value of [null,0,1,'','true','false',[],{}]) {
+    const f=queueCompletionFixture();
+    await assert.rejects(f.complete({preparedGeographySoftware:value}),/Invalid prepared geographic checker choice/);
+    assert.equal(f.writes.length,0);
+  }
+});
+
+test('genuine fresh queue checker choice binds both code outcomes and refuses contradictory reports',async()=>{
+  for(const software of [false,true]) for(const choice of [false,true]) {
+    const f=queueCompletionFixture(freshQueueTransport(report=>software?{...report,trusted_code_commit:report.candidate_commit,
+      candidate_code_executed:true,trusted_code_inventory_sha256:'f'.repeat(64)}:report));
+    const run=()=>f.complete({preparedGeographySoftware:choice});
+    if(software===choice)assert.equal((await run()).accepted,true);
+    else {await assert.rejects(run,/exact trusted combined check/);assert.equal(f.writes.length,0);}
+  }
+});
+
+test('historical or forged custody cannot override independently derived candidate checker code',async()=>{
+  for(const kind of ['clone','historical','supplied-queue']) {
+    const f=queueCompletionFixture(kind==='historical'?combinedTransport():freshQueueTransport());
+    const name='scripts/changed-geography.mjs';f.files=[{filename:name,status:'added'}];
+    f.integrated=[{path:name,type:'blob',mode:'100644',sha:'1'.repeat(40),size:1}];
+    let geography=await f.load();
+    if(kind==='clone')geography=structuredClone(geography);
+    if(kind==='supplied-queue')geography=await loadGeographicReport({...f.loadOptions,api:f.api,fresh:undefined,
+      source:geographicReportProducts(geography).source});
+    geography.prepared_queue=true;assert.equal(preparedQueueSource(geography),null);
+    await assert.rejects(f.complete({preparedGeographySoftware:false,geographyReportLoader:async()=>geography}),/exact trusted combined check/);
+    assert.equal(f.writes.length,0);
+  }
+});
+
+test('workflow forwards the same trusted prepare choice to checker execution and final verification',()=>{
+  const workflow=fs.readFileSync('.github/workflows/worker-merge.yml','utf8');
+  const merge=workflow.split('\n  merge:\n')[1];
+  assert.match(merge,/PREPARED_GEOGRAPHY_SOFTWARE: \$\{\{ needs\.prepare\.outputs\.geography_software \}\}/);
+  assert.match(workflow,/GEOGRAPHY_CODE_COMMIT: \$\{\{ \(needs\.prepare\.outputs\.geography_software == 'true'\)/);
+});
+
+
+test('prepared reuse retains actual integration/geography results and original candidate tree',async()=>{
+  for(const override of [{integrationResult:'failure'},{integrationResult:'skipped'},{integrationResult:'cancelled'},
+    {geographyResult:'failure'},{geographyResult:'skipped'},{geographyResult:'cancelled'}]) {
+    const f=queueCompletionFixture();
+    await assert.rejects(f.complete({preparedGeographySoftware:false,...override}));assert.equal(f.writes.length,0);
+  }
+  const f=queueCompletionFixture(),geography=await f.load();f.commit.tree.sha='f'.repeat(40);
+  await assert.rejects(f.complete({preparedGeographySoftware:false,geographyReportLoader:async()=>geography}),/source differs/);
+  assert.equal(f.writes.length,0);
 });
