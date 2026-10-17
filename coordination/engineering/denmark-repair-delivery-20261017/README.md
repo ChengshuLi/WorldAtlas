@@ -1,0 +1,15 @@
+# Denmark complete original source/native repair handoff
+
+Issue #2391. Full original scope is 27,783 cells, 7,471 intervals and 69 direct municipality owners, including 23,874 land and 3,909 inland-water cells. All target records equal the selected geography bank; accepted overlap is zero at 2223d85bbe8b18585c221cc1329d115e8e774a42.
+
+Genuine accepted-stock physical, source-evidence, native-diagnostic and separate native-authority phases completed. Every original key is qualified; none held. The immutable quartet and full subjects are in final-handoff-001/qualified-authority-handoff.json. Exact request/diagnostic/authority equality and per-owner counts are in complete-native-authority-accounting.json. No PR2386 helper was needed or adopted.
+
+The full consumed primary source has 98 unique municipality features and the contextual source five regions. All 103 are valid/nonempty. ADM2 represented-2018/Public Domain and ADM1 represented-2021/CC BY 4.0 declarations are preserved separately from actual observation, retrieval, update and build dates. The Wikimedia upstream citation is incomplete; we authenticate the actual consumed simplified geoBoundaries product, not the missing upstream artwork. Complete original municipality geometry and island components are retained without parent clipping or aggregation.
+
+All 366 foreign families / 73,464 complete originals were screened without owner filtering. Exactly 12 whole-bounds contacts occur in five complete German/Swedish families, all passed to stock negative preparation. Three raw Fiji periodic-frame exceptions are reconciled against original retained frame/native-span evidence. No global current-territory absence is asserted. Original foreign-bounds-001 had copied Cuba summary fields; foreign-bounds-002 genuinely reruns the complete screen and derives summary counts from frozen scope. Both remain visible; no output was overwritten.
+
+Whole-source physical output is about 2.6MB and took 11.06 seconds. All 71 physical issues remain in the native input. Full diagnostic took 4.15 seconds; separate authority 3.86 seconds. Fifteen actual custom-writer controls reject occupied paths, dangling symlinks and method drift, preserve sentinel bytes and create no output. Stock runtime/source methods remain unchanged.
+
+Prior Nordic #333/#332, all-island and parent-region semantic obligations and separate mapping/physical companions remain open. Source-native authority is neither current-owner-zero nor selected conservation, emitted-consumer acceptance, historical/legal fitness or accepted repair credit. Root owns later integration after independent exact-head review.
+
+Production probes accept explicit repository, exact method commit and fresh output; run-physical-observed.sh observes the stock entry. Historical screen-original.py, verify-targets.py and run-controls.py retain their actual scratch-directory assumptions as audit code, not portable production entry points. Genuine constructor and input pins are unchanged; input-byte-equivalences.json supplies restoration-only ordinary-byte equivalence for manifest custody.
