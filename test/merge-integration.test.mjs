@@ -305,7 +305,7 @@ test('trusted profile uses focused invariants only for isolated evidence and doc
 
 test('immutable reader and checkpoint routing retains the complete actual consumer roster and geography gate', () => {
   const prefix='coordination/engineering/selected-geography-effective-prevention-20261009/';
-  const methods=['scripts/check-effective-geographic-regression.mjs','scripts/selected-checkpoint-native.mjs',
+  const methods=['scripts/check-effective-geographic-regression.mjs','scripts/selected-checkpoint-native.mjs', 'scripts/run-geographic-check.py',
     prefix+'selected-checkpoint.mjs',prefix+'selected-joint-entry.mjs'];
   const consumers=[
     "test/accepted-checkpoint-qualification.test.mjs",

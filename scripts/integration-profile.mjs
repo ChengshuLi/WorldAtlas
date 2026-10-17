@@ -10,7 +10,7 @@ export const COORDINATION_PATHS = new Set([
   'scripts/prepare-delivery-handoff.mjs', 'scripts/delivery-handoff-advance.mjs',
   // The immutable comparison/checkpoint family has no application or builder
   // imports. Its complete focused consumers and candidate geography still run.
-  'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs',
+  'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs', 'scripts/run-geographic-check.py',
   'coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs',
   'coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs',
   'docs/WORKER_COORDINATION.md', 'docs/PREMERGE_EVIDENCE_REVIEW.md',
