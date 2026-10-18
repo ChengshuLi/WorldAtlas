@@ -1,0 +1,1253 @@
+{
+  "census_commit": "20bf5ed4bcefeac4ea0fc705335809bed02fd6d1",
+  "whole_required_families": 11,
+  "whole_required_features": 937,
+  "selected_feature_contacts": 67,
+  "actual_native_archives": [
+    {
+      "family": "gb:BFA:ADM1",
+      "complete_native_features": 13,
+      "census_selected_features": 2,
+      "census_complete_original_sha256": "651c170ce5570e020448e9ba29c69a749a40d663f06ba4114ddee561bfdce670",
+      "archive_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-bfa/source-rights/BFA_ADM1.zip",
+      "archive_bytes": 857130,
+      "archive_sha256": "4ec91d9a6f83b6ddc697bb7b6f81d26c9c81daa0f136897053c16804d213f90a",
+      "immutable_upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "immutable_upstream_path": "sourceData/gbOpen/BFA_ADM1.zip",
+      "retained_upstream_pointer": {
+        "text": "version https://git-lfs.github.com/spec/v1\noid sha256:4ec91d9a6f83b6ddc697bb7b6f81d26c9c81daa0f136897053c16804d213f90a\nsize 857130\n",
+        "source": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-bfa/context-upstream-pointers.json",
+        "oid": "a6f4bd190251127e9807b2cd15e1a08246778b87"
+      },
+      "all_native_members": [
+        {
+          "path": "BFA_ADM1.cpg",
+          "bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "path": "BFA_ADM1.dbf",
+          "bytes": 1053,
+          "sha256": "1c61b969c2ba13d1e3275cc53132bacc1c6b232df5fcd63a3682f0aabdc38ae4"
+        },
+        {
+          "path": "BFA_ADM1.prj",
+          "bytes": 143,
+          "sha256": "98aaf3d1c0ecadf1a424a4536de261c3daf4e373697cb86c40c43b989daf52eb"
+        },
+        {
+          "path": "BFA_ADM1.qpj",
+          "bytes": 257,
+          "sha256": "1de411dcdeedce3219242306fc29bfa1d7fa08883e4ff6779baf798ec50d1657"
+        },
+        {
+          "path": "BFA_ADM1.shp",
+          "bytes": 435468,
+          "sha256": "bd14e01b73db29f1d779cc8cbd5922cfd7293626a83de8fc7a6e45b1adad27fe"
+        },
+        {
+          "path": "BFA_ADM1.shx",
+          "bytes": 204,
+          "sha256": "164a5f9ef560f9bc4e7f10c233071620e7e6600987ff663e487774090adfc544"
+        },
+        {
+          "path": "license.png",
+          "bytes": 588876,
+          "sha256": "4c495639f9ce0ee8b174fcf7d8ec03376b0c7ae10337c38ceee2e5c252801934"
+        },
+        {
+          "path": "__MACOSX/._license.png",
+          "bytes": 480,
+          "sha256": "ed7c0068ef1fc4180e1f9a1a6f9109668a7007ddb1152caa423e5bb911bd7dfc"
+        },
+        {
+          "path": "meta.txt",
+          "bytes": 429,
+          "sha256": "f8ac1a8edcc8086a0f53e46ebae85184852115f05314c6752a19a11ad0fd2421"
+        },
+        {
+          "path": "__MACOSX/._meta.txt",
+          "bytes": 317,
+          "sha256": "dfedd7fcdc44882cac0f2b9d016afd2a7fce5b1e05d57c52cadca0943946fc6f"
+        }
+      ],
+      "native_meta": "Boundary Representative of Year:2017\nISO-3166-1 (Alpha-3):BFA\nBoundary Type:ADM1\nCanonical Boundary Type Name:Region\nSource 1:World Bank\nSource 2: \nRelease Type:gbOpen\nLicense:Creative Commons Attribution 4.0 (CC BY 4.0)\nLicense Notes: \nLicense Source:https://datacatalog.worldbank.org/public-licenses#cc-by\nLink to Source Data:https://datacatalog.worldbank.org/dataset/burkina-faso-administrative-boundaries-2017\nOther Notes:\n",
+      "native_prj": "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137,298.257223563]],PRIMEM[\"Greenwich\",0],UNIT[\"Degree\",0.017453292519943295]]",
+      "native_attribute_fields": [
+        {
+          "name": "Name",
+          "type": "C",
+          "length": 50,
+          "decimal": 0
+        },
+        {
+          "name": "Level",
+          "type": "C",
+          "length": 10,
+          "decimal": 0
+        },
+        {
+          "name": "ISO_Code",
+          "type": "C",
+          "length": 10,
+          "decimal": 0
+        }
+      ],
+      "retained_native_metadata": [
+        {
+          "archive_member": "BFA_ADM1.prj",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/BFA_ADM1/BFA_ADM1.prj",
+          "bytes": 143,
+          "sha256": "98aaf3d1c0ecadf1a424a4536de261c3daf4e373697cb86c40c43b989daf52eb",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/BFA_ADM1/BFA_ADM1.prj"
+        },
+        {
+          "archive_member": "license.png",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/BFA_ADM1/license.png",
+          "bytes": 588876,
+          "sha256": "4c495639f9ce0ee8b174fcf7d8ec03376b0c7ae10337c38ceee2e5c252801934",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/BFA_ADM1/license.png"
+        },
+        {
+          "archive_member": "meta.txt",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/BFA_ADM1/meta.txt",
+          "bytes": 429,
+          "sha256": "f8ac1a8edcc8086a0f53e46ebae85184852115f05314c6752a19a11ad0fd2421",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/BFA_ADM1/meta.txt"
+        }
+      ],
+      "archive_repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/BFA_ADM1/BFA_ADM1.zip",
+      "archive_git_blob_oid": "5790f78c0748bbbf5ce28df885536b29ce8e8ece"
+    },
+    {
+      "family": "gb:BFA:ADM2",
+      "complete_native_features": 45,
+      "census_selected_features": 4,
+      "census_complete_original_sha256": "b9882ee6269fd2b45276e420cafffb544c87519ab478024f7080712a52cd50a9",
+      "archive_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-bfa/source-rights/BFA_ADM2.zip",
+      "archive_bytes": 1116358,
+      "archive_sha256": "f9098548d0a9c4545e8988afd4acc1e99135052c253884cffe06f95eadc5b2fe",
+      "immutable_upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "immutable_upstream_path": "sourceData/gbOpen/BFA_ADM2.zip",
+      "retained_upstream_pointer": {
+        "text": "version https://git-lfs.github.com/spec/v1\noid sha256:f9098548d0a9c4545e8988afd4acc1e99135052c253884cffe06f95eadc5b2fe\nsize 1116358\n",
+        "source": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-bfa/context-upstream-pointers.json",
+        "oid": "88ea914fc34ba5f9c10f3e51cd78d6c132fbc37d"
+      },
+      "all_native_members": [
+        {
+          "path": "BFA_ADM2.cpg",
+          "bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "path": "BFA_ADM2.dbf",
+          "bytes": 2843,
+          "sha256": "d252b4efb97a0d60e0d802a8655e28c7ab524bfc09bbfbfd9083c451e5c2428f"
+        },
+        {
+          "path": "BFA_ADM2.prj",
+          "bytes": 143,
+          "sha256": "98aaf3d1c0ecadf1a424a4536de261c3daf4e373697cb86c40c43b989daf52eb"
+        },
+        {
+          "path": "BFA_ADM2.qpj",
+          "bytes": 257,
+          "sha256": "1de411dcdeedce3219242306fc29bfa1d7fa08883e4ff6779baf798ec50d1657"
+        },
+        {
+          "path": "BFA_ADM2.shp",
+          "bytes": 832492,
+          "sha256": "261fba3dc058a698e1b8914bcd0f864519a5e10b44e983c0a7f6284755b3ab0a"
+        },
+        {
+          "path": "BFA_ADM2.shx",
+          "bytes": 460,
+          "sha256": "073befbfd2da55dbec691b58aa432741cb32b9863f8aed21f22062988e0688e1"
+        },
+        {
+          "path": "license.png",
+          "bytes": 588876,
+          "sha256": "4c495639f9ce0ee8b174fcf7d8ec03376b0c7ae10337c38ceee2e5c252801934"
+        },
+        {
+          "path": "__MACOSX/._license.png",
+          "bytes": 480,
+          "sha256": "ed7c0068ef1fc4180e1f9a1a6f9109668a7007ddb1152caa423e5bb911bd7dfc"
+        },
+        {
+          "path": "meta.txt",
+          "bytes": 431,
+          "sha256": "ee413309c949d10c8f9949753733d8f61888224db1e6fca2f291cc6a43f68bb0"
+        },
+        {
+          "path": "__MACOSX/._meta.txt",
+          "bytes": 317,
+          "sha256": "b084cec46127275abf96aec63a649f0c585d6157c0101f9ad8b6eaf5c7c49715"
+        }
+      ],
+      "native_meta": "Boundary Representative of Year:2017\nISO-3166-1 (Alpha-3):BFA\nBoundary Type:ADM2\nCanonical Boundary Type Name:Province\nSource 1:World Bank\nSource 2: \nRelease Type:gbOpen\nLicense:Creative Commons Attribution 4.0 (CC BY 4.0)\nLicense Notes: \nLicense Source:https://datacatalog.worldbank.org/public-licenses#cc-by\nLink to Source Data:https://datacatalog.worldbank.org/dataset/burkina-faso-administrative-boundaries-2017\nOther Notes:\n",
+      "native_prj": "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137,298.257223563]],PRIMEM[\"Greenwich\",0],UNIT[\"Degree\",0.017453292519943295]]",
+      "native_attribute_fields": [
+        {
+          "name": "Name",
+          "type": "C",
+          "length": 50,
+          "decimal": 0
+        },
+        {
+          "name": "Level",
+          "type": "C",
+          "length": 10,
+          "decimal": 0
+        }
+      ],
+      "retained_native_metadata": [
+        {
+          "archive_member": "BFA_ADM2.prj",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/BFA_ADM2/BFA_ADM2.prj",
+          "bytes": 143,
+          "sha256": "98aaf3d1c0ecadf1a424a4536de261c3daf4e373697cb86c40c43b989daf52eb",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/BFA_ADM2/BFA_ADM2.prj"
+        },
+        {
+          "archive_member": "license.png",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/BFA_ADM2/license.png",
+          "bytes": 588876,
+          "sha256": "4c495639f9ce0ee8b174fcf7d8ec03376b0c7ae10337c38ceee2e5c252801934",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/BFA_ADM2/license.png"
+        },
+        {
+          "archive_member": "meta.txt",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/BFA_ADM2/meta.txt",
+          "bytes": 431,
+          "sha256": "ee413309c949d10c8f9949753733d8f61888224db1e6fca2f291cc6a43f68bb0",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/BFA_ADM2/meta.txt"
+        }
+      ],
+      "archive_repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/BFA_ADM2/BFA_ADM2.zip",
+      "archive_git_blob_oid": "2007b2c7d8b9d3fbe0cddc1ba6d94d1056aa7c8a"
+    },
+    {
+      "family": "gb:BFA:ADM3",
+      "complete_native_features": 351,
+      "census_selected_features": 12,
+      "census_complete_original_sha256": "e6f8af518e7dffd7d2e7bb95fbba41f0ed3287ebb04b8f55762d2737c563d6c9",
+      "archive_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-bfa/source-rights/BFA_ADM3.zip",
+      "archive_bytes": 1211396,
+      "archive_sha256": "f11fd8438c5bdbe638cb58f13c07b150539845b46e1c0d0cd4a8165de5ae9f8b",
+      "immutable_upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "immutable_upstream_path": "sourceData/gbOpen/BFA_ADM3.zip",
+      "retained_upstream_pointer": {
+        "text": "version https://git-lfs.github.com/spec/v1\noid sha256:f11fd8438c5bdbe638cb58f13c07b150539845b46e1c0d0cd4a8165de5ae9f8b\nsize 1211396\n",
+        "source": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-bfa/primary-upstream-pointer.json",
+        "oid": "a89368042488a58a388bc8f84490d4d13203b9db"
+      },
+      "all_native_members": [
+        {
+          "path": "BFA_ADM3.cpg",
+          "bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "path": "BFA_ADM3.dbf",
+          "bytes": 14489,
+          "sha256": "0a2a94c36aa2037e45e831e1fc4162460478f9bc9fdb9ed4cc25ef8e00255f22"
+        },
+        {
+          "path": "BFA_ADM3.prj",
+          "bytes": 145,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4"
+        },
+        {
+          "path": "BFA_ADM3.sbn",
+          "bytes": 3716,
+          "sha256": "8942309424a1c4157e1a3a232aebf56a9cddde24d858af75bda886064dca0f3d"
+        },
+        {
+          "path": "BFA_ADM3.sbx",
+          "bytes": 404,
+          "sha256": "6f6c26a3d761a4c370dd7c37357c2d9b0ae876f60cab1f9e1b220a05b340ce6d"
+        },
+        {
+          "path": "BFA_ADM3.shp",
+          "bytes": 1843692,
+          "sha256": "59672693a22f1077dc50d60bea5129bd448c6ad26da5c38cd9a892ffbe6fef84"
+        },
+        {
+          "path": "BFA_ADM3.shp.xml",
+          "bytes": 351657,
+          "sha256": "0bb21e424dd0e48d7536cedde29d72b5c5bfddaa1f3d043fa27adfa0db446e18"
+        },
+        {
+          "path": "BFA_ADM3.shx",
+          "bytes": 2908,
+          "sha256": "a926bc648faa379150cae8b83a5b8354d7d8216f874ba3ec55c6a9ca7c8b8236"
+        },
+        {
+          "path": "meta.txt",
+          "bytes": 469,
+          "sha256": "fb8cc660eb771cf0d39487b17c69c0368da5778f19d0698c5de00027a224fd3a"
+        }
+      ],
+      "native_meta": "Boundary Representative of Year: 2007.0\nISO-3166-1 (Alpha-3): BFA\nBoundary Type: ADM3\nCanonical Boundary Type Name: \nSource 1: New York University Spatial Data Repository, Stanford University\nSource 2: Map Maker Limited\nRelease Type: gbOpen\nLicense: Public Domain\nLicense Notes: License on metadata pop-up on source page\nLicense Source: https://geo.nyu.edu/catalog/stanford-bv378fk8507\nLink to Source Data: https://geo.nyu.edu/catalog/stanford-bv378fk8507\nOther Notes: ",
+      "native_prj": "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137.0,298.257223563]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+      "native_attribute_fields": [
+        {
+          "name": "Name",
+          "type": "C",
+          "length": 30,
+          "decimal": 0
+        },
+        {
+          "name": "Level",
+          "type": "C",
+          "length": 10,
+          "decimal": 0
+        }
+      ],
+      "retained_native_metadata": [
+        {
+          "archive_member": "BFA_ADM3.prj",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/BFA_ADM3/BFA_ADM3.prj",
+          "bytes": 145,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/BFA_ADM3/BFA_ADM3.prj"
+        },
+        {
+          "archive_member": "BFA_ADM3.shp.xml",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/BFA_ADM3/BFA_ADM3.shp.xml",
+          "bytes": 351657,
+          "sha256": "0bb21e424dd0e48d7536cedde29d72b5c5bfddaa1f3d043fa27adfa0db446e18",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/BFA_ADM3/BFA_ADM3.shp.xml"
+        },
+        {
+          "archive_member": "meta.txt",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/BFA_ADM3/meta.txt",
+          "bytes": 469,
+          "sha256": "fb8cc660eb771cf0d39487b17c69c0368da5778f19d0698c5de00027a224fd3a",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/BFA_ADM3/meta.txt"
+        }
+      ],
+      "archive_repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/BFA_ADM3/BFA_ADM3.zip",
+      "archive_git_blob_oid": "97fa73e3cec1066294afebee070438cf57f0575a"
+    },
+    {
+      "family": "gb:GHA:ADM1",
+      "complete_native_features": 16,
+      "census_selected_features": 5,
+      "census_complete_original_sha256": "d5a094926ef50976c55444e507f61eab56e8c351a3b9cecc76dc2a1074f6214f",
+      "archive_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-bfa/source-rights/GHA_ADM1.zip",
+      "archive_bytes": 1430151,
+      "archive_sha256": "edca25c1df8bf1235a385b24e7b7c872b77798aa26c91884e6857fb077530c49",
+      "immutable_upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "immutable_upstream_path": "sourceData/gbOpen/GHA_ADM1.zip",
+      "retained_upstream_pointer": {
+        "text": "version https://git-lfs.github.com/spec/v1\noid sha256:edca25c1df8bf1235a385b24e7b7c872b77798aa26c91884e6857fb077530c49\nsize 1430151\n",
+        "source": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-bfa/context-upstream-pointers.json",
+        "oid": "d5fc781880ea5110eb4eaf159f9bcf094faffdcb"
+      },
+      "all_native_members": [
+        {
+          "path": "meta.txt",
+          "bytes": 359,
+          "sha256": "55d219f23d7bd919e5e0a981af2969f4696ce9fae566fa97d20f1fea7987aaf0"
+        },
+        {
+          "path": "__MACOSX/._meta.txt",
+          "bytes": 474,
+          "sha256": "65f7c854815c230e6ee16941ac113f9fbbdb94dc495a90dc2bab7dde3b549abb"
+        },
+        {
+          "path": "GHA_ADM1.dbf",
+          "bytes": 1266,
+          "sha256": "11765d66c8814c12f27a7d45b3832bfdf01b300b0a0d74faf6c805b2a0da0a43"
+        },
+        {
+          "path": "GHA_ADM1.shx",
+          "bytes": 228,
+          "sha256": "1771455efa18a7fb6c04b6b9b2afcb88cfe557b49f8d24adf47c053718b7be3a"
+        },
+        {
+          "path": "GHA_ADM1.cpg",
+          "bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "path": "GHA_ADM1.shp",
+          "bytes": 1270932,
+          "sha256": "08ab007a5fe7a53796ee2c815ec3ce2a00dc448794d9e34af126cd4f2ece1aa6"
+        },
+        {
+          "path": "__MACOSX/._GHA_ADM1.shp",
+          "bytes": 176,
+          "sha256": "ad72cc6025535e2d6d3f17cf168652f532c60672c0f268438e9f5a6a575634ad"
+        },
+        {
+          "path": "license.png",
+          "bytes": 443761,
+          "sha256": "f99db0a77406adfa393ed88aff7bb2004d5e6a0ed85fac31b56a9dd2330a3689"
+        },
+        {
+          "path": "__MACOSX/._license.png",
+          "bytes": 588,
+          "sha256": "fbbe6fe38994f2c33e4562405e8e1d4a8711531296ec51ebb058604294f34582"
+        },
+        {
+          "path": "GHA_ADM1.prj",
+          "bytes": 145,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4"
+        }
+      ],
+      "native_meta": "Boundary Representative of Year:2021\nISO-3166-1 (Alpha-3):GHA\nBoundary Type:ADM1\nCanonical Boundary Type Name:Region\nSource 1:Open Street Map\nSource 2:\nRelease Type:gBopen\nLicense:Creative Commons Attribution-ShareAlike 2.0\nLicense Notes: \nLicense Source:https://www.openstreetmap.org/copyright\nLink to Source Data:https://osm-boundaries.com/\nOther Notes: \n",
+      "native_prj": "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137.0,298.257223563]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+      "native_attribute_fields": [
+        {
+          "name": "Name",
+          "type": "C",
+          "length": 50,
+          "decimal": 0
+        },
+        {
+          "name": "Level",
+          "type": "C",
+          "length": 10,
+          "decimal": 0
+        },
+        {
+          "name": "ISO_Code",
+          "type": "C",
+          "length": 10,
+          "decimal": 0
+        }
+      ],
+      "retained_native_metadata": [
+        {
+          "archive_member": "meta.txt",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/GHA_ADM1/meta.txt",
+          "bytes": 359,
+          "sha256": "55d219f23d7bd919e5e0a981af2969f4696ce9fae566fa97d20f1fea7987aaf0",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/GHA_ADM1/meta.txt"
+        },
+        {
+          "archive_member": "license.png",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/GHA_ADM1/license.png",
+          "bytes": 443761,
+          "sha256": "f99db0a77406adfa393ed88aff7bb2004d5e6a0ed85fac31b56a9dd2330a3689",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/GHA_ADM1/license.png"
+        },
+        {
+          "archive_member": "GHA_ADM1.prj",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/GHA_ADM1/GHA_ADM1.prj",
+          "bytes": 145,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/GHA_ADM1/GHA_ADM1.prj"
+        }
+      ],
+      "archive_repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/GHA_ADM1/GHA_ADM1.zip",
+      "archive_git_blob_oid": "bc3a45538ee6bb98f11b154c99ab8a3f5d2e5702"
+    },
+    {
+      "family": "gb:GHA:ADM2",
+      "complete_native_features": 260,
+      "census_selected_features": 12,
+      "census_complete_original_sha256": "ae10ae6edbf0a04e5cbedde2d6cb9c30e7867969c530264772d1e76990142f02",
+      "archive_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-archives/GHA_ADM2.zip",
+      "archive_bytes": 8969858,
+      "archive_sha256": "c5ae72c40135fa0cdddcd8c5bbb55ae53032787416703dcb6b22e361958b0211",
+      "immutable_upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "immutable_upstream_path": "sourceData/gbOpen/GHA_ADM2.zip",
+      "retained_upstream_pointer": {
+        "text": "version https://git-lfs.github.com/spec/v1\noid sha256:c5ae72c40135fa0cdddcd8c5bbb55ae53032787416703dcb6b22e361958b0211\nsize 8969858\n",
+        "source": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/GHA_ADM2-upstream-pointer.json",
+        "oid": "2f2318691f4c0dfcd5a7e08a2ae92d790cecabc9"
+      },
+      "all_native_members": [
+        {
+          "path": "GHA_ADM2.cpg",
+          "bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "path": "GHA_ADM2.dbf",
+          "bytes": 74198,
+          "sha256": "524f1459c2f02062579f158ec73a11cd6a52385b728399dbbdb111373bac7c26"
+        },
+        {
+          "path": "GHA_ADM2.prj",
+          "bytes": 145,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4"
+        },
+        {
+          "path": "GHA_ADM2.sbn",
+          "bytes": 2972,
+          "sha256": "1071fce996bac74293aa988495897015e42ccea9766603c0b43c7ad4e7c3d9da"
+        },
+        {
+          "path": "GHA_ADM2.sbx",
+          "bytes": 404,
+          "sha256": "d73c4f3ac42383f4fa0631d55d017949ce352556645c01bfb1835f6cc348982c"
+        },
+        {
+          "path": "GHA_ADM2.shp",
+          "bytes": 10577696,
+          "sha256": "54a09291b757b95cbd6f511d86ed42b73c5c4d0292b2051fd6be6591b681f8a7"
+        },
+        {
+          "path": "GHA_ADM2.shp.xml",
+          "bytes": 15815,
+          "sha256": "87e57072371763dd68855fad9e5d59d066f8d9468a0d5cb4b6aacdc9af7f36c1"
+        },
+        {
+          "path": "GHA_ADM2.shx",
+          "bytes": 2180,
+          "sha256": "03cdc821b35264bbca1f0d2af688a88dbc37d631cc7bc4b82d7fc617352adc59"
+        },
+        {
+          "path": "license.PNG",
+          "bytes": 307809,
+          "sha256": "559b69e651b4adadd78b24be5e5c0f1a7e62f9fe27314e5740bee6b604e6f710"
+        },
+        {
+          "path": "meta.txt",
+          "bytes": 582,
+          "sha256": "efab89352461a226529b50d2a9e10ab92ee560d6eb67bf352f0c3b57648aded3"
+        }
+      ],
+      "native_meta": "Boundary Representative of Year:2019\nISO-3166-1 (Alpha-3):GHA\nBoundary Type:ADM2\nCanonical Boundary Type Name:Districts\nSource 1: USAID Ghana HPNO\nSource 2: Ghana Statistical Service\nRelease Type:gbOpen\nLicense:Creative Commons Attribution 4.0 International (CC BY 4.0)\nLicense Notes: \nLicense Source:https://creativecommons.org/licenses/by/4.0/\nLink to Source Data:https://hub.arcgis.com/datasets/USAID-Ghana-HPNO::ghana-new-260-district/data?geometry=-14.962%2C4.146%2C12.900%2C11.757\nOther Notes: Taken from the official Ghana Statistics Office, candidate for gbAuthoritative\n",
+      "native_prj": "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137.0,298.257223563]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+      "native_attribute_fields": [
+        {
+          "name": "Name",
+          "type": "C",
+          "length": 254,
+          "decimal": 0
+        },
+        {
+          "name": "Level",
+          "type": "C",
+          "length": 30,
+          "decimal": 0
+        }
+      ],
+      "retained_native_metadata": [
+        {
+          "archive_member": "GHA_ADM2.prj",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/GHA_ADM2/GHA_ADM2.prj",
+          "bytes": 145,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/GHA_ADM2/GHA_ADM2.prj"
+        },
+        {
+          "archive_member": "GHA_ADM2.shp.xml",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/GHA_ADM2/GHA_ADM2.shp.xml",
+          "bytes": 15815,
+          "sha256": "87e57072371763dd68855fad9e5d59d066f8d9468a0d5cb4b6aacdc9af7f36c1",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/GHA_ADM2/GHA_ADM2.shp.xml"
+        },
+        {
+          "archive_member": "license.PNG",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/GHA_ADM2/license.PNG",
+          "bytes": 307809,
+          "sha256": "559b69e651b4adadd78b24be5e5c0f1a7e62f9fe27314e5740bee6b604e6f710",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/GHA_ADM2/license.PNG"
+        },
+        {
+          "archive_member": "meta.txt",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/GHA_ADM2/meta.txt",
+          "bytes": 582,
+          "sha256": "efab89352461a226529b50d2a9e10ab92ee560d6eb67bf352f0c3b57648aded3",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/GHA_ADM2/meta.txt"
+        }
+      ],
+      "archive_repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/GHA_ADM2/GHA_ADM2.zip",
+      "archive_git_blob_oid": "b24f58578d5ef999ee4a1506078e426b9b833624"
+    },
+    {
+      "family": "gb:GIN:ADM1",
+      "complete_native_features": 8,
+      "census_selected_features": 2,
+      "census_complete_original_sha256": "7cf3189bd308c1146a639eb670deb1a5666614ea52b9157ba453fcd350dacccd",
+      "archive_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker1-lbr/additional-negative-rights-001/GIN_ADM1.zip",
+      "archive_bytes": 671259,
+      "archive_sha256": "5a57c8ecfa1d8b66fcd5729d574e949c3a6381a199d150ef46b85112768c3fa1",
+      "immutable_upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "immutable_upstream_path": "sourceData/gbOpen/GIN_ADM1.zip",
+      "retained_upstream_pointer": {
+        "text": "version https://git-lfs.github.com/spec/v1\noid sha256:5a57c8ecfa1d8b66fcd5729d574e949c3a6381a199d150ef46b85112768c3fa1\nsize 671259\n",
+        "source": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker1-lbr/additional-negative-rights-001/GIN_ADM1--upstream-lfs-pointer.txt",
+        "oid": null
+      },
+      "all_native_members": [
+        {
+          "path": "GIN_ADM1.cpg",
+          "bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "path": "GIN_ADM1.dbf",
+          "bytes": 810,
+          "sha256": "7f8834dcc927992802cfa62fc5ec9ae166f900d6b6165830a2bd1e2a6f251ecf"
+        },
+        {
+          "path": "GIN_ADM1.prj",
+          "bytes": 145,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4"
+        },
+        {
+          "path": "GIN_ADM1.qmd",
+          "bytes": 1044,
+          "sha256": "c07a08d2f5620731f83f2670e9aa260a240d0dc5471b551cc56602557573d960"
+        },
+        {
+          "path": "GIN_ADM1.shp",
+          "bytes": 170032,
+          "sha256": "a7cec4963f9f1140d31359ba58f1c4afa19706d02ad99b2141e7f4a336eef608"
+        },
+        {
+          "path": "GIN_ADM1.shx",
+          "bytes": 164,
+          "sha256": "15d2b0c168bb229229f81fe2d189c8c553f1969800a3a351ee3356bb603274d4"
+        },
+        {
+          "path": "license.png",
+          "bytes": 579325,
+          "sha256": "f096b6f1d8bc04fb717cc94029a6e1acea7f1e50cdd9cfe23f9e70d86d0fc5e6"
+        },
+        {
+          "path": "__MACOSX/._GIN_ADM1.shp",
+          "bytes": 276,
+          "sha256": "cf5de6456651521119b8e87c60d070fc0bef60ecd88d0b9ea20721af89c1f6a0"
+        },
+        {
+          "path": "__MACOSX/._license.png",
+          "bytes": 631,
+          "sha256": "eda113e062bb95ecfbee4c4ebe372698e153dfbd5fdb703577f995ef1b1117b8"
+        },
+        {
+          "path": "__MACOSX/._meta.txt",
+          "bytes": 574,
+          "sha256": "3b51f4735ff9be1b16f559833eb9fd6c2d09dc456d8786dafd13637b9d51edae"
+        },
+        {
+          "path": "meta.txt",
+          "bytes": 559,
+          "sha256": "aa75b6e41c0d2d776fe5adafe32db524e4635c221c2b3b26a9246d7dc01aadf9"
+        }
+      ],
+      "native_meta": "Boundary Representative of Year: 2017\nISO-3166-1 (Alpha-3): GIN\nBoundary Type: ADM1\nCanonical Boundary Type Name: Administrative regions and governate\nSource 1: World Food Programme\nSource 2: OCHA ROWCA\nRelease Type: gbOpen\nLicense: Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)\nLicense Notes:\nLicense Source: https://data.humdata.org/dataset/guinea-geodatabase\nLink to Source Data: https://ckan.ev.openindustry.in/pt_BR/dataset/guinea-geodatabase/resource/4ed92c38-a5ea-4c53-a4c8-1b01f2fcec32?inner_span=True\nOther Notes: \n",
+      "native_prj": "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137.0,298.257223563]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+      "native_attribute_fields": [
+        {
+          "name": "OBJECTID",
+          "type": "N",
+          "length": 10,
+          "decimal": 0
+        },
+        {
+          "name": "Level",
+          "type": "C",
+          "length": 10,
+          "decimal": 0
+        },
+        {
+          "name": "ISO_Code",
+          "type": "C",
+          "length": 10,
+          "decimal": 0
+        },
+        {
+          "name": "Name",
+          "type": "C",
+          "length": 50,
+          "decimal": 0
+        }
+      ],
+      "retained_native_metadata": [
+        {
+          "archive_member": "GIN_ADM1.prj",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/GIN_ADM1/GIN_ADM1.prj",
+          "bytes": 145,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/GIN_ADM1/GIN_ADM1.prj"
+        },
+        {
+          "archive_member": "GIN_ADM1.qmd",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/GIN_ADM1/GIN_ADM1.qmd",
+          "bytes": 1044,
+          "sha256": "c07a08d2f5620731f83f2670e9aa260a240d0dc5471b551cc56602557573d960",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/GIN_ADM1/GIN_ADM1.qmd"
+        },
+        {
+          "archive_member": "license.png",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/GIN_ADM1/license.png",
+          "bytes": 579325,
+          "sha256": "f096b6f1d8bc04fb717cc94029a6e1acea7f1e50cdd9cfe23f9e70d86d0fc5e6",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/GIN_ADM1/license.png"
+        },
+        {
+          "archive_member": "meta.txt",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/GIN_ADM1/meta.txt",
+          "bytes": 559,
+          "sha256": "aa75b6e41c0d2d776fe5adafe32db524e4635c221c2b3b26a9246d7dc01aadf9",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/GIN_ADM1/meta.txt"
+        }
+      ],
+      "archive_repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/GIN_ADM1/GIN_ADM1.zip",
+      "archive_git_blob_oid": "1471fbfb5192d0111f0920b7f2fd9d0b54c6c174"
+    },
+    {
+      "family": "gb:GIN:ADM2",
+      "complete_native_features": 34,
+      "census_selected_features": 5,
+      "census_complete_original_sha256": "d5150430f42f765b7418123f2d8f4ea6e1c770c9d23e49494488760a7d9f5680",
+      "archive_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker1-lbr/additional-negative-rights-001/GIN_ADM2.zip",
+      "archive_bytes": 725845,
+      "archive_sha256": "fd153b8d87abef3520747de172eabcc603302e4f09f9700c544c1fddd455c893",
+      "immutable_upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "immutable_upstream_path": "sourceData/gbOpen/GIN_ADM2.zip",
+      "retained_upstream_pointer": {
+        "text": "version https://git-lfs.github.com/spec/v1\noid sha256:fd153b8d87abef3520747de172eabcc603302e4f09f9700c544c1fddd455c893\nsize 725845\n",
+        "source": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker1-lbr/additional-negative-rights-001/GIN_ADM2--upstream-lfs-pointer.txt",
+        "oid": null
+      },
+      "all_native_members": [
+        {
+          "path": "GIN_ADM2.cpg",
+          "bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "path": "GIN_ADM2.dbf",
+          "bytes": 2916,
+          "sha256": "69473228ce5f48c26f020bc42a4d639c2f09e9374a80ea3ec490f716c0ee2363"
+        },
+        {
+          "path": "GIN_ADM2.prj",
+          "bytes": 145,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4"
+        },
+        {
+          "path": "GIN_ADM2.shp",
+          "bytes": 245952,
+          "sha256": "37271df921508c25b219016161ba79f811c99bec702e668c26d37415512905d8"
+        },
+        {
+          "path": "GIN_ADM2.shx",
+          "bytes": 372,
+          "sha256": "061cb03a2541c4add08ce320957fc49686dec745503b11dd5910a36149926834"
+        },
+        {
+          "path": "__MACOSX/._license.png",
+          "bytes": 631,
+          "sha256": "eda113e062bb95ecfbee4c4ebe372698e153dfbd5fdb703577f995ef1b1117b8"
+        },
+        {
+          "path": "__MACOSX/._meta.txt",
+          "bytes": 417,
+          "sha256": "207704518835b7fe829eaebf2f9613993907b058788abbf4719a891c861e9cf0"
+        },
+        {
+          "path": "license.png",
+          "bytes": 579325,
+          "sha256": "f096b6f1d8bc04fb717cc94029a6e1acea7f1e50cdd9cfe23f9e70d86d0fc5e6"
+        },
+        {
+          "path": "meta.txt",
+          "bytes": 533,
+          "sha256": "f9fbb8c1f153ccf5c591fb43ae1205c1d351619258a6483d3d435530c380d7af"
+        }
+      ],
+      "native_meta": "Boundary Representative of Year: 2017\nISO-3166-1 (Alpha-3): GIN\nBoundary Type: ADM2\nCanonical Boundary Type Name: prefecture\nSource 1: World Food Programme\nSource 2: OCHA ROWCA\nRelease Type: gbOpen\nLicense: Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)\nLicense Notes:\nLicense Source: https://data.humdata.org/dataset/guinea-geodatabase\nLink to Source Data: https://ckan.ev.openindustry.in/pt_BR/dataset/guinea-geodatabase/resource/4ed92c38-a5ea-4c53-a4c8-1b01f2fcec32?inner_span=True\nOther Notes: \n",
+      "native_prj": "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137.0,298.257223563]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+      "native_attribute_fields": [
+        {
+          "name": "OBJECTID",
+          "type": "N",
+          "length": 10,
+          "decimal": 0
+        },
+        {
+          "name": "ISO Code",
+          "type": "C",
+          "length": 10,
+          "decimal": 0
+        },
+        {
+          "name": "Name",
+          "type": "C",
+          "length": 50,
+          "decimal": 0
+        },
+        {
+          "name": "Level",
+          "type": "C",
+          "length": 10,
+          "decimal": 0
+        }
+      ],
+      "retained_native_metadata": [
+        {
+          "archive_member": "GIN_ADM2.prj",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/GIN_ADM2/GIN_ADM2.prj",
+          "bytes": 145,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/GIN_ADM2/GIN_ADM2.prj"
+        },
+        {
+          "archive_member": "license.png",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/GIN_ADM2/license.png",
+          "bytes": 579325,
+          "sha256": "f096b6f1d8bc04fb717cc94029a6e1acea7f1e50cdd9cfe23f9e70d86d0fc5e6",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/GIN_ADM2/license.png"
+        },
+        {
+          "archive_member": "meta.txt",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/GIN_ADM2/meta.txt",
+          "bytes": 533,
+          "sha256": "f9fbb8c1f153ccf5c591fb43ae1205c1d351619258a6483d3d435530c380d7af",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/GIN_ADM2/meta.txt"
+        }
+      ],
+      "archive_repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/GIN_ADM2/GIN_ADM2.zip",
+      "archive_git_blob_oid": "e25ef664afeecfcd42776245932ddaddfb8cf9ef"
+    },
+    {
+      "family": "gb:LBR:ADM1",
+      "complete_native_features": 15,
+      "census_selected_features": 4,
+      "census_complete_original_sha256": "f6f4ed18e1e29532a77325f7af84a6dacc4489d94020f2fa2a8feb12a4da9b34",
+      "archive_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-gin/additional-negative-rights/LBR_ADM1.zip",
+      "archive_bytes": 387802,
+      "archive_sha256": "5fa8de2cb03328883a57dcf82685486f6ef9d347da4f16b7f57c3e27fe375f2b",
+      "immutable_upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "immutable_upstream_path": "sourceData/gbOpen/LBR_ADM1.zip",
+      "retained_upstream_pointer": {
+        "text": "version https://git-lfs.github.com/spec/v1\noid sha256:5fa8de2cb03328883a57dcf82685486f6ef9d347da4f16b7f57c3e27fe375f2b\nsize 387802\n",
+        "source": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-gin/additional-negative-archive-pointers-002.json",
+        "oid": null
+      },
+      "all_native_members": [
+        {
+          "path": "LBR_ADM1.dbf",
+          "bytes": 1194,
+          "sha256": "b1c2f5967a595975c2eb5040fca6cc129cde6fb6488ee553ff207bbdec1db936"
+        },
+        {
+          "path": "LBR_ADM1.prj",
+          "bytes": 143,
+          "sha256": "98aaf3d1c0ecadf1a424a4536de261c3daf4e373697cb86c40c43b989daf52eb"
+        },
+        {
+          "path": "LBR_ADM1.qpj",
+          "bytes": 257,
+          "sha256": "1de411dcdeedce3219242306fc29bfa1d7fa08883e4ff6779baf798ec50d1657"
+        },
+        {
+          "path": "LBR_ADM1.shp",
+          "bytes": 289824,
+          "sha256": "3681d08da1057fcde2598df90e3b7822203af6aab84e16d68103773926224bcd"
+        },
+        {
+          "path": "LBR_ADM1.shx",
+          "bytes": 220,
+          "sha256": "95f2469991c3a9f21378034619ee9bad1a16810c54e5e1fc7f02ae55bc6383c5"
+        },
+        {
+          "path": "license.jpg",
+          "bytes": 193405,
+          "sha256": "961218d2fbb253fc9bc40fea2a09965b19c816d603ea90e1a5582aac03f852c1"
+        },
+        {
+          "path": "meta.txt",
+          "bytes": 481,
+          "sha256": "7f143bfebb4654a0163c51d448ec3ad9b55a475e34805ffa81b7ccbf523a8860"
+        }
+      ],
+      "native_meta": "Boundary Representative of Year: 2021\r\nISO-3166-1 (Alpha-3): LBR\r\nBoundary Type: ADM1\r\nCanonical Boundary Type Name: Counties\r\nSource 1: UNMIL\r\nSource 2: OCHA ROWCA\r\nRelease Type: gbOpen\r\nLicense: Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)\t\r\nLicense Notes: \r\nLicense Source: https://data.humdata.org/dataset/liberia-admin-level-2-boundaries\r\nLink to Source Data: https://data.humdata.org/dataset/liberia-admin-level-2-boundaries\r\nOther Notes: ",
+      "native_prj": "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137,298.257223563]],PRIMEM[\"Greenwich\",0],UNIT[\"Degree\",0.017453292519943295]]",
+      "native_attribute_fields": [
+        {
+          "name": "Name",
+          "type": "C",
+          "length": 50,
+          "decimal": 0
+        },
+        {
+          "name": "Level",
+          "type": "C",
+          "length": 10,
+          "decimal": 0
+        },
+        {
+          "name": "ISO_Code",
+          "type": "C",
+          "length": 10,
+          "decimal": 0
+        }
+      ],
+      "retained_native_metadata": [
+        {
+          "archive_member": "LBR_ADM1.prj",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/LBR_ADM1/LBR_ADM1.prj",
+          "bytes": 143,
+          "sha256": "98aaf3d1c0ecadf1a424a4536de261c3daf4e373697cb86c40c43b989daf52eb",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/LBR_ADM1/LBR_ADM1.prj"
+        },
+        {
+          "archive_member": "license.jpg",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/LBR_ADM1/license.jpg",
+          "bytes": 193405,
+          "sha256": "961218d2fbb253fc9bc40fea2a09965b19c816d603ea90e1a5582aac03f852c1",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/LBR_ADM1/license.jpg"
+        },
+        {
+          "archive_member": "meta.txt",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/LBR_ADM1/meta.txt",
+          "bytes": 481,
+          "sha256": "7f143bfebb4654a0163c51d448ec3ad9b55a475e34805ffa81b7ccbf523a8860",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/LBR_ADM1/meta.txt"
+        }
+      ],
+      "archive_repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/LBR_ADM1/LBR_ADM1.zip",
+      "archive_git_blob_oid": "f58b42e6c03da8f8a90d64b41f1c3e4b96f47911"
+    },
+    {
+      "family": "gb:LBR:ADM2",
+      "complete_native_features": 136,
+      "census_selected_features": 16,
+      "census_complete_original_sha256": "9708518c0e606d1d662e29493f3c85fe9053149c0f9d81cf11e81df0a7992d8b",
+      "archive_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-gin/additional-negative-rights/LBR_ADM2.zip",
+      "archive_bytes": 617379,
+      "archive_sha256": "b318484419a2e1da1856e7548c33e4c44b88ba3cd23784147c494c01e385eae3",
+      "immutable_upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "immutable_upstream_path": "sourceData/gbOpen/LBR_ADM2.zip",
+      "retained_upstream_pointer": {
+        "text": "version https://git-lfs.github.com/spec/v1\noid sha256:b318484419a2e1da1856e7548c33e4c44b88ba3cd23784147c494c01e385eae3\nsize 617379\n",
+        "source": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-gin/additional-negative-archive-pointers-002.json",
+        "oid": null
+      },
+      "all_native_members": [
+        {
+          "path": "LBR_ADM2.dbf",
+          "bytes": 8393,
+          "sha256": "80f1e8c98157fdefe733e2fa3c6c1fb0c415085c7a51b14d8ba8e5ccca73dc84"
+        },
+        {
+          "path": "LBR_ADM2.prj",
+          "bytes": 143,
+          "sha256": "98aaf3d1c0ecadf1a424a4536de261c3daf4e373697cb86c40c43b989daf52eb"
+        },
+        {
+          "path": "LBR_ADM2.qpj",
+          "bytes": 257,
+          "sha256": "1de411dcdeedce3219242306fc29bfa1d7fa08883e4ff6779baf798ec50d1657"
+        },
+        {
+          "path": "LBR_ADM2.shp",
+          "bytes": 584092,
+          "sha256": "fe7a862f2e3a6b53c4cee8bf1f632cc7e9a471856e435828e35c2f7faa7d34c2"
+        },
+        {
+          "path": "LBR_ADM2.shx",
+          "bytes": 1188,
+          "sha256": "30135f8667c1a0535d63110e82cb387be0d44710e3f8d5bb437b3a0a31b186c3"
+        },
+        {
+          "path": "license.jpg",
+          "bytes": 193405,
+          "sha256": "961218d2fbb253fc9bc40fea2a09965b19c816d603ea90e1a5582aac03f852c1"
+        },
+        {
+          "path": "meta.txt",
+          "bytes": 482,
+          "sha256": "c84063e7981007c8df402d12c03e526bea5ba714d887f01ef0b2c005afed3b82"
+        }
+      ],
+      "native_meta": "Boundary Representative of Year: 2021\r\nISO-3166-1 (Alpha-3): LBR\r\nBoundary Type: ADM2\r\nCanonical Boundary Type Name: Districts\r\nSource 1: UNMIL\r\nSource 2: OCHA ROWCA\r\nRelease Type: gbOpen\r\nLicense: Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)\t\r\nLicense Notes: \r\nLicense Source: https://data.humdata.org/dataset/liberia-admin-level-2-boundaries\r\nLink to Source Data: https://data.humdata.org/dataset/liberia-admin-level-2-boundaries\r\nOther Notes: ",
+      "native_prj": "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137,298.257223563]],PRIMEM[\"Greenwich\",0],UNIT[\"Degree\",0.017453292519943295]]",
+      "native_attribute_fields": [
+        {
+          "name": "Name",
+          "type": "C",
+          "length": 50,
+          "decimal": 0
+        },
+        {
+          "name": "Level",
+          "type": "C",
+          "length": 10,
+          "decimal": 0
+        }
+      ],
+      "retained_native_metadata": [
+        {
+          "archive_member": "LBR_ADM2.prj",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/LBR_ADM2/LBR_ADM2.prj",
+          "bytes": 143,
+          "sha256": "98aaf3d1c0ecadf1a424a4536de261c3daf4e373697cb86c40c43b989daf52eb",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/LBR_ADM2/LBR_ADM2.prj"
+        },
+        {
+          "archive_member": "license.jpg",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/LBR_ADM2/license.jpg",
+          "bytes": 193405,
+          "sha256": "961218d2fbb253fc9bc40fea2a09965b19c816d603ea90e1a5582aac03f852c1",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/LBR_ADM2/license.jpg"
+        },
+        {
+          "archive_member": "meta.txt",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/LBR_ADM2/meta.txt",
+          "bytes": 482,
+          "sha256": "c84063e7981007c8df402d12c03e526bea5ba714d887f01ef0b2c005afed3b82",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/LBR_ADM2/meta.txt"
+        }
+      ],
+      "archive_repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/LBR_ADM2/LBR_ADM2.zip",
+      "archive_git_blob_oid": "2da70bd4dd6f2f31e4a20610dce9844098e808a7"
+    },
+    {
+      "family": "gb:MLI:ADM1",
+      "complete_native_features": 9,
+      "census_selected_features": 1,
+      "census_complete_original_sha256": "195355e4823fa01cca6cedded585ee3e4f8662ad468df5082f875a6092f73f86",
+      "archive_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-gin/additional-negative-rights/MLI_ADM1.zip",
+      "archive_bytes": 464229,
+      "archive_sha256": "b483f853d397f995f38473d74802e3ba119e135405e74d616d2d6d5e5c99a996",
+      "immutable_upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "immutable_upstream_path": "sourceData/gbOpen/MLI_ADM1.zip",
+      "retained_upstream_pointer": {
+        "text": "version https://git-lfs.github.com/spec/v1\noid sha256:b483f853d397f995f38473d74802e3ba119e135405e74d616d2d6d5e5c99a996\nsize 464229\n",
+        "source": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-gin/additional-negative-archive-pointers-002.json",
+        "oid": null
+      },
+      "all_native_members": [
+        {
+          "path": "License.png",
+          "bytes": 323288,
+          "sha256": "848973d755c1d3c474da2e64074c010c0d7e05771beb1c0207b12ded7e63ed58"
+        },
+        {
+          "path": "meta.txt",
+          "bytes": 582,
+          "sha256": "3b7c18fdaf630c9360ad7794cba7bb7c2fe99ebb73cc8684fc13073a925a54d3"
+        },
+        {
+          "path": "MLI_ADM1.cpg",
+          "bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "path": "MLI_ADM1.dbf",
+          "bytes": 589,
+          "sha256": "4bca2706abfd36fd13a3a52c27767ac6aabb8d84f6001616b79c64d871c6515e"
+        },
+        {
+          "path": "MLI_ADM1.prj",
+          "bytes": 145,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4"
+        },
+        {
+          "path": "MLI_ADM1.sbn",
+          "bytes": 228,
+          "sha256": "fbbd92f129f4850a38b80d8d2cf9a6853e7e1fdb896c98485b50d80c2059be7d"
+        },
+        {
+          "path": "MLI_ADM1.sbx",
+          "bytes": 132,
+          "sha256": "3bd41bbd6820d418e2b81fec2e3400a60fa1c171c2af008e1950db10a2e7c0d6"
+        },
+        {
+          "path": "MLI_ADM1.shp",
+          "bytes": 198080,
+          "sha256": "d3c3b23f5bc1e9ae971c4511ad92bdf608f3ab60abdad1514796296efb652c9f"
+        },
+        {
+          "path": "MLI_ADM1.shp.xml",
+          "bytes": 9814,
+          "sha256": "97f228aeeb62f9a288c76f82f6c3b66ab7258e6ba8c8920d769f591de85597ef"
+        },
+        {
+          "path": "MLI_ADM1.shx",
+          "bytes": 172,
+          "sha256": "ca109cfdcfd2052aa4c353b4373cf9844dfc26cfd18eca4a4c20cccfd96a1cff"
+        }
+      ],
+      "native_meta": "Boundary Representative of Year: 2021\nISO-3166-1 (Alpha-3): MLI\nBoundary Type: ADM1\nCanonical Boundary Type Name: Region or Capital District\nSource 1: DNCT - Direction Nationale des Collectivités Territoriales\nSource 2: United Nations Office for the Coordination of Humanitarian Affairs, Mali\nRelease Type: gbOpen\nLicense: Creative Commons Attribution 4.0 International (CC BY 4.0)\nLicense Notes:\nLicense Source: https://data.humdata.org/dataset/administrative-boundaries-cod-mli\nLink to Source Data: https://data.humdata.org/dataset/administrative-boundaries-cod-mli\nOther Notes: ",
+      "native_prj": "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137.0,298.257223563]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+      "native_attribute_fields": [
+        {
+          "name": "Name",
+          "type": "C",
+          "length": 30,
+          "decimal": 0
+        },
+        {
+          "name": "Level",
+          "type": "C",
+          "length": 10,
+          "decimal": 0
+        },
+        {
+          "name": "ISO_Code",
+          "type": "C",
+          "length": 10,
+          "decimal": 0
+        }
+      ],
+      "retained_native_metadata": [
+        {
+          "archive_member": "License.png",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/MLI_ADM1/License.png",
+          "bytes": 323288,
+          "sha256": "848973d755c1d3c474da2e64074c010c0d7e05771beb1c0207b12ded7e63ed58",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/MLI_ADM1/License.png"
+        },
+        {
+          "archive_member": "meta.txt",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/MLI_ADM1/meta.txt",
+          "bytes": 582,
+          "sha256": "3b7c18fdaf630c9360ad7794cba7bb7c2fe99ebb73cc8684fc13073a925a54d3",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/MLI_ADM1/meta.txt"
+        },
+        {
+          "archive_member": "MLI_ADM1.prj",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/MLI_ADM1/MLI_ADM1.prj",
+          "bytes": 145,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/MLI_ADM1/MLI_ADM1.prj"
+        },
+        {
+          "archive_member": "MLI_ADM1.shp.xml",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/MLI_ADM1/MLI_ADM1.shp.xml",
+          "bytes": 9814,
+          "sha256": "97f228aeeb62f9a288c76f82f6c3b66ab7258e6ba8c8920d769f591de85597ef",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/MLI_ADM1/MLI_ADM1.shp.xml"
+        }
+      ],
+      "archive_repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/MLI_ADM1/MLI_ADM1.zip",
+      "archive_git_blob_oid": "db512e8c019ab9765add62e6be41f85c37d2796b"
+    },
+    {
+      "family": "gb:MLI:ADM2",
+      "complete_native_features": 50,
+      "census_selected_features": 4,
+      "census_complete_original_sha256": "aeaa50219bbd1e383c959c1f191e50c58f0831b5e7404bd97e6d91c7f1764e57",
+      "archive_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-gin/additional-negative-rights/MLI_ADM2.zip",
+      "archive_bytes": 373242,
+      "archive_sha256": "6cf3efaaa65925e4487036aea1079f9e3165ad4659c4adfc3e0c0f630e092479",
+      "immutable_upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "immutable_upstream_path": "sourceData/gbOpen/MLI_ADM2.zip",
+      "retained_upstream_pointer": {
+        "text": "version https://git-lfs.github.com/spec/v1\noid sha256:6cf3efaaa65925e4487036aea1079f9e3165ad4659c4adfc3e0c0f630e092479\nsize 373242\n",
+        "source": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-gin/additional-negative-archive-pointers-002.json",
+        "oid": null
+      },
+      "all_native_members": [
+        {
+          "path": "license.png",
+          "bytes": 124085,
+          "sha256": "4fa902f4ddf7ecbb181792f076f832e1eff5be8d5cf0d38bb9d963691e07a8d2"
+        },
+        {
+          "path": "meta.txt",
+          "bytes": 731,
+          "sha256": "f8b7abe066c78645d70301f26d02011acadd1ebbe6a1d0b5f8b0d62f08063114"
+        },
+        {
+          "path": "MLI_ADM2.cpg",
+          "bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "path": "MLI_ADM2.dbf",
+          "bytes": 2148,
+          "sha256": "d350a865e9fa31a2afff9eb4a93567e5424c809f5aaf32eaf658818fa1a997a3"
+        },
+        {
+          "path": "MLI_ADM2.prj",
+          "bytes": 145,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4"
+        },
+        {
+          "path": "MLI_ADM2.sbn",
+          "bytes": 604,
+          "sha256": "dcca3e65262d085281fc42a93280e8f54d48dfd48e38a4b7f36b47385082ce68"
+        },
+        {
+          "path": "MLI_ADM2.sbx",
+          "bytes": 148,
+          "sha256": "196711b57d5b51f394283ff242057a78ade7a57e2965f6fabdab91c8909bca30"
+        },
+        {
+          "path": "MLI_ADM2.shp",
+          "bytes": 316584,
+          "sha256": "32a9ff3dee21669677300595d3ebd337f4c503fa00c95f6a8222da5d1659a23a"
+        },
+        {
+          "path": "MLI_ADM2.shp.xml",
+          "bytes": 10296,
+          "sha256": "0bf2797663494ffe89542953a5d03859a8b5bea854c793589e14857534df928d"
+        },
+        {
+          "path": "MLI_ADM2.shx",
+          "bytes": 500,
+          "sha256": "68bf29a4a7606d65cc9ec9dffc042f0bbf45ac046d2fc4ff566f3872c9dbb1f9"
+        }
+      ],
+      "native_meta": "Boundary Representative of Year: 2017\nISO-3166-1 (Alpha-3): MLI\nBoundary Type: ADM2\nCanonical Boundary Type Name: Cercle\nSource 1: DNCT - Direction Nationale des Colelctivités Territorielles, DNP - Direction Nationale de la Population\nSource 2: United Nations Office for the Coordination of Humanitarian Affairs, Mali\nRelease Type: gbOpen\nLicense: Creative Commons Attribution 4.0 International (CC BY 4.0)\nLicense Notes: Noted in metadata tab\nLicense Source: https://data.humdata.org/dataset/mali-admin-boundaries-level-1-2-and-3-including-2017-population-desagregated-by-sexe\nLink to Source Data: https://data.humdata.org/dataset/mali-admin-boundaries-level-1-2-and-3-including-2017-population-desagregated-by-sexe\nOther Notes: ",
+      "native_prj": "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137.0,298.257223563]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+      "native_attribute_fields": [
+        {
+          "name": "Name",
+          "type": "C",
+          "length": 30,
+          "decimal": 0
+        },
+        {
+          "name": "Level",
+          "type": "C",
+          "length": 10,
+          "decimal": 0
+        }
+      ],
+      "retained_native_metadata": [
+        {
+          "archive_member": "license.png",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/MLI_ADM2/license.png",
+          "bytes": 124085,
+          "sha256": "4fa902f4ddf7ecbb181792f076f832e1eff5be8d5cf0d38bb9d963691e07a8d2",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/MLI_ADM2/license.png"
+        },
+        {
+          "archive_member": "meta.txt",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/MLI_ADM2/meta.txt",
+          "bytes": 731,
+          "sha256": "f8b7abe066c78645d70301f26d02011acadd1ebbe6a1d0b5f8b0d62f08063114",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/MLI_ADM2/meta.txt"
+        },
+        {
+          "archive_member": "MLI_ADM2.prj",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/MLI_ADM2/MLI_ADM2.prj",
+          "bytes": 145,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/MLI_ADM2/MLI_ADM2.prj"
+        },
+        {
+          "archive_member": "MLI_ADM2.shp.xml",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker2-next-source/actual-foreign-native-metadata/MLI_ADM2/MLI_ADM2.shp.xml",
+          "bytes": 10296,
+          "sha256": "0bf2797663494ffe89542953a5d03859a8b5bea854c793589e14857534df928d",
+          "repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/MLI_ADM2/MLI_ADM2.shp.xml"
+        }
+      ],
+      "archive_repository_path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/MLI_ADM2/MLI_ADM2.zip",
+      "archive_git_blob_oid": "defd5b94635544e8c9bc389ad6391ab76fa917a8"
+    }
+  ],
+  "limits": [
+    "Eachrequiredwholearchiveauthenticatedbeforemetadatause; noarchivefieldlicenses unrelatedsources.",
+    "Nativecounts937agreewholeoriginalfamilies, not just67contacts; fullnativeCRS/metadataandallmembersretained.",
+    "Actualtermsandimagesmustbe substantivelyinspected; wholehashidentitydoesnot establishlegal orscientificapproval."
+  ]
+}
