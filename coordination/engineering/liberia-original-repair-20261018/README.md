@@ -1,0 +1,7 @@
+# Complete original Liberia ADM2 repair package
+
+Parent-authorized local activation of the complete original scope:2,026land cells,zero water,1,005intervals,47owners andALL47direct singleton source atoms. Whole original136districts and current136direct country roles remain separate from the requested denominator. Original stock metadata extraction completed; normal own author allocation completed at252f; no scientific producer has started yet. Exact public issue creation was denied before execution and stopped; no issue number or public claim exists. Current accepted252f2aa1e6309b6990985dec73611d6df0e11c70 exact additive overlap is zero.
+
+Actual whole native archives forLBR1/2(15/136features;2021UNMIL/OCHAROWCA;CCBY3IGOmetadata;actualproductimageIGOwithno visibleedition) andCIV1(14features;2016WorldBank/OCHA;CCBY4metadata, archived generalWorldBanklicenseimage) are pinned to historical9469upstream with actualWGS84PRJs and complete member hashes. No contradictory prohibitory term was observed in those initial inputs; complete foreign applicability remains pending. Current primaryHDX403/oldWorldBankproduct404 were retained without retry/bypass or inferred new grants. Distinct vintages, attribution and historical roles remain explicit.
+
+Existing#802/#813LISGIS2022crosswalk ownership and acceptance remain separate(requested atom intersections43/4), as does#1077parent-source-vintage evidence. No present-law boundary/crosswalk approval, regional completeness, selected admission, owner-zero, integration or delivery is claimed; accepted0.
