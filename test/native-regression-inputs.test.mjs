@@ -6,16 +6,39 @@ import {prepareNativeRegressionInputs,NATIVE_REGRESSION_COMMITS,integrationTestF
 const manifestPath='coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/manifest.json';
 const stagePath='coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/evidence-quality.json';
 const custodyRoot='coordination/engineering/physical-gap-components-1005-20261005-local19/';
+const slePinsPath='test/fixtures/sle-physical-review/input-pins.json';
+const HISTORICAL=Object.freeze({
+ bounds:'d55795e4c0ad01527029db0bd1d774124a12a61a',
+ proof:'548c5f89f00271050823076a84695bb41e1b8454',
+ context:'d70c5d86e345a225b6bc78d67451b3cbbf7a5eed',
+ pinnedPackage:'65cfcef5ffd7d8b98077b9058a374d1e27047430',
+ latitudes:'35d2d3ff48957d34ee8d4329824b268ecadc6d3c'
+});
+const CUSTODY_COMMITS=Object.freeze([
+ '8f6dc184d1a41b634cec4759bb57b3cc04dd980a','6ed6406f9fad4c7c468b06a376346b216cb50db7'
+]);
+const SLE_COMMITS=Object.freeze([
+ '21984e9ec4ec7370bc807e2da23cea2228747698','a6da25fcc78819b8e88ec2040a934039aefc5f97',
+ '597f45d79fb84e222637c3390cb93c11377474af','31ced2c0b64292cbdfeb3bcf7beffeb0410b76be',
+ '5b32388df0501b013ac9a3ba97864932db493d59','58ae8c238f4b170fdf887a0f0c5b2da1dff97ca4'
+]);
+const FULL_COMMITS=Object.freeze([...new Set([
+ HISTORICAL.bounds,HISTORICAL.proof,HISTORICAL.context,HISTORICAL.pinnedPackage,HISTORICAL.latitudes,
+ ...CUSTODY_COMMITS,...SLE_COMMITS
+])]);
+const SLE_TEST='test/sierra-leone-physical-review-controls.test.mjs';
 function fixture({present=[],fetchFails=false,fetchIncomplete=false,bodiesPresent=true,bodyFetchFails=false,bodyFetchIncomplete=false}={}){
  const available=new Set(present),calls=[],documents=new Map(),descriptors=new Map();
  const pin=(commit,name,bytes=7)=>({commit,path:name,bytes,sha256:'a'.repeat(64)});
- const manifest={original_assets:{bounds:pin(NATIVE_REGRESSION_COMMITS[0],'data/bounds.json')},
-  native_latitudes:pin(NATIVE_REGRESSION_COMMITS[4],'data/latitudes.gz')};
- const proof=pin(NATIVE_REGRESSION_COMMITS[1],'retained/proof.json');
- const stage={baseline:{commit:NATIVE_REGRESSION_COMMITS[3],files:[pin(undefined,'data/input.json'),pin(undefined,'scripts/not-consumed.js')]}};
- const custody={generations:NATIVE_REGRESSION_COMMITS.slice(-2).map(commit=>({executed_code_commit:commit,
+ const slePins=JSON.parse(fs.readFileSync(slePinsPath,'utf8'));
+ const manifest={original_assets:{bounds:pin(HISTORICAL.bounds,'data/bounds.json')},
+  native_latitudes:pin(HISTORICAL.latitudes,'data/latitudes.gz')};
+ const proof=pin(HISTORICAL.proof,'retained/proof.json');
+ const stage={baseline:{commit:HISTORICAL.pinnedPackage,files:[pin(undefined,'data/input.json'),pin(undefined,'scripts/not-consumed.js')]}};
+ const custody={generations:CUSTODY_COMMITS.map(commit=>({executed_code_commit:commit,
   code:[pin(undefined,custodyRoot+'executed-code/'+commit+'/scripts/original.py')]}))};
  documents.set(manifestPath,manifest);documents.set(stagePath,stage);documents.set(custodyRoot+'custody-v1/index.json',custody);
+ documents.set(slePinsPath,slePins);
  const manifestHash=createHash('sha256').update(JSON.stringify(manifest)).digest('hex');
  documents.set('scripts/native-ownership/verified-candidates.json',{candidates:{[manifestHash]:proof}});
  const declare=pin=>{
@@ -24,7 +47,8 @@ function fixture({present=[],fetchFails=false,fetchIncomplete=false,bodiesPresen
  };
  for(const p of [manifest.original_assets.bounds,manifest.native_latitudes,proof,
   {...stage.baseline.files[0],commit:stage.baseline.commit},{...manifest.native_latitudes,commit:stage.baseline.commit},
-  ...custody.generations.map(g=>pin(g.executed_code_commit,'scripts/original.py'))])declare(p);
+  ...custody.generations.map(g=>pin(g.executed_code_commit,'scripts/original.py')),
+  ...Object.values(slePins.inputs)])declare(p);
  const bodyAvailable=new Set(bodiesPresent?[...descriptors.values()].map(p=>p.oid):[]);
  const run=(command,args,options={})=>{
   calls.push({command,args,options});assert.equal(command,'git');
@@ -54,9 +78,9 @@ function fixture({present=[],fetchFails=false,fetchIncomplete=false,bodiesPresen
  },run}};
 }
 test('shallow PR and queue regressions obtain only missing immutable vintages and verify availability',()=>{
- const f=fixture({present:[NATIVE_REGRESSION_COMMITS[0]]});
- assert.deepEqual(prepareNativeRegressionInputs('full',f.options),{applicable:true,fetched:NATIVE_REGRESSION_COMMITS.slice(1)});
- assert.deepEqual(f.calls.find(c=>c.args[0]==='fetch').args,['fetch','--no-tags','--depth=1','origin',...NATIVE_REGRESSION_COMMITS.slice(1)]);
+ const f=fixture({present:[HISTORICAL.bounds]});
+ assert.deepEqual(prepareNativeRegressionInputs('full',f.options),{applicable:true,fetched:FULL_COMMITS.slice(1)});
+ assert.deepEqual(f.calls.find(c=>c.args[0]==='fetch').args,['fetch','--no-tags','--depth=1','origin',...FULL_COMMITS.slice(1)]);
  const count=f.calls.filter(c=>c.args[0]==='fetch').length;
  assert.deepEqual(prepareNativeRegressionInputs('full',f.options),{applicable:true,fetched:[]});
  assert.equal(f.calls.filter(c=>c.args[0]==='fetch').length,count);
@@ -71,19 +95,16 @@ test('failed or incomplete frozen input fetch cannot establish regression covera
  }
 });
 
-const common=[
- 'd55795e4c0ad01527029db0bd1d774124a12a61a','548c5f89f00271050823076a84695bb41e1b8454',
- 'd70c5d86e345a225b6bc78d67451b3cbbf7a5eed','65cfcef5ffd7d8b98077b9058a374d1e27047430',
- '35d2d3ff48957d34ee8d4329824b268ecadc6d3c'
-];
-const custody=['8f6dc184d1a41b634cec4759bb57b3cc04dd980a','6ed6406f9fad4c7c468b06a376346b216cb50db7'];
+const common=[HISTORICAL.bounds,HISTORICAL.proof,HISTORICAL.context,HISTORICAL.pinnedPackage,HISTORICAL.latitudes];
+const custody=CUSTODY_COMMITS;
 const consumers=[
- ['test/select-build-ownership.test.mjs',[common[0],common[1]]],
- ['test/native-materialization-gate.test.mjs',[common[1]]],
- ['test/pinned-native-package-inputs.test.mjs',[common[3]]],
- ['test/native-latitudes.test.mjs',[common[4]]],
+ ['test/select-build-ownership.test.mjs',[HISTORICAL.bounds,HISTORICAL.proof]],
+ ['test/native-materialization-gate.test.mjs',[HISTORICAL.proof]],
+ ['test/pinned-native-package-inputs.test.mjs',[HISTORICAL.pinnedPackage]],
+ ['test/native-latitudes.test.mjs',[HISTORICAL.latitudes]],
  ['test/physical-component-custody.test.mjs',custody],
- ['test/physical-component-report-binding.test.mjs',custody]
+ ['test/physical-component-report-binding.test.mjs',custody],
+ [SLE_TEST,SLE_COMMITS]
 ];
 function requiredFor(files,options={}){
  const f=fixture(options),result=prepareNativeRegressionInputs('full',{...f.options,files});
@@ -110,8 +131,8 @@ test('unrelated and snapshot-only controls omit historical acquisition while uns
   'test/worldwide-native-batches-controls.test.mjs','test/install-macro-reference.test.mjs']]){
   const f=requiredFor(files);assert.deepEqual(f.result.fetched,[]);assert.deepEqual(f.calls,[]);
  }
- assert.deepEqual(requiredFor(undefined).result.fetched,[...common,...custody]);
- assert.deepEqual(NATIVE_REGRESSION_COMMITS,[...common,...custody]);
+ assert.deepEqual(requiredFor(undefined).result.fetched,FULL_COMMITS);
+ assert.deepEqual(NATIVE_REGRESSION_COMMITS,FULL_COMMITS);
  for(const files of [[],null,'test/physical-component-custody.test.mjs',[null],['../test/physical-component-custody.test.mjs']])
   assert.throws(()=>requiredFor(files),/Actual regression file roster/);
  const f=fixture();
@@ -121,12 +142,35 @@ test('unrelated and snapshot-only controls omit historical acquisition while uns
 });
 test('file order, duplicates and shard movement cannot drop or duplicate an archived requirement',()=>{
  const all=consumers.map(([name])=>name);
+ const consumerUnion=[...new Set(consumers.flatMap(([,commits])=>commits))];
  for(const files of [all,[...all].reverse(),[...all,all[0]]])
-  assert.deepEqual(requiredFor(files).result.fetched,[...common.filter((_,index)=>index!==2),...custody]);
+  assert.deepEqual(requiredFor(files).result.fetched,consumerUnion);
  for(const shard of [0,1,2]){
   const files=integrationTestFiles('full',shard),expected=new Set();
   for(const [name,commits] of consumers)if(files.includes(name))for(const commit of commits)expected.add(commit);
   assert.deepEqual(new Set(requiredFor(files).result.fetched),expected);
+ }
+});
+test('Sierra Leone scoped fetch and body failures refuse without retrying or broadening',()=>{
+ for(const profile of ['evidence','full']){
+  for(const options of [{fetchFails:true},{fetchIncomplete:true}]){
+   const f=fixture(options);
+   assert.throws(()=>prepareNativeRegressionInputs(profile,{...f.options,files:[SLE_TEST]}),/command failed|remain unavailable/,profile);
+   assert.equal(f.calls.filter(c=>c.args[0]==='fetch').length,1,'failed commit fetch is not retried');
+  }
+  for(const option of [{bodyFetchFails:true},{bodyFetchIncomplete:true}]){
+   const f=fixture({present:FULL_COMMITS,bodiesPresent:false,...option});
+   assert.throws(()=>prepareNativeRegressionInputs(profile,{...f.options,files:[SLE_TEST]}),/command failed|bodies remain unavailable/,profile);
+   assert.equal(f.calls.filter(c=>c.args[0]==='fetch'&&c.args.includes('--stdin')).length,1,'failed body fetch is not retried');
+  }
+ }
+ for(const change of ['missing-role','foreign-pin']){
+  const f=fixture(),pins=f.documents.get(slePinsPath);
+  if(change==='missing-role')delete pins.inputs.selected_state;
+  else pins.inputs.selected_state.commit='f'.repeat(40);
+  assert.throws(()=>prepareNativeRegressionInputs('full',{...f.options,files:[SLE_TEST]}),
+   change==='missing-role'?/roster is incomplete/:/Invalid original regression input declaration/);
+  assert.deepEqual(f.calls,[],'invalid Sierra Leone pins fail before Git access');
  }
 });
 test('a missing required archived object still fails after a scoped fetch, and present ones are not fetched again',()=>{
@@ -146,6 +190,23 @@ test('remaining custody pins agree with the captured authenticated component gen
  const read=name=>JSON.parse(fs.readFileSync(name));
  const index=read('test/fixtures/native-custody/generations.json');
  assert.deepEqual(new Set(index.generations.map(generation=>generation.executed_code_commit)),new Set(custody));
+});
+test('Sierra Leone consumer acquires only its complete original pinned commit scope',()=>{
+ for(const profile of ['evidence','full']){
+  const f=fixture();
+  const result=prepareNativeRegressionInputs(profile,{...f.options,files:[SLE_TEST]});
+  assert.deepEqual(result,{applicable:true,fetched:[...SLE_COMMITS]},profile);
+  assert.deepEqual(f.calls.filter(c=>c.args[0]==='fetch').map(c=>c.args),
+   [['fetch','--no-tags','--depth=1','--filter=blob:none','origin',...SLE_COMMITS]],profile);
+  const trees=f.calls.filter(c=>c.args[0]==='ls-tree');
+  const declared=SLE_COMMITS.map(commit=>trees.some(c=>c.args[2]===commit));
+  assert(declared.every(Boolean),'every original Sierra Leone commit is represented by a consumed pin');
+  assert.equal(trees.length,Object.values(JSON.parse(fs.readFileSync(slePinsPath,'utf8')).inputs).length);
+  assert(!trees.some(c=>!SLE_COMMITS.includes(c.args[2])),'no unrelated native history is inspected');
+ }
+ const f=fixture({present:[SLE_COMMITS[0]]});
+ const result=prepareNativeRegressionInputs('full',{...f.options,files:[SLE_TEST]});
+ assert.deepEqual(result,{applicable:true,fetched:SLE_COMMITS.slice(1)});
 });
 
 
