@@ -89,3 +89,25 @@ source inventory. Shared current inputs and unrelated declarations remain requir
 Repeated finalization can therefore reuse the same genuine original build instead
 of failing an obsolete append-only declaration check. Producer workflow identity
 is still exact; changing that producer requires an applicable genuine capture.
+
+### Retain successful production before tests
+
+The worker queue uploads the existing original Cloudflare package archive
+immediately after a successful build and output inventory, before browser setup
+and tests. This preserves the exact inventoried output when a later test fails
+and avoids capturing test-mutated files. Failed builds or inventories cannot
+upload a claimed successful original product. The manifest and original build
+receipt retain their existing meanings and original execution identity.
+
+Retention alone is not test acceptance or permission to reuse a failed producer.
+Original-output admission still requires the successful complete producer job and
+its successful mandatory test step. Both historical post-test uploads and current
+immediate post-inventory uploads are recognized under those same requirements.
+The queue's current test, geography and merge gates are unchanged. General
+same-input reuse after a test-only failure needs a separately reviewed complete
+build-input and producer contract; this change does not implement that route.
+
+The focused evidence roster also includes `selected-native-witness`, a direct
+consumer of the shared selected-checkpoint fixture. Fixture-only edits therefore
+continue to execute every such consumer; full and explicit reviewed test plans
+keep their existing behavior.
