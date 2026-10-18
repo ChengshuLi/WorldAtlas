@@ -1,0 +1,23 @@
+{
+  "country": "gtm",
+  "phase": "native-authority",
+  "started_at": "2026-10-18T04:28:20.090393+00:00",
+  "finished_at": "2026-10-18T04:28:22.971781+00:00",
+  "elapsed_seconds": 2.8812370410887524,
+  "exit_code": 1,
+  "config": {
+    "version": 1,
+    "source_evidence": {
+      "commit": "fffa2e3a696a7f45e824d870520beb555f823a4c",
+      "path": "coordination/engineering/americas-following-original-evaluations-20261018/source-metadata-003/gtm/source-evidence.json"
+    },
+    "native_patch": {
+      "commit": "e25122c85b600a1c4d3d96a10b759bd8afa3c920",
+      "path": "coordination/engineering/americas-following-original-evaluations-20261018/source-packets/GTM/original-native-request.json"
+    }
+  },
+  "products_published": false,
+  "kind": "derived-public-full-original-authority-refusal",
+  "terminal_error": "Proposed native cells lack unique source-target coverage",
+  "original_private_stderr_sha256": "d59e5475d30e96916c02821a29bf1cf143bbc56ecaa6d94bd517728f49924dab"
+}

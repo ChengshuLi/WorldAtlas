@@ -1,0 +1,23 @@
+{
+  "country": "slv",
+  "phase": "native-authority",
+  "started_at": "2026-10-18T04:28:27.381706+00:00",
+  "finished_at": "2026-10-18T04:28:29.384248+00:00",
+  "elapsed_seconds": 2.0025466249790043,
+  "exit_code": 1,
+  "config": {
+    "version": 1,
+    "source_evidence": {
+      "commit": "fffa2e3a696a7f45e824d870520beb555f823a4c",
+      "path": "coordination/engineering/americas-following-original-evaluations-20261018/source-metadata-003/slv/source-evidence.json"
+    },
+    "native_patch": {
+      "commit": "e25122c85b600a1c4d3d96a10b759bd8afa3c920",
+      "path": "coordination/engineering/americas-following-original-evaluations-20261018/source-packets/SLV/original-native-requested-patch.json"
+    }
+  },
+  "products_published": false,
+  "kind": "derived-public-full-original-authority-refusal",
+  "terminal_error": "Proposed native cells lack unique source-target coverage",
+  "original_private_stderr_sha256": "4809e6fcc5d8cf0ce5f3134dc0a09a20e48afc7916a337665c31c38ded5e4ed2"
+}
