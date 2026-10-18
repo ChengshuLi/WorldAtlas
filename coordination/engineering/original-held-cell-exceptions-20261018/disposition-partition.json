@@ -10,21 +10,24 @@
         "x": 124938,
         "owner": 26987,
         "source_id": "gb:LBR:ADM2:62588387B45934307689461",
-        "original_class": "territorial_exclusion_cells"
+        "original_land_class": "mapped_land_support",
+        "diagnostic_hold_reason": "territorial_exclusion_cells"
       },
       {
         "y": 108405,
         "x": 156464,
         "owner": 18676,
         "source_id": "gb:EGY:ADM2:37247803B50825531526089",
-        "original_class": "territorial_exclusion_cells"
+        "original_land_class": "mapped_land_support",
+        "diagnostic_hold_reason": "territorial_exclusion_cells"
       },
       {
         "y": 109906,
         "x": 156358,
         "owner": 18637,
         "source_id": "gb:EGY:ADM2:37247803B39887765706268",
-        "original_class": "territorial_exclusion_cells"
+        "original_land_class": "mapped_land_support",
+        "diagnostic_hold_reason": "territorial_exclusion_cells"
       }
     ],
     "unresolved_questions_are_recorded_on_each_pending_case": true,
@@ -32,7 +35,41 @@
       "accepted": 0,
       "pending_independent_review": 3,
       "otherwise_resolved": 0
-    }
+    },
+    "package_partitions": [
+      {
+        "country": "LBR",
+        "package_id": "gb-LBR-ADM2--repair-evaluation",
+        "original_scope_cells": 2026,
+        "previously_qualified_original_cells": 2025,
+        "pending_held_original_cells": 1,
+        "otherwise_resolved_original_cells": 0,
+        "original_physical_class_counts": {
+          "mapped_land_support": 2026
+        },
+        "diagnostic_hold_reason_counts": {
+          "territorial_exclusion_cells": 1
+        },
+        "exact_owner_key_partition_review": "https://github.com/ChengshuLi/WorldAtlas/pull/2495#issuecomment-6247233787",
+        "partition_basis": "The independent exact owner-key join reconciles the complete original interval scope against the current cumulative patch; this packet records only the held exception key, not a duplicate expansion of the full interval roster."
+      },
+      {
+        "country": "EGY",
+        "package_id": "gb-EGY-ADM2--repair-evaluation",
+        "original_scope_cells": 19065,
+        "previously_qualified_original_cells": 19063,
+        "pending_held_original_cells": 2,
+        "otherwise_resolved_original_cells": 0,
+        "original_physical_class_counts": {
+          "mapped_land_support": 19065
+        },
+        "diagnostic_hold_reason_counts": {
+          "territorial_exclusion_cells": 2
+        },
+        "exact_owner_key_partition_review": "https://github.com/ChengshuLi/WorldAtlas/pull/2495#issuecomment-6247233787",
+        "partition_basis": "The independent exact owner-key join reconciles the complete original interval scope against the current cumulative patch; this packet records only the held exception keys, not a duplicate expansion of the full interval roster."
+      }
+    ]
   },
   "all_cases": [
     {
@@ -43,7 +80,6 @@
         "x": 124938,
         "owner": 26987,
         "source_id": "gb:LBR:ADM2:62588387B45934307689461",
-        "original_class": "territorial_exclusion_cells",
         "original_land_class": "mapped_land_support",
         "diagnostic_hold_reason": "territorial_exclusion_cells"
       },
@@ -64,7 +100,6 @@
         "x": 156464,
         "owner": 18676,
         "source_id": "gb:EGY:ADM2:37247803B50825531526089",
-        "original_class": "territorial_exclusion_cells",
         "original_land_class": "mapped_land_support",
         "diagnostic_hold_reason": "territorial_exclusion_cells"
       },
@@ -85,7 +120,6 @@
         "x": 156358,
         "owner": 18637,
         "source_id": "gb:EGY:ADM2:37247803B39887765706268",
-        "original_class": "territorial_exclusion_cells",
         "original_land_class": "mapped_land_support",
         "diagnostic_hold_reason": "territorial_exclusion_cells"
       },
@@ -100,8 +134,8 @@
     }
   ],
   "invariants": [
-    "These are proposed evidence-backed exception packets only, not accepted dispositions, not repaired/qualified keys, and not repair credit.",
-    "Original classes remain territorial_exclusion_cells and all original source/foreign contacts remain intact.",
+    "These are proposed evidence-backed exception packets only, not accepted dispositions, not repaired/qualified keys, and not new repair credit.",
+    "The original physical class mapped_land_support and the diagnostic territorial_exclusion_cells hold are separate facts; neither field is substituted for the other.",
     "No target relabelling or source/owner/selection/hold changes.",
     "Normal original package selected-native owner-zero, conservation, witness and emitted-output checks remain required for any future selected delivery."
   ]
