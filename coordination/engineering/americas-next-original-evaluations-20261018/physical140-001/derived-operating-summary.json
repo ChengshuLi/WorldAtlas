@@ -1,0 +1,39 @@
+{
+  "started_at": "2026-10-18T02:46:22.126377+00:00",
+  "finished_at": "2026-10-18T02:46:44.919001+00:00",
+  "external_elapsed_seconds": 22.791555834,
+  "exit_code": 0,
+  "source_checkpoint": "e38e3488de52e6ef299157f7dc736398a1b9ca1f",
+  "configuration_sha256": "435584c2cb4e0036538795c8ae8103068e11da18c016dbc0a4d1433a2948a7b5",
+  "products": [
+    {
+      "path": "execution-receipt.json",
+      "bytes": 67496,
+      "sha256": "84214281cec93dd8267274b669173bfcf32d8d275fcf20810fbcce7b73351925"
+    },
+    {
+      "path": "preparation.json",
+      "bytes": 545,
+      "sha256": "6ea7aff0e840b11c217ced593ce2cba211c7c368fb55a31f6f0586c0eedd15e5"
+    },
+    {
+      "path": "whole-target-support.json",
+      "bytes": 7060799,
+      "sha256": "a2c6bf195a6fdaf3555c09ffefa55bc4e312106438a02c306063c6a64ffe327c"
+    }
+  ],
+  "limits": "Source-relative physical output does not establish native qualification, ownership or accepted credit.",
+  "kind": "derived-public-operating-summary",
+  "original_private_execution_receipt_retained": true,
+  "runtime_files": 204,
+  "source_inputs": 25,
+  "whole_targets": 140,
+  "maximum_resident_set_size_bytes": 579043328,
+  "runtime_versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "shapely": "2.1.2",
+    "geos": "3.13.1"
+  },
+  "note": "Derived public summary; the unchanged original execution receipt includes private installed runtime paths and remains privately preserved. It is not replaced by this summary."
+}
