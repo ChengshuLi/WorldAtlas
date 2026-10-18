@@ -132,3 +132,48 @@ errors may be deferred for overwritten JSON fields. The accepted derived-checkpo
 replay deletion and accepted finalizer acquisition/publication branch are retained.
 Final acceptance still requires exact-head independent review, consequential tests,
 authentic delivery regression and applicable hosted package/browser/build gates.
+
+## Coherent adoption and coordinate-consumer contract (2026-10-18)
+
+The normal refresh combines accepted native comparison/classification `cddcde87`,
+reviewed accepted-baseline admission `67e63fb0`, and preserved memory donor
+`d92b857d`. Both independent appended checkpoint test groups survive. The old
+donor and `b1ee9cd7` experiment remain recoverable, unaccepted checkpoints.
+
+Independent review found three spill-boundary consumer regressions: physical
+coverage used array-only flattening, revised OSM segments used numeric properties,
+and changed-rebind ring/group/bounds helpers assumed mutable indexed arrays.
+These consumers now traverse stored coordinate levels by iteration. Coverage keeps
+its required polygon-reference roster without expanding vertices; segments and
+bounds visit adjacent points sequentially. Rebind rotation retains its existing
+binary64 key-symbol array and sorted hole keys, not another coordinate graph.
+The scanner still owns its required Float64 rings. Sequence storage never grants
+scientific authority or changes source qualification.
+
+The consumer census covers source coverage, revised-source adoption, changed
+rebind, coordinate bounds, polygon/witness validation, numerical conversion, and
+canonical serializers. Fifteen complete proof/output parity controls cross
+31/32/33 vertices, rings and polygons using the actual constructors and rebind
+consumer; six failed before correction. A separate private interval-visitor gap
+could skip the table close after body-close failure and mask a visitor failure.
+The correction attempts both owned closes, clears the active-visit flag, and
+preserves primary or first cleanup failures, including falsy throws. Ten genuine
+visitor fault controls failed before correction and pass afterward, checking
+both close attempts, empty scratch and successful subsequent visits. Borrowed
+checkpoint stores are not closed by this visitor.
+
+Remaining input-sized terms include proposed source patch rows/runs, owner-row
+grouping and interval identity strings. Changed-rebind request/result length
+checks still serialize full canonical values. Source/target metadata, canonical
+polygon keys, normative tables, Float64 rings, active edges/intersections,
+required output size, individual large scalars, and some adopted/provenance
+acquisition remain explicit limits. Existing argument spreads over very large
+polygon/point rosters also remain. This is not a universal OOM fix or evidence
+for complex active-edge bounds.
+
+The earlier 937 distinct tests have passing observations across an aggregate and
+correction reruns, not one clean terminal 937-test run. The first refresh run was
+interrupted after missing sparse test operands; it is not a pass. The corrected
+union requires a fresh consequential run, exact-head independent review, and
+actual hosted geography, package build, browser and prepared-parity gates. No
+new performance benchmark is claimed here.
