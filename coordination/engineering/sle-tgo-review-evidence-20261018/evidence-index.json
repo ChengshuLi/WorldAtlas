@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "review_packet": "Sierra Leone and Togo retained-evidence reviews",
+  "base_commit": "c893639571b05840508b4b102ed79052ab24fb26",
+  "exact_reviewed_subjects": {
+    "sle_pr": 2480,
+    "sle_head": "e34ec029481fc3672408b59d96cb65002cd3d470",
+    "sle_science_head": "ef4a3a649d1fda7deacf87e52dc1efd0374f35d8",
+    "sle_accepted_refresh_base": "7e78edd0dba65dd6d904e04186f0b6b36d2a4ba6",
+    "togo_result_commit": "80cf469d70a68b3ea475ff861d611f297cfcce56",
+    "togo_result_bytes": 457291,
+    "togo_result_sha256": "d0ede54cec455302cf50dce6bd593ff1920cfedf289c1c4eba3c7842e2c81e7d",
+    "togo_input": "2404742bfcc2df26074ad4cc4a1b37a2a04e2c3d",
+    "togo_method": "721dac0bf4722ab2a7e0092746bbf3e17e9daa61",
+    "togo_source_corpus": "cddcde8786f038568137d915c8ee8436475f1688",
+    "togo_original_queue": "21984e9ec4ec7370bc807e2da23cea2228747698"
+  },
+  "review_note_sha256": {
+    "sle-interval-completeness.md": "495174385f7ef9dc11a97dfbc95208b40cc7f36b07739c29703edd912f549c18",
+    "sle-interpretation.md": "e4ae3e829be62866fb7210147af65cc8044d09ae8fc5bec3dc656ff6d7c2580b",
+    "sle-component-index.md": "ae3a4f349a32d71113a764a83b2aa771767db42e078e295105ed46c490699d9c",
+    "togo-result-pin-reconciliation.md": "349a090b4e56d404a01e1e0a3768a4943e81bd85b04963e3e346203b81415325",
+    "togo-benin-fiji-review.md": "2daff2941b57c894137d164968036b395d2d1f7653e04641674d54a679df308a",
+    "togo-burkina-review.md": "cb037fc4f7c17bc3452e0130d354e68dfc56355d7b1e53d2ea2a107c50970264",
+    "togo-ghana-review.md": "2435ffb9b800c49a4ae46064364103153c06988b0b03edec56598ddc2ea5a381",
+    "togo-report-wording-correction.md": "d172b628d62b6bf2570a5393cf9527cc561726d33a1c8ab48a577705bd9b72b9"
+  },
+  "scope_limits": [
+    "No native authority, qualification, repair credit, selected-state change, package activation, or source/question closure.",
+    "No GIS or geometry operation replay; SLE component check is index/reference integrity only.",
+    "Togo candidates are conservative bounds results; Fiji's three invalid-coordinate records remain unresolved.",
+    "Source rights, role, vintage, and attribution remain family-specific and qualified."
+  ],
+  "next_bounded_step": "Source-only exact-product provenance/grant crosswalk for the pinned geoBoundaries GHA ADM2 export; if the historical USAID/GSS terms cannot be bound, preserve the gap as unresolved."
+}
