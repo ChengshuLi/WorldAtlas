@@ -1,0 +1,23 @@
+{
+  "phase": "native-authority",
+  "tag": "native-authority-supported-001",
+  "command": [
+    "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "native-authority",
+    ".cache/civ-original-20261018/native-authority-supported-config-001.json",
+    "coordination/engineering/cote-divoire-original-repair-20261018-worker2/native-authority-supported-001"
+  ],
+  "state": "EXIT0",
+  "started_utc": "2026-10-18T03:33:56.834295+00:00",
+  "original_scope_cells": 2049,
+  "land": 2049,
+  "water": 0,
+  "intervals": 1028,
+  "owners": 66,
+  "pid": 9806,
+  "returncode": 0,
+  "completed_utc": "2026-10-18T03:33:58.746377+00:00",
+  "external_elapsed_seconds": 1.9117787499999999,
+  "output": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/2a7867caa47dd0380802e1986e9d092176bac5b5abdf585e9932b57606842885/work/coordination/engineering/cote-divoire-original-repair-20261018-worker2/native-authority-supported-001"
+}
