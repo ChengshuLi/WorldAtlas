@@ -6,6 +6,9 @@ import {prepareNativeRegressionInputs,NATIVE_REGRESSION_COMMITS,integrationTestF
 const manifestPath='coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/manifest.json';
 const stagePath='coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/evidence-quality.json';
 const custodyRoot='coordination/engineering/physical-gap-components-1005-20261005-local19/';
+const exceptionPinsPath='test/fixtures/original-repair-exceptions/historical-input-pins.json';
+const EXCEPTION_TEST='test/original-repair-exception-controls.test.mjs';
+const EXCEPTION_COMMITS=Object.freeze({accepted:'cd1886f20f34abdcafe7c327ae0ee768ce5d47ae',selectedProducts:'e17dba85347a4a31ccb9ecdaa4c7a20b6b950c8d',originalSalvador:'32d819ddc9333ff025584665665c963822dfcead'});
 const slePinsPath='test/fixtures/sle-physical-review/input-pins.json';
 const HISTORICAL=Object.freeze({
  bounds:'d55795e4c0ad01527029db0bd1d774124a12a61a',
@@ -17,6 +20,14 @@ const HISTORICAL=Object.freeze({
 const CUSTODY_COMMITS=Object.freeze([
  '8f6dc184d1a41b634cec4759bb57b3cc04dd980a','6ed6406f9fad4c7c468b06a376346b216cb50db7'
 ]);
+const heldPinsPath='test/fixtures/held-cell-exceptions/historical-input-pins.json';
+const HELD_TEST='test/held-cell-exception-evidence-controls.test.mjs';
+const HELD_COMMITS=Object.freeze([
+ '427cf5eb2d5004b0b65ffc34bf33d7fbbb6e44bc','b991e2295c50a64e49d4f92c76c37bd95c869b63',
+ '5b32388df0501b013ac9a3ba97864932db493d59','252f2aa1e6309b6990985dec73611d6df0e11c70',
+ 'f988605570667858062905c04c31231564882d11','21984e9ec4ec7370bc807e2da23cea2228747698',
+ '07c74ff101d4ab5e679255ed85c402356aa54a42'
+]);
 const SLE_COMMITS=Object.freeze([
  '21984e9ec4ec7370bc807e2da23cea2228747698','a6da25fcc78819b8e88ec2040a934039aefc5f97',
  '597f45d79fb84e222637c3390cb93c11377474af','31ced2c0b64292cbdfeb3bcf7beffeb0410b76be',
@@ -24,13 +35,15 @@ const SLE_COMMITS=Object.freeze([
 ]);
 const FULL_COMMITS=Object.freeze([...new Set([
  HISTORICAL.bounds,HISTORICAL.proof,HISTORICAL.context,HISTORICAL.pinnedPackage,HISTORICAL.latitudes,
- ...CUSTODY_COMMITS,...SLE_COMMITS
+ ...CUSTODY_COMMITS,...Object.values(EXCEPTION_COMMITS),...HELD_COMMITS,...SLE_COMMITS
 ])]);
 const SLE_TEST='test/sierra-leone-physical-review-controls.test.mjs';
 function fixture({present=[],fetchFails=false,fetchIncomplete=false,bodiesPresent=true,bodyFetchFails=false,bodyFetchIncomplete=false}={}){
  const available=new Set(present),calls=[],documents=new Map(),descriptors=new Map();
  const pin=(commit,name,bytes=7)=>({commit,path:name,bytes,sha256:'a'.repeat(64)});
  const slePins=JSON.parse(fs.readFileSync(slePinsPath,'utf8'));
+ const exceptionPins=JSON.parse(fs.readFileSync(exceptionPinsPath,'utf8'));
+ const heldPins=JSON.parse(fs.readFileSync(heldPinsPath,'utf8'));
  const manifest={original_assets:{bounds:pin(HISTORICAL.bounds,'data/bounds.json')},
   native_latitudes:pin(HISTORICAL.latitudes,'data/latitudes.gz')};
  const proof=pin(HISTORICAL.proof,'retained/proof.json');
@@ -38,17 +51,17 @@ function fixture({present=[],fetchFails=false,fetchIncomplete=false,bodiesPresen
  const custody={generations:CUSTODY_COMMITS.map(commit=>({executed_code_commit:commit,
   code:[pin(undefined,custodyRoot+'executed-code/'+commit+'/scripts/original.py')]}))};
  documents.set(manifestPath,manifest);documents.set(stagePath,stage);documents.set(custodyRoot+'custody-v1/index.json',custody);
- documents.set(slePinsPath,slePins);
+ documents.set(slePinsPath,slePins);documents.set(exceptionPinsPath,exceptionPins);documents.set(heldPinsPath,heldPins);
  const manifestHash=createHash('sha256').update(JSON.stringify(manifest)).digest('hex');
  documents.set('scripts/native-ownership/verified-candidates.json',{candidates:{[manifestHash]:proof}});
  const declare=pin=>{
-  const oid=createHash('sha1').update(pin.commit+':'+pin.path).digest('hex');
+  const oid=pin.git_blob_oid??createHash('sha1').update(pin.commit+':'+pin.path).digest('hex');
   descriptors.set(pin.commit+':'+pin.path,{...pin,oid,mode:'100644'});return oid;
  };
  for(const p of [manifest.original_assets.bounds,manifest.native_latitudes,proof,
   {...stage.baseline.files[0],commit:stage.baseline.commit},{...manifest.native_latitudes,commit:stage.baseline.commit},
   ...custody.generations.map(g=>pin(g.executed_code_commit,'scripts/original.py')),
-  ...Object.values(slePins.inputs)])declare(p);
+  ...Object.values(slePins.inputs),...exceptionPins.inputs,...heldPins.inputs])declare(p);
  const bodyAvailable=new Set(bodiesPresent?[...descriptors.values()].map(p=>p.oid):[]);
  const run=(command,args,options={})=>{
   calls.push({command,args,options});assert.equal(command,'git');
@@ -104,6 +117,8 @@ const consumers=[
  ['test/native-latitudes.test.mjs',[HISTORICAL.latitudes]],
  ['test/physical-component-custody.test.mjs',custody],
  ['test/physical-component-report-binding.test.mjs',custody],
+ [EXCEPTION_TEST,Object.values(EXCEPTION_COMMITS)],
+ [HELD_TEST,HELD_COMMITS],
  [SLE_TEST,SLE_COMMITS]
 ];
 function requiredFor(files,options={}){
@@ -308,4 +323,14 @@ test('commit inspection errors and interrupted tree reads refuse without a fetch
   assert.throws(()=>prepareNativeRegressionInputs('full',{...f.options,files:['test/native-latitudes.test.mjs']}),/inspection failed|command failed/);
   assert(!f.calls.some(c=>c.args[0]==='fetch'));
  }
+});
+
+test('evidence profile acquires the exact original exception consumer pins without unrelated history',()=>{
+ const f=fixture({bodiesPresent:false});
+ const r=prepareNativeRegressionInputs('evidence',{...f.options,files:[EXCEPTION_TEST]});
+ assert.deepEqual(r.fetched,Object.values(EXCEPTION_COMMITS));
+ const wanted=JSON.parse(fs.readFileSync(exceptionPinsPath,'utf8')).inputs;
+ const trees=f.calls.filter(x=>x.args[0]==='ls-tree').map(x=>x.args[2]+':'+x.args[4]);
+ assert.deepEqual(new Set(trees),new Set(wanted.map(p=>p.commit+':'+p.path)));
+ assert.equal(f.calls.filter(x=>x.args.includes('--stdin')).length,1);
 });

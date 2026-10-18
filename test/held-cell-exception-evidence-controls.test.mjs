@@ -10,9 +10,10 @@ import {nativePolygonIntervals, nativeRowLatitudes, witnessCellEffects} from '..
 import {prepareNativeRegressionInputs} from '../scripts/run-integration-tests.mjs';
 
 const packet='coordination/engineering/original-held-cell-exceptions-20261018/';
+const packetFixture='test/fixtures/held-cell-exceptions/packet/';
 const fixturePath='test/fixtures/held-cell-exceptions/current-packet-controls.json';
 const historicalPinsPath='test/fixtures/held-cell-exceptions/historical-input-pins.json';
-const readJson=name=>JSON.parse(fs.readFileSync(name,'utf8'));
+const readJson=name=>JSON.parse(fs.readFileSync(name.startsWith(packet)?packetFixture+name.slice(packet.length):name,'utf8'));
 const sha256=bytes=>createHash('sha256').update(bytes).digest('hex');
 const gitBlobOid=bytes=>createHash('sha1').update(Buffer.from(`blob ${bytes.length}\0`)).update(bytes).digest('hex');
 
@@ -64,7 +65,10 @@ function authenticateHistoricalInputs(pins){
 
 function compareStableReproduction(actual,retained,historicalPins){
   const omitCheckoutTelemetry=({input_resolution,...result})=>result;
-  assert.deepEqual(omitCheckoutTelemetry(actual),omitCheckoutTelemetry(retained));
+  // The retained report adds this exact review annotation; it is not raw output.
+  const annotation='The Buu-Yao query is against target.base_geometry, the selected base footprint, not the raw positive source operand; its no-hit does not establish original source absence or no-repair eligibility.';
+  assert.deepEqual(retained.limits,[actual.limits[0],annotation,...actual.limits.slice(1)]);
+  assert.deepEqual(omitCheckoutTelemetry(actual),omitCheckoutTelemetry({...retained,limits:actual.limits}));
   assert.deepEqual(Object.keys(actual.input_resolution).sort(),['git_show_with_verified_worktree_fallbacks']);
   const allowed=new Set(historicalPins.map(pin=>pin.commit+':'+pin.path));
   for(const result of [actual,retained])for(const spec of result.input_resolution.git_show_with_verified_worktree_fallbacks)
@@ -126,7 +130,7 @@ function verifyFixture(partition,pins,reproduction,fixture){
   assert.equal(sha256(reproducer),reproducerPin.sha256);
   const original=pins.liberia.original_package_contract.reproduction.original_extractor_output;
   const derived=pins.liberia.original_package_contract.reproduction.published_derived_artifact;
-  const derivedBytes=fs.readFileSync(packet+derived.path);
+  const derivedBytes=fs.readFileSync(packetFixture+derived.path);
   assert.equal(derivedBytes.length,derived.bytes);
   assert.equal(sha256(derivedBytes),derived.sha256);
   assert.notEqual(original.bytes,derived.bytes);
@@ -144,7 +148,7 @@ function tempDir(t){
 }
 
 function runNativeReproduction(script,output,env=process.env,repository=process.cwd()){
-  return spawnSync(process.execPath,['-B',script,repository,output],{
+  return spawnSync(process.execPath,[script,repository,output],{
     encoding:'utf8',timeout:120000,maxBuffer:8*1024*1024,
     env:{...env,GIT_NO_LAZY_FETCH:'1',GIT_TERMINAL_PROMPT:'0'}
   });
@@ -166,7 +170,7 @@ test('current held-cell packet and actual 18-query native-center reproduction ma
   assert.equal(lbrLatitude.decoded_sha256,pinnedLatitude.decoded_sha256);
   authenticateHistoricalInputs(historical);
   const outputPin=pins.reproduction_outputs['reproduced-native-centre-queries.json'];
-  const outputBytes=fs.readFileSync(packet+'reproduced-native-centre-queries.json');
+  const outputBytes=fs.readFileSync(packetFixture+'reproduced-native-centre-queries.json');
   assert.equal(outputBytes.length,outputPin.bytes);
   assert.equal(sha256(outputBytes),outputPin.sha256);
   assert.equal(reproduction.status,'all_retained_hit_lists_reproduced; observations_only');
@@ -174,7 +178,8 @@ test('current held-cell packet and actual 18-query native-center reproduction ma
   assert.equal(reproduction.matching_queries,18);
   assert(reproduction.queries.every(query=>query.exact_hit_list_matches_retained));
   const directory=tempDir(t),actualPath=path.join(directory,'actual-reproduction.json');
-  execFileSync(process.execPath,[packet+'reproduce-native-centres.mjs',process.cwd(),actualPath],{
+  const currentPacket=copyReproducerPacket(directory);
+  execFileSync(process.execPath,[path.join(currentPacket,'reproduce-native-centres.mjs'),process.cwd(),actualPath],{
     encoding:'utf8',timeout:120000,maxBuffer:8*1024*1024,
     env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_TERMINAL_PROMPT:'0'}
   });
@@ -215,7 +220,7 @@ function copyReproducerPacket(directory){
   const copy=path.join(directory,'packet');fs.mkdirSync(copy);
   for(const name of ['reproduce-native-centres.mjs','native-grid-pinned.mjs','input-pins.json',
     'native-center-observations.json','liberia-causal-result.json'])
-    fs.copyFileSync(packet+name,path.join(copy,name));
+    fs.copyFileSync((name.endsWith('.mjs')?packet:packetFixture)+name,path.join(copy,name));
   return copy;
 }
 
@@ -249,7 +254,7 @@ function mockScopedGitRun(pins){
       return {status:0,stdout:'',stderr:''};
     }
     if(args[0]==='ls-tree'){
-      const commit=args[1],pathIndex=args.indexOf('--')+1,relative=args[pathIndex];
+      const commit=args[2],pathIndex=args.indexOf('--')+1,relative=args[pathIndex];
       const pin=pins.find(item=>item.commit===commit&&item.path===relative);
       return {status:0,stdout:`100644 blob ${pin.git_blob_oid}\t${relative}\0`,stderr:''};
     }
@@ -309,9 +314,10 @@ test('an empty repo refuses corrupted normative latitude bytes after the working
 test('the actual reproducer refuses to replace an existing output file',t=>{
   const directory=tempDir(t),output=path.join(directory,'existing-reproduction.json');
   const sentinel='preserve-existing-output\n';fs.writeFileSync(output,sentinel,{flag:'wx'});
+  const currentPacket=copyReproducerPacket(directory);
   let error;
   try{
-    execFileSync(process.execPath,[packet+'reproduce-native-centres.mjs',process.cwd(),output],{
+    execFileSync(process.execPath,[path.join(currentPacket,'reproduce-native-centres.mjs'),process.cwd(),output],{
       encoding:'utf8',timeout:120000,maxBuffer:8*1024*1024,
       env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_TERMINAL_PROMPT:'0'}
     });
@@ -354,4 +360,28 @@ test('the pinned numerical scanner catches an exact interior contact and rejects
   const outside={type:'Polygon',coordinates:[[[lon+10,lat-1],[lon+12,lat-1],[lon+12,lat+1],[lon+10,lat+1],[lon+10,lat-1]]]};
   assert.deepEqual(witnessCellEffects(outside,request).hits,[]);
   assert.throws(()=>witnessCellEffects(polygon,{...request,requestedRows:[{y,runs:[[x,x+1,0]]}]}),/Unordered\/overlapping\/invalid requested run/);
+});
+
+
+test('compact packet fixtures are exact current-tree operands with original custody',()=>{
+  const provenance=readJson(packetFixture+'provenance.json');
+  assert.equal(provenance.source_commit,'41db58b993f1b855c9ff3146520fb4e4c7e082a1');
+  assert.equal(provenance.inputs.length,6);
+  for(const pin of provenance.inputs){
+    const body=fs.readFileSync(packetFixture+pin.fixture);
+    assert.equal(body.length,pin.bytes);assert.equal(sha256(body),pin.sha256);assert.equal(gitBlobOid(body),pin.git_blob_oid);
+    const row=execFileSync('git',['ls-tree','-z','HEAD','--',pin.path],{encoding:'utf8',env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_TERMINAL_PROMPT:'0'}});
+    assert.equal(row,`100644 blob ${pin.git_blob_oid}\t${pin.path}\0`);
+  }
+});
+
+
+test('retained output annotation allowance rejects every unexpected annotation',()=>{
+  const retained=readJson(packet+'reproduced-native-centre-queries.json'),historical=readJson(historicalPinsPath).inputs;
+  const actual=structuredClone(retained);actual.limits.splice(1,1);
+  compareStableReproduction(actual,retained,historical);
+  for(const change of [r=>r.limits[1]+=' unexpected',r=>r.limits.push('extra annotation'),r=>r.limits.reverse()]){
+    const altered=structuredClone(retained);change(altered);
+    assert.throws(()=>compareStableReproduction(actual,altered,historical));
+  }
 });

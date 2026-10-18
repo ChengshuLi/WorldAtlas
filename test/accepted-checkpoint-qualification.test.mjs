@@ -10,7 +10,8 @@ import {gzipSync,gunzipSync,crc32,deflateRawSync} from 'node:zlib';
 import {trustedFixture as trustedNativeFixture} from './helpers/selected-joint-fixture.mjs';
 import {ACCEPTED_CHECKPOINT_CODE} from '../scripts/accepted-selected-checkpoint.mjs';
 import {renderWorkerResult} from '../scripts/worker-result.mjs';
-import {createHash} from 'node:crypto';
+import crypto, {createHash} from 'node:crypto';
+import {syncBuiltinESMExports} from 'node:module';
 import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
 import {valueBytes,valueSha,coordinateBounds,normaliseRetainedRepairLedger} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {deriveCoordinateDelta,projectSourceFeatures,projectNativeRows,qualifyTransition} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
@@ -32,7 +33,7 @@ function addition(id,target,index,base,x){const geometry=polygon(x);return {comp
 // This is a fresh miniature trusted repository, not a test-only authority hook.
 // The real entry reads its ordinary committed catalogue and products exactly as
 // production does. Candidate edits never control that executing catalogue.
-async function trustedFixture(t,{incompleteNative=false,sourcePaths,sourceOverride=false,physicalLogicalSource=false,inheritedCode=false}={}){
+async function trustedFixture(t,{incompleteNative=false,sourcePaths,sourceOverride=false,physicalLogicalSource=false,inheritedCode=false,wireProducts=false}={}){
  const root=fs.mkdtempSync(path.join(process.cwd(),'.checkpoint-test-'));
  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
  const git=(...a)=>execFileSync('git',['-c','core.hooksPath=/dev/null','-c','user.name=Checkpoint fixture','-c','user.email=checkpoint@example.invalid','-C',root,...a],{env:{...process.env,GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_NO_LAZY_FETCH:'1'},stdio:['ignore','pipe','pipe']});
@@ -77,10 +78,10 @@ async function trustedFixture(t,{incompleteNative=false,sourcePaths,sourceOverri
  const rebind={request,result:{native:{rows:originalPatch.rows}},facts:{acquisition_phases:[]},publication:{},operating:{}};
  for(const [name,body]of Object.entries(rebind))save('accepted-rebind/'+name+'.json',body);const four=commit();
  const rc={version:1,kind:'qualified-native-additive-current-bank-rebind-v1',execution_commit:one,base_selection:baseSelection,authority_registry_sha256:valueSha(registry),...Object.fromEntries(Object.keys(rebind).map(name=>[name,pin('accepted-rebind/'+name+'.json',four)]))};save('accepted-rebind/certificate.json',rc);const five=commit();
- const ledger={version:2,kind:'native-additive-repair-ledger-v2',authority_registry_sha256:valueSha(registry),scope_ids:['old','rejected'],rows:[{...literal,authority_sha256:entry.authority_sha256},{component_id:'rejected',disposition:'rejected',reason:'complete original exception',authority_sha256:entry.authority_sha256}],parent_inventory:{components:2,roster_sha256:'e'.repeat(64)},current_rebind:pin('accepted-rebind/certificate.json',five),current_targets:[target]};save('data/ledger.json',ledger);const six=commit();
+ const ledger={version:2,kind:'native-additive-repair-ledger-v2',authority_registry_sha256:valueSha(registry),scope_ids:['old','rejected'],rows:[{...literal,authority_sha256:entry.authority_sha256},{component_id:'rejected',disposition:'rejected',reason:'complete original exception',authority_sha256:entry.authority_sha256}],parent_inventory:{components:2,roster_sha256:'e'.repeat(64)},current_rebind:pin('accepted-rebind/certificate.json',five),current_targets:[target]};save('data/ledger.json',wireProducts?Buffer.from('{ "rows":[{"ignored":1e400}], '+JSON.stringify(ledger).slice(1).replace('[0,0]','[-0e0,0.00]')+' \n'):ledger);const six=commit();
  const normalized=[{...literal,authority_sha256:entry.authority_sha256,rule_sha256:entry.rule_sha256}];
  const effective={...reference,footprints_sha256:valueSha({domain:'worldatlas-effective-native-footprints:v2',base_reference:reference,authority_registry_sha256:valueSha(registry),ledger_sha256:pin('data/ledger.json',six).sha256,components:normalized})};
- const patch={version:2,kind:'unassigned-native-cells-v1',authority_registry_sha256:valueSha(registry),ledger_sha256:pin('data/ledger.json',six).sha256,base_reference:reference,effective_reference:effective,rows:originalPatch.rows};save('data/patch.json',patch);const seven=commit();
+ const patch={version:2,kind:'unassigned-native-cells-v1',authority_registry_sha256:valueSha(registry),ledger_sha256:pin('data/ledger.json',six).sha256,base_reference:reference,effective_reference:effective,rows:originalPatch.rows};save('data/patch.json',wireProducts?Buffer.from('{ "rows":false, '+JSON.stringify(patch,null,2).slice(1)+' \n'):patch);const seven=commit();
  const assets={base_manifest:pin('data/manifest.json',one),owner_roster:pin('data/owners.json',one),ledger:pin('data/ledger.json',six),patch:pin('data/patch.json',seven)};
  const envelope={version:2,kind:'retained-native-base-plus-delta-v2',base_reference:reference,effective_reference:effective,...assets};save('data/envelope.json',envelope);const eight=commit();
  const sidecar={version:2,kind:'retained-native-additive-selection-v2',base_selection:baseSelection,authority_registry:pin('data/registry.json',four),logical_asset_map:assets,runtime_envelope:pin('data/envelope.json',eight)};save('data/sidecar.json',sidecar);const nine=commit();
@@ -252,8 +253,8 @@ const JSON_BODY=valueBytes;
 const P='coordination/engineering/selected-geography-effective-prevention-20261009/';
 const {JOINT_CODE:JOINT}=await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs');
 const MEMBERS=['derived-certificate.json.gz','derived-facts.json','derived-publication.json','checkpoint-routes.json'];
-async function acceptedProducts(t,{sourcePaths,actualProducer=false,nativeOnly=false,sourceOverride=false,physicalLogicalSource=false,inheritedCode=false}={}) {
-  const f=nativeOnly?await trustedNativeFixture(t,{nativeOnly:true}):await trustedFixture(t,{sourcePaths,sourceOverride,physicalLogicalSource,inheritedCode});
+async function acceptedProducts(t,{sourcePaths,actualProducer=false,nativeOnly=false,sourceOverride=false,physicalLogicalSource=false,inheritedCode=false,wireProducts=false}={}) {
+  const f=nativeOnly?await trustedNativeFixture(t,{nativeOnly:true}):await trustedFixture(t,{sourcePaths,sourceOverride,physicalLogicalSource,inheritedCode,wireProducts});
   for(const name of [...JOINT,...(actualProducer?['scripts/check-geographic-regression.py','scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','requirements.txt']:[])])f.save(name,fs.readFileSync(name));
   f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[f.rootRow]});
   if(f.inherited)f.save(f.inherited.path,{reviewed:'successor configuration'});
@@ -853,4 +854,70 @@ test('successor checkpoint refuses a changed newly introduced projection route',
  f.write('inputs/projection.json',{forged:true});const changed=f.commit();
  const refused=(await f.api.qualifyTransition({state:first.candidate,reader:new f.native.ImmutableReader(f.repo,changed,{invocation:f.reader.invocation})}));
  assert.equal(refused.available,false);assert.match(refused.reason,/route changed/);
+});
+
+
+test('accepted canonical bindings reuse the private admitted ledger and patch digests without replay',async t=>{
+ const f=await acceptedProducts(t),a=await acquire(f),records=[],streamed=[];
+ const stream=a.reader.stream.bind(a.reader),original=crypto.createHash;
+ a.reader.stream=function(name,...args){streamed.push(name);return stream(name,...args);};
+ crypto.createHash=function(...args){
+  const stack=new Error().stack,hash=Reflect.apply(original,this,args);
+  // Observe only direct canonical value hashes at real derived admission, not
+  // the store's required parse-time hashing or any nested equality checks.
+  if(!/at valueSha[^\n]*\n\s*at admitDerivedCheckpoint/.test(stack))return hash;
+  const update=hash.update,digest=hash.digest,record={bytes:0};
+  hash.update=function(value,...rest){record.bytes+=typeof value==='string'?Buffer.byteLength(value,rest[0]):value.byteLength;return Reflect.apply(update,this,[value,...rest]);};
+  hash.digest=function(...args){const result=Reflect.apply(digest,this,args);record.sha256=typeof result==='string'?result:result.toString('hex');records.push(record);return result;};
+  return hash;
+ };
+ syncBuiltinESMExports();
+ let result;
+ try{result=await qualify(f,a);}finally{crypto.createHash=original;syncBuiltinESMExports();}
+ assert.equal(result.available,true,result.reason);
+ const bindings=f.products.facts.candidate_bindings;
+ assert(records.some(row=>row.sha256===bindings.registry_sha256),'Instrumentation must observe the real registry comparison');
+ assert(records.some(row=>row.sha256===bindings.manifest_sha256),'Instrumentation must observe the real manifest comparison');
+ const repeated=records.filter(row=>[bindings.ledger_sha256,bindings.patch_sha256].includes(row.sha256));
+ t.diagnostic('Repeated complete ledger/patch canonical hash bytes: '+repeated.reduce((n,row)=>n+row.bytes,0));
+ assert.deepEqual(repeated,[],'Already admitted private products must not be traversed again only to recover their canonical digest');
+ for(const role of ['ledger','patch'])assert.equal(streamed.filter(name=>name===f.sidecar.logical_asset_map[role].path).length,1);
+ assert.equal(valueSha(nativeLiteral(result.state.ledger)),bindings.ledger_sha256);
+ assert.equal(valueSha(nativeLiteral(result.state.patch)),bindings.patch_sha256);
+ f.api.releaseCheckpoint(result.state);f.transport.releaseAcceptedCheckpoint(a.handle);
+});
+
+test('accepted private digests preserve noncanonical wire semantics, immutable views and release refusal',async t=>{
+ const f=await acceptedProducts(t,{wireProducts:true}),a=await acquire(f),result=await qualify(f,a);
+ assert.equal(result.available,true,result.reason);
+ for(const role of ['ledger','patch']){
+  const pin=f.sidecar.logical_asset_map[role],raw=f.git('show',pin.commit+':'+pin.path),literal=JSON.parse(raw);
+  assert.notEqual(sha(raw),valueSha(literal),'Raw wire identity must remain distinct from the canonical binding');
+  assert.equal(f.products.facts.candidate_bindings[role+'_sha256'],valueSha(literal));
+  assert.deepEqual(valueBytes(nativeLiteral(result.state[role])),valueBytes(literal));
+  assert.throws(()=>{result.state[role].rows=[];},TypeError);
+ }
+ const ledger=result.state.ledger,patch=result.state.patch;
+ f.api.releaseCheckpoint(result.state);
+ assert.throws(()=>valueSha(nativeLiteral(ledger)),/closed/);assert.throws(()=>valueSha(nativeLiteral(patch)),/closed/);
+ f.transport.releaseAcceptedCheckpoint(a.handle);
+});
+
+for(const role of ['ledger','patch'])test('accepted private digest does not cache a changed '+role+' body across admissions',async t=>{
+ const f=await acceptedProducts(t),a=await acquire(f),good=await qualify(f,a);
+ assert.equal(good.available,true);
+ const corrupt=await acquire(f),stream=corrupt.reader.stream.bind(corrupt.reader),directories=[],mkdtemp=fs.mkdtempSync;
+ corrupt.reader.stream=async function*(name,...args){
+  if(name!==f.sidecar.logical_asset_map[role].path){yield* stream(name,...args);return;}
+  const chunks=[];for await(const chunk of stream(name,...args))chunks.push(chunk);
+  const raw=Buffer.concat(chunks);assert.equal(raw.at(-1),10);raw[raw.length-1]=32;
+  // Same parsed value and length, different complete wire bytes.
+  yield raw;
+ };
+ fs.mkdtempSync=function(prefix,...args){const result=mkdtemp.call(this,prefix,...args);if(String(prefix).endsWith('native-intervals-'))directories.push(result);return result;};
+ try{await assert.rejects(()=>qualify(f,corrupt),/Complete native JSON identity differs/);}
+ finally{fs.mkdtempSync=mkdtemp;f.transport.releaseAcceptedCheckpoint(corrupt.handle);}
+ assert(directories.length>0);for(const directory of directories)assert.equal(fs.existsSync(directory),false,'Failed invocation must release its own stores');
+ assert.equal(valueSha(nativeLiteral(good.state[role])),f.products.facts.candidate_bindings[role+'_sha256'],'A failed separate admission must not close the valid snapshot');
+ f.api.releaseCheckpoint(good.state);f.transport.releaseAcceptedCheckpoint(a.handle);
 });

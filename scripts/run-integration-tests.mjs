@@ -34,6 +34,11 @@ const NATIVE_REGRESSION_INPUTS = [
     '8f6dc184d1a41b634cec4759bb57b3cc04dd980a',
     '6ed6406f9fad4c7c468b06a376346b216cb50db7'
   ]},
+  {tests:['test/original-repair-exception-controls.test.mjs'],commits:[
+    'cd1886f20f34abdcafe7c327ae0ee768ce5d47ae',
+    'e17dba85347a4a31ccb9ecdaa4c7a20b6b950c8d',
+    '32d819ddc9333ff025584665665c963822dfcead'
+  ]},
   {tests:['test/held-cell-exception-evidence-controls.test.mjs'],commits:[
     '427cf5eb2d5004b0b65ffc34bf33d7fbbb6e44bc',
     'b991e2295c50a64e49d4f92c76c37bd95c869b63',
@@ -43,6 +48,7 @@ const NATIVE_REGRESSION_INPUTS = [
     '21984e9ec4ec7370bc807e2da23cea2228747698',
     '07c74ff101d4ab5e679255ed85c402356aa54a42'
   ]},
+
   {tests:['test/sierra-leone-physical-review-controls.test.mjs'],commits:[
     '21984e9ec4ec7370bc807e2da23cea2228747698',
     'a6da25fcc78819b8e88ec2040a934039aefc5f97',
@@ -86,6 +92,7 @@ function nativeRegressionBodies(files,readFile) {
       }
     }
   }
+  if(has('original-repair-exception-controls'))pins.push(...read('test/fixtures/original-repair-exceptions/historical-input-pins.json').inputs);
   if(has('held-cell-exception-evidence-controls')){
     pins.push(...read('test/fixtures/held-cell-exceptions/historical-input-pins.json').inputs);
   }
@@ -96,7 +103,7 @@ function nativeRegressionBodies(files,readFile) {
   return pins;
 }
 export function prepareNativeRegressionInputs(profile,{files,exists=fs.existsSync,readFile=fs.readFileSync,run=spawnSync}={}) {
-  const retainedEvidenceControls=files?.some(name=>['test/sierra-leone-physical-review-controls.test.mjs','test/held-cell-exception-evidence-controls.test.mjs'].includes(name))===true;
+  const retainedEvidenceControls=Array.isArray(files)&&files.some(file=>['test/sierra-leone-physical-review-controls.test.mjs','test/original-repair-exception-controls.test.mjs','test/held-cell-exception-evidence-controls.test.mjs'].includes(file))===true;
   if((profile!=='full'&&!retainedEvidenceControls)||!exists('scripts/native-ownership/validate-context-input-stage.mjs'))return {applicable:false,fetched:[]};
   if(files!==undefined&&(!Array.isArray(files)||!files.length||files.some(name=>typeof name!=='string'||!/^test\/[A-Za-z0-9_.-]+\.test\.mjs$/.test(name)||!exists(name))))
     throw Error('Actual regression file roster required');

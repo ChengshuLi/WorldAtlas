@@ -3,8 +3,11 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import {materializePackageInputs, runPackageBuild, verifyPackageDependencies, assertPackageStage, inspectPackageRuntime} from '../scripts/package-build.mjs';
+import {materializePackageInputs, runPackageBuild, verifyPackageDependencies, assertPackageStage, inspectPackageRuntime, inspectPackageInputs} from '../scripts/package-build.mjs';
 import {execFileSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
+import {selectedDataCheckoutPatterns} from '../scripts/package-inputs.mjs';
+import {committedPackageInputs} from '../scripts/package-output-artifact.mjs';
 
 const fixturePreflight = async () => ({passed: true, errors: [], synthetic_package_boundary_fixture: true});
 
@@ -25,9 +28,32 @@ async function fixture(t, {program, promoted = false} = {}) {
   return {root, definition};
 }
 
+test('current-execution historical fixtures retain exact accepted Git bodies',async()=>{
+ const directory=new URL('./fixtures/current-execution-authored/',import.meta.url);
+ const provenance=JSON.parse(await fs.readFile(new URL('provenance.json',directory)));
+ assert.equal(provenance.version,1);
+ assert.equal(provenance.kind,'literal-current-execution-authored-fixtures-v1');
+ assert.equal(provenance.source_commit,'07c74ff101d4ab5e679255ed85c402356aa54a42');
+ assert.deepEqual(provenance.files.map(pin=>[pin.file,pin.source_path,pin.git_blob_oid]),[
+  ['index.json','coordination/engineering/eastern-two-gap-repair-native-20261007/current-consumer-code/index.json','1f371fc84190beee956e8475b873cfa77f542379'],
+  ['part-000.bin.gz','coordination/engineering/eastern-two-gap-repair-native-20261007/current-consumer-code/part-000.bin.gz','39c0efee9c5e5470d305070496c59abd68a7ce39'],
+  ['stage-manifest.json','data/native-context-migration/manifest.json','a42ac4c5b6962998fec81468795a1eb4d19affa3'],
+ ]);
+ for(const pin of provenance.files){
+  const raw=await fs.readFile(new URL(pin.file,directory));
+  assert.equal(raw.length,pin.bytes);
+  assert.equal(createHash('sha256').update(raw).digest('hex'),pin.sha256);
+  assert.equal(createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex'),pin.git_blob_oid);
+ }
+});
+
 test('current-execution real plain-child package positives and hostile boundaries',()=>{
  const raw=execFileSync(process.execPath,['coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution-controls.mjs'],{maxBuffer:32*1024*1024,env:{...process.env,NODE_OPTIONS:'',NODE_PATH:''}});
  const result=JSON.parse(raw);assert.equal(result.status,'PASS');assert.equal(result.authored_pins_unchanged,true);assert.deepEqual(result.adverse_cases,['midrun body','unbranded receipt','wrong HEAD','wrong root','runtime mutation','omitted import','overbound body','mode mutation','new import','uncommitted source','receipt mutation']);
+ assert.equal(result.historical.authored_files,31);
+ assert.equal(result.historical.all_50_authored_whole_bodies_restored,true);
+ assert.equal(result.historical.immutable_historical_source_and_numerical_negatives,7);
+ assert.equal(result.historical.exact_additive_restoration_extension,true);
  assert.equal(result.actualInner.actual_spawn_without_execute_injection,true);
  assert.deepEqual(result.actualInner.actual_environment_boundary_cases,['positive','missing','hash','root','path','stale']);
 });
@@ -183,4 +209,57 @@ test('actual fresh Cloudflare package admits 25 MiB and refuses one extra byte b
  await assert.rejects(runPackageBuild('cloudflare',{root,preflight:fixturePreflight}),/Cloudflare static asset exceeds 25 MiB/);
  assert.equal(await fs.readFile(path.join(root,'dist/client/preserved'),'utf8'),'accepted previous output');
  assert.equal((await fs.stat(path.join(root,'dist/client/asset.bin'))).size,26214400);
+});
+
+
+test('cold selected-data checkout preserves the full fallback build image without verification-only fixtures', async t => {
+  const verification = ['data/verification/body.json', 'research/geography/verification/body.json',
+    'coordination/engineering/verification/body.json'];
+  const required = ['data/current/value.json', 'research/geography/current/nested/value.json',
+    'coordination/engineering/current/body.json', 'data/optional-present/value.json'];
+  const program = `import fs from 'node:fs';
+    const required=${JSON.stringify(required)}, excluded=${JSON.stringify(verification)};
+    for(const name of excluded)if(fs.existsSync(name))throw Error('Verification fixture entered build image');
+    fs.mkdirSync('dist/client',{recursive:true});
+    fs.writeFileSync('dist/client/values.json',JSON.stringify(required.map(name=>fs.readFileSync(name,'utf8'))));`;
+  const {root,definition}=await fixture(t,{program});
+  await fs.rename(path.join(root,'scripts/build-static-inner.mjs'),path.join(root,'scripts/build-cloudflare-inner.mjs'));
+  definition.inputs[1]='scripts/build-cloudflare-inner.mjs';
+  definition.inputs.push('data/current/','research/geography/current/','coordination/engineering/current/body.json',
+    'data/optional-present/','data/optional-absent/');
+  definition.optional_inputs.push('data/optional-present/','data/optional-absent/');
+  definition.verification_paths=verification;
+  const expectations='coordination/engineering/current/selected-delivery-expectations.json';
+  for(const name of [...required,...verification,expectations]){
+    await fs.mkdir(path.dirname(path.join(root,name)),{recursive:true});await fs.writeFile(path.join(root,name),name+'\n');
+  }
+  await fs.writeFile(path.join(root,'.github/package-inputs.json'),JSON.stringify(definition));
+  const git=(args,input)=>execFileSync('git',['-C',root,'-c','core.hooksPath='+os.devNull,
+    '-c','user.name=Fixture','-c','user.email=fixture@example.invalid',...args],
+    {encoding:'utf8',input,env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:os.devNull}});
+  git(['init','-q']);await fs.appendFile(path.join(root,'.git/info/exclude'),'\nnode_modules/\n.cache/\ndist/\n');
+  git(['add','.']);git(['commit','-qm','Synthetic selected fallback input boundary']);
+  const before=committedPackageInputs(root,definition),head=git(['rev-parse','HEAD']);
+  assert.deepEqual(inspectPackageInputs(root,definition).errors,[]);
+  const beforeImage=path.join(root,'.cache/image-before'),afterImage=path.join(root,'.cache/image-after');
+  const inventory=await materializePackageInputs({source:root,destination:beforeImage,definition});
+  const entries=new Map(git(['ls-tree','-rz','HEAD']).split('\0').filter(Boolean).map(line=>{
+    const [metadata,name]=line.split('\t'),[mode,type,sha]=metadata.split(' ');return [name,{mode,type,sha}];
+  }));
+  git(['sparse-checkout','set','--no-cone','--stdin'],selectedDataCheckoutPatterns(definition,entries,expectations).join('\n')+'\n');
+  git(['checkout','--detach','-q',head.trim()]);
+  for(const name of verification)await assert.rejects(fs.stat(path.join(root,name)),{code:'ENOENT'});
+  assert.equal(git(['rev-parse','HEAD']),head);
+  assert.deepEqual(committedPackageInputs(root,definition),before);
+  assert.deepEqual(inspectPackageInputs(root,definition).errors,[]);
+  assert.deepEqual(await materializePackageInputs({source:root,destination:afterImage,definition}),inventory);
+  for(const {path:name}of inventory)assert.deepEqual(await fs.readFile(path.join(afterImage,name)),await fs.readFile(path.join(beforeImage,name)));
+  // Real private child and Cloudflare output admission, with only the existing
+  // explicit synthetic runtime-preflight injection; no scientific producer.
+  const result=await runPackageBuild('cloudflare',{root,preflight:fixturePreflight});
+  assert.equal(result.source_files,inventory.length);
+  assert.equal(result.source_bytes,inventory.reduce((sum,row)=>sum+row.bytes,0));
+  assert.deepEqual(JSON.parse(await fs.readFile(path.join(root,'dist/client/values.json'))),required.map(name=>name+'\n'));
+  await fs.unlink(path.join(root,required[0]));
+  assert(inspectPackageInputs(root,definition).errors.some(error=>error.path===required[0]));
 });
