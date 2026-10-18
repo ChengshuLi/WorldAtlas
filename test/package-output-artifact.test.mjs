@@ -379,7 +379,7 @@ test('declared build image rejects real producer changes but ignores incidental 
   assert.throws(()=>admitPackageOutputTransition(legacy,current()),/Immediate original build capture/);
 });
 
-test('final queue captures genuine build output immediately and uploads only after checks', () => {
+test('final queue retains genuine build output immediately before independent checks', () => {
   const workflow=fs.readFileSync(new URL('../.github/workflows/worker-merge.yml',import.meta.url),'utf8');
   const steps=workflow.split(/^      - name: /m).slice(1).map(raw=>({name:raw.split('\n')[0],raw}));
   const at=steps.findIndex(step=>step.name==='Build the combined application once before asset-dependent tests');
@@ -387,12 +387,13 @@ test('final queue captures genuine build output immediately and uploads only aft
   assert.equal(steps[at+1].name,'Inventory original final-worker package output',
     'No observer/test may intervene before original capture');
   const end=steps.findIndex(step=>step.name==='Retain original final-worker package output');
+  assert.equal(end,at+2,'Upload must immediately preserve the inventoried original');
   for(const name of ['Install browser dependencies only for tests that use Playwright',
     'Test applicable combined-tree invariants without publishing or live imports']){
     const control=steps.findIndex(step=>step.name===name);
-    assert(control>at+1&&control<end,name+' must run between original capture and upload');
+    assert(control>end,name+' must remain after original retention');
   }
-  assert.match(steps[end].raw,/if: success\(\)/,'Failed checks cannot upload an original');
+  assert.match(steps[end].raw,/if: success\(\)/,'Failed build or inventory cannot upload an original');
   assert.doesNotMatch(workflow,/Read back qualified native build outputs|native-normal-built-output\.json|--built-output-readback/);
   const selectedSmoke=steps.find(step=>step.name==='Retain selected delivery smoke');
   assert.match(selectedSmoke.raw,/name: selected-delivery-smoke-/);

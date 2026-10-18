@@ -1330,3 +1330,35 @@ test('focused Python controls follow their actual paired Node wrapper without a 
  tree.delete(wrapper);assert.equal(integrationProfile('engineering/tests',[{filename:child,status:'added'}],{},tree),'full');
  tree.delete(child);assert.equal(integrationProfile('engineering/tests',[{filename:child,status:'removed'}],{},tree),'evidence');
 });
+
+
+test('successful original build archive is retained before later tests without relaxing acceptance',()=>{
+ const yaml=fs.readFileSync(new URL('../.github/workflows/worker-merge.yml',import.meta.url),'utf8');
+ const integration=yaml.split('\n  integration:\n')[1].split('\n  merge:\n')[0];
+ const steps=integration.split(/\n(?=      - )/).slice(1);
+ const at=name=>steps.findIndex(step=>step.startsWith('      - name: '+name+'\n'));
+ const snapshot=at('Snapshot original final-worker package inputs'),
+  build=at('Build the combined application once before asset-dependent tests'),
+  inventory=at('Inventory original final-worker package output'),
+  retain=at('Retain original final-worker package output'),
+  browser=at('Install browser dependencies only for tests that use Playwright'),
+  tests=at('Test applicable combined-tree invariants without publishing or live imports');
+ assert(snapshot>=0);assert.equal(build,snapshot+1);assert.equal(inventory,build+1);
+ assert.equal(retain,inventory+1,'Capture the original bytes before browser setup or tests can fail or mutate them');
+ assert(retain<browser&&browser<tests);
+ const condition="needs.prepare.outputs.profile == 'full' && matrix.shard == 0 && steps.assembly.outputs.assembled != 'true'";
+ for(const index of [snapshot,build,inventory]){
+  assert(steps[index].includes('\n        if: '+condition+'\n'));
+  assert.doesNotMatch(steps[index],/always\(\)|continue-on-error/);
+ }
+ assert(steps[retain].includes('\n        if: success() && '+condition+'\n'));
+ assert.doesNotMatch(steps[retain],/always\(\)|continue-on-error/);
+ assert.match(steps[retain],/uses: actions\/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02/);
+ assert.match(steps[retain],/if-no-files-found: error/);
+ for(const member of ['dist/client/','dist/cloudflare/','.cache/package-output-manifest.json','.cache/package-input-build.json'])
+  assert(steps[retain].includes(member));
+ assert.match(steps[tests],/node scripts\/run-integration-tests\.mjs/);
+ assert.match(yaml,/needs: \[prepare, integration, geography\]/);
+ assert.match(yaml,/INTEGRATION_RESULT: \$\{\{ needs\.integration\.result \}\}/);
+ assert.match(yaml,/GEOGRAPHY_RESULT: \$\{\{ needs\.geography\.result \}\}/);
+});

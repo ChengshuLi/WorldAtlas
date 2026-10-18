@@ -324,6 +324,22 @@ jobs:
       - name: Inventory original final-worker package output
         if: needs.prepare.outputs.profile == 'full' && matrix.shard == 0 && steps.assembly.outputs.assembled != 'true'
         run: node scripts/package-output-artifact.mjs
+      # Preserve the successful build before later tests can fail or mutate it.
+      # Retention alone grants no test, reuse or merge acceptance.
+      - name: Retain original final-worker package output
+        if: success() && needs.prepare.outputs.profile == 'full' && matrix.shard == 0 && steps.assembly.outputs.assembled != 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: cloudflare-package-output-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            dist/client/
+            dist/cloudflare/
+            .cache/package-output-manifest.json
+            .cache/package-input-build.json
+          include-hidden-files: true
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 30
       - name: Install browser dependencies only for tests that use Playwright
         if: needs.prepare.outputs.test_selection != 'selected-data'
         env:
@@ -353,20 +369,6 @@ jobs:
           elif test "$INTEGRATION_TEST_SELECTION" != selected-data; then
             node scripts/run-integration-tests.mjs
           fi
-      - name: Retain original final-worker package output
-        if: success() && needs.prepare.outputs.profile == 'full' && matrix.shard == 0 && steps.assembly.outputs.assembled != 'true'
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: cloudflare-package-output-${{ github.run_id }}-${{ github.run_attempt }}
-          path: |
-            dist/client/
-            dist/cloudflare/
-            .cache/package-output-manifest.json
-            .cache/package-input-build.json
-          include-hidden-files: true
-          if-no-files-found: error
-          compression-level: 0
-          retention-days: 30
       - name: Retain selected delivery smoke
         if: always() && needs.prepare.outputs.profile == 'full' && matrix.shard == 0
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

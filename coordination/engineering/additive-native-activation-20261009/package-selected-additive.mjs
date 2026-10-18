@@ -107,8 +107,15 @@ export async function readOriginalPackageInventory({api,repo,origin}) {
         'Inventory original final-worker package output','Test applicable combined-tree invariants without publishing or live imports','Retain original final-worker package output'];
   demand(sequence.every(step),'Original package producer lacks required actual steps');
   const numbers=sequence.map(name=>job.steps.find(row=>row.name===name).number);
-  demand(numbers.every((number,index)=>assemblyPositive(number)&&(index===0||number>numbers[index-1]))&&numbers[2]===numbers[1]+1,
-    'Original inventory must immediately follow the build and upload must follow successful current tests');
+  // Current queues retain immediately after inventory, before tests can mutate
+  // output or fail. Historical producers retained after tests. Both still need
+  // the successful whole job and all successful test steps required above;
+  // early artifact existence is not permission to reuse a failed producer.
+  const early=finalWorker&&numbers[4]<numbers[3],ordered=early?
+    [numbers[0],numbers[1],numbers[2],numbers[4],numbers[3]]:numbers;
+  demand(ordered.every((number,index)=>assemblyPositive(number)&&(index===0||number>ordered[index-1]))&&numbers[2]===numbers[1]+1&&
+    (!early||numbers[4]===numbers[2]+1),
+    'Original inventory must immediately follow build; upload follows inventory or successful current tests');
   const artifact=await api(`/repos/${repo}/actions/artifacts/${origin.artifact_id}`);
   demand(artifact.id===origin.artifact_id&&artifact.name===artifactName&&!artifact.expired&&artifact.size_in_bytes===origin.artifact_bytes&&
     artifact.digest==='sha256:'+origin.artifact_digest&&artifact.workflow_run?.id===origin.run_id&&
