@@ -1,0 +1,12 @@
+Boundary Representative of Year: 2020
+ISO-3166-1 (Alpha-3): KEN
+Boundary Type: ADM2
+Canonical Boundary Type Name: Sub-Counties
+Source 1: IEBC
+Source 2: OCHA ROSEA
+Release Type: gbOpen
+License: Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)
+License Notes: 
+License Source: https://data.humdata.org/dataset/ken-administrative-boundaries
+Link to Source Data: https://data.humdata.org/dataset/ken-administrative-boundaries
+Other Notes: This dataset is not an official administrative layer from the National authorities but was agreed and endorsed for operational use by IMWG in October 2016. The administrative level 2 boundaries do not conform to the COD-PS. The boundaries and names shown and the designations used on this map do not imply official endorsement or acceptance by the United Nations. Extensive amount of topological errors (gaps and overlaps) were fixed by using ArcMap Integrate tool. Applying 30 meters tolerance allowed to preserve relatively high level of resolution. Afterwards Align edge tool was used to correct all the remaining errors that were not rectified by the Integrate tool. Codes were reformatted to meet FICSS-UNHCR standards. New generation of codes is based on original County_cod and Const_Code. (Codes are preserve in the dataset in DSCodeAdm2 and DSCodeAdm1 fields– DSC (Data Source Code)). Moreover, a large part of the Belgut and Konoin Admin2 units were overlapping. The issue was resolved using https://softkenya.com/kenya/belgut-constituency/ as a reference. Due to the discrepancies between Admin1 and Admin 2 boundaries listed in the previous email, the Admin1 layer was created by dissolving Admin2 boundaries based on constituency name field.

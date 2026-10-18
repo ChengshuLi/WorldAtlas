@@ -1,0 +1,20 @@
+# Historical Kenya original source meaning
+
+This package evaluates all5,156 original requested keys (5,090land,66inland-water),2,188intervals and all38literal direct-owner source atoms. It does not certify current legal administrative divisions, approve geography imports or close regional source/semantic issues215/216. Public package issue creation was denied before execution; issue=null and no public claim is asserted. The explicit parent assignment authorizes bounded private preparation and ordinary author Git work.
+
+The whole KEN_ADM2 ZIP is retained at source-rights/KEN_ADM2.zip, authenticated to historical upstream geoBoundaries9469f09592ced973a3448cf66b6100b741b64c0d and its actual LFS pointer:3,309,888bytes SHA2565664885f129f58663f12df4bf69fc60336e4a4571bdf4550e51ec2d06fdf9069. Its actual meta.txt identifies represented2020 Sub-Counties, IEBC/OCHA ROSEA, CC BY3.0IGO. The original HDX screenshot separately names IEBC/OCHA ROSEA and an IGO attribution license, updated2020-02-20 with dataset range2018-07-03–2021-04-16; those dates are not a legal effective-date determination.
+
+The substantive archive caveats are essential: it explicitly says this is not an official National-authority administrative layer, operationally endorsed by IMWG in October2016; ADM2 does not conform to COD-PS; boundaries/names imply no UN endorsement. Extensive gaps/overlaps were repaired with ArcMap Integrate using30metres tolerance and Align edge. Codes were reformatted for FICSS-UNHCR from County_cod/Const_Code with originals retained in DSCode fields. Large Belgut/Konoin overlap was resolved against a third-party constituency webpage. The archive describes an ADM1 derivation by dissolving constituency names, but that account does not establish that our separately retained RCMRD ADM1 product used that derivation. No new topology repair, snapping, clipping or geometry transformation is authorized by this evaluation.
+
+Retained source competitors preserve their distinct roles/vintages and actual archives/native PRJs:
+
+- KEN ADM1:47 Counties,2020 RCMRD GeoPortal/Africa GeoPortal; screenshot explicitly Public Domain,2020-06-02 publication/06-10 update. This is independent context, not an assumed IEBC ADM2 dissolve.
+- TZA ADM1:30features,2015 OSM/Wambacher, ODbL1.0 and OpenStreetMap contributors attribution.
+- UGA ADM1:4regions,2017 OSM/Wambacher, ODbL1.0 and OpenStreetMap contributors attribution.
+- UGA ADM2:151 historical2006 Counties, geoBoundaries/WikimediaCommons, Public Domain; actual screenshot credits Rarelibra/MapInfo7.5 and a public-domain Uganda_counties.png. These are counties, not contemporary districts; bitmap lineage limits detail and legal interpretation.
+
+Actual original PRJs declare geographic WGS84 in degrees; retained geoBoundaries GeoJSON uses CRS84(longitude,latitude). No relabeling or reprojection was performed. Source rights declarations and attribution are retained, without treating reachability/hash equality as an authority/currentness approval.
+
+All whole source families and complete source atoms are inputs, not merely contact rosters. The38positive owners are direct original sub-counties. The complete Kenya canonical cohort is274owners/290original atoms across geography parts12,13,28. Nairobi, atlas:city:KEN-1196, is a17-original-source-atom aggregation; complete forward/reverse lineage remains a required negative ancestry operand. Source/physical/native stages retain complete whole domestic and foreign competitors and territorial vetoes. Empty water polygons are not positive coverage operands, while every66original water key stays requested/accounted.
+
+Current main923e9c21 still selects the whole905bdc additive patch:6,118,769 accepted cells. Actual complete patch subtraction found0original-coordinate overlap and0candidate-owner intersection. The55MBselected ledger was not acquired; authority-history assertions were not assessed by that overlap check. Source evidence, physical support, unique native coverage and later current-owner-zero/selected delivery remain separate actual outcomes.

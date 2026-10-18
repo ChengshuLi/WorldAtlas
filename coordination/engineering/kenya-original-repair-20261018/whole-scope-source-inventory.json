@@ -1,0 +1,1149 @@
+{
+  "original_package": {
+    "package_id": "gb-KEN-ADM2--repair-evaluation",
+    "primary_source": "gb:KEN:ADM2",
+    "source_family_index": 175,
+    "category": "repair-evaluation",
+    "native_cells": 5156,
+    "land_cells": 5090,
+    "inland_water_cells": 66,
+    "source_relative_cells": 0,
+    "interval_segments": 2188,
+    "owners": [
+      26104,
+      26114,
+      26120,
+      26128,
+      26133,
+      26134,
+      26135,
+      26139,
+      26141,
+      26143,
+      26153,
+      26156,
+      26157,
+      26158,
+      26159,
+      26173,
+      26182,
+      26192,
+      26196,
+      26230,
+      26248,
+      26264,
+      26266,
+      26277,
+      26291,
+      26293,
+      26301,
+      26302,
+      26303,
+      26304,
+      26305,
+      26310,
+      26315,
+      26316,
+      26326,
+      26332,
+      26339,
+      26352
+    ],
+    "source_features": [
+      40425,
+      40426,
+      40427,
+      40428,
+      40429,
+      40434,
+      40435,
+      40436,
+      40443,
+      40451,
+      40461,
+      40467,
+      40468,
+      40469,
+      40470,
+      40471,
+      40479,
+      40490,
+      40500,
+      40504,
+      40517,
+      40523,
+      40540,
+      40545,
+      40558,
+      40578,
+      40579,
+      40584,
+      40590,
+      40605,
+      40606,
+      40608,
+      40614,
+      40615,
+      40618,
+      40621,
+      40624,
+      40628,
+      40632,
+      40633,
+      40634,
+      40646,
+      40655,
+      40656,
+      40657,
+      40662,
+      40677,
+      40688,
+      40692,
+      40698,
+      40728,
+      40730,
+      40746,
+      40753,
+      60191,
+      60192,
+      60391,
+      60392,
+      60395,
+      60402,
+      60406,
+      60432
+    ],
+    "source_families": [
+      174,
+      175,
+      338,
+      340,
+      341
+    ],
+    "native_blocks": [
+      31,
+      32
+    ],
+    "provinces": [
+      "framework:province:bungoma:c9b9e2a27a45",
+      "framework:province:garissa:b4d7a5fef9fb",
+      "framework:province:kilifi:c6bb4026aa7d",
+      "framework:province:kwale:2b497a486299",
+      "framework:province:lamu:33a49f0697f0",
+      "framework:province:mandera:bcd0c2459fca",
+      "framework:province:marsabit:70c4c3830d0f",
+      "framework:province:migori:1af04dd457a2",
+      "framework:province:mombasa:f0a2a5d1c18a",
+      "framework:province:narok:3a622e169345",
+      "framework:province:siaya:5c10ac47c571",
+      "framework:province:taita-taveta:a87e83dbba71",
+      "framework:province:tana-river:b3e14efd8080",
+      "framework:province:trans-nzoia:ae1851064f7d",
+      "framework:province:turkana:fbdf871da3eb",
+      "framework:province:wajir:034631a2dc6c",
+      "framework:province:west-pokot:f94c6d897804"
+    ],
+    "location_count": 38,
+    "source_feature_count": 62,
+    "locality_count": 17,
+    "cost": {
+      "primary_source_decoded_bytes": 2038927,
+      "all_required_source_decoded_bytes": 4606573,
+      "primary_full_source_raster_measured_seconds": 0.529,
+      "source_interval_segments": 2188,
+      "maximum_native_rows_per_execution_frame": 4096,
+      "observed_global_census_peak_rss_bytes": 884973568
+    },
+    "evidence": {
+      "selection": "ownership-binding.json",
+      "lineage": "lineage.json",
+      "territorial_source_catalogue": "retained-source-catalogue.json",
+      "territorial_catalogue_sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "source_features": "source-feature-roster.json",
+      "territorial_native_blocks": "source-candidates-block-NNN.json.gz",
+      "physical": "physical-unassigned-summary.json",
+      "source_domain_transform": []
+    },
+    "work": {
+      "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+      "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+      "priority": 1
+    },
+    "execution": {
+      "command": "node source-batch-intervals.mjs gb-KEN-ADM2--repair-evaluation OUTPUT_DIRECTORY",
+      "output_columns": [
+        "y",
+        "start",
+        "end",
+        "candidate_owner_indices",
+        "source_feature_indices",
+        "physical_class"
+      ]
+    }
+  },
+  "owners": [
+    {
+      "id": "gb:KEN:ADM2:3690345B11030917787472",
+      "index": 26104,
+      "bounds": [
+        158453.42169555556,
+        133269.00730090274,
+        158981.61336166665,
+        133908.53923240764
+      ],
+      "province_id": "framework:province:taita-taveta:a87e83dbba71",
+      "province_index": 4474,
+      "name": "Taveta",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B11030917787472"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B14280875758697",
+      "index": 26114,
+      "bounds": [
+        160748.32090611113,
+        132293.42994912242,
+        161322.61009388886,
+        132641.93944007583
+      ],
+      "province_id": "framework:province:lamu:33a49f0697f0",
+      "province_index": 2632,
+      "name": "Lamu East",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B14280875758697"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B15365868811730",
+      "index": 26120,
+      "bounds": [
+        160028.96653166667,
+        133424.78823692072,
+        160301.69199555553,
+        133832.12241935256
+      ],
+      "province_id": "framework:province:kilifi:c6bb4026aa7d",
+      "province_index": 2457,
+      "name": "Kilifi North",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B15365868811730"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B18525828088972",
+      "index": 26128,
+      "bounds": [
+        159717.93570222222,
+        134181.22251916694,
+        159919.58505055556,
+        134362.06138199664
+      ],
+      "province_id": "framework:province:kwale:2b497a486299",
+      "province_index": 2559,
+      "name": "Msambweni",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B18525828088972"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B19935861804031",
+      "index": 26133,
+      "bounds": [
+        159850.4023561111,
+        130745.60324596638,
+        160935.76959611112,
+        131330.02007405247
+      ],
+      "province_id": "framework:province:garissa:b4d7a5fef9fb",
+      "province_index": 1789,
+      "name": "Dadaab",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B19935861804031"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B19939243433246",
+      "index": 26134,
+      "bounds": [
+        159957.89041611113,
+        133757.1742813606,
+        160097.71228277776,
+        133966.13178062116
+      ],
+      "province_id": "framework:province:kilifi:c6bb4026aa7d",
+      "province_index": 2457,
+      "name": "Kilifi South",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B19939243433246"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B21268923503814",
+      "index": 26135,
+      "bounds": [
+        159898.90306611112,
+        133961.89792244503,
+        159957.45347277776,
+        134020.5906141136
+      ],
+      "province_id": "framework:province:mombasa:f0a2a5d1c18a",
+      "province_index": 3067,
+      "name": "Jomvu",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B21268923503814"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B22392033475621",
+      "index": 26139,
+      "bounds": [
+        156265.35513,
+        130148.00867532028,
+        156525.62770888887,
+        130348.67882474908
+      ],
+      "province_id": "framework:province:trans-nzoia:ae1851064f7d",
+      "province_index": 4649,
+      "name": "Endebess",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B22392033475621"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B2279611832844",
+      "index": 26141,
+      "bounds": [
+        161124.82041166665,
+        128174.25100187682,
+        161600.57887777776,
+        128617.88652167981
+      ],
+      "province_id": "framework:province:mandera:bcd0c2459fca",
+      "province_index": 2866,
+      "name": "Mandera East",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B2279611832844"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B23512246754033",
+      "index": 26143,
+      "bounds": [
+        159080.65385055554,
+        133684.13185753126,
+        159905.67568777775,
+        134236.6510421533
+      ],
+      "province_id": "framework:province:kwale:2b497a486299",
+      "province_index": 2559,
+      "name": "Kinango",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B23512246754033"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B28138832354018",
+      "index": 26153,
+      "bounds": [
+        160367.0878477778,
+        132390.25696978538,
+        160929.7980372222,
+        132879.6833650847
+      ],
+      "province_id": "framework:province:lamu:33a49f0697f0",
+      "province_index": 2632,
+      "name": "Lamu West",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B28138832354018"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B29556459221230",
+      "index": 26156,
+      "bounds": [
+        158850.2390661111,
+        128420.06354171652,
+        159735.99602666666,
+        129518.15769170447
+      ],
+      "province_id": "framework:province:marsabit:70c4c3830d0f",
+      "province_index": 2915,
+      "name": "Moyale",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B29556459221230"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B29559403317261",
+      "index": 26157,
+      "bounds": [
+        159926.35767222222,
+        133940.14511682736,
+        160036.39456833334,
+        134031.1033474256
+      ],
+      "province_id": "framework:province:mombasa:f0a2a5d1c18a",
+      "province_index": 3067,
+      "name": "Kisauni",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B29559403317261"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B29695103199893",
+      "index": 26158,
+      "bounds": [
+        159986.58302833335,
+        133344.63296718002,
+        160308.82873666668,
+        133531.4322474274
+      ],
+      "province_id": "framework:province:kilifi:c6bb4026aa7d",
+      "province_index": 2457,
+      "name": "Malindi",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B29695103199893"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B29698096186163",
+      "index": 26159,
+      "bounds": [
+        159895.1890477778,
+        133992.19256198846,
+        159957.45347277776,
+        134027.81809822656
+      ],
+      "province_id": "framework:province:mombasa:f0a2a5d1c18a",
+      "province_index": 3067,
+      "name": "Changamwe",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B29698096186163"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B37794826705018",
+      "index": 26173,
+      "bounds": [
+        156024.817825,
+        131809.6006600802,
+        156211.39262833333,
+        131946.53448852344
+      ],
+      "province_id": "framework:province:migori:1af04dd457a2",
+      "province_index": 3032,
+      "name": "Suna West",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B37794826705018"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B40484627971500",
+      "index": 26182,
+      "bounds": [
+        159950.02543611111,
+        134018.47348897567,
+        159981.04841277775,
+        134054.17361244655
+      ],
+      "province_id": "framework:province:mombasa:f0a2a5d1c18a",
+      "province_index": 3067,
+      "name": "Mvita",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B40484627971500"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B44163293085628",
+      "index": 26192,
+      "bounds": [
+        159591.0036638889,
+        132765.03180673855,
+        160387.3328888889,
+        133523.77261161816
+      ],
+      "province_id": "framework:province:kilifi:c6bb4026aa7d",
+      "province_index": 2457,
+      "name": "Magarini",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B44163293085628"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B44835557589557",
+      "index": 26196,
+      "bounds": [
+        159598.35887666667,
+        134052.1293752364,
+        159952.35580055555,
+        134293.98414757955
+      ],
+      "province_id": "framework:province:kwale:2b497a486299",
+      "province_index": 2559,
+      "name": "Matuga",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B44835557589557"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B53478860661951",
+      "index": 26230,
+      "bounds": [
+        159198.77419833335,
+        134139.5999488623,
+        159827.75412666667,
+        134485.60156674878
+      ],
+      "province_id": "framework:province:kwale:2b497a486299",
+      "province_index": 2559,
+      "name": "Lunga Lunga",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B53478860661951"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B58494489025359",
+      "index": 26248,
+      "bounds": [
+        159979.44628722224,
+        133998.2516731268,
+        160016.14952722224,
+        134042.9303957656
+      ],
+      "province_id": "framework:province:mombasa:f0a2a5d1c18a",
+      "province_index": 3067,
+      "name": "Nyali",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B58494489025359"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B63925745903052",
+      "index": 26264,
+      "bounds": [
+        160205.41881444448,
+        127961.72490732286,
+        160923.8337285776,
+        128377.00849089329
+      ],
+      "province_id": "framework:province:mandera:bcd0c2459fca",
+      "province_index": 2866,
+      "name": "Banissa",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B63925745903052"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B65112986078037",
+      "index": 26266,
+      "bounds": [
+        156140.02521722222,
+        130245.32336462737,
+        156426.22310055557,
+        130517.43236121896
+      ],
+      "province_id": "framework:province:bungoma:c9b9e2a27a45",
+      "province_index": 1090,
+      "name": "Mt. Elgon",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B65112986078037"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B67191049823154",
+      "index": 26277,
+      "bounds": [
+        159907.64193277777,
+        134039.57207399365,
+        159975.29532555555,
+        134109.5897711791
+      ],
+      "province_id": "framework:province:mombasa:f0a2a5d1c18a",
+      "province_index": 3067,
+      "name": "Likoni",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B67191049823154"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B72596484741491",
+      "index": 26291,
+      "bounds": [
+        156265.13665833333,
+        128421.74190131408,
+        157045.95439499998,
+        129358.47648479512
+      ],
+      "province_id": "framework:province:turkana:fbdf871da3eb",
+      "province_index": 4684,
+      "name": "Loima",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B72596484741491"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B74333595130890",
+      "index": 26293,
+      "bounds": [
+        159863.65630388889,
+        133834.74977723882,
+        159993.64694555555,
+        133992.19256198846
+      ],
+      "province_id": "framework:province:kilifi:c6bb4026aa7d",
+      "province_index": 2457,
+      "name": "Rabai",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B74333595130890"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B77349779921322",
+      "index": 26301,
+      "bounds": [
+        159402.46261555556,
+        128390.07125741418,
+        160404.59215055555,
+        129419.40744623834
+      ],
+      "province_id": "framework:province:wajir:034631a2dc6c",
+      "province_index": 4866,
+      "name": "Wajir North",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B77349779921322"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B77554234988908",
+      "index": 26302,
+      "bounds": [
+        155837.369135,
+        127534.93929045687,
+        156728.58788722224,
+        128886.27282019435
+      ],
+      "province_id": "framework:province:turkana:fbdf871da3eb",
+      "province_index": 4684,
+      "name": "Turkana West",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B77554234988908"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B77596051964159",
+      "index": 26303,
+      "bounds": [
+        156563.568955,
+        131670.92670876946,
+        157141.4993372222,
+        132422.3884587342
+      ],
+      "province_id": "framework:province:narok:3a622e169345",
+      "province_index": 3207,
+      "name": "Narok West",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B77596051964159"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B78515474379979",
+      "index": 26304,
+      "bounds": [
+        156232.58438,
+        131881.1985020177,
+        156375.10073055554,
+        132092.9474698531
+      ],
+      "province_id": "framework:province:migori:1af04dd457a2",
+      "province_index": 3032,
+      "name": "Kuria East",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B78515474379979"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B78921482472620",
+      "index": 26305,
+      "bounds": [
+        155789.15972055556,
+        131624.16949014348,
+        156102.59373833335,
+        131894.09072727966
+      ],
+      "province_id": "framework:province:migori:1af04dd457a2",
+      "province_index": 3032,
+      "name": "Nyatike",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B78921482472620"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B80624826839047",
+      "index": 26310,
+      "bounds": [
+        160421.5601166667,
+        128085.49088515218,
+        161145.42957222223,
+        128830.62920067032
+      ],
+      "province_id": "framework:province:mandera:bcd0c2459fca",
+      "province_index": 2866,
+      "name": "Mandera North",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B80624826839047"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B81879504162306",
+      "index": 26315,
+      "bounds": [
+        159210.28037277778,
+        132382.16957498473,
+        160748.75784944446,
+        133319.25343274188
+      ],
+      "province_id": "framework:province:tana-river:b3e14efd8080",
+      "province_index": 4494,
+      "name": "Garsen",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B81879504162306"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B82211082616386",
+      "index": 26316,
+      "bounds": [
+        156440.27811111108,
+        129677.01447681777,
+        156872.34224388888,
+        130231.62966900934
+      ],
+      "province_id": "framework:province:west-pokot:f94c6d897804",
+      "province_index": 4913,
+      "name": "Kapenguria",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B82211082616386"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B84738590288078",
+      "index": 26326,
+      "bounds": [
+        155805.2538,
+        131053.72479426477,
+        156121.6007733333,
+        131329.4374727559
+      ],
+      "province_id": "framework:province:siaya:5c10ac47c571",
+      "province_index": 4225,
+      "name": "Bondo",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B84738590288078"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B86494009793520",
+      "index": 26332,
+      "bounds": [
+        156116.43027722224,
+        131887.89953606954,
+        156304.09743888892,
+        132031.10296226954
+      ],
+      "province_id": "framework:province:migori:1af04dd457a2",
+      "province_index": 3032,
+      "name": "Kuria West",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B86494009793520"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B88001194641971",
+      "index": 26339,
+      "bounds": [
+        160861.99899666666,
+        128199.94121718458,
+        161293.11641888888,
+        128888.03760393587
+      ],
+      "province_id": "framework:province:mandera:bcd0c2459fca",
+      "province_index": 2866,
+      "name": "Lafey",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B88001194641971"
+      ]
+    },
+    {
+      "id": "gb:KEN:ADM2:3690345B93324860747201",
+      "index": 26352,
+      "bounds": [
+        156410.41521899446,
+        129150.51018212138,
+        156858.06876166665,
+        130131.47342811165
+      ],
+      "province_id": "framework:province:west-pokot:f94c6d897804",
+      "province_index": 4913,
+      "name": "Kacheliba",
+      "reference_owner": "Kenya",
+      "source_id": "gb:KEN:ADM2",
+      "source_atoms": [
+        "gb:KEN:ADM2:3690345B93324860747201"
+      ]
+    }
+  ],
+  "ALL_source_atoms": [
+    "gb:KEN:ADM2:3690345B11030917787472",
+    "gb:KEN:ADM2:3690345B14280875758697",
+    "gb:KEN:ADM2:3690345B15365868811730",
+    "gb:KEN:ADM2:3690345B18525828088972",
+    "gb:KEN:ADM2:3690345B19935861804031",
+    "gb:KEN:ADM2:3690345B19939243433246",
+    "gb:KEN:ADM2:3690345B21268923503814",
+    "gb:KEN:ADM2:3690345B22392033475621",
+    "gb:KEN:ADM2:3690345B2279611832844",
+    "gb:KEN:ADM2:3690345B23512246754033",
+    "gb:KEN:ADM2:3690345B28138832354018",
+    "gb:KEN:ADM2:3690345B29556459221230",
+    "gb:KEN:ADM2:3690345B29559403317261",
+    "gb:KEN:ADM2:3690345B29695103199893",
+    "gb:KEN:ADM2:3690345B29698096186163",
+    "gb:KEN:ADM2:3690345B37794826705018",
+    "gb:KEN:ADM2:3690345B40484627971500",
+    "gb:KEN:ADM2:3690345B44163293085628",
+    "gb:KEN:ADM2:3690345B44835557589557",
+    "gb:KEN:ADM2:3690345B53478860661951",
+    "gb:KEN:ADM2:3690345B58494489025359",
+    "gb:KEN:ADM2:3690345B63925745903052",
+    "gb:KEN:ADM2:3690345B65112986078037",
+    "gb:KEN:ADM2:3690345B67191049823154",
+    "gb:KEN:ADM2:3690345B72596484741491",
+    "gb:KEN:ADM2:3690345B74333595130890",
+    "gb:KEN:ADM2:3690345B77349779921322",
+    "gb:KEN:ADM2:3690345B77554234988908",
+    "gb:KEN:ADM2:3690345B77596051964159",
+    "gb:KEN:ADM2:3690345B78515474379979",
+    "gb:KEN:ADM2:3690345B78921482472620",
+    "gb:KEN:ADM2:3690345B80624826839047",
+    "gb:KEN:ADM2:3690345B81879504162306",
+    "gb:KEN:ADM2:3690345B82211082616386",
+    "gb:KEN:ADM2:3690345B84738590288078",
+    "gb:KEN:ADM2:3690345B86494009793520",
+    "gb:KEN:ADM2:3690345B88001194641971",
+    "gb:KEN:ADM2:3690345B93324860747201"
+  ],
+  "complete_source_atom_count": 38,
+  "whole_package_source_families": [
+    {
+      "family": "gb:KEN:ADM1",
+      "features": 47,
+      "original_bytes": 861584,
+      "original_sha256": "4d9e1b8a6d305ee2b2bbeeeb4dd6ec3cc52e44884f0f6065d14d255810f9eae4",
+      "crs": {
+        "type": "name",
+        "properties": {
+          "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+      },
+      "registry_metadata": {
+        "boundaryID": "KEN-ADM1-32016919",
+        "boundaryName": "Kenya",
+        "boundaryISO": "KEN",
+        "boundaryYearRepresented": "2020",
+        "boundaryType": "ADM1",
+        "boundaryCanonical": "Counties",
+        "boundarySource": "RCMRD GeoPortal, Africa GeoPortal",
+        "boundaryLicense": "Public Domain",
+        "licenseDetail": "nan",
+        "licenseSource": "rcmrd.africageoportal.com/datasets/africageoportal",
+        "boundarySourceURL": "rcmrd.africageoportal.com/datasets/africageoportal",
+        "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+        "buildDate": "Dec 12, 2023",
+        "Continent": "Africa",
+        "UNSDG-region": "Sub-Saharan Africa",
+        "UNSDG-subregion": "Eastern Africa",
+        "worldBankIncomeGroup": "Lower-middle-income Countries",
+        "admUnitCount": "47",
+        "meanVertices": "3897.0",
+        "minVertices": "555",
+        "maxVertices": "12302",
+        "meanPerimeterLengthKM": "583.9524686524665",
+        "minPerimeterLengthKM": "151.90393606754756",
+        "maxPerimeterLengthKM": "1675.0063100040054",
+        "meanAreaSqKM": "12572.304483011549",
+        "minAreaSqKM": "226.4819538269366",
+        "maxAreaSqKM": "75925.18087289555",
+        "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/KEN/ADM1/geoBoundaries-KEN-ADM1-all.zip",
+        "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/KEN/ADM1/geoBoundaries-KEN-ADM1.geojson",
+        "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/KEN/ADM1/geoBoundaries-KEN-ADM1.topojson",
+        "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/KEN/ADM1/geoBoundaries-KEN-ADM1-PREVIEW.png",
+        "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/KEN/ADM1/geoBoundaries-KEN-ADM1_simplified.geojson",
+        "sha256": "4d9e1b8a6d305ee2b2bbeeeb4dd6ec3cc52e44884f0f6065d14d255810f9eae4"
+      }
+    },
+    {
+      "family": "gb:KEN:ADM2",
+      "features": 290,
+      "original_bytes": 2038927,
+      "original_sha256": "1330f031cf0fd00c7a0ef29ab09d0544da12482094a85d60165a1534e45d84ad",
+      "crs": {
+        "type": "name",
+        "properties": {
+          "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+      },
+      "registry_metadata": {
+        "boundaryID": "KEN-ADM2-3690345",
+        "boundaryName": "Kenya",
+        "boundaryISO": "KEN",
+        "boundaryYearRepresented": "2020",
+        "boundaryType": "ADM2",
+        "boundaryCanonical": "Sub-Counties",
+        "boundarySource": "IEBC, OCHA ROSEA",
+        "boundaryLicense": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+        "licenseDetail": "nan",
+        "licenseSource": "data.humdata.org/dataset/ken-administrative-boundaries",
+        "boundarySourceURL": "data.humdata.org/dataset/ken-administrative-boundaries",
+        "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+        "buildDate": "Dec 12, 2023",
+        "Continent": "Africa",
+        "UNSDG-region": "Sub-Saharan Africa",
+        "UNSDG-subregion": "Eastern Africa",
+        "worldBankIncomeGroup": "Lower-middle-income Countries",
+        "admUnitCount": "290",
+        "meanVertices": "861.0",
+        "minVertices": "35",
+        "maxVertices": "5241",
+        "meanPerimeterLengthKM": "202.5083450782187",
+        "minPerimeterLengthKM": "12.102256111738525",
+        "maxPerimeterLengthKM": "1033.910033651395",
+        "meanAreaSqKM": "2039.914617052316",
+        "minAreaSqKM": "2.9028357640515274",
+        "maxAreaSqKM": "40557.27319192823",
+        "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/KEN/ADM2/geoBoundaries-KEN-ADM2-all.zip",
+        "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/KEN/ADM2/geoBoundaries-KEN-ADM2.geojson",
+        "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/KEN/ADM2/geoBoundaries-KEN-ADM2.topojson",
+        "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/KEN/ADM2/geoBoundaries-KEN-ADM2-PREVIEW.png",
+        "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/KEN/ADM2/geoBoundaries-KEN-ADM2_simplified.geojson",
+        "sha256": "1330f031cf0fd00c7a0ef29ab09d0544da12482094a85d60165a1534e45d84ad"
+      }
+    },
+    {
+      "family": "gb:TZA:ADM1",
+      "features": 30,
+      "original_bytes": 426148,
+      "original_sha256": "8b84f3f0a9e6e16322b777a5bba90c8e33c5e93c0dcb03ef1d3f6332036d066f",
+      "crs": {
+        "type": "name",
+        "properties": {
+          "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+      },
+      "registry_metadata": {
+        "boundaryID": "TZA-ADM1-36957248",
+        "boundaryName": "United Republic of Tanzania",
+        "boundaryISO": "TZA",
+        "boundaryYearRepresented": "2015",
+        "boundaryType": "ADM1",
+        "boundaryCanonical": "Regions",
+        "boundarySource": "OpenStreetMap, Wambacher",
+        "boundaryLicense": "Open Data Commons Open Database License 1.0",
+        "licenseDetail": "nan",
+        "licenseSource": "www.openstreetmap.org/copyright",
+        "boundarySourceURL": "wambachers-osm.website/boundaries/",
+        "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+        "buildDate": "Dec 12, 2023",
+        "Continent": "Africa",
+        "UNSDG-region": "Sub-Saharan Africa",
+        "UNSDG-subregion": "Eastern Africa",
+        "worldBankIncomeGroup": "Low-income Countries",
+        "admUnitCount": "30",
+        "meanVertices": "2716.0",
+        "minVertices": "118",
+        "maxVertices": "11084",
+        "meanPerimeterLengthKM": "983.0656045902408",
+        "minPerimeterLengthKM": "84.48018424905071",
+        "maxPerimeterLengthKM": "1833.8877651340208",
+        "meanAreaSqKM": "31326.441643920283",
+        "minAreaSqKM": "184.68273452291933",
+        "maxAreaSqKM": "75593.75279250013",
+        "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TZA/ADM1/geoBoundaries-TZA-ADM1-all.zip",
+        "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TZA/ADM1/geoBoundaries-TZA-ADM1.geojson",
+        "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TZA/ADM1/geoBoundaries-TZA-ADM1.topojson",
+        "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TZA/ADM1/geoBoundaries-TZA-ADM1-PREVIEW.png",
+        "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TZA/ADM1/geoBoundaries-TZA-ADM1_simplified.geojson",
+        "sha256": "8b84f3f0a9e6e16322b777a5bba90c8e33c5e93c0dcb03ef1d3f6332036d066f"
+      }
+    },
+    {
+      "family": "gb:UGA:ADM1",
+      "features": 4,
+      "original_bytes": 258114,
+      "original_sha256": "75e5442c33f7023bcd2d7d72928835723b557c1a9523f3b4c9afe36d0e73af93",
+      "crs": {
+        "type": "name",
+        "properties": {
+          "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+      },
+      "registry_metadata": {
+        "boundaryID": "UGA-ADM1-17295835",
+        "boundaryName": "Uganda",
+        "boundaryISO": "UGA",
+        "boundaryYearRepresented": "2017",
+        "boundaryType": "ADM1",
+        "boundaryCanonical": "Unknown",
+        "boundarySource": "OpenStreetMap, Wambacher",
+        "boundaryLicense": "Open Data Commons Open Database License 1.0",
+        "licenseDetail": "Open Data Commons Open Database License 1.0",
+        "licenseSource": "www.openstreetmap.org/copyright",
+        "boundarySourceURL": "wambachers-osm.website/boundaries/",
+        "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+        "buildDate": "Dec 12, 2023",
+        "Continent": "Africa",
+        "UNSDG-region": "Sub-Saharan Africa",
+        "UNSDG-subregion": "Eastern Africa",
+        "worldBankIncomeGroup": "Low-income Countries",
+        "admUnitCount": "4",
+        "meanVertices": "16340.0",
+        "minVertices": "11832",
+        "maxVertices": "24629",
+        "meanPerimeterLengthKM": "2062.196007792656",
+        "minPerimeterLengthKM": "1448.1036091051676",
+        "maxPerimeterLengthKM": "2764.413216514554",
+        "meanAreaSqKM": "52251.384305650514",
+        "minAreaSqKM": "31815.23842440912",
+        "maxAreaSqKM": "85255.05449419066",
+        "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM1/geoBoundaries-UGA-ADM1-all.zip",
+        "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM1/geoBoundaries-UGA-ADM1.geojson",
+        "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM1/geoBoundaries-UGA-ADM1.topojson",
+        "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM1/geoBoundaries-UGA-ADM1-PREVIEW.png",
+        "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM1/geoBoundaries-UGA-ADM1_simplified.geojson",
+        "sha256": "75e5442c33f7023bcd2d7d72928835723b557c1a9523f3b4c9afe36d0e73af93"
+      }
+    },
+    {
+      "family": "gb:UGA:ADM2",
+      "features": 151,
+      "original_bytes": 1021800,
+      "original_sha256": "0a13e10b3bc6beeb02db4502c7f29a2ebbbb681a932307ccba4cd53e994feac7",
+      "crs": {
+        "type": "name",
+        "properties": {
+          "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+      },
+      "registry_metadata": {
+        "boundaryID": "UGA-ADM2-47994165",
+        "boundaryName": "Uganda",
+        "boundaryISO": "UGA",
+        "boundaryYearRepresented": "2006",
+        "boundaryType": "ADM2",
+        "boundaryCanonical": "Counties",
+        "boundarySource": "geoBoundaries, Wikimedia Commons",
+        "boundaryLicense": "Public Domain",
+        "licenseDetail": "nan",
+        "licenseSource": "commons.wikimedia.org/wiki/File",
+        "boundarySourceURL": "commons.wikimedia.org/wiki/File",
+        "sourceDataUpdateDate": "Sun Mar 26 09:13:39 2023",
+        "buildDate": "Dec 12, 2023",
+        "Continent": "Africa",
+        "UNSDG-region": "Sub-Saharan Africa",
+        "UNSDG-subregion": "Eastern Africa",
+        "worldBankIncomeGroup": "Low-income Countries",
+        "admUnitCount": "151",
+        "meanVertices": "271.0",
+        "minVertices": "27",
+        "maxVertices": "1778",
+        "meanPerimeterLengthKM": "188.64226463792008",
+        "minPerimeterLengthKM": "60.55553673849462",
+        "maxPerimeterLengthKM": "459.8109612126442",
+        "meanAreaSqKM": "1401.8965637764034",
+        "minAreaSqKM": "141.6772067830781",
+        "maxAreaSqKM": "7287.101204377636",
+        "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM2/geoBoundaries-UGA-ADM2-all.zip",
+        "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM2/geoBoundaries-UGA-ADM2.geojson",
+        "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM2/geoBoundaries-UGA-ADM2.topojson",
+        "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM2/geoBoundaries-UGA-ADM2-PREVIEW.png",
+        "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM2/geoBoundaries-UGA-ADM2_simplified.geojson",
+        "sha256": "0a13e10b3bc6beeb02db4502c7f29a2ebbbb681a932307ccba4cd53e994feac7"
+      }
+    }
+  ],
+  "new_prepared_qualified_accepted_credit": 0
+}
