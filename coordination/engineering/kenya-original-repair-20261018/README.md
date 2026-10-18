@@ -19,7 +19,7 @@ Complete positive metadata retains38whole originals and all274current Kenya owne
 - Actual full native authority refused unique coverage(5.18s/295,092,224B DarwinRSS). Stock diagnostic5156=4941supported+215territorial held(4.88s/405,143,552B). Genuine supported authority4941(3.66s external/424,951,808B); original source/physical/negative operands unchanged. Actual logs and refusal remain retained-attempts-001/.
 - Current main923e9c21 selects complete905bdc patch6,118,769accepted cells; whole actual subtraction found original-coordinate overlap0 and candidate-owner intersection0. The55MBselected ledger was not acquired; authority-history assertions were not assessed. This overlap result does not prove current-owner-zero or selected acceptance.
 
-Constructor quartet: native-authority-supported-001/{constructor-result.json,authority-binding.json,original-rule-preimage.json,preparation.json}. Config/native-authority-supported-001.json binds immutable supported-inputs commitbf5dc270a; complete original source/native inputs, diagnostic, failed direct request and held-original remain immutable ancestors.
+Constructor quartet: native-authority-supported-001/{constructor-result.json,authority-binding.json,original-rule-preimage.json,preparation.json}. config/native-authority-supported-001.json binds immutable supported-inputs commitbf5dc270a; complete original source/native inputs, diagnostic, failed direct request and held-original remain immutable ancestors.
 
 ## Limits and remaining work
 

@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "package_id": "gb-KEN-ADM2--repair-evaluation",
+  "issue": null,
+  "public_claim_status": "denied-known-not-executed",
+  "original_cells": 5156,
+  "qualified_cells": 4941,
+  "held_cells": 215,
+  "original_owners": 38,
+  "qualified_components": 38,
+  "new_accepted_cells": 0,
+  "class_cells": {
+    "original": {
+      "land": 5090,
+      "inland_water": 66
+    },
+    "qualified": {
+      "land": 4901,
+      "inland_water": 40
+    },
+    "held": {
+      "land": 189,
+      "inland_water": 26
+    }
+  },
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "9c3fd2f756b82fcdbd964cf16f461ed5f3542b55",
+        "path": "coordination/engineering/kenya-original-repair-20261018/native-authority-supported-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "a3b4d9d9baab4ae8360133ecab3d780a6564e329",
+        "bytes": 733,
+        "sha256": "1cff14e4104a4511ca4660f4f9576a135c038c03689b8b790159e1c1e7d41f3d"
+      },
+      "source_authority": {
+        "commit": "9c3fd2f756b82fcdbd964cf16f461ed5f3542b55",
+        "path": "coordination/engineering/kenya-original-repair-20261018/native-authority-supported-001/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "e3a06093eb47f0489bed0d73b7882fae1a14484c",
+        "bytes": 736,
+        "sha256": "cb618ab5adcb33d49ae4452bf80c5ff8fd97d004eca1bf88ab0e2b0ab69da10c"
+      },
+      "ledger": {
+        "commit": "9c3fd2f756b82fcdbd964cf16f461ed5f3542b55",
+        "path": "coordination/engineering/kenya-original-repair-20261018/native-authority-supported-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "4fd4895b7b8abd9ce77cad6962095de2580dc7d6",
+        "bytes": 136452,
+        "sha256": "473eed82fc0f75e6e94bd09d3682c866f00037901b1d9977d0588c7e93127cb2"
+      },
+      "native_patch": {
+        "commit": "bf5dc270a0aeae298ba4d334d0caebb7c033d26f",
+        "path": "coordination/engineering/kenya-original-repair-20261018/supported-inputs-001/native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "694d6b3e08943eb4ae2374346e7b30f7cc20480b",
+        "bytes": 59389,
+        "sha256": "c3552c250736add8f4d9468e375da2fdebd2fcb78454c42a2499507689e44c88"
+      }
+    }
+  ],
+  "source_evidence": {
+    "commit": "bf5dc270a0aeae298ba4d334d0caebb7c033d26f",
+    "path": "coordination/engineering/kenya-original-repair-20261018/supported-inputs-001/source-evidence.json",
+    "mode": "100644",
+    "git_blob_oid": "72d4e3b378dc1cdc7837eababe8de9ef067fffcd",
+    "bytes": 200176,
+    "sha256": "e79a57b0eb7ad3b8e2ecfd78e58f01555e1e433aa7f530d03df07e443a9994ef"
+  },
+  "original_scope_accounting": {
+    "commit": "9c3fd2f756b82fcdbd964cf16f461ed5f3542b55",
+    "path": "coordination/engineering/kenya-original-repair-20261018/source-review/final-original-accounting.json",
+    "mode": "100644",
+    "git_blob_oid": "a0b8b9740c20fd461bee4042b424bf7f25eb4ab9",
+    "bytes": 3815,
+    "sha256": "b0e2a924f975ada8fab2ccd618fccc70ef95b6489fa02cab2a63c7ce2c0e219e"
+  },
+  "held_original": {
+    "commit": "bf5dc270a0aeae298ba4d334d0caebb7c033d26f",
+    "path": "coordination/engineering/kenya-original-repair-20261018/supported-inputs-001/held-original.json",
+    "mode": "100644",
+    "git_blob_oid": "fcd69e392692181044c30649a0500b93de031092",
+    "bytes": 10623,
+    "sha256": "7117e3c7d66a54838f69245df9f24d12cc2136458c56558277d1cc0c47224dcb"
+  },
+  "original_partition": {
+    "commit": "bf5dc270a0aeae298ba4d334d0caebb7c033d26f",
+    "path": "coordination/engineering/kenya-original-repair-20261018/supported-inputs-001/original-scope-partition.json",
+    "mode": "100644",
+    "git_blob_oid": "5d2f39c99a95b12eab44688ec996121f7c1c0643",
+    "bytes": 4592,
+    "sha256": "5a5ce3dd1938f5da9e67e0a0ab84382070d6751b48c60a4743530b8ff1159386"
+  },
+  "operating_observation": {
+    "commit": "9c3fd2f756b82fcdbd964cf16f461ed5f3542b55",
+    "path": "coordination/engineering/kenya-original-repair-20261018/source-review/native-observation-001.json",
+    "mode": "100644",
+    "git_blob_oid": "d47f5f258988ffd140b2cc20c4ffd257d8e9ad9c",
+    "bytes": 783,
+    "sha256": "9d3da94ab4c54024ff12175edc0a1a5dce218cf68ca4b809e7ff51983c62b8a7"
+  },
+  "limits": [
+    "Genuine historical source-relative qualification of4941originals with215explicit held originals; full package unfinished.",
+    "Native physical/source/topology and semantic caveats remain;26held water cells remain location-owned original water.",
+    "Independent review, actual selected-owner-zero/conservation/emitted checks and parent integration remain pending; zero accepted credit.",
+    "Public issue create was denied before execution and remains stopped; no public issue/claim is asserted."
+  ]
+}
