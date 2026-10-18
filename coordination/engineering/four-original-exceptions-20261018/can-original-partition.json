@@ -1,0 +1,4303 @@
+{
+  "package_id": "gb-CAN-ADM3--repair-evaluation",
+  "accepted_main": "f833c2d7de6f239955cf592560d559d5377c4c6f",
+  "selected_patch_pin": {
+    "bytes": 30387810,
+    "commit": "160175824051005eb9b2b9990d45b1f94b036126",
+    "git_blob_oid": "b9f5fa1eef498ce3adb38a380405472fdcc72a9a",
+    "mode": "100644",
+    "path": "coordination/engineering/gambia-zimbabwe-selected-delivery-20261018/composition-001/patch.json",
+    "sha256": "4209951c6097f0c992500ed3c3029347cdfee0d338893e785a83676b0afe21b5"
+  },
+  "original_cells": 438062,
+  "original_intervals": 139042,
+  "original_owners": 209,
+  "classes": {
+    "land": 375635,
+    "inland-water": 62427
+  },
+  "accepted": 437959,
+  "held": 103,
+  "held_classes": {
+    "land": 71,
+    "inland-water": 32
+  },
+  "different_owner_intersections": [],
+  "held_exactly_matches_retained_packet": true,
+  "held_records": [
+    {
+      "y": 81655,
+      "x": 36407,
+      "owner": 6718,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9461,
+        9535,
+        14552
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9461,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B24619009834807",
+          "ordinal": 9,
+          "owners": [],
+          "name": "British Columbia",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9535,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B51248410947811",
+          "ordinal": 70,
+          "owners": [],
+          "name": "North Coast / Côte-nord",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 14552,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B96242795204252",
+          "ordinal": 5011,
+          "owners": [
+            6718
+          ],
+          "name": "Stewart",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89642,
+      "x": 91008,
+      "owner": 6624,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9452,
+        9468,
+        9775
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9452,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B96958463903898",
+          "ordinal": 0,
+          "owners": [],
+          "name": "Newfoundland and Labrador",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9468,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B90164277950663",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Notre Dame--Central Bonavista*",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9775,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B76345418387626",
+          "ordinal": 234,
+          "owners": [
+            6624
+          ],
+          "name": "Embree",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89642,
+      "x": 91009,
+      "owner": 6624,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9452,
+        9468,
+        9775
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9452,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B96958463903898",
+          "ordinal": 0,
+          "owners": [],
+          "name": "Newfoundland and Labrador",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9468,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B90164277950663",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Notre Dame--Central Bonavista*",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9775,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B76345418387626",
+          "ordinal": 234,
+          "owners": [
+            6624
+          ],
+          "name": "Embree",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89643,
+      "x": 91007,
+      "owner": 6624,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9452,
+        9468,
+        9775
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9452,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B96958463903898",
+          "ordinal": 0,
+          "owners": [],
+          "name": "Newfoundland and Labrador",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9468,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B90164277950663",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Notre Dame--Central Bonavista*",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9775,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B76345418387626",
+          "ordinal": 234,
+          "owners": [
+            6624
+          ],
+          "name": "Embree",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89643,
+      "x": 91008,
+      "owner": 6624,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9452,
+        9468,
+        9775
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9452,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B96958463903898",
+          "ordinal": 0,
+          "owners": [],
+          "name": "Newfoundland and Labrador",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9468,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B90164277950663",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Notre Dame--Central Bonavista*",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9775,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B76345418387626",
+          "ordinal": 234,
+          "owners": [
+            6624
+          ],
+          "name": "Embree",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89643,
+      "x": 91009,
+      "owner": 6624,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9452,
+        9468,
+        9775
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9452,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B96958463903898",
+          "ordinal": 0,
+          "owners": [],
+          "name": "Newfoundland and Labrador",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9468,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B90164277950663",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Notre Dame--Central Bonavista*",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9775,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B76345418387626",
+          "ordinal": 234,
+          "owners": [
+            6624
+          ],
+          "name": "Embree",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89644,
+      "x": 91008,
+      "owner": 6624,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9452,
+        9468,
+        9775
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9452,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B96958463903898",
+          "ordinal": 0,
+          "owners": [],
+          "name": "Newfoundland and Labrador",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9468,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B90164277950663",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Notre Dame--Central Bonavista*",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9775,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B76345418387626",
+          "ordinal": 234,
+          "owners": [
+            6624
+          ],
+          "name": "Embree",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89644,
+      "x": 91009,
+      "owner": 6624,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9452,
+        9468,
+        9775
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9452,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B96958463903898",
+          "ordinal": 0,
+          "owners": [],
+          "name": "Newfoundland and Labrador",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9468,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B90164277950663",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Notre Dame--Central Bonavista*",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9775,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B76345418387626",
+          "ordinal": 234,
+          "owners": [
+            6624
+          ],
+          "name": "Embree",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90889,
+      "x": 63818,
+      "owner": 723,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9507,
+        12488,
+        61278
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9507,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B31854329878233",
+          "ordinal": 42,
+          "owners": [],
+          "name": "Northwest / Nord-ouest",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12488,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B91029850103497",
+          "ordinal": 2947,
+          "owners": [
+            723
+          ],
+          "name": "Rainy River, Unorganized",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61278,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B10610315112087",
+          "ordinal": 54,
+          "owners": [],
+          "name": "Minnesota",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 91134,
+      "x": 65844,
+      "owner": 6866,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9507,
+        11657,
+        61278
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9507,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B31854329878233",
+          "ordinal": 42,
+          "owners": [],
+          "name": "Northwest / Nord-ouest",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 11657,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87949938725089",
+          "ordinal": 2116,
+          "owners": [
+            6866
+          ],
+          "name": "Neebing",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61278,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B10610315112087",
+          "ordinal": 54,
+          "owners": [],
+          "name": "Minnesota",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 91135,
+      "x": 65845,
+      "owner": 6866,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9507,
+        11657,
+        61278
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9507,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B31854329878233",
+          "ordinal": 42,
+          "owners": [],
+          "name": "Northwest / Nord-ouest",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 11657,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87949938725089",
+          "ordinal": 2116,
+          "owners": [
+            6866
+          ],
+          "name": "Neebing",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61278,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B10610315112087",
+          "ordinal": 54,
+          "owners": [],
+          "name": "Minnesota",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 91307,
+      "x": 86554,
+      "owner": 6642,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9480,
+        10632
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9480,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B83690670726478",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Gaspésie--Îles-de-la-Madelei",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10632,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B58911464093537",
+          "ordinal": 1091,
+          "owners": [
+            6642
+          ],
+          "name": "Grosse-Ãle",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 91307,
+      "x": 86555,
+      "owner": 6642,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9480,
+        10632
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9480,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B83690670726478",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Gaspésie--Îles-de-la-Madelei",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10632,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B58911464093537",
+          "ordinal": 1091,
+          "owners": [
+            6642
+          ],
+          "name": "Grosse-Ãle",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 91307,
+      "x": 86556,
+      "owner": 6642,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9480,
+        10632
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9480,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B83690670726478",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Gaspésie--Îles-de-la-Madelei",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10632,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B58911464093537",
+          "ordinal": 1091,
+          "owners": [
+            6642
+          ],
+          "name": "Grosse-Ãle",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 91308,
+      "x": 86553,
+      "owner": 6642,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9480,
+        10632
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9480,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B83690670726478",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Gaspésie--Îles-de-la-Madelei",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10632,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B58911464093537",
+          "ordinal": 1091,
+          "owners": [
+            6642
+          ],
+          "name": "Grosse-Ãle",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 91308,
+      "x": 86554,
+      "owner": 6642,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9480,
+        10632
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9480,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B83690670726478",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Gaspésie--Îles-de-la-Madelei",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10632,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B58911464093537",
+          "ordinal": 1091,
+          "owners": [
+            6642
+          ],
+          "name": "Grosse-Ãle",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 91308,
+      "x": 86555,
+      "owner": 6642,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9480,
+        10632
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9480,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B83690670726478",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Gaspésie--Îles-de-la-Madelei",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10632,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B58911464093537",
+          "ordinal": 1091,
+          "owners": [
+            6642
+          ],
+          "name": "Grosse-Ãle",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 91308,
+      "x": 86556,
+      "owner": 6642,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9480,
+        10632
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9480,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B83690670726478",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Gaspésie--Îles-de-la-Madelei",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10632,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B58911464093537",
+          "ordinal": 1091,
+          "owners": [
+            6642
+          ],
+          "name": "Grosse-Ãle",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 91309,
+      "x": 86553,
+      "owner": 6642,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9480,
+        10632
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9480,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B83690670726478",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Gaspésie--Îles-de-la-Madelei",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10632,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B58911464093537",
+          "ordinal": 1091,
+          "owners": [
+            6642
+          ],
+          "name": "Grosse-Ãle",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 91309,
+      "x": 86554,
+      "owner": 6642,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9480,
+        10632
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9480,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B83690670726478",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Gaspésie--Îles-de-la-Madelei",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10632,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B58911464093537",
+          "ordinal": 1091,
+          "owners": [
+            6642
+          ],
+          "name": "Grosse-Ãle",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 91309,
+      "x": 86555,
+      "owner": 6642,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9480,
+        10632
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9480,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B83690670726478",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Gaspésie--Îles-de-la-Madelei",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10632,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B58911464093537",
+          "ordinal": 1091,
+          "owners": [
+            6642
+          ],
+          "name": "Grosse-Ãle",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 91722,
+      "x": 80691,
+      "owner": 614,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9481,
+        10822,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9481,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B72713062491295",
+          "ordinal": 16,
+          "owners": [],
+          "name": "Bas-Saint-Laurent",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10822,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B39720829296097",
+          "ordinal": 1281,
+          "owners": [
+            614
+          ],
+          "name": "PohÃ©nÃ©gamook",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 91722,
+      "x": 80692,
+      "owner": 614,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9481,
+        10822,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9481,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B72713062491295",
+          "ordinal": 16,
+          "owners": [],
+          "name": "Bas-Saint-Laurent",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10822,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B39720829296097",
+          "ordinal": 1281,
+          "owners": [
+            614
+          ],
+          "name": "PohÃ©nÃ©gamook",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 91738,
+      "x": 80748,
+      "owner": 614,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9456,
+        9481,
+        10822,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9456,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B52639524229375",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Quebec",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9481,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B72713062491295",
+          "ordinal": 16,
+          "owners": [],
+          "name": "Bas-Saint-Laurent",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10822,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B39720829296097",
+          "ordinal": 1281,
+          "owners": [
+            614
+          ],
+          "name": "PohÃ©nÃ©gamook",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 91740,
+      "x": 80751,
+      "owner": 614,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9456,
+        9481,
+        10822,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9456,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B52639524229375",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Quebec",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9481,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B72713062491295",
+          "ordinal": 16,
+          "owners": [],
+          "name": "Bas-Saint-Laurent",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10822,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B39720829296097",
+          "ordinal": 1281,
+          "owners": [
+            614
+          ],
+          "name": "PohÃ©nÃ©gamook",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 91914,
+      "x": 80798,
+      "owner": 600,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9479,
+        10332,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9479,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B2528613177772",
+          "ordinal": 14,
+          "owners": [],
+          "name": "Edmundston--Woodstock",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10332,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B1259855473048",
+          "ordinal": 791,
+          "owners": [
+            600
+          ],
+          "name": "Saint-FranÃ§ois",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 91997,
+      "x": 80885,
+      "owner": 600,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9479,
+        10332,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9479,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B2528613177772",
+          "ordinal": 14,
+          "owners": [],
+          "name": "Edmundston--Woodstock",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10332,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B1259855473048",
+          "ordinal": 791,
+          "owners": [
+            600
+          ],
+          "name": "Saint-FranÃ§ois",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 92857,
+      "x": 80028,
+      "owner": 627,
+      "physical_class": "land",
+      "source_feature_indices": [
+        10788,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 10788,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B46323308915592",
+          "ordinal": 1247,
+          "owners": [
+            627
+          ],
+          "name": "Saint-Camille-de-Lellis",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 92860,
+      "x": 80026,
+      "owner": 627,
+      "physical_class": "land",
+      "source_feature_indices": [
+        10788,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 10788,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B46323308915592",
+          "ordinal": 1247,
+          "owners": [
+            627
+          ],
+          "name": "Saint-Camille-de-Lellis",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 92889,
+      "x": 79992,
+      "owner": 627,
+      "physical_class": "land",
+      "source_feature_indices": [
+        10788,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 10788,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B46323308915592",
+          "ordinal": 1247,
+          "owners": [
+            627
+          ],
+          "name": "Saint-Camille-de-Lellis",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 92889,
+      "x": 79993,
+      "owner": 627,
+      "physical_class": "land",
+      "source_feature_indices": [
+        10788,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 10788,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B46323308915592",
+          "ordinal": 1247,
+          "owners": [
+            627
+          ],
+          "name": "Saint-Camille-de-Lellis",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 92889,
+      "x": 79994,
+      "owner": 627,
+      "physical_class": "land",
+      "source_feature_indices": [
+        10788,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 10788,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B46323308915592",
+          "ordinal": 1247,
+          "owners": [
+            627
+          ],
+          "name": "Saint-Camille-de-Lellis",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 92890,
+      "x": 79996,
+      "owner": 627,
+      "physical_class": "land",
+      "source_feature_indices": [
+        10788,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 10788,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B46323308915592",
+          "ordinal": 1247,
+          "owners": [
+            627
+          ],
+          "name": "Saint-Camille-de-Lellis",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 92900,
+      "x": 79967,
+      "owner": 627,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9483,
+        10692,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9483,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B14378531582745",
+          "ordinal": 18,
+          "owners": [],
+          "name": "Chaudière-Appalaches",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10692,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B44242508137973",
+          "ordinal": 1151,
+          "owners": [
+            627
+          ],
+          "name": "Saint-Cyprien",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 92954,
+      "x": 79954,
+      "owner": 627,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9483,
+        10692,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9483,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B14378531582745",
+          "ordinal": 18,
+          "owners": [],
+          "name": "Chaudière-Appalaches",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10692,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B44242508137973",
+          "ordinal": 1151,
+          "owners": [
+            627
+          ],
+          "name": "Saint-Cyprien",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93021,
+      "x": 79917,
+      "owner": 627,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9456,
+        9483,
+        10691,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9456,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B52639524229375",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Quebec",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9483,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B14378531582745",
+          "ordinal": 18,
+          "owners": [],
+          "name": "Chaudière-Appalaches",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10691,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B32439439369057",
+          "ordinal": 1150,
+          "owners": [
+            627
+          ],
+          "name": "Saint-Louis-de-Gonzague",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93027,
+      "x": 79915,
+      "owner": 627,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9456,
+        9483,
+        10691,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9456,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B52639524229375",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Quebec",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9483,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B14378531582745",
+          "ordinal": 18,
+          "owners": [],
+          "name": "Chaudière-Appalaches",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10691,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B32439439369057",
+          "ordinal": 1150,
+          "owners": [
+            627
+          ],
+          "name": "Saint-Louis-de-Gonzague",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93028,
+      "x": 79914,
+      "owner": 627,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9456,
+        9483,
+        10691,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9456,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B52639524229375",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Quebec",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9483,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B14378531582745",
+          "ordinal": 18,
+          "owners": [],
+          "name": "Chaudière-Appalaches",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10691,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B32439439369057",
+          "ordinal": 1150,
+          "owners": [
+            627
+          ],
+          "name": "Saint-Louis-de-Gonzague",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93033,
+      "x": 79912,
+      "owner": 627,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9456,
+        9483,
+        10691,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9456,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B52639524229375",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Quebec",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9483,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B14378531582745",
+          "ordinal": 18,
+          "owners": [],
+          "name": "Chaudière-Appalaches",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10691,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B32439439369057",
+          "ordinal": 1150,
+          "owners": [
+            627
+          ],
+          "name": "Saint-Louis-de-Gonzague",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93040,
+      "x": 79909,
+      "owner": 627,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9483,
+        10702,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9483,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B14378531582745",
+          "ordinal": 18,
+          "owners": [],
+          "name": "Chaudière-Appalaches",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10702,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B57750172122441",
+          "ordinal": 1161,
+          "owners": [
+            627
+          ],
+          "name": "Sainte-AurÃ©lie",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93128,
+      "x": 70384,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9457,
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9457,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B66370767641120",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ontario",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93128,
+      "x": 70385,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93129,
+      "x": 70384,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93129,
+      "x": 70385,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93129,
+      "x": 70386,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93129,
+      "x": 70387,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9457,
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9457,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B66370767641120",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ontario",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93129,
+      "x": 70388,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9457,
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9457,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B66370767641120",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ontario",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93130,
+      "x": 70385,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93130,
+      "x": 70386,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93130,
+      "x": 70387,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93130,
+      "x": 70388,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9457,
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9457,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B66370767641120",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ontario",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93130,
+      "x": 70389,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9457,
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9457,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B66370767641120",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ontario",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93130,
+      "x": 70390,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9457,
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9457,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B66370767641120",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ontario",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93130,
+      "x": 70391,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9457,
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9457,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B66370767641120",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ontario",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93131,
+      "x": 70385,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93131,
+      "x": 70386,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93131,
+      "x": 70387,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93131,
+      "x": 70388,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9457,
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9457,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B66370767641120",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ontario",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93131,
+      "x": 70389,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9457,
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9457,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B66370767641120",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ontario",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93131,
+      "x": 70390,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9457,
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9457,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B66370767641120",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ontario",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93131,
+      "x": 70391,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9457,
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9457,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B66370767641120",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ontario",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93132,
+      "x": 70386,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93132,
+      "x": 70387,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93132,
+      "x": 70388,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93132,
+      "x": 70389,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93132,
+      "x": 70390,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93133,
+      "x": 70387,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93133,
+      "x": 70388,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93133,
+      "x": 70389,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93133,
+      "x": 70390,
+      "owner": 6872,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9506,
+        12127
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9506,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B61209589162148",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Northeast / Nord-est",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 12127,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B87884494235050",
+          "ordinal": 2586,
+          "owners": [
+            6872
+          ],
+          "name": "Huron Shores",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93204,
+      "x": 79901,
+      "owner": 627,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9456,
+        9483,
+        10855,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9456,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B52639524229375",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Quebec",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9483,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B14378531582745",
+          "ordinal": 18,
+          "owners": [],
+          "name": "Chaudière-Appalaches",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10855,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B98813753718009",
+          "ordinal": 1314,
+          "owners": [
+            627
+          ],
+          "name": "Saint-Zacharie",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93216,
+      "x": 79899,
+      "owner": 628,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9456,
+        9483,
+        10716,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9456,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B52639524229375",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Quebec",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9483,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B14378531582745",
+          "ordinal": 18,
+          "owners": [],
+          "name": "Chaudière-Appalaches",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10716,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B23963841357163",
+          "ordinal": 1175,
+          "owners": [
+            628
+          ],
+          "name": "Saint-ThÃ©ophile",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93217,
+      "x": 79898,
+      "owner": 628,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9456,
+        9483,
+        10716,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9456,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B52639524229375",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Quebec",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9483,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B14378531582745",
+          "ordinal": 18,
+          "owners": [],
+          "name": "Chaudière-Appalaches",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10716,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B23963841357163",
+          "ordinal": 1175,
+          "owners": [
+            628
+          ],
+          "name": "Saint-ThÃ©ophile",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93218,
+      "x": 79897,
+      "owner": 628,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9456,
+        9483,
+        10716,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9456,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B52639524229375",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Quebec",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9483,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B14378531582745",
+          "ordinal": 18,
+          "owners": [],
+          "name": "Chaudière-Appalaches",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10716,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B23963841357163",
+          "ordinal": 1175,
+          "owners": [
+            628
+          ],
+          "name": "Saint-ThÃ©ophile",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93219,
+      "x": 79896,
+      "owner": 628,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9456,
+        9483,
+        10716,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9456,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B52639524229375",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Quebec",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9483,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B14378531582745",
+          "ordinal": 18,
+          "owners": [],
+          "name": "Chaudière-Appalaches",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10716,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B23963841357163",
+          "ordinal": 1175,
+          "owners": [
+            628
+          ],
+          "name": "Saint-ThÃ©ophile",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93220,
+      "x": 79895,
+      "owner": 628,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9456,
+        9483,
+        10716,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9456,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B52639524229375",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Quebec",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9483,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B14378531582745",
+          "ordinal": 18,
+          "owners": [],
+          "name": "Chaudière-Appalaches",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10716,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B23963841357163",
+          "ordinal": 1175,
+          "owners": [
+            628
+          ],
+          "name": "Saint-ThÃ©ophile",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93223,
+      "x": 79893,
+      "owner": 628,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9483,
+        10716,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9483,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B14378531582745",
+          "ordinal": 18,
+          "owners": [],
+          "name": "Chaudière-Appalaches",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10716,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B23963841357163",
+          "ordinal": 1175,
+          "owners": [
+            628
+          ],
+          "name": "Saint-ThÃ©ophile",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93224,
+      "x": 79892,
+      "owner": 628,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9483,
+        10716,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9483,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B14378531582745",
+          "ordinal": 18,
+          "owners": [],
+          "name": "Chaudière-Appalaches",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10716,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B23963841357163",
+          "ordinal": 1175,
+          "owners": [
+            628
+          ],
+          "name": "Saint-ThÃ©ophile",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93381,
+      "x": 79915,
+      "owner": 628,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9456,
+        9483,
+        10716,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9456,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B52639524229375",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Quebec",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9483,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B14378531582745",
+          "ordinal": 18,
+          "owners": [],
+          "name": "Chaudière-Appalaches",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10716,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B23963841357163",
+          "ordinal": 1175,
+          "owners": [
+            628
+          ],
+          "name": "Saint-ThÃ©ophile",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93387,
+      "x": 79912,
+      "owner": 628,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9456,
+        9483,
+        10716,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9456,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B52639524229375",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Quebec",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9483,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B14378531582745",
+          "ordinal": 18,
+          "owners": [],
+          "name": "Chaudière-Appalaches",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10716,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B23963841357163",
+          "ordinal": 1175,
+          "owners": [
+            628
+          ],
+          "name": "Saint-ThÃ©ophile",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93388,
+      "x": 79911,
+      "owner": 628,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9456,
+        9483,
+        10716,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9456,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B52639524229375",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Quebec",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9483,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B14378531582745",
+          "ordinal": 18,
+          "owners": [],
+          "name": "Chaudière-Appalaches",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10716,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B23963841357163",
+          "ordinal": 1175,
+          "owners": [
+            628
+          ],
+          "name": "Saint-ThÃ©ophile",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93389,
+      "x": 79910,
+      "owner": 628,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9456,
+        9483,
+        10716,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9456,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B52639524229375",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Quebec",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9483,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B14378531582745",
+          "ordinal": 18,
+          "owners": [],
+          "name": "Chaudière-Appalaches",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10716,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B23963841357163",
+          "ordinal": 1175,
+          "owners": [
+            628
+          ],
+          "name": "Saint-ThÃ©ophile",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93390,
+      "x": 79909,
+      "owner": 628,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9456,
+        9483,
+        10716,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9456,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B52639524229375",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Quebec",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9483,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B14378531582745",
+          "ordinal": 18,
+          "owners": [],
+          "name": "Chaudière-Appalaches",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10716,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B23963841357163",
+          "ordinal": 1175,
+          "owners": [
+            628
+          ],
+          "name": "Saint-ThÃ©ophile",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93576,
+      "x": 79769,
+      "owner": 629,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9456,
+        9484,
+        10805,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9456,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B52639524229375",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Quebec",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9484,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B23883248376492",
+          "ordinal": 19,
+          "owners": [],
+          "name": "Estrie",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10805,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B71795601691944",
+          "ordinal": 1264,
+          "owners": [
+            629
+          ],
+          "name": "Saint-Robert-Bellarmin",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93576,
+      "x": 79770,
+      "owner": 629,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9456,
+        9484,
+        10805,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9456,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B52639524229375",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Quebec",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9484,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B23883248376492",
+          "ordinal": 19,
+          "owners": [],
+          "name": "Estrie",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10805,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B71795601691944",
+          "ordinal": 1264,
+          "owners": [
+            629
+          ],
+          "name": "Saint-Robert-Bellarmin",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93748,
+      "x": 79599,
+      "owner": 629,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9456,
+        9484,
+        10812,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9456,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B52639524229375",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Quebec",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9484,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B23883248376492",
+          "ordinal": 19,
+          "owners": [],
+          "name": "Estrie",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10812,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B27980173386039",
+          "ordinal": 1271,
+          "owners": [
+            629
+          ],
+          "name": "Frontenac",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93750,
+      "x": 79598,
+      "owner": 629,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9456,
+        9484,
+        10812,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9456,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B52639524229375",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Quebec",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9484,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B23883248376492",
+          "ordinal": 19,
+          "owners": [],
+          "name": "Estrie",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10812,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B27980173386039",
+          "ordinal": 1271,
+          "owners": [
+            629
+          ],
+          "name": "Frontenac",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93771,
+      "x": 79584,
+      "owner": 629,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9456,
+        9484,
+        10812,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9456,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B52639524229375",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Quebec",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9484,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B23883248376492",
+          "ordinal": 19,
+          "owners": [],
+          "name": "Estrie",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10812,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B27980173386039",
+          "ordinal": 1271,
+          "owners": [
+            629
+          ],
+          "name": "Frontenac",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93772,
+      "x": 79583,
+      "owner": 629,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9456,
+        9484,
+        10812,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9456,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B52639524229375",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Quebec",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9484,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B23883248376492",
+          "ordinal": 19,
+          "owners": [],
+          "name": "Estrie",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10812,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B27980173386039",
+          "ordinal": 1271,
+          "owners": [
+            629
+          ],
+          "name": "Frontenac",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93935,
+      "x": 81976,
+      "owner": 589,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9455,
+        9477,
+        10158,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9455,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B4167839012994",
+          "ordinal": 3,
+          "owners": [],
+          "name": "New Brunswick",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9477,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B20578745802052",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Saint John--St. Stephen",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10158,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B90262817155224",
+          "ordinal": 617,
+          "owners": [
+            589
+          ],
+          "name": "Saint James",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93937,
+      "x": 81979,
+      "owner": 589,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9477,
+        10158,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9477,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B20578745802052",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Saint John--St. Stephen",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10158,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B90262817155224",
+          "ordinal": 617,
+          "owners": [
+            589
+          ],
+          "name": "Saint James",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93942,
+      "x": 81979,
+      "owner": 589,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9455,
+        9477,
+        10158,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9455,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B4167839012994",
+          "ordinal": 3,
+          "owners": [],
+          "name": "New Brunswick",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9477,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B20578745802052",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Saint John--St. Stephen",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10158,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B90262817155224",
+          "ordinal": 617,
+          "owners": [
+            589
+          ],
+          "name": "Saint James",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93943,
+      "x": 81978,
+      "owner": 589,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9477,
+        10158,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9477,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B20578745802052",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Saint John--St. Stephen",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10158,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B90262817155224",
+          "ordinal": 617,
+          "owners": [
+            589
+          ],
+          "name": "Saint James",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93943,
+      "x": 81979,
+      "owner": 589,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9455,
+        9477,
+        10158,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9455,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B4167839012994",
+          "ordinal": 3,
+          "owners": [],
+          "name": "New Brunswick",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9477,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B20578745802052",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Saint John--St. Stephen",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10158,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B90262817155224",
+          "ordinal": 617,
+          "owners": [
+            589
+          ],
+          "name": "Saint James",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93944,
+      "x": 81978,
+      "owner": 589,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9477,
+        10158,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9477,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B20578745802052",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Saint John--St. Stephen",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10158,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B90262817155224",
+          "ordinal": 617,
+          "owners": [
+            589
+          ],
+          "name": "Saint James",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93947,
+      "x": 81977,
+      "owner": 589,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9477,
+        10158,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9477,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B20578745802052",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Saint John--St. Stephen",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10158,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B90262817155224",
+          "ordinal": 617,
+          "owners": [
+            589
+          ],
+          "name": "Saint James",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 93955,
+      "x": 81976,
+      "owner": 589,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9455,
+        9477,
+        10158,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9455,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B4167839012994",
+          "ordinal": 3,
+          "owners": [],
+          "name": "New Brunswick",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9477,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B20578745802052",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Saint John--St. Stephen",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10158,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B90262817155224",
+          "ordinal": 617,
+          "owners": [
+            589
+          ],
+          "name": "Saint James",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 94008,
+      "x": 81941,
+      "owner": 589,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9477,
+        10158,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9477,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B20578745802052",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Saint John--St. Stephen",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10158,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B90262817155224",
+          "ordinal": 617,
+          "owners": [
+            589
+          ],
+          "name": "Saint James",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 94009,
+      "x": 81942,
+      "owner": 589,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9477,
+        10158,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9477,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B20578745802052",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Saint John--St. Stephen",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10158,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B90262817155224",
+          "ordinal": 617,
+          "owners": [
+            589
+          ],
+          "name": "Saint James",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 94010,
+      "x": 81936,
+      "owner": 589,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9477,
+        10158,
+        61265
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9477,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B20578745802052",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Saint John--St. Stephen",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 10158,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B90262817155224",
+          "ordinal": 617,
+          "owners": [
+            589
+          ],
+          "name": "Saint James",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61265,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B78821008370123",
+          "ordinal": 41,
+          "owners": [],
+          "name": "Maine",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 94194,
+      "x": 79050,
+      "owner": 641,
+      "physical_class": "land",
+      "source_feature_indices": [
+        9484,
+        11060,
+        61258
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9484,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B23883248376492",
+          "ordinal": 19,
+          "owners": [],
+          "name": "Estrie",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 11060,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B60870899692063",
+          "ordinal": 1519,
+          "owners": [
+            641
+          ],
+          "name": "Saint-Venant-de-Paquette",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61258,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B86627915353587",
+          "ordinal": 34,
+          "owners": [],
+          "name": "New Hampshire",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 97195,
+      "x": 70551,
+      "owner": 708,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9457,
+        9504,
+        11945,
+        61230
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9457,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B66370767641120",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ontario",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9504,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B8793422234582",
+          "ordinal": 39,
+          "owners": [],
+          "name": "Windsor--Sarnia",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 11945,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B34461817423915",
+          "ordinal": 2404,
+          "owners": [
+            708
+          ],
+          "name": "Amherstburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61230,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B37442548568489",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Michigan",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 97196,
+      "x": 70551,
+      "owner": 708,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        9457,
+        9504,
+        11945,
+        61230
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 9457,
+          "family_index": 53,
+          "source_id": "gb:CAN:ADM1:82249235B66370767641120",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ontario",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 9504,
+          "family_index": 54,
+          "source_id": "gb:CAN:ADM2:811477B8793422234582",
+          "ordinal": 39,
+          "owners": [],
+          "name": "Windsor--Sarnia",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 11945,
+          "family_index": 55,
+          "source_id": "gb:CAN:ADM3:43193130B34461817423915",
+          "ordinal": 2404,
+          "owners": [
+            708
+          ],
+          "name": "Amherstburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61230,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B37442548568489",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Michigan",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    }
+  ],
+  "new_accepted_credit": 0,
+  "selected_sidecar_pin": {
+    "path": "coordination/engineering/gambia-zimbabwe-selected-delivery-20261018/ownership-selection-gambia-zimbabwe.json",
+    "bytes": 3484,
+    "sha256": "22bcd452be8c4db0c2cfd24e4bf400e2e669c25b9b688ffd054e0142f9ccc787"
+  },
+  "disposition_status": "proposed documented-unresolved original-scope exceptions; normal reviewed integration pending",
+  "new_native_repairs": 0
+}

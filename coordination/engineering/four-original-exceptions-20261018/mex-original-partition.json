@@ -1,0 +1,4309 @@
+{
+  "package_id": "gb-MEX-ADM2--repair-evaluation",
+  "accepted_main": "f833c2d7de6f239955cf592560d559d5377c4c6f",
+  "selected_patch_pin": {
+    "bytes": 30387810,
+    "commit": "160175824051005eb9b2b9990d45b1f94b036126",
+    "git_blob_oid": "b9f5fa1eef498ce3adb38a380405472fdcc72a9a",
+    "mode": "100644",
+    "path": "coordination/engineering/gambia-zimbabwe-selected-delivery-20261018/composition-001/patch.json",
+    "sha256": "4209951c6097f0c992500ed3c3029347cdfee0d338893e785a83676b0afe21b5"
+  },
+  "original_cells": 24208,
+  "original_intervals": 12453,
+  "original_owners": 158,
+  "classes": {
+    "land": 24202,
+    "inland-water": 6
+  },
+  "accepted": 24092,
+  "held": 116,
+  "held_classes": {
+    "land": 115,
+    "inland-water": 1
+  },
+  "different_owner_intersections": [],
+  "held_exactly_matches_retained_packet": true,
+  "held_records": [
+    {
+      "y": 105890,
+      "x": 46980,
+      "owner": 29485,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42268,
+        61240
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42268,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B84599572497035",
+          "ordinal": 85,
+          "owners": [
+            29485
+          ],
+          "name": "Mexicali",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61240,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B43071933723331",
+          "ordinal": 16,
+          "owners": [],
+          "name": "California",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 105936,
+      "x": 46472,
+      "owner": 28998,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42269,
+        61240
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42269,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B66512895446284",
+          "ordinal": 86,
+          "owners": [
+            28998
+          ],
+          "name": "Tecate",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61240,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B43071933723331",
+          "ordinal": 16,
+          "owners": [],
+          "name": "California",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 106924,
+      "x": 53745,
+      "owner": 28691,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42453,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42453,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B5477759296036",
+          "ordinal": 270,
+          "owners": [
+            28691
+          ],
+          "name": "Juárez",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 106928,
+      "x": 53757,
+      "owner": 29138,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42156,
+        42461,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42156,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B49801195703560",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Chihuahua",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42461,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B71409715310525",
+          "ordinal": 278,
+          "owners": [
+            29138
+          ],
+          "name": "Guadalupe",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 106929,
+      "x": 53759,
+      "owner": 29138,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42156,
+        42461,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42156,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B49801195703560",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Chihuahua",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42461,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B71409715310525",
+          "ordinal": 278,
+          "owners": [
+            29138
+          ],
+          "name": "Guadalupe",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 106931,
+      "x": 53763,
+      "owner": 29138,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42461,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42461,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B71409715310525",
+          "ordinal": 278,
+          "owners": [
+            29138
+          ],
+          "name": "Guadalupe",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 106935,
+      "x": 53766,
+      "owner": 29138,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42156,
+        42461,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42156,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B49801195703560",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Chihuahua",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42461,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B71409715310525",
+          "ordinal": 278,
+          "owners": [
+            29138
+          ],
+          "name": "Guadalupe",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 106936,
+      "x": 53767,
+      "owner": 29138,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42156,
+        42461,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42156,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B49801195703560",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Chihuahua",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42461,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B71409715310525",
+          "ordinal": 278,
+          "owners": [
+            29138
+          ],
+          "name": "Guadalupe",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 106937,
+      "x": 53768,
+      "owner": 29138,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42156,
+        42461,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42156,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B49801195703560",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Chihuahua",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42461,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B71409715310525",
+          "ordinal": 278,
+          "owners": [
+            29138
+          ],
+          "name": "Guadalupe",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 106938,
+      "x": 53769,
+      "owner": 29138,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42156,
+        42461,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42156,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B49801195703560",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Chihuahua",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42461,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B71409715310525",
+          "ordinal": 278,
+          "owners": [
+            29138
+          ],
+          "name": "Guadalupe",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 106945,
+      "x": 53775,
+      "owner": 29138,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42156,
+        42461,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42156,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B49801195703560",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Chihuahua",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42461,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B71409715310525",
+          "ordinal": 278,
+          "owners": [
+            29138
+          ],
+          "name": "Guadalupe",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 107336,
+      "x": 54234,
+      "owner": 29138,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42461,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42461,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B71409715310525",
+          "ordinal": 278,
+          "owners": [
+            29138
+          ],
+          "name": "Guadalupe",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 107410,
+      "x": 54324,
+      "owner": 29138,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42156,
+        42461,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42156,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B49801195703560",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Chihuahua",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42461,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B71409715310525",
+          "ordinal": 278,
+          "owners": [
+            29138
+          ],
+          "name": "Guadalupe",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 107481,
+      "x": 54417,
+      "owner": 29138,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42156,
+        42461,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42156,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B49801195703560",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Chihuahua",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42461,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B71409715310525",
+          "ordinal": 278,
+          "owners": [
+            29138
+          ],
+          "name": "Guadalupe",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 107511,
+      "x": 54487,
+      "owner": 29138,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42461,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42461,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B71409715310525",
+          "ordinal": 278,
+          "owners": [
+            29138
+          ],
+          "name": "Guadalupe",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 107512,
+      "x": 54492,
+      "owner": 29138,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42461,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42461,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B71409715310525",
+          "ordinal": 278,
+          "owners": [
+            29138
+          ],
+          "name": "Guadalupe",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 107653,
+      "x": 54654,
+      "owner": 29138,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42156,
+        42461,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42156,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B49801195703560",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Chihuahua",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42461,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B71409715310525",
+          "ordinal": 278,
+          "owners": [
+            29138
+          ],
+          "name": "Guadalupe",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 107656,
+      "x": 54665,
+      "owner": 29138,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42461,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42461,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B71409715310525",
+          "ordinal": 278,
+          "owners": [
+            29138
+          ],
+          "name": "Guadalupe",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 107675,
+      "x": 54685,
+      "owner": 29138,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42461,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42461,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B71409715310525",
+          "ordinal": 278,
+          "owners": [
+            29138
+          ],
+          "name": "Guadalupe",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 107689,
+      "x": 54693,
+      "owner": 29138,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42461,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42461,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B71409715310525",
+          "ordinal": 278,
+          "owners": [
+            29138
+          ],
+          "name": "Guadalupe",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 107690,
+      "x": 54693,
+      "owner": 29138,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42461,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42461,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B71409715310525",
+          "ordinal": 278,
+          "owners": [
+            29138
+          ],
+          "name": "Guadalupe",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 107691,
+      "x": 54693,
+      "owner": 29138,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42461,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42461,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B71409715310525",
+          "ordinal": 278,
+          "owners": [
+            29138
+          ],
+          "name": "Guadalupe",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 107692,
+      "x": 54693,
+      "owner": 29138,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42461,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42461,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B71409715310525",
+          "ordinal": 278,
+          "owners": [
+            29138
+          ],
+          "name": "Guadalupe",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 107694,
+      "x": 54692,
+      "owner": 29138,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42156,
+        42461,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42156,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B49801195703560",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Chihuahua",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42461,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B71409715310525",
+          "ordinal": 278,
+          "owners": [
+            29138
+          ],
+          "name": "Guadalupe",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 107695,
+      "x": 54692,
+      "owner": 29138,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42461,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42461,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B71409715310525",
+          "ordinal": 278,
+          "owners": [
+            29138
+          ],
+          "name": "Guadalupe",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 107696,
+      "x": 54693,
+      "owner": 29138,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42156,
+        42461,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42156,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B49801195703560",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Chihuahua",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42461,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B71409715310525",
+          "ordinal": 278,
+          "owners": [
+            29138
+          ],
+          "name": "Guadalupe",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 107896,
+      "x": 54773,
+      "owner": 28818,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42156,
+        42486,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42156,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B49801195703560",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Chihuahua",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42486,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B59810365960374",
+          "ordinal": 303,
+          "owners": [
+            28818
+          ],
+          "name": "Ojinaga",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 107896,
+      "x": 54774,
+      "owner": 28818,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42156,
+        42486,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42156,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B49801195703560",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Chihuahua",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42486,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B59810365960374",
+          "ordinal": 303,
+          "owners": [
+            28818
+          ],
+          "name": "Ojinaga",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108081,
+      "x": 54845,
+      "owner": 28818,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42156,
+        42486,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42156,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B49801195703560",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Chihuahua",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42486,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B59810365960374",
+          "ordinal": 303,
+          "owners": [
+            28818
+          ],
+          "name": "Ojinaga",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108084,
+      "x": 54846,
+      "owner": 28818,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42156,
+        42486,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42156,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B49801195703560",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Chihuahua",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42486,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B59810365960374",
+          "ordinal": 303,
+          "owners": [
+            28818
+          ],
+          "name": "Ojinaga",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108166,
+      "x": 54845,
+      "owner": 28818,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42486,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42486,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B59810365960374",
+          "ordinal": 303,
+          "owners": [
+            28818
+          ],
+          "name": "Ojinaga",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108171,
+      "x": 54846,
+      "owner": 28818,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42486,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42486,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B59810365960374",
+          "ordinal": 303,
+          "owners": [
+            28818
+          ],
+          "name": "Ojinaga",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108263,
+      "x": 54875,
+      "owner": 28818,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42486,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42486,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B59810365960374",
+          "ordinal": 303,
+          "owners": [
+            28818
+          ],
+          "name": "Ojinaga",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108266,
+      "x": 54877,
+      "owner": 28818,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42486,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42486,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B59810365960374",
+          "ordinal": 303,
+          "owners": [
+            28818
+          ],
+          "name": "Ojinaga",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108283,
+      "x": 56610,
+      "owner": 27702,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42157,
+        42322,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42157,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B32124965101143",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Coahuila de Zaragoza",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42322,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B18038735195258",
+          "ordinal": 139,
+          "owners": [
+            27702
+          ],
+          "name": "Acuña",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108286,
+      "x": 56615,
+      "owner": 27702,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42157,
+        42322,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42157,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B32124965101143",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Coahuila de Zaragoza",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42322,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B18038735195258",
+          "ordinal": 139,
+          "owners": [
+            27702
+          ],
+          "name": "Acuña",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108286,
+      "x": 56616,
+      "owner": 27702,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42157,
+        42322,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42157,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B32124965101143",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Coahuila de Zaragoza",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42322,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B18038735195258",
+          "ordinal": 139,
+          "owners": [
+            27702
+          ],
+          "name": "Acuña",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108286,
+      "x": 56617,
+      "owner": 27702,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42157,
+        42322,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42157,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B32124965101143",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Coahuila de Zaragoza",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42322,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B18038735195258",
+          "ordinal": 139,
+          "owners": [
+            27702
+          ],
+          "name": "Acuña",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108290,
+      "x": 56666,
+      "owner": 27702,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42157,
+        42322,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42157,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B32124965101143",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Coahuila de Zaragoza",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42322,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B18038735195258",
+          "ordinal": 139,
+          "owners": [
+            27702
+          ],
+          "name": "Acuña",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108336,
+      "x": 54922,
+      "owner": 28818,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42486,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42486,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B59810365960374",
+          "ordinal": 303,
+          "owners": [
+            28818
+          ],
+          "name": "Ojinaga",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108358,
+      "x": 57031,
+      "owner": 27702,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42157,
+        42322,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42157,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B32124965101143",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Coahuila de Zaragoza",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42322,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B18038735195258",
+          "ordinal": 139,
+          "owners": [
+            27702
+          ],
+          "name": "Acuña",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108372,
+      "x": 56365,
+      "owner": 27702,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42322,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42322,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B18038735195258",
+          "ordinal": 139,
+          "owners": [
+            27702
+          ],
+          "name": "Acuña",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108373,
+      "x": 56362,
+      "owner": 27702,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42157,
+        42322,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42157,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B32124965101143",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Coahuila de Zaragoza",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42322,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B18038735195258",
+          "ordinal": 139,
+          "owners": [
+            27702
+          ],
+          "name": "Acuña",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108373,
+      "x": 56370,
+      "owner": 27702,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42157,
+        42322,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42157,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B32124965101143",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Coahuila de Zaragoza",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42322,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B18038735195258",
+          "ordinal": 139,
+          "owners": [
+            27702
+          ],
+          "name": "Acuña",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108373,
+      "x": 56371,
+      "owner": 27702,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42157,
+        42322,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42157,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B32124965101143",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Coahuila de Zaragoza",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42322,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B18038735195258",
+          "ordinal": 139,
+          "owners": [
+            27702
+          ],
+          "name": "Acuña",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108567,
+      "x": 57395,
+      "owner": 27702,
+      "physical_class": "inland-water",
+      "source_feature_indices": [
+        42157,
+        42322,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42157,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B32124965101143",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Coahuila de Zaragoza",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42322,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B18038735195258",
+          "ordinal": 139,
+          "owners": [
+            27702
+          ],
+          "name": "Acuña",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108596,
+      "x": 56211,
+      "owner": 27702,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42322,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42322,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B18038735195258",
+          "ordinal": 139,
+          "owners": [
+            27702
+          ],
+          "name": "Acuña",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108598,
+      "x": 56209,
+      "owner": 27702,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42322,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42322,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B18038735195258",
+          "ordinal": 139,
+          "owners": [
+            27702
+          ],
+          "name": "Acuña",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108599,
+      "x": 56209,
+      "owner": 27702,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42322,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42322,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B18038735195258",
+          "ordinal": 139,
+          "owners": [
+            27702
+          ],
+          "name": "Acuña",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108607,
+      "x": 56208,
+      "owner": 27702,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42322,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42322,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B18038735195258",
+          "ordinal": 139,
+          "owners": [
+            27702
+          ],
+          "name": "Acuña",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108677,
+      "x": 55237,
+      "owner": 28818,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42486,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42486,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B59810365960374",
+          "ordinal": 303,
+          "owners": [
+            28818
+          ],
+          "name": "Ojinaga",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108682,
+      "x": 55243,
+      "owner": 28818,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42486,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42486,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B59810365960374",
+          "ordinal": 303,
+          "owners": [
+            28818
+          ],
+          "name": "Ojinaga",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108682,
+      "x": 55244,
+      "owner": 28818,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42486,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42486,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B59810365960374",
+          "ordinal": 303,
+          "owners": [
+            28818
+          ],
+          "name": "Ojinaga",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108682,
+      "x": 55245,
+      "owner": 28818,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42486,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42486,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B59810365960374",
+          "ordinal": 303,
+          "owners": [
+            28818
+          ],
+          "name": "Ojinaga",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108682,
+      "x": 55254,
+      "owner": 28818,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42486,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42486,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B59810365960374",
+          "ordinal": 303,
+          "owners": [
+            28818
+          ],
+          "name": "Ojinaga",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108683,
+      "x": 55251,
+      "owner": 28818,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42486,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42486,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B59810365960374",
+          "ordinal": 303,
+          "owners": [
+            28818
+          ],
+          "name": "Ojinaga",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108683,
+      "x": 55252,
+      "owner": 28818,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42486,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42486,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B59810365960374",
+          "ordinal": 303,
+          "owners": [
+            28818
+          ],
+          "name": "Ojinaga",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108683,
+      "x": 55253,
+      "owner": 28818,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42486,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42486,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B59810365960374",
+          "ordinal": 303,
+          "owners": [
+            28818
+          ],
+          "name": "Ojinaga",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108683,
+      "x": 55254,
+      "owner": 28818,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42156,
+        42486,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42156,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B49801195703560",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Chihuahua",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42486,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B59810365960374",
+          "ordinal": 303,
+          "owners": [
+            28818
+          ],
+          "name": "Ojinaga",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108684,
+      "x": 56193,
+      "owner": 27702,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42157,
+        42322,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42157,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B32124965101143",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Coahuila de Zaragoza",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42322,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B18038735195258",
+          "ordinal": 139,
+          "owners": [
+            27702
+          ],
+          "name": "Acuña",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108685,
+      "x": 56190,
+      "owner": 27702,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42157,
+        42322,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42157,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B32124965101143",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Coahuila de Zaragoza",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42322,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B18038735195258",
+          "ordinal": 139,
+          "owners": [
+            27702
+          ],
+          "name": "Acuña",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108754,
+      "x": 55387,
+      "owner": 29267,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42156,
+        42488,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42156,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B49801195703560",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Chihuahua",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42488,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B76577839440191",
+          "ordinal": 305,
+          "owners": [
+            29267
+          ],
+          "name": "Manuel Benavides",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108754,
+      "x": 55388,
+      "owner": 29267,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42156,
+        42488,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42156,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B49801195703560",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Chihuahua",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42488,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B76577839440191",
+          "ordinal": 305,
+          "owners": [
+            29267
+          ],
+          "name": "Manuel Benavides",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108765,
+      "x": 55442,
+      "owner": 29267,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42156,
+        42488,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42156,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B49801195703560",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Chihuahua",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42488,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B76577839440191",
+          "ordinal": 305,
+          "owners": [
+            29267
+          ],
+          "name": "Manuel Benavides",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108766,
+      "x": 55427,
+      "owner": 29267,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42156,
+        42488,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42156,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B49801195703560",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Chihuahua",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42488,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B76577839440191",
+          "ordinal": 305,
+          "owners": [
+            29267
+          ],
+          "name": "Manuel Benavides",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108780,
+      "x": 56143,
+      "owner": 27702,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42322,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42322,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B18038735195258",
+          "ordinal": 139,
+          "owners": [
+            27702
+          ],
+          "name": "Acuña",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108829,
+      "x": 55536,
+      "owner": 29267,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42488,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42488,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B76577839440191",
+          "ordinal": 305,
+          "owners": [
+            29267
+          ],
+          "name": "Manuel Benavides",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108830,
+      "x": 55537,
+      "owner": 29267,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42488,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42488,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B76577839440191",
+          "ordinal": 305,
+          "owners": [
+            29267
+          ],
+          "name": "Manuel Benavides",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108831,
+      "x": 55538,
+      "owner": 29267,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42488,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42488,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B76577839440191",
+          "ordinal": 305,
+          "owners": [
+            29267
+          ],
+          "name": "Manuel Benavides",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108832,
+      "x": 55539,
+      "owner": 29267,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42488,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42488,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B76577839440191",
+          "ordinal": 305,
+          "owners": [
+            29267
+          ],
+          "name": "Manuel Benavides",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108833,
+      "x": 55540,
+      "owner": 29267,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42488,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42488,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B76577839440191",
+          "ordinal": 305,
+          "owners": [
+            29267
+          ],
+          "name": "Manuel Benavides",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108845,
+      "x": 55549,
+      "owner": 29267,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42488,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42488,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B76577839440191",
+          "ordinal": 305,
+          "owners": [
+            29267
+          ],
+          "name": "Manuel Benavides",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108912,
+      "x": 56050,
+      "owner": 29326,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42306,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42306,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B78546697072074",
+          "ordinal": 123,
+          "owners": [
+            29326
+          ],
+          "name": "Ocampo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108984,
+      "x": 55839,
+      "owner": 29267,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42488,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42488,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B76577839440191",
+          "ordinal": 305,
+          "owners": [
+            29267
+          ],
+          "name": "Manuel Benavides",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108989,
+      "x": 55845,
+      "owner": 29267,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42156,
+        42488,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42156,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B49801195703560",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Chihuahua",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42488,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B76577839440191",
+          "ordinal": 305,
+          "owners": [
+            29267
+          ],
+          "name": "Manuel Benavides",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 108990,
+      "x": 55844,
+      "owner": 29267,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42156,
+        42488,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42156,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B49801195703560",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Chihuahua",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42488,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B76577839440191",
+          "ordinal": 305,
+          "owners": [
+            29267
+          ],
+          "name": "Manuel Benavides",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 109547,
+      "x": 58033,
+      "owner": 27986,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42157,
+        42315,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42157,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B32124965101143",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Coahuila de Zaragoza",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42315,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B28083225707634",
+          "ordinal": 132,
+          "owners": [
+            27986
+          ],
+          "name": "Guerrero",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 110100,
+      "x": 58460,
+      "owner": 28207,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42178,
+        44176,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42178,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B88239390016047",
+          "ordinal": 27,
+          "owners": [],
+          "name": "Tamaulipas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 44176,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B36584167330730",
+          "ordinal": 1993,
+          "owners": [
+            28207
+          ],
+          "name": "Nuevo Laredo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 111085,
+      "x": 58917,
+      "owner": 27746,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42178,
+        44154,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42178,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B88239390016047",
+          "ordinal": 27,
+          "owners": [],
+          "name": "Tamaulipas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 44154,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B19734737763323",
+          "ordinal": 1971,
+          "owners": [
+            27746
+          ],
+          "name": "Mier",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 111144,
+      "x": 58986,
+      "owner": 29518,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42178,
+        44156,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42178,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B88239390016047",
+          "ordinal": 27,
+          "owners": [],
+          "name": "Tamaulipas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 44156,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B85594866218636",
+          "ordinal": 1973,
+          "owners": [
+            29518
+          ],
+          "name": "Miguel Alemán",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 111144,
+      "x": 58987,
+      "owner": 29518,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42178,
+        44156,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42178,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B88239390016047",
+          "ordinal": 27,
+          "owners": [],
+          "name": "Tamaulipas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 44156,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B85594866218636",
+          "ordinal": 1973,
+          "owners": [
+            29518
+          ],
+          "name": "Miguel Alemán",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 111144,
+      "x": 58988,
+      "owner": 29518,
+      "physical_class": "land",
+      "source_feature_indices": [
+        44156,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 44156,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B85594866218636",
+          "ordinal": 1973,
+          "owners": [
+            29518
+          ],
+          "name": "Miguel Alemán",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 111144,
+      "x": 58989,
+      "owner": 29518,
+      "physical_class": "land",
+      "source_feature_indices": [
+        44156,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 44156,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B85594866218636",
+          "ordinal": 1973,
+          "owners": [
+            29518
+          ],
+          "name": "Miguel Alemán",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 111169,
+      "x": 59079,
+      "owner": 28221,
+      "physical_class": "land",
+      "source_feature_indices": [
+        44157,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 44157,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B36916974246303",
+          "ordinal": 1974,
+          "owners": [
+            28221
+          ],
+          "name": "Camargo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 111273,
+      "x": 59295,
+      "owner": 29085,
+      "physical_class": "land",
+      "source_feature_indices": [
+        44158,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 44158,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B69577652591157",
+          "ordinal": 1975,
+          "owners": [
+            29085
+          ],
+          "name": "Gustavo Díaz Ordaz",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 111275,
+      "x": 59304,
+      "owner": 29085,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42178,
+        44158,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42178,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B88239390016047",
+          "ordinal": 27,
+          "owners": [],
+          "name": "Tamaulipas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 44158,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B69577652591157",
+          "ordinal": 1975,
+          "owners": [
+            29085
+          ],
+          "name": "Gustavo Díaz Ordaz",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 111368,
+      "x": 59484,
+      "owner": 29165,
+      "physical_class": "land",
+      "source_feature_indices": [
+        44159,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 44159,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B72181114245692",
+          "ordinal": 1976,
+          "owners": [
+            29165
+          ],
+          "name": "Reynosa",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 111411,
+      "x": 59712,
+      "owner": 29489,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42178,
+        44193,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42178,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B88239390016047",
+          "ordinal": 27,
+          "owners": [],
+          "name": "Tamaulipas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 44193,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B84741997482443",
+          "ordinal": 2010,
+          "owners": [
+            29489
+          ],
+          "name": "Río Bravo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 111412,
+      "x": 59711,
+      "owner": 29489,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42178,
+        44193,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42178,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B88239390016047",
+          "ordinal": 27,
+          "owners": [],
+          "name": "Tamaulipas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 44193,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B84741997482443",
+          "ordinal": 2010,
+          "owners": [
+            29489
+          ],
+          "name": "Río Bravo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 111413,
+      "x": 59719,
+      "owner": 29489,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42178,
+        44193,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42178,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B88239390016047",
+          "ordinal": 27,
+          "owners": [],
+          "name": "Tamaulipas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 44193,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B84741997482443",
+          "ordinal": 2010,
+          "owners": [
+            29489
+          ],
+          "name": "Río Bravo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 111426,
+      "x": 59669,
+      "owner": 29489,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42178,
+        44193,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42178,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B88239390016047",
+          "ordinal": 27,
+          "owners": [],
+          "name": "Tamaulipas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 44193,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B84741997482443",
+          "ordinal": 2010,
+          "owners": [
+            29489
+          ],
+          "name": "Río Bravo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 111427,
+      "x": 59668,
+      "owner": 29489,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42178,
+        44193,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42178,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B88239390016047",
+          "ordinal": 27,
+          "owners": [],
+          "name": "Tamaulipas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 44193,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B84741997482443",
+          "ordinal": 2010,
+          "owners": [
+            29489
+          ],
+          "name": "Río Bravo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 111428,
+      "x": 59667,
+      "owner": 29489,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42178,
+        44193,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42178,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B88239390016047",
+          "ordinal": 27,
+          "owners": [],
+          "name": "Tamaulipas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 44193,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B84741997482443",
+          "ordinal": 2010,
+          "owners": [
+            29489
+          ],
+          "name": "Río Bravo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 111429,
+      "x": 59666,
+      "owner": 29489,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42178,
+        44193,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42178,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B88239390016047",
+          "ordinal": 27,
+          "owners": [],
+          "name": "Tamaulipas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 44193,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B84741997482443",
+          "ordinal": 2010,
+          "owners": [
+            29489
+          ],
+          "name": "Río Bravo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 111431,
+      "x": 59879,
+      "owner": 28489,
+      "physical_class": "land",
+      "source_feature_indices": [
+        44192,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 44192,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B46889164342382",
+          "ordinal": 2009,
+          "owners": [
+            28489
+          ],
+          "name": "Matamoros",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 111434,
+      "x": 59883,
+      "owner": 28489,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42178,
+        44192,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42178,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B88239390016047",
+          "ordinal": 27,
+          "owners": [],
+          "name": "Tamaulipas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 44192,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B46889164342382",
+          "ordinal": 2009,
+          "owners": [
+            28489
+          ],
+          "name": "Matamoros",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 111435,
+      "x": 59881,
+      "owner": 28489,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42178,
+        44192,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42178,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B88239390016047",
+          "ordinal": 27,
+          "owners": [],
+          "name": "Tamaulipas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 44192,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B46889164342382",
+          "ordinal": 2009,
+          "owners": [
+            28489
+          ],
+          "name": "Matamoros",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 111436,
+      "x": 59874,
+      "owner": 28489,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42178,
+        44192,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42178,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B88239390016047",
+          "ordinal": 27,
+          "owners": [],
+          "name": "Tamaulipas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 44192,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B46889164342382",
+          "ordinal": 2009,
+          "owners": [
+            28489
+          ],
+          "name": "Matamoros",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 111438,
+      "x": 59895,
+      "owner": 28489,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42178,
+        44192,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42178,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B88239390016047",
+          "ordinal": 27,
+          "owners": [],
+          "name": "Tamaulipas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 44192,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B46889164342382",
+          "ordinal": 2009,
+          "owners": [
+            28489
+          ],
+          "name": "Matamoros",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 111525,
+      "x": 60201,
+      "owner": 28489,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42178,
+        44192,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42178,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B88239390016047",
+          "ordinal": 27,
+          "owners": [],
+          "name": "Tamaulipas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 44192,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B46889164342382",
+          "ordinal": 2009,
+          "owners": [
+            28489
+          ],
+          "name": "Matamoros",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 111526,
+      "x": 60201,
+      "owner": 28489,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42178,
+        44192,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42178,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B88239390016047",
+          "ordinal": 27,
+          "owners": [],
+          "name": "Tamaulipas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 44192,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B46889164342382",
+          "ordinal": 2009,
+          "owners": [
+            28489
+          ],
+          "name": "Matamoros",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 111528,
+      "x": 60202,
+      "owner": 28489,
+      "physical_class": "land",
+      "source_feature_indices": [
+        42178,
+        44192,
+        61239
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 42178,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B88239390016047",
+          "ordinal": 27,
+          "owners": [],
+          "name": "Tamaulipas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 44192,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B46889164342382",
+          "ordinal": 2009,
+          "owners": [
+            28489
+          ],
+          "name": "Matamoros",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 61239,
+          "family_index": 346,
+          "source_id": "gb:USA:ADM1:66186276B29106115751815",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Texas",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 118652,
+      "x": 64879,
+      "owner": 29027,
+      "physical_class": "land",
+      "source_feature_indices": [
+        34644,
+        42340
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 34644,
+          "family_index": 139,
+          "source_id": "gb:GTM:ADM1:53557124B7234641414324",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Petén",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42340,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B67639994326823",
+          "ordinal": 157,
+          "owners": [
+            29027
+          ],
+          "name": "Ocosingo",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 118655,
+      "x": 64908,
+      "owner": 29027,
+      "physical_class": "land",
+      "source_feature_indices": [
+        34644,
+        42340
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 34644,
+          "family_index": 139,
+          "source_id": "gb:GTM:ADM1:53557124B7234641414324",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Petén",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42340,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B67639994326823",
+          "ordinal": 157,
+          "owners": [
+            29027
+          ],
+          "name": "Ocosingo",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 118670,
+      "x": 64948,
+      "owner": 29027,
+      "physical_class": "land",
+      "source_feature_indices": [
+        34644,
+        42340
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 34644,
+          "family_index": 139,
+          "source_id": "gb:GTM:ADM1:53557124B7234641414324",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Petén",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42340,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B67639994326823",
+          "ordinal": 157,
+          "owners": [
+            29027
+          ],
+          "name": "Ocosingo",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 118670,
+      "x": 64949,
+      "owner": 29027,
+      "physical_class": "land",
+      "source_feature_indices": [
+        34644,
+        42340
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 34644,
+          "family_index": 139,
+          "source_id": "gb:GTM:ADM1:53557124B7234641414324",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Petén",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42340,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B67639994326823",
+          "ordinal": 157,
+          "owners": [
+            29027
+          ],
+          "name": "Ocosingo",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 118670,
+      "x": 64950,
+      "owner": 29027,
+      "physical_class": "land",
+      "source_feature_indices": [
+        34644,
+        42340
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 34644,
+          "family_index": 139,
+          "source_id": "gb:GTM:ADM1:53557124B7234641414324",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Petén",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42340,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B67639994326823",
+          "ordinal": 157,
+          "owners": [
+            29027
+          ],
+          "name": "Ocosingo",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 118670,
+      "x": 64951,
+      "owner": 29027,
+      "physical_class": "land",
+      "source_feature_indices": [
+        34644,
+        42340
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 34644,
+          "family_index": 139,
+          "source_id": "gb:GTM:ADM1:53557124B7234641414324",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Petén",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42340,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B67639994326823",
+          "ordinal": 157,
+          "owners": [
+            29027
+          ],
+          "name": "Ocosingo",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 118670,
+      "x": 64952,
+      "owner": 29027,
+      "physical_class": "land",
+      "source_feature_indices": [
+        34644,
+        42340
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 34644,
+          "family_index": 139,
+          "source_id": "gb:GTM:ADM1:53557124B7234641414324",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Petén",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42340,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B67639994326823",
+          "ordinal": 157,
+          "owners": [
+            29027
+          ],
+          "name": "Ocosingo",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 118670,
+      "x": 64953,
+      "owner": 29027,
+      "physical_class": "land",
+      "source_feature_indices": [
+        34644,
+        42340
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 34644,
+          "family_index": 139,
+          "source_id": "gb:GTM:ADM1:53557124B7234641414324",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Petén",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42340,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B67639994326823",
+          "ordinal": 157,
+          "owners": [
+            29027
+          ],
+          "name": "Ocosingo",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 118670,
+      "x": 64954,
+      "owner": 29027,
+      "physical_class": "land",
+      "source_feature_indices": [
+        34644,
+        42340
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 34644,
+          "family_index": 139,
+          "source_id": "gb:GTM:ADM1:53557124B7234641414324",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Petén",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42340,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B67639994326823",
+          "ordinal": 157,
+          "owners": [
+            29027
+          ],
+          "name": "Ocosingo",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 118671,
+      "x": 64937,
+      "owner": 29027,
+      "physical_class": "land",
+      "source_feature_indices": [
+        34644,
+        42340
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 34644,
+          "family_index": 139,
+          "source_id": "gb:GTM:ADM1:53557124B7234641414324",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Petén",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42340,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B67639994326823",
+          "ordinal": 157,
+          "owners": [
+            29027
+          ],
+          "name": "Ocosingo",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 118671,
+      "x": 64938,
+      "owner": 29027,
+      "physical_class": "land",
+      "source_feature_indices": [
+        34644,
+        42340
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 34644,
+          "family_index": 139,
+          "source_id": "gb:GTM:ADM1:53557124B7234641414324",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Petén",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42340,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B67639994326823",
+          "ordinal": 157,
+          "owners": [
+            29027
+          ],
+          "name": "Ocosingo",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 118671,
+      "x": 64939,
+      "owner": 29027,
+      "physical_class": "land",
+      "source_feature_indices": [
+        34644,
+        42340
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 34644,
+          "family_index": 139,
+          "source_id": "gb:GTM:ADM1:53557124B7234641414324",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Petén",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42340,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B67639994326823",
+          "ordinal": 157,
+          "owners": [
+            29027
+          ],
+          "name": "Ocosingo",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 118671,
+      "x": 64940,
+      "owner": 29027,
+      "physical_class": "land",
+      "source_feature_indices": [
+        34644,
+        42340
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 34644,
+          "family_index": 139,
+          "source_id": "gb:GTM:ADM1:53557124B7234641414324",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Petén",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42340,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B67639994326823",
+          "ordinal": 157,
+          "owners": [
+            29027
+          ],
+          "name": "Ocosingo",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 120229,
+      "x": 63967,
+      "owner": 28632,
+      "physical_class": "land",
+      "source_feature_indices": [
+        34651,
+        42155,
+        42365
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 34651,
+          "family_index": 139,
+          "source_id": "gb:GTM:ADM1:53557124B78398693011322",
+          "ordinal": 11,
+          "owners": [],
+          "name": "San Marcos",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42155,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B65177449444732",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Chiapas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42365,
+          "family_index": 209,
+          "source_id": "gb:MEX:ADM2:50627088B52793228533805",
+          "ordinal": 182,
+          "owners": [
+            28632
+          ],
+          "name": "Frontera Hidalgo",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    }
+  ],
+  "new_accepted_credit": 0,
+  "selected_sidecar_pin": {
+    "path": "coordination/engineering/gambia-zimbabwe-selected-delivery-20261018/ownership-selection-gambia-zimbabwe.json",
+    "bytes": 3484,
+    "sha256": "22bcd452be8c4db0c2cfd24e4bf400e2e669c25b9b688ffd054e0142f9ccc787"
+  },
+  "disposition_status": "proposed documented-unresolved original-scope exceptions; normal reviewed integration pending",
+  "new_native_repairs": 0
+}
