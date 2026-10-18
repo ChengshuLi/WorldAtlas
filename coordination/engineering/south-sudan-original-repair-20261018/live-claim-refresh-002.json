@@ -1,0 +1,54 @@
+{
+  "observed_at_utc": "2026-10-18 02:36:38 UTC",
+  "queries": [
+    {
+      "query": "repo:ChengshuLi/WorldAtlas \"gb-SSD-ADM2--repair-evaluation\"",
+      "kind": "issues",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Action completed."
+          }
+        ],
+        "structuredContent": {
+          "issues": []
+        },
+        "isError": false
+      }
+    },
+    {
+      "query": "repo:ChengshuLi/WorldAtlas \"gb-SSD-ADM2--repair-evaluation\"",
+      "kind": "prs",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Action completed."
+          }
+        ],
+        "structuredContent": {
+          "issues": []
+        },
+        "isError": false
+      }
+    },
+    {
+      "query": "repo:ChengshuLi/WorldAtlas \"South Sudan\" in:title",
+      "kind": "issues",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Action completed."
+          }
+        ],
+        "structuredContent": {
+          "issues": []
+        },
+        "isError": false
+      }
+    }
+  ],
+  "status": "No exact conflicting issue/PR found; no public issue created."
+}

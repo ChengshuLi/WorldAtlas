@@ -1,0 +1,29 @@
+{
+  "observed_main": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+  "observed_at_utc": "2026-10-18T02:34:40.359914+00:00",
+  "selector_path": "data/ownership-selection.json",
+  "selector_additive_descriptor": {
+    "path": "coordination/engineering/seven-package-selected-delivery-20261018/ownership-selection-combined.json",
+    "bytes": 3476,
+    "sha256": "3a8a0815c06bcef934e00beb7018564d79e84ba304dcbfef6fc20a8d111de3d9"
+  },
+  "sidecar_path": "coordination/engineering/seven-package-selected-delivery-20261018/ownership-selection-combined.json",
+  "sidecar_sha256": "3a8a0815c06bcef934e00beb7018564d79e84ba304dcbfef6fc20a8d111de3d9",
+  "whole_accepted_patch_pin": {
+    "bytes": 29435903,
+    "commit": "7f9c93b0d72cbf61cd422b6e5656baacfdc2e5cb",
+    "git_blob_oid": "ecf143e2bbf23d615a67db3dee91be5d9f573e82",
+    "mode": "100644",
+    "path": "coordination/engineering/seven-package-selected-delivery-20261018/composition-001/patch.json",
+    "sha256": "921dba57de82e0e93dce8fbc2d9240b304446c94b101efe2fc650bc358d1db69"
+  },
+  "original_cells": 2123,
+  "land_cells": 2123,
+  "inland_water_cells": 0,
+  "intervals": 1151,
+  "coordinate_overlap": 0,
+  "status": "read-only candidate; no allocation, producer or activation",
+  "limits": [
+    "Cumulative accepted-patch coordinate disjointness only; future selected-base owner-zero, conservation and source/territorial correctness are not approved."
+  ]
+}

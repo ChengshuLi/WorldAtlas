@@ -1,0 +1,562 @@
+{
+  "current_metadata_commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+  "current_hierarchy_path": "data/hierarchy.json",
+  "whole_hierarchy_sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144",
+  "whole_country_locations": 80,
+  "whole_country_distinct_atoms": 78,
+  "whole_country_source_atom_references": 80,
+  "recorded_direct_parents": 10,
+  "complete_recorded_ancestry": [
+    {
+      "id": "framework:province:eastern-equatoria:5f0bd7f8ff67",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 8,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 48771326B42994405084241 named 'Eastern Equatoria'; canonical role 'states', represented year 2020, license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:SSD:ADM1 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SSD/ADM1/geoBoundaries-SSD-ADM1.geojson"
+            }
+          ],
+          "rationale": "Retain Eastern Equatoria as a named administrative cluster in the dated reference framework: all 8 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:SSD:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Eastern Equatoria",
+      "parent_id": "framework:area:sudan:88aa6f916faa"
+    },
+    {
+      "id": "framework:province:lakes:a3cebc804914",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 8,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 48771326B2646389376646 named 'Lakes'; canonical role 'states', represented year 2020, license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:SSD:ADM1 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SSD/ADM1/geoBoundaries-SSD-ADM1.geojson"
+            }
+          ],
+          "rationale": "Retain Lakes as a named administrative cluster in the dated reference framework: all 8 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:SSD:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Lakes",
+      "parent_id": "framework:area:sudan:88aa6f916faa"
+    },
+    {
+      "id": "framework:province:warrap:590881062db0",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 6,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 48771326B11845073429118 named 'Warrap'; canonical role 'states', represented year 2020, license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:SSD:ADM1 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SSD/ADM1/geoBoundaries-SSD-ADM1.geojson"
+            }
+          ],
+          "rationale": "Retain Warrap as a named administrative cluster in the dated reference framework: all 6 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:SSD:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Warrap",
+      "parent_id": "framework:area:sudan:88aa6f916faa"
+    },
+    {
+      "id": "framework:province:jonglei:4d1ab63ab968",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 11,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 48771326B48659004133869 named 'Jonglei'; canonical role 'states', represented year 2020, license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:SSD:ADM1 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SSD/ADM1/geoBoundaries-SSD-ADM1.geojson"
+            }
+          ],
+          "rationale": "Retain Jonglei as a named administrative cluster in the dated reference framework: all 11 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:SSD:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Jonglei",
+      "parent_id": "framework:area:sudan:88aa6f916faa"
+    },
+    {
+      "id": "framework:province:central-equatoria:2745f3e053b5",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 6,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 48771326B10235544430886 named 'Central Equatoria'; canonical role 'states', represented year 2020, license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:SSD:ADM1 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SSD/ADM1/geoBoundaries-SSD-ADM1.geojson"
+            }
+          ],
+          "rationale": "Retain Central Equatoria as a named administrative cluster in the dated reference framework: all 6 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:SSD:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Central Equatoria",
+      "parent_id": "framework:area:sudan:88aa6f916faa"
+    },
+    {
+      "id": "framework:province:northern-bahr-el-ghazal:768e72714aa0",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 5,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 48771326B49579010016854 named 'Northern Bahr el Ghazal'; canonical role 'states', represented year 2020, license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:SSD:ADM1 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SSD/ADM1/geoBoundaries-SSD-ADM1.geojson"
+            }
+          ],
+          "rationale": "Retain Northern Bahr el Ghazal as a named administrative cluster in the dated reference framework: all 5 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:SSD:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Northern Bahr el Ghazal",
+      "parent_id": "framework:area:sudan:88aa6f916faa"
+    },
+    {
+      "id": "framework:province:upper-nile:3f07af51b810",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 12,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 48771326B2876692069974 named 'Upper Nile'; canonical role 'states', represented year 2020, license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:SSD:ADM1 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SSD/ADM1/geoBoundaries-SSD-ADM1.geojson"
+            }
+          ],
+          "rationale": "Retain Upper Nile as a named administrative cluster in the dated reference framework: all 12 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:SSD:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Upper Nile",
+      "parent_id": "framework:area:sudan:88aa6f916faa"
+    },
+    {
+      "id": "framework:province:western-equatoria:78e1f50b7de1",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 10,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 48771326B90797869503386 named 'Western Equatoria'; canonical role 'states', represented year 2020, license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:SSD:ADM1 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SSD/ADM1/geoBoundaries-SSD-ADM1.geojson"
+            }
+          ],
+          "rationale": "Retain Western Equatoria as a named administrative cluster in the dated reference framework: all 10 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:SSD:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Western Equatoria",
+      "parent_id": "framework:area:sudan:88aa6f916faa"
+    },
+    {
+      "id": "framework:area:sudan:88aa6f916faa",
+      "level": "area",
+      "metadata": {
+        "basis": "WGSRPD level 3 geographic area; source calls these botanical countries",
+        "child_count": 29,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "More than 20 provinces: review area scale",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "The README defines a botanical geographic recording scheme. Its botanical countries/regions are reference groupings, not automatic atlas tier semantics or political ownership.",
+              "title": "WGSRPD data purpose inspected",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/master/README.md"
+            },
+            {
+              "inspected_fact": "The actual table distinguishes Northern, Western, Middle, Eastern and Southern Africa and names the member territories; statistical classifications do not alone certify a physical boundary or every local territory.",
+              "title": "UN M49 classification inspected",
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/"
+            }
+          ],
+          "rationale": "Retain identity pending an explicit macro/area decision. Current source basis: WGSRPD level 3 geographic area; source calls these botanical countries; 30 adjacent-tier children inventoried. Ownership does not define this parent.",
+          "remaining_reasons": [
+            "More than 20 provinces: review area scale",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Independently assess this area geographic scope and all 30 direct child units; source-family placement is not semantic approval."
+          ]
+        },
+        "source": "Brummitt (2001), WGSRPD 2nd ed.; TDWG / Royal Botanic Gardens, Kew",
+        "source_url": "https://github.com/tdwg/wgsrpd"
+      },
+      "name": "Sudan",
+      "parent_id": "framework:region:northeast-tropical-africa:a1c735f7337c"
+    },
+    {
+      "id": "framework:province:unity:a56fa71f90d4",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 9,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 48771326B37591972128550 named 'Unity'; canonical role 'states', represented year 2020, license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:SSD:ADM1 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SSD/ADM1/geoBoundaries-SSD-ADM1.geojson"
+            }
+          ],
+          "rationale": "Retain Unity as a named administrative cluster in the dated reference framework: all 9 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:SSD:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Unity",
+      "parent_id": "framework:area:sudan:88aa6f916faa"
+    },
+    {
+      "id": "framework:province:western-bahr-el-ghazal:241a7857cf41",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 5,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 48771326B76913720880161 named 'Western Bahr el Ghazal'; canonical role 'states', represented year 2020, license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:SSD:ADM1 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SSD/ADM1/geoBoundaries-SSD-ADM1.geojson"
+            }
+          ],
+          "rationale": "Inspected every member geometry and source-role record for Western Bahr el Ghazal. Current unit is a proposed named cluster, distinct from political ownership; source correspondence and child semantic completion are evaluated separately.",
+          "remaining_reasons": [
+            "Assess local-cluster tier purpose for the actual 5 member territories; source roles {'counties': 5}, vintages ['2020'].",
+            "3 atlas-derived city/physical/island adaptations require complete source-member and functional/physical-geography review."
+          ]
+        },
+        "source": "gb:SSD:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Western Bahr el Ghazal",
+      "parent_id": "framework:area:sudan:88aa6f916faa"
+    },
+    {
+      "id": "framework:region:northeast-tropical-africa:a1c735f7337c",
+      "level": "region",
+      "metadata": {
+        "basis": "WGSRPD level 2 geographic region; independent of political ownership",
+        "child_count": 6,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "The README defines a botanical geographic recording scheme. Its botanical countries/regions are reference groupings, not automatic atlas tier semantics or political ownership.",
+              "title": "WGSRPD data purpose inspected",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/master/README.md"
+            },
+            {
+              "inspected_fact": "The actual table distinguishes Northern, Western, Middle, Eastern and Southern Africa and names the member territories; statistical classifications do not alone certify a physical boundary or every local territory.",
+              "title": "UN M49 classification inspected",
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/"
+            }
+          ],
+          "rationale": "Retain identity pending an explicit macro/area decision. Current source basis: WGSRPD level 2 geographic region; independent of political ownership; 8 adjacent-tier children inventoried. Ownership does not define this parent.",
+          "remaining_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Independently assess this region geographic scope and all 8 direct child units; source-family placement is not semantic approval."
+          ]
+        },
+        "source": "Brummitt (2001), WGSRPD 2nd ed.; TDWG / Royal Botanic Gardens, Kew",
+        "source_url": "https://github.com/tdwg/wgsrpd"
+      },
+      "name": "Northeastern Africa",
+      "parent_id": "framework:subcontinent:eastern-africa:da5c8d5b264e"
+    },
+    {
+      "id": "framework:subcontinent:eastern-africa:da5c8d5b264e",
+      "level": "subcontinent",
+      "metadata": {
+        "basis": "Stable geographic framework, not dated political membership",
+        "child_count": 2,
+        "framework_status": "atlas-defined",
+        "kind": "geographic",
+        "macro_boundary_review": {
+          "boundary_status": "open",
+          "convention": "East African Rift/Great Lakes and Horn/Nile\u2013northeast African geographic reporting group. Chad is a documented northeast/Sahel transition exception inherited from the source, not claimed as Horn of Africa. Socotra is included by African shelf association; propose Rwanda and Burundi into the East African Great Lakes branch.",
+          "convention_status": "documented",
+          "definition_method": "Explicit stable geographic/archipelago reporting convention; exact membership represented by whole-location parent chains. No political owner field is used.",
+          "descendant_completion": "not implied by own convention/boundary review",
+          "evidence_file": "macro-boundary-decisions",
+          "semantic_status": "open",
+          "source_ids": [
+            "africa",
+            "great-lakes",
+            "chad-geography",
+            "socotra",
+            "east-africa"
+          ]
+        },
+        "review_reasons": [],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "open",
+          "convention_status": "documented",
+          "descendant_completion": "not implied by own convention/boundary review",
+          "evidence": [
+            {
+              "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+              "source_sha256": "c0a8e82e265b250353c937324d631909bd08724c911a9a98ff2fa1fdb6946fbb",
+              "title": "africa",
+              "url": "https://education.nationalgeographic.org/resource/africa-physical-geography/"
+            },
+            {
+              "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+              "source_sha256": "9b9f54d08a556de1e737603593e996a4e9d1e29900a7c28f1bef4af1920edd01",
+              "title": "great-lakes",
+              "url": "https://en.wikipedia.org/wiki/African_Great_Lakes"
+            },
+            {
+              "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+              "source_sha256": "b05c690e36f77c141bd4f4d34fc03f5c96ebf6f9df1c1583ded6b195a0921286",
+              "title": "chad-geography",
+              "url": "https://en.wikipedia.org/wiki/Geography_of_Chad"
+            },
+            {
+              "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+              "source_sha256": "d69b97d5008f2bc79cebc31e55d91557068e15c3417cad500ce6f30b82c6c971",
+              "title": "socotra",
+              "url": "https://en.wikipedia.org/wiki/Socotra"
+            },
+            {
+              "inspected_fact": "The inspected geography documents Rift/Great Lakes and Horn definitions and wider UN memberships; geographic definitions are broader than a single sovereign state.",
+              "source_sha256": "ebce71f0fd910280e31cf8bb3edb2c6dfbcb16c808c4a4a36e135fc2ee3d81e2",
+              "title": "east-africa",
+              "url": "https://en.wikipedia.org/wiki/East_Africa"
+            }
+          ],
+          "rationale": "East African Rift/Great Lakes and Horn/Nile\u2013northeast African geographic reporting group. Chad is a documented northeast/Sahel transition exception inherited from the source, not claimed as Horn of Africa. Socotra is included by African shelf association; propose Rwanda and Burundi into the East African Great Lakes branch.",
+          "remaining_reasons": [
+            "Exact physical segment, pending geographic association, named-island crosswalk or source omission remains open; see macro-boundary-decisions."
+          ],
+          "semantic_status": "open"
+        },
+        "source": "Atlas geographic macro-groups",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19"
+      },
+      "name": "Eastern Africa",
+      "parent_id": "framework:continent:africa:d14fc0b285b2"
+    },
+    {
+      "id": "framework:continent:africa:d14fc0b285b2",
+      "level": "continent",
+      "metadata": {
+        "basis": "Antarctica excluded",
+        "child_count": 7,
+        "framework_status": "atlas-defined",
+        "kind": "geographic",
+        "macro_boundary_review": {
+          "boundary_status": "open",
+          "convention": "Africa mainland west of the Suez isthmus, African shelf islands and the listed Atlantic/Indian archipelago associations. Sinai is Asian. Socotra remains African by physical shelf/continental-fragment association. Azores are proposed for the European North Atlantic association; Madeira, Canaries and Cape Verde remain African. Southern remote-island associations are explicit exceptions to continental land.",
+          "convention_status": "documented",
+          "definition_method": "Explicit stable geographic/archipelago reporting convention; exact membership represented by whole-location parent chains. No political owner field is used.",
+          "descendant_completion": "not implied by own convention/boundary review",
+          "evidence_file": "macro-boundary-decisions",
+          "semantic_status": "open",
+          "source_ids": [
+            "africa",
+            "continental-boundaries",
+            "socotra",
+            "macaronesia",
+            "subantarctic"
+          ]
+        },
+        "review_reasons": [],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "open",
+          "convention_status": "documented",
+          "descendant_completion": "not implied by own convention/boundary review",
+          "evidence": [
+            {
+              "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+              "source_sha256": "c0a8e82e265b250353c937324d631909bd08724c911a9a98ff2fa1fdb6946fbb",
+              "title": "africa",
+              "url": "https://education.nationalgeographic.org/resource/africa-physical-geography/"
+            },
+            {
+              "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+              "source_sha256": "18a3cd875968521f60021bf283297875db419cf724e2e6d7bba03bfecae98a52",
+              "title": "continental-boundaries",
+              "url": "https://en.wikipedia.org/wiki/Boundaries_between_the_continents"
+            },
+            {
+              "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+              "source_sha256": "d69b97d5008f2bc79cebc31e55d91557068e15c3417cad500ce6f30b82c6c971",
+              "title": "socotra",
+              "url": "https://en.wikipedia.org/wiki/Socotra"
+            },
+            {
+              "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+              "source_sha256": "2c168b54cf9f396d0db7fc4aa802a66a7ce28337beb28a4bf011384de90757d3",
+              "title": "macaronesia",
+              "url": "https://en.wikipedia.org/wiki/Macaronesia"
+            },
+            {
+              "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+              "source_sha256": "8c5bd4cc94a22a70dd5b97f5d31004b0bc9ed66271fa310d4b924ebc9a5c4011",
+              "title": "subantarctic",
+              "url": "https://en.wikipedia.org/wiki/Subantarctic"
+            }
+          ],
+          "rationale": "Africa mainland west of the Suez isthmus, African shelf islands and the listed Atlantic/Indian archipelago associations. Sinai is Asian. Socotra remains African by physical shelf/continental-fragment association. Azores are proposed for the European North Atlantic association; Madeira, Canaries and Cape Verde remain African. Southern remote-island associations are explicit exceptions to continental land.",
+          "remaining_reasons": [
+            "Exact physical segment, pending geographic association, named-island crosswalk or source omission remains open; see macro-boundary-decisions."
+          ],
+          "semantic_status": "open"
+        },
+        "source": "Atlas six-continent convention",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19"
+      },
+      "name": "Africa",
+      "parent_id": null
+    }
+  ],
+  "limits": [
+    "Recorded ancestry only; no independent current legal parent or country/sovereignty certification.",
+    "All three Raga physical fragments remain separate existing locations sharing one original atom; no deduplication."
+  ]
+}
