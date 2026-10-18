@@ -65,3 +65,27 @@ test('disk write failure rejects and closes the input instead of returning a par
   try{await reject(source(),pin,/synthetic ENOSPC/);}finally{fs.createWriteStream=original;}
   assert.equal(closed,true);
 });
+
+test('word-plane byte extent must be safe before creating a spool or consuming input',async()=>{
+ let consumed=false;const chunks={async *[Symbol.asyncIterator](){consumed=true;yield Buffer.alloc(0);}};
+ for(const words of [Number.MAX_SAFE_INTEGER,Math.floor(Number.MAX_SAFE_INTEGER/4)+1]){
+  await reject(chunks,{words,decoded_bytes:words*4},/Incomplete shuffled native word count/);
+ }
+ assert.equal(consumed,false);empty();
+});
+
+for(const phase of ['normal close','canonical refusal'])test('word-store '+phase+' attempts spool removal despite descriptor cleanup failure',async()=>{
+ const words=3,pin=await wordPin(words),close=fs.closeSync,remove=fs.rmSync,cleanup=Error('word close sentinel');let removed=false,store;
+ fs.closeSync=fd=>{close(fd);throw cleanup;};fs.rmSync=(file,options)=>{remove(file,options);removed=true;};
+ try{
+  if(phase==='canonical refusal')await assert.rejects(openNativeWordStore(gzipChunks(words),{...pin,decoded_sha256:'0'.repeat(64)},{directory:root}),/Whole native canonical words differ/);
+  else{store=await openNativeWordStore(gzipChunks(words),pin,{directory:root});assert.throws(()=>store.close(),error=>error===cleanup);}
+  assert(removed);empty();
+ }finally{fs.closeSync=close;fs.rmSync=remove;store?.close();}
+});
+test('word-store late producer failure survives spool-removal failure',async()=>{
+ const pin=await wordPin(3),encoded=await collect(gzipChunks(3)),remove=fs.rmSync,primary=Error('word producer sentinel');let removed=false;
+ fs.rmSync=(file,options)=>{remove(file,options);removed=true;throw Error('word removal sentinel');};
+ try{await assert.rejects(openNativeWordStore((async function*(){yield encoded;throw primary;})(),pin,{directory:root}),error=>error===primary);assert(removed);empty();}
+ finally{fs.rmSync=remove;}
+});
