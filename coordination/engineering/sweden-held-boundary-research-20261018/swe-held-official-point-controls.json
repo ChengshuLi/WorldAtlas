@@ -1,0 +1,20 @@
+[
+  {
+    "name": "oslo-control",
+    "url": "https://ws.geonorge.no/kommuneinfo/v1/punkt?nord=59.91&ost=10.75&koordsys=4326",
+    "status": 200,
+    "body": "{\"fylkesnavn\":\"Oslo\",\"fylkesnummer\":\"03\",\"kommunenavn\":\"Oslo\",\"kommunenummer\":\"0301\"}\n"
+  },
+  {
+    "name": "west-context",
+    "url": "https://ws.geonorge.no/kommuneinfo/v1/punkt?nord=64.81462670284787&ost=13.911942585995133&koordsys=4326",
+    "status": 200,
+    "body": "{\"fylkesnavn\":\"Tr\\u00f8ndelag\",\"fylkesnummer\":\"50\",\"kommunenavn\":\"Lierne\",\"kommunenummer\":\"5042\"}\n"
+  },
+  {
+    "name": "east-context",
+    "url": "https://ws.geonorge.no/kommuneinfo/v1/punkt?nord=64.81462670284787&ost=13.931942585995133&koordsys=4326",
+    "status": 404,
+    "body": "<!doctype html>\n<html lang=en>\n<title>404 Not Found</title>\n<h1>Not Found</h1>\n<p>Ingen treff, sjekk parameterene.</p>\n"
+  }
+]
