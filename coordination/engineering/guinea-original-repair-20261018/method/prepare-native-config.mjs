@@ -99,7 +99,7 @@ for (const name of projection.location_parts) {
 }
 need(cohortRows.length === 49625 && new Set(cohortRows.map(row => row.id)).size === 49625,
   'Complete world owner association inventory required');
-const canonicalPaths = ['data/geography/part-23.json','data/geography/part-24.json'];
+const canonicalPaths = ["data/geography/part-9.json"];
 const canonical = canonicalPaths.flatMap(name => json(name).features)
   .filter(feature => feature.properties.reference_owner === 'Guinea');
 const country = cohortRows.filter(row => row.owner === 'Guinea');
@@ -120,5 +120,5 @@ fs.mkdirSync(output);
 for (const [name,value] of Object.entries({'source-evidence-config.json':config,'native-requested-patch.json':patch}))
   fs.writeFileSync(path.join(output,name),JSON.stringify(value)+'\n',{flag:'wx'});
 console.log(JSON.stringify({original_cells:cells,owners:byOwner.size,whole_members:targets.length,
-  complete_domestic_features:264,foreign_negative_families:foreign.whole_bounds_candidate_families,
+  complete_domestic_features:34,foreign_negative_families:foreign.whole_bounds_candidate_families,
   complete_canonical_Guinea_owners:canonical.length,qualified_cells:0}));
