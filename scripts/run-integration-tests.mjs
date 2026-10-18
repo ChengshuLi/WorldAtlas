@@ -222,7 +222,7 @@ const FOCUSED_TEST_FAMILIES = [
   'unchanged-selected-geography', 'visible-gap-eligibility',
   'native-(?:authority-entry|diagnostic-entry|witness-authority|regression-inputs)',
   'physical-source-retention', 'revised-source-native', 'dated-centre-authority', 'full-regression-shards',
-  'sierra-leone-physical-review-controls'
+  'sierra-leone-physical-review-controls', 'held-cell-exception-evidence-controls'
 ];
 const focusedTest = new RegExp('^test/(?:' + FOCUSED_TEST_FAMILIES.join('|') + ')\\.test\\.(?:mjs|py)$');
 // This shared fixture has only focused consumers; reuse their ordinary-file
