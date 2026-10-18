@@ -1,0 +1,168 @@
+{
+  "package_id": "gb-CRI-ADM2--repair-evaluation",
+  "original_interval_read_commit": "dfe57bc8511fea3ee6cc78384ff2e94d19c7cecd",
+  "accepted_selection_commit": "dfe57bc8511fea3ee6cc78384ff2e94d19c7cecd",
+  "original_class_counts": {
+    "land": 4380
+  },
+  "original_cells": 4380,
+  "original_intervals": 2011,
+  "original_owners": 27,
+  "accepted_original_owner_cells": 4376,
+  "proposed_documented_exceptions": 4,
+  "different_owner_intersections": [],
+  "original_key_sha256": "9e903a777e195dbf3a5c8eacae7fcc9c0a1d69cbc431e6917bb8fbf55a41a3da",
+  "accepted_original_key_sha256": "b67c086050b54ac87509ac2a0574424eb1e9692ac7a4f782dad9207bf01e7562",
+  "proposed_exception_key_sha256": "0f0ef698b62a940391de323b26b9b37b17b6f81bdff25dcbfe9c40744262f42c",
+  "original_equals_requested_patch": true,
+  "partition_exhaustive_disjoint": true,
+  "exception_records": [
+    {
+      "y": 124130,
+      "x": 70879,
+      "owner": 15819,
+      "source_feature_indices": [
+        20194,
+        48803
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20194,
+          "family_index": 78,
+          "source_id": "gb:CRI:ADM2:36466004B17277375937001",
+          "ordinal": 7,
+          "owners": [
+            15819
+          ],
+          "name": "Talamanca",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 48803,
+          "family_index": 255,
+          "source_id": "gb:PAN:ADM1:82927092B39502170322116",
+          "ordinal": 0,
+          "owners": [],
+          "name": "Provincia de Bocas del Toro",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 124131,
+      "x": 70879,
+      "owner": 15819,
+      "source_feature_indices": [
+        20194,
+        48803
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20194,
+          "family_index": 78,
+          "source_id": "gb:CRI:ADM2:36466004B17277375937001",
+          "ordinal": 7,
+          "owners": [
+            15819
+          ],
+          "name": "Talamanca",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 48803,
+          "family_index": 255,
+          "source_id": "gb:PAN:ADM1:82927092B39502170322116",
+          "ordinal": 0,
+          "owners": [],
+          "name": "Provincia de Bocas del Toro",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 124132,
+      "x": 70879,
+      "owner": 15819,
+      "source_feature_indices": [
+        20194,
+        48803
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20194,
+          "family_index": 78,
+          "source_id": "gb:CRI:ADM2:36466004B17277375937001",
+          "ordinal": 7,
+          "owners": [
+            15819
+          ],
+          "name": "Talamanca",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 48803,
+          "family_index": 255,
+          "source_id": "gb:PAN:ADM1:82927092B39502170322116",
+          "ordinal": 0,
+          "owners": [],
+          "name": "Provincia de Bocas del Toro",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 124502,
+      "x": 70807,
+      "owner": 15858,
+      "source_feature_indices": [
+        20190,
+        48803
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20190,
+          "family_index": 78,
+          "source_id": "gb:CRI:ADM2:36466004B67962139153797",
+          "ordinal": 3,
+          "owners": [
+            15858
+          ],
+          "name": "Coto Brus",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 48803,
+          "family_index": 255,
+          "source_id": "gb:PAN:ADM1:82927092B39502170322116",
+          "ordinal": 0,
+          "owners": [],
+          "name": "Provincia de Bocas del Toro",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    }
+  ],
+  "new_native_repairs": 0,
+  "accepted_disposition_credit": 0,
+  "status": "proposed documented unresolved outcomes; distinct review and normal acceptance pending",
+  "accepted_selection_unchanged_at": "4d87bbff6dc37dd585dad7be154bec46c35f25e0",
+  "accepted_original_class_counts": {
+    "land": 4376
+  }
+}
