@@ -1,0 +1,1311 @@
+{
+  "current_commit": "ff8a00269dafc6bbdf356e5e131d398860452e32",
+  "whole_hierarchy_sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144",
+  "direct_country_parents": [
+    "framework:province:agneby-tiassa:cce370804805",
+    "framework:province:bafing:ead778d027fb",
+    "framework:province:bagoue:ecdf3981904d",
+    "framework:province:belier:9ebbed6e340f",
+    "framework:province:bere:3f8e20f04f7d",
+    "framework:province:bounkani:088366287746",
+    "framework:province:cavally:81d8c8d629b5",
+    "framework:province:district-autonome-d-abidjan:2c566d8a9c1c",
+    "framework:province:district-autonome-de-yamoussoukro:26159d00436d",
+    "framework:province:folon:5c392416efbc",
+    "framework:province:gbeke:1cd3e1a34294",
+    "framework:province:gbokle:e98c46bbdc52",
+    "framework:province:goh:662e9a7b26b8",
+    "framework:province:gontougo:8e4be2957f19",
+    "framework:province:grands-ponts:606bb702dc3c",
+    "framework:province:guemon:81b4bcedaef4",
+    "framework:province:hambol:e3cf22b7962e",
+    "framework:province:haut-sassandra:f11384fe285d",
+    "framework:province:iffou:501205730f69",
+    "framework:province:indenie-djuablin:74186f29212a",
+    "framework:province:kabadougou:c6e7cdd5fdad",
+    "framework:province:loh-djiboua:8105ffa665b0",
+    "framework:province:marahoue:03fba6f11042",
+    "framework:province:me:766079f20028",
+    "framework:province:moronou:fca95200276a",
+    "framework:province:n-zi:c0c21df719f2",
+    "framework:province:nawa:35801e89d66f",
+    "framework:province:poro:c5d37d19bbed",
+    "framework:province:san-pedro:b7ebd8ddbf9a",
+    "framework:province:sud-comoe:6ab55bded59b",
+    "framework:province:tchologo:2108f9ea868f",
+    "framework:province:tonkpi:a813481be9c8",
+    "framework:province:worodougou:5070151f27ad"
+  ],
+  "complete_recorded_ancestry": [
+    {
+      "id": "framework:area:ivory-coast:86d2b1a53604",
+      "level": "area",
+      "metadata": {
+        "basis": "WGSRPD level 3 geographic area; source calls these botanical countries",
+        "child_count": 33,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "More than 20 provinces: review area scale",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "rename",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "UN M49 actual table uses Côte d’Ivoire; no entity or source-member change is proposed.",
+              "title": "Inspected named reference label",
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/"
+            }
+          ],
+          "rationale": "Normalize reference display label 'Ivory Coast' to 'Côte d’Ivoire' while preserving the stable identity, member footprint and original label as source context. This is a display/reference correction, not an invented historical rename interval.",
+          "remaining_reasons": [
+            "More than 20 provinces: review area scale",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Independently assess this area geographic scope and all 33 direct child units; source-family placement is not semantic approval."
+          ]
+        },
+        "source": "Brummitt (2001), WGSRPD 2nd ed.; TDWG / Royal Botanic Gardens, Kew",
+        "source_url": "https://github.com/tdwg/wgsrpd"
+      },
+      "name": "Côte d’Ivoire",
+      "parent_id": "framework:region:west-tropical-africa:ba6e06497098"
+    },
+    {
+      "id": "framework:continent:africa:d14fc0b285b2",
+      "level": "continent",
+      "metadata": {
+        "basis": "Antarctica excluded",
+        "child_count": 7,
+        "framework_status": "atlas-defined",
+        "kind": "geographic",
+        "macro_boundary_review": {
+          "boundary_status": "open",
+          "convention": "Africa mainland west of the Suez isthmus, African shelf islands and the listed Atlantic/Indian archipelago associations. Sinai is Asian. Socotra remains African by physical shelf/continental-fragment association. Azores are proposed for the European North Atlantic association; Madeira, Canaries and Cape Verde remain African. Southern remote-island associations are explicit exceptions to continental land.",
+          "convention_status": "documented",
+          "definition_method": "Explicit stable geographic/archipelago reporting convention; exact membership represented by whole-location parent chains. No political owner field is used.",
+          "descendant_completion": "not implied by own convention/boundary review",
+          "evidence_file": "macro-boundary-decisions",
+          "semantic_status": "open",
+          "source_ids": [
+            "africa",
+            "continental-boundaries",
+            "socotra",
+            "macaronesia",
+            "subantarctic"
+          ]
+        },
+        "review_reasons": [],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "open",
+          "convention_status": "documented",
+          "descendant_completion": "not implied by own convention/boundary review",
+          "evidence": [
+            {
+              "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+              "source_sha256": "c0a8e82e265b250353c937324d631909bd08724c911a9a98ff2fa1fdb6946fbb",
+              "title": "africa",
+              "url": "https://education.nationalgeographic.org/resource/africa-physical-geography/"
+            },
+            {
+              "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+              "source_sha256": "18a3cd875968521f60021bf283297875db419cf724e2e6d7bba03bfecae98a52",
+              "title": "continental-boundaries",
+              "url": "https://en.wikipedia.org/wiki/Boundaries_between_the_continents"
+            },
+            {
+              "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+              "source_sha256": "d69b97d5008f2bc79cebc31e55d91557068e15c3417cad500ce6f30b82c6c971",
+              "title": "socotra",
+              "url": "https://en.wikipedia.org/wiki/Socotra"
+            },
+            {
+              "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+              "source_sha256": "2c168b54cf9f396d0db7fc4aa802a66a7ce28337beb28a4bf011384de90757d3",
+              "title": "macaronesia",
+              "url": "https://en.wikipedia.org/wiki/Macaronesia"
+            },
+            {
+              "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+              "source_sha256": "8c5bd4cc94a22a70dd5b97f5d31004b0bc9ed66271fa310d4b924ebc9a5c4011",
+              "title": "subantarctic",
+              "url": "https://en.wikipedia.org/wiki/Subantarctic"
+            }
+          ],
+          "rationale": "Africa mainland west of the Suez isthmus, African shelf islands and the listed Atlantic/Indian archipelago associations. Sinai is Asian. Socotra remains African by physical shelf/continental-fragment association. Azores are proposed for the European North Atlantic association; Madeira, Canaries and Cape Verde remain African. Southern remote-island associations are explicit exceptions to continental land.",
+          "remaining_reasons": [
+            "Exact physical segment, pending geographic association, named-island crosswalk or source omission remains open; see macro-boundary-decisions."
+          ],
+          "semantic_status": "open"
+        },
+        "source": "Atlas six-continent convention",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19"
+      },
+      "name": "Africa",
+      "parent_id": null
+    },
+    {
+      "id": "framework:province:agneby-tiassa:cce370804805",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 19,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B52449815511854 named 'Agneby-Tiassa'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain Agneby-Tiassa as a named administrative cluster in the dated reference framework: all 19 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Agneby-Tiassa",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:bafing:ead778d027fb",
+      "level": "province",
+      "metadata": {
+        "basis": "Geographic portion of a source administrative unit; not a new government division",
+        "child_count": 15,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B37750272367318 named 'Bafing'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain Bafing as a named administrative cluster in the dated reference framework: all 14 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Bafing",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:bagoue:ecdf3981904d",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 14,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B26044148659027 named 'Bagoue'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain Bagoue as a named administrative cluster in the dated reference framework: all 14 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Bagoue",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:belier:9ebbed6e340f",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 15,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B5123145245776 named 'Belier'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Inspected every member geometry and source-role record for Belier. Current unit is a proposed named cluster, distinct from political ownership; source correspondence and child semantic completion are evaluated separately.",
+          "remaining_reasons": [
+            "Assess local-cluster tier purpose for the actual 15 member territories; source roles {'Departments': 15}, vintages ['2021'].",
+            "1 member polygons have less than 98% measured agreement with the named original source parent or lack a verified parent feature; exact IDs retained in location_review."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Belier",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:bere:3f8e20f04f7d",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 9,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B43857880322183 named 'Bere'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain Bere as a named administrative cluster in the dated reference framework: all 9 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Bere",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:bounkani:088366287746",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 17,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B90856530326373 named 'Bounkani'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain Bounkani as a named administrative cluster in the dated reference framework: all 17 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Bounkani",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:cavally:81d8c8d629b5",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 17,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B42717034718743 named 'Cavally'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain Cavally as a named administrative cluster in the dated reference framework: all 17 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Cavally",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:district-autonome-d-abidjan:2c566d8a9c1c",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 5,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B76853064397847 named \"District Autonome D'Abidjan\"; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain District Autonome D'Abidjan as a named administrative cluster in the dated reference framework: all 5 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "District Autonome D'Abidjan",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:district-autonome-de-yamoussoukro:26159d00436d",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 4,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B30232425959699 named 'District Autonome De Yamoussoukro'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain District Autonome De Yamoussoukro as a named administrative cluster in the dated reference framework: all 4 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "District Autonome De Yamoussoukro",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:folon:5c392416efbc",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 7,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B69523806833990 named 'Folon'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain Folon as a named administrative cluster in the dated reference framework: all 7 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Folon",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:gbeke:1cd3e1a34294",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 20,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B94469137469464 named 'Gbeke'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain Gbeke as a named administrative cluster in the dated reference framework: all 20 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Gbeke",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:gbokle:e98c46bbdc52",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 9,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B37905317988050 named 'Gbokle'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain Gbokle as a named administrative cluster in the dated reference framework: all 9 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Gbokle",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:goh:662e9a7b26b8",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 16,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B83650084589555 named 'Goh'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain Goh as a named administrative cluster in the dated reference framework: all 16 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Goh",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:gontougo:8e4be2957f19",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 29,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "More than 25 locations: review intermediate geographic groupings",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B5040161076408 named 'Gontougo'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain Gontougo as a named administrative cluster in the dated reference framework: all 29 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Gontougo",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:grands-ponts:606bb702dc3c",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 10,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B83353125268201 named 'Grands Ponts'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain Grands Ponts as a named administrative cluster in the dated reference framework: all 10 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Grands Ponts",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:guemon:81b4bcedaef4",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 23,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B22329502030217 named 'Guemon'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain Guemon as a named administrative cluster in the dated reference framework: all 23 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Guemon",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:hambol:e3cf22b7962e",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 19,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B80955316471767 named 'Hambol'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain Hambol as a named administrative cluster in the dated reference framework: all 19 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Hambol",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:haut-sassandra:f11384fe285d",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 23,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B13622385448205 named 'Haut-Sassandra'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain Haut-Sassandra as a named administrative cluster in the dated reference framework: all 23 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Haut-Sassandra",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:iffou:501205730f69",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 15,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B12556457947993 named 'Iffou'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain Iffou as a named administrative cluster in the dated reference framework: all 15 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Iffou",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:indenie-djuablin:74186f29212a",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 14,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B87987908031267 named 'Indenie-Djuablin'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain Indenie-Djuablin as a named administrative cluster in the dated reference framework: all 14 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Indenie-Djuablin",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:kabadougou:c6e7cdd5fdad",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 15,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B2974603948771 named 'Kabadougou'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Inspected every member geometry and source-role record for Kabadougou. Current unit is a proposed named cluster, distinct from political ownership; source correspondence and child semantic completion are evaluated separately.",
+          "remaining_reasons": [
+            "Assess local-cluster tier purpose for the actual 15 member territories; source roles {'Departments': 15}, vintages ['2021'].",
+            "1 member polygons have less than 98% measured agreement with the named original source parent or lack a verified parent feature; exact IDs retained in location_review."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Kabadougou",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:loh-djiboua:8105ffa665b0",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 17,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B50838995581112 named 'Loh-Djiboua'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain Loh-Djiboua as a named administrative cluster in the dated reference framework: all 17 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Loh-Djiboua",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:marahoue:03fba6f11042",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 18,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B99867209198649 named 'Marahoue'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain Marahoue as a named administrative cluster in the dated reference framework: all 18 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Marahoue",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:me:766079f20028",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 17,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B88194950838049 named 'Me'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain Me as a named administrative cluster in the dated reference framework: all 17 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Me",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:moronou:fca95200276a",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 11,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B53162767921513 named 'Moronou'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain Moronou as a named administrative cluster in the dated reference framework: all 11 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Moronou",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:n-zi:c0c21df719f2",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 10,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B73875625736421 named \"N'Zi\"; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain N'Zi as a named administrative cluster in the dated reference framework: all 10 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "N'Zi",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:nawa:35801e89d66f",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 11,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B56207519899242 named 'Nawa'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain Nawa as a named administrative cluster in the dated reference framework: all 11 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Nawa",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:poro:c5d37d19bbed",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 27,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "More than 25 locations: review intermediate geographic groupings",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B2900878653745 named 'Poro'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain Poro as a named administrative cluster in the dated reference framework: all 27 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Poro",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:san-pedro:b7ebd8ddbf9a",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 11,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B43081365176028 named 'San Pedro'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain San Pedro as a named administrative cluster in the dated reference framework: all 11 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "San Pedro",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:sud-comoe:6ab55bded59b",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 17,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B87421109468433 named 'Sud-Comoe'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain Sud-Comoe as a named administrative cluster in the dated reference framework: all 17 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Sud-Comoe",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:tchologo:2108f9ea868f",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 12,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B18937667882346 named 'Tchologo'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain Tchologo as a named administrative cluster in the dated reference framework: all 12 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Tchologo",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:tonkpi:a813481be9c8",
+      "level": "province",
+      "metadata": {
+        "basis": "Geographic portion of a source administrative unit; not a new government division",
+        "child_count": 33,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "More than 25 locations: review intermediate geographic groupings",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B98350089255378 named 'Tonkpi'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain Tonkpi as a named administrative cluster in the dated reference framework: all 32 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Tonkpi",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:province:worodougou:5070151f27ad",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 11,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "evidence": [
+            {
+              "inspected_fact": "Inspected source feature 98640826B81277132888560 named 'Worodougou'; canonical role \"régions de Côte d'Ivoire\", represented year 2016, license Creative Commons Attribution 4.0 International (CC BY 4.0). This is a source reference, not proof of current or ancient administration.",
+              "title": "Pinned gb:CIV:ADM2 source geometry and metadata",
+              "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson"
+            }
+          ],
+          "rationale": "Retain Worodougou as a named administrative cluster in the dated reference framework: all 11 actual local territories have at least 98% WGS84-area overlap with the inspected original named parent and each exact original local source feature was located. Current-versus-original local footprint differences are separately measured and remain open. Pinned metadata identifies both parent and local roles; this is a sourced administrative purpose, not an ADM-number assignment.",
+          "remaining_reasons": [
+            "Descendant semantic, urban-membership, source-age and neighboring-granularity reviews remain individually open. Retaining this source cluster does not approve its descendants or assert a historical/current administrative boundary."
+          ]
+        },
+        "source": "gb:CIV:ADM2",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Worodougou",
+      "parent_id": "framework:area:ivory-coast:86d2b1a53604"
+    },
+    {
+      "id": "framework:region:west-tropical-africa:ba6e06497098",
+      "level": "region",
+      "metadata": {
+        "basis": "WGSRPD level 2 geographic region; independent of political ownership",
+        "child_count": 15,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "The README defines a botanical geographic recording scheme. Its botanical countries/regions are reference groupings, not automatic atlas tier semantics or political ownership.",
+              "title": "WGSRPD data purpose inspected",
+              "url": "https://raw.githubusercontent.com/tdwg/wgsrpd/master/README.md"
+            },
+            {
+              "inspected_fact": "The actual table distinguishes Northern, Western, Middle, Eastern and Southern Africa and names the member territories; statistical classifications do not alone certify a physical boundary or every local territory.",
+              "title": "UN M49 classification inspected",
+              "url": "https://unstats.un.org/unsd/methodology/m49/overview/"
+            }
+          ],
+          "rationale": "Retain identity pending an explicit macro/area decision. Current source basis: WGSRPD level 2 geographic region; independent of political ownership; 15 adjacent-tier children inventoried. Ownership does not define this parent.",
+          "remaining_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "Independently assess this region geographic scope and all 15 direct child units; source-family placement is not semantic approval."
+          ]
+        },
+        "source": "Brummitt (2001), WGSRPD 2nd ed.; TDWG / Royal Botanic Gardens, Kew",
+        "source_url": "https://github.com/tdwg/wgsrpd"
+      },
+      "name": "West Africa",
+      "parent_id": "framework:subcontinent:western-africa:6280a2b17f17"
+    },
+    {
+      "id": "framework:subcontinent:western-africa:6280a2b17f17",
+      "level": "subcontinent",
+      "metadata": {
+        "basis": "Stable geographic framework, not dated political membership",
+        "child_count": 1,
+        "framework_status": "atlas-defined",
+        "kind": "geographic",
+        "macro_boundary_review": {
+          "boundary_status": "supported-convention",
+          "convention": "Atlantic West African coast and adjoining western Sahel/Sahara reporting zone. The source term tropical in regional names is not a claim that all member land is tropical vegetation. Political owners never determine the hierarchy at a selected year.",
+          "convention_status": "documented",
+          "definition_method": "Explicit stable geographic/archipelago reporting convention; exact membership represented by whole-location parent chains. No political owner field is used.",
+          "descendant_completion": "not implied by own convention/boundary review",
+          "evidence_file": "macro-boundary-decisions",
+          "semantic_status": "open",
+          "source_ids": [
+            "africa",
+            "continental-boundaries",
+            "west-africa"
+          ]
+        },
+        "review_reasons": [],
+        "semantic_review": {
+          "action": "retain",
+          "boundary_status": "supported",
+          "convention_status": "documented",
+          "descendant_completion": "not implied by own convention/boundary review",
+          "evidence": [
+            {
+              "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+              "source_sha256": "c0a8e82e265b250353c937324d631909bd08724c911a9a98ff2fa1fdb6946fbb",
+              "title": "africa",
+              "url": "https://education.nationalgeographic.org/resource/africa-physical-geography/"
+            },
+            {
+              "inspected_fact": "Physical boundary or named archipelago reference inspected; see the specific geographic convention and source-backed assignment measurements.",
+              "source_sha256": "18a3cd875968521f60021bf283297875db419cf724e2e6d7bba03bfecae98a52",
+              "title": "continental-boundaries",
+              "url": "https://en.wikipedia.org/wiki/Boundaries_between_the_continents"
+            },
+            {
+              "inspected_fact": "The inspected geography describes western mainland and Sahel coastal/interior transitions, providing a broad reporting zone rather than one biome.",
+              "source_sha256": "03330ed8fd32d726392868c2aad903df6890d46eff93d6e06a7c62d5111d0857",
+              "title": "west-africa",
+              "url": "https://en.wikipedia.org/wiki/West_Africa"
+            }
+          ],
+          "rationale": "Atlantic West African coast and adjoining western Sahel/Sahara reporting zone. The source term tropical in regional names is not a claim that all member land is tropical vegetation. Political owners never determine the hierarchy at a selected year.",
+          "remaining_reasons": [],
+          "semantic_status": "open"
+        },
+        "source": "Atlas geographic macro-groups",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19"
+      },
+      "name": "Western Africa",
+      "parent_id": "framework:continent:africa:d14fc0b285b2"
+    }
+  ],
+  "limits": [
+    "All33recordedcountryparents/ancestorchain retained; 2016region/district and2021child source roles remain mixed-vintage/semanticallyunapproved.",
+    "No hierarchy/identity change or legal jurisdiction inference."
+  ]
+}
