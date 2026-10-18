@@ -1,0 +1,906 @@
+{
+  "version": 1,
+  "issue": 2462,
+  "claim_url": "https://github.com/ChengshuLi/WorldAtlas/issues/2462",
+  "accepted_commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+  "scope": {
+    "cells": 6633,
+    "land_cells": 6590,
+    "water_cells": 43,
+    "owners": 47,
+    "interval_rows": 2400,
+    "blocks": [
+      29
+    ]
+  },
+  "reused_stage": {
+    "original_path": "americas-20261017/honduras-worker-001/preparation-001/original-stage-inputs.json",
+    "path": "original-stage-inputs.json",
+    "bytes": 570457,
+    "sha256": "f8a641aff9aa318428cc80be9ede24a259cd7b29843039b4d39d6caba86a5aee",
+    "git_blob_oid": "8bd7b54bb6b961cf1b37ad890b92ab5592f88317",
+    "complete_original_atom_members": 47,
+    "consumed_features_equal_complete_original_released_features": 47,
+    "selected_features_unchanged": true
+  },
+  "canonical_parts": [
+    {
+      "commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+      "path": "data/geography/part-9.json",
+      "git_blob_oid": "79a4f0cd17ca9f7007916be8419c2fa986fe7a61"
+    },
+    {
+      "commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+      "path": "data/geography/part-10.json",
+      "git_blob_oid": "84b4cf537b801c7f6d3840173c49b7e4293a139d"
+    }
+  ],
+  "complete_source_context": {
+    "released_primary_features": 298,
+    "requested_primary_members": 47,
+    "other_released_primary_members_preserved": 251,
+    "full_parent_features": 18,
+    "parent_contact_features": 14,
+    "archive_raw_geometry_attribute_records": 299,
+    "archive_only_nueva_frontera_record_ordinal": 297,
+    "archive_custody": "whole-archive-299-record-custody.json"
+  },
+  "original_physical_classes": {
+    "land": 6590,
+    "inland-water": 43
+  },
+  "water_owner_counts": {
+    "21780": 43
+  },
+  "water_owner_identity": {
+    "id": "gb:HND:ADM2:27666195B55788691524887",
+    "index": 21780,
+    "bounds": [
+      67145.00920944444,
+      119337.69143741488,
+      67458.80734666667,
+      119651.33979515299
+    ],
+    "province_id": "framework:province:atlantida:a0c74de57334",
+    "province_index": 689,
+    "name": "Tela",
+    "reference_owner": "Honduras",
+    "source_id": "gb:HND:ADM2",
+    "source_atoms": [
+      "gb:HND:ADM2:27666195B55788691524887"
+    ]
+  },
+  "raw_selected_geometry_observations": [
+    {
+      "target": "gb:HND:ADM2:27666195B12686081930969",
+      "pixelIndex": 21631,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 185,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B1442019449651",
+      "pixelIndex": 21637,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 185,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B15608241098476",
+      "pixelIndex": 21641,
+      "raw_type": "MultiPolygon",
+      "selected_type": "MultiPolygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 182,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B17818037881186",
+      "pixelIndex": 21649,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 2,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 165,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B20969327250579",
+      "pixelIndex": 21658,
+      "raw_type": "MultiPolygon",
+      "selected_type": "MultiPolygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 1,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 184,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B20976347050961",
+      "pixelIndex": 21659,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 180,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B22880782572265",
+      "pixelIndex": 21662,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 161,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B23836678424083",
+      "pixelIndex": 21665,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 4,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 167,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B23999178125718",
+      "pixelIndex": 21666,
+      "raw_type": "MultiPolygon",
+      "selected_type": "MultiPolygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 1,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 178,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B24919955333863",
+      "pixelIndex": 21670,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 2,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 171,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B30019857874789",
+      "pixelIndex": 21692,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 160,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B36872574747509",
+      "pixelIndex": 21709,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 4,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 177,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B37116409669852",
+      "pixelIndex": 21710,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 161,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B3977655085649",
+      "pixelIndex": 21721,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 160,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B42436933929514",
+      "pixelIndex": 21729,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 161,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B42868938000768",
+      "pixelIndex": 21731,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 4,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 164,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B45009798989727",
+      "pixelIndex": 21737,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 2,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 165,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B45825573496458",
+      "pixelIndex": 21739,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 1,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 180,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B49147516395854",
+      "pixelIndex": 21750,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 1,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 185,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B50126770089567",
+      "pixelIndex": 21754,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 2,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 181,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B51489907150139",
+      "pixelIndex": 21760,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 181,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B53241292174391",
+      "pixelIndex": 21772,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 4,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 177,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B55788691524887",
+      "pixelIndex": 21780,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 160,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B56820248384798",
+      "pixelIndex": 21782,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 160,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B58138028057911",
+      "pixelIndex": 21785,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 1,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 180,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B60118725213626",
+      "pixelIndex": 21789,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 1,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 177,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B61075928676863",
+      "pixelIndex": 21794,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 161,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B61672641857391",
+      "pixelIndex": 21795,
+      "raw_type": "MultiPolygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 172,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B6198023019370",
+      "pixelIndex": 21796,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 5,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 165,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B63359869130293",
+      "pixelIndex": 21800,
+      "raw_type": "MultiPolygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 172,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B63914214220022",
+      "pixelIndex": 21804,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 185,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B66203278575702",
+      "pixelIndex": 21813,
+      "raw_type": "MultiPolygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 172,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B66529854122091",
+      "pixelIndex": 21814,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 1,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 181,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B6766243724539",
+      "pixelIndex": 21820,
+      "raw_type": "MultiPolygon",
+      "selected_type": "MultiPolygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 166,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B70228202857481",
+      "pixelIndex": 21828,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 2,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 167,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B70826657437169",
+      "pixelIndex": 21830,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 3,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 177,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B71822643652972",
+      "pixelIndex": 21836,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 1,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 181,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B72562154839723",
+      "pixelIndex": 21838,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 1,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 179,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B73827570061080",
+      "pixelIndex": 21841,
+      "raw_type": "MultiPolygon",
+      "selected_type": "MultiPolygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 182,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B79582673708274",
+      "pixelIndex": 21860,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 159,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B79825163063269",
+      "pixelIndex": 21861,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 2,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 173,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B79832367470433",
+      "pixelIndex": 21862,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 161,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B82036397342560",
+      "pixelIndex": 21871,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 161,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B83736805727119",
+      "pixelIndex": 21875,
+      "raw_type": "MultiPolygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 172,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B94440917052753",
+      "pixelIndex": 21905,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 1,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 159,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B95535378381933",
+      "pixelIndex": 21908,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 164,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    {
+      "target": "gb:HND:ADM2:27666195B98073695243909",
+      "pixelIndex": 21920,
+      "raw_type": "Polygon",
+      "selected_type": "Polygon",
+      "raw_selected_complete_geometry_equal": false,
+      "recorded_topology_or_repair_metadata": {
+        "topology_version": 1,
+        "topology_reconciled": true,
+        "topology_conflicts": 2,
+        "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 179,
+        "evidence_file": "geographic-decisions"
+      }
+    }
+  ],
+  "source_rights": "source-families-and-rights.json",
+  "limits": [
+    "Task-only input preparation; no spatial predicate, union, clipping, repair, source/physical/native producer or scientific qualification.",
+    "All47selected geometries differ from consumed originals;4rawMultiPolygon geometries have selectedPolygon representation. Both whole forms remain unchanged; no restoration, equivalence or physical coverage inferred.",
+    "299source archive versus298simplified release, including archive-onlyNuevaFrontera and releasedLagoYojoa, remains a substantive completeness/vintage issue. No archive name is joined to a canonical owner and no extra target is silently added.",
+    "All43water-class requests remain Tela21780; name/role and queue class do not determine physical or legal water ownership.",
+    "All47semantic reviews remain open; stage membership and government reuse rights do not resolve semantic/geographic/historical authority.",
+    "No foreign family contacts are listed in this original package. That is not geographic absence or permission to reuse the old389-target foreign applicability result forHND.",
+    "Newtarget-relative foreign applicability, fullphysical support, exactnative authority/current-owner-zero/conservation and immutable checkpoint bindings remain pending. No operator is runnable before Main checkpoint."
+  ]
+}

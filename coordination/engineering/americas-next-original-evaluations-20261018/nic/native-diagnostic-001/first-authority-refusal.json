@@ -1,0 +1,24 @@
+{
+  "country": "nic",
+  "phase": "native-authority",
+  "started_at": "2026-10-18T02:58:36.981565+00:00",
+  "finished_at": "2026-10-18T02:59:12.679548+00:00",
+  "elapsed_seconds": 35.698726208,
+  "exit_code": 1,
+  "config": {
+    "version": 1,
+    "source_evidence": {
+      "commit": "8c192828cf81a554176efdead967acb9b05ac79e",
+      "path": "coordination/engineering/americas-next-original-evaluations-20261018/nic/source-evidence-001/source-evidence.json"
+    },
+    "native_patch": {
+      "commit": "e38e3488de52e6ef299157f7dc736398a1b9ca1f",
+      "path": "coordination/engineering/americas-next-original-evaluations-20261018/nic/source-stage-001/original-native-patch.json"
+    }
+  },
+  "products_published": false,
+  "kind": "derived-public-original-authority-refusal",
+  "terminal_error": "Proposed native cells lack unique source-target coverage",
+  "original_private_stderr_sha256": "8be88511f007d8cd4686bdb7c9dca23ce33dde3a8e637037f83d786cc69cdcc2",
+  "note": "Older Git option warnings precede the successful fallback and the actual scientific refusal; original complete logs remain privately retained."
+}
