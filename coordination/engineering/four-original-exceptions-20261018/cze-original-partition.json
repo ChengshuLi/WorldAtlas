@@ -1,0 +1,4688 @@
+{
+  "package_id": "gb-CZE-ADM2--repair-evaluation",
+  "accepted_main": "f833c2d7de6f239955cf592560d559d5377c4c6f",
+  "selected_patch_pin": {
+    "bytes": 30387810,
+    "commit": "160175824051005eb9b2b9990d45b1f94b036126",
+    "git_blob_oid": "b9f5fa1eef498ce3adb38a380405472fdcc72a9a",
+    "mode": "100644",
+    "path": "coordination/engineering/gambia-zimbabwe-selected-delivery-20261018/composition-001/patch.json",
+    "sha256": "4209951c6097f0c992500ed3c3029347cdfee0d338893e785a83676b0afe21b5"
+  },
+  "original_cells": 3934,
+  "original_intervals": 1400,
+  "original_owners": 35,
+  "accepted": 3786,
+  "held": 148,
+  "held_classes": {
+    "land": 148
+  },
+  "held_reasons": {
+    "current_official_boundary_uncertainty": 19,
+    "current_official_district_disagreement": 129
+  },
+  "different_owner_intersections": [],
+  "public_custody_bodies_verified": 24,
+  "all_payload_hashes_verified": 38,
+  "held_records": [
+    {
+      "y": 87738,
+      "x": 141626,
+      "owner": 16101,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20465,
+        20482
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20465,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B34062378650272",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ústecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20482,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B57972685793284",
+          "ordinal": 8,
+          "owners": [
+            16101
+          ],
+          "name": "Děčín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 87738,
+      "x": 141627,
+      "owner": 16101,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20465,
+        20482
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20465,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B34062378650272",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ústecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20482,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B57972685793284",
+          "ordinal": 8,
+          "owners": [
+            16101
+          ],
+          "name": "Děčín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 87739,
+      "x": 141631,
+      "owner": 16101,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20465,
+        20482
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20465,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B34062378650272",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ústecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20482,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B57972685793284",
+          "ordinal": 8,
+          "owners": [
+            16101
+          ],
+          "name": "Děčín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 87739,
+      "x": 141632,
+      "owner": 16101,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20465,
+        20482
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20465,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B34062378650272",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ústecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20482,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B57972685793284",
+          "ordinal": 8,
+          "owners": [
+            16101
+          ],
+          "name": "Děčín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 87750,
+      "x": 142012,
+      "owner": 16086,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20486
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20486,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B3568693077695",
+          "ordinal": 12,
+          "owners": [
+            16086
+          ],
+          "name": "Liberec",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 87753,
+      "x": 142040,
+      "owner": 16086,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20486
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20486,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B3568693077695",
+          "ordinal": 12,
+          "owners": [
+            16086
+          ],
+          "name": "Liberec",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 87753,
+      "x": 142041,
+      "owner": 16086,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20486
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20486,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B3568693077695",
+          "ordinal": 12,
+          "owners": [
+            16086
+          ],
+          "name": "Liberec",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 87753,
+      "x": 142042,
+      "owner": 16086,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20486
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20486,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B3568693077695",
+          "ordinal": 12,
+          "owners": [
+            16086
+          ],
+          "name": "Liberec",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 87853,
+      "x": 141732,
+      "owner": 16101,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20465,
+        20482
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20465,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B34062378650272",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ústecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20482,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B57972685793284",
+          "ordinal": 8,
+          "owners": [
+            16101
+          ],
+          "name": "Děčín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 87858,
+      "x": 141719,
+      "owner": 16101,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20465,
+        20482
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20465,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B34062378650272",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ústecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20482,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B57972685793284",
+          "ordinal": 8,
+          "owners": [
+            16101
+          ],
+          "name": "Děčín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 87890,
+      "x": 141532,
+      "owner": 16101,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20482
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20482,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B57972685793284",
+          "ordinal": 8,
+          "owners": [
+            16101
+          ],
+          "name": "Děčín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 87917,
+      "x": 141932,
+      "owner": 16086,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20486
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20486,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B3568693077695",
+          "ordinal": 12,
+          "owners": [
+            16086
+          ],
+          "name": "Liberec",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 87993,
+      "x": 141310,
+      "owner": 16101,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20465,
+        20482
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20465,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B34062378650272",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ústecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20482,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B57972685793284",
+          "ordinal": 8,
+          "owners": [
+            16101
+          ],
+          "name": "Děčín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 87993,
+      "x": 141311,
+      "owner": 16101,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20465,
+        20482
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20465,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B34062378650272",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ústecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20482,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B57972685793284",
+          "ordinal": 8,
+          "owners": [
+            16101
+          ],
+          "name": "Děčín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 87993,
+      "x": 141312,
+      "owner": 16101,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20465,
+        20482
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20465,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B34062378650272",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ústecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20482,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B57972685793284",
+          "ordinal": 8,
+          "owners": [
+            16101
+          ],
+          "name": "Děčín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 87993,
+      "x": 141313,
+      "owner": 16101,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20465,
+        20482
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20465,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B34062378650272",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ústecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20482,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B57972685793284",
+          "ordinal": 8,
+          "owners": [
+            16101
+          ],
+          "name": "Děčín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 87994,
+      "x": 141310,
+      "owner": 16101,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20465,
+        20482
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20465,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B34062378650272",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ústecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20482,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B57972685793284",
+          "ordinal": 8,
+          "owners": [
+            16101
+          ],
+          "name": "Děčín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 87994,
+      "x": 141311,
+      "owner": 16101,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20465,
+        20482
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20465,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B34062378650272",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ústecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20482,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B57972685793284",
+          "ordinal": 8,
+          "owners": [
+            16101
+          ],
+          "name": "Děčín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 87994,
+      "x": 141312,
+      "owner": 16101,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20465,
+        20482
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20465,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B34062378650272",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ústecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20482,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B57972685793284",
+          "ordinal": 8,
+          "owners": [
+            16101
+          ],
+          "name": "Děčín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 87994,
+      "x": 141313,
+      "owner": 16101,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20465,
+        20482
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20465,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B34062378650272",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ústecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20482,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B57972685793284",
+          "ordinal": 8,
+          "owners": [
+            16101
+          ],
+          "name": "Děčín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 87995,
+      "x": 141310,
+      "owner": 16101,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20465,
+        20482
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20465,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B34062378650272",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ústecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20482,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B57972685793284",
+          "ordinal": 8,
+          "owners": [
+            16101
+          ],
+          "name": "Děčín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 87995,
+      "x": 141311,
+      "owner": 16101,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20465,
+        20482
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20465,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B34062378650272",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ústecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20482,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B57972685793284",
+          "ordinal": 8,
+          "owners": [
+            16101
+          ],
+          "name": "Děčín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 87995,
+      "x": 141312,
+      "owner": 16101,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20465,
+        20482
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20465,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B34062378650272",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ústecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20482,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B57972685793284",
+          "ordinal": 8,
+          "owners": [
+            16101
+          ],
+          "name": "Děčín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88004,
+      "x": 141239,
+      "owner": 16102,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20465,
+        20481
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20465,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B34062378650272",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ústecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20481,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B5960993849333",
+          "ordinal": 7,
+          "owners": [
+            16102
+          ],
+          "name": "Ústí nad Labem",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88005,
+      "x": 141238,
+      "owner": 16102,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20465,
+        20481
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20465,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B34062378650272",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ústecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20481,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B5960993849333",
+          "ordinal": 7,
+          "owners": [
+            16102
+          ],
+          "name": "Ústí nad Labem",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88006,
+      "x": 141237,
+      "owner": 16102,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20465,
+        20481
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20465,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B34062378650272",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ústecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20481,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B5960993849333",
+          "ordinal": 7,
+          "owners": [
+            16102
+          ],
+          "name": "Ústí nad Labem",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88006,
+      "x": 141238,
+      "owner": 16102,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20465,
+        20481
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20465,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B34062378650272",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Ústecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20481,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B5960993849333",
+          "ordinal": 7,
+          "owners": [
+            16102
+          ],
+          "name": "Ústí nad Labem",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88006,
+      "x": 142344,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88006,
+      "x": 142345,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88006,
+      "x": 142346,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88007,
+      "x": 142345,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88007,
+      "x": 142346,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88007,
+      "x": 142347,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88008,
+      "x": 142346,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88008,
+      "x": 142347,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88009,
+      "x": 142346,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88009,
+      "x": 142347,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88010,
+      "x": 142347,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88021,
+      "x": 142299,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88021,
+      "x": 142300,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88021,
+      "x": 142301,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88021,
+      "x": 142302,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88022,
+      "x": 142296,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88022,
+      "x": 142297,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88022,
+      "x": 142298,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88022,
+      "x": 142299,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88022,
+      "x": 142300,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88022,
+      "x": 142301,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88023,
+      "x": 142295,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88023,
+      "x": 142296,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88023,
+      "x": 142297,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88023,
+      "x": 142298,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88023,
+      "x": 142299,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88024,
+      "x": 142294,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88024,
+      "x": 142295,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88024,
+      "x": 142296,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88024,
+      "x": 142297,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88024,
+      "x": 142298,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88025,
+      "x": 142294,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88025,
+      "x": 142295,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88025,
+      "x": 142296,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88026,
+      "x": 142294,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88026,
+      "x": 142295,
+      "owner": 16079,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20466,
+        20488
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20488,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B26779967263881",
+          "ordinal": 14,
+          "owners": [
+            16079
+          ],
+          "name": "Semily",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88058,
+      "x": 142581,
+      "owner": 16096,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20467,
+        20489
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20467,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B56271871797203",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Královéhradecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20489,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B50363024387408",
+          "ordinal": 15,
+          "owners": [
+            16096
+          ],
+          "name": "Trutnov",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88092,
+      "x": 141066,
+      "owner": 16113,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20480
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20480,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B6655388448820",
+          "ordinal": 6,
+          "owners": [
+            16113
+          ],
+          "name": "Teplice",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88093,
+      "x": 141065,
+      "owner": 16113,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20480
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20480,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B6655388448820",
+          "ordinal": 6,
+          "owners": [
+            16113
+          ],
+          "name": "Teplice",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88141,
+      "x": 142652,
+      "owner": 16096,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20467,
+        20489
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20467,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B56271871797203",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Královéhradecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20489,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B50363024387408",
+          "ordinal": 15,
+          "owners": [
+            16096
+          ],
+          "name": "Trutnov",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88442,
+      "x": 143492,
+      "owner": 16128,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20471,
+        20508
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20471,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B12746720248776",
+          "ordinal": 11,
+          "owners": [],
+          "name": "Olomoucký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20508,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B8762756005554",
+          "ordinal": 34,
+          "owners": [
+            16128
+          ],
+          "name": "Jeseník",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88443,
+      "x": 143493,
+      "owner": 16128,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20471,
+        20508
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20471,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B12746720248776",
+          "ordinal": 11,
+          "owners": [],
+          "name": "Olomoucký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20508,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B8762756005554",
+          "ordinal": 34,
+          "owners": [
+            16128
+          ],
+          "name": "Jeseník",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88444,
+      "x": 143495,
+      "owner": 16128,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20471,
+        20508
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20471,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B12746720248776",
+          "ordinal": 11,
+          "owners": [],
+          "name": "Olomoucký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20508,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B8762756005554",
+          "ordinal": 34,
+          "owners": [
+            16128
+          ],
+          "name": "Jeseník",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88445,
+      "x": 143496,
+      "owner": 16128,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20471,
+        20508
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20471,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B12746720248776",
+          "ordinal": 11,
+          "owners": [],
+          "name": "Olomoucký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20508,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B8762756005554",
+          "ordinal": 34,
+          "owners": [
+            16128
+          ],
+          "name": "Jeseník",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88753,
+      "x": 143165,
+      "owner": 16114,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20468,
+        20504
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20468,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B96941531518499",
+          "ordinal": 8,
+          "owners": [],
+          "name": "Pardubický kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20504,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B67004616478789",
+          "ordinal": 30,
+          "owners": [
+            16114
+          ],
+          "name": "Rychnov nad Kněžnou",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88754,
+      "x": 143165,
+      "owner": 16114,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20468,
+        20504
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20468,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B96941531518499",
+          "ordinal": 8,
+          "owners": [],
+          "name": "Pardubický kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20504,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B67004616478789",
+          "ordinal": 30,
+          "owners": [
+            16114
+          ],
+          "name": "Rychnov nad Kněžnou",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88849,
+      "x": 140048,
+      "owner": 16121,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20475
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20475,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B74936445485800",
+          "ordinal": 1,
+          "owners": [
+            16121
+          ],
+          "name": "Cheb",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88873,
+      "x": 144196,
+      "owner": 16066,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20472,
+        20547
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20472,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B23519183895960",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Moravskoslezský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20547,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B13474079400168",
+          "ordinal": 73,
+          "owners": [
+            16066
+          ],
+          "name": "Opava",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88875,
+      "x": 144197,
+      "owner": 16066,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20472,
+        20547
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20472,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B23519183895960",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Moravskoslezský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20547,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B13474079400168",
+          "ordinal": 73,
+          "owners": [
+            16066
+          ],
+          "name": "Opava",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88924,
+      "x": 140146,
+      "owner": 16121,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20464,
+        20475
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20464,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B80386947470046",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Karlovarský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20475,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B74936445485800",
+          "ordinal": 1,
+          "owners": [
+            16121
+          ],
+          "name": "Cheb",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 88925,
+      "x": 140145,
+      "owner": 16121,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20464,
+        20475
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20464,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B80386947470046",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Karlovarský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20475,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B74936445485800",
+          "ordinal": 1,
+          "owners": [
+            16121
+          ],
+          "name": "Cheb",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89259,
+      "x": 140174,
+      "owner": 16098,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20491
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20491,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B55732331485961",
+          "ordinal": 17,
+          "owners": [
+            16098
+          ],
+          "name": "Tachov",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89520,
+      "x": 140297,
+      "owner": 16135,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20463,
+        20492
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20463,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B93878397098511",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Plzeňský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20492,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B92931687173289",
+          "ordinal": 18,
+          "owners": [
+            16135
+          ],
+          "name": "Domažlice",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89574,
+      "x": 140349,
+      "owner": 16135,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20463,
+        20492
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20463,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B93878397098511",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Plzeňský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20492,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B92931687173289",
+          "ordinal": 18,
+          "owners": [
+            16135
+          ],
+          "name": "Domažlice",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89577,
+      "x": 140356,
+      "owner": 16135,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20463,
+        20492
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20463,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B93878397098511",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Plzeňský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20492,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B92931687173289",
+          "ordinal": 18,
+          "owners": [
+            16135
+          ],
+          "name": "Domažlice",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89652,
+      "x": 140514,
+      "owner": 16135,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20463,
+        20492
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20463,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B93878397098511",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Plzeňský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20492,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B92931687173289",
+          "ordinal": 18,
+          "owners": [
+            16135
+          ],
+          "name": "Domažlice",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89653,
+      "x": 140515,
+      "owner": 16135,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20463,
+        20492
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20463,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B93878397098511",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Plzeňský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20492,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B92931687173289",
+          "ordinal": 18,
+          "owners": [
+            16135
+          ],
+          "name": "Domažlice",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89862,
+      "x": 140676,
+      "owner": 16117,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20463,
+        20495
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20463,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B93878397098511",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Plzeňský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20495,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B72008682408189",
+          "ordinal": 21,
+          "owners": [
+            16117
+          ],
+          "name": "Klatovy",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89867,
+      "x": 140675,
+      "owner": 16117,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20463,
+        20495
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20463,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B93878397098511",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Plzeňský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20495,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B72008682408189",
+          "ordinal": 21,
+          "owners": [
+            16117
+          ],
+          "name": "Klatovy",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89868,
+      "x": 140675,
+      "owner": 16117,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20463,
+        20495
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20463,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B93878397098511",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Plzeňský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20495,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B72008682408189",
+          "ordinal": 21,
+          "owners": [
+            16117
+          ],
+          "name": "Klatovy",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89868,
+      "x": 144272,
+      "owner": 16111,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20530
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20530,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B65385651307074",
+          "ordinal": 56,
+          "owners": [
+            16111
+          ],
+          "name": "Vsetín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89869,
+      "x": 144272,
+      "owner": 16111,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20530
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20530,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B65385651307074",
+          "ordinal": 56,
+          "owners": [
+            16111
+          ],
+          "name": "Vsetín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89870,
+      "x": 144272,
+      "owner": 16111,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20530
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20530,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B65385651307074",
+          "ordinal": 56,
+          "owners": [
+            16111
+          ],
+          "name": "Vsetín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89871,
+      "x": 144271,
+      "owner": 16111,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20530
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20530,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B65385651307074",
+          "ordinal": 56,
+          "owners": [
+            16111
+          ],
+          "name": "Vsetín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89871,
+      "x": 144272,
+      "owner": 16111,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20530
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20530,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B65385651307074",
+          "ordinal": 56,
+          "owners": [
+            16111
+          ],
+          "name": "Vsetín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89872,
+      "x": 144271,
+      "owner": 16111,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20530
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20530,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B65385651307074",
+          "ordinal": 56,
+          "owners": [
+            16111
+          ],
+          "name": "Vsetín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89872,
+      "x": 144272,
+      "owner": 16111,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20530
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20530,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B65385651307074",
+          "ordinal": 56,
+          "owners": [
+            16111
+          ],
+          "name": "Vsetín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89873,
+      "x": 144271,
+      "owner": 16111,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20530
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20530,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B65385651307074",
+          "ordinal": 56,
+          "owners": [
+            16111
+          ],
+          "name": "Vsetín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89874,
+      "x": 144271,
+      "owner": 16111,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20530
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20530,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B65385651307074",
+          "ordinal": 56,
+          "owners": [
+            16111
+          ],
+          "name": "Vsetín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89875,
+      "x": 144270,
+      "owner": 16111,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20530
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20530,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B65385651307074",
+          "ordinal": 56,
+          "owners": [
+            16111
+          ],
+          "name": "Vsetín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89875,
+      "x": 144271,
+      "owner": 16111,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20530
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20530,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B65385651307074",
+          "ordinal": 56,
+          "owners": [
+            16111
+          ],
+          "name": "Vsetín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89876,
+      "x": 144270,
+      "owner": 16111,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20530
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20530,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B65385651307074",
+          "ordinal": 56,
+          "owners": [
+            16111
+          ],
+          "name": "Vsetín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89876,
+      "x": 144271,
+      "owner": 16111,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20530
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20530,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B65385651307074",
+          "ordinal": 56,
+          "owners": [
+            16111
+          ],
+          "name": "Vsetín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89877,
+      "x": 144270,
+      "owner": 16111,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20530
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20530,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B65385651307074",
+          "ordinal": 56,
+          "owners": [
+            16111
+          ],
+          "name": "Vsetín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89877,
+      "x": 144271,
+      "owner": 16111,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20530
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20530,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B65385651307074",
+          "ordinal": 56,
+          "owners": [
+            16111
+          ],
+          "name": "Vsetín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89878,
+      "x": 144269,
+      "owner": 16111,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20530
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20530,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B65385651307074",
+          "ordinal": 56,
+          "owners": [
+            16111
+          ],
+          "name": "Vsetín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89878,
+      "x": 144270,
+      "owner": 16111,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20530
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20530,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B65385651307074",
+          "ordinal": 56,
+          "owners": [
+            16111
+          ],
+          "name": "Vsetín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89878,
+      "x": 144271,
+      "owner": 16111,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20530
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20530,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B65385651307074",
+          "ordinal": 56,
+          "owners": [
+            16111
+          ],
+          "name": "Vsetín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89879,
+      "x": 144269,
+      "owner": 16111,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20530
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20530,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B65385651307074",
+          "ordinal": 56,
+          "owners": [
+            16111
+          ],
+          "name": "Vsetín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89879,
+      "x": 144270,
+      "owner": 16111,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20530
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20530,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B65385651307074",
+          "ordinal": 56,
+          "owners": [
+            16111
+          ],
+          "name": "Vsetín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89879,
+      "x": 144271,
+      "owner": 16111,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20530
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20530,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B65385651307074",
+          "ordinal": 56,
+          "owners": [
+            16111
+          ],
+          "name": "Vsetín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89880,
+      "x": 144269,
+      "owner": 16111,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20530
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20530,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B65385651307074",
+          "ordinal": 56,
+          "owners": [
+            16111
+          ],
+          "name": "Vsetín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89880,
+      "x": 144270,
+      "owner": 16111,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20530
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20530,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B65385651307074",
+          "ordinal": 56,
+          "owners": [
+            16111
+          ],
+          "name": "Vsetín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89881,
+      "x": 144269,
+      "owner": 16111,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20530
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20530,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B65385651307074",
+          "ordinal": 56,
+          "owners": [
+            16111
+          ],
+          "name": "Vsetín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89881,
+      "x": 144270,
+      "owner": 16111,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20530
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20530,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B65385651307074",
+          "ordinal": 56,
+          "owners": [
+            16111
+          ],
+          "name": "Vsetín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89882,
+      "x": 144268,
+      "owner": 16111,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20530
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20530,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B65385651307074",
+          "ordinal": 56,
+          "owners": [
+            16111
+          ],
+          "name": "Vsetín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 89990,
+      "x": 140839,
+      "owner": 16117,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20463,
+        20495
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20463,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B93878397098511",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Plzeňský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20495,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B72008682408189",
+          "ordinal": 21,
+          "owners": [
+            16117
+          ],
+          "name": "Klatovy",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90007,
+      "x": 144146,
+      "owner": 16112,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20533
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20533,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B65826634483108",
+          "ordinal": 59,
+          "owners": [
+            16112
+          ],
+          "name": "Zlín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90013,
+      "x": 144130,
+      "owner": 16069,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20531
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20531,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B14436380449594",
+          "ordinal": 57,
+          "owners": [
+            16069
+          ],
+          "name": "Uherské Hradiště",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90014,
+      "x": 144130,
+      "owner": 16069,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20531
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20531,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B14436380449594",
+          "ordinal": 57,
+          "owners": [
+            16069
+          ],
+          "name": "Uherské Hradiště",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90015,
+      "x": 144129,
+      "owner": 16069,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20531
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20531,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B14436380449594",
+          "ordinal": 57,
+          "owners": [
+            16069
+          ],
+          "name": "Uherské Hradiště",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90015,
+      "x": 144130,
+      "owner": 16069,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20473,
+        20531
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20473,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B87463303438563",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zlínský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20531,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B14436380449594",
+          "ordinal": 57,
+          "owners": [
+            16069
+          ],
+          "name": "Uherské Hradiště",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90064,
+      "x": 140950,
+      "owner": 16084,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20463,
+        20520
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20463,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B93878397098511",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Plzeňský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20520,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B34464963037986",
+          "ordinal": 46,
+          "owners": [
+            16084
+          ],
+          "name": "Prachatice",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90066,
+      "x": 140951,
+      "owner": 16084,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20463,
+        20520
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20463,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B93878397098511",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Plzeňský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20520,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B34464963037986",
+          "ordinal": 46,
+          "owners": [
+            16084
+          ],
+          "name": "Prachatice",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90066,
+      "x": 140960,
+      "owner": 16084,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20462,
+        20520
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20462,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B46425968394697",
+          "ordinal": 2,
+          "owners": [],
+          "name": "Jihočeský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20520,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B34464963037986",
+          "ordinal": 46,
+          "owners": [
+            16084
+          ],
+          "name": "Prachatice",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90066,
+      "x": 140970,
+      "owner": 16084,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20462,
+        20520
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20462,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B46425968394697",
+          "ordinal": 2,
+          "owners": [],
+          "name": "Jihočeský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20520,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B34464963037986",
+          "ordinal": 46,
+          "owners": [
+            16084
+          ],
+          "name": "Prachatice",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90172,
+      "x": 142574,
+      "owner": 16136,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20537
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20537,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B95695201424764",
+          "ordinal": 63,
+          "owners": [
+            16136
+          ],
+          "name": "Znojmo",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90190,
+      "x": 143666,
+      "owner": 16124,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20470,
+        20536
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20470,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B81289681513643",
+          "ordinal": 10,
+          "owners": [],
+          "name": "Jihomoravský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20536,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B82111344983201",
+          "ordinal": 62,
+          "owners": [
+            16124
+          ],
+          "name": "Hodonín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90261,
+      "x": 143524,
+      "owner": 16124,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20470,
+        20536
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20470,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B81289681513643",
+          "ordinal": 10,
+          "owners": [],
+          "name": "Jihomoravský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20536,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B82111344983201",
+          "ordinal": 62,
+          "owners": [
+            16124
+          ],
+          "name": "Hodonín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90261,
+      "x": 143525,
+      "owner": 16124,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20470,
+        20536
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20470,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B81289681513643",
+          "ordinal": 10,
+          "owners": [],
+          "name": "Jihomoravský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20536,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B82111344983201",
+          "ordinal": 62,
+          "owners": [
+            16124
+          ],
+          "name": "Hodonín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90262,
+      "x": 143523,
+      "owner": 16124,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20470,
+        20536
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20470,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B81289681513643",
+          "ordinal": 10,
+          "owners": [],
+          "name": "Jihomoravský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20536,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B82111344983201",
+          "ordinal": 62,
+          "owners": [
+            16124
+          ],
+          "name": "Hodonín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90262,
+      "x": 143524,
+      "owner": 16124,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20470,
+        20536
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20470,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B81289681513643",
+          "ordinal": 10,
+          "owners": [],
+          "name": "Jihomoravský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20536,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B82111344983201",
+          "ordinal": 62,
+          "owners": [
+            16124
+          ],
+          "name": "Hodonín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90262,
+      "x": 143525,
+      "owner": 16124,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20470,
+        20536
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20470,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B81289681513643",
+          "ordinal": 10,
+          "owners": [],
+          "name": "Jihomoravský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20536,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B82111344983201",
+          "ordinal": 62,
+          "owners": [
+            16124
+          ],
+          "name": "Hodonín",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90286,
+      "x": 141937,
+      "owner": 16115,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20462,
+        20523
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20462,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B46425968394697",
+          "ordinal": 2,
+          "owners": [],
+          "name": "Jihočeský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20523,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B67285149942805",
+          "ordinal": 49,
+          "owners": [
+            16115
+          ],
+          "name": "Jindřichův Hradec",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90287,
+      "x": 141937,
+      "owner": 16115,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20462,
+        20523
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20462,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B46425968394697",
+          "ordinal": 2,
+          "owners": [],
+          "name": "Jihočeský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20523,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B67285149942805",
+          "ordinal": 49,
+          "owners": [
+            16115
+          ],
+          "name": "Jindřichův Hradec",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90287,
+      "x": 141938,
+      "owner": 16115,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20462,
+        20523
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20462,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B46425968394697",
+          "ordinal": 2,
+          "owners": [],
+          "name": "Jihočeský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20523,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B67285149942805",
+          "ordinal": 49,
+          "owners": [
+            16115
+          ],
+          "name": "Jindřichův Hradec",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90364,
+      "x": 141817,
+      "owner": 16119,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20462,
+        20518
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20462,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B46425968394697",
+          "ordinal": 2,
+          "owners": [],
+          "name": "Jihočeský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20518,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B73132069516203",
+          "ordinal": 44,
+          "owners": [
+            16119
+          ],
+          "name": "České Budějovice",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90381,
+      "x": 141807,
+      "owner": 16119,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20462,
+        20518
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20462,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B46425968394697",
+          "ordinal": 2,
+          "owners": [],
+          "name": "Jihočeský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20518,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B73132069516203",
+          "ordinal": 44,
+          "owners": [
+            16119
+          ],
+          "name": "České Budějovice",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90382,
+      "x": 141807,
+      "owner": 16119,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20462,
+        20518
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20462,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B46425968394697",
+          "ordinal": 2,
+          "owners": [],
+          "name": "Jihočeský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20518,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B73132069516203",
+          "ordinal": 44,
+          "owners": [
+            16119
+          ],
+          "name": "České Budějovice",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90383,
+      "x": 141807,
+      "owner": 16119,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20462,
+        20518
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20462,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B46425968394697",
+          "ordinal": 2,
+          "owners": [],
+          "name": "Jihočeský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20518,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B73132069516203",
+          "ordinal": 44,
+          "owners": [
+            16119
+          ],
+          "name": "České Budějovice",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90384,
+      "x": 141807,
+      "owner": 16119,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20462,
+        20518
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20462,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B46425968394697",
+          "ordinal": 2,
+          "owners": [],
+          "name": "Jihočeský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20518,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B73132069516203",
+          "ordinal": 44,
+          "owners": [
+            16119
+          ],
+          "name": "České Budějovice",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90385,
+      "x": 141807,
+      "owner": 16119,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20462,
+        20518
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20462,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B46425968394697",
+          "ordinal": 2,
+          "owners": [],
+          "name": "Jihočeský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20518,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B73132069516203",
+          "ordinal": 44,
+          "owners": [
+            16119
+          ],
+          "name": "České Budějovice",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90386,
+      "x": 141807,
+      "owner": 16119,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20462,
+        20518
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20462,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B46425968394697",
+          "ordinal": 2,
+          "owners": [],
+          "name": "Jihočeský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20518,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B73132069516203",
+          "ordinal": 44,
+          "owners": [
+            16119
+          ],
+          "name": "České Budějovice",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90387,
+      "x": 141807,
+      "owner": 16119,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20462,
+        20518
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20462,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B46425968394697",
+          "ordinal": 2,
+          "owners": [],
+          "name": "Jihočeský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20518,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B73132069516203",
+          "ordinal": 44,
+          "owners": [
+            16119
+          ],
+          "name": "České Budějovice",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90391,
+      "x": 141806,
+      "owner": 16119,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20462,
+        20518
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20462,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B46425968394697",
+          "ordinal": 2,
+          "owners": [],
+          "name": "Jihočeský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20518,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B73132069516203",
+          "ordinal": 44,
+          "owners": [
+            16119
+          ],
+          "name": "České Budějovice",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90392,
+      "x": 141805,
+      "owner": 16119,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20462,
+        20518
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20462,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B46425968394697",
+          "ordinal": 2,
+          "owners": [],
+          "name": "Jihočeský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20518,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B73132069516203",
+          "ordinal": 44,
+          "owners": [
+            16119
+          ],
+          "name": "České Budějovice",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90392,
+      "x": 141806,
+      "owner": 16119,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20518
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20518,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B73132069516203",
+          "ordinal": 44,
+          "owners": [
+            16119
+          ],
+          "name": "České Budějovice",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90393,
+      "x": 141805,
+      "owner": 16119,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20462,
+        20518
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20462,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B46425968394697",
+          "ordinal": 2,
+          "owners": [],
+          "name": "Jihočeský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20518,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B73132069516203",
+          "ordinal": 44,
+          "owners": [
+            16119
+          ],
+          "name": "České Budějovice",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90394,
+      "x": 141804,
+      "owner": 16119,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20462,
+        20518
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20462,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B46425968394697",
+          "ordinal": 2,
+          "owners": [],
+          "name": "Jihočeský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20518,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B73132069516203",
+          "ordinal": 44,
+          "owners": [
+            16119
+          ],
+          "name": "České Budějovice",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90394,
+      "x": 141805,
+      "owner": 16119,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20518
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20518,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B73132069516203",
+          "ordinal": 44,
+          "owners": [
+            16119
+          ],
+          "name": "České Budějovice",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    },
+    {
+      "y": 90424,
+      "x": 141802,
+      "owner": 16073,
+      "physical_class": "land",
+      "source_feature_indices": [
+        20522
+      ],
+      "original_source_contacts": [
+        {
+          "source_index": 20522,
+          "family_index": 83,
+          "source_id": "gb:CZE:ADM2:57006924B21154438881940",
+          "ordinal": 48,
+          "owners": [
+            16073
+          ],
+          "name": "Český Krumlov",
+          "geometry_status": "raw-native-supported"
+        }
+      ]
+    }
+  ],
+  "new_accepted_credit": 0,
+  "locator_erratum": {
+    "supplied": "source-evidence-001/source-evidence-config.json",
+    "verified": "native-inputs-001/source-evidence-config.json",
+    "blob": "47e9a25af35b12c3aef0874b7348df2f86e753d5"
+  },
+  "review_status": "independent proposed-disposition review complete with explicit corrected config locator; no acceptance until publication/integration",
+  "official_comparison_questions_match": {
+    "near_current_official_boundary_5m": 19,
+    "outside_current_official_name_candidate": 129
+  },
+  "disposition_status": "proposed documented-unresolved original-scope exceptions; normal reviewed integration pending",
+  "new_native_repairs": 0
+}
