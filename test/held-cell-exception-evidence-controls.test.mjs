@@ -17,6 +17,10 @@ function packetProjection(partition,pins,reproduction){
   return {
     kind:'held-cell-exception-controls-fixture',
     status:'observations_only; no acceptance or repair credit',
+    source_commits:[...new Set([pins.liberia.source_evidence,pins.liberia.physical_whole_target_support,
+      pins.liberia.native_latitudes,...pins.liberia.original_negative_families.map(item=>item.part),
+      pins.egypt.source_evidence,...Object.values(pins.egypt.whole_original_family_payloads).flatMap(item=>item.parts)
+    ].map(pin=>pin.commit))].sort(),
     scope:{
       original_keys:partition.scope.original_keys,
       accepted:partition.scope.counts.accepted,
@@ -45,6 +49,10 @@ function packetProjection(partition,pins,reproduction){
 function verifyFixture(partition,pins,reproduction,fixture){
   assert.deepEqual(packetProjection(partition,pins,reproduction),fixture);
   assert.equal(pins.exact_scanner.bytes,50250);
+  const reproducer=fs.readFileSync(packet+'reproduce-native-centres.mjs');
+  const reproducerPin=pins.reproduction_outputs['reproduce-native-centres.mjs'];
+  assert.equal(reproducer.length,reproducerPin.bytes);
+  assert.equal(sha256(reproducer),reproducerPin.sha256);
   const scanner=fs.readFileSync(packet+'native-grid-pinned.mjs');
   assert.equal(scanner.length,pins.exact_scanner.bytes);
   assert.equal(sha256(scanner),pins.exact_scanner.sha256);
@@ -89,11 +97,12 @@ test('packet controls reject altered owners, class/hold labels, partitions, cont
     p=>p.scope.package_partitions[1].original_physical_class_counts.land--,
     r=>r.queries[0].hits.push({y:126219,x:124938,kind:'interior'}),
     r=>r.queries[0].label='LBR original positive Buu-Yao target',
-    p=>p.exact_scanner.sha256='0'.repeat(64)
+    p=>p.exact_scanner.sha256='0'.repeat(64),
+    p=>p.liberia.source_evidence.commit='0'.repeat(40)
   ];
   for(let i=0;i<cases.length;i++){
     const p=structuredClone(partition),pin=structuredClone(pins),r=structuredClone(reproduction);
-    if(i<5)cases[i](p); else if(i<7)cases[i](r); else cases[i](pin);
+    if(i<5)cases[i](p); else if(i<7)cases[i](r); else if(i===7)cases[i](pin); else cases[i](pin);
     assert.throws(()=>verifyFixture(p,pin,r,fixture));
   }
 });
