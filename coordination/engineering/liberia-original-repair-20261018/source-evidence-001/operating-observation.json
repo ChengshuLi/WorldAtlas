@@ -1,0 +1,22 @@
+{
+  "tag": "source-evidence-001",
+  "cwd": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0f3d792478426ce8bbf8f8646036980b6da5f3b0837c8945e0ba933be6452e8a/work",
+  "command": [
+    "/usr/bin/time",
+    "-l",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "source-evidence",
+    "coordination/engineering/liberia-original-repair-20261018/native-inputs-001/source-evidence-config.json",
+    "coordination/engineering/liberia-original-repair-20261018/source-evidence-001"
+  ],
+  "timeout_seconds": 300,
+  "config_commit": "3d82037a1dfb1f923814614789f1ad60261238ab",
+  "full_original_cells": 2026,
+  "whole_requested_members": 47,
+  "started_at": "2026-10-18T02:39:18.007016+00:00",
+  "no_custom_memory_policy_fields": true,
+  "exit_code": 0,
+  "elapsed_seconds": 11.969164333,
+  "finished_at": "2026-10-18T02:39:29.978141+00:00"
+}
