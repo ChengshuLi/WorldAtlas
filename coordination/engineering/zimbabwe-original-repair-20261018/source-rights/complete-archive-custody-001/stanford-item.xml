@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<publicObject id="druid:cs051py0596" published="2026-07-23T19:39:23Z" publishVersion="cocina-models/0.129.0">
+  <identityMetadata>
+    <objectType>item</objectType>
+    <objectLabel>Constituencies, Namibia, 2007</objectLabel>
+    <sourceId source="sul">branner:MapLib_NAM.shp.xml</sourceId>
+  </identityMetadata>
+  <contentMetadata objectId="druid:cs051py0596" type="geo">
+    <resource id="cocina-fileSet-cs051py0596-cs051py0596_1" sequence="1" type="object">
+      <label>Object</label>
+      <file id="NAM.dbf" mimetype="application/vnd.dbf" size="45082" publish="yes" shelve="yes" preserve="yes" role="master">
+        <checksum type="sha1">99bc7e157ba9dd05fff3573fed3a9da6257e1e62</checksum>
+        <checksum type="md5">28a13b5cb32991ae35af3ac51c9dc94d</checksum>
+      </file>
+      <file id="NAM.mid" mimetype="text/plain" size="13106" publish="yes" shelve="yes" preserve="yes" role="master">
+        <checksum type="sha1">98211a156c66472c693ea29265931966c0886798</checksum>
+        <checksum type="md5">89ccb05d4dbca130b3d2351b162ef9c1</checksum>
+      </file>
+      <file id="NAM.mif" mimetype="text/plain" size="952987" publish="yes" shelve="yes" preserve="yes" role="master">
+        <checksum type="sha1">2b6e0be998ea778900b722d4fd3aa8c1c6eb3fb5</checksum>
+        <checksum type="md5">ca050f95c63c49e0ddbc97464900d681</checksum>
+      </file>
+      <file id="NAM.prj" mimetype="text/plain" size="145" publish="yes" shelve="yes" preserve="yes" role="master">
+        <checksum type="sha1">86813d76269ab91b40ed3e67a86745bd933124e0</checksum>
+        <checksum type="md5">c742bee3d4edfc2948a2ad08de1790a5</checksum>
+      </file>
+      <file id="NAM.shp" mimetype="application/vnd.shp" size="1087720" publish="yes" shelve="yes" preserve="yes" role="master">
+        <checksum type="sha1">4db4a15cd4f794e978fde64666ca896e2cf06cc2</checksum>
+        <checksum type="md5">2eb3b0b875f1f515e50c90ddbb6ef1e6</checksum>
+      </file>
+      <file id="NAM.shp.xml" mimetype="application/xml" size="45991" publish="yes" shelve="yes" preserve="yes" role="master">
+        <checksum type="sha1">78b3c63330c5df114a59f516fa5465c2f1923996</checksum>
+        <checksum type="md5">407ecc802cfaab0301d239607b53dcc4</checksum>
+      </file>
+      <file id="NAM.shx" mimetype="application/vnd.shx" size="972" publish="yes" shelve="yes" preserve="yes" role="master">
+        <checksum type="sha1">27d18da128e8602109745784e0a399ad57724e1e</checksum>
+        <checksum type="md5">9a57ec8223123bd4eb6c81a6f3aae83f</checksum>
+      </file>
+      <file id="NAM-iso19139.xml" mimetype="application/xml" size="24104" publish="yes" shelve="yes" preserve="yes" role="derivative">
+        <checksum type="sha1">a213e1627b67b2a25047cd5c4adef2dbe8db89c8</checksum>
+        <checksum type="md5">a36eee9fbe37f59d413a3a521e8b7b51</checksum>
+      </file>
+      <file id="NAM-iso19110.xml" mimetype="application/xml" size="15026" publish="yes" shelve="yes" preserve="yes" role="derivative">
+        <checksum type="sha1">dd6b8076a4bfc448262b70bd481545734d524193</checksum>
+        <checksum type="md5">b9841415665f914d3f99c4d1cfdd76c0</checksum>
+      </file>
+      <file id="NAM.fgb" mimetype="application/vnd.fgb" size="1112824" publish="yes" shelve="yes" preserve="no" role="derivative">
+        <checksum type="sha1">b1d5b69ce1b2e271610529c7b6c9e9ed3c1b4121</checksum>
+        <checksum type="md5">7131114eaa55081d0d0ddcf2d75dc63d</checksum>
+      </file>
+      <file id="NAM.pmtiles" mimetype="application/vnd.pmtiles" size="312900" publish="yes" shelve="yes" preserve="no" role="derivative">
+        <checksum type="sha1">a90f481c1b6ad3f44fc6863f08f695578c990339</checksum>
+        <checksum type="md5">bcbda466ea229883d5f17ec008627983</checksum>
+      </file>
+      <file id="NAM.jp2" mimetype="image/jp2" size="18947" publish="yes" shelve="yes" preserve="no" role="thumbnail">
+        <checksum type="sha1">b7c5a8fc36e736b80fd54980ae2e53d4c91a107a</checksum>
+        <checksum type="md5">e03e6c804bae9ce61a36ea3e31dd7c0d</checksum>
+        <imageData height="512" width="512"/>
+      </file>
+    </resource>
+  </contentMetadata>
+  <rightsMetadata>
+    <access type="discover">
+      <machine>
+        <world/>
+      </machine>
+    </access>
+    <access type="read">
+      <machine>
+        <world/>
+      </machine>
+    </access>
+    <use>
+      <human type="useAndReproduction">This item is in the public domain.  There are no restrictions on use.</human>
+      <license/>
+    </use>
+    <copyright>
+      <human>This work is in the Public Domain, meaning that it is not subject to copyright.</human>
+    </copyright>
+  </rightsMetadata>
+  <rdf:RDF xmlns:fedora="info:fedora/fedora-system:def/relations-external#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <rdf:Description rdf:about="info:fedora/druid:cs051py0596">
+      <fedora:isMemberOfCollection rdf:resource="info:fedora/druid:cf420zs7030"/>
+    </rdf:Description>
+  </rdf:RDF>
+  <mods xmlns="http://www.loc.gov/mods/v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink" version="3.7" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-7.xsd">
+    <titleInfo>
+      <title>Constituencies, Namibia, 2007</title>
+    </titleInfo>
+    <name type="corporate">
+      <namePart>Map Maker Ltd.</namePart>
+      <role>
+        <roleTerm authority="marcrelator" type="text">creator</roleTerm>
+      </role>
+    </name>
+    <genre valueURI="http://id.loc.gov/authorities/genreForms/gf2011026297" authority="lcgft">Geospatial data</genre>
+    <genre valueURI="http://rdvocab.info/termList/RDAContentType/1001" authority="rdacontent">cartographic dataset</genre>
+    <genre>Dataset</genre>
+    <typeOfResource>cartographic</typeOfResource>
+    <typeOfResource>software, multimedia</typeOfResource>
+    <physicalDescription>
+      <form>Shapefile</form>
+      <digitalOrigin>born digital</digitalOrigin>
+    </physicalDescription>
+    <language>
+      <languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+    </language>
+    <abstract displayLabel="Abstract">This polygon shapefile contains constituency boundaries for Namibia as of January 2007. These are the level 2 administrative units (ADM2) for Namibia. This layer is part of the Map Library dataset containing line and polygon boundaries for individual countries on the African continent.</abstract>
+    <note displayLabel="Purpose" type="other">The Map Library is a project of the UK charity “The Map Maker Trust." It aims to make public domain mapping data more readily available for development in all kinds of fields, from health care to urban management, from de-mining to environmental protection.</note>
+    <subject authority="geonames">
+      <geographic authority="geonames" authorityURI="http://www.geonames.org/ontology#" valueURI="http://sws.geonames.org/3355338/">Namibia</geographic>
+    </subject>
+    <subject authority="lcsh">
+      <topic authority="lcsh" authorityURI="http://id.loc.gov/authorities/subjects.html">Administrative and political divisions</topic>
+    </subject>
+    <subject authority="ISO19115TopicCategory">
+      <topic authority="ISO19115TopicCategory" authorityURI="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_TopicCategoryCode">Boundaries</topic>
+    </subject>
+    <subject>
+      <temporal encoding="w3cdtf">2007</temporal>
+    </subject>
+    <subject>
+      <cartographics>
+        <projection>EPSG::4326</projection>
+        <coordinates>E 11°42ʹ56ʺ--E 25°15ʹ24ʺ/S 16°57ʹ36ʺ--S 28°58ʹ10ʺ</coordinates>
+      </cartographics>
+    </subject>
+    <originInfo>
+      <dateIssued encoding="w3cdtf" keyDate="yes">2007</dateIssued>
+      <publisher>Map Maker Ltd.</publisher>
+    </originInfo>
+    <location>
+      <url usage="primary display">https://purl.stanford.edu/cs051py0596</url>
+    </location>
+    <note type="contact" displayLabel="Contact">info@mapmaker.com</note>
+    <recordInfo>
+      <languageOfCataloging>
+        <languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+      </languageOfCataloging>
+      <recordContentSource>Stanford</recordContentSource>
+      <recordCreationDate encoding="w3cdtf">2015-11-12</recordCreationDate>
+      <recordIdentifier>edu.stanford.purl:cs051py0596</recordIdentifier>
+    </recordInfo>
+    <extension displayLabel="geo">
+      <rdf:RDF xmlns:gml="http://www.opengis.net/gml/3.2/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+        <rdf:Description rdf:about="http://purl.stanford.edu/cs051py0596">
+          <dc:format>application/x-esri-shapefile; format=Shapefile</dc:format>
+          <dc:type>Dataset#Polygon</dc:type>
+          <gml:boundedBy>
+            <gml:Envelope gml:srsName="EPSG:4326">
+              <gml:lowerCorner>11.715630000006058 -28.969459999992978</gml:lowerCorner>
+              <gml:upperCorner>25.25669999999809 -16.959889999998268</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+        </rdf:Description>
+      </rdf:RDF>
+    </extension>
+    <relatedItem type="host">
+      <titleInfo>
+        <title>The Map Library</title>
+      </titleInfo>
+      <location>
+        <url>https://purl.stanford.edu/cf420zs7030</url>
+      </location>
+      <typeOfResource collection="yes"/>
+    </relatedItem>
+    <accessCondition type="useAndReproduction">This item is in the public domain.  There are no restrictions on use.</accessCondition>
+    <accessCondition type="copyright">This work is in the Public Domain, meaning that it is not subject to copyright.</accessCondition>
+  </mods>
+  <thumb>cs051py0596/NAM.jp2</thumb>
+</publicObject>
