@@ -1,0 +1,505 @@
+{
+  "package_id": "gb-GTM-ADM2--repair-evaluation",
+  "original_interval_read_commit": "32d819ddc9333ff025584665665c963822dfcead",
+  "accepted_selection_commit": "dfe57bc8511fea3ee6cc78384ff2e94d19c7cecd",
+  "original_class_counts": {
+    "inland-water": 395,
+    "land": 1121
+  },
+  "original_cells": 1516,
+  "original_intervals": 830,
+  "original_owners": 30,
+  "accepted_original_owner_cells": 1503,
+  "proposed_documented_exceptions": 13,
+  "different_owner_intersections": [],
+  "original_key_sha256": "2c1c9a1ab80eda1bac582f808291efe0f9d4ac1c281eecaf6c22c73f9ec206a1",
+  "accepted_original_key_sha256": "4e237f4c90133a8a25da7273f6417ebac856ce848ef5a946426686f9751a747a",
+  "proposed_exception_key_sha256": "d086bada8167eaf85bf0d0753ba0120a66a861ef5608534ae50bef4e41e2a97b",
+  "original_equals_requested_patch": true,
+  "partition_exhaustive_disjoint": true,
+  "exception_records": [
+    {
+      "y": 119717,
+      "x": 66562,
+      "owner": 21588,
+      "source_feature_indices": [
+        34786,
+        35076
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 34786,
+          "family_index": 140,
+          "source_id": "gb:GTM:ADM2:79465075B97649712901036",
+          "ordinal": 124,
+          "owners": [
+            21588
+          ],
+          "name": "Morales",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 35076,
+          "family_index": 144,
+          "source_id": "gb:HND:ADM1:10453824B33911095974475",
+          "ordinal": 16,
+          "owners": [],
+          "name": "Santa Bárbara",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 120020,
+      "x": 66139,
+      "owner": 21570,
+      "source_feature_indices": [
+        34740,
+        35069
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 34740,
+          "family_index": 140,
+          "source_id": "gb:GTM:ADM2:79465075B90602875847956",
+          "ordinal": 78,
+          "owners": [
+            21570
+          ],
+          "name": "Gualán",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 35069,
+          "family_index": 144,
+          "source_id": "gb:HND:ADM1:10453824B73363653217090",
+          "ordinal": 9,
+          "owners": [],
+          "name": "Copán",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 120058,
+      "x": 66151,
+      "owner": 21477,
+      "source_feature_indices": [
+        34769,
+        35069
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 34769,
+          "family_index": 140,
+          "source_id": "gb:GTM:ADM2:79465075B65794247030645",
+          "ordinal": 107,
+          "owners": [
+            21477
+          ],
+          "name": "La Unión",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 35069,
+          "family_index": 144,
+          "source_id": "gb:HND:ADM1:10453824B73363653217090",
+          "ordinal": 9,
+          "owners": [],
+          "name": "Copán",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 120059,
+      "x": 66151,
+      "owner": 21477,
+      "source_feature_indices": [
+        34769,
+        35069
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 34769,
+          "family_index": 140,
+          "source_id": "gb:GTM:ADM2:79465075B65794247030645",
+          "ordinal": 107,
+          "owners": [
+            21477
+          ],
+          "name": "La Unión",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 35069,
+          "family_index": 144,
+          "source_id": "gb:HND:ADM1:10453824B73363653217090",
+          "ordinal": 9,
+          "owners": [],
+          "name": "Copán",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 120095,
+      "x": 66138,
+      "owner": 21503,
+      "source_feature_indices": [
+        34678,
+        35069
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 34678,
+          "family_index": 140,
+          "source_id": "gb:GTM:ADM2:79465075B72038924069090",
+          "ordinal": 16,
+          "owners": [
+            21503
+          ],
+          "name": "Camotán",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 35069,
+          "family_index": 144,
+          "source_id": "gb:HND:ADM1:10453824B73363653217090",
+          "ordinal": 9,
+          "owners": [],
+          "name": "Copán",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 120114,
+      "x": 66113,
+      "owner": 21503,
+      "source_feature_indices": [
+        34646,
+        34678,
+        35069
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 34646,
+          "family_index": 139,
+          "source_id": "gb:GTM:ADM1:53557124B25298484445247",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Chiquimula",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 34678,
+          "family_index": 140,
+          "source_id": "gb:GTM:ADM2:79465075B72038924069090",
+          "ordinal": 16,
+          "owners": [
+            21503
+          ],
+          "name": "Camotán",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 35069,
+          "family_index": 144,
+          "source_id": "gb:HND:ADM1:10453824B73363653217090",
+          "ordinal": 9,
+          "owners": [],
+          "name": "Copán",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 120115,
+      "x": 66111,
+      "owner": 21503,
+      "source_feature_indices": [
+        34646,
+        34678,
+        35069
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 34646,
+          "family_index": 139,
+          "source_id": "gb:GTM:ADM1:53557124B25298484445247",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Chiquimula",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 34678,
+          "family_index": 140,
+          "source_id": "gb:GTM:ADM2:79465075B72038924069090",
+          "ordinal": 16,
+          "owners": [
+            21503
+          ],
+          "name": "Camotán",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 35069,
+          "family_index": 144,
+          "source_id": "gb:HND:ADM1:10453824B73363653217090",
+          "ordinal": 9,
+          "owners": [],
+          "name": "Copán",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 120221,
+      "x": 63961,
+      "owner": 21310,
+      "source_feature_indices": [
+        34671,
+        42155
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 34671,
+          "family_index": 140,
+          "source_id": "gb:GTM:ADM2:79465075B23985435861738",
+          "ordinal": 9,
+          "owners": [
+            21310
+          ],
+          "name": "Ayutla",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 42155,
+          "family_index": 208,
+          "source_id": "gb:MEX:ADM1:31927357B65177449444732",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Chiapas",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 120323,
+      "x": 66160,
+      "owner": 21533,
+      "source_feature_indices": [
+        34731,
+        35075
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 34731,
+          "family_index": 140,
+          "source_id": "gb:GTM:ADM2:79465075B80702943511797",
+          "ordinal": 69,
+          "owners": [
+            21533
+          ],
+          "name": "Esquipulas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 35075,
+          "family_index": 144,
+          "source_id": "gb:HND:ADM1:10453824B83660155057128",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Ocotepeque",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 120324,
+      "x": 66161,
+      "owner": 21533,
+      "source_feature_indices": [
+        34731,
+        35075
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 34731,
+          "family_index": 140,
+          "source_id": "gb:GTM:ADM2:79465075B80702943511797",
+          "ordinal": 69,
+          "owners": [
+            21533
+          ],
+          "name": "Esquipulas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 35075,
+          "family_index": 144,
+          "source_id": "gb:HND:ADM1:10453824B83660155057128",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Ocotepeque",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 120327,
+      "x": 66161,
+      "owner": 21533,
+      "source_feature_indices": [
+        34731,
+        35075
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 34731,
+          "family_index": 140,
+          "source_id": "gb:GTM:ADM2:79465075B80702943511797",
+          "ordinal": 69,
+          "owners": [
+            21533
+          ],
+          "name": "Esquipulas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 35075,
+          "family_index": 144,
+          "source_id": "gb:HND:ADM1:10453824B83660155057128",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Ocotepeque",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 120364,
+      "x": 66082,
+      "owner": 21533,
+      "source_feature_indices": [
+        34731,
+        35075
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 34731,
+          "family_index": 140,
+          "source_id": "gb:GTM:ADM2:79465075B80702943511797",
+          "ordinal": 69,
+          "owners": [
+            21533
+          ],
+          "name": "Esquipulas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 35075,
+          "family_index": 144,
+          "source_id": "gb:HND:ADM1:10453824B83660155057128",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Ocotepeque",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 120366,
+      "x": 66081,
+      "owner": 21533,
+      "source_feature_indices": [
+        34731,
+        35075
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 34731,
+          "family_index": 140,
+          "source_id": "gb:GTM:ADM2:79465075B80702943511797",
+          "ordinal": 69,
+          "owners": [
+            21533
+          ],
+          "name": "Esquipulas",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 35075,
+          "family_index": 144,
+          "source_id": "gb:HND:ADM1:10453824B83660155057128",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Ocotepeque",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    }
+  ],
+  "new_native_repairs": 0,
+  "accepted_disposition_credit": 0,
+  "status": "proposed; independent substantive review and accepted integration required",
+  "accepted_original_class_counts": {
+    "inland-water": 395,
+    "land": 1108
+  },
+  "current_selection_identity_checked_at": "095e74472938076e608bc2b10f66195ee81beda5"
+}
