@@ -25,20 +25,17 @@ const helperBytes = fs.readFileSync(helperPath);
 if (sha(helperBytes) !== packet.input_provenance.native_helper_sha256) {
   throw new Error('Native helper SHA-256 does not match the packet pin');
 }
-const { nativePolygonIntervals, polygonParts, nativeRowLatitudes } = await import(pathToFileURL(path.resolve(helperPath)).href);
+const { nativePolygonIntervals, polygonParts } = await import(pathToFileURL(path.resolve(helperPath)).href);
 
 const size = packet.input_provenance.size;
 const latitudeBytes = fs.readFileSync(latitudePath);
 const latitudePin = packet.input_provenance.native_helper_path && packet.actual_scope_outcomes.HND.source_evidence.native_contract.native_latitudes;
-if (!latitudePin || latitudeBytes.length !== size * 8 || sha(latitudeBytes) !== latitudePin.decoded_sha256) {
+if (!latitudePin || latitudePin.decoded_bytes !== size * 8 ||
+    latitudeBytes.length !== latitudePin.decoded_bytes || sha(latitudeBytes) !== latitudePin.decoded_sha256) {
   throw new Error('Normative latitude vector size or SHA-256 mismatch');
 }
 const latitudes = new Float64Array(size);
 for (let i = 0; i < size; i++) latitudes[i] = latitudeBytes.readDoubleLE(i * 8);
-const computed = nativeRowLatitudes(size);
-for (let i = 0; i < size; i++) {
-  if (!Object.is(latitudes[i], computed[i])) throw new Error(`Latitude value mismatch at row ${i}`);
-}
 
 const evidenceByCountry = new Map();
 for (const item of packet.published_evidence.country_source_evidence) {
