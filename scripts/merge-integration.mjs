@@ -234,6 +234,12 @@ export function reviewedTestPlan(request, {base, head, entries, files, definitio
   // comes from the existing executing-authority roster, and real package inputs
   // come from the package definition consumed by the builder itself.
   const inputs = [...EXECUTION_CODE];
+  if (tests.includes('test/current-rebind-product-custody.test.mjs')) {
+    // This consumer compares the live producer policy, not a historical fixture.
+    const policy = 'coordination/engineering/additive-native-composition-20261009/execution-code-paths.json';
+    need(definition.verification_paths.includes(policy), 'Current rebind policy lacks its verification declaration');
+    if (!inputs.includes(policy)) inputs.push(policy);
+  }
   need(plan.inputs === undefined || Array.isArray(plan.inputs) &&
     (plan.inputs.length===0 || JSON.stringify(plan.inputs)===JSON.stringify(inputs)),
     'Reviewed fixture operands are derived; manual inputs are unsupported');

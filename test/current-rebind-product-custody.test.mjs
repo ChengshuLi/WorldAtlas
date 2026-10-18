@@ -7,7 +7,7 @@ import vm from 'node:vm';
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {prepareCurrentRebindDestination,writeCurrentRebindProducts,validateCurrentRebindPlan} from '../coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs';
-import {CURRENT_REBIND_CODE,LEGACY_CURRENT_REBIND_CODE,currentRebindCodePaths,valueBytes,valueSha,verifyCurrentRebindExecution} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {CURRENT_REBIND_CODE,LEGACY_CURRENT_REBIND_CODE,currentRebindCodePaths,valueBytes,valueSha,verifyCurrentRebindExecution,verifyCurrentRebindProducts,currentRebindResult} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {selectedBootstrap} from '../scripts/check-effective-geographic-regression.mjs';
 import {BUILD_CONTEXT_VALIDATOR_SOURCES,BUILD_CONTEXT_STAGE_PATH,validateBuildContextStage} from '../scripts/native-ownership/validate-build-context-stage.mjs';
 import {CONTEXT_STAGE_PATH} from '../scripts/native-ownership/validate-context-input-stage.mjs';
@@ -143,4 +143,82 @@ test('plain actual entry authenticates its whole input before any import',()=>{
  assert.ok(execute(s=>s.raw=Buffer.from('foreign')).error);
  const actual=spawnSync(process.execPath,[path.join(root,entry)],{cwd:root,env:{PATH:process.env.PATH},encoding:'utf8'});
  assert.equal(actual.status,1);assert.match(actual.stderr,/Missing\/plain actual execution identity/);
+});
+
+import {nativeSequence} from '../src/native-grid.js';
+test('full rebind verifier checks canonical count and hash without materializing producer bodies',t=>{
+ const literal={coordinates:Array.from({length:65},(_,i)=>[i/10,-i/10]),label:'雪😀\ud800'};
+ const bodies={request:literal,facts:{},publication:{},operating:{},result:literal};
+ const bodyPins=Object.fromEntries(Object.entries(bodies).map(([name,body])=>[name,{bytes:valueBytes(body).length,sha256:valueSha(body)}]));
+ let visits=0;
+ const stored={...literal,coordinates:nativeSequence(literal.coordinates.length,function*(){for(const pair of literal.coordinates){visits++;yield pair;}})};
+ const input={...bodies,request:stored,result:stored,certificate:{},bodyPins};
+ const stringify=JSON.stringify;let wholeObjects=0;
+ JSON.stringify=value=>{
+  if(value!==null&&typeof value==='object')wholeObjects++;return stringify(value);
+ };
+ try{
+  // Complete descriptor verification succeeds; this deliberately incomplete
+  // certificate must still fail its next independent semantic boundary.
+  assert.throws(()=>verifyCurrentRebindProducts(input),/^Error: Foreign current rebind certificate$/);
+ }finally{JSON.stringify=stringify;}
+ t.diagnostic('Request/result canonical bytes: '+bodyPins.request.bytes+'/'+bodyPins.result.bytes+'; pair visits: '+visits+'; complete object serializations: '+wholeObjects);
+ assert.equal(wholeObjects,0,'Verifier must not rebuild whole producer JSON');
+ assert.equal(visits,130,'Each request/result geometry is traversed once');
+ for(const name of Object.keys(bodies))for(const change of [{bytes:bodyPins[name].bytes+1},{sha256:'0'.repeat(64)}])
+  assert.throws(()=>verifyCurrentRebindProducts({...input,bodyPins:{...bodyPins,[name]:{...bodyPins[name],...change}}}),new RegExp('Whole canonical rebind product bytes differ: '+name));
+ const utf16=JSON.stringify(literal).length+1;assert.notEqual(utf16,bodyPins.request.bytes);
+ assert.throws(()=>verifyCurrentRebindProducts({...input,bodyPins:{...bodyPins,request:{...bodyPins.request,bytes:utf16}}}),/Whole canonical rebind product bytes differ: request/);
+ assert.throws(()=>verifyCurrentRebindProducts({...input,request:null}),/Whole canonical rebind product bytes differ: request/);
+ assert.throws(()=>verifyCurrentRebindProducts({...input,result:{tail:Infinity}}),/Nonfinite\/missing\/non-JSON/);
+});
+
+test('full rebind product acceptance preserves exact literal and owned-store results',async t=>{
+ const {admitNativeMetadataStore}=await import('../scripts/native-patch-store.mjs');
+ const polygon=x=>{const ring=Array.from({length:32},(_,i)=>[x+.2*Math.cos(i*Math.PI/16),.2*Math.sin(i*Math.PI/16)]);return {type:'Polygon',coordinates:[[...ring,ring[0]]]};};
+ const base=polygon(0),primitive=polygon(2),execution_commit='1'.repeat(40);
+ const operands={baseSelection:{version:1},registry:{version:1},size:16,
+  originalRows:[{component_id:'new',target_id:'A',pixelIndex:1,disposition:'assigned',base_geometry:base,base_geometry_sha256:valueSha(base),geometry:primitive,geometry_sha256:valueSha(primitive)}],
+  originalPatches:[{version:1,kind:'unassigned-native-cells-v1',rows:[{y:3,runs:[[4,5,1]]}]}],
+  currentTargets:[{target_id:'A',pixelIndex:1,geometry:base,geometry_sha256:valueSha(base)}],currentRows:[{y:3,runs:[[0,2,2]]}]};
+ const expectedCode=CURRENT_REBIND_CODE.map(path=>({path,bytes:1,sha256:'a'.repeat(64)}));
+ const pin=(path,body)=>({commit:execution_commit,path,mode:'100644',git_blob_oid:'2'.repeat(40),bytes:body.length,sha256:createHash('sha256').update(body).digest('hex')});
+ const identity=(name,value)=>pin(name+'.json',valueBytes(value));
+ const acquisition={version:1,kind:'complete-selected-rebind-inputs-v1',target_sources:[{target_id:'A',path:'data/source.json'}],source_inputs:[],native_inputs:[],predecessor_proof:null,predecessor_rows:[],manifest_sha256:'b'.repeat(64)};
+ const phases=[{kind:'complete-current-target-source',path:'data/source.json'}];
+ const acquired={base_selection:operands.baseSelection,current_targets:operands.currentTargets,current_rows:operands.currentRows,acquisition,acquisition_phases:phases};
+ const plan={version:1,kind:'issued-current-rebind-acquisition-plan-v1',execution_commit,base_selection:operands.baseSelection,authority_registry_sha256:valueSha(operands.registry),original_rows_sha256:valueSha(operands.originalRows),original_patch_sha256s:operands.originalPatches.map(valueSha),target_sources:acquisition.target_sources,predecessor_proof:null,executed_code:expectedCode};
+ const ordinary=path=>({path,bytes:1,sha256:'c'.repeat(64),mode:420}),dependencyRoot='coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/';
+ const before={runtime:[['node','/fixture/node'],['git','/fixture/git'],['supervisor-python','/fixture/python']].map(([role,path])=>({role,...ordinary(path),mode:493}))
+  .concat(expectedCode.filter(p=>p.path.startsWith(dependencyRoot)).map(p=>({role:'installed-dependency',path:'/fixture/node_modules/@noble/hashes/'+p.path.slice(dependencyRoot.length),bytes:p.bytes,sha256:p.sha256,mode:420}))),
+  code:expectedCode,entry:ordinary('/fixture/entry'),supervisor:ordinary('/fixture/supervisor'),plan:{path:'/fixture/plan',bytes:valueBytes(plan).length,sha256:valueSha(plan),mode:420}};
+ const command=['/fixture/node','/fixture/entry','/fixture/plan','/fixture/output'];
+ const request={version:1,kind:'issued-native-additive-current-bank-rebind-v1',execution_commit,executed_code:expectedCode,base_selection:operands.baseSelection,authority_registry_sha256:valueSha(operands.registry),original_rows:operands.originalRows,original_patch_sha256s:operands.originalPatches.map(valueSha),current_targets:operands.currentTargets,current_rows:operands.currentRows,acquisition,execution:{command,pre_use:before},size:operands.size};
+ const result=currentRebindResult(operands),requestPin=identity('request',request),resultPin=identity('result',result);
+ const facts={version:1,kind:'native-additive-current-bank-rebind-facts-v1',execution_commit,request_sha256:requestPin.sha256,result_sha256:resultPin.sha256,acquisition_sha256:valueSha(acquisition),acquisition_phases:phases},factsPin=identity('facts',facts);
+ const publication={version:1,kind:'native-additive-current-bank-rebind-publication-v1',execution_commit,request_sha256:requestPin.sha256,outputs:{facts:{path:'facts.json',bytes:factsPin.bytes,sha256:factsPin.sha256},result:{path:'result.json',bytes:resultPin.bytes,sha256:resultPin.sha256}}},publicationPin=identity('publication',publication);
+ const code_source=valueBytes({version:1,kind:'whole-current-rebind-execution-custody-v1',execution_commit,command,pre_use:before,post_use:before});
+ const executionCustody={code_source,issued_plan:valueBytes(plan),stderr:Buffer.alloc(0),
+  terminal:valueBytes({version:1,kind:'current-rebind-external-terminal-v1',execution_commit,command,request_sha256:requestPin.sha256,publication_sha256:publicationPin.sha256,code_source_sha256:pin('code-source',code_source).sha256,exit_code:0,signal:null,guard_reason:null,elapsed_seconds:1,owned_processes_remaining:[],termination_events:[]}),
+  stdout:valueBytes({version:1,kind:'current-rebind-child-publication-v1',execution_commit,request_sha256:requestPin.sha256,publication_sha256:publicationPin.sha256,result_sha256:resultPin.sha256})};
+ const operating={version:1,kind:'native-additive-current-bank-rebind-operating-v1',execution_commit,request_sha256:requestPin.sha256,publication_sha256:publicationPin.sha256,exit_code:0,signal:null,owned_processes_remaining:[],elapsed_seconds:1,execution_custody:Object.fromEntries(Object.entries(executionCustody).map(([name,raw])=>[name,pin(name,raw)]))};
+ const bodyPins={request:requestPin,result:resultPin,facts:factsPin,publication:publicationPin,operating:identity('operating',operating)};
+ const certificate={version:1,kind:'qualified-native-additive-current-bank-rebind-v1',execution_commit,base_selection:operands.baseSelection,authority_registry_sha256:valueSha(operands.registry),...bodyPins};
+ const input={...operands,request,result,facts,publication,operating,bodyPins,certificate,expectedCode,acquired,executionCustody};
+ assert.strictEqual(verifyCurrentRebindProducts(input),result);
+ const directory=fs.mkdtempSync(path.join(os.tmpdir(),'full-rebind-identity-'));t.after(()=>fs.rmSync(directory,{recursive:true,force:true}));
+ const stores=[];
+ try{
+  const stored={...input};
+  for(const name of ['request','result']){
+   const raw=valueBytes(input[name]),store=await admitNativeMetadataStore({directory,chunks:[raw],expected:bodyPins[name]});stores.push(store);stored[name]=store.metadata;
+  }
+  assert.equal(Array.isArray(stored.request.current_targets[0].geometry.coordinates[0]),false);
+  assert.strictEqual(verifyCurrentRebindProducts(stored),stored.result);
+  assert.deepEqual(valueBytes(stored.result),valueBytes(result));
+  const changed={...stored,result:{...stored.result,geometry:[]}};
+  changed.bodyPins={...bodyPins,result:identity('result',changed.result)};
+  assert.throws(()=>verifyCurrentRebindProducts(changed),/Complete current rebind result\/inverse differs/);
+ }finally{for(const store of stores)store.close();}
+ assert.deepEqual(fs.readdirSync(directory),[]);
 });

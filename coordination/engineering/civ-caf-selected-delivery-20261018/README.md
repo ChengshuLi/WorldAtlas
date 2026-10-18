@@ -7,7 +7,7 @@ This candidate is the closed six-package cohort authorized by the coordinator. I
 | CIV ADM3 repair | 2,049 | 2,041 | 8 | 0 |
 | CAF ADM3 repair | 2,130 | 1,669 | 461 | 0 |
 | GTM ADM2 repair | 1,516 | 1,503 | 13 | 395 |
-| BLZ ADM2 repair | 917 | 917 | 0 | 0 |
+| BLZ ADM1 repair | 917 | 917 | 0 | 0 |
 | DOM ADM2 repair | 3,988 | 3,988 | 0 | 0 |
 | SLV ADM2 repair | 1,134 | 1,131 | 3 | 75 |
 | Total | 11,734 | 11,249 | 485 | 470 |

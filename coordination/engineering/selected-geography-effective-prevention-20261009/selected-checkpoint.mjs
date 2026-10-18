@@ -13,7 +13,7 @@ import {ImmutableReader, NativeAssetImage, decodeVisibilityLatitudes,
   loadBaseSelection, selectedGeometrySourceAlias, selectedReferenceOwners} from '../../../scripts/check-effective-geographic-regression.mjs';
 import {repairComponentKey, nativeOnlyComponent} from '../../../src/native-grid.js';
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
-import {valueBytes, valueSha, coordinateBounds, nativeBaseSelection,
+import {valueSha, valueIdentity, coordinateBounds, nativeBaseSelection,
   normaliseRetainedRepairLedger, repairRowsIndex, repairIndexValues, readRetainedRegistryAuthority, readRegistryAuthorityInputs, verifyCompletedSourceTargetNativeAuthority, validateSupportedProgrammeCatalogue,
   CURRENT_REBIND_CODE, verifyCurrentRebindExecution,
   currentRebindResult, currentRebindAcquisitionIdentity, retainedArcticNativeRows} from './selected-neighbor-prevention.mjs';
@@ -1169,8 +1169,10 @@ function qualifyProjectedRebind(proof, selected, authorities, products) {
   const originalRows=[...selected.normalized.rows.values()].filter(row=>!nativeOnlyComponent(row,valueSha));
   const originalPatches=registry.entries.flatMap(entry => authorities.get(entry.authority_sha256).patches);
   const bodyPins=Object.fromEntries(['request','facts','publication','operating','result'].map(name => [name,certificate[name]]));
-  for (const [name,body] of Object.entries({request,facts,publication,operating,result}))
-    demand(valueSha(body)===bodyPins[name].sha256 && valueBytes(body).length===bodyPins[name].bytes,'Whole canonical producer output differs');
+  for (const [name,body] of Object.entries({request,facts,publication,operating,result})) {
+    const identity=valueIdentity(body);
+    demand(identity.sha256===bodyPins[name].sha256 && identity.bytes===bodyPins[name].bytes,'Whole canonical producer output differs');
+  }
   keys(request,'version,kind,execution_commit,executed_code,base_selection,authority_registry_sha256,original_rows,original_patch_sha256s,current_targets,current_rows,acquisition,execution,size'+(Object.hasOwn(request,'limits')?',limits':''),'Unknown current producer request');
   demand(certificate.version===1 && certificate.kind==='qualified-native-additive-current-bank-rebind-v1'
     && request.version===1 && request.kind==='issued-native-additive-current-bank-rebind-v1'
