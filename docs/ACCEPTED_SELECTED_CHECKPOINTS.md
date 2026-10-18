@@ -301,3 +301,38 @@ view for every lookup. A caller-controlled `.at()` or `entryAt` cannot substitut
 a different primitive into the validated owner's bounds or hash. Declared counts
 remain enforced; nested geometry and intervals retain their borrowed lifetime
 guards. No public trust option, persistent cache or new capability is introduced.
+
+
+### Exact qualified rows before candidate normalization
+
+Candidate admission still authenticates and parses the complete current products.
+Its private ledger admission checks the whole original scope, ordering and
+all dispositions, then proves canonical equality of old raw rows and unchanged
+whole authority entries against the genuine live baseline. Only rows satisfying
+both identities reuse their already-established intrinsic semantics. Every new or
+changed row receives the unchanged full public normalizer through a lazy residual
+row/scope view; the complete current registry and v2 ledger binding are still
+validated. The full normalized index borrows the candidate store, not a cache of
+old geometry. No public skip option or new serialized authority is introduced.
+
+Old-row and old-authority preservation demands stay after existing native-base
+and scientific-route eligibility. Thus a valid changed old row is still rejected
+for an otherwise eligible candidate, while an unsupported base preserves its
+candidate-only cold fallback. Invalid new/changed rows still refuse before that
+fallback. For a multiply malformed private candidate, the complete structural
+scan may report a later scope/disposition error before an earlier geometry error;
+both versions refuse. Public and cold/seed normalization remain unchanged.
+
+Appended source qualification, exact original literals, patch union/disjointness,
+current owner/target bindings, effective-reference digests, changed-rebind proof
+and old projected-addition equality all remain required. Raw row identity alone
+cannot approve changed projected legacy geometry. Baseline and successor handles
+retain private invocation ownership; failed admission releases new stores while
+leaving the baseline usable, and session release invalidates borrowed access.
+
+For the retained seven-package transition this removes deep normalization of
+5,180 old native and 93 old legacy effective rows. The 565 new native components
+remain fully validated. The removed native pass covers 1,210,251 intervals and
+527,088 base vertices (strict geometry plus canonical base hashing); parsing and
+required whole-value equality/digests remain. These are static invocation and
+cardinality counts, not measured time or memory savings.

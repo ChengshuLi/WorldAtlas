@@ -993,3 +993,170 @@ for(const mode of ['valid','footer','inflate','decoded hash','syntax','syntax an
  let expected;try{eager();}catch(error){expected=error;}assert(expected);
  await assert.rejects(f.api.qualifyCheckpoint({reader:f.reader}),error=>mode==='syntax'?error instanceof SyntaxError:error.message===expected.message);
 });
+
+
+// Establish an old native component through the genuine source/transition path.
+// The initial trusted fixture deliberately contains legacy and held rows too.
+async function qualifiedNativeLedger(t){
+ const f=await trustedFixture(t,{nativeAppend:true}),initial=(await f.api.qualifyCheckpoint({reader:f.reader})).state;
+ const first=await appendNativeAuthority(f,{completedConstructor:true,name:'prior-native'});
+ const reader=new f.native.ImmutableReader(f.root,first.candidate,{invocation:f.reader.invocation});
+ const transition=await f.api.qualifyTransition({state:initial,reader});assert.equal(transition.available,true);
+ Object.assign(f,first);return {f,initial,state:transition.candidate};
+}
+function traceLedgerNormalization(){
+ const open=fs.openSync,read=fs.readSync,mkdir=fs.mkdtempSync,files=new Map(),owners=[],metadata=[],scratch=[];
+ fs.openSync=function(name,...args){const fd=open.call(this,name,...args);files.set(fd,String(name));return fd;};
+ fs.readSync=function(fd,buffer,...args){
+  const stack=new Error().stack,n=read.call(this,fd,buffer,...args);
+  if(files.get(fd)?.endsWith('/runs.bin')&&stack.includes('nativeOnlyComponent')
+    &&stack.includes('normaliseRetainedRepairLedger')){
+   const offset=typeof args[0]==='number'?args[0]:0;
+   for(let at=offset;at<offset+n;at+=12)owners.push(buffer.readUInt32LE(at+8));
+  }
+  if(files.get(fd)?.endsWith('/metadata.bin')&&stack.includes('normaliseRetainedRepairLedger')
+    &&n===buffer.length)metadata.push(JSON.parse(buffer)[0].component_id);
+  return n;
+ };
+ fs.mkdtempSync=function(prefix,...args){const name=mkdir.call(this,prefix,...args);
+  if(String(prefix).includes('native-intervals-'))scratch.push(name);return name;};
+ return {owners,metadata,scratch,restore(){fs.openSync=open;fs.readSync=read;fs.mkdtempSync=mkdir;}};
+}
+function repinNativeRegistry(f,registry,ledger=f.ledger){
+ f.save('candidate/registry.json',registry);const commit=f.commit();
+ return candidateProducts({...f,sidecar:{...f.sidecar,authority_registry:f.pin('candidate/registry.json',commit)},
+  patch:{...f.patch,authority_registry_sha256:valueSha(registry)}},
+  {ledger:{...ledger,authority_registry_sha256:valueSha(registry)}});
+}
+function changeCandidateBase(f){
+ const sidecar=JSON.parse(fs.readFileSync(path.join(f.root,'candidate/sidecar.json')));
+ sidecar.base_selection.release_id='geography:unsupported-next-base';
+ f.save('candidate/sidecar.json',sidecar);const at=f.commit(),pin=f.pin('candidate/sidecar.json',at);
+ f.save('data/ownership-selection.json',{...f.selection,release_id:sidecar.base_selection.release_id,
+  additive_release:{path:pin.path,bytes:pin.bytes,sha256:pin.sha256}});return f.commit();
+}
+
+test('private ledger admission reuses only exact old rows and deeply validates the appended row',async t=>{
+ const {f,initial,state}=await qualifiedNativeLedger(t);
+ const next=await appendNativeAuthority(f,{completedConstructor:true,name:'next-native',owner:1,
+  mutatePatch:patch=>{patch.rows=mergeCompletedNativePatches(patch.rows.map(row=>({rows:[row]})),f.manifest.size);}});
+ const reader=new f.native.ImmutableReader(f.root,next.candidate,{invocation:f.reader.invocation}),trace=traceLedgerNormalization();
+ try {
+  const transition=await f.api.qualifyTransition({state,reader});assert.equal(transition.available,true);
+  assert(trace.owners.includes(2),'The genuinely new native component must receive deep normalization');
+  assert(!trace.owners.includes(1),'The exact qualified old component must not replay deep normalization');
+  assert(trace.metadata.length>0);
+  assert.deepEqual([...new Set(trace.metadata)],[next.proof.original_ledger.rows[0].component_id],
+   'Residual normalization must not rescan old component metadata');
+  const expected=eagerCoordinateDelta({certificate:state.certificate,oldAdditions:nativeLiteral(state.additions),
+   additions:nativeLiteral(transition.candidate.additions),selection:transition.candidate.selection});
+  assert.deepEqual(transition.candidate.certificate,expected.certificate);
+  assert.deepEqual(transition.changedIds,expected.changedIds);
+  assert.deepEqual(nativeLiteral(transition.candidate.ledger),next.ledger);
+ } finally {trace.restore();f.api.releaseCheckpoint(initial);}
+});
+for(const [name,mutate,expected] of [
+ ['valid changed receipt',row=>row.source_receipt_sha256='0'.repeat(64),/Old complete ledger/],
+ ['changed interval owner',row=>row.native_rows[0].runs[0][2]=2,/native component interval/i],
+ ['changed cell count',row=>row.native_cells++,/cell count/i],
+ ['changed base hash',row=>row.base_geometry_sha256='0'.repeat(64),/current base changed/i]
+])test('private ledger admission fully checks old row with '+name,async t=>{
+ const {f,initial,state}=await qualifiedNativeLedger(t),ledger=structuredClone(f.ledger);
+ mutate(ledger.rows.find(row=>row.representation==='native-cells'));
+ const candidate=candidateProducts(f,{ledger}),reader=new f.native.ImmutableReader(f.root,candidate,{invocation:f.reader.invocation});
+ const trace=traceLedgerNormalization();
+ try {
+  await assert.rejects(f.api.qualifyTransition({state,reader}),expected);
+  if(name!=='changed base hash')assert(trace.owners.length>0,'Changed old intervals must reach the full normalizer');
+  assert(trace.scratch.length>0);assert(trace.scratch.every(name=>!fs.existsSync(name)),'Failed candidate stores must close');
+  assert.deepEqual(nativeLiteral(state.ledger),f.ledger,'The baseline stays intact after failed candidate admission');
+ } finally {trace.restore();f.api.releaseCheckpoint(initial);}
+});
+test('private ledger admission does not reuse a row under a changed completed constructor authority',async t=>{
+ const {f,initial,state}=await qualifiedNativeLedger(t),registry=structuredClone(f.registry);
+ const entry=registry.entries.find(entry=>entry.completed_constructor),prior=entry.authority_sha256;
+ entry.completed_constructor.commit=f.candidate;
+ const {authority_sha256,completed_constructor,...identity}=entry;
+ assert.equal(valueSha(identity),prior,'Completed constructor changes do not alter the authority ID');
+ const candidate=repinNativeRegistry(f,registry),reader=new f.native.ImmutableReader(f.root,candidate,{invocation:f.reader.invocation});
+ const trace=traceLedgerNormalization();
+ try {
+  await assert.rejects(f.api.qualifyTransition({state,reader}),/Old original authority/);
+  assert(trace.owners.includes(1),'An equal raw row under a changed authority still receives full normalization');
+  assert(trace.scratch.every(name=>!fs.existsSync(name)));
+ } finally {trace.restore();f.api.releaseCheckpoint(initial);}
+});
+for(const invalid of [false,true])test('private ledger admission preserves unsupported-base fallback with changed old row, invalid='+invalid,async t=>{
+ const {f,initial,state}=await qualifiedNativeLedger(t),ledger=structuredClone(f.ledger),row=ledger.rows.find(row=>row.representation==='native-cells');
+ if(invalid)row.native_cells++;else row.source_receipt_sha256='0'.repeat(64);
+ candidateProducts(f,{ledger});const candidate=changeCandidateBase(f);
+ const reader=new f.native.ImmutableReader(f.root,candidate,{invocation:f.reader.invocation}),trace=traceLedgerNormalization();
+ try {
+  if(invalid)await assert.rejects(f.api.qualifyTransition({state,reader}),/cell count/i);
+  else {const result=await f.api.qualifyTransition({state,reader});
+   assert.equal(result.available,false);assert.equal(result.cold,'candidate');assert.strictEqual(result.baseline,state);
+   assert.match(result.reason,/native\/source\/domain\/owner base changed/);}
+  assert(trace.owners.includes(1),'Changed rows are checked before cold-base eligibility');
+  assert(trace.scratch.every(name=>!fs.existsSync(name)));
+  assert.deepEqual(nativeLiteral(state.ledger),f.ledger);
+ } finally {trace.restore();f.api.releaseCheckpoint(initial);}
+});
+for(const [name,mutate,expected] of [
+ ['scope alignment',ledger=>{ledger.scope_ids[0]='different';},/Foreign\/duplicate\/unordered component/],
+ ['scope length',ledger=>{ledger.scope_ids.pop();},/Incomplete complete ledger scope/],
+ ['ledger header',ledger=>{ledger.kind='unknown-ledger';},/Unsupported or unbound versioned repair ledger/],
+ ['held disposition',ledger=>{ledger.rows.find(row=>row.disposition==='rejected').disposition='invented';},/Unknown original ledger disposition/],
+ ['duplicate old identity',ledger=>{ledger.rows.splice(1,0,structuredClone(ledger.rows[0]));ledger.scope_ids.splice(1,0,ledger.scope_ids[0]);},/Foreign\/duplicate\/unordered component/],
+ ['removed held row',ledger=>{ledger.rows=ledger.rows.filter(row=>row.disposition!=='rejected');ledger.scope_ids=ledger.rows.map(row=>row.component_id);},/Old complete ledger/]
+])test('private ledger admission retains whole-ledger '+name,async t=>{
+ const f=await trustedFixture(t),{state}=await f.api.qualifyCheckpoint({reader:f.reader}),ledger=structuredClone(f.ledger);mutate(ledger);
+ const candidate=candidateProducts(f,{ledger}),reader=new f.native.ImmutableReader(f.root,candidate,{invocation:f.reader.invocation});
+ try {await assert.rejects(f.api.qualifyTransition({state,reader}),expected);
+  assert.deepEqual(nativeLiteral(state.ledger),f.ledger);
+ } finally {f.api.releaseCheckpoint(state);}
+});
+test('private ledger admission refuses mixed early geometry and later scope errors with complete cleanup',async t=>{
+ const {f,initial,state}=await qualifiedNativeLedger(t),ledger=structuredClone(f.ledger);
+ ledger.rows.find(row=>row.representation==='native-cells').base_geometry.coordinates[0].at(-1)[0]+=.01;
+ ledger.rows.push({component_id:'zzz-held',disposition:'rejected',reason:'later malformed scope'});ledger.scope_ids.push('different');
+ const candidate=candidateProducts(f,{ledger}),reader=new f.native.ImmutableReader(f.root,candidate,{invocation:f.reader.invocation});
+ const trace=traceLedgerNormalization();
+ try {
+  // The complete structural scan may report the later scope error first. The
+  // old full normalizer reports the earlier geometry error; both must refuse.
+  await assert.rejects(f.api.qualifyTransition({state,reader}),error=>{
+   assert.match(error.message,/Unclosed footprint ring|Foreign\/duplicate\/unordered component/);
+   t.diagnostic(error.message);return true;});
+  assert(trace.scratch.length>0);assert(trace.scratch.every(name=>!fs.existsSync(name)));
+  assert.deepEqual(nativeLiteral(state.ledger),f.ledger);
+ } finally {trace.restore();f.api.releaseCheckpoint(initial);}
+});
+test('private ledger admission owns row views and keeps genuine state lifetime',async t=>{
+ const {f,initial,state}=await qualifiedNativeLedger(t);
+ const borrowed=state.ledger.rows.at(-1),run=borrowed.native_rows.at(0).runs.at(0);
+ run[2]=2;assert.equal(run[2],2,'Returned interval tuples are caller-owned values');
+ assert.throws(()=>{borrowed.base_geometry.coordinates[0][0][0]=90;},TypeError);
+ assert.deepEqual(nativeLiteral(state.ledger),f.ledger,'Public parsed row mutations cannot alter the private store');
+ const reader=new f.native.ImmutableReader(f.root,f.candidate,{invocation:f.reader.invocation});
+ await assert.rejects(f.api.qualifyTransition({state:{...state},reader}),/private qualified/);
+ await assert.rejects(f.api.qualifyTransition({state,reader:new f.native.ImmutableReader(f.root,f.candidate)}),/Foreign or expired/);
+ const trace=traceLedgerNormalization();let additions;
+ try {
+  const result=await f.api.qualifyTransition({state,reader});assert.equal(result.available,true);additions=result.candidate.additions;
+  assert.deepEqual(trace.owners,[],'A wholly unchanged candidate needs no native deep normalization');
+  assert.deepEqual(result.candidate.certificate,state.certificate);
+ } finally {trace.restore();f.api.releaseCheckpoint(initial);}
+ assert.throws(()=>additions.at(-1),/closed|expired/i);
+ await assert.rejects(f.api.qualifyTransition({state,reader}),/private qualified/);
+});
+
+for(const [name,mutate,expected] of [
+ ['kind',registry=>registry.kind='unknown-registry',/Missing explicit retained authority registry/],
+ ['duplicate entry',registry=>registry.entries.push(structuredClone(registry.entries[0])),/Foreign\/duplicate\/unordered authority entry/]
+])test('private ledger admission fully validates current registry '+name+' even with no new rows',async t=>{
+ const f=await trustedFixture(t),{state}=await f.api.qualifyCheckpoint({reader:f.reader}),registry=structuredClone(f.registry);mutate(registry);
+ const candidate=repinNativeRegistry(f,registry),reader=new f.native.ImmutableReader(f.root,candidate,{invocation:f.reader.invocation});
+ try {await assert.rejects(f.api.qualifyTransition({state,reader}),expected);
+  assert.deepEqual(nativeLiteral(state.ledger),f.ledger);
+ } finally {f.api.releaseCheckpoint(state);}
+});
