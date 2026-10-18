@@ -3,13 +3,13 @@
  * Numeric lexemes are retained when hashing committed Python JSON: parsing
  * 1.0 through JS Number and stringifying 1 would silently change the hash.
  */
-import { readFile, writeFile, mkdir, readdir, stat } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, readdir, stat, lstat } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { gunzipSync } from 'node:zlib';
 import { resolve, relative, dirname, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {footprintHash} from './check-prepared.mjs';
-import {validateMacroReviewProjection,loadProjectionPredecessors} from './prepare-macro-review-projection.mjs';
+import {validateMacroReviewProjection,loadProjectionPredecessors,validateCurrentMemberEdges} from './prepare-macro-review-projection.mjs';
 
 export const CONTINENTS = ['Africa', 'Asia', 'Europe', 'North America', 'Oceania', 'South America'];
 export const LEDGERS = Object.fromEntries(CONTINENTS.map(name => [name, `data/geographic-semantic-followup/${name.toLowerCase().replaceAll(' ', '-')}.json.gz`]));
@@ -334,8 +334,20 @@ export async function validateSemanticFollowup(root, { expectedCounts = { locati
   result.source_verification = { current_repository_files_hashed: fileHashes.size, source_geometry_hash_declarations_checked: declaredSourceHashes, evidence_hash_declarations_format_checked: evidenceHashDeclarations, diagnostic_current_footprint_contexts_verified: diagnosticContextsVerified, retained_source_geometry_bytes_verified: retainedSourceBytesVerified, external_response_bytes_refetched: 0, limitation: 'External response/source hashes whose original bytes are not committed remain declarations. This validation neither refetches public sources nor claims unavailable original bytes were verified.' };
   result.critical_input_sha256 = Object.fromEntries(['data/hierarchy.json', 'data/world-index.json', 'data/world-review.json', 'data/location-policy.json', 'data/global-semantic-closure.json.gz', 'data/geographic-decision-migration.json.gz', 'data/macro-boundary-migration.json.gz', 'data/geographic-repair-evidence/migration-receipt.json.gz'].map(path => [path, fileHashes.get(path)]));
   if(membershipProjection){
-    const currentHierarchyRaw=await readFile(safePath('data/hierarchy.json')),currentIndexRaw=await readFile(safePath('data/world-index.json')),currentHierarchy=JSON.parse(currentHierarchyRaw),currentIndex=JSON.parse(currentIndexRaw),currentFeatures=[];
-    for(const part of currentIndex.parts)currentFeatures.push(...JSON.parse(await readFile(safePath(`data/${part}`))).features);
+    const currentHierarchyRaw=await readFile(safePath('data/hierarchy.json')),currentIndexRaw=await readFile(safePath('data/world-index.json')),currentHierarchy=JSON.parse(currentHierarchyRaw),currentIndex=JSON.parse(currentIndexRaw);let currentFeatures=[];
+    const memberParts=Object.hasOwn(membershipProjection,'member_edges')?[]:null;
+    for(const part of currentIndex.parts){
+      const name=`data/${part}`,file=safePath(name),raw=await readFile(file);
+      if(!memberParts)currentFeatures.push(...JSON.parse(raw).features);
+      if(memberParts){const info=await lstat(file);requireThat(info.isFile()&&!(info.mode&0o111),'Current member part is not an ordinary nonexecutable file');memberParts.push({path:name,mode:'100644',raw});}
+    }
+    if(memberParts){
+      const dashboard=JSON.parse(await readFile(safePath('data/macro-foundation/world-review-projection.json'))),compactParts=[];
+      requireThat(Array.isArray(dashboard.location_parts),'Missing compact current projection inventory');
+      for(const part of dashboard.location_parts)compactParts.push({path:`data/${part}`,raw:await readFile(safePath(`data/${part}`))});
+      const {features,...facts}=validateCurrentMemberEdges({projection:membershipProjection,dashboard,compactParts,indexRaw:currentIndexRaw,parts:memberParts});
+      currentFeatures=features;result.current_member_edges=facts;
+    }
     const currentLocations=currentFeatures.map(feature=>({id:feature.id,name:feature.properties.name,parent_id:feature.properties.parent_id,owner:feature.properties.reference_owner}));
     const projected=validateMacroReviewProjection({projection:membershipProjection,hierarchy:currentHierarchy,locations:currentLocations,baselineHierarchy:hierarchy,baselineLocations:locations,predecessorProjections:loadProjectionPredecessors({data:resolve(root,'data'),projection:membershipProjection}),currentPins:{hierarchy_sha256:hash(currentHierarchyRaw),location_index_sha256:hash(currentIndexRaw),footprints_sha256:footprintHash(currentFeatures)}});
     for(const receipt of membershipProjection.crosswalks){const raw=await readFile(safePath(receipt.path));requireThat(hash(raw)===receipt.sha256,'Current membership projection receipt bytes changed');}
