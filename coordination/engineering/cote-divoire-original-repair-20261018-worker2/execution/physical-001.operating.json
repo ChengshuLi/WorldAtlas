@@ -1,0 +1,33 @@
+{
+  "tag": "physical-001",
+  "cwd": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/2a7867caa47dd0380802e1986e9d092176bac5b5abdf585e9932b57606842885/work",
+  "command": [
+    "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "physical",
+    ".cache/civ-original-20261018/physical-launch-config-001.json",
+    "coordination/engineering/cote-divoire-original-repair-20261018-worker2/physical-001"
+  ],
+  "original_scope_cells": 2049,
+  "land_cells": 2049,
+  "inland_water_cells": 0,
+  "original_intervals": 1028,
+  "whole_requested_members": 66,
+  "complete_country_context": 510,
+  "original_positive_atoms": 66,
+  "original_contact_atoms": 91,
+  "config_sha256": "284e6daef46968f6b38b1fc14fc909d0b3dd029c84d9c482da98ace2843f803c",
+  "stage_commit": "3b7b93534ba5cb1a33ed44f6dff1fcb5ef8d9a7c",
+  "expected_runtime_python_alias": "/Users/chengshuli/.cache/worldatlas-python-envs/requirements-a911b499659c266373447ffef081b16be803c5b5b2cd22889cc5c7a22811c0ae-python-3.12.14-macos-arm64/bin/python",
+  "limits": [
+    "Firstphysicalproduceronly;nosource/nativequalificationorselectedapproval.",
+    "Unchanged24commonphysicalinputs+runtimeinventoryreused; stockentryperformsactualcompletecustodyverification.",
+    "PreserveconfiguredPythonaliasandremoveinherited__PYVENV_LAUNCHER__asinexistingworkinglauncher."
+  ],
+  "state": "EXIT0",
+  "started_utc": "2026-10-18T03:26:07.363981+00:00",
+  "pid": 98300,
+  "returncode": 0,
+  "completed_utc": "2026-10-18T03:26:18.562843+00:00",
+  "external_elapsed_seconds": 11.198242208
+}
