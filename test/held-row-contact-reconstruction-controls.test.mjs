@@ -21,7 +21,7 @@ const expectedPacketSha='b2bd104ecd27a599973c83815fc941a8a8182015b524d475fc1ccd8
 const expectedResultsSha='d4f3160ce42ed4ba5f1fb9ded4fd22d48bd19fc452b0753393b3d2411a99b2b0';
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 function git(args){
- return execFileSync('git',args,{cwd:root,encoding:null,maxBuffer:8*1024*1024,env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_TERMINAL_PROMPT:'0'}});
+ return execFileSync('git',['--no-lazy-fetch',...args],{cwd:root,encoding:null,maxBuffer:8*1024*1024,env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_TERMINAL_PROMPT:'0'}});
 }
 function authenticate(pin){
  assert.equal(typeof pin.commit,'string');
@@ -39,9 +39,9 @@ function authenticate(pin){
  assert.equal(bytes.length,pin.bytes,'byte length differs: '+pin.path);
  assert.equal(sha(bytes),pin.sha256,'SHA-256 differs: '+pin.path);
  let decoded=null;
- if(pin.decoded_bytes!==undefined){
+ if(pin.decoded_sha256!==undefined){
   decoded=zlib.gunzipSync(bytes);
-  assert.equal(decoded.length,pin.decoded_bytes,'decoded byte length differs: '+pin.path);
+  if(pin.decoded_bytes!==undefined)assert.equal(decoded.length,pin.decoded_bytes,'decoded byte length differs: '+pin.path);
   assert.equal(sha(decoded),pin.decoded_sha256,'decoded SHA-256 differs: '+pin.path);
  }
  return {bytes,decoded};
@@ -72,6 +72,7 @@ test('authenticated held-row reconstruction matches its retained output and reje
  const manifestTree=git(['ls-tree','-z','HEAD','--',fixtureManifestPath]).toString('utf8').split('\0').filter(Boolean);
  assert.equal(manifestTree.length,1);
  assert.equal(manifestTree[0].split(' ')[2]?.split('\t')[0],expectedPinsBlob,'review locator manifest changed');
+ assert.equal(createHash('sha1').update(`blob ${manifestBytes.length}\0`).update(manifestBytes).digest('hex'),expectedPinsBlob,'actual review locator bytes changed');
  assert.equal(manifest.reviewed_head,'2a2745b995de5ffaae04376737a573b703e53db0');
  const packetBytes=fs.readFileSync(packetPath),resultsBytes=fs.readFileSync(resultsPath),adapterBytes=fs.readFileSync(adapterPath);
  assert.equal(sha(packetBytes),expectedPacketSha);
@@ -98,13 +99,21 @@ test('authenticated held-row reconstruction matches its retained output and reje
    const {bytes,decoded}=authenticate(pin);
    const target=path.join(fixtureRoot,pin.fixture_path);
    fs.mkdirSync(path.dirname(target),{recursive:true});
-   fs.writeFileSync(target,decoded??bytes);
+   // Source payloads remain exact gzip bodies. Only the normative latitude
+   // vector has an explicit decoded-runtime fixture contract.
+   fs.writeFileSync(target,pin===manifest.latitudes?decoded:bytes);
    if(pin.decoded_sha256)extracted.set(pin.fixture_path,decoded);
   }
   const packet=JSON.parse(packetBytes.toString('utf8'));
   const originalBlocks=new Map(manifest.original_extraction_inputs.map(pin=>[pin.country+':'+pin.block,pin]));
-  for(const row of packet.rows){
+  const expectedRows=JSON.parse(resultsBytes.toString('utf8')).results;
+  function validateOriginalRows(value){
+   assert.equal(value.rows.length,expectedRows.length,'complete original held-row roster');
+   const keys=new Set();
+   for(const row of value.rows){
    const key=row.original_key,country=row.owner.source_id.split(':')[1];
+   const identity=[country,key.y,key.x,key.owner_index].join(':');assert(!keys.has(identity),'duplicate original held row');keys.add(identity);
+   assert(expectedRows.some(r=>r.country===country&&r.cell.y===key.y&&r.cell.x===key.x&&r.owner===key.owner_index&&r.target===row.owner.source_id),'original key/source binding differs');
    const pin=originalBlocks.get(country+':'+key.original_block);
    assert(pin,'original interval pin missing for row');
    const block=JSON.parse(extracted.get(pin.fixture_path).toString('utf8'));
@@ -112,8 +121,18 @@ test('authenticated held-row reconstruction matches its retained output and reje
    const matches=block.filter(item=>item[0]===key.y&&item[1]<=key.x&&key.x<item[2]&&item[3].includes(key.owner_index));
    assert.equal(matches.length,1,'original row must be unique for '+country+' '+key.x+','+key.y);
    assert.equal(matches[0][5],key.class,'original class differs for '+country);
-   assert.deepEqual(matches[0][4],[...row.original_source_contact_indices].sort((a,b)=>a-b),'complete original contacts differ for '+country);
+   assert.deepEqual(matches[0][4],row.original_source_contact_indices,'complete original contacts differ for '+country);
+   assert.deepEqual(row.original_source_contacts.map(contact=>contact.source_index),matches[0][4],'complete original contact records differ for '+country);
+   }
   }
+  validateOriginalRows(packet);
+  for(const change of [
+   value=>value.rows.pop(),value=>value.rows.push(structuredClone(value.rows[0])),
+   value=>{value.rows[0].original_key.class='inland-water';},
+   value=>{value.rows[0].original_key.owner_index++;},
+   value=>value.rows[0].original_source_contact_indices.pop(),
+   value=>value.rows[0].original_source_contacts.pop()
+  ]){const altered=structuredClone(packet);change(altered);assert.throws(()=>validateOriginalRows(altered));}
   const expected=JSON.parse(resultsBytes.toString('utf8'));
   const baseline=runAdapter(packetPath,fixtureRoot,path.join(fixtureRoot,manifest.helper.fixture_path),path.join(fixtureRoot,manifest.latitudes.fixture_path));
   assert.equal(baseline.status,0,baseline.stderr);
@@ -137,7 +156,9 @@ test('authenticated held-row reconstruction matches its retained output and reje
   refuse('changed original owner binding',changedPacket,fixtureRoot,path.join(fixtureRoot,manifest.helper.fixture_path),path.join(fixtureRoot,manifest.latitudes.fixture_path),/Target binding mismatch/);
   const alteredRoot=path.join(tmp,'altered-inputs');fs.cpSync(fixtureRoot,alteredRoot,{recursive:true});
   const positive=path.join(alteredRoot,'payloads','gb-HND-ADM2-000.bin.gz');
-  fs.writeFileSync(positive,zlib.gzipSync(zlib.gunzipSync(fs.readFileSync(positive))));
+  const sourceBytes=fs.readFileSync(positive),alteredBytes=Buffer.from(sourceBytes);alteredBytes[4]^=1;
+  assert.deepEqual(zlib.gunzipSync(alteredBytes),zlib.gunzipSync(sourceBytes),'changed gzip header preserves decoded source');
+  assert.notEqual(sha(alteredBytes),sha(sourceBytes),'adverse source must genuinely differ');fs.writeFileSync(positive,alteredBytes);
   refuse('altered complete positive source body',packetPath,alteredRoot,path.join(fixtureRoot,manifest.helper.fixture_path),path.join(fixtureRoot,manifest.latitudes.fixture_path),/Whole source body mismatch/);
   for(const [name,mutate] of [
    ['changed contact relation',doc=>{doc.results[0].positive.relation='outside';}],

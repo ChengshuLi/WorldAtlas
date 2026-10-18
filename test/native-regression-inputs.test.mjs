@@ -114,8 +114,8 @@ const consumers=[
  ['test/physical-component-custody.test.mjs',custody],
  ['test/physical-component-report-binding.test.mjs',custody],
  [EXCEPTION_TEST,Object.values(EXCEPTION_COMMITS)],
- [SLE_TEST,SLE_COMMITS],
- [HOLD_TEST,HOLD_COMMITS]
+ [HOLD_TEST,HOLD_COMMITS],
+ [SLE_TEST,SLE_COMMITS]
 ];
 function requiredFor(files,options={}){
  const f=fixture(options),result=prepareNativeRegressionInputs('full',{...f.options,files});
@@ -142,7 +142,7 @@ test('held-row reconstruction acquires exactly its immutable source, evidence, h
  const declared=new Set(expected.map(pin=>f.descriptors.get(pin.commit+':'+pin.path).oid));
  const fetch=f.calls.find(c=>c.args.includes('--stdin'));
  assert(fetch,'exact body acquisition is required');
- assert.deepEqual(new Set(fetch.options.input.trimEnd().split('\\n')),declared);
+ assert.deepEqual(new Set(fetch.options.input.trimEnd().split('\n')),declared);
 });
 test('unrelated and snapshot-only controls omit historical acquisition while unscoped callers retain it',()=>{
  for(const files of [['test/future-native-consumer.test.mjs'],[
@@ -342,4 +342,23 @@ test('evidence profile acquires the exact original exception consumer pins witho
  const trees=f.calls.filter(x=>x.args[0]==='ls-tree').map(x=>x.args[2]+':'+x.args[4]);
  assert.deepEqual(new Set(trees),new Set(wanted.map(p=>p.commit+':'+p.path)));
  assert.equal(f.calls.filter(x=>x.args.includes('--stdin')).length,1);
+});
+
+test('held-row evidence acquisition preserves exact scope and refuses failed or incomplete custody',()=>{
+ for(const profile of ['evidence','full']){
+  const present=fixture({present:FULL_COMMITS});
+  assert.deepEqual(prepareNativeRegressionInputs(profile,{...present.options,files:[HOLD_TEST]}),{applicable:true,fetched:[]});
+  assert.equal(present.calls.filter(c=>c.args[0]==='ls-tree').length,14);
+  assert.equal(present.calls.filter(c=>c.args[0]==='fetch').length,0);
+  for(const failure of [{fetchFails:true},{fetchIncomplete:true}]){
+   const f=fixture(failure);
+   assert.throws(()=>prepareNativeRegressionInputs(profile,{...f.options,files:[HOLD_TEST]}),/command failed|remain unavailable/);
+   assert.equal(f.calls.filter(c=>c.args[0]==='fetch').length,1);
+  }
+  for(const failure of [{bodyFetchFails:true},{bodyFetchIncomplete:true}]){
+   const f=fixture({present:FULL_COMMITS,bodiesPresent:false,...failure});
+   assert.throws(()=>prepareNativeRegressionInputs(profile,{...f.options,files:[HOLD_TEST]}),/command failed|bodies remain unavailable/);
+   assert.equal(f.calls.filter(c=>c.args[0]==='fetch').length,1);
+  }
+ }
 });
