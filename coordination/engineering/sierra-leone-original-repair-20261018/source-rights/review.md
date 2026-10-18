@@ -1,0 +1,22 @@
+# Historical source meaning and rights
+
+This packet evaluates exactly3,878 original land requests /1,335 intervals /11 intended historical district owners and all11 direct geoBoundaries source atoms. Stock extraction reproduced the whole denominator. The complete domestic original products contain4 ADM1 and14 ADM2 features; current selected lineage retains the same14 stable districts. No current16-unit boundary source is substituted.
+
+Actual whole raw consumed source and current selected display geometries are distinct. All14 selected country features are unchanged from accepted21984e to current923e9c; all11 positive owner IDs, names, direct parents and source atoms join exactly. Every positive consumed raw geometry differs from its selected display geometry. The initial metadata inspection incorrectly asserted equality and stopped before an output; the corrected source-fit record preserves both actual geometries and vertex counts. No geometry was repaired, clipped, simplified anew, unioned or replaced. These differences require the genuine stock physical and native predicates, not a metadata equality claim.
+
+The largest original owner request is Bonthe1,711 cells, followed by Port Loko770. Western Area Rural286 and Western Area Urban117 remain literal distinct source owners. Those403 source-relative requests do not resolve their present rural/urban role, parent or current-completeness questions under#751.
+
+Upstream is exact `wmgeolab/geoBoundaries` commit `9469f09592ced973a3448cf66b6100b741b64c0d`. Actual ZIPs matched their exact immutable LFS pointer size/SHA-256:
+
+- SLE_ADM1.zip580,878bytes, SHA-256 `f86b437e8ac44a6f3e5f344d93795e562970283f629c35a930518771e4e9b8c7`.
+- SLE_ADM2.zip459,197bytes, SHA-256 `b4cd638f5053f2d23f1064a2496f9794abf814d7532f514b6543f7fe0af96777`.
+
+All archive members and original rights images/text are retained. ADM1 meta identifies Province, Government of Sierra Leone / OCHA ROWCA, represented2014, CC BY3.0 IGO. ADM2 identifies Districts, the same providers, represented2017, CC BY3.0 IGO. Their actual PRJs declare WGS84 degrees; both retained whole GeoJSONs explicitly declare CRS84 longitude/latitude. That is a retained coordinate declaration, not a new projection or survey-accuracy conclusion.
+
+The actual ADM1 license image is a generic HDX license-options page, not an independent dataset-specific grant. The actual ADM2 dataset image names Government of Sierra Leone and OCHA ROWCA, records August16 2017–June2 2021 and update October16 2020, and declares CC BY-IGO without a visible version number. Version3.0 comes from actual meta. The image describes data collected from government, cleaned and pcoded by OCHA/ITOS, and retained historical cleaning/coding updates. These are source provenance and declarations, not contemporary statutory completeness or independent underlying licensor-authority adjudication. Preserve attribution, license link and change indication in later source handoffs.
+
+Closed#784 / correction#860 already supersede twelve old#746 SLE assessment rows whose builder leaked Togo's CC BY-SA2.0 field. The actual current retained correction `research/geography/sierra-leone-license-provenance-746/license-provenance.json` is45,968bytes, SHA-256 `3b106d961b9b1a3c6ee691f8c8ab89904d55270fe985183c652fa702bdec6763`. It retains the government/OCHA2017 Districts and SLE CC BY3.0 IGO declarations. The old source/assessment bytes and correction stay intact. No original reproduce.py/verify.py was executed: open#1062 concerns its retained receipt overwrite behavior, outside this repair task.
+
+Open#751 owns Western Area Rural/Urban present role, shared parent and current16-versus-historical14 completeness. Preserve that source uncertainty and its two exact IDs; no present legal/settlement or hierarchy correction follows from this repair. Current source completeness and regional semantic approval remain unproved.
+
+The actual current accepted patch905bdc has zero key contacts with all3,878 frozen requests, regardless of added owner; this is a bounded overlap screen, not the final authoritative selected native owner-zero/conservation/emitted-consumer result. Complete physical witnesses, whole domestic/foreign competitors, retained periodic exceptions, genuine original native authority and independent exact-head scientific review remain required. Qualification and accepted credit are zero at this draft checkpoint.
