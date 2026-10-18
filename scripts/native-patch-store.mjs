@@ -50,6 +50,25 @@ class Input {
   }
   return this.at<this.buffer.length;
  }
+ // A complete numeric tuple already in the owned chunk needs no asynchronous
+ // scalar dispatch. JSON.parse remains the number/syntax authority. Nonmatches,
+ // malformed tuples and chunk splits leave the cursor untouched for the grammar.
+ inlinePair(){
+  let at=this.at;while(at<this.buffer.length&&whitespace(this.buffer[at]))at++;
+  if(this.buffer[at]!==91)return null;const start=at++;let commas=0;
+  for(;at<this.buffer.length;at++){
+   const byte=this.buffer[at];
+   if(byte===93){
+    if(commas!==1)return null;let value;
+    try{value=JSON.parse(this.buffer.subarray(start,at+1));}catch{return null;}
+    if(value.length!==2||value.some(item=>typeof item!=='number'))return null;
+    this.at=at+1;return value;
+   }
+   if(byte===44){if(++commas>1)return null;continue;}
+   if(!(whitespace(byte)||byte>=48&&byte<=57||byte===43||byte===45||byte===46||byte===69||byte===101))return null;
+  }
+  return null;
+ }
  async peek(){return await this.available()?this.buffer[this.at]:undefined;}
  async space(){while(await this.available()){while(this.at<this.buffer.length&&whitespace(this.buffer[this.at]))this.at++;if(this.at<this.buffer.length)return;}}
  syntax(ok,message){if(!ok)throw this.syntaxErrors?new SyntaxError(message):Error(message);}
@@ -109,8 +128,11 @@ function readExact(fd,buffer,length,position,extent){
 
 async function array(input,visit){
  await input.char(91);await input.space();if(await input.peek()===93){input.at++;return;}
- while(true){await visit();await input.space();const next=await input.peek();
-  if(next===93){input.at++;return;}await input.char(44);
+ while(true){const pending=visit();if(pending!==undefined)await pending;
+  while(input.at<input.buffer.length&&whitespace(input.buffer[input.at]))input.at++;
+  if(input.at===input.buffer.length)await input.space();
+  const next=input.at<input.buffer.length?input.buffer[input.at]:await input.peek();
+  if(next===93){input.at++;return;}input.syntax(next===44,'Malformed native JSON delimiter');input.at++;
  }
 }
 async function object(input,visit){
@@ -320,9 +342,14 @@ async function admitStore({chunks,expected,directory,size,ownerCount,rowField='r
    const values=[],index=coordinateIndex(depth),start=index.position;let count=0,spilled=false,valueError;
    const append=value=>{let body;try{body=metadataBytes(value);}catch(error){valueError??=error.message;body=Buffer.from('[null]');}const record=Buffer.allocUnsafe(16);
     record.writeBigUInt64LE(BigInt(vectors.position),0);record.writeBigUInt64LE(BigInt(body.length),8);vectors.append(body);index.append(record);};
-   await array(input,async()=>{const value=await metadataNode(coordinates==='array'?false:true,depth+1);count++;
+   const retain=value=>{count++;
     if(!spilled&&count<=32){values.push(value);return;}
     if(!spilled){for(const previous of values)append(previous);values.length=0;spilled=true;}append(value);
+   };
+   await array(input,()=>{
+    const pair=coordinates===true?input.inlinePair():null;
+    if(pair){retain(pair);return;}
+    return metadataNode(coordinates==='array'?false:true,depth+1).then(retain);
    });
    if(!spilled)return values;
    vectors.flush();index.flush();return coordinateSequence({depth,start,count,...(valueError?{error:valueError}:{})});
