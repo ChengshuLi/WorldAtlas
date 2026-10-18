@@ -390,11 +390,15 @@ class WorkerWorkflowBootstrapTests(WorkflowBootstrapFixture, unittest.TestCase):
         upload_name='Retain original final-worker package output'
         browser_name='Install browser dependencies only for tests that use Playwright'
         tests_name='Test applicable combined-tree invariants without publishing or live imports'
-        order=['Authenticate selected package installer inputs','npm ci','pip install',
-          'Assemble unchanged base with current selected output',snapshot_name,build_name,inventory_name,
+        order=['Authenticate selected package installer inputs','npm ci',
+          'Assemble unchanged base with current selected output','pip install',snapshot_name,build_name,inventory_name,
           upload_name,browser_name,tests_name]
         positions=[self.integration.index(name) for name in order]
         self.assertEqual(positions,sorted(positions))
+        install=self.integration.split('- run: python -m pip install -r requirements.txt',1)[1].split('      - ',1)[0]
+        self.assertIn("steps.assembly.outputs.assembled != 'true'",install)
+        for profile in ['full','evidence']:
+            self.assertIn("needs.prepare.outputs.profile == '"+profile+"'",install)
         for name in [snapshot_name,build_name,inventory_name,upload_name]:
             step=self.integration.split('- name: '+name,1)[1].split('      - ',1)[0]
             self.assertIn("steps.assembly.outputs.assembled != 'true'",step)
