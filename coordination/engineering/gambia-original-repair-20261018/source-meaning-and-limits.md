@@ -1,0 +1,7 @@
+# Historical Gambia source meaning and retained limits
+
+Original2,377 land/0water,1,255intervals,34owners and ALL42positiveatoms; Banjul is the existing complete nine-member aggregate. Full40-location/48-atom domestic cohort and both wholeGMBproducts(8ADM1+48ADM2) retained. Both actual9469archives/meta/licenseimages declare2020WorldBank/geoBoundaries CC BY4.0. ActualGMBADM2metadata explicitly says the supplied district layer appeared incorrectly projected and this dataset was produced by dissolving Wards by district. No reprojection or alternative dissolve was performed here. Preserve actual WGS84 degrees/CRS84 declarations, sourcevintage, fullpositivegeometry and every later wholeforeign operand.
+
+Public source/current semantic questions#830(Banjul independent-city/agglomeration role and cross-LGA parent) and#835(ten original district-footprint mismatches and current legal boundary gap) remain open. Source-relative native qualification cannot close those questions or approve regional geography. All actual physical/hierarchy/territorial/empty-class issues and originalheldkeys must remain visible. Accepted/delivered credit0.
+
+Fresh exactpackageissue/openGambiabranch/openPR queries were empty; all135campaign1202comments and30reservation633comments had noGMB/Gambia packageclaim. Parent separately checked privateassignments and authorized this exact historicalpackage. Ordinaryissuecreate was deniedbeforeexecution and remains stopped; issue=null. This does not authorize an alternate public post.

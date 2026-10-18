@@ -1,0 +1,834 @@
+{
+  "version": 1,
+  "kind": "complete-original-Gambia-repair-evaluation",
+  "issue": null,
+  "public_claim_status": "denied-known-not-executed-stopped",
+  "accepted_commit": "10927524e465bf1eef09a2e2c458525bde9c7442",
+  "original_ownership_vintage": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+  "package_id": "gb-GMB-ADM2--repair-evaluation",
+  "original_cells": 2377,
+  "original_intervals": 1255,
+  "land_cells": 2377,
+  "inland_water_cells": 0,
+  "owners": [
+    {
+      "id": "atlas:city:GMB-2153",
+      "index": 14,
+      "bounds": [
+        118850.91703111112,
+        121171.05902149029,
+        119014.98925277777,
+        121295.48038947451
+      ],
+      "province_id": "framework:province:banjul:c80b5ee73d87",
+      "province_index": 795,
+      "name": "Banjul",
+      "reference_owner": "Gambia",
+      "source_id": "atlas:city:GMB-2153",
+      "location_basis": "Source city territory: Independent City",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B18055278254530",
+        "gb:GMB:ADM2:56634734B29168541437208",
+        "gb:GMB:ADM2:56634734B31410801409584",
+        "gb:GMB:ADM2:56634734B33214654746760",
+        "gb:GMB:ADM2:56634734B44527271765824",
+        "gb:GMB:ADM2:56634734B65078205245432",
+        "gb:GMB:ADM2:56634734B71497134195207",
+        "gb:GMB:ADM2:56634734B93236052329958",
+        "gb:GMB:ADM2:56634734B97208940932189"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B11412565261125",
+      "index": 20823,
+      "bounds": [
+        119658.97090222222,
+        121168.73746714306,
+        119746.286745,
+        121271.27854275715
+      ],
+      "province_id": "framework:province:mansakonko:579d1387a1a9",
+      "province_index": 2880,
+      "name": "Kiang East",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B11412565261125"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B1390118495461",
+      "index": 20824,
+      "bounds": [
+        118839.84779999999,
+        121263.97142742157,
+        118953.45306666667,
+        121490.25087132983
+      ],
+      "province_id": "framework:province:brikama:f43b4100863d",
+      "province_index": 1037,
+      "name": "Kombo South",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B1390118495461"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B14945153011857",
+      "index": 20825,
+      "bounds": [
+        119331.99164111112,
+        121089.9364888083,
+        119439.552525,
+        121203.55762320299
+      ],
+      "province_id": "framework:province:kerewan:94bf612f6cf1",
+      "province_index": 2414,
+      "name": "Lower Badibu",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B14945153011857"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B15786085247071",
+      "index": 20826,
+      "bounds": [
+        120663.94056888888,
+        121258.3576153427,
+        120800.84947999999,
+        121369.96555546828
+      ],
+      "province_id": "framework:province:basse:00c74ff86e75",
+      "province_index": 829,
+      "name": "Basse",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B15786085247071"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B211008456047",
+      "index": 20827,
+      "bounds": [
+        118897.52432000001,
+        121283.9551825621,
+        119005.667795,
+        121410.88809856
+      ],
+      "province_id": "framework:province:brikama:f43b4100863d",
+      "province_index": 1037,
+      "name": "Kombo Central",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B211008456047"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B21442074713298",
+      "index": 20828,
+      "bounds": [
+        119888.58462388889,
+        121018.14622861157,
+        119969.27349277778,
+        121146.26925450044
+      ],
+      "province_id": "framework:province:janjanbureh:ce498c872e50",
+      "province_index": 2219,
+      "name": "Niamina Dankunku",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B21442074713298"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B22755125769096",
+      "index": 20829,
+      "bounds": [
+        120300.40371555556,
+        121117.35599245771,
+        120368.34840388889,
+        121142.0748750872
+      ],
+      "province_id": "framework:province:janjanbureh:ce498c872e50",
+      "province_index": 2219,
+      "name": "Janjanbureh",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B22755125769096"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B25207283407562",
+      "index": 20830,
+      "bounds": [
+        118981.12614444445,
+        121283.9551825621,
+        119163.33151444445,
+        121409.04690733529
+      ],
+      "province_id": "framework:province:brikama:f43b4100863d",
+      "province_index": 1037,
+      "name": "Kombo East",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B25207283407562"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B27555440336226",
+      "index": 20832,
+      "bounds": [
+        119524.29276208537,
+        121089.99894737315,
+        119749.34534833333,
+        121192.99996787432
+      ],
+      "province_id": "framework:province:kerewan:94bf612f6cf1",
+      "province_index": 2414,
+      "name": "Illiasa",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B27555440336226"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B28238259284132",
+      "index": 20833,
+      "bounds": [
+        119061.37806999999,
+        121134.88428096208,
+        119279.70408888889,
+        121286.20041029523
+      ],
+      "province_id": "framework:province:kerewan:94bf612f6cf1",
+      "province_index": 2414,
+      "name": "Upper Niumi",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B28238259284132"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B30137768679203",
+      "index": 20834,
+      "bounds": [
+        119031.73874722222,
+        121089.56187612779,
+        119215.10929944445,
+        121216.66023264447
+      ],
+      "province_id": "framework:province:kerewan:94bf612f6cf1",
+      "province_index": 2414,
+      "name": "Lower Niumi",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B30137768679203"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B33233148834926",
+      "index": 20835,
+      "bounds": [
+        120863.18672888888,
+        121150.83801993154,
+        121038.61947722222,
+        121296.8274436988
+      ],
+      "province_id": "framework:province:basse:00c74ff86e75",
+      "province_index": 829,
+      "name": "Kantora",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B33233148834926"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B41420439456091",
+      "index": 20836,
+      "bounds": [
+        120143.24976333334,
+        120935.30380371331,
+        120369.29511444444,
+        121118.47965243994
+      ],
+      "province_id": "framework:province:kuntaur:8a45ba292617",
+      "province_index": 2550,
+      "name": "Niani",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B41420439456091"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B42374489083147",
+      "index": 20837,
+      "bounds": [
+        120002.04424277777,
+        120991.6858804901,
+        120237.1197561111,
+        121121.25131674141
+      ],
+      "province_id": "framework:province:janjanbureh:ce498c872e50",
+      "province_index": 2219,
+      "name": "Niamina East",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B42374489083147"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B42615963496738",
+      "index": 20838,
+      "bounds": [
+        119297.98288500002,
+        121310.14777419239,
+        119451.85976222223,
+        121409.86959525582
+      ],
+      "province_id": "framework:province:brikama:f43b4100863d",
+      "province_index": 1037,
+      "name": "Foni Kansala",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B42615963496738"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B42913132832661",
+      "index": 20839,
+      "bounds": [
+        120489.96429833335,
+        121223.69781132566,
+        120707.19795888888,
+        121359.6040482009
+      ],
+      "province_id": "framework:province:basse:00c74ff86e75",
+      "province_index": 829,
+      "name": "Jimara",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B42913132832661"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B48610519572764",
+      "index": 20840,
+      "bounds": [
+        120681.85524555555,
+        121121.32622598863,
+        120833.54740611112,
+        121280.66213148316
+      ],
+      "province_id": "framework:province:basse:00c74ff86e75",
+      "province_index": 829,
+      "name": "Wuli West",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B48610519572764"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B54242206420565",
+      "index": 20841,
+      "bounds": [
+        120276.51748,
+        121043.10376736769,
+        120562.01668058345,
+        121207.45106982677
+      ],
+      "province_id": "framework:province:kuntaur:8a45ba292617",
+      "province_index": 2550,
+      "name": "Sami",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B54242206420565"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B54781332377439",
+      "index": 20842,
+      "bounds": [
+        120735.81774722222,
+        121193.44924246162,
+        120929.16517222222,
+        121322.31284345064
+      ],
+      "province_id": "framework:province:basse:00c74ff86e75",
+      "province_index": 829,
+      "name": "Tumana",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B54781332377439"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B57370738255875",
+      "index": 20843,
+      "bounds": [
+        119268.63485777778,
+        121197.26803101362,
+        119575.22343,
+        121353.24506869228
+      ],
+      "province_id": "framework:province:mansakonko:579d1387a1a9",
+      "province_index": 2880,
+      "name": "Kiang West",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B57370738255875"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B57962636272806",
+      "index": 20844,
+      "bounds": [
+        119906.71777222223,
+        120917.30570254079,
+        120164.87845833333,
+        121051.87179530959
+      ],
+      "province_id": "framework:province:kuntaur:8a45ba292617",
+      "province_index": 2550,
+      "name": "Upper Saloum",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B57962636272806"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B67575656085362",
+      "index": 20846,
+      "bounds": [
+        119167.70094777778,
+        121289.9423946171,
+        119348.81395944444,
+        121409.86959525582
+      ],
+      "province_id": "framework:province:brikama:f43b4100863d",
+      "province_index": 1037,
+      "name": "Foni Bintang Karanai",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B67575656085362"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B6993374345684",
+      "index": 20847,
+      "bounds": [
+        119806.5121011111,
+        121163.71981126639,
+        119907.5916588889,
+        121275.12368307679
+      ],
+      "province_id": "framework:province:mansakonko:579d1387a1a9",
+      "province_index": 2880,
+      "name": "Jarra central",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B6993374345684"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B78170872061000",
+      "index": 20851,
+      "bounds": [
+        119206.07913722222,
+        121083.11841426961,
+        119369.27747222222,
+        121222.72454558003
+      ],
+      "province_id": "framework:province:kerewan:94bf612f6cf1",
+      "province_index": 2414,
+      "name": "Jokadu",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B78170872061000"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B81557661921178",
+      "index": 20852,
+      "bounds": [
+        119908.3198977778,
+        121046.17637365623,
+        120042.50987709769,
+        121155.85603743816
+      ],
+      "province_id": "framework:province:janjanbureh:ce498c872e50",
+      "province_index": 2219,
+      "name": "Niamina West",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B81557661921178"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B83949040016571",
+      "index": 20853,
+      "bounds": [
+        119721.67227055554,
+        121148.51620292876,
+        119832.65587722222,
+        121265.24386722578
+      ],
+      "province_id": "framework:province:mansakonko:579d1387a1a9",
+      "province_index": 2880,
+      "name": "Jarra West",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B83949040016571"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B85088174381509",
+      "index": 20854,
+      "bounds": [
+        120002.55401000002,
+        120950.45077036868,
+        120165.1697538889,
+        121045.05225559983
+      ],
+      "province_id": "framework:province:kuntaur:8a45ba292617",
+      "province_index": 2550,
+      "name": "Nianija",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B85088174381509"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B86795933582352",
+      "index": 20855,
+      "bounds": [
+        119735.87292888889,
+        121051.87179530959,
+        119937.15815777777,
+        121205.6541049536
+      ],
+      "province_id": "framework:province:kerewan:94bf612f6cf1",
+      "province_index": 2414,
+      "name": "Sabach Sanjar",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B86795933582352"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B89687119950058",
+      "index": 20856,
+      "bounds": [
+        120809.73399444445,
+        121099.97581428886,
+        120988.96134392105,
+        121242.26371915282
+      ],
+      "province_id": "framework:province:basse:00c74ff86e75",
+      "province_index": 829,
+      "name": "Wuli East",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B89687119950058"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B90495316975710",
+      "index": 20857,
+      "bounds": [
+        120107.20193833334,
+        121074.5767203711,
+        120335.50483000002,
+        121206.62746315893
+      ],
+      "province_id": "framework:province:janjanbureh:ce498c872e50",
+      "province_index": 2219,
+      "name": "Lower Fuladu West",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B90495316975710"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B91081024976770",
+      "index": 20858,
+      "bounds": [
+        120293.33979833333,
+        121110.838624658,
+        120524.919765,
+        121293.2352768374
+      ],
+      "province_id": "framework:province:janjanbureh:ce498c872e50",
+      "province_index": 2219,
+      "name": "Upper Fuladu West",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B91081024976770"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B93657392024497",
+      "index": 20859,
+      "bounds": [
+        120519.74926888889,
+        121143.34817925822,
+        120715.13576277779,
+        121290.39142753734
+      ],
+      "province_id": "framework:province:basse:00c74ff86e75",
+      "province_index": 829,
+      "name": "Sandu",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B93657392024497"
+      ]
+    },
+    {
+      "id": "gb:GMB:ADM2:56634734B95834842597723",
+      "index": 20860,
+      "bounds": [
+        119557.23592944445,
+        121182.29192364194,
+        119659.04372611112,
+        121277.89292848567
+      ],
+      "province_id": "framework:province:mansakonko:579d1387a1a9",
+      "province_index": 2880,
+      "name": "Kiang Central",
+      "reference_owner": "Gambia",
+      "source_id": "gb:GMB:ADM2",
+      "source_atoms": [
+        "gb:GMB:ADM2:56634734B95834842597723"
+      ]
+    }
+  ],
+  "complete_source_atoms": [
+    "gb:GMB:ADM2:56634734B11412565261125",
+    "gb:GMB:ADM2:56634734B1390118495461",
+    "gb:GMB:ADM2:56634734B14945153011857",
+    "gb:GMB:ADM2:56634734B15786085247071",
+    "gb:GMB:ADM2:56634734B18055278254530",
+    "gb:GMB:ADM2:56634734B211008456047",
+    "gb:GMB:ADM2:56634734B21442074713298",
+    "gb:GMB:ADM2:56634734B22755125769096",
+    "gb:GMB:ADM2:56634734B25207283407562",
+    "gb:GMB:ADM2:56634734B27555440336226",
+    "gb:GMB:ADM2:56634734B28238259284132",
+    "gb:GMB:ADM2:56634734B29168541437208",
+    "gb:GMB:ADM2:56634734B30137768679203",
+    "gb:GMB:ADM2:56634734B31410801409584",
+    "gb:GMB:ADM2:56634734B33214654746760",
+    "gb:GMB:ADM2:56634734B33233148834926",
+    "gb:GMB:ADM2:56634734B41420439456091",
+    "gb:GMB:ADM2:56634734B42374489083147",
+    "gb:GMB:ADM2:56634734B42615963496738",
+    "gb:GMB:ADM2:56634734B42913132832661",
+    "gb:GMB:ADM2:56634734B44527271765824",
+    "gb:GMB:ADM2:56634734B48610519572764",
+    "gb:GMB:ADM2:56634734B54242206420565",
+    "gb:GMB:ADM2:56634734B54781332377439",
+    "gb:GMB:ADM2:56634734B57370738255875",
+    "gb:GMB:ADM2:56634734B57962636272806",
+    "gb:GMB:ADM2:56634734B65078205245432",
+    "gb:GMB:ADM2:56634734B67575656085362",
+    "gb:GMB:ADM2:56634734B6993374345684",
+    "gb:GMB:ADM2:56634734B71497134195207",
+    "gb:GMB:ADM2:56634734B78170872061000",
+    "gb:GMB:ADM2:56634734B81557661921178",
+    "gb:GMB:ADM2:56634734B83949040016571",
+    "gb:GMB:ADM2:56634734B85088174381509",
+    "gb:GMB:ADM2:56634734B86795933582352",
+    "gb:GMB:ADM2:56634734B89687119950058",
+    "gb:GMB:ADM2:56634734B90495316975710",
+    "gb:GMB:ADM2:56634734B91081024976770",
+    "gb:GMB:ADM2:56634734B93236052329958",
+    "gb:GMB:ADM2:56634734B93657392024497",
+    "gb:GMB:ADM2:56634734B95834842597723",
+    "gb:GMB:ADM2:56634734B97208940932189"
+  ],
+  "original_package": {
+    "package_id": "gb-GMB-ADM2--repair-evaluation",
+    "primary_source": "gb:GMB:ADM2",
+    "source_family_index": 129,
+    "category": "repair-evaluation",
+    "native_cells": 2377,
+    "land_cells": 2377,
+    "inland_water_cells": 0,
+    "source_relative_cells": 0,
+    "interval_segments": 1255,
+    "owners": [
+      14,
+      20823,
+      20824,
+      20825,
+      20826,
+      20827,
+      20828,
+      20829,
+      20830,
+      20832,
+      20833,
+      20834,
+      20835,
+      20836,
+      20837,
+      20838,
+      20839,
+      20840,
+      20841,
+      20842,
+      20843,
+      20844,
+      20846,
+      20847,
+      20851,
+      20852,
+      20853,
+      20854,
+      20855,
+      20856,
+      20857,
+      20858,
+      20859,
+      20860
+    ],
+    "source_features": [
+      34140,
+      34141,
+      34142,
+      34143,
+      34144,
+      34145,
+      34146,
+      34147,
+      34148,
+      34149,
+      34150,
+      34151,
+      34152,
+      34154,
+      34158,
+      34159,
+      34160,
+      34161,
+      34163,
+      34164,
+      34165,
+      34166,
+      34167,
+      34168,
+      34169,
+      34170,
+      34171,
+      34172,
+      34173,
+      34174,
+      34175,
+      34176,
+      34177,
+      34179,
+      34180,
+      34181,
+      34182,
+      34183,
+      34184,
+      34185,
+      34186,
+      34188,
+      34189,
+      34190,
+      34191,
+      34192,
+      34193,
+      34194,
+      34195
+    ],
+    "source_families": [
+      128,
+      129
+    ],
+    "native_blocks": [
+      29
+    ],
+    "provinces": [
+      "framework:province:banjul:c80b5ee73d87",
+      "framework:province:basse:00c74ff86e75",
+      "framework:province:brikama:f43b4100863d",
+      "framework:province:janjanbureh:ce498c872e50",
+      "framework:province:kerewan:94bf612f6cf1",
+      "framework:province:kuntaur:8a45ba292617",
+      "framework:province:mansakonko:579d1387a1a9"
+    ],
+    "location_count": 34,
+    "source_feature_count": 49,
+    "locality_count": 7,
+    "cost": {
+      "primary_source_decoded_bytes": 150483,
+      "all_required_source_decoded_bytes": 231462,
+      "primary_full_source_raster_measured_seconds": 0.089,
+      "source_interval_segments": 1255,
+      "maximum_native_rows_per_execution_frame": 4096,
+      "observed_global_census_peak_rss_bytes": 884973568
+    },
+    "evidence": {
+      "selection": "ownership-binding.json",
+      "lineage": "lineage.json",
+      "territorial_source_catalogue": "retained-source-catalogue.json",
+      "territorial_catalogue_sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "source_features": "source-feature-roster.json",
+      "territorial_native_blocks": "source-candidates-block-NNN.json.gz",
+      "physical": "physical-unassigned-summary.json",
+      "source_domain_transform": []
+    },
+    "work": {
+      "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+      "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+      "priority": 1
+    },
+    "execution": {
+      "command": "node source-batch-intervals.mjs gb-GMB-ADM2--repair-evaluation OUTPUT_DIRECTORY",
+      "output_columns": [
+        "y",
+        "start",
+        "end",
+        "candidate_owner_indices",
+        "source_feature_indices",
+        "physical_class"
+      ]
+    }
+  },
+  "complete_current_cohort_owners": 40,
+  "complete_current_cohort_source_atoms": 48,
+  "accepted_cells": 0
+}
