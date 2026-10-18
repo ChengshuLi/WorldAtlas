@@ -1,0 +1,44 @@
+{
+  "captures": [
+    {
+      "name": "physical-001.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_gzip": "retained-attempts-001/physical-001.stdout.log.gz"
+    },
+    {
+      "name": "physical-001.stderr.log",
+      "bytes": 2944,
+      "sha256": "1319878a61b810e6216a4c776beefd262ee0541e62fe19c35e53d40576218a5d",
+      "retained_gzip": "retained-attempts-001/physical-001.stderr.log.gz"
+    },
+    {
+      "name": "physical-002.stdout.log",
+      "bytes": 185847,
+      "sha256": "e04e839bfdfe9cddee0b7210c9cc911c609af002327b88b4d5e21132d0da38c6",
+      "retained_gzip": "retained-attempts-001/physical-002.stdout.log.gz"
+    },
+    {
+      "name": "physical-002.stderr.log",
+      "bytes": 777,
+      "sha256": "90a3fbf5744400ba81117eced8ce8f698dcc031155314c9eba67827fb3c8e722",
+      "retained_gzip": "retained-attempts-001/physical-002.stderr.log.gz"
+    },
+    {
+      "name": "metadata-stage-001.stdout.log",
+      "bytes": 221,
+      "sha256": "a41468cbaf1f17bb181b57c8679c6fb1ade2b3c0b979cc6f24fdbded30453e8e",
+      "retained_gzip": "retained-attempts-001/metadata-stage-001.stdout.log.gz"
+    },
+    {
+      "name": "metadata-stage-001.stderr.log",
+      "bytes": 58,
+      "sha256": "e48829f3ca9c2a3d2e2707170e26c7c03e22b36cdc18f9319f7f15e74c250199",
+      "retained_gzip": "retained-attempts-001/metadata-stage-001.stderr.log.gz"
+    }
+  ],
+  "physical_attempt001": "Stock runtime file identity checks passed; inherited ambient macOS Python3.7 __PYVENV_LAUNCHER__ made child3.12 resolve wrong base prefix; shapely import failed before scientific output. No output directory.",
+  "physical_attempt002": "Direct shell launches unchanged stock entry point with same immutable operands; genuine exit0, actual physical-002 output.",
+  "metadata_stage": "Only stdlib metadata joins used; launcher warning retained, genuine output pins complete.",
+  "native_locator_correction": "Preparation adapter points to actual physical-002; no scientific predicate or positive-class rule changed."
+}

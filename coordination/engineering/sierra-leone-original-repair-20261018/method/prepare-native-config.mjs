@@ -68,7 +68,7 @@ const family = catalogue.products.find(product => product.key === 'gb:SLE:ADM2')
 need(family.feature_count === 14, 'Whole domestic original competitor family required');
 const parts = family.parts.map(part => ({...pin(part.path),
   decoded_bytes:part.uncompressed_bytes, decoded_sha256:part.uncompressed_sha256}));
-const physicalPath = prefix + 'physical-001/whole-target-support.json';
+const physicalPath = prefix + 'physical-002/whole-target-support.json';
 const physical = json(physicalPath, inputCommit);
 const physicalPin = pins.get(inputCommit + ':' + physicalPath);
 const physicalBySource = new Map(physical.results.map(result => [result.target,result]));
