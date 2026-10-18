@@ -240,6 +240,12 @@ export function reviewedTestPlan(request, {base, head, entries, files, definitio
     need(definition.verification_paths.includes(policy), 'Current rebind policy lacks its verification declaration');
     if (!inputs.includes(policy)) inputs.push(policy);
   }
+  if (tests.includes('test/local-workspace.test.mjs')) {
+    // The bootstrap controls execute the current documented shell/Python body.
+    const documentation = 'docs/LOCAL_WORKSPACES.md';
+    need(definition.verification_paths.includes(documentation), 'Current workspace documentation lacks its verification declaration');
+    if (!inputs.includes(documentation)) inputs.push(documentation);
+  }
   need(plan.inputs === undefined || Array.isArray(plan.inputs) &&
     (plan.inputs.length===0 || JSON.stringify(plan.inputs)===JSON.stringify(inputs)),
     'Reviewed fixture operands are derived; manual inputs are unsupported');

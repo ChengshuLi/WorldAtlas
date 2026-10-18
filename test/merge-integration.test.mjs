@@ -205,6 +205,30 @@ test('reviewed rebind custody retains its declared live policy and refuses missi
   assert.deepEqual(reviewedTestPlan(request,{...context,entries:changed}),plan,'The current body is selected rather than a frozen historical policy copy');
 });
 
+test('reviewed workspace controls retain current documented bootstrap and refuse missing or redirected operands', () => {
+  const documentation='docs/LOCAL_WORKSPACES.md',consumer='test/local-workspace.test.mjs';
+  const row=(mode='100644',type='blob')=>({sha:sha('e'),mode,type});
+  const entries=new Map([...EXECUTION_CODE.map(name=>[name,row()]),[documentation,row()],
+    [consumer,row()],['test/example.test.mjs',row()],['test/fixtures/contract/input.json',row()]]);
+  const request={base:sha('a'),head:sha('b'),files:[consumer]};
+  const context={base:request.base,head:request.head,entries,files:[],definition:loadPackageInputs()};
+  const plan=reviewedTestPlan(request,context);
+  assert.deepEqual(plan.inputs,[...EXECUTION_CODE,documentation]);
+  assert(plan.checkout_patterns.includes('/'+documentation));assert.equal(plan.build,false);
+  assert(!reviewedTestPlan({...request,files:['test/example.test.mjs']},context).inputs.includes(documentation));
+  const absent=new Map(entries);absent.delete(documentation);
+  assert.throws(()=>reviewedTestPlan(request,{...context,entries:absent}),/unavailable/);
+  for(const name of [documentation,'docs']) {
+    const redirected=new Map(entries);redirected.set(name,row('120000'));
+    assert.throws(()=>reviewedTestPlan(request,{...context,entries:redirected}),/unavailable/);
+  }
+  const definition={...context.definition,verification_paths:context.definition.verification_paths.filter(name=>name!==documentation)};
+  assert.throws(()=>reviewedTestPlan(request,{...context,definition}),/verification declaration/);
+  assert.throws(()=>reviewedTestPlan({...request,inputs:[...plan.inputs,'data/arbitrary.json']},context),/manual inputs/);
+  const changed=new Map(entries);changed.set(documentation,{...row(),sha:sha('f')});
+  assert.deepEqual(reviewedTestPlan(request,{...context,entries:changed}),plan,'Select the current document, not a historical fixture copy');
+});
+
 test('reviewed lists cannot omit actual packaged consumers when package source changes or moves', async () => {
   for(const changed of [{filename:'src/a.js'}, {filename:'archive/a.js',previous_filename:'src/a.js'}]) {
     const f=controlFixture({withContractBoundary:true});f.packageInputs.inputs.push('src/');
