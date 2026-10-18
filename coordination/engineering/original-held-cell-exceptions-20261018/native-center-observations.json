@@ -1,0 +1,486 @@
+{
+  "kind": "bounded-native-centre-comparison",
+  "status": "observations_only_pending_independent_exception_review",
+  "native_rule": {
+    "method": "native-linear-evenodd-first-owner-v1",
+    "grid_size": 262166,
+    "latitudes_decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23",
+    "implementation_sha256": "66b453bbb2e001b9ff56bd754d55087f5919845dceeefd886016494cefa1d3e0"
+  },
+  "liberia": {
+    "cell": {
+      "y": 126219,
+      "x": 124938,
+      "owner": 26987,
+      "center": [
+        -8.43747854412851,
+        6.663368865472858
+      ]
+    },
+    "source_target": {
+      "source_id": "gb:LBR:ADM2:62588387B45934307689461",
+      "effect": {
+        "hits": [],
+        "counts": {
+          "cells": 0,
+          "interior": 0,
+          "boundary": 0,
+          "line": 0,
+          "point": 0
+        },
+        "work": {
+          "requested_cells": 2,
+          "requested_rows": 1,
+          "geometry_parts": 1,
+          "vertices": 80,
+          "polygon_parts": 1,
+          "line_segments": 0,
+          "points": 0,
+          "stock_scan_blocks": 1,
+          "exact_line_cell_tests": 0,
+          "exact_point_cell_tests": 0
+        }
+      }
+    },
+    "physical_report_mapped_land_support": {
+      "source_id": "gb:LBR:ADM2:62588387B45934307689461",
+      "run_support_rows": [
+        {
+          "y": 126219,
+          "runs": [
+            [
+              124938,
+              124940,
+              "mapped_land_support"
+            ]
+          ]
+        },
+        {
+          "runs": [
+            [
+              124938,
+              124940,
+              "mapped_land_support"
+            ]
+          ],
+          "y": 126219
+        }
+      ],
+      "effect": {
+        "hits": [
+          {
+            "y": 126219,
+            "x": 124938,
+            "kind": "interior"
+          },
+          {
+            "y": 126219,
+            "x": 124939,
+            "kind": "interior"
+          }
+        ],
+        "counts": {
+          "cells": 2,
+          "interior": 2,
+          "boundary": 0,
+          "line": 0,
+          "point": 0
+        },
+        "work": {
+          "requested_cells": 2,
+          "requested_rows": 1,
+          "geometry_parts": 1,
+          "vertices": 111,
+          "polygon_parts": 1,
+          "line_segments": 0,
+          "points": 0,
+          "stock_scan_blocks": 1,
+          "exact_line_cell_tests": 0,
+          "exact_point_cell_tests": 0
+        }
+      }
+    },
+    "same_geometry_target_report": {
+      "physical_query_relations": [
+        {
+          "source_id": 0,
+          "periodic_offset": 0,
+          "source_covers_candidate": false,
+          "candidate_covers_source": false,
+          "intersects": false,
+          "disjoint": true,
+          "status": "checked",
+          "witness": "disjoint-after-explicit-predicate"
+        },
+        {
+          "source_id": 1,
+          "periodic_offset": 0,
+          "source_covers_candidate": true,
+          "candidate_covers_source": false,
+          "intersects": true,
+          "disjoint": false,
+          "status": "checked",
+          "witness": "complete-candidate-reconstruction"
+        }
+      ],
+      "physical_issues": []
+    },
+    "original_causal_result_path": "../worker1-lbr/causal-one-cell-001/result.json"
+  },
+  "egypt": [
+    {
+      "cell": {
+        "label": "Nakhl",
+        "y": 108405,
+        "x": 156464,
+        "owner": 18676,
+        "center": [
+          34.85326091102584,
+          29.711429740592195
+        ]
+      },
+      "operand": "Egypt target",
+      "feature": {
+        "source_id": "gb:EGY:2:37247803B50825531526089",
+        "ordinal_zero_based": 240,
+        "name": "Nakhl"
+      },
+      "effect": {
+        "hits": [
+          {
+            "y": 108405,
+            "x": 156464,
+            "kind": "interior"
+          }
+        ],
+        "counts": {
+          "cells": 1,
+          "interior": 1,
+          "boundary": 0,
+          "line": 0,
+          "point": 0
+        },
+        "work": {
+          "requested_cells": 1,
+          "requested_rows": 1,
+          "geometry_parts": 1,
+          "vertices": 39,
+          "polygon_parts": 1,
+          "line_segments": 0,
+          "points": 0,
+          "stock_scan_blocks": 1,
+          "exact_line_cell_tests": 0,
+          "exact_point_cell_tests": 0
+        }
+      }
+    },
+    {
+      "cell": {
+        "label": "Nakhl",
+        "y": 108405,
+        "x": 156464,
+        "owner": 18676,
+        "center": [
+          34.85326091102584,
+          29.711429740592195
+        ]
+      },
+      "operand": "Israel Southern District ADM1 contact",
+      "feature": {
+        "source_id": "gb:ISR:1:19161824B24193204184747",
+        "ordinal_zero_based": 0,
+        "name": "Southern District"
+      },
+      "effect": {
+        "hits": [
+          {
+            "y": 108405,
+            "x": 156464,
+            "kind": "interior"
+          }
+        ],
+        "counts": {
+          "cells": 1,
+          "interior": 1,
+          "boundary": 0,
+          "line": 0,
+          "point": 0
+        },
+        "work": {
+          "requested_cells": 1,
+          "requested_rows": 1,
+          "geometry_parts": 1,
+          "vertices": 298,
+          "polygon_parts": 1,
+          "line_segments": 0,
+          "points": 0,
+          "stock_scan_blocks": 1,
+          "exact_line_cell_tests": 0,
+          "exact_point_cell_tests": 0
+        }
+      }
+    },
+    {
+      "cell": {
+        "label": "Nakhl",
+        "y": 108405,
+        "x": 156464,
+        "owner": 18676,
+        "center": [
+          34.85326091102584,
+          29.711429740592195
+        ]
+      },
+      "operand": "Israel Be’er Sheva ADM2 contact",
+      "feature": {
+        "source_id": "gb:ISR:2:584046B9730835639199",
+        "ordinal_zero_based": 0,
+        "name": "Be'er Sheva"
+      },
+      "effect": {
+        "hits": [],
+        "counts": {
+          "cells": 0,
+          "interior": 0,
+          "boundary": 0,
+          "line": 0,
+          "point": 0
+        },
+        "work": {
+          "requested_cells": 1,
+          "requested_rows": 1,
+          "geometry_parts": 1,
+          "vertices": 407,
+          "polygon_parts": 1,
+          "line_segments": 0,
+          "points": 0,
+          "stock_scan_blocks": 1,
+          "exact_line_cell_tests": 0,
+          "exact_point_cell_tests": 0
+        }
+      }
+    },
+    {
+      "cell": {
+        "label": "Nakhl",
+        "y": 108405,
+        "x": 156464,
+        "owner": 18676,
+        "center": [
+          34.85326091102584,
+          29.711429740592195
+        ]
+      },
+      "operand": "Saudi Tabuk ADM1 contact",
+      "feature": {
+        "source_id": "gb:SAU:1:25081817B21311317754967",
+        "ordinal_zero_based": 7,
+        "name": "Tabuk Region"
+      },
+      "effect": {
+        "hits": [],
+        "counts": {
+          "cells": 0,
+          "interior": 0,
+          "boundary": 0,
+          "line": 0,
+          "point": 0
+        },
+        "work": {
+          "requested_cells": 1,
+          "requested_rows": 1,
+          "geometry_parts": 1,
+          "vertices": 2660,
+          "polygon_parts": 23,
+          "line_segments": 0,
+          "points": 0,
+          "stock_scan_blocks": 1,
+          "exact_line_cell_tests": 0,
+          "exact_point_cell_tests": 0
+        }
+      }
+    },
+    {
+      "cell": {
+        "label": "Sharm el-Sheikh",
+        "y": 109906,
+        "x": 156358,
+        "owner": 18637,
+        "center": [
+          34.70770427896829,
+          27.905508542964288
+        ]
+      },
+      "operand": "Egypt target",
+      "feature": {
+        "source_id": "gb:EGY:2:37247803B39887765706268",
+        "ordinal_zero_based": 299,
+        "name": "Sharm el-Sheikh"
+      },
+      "effect": {
+        "hits": [
+          {
+            "y": 109906,
+            "x": 156358,
+            "kind": "interior"
+          }
+        ],
+        "counts": {
+          "cells": 1,
+          "interior": 1,
+          "boundary": 0,
+          "line": 0,
+          "point": 0
+        },
+        "work": {
+          "requested_cells": 1,
+          "requested_rows": 1,
+          "geometry_parts": 1,
+          "vertices": 260,
+          "polygon_parts": 3,
+          "line_segments": 0,
+          "points": 0,
+          "stock_scan_blocks": 1,
+          "exact_line_cell_tests": 0,
+          "exact_point_cell_tests": 0
+        }
+      }
+    },
+    {
+      "cell": {
+        "label": "Sharm el-Sheikh",
+        "y": 109906,
+        "x": 156358,
+        "owner": 18637,
+        "center": [
+          34.70770427896829,
+          27.905508542964288
+        ]
+      },
+      "operand": "South Sinai ADM1",
+      "feature": {
+        "source_id": "gb:EGY:1:46179711B69358139854301",
+        "ordinal_zero_based": 1,
+        "name": "South Sinai Governorate"
+      },
+      "effect": {
+        "hits": [
+          {
+            "y": 109906,
+            "x": 156358,
+            "kind": "interior"
+          }
+        ],
+        "counts": {
+          "cells": 1,
+          "interior": 1,
+          "boundary": 0,
+          "line": 0,
+          "point": 0
+        },
+        "work": {
+          "requested_cells": 1,
+          "requested_rows": 1,
+          "geometry_parts": 1,
+          "vertices": 929,
+          "polygon_parts": 3,
+          "line_segments": 0,
+          "points": 0,
+          "stock_scan_blocks": 1,
+          "exact_line_cell_tests": 0,
+          "exact_point_cell_tests": 0
+        }
+      }
+    },
+    {
+      "cell": {
+        "label": "Sharm el-Sheikh",
+        "y": 109906,
+        "x": 156358,
+        "owner": 18637,
+        "center": [
+          34.70770427896829,
+          27.905508542964288
+        ]
+      },
+      "operand": "Saudi Tabuk ADM1 contact",
+      "feature": {
+        "source_id": "gb:SAU:1:25081817B21311317754967",
+        "ordinal_zero_based": 7,
+        "name": "Tabuk Region"
+      },
+      "effect": {
+        "hits": [
+          {
+            "y": 109906,
+            "x": 156358,
+            "kind": "interior"
+          }
+        ],
+        "counts": {
+          "cells": 1,
+          "interior": 1,
+          "boundary": 0,
+          "line": 0,
+          "point": 0
+        },
+        "work": {
+          "requested_cells": 1,
+          "requested_rows": 1,
+          "geometry_parts": 1,
+          "vertices": 2660,
+          "polygon_parts": 23,
+          "line_segments": 0,
+          "points": 0,
+          "stock_scan_blocks": 1,
+          "exact_line_cell_tests": 0,
+          "exact_point_cell_tests": 0
+        }
+      }
+    },
+    {
+      "cell": {
+        "label": "Sharm el-Sheikh",
+        "y": 109906,
+        "x": 156358,
+        "owner": 18637,
+        "center": [
+          34.70770427896829,
+          27.905508542964288
+        ]
+      },
+      "operand": "Saudi Tabuk ADM2 contact",
+      "feature": {
+        "source_id": "gb:SAU:2:3984122B79783370872517",
+        "ordinal_zero_based": 46,
+        "name": "Tabuk"
+      },
+      "effect": {
+        "hits": [],
+        "counts": {
+          "cells": 0,
+          "interior": 0,
+          "boundary": 0,
+          "line": 0,
+          "point": 0
+        },
+        "work": {
+          "requested_cells": 1,
+          "requested_rows": 1,
+          "geometry_parts": 1,
+          "vertices": 914,
+          "polygon_parts": 4,
+          "line_segments": 0,
+          "points": 0,
+          "stock_scan_blocks": 1,
+          "exact_line_cell_tests": 0,
+          "exact_point_cell_tests": 0
+        }
+      }
+    }
+  ],
+  "limits": [
+    "These exact numerical effects reproduce membership/contact against the pinned geometries only. They do not decide legal sovereignty, source applicability, whether a recorded contact is a valid territorial exclusion, or whether a held key is repairable.",
+    "No hold, source role, original class, owner, selection, repair-credit, or package completion state was changed."
+  ]
+}
