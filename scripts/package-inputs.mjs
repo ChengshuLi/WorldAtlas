@@ -168,9 +168,10 @@ export function admitSelectedPackageDeclarations(before, current, {selection, pr
   const retired=new Map(removed.length ? selectedCumulativePackageRoles(selection,priorSidecarRaw).map(pin=>[pin.path,pin]) : []);
   for (const name of removed) {
     const pin=retired.get(name), row=priorEntry?.(name);
-    need(pin && row?.mode==='100644' && (row.oid??row.sha??row.git_blob_oid)===(pin.git_blob_oid??pin.blob)
+    need(pin, 'Removed package input is not an authenticated prior cumulative role: '+name);
+    need(row?.mode==='100644' && (row.oid??row.sha??row.git_blob_oid)===(pin.git_blob_oid??pin.blob)
       && (row.bytes??row.size)===pin.bytes,
-      'Removed package input is not an authenticated prior cumulative role: '+name);
+      'Retired cumulative role differs from original source inventory: '+name);
   }
   const retainedInputs=oldInputs.filter(name=>!removed.includes(name));
   need(same(oldPolicy,newPolicy)&&same(oldOptional.filter(name=>!removed.includes(name)),newOptional)&&
