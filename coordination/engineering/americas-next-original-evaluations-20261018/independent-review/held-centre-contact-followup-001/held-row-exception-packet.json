@@ -17,7 +17,13 @@
     "native_helper_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
     "native_helper_git_blob_oid": "3e1d3e7e6012b5b571345caad029ab7d124c07fd",
     "latitude_table_git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53",
-    "native_helper_provenance_note": "The retained executed diagnostic pinned this helper blob at historical commit 2d1fc6f430e756498908bf2c4e267356a13f5cc7. The same blob is present in commits 252f2aa1e6309b6990985dec73611d6df0e11c70 and 75861b9784f75b7894bfc51fa0419f40f966157d. It is not the different helper at 07c74ff101d4ab5e679255ed85c402356aa54a42; the diagnostic results were not recomputed with current helper code."
+    "native_helper_provenance_note": "The retained executed diagnostic pinned this helper blob at historical commit 2d1fc6f430e756498908bf2c4e267356a13f5cc7. The same blob is present in commits 252f2aa1e6309b6990985dec73611d6df0e11c70 and 75861b9784f75b7894bfc51fa0419f40f966157d. It is not the different helper at 07c74ff101d4ab5e679255ed85c402356aa54a42; the diagnostic results were not recomputed with current helper code.",
+    "original_class_and_contact_block_HND": {
+      "commit": "75861b9784f75b7894bfc51fa0419f40f966157d",
+      "path": "coordination/engineering/americas-next-original-evaluations-20261018/foreign-applicability-001/inputs/HND/block-029.json.gz",
+      "git_blob_oid": "16486e4569d97d610404d0fa160ca4e5bc2db3dd",
+      "role": "original HND extraction block used to verify the held key's original class and full recorded contacts"
+    }
   },
   "actual_scope_outcomes": {
     "HND": {
@@ -705,15 +711,15 @@
   ],
   "group_findings": [
     {
-      "group": "all-four positive representation discrepancy",
+      "group": "original positive source versus selected base footprint",
       "keys": [
         "HND:21659:119783:66489",
         "NIC:32414:120892:68584",
         "NIC:32428:122918:68704",
         "NIC:32367:123084:69687"
       ],
-      "finding": "Each cell centre is interior to its exact decoded source-family positive owner feature but outside the source-evidence target base_geometry. This is a concrete source-versus-derived-geometry representation difference coincident with the generic complete-request unique-coverage refusal. It does not by itself prove which input representation ought to govern.",
-      "next_action": "Independent reviewer should authenticate the original source bodies/pins and inspect the existing source-to-target/geometry transformation and intended representation; preserve each row until that reconciliation is documented."
+      "finding": "Each of the four original land-key centres is interior to its exact decoded positive owner source feature and outside the target's selected base footprint recorded as base_geometry. That selected footprint is not the raw positive source operand used by deriveSourceTargetNativeDelta. This is a missing-footprint review question, not evidence of a source defect and not an explanation of the generic territorial-exclusion hold.",
+      "next_action": "For each key, reconcile the original source owner/class and positive feature with the selected-footprint provenance and the exact negative operands, including their applicability, rights, CRS and vintage. Preserve the current hold until that evidence explains whether the selected footprint should include the key; do not infer a source defect or clear the hold from contact alone."
     },
     {
       "group": "Honduras Macuelizo",
@@ -730,13 +736,13 @@
         "NIC:32428:122918:68704",
         "NIC:32367:123084:69687"
       ],
-      "finding": "Murra centre intersects Honduras ADM1 El Paraíso (not the named HND ADM2 negative Trojes). San Juan del Sur centre intersects Costa Rica ADM1 Guanacaste (not the named CRI ADM2 La Cruz). El Castillo centre intersects Costa Rica ADM1 ordinal 0, Heredia (source ID gb:CRI:ADM1:80129987B30917059240714), which is outside; its source-contact Costa Rica ADM1 ordinal 2, Alajuela (source ID gb:CRI:ADM1:80129987B16009817839121), is interior. All three listed Costa Rica ADM2 negatives are outside. These are parent-tier negative contacts, with no basis to drop the ADM1 family.",
+      "finding": "Murra's centre is interior to Honduras ADM1 El Paraíso and outside the named HND ADM2 negative Trojes. San Juan del Sur's centre is interior to Costa Rica ADM1 Guanacaste and outside the named CRI ADM2 negative La Cruz. El Castillo's centre is outside Costa Rica ADM1 ordinal 0, Heredia (source ID gb:CRI:ADM1:80129987B30917059240714), and interior to its recorded positive-contact ADM1 ordinal 2, Alajuela (source ID gb:CRI:ADM1:80129987B16009817839121). All three listed Costa Rica ADM2 negatives are outside. These parent-tier contacts remain recorded; none is shown to be the causal operand.",
       "next_action": "Independent per-key review should compare each original Nicaragua owner with the complete retained neighboring ADM1 and ADM2 features and the original source/physical context; establish whether each is source/derived representation mismatch or an actual territorial conflict using dated primary evidence. Keep all parent-tier negatives."
     }
   ],
   "limits": [
     "The unchanged native diagnostic reports the generic territorial_exclusion_cells reason; the centre-contact analysis records observed relations, not causal attribution to one exclusion operand.",
-    "All four rows remain unresolved; the source feature is interior while the embedded derived base_geometry is outside. This difference needs substantive representation review and does not establish which representation should control.",
+    "All four original land rows remain unresolved. The exact positive owner source feature contains each centre while the target's selected base footprint recorded as base_geometry does not; this is a missing-footprint evidence question, not evidence of a source defect or a causal explanation for the generic hold.",
     "No original source or physical producer was rerun; no hold was cleared, ownership or sovereignty assigned, or cell given qualification or acceptance credit.",
     "The exact pinned Costa Rica ADM2 decoded source hash is retained; its contact geometry was evaluated from a decoded/materialized complete source feature. No legal, CRS/date, source-rights, or whole-source clearance is inferred.",
     "Independent review and normal downstream acceptance remain pending."
