@@ -1,0 +1,934 @@
+{
+  "version": 1,
+  "as_of_accepted_commit": "cd1886f20f34abdcafe7c327ae0ee768ce5d47ae",
+  "as_of_accepted_tree": "4b591cc8ef55b2e6f36576671f6a024210e732fd",
+  "reconstruction": "Historical named18-package ledger plus individually reported actual later activations, accepted deliveries and7completed package removals. Recovered52names and both sums independently; no new original scope or acceptance added.",
+  "historical_named_ledger": "coordination/engineering/poland-original-repair-20261017/source-review/current-named-package-ledger.json",
+  "original_queue": {
+    "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+    "git_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "bytes": 1754890,
+    "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8"
+  },
+  "totals": {
+    "active_packages": 52,
+    "original_cells": 3954981,
+    "accepted_within_original": 3820019,
+    "remaining_without_accepted_disposition": 134962
+  },
+  "rows": [
+    {
+      "package_id": "gb-RUS-ADM2--repair-evaluation",
+      "original": 2566967,
+      "accepted": 2557516,
+      "remaining": 9451,
+      "intervals": 346353,
+      "owners": 334,
+      "accepted_delivery_pr": 2377,
+      "claim_issue": 2302,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2377",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2302"
+      ],
+      "blocker": "9451 held original cells; foreign/source territorial and preserved multipart/source questions.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-CAN-ADM3--repair-evaluation",
+      "original": 438062,
+      "accepted": 437959,
+      "remaining": 103,
+      "intervals": 139042,
+      "owners": 209,
+      "accepted_delivery_pr": 2377,
+      "claim_issue": 2317,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2377",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2317"
+      ],
+      "blocker": "103 holds:55 foreign-USA contacts and48 outside unique intended AAFC region.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-AGO-ADM2--repair-evaluation",
+      "original": 170526,
+      "accepted": 141263,
+      "remaining": 29263,
+      "intervals": 15252,
+      "owners": 47,
+      "accepted_delivery_pr": 2377,
+      "claim_issue": 2313,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2377",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2313"
+      ],
+      "blocker": "29263 foreign ADM1 overlap holds; original provisional zero-hold result is superseded.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-USA-ADM2--repair-evaluation",
+      "original": 107131,
+      "accepted": 105927,
+      "remaining": 1204,
+      "intervals": 46575,
+      "owners": 351,
+      "accepted_delivery_pr": 2377,
+      "claim_issue": 2358,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2377",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2358"
+      ],
+      "blocker": "1204 holds:600 source and604 physical-admission; preserve Fairfax identity and original foreign checks.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-PHL-ADM3--repair-evaluation",
+      "original": 96607,
+      "accepted": 96600,
+      "remaining": 7,
+      "intervals": 36123,
+      "owners": 864,
+      "accepted_delivery_pr": 2377,
+      "claim_issue": 2359,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2377",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2359"
+      ],
+      "blocker": "7 unresolved prior-source-fitness holds.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-GBR-ADM2--repair-evaluation",
+      "original": 89390,
+      "accepted": 88722,
+      "remaining": 668,
+      "intervals": 19349,
+      "owners": 91,
+      "accepted_delivery_pr": 2377,
+      "claim_issue": 2343,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2377",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2343"
+      ],
+      "blocker": "668 holds:640 London missing Natural Earth membership proof plus28 territorial exclusions.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-PNG-ADM3--repair-evaluation",
+      "original": 56552,
+      "accepted": 56476,
+      "remaining": 76,
+      "intervals": 20060,
+      "owners": 130,
+      "accepted_delivery_pr": 2399,
+      "claim_issue": 2376,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2399",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2376"
+      ],
+      "blocker": "76 holds:58 unresolved prior-source-fitness plus18 territorial exclusions.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-EST-ADM2--repair-evaluation",
+      "original": 34461,
+      "accepted": 30621,
+      "remaining": 3840,
+      "intervals": 9065,
+      "owners": 90,
+      "accepted_delivery_pr": 2404,
+      "claim_issue": 2381,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2404",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2381"
+      ],
+      "blocker": "3840 holds:2672 prior municipal-identity/source-fitness plus1168 territorial exclusions.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-TZA-ADM2--repair-evaluation",
+      "original": 32809,
+      "accepted": 32462,
+      "remaining": 347,
+      "intervals": 13163,
+      "owners": 84,
+      "accepted_delivery_pr": 2408,
+      "claim_issue": 2405,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2408",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2405"
+      ],
+      "blocker": "347 explicit original territorial/source holds remain; use exact supported-inputs held ledger and source limits. No queue-only repair delay is inferred.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-ESP-ADM3--repair-evaluation",
+      "original": 29477,
+      "accepted": 29173,
+      "remaining": 304,
+      "intervals": 11546,
+      "owners": 113,
+      "accepted_delivery_pr": 2414,
+      "claim_issue": 2413,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2414",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2413"
+      ],
+      "blocker": "304 explicit original territorial/source holds remain; use exact supported-inputs held ledger and source limits. No queue-only repair delay is inferred.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-ARG-ADM2--repair-evaluation",
+      "original": 28846,
+      "accepted": 22697,
+      "remaining": 6149,
+      "intervals": 10702,
+      "owners": 115,
+      "accepted_delivery_pr": 2399,
+      "claim_issue": 2373,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2399",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2373"
+      ],
+      "blocker": "6149 source/foreign-territorial holds.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-DEU-ADM3--repair-evaluation",
+      "original": 27555,
+      "accepted": 27181,
+      "remaining": 374,
+      "intervals": 7499,
+      "owners": 82,
+      "accepted_delivery_pr": 2414,
+      "claim_issue": 2410,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2414",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2410"
+      ],
+      "blocker": "374 holds:181 territorial,99 physical-coverage,94 GF2 water-only source-role land requests.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-BRA-ADM2--repair-evaluation",
+      "original": 24525,
+      "accepted": 0,
+      "remaining": 24525,
+      "intervals": 10068,
+      "owners": 123,
+      "accepted_delivery_pr": null,
+      "claim_issue": 2415,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2415"
+      ],
+      "blocker": "No accepted cells; existing scientific/source work is not accepted delivery. Latest author handoff required.",
+      "status": "activated_no_accepted_outcomes",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-MEX-ADM2--repair-evaluation",
+      "original": 24208,
+      "accepted": 24092,
+      "remaining": 116,
+      "intervals": 12453,
+      "owners": 158,
+      "accepted_delivery_pr": 2459,
+      "claim_issue": 2436,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2459",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2436"
+      ],
+      "blocker": "116 explicit original territorial/source holds remain; use exact supported-inputs held ledger and source limits. No queue-only repair delay is inferred.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-PAN-ADM2--repair-evaluation",
+      "original": 22669,
+      "accepted": 0,
+      "remaining": 22669,
+      "intervals": 8939,
+      "owners": 52,
+      "accepted_delivery_pr": null,
+      "claim_issue": 2437,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2437"
+      ],
+      "blocker": "No accepted cells. Exact archive academic/noncommercial restriction conflicts with declared CC BY4; rights unresolved.",
+      "status": "activated_no_accepted_outcomes",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-EGY-ADM2--repair-evaluation",
+      "original": 19065,
+      "accepted": 19063,
+      "remaining": 2,
+      "intervals": 8684,
+      "owners": 167,
+      "accepted_delivery_pr": 2459,
+      "claim_issue": 2424,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2459",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2424"
+      ],
+      "blocker": "2 explicit original territorial/source holds remain; use exact supported-inputs held ledger and source limits. No queue-only repair delay is inferred.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-SWE-ADM2--repair-evaluation",
+      "original": 18381,
+      "accepted": 18380,
+      "remaining": 1,
+      "intervals": 6727,
+      "owners": 96,
+      "accepted_delivery_pr": 2414,
+      "claim_issue": 2407,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2414",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2407"
+      ],
+      "blocker": "1 territorial exclusion; independent original review located centre inside retained Norway Trondelag.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-ERI-ADM2--repair-evaluation",
+      "original": 15449,
+      "accepted": 15444,
+      "remaining": 5,
+      "intervals": 5492,
+      "owners": 23,
+      "accepted_delivery_pr": 2466,
+      "claim_issue": 2435,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2466",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2435"
+      ],
+      "blocker": "5 explicit original territorial/source holds remain; use exact supported-inputs held ledger and source limits. No queue-only repair delay is inferred.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-ECU-ADM2--repair-evaluation",
+      "original": 13969,
+      "accepted": 13387,
+      "remaining": 582,
+      "intervals": 5570,
+      "owners": 58,
+      "accepted_delivery_pr": 2459,
+      "claim_issue": 2438,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2459",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2438"
+      ],
+      "blocker": "582 explicit original territorial/source holds remain; use exact supported-inputs held ledger and source limits. No queue-only repair delay is inferred.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-BOL-ADM2--repair-evaluation",
+      "original": 11311,
+      "accepted": 10404,
+      "remaining": 907,
+      "intervals": 4389,
+      "owners": 37,
+      "accepted_delivery_pr": 2459,
+      "claim_issue": 2439,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2459",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2439"
+      ],
+      "blocker": "907 explicit original territorial/source holds remain; use exact supported-inputs held ledger and source limits. No queue-only repair delay is inferred.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-MOZ-ADM2--repair-evaluation",
+      "original": 11163,
+      "accepted": 10811,
+      "remaining": 352,
+      "intervals": 5808,
+      "owners": 81,
+      "accepted_delivery_pr": 2466,
+      "claim_issue": 2444,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2466",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2444"
+      ],
+      "blocker": "352 explicit original territorial/source holds remain; use exact supported-inputs held ledger and source limits. No queue-only repair delay is inferred.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-PER-ADM2--repair-evaluation",
+      "original": 10371,
+      "accepted": 8922,
+      "remaining": 1449,
+      "intervals": 4695,
+      "owners": 55,
+      "accepted_delivery_pr": 2459,
+      "claim_issue": 2440,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2459",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2440"
+      ],
+      "blocker": "1449 explicit original territorial/source holds remain; use exact supported-inputs held ledger and source limits. No queue-only repair delay is inferred.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-TUN-ADM2--repair-evaluation",
+      "original": 7476,
+      "accepted": 7466,
+      "remaining": 10,
+      "intervals": 2631,
+      "owners": 88,
+      "accepted_delivery_pr": 2466,
+      "claim_issue": 2446,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2466",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2446"
+      ],
+      "blocker": "10 explicit original territorial/source holds remain; use exact supported-inputs held ledger and source limits. No queue-only repair delay is inferred.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-POL-ADM2--repair-evaluation",
+      "original": 7309,
+      "accepted": 7236,
+      "remaining": 73,
+      "intervals": 2666,
+      "owners": 56,
+      "accepted_delivery_pr": 2423,
+      "claim_issue": 2418,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2423",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2418"
+      ],
+      "blocker": "73 explicit original territorial/source holds remain; use exact supported-inputs held ledger and source limits. No queue-only repair delay is inferred.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-COL-ADM2--repair-evaluation",
+      "original": 7060,
+      "accepted": 6230,
+      "remaining": 830,
+      "intervals": 3575,
+      "owners": 81,
+      "accepted_delivery_pr": 2459,
+      "claim_issue": 2441,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2459",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2441"
+      ],
+      "blocker": "830 explicit original territorial/source holds remain; use exact supported-inputs held ledger and source limits. No queue-only repair delay is inferred.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-HND-ADM2--repair-evaluation",
+      "original": 6633,
+      "accepted": 6632,
+      "remaining": 1,
+      "intervals": 2400,
+      "owners": 47,
+      "accepted_delivery_pr": 2469,
+      "claim_issue": 2462,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2469",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2462"
+      ],
+      "blocker": "1 explicit original territorial/source holds remain; use exact supported-inputs held ledger and source limits. No queue-only repair delay is inferred.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-GNB-ADM2--repair-evaluation",
+      "original": 6117,
+      "accepted": 0,
+      "remaining": 6117,
+      "intervals": 1878,
+      "owners": 20,
+      "accepted_delivery_pr": null,
+      "claim_issue": 2434,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2434"
+      ],
+      "blocker": "No accepted cells. Corrected source publication was denied/stopped; stale predecessor not admissible. Fresh owner handoff required.",
+      "status": "activated_no_accepted_outcomes",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-KEN-ADM2--repair-evaluation",
+      "original": 5156,
+      "accepted": 4941,
+      "remaining": 215,
+      "intervals": 2188,
+      "owners": 38,
+      "accepted_delivery_pr": 2466,
+      "claim_issue": null,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2466"
+      ],
+      "blocker": "215 explicit original territorial/source holds remain; use exact supported-inputs held ledger and source limits. No queue-only repair delay is inferred.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-CMR-ADM3--repair-evaluation",
+      "original": 4925,
+      "accepted": 0,
+      "remaining": 4925,
+      "intervals": 2900,
+      "owners": 74,
+      "accepted_delivery_pr": null,
+      "claim_issue": null,
+      "evidence_refs": [],
+      "blocker": "No accepted cells. Retained handoff excludes GNQ ADM2 rights conflict and publication hold; fresh author receipt required.",
+      "status": "activated_no_accepted_outcomes",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-ZAF-ADM3--repair-evaluation",
+      "original": 4804,
+      "accepted": 4777,
+      "remaining": 27,
+      "intervals": 2542,
+      "owners": 68,
+      "accepted_delivery_pr": 2427,
+      "claim_issue": 2416,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2427",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2416"
+      ],
+      "blocker": "27 territorial_exclusion_cells; accepted4777 via2427 already counted.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-CRI-ADM2--repair-evaluation",
+      "original": 4380,
+      "accepted": 4376,
+      "remaining": 4,
+      "intervals": 2011,
+      "owners": 27,
+      "accepted_delivery_pr": 2469,
+      "claim_issue": 2461,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2469",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2461"
+      ],
+      "blocker": "4 explicit original territorial/source holds remain; use exact supported-inputs held ledger and source limits. No queue-only repair delay is inferred.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-VUT-ADM1--repair-evaluation",
+      "original": 4366,
+      "accepted": 3163,
+      "remaining": 1203,
+      "intervals": 1990,
+      "owners": 6,
+      "accepted_delivery_pr": null,
+      "claim_issue": 2216,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2216",
+        "https://github.com/ChengshuLi/WorldAtlas/blob/cd1886f20f34abdcafe7c327ae0ee768ce5d47ae/coordination/engineering/vanuatu-native-repair-evaluation-20261016/README.md"
+      ],
+      "blocker": "1203 municipal-scope holds on Efate/Santo/Tanna; affirmative municipal boundary/target evidence required.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-HTI-ADM2--repair-evaluation",
+      "original": 4082,
+      "accepted": 3671,
+      "remaining": 411,
+      "intervals": 1741,
+      "owners": 37,
+      "accepted_delivery_pr": 2469,
+      "claim_issue": 2460,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2469",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2460"
+      ],
+      "blocker": "411 explicit original territorial/source holds remain; use exact supported-inputs held ledger and source limits. No queue-only repair delay is inferred.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-MWI-ADM2--repair-evaluation",
+      "original": 4028,
+      "accepted": 0,
+      "remaining": 4028,
+      "intervals": 2337,
+      "owners": 19,
+      "accepted_delivery_pr": null,
+      "claim_issue": null,
+      "evidence_refs": [],
+      "blocker": "No accepted cells. Prior source publication denied/stopped; fresh owner handoff required.",
+      "status": "activated_no_accepted_outcomes",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-CZE-ADM2--repair-evaluation",
+      "original": 3934,
+      "accepted": 3786,
+      "remaining": 148,
+      "intervals": 1400,
+      "owners": 35,
+      "accepted_delivery_pr": 2431,
+      "claim_issue": 2422,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2431",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2422"
+      ],
+      "blocker": "148 stronger official-source adverse holds:129 district disagreements and19 boundary uncertainty.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-COD-ADM2--repair-evaluation",
+      "original": 3905,
+      "accepted": 2975,
+      "remaining": 930,
+      "intervals": 2323,
+      "owners": 50,
+      "accepted_delivery_pr": 2466,
+      "claim_issue": 2453,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2466",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2453"
+      ],
+      "blocker": "930 explicit original territorial/source holds remain; use exact supported-inputs held ledger and source limits. No queue-only repair delay is inferred.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-NIC-ADM2--repair-evaluation",
+      "original": 2884,
+      "accepted": 2881,
+      "remaining": 3,
+      "intervals": 1264,
+      "owners": 29,
+      "accepted_delivery_pr": 2469,
+      "claim_issue": 2463,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2469",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2463"
+      ],
+      "blocker": "3 explicit original territorial/source holds remain; use exact supported-inputs held ledger and source limits. No queue-only repair delay is inferred.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-KIR-ADM1--repair-evaluation",
+      "original": 2836,
+      "accepted": 2552,
+      "remaining": 284,
+      "intervals": 1000,
+      "owners": 3,
+      "accepted_delivery_pr": null,
+      "claim_issue": 2257,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2257",
+        "https://github.com/ChengshuLi/WorldAtlas/blob/cd1886f20f34abdcafe7c327ae0ee768ce5d47ae/coordination/engineering/kiribati-repair-delivery-20261016/README.md"
+      ],
+      "blocker": "284 owner26615 identity holds; exact disconnected component-to-current-target evidence required.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-SDN-ADM2--repair-evaluation",
+      "original": 2654,
+      "accepted": 0,
+      "remaining": 2654,
+      "intervals": 1311,
+      "owners": 35,
+      "accepted_delivery_pr": null,
+      "claim_issue": null,
+      "evidence_refs": [],
+      "blocker": "Actual allocation/physical execution established; no accepted delivery. Latest frozen authority/held review required.",
+      "status": "activated_no_accepted_outcomes",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-SYC-ADM2--repair-evaluation",
+      "original": 2458,
+      "accepted": 0,
+      "remaining": 2458,
+      "intervals": 882,
+      "owners": 8,
+      "accepted_delivery_pr": null,
+      "claim_issue": 2458,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2458"
+      ],
+      "blocker": "Actual allocation/physical execution established; no accepted delivery. Latest frozen authority/held review required.",
+      "status": "activated_no_accepted_outcomes",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-GMB-ADM2--repair-evaluation",
+      "original": 2377,
+      "accepted": 0,
+      "remaining": 2377,
+      "intervals": 1255,
+      "owners": 34,
+      "accepted_delivery_pr": null,
+      "claim_issue": null,
+      "evidence_refs": [],
+      "blocker": "Actual allocation/physical execution established; no accepted delivery. Latest frozen authority/held review required.",
+      "status": "activated_no_accepted_outcomes",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-SOM-ADM2--repair-evaluation",
+      "original": 2247,
+      "accepted": 0,
+      "remaining": 2247,
+      "intervals": 1645,
+      "owners": 36,
+      "accepted_delivery_pr": null,
+      "claim_issue": null,
+      "evidence_refs": [],
+      "blocker": "Actual allocation/physical execution established; zero qualified was reported, held accounting needs final source disposition.",
+      "status": "activated_no_accepted_outcomes",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-CAF-ADM3--repair-evaluation",
+      "original": 2130,
+      "accepted": 1669,
+      "remaining": 461,
+      "intervals": 1319,
+      "owners": 46,
+      "accepted_delivery_pr": 2477,
+      "claim_issue": null,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2477"
+      ],
+      "blocker": "461 explicit original territorial/source holds remain; use exact supported-inputs held ledger and source limits. No queue-only repair delay is inferred.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-SSD-ADM2--repair-evaluation",
+      "original": 2123,
+      "accepted": 1621,
+      "remaining": 502,
+      "intervals": 1151,
+      "owners": 25,
+      "accepted_delivery_pr": 2469,
+      "claim_issue": null,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2469"
+      ],
+      "blocker": "502 explicit original territorial/source holds remain; use exact supported-inputs held ledger and source limits. No queue-only repair delay is inferred.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-CIV-ADM3--repair-evaluation",
+      "original": 2049,
+      "accepted": 2041,
+      "remaining": 8,
+      "intervals": 1028,
+      "owners": 66,
+      "accepted_delivery_pr": 2477,
+      "claim_issue": null,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2477"
+      ],
+      "blocker": "8 explicit original territorial/source holds remain; use exact supported-inputs held ledger and source limits. No queue-only repair delay is inferred.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-LBR-ADM2--repair-evaluation",
+      "original": 2026,
+      "accepted": 2025,
+      "remaining": 1,
+      "intervals": 1005,
+      "owners": 47,
+      "accepted_delivery_pr": 2469,
+      "claim_issue": null,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2469"
+      ],
+      "blocker": "1 Buu-Yao territorial exclusion; preserve source questions802/813/1077 and UNMIL/OCHA historical rights limits.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-SVK-ADM2--repair-evaluation",
+      "original": 1811,
+      "accepted": 1681,
+      "remaining": 130,
+      "intervals": 700,
+      "owners": 24,
+      "accepted_delivery_pr": 2445,
+      "claim_issue": 2429,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2445",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2429"
+      ],
+      "blocker": "130 explicit original territorial/source holds remain; use exact supported-inputs held ledger and source limits. No queue-only repair delay is inferred.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-ZWE-ADM2--repair-evaluation",
+      "original": 1788,
+      "accepted": 0,
+      "remaining": 1788,
+      "intervals": 1090,
+      "owners": 20,
+      "accepted_delivery_pr": null,
+      "claim_issue": null,
+      "evidence_refs": [],
+      "blocker": "Actual allocation/physical execution established; no accepted delivery. Latest frozen authority/held review required.",
+      "status": "activated_no_accepted_outcomes",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-GTM-ADM2--repair-evaluation",
+      "original": 1516,
+      "accepted": 1503,
+      "remaining": 13,
+      "intervals": 830,
+      "owners": 30,
+      "accepted_delivery_pr": 2477,
+      "claim_issue": 2472,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2477",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2472"
+      ],
+      "blocker": "13 explicit original territorial/source holds remain; use exact supported-inputs held ledger and source limits. No queue-only repair delay is inferred.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-SLV-ADM2--repair-evaluation",
+      "original": 1134,
+      "accepted": 1131,
+      "remaining": 3,
+      "intervals": 538,
+      "owners": 58,
+      "accepted_delivery_pr": 2477,
+      "claim_issue": 2475,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2477",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2475"
+      ],
+      "blocker": "3 explicit original territorial/source holds remain; use exact supported-inputs held ledger and source limits. No queue-only repair delay is inferred.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-NLD-ADM2--repair-evaluation",
+      "original": 770,
+      "accepted": 562,
+      "remaining": 208,
+      "intervals": 352,
+      "owners": 39,
+      "accepted_delivery_pr": 2459,
+      "claim_issue": 2432,
+      "evidence_refs": [
+        "https://github.com/ChengshuLi/WorldAtlas/pull/2459",
+        "https://github.com/ChengshuLi/WorldAtlas/issues/2432"
+      ],
+      "blocker": "208 explicit original territorial/source holds remain; use exact supported-inputs held ledger and source limits. No queue-only repair delay is inferred.",
+      "status": "accepted_supported_partition_with_unresolved_original_remainder",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    },
+    {
+      "package_id": "gb-TGO-ADM2--repair-evaluation",
+      "original": 509,
+      "accepted": 0,
+      "remaining": 509,
+      "intervals": 307,
+      "owners": 20,
+      "accepted_delivery_pr": null,
+      "claim_issue": null,
+      "evidence_refs": [],
+      "blocker": "509 original land cells,307intervals,20owners; activated physical/review work, no accepted repair. Latest author handoff required.",
+      "status": "activated_no_accepted_outcomes",
+      "scope_basis": "Exact immutable original queue package ID, interval count and owner roster; accepted count from prior whole-original partition and accepted selected-delivery receipts, not a new country-level estimate."
+    }
+  ],
+  "limits": [
+    "This is an accounting/read-only evidence handoff, not a new qualification, completion or acceptance.",
+    "Per-original accepted intersections reuse earlier exact interval/owner partition and accepted-tree conservation evidence. This audit does not rerun a global scientific or cell-intersection census.",
+    "Remaining repair holds cannot become completed review packages merely by relabeling unknowns. Completion needs a source-backed justified original outcome under its own contract, distinct review and accepted delivery/disposition.",
+    "Latest unaccepted Africa source status awaits owner handoff; historic publication blockers are dated evidence, not claims that they remain unchanged.",
+    "Panama is active; Mali was not activated and is excluded. Uruguay and Paraguay remain unactivated. Completed SLE physical-review1213 and repair3878 are excluded; no country-wide completion is inferred."
+  ],
+  "evidence_reuse_receipts": [
+    {
+      "name": "pr2477-final-reconciliation.json",
+      "bytes": 2200,
+      "sha256": "884ec0e91ca5d510ceba569548cb5cbdfd36d4557249b3290be63786c20e17b5",
+      "meaning": "Earlier exact original owner/interval partition and accepted/current conservation receipt reused; not newly executed science."
+    },
+    {
+      "name": "sle2484-final-accepted-reconciliation.json",
+      "bytes": 1226,
+      "sha256": "a120821ec53fdea0d6f338c668d68cba9b663180ac1492a7df854c54efb81020",
+      "meaning": "Earlier exact original owner/interval partition and accepted/current conservation receipt reused; not newly executed science."
+    },
+    {
+      "name": "next-six-admission/final-delivery-review.json",
+      "bytes": 587,
+      "sha256": "6fca7ad5f8a8affa36f1eed7acee6358f3aeecb943c32052d307327e5f4c7b7c",
+      "meaning": "Earlier exact original owner/interval partition and accepted/current conservation receipt reused; not newly executed science."
+    },
+    {
+      "name": "next-six-admission/independent-partitions.json",
+      "bytes": 685,
+      "sha256": "f8190d7d2514283a7649d8f0fcf32d9431e0613e7413f50130fd13556a15eb34",
+      "meaning": "Earlier exact original owner/interval partition and accepted/current conservation receipt reused; not newly executed science."
+    },
+    {
+      "name": "africa-nine-admission/final-admission.json",
+      "bytes": 1462,
+      "sha256": "472160c60713b784f4a52a1105f6c054cf9bcb94743f7a98c723a33b43930d03",
+      "meaning": "Earlier exact original owner/interval partition and accepted/current conservation receipt reused; not newly executed science."
+    },
+    {
+      "name": "americas-delivery-admission/final-admission.json",
+      "bytes": 6251,
+      "sha256": "cf903ab81f0dda842ba09dbc5f7f6a9fb56fade2c035ac21f101976d4f77a9ea",
+      "meaning": "Earlier exact original owner/interval partition and accepted/current conservation receipt reused; not newly executed science."
+    },
+    {
+      "name": "civ-caf-americas-six-admitted-handoff.json",
+      "bytes": 167325,
+      "sha256": "8662fdf60a4d2fb558363b5547922d60291fb07dc2112344485e43893fa78474",
+      "meaning": "Earlier exact original owner/interval partition and accepted/current conservation receipt reused; not newly executed science."
+    }
+  ],
+  "priority_order": [
+    "gb-SWE-ADM2--repair-evaluation",
+    "gb-HND-ADM2--repair-evaluation",
+    "gb-LBR-ADM2--repair-evaluation",
+    "gb-EGY-ADM2--repair-evaluation",
+    "gb-NIC-ADM2--repair-evaluation"
+  ]
+}
