@@ -56,7 +56,7 @@ test('existing selected-state observer emits a complete conflict-aware key/accou
   }
   assert.equal(state.original_cells,1213);
   assert.equal(state.original_intervals,613);
-  assert.equal(state.original_owners.length,7);
+  assert.equal(state.original_owners,7);
   assert.equal(state.keys.length,1213);
   assert.equal(new Set(state.keys.map(key=>key.y)).size,events[1].rows);
   assert.deepEqual(new Set(state.keys.map(key=>key.y+':'+key.x)),new Set(expected.keys()));
