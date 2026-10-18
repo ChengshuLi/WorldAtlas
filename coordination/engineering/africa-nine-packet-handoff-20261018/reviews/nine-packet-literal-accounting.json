@@ -1,0 +1,1169 @@
+{
+  "kind": "LOCAL supplemental literal package/owner/held accounting only",
+  "handoff_file": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker2-mdg/africa-eligible-source-handoff-20261018/africa-source-handoff-final-001.json",
+  "handoff_sha256": "576aa16f331a70bf0b6cc4f49606da9b647baa6444be5af6475c14778f373e5d",
+  "previous_accepted_narrow_review": "africa-workers-20261018/worker6-cod/reviews/africa-eligible-handoff-001/final-independent-review.md",
+  "groups": [
+    {
+      "group_id": "eri-original",
+      "package_id": "gb-ERI-ADM2--repair-evaluation",
+      "original_cells": 15449,
+      "qualified_cells": 15444,
+      "held_cells": 5,
+      "original_classes": {
+        "land": 15449
+      },
+      "qualified_classes": {
+        "land": 15444
+      },
+      "held_classes": {
+        "land": 5
+      },
+      "original_owners": 23,
+      "positive_owners": 23,
+      "literal_components": 23,
+      "owners_with_holds": 1,
+      "wholly_held_owners": [],
+      "held_by_owner": [
+        {
+          "owner": 18878,
+          "target_id": "gb:ERI:ADM2:51966322B86476524232792",
+          "original_cells": 2731,
+          "qualified_cells": 2726,
+          "held_cells": 5,
+          "held_classes": {
+            "land": 5
+          },
+          "wholly_held": false
+        }
+      ],
+      "original_source_coverage_locator": {
+        "bytes": 342219,
+        "commit": "83510466de9bb9fd086e5bc5ebc4205252a4e9a0",
+        "git_blob_oid": "cfd792b117a5f95862da50c0df226c021555acc0",
+        "mode": "100644",
+        "path": "coordination/engineering/eritrea-original-repair-20261017/source-evidence-001/source-evidence.json",
+        "sha256": "717d9cd4c5bd420c39388f4c258ad6f090e4ce9f4a62e53a1b84895fb20a83d6"
+      },
+      "held_original_locator": {
+        "commit": "fe7b0c60b23f8df14425115a6e8be0e1b789676f",
+        "path": "coordination/engineering/eritrea-original-repair-20261017/supported-inputs-001/held-original.json"
+      },
+      "held_reason_counts": {
+        "territorial_exclusion_cells": 5
+      },
+      "per_key_causal_foreign_feature": "UNKNOWN; not inferred from aggregate stock reason",
+      "original_equals_qualified_plus_held": true,
+      "original_owner_and_class_preserved": true,
+      "no_synthetic_empty_held_file": false,
+      "previous_full_constructor_patch_review": {
+        "group_id": "eri-original",
+        "package_id": "gb-ERI-ADM2--repair-evaluation",
+        "source_head": "dadbbabbd407f00661def8524493b64858e8a0d0",
+        "source_branch": "engineering/eritrea-original-repair-20261017-worker1",
+        "original_role_descriptors_unchanged": true,
+        "original_locator_only_roles_preserved": [],
+        "original_rule_binding_and_patch_preserved": true,
+        "complete_literal_constructor_cells": 15444,
+        "literal_patch_same_owner_keys": true,
+        "components": 23,
+        "paired_review_head_exact": true,
+        "paired_review_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker6-dza/reviews/eri-001/review.md",
+        "paired_review_sha256": "4612eb5c91b2c1498efb6c72310f097f4af5eb06666645166776c5474f721bbf"
+      }
+    },
+    {
+      "group_id": "mdg-original",
+      "package_id": "gb-MDG-ADM2--repair-evaluation",
+      "original_cells": 13446,
+      "qualified_cells": 13446,
+      "held_cells": 0,
+      "original_classes": {
+        "land": 13446
+      },
+      "qualified_classes": {
+        "land": 13446
+      },
+      "held_classes": {},
+      "original_owners": 43,
+      "positive_owners": 43,
+      "literal_components": 43,
+      "owners_with_holds": 0,
+      "wholly_held_owners": [],
+      "held_by_owner": [],
+      "original_source_coverage_locator": {
+        "commit": "48733a5688509bef25e83882a5b23d327c770a08",
+        "path": "coordination/engineering/madagascar-original-repair-20261017/source-evidence-002/source-evidence.json"
+      },
+      "held_original_locator": null,
+      "held_reason_counts": {},
+      "per_key_causal_foreign_feature": "UNKNOWN; not inferred from aggregate stock reason",
+      "original_equals_qualified_plus_held": true,
+      "original_owner_and_class_preserved": true,
+      "no_synthetic_empty_held_file": true,
+      "previous_full_constructor_patch_review": {
+        "group_id": "mdg-original",
+        "package_id": "gb-MDG-ADM2--repair-evaluation",
+        "source_head": "4ae5f337657f6aa31f9a4e15ece1e62295653adc",
+        "source_branch": "engineering/madagascar-original-repair-20261017",
+        "original_role_descriptors_unchanged": true,
+        "original_locator_only_roles_preserved": [],
+        "original_rule_binding_and_patch_preserved": true,
+        "complete_literal_constructor_cells": 13446,
+        "literal_patch_same_owner_keys": true,
+        "components": 43,
+        "paired_review_head_exact": true,
+        "paired_review_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker3-moz/review-mdg/final-independent-review.md",
+        "paired_review_sha256": "2359d916df385bb918f71b5bb50c9440d5cf73b977a23184936fe86a50e22c19"
+      }
+    },
+    {
+      "group_id": "moz-original",
+      "package_id": "gb-MOZ-ADM2--repair-evaluation",
+      "original_cells": 11163,
+      "qualified_cells": 10811,
+      "held_cells": 352,
+      "original_classes": {
+        "inland-water": 135,
+        "land": 11028
+      },
+      "qualified_classes": {
+        "inland-water": 135,
+        "land": 10676
+      },
+      "held_classes": {
+        "land": 352
+      },
+      "original_owners": 81,
+      "positive_owners": 81,
+      "literal_components": 81,
+      "owners_with_holds": 15,
+      "wholly_held_owners": [],
+      "held_by_owner": [
+        {
+          "owner": 30774,
+          "target_id": "gb:MOZ:ADM2:85939544B12573256040215",
+          "original_cells": 152,
+          "qualified_cells": 84,
+          "held_cells": 68,
+          "held_classes": {
+            "land": 68
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 30782,
+          "target_id": "gb:MOZ:ADM2:85939544B17838134976629",
+          "original_cells": 47,
+          "qualified_cells": 42,
+          "held_cells": 5,
+          "held_classes": {
+            "land": 5
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 30791,
+          "target_id": "gb:MOZ:ADM2:85939544B24654814708458",
+          "original_cells": 123,
+          "qualified_cells": 100,
+          "held_cells": 23,
+          "held_classes": {
+            "land": 23
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 30804,
+          "target_id": "gb:MOZ:ADM2:85939544B28759712944697",
+          "original_cells": 135,
+          "qualified_cells": 127,
+          "held_cells": 8,
+          "held_classes": {
+            "land": 8
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 30806,
+          "target_id": "gb:MOZ:ADM2:85939544B28801965730987",
+          "original_cells": 869,
+          "qualified_cells": 848,
+          "held_cells": 21,
+          "held_classes": {
+            "land": 21
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 30826,
+          "target_id": "gb:MOZ:ADM2:85939544B38440784035247",
+          "original_cells": 2,
+          "qualified_cells": 1,
+          "held_cells": 1,
+          "held_classes": {
+            "land": 1
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 30840,
+          "target_id": "gb:MOZ:ADM2:85939544B50674606181773",
+          "original_cells": 121,
+          "qualified_cells": 88,
+          "held_cells": 33,
+          "held_classes": {
+            "land": 33
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 30854,
+          "target_id": "gb:MOZ:ADM2:85939544B58328889190937",
+          "original_cells": 30,
+          "qualified_cells": 13,
+          "held_cells": 17,
+          "held_classes": {
+            "land": 17
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 30858,
+          "target_id": "gb:MOZ:ADM2:85939544B61462515035200",
+          "original_cells": 88,
+          "qualified_cells": 77,
+          "held_cells": 11,
+          "held_classes": {
+            "land": 11
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 30874,
+          "target_id": "gb:MOZ:ADM2:85939544B69199020344442",
+          "original_cells": 138,
+          "qualified_cells": 123,
+          "held_cells": 15,
+          "held_classes": {
+            "land": 15
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 30880,
+          "target_id": "gb:MOZ:ADM2:85939544B71238690131788",
+          "original_cells": 46,
+          "qualified_cells": 26,
+          "held_cells": 20,
+          "held_classes": {
+            "land": 20
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 30912,
+          "target_id": "gb:MOZ:ADM2:85939544B86519405521682",
+          "original_cells": 372,
+          "qualified_cells": 312,
+          "held_cells": 60,
+          "held_classes": {
+            "land": 60
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 30913,
+          "target_id": "gb:MOZ:ADM2:85939544B8789366603018",
+          "original_cells": 7,
+          "qualified_cells": 2,
+          "held_cells": 5,
+          "held_classes": {
+            "land": 5
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 30920,
+          "target_id": "gb:MOZ:ADM2:85939544B94790467869630",
+          "original_cells": 94,
+          "qualified_cells": 80,
+          "held_cells": 14,
+          "held_classes": {
+            "land": 14
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 30928,
+          "target_id": "gb:MOZ:ADM2:85939544B99370318353636",
+          "original_cells": 222,
+          "qualified_cells": 171,
+          "held_cells": 51,
+          "held_classes": {
+            "land": 51
+          },
+          "wholly_held": false
+        }
+      ],
+      "original_source_coverage_locator": {
+        "bytes": 562470,
+        "commit": "15d9f9b6f7c9343fc860ab0a14569669d545a8fd",
+        "git_blob_oid": "b0425116cae57f9eb05a8f9d1701520ee7f16913",
+        "mode": "100644",
+        "path": "coordination/engineering/mozambique-original-repair-20261017/source-evidence-001/source-evidence.json",
+        "sha256": "10763b06f8b18868c17de8972c04d9f3cdc8dca02ec61061f17cbf9dcb94ff20"
+      },
+      "held_original_locator": {
+        "commit": "c70f693935b4f6018b92dfd9d8d373c0e4b93c31",
+        "path": "coordination/engineering/mozambique-original-repair-20261017/supported-inputs-001/held-original.json"
+      },
+      "held_reason_counts": {
+        "territorial_exclusion_cells": 352
+      },
+      "per_key_causal_foreign_feature": "UNKNOWN; not inferred from aggregate stock reason",
+      "original_equals_qualified_plus_held": true,
+      "original_owner_and_class_preserved": true,
+      "no_synthetic_empty_held_file": false,
+      "previous_full_constructor_patch_review": {
+        "group_id": "moz-original",
+        "package_id": "gb-MOZ-ADM2--repair-evaluation",
+        "source_head": "2a6514715d322d3fb47bf88436da9f0006f23ab3",
+        "source_branch": "engineering/mozambique-original-repair-20261017",
+        "original_role_descriptors_unchanged": true,
+        "original_locator_only_roles_preserved": [
+          "rule_preimage",
+          "source_authority",
+          "ledger"
+        ],
+        "original_rule_binding_and_patch_preserved": true,
+        "complete_literal_constructor_cells": 10811,
+        "literal_patch_same_owner_keys": true,
+        "components": 81,
+        "paired_review_head_exact": true,
+        "paired_review_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker2-mdg/mozambique-independent-review-001/review.md",
+        "paired_review_sha256": "e683ffd7bab4dfb32ccc68abc7ba6ee7ca11e5955db6142ef42292b7c6fd1652"
+      }
+    },
+    {
+      "group_id": "tun-original",
+      "package_id": "gb-TUN-ADM2--repair-evaluation",
+      "original_cells": 7476,
+      "qualified_cells": 7466,
+      "held_cells": 10,
+      "original_classes": {
+        "land": 7353,
+        "inland-water": 123
+      },
+      "qualified_classes": {
+        "land": 7343,
+        "inland-water": 123
+      },
+      "held_classes": {
+        "land": 10
+      },
+      "original_owners": 88,
+      "positive_owners": 87,
+      "literal_components": 87,
+      "owners_with_holds": 3,
+      "wholly_held_owners": [
+        {
+          "owner": 42350,
+          "target_id": "gb:TUN:ADM2:11933810B42878076535883",
+          "original_cells": 6,
+          "qualified_cells": 0,
+          "held_cells": 6,
+          "held_classes": {
+            "land": 6
+          },
+          "wholly_held": true
+        }
+      ],
+      "held_by_owner": [
+        {
+          "owner": 42333,
+          "target_id": "gb:TUN:ADM2:11933810B37259719331002",
+          "original_cells": 11,
+          "qualified_cells": 8,
+          "held_cells": 3,
+          "held_classes": {
+            "land": 3
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 42350,
+          "target_id": "gb:TUN:ADM2:11933810B42878076535883",
+          "original_cells": 6,
+          "qualified_cells": 0,
+          "held_cells": 6,
+          "held_classes": {
+            "land": 6
+          },
+          "wholly_held": true
+        },
+        {
+          "owner": 42389,
+          "target_id": "gb:TUN:ADM2:11933810B55515778364888",
+          "original_cells": 17,
+          "qualified_cells": 16,
+          "held_cells": 1,
+          "held_classes": {
+            "land": 1
+          },
+          "wholly_held": false
+        }
+      ],
+      "original_source_coverage_locator": {
+        "bytes": 268354,
+        "commit": "d2e38b5ac7df127de1dd17ae53cd10fa82f701fe",
+        "git_blob_oid": "873ae2ee41b989ab0ddec35dbddaa076df945a62",
+        "mode": "100644",
+        "path": "coordination/engineering/tunisia-original-repair-20261017/source-evidence-001/source-evidence.json",
+        "sha256": "84aa8907ad924d85217ecfaef310f123574831d61bd8033fc0d482c7571ab070"
+      },
+      "held_original_locator": {
+        "commit": "c076eae068c6bba7020c898bd51604aaf8d973c4",
+        "path": "coordination/engineering/tunisia-original-repair-20261017/supported-inputs-001/held-original.json"
+      },
+      "held_reason_counts": {
+        "territorial_exclusion_cells": 10
+      },
+      "per_key_causal_foreign_feature": "UNKNOWN; not inferred from aggregate stock reason",
+      "original_equals_qualified_plus_held": true,
+      "original_owner_and_class_preserved": true,
+      "no_synthetic_empty_held_file": false,
+      "previous_full_constructor_patch_review": {
+        "group_id": "tun-original",
+        "package_id": "gb-TUN-ADM2--repair-evaluation",
+        "source_head": "a2a30358a6f4eb093539d933859d74bfa546e92d",
+        "source_branch": "engineering/tunisia-original-repair-20261017",
+        "original_role_descriptors_unchanged": true,
+        "original_locator_only_roles_preserved": [],
+        "original_rule_binding_and_patch_preserved": true,
+        "complete_literal_constructor_cells": 7466,
+        "literal_patch_same_owner_keys": true,
+        "components": 87,
+        "paired_review_head_exact": true,
+        "paired_review_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker5-gnb/tun-independent-review/review.md",
+        "paired_review_sha256": "76e564bcc70254bf3d451152b8130944e18e22fc540ec282a3e2ef70eee395c9"
+      }
+    },
+    {
+      "group_id": "dza-original",
+      "package_id": "gb-DZA-ADM2--repair-evaluation",
+      "original_cells": 5965,
+      "qualified_cells": 5965,
+      "held_cells": 0,
+      "original_classes": {
+        "land": 5965
+      },
+      "qualified_classes": {
+        "land": 5965
+      },
+      "held_classes": {},
+      "original_owners": 135,
+      "positive_owners": 135,
+      "literal_components": 135,
+      "owners_with_holds": 0,
+      "wholly_held_owners": [],
+      "held_by_owner": [],
+      "original_source_coverage_locator": {
+        "commit": "46eb86e0950838d080fe2fcc5cb11503c4be3f3a",
+        "path": "coordination/engineering/algeria-original-repair-20261017/native-inputs-001/source-evidence.json"
+      },
+      "held_original_locator": null,
+      "held_reason_counts": {},
+      "per_key_causal_foreign_feature": "UNKNOWN; not inferred from aggregate stock reason",
+      "original_equals_qualified_plus_held": true,
+      "original_owner_and_class_preserved": true,
+      "no_synthetic_empty_held_file": true,
+      "previous_full_constructor_patch_review": {
+        "group_id": "dza-original",
+        "package_id": "gb-DZA-ADM2--repair-evaluation",
+        "source_head": "a3e2fe00da94e2a53dbda900e32ecc10bd5a2918",
+        "source_branch": "engineering/algeria-original-repair-20261017",
+        "original_role_descriptors_unchanged": true,
+        "original_locator_only_roles_preserved": [
+          "rule_preimage",
+          "source_authority",
+          "ledger"
+        ],
+        "original_rule_binding_and_patch_preserved": true,
+        "complete_literal_constructor_cells": 5965,
+        "literal_patch_same_owner_keys": true,
+        "components": 135,
+        "paired_review_head_exact": true,
+        "paired_review_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker1-eri/review-dza/exact-head-review-a3e2fe00.md",
+        "paired_review_sha256": "7b5acd8439856aa03b4597911bcd0ac404c764f10bf4cab6e3226dffa7156c96"
+      }
+    },
+    {
+      "group_id": "ken-original",
+      "package_id": "gb-KEN-ADM2--repair-evaluation",
+      "original_cells": 5156,
+      "qualified_cells": 4941,
+      "held_cells": 215,
+      "original_classes": {
+        "land": 5090,
+        "inland-water": 66
+      },
+      "qualified_classes": {
+        "land": 4901,
+        "inland-water": 40
+      },
+      "held_classes": {
+        "land": 189,
+        "inland-water": 26
+      },
+      "original_owners": 38,
+      "positive_owners": 38,
+      "literal_components": 38,
+      "owners_with_holds": 9,
+      "wholly_held_owners": [],
+      "held_by_owner": [
+        {
+          "owner": 26104,
+          "target_id": "gb:KEN:ADM2:3690345B11030917787472",
+          "original_cells": 31,
+          "qualified_cells": 1,
+          "held_cells": 30,
+          "held_classes": {
+            "land": 6,
+            "inland-water": 24
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 26139,
+          "target_id": "gb:KEN:ADM2:3690345B22392033475621",
+          "original_cells": 4,
+          "qualified_cells": 3,
+          "held_cells": 1,
+          "held_classes": {
+            "land": 1
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 26266,
+          "target_id": "gb:KEN:ADM2:3690345B65112986078037",
+          "original_cells": 36,
+          "qualified_cells": 28,
+          "held_cells": 8,
+          "held_classes": {
+            "land": 8
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 26291,
+          "target_id": "gb:KEN:ADM2:3690345B72596484741491",
+          "original_cells": 68,
+          "qualified_cells": 8,
+          "held_cells": 60,
+          "held_classes": {
+            "land": 60
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 26302,
+          "target_id": "gb:KEN:ADM2:3690345B77554234988908",
+          "original_cells": 356,
+          "qualified_cells": 287,
+          "held_cells": 69,
+          "held_classes": {
+            "land": 69
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 26303,
+          "target_id": "gb:KEN:ADM2:3690345B77596051964159",
+          "original_cells": 6,
+          "qualified_cells": 2,
+          "held_cells": 4,
+          "held_classes": {
+            "land": 4
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 26305,
+          "target_id": "gb:KEN:ADM2:3690345B78921482472620",
+          "original_cells": 41,
+          "qualified_cells": 39,
+          "held_cells": 2,
+          "held_classes": {
+            "inland-water": 2
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 26316,
+          "target_id": "gb:KEN:ADM2:3690345B82211082616386",
+          "original_cells": 21,
+          "qualified_cells": 13,
+          "held_cells": 8,
+          "held_classes": {
+            "land": 8
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 26352,
+          "target_id": "gb:KEN:ADM2:3690345B93324860747201",
+          "original_cells": 45,
+          "qualified_cells": 12,
+          "held_cells": 33,
+          "held_classes": {
+            "land": 33
+          },
+          "wholly_held": false
+        }
+      ],
+      "original_source_coverage_locator": {
+        "bytes": 207062,
+        "commit": "981bb08f47c195f1e72781cd7d0e241e36e0ef2e",
+        "git_blob_oid": "a4f99cf6f8c7769fdb2adebbb25b6e7e6bd65162",
+        "mode": "100644",
+        "path": "coordination/engineering/kenya-original-repair-20261018/source-evidence-001/source-evidence.json",
+        "sha256": "98f8858eed7f9dc36e78126e4e84d43ee5cc39158f84b51fd272be4cc8c3b654"
+      },
+      "held_original_locator": {
+        "commit": "bf5dc270a0aeae298ba4d334d0caebb7c033d26f",
+        "path": "coordination/engineering/kenya-original-repair-20261018/supported-inputs-001/held-original.json"
+      },
+      "held_reason_counts": {
+        "territorial_exclusion_cells": 215
+      },
+      "per_key_causal_foreign_feature": "UNKNOWN; not inferred from aggregate stock reason",
+      "original_equals_qualified_plus_held": true,
+      "original_owner_and_class_preserved": true,
+      "no_synthetic_empty_held_file": false,
+      "previous_full_constructor_patch_review": {
+        "group_id": "ken-original",
+        "package_id": "gb-KEN-ADM2--repair-evaluation",
+        "source_head": "f7d582b2a660d208173483e73d32415ab3a4207f",
+        "source_branch": "engineering/kenya-original-repair-20261018",
+        "original_role_descriptors_unchanged": true,
+        "original_locator_only_roles_preserved": [],
+        "original_rule_binding_and_patch_preserved": true,
+        "complete_literal_constructor_cells": 4941,
+        "literal_patch_same_owner_keys": true,
+        "components": 38,
+        "paired_review_head_exact": true,
+        "paired_review_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker2-mdg/kenya-independent-review-001/review.md",
+        "paired_review_sha256": "a21a9f0e031c261e93b7b88893f0779a851035a5d53a3b12fc67396bd3f34bc9"
+      }
+    },
+    {
+      "group_id": "cod-original",
+      "package_id": "gb-COD-ADM2--repair-evaluation",
+      "original_cells": 3905,
+      "qualified_cells": 2975,
+      "held_cells": 930,
+      "original_classes": {
+        "land": 3645,
+        "inland-water": 260
+      },
+      "qualified_classes": {
+        "land": 2780,
+        "inland-water": 195
+      },
+      "held_classes": {
+        "land": 865,
+        "inland-water": 65
+      },
+      "original_owners": 50,
+      "positive_owners": 48,
+      "literal_components": 48,
+      "owners_with_holds": 28,
+      "wholly_held_owners": [
+        {
+          "owner": 14568,
+          "target_id": "gb:COD:ADM2:63176286B75372177576839",
+          "original_cells": 112,
+          "qualified_cells": 0,
+          "held_cells": 112,
+          "held_classes": {
+            "land": 112
+          },
+          "wholly_held": true
+        },
+        {
+          "owner": 14593,
+          "target_id": "gb:COD:ADM2:63176286B83971453832478",
+          "original_cells": 4,
+          "qualified_cells": 0,
+          "held_cells": 4,
+          "held_classes": {
+            "land": 4
+          },
+          "wholly_held": true
+        }
+      ],
+      "held_by_owner": [
+        {
+          "owner": 14440,
+          "target_id": "gb:COD:ADM2:63176286B14719092717616",
+          "original_cells": 92,
+          "qualified_cells": 83,
+          "held_cells": 9,
+          "held_classes": {
+            "land": 9
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 14441,
+          "target_id": "gb:COD:ADM2:63176286B15680618396169",
+          "original_cells": 63,
+          "qualified_cells": 27,
+          "held_cells": 36,
+          "held_classes": {
+            "land": 36
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 14443,
+          "target_id": "gb:COD:ADM2:63176286B16720510237815",
+          "original_cells": 22,
+          "qualified_cells": 19,
+          "held_cells": 3,
+          "held_classes": {
+            "land": 3
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 14453,
+          "target_id": "gb:COD:ADM2:63176286B21708239892428",
+          "original_cells": 20,
+          "qualified_cells": 18,
+          "held_cells": 2,
+          "held_classes": {
+            "inland-water": 2
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 14459,
+          "target_id": "gb:COD:ADM2:63176286B24678106401017",
+          "original_cells": 77,
+          "qualified_cells": 41,
+          "held_cells": 36,
+          "held_classes": {
+            "land": 36
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 14461,
+          "target_id": "gb:COD:ADM2:63176286B25314267977171",
+          "original_cells": 31,
+          "qualified_cells": 3,
+          "held_cells": 28,
+          "held_classes": {
+            "inland-water": 28
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 14462,
+          "target_id": "gb:COD:ADM2:63176286B25642850349509",
+          "original_cells": 188,
+          "qualified_cells": 74,
+          "held_cells": 114,
+          "held_classes": {
+            "land": 114
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 14464,
+          "target_id": "gb:COD:ADM2:63176286B26674316015082",
+          "original_cells": 307,
+          "qualified_cells": 219,
+          "held_cells": 88,
+          "held_classes": {
+            "land": 88
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 14467,
+          "target_id": "gb:COD:ADM2:63176286B29097498682851",
+          "original_cells": 46,
+          "qualified_cells": 21,
+          "held_cells": 25,
+          "held_classes": {
+            "land": 25
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 14478,
+          "target_id": "gb:COD:ADM2:63176286B33518015273847",
+          "original_cells": 348,
+          "qualified_cells": 255,
+          "held_cells": 93,
+          "held_classes": {
+            "land": 93
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 14484,
+          "target_id": "gb:COD:ADM2:63176286B36806520086654",
+          "original_cells": 14,
+          "qualified_cells": 9,
+          "held_cells": 5,
+          "held_classes": {
+            "inland-water": 5
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 14485,
+          "target_id": "gb:COD:ADM2:63176286B37251946319002",
+          "original_cells": 156,
+          "qualified_cells": 109,
+          "held_cells": 47,
+          "held_classes": {
+            "land": 47
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 14489,
+          "target_id": "gb:COD:ADM2:63176286B40063645047483",
+          "original_cells": 127,
+          "qualified_cells": 108,
+          "held_cells": 19,
+          "held_classes": {
+            "land": 19
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 14492,
+          "target_id": "gb:COD:ADM2:63176286B41140464701712",
+          "original_cells": 70,
+          "qualified_cells": 42,
+          "held_cells": 28,
+          "held_classes": {
+            "land": 28
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 14494,
+          "target_id": "gb:COD:ADM2:63176286B42701779698156",
+          "original_cells": 23,
+          "qualified_cells": 17,
+          "held_cells": 6,
+          "held_classes": {
+            "land": 6
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 14500,
+          "target_id": "gb:COD:ADM2:63176286B47015384768636",
+          "original_cells": 91,
+          "qualified_cells": 88,
+          "held_cells": 3,
+          "held_classes": {
+            "land": 3
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 14501,
+          "target_id": "gb:COD:ADM2:63176286B47421332346835",
+          "original_cells": 73,
+          "qualified_cells": 53,
+          "held_cells": 20,
+          "held_classes": {
+            "land": 20
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 14509,
+          "target_id": "gb:COD:ADM2:63176286B50098701443330",
+          "original_cells": 49,
+          "qualified_cells": 42,
+          "held_cells": 7,
+          "held_classes": {
+            "land": 7
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 14519,
+          "target_id": "gb:COD:ADM2:63176286B53748739739840",
+          "original_cells": 14,
+          "qualified_cells": 12,
+          "held_cells": 2,
+          "held_classes": {
+            "land": 2
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 14552,
+          "target_id": "gb:COD:ADM2:63176286B6958016734749",
+          "original_cells": 38,
+          "qualified_cells": 8,
+          "held_cells": 30,
+          "held_classes": {
+            "inland-water": 30
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 14568,
+          "target_id": "gb:COD:ADM2:63176286B75372177576839",
+          "original_cells": 112,
+          "qualified_cells": 0,
+          "held_cells": 112,
+          "held_classes": {
+            "land": 112
+          },
+          "wholly_held": true
+        },
+        {
+          "owner": 14575,
+          "target_id": "gb:COD:ADM2:63176286B77587123851522",
+          "original_cells": 15,
+          "qualified_cells": 6,
+          "held_cells": 9,
+          "held_classes": {
+            "land": 9
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 14585,
+          "target_id": "gb:COD:ADM2:63176286B80368275017521",
+          "original_cells": 112,
+          "qualified_cells": 55,
+          "held_cells": 57,
+          "held_classes": {
+            "land": 57
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 14586,
+          "target_id": "gb:COD:ADM2:63176286B81146580347594",
+          "original_cells": 9,
+          "qualified_cells": 6,
+          "held_cells": 3,
+          "held_classes": {
+            "land": 3
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 14593,
+          "target_id": "gb:COD:ADM2:63176286B83971453832478",
+          "original_cells": 4,
+          "qualified_cells": 0,
+          "held_cells": 4,
+          "held_classes": {
+            "land": 4
+          },
+          "wholly_held": true
+        },
+        {
+          "owner": 14599,
+          "target_id": "gb:COD:ADM2:63176286B86170870415972",
+          "original_cells": 165,
+          "qualified_cells": 82,
+          "held_cells": 83,
+          "held_classes": {
+            "land": 83
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 14611,
+          "target_id": "gb:COD:ADM2:63176286B94968684087840",
+          "original_cells": 286,
+          "qualified_cells": 227,
+          "held_cells": 59,
+          "held_classes": {
+            "land": 59
+          },
+          "wholly_held": false
+        },
+        {
+          "owner": 14616,
+          "target_id": "gb:COD:ADM2:63176286B98421000452360",
+          "original_cells": 19,
+          "qualified_cells": 17,
+          "held_cells": 2,
+          "held_classes": {
+            "land": 2
+          },
+          "wholly_held": false
+        }
+      ],
+      "original_source_coverage_locator": {
+        "bytes": 485660,
+        "commit": "ea94be0de429ebbb19607f9d07e21ecd57214cff",
+        "git_blob_oid": "6e052aac94cf7ef9a1ce9787b4e3b80b86825676",
+        "mode": "100644",
+        "path": "coordination/engineering/congo-original-repair-20261018/native-inputs-001/source-evidence.json",
+        "sha256": "25188ef15a2c73c17595d99f7a61dd33bf4e24c80ecc87cca6e858b7add66081"
+      },
+      "held_original_locator": {
+        "commit": "81b808d4d73a225b6eacdae8b0554f9326b16270",
+        "path": "coordination/engineering/congo-original-repair-20261018/supported-inputs-001/held-original.json"
+      },
+      "held_reason_counts": {
+        "territorial_exclusion_cells": 930
+      },
+      "per_key_causal_foreign_feature": "UNKNOWN; not inferred from aggregate stock reason",
+      "original_equals_qualified_plus_held": true,
+      "original_owner_and_class_preserved": true,
+      "no_synthetic_empty_held_file": false,
+      "previous_full_constructor_patch_review": {
+        "group_id": "cod-original",
+        "package_id": "gb-COD-ADM2--repair-evaluation",
+        "source_head": "54bdebd3a21bad7358c76da016386a35a59e1375",
+        "source_branch": "engineering/congo-original-repair-20261018",
+        "original_role_descriptors_unchanged": true,
+        "original_locator_only_roles_preserved": [],
+        "original_rule_binding_and_patch_preserved": true,
+        "complete_literal_constructor_cells": 2975,
+        "literal_patch_same_owner_keys": true,
+        "components": 48,
+        "paired_review_head_exact": true,
+        "paired_review_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker3-moz/review-cod/final-independent-review.md",
+        "paired_review_sha256": "fdd2f99d93e85aded5e042bd77778e1688b6010a00b937c51c9d3186d738315c"
+      }
+    },
+    {
+      "group_id": "sle-original",
+      "package_id": "gb-SLE-ADM2--repair-evaluation",
+      "original_cells": 3878,
+      "qualified_cells": 3878,
+      "held_cells": 0,
+      "original_classes": {
+        "land": 3878
+      },
+      "qualified_classes": {
+        "land": 3878
+      },
+      "held_classes": {},
+      "original_owners": 11,
+      "positive_owners": 11,
+      "literal_components": 11,
+      "owners_with_holds": 0,
+      "wholly_held_owners": [],
+      "held_by_owner": [],
+      "original_source_coverage_locator": {
+        "commit": "597f45d79fb84e222637c3390cb93c11377474af",
+        "path": "coordination/engineering/sierra-leone-original-repair-20261018/source-evidence-001/source-evidence.json"
+      },
+      "held_original_locator": null,
+      "held_reason_counts": {},
+      "per_key_causal_foreign_feature": "UNKNOWN; not inferred from aggregate stock reason",
+      "original_equals_qualified_plus_held": true,
+      "original_owner_and_class_preserved": true,
+      "no_synthetic_empty_held_file": true,
+      "previous_full_constructor_patch_review": {
+        "group_id": "sle-original",
+        "package_id": "gb-SLE-ADM2--repair-evaluation",
+        "source_head": "31ced2c0b64292cbdfeb3bcf7beffeb0410b76be",
+        "source_branch": "engineering/sierra-leone-original-repair-20261018",
+        "original_role_descriptors_unchanged": true,
+        "original_locator_only_roles_preserved": [],
+        "original_rule_binding_and_patch_preserved": true,
+        "complete_literal_constructor_cells": 3878,
+        "literal_patch_same_owner_keys": true,
+        "components": 11,
+        "paired_review_head_exact": true,
+        "paired_review_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker1-cmr/review-sle/review.md",
+        "paired_review_sha256": "53cc69cf392dea87f8429e644a075edf004f17b09714d44a621e4779451aa483"
+      }
+    },
+    {
+      "group_id": "gin-original",
+      "package_id": "gb-GIN-ADM2--repair-evaluation",
+      "original_cells": 4094,
+      "qualified_cells": 4094,
+      "held_cells": 0,
+      "original_classes": {
+        "land": 4094
+      },
+      "qualified_classes": {
+        "land": 4094
+      },
+      "held_classes": {},
+      "original_owners": 20,
+      "positive_owners": 20,
+      "literal_components": 20,
+      "owners_with_holds": 0,
+      "wholly_held_owners": [],
+      "held_by_owner": [],
+      "original_source_coverage_locator": {
+        "commit": "cf107343450cc39cb382b271f706dc6ad1d3ed33",
+        "path": "coordination/engineering/guinea-original-repair-20261018/source-evidence-001/source-evidence.json"
+      },
+      "held_original_locator": null,
+      "held_reason_counts": {},
+      "per_key_causal_foreign_feature": "UNKNOWN; not inferred from aggregate stock reason",
+      "original_equals_qualified_plus_held": true,
+      "original_owner_and_class_preserved": true,
+      "no_synthetic_empty_held_file": true,
+      "previous_full_constructor_patch_review": {
+        "group_id": "gin-original",
+        "package_id": "gb-GIN-ADM2--repair-evaluation",
+        "source_head": "8ffca7af81fa4c81d7278bf4da5aa154331bdc0d",
+        "source_branch": "engineering/guinea-original-repair-20261018",
+        "original_role_descriptors_unchanged": true,
+        "original_locator_only_roles_preserved": [],
+        "original_rule_binding_and_patch_preserved": true,
+        "complete_literal_constructor_cells": 4094,
+        "literal_patch_same_owner_keys": true,
+        "components": 20,
+        "paired_review_head_exact": true,
+        "paired_review_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker5-mwi/gin-independent-review/review.md",
+        "paired_review_sha256": "32ce8038071b98049bd43c621c1671904ef8e6e29b6aa81032eba385f5f6d281"
+      }
+    }
+  ],
+  "totals": {
+    "original_cells": 70532,
+    "qualified_cells": 69020,
+    "held_cells": 1512,
+    "original_owners": 489,
+    "positive_owners": 486,
+    "literal_components": 486,
+    "original_land": 69948,
+    "qualified_land": 68527,
+    "held_land": 1421,
+    "original_inland-water": 584,
+    "qualified_inland-water": 493,
+    "held_inland-water": 91
+  },
+  "held_obligations": [
+    "All1512 original held keys retain their original owner and land/water class and remain outside positive authorities.",
+    "No causal foreign feature is inferred from stock territorial_exclusion_cells; original complete negative/source/physical operands and source/legal questions remain attached.",
+    "This file is accounting evidence, not a restoration list, new patch, source authority or selected acceptance.",
+    "Future selected owner-zero/conservation/emitted acceptance belongs to parent integration after its82660 group; none ran here."
+  ],
+  "accepted_cells": 0,
+  "delivered_cells": 0,
+  "source_or_scientific_operator_replayed": false,
+  "selected_consumer_run": false,
+  "activation": false,
+  "public_action": false
+}

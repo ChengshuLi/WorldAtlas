@@ -1,0 +1,41 @@
+{
+  "previous_reviewed_head": "93bd5b560847d5d75884dd96805fa6dfce941b8f",
+  "reviewed_head": "a2a30358a6f4eb093539d933859d74bfa546e92d",
+  "parent_exact": true,
+  "changed_paths": [
+    "coordination/engineering/tunisia-original-repair-20261017/README.md",
+    "coordination/engineering/tunisia-original-repair-20261017/source-review/source-meaning.md",
+    "coordination/engineering/tunisia-original-repair-20261017/source-review/upstream-provenance-002/DZA_ADM2/DZA_ADM2.prj",
+    "coordination/engineering/tunisia-original-repair-20261017/source-review/upstream-provenance-002/DZA_ADM2/DZA_ADM2.zip",
+    "coordination/engineering/tunisia-original-repair-20261017/source-review/upstream-provenance-002/DZA_ADM2/archive-custody.json",
+    "coordination/engineering/tunisia-original-repair-20261017/source-review/upstream-provenance-002/DZA_ADM2/meta.txt",
+    "coordination/engineering/tunisia-original-repair-20261017/source-review/upstream-provenance-002/LBY_ADM1/LBY_ADM1.prj",
+    "coordination/engineering/tunisia-original-repair-20261017/source-review/upstream-provenance-002/LBY_ADM1/LBY_ADM1.zip",
+    "coordination/engineering/tunisia-original-repair-20261017/source-review/upstream-provenance-002/LBY_ADM1/archive-custody.json",
+    "coordination/engineering/tunisia-original-repair-20261017/source-review/upstream-provenance-002/LBY_ADM1/license.PNG",
+    "coordination/engineering/tunisia-original-repair-20261017/source-review/upstream-provenance-002/LBY_ADM1/meta.txt",
+    "coordination/engineering/tunisia-original-repair-20261017/source-review/upstream-provenance-002/adoption.json"
+  ],
+  "unchanged_existing_packet_paths": 84,
+  "original_quartet_and_native_bodies_unchanged": true,
+  "products": [
+    {
+      "product": "DZA_ADM2",
+      "bytes": 1879849,
+      "sha256": "5ba2839e3b24623e5d4b657a344a6b128a834355dc1d66ac0c658bade1f17adc",
+      "members_verified": 6,
+      "matches_independently_acquired_archive": true,
+      "retained_members_match_original_bytes": true
+    },
+    {
+      "product": "LBY_ADM1",
+      "bytes": 81529,
+      "sha256": "5a1a68c0b00c63a8104d1fc113b2646cfe09b8ae052c9688403fbf6bebaf3052",
+      "members_verified": 10,
+      "matches_independently_acquired_archive": true,
+      "retained_members_match_original_bytes": true
+    }
+  ],
+  "scientific_or_test_rerun": false,
+  "verdict": "accepted-with-limits"
+}

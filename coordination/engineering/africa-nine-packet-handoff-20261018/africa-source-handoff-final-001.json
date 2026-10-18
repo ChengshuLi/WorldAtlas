@@ -1,0 +1,995 @@
+{
+  "kind": "LOCAL_LOCATOR_ONLY_AFRICA_SOURCE_HANDOFF",
+  "prepared_by": "01a14c38-5eff-77c2-b4f6-f38b61eea00b",
+  "status": "LOCAL_LITERAL_HANDOFF_FOR_PARENT; independent narrow review recorded separately",
+  "purpose": "One local handoff of exact published historical original-source packets with distinct accepted-with-limits reviews. This file is a navigation/counting aid; original authority artifacts remain authoritative.",
+  "authority_preservation": "No copied binding payload, new authority, repinning, current baseline, selected composition, finalizer, queue or source publication. Original role descriptors remain at their existing locator/JSON pointer; role_file_locators are navigation links only. No rule/authority/ledger/native patch is regenerated.",
+  "totals_of_included_literal_originals_only": {
+    "original_cells": 70532,
+    "qualified_cells": 69020,
+    "held_cells": 1512,
+    "original_land_cells": 69948,
+    "original_inland_water_cells": 584,
+    "qualified_land_cells": 68527,
+    "qualified_inland_water_cells": 493,
+    "held_land_cells": 1421,
+    "held_inland_water_cells": 91,
+    "original_owners": 489,
+    "qualified_components": 486,
+    "included_groups": 9,
+    "literal_patch_union_cells": 69020,
+    "unique_constructor_component_ids": 486,
+    "cross_group_duplicate_native_coordinates": 0,
+    "accepted_cells": 0,
+    "delivered_cells": 0
+  },
+  "groups": [
+    {
+      "group_id": "eri-original",
+      "package_id": "gb-ERI-ADM2--repair-evaluation",
+      "eligibility": "published_source_exact_head_and_distinct_scientific_review_accepted_with_limits",
+      "source_head": {
+        "commit": "dadbbabbd407f00661def8524493b64858e8a0d0",
+        "branch": "engineering/eritrea-original-repair-20261017-worker1",
+        "public_branch": "https://github.com/ChengshuLi/WorldAtlas/tree/engineering/eritrea-original-repair-20261017-worker1",
+        "verification_receipt": "africa-workers-20261017/worker1-cmr/eri-authorized-push-success.json",
+        "publication_status": "published_exact_head_verified; no source-branch blocker"
+      },
+      "original_packet": {
+        "commit": "dadbbabbd407f00661def8524493b64858e8a0d0",
+        "prefix": "coordination/engineering/eritrea-original-repair-20261017/"
+      },
+      "original_quartet_manifest": {
+        "commit": "dadbbabbd407f00661def8524493b64858e8a0d0",
+        "path": "coordination/engineering/eritrea-original-repair-20261017/qualified15444-original-quartet.json"
+      },
+      "original_four_role_descriptor_location": {
+        "commit": "dadbbabbd407f00661def8524493b64858e8a0d0",
+        "path": "coordination/engineering/eritrea-original-repair-20261017/qualified15444-original-quartet.json",
+        "json_pointer": "/authorities/0"
+      },
+      "role_file_locators": {
+        "rule_preimage": {
+          "commit": "e7390d06a80987dfcc629a779ca84fc1f78f1b42",
+          "path": "coordination/engineering/eritrea-original-repair-20261017/native-authority-supported-001/original-rule-preimage.json"
+        },
+        "source_authority": {
+          "commit": "e7390d06a80987dfcc629a779ca84fc1f78f1b42",
+          "path": "coordination/engineering/eritrea-original-repair-20261017/native-authority-supported-001/authority-binding.json"
+        },
+        "ledger": {
+          "commit": "e7390d06a80987dfcc629a779ca84fc1f78f1b42",
+          "path": "coordination/engineering/eritrea-original-repair-20261017/native-authority-supported-001/constructor-result.json"
+        },
+        "native_patch": {
+          "commit": "fe7b0c60b23f8df14425115a6e8be0e1b789676f",
+          "path": "coordination/engineering/eritrea-original-repair-20261017/supported-inputs-001/native-patch.json"
+        }
+      },
+      "supporting_original_locators": {
+        "source_evidence": {
+          "commit": "fe7b0c60b23f8df14425115a6e8be0e1b789676f",
+          "path": "coordination/engineering/eritrea-original-repair-20261017/supported-inputs-001/source-evidence.json"
+        },
+        "original_scope_partition": {
+          "commit": "fe7b0c60b23f8df14425115a6e8be0e1b789676f",
+          "path": "coordination/engineering/eritrea-original-repair-20261017/supported-inputs-001/original-scope-partition.json"
+        },
+        "held_original": {
+          "commit": "fe7b0c60b23f8df14425115a6e8be0e1b789676f",
+          "path": "coordination/engineering/eritrea-original-repair-20261017/supported-inputs-001/held-original.json"
+        },
+        "operating_observation": {
+          "commit": "e7390d06a80987dfcc629a779ca84fc1f78f1b42",
+          "path": "coordination/engineering/eritrea-original-repair-20261017/native-authority-supported-001/operating-observation.json"
+        }
+      },
+      "scope": {
+        "original_cells": 15449,
+        "qualified_cells": 15444,
+        "held_cells": 5,
+        "original_land_cells": 15449,
+        "original_inland_water_cells": 0,
+        "qualified_land_cells": 15444,
+        "qualified_inland_water_cells": 0,
+        "held_land_cells": 5,
+        "held_inland_water_cells": 0,
+        "original_intervals": 5492,
+        "original_owners": 23,
+        "complete_original_owner_source_atoms": 23,
+        "qualified_components": 23,
+        "native_blocks": [
+          28,
+          29
+        ],
+        "accepted_cells": 0,
+        "delivered_cells": 0
+      },
+      "complete_constructor_literal_observation": {
+        "native_cells_from_all_literal_ranges": 15444,
+        "native_cells_from_all_component_fields": 15444,
+        "component_ids": 23,
+        "literal_ledger_rows": 23,
+        "original_native_patch_same_owner_key_set": true,
+        "new_scientific_computation": false
+      },
+      "paired_scientific_review": {
+        "reviewer_agent": "/root/africa_worker6_algeria",
+        "reviewed_source_head": "dadbbabbd407f00661def8524493b64858e8a0d0",
+        "report": {
+          "location": "local_scratch",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker6-dza/reviews/eri-001/review.md"
+        },
+        "disposition": "no_blocking_scientific_finding_with_limits",
+        "public_review_post_not_implied": true
+      },
+      "original_constructor_limitations": [
+        "Physical interpretation and semantic reconciliation are retained reviewed source evidence; actual current owner-zero is checked by native consumers.",
+        "Witness exclusion applies only to requested native centres. Original whole-source physical/hierarchy issues and historical source/resource limits remain retained; no whole-parent certification or acceptance is inferred."
+      ],
+      "source_and_held_caveats": "Retain the complete original packet and exact paired review by the locators above. No source rights/vintage, held class, historical parent/name/territory or physical witness limitation is discharged by this handoff.",
+      "publication_status_correction": "The original scientific review predates successful specifically approved ERI push; its historical push-denial wording is retained. The actual successful-push receipt above establishes later source availability without changing source authority."
+    },
+    {
+      "group_id": "mdg-original",
+      "package_id": "gb-MDG-ADM2--repair-evaluation",
+      "eligibility": "published_source_exact_head_and_distinct_scientific_review_accepted_with_limits",
+      "source_head": {
+        "commit": "4ae5f337657f6aa31f9a4e15ece1e62295653adc",
+        "branch": "engineering/madagascar-original-repair-20261017",
+        "public_branch": "https://github.com/ChengshuLi/WorldAtlas/tree/engineering/madagascar-original-repair-20261017",
+        "verification_receipt": {
+          "local_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker2-mdg/sle-original-20261018/mdg-specific-approved-pr-retry-receipt.json",
+          "meaning": "Actual draft PR2454 create and exact head readback; frozen public source4ae5 unchanged."
+        },
+        "publication_status": "published_exact_head_verified; no source-branch blocker"
+      },
+      "original_packet": {
+        "commit": "4ae5f337657f6aa31f9a4e15ece1e62295653adc",
+        "prefix": "coordination/engineering/madagascar-original-repair-20261017/"
+      },
+      "original_quartet_manifest": {
+        "commit": "4ae5f337657f6aa31f9a4e15ece1e62295653adc",
+        "path": "coordination/engineering/madagascar-original-repair-20261017/qualified13446-original-quartet.json"
+      },
+      "original_four_role_descriptor_location": {
+        "commit": "4ae5f337657f6aa31f9a4e15ece1e62295653adc",
+        "path": "coordination/engineering/madagascar-original-repair-20261017/qualified13446-original-quartet.json",
+        "json_pointer": "/authorities/0"
+      },
+      "role_file_locators": {
+        "rule_preimage": {
+          "commit": "68ff4e17978e20f45575c30b414c76412af29e9d",
+          "path": "coordination/engineering/madagascar-original-repair-20261017/native-authority-001/original-rule-preimage.json"
+        },
+        "source_authority": {
+          "commit": "68ff4e17978e20f45575c30b414c76412af29e9d",
+          "path": "coordination/engineering/madagascar-original-repair-20261017/native-authority-001/authority-binding.json"
+        },
+        "ledger": {
+          "commit": "68ff4e17978e20f45575c30b414c76412af29e9d",
+          "path": "coordination/engineering/madagascar-original-repair-20261017/native-authority-001/constructor-result.json"
+        },
+        "native_patch": {
+          "commit": "48733a5688509bef25e83882a5b23d327c770a08",
+          "path": "coordination/engineering/madagascar-original-repair-20261017/native-request-002/native-requested-patch.json"
+        }
+      },
+      "supporting_original_locators": {
+        "source_evidence": {
+          "commit": "48733a5688509bef25e83882a5b23d327c770a08",
+          "path": "coordination/engineering/madagascar-original-repair-20261017/source-evidence-002/source-evidence.json"
+        },
+        "original_scope_accounting": {
+          "commit": "948bceec626abb194a2f165e6d5f5ad32aedda7e",
+          "path": "coordination/engineering/madagascar-original-repair-20261017/original-scope-accounting.json"
+        },
+        "operating_observation": {
+          "commit": "948bceec626abb194a2f165e6d5f5ad32aedda7e",
+          "path": "coordination/engineering/madagascar-original-repair-20261017/native-authority-001/operating-observation.json"
+        }
+      },
+      "scope": {
+        "original_cells": 13446,
+        "qualified_cells": 13446,
+        "held_cells": 0,
+        "original_land_cells": 13446,
+        "original_inland_water_cells": 0,
+        "qualified_land_cells": 13446,
+        "qualified_inland_water_cells": 0,
+        "held_land_cells": 0,
+        "held_inland_water_cells": 0,
+        "original_intervals": 6225,
+        "original_owners": 43,
+        "complete_original_owner_source_atoms": 43,
+        "qualified_components": 43,
+        "native_blocks": [
+          34,
+          35,
+          36
+        ],
+        "accepted_cells": 0,
+        "delivered_cells": 0
+      },
+      "complete_constructor_literal_observation": {
+        "native_cells_from_all_literal_ranges": 13446,
+        "native_cells_from_all_component_fields": 13446,
+        "component_ids": 43,
+        "literal_ledger_rows": 43,
+        "original_native_patch_same_owner_key_set": true,
+        "new_scientific_computation": false
+      },
+      "paired_scientific_review": {
+        "reviewer_agent": "/root/africa_worker3_mozambique",
+        "reviewed_source_head": "4ae5f337657f6aa31f9a4e15ece1e62295653adc",
+        "report": {
+          "location": "local_scratch",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker3-moz/review-mdg/final-independent-review.md"
+        },
+        "disposition": "accepted_with_limits",
+        "public_review_post_not_implied": true
+      },
+      "original_constructor_limitations": [
+        "Physical interpretation and semantic reconciliation are retained reviewed source evidence; actual current owner-zero is checked by native consumers.",
+        "Witness exclusion applies only to requested native centres. Original whole-source physical/hierarchy issues and historical source/resource limits remain retained; no whole-parent certification or acceptance is inferred."
+      ],
+      "source_and_held_caveats": "Retain the complete original packet and exact paired review by the locators above. No source rights/vintage, held class, historical parent/name/territory or physical witness limitation is discharged by this handoff."
+    },
+    {
+      "group_id": "moz-original",
+      "package_id": "gb-MOZ-ADM2--repair-evaluation",
+      "eligibility": "published_source_exact_head_and_distinct_scientific_review_accepted_with_limits",
+      "source_head": {
+        "commit": "2a6514715d322d3fb47bf88436da9f0006f23ab3",
+        "branch": "engineering/mozambique-original-repair-20261017",
+        "public_branch": "https://github.com/ChengshuLi/WorldAtlas/tree/engineering/mozambique-original-repair-20261017",
+        "verification_receipt": {
+          "local_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker6-dza/combined59248-original-quartets.json",
+          "json_pointer": "/groups/3/source_head",
+          "limit": "Existing author-confirmed public exact-head record; no new remote operation performed by this locator-only handoff."
+        },
+        "publication_status": "published_exact_head_verified; no source-branch blocker"
+      },
+      "original_packet": {
+        "commit": "2a6514715d322d3fb47bf88436da9f0006f23ab3",
+        "prefix": "coordination/engineering/mozambique-original-repair-20261017/"
+      },
+      "original_quartet_manifest": null,
+      "original_four_role_descriptor_location": {
+        "local_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker6-dza/combined59248-original-quartets.json",
+        "json_pointer": "/groups/3/authorities/0"
+      },
+      "role_file_locators": {
+        "rule_preimage": {
+          "commit": "2a6514715d322d3fb47bf88436da9f0006f23ab3",
+          "path": "coordination/engineering/mozambique-original-repair-20261017/native-authority-supported-001/original-rule-preimage.json"
+        },
+        "source_authority": {
+          "commit": "2a6514715d322d3fb47bf88436da9f0006f23ab3",
+          "path": "coordination/engineering/mozambique-original-repair-20261017/native-authority-supported-001/authority-binding.json"
+        },
+        "ledger": {
+          "commit": "2a6514715d322d3fb47bf88436da9f0006f23ab3",
+          "path": "coordination/engineering/mozambique-original-repair-20261017/native-authority-supported-001/constructor-result.json"
+        },
+        "native_patch": {
+          "commit": "c70f693935b4f6018b92dfd9d8d373c0e4b93c31",
+          "path": "coordination/engineering/mozambique-original-repair-20261017/supported-inputs-001/native-patch.json"
+        }
+      },
+      "supporting_original_locators": {
+        "source_evidence": {
+          "commit": "c70f693935b4f6018b92dfd9d8d373c0e4b93c31",
+          "path": "coordination/engineering/mozambique-original-repair-20261017/supported-inputs-001/source-evidence.json"
+        },
+        "held_original": {
+          "commit": "c70f693935b4f6018b92dfd9d8d373c0e4b93c31",
+          "path": "coordination/engineering/mozambique-original-repair-20261017/supported-inputs-001/held-original.json"
+        },
+        "original_scope_partition": {
+          "commit": "c70f693935b4f6018b92dfd9d8d373c0e4b93c31",
+          "path": "coordination/engineering/mozambique-original-repair-20261017/supported-inputs-001/original-scope-partition.json"
+        }
+      },
+      "scope": {
+        "original_cells": 11163,
+        "qualified_cells": 10811,
+        "held_cells": 352,
+        "original_land_cells": 11028,
+        "original_inland_water_cells": 135,
+        "qualified_land_cells": 10676,
+        "qualified_inland_water_cells": 135,
+        "held_land_cells": 352,
+        "held_inland_water_cells": 0,
+        "original_intervals": 5808,
+        "original_owners": 81,
+        "complete_original_owner_source_atoms": 81,
+        "qualified_components": 81,
+        "native_blocks": [
+          33,
+          34,
+          35,
+          36
+        ],
+        "accepted_cells": 0,
+        "delivered_cells": 0
+      },
+      "complete_constructor_literal_observation": {
+        "native_cells_from_all_literal_ranges": 10811,
+        "native_cells_from_all_component_fields": 10811,
+        "component_ids": 81,
+        "literal_ledger_rows": 81,
+        "original_native_patch_same_owner_key_set": true,
+        "new_scientific_computation": false
+      },
+      "paired_scientific_review": {
+        "reviewer_agent": "/root/africa_worker2_madagascar",
+        "reviewed_source_head": "2a6514715d322d3fb47bf88436da9f0006f23ab3",
+        "report": {
+          "location": "local_scratch",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker2-mdg/mozambique-independent-review-001/review.md"
+        },
+        "disposition": "accepted_with_limits",
+        "public_review_post_not_implied": true
+      },
+      "original_constructor_limitations": [
+        "Physical interpretation and semantic reconciliation are retained reviewed source evidence; actual current owner-zero is checked by native consumers.",
+        "Witness exclusion applies only to requested native centres. Original whole-source physical/hierarchy issues and historical source/resource limits remain retained; no whole-parent certification or acceptance is inferred."
+      ],
+      "source_and_held_caveats": "Retain the complete original packet and exact paired review by the locators above. No source rights/vintage, held class, historical parent/name/territory or physical witness limitation is discharged by this handoff."
+    },
+    {
+      "group_id": "tun-original",
+      "package_id": "gb-TUN-ADM2--repair-evaluation",
+      "eligibility": "published_source_exact_head_and_distinct_scientific_review_accepted_with_limits",
+      "source_head": {
+        "commit": "a2a30358a6f4eb093539d933859d74bfa546e92d",
+        "branch": "engineering/tunisia-original-repair-20261017",
+        "public_branch": "https://github.com/ChengshuLi/WorldAtlas/tree/engineering/tunisia-original-repair-20261017",
+        "verification_receipt": {
+          "local_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-tun/current-handoff.json",
+          "json_pointer": "/tunisia"
+        },
+        "publication_status": "published_exact_head_verified; no source-branch blocker"
+      },
+      "original_packet": {
+        "commit": "a2a30358a6f4eb093539d933859d74bfa546e92d",
+        "prefix": "coordination/engineering/tunisia-original-repair-20261017/"
+      },
+      "original_quartet_manifest": {
+        "commit": "a2a30358a6f4eb093539d933859d74bfa546e92d",
+        "path": "coordination/engineering/tunisia-original-repair-20261017/qualified7466-original-quartet.json"
+      },
+      "original_four_role_descriptor_location": {
+        "commit": "a2a30358a6f4eb093539d933859d74bfa546e92d",
+        "path": "coordination/engineering/tunisia-original-repair-20261017/qualified7466-original-quartet.json",
+        "json_pointer": "/authorities/0"
+      },
+      "role_file_locators": {
+        "rule_preimage": {
+          "commit": "f4b1867e709e86fd5533b8ba0b45582e9a25e811",
+          "path": "coordination/engineering/tunisia-original-repair-20261017/native-authority-supported-001/original-rule-preimage.json"
+        },
+        "source_authority": {
+          "commit": "f4b1867e709e86fd5533b8ba0b45582e9a25e811",
+          "path": "coordination/engineering/tunisia-original-repair-20261017/native-authority-supported-001/authority-binding.json"
+        },
+        "ledger": {
+          "commit": "f4b1867e709e86fd5533b8ba0b45582e9a25e811",
+          "path": "coordination/engineering/tunisia-original-repair-20261017/native-authority-supported-001/constructor-result.json"
+        },
+        "native_patch": {
+          "commit": "c076eae068c6bba7020c898bd51604aaf8d973c4",
+          "path": "coordination/engineering/tunisia-original-repair-20261017/supported-inputs-001/native-patch.json"
+        }
+      },
+      "supporting_original_locators": {
+        "source_evidence": {
+          "commit": "c076eae068c6bba7020c898bd51604aaf8d973c4",
+          "path": "coordination/engineering/tunisia-original-repair-20261017/supported-inputs-001/source-evidence.json"
+        },
+        "original_scope_partition": {
+          "commit": "c076eae068c6bba7020c898bd51604aaf8d973c4",
+          "path": "coordination/engineering/tunisia-original-repair-20261017/supported-inputs-001/original-scope-partition.json"
+        },
+        "held_original": {
+          "commit": "c076eae068c6bba7020c898bd51604aaf8d973c4",
+          "path": "coordination/engineering/tunisia-original-repair-20261017/supported-inputs-001/held-original.json"
+        },
+        "operating_observation": {
+          "commit": "f4b1867e709e86fd5533b8ba0b45582e9a25e811",
+          "path": "coordination/engineering/tunisia-original-repair-20261017/native-authority-supported-001/operating-observation.json"
+        }
+      },
+      "scope": {
+        "original_cells": 7476,
+        "qualified_cells": 7466,
+        "held_cells": 10,
+        "original_land_cells": 7353,
+        "original_inland_water_cells": 123,
+        "qualified_land_cells": 7343,
+        "qualified_inland_water_cells": 123,
+        "held_land_cells": 10,
+        "held_inland_water_cells": 0,
+        "original_intervals": 2631,
+        "original_owners": 88,
+        "complete_original_owner_source_atoms": 88,
+        "qualified_components": 87,
+        "native_blocks": [
+          24,
+          25,
+          26
+        ],
+        "accepted_cells": 0,
+        "delivered_cells": 0
+      },
+      "complete_constructor_literal_observation": {
+        "native_cells_from_all_literal_ranges": 7466,
+        "native_cells_from_all_component_fields": 7466,
+        "component_ids": 87,
+        "literal_ledger_rows": 87,
+        "original_native_patch_same_owner_key_set": true,
+        "new_scientific_computation": false
+      },
+      "paired_scientific_review": {
+        "reviewer_agent": "/root/africa_worker5_guinea_bissau",
+        "reviewed_source_head": "a2a30358a6f4eb093539d933859d74bfa546e92d",
+        "report": {
+          "location": "local_scratch",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker5-gnb/tun-independent-review/review.md"
+        },
+        "disposition": "accepted_with_limits_including_final_rights_only_delta",
+        "public_review_post_not_implied": true,
+        "final_rights_only_delta_receipt": {
+          "location": "local_scratch",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker5-gnb/tun-independent-review/a2a30358-metadata-delta-review.json"
+        },
+        "scientific_quartet_pins_unchanged_in_rights_only_head": true
+      },
+      "original_constructor_limitations": [
+        "Physical interpretation and semantic reconciliation are retained reviewed source evidence; actual current owner-zero is checked by native consumers.",
+        "Witness exclusion applies only to requested native centres. Original whole-source physical/hierarchy issues and historical source/resource limits remain retained; no whole-parent certification or acceptance is inferred."
+      ],
+      "source_and_held_caveats": "Retain the complete original packet and exact paired review by the locators above. No source rights/vintage, held class, historical parent/name/territory or physical witness limitation is discharged by this handoff."
+    },
+    {
+      "group_id": "dza-original",
+      "package_id": "gb-DZA-ADM2--repair-evaluation",
+      "eligibility": "published_source_exact_head_and_distinct_scientific_review_accepted_with_limits",
+      "source_head": {
+        "commit": "a3e2fe00da94e2a53dbda900e32ecc10bd5a2918",
+        "branch": "engineering/algeria-original-repair-20261017",
+        "public_branch": "https://github.com/ChengshuLi/WorldAtlas/tree/engineering/algeria-original-repair-20261017",
+        "verification_receipt": {
+          "local_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker6-dza/combined59248-original-quartets.json",
+          "json_pointer": "/groups/5/source_head",
+          "limit": "Existing author-confirmed public exact-head record; no new remote operation performed by this locator-only handoff."
+        },
+        "publication_status": "published_exact_head_verified; no source-branch blocker"
+      },
+      "original_packet": {
+        "commit": "a3e2fe00da94e2a53dbda900e32ecc10bd5a2918",
+        "prefix": "coordination/engineering/algeria-original-repair-20261017/"
+      },
+      "original_quartet_manifest": null,
+      "original_four_role_descriptor_location": {
+        "local_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker6-dza/combined59248-original-quartets.json",
+        "json_pointer": "/groups/5/authorities/0"
+      },
+      "role_file_locators": {
+        "rule_preimage": {
+          "commit": "a3e2fe00da94e2a53dbda900e32ecc10bd5a2918",
+          "path": "coordination/engineering/algeria-original-repair-20261017/authority-original-001/original-rule-preimage.json"
+        },
+        "source_authority": {
+          "commit": "a3e2fe00da94e2a53dbda900e32ecc10bd5a2918",
+          "path": "coordination/engineering/algeria-original-repair-20261017/authority-original-001/authority-binding.json"
+        },
+        "ledger": {
+          "commit": "a3e2fe00da94e2a53dbda900e32ecc10bd5a2918",
+          "path": "coordination/engineering/algeria-original-repair-20261017/authority-original-001/constructor-result.json"
+        },
+        "native_patch": {
+          "commit": "46eb86e0950838d080fe2fcc5cb11503c4be3f3a",
+          "path": "coordination/engineering/algeria-original-repair-20261017/native-request-001/native-requested-patch.json"
+        }
+      },
+      "supporting_original_locators": {
+        "source_evidence": {
+          "commit": "46eb86e0950838d080fe2fcc5cb11503c4be3f3a",
+          "path": "coordination/engineering/algeria-original-repair-20261017/native-inputs-001/source-evidence.json"
+        }
+      },
+      "scope": {
+        "original_cells": 5965,
+        "qualified_cells": 5965,
+        "held_cells": 0,
+        "original_land_cells": 5965,
+        "original_inland_water_cells": 0,
+        "qualified_land_cells": 5965,
+        "qualified_inland_water_cells": 0,
+        "held_land_cells": 0,
+        "held_inland_water_cells": 0,
+        "original_intervals": 2530,
+        "original_owners": 135,
+        "complete_original_owner_source_atoms": 135,
+        "qualified_components": 135,
+        "native_blocks": [
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "accepted_cells": 0,
+        "delivered_cells": 0
+      },
+      "complete_constructor_literal_observation": {
+        "native_cells_from_all_literal_ranges": 5965,
+        "native_cells_from_all_component_fields": 5965,
+        "component_ids": 135,
+        "literal_ledger_rows": 135,
+        "original_native_patch_same_owner_key_set": true,
+        "new_scientific_computation": false
+      },
+      "paired_scientific_review": {
+        "reviewer_agent": "/root/africa_worker1_eritrea",
+        "reviewed_source_head": "a3e2fe00da94e2a53dbda900e32ecc10bd5a2918",
+        "report": {
+          "location": "local_scratch",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker1-eri/review-dza/exact-head-review-a3e2fe00.md"
+        },
+        "disposition": "no_blocking_scientific_finding_with_limits",
+        "public_review_post_not_implied": true
+      },
+      "original_constructor_limitations": [
+        "Physical interpretation and semantic reconciliation are retained reviewed source evidence; actual current owner-zero is checked by native consumers.",
+        "Witness exclusion applies only to requested native centres. Original whole-source physical/hierarchy issues and historical source/resource limits remain retained; no whole-parent certification or acceptance is inferred."
+      ],
+      "source_and_held_caveats": "Retain the complete original packet and exact paired review by the locators above. No source rights/vintage, held class, historical parent/name/territory or physical witness limitation is discharged by this handoff."
+    },
+    {
+      "group_id": "ken-original",
+      "package_id": "gb-KEN-ADM2--repair-evaluation",
+      "eligibility": "published_source_exact_head_and_distinct_scientific_review_accepted_with_limits",
+      "source_head": {
+        "commit": "f7d582b2a660d208173483e73d32415ab3a4207f",
+        "branch": "engineering/kenya-original-repair-20261018",
+        "public_branch": "https://github.com/ChengshuLi/WorldAtlas/tree/engineering/kenya-original-repair-20261018",
+        "verification_receipt": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker3-moz/kenya-original-20261018/frozen-kenya-review-handoff.json",
+        "publication_status": "published_exact_head_verified; no source-branch blocker"
+      },
+      "original_packet": {
+        "commit": "f7d582b2a660d208173483e73d32415ab3a4207f",
+        "prefix": "coordination/engineering/kenya-original-repair-20261018/"
+      },
+      "original_quartet_manifest": {
+        "commit": "f7d582b2a660d208173483e73d32415ab3a4207f",
+        "path": "coordination/engineering/kenya-original-repair-20261018/qualified4941-original-quartet.json"
+      },
+      "original_four_role_descriptor_location": {
+        "commit": "f7d582b2a660d208173483e73d32415ab3a4207f",
+        "path": "coordination/engineering/kenya-original-repair-20261018/qualified4941-original-quartet.json",
+        "json_pointer": "/authorities/0"
+      },
+      "role_file_locators": {
+        "rule_preimage": {
+          "commit": "9c3fd2f756b82fcdbd964cf16f461ed5f3542b55",
+          "path": "coordination/engineering/kenya-original-repair-20261018/native-authority-supported-001/original-rule-preimage.json"
+        },
+        "source_authority": {
+          "commit": "9c3fd2f756b82fcdbd964cf16f461ed5f3542b55",
+          "path": "coordination/engineering/kenya-original-repair-20261018/native-authority-supported-001/authority-binding.json"
+        },
+        "ledger": {
+          "commit": "9c3fd2f756b82fcdbd964cf16f461ed5f3542b55",
+          "path": "coordination/engineering/kenya-original-repair-20261018/native-authority-supported-001/constructor-result.json"
+        },
+        "native_patch": {
+          "commit": "bf5dc270a0aeae298ba4d334d0caebb7c033d26f",
+          "path": "coordination/engineering/kenya-original-repair-20261018/supported-inputs-001/native-patch.json"
+        }
+      },
+      "supporting_original_locators": {
+        "source_evidence": {
+          "commit": "bf5dc270a0aeae298ba4d334d0caebb7c033d26f",
+          "path": "coordination/engineering/kenya-original-repair-20261018/supported-inputs-001/source-evidence.json"
+        },
+        "original_scope_accounting": {
+          "commit": "9c3fd2f756b82fcdbd964cf16f461ed5f3542b55",
+          "path": "coordination/engineering/kenya-original-repair-20261018/source-review/final-original-accounting.json"
+        },
+        "held_original": {
+          "commit": "bf5dc270a0aeae298ba4d334d0caebb7c033d26f",
+          "path": "coordination/engineering/kenya-original-repair-20261018/supported-inputs-001/held-original.json"
+        },
+        "original_partition": {
+          "commit": "bf5dc270a0aeae298ba4d334d0caebb7c033d26f",
+          "path": "coordination/engineering/kenya-original-repair-20261018/supported-inputs-001/original-scope-partition.json"
+        },
+        "operating_observation": {
+          "commit": "9c3fd2f756b82fcdbd964cf16f461ed5f3542b55",
+          "path": "coordination/engineering/kenya-original-repair-20261018/source-review/native-observation-001.json"
+        }
+      },
+      "scope": {
+        "original_cells": 5156,
+        "qualified_cells": 4941,
+        "held_cells": 215,
+        "original_land_cells": 5090,
+        "original_inland_water_cells": 66,
+        "qualified_land_cells": 4901,
+        "qualified_inland_water_cells": 40,
+        "held_land_cells": 189,
+        "held_inland_water_cells": 26,
+        "original_owners": 38,
+        "complete_original_owner_source_atoms": 38,
+        "qualified_components": 38,
+        "accepted_cells": 0,
+        "delivered_cells": 0
+      },
+      "complete_constructor_literal_observation": {
+        "native_cells_from_all_literal_ranges": 4941,
+        "native_cells_from_all_component_fields": 4941,
+        "component_ids": 38,
+        "literal_ledger_rows": 38,
+        "original_native_patch_same_owner_key_set": true,
+        "new_scientific_computation": false
+      },
+      "paired_scientific_review": {
+        "reviewer_agent": "/root/africa_worker2_madagascar",
+        "reviewed_source_head": "f7d582b2a660d208173483e73d32415ab3a4207f",
+        "report": {
+          "location": "local_scratch",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker2-mdg/kenya-independent-review-001/review.md"
+        },
+        "disposition": "accepted_with_limits",
+        "public_review_post_not_implied": true
+      },
+      "original_constructor_limitations": [
+        "Physical interpretation and semantic reconciliation are retained reviewed source evidence; actual current owner-zero is checked by native consumers.",
+        "Witness exclusion applies only to requested native centres. Original whole-source physical/hierarchy issues and historical source/resource limits remain retained; no whole-parent certification or acceptance is inferred."
+      ],
+      "source_and_held_caveats": "Retain the complete original packet and exact paired review by the locators above. No source rights/vintage, held class, historical parent/name/territory or physical witness limitation is discharged by this handoff."
+    },
+    {
+      "group_id": "cod-original",
+      "package_id": "gb-COD-ADM2--repair-evaluation",
+      "eligibility": "published_source_exact_head_and_distinct_scientific_review_accepted_with_limits",
+      "source_head": {
+        "commit": "54bdebd3a21bad7358c76da016386a35a59e1375",
+        "branch": "engineering/congo-original-repair-20261018",
+        "public_branch": "https://github.com/ChengshuLi/WorldAtlas/tree/engineering/congo-original-repair-20261018",
+        "verification_receipt": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker6-cod/frozen-handoff-status.json",
+        "publication_status": "published_exact_head_verified; no source-branch blocker"
+      },
+      "original_packet": {
+        "commit": "54bdebd3a21bad7358c76da016386a35a59e1375",
+        "prefix": "coordination/engineering/congo-original-repair-20261018/"
+      },
+      "original_quartet_manifest": {
+        "commit": "54bdebd3a21bad7358c76da016386a35a59e1375",
+        "path": "coordination/engineering/congo-original-repair-20261018/qualified2975-original-quartet.json"
+      },
+      "original_four_role_descriptor_location": {
+        "commit": "54bdebd3a21bad7358c76da016386a35a59e1375",
+        "path": "coordination/engineering/congo-original-repair-20261018/qualified2975-original-quartet.json",
+        "json_pointer": "/authorities/0"
+      },
+      "role_file_locators": {
+        "rule_preimage": {
+          "commit": "3b5687282ec72a92647e9d83f7327ff9fad9fa16",
+          "path": "coordination/engineering/congo-original-repair-20261018/authority-supported-001/original-rule-preimage.json"
+        },
+        "source_authority": {
+          "commit": "3b5687282ec72a92647e9d83f7327ff9fad9fa16",
+          "path": "coordination/engineering/congo-original-repair-20261018/authority-supported-001/authority-binding.json"
+        },
+        "ledger": {
+          "commit": "3b5687282ec72a92647e9d83f7327ff9fad9fa16",
+          "path": "coordination/engineering/congo-original-repair-20261018/authority-supported-001/constructor-result.json"
+        },
+        "native_patch": {
+          "commit": "81b808d4d73a225b6eacdae8b0554f9326b16270",
+          "path": "coordination/engineering/congo-original-repair-20261018/supported-inputs-001/native-patch.json"
+        }
+      },
+      "supporting_original_locators": {
+        "source_evidence": {
+          "commit": "81b808d4d73a225b6eacdae8b0554f9326b16270",
+          "path": "coordination/engineering/congo-original-repair-20261018/supported-inputs-001/source-evidence.json"
+        },
+        "original_scope_partition": {
+          "commit": "81b808d4d73a225b6eacdae8b0554f9326b16270",
+          "path": "coordination/engineering/congo-original-repair-20261018/supported-inputs-001/original-scope-partition.json"
+        },
+        "original_accounting": {
+          "commit": "3b5687282ec72a92647e9d83f7327ff9fad9fa16",
+          "path": "coordination/engineering/congo-original-repair-20261018/verification/original-accounting.json"
+        },
+        "held_original": {
+          "commit": "81b808d4d73a225b6eacdae8b0554f9326b16270",
+          "path": "coordination/engineering/congo-original-repair-20261018/supported-inputs-001/held-original.json"
+        },
+        "operating_observation": {
+          "commit": "3b5687282ec72a92647e9d83f7327ff9fad9fa16",
+          "path": "coordination/engineering/congo-original-repair-20261018/authority-supported-001/operating-observation.json"
+        }
+      },
+      "scope": {
+        "original_cells": 3905,
+        "qualified_cells": 2975,
+        "held_cells": 930,
+        "original_land_cells": 3645,
+        "original_inland_water_cells": 260,
+        "qualified_land_cells": 2780,
+        "qualified_inland_water_cells": 195,
+        "held_land_cells": 865,
+        "held_inland_water_cells": 65,
+        "original_owners": 50,
+        "complete_original_owner_source_atoms": 50,
+        "qualified_components": 48,
+        "accepted_cells": 0,
+        "delivered_cells": 0
+      },
+      "complete_constructor_literal_observation": {
+        "native_cells_from_all_literal_ranges": 2975,
+        "native_cells_from_all_component_fields": 2975,
+        "component_ids": 48,
+        "literal_ledger_rows": 48,
+        "original_native_patch_same_owner_key_set": true,
+        "new_scientific_computation": false
+      },
+      "paired_scientific_review": {
+        "reviewer_agent": "/root/africa_worker3_mozambique",
+        "reviewed_source_head": "54bdebd3a21bad7358c76da016386a35a59e1375",
+        "report": {
+          "location": "local_scratch",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker3-moz/review-cod/final-independent-review.md"
+        },
+        "disposition": "accepted_with_limits",
+        "public_review_post_not_implied": true
+      },
+      "original_constructor_limitations": [
+        "Physical interpretation and semantic reconciliation are retained reviewed source evidence; actual current owner-zero is checked by native consumers.",
+        "Witness exclusion applies only to requested native centres. Original whole-source physical/hierarchy issues and historical source/resource limits remain retained; no whole-parent certification or acceptance is inferred."
+      ],
+      "source_and_held_caveats": "Retain the complete original packet and exact paired review by the locators above. No source rights/vintage, held class, historical parent/name/territory or physical witness limitation is discharged by this handoff."
+    },
+    {
+      "group_id": "sle-original",
+      "package_id": "gb-SLE-ADM2--repair-evaluation",
+      "eligibility": "published_source_exact_head_and_distinct_scientific_review_accepted_with_limits",
+      "source_head": {
+        "commit": "31ced2c0b64292cbdfeb3bcf7beffeb0410b76be",
+        "branch": "engineering/sierra-leone-original-repair-20261018",
+        "public_branch": "https://github.com/ChengshuLi/WorldAtlas/tree/engineering/sierra-leone-original-repair-20261018",
+        "verification_receipt": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker2-mdg/sle-original-20261018/frozen-source-published-handoff.json",
+        "publication_status": "published_exact_head_verified; no source-branch blocker"
+      },
+      "original_packet": {
+        "commit": "31ced2c0b64292cbdfeb3bcf7beffeb0410b76be",
+        "prefix": "coordination/engineering/sierra-leone-original-repair-20261018/"
+      },
+      "original_quartet_manifest": {
+        "commit": "31ced2c0b64292cbdfeb3bcf7beffeb0410b76be",
+        "path": "coordination/engineering/sierra-leone-original-repair-20261018/qualified3878-original-quartet.json"
+      },
+      "original_four_role_descriptor_location": {
+        "commit": "31ced2c0b64292cbdfeb3bcf7beffeb0410b76be",
+        "path": "coordination/engineering/sierra-leone-original-repair-20261018/qualified3878-original-quartet.json",
+        "json_pointer": "/authorities/0"
+      },
+      "role_file_locators": {
+        "rule_preimage": {
+          "commit": "e1d276515ba4696f4f8db4dc17f8f643958cc4d4",
+          "path": "coordination/engineering/sierra-leone-original-repair-20261018/native-authority-001/original-rule-preimage.json"
+        },
+        "source_authority": {
+          "commit": "e1d276515ba4696f4f8db4dc17f8f643958cc4d4",
+          "path": "coordination/engineering/sierra-leone-original-repair-20261018/native-authority-001/authority-binding.json"
+        },
+        "ledger": {
+          "commit": "e1d276515ba4696f4f8db4dc17f8f643958cc4d4",
+          "path": "coordination/engineering/sierra-leone-original-repair-20261018/native-authority-001/constructor-result.json"
+        },
+        "native_patch": {
+          "commit": "597f45d79fb84e222637c3390cb93c11377474af",
+          "path": "coordination/engineering/sierra-leone-original-repair-20261018/native-request-001/native-requested-patch.json"
+        }
+      },
+      "supporting_original_locators": {
+        "source_evidence": {
+          "commit": "597f45d79fb84e222637c3390cb93c11377474af",
+          "path": "coordination/engineering/sierra-leone-original-repair-20261018/source-evidence-001/source-evidence.json"
+        },
+        "original_scope_accounting": {
+          "commit": "200f9e1e73569e32297f8695239c50acfc36034a",
+          "path": "coordination/engineering/sierra-leone-original-repair-20261018/original-scope-accounting.json"
+        },
+        "operating_observation": {
+          "commit": "200f9e1e73569e32297f8695239c50acfc36034a",
+          "path": "coordination/engineering/sierra-leone-original-repair-20261018/actual-operating-observations.json"
+        }
+      },
+      "scope": {
+        "original_cells": 3878,
+        "qualified_cells": 3878,
+        "held_cells": 0,
+        "original_land_cells": 3878,
+        "original_inland_water_cells": 0,
+        "qualified_land_cells": 3878,
+        "qualified_inland_water_cells": 0,
+        "held_land_cells": 0,
+        "held_inland_water_cells": 0,
+        "original_owners": 11,
+        "complete_original_owner_source_atoms": 11,
+        "qualified_components": 11,
+        "accepted_cells": 0,
+        "delivered_cells": 0
+      },
+      "complete_constructor_literal_observation": {
+        "native_cells_from_all_literal_ranges": 3878,
+        "native_cells_from_all_component_fields": 3878,
+        "component_ids": 11,
+        "literal_ledger_rows": 11,
+        "original_native_patch_same_owner_key_set": true,
+        "new_scientific_computation": false
+      },
+      "paired_scientific_review": {
+        "reviewer_agent": "/root/africa_worker1_eritrea",
+        "reviewed_source_head": "31ced2c0b64292cbdfeb3bcf7beffeb0410b76be",
+        "report": {
+          "location": "local_scratch",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker1-cmr/review-sle/review.md"
+        },
+        "disposition": "accepted_with_limits",
+        "public_review_post_not_implied": true
+      },
+      "original_constructor_limitations": [
+        "Physical interpretation and semantic reconciliation are retained reviewed source evidence; actual current owner-zero is checked by native consumers.",
+        "Witness exclusion applies only to requested native centres. Original whole-source physical/hierarchy issues and historical source/resource limits remain retained; no whole-parent certification or acceptance is inferred."
+      ],
+      "source_and_held_caveats": "Retain the complete original packet and exact paired review by the locators above. No source rights/vintage, held class, historical parent/name/territory or physical witness limitation is discharged by this handoff.",
+      "review_status_correction": {
+        "751": "OPEN: historical14/current16 and Western Area roles/parents/completeness remain unresolved",
+        "1062": "CLOSED: completed read-only provenance-verifier receipt preservation fix; not an unresolved source-completeness issue",
+        "source_quartet_historical_status": "Original pending review/local-only wording is a frozen historical record. Actual publication receipt and distinct accepted review above establish current handoff eligibility only."
+      }
+    },
+    {
+      "group_id": "gin-original",
+      "package_id": "gb-GIN-ADM2--repair-evaluation",
+      "eligibility": "published_source_exact_head_and_distinct_scientific_review_accepted_with_limits",
+      "source_head": {
+        "commit": "8ffca7af81fa4c81d7278bf4da5aa154331bdc0d",
+        "branch": "engineering/guinea-original-repair-20261018",
+        "public_branch": "https://github.com/ChengshuLi/WorldAtlas/tree/engineering/guinea-original-repair-20261018",
+        "verification_receipt": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker5-mwi/gin-independent-review/remote-branch-readback.json",
+        "publication_status": "published_exact_head_verified; no source-branch blocker"
+      },
+      "original_packet": {
+        "commit": "8ffca7af81fa4c81d7278bf4da5aa154331bdc0d",
+        "prefix": "coordination/engineering/guinea-original-repair-20261018/"
+      },
+      "original_quartet_manifest": {
+        "commit": "8ffca7af81fa4c81d7278bf4da5aa154331bdc0d",
+        "path": "coordination/engineering/guinea-original-repair-20261018/qualified4094-original-quartet.json"
+      },
+      "original_four_role_descriptor_location": {
+        "commit": "8ffca7af81fa4c81d7278bf4da5aa154331bdc0d",
+        "path": "coordination/engineering/guinea-original-repair-20261018/qualified4094-original-quartet.json",
+        "json_pointer": "/authorities/0"
+      },
+      "role_file_locators": {
+        "rule_preimage": {
+          "commit": "98a90520adc38dcdaa34dca6c5fc6ad255b4ed59",
+          "path": "coordination/engineering/guinea-original-repair-20261018/native-authority-001/original-rule-preimage.json"
+        },
+        "source_authority": {
+          "commit": "98a90520adc38dcdaa34dca6c5fc6ad255b4ed59",
+          "path": "coordination/engineering/guinea-original-repair-20261018/native-authority-001/authority-binding.json"
+        },
+        "ledger": {
+          "commit": "98a90520adc38dcdaa34dca6c5fc6ad255b4ed59",
+          "path": "coordination/engineering/guinea-original-repair-20261018/native-authority-001/constructor-result.json"
+        },
+        "native_patch": {
+          "commit": "5a011358c16a8d5cc83510b630197f1a85a3ba72",
+          "path": "coordination/engineering/guinea-original-repair-20261018/native-request-001/native-requested-patch.json"
+        }
+      },
+      "supporting_original_locators": {
+        "source_evidence": {
+          "commit": "cf107343450cc39cb382b271f706dc6ad1d3ed33",
+          "path": "coordination/engineering/guinea-original-repair-20261018/source-evidence-001/source-evidence.json"
+        },
+        "original_scope_accounting": {
+          "commit": "26544ea7eec8b5d047da1a2b314257946d8959c0",
+          "path": "coordination/engineering/guinea-original-repair-20261018/scope/final-original-record-accounting.json"
+        },
+        "operating_observation": {
+          "commit": "98a90520adc38dcdaa34dca6c5fc6ad255b4ed59",
+          "path": "coordination/engineering/guinea-original-repair-20261018/native-authority-001/operating-observation.json"
+        }
+      },
+      "scope": {
+        "original_cells": 4094,
+        "qualified_cells": 4094,
+        "held_cells": 0,
+        "original_land_cells": 4094,
+        "original_inland_water_cells": 0,
+        "qualified_land_cells": 4094,
+        "qualified_inland_water_cells": 0,
+        "held_land_cells": 0,
+        "held_inland_water_cells": 0,
+        "original_owners": 20,
+        "complete_original_owner_source_atoms": 20,
+        "qualified_components": 20,
+        "accepted_cells": 0,
+        "delivered_cells": 0
+      },
+      "complete_constructor_literal_observation": {
+        "native_cells_from_all_literal_ranges": 4094,
+        "native_cells_from_all_component_fields": 4094,
+        "component_ids": 20,
+        "literal_ledger_rows": 20,
+        "original_native_patch_same_owner_key_set": true,
+        "new_scientific_computation": false
+      },
+      "paired_scientific_review": {
+        "reviewer_agent": "/root/africa_worker5_guinea_bissau",
+        "reviewed_source_head": "8ffca7af81fa4c81d7278bf4da5aa154331bdc0d",
+        "report": {
+          "location": "local_scratch",
+          "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker5-mwi/gin-independent-review/review.md"
+        },
+        "disposition": "accepted_with_limits",
+        "public_review_post_not_implied": true
+      },
+      "original_constructor_limitations": [
+        "Physical interpretation and semantic reconciliation are retained reviewed source evidence; actual current owner-zero is checked by native consumers.",
+        "Witness exclusion applies only to requested native centres. Original whole-source physical/hierarchy issues and historical source/resource limits remain retained; no whole-parent certification or acceptance is inferred."
+      ],
+      "source_and_held_caveats": "Retain the complete original packet and exact paired review by the locators above. No source rights/vintage, held class, historical parent/name/territory or physical witness limitation is discharged by this handoff.",
+      "verbatim_review_limits": [
+        "The original queue and lineage independently require 4,094 land cells, zero water, 2,033 intervals, twenty recorded owners and all twenty singleton source atoms. The 27 contact features are a separate roster. The complete original domestic ADM2 product and current canonical context each contain 34 subjects; original ADM1 has eight. The literal Conakry subject remains owner20794 and source ID `gb:GIN:ADM2:49546643B29247776226513`. Open issue811's special-zone/tier question remains unresolved. A source label of prefecture or a native success cannot settle current territorial, legal or hierarchy meaning.",
+        "MLI ADM1 has a material unresolved archive inconsistency: metadata declares CC BY4.0, while the actual retained HDX image says CC Attribution IGO without edition. MLI2's image says CC Attribution International without edition while metadata specifies CC BY4.0. These are explicitly preserved, not relabeled or treated as blanket permission. The author does not claim successful current HDX license verification. Attribution, source links, modification notices, provider conditions and applicable ODbL obligations remain attached to their respective families. The packet's source meaning accurately retains these conditions and uncertainties. These historical negative products constrain applicability; they do not assign Guinea keys to foreign owners or resolve sovereignty."
+      ]
+    }
+  ],
+  "excluded_packets_reason_only": [
+    {
+      "package_id": "gb-GNB-ADM2--repair-evaluation",
+      "reason": "Corrected source branch push denied/stopped; excluded regardless of prior published predecessor or local review."
+    },
+    {
+      "package_id": "gb-CMR-ADM3--repair-evaluation",
+      "reason": "GNQ ADM2 rights conflict and source push held/denied; excluded regardless of local qualification."
+    },
+    {
+      "package_id": "gb-MWI-ADM2--repair-evaluation",
+      "reason": "Source branch push denied/stopped; excluded regardless of local qualification/review."
+    },
+    {
+      "scope": "Egypt",
+      "reason": "Owned by parent separate Egypt/NLD/five-Americas group; excluded from Africa handoff."
+    },
+    {
+      "scope": "South Africa and packages owned elsewhere",
+      "reason": "Already accepted or separately owned; excluded."
+    },
+    {
+      "scope": "MAR/SDN/ZMB",
+      "reason": "Unactivated preparation only; excluded from all eligible authoritative groups."
+    }
+  ],
+  "limits": [
+    "All original held counts and inland-water classes remain literal; no held key is accepted or reassigned.",
+    "Every complete original source packet and exact accepted-with-limits scientific review remains in force, including historical/vintage/rights/native-CRS/ancestry/physical and territorial limits.",
+    "Literal patch pairwise disjointness was read from original immutable patch rows and full constructor native rows only; it proves no current selected owner-zero, selected conservation or emitted-consumer result.",
+    "Current selected-owner-zero, combined selected conservation, emitted consumers, parent integration and publication remain unexecuted separate gates.",
+    "Parent authoritative campaign totals are not recomputed or changed by this local handoff.",
+    "No blocked packet role descriptors, constructor outputs or denied publication bodies are included. No repository/public publication of this file is authorized or performed."
+  ]
+}
