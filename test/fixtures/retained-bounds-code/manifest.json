@@ -1,0 +1,41 @@
+{
+  "purpose": "Immutable actual-code compatibility fixtures; no scientific source data",
+  "files": [
+    {
+      "role": "retained_helper",
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "git_blob_oid": "373e43b664ad0138396a2fc1a161e91553b7c404",
+      "bytes": 229462,
+      "sha256": "7d3177e9fb2ed8d6eb1ec7723cf09de7a39c61b8892cd5e767a11012157c61d2",
+      "fixture": "retained_helper.gz"
+    },
+    {
+      "role": "current_helper",
+      "commit": "c893639571b05840508b4b102ed79052ab24fb26",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "git_blob_oid": "732792012cc6ad4823d914d9beb56755386d1f04",
+      "bytes": 234337,
+      "sha256": "f24083355e967cea6310fb002a0387e4a9c627475e6a25dd35f378664464a24f",
+      "fixture": "current_helper.gz"
+    },
+    {
+      "role": "retained_grid",
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "src/native-grid.js",
+      "git_blob_oid": "3e1d3e7e6012b5b571345caad029ab7d124c07fd",
+      "bytes": 50250,
+      "sha256": "66b453bbb2e001b9ff56bd754d55087f5919845dceeefd886016494cefa1d3e0",
+      "fixture": "retained_grid.gz"
+    },
+    {
+      "role": "current_grid",
+      "commit": "c893639571b05840508b4b102ed79052ab24fb26",
+      "path": "src/native-grid.js",
+      "git_blob_oid": "811966bb79e8903037a24a47ada0a408f2c972d2",
+      "bytes": 53003,
+      "sha256": "f8691d492770fd8131f5e8341adacbf33b17625c6d735ccb1460cde3213a37cf",
+      "fixture": "current_grid.gz"
+    }
+  ]
+}
