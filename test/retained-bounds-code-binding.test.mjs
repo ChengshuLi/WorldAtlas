@@ -4,21 +4,19 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import {gunzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
-import {retainedBoundsCodeCompatibility,requireBoundsExecutionIdentity,requireRetainedProducerIdentity} from '../scripts/retained-bounds-code-binding.mjs';
-const names=['retained_helper','current_helper','retained_grid','current_grid'];
+import {requireHistoricalBoundsMethod,requireBoundsExecutionIdentity,requireRetainedProducerIdentity} from '../scripts/retained-bounds-code-binding.mjs';
+import {retainedCoordinateBounds,RETAINED_BOUNDS_CONTRACT} from '../scripts/retained-coordinate-bounds.mjs';
+const names=['retained_helper','retained_grid'];
 const bodies=Object.fromEntries(names.map(n=>[n,gunzipSync(fs.readFileSync(new URL('./fixtures/retained-bounds-code/'+n+'.gz',import.meta.url))).toString()]));
-test('actual historical/current complete bodies admit only the reviewed JSON bounds edge',()=>{
- const r=retainedBoundsCodeCompatibility(bodies);
- assert.equal(r.native_qualification_authorized,false);
- assert.match(r.basis,/reviewed/);
- for(const n of names)assert.throws(()=>retainedBoundsCodeCompatibility({...bodies,[n]:bodies[n]+'\n// changed'}),/Unreviewed/);
- assert.throws(()=>retainedBoundsCodeCompatibility({...bodies,current_grid:undefined}),/Complete/);
- assert.match(retainedBoundsCodeCompatibility({...bodies,current_helper:bodies.retained_helper,current_grid:bodies.retained_grid}).basis,/literal/);
+test('authentic historical producer remains exact independently of current broad modules',()=>{
+ requireHistoricalBoundsMethod(bodies.retained_helper,bodies.retained_grid);
+ assert.throws(()=>requireHistoricalBoundsMethod(bodies.retained_helper+'changed',bodies.retained_grid),/historical/);
+ assert.throws(()=>requireHistoricalBoundsMethod(bodies.retained_helper,bodies.retained_grid+'changed'),/historical/);
 });
 test('current execution and historical producer are distinct explicit immutable bindings',()=>{
  const old='1'.repeat(40),now='2'.repeat(40);
  const config={method_commit:old,execution_commit:now,accepted_commit:now,inputs:{method_package:{commit:old}}};
- for(const k of ['current_coordinate_helper','current_native_grid','native_selection','native_manifest','execution_package'])config.inputs[k]={commit:now};
+ for(const k of ['current_bounds_module','native_selection','native_manifest','execution_package'])config.inputs[k]={commit:now};
  requireBoundsExecutionIdentity(config);
  for(const k of Object.keys(config.inputs)){
    const c=structuredClone(config);c.inputs[k].commit='3'.repeat(40);
@@ -36,7 +34,7 @@ function extracted(prefix) {
  vm.runInContext(scanner.replaceAll('export ','')+'\nconst demand=(v,m)=>{if(!v)throw Error(m);};\n'+hash.replaceAll('export ','')+bounds.replaceAll('export ','')+'\nglobalThis.check=coordinateBounds;',context);
  return g=>{try{return {ok:JSON.stringify(context.check(g))};}catch(e){return {error:e.message};}};
 }
-const old=extracted('retained'),current=extracted('current');
+const old=extracted('retained'),current=g=>{try{return {ok:JSON.stringify(retainedCoordinateBounds(g))};}catch(e){return {error:e.message};}};
 const polygon=ring=>({type:'Polygon',coordinates:[ring]});
 test('dense JSON arrays preserve actual bounds, multipart, seam, endpoint and hash semantics',()=>{
  const fixtures=[
@@ -64,36 +62,37 @@ test('actual old/current bounds preserve malformed dense input refusals',()=>{
  polygon([[NaN,0],[1,0],[1,1],[NaN,0]]),polygon([[Infinity,0],[1,0],[1,1],[Infinity,0]])];
  for(const g of bad){assert.deepEqual(current(g),old(g));assert.ok(current(g).error);}
 });
-test('retained periodic numerical scanner and lattice dependencies are literal',()=>{
- const prefix=s=>s.slice(0,s.indexOf('// Validate a reviewed canonical view'));
- assert.equal(prefix(bodies.retained_grid),prefix(bodies.current_grid));
- assert.equal(createHash('sha256').update(prefix(bodies.current_grid)).digest('hex'),'9b2e369c470c35d82015aae5c74299ca4ca6cccd1db5494956b0a9ae87c814dd');
-});
-
 test('historical completion/config/driver custody cannot be relabeled to current execution',()=>{
  const sha=v=>createHash('sha256').update(v).digest('hex');
  const driver=Buffer.from('retained producer'),old='1'.repeat(40),now='2'.repeat(40);
- const config={method_commit:old,execution_commit:now,inputs:{previous_config:{sha256:sha('old config')}}};
- const completion={driver_sha256:sha(driver),config_sha256:sha('old config')},previous={method_commit:old};
+ const closure=[{commit:old,path:'a.mjs',mode:'100644',git_blob_oid:'a'.repeat(40),bytes:1,sha256:sha('a')}];
+ const config={method_commit:old,execution_commit:now,retained_code_closure:closure,inputs:{previous_config:{sha256:sha('old config')}}};
+ const completion={driver_sha256:sha(driver),config_sha256:sha('old config')},previous={method_commit:old,code_closure:closure};
  requireRetainedProducerIdentity(config,completion,previous,driver);
  assert.throws(()=>requireRetainedProducerIdentity(config,completion,{method_commit:now},driver),/producer identity/);
  assert.throws(()=>requireRetainedProducerIdentity(config,completion,previous,Buffer.from('changed')),/producer identity/);
  assert.throws(()=>requireRetainedProducerIdentity(config,{...completion,config_sha256:sha('new config')},previous,driver),/producer identity/);
 });
-test('actual retained/current seam preprocessing preserves complete small lattice oracle and refusals',()=>{
- const load=prefix=>{
-   const s=bodies[prefix+'_grid'],start=s.indexOf('export function verifyNativeSeamView'),end=s.indexOf('\nexport ',start+10);
-   const context=vm.createContext({});
-   vm.runInContext(s.slice(0,end).replaceAll('export ','')+'\nglobalThis.check=verifyNativeSeamView;',context);
-   return (a,b,o)=>{try{return {ok:JSON.stringify(context.check(a,b,o))};}catch(e){return {error:e.message};}};
- };
- const before=load('retained'),after=load('current');
- const raw=polygon([[179,-20],[180.00000000000003,-20],[180.00000000000003,20],[179,-20]]);
- const view=polygon([[179,-20],[180,-20],[180,20],[179,-20]]);
- const options={size:8,latitudes:[80,60,40,20,0,-20,-40,-60]};
- assert.deepEqual(after(raw,view,options),before(raw,view,options));
- assert.ok(after(raw,view,options).ok);
- for(const [a,b,o] of [[view,view,options],[raw,view,{...options,size:0}],[raw,view,{...options,latitudes:[0]}],[raw,polygon([[179,-20],[181,-20],[181,20],[179,-20]]),options]]){
-   assert.deepEqual(after(a,b,o),before(a,b,o));assert.ok(after(a,b,o).error);
+test('current pure bounds closure has no broad helper/grid/scanner dependencies',()=>{
+ const code=fs.readFileSync(new URL('../scripts/retained-coordinate-bounds.mjs',import.meta.url),'utf8');
+ assert.equal(RETAINED_BOUNDS_CONTRACT,'dense-json-whole-primitive-bounds-v1');
+ assert.doesNotMatch(code,/\bimport\s|\brequire\s*\(/);
+ const g=polygon([[0,0],[1,0],[1,1],[0,0]]),before=JSON.stringify(g);
+ retainedCoordinateBounds(g);assert.equal(JSON.stringify(g),before);
+});
+test('out-of-domain sparse and embellished arrays refuse rather than broaden JSON contract',()=>{
+ const g=polygon([[0,0],[1,0],[1,1],[0,0]]);
+ const sparse=structuredClone(g);delete sparse.coordinates[0][1];assert.throws(()=>retainedCoordinateBounds(sparse),/Incomplete ring/);
+ const extra=structuredClone(g);extra.coordinates[0].other=1;assert.throws(()=>retainedCoordinateBounds(extra),/Incomplete ring/);
+});
+test('historical closure must match authentic previous config, ignoring only materialization paths',()=>{
+ const sha=v=>createHash('sha256').update(v).digest('hex'),driver='old',old='1'.repeat(40);
+ const pin={commit:old,path:'a.mjs',mode:'100644',git_blob_oid:'a'.repeat(40),bytes:1,sha256:sha('a')};
+ const config={method_commit:old,inputs:{previous_config:{sha256:sha('config')}},retained_code_closure:[{...pin,task_file:'new/a.mjs'}]};
+ const completion={driver_sha256:sha(driver),config_sha256:sha('config')},previous={method_commit:old,code_closure:[{...pin,task_file:'old/a.mjs'}]};
+ requireRetainedProducerIdentity(config,completion,previous,driver);
+ for(const key of ['commit','path','mode','git_blob_oid','bytes','sha256']){
+  const bad=structuredClone(config);bad.retained_code_closure[0][key]='changed';
+  assert.throws(()=>requireRetainedProducerIdentity(bad,completion,previous,driver),/Retained closure/);
  }
 });

@@ -3,7 +3,7 @@
  * Requires independent review and Main scheduling before any execution.
  */
 import fs from 'node:fs';
-import {retainedBoundsCodeCompatibility,requireBoundsExecutionIdentity,requireRetainedProducerIdentity} from '../../../scripts/retained-bounds-code-binding.mjs';
+import {requireHistoricalBoundsMethod,requireBoundsExecutionIdentity,requireRetainedProducerIdentity} from '../../../scripts/retained-bounds-code-binding.mjs';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
@@ -27,6 +27,7 @@ const ordinary = name => {
 // Identical inclusive conservative predicate used by the reviewed prior adapter.
 const intersection = (a, b) => a[0] <= b[2] && b[0] <= a[2] && a[1] <= b[3] && b[1] <= a[3];
 const FIJI = ['gb:FJI:ADM1:53030831B91072554514863', 'gb:FJI:ADM2:14151628B95966095088914', 'gb:FJI:ADM2:14151628B42533076410957'];
+const BOUNDS = 'scripts/retained-coordinate-bounds.mjs';
 const HELPER = 'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 const [repoArgument, configArgument, outputArgument] = process.argv.slice(2);
 need(process.argv.length === 5 && !process.execArgv.length && !process.env.NODE_OPTIONS?.trim() && !process.env.NODE_PATH?.trim(), 'Plain Node24 DRIVER REPO CONFIG FRESH_OUTPUT required');
@@ -92,7 +93,7 @@ need(declaredTargets===config.expected.targets&&declaredCells===config.expected.
 requireBoundsExecutionIdentity(config);
 const closure=unique(config.code_closure,'path','current execution code closure');
 const retainedClosure=unique(config.retained_code_closure,'path','retained producer code closure');
-function verifyClosure(inventory,commit,materialized) {
+function verifyClosure(inventory,commit,materialized,entry) {
   const visited=new Set();
   function visit(name) {
     if(visited.has(name))return;
@@ -113,27 +114,28 @@ function verifyClosure(inventory,commit,materialized) {
       }
     }
   }
-  visit(HELPER);need(visited.size===inventory.size,'Unused/incomplete bound code closure');
+  visit(entry);need(visited.size===inventory.size,'Unused/incomplete bound code closure');
 }
-const executionHelper=closure.get(HELPER);
-need(safe(executionHelper?.task_file)&&executionHelper.task_file.endsWith('/'+HELPER),'Current execution root required');
-const executionRoot=executionHelper.task_file.slice(0,-HELPER.length);
+const executionHelper=closure.get(BOUNDS);
+need(safe(executionHelper?.task_file)&&executionHelper.task_file.endsWith('/'+BOUNDS),'Current execution root required');
+const executionRoot=executionHelper.task_file.slice(0,-BOUNDS.length);
 for(const pin of closure.values())need(pin.task_file===executionRoot+pin.path,'Current closure layout differs');
 need(config.inputs.execution_package.task_file===executionRoot+'package.json','Current package context is outside execution root');
-verifyClosure(retainedClosure,config.method_commit,false);
-verifyClosure(closure,config.execution_commit,true);
+verifyClosure(retainedClosure,config.method_commit,false,HELPER);
+verifyClosure(closure,config.execution_commit,true,BOUNDS);
 read(config.inputs.method_package);
 need(safe(config.inputs.execution_package.task_file),'Current package task path required');
 const packageRaw=read(config.inputs.execution_package),packageFile=path.join(root,config.inputs.execution_package.task_file);
 ordinary(packageFile);need(fs.readFileSync(packageFile).equals(packageRaw)&&JSON.parse(packageRaw).type==='module','Current execution package context differs');
-const currentHelper=read(config.inputs.current_coordinate_helper),oldHelper=read(retainedClosure.get(HELPER));
-need(config.inputs.current_coordinate_helper.git_blob_oid===closure.get(HELPER).git_blob_oid
-  &&config.inputs.current_native_grid.git_blob_oid===closure.get('src/native-grid.js').git_blob_oid,'Current helper/grid differs from execution closure');
-const codeCompatibility=retainedBoundsCodeCompatibility({
-  retained_helper:oldHelper,current_helper:currentHelper,
-  retained_grid:read(retainedClosure.get('src/native-grid.js')),current_grid:read(config.inputs.current_native_grid)
-});
-const {coordinateBounds}=await import(pathToFileURL(path.join(root,closure.get(HELPER).task_file)));
+const currentBounds=read(config.inputs.current_bounds_module);
+need(config.inputs.current_bounds_module.path===BOUNDS && config.inputs.current_bounds_module.git_blob_oid===closure.get(BOUNDS).git_blob_oid,
+  'Current bounds module differs from execution closure');
+requireHistoricalBoundsMethod(read(retainedClosure.get(HELPER)),read(retainedClosure.get('src/native-grid.js')));
+const {retainedCoordinateBounds:coordinateBounds,RETAINED_BOUNDS_CONTRACT}=await import(pathToFileURL(path.join(root,closure.get(BOUNDS).task_file)));
+need(RETAINED_BOUNDS_CONTRACT==='dense-json-whole-primitive-bounds-v1','Unexpected current bounds contract');
+const codeCompatibility={kind:RETAINED_BOUNDS_CONTRACT,input_domain:'JSON.parse dense coordinate arrays',
+  current_module_sha256:sha(currentBounds),historical_method_commit:config.method_commit,
+  basis:'Reviewed pure bounds contract; authentic historical producer and unchanged retained operands',native_qualification_authorized:false};
 const completion=json(config.inputs.completion),catalogue=json(config.inputs.catalogue),currentCatalogue=json(config.inputs.current_catalogue);
 need(completion.inventory_complete===true&&completion.complete_source_features===73567&&completion.complete_families===368
   && config.inputs.catalogue.sha256===config.inputs.current_catalogue.sha256&&same(catalogue,currentCatalogue),'Reviewed complete unchanged catalogue required');
