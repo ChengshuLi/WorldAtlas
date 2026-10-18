@@ -29,12 +29,21 @@ export const valueBytes=v=>Buffer.from(JSON.stringify(canonical(v))+'\n');
 // Hash the same canonical JSON bytes without cloning the complete value or
 // retaining its complete serialized string/Buffer. Only the current object's
 // key order, traversal ancestors and a small output chunk are additional state.
-export function valueSha(value) {
+export function valueSha(value) {return canonicalDigest(value,false);}
+// Count the exact UTF-8 chunks fed to the hash, including the final newline.
+// This never reconstructs a complete canonical value just to measure its bytes.
+export function valueIdentity(value) {return canonicalDigest(value,true);}
+function canonicalDigest(value,measureBytes) {
  const hash=createHash('sha256'),ancestors=new Set();
- let parts=[],length=0;
+ let parts=[],length=0,bytes=0;
+ const flush=()=>{
+  const chunk=parts.join('');hash.update(chunk);
+  if(measureBytes){bytes+=Buffer.byteLength(chunk);demand(Number.isSafeInteger(bytes),'Canonical byte count is not representable');}
+  parts=[];length=0;
+ };
  const write=text=>{
   parts.push(text);length+=text.length;
-  if(length>=16384){hash.update(parts.join(''));parts=[];length=0;}
+  if(length>=16384)flush();
  };
  const string=value=>{
   write('"');
@@ -83,8 +92,8 @@ export function valueSha(value) {
   if(typeof value==='string')string(value);else write(JSON.stringify(value));
  };
  visit(value);write('\n');
- if(length)hash.update(parts.join(''));
- return hash.digest('hex');
+ if(length)flush();
+ const sha256=hash.digest('hex');return measureBytes?{sha256,bytes}:sha256;
 }
 const same=(a,b)=>valueSha(a)===valueSha(b);
 const freeze=v=>{if(v&&typeof v==='object'){Object.values(v).forEach(freeze);Object.freeze(v);}return v;};
@@ -2458,7 +2467,10 @@ export function currentRebindAcquisitionIdentity(acquisition) {
 }
 
 export function verifyCurrentRebindProducts({certificate,request,facts,publication,operating,result,baseSelection,registry,originalRows,originalPatches,size,expectedCode,bodyPins,acquired,executionCustody}) {
- for(const [name,body]of Object.entries({request,facts,publication,operating,result}))demand(body&&bodyPins[name]?.sha256===valueSha(body)&&bodyPins[name]?.bytes===valueBytes(body).length,'Whole canonical rebind product bytes differ: '+name);
+ for(const [name,body]of Object.entries({request,facts,publication,operating,result})){
+  const pin=body&&bodyPins[name],identity=body&&valueIdentity(body);
+  demand(body&&pin?.sha256===identity.sha256&&pin?.bytes===identity.bytes,'Whole canonical rebind product bytes differ: '+name);
+ }
  rebindKeys(certificate,'version,kind,execution_commit,base_selection,authority_registry_sha256,request,facts,publication,operating,result','Foreign current rebind certificate');
  demand(certificate.version===1&&/^[a-f0-9]{40}$/.test(certificate.execution_commit)&&certificate.execution_commit===request.execution_commit&&certificate.kind==='qualified-native-additive-current-bank-rebind-v1'&&same(certificate.base_selection,baseSelection)&&certificate.authority_registry_sha256===valueSha(registry),'Stale current rebind certificate');
  rebindReceiptKeys(request,'version,kind,execution_commit,executed_code,base_selection,authority_registry_sha256,original_rows,original_patch_sha256s,current_targets,current_rows,acquisition,execution,size','limits','Foreign issued rebind request');

@@ -13,7 +13,7 @@ import {ImmutableReader, NativeAssetImage, decodeVisibilityLatitudes,
   loadBaseSelection, selectedGeometrySourceAlias, selectedReferenceOwners} from '../../../scripts/check-effective-geographic-regression.mjs';
 import {repairComponentKey, nativeOnlyComponent} from '../../../src/native-grid.js';
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
-import {valueBytes, valueSha, coordinateBounds, nativeBaseSelection,
+import {valueSha, valueIdentity, coordinateBounds, nativeBaseSelection,
   normaliseRetainedRepairLedger, repairRowsIndex, repairIndexValues, readRetainedRegistryAuthority, readRegistryAuthorityInputs, verifyCompletedSourceTargetNativeAuthority, validateSupportedProgrammeCatalogue,
   CURRENT_REBIND_CODE, verifyCurrentRebindExecution,
   currentRebindResult, currentRebindAcquisitionIdentity, retainedArcticNativeRows} from './selected-neighbor-prevention.mjs';
@@ -289,6 +289,47 @@ async function readSelection(session, reader) {
   const selected=await readSelectionProducts(session,reader);
   return {...selected,normalized:normaliseRetainedRepairLedger(selected.ledger,selected.registry)};
 }
+// Only qualifyTransition calls this with a genuine live baseline and products
+// parsed into its own immutable stores. Exact old rows inherit intrinsic row
+// semantics; new/changed rows still use the complete public validator. Preserve
+// original products and defer append-only rejection until after cold eligibility.
+function normaliseTransitionSelection(state, selected) {
+  const {ledger,registry}=selected;
+  demand(isNativeSequence(ledger.scope_ids)&&isNativeSequence(ledger.rows)
+    && ledger.scope_ids.length===ledger.rows.length,'Incomplete complete ledger scope');
+  const oldRows=repairRowsIndex(state.ledger.rows),candidateRows=repairRowsIndex(ledger.rows);
+  let ordinal=0;
+  for(const row of ledger.rows){
+    demand(typeof row.component_id==='string'&&row.component_id
+      &&row.component_id===ledger.scope_ids.at(ordinal++),'Foreign/duplicate/unordered component');
+    demand(['assigned','zero-cell','already-resolved','rejected','awaiting-evidence'].includes(row.disposition),
+      'Unknown original ledger disposition');
+  }
+  demand(Array.isArray(registry?.entries),'Missing explicit retained authority registry');
+  const entries=new Map(registry.entries.map(entry=>[entry?.authority_sha256,entry]));
+  const unchangedAuthorities=new Set(state.registry.entries.filter(entry=>same(entry,entries.get(entry.authority_sha256)))
+    .map(entry=>entry.authority_sha256));
+  const unchangedRows=new Set();
+  for(const row of state.ledger.rows){const key=repairComponentKey(row);
+    if(same(row,candidateRows.get(key)))unchangedRows.add(key);}
+  const residual=repairRowsIndex(ledger.rows,{include:row=>!unchangedRows.has(repairComponentKey(row))
+    ||!unchangedAuthorities.has(row.authority_sha256)});
+  // Only selected residual ordinals are read; index.values() would rescan all
+  // old metadata on each pass. This is private input, not a published ledger.
+  const rows=nativeSequence(residual.size,function*(){for(let at=0;at<residual.size;at++)yield residual.at(at);},
+    {entryAt:at=>residual.at(at)});
+  // Keep direct ordinal scope lookup; a mapped lazy iterator replays prefixes.
+  const {authorities,registry_sha256}=normaliseRetainedRepairLedger({...ledger,rows,
+    scope_ids:nativeSequence(residual.size,function*(){for(const row of rows)yield row.component_id;},
+      {entryAt:at=>residual.at(at).component_id})},registry);
+  selected.normalized={authorities,registry_sha256,rows:repairRowsIndex(ledger.rows,{
+    include:row=>['assigned','zero-cell'].includes(row.disposition),
+    project:row=>{const entry=authorities.get(row.authority_sha256);
+      return entry?{...row,rule_sha256:entry.rule_sha256,authority_sha256:entry.authority_sha256}:row;}
+  })};
+  return {oldRows,rowsPreserved:unchangedRows.size===oldRows.size,
+    authoritiesPreserved:unchangedAuthorities.size===state.registry.entries.length};
+}
 function completeRows(rows, size, owners) {
   let previous = -1;
   demand(isNativeSequence(rows), 'Missing complete native rows');
@@ -491,7 +532,8 @@ function legacyRegistry(registry,authorities) {
 }
 function checkpointAdditions(selected,currentTargets) {
   const index=selected.normalized.rows,project=row=>{
-    // Cold/seed/candidate readSelection validates every normalized component.
+    // Cold/seed readSelection validates every normalized component; private
+    // transitions reuse only exact rows under unchanged qualified authorities.
     // Hosted admission inherits that invariant only after authenticating the
     // producer's exact accepted bytes, policy and routes. This private projection
     // dispatches that validated representation; rereading the store preserves
@@ -783,8 +825,8 @@ async function admitDerivedCheckpoint(session,reader,archiveReader,accepted,sele
     // This private path is reached only with the transport's genuine accepted
     // handle and the original producer's successful native result. Its complete
     // ledger/registry/patch hashes, selector, policy and routes match above.
-    // The producer normalized every candidate row before minting its private
-    // transition. Reconstruct that same cursor view without replaying accepted
+    // The producer established every candidate row's semantics before minting
+    // its private transition. Reconstruct that view without replaying accepted
     // polygon/interval semantics. Parsing and whole-body authentication remain.
     selected.normalized={rows:repairRowsIndex(selected.ledger.rows,{
       include:row=>['assigned','zero-cell'].includes(row.disposition),
@@ -1127,8 +1169,10 @@ function qualifyProjectedRebind(proof, selected, authorities, products) {
   const originalRows=[...selected.normalized.rows.values()].filter(row=>!nativeOnlyComponent(row,valueSha));
   const originalPatches=registry.entries.flatMap(entry => authorities.get(entry.authority_sha256).patches);
   const bodyPins=Object.fromEntries(['request','facts','publication','operating','result'].map(name => [name,certificate[name]]));
-  for (const [name,body] of Object.entries({request,facts,publication,operating,result}))
-    demand(valueSha(body)===bodyPins[name].sha256 && valueBytes(body).length===bodyPins[name].bytes,'Whole canonical producer output differs');
+  for (const [name,body] of Object.entries({request,facts,publication,operating,result})) {
+    const identity=valueIdentity(body);
+    demand(identity.sha256===bodyPins[name].sha256 && identity.bytes===bodyPins[name].bytes,'Whole canonical producer output differs');
+  }
   keys(request,'version,kind,execution_commit,executed_code,base_selection,authority_registry_sha256,original_rows,original_patch_sha256s,current_targets,current_rows,acquisition,execution,size'+(Object.hasOwn(request,'limits')?',limits':''),'Unknown current producer request');
   demand(certificate.version===1 && certificate.kind==='qualified-native-additive-current-bank-rebind-v1'
     && request.version===1 && request.kind==='issued-native-additive-current-bank-rebind-v1'
@@ -1391,7 +1435,8 @@ export async function qualifyTransition({state,reader}) {
   const baseProof=getState(state,reader), {session}=baseProof,priorStores=new Set(session.stores);
   try {
 
-    const selected=await readSelection(session,reader);
+    const selected=await readSelectionProducts(session,reader);
+    const {oldRows,rowsPreserved,authoritiesPreserved}=normaliseTransitionSelection(state,selected);
     supported(same(nativeBaseSelection(selected.selection),state.baseSelection), 'Selected native/source/domain/owner base changed');
     const metadata=projectCheckpointMetadata(state,reader,selected.selection);
     const masked = new Set([...maskedLogicalSources(state.certificate,baseProof.physicalPaths),...metadata.paths]);
@@ -1399,14 +1444,9 @@ export async function qualifyTransition({state,reader}) {
     for (const role of ['base_manifest','owner_roster'])
       supported(same(selected.sidecar.logical_asset_map[role],baseProof.selected.sidecar.logical_asset_map[role]), 'Selected original manifest/owner alias changed');
     demand(same(selected.ledger.parent_inventory,state.ledger.parent_inventory), 'Complete original source/scope denominator changed');
-    const oldRows=repairRowsIndex(state.ledger.rows);
-    const candidateRows=repairRowsIndex(selected.ledger.rows);
-    for (const row of state.ledger.rows) demand(same(row,candidateRows.get(repairComponentKey(row))),
-      'Old complete ledger primitive, exception or native assignment removed/rebound');
+    demand(rowsPreserved,'Old complete ledger primitive, exception or native assignment removed/rebound');
     let authorities=new Map(baseProof.oldAuthorities);
-    const candidateEntries=new Map(selected.registry.entries.map(entry=>[entry.authority_sha256,entry]));
-    for (const entry of state.registry.entries) demand(same(entry,candidateEntries.get(entry.authority_sha256)),
-      'Old original authority removed/rebound');
+    demand(authoritiesPreserved,'Old original authority removed/rebound');
     const addedEntries=selected.registry.entries.filter(entry => !authorities.has(entry.authority_sha256));
 
     authorities=await qualifyAppendedAuthorities(session,reader,state,selected,authorities,addedEntries,oldRows);
@@ -1497,8 +1537,8 @@ export function deriveCoordinateDelta({certificate,oldAdditions,additions,select
     row=>nativeOnlyComponent(row,valueSha));
 }
 
-// The only caller is qualifyTransition, after readSelection fully normalizes
-// candidate rows and old projected operands are bound to a genuine live state.
+// The only caller is qualifyTransition, after private ledger admission proves
+// every candidate row and old projected operands belong to a genuine live state.
 // checkpointAdditions borrows immutable admitted storage: its iterator and index
 // are the same rows, and all native semantics were already checked. Keep the
 // common target/owner/base, duplicate and old projected-equality guards below;

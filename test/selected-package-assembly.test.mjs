@@ -9,7 +9,7 @@ import {createHash} from 'node:crypto';
 import {authenticateOriginalPackageOutput, requireOriginalPackageOutput,
   requirePackageAssemblyExecution, issuePackageAssemblyExecution} from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
 import {requireCurrentPackageAssembly, integrationTestFiles} from '../scripts/run-integration-tests.mjs';
-import {createPackageAssemblyScratch,packageAssemblyInvocation,findOriginalPackage,acceptedSelectedPackageInputs,readOriginalPackageGeography} from '../scripts/assemble-selected-package.mjs';
+import {createPackageAssemblyScratch,packageAssemblyInvocation,packageAssemblyAPI,findOriginalPackage,acceptedSelectedPackageInputs,readOriginalPackageGeography} from '../scripts/assemble-selected-package.mjs';
 import {execFileSync,spawnSync} from 'node:child_process';
 import {inspectPackageNodeRuntime,inspectPackageRuntime} from '../scripts/package-build.mjs';
 import {loadPackageInputs} from '../scripts/package-inputs.mjs';
@@ -58,11 +58,11 @@ function original(t,{worker=false,bodies:extraBodies={}}={}){
     if(route.endsWith('/attempts/2'))return run;
     if(route.endsWith('/jobs/29'))return job;
     if(route.endsWith('/artifacts/41'))return artifact;
-    if(route.includes('/git/commits/'))return {tree:{sha:'e'.repeat(40)}};
-    if(route.endsWith('/git/trees/'+'e'.repeat(40)))return {tree:[{path:'.github',type:'tree',mode:'040000',sha:'6'.repeat(40)}],truncated:false};
-    if(route.endsWith('/git/trees/'+'6'.repeat(40)))return {tree:[{path:'workflows',type:'tree',mode:'040000',sha:'7'.repeat(40)}],truncated:false};
-    if(route.endsWith('/git/trees/'+'7'.repeat(40)))return {tree:[{...workflow,path:path.posix.basename(workflow.path)}],truncated:false};
-    if(route.includes('/git/trees/'))return {tree:[workflow],truncated:false};
+    if(route.includes('/git/commits/'))return {sha:route.split('/').at(-1),tree:{sha:'e'.repeat(40)}};
+    if(route.endsWith('/git/trees/'+'e'.repeat(40)))return {sha:'e'.repeat(40),tree:[{path:'.github',type:'tree',mode:'040000',sha:'6'.repeat(40)}],truncated:false};
+    if(route.endsWith('/git/trees/'+'6'.repeat(40)))return {sha:'6'.repeat(40),tree:[{path:'workflows',type:'tree',mode:'040000',sha:'7'.repeat(40)}],truncated:false};
+    if(route.endsWith('/git/trees/'+'7'.repeat(40)))return {sha:'7'.repeat(40),tree:[{...workflow,path:path.posix.basename(workflow.path)}],truncated:false};
+    if(route.includes('/git/trees/'))return {sha:route.split('/').at(-1).split('?')[0],tree:[workflow],truncated:false};
     throw Error('Unexpected mocked authority route: '+route);
   };
   api.jobLogRedirect=async()=>new Response(null,{status:302,headers:{location:'https://fixture.blob.core.windows.net/job-log'}});
@@ -336,8 +336,9 @@ for(const queueOnly of [false,true])test('private assembly admission uses actual
   await assert.rejects(authenticate(legacy),/Actual executed producer workflow/);
 });
 
-function originalDiscovery(t,{worker=false,queueOnly=false}={}){
-  const f=original(t,{worker}),s=sourceFixture(f,{author:!queueOnly}),before=s.snapshot(),repo=f.repo;
+function originalDiscovery(t,{worker=false,queueOnly=false,configure}={}){
+  const f=original(t,{worker}),s=sourceFixture(f,{author:!queueOnly});configure?.(s);
+  const before=s.snapshot(),repo=f.repo;
   const rows=s.git('ls-tree','-rlz','HEAD').split('\0').filter(Boolean).map(line=>{
     const [metadata,name]=line.split('\t'),[mode,type,oid,size]=metadata.trim().split(/\s+/);
     return {path:name,mode,type,sha:oid,size:Number(size)};
@@ -353,8 +354,13 @@ function originalDiscovery(t,{worker=false,queueOnly=false}={}){
     calls.push(route);
     if(route.includes('/actions/workflows/'))return {workflow_runs:route.includes(worker?'worker-merge.yml':'merge-integration-checks.yml')?[f.run]:[]};
     if(route.endsWith('/actions/runs/17'))return f.run;
-    if(route===`/repos/${repo}/git/commits/${sourceHead}`)return {tree:{sha:before.tree}};
-    if(route===`/repos/${repo}/git/trees/${before.tree}?recursive=1`)return {tree:rows,truncated:false};
+    if(route===`/repos/${repo}/git/commits/${sourceHead}`)return {sha:sourceHead,tree:{sha:before.tree}};
+    const tree=/\/git\/trees\/([a-f0-9]{40})(\?recursive=1)?$/.exec(route);
+    if(tree&&!['e','6','7'].some(value=>tree[1]===value.repeat(40))){
+      const treeRows=s.git('ls-tree',...(tree[2]?['-r']:[]),'-lz',tree[1]).split('\0').filter(Boolean).map(line=>{
+        const [metadata,path]=line.split('\t'),[mode,type,sha,size]=metadata.trim().split(/\s+/);return {path,mode,type,sha,...(type==='blob'?{size:Number(size)}:{})};
+      });return {sha:tree[1],tree:treeRows,truncated:false};
+    }
     if(route.includes('/contents/.github/package-inputs.json')){assert(route.endsWith(sourceHead));const row=rows.find(r=>r.path==='.github/package-inputs.json');return {...blob(definitionRaw),...row,type:'file'};}
     if(route.includes('/git/blobs/'))return blob(selectionRaw);
     if(route.includes('/attempts/2/jobs'))return {jobs:[f.job]};
@@ -410,6 +416,85 @@ for(const worker of [false,true])test('real GitHub adapter discovers and authent
   assert.equal(downloads,priorDownloads);
 });
 
+test('discovery never requests unrelated repository trees while retaining complete declared directory inputs',async t=>{
+  const f=originalDiscovery(t,{configure:s=>{
+    const definition=s.snapshot().definition;definition.inputs.push('public/');
+    s.write('.github/package-inputs.json',definition);s.write('public/a.txt','asset');
+    s.write('public/nested/b.txt','nested asset');s.write('research/unrelated/large.json','unconsumed history');
+    s.write('unrelated non-ASCII é.txt','Not a declared package input');s.commit();
+  }}),oldFetch=globalThis.fetch,oldWarn=console.warn;
+  t.after(()=>{globalThis.fetch=oldFetch;console.warn=oldWarn;});globalThis.fetch=async()=>new Response(f.log());console.warn=()=>{};
+  const calls=[],baseAPI=f.api,rootTree=f.before.tree,publicTree=f.s.git('rev-parse',f.sourceHead+':public');
+  const api=async route=>{
+    calls.push(route);
+    if(route===`/repos/${f.repo}/git/trees/${rootTree}?recursive=1`)throw Error('Unrelated whole-repository metadata unavailable (HTTP 500)');
+    return baseAPI(route);
+  };api.jobLogRedirect=baseAPI.jobLogRedirect;
+  const found=await findOriginalPackage({api,repo:f.repo,current:f.before,originalRunId:17});
+  assert.equal(found?.origin.head,f.sourceHead,'Unneeded repository metadata must not force a full build');
+  assert.deepEqual(found.source.files,f.before.files,'Every declared directory member remains independently inventoried');
+  assert(!calls.includes(`/repos/${f.repo}/git/trees/${rootTree}?recursive=1`));
+  assert(calls.includes(`/repos/${f.repo}/git/trees/${publicTree}?recursive=1`));
+  assert(!calls.some(route=>route.includes(f.s.git('rev-parse',f.sourceHead+':research'))));
+});
+
+test('actual assembly transport recovers one transient metadata failure inside the existing read policy',async t=>{
+  const f=originalDiscovery(t,{worker:true}),oldFetch=globalThis.fetch,oldWarn=console.warn;
+  t.after(()=>{globalThis.fetch=oldFetch;console.warn=oldWarn;});globalThis.fetch=async()=>new Response(f.log());console.warn=()=>{};
+  let failures=0,time=0;const calls=[],waits=[];
+  const api=packageAssemblyAPI('fixture-token',{now:()=>time,sleep:async ms=>{waits.push(ms);time+=ms;},fetchImpl:async url=>{
+    const route=new URL(url).pathname+new URL(url).search;calls.push(route);
+    if(route.endsWith('/jobs/29/logs'))return new Response(null,{status:302,headers:{location:'https://fixture.blob.core.windows.net/job-log'}});
+    if(route.includes('/git/trees/')&&failures++===0)return Response.json({message:'Temporary metadata failure'},{status:500});
+    return Response.json(await f.api(route));
+  }});
+  const found=await findOriginalPackage({api,repo:f.repo,current:f.before,originalRunId:17});
+  assert.equal(found?.origin.head,f.sourceHead,'A transient metadata response must not discard an otherwise valid original');
+  assert.deepEqual(waits,[1000]);
+  const firstTree=calls.find(route=>route.includes('/git/trees/'));
+  assert.equal(calls.filter(route=>route===firstTree).length,2);
+});
+
+test('scoped metadata retains truncation, identity, ancestor and complete directory refusal',async t=>{
+  const f=originalDiscovery(t,{configure:s=>{
+    const definition=s.snapshot().definition;definition.inputs.push('public/','optional/absent.txt');definition.optional_inputs.push('optional/absent.txt');
+    s.write('.github/package-inputs.json',definition);s.write('public/a.txt','asset');s.write('public/nested/b.txt','nested asset');s.commit();
+  }}),oldFetch=globalThis.fetch,oldWarn=console.warn;
+  t.after(()=>{globalThis.fetch=oldFetch;console.warn=oldWarn;});globalThis.fetch=async()=>new Response(f.log());console.warn=()=>{};
+  const baseAPI=f.api,publicTree=f.s.git('rev-parse',f.sourceHead+':public');let mutate=value=>value;
+  const api=async route=>{const value=await baseAPI(route);return route.includes('/git/trees/')?mutate(structuredClone(value),route):value;};
+  api.jobLogRedirect=baseAPI.jobLogRedirect;
+  const discover=()=>findOriginalPackage({api,repo:f.repo,current:f.s.snapshot(),originalRunId:17});
+  assert.equal((await discover()).origin.head,f.sourceHead,'An authenticated absent optional leaf is permitted');
+  for(const change of [
+    value=>({...value,truncated:true}),value=>({...value,sha:'0'.repeat(40)}),
+    value=>({...value,tree:[...value.tree,value.tree[0]]}),
+    value=>({...value,tree:value.tree.map(row=>row.path==='public'?{...row,type:'blob',mode:'120000'}:row)}),
+    value=>({...value,tree:value.tree.map(row=>row.path==='scripts'?{...row,type:'blob',mode:'120000'}:row)}),
+    (value,route)=>route.endsWith(publicTree+'?recursive=1')?{...value,tree:value.tree.filter(row=>row.path!=='nested/b.txt')}:value,
+  ]){mutate=change;assert.equal(await discover(),null);}
+  mutate=value=>value;
+  f.s.write('public/new.txt','new input');f.s.commit();assert.equal(await discover(),null,'A new declared directory member is still an input change');
+  fs.unlinkSync(path.join(f.root,'public/new.txt'));f.s.commit();
+  f.s.write('optional/absent.txt','formerly absent input');f.s.commit();assert.equal(await discover(),null,'Optional absence cannot authorize a new present input');
+});
+
+for(const [name,status,expected]of [['exhausted transient',500,3],['ordinary denial',403,1],['ordinary absence',404,1],['unsupported server failure',501,1],['transport ambiguity',null,1]]){
+  test('assembly transport preserves '+name+' fallback and bounded attempts',async t=>{
+    const f=originalDiscovery(t,{worker:true}),oldFetch=globalThis.fetch,oldWarn=console.warn;
+    t.after(()=>{globalThis.fetch=oldFetch;console.warn=oldWarn;});globalThis.fetch=async()=>new Response(f.log());console.warn=()=>{};
+    let count=0,time=0;const waits=[];
+    const api=packageAssemblyAPI('fixture-token',{now:()=>time,sleep:async ms=>{waits.push(ms);time+=ms;},fetchImpl:async url=>{
+      const route=new URL(url).pathname+new URL(url).search;
+      if(route.endsWith('/jobs/29/logs'))return new Response(null,{status:302,headers:{location:'https://fixture.blob.core.windows.net/job-log'}});
+      if(route.includes('/git/trees/')){count++;if(status===null)throw Error('Uncertain transport');return Response.json({message:'Metadata unavailable'},{status});}
+      return Response.json(await f.api(route));
+    }});
+    assert.equal(await findOriginalPackage({api,repo:f.repo,current:f.before,originalRunId:17}),null);
+    assert.equal(count,expected);assert.deepEqual(waits,expected===3?[1000,2000]:[]);
+  });
+}
+
 test('original discovery ignores observer trees but refuses changed build inputs and workflow',async t=>{
   const f=originalDiscovery(t),old=globalThis.fetch;t.after(()=>{globalThis.fetch=old;});
   globalThis.fetch=async()=>new Response(f.log());
@@ -436,35 +521,36 @@ test('discovery reuses only its authenticated identical base tree and retains ex
     calls.push(route);
     const commit=/\/git\/commits\/([a-f0-9]{40})$/.exec(route);
     if(commit)return {sha:missingCommit&&commit[1]===trustedBase?undefined:(wrongCommit&&commit[1]===trustedBase||wrongOriginal&&commit[1]===f.sourceHead)?'0'.repeat(40):commit[1],tree:{sha:f.s.git('rev-parse',commit[1]+'^{tree}')}};
-    const tree=/\/git\/trees\/([a-f0-9]{40})\?recursive=1$/.exec(route);
+    const tree=/\/git\/trees\/([a-f0-9]{40})(\?recursive=1)?$/.exec(route);
     if(tree){
-      const rows=f.s.git('ls-tree','-rlz',tree[1]).split('\0').filter(Boolean).map(line=>{
+      const rows=f.s.git('ls-tree',...(tree[2]?['-r']:[]),'-lz',tree[1]).split('\0').filter(Boolean).map(line=>{
         const [metadata,path]=line.split('\t'),[mode,type,sha,size]=metadata.trim().split(/\s+/);return {path,mode,type,sha,size:Number(size)};
-      });return {tree:rows,truncated:truncate};
+      });return {sha:tree[1],tree:rows,truncated:truncate};
     }
     return baseAPI(route);
   };
   api.jobLogRedirect=baseAPI.jobLogRedirect;
   const discover=()=>findOriginalPackage({api,repo:f.repo,current:f.s.snapshot(),originalRunId:17,trustedBase});
   const recursive=()=>calls.filter(route=>route.includes('/git/trees/')&&route.endsWith('?recursive=1'));
+  const treeCalls=sha=>calls.filter(route=>route===`/repos/${f.repo}/git/trees/${sha}`);
   assert.notEqual(trustedBase,f.sourceHead);
   const found=await discover();
   assert.equal(found.origin.head,f.sourceHead);assert.equal(found.source.head,f.sourceHead);
   assert.equal(found.accepted_selected_inputs.commit,trustedBase);
   assert.equal(calls.filter(route=>route.endsWith('/git/commits/'+trustedBase)).length,1);
   assert.equal(calls.filter(route=>route.endsWith('/git/commits/'+f.sourceHead)).length,1);
-  assert.deepEqual(recursive(),[`/repos/${f.repo}/git/trees/${f.before.tree}?recursive=1`]);
+  assert.deepEqual(recursive(),[]);assert.equal(treeCalls(f.before.tree).length,1);
   const builder=found.accepted_selected_inputs.files.find(row=>row.path==='scripts/builder.mjs');
   assert.equal(builder.oid,f.rows.find(row=>row.path===builder.path).sha);
   calls.length=0;truncate=true;assert.equal(await discover(),null);truncate=false;
-  wrongCommit=true;await assert.rejects(discover(),/Trusted selected base commit differs/);wrongCommit=false;
-  missingCommit=true;await assert.rejects(discover(),/Trusted selected base commit differs/);missingCommit=false;
+  wrongCommit=true;await assert.rejects(discover(),/Package metadata commit differs/);wrongCommit=false;
+  missingCommit=true;await assert.rejects(discover(),/Package metadata commit differs/);missingCommit=false;
   wrongOriginal=true;assert.equal(await discover(),null);wrongOriginal=false;
   f.s.write('README.md','A different accepted tree with unchanged package inputs');f.s.commit();
   trustedBase=f.s.git('rev-parse','HEAD');calls.length=0;
   assert.equal((await discover()).origin.head,f.sourceHead);
-  assert.deepEqual(recursive(),[`/repos/${f.repo}/git/trees/${f.before.tree}?recursive=1`,
-    `/repos/${f.repo}/git/trees/${f.s.git('rev-parse',trustedBase+'^{tree}')}?recursive=1`]);
+  assert.deepEqual(recursive(),[]);assert.equal(treeCalls(f.before.tree).length,1);
+  assert.equal(treeCalls(f.s.git('rev-parse',trustedBase+'^{tree}')).length,1);
   for(const name of ['scripts/builder.mjs','.github/workflows/worker-merge.yml']){
     const original=fs.readFileSync(path.join(f.root,name),'utf8');f.s.write(name,'changed');f.s.commit();
     assert.equal(await discover(),null,'Tree reuse must not hide changed '+name);
@@ -642,13 +728,13 @@ test('PR discovery checks actual merge-ref workflow bytes even when source and r
   const baseAPI=f.api;
   const api=async route=>{
     const commit=/\/git\/commits\/([a-f0-9]{40})$/.exec(route);
-    if(commit)return {tree:{sha:f.s.git('rev-parse',commit[1]+'^{tree}')}};
+    if(commit)return {sha:commit[1],tree:{sha:f.s.git('rev-parse',commit[1]+'^{tree}')}};
     const tree=/\/git\/trees\/([a-f0-9]{40})(\?recursive=1)?$/.exec(route);
     if(tree){
       const rows=f.s.git('ls-tree',...(tree[2]?['-r']:[]),'-lz',tree[1]).split('\0').filter(Boolean).map(line=>{
         const [meta,name]=line.split('\t'),[mode,type,sha,size]=meta.trim().split(/\s+/);return {path:name,mode,type,sha,size:Number(size)};
       });
-      return {tree:rows,truncated:false};
+      return {sha:tree[1],tree:rows,truncated:false};
     }
     return baseAPI(route);
   };
@@ -994,7 +1080,7 @@ with zipfile.ZipFile(sys.argv[2],'w',zipfile.ZIP_DEFLATED) as z:
     const commit=/\/git\/commits\/([a-f0-9]{40})$/.exec(route);
     if(commit)return {sha:commit[1],tree:{sha:git('rev-parse',commit[1]+'^{tree}')}};
     const tree=/\/git\/trees\/([a-f0-9]{40})(\?recursive=1)?$/.exec(route);
-    if(tree)return {truncated:false,tree:git('ls-tree',...(tree[2]?['-r']:[]),'-lz',tree[1]).split('\0').filter(Boolean).map(line=>{
+    if(tree)return {sha:tree[1],truncated:false,tree:git('ls-tree',...(tree[2]?['-r']:[]),'-lz',tree[1]).split('\0').filter(Boolean).map(line=>{
       const [meta,path]=line.split('\t'),[mode,type,sha,size]=meta.trim().split(/\s+/);return {path,mode,type,sha,size:Number(size)};
     })};
     const content=/\/contents\/(.+)\?ref=([a-f0-9]{40})$/.exec(route),blob=/\/git\/blobs\/([a-f0-9]{40})$/.exec(route);
