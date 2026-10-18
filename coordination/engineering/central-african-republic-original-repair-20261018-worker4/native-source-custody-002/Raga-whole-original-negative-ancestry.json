@@ -1,0 +1,330 @@
+{
+  "source_id": "gb:SSD:ADM2:79223893B70929244954658",
+  "original_roster_owners": [
+    5998,
+    6205,
+    6443
+  ],
+  "lineage_commit": "21984e9ec4ec7370bc807e2da23cea2228747698",
+  "actual_lineage": [
+    {
+      "id": "atlas:physical:330315171ab7280e6c96",
+      "index": 5998,
+      "bounds": [
+        149280.66540512355,
+        123452.2020347733,
+        150036.04936218384,
+        123801.19052657942
+      ],
+      "province_id": "framework:province:western-bahr-el-ghazal:241a7857cf41",
+      "province_index": 4927,
+      "name": "Raga · Sahelian Acacia savanna",
+      "reference_owner": "South Sudan",
+      "source_id": "resolve:53",
+      "location_basis": "Published geographic subdivision within a source rural district",
+      "source_atoms": [
+        "gb:SSD:ADM2:79223893B70929244954658"
+      ]
+    },
+    {
+      "id": "atlas:physical:6400575043bf4ba13f84",
+      "index": 6205,
+      "bounds": [
+        148670.47893388887,
+        123684.50644644992,
+        150693.74503888888,
+        126119.08306036868
+      ],
+      "province_id": "framework:province:western-bahr-el-ghazal:241a7857cf41",
+      "province_index": 4927,
+      "name": "Raga · East Sudanian savanna",
+      "reference_owner": "South Sudan",
+      "source_id": "resolve:43",
+      "location_basis": "Published geographic subdivision within a source rural district",
+      "source_atoms": [
+        "gb:SSD:ADM2:79223893B70929244954658"
+      ]
+    },
+    {
+      "id": "atlas:physical:a02ef9b95b959bb4d5d8",
+      "index": 6443,
+      "bounds": [
+        150141.88560888887,
+        126110.75807559238,
+        150359.9931561111,
+        126229.44844025288
+      ],
+      "province_id": "framework:province:western-bahr-el-ghazal:241a7857cf41",
+      "province_index": 4927,
+      "name": "Raga · Northern Congolian Forest-Savanna",
+      "reference_owner": "South Sudan",
+      "source_id": "resolve:52",
+      "location_basis": "Published geographic subdivision within a source rural district",
+      "source_atoms": [
+        "gb:SSD:ADM2:79223893B70929244954658"
+      ]
+    }
+  ],
+  "accepted_commit": "cddcde8786f038568137d915c8ee8436475f1688",
+  "accepted_path": "data/geography/part-22.json",
+  "actual_current_properties": [
+    {
+      "id": "atlas:physical:6400575043bf4ba13f84",
+      "properties": {
+        "id": "atlas:physical:6400575043bf4ba13f84",
+        "name": "Raga · East Sudanian savanna",
+        "parent_id": "framework:province:western-bahr-el-ghazal:241a7857cf41",
+        "reference_owner": "South Sudan",
+        "metadata": {
+          "source_id": "resolve:43",
+          "source_name": "Named physical region adaptation",
+          "source_url": "https://www.arcgis.com/home/item.html?id=37ea320eebb647c6838c23f72abae5ef",
+          "license": "CC BY 4.0; underlying administrative source license retained",
+          "reference_year": "2020",
+          "administrative_level": "Named physical region portion",
+          "parent_source_level": "ADM1",
+          "granularity_version": 3,
+          "source_role": "counties",
+          "selection_reason": "Named counties territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+          "parent_match": "Named source administrative unit grouped within this geographic area",
+          "original_id": "79223893B70929244954658",
+          "representative_point": [
+            25.203053723132037,
+            8.45815
+          ],
+          "hierarchy_version": 4,
+          "hierarchy_source": "gb:SSD:ADM1",
+          "hierarchy_overlap": 0.99906,
+          "topology_version": 1,
+          "topology_reconciled": true,
+          "topology_conflicts": 6,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+          "original_geometry_sha256": "2c2c99f01e8f46950a808a457d1d8c0564450c04f65b84294e5cb2cbc11a526d",
+          "reference_version": 3,
+          "geographic_area_code": "SUD",
+          "geographic_region_code": 24,
+          "geographic_match": "largest source overlap",
+          "geographic_overlap": 0.99174,
+          "coverage_version": 1,
+          "semantic_version": 1,
+          "location_basis": "Published geographic subdivision within a source rural district",
+          "source_member_ids": [
+            "gb:SSD:ADM2:79223893B70929244954658"
+          ],
+          "search_aliases": [
+            "Raga"
+          ],
+          "remote_version": 1,
+          "coastline_adjustments": [
+            {
+              "area_km2": 0.0,
+              "distance_band_degrees": 0.001
+            }
+          ],
+          "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+          "framework_match": {
+            "source": "Natural Earth",
+            "id": "SDS-873",
+            "overlap": 0.934173
+          },
+          "regional_match": {
+            "reference_iso": "SSD",
+            "source_id": null,
+            "overlap": 0,
+            "method": "reference-territory-constrained overlap"
+          },
+          "reference_owner_id": "owner:Q958",
+          "reference_polity": "South Sudan",
+          "reference_polity_status": "reference",
+          "reference_polity_evidence": {
+            "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+            "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+            "reference_territory": "South Sudan",
+            "classification": "Sovereign country",
+            "note": null,
+            "uncertainty": false
+          },
+          "semantic_review": {
+            "status": "open",
+            "continent": "Africa",
+            "decision_index": 174,
+            "evidence_file": "geographic-decisions"
+          }
+        }
+      }
+    },
+    {
+      "id": "atlas:physical:a02ef9b95b959bb4d5d8",
+      "properties": {
+        "id": "atlas:physical:a02ef9b95b959bb4d5d8",
+        "name": "Raga · Northern Congolian Forest-Savanna",
+        "parent_id": "framework:province:western-bahr-el-ghazal:241a7857cf41",
+        "reference_owner": "South Sudan",
+        "metadata": {
+          "source_id": "resolve:52",
+          "source_name": "Named physical region adaptation",
+          "source_url": "https://www.arcgis.com/home/item.html?id=37ea320eebb647c6838c23f72abae5ef",
+          "license": "CC BY 4.0; underlying administrative source license retained",
+          "reference_year": "2020",
+          "administrative_level": "Named physical region portion",
+          "parent_source_level": "ADM1",
+          "granularity_version": 3,
+          "source_role": "counties",
+          "selection_reason": "Named counties territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+          "parent_match": "Named source administrative unit grouped within this geographic area",
+          "original_id": "79223893B70929244954658",
+          "representative_point": [
+            26.361442002786113,
+            6.72265
+          ],
+          "hierarchy_version": 4,
+          "hierarchy_source": "gb:SSD:ADM1",
+          "hierarchy_overlap": 0.99906,
+          "topology_version": 1,
+          "topology_reconciled": true,
+          "topology_conflicts": 6,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+          "original_geometry_sha256": "2c2c99f01e8f46950a808a457d1d8c0564450c04f65b84294e5cb2cbc11a526d",
+          "reference_version": 3,
+          "geographic_area_code": "SUD",
+          "geographic_region_code": 24,
+          "geographic_match": "largest source overlap",
+          "geographic_overlap": 0.99174,
+          "coverage_version": 1,
+          "semantic_version": 1,
+          "location_basis": "Published geographic subdivision within a source rural district",
+          "source_member_ids": [
+            "gb:SSD:ADM2:79223893B70929244954658"
+          ],
+          "search_aliases": [
+            "Raga"
+          ],
+          "remote_version": 1,
+          "coastline_adjustments": [
+            {
+              "area_km2": 0.0,
+              "distance_band_degrees": 0.001
+            }
+          ],
+          "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+          "framework_match": {
+            "source": "Natural Earth",
+            "id": "SDS-873",
+            "overlap": 1.0
+          },
+          "regional_match": {
+            "reference_iso": "SSD",
+            "source_id": null,
+            "overlap": 0,
+            "method": "reference-territory-constrained overlap"
+          },
+          "reference_owner_id": "owner:Q958",
+          "reference_polity": "South Sudan",
+          "reference_polity_status": "reference",
+          "reference_polity_evidence": {
+            "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+            "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+            "reference_territory": "South Sudan",
+            "classification": "Sovereign country",
+            "note": null,
+            "uncertainty": false
+          },
+          "semantic_review": {
+            "status": "open",
+            "continent": "Africa",
+            "decision_index": 175,
+            "evidence_file": "geographic-decisions"
+          }
+        }
+      }
+    },
+    {
+      "id": "atlas:physical:330315171ab7280e6c96",
+      "properties": {
+        "id": "atlas:physical:330315171ab7280e6c96",
+        "name": "Raga · Sahelian Acacia savanna",
+        "parent_id": "framework:province:western-bahr-el-ghazal:241a7857cf41",
+        "reference_owner": "South Sudan",
+        "metadata": {
+          "source_id": "resolve:53",
+          "source_name": "Named physical region adaptation",
+          "source_url": "https://www.arcgis.com/home/item.html?id=37ea320eebb647c6838c23f72abae5ef",
+          "license": "CC BY 4.0; underlying administrative source license retained",
+          "reference_year": "2020",
+          "administrative_level": "Named physical region portion",
+          "parent_source_level": "ADM1",
+          "granularity_version": 3,
+          "source_role": "counties",
+          "selection_reason": "Named counties territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+          "parent_match": "Named source administrative unit grouped within this geographic area",
+          "original_id": "79223893B70929244954658",
+          "representative_point": [
+            25.49118655214437,
+            10.190650000000002
+          ],
+          "hierarchy_version": 4,
+          "hierarchy_source": "gb:SSD:ADM1",
+          "hierarchy_overlap": 0.99906,
+          "topology_version": 1,
+          "topology_reconciled": true,
+          "topology_conflicts": 6,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+          "original_geometry_sha256": "2c2c99f01e8f46950a808a457d1d8c0564450c04f65b84294e5cb2cbc11a526d",
+          "reference_version": 3,
+          "geographic_area_code": "SUD",
+          "geographic_region_code": 24,
+          "geographic_match": "largest source overlap",
+          "geographic_overlap": 0.99174,
+          "coverage_version": 1,
+          "semantic_version": 1,
+          "location_basis": "Published geographic subdivision within a source rural district",
+          "source_member_ids": [
+            "gb:SSD:ADM2:79223893B70929244954658"
+          ],
+          "search_aliases": [
+            "Raga"
+          ],
+          "remote_version": 1,
+          "coastline_adjustments": [
+            {
+              "area_km2": 0.0,
+              "distance_band_degrees": 0.001
+            }
+          ],
+          "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+          "framework_match": {
+            "source": "Natural Earth",
+            "id": "SDS-873",
+            "overlap": 0.936123
+          },
+          "regional_match": {
+            "reference_iso": "SSD",
+            "source_id": null,
+            "overlap": 0,
+            "method": "reference-territory-constrained overlap"
+          },
+          "reference_owner_id": "owner:Q958",
+          "reference_polity": "South Sudan",
+          "reference_polity_status": "reference",
+          "reference_polity_evidence": {
+            "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+            "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+            "reference_territory": "South Sudan",
+            "classification": "Sovereign country",
+            "note": null,
+            "uncertainty": false
+          },
+          "semantic_review": {
+            "status": "open",
+            "continent": "Africa",
+            "decision_index": 176,
+            "evidence_file": "geographic-decisions"
+          }
+        }
+      }
+    }
+  ],
+  "limits": [
+    "Retain one whole original source negative; three currentphysical fragments neither substitute for its whole geometry nor become invented direct source IDs."
+  ]
+}

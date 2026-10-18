@@ -1,0 +1,1332 @@
+{
+  "kind": "complete-thirteen-whole-native-archive-custody",
+  "started_utc": "2026-10-18T03:35:06.520706+00:00",
+  "completed_utc": "2026-10-18T03:35:07.329309+00:00",
+  "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+  "whole_family_count": 13,
+  "whole_native_features": 1092,
+  "contact_features": 69,
+  "actual_zip_bytes": 12008733,
+  "all_archive_bytes_reused": true,
+  "all_fresh_immutable_pointers_match": true,
+  "all_members_read_and_crc_checked": true,
+  "families": [
+    {
+      "source_family": "gb:CMR:ADM1",
+      "native_name": "CMR_ADM1",
+      "whole_family_features": 10,
+      "conservative_contact_features": 3,
+      "reused_archive_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-next-readiness/source-rights/CMR_ADM1.zip",
+      "owned_archive_path": "native-source-custody-002/CMR_ADM1/CMR_ADM1.zip",
+      "zip_bytes": 77177,
+      "zip_sha256": "d7b5fa7244d16d25aa5e83bce0231f13eccb36ffc537401382cdf121faf372f1",
+      "fresh_immutable_pointer": {
+        "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/sourceData/gbOpen/CMR_ADM1.zip",
+        "observed_utc": "2026-10-18T03:35:06.714035+00:00",
+        "lfs_sha256": "d7b5fa7244d16d25aa5e83bce0231f13eccb36ffc537401382cdf121faf372f1",
+        "bytes": 77177,
+        "content": "version https://git-lfs.github.com/spec/v1\noid sha256:d7b5fa7244d16d25aa5e83bce0231f13eccb36ffc537401382cdf121faf372f1\nsize 77177\n",
+        "pointer_sha256": "1d977b3c22cf6eb2c712a1d802de61988de5146ac6dec76455cfb3a11f334239"
+      },
+      "member_count": 10,
+      "complete_member_hashes": [
+        {
+          "name": "CMR_ADM1.cpg",
+          "bytes": 5,
+          "compressed_bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "name": "CMR_ADM1.dbf",
+          "bytes": 1640,
+          "compressed_bytes": 206,
+          "sha256": "da98ae2c23ce419a904f2c25b42d990acd887defe7c50b2620d4e1a86ee9f167",
+          "dbf_records": 10
+        },
+        {
+          "name": "CMR_ADM1.prj",
+          "bytes": 145,
+          "compressed_bytes": 121,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+          "retained_path": "native-source-custody-002/CMR_ADM1/CMR_ADM1.prj"
+        },
+        {
+          "name": "CMR_ADM1.sbn",
+          "bytes": 236,
+          "compressed_bytes": 139,
+          "sha256": "6f3029feb89d417307abd435bf6b1a0295087fce8557e17bfed810bef0417fb8"
+        },
+        {
+          "name": "CMR_ADM1.sbx",
+          "bytes": 132,
+          "compressed_bytes": 70,
+          "sha256": "82e7a64f2ab455c8cc875c476ee671ee6aed81f49b452f09b9f23851db8a612f"
+        },
+        {
+          "name": "CMR_ADM1.shp",
+          "bytes": 62676,
+          "compressed_bytes": 42150,
+          "sha256": "e914dfdb699232f62884e47d9665bf98d1c62b2530f5d6ce217bfdb4be8bed0e"
+        },
+        {
+          "name": "CMR_ADM1.shp.xml",
+          "bytes": 9941,
+          "compressed_bytes": 2553,
+          "sha256": "473dcd6bb9fd44d01764e664760b987bfe4eb47d4f9469b6e423b7c3e7d8ae67",
+          "retained_path": "native-source-custody-002/CMR_ADM1/CMR_ADM1.shp.xml"
+        },
+        {
+          "name": "CMR_ADM1.shx",
+          "bytes": 180,
+          "compressed_bytes": 125,
+          "sha256": "50d5b586da48850381b3ba4158459adf5653729684a67751880546c652b12e6f"
+        },
+        {
+          "name": "license.PNG",
+          "bytes": 34717,
+          "compressed_bytes": 30527,
+          "sha256": "34651a30918e77ce84130b3f060ecaba43f38cb0a1ec24fde8a11a3cd29fb837",
+          "retained_path": "native-source-custody-002/CMR_ADM1/license.PNG"
+        },
+        {
+          "name": "meta.txt",
+          "bytes": 468,
+          "compressed_bytes": 261,
+          "sha256": "d0eb20232bb591aec47eaba92aafbae8b95801009cc9f0e08ced4318777bef0d",
+          "retained_path": "native-source-custody-002/CMR_ADM1/meta.txt"
+        }
+      ],
+      "native_dbf_records": 10,
+      "actual_text_paths": [
+        "native-source-custody-002/CMR_ADM1/CMR_ADM1.prj",
+        "native-source-custody-002/CMR_ADM1/CMR_ADM1.shp.xml",
+        "native-source-custody-002/CMR_ADM1/meta.txt"
+      ],
+      "actual_license_image_paths": [
+        "native-source-custody-002/CMR_ADM1/license.PNG"
+      ],
+      "native_geometry_not_modified": true
+    },
+    {
+      "source_family": "gb:CMR:ADM2",
+      "native_name": "CMR_ADM2",
+      "whole_family_features": 60,
+      "conservative_contact_features": 6,
+      "reused_archive_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-next-readiness/source-rights/CMR_ADM2.zip",
+      "owned_archive_path": "native-source-custody-002/CMR_ADM2/CMR_ADM2.zip",
+      "zip_bytes": 861559,
+      "zip_sha256": "b9c49b5393523554f78588bf7c965c2af3caacdd924bc1ecd4c146bd09f26927",
+      "fresh_immutable_pointer": {
+        "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/sourceData/gbOpen/CMR_ADM2.zip",
+        "observed_utc": "2026-10-18T03:35:06.693352+00:00",
+        "lfs_sha256": "b9c49b5393523554f78588bf7c965c2af3caacdd924bc1ecd4c146bd09f26927",
+        "bytes": 861559,
+        "content": "version https://git-lfs.github.com/spec/v1\noid sha256:b9c49b5393523554f78588bf7c965c2af3caacdd924bc1ecd4c146bd09f26927\nsize 861559\n",
+        "pointer_sha256": "d9cdb13a00798c2650de76afed79930347ff2b6ef371384c38c63d136046dc34"
+      },
+      "member_count": 20,
+      "complete_member_hashes": [
+        {
+          "name": "CMR_ADM2.cpg",
+          "bytes": 5,
+          "compressed_bytes": 7,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "name": "__MACOSX/._CMR_ADM2.cpg",
+          "bytes": 212,
+          "compressed_bytes": 135,
+          "sha256": "739efd6efe170b1ef3ca2814e43336be046baaeb3360ed58bc71101b51314bbf",
+          "appledouble_resource_fork": true
+        },
+        {
+          "name": "CMR_ADM2.dbf",
+          "bytes": 8502,
+          "compressed_bytes": 1690,
+          "sha256": "be93370cca908cc5296917f14cea94aface97a00cac62e8d18dc54a85d2af528",
+          "dbf_records": 60
+        },
+        {
+          "name": "__MACOSX/._CMR_ADM2.dbf",
+          "bytes": 212,
+          "compressed_bytes": 135,
+          "sha256": "739efd6efe170b1ef3ca2814e43336be046baaeb3360ed58bc71101b51314bbf",
+          "appledouble_resource_fork": true
+        },
+        {
+          "name": "CMR_ADM2.prj",
+          "bytes": 145,
+          "compressed_bytes": 121,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+          "retained_path": "native-source-custody-002/CMR_ADM2/CMR_ADM2.prj"
+        },
+        {
+          "name": "__MACOSX/._CMR_ADM2.prj",
+          "bytes": 212,
+          "compressed_bytes": 135,
+          "sha256": "739efd6efe170b1ef3ca2814e43336be046baaeb3360ed58bc71101b51314bbf",
+          "retained_path": "native-source-custody-002/CMR_ADM2/._CMR_ADM2.prj",
+          "appledouble_resource_fork": true
+        },
+        {
+          "name": "CMR_ADM2.sbn",
+          "bytes": 764,
+          "compressed_bytes": 509,
+          "sha256": "022e3f53f634c6435330ef28b11c56c8559e5fd0fb0cdd6d77d5d338e75f4ae4"
+        },
+        {
+          "name": "__MACOSX/._CMR_ADM2.sbn",
+          "bytes": 212,
+          "compressed_bytes": 135,
+          "sha256": "739efd6efe170b1ef3ca2814e43336be046baaeb3360ed58bc71101b51314bbf",
+          "appledouble_resource_fork": true
+        },
+        {
+          "name": "CMR_ADM2.sbx",
+          "bytes": 164,
+          "compressed_bytes": 93,
+          "sha256": "47db5a501d9b9aeacc3e1b152af114487b263d33609b9eabdbf577f0591fce2f"
+        },
+        {
+          "name": "__MACOSX/._CMR_ADM2.sbx",
+          "bytes": 212,
+          "compressed_bytes": 135,
+          "sha256": "739efd6efe170b1ef3ca2814e43336be046baaeb3360ed58bc71101b51314bbf",
+          "appledouble_resource_fork": true
+        },
+        {
+          "name": "CMR_ADM2.shp",
+          "bytes": 150132,
+          "compressed_bytes": 88032,
+          "sha256": "17e104f9cdaf61ef858c6fd4762260f15cb2a4274ba20b98b4ef54e782bc913c"
+        },
+        {
+          "name": "__MACOSX/._CMR_ADM2.shp",
+          "bytes": 212,
+          "compressed_bytes": 135,
+          "sha256": "739efd6efe170b1ef3ca2814e43336be046baaeb3360ed58bc71101b51314bbf",
+          "appledouble_resource_fork": true
+        },
+        {
+          "name": "CMR_ADM2.shp.xml",
+          "bytes": 10704,
+          "compressed_bytes": 2588,
+          "sha256": "280fa1ac0588af65d976d38b9d913b7e070a9a9226eb11960d40e167b228f5cf",
+          "retained_path": "native-source-custody-002/CMR_ADM2/CMR_ADM2.shp.xml"
+        },
+        {
+          "name": "__MACOSX/._CMR_ADM2.shp.xml",
+          "bytes": 212,
+          "compressed_bytes": 135,
+          "sha256": "739efd6efe170b1ef3ca2814e43336be046baaeb3360ed58bc71101b51314bbf",
+          "retained_path": "native-source-custody-002/CMR_ADM2/._CMR_ADM2.shp.xml",
+          "appledouble_resource_fork": true
+        },
+        {
+          "name": "CMR_ADM2.shx",
+          "bytes": 580,
+          "compressed_bytes": 407,
+          "sha256": "a7758c95f8546fb74944a9258a9d18d9e5e3e3d99e13c5cf6c3e48c806f8225d"
+        },
+        {
+          "name": "__MACOSX/._CMR_ADM2.shx",
+          "bytes": 212,
+          "compressed_bytes": 135,
+          "sha256": "739efd6efe170b1ef3ca2814e43336be046baaeb3360ed58bc71101b51314bbf",
+          "appledouble_resource_fork": true
+        },
+        {
+          "name": "license.png",
+          "bytes": 822055,
+          "compressed_bytes": 762349,
+          "sha256": "314bc5a385620905c56e9bf56dac2381274ff3e12893e029b5476ff87c6c3d0d",
+          "retained_path": "native-source-custody-002/CMR_ADM2/license.png"
+        },
+        {
+          "name": "__MACOSX/._license.png",
+          "bytes": 619,
+          "compressed_bytes": 278,
+          "sha256": "47843e3f8b2e6465d22590c3213d82a00d181c287bf87d73d39ff5872b1d1fa1",
+          "retained_path": "native-source-custody-002/CMR_ADM2/._license.png",
+          "appledouble_resource_fork": true
+        },
+        {
+          "name": "meta.txt",
+          "bytes": 417,
+          "compressed_bytes": 246,
+          "sha256": "72291e3994e992280b94e5c2e4b6556c07b24fc093abc68cf501ec162e43f875",
+          "retained_path": "native-source-custody-002/CMR_ADM2/meta.txt"
+        },
+        {
+          "name": "__MACOSX/._meta.txt",
+          "bytes": 484,
+          "compressed_bytes": 321,
+          "sha256": "402ed3611f1fc5deb67b23a50f73ec8812801bd683c59878fa105d7b6ceb36f8",
+          "retained_path": "native-source-custody-002/CMR_ADM2/._meta.txt",
+          "appledouble_resource_fork": true
+        }
+      ],
+      "native_dbf_records": 60,
+      "actual_text_paths": [
+        "native-source-custody-002/CMR_ADM2/CMR_ADM2.prj",
+        "native-source-custody-002/CMR_ADM2/CMR_ADM2.shp.xml",
+        "native-source-custody-002/CMR_ADM2/meta.txt"
+      ],
+      "actual_license_image_paths": [
+        "native-source-custody-002/CMR_ADM2/license.png"
+      ],
+      "native_geometry_not_modified": true
+    },
+    {
+      "source_family": "gb:CMR:ADM3",
+      "native_name": "CMR_ADM3",
+      "whole_family_features": 360,
+      "conservative_contact_features": 16,
+      "reused_archive_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker1-cmr/upstream-rights/CMR_ADM3.zip",
+      "owned_archive_path": "native-source-custody-002/CMR_ADM3/CMR_ADM3.zip",
+      "zip_bytes": 2487926,
+      "zip_sha256": "c64228514d5df5a8e6d142bf37fee6660cecb0fc172c70c0776a417dbc0c11ed",
+      "fresh_immutable_pointer": {
+        "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/sourceData/gbOpen/CMR_ADM3.zip",
+        "observed_utc": "2026-10-18T03:35:06.694958+00:00",
+        "lfs_sha256": "c64228514d5df5a8e6d142bf37fee6660cecb0fc172c70c0776a417dbc0c11ed",
+        "bytes": 2487926,
+        "content": "version https://git-lfs.github.com/spec/v1\noid sha256:c64228514d5df5a8e6d142bf37fee6660cecb0fc172c70c0776a417dbc0c11ed\nsize 2487926\n",
+        "pointer_sha256": "a2f75bc35556c9ee5cb22bc74c28d43b8d39703affc866c349c8509bf1057712"
+      },
+      "member_count": 6,
+      "complete_member_hashes": [
+        {
+          "name": "CMR_ADM3.dbf",
+          "bytes": 183338,
+          "compressed_bytes": 3136,
+          "sha256": "c3211a82dc7ad25976dbd7780936d1adbdd736bd11e12de57f946945156dd226",
+          "dbf_records": 360
+        },
+        {
+          "name": "CMR_ADM3.prj",
+          "bytes": 143,
+          "compressed_bytes": 121,
+          "sha256": "98aaf3d1c0ecadf1a424a4536de261c3daf4e373697cb86c40c43b989daf52eb",
+          "retained_path": "native-source-custody-002/CMR_ADM3/CMR_ADM3.prj"
+        },
+        {
+          "name": "CMR_ADM3.qpj",
+          "bytes": 257,
+          "compressed_bytes": 156,
+          "sha256": "1de411dcdeedce3219242306fc29bfa1d7fa08883e4ff6779baf798ec50d1657",
+          "retained_path": "native-source-custody-002/CMR_ADM3/CMR_ADM3.qpj"
+        },
+        {
+          "name": "CMR_ADM3.shp",
+          "bytes": 3068156,
+          "compressed_bytes": 2481353,
+          "sha256": "ed427d1e36d03d8c0ec6fa784703a6e3c7391aea76d6be7e11e528cf1e7989ff"
+        },
+        {
+          "name": "CMR_ADM3.shx",
+          "bytes": 2980,
+          "compressed_bytes": 2119,
+          "sha256": "2ca07b686cf48d40c4b029b16f10f7f9f702abfa3be718634de7f79fb7aecc73"
+        },
+        {
+          "name": "meta.txt",
+          "bytes": 427,
+          "compressed_bytes": 427,
+          "sha256": "8117f5e29bae178e8e0c94a398116824f64cbe8b8c67cc89eea42a6d865ae568",
+          "retained_path": "native-source-custody-002/CMR_ADM3/meta.txt"
+        }
+      ],
+      "native_dbf_records": 360,
+      "actual_text_paths": [
+        "native-source-custody-002/CMR_ADM3/CMR_ADM3.prj",
+        "native-source-custody-002/CMR_ADM3/CMR_ADM3.qpj",
+        "native-source-custody-002/CMR_ADM3/meta.txt"
+      ],
+      "actual_license_image_paths": [],
+      "native_geometry_not_modified": true
+    },
+    {
+      "source_family": "gb:COD:ADM1",
+      "native_name": "COD_ADM1",
+      "whole_family_features": 26,
+      "conservative_contact_features": 4,
+      "reused_archive_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker6-cod/source-rights/COD_ADM1/COD_ADM1.zip",
+      "owned_archive_path": "native-source-custody-002/COD_ADM1/COD_ADM1.zip",
+      "zip_bytes": 2493663,
+      "zip_sha256": "01d80dd3941fcfbd555614f1bb70d72deecbcd31a13a14047af34c15e9174c55",
+      "fresh_immutable_pointer": {
+        "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/sourceData/gbOpen/COD_ADM1.zip",
+        "observed_utc": "2026-10-18T03:35:06.679928+00:00",
+        "lfs_sha256": "01d80dd3941fcfbd555614f1bb70d72deecbcd31a13a14047af34c15e9174c55",
+        "bytes": 2493663,
+        "content": "version https://git-lfs.github.com/spec/v1\noid sha256:01d80dd3941fcfbd555614f1bb70d72deecbcd31a13a14047af34c15e9174c55\nsize 2493663\n",
+        "pointer_sha256": "18cfdb10dbe8f53ae3d248ae21b30ca6a9e378731064315840b27ca39e9dcb97"
+      },
+      "member_count": 20,
+      "complete_member_hashes": [
+        {
+          "name": "COD_ADM1.cpg",
+          "bytes": 5,
+          "compressed_bytes": 7,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "name": "__MACOSX/._COD_ADM1.cpg",
+          "bytes": 312,
+          "compressed_bytes": 177,
+          "sha256": "e8ae1c383056ffffdd1f5f6086951fb120fa4235f4a217065798d4f32346b350",
+          "appledouble_resource_fork": true
+        },
+        {
+          "name": "COD_ADM1.dbf",
+          "bytes": 1040,
+          "compressed_bytes": 342,
+          "sha256": "7da1eb951a207cc36f7b46db361201cd413147af81eee27692b4f9d2c126d53d",
+          "dbf_records": 26
+        },
+        {
+          "name": "__MACOSX/._COD_ADM1.dbf",
+          "bytes": 312,
+          "compressed_bytes": 177,
+          "sha256": "e8ae1c383056ffffdd1f5f6086951fb120fa4235f4a217065798d4f32346b350",
+          "appledouble_resource_fork": true
+        },
+        {
+          "name": "COD_ADM1.prj",
+          "bytes": 135,
+          "compressed_bytes": 117,
+          "sha256": "609b8869cd2b545c0128f23e94c1317a5b56765e1723e933c08d033202a6543a",
+          "retained_path": "native-source-custody-002/COD_ADM1/COD_ADM1.prj"
+        },
+        {
+          "name": "__MACOSX/._COD_ADM1.prj",
+          "bytes": 312,
+          "compressed_bytes": 177,
+          "sha256": "e8ae1c383056ffffdd1f5f6086951fb120fa4235f4a217065798d4f32346b350",
+          "retained_path": "native-source-custody-002/COD_ADM1/._COD_ADM1.prj",
+          "appledouble_resource_fork": true
+        },
+        {
+          "name": "COD_ADM1.sbn",
+          "bytes": 396,
+          "compressed_bytes": 262,
+          "sha256": "2283462db19dac22ae703d2c8e0af67a5b7ef141c99bfb2e842465aef355db73"
+        },
+        {
+          "name": "__MACOSX/._COD_ADM1.sbn",
+          "bytes": 312,
+          "compressed_bytes": 177,
+          "sha256": "e8ae1c383056ffffdd1f5f6086951fb120fa4235f4a217065798d4f32346b350",
+          "appledouble_resource_fork": true
+        },
+        {
+          "name": "COD_ADM1.sbx",
+          "bytes": 148,
+          "compressed_bytes": 75,
+          "sha256": "6a51a10f738020cd54041e4cd21cd9cf6eaa9faeeeceecab94c0cc308d098244"
+        },
+        {
+          "name": "__MACOSX/._COD_ADM1.sbx",
+          "bytes": 312,
+          "compressed_bytes": 177,
+          "sha256": "e8ae1c383056ffffdd1f5f6086951fb120fa4235f4a217065798d4f32346b350",
+          "appledouble_resource_fork": true
+        },
+        {
+          "name": "COD_ADM1.shp",
+          "bytes": 3107356,
+          "compressed_bytes": 2400480,
+          "sha256": "472f722952df13e4041dc383a77dea31e686f2751d1409292cf5f73ed879f670"
+        },
+        {
+          "name": "__MACOSX/._COD_ADM1.shp",
+          "bytes": 312,
+          "compressed_bytes": 177,
+          "sha256": "e8ae1c383056ffffdd1f5f6086951fb120fa4235f4a217065798d4f32346b350",
+          "appledouble_resource_fork": true
+        },
+        {
+          "name": "COD_ADM1.shp.xml",
+          "bytes": 674,
+          "compressed_bytes": 332,
+          "sha256": "2a7d49916d64956a32851ac60777d5d60c6fb7489812fbc1cb50ea7e99713dfc",
+          "retained_path": "native-source-custody-002/COD_ADM1/COD_ADM1.shp.xml"
+        },
+        {
+          "name": "__MACOSX/._COD_ADM1.shp.xml",
+          "bytes": 312,
+          "compressed_bytes": 177,
+          "sha256": "e8ae1c383056ffffdd1f5f6086951fb120fa4235f4a217065798d4f32346b350",
+          "retained_path": "native-source-custody-002/COD_ADM1/._COD_ADM1.shp.xml",
+          "appledouble_resource_fork": true
+        },
+        {
+          "name": "COD_ADM1.shx",
+          "bytes": 308,
+          "compressed_bytes": 256,
+          "sha256": "f4e4fe4045fb357feb7873c89da6cba4e960382ebd99c18e6e1a633a3b491963"
+        },
+        {
+          "name": "__MACOSX/._COD_ADM1.shx",
+          "bytes": 312,
+          "compressed_bytes": 177,
+          "sha256": "e8ae1c383056ffffdd1f5f6086951fb120fa4235f4a217065798d4f32346b350",
+          "appledouble_resource_fork": true
+        },
+        {
+          "name": "license.png",
+          "bytes": 95958,
+          "compressed_bytes": 85606,
+          "sha256": "fe4182b63e68ff61297abd5c6e08fb3dba69f10165b82b56f427249ce7494430",
+          "retained_path": "native-source-custody-002/COD_ADM1/license.png"
+        },
+        {
+          "name": "__MACOSX/._license.png",
+          "bytes": 688,
+          "compressed_bytes": 347,
+          "sha256": "2d110dfc5db61234af421f68363bdfb143665b6668e414764049cbd09011de12",
+          "retained_path": "native-source-custody-002/COD_ADM1/._license.png",
+          "appledouble_resource_fork": true
+        },
+        {
+          "name": "meta.txt",
+          "bytes": 389,
+          "compressed_bytes": 247,
+          "sha256": "3c5197b8b24cd7d489371e35403d55a4c8cedf443b77585e8e443211bab4a078",
+          "retained_path": "native-source-custody-002/COD_ADM1/meta.txt"
+        },
+        {
+          "name": "__MACOSX/._meta.txt",
+          "bytes": 484,
+          "compressed_bytes": 338,
+          "sha256": "b2a26b68d3b3c7d4b772833bc59c8dbcc794255eae6183a9bf41074820ba68e1",
+          "retained_path": "native-source-custody-002/COD_ADM1/._meta.txt",
+          "appledouble_resource_fork": true
+        }
+      ],
+      "native_dbf_records": 26,
+      "actual_text_paths": [
+        "native-source-custody-002/COD_ADM1/COD_ADM1.prj",
+        "native-source-custody-002/COD_ADM1/COD_ADM1.shp.xml",
+        "native-source-custody-002/COD_ADM1/meta.txt"
+      ],
+      "actual_license_image_paths": [
+        "native-source-custody-002/COD_ADM1/license.png"
+      ],
+      "native_geometry_not_modified": true
+    },
+    {
+      "source_family": "gb:COD:ADM2",
+      "native_name": "COD_ADM2",
+      "whole_family_features": 189,
+      "conservative_contact_features": 9,
+      "reused_archive_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261018/worker6-cod/source-rights/COD_ADM2/COD_ADM2.zip",
+      "owned_archive_path": "native-source-custody-002/COD_ADM2/COD_ADM2.zip",
+      "zip_bytes": 2215535,
+      "zip_sha256": "2cf73c7be7403b742c8e9682f7d51609485fa0e6eab01644a695a83f81a7bb5e",
+      "fresh_immutable_pointer": {
+        "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/sourceData/gbOpen/COD_ADM2.zip",
+        "observed_utc": "2026-10-18T03:35:06.819472+00:00",
+        "lfs_sha256": "2cf73c7be7403b742c8e9682f7d51609485fa0e6eab01644a695a83f81a7bb5e",
+        "bytes": 2215535,
+        "content": "version https://git-lfs.github.com/spec/v1\noid sha256:2cf73c7be7403b742c8e9682f7d51609485fa0e6eab01644a695a83f81a7bb5e\nsize 2215535\n",
+        "pointer_sha256": "1f3b929fad266ae548640bfc1e2aaa3a78aec19b9ff9fc619065c6fb7be97e7c"
+      },
+      "member_count": 10,
+      "complete_member_hashes": [
+        {
+          "name": "COD_ADM2.cpg",
+          "bytes": 5,
+          "compressed_bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "name": "COD_ADM2.dbf",
+          "bytes": 19187,
+          "compressed_bytes": 1274,
+          "sha256": "6aaae4f997769ca85048fdd2909f8ab353e53a0d1c3132cb50cd66cbce615e06",
+          "dbf_records": 189
+        },
+        {
+          "name": "COD_ADM2.prj",
+          "bytes": 145,
+          "compressed_bytes": 121,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+          "retained_path": "native-source-custody-002/COD_ADM2/COD_ADM2.prj"
+        },
+        {
+          "name": "COD_ADM2.sbn",
+          "bytes": 2060,
+          "compressed_bytes": 1437,
+          "sha256": "ada1f246537b5e7f76f4661ae541f80f47a356384e9d477f44de913a7f84d77d"
+        },
+        {
+          "name": "COD_ADM2.sbx",
+          "bytes": 308,
+          "compressed_bytes": 169,
+          "sha256": "78c1453ddbd22a9e2e4886155961108bfe5d6685fc66f36622ea2e6611cb8d17"
+        },
+        {
+          "name": "COD_ADM2.shp",
+          "bytes": 2362480,
+          "compressed_bytes": 1869671,
+          "sha256": "776b8549adbe8f4abd81d6b8155fcd5f682faaf3382a16a72253641224ef1d07"
+        },
+        {
+          "name": "COD_ADM2.shp.xml",
+          "bytes": 379136,
+          "compressed_bytes": 251408,
+          "sha256": "82bc98c3e9995cb2d45ff44bdec117c0c73de907468c5e2732a165f15f59679d",
+          "retained_path": "native-source-custody-002/COD_ADM2/COD_ADM2.shp.xml"
+        },
+        {
+          "name": "COD_ADM2.shx",
+          "bytes": 1612,
+          "compressed_bytes": 1196,
+          "sha256": "80879cfc7055c91323a663d7a7b8e249dd8088a14ecdcb90df15cc548f345dec"
+        },
+        {
+          "name": "license.PNG",
+          "bytes": 100931,
+          "compressed_bytes": 88891,
+          "sha256": "4fecf786210fa04af572abddc4dc03e7a1c8ec26d7a93a181b94da8aa4c70ec2",
+          "retained_path": "native-source-custody-002/COD_ADM2/license.PNG"
+        },
+        {
+          "name": "meta.txt",
+          "bytes": 524,
+          "compressed_bytes": 307,
+          "sha256": "f0738109bf7eb28b226e2fb9857713e37f9ac9ce8d93e6162cfa536f77e7e630",
+          "retained_path": "native-source-custody-002/COD_ADM2/meta.txt"
+        }
+      ],
+      "native_dbf_records": 189,
+      "actual_text_paths": [
+        "native-source-custody-002/COD_ADM2/COD_ADM2.prj",
+        "native-source-custody-002/COD_ADM2/COD_ADM2.shp.xml",
+        "native-source-custody-002/COD_ADM2/meta.txt"
+      ],
+      "actual_license_image_paths": [
+        "native-source-custody-002/COD_ADM2/license.PNG"
+      ],
+      "native_geometry_not_modified": true
+    },
+    {
+      "source_family": "gb:COG:ADM1",
+      "native_name": "COG_ADM1",
+      "whole_family_features": 12,
+      "conservative_contact_features": 2,
+      "reused_archive_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker2-mdg/cog-original-20261018/actual-source-archives/COG_ADM1/COG_ADM1.zip",
+      "owned_archive_path": "native-source-custody-002/COG_ADM1/COG_ADM1.zip",
+      "zip_bytes": 440062,
+      "zip_sha256": "731e08ee7fa47ea55f6393d1d8a4364851ca8c6bc65f3bbc875d57feeca7cc8d",
+      "fresh_immutable_pointer": {
+        "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/sourceData/gbOpen/COG_ADM1.zip",
+        "observed_utc": "2026-10-18T03:35:06.847972+00:00",
+        "lfs_sha256": "731e08ee7fa47ea55f6393d1d8a4364851ca8c6bc65f3bbc875d57feeca7cc8d",
+        "bytes": 440062,
+        "content": "version https://git-lfs.github.com/spec/v1\noid sha256:731e08ee7fa47ea55f6393d1d8a4364851ca8c6bc65f3bbc875d57feeca7cc8d\nsize 440062\n",
+        "pointer_sha256": "200a62999eab15b8e996d41231942be785a7c10662ae8bd615a8cde3b090cfec"
+      },
+      "member_count": 10,
+      "complete_member_hashes": [
+        {
+          "name": "COG_ADM1.cpg",
+          "bytes": 5,
+          "compressed_bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "name": "COG_ADM1.dbf",
+          "bytes": 982,
+          "compressed_bytes": 245,
+          "sha256": "35973d828c2bafbd93f836d694130bb950261f2b44f8a8257305f6f11110ee73",
+          "dbf_records": 12
+        },
+        {
+          "name": "COG_ADM1.prj",
+          "bytes": 145,
+          "compressed_bytes": 121,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+          "retained_path": "native-source-custody-002/COG_ADM1/COG_ADM1.prj"
+        },
+        {
+          "name": "COG_ADM1.sbn",
+          "bytes": 252,
+          "compressed_bytes": 153,
+          "sha256": "06d7fc3b7349ca664fb2efcacac9d6470335850c0457b0575fa12ae1dcbbc941"
+        },
+        {
+          "name": "COG_ADM1.sbx",
+          "bytes": 132,
+          "compressed_bytes": 71,
+          "sha256": "0f11cc7a013fcfc83c89cb546473a71f11c409ef502c7f3897d618a0be411517"
+        },
+        {
+          "name": "COG_ADM1.shp",
+          "bytes": 272164,
+          "compressed_bytes": 206850,
+          "sha256": "eab6640263024da27ba884d68314d3848db8fcff5e043ac51aad660c2e7dc21c"
+        },
+        {
+          "name": "COG_ADM1.shp.xml",
+          "bytes": 17084,
+          "compressed_bytes": 4537,
+          "sha256": "29f82f52202bb0750b321b36d87472ca18b7c303b7492656c630482e4161405b",
+          "retained_path": "native-source-custody-002/COG_ADM1/COG_ADM1.shp.xml"
+        },
+        {
+          "name": "COG_ADM1.shx",
+          "bytes": 196,
+          "compressed_bytes": 142,
+          "sha256": "2048f32291b29806be7dca0b2402bb872e296af9b1c8777b0e14d1cc1fa58d0a"
+        },
+        {
+          "name": "license.PNG",
+          "bytes": 252777,
+          "compressed_bytes": 226664,
+          "sha256": "2356cbfd98f4f4b61d2d7d5ee0c193f7e86539fd73cd903bfe34edd8d0ee5e54",
+          "retained_path": "native-source-custody-002/COG_ADM1/license.PNG"
+        },
+        {
+          "name": "meta.txt",
+          "bytes": 439,
+          "compressed_bytes": 254,
+          "sha256": "c6024d6a12c7d3a194e7f00bb1863135b53f85abfa5544045a0a253c2c1dc994",
+          "retained_path": "native-source-custody-002/COG_ADM1/meta.txt"
+        }
+      ],
+      "native_dbf_records": 12,
+      "actual_text_paths": [
+        "native-source-custody-002/COG_ADM1/COG_ADM1.prj",
+        "native-source-custody-002/COG_ADM1/COG_ADM1.shp.xml",
+        "native-source-custody-002/COG_ADM1/meta.txt"
+      ],
+      "actual_license_image_paths": [
+        "native-source-custody-002/COG_ADM1/license.PNG"
+      ],
+      "native_geometry_not_modified": true
+    },
+    {
+      "source_family": "gb:COG:ADM2",
+      "native_name": "COG_ADM2",
+      "whole_family_features": 46,
+      "conservative_contact_features": 2,
+      "reused_archive_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker2-mdg/cog-original-20261018/actual-source-archives/COG_ADM2/COG_ADM2.zip",
+      "owned_archive_path": "native-source-custody-002/COG_ADM2/COG_ADM2.zip",
+      "zip_bytes": 109588,
+      "zip_sha256": "a4dbf1f2a7bd9da0ff9afaebd958fd37bc9342368af90db00dd545028aaba834",
+      "fresh_immutable_pointer": {
+        "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/sourceData/gbOpen/COG_ADM2.zip",
+        "observed_utc": "2026-10-18T03:35:06.821809+00:00",
+        "lfs_sha256": "a4dbf1f2a7bd9da0ff9afaebd958fd37bc9342368af90db00dd545028aaba834",
+        "bytes": 109588,
+        "content": "version https://git-lfs.github.com/spec/v1\noid sha256:a4dbf1f2a7bd9da0ff9afaebd958fd37bc9342368af90db00dd545028aaba834\nsize 109588\n",
+        "pointer_sha256": "608934c4427d7f232d47457d7bcf958ea80ee9a314012361affe1407a9dd9af1"
+      },
+      "member_count": 9,
+      "complete_member_hashes": [
+        {
+          "name": "COG_ADM2.cpg",
+          "bytes": 5,
+          "compressed_bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "name": "COG_ADM2.dbf",
+          "bytes": 1984,
+          "compressed_bytes": 412,
+          "sha256": "6fdfa896209236cb615fff89a8f171351b31048c2e42d7553cec6bc6cc8f6e94",
+          "dbf_records": 46
+        },
+        {
+          "name": "COG_ADM2.prj",
+          "bytes": 145,
+          "compressed_bytes": 121,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+          "retained_path": "native-source-custody-002/COG_ADM2/COG_ADM2.prj"
+        },
+        {
+          "name": "COG_ADM2.sbn",
+          "bytes": 588,
+          "compressed_bytes": 402,
+          "sha256": "e1ea754eab3c8749c2627eb6e4bb66088513e506dba456e190a211b3040d5311"
+        },
+        {
+          "name": "COG_ADM2.sbx",
+          "bytes": 164,
+          "compressed_bytes": 84,
+          "sha256": "7c0cdc1782aac1fce7d4c713fa944c54032b677a49a2361122a3acccae30e092"
+        },
+        {
+          "name": "COG_ADM2.shp",
+          "bytes": 202852,
+          "compressed_bytes": 90038,
+          "sha256": "7b6cf8d35ded3fc3f4a190f3a92515a0e8dbb8723c1fcc158b69848ca36ac601"
+        },
+        {
+          "name": "COG_ADM2.shp.xml",
+          "bytes": 45811,
+          "compressed_bytes": 16801,
+          "sha256": "0813ed0f0e234baf88845198068f3b963f3cb942799f15fc50754902de3a2753",
+          "retained_path": "native-source-custody-002/COG_ADM2/COG_ADM2.shp.xml"
+        },
+        {
+          "name": "COG_ADM2.shx",
+          "bytes": 468,
+          "compressed_bytes": 334,
+          "sha256": "a7f78979fd633400d17d2a28909ba7ef2d1fa65c59c5cb68116035205c8754bb"
+        },
+        {
+          "name": "meta.txt",
+          "bytes": 469,
+          "compressed_bytes": 469,
+          "sha256": "963436e10352b8dcdd68a694e44b3761feae0b62b541c7622f3931f6d3381597",
+          "retained_path": "native-source-custody-002/COG_ADM2/meta.txt"
+        }
+      ],
+      "native_dbf_records": 46,
+      "actual_text_paths": [
+        "native-source-custody-002/COG_ADM2/COG_ADM2.prj",
+        "native-source-custody-002/COG_ADM2/COG_ADM2.shp.xml",
+        "native-source-custody-002/COG_ADM2/meta.txt"
+      ],
+      "actual_license_image_paths": [],
+      "native_geometry_not_modified": true
+    },
+    {
+      "source_family": "gb:SDN:ADM1",
+      "native_name": "SDN_ADM1",
+      "whole_family_features": 19,
+      "conservative_contact_features": 1,
+      "reused_archive_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-sdn-preparation/source-rights/SDN_ADM1.zip",
+      "owned_archive_path": "native-source-custody-002/SDN_ADM1/SDN_ADM1.zip",
+      "zip_bytes": 643439,
+      "zip_sha256": "cf00c3a7bef23cf88e642aab9e641ea77c4c0eff7ddd9c535e2a1caaeb2d5ee2",
+      "fresh_immutable_pointer": {
+        "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/sourceData/gbOpen/SDN_ADM1.zip",
+        "observed_utc": "2026-10-18T03:35:06.836329+00:00",
+        "lfs_sha256": "cf00c3a7bef23cf88e642aab9e641ea77c4c0eff7ddd9c535e2a1caaeb2d5ee2",
+        "bytes": 643439,
+        "content": "version https://git-lfs.github.com/spec/v1\noid sha256:cf00c3a7bef23cf88e642aab9e641ea77c4c0eff7ddd9c535e2a1caaeb2d5ee2\nsize 643439\n",
+        "pointer_sha256": "4c811f6b6a9ae215d0cff9368410ad94da64d285192acb028dc61c58419579a3"
+      },
+      "member_count": 10,
+      "complete_member_hashes": [
+        {
+          "name": "SDN_ADM1.cpg",
+          "bytes": 5,
+          "compressed_bytes": 7,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "name": "SDN_ADM1.dbf",
+          "bytes": 2999,
+          "compressed_bytes": 297,
+          "sha256": "bb743a9ab90e757141ce1b08c6daaecdf4361ced816bd9ec686bae20983477e1",
+          "dbf_records": 19
+        },
+        {
+          "name": "SDN_ADM1.prj",
+          "bytes": 145,
+          "compressed_bytes": 121,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+          "retained_path": "native-source-custody-002/SDN_ADM1/SDN_ADM1.prj"
+        },
+        {
+          "name": "SDN_ADM1.sbn",
+          "bytes": 308,
+          "compressed_bytes": 203,
+          "sha256": "34a4268c224fadd26127dd74db5a2d27e9c75bfc966045d9af63fd8cbf66c823"
+        },
+        {
+          "name": "SDN_ADM1.sbx",
+          "bytes": 132,
+          "compressed_bytes": 69,
+          "sha256": "eb993e04d2df481f7d3eeffee7cf9b0bc7027ff704b3727a843633bfb169e14a"
+        },
+        {
+          "name": "SDN_ADM1.shp",
+          "bytes": 320732,
+          "compressed_bytes": 228509,
+          "sha256": "2c005c28ef1f1e451122929ad711d8d9dc779e5433b604fcb43e40902da0c3f5"
+        },
+        {
+          "name": "SDN_ADM1.shp.xml",
+          "bytes": 219413,
+          "compressed_bytes": 124580,
+          "sha256": "4ba00ecc2270577b4ddbcae64ddd5ac481920ce71770ec1dc04214e324fb7fa5",
+          "retained_path": "native-source-custody-002/SDN_ADM1/SDN_ADM1.shp.xml"
+        },
+        {
+          "name": "SDN_ADM1.shx",
+          "bytes": 252,
+          "compressed_bytes": 197,
+          "sha256": "36c807ae15b952400fb668566846c56111df7af331522c75667eabd25e30a0af"
+        },
+        {
+          "name": "license.png",
+          "bytes": 312880,
+          "compressed_bytes": 287374,
+          "sha256": "fa2a62423fef383f3c112dd3eb9657fb603504a2bb9db36e7e928f1b25ad9503",
+          "retained_path": "native-source-custody-002/SDN_ADM1/license.png"
+        },
+        {
+          "name": "meta.txt",
+          "bytes": 531,
+          "compressed_bytes": 306,
+          "sha256": "b5435448af4932532e1e497840c51cdc8dec29e56b358f7d2bade7a84dec15ad",
+          "retained_path": "native-source-custody-002/SDN_ADM1/meta.txt"
+        }
+      ],
+      "native_dbf_records": 19,
+      "actual_text_paths": [
+        "native-source-custody-002/SDN_ADM1/SDN_ADM1.prj",
+        "native-source-custody-002/SDN_ADM1/SDN_ADM1.shp.xml",
+        "native-source-custody-002/SDN_ADM1/meta.txt"
+      ],
+      "actual_license_image_paths": [
+        "native-source-custody-002/SDN_ADM1/license.png"
+      ],
+      "native_geometry_not_modified": true
+    },
+    {
+      "source_family": "gb:SDN:ADM2",
+      "native_name": "SDN_ADM2",
+      "whole_family_features": 189,
+      "conservative_contact_features": 3,
+      "reused_archive_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-sdn-preparation/source-rights/SDN_ADM2.zip",
+      "owned_archive_path": "native-source-custody-002/SDN_ADM2/SDN_ADM2.zip",
+      "zip_bytes": 905412,
+      "zip_sha256": "dc17abddf063e0974dc94999e94db2fd0e3d413e5114aca1a7be72c3eca73fba",
+      "fresh_immutable_pointer": {
+        "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/sourceData/gbOpen/SDN_ADM2.zip",
+        "observed_utc": "2026-10-18T03:35:06.980257+00:00",
+        "lfs_sha256": "dc17abddf063e0974dc94999e94db2fd0e3d413e5114aca1a7be72c3eca73fba",
+        "bytes": 905412,
+        "content": "version https://git-lfs.github.com/spec/v1\noid sha256:dc17abddf063e0974dc94999e94db2fd0e3d413e5114aca1a7be72c3eca73fba\nsize 905412\n",
+        "pointer_sha256": "f693f472263e41ec69c55c1cacf281d8b7d5d561629c590f128e4111821d04d8"
+      },
+      "member_count": 7,
+      "complete_member_hashes": [
+        {
+          "name": "license.png",
+          "bytes": 495844,
+          "compressed_bytes": 482222,
+          "sha256": "14f9e8917e2975ee040c5705fcd4fbccf7fc5773433ae243ff336298ad8dc8e1",
+          "retained_path": "native-source-custody-002/SDN_ADM2/license.png"
+        },
+        {
+          "name": "meta.txt",
+          "bytes": 531,
+          "compressed_bytes": 304,
+          "sha256": "7606e13f232e5fcdca64ce255fb75b544638bfaee1bb72c082dc8432b637dd33",
+          "retained_path": "native-source-custody-002/SDN_ADM2/meta.txt"
+        },
+        {
+          "name": "SDN_ADM2.cpg",
+          "bytes": 5,
+          "compressed_bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "name": "SDN_ADM2.dbf",
+          "bytes": 7091,
+          "compressed_bytes": 1339,
+          "sha256": "200d309042939d8373b9f3cd4202b9e1569c513f60df1be417540e295b05477e",
+          "dbf_records": 189
+        },
+        {
+          "name": "SDN_ADM2.prj",
+          "bytes": 145,
+          "compressed_bytes": 121,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+          "retained_path": "native-source-custody-002/SDN_ADM2/SDN_ADM2.prj"
+        },
+        {
+          "name": "SDN_ADM2.shp",
+          "bytes": 560764,
+          "compressed_bytes": 419629,
+          "sha256": "e34ffcf6dc334d2480de8d8524e0bfab4f1636f75f8074a1175dcec074b1b132"
+        },
+        {
+          "name": "SDN_ADM2.shx",
+          "bytes": 1612,
+          "compressed_bytes": 1080,
+          "sha256": "411b2bbb083b5aad9c2af3fa3a6c3aaf8a8bef2507f97706b4bdb5d836c9c120"
+        }
+      ],
+      "native_dbf_records": 189,
+      "actual_text_paths": [
+        "native-source-custody-002/SDN_ADM2/meta.txt",
+        "native-source-custody-002/SDN_ADM2/SDN_ADM2.prj"
+      ],
+      "actual_license_image_paths": [
+        "native-source-custody-002/SDN_ADM2/license.png"
+      ],
+      "native_geometry_not_modified": true
+    },
+    {
+      "source_family": "gb:SSD:ADM1",
+      "native_name": "SSD_ADM1",
+      "whole_family_features": 10,
+      "conservative_contact_features": 3,
+      "reused_archive_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker1-sdn/additional-rights-001/SSD_ADM1.zip",
+      "owned_archive_path": "native-source-custody-002/SSD_ADM1/SSD_ADM1.zip",
+      "zip_bytes": 266503,
+      "zip_sha256": "e94e89e44654764a0114bf35b352fe45a90b3dce25421478aa9ac0cb5609e8fe",
+      "fresh_immutable_pointer": {
+        "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/sourceData/gbOpen/SSD_ADM1.zip",
+        "observed_utc": "2026-10-18T03:35:06.998201+00:00",
+        "lfs_sha256": "e94e89e44654764a0114bf35b352fe45a90b3dce25421478aa9ac0cb5609e8fe",
+        "bytes": 266503,
+        "content": "version https://git-lfs.github.com/spec/v1\noid sha256:e94e89e44654764a0114bf35b352fe45a90b3dce25421478aa9ac0cb5609e8fe\nsize 266503\n",
+        "pointer_sha256": "e87883000f2b6be60f1599e668cc984486e8d8aefe14da5a7e18cedd4e61a796"
+      },
+      "member_count": 10,
+      "complete_member_hashes": [
+        {
+          "name": "SSD_ADM1.cpg",
+          "bytes": 5,
+          "compressed_bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "name": "SSD_ADM1.dbf",
+          "bytes": 640,
+          "compressed_bytes": 203,
+          "sha256": "b81877d769623f5aca36ea2fe73bd49c65e44af34e1522fbd07a307b1edefeef",
+          "dbf_records": 10
+        },
+        {
+          "name": "SSD_ADM1.prj",
+          "bytes": 145,
+          "compressed_bytes": 121,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+          "retained_path": "native-source-custody-002/SSD_ADM1/SSD_ADM1.prj"
+        },
+        {
+          "name": "SSD_ADM1.sbn",
+          "bytes": 236,
+          "compressed_bytes": 142,
+          "sha256": "1646a391bc20f4371748ac542559ec6cd442705d82f558c683ecc415a3b764eb"
+        },
+        {
+          "name": "SSD_ADM1.sbx",
+          "bytes": 132,
+          "compressed_bytes": 68,
+          "sha256": "58108e2ecdd71a55eacea01f88b52f6e487bfebdad43c5f99affe96262dfe5e0"
+        },
+        {
+          "name": "SSD_ADM1.shp",
+          "bytes": 147700,
+          "compressed_bytes": 108775,
+          "sha256": "08ea868449b97f1d33997ed85b11942e86172dd925ee3fb7008c31e91f8a502e"
+        },
+        {
+          "name": "SSD_ADM1.shp.xml",
+          "bytes": 88897,
+          "compressed_bytes": 48046,
+          "sha256": "19d9422f62b2e77d0cc4aa397bab6fbd8f599b940b9ad6b4780f6d00d4735610",
+          "retained_path": "native-source-custody-002/SSD_ADM1/SSD_ADM1.shp.xml"
+        },
+        {
+          "name": "SSD_ADM1.shx",
+          "bytes": 180,
+          "compressed_bytes": 127,
+          "sha256": "37ec5fb21c01ad2754c24ae4d59e2564166f2ad98f818948c06f0c8ef132cf47"
+        },
+        {
+          "name": "license.PNG",
+          "bytes": 124768,
+          "compressed_bytes": 107382,
+          "sha256": "3fb5735f5578f5af40b86bcb83dc45b3ec8869701f9a34b5eddec32f4f5e699a",
+          "retained_path": "native-source-custody-002/SSD_ADM1/license.PNG"
+        },
+        {
+          "name": "meta.txt",
+          "bytes": 1160,
+          "compressed_bytes": 578,
+          "sha256": "b1aa50d10c50fe65917166be14296ed6df5ee9ff30eb85b02965ffc0ae6b7514",
+          "retained_path": "native-source-custody-002/SSD_ADM1/meta.txt"
+        }
+      ],
+      "native_dbf_records": 10,
+      "actual_text_paths": [
+        "native-source-custody-002/SSD_ADM1/SSD_ADM1.prj",
+        "native-source-custody-002/SSD_ADM1/SSD_ADM1.shp.xml",
+        "native-source-custody-002/SSD_ADM1/meta.txt"
+      ],
+      "actual_license_image_paths": [
+        "native-source-custody-002/SSD_ADM1/license.PNG"
+      ],
+      "native_geometry_not_modified": true
+    },
+    {
+      "source_family": "gb:SSD:ADM2",
+      "native_name": "SSD_ADM2",
+      "whole_family_features": 78,
+      "conservative_contact_features": 5,
+      "reused_archive_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker1-sdn/additional-rights-001/SSD_ADM2.zip",
+      "owned_archive_path": "native-source-custody-002/SSD_ADM2/SSD_ADM2.zip",
+      "zip_bytes": 307974,
+      "zip_sha256": "ee1c21621faf4c874c2a2cef45c754ec519126df35756aeb3c8c25bcfaecbf55",
+      "fresh_immutable_pointer": {
+        "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/sourceData/gbOpen/SSD_ADM2.zip",
+        "observed_utc": "2026-10-18T03:35:06.999928+00:00",
+        "lfs_sha256": "ee1c21621faf4c874c2a2cef45c754ec519126df35756aeb3c8c25bcfaecbf55",
+        "bytes": 307974,
+        "content": "version https://git-lfs.github.com/spec/v1\noid sha256:ee1c21621faf4c874c2a2cef45c754ec519126df35756aeb3c8c25bcfaecbf55\nsize 307974\n",
+        "pointer_sha256": "7592e0ce3805727fbf64b16ef1ec475afd49d76cafca7f409752cc40e0153de8"
+      },
+      "member_count": 10,
+      "complete_member_hashes": [
+        {
+          "name": "SSD_ADM2.cpg",
+          "bytes": 5,
+          "compressed_bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "name": "SSD_ADM2.dbf",
+          "bytes": 3296,
+          "compressed_bytes": 580,
+          "sha256": "c52a6df75560d77339f7fdcd770fb00de129b22d0f5b8a493fbd1058ef9a8be0",
+          "dbf_records": 78
+        },
+        {
+          "name": "SSD_ADM2.prj",
+          "bytes": 145,
+          "compressed_bytes": 121,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+          "retained_path": "native-source-custody-002/SSD_ADM2/SSD_ADM2.prj"
+        },
+        {
+          "name": "SSD_ADM2.sbn",
+          "bytes": 948,
+          "compressed_bytes": 669,
+          "sha256": "f91c4c3f7b7aeb2b7a822b57dc31b666c34959e66a487a5e7bcb33e14665614b"
+        },
+        {
+          "name": "SSD_ADM2.sbx",
+          "bytes": 212,
+          "compressed_bytes": 117,
+          "sha256": "429e8719b2a6ab46869954d434270f8098d982f798bb3776155cc375703cee1a"
+        },
+        {
+          "name": "SSD_ADM2.shp",
+          "bytes": 182100,
+          "compressed_bytes": 124039,
+          "sha256": "28d0057d09d1104e3617a3d6dac0e927ae5183c70330f27dbdc75592f70de884"
+        },
+        {
+          "name": "SSD_ADM2.shp.xml",
+          "bytes": 132674,
+          "compressed_bytes": 72936,
+          "sha256": "09a7ba746dd9fa4f4f42dd815fe7813f603adc6bac626477479b49ca7b261b4f",
+          "retained_path": "native-source-custody-002/SSD_ADM2/SSD_ADM2.shp.xml"
+        },
+        {
+          "name": "SSD_ADM2.shx",
+          "bytes": 724,
+          "compressed_bytes": 489,
+          "sha256": "75de17c9d6674ed7e1be14debcf439b673f619a15287771b6758a1e4d6962819"
+        },
+        {
+          "name": "license.PNG",
+          "bytes": 124768,
+          "compressed_bytes": 107382,
+          "sha256": "3fb5735f5578f5af40b86bcb83dc45b3ec8869701f9a34b5eddec32f4f5e699a",
+          "retained_path": "native-source-custody-002/SSD_ADM2/license.PNG"
+        },
+        {
+          "name": "meta.txt",
+          "bytes": 1162,
+          "compressed_bytes": 580,
+          "sha256": "ebc85097eb4b20b354875e26d80d62377914157fe04f47626fd4f626e0ed8a3c",
+          "retained_path": "native-source-custody-002/SSD_ADM2/meta.txt"
+        }
+      ],
+      "native_dbf_records": 78,
+      "actual_text_paths": [
+        "native-source-custody-002/SSD_ADM2/SSD_ADM2.prj",
+        "native-source-custody-002/SSD_ADM2/SSD_ADM2.shp.xml",
+        "native-source-custody-002/SSD_ADM2/meta.txt"
+      ],
+      "actual_license_image_paths": [
+        "native-source-custody-002/SSD_ADM2/license.PNG"
+      ],
+      "native_geometry_not_modified": true
+    },
+    {
+      "source_family": "gb:TCD:ADM1",
+      "native_name": "TCD_ADM1",
+      "whole_family_features": 23,
+      "conservative_contact_features": 5,
+      "reused_archive_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-sdn-preparation/source-rights/TCD_ADM1.zip",
+      "owned_archive_path": "native-source-custody-002/TCD_ADM1/TCD_ADM1.zip",
+      "zip_bytes": 131883,
+      "zip_sha256": "63531ffdd2460a653719eafca0c5b9322651c1f96e506d200143e62521920216",
+      "fresh_immutable_pointer": {
+        "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/sourceData/gbOpen/TCD_ADM1.zip",
+        "observed_utc": "2026-10-18T03:35:07.002099+00:00",
+        "lfs_sha256": "63531ffdd2460a653719eafca0c5b9322651c1f96e506d200143e62521920216",
+        "bytes": 131883,
+        "content": "version https://git-lfs.github.com/spec/v1\noid sha256:63531ffdd2460a653719eafca0c5b9322651c1f96e506d200143e62521920216\nsize 131883\n",
+        "pointer_sha256": "54550f09c1954ae0de439bb59cdbac49e490d0d0ff9ed3255cb9a57b8b833c0d"
+      },
+      "member_count": 9,
+      "complete_member_hashes": [
+        {
+          "name": "TCD_ADM1.cpg",
+          "bytes": 5,
+          "compressed_bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "name": "TCD_ADM1.dbf",
+          "bytes": 1004,
+          "compressed_bytes": 353,
+          "sha256": "ffe2f20054ec3debbd449391cc72b243bfd2e2387663055e6abac7fc062fb635",
+          "dbf_records": 23
+        },
+        {
+          "name": "TCD_ADM1.prj",
+          "bytes": 135,
+          "compressed_bytes": 117,
+          "sha256": "609b8869cd2b545c0128f23e94c1317a5b56765e1723e933c08d033202a6543a",
+          "retained_path": "native-source-custody-002/TCD_ADM1/TCD_ADM1.prj"
+        },
+        {
+          "name": "TCD_ADM1.sbn",
+          "bytes": 340,
+          "compressed_bytes": 225,
+          "sha256": "e7340dfffdfb758721f9c0134a3031be1db23d18298a5977094fafc0d1988deb"
+        },
+        {
+          "name": "TCD_ADM1.sbx",
+          "bytes": 132,
+          "compressed_bytes": 67,
+          "sha256": "0e95502c43b1099ac9cc29582496d8dbf4bb857d50fa3a92c04d4e5f6da333ce"
+        },
+        {
+          "name": "TCD_ADM1.shp",
+          "bytes": 192076,
+          "compressed_bytes": 129220,
+          "sha256": "f0fd7432ac767dc2010eccd5658e02b1c5cc2e173b52600cb8e36fca8ea68cd9"
+        },
+        {
+          "name": "TCD_ADM1.shp.xml",
+          "bytes": 674,
+          "compressed_bytes": 331,
+          "sha256": "8fc769c6445cb2a2097e8f8cd76f20c7869c2fd3ef998433623d5c68b6af714f",
+          "retained_path": "native-source-custody-002/TCD_ADM1/TCD_ADM1.shp.xml"
+        },
+        {
+          "name": "TCD_ADM1.shx",
+          "bytes": 284,
+          "compressed_bytes": 216,
+          "sha256": "ce16debb6a5894a9f3ce3f5b39676bd3dde41a79dc50a4a86dcce690c980b4e5"
+        },
+        {
+          "name": "meta.txt",
+          "bytes": 427,
+          "compressed_bytes": 427,
+          "sha256": "09050cd6920b3e340e13980d17045906e23af4a30525bb236aa8f963f9752660",
+          "retained_path": "native-source-custody-002/TCD_ADM1/meta.txt"
+        }
+      ],
+      "native_dbf_records": 23,
+      "actual_text_paths": [
+        "native-source-custody-002/TCD_ADM1/TCD_ADM1.prj",
+        "native-source-custody-002/TCD_ADM1/TCD_ADM1.shp.xml",
+        "native-source-custody-002/TCD_ADM1/meta.txt"
+      ],
+      "actual_license_image_paths": [],
+      "native_geometry_not_modified": true
+    },
+    {
+      "source_family": "gb:TCD:ADM2",
+      "native_name": "TCD_ADM2",
+      "whole_family_features": 70,
+      "conservative_contact_features": 10,
+      "reused_archive_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker1-sdn/additional-rights-001/TCD_ADM2.zip",
+      "owned_archive_path": "native-source-custody-002/TCD_ADM2/TCD_ADM2.zip",
+      "zip_bytes": 1068012,
+      "zip_sha256": "12f9483198e437b885f2d09d316f094c18bc39eba403901a28252c634a303d9f",
+      "fresh_immutable_pointer": {
+        "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/sourceData/gbOpen/TCD_ADM2.zip",
+        "observed_utc": "2026-10-18T03:35:07.101480+00:00",
+        "lfs_sha256": "12f9483198e437b885f2d09d316f094c18bc39eba403901a28252c634a303d9f",
+        "bytes": 1068012,
+        "content": "version https://git-lfs.github.com/spec/v1\noid sha256:12f9483198e437b885f2d09d316f094c18bc39eba403901a28252c634a303d9f\nsize 1068012\n",
+        "pointer_sha256": "8d53f73dc1770a17a90dd219aa9daf53fc0866470d245c4ba1b7371068f3d149"
+      },
+      "member_count": 7,
+      "complete_member_hashes": [
+        {
+          "name": "TCD_ADM2.cpg",
+          "bytes": 5,
+          "compressed_bytes": 7,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "name": "TCD_ADM2.dbf",
+          "bytes": 4368,
+          "compressed_bytes": 632,
+          "sha256": "a6811cd52ee7aea2a9abcfaa78852dab664c28511017f6c78c6c0dad4e0867f2",
+          "dbf_records": 70
+        },
+        {
+          "name": "TCD_ADM2.prj",
+          "bytes": 145,
+          "compressed_bytes": 121,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+          "retained_path": "native-source-custody-002/TCD_ADM2/TCD_ADM2.prj"
+        },
+        {
+          "name": "TCD_ADM2.shp",
+          "bytes": 186164,
+          "compressed_bytes": 128403,
+          "sha256": "1ee404c8c369a164eb93428656f7b030a9c713d761c13db509ad5de0f30c2ab5"
+        },
+        {
+          "name": "TCD_ADM2.shx",
+          "bytes": 660,
+          "compressed_bytes": 458,
+          "sha256": "7984169ad20565688c26a399817125552ec9874824dc709faefcd1650a1b1e17"
+        },
+        {
+          "name": "license.png",
+          "bytes": 1004348,
+          "compressed_bytes": 936978,
+          "sha256": "9876a51ae683d44646ac41eba70e26e99ea824ba38a1a878fddb22a56fa75042",
+          "retained_path": "native-source-custody-002/TCD_ADM2/license.png"
+        },
+        {
+          "name": "meta.txt",
+          "bytes": 704,
+          "compressed_bytes": 401,
+          "sha256": "3a88b41bf241e0aea62cfed5dbbcd11508f6ea798d55ab27e8b33a564577ef3e",
+          "retained_path": "native-source-custody-002/TCD_ADM2/meta.txt"
+        }
+      ],
+      "native_dbf_records": 70,
+      "actual_text_paths": [
+        "native-source-custody-002/TCD_ADM2/TCD_ADM2.prj",
+        "native-source-custody-002/TCD_ADM2/meta.txt"
+      ],
+      "actual_license_image_paths": [
+        "native-source-custody-002/TCD_ADM2/license.png"
+      ],
+      "native_geometry_not_modified": true
+    }
+  ],
+  "limits": [
+    "Custody is not substantive source/right/vintage/CRS/ancestry approval; actual statements require separate review.",
+    "Complete whole-family native feature counts, not only69contacts, govern this inventory.",
+    "No native/source geometry processing, source-evidence, physical or native authority ran.",
+    "AppleDouble ._ members remain fully hashed/retained as resource forks; they are not native DBFs, text declarations or license images."
+  ]
+}
