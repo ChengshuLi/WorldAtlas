@@ -33,3 +33,7 @@ Existing#830 retains Banjul's independent-city/agglomeration role and cross-LGA 
 The current accepted cumulative Slovakia patch at10927524 (6,120,450 cells) has zero coordinate and recorded-owner intersection with these2,377 originals. That readiness observation does not prove future native owner-zero, latest selected conservation, emitted picker behavior or parent delivery. Those remain separate. A distinct exact-head review is required before any handoff eligibility.
 
 The exact public issue-create attempt was denied before execution and remains stopped. Issue is null; no alternate public post or claim is asserted. This packet does not alter selected geography, any shared source/operator, integration queue or deployment, and is not added to the frozen69,020-cell nine-packet handoff.
+
+## Descriptive count erratum
+
+`source-review/periodic-negatives-001/subject-count-erratum.json` corrects the preserved periodic reconciliation’s inherited descriptive count of38: the actual scope is34 intended owners represented by all42 whole positive source members. Its original proof/result and the complete authority quartet remain unchanged. Native XML creation dates (ADM1:2022-09-10; ADM2:2022-09-11) are separate from represented2020 and the archived World Bank2021 catalogue image. This additive correction required no scientific replay or authority repin.

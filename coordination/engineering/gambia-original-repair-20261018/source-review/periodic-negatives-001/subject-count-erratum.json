@@ -1,0 +1,42 @@
+{
+  "kind": "additive-original-subject-count-erratum",
+  "preserved_original_head": "b7b9151a47aedefd59268e4497f5e5774363a1c7",
+  "preserved_reconciliation": {
+    "path": "coordination/engineering/gambia-original-repair-20261018/source-review/periodic-negatives-001/retained-periodic-negative-reconciliation.json",
+    "bytes": 16789,
+    "sha256": "a9a1793956d783b9ed412aece4021c5ec707ab05f9b34c5bc9cbb026f640ec90"
+  },
+  "preserved_quartet": {
+    "path": "coordination/engineering/gambia-original-repair-20261018/qualified2377-original-quartet.json",
+    "sha256": "3ae0556bbb43c6d21d2545b5ee0ef69b84d7f232f55abb47b4ae3a14c6bdb25b"
+  },
+  "corrections": [
+    {
+      "location": "original_Gambia_subjects",
+      "recorded": 38,
+      "correct_original_intended_owners": 34
+    },
+    {
+      "location": "limits[2] description: these38 complete original district member geometries",
+      "correct_description": "34 original intended owners represented by all 42 complete original positive source-member geometries; Banjul preserves its nine-member aggregate"
+    }
+  ],
+  "scope": {
+    "original_cells": 2377,
+    "land_cells": 2377,
+    "water_cells": 0,
+    "original_intervals": 1255,
+    "original_intended_owners": 34,
+    "complete_positive_source_atoms_and_physical_members": 42,
+    "complete_current_country_locations": 40,
+    "complete_current_country_source_atoms": 48
+  },
+  "vintage_distinctions": {
+    "represented_source_year": 2020,
+    "archived_World_Bank_image_year": 2021,
+    "native_GMB_ADM1_XML_creation_date": "20220910",
+    "native_GMB_ADM2_XML_creation_date": "20220911",
+    "meaning": "Native archive creation dates are distinct from the represented source year and archived catalogue update; none establishes current legal geography."
+  },
+  "effect": "Descriptive metadata correction only. The original method, whole geometry operands, complete original interval enclosure, three whole Fiji proofs, source evidence, original patch, authority binding, rule preimage, constructor and quartet remain byte-for-byte unchanged. No scientific producer or native replay, no authority repin, no selected or accepted credit. The final pending-review sentence in the preserved reconciliation describes its preparation-stage state; completed stock results are reported in the immutable quartet and README."
+}
