@@ -10,24 +10,27 @@
         "x": 124938,
         "owner": 26987,
         "source_id": "gb:LBR:ADM2:62588387B45934307689461",
-        "original_land_class": "mapped_land_support",
-        "diagnostic_hold_reason": "territorial_exclusion_cells"
+        "diagnostic_hold_reason": "territorial_exclusion_cells",
+        "original_physical_class": "land",
+        "source_evidence_coverage_class": "mapped_land_support"
       },
       {
         "y": 108405,
         "x": 156464,
         "owner": 18676,
         "source_id": "gb:EGY:ADM2:37247803B50825531526089",
-        "original_land_class": "mapped_land_support",
-        "diagnostic_hold_reason": "territorial_exclusion_cells"
+        "diagnostic_hold_reason": "territorial_exclusion_cells",
+        "original_physical_class": "land",
+        "source_evidence_coverage_class": "mapped_land_support"
       },
       {
         "y": 109906,
         "x": 156358,
         "owner": 18637,
         "source_id": "gb:EGY:ADM2:37247803B39887765706268",
-        "original_land_class": "mapped_land_support",
-        "diagnostic_hold_reason": "territorial_exclusion_cells"
+        "diagnostic_hold_reason": "territorial_exclusion_cells",
+        "original_physical_class": "land",
+        "source_evidence_coverage_class": "mapped_land_support"
       }
     ],
     "unresolved_questions_are_recorded_on_each_pending_case": true,
@@ -45,13 +48,17 @@
         "pending_held_original_cells": 1,
         "otherwise_resolved_original_cells": 0,
         "original_physical_class_counts": {
-          "mapped_land_support": 2026
+          "land": 2026
         },
         "diagnostic_hold_reason_counts": {
           "territorial_exclusion_cells": 1
         },
         "exact_owner_key_partition_review": "https://github.com/ChengshuLi/WorldAtlas/pull/2495#issuecomment-6247233787",
-        "partition_basis": "The independent exact owner-key join reconciles the complete original interval scope against the current cumulative patch; this packet records only the held exception key, not a duplicate expansion of the full interval roster."
+        "partition_basis": "The independent exact owner-key join reconciles the complete original interval scope against the current cumulative patch; this packet records only the held exception key, not a duplicate expansion of the full interval roster.",
+        "source_evidence_coverage_class_counts": {
+          "mapped_land_support": 2026
+        },
+        "original_class_join_review": "https://github.com/ChengshuLi/WorldAtlas/pull/2495#issuecomment-6247244352"
       },
       {
         "country": "EGY",
@@ -61,13 +68,17 @@
         "pending_held_original_cells": 2,
         "otherwise_resolved_original_cells": 0,
         "original_physical_class_counts": {
-          "mapped_land_support": 19065
+          "land": 19065
         },
         "diagnostic_hold_reason_counts": {
           "territorial_exclusion_cells": 2
         },
         "exact_owner_key_partition_review": "https://github.com/ChengshuLi/WorldAtlas/pull/2495#issuecomment-6247233787",
-        "partition_basis": "The independent exact owner-key join reconciles the complete original interval scope against the current cumulative patch; this packet records only the held exception keys, not a duplicate expansion of the full interval roster."
+        "partition_basis": "The independent exact owner-key join reconciles the complete original interval scope against the current cumulative patch; this packet records only the held exception keys, not a duplicate expansion of the full interval roster.",
+        "source_evidence_coverage_class_counts": {
+          "mapped_land_support": 19065
+        },
+        "original_class_join_review": "https://github.com/ChengshuLi/WorldAtlas/pull/2495#issuecomment-6247244352"
       }
     ]
   },
@@ -80,17 +91,19 @@
         "x": 124938,
         "owner": 26987,
         "source_id": "gb:LBR:ADM2:62588387B45934307689461",
-        "original_land_class": "mapped_land_support",
-        "diagnostic_hold_reason": "territorial_exclusion_cells"
+        "diagnostic_hold_reason": "territorial_exclusion_cells",
+        "original_physical_class": "land",
+        "source_evidence_coverage_class": "mapped_land_support"
       },
       "status": "pending_independent_review",
       "candidate_disposition": "documented_no_repair_exception_candidate",
-      "evidence_reason": "The exact native center has no hit in its original Buu-Yao target polygon, while it is interior to the matching physical report mapped_land_support polygon. The run-level physical support field is distinct from source-target coverage. An exact CIV ADM1 Montagnes negative center-interior contact also remains. The original two-cell diagnostic refuses unique source-target coverage.",
+      "evidence_reason": "The exact native center has no hit in its original Buu-Yao target polygon, while it is interior to the matching reported mapped-land-support geometry. The run-level physical support field is distinct from source-target coverage. An exact CIV ADM1 Montagnes negative center-interior contact also remains. The original two-cell diagnostic refuses unique source-target coverage.",
       "unresolved_question": "Why do the original target and physical mapped-land support polygons differ at this center, and is any alternate source vintage/applicability valid? Does the exact original target noncoverage satisfy the package documented-exception rule after reviewer confirmation?",
       "next_action": "Independent reviewer validates exact target/physical source provenance and no-repair exception against the original interval package; preserve territorial hold and class unless the original package’s normal acceptance process adopts an explicit disposition. No repair candidate for this key.",
       "credit": 0,
-      "original_land_class": "mapped_land_support",
-      "diagnostic_hold_reason": "territorial_exclusion_cells"
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "original_physical_class": "land",
+      "source_evidence_coverage_class": "mapped_land_support"
     },
     {
       "country": "EGY",
@@ -100,8 +113,9 @@
         "x": 156464,
         "owner": 18676,
         "source_id": "gb:EGY:ADM2:37247803B50825531526089",
-        "original_land_class": "mapped_land_support",
-        "diagnostic_hold_reason": "territorial_exclusion_cells"
+        "diagnostic_hold_reason": "territorial_exclusion_cells",
+        "original_physical_class": "land",
+        "source_evidence_coverage_class": "mapped_land_support"
       },
       "status": "pending_independent_review",
       "candidate_disposition": "documented_unresolved_source_territorial_exception",
@@ -109,8 +123,9 @@
       "unresolved_question": "Does the official Egypt-Israel legal boundary/source authority resolve this exact point, and what is the applicability of the retained Israel/Saudi administrative products?",
       "next_action": "Cloud legal/source adjudication; obtain authoritative applicable boundary/source data or adopt a reviewer-approved unresolved exception. Preserve the original territorial hold and all three contacts.",
       "credit": 0,
-      "original_land_class": "mapped_land_support",
-      "diagnostic_hold_reason": "territorial_exclusion_cells"
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "original_physical_class": "land",
+      "source_evidence_coverage_class": "mapped_land_support"
     },
     {
       "country": "EGY",
@@ -120,8 +135,9 @@
         "x": 156358,
         "owner": 18637,
         "source_id": "gb:EGY:ADM2:37247803B39887765706268",
-        "original_land_class": "mapped_land_support",
-        "diagnostic_hold_reason": "territorial_exclusion_cells"
+        "diagnostic_hold_reason": "territorial_exclusion_cells",
+        "original_physical_class": "land",
+        "source_evidence_coverage_class": "mapped_land_support"
       },
       "status": "pending_independent_review",
       "candidate_disposition": "documented_unresolved_source_territorial_exception",
@@ -129,13 +145,14 @@
       "unresolved_question": "Does the exact center fall on Sanafir or another Saudi land area, and what authoritative terrestrial geometry/source determines the land surface and administrative role here?",
       "next_action": "Cloud legal/source adjudication; request/use complete authoritative Saudi island or land geometry (GEOSA/Saudi Geological Survey/hydrographic product) and review its applicability against exact center; until then, preserve all exact center contacts and bounds-screen records and the original territorial hold.",
       "credit": 0,
-      "original_land_class": "mapped_land_support",
-      "diagnostic_hold_reason": "territorial_exclusion_cells"
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "original_physical_class": "land",
+      "source_evidence_coverage_class": "mapped_land_support"
     }
   ],
   "invariants": [
     "These are proposed evidence-backed exception packets only, not accepted dispositions, not repaired/qualified keys, and not new repair credit.",
-    "The original physical class mapped_land_support and the diagnostic territorial_exclusion_cells hold are separate facts; neither field is substituted for the other.",
+    "The original physical class land, source-evidence coverage class mapped_land_support, and diagnostic territorial_exclusion_cells hold are separate facts; none substitutes for another.",
     "No target relabelling or source/owner/selection/hold changes.",
     "Normal original package selected-native owner-zero, conservation, witness and emitted-output checks remain required for any future selected delivery."
   ]
