@@ -1,0 +1,114 @@
+--- CIV-3b7b9353/prepare-source-members.py
++++ CAF-draft/prepare-source-members.py.in
+@@ -17,7 +17,7 @@
+ BASE = 'cddcde8786f038568137d915c8ee8436475f1688'
+ INPUT = sys.argv[3]
+ assert len(INPUT) == 40
+-PREFIX = 'coordination/engineering/cote-divoire-original-repair-20261018-worker2/'
++PREFIX = 'coordination/engineering/central-african-republic-original-repair-20261018-worker4/'
+ QUEUE = 'coordination/engineering/global-current-cell-work-queue-20261014/'
+ ENV = dict(os.environ, GIT_NO_LAZY_FETCH='1', GIT_NO_REPLACE_OBJECTS='1', GIT_OPTIONAL_LOCKS='0')
+ assert not OUT.exists() and OUT.parent.is_dir()
+@@ -48,18 +48,18 @@
+ assert read(PREFIX + 'method/prepare-source-members.py', INPUT) == pathlib.Path(__file__).read_bytes()
+ scope = js(PREFIX + 'original-claim-scope.json', INPUT)
+ owners = {r['index']: r for r in scope['owners']}
+-assert len(owners) == 66 and len(set(scope['complete_source_atoms'])) == 66
++assert len(owners) == 46 and len(set(scope['complete_source_atoms'])) == 46
+ roster = js(QUEUE + 'source-feature-roster.json.gz')
+ by_source = {r['source_id']: r for r in roster}
+ assert len(by_source) == len(roster) == 73567
+ selected = {}
+ whole_country = []
+ canonical_paths = []
+-for name in ['data/geography/part-4.json']:
++for name in ['data/geography/part-2.json']:
+     product = js(name)
+     assert product['type'] == 'FeatureCollection'
+     for feature in product['features']:
+-        if feature['properties'].get('reference_owner') == "Côte d'Ivoire":
++        if feature['properties'].get('reference_owner') == 'Central African Republic':
+             whole_country.append(feature)
+             if name not in canonical_paths:
+                 canonical_paths.append(name)
+@@ -67,12 +67,12 @@
+             assert feature['id'] not in selected
+             selected[feature['id']] = feature
+ assert len(selected) == len(owners)
+-assert len(whole_country) == 510
++assert len(whole_country) == 175
+ 
+ catalogue = js('coordination/engineering/original-geography-source-corpus-20261006/catalogue.json')
+ metadata = js('data/administrative-sources.json')
+ products, product_inventory = {}, []
+-for family in ('gb:CIV:ADM1', 'gb:CIV:ADM2', 'gb:CIV:ADM3', 'gb:GHA:ADM1'):
++for family in ('gb:CAF:ADM1', 'gb:CAF:ADM2', 'gb:CAF:ADM3', 'gb:CMR:ADM1', 'gb:CMR:ADM2', 'gb:COD:ADM1', 'gb:COG:ADM1', 'gb:TCD:ADM1'):
+     record, = [r for r in catalogue['products'] if r['key'] == family]
+     chunks, offset = [], 0
+     for ordinal, part in enumerate(record['parts']):
+@@ -101,17 +101,17 @@
+     feature = selected[owner['id']]
+     properties = feature['properties']
+     assert feature['id'] == properties['id'] == owner['id']
+-    assert properties['reference_owner'] == "Côte d'Ivoire" and properties['parent_id'] == owner['province_id']
++    assert properties['reference_owner'] == 'Central African Republic' and properties['parent_id'] == owner['province_id']
+     atoms = owner['source_atoms']
+     assert len(atoms) == len(set(atoms))
+     assert atoms == [owner['id']]
+-    assert owner['id'] in products['gb:CIV:ADM3']
++    assert owner['id'] in products['gb:CAF:ADM3']
+     assert not properties['metadata'].get('source_member_ids')
+     association = 'direct-original-local-administrative-territory'
+     for atom in atoms:
+         row = by_source[atom]
+-        assert row['family_index'] == 65 and row['owners'] == [index]
+-        original = products['gb:CIV:ADM3'][atom]
++        assert row['family_index'] == 52 and row['owners'] == [index]
++        original = products['gb:CAF:ADM3'][atom]
+         stages.append(dict(target=atom, consumed=original, selected=feature))
+         membership.append(dict(source_id=atom, target_id=owner['id'], pixelIndex=index,
+                                source_ordinal=row['ordinal'], source_index=row['source_index']))
+@@ -119,10 +119,10 @@
+                                    association=association, source_atoms=atoms,
+                                    location_basis=properties['metadata'].get('location_basis'),
+                                    source_url=properties['metadata'].get('source_url')))
+-assert len(stages) == len({s['target'] for s in stages}) == 66
++assert len(stages) == len({s['target'] for s in stages}) == 46
+ assert set(s['target'] for s in stages) == set(scope['complete_source_atoms'])
+ stage_bytes = encode(stages)
+-assessment = dict(version=1, kind='cote-divoire-original-source-owner-preparation', accepted_commit=BASE,
++assessment = dict(version=1, kind='central-african-republic-original-source-owner-preparation', accepted_commit=BASE,
+                   whole_physical_stage_targets=len(stages), whole_intended_owners=len(owners),
+                   complete_selected_country_owners_in_complete_index=len(whole_country),
+                   complete_selected_country_part_paths=canonical_paths,
+--- CIV-3b7b9353/screen-whole-foreign-bounds.mjs
++++ CAF-draft/screen-whole-foreign-bounds.mjs.in
+@@ -3,7 +3,7 @@
+  * Complete originals are never modified. Unsupported inputs remain explicit.
+  */
+ import fs from'node:fs';import path from'node:path';import{pathToFileURL,fileURLToPath}from'node:url';import{execFileSync}from'node:child_process';import{createHash}from'node:crypto';import{gunzipSync}from'node:zlib';
+-const[R,C,O]=process.argv.slice(2),H='cddcde8786f038568137d915c8ee8436475f1688',Q='21984e9ec4ec7370bc807e2da23cea2228747698',P='coordination/engineering/cote-divoire-original-repair-20261018-worker2';const need=(x,m)=>{if(!x)throw Error(m)};const sha=b=>createHash('sha256').update(b).digest('hex');
++const[R,C,O]=process.argv.slice(2),H='cddcde8786f038568137d915c8ee8436475f1688',Q='21984e9ec4ec7370bc807e2da23cea2228747698',P='coordination/engineering/central-african-republic-original-repair-20261018-worker4';const need=(x,m)=>{if(!x)throw Error(m)};const sha=b=>createHash('sha256').update(b).digest('hex');
+ need(process.argv.length===5&&/^[a-f0-9]{40}$/.test(C),'exact arguments');for(const root of[R,O])for(let p=path.resolve(root);;p=path.dirname(p)){need(!fs.lstatSync(p,{throwIfNoEntry:false})?.isSymbolicLink(),'symlink');if(p===path.dirname(p))break;}need(fs.statSync(path.dirname(O)).isDirectory()&&!fs.lstatSync(O,{throwIfNoEntry:false}),'fresh output');
+ const env={...process.env,GIT_NO_LAZY_FETCH:'1',GIT_NO_REPLACE_OBJECTS:'1',GIT_TERMINAL_PROMPT:'0'};
+ function raw(p,c=H){const size=Number(execFileSync('git',['-C',R,'cat-file','-s',c+':'+p],{env}).toString());need(Number.isSafeInteger(size)&&size>0,'blob size');const b=execFileSync('git',['-c','protocol.allow=never','-C',R,'show',c+':'+p],{env,maxBuffer:size+1});need(b.length===size,'exact blob size');return b;}
+@@ -12,11 +12,11 @@
+ const{pinReader}=await import(pathToFileURL(path.join(R,'scripts/prepare-delivery-handoff.mjs')));const{coordinateBounds}=await import(pathToFileURL(path.join(R,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs')));const reader=pinReader(R),pins=new Map(),start=performance.now();
+ function read(p,c=H){const pin=reader.pin(c,p);pins.set(c+':'+p,pin);return reader.read(pin)}function json(p,c=H){const b=read(p,c);return JSON.parse(p.endsWith('.gz')?gunzipSync(b):b)}
+ need(read(P+'/method/screen-whole-foreign-bounds.mjs',C).equals(fs.readFileSync(fileURLToPath(import.meta.url))),'executed method drift');
+-const catalogue=json('coordination/engineering/original-geography-source-corpus-20261006/catalogue.json'),stages=json(P+'/source-stage-001/original-stage-inputs.json',C),membership=json(P+'/source-stage-001/source-target-membership.json',C),roster=json('coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz',Q);need(catalogue.products.length===368&&roster.length===73567&&stages.length===66&&membership.length===66,'complete initial inventory');const byid=new Map(roster.map(r=>[r.source_id,r]));need(byid.size===roster.length,'unique global roster');const stageMap=new Map(stages.map(s=>[s.target,s]));const targets=membership.map(m=>({source_id:m.source_id,pixelIndex:m.pixelIndex,bounds:coordinateBounds(stageMap.get(m.source_id).consumed.geometry)}));
++const catalogue=json('coordination/engineering/original-geography-source-corpus-20261006/catalogue.json'),stages=json(P+'/source-stage-001/original-stage-inputs.json',C),membership=json(P+'/source-stage-001/source-target-membership.json',C),roster=json('coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz',Q);need(catalogue.products.length===368&&roster.length===73567&&stages.length===46&&membership.length===46,'complete initial inventory');const byid=new Map(roster.map(r=>[r.source_id,r]));need(byid.size===roster.length,'unique global roster');const stageMap=new Map(stages.map(s=>[s.target,s]));const targets=membership.map(m=>({source_id:m.source_id,pixelIndex:m.pixelIndex,bounds:coordinateBounds(stageMap.get(m.source_id).consumed.geometry)}));
+ const intersection=(a,b)=>a[0]<=b[2]&&b[0]<=a[2]&&a[1]<=b[3]&&b[1]<=a[3];const overall=[Math.min(...targets.flatMap(t=>t.bounds.map(b=>b[0]))),Math.min(...targets.flatMap(t=>t.bounds.map(b=>b[1]))),Math.max(...targets.flatMap(t=>t.bounds.map(b=>b[2]))),Math.max(...targets.flatMap(t=>t.bounds.map(b=>b[3])))];
+ const families=[],allSeen=new Set(),failures=[];let encodedTotal=0,decodedTotal=0;
+ for(const record of catalogue.products){
+- if(record.key.startsWith('gb:CIV:'))continue;const pieces=[],partPins=[];let offset=0;
++ if(record.key.startsWith('gb:CAF:'))continue;const pieces=[],partPins=[];let offset=0;
+  for(const[ordinal,p]of record.parts.entries()){need(p.ordinal===ordinal&&p.offset===offset,'complete ordinal offset');const b=read(p.path),pin=pins.get(H+':'+p.path);need(b.length===p.bytes&&sha(b)===p.sha256,'encoded original custody');const d=gunzipSync(b,{maxOutputLength:p.uncompressed_bytes+1});need(d.length===p.uncompressed_bytes&&sha(d)===p.uncompressed_sha256,'decoded original custody');pieces.push(d);partPins.push({...pin,decoded_bytes:d.length,decoded_sha256:sha(d)});offset+=d.length;encodedTotal+=b.length;decodedTotal+=d.length;}
+  const b=Buffer.concat(pieces);need(b.length===record.original_bytes&&sha(b)===record.original_sha256,'whole original custody');const fc=JSON.parse(b);need(fc.type==='FeatureCollection'&&fc.features.length===record.feature_count,'whole feature roster');const expected=roster.filter(r=>r.source_id.startsWith(record.key+':'));need(expected.length===fc.features.length,'complete original family roster');const seen=new Set(),selected=[],unsupported=[],trace=createHash('sha256');let disjoint=0,ownerless=0;
+  for(const[ordinal,f]of fc.features.entries()){
+@@ -28,4 +28,4 @@
+  }
+  need(seen.size===expected.length&&expected.every(r=>seen.has(r.source_id))&&disjoint+selected.length+unsupported.length===seen.size,'complete family conservation');families.push({source_family:record.key,complete_original_bytes:record.original_bytes,complete_original_sha256:record.original_sha256,complete_features:seen.size,ownerless_features:ownerless,disjoint_features:disjoint,selected_features:selected,unsupported_features:unsupported,complete_ordered_trace_sha256:trace.digest('hex'),parts:partPins});console.log(JSON.stringify({family:record.key,features:seen.size,selected:selected.length,unsupported:unsupported.length}));
+ }
+-const foreign=roster.filter(r=>!r.source_id.startsWith('gb:CIV:'));need(families.length===365&&allSeen.size===foreign.length&&foreign.every(r=>allSeen.has(r.source_id)),'complete foreign original corpus');const result={kind:'complete-original-foreign-bounds-Cote_divoire-applicability',baseline:H,method_commit:C,original_subjects:stages.length,original_native_cells:json(P+'/original-claim-scope.json',C).original_cells,complete_catalogue_families:368,complete_foreign_families:365,complete_foreign_features:allSeen.size,whole_bounds_candidate_families:families.filter(f=>f.selected_features.length).map(f=>f.source_family),unsupported_families:families.filter(f=>f.unsupported_features.length).map(f=>f.source_family),selected_foreign_features:families.reduce((s,f)=>s+f.selected_features.length,0),unsupported_foreign_features:failures.length,families,targets,executed_stock_method_closure:[...closure.values()],inputs:[...pins.values()],measured_encoded_source_bytes:encodedTotal,measured_decoded_source_bytes:decodedTotal,seconds:(performance.now()-start)/1000,max_rss_bytes_linux:process.resourceUsage().maxRSS*1024,limits:['Complete original feature-part bounds use the exact accepted stock coordinateBounds method; originals are never clipped, repaired or assigned guessed owners.','Disjoint complete bounds justify omission only from this frozen source-relative negative operand scope. Touching/overlapping bounds are retained conservatively.','Unsupported original geometry/domain outcomes remain explicit and unresolved; they do not count as disjoint or a source-fitness approval.','This is a conservative source-bounds applicability screen, not point membership, current sovereignty, physical support or native/selected authority.']};need(!fs.lstatSync(O,{throwIfNoEntry:false}),'fresh output');fs.mkdirSync(O);const body=Buffer.from(JSON.stringify(result)+'\n');fs.writeFileSync(path.join(O,'complete-foreign-bounds.json'),body,{flag:'wx'});fs.writeFileSync(path.join(O,'preparation.json'),JSON.stringify({complete:true,bytes:body.length,sha256:sha(body),method_commit:C,seconds:result.seconds})+'\n',{flag:'wx'});console.log(JSON.stringify({complete:true,foreign_features:allSeen.size,selected:result.selected_foreign_features,unsupported:failures.length,families:result.whole_bounds_candidate_families,output_bytes:body.length,seconds:result.seconds,max_rss_bytes_linux:result.max_rss_bytes_linux}));
++const foreign=roster.filter(r=>!r.source_id.startsWith('gb:CAF:'));need(families.length===365&&allSeen.size===foreign.length&&foreign.every(r=>allSeen.has(r.source_id)),'complete foreign original corpus');const result={kind:'complete-original-foreign-bounds-Central_African_Republic-applicability',baseline:H,method_commit:C,original_subjects:stages.length,original_native_cells:json(P+'/original-claim-scope.json',C).original_cells,complete_catalogue_families:368,complete_foreign_families:365,complete_foreign_features:allSeen.size,whole_bounds_candidate_families:families.filter(f=>f.selected_features.length).map(f=>f.source_family),unsupported_families:families.filter(f=>f.unsupported_features.length).map(f=>f.source_family),selected_foreign_features:families.reduce((s,f)=>s+f.selected_features.length,0),unsupported_foreign_features:failures.length,families,targets,executed_stock_method_closure:[...closure.values()],inputs:[...pins.values()],measured_encoded_source_bytes:encodedTotal,measured_decoded_source_bytes:decodedTotal,seconds:(performance.now()-start)/1000,max_rss_bytes_linux:process.resourceUsage().maxRSS*1024,limits:['Complete original feature-part bounds use the exact accepted stock coordinateBounds method; originals are never clipped, repaired or assigned guessed owners.','Disjoint complete bounds justify omission only from this frozen source-relative negative operand scope. Touching/overlapping bounds are retained conservatively.','Unsupported original geometry/domain outcomes remain explicit and unresolved; they do not count as disjoint or a source-fitness approval.','This is a conservative source-bounds applicability screen, not point membership, current sovereignty, physical support or native/selected authority.']};need(!fs.lstatSync(O,{throwIfNoEntry:false}),'fresh output');fs.mkdirSync(O);const body=Buffer.from(JSON.stringify(result)+'\n');fs.writeFileSync(path.join(O,'complete-foreign-bounds.json'),body,{flag:'wx'});fs.writeFileSync(path.join(O,'preparation.json'),JSON.stringify({complete:true,bytes:body.length,sha256:sha(body),method_commit:C,seconds:result.seconds})+'\n',{flag:'wx'});console.log(JSON.stringify({complete:true,foreign_features:allSeen.size,selected:result.selected_foreign_features,unsupported:failures.length,families:result.whole_bounds_candidate_families,output_bytes:body.length,seconds:result.seconds,max_rss_bytes_linux:result.max_rss_bytes_linux}));

@@ -1,0 +1,1326 @@
+{
+  "kind": "readonly-immutable-original-cohort-facts",
+  "accepted_base": "cddcde8786f038568137d915c8ee8436475f1688",
+  "original_queue_commit": "21984e9ec4ec7370bc807e2da23cea2228747698",
+  "actual_author_chat_id": "01a14d05-d4b1-7017-9f92-7fd78a0d402c",
+  "catalogue_families": 368,
+  "global_original_features": 73567,
+  "domestic_families": [
+    {
+      "key": "gb:CAF:ADM1",
+      "feature_count": 17,
+      "original_bytes": 115127,
+      "original_sha256": "f9180594ed02a19e423a94f226c489b128d755d306cdd5f00669019b6eb980e8",
+      "parts": [
+        {
+          "bytes": 35452,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CAF-ADM1-000.bin.gz",
+          "sha256": "3d66ea0099b0b03ca75ea3e9dc1c098c7501f3360506acdc3fe5b75e790968ea",
+          "uncompressed_bytes": 115127,
+          "uncompressed_sha256": "f9180594ed02a19e423a94f226c489b128d755d306cdd5f00669019b6eb980e8"
+        }
+      ]
+    },
+    {
+      "key": "gb:CAF:ADM2",
+      "feature_count": 72,
+      "original_bytes": 597126,
+      "original_sha256": "891357fe42dcc29a7c2ef847bef6422eea857602c515e0141ab015a78b1899bc",
+      "parts": [
+        {
+          "bytes": 165838,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CAF-ADM2-000.bin.gz",
+          "sha256": "beed24d4682d1a3083093c53d435399860d23f615a449caf35d8ce5eec723066",
+          "uncompressed_bytes": 597126,
+          "uncompressed_sha256": "891357fe42dcc29a7c2ef847bef6422eea857602c515e0141ab015a78b1899bc"
+        }
+      ]
+    },
+    {
+      "key": "gb:CAF:ADM3",
+      "feature_count": 175,
+      "original_bytes": 807513,
+      "original_sha256": "e368afac2f5c1ac7503a181e3e62541df88167cf9072a84c5453ffea999ee88a",
+      "parts": [
+        {
+          "bytes": 230764,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CAF-ADM3-000.bin.gz",
+          "sha256": "9888409cb3cc0f35d2e49e9e6877e2b1e548cece703c6b8553819ca80171b9b5",
+          "uncompressed_bytes": 807513,
+          "uncompressed_sha256": "e368afac2f5c1ac7503a181e3e62541df88167cf9072a84c5453ffea999ee88a"
+        }
+      ]
+    }
+  ],
+  "domestic_features": 264,
+  "complete_foreign_families": 365,
+  "complete_foreign_features": 73303,
+  "foreign_expectations_are_input_accounting_not_execution": true,
+  "original_cells": 2130,
+  "original_land_cells": 2130,
+  "original_water_cells": 0,
+  "original_intervals": 1319,
+  "positive_owners": 46,
+  "positive_atoms": [
+    "gb:CAF:ADM3:52401652B10274630546415",
+    "gb:CAF:ADM3:52401652B13150974576850",
+    "gb:CAF:ADM3:52401652B14361696899500",
+    "gb:CAF:ADM3:52401652B1604113558171",
+    "gb:CAF:ADM3:52401652B1736061354694",
+    "gb:CAF:ADM3:52401652B18967628609342",
+    "gb:CAF:ADM3:52401652B21565212342700",
+    "gb:CAF:ADM3:52401652B2286145520715",
+    "gb:CAF:ADM3:52401652B23917510341632",
+    "gb:CAF:ADM3:52401652B27659488729720",
+    "gb:CAF:ADM3:52401652B29784089160691",
+    "gb:CAF:ADM3:52401652B305023416532",
+    "gb:CAF:ADM3:52401652B30715690483256",
+    "gb:CAF:ADM3:52401652B33074004162122",
+    "gb:CAF:ADM3:52401652B39889213589793",
+    "gb:CAF:ADM3:52401652B49227657461354",
+    "gb:CAF:ADM3:52401652B53216405573620",
+    "gb:CAF:ADM3:52401652B55058977960820",
+    "gb:CAF:ADM3:52401652B56175823548729",
+    "gb:CAF:ADM3:52401652B5866645340360",
+    "gb:CAF:ADM3:52401652B60998928048694",
+    "gb:CAF:ADM3:52401652B61514878619891",
+    "gb:CAF:ADM3:52401652B61639172819254",
+    "gb:CAF:ADM3:52401652B62391094293120",
+    "gb:CAF:ADM3:52401652B64794494109005",
+    "gb:CAF:ADM3:52401652B65052605957591",
+    "gb:CAF:ADM3:52401652B65189611062659",
+    "gb:CAF:ADM3:52401652B67617163165287",
+    "gb:CAF:ADM3:52401652B68266089784761",
+    "gb:CAF:ADM3:52401652B70517020130267",
+    "gb:CAF:ADM3:52401652B74333479476310",
+    "gb:CAF:ADM3:52401652B79208883634836",
+    "gb:CAF:ADM3:52401652B8260276568756",
+    "gb:CAF:ADM3:52401652B84569563404367",
+    "gb:CAF:ADM3:52401652B86682569461435",
+    "gb:CAF:ADM3:52401652B87621344901133",
+    "gb:CAF:ADM3:52401652B89925549074146",
+    "gb:CAF:ADM3:52401652B91880463318488",
+    "gb:CAF:ADM3:52401652B92301081173176",
+    "gb:CAF:ADM3:52401652B95318023512447",
+    "gb:CAF:ADM3:52401652B95349745734913",
+    "gb:CAF:ADM3:52401652B966947158618",
+    "gb:CAF:ADM3:52401652B97101163369552",
+    "gb:CAF:ADM3:52401652B98074041041370",
+    "gb:CAF:ADM3:52401652B98607316941388",
+    "gb:CAF:ADM3:52401652B99363571212605"
+  ],
+  "original_recorded_parents": [
+    "framework:province:amada-gaza:d16e1f1903ec",
+    "framework:province:baboua:bca07ccb3682",
+    "framework:province:bambio:411061ff7c58",
+    "framework:province:bambouti:ab10be08e232",
+    "framework:province:bangassou:578b529a0124",
+    "framework:province:bangui:8bff8e376617",
+    "framework:province:bayanga:4f6fa3c04410",
+    "framework:province:bimbo:d5e5bb7f46a1",
+    "framework:province:birao:22cb07160dcf",
+    "framework:province:bouar:13501ff7fdc2",
+    "framework:province:damara:de04dd26523a",
+    "framework:province:djema:6cdc76bdf088",
+    "framework:province:djoukou:65bfaf46248c",
+    "framework:province:gamboula:88c8afbf6d9f",
+    "framework:province:kabo:1b866cd0c14b",
+    "framework:province:kouango:9f9074db431b",
+    "framework:province:koui:7dc6a9b362b2",
+    "framework:province:markounda:9afafdadda02",
+    "framework:province:mbaiki:fa0fe4a16a62",
+    "framework:province:mongoumba:8d17de9c98ff",
+    "framework:province:ndele:228bb4aa2c6a",
+    "framework:province:ngaoundaye:54c3b9f985c5",
+    "framework:province:nola:f1edcac066c6",
+    "framework:province:obo:a9ff5fa831a0",
+    "framework:province:ouango:9d1964a0d013",
+    "framework:province:paoua:0e3d8a2c134e",
+    "framework:province:rafai:c19fd1cd302f",
+    "framework:province:satema:049fa46526bb",
+    "framework:province:yalinga:0c8dbd07ec65",
+    "framework:province:zangba:9db28203562c",
+    "framework:province:zemio:004c36f51168"
+  ],
+  "whole_primary_context": 175,
+  "canonical_paths": [
+    "data/geography/part-2.json"
+  ],
+  "primary_family_index": 52,
+  "initial_contact_features": 102,
+  "initial_contact_families": [
+    "gb:CAF:ADM1",
+    "gb:CAF:ADM2",
+    "gb:CAF:ADM3",
+    "gb:CMR:ADM1",
+    "gb:CMR:ADM2",
+    "gb:COD:ADM1",
+    "gb:COG:ADM1",
+    "gb:TCD:ADM1"
+  ],
+  "raw_original_package": {
+    "package_id": "gb-CAF-ADM3--repair-evaluation",
+    "primary_source": "gb:CAF:ADM3",
+    "source_family_index": 52,
+    "category": "repair-evaluation",
+    "native_cells": 2130,
+    "land_cells": 2130,
+    "inland_water_cells": 0,
+    "source_relative_cells": 0,
+    "interval_segments": 1319,
+    "owners": [
+      10494,
+      10501,
+      10504,
+      10509,
+      10514,
+      10515,
+      10519,
+      10521,
+      10526,
+      10532,
+      10536,
+      10537,
+      10538,
+      10542,
+      10552,
+      10559,
+      10567,
+      10571,
+      10573,
+      10580,
+      10584,
+      10585,
+      10586,
+      10588,
+      10593,
+      10594,
+      10595,
+      10600,
+      10602,
+      10605,
+      10610,
+      10622,
+      10633,
+      10635,
+      10639,
+      10642,
+      10645,
+      10648,
+      10649,
+      10656,
+      10657,
+      10658,
+      10659,
+      10663,
+      10666,
+      10668
+    ],
+    "source_features": [
+      9188,
+      9189,
+      9190,
+      9191,
+      9192,
+      9193,
+      9194,
+      9195,
+      9198,
+      9199,
+      9200,
+      9201,
+      9202,
+      9203,
+      9204,
+      9205,
+      9206,
+      9207,
+      9208,
+      9209,
+      9210,
+      9211,
+      9215,
+      9222,
+      9232,
+      9238,
+      9240,
+      9241,
+      9242,
+      9244,
+      9245,
+      9246,
+      9247,
+      9249,
+      9250,
+      9251,
+      9252,
+      9254,
+      9275,
+      9282,
+      9284,
+      9288,
+      9304,
+      9305,
+      9308,
+      9310,
+      9311,
+      9312,
+      9321,
+      9322,
+      9323,
+      9324,
+      9326,
+      9327,
+      9330,
+      9332,
+      9335,
+      9336,
+      9337,
+      9339,
+      9340,
+      9347,
+      9366,
+      9367,
+      9370,
+      9372,
+      9373,
+      9377,
+      9384,
+      9385,
+      9386,
+      9387,
+      9388,
+      9395,
+      9411,
+      9424,
+      9427,
+      9428,
+      9432,
+      9434,
+      9438,
+      9443,
+      9448,
+      9450,
+      9451,
+      18301,
+      18302,
+      18310,
+      18322,
+      18324,
+      18325,
+      18340,
+      18727,
+      18730,
+      18732,
+      18740,
+      18946,
+      18951,
+      57091,
+      57092,
+      57102,
+      57106
+    ],
+    "source_families": [
+      50,
+      51,
+      52,
+      66,
+      67,
+      69,
+      71,
+      317
+    ],
+    "native_blocks": [
+      30,
+      31
+    ],
+    "provinces": [
+      "framework:province:amada-gaza:d16e1f1903ec",
+      "framework:province:baboua:bca07ccb3682",
+      "framework:province:bambio:411061ff7c58",
+      "framework:province:bambouti:ab10be08e232",
+      "framework:province:bangassou:578b529a0124",
+      "framework:province:bangui:8bff8e376617",
+      "framework:province:bayanga:4f6fa3c04410",
+      "framework:province:bimbo:d5e5bb7f46a1",
+      "framework:province:birao:22cb07160dcf",
+      "framework:province:bouar:13501ff7fdc2",
+      "framework:province:damara:de04dd26523a",
+      "framework:province:djema:6cdc76bdf088",
+      "framework:province:djoukou:65bfaf46248c",
+      "framework:province:gamboula:88c8afbf6d9f",
+      "framework:province:kabo:1b866cd0c14b",
+      "framework:province:kouango:9f9074db431b",
+      "framework:province:koui:7dc6a9b362b2",
+      "framework:province:markounda:9afafdadda02",
+      "framework:province:mbaiki:fa0fe4a16a62",
+      "framework:province:mongoumba:8d17de9c98ff",
+      "framework:province:ndele:228bb4aa2c6a",
+      "framework:province:ngaoundaye:54c3b9f985c5",
+      "framework:province:nola:f1edcac066c6",
+      "framework:province:obo:a9ff5fa831a0",
+      "framework:province:ouango:9d1964a0d013",
+      "framework:province:paoua:0e3d8a2c134e",
+      "framework:province:rafai:c19fd1cd302f",
+      "framework:province:satema:049fa46526bb",
+      "framework:province:yalinga:0c8dbd07ec65",
+      "framework:province:zangba:9db28203562c",
+      "framework:province:zemio:004c36f51168"
+    ],
+    "location_count": 46,
+    "source_feature_count": 102,
+    "locality_count": 31,
+    "cost": {
+      "primary_source_decoded_bytes": 807513,
+      "all_required_source_decoded_bytes": 3302540,
+      "primary_full_source_raster_measured_seconds": 0.418,
+      "source_interval_segments": 1319,
+      "maximum_native_rows_per_execution_frame": 4096,
+      "observed_global_census_peak_rss_bytes": 884973568
+    },
+    "evidence": {
+      "selection": "ownership-binding.json",
+      "lineage": "lineage.json",
+      "territorial_source_catalogue": "retained-source-catalogue.json",
+      "territorial_catalogue_sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "source_features": "source-feature-roster.json",
+      "territorial_native_blocks": "source-candidates-block-NNN.json.gz",
+      "physical": "physical-unassigned-summary.json",
+      "source_domain_transform": []
+    },
+    "work": {
+      "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+      "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+      "priority": 1
+    },
+    "execution": {
+      "command": "node source-batch-intervals.mjs gb-CAF-ADM3--repair-evaluation OUTPUT_DIRECTORY",
+      "output_columns": [
+        "y",
+        "start",
+        "end",
+        "candidate_owner_indices",
+        "source_feature_indices",
+        "physical_class"
+      ]
+    }
+  },
+  "original_owners": [
+    {
+      "id": "gb:CAF:ADM3:52401652B10274630546415",
+      "index": 10494,
+      "bounds": [
+        149780.09652888885,
+        126948.81265179452,
+        150171.30646000002,
+        127312.62636931207
+      ],
+      "province_id": "framework:province:obo:a9ff5fa831a0",
+      "province_index": 3446,
+      "name": "Mboki",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B10274630546415"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B13150974576850",
+      "index": 10501,
+      "bounds": [
+        148750.58521166665,
+        125032.45183763767,
+        150429.53997,
+        126983.49933131809
+      ],
+      "province_id": "framework:province:djema:6cdc76bdf088",
+      "province_index": 1547,
+      "name": "Djema",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B13150974576850"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B14361696899500",
+      "index": 10504,
+      "bounds": [
+        144278.90713833334,
+        127676.23364482699,
+        144797.04910777777,
+        128263.08104351143
+      ],
+      "province_id": "framework:province:bimbo:d5e5bb7f46a1",
+      "province_index": 921,
+      "name": "Bimbo",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B14361696899500"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B1604113558171",
+      "index": 10509,
+      "bounds": [
+        146644.59116888887,
+        127771.06560117703,
+        147214.51092333332,
+        128005.88123620777
+      ],
+      "province_id": "framework:province:satema:049fa46526bb",
+      "province_index": 4143,
+      "name": "Kotto-Oubangui",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B1604113558171"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B1736061354694",
+      "index": 10514,
+      "bounds": [
+        145979.1799964939,
+        127428.25665538377,
+        146408.7874166667,
+        127874.13399768605
+      ],
+      "province_id": "framework:province:zangba:9db28203562c",
+      "province_index": 5084,
+      "name": "Yabongo",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B1736061354694"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B18967628609342",
+      "index": 10515,
+      "bounds": [
+        148030.50259833332,
+        126154.07050561781,
+        149427.11913944443,
+        127630.49180109106
+      ],
+      "province_id": "framework:province:rafai:c19fd1cd302f",
+      "province_index": 3881,
+      "name": "Rafai",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B18967628609342"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B21565212342700",
+      "index": 10519,
+      "bounds": [
+        142232.26456500002,
+        125585.34344557885,
+        142544.8246961111,
+        125951.32053567785
+      ],
+      "province_id": "framework:province:ngaoundaye:54c3b9f985c5",
+      "province_index": 3251,
+      "name": "Kodi",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B21565212342700"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B2286145520715",
+      "index": 10521,
+      "bounds": [
+        144819.4060416667,
+        123929.90065758544,
+        147391.90991666666,
+        125094.40877257426
+      ],
+      "province_id": "framework:province:ndele:228bb4aa2c6a",
+      "province_index": 3221,
+      "name": "Dar El Kouti",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B2286145520715"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B23917510341632",
+      "index": 10526,
+      "bounds": [
+        146245.22496222222,
+        123488.25919867733,
+        148340.69852660797,
+        124514.85358934841
+      ],
+      "province_id": "framework:province:birao:22cb07160dcf",
+      "province_index": 933,
+      "name": "Ouandja",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B23917510341632"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B27659488729720",
+      "index": 10532,
+      "bounds": [
+        142540.67373444446,
+        128165.9232813761,
+        143179.41206388889,
+        128670.38496440757
+      ],
+      "province_id": "framework:province:nola:f1edcac066c6",
+      "province_index": 3298,
+      "name": "Nola",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B27659488729720"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B29784089160691",
+      "index": 10536,
+      "bounds": [
+        142561.13724722224,
+        125520.98864573525,
+        142904.6475311111,
+        125881.68018254783
+      ],
+      "province_id": "framework:province:ngaoundaye:54c3b9f985c5",
+      "province_index": 3251,
+      "name": "Yeme",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B29784089160691"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B305023416532",
+      "index": 10537,
+      "bounds": [
+        147291.84989333333,
+        124323.46019610218,
+        148986.75308333331,
+        126645.36314120499
+      ],
+      "province_id": "framework:province:yalinga:0c8dbd07ec65",
+      "province_index": 5005,
+      "name": "Yalinga",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B305023416532"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B30715690483256",
+      "index": 10538,
+      "bounds": [
+        141772.30888277778,
+        127424.96698979888,
+        142417.74701,
+        127724.38238735306
+      ],
+      "province_id": "framework:province:amada-gaza:d16e1f1903ec",
+      "province_index": 557,
+      "name": "Haute-Boumbe",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B30715690483256"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B33074004162122",
+      "index": 10542,
+      "bounds": [
+        141662.78175388888,
+        126568.60414138848,
+        142102.3467472222,
+        127443.24262327988
+      ],
+      "province_id": "framework:province:baboua:bca07ccb3682",
+      "province_index": 730,
+      "name": "Baboua",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B33074004162122"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B39889213589793",
+      "index": 10552,
+      "bounds": [
+        143319.59805,
+        125250.71478481613,
+        143996.20480166667,
+        125833.82620128935
+      ],
+      "province_id": "framework:province:markounda:9afafdadda02",
+      "province_index": 2909,
+      "name": "Nana Markounda",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B39889213589793"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B49227657461354",
+      "index": 10559,
+      "bounds": [
+        144379.54975277776,
+        126900.14404423253,
+        145023.02163499998,
+        127802.03934362342
+      ],
+      "province_id": "framework:province:damara:de04dd26523a",
+      "province_index": 1438,
+      "name": "Damara",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B49227657461354"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B53216405573620",
+      "index": 10567,
+      "bounds": [
+        142553.19944333332,
+        128539.80021717667,
+        142947.24950611108,
+        129115.8081539748
+      ],
+      "province_id": "framework:province:nola:f1edcac066c6",
+      "province_index": 3298,
+      "name": "Salo",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B53216405573620"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B55058977960820",
+      "index": 10571,
+      "bounds": [
+        142388.3261588889,
+        125591.51536430484,
+        142594.34494055554,
+        125771.13589199321
+      ],
+      "province_id": "framework:province:ngaoundaye:54c3b9f985c5",
+      "province_index": 3251,
+      "name": "Lim",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B55058977960820"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B56175823548729",
+      "index": 10573,
+      "bounds": [
+        141804.56986555556,
+        127650.73270898705,
+        142329.12033722224,
+        128170.74138943576
+      ],
+      "province_id": "framework:province:gamboula:88c8afbf6d9f",
+      "province_index": 1779,
+      "name": "Basse-Boumne",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B56175823548729"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B5866645340360",
+      "index": 10580,
+      "bounds": [
+        146198.836145,
+        127570.20268729108,
+        146447.74819722222,
+        127861.27891996392
+      ],
+      "province_id": "framework:province:zangba:9db28203562c",
+      "province_index": 5084,
+      "name": "Ouambe",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B5866645340360"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B60998928048694",
+      "index": 10584,
+      "bounds": [
+        148914.37348908518,
+        126789.68541197898,
+        150005.19516944446,
+        127506.25168877501
+      ],
+      "province_id": "framework:province:zemio:004c36f51168",
+      "province_index": 5095,
+      "name": "Zemio",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B60998928048694"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B61514878619891",
+      "index": 10585,
+      "bounds": [
+        144594.88999222222,
+        127878.8084959721,
+        144625.7673211111,
+        127907.73106389813
+      ],
+      "province_id": "framework:province:bangui:8bff8e376617",
+      "province_index": 793,
+      "name": "Arrondissement 1",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B61514878619891"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B61639172819254",
+      "index": 10586,
+      "bounds": [
+        147297.82145222224,
+        127943.8821342116,
+        147515.41923222222,
+        128085.83474918907
+      ],
+      "province_id": "framework:province:ouango:9d1964a0d013",
+      "province_index": 3534,
+      "name": "Ngbandinga",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B61639172819254"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B62391094293120",
+      "index": 10588,
+      "bounds": [
+        144624.529315,
+        127881.07269164681,
+        144659.77607722222,
+        127906.56250490685
+      ],
+      "province_id": "framework:province:bangui:8bff8e376617",
+      "province_index": 793,
+      "name": "Arrondissement 7",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B62391094293120"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B64794494109005",
+      "index": 10593,
+      "bounds": [
+        147733.2354838889,
+        127357.41414604463,
+        148313.20493500002,
+        127737.60606844517
+      ],
+      "province_id": "framework:province:bangassou:578b529a0124",
+      "province_index": 790,
+      "name": "Zangandou",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B64794494109005"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B65052605957591",
+      "index": 10594,
+      "bounds": [
+        142918.11995055556,
+        127978.05916457775,
+        143734.91268833334,
+        128534.54713434515
+      ],
+      "province_id": "framework:province:bambio:411061ff7c58",
+      "province_index": 783,
+      "name": "Mbaere",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B65052605957591"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B65189611062659",
+      "index": 10595,
+      "bounds": [
+        147395.1141677778,
+        127606.45010238847,
+        147638.05489236262,
+        128003.47150467186
+      ],
+      "province_id": "framework:province:ouango:9d1964a0d013",
+      "province_index": 3534,
+      "name": "Ouango",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B65189611062659"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B67617163165287",
+      "index": 10600,
+      "bounds": [
+        150495.59123722222,
+        126713.17399928714,
+        151077.96387666668,
+        127424.61226136338
+      ],
+      "province_id": "framework:province:bambouti:ab10be08e232",
+      "province_index": 784,
+      "name": "Lili",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B67617163165287"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B68266089784761",
+      "index": 10602,
+      "bounds": [
+        142108.31830611112,
+        125738.90521000513,
+        142309.16659166667,
+        126006.34762567446
+      ],
+      "province_id": "framework:province:ngaoundaye:54c3b9f985c5",
+      "province_index": 3251,
+      "name": "Mbili",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B68266089784761"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B70517020130267",
+      "index": 10605,
+      "bounds": [
+        150114.72229833336,
+        126681.17399057499,
+        150602.35105833333,
+        127405.08230532981
+      ],
+      "province_id": "framework:province:obo:a9ff5fa831a0",
+      "province_index": 3446,
+      "name": "Obo",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B70517020130267"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B74333479476310",
+      "index": 10610,
+      "bounds": [
+        144128.67145555554,
+        124814.834474575,
+        144975.17634,
+        125606.13108021668
+      ],
+      "province_id": "framework:province:kabo:1b866cd0c14b",
+      "province_index": 2290,
+      "name": "Sido",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B74333479476310"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B79208883634836",
+      "index": 10622,
+      "bounds": [
+        143717.07083555558,
+        128246.51203106265,
+        144142.5808183333,
+        128508.50000106463
+      ],
+      "province_id": "framework:province:mbaiki:fa0fe4a16a62",
+      "province_index": 2969,
+      "name": "Moboma",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B79208883634836"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B8260276568756",
+      "index": 10633,
+      "bounds": [
+        141584.27760166666,
+        126499.30289608764,
+        141838.72426944444,
+        126774.44285837084
+      ],
+      "province_id": "framework:province:baboua:bca07ccb3682",
+      "province_index": 730,
+      "name": "Kounde",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B8260276568756"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B84569563404367",
+      "index": 10635,
+      "bounds": [
+        146898.52806944444,
+        123017.06534435325,
+        148319.10367,
+        124013.53748632432
+      ],
+      "province_id": "framework:province:birao:22cb07160dcf",
+      "province_index": 933,
+      "name": "Ridina",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B84569563404367"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B86682569461435",
+      "index": 10639,
+      "bounds": [
+        144381.66164555555,
+        128202.64212980503,
+        144653.80451833332,
+        128553.66232601089
+      ],
+      "province_id": "framework:province:mongoumba:8d17de9c98ff",
+      "province_index": 3077,
+      "name": "Mongoumba",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B86682569461435"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B87621344901133",
+      "index": 10642,
+      "bounds": [
+        141944.68302777776,
+        126150.69719052868,
+        142356.93906277776,
+        126614.2365479698
+      ],
+      "province_id": "framework:province:bouar:13501ff7fdc2",
+      "province_index": 1003,
+      "name": "Niem-Yelewa",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B87621344901133"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B89925549074146",
+      "index": 10645,
+      "bounds": [
+        147511.12262277777,
+        127449.96788090141,
+        147718.81635388886,
+        127760.57810038628
+      ],
+      "province_id": "framework:province:bangassou:578b529a0124",
+      "province_index": 790,
+      "name": "Sayo Niakari",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B89925549074146"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B91880463318488",
+      "index": 10648,
+      "bounds": [
+        145543.5410373943,
+        127109.3430708269,
+        146056.39261833334,
+        127788.89033471803
+      ],
+      "province_id": "framework:province:kouango:9f9074db431b",
+      "province_index": 2516,
+      "name": "Kouango",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B91880463318488"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B92301081173176",
+      "index": 10649,
+      "bounds": [
+        145109.536415,
+        127035.45089675198,
+        145660.95890166666,
+        127425.47871704563
+      ],
+      "province_id": "framework:province:djoukou:65bfaf46248c",
+      "province_index": 1549,
+      "name": "Galabadja",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B92301081173176"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B95318023512447",
+      "index": 10656,
+      "bounds": [
+        142837.35825777779,
+        125443.02530316252,
+        143161.57021111113,
+        125771.94345393988
+      ],
+      "province_id": "framework:province:paoua:0e3d8a2c134e",
+      "province_index": 3576,
+      "name": "Bah-Bessar",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B95318023512447"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B95349745734913",
+      "index": 10657,
+      "bounds": [
+        144812.34212444446,
+        126919.75853763086,
+        145216.5147077778,
+        127480.6689506827
+      ],
+      "province_id": "framework:province:djoukou:65bfaf46248c",
+      "province_index": 1549,
+      "name": "Galafondo",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B95349745734913"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B966947158618",
+      "index": 10658,
+      "bounds": [
+        141823.94102,
+        126247.6306304558,
+        142103.51192944444,
+        126638.18593387051
+      ],
+      "province_id": "framework:province:baboua:bca07ccb3682",
+      "province_index": 730,
+      "name": "Goudrot",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B966947158618"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B97101163369552",
+      "index": 10659,
+      "bounds": [
+        143035.2207638889,
+        125327.47709687597,
+        143325.56960888888,
+        125620.52737743198
+      ],
+      "province_id": "framework:province:paoua:0e3d8a2c134e",
+      "province_index": 3576,
+      "name": "Mia-Pende",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B97101163369552"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B98074041041370",
+      "index": 10663,
+      "bounds": [
+        144589.42820055556,
+        127892.61263966929,
+        144607.92546833333,
+        127925.18611845808
+      ],
+      "province_id": "framework:province:bangui:8bff8e376617",
+      "province_index": 793,
+      "name": "Arrondissement 2",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B98074041041370"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B98607316941388",
+      "index": 10666,
+      "bounds": [
+        141967.33125722222,
+        125938.4062287783,
+        142441.77889333334,
+        126488.8993010182
+      ],
+      "province_id": "framework:province:koui:7dc6a9b362b2",
+      "province_index": 2518,
+      "name": "Koui",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B98607316941388"
+      ]
+    },
+    {
+      "id": "gb:CAF:ADM3:52401652B99363571212605",
+      "index": 10668,
+      "bounds": [
+        142783.90552333332,
+        128545.12621838957,
+        143169.21671944443,
+        129463.42712341915
+      ],
+      "province_id": "framework:province:bayanga:4f6fa3c04410",
+      "province_index": 849,
+      "name": "Yobe-Sangha",
+      "reference_owner": "Central African Republic",
+      "source_id": "gb:CAF:ADM3",
+      "source_atoms": [
+        "gb:CAF:ADM3:52401652B99363571212605"
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "commit": "cddcde8786f038568137d915c8ee8436475f1688",
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+    },
+    {
+      "commit": "21984e9ec4ec7370bc807e2da23cea2228747698",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "bytes": 1844315,
+      "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa"
+    },
+    {
+      "commit": "cddcde8786f038568137d915c8ee8436475f1688",
+      "path": "data/geography/part-2.json",
+      "bytes": 6259307,
+      "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf"
+    },
+    {
+      "commit": "ff8a00269dafc6bbdf356e5e131d398860452e32",
+      "path": "data/geography/part-2.json",
+      "bytes": 6259307,
+      "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf"
+    },
+    {
+      "commit": "cddcde8786f038568137d915c8ee8436475f1688",
+      "path": "data/hierarchy.json",
+      "bytes": 10164089,
+      "sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144"
+    },
+    {
+      "commit": "ff8a00269dafc6bbdf356e5e131d398860452e32",
+      "path": "data/hierarchy.json",
+      "bytes": 10164089,
+      "sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144"
+    },
+    {
+      "commit": "cddcde8786f038568137d915c8ee8436475f1688",
+      "path": "data/administrative-sources.json",
+      "bytes": 661416,
+      "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+    },
+    {
+      "commit": "ff8a00269dafc6bbdf356e5e131d398860452e32",
+      "path": "data/administrative-sources.json",
+      "bytes": 661416,
+      "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+    },
+    {
+      "commit": "cddcde8786f038568137d915c8ee8436475f1688",
+      "path": "data/location-policy.json",
+      "bytes": 69433,
+      "sha256": "efab4528fd4b7b180815ef82de93480f490ef8fa48ad9ef32d1f9d76a64b7fb9"
+    },
+    {
+      "commit": "ff8a00269dafc6bbdf356e5e131d398860452e32",
+      "path": "data/location-policy.json",
+      "bytes": 69433,
+      "sha256": "efab4528fd4b7b180815ef82de93480f490ef8fa48ad9ef32d1f9d76a64b7fb9"
+    },
+    {
+      "commit": "cddcde8786f038568137d915c8ee8436475f1688",
+      "path": "data/ownership-selection.json",
+      "bytes": 1847,
+      "sha256": "a5a745dff4fdf5f4086545b213124f2a6b61177ec6f51fbd37ee94429a76b403"
+    },
+    {
+      "commit": "ff8a00269dafc6bbdf356e5e131d398860452e32",
+      "path": "data/ownership-selection.json",
+      "bytes": 1847,
+      "sha256": "a5a745dff4fdf5f4086545b213124f2a6b61177ec6f51fbd37ee94429a76b403"
+    }
+  ],
+  "limits": [
+    "No coordinate traversal, geometry bounds, global screen, scientific allocation, claim, fetch, import or public action ran.",
+    "365/73303 is catalogue-minus-all-three-CAF-families input accounting; complete applicable foreign set is unknown until first census.",
+    "All original rows/positive atoms and whole175 context remain unchanged."
+  ]
+}
