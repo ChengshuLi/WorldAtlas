@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "selector": {
+    "path": "data/ownership-selection.json",
+    "commit": "75861b9784f75b7894bfc51fa0419f40f966157d",
+    "mode": "100644",
+    "git_blob_oid": "c92ec39f7d8c3896cdf87b558f021d230a3cb5df",
+    "bytes": 1849,
+    "sha256": "a4b26ec501d4ff52217c59ede2b26d0bc15e128bb843e06e04e295c038447e7e"
+  },
+  "effective_release_id": "geography:civ-caf-selected-delivery-20261018",
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "a5fd3230c50b7bcdb8fe0acf7b0046335425e1b1",
+        "path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/native-authority-supported-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "3dfcaa04dec04d9feffb2fe03d6ed9c9bb6f1e39",
+        "bytes": 763,
+        "sha256": "25597d12b71284f05330597f045da1c6e44aedfef8430a72ea0274e5784c33ba"
+      },
+      "source_authority": {
+        "commit": "a5fd3230c50b7bcdb8fe0acf7b0046335425e1b1",
+        "path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/native-authority-supported-001/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "6d9f6668a5c0ad13f3b240a92ebc624bd1c9bc60",
+        "bytes": 766,
+        "sha256": "9535daa76599e516740a6474f7cb4adc7418014b2e162bc479adfd41d7ae07a6"
+      },
+      "ledger": {
+        "commit": "a5fd3230c50b7bcdb8fe0acf7b0046335425e1b1",
+        "path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/native-authority-supported-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "1a240cdc6af3e37657c82f60e510b30b27cef94f",
+        "bytes": 157892,
+        "sha256": "92af390eec3b0b5c37a98e672c1fcdfd2bf2055165b1863800d3dd232b0e1ff3"
+      },
+      "native_patch": {
+        "commit": "61d5073a549f9d1e762e6af9320365b92e117ef4",
+        "path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/supported-inputs-001/native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "3e6fa28e460b7a3dc239a54268255c010100d571",
+        "bytes": 42295,
+        "sha256": "4e9628f1f24d12803be127650672d1f57b7932ff629609e5b8dd9a65e9aad828"
+      }
+    },
+    {
+      "rule_preimage": {
+        "commit": "cb07c6f1a64654788f61cb9f0d483f72ac335f3b",
+        "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/native-authority-supported-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "7936752d7fabacabdcc3fed55828cf9ca1e17a73",
+        "bytes": 787,
+        "sha256": "11b03959c48b0dc1f20764764082d9d02ca5658ee6a3bbb7054880aa321b31a7"
+      },
+      "source_authority": {
+        "commit": "cb07c6f1a64654788f61cb9f0d483f72ac335f3b",
+        "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/native-authority-supported-001/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "4dffd7dd462407ad685855837160f4beb1c91eb7",
+        "bytes": 790,
+        "sha256": "e1e4c9fd6f0ac3aa6188f453e9e6aa67868bdedc5f17612e3d1b77195d1853c0"
+      },
+      "ledger": {
+        "commit": "cb07c6f1a64654788f61cb9f0d483f72ac335f3b",
+        "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/native-authority-supported-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "b22d15b6190cd7a9a740645dd20e61917c2f201a",
+        "bytes": 168450,
+        "sha256": "c0cac036966b7d073b031770decfca05262e4dc7afb2462c2a3aed4e1b2cf7b5"
+      },
+      "native_patch": {
+        "commit": "58cbec91fe8cfba270f9d9d53711d51a611d695f",
+        "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/supported-inputs-001/native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "6806bfd4187650d86bd3c00fbb8f33797af3abc5",
+        "bytes": 41239,
+        "sha256": "dc116ce151aa2fff07ffa586403e6b4182c67bf97ef596581a7137bf6e16b09c"
+      }
+    }
+  ]
+}
