@@ -33,6 +33,14 @@ const NATIVE_REGRESSION_INPUTS = [
     // The compact evidence-controls wrapper uses synthetic predicates instead.
     '8f6dc184d1a41b634cec4759bb57b3cc04dd980a',
     '6ed6406f9fad4c7c468b06a376346b216cb50db7'
+  ]},
+  {tests:['test/sierra-leone-physical-review-controls.test.mjs'],commits:[
+    '21984e9ec4ec7370bc807e2da23cea2228747698',
+    'a6da25fcc78819b8e88ec2040a934039aefc5f97',
+    '597f45d79fb84e222637c3390cb93c11377474af',
+    '31ced2c0b64292cbdfeb3bcf7beffeb0410b76be',
+    '5b32388df0501b013ac9a3ba97864932db493d59',
+    '58ae8c238f4b170fdf887a0f0c5b2da1dff97ca4'
   ]}
 ];
 export const NATIVE_REGRESSION_COMMITS = [...new Set(NATIVE_REGRESSION_INPUTS.flatMap(group=>group.commits))];
@@ -69,10 +77,15 @@ function nativeRegressionBodies(files,readFile) {
       }
     }
   }
+  if(has('sierra-leone-physical-review-controls')){
+    const root='coordination/engineering/sierra-leone-physical-review-20261018-worker4/';
+    pins.push(...Object.values(read(root+'input-pins.json').inputs));
+  }
   return pins;
 }
 export function prepareNativeRegressionInputs(profile,{files,exists=fs.existsSync,readFile=fs.readFileSync,run=spawnSync}={}) {
-  if(profile!=='full'||!exists('scripts/native-ownership/validate-context-input-stage.mjs'))return {applicable:false,fetched:[]};
+  const retainedSleControls=files?.includes('test/sierra-leone-physical-review-controls.test.mjs')===true;
+  if((profile!=='full'&&!retainedSleControls)||!exists('scripts/native-ownership/validate-context-input-stage.mjs'))return {applicable:false,fetched:[]};
   if(files!==undefined&&(!Array.isArray(files)||!files.length||files.some(name=>typeof name!=='string'||!/^test\/[A-Za-z0-9_.-]+\.test\.mjs$/.test(name)||!exists(name))))
     throw Error('Actual regression file roster required');
   // Unscoped callers retain every remaining regression dependency and their
@@ -177,8 +190,7 @@ const FOCUSED_TEST_FAMILIES = [
   'package-(?:build(?:-preflight)?|inputs|output-artifact|python-execution|python-runtime)',
   'selected-package-(?:assembly|bootstrap)',
   'source-(?:cohort|completed-staging|evidence-derivation|member-native-delivery|target-native-delivery)',
-  'handoff-scope', 'regional-research-gate', 'geography-worker-lane',
-  'evidence-quality', 'historical-evidence', 'premerge-evidence',
+  'handoff-scope', 'regional-research-gate', 'geography-worker-lane',  'evidence-quality', 'historical-evidence', 'premerge-evidence',
   'geographic-adjudication-api', 'geographic-report-artifact', 'trusted-workflow-checkouts',
   'merge-integration(?:-entrypoint)?', 'selected-data-profile', 'git-blob-transport',
   'immutable-git-blobs', 'local-workspace',
@@ -196,7 +208,8 @@ const FOCUSED_TEST_FAMILIES = [
   'source-target-native-diagnostic', 'supported-programs', 'trusted-geography-check',
   'unchanged-selected-geography', 'visible-gap-eligibility',
   'native-(?:authority-entry|diagnostic-entry|witness-authority|regression-inputs)',
-  'physical-source-retention', 'revised-source-native', 'dated-centre-authority', 'full-regression-shards'
+  'physical-source-retention', 'revised-source-native', 'dated-centre-authority', 'full-regression-shards',
+  'sierra-leone-physical-review-controls'
 ];
 const focusedTest = new RegExp('^test/(?:' + FOCUSED_TEST_FAMILIES.join('|') + ')\\.test\\.(?:mjs|py)$');
 // This shared fixture has only focused consumers; reuse their ordinary-file
