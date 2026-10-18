@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "package_id": "gb-ERI-ADM2--repair-evaluation",
+  "issue": 2435,
+  "original_cells": 15449,
+  "qualified_cells": 15444,
+  "held_cells": 5,
+  "original_owners": 23,
+  "qualified_components": 23,
+  "new_accepted_cells": 0,
+  "authorities": [
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/eritrea-original-repair-20261017/native-authority-supported-001/original-rule-preimage.json",
+        "commit": "e7390d06a80987dfcc629a779ca84fc1f78f1b42",
+        "mode": "100644",
+        "git_blob_oid": "418107f43a4c0da963accc38185c66ecbf96c2da",
+        "bytes": 738,
+        "sha256": "f7e99c730c873529697ebb0307a6b75dbc103ed309c8698e9fa12540be1f9ef0"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/eritrea-original-repair-20261017/native-authority-supported-001/authority-binding.json",
+        "commit": "e7390d06a80987dfcc629a779ca84fc1f78f1b42",
+        "mode": "100644",
+        "git_blob_oid": "8c9a210d17e60a78e889ba70d3806711897261c4",
+        "bytes": 741,
+        "sha256": "a9668cf0469b1adb247487ed160b6013a3990b81ce4b1753c13362b5cf7c1ca0"
+      },
+      "ledger": {
+        "path": "coordination/engineering/eritrea-original-repair-20261017/native-authority-supported-001/constructor-result.json",
+        "commit": "e7390d06a80987dfcc629a779ca84fc1f78f1b42",
+        "mode": "100644",
+        "git_blob_oid": "fe624df38554295bd76ce6c769a85e32e338c8d0",
+        "bytes": 233343,
+        "sha256": "a3de966784ae734abf28e860a8058094afaf87db3288bd74beddf562cd2aeed7"
+      },
+      "native_patch": {
+        "path": "coordination/engineering/eritrea-original-repair-20261017/supported-inputs-001/native-patch.json",
+        "commit": "fe7b0c60b23f8df14425115a6e8be0e1b789676f",
+        "mode": "100644",
+        "git_blob_oid": "69d17ee128c62e3efecaf31c9c5d8e0414095e75",
+        "bytes": 156013,
+        "sha256": "774121926efce9c53fee8bde5b306babd8dd01e846edd7fd939b8aff4476216f"
+      }
+    }
+  ],
+  "source_evidence": {
+    "path": "coordination/engineering/eritrea-original-repair-20261017/supported-inputs-001/source-evidence.json",
+    "commit": "fe7b0c60b23f8df14425115a6e8be0e1b789676f",
+    "mode": "100644",
+    "git_blob_oid": "57f22a80c7975c08543b9a75a13f77732854f502",
+    "bytes": 342121,
+    "sha256": "df6a1cffb3fa0f4f3b9ec3ade267940b94791a65ea2c13aef418badcadf6b59a"
+  },
+  "original_scope_partition": {
+    "path": "coordination/engineering/eritrea-original-repair-20261017/supported-inputs-001/original-scope-partition.json",
+    "commit": "fe7b0c60b23f8df14425115a6e8be0e1b789676f",
+    "mode": "100644",
+    "git_blob_oid": "a0e676503fad39309a42bd85d340100d000af6c5",
+    "bytes": 3542,
+    "sha256": "e152e13f22704a8777bb6157cd15ddfe2dc1e11accca7814f8cb48f57eb31bfa"
+  },
+  "held_original": {
+    "path": "coordination/engineering/eritrea-original-repair-20261017/supported-inputs-001/held-original.json",
+    "commit": "fe7b0c60b23f8df14425115a6e8be0e1b789676f",
+    "mode": "100644",
+    "git_blob_oid": "bf05ed666cb82317da7ebc045e182096f9d5bf27",
+    "bytes": 233,
+    "sha256": "33c972334ae311d707e8e8e55b57226bfb8e2278e95ecdfde0fb8a21342c812d"
+  },
+  "operating_observation": {
+    "path": "coordination/engineering/eritrea-original-repair-20261017/native-authority-supported-001/operating-observation.json",
+    "commit": "e7390d06a80987dfcc629a779ca84fc1f78f1b42",
+    "mode": "100644",
+    "git_blob_oid": "6eee3680e575f741b62de94e84387e4fa1f693dc",
+    "bytes": 1168,
+    "sha256": "4e1b1b5ae844d419cb5e46c75f63c843b6d3b26dd29a668b5259cb178e170fd6"
+  },
+  "limits": [
+    "Prepared scientific qualification only; distinct exact-head review and actual selected current-owner-zero/conservation/emitted checks remain pending.",
+    "Preserve the actual current accepted baseline at final composition; no projected selector or accepted repair credit is supplied.",
+    "Every original source category, complete physical witness and all five territorial holds remain unchanged."
+  ]
+}
