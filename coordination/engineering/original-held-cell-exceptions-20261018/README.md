@@ -2,11 +2,11 @@
 
 Status: **0 accepted, 3 pending independent review, 0 otherwise resolved**. The three rows remain in their original selected package with their existing owner, source ID, land class, diagnostic hold reason and zero repair credit. This packet adds traceable evidence and finite questions only. It does not qualify, clear, accept, reassign, select or deliver a cell.
 
-`original_land_class` records the source-backed physical class (`mapped_land_support`). `diagnostic_hold_reason` records the existing `territorial_exclusion_cells` veto. They are separate facts: a mapped-land observation does not resolve territorial/source applicability.
+`original_physical_class` records the original class (`land`). `source_evidence_coverage_class` records the source-evidence coverage label (`mapped_land_support`), and `diagnostic_hold_reason` records the existing `territorial_exclusion_cells` veto. These are separate facts: the source-coverage label does not replace the original physical class or resolve territorial/source applicability.
 
 ## Liberia — Buu-Yao, one original key
 
-Original key `(y=126219, x=124938, owner=26987)`, source `gb:LBR:ADM2:62588387B45934307689461`, package `gb-LBR-ADM2--repair-evaluation`. Its original physical class is `mapped_land_support`; its existing hold reason is `territorial_exclusion_cells`.
+Original key `(y=126219, x=124938, owner=26987)`, source `gb:LBR:ADM2:62588387B45934307689461`, package `gb-LBR-ADM2--repair-evaluation`. Its original physical class is `land`; its source-evidence coverage label is `mapped_land_support`; its existing hold reason is `territorial_exclusion_cells`.
 
 The normative center is `(-8.43747854412851, 6.663368865472858)`. The exact pinned Buu-Yao target geometry has no center hit. The matching whole-target physical report's `mapped_land_support` geometry contains this center and adjacent center `x=124939`; that run-level geometry is not source-target membership. The retained one-cell causal query also finds one interior hit in CIV ADM1 Montagnes. The complete eight-operand CIV negative set has one such interior hit and seven no-hit results. The exact original result and complete operands remain in `liberia-causal-result.json`; the pinned-source recheck is reproduced in `reproduced-native-centre-queries.json`.
 
@@ -22,7 +22,7 @@ The immutable output SHA-256 and extractor/manifest Git object IDs are recorded 
 
 ## Egypt — Nakhl, one original key
 
-Original key `(y=108405, x=156464, owner=18676)`, source `gb:EGY:ADM2:37247803B50825531526089`, package `gb-EGY-ADM2--repair-evaluation`. Its original physical class is `mapped_land_support`; its existing hold reason is `territorial_exclusion_cells`.
+Original key `(y=108405, x=156464, owner=18676)`, source `gb:EGY:ADM2:37247803B50825531526089`, package `gb-EGY-ADM2--repair-evaluation`. Its original physical class is `land`; its source-evidence coverage label is `mapped_land_support`; its existing hold reason is `territorial_exclusion_cells`.
 
 The exact center `(34.85326091102584, 29.711429740592195)` is interior to the complete retained Egypt Nakhl ADM2 target and Israel Southern District ADM1 reference geometry. It is outside the retained Israel Be'er Sheva ADM2 and Saudi Tabuk ADM1 polygons. Separately, the complete foreign-bounds report records overlapping/touching feature-part **bounding boxes** for three foreign operands. This is a conservative bounds screen, not a polygon-intersection result and not proof of a foreign cell hit.
 
@@ -34,7 +34,7 @@ The finite question is whether an authoritative, applicable boundary/source reco
 
 ## Egypt — Sharm el-Sheikh, one original key
 
-Original key `(y=109906, x=156358, owner=18637)`, source `gb:EGY:ADM2:37247803B39887765706268`, same Egypt package. Its original physical class is `mapped_land_support`; its existing hold reason is `territorial_exclusion_cells`.
+Original key `(y=109906, x=156358, owner=18637)`, source `gb:EGY:ADM2:37247803B39887765706268`, same Egypt package. Its original physical class is `land`; its source-evidence coverage label is `mapped_land_support`; its existing hold reason is `territorial_exclusion_cells`.
 
 The exact center `(34.70770427896829, 27.905508542964288)` is interior to the Egypt Sharm ADM2 target, Egypt South Sinai ADM1 and Saudi Tabuk ADM1 reference polygons. It is outside the retained Saudi Tabuk ADM2 polygon. Separately, the complete foreign-bounds report retains overlapping/touching feature-part bounding boxes for both Saudi levels. This is not polygon-intersection proof or a center hit.
 
@@ -56,6 +56,6 @@ The numeric queries establish only native contact against the pinned geometry. T
 
 ## Disposition and acceptance boundary
 
-The partition in `disposition-partition.json` separates each original physical class (`mapped_land_support`) from its diagnostic hold (`territorial_exclusion_cells`). The complete original scope joins are independently reconciled at [the exact owner-key review](https://github.com/ChengshuLi/WorldAtlas/pull/2495#issuecomment-6247233787): Liberia has 2,026 original cells = 2,025 previously qualified + 1 held; Egypt has 19,065 = 19,063 previously qualified + 2 held, with no wrong-owner overlap. This packet records zero new accepted repair credit, three pending cases and zero otherwise-resolved cases. Original held source, owner and hold assignments remain unchanged. The finite follow-up questions are: (1) Liberia source-vintage/physical-geometry reconciliation; (2) Nakhl applicable boundary/source evidence; and (3) Sharm complete authoritative island/land geometry with date, datum and accuracy. Until evidence and independent review resolve those questions, all three remain held.
+The partition in `disposition-partition.json` distinguishes original physical class (`land`), source-evidence coverage class (`mapped_land_support`) and diagnostic hold (`territorial_exclusion_cells`). The original class join is independently authenticated [here](https://github.com/ChengshuLi/WorldAtlas/pull/2495#issuecomment-6247244352), and the complete original scope is reconciled to exact current owner keys [here](https://github.com/ChengshuLi/WorldAtlas/pull/2495#issuecomment-6247233787): Liberia has 2,026 original cells = 2,025 previously qualified + 1 held; Egypt has 19,065 = 19,063 previously qualified + 2 held, with no wrong-owner overlap. This packet records zero new accepted repair credit, three pending cases and zero otherwise-resolved cases. Original held source, owner and hold assignments remain unchanged. The finite follow-up questions are: (1) Liberia source-vintage/physical-geometry reconciliation; (2) Nakhl applicable boundary/source evidence; and (3) Sharm complete authoritative island/land geometry with date, datum and accuracy. Until evidence and independent review resolve those questions, all three remain held.
 
 No exception is accepted by this packet. Any later selected delivery must still pass the original package's owner-zero, conservation, source/physical-witness and emitted-output checks. No owner reassignment or repair credit is claimed.
