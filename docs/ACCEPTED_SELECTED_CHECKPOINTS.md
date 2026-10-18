@@ -239,3 +239,21 @@ and joint-entry SHA256
 `bfe424cbe10dceb86469659f9bba9d7236133330981ca21e230a4e6e79d038d1`.
 Those immutable bodies already implement the same owner/index preservation,
 per-addition validation, effective-hash derivation and private publication path.
+
+### Validated checkpoint projections
+
+The private `checkpointAdditions` projection receives only `readSelection` results.
+`readSelection` authenticates the selected products and calls
+`normaliseRetainedRepairLedger`, which checks each native component's complete
+schema, base geometry/hash, owner, custody, interval ordering/count and bounds.
+Projection dispatch therefore uses the validated representation tag instead of
+repeating that entire validation for every iteration or ordinal lookup. All three
+callers (cold qualification, accepted-derived admission and candidate transition)
+follow this boundary; no caller-supplied index or projection callback enters it.
+
+Rows remain source-backed and are freshly read on access. No geometry or result
+cache survives store closure. The exported `deriveCoordinateDelta` still validates
+arbitrary input components, and current-owner, old-row preservation, certificate,
+source-authority and route checks remain separate requirements. Real admitted
+projection controls reject interval rereads during projection alone, retain exact
+values and closure refusal, and malformed committed ledgers fail normalization.
