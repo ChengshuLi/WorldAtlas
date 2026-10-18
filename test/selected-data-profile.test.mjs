@@ -1784,9 +1784,7 @@ test('selected-data role walk requires the exact new provider-adoption leaf and 
 
 
 test('selected-data role walk binds the optional completed constructor as a consumed immutable input',async()=>{
- const f=sourceTargetRoleFixture(),entry=f.registryBody.entries.at(-1);
- const completed=f.put(prefix+'reviewed-constructor-result.json',{kind:'fixture-result'});
- entry.completed_constructor=completed;refreshPins(f);
+ const {f,entry,completed}=completedSourceTargetRoleFixture();
  f.files=[...f.authored.entries].filter(([name,row])=>f.baseline.entries.get(name)?.sha!==row.sha)
   .map(([filename])=>({filename,status:f.baseline.entries.has(filename)?'modified':'added'}));
  const diagnostics={};assert.equal((await f.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
@@ -2050,3 +2048,43 @@ test('retirement and checkpoint advancement cannot remove unrelated, shared or s
     assert.equal(prepared.geography_software,true,kind);
   }
 });
+
+
+// Profile eligibility only: genuine constructor qualification remains the
+// trusted geography consumer's job. This captures the finalizer's five roles.
+function completedSourceTargetRoleFixture({completed=true}={}) {
+ const f=sourceTargetRoleFixture({mutateRoles:({f,roles,parts})=>{
+  for(const [name,pin]of Object.entries(roles))roles[name]=f.put(pin.path,{historical_role:name});
+  parts[0]=f.put(parts[0].path,{historical_role:'source-family'});
+ }}),entry=f.registryBody.entries.at(-1);
+ const binding=JSON.parse(f.blobs.get(entry.source_authority.git_blob_oid));
+ const evidence=JSON.parse(f.blobs.get(binding.source_evidence.git_blob_oid));
+ const historical=[...['catalogue','physical_evidence','physical_input','physical_reproduction','owner_roster','native_latitudes'].map(k=>evidence[k]),...evidence.families.flatMap(x=>x.parts)];
+ for(const pin of historical){f.authored.entries.delete(pin.path);f.blobs.delete(pin.git_blob_oid);}
+ const constructor=f.put(prefix+'reviewed-constructor-result.json',{kind:'fixture-result'});
+ if(completed)entry.completed_constructor=constructor;else f.authored.entries.delete(constructor.path);
+ refreshPins(f);
+ f.files=[...f.authored.entries].filter(([name,row])=>f.baseline.entries.get(name)?.sha!==row.sha)
+  .map(([filename])=>({filename,status:f.baseline.entries.has(filename)?'modified':'added'}));
+ return {f,entry,completed:constructor,historical,direct:{rule:entry.rule_preimage,binding:entry.source_authority,
+  constructor,evidence:binding.source_evidence,patch:binding.native_patch}};
+}
+test('completed source-target profile stays selected-data with absent historical bodies',async()=>{
+ const {f,historical}=completedSourceTargetRoleFixture(),diagnostics={};
+ assert.equal((await f.run({metadataDiagnostics:diagnostics}))?.test_selection,'selected-data',diagnostics.failure);
+ for(const pin of historical){assert(!f.authored.entries.has(pin.path));assert(!f.blobs.has(pin.git_blob_oid));assert(!f.reads.includes(pin.git_blob_oid));}
+ const g=mergeFixture({selectedFixture:f}),prepared=await prepareIntegration(g.options);
+ assert.equal(prepared.test_selection,'selected-data');assert.equal(prepared.geography_software,false);
+ assert.equal(prepared.geography_required,true,'Classification must retain genuine constructor/native qualification');
+});
+test('unqualified source-target profile still requires historical bodies',async()=>{
+ const {f}=completedSourceTargetRoleFixture({completed:false}),diagnostics={};
+ assert.equal(await f.run({metadataDiagnostics:diagnostics}),null);assert.match(diagnostics.failure,/role differs from candidate tree/);
+});
+for(const role of ['rule','binding','constructor','evidence','patch'])for(const defect of ['missing','changed'])
+ test('completed source-target profile refuses '+defect+' direct '+role,async()=>{
+  const {f,direct}=completedSourceTargetRoleFixture(),pin=direct[role];
+  if(defect==='missing')f.authored.entries.delete(pin.path);
+  else f.authored.entries.set(pin.path,{...f.authored.entries.get(pin.path),sha:'f'.repeat(40)});
+  assert.equal(await f.run(),null);
+ });

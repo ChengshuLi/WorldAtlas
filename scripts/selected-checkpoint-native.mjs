@@ -120,7 +120,25 @@ export async function compareSelectedCheckpointNative({transition}) {
     for(const loss of part.intervals)result.intervals.push(loss);
     demand(Number.isSafeInteger(result.lost_or_reassigned_cells),'Native loss count exceeds exact integer domain');
   }});
-  if(visibilityCandidates.length&&expected.length){
+  // qualifyTransition binds every new native component to the exact appended
+  // patch union and rejects ANY overlap with the old cumulative patch, including
+  // same-owner overlap. The complete base scan above establishes current
+  // owner-zero. Therefore each new native component's first cell is already its
+  // deterministic 0 -> owner witness; searching all row batches repeats proof.
+  let hasPolygons=false,ordinal=0;
+  for(const item of visibilityCandidates){
+    const index=ordinal++;
+    if(item.representation!=='native-cells'){hasPolygons=true;continue;}
+    demand(!result.intervals.length&&result.lost_or_reassigned_cells===0,
+      'Qualified native append lost or reassigned map cells');
+    const row=item.native_rows.at(0),run=row?.runs.at(0);
+    demand(run,'New gap repair has no actual changed map-cell witness');
+    visibilityWitnesses[index]={component_id:item.component_id,
+      ...(item.authority_sha256?{authority_sha256:item.authority_sha256}:{}),
+      native_rows_sha256:visibilityDigest(item.native_rows),x:run[0],y:row.y,
+      previous_owner:0,candidate_owner:run[2]};
+  }
+  if(hasPolygons&&expected.length){
     const latitudes=projectVisibilityLatitudes({state:candidate});
     // Base intervals have already been validated and need not be visited again.
     // These small batches contain references to patch rows, never copied runs.
@@ -133,8 +151,7 @@ export async function compareSelectedCheckpointNative({transition}) {
         pending=[];indices=[];
       };
       for(const item of visibilityCandidates){
-        if(!visibilityWitnesses[i]&&(item.representation!=='native-cells'
-          ||item.native_rows.at(0).y<=rows.at(-1)&&item.native_rows.at(-1).y>=rows[0])){
+        if(!visibilityWitnesses[i]){
           pending.push(item);indices.push(i);if(pending.length===16)visit();
         }i++;
       }
