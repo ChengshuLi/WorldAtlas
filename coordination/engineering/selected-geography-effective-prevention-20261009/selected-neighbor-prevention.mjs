@@ -3,6 +3,7 @@
 import {createHash} from 'node:crypto';
 import {isNativeSequence,nativeSequence} from '../../../src/native-grid.js';
 import fs from 'node:fs';
+import os from 'node:os';
 import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {gunzipSync} from 'node:zlib';
@@ -816,10 +817,14 @@ function* readAdoptedOsmRevision({evidence,proposed,owners,latitudes,read,json,r
    return {id:member.target_id,pixelIndex:member.pixelIndex,feature:member.feature};}};
 }
 
-function readSourceTargetBody(reader,p) {
+function sourceTargetBodyVersion(reader,p) {
   pinCheck(p);let version=p.commit;try{reader.git('--no-lazy-fetch','cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
   const d=reader.descriptor(p.path,version);
   demand(d.mode===p.mode&&d.git_blob_oid===p.git_blob_oid&&d.bytes===p.bytes,'Source-target whole identity differs');
+  return version;
+}
+function readSourceTargetBody(reader,p) {
+  const version=sourceTargetBodyVersion(reader,p);
   const raw=reader.read(p.path,{version,expected:p.sha256});
   if(p.decoded_bytes===undefined)return raw;
   const decoded=gunzipSync(raw,{maxOutputLength:p.decoded_bytes});
@@ -828,6 +833,52 @@ function readSourceTargetBody(reader,p) {
 
 export function qualifySourceTargetNativeAuthority(reader, preimage, binding, {snapshot}={}) {
  return driveSourceAuthority(evaluateSourceTargetNativeAuthority(reader, preimage, binding, false, snapshot));
+}
+
+// Owned async acquisition for the same evaluator. Views remain valid until
+// close(), including while callers serialize their required authority products.
+export async function qualifySourceTargetNativeAuthorityStored(reader,preimage,binding,{snapshot,directory=os.tmpdir()}={}) {
+ demand(reader instanceof ImmutableReader,'Require actual immutable source reader');
+ const {admitNativeMetadataStore,authenticatedDecodedNativeChunks}=await import('../../../scripts/native-patch-store.mjs');
+ const stores=new Set();let closed=false;
+ const close=()=>{if(closed)return;closed=true;let failure;
+  for(const store of stores)try{store.close();}catch(error){failure??=error;}
+  stores.clear();if(failure)throw failure;
+ };
+ const chunks=async function*(pin,version=sourceTargetBodyVersion(reader,pin)){
+  const encoded=reader.stream(pin.path,{version,expected:pin.sha256});
+  if(pin.decoded_bytes===undefined){yield* encoded;return;}
+  const hash=createHash('sha256');let bytes=0;
+  for await(const chunk of authenticatedDecodedNativeChunks(encoded,pin,{directory})){
+   bytes+=chunk.length;hash.update(chunk);yield chunk;
+  }
+  demand(bytes===pin.decoded_bytes&&hash.digest('hex')===pin.decoded_sha256,'Source-target decoded body differs');
+ };
+ const acquire=async request=>{
+  let input,expected;
+  if(request.kind==='json'){
+   const p=request.pin,version=sourceTargetBodyVersion(reader,p);input=chunks(p,version);expected={bytes:p.decoded_bytes??p.bytes,sha256:p.decoded_sha256??p.sha256};
+  }else{
+   demand(request.kind==='source','Unknown source acquisition operation');
+   input=(async function*(){for(const pin of request.sourceParts())yield* chunks(pin);})();
+   expected={bytes:request.record.original_bytes,sha256:request.record.original_sha256};
+  }
+  if(request.kind==='source'&&!(Number.isSafeInteger(expected.bytes)&&expected.bytes>=0&&hash(expected.sha256))){
+   for await(const chunk of input){}
+   throw Error('Whole original consumed source product differs');
+  }
+  let store;try{store=await admitNativeMetadataStore({chunks:input,expected,directory,mutableMetadata:true});}
+  catch(error){if(request.kind==='source'&&['Complete native JSON identity differs','JSON stream exceeds exact byte identity'].includes(error.message))
+    throw Error('Whole original consumed source product differs');throw error;}
+  stores.add(store);return store.metadata;
+ };
+ const steps=evaluateSourceTargetNativeAuthority(reader,preimage,binding,false,snapshot);
+ try{
+  let step=steps.next();
+  while(!step.done){let value;try{value=await acquire(step.value);}catch(error){step=steps.throw(error);continue;}
+   step=steps.next(value);}
+  return Object.freeze({proof:step.value,close,[Symbol.dispose]:close});
+ }catch(error){try{steps.return();}catch{}try{close();}catch{}throw error;}
 }
 
 // Same authenticated preparation and predicates as qualification. This returns
@@ -1491,16 +1542,17 @@ function* evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnos
    'Missing complete original source family');
   const identity=valueSha({parts,record});
   if(completeOriginalSources.has(identity))return completeOriginalSources.get(identity);
-  const product=yield {kind:'source',parts,record,read:()=>{
-  const pieces=parts.map((pin,i)=>{
+  const sourceParts=function*(){for(const [i,pin]of parts.entries()){
    const expected=record.parts[i];demand(pin.path===expected.path&&pin.sha256===expected.sha256
     &&pin.bytes===expected.bytes&&pin.decoded_bytes===expected.uncompressed_bytes
-    &&pin.decoded_sha256===expected.uncompressed_sha256,'Source family part differs from retained catalogue');return read(pin);
-  });
-  const raw=Buffer.concat(pieces);demand(raw.length===record.original_bytes&&sha(raw)===record.original_sha256,
-   'Whole original consumed source product differs');
-  const product=JSON.parse(raw);demand(product.features?.length===record.feature_count,'Incomplete original source feature roster');
-  return product;}};
+    &&pin.decoded_sha256===expected.uncompressed_sha256,'Source family part differs from retained catalogue');yield pin;
+  }};
+  const product=yield {kind:'source',sourceParts,record,read:()=>{
+   const pieces=Array.from(sourceParts(),read),raw=Buffer.concat(pieces);
+   demand(raw.length===record.original_bytes&&sha(raw)===record.original_sha256,'Whole original consumed source product differs');
+   return JSON.parse(raw);
+  }};
+  demand(product.features?.length===record.feature_count,'Incomplete original source feature roster');
   completeOriginalSources.set(identity,product);return product;
  };
 

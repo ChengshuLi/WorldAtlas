@@ -1,6 +1,8 @@
 // Metadata preparation and explicit body acquisition. Existing
 // operators, source authority and independent review remain authoritative.
 import fs from 'node:fs';
+import os from 'node:os';
+import {writeNativeByteChunks} from './native-patch-store.mjs';
 import {performance} from 'node:perf_hooks';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
@@ -87,17 +89,61 @@ function admitDestination(root, destination, resume) {
   return target;
 }
 
+// Required output bytes may live in one invocation-owned file. A plain object
+// with a path/hash is never admitted as a staged product.
+const stagedProducts=new WeakMap();
+export function stageProduct(chunks,{directory=os.tmpdir()}={}) {
+ const parent=fs.lstatSync(directory);
+ need(parent.isDirectory()&&fs.realpathSync(directory)===directory,'Require ordinary product staging directory');
+ const folder=fs.mkdtempSync(path.join(directory,'authority-product-')),file=path.join(folder,'body');
+ let fd,closed=false;
+ try{
+  fd=fs.openSync(file,'wx+',0o600);const identity=writeNativeByteChunks(fd,chunks);
+  const close=()=>{if(closed)return;closed=true;let failure;try{fs.closeSync(fd);}catch(error){failure=error;}
+   try{fs.rmSync(folder,{recursive:true});}catch(error){failure??=error;}if(failure)throw failure;};
+  const product=Object.freeze({file,...identity,close,[Symbol.dispose]:close});
+  stagedProducts.set(product,{fd,active:()=>need(!closed,'Staged product is closed')});return product;
+ }catch(error){try{if(fd!==undefined)fs.closeSync(fd);}catch{}try{fs.rmSync(folder,{recursive:true});}catch{}throw error;}
+}
+function visitProduct(raw,consume=()=>{}) {
+ if(Buffer.isBuffer(raw)){consume(raw);return {bytes:raw.length,sha256:digest(raw)};}
+ const source=stagedProducts.get(raw);need(source,'Require owned staged product');source.active();
+ const stat=fs.fstatSync(source.fd);need(stat.isFile()&&stat.size===raw.bytes,'Staged product size changed');
+ const buffer=Buffer.allocUnsafe(65536),hash=createHash('sha256');let bytes=0;
+ while(bytes<stat.size){const count=fs.readSync(source.fd,buffer,0,Math.min(buffer.length,stat.size-bytes),bytes);
+  need(count>0,'Truncated staged product');const chunk=buffer.subarray(0,count);hash.update(chunk);consume(chunk);bytes+=count;}
+ const sha256=hash.digest('hex');need(sha256===raw.sha256,'Staged product bytes changed');return {bytes,sha256};
+}
+function productEqualsFile(root,relative,product) {
+ if(Buffer.isBuffer(product))return ordinary(root,relative).equals(product);
+ need(safe(relative),'Unsafe input path');const filename=path.join(root,relative),stat=fs.lstatSync(filename);
+ need(stat.isFile()&&fs.realpathSync(filename)===filename,'Require ordinary input: '+relative);
+ if(stat.size!==product.bytes)return false;
+ const fd=fs.openSync(filename,'r'),buffer=Buffer.allocUnsafe(65536);let position=0,equal=true,failure;
+ try{visitProduct(product,chunk=>{let used=0;while(used<chunk.length){const n=fs.readSync(fd,buffer,used,chunk.length-used,position+used);if(!n){equal=false;break;}used+=n;}
+  if(used!==chunk.length||!chunk.equals(buffer.subarray(0,used)))equal=false;position+=used;});return equal;}
+ catch(error){failure=error;throw error;}
+ finally{try{fs.closeSync(fd);}catch(error){if(!failure)throw error;}}
+}
+function writeProduct(filename,raw) {
+ if(Buffer.isBuffer(raw)){fs.writeFileSync(filename,raw,{flag:'wx'});return;}
+ const fd=fs.openSync(filename,'wx',0o600);let position=0,failure;
+ try{visitProduct(raw,chunk=>{let at=0;while(at<chunk.length){const n=fs.writeSync(fd,chunk,at,chunk.length-at,position+at);need(n>0,'Incomplete product publication');at+=n;}position+=chunk.length;});}
+ catch(error){failure=error;throw error;}
+ finally{try{fs.closeSync(fd);}catch(error){if(!failure)throw error;}}
+}
+
 // Equivalent to the shared new-vintage writer for this JS metadata adapter:
 // validate whole destination before mutation, exclusive creation, receipt last.
 // Resume means checking every immutable byte; partial output is never repaired.
 export function admitPublication(root, destination, products, binding, resume = false) {
   const target = admitDestination(root, destination, resume);
   for (const [name, raw] of Object.entries(products)) {
-    need(safe(name) && !name.includes('/') && name !== 'preparation.json' && Buffer.isBuffer(raw),
+    need(safe(name) && !name.includes('/') && name !== 'preparation.json' && (Buffer.isBuffer(raw)||stagedProducts.has(raw)),
       'Safe flat product filenames required');
   }
   need(Object.keys(products).length > 0, 'No empty completion');
-  const outputs = Object.fromEntries(Object.entries(products).map(([name, raw]) => [name, {bytes: raw.length, sha256: digest(raw)}]));
+  const outputs = Object.fromEntries(Object.entries(products).map(([name, raw]) => [name, visitProduct(raw)]));
   const receipt = jsonBytes({version: 1, binding, outputs});
   const inspectExisting = () => {
     admitDestination(root, destination, resume);
@@ -106,7 +152,7 @@ export function admitPublication(root, destination, products, binding, resume = 
     const found = fs.readdirSync(target).sort();
     need(same(found, expected), 'Incomplete or foreign resumed output inventory');
     for (const [name, raw] of Object.entries({...products, 'preparation.json': receipt}))
-      need(ordinary(root, destination + '/' + name).equals(raw), 'Resumed bytes/binding changed: ' + name);
+      need(productEqualsFile(root, destination + '/' + name,raw), 'Resumed bytes/binding changed: ' + name);
     return true;
   };
   inspectExisting();
@@ -114,13 +160,13 @@ export function admitPublication(root, destination, products, binding, resume = 
   // Recheck the destination after that boundary; never adopt a new collision.
   return () => {
     need(same(Object.keys(products).sort(), Object.keys(outputs).sort())
-      && Object.entries(products).every(([name, raw]) => raw.length === outputs[name].bytes && digest(raw) === outputs[name].sha256),
+      && Object.entries(products).every(([name, raw]) => same(visitProduct(raw),outputs[name])),
       'Admitted products changed before publication');
     if (inspectExisting()) return {destination, resumed: true, binding};
     fs.mkdirSync(path.dirname(target), {recursive: true});
     fs.mkdirSync(target);
     for (const [name, raw] of Object.entries(products))
-      fs.writeFileSync(path.join(target, name), raw, {flag: 'wx'});
+      writeProduct(path.join(target,name),raw);
     fs.writeFileSync(path.join(target, 'preparation.json'), receipt, {flag: 'wx'});
     return {destination, resumed: false, binding};
   };
@@ -1540,7 +1586,7 @@ export async function nativeAuthority(config, reader, root, diagnostic = false) 
     reader.descriptor(locator?.commit, locator?.path);
   const authorityReader = flow.deliveryAuthorityReader(root, reader);
   const started = performance.now();
-  let result, products;
+  let result, products, qualifiedCells;
   if (diagnostic) {
     const {diagnoseSourceTargetNativeAuthority} = await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs');
     const binding = {version: 1, kind: 'source-target-native-custody-v1', ...pins};
@@ -1548,20 +1594,25 @@ export async function nativeAuthority(config, reader, root, diagnostic = false) 
     result = diagnoseSourceTargetNativeAuthority(authorityReader, preimage, binding);
     products = {'native-diagnostic.json': jsonBytes(result)};
   } else {
-    result = flow.constructOriginalAuthority(authorityReader, inputs);
+    const owned=await flow.constructOriginalAuthorityStored(authorityReader,inputs,{directory:os.tmpdir()});
+    let failure;try{result=owned.result;
+    const {canonicalNativeJsonChunks}=await import('./native-patch-store.mjs');
     need(Array.isArray(result.ledger_rows) && result.ledger_rows.length > 0
       && same(result.component_ids, result.ledger_rows.map(row => row.component_id)), 'Complete modern constructor rows required');
-    products = {...result.products, 'constructor-result.json': jsonBytes({version: 1,
+    products = {...result.products, 'constructor-result.json': stageProduct(canonicalNativeJsonChunks({version: 1,
       kind: 'existing-source-target-native-constructor-result', inputs,
       component_ids: result.component_ids, rule_sha256: result.rule_sha256, ledger_rows: result.ledger_rows,
       limitations: result.limitations,
       ...(Object.hasOwn(result,'physical_context_hits') ? {physical_context_hits: result.physical_context_hits} : {}),
       ...(Object.hasOwn(result,'split_source_competitors') ? {split_source_competitors: result.split_source_competitors} : {}),
-      ...(Object.hasOwn(result,'territorial_contacts') ? {territorial_contacts: result.territorial_contacts} : {})})};
+      ...(Object.hasOwn(result,'territorial_contacts') ? {territorial_contacts: result.territorial_contacts} : {})}))};
+    qualifiedCells=result.ledger_rows.reduce((n,row)=>n+row.native_cells,0);
+    }catch(error){failure=error;throw error;}
+    finally{try{owned.close();}catch(error){if(!failure){for(const product of Object.values(products??{}))if(stagedProducts.has(product))try{product.close();}catch{}throw error;}}}
   }
   return {products, observation: {elapsed_seconds: (performance.now() - started) / 1000,
     ...(diagnostic ? {requested_cells: result.requested_cells, supported_cells: result.supported_cells, held_cells: result.held_cells}
-      : {qualified_cells: result.ledger_rows.reduce((n, row) => n + row.native_cells, 0)}),
+      : {qualified_cells: qualifiedCells}),
     limits: ['Original source/physical producers are not replayed.', diagnostic
       ? 'Diagnostic screening produces no authority, current-owner-zero or selected-output acceptance.'
       : 'Constructor qualification is not actual current-owner-zero or final selected-output acceptance.']}};
@@ -1613,6 +1664,10 @@ async function main(args) {
   if (phase === 'compose') outputs = composeAuthorities(config, reader);
   if (phase === 'package') outputs = packageProjection(config, reader);
   if (phase === 'finalize') outputs = finalizeDelivery(config, reader);
-  console.log(JSON.stringify({...publish(root, destination, outputs, binding, flags.includes('--resume')), ...(observation ? {observation} : {})}));
+  let publicationFailure;
+  try{console.log(JSON.stringify({...publish(root, destination, outputs, binding, flags.includes('--resume')), ...(observation ? {observation} : {})}));}
+  catch(error){publicationFailure=error;throw error;}
+  finally{let cleanupFailure;for(const product of Object.values(outputs??{}))if(stagedProducts.has(product))try{product.close();}catch(error){cleanupFailure??=error;}
+   if(!publicationFailure&&cleanupFailure)throw cleanupFailure;}
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main(process.argv.slice(2)).catch(error => { console.error(error.message); process.exitCode = 1; });

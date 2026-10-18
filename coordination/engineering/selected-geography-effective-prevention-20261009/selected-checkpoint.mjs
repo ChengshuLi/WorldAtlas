@@ -4,11 +4,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
-import {gunzipSync,createGunzip} from 'node:zlib';
-import {Readable} from 'node:stream';
-import {pipeline} from 'node:stream/promises';
+import {gunzipSync} from 'node:zlib';
 import os from 'node:os';
-import {admitNativePatchStore,admitNativeLedgerStore,admitNativeEnvelopeStore,admitNativeMetadataStore} from '../../../scripts/native-patch-store.mjs';
+import {admitNativePatchStore,admitNativeLedgerStore,admitNativeEnvelopeStore,admitNativeMetadataStore,decodedNativeChunks,authenticatedDecodedNativeChunks} from '../../../scripts/native-patch-store.mjs';
 import {nativeSequence,isNativeSequence,nativeRowAt} from '../../../src/native-grid.js';
 import {openNativeWordStore} from '../../../scripts/native-word-store.mjs';
 import {ImmutableReader, NativeAssetImage, decodeVisibilityLatitudes,
@@ -210,35 +208,8 @@ function closeStores(session,keep=new Set()) {
   }
   if(failure)throw failure;
 }
-async function* decodedChunks(chunks) {
-  const input=Readable.from(chunks),output=createGunzip();
-  const settled=pipeline(input,output).then(()=>null,error=>error);let complete=false;
-  try{yield* output;complete=true;}
-  finally{
-    if(!complete){input.destroy();output.destroy();}
-    const failure=await settled;if(complete&&failure)throw failure;
-  }
-}
-// Legacy custody authenticates encoded bytes and the footer before inflation.
-// Stage only this transport layer; semantic JSON still uses the shared store.
-async function* custodyChunks(chunks,p) {
-  if(!p.decoded_bytes){yield* chunks;return;}
-  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'checkpoint-custody-'));
-  const file=path.join(directory,'encoded');let fd;
-  try{
-    fd=fs.openSync(file,'wx+',0o600);let bytes=0;
-    for await(const chunk of chunks){let at=0;while(at<chunk.length){const n=fs.writeSync(fd,chunk,at,chunk.length-at,bytes+at);demand(n>0,'Incomplete checkpoint custody spill');at+=n;}bytes+=chunk.length;}
-    const footer=Buffer.alloc(4);let read=0;
-    if(bytes>=18)while(read<4){const n=fs.readSync(fd,footer,read,4-read,bytes-4+read);demand(n>0,'Incomplete checkpoint custody spill');read+=n;}
-    demand(bytes>=18&&footer.readUInt32LE(0)===p.decoded_bytes,'Checkpoint gzip declared size differs before inflate');
-    fs.closeSync(fd);fd=undefined;let decoded=0;
-    for await(const chunk of decodedChunks(fs.createReadStream(file))){
-      decoded+=chunk.length;
-      if(decoded>p.decoded_bytes){const error=new RangeError('Cannot create a Buffer larger than '+p.decoded_bytes+' bytes');error.code='ERR_BUFFER_TOO_LARGE';throw error;}
-      yield chunk;
-    }
-  }finally{try{if(fd!==undefined)fs.closeSync(fd);}finally{fs.rmSync(directory,{recursive:true});}}
-}
+const decodedChunks=decodedNativeChunks;
+const custodyChunks=(chunks,p)=>authenticatedDecodedNativeChunks(chunks,p,{directory:os.tmpdir(),footer:true});
 async function storedProduct(session,reader,p,domain,ledger) {
   const {version}=resolvePin(reader,p);
   let chunks=reader.stream(p.path,{version,expected:p.sha256});

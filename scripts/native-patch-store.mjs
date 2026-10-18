@@ -1,6 +1,10 @@
 // Invocation-local native interval storage. This parses data, never authority.
 // Keep original JSON wire products; large intervals and coordinate arrays live on disk.
 import fs from 'node:fs';
+import os from 'node:os';
+import {Readable} from 'node:stream';
+import {pipeline} from 'node:stream/promises';
+import {createGunzip,gunzipSync} from 'node:zlib';
 import {nativeSequence,isNativeSequence} from '../src/native-grid.js';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
@@ -42,7 +46,7 @@ class Input {
    demand(Buffer.isBuffer(next.value)||next.value instanceof Uint8Array,'JSON stream requires byte chunks');
    // Snapshot the yielded chunk before any await can let its owner mutate it.
    this.buffer=Buffer.from(next.value);this.at=0;this.bytes+=this.buffer.length;
-   demand(this.bytes<=this.expected.bytes,'JSON stream exceeds exact byte identity');this.hash.update(this.buffer);
+   if(!this.syntaxErrors)demand(this.bytes<=this.expected.bytes,'JSON stream exceeds exact byte identity');this.hash.update(this.buffer);
   }
   return this.at<this.buffer.length;
  }
@@ -187,7 +191,7 @@ function hashChunks(chunks){
  * The caller authenticates roles/modes/OIDs and passes the original byte stream.
  * Full syntax, exact bytes/hash and final row domains precede returned cursors.
  */
-async function admitStore({chunks,expected,directory,size,ownerCount,rowField='rows',envelopePaths,rawSyntaxOnly=false,metadataArrays=[]},ledger){
+async function admitStore({chunks,expected,directory,size,ownerCount,rowField='rows',envelopePaths,rawSyntaxOnly=false,metadataArrays=[],mutableMetadata=false},ledger){
  demand(!rawSyntaxOnly||(!ledger&&envelopePaths?.length===0),'Raw syntax admission cannot validate native rows');
  demand(Array.isArray(metadataArrays)&&metadataArrays.every(key=>typeof key==='string'),'Invalid metadata array keys');
  const spillKeys=new Set(metadataArrays);
@@ -479,7 +483,7 @@ async function admitStore({chunks,expected,directory,size,ownerCount,rowField='r
    for(const fd of fds)try{fs.closeSync(fd);}catch(e){error??=e;}
    try{fs.rmSync(root,{recursive:true});}catch(e){error??=e;}if(error)throw error;
   };
-  const common={metadata:freeze(metadata),canonical_sha256,runCount:range.runCount,
+  const common={metadata:mutableMetadata?metadata:freeze(metadata),canonical_sha256,runCount:range.runCount,
    storedBytes:runs.position+index.position+vectors.position+vectorIndex.position+coordinateIndices.reduce((n,p)=>n+(p?.position??0),0)+(components?.position??0)+(meta?.position??0),intervals,close,[Symbol.dispose]:close};
   complete=true;return Object.freeze(ledger?
    {...common,componentCount,nativeRowCount:range.rowCount,componentEntries,componentAt,componentMetadata,componentRows,componentCanonicalChunks}:
@@ -498,3 +502,48 @@ export const admitNativeEnvelopeStore=options=>admitStore({...options,envelopePa
 // Authenticate complete JSON bytes/syntax without claiming semantic canonical validity.
 // Consumers remain responsible for validating every field they actually use.
 export const admitNativeMetadataStore=options=>admitStore({...options,envelopePaths:[],rawSyntaxOnly:true},false);
+
+export async function* decodedNativeChunks(chunks) {
+  const input=Readable.from(chunks),output=createGunzip();
+  const settled=pipeline(input,output).then(()=>null,error=>error);let complete=false;
+  try{yield* output;complete=true;}
+  finally{
+    if(!complete){input.destroy();output.destroy();}
+    const failure=await settled;if(complete&&failure)throw failure;
+  }
+}
+// Legacy custody authenticates encoded bytes and the footer before inflation.
+// Stage only this transport layer; semantic JSON still uses the shared store.
+export async function* authenticatedDecodedNativeChunks(chunks,p,{directory:scratch=os.tmpdir(),footer:checkFooter=false}={}) {
+  if(p.decoded_bytes===undefined||checkFooter&&!p.decoded_bytes){yield* chunks;return;}
+  const directory=fs.mkdtempSync(path.join(scratch,'checkpoint-custody-'));
+  const file=path.join(directory,'encoded');let fd;
+  try{
+    fd=fs.openSync(file,'wx+',0o600);let bytes=0;
+    for await(const chunk of chunks){let at=0;while(at<chunk.length){const n=fs.writeSync(fd,chunk,at,chunk.length-at,bytes+at);demand(n>0,'Incomplete checkpoint custody spill');at+=n;}bytes+=chunk.length;}
+    const footer=Buffer.alloc(4);let read=0;
+    if(bytes>=18)while(read<4){const n=fs.readSync(fd,footer,read,4-read,bytes-4+read);demand(n>0,'Incomplete checkpoint custody spill');read+=n;}
+    if(checkFooter)demand(bytes>=18&&footer.readUInt32LE(0)===p.decoded_bytes,'Checkpoint gzip declared size differs before inflate');
+    fs.closeSync(fd);fd=undefined;let decoded=0;
+    if(!checkFooter&&p.decoded_bytes===0)gunzipSync(Buffer.alloc(0),{maxOutputLength:0});
+    for await(const chunk of decodedNativeChunks(fs.createReadStream(file))){
+      decoded+=chunk.length;
+      if(decoded>p.decoded_bytes){const error=new RangeError('Cannot create a Buffer larger than '+p.decoded_bytes+' bytes');error.code='ERR_BUFFER_TOO_LARGE';throw error;}
+      yield chunk;
+    }
+  }finally{try{if(fd!==undefined)fs.closeSync(fd);}finally{fs.rmSync(directory,{recursive:true});}}
+}
+
+// Serialize already validated native values and store-backed views without a whole output Buffer.
+export function* canonicalNativeJsonChunks(value){yield* canonicalChunks(value);yield '\n';}
+
+// The same bounded writer serves required publication bytes as private records.
+export function writeNativeByteChunks(fd,chunks){
+ const writer=new Writer(fd),hash=createHash('sha256');
+ for(const chunk of chunks){
+  demand(typeof chunk==='string'||Buffer.isBuffer(chunk)||chunk instanceof Uint8Array,'Product requires byte chunks');
+  const body=Buffer.from(chunk);demand(Number.isSafeInteger(writer.position+body.length),'Product byte size is not representable');
+  writer.append(body);hash.update(body);
+ }
+ writer.flush();return {bytes:writer.position,sha256:hash.digest('hex')};
+}
