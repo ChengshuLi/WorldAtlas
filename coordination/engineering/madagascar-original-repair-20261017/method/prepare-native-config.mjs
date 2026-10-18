@@ -33,7 +33,7 @@ const members = json(prefix + 'source-stage-001/source-target-membership.json', 
 const foreign = json(prefix + 'source-review/foreign-bounds-001/complete-foreign-bounds.json', inputCommit);
 const periodic = json(prefix + 'source-review/periodic-negatives-001/retained-periodic-negative-reconciliation.json', inputCommit);
 const original = [34,35,36].flatMap(block =>
-  json(prefix + 'original-extraction-001/block-' + String(block).padStart(3, '0') + '.json.gz', inputCommit));
+  json(prefix + 'original-extraction/block-' + String(block).padStart(3, '0') + '.json.gz', inputCommit));
 need(stages.length === 43 && members.length === 43 && original.length === 6225
   && foreign.complete_foreign_features === 73426 && foreign.selected_foreign_features === 0 && foreign.whole_bounds_candidate_families.length === 0
   && periodic.unresolved_foreign_bound_features === 0, 'Complete original scientific scope required');
