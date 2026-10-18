@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "selector": {
+    "commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+    "path": "data/ownership-selection.json"
+  },
+  "package_inputs": {
+    "commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+    "path": ".github/package-inputs.json"
+  },
+  "composition": {
+    "commit": "1a969c7685e1ff6f702311bf257fe0e50a3d8554",
+    "path": "coordination/engineering/africa-nine-selected-delivery-20261018/composition-001/selected-ledger.json"
+  },
+  "rebind": {
+    "commit": "149f5e7393965361b67ccaebcdc04e1c14fd97e5",
+    "path": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/rebind-certificate-001/certificate.json"
+  },
+  "new_prefix": "coordination/engineering/africa-nine-selected-delivery-20261018/",
+  "sidecar_output": "coordination/engineering/africa-nine-selected-delivery-20261018/ownership-selection-africa-nine.json",
+  "accepted_checkpoint": {
+    "commit": "1a969c7685e1ff6f702311bf257fe0e50a3d8554",
+    "path": "coordination/engineering/africa-nine-selected-delivery-20261018/accepted2459-checkpoint-001/selected-checkpoint.json"
+  },
+  "restored_read_roles": {
+    "commit": "e0d7df24f33925fe90a69425f36bc156d9ee8ced"
+  }
+}

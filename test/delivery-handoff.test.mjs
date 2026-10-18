@@ -510,7 +510,7 @@ test('finalization refuses a new identity at an accepted package path', () => {
 // Actual Git/plain-Node fixture for metadata assembly. The source interpretation
 // and native construction controls live in source-member-native-delivery.test;
 // this fixture exercises the consumed-role boundary without replaying science.
-function modernFinalizationFixture(t, {mixed = false, membership = true, cohort = false, external = false, dated = false, territorial = false, territorialParts = false, provider = false, seam = false, negativeSources = false} = {}) {
+function modernFinalizationFixture(t, {completed = false, mixed = false, membership = true, cohort = false, external = false, dated = false, territorial = false, territorialParts = false, provider = false, seam = false, negativeSources = false} = {}) {
   const root = directory(t), owned = 'coordination/engineering/modern-finalize/';
   const git = (...args) => execFileSync('git', args, {cwd: root, stdio: ['pipe', 'pipe', 'pipe']}).toString().trim();
   git('init'); git('config', 'user.name', 'Finalizer fixture'); git('config', 'user.email', 'finalizer@example.invalid');
@@ -640,6 +640,17 @@ function modernFinalizationFixture(t, {mixed = false, membership = true, cohort 
     rows.unshift({component_id: 'held:fixture', disposition: 'awaiting-evidence', reason: 'literal unresolved evidence',
       authority_sha256: legacy.authority_sha256, rule_sha256: legacy.rule_sha256});
   }
+  if (completed) {
+    const binding = r.json(modern.source_authority);
+    const originalRows = rows.filter(row => row.authority_sha256 === modern.authority_sha256)
+      .map(({authority_sha256, rule_sha256, ...row}) => row);
+    save(owned + 'constructor-result.json', {version: 1, kind: 'existing-source-target-native-constructor-result',
+      inputs: Object.fromEntries(['source_evidence', 'native_patch'].map(role => [role,
+        {commit: binding[role].commit, path: binding[role].path}])),
+      component_ids: originalRows.map(row => row.component_id), ledger_rows: originalRows,
+      rule_sha256: modern.rule_sha256, limitations: ['Metadata fixture; scientific qualification is tested separately.']});
+    commitAll(); modern.completed_constructor = pin(owned + 'constructor-result.json');
+  }
   const package_inputs = pin('.github/package-inputs.json');
   const registry = {version: 1, kind: 'retained-rule-authority-registry-v1', entries: entries.sort((a, b) => a.authority_sha256.localeCompare(b.authority_sha256))};
   save(owned + 'registry.json', registry); save(owned + 'ledger.json', {version: 2, kind: 'native-additive-repair-ledger-v2',
@@ -686,6 +697,63 @@ function modernFinalizationFixture(t, {mixed = false, membership = true, cohort 
   return {root, r, config, run, git, save, commitAll, pin, evidenceBody, originalSelector, originalPackage, assets,
     consumed: [...Object.values(roles), familyPart, ...(membership ? memberPaths : [])], incidental, withEvidence, datedSupport, territorialSupport, providerAdoption, seamViews};
 }
+
+test('completed-constructor finalization keeps provenance cold without historical leaf restoration', t => {
+  const f = modernFinalizationFixture(t, {completed: true, cohort: true, external: true, dated: true,
+    territorial: true, territorialParts: true, provider: true, seam: true, negativeSources: true});
+  const entry = f.r.json(f.config.registry).entries[0], binding = f.r.json(entry.source_authority);
+  const originalEvidence = Buffer.from(f.r.read(binding.source_evidence)), leaves = new Map();
+  const collect = value => {
+    if (!value || typeof value !== 'object') return;
+    if (value.path && value.commit && value.git_blob_oid) leaves.set(value.path, value);
+    else for (const member of Object.values(value)) collect(member);
+  };
+  collect(f.evidenceBody); collect(f.datedSupport.body); collect(f.territorialSupport.body); collect(f.seamViews);
+  for (const pin of [f.evidenceBody.catalogue, f.evidenceBody.source_membership.index,
+    f.datedSupport.pin, f.territorialSupport.pin, f.providerAdoption, f.seamViews.method])
+    assert.ok(leaves.has(pin.path), 'Exercise the original role: ' + pin.path);
+  f.git('rm', '--', ...leaves.keys()); f.commitAll();
+  f.config.package_inputs = f.pin('.github/package-inputs.json');
+  // These are this test's own loose blobs. Removing them models cold partial-
+  // clone history: retained commit/path/OID references need no leaf acquisition.
+  for (const oid of new Set([...leaves.values()].map(pin => pin.git_blob_oid)))
+    fs.unlinkSync(path.join(f.root, '.git', 'objects', oid.slice(0, 2), oid.slice(2)));
+  const destination = '.cache/delivery-handoff/completed-cold';
+  const run = f.run('finalize', destination); assert.equal(run.status, 0, run.stderr);
+  const output = name => JSON.parse(fs.readFileSync(path.join(f.root, destination, name)));
+  const roles = output('package-roles.json').paths;
+  for (const pin of [entry.rule_preimage, entry.source_authority, entry.completed_constructor,
+    binding.source_evidence, binding.native_patch])
+    assert.ok(roles.some(role => role.path === pin.path && role.sha256 === pin.sha256), pin.path);
+  for (const name of leaves.keys()) assert.ok(!roles.some(role => role.path === name), name);
+  assert.deepEqual(f.r.read(binding.source_evidence), originalEvidence, 'Original provenance body stays byte-identical');
+  assert.equal(output('selected-delivery-expectations.json').cumulative_native_cells, 2);
+  assert.ok(!f.config.restored_read_roles, 'No restoration snapshot or bypass flag');
+});
+
+test('unqualified source-target finalization still requires historical leaf bodies', t => {
+  const f = modernFinalizationFixture(t), leaf = f.evidenceBody.catalogue;
+  f.git('rm', '--', leaf.path); f.commitAll();
+  f.config.package_inputs = f.pin('.github/package-inputs.json');
+  fs.unlinkSync(path.join(f.root, '.git', 'objects', leaf.git_blob_oid.slice(0, 2), leaf.git_blob_oid.slice(2)));
+  const destination = '.cache/delivery-handoff/unqualified-cold';
+  const run = f.run('finalize', destination);
+  assert.notEqual(run.status, 0, 'No completed constructor means no cold-corpus route');
+  assert.match(run.stderr, /cat-file|bad object|missing/i);
+  assert.equal(fs.existsSync(path.join(f.root, destination)), false);
+});
+
+test('completed-constructor finalizer retains every direct immutable body check', t => {
+  const f = modernFinalizationFixture(t, {completed: true});
+  const entry = f.r.json(f.config.registry).entries[0], binding = f.r.json(entry.source_authority);
+  for (const pin of [entry.rule_preimage, entry.source_authority, entry.completed_constructor,
+    binding.source_evidence, binding.native_patch]) {
+    const original = f.r.read;
+    f.r.read = p => original(p.path === pin.path ? {...p, sha256: '0'.repeat(64)} : p);
+    assert.throws(() => packageProjection(f.config, f.r), /hash differs/, pin.path);
+    f.r.read = original;
+  }
+});
 
 for (const mixed of [false, true]) test('real finalizer supports ' + (mixed ? 'mixed legacy/modern' : 'modern') + ' roles, flat envelope aliases and exact resume', t => {
   const f = modernFinalizationFixture(t, {mixed}), first = '.cache/delivery-handoff/first', second = '.cache/delivery-handoff/second';
