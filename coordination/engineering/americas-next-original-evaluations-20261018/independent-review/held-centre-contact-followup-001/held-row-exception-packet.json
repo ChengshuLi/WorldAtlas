@@ -227,9 +227,8 @@
         }
       },
       "basis": "Independent reconciliation against the actual current selected patch reports the full original partitions as HND 6633 = 6632 accepted + 1 held and NIC 2884 = 2881 accepted + 3 held, with no wrong-owner overlap. The accepted cells match the native-qualified products and were accepted in PR #2469. The earlier 252f2aa comparison is historical only and is not used to infer current acceptance.",
-      "independent_receipt_locator": "hnd-nic-independent-partition.json",
-      "independent_receipt_repository_path": null,
-      "independent_receipt_commit": null
+      "independent_review_url": "https://github.com/ChengshuLi/WorldAtlas/pull/2494#pullrequestreview-5561932870",
+      "review_note": "The current-patch partition finding is recorded in this public independent review. Exact input pins and key hashes may be appended by the auditor there; this packet does not invent a path for a private receipt."
     },
     "note": "The original full-scope native qualification partition is 9513 cells, now accepted through PR #2469, plus four preserved documented exception cells. This supplemental contact evidence does not add repair or acceptance credit. All four exception rows remain unresolved."
   },
@@ -874,5 +873,22 @@
       "commit": "07c74ff101d4ab5e679255ed85c402356aa54a42",
       "path": "coordination/engineering/americas-next-original-evaluations-20261018/independent-review/diagnostic-partition-REVIEW.md"
     }
+  },
+  "reproduction_artifact": {
+    "repository_path": "coordination/engineering/americas-next-original-evaluations-20261018/independent-review/held-centre-contact-followup-001/held-row-diagnostic-repro.mjs",
+    "sha256": "0222a8cced63e0ea2ac02cea8acf48eee6329750ddc7d5742bfc886e6a027d20",
+    "status": "sanitized path-portable reconstruction; not the original executed source or an invocation receipt",
+    "source_task_local_script": "diagnose.mjs",
+    "source_task_local_script_sha256": "9d0c4c603da9b59f17b75733853be95f9993081b6a3a2a4161c838d29bdc64a2",
+    "row_extraction": "The four original row/class/contact joins are literal packet inputs; the adapter re-evaluates their geometry contacts and does not regenerate extraction from the original interval blocks.",
+    "fixture_layout": {
+      "packet": "held-row-exception-packet.json",
+      "evidence": "FIXTURE_ROOT/evidence/{HND,NIC}/source-evidence.json, from each exact published_evidence.country_source_evidence commit/path",
+      "source_payloads": "FIXTURE_ROOT/payloads/<basename of the source-family path pinned in this packet>",
+      "helper": "src/native-grid.js at input_provenance.native_helper_commit, matching the pinned SHA-256",
+      "latitudes": "Decoded f64le bytes for the packet-pinned latitude table; verify decoded SHA-256 in actual_scope_outcomes.HND.source_evidence.native_contract.native_latitudes"
+    },
+    "reconstruction_command_template": "node held-row-diagnostic-repro.mjs --packet held-row-exception-packet.json --fixture-root FIXTURE_ROOT --helper PATH_TO_PINNED_native-grid.js --latitudes PATH_TO_PINNED_DECODED_LATITUDES.f64le",
+    "historical_invocation_receipt": null
   }
 }
