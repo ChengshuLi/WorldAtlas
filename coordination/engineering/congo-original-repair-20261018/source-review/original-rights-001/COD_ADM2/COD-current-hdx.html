@@ -1,0 +1,6245 @@
+<!DOCTYPE html>
+<html lang="en_AU">
+  <head>
+
+    <script type="application/javascript">
+      /**
+       * A map holding all the information to be sent to the analytics servers
+       * @type {object}
+       */
+      var analyticsInfo = {
+          'organizationName': 'ocha-fiss',
+          'organizationId': 'b3a25ac4-ac05-4991-923c-d25f47bef1ec',
+          'groupNames': ["cod"],
+          'groupIds': ["cod"],
+          'isCod': true,
+          'isIndicator': false,
+          'isArchived': false,
+          'datasetName': 'cod-ab-cod',
+          'datasetId': 'f42132b9-8cc6-4201-b020-9259c56e8868',
+          'pageTitle': 'Democratic Republic of the Congo - Subnational Administrative Boundaries | Humanitarian Dataset',
+          'datasetAvailability': 'public',
+          'cameFrom': '',
+          'supportsNotifications': 'true',
+          'supportsTabularDataEndpoints': 'false',
+          'authenticated': 'false',
+          'accountType': '',
+      };
+    </script>
+
+    
+        <!-- start Mixpanel -->
+<script type="text/javascript">
+    (function (e, b) {
+        if (!b.__SV) {
+            var a, f, i, g;
+            window.mixpanel = b;
+            b._i = [];
+            b.init = function (a, e, d) {
+                function f(b, h) {
+                    var a = h.split(".");
+                    2 == a.length && (b = b[a[0]], h = a[1]);
+                    b[h] = function () {
+                        b.push([h].concat(Array.prototype.slice.call(arguments, 0)))
+                    }
+                }
+
+                var c = b;
+                "undefined" !== typeof d ? c = b[d] = [] : d = "mixpanel";
+                c.people = c.people || [];
+                c.toString = function (b) {
+                    var a = "mixpanel";
+                    "mixpanel" !== d && (a += "." + d);
+                    b || (a += " (stub)");
+                    return a
+                };
+                c.people.toString = function () {
+                    return c.toString(1) + ".people (stub)"
+                };
+                i = "disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+                for (g = 0; g < i.length; g++)f(c, i[g]);
+                b._i.push([a, e, d])
+            };
+            b.__SV = 1.2;
+            a = e.createElement("script");
+            a.type = "text/javascript";
+            a.async = !0;
+            a.src = "undefined" !== typeof MIXPANEL_CUSTOM_LIB_URL ? MIXPANEL_CUSTOM_LIB_URL : "file:" === e.location.protocol && "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//) ? "https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js" : "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";
+            f = e.getElementsByTagName("script")[0];
+            f.parentNode.insertBefore(a, f)
+        }
+    })(document, window.mixpanel || []);
+    mixpanel.init("5cbf12bc9984628fb2c55a49daf32e74");
+
+    var mixpanelTrackData = {
+      "page title": analyticsInfo.pageTitle,
+      "org name": analyticsInfo.organizationName,
+      "org id": analyticsInfo.organizationId,
+      "group names": analyticsInfo.groupNames,
+      "group ids": analyticsInfo.groupIds,
+      "authenticated": analyticsInfo.authenticated,
+      "dataset availability": analyticsInfo.datasetAvailability,
+      "is cod": analyticsInfo.isCod,
+      "is indicator": analyticsInfo.isIndicator,
+      "is archived": analyticsInfo.isArchived,
+      "dataset id": analyticsInfo.datasetId,
+      "dataset name": analyticsInfo.datasetName,
+      "came from": analyticsInfo.cameFrom,
+      "supports notifications": analyticsInfo.supportsNotifications,
+      "supports tabular data endpoints": analyticsInfo.supportsTabularDataEndpoints,
+    };
+
+    if(analyticsInfo.accountType) {
+      mixpanelTrackData['account type'] = analyticsInfo.accountType;
+    }
+
+    mixpanel.track("page view", mixpanelTrackData);
+</script>
+<!-- end Mixpanel -->
+    
+
+    
+      <!-- Google Tag Manager - DATALAYER -->
+      <script type="application/javascript">
+        window.dataLayer = window.dataLayer || [];
+
+        <!-- Google Analytics - custom properties (dimensions) -->
+        (function() {
+            if (analyticsInfo.organizationName !== 'None') {
+                dataLayer.push({
+                  'org_name': analyticsInfo.organizationName
+                });
+            }
+
+            
+
+            var locationNames = analyticsInfo.groupNames.length < 15 ? analyticsInfo.groupNames.join('~') : 'many';
+            if (locationNames) {
+                dataLayer.push({
+                  'location_names': locationNames
+                });
+            }
+        }());
+        <!-- END - Google Analytics - custom properties (dimensions) -->
+      </script>
+      <!-- Google Tag Manager -->
+      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-MFNPQ7K');</script>
+      <!-- End Google Tag Manager -->
+
+    
+
+    
+    
+    
+    
+  <meta charset="utf-8" />
+
+      <meta name="csrf_field_name" content="_csrf_token" />
+      <meta name="_csrf_token" content="ImU5MzNhZTk3YWIzYTEzYmM3ODdjZDlhNzExMzNlODhiNWFiNDUxNTci.atQQUg.Bn9YCIHFM7iM-BPIwIzldKh-WIo" />
+
+      <meta name="referrer" content="always">
+      <meta name="generator" content="ckan " />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="hdx-version" content="v3.1.1">
+
+    <meta name="description" content="Democratic Republic of the Congo administrative level 0-3 boundaries (COD-AB) dataset version 01. This dataset is structured into 3 levels: - Admin 1: 26 Province - Admin 2: 164 Territory /... Access the Democratic Republic of the Congo - Subnational Administrative Boundaries dataset to support humanitarian efforts." />
+
+    <title>Democratic Republic of the Congo - Subnational Administrative Boundaries | Humanitarian Dataset | HDX</title>
+
+    
+
+    <meta property="og:image" content="https://data.humdata.org/images/hdx-social-share.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://data.humdata.org/images/hdx-social-share.png">
+
+    
+    
+  
+
+
+  
+
+
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="manifest" href="/site.webmanifest">
+      <meta name="theme-color" content="#1862d8">
+      <link rel="search" type="application/opensearchdescription+xml" title="HDX Search" href="/xml/opensearch.xml">
+    
+
+  
+  
+  
+    
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Merriweather:wght@600;700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  
+  
+
+  
+  
+      
+          
+          <link rel="alternate" type="text/n3" href="https://data.humdata.org/dataset/f42132b9-8cc6-4201-b020-9259c56e8868.n3"/>
+          <link rel="alternate" type="text/turtle" href="https://data.humdata.org/dataset/f42132b9-8cc6-4201-b020-9259c56e8868.ttl"/>
+          <link rel="alternate" type="application/rdf+xml" href="https://data.humdata.org/dataset/f42132b9-8cc6-4201-b020-9259c56e8868.xml"/>
+          <link rel="alternate" type="application/ld+json" href="https://data.humdata.org/dataset/f42132b9-8cc6-4201-b020-9259c56e8868.jsonld?profiles=croissant" title="Croissant ML"/>
+          <link rel="alternate" type="application/ld+json" href="https://data.humdata.org/dataset/f42132b9-8cc6-4201-b020-9259c56e8868.jsonld?profiles=euro_dcat_ap" title="EURO DCAT-AP"/>
+      
+  
+
+  
+  
+
+
+    
+      
+      
+    
+  <meta property="og:title" content="Democratic Republic of the Congo - Subnational Administrative Boundaries - Humanitarian Data Exchange">
+  <meta property="og:description" content="Democratic Republic of the Congo administrative level 0-3 boundaries (COD-AB) dataset version 01. This dataset is structured into 3 levels: - Admin 1: 26 Province - Admin 2: 164 Territory /...">
+  <script type="application/ld+json">
+    {
+    "@context": {
+        "brick": "https://brickschema.org/schema/Brick#",
+        "csvw": "http://www.w3.org/ns/csvw#",
+        "dc": "http://purl.org/dc/elements/1.1/",
+        "dcam": "http://purl.org/dc/dcam/",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "dcmitype": "http://purl.org/dc/dcmitype/",
+        "dcterms": "http://purl.org/dc/terms/",
+        "doap": "http://usefulinc.com/ns/doap#",
+        "foaf": "http://xmlns.com/foaf/0.1/",
+        "geo": "http://www.opengis.net/ont/geosparql#",
+        "odrl": "http://www.w3.org/ns/odrl/2/",
+        "org": "http://www.w3.org/ns/org#",
+        "owl": "http://www.w3.org/2002/07/owl#",
+        "prof": "http://www.w3.org/ns/dx/prof/",
+        "prov": "http://www.w3.org/ns/prov#",
+        "qb": "http://purl.org/linked-data/cube#",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "schema": "http://schema.org/",
+        "sh": "http://www.w3.org/ns/shacl#",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "sosa": "http://www.w3.org/ns/sosa/",
+        "ssn": "http://www.w3.org/ns/ssn/",
+        "time": "http://www.w3.org/2006/time#",
+        "vann": "http://purl.org/vocab/vann/",
+        "void": "http://rdfs.org/ns/void#",
+        "wgs": "https://www.w3.org/2003/01/geo/wgs84_pos#",
+        "xsd": "http://www.w3.org/2001/XMLSchema#"
+    },
+    "@graph": [
+        {
+            "@id": "https://data.humdata.org/organization/ocha-fiss",
+            "@type": "schema:Organization",
+            "schema:contactPoint": [
+                {
+                    "@id": "_:N12ee2eb5cc6c4680af09a9acfde128d0"
+                },
+                {
+                    "@id": "_:Nf8ff41f46b5a4e4fbc97a21e947e3c69"
+                }
+            ],
+            "schema:name": "OCHA Field Information Services Section (FISS)"
+        },
+        {
+            "@id": "_:N12ee2eb5cc6c4680af09a9acfde128d0",
+            "@type": "schema:ContactPoint",
+            "schema:contactType": "customer service",
+            "schema:name": "0ad0784a-b5e1-45d4-bf2d-5530f5d1d239",
+            "schema:url": "https://data.humdata.org"
+        },
+        {
+            "@id": "_:Nf8ff41f46b5a4e4fbc97a21e947e3c69",
+            "@type": "schema:ContactPoint",
+            "schema:contactType": "customer service",
+            "schema:name": "0ad0784a-b5e1-45d4-bf2d-5530f5d1d239",
+            "schema:url": "https://data.humdata.org"
+        },
+        {
+            "@id": "https://data.humdata.org/dataset/f42132b9-8cc6-4201-b020-9259c56e8868/resource/9a9f9847-6a62-461f-bba9-ac8fce5f4831",
+            "@type": "schema:DataDownload",
+            "schema:contentUrl": "https://data.humdata.org/dataset/f42132b9-8cc6-4201-b020-9259c56e8868/resource/9a9f9847-6a62-461f-bba9-ac8fce5f4831/download/cod_admin_boundaries.xlsx",
+            "schema:description": "Democratic Republic of the Congo administrative level 0-3 boundaries (COD-AB), XLSX",
+            "schema:encodingFormat": "XLSX",
+            "schema:name": "cod_admin_boundaries.xlsx"
+        },
+        {
+            "@id": "https://data.humdata.org/dataset/f42132b9-8cc6-4201-b020-9259c56e8868/resource/7514482b-f7af-4654-8ea2-e8a34a6acb6a",
+            "@type": "schema:DataDownload",
+            "schema:contentUrl": "https://data.humdata.org/dataset/f42132b9-8cc6-4201-b020-9259c56e8868/resource/7514482b-f7af-4654-8ea2-e8a34a6acb6a/download/cod_admin_boundaries.shp.zip",
+            "schema:description": "Democratic Republic of the Congo administrative level 0-3 boundaries (COD-AB), SHP",
+            "schema:encodingFormat": "SHP",
+            "schema:name": "cod_admin_boundaries.shp.zip"
+        },
+        {
+            "@id": "https://data.humdata.org/dataset/f42132b9-8cc6-4201-b020-9259c56e8868/resource/93d6b999-01b1-411f-aaaf-5a3a5f7ed12c",
+            "@type": "schema:DataDownload",
+            "schema:contentUrl": "https://data.humdata.org/dataset/f42132b9-8cc6-4201-b020-9259c56e8868/resource/93d6b999-01b1-411f-aaaf-5a3a5f7ed12c/download/cod_admin_boundaries.gdb.zip",
+            "schema:description": "Democratic Republic of the Congo administrative level 0-3 boundaries (COD-AB), Geodatabase",
+            "schema:encodingFormat": "Geodatabase",
+            "schema:name": "cod_admin_boundaries.gdb.zip"
+        },
+        {
+            "@id": "https://data.humdata.org/dataset/cod-ab-cod",
+            "@type": "schema:Dataset",
+            "schema:about": {
+                "@id": "_:Ncb88d3aba7934fc793526bad81b51d7a"
+            },
+            "schema:creator": {
+                "@id": "https://data.humdata.org/organization/ocha-fiss"
+            },
+            "schema:dateModified": "2026-08-14T06:37:20.655367",
+            "schema:datePublished": "2017-04-13T17:50:49.423969",
+            "schema:description": "Democratic Republic of the Congo administrative level 0-3 boundaries (COD-AB) dataset version 01.  \n  \nThis dataset is structured into 3 levels:  \n- Admin 1: 26  Province  \n- Admin 2: 164 Territory / Territorie  \n- Admin 3: 519 Health zone / Zone de sant\u00e9  \n  \n  \nNote: Officially, there are 145 administrative units. However, to align with the admin3 level\u2014which in practice represents health district areas rather than administrative boundaries\u201419 admin2 units corresponding to the main cities have been created.  \n  \n  \nDates associated with this dataset:  \n- 20 December 2024: dataset reviewed for accuracy and completeness  \n- 11 September 2019: valid for use by the humanitarian community  \n- 12 September 2019: last edit to the dataset before publishing  \n- 12 September 2019: boundaries created by the source  \n  \nContributed by [OCHA Democratic Republic of the Congo (DRC)](https://data.humdata.org/organization/ocha-dr-congo).  \nQuality assured, configured, and published by [OCHA Field Information Services (FIS)](https://data.humdata.org/organization/ocha-fiss) and [HDX](https://data.humdata.org/organization/hdx).  \n  \nPart of the dataset: [Global Subnational Administrative Boundaries](https://data.humdata.org/dataset/cod-ab-global)",
+            "schema:distribution": [
+                {
+                    "@id": "https://data.humdata.org/dataset/f42132b9-8cc6-4201-b020-9259c56e8868/resource/9a9f9847-6a62-461f-bba9-ac8fce5f4831"
+                },
+                {
+                    "@id": "https://data.humdata.org/dataset/f42132b9-8cc6-4201-b020-9259c56e8868/resource/93d6b999-01b1-411f-aaaf-5a3a5f7ed12c"
+                },
+                {
+                    "@id": "https://data.humdata.org/dataset/f42132b9-8cc6-4201-b020-9259c56e8868/resource/7514482b-f7af-4654-8ea2-e8a34a6acb6a"
+                },
+                {
+                    "@id": "https://data.humdata.org/dataset/f42132b9-8cc6-4201-b020-9259c56e8868/resource/97260e2b-65b1-41e3-aef2-fb0e6874e406"
+                }
+            ],
+            "schema:identifier": "https://data.humdata.org/dataset/cod-ab-cod",
+            "schema:includedInDataCatalog": {
+                "@id": "_:Nb04a18efd94d4b37b9c9acc4075dd31f"
+            },
+            "schema:isAccessibleForFree": true,
+            "schema:keywords": [
+                "gazetteer",
+                "geodata",
+                "administrative boundaries-divisions",
+                "crisis-ebola-bundibugyo-virus-disease"
+            ],
+            "schema:license": "http://creativecommons.org/licenses/by/3.0/igo/legalcode",
+            "schema:name": "Democratic Republic of the Congo - Subnational Administrative Boundaries",
+            "schema:publisher": {
+                "@id": "https://data.humdata.org/organization/ocha-fiss"
+            },
+            "schema:spatialCoverage": "Democratic Republic of the Congo",
+            "schema:temporalCoverage": "2019-09-11T00:00:00/2024-12-20T23:59:59",
+            "schema:url": "https://data.humdata.org/dataset/cod-ab-cod"
+        },
+        {
+            "@id": "_:Nb04a18efd94d4b37b9c9acc4075dd31f",
+            "@type": "schema:DataCatalog",
+            "schema:description": "",
+            "schema:name": "Humanitarian Data Exchange",
+            "schema:url": "https://data.humdata.org"
+        },
+        {
+            "@id": "_:Ncb88d3aba7934fc793526bad81b51d7a",
+            "@type": "schema:Thing",
+            "schema:name": "cod",
+            "schema:url": "https://data.humdata.org/group/cod"
+        },
+        {
+            "@id": "https://data.humdata.org/dataset/f42132b9-8cc6-4201-b020-9259c56e8868/resource/97260e2b-65b1-41e3-aef2-fb0e6874e406",
+            "@type": "schema:DataDownload",
+            "schema:contentUrl": "https://data.humdata.org/dataset/f42132b9-8cc6-4201-b020-9259c56e8868/resource/97260e2b-65b1-41e3-aef2-fb0e6874e406/download/cod_admin_boundaries.geojson.zip",
+            "schema:description": "Democratic Republic of the Congo administrative level 0-3 boundaries (COD-AB), GeoJSON",
+            "schema:encodingFormat": "GeoJSON",
+            "schema:name": "cod_admin_boundaries.geojson.zip"
+        }
+    ]
+}
+  </script>
+
+
+    <link rel=preconnect href="https://fonts.gstatic.com" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link href="/webassets/ckanext-hdx_theme/1650c0bb_v2-components-styles.css" rel="stylesheet"/>
+<link href="/webassets/ckanext-hdx_theme/1b793184_v2-page-styles.css" rel="stylesheet"/>
+<link href="/webassets/ckanext-hdx_theme/c2ea7871_v2-dataset-page-styles.css" rel="stylesheet"/>
+    
+  </head>
+
+  
+  <body data-site-root="/" data-locale-root="/" data-api-root="" class="hdx-v2">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MFNPQ7K" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <a href="#hdx-v2-main" class="sr-only sr-only--focusable">Skip to main content</a>
+    
+    
+      
+
+
+
+
+
+
+
+
+
+
+<div id="logoutPopup" class="popup popup-onbording" style="display: none;" >
+    <div class="content ">
+        
+            <div class="row">
+                
+                <div class="col-12">
+                    
+    <div class="notification-widget">
+        <div class="notification-title ">
+            
+                You logged out of HDX
+            
+            <i class="close humanitarianicons-Exit-Cancel"></i>
+        </div>
+        <div>
+            <div>
+                
+    <div class="logout-widget">
+        <div class="center">
+            <img class="mTop20 lazyload" data-src="/images/onboarding/logout.png">
+            <div class="mTop30 notification-message">
+                Thank you for using HDX !
+            </div>
+        </div>
+    </div>
+
+            </div>
+        </div>
+    </div>
+
+                </div>
+
+            </div>
+        
+    </div>
+</div>
+
+    
+
+    
+      
+
+
+
+
+<header class="hdx-v2-header">
+
+  
+  
+  <div class="hdx-v2-top-bar">
+    <div class="hdx-v2-top-bar__inner hdx-v2-container">
+
+      
+      <div class="hdx-v2-top-bar__services">
+        <button class="hdx-v2-top-bar__services-trigger"
+                type="button"
+                data-hdx-v2-panel="services"
+                aria-expanded="false"
+                aria-controls="hdx-v2-panel-services"
+                aria-label="OCHA services">
+          <span class="hdx-v2-top-bar__services-logo" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 21 18" fill="none"><use href="/v2/icons/ocha-logo.svg#i"/></svg></span>
+          <span class="hdx-v2-top-bar__services-text">OCHA Services</span>
+          <span class="hdx-v2-top-bar__services-chevron"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/chevron-down.svg#i"/></svg></span>
+        </button>
+
+        <div class="hdx-v2-top-bar__dropdown" id="hdx-v2-panel-services" role="menu" hidden>
+          <div class="hdx-v2-top-bar__dropdown-grid">
+
+          
+            <div class="hdx-v2-top-bar__dropdown-col">
+              <p class="hdx-v2-top-bar__dropdown-heading">Related Platforms</p>
+              <ul class="hdx-v2-top-bar__dropdown-list">
+                <li>
+                  <a href="https://centre.humdata.org/" target="_blank" rel="noopener noreferrer"
+                     data-module="hdx_click_stopper" data-module-link_type="header">Centre for Humanitarian Data</a>
+                </li>
+              </ul>
+            </div>
+
+          
+            <div class="hdx-v2-top-bar__dropdown-col">
+              <p class="hdx-v2-top-bar__dropdown-heading">Other OCHA Services</p>
+              <ul class="hdx-v2-top-bar__dropdown-list">
+                <li>
+                  <a href="https://cerf.un.org/" target="_blank" rel="noopener noreferrer"
+                     data-module="hdx_click_stopper" data-module-link_type="header">Central Emergency Response Fund</a>
+                </li>
+                <li>
+                  <a href="https://fts.unocha.org/" target="_blank" rel="noopener noreferrer"
+                     data-module="hdx_click_stopper" data-module-link_type="header">Financial Tracking Service</a>
+                </li>
+                <li>
+                  <a href="https://gdacs.org/" target="_blank" rel="noopener noreferrer"
+                     data-module="hdx_click_stopper" data-module-link_type="header">Global Disaster Alert &amp; Coordination System</a>
+                </li>
+                <li>
+                  <a href="https://humanitarianaction.info/" target="_blank" rel="noopener noreferrer"
+                     data-module="hdx_click_stopper" data-module-link_type="header">Humanitarian Action</a>
+                </li>
+                <li>
+                  <a href="https://www.insarag.org/" target="_blank" rel="noopener noreferrer"
+                     data-module="hdx_click_stopper" data-module-link_type="header">International Search and Rescue Advisory</a>
+                </li>
+              </ul>
+            </div>
+
+          
+            <div class="hdx-v2-top-bar__dropdown-col">
+              <p class="hdx-v2-top-bar__dropdown-heading hdx-v2-top-bar__dropdown-heading--empty">&nbsp;</p>
+              <ul class="hdx-v2-top-bar__dropdown-list">
+                <li>
+                  <a href="https://interagencystandingcommittee.org/" target="_blank" rel="noopener noreferrer"
+                     data-module="hdx_click_stopper" data-module-link_type="header">Inter-Agency Standing Committee</a>
+                </li>
+                <li>
+                  <a href="https://pfdata.unocha.org/" target="_blank" rel="noopener noreferrer"
+                     data-module="hdx_click_stopper" data-module-link_type="header">Pooled Funds Data Hub</a>
+                </li>
+                <li>
+                  <a href="https://reliefweb.int/" target="_blank" rel="noopener noreferrer"
+                     data-module="hdx_click_stopper" data-module-link_type="header">ReliefWeb</a>
+                </li>
+                <li>
+                  <a href="https://response.reliefweb.int/" target="_blank" rel="noopener noreferrer"
+                     data-module="hdx_click_stopper" data-module-link_type="header">ReliefWeb Response</a>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      
+      <nav class="hdx-v2-top-bar__nav">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="c-text-link c-text-link--primary c-text-link--size-s"
+   href="https://docs.humdata.org/"
+   target="_blank"
+   rel="noopener noreferrer"
+   
+    data-module="hdx_click_stopper" data-module-link_type="header" aria-label="documentation link">Documentation</a>
+      </nav>
+
+    </div>
+  </div>
+  
+
+  
+  <nav class="hdx-v2-navbar"
+       aria-label="Main navigation"
+       >
+    <div class="hdx-v2-navbar__inner hdx-v2-container">
+
+      
+      <a class="hdx-v2-navbar__logo" href="/" aria-label="HDX — Humanitarian Data Exchange"
+         data-module="hdx_click_stopper" data-module-link_type="header">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 121 40" fill="none"><use href="/v2/icons/hdx.svg#i"/></svg>
+      </a>
+
+      
+      
+      
+      
+      <div class="hdx-v2-navbar__search">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<form action="/dataset/" method="get" role="search">
+  <input type="hidden" name="ext_search_source" value="main-nav">
+
+<div class="c-autocomplete"
+     role="combobox"
+     aria-haspopup="listbox"
+     aria-expanded="false"
+     data-hdx-v2-search-autocomplete
+     data-search-source="main-nav">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="c-search-input c-search-input--size-m"
+      data-search-managed="">
+
+  <input type="search"
+         name="q"
+         
+         placeholder="Search for datasets, locations or organisations"
+         value=""
+         autocomplete="off"
+         >
+
+  
+    <button class="c-search-input__clear" type="button" aria-label="Clear search">
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/close.svg#i"/></svg>
+    </button>
+    
+      
+      <button class="c-search-input__icon c-search-input__icon--btn" type="submit" aria-label="Search">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/search.svg#i"/></svg>
+      </button>
+    
+  
+
+</div>
+
+  <div class="c-autocomplete__panel" role="listbox" hidden>
+
+    
+    
+
+    
+    <div class="c-autocomplete__results" data-results-label="Search results">
+      
+    </div>
+
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<button
+  type="submit"
+  class="c-button c-button--tertiary c-button--size-m c-autocomplete__confirm-btn"
+  
+  
+  
+  
+>
+
+
+  
+  
+
+    
+
+    <span class="c-button__label">View all results</span>
+
+    
+
+  
+
+
+</button>
+
+
+  </div>
+
+</div>
+</form>
+      </div>
+      
+
+      
+      <div class="hdx-v2-navbar__nav">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="c-nav-item"
+   href="/dataset/"
+   
+    data-module="hdx_click_stopper" data-module-link_type="main nav">
+
+  <span class="c-nav-item__label">Data</span>
+
+  
+
+</a>
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="c-nav-item"
+   href="/group/"
+   
+    data-module="hdx_click_stopper" data-module-link_type="main nav">
+
+  <span class="c-nav-item__label">Locations</span>
+
+  
+
+</a>
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="c-nav-item"
+   href="/organization/"
+   
+    data-module="hdx_click_stopper" data-module-link_type="main nav">
+
+  <span class="c-nav-item__label">Organisations</span>
+
+  
+
+</a>
+
+        
+        <div class="hdx-v2-navbar__products">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="c-nav-item"
+   href="#"
+   
+    data-hdx-v2-panel="products" aria-expanded="false" aria-controls="hdx-v2-panel-products">
+
+  <span class="c-nav-item__label">Products</span>
+
+  
+    <span class="c-nav-item__chevron"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/chevron-down.svg#i"/></svg></span>
+  
+
+</a>
+          <ul class="hdx-v2-navbar__products-panel" id="hdx-v2-panel-products" hidden>
+            
+              <li>
+                <a href="/crisis-pages"
+                   
+                   data-module="hdx_click_stopper" data-module-link_type="main nav">
+                  Crisis Pages
+                </a>
+              </li>
+            
+              <li>
+                <a href="/dashboards/overview-of-data-grids"
+                   
+                   data-module="hdx_click_stopper" data-module-link_type="main nav">
+                  Data Grids
+                </a>
+              </li>
+            
+              <li>
+                <a href="/dataviz-gallery"
+                   
+                   data-module="hdx_click_stopper" data-module-link_type="main nav">
+                  Dataviz Gallery
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://docs.humdata.org/build/hdx-apis/hapi"
+                   
+                   data-module="hdx_click_stopper" data-module-link_type="main nav">
+                  Humanitarian API
+                </a>
+              </li>
+            
+              <li>
+                <a href="/signals"
+                   
+                   data-module="hdx_click_stopper" data-module-link_type="main nav">
+                  Signals
+                </a>
+              </li>
+            
+              <li>
+                <a href="/dashboards/archived-datasets"
+                   
+                   data-module="hdx_click_stopper" data-module-link_type="main nav">
+                  Archived Datasets
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+
+      
+      <div class="hdx-v2-navbar__actions">
+        
+        
+        <button class="hdx-v2-navbar__search-icon" type="button"
+                aria-label="Search"
+                aria-expanded="false"
+                aria-controls="hdx-search-autocomplete-overlay"
+                data-action="open-search-overlay">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/search.svg#i"/></svg>
+        </button>
+        
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<a
+  class="c-button c-button--secondary c-button--size-m hdx-v2-navbar__login"
+  href="/sign-in?came_from=/dataset/cod-ab-cod"
+  
+  
+  
+   data-module="hdx_click_stopper" data-module-link_type="header"
+>
+
+
+  
+  
+
+    
+
+    <span class="c-button__label">Log in</span>
+
+    
+
+  
+
+
+</a>
+
+        
+
+        
+        <button class="hdx-v2-navbar__hamburger" type="button"
+                aria-label="Open menu"
+                aria-label-close="Close menu"
+                aria-expanded="false"
+                aria-controls="hdx-v2-offcanvas"
+                data-hdx-v2-panel="offcanvas">
+          <span class="hdx-v2-navbar__icon-menu"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/menu.svg#i"/></svg></span>
+          <span class="hdx-v2-navbar__icon-close"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/close.svg#i"/></svg></span>
+        </button>
+      </div>
+      
+
+    </div>
+  </nav>
+
+  
+  
+  <div class="hdx-v2-offcanvas" id="hdx-v2-offcanvas" aria-hidden="true">
+    <div class="hdx-v2-offcanvas__body">
+
+      
+      <div class="hdx-v2-offcanvas__primary">
+
+        
+        
+
+        
+        <nav class="hdx-v2-offcanvas__nav" aria-label="Mobile navigation">
+          <a class="hdx-v2-offcanvas__nav-item" href="/"
+             data-module="hdx_click_stopper" data-module-link_type="main nav">
+            Home
+          </a>
+          <a class="hdx-v2-offcanvas__nav-item" href="/dataset/"
+             data-module="hdx_click_stopper" data-module-link_type="main nav">
+            Data
+          </a>
+          <a class="hdx-v2-offcanvas__nav-item" href="/group/"
+             data-module="hdx_click_stopper" data-module-link_type="main nav">
+            Locations
+          </a>
+          <a class="hdx-v2-offcanvas__nav-item" href="/organization/"
+             data-module="hdx_click_stopper" data-module-link_type="main nav">
+            Organisations
+          </a>
+
+          
+          <button class="hdx-v2-offcanvas__nav-item hdx-v2-offcanvas__nav-item--expandable"
+                  type="button"
+                  aria-expanded="true"
+                  aria-controls="offcanvas-products"
+                  data-module="hdx_click_stopper" data-module-link_type="main nav">
+            Products
+            <span class="hdx-v2-offcanvas__expand-icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/chevron-down.svg#i"/></svg></span>
+          </button>
+          <ul class="hdx-v2-offcanvas__subnav" id="offcanvas-products">
+            
+              <li>
+                <a href="/crisis-pages"
+                   
+                   data-module="hdx_click_stopper" data-module-link_type="main nav">
+                  Crisis Pages
+                </a>
+              </li>
+            
+              <li>
+                <a href="/dashboards/overview-of-data-grids"
+                   
+                   data-module="hdx_click_stopper" data-module-link_type="main nav">
+                  Data Grids
+                </a>
+              </li>
+            
+              <li>
+                <a href="/dataviz-gallery"
+                   
+                   data-module="hdx_click_stopper" data-module-link_type="main nav">
+                  Dataviz Gallery
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://docs.humdata.org/build/hdx-apis/hapi"
+                   
+                   data-module="hdx_click_stopper" data-module-link_type="main nav">
+                  Humanitarian API
+                </a>
+              </li>
+            
+              <li>
+                <a href="/signals"
+                   
+                   data-module="hdx_click_stopper" data-module-link_type="main nav">
+                  Signals
+                </a>
+              </li>
+            
+              <li>
+                <a href="/dashboards/archived-datasets"
+                   
+                   data-module="hdx_click_stopper" data-module-link_type="main nav">
+                  Archived Datasets
+                </a>
+              </li>
+            
+          </ul>
+        </nav>
+
+        
+        <div class="hdx-v2-offcanvas__footer">
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a
+  class="c-button c-button--secondary c-button--size-l"
+  href="/sign-in?came_from=/dataset/cod-ab-cod"
+  
+  
+  
+   data-module="hdx_click_stopper" data-module-link_type="main nav"
+>
+
+
+  
+  
+
+    
+
+    <span class="c-button__label">Log in</span>
+
+    
+
+  
+
+
+</a>
+
+          
+        </div>
+
+      </div>
+
+      
+      
+
+    </div>
+  </div>
+
+  
+  <div class="hdx-v2-offcanvas__backdrop" hidden data-hdx-v2-close="offcanvas"></div>
+
+  
+  
+  
+  
+  <div class="hdx-v2-search-filter-overlay" id="hdx-search-autocomplete-overlay" role="dialog" aria-modal="true" aria-label="Search">
+    <div class="hdx-v2-search-filter-overlay__header">
+      <span class="hdx-v2-search-filter-overlay__title">Search</span>
+      <button type="button"
+              class="hdx-v2-search-filter-overlay__close"
+              data-action="close-search-overlay"
+              aria-label="Close search">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/close.svg#i"/></svg>
+      </button>
+    </div>
+
+    <div class="hdx-v2-search-filter-overlay__body">
+      <form class="hdx-v2-search-filter-overlay__form"
+            id="hdx-search-overlay-form"
+            action="/dataset/"
+            method="get"
+            role="search">
+        <input type="hidden" name="ext_search_source" value="main-nav">
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="c-search-input c-search-input--size-l"
+      data-search-managed="">
+
+  <input type="search"
+         name="q"
+         id="hdx-search-overlay-input"
+         placeholder="Search for datasets, locations or organisations"
+         value=""
+         autocomplete="off"
+         >
+
+  
+    <button class="c-search-input__clear" type="button" aria-label="Clear search">
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/close.svg#i"/></svg>
+    </button>
+    
+      
+      <button class="c-search-input__icon c-search-input__icon--btn" type="submit" aria-label="Search">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/search.svg#i"/></svg>
+      </button>
+    
+  
+
+</div>
+
+        <div class="hdx-v2-search-filter-overlay__results c-autocomplete__results"
+             role="listbox"
+             aria-label="Search suggestions">
+        </div>
+      </form>
+    </div>
+
+    <div class="hdx-v2-search-filter-overlay__footer">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+<button
+  type="button"
+  class="c-button c-button--tertiary c-button--size-l is-disabled"
+  
+  disabled aria-disabled="true"
+  
+   data-action="clear-search-overlay"
+>
+
+
+  
+  
+
+    
+
+    <span class="c-button__label">Clear</span>
+
+    
+
+  
+
+
+</button>
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<button
+  type="submit"
+  class="c-button c-button--primary c-button--size-l"
+  
+  
+  
+   form="hdx-search-overlay-form"
+>
+
+
+  
+  
+
+    
+
+    <span class="c-button__label">View all results</span>
+
+    
+
+  
+
+
+</button>
+
+    </div>
+
+  </div>
+  
+
+</header>
+    
+  
+    <div role="main" id="hdx-v2-main">
+      <div id="content">
+        
+          <div class="hdx-v2-breadcrumb-row">
+            <div class="hdx-v2-container">
+              
+  
+
+
+
+
+
+
+
+<nav class="c-breadcrumb"
+     aria-label="Breadcrumb"
+     vocab="https://schema.org/"
+     typeof="BreadcrumbList">
+
+  
+    
+    
+
+    <span class="c-breadcrumb__item"
+          property="itemListElement"
+          typeof="ListItem">
+
+      
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="c-text-link c-text-link--tertiary c-text-link--size-xs"
+   href="/"
+   
+   
+   
+    property="item" typeof="WebPage"><span  property="name">Home</span></a>
+      
+
+      <meta property="position" content="1">
+
+      
+        <span class="c-breadcrumb__separator" aria-hidden="true">/</span>
+      
+
+    </span>
+  
+    
+    
+
+    <span class="c-breadcrumb__item"
+          property="itemListElement"
+          typeof="ListItem">
+
+      
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="c-text-link c-text-link--tertiary c-text-link--size-xs"
+   href="/organization/ocha-fiss"
+   
+   
+   
+    property="item" typeof="WebPage"><span  property="name">OCHA Field Information Services Section (FISS)</span></a>
+      
+
+      <meta property="position" content="2">
+
+      
+        <span class="c-breadcrumb__separator" aria-hidden="true">/</span>
+      
+
+    </span>
+  
+    
+    
+
+    <span class="c-breadcrumb__item"
+          property="itemListElement"
+          typeof="ListItem">
+
+      
+        <span class="c-breadcrumb__current"
+              property="name">Democratic Republic of the Congo - Subnational Administrative Boundaries</span>
+      
+
+      <meta property="position" content="3">
+
+      
+
+    </span>
+  
+
+</nav>
+
+            </div>
+          </div>
+        
+
+        
+          <div class="flash-messages">
+            <div class="hdx-v2-container">
+              
+                
+                
+              
+            </div>
+          </div>
+        
+
+        
+          
+          <div class="">
+            
+            
+              
+  <div class="hdx-v2-page-header-section">
+    <div class="hdx-v2-container">
+  
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    
+    
+    
+    
+    
+
+    
+    
+      
+      
+    
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="c-page-header">
+
+  
+  <div class="c-page-header__top">
+
+    <div class="c-page-header__left">
+      <div class="c-page-header__description">
+
+        
+        
+
+        
+        
+        <div class="c-page-header__labels">
+
+          
+
+          
+
+          
+
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="c-label c-label--grey c-label--size-s"
+      >
+
+
+  
+
+  
+    <span class="c-label__text">COD+</span>
+  
+
+</span>
+          
+
+          
+            <div class="c-page-header__link-group">
+              
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="c-label c-label--grey c-label--size-s"
+      >
+
+
+  
+
+  
+    <span class="c-label__text">Part of the </span>
+  
+
+</span>
+              
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<a
+  class="c-text-button c-text-button--tertiary c-text-button--size-s"
+  href="https://data.humdata.org/group/cod"
+  
+   target="_self"
+>
+
+
+  
+
+  <span class="c-text-button__label">Democratic Republic of the Congo Data Grid</span>
+
+  
+    
+    <span class="c-text-button__icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/arrow-right.svg#i"/></svg></span>
+  
+  
+
+
+</a>
+
+            </div>
+          
+
+          
+            <div class="c-page-header__link-group">
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="c-label c-label--grey c-label--size-s"
+      >
+
+
+  
+
+  
+    <span class="c-label__text">Part of Ebola Bundibugyo Virus Disease Crisis</span>
+  
+
+</span>
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<a
+  class="c-text-button c-text-button--tertiary c-text-button--size-s"
+  href="/event/crisis-ebola-bundibugyo-virus-disease"
+  
+  
+>
+
+
+  
+
+  <span class="c-text-button__label">View crisis page</span>
+
+  
+    
+    <span class="c-text-button__icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/arrow-right.svg#i"/></svg></span>
+  
+  
+
+
+</a>
+
+            </div>
+          
+
+        </div>
+        
+
+        
+        
+          
+          
+            
+            <h1 class="c-page-header__title"
+                >Democratic Republic of the Congo - Subnational Administrative Boundaries</h1>
+          
+          
+        
+
+        
+        
+
+        
+        
+
+        
+        
+
+        
+        
+
+        
+        
+        <div class="c-page-header__desc"
+             data-module="clamped-text"
+             >
+          <div class="c-page-header__desc-text" data-clamped-content><p>Democratic Republic of the Congo administrative level 0-3 boundaries (COD-AB) dataset version 01.  </p>
+<p>This dataset is structured into 3 levels:<br>
+- Admin 1: 26  Province<br>
+- Admin 2: 164 Territory / Territorie<br>
+- Admin 3: 519 Health zone / Zone de santé  </p>
+<p>Note: Officially, there are 145 administrative units. However, to align with the admin3 level—which in practice represents health district areas rather than administrative boundaries—19 admin2 units corresponding to the main cities have been created.  </p>
+<p>Dates associated with this dataset:<br>
+- 20 December 2024: dataset reviewed for accuracy and completeness<br>
+- 11 September 2019: valid for use by the humanitarian community<br>
+- 12 September 2019: last edit to the dataset before publishing<br>
+- 12 September 2019: boundaries created by the source  </p>
+<p>Contributed by <a href="https://data.humdata.org/organization/ocha-dr-congo">OCHA Democratic Republic of the Congo (DRC)</a>.<br>
+Quality assured, configured, and published by <a href="https://data.humdata.org/organization/ocha-fiss">OCHA Field Information Services (FIS)</a> and <a href="https://data.humdata.org/organization/hdx">HDX</a>.  </p>
+<p>Part of the dataset: <a href="https://data.humdata.org/dataset/cod-ab-global">Global Subnational Administrative Boundaries</a></p></div>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<button
+  type="button"
+  class="c-text-button c-text-button--tertiary c-text-button--size-s"
+  
+   data-clamped-toggle=""
+>
+
+
+  
+
+  <span class="c-text-button__label">Show more</span>
+
+  
+    
+    <span class="c-text-button__icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/chevron-down.svg#i"/></svg></span>
+  
+  
+
+
+</button>
+
+        </div>
+        
+
+        
+        
+
+      </div>
+      
+
+      
+      
+      <div class="c-page-header__cta">
+        
+          
+
+
+
+
+<div class="notification-platform-wrapper">
+
+
+  <div class="notification-platform-opt-in-action-menu" hidden>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<a
+  class="c-button c-button--primary c-button--size-m"
+  href="#"
+  
+  
+  
+  
+>
+
+
+  
+  
+
+    
+      
+    <span class="c-button__icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/bell.svg#i"/></svg></span>
+  
+    
+
+    <span class="c-button__label">Get Notified</span>
+
+    
+
+  
+
+
+</a>
+
+  </div>
+
+
+  <div class="notification-platform-opt-out-action-menu" hidden>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<a
+  class="c-button c-button--secondary c-button--size-m"
+  href="#"
+  
+  
+  
+  
+>
+
+
+  
+  
+
+    
+      
+    <span class="c-button__icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/bell.svg#i"/></svg></span>
+  
+    
+
+    <span class="c-button__label">Unsubscribe</span>
+
+    
+
+  
+
+
+</a>
+
+  </div>
+
+</div>
+        
+        
+          <div class="c-page-header__downloads">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/trend-up.svg#i"/></svg>
+            <span>14000 downloads</span>
+          </div>
+        
+      </div>
+      
+
+    </div>
+    
+
+    
+    
+    <div class="c-page-header__right-card">
+      
+        
+          <a class="c-page-header__logo-link mx-ga-dimension-organization" href="/organization/b3a25ac4-ac05-4991-923c-d25f47bef1ec">
+            <img class="c-page-header__logo" src="/image/2021-12-10-055058.773985UNOCHA_logo_horizontal_blue_RGB.png" alt="OCHA Field Information Services Section (FISS)">
+          </a>
+        
+      
+      
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<a
+  class="c-text-button c-text-button--tertiary c-text-button--size-m"
+  href="/sign-in?came_from=/dataset/cod-ab-cod/contact/&amp;info_message_type=contact-contributor"
+  
+   id="contact-the-contributor"
+>
+
+
+  
+    
+    <span class="c-text-button__icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/mail.svg#i"/></svg></span>
+  
+  
+
+  <span class="c-text-button__label">Contact the contributor</span>
+
+  
+
+
+</a>
+
+        
+        
+        
+      
+      
+      
+    </div>
+    
+
+  </div>
+  
+
+  
+  
+
+  
+  
+  <hr class="c-divider">
+  <div class="c-page-header__metadata">
+
+    
+    <div class="c-page-header__meta-item">
+      <div class="c-page-header__meta-label-row">
+        <span class="c-page-header__meta-label">Location</span>
+        
+        
+        
+      </div>
+      <div class="c-page-header__meta-value">
+        <span>Democratic Republic of the Congo</span>
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="c-label c-label--cyan c-label--size-xs"
+      >
+
+
+  
+
+  
+    <span class="c-label__text">Sub-national</span>
+  
+
+</span>
+        
+      </div>
+    </div>
+    
+    <div class="c-page-header__meta-item">
+      <div class="c-page-header__meta-label-row">
+        <span class="c-page-header__meta-label">Expected update frequency</span>
+        
+        
+        
+      </div>
+      <div class="c-page-header__meta-value">
+        <span>Every year</span>
+        
+      </div>
+    </div>
+    
+    <div class="c-page-header__meta-item">
+      <div class="c-page-header__meta-label-row">
+        <span class="c-page-header__meta-label">Time period</span>
+        
+        
+        
+          
+
+
+
+
+
+
+
+<div class="c-tooltip-anchor">
+  <button type="button"
+          class="c-info-icon c-tooltip-trigger"
+          aria-label="More info about time period"
+          aria-expanded="false"
+          aria-describedby="tooltip-time-period">
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/info-circle.svg#i"/></svg>
+  </button>
+  
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="c-tooltip c-tooltip--dark"
+     role="tooltip"
+     id="tooltip-time-period">
+
+  
+  
+
+    <span class="c-tooltip__text">The earliest start date and latest end date across all resources included in the dataset.</span>
+
+    
+
+  
+  
+
+</div>
+  
+</div>
+        
+      </div>
+      <div class="c-page-header__meta-value">
+        <span>11 September 2019 - 20 December 2024</span>
+        
+      </div>
+    </div>
+    
+    <div class="c-page-header__meta-item" data-header-meta-overflow>
+      <div class="c-page-header__meta-label-row">
+        <span class="c-page-header__meta-label">Source</span>
+        
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+
+
+
+<a
+  class="c-text-button c-text-button--tertiary c-text-button--size-s c-page-header__meta-view-more"
+  href="#metadata-source"
+  
+  
+>
+
+
+  
+
+  <span class="c-text-button__label">View more</span>
+
+  
+    
+    <span class="c-text-button__icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/arrow-down.svg#i"/></svg></span>
+  
+  
+
+
+</a>
+
+        
+        
+      </div>
+      <div class="c-page-header__meta-value c-page-header__meta-value--truncate">
+        <span>Referenciel Géographique Commun</span>
+        
+      </div>
+    </div>
+    
+
+  </div>
+  
+
+</section>
+
+
+
+  
+    </div>
+  </div>
+
+            
+
+            <div class="hdx-v2-page-row hdx-v2-dataset-row">
+              <div class="hdx-v2-container">
+                <div class="hdx-v2-content-columns hdx-v2-content-columns--gap-xl">
+                  
+                    <div class="hdx-v2-content-columns__sidebar hdx-v2-content-columns__sidebar--xl-only hdx-v2-dataset-sidebar">
+                      
+  
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="c-anchor-links-wrapper">
+  
+    <p class="c-anchor-links__heading">Dataset details</p>
+  
+
+  <nav class="c-anchor-links"
+       aria-label="Page sections">
+    
+      
+      <a class="c-anchor-links__item c-anchor-links__item--active"
+         href="#preview"
+         aria-current="true"
+         >
+        <span class="c-anchor-links__border" aria-hidden="true"></span>
+        <div class="c-anchor-links__content">
+          <span class="c-anchor-links__label">Preview</span>
+          
+        </div>
+      </a>
+    
+      
+      <a class="c-anchor-links__item c-anchor-links__item--inactive"
+         href="#data-and-resources"
+         
+         >
+        <span class="c-anchor-links__border" aria-hidden="true"></span>
+        <div class="c-anchor-links__content">
+          <span class="c-anchor-links__label">Data and resources</span>
+          
+        </div>
+      </a>
+    
+      
+      <a class="c-anchor-links__item c-anchor-links__item--inactive"
+         href="#metadata"
+         
+         >
+        <span class="c-anchor-links__border" aria-hidden="true"></span>
+        <div class="c-anchor-links__content">
+          <span class="c-anchor-links__label">Metadata</span>
+          
+        </div>
+      </a>
+    
+      
+      <a class="c-anchor-links__item c-anchor-links__item--inactive"
+         href="#activity"
+         
+         >
+        <span class="c-anchor-links__border" aria-hidden="true"></span>
+        <div class="c-anchor-links__content">
+          <span class="c-anchor-links__label">Activity</span>
+          
+        </div>
+      </a>
+    
+  </nav>
+</div>
+
+
+
+
+
+
+                    </div>
+                  
+                  <div class="hdx-v2-content-columns__content">
+                    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <div class="c-anchor-links-mobile"
+       data-module="anchor-dropdown">
+    <button class="c-anchor-links-mobile__toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="anchor-dropdown-panel">
+      <span class="c-anchor-links-mobile__label">Preview</span>
+      <span class="c-anchor-links-mobile__chevron" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/chevron-down.svg#i"/></svg></span>
+    </button>
+    <ul class="c-anchor-links-mobile__panel"
+        id="anchor-dropdown-panel"
+        hidden>
+      
+        <li>
+          <a class="c-anchor-links-mobile__item is-active"
+             href="#preview"
+             >Preview</a>
+        </li>
+      
+        <li>
+          <a class="c-anchor-links-mobile__item"
+             href="#data-and-resources"
+             >Data and resources</a>
+        </li>
+      
+        <li>
+          <a class="c-anchor-links-mobile__item"
+             href="#metadata"
+             >Metadata</a>
+        </li>
+      
+        <li>
+          <a class="c-anchor-links-mobile__item"
+             href="#activity"
+             >Activity</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+  
+  
+    <section class="hdx-v2-dataset-section" id="preview">
+      <div class="hdx-v2-dataset-section__header">
+        <h2 class="hdx-v2-dataset-section__title">Preview</h2>
+      </div>
+      <div class="hdx-v2-dataset-section__body">
+        <div id="mapbox-baselayer-url-div" class="hdx-v2-dataset-map__config">{&#34;baseMapUrl&#34;: &#34;/mapbox&#34;, &#34;token&#34;: &#34;cacheToken&#34;, &#34;style&#34;: &#34;mapbox://styles/humdata/cmneqc85n005a01ry0xal9ard&#34;}</div>
+        <div id="shapeData" class="hdx-v2-dataset-map__config">[{&#34;resource_name&#34;: &#34;cod_admin_boundaries.shp.zip&#34;, &#34;resource_format&#34;: &#34;SHP&#34;, &#34;url&#34;: &#34;//data.humdata.org/gis/pre_7514482b_f7af_4654_8ea2_e8a34a6acb6a/{z}/{x}/{y}.pbf&#34;, &#34;bounding_box&#34;: &#34;BOX(12.939350000000047 -11.65955299999996,30.222499999999968 4.283333000000027)&#34;, &#34;layer_fields&#34;: [{&#34;field_name&#34;: &#34;ogc_fid&#34;, &#34;data_type&#34;: &#34;integer&#34;}, {&#34;field_name&#34;: &#34;adm_p_lvl&#34;, &#34;data_type&#34;: &#34;numeric&#34;}, {&#34;field_name&#34;: &#34;name&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;name_1&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;name_2&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;name_3&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;loc_pcode&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;x_coord&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;y_coord&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm3_name&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm3_name1&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm3_name2&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm3_name3&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm3_pcode&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm2_name&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm2_name1&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm2_name2&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm2_name3&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm2_pcode&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm1_name&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm1_name1&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm1_name2&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm1_name3&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm1_pcode&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm0_name&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm0_name1&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm0_name2&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm0_name3&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm0_pcode&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;valid_on&#34;, &#34;data_type&#34;: &#34;date&#34;}, {&#34;field_name&#34;: &#34;valid_to&#34;, &#34;data_type&#34;: &#34;date&#34;}, {&#34;field_name&#34;: &#34;version&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;name_lng&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;name_lng1&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;name_lng2&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;name_lng3&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;wkb_geometry&#34;, &#34;data_type&#34;: &#34;USER-DEFINED&#34;}], &#34;layer_id&#34;: &#34;pre_7514482b_f7af_4654_8ea2_e8a34a6acb6a&#34;}, {&#34;resource_name&#34;: &#34;cod_admin_boundaries.geojson.zip&#34;, &#34;resource_format&#34;: &#34;GeoJSON&#34;, &#34;url&#34;: &#34;//data.humdata.org/gis/pre_97260e2b_65b1_41e3_aef2_fb0e6874e406/{z}/{x}/{y}.pbf&#34;, &#34;bounding_box&#34;: &#34;BOX(12.205664554000066 -13.455997414999956,31.305220572000167 5.386098154000138)&#34;, &#34;layer_fields&#34;: [{&#34;field_name&#34;: &#34;ogc_fid&#34;, &#34;data_type&#34;: &#34;integer&#34;}, {&#34;field_name&#34;: &#34;adm3_name&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm3_name1&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm3_name2&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm3_name3&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm3_pcode&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm2_name&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm2_name1&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm2_name2&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm2_name3&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm2_pcode&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm1_name&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm1_name1&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm1_name2&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm1_name3&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm1_pcode&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm0_name&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm0_name1&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm0_name2&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm0_name3&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;adm0_pcode&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;valid_on&#34;, &#34;data_type&#34;: &#34;date&#34;}, {&#34;field_name&#34;: &#34;valid_to&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;area_sqkm&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;version&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;lang&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;lang1&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;lang2&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;lang3&#34;, &#34;data_type&#34;: &#34;character varying&#34;}, {&#34;field_name&#34;: &#34;wkb_geometry&#34;, &#34;data_type&#34;: &#34;USER-DEFINED&#34;}], &#34;layer_id&#34;: &#34;pre_97260e2b_65b1_41e3_aef2_fb0e6874e406&#34;}]</div>
+        <div id="map" class="hdx-v2-dataset-map"></div>
+      </div>
+    </section>
+    <hr class="c-divider">
+  
+
+  
+  <section class="hdx-v2-dataset-section" id="data-and-resources">
+    <div class="hdx-v2-dataset-section__header">
+      <div class="hdx-v2-dataset-section__title-row">
+        <div class="hdx-v2-dataset-section__left">
+          <h2 class="hdx-v2-dataset-section__title">Data and resources</h2>
+          
+            <span class="hdx-v2-dataset-section__count">4</span>
+          
+        </div>
+        
+        
+      </div>
+    </div>
+    <div class="hdx-v2-dataset-section__body">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="dataUseSurveyPopup" class="popup popup-onbording" style="display: none;" >
+    <div class="content ">
+        
+            <div class="row">
+                
+                <div class="col-12">
+                    
+    <div class="notification-widget">
+        <div class="notification-title ">
+            
+                HDX Data Use Survey
+            
+            <i class="close humanitarianicons-Exit-Cancel"></i>
+        </div>
+        <div>
+            <div>
+                
+  <div class="survey-widget">
+    <div class="survey-content">
+      <div class="center">
+      <div style="text-align: justify;">
+        
+        Please take 30 seconds to help HDX and OCHA Field Information Services Section (FISS) understand your interest in this data.
+      </div>
+    </div>
+      <div class="right-side-actions">
+        <div id="dataUseSurveyPkgId" style="visibility:hidden;position:absolute;">f42132b9-8cc6-4201-b020-9259c56e8868</div>
+        <div id="dataUseSurveyPkgUrl" style="visibility:hidden;position:absolute;">https://data.humdata.org/dataset/cod-ab-cod</div>
+        <div id="dataUseSurveyOrgName" style="visibility:hidden;position:absolute;">ocha-fiss</div>
+        <input class="btn btn-empty btn-empty-black btn-large float-start" type="button" onclick="closeCurrentWidget(this);" value="Not now">
+        <a href="#"  class="mL35 btn btn-primary btn-primary-small btn-large float-end" type="button" value="Take survey">Take the survey</a>
+      </div>
+    </div>
+    <iframe style="display: none;"></iframe>
+  </div>
+
+            </div>
+        </div>
+    </div>
+
+                </div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+
+
+<div id="dataset-resources" class="resources mTop35 info-wrapper">
+  <div class="requested-data-message"></div>
+  
+    
+      
+      <div class="resource-list c-resource-card-list">
+        
+          
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="resource-item"
+     data-grouping-id=""
+     style="">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="c-resource-card" data-module="clamped-text">
+
+  
+  <div class="c-resource-card__header">
+
+    
+    <div class="c-resource-card__top">
+
+      
+      <div class="c-resource-card__file-type">
+        
+
+
+
+
+
+
+
+
+
+  
+    
+  
+
+
+
+
+
+<span class="c-file-type c-file-type--geo c-file-type--size-m"
+      role="img" aria-label="Geodatabase">
+  <span class="c-file-type__icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/geographic-format.svg#i"/></svg></span>
+</span>
+        
+          <span class="c-resource-card__format-text">GEODATABASE</span>
+        
+      </div>
+      
+
+      
+        <div class="c-resource-card__tags">
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="c-label c-label--light c-label--size-s"
+      >
+
+
+  
+
+  
+    <span class="c-label__text">P-coded</span>
+  
+
+</span>
+          
+          
+        </div>
+      
+
+    </div>
+
+    
+    
+      <a class="c-resource-card__title" href="/dataset/cod-ab-cod/resource/93d6b999-01b1-411f-aaaf-5a3a5f7ed12c" title="cod_admin_boundaries.gdb.zip">cod_admin_boundaries.gdb.zip</a>
+    
+
+    
+    
+      <div class="c-resource-card__desc">
+        <div class="c-resource-card__desc-text" data-clamped-content><p>Democratic Republic of the Congo administrative level 0-3 boundaries (COD-AB), Geodatabase</p></div>
+      </div>
+    
+
+  </div>
+
+  
+  <div class="c-resource-card__footer">
+
+    
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<button
+  type="button"
+  class="c-text-button c-text-button--tertiary c-text-button--size-m"
+  
+   data-clamped-toggle=""
+>
+
+
+  
+
+  <span class="c-text-button__label">Show more</span>
+
+  
+    
+    <span class="c-text-button__icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/chevron-down.svg#i"/></svg></span>
+  
+  
+
+
+</button>
+
+    
+
+    <div class="c-resource-card__actions">
+      
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a
+  class="c-button c-button--tertiary c-button--size-m"
+  href="/dataset/cod-ab-cod/resource/93d6b999-01b1-411f-aaaf-5a3a5f7ed12c"
+  
+  
+  
+  
+>
+
+
+  
+  
+
+    
+
+    <span class="c-button__label">More information</span>
+
+    
+
+  
+
+
+</a>
+
+      
+      
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+
+
+
+<a
+  class="c-button c-button--primary c-button--size-m resource-url-analytics ga-download resource-download-button"
+  href="/dataset/f42132b9-8cc6-4201-b020-9259c56e8868/resource/93d6b999-01b1-411f-aaaf-5a3a5f7ed12c/download/cod_admin_boundaries.gdb.zip"
+  
+  
+  
+   target="_blank" data-resource-id="93d6b999-01b1-411f-aaaf-5a3a5f7ed12c" data-resource-name="cod_admin_boundaries.gdb.zip" data-dataset-id="f42132b9-8cc6-4201-b020-9259c56e8868" data-dataset-name="cod-ab-cod" data-dataset-supports-notifications="true" data-is-authenticated="False" tracking-type="upload"
+>
+
+
+  
+  
+
+    
+      
+    <span class="c-button__icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/download.svg#i"/></svg></span>
+  
+    
+
+    <span class="c-button__label">Download (9.5M)</span>
+
+    
+
+  
+
+
+</a>
+
+      
+    </div>
+
+  </div>
+
+  
+
+</div>
+
+</div>
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="resource-item"
+     data-grouping-id=""
+     style="">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="c-resource-card" data-module="clamped-text">
+
+  
+  <div class="c-resource-card__header">
+
+    
+    <div class="c-resource-card__top">
+
+      
+      <div class="c-resource-card__file-type">
+        
+
+
+
+
+
+
+
+
+
+  
+    
+  
+
+
+
+
+
+<span class="c-file-type c-file-type--geo c-file-type--size-m"
+      role="img" aria-label="SHP">
+  <span class="c-file-type__icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/geographic-format.svg#i"/></svg></span>
+</span>
+        
+          <span class="c-resource-card__format-text">SHP</span>
+        
+      </div>
+      
+
+      
+        <div class="c-resource-card__tags">
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="c-label c-label--light c-label--size-s"
+      >
+
+
+  
+
+  
+    <span class="c-label__text">P-coded</span>
+  
+
+</span>
+          
+          
+        </div>
+      
+
+    </div>
+
+    
+    
+      <a class="c-resource-card__title" href="/dataset/cod-ab-cod/resource/7514482b-f7af-4654-8ea2-e8a34a6acb6a" title="cod_admin_boundaries.shp.zip">cod_admin_boundaries.shp.zip</a>
+    
+
+    
+    
+      <div class="c-resource-card__desc">
+        <div class="c-resource-card__desc-text" data-clamped-content><p>Democratic Republic of the Congo administrative level 0-3 boundaries (COD-AB), SHP</p></div>
+      </div>
+    
+
+  </div>
+
+  
+  <div class="c-resource-card__footer">
+
+    
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<button
+  type="button"
+  class="c-text-button c-text-button--tertiary c-text-button--size-m"
+  
+   data-clamped-toggle=""
+>
+
+
+  
+
+  <span class="c-text-button__label">Show more</span>
+
+  
+    
+    <span class="c-text-button__icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/chevron-down.svg#i"/></svg></span>
+  
+  
+
+
+</button>
+
+    
+
+    <div class="c-resource-card__actions">
+      
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a
+  class="c-button c-button--tertiary c-button--size-m"
+  href="/dataset/cod-ab-cod/resource/7514482b-f7af-4654-8ea2-e8a34a6acb6a"
+  
+  
+  
+  
+>
+
+
+  
+  
+
+    
+
+    <span class="c-button__label">More information</span>
+
+    
+
+  
+
+
+</a>
+
+      
+      
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+
+
+
+<a
+  class="c-button c-button--primary c-button--size-m resource-url-analytics ga-download resource-download-button"
+  href="/dataset/f42132b9-8cc6-4201-b020-9259c56e8868/resource/7514482b-f7af-4654-8ea2-e8a34a6acb6a/download/cod_admin_boundaries.shp.zip"
+  
+  
+  
+   target="_blank" data-resource-id="7514482b-f7af-4654-8ea2-e8a34a6acb6a" data-resource-name="cod_admin_boundaries.shp.zip" data-dataset-id="f42132b9-8cc6-4201-b020-9259c56e8868" data-dataset-name="cod-ab-cod" data-dataset-supports-notifications="true" data-is-authenticated="False" tracking-type="upload"
+>
+
+
+  
+  
+
+    
+      
+    <span class="c-button__icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/download.svg#i"/></svg></span>
+  
+    
+
+    <span class="c-button__label">Download (20.7M)</span>
+
+    
+
+  
+
+
+</a>
+
+      
+    </div>
+
+  </div>
+
+  
+
+</div>
+
+</div>
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="resource-item"
+     data-grouping-id=""
+     style="">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="c-resource-card" data-module="clamped-text">
+
+  
+  <div class="c-resource-card__header">
+
+    
+    <div class="c-resource-card__top">
+
+      
+      <div class="c-resource-card__file-type">
+        
+
+
+
+
+
+
+
+
+
+  
+    
+  
+
+
+
+
+
+<span class="c-file-type c-file-type--geo c-file-type--size-m"
+      role="img" aria-label="GeoJSON">
+  <span class="c-file-type__icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/geographic-format.svg#i"/></svg></span>
+</span>
+        
+          <span class="c-resource-card__format-text">GEOJSON</span>
+        
+      </div>
+      
+
+      
+        <div class="c-resource-card__tags">
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="c-label c-label--light c-label--size-s"
+      >
+
+
+  
+
+  
+    <span class="c-label__text">P-coded</span>
+  
+
+</span>
+          
+          
+        </div>
+      
+
+    </div>
+
+    
+    
+      <a class="c-resource-card__title" href="/dataset/cod-ab-cod/resource/97260e2b-65b1-41e3-aef2-fb0e6874e406" title="cod_admin_boundaries.geojson.zip">cod_admin_boundaries.geojson.zip</a>
+    
+
+    
+    
+      <div class="c-resource-card__desc">
+        <div class="c-resource-card__desc-text" data-clamped-content><p>Democratic Republic of the Congo administrative level 0-3 boundaries (COD-AB), GeoJSON</p></div>
+      </div>
+    
+
+  </div>
+
+  
+  <div class="c-resource-card__footer">
+
+    
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<button
+  type="button"
+  class="c-text-button c-text-button--tertiary c-text-button--size-m"
+  
+   data-clamped-toggle=""
+>
+
+
+  
+
+  <span class="c-text-button__label">Show more</span>
+
+  
+    
+    <span class="c-text-button__icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/chevron-down.svg#i"/></svg></span>
+  
+  
+
+
+</button>
+
+    
+
+    <div class="c-resource-card__actions">
+      
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a
+  class="c-button c-button--tertiary c-button--size-m"
+  href="/dataset/cod-ab-cod/resource/97260e2b-65b1-41e3-aef2-fb0e6874e406"
+  
+  
+  
+  
+>
+
+
+  
+  
+
+    
+
+    <span class="c-button__label">More information</span>
+
+    
+
+  
+
+
+</a>
+
+      
+      
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+
+
+
+<a
+  class="c-button c-button--primary c-button--size-m resource-url-analytics ga-download resource-download-button"
+  href="/dataset/f42132b9-8cc6-4201-b020-9259c56e8868/resource/97260e2b-65b1-41e3-aef2-fb0e6874e406/download/cod_admin_boundaries.geojson.zip"
+  
+  
+  
+   target="_blank" data-resource-id="97260e2b-65b1-41e3-aef2-fb0e6874e406" data-resource-name="cod_admin_boundaries.geojson.zip" data-dataset-id="f42132b9-8cc6-4201-b020-9259c56e8868" data-dataset-name="cod-ab-cod" data-dataset-supports-notifications="true" data-is-authenticated="False" tracking-type="upload"
+>
+
+
+  
+  
+
+    
+      
+    <span class="c-button__icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/download.svg#i"/></svg></span>
+  
+    
+
+    <span class="c-button__label">Download (24.3M)</span>
+
+    
+
+  
+
+
+</a>
+
+      
+    </div>
+
+  </div>
+
+  
+
+</div>
+
+</div>
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="resource-item"
+     data-grouping-id=""
+     style="">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="c-resource-card" data-module="clamped-text">
+
+  
+  <div class="c-resource-card__header">
+
+    
+    <div class="c-resource-card__top">
+
+      
+      <div class="c-resource-card__file-type">
+        
+
+
+
+
+
+
+
+
+
+  
+    
+  
+
+
+
+
+
+<span class="c-file-type c-file-type--tabular c-file-type--size-m"
+      role="img" aria-label="XLSX">
+  <span class="c-file-type__icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/view-table.svg#i"/></svg></span>
+</span>
+        
+          <span class="c-resource-card__format-text">XLSX</span>
+        
+      </div>
+      
+
+      
+        <div class="c-resource-card__tags">
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="c-label c-label--light c-label--size-s"
+      >
+
+
+  
+
+  
+    <span class="c-label__text">P-coded</span>
+  
+
+</span>
+          
+          
+        </div>
+      
+
+    </div>
+
+    
+    
+      <a class="c-resource-card__title" href="/dataset/cod-ab-cod/resource/9a9f9847-6a62-461f-bba9-ac8fce5f4831" title="cod_admin_boundaries.xlsx">cod_admin_boundaries.xlsx</a>
+    
+
+    
+    
+      <div class="c-resource-card__desc">
+        <div class="c-resource-card__desc-text" data-clamped-content><p>Democratic Republic of the Congo administrative level 0-3 boundaries (COD-AB), XLSX</p></div>
+      </div>
+    
+
+  </div>
+
+  
+  <div class="c-resource-card__footer">
+
+    
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<button
+  type="button"
+  class="c-text-button c-text-button--tertiary c-text-button--size-m"
+  
+   data-clamped-toggle=""
+>
+
+
+  
+
+  <span class="c-text-button__label">Show more</span>
+
+  
+    
+    <span class="c-text-button__icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/chevron-down.svg#i"/></svg></span>
+  
+  
+
+
+</button>
+
+    
+
+    <div class="c-resource-card__actions">
+      
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a
+  class="c-button c-button--tertiary c-button--size-m"
+  href="/dataset/cod-ab-cod/resource/9a9f9847-6a62-461f-bba9-ac8fce5f4831"
+  
+  
+  
+  
+>
+
+
+  
+  
+
+    
+
+    <span class="c-button__label">More information</span>
+
+    
+
+  
+
+
+</a>
+
+      
+      
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+
+
+
+<a
+  class="c-button c-button--primary c-button--size-m resource-url-analytics ga-download resource-download-button"
+  href="/dataset/f42132b9-8cc6-4201-b020-9259c56e8868/resource/9a9f9847-6a62-461f-bba9-ac8fce5f4831/download/cod_admin_boundaries.xlsx"
+  
+  
+  
+   target="_blank" data-resource-id="9a9f9847-6a62-461f-bba9-ac8fce5f4831" data-resource-name="cod_admin_boundaries.xlsx" data-dataset-id="f42132b9-8cc6-4201-b020-9259c56e8868" data-dataset-name="cod-ab-cod" data-dataset-supports-notifications="true" data-is-authenticated="False" tracking-type="upload"
+>
+
+
+  
+  
+
+    
+      
+    <span class="c-button__icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/download.svg#i"/></svg></span>
+  
+    
+
+    <span class="c-button__label">Download (144.2K)</span>
+
+    
+
+  
+
+
+</a>
+
+      
+    </div>
+
+  </div>
+
+  
+
+</div>
+
+</div>
+          
+        
+      </div>
+    
+
+    
+</div>
+    </div>
+  </section>
+
+  
+  
+
+  
+  <hr class="c-divider">
+  <section class="hdx-v2-dataset-section hdx-v2-dataset-section--collapsible is-open"
+           id="metadata">
+    <div class="hdx-v2-dataset-section__header"
+         role="button" tabindex="0"
+         aria-expanded="true" aria-controls="metadata-body">
+      <h2 class="hdx-v2-dataset-section__title">Metadata</h2>
+      <span class="hdx-v2-dataset-section__chevron" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/chevron-down.svg#i"/></svg></span>
+    </div>
+    <div class="hdx-v2-dataset-section__body" id="metadata-body">
+      
+
+      <div class="hdx-v2-dataset-metadata">
+
+        
+        <div class="hdx-v2-dataset-metadata__grid">
+
+          <div class="hdx-v2-dataset-metadata__cell"
+               >
+            <div class="hdx-v2-dataset-metadata__label-row">
+              <span class="hdx-v2-dataset-metadata__label">Time period</span>
+              
+
+
+
+
+
+
+
+<div class="c-tooltip-anchor">
+  <button type="button"
+          class="c-info-icon c-tooltip-trigger"
+          aria-label="More info about time period"
+          aria-expanded="false"
+          aria-describedby="tooltip-md-time-period">
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/info-circle.svg#i"/></svg>
+  </button>
+  
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="c-tooltip c-tooltip--dark"
+     role="tooltip"
+     id="tooltip-md-time-period">
+
+  
+  
+
+    <span class="c-tooltip__text">The earliest start date and latest end date across all resources included in the dataset.</span>
+
+    
+
+  
+  
+
+</div>
+  
+</div>
+            </div>
+            <span class="hdx-v2-dataset-metadata__value">
+              11 September 2019 - 20 December 2024
+            </span>
+          </div>
+
+          <div class="hdx-v2-dataset-metadata__cell"
+               >
+            <span class="hdx-v2-dataset-metadata__label">Expected update frequency</span>
+            <span class="hdx-v2-dataset-metadata__value">
+              Every year
+            </span>
+          </div>
+
+          <div class="hdx-v2-dataset-metadata__cell">
+            <div class="hdx-v2-dataset-metadata__label-row">
+              <span class="hdx-v2-dataset-metadata__label">Modified</span>
+              
+
+
+
+
+
+
+
+<div class="c-tooltip-anchor">
+  <button type="button"
+          class="c-info-icon c-tooltip-trigger"
+          aria-label="More info about modified date"
+          aria-expanded="false"
+          aria-describedby="tooltip-md-modified">
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/info-circle.svg#i"/></svg>
+  </button>
+  
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="c-tooltip c-tooltip--dark"
+     role="tooltip"
+     id="tooltip-md-modified">
+
+  
+  
+
+    <span class="c-tooltip__text">The date of the most recent change to any data or metadata.</span>
+
+    
+
+  
+  
+
+</div>
+  
+</div>
+            </div>
+            <span class="hdx-v2-dataset-metadata__value">
+              16 April 2026
+            </span>
+          </div>
+
+        </div>
+
+        
+        <div class="hdx-v2-dataset-metadata__grid">
+
+          <div class="hdx-v2-dataset-metadata__cell"
+               >
+            <span class="hdx-v2-dataset-metadata__label">Contributor</span>
+            <div class="hdx-v2-dataset-metadata__value">
+              
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="c-text-link c-text-link--secondary c-text-link--size-m mx-ga-dimension-organization"
+   href="/organization/b3a25ac4-ac05-4991-923c-d25f47bef1ec"
+   
+   
+   
+   >OCHA Field Information Services Section (FISS)</a>
+              
+            </div>
+          </div>
+
+          <div class="hdx-v2-dataset-metadata__cell" id="metadata-source"
+               data-module="clamped-text"
+               >
+            <span class="hdx-v2-dataset-metadata__label">Source</span>
+            <span class="hdx-v2-dataset-metadata__value hdx-v2-dataset-metadata__value--clamped" data-clamped-content>Referenciel Géographique Commun</span>
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<button
+  type="button"
+  class="c-text-button c-text-button--tertiary c-text-button--size-s"
+  
+   data-clamped-toggle=""
+>
+
+
+  
+
+  <span class="c-text-button__label">Show more</span>
+
+  
+    
+    <span class="c-text-button__icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/chevron-down.svg#i"/></svg></span>
+  
+  
+
+
+</button>
+
+          </div>
+
+          <div class="hdx-v2-dataset-metadata__cell">
+            <div class="hdx-v2-dataset-metadata__label-row">
+              <span class="hdx-v2-dataset-metadata__label">Dataset added on HDX</span>
+              
+
+
+
+
+
+
+
+<div class="c-tooltip-anchor">
+  <button type="button"
+          class="c-info-icon c-tooltip-trigger"
+          aria-label="More info about when dataset was added"
+          aria-expanded="false"
+          aria-describedby="tooltip-md-added">
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/info-circle.svg#i"/></svg>
+  </button>
+  
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="c-tooltip c-tooltip--dark"
+     role="tooltip"
+     id="tooltip-md-added">
+
+  
+  
+
+    <span class="c-tooltip__text">The date when the dataset was first added to HDX.</span>
+
+    
+
+  
+  
+
+</div>
+  
+</div>
+            </div>
+            <span class="hdx-v2-dataset-metadata__value">
+              13 April 2017
+            </span>
+          </div>
+
+          <div class="hdx-v2-dataset-metadata__cell">
+            <div class="hdx-v2-dataset-metadata__label-row">
+              <span class="hdx-v2-dataset-metadata__label">Dataset ID</span>
+              
+
+
+
+
+
+
+
+<button type="button"
+        class="c-copy-button c-copy-button--secondary c-copy-button--size-s c-copy-button--icon-left"
+        data-copy-value="f42132b9-8cc6-4201-b020-9259c56e8868"
+        aria-label="Copy">
+  
+    <span class="c-copy-button__icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/copy.svg#i"/></svg></span>
+
+  
+  <span class="c-copy-button__label">Copy</span>
+  <span class="sr-only" aria-live="polite" data-copy-status></span>
+</button>
+            </div>
+            <span class="hdx-v2-dataset-metadata__value">f42132b9-8cc6-4201-b020-9259c56e8868</span>
+          </div>
+
+        </div>
+
+        
+        <div class="hdx-v2-dataset-metadata__full" id="metadata-location"
+             data-module="clamped-text"
+             >
+          <span class="hdx-v2-dataset-metadata__label">Location</span>
+          <div class="hdx-v2-dataset-metadata__value hdx-v2-dataset-metadata__value--locations hdx-v2-dataset-metadata__value--clamped" data-clamped-content>
+            
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="c-text-link c-text-link--secondary c-text-link--size-m"
+   href="/group/cod"
+   
+   
+   
+   >Democratic Republic of the Congo</a>
+            
+          </div>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<button
+  type="button"
+  class="c-text-button c-text-button--tertiary c-text-button--size-s"
+  
+   data-clamped-toggle=""
+>
+
+
+  
+
+  <span class="c-text-button__label">Show more</span>
+
+  
+    
+    <span class="c-text-button__icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/chevron-down.svg#i"/></svg></span>
+  
+  
+
+
+</button>
+
+        </div>
+
+        
+        <div class="hdx-v2-dataset-metadata__full"
+             data-module="clamped-text"
+             >
+          <span class="hdx-v2-dataset-metadata__label">Methodology</span>
+          
+          <div class="hdx-v2-dataset-metadata__value hdx-v2-dataset-metadata__value--clamped" data-clamped-content>
+            
+              <p>Dataset: Admin0: Le fichier a été récupéré auprès de la MONUC. Les frontières de RDC et des pays voisins ont été ajustées par UNDP suivant quelques modifications observées sur images satellites 
+Admin1: Le fichier a été généré par agrégation des territoires.
+Admin2: Le fichier est issu de la digitalisation par OCHA de l’atlas de l’organisation administrative de la RDC réalisé par le père Léon de Saint Moulin. Lorsque les limites de territoires sont définies par un cours d’eau, la géométrie a été partagée. Une validation topologique a été effectuée par UNDP et les limites de communes de Kinshasa ont été ajoutées. L’ensemble des communes de 19 autres villes sont détourées au moyen d’un seul polygone. La toponymie a été validée par l’INS.</p>
+            
+          </div>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<button
+  type="button"
+  class="c-text-button c-text-button--tertiary c-text-button--size-s"
+  
+   data-clamped-toggle=""
+>
+
+
+  
+
+  <span class="c-text-button__label">Show more</span>
+
+  
+    
+    <span class="c-text-button__icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/chevron-down.svg#i"/></svg></span>
+  
+  
+
+
+</button>
+
+        </div>
+
+        
+        <div class="hdx-v2-dataset-metadata__full"
+             data-module="clamped-text"
+             >
+          <span class="hdx-v2-dataset-metadata__label">Caveats / Comments</span>
+          <div class="hdx-v2-dataset-metadata__value hdx-v2-dataset-metadata__value--clamped" data-clamped-content>
+            <p>[HDX dataset name edited 2018 05 10]
+Tous les territoires ruraux,  les communes urbaines sont en cours d’intégration. Etant donné le changement de codification INS opéré en mai 2008, la structure des Pcode a été adaptée mais les localités existantes dans la base conservent leur Pcode même si leur position géographique est ajustée par la suite. Un Pcode disparaît donc si et seulement si la localité correspondante est éliminée de la base (car il a été prouvé qu’elle n’existe pas sur le terrain). Ce code ne sera en aucun cas affecté à une nouvelle localité. La couche admin3 ne reflète pas la configuration réelle des limites de différentes entités, le travail de mise à jour se poursuit par les différents membres du groupe de travail IM.</p>
+          </div>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<button
+  type="button"
+  class="c-text-button c-text-button--tertiary c-text-button--size-s"
+  
+   data-clamped-toggle=""
+>
+
+
+  
+
+  <span class="c-text-button__label">Show more</span>
+
+  
+    
+    <span class="c-text-button__icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/chevron-down.svg#i"/></svg></span>
+  
+  
+
+
+</button>
+
+        </div>
+
+        
+        
+          <div class="hdx-v2-dataset-metadata__full"
+               data-module="clamped-text"
+               >
+            <span class="hdx-v2-dataset-metadata__label">License</span>
+            <div class="hdx-v2-dataset-metadata__value hdx-v2-dataset-metadata__value--clamped" data-clamped-content>
+              
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="c-text-link c-text-link--secondary c-text-link--size-m"
+   href="https://docs.humdata.org/about/data-licenses"
+   
+   
+   
+    property="dc:rights">Creative Commons Attribution for Intergovernmental Organisations (CC BY-IGO)</a>
+                
+              
+            </div>
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<button
+  type="button"
+  class="c-text-button c-text-button--tertiary c-text-button--size-s"
+  
+   data-clamped-toggle=""
+>
+
+
+  
+
+  <span class="c-text-button__label">Show more</span>
+
+  
+    
+    <span class="c-text-button__icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/chevron-down.svg#i"/></svg></span>
+  
+  
+
+
+</button>
+
+          </div>
+        
+
+        
+        
+
+        
+        
+        <div class="hdx-v2-dataset-metadata__full"
+             >
+          <span class="hdx-v2-dataset-metadata__label">Tags</span>
+          <div class="hdx-v2-dataset-metadata__value hdx-v2-dataset-metadata__value--tags">
+            
+              
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="c-label c-label--light c-label--size-m"
+   href="/dataset/?vocab_Topics=administrative+boundaries-divisions"
+   >
+
+
+  
+
+  
+    <span class="c-label__text">administrative boundaries-divisions</span>
+  
+
+</a>
+
+              
+            
+              
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="c-label c-label--light c-label--size-m"
+   href="/dataset/?vocab_Topics=crisis-ebola-bundibugyo-virus-disease"
+   >
+
+
+  
+
+  
+    <span class="c-label__text">crisis-ebola-bundibugyo-virus-disease</span>
+  
+
+</a>
+
+              
+            
+              
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="c-label c-label--light c-label--size-m"
+   href="/dataset/?vocab_Topics=gazetteer"
+   >
+
+
+  
+
+  
+    <span class="c-label__text">gazetteer</span>
+  
+
+</a>
+
+              
+            
+              
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="c-label c-label--light c-label--size-m"
+   href="/dataset/?vocab_Topics=geodata"
+   >
+
+
+  
+
+  
+    <span class="c-label__text">geodata</span>
+  
+
+</a>
+
+              
+            
+          </div>
+        </div>
+        
+
+        
+        
+          
+            <div class="hdx-v2-dataset-metadata__full">
+              <span class="hdx-v2-dataset-metadata__label">Visibility</span>
+              <div class="hdx-v2-dataset-metadata__value">
+                <div id="private_block">
+                  <span id="visibility">Public</span>
+                </div>
+              </div>
+            </div>
+          
+        
+
+        
+        
+          <div class="hdx-v2-dataset-metadata__full hdx-v2-dataset-metadata__downloads">
+            <div id="dataset-downloads-data" class="d-none">
+              [{&#34;value&#34;: 105, &#34;date&#34;: &#34;2026-04-27&#34;}, {&#34;value&#34;: 102, &#34;date&#34;: &#34;2026-05-04&#34;}, {&#34;value&#34;: 152, &#34;date&#34;: &#34;2026-05-11&#34;}, {&#34;value&#34;: 152, &#34;date&#34;: &#34;2026-05-18&#34;}, {&#34;value&#34;: 159, &#34;date&#34;: &#34;2026-05-25&#34;}, {&#34;value&#34;: 122, &#34;date&#34;: &#34;2026-06-01&#34;}, {&#34;value&#34;: 122, &#34;date&#34;: &#34;2026-06-08&#34;}, {&#34;value&#34;: 162, &#34;date&#34;: &#34;2026-06-15&#34;}, {&#34;value&#34;: 142, &#34;date&#34;: &#34;2026-06-22&#34;}, {&#34;value&#34;: 147, &#34;date&#34;: &#34;2026-06-29&#34;}, {&#34;value&#34;: 130, &#34;date&#34;: &#34;2026-07-06&#34;}, {&#34;value&#34;: 150, &#34;date&#34;: &#34;2026-07-13&#34;}, {&#34;value&#34;: 129, &#34;date&#34;: &#34;2026-07-20&#34;}, {&#34;value&#34;: 123, &#34;date&#34;: &#34;2026-07-27&#34;}, {&#34;value&#34;: 146, &#34;date&#34;: &#34;2026-08-03&#34;}, {&#34;value&#34;: 143, &#34;date&#34;: &#34;2026-08-10&#34;}, {&#34;value&#34;: 199, &#34;date&#34;: &#34;2026-08-17&#34;}, {&#34;value&#34;: 100, &#34;date&#34;: &#34;2026-08-24&#34;}, {&#34;value&#34;: 172, &#34;date&#34;: &#34;2026-08-31&#34;}, {&#34;value&#34;: 131, &#34;date&#34;: &#34;2026-09-07&#34;}, {&#34;value&#34;: 122, &#34;date&#34;: &#34;2026-09-14&#34;}, {&#34;value&#34;: 142, &#34;date&#34;: &#34;2026-09-21&#34;}, {&#34;value&#34;: 164, &#34;date&#34;: &#34;2026-09-28&#34;}, {&#34;value&#34;: 163, &#34;date&#34;: &#34;2026-10-05&#34;}, {&#34;value&#34;: 189, &#34;date&#34;: &#34;2026-10-12&#34;}]
+            </div>
+            <span class="hdx-v2-dataset-metadata__label">Downloads</span>
+            <div id="dataset-downloads-chart">
+              <div id="dataset-downloads-chart-no-data" class="hdx-v2-dataset-metadata__no-data">
+                <div>No download data available</div>
+              </div>
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="c-tooltip c-tooltip--graph hdx-v2-chart-tooltip"
+     role="tooltip"
+     >
+
+  
+  
+
+    <span class="c-tooltip__text"></span>
+
+    
+      <div class="c-tooltip__legend">
+        
+          <div class="c-tooltip__legend-row">
+            <div class="c-tooltip__legend-key">
+              <span class="c-tooltip__legend-swatch"
+                    style="background-color: var(--hdx-primary-5);"></span>
+              <span class="c-tooltip__legend-label">Downloads</span>
+            </div>
+            <span class="c-tooltip__legend-value"></span>
+          </div>
+        
+      </div>
+    
+
+    
+      <span class="c-tooltip__arrow c-tooltip__arrow--below"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 8" fill="none"><use href="/v2/icons/below.svg#i"/></svg></span>
+    
+
+  
+
+</div>
+            </div>
+          </div>
+        
+
+      </div>
+    </div>
+  </section>
+
+  
+  
+
+  
+  <hr class="c-divider">
+  <section class="hdx-v2-dataset-section hdx-v2-dataset-section--collapsible"
+           id="activity">
+    <div class="hdx-v2-dataset-section__header"
+         role="button" tabindex="0"
+         aria-expanded="false" aria-controls="activity-body">
+      <h2 class="hdx-v2-dataset-section__title">Activity</h2>
+      <span class="hdx-v2-dataset-section__chevron" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/chevron-down.svg#i"/></svg></span>
+    </div>
+    <div class="hdx-v2-dataset-section__body" id="activity-body">
+      <div class="dataset-activity-wrapper" data-fetched="false" data-dataset-id="f42132b9-8cc6-4201-b020-9259c56e8868">
+        
+
+
+  
+    <p class="c-activity-stream__empty">No recent activity for this dataset.</p>
+  
+
+      </div>
+    </div>
+  </section>
+
+  
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+  
+
+  
+    
+    
+  
+
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+  <span
+    id="notification_platform_data"
+    hidden
+    data-object-id="f42132b9-8cc6-4201-b020-9259c56e8868"
+    data-object-name="cod-ab-cod"
+    data-object-type="dataset"
+    data-is-authenticated="False"
+  ></span>
+
+  
+  
+
+
+
+
+<div class="c-drawer" id="notificationsSignupDrawer" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="notificationsSignupDrawer-title">
+  <div class="c-drawer__overlay" data-drawer-close></div>
+  <div class="c-drawer__container" tabindex="-1">
+    <div class="c-drawer__header">
+      
+        <span class="c-drawer__title" id="notificationsSignupDrawer-title">Subscribe to notifications on this dataset</span>
+      
+      <button class="c-drawer__close" aria-label="Close" data-drawer-close>
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/close.svg#i"/></svg>
+      </button>
+    </div>
+    <div class="c-drawer__body">
+      
+    
+
+
+
+
+
+
+<div class="c-drawer-form">
+
+  <p class="c-drawer-form__description">Would you like to receive notifications when resources (files) in this dataset change? <a href="https://docs.humdata.org/find/staying-up-to-date-with-hdx" target="_blank">Learn more</a> about notifications.</p>
+
+  
+    <p class="c-drawer-form__description">If so, please <a href="/sign-in" title="login">log in</a> or enter your email address below:</p>
+  
+
+  
+
+
+
+
+
+
+
+
+<div class="c-alert c-alert--error" role="alert" hidden>
+  <span class="c-alert__message"></span>
+  
+    <button type="button" class="c-alert__close" data-alert-close aria-label="Dismiss">
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/close.svg#i"/></svg>
+    </button>
+  
+</div>
+
+  <form method="post" id="notification-platform-form" novalidate data-hdx-v2-form-validator>
+    <input type="hidden" name="popup_source" value="">
+
+    
+      <div class="c-form-field">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<label class="c-search-input__label" for="notification-email">
+  Your email address<span class="c-search-input__required" aria-hidden="true"> *</span>
+</label>
+
+<div class="c-search-input c-search-input--size-l"
+     >
+
+  
+    <input type="email"
+           name="email"
+           id="notification-email"
+           placeholder="Your email address"
+           value=""
+           autocomplete="new-email"
+           required="required"
+           data-validation="email" data-validation-error="Please enter a valid email address" >
+
+    
+  
+
+</div>
+<span class="c-search-input__error"></span>
+<ul class="c-form-validator__live-feedback" hidden></ul>
+        <div class="c-form-field__hint">
+          Already have an account? <a href="/sign-in" title="login">Log in</a>
+        </div>
+      </div>
+    
+
+    
+      <p class="c-drawer-form__update-freq">This dataset updates approximately: Every year</p>
+    
+
+    
+
+    
+      <div class="c-drawer-form__recaptcha">
+        <div class="g-recaptcha" data-sitekey="6Lcl60EUAAAAAE46a3XcPM2nPUKI2K4XZbcsorkR"></div>
+      </div>
+    
+
+  </form>
+
+</div>
+    <div class="c-drawer-form__buttons">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<button
+  type="button"
+  class="c-button c-button--tertiary c-button--size-m"
+  
+  
+  
+   data-drawer-close=""
+>
+
+
+  
+  
+
+    
+
+    <span class="c-button__label">Cancel</span>
+
+    
+
+  
+
+
+</button>
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<button
+  type="button"
+  class="c-button c-button--primary c-button--size-m"
+  
+  
+  
+   id="notificationsSignupButton"
+>
+
+
+  
+  
+
+    
+
+    <span class="c-button__label">Verify email address</span>
+
+    
+
+  
+
+
+</button>
+
+    </div>
+  
+    </div>
+  </div>
+</div>
+
+  
+  
+
+
+
+
+<div class="c-drawer" id="notificationsVerificationDrawer" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="notificationsVerificationDrawer-title">
+  <div class="c-drawer__overlay" data-drawer-close></div>
+  <div class="c-drawer__container" tabindex="-1">
+    <div class="c-drawer__header">
+      
+        <span class="c-drawer__title" id="notificationsVerificationDrawer-title">Verification email has been sent</span>
+      
+      <button class="c-drawer__close" aria-label="Close" data-drawer-close>
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/close.svg#i"/></svg>
+      </button>
+    </div>
+    <div class="c-drawer__body">
+      
+    <div class="c-drawer-form">
+      
+
+
+
+
+
+
+
+
+<div class="c-alert c-alert--success" role="status">
+  <span class="c-alert__message">Please click the link in the email we have sent you to confirm your email address.</span>
+  
+    <button type="button" class="c-alert__close" data-alert-close aria-label="Dismiss">
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/close.svg#i"/></svg>
+    </button>
+  
+</div>
+      <div class="c-drawer-form__buttons">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<button
+  type="button"
+  class="c-button c-button--primary c-button--size-m"
+  
+  
+  
+   data-drawer-close=""
+>
+
+
+  
+  
+
+    
+
+    <span class="c-button__label">Close</span>
+
+    
+
+  
+
+
+</button>
+
+      </div>
+    </div>
+  
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="c-drawer" id="notificationsUnsubscribeDrawer" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="notificationsUnsubscribeDrawer-title">
+  <div class="c-drawer__overlay" data-drawer-close></div>
+  <div class="c-drawer__container" tabindex="-1">
+    <div class="c-drawer__header">
+      
+        <span class="c-drawer__title" id="notificationsUnsubscribeDrawer-title">Unsubscribe</span>
+      
+      <button class="c-drawer__close" aria-label="Close" data-drawer-close>
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/close.svg#i"/></svg>
+      </button>
+    </div>
+    <div class="c-drawer__body">
+      
+  <div class="c-drawer-form">
+    <p class="c-drawer-form__text">Please confirm that you want to unsubscribe from email notifications for updates to this dataset on HDX.</p>
+    
+
+
+
+
+
+
+
+
+<div class="c-alert c-alert--error" role="alert" hidden>
+  <span class="c-alert__message"></span>
+  
+    <button type="button" class="c-alert__close" data-alert-close aria-label="Dismiss">
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/close.svg#i"/></svg>
+    </button>
+  
+</div>
+    <div class="c-drawer-form__buttons">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<button
+  type="button"
+  class="c-button c-button--tertiary c-button--size-m"
+  
+  
+  
+   data-drawer-close=""
+>
+
+
+  
+  
+
+    
+
+    <span class="c-button__label">Cancel</span>
+
+    
+
+  
+
+
+</button>
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<button
+  type="button"
+  class="c-button c-button--primary c-button--size-m"
+  
+  
+  
+   id="notificationsUnsubscribeButton" data-unsubscribe-token="" data-unsubscribe-token-validated="False" data-unsubscribe-email="" data-unsubscribe-token-invalidate="False" data-is-authenticated="False" data-object-id="f42132b9-8cc6-4201-b020-9259c56e8868" data-object-type="dataset" data-object-name="cod-ab-cod"
+>
+
+
+  
+  
+
+    
+
+    <span class="c-button__label">Unsubscribe</span>
+
+    
+
+  
+
+
+</button>
+
+    </div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<div class="c-drawer" id="notificationsUnsubscribedDrawer" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="notificationsUnsubscribedDrawer-title">
+  <div class="c-drawer__overlay" data-drawer-close></div>
+  <div class="c-drawer__container" tabindex="-1">
+    <div class="c-drawer__header">
+      
+        <span class="c-drawer__title" id="notificationsUnsubscribedDrawer-title">You have unsubscribed</span>
+      
+      <button class="c-drawer__close" aria-label="Close" data-drawer-close>
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/close.svg#i"/></svg>
+      </button>
+    </div>
+    <div class="c-drawer__body">
+      
+  <div class="c-drawer-form">
+    
+
+
+
+
+
+
+
+
+<div class="c-alert c-alert--success" role="status">
+  <span class="c-alert__message">You have successfully unsubscribed to dataset notifications.</span>
+  
+    <button type="button" class="c-alert__close" data-alert-close aria-label="Dismiss">
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/close.svg#i"/></svg>
+    </button>
+  
+</div>
+    <div class="c-drawer-form__buttons">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<button
+  type="button"
+  class="c-button c-button--primary c-button--size-m"
+  
+  
+  
+   data-drawer-close=""
+>
+
+
+  
+  
+
+    
+
+    <span class="c-button__label">Close</span>
+
+    
+
+  
+
+
+</button>
+
+    </div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+  
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            
+
+
+
+          </div>
+        
+      </div>
+    </div>
+  
+    
+
+
+
+
+
+<footer class="hdx-v2-footer">
+  <div class="hdx-v2-container">
+
+  
+  <div class="hdx-v2-footer__top">
+
+    
+    <div class="hdx-v2-footer__branding">
+
+      <div class="hdx-v2-footer__logo-wrap">
+        <span class="hdx-v2-footer__logo" aria-label="HDX"><svg aria-hidden="true" focusable="false" viewBox="0 0 121 40" fill="none"><use href="/v2/icons/hdx.svg#i"/></svg></span>
+        <p class="hdx-v2-footer__tagline">Find, share and use humanitarian data all in one place</p>
+      </div>
+
+      
+      <div class="hdx-v2-footer__actions">
+        <div class="hdx-v2-footer__newsletter">
+          <p class="hdx-v2-footer__newsletter-label">Subscribe to our mailing list</p>
+          <div id="mc_embed_signup">
+            <form action="//humdata.us14.list-manage.com/subscribe/post?u=ea3f905d50ea939780139789d&amp;id=99796325d1" method="post"
+                  id="mc-embedded-subscribe-form"
+                  name="mc-embedded-subscribe-form"
+                  class="validate" target="_blank" novalidate>
+              <div class="hdx-v2-footer__newsletter-row">
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="c-search-input c-search-input--size-m"
+     >
+
+  
+    <input type="email"
+           name="EMAIL"
+           id="mce-EMAIL"
+           placeholder="Enter your email"
+           value=""
+           autocomplete="off"
+           
+           >
+
+    
+  
+
+</div>
+<span class="c-search-input__error"></span>
+<ul class="c-form-validator__live-feedback" hidden></ul>
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<button
+  type="submit"
+  class="c-button c-button--secondary c-button--size-m hdx-v2-footer__subscribe-btn"
+  
+  
+  
+   name="subscribe" id="mc-embedded-subscribe"
+>
+
+
+  
+  
+
+    
+
+    <span class="c-button__label">Subscribe</span>
+
+    
+
+  
+
+
+</button>
+
+              </div>
+              <div id="mce-responses" class="clear">
+                <div class="response" id="mce-error-response" style="display:none"></div>
+                <div class="response" id="mce-success-response" style="display:none"></div>
+              </div>
+              
+            </form>
+          </div>
+        </div>
+
+        <div class="hdx-v2-footer__social">
+          <a href="https://github.com/OCHA-DAP"
+             target="_blank" rel="noopener noreferrer"
+             class="hdx-v2-footer__social-link"
+             data-module="hdx_click_stopper"
+             data-module-link_type="footer">
+            <span class="hdx-v2-footer__social-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 20 19" fill="none"><use href="/v2/icons/github.svg#i"/></svg></span>
+            <span class="c-text-link c-text-link--primary c-text-link--size-s">GitHub</span>
+          </a>
+          <a href="https://linkedin.com/company/ocha-centre-for-humanitarian-data"
+             target="_blank" rel="noopener noreferrer"
+             class="hdx-v2-footer__social-link"
+             data-module="hdx_click_stopper"
+             data-module-link_type="footer">
+            <span class="hdx-v2-footer__social-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 18 18" fill="none"><use href="/v2/icons/linkedin.svg#i"/></svg></span>
+            <span class="c-text-link c-text-link--primary c-text-link--size-s">LinkedIn</span>
+          </a>
+        </div>
+      </div>
+
+      
+
+    </div>
+
+    
+    <nav class="hdx-v2-footer__nav" aria-label="Footer navigation">
+
+        
+        <div class="hdx-v2-footer__nav-col">
+          <p class="hdx-v2-footer__nav-heading">Data</p>
+          <ul class="hdx-v2-footer__nav-list">
+            <li>
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="c-text-link c-text-link--primary c-text-link--size-s"
+   href="/dataset/"
+   
+   
+   
+    data-module="hdx_click_stopper" data-module-link_type="footer">Explore data</a>
+            </li>
+            <li>
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="c-text-link c-text-link--primary c-text-link--size-s"
+   href="/group/"
+   
+   
+   
+    data-module="hdx_click_stopper" data-module-link_type="footer">Locations</a>
+            </li>
+            <li>
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="c-text-link c-text-link--primary c-text-link--size-s"
+   href="/organization/"
+   
+   
+   
+    data-module="hdx_click_stopper" data-module-link_type="footer">Organisations</a>
+            </li>
+          </ul>
+        </div>
+
+        
+        <div class="hdx-v2-footer__nav-col">
+          <p class="hdx-v2-footer__nav-heading">Products</p>
+          <ul class="hdx-v2-footer__nav-list">
+            
+            <li>
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="c-text-link c-text-link--primary c-text-link--size-s"
+   href="/crisis-pages"
+   
+   
+   
+    data-module="hdx_click_stopper" data-module-link_type="footer" target="_self">Crisis Pages</a>
+            </li>
+            
+            <li>
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="c-text-link c-text-link--primary c-text-link--size-s"
+   href="/dashboards/overview-of-data-grids"
+   
+   
+   
+    data-module="hdx_click_stopper" data-module-link_type="footer" target="_self">Data Grids</a>
+            </li>
+            
+            <li>
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="c-text-link c-text-link--primary c-text-link--size-s"
+   href="/dataviz-gallery"
+   
+   
+   
+    data-module="hdx_click_stopper" data-module-link_type="footer" target="_self">Dataviz Gallery</a>
+            </li>
+            
+            <li>
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="c-text-link c-text-link--primary c-text-link--size-s"
+   href="https://docs.humdata.org/build/hdx-apis/hapi"
+   
+   
+   
+    data-module="hdx_click_stopper" data-module-link_type="footer" target="_self">Humanitarian API</a>
+            </li>
+            
+            <li>
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="c-text-link c-text-link--primary c-text-link--size-s"
+   href="/signals"
+   
+   
+   
+    data-module="hdx_click_stopper" data-module-link_type="footer" target="_self">Signals</a>
+            </li>
+            
+            <li>
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="c-text-link c-text-link--primary c-text-link--size-s"
+   href="/dashboards/archived-datasets"
+   
+   
+   
+    data-module="hdx_click_stopper" data-module-link_type="footer" target="_self">Archived Datasets</a>
+            </li>
+            
+          </ul>
+        </div>
+
+        
+        <div class="hdx-v2-footer__nav-col">
+          <p class="hdx-v2-footer__nav-heading">Resources</p>
+          <ul class="hdx-v2-footer__nav-list">
+            <li>
+              <a href="https://docs.humdata.org/"
+                 target="_blank" rel="noopener noreferrer"
+                 class="c-text-link c-text-link--primary c-text-link--size-s hdx-v2-footer__ext-link"
+                 data-module="hdx_click_stopper"
+                 data-module-link_type="footer">
+                <span class="hdx-v2-footer__ext-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/link-external.svg#i"/></svg></span>Documentation
+              </a>
+            </li>
+            <li>
+              <a href="https://docs.humdata.org/publish"
+                 target="_blank" rel="noopener noreferrer"
+                 class="c-text-link c-text-link--primary c-text-link--size-s hdx-v2-footer__ext-link"
+                 data-module="hdx_click_stopper"
+                 data-module-link_type="footer">
+                <span class="hdx-v2-footer__ext-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/link-external.svg#i"/></svg></span>QA Process
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/OCHA-DAP"
+                 target="_blank" rel="noopener noreferrer"
+                 class="c-text-link c-text-link--primary c-text-link--size-s hdx-v2-footer__ext-link"
+                 data-module="hdx_click_stopper"
+                 data-module-link_type="footer">
+                <span class="hdx-v2-footer__ext-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/link-external.svg#i"/></svg></span>Open source
+              </a>
+            </li>
+            <li>
+              <a href="https://docs.humdata.org/build"
+                 target="_blank" rel="noopener noreferrer"
+                 class="c-text-link c-text-link--primary c-text-link--size-s hdx-v2-footer__ext-link"
+                 data-module="hdx_click_stopper"
+                 data-module-link_type="footer">
+                <span class="hdx-v2-footer__ext-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/link-external.svg#i"/></svg></span>Build with HDX
+              </a>
+            </li>
+            <li>
+              <a href="https://docs.humdata.org/about/data-licenses"
+                 target="_blank" rel="noopener noreferrer"
+                 class="c-text-link c-text-link--primary c-text-link--size-s hdx-v2-footer__ext-link"
+                 data-module="hdx_click_stopper"
+                 data-module-link_type="footer">
+                <span class="hdx-v2-footer__ext-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/link-external.svg#i"/></svg></span>Data Licenses
+              </a>
+            </li>
+            <li>
+              <a href="https://centre.humdata.org/category/blog/"
+                 target="_blank" rel="noopener noreferrer"
+                 class="c-text-link c-text-link--primary c-text-link--size-s hdx-v2-footer__ext-link"
+                 data-module="hdx_click_stopper"
+                 data-module-link_type="footer">
+                <span class="hdx-v2-footer__ext-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/link-external.svg#i"/></svg></span>Blog
+              </a>
+            </li>
+            <li>
+              <a href="https://centre.humdata.org/contact-us/"
+                 target="_blank" rel="noopener noreferrer"
+                 class="c-text-link c-text-link--primary c-text-link--size-s hdx-v2-footer__ext-link"
+                 data-module="hdx_click_stopper"
+                 data-module-link_type="footer">
+                <span class="hdx-v2-footer__ext-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/link-external.svg#i"/></svg></span>Contact
+              </a>
+            </li>
+          </ul>
+        </div>
+
+    </nav>
+
+  </div>
+
+  <hr class="c-divider hdx-v2-footer__divider">
+
+  
+  <div class="hdx-v2-footer__bottom">
+
+    <div class="hdx-v2-footer__service">
+      <p class="hdx-v2-footer__service-label">Service provided by</p>
+      <div class="hdx-v2-footer__service-detail">
+        <span class="hdx-v2-footer__ocha-logo" aria-label="OCHA"><svg aria-hidden="true" focusable="false" viewBox="0 0 149 37" fill="none"><use href="/v2/icons/ocha.svg#i"/></svg></span>
+        <p class="hdx-v2-footer__ocha-text">
+          OCHA coordinates the global emergency response to save lives and protect people in humanitarian
+          crises. We advocate for effective and principled humanitarian action by all, for all.
+        </p>
+      </div>
+    </div>
+
+    <div class="hdx-v2-footer__license">
+      <span class="hdx-v2-footer__license-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 20 20" fill="none"><use href="/v2/icons/creative-commons.svg#i"/></svg></span>
+      <p class="hdx-v2-footer__license-text">
+        Except where otherwise noted, content on this site is licensed under a
+        Creative Commons BY 4.0 International license.
+      </p>
+    </div>
+
+    <div class="hdx-v2-footer__legal">
+      <a href="https://docs.humdata.org/about/hdx-terms-of-service"
+         target="_blank" rel="noopener noreferrer"
+         class="c-text-link c-text-link--primary c-text-link--size-s hdx-v2-footer__ext-link"
+         data-module="hdx_click_stopper"
+         data-module-link_type="footer">
+        <span class="hdx-v2-footer__ext-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/link-external.svg#i"/></svg></span>Terms of Service
+      </a>
+      <a href="https://docs.humdata.org/about/hdx-terms-of-service#privacy-notice"
+         target="_blank" rel="noopener noreferrer"
+         class="c-text-link c-text-link--primary c-text-link--size-s hdx-v2-footer__ext-link"
+         data-module="hdx_click_stopper"
+         data-module-link_type="footer">
+        <span class="hdx-v2-footer__ext-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none"><use href="/v2/icons/link-external.svg#i"/></svg></span>Privacy Policy
+      </a>
+    </div>
+
+  </div>
+
+  </div>
+</footer>
+  
+    
+  
+  
+  
+      
+      
+
+    
+  
+  
+
+  
+  
+  
+    
+  
+  
+
+
+      
+
+    
+    
+    <link href="/webassets/vendor/53df638c_fontawesome.css" rel="stylesheet"/>
+<link href="/webassets/ckanext-hdx_theme/c5ef5d0f_charting-styles.css" rel="stylesheet"/>
+    <script src="/webassets/ckanext-hdx_theme/3b90b3c2_v2-components-scripts.js" type="text/javascript"></script>
+<script src="/webassets/ckanext-hdx_theme/c9b25913_notification-platform-util-scripts.js" type="text/javascript"></script>
+<script src="/webassets/ckanext-hdx_theme/2615ee4a_notification-platform-unsubscribe-scripts.js" type="text/javascript"></script>
+<script src="/webassets/ckanext-hdx_theme/97d099e7_v2-form-validator-scripts.js" type="text/javascript"></script>
+<script src="/webassets/ckanext-hdx_theme/c18b11f8_notification-platform-subscribe-scripts.js" type="text/javascript"></script>
+<script src="/base/vendor/jed.js" type="text/javascript"></script>
+<script src="/base/vendor/moment-with-locales.js" type="text/javascript"></script>
+<script src="/base/vendor/popperjs.js" type="text/javascript"></script>
+<script src="/base/vendor/purify.js" type="text/javascript"></script>
+<script src="/base/vendor/jquery.js" type="text/javascript"></script>
+<script src="/webassets/vendor/240e5086_jquery.js" type="text/javascript"></script>
+<script src="/webassets/vendor/6d1ad7e6_bootstrap.js" type="text/javascript"></script>
+<script src="/webassets/base/88c359cd_main.js" type="text/javascript"></script>
+<script src="/webassets/ckanext-hdx_theme/981f99dd_ckan.js" type="text/javascript"></script>
+<script src="/webassets/ckanext-hdx_theme/528d5ed1_v2-search-scripts.js" type="text/javascript"></script>
+<script src="/webassets/ckanext-hdx_theme/f0df5947_v2-page-scripts.js" type="text/javascript"></script>
+<script src="/webassets/ckanext-hdx_theme/a9395134_v2-chart-scripts.js" type="text/javascript"></script>
+<script src="/webassets/ckanext-hdx_theme/8802f609_v2-dataset-page-scripts.js" type="text/javascript"></script>
+<script src="/webassets/ckanext-hdx_theme/34911dbc_charting-scripts.js" type="text/javascript"></script>
+<script src="/webassets/ckanext-hdx_theme/ca81cd2a_v2-shape-view-scripts.js" type="text/javascript"></script>
+<script src="/webassets/ckanext-hdx_theme/3c416515_v2-quick-edit-scripts.js" type="text/javascript"></script>
+  </body>
+  
+  
+</html>

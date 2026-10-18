@@ -1,0 +1,1827 @@
+{
+  "package": {
+    "package_id": "gb-COD-ADM2--repair-evaluation",
+    "primary_source": "gb:COD:ADM2",
+    "source_family_index": 70,
+    "category": "repair-evaluation",
+    "native_cells": 3905,
+    "land_cells": 3645,
+    "inland_water_cells": 260,
+    "source_relative_cells": 0,
+    "interval_segments": 2323,
+    "owners": [
+      14433,
+      14438,
+      14440,
+      14441,
+      14443,
+      14453,
+      14459,
+      14461,
+      14462,
+      14464,
+      14467,
+      14473,
+      14478,
+      14484,
+      14485,
+      14489,
+      14490,
+      14492,
+      14494,
+      14500,
+      14501,
+      14509,
+      14511,
+      14512,
+      14519,
+      14520,
+      14529,
+      14540,
+      14542,
+      14552,
+      14554,
+      14555,
+      14564,
+      14567,
+      14568,
+      14574,
+      14575,
+      14583,
+      14585,
+      14586,
+      14587,
+      14593,
+      14594,
+      14596,
+      14599,
+      14602,
+      14610,
+      14611,
+      14614,
+      14616
+    ],
+    "source_features": [
+      444,
+      445,
+      446,
+      447,
+      449,
+      450,
+      2030,
+      2032,
+      9188,
+      9193,
+      9197,
+      9200,
+      9201,
+      9203,
+      9204,
+      9208,
+      9209,
+      18727,
+      18728,
+      18730,
+      18732,
+      18734,
+      18735,
+      18737,
+      18738,
+      18740,
+      18742,
+      18745,
+      18746,
+      18747,
+      18749,
+      18750,
+      18752,
+      18755,
+      18757,
+      18775,
+      18776,
+      18777,
+      18779,
+      18782,
+      18793,
+      18797,
+      18798,
+      18799,
+      18801,
+      18802,
+      18814,
+      18819,
+      18823,
+      18826,
+      18828,
+      18832,
+      18836,
+      18838,
+      18839,
+      18841,
+      18848,
+      18850,
+      18851,
+      18859,
+      18860,
+      18873,
+      18875,
+      18877,
+      18881,
+      18891,
+      18895,
+      18896,
+      18897,
+      18901,
+      18911,
+      18916,
+      18918,
+      18920,
+      18921,
+      18922,
+      18923,
+      18925,
+      18926,
+      18932,
+      18934,
+      18938,
+      18941,
+      18942,
+      18946,
+      18948,
+      18950,
+      60206,
+      60207,
+      60215,
+      60391,
+      60394,
+      60453,
+      60456,
+      60458,
+      60459,
+      60495,
+      60496,
+      60498,
+      60499,
+      60516
+    ],
+    "source_families": [
+      2,
+      19,
+      50,
+      51,
+      69,
+      70,
+      71,
+      338,
+      340,
+      341
+    ],
+    "native_blocks": [
+      31,
+      32,
+      33,
+      34
+    ],
+    "provinces": [
+      "framework:province:central-kasai:973a3aa42512",
+      "framework:province:equateur:ca1f5c9cdfaa",
+      "framework:province:haut-katanga:be6b0bcac921",
+      "framework:province:ituri:98f8b4464451",
+      "framework:province:kasai:3a03574b01e3",
+      "framework:province:kinshasa:fb37a91feb40",
+      "framework:province:kongo-central:229f22e277f2",
+      "framework:province:kwango:68845ac502ac",
+      "framework:province:lower-uele:a2ed6cada392",
+      "framework:province:lualaba:d1370ad76c47",
+      "framework:province:mai-ndombe:710d497c99cb",
+      "framework:province:nord-ubangi:8dd50b7aa7ae",
+      "framework:province:north-kivu:90ca888d273b",
+      "framework:province:south-kivu:7635f47c1158",
+      "framework:province:sud-ubangi:6bb6cdccfc6e",
+      "framework:province:tanganyika:0f937f3d177a",
+      "framework:province:upper-uele:7700a34fa2c8"
+    ],
+    "location_count": 50,
+    "source_feature_count": 101,
+    "locality_count": 17,
+    "cost": {
+      "primary_source_decoded_bytes": 3294607,
+      "all_required_source_decoded_bytes": 7750773,
+      "primary_full_source_raster_measured_seconds": 0.754,
+      "source_interval_segments": 2323,
+      "maximum_native_rows_per_execution_frame": 4096,
+      "observed_global_census_peak_rss_bytes": 884973568
+    },
+    "evidence": {
+      "selection": "ownership-binding.json",
+      "lineage": "lineage.json",
+      "territorial_source_catalogue": "retained-source-catalogue.json",
+      "territorial_catalogue_sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "source_features": "source-feature-roster.json",
+      "territorial_native_blocks": "source-candidates-block-NNN.json.gz",
+      "physical": "physical-unassigned-summary.json",
+      "source_domain_transform": []
+    },
+    "work": {
+      "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+      "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+      "priority": 1
+    },
+    "execution": {
+      "command": "node source-batch-intervals.mjs gb-COD-ADM2--repair-evaluation OUTPUT_DIRECTORY",
+      "output_columns": [
+        "y",
+        "start",
+        "end",
+        "candidate_owner_indices",
+        "source_feature_indices",
+        "physical_class"
+      ]
+    }
+  },
+  "owners": [
+    {
+      "id": "gb:COD:ADM2:63176286B12311619160810",
+      "index": 14433,
+      "bounds": [
+        142663.52763499998,
+        133279.9459543505,
+        143740.44730388888,
+        134161.06805074963
+      ],
+      "province_id": "framework:province:mai-ndombe:710d497c99cb",
+      "province_index": 2832,
+      "name": "Kwamouth",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B12311619160810"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B14204108243102",
+      "index": 14438,
+      "bounds": [
+        143101.99567028004,
+        131487.54304059554,
+        144051.40530944444,
+        132540.7209349038
+      ],
+      "province_id": "framework:province:equateur:ca1f5c9cdfaa",
+      "province_index": 1672,
+      "name": "Lukolela",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B14204108243102"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B14719092717616",
+      "index": 14440,
+      "bounds": [
+        153011.65659833333,
+        128404.88513744331,
+        153604.73434944445,
+        129348.85547401357
+      ],
+      "province_id": "framework:province:ituri:98f8b4464451",
+      "province_index": 2198,
+      "name": "Aru",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B14719092717616"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B15680618396169",
+      "index": 14441,
+      "bounds": [
+        153021.6334711111,
+        128977.71536965853,
+        153878.04240444445,
+        129801.82652529186
+      ],
+      "province_id": "framework:province:ituri:98f8b4464451",
+      "province_index": 2198,
+      "name": "Mahagi",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B15680618396169"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B16720510237815",
+      "index": 14443,
+      "bounds": [
+        144497.8885722222,
+        127603.52702114942,
+        145297.20357666665,
+        129078.11554433078
+      ],
+      "province_id": "framework:province:sud-ubangi:6bb6cdccfc6e",
+      "province_index": 4414,
+      "name": "Libenge",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B16720510237815"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B21708239892428",
+      "index": 14453,
+      "bounds": [
+        151344.2808383333,
+        133663.920734359,
+        152485.28552944443,
+        134736.35438150732
+      ],
+      "province_id": "framework:province:south-kivu:7635f47c1158",
+      "province_index": 4341,
+      "name": "Fizi",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B21708239892428"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B24678106401017",
+      "index": 14459,
+      "bounds": [
+        149065.5485311111,
+        127154.84274861302,
+        150958.24140333335,
+        128529.22105084137
+      ],
+      "province_id": "framework:province:lower-uele:a2ed6cada392",
+      "province_index": 2760,
+      "name": "Ango",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B24678106401017"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B25314267977171",
+      "index": 14461,
+      "bounds": [
+        151762.58125611112,
+        135762.9779142056,
+        153507.73292944446,
+        137218.92624122088
+      ],
+      "province_id": "framework:province:tanganyika:0f937f3d177a",
+      "province_index": 4497,
+      "name": "Moba",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B25314267977171"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B25642850349509",
+      "index": 14462,
+      "bounds": [
+        152161.00075222223,
+        131407.50652018207,
+        152699.97035388887,
+        132156.8157062927
+      ],
+      "province_id": "framework:province:north-kivu:90ca888d273b",
+      "province_index": 3340,
+      "name": "Rutshuru",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B25642850349509"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B26674316015082",
+      "index": 14464,
+      "bounds": [
+        146954.31116833334,
+        137415.76157409855,
+        148979.68916611111,
+        138478.67524801422
+      ],
+      "province_id": "framework:province:lualaba:d1370ad76c47",
+      "province_index": 2763,
+      "name": "Sandoa",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B26674316015082"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B29097498682851",
+      "index": 14467,
+      "bounds": [
+        140895.65490833335,
+        134695.19903736413,
+        141758.39952,
+        135390.628076236
+      ],
+      "province_id": "framework:province:kongo-central:229f22e277f2",
+      "province_index": 2501,
+      "name": "Songololo",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B29097498682851"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B3160723083670",
+      "index": 14473,
+      "bounds": [
+        151624.361515,
+        132631.8827733894,
+        152209.38151699345,
+        133049.46279792165
+      ],
+      "province_id": "framework:province:south-kivu:7635f47c1158",
+      "province_index": 4341,
+      "name": "Kabare",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B3160723083670"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B33518015273847",
+      "index": 14478,
+      "bounds": [
+        147230.96912222225,
+        138275.2676931725,
+        148855.96137888887,
+        139328.84294130479
+      ],
+      "province_id": "framework:province:lualaba:d1370ad76c47",
+      "province_index": 2763,
+      "name": "Dilolo",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B33518015273847"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B36806520086654",
+      "index": 14484,
+      "bounds": [
+        143975.10101709826,
+        129534.11722661059,
+        145247.10074111112,
+        131493.44205690626
+      ],
+      "province_id": "framework:province:equateur:ca1f5c9cdfaa",
+      "province_index": 1672,
+      "name": "Bomongo",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B36806520086654"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B37251946319002",
+      "index": 14485,
+      "bounds": [
+        144107.55252777776,
+        135666.69710391236,
+        145625.05672444444,
+        137008.10265314166
+      ],
+      "province_id": "framework:province:kwango:68845ac502ac",
+      "province_index": 2560,
+      "name": "Kahemba",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B37251946319002"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B40063645047483",
+      "index": 14489,
+      "bounds": [
+        140823.9233777778,
+        134215.98337286897,
+        141623.38403000002,
+        134976.92584018232
+      ],
+      "province_id": "framework:province:kongo-central:229f22e277f2",
+      "province_index": 2501,
+      "name": "Luozi",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B40063645047483"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B40120828568077",
+      "index": 14490,
+      "bounds": [
+        145414.81415722222,
+        135265.78276564955,
+        146949.50479166667,
+        136408.73979993715
+      ],
+      "province_id": "framework:province:kasai:3a03574b01e3",
+      "province_index": 2366,
+      "name": "Kamonia",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B40120828568077"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B41140464701712",
+      "index": 14492,
+      "bounds": [
+        146920.44806,
+        136661.24905506274,
+        148363.38059444443,
+        137915.81530211435
+      ],
+      "province_id": "framework:province:lualaba:d1370ad76c47",
+      "province_index": 2763,
+      "name": "Kapanga",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B41140464701712"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B42701779698156",
+      "index": 14494,
+      "bounds": [
+        152043.39017166666,
+        133077.67739931215,
+        152389.30364388888,
+        133748.70940965568
+      ],
+      "province_id": "framework:province:south-kivu:7635f47c1158",
+      "province_index": 4341,
+      "name": "Uvira",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B42701779698156"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B47015384768636",
+      "index": 14500,
+      "bounds": [
+        140164.72153555555,
+        134464.77813116895,
+        140852.90728555556,
+        134969.026655685
+      ],
+      "province_id": "framework:province:kongo-central:229f22e277f2",
+      "province_index": 2501,
+      "name": "Tshela",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B47015384768636"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B47421332346835",
+      "index": 14501,
+      "bounds": [
+        142836.33872333332,
+        134646.00728051492,
+        143599.38743111113,
+        135562.530167137
+      ],
+      "province_id": "framework:province:kwango:68845ac502ac",
+      "province_index": 2560,
+      "name": "Popokabaka",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B47421332346835"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B50098701443330",
+      "index": 14509,
+      "bounds": [
+        144929.73423333335,
+        127330.43416224876,
+        145942.71452777777,
+        128243.37335732662
+      ],
+      "province_id": "framework:province:nord-ubangi:8dd50b7aa7ae",
+      "province_index": 3307,
+      "name": "Bosobolo",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B50098701443330"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B50481715267247",
+      "index": 14511,
+      "bounds": [
+        151191.93326277778,
+        136650.5952653776,
+        152688.8282988889,
+        138234.84310258535
+      ],
+      "province_id": "framework:province:haut-katanga:be6b0bcac921",
+      "province_index": 1992,
+      "name": "Pweto",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B50481715267247"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B52056185132037",
+      "index": 14512,
+      "bounds": [
+        151234.9721811111,
+        139695.14212837318,
+        152792.5295166667,
+        140973.52418723356
+      ],
+      "province_id": "framework:province:haut-katanga:be6b0bcac921",
+      "province_index": 1992,
+      "name": "Sakania",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B52056185132037"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B53748739739840",
+      "index": 14519,
+      "bounds": [
+        144588.91843333334,
+        127885.77062711157,
+        144823.41135555555,
+        128190.52442742683
+      ],
+      "province_id": "framework:province:sud-ubangi:6bb6cdccfc6e",
+      "province_index": 4414,
+      "name": "Zongo",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B53748739739840"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B538038850114",
+      "index": 14520,
+      "bounds": [
+        140539.03632444446,
+        135284.44666175017,
+        140633.41608444444,
+        135371.55598275212
+      ],
+      "province_id": "framework:province:kongo-central:229f22e277f2",
+      "province_index": 2501,
+      "name": "Boma",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B538038850114"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B57018267641486",
+      "index": 14529,
+      "bounds": [
+        148639.0190138889,
+        138388.96547633864,
+        149978.83292166668,
+        139692.46444342003
+      ],
+      "province_id": "framework:province:lualaba:d1370ad76c47",
+      "province_index": 2763,
+      "name": "Mutshatsha",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B57018267641486"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B64827262038855",
+      "index": 14540,
+      "bounds": [
+        152052.78445333333,
+        132872.02979684816,
+        152123.93339277778,
+        132948.78691892984
+      ],
+      "province_id": "framework:province:south-kivu:7635f47c1158",
+      "province_index": 4341,
+      "name": "Bukavu",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B64827262038855"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B65133649587609",
+      "index": 14542,
+      "bounds": [
+        152655.62060555554,
+        129323.63632528561,
+        153683.82109277777,
+        130100.95202681304
+      ],
+      "province_id": "framework:province:ituri:98f8b4464451",
+      "province_index": 2198,
+      "name": "Djugu",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B65133649587609"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B6958016734749",
+      "index": 14552,
+      "bounds": [
+        151497.28382888887,
+        134734.59990756246,
+        152678.92424999998,
+        136288.576489998
+      ],
+      "province_id": "framework:province:tanganyika:0f937f3d177a",
+      "province_index": 4497,
+      "name": "Kalemie",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B6958016734749"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B6974395638231",
+      "index": 14554,
+      "bounds": [
+        150693.96351055556,
+        127286.04904484273,
+        152798.57389944443,
+        129033.93218138811
+      ],
+      "province_id": "framework:province:upper-uele:7700a34fa2c8",
+      "province_index": 4729,
+      "name": "Dungu",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B6974395638231"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B69853523616594",
+      "index": 14555,
+      "bounds": [
+        140617.10353333334,
+        134665.9611382241,
+        141030.233455,
+        135364.38157524884
+      ],
+      "province_id": "framework:province:kongo-central:229f22e277f2",
+      "province_index": 2501,
+      "name": "Seke-Banza",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B69853523616594"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B72804638257173",
+      "index": 14564,
+      "bounds": [
+        146564.557715,
+        127992.44502642655,
+        148220.71859611108,
+        128937.90193862976
+      ],
+      "province_id": "framework:province:nord-ubangi:8dd50b7aa7ae",
+      "province_index": 3307,
+      "name": "Yakoma",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B72804638257173"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B75279003671986",
+      "index": 14567,
+      "bounds": [
+        150894.66614833334,
+        139112.3626209445,
+        151854.67658130193,
+        140100.2531704534
+      ],
+      "province_id": "framework:province:haut-katanga:be6b0bcac921",
+      "province_index": 1992,
+      "name": "Kipushi",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B75279003671986"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B75372177576839",
+      "index": 14568,
+      "bounds": [
+        152413.69964666668,
+        129811.95378038884,
+        153361.18163224673,
+        130508.61984849349
+      ],
+      "province_id": "framework:province:ituri:98f8b4464451",
+      "province_index": 2198,
+      "name": "Irumu",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B75372177576839"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B77262619841164",
+      "index": 14574,
+      "bounds": [
+        150731.39498944447,
+        137946.3713654001,
+        151981.12574666666,
+        139419.29935808145
+      ],
+      "province_id": "framework:province:haut-katanga:be6b0bcac921",
+      "province_index": 1992,
+      "name": "Kasenga",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B77262619841164"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B77587123851522",
+      "index": 14575,
+      "bounds": [
+        145906.5938788889,
+        127673.2378988811,
+        147078.76719444446,
+        128470.92323682703
+      ],
+      "province_id": "framework:province:nord-ubangi:8dd50b7aa7ae",
+      "province_index": 3307,
+      "name": "Mobayi-Mbongo",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B77587123851522"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B79360907689545",
+      "index": 14583,
+      "bounds": [
+        142102.05545166667,
+        133945.47375231583,
+        143122.53660666666,
+        134747.02757026756
+      ],
+      "province_id": "framework:province:kinshasa:fb37a91feb40",
+      "province_index": 2465,
+      "name": "Kinshasa",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B79360907689545"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B80368275017521",
+      "index": 14585,
+      "bounds": [
+        147428.4675088889,
+        127354.74760178565,
+        149685.7895927778,
+        128609.76455548685
+      ],
+      "province_id": "framework:province:lower-uele:a2ed6cada392",
+      "province_index": 2760,
+      "name": "Bondo",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B80368275017521"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B81146580347594",
+      "index": 14586,
+      "bounds": [
+        146851.99360444446,
+        135832.01638885314,
+        148030.2841266667,
+        136851.46231257182
+      ],
+      "province_id": "framework:province:central-kasai:973a3aa42512",
+      "province_index": 1224,
+      "name": "Luiza",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B81146580347594"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B82592558575614",
+      "index": 14587,
+      "bounds": [
+        141414.08817333332,
+        134559.40374399655,
+        142211.82858521029,
+        135388.39437453082
+      ],
+      "province_id": "framework:province:kongo-central:229f22e277f2",
+      "province_index": 2501,
+      "name": "Mbanza-Ngungu",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B82592558575614"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B83971453832478",
+      "index": 14593,
+      "bounds": [
+        142552.10708500003,
+        134698.48841147235,
+        142930.06306833334,
+        135371.48277387457
+      ],
+      "province_id": "framework:province:kongo-central:229f22e277f2",
+      "province_index": 2501,
+      "name": "Kimvula",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B83971453832478"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B84034630662614",
+      "index": 14594,
+      "bounds": [
+        149641.43984444445,
+        138743.78819411245,
+        151139.4272388889,
+        139893.16528208376
+      ],
+      "province_id": "framework:province:haut-katanga:be6b0bcac921",
+      "province_index": 1992,
+      "name": "Kambove",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B84034630662614"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B8564391110970",
+      "index": 14596,
+      "bounds": [
+        151705.05038388888,
+        132935.4469163727,
+        152231.2371699355,
+        133266.4549700572
+      ],
+      "province_id": "framework:province:south-kivu:7635f47c1158",
+      "province_index": 4341,
+      "name": "Walungu",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B8564391110970"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B86170870415972",
+      "index": 14599,
+      "bounds": [
+        152201.05389111108,
+        130390.77718465863,
+        152924.55922722223,
+        131194.0565616812
+      ],
+      "province_id": "framework:province:north-kivu:90ca888d273b",
+      "province_index": 3340,
+      "name": "Oïcha",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B86170870415972"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B88277060419996",
+      "index": 14602,
+      "bounds": [
+        139971.66540611113,
+        135072.9706591338,
+        140839.65333777777,
+        135502.4014811282
+      ],
+      "province_id": "framework:province:kongo-central:229f22e277f2",
+      "province_index": 2501,
+      "name": "Moanda",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B88277060419996"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B94121502354965",
+      "index": 14610,
+      "bounds": [
+        152455.42773499998,
+        127897.87866456373,
+        153350.25493608712,
+        129200.37378914739
+      ],
+      "province_id": "framework:province:upper-uele:7700a34fa2c8",
+      "province_index": 4729,
+      "name": "Faradje",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B94121502354965"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B94968684087840",
+      "index": 14611,
+      "bounds": [
+        143237.1670530405,
+        135382.2446201647,
+        144662.17926555558,
+        137022.88845661096
+      ],
+      "province_id": "framework:province:kwango:68845ac502ac",
+      "province_index": 2560,
+      "name": "Kasongo-Lunda",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B94968684087840"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B98008703469616",
+      "index": 14614,
+      "bounds": [
+        141913.95134666667,
+        134323.712094586,
+        142613.35197555556,
+        134848.4348899995
+      ],
+      "province_id": "framework:province:kongo-central:229f22e277f2",
+      "province_index": 2501,
+      "name": "Kasangulu",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B98008703469616"
+      ]
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B98421000452360",
+      "index": 14616,
+      "bounds": [
+        146102.19884444444,
+        127841.99573073625,
+        146433.18341944445,
+        128122.04750250516
+      ],
+      "province_id": "framework:province:nord-ubangi:8dd50b7aa7ae",
+      "province_index": 3307,
+      "name": "Gbadolite",
+      "reference_owner": "Democratic Republic of the Congo",
+      "source_id": "gb:COD:ADM2",
+      "source_atoms": [
+        "gb:COD:ADM2:63176286B98421000452360"
+      ]
+    }
+  ],
+  "all_source_atoms": [
+    "gb:COD:ADM2:63176286B12311619160810",
+    "gb:COD:ADM2:63176286B14204108243102",
+    "gb:COD:ADM2:63176286B14719092717616",
+    "gb:COD:ADM2:63176286B15680618396169",
+    "gb:COD:ADM2:63176286B16720510237815",
+    "gb:COD:ADM2:63176286B21708239892428",
+    "gb:COD:ADM2:63176286B24678106401017",
+    "gb:COD:ADM2:63176286B25314267977171",
+    "gb:COD:ADM2:63176286B25642850349509",
+    "gb:COD:ADM2:63176286B26674316015082",
+    "gb:COD:ADM2:63176286B29097498682851",
+    "gb:COD:ADM2:63176286B3160723083670",
+    "gb:COD:ADM2:63176286B33518015273847",
+    "gb:COD:ADM2:63176286B36806520086654",
+    "gb:COD:ADM2:63176286B37251946319002",
+    "gb:COD:ADM2:63176286B40063645047483",
+    "gb:COD:ADM2:63176286B40120828568077",
+    "gb:COD:ADM2:63176286B41140464701712",
+    "gb:COD:ADM2:63176286B42701779698156",
+    "gb:COD:ADM2:63176286B47015384768636",
+    "gb:COD:ADM2:63176286B47421332346835",
+    "gb:COD:ADM2:63176286B50098701443330",
+    "gb:COD:ADM2:63176286B50481715267247",
+    "gb:COD:ADM2:63176286B52056185132037",
+    "gb:COD:ADM2:63176286B53748739739840",
+    "gb:COD:ADM2:63176286B538038850114",
+    "gb:COD:ADM2:63176286B57018267641486",
+    "gb:COD:ADM2:63176286B64827262038855",
+    "gb:COD:ADM2:63176286B65133649587609",
+    "gb:COD:ADM2:63176286B6958016734749",
+    "gb:COD:ADM2:63176286B6974395638231",
+    "gb:COD:ADM2:63176286B69853523616594",
+    "gb:COD:ADM2:63176286B72804638257173",
+    "gb:COD:ADM2:63176286B75279003671986",
+    "gb:COD:ADM2:63176286B75372177576839",
+    "gb:COD:ADM2:63176286B77262619841164",
+    "gb:COD:ADM2:63176286B77587123851522",
+    "gb:COD:ADM2:63176286B79360907689545",
+    "gb:COD:ADM2:63176286B80368275017521",
+    "gb:COD:ADM2:63176286B81146580347594",
+    "gb:COD:ADM2:63176286B82592558575614",
+    "gb:COD:ADM2:63176286B83971453832478",
+    "gb:COD:ADM2:63176286B84034630662614",
+    "gb:COD:ADM2:63176286B8564391110970",
+    "gb:COD:ADM2:63176286B86170870415972",
+    "gb:COD:ADM2:63176286B88277060419996",
+    "gb:COD:ADM2:63176286B94121502354965",
+    "gb:COD:ADM2:63176286B94968684087840",
+    "gb:COD:ADM2:63176286B98008703469616",
+    "gb:COD:ADM2:63176286B98421000452360"
+  ],
+  "atom_families": [
+    "gb:COD:ADM2"
+  ],
+  "contact_families": [
+    "gb:AGO:ADM1",
+    "gb:BDI:ADM1",
+    "gb:CAF:ADM1",
+    "gb:CAF:ADM2",
+    "gb:COD:ADM1",
+    "gb:COD:ADM2",
+    "gb:COG:ADM1",
+    "gb:TZA:ADM1",
+    "gb:UGA:ADM1",
+    "gb:UGA:ADM2"
+  ],
+  "complete_required_products": [
+    {
+      "advertised_feature_count": 18,
+      "cohort": "administrative-registry",
+      "feature_count": 18,
+      "key": "gb:AGO:ADM1",
+      "metadata_sha256": "7282c93f179d94cc15aee8f34c6030a7d95d1bc893abda8f3e271ceb6547e247",
+      "original_bytes": 574816,
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "71796d87bc112f7969b92ca4c8beb2fa60a4e0a37c3a5e7801ee51a3e7e58c76",
+      "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+      "parts": [
+        {
+          "bytes": 179282,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-AGO-ADM1-000.bin.gz",
+          "sha256": "a54aaaf45c85240aba8b99cf98126350cc070306e6da12b746259168e6a6ee71",
+          "uncompressed_bytes": 574816,
+          "uncompressed_sha256": "71796d87bc112f7969b92ca4c8beb2fa60a4e0a37c3a5e7801ee51a3e7e58c76"
+        }
+      ],
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AGO/ADM1/geoBoundaries-AGO-ADM1_simplified.geojson",
+      "recorded_license": "Public Domain",
+      "source_represented_year_claim": "2021"
+    },
+    {
+      "advertised_feature_count": 18,
+      "cohort": "administrative-registry",
+      "feature_count": 18,
+      "key": "gb:BDI:ADM1",
+      "metadata_sha256": "d69136daf1ce79190233e5fe1f4f178d74b2d6e517dd4545766d72d01000b7ba",
+      "original_bytes": 138787,
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "2e134d7b93d0c55c490afe45c7ff0a6ca6d78e6e841264d5119420caacdbf32b",
+      "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+      "parts": [
+        {
+          "bytes": 43830,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BDI-ADM1-000.bin.gz",
+          "sha256": "39eb94814dc7a41afeefb836648d7c971b1caed1c794bfc72b21eb253d00fe43",
+          "uncompressed_bytes": 138787,
+          "uncompressed_sha256": "2e134d7b93d0c55c490afe45c7ff0a6ca6d78e6e841264d5119420caacdbf32b"
+        }
+      ],
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BDI/ADM1/geoBoundaries-BDI-ADM1_simplified.geojson",
+      "recorded_license": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+      "source_represented_year_claim": "2014"
+    },
+    {
+      "advertised_feature_count": 17,
+      "cohort": "administrative-registry",
+      "feature_count": 17,
+      "key": "gb:CAF:ADM1",
+      "metadata_sha256": "7801fe6bdbd0f805c78c82e0681ddef39e50196a798e42ea05e08a659c070052",
+      "original_bytes": 115127,
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "f9180594ed02a19e423a94f226c489b128d755d306cdd5f00669019b6eb980e8",
+      "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+      "parts": [
+        {
+          "bytes": 35452,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CAF-ADM1-000.bin.gz",
+          "sha256": "3d66ea0099b0b03ca75ea3e9dc1c098c7501f3360506acdc3fe5b75e790968ea",
+          "uncompressed_bytes": 115127,
+          "uncompressed_sha256": "f9180594ed02a19e423a94f226c489b128d755d306cdd5f00669019b6eb980e8"
+        }
+      ],
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CAF/ADM1/geoBoundaries-CAF-ADM1_simplified.geojson",
+      "recorded_license": "Creative Commons Attribution 2.5 Generic",
+      "source_represented_year_claim": "2006"
+    },
+    {
+      "advertised_feature_count": 72,
+      "cohort": "administrative-registry",
+      "feature_count": 72,
+      "key": "gb:CAF:ADM2",
+      "metadata_sha256": "5d099f05a2b368cbf2aa4286e1f3f7b703f7e2dc4c2dc2a8439a16e1feaa7f8d",
+      "original_bytes": 597126,
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "891357fe42dcc29a7c2ef847bef6422eea857602c515e0141ab015a78b1899bc",
+      "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+      "parts": [
+        {
+          "bytes": 165838,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CAF-ADM2-000.bin.gz",
+          "sha256": "beed24d4682d1a3083093c53d435399860d23f615a449caf35d8ce5eec723066",
+          "uncompressed_bytes": 597126,
+          "uncompressed_sha256": "891357fe42dcc29a7c2ef847bef6422eea857602c515e0141ab015a78b1899bc"
+        }
+      ],
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CAF/ADM2/geoBoundaries-CAF-ADM2_simplified.geojson",
+      "recorded_license": "Creative Commons Attribution 3.0 License",
+      "source_represented_year_claim": "2015"
+    },
+    {
+      "advertised_feature_count": 26,
+      "cohort": "administrative-registry",
+      "feature_count": 26,
+      "key": "gb:COD:ADM1",
+      "metadata_sha256": "8d35ea720eb2d29e2bda664b5ecbb89ed14fb65d50fb48229f1f3ab5a87afcad",
+      "original_bytes": 1153436,
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "bf6096f1c16f2632be9c4d4c0305276024fd5b3f3b9b3e635b2e2018d02f0331",
+      "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+      "parts": [
+        {
+          "bytes": 378900,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-COD-ADM1-000.bin.gz",
+          "sha256": "a2e524c39c94b065d6ae76ca335730ef716d6378c050f1d11c15a1a40fe8b584",
+          "uncompressed_bytes": 1153436,
+          "uncompressed_sha256": "bf6096f1c16f2632be9c4d4c0305276024fd5b3f3b9b3e635b2e2018d02f0331"
+        }
+      ],
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COD/ADM1/geoBoundaries-COD-ADM1_simplified.geojson",
+      "recorded_license": "Open Data Commons Open Database License 1.0",
+      "source_represented_year_claim": "2017"
+    },
+    {
+      "advertised_feature_count": 189,
+      "cohort": "administrative-registry",
+      "feature_count": 189,
+      "key": "gb:COD:ADM2",
+      "metadata_sha256": "182153089511b1219fd9887e7bf7cebb41b54eac5032febbe2c437ac7597bfa0",
+      "original_bytes": 3294607,
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "922427143fcff23010af3931fb3f5e4ffea8b05c5d2b797ca02fc04c6c8b1baa",
+      "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+      "parts": [
+        {
+          "bytes": 1074327,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-COD-ADM2-000.bin.gz",
+          "sha256": "a75f184d075817469627f2b9eff892ff043597fefccdb9d61d2503f31a8486db",
+          "uncompressed_bytes": 3294607,
+          "uncompressed_sha256": "922427143fcff23010af3931fb3f5e4ffea8b05c5d2b797ca02fc04c6c8b1baa"
+        }
+      ],
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COD/ADM2/geoBoundaries-COD-ADM2_simplified.geojson",
+      "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "source_represented_year_claim": "2019"
+    },
+    {
+      "advertised_feature_count": 12,
+      "cohort": "administrative-registry",
+      "feature_count": 12,
+      "key": "gb:COG:ADM1",
+      "metadata_sha256": "ac1fe92e9fb8c5ef51680a93de667d67a1ad49f1350463d8d122bd053e9078d0",
+      "original_bytes": 170812,
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "2aea50c78d9c86139a73dfb72e20e59ae151d1c7d5c0e03bd0482f06e18d340b",
+      "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+      "parts": [
+        {
+          "bytes": 54037,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-COG-ADM1-000.bin.gz",
+          "sha256": "a4ecf3129d317d13214efef5fd461203443ef88f0d18be11800edb461dc0198b",
+          "uncompressed_bytes": 170812,
+          "uncompressed_sha256": "2aea50c78d9c86139a73dfb72e20e59ae151d1c7d5c0e03bd0482f06e18d340b"
+        }
+      ],
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COG/ADM1/geoBoundaries-COG-ADM1_simplified.geojson",
+      "recorded_license": "Open Data Commons Open Database License 1.0",
+      "source_represented_year_claim": "2017"
+    },
+    {
+      "advertised_feature_count": 30,
+      "cohort": "administrative-registry",
+      "feature_count": 30,
+      "key": "gb:TZA:ADM1",
+      "metadata_sha256": "1a7fa9cdb5ac1df4e3e3b196d2fe352cec47c8e29488e86b780a02ef8afbc834",
+      "original_bytes": 426148,
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "8b84f3f0a9e6e16322b777a5bba90c8e33c5e93c0dcb03ef1d3f6332036d066f",
+      "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+      "parts": [
+        {
+          "bytes": 131832,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-TZA-ADM1-000.bin.gz",
+          "sha256": "1594bd12d18f550af5eb9c0c7130d71ce57c400018070ef27b04db61f1a77f13",
+          "uncompressed_bytes": 426148,
+          "uncompressed_sha256": "8b84f3f0a9e6e16322b777a5bba90c8e33c5e93c0dcb03ef1d3f6332036d066f"
+        }
+      ],
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TZA/ADM1/geoBoundaries-TZA-ADM1_simplified.geojson",
+      "recorded_license": "Open Data Commons Open Database License 1.0",
+      "source_represented_year_claim": "2015"
+    },
+    {
+      "advertised_feature_count": 4,
+      "cohort": "administrative-registry",
+      "feature_count": 4,
+      "key": "gb:UGA:ADM1",
+      "metadata_sha256": "531cac0221086443c235d777423509a94f122766421cccccf31d96087bb4e774",
+      "original_bytes": 258114,
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "75e5442c33f7023bcd2d7d72928835723b557c1a9523f3b4c9afe36d0e73af93",
+      "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+      "parts": [
+        {
+          "bytes": 85208,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-UGA-ADM1-000.bin.gz",
+          "sha256": "3e0dc23da310870739bc742483875a3e9a9b1614d46d9a67c77aac6ccb427425",
+          "uncompressed_bytes": 258114,
+          "uncompressed_sha256": "75e5442c33f7023bcd2d7d72928835723b557c1a9523f3b4c9afe36d0e73af93"
+        }
+      ],
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM1/geoBoundaries-UGA-ADM1_simplified.geojson",
+      "recorded_license": "Open Data Commons Open Database License 1.0",
+      "source_represented_year_claim": "2017"
+    },
+    {
+      "advertised_feature_count": 151,
+      "cohort": "administrative-registry",
+      "feature_count": 151,
+      "key": "gb:UGA:ADM2",
+      "metadata_sha256": "c5512853c1d9c3047ad049f3c69464250bb784c2c9672d3d6eede58b23f0c41e",
+      "original_bytes": 1021800,
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "0a13e10b3bc6beeb02db4502c7f29a2ebbbb681a932307ccba4cd53e994feac7",
+      "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+      "parts": [
+        {
+          "bytes": 317239,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-UGA-ADM2-000.bin.gz",
+          "sha256": "c16dc4723d4a48cbe5622bfe3f555cf46e0490a1a08324a22503696a5fc9389c",
+          "uncompressed_bytes": 1021800,
+          "uncompressed_sha256": "0a13e10b3bc6beeb02db4502c7f29a2ebbbb681a932307ccba4cd53e994feac7"
+        }
+      ],
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM2/geoBoundaries-UGA-ADM2_simplified.geojson",
+      "recorded_license": "Public Domain",
+      "source_represented_year_claim": "2006"
+    }
+  ],
+  "external_atoms_missing_from_gb_roster": [],
+  "direct_owners": 50,
+  "metadata": {
+    "gb:AGO:ADM1": {
+      "boundaryID": "AGO-ADM1-26408823",
+      "boundaryName": "Angola",
+      "boundaryISO": "AGO",
+      "boundaryYearRepresented": "2021",
+      "boundaryType": "ADM1",
+      "boundaryCanonical": "Province",
+      "boundarySource": "U.S. Census Bureau",
+      "boundaryLicense": "Public Domain",
+      "licenseDetail": "nan",
+      "licenseSource": "www.census.gov/geographies/mapping-files/time-series/demo/international-programs/subnationalpopulation.html",
+      "boundarySourceURL": "www.census.gov/geographies/mapping-files/time-series/demo/international-programs/subnationalpopulation.html",
+      "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+      "buildDate": "Dec 12, 2023",
+      "Continent": "Africa",
+      "UNSDG-region": "Sub-Saharan Africa",
+      "UNSDG-subregion": "Middle Africa",
+      "worldBankIncomeGroup": "Lower-middle-income Countries",
+      "admUnitCount": "18",
+      "meanVertices": "8154.0",
+      "minVertices": "436",
+      "maxVertices": "30778",
+      "meanPerimeterLengthKM": "1470.5506777405328",
+      "minPerimeterLengthKM": "693.8960845401504",
+      "maxPerimeterLengthKM": "2847.5719594219645",
+      "meanAreaSqKM": "69301.17669739896",
+      "minAreaSqKM": "6990.237838433679",
+      "maxAreaSqKM": "199954.2679369335",
+      "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AGO/ADM1/geoBoundaries-AGO-ADM1-all.zip",
+      "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AGO/ADM1/geoBoundaries-AGO-ADM1.geojson",
+      "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AGO/ADM1/geoBoundaries-AGO-ADM1.topojson",
+      "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AGO/ADM1/geoBoundaries-AGO-ADM1-PREVIEW.png",
+      "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AGO/ADM1/geoBoundaries-AGO-ADM1_simplified.geojson",
+      "sha256": "71796d87bc112f7969b92ca4c8beb2fa60a4e0a37c3a5e7801ee51a3e7e58c76"
+    },
+    "gb:BDI:ADM1": {
+      "boundaryID": "BDI-ADM1-87207978",
+      "boundaryName": "Burundi",
+      "boundaryISO": "BDI",
+      "boundaryYearRepresented": "2014",
+      "boundaryType": "ADM1",
+      "boundaryCanonical": "Province",
+      "boundarySource": "geoBoundaries, Wikimedia",
+      "boundaryLicense": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+      "licenseDetail": "nan",
+      "licenseSource": "commons.wikimedia.org/wiki/File",
+      "boundarySourceURL": "commons.wikimedia.org/wiki/File",
+      "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+      "buildDate": "Dec 12, 2023",
+      "Continent": "Africa",
+      "UNSDG-region": "Sub-Saharan Africa",
+      "UNSDG-subregion": "Eastern Africa",
+      "worldBankIncomeGroup": "Low-income Countries",
+      "admUnitCount": "18",
+      "meanVertices": "301.0",
+      "minVertices": "61",
+      "maxVertices": "557",
+      "meanPerimeterLengthKM": "205.8914409570872",
+      "minPerimeterLengthKM": "56.10073833421855",
+      "maxPerimeterLengthKM": "309.59065704254255",
+      "meanAreaSqKM": "1391.67728701509",
+      "minAreaSqKM": "110.47352729854649",
+      "maxAreaSqKM": "2252.986791630631",
+      "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BDI/ADM1/geoBoundaries-BDI-ADM1-all.zip",
+      "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BDI/ADM1/geoBoundaries-BDI-ADM1.geojson",
+      "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BDI/ADM1/geoBoundaries-BDI-ADM1.topojson",
+      "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BDI/ADM1/geoBoundaries-BDI-ADM1-PREVIEW.png",
+      "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BDI/ADM1/geoBoundaries-BDI-ADM1_simplified.geojson",
+      "sha256": "2e134d7b93d0c55c490afe45c7ff0a6ca6d78e6e841264d5119420caacdbf32b"
+    },
+    "gb:CAF:ADM1": {
+      "boundaryID": "CAF-ADM1-63714938",
+      "boundaryName": "Central African Republic",
+      "boundaryISO": "CAF",
+      "boundaryYearRepresented": "2006",
+      "boundaryType": "ADM1",
+      "boundaryCanonical": "Prefecture and Commune",
+      "boundarySource": "geoBoundaries, Wikimedia",
+      "boundaryLicense": "Creative Commons Attribution 2.5 Generic",
+      "licenseDetail": "nan",
+      "licenseSource": "commons.wikimedia.org/wiki/File",
+      "boundarySourceURL": "commons.wikimedia.org/wiki/File",
+      "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+      "buildDate": "Dec 12, 2023",
+      "Continent": "Africa",
+      "UNSDG-region": "Sub-Saharan Africa",
+      "UNSDG-subregion": "Middle Africa",
+      "worldBankIncomeGroup": "Low-income Countries",
+      "admUnitCount": "17",
+      "meanVertices": "164.0",
+      "minVertices": "17",
+      "maxVertices": "295",
+      "meanPerimeterLengthKM": "949.5787851069974",
+      "minPerimeterLengthKM": "64.83850845865095",
+      "maxPerimeterLengthKM": "1551.4243343075211",
+      "meanAreaSqKM": "36455.24129049195",
+      "minAreaSqKM": "267.7881583109446",
+      "maxAreaSqKM": "86468.47806276864",
+      "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CAF/ADM1/geoBoundaries-CAF-ADM1-all.zip",
+      "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CAF/ADM1/geoBoundaries-CAF-ADM1.geojson",
+      "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CAF/ADM1/geoBoundaries-CAF-ADM1.topojson",
+      "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CAF/ADM1/geoBoundaries-CAF-ADM1-PREVIEW.png",
+      "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CAF/ADM1/geoBoundaries-CAF-ADM1_simplified.geojson",
+      "sha256": "f9180594ed02a19e423a94f226c489b128d755d306cdd5f00669019b6eb980e8"
+    },
+    "gb:CAF:ADM2": {
+      "boundaryID": "CAF-ADM2-33826404",
+      "boundaryName": "Central African Republic",
+      "boundaryISO": "CAF",
+      "boundaryYearRepresented": "2015",
+      "boundaryType": "ADM2",
+      "boundaryCanonical": "Sub-Prefectures",
+      "boundarySource": "geoBoundaries, UNHCR",
+      "boundaryLicense": "Creative Commons Attribution 3.0 License",
+      "licenseDetail": "nan",
+      "licenseSource": "data2.unhcr.org/en/documents/details/32968",
+      "boundarySourceURL": "data2.unhcr.org/en/documents/details/32968",
+      "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+      "buildDate": "Dec 12, 2023",
+      "Continent": "Africa",
+      "UNSDG-region": "Sub-Saharan Africa",
+      "UNSDG-subregion": "Middle Africa",
+      "worldBankIncomeGroup": "Low-income Countries",
+      "admUnitCount": "72",
+      "meanVertices": "527.0",
+      "minVertices": "60",
+      "maxVertices": "3953",
+      "meanPerimeterLengthKM": "477.5579066452236",
+      "minPerimeterLengthKM": "57.930411913489245",
+      "maxPerimeterLengthKM": "1303.5806706045937",
+      "meanAreaSqKM": "8578.338736373833",
+      "minAreaSqKM": "69.12942836398491",
+      "maxAreaSqKM": "41423.23566133018",
+      "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CAF/ADM2/geoBoundaries-CAF-ADM2-all.zip",
+      "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CAF/ADM2/geoBoundaries-CAF-ADM2.geojson",
+      "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CAF/ADM2/geoBoundaries-CAF-ADM2.topojson",
+      "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CAF/ADM2/geoBoundaries-CAF-ADM2-PREVIEW.png",
+      "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CAF/ADM2/geoBoundaries-CAF-ADM2_simplified.geojson",
+      "sha256": "891357fe42dcc29a7c2ef847bef6422eea857602c515e0141ab015a78b1899bc"
+    },
+    "gb:COD:ADM1": {
+      "boundaryID": "COD-ADM1-28894549",
+      "boundaryName": "Democratic Republic of the Congo",
+      "boundaryISO": "COD",
+      "boundaryYearRepresented": "2017",
+      "boundaryType": "ADM1",
+      "boundaryCanonical": "Provinces",
+      "boundarySource": "OpenStreetMap, Wambacher",
+      "boundaryLicense": "Open Data Commons Open Database License 1.0",
+      "licenseDetail": "nan",
+      "licenseSource": "www.openstreetmap.org/copyright",
+      "boundarySourceURL": "wambachers-osm.website/boundaries/",
+      "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+      "buildDate": "Dec 12, 2023",
+      "Continent": "Africa",
+      "UNSDG-region": "Sub-Saharan Africa",
+      "UNSDG-subregion": "Middle Africa",
+      "worldBankIncomeGroup": "Low-income Countries",
+      "admUnitCount": "26",
+      "meanVertices": "7466.0",
+      "minVertices": "1665",
+      "maxVertices": "16557",
+      "meanPerimeterLengthKM": "2061.367348533665",
+      "minPerimeterLengthKM": "635.7009527597437",
+      "maxPerimeterLengthKM": "3251.7261198670203",
+      "meanAreaSqKM": "88800.29888509739",
+      "minAreaSqKM": "10132.669108601853",
+      "maxAreaSqKM": "194537.57624352287",
+      "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COD/ADM1/geoBoundaries-COD-ADM1-all.zip",
+      "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COD/ADM1/geoBoundaries-COD-ADM1.geojson",
+      "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COD/ADM1/geoBoundaries-COD-ADM1.topojson",
+      "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COD/ADM1/geoBoundaries-COD-ADM1-PREVIEW.png",
+      "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COD/ADM1/geoBoundaries-COD-ADM1_simplified.geojson",
+      "sha256": "bf6096f1c16f2632be9c4d4c0305276024fd5b3f3b9b3e635b2e2018d02f0331"
+    },
+    "gb:COD:ADM2": {
+      "boundaryID": "COD-ADM2-63176286",
+      "boundaryName": "Democratic Republic of the Congo",
+      "boundaryISO": "COD",
+      "boundaryYearRepresented": "2019",
+      "boundaryType": "ADM2",
+      "boundaryCanonical": "territory, city",
+      "boundarySource": "Referenciel Géographique Commun, OCHA DR Congo",
+      "boundaryLicense": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "licenseDetail": "nan",
+      "licenseSource": "data.humdata.org/dataset/drc-administrative-boundaries-levels-0-2",
+      "boundarySourceURL": "data.humdata.org/dataset/drc-administrative-boundaries-levels-0-2",
+      "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+      "buildDate": "Dec 12, 2023",
+      "Continent": "Africa",
+      "UNSDG-region": "Sub-Saharan Africa",
+      "UNSDG-subregion": "Middle Africa",
+      "worldBankIncomeGroup": "Low-income Countries",
+      "admUnitCount": "189",
+      "meanVertices": "774.0",
+      "minVertices": "15",
+      "maxVertices": "4400",
+      "meanPerimeterLengthKM": "597.6135987707929",
+      "minPerimeterLengthKM": "5.997048193930922",
+      "maxPerimeterLengthKM": "1581.0015925531643",
+      "meanAreaSqKM": "12329.86262700922",
+      "minAreaSqKM": "2.6159653460849555",
+      "maxAreaSqKM": "48803.59295354783",
+      "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COD/ADM2/geoBoundaries-COD-ADM2-all.zip",
+      "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COD/ADM2/geoBoundaries-COD-ADM2.geojson",
+      "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COD/ADM2/geoBoundaries-COD-ADM2.topojson",
+      "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COD/ADM2/geoBoundaries-COD-ADM2-PREVIEW.png",
+      "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COD/ADM2/geoBoundaries-COD-ADM2_simplified.geojson",
+      "sha256": "922427143fcff23010af3931fb3f5e4ffea8b05c5d2b797ca02fc04c6c8b1baa"
+    },
+    "gb:COG:ADM1": {
+      "boundaryID": "COG-ADM1-67827341",
+      "boundaryName": "Congo",
+      "boundaryISO": "COG",
+      "boundaryYearRepresented": "2017",
+      "boundaryType": "ADM1",
+      "boundaryCanonical": "Départements",
+      "boundarySource": "OpenStreetMap, Wambacher",
+      "boundaryLicense": "Open Data Commons Open Database License 1.0",
+      "licenseDetail": "Open Data Commons Open Database License 1.0",
+      "licenseSource": "www.openstreetmap.org/copyright",
+      "boundarySourceURL": "wambachers-osm.website/boundaries/",
+      "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+      "buildDate": "Dec 12, 2023",
+      "Continent": "Africa",
+      "UNSDG-region": "Sub-Saharan Africa",
+      "UNSDG-subregion": "Middle Africa",
+      "worldBankIncomeGroup": "Lower-middle-income Countries",
+      "admUnitCount": "12",
+      "meanVertices": "1414.0",
+      "minVertices": "163",
+      "maxVertices": "3702",
+      "meanPerimeterLengthKM": "972.8862516348509",
+      "minPerimeterLengthKM": "50.15052084763803",
+      "maxPerimeterLengthKM": "1812.4791835239805",
+      "meanAreaSqKM": "28606.23002598925",
+      "minAreaSqKM": "80.85184430128498",
+      "maxAreaSqKM": "66513.8368916218",
+      "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COG/ADM1/geoBoundaries-COG-ADM1-all.zip",
+      "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COG/ADM1/geoBoundaries-COG-ADM1.geojson",
+      "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COG/ADM1/geoBoundaries-COG-ADM1.topojson",
+      "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COG/ADM1/geoBoundaries-COG-ADM1-PREVIEW.png",
+      "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COG/ADM1/geoBoundaries-COG-ADM1_simplified.geojson",
+      "sha256": "2aea50c78d9c86139a73dfb72e20e59ae151d1c7d5c0e03bd0482f06e18d340b"
+    },
+    "gb:TZA:ADM1": {
+      "boundaryID": "TZA-ADM1-36957248",
+      "boundaryName": "United Republic of Tanzania",
+      "boundaryISO": "TZA",
+      "boundaryYearRepresented": "2015",
+      "boundaryType": "ADM1",
+      "boundaryCanonical": "Regions",
+      "boundarySource": "OpenStreetMap, Wambacher",
+      "boundaryLicense": "Open Data Commons Open Database License 1.0",
+      "licenseDetail": "nan",
+      "licenseSource": "www.openstreetmap.org/copyright",
+      "boundarySourceURL": "wambachers-osm.website/boundaries/",
+      "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+      "buildDate": "Dec 12, 2023",
+      "Continent": "Africa",
+      "UNSDG-region": "Sub-Saharan Africa",
+      "UNSDG-subregion": "Eastern Africa",
+      "worldBankIncomeGroup": "Low-income Countries",
+      "admUnitCount": "30",
+      "meanVertices": "2716.0",
+      "minVertices": "118",
+      "maxVertices": "11084",
+      "meanPerimeterLengthKM": "983.0656045902408",
+      "minPerimeterLengthKM": "84.48018424905071",
+      "maxPerimeterLengthKM": "1833.8877651340208",
+      "meanAreaSqKM": "31326.441643920283",
+      "minAreaSqKM": "184.68273452291933",
+      "maxAreaSqKM": "75593.75279250013",
+      "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TZA/ADM1/geoBoundaries-TZA-ADM1-all.zip",
+      "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TZA/ADM1/geoBoundaries-TZA-ADM1.geojson",
+      "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TZA/ADM1/geoBoundaries-TZA-ADM1.topojson",
+      "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TZA/ADM1/geoBoundaries-TZA-ADM1-PREVIEW.png",
+      "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TZA/ADM1/geoBoundaries-TZA-ADM1_simplified.geojson",
+      "sha256": "8b84f3f0a9e6e16322b777a5bba90c8e33c5e93c0dcb03ef1d3f6332036d066f"
+    },
+    "gb:UGA:ADM1": {
+      "boundaryID": "UGA-ADM1-17295835",
+      "boundaryName": "Uganda",
+      "boundaryISO": "UGA",
+      "boundaryYearRepresented": "2017",
+      "boundaryType": "ADM1",
+      "boundaryCanonical": "Unknown",
+      "boundarySource": "OpenStreetMap, Wambacher",
+      "boundaryLicense": "Open Data Commons Open Database License 1.0",
+      "licenseDetail": "Open Data Commons Open Database License 1.0",
+      "licenseSource": "www.openstreetmap.org/copyright",
+      "boundarySourceURL": "wambachers-osm.website/boundaries/",
+      "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+      "buildDate": "Dec 12, 2023",
+      "Continent": "Africa",
+      "UNSDG-region": "Sub-Saharan Africa",
+      "UNSDG-subregion": "Eastern Africa",
+      "worldBankIncomeGroup": "Low-income Countries",
+      "admUnitCount": "4",
+      "meanVertices": "16340.0",
+      "minVertices": "11832",
+      "maxVertices": "24629",
+      "meanPerimeterLengthKM": "2062.196007792656",
+      "minPerimeterLengthKM": "1448.1036091051676",
+      "maxPerimeterLengthKM": "2764.413216514554",
+      "meanAreaSqKM": "52251.384305650514",
+      "minAreaSqKM": "31815.23842440912",
+      "maxAreaSqKM": "85255.05449419066",
+      "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM1/geoBoundaries-UGA-ADM1-all.zip",
+      "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM1/geoBoundaries-UGA-ADM1.geojson",
+      "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM1/geoBoundaries-UGA-ADM1.topojson",
+      "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM1/geoBoundaries-UGA-ADM1-PREVIEW.png",
+      "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM1/geoBoundaries-UGA-ADM1_simplified.geojson",
+      "sha256": "75e5442c33f7023bcd2d7d72928835723b557c1a9523f3b4c9afe36d0e73af93"
+    },
+    "gb:UGA:ADM2": {
+      "boundaryID": "UGA-ADM2-47994165",
+      "boundaryName": "Uganda",
+      "boundaryISO": "UGA",
+      "boundaryYearRepresented": "2006",
+      "boundaryType": "ADM2",
+      "boundaryCanonical": "Counties",
+      "boundarySource": "geoBoundaries, Wikimedia Commons",
+      "boundaryLicense": "Public Domain",
+      "licenseDetail": "nan",
+      "licenseSource": "commons.wikimedia.org/wiki/File",
+      "boundarySourceURL": "commons.wikimedia.org/wiki/File",
+      "sourceDataUpdateDate": "Sun Mar 26 09:13:39 2023",
+      "buildDate": "Dec 12, 2023",
+      "Continent": "Africa",
+      "UNSDG-region": "Sub-Saharan Africa",
+      "UNSDG-subregion": "Eastern Africa",
+      "worldBankIncomeGroup": "Low-income Countries",
+      "admUnitCount": "151",
+      "meanVertices": "271.0",
+      "minVertices": "27",
+      "maxVertices": "1778",
+      "meanPerimeterLengthKM": "188.64226463792008",
+      "minPerimeterLengthKM": "60.55553673849462",
+      "maxPerimeterLengthKM": "459.8109612126442",
+      "meanAreaSqKM": "1401.8965637764034",
+      "minAreaSqKM": "141.6772067830781",
+      "maxAreaSqKM": "7287.101204377636",
+      "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM2/geoBoundaries-UGA-ADM2-all.zip",
+      "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM2/geoBoundaries-UGA-ADM2.geojson",
+      "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM2/geoBoundaries-UGA-ADM2.topojson",
+      "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM2/geoBoundaries-UGA-ADM2-PREVIEW.png",
+      "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UGA/ADM2/geoBoundaries-UGA-ADM2_simplified.geojson",
+      "sha256": "0a13e10b3bc6beeb02db4502c7f29a2ebbbb681a932307ccba4cd53e994feac7"
+    }
+  }
+}
