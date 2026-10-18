@@ -49,6 +49,7 @@ const NATIVE_REGRESSION_INPUTS = [
     '07c74ff101d4ab5e679255ed85c402356aa54a42'
   ]},
 
+  {tests:['test/held-row-contact-reconstruction-controls.test.mjs'],commits:["252f2aa1e6309b6990985dec73611d6df0e11c70","601852e911478b90762edb7b9d80985786f95d43","8c192828cf81a554176efdead967acb9b05ac79e","6a6358d232df09ef4561073f8727b2892d5413ea","e38e3488de52e6ef299157f7dc736398a1b9ca1f","2d1fc6f430e756498908bf2c4e267356a13f5cc7"]},
   {tests:['test/sierra-leone-physical-review-controls.test.mjs'],commits:[
     '21984e9ec4ec7370bc807e2da23cea2228747698',
     'a6da25fcc78819b8e88ec2040a934039aefc5f97',
@@ -100,10 +101,14 @@ function nativeRegressionBodies(files,readFile) {
     const root='test/fixtures/sle-physical-review/';
     pins.push(...Object.values(read(root+'input-pins.json').inputs));
   }
+  if(has('held-row-contact-reconstruction-controls')){
+    const inputs=read('test/fixtures/held-row-contact/input-locators.json');
+    pins.push(...inputs.source_and_evidence_inputs,...inputs.original_extraction_inputs,inputs.helper,inputs.latitudes);
+  }
   return pins;
 }
 export function prepareNativeRegressionInputs(profile,{files,exists=fs.existsSync,readFile=fs.readFileSync,run=spawnSync}={}) {
-  const retainedEvidenceControls=Array.isArray(files)&&files.some(file=>['test/sierra-leone-physical-review-controls.test.mjs','test/original-repair-exception-controls.test.mjs','test/held-cell-exception-evidence-controls.test.mjs'].includes(file))===true;
+  const retainedEvidenceControls=Array.isArray(files)&&files.some(file=>['test/sierra-leone-physical-review-controls.test.mjs','test/original-repair-exception-controls.test.mjs','test/held-cell-exception-evidence-controls.test.mjs','test/held-row-contact-reconstruction-controls.test.mjs'].includes(file))===true;
   if((profile!=='full'&&!retainedEvidenceControls)||!exists('scripts/native-ownership/validate-context-input-stage.mjs'))return {applicable:false,fetched:[]};
   if(files!==undefined&&(!Array.isArray(files)||!files.length||files.some(name=>typeof name!=='string'||!/^test\/[A-Za-z0-9_.-]+\.test\.mjs$/.test(name)||!exists(name))))
     throw Error('Actual regression file roster required');
@@ -229,7 +234,7 @@ const FOCUSED_TEST_FAMILIES = [
   'unchanged-selected-geography', 'visible-gap-eligibility',
   'native-(?:authority-entry|diagnostic-entry|witness-authority|regression-inputs)',
   'physical-source-retention', 'revised-source-native', 'dated-centre-authority', 'full-regression-shards',
-  'sierra-leone-physical-review-controls', 'held-cell-exception-evidence-controls'
+  'sierra-leone-physical-review-controls', 'held-cell-exception-evidence-controls', 'held-row-contact-reconstruction-controls'
 ];
 const focusedTest = new RegExp('^test/(?:' + FOCUSED_TEST_FAMILIES.join('|') + ')\\.test\\.(?:mjs|py)$');
 // This shared fixture has only focused consumers; reuse their ordinary-file
