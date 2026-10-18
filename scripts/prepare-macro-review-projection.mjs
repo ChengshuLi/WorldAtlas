@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
+import {isDeepStrictEqual} from 'node:util';
 import {gzipSync,gunzipSync} from 'node:zlib';
 import {footprintHash} from './check-prepared.mjs';
 const tiers=['province','area','region','subcontinent','continent'];
@@ -9,6 +10,70 @@ const encode=value=>Buffer.from(JSON.stringify(value)+'\n');
 const read=file=>JSON.parse(file.endsWith('.gz')?gunzipSync(fs.readFileSync(file)):fs.readFileSync(file));
 const same=(a,b)=>{const left=new Set(a),right=new Set(b);return left.size===a.length&&right.size===b.length&&left.size===right.size&&[...left].every(id=>right.has(id));};
 const chain=(parent,groups)=>{const result=[];for(const tier of tiers){const row=groups.get(parent);if(row?.level!==tier)throw Error('Projection requires complete adjacent-tier chains');result.push(parent);parent=row.parent_id;}if(parent!==null)throw Error('Projection continent has a parent');return result;};
+// Literal metadata prerequisite only. This does not authorize native absence
+// admission; callers must separately establish accepted projection provenance.
+const memberFacts=row=>({id:row.id,...(Object.hasOwn(row,'source_member_ids')
+ ?{source_member_ids:structuredClone(row.source_member_ids)}:{})});
+const ordinaryPart=name=>typeof name==='string'&&name.startsWith('data/')
+ &&!name.includes('\\')&&!name.includes('\0')&&name.split('/').every(p=>p&&!['.','..'].includes(p));
+export function projectCurrentMemberEdges({indexRaw,parts}){
+ if(!Buffer.isBuffer(indexRaw)||!Array.isArray(parts))throw Error('Complete current member input bytes required');
+ const index=JSON.parse(indexRaw),names=Array.isArray(index.parts)&&index.parts.every(name=>typeof name==='string')
+  ?index.parts.map(name=>'data/'+name):null;
+ if(!Array.isArray(names)||!names.length||!names.every(ordinaryPart)||new Set(names).size!==names.length
+  ||parts.length!==names.length||parts.some((part,i)=>part.path!==names[i]||part.mode!=='100644'||!Buffer.isBuffer(part.raw)))
+  throw Error('Incomplete or reordered current member part inventory');
+ const locations=[],features=[],ids=new Set(),bindings=[];
+ for(const part of parts){
+  const collection=JSON.parse(part.raw);
+  if(collection.type!=='FeatureCollection'||!Array.isArray(collection.features))throw Error('Malformed current member part');
+  bindings.push({path:part.path,mode:part.mode,bytes:part.raw.length,sha256:sha(part.raw),
+   git_blob_oid:createHash('sha1').update(`blob ${part.raw.length}\0`).update(part.raw).digest('hex')});
+  for(const feature of collection.features){
+   if((feature.type!==undefined&&feature.type!=='Feature')||typeof feature.id!=='string'||!feature.id||feature.properties?.id!==feature.id||ids.has(feature.id))
+    throw Error('Missing or duplicate current member identity');
+   ids.add(feature.id);features.push(feature);const metadata=feature.properties.metadata;
+   // Preserve even malformed/null values literally. Validation of metadata
+   // equality is not a decision that these values may prove member absence.
+   locations.push(memberFacts({id:feature.id,...(metadata&&Object.hasOwn(metadata,'source_member_ids')
+    ?{source_member_ids:metadata.source_member_ids}:{})}));
+  }
+ }
+ if(!locations.length)throw Error('Empty current member inventory');
+ return {member_edges:{version:1,index_sha256:sha(indexRaw),parts:bindings,locations:locations.length},locations,features};
+}
+export function validateCurrentMemberEdges({projection,dashboard,compactParts,indexRaw,parts}){
+ const expected=projectCurrentMemberEdges({indexRaw,parts});
+ if(!isDeepStrictEqual(projection?.member_edges,expected.member_edges)
+  ||!isDeepStrictEqual(dashboard?.member_edges,expected.member_edges)
+  ||projection.current_pins?.location_index_sha256!==expected.member_edges.index_sha256
+  ||dashboard.current_pins?.location_index_sha256!==expected.member_edges.index_sha256)
+  throw Error('Stale or forged complete current member bindings');
+ const names=Array.isArray(dashboard.location_parts)&&dashboard.location_parts.every(name=>typeof name==='string')
+  ?dashboard.location_parts.map(name=>'data/'+name):null;
+ if(!Array.isArray(names)||!names.length||!names.every(ordinaryPart)||new Set(names).size!==names.length
+  ||!Array.isArray(compactParts)||compactParts.length!==names.length||compactParts.some((part,i)=>part.path!==names[i]||!Buffer.isBuffer(part.raw)))
+  throw Error('Incomplete compact current member inventory');
+ const compact=compactParts.flatMap(part=>{
+  const rows=JSON.parse(part.path.endsWith('.gz')?gunzipSync(part.raw):part.raw);
+  if(!Array.isArray(rows))throw Error('Malformed compact current member partition');return rows;
+ });
+ if(!Array.isArray(projection.locations)||dashboard.locations!==expected.locations.length
+  ||projection.counts?.locations!==expected.locations.length)throw Error('Current member counts differ');
+ const check=rows=>{
+  if(rows.length!==expected.locations.length||new Set(rows.map(row=>row?.id)).size!==rows.length)
+   throw Error('Incomplete current member identity inventory');
+  const byId=new Map(rows.map(row=>[row.id,row]));
+  for(const row of expected.locations)if(!byId.has(row.id)||!isDeepStrictEqual(memberFacts(byId.get(row.id)),row))
+   throw Error('Current member property presence or value differs');
+ };
+ check(projection.locations);check(compact);
+ // The compact rows are a literal partition of the monolithic projection,
+ // not merely an independently matching member-edge subset.
+ if(!isDeepStrictEqual(compact,projection.locations))throw Error('Compact current projection differs from monolithic rows');
+ return {validated:true,locations:expected.locations.length,parts:expected.member_edges.parts.length,
+  member_fields_only:true,native_absence_admission:false,features:expected.features};
+}
 function snapshot(value){
  const units=Array.isArray(value.units)?value.units:[...(value.units instanceof Map?value.units:value.groups).values()],groups=new Map(units.map(row=>[row.id,row]));
  if(groups.size!==units.length)throw Error('Projection contains duplicate groups');
