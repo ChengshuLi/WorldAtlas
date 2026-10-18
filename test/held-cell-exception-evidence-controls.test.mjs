@@ -21,6 +21,14 @@ function packetProjection(partition,pins,reproduction){
     kind:'held-cell-exception-controls-fixture',
     status:'observations_only; no acceptance or repair credit',
     source_commits:[...new Set(usedSourcePins(pins).map(pin=>pin.commit))].sort(),
+    contract_artifacts:[
+      [pins.liberia.original_package_contract.reproduction.original_extractor_output.relative_output_name,
+        pins.liberia.original_package_contract.reproduction.original_extractor_output.bytes,
+        pins.liberia.original_package_contract.reproduction.original_extractor_output.sha256],
+      [pins.liberia.original_package_contract.reproduction.published_derived_artifact.path,
+        pins.liberia.original_package_contract.reproduction.published_derived_artifact.bytes,
+        pins.liberia.original_package_contract.reproduction.published_derived_artifact.sha256]
+    ],
     scope:{
       original_keys:partition.scope.original_keys,
       accepted:partition.scope.counts.accepted,
@@ -61,6 +69,13 @@ function verifyFixture(partition,pins,reproduction,fixture){
   const reproducerPin=pins.reproduction_outputs['reproduce-native-centres.mjs'];
   assert.equal(reproducer.length,reproducerPin.bytes);
   assert.equal(sha256(reproducer),reproducerPin.sha256);
+  const original=pins.liberia.original_package_contract.reproduction.original_extractor_output;
+  const derived=pins.liberia.original_package_contract.reproduction.published_derived_artifact;
+  const derivedBytes=fs.readFileSync(packet+derived.path);
+  assert.equal(derivedBytes.length,derived.bytes);
+  assert.equal(sha256(derivedBytes),derived.sha256);
+  assert.notEqual(original.bytes,derived.bytes);
+  assert.notEqual(original.sha256,derived.sha256);
   const scanner=fs.readFileSync(packet+'native-grid-pinned.mjs');
   assert.equal(scanner.length,pins.exact_scanner.bytes);
   assert.equal(sha256(scanner),pins.exact_scanner.sha256);
@@ -93,11 +108,12 @@ test('packet controls reject altered owners, class/hold labels, partitions, cont
     r=>r.queries[0].hits.push({y:126219,x:124938,kind:'interior'}),
     r=>r.queries[0].label='LBR original positive Buu-Yao target',
     p=>p.exact_scanner.sha256='0'.repeat(64),
-    p=>p.liberia.source_evidence.commit='0'.repeat(40)
+    p=>p.liberia.source_evidence.commit='0'.repeat(40),
+    p=>p.liberia.original_package_contract.reproduction.original_extractor_output.bytes=4802
   ];
   for(let i=0;i<cases.length;i++){
     const p=structuredClone(partition),pin=structuredClone(pins),r=structuredClone(reproduction);
-    if(i<5)cases[i](p); else if(i<7)cases[i](r); else if(i===7)cases[i](pin); else cases[i](pin);
+    if(i<5)cases[i](p); else if(i<7)cases[i](r); else if(i>=7)cases[i](pin);
     assert.throws(()=>verifyFixture(p,pin,r,fixture));
   }
 });
