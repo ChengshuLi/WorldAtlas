@@ -153,7 +153,11 @@ function scanNativePolygonIntervals(index,{size,rowStart,rowEnd,latitudes},longi
       let next=0,active=[];
       for(let y=edges[0]?.first??rowEnd;y<rowEnd&&(active.length||next<edges.length);y++){
         active=active.filter(edge=>edge.end>y);
-        while(next<edges.length&&edges[next].first===y){const edge=edges[next++];prepareEdge(edge);active.push(edge);}
+        while(next<edges.length&&edges[next].first===y){
+          // The monotone cursor never revisits a consumed slot. Transfer its
+          // ownership to active so expiration releases the entire edge/cache.
+          const edge=edges[next];edges[next++]=null;prepareEdge(edge);active.push(edge);
+        }
         const latitude=binary(latitudes[y]),columns=[];
         for(const edge of active){
           const hit=crossing(edge,latitude,size);columns.push(hit.column);

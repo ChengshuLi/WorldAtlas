@@ -67,3 +67,26 @@ Cold changed-geography preparation remains slow and whole-process memory measure
 Selected readers and native preparation use ordinary runtime/OS memory behavior.
 See [PROCESSING_MEMORY_ADMISSION.md](PROCESSING_MEMORY_ADMISSION.md). Scientific
 checks, immutable input identity and complete-output acceptance remain required.
+
+## Numerical edge-record lifetime
+
+The monotone scanner schedules each edge once and uses it only while the current
+row is below its exclusive end. Activation now clears the consumed pending-array
+slot, transferring sole ownership to the active set. The existing expiration
+filter can then release the entire edge and its cached exact binary decompositions.
+The sorted roster's first edge is read only to initialize the scan; its monotone
+cursor never revisits a consumed slot. Horizontal and excluded-vertex ties were
+recorded as scalar values before activation. Every row-block or canonical seam
+scan constructs fresh edges, so later scans do not depend on an earlier record.
+
+A bounded 155-vertex polygon with thirty short-lived holes has 62 scheduled edges
+and at most four active edges. Instrumenting the exact before/after scanner gives
+62 versus four peak cached edges; retained records after the last activation also
+drop from 62 to four. Complete rows, ties and flags are unchanged. These are live
+record counts, not a new RSS or speed measurement. Controls cover endpoint ties,
+repeated/out-of-order overlapping row blocks and repeated multi-block seam scans.
+
+Full numerical coordinate arrays, pending-array slots, future edge records,
+genuinely active edges and block results remain input-sized. This lifetime
+correction does not bound complex active geometry or eliminate whole
+request/result serialization.

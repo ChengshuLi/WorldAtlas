@@ -384,26 +384,30 @@ class WorkerWorkflowBootstrapTests(WorkflowBootstrapFixture, unittest.TestCase):
     def test_nonexact_base_falls_back_before_token_request(self):
         self.env['SELECTED_PACKAGE_TRUSTED_BASE']='main';self.assert_rejected();self.assertFalse(self.requests)
     def test_actual_worker_order_and_fallback_consumers(self):
+        snapshot_name='Snapshot original final-worker package inputs'
+        build_name='Build the combined application once before asset-dependent tests'
+        inventory_name='Inventory original final-worker package output'
+        upload_name='Retain original final-worker package output'
+        browser_name='Install browser dependencies only for tests that use Playwright'
+        tests_name='Test applicable combined-tree invariants without publishing or live imports'
         order=['Authenticate selected package installer inputs','npm ci','pip install',
-          'Assemble unchanged base with current selected output','Snapshot original final-worker package inputs',
-          'Build the combined application once before asset-dependent tests','Inventory original final-worker package output',
-          'Install browser dependencies only for tests that use Playwright',
-          'Test applicable combined-tree invariants without publishing or live imports','Retain original final-worker package output']
+          'Assemble unchanged base with current selected output',snapshot_name,build_name,inventory_name,
+          upload_name,browser_name,tests_name]
         positions=[self.integration.index(name) for name in order]
         self.assertEqual(positions,sorted(positions))
-        for name in [order[4],order[5],order[6],order[-1]]:
+        for name in [snapshot_name,build_name,inventory_name,upload_name]:
             step=self.integration.split('- name: '+name,1)[1].split('      - ',1)[0]
             self.assertIn("steps.assembly.outputs.assembled != 'true'",step)
-        for name in [order[7],order[8]]:
+        for name in [browser_name,tests_name]:
             step=self.integration.split('- name: '+name,1)[1].split('      - ',1)[0]
             self.assertIn("steps.assembly.outputs.assembled == 'true' && 'selected-output' || needs.prepare.outputs.test_selection",step)
-        build=self.integration.split('- name: '+order[5],1)[1].split('      - ',1)[0]
+        build=self.integration.split('- name: '+build_name,1)[1].split('      - ',1)[0]
         self.assertIn('run: npm run build:cloudflare',build)
         self.assertEqual(self.integration.count('npm run build:cloudflare'),1)
-        tests=self.integration.split('- name: '+order[8],1)[1].split('      - ',1)[0]
+        tests=self.integration.split('- name: '+tests_name,1)[1].split('      - ',1)[0]
         self.assertIn('SELECTED_PACKAGE_ASSEMBLY_SHA256: ${{ steps.assembly.outputs.assembly_sha256 }}',tests)
         self.assertIn('= selected-output',tests);self.assertIn('selectedDeliverySmoke',tests)
-        browser=self.integration.split('- name: '+order[7],1)[1].split('      - ',1)[0]
+        browser=self.integration.split('- name: '+browser_name,1)[1].split('      - ',1)[0]
         self.assertIn("if: needs.prepare.outputs.test_selection != 'selected-data'",browser)
         self.assertIn('if test "$INTEGRATION_TEST_SELECTION" = selected-output; then',tests)
         self.assertIn('requireCurrentPackageAssembly()',tests)

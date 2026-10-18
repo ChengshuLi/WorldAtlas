@@ -523,6 +523,28 @@ test('final-worker original binds candidate source separately from successful pr
   assert.throws(()=>requireOriginalPackageOutput(structuredClone(token)),/Privately authenticated/);
 });
 
+test('early original archive retention still requires successful producer tests and complete ordered phases',async t=>{
+ const old=globalThis.fetch;t.after(()=>{globalThis.fetch=old;});
+ const early=()=>{const f=original(t,{worker:true}),steps=f.job.steps;
+  f.job.steps=[steps[0],steps[1],steps[2],steps[4],steps[3]].map((step,index)=>({...step,number:index+1}));
+  return f;};
+ const valid=early();globalThis.fetch=async()=>new Response(valid.log());
+ assert.equal(requireOriginalPackageOutput(await authenticateOriginalPackageOutput(valid)).origin.head,valid.origin.head);
+ const cases=[
+  f=>{f.job.conclusion='failure';},
+  f=>{f.job.conclusion='cancelled';},
+  f=>{f.job.status='in_progress';},
+  ...['Snapshot','Build','Inventory','Retain','Test'].flatMap(prefix=>['failure','skipped','cancelled'].map(conclusion=>
+   f=>{f.job.steps.find(row=>row.name.startsWith(prefix)).conclusion=conclusion;})),
+  f=>{f.job.steps.find(row=>row.name.startsWith('Retain')).number=2;},
+  f=>{f.job.steps.find(row=>row.name.startsWith('Test')).number=3;},
+  f=>{for(const row of f.job.steps)if(row.number>=4)row.number++;},
+  f=>{f.job.steps.push({...f.job.steps[3]});},
+ ];
+ for(const mutate of cases){const f=early();mutate(f);globalThis.fetch=async()=>new Response(f.log());
+  await assert.rejects(authenticateOriginalPackageOutput(f));}
+});
+
 test('actual current queue step roster admits an original donor without historical readback',async t=>{
   const f=original(t,{worker:true}),old=globalThis.fetch;t.after(()=>{globalThis.fetch=old;});
   const workflow=fs.readFileSync(new URL('../.github/workflows/worker-merge.yml',import.meta.url),'utf8');
