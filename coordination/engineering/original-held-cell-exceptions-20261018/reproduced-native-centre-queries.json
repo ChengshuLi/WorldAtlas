@@ -26,7 +26,7 @@
   "matching_queries": 18,
   "queries": [
     {
-      "label": "LBR original positive Buu-Yao target",
+      "label": "LBR selected Buu-Yao base footprint (target.base_geometry)",
       "authority": "source-evidence 427cf5eb2d5004b0b65ffc34bf33d7fbbb6e44bc:coordination/engineering/liberia-original-repair-20261018/source-evidence-001/source-evidence.json",
       "query": {
         "y": 126219,
@@ -633,6 +633,7 @@
   ],
   "limits": [
     "This rerun validates only exact numeric cell contacts against the pinned geometries.",
+    "The Buu-Yao query is against target.base_geometry, the selected base footprint, not the raw positive source operand; its no-hit does not establish original source absence or no-repair eligibility.",
     "It does not resolve original source applicability, sovereignty, land truth, qualification, acceptance, selected state, or repair credit.",
     "The historical Liberia causal result uses a different scanner module SHA than this later repository-pinned recheck; neither is rewritten or called byte-equivalent."
   ]
