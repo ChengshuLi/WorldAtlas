@@ -210,7 +210,6 @@
     },
     "selected_patch_intersection": {
       "accepted_commit": "75861b9784f75b7894bfc51fa0419f40f966157d",
-      "current_tree": "07c74ff101d4ab5e679255ed85c402356aa54a42",
       "original_scope_coordinate_intersections": 9513,
       "accepted_coordinate_intersections": 9513,
       "held_exception_cells": 4,
@@ -227,9 +226,12 @@
           "held_exception_cells": 3
         }
       },
-      "basis": "Independent reconciliation against the actual current selected patch reports the full original partitions as HND 6633 = 6632 accepted + 1 held and NIC 2884 = 2881 accepted + 3 held, with no wrong-owner overlap. The accepted cells match the native-qualified products and were accepted in PR #2469. The earlier 252f2aa comparison is historical only and is not used to infer current acceptance.",
+      "basis": "Independent reconciliation against the actual selected patch at the audited tree reports the full original partitions as HND 6633 = 6632 accepted + 1 held and NIC 2884 = 2881 accepted + 3 held, with no wrong-owner overlap. The accepted cells match the native-qualified products and were accepted in PR #2469. The earlier 252f2aa comparison is historical only and is not used to infer current acceptance. The repository main head later advanced to d44a8c13ac17bc661cbee6d138d251f25093973e via software-only PR #2490; its diff does not include these HND/NIC evidence or selected-data files.",
       "independent_review_url": "https://github.com/ChengshuLi/WorldAtlas/pull/2494#pullrequestreview-5561932870",
-      "review_note": "The current-patch partition finding is recorded in this public independent review. Exact input pins and key hashes may be appended by the auditor there; this packet does not invent a path for a private receipt."
+      "review_note": "The current-patch partition finding is recorded in this public independent review. Exact input pins and key hashes may be appended by the auditor there; this packet does not invent a path for a private receipt.",
+      "audited_tree": "07c74ff101d4ab5e679255ed85c402356aa54a42",
+      "current_main_after_audit": "d44a8c13ac17bc661cbee6d138d251f25093973e",
+      "subsequent_change_note": "PR #2490 merged after this audit; its changed files are code, documentation, tests, and fixtures only. It did not change the HND/NIC source evidence, native qualification products, or selected-data patch used for this partition."
     },
     "note": "The original full-scope native qualification partition is 9513 cells, now accepted through PR #2469, plus four preserved documented exception cells. This supplemental contact evidence does not add repair or acceptance credit. All four exception rows remain unresolved."
   },
