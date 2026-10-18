@@ -64,6 +64,23 @@ be inferred from the source or Actions run head. A missing or
 incompatible original takes the ordinary full-build path. Assembled output is
 never retained as a new full-build original.
 
+Original-output discovery independently binds the originating commit and its
+complete declared package inputs to Git metadata. It resolves exact input,
+selector, sidecar and workflow paths through ordinary ancestor trees, and requests
+recursive metadata only for declared input directories. Unrelated repository
+history is not part of that inventory. Repeated immutable ancestor trees are
+shared within this discovery invocation, including identical trees under distinct
+source, executed-workflow and trusted-base commits. Directory membership, optional
+absence, exact producer bytes and whole artifact/job/upload authentication remain
+required; the archive cannot attest its own source-code identity.
+
+The selected assembly client uses the queue's existing eight-minute non-merge
+read allowance. The shared transport still permits only its existing two retries
+for explicit transient GET responses, with bounded HTTP attempts; ordinary denials,
+ambiguous transport and writes are not retried. Exhaustion remains an ordinary
+full-build fallback. Neither successful discovery nor a retried request establishes
+new test, scientific or delivery acceptance.
+
 Legacy manifests keep their original provenance. They cannot establish immediate
 build capture and therefore require the ordinary full-build path under the new
 reuse policy. This removes false invalidation for later eligible selected-package
