@@ -215,7 +215,7 @@ This relies on the producing code, not on the native success label alone.
 private `authenticateTransition` capability. At the cold or trusted-catalogue
 seed boundary, `coordinateCheck` establishes complete owner/index/source and
 effective-primitive identities. `qualifyTransition` preserves that baseline;
-`deriveCoordinateDelta` rejects changed old primitives and checks every new
+its private coordinate delta rejects changed old primitives and checks every new
 primitive's owner index and base geometry before recomputing changed effective
 hashes. Metadata projection checks every stable owner/index and each changed
 source feature. The producer then binds that exact candidate certificate in its
@@ -285,3 +285,19 @@ reads those operands only. The historical result, publication and operating
 bodies remain provenance and route-bound, without being reopened. Cold seeds
 and genuinely changed rebinds still read and validate all five product bodies.
 No historical scientific result is regenerated or relabelled as a new execution.
+
+### Qualified delta projection and the public boundary
+
+After full candidate ledger normalization and source-authority/patch/rebind
+qualification, the private delta uses validated native representation tags rather
+than repeating native component validation for every cumulative row and new bound.
+Duplicate identities, old projected-addition equality, current target/index/base
+bindings, legacy geometry checks and exact effective hashes remain. In particular,
+raw old-row equality cannot replace projected equality after a changed rebind.
+
+The exported pure `deriveCoordinateDelta` still performs full component validation.
+It snapshots only each sequence's outer iterated row references, then uses that
+view for every lookup. A caller-controlled `.at()` or `entryAt` cannot substitute
+a different primitive into the validated owner's bounds or hash. Declared counts
+remain enforced; nested geometry and intervals retain their borrowed lifetime
+guards. No public trust option, persistent cache or new capability is introduced.
