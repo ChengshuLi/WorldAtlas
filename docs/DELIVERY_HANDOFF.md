@@ -399,8 +399,18 @@ operators. `destination_prefix` is used only by the existing greedy constructor.
 
 ### Inherited package read roles and committed restoration
 
-Finalization derives package read roles from authenticated authority, original
-custody and current release metadata. An out-of-prefix role already present at
+Finalization derives actual read roles from authenticated authority, original
+custody and current release metadata. For a source-target entry with a completed
+constructor, these are the original rule, binding, constructor, source-evidence
+and native patch. Every historical source, license and provenance reference stays
+in the unchanged source-evidence body, but its nested corpus is not reopened or
+required at the current package path. Scientific qualification and substantive
+source review remain required; finalization does not establish scientific validity
+or hosted acceptance. The selected reader still checks complete constructor joins,
+current targets, native intervals and actual current owner-zero. Entries without
+a completed constructor and legacy authorities retain their full read traversal.
+
+An out-of-prefix consumed role already present at
 the accepted package baseline must retain its exact ordinary mode, Git object,
 size and SHA-256. Existing package declarations remain an unchanged prefix;
 covered directory members are not redundantly appended.

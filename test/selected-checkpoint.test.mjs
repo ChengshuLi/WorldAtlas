@@ -833,3 +833,44 @@ test('coordinate grouping reads indexed additions proportionally to components r
  const result=deriveCoordinateDelta({certificate,oldAdditions:[],additions,selection:{}});
  assert.deepEqual(result.changedIds,features.map(f=>f.id));assert(visits<=8*values.length,'repeated complete addition scans: '+visits);
 });
+
+
+test('validated private projections retain lazy intervals and refuse reads after release',async t=>{
+ const f=await trustedFixture(t,{nativeAppend:true});
+ const open=fs.openSync,read=fs.readSync,intervals=new Set();
+ fs.openSync=function(name,...args){const fd=open.call(this,name,...args);if(String(name).endsWith('/runs.bin'))intervals.add(fd);return fd;};
+ let state;
+ try {
+  state=(await f.api.qualifyCheckpoint({reader:f.reader})).state;
+  const next=await appendNativeAuthority(f,{completedConstructor:true});
+  const reader=new f.native.ImmutableReader(f.root,next.candidate,{invocation:f.reader.invocation});
+  const transition=await f.api.qualifyTransition({state,reader});assert.equal(transition.available,true);
+  const additions=transition.candidate.additions,expected=nativeLiteral(additions);
+  assert(intervals.size>0,'The real store interval descriptors were observed');
+  fs.readSync=function(fd,...args){assert(!intervals.has(fd),'Projection must not replay already validated native intervals');return read.call(this,fd,...args);};
+  for(let pass=0;pass<2;pass++){
+   assert.deepEqual([...additions].map(p=>p.component_id),expected.map(p=>p.component_id));
+   for(let i=0;i<additions.length;i++)assert.equal(additions.at(i).component_id,expected[i].component_id);
+  }
+  fs.readSync=read;
+  assert.deepEqual(nativeLiteral(additions),expected);
+  f.api.releaseCheckpoint(state);state=null;
+  assert.throws(()=>additions.at(-1),/closed|expired/i);
+  assert.throws(()=>[...additions],/closed|expired/i);
+ } finally {fs.openSync=open;fs.readSync=read;if(state)f.api.releaseCheckpoint(state);}
+});
+
+for(const [name,mutate,expected] of [
+ ['base hash',p=>p.base_geometry_sha256='0'.repeat(64),/current base changed/i],
+ ['interval owner',p=>{p.native_rows=nativeLiteral(p.native_rows);p.native_rows[0].runs[0][2]=2;},/native component interval/i],
+ ['cell count',p=>p.native_cells++,/cell count/i],
+ ['bounds',p=>p.native_bounds=[-181,0,1,1],/component bounds/i],
+ ['extra fields',p=>p.unvalidated=true,/foreign fields/i]
+])test('unnormalized native '+name+' cannot reach the private projection',async t=>{
+ const f=await trustedFixture(t,{nativeAppend:true}),{state}=await f.api.qualifyCheckpoint({reader:f.reader});
+ try {
+  const next=await appendNativeAuthority(f,{completedConstructor:true,mutateLedger:ledger=>mutate(ledger.rows.find(p=>p.representation==='native-cells'))});
+  const reader=new f.native.ImmutableReader(f.root,next.candidate,{invocation:f.reader.invocation});
+  await assert.rejects(f.api.qualifyTransition({state,reader}),expected);
+ } finally {f.api.releaseCheckpoint(state);}
+});
