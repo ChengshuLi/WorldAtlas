@@ -5,14 +5,34 @@ import {createHash} from 'node:crypto';
 import {rebindCoverageManifest} from '../scripts/rebind-coverage-manifest.mjs';
 import {validateGeometryMigrations} from '../scripts/prepare-geographic-release.mjs';
 import {footprintHash} from '../scripts/check-prepared.mjs';
-const originalBytes = await fs.readFile('data/canonical-grid/manifest.json');
-const selectedBytes = await fs.readFile('coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/manifest.json');
+const fixtureRoot = new URL('./fixtures/rebind-coverage/', import.meta.url);
+const fixtureManifest = JSON.parse(await fs.readFile(new URL('manifest.json', fixtureRoot)));
+const originalBytes = await fs.readFile(new URL('original-grid.json', fixtureRoot));
+const selectedBytes = await fs.readFile(new URL('selected-grid.json', fixtureRoot));
+const classificationBytes = await fs.readFile(new URL('classification.json', fixtureRoot));
 const originalGrid = JSON.parse(originalBytes), selectedGrid = JSON.parse(selectedBytes);
-const classification = JSON.parse(await fs.readFile('data/coverage-classification/manifest.json'));
+const classification = JSON.parse(classificationBytes);
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 const context = {originalGrid, originalGridSha256: digest(originalBytes), selectedGrid,
   selectedGridSha256: digest(selectedBytes), release: {id: selectedGrid.geographic_release,
     footprints_sha256: selectedGrid.footprints_sha256, hierarchy_sha256: selectedGrid.hierarchy_sha256}};
+
+test('literal historical coverage operands retain their complete source byte identities', () => {
+  assert.equal(fixtureManifest.version, 1);
+  assert.equal(fixtureManifest.kind, 'literal-rebind-coverage-fixtures-v1');
+  assert.equal(fixtureManifest.source_commit, 'c9e14de1ebf2fbef0682085dfc9a035af6ead550');
+  assert.deepEqual(fixtureManifest.files.map(pin => pin.source_path), [
+    'data/canonical-grid/manifest.json',
+    'coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/manifest.json',
+    'data/coverage-classification/manifest.json'
+  ]);
+  for (const [index, raw] of [originalBytes, selectedBytes, classificationBytes].entries()) {
+    const pin = fixtureManifest.files[index];
+    assert.equal(raw.length, pin.bytes);
+    assert.equal(digest(raw), pin.sha256);
+    assert.equal(createHash('sha1').update(Buffer.from('blob ' + raw.length + '\0')).update(raw).digest('hex'), pin.git_blob_oid);
+  }
+});
 
 test('native ownership binding retains all original physical bytes, sources, domain and uncertainties', () => {
   const before = JSON.stringify(classification), rebound = rebindCoverageManifest(classification, context);
