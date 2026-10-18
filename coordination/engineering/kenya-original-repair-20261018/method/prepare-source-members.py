@@ -152,7 +152,7 @@ assert set(s['target'] for s in stages) == set(scope['complete_source_atoms'])
 stage_bytes = encode(stages)
 assessment = dict(version=1, kind='kenya-original-source-owner-preparation', accepted_commit=BASE,
                   whole_physical_stage_targets=len(stages), whole_intended_owners=len(owners),
-                  complete_selected_country_owners_in_one_part=len(whole_country),
+                  complete_selected_country_owners=len(whole_country),
                   whole_stage_serialized_bytes=len(stage_bytes),
                   whole_products=product_inventory, owner_associations=owner_associations,
                   complete_country_ancestry=country_associations,
@@ -166,5 +166,5 @@ outputs = {'source-target-membership.json': membership, 'source-owner-assessment
 for name, value in outputs.items():
     (OUT / name).write_bytes(encode(value))
 print(json.dumps({k: assessment[k] for k in ['whole_physical_stage_targets', 'whole_intended_owners',
-                'complete_selected_country_owners_in_one_part', 'whole_stage_serialized_bytes',
+                'complete_selected_country_owners', 'whole_stage_serialized_bytes',
                 'accepted_commit']}))
