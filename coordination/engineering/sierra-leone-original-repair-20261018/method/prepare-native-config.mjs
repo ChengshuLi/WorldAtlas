@@ -31,7 +31,7 @@ need(reader.read(pin(prefix + 'method/prepare-native-config.mjs', inputCommit))
 const stages = json(prefix + 'source-stage-001/original-stage-inputs.json', inputCommit);
 const members = json(prefix + 'source-stage-001/source-target-membership.json', inputCommit);
 const foreign = json(prefix + 'source-review/foreign-bounds-001/complete-foreign-bounds.json', inputCommit);
-const periodic = json(prefix + 'source-review/periodic-negatives-001/retained-periodic-negative-reconciliation.json', inputCommit);
+const periodic = json(prefix + 'source-review/periodic-negatives-002/retained-periodic-negative-reconciliation.json', inputCommit);
 const original = [30].flatMap(block =>
   json(prefix + 'original-intervals/block-' + String(block).padStart(3, '0') + '.json.gz', inputCommit));
 need(stages.length === 11 && members.length === 11 && original.length === 1335

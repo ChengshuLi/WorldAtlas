@@ -1,0 +1,9 @@
+{
+  "original_result": "periodic-negatives-001/retained-periodic-negative-reconciliation.json",
+  "status": "Preserved complete first execution; superseded for one wrong descriptive subject count.",
+  "actual_guarded_owners": 11,
+  "incorrect_descriptive_subjects_literal": 43,
+  "reason": "A copied result metadata literal remained43 although all source guards and actual target/interval scopes correctly checked11/1335/3878.",
+  "correction": "New method derives descriptive subjects from originalScope.owners.length; native preparation consumes fresh periodic-negatives-002. No proof, predicate or geometry changed.",
+  "raw_source_failures_preserved": 3
+}
