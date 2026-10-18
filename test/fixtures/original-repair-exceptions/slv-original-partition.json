@@ -1,0 +1,152 @@
+{
+  "package_id": "gb-SLV-ADM2--repair-evaluation",
+  "original_interval_read_commit": "32d819ddc9333ff025584665665c963822dfcead",
+  "accepted_selection_commit": "cd1886f20f34abdcafe7c327ae0ee768ce5d47ae",
+  "original_cells": 1134,
+  "original_intervals": 538,
+  "original_owners": 58,
+  "accepted_original_owner_cells": 1131,
+  "proposed_documented_exceptions": 3,
+  "different_owner_intersections": [],
+  "original_key_sha256": "d354cc2b65ac77b92b7b2c361c9df20c3658346510240864d79d23d7d0ba20e8",
+  "accepted_original_key_sha256": "aaf5775d1b478438044d5f1075f92df31430558e6a4cb6b7bbbc196c89d78902",
+  "proposed_exception_key_sha256": "e2a9c319ded6667e6baa6d5ac9a6b563d87573ed3fc4aa3af3e040d6601c5025",
+  "original_equals_requested_patch": true,
+  "partition_exhaustive_disjoint": true,
+  "exception_records": [
+    {
+      "y": 121014,
+      "x": 67180,
+      "owner": 39827,
+      "source_feature_indices": [
+        35066,
+        55556,
+        55818
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 35066,
+          "family_index": 144,
+          "source_id": "gb:HND:ADM1:10453824B78724193103152",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Valle",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 55556,
+          "family_index": 293,
+          "source_id": "gb:SLV:ADM1:98794003B34340758390936",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Departamento de La Uni\u00f3n",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 55818,
+          "family_index": 294,
+          "source_id": "gb:SLV:ADM2:79315794B47950461762120",
+          "ordinal": 255,
+          "owners": [
+            39827
+          ],
+          "name": "El Sauce",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "positive_original_target_id": "gb:SLV:ADM2:79315794B47950461762120",
+      "positive_original_coverage_class": "mapped_land_support",
+      "proposed_disposition": "documented-unresolved-source-applicability-exception",
+      "scientific_territorial_hold_retained": true,
+      "native_repair_credit": 0
+    },
+    {
+      "y": 121199,
+      "x": 67200,
+      "owner": 39842,
+      "source_feature_indices": [
+        35066,
+        55556,
+        55819
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 35066,
+          "family_index": 144,
+          "source_id": "gb:HND:ADM1:10453824B78724193103152",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Valle",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 55556,
+          "family_index": 293,
+          "source_id": "gb:SLV:ADM1:98794003B34340758390936",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Departamento de La Uni\u00f3n",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 55819,
+          "family_index": 294,
+          "source_id": "gb:SLV:ADM2:79315794B52450806978859",
+          "ordinal": 256,
+          "owners": [
+            39842
+          ],
+          "name": "Pasaquina",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "positive_original_target_id": "gb:SLV:ADM2:79315794B52450806978859",
+      "positive_original_coverage_class": "mapped_land_support",
+      "proposed_disposition": "documented-unresolved-source-applicability-exception",
+      "scientific_territorial_hold_retained": true,
+      "native_repair_credit": 0
+    },
+    {
+      "y": 121202,
+      "x": 67198,
+      "owner": 39842,
+      "source_feature_indices": [
+        35066,
+        55819
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 35066,
+          "family_index": 144,
+          "source_id": "gb:HND:ADM1:10453824B78724193103152",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Valle",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 55819,
+          "family_index": 294,
+          "source_id": "gb:SLV:ADM2:79315794B52450806978859",
+          "ordinal": 256,
+          "owners": [
+            39842
+          ],
+          "name": "Pasaquina",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "positive_original_target_id": "gb:SLV:ADM2:79315794B52450806978859",
+      "positive_original_coverage_class": "mapped_land_support",
+      "proposed_disposition": "documented-unresolved-source-applicability-exception",
+      "scientific_territorial_hold_retained": true,
+      "native_repair_credit": 0
+    }
+  ],
+  "new_native_repairs": 0,
+  "accepted_disposition_credit": 0,
+  "status": "proposed; independent substantive review and accepted integration required"
+}
