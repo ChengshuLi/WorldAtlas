@@ -132,9 +132,54 @@
       "package_id": "gb-EGY-ADM2--repair-evaluation",
       "issue": 2424,
       "original_cells": 19065,
-      "qualified_before_holds": 19063,
       "held": 2,
-      "accepted_delivery_context": "PR #2459"
+      "accepted_delivery_context": "PR #2459",
+      "original_physical_class_counts": {
+        "land": 18591,
+        "inland-water": 474
+      },
+      "accepted_original_owner_cells": 19063,
+      "accepted_original_owner_class_counts": {
+        "land": 18589,
+        "inland-water": 474
+      },
+      "pending_held_original_class_counts": {
+        "land": 2
+      },
+      "exact_current_owner_key_partition_review": "https://github.com/ChengshuLi/WorldAtlas/pull/2495#issuecomment-6247233787",
+      "exact_original_class_join_review": "https://github.com/ChengshuLi/WorldAtlas/pull/2495#issuecomment-6247244352",
+      "original_interval_blocks": [
+        {
+          "commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+          "path": "coordination/engineering/egypt-original-repair-20261017/original-extraction-001/block-026.json.gz",
+          "git_blob_oid": "38d5b6339827bf0acdd9ff24a413d5ecc47fa01d",
+          "encoded_bytes": 39530,
+          "encoded_sha256": "498e01b183a2968819a80b9a5db19c3c49c61493a5d20534d972bb6fb12ebcfe",
+          "decoded_bytes": 338250,
+          "decoded_sha256": "6551021f57074d6047e95176908418240c1fde2b426b1c3228ef355f8aaccc75",
+          "interval_rows": 6624,
+          "cells": 14158,
+          "physical_class_counts": {
+            "land": 13718,
+            "inland-water": 440
+          }
+        },
+        {
+          "commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+          "path": "coordination/engineering/egypt-original-repair-20261017/original-extraction-001/block-027.json.gz",
+          "git_blob_oid": "dfa324c360eb88490970e13013380a697289b694",
+          "encoded_bytes": 11320,
+          "encoded_sha256": "cf94dabe8ce5228f4cc5d95205d45c86e336ae674eafe0e6070fcdd110d76456",
+          "decoded_bytes": 105429,
+          "decoded_sha256": "7268eb0eed376df3e61e9c15b790bdec1419aa1f156a015f74d85e5498690cdf",
+          "interval_rows": 2060,
+          "cells": 4907,
+          "physical_class_counts": {
+            "land": 4873,
+            "inland-water": 34
+          }
+        }
+      ]
     },
     "held_original": {
       "path": "coordination/engineering/egypt-original-repair-20261017/supported-inputs-001/held-original.json",
