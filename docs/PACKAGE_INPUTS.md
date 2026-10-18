@@ -37,7 +37,11 @@ Reuse does not recreate or compare the original installed environment. Historica
 runtime metadata stays literal in the original manifest. New captures record the actual
 build's runtime metadata without an installed-file inventory. Current assembly admits
 its locked Node dependencies, authenticates the archive extractor, and runs the current
-selected additive computation with its actual source/input/output bindings. Any new
+selected additive computation with its actual source/input/output bindings. The queue
+attempts this assembly before installing scientific Python requirements. Successful
+assembly needs only the Python standard library under isolated startup; a fallback
+build and ordinary full/evidence regression still install the pinned requirements
+before their consumers. Python setup and installer-input authentication remain. Any new
 scientific execution uses the isolated Python launcher and records its own execution;
 retaining old output never establishes fresh runtime equivalence or a fresh full build.
 Tests, unrelated workflows and observer scripts outside the declared image do not
