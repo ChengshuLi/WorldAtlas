@@ -33,3 +33,17 @@ test('tuple framing keeps exact semantic canonical identity across spill and chu
  const text='{"coordinates":['+Array(65).fill('[ -0, 1.25e+2 ]').join(',')+']}';
  for(const chunk of [1,17,31,64,65536])await inspect(text,chunk,value=>assert.equal(valueSha(value),valueSha(JSON.parse(text))));
 });
+
+test('consecutive tuple batches preserve heterogeneous transitions and exact delimiter boundaries',async()=>{
+ for(const members of ['[1,2],[3,4],null,[5,6]','[],[1,2],[],[3,4]','[1,2],{"coordinates":[[3,4]]},[5,6]',
+  '[1,2],"雪",[3,4]','[1,2],[[3,4]], [5,6]','[1,2],[3,4],[5,6]']){
+  const text='{"coordinates":['+members+']}';for(let chunk=1;chunk<=Buffer.byteLength(text)+1;chunk++)
+   await inspect(text,chunk,value=>assert.deepEqual(nativeLiteral(value),JSON.parse(text)));
+ }
+});
+test('bounded tuple batch limit does not reject large valid sequences or deep ignored arrays',async()=>{
+ const text='{"coordinates":['+Array(20000).fill('[1e-10,-0]').join(',')+']}';
+ for(const chunk of [65535,65536,65537,Buffer.byteLength(text)])await inspect(text,chunk,value=>assert.equal(valueSha(value),valueSha(JSON.parse(text))));
+ const depth=2000,deep='{"ignored":'+ '['.repeat(depth)+'[]'+']'.repeat(depth)+',"coordinates":[[1,2],[3,4]]}';
+ await inspect(deep,65536,value=>{let item=value.ignored;for(let n=0;n<depth;n++){assert.equal(item.length,1);item=item[0];}assert.deepEqual(item,[]);});
+});

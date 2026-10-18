@@ -50,24 +50,29 @@ class Input {
   }
   return this.at<this.buffer.length;
  }
- // A complete numeric tuple already in the owned chunk needs no asynchronous
- // scalar dispatch. JSON.parse remains the number/syntax authority. Nonmatches,
- // malformed tuples and chunk splits leave the cursor untouched for the grammar.
- inlinePair(){
+ // Frame consecutive complete numeric pairs from the owned chunk in one
+ // bounded JSON.parse call. Incomplete/nonmatching members stay with the shared
+ // grammar, without consuming their bytes. The window limits work, never input.
+ inlinePairs(){
   let at=this.at;while(at<this.buffer.length&&whitespace(this.buffer[at]))at++;
-  if(this.buffer[at]!==91)return null;const start=at++;let commas=0;
-  for(;at<this.buffer.length;at++){
-   const byte=this.buffer[at];
-   if(byte===93){
-    if(commas!==1)return null;let value;
-    try{value=JSON.parse(this.buffer.subarray(start,at+1));}catch{return null;}
-    if(value.length!==2||value.some(item=>typeof item!=='number'))return null;
-    this.at=at+1;return value;
+  const start=at,limit=Math.min(this.buffer.length,start+65536);let end=start;
+  sequence:while(at<limit){
+   if(this.buffer[at++]!==91)break;let commas=0;
+   for(;at<limit;at++){
+    const byte=this.buffer[at];
+    if(byte===93){if(commas!==1)break sequence;end=++at;break;}
+    if(byte===44){if(++commas>1)break sequence;continue;}
+    if(!(whitespace(byte)||byte>=48&&byte<=57||byte===43||byte===45||byte===46||byte===69||byte===101))break sequence;
    }
-   if(byte===44){if(++commas>1)return null;continue;}
-   if(!(whitespace(byte)||byte>=48&&byte<=57||byte===43||byte===45||byte===46||byte===69||byte===101))return null;
+   if(at===limit)break;
+   while(at<limit&&whitespace(this.buffer[at]))at++;
+   if(this.buffer[at++]!==44)break;
+   while(at<limit&&whitespace(this.buffer[at]))at++;
   }
-  return null;
+  if(end===start)return null;let pairs;
+  try{pairs=JSON.parse('['+this.buffer.toString('utf8',start,end)+']');}catch{return null;}
+  if(pairs.some(value=>value.length!==2||value.some(item=>typeof item!=='number')))return null;
+  this.at=end;return pairs;
  }
  async peek(){return await this.available()?this.buffer[this.at]:undefined;}
  async space(){while(await this.available()){while(this.at<this.buffer.length&&whitespace(this.buffer[this.at]))this.at++;if(this.at<this.buffer.length)return;}}
@@ -347,8 +352,8 @@ async function admitStore({chunks,expected,directory,size,ownerCount,rowField='r
     if(!spilled){for(const previous of values)append(previous);values.length=0;spilled=true;}append(value);
    };
    await array(input,()=>{
-    const pair=coordinates===true?input.inlinePair():null;
-    if(pair){retain(pair);return;}
+    const pairs=coordinates===true?input.inlinePairs():null;
+    if(pairs){for(const pair of pairs)retain(pair);return;}
     return metadataNode(coordinates==='array'?false:true,depth+1).then(retain);
    });
    if(!spilled)return values;
