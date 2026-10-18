@@ -1,0 +1,47 @@
+{
+  "accepted_report_sha256": "6a8f4953e761ac16b07804daea2c24f833f45f3d650ed18d0c48a5b9f70c3eaa",
+  "native_components": 5745,
+  "new_native_components": 565,
+  "cumulative_component_rows": 646272,
+  "cumulative_component_intervals": 1245358,
+  "cumulative_base_vertices": 580292,
+  "row_batches": 138,
+  "repeated_cumulative_component_visits": 805644,
+  "repeated_native_validator_interval_visits": 171859404,
+  "repeated_native_base_vertices": 80080296,
+  "one_eager_cumulative_native_validation_ms": 752.681972,
+  "direct_565_witnesses_ms": 49.84039000000007,
+  "direct_witnesses_equal_accepted_report": true,
+  "changed_rows": 17593,
+  "changed_rows_original_base_intervals": 4970502,
+  "table_acquisition_ms": 162.92701399999714,
+  "numerical_base_sample": {
+    "blocks": [
+      {
+        "ordinal": 0,
+        "rows": 128,
+        "intervals": 49635
+      },
+      {
+        "ordinal": 65,
+        "rows": 128,
+        "intervals": 50282
+      },
+      {
+        "ordinal": 69,
+        "rows": 128,
+        "intervals": 46463
+      }
+    ],
+    "rows": 384,
+    "intervals": 146380,
+    "containing_body_acquisition_ms": 856.9955339999979,
+    "decode_validate_ms": 31.243576000018948
+  },
+  "max_rss_kib": 564820,
+  "limits": [
+    "Diagnostic numerical census and bounded replay of exact accepted inputs; no new source predicate, checkpoint qualification, owner-zero acceptance or whole-phase speedup claim.",
+    "Eager component validation timing excludes production disk-backed metadata/interval reads and repeated lazy filtering.",
+    "Native sample measures synchronous interval decoding/validation; actual comparison uses async iteration and performs cumulative patch overlap checks."
+  ]
+}
