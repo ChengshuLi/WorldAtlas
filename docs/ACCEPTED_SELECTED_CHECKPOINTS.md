@@ -175,3 +175,29 @@ metadata reference, while appended native intervals still undergo the existing
 owner-zero, overlap and conservation checks. This reuses accepted qualification;
 it does not turn a cold candidate-code report into an accepted checkpoint artifact
 or claim that historical scientific predicates ran again.
+
+## Finalizer adoption of a chosen checkpoint
+
+The `finalize` handoff config may supply `accepted_checkpoint: {commit, path}`
+pointing to the committed `selected-checkpoint.json` emitted by the acquisition
+helper. Its exact retained ZIP must be committed at the locator's recorded path.
+The finalizer reauthenticates the actual accepted PR, merge/tested trees, original
+job and archive using the existing private acquisition API. The archive's
+`derived-facts.json` must name the prior `config.selector` selection and the
+accepted tested candidate. The newly emitted selection cannot accept itself.
+
+When supplied, the exact chosen locator becomes a `selected-checkpoint.json`
+product bound by the ordinary preparation receipt. The finalize CLI also adopts
+those bytes automatically at `data/selected-checkpoint.json`; there is no manual
+canonical-copy step. Before publication and again before atomic adoption it
+requires the existing canonical file to equal the selector commit's original
+file (or, for an identical `--resume`, the chosen output). Unexpected local edits,
+links and incompatible checkpoints fail. If interrupted after batch publication,
+`--resume` verifies every completed product and finishes canonical adoption.
+
+The operand is optional. Existing deliveries can retain an authenticated compatible
+checkpoint; age alone neither invalidates it nor requires a new acquisition.
+Supplying an incompatible chosen checkpoint is an error, not a cold fallback.
+The retained archive stays in batch custody outside package-consumed roles.
+Existing selected-data classification and joint-entry scientific admission still
+check the actual candidate's canonical locator and accepted lineage.

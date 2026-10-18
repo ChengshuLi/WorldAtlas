@@ -906,7 +906,7 @@ test('original reference metadata refuses coherent source, native, revision and 
 });
 
 
-for(const priorGzip of [false,true])test('actual '+(priorGzip?'gzip':'plain')+' retained assembly preserves invariants and emits current gzip',async t=>{
+for(const [priorGzip,retirement] of [[false,false],[true,false],[true,true]])test('actual '+(priorGzip?'gzip':'plain')+(retirement?' retired-input':'')+' retained assembly preserves invariants and emits current gzip',async t=>{
   if(process.execArgv.length||process.env.NODE_OPTIONS?.trim()||process.env.NODE_PATH?.trim()){
     execFileSync(process.execPath,[new URL(import.meta.url).pathname,t.name],{env:{...process.env,NODE_OPTIONS:'',NODE_PATH:'',NODE_TEST_CONTEXT:undefined},encoding:'utf8'});return;
   }
@@ -925,7 +925,7 @@ for(const priorGzip of [false,true])test('actual '+(priorGzip?'gzip':'plain')+' 
   fs.symlinkSync(fs.realpathSync(path.join(sourceRoot,'node_modules')),path.join(directory,'node_modules'),'dir');
   write('.gitignore','node_modules/\n.cache/\ndist/\n');
   for(const name of ['merge-integration-checks.yml','worker-merge.yml'])write('.github/workflows/'+name,'unchanged original producer');
-  const pin=(name,raw)=>({path:name,bytes:raw.length,sha256:sha(raw)}),prefix='coordination/engineering/prior-fixture/';
+  const pin=(name,raw)=>({path:name,bytes:raw.length,sha256:sha(raw),...(retirement?{mode:'100644',git_blob_oid:createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex')}:{})}),prefix='coordination/engineering/prior-fixture/';
   const priorMap={};
   for(const [role,raw]of Object.entries(f.priorSourceBodies)){
     const name=prefix+path.posix.basename(f.priorSourceEnvelope[role].path);write(name,raw);
@@ -935,7 +935,8 @@ for(const priorGzip of [false,true])test('actual '+(priorGzip?'gzip':'plain')+' 
   const priorSidecar={...f.sidecar,runtime_envelope:priorEnvelopePin,logical_asset_map:priorMap},priorSidecarRaw=Buffer.from(JSON.stringify(priorSidecar));
   const priorPin=pin(prefix+'sidecar.json',priorSidecarRaw);write(priorPin.path,priorSidecarRaw);
   const priorSelection={...f.currentSelection,additive_release:priorPin};write('data/ownership-selection.json',JSON.stringify(priorSelection));
-  const definition=loadPackageInputs(directory);definition.inputs.push(...copied,prefix);
+  const retired=[priorPin.path,priorEnvelopePin.path,priorMap.ledger.path,priorMap.patch.path];
+  const definition=loadPackageInputs(directory);definition.inputs.push(...copied,...(retirement?[...Object.values(priorMap).map(pin=>pin.path),priorEnvelopePin.path,priorPin.path]:[prefix]));
   write('.github/package-inputs.json',JSON.stringify(definition));
   const git=(...args)=>execFileSync('git',['-C',directory,...args],{encoding:'utf8'}).trim();
   git('init','-q');const commit=()=>{git('add','.');git('-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','fixture');};commit();
@@ -981,11 +982,31 @@ with zipfile.ZipFile(sys.argv[2],'w',zipfile.ZIP_DEFLATED) as z:
   };api.jobLogRedirect=f.f.api.jobLogRedirect;
   let downloads=0;api.artifactRedirect=async()=>{downloads++;return new Response(null,{status:302,headers:{location:'https://fixture.blob.core.windows.net/original.zip'}});};
   globalThis.fetch=async url=>new Response(String(url).endsWith('/original.zip')?archive:f.f.log());
+  if(retirement){const next=structuredClone(definition);next.inputs=next.inputs.filter(name=>!retired.includes(name));write('.github/package-inputs.json',JSON.stringify(next));}
   write('data/ownership-selection.json',JSON.stringify(f.currentSelection));commit();
   const entry=path.join(directory,'scripts/assemble-selected-package.mjs'),{assembleSelectedPackage}=await import(pathToFileURL(entry));process.argv[1]=entry;
   const assemble=()=>assembleSelectedPackage({api,repo:f.f.repo,expectedHead:git('rev-parse','HEAD'),originalRunId:17});
   const result=await assemble();assert.equal(result.assembled,true);assert.equal(downloads,1);
   assert.equal(result.current_additive_assets,4);
+  if(retirement){
+    const receipt=JSON.parse(fs.readFileSync(path.join(directory,'.cache/package-input-build.json')));
+    assert.deepEqual([...receipt.assembly.transition.removed_selected_inputs].sort(),[...retired].sort());
+    // Discovery, private execution issuance and final output admission must use
+    // the same original selector-bound bytes, never a caller's retirement flag.
+    const currentDefinition=loadPackageInputs(directory),current={head:git('rev-parse','HEAD'),
+      definition:currentDefinition,selection:f.currentSelection,files:committedPackageInputs(directory,currentDefinition),
+      producer:committedPackageProducer(directory)};
+    const found=await findOriginalPackage({api,repo:f.f.repo,current,originalRunId:17});
+    assert.deepEqual(found.priorSidecarRaw,priorSidecarRaw);
+    const authority=await import(pathToFileURL(path.join(directory,'coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs')));
+    const original=await authority.authenticateOriginalPackageOutput({api,repo:f.f.repo,origin:found.origin,root:f.f.root,manifestRaw:f.f.manifestRaw});
+    const stage=fs.mkdtempSync(path.join(directory,'.cache/proof-'));
+    const issue=priorSidecarRaw=>authority.issuePackageAssemblyExecution({original,source:directory,stage,executingRoot:directory,priorSidecarRaw});
+    assert.throws(()=>issue(undefined),/Authenticated prior cumulative|authenticated prior cumulative/);
+    const corrupt=Buffer.from(priorSidecarRaw);corrupt[corrupt.length-1]^=1;
+    assert.throws(()=>issue(corrupt),/Authenticated prior cumulative|authenticated prior cumulative/);
+    assert.equal(authority.requirePackageAssemblyExecution(issue(found.priorSidecarRaw)).source_commit,current.head);
+  }
   const changed=new Set(['dist/client/atlas-geography.json',...Object.values(f.priorEnvelope).filter(pin=>pin?.path).map(pin=>'dist/client/'+pin.path)]);
   for(const output of manifest.output.files)if(!changed.has(output.path)){
     const raw=fs.readFileSync(path.join(directory,output.path));assert.equal(raw.length,output.bytes);assert.equal(sha(raw),output.sha256,output.path);
