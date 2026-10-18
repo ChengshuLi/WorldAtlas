@@ -1,0 +1,54 @@
+{
+  "accepted_baseline": "bfacb7ace398d4eafbca2b5db41870627e6d9454",
+  "packets": [
+    {
+      "package_id": "gb-GMB-ADM2--repair-evaluation",
+      "source_head": "41143029b24a91bbc94de692fe61149eda059dfd",
+      "original": 2377,
+      "supported": 2377,
+      "held": 0,
+      "original_intervals": 1255,
+      "original_owners": 34,
+      "components": 34,
+      "classes_original": {
+        "land": 2377
+      },
+      "classes_supported": {
+        "land": 2377
+      },
+      "classes_held": {},
+      "original_overlap_current": 0,
+      "constructor_rows_equal_supported_patch": true,
+      "rule_hash_and_authority_source_pins_match": true
+    },
+    {
+      "package_id": "gb-ZWE-ADM2--repair-evaluation",
+      "source_head": "040dbab4bcea00da1dbf07a6b5af76c5c1330f41",
+      "original": 1788,
+      "supported": 1667,
+      "held": 121,
+      "original_intervals": 1090,
+      "original_owners": 20,
+      "components": 19,
+      "classes_original": {
+        "land": 1763,
+        "inland-water": 25
+      },
+      "classes_supported": {
+        "land": 1642,
+        "inland-water": 25
+      },
+      "classes_held": {
+        "land": 121
+      },
+      "original_overlap_current": 0,
+      "constructor_rows_equal_supported_patch": true,
+      "rule_hash_and_authority_source_pins_match": true
+    }
+  ],
+  "pair_original_coordinate_overlap": 0,
+  "supported": 4044,
+  "held": 121,
+  "new_accepted_credit": 0,
+  "status": "bounded current re-admission checks passed; substantive source review limits and actual stock delivery gates remain"
+}
