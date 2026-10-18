@@ -1,0 +1,17 @@
+file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/50504d25ad0c107e7786e45a8152147c4d0e461bf5e333ddbcf57235eb4444fe/work/scripts/check-effective-geographic-regression.mjs:19
+const demand=(v,m)=>{if(!v)throw Error(m);};
+                                 ^
+
+Error: Selected source original mode/OID/body differs
+    at demand (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/50504d25ad0c107e7786e45a8152147c4d0e461bf5e333ddbcf57235eb4444fe/work/scripts/check-effective-geographic-regression.mjs:19:34)
+    at SelectedGeometrySources.readPinned (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/50504d25ad0c107e7786e45a8152147c4d0e461bf5e333ddbcf57235eb4444fe/work/scripts/check-effective-geographic-regression.mjs:487:5)
+    at read (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/50504d25ad0c107e7786e45a8152147c4d0e461bf5e333ddbcf57235eb4444fe/work/scripts/check-effective-geographic-regression.mjs:436:49)
+    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/50504d25ad0c107e7786e45a8152147c4d0e461bf5e333ddbcf57235eb4444fe/work/scripts/selected-reference-metadata.mjs:27:17
+    at validateReferenceMetadataProjection (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/50504d25ad0c107e7786e45a8152147c4d0e461bf5e333ddbcf57235eb4444fe/work/scripts/selected-reference-metadata.mjs:92:33)
+    at new SelectedGeometrySources (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/50504d25ad0c107e7786e45a8152147c4d0e461bf5e333ddbcf57235eb4444fe/work/scripts/check-effective-geographic-regression.mjs:435:23)
+    at loadBaseSelection (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/50504d25ad0c107e7786e45a8152147c4d0e461bf5e333ddbcf57235eb4444fe/work/scripts/check-effective-geographic-regression.mjs:710:61)
+    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/50504d25ad0c107e7786e45a8152147c4d0e461bf5e333ddbcf57235eb4444fe/work/coordination/engineering/sierra-leone-physical-review-20261018-worker4/observe-selected-state.mjs:31:16
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+
+Node.js v24.21.0
