@@ -103,7 +103,7 @@ function run(label,geometry,cell,expected,authority) {
   reports.push({label,authority,query:{y:cell.y,x_start:cell.x,x_end_exclusive:end,owner:cell.owner},hits:actual.hits,counts:actual.counts,work:actual.work,exact_hit_list_matches_retained:true});
 }
 const lbrCell=lbrResult.key;
-run('LBR original positive Buu-Yao target',targetGeometry(lbrSource,lbrResult.positive_target.source_id),lbrCell,lbrResult.positive_target.effects,
+run('LBR selected Buu-Yao base footprint (target.base_geometry)',targetGeometry(lbrSource,lbrResult.positive_target.source_id),lbrCell,lbrResult.positive_target.effects,
   `source-evidence ${pins.liberia.source_evidence.commit}:${pins.liberia.source_evidence.path}`);
 const lbrObs=observations.liberia;
 run('LBR original physical mapped-land support',physicalSupport(lbrResult.positive_target.source_id),{...lbrCell,end:lbrCell.x+2},lbrObs.physical_report_mapped_land_support.effect,
