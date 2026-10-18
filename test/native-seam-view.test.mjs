@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {gunzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
+import {normativeLatitudeBytes} from './fixtures/native-latitudes.mjs';
 import {verifyNativeSeamView,nativePolygonIntervals,nativeRuntimeIndex} from '../src/native-grid.js';
 const box=(left,right,bottom=-1,top=1)=>({type:'Polygon',coordinates:[[[left,bottom],[right,bottom],[right,top],[left,top],[left,bottom]]]});
 const options={size:360,latitudes:Float64Array.from({length:360},(_,i)=>89.75-i*.5)};
@@ -26,13 +27,17 @@ test('explicit seam comparison preserves strict defaults and rejects changed com
  assert.throws(()=>verifyNativeSeamView(original,malformed,options),/Unclosed native ring/);
 });
 test('all actual Fiji source, physical and query views preserve the complete native pointsets',()=>{
- const prefix=new URL('../coordination/engineering/fiji-current-cell-20261016/',import.meta.url);
- const read=name=>JSON.parse(fs.readFileSync(new URL(name,prefix)));
- const stage=read('original-stage-inputs.json'),physical=read('physical-001/whole-target-support.json');
- const table=read('canonical-views-001/canonical-seam-views.json');
- const pin=read('source-002/source-evidence.json').native_latitudes;
- const encoded=fs.readFileSync(new URL('../'+pin.path,import.meta.url));
+ // This is an exact captured numeric regression, not a replay of source qualification.
  const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
+ const capture=fs.readFileSync(new URL('./fixtures/fiji-seam-regression.json.gz',import.meta.url));
+ assert.equal(capture.length,268530);
+ assert.equal(sha(capture),'99323ed88aa604c5e77f1adff7406bc5a8fe0c6f141e446538af5741c4fd2322');
+ const raw=gunzipSync(capture,{maxOutputLength:1135979});
+ assert.equal(raw.length,1135979);
+ assert.equal(sha(raw),'c1c6004ae0ef563c86be1d02c4613e1ee8d4379557c26bebcaa29b16063099db');
+ const table=JSON.parse(raw),pin=table.native_latitudes;
+ assert.equal(table.kind,'captured-real-fiji-seam-regression-v1');
+ const encoded=normativeLatitudeBytes();
  assert.equal(encoded.length,pin.bytes);assert.equal(sha(encoded),pin.sha256);
  const bytes=gunzipSync(encoded,{maxOutputLength:pin.decoded_bytes});
  assert.equal(bytes.length,pin.decoded_bytes);assert.equal(sha(bytes),pin.decoded_sha256);
@@ -40,9 +45,7 @@ test('all actual Fiji source, physical and query views preserve the complete nat
  let sourceOverruns=0,physicalCount=0;
  assert.equal(table.records.length,10);
  for(const record of table.records){
-  const target=record.role==='source'?stage.find(s=>s.target===record.source_id).consumed:
-   physical.results.find(s=>s.target===record.source_id);
-  const original=record.pointer.slice(1).split('/').reduce((value,key)=>value[key],target);
+  const original=record.original;
   const result=verifyNativeSeamView(original,record.geometry,normative);
   if(record.role==='source')sourceOverruns+=result.overrun_vertices;else physicalCount++;
   assert.ok(result.native_cells>0);

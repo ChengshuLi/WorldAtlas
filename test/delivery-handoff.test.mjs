@@ -514,6 +514,7 @@ function modernFinalizationFixture(t, {completed = false, mixed = false, members
   const root = directory(t), owned = 'coordination/engineering/modern-finalize/';
   const git = (...args) => execFileSync('git', args, {cwd: root, stdio: ['pipe', 'pipe', 'pipe']}).toString().trim();
   git('init'); git('config', 'user.name', 'Finalizer fixture'); git('config', 'user.email', 'finalizer@example.invalid');
+  git('config', 'gc.auto', '0'); git('config', 'maintenance.auto', 'false');
   const save = (name, value) => write(root, name, Buffer.isBuffer(value) ? value : jsonBytes(value));
   const commitAll = () => { git('add', '.'); git('commit', '--allow-empty', '-qm', 'Immutable finalizer fixture'); return git('rev-parse', 'HEAD'); };
   const r = pinReader(root), pin = name => r.pin(git('rev-parse', 'HEAD'), name);
@@ -698,7 +699,46 @@ function modernFinalizationFixture(t, {completed = false, mixed = false, members
     consumed: [...Object.values(roles), familyPart, ...(membership ? memberPaths : [])], incidental, withEvidence, datedSupport, territorialSupport, providerAdoption, seamViews};
 }
 
-test('completed-constructor finalization keeps provenance cold without historical leaf restoration', t => {
+// Build a private object universe, not a loose-file deletion simulation. Git's
+// pack writer takes this exact OID list (without --revs), so omitted historical
+// blobs cannot enter through graph traversal or another object's pack delta.
+function omitHistoricalObjects(t, f, omitted, storage) {
+  assert.ok(!process.env.GIT_ALTERNATE_OBJECT_DIRECTORIES, 'Fixture has no ambient alternate object database');
+  const ids = new Set(omitted), before = f.git('rev-parse', 'HEAD'), tree = f.git('rev-parse', 'HEAD^{tree}');
+  const objects = path.resolve(f.root, f.git('rev-parse', '--git-path', 'objects'));
+  assert.equal(objects, path.join(f.root, '.git', 'objects'), 'Fixture owns its ordinary object directory');
+  assert.equal(fs.existsSync(path.join(objects, 'info', 'alternates')), false);
+  assert.equal(f.git('remote'), '', 'Fixture has no network fallback');
+  for (const oid of ids) assert.equal(f.git('cat-file', '-t', oid), 'blob');
+  if (storage === 'loose') for (const oid of ids)
+    assert.equal(fs.existsSync(path.join(objects, oid.slice(0, 2), oid.slice(2))), true);
+  if (storage === 'packed') {
+    f.git('repack', '-ad');
+    assert.ok(fs.readdirSync(path.join(objects, 'pack')).some(name => name.endsWith('.pack')));
+    for (const oid of ids) assert.equal(fs.existsSync(path.join(objects, oid.slice(0, 2), oid.slice(2))), false);
+  }
+  const all = f.git('cat-file', '--batch-all-objects', '--batch-check=%(objectname)').split('\n');
+  assert.ok([...ids].every(oid => all.includes(oid)));
+  const allowed = all.filter(oid => !ids.has(oid));
+  const env = {...process.env, GIT_NO_LAZY_FETCH: '1'};
+  const pack = execFileSync('git', ['pack-objects', '--stdout'], {cwd: f.root, env,
+    input: allowed.join('\n') + '\n', maxBuffer: 16 * 1024 * 1024});
+  const quarantine = fs.mkdtempSync(path.join(os.tmpdir(), 'finalizer-original-objects-'));
+  t.after(() => fs.rmSync(quarantine, {recursive: true, force: true}));
+  fs.renameSync(objects, path.join(quarantine, 'objects'));
+  fs.mkdirSync(path.join(objects, 'pack'), {recursive: true});
+  fs.mkdirSync(path.join(objects, 'info'));
+  execFileSync('git', ['index-pack', '--stdin'], {cwd: f.root, env, input: pack, stdio: ['pipe', 'pipe', 'pipe']});
+  assert.equal(f.git('rev-parse', 'HEAD'), before); assert.equal(f.git('rev-parse', 'HEAD^{tree}'), tree);
+  assert.equal(fs.existsSync(path.join(objects, 'info', 'alternates')), false);
+  assert.deepEqual(f.git('cat-file', '--batch-all-objects', '--batch-check=%(objectname)').split('\n').sort(), allowed.sort());
+  for (const oid of ids) {
+    const probe = spawnSync('git', ['cat-file', '-e', oid], {cwd: f.root, env, encoding: 'utf8'});
+    assert.notEqual(probe.status, 0, 'Historical body must be genuinely unreadable: ' + oid);
+  }
+}
+
+for (const storage of ['loose', 'packed']) test('completed-constructor finalization keeps provenance cold with ' + storage + ' history', t => {
   const f = modernFinalizationFixture(t, {completed: true, cohort: true, external: true, dated: true,
     territorial: true, territorialParts: true, provider: true, seam: true, negativeSources: true});
   const entry = f.r.json(f.config.registry).entries[0], binding = f.r.json(entry.source_authority);
@@ -714,10 +754,7 @@ test('completed-constructor finalization keeps provenance cold without historica
     assert.ok(leaves.has(pin.path), 'Exercise the original role: ' + pin.path);
   f.git('rm', '--', ...leaves.keys()); f.commitAll();
   f.config.package_inputs = f.pin('.github/package-inputs.json');
-  // These are this test's own loose blobs. Removing them models cold partial-
-  // clone history: retained commit/path/OID references need no leaf acquisition.
-  for (const oid of new Set([...leaves.values()].map(pin => pin.git_blob_oid)))
-    fs.unlinkSync(path.join(f.root, '.git', 'objects', oid.slice(0, 2), oid.slice(2)));
+  omitHistoricalObjects(t, f, [...leaves.values()].map(pin => pin.git_blob_oid), storage);
   const destination = '.cache/delivery-handoff/completed-cold';
   const run = f.run('finalize', destination); assert.equal(run.status, 0, run.stderr);
   const output = name => JSON.parse(fs.readFileSync(path.join(f.root, destination, name)));
@@ -731,11 +768,11 @@ test('completed-constructor finalization keeps provenance cold without historica
   assert.ok(!f.config.restored_read_roles, 'No restoration snapshot or bypass flag');
 });
 
-test('unqualified source-target finalization still requires historical leaf bodies', t => {
+for (const storage of ['loose', 'packed']) test('unqualified source-target finalization still requires historical leaf bodies with ' + storage + ' history', t => {
   const f = modernFinalizationFixture(t), leaf = f.evidenceBody.catalogue;
   f.git('rm', '--', leaf.path); f.commitAll();
   f.config.package_inputs = f.pin('.github/package-inputs.json');
-  fs.unlinkSync(path.join(f.root, '.git', 'objects', leaf.git_blob_oid.slice(0, 2), leaf.git_blob_oid.slice(2)));
+  omitHistoricalObjects(t, f, [leaf.git_blob_oid], storage);
   const destination = '.cache/delivery-handoff/unqualified-cold';
   const run = f.run('finalize', destination);
   assert.notEqual(run.status, 0, 'No completed constructor means no cold-corpus route');

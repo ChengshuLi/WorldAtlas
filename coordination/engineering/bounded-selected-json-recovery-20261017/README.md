@@ -44,3 +44,136 @@ Frozen 93d3 full-route measurements separated the terms: 131,072 supported inter
 The continuing fix adds selected ordinal access to the existing repair component index, preserves indexed access through checkpoint addition projection, and groups only ordinals by exact target once. It removes owner-times-component decoding/validation without retaining a geometry cache. The complete old coordinate-delta function is retained as a pinned eager oracle. Nine sequence/index controls and twelve targeted checkpoint/arithmetic controls pass, including exact value/refusal comparisons, a proportional-visit assertion, and genuine 3/16/64-owner transitions. New immutable same-input performance measurements remain pending at this commit.
 
 Largest-object limits remain: the frozen one-owner/one-interval 65,537-point ring case measured 5,873→6,456 ms and 311,840→321,016 KiB, with exact outputs. That shape had no measured memory benefit. These observations do not establish a universal OOM fix.
+
+## Coordinate-array successor (separate from frozen 6582)
+
+The same authenticated parser now spills long coordinate arrays into metadata
+vector bodies, using per-depth ordinal indices so nested rings cannot interleave
+parent records. Private tagged descriptors preserve JSON values and last-key-wins
+semantics; they are not wire-authority inputs. Small coordinate tuples remain
+literal, while sequential reads use at most 256 index records and a 64 KiB body
+window except an individually larger scalar/element. Hashes still traverse the
+semantic values, never substitute raw wire bytes for canonical JSON.
+
+The shared bounds, polygon and native-runtime validators accept branded coordinate
+sequences with unchanged numerical algorithms and refusal order. Runtime conversion
+still creates Float64 rings and the scanner retains active edge records. Noncoordinate
+metadata collections, very large scalars and original source-family acquisition
+remain explicit unresolved terms. No universal constant-memory claim is made.
+
+Author tests: 45 parser/grid/sequence controls and 13 genuine completed-entry and
+coordinate controls pass. New controls cover nested rings, noncanonical numeric
+formatting, duplicate keys, deferred overridden nonfinite values, complete hashes,
+closed-store refusal, exact malformed-coordinate messages and a genuine 513-point
+source through completed append and numerical comparison. Geometry scale measurements
+against the immutable 6582 science are pending at this source checkpoint.
+
+The follow-up geometry consumer audit also covers every supported witness type
+(Point/MultiPoint/LineString/MultiLineString/Polygon/MultiPolygon/collections) and
+canonical seam views. Lazy coordinate sequences must not leak into the scanner's
+required eager polygon/ring roster: native runtime conversion explicitly materializes
+those output arrays, and witness accounting consumes every point before reporting
+counts. Tests compare complete exact cell predicates, malformed refusals, retained
+seam checks and full scanner results for large polygon/ring rosters. The four
+ledger/grid/witness/scanner suites pass 120 tests. These tests caught and fixed the
+initial successor's LineString admission and lazy-map witness-count gaps.
+
+## Owned original-authority acquisition and publication (2026-10-18)
+
+The integrated successor uses one generator evaluator with synchronous and owned
+asynchronous acquisition drivers. Each authenticated body is acquired at its
+original semantic read point. The existing raw-syntax store retains long geometry
+arrays without requiring a second resident source graph; semantic validation and
+canonical identities remain the consumers' responsibility. Required constructor
+output is serialized into an owned staged file, authenticated again at publication,
+and kept alive until publication completes. The existing Buffer publication API
+remains usable. Legacy accepted custody uses this same parser rather than a second
+whole-body decoder.
+
+Homogeneous finite coordinate pairs now use contiguous 17-byte private records;
+the redundant ordinal index is omitted. A heterogeneous member transitions once
+to the existing variable-width index with bounded backfill. Pairs are encoded
+directly into the existing 64 KiB writer, eliminating temporary per-pair record
+buffers. Safe-integer extents, finite IEEE doubles, tag checks, truncation and
+closed-owner refusals remain enforced. Private extent checks establish containment,
+not cryptographic authentication of arbitrary private-file corruption.
+
+Same-input, normal-runtime measurements of the actual native-authority constructor,
+required serialization and publication at 524,289 collinear polygon vertices:
+
+- Earlier eager path: median 3.065 s and 898,592 KiB peak RSS.
+- Owned acquisition before target/index simplification: 9.613 s and 163,344 KiB.
+- Counterbalanced fixed-stride comparison: 8.452 to 6.667 s, with 171,740 to
+  166,208 KiB. Separate profiling removed 109,052,112 bytes of redundant index
+  reads and reduced coordinate reads from 5,018 to 1,781.
+- Counterbalanced direct-writer comparison: 6.736 to 6.205 s, with 169,776 to
+  165,260 KiB. A separate instrumented actual-entry control counted 3,145,734
+  temporary pair buffers before the change and zero afterward.
+
+Each pair uses identical authenticated scientific operands and exact output/receipt
+hashes; instrumented samples are excluded from normal timings. Comparisons between
+series have different run windows. The current path still costs about twice the
+earlier eager time for roughly 82% lower peak on this shape. This is a memory-oriented
+tradeoff, not overall speed parity or a universal OOM guarantee.
+
+Remaining terms include normative tables, source/target/ordinal wrappers, large
+individual scalar metadata, Float64 numerical rings, scan edges and active
+intersections, and required output size. The collinear shape does not establish
+complex active-edge bounds. Some adopted/provenance acquisition remains eager.
+Whole-delivery composition/finalization is separate: the genuine seven-package
+6.2-million-cell finalizer still peaked at 1,262,292 KiB in the independent finalizer
+work, despite removal of historical leaf-body replay.
+
+The owned-resource audit covers source acquisition, generator shutdown, decoded
+pipeline settlement, store and staged-product close, publication/resume descriptors,
+and normative word spools. All cleanup actions are attempted; original failures
+remain primary, including values thrown by custom iterators. Only semantic canonical
+errors may be deferred for overwritten JSON fields. The accepted derived-checkpoint
+replay deletion and accepted finalizer acquisition/publication branch are retained.
+Final acceptance still requires exact-head independent review, consequential tests,
+authentic delivery regression and applicable hosted package/browser/build gates.
+
+## Coherent adoption and coordinate-consumer contract (2026-10-18)
+
+The normal refresh combines accepted native comparison/classification `cddcde87`,
+reviewed accepted-baseline admission `67e63fb0`, and preserved memory donor
+`d92b857d`. Both independent appended checkpoint test groups survive. The old
+donor and `b1ee9cd7` experiment remain recoverable, unaccepted checkpoints.
+
+Independent review found three spill-boundary consumer regressions: physical
+coverage used array-only flattening, revised OSM segments used numeric properties,
+and changed-rebind ring/group/bounds helpers assumed mutable indexed arrays.
+These consumers now traverse stored coordinate levels by iteration. Coverage keeps
+its required polygon-reference roster without expanding vertices; segments and
+bounds visit adjacent points sequentially. Rebind rotation retains its existing
+binary64 key-symbol array and sorted hole keys, not another coordinate graph.
+The scanner still owns its required Float64 rings. Sequence storage never grants
+scientific authority or changes source qualification.
+
+The consumer census covers source coverage, revised-source adoption, changed
+rebind, coordinate bounds, polygon/witness validation, numerical conversion, and
+canonical serializers. Fifteen complete proof/output parity controls cross
+31/32/33 vertices, rings and polygons using the actual constructors and rebind
+consumer; six failed before correction. A separate private interval-visitor gap
+could skip the table close after body-close failure and mask a visitor failure.
+The correction attempts both owned closes, clears the active-visit flag, and
+preserves primary or first cleanup failures, including falsy throws. Ten genuine
+visitor fault controls failed before correction and pass afterward, checking
+both close attempts, empty scratch and successful subsequent visits. Borrowed
+checkpoint stores are not closed by this visitor.
+
+Remaining input-sized terms include proposed source patch rows/runs, owner-row
+grouping and interval identity strings. Changed-rebind request/result length
+checks still serialize full canonical values. Source/target metadata, canonical
+polygon keys, normative tables, Float64 rings, active edges/intersections,
+required output size, individual large scalars, and some adopted/provenance
+acquisition remain explicit limits. Existing argument spreads over very large
+polygon/point rosters also remain. This is not a universal OOM fix or evidence
+for complex active-edge bounds.
+
+The earlier 937 distinct tests have passing observations across an aggregate and
+correction reruns, not one clean terminal 937-test run. The first refresh run was
+interrupted after missing sparse test operands; it is not a pass. The corrected
+union requires a fresh consequential run, exact-head independent review, and
+actual hosted geography, package build, browser and prepared-parity gates. No
+new performance benchmark is claimed here.
