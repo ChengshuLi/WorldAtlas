@@ -1,0 +1,122 @@
+{
+  "kind": "Netherlands-complete-original-spatial-overlap-screen",
+  "accepted_main": "1330b938687e1c8255ae0e80bf4ad854e44c6d5e",
+  "original_cells": 770,
+  "original_intervals": 352,
+  "original_owners": 39,
+  "comparisons": [
+    {
+      "reference": "actual_accepted_additive",
+      "cells": 6114983,
+      "overlap_cells": 0,
+      "overlap_keys": []
+    },
+    {
+      "reference": "entire_Sweden_original",
+      "cells": 18381,
+      "overlap_cells": 0,
+      "overlap_keys": []
+    },
+    {
+      "reference": "entire_Germany_original",
+      "cells": 27555,
+      "overlap_cells": 0,
+      "overlap_keys": []
+    },
+    {
+      "reference": "entire_Spain_original",
+      "cells": 29477,
+      "overlap_cells": 0,
+      "overlap_keys": []
+    },
+    {
+      "reference": "entire_Poland_original",
+      "cells": 7309,
+      "overlap_cells": 0,
+      "overlap_keys": []
+    },
+    {
+      "reference": "entire_Czechia_original",
+      "cells": 3934,
+      "overlap_cells": 0,
+      "overlap_keys": []
+    },
+    {
+      "reference": "entire_Slovakia_original",
+      "cells": 1811,
+      "overlap_cells": 0,
+      "overlap_keys": []
+    }
+  ],
+  "inputs": [
+    {
+      "path": "block-020.json.gz",
+      "bytes": 321,
+      "sha256": "870b4e1bda3b94b7b079c3f898547b36b34cf285d0dcc36f6644e1ffd966f161"
+    },
+    {
+      "path": "block-021.json.gz",
+      "bytes": 2102,
+      "sha256": "d162351792be959df1b19718b95bed7eefa685b767ac5019b9465f1e1e43792f"
+    },
+    {
+      "commit": "1330b938687e1c8255ae0e80bf4ad854e44c6d5e",
+      "path": "data/ownership-selection.json",
+      "bytes": 1846,
+      "sha256": "7e16163600121c42533b1d5bf073ea4d062d7c144d54a9236c3d974e52db2803"
+    },
+    {
+      "commit": "1330b938687e1c8255ae0e80bf4ad854e44c6d5e",
+      "path": "coordination/engineering/south-africa-selected-delivery-20261017/ownership-selection-combined.json",
+      "bytes": 3472,
+      "sha256": "190d0682763462a6a27a7f460e64caa71705f5f202c25ba6b3ef153baedd881c"
+    },
+    {
+      "commit": "f78cc343b985d46a4396a386c1b1ce48c9468b1f",
+      "path": "coordination/engineering/south-africa-selected-delivery-20261017/composition-001/patch.json",
+      "bytes": 28642685,
+      "sha256": "5fa4556a1e718c2a9ff428932b3a8ab54b510bf62a5dcdc03205e0125ec6fc84"
+    },
+    {
+      "commit": "a1a8c3060a97cfc0648a7412c1662e19fde83f76",
+      "path": "coordination/engineering/sweden-original-repair-20261017/source-stage-001/original-native-patch.json",
+      "bytes": 217998,
+      "sha256": "47694b3131fdca8b648bc7988712e1eef028a99bee1ee06d0ae017afbeb920bf"
+    },
+    {
+      "commit": "9ebe37b375b46b06f2eed17302c746582e80a2aa",
+      "path": "coordination/engineering/germany-original-repair-20261017/source-stage-001/original-native-patch.json",
+      "bytes": 219583,
+      "sha256": "6e6e56ca235716532eeb1c34fe4bd95b7e612c4dc4083ce49ba41a3e77d37ab9"
+    },
+    {
+      "commit": "c1a507348cd1ade4167f548a1f9fe384da8fe7c2",
+      "path": "coordination/engineering/spain-original-repair-20261017/source-stage-001/original-native-patch.json",
+      "bytes": 319338,
+      "sha256": "ae200d8a6c46386a208db318d29e6919cf3459a403c367b55f9c845d86cc6d0f"
+    },
+    {
+      "commit": "d6017783b1154a59386ea8701b1a729749806741",
+      "path": "coordination/engineering/poland-original-repair-20261017/source-stage-001/original-native-patch.json",
+      "bytes": 101377,
+      "sha256": "d87a525f66b69f88d0c4e5a347d9297aa840d327f9f63773d36d6a7e3d6535aa"
+    },
+    {
+      "commit": "cb333f83bd9996cc1f685a36c87872b8aea21a16",
+      "path": "coordination/engineering/czechia-original-repair-20261017/source-stage-001/original-native-patch.json",
+      "bytes": 53082,
+      "sha256": "277d03235d505957a29f793228eb354eb365c12f6a58b9a2628f8f513d9308e6"
+    },
+    {
+      "commit": "faadabeb4201911818dd4f55d3d5f9d2004240af",
+      "path": "coordination/engineering/slovakia-original-repair-20261017/source-stage-001/original-native-patch.json",
+      "bytes": 26524,
+      "sha256": "5e6bc1b2304cec35e19148b88c08b7f9fff085f72b679e2843e3b4b1d4e8b2a1"
+    }
+  ],
+  "limitations": [
+    "Spatial keys are compared irrespective of owner; complete pending originals conservatively cover their proposed supported subsets.",
+    "This does not replace genuine native-base owner-zero or final selected-output conservation.",
+    "Netherlands remains unclaimed and outside active denominators."
+  ]
+}
