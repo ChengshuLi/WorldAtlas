@@ -1,0 +1,90 @@
+{
+  "reviewed_code_head": "e414635840faa65ba927765d046ef82be44530d8",
+  "actual_base": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+  "actual_authored_head": "4a99d16449e8901eb8ae1992b5cab33d4b9da128",
+  "positive_repeated_prepare_invocations": 2,
+  "adverse_cases": 7,
+  "cases": [
+    {
+      "scenario": "unchanged",
+      "selected": "selected-data",
+      "geography_software": false,
+      "diagnostic": null,
+      "receipt": "e414-unchanged.json",
+      "sha256": "554568af562e9edfc0bc080911ed5f9e357770983fe6c59fcedcf79743c4d25e"
+    },
+    {
+      "scenario": "remove-unrelated",
+      "selected": null,
+      "geography_software": true,
+      "diagnostic": "Invalid or unavailable selected metadata",
+      "receipt": "e414-remove-unrelated.json",
+      "sha256": "5cf5d6497c7459d83491bd6359295939d8dd6834e364769ed3183d0eca29b582"
+    },
+    {
+      "scenario": "remove-shared",
+      "selected": null,
+      "geography_software": true,
+      "diagnostic": "Invalid or unavailable selected metadata",
+      "receipt": "e414-remove-shared.json",
+      "sha256": "253fabe05c5f96d211eda2d6b00d14fd16ac60a89e05f1b9ba5ca2e3887906b2"
+    },
+    {
+      "scenario": "reorder",
+      "selected": null,
+      "geography_software": true,
+      "diagnostic": "Invalid or unavailable selected metadata",
+      "receipt": "e414-reorder.json",
+      "sha256": "6e9677f46b9b3c399f5f58088c90fdeed00ecabbac8e64d74d074245bd458f66"
+    },
+    {
+      "scenario": "change-policy",
+      "selected": null,
+      "geography_software": true,
+      "diagnostic": "Invalid or unavailable selected metadata",
+      "receipt": "e414-change-policy.json",
+      "sha256": "1105566bfb4a36306ac43610df30d67fef79ecd095446cc4d25936b8f0ba7db1"
+    },
+    {
+      "scenario": "tamper-prior-sidecar",
+      "selected": null,
+      "geography_software": true,
+      "diagnostic": null,
+      "receipt": "e414-tamper-prior-sidecar.json",
+      "sha256": "6b7a67d3b10e31d9e4d68062fb3b74a845363ad27be96d5f971416bd7432a28b"
+    },
+    {
+      "scenario": "wrong-acceptance",
+      "selected": null,
+      "geography_software": true,
+      "diagnostic": "Invalid or unavailable selected metadata",
+      "receipt": "e414-wrong-acceptance.json",
+      "sha256": "73849758e73573fe0375f22be17c8b39f1dbc710887f8ac03a52811cf992fe22"
+    },
+    {
+      "scenario": "change-code",
+      "selected": null,
+      "geography_software": true,
+      "diagnostic": null,
+      "receipt": "e414-change-code.json",
+      "sha256": "8f2d5b75e8e566f485d9df1745fe3b0d0529f1bfa04cb126cd9fbe33d77eed11"
+    }
+  ],
+  "executing_code_files": 378,
+  "executing_code_inventory_sha256": "97d6892f07c4b300ff869f4ed645189ec36a380661917f8fd029243f9186037d",
+  "harness_sha256": "cb8ccc8f26292c981ad303e6bd89f67ee496f64c3a8e790635649e5011c97de3",
+  "limits": [
+    "Actual immutable Slovakia file trees and Git blobs; actual selectedDataSelection and prepareIntegration.",
+    "Queue claim/review/reference mutations are in-memory fixtures; accepted Czechia2431 acceptance metadata and retained ZIP are authenticated by the production classifier.",
+    "No hosted acceptance, scientific replay or performance measurement is claimed."
+  ],
+  "permanent_regression": {
+    "patch": "permanent-regression.patch",
+    "sha256": "51e50bcae8397eb036a49b4a165116fbe1747fb629aa0d26019e0b01aec74adb",
+    "added_lines": 60,
+    "controls": 2,
+    "adverse_cases": 3,
+    "before_result": "positive fails: expected selected-data, actual undefined",
+    "fixed_result": "2/2 pass"
+  }
+}
