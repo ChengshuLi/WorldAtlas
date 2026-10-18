@@ -1,0 +1,170 @@
+{
+  "version": 1,
+  "package_id": "gb-CIV-ADM3--repair-evaluation",
+  "issue": null,
+  "public_claim_status": "Parent-coordinated normal owned scope; no public issue requested or fabricated.",
+  "original_cells": 2049,
+  "qualified_cells": 2041,
+  "held_cells": 8,
+  "original_intervals": 1028,
+  "original_owners": 66,
+  "all_literal_source_atoms": 66,
+  "all_original_contact_atoms": 91,
+  "qualified_components": 66,
+  "new_accepted_cells": 0,
+  "class_cells": {
+    "original": {
+      "land": 2049,
+      "inland_water": 0
+    },
+    "qualified": {
+      "land": 2041,
+      "inland_water": 0
+    },
+    "held": {
+      "land": 8,
+      "inland_water": 0
+    }
+  },
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "a5fd3230c50b7bcdb8fe0acf7b0046335425e1b1",
+        "path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/native-authority-supported-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "3dfcaa04dec04d9feffb2fe03d6ed9c9bb6f1e39",
+        "bytes": 763,
+        "sha256": "25597d12b71284f05330597f045da1c6e44aedfef8430a72ea0274e5784c33ba"
+      },
+      "source_authority": {
+        "commit": "a5fd3230c50b7bcdb8fe0acf7b0046335425e1b1",
+        "path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/native-authority-supported-001/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "6d9f6668a5c0ad13f3b240a92ebc624bd1c9bc60",
+        "bytes": 766,
+        "sha256": "9535daa76599e516740a6474f7cb4adc7418014b2e162bc479adfd41d7ae07a6"
+      },
+      "ledger": {
+        "commit": "a5fd3230c50b7bcdb8fe0acf7b0046335425e1b1",
+        "path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/native-authority-supported-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "1a240cdc6af3e37657c82f60e510b30b27cef94f",
+        "bytes": 157892,
+        "sha256": "92af390eec3b0b5c37a98e672c1fcdfd2bf2055165b1863800d3dd232b0e1ff3"
+      },
+      "native_patch": {
+        "commit": "61d5073a549f9d1e762e6af9320365b92e117ef4",
+        "path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/supported-inputs-001/native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "3e6fa28e460b7a3dc239a54268255c010100d571",
+        "bytes": 42295,
+        "sha256": "4e9628f1f24d12803be127650672d1f57b7932ff629609e5b8dd9a65e9aad828"
+      }
+    }
+  ],
+  "source_evidence": {
+    "commit": "61d5073a549f9d1e762e6af9320365b92e117ef4",
+    "path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/supported-inputs-001/source-evidence.json",
+    "mode": "100644",
+    "git_blob_oid": "d1a5dcbdee7ca5140635607bb2909c861067a399",
+    "bytes": 212659,
+    "sha256": "0d6dfb511f5ba1a9127584680c53f5aa818b2e341cfc5e272bb02d459b972077"
+  },
+  "full_original_source_evidence": {
+    "commit": "7bfc37bc2076f0a623a9b7a37415536433fd0deb",
+    "path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-evidence-001/source-evidence.json",
+    "mode": "100644",
+    "git_blob_oid": "74dcb195d7a7c2388ef3adcb4830f935f89d9950",
+    "bytes": 213139,
+    "sha256": "9c350ec45a7a5007ddbb2f51dd324e0ae1a56011aa8bc35fac56c5f56b499634"
+  },
+  "full_original_native_patch": {
+    "commit": "7bfc37bc2076f0a623a9b7a37415536433fd0deb",
+    "path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/native-request-001/native-requested-patch.json",
+    "mode": "100644",
+    "git_blob_oid": "c69939572fa2a311d98c95676fd1557e0f692915",
+    "bytes": 42647,
+    "sha256": "e5661e02d81b7fad11b3caae8bfdac11b9e654b7c59f99252d8555b05c2e5ec6"
+  },
+  "original_scope_accounting": {
+    "commit": "a5fd3230c50b7bcdb8fe0acf7b0046335425e1b1",
+    "path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/original-scope-accounting.json",
+    "mode": "100644",
+    "git_blob_oid": "b09039ab7120950f25e84006a9bdd015d23c7ae4",
+    "bytes": 40011,
+    "sha256": "d557b5db483eacd13a5f79b2066c7db378fd079cd8f9f3efa47fd458cb4b7c77"
+  },
+  "held_original": {
+    "commit": "61d5073a549f9d1e762e6af9320365b92e117ef4",
+    "path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/supported-inputs-001/held-original.json",
+    "mode": "100644",
+    "git_blob_oid": "34c6f29fa83948877aaeb79bf3cf1a23f328e89c",
+    "bytes": 603,
+    "sha256": "f8f56e579e524f3951bef517f67b807f0e02ca1a01b94d40e96c0a0c2815da2a"
+  },
+  "original_partition": {
+    "commit": "61d5073a549f9d1e762e6af9320365b92e117ef4",
+    "path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/supported-inputs-001/original-scope-partition.json",
+    "mode": "100644",
+    "git_blob_oid": "fc58797a64708445384de7bb56fc57e9cadd9175",
+    "bytes": 6632,
+    "sha256": "6b559aba899384a0383616b99ffe30b795424e1fbf4177d0dee51af57b422d58"
+  },
+  "operating_observation": {
+    "commit": "a5fd3230c50b7bcdb8fe0acf7b0046335425e1b1",
+    "path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/actual-operating-observations.json",
+    "mode": "100644",
+    "git_blob_oid": "f7aeb45c071ae748a558bf413ae3d679ca08bc02",
+    "bytes": 5935,
+    "sha256": "8b2eeefd750df58869176ee9b062854d4136ca2163573cca6123950dd5120bf7"
+  },
+  "whole_physical_evidence": {
+    "commit": "fdb55474c482ea114474201745a80dc74d66fd95",
+    "path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/physical-001/whole-target-support.json",
+    "mode": "100644",
+    "git_blob_oid": "89c1cb751b82ea150824fc04c71cf00aa64543e2",
+    "bytes": 644739,
+    "sha256": "e951c8d51d0b2f7d28e37dfc687d1234c812e2847d5a1e3733dd0c109a833d7c"
+  },
+  "complete_archive_custody": {
+    "commit": "30fcfbbd6a9ed62274a6d52181b583bd4e0c67c2",
+    "path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/all11-actual-foreign-archive-custody.json",
+    "mode": "100644",
+    "git_blob_oid": "84bcc79d4d3779738d3fc2765c3aed32c2087b5e",
+    "bytes": 63732,
+    "sha256": "5cd00a9a64e4177151a95ee4f2d376233bde8cdc98081f1d17adac3244c59389"
+  },
+  "source_rights_review": {
+    "commit": "30fcfbbd6a9ed62274a6d52181b583bd4e0c67c2",
+    "path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-rights/complete-foreign-archives-001/complete-foreign-source-rights-review.md",
+    "mode": "100644",
+    "git_blob_oid": "68cc453d81d2caa8d7a35288ef1205d8e6bfad15",
+    "bytes": 7966,
+    "sha256": "cd8034158d1732317321ac30ebed3ec0dfdd7d534a74610afe126c899f7e1f0f"
+  },
+  "whole_foreign_census": {
+    "commit": "20bf5ed4bcefeac4ea0fc705335809bed02fd6d1",
+    "path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-review/foreign-bounds-001/complete-foreign-bounds.json",
+    "mode": "100644",
+    "git_blob_oid": "f8e2b8b1d0c97d45360de56cd298a28e940f0b3e",
+    "bytes": 472505,
+    "sha256": "92d80e2b0bdc717796bdedc84bb9f4ff69d3fdfe101f14a214c46598c865fc42"
+  },
+  "retained_periodic_proof": {
+    "commit": "c62f0288d722dea2aac9e9ade98cef75c842f22a",
+    "path": "coordination/engineering/cote-divoire-original-repair-20261018-worker2/source-review/retained-periodic-negative-reconciliation-001/retained-periodic-negative-reconciliation.json",
+    "mode": "100644",
+    "git_blob_oid": "0546d4abadf1605f6240a7f5f3522ac414964011",
+    "bytes": 17279,
+    "sha256": "39b6ae34904d130bb7dac181e31c4c216452836889026e0bd5bf5fe630c2c7cb"
+  },
+  "limits": [
+    "Genuine historical source-relative result only:2049original land keys=2041qualified+8territorial-exclusion holds; original/qualified/held waterall0. No accepted or delivered credit.",
+    "All66directpositiveowners/all66literalpositiveatoms and91contactatoms/1028originalintervals retained; all66qualifyingcomponents survive. Youndouo13651has38original=30qualified+8held. No specific foreign causal/source sovereignty claim follows from the generic hold reason.",
+    "All510domestic owners/atoms,33recordedparents and37wholeancestor nodes retained; source role, official codes, legal parents/effective dates and current territorial meaning remain open in832/839/841/855 and1083.",
+    "Original whole source and canonical target differences remain. Firstwholephysical66result retains6whole residuals/4targets; Abidjan lineal land/water witness is not an areal conflict or inferred original key hit. No physical/source replay or manual waiver.",
+    "Complete365foreignfamily/73010feature census and exactthree retainedFiji proofs preserved; all11wholeforeignfamilies/937nativefeatures and196targetnegativepositions retained. No cropped foreign competitors, new normalization or source substitution.",
+    "Historical source grant limits remain: generic BFA1/2 andGHA2images, GHA1ODbLdata versusCCBYSA2documentation, MLI1International/IGO mismatch, MLI2editionambiguity, mixedyears andBFA3historicalamalgamation/edge-match caveats. No blanket current or production rights clearance.",
+    "Actual future selected ownerzero/conservation/emitted output, integration and publication acceptance remain separate; parent/Americas owns any future composition. Sourcebranch is local-only at quartet authoring; actual verifiedpush/readback determines later source availability."
+  ]
+}
