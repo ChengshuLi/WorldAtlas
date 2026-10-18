@@ -1,0 +1,35 @@
+{
+  "kind": "read-only-original-key-owner-contact-rejoin",
+  "accepted_algorithm": "dfe57bc8511fea3ee6cc78384ff2e94d19c7cecd:coordination/engineering/sweden-el-salvador-original-exceptions-20261018/verify-original-partitions.py",
+  "execution_description": "Read-only scoped adaptation of the accepted extraction/rejoin algorithm, authenticated original blocks and requested patches, current selected-owner lookup, full original roster joins and exact held-ledger equality. No new executable is added to the repository.",
+  "adapter_sha256": "e7d01cbab7482ecf7fde6fe716e9df2b2b2566a082d25e20bc79c041e4feb8d1",
+  "current_selection_identity_checked_at": "bfacb7ace398d4eafbca2b5db41870627e6d9454",
+  "scope": {
+    "original": 12113,
+    "already_accepted": 12013,
+    "proposed_exceptions": 100
+  },
+  "complete_original_equals_request": true,
+  "exact_held_equals_residual": true,
+  "different_owner_intersections": 0,
+  "all_residual_original_class": "land",
+  "scientific_producer_executed": false,
+  "new_native_credit": 0,
+  "accepted_disposition_credit": 0,
+  "original_queue_checks": [
+    {
+      "package_id": "gb-ZAF-ADM3--repair-evaluation",
+      "complete_original_owner_roster_equals_queue": true,
+      "complete_original_source_contact_roster_equals_queue": true,
+      "interval_count_and_classes_equal_queue": true,
+      "literal_contract_matches": true
+    },
+    {
+      "package_id": "gb-POL-ADM2--repair-evaluation",
+      "complete_original_owner_roster_equals_queue": true,
+      "complete_original_source_contact_roster_equals_queue": true,
+      "interval_count_and_classes_equal_queue": true,
+      "literal_contract_matches": true
+    }
+  ]
+}

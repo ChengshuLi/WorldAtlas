@@ -332,3 +332,157 @@ test('cold routing acquisition supplies exact objects and authenticates tree met
     }
   } finally { f.close(); }
 });
+
+// No alternates or historical checkout: start with an empty object store, then
+// exercise the same private native commit transport and authenticated tree cache as CI.
+function originFixture() {
+  const f = fixture(), remote = path.join(f.directory, 'cold-origin');
+  fs.mkdirSync(remote); f.git(remote, ['init', '--bare']);
+  f.git(f.origin, ['config', 'uploadpack.allowFilter', 'true']);
+  f.git(f.origin, ['config', 'uploadpack.allowAnySHA1InWant', 'true']);
+  const calls = {commits: [], trees: [], fetches: [], stores: []};
+  const loaders = {
+    async loadCommit(id) {
+      calls.commits.push(id);
+      assert.equal(f.git(f.origin, ['cat-file', '-t', id]).toString().trim(), 'commit');
+      return {sha: id, tree: {sha: f.git(f.origin, ['rev-parse', id + '^{tree}']).toString().trim()}};
+    },
+    async loadTree(id, recursive) {
+      assert.equal(recursive, false); calls.trees.push(id);
+      return {sha: id, truncated: false, tree: f.git(f.origin, ['ls-tree', '-z', id]).toString().split('\0').filter(Boolean).map(line => {
+        const [, mode, type, sha, name] = line.match(/^(\d+) (\w+) ([a-f0-9]+)\t(.+)$/s);
+        return {mode, type, sha, path: name};
+      })};
+    },
+    execute(command, args, options) {
+      if (args.includes('init')) calls.stores.push(args[args.indexOf('-C') + 1]);
+      if (args.includes('fetch')) {
+        assert(args.includes('--filter=tree:0')); assert(args.includes('--depth=1'));
+        calls.fetches.push(options.input.trim());
+        args = args.map(arg => arg === 'https://github.com/ChengshuLi/WorldAtlas.git' ? 'file://' + f.origin : arg);
+      }
+      return execFileSync(command, args, options);
+    }
+  };
+  const acquisition = extra => createAcquisition({repo: remote, ...loaders, token: '', ...extra});
+  const inventory = () => f.git(remote, ['cat-file', '--batch-all-objects', '--batch-check=%(objectname) %(objecttype)']).toString().trim().split('\n').filter(Boolean).map(line => line.split(' '));
+  return {...f, remote, loaders, calls, acquisition, inventory, assertIsolated() {
+    assert.deepEqual(inventory(), []); assert(!fs.existsSync(path.join(remote, 'shallow')));
+    for (const store of calls.stores) assert(!fs.existsSync(store), 'owned origin store was not removed');
+  }};
+}
+
+test('cold origin metadata resolves and caches exact path trees without blobs or parent history', async () => {
+  const f = originFixture(); try {
+    const id = f.commit({'first/a.json': 'first scientific leaf', 'second/b.json': 'second scientific leaf'});
+    const parent = f.baseline, root = f.git(f.origin, ['rev-parse', id + '^{tree}']).toString().trim();
+    const withParent = f.git(f.origin, ['commit-tree', root, '-p', parent], 'historical origin\n').toString().trim();
+    const a = f.acquisition();
+    const first = await a.resolvePath(withParent, 'first/a.json');
+    assert(Object.isFrozen(first)); f.assertIsolated();
+    const before = {...a.stats}; await a.resolvePath(withParent, 'first/a.json');
+    assert.deepEqual(a.stats, before); assert.equal(f.calls.fetches.length, 1);
+    // A present commit/root must not conceal a missing second path's tree.
+    await a.resolvePath(withParent, 'second/b.json');
+    assert.equal(a.stats.origin_metadata_objects, 4); assert.equal(a.stats.origin_metadata_imports, 0);
+    assert.equal(f.calls.trees.length, 3); assert.equal(f.calls.commits.length, 1);
+    f.assertIsolated();
+    for (const name of ['first/a.json', 'second/b.json']) {
+      const row = await a.resolvePath(withParent, name);
+      assert.equal(`${row.mode} blob ${row.git_blob_oid}\t${row.path}\0`,
+        f.git(f.origin, ['ls-tree', '-z', withParent, '--', name]).toString());
+      assert.equal(row.commit, withParent);
+    }
+  } finally { f.close(); }
+});
+
+for (const mode of ['denied commit', 'failed transport', 'wrong commit', 'wrong root', 'denied tree', 'wrong tree', 'truncated tree', 'duplicate tree', 'changed child', 'unsafe child'])
+test('cold origin metadata refuses unavailable or unauthenticated metadata: ' + mode, async () => {
+  const f = originFixture(); try {
+    const id = f.commit({'nested/input.json': 'scientific leaf'}), a = f.acquisition({
+      execute(command, args, options) {
+        if (mode === 'failed transport' && args.includes('fetch')) throw Error('failed transport');
+        return f.loaders.execute(command, args, options);
+      },
+      loadCommit: async value => {
+        if (mode === 'denied commit') throw Error('denied commit');
+        const result = await f.loaders.loadCommit(value);
+        return mode === 'wrong commit' ? {...result, sha: 'a'.repeat(40)}
+          : mode === 'wrong root' ? {...result, tree: {sha: 'b'.repeat(40)}} : result;
+      },
+      loadTree: async (...args) => {
+        if (mode === 'denied tree') throw Error('denied tree');
+        const result = await f.loaders.loadTree(...args);
+        if (mode === 'wrong tree') result.sha = 'c'.repeat(40);
+        if (mode === 'truncated tree') result.truncated = true;
+        if (mode === 'duplicate tree') result.tree.push(result.tree[0]);
+        if (mode === 'changed child') result.tree[0].sha = 'd'.repeat(40);
+        if (mode === 'unsafe child') result.tree[0].path = '../escape';
+        return result;
+      }
+    });
+    await assert.rejects(a.resolvePath(id, 'nested/input.json'), /denied|acquisition failed|Wrong immutable|Malformed immutable/);
+    f.assertIsolated();
+    if (['denied commit', 'wrong commit'].includes(mode)) assert.equal(f.calls.fetches.length, 0);
+  } finally { f.close(); }
+});
+
+test('cold origin metadata rejects blob-valued origins, nonordinary members and unsafe paths', async () => {
+  const f = originFixture(); try {
+    const id = f.commit({'input.json': 'scientific leaf'}), blob = f.git(f.origin, ['rev-parse', id + ':input.json']).toString().trim();
+    const a = f.acquisition();
+    await assert.rejects(a.resolvePath(blob, 'input.json')); assert.equal(f.calls.fetches.length, 0);
+    for (const name of ['../input.json', '/input.json', 'a//b', 'a\\b']) await assert.rejects(a.resolvePath(id, name), /Unsafe/);
+    await assert.rejects(a.resolvePath(id, 'missing.json'), /Missing or nonordinary/);
+    const tree = f.git(f.origin, ['mktree'], `120000 blob ${blob}\tlink\n`).toString().trim();
+    const link = f.git(f.origin, ['commit-tree', tree], 'symlink\n').toString().trim();
+    await assert.rejects(a.resolvePath(link, 'link'), /Missing or nonordinary/);
+    f.assertIsolated();
+  } finally { f.close(); }
+});
+
+test('cold origin metadata authenticates already present native object type and bytes before reuse', async () => {
+  for (const variant of ['wrong type', 'wrong hash']) {
+    const f = originFixture(); try {
+      const id = f.commit({'input.json': 'scientific leaf'}), raw = variant === 'wrong type' ? Buffer.from('blob 1\0x')
+        : (() => { const bytes = Buffer.concat([f.git(f.origin, ['cat-file', 'commit', id]), Buffer.from('changed')]);
+          return Buffer.concat([Buffer.from(`commit ${bytes.length}\0`), bytes]); })();
+      const file = path.join(f.remote, 'objects', id.slice(0, 2), id.slice(2));
+      fs.mkdirSync(path.dirname(file), {recursive: true});
+      fs.writeFileSync(file, (await import('node:zlib')).deflateSync(raw));
+      await assert.rejects(f.acquisition().resolvePath(id, 'input.json'), /Wrong immutable origin metadata/);
+      assert.equal(f.calls.fetches.length, 0);
+    } finally { f.close(); }
+  }
+});
+
+
+test('cold routing body acquisition uses the private original descriptor without exposing its origin', async () => {
+  const f = fixture(); try {
+    f.git(f.origin, ['config', 'uploadpack.allowFilter', 'true']);
+    f.git(f.origin, ['config', 'uploadpack.allowAnySHA1InWant', 'true']);
+    const raw = 'historical routing body absent from the current tree', id = f.commit({'nested/routing.json': raw});
+    const row = f.maps.get(id).tree[0], pin = {commit: id, path: row.path, mode: row.mode, git_blob_oid: row.sha};
+    const before = f.git(f.destination, ['cat-file', '--batch-all-objects', '--batch-check=%(objectname)']).toString().trim().split('\n');
+    const a = createRoutingMetadataAcquisition({repo: f.destination, baseline: f.baseline, token: '',
+      loadCommit: async id => ({sha: id, tree: {sha: f.git(f.origin, ['rev-parse', id + '^{tree}']).toString().trim()}}),
+      loadTree: async (root, recursive) => ({sha: root, truncated: false,
+        tree: f.git(f.origin, ['ls-tree', '-l', '-z', ...(recursive ? ['-r'] : []), root]).toString().split('\0').filter(Boolean).map(line => {
+          const [, mode, type, sha, size, name] = line.match(/^(\d+) (\w+) ([a-f0-9]+)\s+(\d+|-)\t(.+)$/s);
+          return {mode, type, sha, size: Number(size), path: name};
+        })}),
+      execute: (command, args, options) => execFileSync(command,
+        args.map(arg => arg === 'https://github.com/ChengshuLi/WorldAtlas.git' ? 'file://' + f.origin : arg), options)
+    });
+    await a.resolvePath(id, pin.path);
+    await a.acquire(pin, {bytes: row.size, sha256: digest(raw)});
+    assert.equal(f.git(f.destination, ['cat-file', 'blob', row.sha]).toString(), raw);
+    assert.throws(() => f.git(f.destination, ['cat-file', '-e', id]));
+    assert(!fs.existsSync(path.join(f.destination, 'shallow')));
+    const after = f.git(f.destination, ['cat-file', '--batch-all-objects', '--batch-check=%(objectname)']).toString().trim().split('\n');
+    assert.deepEqual(after.filter(id => !before.includes(id)), [row.sha]);
+    assert.equal(a.summary().origin_metadata_imports, 0); assert.equal(a.summary().fetched_objects, 1);
+    await assert.rejects(a.acquire({...pin, git_blob_oid: 'f'.repeat(40)}, {bytes: row.size}), /differs from tree/);
+    assert.equal(a.summary().fetched_objects, 1);
+  } finally { f.close(); }
+});
