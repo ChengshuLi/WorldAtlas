@@ -653,6 +653,12 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
           ||evidence.version===3&&evidence.kind==='source-target-native-evidence-v3')
           &&Array.isArray(evidence.families)&&evidence.families.length>0&&Array.isArray(evidence.targets)&&evidence.targets.length>0,
           'missing source-target evidence roles');
+        // Completed source-target authorities are consumed through the exact
+        // rule, binding, constructor, evidence and patch pins above. Historical
+        // source operands remain bound inside evidence, but are not current
+        // package inputs. Scientific qualification still runs in geography.
+        // Match packageProjection; unqualified authorities retain the full walk.
+        if (entry.completed_constructor !== undefined) continue;
         for (const role of ['catalogue','physical_evidence','physical_input','owner_roster','native_latitudes']) pin(evidence[role]);
         if(evidence.canonical_seam_views!==undefined){
           const views=await pinnedJSON(evidence.canonical_seam_views);
