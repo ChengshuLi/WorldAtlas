@@ -221,15 +221,19 @@ async function storedProduct(session,reader,p,domain,ledger) {
   (session.stores??=new Set()).add(store);
   if(ledger==='envelope'||ledger==='custody')return store.metadata;
   const wrap=row=>Object.freeze({y:row.y,runs:nativeSequence(row.count,()=>store.intervals(row))});
-  if(!ledger)return {...store.metadata,rows:nativeSequence(store.rowCount,
-    function*(){for(const row of store.rowEntries())yield wrap(row);},
-    {rowAt:y=>{const row=store.rowAt(y);return row?wrap(row):undefined;}})};
   const componentView=component=>Object.freeze({...store.componentMetadata(component),
     ...(component.hasNativeRows?{native_rows:nativeSequence(component.rowCount,
       function*(){for(const row of store.componentRows(component))yield wrap(row);})}:{})});
-  return {...store.metadata,[ledger==='constructor'?'ledger_rows':'rows']:nativeSequence(store.componentCount,
+  const product=Object.freeze(ledger?{...store.metadata,[ledger==='constructor'?'ledger_rows':'rows']:nativeSequence(store.componentCount,
     function*(){for(const component of store.componentEntries())yield componentView(component);},
-    {entryAt:ordinal=>componentView(store.componentAt(ordinal))})};
+    {entryAt:ordinal=>componentView(store.componentAt(ordinal))})}:
+    {...store.metadata,rows:nativeSequence(store.rowCount,
+      function*(){for(const row of store.rowEntries())yield wrap(row);},
+      {rowAt:y=>{const row=store.rowAt(y);return row?wrap(row):undefined;}})});
+  // This exact frozen view only reads its invocation-owned immutable store.
+  // Admission already hashed its complete canonical value, not its wire bytes.
+  (session.productStores??=new WeakMap()).set(product,store);
+  return product;
 }
 async function readSelectionProducts(session, reader) {
   const selection = readNamed(session, reader, 'data/ownership-selection.json');
@@ -743,8 +747,10 @@ async function admitDerivedCheckpoint(session,reader,archiveReader,accepted,sele
   const selected=selectedInput??await readSelectionProducts(session,reader);
   supported(same(selected.selection,facts.candidate_selection), 'Accepted checkpoint does not cover the actual complete selector');
   const manifest=readNamed(session,reader,selected.selection.manifest_path,selected.selection.sha256);
-  demand(same(facts.candidate_bindings,{ledger_sha256:valueSha(selected.ledger),registry_sha256:valueSha(selected.registry),
-    patch_sha256:valueSha(selected.patch),manifest_sha256:valueSha(manifest)}),
+  const ledgerStore=session.productStores.get(selected.ledger),patchStore=session.productStores.get(selected.patch);
+  demand(session.stores.has(ledgerStore)&&session.stores.has(patchStore), 'Missing live private selected product store');
+  demand(same(facts.candidate_bindings,{ledger_sha256:ledgerStore.canonical_sha256,registry_sha256:valueSha(selected.registry),
+    patch_sha256:patchStore.canonical_sha256,manifest_sha256:valueSha(manifest)}),
   'Accepted checkpoint changed the complete ledger/registry/patch/manifest');
   // Accepted aggregate consumers use request/facts only. Keep the other original
   // product pins in the certificate and route census; cold seeds and changed
@@ -1042,7 +1048,7 @@ export function releaseCheckpoint(state) {
   const session = proof.session; session.closed = true;
   try{closeStores(session);}finally{
     for (const handle of session.handles) states.delete(handle);
-    session.handles.clear(); session.executingPolicy=null;
+    session.handles.clear(); session.executingPolicy=null; session.productStores=null;
   }
 }
 
