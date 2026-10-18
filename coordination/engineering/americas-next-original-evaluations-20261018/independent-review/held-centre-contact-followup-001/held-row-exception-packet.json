@@ -1,6 +1,6 @@
 {
   "kind": "held-original-exception-evidence-packet-v1",
-  "scope": "Supplemental centre-contact evidence for the four original held land keys in existing Honduras issue #2462 and Nicaragua issue #2463. No new qualification or acceptance.",
+  "scope": "Supplemental centre-contact evidence for four original held land keys in existing Honduras issue #2462 and Nicaragua issue #2463. The 9513 previously qualified cells were accepted in PR #2469; this packet adds no new qualification or acceptance.",
   "input_provenance": {
     "native_helper_path": "src/native-grid.js",
     "native_helper_sha256": "66b453bbb2e001b9ff56bd754d55087f5919845dceeefd886016494cefa1d3e0",
@@ -177,8 +177,8 @@
     "scope_cells": 9517,
     "native_qualified_cells": 9513,
     "documented_exception_cells": 4,
-    "accepted_repair_cells": 0,
-    "selected_acceptance_cells": 0,
+    "accepted_repair_cells": 9513,
+    "selected_acceptance_cells": 9513,
     "disjoint": true,
     "country_counts": {
       "HND": {
@@ -208,16 +208,30 @@
       "contact_diagnostic_does_not_reclassify_or_clear_exceptions": true
     },
     "selected_patch_intersection": {
-      "accepted_commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
-      "accepted_tree": "c1df1bb415be741b182eccbdc4f23142d642e624",
-      "candidate_native_cells": 6203110,
-      "original_scope_coordinate_intersections": 0,
-      "original_scope_owner_intersections": 0,
-      "qualified_subset_coordinate_intersections": 0,
-      "qualified_subset_owner_intersections": 0,
-      "basis": "Original issues #2462 and #2463 record literal comparisons of each entire original request scope against this accepted baseline patch with zero coordinate and owner intersections. The qualified outputs are subsets of those original scopes, so their intersection is also exactly empty; this is a set-inclusion derivation, not a new scan."
+      "accepted_commit": "75861b9784f75b7894bfc51fa0419f40f966157d",
+      "current_tree": "07c74ff101d4ab5e679255ed85c402356aa54a42",
+      "original_scope_coordinate_intersections": 9513,
+      "accepted_coordinate_intersections": 9513,
+      "held_exception_cells": 4,
+      "wrong_owner_intersections": 0,
+      "country_partition": {
+        "HND": {
+          "original_scope_cells": 6633,
+          "accepted_cells": 6632,
+          "held_exception_cells": 1
+        },
+        "NIC": {
+          "original_scope_cells": 2884,
+          "accepted_cells": 2881,
+          "held_exception_cells": 3
+        }
+      },
+      "basis": "Independent reconciliation against the actual current selected patch reports the full original partitions as HND 6633 = 6632 accepted + 1 held and NIC 2884 = 2881 accepted + 3 held, with no wrong-owner overlap. The accepted cells match the native-qualified products and were accepted in PR #2469. The earlier 252f2aa comparison is historical only and is not used to infer current acceptance.",
+      "independent_receipt_locator": "hnd-nic-independent-partition.json",
+      "independent_receipt_repository_path": null,
+      "independent_receipt_commit": null
     },
-    "note": "The original full-scope native qualification partition is 9513 qualified cells plus four preserved documented exception cells. These are qualification counts, not accepted repair or selected-delivery credit. All four exception rows remain unresolved."
+    "note": "The original full-scope native qualification partition is 9513 cells, now accepted through PR #2469, plus four preserved documented exception cells. This supplemental contact evidence does not add repair or acceptance credit. All four exception rows remain unresolved."
   },
   "rows": [
     {
