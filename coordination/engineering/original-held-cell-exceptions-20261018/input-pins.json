@@ -366,12 +366,13 @@
   },
   "generated_observations": {
     "path": "native-center-observations.json",
-    "sha256": "47b28391a3c90127039b8b64e4c28d6a8641a01c5aff4185bf38fac5c55a808d",
-    "bytes": 14647
+    "sha256": "69db96041aed6960fc0799f52f9fb1fcbe6a42315661ce32a81e63147eb3057f",
+    "bytes": 15268
   },
   "limitations": [
     "The exact scanner establishes numerical membership/contact against the pinned bodies, not authoritative source applicability or territorial status.",
-    "An exception proposal is pending independent review and normal acceptance; no original held class, owner, source, package status, hold, or repair-credit count changes."
+    "An exception proposal is pending independent review and normal acceptance; no original held class, owner, source, package status, hold, or repair-credit count changes.",
+    "The Buu-Yao native query is against selected target.base_geometry, not the raw positive source operand; its no-hit does not establish source absence or no-repair eligibility."
   ],
   "exact_scanner": {
     "commit": "0005013ac140835fd35af6a2665973250118f118",
@@ -401,8 +402,8 @@
   },
   "reproduction_outputs": {
     "reproduced-native-centre-queries.json": {
-      "bytes": 16895,
-      "sha256": "200e0d37aa82fd606e7577cf5eff66a49a9bb7bdb59a482b8a545d124790d29c",
+      "bytes": 17121,
+      "sha256": "2dd37149ff737e70d6bfde9fe612541248c6504fbcc4bb6fde64ea10fee5e1ae",
       "runtime": "Node.js v24.21.0",
       "query_count": 18,
       "result": "all_retained_hit_lists_reproduced; observations_only",
