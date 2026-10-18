@@ -172,3 +172,97 @@ test('native merge cursors can share a fixed prefetch budget using single-record
  assert.deepEqual(rows,value.rows);assert.throws(()=>[...store.rowEntries({windowRecords:0})],/cursor window/);
  store.close();assert.deepEqual(fs.readdirSync(directory),[]);
 });
+
+// The complete-chunk case actually exercises synchronous tuple admission; every
+// two-chunk cut exercises the unchanged grammar whenever that tuple is split.
+const chunkCuts=function*(body){yield [body];for(let cut=0;cut<=body.length;cut++)yield [body.subarray(0,cut),body.subarray(cut)];};
+test('native inline triples preserve exact records and metadata at every chunk cut',async t=>{
+ const directory=temporary(t),text=' {"rows":[{"y":0,"runs":[ [0,10,1],\t[10, 4294967295,\r\n4294967295] ]}],"[0,1,1]":"[0,1,1] 😀\\ud800","array":[0,1,1],"__proto__":{"runs":"[0,1,1]"}}\n';
+ const body=Buffer.from(text),value=JSON.parse(text),expected=Buffer.alloc(24);
+ [0,10,1,10,4294967295,4294967295].forEach((n,i)=>expected.writeUInt32LE(n,i*4));
+ for(const parts of chunkCuts(body)){
+  const store=await open(directory,text,{chunks:parts,size:0xffffffff,ownerCount:0xffffffff});
+  try{
+   assert.deepEqual({...materialize(store),array:[...store.metadata.array]},value);assert.equal(store.canonical_sha256,hash(valueBytes(value)));
+   assert.equal(store.rowCount,1);assert.equal(store.runCount,2);
+   assert.deepEqual(fs.readFileSync(path.join(directory,fs.readdirSync(directory)[0],'runs.bin')),expected);
+  }finally{store.close();}
+ }
+ assert.deepEqual(fs.readdirSync(directory),[]);
+});
+
+test('native inline triples leave noncanonical numbers to the complete JSON grammar',async t=>{
+ const directory=temporary(t);
+ for(const tuple of ['[-0,1.0,1e0]','[0e99,10e-1,0.1e1]','[1e-324,1.00000000000000001,1E+0]',
+  '[0,4294967295.0000001,4294967295]','[0,1,4294967295.0]']){
+  const text='{"rows":[{"y":0,"runs":['+tuple+']}]}',body=Buffer.from(text),value=JSON.parse(valueBytes(JSON.parse(text)));
+  for(const parts of chunkCuts(body)){
+   const store=await open(directory,text,{chunks:parts,size:0xffffffff,ownerCount:0xffffffff});
+   assert.deepEqual(materialize(store),value);assert.equal(store.canonical_sha256,hash(valueBytes(value)));store.close();
+  }
+ }
+ assert.deepEqual(fs.readdirSync(directory),[]);
+});
+
+test('native inline triples defer invalid domains until final duplicate fields win',async t=>{
+ const directory=temporary(t);
+ for(const tuple of ['[0,0,1]','[3,2,1]','[0,101,1]','[0,1,0]','[0,1,11]',
+  '[0,4294967296,1]','[0,1,9007199254740993]','[0,1e400,1]','[0,1.5,1]']){
+  for(const text of [
+   '{"rows":[{"y":0,"runs":['+tuple+',[0,1,1]],"runs":[[2,3,2]]}]}',
+   '{"rows":[{"y":0,"runs":['+tuple+']}],"rows":[{"y":0,"runs":[[0,1,1]]}]}']){
+   const body=Buffer.from(text),value=JSON.parse(text);
+   for(const parts of chunkCuts(body)){
+    const store=await open(directory,text,{chunks:parts});assert.deepEqual(materialize(store),value);
+    assert.equal(store.canonical_sha256,hash(valueBytes(value)));store.close();
+   }
+  }
+  const text='{"rows":[{"y":0,"runs":['+tuple+']}]}';
+  await assert.rejects(open(directory,text,{chunks:[Buffer.from(text)]}),/Invalid complete native interval\/owner/);
+  assert.deepEqual(fs.readdirSync(directory),[]);
+ }
+});
+
+test('native inline triples reject malformed tuples and partials even before replacement',async t=>{
+ const directory=temporary(t);
+ for(const tuple of ['[00,1,1]','[+0,1,1]','[0,01,1]','[0,1.,1]','[0,1e,1]','[0,1,1,]',
+  '[0,1,,1]','[0,1 2,1]','[0,1,1]true','[0,1,1}','[0,1,1\u000b]']){
+  const text='{"rows":[{"y":0,"runs":['+tuple+']}],"rows":[]}',body=Buffer.from(text);
+  assert.throws(()=>JSON.parse(text));
+  for(const parts of chunkCuts(body)){
+   await assert.rejects(open(directory,text,{chunks:parts}));assert.deepEqual(fs.readdirSync(directory),[]);
+  }
+ }
+ const text='{"rows":[{"y":0,"runs":[[0,1,1],[2,3,1]]}]}',body=Buffer.from(text);
+ for(let cut=0;cut<body.length;cut++){
+  const partial=body.subarray(0,cut);await assert.rejects(open(directory,partial.toString(),{chunks:[partial]}));
+  assert.deepEqual(fs.readdirSync(directory),[]);
+ }
+});
+
+test('native inline triples avoid per-run JSON arrays, strings and promise dispatch',t=>{
+ const directory=temporary(t),module=new URL('../scripts/native-patch-store.mjs',import.meta.url).href;
+ const script=`import assert from 'node:assert/strict';import {createHash} from 'node:crypto';import {createHook} from 'node:async_hooks';
+  import {admitNativePatchStore} from ${JSON.stringify(module)};
+  const parse=JSON.parse,toString=Buffer.prototype.toString;let observed=null,parsing=false;
+  JSON.parse=function(value,...rest){const before=parsing;parsing=!!observed&&Buffer.isBuffer(value)&&value[0]===91;
+   try{const result=Reflect.apply(parse,this,[value,...rest]);if(parsing&&Array.isArray(result)&&result.length===3)observed.arrays++;return result;}finally{parsing=before;}};
+  Buffer.prototype.toString=function(...args){if(observed&&parsing)observed.strings++;return Reflect.apply(toString,this,args);};
+  const hook=createHook({init(_id,type){if(observed&&type==='PROMISE')observed.promises++;}}),results=[];
+  const warm=Buffer.from('{"rows":[]}');
+  (await admitNativePatchStore({directory:${JSON.stringify(directory)},chunks:[warm],size:256,ownerCount:3,expected:{bytes:warm.length,sha256:createHash('sha256').update(warm).digest('hex')}})).close();
+  for(const count of [1,8]){
+   const value={rows:Array.from({length:64},(_,y)=>({runs:Array.from({length:count},(_,i)=>[i*2,i*2+1,i%3+1]),y})),version:2};
+   const body=Buffer.from(JSON.stringify(value)+'\\n'),sha256=createHash('sha256').update(body).digest('hex'),record={count,arrays:0,strings:0,promises:0};
+   let store;try{observed=record;hook.enable();store=await admitNativePatchStore({directory:${JSON.stringify(directory)},chunks:[body],size:256,ownerCount:3,expected:{bytes:body.length,sha256}});
+    hook.disable();observed=null;assert.equal(store.canonical_sha256,sha256);assert.equal(store.runCount,64*count);
+    assert.deepEqual([...store.rowEntries()].map(row=>({runs:[...store.intervals(row)],y:row.y})),value.rows);results.push(record);
+   }finally{hook.disable();observed=null;store?.close();}
+  }
+  JSON.parse=parse;Buffer.prototype.toString=toString;console.log(JSON.stringify(results));`;
+ const result=spawnSync(process.execPath,['--input-type=module','-e',script],{encoding:'utf8',timeout:30000,env:{...process.env,NODE_OPTIONS:'',NODE_PATH:''}});
+ assert.equal(result.status,0,result.stderr);const observations=JSON.parse(result.stdout);
+ assert.deepEqual({allocations:observations.map(({arrays,strings})=>({arrays,strings})),extraPromises:observations[1].promises-observations[0].promises},
+  {allocations:[{arrays:0,strings:0},{arrays:0,strings:0}],extraPromises:0},result.stdout);
+ assert.deepEqual(fs.readdirSync(directory),[]);
+});
