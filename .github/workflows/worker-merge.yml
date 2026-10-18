@@ -283,8 +283,6 @@ jobs:
       # source/physical CLI fixtures with NumPy/Shapely. Keep their real runtime.
       - run: npm ci --no-audit --no-fund
         if: needs.prepare.outputs.profile == 'full' || needs.prepare.outputs.profile == 'evidence'
-      - run: python -m pip install -r requirements.txt
-        if: needs.prepare.outputs.profile == 'full' || needs.prepare.outputs.profile == 'evidence'
       - name: Assemble unchanged base with current selected output
         id: assembly
         if: needs.prepare.outputs.profile == 'full' && matrix.shard == 0 && needs.prepare.outputs.test_selection == 'selected-data'
@@ -315,6 +313,10 @@ jobs:
           assert len(body) == blob['size'] and hashlib.sha1(('blob ' + str(len(body)) + '\0').encode() + body).hexdigest() == blob['sha']
           exec(compile(body, '<authenticated selected package bootstrap>', 'exec'), {'__name__':'__main__'})
           PACKAGE_BOOTSTRAP
+      # Retained assembly uses Node and isolated Python standard-library extraction.
+      # Keep scientific dependencies for fallback builds and ordinary regressions.
+      - run: python -m pip install -r requirements.txt
+        if: (needs.prepare.outputs.profile == 'full' || needs.prepare.outputs.profile == 'evidence') && steps.assembly.outputs.assembled != 'true'
       - name: Snapshot original final-worker package inputs
         if: needs.prepare.outputs.profile == 'full' && matrix.shard == 0 && steps.assembly.outputs.assembled != 'true'
         run: node scripts/package-output-artifact.mjs --snapshot
