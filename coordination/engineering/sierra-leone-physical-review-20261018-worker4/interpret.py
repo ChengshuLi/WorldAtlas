@@ -176,7 +176,6 @@ def analyze(data):
             disposition = 'unresolved-specific-contact' if concerns else 'supported-limited-source-interpretation'
             observation = 'retained-mapped-support' if any(k in hits for k in ['mapped_land_support', 'mapped_inland_water_support']) else ('original-source-backed-outside-mapped-L1' if 'outside_mapped_L1_context' in hits else 'retained-witness-combination')
             component_tag = '+'.join(map(str, component_hits)) if component_hits else 'unknown'
-            qid = 'SLE-physical-' + str(r['source_index']) + '-component-' + component_tag
             evidence = {'source_polygon_indices': component_hits, 'complete_primary_membership': membership,
                         'secondary_source_membership': secondary_hits, 'physical_witness_hits': hits,
                         'physical_issue_contacts': issue_contacts, 'source_boundary_contact': boundary,
@@ -185,6 +184,10 @@ def analyze(data):
                         'existing_product_overlap': native['existing_product_overlap'], 'disposition': disposition,
                         'supported_observation': observation, 'specific_unresolved_concerns': concerns,
                         'physical_nature': 'No dated cell-specific coast/river/local evidence in these retained inputs establishes the actual surface or cause of disagreement.'}
+            # Outcome signatures exclude coordinates/interval order, preserving
+            # stable source/component questions without merging distinct facts.
+            outcome_sha = digest((json.dumps(evidence, sort_keys=True, separators=(',', ':')) + '\n').encode())
+            qid = 'SLE-physical-' + str(r['source_index']) + '-component-' + component_tag + '-outcome-' + outcome_sha[:12]
             observations.append({'interval_index': index, 'y': y, 'x': x, 'original_owner': owner,
                                  'source_id': identity, 'question_id': qid, **evidence})
             if parts and parts[-1]['end'] == x and parts[-1]['evidence'] == evidence:
@@ -193,6 +196,7 @@ def analyze(data):
                 parts.append({'start': x, 'end': x + 1, 'question_id': qid, 'evidence': evidence})
             question = questions.setdefault(qid, {'question_id': qid, 'owner_index': owner, 'source_feature_index': r['source_index'],
                 'source_id': identity, 'source_polygon_indices': component_hits, 'name': r['name'], 'reference_year': 2017,
+                'outcome_signature': evidence, 'outcome_signature_sha256': outcome_sha,
                 'native_cells': 0, 'interval_indices': [], 'cell_center_bounds': [longitude, latitude, longitude, latitude],
                 'observed_disposition_counts': {}, 'observed_concerns': [],
                 'question': 'Which dated coast/river/local and territorial-source evidence explains these exact original reference-district cells and the observed retained-source/selected-state contacts?',
