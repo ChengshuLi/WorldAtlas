@@ -805,6 +805,62 @@ test('genuine larger source geometry is reflected in certificate and original co
 import {createHash} from 'node:crypto';
 import {nativeSequence} from '../src/native-grid.js';
 import {deriveCoordinateDelta as eagerCoordinateDelta} from './fixtures/coordinate-delta-eager.mjs';
+for(const kind of ['array','sequence'])test('public coordinate delta binds '+kind+' lookup to validated iteration',()=>{
+ const {certificate}=fixtures(),good=addition('good','A',1,certificate.entries[0][7],1.05),
+  other=addition('other','B',2,certificate.entries[1][7],10);
+ let lookups=0;
+ const additions=kind==='array'?[good]:nativeSequence(1,function*(){yield good;},{entryAt:()=>{lookups++;return other;}});
+ if(kind==='array')Object.defineProperty(additions,'at',{value:()=>{lookups++;return other;}});
+ const inputs={certificate,oldAdditions:[],additions,selection:{next:true}};
+ assert.deepEqual(deriveCoordinateDelta(inputs),eagerCoordinateDelta({...inputs,additions:[good]}));
+ assert.equal(lookups,0,'Untrusted random access must not replace the iterated row');
+});
+test('public coordinate delta binds old additions to one iterated view',()=>{
+ const {certificate}=fixtures(),old=addition('old','A',1,certificate.entries[0][7],.3),
+  other=addition('other','B',2,certificate.entries[1][7],10);
+ let iterations=0,lookups=0;
+ const oldAdditions=nativeSequence(1,function*(){yield ++iterations===1?old:other;},
+  {entryAt:()=>{lookups++;return other;}});
+ const inputs={certificate,oldAdditions,additions:[old],selection:{next:true}};
+ assert.deepEqual(deriveCoordinateDelta(inputs),eagerCoordinateDelta({...inputs,oldAdditions:[old]}));
+ assert.equal(iterations,1);assert.equal(lookups,0);
+});
+for(const kind of ['array','sequence'])for(const count of [0,2])
+test('public coordinate delta refuses '+kind+' iterator count '+count+' for declared length one',()=>{
+ const {certificate}=fixtures(),row=addition('one','A',1,certificate.entries[0][7],.3);
+ const entries=function*(){for(let i=0;i<count;i++)yield {...row,component_id:'component-'+i};};
+ const additions=kind==='array'?[row]:nativeSequence(1,entries,{entryAt:()=>row});
+ if(kind==='array')Object.defineProperty(additions,Symbol.iterator,{value:entries});
+ assert.throws(()=>deriveCoordinateDelta({certificate,oldAdditions:[],additions,selection:{}}),
+  /Duplicate complete primitive identity|Native sequence (omitted declared entries|exceeds declared count)/);
+});
+test('qualified coordinate delta consumes normalized native semantics without replay',async t=>{
+ const f=await trustedFixture(t,{nativeAppend:true}),baseline=await f.api.qualifyCheckpoint({reader:f.reader});
+ const next=await appendNativeAuthority(f,{completedConstructor:true});
+ const reader=new f.native.ImmutableReader(f.root,next.candidate,{invocation:f.reader.invocation});
+ const open=fs.openSync,read=fs.readSync,intervals=new Set();let normalizedReads=0;
+ fs.openSync=function(name,...args){const fd=open.call(this,name,...args);if(String(name).endsWith('/runs.bin'))intervals.add(fd);return fd;};
+ fs.readSync=function(fd,...args){
+  if(intervals.has(fd)){
+   const stack=new Error().stack;
+   if(stack.includes('nativeOnlyComponent')){
+    assert(!/coordinateDelta|deriveCoordinateDelta|deriveQualifiedCoordinateDelta/.test(stack),
+     'Qualified coordinate projection replayed native component validation');
+    if(stack.includes('normaliseRetainedRepairLedger'))normalizedReads++;
+   }
+  }
+  return read.call(this,fd,...args);
+ };
+ try {
+  const transition=await f.api.qualifyTransition({state:baseline.state,reader});assert.equal(transition.available,true);
+  assert(normalizedReads>0,'The actual candidate normalizer must still read and validate native intervals');
+  const expected=eagerCoordinateDelta({certificate:baseline.state.certificate,
+   oldAdditions:nativeLiteral(baseline.state.additions),additions:nativeLiteral(transition.candidate.additions),
+   selection:transition.candidate.selection});
+  assert.deepEqual(transition.candidate.certificate,expected.certificate);
+  assert.deepEqual(transition.changedIds,expected.changedIds);
+ } finally {fs.openSync=open;fs.readSync=read;f.api.releaseCheckpoint(baseline.state);}
+});
 test('indexed coordinate grouping preserves exact eager values, ordering and refusal messages',()=>{
  assert.equal(createHash('sha256').update(fs.readFileSync(new URL('./fixtures/coordinate-delta-eager.mjs',import.meta.url))).digest('hex'),
   'c98d006cde4f2eb6d323c899b530413b59fb1f6ead4337c436c962f0ffb31f89');

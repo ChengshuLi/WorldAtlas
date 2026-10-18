@@ -1450,7 +1450,7 @@ export async function qualifyTransition({state,reader}) {
         && priorReference.footprints_sha256===metadata.nativeReference.footprints_sha256)
       && selected.envelope.effective_reference.hierarchy_sha256===selected.envelope.base_reference.hierarchy_sha256,
     'Candidate silently changes complete base release or hierarchy');
-    const {certificate,changedIds}=deriveCoordinateDelta({certificate:metadata.certificate,oldAdditions:state.additions,additions,selection:selected.selection});
+    const {certificate,changedIds}=deriveQualifiedCoordinateDelta({certificate:metadata.certificate,oldAdditions:state.additions,additions,selection:selected.selection});
     const candidate=newState(session,{...state,selected_commit:reader.version,selection:selected.selection,certificate,
       additions,ledger:selected.ledger,registry:selected.registry,patch:selected.patch},
       {...operandProof,selected,oldAuthorities:new Map([...authorities].map(([key,p])=>[key,{entry:p.entry,nativeOnly:!!p.nativeOnly}])),
@@ -1482,6 +1482,31 @@ export function authenticateTransition({transition}) {
 // Pure arithmetic only. This function cannot mint a checkpoint, projector or
 // selected certificate capability; callers must still qualify all operands.
 export function deriveCoordinateDelta({certificate,oldAdditions,additions,selection}) {
+  // Public sequences provide storage, not an iterator/index consistency proof.
+  // Bind every later lookup to the outer rows actually iterated here. Nested
+  // stored geometry/intervals remain borrowed and retain their lifetime guards.
+  const snapshot=source=>{
+    demand(isNativeSequence(source),'Missing complete primitive sequence');
+    const rows=[];
+    for(const row of source){
+      demand(rows.length<source.length,'Duplicate complete primitive identity');rows.push(row);
+    }
+    demand(rows.length===source.length,'Duplicate complete primitive identity');return rows;
+  };
+  return coordinateDelta({certificate,oldAdditions:snapshot(oldAdditions),additions:snapshot(additions),selection},
+    row=>nativeOnlyComponent(row,valueSha));
+}
+
+// The only caller is qualifyTransition, after readSelection fully normalizes
+// candidate rows and old projected operands are bound to a genuine live state.
+// checkpointAdditions borrows immutable admitted storage: its iterator and index
+// are the same rows, and all native semantics were already checked. Keep the
+// common target/owner/base, duplicate and old projected-equality guards below;
+// in particular raw old-row equality does not authorize a changed legacy rebind.
+function deriveQualifiedCoordinateDelta(operands) {
+  return coordinateDelta(operands,row=>row.representation==='native-cells');
+}
+function coordinateDelta({certificate,oldAdditions,additions,selection},nativeComponent) {
   const oldById=new Set(oldAdditions.map(repairComponentKey)),ordinals=new Map();let ordinal=0;
   for(const row of additions)ordinals.set(repairComponentKey(row),ordinal++);
   demand(oldById.size===oldAdditions.length && ordinals.size===additions.length,
@@ -1494,7 +1519,7 @@ export function deriveCoordinateDelta({certificate,oldAdditions,additions,select
   ordinal=0;
   for (const row of additions) {
     demand(rows.has(row.target_id) && row.pixelIndex===rows.get(row.target_id)[1]
-      && row.base_geometry_sha256===rows.get(row.target_id)[7] && (nativeOnlyComponent(row,valueSha) || row.geometry_sha256===valueSha(row.geometry)),
+      && row.base_geometry_sha256===rows.get(row.target_id)[7] && (nativeComponent(row) || row.geometry_sha256===valueSha(row.geometry)),
     'Appended primitive targets a stale base, changed geometry or different owner');
     let group=byTarget.get(row.target_id);if(!group){group={all:[],added:[]};byTarget.set(row.target_id,group);}
     group.all.push(ordinal);
@@ -1508,7 +1533,7 @@ export function deriveCoordinateDelta({certificate,oldAdditions,additions,select
     const bounds=(a,b)=>[Math.min(a[0],b[0]),Math.min(a[1],b[1]),Math.max(a[2],b[2]),Math.max(a[3],b[3])];
     let box=row[9].reduce(bounds);
     for(const at of group.added){const p=additions.at(at);
-      for(const next of nativeOnlyComponent(p,valueSha)?[p.native_bounds]:coordinateBounds(p.geometry))box=bounds(box,next);}
+      for(const next of nativeComponent(p)?[p.native_bounds]:coordinateBounds(p.geometry))box=bounds(box,next);}
     const next=[...row]; next[8]=valueSha({base_geometry_sha256:row[7],additions:all});
     next[9]=[box];
     return next;
