@@ -1,0 +1,69 @@
+{
+  "kind": "actual-original-CAF-source-physical-native-result",
+  "actual_author_worker_id": "01a14d05-d4b1-7017-9f92-7fd78a0d402c",
+  "allocation_base": "0005013ac140835fd35af6a2665973250118f118",
+  "original_scope": {
+    "land_cells": 2130,
+    "inland_water_cells": 0,
+    "intervals": 1319,
+    "positive_owners": 46,
+    "positive_atoms": 46,
+    "positive_parents": 31,
+    "complete_primary_context": 175,
+    "complete_context_parents": 72,
+    "complete_ancestor_records": 76
+  },
+  "foreign": {
+    "complete_families": 365,
+    "complete_features": 73303,
+    "whole_required_families": 13,
+    "whole_native_dbf_rows": 1092,
+    "conservative_contact_features": 69,
+    "raw_disjoint_features": 73231,
+    "separately_periodic_reconciled": 3,
+    "unresolved": 0
+  },
+  "physical": {
+    "whole_members": 46,
+    "results": 46,
+    "issue_rows": 0,
+    "query_witnesses": 93,
+    "full_candidate_reconstructions": 46,
+    "explicit_disjoints": 47,
+    "immutable_result_commit": "1f655c379e938d7ecf0f044f2f01da0a49b21b4b"
+  },
+  "original_native_refusal": {
+    "reason": "Proposed native cells lack unique source-target coverage",
+    "diagnostic_commit": "9ac9f46f7d6ebece2dfdd43a4805893beb209f85"
+  },
+  "actual_partition": {
+    "original_cells": 2130,
+    "supported_cells": 1669,
+    "held_cells": 461,
+    "held_reason": "territorial_exclusion_cells",
+    "original_owner_records": 46,
+    "surviving_positive_atoms": 34,
+    "wholly_held_owners": 12,
+    "decision_cell_counts": {
+      "territorial_exclusion_cells": 461,
+      "assigned_cells": 1669
+    },
+    "immutable_inputs_commit": "58cbec91fe8cfba270f9d9d53711d51a611d695f"
+  },
+  "qualified_native": {
+    "cells": 1669,
+    "components": 34,
+    "ledger_rows": 34,
+    "rule_sha256": "11b03959c48b0dc1f20764764082d9d02ca5658ee6a3bbb7054880aa321b31a7",
+    "constructor_result_path": "native-authority-supported-001/constructor-result.json"
+  },
+  "selected_consumer_run": false,
+  "public_issue_pr_or_composition_created": false,
+  "new_accepted_cells": 0,
+  "limits": [
+    "Native qualification is for actual1669supported originalcells only; all461heldoriginalcells andall46originalownerrecords remainretained.",
+    "No currentselectedownerzero, selectedconsumerconservation, currentlaw/899crosswalk, blanketredistribution or publication acceptance is asserted.",
+    "All13wholeforeignfamilies/wholeRaga andthreephysicaldescendants, completephysicalinputs/querywitnesses and175primarycontext remainpinned.",
+    "Retain CMRderivative/baseBYSA, ODbLdatabase/docs, SSDexpressmetagrant-vsgenericimage/2013XML/1970maprights, COD/FODunseenreference, CAF2footer, vintage/CRS/territoriallimits."
+  ]
+}
