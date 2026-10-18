@@ -1,0 +1,581 @@
+{
+  "version": 1,
+  "package_id": "gb-LBR-ADM2--repair-evaluation",
+  "method": "Exact immutable integer-row/owner key joins only; no geometry or producer replay.",
+  "original_cells": 2026,
+  "original_land_cells": 2026,
+  "original_water_cells": 0,
+  "original_intervals": 1005,
+  "original_owners": 47,
+  "all_original_source_atoms": 47,
+  "qualified_cells": 2025,
+  "stock_held_cells": 1,
+  "qualified_components": 47,
+  "ledger_equals_supported_patch": true,
+  "partition_disjoint": true,
+  "partition_exact_original_union": true,
+  "owner_reassignments": 0,
+  "all_original_classes_land": true,
+  "all_non_target_source_fields_identical": true,
+  "surviving_targets_identical_except_coverage_rows": true,
+  "all_territorial_operands_preserved": true,
+  "all_original_owners": [
+    {
+      "owner": 26946,
+      "id": "gb:LBR:ADM2:62588387B13670701840793",
+      "name": "Quardu Boundi",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B13670701840793"
+      ],
+      "original_cells": 93,
+      "qualified_cells": 93,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 26947,
+      "id": "gb:LBR:ADM2:62588387B17056544161092",
+      "name": "Zota",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B17056544161092"
+      ],
+      "original_cells": 18,
+      "qualified_cells": 18,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 26948,
+      "id": "gb:LBR:ADM2:62588387B17909685690178",
+      "name": "Vahun",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B17909685690178"
+      ],
+      "original_cells": 19,
+      "qualified_cells": 19,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 26951,
+      "id": "gb:LBR:ADM2:62588387B18809430914172",
+      "name": "Kongba",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B18809430914172"
+      ],
+      "original_cells": 6,
+      "qualified_cells": 6,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 26952,
+      "id": "gb:LBR:ADM2:62588387B20671280647544",
+      "name": "Konobo",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B20671280647544"
+      ],
+      "original_cells": 14,
+      "qualified_cells": 14,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 26957,
+      "id": "gb:LBR:ADM2:62588387B22492671376188",
+      "name": "Commonwealth 2",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B22492671376188"
+      ],
+      "original_cells": 13,
+      "qualified_cells": 13,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 26959,
+      "id": "gb:LBR:ADM2:62588387B25205457381815",
+      "name": "Kolahun",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B25205457381815"
+      ],
+      "original_cells": 19,
+      "qualified_cells": 19,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 26965,
+      "id": "gb:LBR:ADM2:62588387B28167569470031",
+      "name": "Grand Cess Wedabo",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B28167569470031"
+      ],
+      "original_cells": 71,
+      "qualified_cells": 71,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 26968,
+      "id": "gb:LBR:ADM2:62588387B29328841835384",
+      "name": "Salayea",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B29328841835384"
+      ],
+      "original_cells": 252,
+      "qualified_cells": 252,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 26970,
+      "id": "gb:LBR:ADM2:62588387B31416079447902",
+      "name": "Kparblee",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B31416079447902"
+      ],
+      "original_cells": 92,
+      "qualified_cells": 92,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 26972,
+      "id": "gb:LBR:ADM2:62588387B32884824633153",
+      "name": "District #1",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B32884824633153"
+      ],
+      "original_cells": 11,
+      "qualified_cells": 11,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 26973,
+      "id": "gb:LBR:ADM2:62588387B34130334496008",
+      "name": "Barclayville",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B34130334496008"
+      ],
+      "original_cells": 18,
+      "qualified_cells": 18,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 26980,
+      "id": "gb:LBR:ADM2:62588387B39118473724395",
+      "name": "Zorzor",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B39118473724395"
+      ],
+      "original_cells": 9,
+      "qualified_cells": 9,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 26981,
+      "id": "gb:LBR:ADM2:62588387B40614732140726",
+      "name": "Sam Gbalor",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B40614732140726"
+      ],
+      "original_cells": 52,
+      "qualified_cells": 52,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 26983,
+      "id": "gb:LBR:ADM2:62588387B4114270001160",
+      "name": "Gbehlay-Geh",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B4114270001160"
+      ],
+      "original_cells": 8,
+      "qualified_cells": 8,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 26987,
+      "id": "gb:LBR:ADM2:62588387B45934307689461",
+      "name": "Buu-Yao",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B45934307689461"
+      ],
+      "original_cells": 184,
+      "qualified_cells": 183,
+      "stock_held_cells": 1
+    },
+    {
+      "owner": 26989,
+      "id": "gb:LBR:ADM2:62588387B48887094579275",
+      "name": "Glio-Twarbo",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B48887094579275"
+      ],
+      "original_cells": 71,
+      "qualified_cells": 71,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 26991,
+      "id": "gb:LBR:ADM2:62588387B49218131763508",
+      "name": "Gbao",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B49218131763508"
+      ],
+      "original_cells": 13,
+      "qualified_cells": 13,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 26992,
+      "id": "gb:LBR:ADM2:62588387B50517390877930",
+      "name": "Panta",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B50517390877930"
+      ],
+      "original_cells": 35,
+      "qualified_cells": 35,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 26994,
+      "id": "gb:LBR:ADM2:62588387B5166019461138",
+      "name": "Kpayan",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B5166019461138"
+      ],
+      "original_cells": 1,
+      "qualified_cells": 1,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 27005,
+      "id": "gb:LBR:ADM2:62588387B58471335034652",
+      "name": "Butaw",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B58471335034652"
+      ],
+      "original_cells": 50,
+      "qualified_cells": 50,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 27006,
+      "id": "gb:LBR:ADM2:62588387B58887581868104",
+      "name": "Garwula",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B58887581868104"
+      ],
+      "original_cells": 75,
+      "qualified_cells": 75,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 27007,
+      "id": "gb:LBR:ADM2:62588387B59492535947478",
+      "name": "Dugbe River",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B59492535947478"
+      ],
+      "original_cells": 16,
+      "qualified_cells": 16,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 27009,
+      "id": "gb:LBR:ADM2:62588387B59975354142856",
+      "name": "Mambah Kaba",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B59975354142856"
+      ],
+      "original_cells": 41,
+      "qualified_cells": 41,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 27010,
+      "id": "gb:LBR:ADM2:62588387B61310853787803",
+      "name": "District #4",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B61310853787803"
+      ],
+      "original_cells": 69,
+      "qualified_cells": 69,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 27011,
+      "id": "gb:LBR:ADM2:62588387B61657259363442",
+      "name": "Twan River",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B61657259363442"
+      ],
+      "original_cells": 10,
+      "qualified_cells": 10,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 27012,
+      "id": "gb:LBR:ADM2:62588387B62156042060365",
+      "name": "B'hai",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B62156042060365"
+      ],
+      "original_cells": 20,
+      "qualified_cells": 20,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 27013,
+      "id": "gb:LBR:ADM2:62588387B62702599090886",
+      "name": "Greater Monrovia",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B62702599090886"
+      ],
+      "original_cells": 151,
+      "qualified_cells": 151,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 27015,
+      "id": "gb:LBR:ADM2:62588387B63326242332262",
+      "name": "St. Paul River",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B63326242332262"
+      ],
+      "original_cells": 41,
+      "qualified_cells": 41,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 27017,
+      "id": "gb:LBR:ADM2:62588387B63754413826366",
+      "name": "Garraway",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B63754413826366"
+      ],
+      "original_cells": 27,
+      "qualified_cells": 27,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 27021,
+      "id": "gb:LBR:ADM2:62588387B65193305891299",
+      "name": "Harper",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B65193305891299"
+      ],
+      "original_cells": 45,
+      "qualified_cells": 45,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 27023,
+      "id": "gb:LBR:ADM2:62588387B65725534392235",
+      "name": "Upper Jloh",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B65725534392235"
+      ],
+      "original_cells": 16,
+      "qualified_cells": 16,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 27024,
+      "id": "gb:LBR:ADM2:62588387B6652087258063",
+      "name": "Fen River",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B6652087258063"
+      ],
+      "original_cells": 44,
+      "qualified_cells": 44,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 27025,
+      "id": "gb:LBR:ADM2:62588387B67611028502926",
+      "name": "Neekreen",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B67611028502926"
+      ],
+      "original_cells": 2,
+      "qualified_cells": 2,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 27028,
+      "id": "gb:LBR:ADM2:62588387B68895676065239",
+      "name": "Greenville",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B68895676065239"
+      ],
+      "original_cells": 55,
+      "qualified_cells": 55,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 27033,
+      "id": "gb:LBR:ADM2:62588387B7448810269647",
+      "name": "Dowein",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B7448810269647"
+      ],
+      "original_cells": 53,
+      "qualified_cells": 53,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 27035,
+      "id": "gb:LBR:ADM2:62588387B76680524179510",
+      "name": "Porkpa",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B76680524179510"
+      ],
+      "original_cells": 3,
+      "qualified_cells": 3,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 27038,
+      "id": "gb:LBR:ADM2:62588387B79134287051190",
+      "name": "Tchien",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B79134287051190"
+      ],
+      "original_cells": 6,
+      "qualified_cells": 6,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 27041,
+      "id": "gb:LBR:ADM2:62588387B79313023095428",
+      "name": "Lower Jloh",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B79313023095428"
+      ],
+      "original_cells": 13,
+      "qualified_cells": 13,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 27042,
+      "id": "gb:LBR:ADM2:62588387B80156561530658",
+      "name": "Sanquin Dist #3",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B80156561530658"
+      ],
+      "original_cells": 43,
+      "qualified_cells": 43,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 27043,
+      "id": "gb:LBR:ADM2:62588387B80284911734552",
+      "name": "Owensgrove",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B80284911734552"
+      ],
+      "original_cells": 33,
+      "qualified_cells": 33,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 27044,
+      "id": "gb:LBR:ADM2:62588387B80584494728088",
+      "name": "Commonwealth",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B80584494728088"
+      ],
+      "original_cells": 147,
+      "qualified_cells": 147,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 27045,
+      "id": "gb:LBR:ADM2:62588387B81783560061544",
+      "name": "Voinjama",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B81783560061544"
+      ],
+      "original_cells": 29,
+      "qualified_cells": 29,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 27046,
+      "id": "gb:LBR:ADM2:62588387B82144239475407",
+      "name": "Garr-Bain",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B82144239475407"
+      ],
+      "original_cells": 7,
+      "qualified_cells": 7,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 27066,
+      "id": "gb:LBR:ADM2:62588387B92809240343923",
+      "name": "Felo-Jekwi",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B92809240343923"
+      ],
+      "original_cells": 7,
+      "qualified_cells": 7,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 27070,
+      "id": "gb:LBR:ADM2:62588387B94510923567486",
+      "name": "Yarmein",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B94510923567486"
+      ],
+      "original_cells": 5,
+      "qualified_cells": 5,
+      "stock_held_cells": 0
+    },
+    {
+      "owner": 27071,
+      "id": "gb:LBR:ADM2:62588387B94896309973685",
+      "name": "Foya",
+      "source_atoms": [
+        "gb:LBR:ADM2:62588387B94896309973685"
+      ],
+      "original_cells": 19,
+      "qualified_cells": 19,
+      "stock_held_cells": 0
+    }
+  ],
+  "fully_stock_held_owners": [],
+  "stock_hold_reasons": {
+    "territorial_exclusion_cells": 1
+  },
+  "complete_stock_held_rows": [
+    {
+      "runs": [
+        [
+          124938,
+          124939,
+          26987,
+          "territorial_exclusion_cells"
+        ]
+      ],
+      "y": 126219
+    }
+  ],
+  "complete_held_original_interval_context": [
+    [
+      126219,
+      124938,
+      124939,
+      [
+        26987
+      ],
+      [
+        17746,
+        41512,
+        41530
+      ],
+      "land"
+    ]
+  ],
+  "stock_per_key_causal_foreign_feature": "Not identified by the stock diagnostic; independent review evidence is distinct.",
+  "new_accepted_cells": 0,
+  "limits": [
+    "All47 original source atoms, physical records and full136domestic/617foreign source context remain preserved.",
+    "Constructor qualification is not actual current-owner-zero, final selected-output acceptance, legal/territorial clearance, integration or delivery.",
+    "Existing research802/813andparent-source1077acceptance remains separate."
+  ]
+}
