@@ -1,0 +1,22 @@
+{
+  "tag": "physical-001",
+  "cwd": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0f3d792478426ce8bbf8f8646036980b6da5f3b0837c8945e0ba933be6452e8a/work",
+  "command": [
+    "/usr/bin/time",
+    "-l",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "physical",
+    "coordination/engineering/liberia-original-repair-20261018/config/physical-001.json",
+    "coordination/engineering/liberia-original-repair-20261018/physical-001"
+  ],
+  "timeout_seconds": 300,
+  "config_commit": "5769270329cd6c649bc29821db81750bf06a6f34",
+  "original_scope_cells": 2026,
+  "whole_requested_members": 47,
+  "started_at": "2026-10-18T02:28:45.287128+00:00",
+  "no_custom_memory_policy_fields": true,
+  "exit_code": 0,
+  "elapsed_seconds": 17.426903375000002,
+  "finished_at": "2026-10-18T02:29:02.716208+00:00"
+}
