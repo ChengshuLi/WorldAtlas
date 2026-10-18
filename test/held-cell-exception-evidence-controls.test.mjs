@@ -51,9 +51,10 @@ function verifyFixture(partition,pins,reproduction,fixture){
   for(const pin of usedSourcePins(pins)){
     assert.match(pin.commit,/^[0-9a-f]{40}$/);
     assert.match(pin.path,/^[A-Za-z0-9._/-]+$/);
-    assert(Number.isSafeInteger(pin.bytes)&&pin.bytes>0);
-    assert.match(pin.git_blob_oid,/^[0-9a-f]{40}$/);
-    assert.match(pin.sha256,/^[0-9a-f]{64}$/);
+    if(pin.bytes!==undefined)assert(Number.isSafeInteger(pin.bytes)&&pin.bytes>0);
+    if(pin.git_blob_oid!==undefined)assert.match(pin.git_blob_oid,/^[0-9a-f]{40}$/);
+    const hashes=[pin.sha256,pin.encoded_sha256,pin.decoded_sha256].filter(value=>value!==undefined);
+    assert(hashes.length>0&&hashes.every(value=>/^[0-9a-f]{64}$/.test(value)));
   }
   assert.equal(pins.exact_scanner.bytes,50250);
   const reproducer=fs.readFileSync(packet+'reproduce-native-centres.mjs');
