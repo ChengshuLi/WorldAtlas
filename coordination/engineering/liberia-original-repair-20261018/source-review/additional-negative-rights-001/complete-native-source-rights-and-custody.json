@@ -1,0 +1,690 @@
+{
+  "kind": "actual-whole-native-archive-rights-custody",
+  "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+  "domestic_context_families": 2,
+  "complete_foreign_negative_families": [
+    "gb:CIV:ADM1",
+    "gb:CIV:ADM2",
+    "gb:CIV:ADM3",
+    "gb:GIN:ADM1",
+    "gb:GIN:ADM2",
+    "gb:SLE:ADM1",
+    "gb:SLE:ADM2"
+  ],
+  "complete_native_archives": 9,
+  "complete_native_features": 768,
+  "foreign_native_features": 617,
+  "all_whole_pointers_authenticated": true,
+  "archives": [
+    {
+      "family": "gb:LBR:ADM1",
+      "role": "domestic-context",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "upstream_path": "sourceData/gbOpen/LBR_ADM1.zip",
+      "pointer_git_blob_oid": "219f0ad02bd35307d291edd8d8625f3ec42fe7d9",
+      "local_whole_archive": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0f3d792478426ce8bbf8f8646036980b6da5f3b0837c8945e0ba933be6452e8a/work/coordination/engineering/liberia-original-repair-20261018/source-rights/LBR_ADM1.zip",
+      "bytes": 387802,
+      "sha256": "5fa8de2cb03328883a57dcf82685486f6ef9d347da4f16b7f57c3e27fe375f2b",
+      "native_dbf_shx_features": 15,
+      "metadata": "Boundary Representative of Year: 2021\r\nISO-3166-1 (Alpha-3): LBR\r\nBoundary Type: ADM1\r\nCanonical Boundary Type Name: Counties\r\nSource 1: UNMIL\r\nSource 2: OCHA ROWCA\r\nRelease Type: gbOpen\r\nLicense: Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)\t\r\nLicense Notes: \r\nLicense Source: https://data.humdata.org/dataset/liberia-admin-level-2-boundaries\r\nLink to Source Data: https://data.humdata.org/dataset/liberia-admin-level-2-boundaries\r\nOther Notes: ",
+      "native_prj": "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137,298.257223563]],PRIMEM[\"Greenwich\",0],UNIT[\"Degree\",0.017453292519943295]]",
+      "native_metadata_constraints": [],
+      "members": [
+        {
+          "path": "LBR_ADM1.dbf",
+          "bytes": 1194,
+          "sha256": "b1c2f5967a595975c2eb5040fca6cc129cde6fb6488ee553ff207bbdec1db936"
+        },
+        {
+          "path": "LBR_ADM1.prj",
+          "bytes": 143,
+          "sha256": "98aaf3d1c0ecadf1a424a4536de261c3daf4e373697cb86c40c43b989daf52eb"
+        },
+        {
+          "path": "LBR_ADM1.qpj",
+          "bytes": 257,
+          "sha256": "1de411dcdeedce3219242306fc29bfa1d7fa08883e4ff6779baf798ec50d1657"
+        },
+        {
+          "path": "LBR_ADM1.shp",
+          "bytes": 289824,
+          "sha256": "3681d08da1057fcde2598df90e3b7822203af6aab84e16d68103773926224bcd"
+        },
+        {
+          "path": "LBR_ADM1.shx",
+          "bytes": 220,
+          "sha256": "95f2469991c3a9f21378034619ee9bad1a16810c54e5e1fc7f02ae55bc6383c5"
+        },
+        {
+          "path": "license.jpg",
+          "bytes": 193405,
+          "sha256": "961218d2fbb253fc9bc40fea2a09965b19c816d603ea90e1a5582aac03f852c1"
+        },
+        {
+          "path": "meta.txt",
+          "bytes": 481,
+          "sha256": "7f143bfebb4654a0163c51d448ec3ad9b55a475e34805ffa81b7ccbf523a8860"
+        }
+      ]
+    },
+    {
+      "family": "gb:LBR:ADM2",
+      "role": "domestic-context",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "upstream_path": "sourceData/gbOpen/LBR_ADM2.zip",
+      "pointer_git_blob_oid": "ac4b60cbbbb168c6ed01d4fee58c2a4a31f434f3",
+      "local_whole_archive": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0f3d792478426ce8bbf8f8646036980b6da5f3b0837c8945e0ba933be6452e8a/work/coordination/engineering/liberia-original-repair-20261018/source-rights/LBR_ADM2.zip",
+      "bytes": 617379,
+      "sha256": "b318484419a2e1da1856e7548c33e4c44b88ba3cd23784147c494c01e385eae3",
+      "native_dbf_shx_features": 136,
+      "metadata": "Boundary Representative of Year: 2021\r\nISO-3166-1 (Alpha-3): LBR\r\nBoundary Type: ADM2\r\nCanonical Boundary Type Name: Districts\r\nSource 1: UNMIL\r\nSource 2: OCHA ROWCA\r\nRelease Type: gbOpen\r\nLicense: Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)\t\r\nLicense Notes: \r\nLicense Source: https://data.humdata.org/dataset/liberia-admin-level-2-boundaries\r\nLink to Source Data: https://data.humdata.org/dataset/liberia-admin-level-2-boundaries\r\nOther Notes: ",
+      "native_prj": "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137,298.257223563]],PRIMEM[\"Greenwich\",0],UNIT[\"Degree\",0.017453292519943295]]",
+      "native_metadata_constraints": [],
+      "members": [
+        {
+          "path": "LBR_ADM2.dbf",
+          "bytes": 8393,
+          "sha256": "80f1e8c98157fdefe733e2fa3c6c1fb0c415085c7a51b14d8ba8e5ccca73dc84"
+        },
+        {
+          "path": "LBR_ADM2.prj",
+          "bytes": 143,
+          "sha256": "98aaf3d1c0ecadf1a424a4536de261c3daf4e373697cb86c40c43b989daf52eb"
+        },
+        {
+          "path": "LBR_ADM2.qpj",
+          "bytes": 257,
+          "sha256": "1de411dcdeedce3219242306fc29bfa1d7fa08883e4ff6779baf798ec50d1657"
+        },
+        {
+          "path": "LBR_ADM2.shp",
+          "bytes": 584092,
+          "sha256": "fe7a862f2e3a6b53c4cee8bf1f632cc7e9a471856e435828e35c2f7faa7d34c2"
+        },
+        {
+          "path": "LBR_ADM2.shx",
+          "bytes": 1188,
+          "sha256": "30135f8667c1a0535d63110e82cb387be0d44710e3f8d5bb437b3a0a31b186c3"
+        },
+        {
+          "path": "license.jpg",
+          "bytes": 193405,
+          "sha256": "961218d2fbb253fc9bc40fea2a09965b19c816d603ea90e1a5582aac03f852c1"
+        },
+        {
+          "path": "meta.txt",
+          "bytes": 482,
+          "sha256": "c84063e7981007c8df402d12c03e526bea5ba714d887f01ef0b2c005afed3b82"
+        }
+      ]
+    },
+    {
+      "family": "gb:CIV:ADM1",
+      "role": "complete-foreign-negative",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "upstream_path": "sourceData/gbOpen/CIV_ADM1.zip",
+      "pointer_git_blob_oid": "ad65f6d6b69e6b2dcfec1300af27e3a05e83c07c",
+      "local_whole_archive": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0f3d792478426ce8bbf8f8646036980b6da5f3b0837c8945e0ba933be6452e8a/work/coordination/engineering/liberia-original-repair-20261018/source-rights/CIV_ADM1.zip",
+      "bytes": 1262556,
+      "sha256": "1da183e80010810256a4cb7a0de9196b1256a3b489db1c7a0928fbecc85d7582",
+      "native_dbf_shx_features": 14,
+      "metadata": "Boundary Representative of Year:2016\nISO-3166-1 (Alpha-3):CIV\nBoundary Type:ADM1\nCanonical Boundary Type Name:districts de C\u00f4te d\u2019Ivoire\nSource 1: World Bank Group\nSource 2: OCHA C\u00f4te d\u2019Ivoire\nRelease Type:gbOpen\nLicense:Creative Commons Attribution 4.0 International (CC BY 4.0)\nLicense Notes: \nLicense Source:https://datacatalog.worldbank.org/public-licenses#cc-by\nLink to Source Data:https://datacatalog.worldbank.org/dataset/cote-divoire-administrative-boundaries-2016\nOther Notes: \n",
+      "native_prj": "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137.0,298.257223563]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+      "native_metadata_constraints": [],
+      "members": [
+        {
+          "path": "CIV_ADM1.cpg",
+          "bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "path": "CIV_ADM1.dbf",
+          "bytes": 1856,
+          "sha256": "86facb648fc41088588f142ab94f675ae5c81e62081f84e3f4cb7734befa01ce"
+        },
+        {
+          "path": "CIV_ADM1.prj",
+          "bytes": 145,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4"
+        },
+        {
+          "path": "CIV_ADM1.qmd",
+          "bytes": 1044,
+          "sha256": "644d1bd10ddc874b1a20cf6ee6c17ef57c76b260a112d600bd4357c6cd112732"
+        },
+        {
+          "path": "CIV_ADM1.shp",
+          "bytes": 690884,
+          "sha256": "636003d9cc2101b14639c293f2106118893705fda9a4d678fb888a8f3692cfb9"
+        },
+        {
+          "path": "CIV_ADM1.shx",
+          "bytes": 212,
+          "sha256": "94f70a500e681a6a14180c4f370ca5bdeac8b02782c7281105bfb33e38b1818e"
+        },
+        {
+          "path": "License.png",
+          "bytes": 844931,
+          "sha256": "96eac52bf64dd028aec4b4effdb1c5adf7c2f7f1603cecd7563bd2e4af7ff011"
+        },
+        {
+          "path": "__MACOSX/._CIV_ADM1.cpg",
+          "bytes": 504,
+          "sha256": "8f5c3526b941ec56ff0c3f0a98d24f4e1981219a1dae1def25305fa9ae59331b"
+        },
+        {
+          "path": "__MACOSX/._CIV_ADM1.dbf",
+          "bytes": 504,
+          "sha256": "50a49e2a79ad2685a50346b932368990606a127155fb8b86b4dd2ce8d89114be"
+        },
+        {
+          "path": "__MACOSX/._CIV_ADM1.prj",
+          "bytes": 504,
+          "sha256": "93299d1942f02a5dd8cc557e40cdec5a392d423cc5b2fed34010d45f42455b0e"
+        },
+        {
+          "path": "__MACOSX/._CIV_ADM1.qpj",
+          "bytes": 504,
+          "sha256": "67c105e2a3cd8a3c239afafbfb2ebfe90334e1bb78534c6a5ad5fa67240b6fab"
+        },
+        {
+          "path": "__MACOSX/._CIV_ADM1.shp",
+          "bytes": 504,
+          "sha256": "7987c9855860c893bbd41acc8c139ebe7e94374ed13d383a5dca7dfaa0d86bed"
+        },
+        {
+          "path": "__MACOSX/._CIV_ADM1.shx",
+          "bytes": 504,
+          "sha256": "a15169a04410ca44949c4c0195a311031c5429de3499f70c5c6228f40186e9e5"
+        },
+        {
+          "path": "__MACOSX/._License.png",
+          "bytes": 1015,
+          "sha256": "cde1f1f11db22c3fac0b5309698c2edaeb8555a803bac2a2ceafc13e120ea562"
+        },
+        {
+          "path": "__MACOSX/._meta.txt",
+          "bytes": 701,
+          "sha256": "1539cab2927dff1889da1e46829080ded7a096a606f897bfa7db0d5d424fd321"
+        },
+        {
+          "path": "meta.txt",
+          "bytes": 493,
+          "sha256": "dc36b29fff5f9f0136dae4bb8ead9d9d6a474db2ea75420a5d436abab66756e7"
+        }
+      ]
+    },
+    {
+      "family": "gb:CIV:ADM2",
+      "role": "complete-foreign-negative",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "upstream_path": "sourceData/gbOpen/CIV_ADM2.zip",
+      "pointer_git_blob_oid": "618eb835f79d204cdccf33b8c222d18453151be2",
+      "local_whole_archive": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-gin/additional-negative-rights/CIV_ADM2.zip",
+      "bytes": 1472619,
+      "sha256": "2d4a46d30446d6bccc3d9b939b99a1df99e731a916f35daaa4a7aa4e7d202cba",
+      "native_dbf_shx_features": 33,
+      "metadata": "Boundary Representative of Year:2016\nISO-3166-1 (Alpha-3):CIV\nBoundary Type:ADM2\nCanonical Boundary Type Name:r\u00e9gions de C\u00f4te d'Ivoire\nSource 1:World Bank\nSource 2:\u00a0\nRelease Type:gbOpen\nLicense:Creative Commons Attribution 4.0 International (CC BY 4.0)\nLicense Notes:\nLicense Source:https://datacatalog.worldbank.org/public-licenses#cc-by\nLink to Source Data:https://datacatalog.worldbank.org/dataset/cote-divoire-administrative-boundaries-2016\nOther Notes: \n",
+      "native_prj": "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137,298.257223563]],PRIMEM[\"Greenwich\",0],UNIT[\"Degree\",0.017453292519943295]]",
+      "native_metadata_constraints": [],
+      "members": [
+        {
+          "path": "CIV_ADM2.cpg",
+          "bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "path": "__MACOSX/._CIV_ADM2.cpg",
+          "bytes": 504,
+          "sha256": "2b98cf55590dacdfa36ae70b4cd0dbf6d7b4687fa747b807dc17652d5213e355"
+        },
+        {
+          "path": "CIV_ADM2.dbf",
+          "bytes": 2111,
+          "sha256": "9635c05b8e3ef9ac8a452031bfabf1eede5818d39a046da0b3b830898a27030f"
+        },
+        {
+          "path": "__MACOSX/._CIV_ADM2.dbf",
+          "bytes": 504,
+          "sha256": "7cf6514c0a6c40e02aa1c5806c0b6de33cd0be788686ee148fbc4c608b8cc012"
+        },
+        {
+          "path": "CIV_ADM2.prj",
+          "bytes": 143,
+          "sha256": "98aaf3d1c0ecadf1a424a4536de261c3daf4e373697cb86c40c43b989daf52eb"
+        },
+        {
+          "path": "__MACOSX/._CIV_ADM2.prj",
+          "bytes": 504,
+          "sha256": "6e859709e6b2a3d1ab7b6f262e7fa7c677b0185a9b58b4cd96f603ff228c814a"
+        },
+        {
+          "path": "CIV_ADM2.qpj",
+          "bytes": 257,
+          "sha256": "1de411dcdeedce3219242306fc29bfa1d7fa08883e4ff6779baf798ec50d1657"
+        },
+        {
+          "path": "__MACOSX/._CIV_ADM2.qpj",
+          "bytes": 504,
+          "sha256": "c84079185491f7198d20190512136e65cd34d67895f1175c4a8468cc84bd0a40"
+        },
+        {
+          "path": "CIV_ADM2.shp",
+          "bytes": 1048688,
+          "sha256": "4b776dfd5266cc01db11348cae03eefaf0d54a83f557aee82e007318e0b919be"
+        },
+        {
+          "path": "__MACOSX/._CIV_ADM2.shp",
+          "bytes": 504,
+          "sha256": "b65798b807a30811afd4a14752e1f97ce358b5ad015d586c015325806ef6c081"
+        },
+        {
+          "path": "CIV_ADM2.shx",
+          "bytes": 364,
+          "sha256": "5ce06883b46e0436a4dbc6e094d2212f62c1e3d279ead20acb5251f37f8202d7"
+        },
+        {
+          "path": "__MACOSX/._CIV_ADM2.shx",
+          "bytes": 504,
+          "sha256": "d2d8446cfa6ae6ceef23f057afc25f2c700debd8233e3216851a27aa11735be1"
+        },
+        {
+          "path": "license.png",
+          "bytes": 758207,
+          "sha256": "39ccb549b2a6900ff523fd476653550814df86ca078f0770934a3b1a8c1d49c1"
+        },
+        {
+          "path": "__MACOSX/._license.png",
+          "bytes": 807,
+          "sha256": "37999e536d79903d690604a8cf3b8fe9dc1e745fdf32cfc35cc305cd81c127b6"
+        },
+        {
+          "path": "meta.txt",
+          "bytes": 462,
+          "sha256": "f9c86be3c241e607ed03c96faff010d91876d9dbf3b60b49083986369d859f9d"
+        },
+        {
+          "path": "__MACOSX/._meta.txt",
+          "bytes": 858,
+          "sha256": "fc775887ae56d593b1c093f3f8961315754fcb75313c14780cc1bf69abf52588"
+        }
+      ]
+    },
+    {
+      "family": "gb:CIV:ADM3",
+      "role": "complete-foreign-negative",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "upstream_path": "sourceData/gbOpen/CIV_ADM3.zip",
+      "pointer_git_blob_oid": "51cc4e922bfceee56ff2d3fc911e8933a1055123",
+      "local_whole_archive": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-gin/additional-negative-rights/CIV_ADM3.zip",
+      "bytes": 2403765,
+      "sha256": "1c7a5e4ab76482761d3753236336c96fb688dacd263b7a8fd815b94c9ef83fcd",
+      "native_dbf_shx_features": 510,
+      "metadata": "Boundary Representative of Year: 2021\r\nISO-3166-1 (Alpha-3): CIV\r\nBoundary Type: ADM3\r\nCanonical Boundary Type Name: Departments\r\nSource 1: Comit\u00e9 National de T\u00e9l\u00e9d\u00e9tection et d'Information G\u00e9ographique (CNTIG)\r\nSource 2: OCHA ROWCA\r\nRelease Type: gbOpen\r\nLicense: Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)\r\nLicense Notes: \r\nLicense Source: Humdata\r\nLink to Source Data: https://data.humdata.org/dataset/cote-d-ivoire-administrative-level-0-3-boundaries-and-points\r\nOther Notes:",
+      "native_prj": "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137,298.257223563]],PRIMEM[\"Greenwich\",0],UNIT[\"Degree\",0.017453292519943295]]",
+      "native_metadata_constraints": [],
+      "members": [
+        {
+          "path": "CIV_ADM3.dbf",
+          "bytes": 31207,
+          "sha256": "861dad4ccf44b9d865b529e147e57885c6df7153b2d981b92e89d2e88b60f19d"
+        },
+        {
+          "path": "__MACOSX/._CIV_ADM3.dbf",
+          "bytes": 212,
+          "sha256": "87b566ff75b2f6aa5838e5ad60b27d20f3bdb24e2d80d379010add64466b2562"
+        },
+        {
+          "path": "CIV_ADM3.prj",
+          "bytes": 143,
+          "sha256": "98aaf3d1c0ecadf1a424a4536de261c3daf4e373697cb86c40c43b989daf52eb"
+        },
+        {
+          "path": "__MACOSX/._CIV_ADM3.prj",
+          "bytes": 212,
+          "sha256": "87b566ff75b2f6aa5838e5ad60b27d20f3bdb24e2d80d379010add64466b2562"
+        },
+        {
+          "path": "license.jpg",
+          "bytes": 126551,
+          "sha256": "1c3f1e73587d24e5c73aa4aaca7e63471e14c27368c8da9947498b932a51c0cd"
+        },
+        {
+          "path": "__MACOSX/._license.jpg",
+          "bytes": 212,
+          "sha256": "87b566ff75b2f6aa5838e5ad60b27d20f3bdb24e2d80d379010add64466b2562"
+        },
+        {
+          "path": "CIV_ADM3.qpj",
+          "bytes": 257,
+          "sha256": "1de411dcdeedce3219242306fc29bfa1d7fa08883e4ff6779baf798ec50d1657"
+        },
+        {
+          "path": "__MACOSX/._CIV_ADM3.qpj",
+          "bytes": 212,
+          "sha256": "87b566ff75b2f6aa5838e5ad60b27d20f3bdb24e2d80d379010add64466b2562"
+        },
+        {
+          "path": "meta.txt",
+          "bytes": 522,
+          "sha256": "73ff31774a589e6bae697cc7ae0e38871881947f7216658442b5ac0f2daca36d"
+        },
+        {
+          "path": "__MACOSX/._meta.txt",
+          "bytes": 484,
+          "sha256": "0d0f6780a179263fffb25c6eb2f1e6629e3f00f93c311e8ddcc8a74f380e246d"
+        },
+        {
+          "path": "CIV_ADM3.shp",
+          "bytes": 2906052,
+          "sha256": "d52aa272d12f02c3f8e88e86d69353d1b0d2b8ce35c8b2f07d35f671ae66756a"
+        },
+        {
+          "path": "__MACOSX/._CIV_ADM3.shp",
+          "bytes": 212,
+          "sha256": "87b566ff75b2f6aa5838e5ad60b27d20f3bdb24e2d80d379010add64466b2562"
+        },
+        {
+          "path": "CIV_ADM3.shx",
+          "bytes": 4180,
+          "sha256": "b1d7e0c781a51ba013b005ef6b6a07e1ad13bfb99d5564aab7ec2f52cc4405bc"
+        },
+        {
+          "path": "__MACOSX/._CIV_ADM3.shx",
+          "bytes": 212,
+          "sha256": "87b566ff75b2f6aa5838e5ad60b27d20f3bdb24e2d80d379010add64466b2562"
+        }
+      ]
+    },
+    {
+      "family": "gb:GIN:ADM1",
+      "role": "complete-foreign-negative",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "upstream_path": "sourceData/gbOpen/GIN_ADM1.zip",
+      "pointer_git_blob_oid": "65662681882b0018d23072522e00f4f49e920290",
+      "local_whole_archive": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-gin/source-rights/GIN_ADM1.zip",
+      "bytes": 671259,
+      "sha256": "5a57c8ecfa1d8b66fcd5729d574e949c3a6381a199d150ef46b85112768c3fa1",
+      "native_dbf_shx_features": 8,
+      "metadata": "Boundary Representative of Year: 2017\nISO-3166-1 (Alpha-3): GIN\nBoundary Type: ADM1\nCanonical Boundary Type Name: Administrative regions and governate\nSource 1: World Food Programme\nSource 2: OCHA ROWCA\nRelease Type: gbOpen\nLicense: Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)\nLicense Notes:\nLicense Source: https://data.humdata.org/dataset/guinea-geodatabase\nLink to Source Data: https://ckan.ev.openindustry.in/pt_BR/dataset/guinea-geodatabase/resource/4ed92c38-a5ea-4c53-a4c8-1b01f2fcec32?inner_span=True\nOther Notes: \n",
+      "native_prj": "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137.0,298.257223563]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+      "native_metadata_constraints": [],
+      "members": [
+        {
+          "path": "GIN_ADM1.cpg",
+          "bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "path": "GIN_ADM1.dbf",
+          "bytes": 810,
+          "sha256": "7f8834dcc927992802cfa62fc5ec9ae166f900d6b6165830a2bd1e2a6f251ecf"
+        },
+        {
+          "path": "GIN_ADM1.prj",
+          "bytes": 145,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4"
+        },
+        {
+          "path": "GIN_ADM1.qmd",
+          "bytes": 1044,
+          "sha256": "c07a08d2f5620731f83f2670e9aa260a240d0dc5471b551cc56602557573d960"
+        },
+        {
+          "path": "GIN_ADM1.shp",
+          "bytes": 170032,
+          "sha256": "a7cec4963f9f1140d31359ba58f1c4afa19706d02ad99b2141e7f4a336eef608"
+        },
+        {
+          "path": "GIN_ADM1.shx",
+          "bytes": 164,
+          "sha256": "15d2b0c168bb229229f81fe2d189c8c553f1969800a3a351ee3356bb603274d4"
+        },
+        {
+          "path": "license.png",
+          "bytes": 579325,
+          "sha256": "f096b6f1d8bc04fb717cc94029a6e1acea7f1e50cdd9cfe23f9e70d86d0fc5e6"
+        },
+        {
+          "path": "__MACOSX/._GIN_ADM1.shp",
+          "bytes": 276,
+          "sha256": "cf5de6456651521119b8e87c60d070fc0bef60ecd88d0b9ea20721af89c1f6a0"
+        },
+        {
+          "path": "__MACOSX/._license.png",
+          "bytes": 631,
+          "sha256": "eda113e062bb95ecfbee4c4ebe372698e153dfbd5fdb703577f995ef1b1117b8"
+        },
+        {
+          "path": "__MACOSX/._meta.txt",
+          "bytes": 574,
+          "sha256": "3b51f4735ff9be1b16f559833eb9fd6c2d09dc456d8786dafd13637b9d51edae"
+        },
+        {
+          "path": "meta.txt",
+          "bytes": 559,
+          "sha256": "aa75b6e41c0d2d776fe5adafe32db524e4635c221c2b3b26a9246d7dc01aadf9"
+        }
+      ]
+    },
+    {
+      "family": "gb:GIN:ADM2",
+      "role": "complete-foreign-negative",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "upstream_path": "sourceData/gbOpen/GIN_ADM2.zip",
+      "pointer_git_blob_oid": "2422a73bf93f1be1ea06dd9f6a3f3c8cd64fd20a",
+      "local_whole_archive": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-gin/source-rights/GIN_ADM2.zip",
+      "bytes": 725845,
+      "sha256": "fd153b8d87abef3520747de172eabcc603302e4f09f9700c544c1fddd455c893",
+      "native_dbf_shx_features": 34,
+      "metadata": "Boundary Representative of Year: 2017\nISO-3166-1 (Alpha-3): GIN\nBoundary Type: ADM2\nCanonical Boundary Type Name: prefecture\nSource 1: World Food Programme\nSource 2: OCHA ROWCA\nRelease Type: gbOpen\nLicense: Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)\nLicense Notes:\nLicense Source: https://data.humdata.org/dataset/guinea-geodatabase\nLink to Source Data: https://ckan.ev.openindustry.in/pt_BR/dataset/guinea-geodatabase/resource/4ed92c38-a5ea-4c53-a4c8-1b01f2fcec32?inner_span=True\nOther Notes: \n",
+      "native_prj": "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137.0,298.257223563]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+      "native_metadata_constraints": [],
+      "members": [
+        {
+          "path": "GIN_ADM2.cpg",
+          "bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "path": "GIN_ADM2.dbf",
+          "bytes": 2916,
+          "sha256": "69473228ce5f48c26f020bc42a4d639c2f09e9374a80ea3ec490f716c0ee2363"
+        },
+        {
+          "path": "GIN_ADM2.prj",
+          "bytes": 145,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4"
+        },
+        {
+          "path": "GIN_ADM2.shp",
+          "bytes": 245952,
+          "sha256": "37271df921508c25b219016161ba79f811c99bec702e668c26d37415512905d8"
+        },
+        {
+          "path": "GIN_ADM2.shx",
+          "bytes": 372,
+          "sha256": "061cb03a2541c4add08ce320957fc49686dec745503b11dd5910a36149926834"
+        },
+        {
+          "path": "__MACOSX/._license.png",
+          "bytes": 631,
+          "sha256": "eda113e062bb95ecfbee4c4ebe372698e153dfbd5fdb703577f995ef1b1117b8"
+        },
+        {
+          "path": "__MACOSX/._meta.txt",
+          "bytes": 417,
+          "sha256": "207704518835b7fe829eaebf2f9613993907b058788abbf4719a891c861e9cf0"
+        },
+        {
+          "path": "license.png",
+          "bytes": 579325,
+          "sha256": "f096b6f1d8bc04fb717cc94029a6e1acea7f1e50cdd9cfe23f9e70d86d0fc5e6"
+        },
+        {
+          "path": "meta.txt",
+          "bytes": 533,
+          "sha256": "f9fbb8c1f153ccf5c591fb43ae1205c1d351619258a6483d3d435530c380d7af"
+        }
+      ]
+    },
+    {
+      "family": "gb:SLE:ADM1",
+      "role": "complete-foreign-negative",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "upstream_path": "sourceData/gbOpen/SLE_ADM1.zip",
+      "pointer_git_blob_oid": "ee5acb212d0c1b64e1acf4260f3e0b8b52c6cb18",
+      "local_whole_archive": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-gin/reused-negative-rights/SLE_ADM1.zip",
+      "bytes": 580878,
+      "sha256": "f86b437e8ac44a6f3e5f344d93795e562970283f629c35a930518771e4e9b8c7",
+      "native_dbf_shx_features": 4,
+      "metadata": "Boundary Representative of Year:\u00a02014\nISO-3166-1 (Alpha-3):\u00a0SLE\nBoundary Type: ADM1\nCanonical Boundary Type Name:\u00a0Province\nSource 1: Government of Sierra Leone\nSource 2:\u00a0OCHA ROWCA\nRelease Type:\u00a0gbOpen\nLicense:\u00a0Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)\nLicense Notes:\u00a0\nLicense Source:\u00a0https://data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries\nLink to Source Data:\u00a0https://data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries\nOther Notes:\u00a0\n",
+      "native_prj": "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137.0,298.257223563]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+      "native_metadata_constraints": [],
+      "members": [
+        {
+          "path": "SLE_ADM1.cpg",
+          "bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "path": "SLE_ADM1.dbf",
+          "bytes": 334,
+          "sha256": "371edf4d0906e86f2b01cbe91724f50d9aa1c6c8d3dc772beec6372fb6fcbce1"
+        },
+        {
+          "path": "SLE_ADM1.prj",
+          "bytes": 145,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4"
+        },
+        {
+          "path": "SLE_ADM1.sbn",
+          "bytes": 188,
+          "sha256": "c154db0da68c0ecaf85175d792fa38646cccfaf2b60553dddb12cd10755c5243"
+        },
+        {
+          "path": "SLE_ADM1.sbx",
+          "bytes": 132,
+          "sha256": "7147bf0221f8ccb86c22760bc711a051537fe69057568fe41e2fd7d522565be8"
+        },
+        {
+          "path": "SLE_ADM1.shp",
+          "bytes": 201900,
+          "sha256": "87ba1f9db24fef314cf164a6909c9a532fa64bfaed45aa227f6b66ce5f9f81bf"
+        },
+        {
+          "path": "SLE_ADM1.shp.xml",
+          "bytes": 4182,
+          "sha256": "302725de59e983bd7ebf2a409577dbbd0d6733e18690fe23a1a44914ffac3992"
+        },
+        {
+          "path": "SLE_ADM1.shx",
+          "bytes": 132,
+          "sha256": "84df654f8360be1d63e02d05250622f7c597f754f4ddc0e6e94f7f8a289d5bc0"
+        },
+        {
+          "path": "license.png",
+          "bytes": 480922,
+          "sha256": "5d0915b810380a9c032ba1fe60171fc50de5247be393878a7765c2f511e0306f"
+        },
+        {
+          "path": "meta.txt",
+          "bytes": 517,
+          "sha256": "7479b9122dd0d394140d4ed888d016788850a3aa5e52dd2777076d0d83473e74"
+        }
+      ]
+    },
+    {
+      "family": "gb:SLE:ADM2",
+      "role": "complete-foreign-negative",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "upstream_path": "sourceData/gbOpen/SLE_ADM2.zip",
+      "pointer_git_blob_oid": "fe461368441489dad110900afc2f4e9d681e88a1",
+      "local_whole_archive": "/Users/chengshuli/Documents/Codex/2026-10-14/task/africa-workers-20261017/worker4-gin/reused-negative-rights/SLE_ADM2.zip",
+      "bytes": 459197,
+      "sha256": "b4cd638f5053f2d23f1064a2496f9794abf814d7532f514b6543f7fe0af96777",
+      "native_dbf_shx_features": 14,
+      "metadata": "Boundary Representative of Year: 2017\r\nISO-3166-1 (Alpha-3): SLE\r\nBoundary Type: ADM2\r\nCanonical Boundary Type Name: Districts\r\nSource 1:Government of Sierra Leone\r\nSource 2: OCHA ROWCA\r\nRelease Type: gbOpen\r\nLicense: Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)\t\r\nLicense Notes: \r\nLicense Source: https://data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries\r\nLink to Source Data: https://data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries\r\nOther Notes: ",
+      "native_prj": "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137.0,298.257223563]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+      "native_metadata_constraints": [
+        {
+          "member": "SLE_ADM2.shp.xml",
+          "tag": "idAbs",
+          "text": "<DIV STYLE=\"text-align:Left;\"><DIV><DIV><P><SPAN>The dataset represents the districts of Sierra Leone</SPAN></P></DIV></DIV></DIV>"
+        },
+        {
+          "member": "SLE_ADM2.shp.xml",
+          "tag": "resConst",
+          "text": "<DIV STYLE=\"text-align:Left;\"><DIV><DIV><P><SPAN>See the COD/FOD Registry </SPAN><A href=\"https://www.humanitarianresponse.info/applications/data/page/terms-use\"><SPAN>Terms of Use</SPAN></A><SPAN>. This does not replace any terms of use information provided with the dataset.</SPAN></P></DIV></DIV></DIV>"
+        },
+        {
+          "member": "SLE_ADM2.shp.xml",
+          "tag": "useLimit",
+          "text": "<DIV STYLE=\"text-align:Left;\"><DIV><DIV><P><SPAN>See the COD/FOD Registry </SPAN><A href=\"https://www.humanitarianresponse.info/applications/data/page/terms-use\"><SPAN>Terms of Use</SPAN></A><SPAN>. This does not replace any terms of use information provided with the dataset.</SPAN></P></DIV></DIV></DIV>"
+        },
+        {
+          "member": "SLE_ADM2.shp.xml",
+          "tag": "idPurp",
+          "text": "Administrative Level 2 Boundaries of Sierra Leone"
+        }
+      ],
+      "members": [
+        {
+          "path": "license.PNG",
+          "bytes": 95880,
+          "sha256": "aacc01854f958db43e1995b7595e4f482397ec62b3c38a4415bbfac1cd36573c"
+        },
+        {
+          "path": "meta.txt",
+          "bytes": 518,
+          "sha256": "f186d0245c1fdb9095fc4007c5deaeb2b7c96f9ad7453211ec1bcc2d7302aacf"
+        },
+        {
+          "path": "SLE_ADM2.cpg",
+          "bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "path": "SLE_ADM2.dbf",
+          "bytes": 4368,
+          "sha256": "9c617430038465bafd903bcb995e499ae467e4f93681294949ddf509328e75f3"
+        },
+        {
+          "path": "SLE_ADM2.prj",
+          "bytes": 145,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4"
+        },
+        {
+          "path": "SLE_ADM2.sbn",
+          "bytes": 268,
+          "sha256": "5794de7f5e4201a58a6dfbb86fc66756978f444f9d3b5634ecdcc95a4864050b"
+        },
+        {
+          "path": "SLE_ADM2.sbx",
+          "bytes": 132,
+          "sha256": "8098e316951396f0a29b5513b50c70e0e0055e05a994639c201b440736d1831c"
+        },
+        {
+          "path": "SLE_ADM2.shp",
+          "bytes": 342544,
+          "sha256": "fbc5eeb816450221a51361a40cff732e54760a24c546ad5174c4e9f1cf03b4c4"
+        },
+        {
+          "path": "SLE_ADM2.shp.xml",
+          "bytes": 207140,
+          "sha256": "7f08892320f64741d663596a61269feed7f6e968c1e2e4bcab51010623d6ca5d"
+        },
+        {
+          "path": "SLE_ADM2.shx",
+          "bytes": 212,
+          "sha256": "9e2201812c7ffa7889c5757273b4e323ead8de6e1bf9121239fa7c2cb7127740"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Native archive custody and source declarations do not establish current legal boundaries or source fitness.",
+    "License images must be interpreted individually; metadata editions and visibly displayed labels remain distinct.",
+    "No source geometry predicate, point test, producer or comparison rerun is performed by this metadata retention step."
+  ]
+}
