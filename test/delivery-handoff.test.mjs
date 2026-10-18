@@ -1325,6 +1325,34 @@ test('finalizer retains complete conservation for a distinct caller-owned compos
   assert.throws(()=>finalizeDelivery(f.config,f.r),/does not conserve/);
 });
 
+test('finalizer caller methods and getters cannot expose its owned snapshot through their receiver',t=>{
+  const f=modernCompositionFixture(t),config=f.finalizeConfig(composeAuthorities(f.config,f.r));
+  const expected=finalizeDelivery(config,f.r),seen=new Map(),getterReceivers=[];
+  const receiver=Symbol('caller receiver');
+  const reader={...f.r,[receiver](){return this;},json(pin){
+    assert.equal(this,reader,'Caller JSON method retains its own reader');
+    return JSON.parse(this.read(pin));
+  }};
+  for(const name of ['pin','git','hasPath','descriptor']){
+    const method=f.r[name];
+    const callback=function(...args){
+      seen.set(name,[this,this[receiver]()]);
+      // Each public parsed view can be mutated, but is never the private one.
+      const visible=this.json(config.selected_ledger);
+      visible.rows.find(row=>row.disposition==='awaiting-evidence').ignored_metadata=1n;
+      return method(...args);
+    };
+    callback.bind=()=>{throw Error('A caller-owned bind override is not a binding primitive');};
+    if(name==='pin')Object.defineProperty(reader,name,{enumerable:true,get(){getterReceivers.push(this);return callback;}});
+    else reader[name]=callback;
+  }
+  assert.deepEqual(finalizeDelivery(config,reader),expected,'Public-view mutations cannot change any final output byte');
+  assert.deepEqual([...seen.keys()].sort(),['descriptor','git','hasPath','pin']);
+  for(const references of seen.values())for(const value of references)assert.equal(value,reader);
+  assert.ok(getterReceivers.length>0);
+  for(const value of getterReceivers)assert.equal(value,reader,'Getter evaluation cannot acquire the private wrapper');
+});
+
 
 test('finalizer selected snapshot isolates mutable reader bytes and authenticates anew on the next call',t=>{
   const f=modernFinalizationFixture(t),reader=f.r;

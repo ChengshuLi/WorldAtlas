@@ -1002,11 +1002,16 @@ export function finalizeDelivery(config, reader, {acceptedCheckpoint} = {}) {
     if (selectedRaw === undefined) selectedRaw = Buffer.from(originalReader.read(pin));
     return selectedRaw;
   };
-  reader = {...originalReader, read, json(pin) {
+  reader = {...originalReader};
+  // Inherited callbacks must keep their original receiver. Giving one this
+  // wrapper would expose read/json and let it retain or mutate our snapshot.
+  for (const key of Reflect.ownKeys(reader)) if (typeof reader[key] === 'function')
+    reader[key] = Function.prototype.bind.call(reader[key], originalReader);
+  Object.assign(reader, {read, json(pin) {
     if (!selectedIdentity || snapshotIdentity(pin) !== selectedIdentity) return originalReader.json(pin);
     if (selectedJSON === undefined) selectedJSON = JSON.parse(read(pin));
     return selectedJSON;
-  }};
+  }});
   need(typeof config.new_prefix === 'string' && config.new_prefix.endsWith('/')
     && safe(config.new_prefix.slice(0, -1)), 'Exact owned output prefix required');
   const originalSelector = reader.read(config.selector), selection = JSON.parse(originalSelector);
