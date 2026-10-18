@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
-import {execFileSync} from 'node:child_process';
+import childProcess, {execFileSync} from 'node:child_process';
 import {gzipSync,gunzipSync,crc32,deflateRawSync} from 'node:zlib';
 import {trustedFixture as trustedNativeFixture} from './helpers/selected-joint-fixture.mjs';
 import {ACCEPTED_CHECKPOINT_CODE} from '../scripts/accepted-selected-checkpoint.mjs';
@@ -30,15 +30,21 @@ function fixtures(sourcePaths){
 }
 function addition(id,target,index,base,x){const geometry=polygon(x);return {component_id:id,target_id:target,pixelIndex:index,base_geometry_sha256:base,geometry,geometry_sha256:valueSha(geometry)};}
 
-// This is a fresh miniature trusted repository, not a test-only authority hook.
-// The real entry reads its ordinary committed catalogue and products exactly as
-// production does. Candidate edits never control that executing catalogue.
-async function trustedFixture(t,{incompleteNative=false,sourcePaths,sourceOverride=false,physicalLogicalSource=false,inheritedCode=false,wireProducts=false}={}){
- const root=fs.mkdtempSync(path.join(process.cwd(),'.checkpoint-test-'));
- t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+// Each case owns its physical repository, mutable operands and private modules.
+function fixtureRepository(root){
  const git=(...a)=>execFileSync('git',['-c','core.hooksPath=/dev/null','-c','user.name=Checkpoint fixture','-c','user.email=checkpoint@example.invalid','-C',root,...a],{env:{...process.env,GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_NO_LAZY_FETCH:'1'},stdio:['ignore','pipe','pipe']});
  const save=(name,value)=>{const f=path.join(root,name);fs.mkdirSync(path.dirname(f),{recursive:true});fs.writeFileSync(f,Buffer.isBuffer(value)?value:valueBytes(value));};
  const commit=()=>{git('add','.');git('commit','-qm','Checkpoint fixture');return git('rev-parse','HEAD').toString().trim();};
+ const pin=(name,at=git('rev-parse','HEAD').toString().trim())=>{const body=git('show',at+':'+name),tree=git('ls-tree',at,'--',name).toString().split(/\s+/);return {commit:at,path:name,mode:tree[0],git_blob_oid:tree[2],bytes:body.length,sha256:sha(body)};};
+ return {root,git,save,commit,pin};
+}
+
+// Only the default miniature history is reused, as ordinary bytes. No seed
+// module is imported, and no reader, qualification result or capability is kept.
+let trustedDefaultSeed;
+after(()=>{if(trustedDefaultSeed)fs.rmSync(trustedDefaultSeed.root,{recursive:true,force:true});});
+function buildTrustedFixture(root,{incompleteNative,sourcePaths,sourceOverride,physicalLogicalSource,inheritedCode,wireProducts}){
+ const {git,save,commit,pin}=fixtureRepository(root);
  git('init','-q');save(PROGRAMME,fs.readFileSync(PROGRAMME));for(const name of CODE)save(name,fs.readFileSync(name));save('package.json',{type:'module'});
  const inheritedName='fixture/historical-execution.json';
  if(inheritedCode)save(inheritedName,{original:'executed configuration'});
@@ -59,7 +65,6 @@ async function trustedFixture(t,{incompleteNative=false,sourcePaths,sourceOverri
  const literal={...primitive,base_geometry:features[0].geometry,disposition:'assigned',native_cells:1,source_receipt_sha256:'c'.repeat(64)};
  const originalPatch={version:1,kind:'unassigned-native-cells-v1',rows:[{y:1,runs:[[2,3,1]]}]};
  save('original/patch-one.json',originalPatch);save('original/rule.json',{version:1});const one=commit();
- const pin=(name,at=git('rev-parse','HEAD').toString().trim())=>{const body=git('show',at+':'+name),tree=git('ls-tree',at,'--',name).toString().split(/\s+/);return {commit:at,path:name,mode:tree[0],git_blob_oid:tree[2],bytes:body.length,sha256:sha(body)};};
  const inherited=inheritedCode?pin(inheritedName,one):null;
  if(inherited){
   const {bytes,sha256}=inherited,role={path:inherited.path,bytes,sha256};
@@ -101,10 +106,85 @@ async function trustedFixture(t,{incompleteNative=false,sourcePaths,sourceOverri
  save('accepted/routes.json',[...new Set([...inventory.map(p=>p.path),...paths])].sort().map(name=>({path:name,tree:git('ls-tree','-z',selected,'--',name).toString()})));const accepted=commit();
  const rootRow={id:'fixture',accepted_head:accepted,selected_commit:selected,selection_sha256:valueSha(selection),execution_commit:one,execution_code_sha256:valueSha(execution_code),runtime_sha256:valueSha(runtime),facts:pin('accepted/facts.json'),certificate:{...pin('accepted/certificate.json.gz'),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)},publication:pin('accepted/publication.json'),custody:pin('accepted/custody.json'),routes:pin('accepted/routes.json')};
  save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[rootRow]});commit();
- const api=checkpointTestAPI(t,await import(pathToFileURL(path.join(root,MODULE)))),native=await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs')));
- const reader=new native.ImmutableReader(root,selected);
- return {api,native,reader,selected,root,git,save,commit,pin,ledger,patch,sidecar,envelope,selection,rootRow,inherited};
+ return {selected,ledger,patch,sidecar,envelope,selection,rootRow,inherited};
 }
+
+// Real admission reads each copy's committed catalogue. Nondefault fixtures are
+// constructed afresh; current modules, readers and admission always stay fresh.
+async function trustedFixture(t,{incompleteNative=false,sourcePaths,sourceOverride=false,physicalLogicalSource=false,inheritedCode=false,wireProducts=false}={}){
+ const options={incompleteNative,sourcePaths,sourceOverride,physicalLogicalSource,inheritedCode,wireProducts};
+ const useDefault=incompleteNative===false&&sourcePaths===undefined&&sourceOverride===false
+  &&physicalLogicalSource===false&&inheritedCode===false&&wireProducts===false;
+ if(useDefault&&!trustedDefaultSeed){
+  const root=fs.mkdtempSync(path.join(process.cwd(),'.checkpoint-seed-'));
+  try{trustedDefaultSeed={root,data:buildTrustedFixture(root,options)};}
+  catch(error){fs.rmSync(root,{recursive:true,force:true});throw error;}
+ }
+ const root=fs.mkdtempSync(path.join(process.cwd(),'.checkpoint-test-'));
+ t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+ let data;
+ if(useDefault){fs.cpSync(trustedDefaultSeed.root,root,{recursive:true});data=structuredClone(trustedDefaultSeed.data);}
+ else data=buildTrustedFixture(root,options);
+ const api=checkpointTestAPI(t,await import(pathToFileURL(path.join(root,MODULE)))),native=await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs')));
+ const reader=new native.ImmutableReader(root,data.selected);
+ return {...data,...fixtureRepository(root),api,native,reader};
+}
+
+async function countFixtureHistory(action){
+ const original=childProcess.execFileSync,counts={init:0,add:0,commit:0};
+ childProcess.execFileSync=function(command,args,...rest){
+  if(command==='git')for(const name of Object.keys(counts))if(args.includes(name))counts[name]++;
+  return original.call(this,command,args,...rest);
+ };syncBuiltinESMExports();
+ try{return {value:await action(),counts};}finally{childProcess.execFileSync=original;syncBuiltinESMExports();}
+}
+
+test('default accepted fixture copies history but isolates bytes, private state and cleanup',async t=>{
+ const first=await trustedFixture(t);
+ const {value:second,counts}=await countFixtureHistory(()=>trustedFixture(t));
+ assert.deepEqual(counts,{init:0,add:0,commit:0},'A second default must copy history rather than rebuild it');
+ assert.notEqual(first.root,second.root);assert.equal(first.selected,second.selected);
+ assert.notEqual(first.native.ImmutableReader,second.native.ImmutableReader);
+ assert.notEqual(first.api.qualifyTransition,second.api.qualifyTransition);
+ const originalLedger=structuredClone(second.ledger),originalHead=second.git('rev-parse','HEAD').toString();
+ for(const f of [first,second]){
+  assert(fs.lstatSync(path.join(f.root,'.git')).isDirectory());
+  assert.equal(f.git('remote').toString(),'');
+  assert.equal(fs.existsSync(path.join(f.root,'.git/objects/info/alternates')),false);
+  assert.equal(fs.existsSync(path.join(f.root,'node_modules')),false);
+  assert.equal(fs.existsSync(path.join(f.root,'.cache')),false);
+  assert.equal(Number(f.git('rev-list','--count','HEAD')),12);
+ }
+ const original=first.pin('data/source.json',first.selected),relative=path.join('.git/objects',original.git_blob_oid.slice(0,2),original.git_blob_oid.slice(2));
+ const a=fs.statSync(path.join(first.root,relative)),b=fs.statSync(path.join(second.root,relative));
+ assert(a.dev!==b.dev||a.ino!==b.ino,'Copied Git objects must not be hard-linked');
+ const admitted=await first.api.qualifyCheckpoint({reader:first.reader});assert.equal(admitted.available,true);
+ assert.throws(()=>second.api.releaseCheckpoint(admitted.state),/foreign/);
+ first.api.releaseCheckpoint(admitted.state);
+ first.ledger.rows[0].target_id='mutated returned row';
+ first.save('data/source.json',{changed:'committed mutation'});first.commit();
+ fs.unlinkSync(path.join(first.root,relative));fs.writeFileSync(path.join(first.root,relative),'corrupted only in first copy');
+ assert.deepEqual(second.ledger,originalLedger);assert.equal(second.git('rev-parse','HEAD').toString(),originalHead);
+ assert.equal(second.pin('data/source.json',second.selected).sha256,original.sha256);
+ fs.rmSync(first.root,{recursive:true,force:true});
+ const next=await second.api.qualifyCheckpoint({reader:second.reader});assert.equal(next.available,true);
+ assert.deepEqual(second.api.projectSourceFeatures({state:next.state,ids:['A']}).features.map(f=>f.id),['A']);
+ second.api.releaseCheckpoint(next.state);
+});
+
+test('parameterized accepted fixtures still construct fresh histories and preserve literal wire inputs',async t=>{
+ const {value:fixtures,counts}=await countFixtureHistory(async()=>[
+  await trustedFixture(t,{wireProducts:true}),await trustedFixture(t,{wireProducts:true})]);
+ assert.deepEqual(counts,{init:2,add:24,commit:24});assert.notEqual(fixtures[0].root,fixtures[1].root);
+ for(const f of fixtures){
+  const wire=f.git('show',f.selected+':data/ledger.json').toString();
+  assert(wire.startsWith('{ "rows":[{"ignored":1e400}], '));
+  const decoded=JSON.parse(wire);assert.equal(valueSha(decoded),valueSha(f.ledger));
+  assert(wire.includes('[-0e0,0.00]'));
+  const result=await f.api.qualifyCheckpoint({reader:f.reader});assert.equal(result.available,true);
+  f.api.releaseCheckpoint(result.state);
+ }
+});
 
 function zipMembers(members, {descriptor = false, method = 8} = {}) {
   const locals = [], centrals = []; let offset = 0;
