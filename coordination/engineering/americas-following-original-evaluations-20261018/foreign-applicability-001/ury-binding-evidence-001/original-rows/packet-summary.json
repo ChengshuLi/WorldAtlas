@@ -1,0 +1,62 @@
+{
+  "package_id": "gb-URY-ADM1--repair-evaluation",
+  "frozen_queue_commit": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+  "execution": "completed using existing hash-checked source-batch-intervals.mjs; no new segmentation or geometry code",
+  "class_rows": 1409,
+  "cells": 3242,
+  "land_cells": 2982,
+  "inland_water_cells": 260,
+  "owners": 13,
+  "per_owner_csv": "per-owner-class-counts.csv",
+  "literal_class_rows": [
+    "adapter-output/block-037.json.gz",
+    "adapter-output/block-038.json.gz"
+  ],
+  "retained_frame_comparisons": [
+    {
+      "file": "physical-support-block-037.json.gz",
+      "adapter_sha256": "7968adeb24cacca45f6ac1d015fa88eb3b288aef86dcf10cdfe3f775d59d84c4",
+      "retained_bundle_sha256": "7968adeb24cacca45f6ac1d015fa88eb3b288aef86dcf10cdfe3f775d59d84c4",
+      "identical": true
+    },
+    {
+      "file": "physical-support-block-038.json.gz",
+      "adapter_sha256": "af6039ecdc8b86d54b956753d36787c0398fe06f6572a86ffd4ae7c42f1c668d",
+      "retained_bundle_sha256": "af6039ecdc8b86d54b956753d36787c0398fe06f6572a86ffd4ae7c42f1c668d",
+      "identical": true
+    },
+    {
+      "file": "inland-water-support-block-037.json.gz",
+      "adapter_sha256": "2e25139f622de52715c528923b7f16952aea2fa6ab3996c2b74d77c4fd6690d7",
+      "retained_bundle_sha256": "2e25139f622de52715c528923b7f16952aea2fa6ab3996c2b74d77c4fd6690d7",
+      "identical": true
+    },
+    {
+      "file": "inland-water-support-block-038.json.gz",
+      "adapter_sha256": "b014ac7486ea04f9989b57c6720179959271e83772cf49b3428f6b36878a2cc6",
+      "retained_bundle_sha256": "b014ac7486ea04f9989b57c6720179959271e83772cf49b3428f6b36878a2cc6",
+      "identical": true
+    },
+    {
+      "file": "source-candidates-block-037.json.gz",
+      "adapter_sha256": "3740e8b69b7f47c5c09061fd2bab50eeb2f14319638f1ab19122825cedb18d37",
+      "retained_bundle_sha256": "3740e8b69b7f47c5c09061fd2bab50eeb2f14319638f1ab19122825cedb18d37",
+      "identical": true
+    },
+    {
+      "file": "source-candidates-block-038.json.gz",
+      "adapter_sha256": "22daa09abac662d8668f95f3638a13639547cc85e4429bb8860c7f189c68c7e5",
+      "retained_bundle_sha256": "22daa09abac662d8668f95f3638a13639547cc85e4429bb8860c7f189c68c7e5",
+      "identical": true
+    }
+  ],
+  "claim_state_refresh": {
+    "checked_at_utc": "2026-10-18 (current executor read-only exact searches)",
+    "method": "GitHub connector exact quoted package query; open and closed issues separately; all-state PRs",
+    "issue_open": [],
+    "issue_closed": [],
+    "pull_requests": [],
+    "assessment": "No exact package-ID matches returned. Point-in-time only; not a reservation."
+  },
+  "source_notice_handoff": "Reuse americas-20261018/next-six-work-001/claims-and-notices/ury-pry-source-notice-draft.md; preserve the recorded OSM/ODbL credit/link, CRS84 declaration, represented-year/update/build date distinctions, and no Wambacher-specific terms inference."
+}

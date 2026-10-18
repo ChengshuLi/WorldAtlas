@@ -1,0 +1,105 @@
+{
+  "package_id": "gb-URY-ADM1--repair-evaluation",
+  "primary_source": "gb:URY:ADM1",
+  "source_family_index": 345,
+  "category": "repair-evaluation",
+  "native_cells": 3242,
+  "land_cells": 2982,
+  "inland_water_cells": 260,
+  "source_relative_cells": 0,
+  "interval_segments": 1409,
+  "owners": [
+    44469,
+    44470,
+    44471,
+    44473,
+    44474,
+    44475,
+    44476,
+    44477,
+    44480,
+    44482,
+    44483,
+    44484,
+    44485
+  ],
+  "source_features": [
+    675,
+    681,
+    3547,
+    61205,
+    61206,
+    61207,
+    61208,
+    61209,
+    61210,
+    61213,
+    61214,
+    61218,
+    61219,
+    61220,
+    61222,
+    61223
+  ],
+  "source_families": [
+    8,
+    43,
+    345
+  ],
+  "native_blocks": [
+    37,
+    38
+  ],
+  "provinces": [
+    "framework:province:artigas:dc4b2e0fed20",
+    "framework:province:canelones:1c2718ecfd08",
+    "framework:province:cerro-largo:0a3b808d7abf",
+    "framework:province:colonia:465c2abd724e",
+    "framework:province:maldonado:a1c6a1a54875",
+    "framework:province:montevideo:0f1ab0037517",
+    "framework:province:paysandu:01af8b43546d",
+    "framework:province:rio-negro:6ed1a5fb470c",
+    "framework:province:rivera:08ea824e0d7b",
+    "framework:province:rocha:d48385369f22",
+    "framework:province:salto:d062af3217c7",
+    "framework:province:san-jose:4f1a411d0029",
+    "framework:province:treinta-y-tres:7583585ca02c"
+  ],
+  "location_count": 13,
+  "source_feature_count": 16,
+  "locality_count": 13,
+  "cost": {
+    "primary_source_decoded_bytes": 425451,
+    "all_required_source_decoded_bytes": 2093176,
+    "primary_full_source_raster_measured_seconds": 0.131,
+    "source_interval_segments": 1409,
+    "maximum_native_rows_per_execution_frame": 4096,
+    "observed_global_census_peak_rss_bytes": 884973568
+  },
+  "evidence": {
+    "selection": "ownership-binding.json",
+    "lineage": "lineage.json",
+    "territorial_source_catalogue": "retained-source-catalogue.json",
+    "territorial_catalogue_sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+    "source_features": "source-feature-roster.json",
+    "territorial_native_blocks": "source-candidates-block-NNN.json.gz",
+    "physical": "physical-unassigned-summary.json",
+    "source_domain_transform": []
+  },
+  "work": {
+    "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+    "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+    "priority": 1
+  },
+  "execution": {
+    "command": "node source-batch-intervals.mjs gb-URY-ADM1--repair-evaluation OUTPUT_DIRECTORY",
+    "output_columns": [
+      "y",
+      "start",
+      "end",
+      "candidate_owner_indices",
+      "source_feature_indices",
+      "physical_class"
+    ]
+  }
+}

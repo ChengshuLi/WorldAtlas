@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "kind": "ury-first-physical-pin-audit",
+  "status": "blocked; pending config unchanged",
+  "scope": {
+    "original_cells": 3242,
+    "land_cells": 2982,
+    "inland_water_cells": 260,
+    "owners": 13,
+    "includes_artigas": true,
+    "interval_segments": 1409
+  },
+  "stage": {
+    "path": "americas-20261018/ury-first-physical-preparation-001/source-stage-001/original-stage-inputs.json",
+    "rows": 13,
+    "bytes": 356948,
+    "sha256": "51893bfce5f8a3e2445893f05b73a39a531bbfac4c9d4726fde168cce7d12d97",
+    "git_blob_oid": "3d34b31985bde84307712437c559b27f7689152f",
+    "repository_commit": null,
+    "repository_path": null,
+    "accepted_selected_source_commit": "7e78edd0dba65dd6d904e04186f0b6b36d2a4ba6",
+    "binding_status": "content is present and hash-pinned locally; repository commit/path binding is missing"
+  },
+  "physical_operands": {
+    "declared_input_count": 25,
+    "reused_prior_physical_input_count": 24,
+    "reused_input_commit": "a285e89d0e2a7dd47a56abcbaaef15cd299a0bf8",
+    "status": "24 reused operand records have commit/OID/size/SHA fields; this audit did not re-execute or whole-verify the prior producer"
+  },
+  "runtime": {
+    "inventory_file_count": 204,
+    "python": "3.12.14 (main, Aug 25 2026, 13:50:33) [Clang 22.1.3 ]",
+    "numpy": "2.3.5",
+    "shapely": "2.1.2",
+    "geos": "3.13.1",
+    "status": "reuses the recorded prior 204-file inventory; no current invocation/closure receipt exists"
+  },
+  "native_grid_caller_mismatch": {
+    "path": "src/native-grid.js",
+    "accepted_main_commit": "7e78edd0dba65dd6d904e04186f0b6b36d2a4ba6",
+    "accepted_blob_oid": "811966bb79e8903037a24a47ada0a408f2c972d2",
+    "accepted_bytes": 53003,
+    "accepted_sha256": "f8691d492770fd8131f5e8341adacbf33b17625c6d735ccb1460cde3213a37cf",
+    "existing_caller_method_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "existing_caller_blob_oid": "3e1d3e7e6012b5b571345caad029ab7d124c07fd",
+    "existing_caller_bytes": 50250,
+    "existing_caller_sha256": "66b453bbb2e001b9ff56bd754d55087f5919845dceeefd886016494cefa1d3e0",
+    "status": "unresolved caller binding mismatch; retain as blocker, do not substitute accepted-main bytes into the historical caller pin"
+  },
+  "decision": "Do not create a corrected/runnable config yet. The local stage needs an immutable repository commit/path binding, and the existing caller still has the native-grid mismatch. Preserve all 13 original stage rows and the 3,242-cell land/water partition."
+}
