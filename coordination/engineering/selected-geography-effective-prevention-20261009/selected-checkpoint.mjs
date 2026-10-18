@@ -239,7 +239,7 @@ async function storedProduct(session,reader,p,domain,ledger) {
     function*(){for(const component of store.componentEntries())yield componentView(component);},
     {entryAt:ordinal=>componentView(store.componentAt(ordinal))})};
 }
-async function readSelection(session, reader) {
+async function readSelectionProducts(session, reader) {
   const selection = readNamed(session, reader, 'data/ownership-selection.json');
   supported(selection?.version === 1 && selection.method === 'native-linear-evenodd-first-owner-v1'
     && selection.additive_release && selection.selected_geography?.kind === 'complete-world-index-with-exact-encoded-overrides',
@@ -287,12 +287,15 @@ async function readSelection(session, reader) {
   reference(envelope.base_reference); reference(envelope.effective_reference);
   keys(patch,'version,kind,authority_registry_sha256,base_reference,effective_reference,ledger_sha256,rows',
     'Unknown complete native patch schema');
-  const normalized = normaliseRetainedRepairLedger(ledger,registry);
   demand(patch.kind === 'unassigned-native-cells-v1' && patch.authority_registry_sha256 === valueSha(registry)
     && patch.ledger_sha256 === sidecar.logical_asset_map.ledger.sha256
     && same(patch.base_reference,envelope.base_reference) && same(patch.effective_reference,envelope.effective_reference),
   'Stale native patch/ledger/registry binding');
-  return {selection,sidecar,registry,ledger,patch,envelope,normalized};
+  return {selection,sidecar,registry,ledger,patch,envelope};
+}
+async function readSelection(session, reader) {
+  const selected=await readSelectionProducts(session,reader);
+  return {...selected,normalized:normaliseRetainedRepairLedger(selected.ledger,selected.registry)};
 }
 function completeRows(rows, size, owners) {
   let previous = -1;
@@ -337,14 +340,18 @@ function coordinateCheck(certificate, facts, additions) {
       'Unsupported retained selected source transport');
   }
 }
-async function rebindProducts(session, reader, ledger, domain) {
+async function rebindOperands(session, reader, ledger, domain) {
   supported(ledger.current_rebind, 'Current-base-bound producer proof is unavailable');
   const certificate = readBody(session,reader,ledger.current_rebind);
   keys(certificate,'version,kind,execution_commit,base_selection,authority_registry_sha256,request,facts,publication,operating,result','Unknown current rebind certificate');
-  const bodies = {};
-  for (const name of ['request','facts','publication','operating','result']) bodies[name] = ['request','result'].includes(name)
-    ?await storedProduct(session,reader,certificate[name],domain,'envelope'):readBody(session,reader,certificate[name]);
-  return {certificate,...bodies};
+  const request=await storedProduct(session,reader,certificate.request,domain,'envelope');
+  return {certificate,request,facts:readBody(session,reader,certificate.facts)};
+}
+async function rebindProducts(session, reader, ledger, domain) {
+  const operands=await rebindOperands(session,reader,ledger,domain),{certificate}=operands;
+  return {...operands,publication:readBody(session,reader,certificate.publication),
+    operating:readBody(session,reader,certificate.operating),
+    result:await storedProduct(session,reader,certificate.result,domain,'envelope')};
 }
 function newState(session, data, privateData) {
   freeze(data); states.set(data,{session,...privateData}); session.handles.add(data); return data;
@@ -492,8 +499,9 @@ function legacyRegistry(registry,authorities) {
 }
 function checkpointAdditions(selected,currentTargets) {
   const index=selected.normalized.rows,project=row=>{
-    // readSelection already validated every normalized native component, including
-    // its base hash and complete interval custody. This private projection only
+    // Cold/seed/candidate readSelection validates every normalized component.
+    // Hosted admission inherits that invariant only after authenticating the
+    // producer's exact accepted bytes, policy and routes. This private projection
     // dispatches that validated representation; rereading the store preserves
     // session lifetime checks without replaying validation on each traversal.
     if (row.representation === 'native-cells') return row;
@@ -698,13 +706,17 @@ async function admitDerivedCheckpoint(session,reader,archiveReader,accepted,sele
     && commit(facts.baseline_accepted_execution?.execution_commit)
     && commit(facts.baseline_accepted_execution?.historical_selected_commit),
   'Accepted predecessor checkpoint custody differs');
-  const selected=selectedInput??await readSelection(session,reader);
+  const selected=selectedInput??await readSelectionProducts(session,reader);
   supported(same(selected.selection,facts.candidate_selection), 'Accepted checkpoint does not cover the actual complete selector');
   const manifest=readNamed(session,reader,selected.selection.manifest_path,selected.selection.sha256);
   demand(same(facts.candidate_bindings,{ledger_sha256:valueSha(selected.ledger),registry_sha256:valueSha(selected.registry),
     patch_sha256:valueSha(selected.patch),manifest_sha256:valueSha(manifest)}),
   'Accepted checkpoint changed the complete ledger/registry/patch/manifest');
-  const rebind=await rebindProducts(session,reader,selected.ledger,{size:manifest.size,ownerCount:certificate.entries.length});
+  // Accepted aggregate consumers use request/facts only. Keep the other original
+  // product pins in the certificate and route census; cold seeds and changed
+  // rebinds still acquire their complete proof bodies.
+  const rebind=await (seedRoot?rebindProducts:rebindOperands)(session,reader,selected.ledger,
+    {size:manifest.size,ownerCount:certificate.entries.length});
   // The trusted accepted execution already proved this exact aggregate.
   // Keep authority identities and full route custody, not historical patch copies.
   const oldAuthorities=await acceptedAuthorities(session,reader,selected,{metadataOnly:true});
@@ -712,19 +724,8 @@ async function admitDerivedCheckpoint(session,reader,archiveReader,accepted,sele
     &&rebind.request.authority_registry_sha256===valueSha(legacyRegistry(selected.registry,oldAuthorities)),
     'Accepted checkpoint rebind/native selection differs');
   demand(same(selected.ledger.current_targets,rebind.request.current_targets), 'Accepted complete target roster differs');
-  const additions=checkpointAdditions(selected,rebind.request.current_targets);
-  // Hosted acceptance binds the private producer's derived certificate bytes.
-  // Its original owner identities were checked at the cold/seed boundary;
-  // qualifyTransition preserves them and validates each changed primitive.
-  // Replaying that scientific result here repeats all owners × additions.
-  // A trusted catalogue seed has no hosted acceptance, so still checks fully.
-  if (seedRoot) coordinateCheck(certificate,{binding:certificate.binding,complete_owners:certificate.entries.length,
-    complete_sources:certificate.binding.sources.length},additions);
   demand(same(certificate.inputs.map(p=>p.source),certificate.binding.sources), 'Accepted complete source binding inventory differs');
   demand(same(certificate.binding.selection,selected.selection), 'Accepted certificate selected binding differs');
-  completeRows(selected.patch.rows,manifest.size,certificate.entries.length);
-  completeRows(rebind.request.current_rows,manifest.size,certificate.entries.length);
-  completeRows(rebind.request.acquisition.predecessor_rows,manifest.size,certificate.entries.length);
   const inventories=facts.actual_reader_inventories;
   keys(inventories,'baseline,candidate','Missing complete accepted reader inventories');
   for (const inventory of Object.values(inventories)) {
@@ -786,6 +787,28 @@ async function admitDerivedCheckpoint(session,reader,archiveReader,accepted,sele
   const physicalPaths = bindPhysicalLogicalSources(reader,certificate,Object.values(inventories).flat());
   const masked = maskedLogicalSources(certificate,physicalPaths);
   supported(sameScientificRoutes(reader,census.routes,session.executablePaths,masked), 'Accepted checkpoint input or routing alternative changed');
+  if (!seedRoot) {
+    // This private path is reached only with the transport's genuine accepted
+    // handle and the original producer's successful native result. Its complete
+    // ledger/registry/patch hashes, selector, policy and routes match above.
+    // The producer normalized every candidate row before minting its private
+    // transition. Reconstruct that same cursor view without replaying accepted
+    // polygon/interval semantics. Parsing and whole-body authentication remain.
+    selected.normalized={rows:repairRowsIndex(selected.ledger.rows,{
+      include:row=>['assigned','zero-cell'].includes(row.disposition),
+      project:row=>{const entry=oldAuthorities.get(row.authority_sha256)?.entry;
+        return entry?{...row,rule_sha256:entry.rule_sha256,authority_sha256:entry.authority_sha256}:row;}
+    })};
+  }
+  const additions=checkpointAdditions(selected,rebind.request.current_targets);
+  // A catalogue seed has no hosted acceptance; preserve its full semantic check.
+  if (seedRoot) {
+    coordinateCheck(certificate,{binding:certificate.binding,complete_owners:certificate.entries.length,
+      complete_sources:certificate.binding.sources.length},additions);
+    completeRows(selected.patch.rows,manifest.size,certificate.entries.length);
+    completeRows(rebind.request.current_rows,manifest.size,certificate.entries.length);
+    completeRows(rebind.request.acquisition.predecessor_rows,manifest.size,certificate.entries.length);
+  }
   const data={version:1,kind:'verified-selected-state-v1',selected_commit:reader.version,
     accepted_execution:seedRoot?{kind:'trusted-main-derived-selected-checkpoint-v1',checkpoint_id:seedRoot.id,
       accepted_head:seedRoot.accepted_head,execution_commit:facts.executing_commit,
