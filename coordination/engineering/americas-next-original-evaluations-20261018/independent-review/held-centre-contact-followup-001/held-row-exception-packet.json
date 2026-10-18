@@ -14,9 +14,10 @@
       "HND": "601852e911478b90762edb7b9d80985786f95d43",
       "NIC": "252f2aa1e6309b6990985dec73611d6df0e11c70"
     },
-    "native_helper_commit": "07c74ff101d4ab5e679255ed85c402356aa54a42",
+    "native_helper_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
     "native_helper_git_blob_oid": "3e1d3e7e6012b5b571345caad029ab7d124c07fd",
-    "latitude_table_git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53"
+    "latitude_table_git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53",
+    "native_helper_provenance_note": "The retained executed diagnostic pinned this helper blob at historical commit 2d1fc6f430e756498908bf2c4e267356a13f5cc7. The same blob is present in commits 252f2aa1e6309b6990985dec73611d6df0e11c70 and 75861b9784f75b7894bfc51fa0419f40f966157d. It is not the different helper at 07c74ff101d4ab5e679255ed85c402356aa54a42; the diagnostic results were not recomputed with current helper code."
   },
   "actual_scope_outcomes": {
     "HND": {
@@ -852,7 +853,7 @@
       "role": "custody index for the complete archived HND source; the diagnostic retains the inline geometry hash separately"
     },
     "native_helper": {
-      "commit": "07c74ff101d4ab5e679255ed85c402356aa54a42",
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
       "path": "src/native-grid.js",
       "git_blob_oid": "3e1d3e7e6012b5b571345caad029ab7d124c07fd",
       "sha256": "66b453bbb2e001b9ff56bd754d55087f5919845dceeefd886016494cefa1d3e0"
