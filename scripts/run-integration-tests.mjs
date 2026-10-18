@@ -78,7 +78,7 @@ function nativeRegressionBodies(files,readFile) {
     }
   }
   if(has('sierra-leone-physical-review-controls')){
-    const root='coordination/engineering/sierra-leone-physical-review-20261018-worker4/';
+    const root='test/fixtures/sle-physical-review/';
     pins.push(...Object.values(read(root+'input-pins.json').inputs));
   }
   return pins;

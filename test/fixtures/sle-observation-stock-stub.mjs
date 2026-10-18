@@ -4,11 +4,10 @@ import {gunzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
 
 const base='75861b9784f75b7894bfc51fa0419f40f966157d';
-const prefix='coordination/engineering/sierra-leone-physical-review-20261018-worker4/';
 const sha=body=>createHash('sha256').update(body).digest('hex');
 let intervalRows;
 function retainedIntervals(){
-  if(!intervalRows)intervalRows=JSON.parse(gunzipSync(fs.readFileSync(path.join(process.cwd(),prefix,'intervals/block-030.json.gz'))));
+  if(!intervalRows)intervalRows=JSON.parse(gunzipSync(fs.readFileSync(path.join(process.cwd(),'test/fixtures/sle-physical-review/intervals/block-030.json.gz'))));
   return intervalRows;
 }
 

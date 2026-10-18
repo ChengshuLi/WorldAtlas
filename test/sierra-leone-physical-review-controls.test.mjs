@@ -7,20 +7,46 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 
-const prefix='coordination/engineering/sierra-leone-physical-review-20261018-worker4/';
-const pythonControls=path.resolve(prefix+'test_interpret.py');
-const observer=path.resolve(prefix+'observe-selected-state.mjs');
+const retainedCodePrefix='coordination/engineering/sierra-leone-physical-review-20261018-worker4/';
+const fixturePrefix='test/fixtures/sle-physical-review/';
+const fixtureFiles=[
+  'input-pins.json',
+  'intervals/block-030.json.gz',
+  'intervals/package.json',
+  'results-001/interval-assessments.json',
+  'results-001/cell-observations.json',
+  'results-001/questions.json'
+];
+const retainedScripts=['interpret.py','test_interpret.py','observe-selected-state.mjs'];
 const loader=path.resolve('test/fixtures/sle-observation-loader.mjs');
 const digest=body=>createHash('sha256').update(body).digest('hex');
 
-function runObserver(output) {
+function copyRetainedPacket(directory) {
+  const packet=path.join(directory,'packet');
+  fs.mkdirSync(packet);
+  for(const name of retainedScripts) {
+    fs.copyFileSync(path.join(process.cwd(),retainedCodePrefix,name),path.join(packet,name));
+  }
+  for(const name of fixtureFiles) {
+    const source=path.join(process.cwd(),fixturePrefix,name);
+    const destination=path.join(packet,name);
+    fs.mkdirSync(path.dirname(destination),{recursive:true});
+    fs.copyFileSync(source,destination);
+  }
+  return packet;
+}
+
+function runObserver(observer,output) {
   return spawnSync(process.execPath,['--import',loader,observer,output],{
     cwd:process.cwd(),encoding:'utf8',maxBuffer:8*1024*1024
   });
 }
 
-test('bounded retained Python interpretation controls run in the ordinary Node test inventory',()=>{
-  const result=spawnSync(process.env.PYTHON??'python3',['-I','-B',pythonControls],{
+test('bounded retained Python interpretation controls run in the ordinary Node test inventory',t=>{
+  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'sle-python-controls-'));
+  t.after(()=>fs.rmSync(directory,{recursive:true,force:true}));
+  const packet=copyRetainedPacket(directory);
+  const result=spawnSync(process.env.PYTHON??'python3',['-I','-B',path.join(packet,'test_interpret.py')],{
     cwd:process.cwd(),encoding:'utf8',maxBuffer:8*1024*1024
   });
   assert.equal(result.error,undefined,result.error?.message);
@@ -39,15 +65,17 @@ test('bounded retained Python interpretation controls run in the ordinary Node t
 test('existing selected-state observer emits a complete conflict-aware key/accounting receipt',t=>{
   const directory=fs.mkdtempSync(path.join(os.tmpdir(),'sle-observer-controls-'));
   t.after(()=>fs.rmSync(directory,{recursive:true,force:true}));
+  const packet=copyRetainedPacket(directory);
+  const observer=path.join(packet,'observe-selected-state.mjs');
   const output=path.join(directory,'fresh');
-  const result=runObserver(output);
+  const result=runObserver(observer,output);
   assert.equal(result.error,undefined,result.error?.message);
   assert.equal(result.status,0,result.stderr);
   const events=result.stdout.trim().split('\n').map(line=>JSON.parse(line));
   assert.deepEqual(events.map(event=>event.event),['actual-start','actual-exit']);
   const state=JSON.parse(fs.readFileSync(path.join(output,'selected-state.json'),'utf8'));
   const publication=JSON.parse(fs.readFileSync(path.join(output,'publication.json'),'utf8'));
-  const intervals=JSON.parse(gunzipSync(fs.readFileSync(prefix+'intervals/block-030.json.gz')));
+  const intervals=JSON.parse(gunzipSync(fs.readFileSync(path.join(packet,'intervals/block-030.json.gz'))));
   const expected=new Map();
   for(const [y,start,end,owners] of intervals)for(let x=start;x<end;x++){
     const key=y+':'+x;
@@ -84,10 +112,12 @@ test('existing selected-state observer emits a complete conflict-aware key/accou
 test('selected-state observer refuses existing and symlink output paths before writing',t=>{
   const directory=fs.mkdtempSync(path.join(os.tmpdir(),'sle-observer-refusal-'));
   t.after(()=>fs.rmSync(directory,{recursive:true,force:true}));
+  const packet=copyRetainedPacket(directory);
+  const observer=path.join(packet,'observe-selected-state.mjs');
   const existing=path.join(directory,'existing');
   fs.mkdirSync(existing);
   fs.writeFileSync(path.join(existing,'sentinel'),'unchanged');
-  const refused=runObserver(existing);
+  const refused=runObserver(observer,existing);
   assert.notEqual(refused.status,0);
   assert.equal(refused.stdout,'');
   assert.match(refused.stderr,/Fresh output required/);
@@ -97,7 +127,7 @@ test('selected-state observer refuses existing and symlink output paths before w
   fs.mkdirSync(target);
   const link=path.join(directory,'linked-parent');
   fs.symlinkSync(target,link);
-  const symlinkRefused=runObserver(path.join(link,'new-output'));
+  const symlinkRefused=runObserver(observer,path.join(link,'new-output'));
   assert.notEqual(symlinkRefused.status,0);
   assert.equal(symlinkRefused.stdout,'');
   assert.match(symlinkRefused.stderr,/Symlink output refused/);
