@@ -275,12 +275,18 @@ test('raw metadata authenticates complete malformed bodies before syntax refusal
 
 test('raw ignored nesting has no extra recursive freeze or spill-serialization depth limit',async t=>{
  const {admitNativeMetadataStore}=await import('../scripts/native-patch-store.mjs');const directory=temporary(t),depth=5000;
+ const {isNativeSequence}=await import('../src/native-grid.js');
  for(const spill of [false,true])for(const object of [false,true]){
   const item='{"ignored":'+(object?'{"constructor":':'[').repeat(depth)+'-1e400'+(object?'}':']').repeat(depth)+'}';
-  const body=Buffer.from(spill?'{"inventory":['+Array(33).fill(item).join(',')+']}':item);JSON.parse(body);
+  // Entry 33 flushes the buffered deep value at 0, then appends the deep value
+  // at 32 directly. The intervening entries need count, not repeated depth.
+  const body=Buffer.from(spill?'{"inventory":['+[item,...Array(31).fill('{}'),item].join(',')+']}':item);JSON.parse(body);
   const store=await admitNativeMetadataStore({directory,chunks:chunks(body,4096),metadataArrays:['inventory'],expected:{bytes:body.length,sha256:hash(body)}});
-  let value=(spill?store.metadata.inventory.at(32):store.metadata).ignored;
-  for(let i=0;i<depth;i++){assert(Object.isFrozen(value));value=object?value.constructor:value[0];}assert.equal(value,-Infinity);
+  if(spill){assert(isNativeSequence(store.metadata.inventory));assert.equal(Array.isArray(store.metadata.inventory),false);assert.equal(store.metadata.inventory.length,33);}
+  for(const entry of spill?[store.metadata.inventory.at(0),store.metadata.inventory.at(32)]:[store.metadata]){
+   let value=entry.ignored;
+   for(let i=0;i<depth;i++){assert(Object.isFrozen(value));value=object?value.constructor:value[0];}assert.equal(value,-Infinity);
+  }
   store.close();assert.deepEqual(fs.readdirSync(directory),[]);
  }
 });
