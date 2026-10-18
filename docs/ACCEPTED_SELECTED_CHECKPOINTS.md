@@ -361,3 +361,30 @@ seconds to these two repeated canonical traversals (83,779,731 bytes) inside a
 observational overhead; this is not a paired speedup or an end-to-end estimate.
 The parser's required canonical pass, native Float64 coordinates, edges/crossings,
 retained metadata and exact output remain distinct size-dependent terms.
+
+### Chunk-local native interval ingestion
+
+A complete unsigned-decimal uint32 interval triple and its following delimiter
+already present in the input's owned byte chunk can write the existing 12-byte
+record directly. Its synchronous array visitor avoids a temporary three-element
+JSON array, a tuple string and per-run promise dispatch. Overflow, signed zero,
+exponents, decimal spellings, malformed tokens and chunk splits leave the parser
+cursor untouched for the existing complete JSON grammar. Native domain errors
+remain deferred until the final duplicate field wins; malformed syntax cannot be
+erased by a later duplicate. Property names, strings and other metadata keep their
+original parser. Producer-owned chunks are still snapshotted before use.
+
+This changes neither storage format nor authority. Complete raw byte/hash
+verification, required canonical passes, row order and owner bounds, ordinary
+scratch cleanup and borrowed-store lifetimes remain. A bounded genuine control
+with 64 rows and 448 additional local triples observed 448 fewer parsed arrays,
+448 fewer tuple-string conversions and 4,480 fewer promise initializations;
+those are allocation-event counts, not retained-byte or peak-memory savings.
+
+One parser-only observation on accepted preimage `4d87bbff` admitted the retained
+55,093,578-byte ledger and 28,686,153-byte patch in 20.731 seconds. Separately
+measured canonical work accounted for 6.962 seconds; the 13.766-second residual
+combines parsing, spooling and local Git transport. Instrumentation adds overhead,
+and that residual is neither pure parser time nor a promised speedup. Both stores
+retain disk-backed records and metadata; native Float64 geometry, edges/crossings,
+current output and other eager inputs remain separate size-dependent terms.

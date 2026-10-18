@@ -69,6 +69,33 @@ class Input {
   }
   return null;
  }
+ // Only complete unsigned-decimal uint32 triples in this owned chunk take the
+ // synchronous path. All other spellings/splits leave the cursor untouched for
+ // value(). Return undefined for fallback, -1 for a deferred domain error, or
+ // the positive interval end after writing the same private 12-byte record.
+ inlineRun(record,end,size,ownerCount){
+  const buffer=this.buffer;let at=this.at,start,stop,owner;
+  while(at<buffer.length&&whitespace(buffer[at]))at++;
+  if(buffer[at++]!==91)return;
+  for(let field=0;field<3;field++){
+   while(at<buffer.length&&whitespace(buffer[at]))at++;
+   let byte=buffer[at++];if(!(byte>=48&&byte<=57))return;
+   let value=byte-48;
+   if(byte!==48)while((byte=buffer[at])>=48&&byte<=57){
+    value=value*10+byte-48;if(value>0xffffffff)return;at++;
+   }
+   while(at<buffer.length&&whitespace(buffer[at]))at++;
+   if(buffer[at++]!==(field===2?93:44))return;
+   if(field===0)start=value;else if(field===1)stop=value;else owner=value;
+  }
+  // A trailing non-JSON token belongs to value() too. If the outer delimiter
+  // is not yet in this chunk, let that grammar retain its original diagnostics.
+  let next=at;while(next<buffer.length&&whitespace(buffer[next]))next++;
+  if(buffer[next]!==44&&buffer[next]!==93)return;
+  this.at=at;
+  if(!(start>=end&&stop>start&&stop<=size&&owner>0&&owner<=ownerCount))return -1;
+  record.writeUInt32LE(start,0);record.writeUInt32LE(stop,4);record.writeUInt32LE(owner,8);return stop;
+ }
  async peek(){return await this.available()?this.buffer[this.at]:undefined;}
  async space(){while(await this.available()){while(this.at<this.buffer.length&&whitespace(this.buffer[this.at]))this.at++;if(this.at<this.buffer.length)return;}}
  syntax(ok,message){if(!ok)throw this.syntaxErrors?new SyntaxError(message):Error(message);}
@@ -163,7 +190,7 @@ async function parseRows(input,runs,index,size,ownerCount){
    runs.reset(offset);result={error:null,count:0};let end=0;
    await input.space();
    if(await input.peek()!==91){await input.value();result.error='Missing complete native intervals';return;}
-   await array(input,async()=>{
+   const genericRun=async()=>{
     const run=await input.value();
     if(!(Array.isArray(run)&&run.length===3&&run.every(Number.isSafeInteger)&&run[0]>=end
      &&run[1]>run[0]&&run[1]<=size&&run[2]>0&&run[2]<=ownerCount)){
@@ -171,6 +198,12 @@ async function parseRows(input,runs,index,size,ownerCount){
     }
     end=run[1];run.forEach((value,i)=>tripleRecord.writeUInt32LE(value,i*4));
     runs.append(tripleRecord);result.count++;
+   };
+   await array(input,()=>{
+    const next=input.inlineRun(tripleRecord,end,size,ownerCount);
+    if(next===undefined)return genericRun();
+    if(next===-1){result.error??='Invalid complete native interval/owner';return;}
+    end=next;runs.append(tripleRecord);result.count++;
    });
   });
   const rowError=fields.size!==2||!fields.has('y')||!fields.has('runs')?'Unknown native row shape':
