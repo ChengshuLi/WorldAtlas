@@ -8,6 +8,8 @@ import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {gunzipSync} from 'node:zlib';
 import {locate} from './delivery-handoff-advance.mjs';
+import {acquireFinalizationCheckpoint, finalizationCheckpointBytes, admitCanonicalCheckpoint} from './delivery-checkpoint-finalization.mjs';
+import {releaseAcceptedCheckpoint} from './accepted-selected-checkpoint.mjs';
 import {repairComponentKey, compareRepairComponents} from '../src/native-grid.js';
 import {scientificNativeSelection,originalNativeReference,validateReferenceMetadataHeader} from '../src/reference-metadata.js';
 import {prepareReferenceMetadataProjection,validateReferenceMetadataProjection} from './selected-reference-metadata.mjs';
@@ -894,7 +896,7 @@ function appendPackageReadPaths(original, paths, prior = {}) {
 export function resolveFinalizeConfig(config, reader) {
   if (!Object.hasOwn(config, 'composition')) return config;
   const keys = ['version', 'selector', 'package_inputs', 'composition', 'rebind', 'new_prefix', 'sidecar_output'];
-  need(config.version === 1 && same(Object.keys(config).filter(key => !['restored_read_roles', 'preparation_allowance'].includes(key)).sort(), keys.sort()),
+  need(config.version === 1 && same(Object.keys(config).filter(key => !['restored_read_roles', 'preparation_allowance', 'accepted_checkpoint'].includes(key)).sort(), keys.sort()),
     'Compact finalization requires exact locators and cannot mix full pins or an existing sidecar');
   need(config.composition?.path && path.posix.basename(config.composition.path) === 'selected-ledger.json',
     'Modern composition requires the committed selected-ledger.json product');
@@ -906,7 +908,8 @@ export function resolveFinalizeConfig(config, reader) {
     ledger: selected, selected_ledger: selected, patch: sibling('patch.json'), runtime_envelope: sibling('runtime-envelope.json')};
 }
 
-export function finalizeDelivery(config, reader) {
+export function finalizeDelivery(config, reader, {acceptedCheckpoint} = {}) {
+  const checkpoint = finalizationCheckpointBytes(config, reader, acceptedCheckpoint);
   config = resolveFinalizeConfig(config, reader);
   // The cumulative route uses one exact selected ledger in several roles.
   // Authenticate it once here; this snapshot cannot survive another invocation.
@@ -1068,8 +1071,16 @@ export function finalizeDelivery(config, reader) {
       component_ids: c.component_ids, members: c.members.map(m => ({component_id: m.component_id, target_id: m.target_id,
         disposition: m.disposition, ...(Object.hasOwn(m, 'native_rows_sha256')
           ? {native_rows_sha256: m.native_rows_sha256} : {geometry_sha256: m.geometry_sha256})}))}))};
-  return {...outputs, 'ownership-selection.json': selector, 'package-inputs.json': orderedBytes(packageInputs),
+  return {...outputs, ...(checkpoint ? {'selected-checkpoint.json': checkpoint} : {}),
+    'ownership-selection.json': selector, 'package-inputs.json': orderedBytes(packageInputs),
     'selected-delivery-expectations.json': orderedBytes(expectations)};
+}
+
+export function publishFinalizedDelivery(root, destination, outputs, binding, reader, selector, resume = false) {
+  const adopt = admitCanonicalCheckpoint(root, reader, selector, outputs['selected-checkpoint.json'], resume);
+  const publication = publish(root, destination, outputs, binding, resume);
+  adopt();
+  return publication;
 }
 
 const physicalProducts = ['whole-target-support.json', 'execution-receipt.json'];
@@ -1626,7 +1637,15 @@ async function main(args) {
   if (phase === 'retain') outputs = retainProducts(config, root, reader);
   if (phase === 'compose') outputs = composeAuthorities(config, reader);
   if (phase === 'package') outputs = packageProjection(config, reader);
-  if (phase === 'finalize') outputs = finalizeDelivery(config, reader);
+  if (phase === 'finalize') {
+    const token = config.accepted_checkpoint ? process.env.GH_TOKEN ?? execFileSync('gh', ['auth', 'token'],
+      {encoding: 'utf8', timeout: 20000, maxBuffer: 16384}).trim() : undefined;
+    const handle = await acquireFinalizationCheckpoint(config, reader, {token});
+    try { outputs = finalizeDelivery(config, reader, {acceptedCheckpoint: handle}); }
+    finally { if (handle) releaseAcceptedCheckpoint(handle); }
+    const publication = publishFinalizedDelivery(root, destination, outputs, binding, reader, config.selector, flags.includes('--resume'));
+    console.log(JSON.stringify(publication)); return;
+  }
   console.log(JSON.stringify({...publish(root, destination, outputs, binding, flags.includes('--resume')), ...(observation ? {observation} : {})}));
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main(process.argv.slice(2)).catch(error => { console.error(error.message); process.exitCode = 1; });
