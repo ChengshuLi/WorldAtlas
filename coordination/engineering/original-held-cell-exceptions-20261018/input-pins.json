@@ -83,9 +83,6 @@
         "priority": 1
       },
       "reproduction": {
-        "output_body_path": "liberia-original-package-contract.json",
-        "output_bytes": 3959,
-        "output_sha256": "56770ca264a899b87694aadb5acaee3c3a1c26a51856897061c29df9196a9cd1",
         "extractor": {
           "commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
           "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs",
@@ -99,7 +96,19 @@
           "bytes": 1754890
         },
         "invocation": "node coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs gb-LBR-ADM2--repair-evaluation OUTPUT_DIRECTORY",
-        "reproduces": "The exact original intervals/package contract from the immutable package queue and retained complete source/physical blocks; this does not adjudicate an exception or grant credit."
+        "reproduces": "The exact original intervals/package contract from the immutable package queue and retained complete source/physical blocks; this does not adjudicate an exception or grant credit.",
+        "original_extractor_output": {
+          "relative_output_name": "package.json",
+          "bytes": 3959,
+          "sha256": "56770ca264a899b87694aadb5acaee3c3a1c26a51856897061c29df9196a9cd1",
+          "meaning": "Original stock extractor output body; this is the source of the extracted contract fields recorded above."
+        },
+        "published_derived_artifact": {
+          "path": "liberia-original-package-contract.json",
+          "bytes": 4802,
+          "sha256": "93f427dd8b612b3947a5137ff6e019772aa63fda0e6591a9d7f9907f57a04402",
+          "meaning": "Derived evidence artifact including the extracted contract plus packet metadata; not byte-identical to the original extractor output."
+        }
       }
     },
     "native_latitudes": {
