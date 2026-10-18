@@ -1990,3 +1990,63 @@ test('a public prepared flag or cloned report cannot reuse the trusted checker c
   assert.equal(result.accepted,true);assert(f.reads.length>0,'Unprivileged report retains original classification');
   assert.equal(result.geography.execution,undefined);
 });
+
+// Exercise the paired finalizer declaration contract and the actual prepared
+// routing entry with existing compact accepted-checkpoint custody, not history.
+function retiredCheckpointPrepareFixture(mutate = () => {}) {
+  const f=checkpointProfileFixture(), c=f.checkpoint;
+  const read=name=>JSON.parse(f.blobs.get(f.authored.entries.get(name).sha));
+  const currentSelection=read('data/ownership-selection.json');
+  const priorSelection=structuredClone(c.facts.candidate_selection), priorPath=priorSelection.additive_release.path;
+  const prior=read(priorPath);
+  prior.version=2;prior.kind='retained-native-additive-selection-v2';
+  prior.runtime_envelope=f.leaf('envelope.json',true);
+  prior.logical_asset_map.patch=f.leaf('patch.json',true);
+  const pin=f.put(priorPath,prior,true);
+  priorSelection.additive_release={path:pin.path,bytes:pin.bytes,sha256:pin.sha256};
+  f.put('data/ownership-selection.json',priorSelection,true);
+  f.put('data/ownership-selection.json',currentSelection);
+  const retired=[priorPath,prior.runtime_envelope.path,prior.logical_asset_map.ledger.path,prior.logical_asset_map.patch.path];
+  const shared=f.sidecarBody.logical_asset_map.base_manifest.path;
+  const unrelated=f.put('data/unrelated-package.json',{unchanged:true},true).path;
+  const before={...f.policy,inputs:[...f.policy.inputs,shared,unrelated,...retired]};
+  f.definition={...f.definition,inputs:[...f.definition.inputs.slice(0,2),shared,unrelated,...f.definition.inputs.slice(2)]};
+  f.put('.github/package-inputs.json',before,true);
+  f.put('.github/package-inputs.json',f.definition);
+  f.put(c.locatorPath,{...c.locator,acceptance:{...c.locator.acceptance,pr_number:6}},true);
+  c.facts.candidate_selection=priorSelection;c.rebuild();
+  f.put(prefix+'retained-audit.py','# Inert retained delivery evidence; never executed.\n');
+  mutate(f,{shared,unrelated,prior,currentSelection,retired,read});
+  c.refresh();
+  return mergeFixture({selectedFixture:f});
+}
+
+test('authenticated quartet retirement and checkpoint advancement preserve the actual prepared selected route repeatedly',async()=>{
+  const f=retiredCheckpointPrepareFixture();
+  for(let i=0;i<2;i++){
+    const prepared=await prepareIntegration(f.options);
+    assert.equal(prepared.test_selection,'selected-data');assert.deepEqual(prepared.shards,[0]);
+    assert.equal(prepared.geography_required,true);assert.equal(prepared.geography_software,false);
+  }
+  assert(f.checkpoint.calls.some(route=>route.endsWith('/pulls/7')),'chosen predecessor acceptance was checked');
+  assert(f.reads.includes(f.authored.entries.get(f.checkpoint.archive).sha),'chosen ZIP was authenticated');
+});
+
+test('retirement and checkpoint advancement cannot remove unrelated, shared or still-current roles',async()=>{
+  for(const kind of ['unrelated','shared','still-current']){
+    const f=retiredCheckpointPrepareFixture((f,state)=>{
+      if(kind==='still-current'){
+        const sidecar={...f.sidecarBody,runtime_envelope:state.prior.runtime_envelope};
+        const pin=f.put(state.currentSelection.additive_release.path,sidecar);
+        f.put('data/ownership-selection.json',{...state.currentSelection,additive_release:{path:pin.path,bytes:pin.bytes,sha256:pin.sha256}});
+      }else{
+        f.definition.inputs=f.definition.inputs.filter(name=>name!==state[kind]);
+        f.put('.github/package-inputs.json',f.definition);
+      }
+    });
+    const prepared=await prepareIntegration(f.options);
+    assert.notEqual(prepared.test_selection,'selected-data',kind);
+    assert.equal(prepared.profile,'full',kind);
+    assert.equal(prepared.geography_software,true,kind);
+  }
+});

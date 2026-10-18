@@ -153,6 +153,34 @@ export function selectedCumulativePackageRoles(selection, raw) {
       /^[a-f0-9]{64}$/.test(pin.sha256 ?? ''))) fail();
   return [{...hook, mode: '100644', git_blob_oid: createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex')}, ...pins];
 }
+// One definition-level rule for generation, selected-data classification and
+// retained package reuse. Callers still authenticate their own complete role
+// graphs; this permits no unrelated removal, directory narrowing or policy edit.
+export function admitSelectedPackageDeclarations(before, current, {selection, priorSidecarRaw, priorEntry, currentPaths = []} = {}) {
+  const need=(ok,message)=>{if(!ok)throw Error(message);};
+  const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+  validatePackageInputs(before); validatePackageInputs(current);
+  const {inputs:oldInputs,optional_inputs:oldOptional,...oldPolicy}=before,
+    {inputs:newInputs,optional_inputs:newOptional,...newPolicy}=current;
+  const removed=oldInputs.filter(name=>!newInputs.includes(name));
+  need(Array.isArray(currentPaths) && removed.every(name=>!currentPaths.includes(name)),
+    'Retired cumulative role remains a current package input');
+  const retired=new Map(removed.length ? selectedCumulativePackageRoles(selection,priorSidecarRaw).map(pin=>[pin.path,pin]) : []);
+  for (const name of removed) {
+    const pin=retired.get(name), row=priorEntry?.(name);
+    need(pin, 'Removed package input is not an authenticated prior cumulative role: '+name);
+    need(row?.mode==='100644' && (row.oid??row.sha??row.git_blob_oid)===(pin.git_blob_oid??pin.blob)
+      // Source capture inventories bind Git OIDs, which include byte length;
+      // tree/whole-pin descriptors also carry an independently checked size.
+      && ['bytes','size'].every(key=>!Object.hasOwn(row,key)||row[key]===pin.bytes),
+      'Retired cumulative role differs from original source inventory: '+name);
+  }
+  const retainedInputs=oldInputs.filter(name=>!removed.includes(name));
+  need(same(oldPolicy,newPolicy)&&same(oldOptional.filter(name=>!removed.includes(name)),newOptional)&&
+    same(retainedInputs,newInputs.slice(0,retainedInputs.length)),
+    'Package definition is not an append-only selected change or authenticated cumulative replacement');
+  return {removed,retired,retainedInputs,additions:newInputs.slice(retainedInputs.length)};
+}
 export function admitPackageInputTransition(before, current, {acceptedInputs, typedInputs, priorSidecarRaw, preliminary = false} = {}) {
   const need=(ok,message)=>{if(!ok)throw Error(message);};
   const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
@@ -160,15 +188,9 @@ export function admitPackageInputTransition(before, current, {acceptedInputs, ty
   validatePackageInputs(before.definition); validatePackageInputs(current.definition);
   need(before.producer?.kind===PACKAGE_PRODUCER_KIND&&same(before.producer,current.producer),
     'Immediate original build capture and unchanged producer workflow required');
-  const {inputs:oldInputs,optional_inputs:oldOptional,...oldPolicy}=before.definition,
-    {inputs:newInputs,optional_inputs:newOptional,...newPolicy}=current.definition;
-  const removed=oldInputs.filter(name=>!newInputs.includes(name));
-  const retired=new Map(removed.length ? selectedCumulativePackageRoles(before.selection,priorSidecarRaw).map(pin=>[pin.path,pin]) : []);
-  need(removed.every(name=>retired.has(name)), 'Removed package input is not an authenticated prior cumulative role');
-  const retainedInputs=oldInputs.filter(name=>!removed.includes(name));
-  need(same(oldPolicy,newPolicy)&&same(oldOptional.filter(name=>!removed.includes(name)),newOptional)&&
-    same(retainedInputs,newInputs.slice(0,retainedInputs.length)),
-    'Package definition is not an append-only selected change or authenticated cumulative replacement');
+  const oldInventory=new Map(before.files.map(row=>[row.path,row]));
+  const {removed,retired,retainedInputs,additions:newDeclarations}=admitSelectedPackageDeclarations(
+    before.definition,current.definition,{selection:before.selection,priorSidecarRaw,priorEntry:name=>oldInventory.get(name),currentPaths:current.files.map(row=>row.path)});
   const {additive_release:oldAdditive,...oldBase}=before.selection;
   const {additive_release:newAdditive,...newBase}=current.selection;
   need(same(oldBase,newBase)&&oldAdditive&&newAdditive,'Original invariant selection differs');
@@ -183,7 +205,7 @@ export function admitPackageInputTransition(before, current, {acceptedInputs, ty
     } else need(newFiles.has(name)&&(exceptions.has(name)||same(row,newFiles.get(name))),
       'Original invariant package input changed: '+name);
   }
-  const newDeclarations=newInputs.slice(retainedInputs.length),accepted=new Map(),retained=[];
+  const accepted=new Map(),retained=[];
   if(acceptedInputs!==undefined){
     need(commit(acceptedInputs?.commit)&&Array.isArray(acceptedInputs.files),'Exact trusted selected base required');
     for(const row of acceptedInputs.files){

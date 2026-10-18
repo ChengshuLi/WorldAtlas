@@ -209,7 +209,7 @@ function assemblyCode(source,executingRoot) {
   visit('scripts/assemble-selected-package.mjs');return files.sort((a,b)=>a.path.localeCompare(b.path,'en'));
 }
 
-function assemblySourceAdmission(original,source,acceptedInputs) {
+function assemblySourceAdmission(original,source,acceptedInputs,priorSidecarRaw) {
   const before=requireOriginalPackageOutput(original).manifest.source,definition=loadPackageInputs(source);
   const read=name=>{
     const file=path.join(source,name),stat=ordinary(file);
@@ -235,16 +235,16 @@ function assemblySourceAdmission(original,source,acceptedInputs) {
     'Immediate original build capture and unchanged producer workflow required');
   const current={head:assemblyGit(source,['rev-parse','HEAD']).trim(),definition,selection,files:plain,
     producer:{kind:'immediate-cloudflare-build-v1',workflows:workflowPins}};
-  admitPackageInputTransition(before,current,{acceptedInputs,preliminary:true});
+  admitPackageInputTransition(before,current,{acceptedInputs,priorSidecarRaw,preliminary:true});
 }
 
 // Separate from package-issued full-build execution: this authenticates only the
 // actual small assembly programme and its immutable current source identities.
-export function issuePackageAssemblyExecution({original,source,stage,executingRoot,acceptedInputs}) {
+export function issuePackageAssemblyExecution({original,source,stage,executingRoot,acceptedInputs,priorSidecarRaw}) {
   requireOriginalPackageOutput(original);
   demand(process.execArgv.length===0&&!process.env.NODE_OPTIONS?.trim()&&!process.env.NODE_PATH?.trim(),'Plain assembly Node execution required');
   source=fs.realpathSync(source);stage=fs.realpathSync(stage);executingRoot=fs.realpathSync(executingRoot);
-  assemblySourceAdmission(original,source,acceptedInputs);
+  assemblySourceAdmission(original,source,acceptedInputs,priorSidecarRaw);
   demand(path.resolve(process.argv[1])===path.join(executingRoot,'scripts/assemble-selected-package.mjs'),'Actual assembly driver required');
   const files=assemblyCode(source,executingRoot), executable=fs.realpathSync(process.execPath);
   const runtime={...assemblyFile(path.dirname(executable),path.basename(executable)),

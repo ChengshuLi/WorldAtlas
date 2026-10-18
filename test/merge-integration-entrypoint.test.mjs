@@ -6,6 +6,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {renderClaim} from '../scripts/issue-claim-contract.mjs';
+import {EXECUTION_CODE} from '../scripts/check-unchanged-selected-geography.mjs';
 
 const root=path.resolve(import.meta.dirname,'..');
 // Mock the real authenticated core-response boundary even when these child
@@ -180,6 +181,7 @@ for(const wrapped of [false,true]) for(const notification of ['denied','transpor
     body:'<!-- worldatlas-work:v1\n'+JSON.stringify({mode:'engineering',max_prs:2,depends_on:[],scope:'code'})+'\n-->'};
   const pr={number:2,state:'open',draft:false,body:'Closes #1',title:'Repair',changed_files:1,
     head:{sha:head,ref:'engineering/test',repo:{full_name:'owner/repo'}},base:{ref:'main',sha:base},mergeable:true,merge_commit_sha:candidate};
+  const authorityRows=[...EXECUTION_CODE,'test/fixtures/owned-prepare.json'].map(name=>({path:name,sha:sha('8'),mode:'100644',type:'blob'}));
   const routes={
     '/pulls/2':pr,'/issues/1':issue,'/issues/1/timeline':[],
     '/issues/1/comments':[{id:1,user:{login:'github-actions[bot]'},body:renderClaim({version:1,active:true,worker_id:'worker',claim_id:'nonce',branch:'engineering/test',expires_at:new Date(Date.now()+3600000).toISOString()})}],
@@ -189,10 +191,10 @@ for(const wrapped of [false,true]) for(const notification of ['denied','transpor
     ['/git/commits/'+candidate]:{sha:candidate,parents:[{sha:sha('d')},{sha:head}]},
     '/contents/.github/package-inputs.json':packageBlob,
     ['/git/commits/'+base]:{sha:base,tree:{sha:sha('5')}},
-    ['/git/trees/'+sha('5')]:{truncated:false,tree:[]},
+    ['/git/trees/'+sha('5')]:{truncated:false,tree:authorityRows},
     ['/git/commits/'+owned]:{sha:owned,tree:{sha:sha('6')},parents:[{sha:base},{sha:head}]},
     ['/git/commits/'+head]:{tree:{sha:sha('6')}},
-    ['/git/trees/'+sha('6')]:{truncated:false,tree:[{path:'src/a.js',sha:'blob',mode:'100644',type:'blob'},
+    ['/git/trees/'+sha('6')]:{truncated:false,tree:[...authorityRows,{path:'src/a.js',sha:'blob',mode:'100644',type:'blob'},
       {path:'test/merge-integration.test.mjs',sha:sha('7'),mode:'100644',type:'blob'}]}
   };
   fs.writeFileSync(path.join(directory,'mock.mjs'),capacityShim+`import fs from 'node:fs';const routes=${JSON.stringify(routes)},refs=new Map();
