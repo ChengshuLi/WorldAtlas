@@ -104,7 +104,9 @@ test('native-authority leaves whole input discovery to the unchanged constructor
   }
   const direct=await nativeAuthority(f.config,f.reader,f.root);
   assert.equal(outerReads,0,'authority must not retain a second outer copy of constructor inputs');
-  const result=JSON.parse(direct.products['constructor-result.json']);
+  const staged=direct.products['constructor-result.json'];t.after(()=>staged.close());
+  assert.equal(Buffer.isBuffer(staged),false,'required large result stays file-backed');
+  const result=JSON.parse(fs.readFileSync(staged.file));
   assert.equal(result.ledger_rows.length,1);
   assert.equal(result.ledger_rows[0].target_id,'city');
   assert.equal(result.ledger_rows[0].native_cells,1);

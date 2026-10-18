@@ -12,7 +12,7 @@ import {ACCEPTED_CHECKPOINT_CODE} from '../scripts/accepted-selected-checkpoint.
 import {renderWorkerResult} from '../scripts/worker-result.mjs';
 import {createHash} from 'node:crypto';
 import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
-import {valueBytes,valueSha,coordinateBounds} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {valueBytes,valueSha,coordinateBounds,normaliseRetainedRepairLedger} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {deriveCoordinateDelta,projectSourceFeatures,projectNativeRows,qualifyTransition} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const MODULE='coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const PROGRAMME='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
@@ -605,6 +605,75 @@ function successorSelector(f,name='successor/sidecar.json') {
 function currentReader(f,a,version) {
   return new f.native.ImmutableReader(f.root,version,{invocation:a.reader.invocation});
 }
+function candidateLedger(f,ledger,prefix) {
+  const registry=JSON.parse(fs.readFileSync(path.join(f.root,f.sidecar.authority_registry.path)));
+  f.save(prefix+'/ledger.json',ledger);const ledgerPin=f.pin(prefix+'/ledger.json',f.commit());
+  // Build complete fixture bindings without using the production validator: the
+  // adverse candidate must reach its real admission boundary with coherent pins.
+  const components=ledger.rows.filter(row=>['assigned','zero-cell'].includes(row.disposition)).map(row=>{
+    const entry=registry.entries.find(entry=>entry.authority_sha256===row.authority_sha256);
+    return {...row,rule_sha256:entry.rule_sha256,authority_sha256:entry.authority_sha256};
+  });
+  const effective={...f.envelope.effective_reference,footprints_sha256:valueSha({domain:'worldatlas-effective-native-footprints:v2',
+    base_reference:f.envelope.base_reference,authority_registry_sha256:valueSha(registry),ledger_sha256:ledgerPin.sha256,components})};
+  f.save(prefix+'/patch.json',{...f.patch,ledger_sha256:ledgerPin.sha256,effective_reference:effective});
+  const patchPin=f.pin(prefix+'/patch.json',f.commit());
+  const assets={...f.sidecar.logical_asset_map,ledger:ledgerPin,patch:patchPin};
+  f.save(prefix+'/envelope.json',{...f.envelope,...assets,effective_reference:effective});
+  const envelopePin=f.pin(prefix+'/envelope.json',f.commit());
+  f.save(prefix+'/sidecar.json',{...f.sidecar,logical_asset_map:assets,runtime_envelope:envelopePin});
+  const sidecarPin=f.pin(prefix+'/sidecar.json',f.commit());
+  f.save('data/ownership-selection.json',{...f.selection,additive_release:{path:sidecarPin.path,bytes:sidecarPin.bytes,sha256:sidecarPin.sha256}});
+  return f.commit();
+}
+
+test('hosted admission omits unused rebind bodies while cold and changed rebinds still require them',async t=>{
+  const f=await acceptedProducts(t),a=await acquire(f);
+  const certificate=JSON.parse(f.git('show',f.ledger.current_rebind.commit+':'+f.ledger.current_rebind.path));
+  const unused=new Set(['result','publication','operating'].map(role=>certificate[role].path));
+  const denyUnused=reader=>{
+    for(const method of ['read','stream']){const original=reader[method].bind(reader);
+      reader[method]=(name,...args)=>{assert(!unused.has(name),'Historical rebind body requested: '+name);return original(name,...args);};}
+    return reader;
+  };
+  denyUnused(a.reader);const admitted=await qualify(f,a);assert.equal(admitted.available,true);
+  for(const name of unused)assert(![...a.reader.inventory.values()].some(p=>p.path===name&&p.whole_body_consumed));
+  for(const role of ['request','facts'])assert([...a.reader.inventory.values()].some(p=>p.path===certificate[role].path&&p.whole_body_consumed));
+  assert.deepEqual(admitted.state.ledger.current_rebind,f.ledger.current_rebind);
+  assert.equal(unused.size,3);
+  assert.deepEqual(JSON.parse(f.git('show',f.ledger.current_rebind.commit+':'+f.ledger.current_rebind.path)),certificate);
+  await assert.rejects(()=>f.api.qualifyCheckpoint({reader:denyUnused(new f.native.ImmutableReader(f.root,f.trusted))}),/Historical rebind body requested/);
+  f.save('changed-rebind/certificate.json',certificate);const pin=f.pin('changed-rebind/certificate.json',f.commit());
+  const candidate=candidateLedger(f,{...f.ledger,current_rebind:pin},'changed-rebind');
+  await assert.rejects(()=>f.api.qualifyTransition({state:admitted.state,reader:denyUnused(currentReader(f,a,candidate))}),/Historical rebind body requested/);
+  f.api.releaseCheckpoint(admitted.state);f.transport.releaseAcceptedCheckpoint(a.handle);
+});
+
+test('accepted validation inheritance does not admit a malformed or changed candidate component',async t=>{
+  const f=await acceptedProducts(t,{actualProducer:true,nativeOnly:true}),a=await acquire(f),admitted=await qualify(f,a);
+  assert.equal(admitted.available,true);
+  const corrupt=await acquire(f),stream=corrupt.reader.stream.bind(corrupt.reader);
+  corrupt.reader.stream=async function*(name,...args){
+    if(name!==f.sidecar.logical_asset_map.ledger.path){yield* stream(name,...args);return;}
+    const chunks=[];for await(const chunk of stream(name,...args))chunks.push(chunk);
+    const original=Buffer.concat(chunks).toString(),changed=original.replace('"native_cells":1','"native_cells":2');
+    assert.notEqual(changed,original);yield Buffer.from(changed);
+  };
+  await assert.rejects(()=>qualify(f,corrupt),/Complete native JSON identity differs/);
+  f.transport.releaseAcceptedCheckpoint(corrupt.handle);
+  const unchanged=candidateLedger(f,structuredClone(f.ledger),'unchanged-candidate');
+  const transition=await f.api.qualifyTransition({state:admitted.state,reader:currentReader(f,a,unchanged)});
+  assert.equal(transition.available,true);assert.deepEqual(transition.changedNativeRows,[]);
+  const malformed=structuredClone(f.ledger),native=malformed.rows.find(row=>row.representation==='native-cells');
+  native.base_geometry.coordinates[0][1][0]+=.01;
+  const bad=candidateLedger(f,malformed,'malformed-candidate');
+  await assert.rejects(()=>f.api.qualifyTransition({state:admitted.state,reader:currentReader(f,a,bad)}),/current base changed/);
+  const changed=structuredClone(f.ledger);changed.rows.find(row=>row.disposition==='rejected').reason='Changed retained exception';
+  const drift=candidateLedger(f,changed,'changed-candidate');
+  await assert.rejects(()=>f.api.qualifyTransition({state:admitted.state,reader:currentReader(f,a,drift)}),/Old complete ledger primitive/);
+  f.api.releaseCheckpoint(admitted.state);f.transport.releaseAcceptedCheckpoint(a.handle);
+});
+
 test('older accepted selector advances to actual baseline with zero cold reconstruction',async t=>{
   const f=await acceptedProducts(t),a=await acquire(f),baseline=successorSelector(f);
   a.reader=currentReader(f,a,baseline);
@@ -669,6 +738,10 @@ test('actual native-only joint products survive Python retention and fresh accep
  const native=result.state.additions.find(row=>row.representation==='native-cells');
  assert.equal(native.target_id,'B');assert.equal(Object.hasOwn(native,'geometry'),false);
  assert.deepEqual(nativeLiteral(native.native_rows),[{y:2,runs:[[2,3,2]]}]);
+ // Independent full normalization of the actual producer's literal input proves
+ // that hosted reconstruction retains the same validated native component view.
+ const normalized=normaliseRetainedRepairLedger(f.ledger,result.state.registry);
+ assert.deepEqual(nativeLiteral(native),nativeLiteral([...normalized.rows.values()].find(row=>row.representation==='native-cells')));
  assert.deepEqual(result.state.certificate,f.products.certificate);
  assert.deepEqual(result.state.certificate.entries.find(row=>row[0]==='B')[9],[[1,0,10,20]]);
  assert.deepEqual(nativeLiteral(result.state.patch.rows),[{y:1,runs:[[2,3,1]]},{y:2,runs:[[2,3,2]]}]);

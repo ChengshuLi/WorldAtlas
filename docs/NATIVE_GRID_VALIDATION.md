@@ -45,6 +45,23 @@ Recovery selects the retained legacy manifest by running the ordinary build with
 
 ## Limits before delivery
 
+Source-target coverage masks are strictly admitted per original geometry while
+being converted to the Float64 rings required by the native scanner. Only the
+numerical polygons are then grouped by their already-checked original source
+ordinal. This removes the earlier complete coordinate walk for raw mask grouping;
+it does not bypass exact geometry fields, nonempty polygons/rings, literal finite
+bounded pairs, closure, or original member-to-owner checks. Sparse arrays remain
+invalid. Source and exclusion conversion, the public footprint/runtime APIs and
+the scanner's own numerical checks are unchanged.
+
+Each invocation and coverage class converts its current operands. Numerical rings
+are not cached across classes, row blocks or calls, and lazy source storage must
+remain open until conversion completes. The required Float64 rings, polygon
+rosters, scan edges/intersections and result arrays remain input/output-sized
+memory terms. `test/native-coverage-admission.test.mjs` exercises strict rejection,
+genuine stored 31/32/33 boundaries, exact result parity and one coordinate visit
+per original coverage conversion; that pass count is not a wall-time claim.
+
 Cold changed-geography preparation remains slow and whole-process memory measurements vary substantially. Incremental source authentication limits each serialization buffer to one feature; it does not bound total geometry or grid memory. Original geographic approval/certificates retain their existing meaning. Independent exact-head review, bounded evidence packaging, normal queue checks and a separately authorized verified delivery are required. No live facts were read back or mutated in this offline validation. Genuine source gaps and uncertain physical-water questions remain open for the global source audit and coordinated factual repairs.
 
 Selected readers and native preparation use ordinary runtime/OS memory behavior.

@@ -242,7 +242,8 @@ per-addition validation, effective-hash derivation and private publication path.
 
 ### Validated checkpoint projections
 
-The private `checkpointAdditions` projection receives only `readSelection` results.
+The private `checkpointAdditions` projection receives fully validated rows from
+`readSelection`, or the equivalent privately reconstructed hosted accepted view.
 `readSelection` authenticates the selected products and calls
 `normaliseRetainedRepairLedger`, which checks each native component's complete
 schema, base geometry/hash, owner, custody, interval ordering/count and bounds.
@@ -257,3 +258,30 @@ arbitrary input components, and current-owner, old-row preservation, certificate
 source-authority and route checks remain separate requirements. Real admitted
 projection controls reject interval rereads during projection alone, retain exact
 values and closure refusal, and malformed committed ledgers fail normalization.
+
+### Accepted ledger and rebind reuse
+
+Hosted admission first authenticates the private accepted archive, successful
+trusted producer/native result, complete live ledger/registry/patch/manifest
+hashes, selector, policy eligibility and scientific routes. Only then does it
+reconstruct the original normalized row cursor. The producing
+`qualifyTransition` called the full ledger normalizer before publishing its
+private transition; `selected-joint-entry` can publish only that genuine
+transition after native success. This existing producer invariant supplies the
+validated representation used by `checkpointAdditions`. Rechecking every old
+polygon, component interval and row count adds no new proof for identical
+accepted bytes.
+
+Whole-body hashing, parsing and invocation-local storage remain. Cheap original
+authority-binding reads still establish native/legacy classification; constructor
+presence is not used as a substitute. Cold/catalogue seeds and every candidate
+transition still normalize their entire ledger. They cannot inherit validation
+from a caller flag, fabricated handle, stale archive or changed body. The public
+delta validator and complete old-row preservation remain unchanged.
+
+An accepted rebind retains its complete original certificate and all literal
+product pins. Current consumers need its request and facts, so hosted admission
+reads those operands only. The historical result, publication and operating
+bodies remain provenance and route-bound, without being reopened. Cold seeds
+and genuinely changed rebinds still read and validate all five product bodies.
+No historical scientific result is regenerated or relabelled as a new execution.
