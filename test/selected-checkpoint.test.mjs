@@ -937,3 +937,42 @@ for(const mode of ['valid','footer','inflate','decoded hash','syntax','syntax an
  let expected;try{eager();}catch(error){expected=error;}assert(expected);
  await assert.rejects(f.api.qualifyCheckpoint({reader:f.reader}),error=>mode==='syntax'?error instanceof SyntaxError:error.message===expected.message);
 });
+
+test('changed rebind traverses stored canonical request and result without whole JSON reconstruction',async t=>{
+ const {valueBytes,normaliseRetainedRepairLedger}=await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs');
+ const sourceFeatures=[feature('A',0),feature('B',1),feature('C',5)];
+ const ring=Array.from({length:32},(_,i)=>[.1+.1*Math.cos(i*Math.PI/16),.1+.1*Math.sin(i*Math.PI/16)]);ring.push(ring[0]);
+ sourceFeatures[0].geometry={type:'Polygon',coordinates:[ring]};
+ const f=await trustedFixture(t,{sourceFeatures}),{state}=await f.api.qualifyCheckpoint({reader:f.reader});
+ const old=f.ledger.current_rebind,certificate=JSON.parse(f.git('show',old.commit+':'+old.path));
+ const expectedBodies=new Set(['request','result'].map(name=>{
+  const pin=certificate[name];return f.git('show',pin.commit+':'+pin.path).toString();
+ }));
+ // A new authenticated certificate locator forces the genuine changed-rebind
+ // route, while every original source/native operand remains unchanged.
+ f.save('changed-rebind/certificate.json',certificate);const c=f.commit();
+ const ledger={...f.ledger,current_rebind:f.pin('changed-rebind/certificate.json',c)};
+ f.save('changed-rebind/ledger.json',ledger);const l=f.commit(),ledgerPin=f.pin('changed-rebind/ledger.json',l);
+ const effective={...f.envelope.effective_reference,footprints_sha256:valueSha({domain:'worldatlas-effective-native-footprints:v2',
+  base_reference:f.envelope.base_reference,authority_registry_sha256:valueSha(f.registry),ledger_sha256:ledgerPin.sha256,
+  components:[...normaliseRetainedRepairLedger(ledger,f.registry).rows.values()]})};
+ f.save('changed-rebind/patch.json',{...f.patch,ledger_sha256:ledgerPin.sha256,effective_reference:effective});const p=f.commit();
+ const assets={...f.sidecar.logical_asset_map,ledger:ledgerPin,patch:f.pin('changed-rebind/patch.json',p)};
+ f.save('changed-rebind/envelope.json',{...f.envelope,...assets,effective_reference:effective});const e=f.commit();
+ f.save('changed-rebind/sidecar.json',{...f.sidecar,logical_asset_map:assets,runtime_envelope:f.pin('changed-rebind/envelope.json',e)});const s=f.commit(),side=f.pin('changed-rebind/sidecar.json',s);
+ f.save('data/ownership-selection.json',{...f.selection,additive_release:{path:side.path,bytes:side.bytes,sha256:side.sha256}});
+ const reader=new f.native.ImmutableReader(f.root,f.commit(),{invocation:f.reader.invocation}),stream=reader.stream.bind(reader),streamed=[];
+ reader.stream=function(name,...args){streamed.push(name);return stream(name,...args);};
+ const from=Buffer.from,materialized=[];
+ Buffer.from=function(value,...args){if(typeof value==='string'&&expectedBodies.has(value))materialized.push(Buffer.byteLength(value));return from(value,...args);};
+ try{
+  // Accepted fixture products are intentionally a minimal historical shape.
+  // Their complete byte checks must pass before the unchanged schema refusal.
+  await assert.rejects(f.api.qualifyTransition({state,reader}),/^Error: Unknown current producer request$/);
+ }finally{Buffer.from=from;}
+ t.diagnostic('Complete producer Buffer allocations: '+JSON.stringify(materialized));
+ assert.deepEqual(materialized,[],'Count-only validation must not recreate either whole producer Buffer');
+ for(const name of ['request','result'])assert.ok(streamed.includes(certificate[name].path),name+' must use genuine stored admission');
+ assert.deepEqual(valueBytes(nativeLiteral(state.ledger)),valueBytes(f.ledger));
+ f.api.releaseCheckpoint(state);
+});
