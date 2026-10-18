@@ -173,7 +173,7 @@
     "priority": 1
   },
   "execution": {
-    "command": "node source-batch-intervals.mjs gb-LBR-ADM2--repair-evaluation OUTPUT_DIRECTORY",
+    "command": "node coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs gb-LBR-ADM2--repair-evaluation OUTPUT_DIRECTORY",
     "output_columns": [
       "y",
       "start",
@@ -181,6 +181,19 @@
       "candidate_owner_indices",
       "source_feature_indices",
       "physical_class"
-    ]
+    ],
+    "extractor_pin": {
+      "commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs",
+      "git_blob_oid": "c5ba9331deb93eed40662d1dc579cdaedea55c46",
+      "bytes": 6840
+    },
+    "manifest_pin": {
+      "commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+      "git_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+      "bytes": 1754890
+    },
+    "reproduction_note": "Use the exact accepted extractor and manifest at the pinned commit. This reproduces original package operands; it does not itself adjudicate the exception or grant repair credit."
   }
 }
