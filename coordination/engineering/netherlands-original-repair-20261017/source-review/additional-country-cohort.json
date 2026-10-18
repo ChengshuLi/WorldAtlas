@@ -1,0 +1,222 @@
+{
+  "accepted": "1330b938687e1c8255ae0e80bf4ad854e44c6d5e",
+  "additional_country_owned_subjects": [
+    {
+      "path": "data/geography/part-28.json",
+      "features": [
+        {
+          "type": "Feature",
+          "id": "atlas:coverage:NLD-5148",
+          "properties": {
+            "id": "atlas:coverage:NLD-5148",
+            "name": "St. Eustatius",
+            "parent_id": "framework:province:st-eustatius:e6518ccedeff",
+            "reference_owner": "Netherlands",
+            "metadata": {
+              "source_name": "Natural Earth",
+              "source_url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/",
+              "source_id": "natural-earth:NLD-5148",
+              "license": "Public domain",
+              "reference_year": "Undated modern reference",
+              "reference_version": 3,
+              "hierarchy_version": 4,
+              "topology_version": 1,
+              "coverage_version": 1,
+              "location_basis": "Named source island / overseas territory",
+              "source_role": "Special Municipality",
+              "representative_point": [
+                -62.97757176453101,
+                17.495524500000002
+              ],
+              "coverage_reason": "Territory omitted by mainland source selection",
+              "existing_source_priority": true,
+              "semantic_version": 1,
+              "remote_version": 1,
+              "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+              "framework_match": {
+                "source": "Natural Earth",
+                "id": "NLD-5148",
+                "overlap": 1.0
+              },
+              "hierarchy_source": "WGSRPD / Natural Earth",
+              "parent_match": "Named source territory; no smaller province asserted",
+              "regional_match": {
+                "reference_iso": "NLD",
+                "source_id": "NLD-5148",
+                "overlap": 1.0,
+                "method": "reference-territory-constrained overlap"
+              },
+              "reference_owner_id": "owner:Q55",
+              "reference_polity": "Netherlands",
+              "reference_polity_status": "reference",
+              "reference_polity_evidence": {
+                "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+                "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+                "reference_territory": "Netherlands",
+                "classification": "Country",
+                "note": null,
+                "uncertainty": false
+              },
+              "semantic_review": {
+                "status": "open",
+                "continent": "North America",
+                "decision_index": 474,
+                "evidence_file": "geographic-decisions"
+              }
+            }
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -62.997141,
+                  17.525621
+                ],
+                [
+                  -62.983797,
+                  17.517683
+                ],
+                [
+                  -62.977254,
+                  17.504137
+                ],
+                [
+                  -62.965257,
+                  17.498916
+                ],
+                [
+                  -62.945065,
+                  17.485384
+                ],
+                [
+                  -62.948904,
+                  17.472375
+                ],
+                [
+                  -62.958723,
+                  17.464571
+                ],
+                [
+                  -62.981086,
+                  17.467724
+                ],
+                [
+                  -62.9947,
+                  17.492133
+                ],
+                [
+                  -62.997141,
+                  17.525621
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "atlas:coverage:NLD-5147",
+          "properties": {
+            "id": "atlas:coverage:NLD-5147",
+            "name": "Saba",
+            "parent_id": "framework:province:saba:ce82cdcf95ca",
+            "reference_owner": "Netherlands",
+            "metadata": {
+              "source_name": "Natural Earth",
+              "source_url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/",
+              "source_id": "natural-earth:NLD-5147",
+              "license": "Public domain",
+              "reference_year": "Undated modern reference",
+              "reference_version": 3,
+              "hierarchy_version": 4,
+              "topology_version": 1,
+              "coverage_version": 1,
+              "location_basis": "Named source island / overseas territory",
+              "source_role": "Special Municipality",
+              "representative_point": [
+                -63.23812272963242,
+                17.634792500000003
+              ],
+              "coverage_reason": "Territory omitted by mainland source selection",
+              "existing_source_priority": true,
+              "semantic_version": 1,
+              "remote_version": 1,
+              "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+              "framework_match": {
+                "source": "Natural Earth",
+                "id": "NLD-5147",
+                "overlap": 1.0
+              },
+              "hierarchy_source": "WGSRPD / Natural Earth",
+              "parent_match": "Named source territory; no smaller province asserted",
+              "regional_match": {
+                "reference_iso": "NLD",
+                "source_id": "NLD-5147",
+                "overlap": 1.0,
+                "method": "reference-territory-constrained overlap"
+              },
+              "reference_owner_id": "owner:Q55",
+              "reference_polity": "Netherlands",
+              "reference_polity_status": "reference",
+              "reference_polity_evidence": {
+                "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+                "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+                "reference_territory": "Netherlands",
+                "classification": "Country",
+                "note": null,
+                "uncertainty": false
+              },
+              "semantic_review": {
+                "status": "open",
+                "continent": "North America",
+                "decision_index": 476,
+                "evidence_file": "geographic-decisions"
+              }
+            }
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -63.223704,
+                  17.629218
+                ],
+                [
+                  -63.229482,
+                  17.618232
+                ],
+                [
+                  -63.238393,
+                  17.614691
+                ],
+                [
+                  -63.251332,
+                  17.623765
+                ],
+                [
+                  -63.248931,
+                  17.640367
+                ],
+                [
+                  -63.238433,
+                  17.646918
+                ],
+                [
+                  -63.230295,
+                  17.64232
+                ],
+                [
+                  -63.223704,
+                  17.629218
+                ]
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "original_cells_unchanged": 770,
+  "reason": "Complete whole-country membership includes retained coverage records, outside this European original package."
+}

@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "kind": "derived-public-operating-observation",
+  "not_an_original_execution_receipt": true,
+  "scientific_program": {
+    "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "path": "scripts/qualify-source-cohort.py",
+    "sha256": "abc801b9a35d20c9f0dfe3bbc9bb2cb7dc107f1758414970d9cde11380574a18"
+  },
+  "entry": {
+    "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "path": "scripts/prepare-delivery-handoff.mjs",
+    "sha256": "1b44159d999e173463805a51ea184ff59395afad25a156e4cdb520a121738924"
+  },
+  "stage_commit": "29e570dee104b096535f2388e240c119c8517012",
+  "started_at": "2026-10-18T00:00:41.641313+00:00",
+  "ended_at": "2026-10-18T00:01:19.386867+00:00",
+  "exit_code": 0,
+  "external_seconds": 37.74520516698249,
+  "producer_seconds": 36.67667825007811,
+  "darwin_time_l_maximum_resident_set_size_bytes": 555057152,
+  "hard_deadline": null,
+  "enforced_rss_limit": null,
+  "query_status_counts": {
+    "checked": 3269
+  },
+  "country_observations": {
+    "MEX": {
+      "whole_targets": 158,
+      "query_relations": 2193,
+      "zero_issue_targets": 98,
+      "issue_targets": 60,
+      "issue_geometries": {
+        "missing_reconstruction": 23,
+        "extra_reconstruction": 36,
+        "contradictory_land_water_support": 27,
+        "L2-outside-L1": 7
+      }
+    },
+    "ECU": {
+      "whole_targets": 58,
+      "query_relations": 314,
+      "zero_issue_targets": 43,
+      "issue_targets": 15,
+      "issue_geometries": {
+        "missing_reconstruction": 11,
+        "extra_reconstruction": 13,
+        "contradictory_land_water_support": 3,
+        "L2-outside-L1": 1
+      }
+    },
+    "BOL": {
+      "whole_targets": 37,
+      "query_relations": 66,
+      "zero_issue_targets": 21,
+      "issue_targets": 16,
+      "issue_geometries": {
+        "missing_reconstruction": 2,
+        "extra_reconstruction": 8,
+        "contradictory_land_water_support": 16,
+        "L2-outside-L1": 9,
+        "L3-outside-L2": 1
+      }
+    },
+    "PER": {
+      "whole_targets": 55,
+      "query_relations": 261,
+      "zero_issue_targets": 43,
+      "issue_targets": 12,
+      "issue_geometries": {
+        "missing_reconstruction": 6,
+        "extra_reconstruction": 7,
+        "contradictory_land_water_support": 8,
+        "L2-outside-L1": 4
+      }
+    },
+    "COL": {
+      "whole_targets": 81,
+      "query_relations": 435,
+      "zero_issue_targets": 63,
+      "issue_targets": 18,
+      "issue_geometries": {
+        "missing_reconstruction": 12,
+        "extra_reconstruction": 14,
+        "contradictory_land_water_support": 5,
+        "L3-outside-L2": 1,
+        "L2-outside-L1": 1
+      }
+    }
+  },
+  "report": {
+    "path": "whole-target-support.json",
+    "bytes": 27539267,
+    "sha256": "48a9748e5ca358808c6b7125b8ccbe156b4613d8c8a2f41074f047dc09a6dc9b"
+  },
+  "unchanged_original_execution_receipt": {
+    "retention": "Original complete receipt retained privately without redaction; no relocated/redacted copy is presented as original.",
+    "bytes": 67519,
+    "sha256": "66b6e3cae28554e704cb80ecdb04e8d133e6a659c417e81c27d35907593c22cd",
+    "absolute_runtime_path_fields": 204
+  },
+  "runtime_versions": {
+    "shapely": "2.1.2",
+    "geos": "3.13.1"
+  },
+  "runtime_inventory_files": 204,
+  "limits": [
+    "Measured RSS is an observation, not an enforced process-tree memory ceiling. No hard deadline was imposed.",
+    "The exact report and preparation bytes are public; original config, execution receipt, stdout and task observer records remain unchanged privately because they contain host runtime paths.",
+    "This derived summary is not the original execution receipt and is not sufficient for stock resume.",
+    "The 121 whole targets retaining issues are not a per-requested-cell held partition. All issue geometries and query witnesses remain in the complete report.",
+    "Source-relative GSHHG whole-target support does not establish dated land/water, native qualification, owner-zero/conservation, legal ownership, selected output or repair acceptance."
+  ]
+}

@@ -1,0 +1,3332 @@
+{
+  "version": 1,
+  "kind": "complete-original-Egypt-repair-claim",
+  "issue": 2424,
+  "accepted_commit": "21984e9ec4ec7370bc807e2da23cea2228747698",
+  "package_id": "gb-EGY-ADM2--repair-evaluation",
+  "original_cells": 19065,
+  "original_intervals": 8684,
+  "land_cells": 18591,
+  "inland_water_cells": 474,
+  "owners": [
+    {
+      "id": "atlas:city:EGY-1533",
+      "index": 10,
+      "bounds": [
+        153824.15272666665,
+        107933.5636397253,
+        154318.9182277778,
+        108386.82497597998
+      ],
+      "province_id": "framework:province:cairo:10f94c7924c4",
+      "province_index": 1136,
+      "name": "Cairo",
+      "reference_owner": "Egypt",
+      "source_id": "atlas:city:EGY-1533",
+      "location_basis": "Source city territory: Governorate",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B10880133914548",
+        "gb:EGY:ADM2:37247803B15392203431980",
+        "gb:EGY:ADM2:37247803B18410334160069",
+        "gb:EGY:ADM2:37247803B18472339316050",
+        "gb:EGY:ADM2:37247803B1884066406604",
+        "gb:EGY:ADM2:37247803B1921003738807",
+        "gb:EGY:ADM2:37247803B21469576264473",
+        "gb:EGY:ADM2:37247803B22012205190656",
+        "gb:EGY:ADM2:37247803B27962965783351",
+        "gb:EGY:ADM2:37247803B28746183260819",
+        "gb:EGY:ADM2:37247803B29547542469056",
+        "gb:EGY:ADM2:37247803B2980274366801",
+        "gb:EGY:ADM2:37247803B34541492244214",
+        "gb:EGY:ADM2:37247803B35159038955302",
+        "gb:EGY:ADM2:37247803B36275264085145",
+        "gb:EGY:ADM2:37247803B37865224267935",
+        "gb:EGY:ADM2:37247803B41278628102289",
+        "gb:EGY:ADM2:37247803B46264859714526",
+        "gb:EGY:ADM2:37247803B46837021628067",
+        "gb:EGY:ADM2:37247803B47496652532681",
+        "gb:EGY:ADM2:37247803B49811870233448",
+        "gb:EGY:ADM2:37247803B51665438591487",
+        "gb:EGY:ADM2:37247803B52731964573716",
+        "gb:EGY:ADM2:37247803B54164801772616",
+        "gb:EGY:ADM2:37247803B54771343993886",
+        "gb:EGY:ADM2:37247803B58056872224952",
+        "gb:EGY:ADM2:37247803B58448533869188",
+        "gb:EGY:ADM2:37247803B59541002076203",
+        "gb:EGY:ADM2:37247803B60267904610722",
+        "gb:EGY:ADM2:37247803B62139513677683",
+        "gb:EGY:ADM2:37247803B62499095418831",
+        "gb:EGY:ADM2:37247803B6267278220516",
+        "gb:EGY:ADM2:37247803B64528254011318",
+        "gb:EGY:ADM2:37247803B66210800118153",
+        "gb:EGY:ADM2:37247803B66957331642315",
+        "gb:EGY:ADM2:37247803B70915432571750",
+        "gb:EGY:ADM2:37247803B88500614059504",
+        "gb:EGY:ADM2:37247803B90563077233192",
+        "gb:EGY:ADM2:37247803B92056872151518",
+        "gb:EGY:ADM2:37247803B92272311463105",
+        "gb:EGY:ADM2:37247803B93568001164514",
+        "gb:EGY:ADM2:37247803B98610862498628",
+        "gb:EGY:ADM2:37247803B99181648743437"
+      ]
+    },
+    {
+      "id": "atlas:city:EGY-1543",
+      "index": 11,
+      "bounds": [
+        152579.2283461111,
+        107052.7349226554,
+        152994.61580833333,
+        107941.91114117467
+      ],
+      "province_id": "framework:province:alexandria-governorate:ca2b074a8661",
+      "province_index": 530,
+      "name": "Alexandria",
+      "reference_owner": "Egypt",
+      "source_id": "atlas:city:EGY-1543",
+      "location_basis": "Source city territory: Governorate",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B18141858630320",
+        "gb:EGY:ADM2:37247803B2309887607754",
+        "gb:EGY:ADM2:37247803B27556754464057",
+        "gb:EGY:ADM2:37247803B47768996612794",
+        "gb:EGY:ADM2:37247803B47778858868079",
+        "gb:EGY:ADM2:37247803B50327552497363",
+        "gb:EGY:ADM2:37247803B59433804182787",
+        "gb:EGY:ADM2:37247803B60489712487225",
+        "gb:EGY:ADM2:37247803B6072823038125",
+        "gb:EGY:ADM2:37247803B61972877463363",
+        "gb:EGY:ADM2:37247803B76316502393625",
+        "gb:EGY:ADM2:37247803B81947016112808",
+        "gb:EGY:ADM2:37247803B90463856595624",
+        "gb:EGY:ADM2:37247803B92926604097979",
+        "gb:EGY:ADM2:37247803B98787115048764",
+        "gb:EGY:ADM2:37247803B99104887182997"
+      ]
+    },
+    {
+      "id": "atlas:multipart:13deae58bd47bd9b818e",
+      "index": 5754,
+      "bounds": [
+        153825.0994372222,
+        107463.30575235511,
+        153942.6371938889,
+        107667.6040677261
+      ],
+      "province_id": "framework:province:dakahlia-governorate:b926c0a50068",
+      "province_index": 1429,
+      "name": "Mit Ghamr",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "location_basis": "Disconnected components of the same named source district",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B10909701940084",
+        "gb:EGY:ADM2:37247803B25153322962327"
+      ]
+    },
+    {
+      "id": "atlas:multipart:51e672a8d1d9816a428d",
+      "index": 5765,
+      "bounds": [
+        153522.88029833333,
+        107871.64779332407,
+        153825.02661333332,
+        108106.16062101263
+      ],
+      "province_id": "framework:province:giza-governorate:c786e95feec8",
+      "province_index": 1837,
+      "name": "Imbaba",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "location_basis": "Disconnected components of the same named source district",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B14597497558400",
+        "gb:EGY:ADM2:37247803B76869719120733"
+      ]
+    },
+    {
+      "id": "atlas:multipart:54ba0896fd9272689ee8",
+      "index": 5766,
+      "bounds": [
+        153729.99143833335,
+        107711.75083779205,
+        153884.37808277778,
+        107851.64597910515
+      ],
+      "province_id": "framework:province:qalyubia-governorate:1557b2686094",
+      "province_index": 3832,
+      "name": "Banha",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "location_basis": "Disconnected components of the same named source district",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B4989882956634",
+        "gb:EGY:ADM2:37247803B8473784659060"
+      ]
+    },
+    {
+      "id": "atlas:multipart:600f17c662013a01d180",
+      "index": 5767,
+      "bounds": [
+        153374.53803666664,
+        107073.53046506959,
+        153518.36521722225,
+        107308.30063541613
+      ],
+      "province_id": "framework:province:kafr-el-sheikh-governorate:6496216f3cd4",
+      "province_index": 2298,
+      "name": "Disuq",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "location_basis": "Disconnected components of the same named source district",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B31091771651272",
+        "gb:EGY:ADM2:37247803B5020556280365"
+      ]
+    },
+    {
+      "id": "atlas:multipart:6ba69d5451e06c1f226a",
+      "index": 5769,
+      "bounds": [
+        154078.08962722222,
+        110942.24584288709,
+        154231.82085666666,
+        111094.9658321513
+      ],
+      "province_id": "framework:province:sohag-governorate:8d477ff34a4c",
+      "province_index": 4285,
+      "name": "Suhag",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "location_basis": "Disconnected components of the same named source district",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B36599937729420",
+        "gb:EGY:ADM2:37247803B47370411243252"
+      ]
+    },
+    {
+      "id": "atlas:multipart:990a599f48f1ebe6626d",
+      "index": 5776,
+      "bounds": [
+        154219.73209111113,
+        111155.21997212087,
+        154340.40127499998,
+        111273.25810988733
+      ],
+      "province_id": "framework:province:sohag-governorate:8d477ff34a4c",
+      "province_index": 4285,
+      "name": "Girga",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "location_basis": "Disconnected components of the same named source district",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B10377703685184",
+        "gb:EGY:ADM2:37247803B67165443918142"
+      ]
+    },
+    {
+      "id": "atlas:multipart:baf57050f3c8c0fe2864",
+      "index": 5782,
+      "bounds": [
+        153643.47665833333,
+        108849.50229513679,
+        153775.94331222225,
+        108996.67718112438
+      ],
+      "province_id": "framework:province:beni-suef-governorate:68c456de5693",
+      "province_index": 891,
+      "name": "Bani Swayf",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "location_basis": "Disconnected components of the same named source district",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B61298803193986",
+        "gb:EGY:ADM2:37247803B71974120040815"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B10876030245945",
+      "index": 18546,
+      "bounds": [
+        154578.53539166664,
+        107098.06909964146,
+        154600.81950166667,
+        107118.93808635946
+      ],
+      "province_id": "framework:province:port-said-governorate:40d5a143e756",
+      "province_index": 3702,
+      "name": "Al-Dawahy",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B10876030245945"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B11415934472050",
+      "index": 18547,
+      "bounds": [
+        151308.30583722223,
+        107169.25693680551,
+        152028.2428027778,
+        109350.00379571364
+      ],
+      "province_id": "framework:province:matrouh-governorate:68098466f9e9",
+      "province_index": 2941,
+      "name": "Daba",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B11415934472050"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B11540085647408",
+      "index": 18548,
+      "bounds": [
+        154078.235275,
+        110848.25887830502,
+        154185.6505111111,
+        110954.30320476372
+      ],
+      "province_id": "framework:province:sohag-governorate:8d477ff34a4c",
+      "province_index": 4285,
+      "name": "Saqulta",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B11540085647408"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B11741715008069",
+      "index": 18549,
+      "bounds": [
+        154830.94299055557,
+        108209.42956887723,
+        155836.42242444446,
+        108788.92550584863
+      ],
+      "province_id": "framework:province:south-sinai-governorate:ae2923b87eb7",
+      "province_index": 4347,
+      "name": "Ras Sidr",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B11741715008069"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B12762735296795",
+      "index": 18551,
+      "bounds": [
+        153339.14562666666,
+        106858.83821528003,
+        153591.3347538889,
+        107152.74287796112
+      ],
+      "province_id": "framework:province:kafr-el-sheikh-governorate:6496216f3cd4",
+      "province_index": 2298,
+      "name": "Sidi Salim",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B12762735296795"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B13171530844779",
+      "index": 18552,
+      "bounds": [
+        152883.70502555557,
+        107078.72850961298,
+        153105.0896477778,
+        107338.03430761004
+      ],
+      "province_id": "framework:province:beheira-governorate:0439f0b87689",
+      "province_index": 861,
+      "name": "Kafr Al-Dawwar",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B13171530844779"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B13722182372819",
+      "index": 18554,
+      "bounds": [
+        152508.22505444445,
+        113181.67437376338,
+        154210.41063333335,
+        114653.52851583669
+      ],
+      "province_id": "framework:province:new-valley-governorate:49bc31fbddab",
+      "province_index": 3246,
+      "name": "Paris Paris",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B13722182372819"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B15072818430421",
+      "index": 18558,
+      "bounds": [
+        153167.7181922222,
+        106918.54224604083,
+        153309.5791277778,
+        107097.47276330485
+      ],
+      "province_id": "framework:province:beheira-governorate:0439f0b87689",
+      "province_index": 861,
+      "name": "Rashid",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B15072818430421"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B15817250169024",
+      "index": 18559,
+      "bounds": [
+        153032.48423055556,
+        107105.22479077095,
+        153278.77462277777,
+        107350.43427329526
+      ],
+      "province_id": "framework:province:beheira-governorate:0439f0b87689",
+      "province_index": 861,
+      "name": "Abu Hummus",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B15817250169024"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B16391777329697",
+      "index": 18562,
+      "bounds": [
+        153728.38931277778,
+        108016.41116975146,
+        153792.6928066667,
+        108109.105725554
+      ],
+      "province_id": "framework:province:giza-governorate:c786e95feec8",
+      "province_index": 1837,
+      "name": "Auseem",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B16391777329697"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B17472786437270",
+      "index": 18563,
+      "bounds": [
+        153940.88942055556,
+        107248.46038381642,
+        153978.612195,
+        107307.36597167425
+      ],
+      "province_id": "framework:province:dakahlia-governorate:b926c0a50068",
+      "province_index": 1429,
+      "name": "E Mansora 2",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B17472786437270"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B17658865613215",
+      "index": 18564,
+      "bounds": [
+        154928.59982555555,
+        112797.85872404261,
+        155148.67361777776,
+        113177.29465347643
+      ],
+      "province_id": "framework:province:aswan-governorate:071a116cf49d",
+      "province_index": 683,
+      "name": "Aswan",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B17658865613215"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B17837872993253",
+      "index": 18565,
+      "bounds": [
+        154774.57730055557,
+        111293.47142790772,
+        154990.06318777776,
+        111476.65563604535
+      ],
+      "province_id": "framework:province:qena-governorate:cff9aa45d830",
+      "province_index": 3836,
+      "name": "Qina",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B17837872993253"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B18007255516355",
+      "index": 18566,
+      "bounds": [
+        153529.87139166667,
+        107828.7687638268,
+        153744.4833922222,
+        107995.85450050182
+      ],
+      "province_id": "framework:province:monufia-governorate:f19e7d71bf69",
+      "province_index": 3090,
+      "name": "Ashmun",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B18007255516355"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B18011904824806",
+      "index": 18567,
+      "bounds": [
+        153875.12944888888,
+        107146.61308756734,
+        154013.85895722223,
+        107304.56191572198
+      ],
+      "province_id": "framework:province:dakahlia-governorate:b926c0a50068",
+      "province_index": 1429,
+      "name": "Talkha",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B18011904824806"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B18830247212538",
+      "index": 18570,
+      "bounds": [
+        153296.10670833333,
+        107075.2347790218,
+        153414.66399944446,
+        107169.25693680551
+      ],
+      "province_id": "framework:province:kafr-el-sheikh-governorate:6496216f3cd4",
+      "province_index": 2298,
+      "name": "Fuwwa",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B18830247212538"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B18851026884182",
+      "index": 18571,
+      "bounds": [
+        155064.78049777777,
+        110559.91475081649,
+        155860.30866,
+        111171.23244658935
+      ],
+      "province_id": "framework:province:red-sea-governorate:af3fc38ad247",
+      "province_index": 3903,
+      "name": "Safaga",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B18851026884182"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B19070372883194",
+      "index": 18572,
+      "bounds": [
+        155017.15367444445,
+        112690.53668919974,
+        155130.831765,
+        112826.22963723149
+      ],
+      "province_id": "framework:province:aswan-governorate:071a116cf49d",
+      "province_index": 683,
+      "name": "Daraw",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B19070372883194"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B19297711577028",
+      "index": 18574,
+      "bounds": [
+        155458.10232166664,
+        111841.40829062104,
+        156921.93531222222,
+        113164.39330540416
+      ],
+      "province_id": "framework:province:red-sea-governorate:af3fc38ad247",
+      "province_index": 3903,
+      "name": "Marsa Alam",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B19297711577028"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B20461221508658",
+      "index": 18575,
+      "bounds": [
+        154518.01874,
+        111346.21675612743,
+        154692.9417211111,
+        111470.49847228796
+      ],
+      "province_id": "framework:province:qena-governorate:cff9aa45d830",
+      "province_index": 3836,
+      "name": "Nag Hammadi",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B20461221508658"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B20583905741630",
+      "index": 18576,
+      "bounds": [
+        153391.50600277778,
+        109331.01127709995,
+        153566.13768833334,
+        109474.38973056005
+      ],
+      "province_id": "framework:province:minya-governate:85bca7e8e08b",
+      "province_index": 3042,
+      "name": "Markz Bani Mazar",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B20583905741630"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B21152276423955",
+      "index": 18577,
+      "bounds": [
+        153390.049525,
+        109223.61318406854,
+        153586.45555333333,
+        109373.13756564297
+      ],
+      "province_id": "framework:province:minya-governate:85bca7e8e08b",
+      "province_index": 3042,
+      "name": "Markz Maghagha",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B21152276423955"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B22072181231059",
+      "index": 18579,
+      "bounds": [
+        153766.4033827778,
+        107423.01250171292,
+        153859.83643222222,
+        107673.94845594194
+      ],
+      "province_id": "framework:province:gharbiyya-governorate:3043114e29a4",
+      "province_index": 1819,
+      "name": "Zifta",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B22072181231059"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B22185494316404",
+      "index": 18581,
+      "bounds": [
+        153843.96082444445,
+        108355.78896144839,
+        153902.87535055555,
+        108605.59809279913
+      ],
+      "province_id": "framework:province:giza-governorate:c786e95feec8",
+      "province_index": 1837,
+      "name": "Saf",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B22185494316404"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B22410072002885",
+      "index": 18582,
+      "bounds": [
+        153870.76001555557,
+        110372.53651785615,
+        154946.29603055556,
+        111369.73980837024
+      ],
+      "province_id": "framework:province:sohag-governorate:8d477ff34a4c",
+      "province_index": 4285,
+      "name": "Zemam Out",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B22410072002885"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B22529416419300",
+      "index": 18583,
+      "bounds": [
+        154792.27350555558,
+        108175.88958366126,
+        154811.64466,
+        108203.29418686677
+      ],
+      "province_id": "framework:province:suez-governorate:0f5514dfc2bb",
+      "province_index": 4418,
+      "name": "Suez",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B22529416419300"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B2291437615199",
+      "index": 18585,
+      "bounds": [
+        153540.794975,
+        106931.00698449489,
+        153663.2119322222,
+        107160.83008221492
+      ],
+      "province_id": "framework:province:kafr-el-sheikh-governorate:6496216f3cd4",
+      "province_index": 2298,
+      "name": "Riyad",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B2291437615199"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B24325700494067",
+      "index": 18586,
+      "bounds": [
+        153823.42448777775,
+        110549.44220010827,
+        153925.23228444444,
+        110689.25030590896
+      ],
+      "province_id": "framework:province:asyut-governorate:7ec0add7adef",
+      "province_index": 684,
+      "name": "Abu Tig",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B24325700494067"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B26246524516343",
+      "index": 18590,
+      "bounds": [
+        155468.88025722222,
+        112957.27226574543,
+        157189.31094716347,
+        114653.60705846018
+      ],
+      "province_id": "framework:province:red-sea-governorate:af3fc38ad247",
+      "province_index": 3903,
+      "name": "Shallatin",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B26246524516343"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B27009685632556",
+      "index": 18593,
+      "bounds": [
+        155741.96984055557,
+        108384.39283714697,
+        156463.945875,
+        109090.05172421117
+      ],
+      "province_id": "framework:province:south-sinai-governorate:ae2923b87eb7",
+      "province_index": 4347,
+      "name": "Nuweiba",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B27009685632556"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B27460825727162",
+      "index": 18594,
+      "bounds": [
+        154613.49085833333,
+        107114.6795491484,
+        154787.394305,
+        107393.05531667122
+      ],
+      "province_id": "atlas:macro-boundary:province:a48116e327dc2131",
+      "province_index": 5,
+      "name": "Mubark-Sharq Tafrea",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B27460825727162"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B28167369066586",
+      "index": 18596,
+      "bounds": [
+        154368.00152888888,
+        107123.19639820936,
+        154426.55193555556,
+        107187.21426371526
+      ],
+      "province_id": "framework:province:dakahlia-governorate:b926c0a50068",
+      "province_index": 1429,
+      "name": "Matariyya",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B28167369066586"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B28192113145833",
+      "index": 18597,
+      "bounds": [
+        154705.17613444445,
+        111713.72854764601,
+        154820.7476461111,
+        111841.40829062104
+      ],
+      "province_id": "framework:province:luxor-governate:29270343a054",
+      "province_index": 2788,
+      "name": "Armant",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B28192113145833"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B2824633862511",
+      "index": 18598,
+      "bounds": [
+        154769.6981,
+        107218.77883039539,
+        155013.94942333334,
+        107479.67183929682
+      ],
+      "province_id": "framework:province:north-sinai-governorate:413042f14fc8",
+      "province_index": 3350,
+      "name": "Rummana",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B2824633862511"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B28688372464969",
+      "index": 18599,
+      "bounds": [
+        153773.32165222222,
+        107267.08020585592,
+        153888.96598777777,
+        107452.95865306995
+      ],
+      "province_id": "framework:province:gharbiyya-governorate:3043114e29a4",
+      "province_index": 1819,
+      "name": "Samannud",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B28688372464969"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B29149830762978",
+      "index": 18600,
+      "bounds": [
+        154714.4975922222,
+        111828.97884347038,
+        154869.75812333333,
+        112119.605283239
+      ],
+      "province_id": "framework:province:qina:358aecb4f52e",
+      "province_index": 3843,
+      "name": "Isna",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B29149830762978"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B30384422366927",
+      "index": 18603,
+      "bounds": [
+        151801.10509333335,
+        107409.26581620118,
+        153176.16576333335,
+        109206.58661707595
+      ],
+      "province_id": "framework:province:matrouh-governorate:68098466f9e9",
+      "province_index": 2941,
+      "name": "Al-Hammam",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B30384422366927"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B3069705007202",
+      "index": 18606,
+      "bounds": [
+        154886.58044166665,
+        107118.85291782397,
+        155509.661635,
+        107935.50303330983
+      ],
+      "province_id": "framework:province:north-sinai-governorate:413042f14fc8",
+      "province_index": 3350,
+      "name": "Bir Al-Abd",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B3069705007202"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B31369022265166",
+      "index": 18608,
+      "bounds": [
+        153820.5115322222,
+        108219.5981829799,
+        153863.62327444446,
+        108263.45192561035
+      ],
+      "province_id": "framework:province:giza-governorate:c786e95feec8",
+      "province_index": 1837,
+      "name": "Hwamdeia",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B31369022265166"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B31879405836913",
+      "index": 18609,
+      "bounds": [
+        153818.7637588889,
+        107317.13692323153,
+        153949.1913438889,
+        107496.88236292612
+      ],
+      "province_id": "framework:province:dakahlia-governorate:b926c0a50068",
+      "province_index": 1429,
+      "name": "Aga",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B31879405836913"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B32135052764998",
+      "index": 18610,
+      "bounds": [
+        155050.87113500002,
+        112542.40115123527,
+        155208.3163827778,
+        112781.3919568891
+      ],
+      "province_id": "framework:province:aswan-governorate:071a116cf49d",
+      "province_index": 683,
+      "name": "Nasr",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B32135052764998"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B32615858974663",
+      "index": 18611,
+      "bounds": [
+        153915.47388333332,
+        110616.10244951826,
+        154032.9388161111,
+        110773.6046467131
+      ],
+      "province_id": "framework:province:asyut-governorate:7ec0add7adef",
+      "province_index": 684,
+      "name": "Al- Badari",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B32615858974663"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B3351007317987",
+      "index": 18615,
+      "bounds": [
+        154957.36526166668,
+        111421.30787357685,
+        155021.5231077778,
+        111510.02702131822
+      ],
+      "province_id": "framework:province:qena-governorate:cff9aa45d830",
+      "province_index": 3836,
+      "name": "Qift",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B3351007317987"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B33553459827704",
+      "index": 18616,
+      "bounds": [
+        153355.31253,
+        109415.07780484586,
+        153539.33849722223,
+        109529.35823634063
+      ],
+      "province_id": "framework:province:minya-governate:85bca7e8e08b",
+      "province_index": 3042,
+      "name": "Markz Matay",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B33553459827704"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B33567976679520",
+      "index": 18617,
+      "bounds": [
+        154161.90992333333,
+        111002.3542082636,
+        154250.60942,
+        111170.9073473465
+      ],
+      "province_id": "framework:province:sohag-governorate:8d477ff34a4c",
+      "province_index": 4285,
+      "name": "Al-Minshat",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B33567976679520"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B33717646792475",
+      "index": 18618,
+      "bounds": [
+        153561.768255,
+        108964.28036153357,
+        153708.07144777777,
+        109120.90469221395
+      ],
+      "province_id": "framework:province:beni-suef-governorate:68c456de5693",
+      "province_index": 891,
+      "name": "Biba",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B33717646792475"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B34514127980105",
+      "index": 18621,
+      "bounds": [
+        149632.55533,
+        106781.30149437208,
+        150231.96875944445,
+        108768.89067020064
+      ],
+      "province_id": "framework:province:matrouh-governorate:68098466f9e9",
+      "province_index": 2941,
+      "name": "Sidi Barani",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B34514127980105"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B34734253794751",
+      "index": 18622,
+      "bounds": [
+        155290.8986727778,
+        110975.1554966625,
+        156313.27324888887,
+        112023.55105485361
+      ],
+      "province_id": "framework:province:red-sea-governorate:af3fc38ad247",
+      "province_index": 3903,
+      "name": "Qusir",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B34734253794751"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B34846492708063",
+      "index": 18623,
+      "bounds": [
+        153467.17002333334,
+        109082.98143311484,
+        153610.19614111108,
+        109241.38369659854
+      ],
+      "province_id": "framework:province:beni-suef-governorate:68c456de5693",
+      "province_index": 891,
+      "name": "Al Fashn",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B34846492708063"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B35886288843325",
+      "index": 18626,
+      "bounds": [
+        153535.91577444444,
+        107697.79896566032,
+        153663.8673472222,
+        107850.29547099727
+      ],
+      "province_id": "framework:province:monufia-governorate:f19e7d71bf69",
+      "province_index": 3090,
+      "name": "Minuf",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B35886288843325"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B37481118609375",
+      "index": 18628,
+      "bounds": [
+        153357.3515988889,
+        107463.89939848828,
+        153550.55337611111,
+        107757.6484589621
+      ],
+      "province_id": "framework:province:beheira-governorate:0439f0b87689",
+      "province_index": 861,
+      "name": "Kum Hamada",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B37481118609375"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B37861588601733",
+      "index": 18630,
+      "bounds": [
+        154583.4145922222,
+        107742.01402608312,
+        154705.6130777778,
+        107966.10570903715
+      ],
+      "province_id": "framework:province:ismailia-governorate:b94d00fa8247",
+      "province_index": 2188,
+      "name": "Fayid",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B37861588601733"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B38142631960117",
+      "index": 18631,
+      "bounds": [
+        152476.2553672222,
+        107332.34327748584,
+        152612.50886333335,
+        107409.26581620118
+      ],
+      "province_id": "framework:province:matrouh-governorate:68098466f9e9",
+      "province_index": 2941,
+      "name": "North Coast",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B38142631960117"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B38427943153509",
+      "index": 18632,
+      "bounds": [
+        155554.37550277778,
+        109030.97619998684,
+        156224.13680888887,
+        109554.18212238426
+      ],
+      "province_id": "framework:province:south-sinai-governorate:ae2923b87eb7",
+      "province_index": 4347,
+      "name": "Sant Katrin",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B38427943153509"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B38708414170128",
+      "index": 18634,
+      "bounds": [
+        153540.50367944443,
+        110319.31566064726,
+        153690.88501000003,
+        110484.53473307838
+      ],
+      "province_id": "framework:province:asyut-governorate:7ec0add7adef",
+      "province_index": 684,
+      "name": "Manfalut",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B38708414170128"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B3923529194747",
+      "index": 18636,
+      "bounds": [
+        152822.31448722223,
+        107146.5279483051,
+        152847.2930811111,
+        107183.04443530011
+      ],
+      "province_id": "framework:province:alexandria-governorate:ca2b074a8661",
+      "province_index": 530,
+      "name": "Port Alexandria Police Department",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B3923529194747"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B39887765706268",
+      "index": 18637,
+      "bounds": [
+        155810.42429611113,
+        109475.0522067823,
+        156383.54830166665,
+        110053.80985673156
+      ],
+      "province_id": "framework:province:south-sinai-governorate:ae2923b87eb7",
+      "province_index": 4347,
+      "name": "Sharm el-Sheikh",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B39887765706268"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B40134172984025",
+      "index": 18638,
+      "bounds": [
+        153422.52897944444,
+        110060.14445065022,
+        153588.27615055558,
+        110165.54574390991
+      ],
+      "province_id": "framework:province:minya-governate:85bca7e8e08b",
+      "province_index": 3042,
+      "name": "Markz Dir Mawas",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B40134172984025"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B40738105773266",
+      "index": 18640,
+      "bounds": [
+        154293.211395,
+        111202.68048370593,
+        154397.56802777777,
+        111333.80396347507
+      ],
+      "province_id": "framework:province:sohag-governorate:8d477ff34a4c",
+      "province_index": 4285,
+      "name": "Al-Balyana",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B40738105773266"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B4110362295427",
+      "index": 18641,
+      "bounds": [
+        153033.13964555558,
+        107000.12542113301,
+        153239.08560333334,
+        107127.79512194649
+      ],
+      "province_id": "framework:province:beheira-governorate:0439f0b87689",
+      "province_index": 861,
+      "name": "Idku",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B4110362295427"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B41250479572628",
+      "index": 18642,
+      "bounds": [
+        151808.89724944445,
+        107317.56172047717,
+        152177.24047944444,
+        107683.76014331687
+      ],
+      "province_id": "framework:province:matrouh-governorate:68098466f9e9",
+      "province_index": 2941,
+      "name": "Alamn",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B41250479572628"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B42052057109088",
+      "index": 18644,
+      "bounds": [
+        152477.93031666667,
+        107271.67073597205,
+        152724.51200444443,
+        107531.37725094023
+      ],
+      "province_id": "framework:province:matrouh-governorate:68098466f9e9",
+      "province_index": 2941,
+      "name": "Burg al-Arab",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B42052057109088"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B4319107870519",
+      "index": 18649,
+      "bounds": [
+        154259.56675833336,
+        111109.03672803301,
+        154547.9493583333,
+        111371.8484864736
+      ],
+      "province_id": "framework:province:qena-governorate:cff9aa45d830",
+      "province_index": 3836,
+      "name": "Dar al-Salam",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B4319107870519"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B43857760448777",
+      "index": 18653,
+      "bounds": [
+        153422.52897944444,
+        110133.4944611751,
+        153568.75934833335,
+        110284.28273674066
+      ],
+      "province_id": "framework:province:asyut-governorate:7ec0add7adef",
+      "province_index": 684,
+      "name": "Dayrut",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B43857760448777"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B44606701734202",
+      "index": 18654,
+      "bounds": [
+        155022.17852277777,
+        108766.13551243432,
+        156020.08427222222,
+        109154.40636272707
+      ],
+      "province_id": "framework:province:south-sinai-governorate:ae2923b87eb7",
+      "province_index": 4347,
+      "name": "Abu Radis",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B44606701734202"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B45128523411897",
+      "index": 18655,
+      "bounds": [
+        152825.6643861111,
+        108389.84408499174,
+        153750.30930333334,
+        109030.3103296408
+      ],
+      "province_id": "framework:province:faiyum-governorate:6df5a7b4a0fb",
+      "province_index": 1700,
+      "name": "Zemam Out",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B45128523411897"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B45225516611894",
+      "index": 18656,
+      "bounds": [
+        153793.6395172222,
+        108227.58093914417,
+        153872.5806127778,
+        108394.37254539493
+      ],
+      "province_id": "framework:province:giza-governorate:c786e95feec8",
+      "province_index": 1837,
+      "name": "Badrashain",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B45225516611894"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B45623855174262",
+      "index": 18657,
+      "bounds": [
+        154610.3594311111,
+        107123.87770719558,
+        154634.97390555555,
+        107221.07550035659
+      ],
+      "province_id": "atlas:macro-boundary:province:a48116e327dc2131",
+      "province_index": 5,
+      "name": "Port Fuad 2",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B45623855174262"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B46347292779018",
+      "index": 18659,
+      "bounds": [
+        153800.04801944445,
+        108115.66872677997,
+        153819.34635,
+        108138.97161857701
+      ],
+      "province_id": "framework:province:giza-governorate:c786e95feec8",
+      "province_index": 1837,
+      "name": "DuqqI",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B46347292779018"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B46419468197970",
+      "index": 18661,
+      "bounds": [
+        153307.46723500002,
+        109475.13501595802,
+        153499.86794944442,
+        109713.46762399524
+      ],
+      "province_id": "framework:province:minya-governate:85bca7e8e08b",
+      "province_index": 3042,
+      "name": "Markz Samalut",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B46419468197970"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B46466496002040",
+      "index": 18662,
+      "bounds": [
+        154733.14050777777,
+        111611.04203713863,
+        154919.0598961111,
+        111829.30170644954
+      ],
+      "province_id": "framework:province:luxor-governate:29270343a054",
+      "province_index": 2788,
+      "name": "Luxor",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B46466496002040"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B46685873859675",
+      "index": 18663,
+      "bounds": [
+        153637.94204277778,
+        107753.93026863666,
+        153764.00019444444,
+        107875.27629523852
+      ],
+      "province_id": "framework:province:monufia-governorate:f19e7d71bf69",
+      "province_index": 3090,
+      "name": "Al-Bagur",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B46685873859675"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B46763181924450",
+      "index": 18664,
+      "bounds": [
+        154869.976595,
+        111642.58737763471,
+        154935.08115166667,
+        111708.47560235643
+      ],
+      "province_id": "framework:province:luxor-governate:29270343a054",
+      "province_index": 2788,
+      "name": "Tiba police station",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B46763181924450"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B47904528840221",
+      "index": 18666,
+      "bounds": [
+        153284.01794277778,
+        107751.05700643407,
+        153565.55509722224,
+        107971.50004999005
+      ],
+      "province_id": "framework:province:monufia-governorate:f19e7d71bf69",
+      "province_index": 3090,
+      "name": "Sadat City",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B47904528840221"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B49167572517761",
+      "index": 18669,
+      "bounds": [
+        153233.91510722222,
+        107076.34256370494,
+        153371.69790499998,
+        107224.7330250716
+      ],
+      "province_id": "framework:province:beheira-governorate:0439f0b87689",
+      "province_index": 861,
+      "name": "Al-Mahmudiyya",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B49167572517761"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B50219622339720",
+      "index": 18672,
+      "bounds": [
+        153744.41056833332,
+        110423.43208049492,
+        153879.64453,
+        110520.06357114189
+      ],
+      "province_id": "framework:province:asyut-governorate:7ec0add7adef",
+      "province_index": 684,
+      "name": "Alfath",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B50219622339720"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B5042289926655",
+      "index": 18674,
+      "bounds": [
+        155011.18211555554,
+        112383.85334079046,
+        155130.97741277778,
+        112765.8020129708
+      ],
+      "province_id": "framework:province:aswan-governorate:071a116cf49d",
+      "province_index": 683,
+      "name": "Kum Umbu",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B5042289926655"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B50825531526089",
+      "index": 18676,
+      "bounds": [
+        154993.04896722222,
+        107905.39514775421,
+        156483.89962055557,
+        108570.96045311299
+      ],
+      "province_id": "framework:province:north-sinai-governorate:413042f14fc8",
+      "province_index": 3350,
+      "name": "Nakhl",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B50825531526089"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B51096510617520",
+      "index": 18677,
+      "bounds": [
+        154210.99322444445,
+        107014.53891093907,
+        154284.25405666666,
+        107215.63143582096
+      ],
+      "province_id": "framework:province:damietta-governorate:82394487e55a",
+      "province_index": 1441,
+      "name": "MIt Salsil",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B51096510617520"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B51826009871737",
+      "index": 18680,
+      "bounds": [
+        155256.01603,
+        109138.28062703271,
+        155912.5962122222,
+        109916.06562357937
+      ],
+      "province_id": "framework:province:south-sinai-governorate:ae2923b87eb7",
+      "province_index": 4347,
+      "name": "Al-Tur",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B51826009871737"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B5321471482777",
+      "index": 18685,
+      "bounds": [
+        153903.74923722225,
+        110696.11259431427,
+        154025.0738361111,
+        110809.59305774486
+      ],
+      "province_id": "framework:province:sohag-governorate:8d477ff34a4c",
+      "province_index": 4285,
+      "name": "Tama",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B5321471482777"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B53334820254906",
+      "index": 18687,
+      "bounds": [
+        154220.89727333334,
+        111084.06553506832,
+        154292.84727555557,
+        111182.44768190742
+      ],
+      "province_id": "framework:province:sohag-governorate:8d477ff34a4c",
+      "province_index": 4285,
+      "name": "Al Usayrat",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B53334820254906"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B53497462847633",
+      "index": 18688,
+      "bounds": [
+        153690.0111233333,
+        108639.38544111908,
+        153826.41026722224,
+        108817.13326364999
+      ],
+      "province_id": "framework:province:beni-suef-governorate:68c456de5693",
+      "province_index": 891,
+      "name": "Al Wasta",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B53497462847633"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B53748377361433",
+      "index": 18689,
+      "bounds": [
+        153765.3110244444,
+        110473.31653721585,
+        153806.23805,
+        110510.15945468518
+      ],
+      "province_id": "framework:province:asyut-governorate:7ec0add7adef",
+      "province_index": 684,
+      "name": "Kesm Than Assuit",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B53748377361433"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B5447548481781",
+      "index": 18692,
+      "bounds": [
+        154007.08633555553,
+        106931.8606625975,
+        154231.45673722224,
+        107093.46867621403
+      ],
+      "province_id": "framework:province:damietta-governorate:82394487e55a",
+      "province_index": 1441,
+      "name": "Kafr Sad",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B5447548481781"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B54771061850383",
+      "index": 18693,
+      "bounds": [
+        153700.35211555558,
+        107810.44553146602,
+        153877.31416555558,
+        107935.92463459793
+      ],
+      "province_id": "framework:province:qalyubia-governorate:1557b2686094",
+      "province_index": 3832,
+      "name": "Tukh",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B54771061850383"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B55829024150134",
+      "index": 18696,
+      "bounds": [
+        153800.70343444444,
+        108135.69110004607,
+        153825.02661333332,
+        108191.27425618218
+      ],
+      "province_id": "framework:province:giza-governorate:c786e95feec8",
+      "province_index": 1837,
+      "name": "Giza",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B55829024150134"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B57049820860179",
+      "index": 18699,
+      "bounds": [
+        153460.17893,
+        108548.8652851942,
+        153610.63308444445,
+        108713.51996439011
+      ],
+      "province_id": "framework:province:faiyum-governorate:6df5a7b4a0fb",
+      "province_index": 1700,
+      "name": "Sinuras",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B57049820860179"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B57305898539534",
+      "index": 18700,
+      "bounds": [
+        153504.52867833336,
+        107590.07827184045,
+        153625.48915777777,
+        107720.12082342297
+      ],
+      "province_id": "framework:province:monufia-governorate:f19e7d71bf69",
+      "province_index": 3090,
+      "name": "Al-Shuhada",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B57305898539534"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B57319556498410",
+      "index": 18701,
+      "bounds": [
+        154796.570115,
+        108222.45525695058,
+        154847.61966111112,
+        108303.7569499842
+      ],
+      "province_id": "framework:province:port-suez-police-department:5eee1452042c",
+      "province_index": 3703,
+      "name": "Port Suez Police Department",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B57319556498410"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B58798403168141",
+      "index": 18705,
+      "bounds": [
+        154627.18174944445,
+        111293.2279197004,
+        154802.5416738889,
+        111401.12182703924
+      ],
+      "province_id": "framework:province:qena-governorate:cff9aa45d830",
+      "province_index": 3836,
+      "name": "Dishna",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B58798403168141"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B59036266241246",
+      "index": 18706,
+      "bounds": [
+        153768.00550833333,
+        108179.92518182554,
+        153859.03536944443,
+        108242.2840224191
+      ],
+      "province_id": "framework:province:giza-governorate:c786e95feec8",
+      "province_index": 1837,
+      "name": "Giza",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B59036266241246"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B59643082406240",
+      "index": 18708,
+      "bounds": [
+        154198.831635,
+        106900.18309807985,
+        154228.8350772222,
+        106941.76266267496
+      ],
+      "province_id": "framework:province:damietta-governorate:82394487e55a",
+      "province_index": 1441,
+      "name": "Police Department Port of Damietta",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B59643082406240"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B61040397145628",
+      "index": 18712,
+      "bounds": [
+        154430.33877777777,
+        107007.37513342348,
+        154581.08422777778,
+        107110.33560896767
+      ],
+      "province_id": "framework:province:dakahlia-governorate:b926c0a50068",
+      "province_index": 1429,
+      "name": "Al-Manasra",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B61040397145628"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B61234943331501",
+      "index": 18713,
+      "bounds": [
+        153723.94705555556,
+        107912.48034203824,
+        153829.46887055557,
+        108053.72031578695
+      ],
+      "province_id": "framework:province:qalyubia-governorate:1557b2686094",
+      "province_index": 3832,
+      "name": "Qanatir Al-Khayriyya",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B61234943331501"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B61358518780197",
+      "index": 18715,
+      "bounds": [
+        154830.79734277778,
+        110183.9495305967,
+        155733.52226944445,
+        110906.30889372186
+      ],
+      "province_id": "framework:province:red-sea-governorate:af3fc38ad247",
+      "province_index": 3903,
+      "name": "Hurghada 1",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B61358518780197"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B61393331220836",
+      "index": 18716,
+      "bounds": [
+        153821.09412333334,
+        107644.33710943609,
+        153911.10445,
+        107747.08497866736
+      ],
+      "province_id": "framework:province:qalyubia-governorate:1557b2686094",
+      "province_index": 3832,
+      "name": "Kafr Shukr",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B61393331220836"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B61862544009771",
+      "index": 18718,
+      "bounds": [
+        154669.92937222222,
+        107922.76966248406,
+        155009.21587055555,
+        108303.7569499842
+      ],
+      "province_id": "atlas:macro-boundary:province:3d0b323721cd05c7",
+      "province_index": 2,
+      "name": "Al-Ganayin",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B61862544009771"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B62002284809719",
+      "index": 18719,
+      "bounds": [
+        153298.291425,
+        107170.95922470257,
+        153438.91435444445,
+        107283.2309169718
+      ],
+      "province_id": "framework:province:beheira-governorate:0439f0b87689",
+      "province_index": 861,
+      "name": "Al-Rahmaniyya",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B62002284809719"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B62515716527778",
+      "index": 18721,
+      "bounds": [
+        154172.25091555555,
+        110917.9634399792,
+        154265.61114111112,
+        111114.40425875076
+      ],
+      "province_id": "framework:province:sohag-governorate:8d477ff34a4c",
+      "province_index": 4285,
+      "name": "Akhmim",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B62515716527778"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B63195966732086",
+      "index": 18722,
+      "bounds": [
+        149288.82657444445,
+        110098.14262729806,
+        153559.7291861111,
+        114652.50745669124
+      ],
+      "province_id": "framework:province:new-valley-governorate:49bc31fbddab",
+      "province_index": 3246,
+      "name": "A-Dakhla Oasis",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B63195966732086"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B63981628133809",
+      "index": 18724,
+      "bounds": [
+        153630.29553444445,
+        110352.44910579402,
+        153811.11725055554,
+        110457.59236436963
+      ],
+      "province_id": "framework:province:asyut-governorate:7ec0add7adef",
+      "province_index": 684,
+      "name": "Abnub",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B63981628133809"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B63984136807861",
+      "index": 18725,
+      "bounds": [
+        153456.901855,
+        110215.32589764756,
+        153602.3311611111,
+        110387.37375378115
+      ],
+      "province_id": "framework:province:asyut-governorate:7ec0add7adef",
+      "province_index": 684,
+      "name": "Al-Qusia",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B63984136807861"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B66278795403604",
+      "index": 18727,
+      "bounds": [
+        154732.19379722222,
+        108147.04619129091,
+        154811.64466,
+        108214.05181951862
+      ],
+      "province_id": "framework:province:suez-governorate:0f5514dfc2bb",
+      "province_index": 4418,
+      "name": "Al-Arbiin",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B66278795403604"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B67299056810507",
+      "index": 18728,
+      "bounds": [
+        149288.97222222222,
+        110095.59346930467,
+        151863.07822277778,
+        111128.96010597733
+      ],
+      "province_id": "framework:province:new-valley-governorate:49bc31fbddab",
+      "province_index": 3246,
+      "name": "Al Farafra Oasis",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B67299056810507"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B6993574009783",
+      "index": 18731,
+      "bounds": [
+        151813.48515444444,
+        109183.57467696372,
+        154800.79390055555,
+        110156.75332250583
+      ],
+      "province_id": "framework:province:minya-governate:85bca7e8e08b",
+      "province_index": 3042,
+      "name": "Zemam Out",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B6993574009783"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B6997097478011",
+      "index": 18732,
+      "bounds": [
+        154117.56017500002,
+        106913.16302563748,
+        154229.5633161111,
+        106978.28703029532
+      ],
+      "province_id": "framework:province:damietta-governorate:82394487e55a",
+      "province_index": 1441,
+      "name": "Dumyat Al-Gadida",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B6997097478011"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B70757387881176",
+      "index": 18735,
+      "bounds": [
+        154604.09657666666,
+        107085.2042914431,
+        154624.92420888887,
+        107119.96010175424
+      ],
+      "province_id": "framework:province:port-said-governorate:40d5a143e756",
+      "province_index": 3702,
+      "name": "Police Department Port Said Port",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B70757387881176"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B71323814972136",
+      "index": 18737,
+      "bounds": [
+        154141.37358666665,
+        106991.59550816914,
+        154242.74443999998,
+        107116.72367513833
+      ],
+      "province_id": "framework:province:damietta-governorate:82394487e55a",
+      "province_index": 1441,
+      "name": "Fariskur",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B71323814972136"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B7137912263252",
+      "index": 18738,
+      "bounds": [
+        150141.7399611111,
+        106853.11316513181,
+        151386.80998944445,
+        109373.05465985366
+      ],
+      "province_id": "framework:province:matrouh-governorate:68098466f9e9",
+      "province_index": 2941,
+      "name": "Marsa Matruh",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B7137912263252"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B71676379887746",
+      "index": 18740,
+      "bounds": [
+        153326.47426999998,
+        109649.44082462855,
+        153545.8926472222,
+        109841.21756607736
+      ],
+      "province_id": "framework:province:minya-governate:85bca7e8e08b",
+      "province_index": 3042,
+      "name": "Markz Al Minya",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B71676379887746"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B7250727301439",
+      "index": 18741,
+      "bounds": [
+        153786.86689555555,
+        108390.7665689145,
+        153877.09569388887,
+        108666.47251340521
+      ],
+      "province_id": "framework:province:giza-governorate:c786e95feec8",
+      "province_index": 1837,
+      "name": "Ayat",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B7250727301439"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B72756565577460",
+      "index": 18743,
+      "bounds": [
+        153816.28774666667,
+        108101.02747556422,
+        153825.53638055554,
+        108130.55977372453
+      ],
+      "province_id": "framework:province:giza-governorate:c786e95feec8",
+      "province_index": 1837,
+      "name": "Zamalik",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B72756565577460"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B72914028370389",
+      "index": 18744,
+      "bounds": [
+        153884.37808277778,
+        110649.45528455367,
+        153980.28714444445,
+        110742.50132736625
+      ],
+      "province_id": "framework:province:asyut-governorate:7ec0add7adef",
+      "province_index": 684,
+      "name": "Sidfa",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B72914028370389"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B73326223517768",
+      "index": 18745,
+      "bounds": [
+        153701.73576944444,
+        107623.09495306746,
+        153844.54341555556,
+        107763.2254293433
+      ],
+      "province_id": "framework:province:monufia-governorate:f19e7d71bf69",
+      "province_index": 3090,
+      "name": "Quwisna",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B73326223517768"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B7335021436895",
+      "index": 18746,
+      "bounds": [
+        153805.6554588889,
+        108591.46028300433,
+        153874.76532944443,
+        108836.65625907107
+      ],
+      "province_id": "framework:province:giza-governorate:c786e95feec8",
+      "province_index": 1837,
+      "name": "Atfeh",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B7335021436895"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B73956026156280",
+      "index": 18748,
+      "bounds": [
+        153183.22968055555,
+        106883.5281280026,
+        153403.52194444445,
+        107100.02845932465
+      ],
+      "province_id": "framework:province:kafr-el-sheikh-governorate:6496216f3cd4",
+      "province_index": 2298,
+      "name": "Mitubas",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B73956026156280"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B74067375685147",
+      "index": 18749,
+      "bounds": [
+        156963.15363333334,
+        114047.6368299017,
+        157961.35067833334,
+        114653.60705846018
+      ],
+      "province_id": "framework:province:red-sea-governorate:af3fc38ad247",
+      "province_index": 3903,
+      "name": "Halayib",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B74067375685147"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B75399963690534",
+      "index": 18752,
+      "bounds": [
+        154610.3594311111,
+        107101.81739821186,
+        154639.78028222223,
+        107136.22543316118
+      ],
+      "province_id": "atlas:macro-boundary:province:a48116e327dc2131",
+      "province_index": 5,
+      "name": "Port Fuad",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B75399963690534"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B75450946768070",
+      "index": 18753,
+      "bounds": [
+        149191.75233055555,
+        108373.32152345455,
+        151350.54369277778,
+        110117.95780904683
+      ],
+      "province_id": "framework:province:matrouh-governorate:68098466f9e9",
+      "province_index": 2941,
+      "name": "Siwa",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B75450946768070"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B76296882951531",
+      "index": 18754,
+      "bounds": [
+        155008.1963361111,
+        112985.35939979317,
+        155061.57624666666,
+        113093.24758457665
+      ],
+      "province_id": "framework:province:aswan-governorate:071a116cf49d",
+      "province_index": 683,
+      "name": "Aswan",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B76296882951531"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B76793683664752",
+      "index": 18755,
+      "bounds": [
+        153985.0206972222,
+        107014.28307276343,
+        154154.33623888888,
+        107197.8506048235
+      ],
+      "province_id": "framework:province:dakahlia-governorate:b926c0a50068",
+      "province_index": 1429,
+      "name": "Shirbin",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B76793683664752"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B78325352338503",
+      "index": 18758,
+      "bounds": [
+        153761.74265388888,
+        108051.53107694242,
+        153832.67312166668,
+        108111.71415975409
+      ],
+      "province_id": "framework:province:giza-governorate:c786e95feec8",
+      "province_index": 1837,
+      "name": "Waraq",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B78325352338503"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B80197492831052",
+      "index": 18761,
+      "bounds": [
+        154200.2152888889,
+        106868.92014049375,
+        154434.56256333334,
+        107017.09724780222
+      ],
+      "province_id": "framework:province:damietta-governorate:82394487e55a",
+      "province_index": 1441,
+      "name": "Dumyat",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B80197492831052"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B80470796626605",
+      "index": 18762,
+      "bounds": [
+        154673.49774277778,
+        111371.36187261302,
+        154790.45290833333,
+        111416.44415833475
+      ],
+      "province_id": "framework:province:new-valley-governorate:49bc31fbddab",
+      "province_index": 3246,
+      "name": "Al Waqf",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B80470796626605"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B80860993707274",
+      "index": 18764,
+      "bounds": [
+        154242.0162011111,
+        106942.78693754564,
+        154263.6448961111,
+        106969.32815564121
+      ],
+      "province_id": "framework:province:damietta-governorate:82394487e55a",
+      "province_index": 1441,
+      "name": "Dumyat 2",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B80860993707274"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B81519659380298",
+      "index": 18766,
+      "bounds": [
+        153676.24740833332,
+        106801.14166681716,
+        153953.12383388888,
+        106945.17686124105
+      ],
+      "province_id": "framework:province:kafr-el-sheikh-governorate:6496216f3cd4",
+      "province_index": 2298,
+      "name": "Burullus",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B81519659380298"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B81871138986317",
+      "index": 18769,
+      "bounds": [
+        153506.85904277777,
+        106803.79234985138,
+        153820.94847555555,
+        107125.92159954975
+      ],
+      "province_id": "framework:province:kafr-el-sheikh-governorate:6496216f3cd4",
+      "province_index": 2298,
+      "name": "Al Hamul",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B81871138986317"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B81923803494172",
+      "index": 18770,
+      "bounds": [
+        153668.38242833334,
+        110427.1190587303,
+        153887.94645333334,
+        110604.00087657537
+      ],
+      "province_id": "framework:province:asyut-governorate:7ec0add7adef",
+      "province_index": 684,
+      "name": "Assuit",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B81923803494172"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B8228928204650",
+      "index": 18772,
+      "bounds": [
+        156402.04556944442,
+        108552.71561571243,
+        156501.4800211455,
+        108613.1261421822
+      ],
+      "province_id": "framework:province:south-sinai-governorate:ae2923b87eb7",
+      "province_index": 4347,
+      "name": "Taba",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B8228928204650"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B82534825994477",
+      "index": 18773,
+      "bounds": [
+        154209.09980333335,
+        108859.26065701814,
+        155306.99275222223,
+        109957.91357066241
+      ],
+      "province_id": "framework:province:red-sea-governorate:af3fc38ad247",
+      "province_index": 3903,
+      "name": "Ras Gharib",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B82534825994477"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B8272861874741",
+      "index": 18774,
+      "bounds": [
+        153904.91441944445,
+        110768.46230105386,
+        154066.5834527778,
+        110880.14196340233
+      ],
+      "province_id": "framework:province:sohag-governorate:8d477ff34a4c",
+      "province_index": 4285,
+      "name": "Tahta",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B8272861874741"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B82943552263009",
+      "index": 18776,
+      "bounds": [
+        153877.7511088889,
+        110516.62590026614,
+        153965.94083833334,
+        110629.2651866757
+      ],
+      "province_id": "framework:province:asyut-governorate:7ec0add7adef",
+      "province_index": 684,
+      "name": "Sahil Silim",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B82943552263009"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B83073428854351",
+      "index": 18777,
+      "bounds": [
+        153879.7901777778,
+        107168.57601158047,
+        154097.3151338889,
+        107377.18116903203
+      ],
+      "province_id": "framework:province:dakahlia-governorate:b926c0a50068",
+      "province_index": 1429,
+      "name": "El Mansora",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B83073428854351"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B84548629991625",
+      "index": 18780,
+      "bounds": [
+        155640.16204388888,
+        107116.72367513833,
+        155991.4644838889,
+        107652.03708867657
+      ],
+      "province_id": "framework:province:north-sinai-governorate:413042f14fc8",
+      "province_index": 3350,
+      "name": "Shaykh Zuwayd",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B84548629991625"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B87284090425389",
+      "index": 18788,
+      "bounds": [
+        154250.31812444446,
+        106879.76960303924,
+        154264.9557261111,
+        106895.65670634888
+      ],
+      "province_id": "framework:province:damietta-governorate:82394487e55a",
+      "province_index": 1441,
+      "name": "Ras al-Bar",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B87284090425389"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B87719226438942",
+      "index": 18790,
+      "bounds": [
+        154891.82376166666,
+        111468.22994316714,
+        154953.50559555556,
+        111637.57317104544
+      ],
+      "province_id": "framework:province:luxor-governate:29270343a054",
+      "province_index": 2788,
+      "name": "Naqada",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B87719226438942"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B89602955599025",
+      "index": 18796,
+      "bounds": [
+        154266.19373222222,
+        108081.83848971956,
+        154858.9073638889,
+        109019.57245967459
+      ],
+      "province_id": "framework:province:suez-governorate:0f5514dfc2bb",
+      "province_index": 4418,
+      "name": "Ataqa",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B89602955599025"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B90937698610862",
+      "index": 18799,
+      "bounds": [
+        153438.18611555555,
+        109917.38396851161,
+        153591.8445211111,
+        110111.62729223742
+      ],
+      "province_id": "framework:province:minya-governate:85bca7e8e08b",
+      "province_index": 3042,
+      "name": "Markz Mallawi",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B90937698610862"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B91562573257971",
+      "index": 18801,
+      "bounds": [
+        154471.70274666668,
+        107109.22829258142,
+        154612.9810911111,
+        107286.0357118945
+      ],
+      "province_id": "framework:province:port-said-governorate:40d5a143e756",
+      "province_index": 3702,
+      "name": "Al-Ganoub",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B91562573257971"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B91574784842387",
+      "index": 18802,
+      "bounds": [
+        154615.6027511111,
+        107316.11740075363,
+        155065.87285611112,
+        107999.30905092398
+      ],
+      "province_id": "atlas:macro-boundary:province:e4e08ad07f1bb06d",
+      "province_index": 7,
+      "name": "Qantara Sharq, al-",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B91574784842387"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B9213477235230",
+      "index": 18803,
+      "bounds": [
+        153390.99623555556,
+        108605.17984824075,
+        153504.81997388887,
+        108776.65472712365
+      ],
+      "province_id": "framework:province:faiyum-governorate:6df5a7b4a0fb",
+      "province_index": 1700,
+      "name": "Abshaway",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B9213477235230"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B95427647060127",
+      "index": 18807,
+      "bounds": [
+        154916.72953166667,
+        111482.40736361781,
+        155003.09866388887,
+        111676.70937490981
+      ],
+      "province_id": "framework:province:luxor-governate:29270343a054",
+      "province_index": 2788,
+      "name": "Qus",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B95427647060127"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B95648929265509",
+      "index": 18808,
+      "bounds": [
+        153637.94204277778,
+        108783.75029044549,
+        153810.97160277778,
+        108907.20226681718
+      ],
+      "province_id": "framework:province:beni-suef-governorate:68c456de5693",
+      "province_index": 891,
+      "name": "Nasir",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B95648929265509"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B96122561755956",
+      "index": 18810,
+      "bounds": [
+        154854.53793055555,
+        112082.01607447192,
+        155116.33981111113,
+        112549.69293942448
+      ],
+      "province_id": "framework:province:aswan-governorate:071a116cf49d",
+      "province_index": 683,
+      "name": "Adfu",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B96122561755956"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B96193438521946",
+      "index": 18811,
+      "bounds": [
+        153229.2543783333,
+        108627.17671398284,
+        153416.12047722226,
+        108792.84844399751
+      ],
+      "province_id": "framework:province:faiyum-governorate:6df5a7b4a0fb",
+      "province_index": 1700,
+      "name": "Yousef El sadeq",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B96193438521946"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B96203293605859",
+      "index": 18812,
+      "bounds": [
+        154027.47702444447,
+        110849.97154768187,
+        154126.6631611111,
+        110990.71022216063
+      ],
+      "province_id": "framework:province:sohag-governorate:8d477ff34a4c",
+      "province_index": 4285,
+      "name": "Al-Maragha",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B96203293605859"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B96389835129643",
+      "index": 18813,
+      "bounds": [
+        154086.9741416667,
+        107098.49505145995,
+        154217.1104311111,
+        107182.19342341823
+      ],
+      "province_id": "framework:province:damietta-governorate:82394487e55a",
+      "province_index": 1441,
+      "name": "Zarqa",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B96389835129643"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B96571076642873",
+      "index": 18814,
+      "bounds": [
+        153320.0657677778,
+        107336.9301091245,
+        153507.00469055556,
+        107488.06560293591
+      ],
+      "province_id": "framework:province:beheira-governorate:0439f0b87689",
+      "province_index": 861,
+      "name": "Itay Al-Barud",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B96571076642873"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B96963536963151",
+      "index": 18817,
+      "bounds": [
+        154822.71389111108,
+        111645.82221055789,
+        154903.25711222223,
+        111730.69764295004
+      ],
+      "province_id": "framework:province:luxor-governate:29270343a054",
+      "province_index": 2788,
+      "name": "Luxor",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B96963536963151"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B97013363059523",
+      "index": 18818,
+      "bounds": [
+        153344.38894666667,
+        107246.4195945889,
+        153500.8874838889,
+        107379.98271472631
+      ],
+      "province_id": "framework:province:beheira-governorate:0439f0b87689",
+      "province_index": 861,
+      "name": "Shubra Khît",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B97013363059523"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B97028957261557",
+      "index": 18819,
+      "bounds": [
+        153453.55195611113,
+        109724.8636632745,
+        153495.86263555556,
+        109763.99541360575
+      ],
+      "province_id": "framework:province:minya-governate:85bca7e8e08b",
+      "province_index": 3042,
+      "name": "Kesm Al-minya",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B97028957261557"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B9734537557155",
+      "index": 18820,
+      "bounds": [
+        153417.14001166666,
+        109797.99463731529,
+        153568.46805277778,
+        109955.85458326564
+      ],
+      "province_id": "framework:province:minya-governate:85bca7e8e08b",
+      "province_index": 3042,
+      "name": "Markz Abu Qurqas",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B9734537557155"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B97823956456767",
+      "index": 18823,
+      "bounds": [
+        154376.81321944445,
+        111298.34146026254,
+        154521.00451944445,
+        111418.95710896933
+      ],
+      "province_id": "framework:province:qena-governorate:cff9aa45d830",
+      "province_index": 3836,
+      "name": "Abu Tisht",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B97823956456767"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B98457599359411",
+      "index": 18824,
+      "bounds": [
+        154803.70685611112,
+        109708.18200607908,
+        155617.65946222222,
+        110373.4382974679
+      ],
+      "province_id": "framework:province:red-sea-governorate:af3fc38ad247",
+      "province_index": 3903,
+      "name": "Hurghada 2",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B98457599359411"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B98548852573050",
+      "index": 18825,
+      "bounds": [
+        153481.66197722222,
+        107395.6016825687,
+        153582.52306333333,
+        107574.83530735665
+      ],
+      "province_id": "framework:province:gharbiyya-governorate:3043114e29a4",
+      "province_index": 1819,
+      "name": "Kafr Al-Zayyat",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B98548852573050"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B99399074441335",
+      "index": 18826,
+      "bounds": [
+        156041.42167166664,
+        109050.1177726941,
+        156317.0600911111,
+        109393.36422594755
+      ],
+      "province_id": "framework:province:south-sinai-governorate:ae2923b87eb7",
+      "province_index": 4347,
+      "name": "Dahab",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B99399074441335"
+      ]
+    },
+    {
+      "id": "gb:EGY:ADM2:37247803B99889104547734",
+      "index": 18827,
+      "bounds": [
+        149066.49524166665,
+        106758.96181640713,
+        149687.6830138889,
+        108486.56601499772
+      ],
+      "province_id": "framework:province:matrouh-governorate:68098466f9e9",
+      "province_index": 2941,
+      "name": "Salloum",
+      "reference_owner": "Egypt",
+      "source_id": "gb:EGY:ADM2",
+      "source_atoms": [
+        "gb:EGY:ADM2:37247803B99889104547734"
+      ]
+    }
+  ],
+  "complete_source_atoms": [
+    "gb:EGY:ADM2:37247803B10377703685184",
+    "gb:EGY:ADM2:37247803B10876030245945",
+    "gb:EGY:ADM2:37247803B10880133914548",
+    "gb:EGY:ADM2:37247803B10909701940084",
+    "gb:EGY:ADM2:37247803B11415934472050",
+    "gb:EGY:ADM2:37247803B11540085647408",
+    "gb:EGY:ADM2:37247803B11741715008069",
+    "gb:EGY:ADM2:37247803B12762735296795",
+    "gb:EGY:ADM2:37247803B13171530844779",
+    "gb:EGY:ADM2:37247803B13722182372819",
+    "gb:EGY:ADM2:37247803B14597497558400",
+    "gb:EGY:ADM2:37247803B15072818430421",
+    "gb:EGY:ADM2:37247803B15392203431980",
+    "gb:EGY:ADM2:37247803B15817250169024",
+    "gb:EGY:ADM2:37247803B16391777329697",
+    "gb:EGY:ADM2:37247803B17472786437270",
+    "gb:EGY:ADM2:37247803B17658865613215",
+    "gb:EGY:ADM2:37247803B17837872993253",
+    "gb:EGY:ADM2:37247803B18007255516355",
+    "gb:EGY:ADM2:37247803B18011904824806",
+    "gb:EGY:ADM2:37247803B18141858630320",
+    "gb:EGY:ADM2:37247803B18410334160069",
+    "gb:EGY:ADM2:37247803B18472339316050",
+    "gb:EGY:ADM2:37247803B18830247212538",
+    "gb:EGY:ADM2:37247803B1884066406604",
+    "gb:EGY:ADM2:37247803B18851026884182",
+    "gb:EGY:ADM2:37247803B19070372883194",
+    "gb:EGY:ADM2:37247803B1921003738807",
+    "gb:EGY:ADM2:37247803B19297711577028",
+    "gb:EGY:ADM2:37247803B20461221508658",
+    "gb:EGY:ADM2:37247803B20583905741630",
+    "gb:EGY:ADM2:37247803B21152276423955",
+    "gb:EGY:ADM2:37247803B21469576264473",
+    "gb:EGY:ADM2:37247803B22012205190656",
+    "gb:EGY:ADM2:37247803B22072181231059",
+    "gb:EGY:ADM2:37247803B22185494316404",
+    "gb:EGY:ADM2:37247803B22410072002885",
+    "gb:EGY:ADM2:37247803B22529416419300",
+    "gb:EGY:ADM2:37247803B2291437615199",
+    "gb:EGY:ADM2:37247803B2309887607754",
+    "gb:EGY:ADM2:37247803B24325700494067",
+    "gb:EGY:ADM2:37247803B25153322962327",
+    "gb:EGY:ADM2:37247803B26246524516343",
+    "gb:EGY:ADM2:37247803B27009685632556",
+    "gb:EGY:ADM2:37247803B27460825727162",
+    "gb:EGY:ADM2:37247803B27556754464057",
+    "gb:EGY:ADM2:37247803B27962965783351",
+    "gb:EGY:ADM2:37247803B28167369066586",
+    "gb:EGY:ADM2:37247803B28192113145833",
+    "gb:EGY:ADM2:37247803B2824633862511",
+    "gb:EGY:ADM2:37247803B28688372464969",
+    "gb:EGY:ADM2:37247803B28746183260819",
+    "gb:EGY:ADM2:37247803B29149830762978",
+    "gb:EGY:ADM2:37247803B29547542469056",
+    "gb:EGY:ADM2:37247803B2980274366801",
+    "gb:EGY:ADM2:37247803B30384422366927",
+    "gb:EGY:ADM2:37247803B3069705007202",
+    "gb:EGY:ADM2:37247803B31091771651272",
+    "gb:EGY:ADM2:37247803B31369022265166",
+    "gb:EGY:ADM2:37247803B31879405836913",
+    "gb:EGY:ADM2:37247803B32135052764998",
+    "gb:EGY:ADM2:37247803B32615858974663",
+    "gb:EGY:ADM2:37247803B3351007317987",
+    "gb:EGY:ADM2:37247803B33553459827704",
+    "gb:EGY:ADM2:37247803B33567976679520",
+    "gb:EGY:ADM2:37247803B33717646792475",
+    "gb:EGY:ADM2:37247803B34514127980105",
+    "gb:EGY:ADM2:37247803B34541492244214",
+    "gb:EGY:ADM2:37247803B34734253794751",
+    "gb:EGY:ADM2:37247803B34846492708063",
+    "gb:EGY:ADM2:37247803B35159038955302",
+    "gb:EGY:ADM2:37247803B35886288843325",
+    "gb:EGY:ADM2:37247803B36275264085145",
+    "gb:EGY:ADM2:37247803B36599937729420",
+    "gb:EGY:ADM2:37247803B37481118609375",
+    "gb:EGY:ADM2:37247803B37861588601733",
+    "gb:EGY:ADM2:37247803B37865224267935",
+    "gb:EGY:ADM2:37247803B38142631960117",
+    "gb:EGY:ADM2:37247803B38427943153509",
+    "gb:EGY:ADM2:37247803B38708414170128",
+    "gb:EGY:ADM2:37247803B3923529194747",
+    "gb:EGY:ADM2:37247803B39887765706268",
+    "gb:EGY:ADM2:37247803B40134172984025",
+    "gb:EGY:ADM2:37247803B40738105773266",
+    "gb:EGY:ADM2:37247803B4110362295427",
+    "gb:EGY:ADM2:37247803B41250479572628",
+    "gb:EGY:ADM2:37247803B41278628102289",
+    "gb:EGY:ADM2:37247803B42052057109088",
+    "gb:EGY:ADM2:37247803B4319107870519",
+    "gb:EGY:ADM2:37247803B43857760448777",
+    "gb:EGY:ADM2:37247803B44606701734202",
+    "gb:EGY:ADM2:37247803B45128523411897",
+    "gb:EGY:ADM2:37247803B45225516611894",
+    "gb:EGY:ADM2:37247803B45623855174262",
+    "gb:EGY:ADM2:37247803B46264859714526",
+    "gb:EGY:ADM2:37247803B46347292779018",
+    "gb:EGY:ADM2:37247803B46419468197970",
+    "gb:EGY:ADM2:37247803B46466496002040",
+    "gb:EGY:ADM2:37247803B46685873859675",
+    "gb:EGY:ADM2:37247803B46763181924450",
+    "gb:EGY:ADM2:37247803B46837021628067",
+    "gb:EGY:ADM2:37247803B47370411243252",
+    "gb:EGY:ADM2:37247803B47496652532681",
+    "gb:EGY:ADM2:37247803B47768996612794",
+    "gb:EGY:ADM2:37247803B47778858868079",
+    "gb:EGY:ADM2:37247803B47904528840221",
+    "gb:EGY:ADM2:37247803B49167572517761",
+    "gb:EGY:ADM2:37247803B49811870233448",
+    "gb:EGY:ADM2:37247803B4989882956634",
+    "gb:EGY:ADM2:37247803B5020556280365",
+    "gb:EGY:ADM2:37247803B50219622339720",
+    "gb:EGY:ADM2:37247803B50327552497363",
+    "gb:EGY:ADM2:37247803B5042289926655",
+    "gb:EGY:ADM2:37247803B50825531526089",
+    "gb:EGY:ADM2:37247803B51096510617520",
+    "gb:EGY:ADM2:37247803B51665438591487",
+    "gb:EGY:ADM2:37247803B51826009871737",
+    "gb:EGY:ADM2:37247803B52731964573716",
+    "gb:EGY:ADM2:37247803B5321471482777",
+    "gb:EGY:ADM2:37247803B53334820254906",
+    "gb:EGY:ADM2:37247803B53497462847633",
+    "gb:EGY:ADM2:37247803B53748377361433",
+    "gb:EGY:ADM2:37247803B54164801772616",
+    "gb:EGY:ADM2:37247803B5447548481781",
+    "gb:EGY:ADM2:37247803B54771061850383",
+    "gb:EGY:ADM2:37247803B54771343993886",
+    "gb:EGY:ADM2:37247803B55829024150134",
+    "gb:EGY:ADM2:37247803B57049820860179",
+    "gb:EGY:ADM2:37247803B57305898539534",
+    "gb:EGY:ADM2:37247803B57319556498410",
+    "gb:EGY:ADM2:37247803B58056872224952",
+    "gb:EGY:ADM2:37247803B58448533869188",
+    "gb:EGY:ADM2:37247803B58798403168141",
+    "gb:EGY:ADM2:37247803B59036266241246",
+    "gb:EGY:ADM2:37247803B59433804182787",
+    "gb:EGY:ADM2:37247803B59541002076203",
+    "gb:EGY:ADM2:37247803B59643082406240",
+    "gb:EGY:ADM2:37247803B60267904610722",
+    "gb:EGY:ADM2:37247803B60489712487225",
+    "gb:EGY:ADM2:37247803B6072823038125",
+    "gb:EGY:ADM2:37247803B61040397145628",
+    "gb:EGY:ADM2:37247803B61234943331501",
+    "gb:EGY:ADM2:37247803B61298803193986",
+    "gb:EGY:ADM2:37247803B61358518780197",
+    "gb:EGY:ADM2:37247803B61393331220836",
+    "gb:EGY:ADM2:37247803B61862544009771",
+    "gb:EGY:ADM2:37247803B61972877463363",
+    "gb:EGY:ADM2:37247803B62002284809719",
+    "gb:EGY:ADM2:37247803B62139513677683",
+    "gb:EGY:ADM2:37247803B62499095418831",
+    "gb:EGY:ADM2:37247803B62515716527778",
+    "gb:EGY:ADM2:37247803B6267278220516",
+    "gb:EGY:ADM2:37247803B63195966732086",
+    "gb:EGY:ADM2:37247803B63981628133809",
+    "gb:EGY:ADM2:37247803B63984136807861",
+    "gb:EGY:ADM2:37247803B64528254011318",
+    "gb:EGY:ADM2:37247803B66210800118153",
+    "gb:EGY:ADM2:37247803B66278795403604",
+    "gb:EGY:ADM2:37247803B66957331642315",
+    "gb:EGY:ADM2:37247803B67165443918142",
+    "gb:EGY:ADM2:37247803B67299056810507",
+    "gb:EGY:ADM2:37247803B6993574009783",
+    "gb:EGY:ADM2:37247803B6997097478011",
+    "gb:EGY:ADM2:37247803B70757387881176",
+    "gb:EGY:ADM2:37247803B70915432571750",
+    "gb:EGY:ADM2:37247803B71323814972136",
+    "gb:EGY:ADM2:37247803B7137912263252",
+    "gb:EGY:ADM2:37247803B71676379887746",
+    "gb:EGY:ADM2:37247803B71974120040815",
+    "gb:EGY:ADM2:37247803B7250727301439",
+    "gb:EGY:ADM2:37247803B72756565577460",
+    "gb:EGY:ADM2:37247803B72914028370389",
+    "gb:EGY:ADM2:37247803B73326223517768",
+    "gb:EGY:ADM2:37247803B7335021436895",
+    "gb:EGY:ADM2:37247803B73956026156280",
+    "gb:EGY:ADM2:37247803B74067375685147",
+    "gb:EGY:ADM2:37247803B75399963690534",
+    "gb:EGY:ADM2:37247803B75450946768070",
+    "gb:EGY:ADM2:37247803B76296882951531",
+    "gb:EGY:ADM2:37247803B76316502393625",
+    "gb:EGY:ADM2:37247803B76793683664752",
+    "gb:EGY:ADM2:37247803B76869719120733",
+    "gb:EGY:ADM2:37247803B78325352338503",
+    "gb:EGY:ADM2:37247803B80197492831052",
+    "gb:EGY:ADM2:37247803B80470796626605",
+    "gb:EGY:ADM2:37247803B80860993707274",
+    "gb:EGY:ADM2:37247803B81519659380298",
+    "gb:EGY:ADM2:37247803B81871138986317",
+    "gb:EGY:ADM2:37247803B81923803494172",
+    "gb:EGY:ADM2:37247803B81947016112808",
+    "gb:EGY:ADM2:37247803B8228928204650",
+    "gb:EGY:ADM2:37247803B82534825994477",
+    "gb:EGY:ADM2:37247803B8272861874741",
+    "gb:EGY:ADM2:37247803B82943552263009",
+    "gb:EGY:ADM2:37247803B83073428854351",
+    "gb:EGY:ADM2:37247803B84548629991625",
+    "gb:EGY:ADM2:37247803B8473784659060",
+    "gb:EGY:ADM2:37247803B87284090425389",
+    "gb:EGY:ADM2:37247803B87719226438942",
+    "gb:EGY:ADM2:37247803B88500614059504",
+    "gb:EGY:ADM2:37247803B89602955599025",
+    "gb:EGY:ADM2:37247803B90463856595624",
+    "gb:EGY:ADM2:37247803B90563077233192",
+    "gb:EGY:ADM2:37247803B90937698610862",
+    "gb:EGY:ADM2:37247803B91562573257971",
+    "gb:EGY:ADM2:37247803B91574784842387",
+    "gb:EGY:ADM2:37247803B92056872151518",
+    "gb:EGY:ADM2:37247803B9213477235230",
+    "gb:EGY:ADM2:37247803B92272311463105",
+    "gb:EGY:ADM2:37247803B92926604097979",
+    "gb:EGY:ADM2:37247803B93568001164514",
+    "gb:EGY:ADM2:37247803B95427647060127",
+    "gb:EGY:ADM2:37247803B95648929265509",
+    "gb:EGY:ADM2:37247803B96122561755956",
+    "gb:EGY:ADM2:37247803B96193438521946",
+    "gb:EGY:ADM2:37247803B96203293605859",
+    "gb:EGY:ADM2:37247803B96389835129643",
+    "gb:EGY:ADM2:37247803B96571076642873",
+    "gb:EGY:ADM2:37247803B96963536963151",
+    "gb:EGY:ADM2:37247803B97013363059523",
+    "gb:EGY:ADM2:37247803B97028957261557",
+    "gb:EGY:ADM2:37247803B9734537557155",
+    "gb:EGY:ADM2:37247803B97823956456767",
+    "gb:EGY:ADM2:37247803B98457599359411",
+    "gb:EGY:ADM2:37247803B98548852573050",
+    "gb:EGY:ADM2:37247803B98610862498628",
+    "gb:EGY:ADM2:37247803B98787115048764",
+    "gb:EGY:ADM2:37247803B99104887182997",
+    "gb:EGY:ADM2:37247803B99181648743437",
+    "gb:EGY:ADM2:37247803B99399074441335",
+    "gb:EGY:ADM2:37247803B99889104547734"
+  ],
+  "complete_source_atom_count": 231,
+  "original_native_blocks": [
+    26,
+    27
+  ],
+  "source_rights_archive_sha256": "8d3a916fc8ffeca22c8cbe9799ef74c0a95330ba13c1cdbc8e7464ef5f8a8c3b",
+  "new_accepted_credit": 0
+}
