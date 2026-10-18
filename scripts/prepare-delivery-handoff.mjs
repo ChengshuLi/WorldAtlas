@@ -578,6 +578,13 @@ export function packageProjection(config, reader, acceptedRegistry = null) {
         || evidence.version === 3 && evidence.kind === 'source-target-native-evidence-v3')
         && Array.isArray(evidence.targets) && evidence.targets.length > 0
         && Array.isArray(evidence.families) && evidence.families.length > 0, 'Missing source-target evidence roles');
+      // Completed qualification is consumed through these five original bodies:
+      // rule, binding, constructor, evidence and patch. The immutable evidence
+      // retains every source/license/provenance reference. Reopening its corpus
+      // cannot establish source validity and is not a finalizer/package input.
+      // Scientific qualification, source review and selected admission remain
+      // authoritative; an unqualified entry still needs the full traversal.
+      if (entry.completed_constructor !== undefined) continue;
       // Closed whole-body read roles of qualifySourceTargetNativeAuthority. Its
       // physical reproducer is authenticated, never executed here; nested GIS
       // operands/native contracts are not a recursive package declaration.
@@ -1006,9 +1013,10 @@ export function finalizeDelivery(config, reader, {acceptedCheckpoint} = {}) {
     outputs['package-roles.json'] = jsonBytes(projection);
     outputs[path.posix.basename(config.sidecar.path)] = generatedSidecar;
   }
-  // Keep the complete preparation/custody projection above as evidence. The
-  // current package consumer reads only the sidecar, envelope, four assets and
-  // the optional current metadata application. Historical custody stays cold.
+  // Keep the actual preparation/consumer roles above. Completed authorities
+  // retain their historical corpus references in the original evidence body.
+  // The current package reads only the sidecar, envelope, four assets and the
+  // optional current metadata application; historical custody stays cold.
   const paths = [...new Set([config.sidecar, sidecar.runtime_envelope, ...Object.values(assets),
     ...(references.projectionPin ? [references.projectionPin] : [])].map(p => p.path))];
   const baselinePackage = reader.json(config.package_inputs);
