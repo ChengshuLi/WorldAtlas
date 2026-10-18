@@ -5,6 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {materializePackageInputs, runPackageBuild, verifyPackageDependencies, assertPackageStage, inspectPackageRuntime, inspectPackageInputs} from '../scripts/package-build.mjs';
 import {execFileSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
 import {selectedDataCheckoutPatterns} from '../scripts/package-inputs.mjs';
 import {committedPackageInputs} from '../scripts/package-output-artifact.mjs';
 
@@ -27,9 +28,32 @@ async function fixture(t, {program, promoted = false} = {}) {
   return {root, definition};
 }
 
+test('current-execution historical fixtures retain exact accepted Git bodies',async()=>{
+ const directory=new URL('./fixtures/current-execution-authored/',import.meta.url);
+ const provenance=JSON.parse(await fs.readFile(new URL('provenance.json',directory)));
+ assert.equal(provenance.version,1);
+ assert.equal(provenance.kind,'literal-current-execution-authored-fixtures-v1');
+ assert.equal(provenance.source_commit,'07c74ff101d4ab5e679255ed85c402356aa54a42');
+ assert.deepEqual(provenance.files.map(pin=>[pin.file,pin.source_path,pin.git_blob_oid]),[
+  ['index.json','coordination/engineering/eastern-two-gap-repair-native-20261007/current-consumer-code/index.json','1f371fc84190beee956e8475b873cfa77f542379'],
+  ['part-000.bin.gz','coordination/engineering/eastern-two-gap-repair-native-20261007/current-consumer-code/part-000.bin.gz','39c0efee9c5e5470d305070496c59abd68a7ce39'],
+  ['stage-manifest.json','data/native-context-migration/manifest.json','a42ac4c5b6962998fec81468795a1eb4d19affa3'],
+ ]);
+ for(const pin of provenance.files){
+  const raw=await fs.readFile(new URL(pin.file,directory));
+  assert.equal(raw.length,pin.bytes);
+  assert.equal(createHash('sha256').update(raw).digest('hex'),pin.sha256);
+  assert.equal(createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex'),pin.git_blob_oid);
+ }
+});
+
 test('current-execution real plain-child package positives and hostile boundaries',()=>{
  const raw=execFileSync(process.execPath,['coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution-controls.mjs'],{maxBuffer:32*1024*1024,env:{...process.env,NODE_OPTIONS:'',NODE_PATH:''}});
  const result=JSON.parse(raw);assert.equal(result.status,'PASS');assert.equal(result.authored_pins_unchanged,true);assert.deepEqual(result.adverse_cases,['midrun body','unbranded receipt','wrong HEAD','wrong root','runtime mutation','omitted import','overbound body','mode mutation','new import','uncommitted source','receipt mutation']);
+ assert.equal(result.historical.authored_files,31);
+ assert.equal(result.historical.all_50_authored_whole_bodies_restored,true);
+ assert.equal(result.historical.immutable_historical_source_and_numerical_negatives,7);
+ assert.equal(result.historical.exact_additive_restoration_extension,true);
  assert.equal(result.actualInner.actual_spawn_without_execute_injection,true);
  assert.deepEqual(result.actualInner.actual_environment_boundary_cases,['positive','missing','hash','root','path','stale']);
 });
