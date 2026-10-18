@@ -381,7 +381,14 @@
     "liberia_causal_result_commit": "252f2aa1e6309b6990985dec73611d6df0e11c70",
     "subsequent_recheck_scanner_sha256": "66b453bbb2e001b9ff56bd754d55087f5919845dceeefd886016494cefa1d3e0",
     "subsequent_recheck_scanner_commit": "0005013ac140835fd35af6a2665973250118f118",
-    "relationship": "These are different scanner module hashes and are not asserted byte-equivalent. The original Liberia result remains immutable historical evidence; the reproducible packet query below is explicitly a later recheck using the repository-pinned 0005013 scanner. Both runs use the pinned latitude bytes. Any discrepancy is surfaced by the per-hit comparison rather than hidden."
+    "relationship": "The immutable Liberia result JSON records scanner SHA-256 81ebf5207b2f0127ed8bdacf2f50f02c01d4be80b7586b470d049def3156faee, while its contemporaneous causal README reports the query implementation SHA-256 66b453bbb2e001b9ff56bd754d55087f5919845dceeefd886016494cefa1d3e0. The exact repository source pinned for this recheck also hashes to 66b453bbb2e001b9ff56bd754d55087f5919845dceeefd886016494cefa1d3e0. These records conflict about the historical scanner identity. Do not infer which hash actually ran or claim byte identity. Preserve the old result unchanged; treat its scanner identity as unresolved, and treat this packet run only as a later 0005013-pinned numerical recheck. Compare numerical hits explicitly. Both records pin the same decoded normative latitude bytes.",
+    "contemporaneous_causal_readme": {
+      "path": "africa-workers-20261018/worker1-lbr/causal-one-cell-001/README.md",
+      "sha256": "488df09a1164dd5470e3844efcc3585fa5ca62e266367f8c8af6a0749a0f3583",
+      "reported_query_implementation_sha256": "66b453bbb2e001b9ff56bd754d55087f5919845dceeefd886016494cefa1d3e0"
+    },
+    "historical_result_sha256": "abc92e91d643815231b4d2704b7a37e3485e66f74252512ed814a634e1fe9d90",
+    "reconciliation_status": "unresolved_internal_metadata_inconsistency"
   },
   "reproduction_outputs": {
     "reproduced-native-centre-queries.json": {
