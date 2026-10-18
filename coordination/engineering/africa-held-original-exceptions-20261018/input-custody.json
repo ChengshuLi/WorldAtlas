@@ -443,5 +443,32 @@
     "uncompressed_sha256": "4b0a1cc933de6a77fa131ef2a7ed5738c806cac25025782d6f674cb0d7799715",
     "compressed_bytes": 71114,
     "compressed_sha256": "363700efa850e5d96b466dc9b464b0c62af060e3c051cf8ab18ef8bc08cc8c6e"
+  },
+  "supplementary_tanzania_rejoin": {
+    "path": "tanzania-current-rejoin.json",
+    "bytes": 326679,
+    "sha256": "6152638937c9dcad8a92f9d8ef18a5f883b0416dd4209dba6898858dfa6455d8",
+    "git_blob_oid": "ef416c3f8d5c78977fa049441ba492c7e0e5fa32",
+    "accepted_main": "f833c2d7de6f239955cf592560d559d5377c4c6f",
+    "verified_rejoin": {
+      "held_records": 347,
+      "complete_original_source_contacts": 850,
+      "matched_partition_keys": 347,
+      "matched_source_feature_index_sets": 347,
+      "different_owner_intersections": 0
+    },
+    "selected_patch_pin": {
+      "bytes": 30387810,
+      "commit": "160175824051005eb9b2b9990d45b1f94b036126",
+      "git_blob_oid": "b9f5fa1eef498ce3adb38a380405472fdcc72a9a",
+      "mode": "100644",
+      "path": "coordination/engineering/gambia-zimbabwe-selected-delivery-20261018/composition-001/patch.json",
+      "sha256": "4209951c6097f0c992500ed3c3029347cdfee0d338893e785a83676b0afe21b5"
+    },
+    "accepted_main_tree_confirmation": {
+      "commit": "f833c2d7de6f239955cf592560d559d5377c4c6f",
+      "path": "coordination/engineering/gambia-zimbabwe-selected-delivery-20261018/composition-001/patch.json",
+      "git_blob_oid": "b9f5fa1eef498ce3adb38a380405472fdcc72a9a"
+    }
   }
 }

@@ -21,7 +21,8 @@
         "land": 189,
         "inland-water": 26
       },
-      "owner_count": 38
+      "owner_count": 38,
+      "already_accepted_at_baseline": 4941
     },
     {
       "country": "Mozambique",
@@ -41,7 +42,8 @@
         "land": 352,
         "inland-water": 0
       },
-      "owner_count": 81
+      "owner_count": 81,
+      "already_accepted_at_baseline": 10811
     },
     {
       "country": "Tanzania",
@@ -61,7 +63,8 @@
         "land": 341,
         "inland-water": 6
       },
-      "owner_count": 84
+      "owner_count": 84,
+      "already_accepted_at_baseline": 32462
     }
   ],
   "totals": {
@@ -73,7 +76,8 @@
       "inland-water": 32
     },
     "new_native_repairs": 0,
-    "new_accepted_repair_credit": 0
+    "new_accepted_repair_credit": 0,
+    "already_accepted_at_baseline": 48214
   },
   "exact_count_conservation": true,
   "duplicate_original_keys": 0,
@@ -88,5 +92,11 @@
     "No sovereignty, modern boundary, legal status, source rights approval, or exact source applicability is decided.",
     "Current-owner-zero, selected-output conservation/acceptance, and package completion remain outside this evidence-only packet.",
     "All 914 dispositions remain unresolved; existing classes, owners, source associations, and selected repair data remain unchanged."
-  ]
+  ],
+  "baseline_acceptance": {
+    "accepted_main": "f833c2d7de6f239955cf592560d559d5377c4c6f",
+    "already_accepted_cells": 48214,
+    "scope": "the 48,214 supported cells in these three original packages were already accepted at this baseline; this packet adds no repair cells or credit"
+  },
+  "conditional_contract_effect": "If all 914 proposed documented exceptions are accepted and integrated normally, the three original package disposition contracts would be complete with zero new repaired cells; until that integration, this packet grants zero new accepted repair credit."
 }
