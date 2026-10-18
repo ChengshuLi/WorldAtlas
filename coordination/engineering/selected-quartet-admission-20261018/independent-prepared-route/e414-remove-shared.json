@@ -1,0 +1,41 @@
+{
+  "scenario": "remove-shared",
+  "executing_code": {
+    "scripts/package-inputs.mjs": "039a29e738da456a1d482e57eb940103b5c207dc2a7629f5d2b4cbc3d598f696",
+    "scripts/integration-profile.mjs": "b09c7e89fd7d29b250cd2b5eda3e5c516e2ca833d2d7cac3ca38e37bce209c51",
+    "scripts/merge-integration.mjs": "4741fe41f45611333e08840fafd23af9c6dfb641c650b9733eb09140152783a0"
+  },
+  "base": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+  "head": "4a99d16449e8901eb8ae1992b5cab33d4b9da128",
+  "synthetic_candidate": "cccccccccccccccccccccccccccccccccccccccc",
+  "files": 90,
+  "selected": null,
+  "metadataDiagnostics": {
+    "read_count": 7,
+    "read_bytes": 340004,
+    "retained_bytes": 340004,
+    "retained_count": 7,
+    "transient_read_count": 0,
+    "transient_read_bytes": 0,
+    "decoded_bytes": 0,
+    "failure": "Invalid or unavailable selected metadata"
+  },
+  "prepared": {
+    "profile": "full",
+    "test_selection": null,
+    "geography_software": true,
+    "geography_required": true,
+    "shards": null
+  },
+  "read_calls": 24,
+  "fixture_mutations": [
+    {
+      "route": "/repos/ChengshuLi/WorldAtlas/git/refs",
+      "method": "POST"
+    },
+    {
+      "route": "/repos/ChengshuLi/WorldAtlas/merges",
+      "method": "POST"
+    }
+  ]
+}

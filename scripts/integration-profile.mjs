@@ -99,7 +99,7 @@ import {createHash} from 'node:crypto';
 import {isDeepStrictEqual as same} from 'node:util';
 import {gunzipSync} from 'node:zlib';
 import {isUtf8} from 'node:buffer';
-import {validatePackageInputs, loadPackageInputs, packagePathRequired, safePackagePath, containsPackagePath, PACKAGE_INPUT_FILE} from './package-inputs.mjs';
+import {validatePackageInputs, admitSelectedPackageDeclarations, loadPackageInputs, packagePathRequired, safePackagePath, containsPackagePath, PACKAGE_INPUT_FILE} from './package-inputs.mjs';
 const SELECTION = 'data/ownership-selection.json';
 const CHECKPOINT_LOCATOR = 'data/selected-checkpoint.json';
 const ADMINISTRATIVE_REGISTRY = 'coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json';
@@ -254,16 +254,13 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       return JSON.parse(bytes);
     };
     const json = async (name, tree, retain = true) => parseJSON(await read(name, tree, retain));
-    let packageAdditions = [];
-    if (files.some(file => file.filename === PACKAGE_INPUT_FILE)) {
-      const {inputs: before, ...oldPolicy} = validatePackageInputs(await json(PACKAGE_INPUT_FILE, baseline));
-      const {inputs: after, ...policy} = validatePackageInputs(await json(PACKAGE_INPUT_FILE));
-      needSelected(same(oldPolicy, policy) && after.length >= before.length && same(before, after.slice(0, before.length)),
-        'package policy is not append-only');
-      packageAdditions = after.slice(before.length);
-    }
     const registryChanged = files.some(file => file.filename === ADMINISTRATIVE_REGISTRY);
     const oldSelection = await json(SELECTION, baseline), selection = await json(SELECTION);
+    let packageAdditions = [], packageDefinitions;
+    if (files.some(file => file.filename === PACKAGE_INPUT_FILE)) {
+      packageDefinitions = {before:validatePackageInputs(await json(PACKAGE_INPUT_FILE, baseline)),
+        after:validatePackageInputs(await json(PACKAGE_INPUT_FILE))};
+    }
     const {additive_release: oldHook, ...oldBase} = oldSelection, {additive_release: hook, ...newBase} = selection;
     needSelected(selection.version === 1 && selection.method === 'native-linear-evenodd-first-owner-v1' &&
       selection.artifact_consumption && same(oldBase, newBase) && !same(oldHook, hook), 'selection changes method/base authority');
@@ -554,6 +551,20 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       keys(sidecar, ['version','kind','base_selection','runtime_envelope','authority_registry','logical_asset_map']) &&
       same(sidecar.base_selection, scientificNativeSelection(selection)) && keys(sidecar.logical_asset_map, ['base_manifest','ledger','owner_roster','patch']),
       'unsupported selected sidecar');
+    if (packageDefinitions) {
+      const {before,after}=packageDefinitions;
+      const removes=before.inputs.some(name=>!after.inputs.includes(name));
+      const transition=admitSelectedPackageDeclarations(before,after,{selection:oldSelection,
+        priorSidecarRaw:removes ? await read(oldHook.path,baseline) : undefined,
+        priorEntry:name=>baseline.entries.get(name),
+        currentPaths:[hook.path,sidecar.runtime_envelope.path,sidecar.authority_registry.path,
+          ...Object.values(sidecar.logical_asset_map).map(pin=>pin.path)]});
+      needSelected(transition.removed.every(name=>{
+        const a=baseline.entries.get(name),b=authored.entries.get(name);
+        return ordinary(b)&&a.mode===b.mode&&a.sha===b.sha&&a.size===b.size;
+      }), 'retired cumulative custody changed');
+      packageAdditions=transition.additions;
+    }
     pin(sidecar.runtime_envelope);
     for (const value of Object.values(sidecar.logical_asset_map)) pin(value);
     const ledger = await pinnedJSON(sidecar.logical_asset_map.ledger);
