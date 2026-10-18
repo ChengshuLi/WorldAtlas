@@ -336,3 +336,28 @@ remain fully validated. The removed native pass covers 1,210,251 intervals and
 527,088 base vertices (strict geometry plus canonical base hashing); parsing and
 required whole-value equality/digests remain. These are static invocation and
 cardinality counts, not measured time or memory savings.
+
+
+### Reuse only the admitted private product digest
+
+Derived checkpoint admission retains the complete canonical ledger/patch binding
+comparison. The native store already computes those canonical digests while
+admitting the whole authenticated body. A private invocation-local association
+binds each frozen selected product view to that same live store, so recovering its
+digest does not traverse every coordinate and interval again. This is not a raw
+wire SHA substitution: whitespace, duplicate keys, numeric spelling and gzip
+transport retain their separate whole-byte authentication and parsed semantics.
+
+No caller-supplied digest or public value hash is trusted. New admissions still
+parse and authenticate complete bodies, and changed/missing bindings refuse.
+The association cannot outlive checkpoint release; failed candidates release only
+their own stores. Public hashes still traverse their actual input and borrowed
+cursors still refuse after their store closes. Catalogue seeds keep all existing
+semantic qualification. Producer output bindings remain unchanged.
+
+A bounded observation on the retained accepted #2445 baseline attributed 8.431
+seconds to these two repeated canonical traversals (83,779,731 bytes) inside a
+29.975-second admission on the accepted preimage. Hash instrumentation adds
+observational overhead; this is not a paired speedup or an end-to-end estimate.
+The parser's required canonical pass, native Float64 coordinates, edges/crossings,
+retained metadata and exact output remain distinct size-dependent terms.
