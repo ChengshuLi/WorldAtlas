@@ -268,7 +268,7 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
     need(same(manifest.configuration,packageBuildConfiguration()),'Original build configuration differs');
     const stage=path.join(scratch,'assembly');fs.mkdirSync(stage);
     const execution=issuePackageAssemblyExecution({original,source:root,stage,executingRoot:root,
-      acceptedInputs:current.accepted_selected_inputs});
+      acceptedInputs:current.accepted_selected_inputs,priorSidecarRaw:found.priorSidecarRaw});
     const {atlas,selectedGrid,geographicRelease,features,referenceRevision}=readOriginalPackageGeography(original);
     // The authenticated execution closure includes this literal deferred import.
     // Current locked dependencies are admitted above; no dependency sees API credentials.
