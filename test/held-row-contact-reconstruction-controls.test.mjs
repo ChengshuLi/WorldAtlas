@@ -12,8 +12,8 @@ const fixtureManifestPath='test/fixtures/held-row-contact/input-locators.json';
 const manifestBytes=fs.readFileSync(path.join(root,fixtureManifestPath));
 const manifest=JSON.parse(manifestBytes);
 const packetDir=path.join(root,manifest.packet_directory);
-const packetPath=path.join(packetDir,'held-row-exception-packet.json');
-const resultsPath=path.join(packetDir,'centre-contact-results.json');
+const packetPath=path.join(root,'test/fixtures/held-row-contact/held-row-exception-packet.json');
+const resultsPath=path.join(root,'test/fixtures/held-row-contact/centre-contact-results.json');
 const adapterPath=path.join(packetDir,'held-row-diagnostic-repro.mjs');
 const expectedPinsBlob='189dde6fbb4a0098e0f1d3ca0e40bd192f6e493a';
 const expectedAdapterSha='57c0d3dcca56ef0614bb693543dcaa4e28f4a147bce1e8a9a5d9d1f18cb398cd';
@@ -78,6 +78,13 @@ test('authenticated held-row reconstruction matches its retained output and reje
  assert.equal(sha(packetBytes),expectedPacketSha);
  assert.equal(sha(resultsBytes),expectedResultsSha);
  assert.equal(sha(adapterBytes),expectedAdapterSha);
+ // Compact fixtures are exact current packet metadata. The stock cold checkout
+ // keeps executable coordination code without materializing its JSON neighbors.
+ for(const [name,bytes] of [['held-row-exception-packet.json',packetBytes],['centre-contact-results.json',resultsBytes]]){
+  const original=manifest.packet_directory+'/'+name;
+  const oid=createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex');
+  assert.equal(git(['ls-tree','-z','HEAD','--',original]).toString('utf8'),`100644 blob ${oid}\t${original}\0`,'current packet metadata differs: '+name);
+ }
  assert.equal(manifest.source_and_evidence_inputs.length,9);
  assert.equal(manifest.original_extraction_inputs.length,3);
  const pins=[...manifest.source_and_evidence_inputs,...manifest.original_extraction_inputs,manifest.helper,manifest.latitudes];
