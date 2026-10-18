@@ -1,0 +1,41 @@
+# CAF actual physical/native/partition review
+
+Distinct reviewer `/root/africa_worker6_caf_review`; requested configuration gpt-6.1-sol / high, without authoritative model readback. Final reviewed head: **`cb07c6f1a64654788f61cb9f0d483f72ac335f3b`**. Author prefix: `coordination/engineering/central-african-republic-original-repair-20261018-worker4/`.
+
+**Disposition: support the reported bounded scientific outcome: 1,669 genuinely qualified native cells in 34 components, with 461 original cells held by territorial exclusions.** The full original request did not qualify. This review clears the actual source/result interpretation for that partition; it establishes no selected-consumer acceptance, current-owner-zero finding, accepted repair credit, present legal/territorial approval or publication permission. Parent alone owns the next delivery decision. No scientific rerun, new operator/helper, geometry change, public action or Git mutation was performed by this review.
+
+The original denominator remains **2,130 land / zero water / 1,319 original intervals / 46 positive owners and atoms**, with 31 positive parents. Complete primary context remains 175 members, 72 parents and 76 ancestor records. The 34 surviving positives are the supported constructor input, not a replacement for original scope. All 46 original owner-accounting records and every held cell remain retained.
+
+## What the actual physical result establishes
+
+The first stock physical run at `1f655c379e938d7ecf0f044f2f01da0a49b21b4b` completed EXIT0 during 2026-10-18T03:45:43.218311Z–03:45:51.984471Z, 8.76554 seconds externally observed. I read its actual `physical-001/whole-target-support.json`, rather than treating zero issue rows as native qualification.
+
+Its 46 distinct target records match the original staged target set. All 93 source-query relations are actually marked checked: 46 complete-candidate reconstructions and 47 explicit-predicate disjoints. Source IDs 0 and 1 are queried for all 46; the extra query is ID 187110 for Yobe-Sangha and is explicitly disjoint. Actual support records have empty inland-water/contradictory-water geometries, empty outside-L1/missing/extra reconstruction geometries, and empty hierarchy-disagreement geometries. Polygon-empty and GeometryCollection-empty encodings are distinguished in that reading. Whole original and canonical target geometries remain separately retained; no geometric equivalence to the selected display boundaries is inferred.
+
+This is original-GSHHG source-relative support with heterogeneous observation dates. It does not establish current physical truth, administrative legality, whole-parent certification or the absence of territorial disagreement. The subsequently observed native refusal demonstrates why that limit matters.
+
+## Actual refusal and complete partition
+
+Stock source evidence at `f1bc5e42011698f2593375991d59f4d1d692b910` carries all 46 targets and all thirteen required whole foreign families. The complete foreign census remains 365 families / 73,303 features, conserved as 73,234 negatives after separately retained Fiji reconciliation plus 69 conservative contacts, unresolved zero. The thirteen required families total 1,092 whole features/native DBF header rows, distinct from those 69 contacts.
+
+The first direct stock native attempt on the unchanged full request actually exited 1 at 03:50:04.863299Z, with stderr **“Proposed native cells lack unique source-target coverage.”** It created no authority result. The existing stock diagnostic then actually completed EXIT0 during 03:50:37.551516Z–03:50:39.781654Z. Its frozen result at `9ac9f46f7d6ebece2dfdd43a4805893beb209f85` records 1,669 assigned cells and 461 `territorial_exclusion_cells`; no physical-unknown hold is recorded. These are conservative source disagreements, not legal sovereignty findings.
+
+I independently compared the retained diagnostic decisions, supported/held rows and stock preparation against the actual original two interval blocks. Cell and owner identities establish that the supported and held sets are disjoint and their union is exactly all 2,130 original cells. All 1,319 original intervals and 46 owners remain accounted for. Stock `supported-inputs` at `58cbec91fe8cfba270f9d9d53711d51a611d695f` emits exactly the diagnostic's 1,669 supported cells and retains exactly its 461 held cells and reasons. This was bounded retained-record comparison, with no scientific predicate, raster, geometry or diagnostic execution.
+
+There are 10 fully supported owners, 24 partially supported owners and 12 wholly held owners. The wholly held owners are 10504, 10509, 10514, 10532, 10559, 10580, 10595, 10639, 10642, 10645, 10648 and 10649. They remain in original evidence/accounting; stock preparation removes them only from positive constructor input. The supported source evidence changes only its targets list: surviving target records change only positive coverage rows where needed. All top-level whole source, native contract, source membership, physical and negative-family roles remain unchanged. No source geometry, base geometry, witness or foreign family was dropped to obtain this partition.
+
+## Actual supported constructor
+
+The separate genuine stock supported native constructor completed EXIT0 during 03:52:12.006009Z–03:52:14.011549Z, 2.00524 seconds. At final head cb07, `native-authority-supported-001/constructor-result.json` contains 34 component IDs and 34 assigned ledger rows totaling 1,669 native cells; rule SHA256 is `11b03959c48b0dc1f20764764082d9d02ca5658ee6a3bbb7054880aa321b31a7`. Its authority binding and original rule preimage identify the exact stock supported inputs at 58cbec9.
+
+I read the actual ledger rows: their cell sets are mutually disjoint and exactly equal the emitted supported patch, and each row preserves the target's owner, accepted base geometry and source receipt. Every ledger cell stays with its original owner. Thus the numerical claim follows the genuine constructor output; it is not a qualification inferred from physical zero issues, a diagnostic label or preparation alone. The 461 held cells acquire no authority from this success.
+
+## Retained source limits and next boundary
+
+The prior substantive thirteen-whole-source review at `36b1fb6d42151afd251efb005d7cb1b9634d9744` remains applicable. All thirteen families remain required: CMR1/2/3, COD1/2, COG1/2, SDN1/2, SSD1/2 and TCD1/2. Raga remains one whole original SSD2 atom with original owner array 5998/6205/6443 and all three accepted physical-fragment descendants; fragment ancestry is not a license to substitute fragments for the whole negative operand.
+
+Preserve CMR derivative/base attribution and applicable BY-SA conditions; ODbL database/documentation distinctions; SSD express metadata grant separately from the generic license-menu image, 2013 XML and Russian 1970 map provenance; SDN/SSD Abyei/Illemi/undetermined-boundary and nonnesting limits; COG2's actual public-domain declaration and 2007 accuracy limits; TCD tier-specific caveats; inaccessible COD/FOD referenced terms; native WGS84/CRS84 declarations without broader accuracy certification; and CAF2's historical portal-footer versus dataset-specific grant distinction. Native success supplies none of the missing underlying-rights or current-law facts. CAF #899 law-era identity/parentage remains open, including the 21 overlapping positive subjects. Original versus canonical geometry differences remain explicit.
+
+This completes the requested consequential physical/native/partition review. The supported 1,669-cell result may proceed to parent's ordinary next decision with its complete held partition and source limitations. Current-owner-zero, selected conservation/admission, composition, accepted credit and publication were not executed or established here. No tolerance adjustment, omission, native/GSHHG replay or duplicate mechanical/runtime/hash suite was requested or run.
+
+Supporting private record: `actual-physical-native-partition-observations.json`; prior source disposition: `actual-census-and-source-fitness-review.md`. Author operating records, actual refusal stderr, physical/source/diagnostic/preparation products and final constructor bodies were read at the stated immutable heads.

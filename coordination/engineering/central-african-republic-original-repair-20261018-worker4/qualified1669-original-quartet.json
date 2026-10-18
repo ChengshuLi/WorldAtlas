@@ -1,0 +1,3312 @@
+{
+  "version": 1,
+  "package_id": "gb-CAF-ADM3--repair-evaluation",
+  "issue": null,
+  "public_claim_status": "Parent-coordinated normal owned source handoff; no new issue, PR, queue or selected composition authorized.",
+  "reviewed_scientific_head": "cb07c6f1a64654788f61cb9f0d483f72ac335f3b",
+  "original_cells": 2130,
+  "qualified_cells": 1669,
+  "held_cells": 461,
+  "original_intervals": 1319,
+  "original_owners": 46,
+  "all_literal_source_atoms": 46,
+  "all_original_contact_atoms": 102,
+  "qualified_components": 34,
+  "qualified_positive_atoms": 34,
+  "wholly_held_owners": 12,
+  "new_accepted_cells": 0,
+  "class_cells": {
+    "original": {
+      "land": 2130,
+      "inland_water": 0
+    },
+    "qualified": {
+      "land": 1669,
+      "inland_water": 0
+    },
+    "held": {
+      "land": 461,
+      "inland_water": 0
+    }
+  },
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "cb07c6f1a64654788f61cb9f0d483f72ac335f3b",
+        "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/native-authority-supported-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "7936752d7fabacabdcc3fed55828cf9ca1e17a73",
+        "bytes": 787,
+        "sha256": "11b03959c48b0dc1f20764764082d9d02ca5658ee6a3bbb7054880aa321b31a7"
+      },
+      "source_authority": {
+        "commit": "cb07c6f1a64654788f61cb9f0d483f72ac335f3b",
+        "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/native-authority-supported-001/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "4dffd7dd462407ad685855837160f4beb1c91eb7",
+        "bytes": 790,
+        "sha256": "e1e4c9fd6f0ac3aa6188f453e9e6aa67868bdedc5f17612e3d1b77195d1853c0"
+      },
+      "ledger": {
+        "commit": "cb07c6f1a64654788f61cb9f0d483f72ac335f3b",
+        "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/native-authority-supported-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "b22d15b6190cd7a9a740645dd20e61917c2f201a",
+        "bytes": 168450,
+        "sha256": "c0cac036966b7d073b031770decfca05262e4dc7afb2462c2a3aed4e1b2cf7b5"
+      },
+      "native_patch": {
+        "commit": "58cbec91fe8cfba270f9d9d53711d51a611d695f",
+        "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/supported-inputs-001/native-patch.json",
+        "mode": "100644",
+        "git_blob_oid": "6806bfd4187650d86bd3c00fbb8f33797af3abc5",
+        "bytes": 41239,
+        "sha256": "dc116ce151aa2fff07ffa586403e6b4182c67bf97ef596581a7137bf6e16b09c"
+      }
+    }
+  ],
+  "source_evidence": {
+    "commit": "58cbec91fe8cfba270f9d9d53711d51a611d695f",
+    "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/supported-inputs-001/source-evidence.json",
+    "mode": "100644",
+    "git_blob_oid": "82b1c319d9aa5049c414351cbe48fec6b526a633",
+    "bytes": 228343,
+    "sha256": "9f9a603cbbc9675dda1fcd221d7ef0845a33df30dc5be192c884be979d797ce2"
+  },
+  "full_original_source_evidence": {
+    "commit": "f1bc5e42011698f2593375991d59f4d1d692b910",
+    "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/source-evidence-001/source-evidence.json",
+    "mode": "100644",
+    "git_blob_oid": "cc7b145215611327d1cb66489aa5740275fb0b7b",
+    "bytes": 277509,
+    "sha256": "80e4af2b6eaa22ed4785e5db42e771488a3ec6fd4dfbb19c50e0418cc47d6b8a"
+  },
+  "full_original_native_patch": {
+    "commit": "f1bc5e42011698f2593375991d59f4d1d692b910",
+    "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/native-request-001/native-requested-patch.json",
+    "mode": "100644",
+    "git_blob_oid": "e5113f4b646f114e2cac88df5cbdf4d92589c08d",
+    "bytes": 52811,
+    "sha256": "2ab51e50430b829d262b4e45df25d0c83e5971e8d5dc37f1bbe44077f21d93d5"
+  },
+  "original_scope": {
+    "commit": "d4c9e2ae51ec32884dd61eb92c84eeb76f76ffd4",
+    "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/original-claim-scope.json",
+    "mode": "100644",
+    "git_blob_oid": "89cf5e18865f0337d69a89864fa28d4838419a8c",
+    "bytes": 790964,
+    "sha256": "fe8138d8e9a289f973b20ee2d4d95ec58686ac40b6ad49539597b591d05883e8"
+  },
+  "original_scope_accounting": {
+    "commit": "58cbec91fe8cfba270f9d9d53711d51a611d695f",
+    "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/supported-inputs-001/original-scope-partition.json",
+    "mode": "100644",
+    "git_blob_oid": "73fafeb6acb6ac150b5ec85d67c50256f6422ee0",
+    "bytes": 5263,
+    "sha256": "5fb84cd923cd67586e28987a099e962b4ead7c9247d5ca570e29580b125fb301"
+  },
+  "original_owner_accounting": [
+    {
+      "held_cells": 14,
+      "original_cells": 21,
+      "owner": 10494,
+      "supported_cells": 7
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 357,
+      "owner": 10501,
+      "supported_cells": 357
+    },
+    {
+      "held_cells": 12,
+      "original_cells": 12,
+      "owner": 10504,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 36,
+      "original_cells": 36,
+      "owner": 10509,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 1,
+      "original_cells": 1,
+      "owner": 10514,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 35,
+      "original_cells": 62,
+      "owner": 10515,
+      "supported_cells": 27
+    },
+    {
+      "held_cells": 9,
+      "original_cells": 119,
+      "owner": 10519,
+      "supported_cells": 110
+    },
+    {
+      "held_cells": 11,
+      "original_cells": 48,
+      "owner": 10521,
+      "supported_cells": 37
+    },
+    {
+      "held_cells": 3,
+      "original_cells": 72,
+      "owner": 10526,
+      "supported_cells": 69
+    },
+    {
+      "held_cells": 1,
+      "original_cells": 1,
+      "owner": 10532,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 33,
+      "owner": 10536,
+      "supported_cells": 33
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 115,
+      "owner": 10537,
+      "supported_cells": 115
+    },
+    {
+      "held_cells": 1,
+      "original_cells": 8,
+      "owner": 10538,
+      "supported_cells": 7
+    },
+    {
+      "held_cells": 3,
+      "original_cells": 103,
+      "owner": 10542,
+      "supported_cells": 100
+    },
+    {
+      "held_cells": 7,
+      "original_cells": 13,
+      "owner": 10552,
+      "supported_cells": 6
+    },
+    {
+      "held_cells": 3,
+      "original_cells": 3,
+      "owner": 10559,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 20,
+      "original_cells": 35,
+      "owner": 10567,
+      "supported_cells": 15
+    },
+    {
+      "held_cells": 1,
+      "original_cells": 29,
+      "owner": 10571,
+      "supported_cells": 28
+    },
+    {
+      "held_cells": 8,
+      "original_cells": 74,
+      "owner": 10573,
+      "supported_cells": 66
+    },
+    {
+      "held_cells": 13,
+      "original_cells": 13,
+      "owner": 10580,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 10,
+      "original_cells": 11,
+      "owner": 10584,
+      "supported_cells": 1
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 28,
+      "owner": 10585,
+      "supported_cells": 28
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 5,
+      "owner": 10586,
+      "supported_cells": 5
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 11,
+      "owner": 10588,
+      "supported_cells": 11
+    },
+    {
+      "held_cells": 29,
+      "original_cells": 38,
+      "owner": 10593,
+      "supported_cells": 9
+    },
+    {
+      "held_cells": 3,
+      "original_cells": 6,
+      "owner": 10594,
+      "supported_cells": 3
+    },
+    {
+      "held_cells": 2,
+      "original_cells": 2,
+      "owner": 10595,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 5,
+      "original_cells": 279,
+      "owner": 10600,
+      "supported_cells": 274
+    },
+    {
+      "held_cells": 4,
+      "original_cells": 97,
+      "owner": 10602,
+      "supported_cells": 93
+    },
+    {
+      "held_cells": 32,
+      "original_cells": 65,
+      "owner": 10605,
+      "supported_cells": 33
+    },
+    {
+      "held_cells": 19,
+      "original_cells": 52,
+      "owner": 10610,
+      "supported_cells": 33
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 1,
+      "owner": 10622,
+      "supported_cells": 1
+    },
+    {
+      "held_cells": 6,
+      "original_cells": 52,
+      "owner": 10633,
+      "supported_cells": 46
+    },
+    {
+      "held_cells": 46,
+      "original_cells": 114,
+      "owner": 10635,
+      "supported_cells": 68
+    },
+    {
+      "held_cells": 7,
+      "original_cells": 7,
+      "owner": 10639,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 15,
+      "original_cells": 15,
+      "owner": 10642,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 1,
+      "original_cells": 1,
+      "owner": 10645,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 2,
+      "original_cells": 2,
+      "owner": 10648,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 2,
+      "original_cells": 2,
+      "owner": 10649,
+      "supported_cells": 0
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 30,
+      "owner": 10656,
+      "supported_cells": 30
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 1,
+      "owner": 10657,
+      "supported_cells": 1
+    },
+    {
+      "held_cells": 7,
+      "original_cells": 19,
+      "owner": 10658,
+      "supported_cells": 12
+    },
+    {
+      "held_cells": 25,
+      "original_cells": 29,
+      "owner": 10659,
+      "supported_cells": 4
+    },
+    {
+      "held_cells": 0,
+      "original_cells": 24,
+      "owner": 10663,
+      "supported_cells": 24
+    },
+    {
+      "held_cells": 12,
+      "original_cells": 18,
+      "owner": 10666,
+      "supported_cells": 6
+    },
+    {
+      "held_cells": 56,
+      "original_cells": 66,
+      "owner": 10668,
+      "supported_cells": 10
+    }
+  ],
+  "all_original_positive_atoms": [
+    "gb:CAF:ADM3:52401652B10274630546415",
+    "gb:CAF:ADM3:52401652B13150974576850",
+    "gb:CAF:ADM3:52401652B14361696899500",
+    "gb:CAF:ADM3:52401652B1604113558171",
+    "gb:CAF:ADM3:52401652B1736061354694",
+    "gb:CAF:ADM3:52401652B18967628609342",
+    "gb:CAF:ADM3:52401652B21565212342700",
+    "gb:CAF:ADM3:52401652B2286145520715",
+    "gb:CAF:ADM3:52401652B23917510341632",
+    "gb:CAF:ADM3:52401652B27659488729720",
+    "gb:CAF:ADM3:52401652B29784089160691",
+    "gb:CAF:ADM3:52401652B305023416532",
+    "gb:CAF:ADM3:52401652B30715690483256",
+    "gb:CAF:ADM3:52401652B33074004162122",
+    "gb:CAF:ADM3:52401652B39889213589793",
+    "gb:CAF:ADM3:52401652B49227657461354",
+    "gb:CAF:ADM3:52401652B53216405573620",
+    "gb:CAF:ADM3:52401652B55058977960820",
+    "gb:CAF:ADM3:52401652B56175823548729",
+    "gb:CAF:ADM3:52401652B5866645340360",
+    "gb:CAF:ADM3:52401652B60998928048694",
+    "gb:CAF:ADM3:52401652B61514878619891",
+    "gb:CAF:ADM3:52401652B61639172819254",
+    "gb:CAF:ADM3:52401652B62391094293120",
+    "gb:CAF:ADM3:52401652B64794494109005",
+    "gb:CAF:ADM3:52401652B65052605957591",
+    "gb:CAF:ADM3:52401652B65189611062659",
+    "gb:CAF:ADM3:52401652B67617163165287",
+    "gb:CAF:ADM3:52401652B68266089784761",
+    "gb:CAF:ADM3:52401652B70517020130267",
+    "gb:CAF:ADM3:52401652B74333479476310",
+    "gb:CAF:ADM3:52401652B79208883634836",
+    "gb:CAF:ADM3:52401652B8260276568756",
+    "gb:CAF:ADM3:52401652B84569563404367",
+    "gb:CAF:ADM3:52401652B86682569461435",
+    "gb:CAF:ADM3:52401652B87621344901133",
+    "gb:CAF:ADM3:52401652B89925549074146",
+    "gb:CAF:ADM3:52401652B91880463318488",
+    "gb:CAF:ADM3:52401652B92301081173176",
+    "gb:CAF:ADM3:52401652B95318023512447",
+    "gb:CAF:ADM3:52401652B95349745734913",
+    "gb:CAF:ADM3:52401652B966947158618",
+    "gb:CAF:ADM3:52401652B97101163369552",
+    "gb:CAF:ADM3:52401652B98074041041370",
+    "gb:CAF:ADM3:52401652B98607316941388",
+    "gb:CAF:ADM3:52401652B99363571212605"
+  ],
+  "held_original": {
+    "commit": "58cbec91fe8cfba270f9d9d53711d51a611d695f",
+    "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/supported-inputs-001/held-original.json",
+    "mode": "100644",
+    "git_blob_oid": "e8880c97544c0d5f4f4d4489141dcc45effc30b1",
+    "bytes": 21627,
+    "sha256": "bff9f77eb1a2ce5cec98abf5d38b8babd259b3ffabcf29c18ca4f002c16b23bb"
+  },
+  "held_native_key_columns": [
+    "y",
+    "x",
+    "original_owner",
+    "non_assignment_reason"
+  ],
+  "all_held_native_keys": [
+    [
+      123071,
+      147713,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123071,
+      147714,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123074,
+      147309,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123074,
+      147310,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123074,
+      147311,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123074,
+      147312,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123075,
+      147307,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123075,
+      147308,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123075,
+      147309,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123076,
+      147305,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123076,
+      147306,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123077,
+      147303,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123078,
+      147300,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123079,
+      147298,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123108,
+      147121,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123109,
+      147189,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123109,
+      147228,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123109,
+      147229,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123110,
+      147223,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123110,
+      147224,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123110,
+      147225,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123110,
+      147226,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123111,
+      147219,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123111,
+      147220,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123111,
+      147221,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123111,
+      147222,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123111,
+      147223,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123112,
+      147218,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123112,
+      147219,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123112,
+      147220,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123113,
+      147216,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123113,
+      147217,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123117,
+      147040,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123117,
+      147041,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123117,
+      147042,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123117,
+      147043,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123118,
+      147040,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123118,
+      147041,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123118,
+      147042,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123118,
+      147043,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123118,
+      147044,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123119,
+      147039,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123119,
+      147040,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123119,
+      147041,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123119,
+      147042,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123120,
+      147039,
+      10635,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123591,
+      146847,
+      10526,
+      "territorial_exclusion_cells"
+    ],
+    [
+      123604,
+      146801,
+      10526,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124045,
+      146353,
+      10526,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124207,
+      146145,
+      10521,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124386,
+      145721,
+      10521,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124409,
+      145656,
+      10521,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124430,
+      145638,
+      10521,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124505,
+      144952,
+      10521,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124517,
+      144916,
+      10521,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124517,
+      144917,
+      10521,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124517,
+      144918,
+      10521,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124517,
+      144919,
+      10521,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124618,
+      144830,
+      10521,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124645,
+      144867,
+      10521,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124850,
+      144934,
+      10610,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124850,
+      144935,
+      10610,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124851,
+      144930,
+      10610,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124851,
+      144931,
+      10610,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124851,
+      144932,
+      10610,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124851,
+      144933,
+      10610,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124852,
+      144930,
+      10610,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124852,
+      144931,
+      10610,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124853,
+      144926,
+      10610,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124853,
+      144927,
+      10610,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124853,
+      144928,
+      10610,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124853,
+      144929,
+      10610,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124854,
+      144925,
+      10610,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124854,
+      144926,
+      10610,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124855,
+      144924,
+      10610,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124855,
+      144925,
+      10610,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124856,
+      144922,
+      10610,
+      "territorial_exclusion_cells"
+    ],
+    [
+      124856,
+      144923,
+      10610,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125050,
+      144764,
+      10610,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125450,
+      143219,
+      10659,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125453,
+      143219,
+      10659,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125467,
+      143544,
+      10552,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125506,
+      143435,
+      10552,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125506,
+      143436,
+      10552,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125507,
+      143436,
+      10552,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125507,
+      143437,
+      10552,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125507,
+      143438,
+      10552,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125508,
+      143438,
+      10552,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125557,
+      143314,
+      10659,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125565,
+      143319,
+      10659,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125566,
+      143320,
+      10659,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125566,
+      143321,
+      10659,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125567,
+      143320,
+      10659,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125567,
+      143321,
+      10659,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125567,
+      143322,
+      10659,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125568,
+      143321,
+      10659,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125568,
+      143322,
+      10659,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125568,
+      143323,
+      10659,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125569,
+      143321,
+      10659,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125569,
+      143322,
+      10659,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125569,
+      143323,
+      10659,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125569,
+      143324,
+      10659,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125570,
+      143322,
+      10659,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125570,
+      143323,
+      10659,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125570,
+      143324,
+      10659,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125571,
+      143323,
+      10659,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125571,
+      143324,
+      10659,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125572,
+      143323,
+      10659,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125572,
+      143324,
+      10659,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125573,
+      143324,
+      10659,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125575,
+      143325,
+      10659,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125586,
+      142374,
+      10519,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125586,
+      142375,
+      10519,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125587,
+      142372,
+      10519,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125587,
+      142373,
+      10519,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125587,
+      142374,
+      10519,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125588,
+      142372,
+      10519,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125588,
+      142373,
+      10519,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125588,
+      142374,
+      10519,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125593,
+      142395,
+      10571,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125596,
+      142367,
+      10519,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125795,
+      142171,
+      10602,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125928,
+      142127,
+      10602,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125953,
+      142114,
+      10602,
+      "territorial_exclusion_cells"
+    ],
+    [
+      125954,
+      142114,
+      10602,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126084,
+      142074,
+      10666,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126086,
+      142073,
+      10666,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126110,
+      142060,
+      10666,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126111,
+      142060,
+      10666,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126112,
+      142060,
+      10666,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126113,
+      142059,
+      10666,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126114,
+      142059,
+      10666,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126115,
+      142059,
+      10666,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126151,
+      142008,
+      10666,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126152,
+      142003,
+      10666,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126159,
+      141983,
+      10666,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126161,
+      141982,
+      10666,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126196,
+      141965,
+      10642,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126199,
+      141964,
+      10642,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126201,
+      141963,
+      10642,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126204,
+      141962,
+      10642,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126207,
+      141961,
+      10642,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126209,
+      141960,
+      10642,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126210,
+      141960,
+      10642,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126212,
+      141959,
+      10642,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126213,
+      141959,
+      10642,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126214,
+      141958,
+      10642,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126215,
+      141958,
+      10642,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126216,
+      141958,
+      10642,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126217,
+      141957,
+      10642,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126218,
+      141957,
+      10642,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126219,
+      141957,
+      10642,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126260,
+      141938,
+      10658,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126414,
+      141868,
+      10658,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126415,
+      141868,
+      10658,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126416,
+      141868,
+      10658,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126417,
+      141868,
+      10658,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126476,
+      141849,
+      10658,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126479,
+      141847,
+      10658,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126548,
+      141744,
+      10633,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126549,
+      141740,
+      10633,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126549,
+      141741,
+      10633,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126680,
+      141585,
+      10633,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126681,
+      141585,
+      10633,
+      "territorial_exclusion_cells"
+    ],
+    [
+      126759,
+      141635,
+      10633,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127011,
+      141712,
+      10542,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127247,
+      149859,
+      10494,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127247,
+      150123,
+      10494,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127247,
+      150124,
+      10494,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127247,
+      150125,
+      10494,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127247,
+      150126,
+      10494,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127247,
+      150127,
+      10494,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127247,
+      150128,
+      10494,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127247,
+      150129,
+      10494,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127247,
+      150130,
+      10494,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127247,
+      150131,
+      10494,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127248,
+      150124,
+      10494,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127248,
+      150125,
+      10494,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127248,
+      150126,
+      10494,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127272,
+      150155,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127272,
+      150156,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127272,
+      150157,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127273,
+      150154,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127273,
+      150155,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127273,
+      150156,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127273,
+      150157,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127273,
+      150158,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127274,
+      150153,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127274,
+      150154,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127274,
+      150155,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127274,
+      150156,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127274,
+      150157,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127274,
+      150158,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127274,
+      150159,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127275,
+      150152,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127275,
+      150153,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127275,
+      150154,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127275,
+      150155,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127275,
+      150156,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127275,
+      150157,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127275,
+      150158,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127275,
+      150159,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127276,
+      150152,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127276,
+      150153,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127276,
+      150154,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127276,
+      150155,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127276,
+      150156,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127276,
+      150157,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127277,
+      150154,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127277,
+      150155,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127277,
+      150156,
+      10605,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127279,
+      150088,
+      10494,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127285,
+      149532,
+      10584,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127303,
+      150879,
+      10600,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127332,
+      145308,
+      10649,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127339,
+      145408,
+      10649,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127357,
+      149542,
+      10584,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127358,
+      149541,
+      10584,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127360,
+      149540,
+      10584,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127361,
+      149539,
+      10584,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127362,
+      149539,
+      10584,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127363,
+      149538,
+      10584,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127364,
+      149537,
+      10584,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127365,
+      149536,
+      10584,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127368,
+      149534,
+      10584,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127377,
+      141773,
+      10542,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127378,
+      141773,
+      10542,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127392,
+      150665,
+      10600,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127394,
+      150664,
+      10600,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127395,
+      150663,
+      10600,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127396,
+      150662,
+      10600,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127399,
+      148852,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127411,
+      148860,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127412,
+      148858,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127412,
+      148859,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127413,
+      148857,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127413,
+      148858,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127413,
+      148859,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127414,
+      148855,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127414,
+      148856,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127414,
+      148857,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127414,
+      148858,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127415,
+      148854,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127415,
+      148855,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127415,
+      148856,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127415,
+      148857,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127416,
+      148852,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127416,
+      148853,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127416,
+      148854,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127416,
+      148855,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127416,
+      148856,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127417,
+      148851,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127417,
+      148852,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127417,
+      148853,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127417,
+      148854,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127417,
+      148855,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127418,
+      148849,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127418,
+      148850,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127418,
+      148851,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127418,
+      148852,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127419,
+      148847,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127419,
+      148848,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127419,
+      148849,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127420,
+      148846,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127445,
+      141772,
+      10538,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127520,
+      148597,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127520,
+      148598,
+      10515,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127540,
+      145770,
+      10648,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127610,
+      147760,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127611,
+      147760,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127612,
+      147759,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127612,
+      147760,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127613,
+      147758,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127613,
+      147759,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127613,
+      147760,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127614,
+      147758,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127614,
+      147759,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127614,
+      147760,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127615,
+      147758,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127615,
+      147759,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127615,
+      147760,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127616,
+      147757,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127616,
+      147758,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127616,
+      147759,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127616,
+      147760,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127617,
+      147757,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127617,
+      147758,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127617,
+      147759,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127618,
+      147756,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127618,
+      147757,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127619,
+      147755,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127619,
+      147756,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127620,
+      147754,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127621,
+      147752,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127622,
+      147751,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127631,
+      144908,
+      10559,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127650,
+      141803,
+      10573,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127651,
+      141802,
+      10573,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127651,
+      141803,
+      10573,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127652,
+      141803,
+      10573,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127652,
+      141804,
+      10573,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127653,
+      141804,
+      10573,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127654,
+      141805,
+      10573,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127655,
+      141805,
+      10573,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127655,
+      148231,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127675,
+      144874,
+      10559,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127691,
+      148148,
+      10593,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127699,
+      145968,
+      10648,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127710,
+      147643,
+      10645,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127740,
+      144811,
+      10559,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127841,
+      146272,
+      10580,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127846,
+      146307,
+      10580,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127846,
+      146308,
+      10580,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127846,
+      146309,
+      10580,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127847,
+      146293,
+      10580,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127847,
+      146294,
+      10580,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127847,
+      146295,
+      10580,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127847,
+      146296,
+      10580,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127847,
+      146297,
+      10580,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127847,
+      146298,
+      10580,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127847,
+      146299,
+      10580,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127847,
+      146300,
+      10580,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127854,
+      146333,
+      10580,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127860,
+      146172,
+      10514,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127912,
+      147551,
+      10595,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127931,
+      147519,
+      10595,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127971,
+      146807,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127974,
+      146803,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127975,
+      146802,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127978,
+      146798,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127981,
+      146794,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127982,
+      146793,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127985,
+      146789,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127995,
+      147113,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127997,
+      147116,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127998,
+      147117,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127998,
+      147118,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127999,
+      147118,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127999,
+      147119,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      127999,
+      147120,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128000,
+      147119,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128000,
+      147120,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128000,
+      147121,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128001,
+      147121,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128001,
+      147122,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128001,
+      147123,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128002,
+      147122,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128002,
+      147123,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128002,
+      147124,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128002,
+      147125,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128003,
+      147123,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128003,
+      147124,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128003,
+      147125,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128003,
+      147126,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128004,
+      147125,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128004,
+      147126,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128004,
+      147127,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128004,
+      147128,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128005,
+      147127,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128005,
+      147128,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128005,
+      147129,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128005,
+      147130,
+      10509,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128068,
+      144649,
+      10504,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128070,
+      144650,
+      10504,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128071,
+      144651,
+      10504,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128072,
+      144651,
+      10504,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128074,
+      144652,
+      10504,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128075,
+      144652,
+      10504,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128077,
+      144653,
+      10504,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128079,
+      144654,
+      10504,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128084,
+      144656,
+      10504,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128102,
+      144661,
+      10504,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128117,
+      144663,
+      10504,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128241,
+      144630,
+      10504,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128331,
+      144622,
+      10639,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128408,
+      144630,
+      10639,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128413,
+      144631,
+      10639,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128418,
+      144632,
+      10639,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128422,
+      144633,
+      10639,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128427,
+      144634,
+      10639,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128432,
+      144635,
+      10639,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128466,
+      143644,
+      10594,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128467,
+      143644,
+      10594,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128468,
+      143644,
+      10594,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128535,
+      143178,
+      10532,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128549,
+      143168,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128550,
+      143168,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128551,
+      143168,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128554,
+      143167,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128555,
+      143167,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128556,
+      143167,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128558,
+      143166,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128559,
+      143166,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128560,
+      143166,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128563,
+      143165,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128564,
+      143165,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128565,
+      143165,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128568,
+      143164,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128569,
+      143164,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128573,
+      143163,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128574,
+      143163,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128578,
+      143162,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128583,
+      143161,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128728,
+      143130,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128973,
+      142789,
+      10567,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128974,
+      142789,
+      10567,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128976,
+      142790,
+      10567,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128977,
+      142790,
+      10567,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128979,
+      142791,
+      10567,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128980,
+      142791,
+      10567,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128982,
+      142792,
+      10567,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128983,
+      142792,
+      10567,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128984,
+      142793,
+      10567,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128985,
+      142793,
+      10567,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128986,
+      142793,
+      10567,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128988,
+      142794,
+      10567,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128991,
+      142795,
+      10567,
+      "territorial_exclusion_cells"
+    ],
+    [
+      128994,
+      142796,
+      10567,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129001,
+      142798,
+      10567,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129002,
+      142798,
+      10567,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129003,
+      142798,
+      10567,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129004,
+      142798,
+      10567,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129005,
+      142798,
+      10567,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129006,
+      142798,
+      10567,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129081,
+      143077,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129083,
+      143076,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129085,
+      143075,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129087,
+      143074,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129088,
+      143073,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129089,
+      143073,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129090,
+      143072,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129091,
+      143072,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129092,
+      143071,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129132,
+      143049,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129134,
+      143048,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129136,
+      143047,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129138,
+      143046,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129139,
+      143045,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129140,
+      143045,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129141,
+      143044,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129142,
+      143044,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129143,
+      143043,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129144,
+      143043,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129145,
+      143042,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129147,
+      143041,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129232,
+      142786,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129233,
+      142786,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129234,
+      142786,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129236,
+      142785,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129237,
+      142785,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129238,
+      142785,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129239,
+      142785,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129240,
+      142784,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129240,
+      142785,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129241,
+      142784,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129241,
+      142785,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129242,
+      142784,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129243,
+      142784,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129244,
+      142784,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129245,
+      142784,
+      10668,
+      "territorial_exclusion_cells"
+    ],
+    [
+      129246,
+      142784,
+      10668,
+      "territorial_exclusion_cells"
+    ]
+  ],
+  "original_interval_blocks": [
+    {
+      "commit": "d4c9e2ae51ec32884dd61eb92c84eeb76f76ffd4",
+      "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/original-intervals-001/block-030.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "18db60720bb8a2ef22683146490a0622e8614085",
+      "bytes": 5332,
+      "sha256": "6bdd015ae0aa13ea2f6ab80ba6179fa16e63fd45351e82b5346ea7f51ad94efc"
+    },
+    {
+      "commit": "d4c9e2ae51ec32884dd61eb92c84eeb76f76ffd4",
+      "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/original-intervals-001/block-031.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "aa3c1bbc49af726ef40570f008a5965192fc7374",
+      "bytes": 3440,
+      "sha256": "73ee671a1717cc9dd13d3022ef876d444e67b950594028979b19fed1082426f1"
+    }
+  ],
+  "whole_physical_evidence": {
+    "commit": "1f655c379e938d7ecf0f044f2f01da0a49b21b4b",
+    "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/physical-001/whole-target-support.json",
+    "mode": "100644",
+    "git_blob_oid": "28c87655ce6bc27ba8b53ec0d0c19552e0e7e25d",
+    "bytes": 311103,
+    "sha256": "686d41e172c55480b5c1192fafb6a82c4bce4feefce906e003acffa8b2ac9ce8"
+  },
+  "whole_foreign_census": {
+    "commit": "c773c8cef2fd2598d07c78912060cf98b35e497a",
+    "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/source-review/foreign-bounds-001/complete-foreign-bounds.json",
+    "mode": "100644",
+    "git_blob_oid": "51dbcd3ad7a4dd49d891d68a162970bea24e3725",
+    "bytes": 468893,
+    "sha256": "448d489613bc30eb600a09882257b2f52d58bd80fb26f307e482f426a247a343"
+  },
+  "retained_periodic_proof": {
+    "commit": "7a13c8cb319935d188817eb8ab658fef1fb33329",
+    "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/source-review/retained-periodic-negative-reconciliation-001/retained-periodic-negative-reconciliation.json",
+    "mode": "100644",
+    "git_blob_oid": "d145830ba86d23b385d1a54d5c6d42646e3a82a8",
+    "bytes": 17367,
+    "sha256": "4c22904e4e216e7d51d598bc7ba33980a5bbf8860316c9847b32592a108af52b"
+  },
+  "complete_archive_custody": {
+    "commit": "36b1fb6d42151afd251efb005d7cb1b9634d9744",
+    "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/native-source-custody-002/complete-thirteen-native-archive-custody.json",
+    "mode": "100644",
+    "git_blob_oid": "3b1b4176f0b147aa078e42a076174c69c0715be3",
+    "bytes": 54982,
+    "sha256": "0f49af8b252858c67aaffd47c42a9af1c982d3cde8fa1845342e467bc97fe4b9"
+  },
+  "source_rights_interpretation": {
+    "commit": "36b1fb6d42151afd251efb005d7cb1b9634d9744",
+    "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/thirteen-whole-source-interpretation.md",
+    "mode": "100644",
+    "git_blob_oid": "dac004d112899e75ae8c5079c73249f8067025a5",
+    "bytes": 11449,
+    "sha256": "258222312136107437edae5e1c36f8e505c11d55cec68e7a55c630cc24e4a04f"
+  },
+  "whole_Raga_original_and_three_descendants": {
+    "commit": "36b1fb6d42151afd251efb005d7cb1b9634d9744",
+    "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/native-source-custody-002/Raga-whole-original-negative-ancestry.json",
+    "mode": "100644",
+    "git_blob_oid": "2b3818f7d2f4255093223a44edf3bd839ccdf1c1",
+    "bytes": 13667,
+    "sha256": "ccd100e9ce02f4c342839c4e8ea0f3af9a905b54e6c344d20ff84494e45b433e"
+  },
+  "actual_native_summary": {
+    "commit": "cb07c6f1a64654788f61cb9f0d483f72ac335f3b",
+    "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/actual-native-result-summary.json",
+    "mode": "100644",
+    "git_blob_oid": "fb4c163f367adfe352a444d5780453570a577aac",
+    "bytes": 2682,
+    "sha256": "47f087eab85ae07afeff14267ae4a92926b421028b7871ba8d8cdee66056588d"
+  },
+  "distinct_review": {
+    "reviewer": "/root/africa_worker6_caf_review",
+    "reviewed_head": "cb07c6f1a64654788f61cb9f0d483f72ac335f3b",
+    "path": "coordination/engineering/central-african-republic-original-repair-20261018-worker4/source-review/distinct-reviewer6/actual-physical-native-result-review.md",
+    "bytes": 8266,
+    "sha256": "5e2f099db7eaf3f8356420cd8032d248c33bf0b342cbf8379a5f5af7a276974a",
+    "copy_is_byte_unchanged": true,
+    "disposition": "Support genuine1669native cells/34components;461territorialholds remainunqualified;no selected/currentlaw/publication acceptance."
+  },
+  "limits": [
+    "Original2130land/0water/1319intervals/46owners andall46positiveatoms remain the denominator. 1669qualified/34survivingpositiveatoms plus461territorialheld exactly accountoriginalscope; all461explicitkeys andall46ownerrecords retained.",
+    "All175primarycontext members,72contextparents/76ancestorrecords,31positiveparents andalloriginal/canonical geometry differences remain retained; original scope is not replaced by positive supported input.",
+    "All13wholeforeignfamilies/1092nativeDBFrows and69conservativecontacts remain;complete365foreign/73303census+threeunchangedretainedFijiproofs retained. No cropped/fewer negative operands or newly invented source identity.",
+    "Raga remainsonewholeoriginalSSD2atom withoriginalowners5998/6205/6443 andallthreeacceptedphysical-fragmentdescendants; neverreplacewhole negativewithfragments.",
+    "CMR1derivativeCCBY3 andbaseCCBYSA3 remain distinct: preserveNordNordWest/Ji-Elle attribution,NIMA/WDBIIprovenance,applicablesharealike andunknownbaseelementscope; no waiver. CMR2metadataCCBY4 versusimageeditionlessAttribution remains.",
+    "OSM/WambacherCMR3/COD1/COG1/TCD1retainODbLdatabase attribution/sharealike, separatelyfromCCBYSA2documentation; geoBoundariesderivativeCCBY4doesnoteraseunderlyingterms.",
+    "COD2RGC/OCHA2019metadataCCBY3IGOvseditionlessimage,atlas/watercourseprovenance andunseenCOD/FODreference remain. COG2actualXMLpublicdomain/noaccess-use restriction remainswithMapMakerattribution andJanuary2007accuracylimits.",
+    "SDN2020IGOmetadata/editionlessimages andSSD2020expressmetadatagrantvs genericlicense-menuimage/2013XML/Russian1970topomapprovenance remain distinct. Underlyingmaprights/unseenCOD-FODterms notpositivelycleared; Abyei/Illemi/undeterminedboundary/nonnestinglimits literal. TCD2tier-specificITOS/ADM3caveats remain.",
+    "CAF1/2/3historical2006/2015/2018roles,CAF1chosenCCBY2.5,CAF2CCBY3/historicalportalfootervscurrentdefault distinction,CAF3metadataCCBY3IGOvsimageeditionlessgrant remain. #899law-eracrosswalkand21of46overlap remainunresolved.",
+    "Historicalresearch sourcehand-off only: no blanketredistribution/relicense,currentlegalborder/parentage orsourceaccuracyclaim. Explicitobservedsourcegrants,attribution/conditions andremainingunderlyingrights limits remainmaterial.",
+    "No currentselectedownerzero/selectedconservation/emittedcomposition/integration/import/publication or accepted/deliveredcellcredit established; parentsole nextdelivery decision."
+  ]
+}
