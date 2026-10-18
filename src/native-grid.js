@@ -295,6 +295,37 @@ export function polygonParts(geometry) {
   }
   return polygons;
 }
+// Coverage admits each original geometry while making the numerical rings the
+// scanner already needs. Group only those rings: grouping raw coordinates first
+// would require a separate strict walk before nativeRuntimeIndex's conversion.
+function coverageRuntimeIndex(features) {
+  const grouped=new Map();
+  for(const {id,pixelIndex,geometry} of features){
+    require(geometry && ['Polygon','MultiPolygon'].includes(geometry.type), 'Unsupported original native geometry / footprint primitive');
+    exactKeys(geometry,['type','coordinates'],'Primitive geometry');
+    const polygons=geometry.type==='Polygon'?[geometry.coordinates]:geometry.coordinates;
+    require(isNativeSequence(polygons) && polygons.length>0,'Missing footprint polygons');
+    const item=grouped.get(id)??{index:pixelIndex,polygons:[]};
+    for(const polygon of polygons){
+      require(isNativeSequence(polygon) && polygon.length>0,'Missing footprint rings');
+      const rings=[];
+      for(const ring of polygon){
+        require(isNativeSequence(ring) && ring.length>=4,'Incomplete footprint ring');
+        const result=new Float64Array(ring.length*2);let offset=0;
+        for(const point of ring){
+          require(Array.isArray(point) && point.length===2 && point.every(Number.isFinite)
+            && Math.abs(point[0])<=180 && Math.abs(point[1])<=90,'Invalid native footprint coordinate');
+          result.set(point,offset);offset+=2;
+        }
+        require(result[0]===result.at(-2) && result[1]===result.at(-1),'Unclosed footprint ring');
+        rings.push(result);
+      }
+      item.polygons.push(rings);
+    }
+    grouped.set(id,item);
+  }
+  return [...grouped.values()].sort((a,b)=>a.index-b.index);
+}
 // Component labels belong to their original authority; repeated labels do not
 // rename or merge the independently qualified original rows.
 export const repairComponentKey = row => JSON.stringify([row.authority_sha256 ?? null, row.component_id]);
@@ -432,15 +463,7 @@ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverage
   const options = {size, latitudes, rowStart, rowEnd};
   const scan = (features, masks = false) => {
     if (!features.length) return {rows:new Map(),ties:[]};
-    if (masks) {
-      const grouped=new Map();
-      for (const feature of features) {
-        const item=grouped.get(feature.id)??{id:feature.id,pixelIndex:feature.pixelIndex,geometry:{type:'MultiPolygon',coordinates:[]}};
-        item.geometry.coordinates.push(...polygonParts(feature.geometry)); grouped.set(feature.id,item);
-      }
-      features=[...grouped.values()];
-    }
-    return nativePolygonIntervals(nativeRuntimeIndex(features),options);
+    return nativePolygonIntervals(masks?coverageRuntimeIndex(features):nativeRuntimeIndex(features),options);
   };
   // Internal scan ordinals preserve each original member's geometry and holes.
   // Ownership below unions their accepted owners, while coverage must still meet
