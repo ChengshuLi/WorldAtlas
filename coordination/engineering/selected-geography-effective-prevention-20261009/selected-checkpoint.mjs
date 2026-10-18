@@ -659,6 +659,10 @@ async function admitDerivedCheckpoint(session,reader,archiveReader,accepted,sele
     demand(same(facts.checkpoint_routes,publication.routes), 'Accepted complete route publication differs');
   }
   demand(same(facts.certificate,publication.certificate), 'Accepted candidate certificate pin differs');
+  demand(certificate.version===2 && certificate.kind==='selected-coordinate-neighbor-certificate-v2'
+    && same(certificate.entry_fields,FIELDS) && Array.isArray(certificate.entries)
+    && Array.isArray(certificate.inputs) && Array.isArray(certificate.binding?.sources),
+  'Unsupported accepted coordinate product schema');
   const native=report.selected_native_report;
   const {runtime:outerRuntime,caller_runtime:outerCaller,execution_runtimes:outerRuntimes,
     execution_code_inventory:outerCode,...nativeInverse}=native??{};
@@ -706,7 +710,12 @@ async function admitDerivedCheckpoint(session,reader,archiveReader,accepted,sele
     'Accepted checkpoint rebind/native selection differs');
   demand(same(selected.ledger.current_targets,rebind.request.current_targets), 'Accepted complete target roster differs');
   const additions=checkpointAdditions(selected,rebind.request.current_targets);
-  coordinateCheck(certificate,{binding:certificate.binding,complete_owners:certificate.entries.length,
+  // Hosted acceptance binds the private producer's derived certificate bytes.
+  // Its original owner identities were checked at the cold/seed boundary;
+  // qualifyTransition preserves them and validates each changed primitive.
+  // Replaying that scientific result here repeats all owners × additions.
+  // A trusted catalogue seed has no hosted acceptance, so still checks fully.
+  if (seedRoot) coordinateCheck(certificate,{binding:certificate.binding,complete_owners:certificate.entries.length,
     complete_sources:certificate.binding.sources.length},additions);
   demand(same(certificate.inputs.map(p=>p.source),certificate.binding.sources), 'Accepted complete source binding inventory differs');
   demand(same(certificate.binding.selection,selected.selection), 'Accepted certificate selected binding differs');

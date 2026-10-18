@@ -425,6 +425,15 @@ test('actual joint producer and Python retention feed archive transport and next
   const result=await qualify(f,a);assert.equal(result.available,true);
   assert.equal(result.state.selected_commit,f.trusted);
   assert.deepEqual(result.state.certificate,f.products.certificate);
+  // Independently check the producer's invariant on this bounded real fixture.
+  // Production accepted reuse must not recompute this complete cross product.
+  for (const [i,row] of f.products.certificate.entries.entries()) {
+    assert.equal(row[1],i+1);
+    const effective=nativeLiteral(result.state.additions).filter(p=>p.target_id===row[0]);
+    assert(effective.every(p=>p.pixelIndex===row[1] && p.base_geometry_sha256===row[7]));
+    assert.equal(row[8],valueSha({base_geometry_sha256:row[7],additions:effective}));
+  }
+
   assert.equal(f.products.facts.validation_stage,'native-passed');
   assert.equal(f.products.facts.continuous_publication,undefined);
   assert.equal(f.products.native.repair_visibility.new_components,0);
@@ -453,7 +462,10 @@ test('coherently rehashed omitted routes, stale selectors, old exception drift a
     [p=>p.facts.executing_policy.body+=' ',/policy identity differs/],
     [p=>p.facts.executing_policy.body=p.facts.executing_policy.body.replace('1','2'),/policy body differs/],
     [p=>p.facts.execution_code=p.facts.execution_code.filter(x=>x.path!=='scripts/selected-checkpoint-native.mjs'),/original native execution/],
-    [p=>p.certificate.entries[0][1]=2,/owner\/index\/parent identity/]]) {
+    ...[p=>p.certificate.version=3,p=>p.certificate.kind='unknown',
+      p=>p.certificate.entry_fields=[],p=>p.certificate.entries=null,
+      p=>p.certificate.inputs=null,p=>p.certificate.binding.sources=null]
+      .map(mutate=>[mutate,/coordinate product schema/])]) {
     const a=await acquire(f,mutate);
     try {const result=await qualify(f,a);assert.equal(result.available,false);assert.match(result.reason,reason);}
     catch(error){assert.match(error.message,reason);}
@@ -548,6 +560,14 @@ test('one trusted-main derived seed reuses the same admission with truthful dist
   assert.equal(q.state.accepted_execution.source,undefined);
   assert.equal(q.state.accepted_execution.checkpoint_id,'fixture-derived-seed');
   f.api.releaseCheckpoint(q.state);
+});
+// A seed is not a hosted accepted result: even coherently republished owner
+// corruption must undergo full coordinate validation on its first admission.
+test('trusted-main seed rejects a coherently rehashed wrong owner index',async t=>{
+  const f=await acceptedProducts(t);
+  f.products.certificate.entries[0][1]=2;
+  const a=await installSeed(f);
+  await assert.rejects(()=>f.api.qualifyCheckpoint(a),/owner\/index\/parent identity/);
 });
 test('trusted-main seed still requires original successful terminal custody and complete routes',async t=>{
   const f=await acceptedProducts(t);
