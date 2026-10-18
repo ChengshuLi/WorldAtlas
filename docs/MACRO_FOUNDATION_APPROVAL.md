@@ -56,3 +56,12 @@ The raw-byte extraction returns its locally decoded canonical features for the
 current semantic/footprint check, avoiding a second parse of every current part.
 Those transient features are removed from the small validation report. The API
 never accepts supplied decoded features in place of the complete raw bytes.
+
+The extractor also accepts an exact-order synchronous iterable of whole raw
+parts. The filesystem validator uses this to read, hash and decode one canonical
+part before loading the next, without retaining an aggregate raw-buffer array.
+Missing, extra, reordered and duplicate parts still refuse; no partial report is
+returned if iteration or a later part fails. Caller-owned arrays are not mutated.
+Decoded geometry remains input-sized for the existing semantic and footprint
+checks, and the footprint hash still creates its complete serialization. This
+change makes no whole-world peak-memory or timing guarantee.

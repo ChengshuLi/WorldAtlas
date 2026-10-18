@@ -193,3 +193,62 @@ test('literal member extraction does not silently repair malformed claims or gra
  const f=memberEdgeFixture();delete f.projection.member_edges;assert.throws(()=>validateCurrentMemberEdges(f),/bindings/);
  assert.equal(validateMacroReviewProjection(fixture()).validated,true);
 });
+
+test('lazy complete member extraction equals array extraction without retaining yielded raw bodies',()=>{
+ const f=memberEdgeFixture(),expected=projectCurrentMemberEdges(f),before=f.parts.map(part=>Buffer.from(part.raw));
+ function* parts(){
+  for(const part of f.parts){
+   const raw=Buffer.from(part.raw);yield {...part,raw};
+   raw.fill(0); // A consumed transport buffer may be reused by its owner.
+  }
+ }
+ assert.deepEqual(projectCurrentMemberEdges({...f,parts:parts()}),expected);
+ assert.deepEqual(validateCurrentMemberEdges({...f,parts:parts()}),validateCurrentMemberEdges(f));
+ f.parts.forEach((part,i)=>assert.deepEqual(part.raw,before[i],'caller-owned input arrays are unchanged'));
+});
+
+test('lazy member inventory must exhaust the exact index and closes on every refusal',()=>{
+ for(const kind of ['missing','extra','reordered','duplicate','wrong-mode','wrong-path','non-buffer','malformed-last','duplicate-owner']){
+  const f=memberEdgeFixture(),parts=f.parts.map(part=>({...part}));let closed=false;
+  if(kind==='missing')parts.pop();
+  if(kind==='extra')parts.push(parts[0]);
+  if(kind==='reordered')parts.reverse();
+  if(kind==='duplicate')parts[1]=parts[0];
+  if(kind==='wrong-mode')parts[1].mode='100755';
+  if(kind==='wrong-path')parts[1].path='data/geography/elsewhere.json';
+  if(kind==='non-buffer')parts[1].raw=parts[1].raw.toString();
+  if(kind==='malformed-last')parts[1].raw=Buffer.from('{');
+  if(kind==='duplicate-owner')parts[1].raw=parts[0].raw;
+  function* input(){try{yield* parts;}finally{closed=true;}}
+  assert.throws(()=>validateCurrentMemberEdges({...f,parts:input()}),undefined,kind);
+  assert.equal(closed,true,kind+' closes its owned iterator');
+ }
+});
+
+test('lazy member input failure cannot return a partial validation or skip a final part',()=>{
+ const f=memberEdgeFixture(),failure=Error('actual final part read failed');let closed=false;
+ function* parts(){try{yield f.parts[0];throw failure;}finally{closed=true;}}
+ assert.throws(()=>validateCurrentMemberEdges({...f,parts:parts()}),error=>error===failure);
+ assert.equal(closed,true);
+ for(const parts of [null,{},Promise.resolve(f.parts)])assert.throws(()=>projectCurrentMemberEdges({...f,parts}),/input bytes/);
+});
+
+test('lazy extraction consumes each raw property once and pins index bytes before advancing',()=>{
+ const f=memberEdgeFixture(),expected=projectCurrentMemberEdges(f),indexRaw=Buffer.from(f.indexRaw);let reads=0;
+ function* parts(){
+  indexRaw.fill(0);
+  for(const part of f.parts)yield {path:part.path,mode:part.mode,get raw(){reads++;return part.raw;}};
+ }
+ assert.deepEqual(projectCurrentMemberEdges({indexRaw,parts:parts()}),expected);
+ assert.equal(reads,f.parts.length);
+});
+
+test('lazy member validation preserves exact absent null malformed and duplicate claim values',()=>{
+ for(const value of [null,[],['dup','dup'],42,{wrong:'shape'},'raw:competitor']){
+  const f=memberEdgeFixture(),body=JSON.parse(f.parts[1].raw);body.features[0].properties.metadata.source_member_ids=value;
+  f.parts[1].raw=Buffer.from(JSON.stringify(body));
+  const expected=projectCurrentMemberEdges(f),parts=(function*(){yield* f.parts;})();
+  assert.deepEqual(projectCurrentMemberEdges({...f,parts}),expected);
+  assert.deepEqual(expected.locations[2].source_member_ids,value);
+ }
+});

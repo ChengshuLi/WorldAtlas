@@ -1,5 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import { syncBuiltinESMExports } from 'node:module';
 import { mkdtemp, mkdir, writeFile, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, dirname } from 'node:path';
@@ -152,9 +154,23 @@ test('actual semantic validation checks complete current member fields and liter
  const directory=join(root,'data/macro-foundation');await mkdir(directory,{recursive:true});
  const save=async()=>{await writeFile(join(directory,'current-membership-projection.json.gz'),gzipSync(JSON.stringify(projection)));await writeFile(join(directory,'world-review-projection.json'),JSON.stringify(dashboard));await writeFile(join(directory,'world-review-locations-0.json.gz'),gzipSync(JSON.stringify(projection.locations)));};
  await save();const parse=JSON.parse,counts=new Map(parts.map(part=>[part.raw.toString(),0]));let result;
- JSON.parse=function(raw,...args){if(Buffer.isBuffer(raw)&&counts.has(raw.toString()))counts.set(raw.toString(),counts.get(raw.toString())+1);return parse(raw,...args);};
- try{result=await validateSemanticFollowup(root,{expectedCounts});}finally{JSON.parse=parse;}
+ const reads=[],paths=new Map(parts.map(part=>[join(root,part.path),part.path]));
+ const bodyPaths=new Map(parts.map(part=>[part.raw.toString(),part.path]));
+ const asyncRead=fs.promises.readFile,syncRead=fs.readFileSync;
+ const observe=file=>{if(paths.has(String(file)))reads.push(['read',paths.get(String(file))]);};
+ fs.promises.readFile=async function(file,...args){observe(file);return asyncRead.call(this,file,...args);};
+ fs.readFileSync=function(file,...args){observe(file);return syncRead.call(this,file,...args);};
+ syncBuiltinESMExports();
+ JSON.parse=function(raw,...args){if(Buffer.isBuffer(raw)&&counts.has(raw.toString())){
+  counts.set(raw.toString(),counts.get(raw.toString())+1);reads.push(['parse',bodyPaths.get(raw.toString())]);
+ }return parse(raw,...args);};
+ try{result=await validateSemanticFollowup(root,{expectedCounts});}finally{
+  JSON.parse=parse;fs.promises.readFile=asyncRead;fs.readFileSync=syncRead;syncBuiltinESMExports();
+ }
  assert.deepEqual([...counts.values()],[1,1],'each indexed current part decoded once; existing retained-baseline text parsing is separate');
+ const firstParse=reads.findIndex(([operation])=>operation==='parse');
+ assert.deepEqual(reads.slice(firstParse-1,firstParse+3),parts.flatMap(part=>[['read',part.path],['parse',part.path]]),
+  'current canonical raw bodies are read and consumed one at a time, not accumulated before decoding');
  assert.equal(result.current_member_edges.validated,true);assert.equal(result.current_member_edges.native_absence_admission,false);assert.equal(Object.hasOwn(result.current_member_edges,'features'),false);
  projection.locations[0].source_member_ids=['forged'];await save();await assert.rejects(validateSemanticFollowup(root,{expectedCounts}),/member property/);
  delete projection.locations[0].source_member_ids;await save();const compact=structuredClone(projection.locations);compact[0].source_member_ids=null;await writeFile(join(directory,'world-review-locations-0.json.gz'),gzipSync(JSON.stringify(compact)));await assert.rejects(validateSemanticFollowup(root,{expectedCounts}),/member property/);

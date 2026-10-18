@@ -17,18 +17,24 @@ const memberFacts=row=>({id:row.id,...(Object.hasOwn(row,'source_member_ids')
 const ordinaryPart=name=>typeof name==='string'&&name.startsWith('data/')
  &&!name.includes('\\')&&!name.includes('\0')&&name.split('/').every(p=>p&&!['.','..'].includes(p));
 export function projectCurrentMemberEdges({indexRaw,parts}){
- if(!Buffer.isBuffer(indexRaw)||!Array.isArray(parts))throw Error('Complete current member input bytes required');
+ if(!Buffer.isBuffer(indexRaw)||typeof parts?.[Symbol.iterator]!=='function')throw Error('Complete current member input bytes required');
  const index=JSON.parse(indexRaw),names=Array.isArray(index.parts)&&index.parts.every(name=>typeof name==='string')
   ?index.parts.map(name=>'data/'+name):null;
- if(!Array.isArray(names)||!names.length||!names.every(ordinaryPart)||new Set(names).size!==names.length
-  ||parts.length!==names.length||parts.some((part,i)=>part.path!==names[i]||part.mode!=='100644'||!Buffer.isBuffer(part.raw)))
+ if(!Array.isArray(names)||!names.length||!names.every(ordinaryPart)||new Set(names).size!==names.length)
   throw Error('Incomplete or reordered current member part inventory');
- const locations=[],features=[],ids=new Set(),bindings=[];
+ const indexSha256=sha(indexRaw),locations=[],features=[],ids=new Set(),bindings=[];
+ let ordinal=0;
  for(const part of parts){
-  const collection=JSON.parse(part.raw);
+  // Capture this whole body once. An owned iterator can release its raw bytes
+  // before loading the next part; decoded features remain available to callers.
+  const {path,mode,raw}=part??{};
+  if(ordinal>=names.length||path!==names[ordinal]||mode!=='100644'||!Buffer.isBuffer(raw))
+   throw Error('Incomplete or reordered current member part inventory');
+  ordinal++;
+  const collection=JSON.parse(raw);
   if(collection.type!=='FeatureCollection'||!Array.isArray(collection.features))throw Error('Malformed current member part');
-  bindings.push({path:part.path,mode:part.mode,bytes:part.raw.length,sha256:sha(part.raw),
-   git_blob_oid:createHash('sha1').update(`blob ${part.raw.length}\0`).update(part.raw).digest('hex')});
+  bindings.push({path,mode,bytes:raw.length,sha256:sha(raw),
+   git_blob_oid:createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex')});
   for(const feature of collection.features){
    if((feature.type!==undefined&&feature.type!=='Feature')||typeof feature.id!=='string'||!feature.id||feature.properties?.id!==feature.id||ids.has(feature.id))
     throw Error('Missing or duplicate current member identity');
@@ -39,8 +45,9 @@ export function projectCurrentMemberEdges({indexRaw,parts}){
     ?{source_member_ids:metadata.source_member_ids}:{})}));
   }
  }
+ if(ordinal!==names.length)throw Error('Incomplete or reordered current member part inventory');
  if(!locations.length)throw Error('Empty current member inventory');
- return {member_edges:{version:1,index_sha256:sha(indexRaw),parts:bindings,locations:locations.length},locations,features};
+ return {member_edges:{version:1,index_sha256:indexSha256,parts:bindings,locations:locations.length},locations,features};
 }
 export function validateCurrentMemberEdges({projection,dashboard,compactParts,indexRaw,parts}){
  const expected=projectCurrentMemberEdges({indexRaw,parts});
