@@ -591,6 +591,12 @@ export function composeAuthorities(config, reader) {
 }
 
 export function packageProjection(config, reader, acceptedRegistry = null) {
+  return projectPackage(config, reader, acceptedRegistry);
+}
+
+// Only finalizeDelivery can supply its invocation-owned parsed snapshot.
+// Public readers retain complete conservation comparisons, even for aliases.
+function projectPackage(config, reader, acceptedRegistry, ownedSnapshot) {
   const registry = reader.json(config.registry), ledger = reader.json(config.ledger);
   const normalized = normaliseRetainedRepairLedger(ledger, registry);
   const roles = new Map();
@@ -766,18 +772,22 @@ export function packageProjection(config, reader, acceptedRegistry = null) {
     for (const role of ['request', 'facts', 'publication', 'result', 'operating']) add(certificate[role], 'current rebind ' + role);
     for (const [role, pin] of Object.entries(reader.json(certificate.operating).execution_custody)) add(pin, 'current external ' + role);
   }
+  // These shallow projections are stable only for our private parsed ledger.
+  // Do not retain a snapshot of a caller-owned mutable row cursor.
+  const ownedRows = ownedSnapshot !== undefined && ledger === ownedSnapshot ? [...normalized.rows.values()] : null;
   const cohorts = registry.entries.map(entry => {
-    const rows = [...normalized.rows.values()].filter(row => row.authority_sha256 === entry.authority_sha256);
+    const rows = (ownedRows ?? [...normalized.rows.values()]).filter(row => row.authority_sha256 === entry.authority_sha256);
     return {original_batch_id: 'retained-authority-scope:' + entry.authority_sha256, component_ids: rows.map(row => row.component_id),
       members: rows.map(row => ({component_id: row.component_id, target_id: row.target_id, disposition: row.disposition,
         ...(row.representation === 'native-cells' ? {native_rows_sha256: digest(jsonBytes(row.native_rows))}
           : {geometry_sha256: row.geometry_sha256})}))};
   }).filter(c => c.members.length);
   const expectation = {version: 1, selected_ledger_sha256: null,
-    cumulative_native_cells: [...normalized.rows.values()].reduce((sum, row) => sum + row.native_cells, 0), cohorts};
+    cumulative_native_cells: (ownedRows ?? [...normalized.rows.values()]).reduce((sum, row) => sum + row.native_cells, 0), cohorts};
   if (config.selected_ledger) {
     const selected = reader.json(config.selected_ledger);
-    need(same(selected.rows, ledger.rows) && same(selected.scope_ids, ledger.scope_ids)
+    const sameSnapshot = ownedSnapshot !== undefined && selected === ownedSnapshot && ledger === ownedSnapshot;
+    need((sameSnapshot || same(selected.rows, ledger.rows) && same(selected.scope_ids, ledger.scope_ids))
       && selected.authority_registry_sha256 === ledger.authority_registry_sha256 && selected.current_rebind && selected.current_targets,
     'Actual selected ledger does not conserve original rows/current rebind');
     expectation.selected_ledger_sha256 = config.selected_ledger.sha256; add(config.selected_ledger, 'actual selected ledger');
@@ -1064,9 +1074,9 @@ export function finalizeDelivery(config, reader, {acceptedCheckpoint} = {}) {
       && (declared.decoded_sha256 ?? declared.sha256) === (pin.decoded_sha256 ?? pin.sha256), 'Final envelope asset descriptor differs: ' + role);
   }
   const selector = finalizedSelection(originalSelector, sidecar, config.sidecar);
-  const outputs = packageProjection({...config, outer_roles: [...Object.values(assets), sidecar.runtime_envelope,
+  const outputs = projectPackage({...config, outer_roles: [...Object.values(assets), sidecar.runtime_envelope,
     ...(references.projectionPin ? [references.projectionPin] : []),
-    ...(!generatedSidecar ? [config.sidecar] : [])]}, reader, acceptedRegistry);
+    ...(!generatedSidecar ? [config.sidecar] : [])]}, reader, acceptedRegistry, selectedJSON);
   const projection = JSON.parse(outputs['package-roles.json']);
   if (generatedSidecar) {
     projection.paths.push({...config.sidecar, roles: ['generated final sidecar']});

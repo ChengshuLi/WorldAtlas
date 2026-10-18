@@ -1252,6 +1252,79 @@ test('finalizer authenticates and parses a shared cumulative selected ledger onl
   }finally{reader.read=read;reader.json=json;JSON.parse=parse;crypto.createHash=hash;syncBuiltinESMExports();}
 });
 
+test('finalizer reuses only its owned rows for conservation and normalized projections',t=>{
+  const f=modernFinalizationFixture(t,{mixed:true});
+  f.config.ledger=f.config.selected_ledger;
+  const raw=f.r.read(f.config.selected_ledger),ledger=JSON.parse(raw),registry=f.r.json(f.config.registry);
+  const rowBytes=jsonBytes(ledger.rows),scopeBytes=jsonBytes(ledger.scope_ids);
+  const complete=new Set([rowBytes.toString(),scopeBytes.toString()]);
+  const expected=finalizeDelivery(f.config,f.r),parse=JSON.parse,from=Buffer.from;
+  let traversals=0,visits=0;const allocations=[];
+  JSON.parse=(body,...args)=>{
+    const value=parse(body,...args);
+    if(Buffer.isBuffer(body)&&body.equals(raw))Object.defineProperty(value.rows,Symbol.iterator,{value:function*(){
+      traversals++;for(let i=0;i<this.length;i++){visits++;yield this[i];}
+    }});
+    return value;
+  };
+  Buffer.from=function(value,...args){
+    if(typeof value==='string'&&complete.has(value))allocations.push(Buffer.byteLength(value));
+    return from.call(this,value,...args);
+  };
+  let actual;
+  try{actual=finalizeDelivery(f.config,f.r);}finally{JSON.parse=parse;Buffer.from=from;}
+  assert.deepEqual(actual,expected,'Every emitted finalizer byte is unchanged by observation');
+  assert.deepEqual(f.r.read(f.config.selected_ledger),raw,'The original selected body is unchanged');
+  t.diagnostic(JSON.stringify({authorities:registry.entries.length,rows:ledger.rows.length,traversals,visits,
+    completeCanonicalAllocations:allocations,rowsBytes:rowBytes.length,scopeBytes:scopeBytes.length}));
+  assert.deepEqual(allocations,[],'No complete rows/scope canonical Buffer is needed to compare the owned snapshot to itself');
+  assert.equal(traversals,3,'Two validation traversals plus one normalized collection');
+  assert.equal(visits,3*ledger.rows.length);
+});
+
+test('public package projection cannot claim the finalizer snapshot or bypass permissive serialization',t=>{
+  const f=modernFinalizationFixture(t,{mixed:true}),ledger=f.r.json(f.config.selected_ledger);
+  const config={...f.config,ledger:f.config.selected_ledger};
+  const reader={...f.r,json(pin){return pin.git_blob_oid===config.selected_ledger.git_blob_oid?ledger:f.r.json(pin);}};
+  const held=ledger.rows.find(row=>row.disposition==='awaiting-evidence');
+  assert.ok(held);
+  const iterate=ledger.rows[Symbol.iterator],authorities=f.r.json(config.registry).entries.length;let traversals=0;
+  Object.defineProperty(ledger.rows,Symbol.iterator,{value:function*(){traversals++;yield* iterate.call(this);}});
+  const expected=packageProjection(config,reader);
+  assert.equal(traversals,authorities+3,'Caller-owned normalized views are still collected at every original boundary');
+  traversals=0;
+  held.ignored_metadata={nonfinite:Infinity,omitted:undefined};
+  assert.deepEqual(packageProjection(config,reader,null,ledger),expected,
+    'Ignored metadata keeps JSON.stringify semantics and a public fourth argument grants no capability');
+  assert.equal(traversals,authorities+3);
+  held.ignored_metadata=1n;
+  assert.throws(()=>packageProjection(config,reader,null,ledger),/BigInt/,
+    'Even the same public object still undergoes complete serialization');
+});
+
+test('public package projection still compares different row and scope views and requires current metadata',t=>{
+  const f=modernFinalizationFixture(t),ledger=f.r.json(f.config.selected_ledger);
+  const config={...f.config,ledger:f.config.selected_ledger};
+  for(const mutate of [value=>{value.rows[0].ignored_metadata='changed';},value=>{value.scope_ids[0]='changed';},
+    value=>{delete value.current_rebind;},value=>{delete value.current_targets;}]){
+    const selected=structuredClone(ledger);mutate(selected);let reads=0;
+    const reader={...f.r,json(pin){return pin.git_blob_oid===config.selected_ledger.git_blob_oid
+      ? ++reads===1?ledger:selected:f.r.json(pin);}};
+    assert.throws(()=>packageProjection(config,reader,null,ledger),/does not conserve/);
+  }
+});
+
+test('finalizer retains complete conservation for a distinct caller-owned composed ledger',t=>{
+  const f=modernFinalizationFixture(t,{mixed:true}),json=f.r.json;
+  f.r.json=pin=>{
+    const value=json(pin);
+    if(pin.git_blob_oid===f.config.ledger.git_blob_oid)
+      value.rows.find(row=>row.disposition==='awaiting-evidence').ignored_metadata='changed';
+    return value;
+  };
+  assert.throws(()=>finalizeDelivery(f.config,f.r),/does not conserve/);
+});
+
 
 test('finalizer selected snapshot isolates mutable reader bytes and authenticates anew on the next call',t=>{
   const f=modernFinalizationFixture(t),reader=f.r;
