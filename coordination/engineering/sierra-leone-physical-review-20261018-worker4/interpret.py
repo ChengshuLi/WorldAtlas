@@ -104,8 +104,7 @@ def witness_hits(supports, issues, point):
     return hits, contacts
 
 
-def analyze(data):
-    roster, primary, bysid, byowner, state = validate_scope(data)
+def source_inventory(data, primary):
     original = data['source']
     require(original['crs']['properties']['name'] == 'urn:ogc:def:crs:OGC:1.3:CRS84', 'Primary source CRS changed')
     source = unique(original['features'], lambda f: 'gb:SLE:ADM2:' + f['properties']['shapeID'], 'primary original')
@@ -117,6 +116,13 @@ def analyze(data):
     stages = unique(data['selected_stage'], lambda r: r['target'], 'physical-stage target')
     physical = unique(data['whole_physical']['results'], lambda r: r['target'], 'physical result')
     require(len(stages) == len(physical) == 11 and set(stages) == set(physical), 'Retain all11 physical/stage targets')
+    return source, secondary, byid, selected, stages, physical
+
+
+def analyze(data):
+    roster, primary, bysid, byowner, state = validate_scope(data)
+    source, secondary, byid, selected, stages, physical = source_inventory(data, primary)
+    original = data['source']
     geometries, components, supports, issues = {}, {}, {}, []
     for identity, feature in source.items():
         r = byid[identity]
