@@ -1,0 +1,198 @@
+{
+  "version": 1,
+  "kind": "exact-Kenya-original-owner-key-accounting",
+  "original_cells": 5156,
+  "qualified_cells": 4941,
+  "held_cells": 215,
+  "original_owners": 38,
+  "qualified_components": 38,
+  "literal_constructor_ledger_rows": 38,
+  "class_cells": {
+    "original": {
+      "land": 5090,
+      "inland-water": 66
+    },
+    "qualified": {
+      "land": 4901,
+      "inland-water": 40
+    },
+    "held": {
+      "land": 189,
+      "inland-water": 26
+    }
+  },
+  "per_owner": {
+    "26264": {
+      "original": 14,
+      "qualified": 14
+    },
+    "26141": {
+      "original": 89,
+      "qualified": 89
+    },
+    "26310": {
+      "original": 81,
+      "qualified": 81
+    },
+    "26339": {
+      "original": 56,
+      "qualified": 56
+    },
+    "26302": {
+      "original": 356,
+      "qualified": 287,
+      "held": 69
+    },
+    "26301": {
+      "original": 26,
+      "qualified": 26
+    },
+    "26156": {
+      "original": 110,
+      "qualified": 110
+    },
+    "26291": {
+      "original": 68,
+      "qualified": 8,
+      "held": 60
+    },
+    "26352": {
+      "original": 45,
+      "qualified": 12,
+      "held": 33
+    },
+    "26316": {
+      "original": 21,
+      "qualified": 13,
+      "held": 8
+    },
+    "26139": {
+      "original": 4,
+      "qualified": 3,
+      "held": 1
+    },
+    "26266": {
+      "original": 36,
+      "qualified": 28,
+      "held": 8
+    },
+    "26133": {
+      "original": 22,
+      "qualified": 22
+    },
+    "26326": {
+      "original": 2,
+      "qualified": 2
+    },
+    "26305": {
+      "original": 41,
+      "qualified": 39,
+      "held": 2
+    },
+    "26173": {
+      "original": 2,
+      "qualified": 2
+    },
+    "26332": {
+      "original": 2,
+      "qualified": 2
+    },
+    "26304": {
+      "original": 2,
+      "qualified": 2
+    },
+    "26303": {
+      "original": 6,
+      "qualified": 2,
+      "held": 4
+    },
+    "26114": {
+      "original": 1055,
+      "qualified": 1055
+    },
+    "26153": {
+      "original": 1077,
+      "qualified": 1077
+    },
+    "26315": {
+      "original": 51,
+      "qualified": 51
+    },
+    "26192": {
+      "original": 43,
+      "qualified": 43
+    },
+    "26104": {
+      "original": 31,
+      "qualified": 1,
+      "held": 30
+    },
+    "26158": {
+      "original": 3,
+      "qualified": 3
+    },
+    "26120": {
+      "original": 140,
+      "qualified": 140
+    },
+    "26134": {
+      "original": 60,
+      "qualified": 60
+    },
+    "26157": {
+      "original": 158,
+      "qualified": 158
+    },
+    "26293": {
+      "original": 2,
+      "qualified": 2
+    },
+    "26135": {
+      "original": 15,
+      "qualified": 15
+    },
+    "26159": {
+      "original": 97,
+      "qualified": 97
+    },
+    "26248": {
+      "original": 21,
+      "qualified": 21
+    },
+    "26182": {
+      "original": 53,
+      "qualified": 53
+    },
+    "26143": {
+      "original": 9,
+      "qualified": 9
+    },
+    "26277": {
+      "original": 16,
+      "qualified": 16
+    },
+    "26196": {
+      "original": 46,
+      "qualified": 46
+    },
+    "26128": {
+      "original": 51,
+      "qualified": 51
+    },
+    "26230": {
+      "original": 1245,
+      "qualified": 1245
+    }
+  },
+  "checks": [
+    "Actual original interval owner/key union equals the original requested patch.",
+    "Supported and held owner/key unions are disjoint and exactly equal all originals.",
+    "Actual literal constructor rows equal the supported owner/key patch.",
+    "Every38owner retains original=qualified+held accounting.",
+    "Whole source, physical, ancestry and negative operands unchanged; only positive requested coverage_rows narrowed."
+  ],
+  "accepted_cells": 0,
+  "limits": [
+    "Native qualification is historical source-relative support, not current-owner-zero, selected acceptance, source/legal approval or full package completion."
+  ]
+}
