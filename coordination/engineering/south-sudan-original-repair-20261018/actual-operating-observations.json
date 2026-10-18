@@ -1,0 +1,56 @@
+{
+  "darwin_time_l": [
+    {
+      "phase": "physical-001",
+      "exit_code": 1,
+      "elapsed_wall_seconds": 0.14,
+      "maximum_resident_set_size_bytes": 59736064,
+      "scope_note": "Absolute-config-path admission refused before producer/output"
+    },
+    {
+      "phase": "physical-002",
+      "exit_code": 0,
+      "elapsed_wall_seconds": 7.92,
+      "maximum_resident_set_size_bytes": 469024768,
+      "scope_note": "Actual unchanged stock execution"
+    },
+    {
+      "phase": "foreign-001",
+      "exit_code": 0,
+      "elapsed_wall_seconds": 39.13,
+      "maximum_resident_set_size_bytes": 851329024,
+      "scope_note": "Actual unchanged stock execution"
+    },
+    {
+      "phase": "source-evidence-001",
+      "exit_code": 0,
+      "elapsed_wall_seconds": 4.13,
+      "maximum_resident_set_size_bytes": 465305600,
+      "scope_note": "Actual unchanged stock execution"
+    },
+    {
+      "phase": "native-authority-001",
+      "exit_code": 1,
+      "elapsed_wall_seconds": 6.09,
+      "maximum_resident_set_size_bytes": 461946880,
+      "scope_note": "Actual unchanged stock execution"
+    },
+    {
+      "phase": "native-diagnostic-001",
+      "exit_code": 0,
+      "elapsed_wall_seconds": 5.61,
+      "maximum_resident_set_size_bytes": 521158656,
+      "scope_note": "Actual unchanged stock execution"
+    },
+    {
+      "phase": "native-authority-supported-001",
+      "exit_code": 0,
+      "elapsed_wall_seconds": 5.36,
+      "maximum_resident_set_size_bytes": 461930496,
+      "scope_note": "Actual unchanged stock execution"
+    }
+  ],
+  "limits": [
+    "RSS is an observed process maximum, not a custom memory cap, aggregate process-tree bound or guaranteed capacity."
+  ]
+}
