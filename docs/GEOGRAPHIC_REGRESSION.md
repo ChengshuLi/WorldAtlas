@@ -95,6 +95,35 @@ workflow jobs below invoke the check on exact PR and combined merge commits.
 
 ## Trusted premerge enforcement
 
+### Cold unchanged-input origin metadata
+
+The unchanged-selected-input collector compares current paths and absences on
+both exact commits. Historical full pins may use a same-path current copy only
+when its ordinary mode and complete Git blob OID match. A legitimately changed
+current alias cannot substitute for a source or hierarchy before-image.
+
+When an original descriptor's commit or intermediate tree is absent, the routing
+acquisition resolves that exact commit/path before retrying the descriptor. A
+missing commit is admitted through the exact GitHub commit endpoint and fetched
+with `tree:0`, depth one and no negotiation. Each required nonrecursive tree is
+reconstructed from its complete metadata, verified against its native Git object
+hash, and imported without requesting any child body. Imported commits are also
+checked for native type/hash and the declared root. Immutable trees are cached;
+the existence of a commit never stands in for another path's missing trees.
+Missing, malformed, wrong-hash or nonordinary metadata retains the full checker.
+Current alias equality and the original full-pin identity checks still apply.
+
+The exact PR 2496 base `4d87bbff6dc37dd585dad7be154bec46c35f25e0` and queue tree
+`6ff9eb3d0feeb15982b9b7114a630c8b69172c8b` reproduced the old `ls-tree` decline
+with original bounds metadata absent. Restoring bounds alone exposed two more
+required historical before-images. The complete resolver succeeded from the same
+cold origin boundary with three commits and eight path trees, 38,650 native bytes;
+no scientific leaf or parent-history object was imported. Its ten existing routing
+JSON bodies totaled 614,026 bytes. One public-network observation used 151,484
+bytes of decoded API JSON and took 29.6 seconds; native bytes are not wire bytes,
+and this is not a paired end-to-end speedup measurement. Applicability does not
+revalidate source authority, rerun science or authorize publication.
+
 ### Selected native assignment conservation
 
 The same trusted wrapper also compares `data/ownership-selection.json` when
