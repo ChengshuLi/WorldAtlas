@@ -106,32 +106,45 @@ test('sparse inspection and checkout share the engineering code-only selection',
 
 test('cold stock delivery and selected-check entries resolve imports before ordinary input refusal', t => {
   const {repo, git, manager} = fixture(t);
-  // Real entry/helper bytes, not substitute implementations or a dependency parser.
-  const files = ['scripts/prepare-delivery-handoff.mjs', 'scripts/delivery-handoff-advance.mjs',
-    'scripts/check-effective-geographic-regression.mjs', 'scripts/evidence-quality.mjs',
-    'scripts/selected-reference-metadata.mjs','src/reference-metadata.js',
-    'scripts/geography-prefetch.mjs', 'scripts/native-ownership/native-preparation-guards.mjs',
-    'scripts/package-inputs.mjs', 'scripts/run-geographic-check.py', 'src/native-grid.js', 'src/ownership-codec.js',
-    'coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs',
-    'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs'];
-  for (const name of files) {
+  // Use the stock current code inventory, not a second maintained import list.
+  // Copy JavaScript and the checker's Python sources, without scientific inputs
+  // or installed modules. Both languages are in the focused CI code checkout.
+  const source = path.resolve(import.meta.dirname, '..');
+  const head = execFileSync('git', ['--no-lazy-fetch', '-C', source, 'rev-parse', 'HEAD'],
+    {encoding: 'utf8', env: {...process.env, GIT_NO_LAZY_FETCH: '1'}}).trim();
+  const files = workspaceManager(source).inspect({commit: head}).inputs
+    .filter(({path: name}) => /\.(?:mjs|js|cjs|py)$/.test(name));
+  for (const {path: name} of files) {
     fs.mkdirSync(path.dirname(path.join(repo, name)), {recursive: true});
     fs.writeFileSync(path.join(repo, name), fs.readFileSync(new URL('../' + name, import.meta.url)));
   }
   fs.writeFileSync(path.join(repo, 'package.json'), '{"type":"module"}');
   git('add', '.'); git('commit', '-m', 'actual stock entry fixture');
   const entry = manager.allocate({worker: 'stock-entry', slot: 'review', commit: git('rev-parse', 'HEAD').trim()});
+  const run = name => spawnSync(process.execPath, [name], {cwd: entry.path, encoding: 'utf8', timeout: 10000,
+    env: {PATH: process.env.PATH, HOME: repo, GIT_NO_LAZY_FETCH: '1'}});
   for (const [name, expected] of [['scripts/prepare-delivery-handoff.mjs', /Use prepare-delivery-handoff\.mjs/],
     ['scripts/check-effective-geographic-regression.mjs', /Require immutable input commit/]]) {
-    const result = spawnSync(process.execPath, [name], {cwd: entry.path, encoding: 'utf8', timeout: 10000,
-      env: {PATH: process.env.PATH, HOME: repo, GIT_NO_LAZY_FETCH: '1'}});
+    const result = run(name);
     assert.equal(result.error, undefined);
     assert.equal(result.status, 1, result.stderr);
     assert.match(result.stderr, expected);
     assert.doesNotMatch(result.stderr, /ERR_MODULE_NOT_FOUND|Cannot find module/);
   }
+  // Removing a genuinely imported helper must fail before the ordinary guard.
+  const helper = path.join(entry.path, 'scripts/native-patch-store.mjs'), bytes = fs.readFileSync(helper);
+  fs.unlinkSync(helper);
+  try {
+    const result = run('scripts/prepare-delivery-handoff.mjs');
+    assert.equal(result.error, undefined);
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, /ERR_MODULE_NOT_FOUND/);
+    assert.match(result.stderr, /native-patch-store\.mjs/);
+    assert.doesNotMatch(result.stderr, /Use prepare-delivery-handoff\.mjs/);
+  } finally { fs.writeFileSync(helper, bytes); }
   assert.ok(!fs.existsSync(path.join(entry.path, 'data')));
   assert.ok(!fs.existsSync(path.join(entry.path, '.cache')));
+  assert.ok(!fs.existsSync(path.join(entry.path, 'node_modules')));
   manager.release({worker: 'stock-entry', slot: 'review', token: entry.token});
 });
 
