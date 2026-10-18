@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import {currentRebindResult,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {trustedFixture} from './fixtures/selected-checkpoint.mjs';
 function layout(count=2048,runPartWords=1024){
  const size=count*2+4,bits=Math.ceil(Math.log2(size)),runs=[];
@@ -81,4 +82,19 @@ test('private interval visitor preserves first cleanup failure and releases acti
   await f.api.visitNativeIntervals({state,rows:[0],visit:async({runs})=>{for await(const run of runs)assert.ok(run);}});
   assert.equal(trace.live.size,0);
  }finally{fs.openSync=open;fs.closeSync=close;for(const fd of fds)try{close(fd);}catch{}for(const name of trace.live)remove(name,{recursive:true});trace.restore();f.api.releaseCheckpoint(state);}
+});
+
+test('current rebind recomputes owner and original polygon preservation after generation guard removal',()=>{
+ const polygon=x=>({type:'Polygon',coordinates:[[[x,0],[x+1,0],[x+1,1],[x,0]]]}),base=polygon(0),primitive=polygon(2);
+ const input={baseSelection:{version:1},registry:{version:1},size:16,
+  originalRows:[{component_id:'new',target_id:'A',pixelIndex:1,disposition:'assigned',base_geometry:base,base_geometry_sha256:valueSha(base),geometry:primitive,geometry_sha256:valueSha(primitive)}],
+  originalPatches:[{version:1,kind:'unassigned-native-cells-v1',rows:[{y:3,runs:[[4,5,1]]}]}],
+  currentTargets:[{target_id:'A',pixelIndex:1,geometry:base,geometry_sha256:valueSha(base)}],currentRows:[{y:3,runs:[[0,2,2]]}]};
+ const result=currentRebindResult(input);assert.equal(result.native.assigned_cells,1);
+ assert.deepEqual(result.native.effective_rows,[{y:3,runs:[[0,2,2],[4,5,1]]}]);
+ const occupied=structuredClone(input);occupied.currentRows[0].runs.push([4,5,2]);assert.throws(()=>currentRebindResult(occupied),/already owned/);
+ const rebound=structuredClone(input);rebound.currentTargets[0].pixelIndex=2;assert.throws(()=>currentRebindResult(rebound),/identity differs/);
+ const missing=structuredClone(input);missing.currentRows=[];assert.throws(()=>currentRebindResult(missing),/Missing complete current native row/);
+ const altered=structuredClone(input);altered.currentTargets[0].geometry=polygon(8);altered.currentTargets[0].geometry_sha256=valueSha(altered.currentTargets[0].geometry);
+ assert.throws(()=>currentRebindResult(altered),/loses\/rebuilds an original full polygon group/);
 });

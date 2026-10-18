@@ -33,7 +33,9 @@ test('complete approved original pointsets produce identical native intervals un
  const {nativePolygonIntervals}=await import('../src/native-grid.js');
  const {coverageRow}=await import('../scripts/audit-grid-intervals.mjs');
  const {nativeRuntimeIndex:originalIndex}=await import('../src/native-runtime.js');
- const fixturesRaw=fs.readFileSync('coordination/engineering/additive-native-gap-repair-20261008/accepted-1295-whole-fixtures.json');
+ // Byte-identical copy of coordination/engineering/additive-native-gap-repair-20261008/accepted-1295-whole-fixtures.json.
+ // The whole historical body is pinned below and belongs to the declared test/fixtures checkout boundary.
+ const fixturesRaw=fs.readFileSync(new URL('./fixtures/accepted-1295-whole-fixtures.json',import.meta.url));
  assert.equal(createHash('sha256').update(fixturesRaw).digest('hex'),'acd45e97757c84d9fba135e8eba8059372e09a529234d7fe5e488b2e5890817e');
  const latRaw=gunzipSync(fs.readFileSync('coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz'));
  const size=262166,latitudes=Float64Array.from({length:size},(_,y)=>latRaw.readDoubleLE(y*8));
