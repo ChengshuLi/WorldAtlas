@@ -1,0 +1,37 @@
+{
+  "measured_darwin_time_l": [
+    {
+      "phase": "physical-001",
+      "elapsed_wall_seconds": 5.91,
+      "maximum_resident_set_size_bytes": 301957120,
+      "exit_code": 0
+    },
+    {
+      "phase": "foreign-001",
+      "elapsed_wall_seconds": 45.3,
+      "maximum_resident_set_size_bytes": 691683328,
+      "exit_code": 0
+    },
+    {
+      "phase": "native-authority-001",
+      "elapsed_wall_seconds": 3.36,
+      "maximum_resident_set_size_bytes": 416612352,
+      "exit_code": 1
+    },
+    {
+      "phase": "native-diagnostic-001",
+      "elapsed_wall_seconds": 3.22,
+      "maximum_resident_set_size_bytes": 478396416,
+      "exit_code": 0
+    },
+    {
+      "phase": "native-authority-supported-001",
+      "elapsed_wall_seconds": 3.23,
+      "maximum_resident_set_size_bytes": 428277760,
+      "exit_code": 0
+    }
+  ],
+  "limits": [
+    "Observed process RSS is not a custom memory limit, system capacity guarantee or selected execution allowance."
+  ]
+}
