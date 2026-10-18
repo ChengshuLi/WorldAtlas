@@ -56,6 +56,13 @@ and the trusted assembly receipt, then runs current delivery-smoke consumers.
 Ordinary unchanged-producer selected-data batches do not reinstall or rerun the
 browser suite; full software profiles retain browser qualification. A selected-data
 full-build fallback retains the ordinary build preflight and delivery smoke.
+Its stock sparse checkout retains every declared package input (including complete
+directories and present optional inputs), the reviewed expectations, and the
+coordination execution closure. Verification-only data fixtures are omitted on
+this route: neither retained assembly nor the declared full-build source image
+consumes them, and current emitted smoke reads the selected roles and emitted
+assets. Full and focused regression checkouts continue to retain their declared
+verification fixtures.
 A worker run's workflow commit and built candidate commit are distinct: the authenticated inventory log binds the candidate,
 and the executed workflow must match its captured descriptor. The existing capture
 log records `GITHUB_WORKFLOW_SHA` and the workflow path/ref, including the distinct

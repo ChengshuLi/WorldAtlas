@@ -48,18 +48,20 @@ function checkout(patterns, filenames = names) {
 test('stock non-cone checkout retains exact selected roles and executable helpers without opaque siblings',()=>{
   const retained=checkout(selectedDataCheckoutPatterns(definition,entries(),expectations));
   assert.deepEqual(retained.sort(), ['README.md','.github/package-inputs.json',expectations,
-    ...definition.inputs.slice(1),...definition.verification_paths,
+    ...definition.inputs.slice(1),
     'coordination/engineering/unconsumed/helper.py','coordination/engineering/unconsumed/package.json',
     'coordination/engineering/unconsumed/executable.bin'].sort());
 });
 
 for (const namespace of ['research/geography/','coordination/engineering/','data/']) {
-  for (const role of ['inputs','verification_paths']) test(`stock selection preserves declared ${namespace} ancestor in ${role}`,()=>{
+  for (const role of ['inputs','verification_paths']) test(`stock selection ${role==='inputs'?'preserves':'ignores verification-only'} ${namespace} ancestor in ${role}`,()=>{
     const prefix=namespace.split('/')[0]+'/';
     const policy={...definition,[role]:[...definition[role].filter(name=>!name.startsWith(prefix)),prefix]};
     if(role==='inputs')policy.inputs=policy.inputs.filter(name=>!name.startsWith(prefix)||name===prefix);
     const retained=checkout(selectedDataCheckoutPatterns(policy,entries(),expectations));
-    for(const name of names.filter(name=>name.startsWith(namespace)))assert(retained.includes(name),name);
+    if(role==='inputs')for(const name of names.filter(name=>name.startsWith(namespace)))assert(retained.includes(name),name);
+    else assert.deepEqual(retained,checkout(selectedDataCheckoutPatterns(definition,entries(),expectations)),
+      'A verification-only ancestor does not expand selected execution inputs');
   });
 }
 
