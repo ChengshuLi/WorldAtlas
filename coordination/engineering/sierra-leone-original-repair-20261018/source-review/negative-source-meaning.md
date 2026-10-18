@@ -1,0 +1,11 @@
+# Whole foreign negative-source meaning
+
+The genuine complete screen retained all366 foreign families/73,549 whole features. There are73,520 raw disjoint features,26 contacts across whole GIN ADM1/2 and LBR ADM1/2, and3 explicit retained Fiji periodic cases. The four complete touching families remain negative operands; they are not reduced to contact records or reinterpreted as positive provider precedence.
+
+Actual unchanged Guinea archives were reused from immutable `c0121db15fd8178bab4a56734fa1a4efdef2ecfb`; actual unchanged Liberia archives were reused from worker4's retained upstream9469 LFS-bound ZIP acquisition. This worker independently read each actual ZIP's meta/PRJ and visually inspected each actual license image. Whole archives are retained here with their own SHA-256 and custody references. No new acquisition or geometry transformation was needed.
+
+GIN ADM1 meta names Administrative regions and governate; ADM2 names prefecture. Both declare2017 World Food Programme/OCHA ROWCA, CC BY3.0 IGO and geographic WGS84 degrees. The actual shared HDX dataset images name WFP/OCHA, show August3 2017–February16 2021 and update July25 2019, and declare CC BY-IGO without a visible numeric version. Version3.0 is from meta. Original macOS resource forks remain inside each whole ZIP and are not interpreted as license text/images.
+
+LBR ADM1/2 meta names Counties/Districts respectively,2021 UNMIL/OCHA ROWCA, CC BY3.0 IGO and WGS84 degrees. Actual dataset images name UNMIL/OCHA, show December27 2017–March18 2021 and update February11 2021, and declare CC BY-IGO without a visible numeric version. Their visible methodology describes UNMIL acquisition with OCHA enhancement. Retained historical replacement/cleaning notes are not a contemporary legal effective-date or boundary-completeness assertion. Version3.0 is from meta.
+
+Those mixed vintages and rights declarations remain distinct from Sierra Leone's2014/2017 products and from the original physical point support. They establish retained provenance/declared terms for the scientific operands, not current sovereign authority or independent legal reuse adjudication. Full original negative families and inherited source uncertainties remain mandatory.

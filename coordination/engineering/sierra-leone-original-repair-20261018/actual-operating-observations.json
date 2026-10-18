@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "actual_hardware_memsize_bytes": 8589934592,
+  "completed_phases": {
+    "physical-002": {
+      "exit": 0,
+      "external_elapsed_seconds": 5.88,
+      "darwin_maximum_resident_set_bytes": 340066304,
+      "stock_elapsed_seconds": 5.241242874995805
+    },
+    "foreign-001": {
+      "exit": 0,
+      "external_elapsed_seconds": 56.34,
+      "darwin_maximum_resident_set_bytes": 683163648,
+      "stock_elapsed_seconds": 55.14169737500001
+    },
+    "native-authority-001": {
+      "exit": 0,
+      "external_elapsed_seconds": 1.92,
+      "darwin_maximum_resident_set_bytes": 363134976,
+      "stock_elapsed_seconds": 1.7855503750000001
+    }
+  },
+  "limits": [
+    "No custom budget/heap flags/resource framework; unchanged stock checks.",
+    "Runtime-launcher first refusal and descriptive periodic001count error preserved and superseded explicitly.",
+    "Git2.39 capability warnings and guarded stock fallback retained; no network fetch or guard changes.",
+    "0accepted cells; no selected-consumer or map acceptance."
+  ]
+}

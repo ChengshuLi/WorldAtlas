@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "kind": "exact-Sierra-Leone-original-owner-key-accounting",
+  "original_cells": 3878,
+  "qualified_cells": 3878,
+  "held_cells": 0,
+  "original_owners": 11,
+  "qualified_components": 11,
+  "literal_constructor_ledger_rows": 11,
+  "all_original_source_atoms": 11,
+  "original_land_cells": 3878,
+  "original_inland_water_cells": 0,
+  "qualified_land_cells": 3878,
+  "qualified_inland_water_cells": 0,
+  "per_owner": [
+    {
+      "pixelIndex": 39709,
+      "name": "Kailahun",
+      "original_cells": 140,
+      "qualified_cells": 140,
+      "held_cells": 0
+    },
+    {
+      "pixelIndex": 39710,
+      "name": "Pujehun",
+      "original_cells": 17,
+      "qualified_cells": 17,
+      "held_cells": 0
+    },
+    {
+      "pixelIndex": 39711,
+      "name": "Bombali",
+      "original_cells": 207,
+      "qualified_cells": 207,
+      "held_cells": 0
+    },
+    {
+      "pixelIndex": 39712,
+      "name": "Moyamba",
+      "original_cells": 181,
+      "qualified_cells": 181,
+      "held_cells": 0
+    },
+    {
+      "pixelIndex": 39715,
+      "name": "Western Area Rural",
+      "original_cells": 286,
+      "qualified_cells": 286,
+      "held_cells": 0
+    },
+    {
+      "pixelIndex": 39716,
+      "name": "Kenema",
+      "original_cells": 10,
+      "qualified_cells": 10,
+      "held_cells": 0
+    },
+    {
+      "pixelIndex": 39717,
+      "name": "Western Area Urban",
+      "original_cells": 117,
+      "qualified_cells": 117,
+      "held_cells": 0
+    },
+    {
+      "pixelIndex": 39718,
+      "name": "Kambia",
+      "original_cells": 353,
+      "qualified_cells": 353,
+      "held_cells": 0
+    },
+    {
+      "pixelIndex": 39719,
+      "name": "Bonthe",
+      "original_cells": 1711,
+      "qualified_cells": 1711,
+      "held_cells": 0
+    },
+    {
+      "pixelIndex": 39720,
+      "name": "Port Loko",
+      "original_cells": 770,
+      "qualified_cells": 770,
+      "held_cells": 0
+    },
+    {
+      "pixelIndex": 39722,
+      "name": "Koinadugu",
+      "original_cells": 86,
+      "qualified_cells": 86,
+      "held_cells": 0
+    }
+  ],
+  "checks": {
+    "original_equals_requested_patch_equals_actual_constructor_by_every_key_and_owner": true,
+    "no_added_removed_reassigned_or_duplicate_original_keys": true,
+    "no_diagnostic_or_narrowing": true
+  },
+  "accepted_cells": 0,
+  "limits": [
+    "Historical source-native point support only; current legal/source completeness and selected delivery remain unproved.",
+    "WesternRural286+WesternUrban117 retain751unknowns;1062unchanged."
+  ]
+}
