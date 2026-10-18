@@ -62,7 +62,7 @@ for name in tuple('data/' + n for n in js('data/world-index.json')['parts']):
     product = js(name)
     assert product['type'] == 'FeatureCollection'
     for feature in product['features']:
-        if feature['properties']['reference_owner'] == 'Guinea':
+        if feature['properties'].get('reference_owner') == 'Guinea':
             whole_country.append(feature)
         if feature['id'] in {r['id'] for r in owners.values()}:
             assert feature['id'] not in selected
