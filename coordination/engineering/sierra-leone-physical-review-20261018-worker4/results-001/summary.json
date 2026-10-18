@@ -1,0 +1,47 @@
+{
+  "package_id": "gb-SLE-ADM2--physical-interpretation",
+  "evaluation_commit": "75861b9784f75b7894bfc51fa0419f40f966157d",
+  "original_cells": 1213,
+  "original_intervals": 613,
+  "original_owners": [
+    39710,
+    39712,
+    39715,
+    39717,
+    39718,
+    39719,
+    39720
+  ],
+  "source_relative_cells": 1213,
+  "complete_primary_features": 14,
+  "complete_secondary_features": 4,
+  "complete_primary_components": 95,
+  "retained_whole_physical_targets": 11,
+  "all_physical_issue_witnesses_retained": 1,
+  "question_groups": 78,
+  "observed_counts": {
+    "disposition:supported-limited-source-interpretation": 1213,
+    "observation:original-source-backed-outside-mapped-L1": 1213,
+    "physical:outside_mapped_L1_context": 1213,
+    "physical_issue_contact_cells": 0,
+    "selected_target_contact_cells": 0,
+    "base_occupied_cells": 0,
+    "accepted_additive_occupied_cells": 0,
+    "source_boundary_contact_cells": 0
+  },
+  "native_authority_created": false,
+  "native_qualification_executed": false,
+  "accepted_repair_credit": 0,
+  "runtime": {
+    "python": "3.12.14",
+    "shapely": "2.1.2",
+    "geos": "3.13.1"
+  },
+  "limits": [
+    "Candidate-centre binary64/GEOS diagnostic, not a native raster or authority qualification.",
+    "Existing Cloud613interval extraction is reused literally. No local extraction or independent reconstruction.",
+    "Whole11-target physical evidence is reused unchanged; heterogeneous GSHHG dates and source-relative limits remain.",
+    "Historical4ADM1/14ADM2 context, all zero-candidate competitors, current16 versus14 and open#751 remain distinct.",
+    "No source, geometry, hierarchy, native asset, selected composition, legal title or accepted repair is changed."
+  ]
+}

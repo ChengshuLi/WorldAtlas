@@ -1,0 +1,32 @@
+# Sierra Leone PR #2480 interpretation review
+
+**Disposition:** accept the limited interpretation claims below at exact PR head `e34ec029481fc3672408b59d96cb65002cd3d470` (PR #2480, draft; reviewed science head `ef4a3a649d1fda7deacf87e52dc1efd0374f35d8`). This is acceptance of the review-only source/result interpretation, not native repair authority or physical truth.
+
+## Claims supported by retained evidence
+
+The original `gb-SLE-ADM2--physical-interpretation` scope contains 1,213 source-relative cells, 613 ordered original intervals, and seven original owners. The completed result retains 614 internal pieces and 78 distinct source/component/outcome question groups. The independent exact-head science review reports that the interval headers and their source-index arrays remain unchanged and ordered; the partition conserves all original keys without loss, duplication, or owner reassignment; each key's recorded evidence agrees with its part and question signature; and question bounds are based on recorded centre coordinates. The exact-head refresh review confirms the full 39-file evidence set (3,205,443 bytes) was byte-identical from the reviewed science head to `e34ec…`.
+
+The per-centre evidence supports the narrow finding that each of the 1,213 original-reference cells belongs to one component of its intended historical ADM2 source and contacts only the retained `outside_mapped_L1_context` support. As recorded, these centres have no mapped-land/inland-water, hierarchy/reconstruction/contradiction, source-boundary, physical-issue, or selected-continuous-target contacts. This is a source-vintage/mapping disagreement observation at the recorded centres. It does not establish that any cell is ocean, river, estuary, dry land, legally excluded, or physically misrepresented, and it does not identify the cause.
+
+The 78 questions preserve source/component/outcome signatures, per-key observations, interval references, and exact centre bounds. The completed independent assessment specifically checked the full key set and says different per-key facts are not merged under an undifferentiated unknown. I therefore support the claim that unresolved physical nature/cause is preserved by key/question while the limited source interpretation remains available. The result is not a blanket unknown disposition.
+
+The retained selected-state observation is explicitly evaluated against frozen baseline `75861b9784f75b7894bfc51fa0419f40f966157d`: base owner, accepted additive owner, and effective owner are each zero for these keys, with no conflicts. It also retains all 14 historical SLE selected primary targets. This must remain a baseline-specific recorded observation, not a current-baseline finding or selected-composition decision.
+
+## Qualifications that remain part of the result
+
+- **#751 remains open and separate.** Western Area Rural/Urban identity, roles, their shared parent, and completeness against the 14-member historical source versus current 16-unit OCHA source remain unresolved. This packet does not resolve that issue or substitute the current 16 units.
+- Preserve the historical source roles/vintages (Government/OCHA Province 2014 and Districts 2017), the original-versus-selected geometry differences, heterogeneous physical-source vintages/precision, and the limits of centre-based binary64/GEOS diagnostics versus the native raster kernel.
+- Preserve source-specific rights and attribution limits, including the distinct IGO metadata grants and ADM2 dataset image. No blanket redistribution permission or rights waiver follows. Keep corrected #784/#860 provenance separate and do not treat #1062's overwrite-prone verifier as executed.
+- The evidence establishes no native qualification, repair credit, accepted correction, statutory boundary, title, or physical classification. The issue acceptance is the original queue's allowance for an interval disposition consisting of a reusable limited source interpretation or an explicit unresolved question; it does not make physical uncertainty equivalent to an unsupported finding.
+
+## Evidence pins inspected
+
+- Exact PR head and refresh linkage: `worker4-sle-physical-review/frozen-published-review-handoff.json` records draft PR #2480 at `e34ec029…`, refreshed from accepted base `7e78edd0dba65dd6d904e04186f0b6b36d2a4ba6`, with reviewed science head `ef4a3a649d1fda7deacf87e52dc1efd0374f35d8`.
+- Substantive completed review: `worker6-sle-physical-review/final-exact-head-source-result-review.md`, SHA-256 `667729d0c6da36935af112e99958db2745093a7a09b30940acfe56d6869613a2`.
+- Independent key/partition assessment: `worker6-sle-physical-review/final-actual-interval-question-observations.json`, SHA-256 `190eff78ed59e8115408101a8c15989a05bbf3d91e8f1e1d66e99e825f6a87ee`; records 1,213 cells, 613 intervals, 614 parts, 78 groups, exact conservation, `outside_mapped_L1_context only`, and the frozen-75861 owner-state limit.
+- Exact-head refresh review: `worker6-sle-physical-review/accepted7e78-refresh-review.md`, SHA-256 `a5fc98062314c653bcdec9956acfc597513f3476b5164d30530fcdaede1a5c24`; confirms all 39 reviewed owned files unchanged at the PR head and no other candidate changes.
+- Refresh byte proof: `worker4-sle-physical-review/accepted7e78-refresh-byte-proof.json`; includes the exact result-object pins. In particular `results-001/cell-observations.json` SHA-256 `849a238f83e1660bb49cef6802704a6debf4df26d57bd7dd2613d6610715c0ae`, `results-001/questions.json` SHA-256 `203191f8f3d5faeb427f5b1b1dd0c2fe763cb07b8801ddc9dab8a3c7def5f863`, and `results-001/interval-assessments.json` SHA-256 `daa8a524c703ed29edd61554297c6bcbb9a57705aa174feabc4c1e96d6e2af0d`.
+- Retained original interval artifact: `sle-cloud-retained-extraction/unpacked/sle-retained-extraction-handoff/intervals/block-030.json.gz`, SHA-256 `534192593d9caba16e86286e888e8384cfdadf35f5372d6536b31139565001a0`; its package SHA-256 is `3d63642a25356435c2190094367a1292085893ee56fad451fe0018dabd7cdad1`. It is the earlier lawful Cloud extraction, not a local extractor rerun or reconstruction.
+- Original issue acceptance/limits: `worker4-sle-physical-review/issue751.json`, SHA-256 `1e3e91b2aae475665feb8aca5f6bccd4c8c9f18fafdf2cb4fd061249aed2a364`; its body defines the separate two-subject Western Area scope and the current-16 versus pinned-14 question.
+
+This review is bounded to interpretation and record-scope assessment. It does not rerun source, physical, native, geometry, or controls work and does not modify the repository or GitHub.
