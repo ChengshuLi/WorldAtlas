@@ -1,0 +1,109 @@
+{
+  "kind": "held-cell-exception-controls-fixture",
+  "status": "observations_only; no acceptance or repair credit",
+  "scope": {
+    "original_keys": 3,
+    "accepted": 0,
+    "pending_independent_review": 3,
+    "otherwise_resolved": 0
+  },
+  "cases": [
+    [
+      "LBR",
+      126219,
+      124938,
+      26987,
+      "gb:LBR:ADM2:62588387B45934307689461",
+      "land",
+      "mapped_land_support",
+      "territorial_exclusion_cells"
+    ],
+    [
+      "EGY",
+      108405,
+      156464,
+      18676,
+      "gb:EGY:ADM2:37247803B50825531526089",
+      "land",
+      "mapped_land_support",
+      "territorial_exclusion_cells"
+    ],
+    [
+      "EGY",
+      109906,
+      156358,
+      18637,
+      "gb:EGY:ADM2:37247803B39887765706268",
+      "land",
+      "mapped_land_support",
+      "territorial_exclusion_cells"
+    ]
+  ],
+  "package_partitions": [
+    [
+      "LBR",
+      2026,
+      2025,
+      1,
+      {
+        "land": 2026
+      },
+      {
+        "land": 2025
+      },
+      {
+        "land": 1
+      }
+    ],
+    [
+      "EGY",
+      19065,
+      19063,
+      2,
+      {
+        "land": 18591,
+        "inland-water": 474
+      },
+      {
+        "land": 18589,
+        "inland-water": 474
+      },
+      {
+        "land": 2
+      }
+    ]
+  ],
+  "reproduction": {
+    "query_count": 18,
+    "all_retained_hit_lists_reproduced": true,
+    "first_query": [
+      "LBR selected Buu-Yao base footprint (target.base_geometry)",
+      126219,
+      124938,
+      124939,
+      26987,
+      []
+    ]
+  },
+  "source_commits": [
+    "07c74ff101d4ab5e679255ed85c402356aa54a42",
+    "21984e9ec4ec7370bc807e2da23cea2228747698",
+    "252f2aa1e6309b6990985dec73611d6df0e11c70",
+    "427cf5eb2d5004b0b65ffc34bf33d7fbbb6e44bc",
+    "5b32388df0501b013ac9a3ba97864932db493d59",
+    "b991e2295c50a64e49d4f92c76c37bd95c869b63",
+    "f988605570667858062905c04c31231564882d11"
+  ],
+  "contract_artifacts": [
+    [
+      "package.json",
+      3959,
+      "56770ca264a899b87694aadb5acaee3c3a1c26a51856897061c29df9196a9cd1"
+    ],
+    [
+      "liberia-original-package-contract.json",
+      4802,
+      "93f427dd8b612b3947a5137ff6e019772aa63fda0e6591a9d7f9907f57a04402"
+    ]
+  ]
+}
