@@ -1199,3 +1199,37 @@ for(const [name,mutate,expected] of [
   assert.deepEqual(nativeLiteral(state.ledger),f.ledger);
  } finally {f.api.releaseCheckpoint(state);}
 });
+
+
+test('private admitted component equality does not reread native intervals to rehash old rows',async t=>{
+ const {f,initial,state}=await qualifiedNativeLedger(t);
+ const candidate=candidateProducts(f),reader=new f.native.ImmutableReader(f.root,candidate,{invocation:f.reader.invocation});
+ const read=fs.readSync,limit=Error.stackTraceLimit;let repeatedReads=0;
+ Error.stackTraceLimit=60;
+ fs.readSync=function(...args){
+  const stack=new Error().stack;
+  if(stack.includes('normaliseTransitionSelection')&&stack.includes('canonicalDigest')
+    &&stack.includes('at intervals'))repeatedReads++;
+  return Reflect.apply(read,this,args);
+ };
+ try{
+  const transition=await f.api.qualifyTransition({state,reader});assert.equal(transition.available,true);
+  assert.deepEqual(nativeLiteral(transition.candidate.ledger),f.ledger);
+  assert.equal(repeatedReads,0,'Old row equality must use the exact private admitted component digest');
+ }finally{fs.readSync=read;Error.stackTraceLimit=limit;f.api.releaseCheckpoint(initial);}
+});
+
+test('private component identities reject public digest claims and foreign or expired sessions',async t=>{
+ const {f,initial,state}=await qualifiedNativeLedger(t),ledger=structuredClone(f.ledger);
+ const row=ledger.rows.find(row=>row.representation==='native-cells');
+ const oldDigest=valueSha(row);row.source_receipt_sha256='0'.repeat(64);row.canonical_sha256=oldDigest;
+ const candidate=candidateProducts(f,{ledger});
+ const reader=new f.native.ImmutableReader(f.root,candidate,{invocation:f.reader.invocation});
+ try{
+  await assert.rejects(f.api.qualifyTransition({state,reader}),/Native source-target component has missing\/foreign fields/);
+  assert.deepEqual(nativeLiteral(state.ledger),f.ledger,'Rejected digest claims cannot alter baseline stores');
+  const foreign=new f.native.ImmutableReader(f.root,candidate);
+  await assert.rejects(f.api.qualifyTransition({state,reader:foreign}),/Foreign or expired checkpoint invocation/);
+ }finally{f.api.releaseCheckpoint(initial);}
+ await assert.rejects(f.api.qualifyTransition({state,reader}),/Missing private qualified selected checkpoint/);
+});

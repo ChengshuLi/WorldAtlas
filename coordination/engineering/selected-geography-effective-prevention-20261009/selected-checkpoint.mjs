@@ -221,9 +221,15 @@ async function storedProduct(session,reader,p,domain,ledger) {
   (session.stores??=new Set()).add(store);
   if(ledger==='envelope'||ledger==='custody')return store.metadata;
   const wrap=row=>Object.freeze({y:row.y,runs:nativeSequence(row.count,()=>store.intervals(row))});
-  const componentView=component=>Object.freeze({...store.componentMetadata(component),
-    ...(component.hasNativeRows?{native_rows:nativeSequence(component.rowCount,
-      function*(){for(const row of store.componentRows(component))yield wrap(row);})}:{})});
+  const componentView=component=>{
+    const view=Object.freeze({...store.componentMetadata(component),
+      ...(component.hasNativeRows?{native_rows:nativeSequence(component.rowCount,
+        function*(){for(const row of store.componentRows(component))yield wrap(row);})}:{})});
+    // The parser authenticated every byte and computed this exact canonical
+    // component identity. Only this invocation-owned immutable view may use it.
+    (session.componentIdentities??=new WeakMap()).set(view,{store,sha256:component.canonical_sha256});
+    return view;
+  };
   const product=Object.freeze(ledger?{...store.metadata,[ledger==='constructor'?'ledger_rows':'rows']:nativeSequence(store.componentCount,
     function*(){for(const component of store.componentEntries())yield componentView(component);},
     {entryAt:ordinal=>componentView(store.componentAt(ordinal))})}:
@@ -297,7 +303,14 @@ async function readSelection(session, reader) {
 // parsed into its own immutable stores. Exact old rows inherit intrinsic row
 // semantics; new/changed rows still use the complete public validator. Preserve
 // original products and defer append-only rejection until after cold eligibility.
-function normaliseTransitionSelection(state, selected) {
+function sameAdmittedComponent(session,before,after) {
+  if(after===undefined)return false;
+  const left=session.componentIdentities?.get(before),right=session.componentIdentities?.get(after);
+  demand(left&&right&&session.stores.has(left.store)&&session.stores.has(right.store),
+    'Missing live private component identity');
+  return left.sha256===right.sha256;
+}
+function normaliseTransitionSelection(session,state, selected) {
   const {ledger,registry}=selected;
   demand(isNativeSequence(ledger.scope_ids)&&isNativeSequence(ledger.rows)
     && ledger.scope_ids.length===ledger.rows.length,'Incomplete complete ledger scope');
@@ -315,7 +328,7 @@ function normaliseTransitionSelection(state, selected) {
     .map(entry=>entry.authority_sha256));
   const unchangedRows=new Set();
   for(const row of state.ledger.rows){const key=repairComponentKey(row);
-    if(same(row,candidateRows.get(key)))unchangedRows.add(key);}
+    if(sameAdmittedComponent(session,row,candidateRows.get(key)))unchangedRows.add(key);}
   const residual=repairRowsIndex(ledger.rows,{include:row=>!unchangedRows.has(repairComponentKey(row))
     ||!unchangedAuthorities.has(row.authority_sha256)});
   // Only selected residual ordinals are read; index.values() would rescan all
@@ -1048,7 +1061,7 @@ export function releaseCheckpoint(state) {
   const session = proof.session; session.closed = true;
   try{closeStores(session);}finally{
     for (const handle of session.handles) states.delete(handle);
-    session.handles.clear(); session.executingPolicy=null; session.productStores=null;
+    session.handles.clear(); session.executingPolicy=null; session.productStores=null; session.componentIdentities=null;
   }
 }
 
@@ -1442,7 +1455,7 @@ export async function qualifyTransition({state,reader}) {
   try {
 
     const selected=await readSelectionProducts(session,reader);
-    const {oldRows,rowsPreserved,authoritiesPreserved}=normaliseTransitionSelection(state,selected);
+    const {oldRows,rowsPreserved,authoritiesPreserved}=normaliseTransitionSelection(session,state,selected);
     supported(same(nativeBaseSelection(selected.selection),state.baseSelection), 'Selected native/source/domain/owner base changed');
     const metadata=projectCheckpointMetadata(state,reader,selected.selection);
     const masked = new Set([...maskedLogicalSources(state.certificate,baseProof.physicalPaths),...metadata.paths]);
