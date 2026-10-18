@@ -20,6 +20,7 @@ function transition(a,b) {
 test('one authenticated rule admits repeated cumulative replacement and append-only unchanged policy',()=>{
  const a=fixture(),b=fixture('second'),c=fixture('third'),first=transition(a,b);
  assert.deepEqual(first.run().removed,a.roles.map(p=>p.path));
+ assert.equal(first.run(first.current,{...first.options,priorEntry:n=>{const p=first.options.priorEntry(n);return {path:n,mode:p.mode,oid:p.git_blob_oid}}}).removed.length,4);
  const next=transition({...b,definition:first.current},c);assert.equal(next.run().removed.length,4);
  assert.deepEqual(admitSelectedPackageDeclarations(first.current,first.current).additions,[]);
 });
@@ -34,5 +35,7 @@ test('retirement binds exact old selector/body and every removed mode/OID/size; 
  assert.throws(()=>t.run(t.current,{...t.options,priorSidecarRaw:Buffer.from('{}')}));
  assert.throws(()=>t.run(t.current,{...t.options,selection:{additive_release:{...a.selection.additive_release,sha256:'0'.repeat(64)}}}));
  for(const field of ['mode','git_blob_oid','bytes'])assert.throws(()=>t.run(t.current,{...t.options,priorEntry:n=>({...t.options.priorEntry(n),[field]:field==='bytes'?999:'0'})}));
+ for(const value of [null,undefined,NaN,Infinity,-1]) for(const field of ['bytes','size'])
+  assert.throws(()=>t.run(t.current,{...t.options,priorEntry:n=>({...t.options.priorEntry(n),[field]:value})}));
  assert.throws(()=>t.run(t.current,{...t.options,currentPaths:[a.roles[2].path]}),/remains a current/);
 });
