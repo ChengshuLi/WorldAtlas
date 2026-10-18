@@ -833,3 +833,66 @@ test('coordinate grouping reads indexed additions proportionally to components r
  const result=deriveCoordinateDelta({certificate,oldAdditions:[],additions,selection:{}});
  assert.deepEqual(result.changedIds,features.map(f=>f.id));assert(visits<=8*values.length,'repeated complete addition scans: '+visits);
 });
+
+test('genuine dense-ring source survives completed authority and numerical comparison through coordinate cursors',async t=>{
+ const sourceFeatures=[feature('A',0),feature('B',1),feature('C',5)],ring=[];
+ const corners=[[0,0],[.8,0],[.8,.8],[0,.8]];
+ for(let edge=0;edge<4;edge++)for(let i=0;i<128;i++){
+  const a=corners[edge],b=corners[(edge+1)%4],q=i/128;ring.push([a[0]+(b[0]-a[0])*q,a[1]+(b[1]-a[1])*q]);
+ }ring.push(ring[0]);sourceFeatures[0].geometry={type:'Polygon',coordinates:[ring]};
+ const f=await trustedFixture(t,{nativeAppend:true,sourceFeatures}),baseline=await f.api.qualifyCheckpoint({reader:f.reader});
+ assert.equal(baseline.available,true);
+ const next=await appendNativeAuthority(f,{completedConstructor:true});
+ const reader=new f.native.ImmutableReader(f.root,next.candidate,{invocation:f.reader.invocation});
+ const transition=await f.api.qualifyTransition({state:baseline.state,reader});assert.equal(transition.available,true);
+ assert.deepEqual(nativeLiteral(transition.candidate.patch.rows),next.patch.rows);
+ assert.deepEqual(nativeLiteral(transition.candidate.ledger),next.ledger);
+ fs.writeFileSync(path.join(f.root,'scripts/selected-checkpoint-native.mjs'),fs.readFileSync('scripts/selected-checkpoint-native.mjs'));
+ const consumer=await import(pathToFileURL(path.join(f.root,'scripts/selected-checkpoint-native.mjs')));
+ const numerical=await consumer.compareSelectedCheckpointNative({transition});assert.equal(numerical.status,'no-new-native-loss');
+});
+
+test('legacy custody admits ignored nonfinite metadata and validates only consumed authority fields',async t=>{
+ const f=await trustedFixture(t),original=JSON.parse(fs.readFileSync(path.join(f.root,'accepted/custody.json')));
+ const retained=original.complete_cold_custody[0];
+ // Force both the record roster and its ignored nested coordinates across the
+ // spill boundary. Earlier records are authentic JSON but are not selected.
+ const ignored=Array.from({length:40},(_,i)=>({facts:{selected_commit:String(i)},coordinates:Array(40).fill(Infinity)}));
+ const text=JSON.stringify({...original,complete_cold_custody:[...ignored,retained]}).replaceAll('null','1e400');
+ assert.equal(JSON.parse(text).complete_cold_custody[0].coordinates[0],Infinity);
+ f.save('accepted/custody.json',Buffer.from(text));const version=f.commit();f.rootRow.custody=f.pin('accepted/custody.json',version);
+ f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[f.rootRow]});f.commit();
+ const result=await f.api.qualifyCheckpoint({reader:f.reader});assert.equal(result.available,true);
+ assert.deepEqual(nativeLiteral(result.state.ledger),f.ledger);
+});
+
+test('legacy custody keeps malformed syntax ahead of later detached-authority validation',async t=>{
+ const f=await trustedFixture(t),text='{"complete_cold_custody":[],"ignored":[1,]}';
+ assert.throws(()=>JSON.parse(text),SyntaxError);
+ f.save('accepted/custody.json',Buffer.from(text));const version=f.commit();f.rootRow.custody=f.pin('accepted/custody.json',version);
+ f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[f.rootRow]});f.commit();
+ await assert.rejects(f.api.qualifyCheckpoint({reader:f.reader}),SyntaxError);
+});
+
+for(const mode of ['valid','footer','inflate','decoded hash','syntax','syntax and decoded hash'])test('legacy gzip custody preserves authenticated refusal order: '+mode,async t=>{
+ const {gzipSync,gunzipSync}=await import('node:zlib');const {createHash}=await import('node:crypto');
+ const digest=bytes=>createHash('sha256').update(bytes).digest('hex');const f=await trustedFixture(t);
+ const os=await import('node:os'),spills=()=>fs.readdirSync(os.tmpdir()).filter(name=>name.startsWith('checkpoint-custody-')).sort();
+ const before=spills();t.after(()=>assert.deepEqual(spills(),before));
+ const body=mode.startsWith('syntax')?Buffer.from('{"complete_cold_custody":[]} trailing'):fs.readFileSync(path.join(f.root,'accepted/custody.json'));
+ const encoded=gzipSync(body);
+ if(mode==='footer')encoded.writeUInt32LE(body.length+1,encoded.length-4);
+ if(mode==='inflate')encoded[0]=0;
+ f.save('accepted/custody.json.gz',encoded);const version=f.commit();
+ f.rootRow.custody={...f.pin('accepted/custody.json.gz',version),decoded_bytes:body.length,decoded_sha256:mode.includes('decoded hash')?'0'.repeat(64):digest(body)};
+ f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[f.rootRow]});f.commit();
+ if(mode==='valid'){assert.equal((await f.api.qualifyCheckpoint({reader:f.reader})).available,true);return;}
+ const eager=()=>{
+  assert(encoded.length>=18&&encoded.readUInt32LE(encoded.length-4)===body.length,'Checkpoint gzip declared size differs before inflate');
+  const decoded=gunzipSync(encoded,{maxOutputLength:body.length});
+  assert(decoded.length===body.length&&digest(decoded)===f.rootRow.custody.decoded_sha256,'Checkpoint whole decoded output is corrupt');
+  return JSON.parse(decoded);
+ };
+ let expected;try{eager();}catch(error){expected=error;}assert(expected);
+ await assert.rejects(f.api.qualifyCheckpoint({reader:f.reader}),error=>mode==='syntax'?error instanceof SyntaxError:error.message===expected.message);
+});
