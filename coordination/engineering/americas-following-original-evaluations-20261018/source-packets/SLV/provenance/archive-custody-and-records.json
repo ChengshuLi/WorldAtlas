@@ -1,0 +1,1714 @@
+{
+  "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/sourceData/gbOpen/SLV_ADM2.zip",
+  "git_ref": "9469f09",
+  "archive_bytes": 709288,
+  "archive_sha256": "e3d0af021ea4a3c4e794bd49c9c6b69030d8f00b18a122b8457f9f2fa9cc7652",
+  "archive_lfs_oid_matches": true,
+  "members": [
+    {
+      "name": "License.png",
+      "bytes": 438591,
+      "sha256": "3b61f8b93960825cf5c691f090d73ff08229b3144a8dc094ff6be2936d74c394"
+    },
+    {
+      "name": "meta.txt",
+      "bytes": 474,
+      "sha256": "554d42238ca4e44b37f34c1caa190e55f7dc68021d0c6ed8ba30e9d78ee93f48"
+    },
+    {
+      "name": "SLV_ADM2.cpg",
+      "bytes": 5,
+      "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+    },
+    {
+      "name": "SLV_ADM2.dbf",
+      "bytes": 27570,
+      "sha256": "18fdc1bc9d205fdd05ca0c0666b46d3fe17dd9f80abdd28f00a53fdd718b9756"
+    },
+    {
+      "name": "SLV_ADM2.prj",
+      "bytes": 145,
+      "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4"
+    },
+    {
+      "name": "SLV_ADM2.sbn",
+      "bytes": 3052,
+      "sha256": "c30c2b20fc0c91b02604f9278966cae85633088ad3debeb118e4fc8c3033826b"
+    },
+    {
+      "name": "SLV_ADM2.sbx",
+      "bytes": 396,
+      "sha256": "495880f0b046c4d8301129b5b9ed2117b0dd066a9f2cd6f745b6b1916907ff1a"
+    },
+    {
+      "name": "SLV_ADM2.shp",
+      "bytes": 444260,
+      "sha256": "a04010d6080ac4d68914c40ae391006003981d089ea948ae202552778ae0de49"
+    },
+    {
+      "name": "SLV_ADM2.shx",
+      "bytes": 2276,
+      "sha256": "de01c9b3a2618514d3885681ad1823f755daffb7854ab27c7174343010757773"
+    }
+  ],
+  "meta": "Boundary Representative of Year: 2007\r\nISO-3166-1 (Alpha-3): SLV\r\nBoundary Type: ADM2\r\nCanonical Boundary Type Name: Municipalities\r\nSource 1: geoBoundaries\r\nSource 2: \r\nRelease Type: gBOpen\r\nLicense: Public Domain\r\nLicense Notes: \r\nLicense Source: https://commons.wikimedia.org/wiki/File:El_Salvador_municipalities.png\r\nLink to Source Data: https://en.wikipedia.org/wiki/Municipalities_of_El_Salvador#/media/File:El_Salvador_municipalities.png\r\nOther Notes: Holes are lakes",
+  "prj": "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137.0,298.257223563]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+  "dbf_fields": [
+    {
+      "name": "Name",
+      "type": "C",
+      "length": 50
+    },
+    {
+      "name": "Level",
+      "type": "C",
+      "length": 50
+    }
+  ],
+  "dbf_records": [
+    {
+      "ordinal": 0,
+      "deleted": false,
+      "Name": "Metapan",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 1,
+      "deleted": false,
+      "Name": "Santa Rosa Guachipilin",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 2,
+      "deleted": false,
+      "Name": "Masahuat",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 3,
+      "deleted": false,
+      "Name": "Citala",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 4,
+      "deleted": false,
+      "Name": "San Antonio Pajonal",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 5,
+      "deleted": false,
+      "Name": "Texistepeque",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 6,
+      "deleted": false,
+      "Name": "Nueva Concepcion",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 7,
+      "deleted": false,
+      "Name": "Agua Caliente",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 8,
+      "deleted": false,
+      "Name": "Null",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 9,
+      "deleted": false,
+      "Name": "San Ingnacio",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 10,
+      "deleted": false,
+      "Name": "La Palma",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 11,
+      "deleted": false,
+      "Name": "La Reina",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 12,
+      "deleted": false,
+      "Name": "San Fernando",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 13,
+      "deleted": false,
+      "Name": "Santiago de la Frontera",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 14,
+      "deleted": false,
+      "Name": "Candelaria de la Frontera",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 15,
+      "deleted": false,
+      "Name": "Chalchuapa",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 16,
+      "deleted": false,
+      "Name": "El Porvenir",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 17,
+      "deleted": false,
+      "Name": "San Sebastian Salitrillo",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 18,
+      "deleted": false,
+      "Name": "Santa Ana",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 19,
+      "deleted": false,
+      "Name": "Coatepeque",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 20,
+      "deleted": false,
+      "Name": "El Congo",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 21,
+      "deleted": false,
+      "Name": "El Refugio",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 22,
+      "deleted": false,
+      "Name": "Atiquizaya",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 23,
+      "deleted": false,
+      "Name": "Turin",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 24,
+      "deleted": false,
+      "Name": "San Lorenzo",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 25,
+      "deleted": false,
+      "Name": "Ahuachpan",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 26,
+      "deleted": false,
+      "Name": "Juayua",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 27,
+      "deleted": false,
+      "Name": "Apaneca",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 28,
+      "deleted": false,
+      "Name": "Concepcion de Ataco",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 29,
+      "deleted": false,
+      "Name": "Tacuba",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 30,
+      "deleted": false,
+      "Name": "San Francisco Menendez",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 31,
+      "deleted": false,
+      "Name": "Jujutla",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 32,
+      "deleted": false,
+      "Name": "Guaymango",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 33,
+      "deleted": false,
+      "Name": "San Pedro Puxtla",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 34,
+      "deleted": false,
+      "Name": "Acajutla",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 35,
+      "deleted": false,
+      "Name": "San Francisco Morazan",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 36,
+      "deleted": false,
+      "Name": "Dulce Nombre de Maria",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 37,
+      "deleted": false,
+      "Name": "Tejutla",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 38,
+      "deleted": false,
+      "Name": "El Paraiso",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 39,
+      "deleted": false,
+      "Name": "San Rafael",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 40,
+      "deleted": false,
+      "Name": "Salcoatitan",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 41,
+      "deleted": false,
+      "Name": "Santa Catarina Masahuat",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 42,
+      "deleted": false,
+      "Name": "Santo Domingo",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 43,
+      "deleted": false,
+      "Name": "Nahuizalco",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 44,
+      "deleted": false,
+      "Name": "San Antonio del Monte",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 45,
+      "deleted": false,
+      "Name": "Null",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 46,
+      "deleted": false,
+      "Name": "Nahulingo",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 47,
+      "deleted": false,
+      "Name": "Sonsonate",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 48,
+      "deleted": false,
+      "Name": "Izalco",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 49,
+      "deleted": false,
+      "Name": "Caluco",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 50,
+      "deleted": false,
+      "Name": "Cuisnahuat",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 51,
+      "deleted": false,
+      "Name": "San Julian",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 52,
+      "deleted": false,
+      "Name": "Santa Isabel Ishuatan",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 53,
+      "deleted": false,
+      "Name": "Armenia",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 54,
+      "deleted": false,
+      "Name": "Sacacoyo",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 55,
+      "deleted": false,
+      "Name": "Tepecoyo",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 56,
+      "deleted": false,
+      "Name": "Teotepeque",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 57,
+      "deleted": false,
+      "Name": "San Pablo Tacachico",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 58,
+      "deleted": false,
+      "Name": "El Paisnal",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 59,
+      "deleted": false,
+      "Name": "Aguilares",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 60,
+      "deleted": false,
+      "Name": "Ciudad Arce",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 61,
+      "deleted": false,
+      "Name": "Jicalapa",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 62,
+      "deleted": false,
+      "Name": "Chiltiupán",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 63,
+      "deleted": false,
+      "Name": "Jayaque",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 64,
+      "deleted": false,
+      "Name": "Tamanique",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 65,
+      "deleted": false,
+      "Name": "Opico",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 66,
+      "deleted": false,
+      "Name": "San Matias",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 67,
+      "deleted": false,
+      "Name": "Quezaltepeque",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 68,
+      "deleted": false,
+      "Name": "Colón",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 69,
+      "deleted": false,
+      "Name": "Talnique",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 70,
+      "deleted": false,
+      "Name": "Comasagua",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 71,
+      "deleted": false,
+      "Name": "Santa Tecla",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 72,
+      "deleted": false,
+      "Name": "Zaragoza",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 73,
+      "deleted": false,
+      "Name": "Nuevo Cuscatlán",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 74,
+      "deleted": false,
+      "Name": "El Carrizal",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 75,
+      "deleted": false,
+      "Name": "La Laguna",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 76,
+      "deleted": false,
+      "Name": "Comalapa",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 77,
+      "deleted": false,
+      "Name": "Santa Rita",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 78,
+      "deleted": false,
+      "Name": "Ojos de Agua",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 79,
+      "deleted": false,
+      "Name": "Las Vueltas",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 80,
+      "deleted": false,
+      "Name": "Concepcion Quezaltepeque",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 81,
+      "deleted": false,
+      "Name": "Chalatenago",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 82,
+      "deleted": false,
+      "Name": "San Jose Villanueva",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 83,
+      "deleted": false,
+      "Name": "Huizucar",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 84,
+      "deleted": false,
+      "Name": "Antiguo Cuscatlan",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 85,
+      "deleted": false,
+      "Name": "Nejapa",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 86,
+      "deleted": false,
+      "Name": "San Salvador",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 87,
+      "deleted": false,
+      "Name": "San Marcos",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 88,
+      "deleted": false,
+      "Name": "Mejicanos",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 89,
+      "deleted": false,
+      "Name": "Apopa",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 90,
+      "deleted": false,
+      "Name": "Ayutuxtepeque",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 91,
+      "deleted": false,
+      "Name": "Cuscatancingo",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 92,
+      "deleted": false,
+      "Name": "Delgado",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 93,
+      "deleted": false,
+      "Name": "Guazapa",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 94,
+      "deleted": false,
+      "Name": "Arcatao",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 95,
+      "deleted": false,
+      "Name": "Nueva Trinidad",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 96,
+      "deleted": false,
+      "Name": "Nombre de Jesus",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 97,
+      "deleted": false,
+      "Name": "San Antonio de la Cruz",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 98,
+      "deleted": false,
+      "Name": "San Jose Las Flores",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 99,
+      "deleted": false,
+      "Name": "San Isidro Labrador",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 100,
+      "deleted": false,
+      "Name": "San Antonia Los Ranchos",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 101,
+      "deleted": false,
+      "Name": "San Miguel de Mercedes",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 102,
+      "deleted": false,
+      "Name": "San Jose Cancasque",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 103,
+      "deleted": false,
+      "Name": "Potonico",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 104,
+      "deleted": false,
+      "Name": "San Luis del Carmen",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 105,
+      "deleted": false,
+      "Name": "Azacualpa",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 106,
+      "deleted": false,
+      "Name": "San Francisco Lempa",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 107,
+      "deleted": false,
+      "Name": "La Libertad",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 108,
+      "deleted": false,
+      "Name": "Rosario de Mora",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 109,
+      "deleted": false,
+      "Name": "Panchimalco",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 110,
+      "deleted": false,
+      "Name": "Soyapango",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 111,
+      "deleted": false,
+      "Name": "Santo Tomas",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 112,
+      "deleted": false,
+      "Name": "Ilopango",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 113,
+      "deleted": false,
+      "Name": "Tonacatepeque",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 114,
+      "deleted": false,
+      "Name": "Santiago Texacuangos",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 115,
+      "deleted": false,
+      "Name": "Olocuilta",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 116,
+      "deleted": false,
+      "Name": "San Luis Talpa",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 117,
+      "deleted": false,
+      "Name": "San Juan Talpa",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 118,
+      "deleted": false,
+      "Name": "Cuyultitán",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 119,
+      "deleted": false,
+      "Name": "San Francsico Chinameca",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 120,
+      "deleted": false,
+      "Name": "Tapalhuaca",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 121,
+      "deleted": false,
+      "Name": "San Antonio Masahuat",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 122,
+      "deleted": false,
+      "Name": "San Jose Guayabal",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 123,
+      "deleted": false,
+      "Name": "San Martin",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 124,
+      "deleted": false,
+      "Name": "San Miguel Tepezontes",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 125,
+      "deleted": false,
+      "Name": "El Rosario",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 126,
+      "deleted": false,
+      "Name": "San Juan Tepezontes",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 127,
+      "deleted": false,
+      "Name": "Oratorio de Concepcion",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 128,
+      "deleted": false,
+      "Name": "San Bartolome Perulapia",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 129,
+      "deleted": false,
+      "Name": "San Pedro Perulapan",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 130,
+      "deleted": false,
+      "Name": "Suchitoto",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 131,
+      "deleted": false,
+      "Name": "Tenancingo",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 132,
+      "deleted": false,
+      "Name": "Cinquera",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 133,
+      "deleted": false,
+      "Name": "Teujutepeque",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 134,
+      "deleted": false,
+      "Name": "Jutiapa",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 135,
+      "deleted": false,
+      "Name": "Victoria",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 136,
+      "deleted": false,
+      "Name": "Sensuntepeque",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 137,
+      "deleted": false,
+      "Name": "Guacoteci",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 138,
+      "deleted": false,
+      "Name": "Ciudad Ilobasco",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 139,
+      "deleted": false,
+      "Name": "San Isidro",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 140,
+      "deleted": false,
+      "Name": "El Rosario",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 141,
+      "deleted": false,
+      "Name": "San Rafael Cedros",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 142,
+      "deleted": false,
+      "Name": "Monte San Juan",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 143,
+      "deleted": false,
+      "Name": "Santa Cruz Michapa",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 144,
+      "deleted": false,
+      "Name": "El Carmen",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 145,
+      "deleted": false,
+      "Name": "Cojutepeque",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 146,
+      "deleted": false,
+      "Name": "Candelaria",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 147,
+      "deleted": false,
+      "Name": "San Ramon",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 148,
+      "deleted": false,
+      "Name": "San Cristobal",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 149,
+      "deleted": false,
+      "Name": "Santa Cruz Analquito",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 150,
+      "deleted": false,
+      "Name": "Jerusalen",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 151,
+      "deleted": false,
+      "Name": "Verapaz",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 152,
+      "deleted": false,
+      "Name": "San Emigdo",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 153,
+      "deleted": false,
+      "Name": "Paraíso de Osorio",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 154,
+      "deleted": false,
+      "Name": "Mercedes La Ceiba",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 155,
+      "deleted": false,
+      "Name": "Santa María Ostuma",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 156,
+      "deleted": false,
+      "Name": "San Pedro Nonualco",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 157,
+      "deleted": false,
+      "Name": "San Sebastian",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 158,
+      "deleted": false,
+      "Name": "Santo Domingo",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 159,
+      "deleted": false,
+      "Name": "San Lorenzo",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 160,
+      "deleted": false,
+      "Name": "Tepetitan",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 161,
+      "deleted": false,
+      "Name": "San Cayetano Istepeque",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 162,
+      "deleted": false,
+      "Name": "San Esteban Catarina",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 163,
+      "deleted": false,
+      "Name": "Santiago Nonualco",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 164,
+      "deleted": false,
+      "Name": "Null",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 165,
+      "deleted": false,
+      "Name": "Guadalupe",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 166,
+      "deleted": false,
+      "Name": "San Rafael Obrajuelo",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 167,
+      "deleted": false,
+      "Name": "San Juan Nonualco",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 168,
+      "deleted": false,
+      "Name": "Dolores",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 169,
+      "deleted": false,
+      "Name": "Santa Clara",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 170,
+      "deleted": false,
+      "Name": "Apastepeque",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 171,
+      "deleted": false,
+      "Name": "San Vicente",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 172,
+      "deleted": false,
+      "Name": "San Luis La Herradura",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 173,
+      "deleted": false,
+      "Name": "Zacatecoluca",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 174,
+      "deleted": false,
+      "Name": "Tecoluca",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 175,
+      "deleted": false,
+      "Name": "San Ildefonso",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 176,
+      "deleted": false,
+      "Name": "Estanzuelas",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 177,
+      "deleted": false,
+      "Name": "Nuevo Eden de San Juan",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 178,
+      "deleted": false,
+      "Name": "Mercedes Umaña",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 179,
+      "deleted": false,
+      "Name": "Berlin",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 180,
+      "deleted": false,
+      "Name": "San Agustin",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 181,
+      "deleted": false,
+      "Name": "Jiquilisco",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 182,
+      "deleted": false,
+      "Name": "Null",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 183,
+      "deleted": false,
+      "Name": "Null",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 184,
+      "deleted": false,
+      "Name": "Puerto El Triunfo",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 185,
+      "deleted": false,
+      "Name": "Null",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 186,
+      "deleted": false,
+      "Name": "Null",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 187,
+      "deleted": false,
+      "Name": "San Francisco Javier",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 188,
+      "deleted": false,
+      "Name": "Alegría",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 189,
+      "deleted": false,
+      "Name": "Tecapán",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 190,
+      "deleted": false,
+      "Name": "Ozatlan",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 191,
+      "deleted": false,
+      "Name": "Santiago de Maria",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 192,
+      "deleted": false,
+      "Name": "California",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 193,
+      "deleted": false,
+      "Name": "San Gerardo",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 194,
+      "deleted": false,
+      "Name": "Nueva Granada",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 195,
+      "deleted": false,
+      "Name": "Sesori",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 196,
+      "deleted": false,
+      "Name": "El Triunfo",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 197,
+      "deleted": false,
+      "Name": "Jucuapa",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 198,
+      "deleted": false,
+      "Name": "San Buenaventura",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 199,
+      "deleted": false,
+      "Name": "Lolotique",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 200,
+      "deleted": false,
+      "Name": "Nueva Guadalupe",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 201,
+      "deleted": false,
+      "Name": "Chinameca",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 202,
+      "deleted": false,
+      "Name": "Santa Elena",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 203,
+      "deleted": false,
+      "Name": "San Dionisio",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 204,
+      "deleted": false,
+      "Name": "Usulutan",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 205,
+      "deleted": false,
+      "Name": "Santa María",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 206,
+      "deleted": false,
+      "Name": "Ereguayquín",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 207,
+      "deleted": false,
+      "Name": "San Luis de la Reina",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 208,
+      "deleted": false,
+      "Name": "San Jorge",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 209,
+      "deleted": false,
+      "Name": "San Rafael",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 210,
+      "deleted": false,
+      "Name": "Concepción Batres",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 211,
+      "deleted": false,
+      "Name": "El Transito",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 212,
+      "deleted": false,
+      "Name": "Carolina",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 213,
+      "deleted": false,
+      "Name": "Ciudad Barrios",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 214,
+      "deleted": false,
+      "Name": "Chapeltique",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 215,
+      "deleted": false,
+      "Name": "Moncagua",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 216,
+      "deleted": false,
+      "Name": "Quelepa",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 217,
+      "deleted": false,
+      "Name": "San Antonio",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 218,
+      "deleted": false,
+      "Name": "Torola",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 219,
+      "deleted": false,
+      "Name": "San Isidro",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 220,
+      "deleted": false,
+      "Name": "San Simon",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 221,
+      "deleted": false,
+      "Name": "Guatajiagua",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 222,
+      "deleted": false,
+      "Name": "El Rosario",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 223,
+      "deleted": false,
+      "Name": "Gualococti",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 224,
+      "deleted": false,
+      "Name": "San Fernando",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 225,
+      "deleted": false,
+      "Name": "Yamabal",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 226,
+      "deleted": false,
+      "Name": "Sensembra",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 227,
+      "deleted": false,
+      "Name": "Perquin",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 228,
+      "deleted": false,
+      "Name": "Jocoaitique",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 229,
+      "deleted": false,
+      "Name": "Arambala",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 230,
+      "deleted": false,
+      "Name": "Meanguera",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 231,
+      "deleted": false,
+      "Name": "Delicias de Concepcion",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 232,
+      "deleted": false,
+      "Name": "Yoloaiquin",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 233,
+      "deleted": false,
+      "Name": "Joateca",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 234,
+      "deleted": false,
+      "Name": "Jucuarán",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 235,
+      "deleted": false,
+      "Name": "Cacaopera",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 236,
+      "deleted": false,
+      "Name": "Lolotiquillo",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 237,
+      "deleted": false,
+      "Name": "Corinto",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 238,
+      "deleted": false,
+      "Name": "San Francisco",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 239,
+      "deleted": false,
+      "Name": "San Carlos",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 240,
+      "deleted": false,
+      "Name": "Null",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 241,
+      "deleted": false,
+      "Name": "Lislique",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 242,
+      "deleted": false,
+      "Name": "Sociedad",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 243,
+      "deleted": false,
+      "Name": "Jocoro",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 244,
+      "deleted": false,
+      "Name": "El Divisadero",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 245,
+      "deleted": false,
+      "Name": "Comacarán",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 246,
+      "deleted": false,
+      "Name": "Uluazapa",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 247,
+      "deleted": false,
+      "Name": "Yayantique",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 248,
+      "deleted": false,
+      "Name": "San Miguel",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 249,
+      "deleted": false,
+      "Name": "Chirilagua",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 250,
+      "deleted": false,
+      "Name": "Null",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 251,
+      "deleted": false,
+      "Name": "Nueva Esparta",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 252,
+      "deleted": false,
+      "Name": "Anamoros",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 253,
+      "deleted": false,
+      "Name": "Poloros",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 254,
+      "deleted": false,
+      "Name": "Concepcion de Oriente",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 255,
+      "deleted": false,
+      "Name": "El Sauce",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 256,
+      "deleted": false,
+      "Name": "Pasaquina",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 257,
+      "deleted": false,
+      "Name": "Santa Rosa de Lima",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 258,
+      "deleted": false,
+      "Name": "San Jose",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 259,
+      "deleted": false,
+      "Name": "Bolivar",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 260,
+      "deleted": false,
+      "Name": "Yucuaiquin",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 261,
+      "deleted": false,
+      "Name": "San Alejo",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 262,
+      "deleted": false,
+      "Name": "Intipuca",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 263,
+      "deleted": false,
+      "Name": "El Carmen",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 264,
+      "deleted": false,
+      "Name": "Conchagua",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 265,
+      "deleted": false,
+      "Name": "Null",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 266,
+      "deleted": false,
+      "Name": "La Union",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 267,
+      "deleted": false,
+      "Name": "San Pedro Masahuat",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 268,
+      "deleted": false,
+      "Name": "Chilanga",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 269,
+      "deleted": false,
+      "Name": "Osicala",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 270,
+      "deleted": false,
+      "Name": "Chilanga",
+      "Level": "ADM 2"
+    },
+    {
+      "ordinal": 271,
+      "deleted": false,
+      "Name": "Meanguera del Golfo",
+      "Level": "ADM 2"
+    }
+  ],
+  "dbf_record_count": 272,
+  "duplicate_names": {
+    "Null": 10,
+    "San Fernando": 2,
+    "San Lorenzo": 2,
+    "San Rafael": 2,
+    "Santo Domingo": 2,
+    "El Rosario": 3,
+    "San Isidro": 2,
+    "El Carmen": 2,
+    "Chilanga": 2
+  }
+}

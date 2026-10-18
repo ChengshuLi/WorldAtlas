@@ -1,0 +1,4547 @@
+[
+  {
+    "owner_index": 39730,
+    "id": "gb:SLV:ADM2:79315794B12575080956445",
+    "name": "San Rafael",
+    "original_name": "San Rafael",
+    "parent_id": "framework:province:departamento-de-chalatenango:b7cc742b5e58",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B12575080956445"
+    ],
+    "source_ordinal": 39,
+    "source_index": 55602,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Geographic portion of a source administrative unit; not a new government division",
+      "original_id": "79315794B12575080956445",
+      "representative_point": [
+        -89.04124514767932,
+        14.11735
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 1.0,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1357",
+        "overlap": 1.0
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1357",
+        "overlap": 1.0,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 332,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 28
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39744,
+    "id": "gb:SLV:ADM2:79315794B15672715346163",
+    "name": "Joateca",
+    "original_name": "Joateca",
+    "parent_id": "framework:province:departamento-de-morazan:15e99c3308de",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B15672715346163"
+    ],
+    "source_ordinal": 233,
+    "source_index": 55796,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B15672715346163",
+      "representative_point": [
+        -88.06077140110222,
+        13.90335
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.998127,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 2,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "6a87c888062b2a072543acd0340b7da5e0232a8d3b7242e9cb193c77118aff2b",
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1351",
+        "overlap": 0.875921
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1351",
+        "overlap": 0.875921,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 349,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 3
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39749,
+    "id": "gb:SLV:ADM2:79315794B16345419733055",
+    "name": "San Miguel Tepezontes",
+    "original_name": "San Miguel Tepezontes",
+    "parent_id": "framework:province:departamento-de-la-paz:e360ee2617df",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B16345419733055"
+    ],
+    "source_ordinal": 124,
+    "source_index": 55687,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B16345419733055",
+      "representative_point": [
+        -89.0255393954918,
+        13.639700000000001
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 1.0,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1347",
+        "overlap": 1.0
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1347",
+        "overlap": 1.0,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 341,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "inland-water": 21,
+      "land": 4
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39753,
+    "id": "gb:SLV:ADM2:79315794B19260773575494",
+    "name": "Null",
+    "original_name": "Null",
+    "parent_id": "framework:province:departamento-de-usulutan:8f91ea9e2202",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B19260773575494"
+    ],
+    "source_ordinal": 186,
+    "source_index": 55749,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B19260773575494",
+      "representative_point": [
+        -88.50682382075472,
+        13.234449999999999
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 1.0,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1354",
+        "overlap": 0.492497
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": null,
+        "overlap": 0.492497,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 346,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 34
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39761,
+    "id": "gb:SLV:ADM2:79315794B22426566538206",
+    "name": "Suchitoto",
+    "original_name": "Suchitoto",
+    "parent_id": "framework:province:departamento-de-cuscatlan:cfc28d4422d5",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B22426566538206"
+    ],
+    "source_ordinal": 130,
+    "source_index": 55693,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B22426566538206",
+      "representative_point": [
+        -89.09917596525096,
+        13.959050000000001
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.964547,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1345",
+        "overlap": 0.939003
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1345",
+        "overlap": 0.939003,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 342,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 83
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39763,
+    "id": "gb:SLV:ADM2:79315794B22688321634374",
+    "name": "El Congo",
+    "original_name": "El Congo",
+    "parent_id": "framework:province:departamento-de-santa-ana:876e7bde53a5",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B22688321634374"
+    ],
+    "source_ordinal": 20,
+    "source_index": 55583,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Geographic portion of a source administrative unit; not a new government division",
+      "original_id": "79315794B22688321634374",
+      "representative_point": [
+        -89.51149346957807,
+        13.85255
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.854297,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1358",
+        "overlap": 0.962338
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1358",
+        "overlap": 0.962338,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 330,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 1,
+      "inland-water": 14
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39772,
+    "id": "gb:SLV:ADM2:79315794B2864727772405",
+    "name": "Chirilagua",
+    "original_name": "Chirilagua",
+    "parent_id": "framework:province:departamento-de-san-miguel:58d840c2c863",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B2864727772405"
+    ],
+    "source_ordinal": 249,
+    "source_index": 55812,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B2864727772405",
+      "representative_point": [
+        -88.16276022727273,
+        13.2522
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.928961,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.99586,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1352",
+        "overlap": 0.907542
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1352",
+        "overlap": 0.907542,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 347,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "inland-water": 3
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39773,
+    "id": "gb:SLV:ADM2:79315794B287645729491",
+    "name": "San Dionisio",
+    "original_name": "San Dionisio",
+    "parent_id": "framework:province:departamento-de-usulutan:8f91ea9e2202",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B287645729491"
+    ],
+    "source_ordinal": 203,
+    "source_index": 55766,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B287645729491",
+      "representative_point": [
+        -88.47376429765886,
+        13.288599999999999
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 1.0,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1354",
+        "overlap": 0.970438
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1354",
+        "overlap": 0.970438,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 346,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 12
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39774,
+    "id": "gb:SLV:ADM2:79315794B28833031300793",
+    "name": "Conchagua",
+    "original_name": "Conchagua",
+    "parent_id": "framework:province:departamento-de-la-union:ed0cc115d170",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B28833031300793"
+    ],
+    "source_ordinal": 264,
+    "source_index": 55827,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B28833031300793",
+      "representative_point": [
+        -87.88660824250681,
+        13.24945
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.996677,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.94189,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1350",
+        "overlap": 0.908967
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1350",
+        "overlap": 0.908967,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 352,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 8
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39777,
+    "id": "gb:SLV:ADM2:79315794B29196841489463",
+    "name": "Santa Rita",
+    "original_name": "Santa Rita",
+    "parent_id": "framework:province:departamento-de-chalatenango:b7cc742b5e58",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B29196841489463"
+    ],
+    "source_ordinal": 77,
+    "source_index": 55640,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Geographic portion of a source administrative unit; not a new government division",
+      "original_id": "79315794B29196841489463",
+      "representative_point": [
+        -89.00154441473559,
+        14.11695
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 1.0,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1357",
+        "overlap": 1.0
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1357",
+        "overlap": 1.0,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 332,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 6
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39782,
+    "id": "gb:SLV:ADM2:79315794B30696724436757",
+    "name": "Nueva Concepcion",
+    "original_name": "Nueva Concepcion",
+    "parent_id": "framework:province:departamento-de-chalatenango:b7cc742b5e58",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B30696724436757"
+    ],
+    "source_ordinal": 6,
+    "source_index": 55569,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Geographic portion of a source administrative unit; not a new government division",
+      "original_id": "79315794B30696724436757",
+      "representative_point": [
+        -89.31288255434782,
+        14.139050000000001
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.972379,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1357",
+        "overlap": 0.866011
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1357",
+        "overlap": 0.866011,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 332,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 23
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39787,
+    "id": "gb:SLV:ADM2:79315794B31995662922872",
+    "name": "Null",
+    "original_name": "Null",
+    "parent_id": "framework:province:departamento-de-usulutan:8f91ea9e2202",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B31995662922872"
+    ],
+    "source_ordinal": 240,
+    "source_index": 55803,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B31995662922872",
+      "representative_point": [
+        -88.42719989035086,
+        13.19865
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 1.0,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.17874,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1354",
+        "overlap": 0.643717
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1354",
+        "overlap": 0.643717,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 346,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 53
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39789,
+    "id": "gb:SLV:ADM2:79315794B33324445262057",
+    "name": "Santa Ana",
+    "original_name": "Santa Ana",
+    "parent_id": "framework:province:departamento-de-santa-ana:876e7bde53a5",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B33324445262057"
+    ],
+    "source_ordinal": 18,
+    "source_index": 55581,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Geographic portion of a source administrative unit; not a new government division",
+      "original_id": "79315794B33324445262057",
+      "representative_point": [
+        -89.56470541666667,
+        13.95985
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.996501,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "search_aliases": [
+        "Santa Ana"
+      ],
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1358",
+        "overlap": 0.980816
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1358",
+        "overlap": 0.980816,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 330,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 32
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39791,
+    "id": "gb:SLV:ADM2:79315794B33887915664095",
+    "name": "Null",
+    "original_name": "Null",
+    "parent_id": "framework:province:departamento-de-la-paz:e360ee2617df",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B33887915664095"
+    ],
+    "source_ordinal": 164,
+    "source_index": 55727,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B33887915664095",
+      "representative_point": [
+        -89.00400700284806,
+        13.35125
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.991661,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1347",
+        "overlap": 0.875698
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1347",
+        "overlap": 0.875698,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 341,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 44
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39797,
+    "id": "gb:SLV:ADM2:79315794B36764695607586",
+    "name": "San Luis La Herradura",
+    "original_name": "San Luis La Herradura",
+    "parent_id": "framework:province:departamento-de-la-paz:e360ee2617df",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B36764695607586"
+    ],
+    "source_ordinal": 172,
+    "source_index": 55735,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B36764695607586",
+      "representative_point": [
+        -88.9333007470083,
+        13.3719
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 1.0,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1347",
+        "overlap": 1.0
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1347",
+        "overlap": 1.0,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 341,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 10
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39801,
+    "id": "gb:SLV:ADM2:79315794B37324001782995",
+    "name": "San Alejo",
+    "original_name": "San Alejo",
+    "parent_id": "framework:province:departamento-de-la-union:ed0cc115d170",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B37324001782995"
+    ],
+    "source_ordinal": 261,
+    "source_index": 55824,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B37324001782995",
+      "representative_point": [
+        -87.91423430448336,
+        13.45125
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 1.0,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1350",
+        "overlap": 0.999975
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1350",
+        "overlap": 0.999975,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 352,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 9
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39809,
+    "id": "gb:SLV:ADM2:79315794B39716391239783",
+    "name": "Metapan",
+    "original_name": "Metapan",
+    "parent_id": "framework:province:departamento-de-santa-ana:876e7bde53a5",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B39716391239783"
+    ],
+    "source_ordinal": 0,
+    "source_index": 55563,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Geographic portion of a source administrative unit; not a new government division",
+      "original_id": "79315794B39716391239783",
+      "representative_point": [
+        -89.40345691803694,
+        14.303305642299504
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.993063,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 4,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "ccb2b77e743c903ab22b7fdec28e1c7b4ed657973952515b44f93386494aeb33",
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.91363,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1358",
+        "overlap": 0.978325
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1358",
+        "overlap": 0.978325,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 330,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 16
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39814,
+    "id": "gb:SLV:ADM2:79315794B43009809112841",
+    "name": "Intipuca",
+    "original_name": "Intipuca",
+    "parent_id": "framework:province:departamento-de-la-union:ed0cc115d170",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B43009809112841"
+    ],
+    "source_ordinal": 262,
+    "source_index": 55825,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B43009809112841",
+      "representative_point": [
+        -88.05076937119675,
+        13.22215
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.746956,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.99996,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1350",
+        "overlap": 0.851356
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1350",
+        "overlap": 0.851356,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 352,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 2
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39818,
+    "id": "gb:SLV:ADM2:79315794B44373190309719",
+    "name": "San Fernando",
+    "original_name": "San Fernando",
+    "parent_id": "framework:province:departamento-de-chalatenango:cdc9aef1ac5c",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B44373190309719"
+    ],
+    "source_ordinal": 12,
+    "source_index": 55575,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Geographic portion of a source administrative unit; not a new government division",
+      "original_id": "79315794B44373190309719",
+      "representative_point": [
+        -89.05562499870652,
+        14.29824974210187
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.984142,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 1,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "dff6400d0ddc6c3279dab4b50d08f886fb6a5c10226e517ea77933c2c315b666",
+      "reference_version": 3,
+      "geographic_area_code": "HON",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1357",
+        "overlap": 0.960409
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1357",
+        "overlap": 0.960409,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 333,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 17
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39823,
+    "id": "gb:SLV:ADM2:79315794B46702260316580",
+    "name": "Tacuba",
+    "original_name": "Tacuba",
+    "parent_id": "framework:province:departamento-de-ahuachapan:883cee4c862a",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B46702260316580"
+    ],
+    "source_ordinal": 29,
+    "source_index": 55592,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Geographic portion of a source administrative unit; not a new government division",
+      "original_id": "79315794B46702260316580",
+      "representative_point": [
+        -89.92915693612774,
+        13.87485
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.999366,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 2,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "2d2169ccc809472732fcb871007f22693b31d2a553a05a3a538f555d4ca70953",
+      "reference_version": 3,
+      "geographic_area_code": "GUA",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.59061,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1343",
+        "overlap": 0.998759
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1343",
+        "overlap": 0.998759,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 337,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 14
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39825,
+    "id": "gb:SLV:ADM2:79315794B47681423579390",
+    "name": "Puerto El Triunfo",
+    "original_name": "Puerto El Triunfo",
+    "parent_id": "framework:province:departamento-de-usulutan:8f91ea9e2202",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B47681423579390"
+    ],
+    "source_ordinal": 184,
+    "source_index": 55747,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B47681423579390",
+      "representative_point": [
+        -88.5500924778761,
+        13.28415
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 1.0,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1354",
+        "overlap": 0.927543
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1354",
+        "overlap": 0.927543,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 346,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 25
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39826,
+    "id": "gb:SLV:ADM2:79315794B47910472447580",
+    "name": "San Gerardo",
+    "original_name": "San Gerardo",
+    "parent_id": "framework:province:departamento-de-san-miguel:58d840c2c863",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B47910472447580"
+    ],
+    "source_ordinal": 193,
+    "source_index": 55756,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B47910472447580",
+      "representative_point": [
+        -88.41601708207324,
+        13.83975
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.997865,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 2,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "e3733881a8e0abb0f9ab1b1254887c03504a93ead4e9f5a08207c95cb837ae97",
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.97265,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1352",
+        "overlap": 0.951404
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1352",
+        "overlap": 0.951404,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 348,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 1
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39827,
+    "id": "gb:SLV:ADM2:79315794B47950461762120",
+    "name": "El Sauce",
+    "original_name": "El Sauce",
+    "parent_id": "framework:province:departamento-de-la-union:ed0cc115d170",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B47950461762120"
+    ],
+    "source_ordinal": 255,
+    "source_index": 55818,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B47950461762120",
+      "representative_point": [
+        -87.80741202960658,
+        13.673383211678779
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.998069,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 1,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "faa4435e5676440c6664a874ac645c2bedd9716e5dd8518a1e8e2535dc6ec55e",
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.87349,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1350",
+        "overlap": 0.972714
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1350",
+        "overlap": 0.972714,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 352,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 10
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39838,
+    "id": "gb:SLV:ADM2:79315794B51596434492977",
+    "name": "Zacatecoluca",
+    "original_name": "Zacatecoluca",
+    "parent_id": "framework:province:departamento-de-la-paz:e360ee2617df",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B51596434492977"
+    ],
+    "source_ordinal": 173,
+    "source_index": 55736,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B51596434492977",
+      "representative_point": [
+        -88.86620209680127,
+        13.44905
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.962701,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "search_aliases": [
+        "Zacatecoluca"
+      ],
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1347",
+        "overlap": 0.973879
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1347",
+        "overlap": 0.973879,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 341,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 52
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39839,
+    "id": "gb:SLV:ADM2:79315794B51987205560493",
+    "name": "Candelaria",
+    "original_name": "Candelaria",
+    "parent_id": "framework:province:departamento-de-cuscatlan:cfc28d4422d5",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B51987205560493"
+    ],
+    "source_ordinal": 146,
+    "source_index": 55709,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B51987205560493",
+      "representative_point": [
+        -88.97154494382022,
+        13.7034
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 1.0,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1345",
+        "overlap": 1.0
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1345",
+        "overlap": 1.0,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 342,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "inland-water": 4,
+      "land": 8
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39842,
+    "id": "gb:SLV:ADM2:79315794B52450806978859",
+    "name": "Pasaquina",
+    "original_name": "Pasaquina",
+    "parent_id": "framework:province:departamento-de-la-union:ed0cc115d170",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B52450806978859"
+    ],
+    "source_ordinal": 256,
+    "source_index": 55819,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B52450806978859",
+      "representative_point": [
+        -87.83468640483383,
+        13.5247
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.995437,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 2,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "b053623904cb1cfeb37f53c8aa4ca766bb62a9a6de4cb0c101bf85570daf2418",
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.79401,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1350",
+        "overlap": 0.973927
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1350",
+        "overlap": 0.973927,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 352,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 73
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39843,
+    "id": "gb:SLV:ADM2:79315794B52861243769540",
+    "name": "Izalco",
+    "original_name": "Izalco",
+    "parent_id": "framework:province:departamento-de-sonsonate:67157ddf4d01",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B52861243769540"
+    ],
+    "source_ordinal": 48,
+    "source_index": 55611,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B52861243769540",
+      "representative_point": [
+        -89.64948365591398,
+        13.754999999999999
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.997283,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1348",
+        "overlap": 0.979311
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1348",
+        "overlap": 0.979311,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 338,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 13
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39844,
+    "id": "gb:SLV:ADM2:79315794B53503035270469",
+    "name": "Concepción Batres",
+    "original_name": "Concepción Batres",
+    "parent_id": "framework:province:departamento-de-usulutan:8f91ea9e2202",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B53503035270469"
+    ],
+    "source_ordinal": 210,
+    "source_index": 55773,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B53503035270469",
+      "representative_point": [
+        -88.36909613899614,
+        13.300699999999999
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.983204,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1354",
+        "overlap": 0.9738
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1354",
+        "overlap": 0.9738,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 346,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 10
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39858,
+    "id": "gb:SLV:ADM2:79315794B59411245897989",
+    "name": "San Francsico Chinameca",
+    "original_name": "San Francsico Chinameca",
+    "parent_id": "framework:province:departamento-de-la-paz:e360ee2617df",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B59411245897989"
+    ],
+    "source_ordinal": 119,
+    "source_index": 55682,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B59411245897989",
+      "representative_point": [
+        -89.09829503424658,
+        13.61375
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.742603,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1349",
+        "overlap": 0.725292
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1349",
+        "overlap": 0.725292,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 341,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 8,
+      "inland-water": 11
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39866,
+    "id": "gb:SLV:ADM2:79315794B6162920876089",
+    "name": "Dulce Nombre de Maria",
+    "original_name": "Dulce Nombre de Maria",
+    "parent_id": "framework:province:departamento-de-chalatenango:cdc9aef1ac5c",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B6162920876089"
+    ],
+    "source_ordinal": 36,
+    "source_index": 55599,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Geographic portion of a source administrative unit; not a new government division",
+      "original_id": "79315794B6162920876089",
+      "representative_point": [
+        -88.98571732954545,
+        14.20135
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.994997,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 2,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "0f97234d1028136debb53ff1e6dd87822df9018080bd7a93034948d005d85fcf",
+      "reference_version": 3,
+      "geographic_area_code": "HON",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.62063,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1357",
+        "overlap": 0.954981
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1357",
+        "overlap": 0.954981,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 334,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 6
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39869,
+    "id": "gb:SLV:ADM2:79315794B61762263444110",
+    "name": "Azacualpa",
+    "original_name": "Azacualpa",
+    "parent_id": "framework:province:departamento-de-chalatenango:b7cc742b5e58",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B61762263444110"
+    ],
+    "source_ordinal": 105,
+    "source_index": 55668,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Geographic portion of a source administrative unit; not a new government division",
+      "original_id": "79315794B61762263444110",
+      "representative_point": [
+        -88.99325918367347,
+        14.00995
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 1.0,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 1,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "a23df7110d47578970e6b45cc24d6610ed29905c726f11cfcb3187147934b564",
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1357",
+        "overlap": 1.0
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1357",
+        "overlap": 1.0,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 332,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 11
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39873,
+    "id": "gb:SLV:ADM2:79315794B62992281929492",
+    "name": "San Miguel",
+    "original_name": "San Miguel",
+    "parent_id": "framework:province:departamento-de-san-miguel:58d840c2c863",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B62992281929492"
+    ],
+    "source_ordinal": 248,
+    "source_index": 55811,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B62992281929492",
+      "representative_point": [
+        -88.18773144489218,
+        13.4671
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.99449,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "search_aliases": [
+        "San Miguel"
+      ],
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1352",
+        "overlap": 0.986617
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1352",
+        "overlap": 0.986617,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 347,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 7
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39878,
+    "id": "gb:SLV:ADM2:79315794B64069992176123",
+    "name": "Citala",
+    "original_name": "Citala",
+    "parent_id": "framework:province:departamento-de-chalatenango:b7cc742b5e58",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B64069992176123"
+    ],
+    "source_ordinal": 3,
+    "source_index": 55566,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Geographic portion of a source administrative unit; not a new government division",
+      "original_id": "79315794B64069992176123",
+      "representative_point": [
+        -89.25888513513513,
+        14.36745
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.989424,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 2,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "0ace0c29ece4d6c792d7fb4304a57e40455eebf080c2ff3167e438038d2608f3",
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.45457,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1357",
+        "overlap": 0.824802
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1357",
+        "overlap": 0.824802,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 331,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 7
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39885,
+    "id": "gb:SLV:ADM2:79315794B65183963779708",
+    "name": "Jucuarán",
+    "original_name": "Jucuarán",
+    "parent_id": "framework:province:departamento-de-usulutan:8f91ea9e2202",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B65183963779708"
+    ],
+    "source_ordinal": 234,
+    "source_index": 55797,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B65183963779708",
+      "representative_point": [
+        -88.25497022460542,
+        13.2367
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.905322,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.79074,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1354",
+        "overlap": 0.920176
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1354",
+        "overlap": 0.920176,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 346,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 38
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39895,
+    "id": "gb:SLV:ADM2:79315794B68893851192533",
+    "name": "Usulutan",
+    "original_name": "Usulutan",
+    "parent_id": "framework:province:departamento-de-usulutan:8f91ea9e2202",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B68893851192533"
+    ],
+    "source_ordinal": 204,
+    "source_index": 55767,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B68893851192533",
+      "representative_point": [
+        -88.46016808934101,
+        13.32915
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 1.0,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1354",
+        "overlap": 0.991314
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1354",
+        "overlap": 0.991314,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 346,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 30
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39899,
+    "id": "gb:SLV:ADM2:79315794B69543299009522",
+    "name": "Null",
+    "original_name": "Null",
+    "parent_id": "framework:province:departamento-de-usulutan:8f91ea9e2202",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B69543299009522"
+    ],
+    "source_ordinal": 183,
+    "source_index": 55746,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B69543299009522",
+      "representative_point": [
+        -88.59940684713376,
+        13.2137
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.997027,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.38066,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1354",
+        "overlap": 0.687144
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1354",
+        "overlap": 0.687144,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 346,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 16
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39908,
+    "id": "gb:SLV:ADM2:79315794B74601792189974",
+    "name": "Cinquera",
+    "original_name": "Cinquera",
+    "parent_id": "framework:province:departamento-de-cabanas:7175140460ef",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B74601792189974"
+    ],
+    "source_ordinal": 132,
+    "source_index": 55695,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Geographic portion of a source administrative unit; not a new government division",
+      "original_id": "79315794B74601792189974",
+      "representative_point": [
+        -88.97218515624999,
+        13.896999999999998
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.763582,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1345",
+        "overlap": 0.58575
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1345",
+        "overlap": 0.58575,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 343,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 7
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39911,
+    "id": "gb:SLV:ADM2:79315794B76492657224613",
+    "name": "San Martin",
+    "original_name": "San Martin",
+    "parent_id": "framework:province:departamento-de-san-salvador:291971a52319",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B76492657224613"
+    ],
+    "source_ordinal": 123,
+    "source_index": 55686,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B76492657224613",
+      "representative_point": [
+        -89.07578391089109,
+        13.7652
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.919786,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1349",
+        "overlap": 0.966433
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1349",
+        "overlap": 0.966433,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 340,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 6
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39916,
+    "id": "gb:SLV:ADM2:79315794B77500170137701",
+    "name": "Null",
+    "original_name": "Null",
+    "parent_id": "framework:province:departamento-de-usulutan:8f91ea9e2202",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B77500170137701"
+    ],
+    "source_ordinal": 185,
+    "source_index": 55748,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B77500170137701",
+      "representative_point": [
+        -88.5119639380531,
+        13.288599999999999
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 1.0,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1354",
+        "overlap": 1.0
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1354",
+        "overlap": 1.0,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 346,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 29
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39918,
+    "id": "gb:SLV:ADM2:79315794B78651790213252",
+    "name": "Jutiapa",
+    "original_name": "Jutiapa",
+    "parent_id": "framework:province:departamento-de-cabanas:7175140460ef",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B78651790213252"
+    ],
+    "source_ordinal": 134,
+    "source_index": 55697,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Geographic portion of a source administrative unit; not a new government division",
+      "original_id": "79315794B78651790213252",
+      "representative_point": [
+        -88.89967098784243,
+        13.925049999999999
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.955073,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1344",
+        "overlap": 0.980802
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1344",
+        "overlap": 0.980802,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 343,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 8
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39920,
+    "id": "gb:SLV:ADM2:79315794B79083101241922",
+    "name": "San Francisco Menendez",
+    "original_name": "San Francisco Menendez",
+    "parent_id": "framework:province:departamento-de-ahuachapan:883cee4c862a",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B79083101241922"
+    ],
+    "source_ordinal": 30,
+    "source_index": 55593,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Geographic portion of a source administrative unit; not a new government division",
+      "original_id": "79315794B79083101241922",
+      "representative_point": [
+        -90.03872009803922,
+        13.79795
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.996615,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 1,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "33085c3dc3da9b5781f8787d17c572e489ebbcd5bd0ea4527cd4cfbefc5cfe11",
+      "reference_version": 3,
+      "geographic_area_code": "GUA",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.58254,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1343",
+        "overlap": 0.955573
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1343",
+        "overlap": 0.955573,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 337,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 15
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39922,
+    "id": "gb:SLV:ADM2:79315794B79913298248778",
+    "name": "San Luis del Carmen",
+    "original_name": "San Luis del Carmen",
+    "parent_id": "framework:province:departamento-de-chalatenango:b7cc742b5e58",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B79913298248778"
+    ],
+    "source_ordinal": 104,
+    "source_index": 55667,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Geographic portion of a source administrative unit; not a new government division",
+      "original_id": "79315794B79913298248778",
+      "representative_point": [
+        -88.97323379790942,
+        13.975449999999999
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 1.0,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1357",
+        "overlap": 0.881787
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1357",
+        "overlap": 0.881787,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 332,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 43
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39923,
+    "id": "gb:SLV:ADM2:79315794B8005106652117",
+    "name": "Tejutla",
+    "original_name": "Tejutla",
+    "parent_id": "framework:province:departamento-de-chalatenango:b7cc742b5e58",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B8005106652117"
+    ],
+    "source_ordinal": 37,
+    "source_index": 55600,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Geographic portion of a source administrative unit; not a new government division",
+      "original_id": "79315794B8005106652117",
+      "representative_point": [
+        -89.11360342465754,
+        14.145900000000001
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 1.0,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1357",
+        "overlap": 0.998088
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1357",
+        "overlap": 0.998088,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 332,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 15
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39926,
+    "id": "gb:SLV:ADM2:79315794B80600730449198",
+    "name": "Concepcion de Oriente",
+    "original_name": "Concepcion de Oriente",
+    "parent_id": "framework:province:departamento-de-la-union:ed0cc115d170",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B80600730449198"
+    ],
+    "source_ordinal": 254,
+    "source_index": 55817,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B80600730449198",
+      "representative_point": [
+        -87.73969398751652,
+        13.77427184154175
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.993663,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 3,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "7e414d64afde37514cdf45ecd1c3d02956488558b1efdabc85904b27ae001306",
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.29098,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1350",
+        "overlap": 0.928503
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1350",
+        "overlap": 0.928503,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 352,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 2
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39927,
+    "id": "gb:SLV:ADM2:79315794B80691700287091",
+    "name": "La Union",
+    "original_name": "La Union",
+    "parent_id": "framework:province:departamento-de-la-union:ed0cc115d170",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B80691700287091"
+    ],
+    "source_ordinal": 266,
+    "source_index": 55829,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B80691700287091",
+      "representative_point": [
+        -87.7851510095488,
+        13.30155
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.94499,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.59601,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "search_aliases": [
+        "La Union",
+        "La Unión"
+      ],
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1350",
+        "overlap": 0.529582
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1350",
+        "overlap": 0.529582,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 352,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 3
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39929,
+    "id": "gb:SLV:ADM2:79315794B81588611642369",
+    "name": "El Paraiso",
+    "original_name": "El Paraiso",
+    "parent_id": "framework:province:departamento-de-chalatenango:b7cc742b5e58",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B81588611642369"
+    ],
+    "source_ordinal": 38,
+    "source_index": 55601,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Geographic portion of a source administrative unit; not a new government division",
+      "original_id": "79315794B81588611642369",
+      "representative_point": [
+        -89.09049329608939,
+        14.0961
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 1.0,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1357",
+        "overlap": 0.997765
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1357",
+        "overlap": 0.997765,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 332,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 14
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39931,
+    "id": "gb:SLV:ADM2:79315794B81860372869585",
+    "name": "San Francisco Lempa",
+    "original_name": "San Francisco Lempa",
+    "parent_id": "framework:province:departamento-de-chalatenango:b7cc742b5e58",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B81860372869585"
+    ],
+    "source_ordinal": 106,
+    "source_index": 55669,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Geographic portion of a source administrative unit; not a new government division",
+      "original_id": "79315794B81860372869585",
+      "representative_point": [
+        -89.00078823529412,
+        13.97575
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 1.0,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 1,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "7e30e16ae037d9801765246a21d6a6616b12a9b4d7782206b2a5673be1865b72",
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1357",
+        "overlap": 1.0
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1357",
+        "overlap": 1.0,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 332,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 16
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39935,
+    "id": "gb:SLV:ADM2:79315794B83048937220923",
+    "name": "La Libertad",
+    "original_name": "La Libertad",
+    "parent_id": "framework:province:la-libertad:e3696808a00c",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B83048937220923"
+    ],
+    "source_ordinal": 107,
+    "source_index": 55670,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B83048937220923",
+      "representative_point": [
+        -89.26761423766814,
+        13.491399999999999
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.924211,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1346",
+        "overlap": 0.873965
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1346",
+        "overlap": 0.873965,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 339,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 1
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39940,
+    "id": "gb:SLV:ADM2:79315794B83892648288540",
+    "name": "Coatepeque",
+    "original_name": "Coatepeque",
+    "parent_id": "framework:province:departamento-de-santa-ana:876e7bde53a5",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B83892648288540"
+    ],
+    "source_ordinal": 19,
+    "source_index": 55582,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Geographic portion of a source administrative unit; not a new government division",
+      "original_id": "79315794B83892648288540",
+      "representative_point": [
+        -89.47349595800111,
+        13.90205
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.9913,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1358",
+        "overlap": 1.0
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1358",
+        "overlap": 1.0,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 330,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "inland-water": 21,
+      "land": 4
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39947,
+    "id": "gb:SLV:ADM2:79315794B86595410574585",
+    "name": "Santiago Nonualco",
+    "original_name": "Santiago Nonualco",
+    "parent_id": "framework:province:departamento-de-la-paz:e360ee2617df",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B86595410574585"
+    ],
+    "source_ordinal": 163,
+    "source_index": 55726,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B86595410574585",
+      "representative_point": [
+        -88.96691071906355,
+        13.4817
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 1.0,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1347",
+        "overlap": 1.0
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1347",
+        "overlap": 1.0,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 341,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 14
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39948,
+    "id": "gb:SLV:ADM2:79315794B86841984687248",
+    "name": "Null",
+    "original_name": "Null",
+    "parent_id": "framework:province:departamento-de-usulutan:8f91ea9e2202",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B86841984687248"
+    ],
+    "source_ordinal": 182,
+    "source_index": 55745,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B86841984687248",
+      "representative_point": [
+        -88.60706208333332,
+        13.25145
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 1.0,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1354",
+        "overlap": 0.753796
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1354",
+        "overlap": 0.753796,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 346,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 20
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39955,
+    "id": "gb:SLV:ADM2:79315794B89253814837781",
+    "name": "El Carmen",
+    "original_name": "El Carmen",
+    "parent_id": "framework:province:departamento-de-la-union:ed0cc115d170",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B89253814837781"
+    ],
+    "source_ordinal": 263,
+    "source_index": 55826,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B89253814837781",
+      "representative_point": [
+        -88.01561864548495,
+        13.32465
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.813834,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1350",
+        "overlap": 0.654401
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1350",
+        "overlap": 0.654401,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 352,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 20
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39959,
+    "id": "gb:SLV:ADM2:79315794B89800757890613",
+    "name": "Jiquilisco",
+    "original_name": "Jiquilisco",
+    "parent_id": "framework:province:departamento-de-usulutan:8f91ea9e2202",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B89800757890613"
+    ],
+    "source_ordinal": 181,
+    "source_index": 55744,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B89800757890613",
+      "representative_point": [
+        -88.63145070532916,
+        13.357099999999999
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.998238,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.98458,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1354",
+        "overlap": 0.972396
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1354",
+        "overlap": 0.972396,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 346,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 80
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39965,
+    "id": "gb:SLV:ADM2:79315794B91576737756092",
+    "name": "Torola",
+    "original_name": "Torola",
+    "parent_id": "framework:province:departamento-de-morazan:15e99c3308de",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B91576737756092"
+    ],
+    "source_ordinal": 218,
+    "source_index": 55781,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B91576737756092",
+      "representative_point": [
+        -88.22985854159975,
+        13.9063
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.955309,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 1,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "fd330bff9fd45d454e50de70189b2c29a82c0f727bfce06b603f19511ebdc14c",
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 0.99862,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1351",
+        "overlap": 0.984417
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1351",
+        "overlap": 0.984417,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 349,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 1
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39971,
+    "id": "gb:SLV:ADM2:79315794B92906817022615",
+    "name": "San Pedro Perulapan",
+    "original_name": "San Pedro Perulapan",
+    "parent_id": "framework:province:departamento-de-cuscatlan:cfc28d4422d5",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B92906817022615"
+    ],
+    "source_ordinal": 129,
+    "source_index": 55692,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B92906817022615",
+      "representative_point": [
+        -89.0148897515528,
+        13.793
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.997689,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1345",
+        "overlap": 1.0
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1345",
+        "overlap": 1.0,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 342,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 4
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39980,
+    "id": "gb:SLV:ADM2:79315794B95898658703869",
+    "name": "San Emigdo",
+    "original_name": "San Emigdo",
+    "parent_id": "framework:province:departamento-de-la-paz:e360ee2617df",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B95898658703869"
+    ],
+    "source_ordinal": 152,
+    "source_index": 55715,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B95898658703869",
+      "representative_point": [
+        -88.99238941390217,
+        13.65785
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.604898,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1347",
+        "overlap": 0.595191
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1347",
+        "overlap": 0.595191,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 341,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 27,
+      "inland-water": 1
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39986,
+    "id": "gb:SLV:ADM2:79315794B98039027185158",
+    "name": "Tamanique",
+    "original_name": "Tamanique",
+    "parent_id": "framework:province:la-libertad:e3696808a00c",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B98039027185158"
+    ],
+    "source_ordinal": 64,
+    "source_index": 55627,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B98039027185158",
+      "representative_point": [
+        -89.42552721122112,
+        13.58325
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 0.996511,
+      "topology_version": 1,
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1346",
+        "overlap": 0.981147
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1346",
+        "overlap": 0.981147,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 339,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 2
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  },
+  {
+    "owner_index": 39989,
+    "id": "gb:SLV:ADM2:79315794B99064855901693",
+    "name": "Santiago Texacuangos",
+    "original_name": "Santiago Texacuangos",
+    "parent_id": "framework:province:departamento-de-san-salvador:291971a52319",
+    "source_atoms": [
+      "gb:SLV:ADM2:79315794B99064855901693"
+    ],
+    "source_ordinal": 114,
+    "source_index": 55677,
+    "canonical_path": "data/geography/part-22.json",
+    "same_original_geometry_value": false,
+    "canonical_metadata": {
+      "source_id": "gb:SLV:ADM2",
+      "source_name": "geoBoundaries gbOpen",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLV/ADM2/geoBoundaries-SLV-ADM2.geojson",
+      "license": "Public Domain",
+      "reference_year": "2007",
+      "administrative_level": "ADM2",
+      "parent_source_level": "ADM1",
+      "granularity_version": 3,
+      "source_role": "Municipalities",
+      "selection_reason": "Named Municipalities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "parent_match": "Named source administrative unit grouped within this geographic area",
+      "original_id": "79315794B99064855901693",
+      "representative_point": [
+        -89.1132716755319,
+        13.662700000000001
+      ],
+      "hierarchy_version": 4,
+      "hierarchy_source": "gb:SLV:ADM1",
+      "hierarchy_overlap": 1.0,
+      "topology_version": 1,
+      "topology_reconciled": true,
+      "topology_conflicts": 1,
+      "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ.",
+      "original_geometry_sha256": "5336285d7e7bc85d3622bc0df7e5eaabebd15c586c75e7478924022a2d67199b",
+      "reference_version": 3,
+      "geographic_area_code": "ELS",
+      "geographic_region_code": 80,
+      "geographic_match": "largest source overlap",
+      "geographic_overlap": 1.0,
+      "coverage_version": 1,
+      "semantic_version": 1,
+      "remote_version": 1,
+      "framework_reference": "Modern geographic framework; historical attributes require dated evidence",
+      "framework_match": {
+        "source": "Natural Earth",
+        "id": "SLV-1349",
+        "overlap": 1.0
+      },
+      "regional_match": {
+        "reference_iso": "SLV",
+        "source_id": "SLV-1349",
+        "overlap": 1.0,
+        "method": "reference-territory-constrained overlap"
+      },
+      "reference_owner_id": "owner:Q792",
+      "reference_polity": "El Salvador",
+      "reference_polity_status": "reference",
+      "reference_polity_evidence": {
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "reference_territory": "El Salvador",
+        "classification": "Sovereign country",
+        "note": null,
+        "uncertainty": false
+      },
+      "semantic_review": {
+        "status": "open",
+        "continent": "North America",
+        "decision_index": 340,
+        "evidence_file": "geographic-decisions"
+      }
+    },
+    "original_classes": {
+      "land": 14
+    },
+    "association": "direct exact retained source atom and canonical metadata; modern jurisdiction correspondence unresolved"
+  }
+]

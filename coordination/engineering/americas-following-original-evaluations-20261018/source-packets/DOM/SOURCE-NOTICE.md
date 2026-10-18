@@ -1,0 +1,17 @@
+# Dominican Republic source notice
+
+DOM ADM2 is the complete 155-feature consumed geoBoundaries simplified source, identified as Caribbean GeoPortal, Municipalities, represented 2020 and CC BY 4.0. Keep that source-specific attribution and license basis; DOM ADM1 is a separate 32-feature Natural Earth/Public Domain/represented-2022 Province context product. Prior use of Dominican context in Haiti evaluation does not transfer the parent license to this positive ADM2 source or decide current territorial ownership.
+
+The pinned source archive identifies the source item as `DOM adm2 pop`, with the dataset-specific URL https://haiti.caribbeangeoportal.com/datasets/caribgeoportal::dom-adm2-pop/about . Its retained screenshot shows 155 records and a CC BY License label; archive and release metadata specify version 4.0. The displayed publisher is Private Member / Caribbean GeoPortal; the original boundary author and pre-portal derivation are not established. Preserve the provider/dataset/source links, geoBoundaries lineage, license link and relevant change indications in derived uses. Terms: https://creativecommons.org/licenses/by/4.0/ .
+
+Represented 2020 is a provider declaration. The source's IRMA-17 exposure summary concerns 7 September 2017, with summary publication 09/09/2017; the portal sidebar shows 24 August 2020 dates. Archived XML and shapefile download evidence show 5 November 2021 export preparation, including field removal and calculation of the ADM2 label. The provider update is 19 January 2023 and the build is 12 December 2023. None establishes the effective/legal date of these boundary vertices. No current official municipality or changed-tier claim is made here.
+
+The original consumed GeoJSON explicitly declares CRS84. Both archived input and release PRJs describe geographic WGS84 angular degrees; XML references EPSG4326. This is released-frame evidence, not survey accuracy or current-boundary certification. No coordinate transform or geometry predicate occurred during staging.
+
+All 52 complete original and selected records are retained as JSON values, including all 52 open semantic-review records and nine topology-reconciliation notes. All 52 geometry encodings differ literally; that does not establish spatial inequivalence or source fitness. Five original names retain trailing CR/LF while canonical names do not; neither original strings nor canonical names are changed. IDs and native owner indices come from recorded lineage/roster/reverse joins, not a new name crosswalk.
+
+The original 3,988 requests remain land-class requests. This is not proof that whole source polygons lack rivers, lakes, coastal effects or islands. All 70 original source contacts survive: 52 positive ADM2 members and 18 ownerless ADM1 contexts. Their presence does not replace new target-relative whole foreign applicability. The full positive source and full parent family remain retained separately from those contacts.
+
+This data stage creates no qualification or accepted repair. Claim, immutable stage paths/checkpoint, physical evidence, foreign applicability, source results and native authority pins remain null for Main. No null means empty, disjoint, negative or approved evidence.
+
+Source meaning and exact archived evidence are retained at `americas-20261017/dominican-source-meaning-review-001/`; the review SHA256 is `56e267a4ccd35d1bf290aa58a8f6177e1ee87d656b3742b16787d50cf2293892`.

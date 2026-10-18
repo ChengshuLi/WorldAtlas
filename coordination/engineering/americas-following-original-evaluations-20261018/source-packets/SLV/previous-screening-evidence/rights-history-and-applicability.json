@@ -1,0 +1,195 @@
+{
+  "observed_at_utc": "2026-10-18T03:02:24.958778+00:00",
+  "package_id": "gb-SLV-ADM2--repair-evaluation",
+  "status": "unclaimed bounded evaluation candidate; source scientific applicability remains unresolved",
+  "positive_source": {
+    "family": "gb:SLV:ADM2",
+    "represented_year": "2007",
+    "complete_features": 272,
+    "literal_Null_names": 10,
+    "named_records": 262,
+    "exact_original_target_member_count": 58,
+    "raw_archive_dbf_ordinals_and_names_match_all58": true,
+    "recorded_role": "Municipalities",
+    "actual_archive_rights": "Public Domain",
+    "provider_map": "Rarelibra municipal map, dated 11 April 2007, MapInfo Professional v8.5 and various mapping resources",
+    "exact_license_url": "https://commons.wikimedia.org/wiki/File:El_Salvador_municipalities.png",
+    "live_primary_page": "https://commons.wikimedia.org/w/index.php?title=File:El_Salvador_municipalities.png&oldid=1226889240",
+    "rights_assessment": "Archive meta and dataset-specific screenshot match the exact Commons public-domain file. Machine-readable original author/source are absent there. This records an actual public-domain statement; no official cadastral or governmental boundary status inferred.",
+    "archive_note": "Holes are lakes",
+    "null_record_limit": "No geometry or role inferred for the 10 Null records; all 272 complete features retained. All 58 scoped positive owners are named."
+  },
+  "parent_source": {
+    "family": "gb:SLV:ADM1",
+    "complete_features": 14,
+    "represented_year": "2021",
+    "role": "Departments",
+    "recorded_and_archive_license": "Creative Commons Attribution-ShareAlike 2.0",
+    "captured_screenshot": "provider-source-evidence/ADM1-license.jpg",
+    "live_primary_terms_urls": [
+      "https://osm-boundaries.com/",
+      "https://www.openstreetmap.org/copyright"
+    ],
+    "rights_discrepancy": "Dataset archive screenshot and OSM-Boundaries footer label OSM as CC BY-SA 2.0, while OSM copyright distinguishes ODbL data from CC BY-SA 2.0 documentation. OSM-Boundaries About says downloaded data follows OSM license. Preserve this conflict; CC BY-SA 2.0-only data permission is not established. A scientific/public source chain must record actual ODbL data obligations and the provider metadata discrepancy.",
+    "provenance_limit": "Archive DBF has Name and Level, no OSM relation IDs or exact extraction date. 2021 represented year is metadata, not feature-level boundary effective date.",
+    "grant_restricted_reuse_prohibition_found": false
+  },
+  "foreign_contact_context": {
+    "family": "gb:HND:ADM1",
+    "complete_features": 18,
+    "represented_year": "2017",
+    "recorded_provider": "OpenStreetMap, Wambacher",
+    "recorded_license": "Open Data Commons Open Database License 1.0",
+    "contact_feature": "gb:HND:ADM1:10453824B78724193103152",
+    "contact_name": "Valle",
+    "original_contact_cells": {
+      "land": 3
+    },
+    "limit": "All 18 complete consumed features retained; no foreign applicability decision or territorial exclusion inferred from three cells."
+  },
+  "crs": {
+    "consumed_whole_products": "All 3 decoded products explicitly CRS84 longitude,latitude.",
+    "original_ADM2_shapefile_prj": "Geographic GCS_WGS_1984, angular degrees.",
+    "original_ADM1_shapefile_prj": "Geographic GCS_WGS_1984, angular degrees.",
+    "coordinate_operation_performed": false
+  },
+  "history": {
+    "official_decree_762_url": "https://www.asamblea.gob.sv/sites/default/files/documents/decretos/4194112C-1F6E-4E24-808E-9854A3D081AD.pdf",
+    "official_pdf_task_file": "decreto-762-official.pdf",
+    "pdf_bytes": 2126486,
+    "pdf_sha256": "977c02c1050b048640f08fd346cda294eca7f4def6596530ae0e8ca1b68ca425",
+    "official_publication": "Diario Oficial 110, Tomo 439, 14 June 2023; issued 13 June 2023",
+    "article1": "14 departments, 44 municipalities, 262 districts; former municipalities become districts.",
+    "article3_limit": "Provision for judicial territorial competence preserves current legislatively conferred district delimitations from 1 May 2024. This does not establish 2007 source polygon equivalence.",
+    "article14": "Restructuring effective for municipal council election 3 March 2024.",
+    "independent_primary_corrob": "https://www.transparenciafiscal.gob.sv/downloads/pdf/700-DGCG-LY-2024-002.pdf",
+    "corrob_limit": "Decree 1004 recites former municipality-to-district conversion and starts new municipal financial operations 1 May 2024; no geometry proof.",
+    "exact_text_district_roster_lines": 262,
+    "source_feature_to_statutory_district_join_performed": false,
+    "current_applicability": "The 58 targets are exact existing canonical location IDs with open semantic review, not newly proven 2024 municipal jurisdictions. No 272-to-44 unit substitution, rename or district/municipality join or current legal boundary repair credit is authorized by this screen."
+  },
+  "scope": {
+    "original_cells": 1134,
+    "classes": {
+      "land": 1059,
+      "inland-water": 75
+    },
+    "owners": 58,
+    "source_contact_atoms": 72,
+    "source_contact_family_counts": {
+      "gb:SLV:ADM2": 58,
+      "gb:SLV:ADM1": 13,
+      "gb:HND:ADM1": 1
+    },
+    "complete_consumed_family_features": 304,
+    "positive_members": 58,
+    "parent_members": 14,
+    "canonical_containing_part": "data/geography/part-22.json",
+    "same_raw_selected_geometry_values": 0,
+    "water_owner_count": 7,
+    "water_owners": [
+      {
+        "index": 39749,
+        "id": "gb:SLV:ADM2:79315794B16345419733055",
+        "name": "San Miguel Tepezontes",
+        "water_cells": 21
+      },
+      {
+        "index": 39763,
+        "id": "gb:SLV:ADM2:79315794B22688321634374",
+        "name": "El Congo",
+        "water_cells": 14
+      },
+      {
+        "index": 39772,
+        "id": "gb:SLV:ADM2:79315794B2864727772405",
+        "name": "Chirilagua",
+        "water_cells": 3
+      },
+      {
+        "index": 39839,
+        "id": "gb:SLV:ADM2:79315794B51987205560493",
+        "name": "Candelaria",
+        "water_cells": 4
+      },
+      {
+        "index": 39858,
+        "id": "gb:SLV:ADM2:79315794B59411245897989",
+        "name": "San Francsico Chinameca",
+        "water_cells": 11
+      },
+      {
+        "index": 39940,
+        "id": "gb:SLV:ADM2:79315794B83892648288540",
+        "name": "Coatepeque",
+        "water_cells": 21
+      },
+      {
+        "index": 39980,
+        "id": "gb:SLV:ADM2:79315794B95898658703869",
+        "name": "San Emigdo",
+        "water_cells": 1
+      }
+    ]
+  },
+  "source_scientific_blockers": [
+    "Target-relative applicability and source/water interpretation have not been evaluated. Retain 2007 source and 2021 parent vintages; statutory 262 named units are not proof of all 58 current geometry matches.",
+    "Parent OSM recorded CC BY-SA 2.0 data attribution conflicts with actual ODbL data terms; explicit actual source-license binding and provenance limitations must be preserved before scientific/publication claims.",
+    "Complete foreign applicability and source competitors, physical support witnesses, native authority and accepted base owner zero have not run."
+  ],
+  "no_confirmed_source_rights_refusal": true,
+  "qualified_cells": 0,
+  "accepted_cells": 0,
+  "evidence_files": [
+    {
+      "path": "americas-20261017/el-salvador-original-screening-20261018/provider-source-evidence/ADM1-license.jpg",
+      "bytes": 121407,
+      "sha256": "e213797bcb489aca6f4fdff6e6a3a11256a4635e9290ebf082067ec09537aab5"
+    },
+    {
+      "path": "americas-20261017/el-salvador-original-screening-20261018/provider-source-evidence/License.png",
+      "bytes": 438591,
+      "sha256": "3b61f8b93960825cf5c691f090d73ff08229b3144a8dc094ff6be2936d74c394"
+    },
+    {
+      "path": "americas-20261017/el-salvador-original-screening-20261018/provider-source-evidence/SLV_ADM2.prj",
+      "bytes": 145,
+      "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4"
+    },
+    {
+      "path": "americas-20261017/el-salvador-original-screening-20261018/provider-source-evidence/archive-custody-and-records.json",
+      "bytes": 33003,
+      "sha256": "0fb9c4147c756c06d325943401e2d89ef53fb40e8a76911ff06b7fe6506d8969"
+    },
+    {
+      "path": "americas-20261017/el-salvador-original-screening-20261018/provider-source-evidence/decreto-762-roster-lines.json",
+      "bytes": 8878,
+      "sha256": "52afb96a7bbb3cbd9ff25b6b383038746ed55447c9daa1b151d16ec5e7fa797f"
+    },
+    {
+      "path": "americas-20261017/el-salvador-original-screening-20261018/provider-source-evidence/live-exact-commons-file.html",
+      "bytes": 111798,
+      "sha256": "c5bb4375aad60ca77ce0acbcf35b700bdedcb127be3f39e8faee96ce63fe337f"
+    },
+    {
+      "path": "americas-20261017/el-salvador-original-screening-20261018/provider-source-evidence/live-openstreetmap-copyright.html",
+      "bytes": 21314,
+      "sha256": "810763c88339245f7240e67f7f92001f796856a55f9986c7761da7e499dcf0e7"
+    },
+    {
+      "path": "americas-20261017/el-salvador-original-screening-20261018/provider-source-evidence/live-osm-boundaries.html",
+      "bytes": 25192,
+      "sha256": "8c227f7b9428dcfda1b995003207022d021dd37a51a2db6998e1afb227027856"
+    },
+    {
+      "path": "americas-20261017/el-salvador-original-screening-20261018/provider-source-evidence/meta.txt",
+      "bytes": 474,
+      "sha256": "554d42238ca4e44b37f34c1caa190e55f7dc68021d0c6ed8ba30e9d78ee93f48"
+    },
+    {
+      "path": "americas-20261017/el-salvador-original-screening-20261018/provider-source-evidence/parent-source-archive-custody.json",
+      "bytes": 1881,
+      "sha256": "2968bd3619b153d6e5461301af6c18d6a2765b1e18306123d988a8ae7b5c270c"
+    }
+  ]
+}

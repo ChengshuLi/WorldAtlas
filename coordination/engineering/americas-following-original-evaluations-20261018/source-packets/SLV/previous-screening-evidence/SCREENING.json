@@ -1,0 +1,177 @@
+{
+  "observed_at_utc": "2026-10-18T03:04:14.647915+00:00",
+  "kind": "task-only El Salvador original source and queue screening",
+  "package_id": "gb-SLV-ADM2--repair-evaluation",
+  "result": "Unclaimed bounded evaluation candidate, with source scientific applicability and parent license provenance still open.",
+  "original_queue_commit": "10927524e465bf1eef09a2e2c458525bde9c7442",
+  "accepted_main": "ff8a00269dafc6bbdf356e5e131d398860452e32",
+  "same_map_as_accepted": "252f2aa1e6309b6990985dec73611d6df0e11c70",
+  "original_cells": 1134,
+  "classes": {
+    "land": 1059,
+    "inland-water": 75
+  },
+  "owners": 58,
+  "contact_source_atoms": 72,
+  "interval_rows": 538,
+  "native_blocks": [
+    29
+  ],
+  "direct_exact_source_owner_associations": 58,
+  "complete_positive_family_features": 272,
+  "complete_parent_family_features": 14,
+  "complete_foreign_contact_family_features": 18,
+  "canonical_containing_parts": [
+    "data/geography/part-22.json"
+  ],
+  "canonical_source_geometry_value_equal": 0,
+  "foreign_source_contact_cells": {
+    "land": 3
+  },
+  "accepted_coordinate_overlap_cells": 0,
+  "accepted_same_owner_coordinate_overlap_cells": 0,
+  "accepted_owner_inventory_intersection": [],
+  "accepted_owner_identity_intersection": [],
+  "original106_snapshot_operands": 44,
+  "current_open_pr_count": 107,
+  "delta_closed_snapshot_prs": [
+    2445,
+    2452
+  ],
+  "delta_new_prs": [
+    2464,
+    2465,
+    2466
+  ],
+  "unchanged_remaining_snapshot_heads": true,
+  "current_delta_coordinate_products": 19,
+  "new_body_comparisons": 17,
+  "reused_exact_prior_comparisons": 2,
+  "pending_coordinate_overlap_cells": 0,
+  "pending_owner_inventory_intersection": [],
+  "pending_owner_identity_intersection": [],
+  "bounded_pending_screen_complete": true,
+  "current_claim_search": {
+    "exact_original_package_issue_count": 0,
+    "El_Salvador_PR_count": 0,
+    "SLV_PR_alias_results": "Three closed global source-custody/comparison deliveries: #1240, #1254, #1283.",
+    "existing_regional_source_review_issues": [
+      185,
+      186,
+      187
+    ],
+    "direct_reviews_186_187": "Both open, zero comments, no assignees on the observed GET.",
+    "no_public_reservation_inferred": true
+  },
+  "source_followups": [
+    "Keep all 272 original positive features, including ten literal Null names; named records total 262, so a simple 272-versus-262 numerical mismatch is not a valid rejection.",
+    "The exact positive source archive and Commons page record public-domain municipal map provenance from 2007. No source rights prohibition found; source authority and current applicability remain unevaluated.",
+    "The complete 2021 SLV parent archive labels OSM CC BY-SA 2.0; actual OSM data terms are ODbL. Preserve and resolve the data-versus-documentation discrepancy in the source permission chain before scientific/publication assertions.",
+    "Official Decree 762 records 44 municipalities and 262 districts; no source-feature-to-modern-district identity or geometry join was performed. The original targets are the existing 58 stable atlas location IDs.",
+    "All 75 original water cells remain owned by seven recorded locations; archive note about lake holes does not determine their territorial meaning.",
+    "Retain all 18 HND parent features and the Valle contact on three original land cells; complete foreign applicability is unexecuted."
+  ],
+  "qualified_cells": 0,
+  "accepted_cells": 0,
+  "public_claim_created": false,
+  "author_repository_mutated": false,
+  "new_geometry_source_native_physical_predicates_executed": false,
+  "lazy_fetch_attempted": false,
+  "pins": [
+    {
+      "path": "original-package.json",
+      "bytes": 4407,
+      "sha256": "02fe449f3095c180c34d593b3050c005fdc44853fabc394f7e14190877c2baac",
+      "git_blob_oid": "966a576d0219d0dab84f328cbe9d4560dab6c192"
+    },
+    {
+      "path": "original-intervals/package.json",
+      "bytes": 4407,
+      "sha256": "02fe449f3095c180c34d593b3050c005fdc44853fabc394f7e14190877c2baac",
+      "git_blob_oid": "966a576d0219d0dab84f328cbe9d4560dab6c192"
+    },
+    {
+      "path": "original-intervals/block-029.json.gz",
+      "bytes": 3779,
+      "sha256": "94762bd96a234014010b5b9c5b5b6f00f178eff8fca664bc4fe05071e5bad589",
+      "git_blob_oid": "e3feeb2552cb5c3463285680138dcfdf08bab0fd"
+    },
+    {
+      "path": "original-member-scope.json",
+      "bytes": 27698,
+      "sha256": "bfb0fe2010559ffb3c3927cd0f237e0403518286a4d40085dd2e165f3d11f5c3",
+      "git_blob_oid": "3744fbce9d4f2e737af1c073922152db5f72106a"
+    },
+    {
+      "path": "original-contact-roster.json",
+      "bytes": 36889,
+      "sha256": "aa7beac8045a3855662e4e63e5b02aee6eca942a45801488e7dd972368658d34",
+      "git_blob_oid": "ba58789aa01357ba078ba35e6a246d6f1791dea8"
+    },
+    {
+      "path": "source-owner-associations.json",
+      "bytes": 182581,
+      "sha256": "b1d17353e4d58ec37b64a33e38a0c44253b790d730ca21db8c9d172b6a878afd",
+      "git_blob_oid": "7375574006464dd30d13dd55f68c39a7ba16d3dc"
+    },
+    {
+      "path": "whole-original-stage-inputs.json",
+      "bytes": 584574,
+      "sha256": "1df229bb2329c07a5a05572c48d7099bfbde35e64b5d538bb81d936cf48d3775",
+      "git_blob_oid": "497ddb950ac310b594b3cd4453192b3cfe1598f0"
+    },
+    {
+      "path": "original-native-owner-patch.json",
+      "bytes": 18129,
+      "sha256": "0acca14bbdf9a7ccf46dda2217c05ee4a5b9e651b6a39a292fbdd1bcf4d6a04e",
+      "git_blob_oid": "bf61c7915cc1409091255a01e9e6012d0be9d674"
+    },
+    {
+      "path": "original-native-class-patch.json",
+      "bytes": 18828,
+      "sha256": "0b74f40e6d81f78712621f3eee270a017563b9f9b83d28cd6f8b39b00966f462",
+      "git_blob_oid": "8745b097420650310d1ad01681b164cedba2b718"
+    },
+    {
+      "path": "source-membership-review.json",
+      "bytes": 10203,
+      "sha256": "6ddb8567fd73c0de883e448a65b44fb72b8dc1de87b9f031984693e341e7aa06",
+      "git_blob_oid": "45eff58926166fbe38c45e7eff827cfed2acab7d"
+    },
+    {
+      "path": "coordinate-owner-overlap-screen.json",
+      "bytes": 64238,
+      "sha256": "b4e5096d2b8b8fef117880ee0ec9e9f6e9f7e8e3a49cfceec695522613c45449",
+      "git_blob_oid": "07890542733b1efcb28f4d9eedb511ba2e34121f"
+    },
+    {
+      "path": "new-2466-overlap-closure.json",
+      "bytes": 20915,
+      "sha256": "4a21bab885aceb6757d969b10e8630a25598ab9862b5e03ec34ba97bfd70b5e1",
+      "git_blob_oid": "bf621c8cd820e69388eb0d5e5c867c4d0399b1d1"
+    },
+    {
+      "path": "rights-history-and-applicability.json",
+      "bytes": 9667,
+      "sha256": "bb83d7139b3c6d4253f19b2d1508a6160fff170c4470c19e3e3583806c02b103",
+      "git_blob_oid": "199ef04edcfe44ec3ea875adef792392650db24c"
+    },
+    {
+      "path": "screening-input-custody.json",
+      "bytes": 3248,
+      "sha256": "dac7a4c8413a2f1161ca91db19366dca83c4effdfdda669a0eec583fcde2cc83",
+      "git_blob_oid": "f04911753daefd9b54ded8f543ff89f72383dfb7"
+    },
+    {
+      "path": "pending-inventory-delta.json",
+      "bytes": 616,
+      "sha256": "131be128f5afde6fbe60766e6f702fbcbf462d0f4611449b31dcac605154914f",
+      "git_blob_oid": "6e45599126d87411c2c3486c72a5abc1c81e038a"
+    }
+  ],
+  "limits": [
+    "Screening uses actual literal coordinates and owners, not country/title exemptions. Current107 snapshot is bounded observed evidence, not a permanent reservation.",
+    "No source or physical qualification, native authority constructor, accepted base owner-zero verification, geometry operation, jurisdiction rewrite or repair-credit claim was made.",
+    "No public issue, PR, comment, commit, branch, accepted map or source bank was changed."
+  ]
+}

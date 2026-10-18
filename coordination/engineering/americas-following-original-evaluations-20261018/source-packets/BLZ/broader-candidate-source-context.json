@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-18",
+  "purpose": "extend the original Belize package metadata scout with candidate-list source IDs/families and exact package issue/PR lookup",
+  "preserves": "metadata-scout.json remains unchanged",
+  "package": "gb-BLZ-ADM1--repair-evaluation",
+  "candidate_list_method": {
+    "input": "source-candidates-block-028.json.gz and source-candidates-block-029.json.gz from the pinned original current-cell work queue",
+    "selection": "retain candidate-list runs whose owner-index list contains any package owner index 10194–10199, then union their source-feature indices",
+    "interpretive_limit": "candidate-list membership is a search/input contact only; this report makes no geometry-intersection or territorial conclusion"
+  },
+  "candidate_block_pins": [
+    {"commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f", "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-028.json.gz", "git_blob_oid": "242c191e5cb4822c969247f4d4af99b56a5ec160"},
+    {"commit": "3449c224e65ed3b8910c6ab37886bcdfc4952c7f", "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-029.json.gz", "git_blob_oid": "3fc846f1a3a57841d82c695b97ad31b93af681e6"}
+  ],
+  "candidate_list_source_contacts": [
+    {"source_index": 3396, "family_index": 40, "source_family": "gb:BLZ:ADM1", "source_id": "gb:BLZ:ADM1:66346737B60973332075708", "ordinal": 0, "name": "Orange Walk", "owner_indices": [10199], "contact_role": "package primary-source feature"},
+    {"source_index": 3397, "family_index": 40, "source_family": "gb:BLZ:ADM1", "source_id": "gb:BLZ:ADM1:66346737B23604924227645", "ordinal": 1, "name": "Corozal", "owner_indices": [10195], "contact_role": "package primary-source feature"},
+    {"source_index": 3398, "family_index": 40, "source_family": "gb:BLZ:ADM1", "source_id": "gb:BLZ:ADM1:66346737B58775340764376", "ordinal": 2, "name": "Belize", "owner_indices": [10198], "contact_role": "package primary-source feature"},
+    {"source_index": 3399, "family_index": 40, "source_family": "gb:BLZ:ADM1", "source_id": "gb:BLZ:ADM1:66346737B25506523624111", "ordinal": 3, "name": "Cayo", "owner_indices": [10196], "contact_role": "package primary-source feature"},
+    {"source_index": 3400, "family_index": 40, "source_family": "gb:BLZ:ADM1", "source_id": "gb:BLZ:ADM1:66346737B48775360277934", "ordinal": 4, "name": "Stann Creek", "owner_indices": [10197], "contact_role": "package primary-source feature"},
+    {"source_index": 3401, "family_index": 40, "source_family": "gb:BLZ:ADM1", "source_id": "gb:BLZ:ADM1:66346737B22858594960980", "ordinal": 5, "name": "Toledo", "owner_indices": [10194], "contact_role": "package primary-source feature"},
+    {"source_index": 43983, "family_index": 209, "source_family": "gb:MEX:ADM2", "source_id": "gb:MEX:ADM2:50627088B47039366190393", "ordinal": 1800, "name": "Othón P. Blanco", "owner_indices": [28496], "contact_role": "additional source feature present in a candidate list for a package-owner run; not an intersection finding"}
+  ],
+  "github_exact_package_search": {
+    "date": "2026-10-18",
+    "repository": "ChengshuLi/WorldAtlas",
+    "query": "repo:ChengshuLi/WorldAtlas \"gb-BLZ-ADM1--repair-evaluation\"",
+    "endpoint": "GitHub Search Issues (covers issues and pull requests)",
+    "total_count": 0,
+    "issues": [],
+    "pull_requests": [],
+    "result_scope": "Exact package literal phrase; no title/body results returned by GitHub search. This is a point-in-time metadata lookup, not a reservation guarantee."
+  },
+  "limits": {
+    "no_geometry_fetch_or_computation": true,
+    "no_source_body_fetch": true,
+    "no_crs_or_rights_or_sovereignty_judgment": true,
+    "claim_eligibility": "remains with Main / strong reviewer"
+  }
+}
