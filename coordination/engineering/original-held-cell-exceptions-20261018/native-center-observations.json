@@ -23,35 +23,6 @@
         6.663368865472858
       ]
     },
-    "source_target": {
-      "source_id": "gb:LBR:ADM2:62588387B45934307689461",
-      "effect": {
-        "hits": [],
-        "counts": {
-          "cells": 0,
-          "interior": 0,
-          "boundary": 0,
-          "line": 0,
-          "point": 0
-        },
-        "work": {
-          "requested_cells": 2,
-          "requested_rows": 1,
-          "geometry_parts": 1,
-          "vertices": 80,
-          "polygon_parts": 1,
-          "line_segments": 0,
-          "points": 0,
-          "stock_scan_blocks": 1,
-          "exact_line_cell_tests": 0,
-          "exact_point_cell_tests": 0
-        }
-      },
-      "feature": {
-        "source_id": "gb:LBR:ADM2:62588387B45934307689461",
-        "authority": "target base_geometry in exact pinned Liberia source_evidence.targets record"
-      }
-    },
     "physical_report_mapped_land_support": {
       "source_id": "gb:LBR:ADM2:62588387B45934307689461",
       "run_support_rows": [
@@ -139,7 +110,43 @@
       ],
       "physical_issues": []
     },
-    "original_causal_result_path": "liberia-causal-result.json"
+    "original_causal_result_path": "liberia-causal-result.json",
+    "selected_target_base_footprint": {
+      "source_id": "gb:LBR:ADM2:62588387B45934307689461",
+      "effect": {
+        "hits": [],
+        "counts": {
+          "cells": 0,
+          "interior": 0,
+          "boundary": 0,
+          "line": 0,
+          "point": 0
+        },
+        "work": {
+          "requested_cells": 2,
+          "requested_rows": 1,
+          "geometry_parts": 1,
+          "vertices": 80,
+          "polygon_parts": 1,
+          "line_segments": 0,
+          "points": 0,
+          "stock_scan_blocks": 1,
+          "exact_line_cell_tests": 0,
+          "exact_point_cell_tests": 0
+        }
+      },
+      "feature": {
+        "source_id": "gb:LBR:ADM2:62588387B45934307689461",
+        "authority": "target.base_geometry in exact pinned Liberia source_evidence.targets record",
+        "geometry_field": "base_geometry",
+        "role": "selected base footprint; not raw positive source operand"
+      }
+    },
+    "interpretation_limits": [
+      "The source_evidence target.base_geometry query is a selected base footprint observation, not a query against the raw positive source operand.",
+      "A no-hit against the selected base footprint can be the expected missing-footprint repair gap and does not establish original source absence or no-repair eligibility.",
+      "Positive mapped-land-support observations and the territorial exclusion hold remain separate retained evidence."
+    ]
   },
   "egypt": [
     {
