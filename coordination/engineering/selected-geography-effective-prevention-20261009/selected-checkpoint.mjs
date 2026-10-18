@@ -492,8 +492,11 @@ function legacyRegistry(registry,authorities) {
 }
 function checkpointAdditions(selected,currentTargets) {
   const index=selected.normalized.rows,project=row=>{
-    // Native cells bind their own current pointset and exact interval custody.
-    if (nativeOnlyComponent(row,valueSha)) return row;
+    // readSelection already validated every normalized native component, including
+    // its base hash and complete interval custody. This private projection only
+    // dispatches that validated representation; rereading the store preserves
+    // session lifetime checks without replaying validation on each traversal.
+    if (row.representation === 'native-cells') return row;
     const target=currentTargets.find(p=>p.target_id===row.target_id);
     demand(target && target.pixelIndex===row.pixelIndex,'Accepted current target identity omitted');
     return {...row,base_geometry:target.geometry,base_geometry_sha256:target.geometry_sha256};
