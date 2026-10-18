@@ -175,3 +175,41 @@ metadata reference, while appended native intervals still undergo the existing
 owner-zero, overlap and conservation checks. This reuses accepted qualification;
 it does not turn a cold candidate-code report into an accepted checkpoint artifact
 or claim that historical scientific predicates ran again.
+
+### Accepted coordinate result reuse
+
+Hosted accepted checkpoint admission authenticates the complete archived
+certificate and its publication hashes, supported schema, successful original
+native report, accepted execution lineage and code, actual selector, live
+ledger/registry/patch/manifest, reader routes and current policy. It does not
+repeat the certificate's owner-by-primitive scientific computation.
+
+This relies on the producing code, not on the native success label alone.
+`selected-joint-entry.mjs` publishes only the certificate obtained from the
+private `authenticateTransition` capability. At the cold or trusted-catalogue
+seed boundary, `coordinateCheck` establishes complete owner/index/source and
+effective-primitive identities. `qualifyTransition` preserves that baseline;
+`deriveCoordinateDelta` rejects changed old primitives and checks every new
+primitive's owner index and base geometry before recomputing changed effective
+hashes. Metadata projection checks every stable owner/index and each changed
+source feature. The producer then binds that exact candidate certificate in its
+facts and publication after the native comparison succeeds. Repeated deliveries
+preserve this invariant inductively.
+
+A trusted catalogue seed still runs the full coordinate check because it is not
+an authenticated hosted accepted artifact. A fixture which corrupts an owner
+index and then invents a fresh successful accepted job, publication and receipt
+crosses the accepted-result trust boundary; that negative belongs at seed/cold
+admission or producer construction. Tampering with the actual accepted bytes,
+unsupported schemas, changed live inputs, changed executing code or incompatible
+policy/selector remain admission failures. No caller-controlled skip option is
+provided.
+
+The retained South Africa PR #2427 artifact provides a historical check of this
+contract: its original executing commit
+`2013eb75fdaa4fdd7de311da09a5c0bd1fbf4f28` binds checkpoint code SHA256
+`7f12b9fde333a0c17509f573fd92f507047912590faea57d6ca2b1c1e95f43f9`
+and joint-entry SHA256
+`bfe424cbe10dceb86469659f9bba9d7236133330981ca21e230a4e6e79d038d1`.
+Those immutable bodies already implement the same owner/index preservation,
+per-addition validation, effective-hash derivation and private publication path.
