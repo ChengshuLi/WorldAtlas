@@ -1,0 +1,89 @@
+--- worked-CIV/prepare-native-config.mjs
++++ CAF/prepare-native-config.mjs
+@@ -6,7 +6,7 @@
+ import {createHash} from 'node:crypto';
+ const [root, inputCommit, output] = process.argv.slice(2);
+ const base = '21984e9ec4ec7370bc807e2da23cea2228747698';
+-const prefix = 'coordination/engineering/cote-divoire-original-repair-20261018-worker2/';
++const prefix = 'coordination/engineering/central-african-republic-original-repair-20261018-worker4/';
+ const need = (value, message) => { if (!value) throw Error(message); };
+ const sha = body => createHash('sha256').update(body).digest('hex');
+ need(/^[a-f0-9]{40}$/.test(inputCommit) && !fs.existsSync(output), 'Exact input commit and fresh output required');
+@@ -34,8 +34,8 @@
+ const periodic = json(prefix + 'source-review/retained-periodic-negative-reconciliation-001/retained-periodic-negative-reconciliation.json', inputCommit);
+ const original = [30,31].flatMap(block =>
+   json(prefix + 'original-intervals-001/block-' + String(block).padStart(3, '0') + '.json.gz', inputCommit));
+-need(stages.length === 66 && members.length === 66 && original.length === 1028
+-  && foreign.complete_foreign_features === 73010 && foreign.complete_foreign_families === 365
++need(stages.length === 46 && members.length === 46 && original.length === 1319
++  && foreign.complete_foreign_features === 73303 && foreign.complete_foreign_families === 365
+   && periodic.unresolved_foreign_bound_features === 0, 'Complete original scientific scope required');
+ const byOwner = new Map(), patchRows = new Map();
+ let cells = 0;
+@@ -58,21 +58,21 @@
+   }
+   return result;
+ };
+-need(cells === 2049 && byOwner.size === 66, 'Original denominator changed');
++need(cells === 2130 && byOwner.size === 46, 'Original denominator changed');
+ const patch = {rows: [...patchRows].sort(([a],[b]) => a-b).map(([y,runs]) => ({y,runs:merge(runs)}))};
+ const classRows = new Map([...byOwner].map(([owner, rows]) => [owner,
+   [...rows].sort(([a],[b]) => a-b).map(([y,runs]) => ({y,runs:merge(runs)}))]));
+ const cataloguePath = 'coordination/engineering/original-geography-source-corpus-20261006/catalogue.json';
+ const catalogue = json(cataloguePath);
+-const family = catalogue.products.find(product => product.key === 'gb:CIV:ADM3');
+-need(family.feature_count === 510, 'Whole domestic original competitor family required');
++const family = catalogue.products.find(product => product.key === 'gb:CAF:ADM3');
++need(family.feature_count === 175, 'Whole domestic original competitor family required');
+ const parts = family.parts.map(part => ({...pin(part.path),
+   decoded_bytes:part.uncompressed_bytes, decoded_sha256:part.uncompressed_sha256}));
+ const physicalPath = prefix + 'physical-001/whole-target-support.json';
+ const physical = json(physicalPath, inputCommit);
+ const physicalPin = pins.get(inputCommit + ':' + physicalPath);
+ const physicalBySource = new Map(physical.results.map(result => [result.target,result]));
+-need(physicalBySource.size === 66, 'Complete whole-member physical output required');
++need(physicalBySource.size === 46, 'Complete whole-member physical output required');
+ const memberById = new Map(members.map(member => [member.source_id,member]));
+ const targets = stages.map(stage => {
+   const member = memberById.get(stage.target), support = physicalBySource.get(stage.target)?.support;
+@@ -84,7 +84,7 @@
+   const classes = ['mapped_land_support'];
+   if (support.mapped_inland_water_support?.coordinates?.length) classes.push('mapped_inland_water_support');
+   return {id:stage.target, target_id:member.target_id, pixelIndex:member.pixelIndex,
+-    base_geometry:stage.selected.geometry, source_family:'gb:CIV:ADM3',
++    base_geometry:stage.selected.geometry, source_family:'gb:CAF:ADM3',
+     source_receipt_sha256:physicalPin.sha256, coverage_classes:classes,
+     coverage_rows:classRows.get(member.pixelIndex), territorial_exclusions:[]};
+ });
+@@ -99,17 +99,17 @@
+ }
+ need(cohortRows.length === 49625 && new Set(cohortRows.map(row => row.id)).size === 49625,
+   'Complete world owner association inventory required');
+-const canonicalPaths = ['data/geography/part-4.json'];
++const canonicalPaths = ['data/geography/part-2.json'];
+ const canonical = canonicalPaths.flatMap(name => json(name).features)
+-  .filter(feature => feature.properties.reference_owner === "Côte d'Ivoire");
+-const country = cohortRows.filter(row => row.owner === "Côte d'Ivoire");
+-need(canonical.length === 510 && country.length === canonical.length
+-  && canonical.every(feature => country.some(row => row.id === feature.id)), 'Complete Cote dIvoire country context required');
++  .filter(feature => feature.properties.reference_owner === 'Central African Republic');
++const country = cohortRows.filter(row => row.owner === 'Central African Republic');
++need(canonical.length === 175 && country.length === canonical.length
++  && canonical.every(feature => country.some(row => row.id === feature.id)), 'Complete Central African Republic country context required');
+ const config = {version:1, selector:{commit:base,path:'data/ownership-selection.json'},
+   ...(foreign.whole_bounds_candidate_families.length ? {compact_territorial_exclusions:true,
+     territorial_exclusion_families:foreign.whole_bounds_candidate_families} : {}),
+   source_evidence:{version:1,kind:'source-target-native-evidence-v1',
+-    catalogue:pins.get(base + ':' + cataloguePath), families:[{source_id:'gb:CIV:ADM3',parts}],
++    catalogue:pins.get(base + ':' + cataloguePath), families:[{source_id:'gb:CAF:ADM3',parts}],
+     physical_evidence:physicalPin,
+     physical_input:pin(prefix + 'source-stage-001/original-stage-inputs.json',inputCommit),
+     physical_reproduction:pin('scripts/qualify-source-cohort.py'),
+@@ -120,5 +120,5 @@
+ for (const [name,value] of Object.entries({'source-evidence-config.json':config,'native-requested-patch.json':patch}))
+   fs.writeFileSync(path.join(output,name),JSON.stringify(value)+'\n',{flag:'wx'});
+ console.log(JSON.stringify({original_cells:cells,owners:byOwner.size,whole_members:targets.length,
+-  complete_domestic_features:510,foreign_negative_families:foreign.whole_bounds_candidate_families,
+-  complete_canonical_CIV_owners:canonical.length,qualified_cells:0}));
++  complete_domestic_features:175,foreign_negative_families:foreign.whole_bounds_candidate_families,
++  complete_canonical_CAF_owners:canonical.length,qualified_cells:0}));
