@@ -1,0 +1,25 @@
+{
+  "tag": "native-authority-original-001",
+  "cwd": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0f3d792478426ce8bbf8f8646036980b6da5f3b0837c8945e0ba933be6452e8a/work",
+  "command": [
+    "/usr/bin/time",
+    "-l",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "scripts/prepare-delivery-handoff.mjs",
+    "native-authority",
+    "coordination/engineering/liberia-original-repair-20261018/config/native-authority-original-001.json",
+    "coordination/engineering/liberia-original-repair-20261018/native-authority-original-001"
+  ],
+  "timeout_seconds": 300,
+  "config_commit": "cf2f5b9bc5d20916094e6c67b3b16bb33cd79d8a",
+  "full_original_cells": 2026,
+  "original_land_cells": 2026,
+  "original_water_cells": 0,
+  "whole_requested_members": 47,
+  "direct_authority_before_any_diagnostic": true,
+  "started_at": "2026-10-18T02:40:27.606255+00:00",
+  "no_custom_memory_policy_fields": true,
+  "exit_code": 1,
+  "elapsed_seconds": 10.674737167,
+  "finished_at": "2026-10-18T02:40:38.283167+00:00"
+}
