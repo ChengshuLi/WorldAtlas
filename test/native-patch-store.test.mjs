@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
-import {admitNativePatchStore} from '../scripts/native-patch-store.mjs';
+import {admitNativePatchStore,admitNativeLedgerStore} from '../scripts/native-patch-store.mjs';
 import {valueBytes} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 const hash=body=>createHash('sha256').update(body).digest('hex');
 const temporary=t=>{const dir=fs.mkdtempSync(path.join(os.tmpdir(),'patch-store-test-'));t.after(()=>fs.rmSync(dir,{recursive:true,force:true}));return dir;};
@@ -98,7 +98,7 @@ test('native JSON scalar and surrogate semantics survive every byte split',async
 
 test('dense native row ingestion and iteration stay within a fixed 64MiB child heap',async t=>{
  const directory=temporary(t),module=new URL('../scripts/native-patch-store.mjs',import.meta.url).href;
- const script=`import {admitNativePatchStore} from ${JSON.stringify(module)};import {createHash} from 'node:crypto';
+ const script=`import {admitNativePatchStore,admitNativeLedgerStore} from ${JSON.stringify(module)};import {createHash} from 'node:crypto';
   function* chunks(){yield Buffer.from('{"rows":[{"runs":[');for(let i=0;i<250000;i++)yield Buffer.from((i?',':'')+JSON.stringify([i*2,i*2+1,1]));yield Buffer.from('],"y":0}]}\\n');}
   let bytes=0;const hash=createHash('sha256');for(const chunk of chunks()){bytes+=chunk.length;hash.update(chunk);}const sha256=hash.digest('hex');
   const store=await admitNativePatchStore({directory:${JSON.stringify(directory)},size:500000,ownerCount:1,chunks:chunks(),expected:{bytes,sha256}});
@@ -243,7 +243,7 @@ test('native inline triples reject malformed tuples and partials even before rep
 test('native inline triples avoid per-run JSON arrays, strings and promise dispatch',t=>{
  const directory=temporary(t),module=new URL('../scripts/native-patch-store.mjs',import.meta.url).href;
  const script=`import assert from 'node:assert/strict';import {createHash} from 'node:crypto';import {createHook} from 'node:async_hooks';
-  import {admitNativePatchStore} from ${JSON.stringify(module)};
+  import {admitNativePatchStore,admitNativeLedgerStore} from ${JSON.stringify(module)};
   const parse=JSON.parse,toString=Buffer.prototype.toString;let observed=null,parsing=false;
   JSON.parse=function(value,...rest){const before=parsing;parsing=!!observed&&Buffer.isBuffer(value)&&value[0]===91;
    try{const result=Reflect.apply(parse,this,[value,...rest]);if(parsing&&Array.isArray(result)&&result.length===3)observed.arrays++;return result;}finally{parsing=before;}};
@@ -265,4 +265,56 @@ test('native inline triples avoid per-run JSON arrays, strings and promise dispa
  assert.deepEqual({allocations:observations.map(({arrays,strings})=>({arrays,strings})),extraPromises:observations[1].promises-observations[0].promises},
   {allocations:[{arrays:0,strings:0},{arrays:0,strings:0}],extraPromises:0},result.stdout);
  assert.deepEqual(fs.readdirSync(directory),[]);
+});
+
+
+function observeWriterIO({shortWrites=false,writeError,truncateError}={}){
+ const original={open:fs.openSync,write:fs.writeSync,truncate:fs.ftruncateSync},files=new Map(),writes=[],truncates=[];
+ fs.openSync=function(name,...args){const fd=original.open.call(this,name,...args);files.set(fd,String(name));return fd;};
+ fs.writeSync=function(fd,buffer,offset,length,position){
+  writes.push({path:files.get(fd),length,position});
+  if(writeError&&files.get(fd)?.endsWith('/runs.bin'))throw writeError;
+  return original.write.call(this,fd,buffer,offset,shortWrites?Math.min(length,5):length,position);
+ };
+ fs.ftruncateSync=function(fd,length){truncates.push({path:files.get(fd),length});if(truncateError)throw truncateError;return original.truncate.call(this,fd,length);};
+ return {writes,truncates,restore(){fs.openSync=original.open;fs.writeSync=original.write;fs.ftruncateSync=original.truncate;}};
+}
+test('store reset at buffered logical end keeps sequential writes batched',async t=>{
+ const directory=temporary(t),value={rows:Array.from({length:64},(_,y)=>({y,runs:[[0,2,1]]}))},trace=observeWriterIO();let store;
+ try{store=await open(directory,JSON.stringify(value));
+  assert.deepEqual(materialize(store),value);assert.equal(store.canonical_sha256,hash(valueBytes(value)));
+  assert.equal(trace.truncates.length,0,'No first-field reset may truncate an unchanged logical end');
+  assert.equal(trace.writes.filter(p=>p.path.endsWith('/runs.bin')).length,1);
+  assert.equal(trace.writes.filter(p=>p.path.endsWith('/rows.bin')).length,1);
+ }finally{trace.restore();store?.close();}
+});
+test('store reset at already flushed component end preserves complete ledger projections',async t=>{
+ const directory=temporary(t),value={rows:[0,1,2].map(i=>({component_id:String(i),native_rows:[{y:i,runs:[[i,i+1,1]]}]}))};
+ const body=Buffer.from(JSON.stringify(value)),trace=observeWriterIO();let store;
+ try{store=await admitNativeLedgerStore({directory,size:100,ownerCount:10,chunks:[body],expected:{bytes:body.length,sha256:hash(body)}});
+  assert.equal(store.canonical_sha256,hash(valueBytes(value)));
+  assert.equal(trace.truncates.length,0);
+  assert.equal(trace.writes.filter(p=>p.path.endsWith('/runs.bin')).length,3,'Each completed component still flushes for genuine canonical readback');
+  for(const c of store.componentEntries())assert.equal([...store.componentCanonicalChunks(c)].join(''),valueBytes(value.rows[c.ordinal]).toString());
+ }finally{trace.restore();store?.close();}
+});
+test('store actual duplicate-field rewind retains flush and truncate',async t=>{
+ const directory=temporary(t),text='{"rows":[{"y":0,"runs":[[0,9,1]],"runs":[[2,3,2]]}],"rows":[{"y":1,"runs":[[4,5,3]]}]}';
+ const trace=observeWriterIO();let store;
+ try{store=await open(directory,text);assert.deepEqual(materialize(store),JSON.parse(text));
+  assert.equal(store.canonical_sha256,hash(valueBytes(JSON.parse(text))));
+  assert(trace.truncates.some(p=>p.path.endsWith('/runs.bin')));assert(trace.truncates.some(p=>p.path.endsWith('/rows.bin')));
+ }finally{trace.restore();store?.close();}
+});
+test('store deferred end flush handles partial writes without changing bytes',async t=>{
+ const directory=temporary(t),value={rows:[{y:1,runs:[[0,2,1],[3,4,2]]}]},trace=observeWriterIO({shortWrites:true});let store;
+ try{store=await open(directory,JSON.stringify(value));assert.deepEqual(materialize(store),value);assert.equal(store.canonical_sha256,hash(valueBytes(value)));
+  assert(trace.writes.filter(p=>p.path.endsWith('/runs.bin')).length>=5);
+ }finally{trace.restore();store?.close();}
+});
+for(const mode of ['final-flush','rewind-flush','rewind-truncate'])test('store reset preserves '+mode+' failure and cleanup',async t=>{
+ const directory=temporary(t),failure=Error(mode),trace=observeWriterIO(mode==='rewind-truncate'?{truncateError:failure}:{writeError:failure});
+ const text=mode==='final-flush'?'{"rows":[{"y":0,"runs":[[0,1,1]]}]}':'{"rows":[{"y":0,"runs":[[0,1,1]],"runs":[]}]}';
+ try{await assert.rejects(open(directory,text),error=>error===failure);assert.deepEqual(fs.readdirSync(directory),[]);}
+ finally{trace.restore();}
 });

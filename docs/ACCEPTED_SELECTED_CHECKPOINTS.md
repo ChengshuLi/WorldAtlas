@@ -405,3 +405,12 @@ measured the exact `valueSha` equality pass at 13.993 seconds and 1,271,006 read
 versus 14.86 milliseconds and 5,292 component-descriptor reads for the already
 admitted identities. Both passes agreed on every complete component. This is an
 isolated equality-pass observation, not a whole qualification speedup claim.
+
+### Preserve buffered writes at an unchanged logical end
+
+The private native-store writer skips `reset(position)` only when `position`
+already equals its complete logical end, including pending buffered bytes. This
+is the first `runs` field of an ordinary row. Pending bytes still flush at the
+existing capacity, canonical-readback and final-admission boundaries. A genuine
+duplicate-key rewind still flushes and truncates, with the original write-error
+and cleanup behavior. This changes neither stored formats nor admitted identities.
