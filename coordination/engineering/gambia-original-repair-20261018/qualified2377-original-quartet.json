@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "package_id": "gb-GMB-ADM2--repair-evaluation",
+  "issue": null,
+  "public_claim_status": "denied-known-not-executed-stopped",
+  "original_cells": 2377,
+  "qualified_cells": 2377,
+  "held_cells": 0,
+  "original_owners": 34,
+  "ALL_positive_source_atoms": 42,
+  "qualified_components": 34,
+  "complete_country_owners": 40,
+  "complete_country_atoms": 48,
+  "class_cells": {
+    "original": {
+      "land": 2377,
+      "inland_water": 0
+    },
+    "qualified": {
+      "land": 2377,
+      "inland_water": 0
+    },
+    "held": {
+      "land": 0,
+      "inland_water": 0
+    }
+  },
+  "new_accepted_cells": 0,
+  "new_delivered_cells": 0,
+  "direct_original_authority_succeeded": true,
+  "diagnostic_or_narrowing": false,
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "01cb8e68c14883664922ac83cf15f3b5cbad5587",
+        "path": "coordination/engineering/gambia-original-repair-20261018/native-authority-001/original-rule-preimage.json",
+        "mode": "100644",
+        "git_blob_oid": "97f55f4864622cd26811881b10bdbc565e3a6672",
+        "bytes": 742,
+        "sha256": "d9807385f3a13324f6c74c2e6b83b65ba8dc435f08963eb4a45c0e2d1a150edd"
+      },
+      "source_authority": {
+        "commit": "01cb8e68c14883664922ac83cf15f3b5cbad5587",
+        "path": "coordination/engineering/gambia-original-repair-20261018/native-authority-001/authority-binding.json",
+        "mode": "100644",
+        "git_blob_oid": "4f8c9f79111567d6e175fd3cf98ee4365b6314dd",
+        "bytes": 745,
+        "sha256": "933351777f4745a919582a1c3317da52ff9364a0a889e9d165590429a8fca8ac"
+      },
+      "ledger": {
+        "commit": "01cb8e68c14883664922ac83cf15f3b5cbad5587",
+        "path": "coordination/engineering/gambia-original-repair-20261018/native-authority-001/constructor-result.json",
+        "mode": "100644",
+        "git_blob_oid": "61da51228a70f73d458b868350e9847a25532535",
+        "bytes": 96171,
+        "sha256": "735b45b42779f1a8bba447930519d1a237eb52d7cb05cdcc6dabf4968ce378d6"
+      },
+      "native_patch": {
+        "bytes": 34717,
+        "commit": "343543defc6b5893f0113ba60432e2111a02a51b",
+        "git_blob_oid": "2840eff62d2f4410ada13e1f716b4b259531d106",
+        "mode": "100644",
+        "path": "coordination/engineering/gambia-original-repair-20261018/native-request-001/native-requested-patch.json",
+        "sha256": "23b508f48d980ce253c4bb75a9bd5a8de6e8e62837612566f2a0fb3957fd5063"
+      }
+    }
+  ],
+  "source_evidence": {
+    "bytes": 187992,
+    "commit": "38fd3c394dae963ef727f85e1ec7cb0e96d8f891",
+    "git_blob_oid": "22699bd6dd278af350575dce141a59c320c0e95a",
+    "mode": "100644",
+    "path": "coordination/engineering/gambia-original-repair-20261018/source-evidence-001/source-evidence.json",
+    "sha256": "993a647d87e1737cfe69e9595f2138c465866085ae33a56b72cbd2dd8d9bafb7"
+  },
+  "original_scope_accounting": {
+    "commit": "01cb8e68c14883664922ac83cf15f3b5cbad5587",
+    "path": "coordination/engineering/gambia-original-repair-20261018/verification/original-accounting.json",
+    "mode": "100644",
+    "git_blob_oid": "d6167a3c6a52712b9f49187df9cb3910c144e441",
+    "bytes": 13752,
+    "sha256": "14010d312f5f6280543069388004918e92f9ff76fecd3913ee674f6440dada04"
+  },
+  "operating_observation": {
+    "commit": "01cb8e68c14883664922ac83cf15f3b5cbad5587",
+    "path": "coordination/engineering/gambia-original-repair-20261018/native-authority-001/operating-observation.json",
+    "mode": "100644",
+    "git_blob_oid": "cd1a2f2f912b52eadc643d5075c1a8d779a69818",
+    "bytes": 583,
+    "sha256": "fc3376663b3558e5b9a735f2f5691c7e06e64d193cd978e9c228f0405d64a9c3"
+  },
+  "held_original": null,
+  "limits": [
+    "Physical interpretation and semantic reconciliation are retained reviewed source evidence; actual current owner-zero is checked by native consumers.",
+    "Witness exclusion applies only to requested native centres. Original whole-source physical/hierarchy issues and historical source/resource limits remain retained; no whole-parent certification or acceptance is inferred.",
+    "Historical2020WorldBank ward-derived district source; projection/vintage and Banjul nine-member/cross-LGA legal-role questions remain open.",
+    "All42 whole physical members, all15 issues and whole48-feature domestic family retained; no current legal or factual approval.",
+    "Independent review and actual latest selected-owner-zero/conservation/emitted checks remain separate; accepted/delivered0.",
+    "Public issue creation denied before execution and stopped; no public issue or claim asserted."
+  ]
+}
