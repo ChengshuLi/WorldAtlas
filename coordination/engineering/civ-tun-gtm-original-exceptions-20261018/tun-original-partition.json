@@ -1,0 +1,450 @@
+{
+  "package_id": "gb-TUN-ADM2--repair-evaluation",
+  "original_interval_read_commit": "c076eae068c6bba7020c898bd51604aaf8d973c4",
+  "accepted_selection_commit": "dfe57bc8511fea3ee6cc78384ff2e94d19c7cecd",
+  "original_class_counts": {
+    "inland-water": 123,
+    "land": 7353
+  },
+  "original_cells": 7476,
+  "original_intervals": 2631,
+  "original_owners": 88,
+  "accepted_original_owner_cells": 7466,
+  "proposed_documented_exceptions": 10,
+  "different_owner_intersections": [],
+  "original_key_sha256": "ad64b458dcbb87a2459fa06e60b10c2e66d53126137e5953492c6b749d2bd071",
+  "accepted_original_key_sha256": "0c87f83466fdf8e098a88ae94bde33df94e77f1a5f5316b5ee1892e9b8ecb590",
+  "proposed_exception_key_sha256": "2627f71fa80f88384893f764fa6e9828ff4fa7e78eafe148b7c00b2abd077085",
+  "original_equals_requested_patch": true,
+  "partition_exhaustive_disjoint": true,
+  "exception_records": [
+    {
+      "y": 102647,
+      "x": 137189,
+      "owner": 42389,
+      "source_feature_indices": [
+        21396,
+        58453,
+        58615
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 21396,
+          "family_index": 94,
+          "source_id": "gb:DZA:ADM1:43142294B60721224304202",
+          "ordinal": 46,
+          "owners": [],
+          "name": "Souk Ahras",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 58453,
+          "family_index": 331,
+          "source_id": "gb:TUN:ADM1:13205935B49538157477352",
+          "ordinal": 2,
+          "owners": [],
+          "name": "El Kef",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 58615,
+          "family_index": 332,
+          "source_id": "gb:TUN:ADM2:11933810B55515778364888",
+          "ordinal": 140,
+          "owners": [
+            42389
+          ],
+          "name": "ساقية سيدي يوسف",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 104072,
+      "x": 137127,
+      "owner": 42333,
+      "source_feature_indices": [
+        21386,
+        58561
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 21386,
+          "family_index": 94,
+          "source_id": "gb:DZA:ADM1:43142294B7086800589276",
+          "ordinal": 36,
+          "owners": [],
+          "name": "Tébessa",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 58561,
+          "family_index": 332,
+          "source_id": "gb:TUN:ADM2:11933810B37259719331002",
+          "ordinal": 86,
+          "owners": [
+            42333
+          ],
+          "name": "ماجل بالعباس",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 104073,
+      "x": 137130,
+      "owner": 42333,
+      "source_feature_indices": [
+        21386,
+        58561
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 21386,
+          "family_index": 94,
+          "source_id": "gb:DZA:ADM1:43142294B7086800589276",
+          "ordinal": 36,
+          "owners": [],
+          "name": "Tébessa",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 58561,
+          "family_index": 332,
+          "source_id": "gb:TUN:ADM2:11933810B37259719331002",
+          "ordinal": 86,
+          "owners": [
+            42333
+          ],
+          "name": "ماجل بالعباس",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 104074,
+      "x": 137133,
+      "owner": 42333,
+      "source_feature_indices": [
+        21386,
+        58561
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 21386,
+          "family_index": 94,
+          "source_id": "gb:DZA:ADM1:43142294B7086800589276",
+          "ordinal": 36,
+          "owners": [],
+          "name": "Tébessa",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 58561,
+          "family_index": 332,
+          "source_id": "gb:TUN:ADM2:11933810B37259719331002",
+          "ordinal": 86,
+          "owners": [
+            42333
+          ],
+          "name": "ماجل بالعباس",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 106566,
+      "x": 137732,
+      "owner": 42350,
+      "source_feature_indices": [
+        21351,
+        58464,
+        58486
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 21351,
+          "family_index": 94,
+          "source_id": "gb:DZA:ADM1:43142294B70824426814000",
+          "ordinal": 1,
+          "owners": [],
+          "name": "Ouargla",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 58464,
+          "family_index": 331,
+          "source_id": "gb:TUN:ADM1:13205935B85172640982228",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Tataouine",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 58486,
+          "family_index": 332,
+          "source_id": "gb:TUN:ADM2:11933810B42878076535883",
+          "ordinal": 11,
+          "owners": [
+            42350
+          ],
+          "name": "رمادة",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 106579,
+      "x": 137735,
+      "owner": 42350,
+      "source_feature_indices": [
+        21351,
+        58464,
+        58486
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 21351,
+          "family_index": 94,
+          "source_id": "gb:DZA:ADM1:43142294B70824426814000",
+          "ordinal": 1,
+          "owners": [],
+          "name": "Ouargla",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 58464,
+          "family_index": 331,
+          "source_id": "gb:TUN:ADM1:13205935B85172640982228",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Tataouine",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 58486,
+          "family_index": 332,
+          "source_id": "gb:TUN:ADM2:11933810B42878076535883",
+          "ordinal": 11,
+          "owners": [
+            42350
+          ],
+          "name": "رمادة",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 106648,
+      "x": 137751,
+      "owner": 42350,
+      "source_feature_indices": [
+        21351,
+        58464,
+        58486
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 21351,
+          "family_index": 94,
+          "source_id": "gb:DZA:ADM1:43142294B70824426814000",
+          "ordinal": 1,
+          "owners": [],
+          "name": "Ouargla",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 58464,
+          "family_index": 331,
+          "source_id": "gb:TUN:ADM1:13205935B85172640982228",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Tataouine",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 58486,
+          "family_index": 332,
+          "source_id": "gb:TUN:ADM2:11933810B42878076535883",
+          "ordinal": 11,
+          "owners": [
+            42350
+          ],
+          "name": "رمادة",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 106661,
+      "x": 137754,
+      "owner": 42350,
+      "source_feature_indices": [
+        21351,
+        58464,
+        58486
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 21351,
+          "family_index": 94,
+          "source_id": "gb:DZA:ADM1:43142294B70824426814000",
+          "ordinal": 1,
+          "owners": [],
+          "name": "Ouargla",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 58464,
+          "family_index": 331,
+          "source_id": "gb:TUN:ADM1:13205935B85172640982228",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Tataouine",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 58486,
+          "family_index": 332,
+          "source_id": "gb:TUN:ADM2:11933810B42878076535883",
+          "ordinal": 11,
+          "owners": [
+            42350
+          ],
+          "name": "رمادة",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 106717,
+      "x": 137767,
+      "owner": 42350,
+      "source_feature_indices": [
+        21351,
+        58464,
+        58486
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 21351,
+          "family_index": 94,
+          "source_id": "gb:DZA:ADM1:43142294B70824426814000",
+          "ordinal": 1,
+          "owners": [],
+          "name": "Ouargla",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 58464,
+          "family_index": 331,
+          "source_id": "gb:TUN:ADM1:13205935B85172640982228",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Tataouine",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 58486,
+          "family_index": 332,
+          "source_id": "gb:TUN:ADM2:11933810B42878076535883",
+          "ordinal": 11,
+          "owners": [
+            42350
+          ],
+          "name": "رمادة",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 106730,
+      "x": 137770,
+      "owner": 42350,
+      "source_feature_indices": [
+        21351,
+        58464,
+        58486
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 21351,
+          "family_index": 94,
+          "source_id": "gb:DZA:ADM1:43142294B70824426814000",
+          "ordinal": 1,
+          "owners": [],
+          "name": "Ouargla",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 58464,
+          "family_index": 331,
+          "source_id": "gb:TUN:ADM1:13205935B85172640982228",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Tataouine",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 58486,
+          "family_index": 332,
+          "source_id": "gb:TUN:ADM2:11933810B42878076535883",
+          "ordinal": 11,
+          "owners": [
+            42350
+          ],
+          "name": "رمادة",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    }
+  ],
+  "new_native_repairs": 0,
+  "accepted_disposition_credit": 0,
+  "status": "proposed; independent substantive review and accepted integration required",
+  "accepted_original_class_counts": {
+    "inland-water": 123,
+    "land": 7343
+  },
+  "current_selection_identity_checked_at": "095e74472938076e608bc2b10f66195ee81beda5"
+}
