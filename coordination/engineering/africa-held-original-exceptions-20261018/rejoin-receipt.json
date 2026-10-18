@@ -1,0 +1,92 @@
+{
+  "format": "root-verified-original-scope-reconciliation-v1",
+  "accepted_main": "f833c2d7de6f239955cf592560d559d5377c4c6f",
+  "verification_source": "Parent independently rejoined the retained Library packets against accepted main before this delivery; exact original keys, owners, classes, and complete contact sets were verified. This PR reuses that review and does not rerun a producer or selected integration.",
+  "packages": [
+    {
+      "country": "Kenya",
+      "package_id": "gb-KEN-ADM2--repair-evaluation",
+      "original": 5156,
+      "original_class_counts": {
+        "land": 5090,
+        "inland-water": 66
+      },
+      "previously_supported_native": 4941,
+      "supported_class_counts": {
+        "land": 4901,
+        "inland-water": 40
+      },
+      "explicit_unresolved": 215,
+      "unresolved_class_counts": {
+        "land": 189,
+        "inland-water": 26
+      },
+      "owner_count": 38
+    },
+    {
+      "country": "Mozambique",
+      "package_id": "gb-MOZ-ADM2--repair-evaluation",
+      "original": 11163,
+      "original_class_counts": {
+        "land": 11028,
+        "inland-water": 135
+      },
+      "previously_supported_native": 10811,
+      "supported_class_counts": {
+        "land": 10676,
+        "inland-water": 135
+      },
+      "explicit_unresolved": 352,
+      "unresolved_class_counts": {
+        "land": 352,
+        "inland-water": 0
+      },
+      "owner_count": 81
+    },
+    {
+      "country": "Tanzania",
+      "package_id": "gb-TZA-ADM2--repair-evaluation",
+      "original": 32809,
+      "original_class_counts": {
+        "land": 22027,
+        "inland-water": 10782
+      },
+      "previously_supported_native": 32462,
+      "supported_class_counts": {
+        "land": 21686,
+        "inland-water": 10776
+      },
+      "explicit_unresolved": 347,
+      "unresolved_class_counts": {
+        "land": 341,
+        "inland-water": 6
+      },
+      "owner_count": 84
+    }
+  ],
+  "totals": {
+    "original_cells": 49128,
+    "previously_supported_native": 48214,
+    "explicit_unresolved": 914,
+    "unresolved_class_counts": {
+      "land": 882,
+      "inland-water": 32
+    },
+    "new_native_repairs": 0,
+    "new_accepted_repair_credit": 0
+  },
+  "exact_count_conservation": true,
+  "duplicate_original_keys": 0,
+  "selected_data_changed": false,
+  "current_owner_zero_rechecked_by_this_packet": false,
+  "selected_output_acceptance_claimed": false,
+  "source_producer_replayed": false,
+  "native_repair_run": false,
+  "scientific_research_repeated": false,
+  "limits": [
+    "No per-cell causal attribution is inferred from aggregate physical issues or owner-level foreign contacts.",
+    "No sovereignty, modern boundary, legal status, source rights approval, or exact source applicability is decided.",
+    "Current-owner-zero, selected-output conservation/acceptance, and package completion remain outside this evidence-only packet.",
+    "All 914 dispositions remain unresolved; existing classes, owners, source associations, and selected repair data remain unchanged."
+  ]
+}
