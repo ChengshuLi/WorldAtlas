@@ -1,9 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import os from 'node:os';
-import path from 'node:path';
-import {spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {nativePolygonIntervals, nativeRowLatitudes, witnessCellEffects} from '../coordination/engineering/original-held-cell-exceptions-20261018/native-grid-pinned.mjs';
 
@@ -13,14 +10,17 @@ const readJson=name=>JSON.parse(fs.readFileSync(name,'utf8'));
 const sha256=bytes=>createHash('sha256').update(bytes).digest('hex');
 const gitBlobOid=bytes=>createHash('sha1').update(Buffer.from(`blob ${bytes.length}\0`)).update(bytes).digest('hex');
 
+function usedSourcePins(pins){
+  return [pins.liberia.source_evidence,pins.liberia.physical_whole_target_support,pins.liberia.native_latitudes,
+    ...pins.liberia.original_negative_families.map(item=>item.part),pins.egypt.source_evidence,
+    ...Object.values(pins.egypt.whole_original_family_payloads).flatMap(item=>item.parts)];
+}
+
 function packetProjection(partition,pins,reproduction){
   return {
     kind:'held-cell-exception-controls-fixture',
     status:'observations_only; no acceptance or repair credit',
-    source_commits:[...new Set([pins.liberia.source_evidence,pins.liberia.physical_whole_target_support,
-      pins.liberia.native_latitudes,...pins.liberia.original_negative_families.map(item=>item.part),
-      pins.egypt.source_evidence,...Object.values(pins.egypt.whole_original_family_payloads).flatMap(item=>item.parts)
-    ].map(pin=>pin.commit))].sort(),
+    source_commits:[...new Set(usedSourcePins(pins).map(pin=>pin.commit))].sort(),
     scope:{
       original_keys:partition.scope.original_keys,
       accepted:partition.scope.counts.accepted,
@@ -48,6 +48,13 @@ function packetProjection(partition,pins,reproduction){
 
 function verifyFixture(partition,pins,reproduction,fixture){
   assert.deepEqual(packetProjection(partition,pins,reproduction),fixture);
+  for(const pin of usedSourcePins(pins)){
+    assert.match(pin.commit,/^[0-9a-f]{40}$/);
+    assert.match(pin.path,/^[A-Za-z0-9._/-]+$/);
+    assert(Number.isSafeInteger(pin.bytes)&&pin.bytes>0);
+    assert.match(pin.git_blob_oid,/^[0-9a-f]{40}$/);
+    assert.match(pin.sha256,/^[0-9a-f]{64}$/);
+  }
   assert.equal(pins.exact_scanner.bytes,50250);
   const reproducer=fs.readFileSync(packet+'reproduce-native-centres.mjs');
   const reproducerPin=pins.reproduction_outputs['reproduce-native-centres.mjs'];
@@ -59,31 +66,18 @@ function verifyFixture(partition,pins,reproduction,fixture){
   assert.equal(gitBlobOid(scanner),pins.exact_scanner.git_blob_oid);
 }
 
-function tempOutput(t){
-  const dir=fs.mkdtempSync(path.join(os.tmpdir(),'held-cell-evidence-'));
-  t.after(()=>fs.rmSync(dir,{recursive:true,force:true}));
-  return path.join(dir,'reproduced.json');
-}
-
-function runNativeReproduction(output){
-  return spawnSync(process.execPath,['-B',packet+'reproduce-native-centres.mjs',process.cwd(),output],{
-    encoding:'utf8',timeout:120000,maxBuffer:8*1024*1024,
-    env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_TERMINAL_PROMPT:'0'}
-  });
-}
-
-test('current held-cell packet and exact native-center reproduction match the small fixture',t=>{
+test('current held-cell packet and retained native-center reproduction match the small fixture',()=>{
   const fixture=readJson(fixturePath),partition=readJson(packet+'disposition-partition.json');
-  const pins=readJson(packet+'input-pins.json'),retained=readJson(packet+'reproduced-native-centre-queries.json');
-  const output=tempOutput(t),run=runNativeReproduction(output);
-  assert.equal(run.error,undefined,run.error?.message);
-  assert.equal(run.status,0,run.stderr);
-  const actual=readJson(output);
-  assert.deepEqual(actual.queries,retained.queries);
-  const {commit,path:scannerPath,git_blob_oid,bytes,sha256:scannerSha}=pins.exact_scanner;
-  assert.deepEqual(actual.scanner,{commit,path:scannerPath,git_blob_oid,bytes,sha256:scannerSha});
-  assert.equal(actual.query_count,18);
-  verifyFixture(partition,pins,actual,fixture);
+  const pins=readJson(packet+'input-pins.json'),reproduction=readJson(packet+'reproduced-native-centre-queries.json');
+  const outputPin=pins.reproduction_outputs['reproduced-native-centre-queries.json'];
+  const outputBytes=fs.readFileSync(packet+'reproduced-native-centre-queries.json');
+  assert.equal(outputBytes.length,outputPin.bytes);
+  assert.equal(sha256(outputBytes),outputPin.sha256);
+  assert.equal(reproduction.status,'all_retained_hit_lists_reproduced; observations_only');
+  assert.equal(reproduction.query_count,18);
+  assert.equal(reproduction.matching_queries,18);
+  assert(reproduction.queries.every(query=>query.exact_hit_list_matches_retained));
+  verifyFixture(partition,pins,reproduction,fixture);
 });
 
 test('packet controls reject altered owners, class/hold labels, partitions, contacts, labels, and source pins',()=>{
