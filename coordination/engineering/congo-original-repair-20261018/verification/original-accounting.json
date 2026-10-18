@@ -1,0 +1,45 @@
+{
+  "original_cells": 3905,
+  "original_land_water": {
+    "land": 3645,
+    "inland-water": 260
+  },
+  "original_owners": 50,
+  "original_atoms": 50,
+  "qualified_cells": 2975,
+  "qualified_land_water": {
+    "land": 2780,
+    "inland-water": 195
+  },
+  "qualified_components": 48,
+  "held_cells": 930,
+  "held_land_water": {
+    "land": 865,
+    "inland-water": 65
+  },
+  "wholly_held_owners": [
+    {
+      "owner": 14568,
+      "id": "gb:COD:ADM2:63176286B75372177576839",
+      "name": "Irumu",
+      "held_cells": 112
+    },
+    {
+      "owner": 14593,
+      "id": "gb:COD:ADM2:63176286B83971453832478",
+      "name": "Kimvula",
+      "held_cells": 4
+    }
+  ],
+  "requested_equals_complete_original": true,
+  "qualified_held_disjoint_union_equals_original": true,
+  "constructor_ledger_equals_supported_patch": true,
+  "original_coverage_class_and_owner_assignments_preserved": true,
+  "stock_output_hashes_verified": true,
+  "actual_rule_preimage_sha256": "9457fb3a364b5ecbd8746c3a8e434bde915e3fe3c205f67a3b3a603bb82c7cb1",
+  "new_accepted_map_cells": 0,
+  "limits": [
+    "Literal original/patch/ledger/class reconciliation only; no full scientific producer rerun, current owner-zero, selected conservation or emitted consumer check.",
+    "Held decisions are stock territorial_exclusion_cells; per-key causal foreign feature remains unknown."
+  ]
+}
