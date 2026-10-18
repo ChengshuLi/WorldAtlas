@@ -114,5 +114,7 @@ test('the pinned numerical scanner catches an exact interior contact and rejects
   const result=witnessCellEffects(polygon,request);
   assert.deepEqual(result.hits,[{y,x,kind:'interior'}]);
   assert.equal(result.counts.cells,1);
+  const outside={type:'Polygon',coordinates:[[[lon+10,lat-1],[lon+12,lat-1],[lon+12,lat+1],[lon+10,lat+1],[lon+10,lat-1]]]};
+  assert.deepEqual(witnessCellEffects(outside,request).hits,[]);
   assert.throws(()=>witnessCellEffects(polygon,{...request,requestedRows:[{y,runs:[[x,x+1,0]]}]}),/Unordered\/overlapping\/invalid requested run/);
 });
