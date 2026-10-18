@@ -106,3 +106,8 @@ immediate post-inventory uploads are recognized under those same requirements.
 The queue's current test, geography and merge gates are unchanged. General
 same-input reuse after a test-only failure needs a separately reviewed complete
 build-input and producer contract; this change does not implement that route.
+
+The focused evidence roster also includes `selected-native-witness`, a direct
+consumer of the shared selected-checkpoint fixture. Fixture-only edits therefore
+continue to execute every such consumer; full and explicit reviewed test plans
+keep their existing behavior.
