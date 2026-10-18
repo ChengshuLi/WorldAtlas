@@ -1,0 +1,81 @@
+{
+  "status": "stock composition completed; finalization and hosted acceptance pending",
+  "groups": [
+    {
+      "package": "Egypt",
+      "source_head": "5dd6eb3d6b8eb3f22f3358406d6733ce6f71936d",
+      "original": 19065,
+      "supported": 19063,
+      "held": 2,
+      "original_owners": 167
+    },
+    {
+      "package": "Netherlands",
+      "source_head": "02d2b0806e4fc912e1d05b7b1cc89af5247e3239",
+      "original": 770,
+      "supported": 562,
+      "held": 208,
+      "original_owners": 39
+    },
+    {
+      "package": "MEX",
+      "source_head": "e0ea1200ad98cad28c50912259c38ce9dd5fe519",
+      "original": 24208,
+      "supported": 24092,
+      "held": 116,
+      "original_owners": 158
+    },
+    {
+      "package": "ECU",
+      "source_head": "e0ea1200ad98cad28c50912259c38ce9dd5fe519",
+      "original": 13969,
+      "supported": 13387,
+      "held": 582,
+      "original_owners": 58
+    },
+    {
+      "package": "BOL",
+      "source_head": "e0ea1200ad98cad28c50912259c38ce9dd5fe519",
+      "original": 11311,
+      "supported": 10404,
+      "held": 907,
+      "original_owners": 37
+    },
+    {
+      "package": "PER",
+      "source_head": "e0ea1200ad98cad28c50912259c38ce9dd5fe519",
+      "original": 10371,
+      "supported": 8922,
+      "held": 1449,
+      "original_owners": 55
+    },
+    {
+      "package": "COL",
+      "source_head": "e0ea1200ad98cad28c50912259c38ce9dd5fe519",
+      "original": 7060,
+      "supported": 6230,
+      "held": 830,
+      "original_owners": 81
+    }
+  ],
+  "source_adoption": "normal merges of the three exact reviewed source heads, preserving every literal namespace/history",
+  "composition": "existing multi-original composer with seven authenticated original authority quartets; no producer replay",
+  "totals": {
+    "original": 86754,
+    "supported": 82660,
+    "held": 4094,
+    "original_owners": 595
+  },
+  "exact_original_and_supported_cross_package_key_overlap": 0,
+  "cross_package_original_owner_overlap": 0,
+  "remaining": "actual accepted baseline owner-zero/disjointness and inherited ledger/authority conservation; compatible fresh checkpoint; stock finalizer, emitted checks, root review and queue acceptance",
+  "exclusions": [
+    "Panama rights-blocked22669",
+    "unfinished Africa",
+    "unresolved Brazil"
+  ],
+  "limits": "All per-country source dates, rights/semantic roles and original holds remain literal. No country/package-complete claim.",
+  "accepted_baseline": "10927524e465bf1eef09a2e2c458525bde9c7442",
+  "accepted_native_cells": 6120450,
+  "candidate_native_cells": 6203110
+}

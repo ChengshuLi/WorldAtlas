@@ -1,0 +1,7 @@
+# First complete physical result for five original Americas scopes
+
+The unchanged accepted stock physical helper completed all389 original whole targets once. `whole-target-support.json` and `preparation.json` preserve its exact complete published output bytes. `physical-input-contract.json` is the exact canonical phase-config byte body bound by the original execution receipt, without the outer installed-runtime inventory. Source attribution and original stage provenance remain in the adjacent source-stage directory.
+
+`operating-observation.json` is a separate derived public summary of the actual operating records. The original complete execution receipt (SHA25666b6e3cae28554e704cb80ecdb04e8d133e6a659c417e81c27d35907593c22cd), outer config, stdout/stderr and task observer records are retained unchanged privately, because installed-runtime paths occur there. No redacted or relocated receipt is called an original. The public preparation therefore names the original private receipt hash; its absence from this directory is explicit. This public directory alone is not a stock resume package.
+
+All3269 query relations were checked.121 whole targets retain reconstruction or hierarchy issues, and all exact witnesses remain. Whole-target issue/zero-issue counts do not establish candidate-centre support or holds. The actual original water requests, complete foreign competitors, owner joins, territorial exclusions and source/version limits must still be enforced by the existing native constructor. No new qualification or acceptance credit is claimed.

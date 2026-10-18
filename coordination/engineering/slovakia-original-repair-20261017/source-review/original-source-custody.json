@@ -1,0 +1,287 @@
+{
+  "accepted": "21984e9ec4ec7370bc807e2da23cea2228747698",
+  "source": {
+    "advertised_feature_count": 79,
+    "cohort": "administrative-registry",
+    "feature_count": 79,
+    "key": "gb:SVK:ADM2",
+    "metadata_sha256": "cc45706529a0ee1954b762ab8493ff768bb383a3c88df1106053a8128c7dac0e",
+    "original_bytes": 469146,
+    "original_metadata_file": "data/administrative-sources.json",
+    "original_sha256": "10805ba684c4ac52d10c1cdc3670e9242dd8e9fb503515b67275d42d6aac080a",
+    "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+    "parts": [
+      {
+        "bytes": 138373,
+        "hash_kind": "file-bytes",
+        "offset": 0,
+        "ordinal": 0,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-SVK-ADM2-000.bin.gz",
+        "sha256": "0e73bec6ad8327716edfb7526ed8135aa6b3f91f05c9d5912fc4f28bb3ebd324",
+        "uncompressed_bytes": 469146,
+        "uncompressed_sha256": "10805ba684c4ac52d10c1cdc3670e9242dd8e9fb503515b67275d42d6aac080a"
+      }
+    ],
+    "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SVK/ADM2/geoBoundaries-SVK-ADM2_simplified.geojson",
+    "recorded_license": "Open Data Commons Open Database License 1.0",
+    "source_represented_year_claim": "2017"
+  },
+  "all_79_valid_nonempty": true,
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "all_24_literal_identity_joins": true,
+  "owners": [
+    {
+      "owner": 40388,
+      "id": "gb:SVK:ADM2:56367889B1447043738985",
+      "source_atom": "gb:SVK:ADM2:56367889B1447043738985",
+      "name": "District of Kovice - okolie",
+      "original_source_name": "District of Kovice - okolie",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 40389,
+      "id": "gb:SVK:ADM2:56367889B14569056094647",
+      "source_atom": "gb:SVK:ADM2:56367889B14569056094647",
+      "name": "District of Snina",
+      "original_source_name": "District of Snina",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 40390,
+      "id": "gb:SVK:ADM2:56367889B15205076567490",
+      "source_atom": "gb:SVK:ADM2:56367889B15205076567490",
+      "name": "District of Rimavsk",
+      "original_source_name": "District of Rimavsk",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 40394,
+      "id": "gb:SVK:ADM2:56367889B17286119603144",
+      "source_atom": "gb:SVK:ADM2:56367889B17286119603144",
+      "name": "District of Trencon",
+      "original_source_name": "District of Trencon",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 40395,
+      "id": "gb:SVK:ADM2:56367889B18200948818921",
+      "source_atom": "gb:SVK:ADM2:56367889B18200948818921",
+      "name": "District of Bardejov",
+      "original_source_name": "District of Bardejov",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 40396,
+      "id": "gb:SVK:ADM2:56367889B24002183790147",
+      "source_atom": "gb:SVK:ADM2:56367889B24002183790147",
+      "name": "District of Stark Lubovna",
+      "original_source_name": "District of Stark Lubovna",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 40397,
+      "id": "gb:SVK:ADM2:56367889B25974753894430",
+      "source_atom": "gb:SVK:ADM2:56367889B25974753894430",
+      "name": "District of Numestovo",
+      "original_source_name": "District of Numestovo",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 40399,
+      "id": "gb:SVK:ADM2:56367889B27848609458937",
+      "source_atom": "gb:SVK:ADM2:56367889B27848609458937",
+      "name": "District of Komprno",
+      "original_source_name": "District of Komprno",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 40403,
+      "id": "gb:SVK:ADM2:56367889B34538662559621",
+      "source_atom": "gb:SVK:ADM2:56367889B34538662559621",
+      "name": "District of Skalica",
+      "original_source_name": "District of Skalica",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 40418,
+      "id": "gb:SVK:ADM2:56367889B51496625279666",
+      "source_atom": "gb:SVK:ADM2:56367889B51496625279666",
+      "name": "District of Kermarok",
+      "original_source_name": "District of Kermarok",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 40425,
+      "id": "gb:SVK:ADM2:56367889B59585277732331",
+      "source_atom": "gb:SVK:ADM2:56367889B59585277732331",
+      "name": "District of Lucenec",
+      "original_source_name": "District of Lucenec",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 40429,
+      "id": "gb:SVK:ADM2:56367889B62553648042075",
+      "source_atom": "gb:SVK:ADM2:56367889B62553648042075",
+      "name": "District of Nova Zkmky",
+      "original_source_name": "District of Nova Zkmky",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 40431,
+      "id": "gb:SVK:ADM2:56367889B62817588919968",
+      "source_atom": "gb:SVK:ADM2:56367889B62817588919968",
+      "name": "District of Cadca",
+      "original_source_name": "District of Cadca",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 40432,
+      "id": "gb:SVK:ADM2:56367889B65708067786299",
+      "source_atom": "gb:SVK:ADM2:56367889B65708067786299",
+      "name": "District of Trebi ov",
+      "original_source_name": "District of Trebi ov",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 40433,
+      "id": "gb:SVK:ADM2:56367889B65848289259275",
+      "source_atom": "gb:SVK:ADM2:56367889B65848289259275",
+      "name": "District of Senica",
+      "original_source_name": "District of Senica",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 40435,
+      "id": "gb:SVK:ADM2:56367889B67356758961124",
+      "source_atom": "gb:SVK:ADM2:56367889B67356758961124",
+      "name": "District of Humennn",
+      "original_source_name": "District of Humennn",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 40439,
+      "id": "gb:SVK:ADM2:56367889B75362220391655",
+      "source_atom": "gb:SVK:ADM2:56367889B75362220391655",
+      "name": "District of Prchov",
+      "original_source_name": "District of Prchov",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 40443,
+      "id": "gb:SVK:ADM2:56367889B78366861694162",
+      "source_atom": "gb:SVK:ADM2:56367889B78366861694162",
+      "name": "District of Dunajskn Streda",
+      "original_source_name": "District of Dunajskn Streda",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 40444,
+      "id": "gb:SVK:ADM2:56367889B79509103276820",
+      "source_atom": "gb:SVK:ADM2:56367889B79509103276820",
+      "name": "Nov\u00e9 Mesto nad V\u00e1hom",
+      "original_source_name": "District of Nova Mesto nad Va*",
+      "accepted_name_crosswalk": {
+        "original": "District of Nova Mesto nad Va*",
+        "source": "https://www.nove-mesto.sk/",
+        "reason": "Expanded truncated source label / corrected spelling against official municipality name"
+      }
+    },
+    {
+      "owner": 40452,
+      "id": "gb:SVK:ADM2:56367889B91036256885729",
+      "source_atom": "gb:SVK:ADM2:56367889B91036256885729",
+      "name": "District of Myjava",
+      "original_source_name": "District of Myjava",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 40456,
+      "id": "gb:SVK:ADM2:56367889B96980961358907",
+      "source_atom": "gb:SVK:ADM2:56367889B96980961358907",
+      "name": "District of Velka Krta",
+      "original_source_name": "District of Velka Krta",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 40459,
+      "id": "gb:SVK:ADM2:56367889B97606993013938",
+      "source_atom": "gb:SVK:ADM2:56367889B97606993013938",
+      "name": "District of Sobrance",
+      "original_source_name": "District of Sobrance",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 40460,
+      "id": "gb:SVK:ADM2:56367889B98399677297130",
+      "source_atom": "gb:SVK:ADM2:56367889B98399677297130",
+      "name": "District of Ilava",
+      "original_source_name": "District of Ilava",
+      "accepted_name_crosswalk": null
+    },
+    {
+      "owner": 40462,
+      "id": "gb:SVK:ADM2:56367889B99469568447767",
+      "source_atom": "gb:SVK:ADM2:56367889B99469568447767",
+      "name": "District of Medzilaborce",
+      "original_source_name": "District of Medzilaborce",
+      "accepted_name_crosswalk": null
+    }
+  ],
+  "upstream_zip": {
+    "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/sourceData/gbOpen/SVK_ADM2.zip",
+    "bytes": 3950953,
+    "sha256": "788fdf2c6e7358c17256989cc84ec954c77f1ae44151c5cd0072a69df8157e11",
+    "files": {
+      "license.PNG": {
+        "bytes": 252777,
+        "sha256": "2356cbfd98f4f4b61d2d7d5ee0c193f7e86539fd73cd903bfe34edd8d0ee5e54"
+      },
+      "meta.txt": {
+        "bytes": 430,
+        "sha256": "5381c0968eb415311055972d887946b34ba264438d754544535ef518be6a2d32"
+      },
+      "SVK_ADM2.cpg": {
+        "bytes": 5,
+        "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+      },
+      "SVK_ADM2.dbf": {
+        "bytes": 8077,
+        "sha256": "980df41d247f85f45e89fce6e3ab76a7cf9396871768f5964f61bd438a756cc6"
+      },
+      "SVK_ADM2.prj": {
+        "bytes": 145,
+        "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4"
+      },
+      "SVK_ADM2.sbn": {
+        "bytes": 948,
+        "sha256": "35f3b6a667c029e5f55de1f4c5aabdef4a5cf6e6fcf3df4cd71e3dd89634a016"
+      },
+      "SVK_ADM2.sbx": {
+        "bytes": 196,
+        "sha256": "3bf2a7ab28a1310f5c9ec39e659005c3f5493da53967101f17c7f9cfcdf1a393"
+      },
+      "SVK_ADM2.shp": {
+        "bytes": 5509536,
+        "sha256": "c029a1f9b3b179a981da050464bda0f096e2d24d0d6c339103e6d92f81788ffb"
+      },
+      "SVK_ADM2.shp.xml": {
+        "bytes": 17941,
+        "sha256": "2cba987443a8e52ee72274cd75eddda8d6d67660d552b54912f627488721e7bb"
+      },
+      "SVK_ADM2.shx": {
+        "bytes": 732,
+        "sha256": "ae0d7a485c241d53f8b1538ca6b2ecae29a566c7f046124bc56692c2ea0b02e0"
+      }
+    }
+  },
+  "limits": [
+    "2017 source vintage is historical and does not assert present legal boundaries.",
+    "ODbL attribution and applicable share-alike/data-access obligations remain in force; geoBoundaries attribution does not replace the OSM source license.",
+    "Original source simplification remains distinct from upstream ZIP geometry."
+  ]
+}

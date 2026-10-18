@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "package_id": "gb-EGY-ADM2--repair-evaluation",
+  "issue": 2424,
+  "original_cells": 19065,
+  "qualified_cells": 19063,
+  "held_cells": 2,
+  "original_owners": 167,
+  "qualified_components": 166,
+  "new_accepted_cells": 0,
+  "authorities": [
+    {
+      "rule_preimage": {
+        "path": "coordination/engineering/egypt-original-repair-20261017/native-authority-supported-001/original-rule-preimage.json",
+        "commit": "69324769a1a54aee7b93993f4035f532b4ac8293",
+        "mode": "100644",
+        "git_blob_oid": "504d0ea90f344fbdf3f96e3c046fcbd2a7802de7",
+        "bytes": 735,
+        "sha256": "e6dfaf385df549d785f8793ae6caa3aa586ed65cdf5e1e9005a2100ceb9be696"
+      },
+      "source_authority": {
+        "path": "coordination/engineering/egypt-original-repair-20261017/native-authority-supported-001/authority-binding.json",
+        "commit": "69324769a1a54aee7b93993f4035f532b4ac8293",
+        "mode": "100644",
+        "git_blob_oid": "a9ec21b6046f1e3fd854177055569ecc5159f667",
+        "bytes": 738,
+        "sha256": "456bf4efeb48f1fe679f61d11987b274b3ed9020f279470e06efccaa45b370ab"
+      },
+      "ledger": {
+        "path": "coordination/engineering/egypt-original-repair-20261017/native-authority-supported-001/constructor-result.json",
+        "commit": "69324769a1a54aee7b93993f4035f532b4ac8293",
+        "mode": "100644",
+        "git_blob_oid": "8c7c1b16645906f8578291b80fead659c8176274",
+        "bytes": 553257,
+        "sha256": "59766c60c730ef00306966669c2785ad2a68415a484ae34bbbb5849cb21a0ffc"
+      },
+      "native_patch": {
+        "path": "coordination/engineering/egypt-original-repair-20261017/supported-inputs-001/native-patch.json",
+        "commit": "209c1cd643810d241029eb7fb4962878154565cb",
+        "mode": "100644",
+        "git_blob_oid": "53439b133e5a00b34ff658df31a47adbf13410e6",
+        "bytes": 276690,
+        "sha256": "c76f870577cab7c6517a703f0f8879b61e251524395e1513c2eb65b8519f5c89"
+      }
+    }
+  ],
+  "source_evidence": {
+    "path": "coordination/engineering/egypt-original-repair-20261017/supported-inputs-001/source-evidence.json",
+    "commit": "209c1cd643810d241029eb7fb4962878154565cb",
+    "mode": "100644",
+    "git_blob_oid": "55905709916494aa891f15a30d499e48e7150376",
+    "bytes": 1188533,
+    "sha256": "c74f3103d374d2225619b1fc0230aba501d25349dc4af7481a9c30f2426dc9b8"
+  },
+  "original_scope_partition": {
+    "path": "coordination/engineering/egypt-original-repair-20261017/supported-inputs-001/original-scope-partition.json",
+    "commit": "209c1cd643810d241029eb7fb4962878154565cb",
+    "mode": "100644",
+    "git_blob_oid": "a23041c66fc7d665eec6122d0df86a292575df72",
+    "bytes": 13946,
+    "sha256": "a5e35850881b77c99530805c4665d3bc816f0201f67de1a66a16c4a0046ca155"
+  },
+  "held_original": {
+    "path": "coordination/engineering/egypt-original-repair-20261017/supported-inputs-001/held-original.json",
+    "commit": "209c1cd643810d241029eb7fb4962878154565cb",
+    "mode": "100644",
+    "git_blob_oid": "491f0d6bf23ce3f025ca60e13571aff859336574",
+    "bytes": 159,
+    "sha256": "f06865d3a5bc3b568f1e510ccb85e68602bca9846481321bc703f38df9f29ef2"
+  },
+  "operating_observation": {
+    "path": "coordination/engineering/egypt-original-repair-20261017/native-authority-supported-001/operating-observation.json",
+    "commit": "69324769a1a54aee7b93993f4035f532b4ac8293",
+    "mode": "100644",
+    "git_blob_oid": "29ecbd8027a19059220766a2eff7e4c440165578",
+    "bytes": 969,
+    "sha256": "573022b1c18dbdeb23ff6af38b95a7ef2fbde589720b52d3d84e1fa808eab299"
+  },
+  "limits": [
+    "Prepared qualification only; distinct scientific review and actual selected current-owner-zero/conservation/emitted checks remain pending.",
+    "Preserve actual current accepted baseline at final composition; no projected selector is supplied.",
+    "All original source categories, complete physical witnesses and both territorial holds remain unchanged."
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "version": 1,
+  "kind": "task-only-stock-compose-original-quartet-pin-handoff",
+  "country_order": [
+    "MEX",
+    "ECU",
+    "BOL",
+    "PER",
+    "COL"
+  ],
+  "authority_commit": "673b20c77c5b1fd346bb0c846090c3661f8d1ddd",
+  "native_patch_commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+  "output": {
+    "path": "original-authority-quartets.json",
+    "bytes": 7233,
+    "sha256": "1104fab0dcd9c28772d4c7455cf5de281c6a5f6058769d6892c450b7d6471dd0"
+  },
+  "source_summary": {
+    "commit": "673b20c77c5b1fd346bb0c846090c3661f8d1ddd",
+    "path": "coordination/engineering/americas-original-repair-20261017/country-qualified-authorities-001/summary.json",
+    "mode": "100644",
+    "git_blob_oid": "c94e75b9a528921c6f6e1dd13014950a6d8610fd",
+    "bytes": 1138,
+    "sha256": "cb11d9381128a4dd071373a261a5456749a96dc7d3c0e26b1e9a5b6b5cb986f7"
+  },
+  "retained_hold_pins": [
+    {
+      "country": "MEX",
+      "held_original": {
+        "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+        "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/mex/held-original.json",
+        "mode": "100644",
+        "git_blob_oid": "8bd009b830c3052910d9ff7d5151e8657b1a8ed7",
+        "bytes": 6735,
+        "sha256": "71078f03648a2d6cedbbba78cdea955809c0792dedba2f766e53560f234e23d9"
+      },
+      "original_scope_partition": {
+        "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+        "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/mex/original-scope-partition.json",
+        "mode": "100644",
+        "git_blob_oid": "fd40d7644b51655d34505bb20956d43a3c6b6019",
+        "bytes": 13317,
+        "sha256": "15999f70b94c431dfe7997aea66f0a457a9f93df896e0f34cec0a5701c3bb54b"
+      }
+    },
+    {
+      "country": "ECU",
+      "held_original": {
+        "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+        "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/ecu/held-original.json",
+        "mode": "100644",
+        "git_blob_oid": "046110e9fcd3ec65daaaca0d71ad96c1182d1058",
+        "bytes": 21441,
+        "sha256": "8e04477375dbba37810841a9fb591e72a6351701ef805dbf28756e1c767345b3"
+      },
+      "original_scope_partition": {
+        "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+        "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/ecu/original-scope-partition.json",
+        "mode": "100644",
+        "git_blob_oid": "01015cef41284d02c80ff6b6cec10d7dc36c935e",
+        "bytes": 6107,
+        "sha256": "fcaa89fde13dafa9df60495d10168224cbced5c9dec19c0f5def14288f198f7a"
+      }
+    },
+    {
+      "country": "BOL",
+      "held_original": {
+        "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+        "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/bol/held-original.json",
+        "mode": "100644",
+        "git_blob_oid": "0a3e49335e5849679aa90a6d39c54ec3e18bf59d",
+        "bytes": 31611,
+        "sha256": "57d3e302cd941235f281d8b768a7495058c6045e6d3d380b037b68d0a91f2d80"
+      },
+      "original_scope_partition": {
+        "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+        "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/bol/original-scope-partition.json",
+        "mode": "100644",
+        "git_blob_oid": "e42b02e93add6465d1a0a929e3120de2eebb5c25",
+        "bytes": 4616,
+        "sha256": "eda67c4961de79367206f239fd875971741c199707ab1a700df631a933faf4af"
+      }
+    },
+    {
+      "country": "PER",
+      "held_original": {
+        "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+        "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/per/held-original.json",
+        "mode": "100644",
+        "git_blob_oid": "88a27bbf64978cd8dca3006202c4ce621201ab62",
+        "bytes": 44303,
+        "sha256": "407ee653bb640d87add97572899d61ea17e159632e533a2b212c9341b3644746"
+      },
+      "original_scope_partition": {
+        "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+        "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/per/original-scope-partition.json",
+        "mode": "100644",
+        "git_blob_oid": "0a9b4a90ed2ace77a17311650aaee8590378e0e2",
+        "bytes": 5930,
+        "sha256": "1b7989e358094a71b40ccc7188f317004d8cebdb7aca3999910bf11378a9be05"
+      }
+    },
+    {
+      "country": "COL",
+      "held_original": {
+        "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+        "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/col/held-original.json",
+        "mode": "100644",
+        "git_blob_oid": "176175be9f2778037ade78a092d3e87f2388a0bb",
+        "bytes": 31311,
+        "sha256": "c7d5c23ecb00c6a121da73b89e77eef8b10eb8d70f96a6b019623f0183d922fb"
+      },
+      "original_scope_partition": {
+        "commit": "db3801d77516795a6f9b09a241f1196cdc1ccd49",
+        "path": "coordination/engineering/americas-original-repair-20261017/country-supported-inputs-001/col/original-scope-partition.json",
+        "mode": "100644",
+        "git_blob_oid": "b0461e43e1aa88594bbb7b15ff45607aabc95fbb",
+        "bytes": 7743,
+        "sha256": "51f3ddd5681d547b6b840892047ca5bdfa91ed8022a5c8914c6c94cce357aa2d"
+      }
+    }
+  ],
+  "original_native_patch_binding_equality_checked": true,
+  "compose_executed": false,
+  "author_repository_edited": false,
+  "accepted_cells": 0,
+  "limits": [
+    "Pin/metadata preparation only; no compose, native evaluation or final scientific review repeated.",
+    "Every original authority quartet remains literal; supported patch commit/path equals its authority binding.",
+    "Held originals and scope partitions remain at their immutable supported-input commit and are not reclassified.",
+    "Final selector/effective release, independent exact-head review, conservation, integration and publication remain Main-owned."
+  ]
+}

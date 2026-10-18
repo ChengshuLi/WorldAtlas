@@ -1,0 +1,5 @@
+# Stock-prepared supported requests
+
+These are the exact outputs of the existing supported-inputs phase for all five complete diagnostic partitions. It preserves original whole-source, physical and negative pins, exact supported positive class rows, all withheld original cells, and per-original-owner conservation. The only narrowed data is positive coverage/request rows and wholly held target owners. The source operands are not replaced and no class, exclusion, witness or predicate is relaxed.
+
+The total remains66,919 original cells =63,035 supported requests +3,884 held original cells. These are prepared inputs; no new authority, owner-zero/conservation over selected output or accepted credit is claimed by this checkpoint. Each exact emitted source-evidence/native-patch pair must pass the genuine stock native-authority constructor next. Original full requests, first refusals and complete decision traces are preserved in prior immutable checkpoints. Panama remains outside the five requests and blocked within the six-package accounting.
