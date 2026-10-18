@@ -1,0 +1,65 @@
+{
+  "observed_at_utc": "2026-10-18T03:44:07.722457+00:00",
+  "original_freeze_unchanged": true,
+  "review_subjects": {
+    "derive-declared-scope-applicability.proposed.mjs": {
+      "bytes": 25506,
+      "sha256": "7d0b6ecd222b52a8701a6b11ddbcd34b06e8e47dd58b3c958b1a7a9c9c770e66",
+      "unchanged_from_original_freeze": true
+    },
+    "adapter-config.proposed.json": {
+      "bytes": 185656,
+      "sha256": "530df25b0466c99b4c567d57f2bf90d332c3f0eaead59e31596642cb99fc2b71",
+      "unchanged_from_original_freeze": true
+    },
+    "scope-contract.proposed.json": {
+      "bytes": 891,
+      "sha256": "60ff46a701f756e021cd06a414f2423017f7c6529bdac0c732c154c4762f5144",
+      "unchanged_from_original_freeze": true
+    },
+    "reference-four-scope-caller.mjs": {
+      "bytes": 22861,
+      "sha256": "207c3112484a7cd3346c3318618a10c44748dad2b9650fc450f5d97f27b798ad",
+      "unchanged_from_original_freeze": true
+    },
+    "caller-parameterization.patch": {
+      "bytes": 13233,
+      "sha256": "6033879a371072116cb6392a8882fbfbe7ea98141889811ce1f1c5a10c4aa2b1",
+      "unchanged_from_original_freeze": true
+    },
+    "ADVERSE-CASES.proposed.json": {
+      "bytes": 5339,
+      "sha256": "8395daea8780031cc3d1f230b523490394259676ad96b2af0d61f31813f47f76",
+      "unchanged_from_original_freeze": true
+    }
+  },
+  "actual_control_files": {
+    "results.json": {
+      "bytes": 11327,
+      "sha256": "a9aa52dc51c631cd81800be9fc1ceba08b74b6384764cdf38631979a13aabb81"
+    },
+    "commands.json": {
+      "bytes": 1392,
+      "sha256": "05a7c37d1a550711e2b7f486cc5c22e96d9d5a31e14707a262af5acd709cf90f"
+    },
+    "RESULTS.md": {
+      "bytes": 3446,
+      "sha256": "b5ae16c2694a2d846dae43b4d8850145c4483dec236df371c42ee1e745576006"
+    },
+    "admission-controls.mjs": {
+      "bytes": 12187,
+      "sha256": "35222c72bdcd10ffa4cef01939935123a1a7a805d65098fe1448d9f003473b16"
+    }
+  },
+  "syntax_exit": 0,
+  "synthetic_control_exit": 0,
+  "admission_controls": 21,
+  "expected_admissions": 1,
+  "expected_refusals": 20,
+  "synthetic_unchanged_kernel_controls": 7,
+  "full_caller_invocations": 0,
+  "world_source_scan": false,
+  "real_target_geometry_read_by_controls": false,
+  "qualified_cells": 0,
+  "accepted_credit": 0
+}

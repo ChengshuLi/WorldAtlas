@@ -1,0 +1,391 @@
+{
+  "observed_at_utc": "2026-10-18T03:43:33.796Z",
+  "node": "v24.19.0",
+  "caller_sha256": "7d0b6ecd222b52a8701a6b11ddbcd34b06e8e47dd58b3c958b1a7a9c9c770e66",
+  "scope_contract_sha256": "60ff46a701f756e021cd06a414f2423017f7c6529bdac0c732c154c4762f5144",
+  "admission_controls": [
+    {
+      "name": "exact-four-scope-admission",
+      "expected": "admit",
+      "actual": "admitted",
+      "observed": [
+        {
+          "iso": "GTM",
+          "positive_family": "gb:GTM:ADM2",
+          "parent_context_families": [
+            "gb:GTM:ADM1"
+          ],
+          "own_families": [
+            "gb:GTM:ADM2",
+            "gb:GTM:ADM1"
+          ],
+          "complete_foreign_families": 366
+        },
+        {
+          "iso": "BLZ",
+          "positive_family": "gb:BLZ:ADM1",
+          "parent_context_families": [],
+          "own_families": [
+            "gb:BLZ:ADM1"
+          ],
+          "complete_foreign_families": 367
+        },
+        {
+          "iso": "DOM",
+          "positive_family": "gb:DOM:ADM2",
+          "parent_context_families": [
+            "gb:DOM:ADM1"
+          ],
+          "own_families": [
+            "gb:DOM:ADM2",
+            "gb:DOM:ADM1"
+          ],
+          "complete_foreign_families": 366
+        },
+        {
+          "iso": "SLV",
+          "positive_family": "gb:SLV:ADM2",
+          "parent_context_families": [
+            "gb:SLV:ADM1"
+          ],
+          "own_families": [
+            "gb:SLV:ADM2",
+            "gb:SLV:ADM1"
+          ],
+          "complete_foreign_families": 366
+        }
+      ]
+    },
+    {
+      "name": "wrong-scope-country-order",
+      "expected": "refuse",
+      "actual": "refused",
+      "guard_error": "Exact frozen scope contract required"
+    },
+    {
+      "name": "wrong-aggregate-target-count",
+      "expected": "refuse",
+      "actual": "refused",
+      "guard_error": "Exact frozen scope contract required"
+    },
+    {
+      "name": "wrong-aggregate-key-count",
+      "expected": "refuse",
+      "actual": "refused",
+      "guard_error": "Exact frozen scope contract required"
+    },
+    {
+      "name": "contract-target-total-inconsistent",
+      "expected": "refuse",
+      "actual": "refused",
+      "guard_error": "Declared aggregate scope differs"
+    },
+    {
+      "name": "missing-blz-parent-declaration",
+      "expected": "refuse",
+      "actual": "refused",
+      "guard_error": "Explicit bounded scope declaration required"
+    },
+    {
+      "name": "invented-blz-adm0-parent",
+      "expected": "refuse",
+      "actual": "refused",
+      "guard_error": "Supported positive-level and exact parent roles required"
+    },
+    {
+      "name": "blz-positive-repeated-as-parent",
+      "expected": "refuse",
+      "actual": "refused",
+      "guard_error": "Supported positive-level and exact parent roles required"
+    },
+    {
+      "name": "unknown-positive-source-level",
+      "expected": "refuse",
+      "actual": "refused",
+      "guard_error": "Supported positive-level and exact parent roles required"
+    },
+    {
+      "name": "wrong-positive-family-in-country",
+      "expected": "refuse",
+      "actual": "refused",
+      "guard_error": "Country roles differ from frozen declaration"
+    },
+    {
+      "name": "unknown-parent-role-in-country",
+      "expected": "refuse",
+      "actual": "refused",
+      "guard_error": "Country roles differ from frozen declaration"
+    },
+    {
+      "name": "wrong-country-parent-in-adm2-contract",
+      "expected": "refuse",
+      "actual": "refused",
+      "guard_error": "Supported positive-level and exact parent roles required"
+    },
+    {
+      "name": "unclassified-extra-own-catalogue-family",
+      "expected": "refuse",
+      "actual": "refused",
+      "guard_error": "Every retained own family must have exactly one declared role"
+    },
+    {
+      "name": "missing-declared-parent-catalogue-family",
+      "expected": "refuse",
+      "actual": "refused",
+      "guard_error": "Every retained own family must have exactly one declared role"
+    },
+    {
+      "name": "wrong-blz-stage-member-count",
+      "expected": "refuse",
+      "actual": "refused",
+      "guard_error": "Complete declared original stage scope required"
+    },
+    {
+      "name": "wrong-blz-membership-count",
+      "expected": "refuse",
+      "actual": "refused",
+      "guard_error": "Complete declared original stage scope required"
+    },
+    {
+      "name": "wrong-blz-package-key-count",
+      "expected": "refuse",
+      "actual": "refused",
+      "guard_error": "Complete declared original stage scope required"
+    },
+    {
+      "name": "wrong-blz-package-source-level",
+      "expected": "refuse",
+      "actual": "refused",
+      "guard_error": "Complete declared original stage scope required"
+    },
+    {
+      "name": "wrong-target-positive-prefix",
+      "expected": "refuse",
+      "actual": "refused",
+      "guard_error": "Original target association differs"
+    },
+    {
+      "name": "reduced-global-source-declaration",
+      "expected": "refuse",
+      "actual": "refused",
+      "guard_error": "Exact frozen scope contract required"
+    },
+    {
+      "name": "duplicate-country-declaration",
+      "expected": "refuse",
+      "actual": "refused",
+      "guard_error": "Duplicate declared evaluation scopes"
+    }
+  ],
+  "kernel_controls": [
+    {
+      "name": "ownerless-selected-only-contact",
+      "outcome": {
+        "country_iso": "BLZ",
+        "role": "foreign-original",
+        "status": "whole-bounds-candidate",
+        "target_ids": [
+          "synthetic-target"
+        ],
+        "frame_target_ids": {
+          "consumed": [],
+          "selected": [
+            "synthetic-target"
+          ]
+        }
+      },
+      "candidate_families": [
+        "gb:FJI:ADM1"
+      ],
+      "unresolved_families": [],
+      "periodic": []
+    },
+    {
+      "name": "inclusive-edge-contact",
+      "outcome": {
+        "country_iso": "BLZ",
+        "role": "foreign-original",
+        "status": "whole-bounds-candidate",
+        "target_ids": [
+          "synthetic-target"
+        ],
+        "frame_target_ids": {
+          "consumed": [
+            "synthetic-target"
+          ],
+          "selected": []
+        }
+      },
+      "candidate_families": [
+        "gb:FJI:ADM1"
+      ],
+      "unresolved_families": [],
+      "periodic": []
+    },
+    {
+      "name": "inclusive-corner-contact",
+      "outcome": {
+        "country_iso": "BLZ",
+        "role": "foreign-original",
+        "status": "whole-bounds-candidate",
+        "target_ids": [
+          "synthetic-target"
+        ],
+        "frame_target_ids": {
+          "consumed": [
+            "synthetic-target"
+          ],
+          "selected": []
+        }
+      },
+      "candidate_families": [
+        "gb:FJI:ADM1"
+      ],
+      "unresolved_families": [],
+      "periodic": []
+    },
+    {
+      "name": "unknown-retained-outcome",
+      "outcome": {
+        "country_iso": "BLZ",
+        "role": "foreign-original",
+        "status": "unresolved-retained-coordinate-outcome",
+        "target_ids": [],
+        "frame_target_ids": {
+          "consumed": [],
+          "selected": []
+        }
+      },
+      "candidate_families": [
+        "gb:FJI:ADM1"
+      ],
+      "unresolved_families": [
+        "gb:FJI:ADM1"
+      ],
+      "periodic": []
+    },
+    {
+      "name": "periodic-selected-frame-contact",
+      "outcome": {
+        "country_iso": "BLZ",
+        "role": "foreign-original",
+        "status": "unresolved-retained-periodic-contact",
+        "target_ids": [
+          "synthetic-target"
+        ],
+        "frame_target_ids": {
+          "consumed": [],
+          "selected": [
+            "synthetic-target"
+          ]
+        }
+      },
+      "candidate_families": [
+        "gb:FJI:ADM1"
+      ],
+      "unresolved_families": [
+        "gb:FJI:ADM1"
+      ],
+      "periodic": [
+        {
+          "country_iso": "BLZ",
+          "source_id": "synthetic-foreign-source",
+          "original_geometry_sha256": "synthetic",
+          "retained_canonical_geometry_sha256": "synthetic",
+          "whole_consumed_and_selected_bounds_disjoint": false,
+          "native_enclosure": [
+            -75,
+            -71
+          ],
+          "native_key_enclosure_disjoint": true,
+          "independent_whole_native_equality": {
+            "exact_output_match": true
+          },
+          "status": "unresolved-retained-periodic-contact"
+        }
+      ]
+    },
+    {
+      "name": "periodic-native-enclosure-endpoint-contact",
+      "outcome": {
+        "country_iso": "BLZ",
+        "role": "foreign-original",
+        "status": "unresolved-retained-periodic-contact",
+        "target_ids": [],
+        "frame_target_ids": {
+          "consumed": [],
+          "selected": []
+        }
+      },
+      "candidate_families": [
+        "gb:FJI:ADM1"
+      ],
+      "unresolved_families": [
+        "gb:FJI:ADM1"
+      ],
+      "periodic": [
+        {
+          "country_iso": "BLZ",
+          "source_id": "synthetic-foreign-source",
+          "original_geometry_sha256": "synthetic",
+          "retained_canonical_geometry_sha256": "synthetic",
+          "whole_consumed_and_selected_bounds_disjoint": true,
+          "native_enclosure": [
+            9,
+            10
+          ],
+          "native_key_enclosure_disjoint": false,
+          "independent_whole_native_equality": {
+            "exact_output_match": true
+          },
+          "status": "unresolved-retained-periodic-contact"
+        }
+      ]
+    },
+    {
+      "name": "periodic-both-disjoint-synthetic-control",
+      "outcome": {
+        "country_iso": "BLZ",
+        "role": "foreign-original",
+        "status": "retained-periodic-bounds-and-native-key-enclosure-disjoint",
+        "target_ids": [],
+        "frame_target_ids": {
+          "consumed": [],
+          "selected": []
+        }
+      },
+      "candidate_families": [],
+      "unresolved_families": [],
+      "periodic": [
+        {
+          "country_iso": "BLZ",
+          "source_id": "synthetic-foreign-source",
+          "original_geometry_sha256": "synthetic",
+          "retained_canonical_geometry_sha256": "synthetic",
+          "whole_consumed_and_selected_bounds_disjoint": true,
+          "native_enclosure": [
+            -75,
+            -71
+          ],
+          "native_key_enclosure_disjoint": true,
+          "independent_whole_native_equality": {
+            "exact_output_match": true
+          },
+          "status": "retained-periodic-bounds-and-native-key-enclosure-disjoint"
+        }
+      ]
+    }
+  ],
+  "unchanged_callback_and_inclusive_relation": true,
+  "full_caller_invocations": 0,
+  "real_target_geometry_reads": 0,
+  "world_source_records_scanned": 0,
+  "source_geometry_transports_decoded": 0,
+  "qualified_cells": 0,
+  "accepted_credit": 0,
+  "limits": [
+    "Exact changed admission fragments run with synthetic scope/family/count/identity fixtures; immutable Git/byte input admission and actual stage contents are not rerun.",
+    "Unchanged outcome callback uses synthetic bounds and an already-admitted synthetic periodic proof; actual Fiji identity/native-equality proof guards are not replayed.",
+    "No coordinateBounds import, real target-frame derivation, full catalogue record traversal, applicability producer, physical/source/native producer or scientific result."
+  ]
+}

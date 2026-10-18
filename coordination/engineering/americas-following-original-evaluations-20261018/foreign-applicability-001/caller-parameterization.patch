@@ -1,0 +1,126 @@
+--- reference-four-scope-caller.mjs
++++ derive-declared-scope-applicability.proposed.mjs
+@@ -1,4 +1,4 @@
+-/* Task-only scope adapter. Reuse reviewed complete bounds; never read world geometry.
++/* Proposed task-only scope adapter. Reuse reviewed complete bounds; never decode world source transports.
+  * NODE24 THIS_FILE STABLE_REPO FROZEN_CONFIG FRESH_OUTPUT
+  * Requires independent review and Main scheduling before any execution.
+  */
+@@ -25,7 +25,6 @@
+ };
+ // Identical inclusive conservative predicate used by the reviewed prior adapter.
+ const intersection = (a, b) => a[0] <= b[2] && b[0] <= a[2] && a[1] <= b[3] && b[1] <= a[3];
+-const ISOS = ['HTI', 'CRI', 'HND', 'NIC'];
+ const FIJI = ['gb:FJI:ADM1:53030831B91072554514863', 'gb:FJI:ADM2:14151628B95966095088914', 'gb:FJI:ADM2:14151628B42533076410957'];
+ const HELPER = 'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+ const [repoArgument, configArgument, outputArgument] = process.argv.slice(2);
+@@ -35,9 +34,8 @@
+ need(fs.statSync(repo).isDirectory() && fs.statSync(configFile).isFile() && !fs.existsSync(output)
+   && output.startsWith(root+path.sep) && fs.statSync(path.dirname(output)).isDirectory(), 'Ordinary repository/config and absent task-only output required');
+ const configRaw = fs.readFileSync(configFile), config = JSON.parse(configRaw);
+-need(config.version === 1 && config.kind === 'four-scope-retained-bounds-adapter-v1'
+-  && same(config.countries.map(c => c.iso), ISOS) && same(config.target_frames, ['consumed', 'selected'])
+-  && same(config.expected, {catalogue_families:368, source_features:73567, targets:140, native_cells:17979}), 'Exact new-four scope required');
++need(config.version === 2 && config.kind === 'parameterized-scope-retained-bounds-adapter-v2'
++  && Array.isArray(config.countries) && same(config.target_frames, ['consumed', 'selected']), 'Frozen parameterized scope and both target frames required');
+ const env = {...process.env, GIT_NO_LAZY_FETCH:'1', GIT_NO_REPLACE_OBJECTS:'1', GIT_OPTIONAL_LOCKS:'0',
+   GIT_TERMINAL_PROMPT:'0', GIT_CONFIG_NOSYSTEM:'1', GIT_CONFIG_GLOBAL:'/dev/null'};
+ const git = (...args) => execFileSync('git', ['-c','protocol.allow=never','-C',repo,...args], {env,maxBuffer:32*1024*1024});
+@@ -74,6 +72,22 @@
+   need(Array.isArray(rows)&&rows.length,'Nonempty '+label+' required'); const map=new Map();
+   for(const row of rows){need(!map.has(row[key]),'Duplicate '+label);map.set(row[key],row);} return map;
+ }
++// The frozen scope contract declares subjects/roles; it does not alter the bounds method.
++const scopeContract=json(config.inputs.scope_contract),declaredScopes=unique(scopeContract.countries,'iso','declared evaluation scopes');
++need(scopeContract.version===1&&scopeContract.kind==='retained-bounds-evaluation-scope-contract-v1'
++  &&same(config.countries.map(c=>c.iso),scopeContract.countries.map(c=>c.iso))
++  &&same(config.expected,scopeContract.expected)&&config.expected.catalogue_families===368
++  &&config.expected.source_features===73567&&same(scopeContract.target_frames,config.target_frames), 'Exact frozen scope contract required');
++let declaredTargets=0,declaredCells=0;
++for(const c of scopeContract.countries){
++  need(/^[A-Z]{3}$/.test(c.iso)&&Number.isSafeInteger(c.target_count)&&c.target_count>0
++    &&Number.isSafeInteger(c.native_cells)&&c.native_cells>0&&Array.isArray(c.parent_context_families), 'Explicit bounded scope declaration required');
++  const m=/^gb:([A-Z]{3}):ADM([12])$/.exec(c.positive_family);
++  need(m&&m[1]===c.iso&&same(c.parent_context_families,m[2]==='1'?[]:[`gb:${c.iso}:ADM1`])
++    &&c.package_id===c.positive_family.replaceAll(':','-')+'--repair-evaluation', 'Supported positive-level and exact parent roles required');
++  declaredTargets+=c.target_count;declaredCells+=c.native_cells;
++}
++need(declaredTargets===config.expected.targets&&declaredCells===config.expected.native_cells, 'Declared aggregate scope differs');
+ const closure=unique(config.code_closure,'path','accepted code closure'),visited=new Set();
+ function verifyCode(name) {
+   if(visited.has(name))return;const pin=closure.get(name);need(pin?.commit===config.method_commit&&safe(pin.task_file),'Accepted closure missing');
+@@ -120,12 +134,17 @@
+ const denominator=BigInt(manifest.size),floor=(n,d)=>n>=0n?n/d:-((-n+d-1n)/d),ceil=(n,d)=>-floor(-n,d);
+ const targetMap=new Map();let requestedCells=0;
+ const countries=config.countries.map(c=>{
+-  need(c.positive_family===`gb:${c.iso}:ADM2`&&same(c.parent_context_families,[`gb:${c.iso}:ADM1`]),'Exact positive/parent roles required');
++  const declared=declaredScopes.get(c.iso);
++  need(declared&&c.positive_family===declared.positive_family&&same(c.parent_context_families,declared.parent_context_families), 'Country roles differ from frozen declaration');
++  const ownFamilies=[c.positive_family,...c.parent_context_families],actualOwnFamilies=[...products.keys()].filter(f=>f.startsWith(`gb:${c.iso}:`));
++  need(new Set(ownFamilies).size===ownFamilies.length&&ownFamilies.every(f=>products.has(f))
++    &&same([...ownFamilies].sort(),actualOwnFamilies.sort()), 'Every retained own family must have exactly one declared role');
+   const stages=unique(json(c.stage),'target','whole stages'),members=unique(json(c.membership),'source_id','target membership'),pkg=json(c.package);
+-  read(c.original_membership);need(stages.size===c.target_ids.length&&pkg.package_id===`gb-${c.iso}-ADM2--repair-evaluation`,'Complete new stage scope required');
++  read(c.original_membership);need(stages.size===c.target_ids.length&&stages.size===declared.target_count&&members.size===declared.target_count
++    &&pkg.package_id===declared.package_id&&pkg.location_count===declared.target_count&&pkg.native_cells===declared.native_cells, 'Complete declared original stage scope required');
+   const owners=new Set(),targets=c.target_ids.map(id=>{
+     const s=stages.get(id),m=members.get(id),original=sources.get(id);need(s&&m&&original&&!targetMap.has(id),'Missing/duplicate original target');
+-    need(m.target_id===id&&s.selected.id===id&&same(original.owners,[m.pixelIndex])&&original.source_index===m.source_index
++    need(id.startsWith(c.positive_family+':')&&m.source_id===id&&m.target_id===id&&s.selected.id===id&&same(original.owners,[m.pixelIndex])&&original.source_index===m.source_index
+       &&original.ordinal===m.source_ordinal&&s.consumed.properties.shapeID===id.slice(c.positive_family.length+1),'Original target association differs');
+     const t={id,pixelIndex:m.pixelIndex,source_index:original.source_index,original_geometry_sha256:sha(bytes(s.consumed.geometry)),
+       original_properties:s.consumed.properties,frames:{consumed:coordinateBounds(s.consumed.geometry),selected:coordinateBounds(s.selected.geometry)}};
+@@ -149,9 +168,9 @@
+   const enclosure=[Number(floor(west,denominator)),Number(ceil(east,denominator))];
+   need(c.expected_scope.cells===cells&&c.expected_scope.intervals===segments&&same(c.expected_scope.exact_longitude_numerators,[String(west),String(east)])
+     &&same(c.expected_scope.longitude_enclosure,enclosure)&&c.expected_scope.longitude_denominator===String(denominator),'Frozen native enclosure differs');
+-  requestedCells+=cells;return {...c,targets,enclosure,feature_counts:{positive:0,parent_context:0,foreign:0,foreign_candidates:0,foreign_disjoint:0,foreign_unresolved:0},candidates:new Set(),unresolved:new Set()};
++  requestedCells+=cells;return {...c,own_families:ownFamilies,targets,enclosure,feature_counts:{positive:0,parent_context:0,foreign:0,foreign_candidates:0,foreign_disjoint:0,foreign_unresolved:0},candidates:new Set(),unresolved:new Set()};
+ });
+-need(targetMap.size===140&&requestedCells===17979,'Exact complete four-country scope required');
++need(targetMap.size===config.expected.targets&&requestedCells===config.expected.native_cells,'Exact complete declared target/key scope required');
+ const expectedOutputs=new Map(completion.outputs.map(p=>[p.path,p]));
+ need(config.retained_bounds_shards.length===12,'Complete retained shard inventory required');
+ for(const p of config.retained_bounds_shards){const prior=expectedOutputs.get(path.posix.basename(p.path));need(prior&&prior.bytes===p.bytes&&prior.sha256===p.sha256,'Retained shard not in reviewed completion');}
+@@ -209,30 +228,33 @@
+   }
+   need(records===expectedOutputs.get(path.posix.basename(pin.path)).records,'Retained shard record count differs');
+ }
+-finish();need(seen.size===73567&&roster.every(r=>seen.has(r.source_id))&&targetJoins.size===140&&periodic.length===12,'Complete source/target/periodic coverage required');
++finish();need(seen.size===73567&&roster.every(r=>seen.has(r.source_id))&&targetJoins.size===config.expected.targets&&periodic.length===FIJI.length*countries.length,'Complete source/target/periodic coverage required');
+ for(const [family,p]of products)need(familyCounts.get(family)===p.feature_count,'Complete family omitted');
+ const summaries=countries.map(c=>{
+   need(c.feature_counts.positive+c.feature_counts.parent_context+c.feature_counts.foreign===73567
+     &&c.feature_counts.foreign_candidates+c.feature_counts.foreign_disjoint+c.feature_counts.foreign_unresolved===c.feature_counts.foreign,'Complete outcome conservation differs');
+-  need([...products.keys()].filter(f=>f.startsWith(`gb:${c.iso}:`)).length===2,'Unexpected own-country family role');
++  need(c.feature_counts.positive===products.get(c.positive_family).feature_count
++    &&c.feature_counts.parent_context===c.parent_context_families.reduce((n,f)=>n+products.get(f).feature_count,0), 'Declared positive/parent feature conservation differs');
+   const unresolved=[...c.unresolved].sort(),candidate=[...c.candidates].sort();return {country_iso:c.iso,target_count:c.targets.length,
+-    positive_family:c.positive_family,parent_context_families:c.parent_context_families,complete_foreign_families:366,
++    positive_family:c.positive_family,parent_context_families:c.parent_context_families,own_families:c.own_families,complete_foreign_families:products.size-c.own_families.length,
+     complete_target_frames:c.targets,original_scope:c.expected_scope,feature_counts:c.feature_counts,
+     whole_bounds_candidate_families:candidate,unresolved_families:unresolved,stock_scope_ready:unresolved.length===0,
+     stock_territorial_exclusion_families:unresolved.length?null:candidate};
+ });
+-write('country-foreign-applicability.json',{version:1,countries:summaries});write('retained-periodic-outcomes-new-four.json',{rows:periodic});
++write('country-foreign-applicability.json',{version:1,countries:summaries});write('retained-periodic-outcomes-current-scopes.json',{rows:periodic});
+ const complete=summaries.every(c=>c.stock_scope_ready);
+-write('completion.json',{version:1,kind:'four-scope-retained-complete-bounds-applicability',inventory_complete:true,country_applicability_complete:complete,
++write('completion.json',{version:2,kind:'parameterized-scope-retained-complete-bounds-applicability',inventory_complete:true,country_applicability_complete:complete,
+   source_result:config.inputs.completion,previous_outputs_preserved:true,complete_source_features:73567,complete_families:368,retained_ownerless_features:ownerless,
+-  complete_target_members:140,original_requested_cells:17979,source_geometry_bodies_read:0,new_country_outcomes:73567*4,
++  complete_target_members:config.expected.targets,original_requested_cells:config.expected.native_cells,source_geometry_bodies_read:0,
++  whole_target_stage_members_read:config.expected.targets,new_country_outcomes:73567*countries.length,
+   driver_sha256:sha(fs.readFileSync(fileURLToPath(import.meta.url))),config_sha256:sha(configRaw),inputs:[...consumed.values()],
+   unchanged_source_transports:[...currentParts.values()],outputs:emitted,seconds:(performance.now()-started)/1000,
+   process_max_rss_platform_units:process.resourceUsage().maxRSS,platform:process.platform,
+   limits:['Whole world geometry was not replayed; reviewed complete per-part bounds and unchanged whole-source identities reused.',
++    'source_geometry_bodies_read=0 refers to global source-corpus transport decoding; whole consumed and selected target-stage geometries are read.',
+     'Consumed plus selected frames create a conservative candidate superset under the identical inclusive relation; no geometry equivalence inferred.',
+-    'All five original per-country outcomes retained, with four new outcomes appended for every original including ownerless/disjoint records.',
++    'All five original per-country outcomes retained, with declared-scope outcomes appended for every original including ownerless/disjoint records.',
+     'No physical/native/source semantic, source-rights, current-owner-zero, selected delivery or accepted repair credit.',
+     'Runtime/resource values are observations, not process-tree/time/memory enforcement.']});
+-console.log(JSON.stringify({inventory_complete:true,country_applicability_complete:complete,complete_features:seen.size,targets:140,output}));
++console.log(JSON.stringify({inventory_complete:true,country_applicability_complete:complete,complete_features:seen.size,targets:config.expected.targets,output}));
+ if(!complete)process.exitCode=2;

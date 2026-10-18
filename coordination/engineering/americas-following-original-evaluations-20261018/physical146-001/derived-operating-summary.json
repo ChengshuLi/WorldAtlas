@@ -1,0 +1,26 @@
+{
+  "suggested_path": "physical-execution-summary.json",
+  "derivation": "Derived only from the actual execution record and report metadata; contains no copied receipt fields or host paths.",
+  "exit_code": 0,
+  "started_at": "2026-10-18T04:08:25.376282+00:00",
+  "finished_at": "2026-10-18T04:08:36.617238+00:00",
+  "elapsed_seconds": 11.240762792062014,
+  "scope": "Diagnostic original GSHHG source-relative support for whole consumed targets; heterogeneous observation dates and physical authority limits retained.",
+  "report_bytes": 2668494,
+  "report_sha256": "574a108cd55cdff7ec7526321c8153694229f571d9cd5a688d119ad0477c90bd",
+  "private_receipt_bytes": 67517,
+  "private_receipt_sha256": "a6e44ab9aa0e74040a60093ebf83098cc9ff11ce28e885614be4910d4d83662f",
+  "physical_limits": [
+    "Source-relative physical evidence only; no native selection, factual approval or repaired credit.",
+    "Runtime inventory covers executables, loaded modules and package libraries, not a hermetic OS-loader/system-library closure."
+  ],
+  "kind": "derived-public-operating-summary",
+  "source_checkpoint": "e25122c85b600a1c4d3d96a10b759bd8afa3c920",
+  "configuration_sha256": "9185173abf477a000c6d28ce1fab9d32055a59e4127ee479e663a6e30b57084a",
+  "whole_targets": 146,
+  "original_cells": 7555,
+  "land_cells": 7085,
+  "inland_water_cells": 470,
+  "source_inputs": 25,
+  "original_receipt_private_and_unchanged": true
+}

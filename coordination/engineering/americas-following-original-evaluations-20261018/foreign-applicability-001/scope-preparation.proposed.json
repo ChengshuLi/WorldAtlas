@@ -1,0 +1,104 @@
+{
+  "kind": "task-only-frozen-subject-inputs; not applicability evidence",
+  "countries": [
+    {
+      "iso": "GTM",
+      "targets": 30,
+      "cells": 1516,
+      "intervals": 830,
+      "classes": {
+        "land": 1121,
+        "inland-water": 395
+      },
+      "min_column": 63930,
+      "max_inclusive_column": 66835,
+      "exact_longitude_numerators": [
+        "-24174900",
+        "-23129100"
+      ],
+      "longitude_denominator": "262166",
+      "longitude_enclosure": [
+        -93,
+        -88
+      ],
+      "native_size": 262166,
+      "longitude_formula": "(360*x + 180 - 180*size) / size"
+    },
+    {
+      "iso": "BLZ",
+      "targets": 6,
+      "cells": 917,
+      "intervals": 497,
+      "classes": {
+        "land": 917
+      },
+      "min_column": 66152,
+      "max_inclusive_column": 67165,
+      "exact_longitude_numerators": [
+        "-23374980",
+        "-23010300"
+      ],
+      "longitude_denominator": "262166",
+      "longitude_enclosure": [
+        -90,
+        -87
+      ],
+      "native_size": 262166,
+      "longitude_formula": "(360*x + 180 - 180*size) / size"
+    },
+    {
+      "iso": "DOM",
+      "targets": 52,
+      "cells": 3988,
+      "intervals": 1835,
+      "classes": {
+        "land": 3988
+      },
+      "min_column": 78660,
+      "max_inclusive_column": 81307,
+      "exact_longitude_numerators": [
+        "-18872100",
+        "-17919180"
+      ],
+      "longitude_denominator": "262166",
+      "longitude_enclosure": [
+        -72,
+        -68
+      ],
+      "native_size": 262166,
+      "longitude_formula": "(360*x + 180 - 180*size) / size"
+    },
+    {
+      "iso": "SLV",
+      "targets": 58,
+      "cells": 1134,
+      "intervals": 538,
+      "classes": {
+        "land": 1059,
+        "inland-water": 75
+      },
+      "min_column": 65457,
+      "max_inclusive_column": 67200,
+      "exact_longitude_numerators": [
+        "-23625180",
+        "-22997700"
+      ],
+      "longitude_denominator": "262166",
+      "longitude_enclosure": [
+        -91,
+        -87
+      ],
+      "native_size": 262166,
+      "longitude_formula": "(360*x + 180 - 180*size) / size"
+    }
+  ],
+  "targets": 146,
+  "original_cells": 7555,
+  "original_interval_rows": 3700,
+  "world_source_geometries_read": 0,
+  "whole_target_stage_members_read_for_data_freeze": 146,
+  "source_transport_descriptors_reused_unchanged": 370,
+  "retained_bounds_shards_reused": 12,
+  "caller_executed": false,
+  "independent_method_review": "pending"
+}

@@ -1,0 +1,104 @@
+{
+  "status": "static proposed adverse cases; none executed",
+  "caller_executions": 0,
+  "geometry_predicates_executed": 0,
+  "new_control_pass_claims": false,
+  "cases": [
+    {
+      "case": "BLZ valid role",
+      "scenario": "BLZ positive gb:BLZ:ADM1 and explicit [] parents",
+      "expected_behavior_from_code": "One own family, zero parent-context features, 367 complete foreign families; no invented ADM0.",
+      "execution": "not run; independent static review requested"
+    },
+    {
+      "case": "Three ADM2 roles",
+      "scenario": "GTM/DOM/SLV positive ADM2 plus own ADM1",
+      "expected_behavior_from_code": "Two own families each and 366 complete foreign families.",
+      "execution": "not run; independent static review requested"
+    },
+    {
+      "case": "BLZ missing parent declaration",
+      "scenario": "Delete parent_context_families instead of []",
+      "expected_behavior_from_code": "Reject explicit-role contract requirement; absence is not an empty-context decision.",
+      "execution": "not run; independent static review requested"
+    },
+    {
+      "case": "BLZ invented ADM0",
+      "scenario": "Add gb:BLZ:ADM0 as parent",
+      "expected_behavior_from_code": "Reject supported ADM1-positive policy and exact own-family catalogue match.",
+      "execution": "not run; independent static review requested"
+    },
+    {
+      "case": "Positive also parent",
+      "scenario": "Use gb:BLZ:ADM1 as both positive and parent",
+      "expected_behavior_from_code": "Reject parent policy/duplicate own-family declaration; no double-counted source.",
+      "execution": "not run; independent static review requested"
+    },
+    {
+      "case": "Scope truncation or substitution",
+      "scenario": "Drop a target, use wrong positive prefix, change package cells or membership",
+      "expected_behavior_from_code": "Reject per-declaration stage/member/package count or exact association/aggregate guards; literal Null names are never filtered.",
+      "execution": "not run; independent static review requested"
+    },
+    {
+      "case": "Missing source/transport",
+      "scenario": "Omit a source record, ownerless feature, family, source part or retained shard",
+      "expected_behavior_from_code": "Reject unchanged 73567/368/370/12 inventory and conservation guards; no world geometry re-decoding.",
+      "execution": "not run; independent static review requested"
+    },
+    {
+      "case": "Ownerless candidate",
+      "scenario": "A valid ownerless foreign feature bounds touches any target frame",
+      "expected_behavior_from_code": "Retain as a family candidate; ownerless is counted, not excluded.",
+      "execution": "not run; independent static review requested"
+    },
+    {
+      "case": "Inclusive edge contact",
+      "scenario": "Valid bounds touch at an edge or corner",
+      "expected_behavior_from_code": "Retain candidate through unchanged <= inclusive relation.",
+      "execution": "not run; independent static review requested"
+    },
+    {
+      "case": "Selected-only contact",
+      "scenario": "Foreign complete bounds touch selected frame only",
+      "expected_behavior_from_code": "Retain through union of consumed and selected matches.",
+      "execution": "not run; independent static review requested"
+    },
+    {
+      "case": "Unknown non-Fiji frame",
+      "scenario": "Invalid bounds, nonnull raw-coordinate error or unexpected frame",
+      "expected_behavior_from_code": "Preserve unresolved outcome/family; stock exclusion list remains null.",
+      "execution": "not run; independent static review requested"
+    },
+    {
+      "case": "Fiji proof mismatch",
+      "scenario": "Alter geometry hashes, source ordinal/owner join, normalization, proof match or prior five outcomes",
+      "expected_behavior_from_code": "Reject unchanged exact seam/native proof guards.",
+      "execution": "not run; independent static review requested"
+    },
+    {
+      "case": "Fiji target contact",
+      "scenario": "Fiji complete bounds touch either consumed or selected target frame",
+      "expected_behavior_from_code": "Preserve unresolved periodic contact even if native longitude enclosure appears disjoint.",
+      "execution": "not run; independent static review requested"
+    },
+    {
+      "case": "Fiji native-key enclosure contact",
+      "scenario": "No frame bound match but source span touches native enclosure boundary",
+      "expected_behavior_from_code": "Preserve unresolved periodic contact through unchanged strict outside comparison.",
+      "execution": "not run; independent static review requested"
+    },
+    {
+      "case": "Coordinate contract drift",
+      "scenario": "Change native size/grid identity, helper bounds export or frozen native enclosure",
+      "expected_behavior_from_code": "Reject unchanged normative grid/helper/BigInt enclosure guards.",
+      "execution": "not run; independent static review requested"
+    },
+    {
+      "case": "Output record preservation",
+      "scenario": "Read original reviewed five-country retained records",
+      "expected_behavior_from_code": "Spread complete original record and append new declared-scope outcomes; actual config pins original five-country result, not the later old-four appended result.",
+      "execution": "not run; independent static review requested"
+    }
+  ]
+}

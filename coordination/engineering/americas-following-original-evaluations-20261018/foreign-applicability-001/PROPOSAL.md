@@ -1,0 +1,26 @@
+# Proposed retained-bounds caller parameterization
+
+**Task-only proposal, frozen for independent static review; not executed.** The caller, actual configuration and input copies are in this directory. No repository code, accepted operator, geometry source, selected map or publication was changed. Main schedules any later use after the independent review; this preparation does not interrupt priority delivery.
+
+`derive-declared-scope-applicability.proposed.mjs` changes the reviewed four-scope caller's subject/role binding. `caller-parameterization.patch` shows the complete change against `reference-four-scope-caller.mjs`. `adapter-config.proposed.json` consumes the exact pinned bytes of `scope-contract.proposed.json`; the contract is not commentary or an unused allowlist.
+
+| Scope | Complete target members | Original request keys | Positive family | Explicit parent context | Retained own families | Complete foreign families |
+|---|---:|---:|---|---|---:|---:|
+| GTM | 30 | 1,516 | gb:GTM:ADM2 | gb:GTM:ADM1 | 2 | 366 |
+| BLZ | 6 | 917 | gb:BLZ:ADM1 | `[]` | 1 | 367 |
+| DOM | 52 | 3,988 | gb:DOM:ADM2 | gb:DOM:ADM1 | 2 | 366 |
+| SLV | 58 | 1,134 | gb:SLV:ADM2 | gb:SLV:ADM1 | 2 | 366 |
+
+The actual frozen input set preserves all **146 targets, 7,555 original keys and 3,700 interval rows**. Each original stage, original membership and package is copied intact into `inputs/<ISO>/`; a separate membership view carries the stock source ID/target ID/owner/source-index/ordinal fields. No names, including SLV's six Null names, are used to select or drop records. Original intervals supply the integer native-longitude enclosure facts in `scope-preparation.proposed.json`; no geometry predicate produced those metadata facts.
+
+The supported declaration policy is deliberately narrow: an ADM1 positive family has an explicitly empty parent-family array; an ADM2 positive has its own ADM1 parent. Each package ID follows that declared positive level. The caller checks that the declared positive-plus-parent set is unique and equals **every actual same-country gb family in the retained catalogue**. Thus Belize's same ADM1 source is not counted again as an independent parent, a missing parent field is not silently treated as `[]`, and no ADM0 is fabricated. Parent feature conservation is checked against the declared actual catalogue records; the foreign-family count is derived as `368 - own_family_count`.
+
+The inclusive intersection relation and its use across both **consumed and selected whole-target frames** are unchanged. The complete retained source traversal remains 73,567 original records across 368 families, all 370 source transport descriptors and all 12 reviewed bounds shards. Ownerless records stay in the same loop and are counted; complete source families are retained as family operands when any member is a candidate or unresolved. No original foreign family is clipped, simplified, substituted by a country mask, or exempted by its name.
+
+The existing native-grid identity/size, accepted `coordinateBounds` export comparison, exact original target joins, class/contact preservation and BigInt native-longitude formula remain. All three exact Fiji seam identities, original/canonical hashes, prior independent whole-native equality joins, both target-frame checks and strict native-key enclosure guards remain in place. A target-frame contact, a native-enclosure contact or an unsupported frame remains unresolved; unresolved foreign families still produce a null stock exclusion list. The expected periodic record count now derives from three seam records times the declared scope count (12 for this frozen four-scope contract).
+
+The configuration reuses the original reviewed **five-country** retained result and immutable helper/source descriptors from the prior configuration. It does not feed the later old-four appended-result records back through the caller, overwrite old output directories or discard their evidence. The complete original record is emitted with new declared-scope outcomes appended; the original five per-country outcome fields are unchanged. Existing immutable descriptor commits remain their actual historical commits, including 252f2aa inputs; they were not silently repinned to a newer commit. The separately observed map-equivalent ff8a commit is contextual metadata, not an invented input locator.
+
+`source_geometry_bodies_read: 0` in the proposed output means **no global original source-corpus transport decoding/replay**. It does not claim no geometry input: the complete consumed and selected geometries of the 146 newly frozen target-stage members are necessarily read. The output now states that distinction explicitly. Neither conservative bounds candidates nor unresolved counts are native, physical, legal-role, rights or accepted repair credit.
+
+`ADVERSE-CASES.proposed.json` describes the intended static adverse cases and relevant rejection/unresolved behavior. **No proposed caller, syntax/runtime check, adverse control or scientific predicate was executed. No new control is reported as passing.** Prior method evidence remains its own evidence; it is not relabeled as a new run. Frozen file identities are in `FREEZE.json`, and substantive independent review is assigned to `/root/salvador_source_scope_sol`.

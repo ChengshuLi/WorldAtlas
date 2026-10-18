@@ -14,3 +14,7 @@ Source identities and limits to carry with the inputs:
 These are source/provenance limits for the retained inputs, not source qualification, legal clearance, current-boundary approval, or scientific findings. Full source notices are in `source-notices-draft.md`.
 
 The original SLV operating input-custody receipt remains retained privately because it contains host paths; it is not published or used as a changed scientific source. All complete source and target geometries, original request/class intentions and contrary records are unchanged.
+
+First actual whole146 physical call succeeded at 2026-10-18T04:08:25.376282Z–04:08:36.617238Z (11.240762792 seconds); all7,555originals/470water were processed. Full577checked-query report remains whole. The separate retained-bounds call succeeded in8.5404355seconds on73,567records/368families/370parts/7,136ownerless. Its zero-unresolved result is source-operand readiness, not native/territorial/rights clearance.
+
+The retained consumed Honduras ADM2 family has298features. Its known archive-only NuevaFrontera original is separately preserved whole as an additional negative operand for all146targets; it was not part of this bounds traversal, and no contact/disjointness is guessed. No geometry or key is manually cut. Actual native qualification and supported/held partitions are not yet established.
