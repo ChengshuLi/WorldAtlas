@@ -106,8 +106,8 @@ const country = cohortRows.filter(row => row.owner === 'Madagascar');
 need(canonical.length === 119 && country.length === canonical.length
   && canonical.every(feature => country.some(row => row.id === feature.id)), 'Complete Madagascar country context required');
 const config = {version:1, selector:{commit:base,path:'data/ownership-selection.json'},
-  compact_territorial_exclusions:true,
-  territorial_exclusion_families:foreign.whole_bounds_candidate_families,
+  ...(foreign.whole_bounds_candidate_families.length ? {compact_territorial_exclusions:true,
+    territorial_exclusion_families:foreign.whole_bounds_candidate_families} : {}),
   source_evidence:{version:1,kind:'source-target-native-evidence-v1',
     catalogue:pins.get(base + ':' + cataloguePath), families:[{source_id:'gb:MDG:ADM2',parts}],
     physical_evidence:physicalPin,
