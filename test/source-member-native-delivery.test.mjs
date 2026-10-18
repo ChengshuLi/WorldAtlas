@@ -743,3 +743,26 @@ for(const first of [undefined,null,false,0])test('stored authority owner closes 
   let failed=false;try{owned.close();}catch(error){failed=true;assert.equal(error,first);}assert(failed);assert(closes>1);assert.deepEqual(fs.readdirSync(directory),[]);
  }finally{fs.closeSync=original;owned?.close();fs.rmSync(directory,{recursive:true});}
 });
+
+// Physical coverage may spill its outer polygon roster without changing any
+// source member or requested cell. Both actual constructors consume these pins.
+for(const count of [31,32,33])test('owned constructor preserves spilled physical coverage polygon roster '+count,async()=>{
+ const fs=await import('node:fs'),os=await import('node:os'),path=await import('node:path');
+ const fixture=constructorFixture(state=>{
+  for(const result of state.physical.results){
+   const original=result.support.mapped_land_support,ring=original.coordinates[0];
+   const left=ring[0][0],right=ring[1][0],bottom=ring[0][1],top=ring[2][1];
+   // Disjoint horizontal strips: the selected centre at latitude near zero is
+   // retained in the first strip; the remaining strips lie strictly north.
+   const polygons=[rectangle(left,right,bottom,.001).coordinates];
+   for(let i=1;i<count;i++){const lo=.002+(top-.002)*(i-1)/(count-1),hi=lo+(top-.002)/(count-1)*.8;
+    polygons.push(rectangle(left,right,lo,hi).coordinates);}
+   result.support.mapped_land_support={type:'MultiPolygon',coordinates:polygons};
+  }
+ });
+ const eager=fixture.run(),directory=fs.mkdtempSync(path.join(os.tmpdir(),'coverage-roster-'));let owned;
+ const literal=result=>({...result,products:Object.fromEntries(Object.entries(result.products).map(([key,value])=>[key,value.toString()]))});
+ try{owned=await constructOriginalAuthorityStored(fixture.reader(),fixture.locators,{directory});
+  assert.equal(valueSha(literal(owned.result)),valueSha(literal(eager)));assert.equal(eager.ledger_rows[0].native_cells,1);
+ }finally{owned?.close();assert.deepEqual(fs.readdirSync(directory),[]);fs.rmSync(directory,{recursive:true});}
+});

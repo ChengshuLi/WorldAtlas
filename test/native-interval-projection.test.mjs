@@ -53,3 +53,32 @@ test('native layout seed snapshots caller words and separates distinct partition
  const {state}=(await first.api.qualifyCheckpoint({reader:first.reader}));let count=0;
  try{await first.api.visitNativeIntervals({state,rows:[0],visit:async ({runs})=>{for await(const run of runs){assert.equal(run[0],count*2);count++;}}});assert.equal(count,16);}finally{first.api.releaseCheckpoint(state);}
 });
+
+for(const primary of [Error('visitor primary'),undefined,null,false,0])
+test('private interval visitor attempts both owned closes and preserves primary '+String(primary),async t=>{
+ const f=await trustedFixture(t,{nativeLayout:layout(4,8)}),{state}=await f.api.qualifyCheckpoint({reader:f.reader});
+ const open=fs.openSync,close=fs.closeSync,remove=fs.rmSync,trace=scratchTrace(),fds=new Set();let attempts=0;
+ fs.openSync=function(name,...args){const fd=open.call(this,name,...args);if(path.basename(String(name))==='shuffled')fds.add(fd);return fd;};
+ fs.closeSync=function(fd){const owned=fds.delete(fd);close(fd);if(owned){attempts++;throw Error('secondary close');}};
+ try{
+  await assert.rejects(f.api.visitNativeIntervals({state,rows:[0],visit:async({runs})=>{for await(const run of runs){assert.ok(run);throw primary;}}}),error=>Object.is(error,primary));
+  assert.equal(attempts,2);assert.equal(trace.live.size,0);assert.equal(fds.size,0);
+  fs.closeSync=close;
+  await f.api.visitNativeIntervals({state,rows:[0],visit:async({runs})=>{for await(const run of runs)assert.ok(run);}});
+  assert.equal(trace.live.size,0);
+ }finally{fs.openSync=open;fs.closeSync=close;for(const fd of fds)try{close(fd);}catch{}for(const name of trace.live)remove(name,{recursive:true});trace.restore();f.api.releaseCheckpoint(state);}
+});
+for(const first of [Error('cleanup primary'),undefined,null,false,0])
+test('private interval visitor preserves first cleanup failure and releases active visit '+String(first),async t=>{
+ const f=await trustedFixture(t,{nativeLayout:layout(4,8)}),{state}=await f.api.qualifyCheckpoint({reader:f.reader});
+ const open=fs.openSync,close=fs.closeSync,remove=fs.rmSync,trace=scratchTrace(),fds=new Set();let attempts=0;
+ fs.openSync=function(name,...args){const fd=open.call(this,name,...args);if(path.basename(String(name))==='shuffled')fds.add(fd);return fd;};
+ fs.closeSync=function(fd){const owned=fds.delete(fd);close(fd);if(owned)throw ++attempts===1?first:Error('later cleanup');};
+ try{
+  await assert.rejects(f.api.visitNativeIntervals({state,rows:[0],visit:async({runs})=>{for await(const run of runs)assert.ok(run);}}),error=>Object.is(error,first));
+  assert.equal(attempts,2);assert.equal(trace.live.size,0);assert.equal(fds.size,0);
+  fs.closeSync=close;
+  await f.api.visitNativeIntervals({state,rows:[0],visit:async({runs})=>{for await(const run of runs)assert.ok(run);}});
+  assert.equal(trace.live.size,0);
+ }finally{fs.openSync=open;fs.closeSync=close;for(const fd of fds)try{close(fd);}catch{}for(const name of trace.live)remove(name,{recursive:true});trace.restore();f.api.releaseCheckpoint(state);}
+});

@@ -1326,7 +1326,7 @@ export async function visitNativeIntervals({state,rows,visit}) {
   if(!rows.length){const result=projectNativeRows({state,rows});return {reused_rows:[],acquired_rows:[],custody:result.custody};}
   const context=nativeContext(proof),manifest=state.manifest;
   demand(!context.intervalVisit,'Nested native interval visit');context.intervalVisit=true;
-  let table,body,bodyPin,partIndex=0;const reused=[],acquired=[];
+  let table,body,bodyPin,partIndex=0,failed=false;const reused=[],acquired=[];
   async function open(pin){
     const name=path.posix.join(path.posix.dirname(state.selection.manifest_path),pin.path);
     const chunks=proof.reader.treeRoute(name).length?proof.reader.stream(name,{expected:pin.sha256}):context.image.logicalStream(name,pin);
@@ -1375,7 +1375,14 @@ export async function visitNativeIntervals({state,rows,visit}) {
     }
     return {reused_rows:reused,acquired_rows:acquired,custody:{accepted_checkpoint:state.accepted_execution,
       new_whole_inputs:[...context.inputInventory.values()],retained_native_inputs:Array.from(proof.rebind.request.acquisition.native_inputs)}};
-  }finally{body?.close();table?.close();delete context.intervalVisit;}
+  }catch(error){failed=true;throw error;}
+  finally{
+    const errors=[];
+    try{body?.close();}catch(error){errors.push(error);}
+    try{table?.close();}catch(error){errors.push(error);}
+    delete context.intervalVisit;
+    if(!failed&&errors.length)throw errors[0];
+  }
 }
 
 /** Exhaustive actual append-only transition. Never reacquires a full selection.

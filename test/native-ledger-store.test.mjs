@@ -474,3 +474,23 @@ test('finite coordinate admission writes directly into its bounded writer withou
  }finally{Buffer.allocUnsafe=allocate;store?.close();}
  assert.deepEqual(fs.readdirSync(directory),[]);
 });
+
+for(const shape of ['vertices','rings','polygons'])for(const count of [31,32,33])
+test('stored changed-rebind preserves complete polygon identities and disjoint bounds: '+shape+' '+count,async t=>{
+ const {admitNativeMetadataStore}=await import('../scripts/native-patch-store.mjs');
+ const {currentRebindResult,valueSha}=await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs');
+ const ring=(x,n=5,radius=.2)=>{const points=[];for(let i=0;i<n-1;i++){const angle=2*Math.PI*i/(n-1);points.push([x+radius*Math.cos(angle),radius*Math.sin(angle)]);}points.push(points[0]);return points;};
+ let polygons=[[ring(0,shape==='vertices'?count:5)]];
+ if(shape==='rings')polygons=[[ring(0,5,1),...Array.from({length:count-1},(_,i)=>ring(-.5+i/count,5,.003))]];
+ if(shape==='polygons')polygons=Array.from({length:count},(_,i)=>[ring(i*2)]);
+ const original={type:'MultiPolygon',coordinates:polygons},added=[ring(100,shape==='vertices'?count:5)],current={type:'MultiPolygon',coordinates:[...polygons,added]},primitive={type:'Polygon',coordinates:[ring(120,shape==='vertices'?count:5)]};
+ const input={baseSelection:{version:1},registry:{version:1},size:16,
+  originalRows:[{component_id:'old',target_id:'A',pixelIndex:1,disposition:'assigned',base_geometry:original,base_geometry_sha256:valueSha(original),geometry:primitive,geometry_sha256:valueSha(primitive)}],
+  originalPatches:[{version:1,kind:'unassigned-native-cells-v1',rows:[{y:3,runs:[[4,5,1]]}]}],
+  currentTargets:[{target_id:'A',pixelIndex:1,geometry:current,geometry_sha256:valueSha(current)}],currentRows:[{y:3,runs:[[0,2,2]]}]};
+ const directory=temporary(t),body=Buffer.from(JSON.stringify(input)),store=await admitNativeMetadataStore({directory,chunks:chunks(body),expected:{bytes:body.length,sha256:hash(body)}});
+ try{assert.equal(valueSha(currentRebindResult(store.metadata)),valueSha(currentRebindResult(input)));
+  const changed={...store.metadata,currentTargets:[{...store.metadata.currentTargets[0],geometry:primitive,geometry_sha256:valueSha(primitive)}]};
+  assert.throws(()=>currentRebindResult(changed),/loses\/rebuilds an original full polygon group/);
+ }finally{store.close();assert.deepEqual(fs.readdirSync(directory),[]);}
+});

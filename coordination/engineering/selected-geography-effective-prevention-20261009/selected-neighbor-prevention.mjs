@@ -711,11 +711,12 @@ function* readAdoptedOsmRevision({evidence,proposed,owners,latitudes,read,json,r
    'Current geography changed after revised-source comparison');
  }
  const members=new Map(),relationIds=new Set();
- const segments=points=>{const result=new Map();for(let i=1;i<points.length;i++){
-  const ends=[points[i-1],points[i]].sort((a,b)=>a[0]-b[0]||a[1]-b[1]);
+ const segments=points=>{const result=new Map();let prior,started=false;for(const point of points){
+  if(!started){prior=point;started=true;continue;}
+  const ends=[prior,point].sort((a,b)=>a[0]-b[0]||a[1]-b[1]);
   demand(ends.every(p=>Array.isArray(p)&&p.length===2&&p.every(Number.isFinite)
    &&Math.abs(p[0])<=180&&Math.abs(p[1])<=90),'Invalid literal revised-source segment');
-  const id=JSON.stringify(ends);result.set(id,(result.get(id)??0)+1);
+  const id=JSON.stringify(ends);result.set(id,(result.get(id)??0)+1);prior=point;
  }return result;};
  const addSegments=(target,source)=>{for(const [key,count]of source)target.set(key,(target.get(key)??0)+count);};
  for(const member of data.members){
@@ -1497,10 +1498,12 @@ function* evaluateSourceTargetNativeAuthority(reader, preimage, binding, diagnos
    &&new Set(target.coverage_classes).size===target.coverage_classes.length,
    'Unresolved physical support cannot qualify a repair');
   const hasDated=datedCentres.some(p=>p.source_id===target.id);
-  const coverageBounds=[];
-  const polygons=target.coverage_classes.flatMap(kind=>{const geometry=support.support[kind];
-   if(hasDated&&validateWitnessGeometry(geometry).empty)return [];coverageBounds.push(...coordinateBounds(geometry));
-   return geometry.type==='Polygon'?[geometry.coordinates]:geometry.coordinates;});
+  const coverageBounds=[],polygons=[];
+  for(const kind of target.coverage_classes){const geometry=support.support[kind];
+   if(hasDated&&validateWitnessGeometry(geometry).empty)continue;coverageBounds.push(...coordinateBounds(geometry));
+   // Keep the required polygon roster, never expand stored rings/vertices.
+   for(const polygon of geometry.type==='Polygon'?[geometry.coordinates]:geometry.coordinates)polygons.push(polygon);
+  }
   target.coverage_geometry={type:'MultiPolygon',coordinates:polygons};
   coordinateBounds(target.base_geometry);
   const facts={coverageBounds};targetFacts.set(target,facts);
@@ -2226,11 +2229,14 @@ function leastRotation(points){
   const start=Math.min(i,j);return Array.from({length:n},(_,k)=>points[(start+k)%n]).join('');
 }
 function ringKey(ring){
-  const points=ring.map(([x,y])=>bits(x)+bits(y));
+  // Rotation needs indexed key symbols, not a second coordinate graph.
+  const points=Array.from(ring,([x,y])=>bits(x)+bits(y));
   demand(points.length>=4&&points[0]===points.at(-1),'Ring binary64 closure changed');points.pop();
   const a=leastRotation(points),b=leastRotation([...points].reverse());return a<b?a:b;
 }
-function groupKey(polygon){return JSON.stringify([ringKey(polygon[0]),polygon.slice(1).map(ringKey).sort()]);}
+function groupKey(polygon){let outer;const holes=[];for(const ring of polygon){
+  const key=ringKey(ring);if(outer===undefined)outer=key;else holes.push(key);
+ }return JSON.stringify([outer,holes.sort()]);}
 export function preservedNativePolygonGroups(original,current){
   const old=rebindPolygonParts(original),next=rebindPolygonParts(current),remaining=new Map();
   for(const polygon of old){const key=groupKey(polygon);remaining.set(key,(remaining.get(key)??0)+1);}
@@ -2243,8 +2249,8 @@ export function preservedNativePolygonGroups(original,current){
 function conservativeBounds(geometry){
   const polygons=rebindPolygonParts(geometry),b=[Infinity,Infinity,-Infinity,-Infinity];let periodic=false;
   for(const polygon of polygons)for(const ring of polygon){
-    for(let i=0;i<ring.length;i++){const [x,y]=ring[i];b[0]=Math.min(b[0],x);b[1]=Math.min(b[1],y);b[2]=Math.max(b[2],x);b[3]=Math.max(b[3],y);
-      if(Math.abs(x)===180||(i&&Math.abs(x-ring[i-1][0])>180))periodic=true;}}
+    let prior;for(const [x,y] of ring){b[0]=Math.min(b[0],x);b[1]=Math.min(b[1],y);b[2]=Math.max(b[2],x);b[3]=Math.max(b[3],y);
+      if(Math.abs(x)===180||(prior!==undefined&&Math.abs(x-prior)>180))periodic=true;prior=x;}}
   if(periodic||b[2]-b[0]>180){b[0]=-180;b[2]=180;}
   return b;
 }
