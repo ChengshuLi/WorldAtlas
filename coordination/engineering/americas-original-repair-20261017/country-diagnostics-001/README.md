@@ -1,0 +1,7 @@
+# Actual first native refusals and unchanged-input diagnostics
+
+Each of the five first direct stock native-authority attempts refused at unique source-target coverage. The complete-request diagnostic was run only after that actual scientific refusal, on the same immutable b6900b2f evidence and patch. All five diagnostics completed and retain every requested cell, decision and original pin. Their exact total is66,919 requested =63,035 supported +3,884 held. Every held decision reports territorial_exclusion_cells; that is a source-conflict predicate, not a legal ownership ruling. All source, physical, witness, foreign, class and hierarchy limits remain.
+
+These supported counts are not qualified or accepted cells. The existing supported-inputs preparation may narrow positive requests to the actual supported partition while keeping every original whole operand and all withheld original cells. A subsequent genuine native-authority call is still required. Panama's22,669 rights-blocked cells remain outside these five diagnostics and inside the89,588 original six-package denominator.
+
+The public operating observations preserve actual refusals, diagnostic completion and measured platform RSS. Original full logs/records remain private because invocation paths are host-specific. The optional Git-version warnings did not prevent execution of the genuine scientific guard; no Git/library upgrade or reader change was made.
