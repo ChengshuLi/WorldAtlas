@@ -1,0 +1,20 @@
+{
+  "command": "node scripts/prepare-delivery-handoff.mjs native-authority coordination/engineering/eritrea-original-repair-20261017/config/native-authority-supported-001.json coordination/engineering/eritrea-original-repair-20261017/native-authority-supported-001",
+  "stock_observation": {
+    "elapsed_seconds": 2.461743083,
+    "qualified_cells": 15444,
+    "limits": [
+      "Original source/physical producers are not replayed.",
+      "Constructor qualification is not actual current-owner-zero or final selected-output acceptance."
+    ]
+  },
+  "external_elapsed_seconds": 2.6,
+  "macos_time_maximum_resident_set_size_bytes": 399376384,
+  "deadline_seconds": 600,
+  "deadline_method": "POSIX alarm inherited by the Node command through exec; no process-tree supervisor or aggregate RSS containment claimed.",
+  "limits": [
+    "Measured maximum resident set size is not an enforced memory limit or aggregate live process-tree measurement.",
+    "No application memory policy fields, NODE_OPTIONS or heap flags were supplied.",
+    "Qualification is not current-owner-zero, selected conservation/emitted acceptance, deployment or accepted repair credit."
+  ]
+}
