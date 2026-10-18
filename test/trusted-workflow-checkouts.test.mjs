@@ -196,6 +196,54 @@ for (const workflow of ['worker-merge.yml']) {
 }
 
 
+test('scientific pip installation follows assembly and preserves fallback runtimes', () => {
+  const {integration}=queueWorkflow();
+  const command=run=>{
+    const found=integration.steps.filter(step=>step.text.includes('      - run: '+run+'\n'));
+    assert.equal(found.length,1,run);return found[0];
+  };
+  const npm=command('npm ci --no-audit --no-fund');
+  const pip=command('python -m pip install -r requirements.txt');
+  const assembly=packageStep(integration,'Assemble unchanged base with current selected output');
+  const index=step=>integration.steps.indexOf(step);
+  for(const action of ['setup-node','setup-python']){
+    const found=integration.steps.filter(step=>step.text.includes('uses: actions/'+action+'@'));
+    assert.equal(found.length,1,action);assert(index(found[0])<index(assembly),action);
+  }
+  const bootstrap=packageStep(integration,'Authenticate selected package installer inputs');
+  assert(index(bootstrap)<index(npm));assert(index(npm)<index(assembly));
+  assert.equal(index(pip),index(assembly)+1,'pip must follow the actual assembly result');
+  for(const name of ['Snapshot original final-worker package inputs',
+    'Build the combined application once before asset-dependent tests',
+    'Test applicable combined-tree invariants without publishing or live imports']){
+    assert(index(pip)<index(packageStep(integration,name)),name);
+  }
+  assert.doesNotMatch(pip.text,/continue-on-error:|\b(?:always|failure|cancelled)\(/);
+  // Concrete queue routes: absent output includes skipped assembly; false also
+  // covers the assembly CLI's caught failure/no-retained-artifact fallback.
+  for(const [profile,selection,shard,assembled,installs] of [
+    ['full','selected-data',0,'true',false],
+    ['full','selected-data',0,'false',true],
+    ['full','selected-data',0,'',true],
+    ['full','selected-data',0,undefined,true],
+    ['full','complete',0,undefined,true],
+    ['full','complete',1,undefined,true],
+    ['full','complete',2,undefined,true],
+    ['full','reviewed',0,undefined,true],
+    ['evidence','complete',0,undefined,true],
+    ['evidence','reviewed',0,undefined,true],
+    ['unknown','complete',0,undefined,false],
+  ]){
+    const context=queueContext({profile,selection});context.matrix.shard=shard;
+    context.steps.assembly.outputs=assembled===undefined?{}:{assembled};
+    const route=JSON.stringify([profile,selection,shard,assembled]);
+    assert.equal(workflowCondition(pip.condition,context),installs,route);
+    assert.equal(workflowCondition(npm.condition,context),profile!=='unknown',route);
+    assert.equal(workflowCondition(pip.condition,context,{success:false}),false,route);
+    assert.equal(workflowCondition(pip.condition,context,{success:false,cancelled:true}),false,route);
+  }
+});
+
 test('focused delivery tests receive their real Node/Python runtime without an atlas build', () => {
   const {source,integration}=queueWorkflow();
   for(const command of ['npm ci --no-audit --no-fund','python -m pip install -r requirements.txt']) {
