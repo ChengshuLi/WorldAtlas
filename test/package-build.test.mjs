@@ -3,8 +3,10 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import {materializePackageInputs, runPackageBuild, verifyPackageDependencies, assertPackageStage, inspectPackageRuntime} from '../scripts/package-build.mjs';
+import {materializePackageInputs, runPackageBuild, verifyPackageDependencies, assertPackageStage, inspectPackageRuntime, inspectPackageInputs} from '../scripts/package-build.mjs';
 import {execFileSync} from 'node:child_process';
+import {selectedDataCheckoutPatterns} from '../scripts/package-inputs.mjs';
+import {committedPackageInputs} from '../scripts/package-output-artifact.mjs';
 
 const fixturePreflight = async () => ({passed: true, errors: [], synthetic_package_boundary_fixture: true});
 
@@ -183,4 +185,57 @@ test('actual fresh Cloudflare package admits 25 MiB and refuses one extra byte b
  await assert.rejects(runPackageBuild('cloudflare',{root,preflight:fixturePreflight}),/Cloudflare static asset exceeds 25 MiB/);
  assert.equal(await fs.readFile(path.join(root,'dist/client/preserved'),'utf8'),'accepted previous output');
  assert.equal((await fs.stat(path.join(root,'dist/client/asset.bin'))).size,26214400);
+});
+
+
+test('cold selected-data checkout preserves the full fallback build image without verification-only fixtures', async t => {
+  const verification = ['data/verification/body.json', 'research/geography/verification/body.json',
+    'coordination/engineering/verification/body.json'];
+  const required = ['data/current/value.json', 'research/geography/current/nested/value.json',
+    'coordination/engineering/current/body.json', 'data/optional-present/value.json'];
+  const program = `import fs from 'node:fs';
+    const required=${JSON.stringify(required)}, excluded=${JSON.stringify(verification)};
+    for(const name of excluded)if(fs.existsSync(name))throw Error('Verification fixture entered build image');
+    fs.mkdirSync('dist/client',{recursive:true});
+    fs.writeFileSync('dist/client/values.json',JSON.stringify(required.map(name=>fs.readFileSync(name,'utf8'))));`;
+  const {root,definition}=await fixture(t,{program});
+  await fs.rename(path.join(root,'scripts/build-static-inner.mjs'),path.join(root,'scripts/build-cloudflare-inner.mjs'));
+  definition.inputs[1]='scripts/build-cloudflare-inner.mjs';
+  definition.inputs.push('data/current/','research/geography/current/','coordination/engineering/current/body.json',
+    'data/optional-present/','data/optional-absent/');
+  definition.optional_inputs.push('data/optional-present/','data/optional-absent/');
+  definition.verification_paths=verification;
+  const expectations='coordination/engineering/current/selected-delivery-expectations.json';
+  for(const name of [...required,...verification,expectations]){
+    await fs.mkdir(path.dirname(path.join(root,name)),{recursive:true});await fs.writeFile(path.join(root,name),name+'\n');
+  }
+  await fs.writeFile(path.join(root,'.github/package-inputs.json'),JSON.stringify(definition));
+  const git=(args,input)=>execFileSync('git',['-C',root,'-c','core.hooksPath='+os.devNull,
+    '-c','user.name=Fixture','-c','user.email=fixture@example.invalid',...args],
+    {encoding:'utf8',input,env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:os.devNull}});
+  git(['init','-q']);await fs.appendFile(path.join(root,'.git/info/exclude'),'\nnode_modules/\n.cache/\ndist/\n');
+  git(['add','.']);git(['commit','-qm','Synthetic selected fallback input boundary']);
+  const before=committedPackageInputs(root,definition),head=git(['rev-parse','HEAD']);
+  assert.deepEqual(inspectPackageInputs(root,definition).errors,[]);
+  const beforeImage=path.join(root,'.cache/image-before'),afterImage=path.join(root,'.cache/image-after');
+  const inventory=await materializePackageInputs({source:root,destination:beforeImage,definition});
+  const entries=new Map(git(['ls-tree','-rz','HEAD']).split('\0').filter(Boolean).map(line=>{
+    const [metadata,name]=line.split('\t'),[mode,type,sha]=metadata.split(' ');return [name,{mode,type,sha}];
+  }));
+  git(['sparse-checkout','set','--no-cone','--stdin'],selectedDataCheckoutPatterns(definition,entries,expectations).join('\n')+'\n');
+  git(['checkout','--detach','-q',head.trim()]);
+  for(const name of verification)await assert.rejects(fs.stat(path.join(root,name)),{code:'ENOENT'});
+  assert.equal(git(['rev-parse','HEAD']),head);
+  assert.deepEqual(committedPackageInputs(root,definition),before);
+  assert.deepEqual(inspectPackageInputs(root,definition).errors,[]);
+  assert.deepEqual(await materializePackageInputs({source:root,destination:afterImage,definition}),inventory);
+  for(const {path:name}of inventory)assert.deepEqual(await fs.readFile(path.join(afterImage,name)),await fs.readFile(path.join(beforeImage,name)));
+  // Real private child and Cloudflare output admission, with only the existing
+  // explicit synthetic runtime-preflight injection; no scientific producer.
+  const result=await runPackageBuild('cloudflare',{root,preflight:fixturePreflight});
+  assert.equal(result.source_files,inventory.length);
+  assert.equal(result.source_bytes,inventory.reduce((sum,row)=>sum+row.bytes,0));
+  assert.deepEqual(JSON.parse(await fs.readFile(path.join(root,'dist/client/values.json'))),required.map(name=>name+'\n'));
+  await fs.unlink(path.join(root,required[0]));
+  assert(inspectPackageInputs(root,definition).errors.some(error=>error.path===required[0]));
 });

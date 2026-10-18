@@ -66,7 +66,7 @@ export function fullCheckoutPatterns(definition) {
     .map(prefix => '!/' + prefix), ...scopedCheckoutPatterns('research/geography/', declared)];
 }
 
-// One fixture roster serves full, selected-data and focused regression. Keep
+// One fixture roster serves full and focused regression. Keep
 // ordinary code discovery separate from the literal verification operands.
 export function focusedCheckoutPatterns(definition, verificationPaths = definition.verification_paths) {
   validatePackageInputs(definition);
@@ -100,9 +100,10 @@ function scopedCheckoutPatterns(prefix, paths) {
   return patterns;
 }
 
-// Preserve the existing selected-data checkout boundary while the standard
-// checkout action owns transport and materialization. Preparation supplies the
-// authenticated complete candidate tree; package roles never authorize code.
+// Selected-data runs current emitted smoke, not the unit fixture roster. Keep
+// every declared build input for either retained assembly or full-build fallback,
+// plus current expectations and all coordination execution. Preparation supplies
+// the authenticated complete candidate tree; package roles never authorize code.
 export function selectedDataCheckoutPatterns(definition, entries, expectationsPath) {
   validatePackageInputs(definition);
   if (!(entries instanceof Map) || !safePackagePath(expectationsPath) ||
@@ -120,7 +121,7 @@ export function selectedDataCheckoutPatterns(definition, entries, expectationsPa
   }
   const patterns = ['/*','!/data/regional-review/','!/research/campaigns/'];
   for (const prefix of ['research/geography/','coordination/engineering/','data/']) {
-    const paths = [...definition.inputs, ...definition.verification_paths, expectationsPath,
+    const paths = [...definition.inputs, expectationsPath,
       ...(prefix === 'coordination/engineering/' ? execution : [])];
     patterns.push(...scopedCheckoutPatterns(prefix, paths));
   }

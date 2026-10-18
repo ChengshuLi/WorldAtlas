@@ -5,6 +5,9 @@ import path from 'node:path';
 import os from 'node:os';
 import {gzipSync,gunzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
+import {selectedDataCheckoutPatterns,loadPackageInputs} from '../scripts/package-inputs.mjs';
+import {committedPackageInputs} from '../scripts/package-output-artifact.mjs';
 import {prepareCurrentSelectedAdditive} from '../scripts/package-current-additive.mjs';
 import {additiveReleaseFootprintDigest,bindAdditiveLedgerFeatures,footprintValueSha256,loadedBaseFootprintSha256} from '../src/effective-footprint.js';
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
@@ -220,4 +223,37 @@ test('derived gzip path collision fails before publication and source mutation',
  await assert.rejects(prepareCurrentSelectedAdditive(f),/Duplicate native additive assets/);
  assert.deepEqual(await fs.readFile(path.join(f.root,f.sidecar.runtime_envelope.path)),original);
  assert.equal(await fs.stat(path.join(f.root,'out')).catch(()=>null),null);
+});
+
+
+for(const metadata of [false,true])test('cold selected-data checkout preserves reused current output '+(metadata?'with':'without')+' reference metadata',async t=>{
+ const f=await fixture(t,{metadata}),definition=loadPackageInputs(f.root);
+ const verification=['data/verification/body.json','research/geography/verification/body.json','coordination/engineering/verification/body.json'];
+ definition.verification_paths=verification;
+ for(const name of verification)await write(f.root,name,{verification_only:true});
+ const expectations='coordination/engineering/current/selected-delivery-expectations.json';
+ await write(f.root,expectations,{synthetic_checkout_operand:true});
+ await write(f.root,'.github/package-inputs.json',definition);
+ const git=(args,input)=>execFileSync('git',['-C',f.root,'-c','core.hooksPath='+os.devNull,
+  '-c','user.name=Fixture','-c','user.email=fixture@example.invalid',...args],
+  {encoding:'utf8',input,env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:os.devNull}});
+ git(['init','-q']);await fs.appendFile(path.join(f.root,'.git/info/exclude'),'\nout-before/\nout-after/\n');
+ git(['add','.']);git(['commit','-qm','Synthetic retained-output input boundary']);
+ const source=committedPackageInputs(f.root,definition),before=await prepareCurrentSelectedAdditive(f),outBefore=path.join(f.root,'out-before');
+ await assertPublished(f,before,outBefore);
+ const entries=new Map(git(['ls-tree','-rz','HEAD']).split('\0').filter(Boolean).map(line=>{
+  const [metadata,name]=line.split('\t'),[mode,type,sha]=metadata.split(' ');return [name,{mode,type,sha}];
+ }));
+ git(['sparse-checkout','set','--no-cone','--stdin'],selectedDataCheckoutPatterns(definition,entries,expectations).join('\n')+'\n');
+ git(['checkout','--detach','-q','HEAD']);
+ for(const name of verification)await assert.rejects(fs.stat(path.join(f.root,name)),{code:'ENOENT'});
+ assert.deepEqual(committedPackageInputs(f.root,definition),source);
+ const after=await prepareCurrentSelectedAdditive(f),outAfter=path.join(f.root,'out-after');
+ const {publish:beforePublish,...beforeValues}=before,{publish:afterPublish,...afterValues}=after;
+ assert.deepEqual(afterValues,beforeValues,'All current role reads, complete whole pins and effective output identities stay exact');
+ await assertPublished(f,after,outAfter);
+ for(const directory of await fs.readdir(outBefore))for(const name of await fs.readdir(path.join(outBefore,directory)))
+  assert.deepEqual(await fs.readFile(path.join(outAfter,directory,name)),await fs.readFile(path.join(outBefore,directory,name)));
+ await fs.unlink(path.join(f.root,f.sidecar.logical_asset_map.patch.path));
+ await assert.rejects(prepareCurrentSelectedAdditive(f),{code:'ENOENT'});
 });
