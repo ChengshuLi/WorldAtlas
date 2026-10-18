@@ -452,9 +452,9 @@ test('cold collector resolves all original before-images without replacing chang
     assert(result.immutable_descriptors.some(row => row.commit === source && row.path === 'data/geography/source.json'));
     assert(result.immutable_descriptors.some(row => row.commit === hierarchy && row.path === 'data/hierarchy.json'));
     const added = cold.git(['cat-file', '--batch-all-objects', '--batch-check=%(objectname) %(objecttype)']).toString().trim().split('\n').map(row => row.split(' ')).filter(([id]) => !before.has(id));
-    assert(added.every(([, type]) => ['commit', 'tree'].includes(type)));
+    assert.deepEqual(added, []); assert(!fs.existsSync(path.join(cold.directory, 'shallow')));
     assert.equal(result.science_reexecuted, false); assert.equal(result.metadata_acquisition.fetched_objects, 0);
-    // Complete original metadata permits warm replay without any new transport.
+    // Private authenticated metadata permits replay without exposing any origin.
     const calls = cold.fetches.length; assert.equal((await cold.inspect()).status, 'unchanged-selected-inputs');
     assert.equal(cold.fetches.length, calls);
   } finally { f.close(); }
@@ -497,4 +497,52 @@ test('cold collector preserves historical alias rules: ' + variant, async () => 
     if (variant === 'matching current alias') assert(!result.immutable_descriptors.some(row => row.commit === unavailable));
     else assert(result.current_and_absent_alternatives.some(row => row.path === P + 'source-override.json' && row.absent));
   } finally { f.close(); }
+});
+
+for (const variant of ['matching alias', 'changed alias', 'forged pin', 'missing original and alias', 'known original mismatch'])
+test('partial origin acquisition then decline preserves full-reader guards: ' + variant, async () => {
+  const f = fixture({projection: true}), previous = process.env.GIT_NO_LAZY_FETCH;
+  try {
+    const {ImmutableReader} = await import('../scripts/check-effective-geographic-regression.mjs');
+    const files = {...f.files, 'data/geography/current-only.json': body('unconsumed current sibling'),
+      'scripts/native-ownership/verified-candidates.json': body({version: 0, candidates: {}})};
+    let pin = f.pin('data/geography/source.json', f.original);
+    if (variant === 'changed alias') files[pin.path] = body('changed current source');
+    if (variant === 'forged pin') pin = {...pin, sha256: 'f'.repeat(64)};
+    if (variant === 'missing original and alias') { pin = f.pin(P + 'historical-authority.json', f.original); delete files[pin.path]; }
+    const baseline = f.commit(files, f.baseline), candidate = f.commit({...files, unrelated: body('evidence')}, baseline);
+    const cold = coldOrigins(f, baseline, candidate);
+    if (variant === 'known original mismatch') {
+      // An available original disagrees with a matching current alias. The
+      // actual full reader must continue to prefer and reject that original.
+      const old = f.commit({...f.files, [pin.path]: body('different known original')});
+      pin = {...pin, commit: old};
+      const ids = new Map([[old, 'commit']]);
+      for (const line of f.git(['ls-tree', '-rt', old]).split('\n')) {
+        const [, type, id] = line.split(/\s/); if (type === 'tree') ids.set(id, type);
+      }
+      ids.set(f.git(['rev-parse', old + '^{tree}']), 'tree');
+      ids.set(f.git(['rev-parse', old + ':' + pin.path]), 'blob');
+      for (const [id, type] of ids) execFileSync('git', ['-C', cold.directory, 'hash-object', '-w', '-t', type, '--stdin'],
+        {input: execFileSync('git', ['-C', f.directory, 'cat-file', type, id]), stdio: ['pipe', 'pipe', 'pipe']});
+    }
+    if (files[pin.path]) execFileSync('git', ['-C', cold.directory, 'hash-object', '-w', '--stdin'],
+      {input: files[pin.path], stdio: ['pipe', 'pipe', 'pipe']});
+    process.env.GIT_NO_LAZY_FETCH = '1';
+    const read = () => new ImmutableReader(cold.directory, baseline).readPinned([pin])[0];
+    const check = () => variant === 'matching alias' ? assert.deepEqual(read(), files[pin.path]) : assert.throws(read,
+      variant === 'forged pin' ? /Whole immutable input differs/ : variant === 'missing original and alias' ? /Missing whole ordinary/ : /historical alias changed/);
+    check();
+    const inventory = () => cold.git(['cat-file', '--batch-all-objects', '--batch-check=%(objectname) %(objecttype) %(objectsize)']).toString();
+    const before = inventory(), shallow = path.join(cold.directory, 'shallow');
+    assert(!fs.existsSync(shallow));
+    const result = await cold.inspect(); assert.equal(result.status, 'full-check-required');
+    assert.match(result.reason, /unsupported-native-receipt/); assert.equal(cold.fetches.length, 1);
+    assert.equal(inventory(), before); assert(!fs.existsSync(shallow));
+    assert.throws(() => cold.git(['cat-file', '-e', f.original]));
+    check();
+  } finally {
+    if (previous === undefined) delete process.env.GIT_NO_LAZY_FETCH; else process.env.GIT_NO_LAZY_FETCH = previous;
+    f.close();
+  }
 });

@@ -1,5 +1,7 @@
 // Acquisition only. No candidate module is imported; actual readers authenticate their inputs.
 import path from 'node:path';
+import fs from 'node:fs';
+import os from 'node:os';
 import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
@@ -17,11 +19,11 @@ export function createAcquisition({repo, loadTree, loadDescriptor, loadCommit, e
     GIT_CONFIG_KEY_1: 'credential.helper', GIT_CONFIG_VALUE_1: ''});
   if (token) Object.assign(env, {GIT_CONFIG_KEY_2: 'http.https://github.com/.extraheader',
     GIT_CONFIG_VALUE_2: 'AUTHORIZATION: basic ' + Buffer.from('x-access-token:' + token).toString('base64')});
-  const git = (args, input, expectedBytes) => {
+  const git = (args, input, expectedBytes, directory = repo) => {
     // Captured output has an exact immutable/protocol length. Commands whose
     // output is not consumed need no buffered stdout or stderr at all.
     const output = expectedBytes === undefined ? {} : {maxBuffer: expectedBytes + 1};
-    try { return execute('git', ['-C', repo, ...args], {env, input, ...output, timeout: 60000,
+    try { return execute('git', ['-C', directory, ...args], {env, input, ...output, timeout: 60000,
       stdio: ['pipe', expectedBytes === undefined ? 'ignore' : 'pipe', 'ignore']}); }
     catch { throw Error('Geography object acquisition failed'); }
   };
@@ -30,61 +32,77 @@ export function createAcquisition({repo, loadTree, loadDescriptor, loadCommit, e
     unique_objects: 0, declared_bytes: 0, fetched_objects: 0, fetched_bytes: 0, fetch_batches: 0,
     tree_metadata_ms: 0, fetch_ms: 0, declarations: 0,
     origin_metadata_objects: 0, origin_metadata_bytes: 0, origin_metadata_fetches: 0, origin_metadata_imports: 0};
-  const originObjects = new Map(), originPaths = new Set();
+  const originObjects = new Map(), originPaths = new Map();
   async function originObject(id, type) {
     requireValue(oid(id) && ['commit', 'tree'].includes(type), 'Invalid immutable origin metadata');
     if (!originObjects.has(id)) {
-      let declaredRoot;
-      // --missing prevents implicit lazy acquisition even on older Git versions.
-      // No ancestry traversal: the only requested root is this exact object.
-      const present = git(['-c', 'core.commitGraph=false', 'rev-list', '--objects', '--filter=tree:0',
-        '--missing=print', '--ignore-missing', '--no-walk=unsorted', '--no-object-names', '--stdin'], id + '\n', 42).toString().trim();
-      if (present !== id) {
-        requireValue(present === '' || present === '?' + id, 'Invalid local origin metadata inventory');
-        if (type === 'commit') {
-          // An explicitly wanted blob bypasses Git's filter. Admit the exact
-          // origin through the commit endpoint before any native fetch, then
-          // verify the imported native object's type, hash and root below.
-          const declared = await loadCommit(id);
-          requireValue(declared?.sha === id && oid(declared.tree?.sha), 'Wrong immutable origin commit metadata');
-          declaredRoot = declared.tree.sha;
-          git(['-c', 'fetch.negotiationAlgorithm=noop', 'fetch', '--no-tags', '--no-write-fetch-head',
-            '--no-recurse-submodules', '--no-auto-maintenance', '--filter=tree:0', '--depth=1',
-            '--stdin', 'https://github.com/' + repository + '.git'], id + '\n');
-          stats.origin_metadata_fetches++;
-        } else {
-          // Reconstruct only one nonrecursive Git tree, authenticating its
-          // complete native bytes before import. No child object is requested.
-          const value = await loadTree(id, false);
-          requireValue(value?.sha === id && !value.truncated && Array.isArray(value.tree)
-            && new Set(value.tree.map(row => row.path)).size === value.tree.length, 'Wrong immutable origin tree metadata');
-          const modes = {'040000': 'tree', '100644': 'blob', '100755': 'blob', '120000': 'blob', '160000': 'commit'};
-          const chunks = value.tree.map(row => {
-            requireValue(Object.hasOwn(modes, row.mode) && modes[row.mode] === row.type && oid(row.sha)
-              && typeof row.path === 'string' && row.path && !['.', '..'].includes(row.path)
-              && !row.path.includes('\0') && !row.path.includes('/'), 'Malformed immutable origin tree entry');
-            return Buffer.concat([Buffer.from(`${row.mode === '040000' ? '40000' : row.mode} ${row.path}\0`), Buffer.from(row.sha, 'hex')]);
-          });
-          const raw = Buffer.concat(chunks);
-          requireValue(createHash('sha1').update(`tree ${raw.length}\0`).update(raw).digest('hex') === id,
-            'Wrong immutable origin tree identity');
-          requireValue(git(['hash-object', '-w', '-t', 'tree', '--stdin'], raw, 41).toString().trim() === id,
-            'Wrong imported origin tree identity');
+      let declaredRoot, raw, directory = repo, owned;
+      try {
+        // --missing prevents implicit lazy acquisition even on older Git versions.
+        // No ancestry traversal: the only requested root is this exact object.
+        const present = git(['-c', 'core.commitGraph=false', 'rev-list', '--objects', '--filter=tree:0',
+          '--missing=print', '--ignore-missing', '--no-walk=unsorted', '--no-object-names', '--stdin'], id + '\n', 42).toString().trim();
+        if (present !== id) {
+          requireValue(present === '' || present === '?' + id, 'Invalid local origin metadata inventory');
+          if (type === 'commit') {
+            // The optional proof must not expose a partial origin to subsequent
+            // scientific readers. Authenticate native bytes in an owned store,
+            // then discard it without changing caller objects or shallow state.
+            const declared = await loadCommit(id);
+            requireValue(declared?.sha === id && oid(declared.tree?.sha), 'Wrong immutable origin commit metadata');
+            declaredRoot = declared.tree.sha;
+            directory = owned = fs.mkdtempSync(path.join(os.tmpdir(), 'worldatlas-routing-origin-'));
+            git(['init', '--bare', '--template='], undefined, undefined, directory);
+            git(['-c', 'fetch.negotiationAlgorithm=noop', 'fetch', '--no-tags', '--no-write-fetch-head',
+              '--no-recurse-submodules', '--no-auto-maintenance', '--filter=tree:0', '--depth=1',
+              '--stdin', 'https://github.com/' + repository + '.git'], id + '\n', undefined, directory);
+            stats.origin_metadata_fetches++;
+            requireValue(git(['cat-file', '--batch-all-objects', '--batch-check=%(objectname) %(objecttype)'],
+              undefined, 48, directory).toString() === id + ' commit\n', 'Unexpected private origin objects');
+          } else {
+            // Reconstruct and authenticate one complete nonrecursive tree. Its
+            // rows stay private; neither the tree nor any child is imported.
+            const value = await loadTree(id, false);
+            requireValue(value?.sha === id && !value.truncated && Array.isArray(value.tree)
+              && new Set(value.tree.map(row => row.path)).size === value.tree.length, 'Wrong immutable origin tree metadata');
+            const modes = {'040000': 'tree', '100644': 'blob', '100755': 'blob', '120000': 'blob', '160000': 'commit'};
+            const chunks = value.tree.map(row => {
+              requireValue(Object.hasOwn(modes, row.mode) && modes[row.mode] === row.type && oid(row.sha)
+                && typeof row.path === 'string' && row.path && !['.', '..'].includes(row.path)
+                && !row.path.includes('\0') && !row.path.includes('/'), 'Malformed immutable origin tree entry');
+              return Buffer.concat([Buffer.from(`${row.mode === '040000' ? '40000' : row.mode} ${row.path}\0`), Buffer.from(row.sha, 'hex')]);
+            });
+            raw = Buffer.concat(chunks);
+          }
         }
-        stats.origin_metadata_imports++;
-      }
-      const status = git(['cat-file', '--batch-check=%(objectname) %(objecttype) %(objectsize)'], id + '\n', 80).toString().trim().split(' ');
-      const size = Number(status[2]);
-      requireValue(status.length === 3 && status[0] === id && status[1] === type
-        && Number.isSafeInteger(size) && size >= 0, 'Wrong immutable origin metadata type/size');
-      const raw = git(['cat-file', type, id], undefined, size);
-      requireValue(raw.length === size && createHash('sha1').update(`${type} ${size}\0`).update(raw).digest('hex') === id,
-        'Wrong immutable origin metadata identity');
-      const root = type === 'commit' ? raw.toString().match(/^tree ([a-f0-9]{40})\n/)?.[1] : undefined;
-      requireValue(type !== 'commit' || oid(root), 'Invalid immutable origin root tree');
-      requireValue(declaredRoot === undefined || root === declaredRoot, 'Wrong immutable origin root tree');
-      originObjects.set(id, {type, size, root});
-      stats.origin_metadata_objects++; stats.origin_metadata_bytes += size;
+        if (raw === undefined) {
+          const status = git(['cat-file', '--batch-check=%(objectname) %(objecttype) %(objectsize)'], id + '\n', 80, directory).toString().trim().split(' ');
+          const size = Number(status[2]);
+          requireValue(status.length === 3 && status[0] === id && status[1] === type
+            && Number.isSafeInteger(size) && size >= 0, 'Wrong immutable origin metadata type/size');
+          raw = git(['cat-file', type, id], undefined, size, directory);
+          requireValue(raw.length === size, 'Wrong immutable origin metadata length');
+        }
+        requireValue(createHash('sha1').update(`${type} ${raw.length}\0`).update(raw).digest('hex') === id,
+          'Wrong immutable origin metadata identity');
+        const root = type === 'commit' ? raw.toString().match(/^tree ([a-f0-9]{40})\n/)?.[1] : undefined;
+        requireValue(type !== 'commit' || oid(root), 'Invalid immutable origin root tree');
+        requireValue(declaredRoot === undefined || root === declaredRoot, 'Wrong immutable origin root tree');
+        const entries = new Map();
+        if (type === 'tree') for (let offset = 0; offset < raw.length;) {
+          const space = raw.indexOf(32, offset), nul = raw.indexOf(0, space + 1), mode = raw.subarray(offset, space).toString();
+          requireValue(space > offset && nul > space + 1 && nul + 21 <= raw.length
+            && ['40000', '100644', '100755', '120000', '160000'].includes(mode), 'Malformed immutable origin tree entry');
+          // Byte keys preserve unrelated non-UTF8 native names without making
+          // them aliases of a requested ordinary UTF8 path component.
+          const name = raw.subarray(space + 1, nul).toString('hex');
+          requireValue(!entries.has(name), 'Malformed immutable origin tree entry');
+          entries.set(name, {mode: mode === '40000' ? '040000' : mode, oid: raw.subarray(nul + 1, nul + 21).toString('hex')});
+          offset = nul + 21;
+        }
+        originObjects.set(id, {type, root, entries});
+        stats.origin_metadata_objects++; stats.origin_metadata_bytes += raw.length;
+      } finally { if (owned) fs.rmSync(owned, {recursive: true, force: true}); }
     }
     const value = originObjects.get(id);
     requireValue(value.type === type, 'Wrong immutable origin metadata type/size');
@@ -93,21 +111,20 @@ export function createAcquisition({repo, loadTree, loadDescriptor, loadCommit, e
   async function resolvePath(version, name) {
     requireValue(oid(version) && safe(name), 'Unsafe immutable origin locator');
     const key = version + ':' + name;
-    if (originPaths.has(key)) return;
+    if (originPaths.has(key)) return originPaths.get(key);
     let root = (await originObject(version, 'commit')).root;
     const parts = name.split('/');
     for (let i = 0; i < parts.length; i++) {
-      const tree = await originObject(root, 'tree');
-      // Resolve one component at a time. Having the commit (or another path's
-      // trees) does not imply that this path's intermediate trees are present.
-      const row = git(['--literal-pathspecs', 'ls-tree', '-z', root, '--', parts[i]], undefined, tree.size + 64).toString();
-      const match = row.match(/^(040000 tree|100644 blob|100755 blob) ([a-f0-9]{40})\t([^\0]+)\0$/);
-      requireValue(match && match[3] === parts[i]
-        && (i === parts.length - 1 ? match[1].endsWith(' blob') : match[1] === '040000 tree'), 'Missing or nonordinary immutable origin path');
-      root = match[2];
+      const tree = await originObject(root, 'tree'), row = tree.entries.get(Buffer.from(parts[i]).toString('hex'));
+      requireValue(row && (i === parts.length - 1 ? ['100644', '100755'].includes(row.mode) : row.mode === '040000'),
+        'Missing or nonordinary immutable origin path');
+      if (i === parts.length - 1) {
+        // The final blob is only an identity operand. Never acquire its body here.
+        const result = Object.freeze({commit: version, path: name, mode: row.mode, git_blob_oid: row.oid, tree_oid: root});
+        originPaths.set(key, result); return result;
+      }
+      root = row.oid;
     }
-    // The final blob is only an identity operand. Never acquire its body here.
-    originPaths.add(key);
   }
   async function tree(version) {
     requireValue(oid(version), 'Invalid immutable geography commit');
@@ -132,9 +149,14 @@ export function createAcquisition({repo, loadTree, loadDescriptor, loadCommit, e
     const row = loadDescriptor ? await loadDescriptor(version, name) : (await tree(version)).get(name);
     requireValue(row?.type === 'blob' && ['100644', '100755'].includes(row.mode) && oid(row.sha)
       && Number.isSafeInteger(row.size) && row.size >= 0, 'Missing or nonordinary declared geography input');
-    const expectedTreeRow = `${row.mode} blob ${row.sha}\t${name}\0`;
-    requireValue(git(['ls-tree', '-z', version, '--', name], undefined, Buffer.byteLength(expectedTreeRow)).toString() === expectedTreeRow,
+    const original = originPaths.get(version + ':' + name);
+    if (original) requireValue(original.mode === row.mode && original.git_blob_oid === row.sha,
       'Remote descriptor differs from actual immutable Git tree');
+    else {
+      const expectedTreeRow = `${row.mode} blob ${row.sha}\t${name}\0`;
+      requireValue(git(['ls-tree', '-z', version, '--', name], undefined, Buffer.byteLength(expectedTreeRow)).toString() === expectedTreeRow,
+        'Remote descriptor differs from actual immutable Git tree');
+    }
     requireValue((expected.mode === undefined || expected.mode === row.mode)
       && (expected.git_blob_oid === undefined || expected.git_blob_oid === row.sha)
       && (expected.bytes === undefined || expected.bytes === row.size), 'Declared geography identity differs from tree');

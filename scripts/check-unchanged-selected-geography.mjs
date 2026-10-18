@@ -123,9 +123,12 @@ function createReader({repo, baseline, candidate, acquisition}) {
       // Only unavailable Git metadata can request transport. Missing paths,
       // nonordinary entries and identity disagreements remain refusals.
       if (!error.message.startsWith('immutable-object-unavailable:') || !acquisition.resolvePath) throw error;
-      await acquisition.resolvePath(commit, name);
-      origins.set(commit, true);
-      return descriptor(commit, name);
+      const resolved = await acquisition.resolvePath(commit, name);
+      demand(resolved?.commit === commit && resolved.path === name && ['100644', '100755'].includes(resolved.mode)
+        && oid(resolved.git_blob_oid), 'invalid-original-descriptor');
+      const result = {commit, path: name, mode: resolved.mode, git_blob_oid: resolved.git_blob_oid};
+      descriptors.set(commit + ':' + name, result);
+      return result;
     }
   }
   async function body(pin, expected) {

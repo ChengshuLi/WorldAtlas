@@ -35,9 +35,16 @@ export function createRoutingMetadataAcquisition({repo, baseline, execute = exec
     return trees.get(key);
   }
   async function descriptor(version, name) {
-    const line = git(['ls-tree', '-z', version, '--', name]);
-    const match = line.match(/^(100644|100755) blob ([a-f0-9]{40})\t([^\0]+)\0$/);
-    demand(match && match[3] === name, 'routing-metadata-invalid-locator');
+    let original;
+    try {
+      const line = git(['ls-tree', '-z', version, '--', name]);
+      const match = line.match(/^(100644|100755) blob ([a-f0-9]{40})\t([^\0]+)\0$/);
+      demand(match && match[3] === name, 'routing-metadata-invalid-locator');
+      original = {mode: match[1], git_blob_oid: match[2]};
+    } catch (error) {
+      if (error.message !== 'routing-metadata-tree-unavailable') throw error;
+      original = await acquisition.resolvePath(version, name);
+    }
     // Immutable identity is still bound to the exact original (commit,path).
     // The baseline inventory is only an authenticated OID-to-size index, shared
     // by retained historical aliases; it never chooses a different body.
@@ -49,20 +56,20 @@ export function createRoutingMetadataAcquisition({repo, baseline, execute = exec
       }
       return result;
     });
-    let size = (await index).get(match[2]);
+    let size = (await index).get(original.git_blob_oid);
     if (size === undefined) {
       const directory = path.posix.dirname(name);
-      const root = git(['rev-parse', directory === '.' ? version + '^{tree}' : version + ':' + directory]);
+      const root = original.tree_oid ?? git(['rev-parse', directory === '.' ? version + '^{tree}' : version + ':' + directory]);
       const rows = await tree(root, false), row = rows.find(row => row.path === path.posix.basename(name));
-      demand(row && row.type === 'blob' && row.mode === match[1] && row.sha === match[2], 'routing-metadata-remote-identity');
+      demand(row && row.type === 'blob' && row.mode === original.mode && row.sha === original.git_blob_oid, 'routing-metadata-remote-identity');
       size = row.size;
     }
     // The exact remote size remains bound to the original Git identity before
     // acquisition; finite larger routing metadata is not a different input role.
     demand(Number.isSafeInteger(size) && size > 0, 'invalid-metadata-length');
-    demand(!planned.has(match[2]) || planned.get(match[2]) === size, 'routing-metadata-conflicting-size');
-    planned.set(match[2], size);
-    return {path: name, type: 'blob', mode: match[1], sha: match[2], size};
+    demand(!planned.has(original.git_blob_oid) || planned.get(original.git_blob_oid) === size, 'routing-metadata-conflicting-size');
+    planned.set(original.git_blob_oid, size);
+    return {path: name, type: 'blob', mode: original.mode, sha: original.git_blob_oid, size};
   }
   const acquisition = createAcquisition({repo, loadDescriptor: descriptor, loadCommit,
     loadTree: async root => ({sha: root, tree: await tree(root, false), truncated: false}), execute, token});
