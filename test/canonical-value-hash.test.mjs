@@ -2,10 +2,14 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
-import {valueBytes,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {valueBytes,valueSha,valueIdentity} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const reference=value=>createHash('sha256').update(valueBytes(value)).digest('hex');
-const equal=value=>assert.equal(valueSha(value),reference(value));
+const equal=value=>{
+ const bytes=valueBytes(value),sha256=reference(value);
+ assert.equal(valueSha(value),sha256);
+ assert.deepEqual(valueIdentity(value),{sha256,bytes:bytes.length});
+};
 
 test('bounded hash preserves canonical scalar, numeric and property-order bytes',()=>{
  for(const value of [null,true,false,0,-0,1,Number.MIN_VALUE,Number.MAX_VALUE,1e-7,1e21,
@@ -45,12 +49,13 @@ test('bounded hash keeps invalid JSON values refused and does not cache mutable 
   for(const value of [bad,[bad],{bad}]){
    assert.throws(()=>valueBytes(value),/Nonfinite\/missing\/non-JSON/);
    assert.throws(()=>valueSha(value),/Nonfinite\/missing\/non-JSON/);
+   assert.throws(()=>valueIdentity(value),/Nonfinite\/missing\/non-JSON/);
   }
  }
  const cyclic={};cyclic.self=cyclic;
- assert.throws(()=>valueBytes(cyclic));assert.throws(()=>valueSha(cyclic),/Circular/);
+ assert.throws(()=>valueBytes(cyclic));assert.throws(()=>valueSha(cyclic),/Circular/);assert.throws(()=>valueIdentity(cyclic),/Circular/);
  let deep=0;for(let i=0;i<20000;i++)deep=[deep];
- assert.throws(()=>valueBytes(deep));assert.throws(()=>valueSha(deep));
+ assert.throws(()=>valueBytes(deep));assert.throws(()=>valueSha(deep));assert.throws(()=>valueIdentity(deep));
  const value={rows:[[1,2,3]]},before=valueSha(value);value.rows[0][2]=4;
  assert.notEqual(valueSha(value),before);equal(value);
  let nested=0;for(let i=0;i<256;i++)nested={value:[nested]};equal(nested);
@@ -73,5 +78,59 @@ test('numeric triple fast path preserves JSON numeric formatting and generic ref
  for(const bad of [[NaN,1,2],[1,Infinity,2],[1,2,undefined]]){
   assert.throws(()=>valueBytes(bad),/Nonfinite\/missing\/non-JSON/);
   assert.throws(()=>valueSha(bad),/Nonfinite\/missing\/non-JSON/);
+  assert.throws(()=>valueIdentity(bad),/Nonfinite\/missing\/non-JSON/);
  }
+});
+
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {nativeSequence,isNativeSequence} from '../src/native-grid.js';
+import {admitNativeMetadataStore} from '../scripts/native-patch-store.mjs';
+
+test('canonical identity traverses repeatable sequences once without whole-value serialization',()=>{
+ const literal={coordinates:Array.from({length:65},(_,i)=>[i,-i]),label:'雪😀'.repeat(8193)};
+ const bytes=valueBytes(literal),expected={bytes:bytes.length,sha256:reference(literal)};
+ let visits=0;
+ const value={...literal,coordinates:nativeSequence(literal.coordinates.length,function*(){for(const pair of literal.coordinates){visits++;yield pair;}})};
+ const stringify=JSON.stringify;let actual;
+ JSON.stringify=value=>{
+  assert.ok(value===null||typeof value!=='object','identity must not reconstruct an entire graph for JSON.stringify');
+  return stringify(value);
+ };
+ try{actual=valueIdentity(value);}finally{JSON.stringify=stringify;}
+ assert.deepEqual(actual,expected);assert.equal(visits,65);
+ literal.coordinates.at(-1)[1]=999;
+ assert.notDeepEqual(valueIdentity(value),expected);equal(value);
+ for(const [length,values]of [[2,[1]],[1,[1,2]]]){
+  const sequence=nativeSequence(length,()=>values.values());
+  assert.throws(()=>valueIdentity(sequence),/declared/);
+ }
+ for(const failure of [Error('iterator failure'),false,undefined]){
+  let closed=false;
+  const sequence=nativeSequence(2,function*(){try{yield 1;throw failure;}finally{closed=true;}});
+  let caught=false;try{valueIdentity(sequence);}catch(error){caught=true;assert.strictEqual(error,failure);}
+  assert.equal(caught,true);assert.equal(closed,true);
+ }
+});
+
+test('canonical identity consumes genuine stored coordinates and rejects closed or nonfinite stores',async t=>{
+ const directory=fs.mkdtempSync(path.join(os.tmpdir(),'canonical-identity-'));t.after(()=>fs.rmSync(directory,{recursive:true,force:true}));
+ for(const count of [31,32,33,65]){
+  const literal={coordinates:[Array.from({length:count},(_,i)=>[i===0?-0:i/10,-i/10])],label:'雪😀\ud800', '10':1,'2':2};
+  const raw=Buffer.from(JSON.stringify(literal,null,2)),bytes=valueBytes(literal);
+  const store=await admitNativeMetadataStore({directory,chunks:(function*(){for(let i=0;i<raw.length;i+=7)yield raw.subarray(i,i+7);})(),expected:{bytes:raw.length,sha256:createHash('sha256').update(raw).digest('hex')}});
+  try{
+   assert.deepEqual(valueIdentity(store.metadata),{bytes:bytes.length,sha256:reference(literal)});
+   assert.deepEqual(valueBytes(store.metadata),bytes);
+   if(count>32)assert.equal(Array.isArray(store.metadata.coordinates[0]),false);
+   assert.ok(isNativeSequence(store.metadata.coordinates[0]));
+  }finally{store.close();}
+  if(count>32)assert.throws(()=>valueIdentity(store.metadata),/closed/);
+  assert.deepEqual(fs.readdirSync(directory),[]);
+ }
+ const raw=Buffer.from('{"coordinates":['+Array.from({length:33},()=> '[1,2]').join(',')+',[1e400,2]]}');
+ const store=await admitNativeMetadataStore({directory,chunks:[raw],expected:{bytes:raw.length,sha256:createHash('sha256').update(raw).digest('hex')}});
+ try{assert.throws(()=>valueIdentity(store.metadata),/Nonfinite\/missing\/non-JSON/);}finally{store.close();}
+ assert.deepEqual(fs.readdirSync(directory),[]);
 });

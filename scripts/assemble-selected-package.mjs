@@ -12,8 +12,7 @@ import {gunzipSync} from 'node:zlib';
 import {footprintHash} from './check-prepared.mjs';
 import {originalNativeReference,validateReferenceMetadataHeader} from '../src/reference-metadata.js';
 import {githubAPI, githubPages} from './issue-claim-contract.mjs';
-import {integrationTree} from './integration-profile.mjs';
-import {loadPackageInputs, readPackageInputs, containsPackagePath} from './package-inputs.mjs';
+import {loadPackageInputs, readPackageInputs, containsPackagePath, safePackagePath} from './package-inputs.mjs';
 import {assertCloudflareStaticAssets, inspectPackageNodeRuntime, verifyPackageDependencies} from './package-build.mjs';
 import {committedPackageInputs, committedPackageProducer, PACKAGE_PRODUCER_WORKFLOWS, PACKAGE_PRODUCER_KIND, packageBuildConfiguration,
   validatePackageOutputManifest, admitPackageInputTransition, admitPackageOutputTransition, inertSelectedPackageInput, streamedPackageFile, resolvePackagePythonExecutable} from './package-output-artifact.mjs';
@@ -39,6 +38,60 @@ function admitDisk(bytes,label){
   need(Number.isSafeInteger(bytes)&&bytes>=0&&disk.bavail*disk.bsize>=bytes,'Insufficient disk for '+label);
 }
 const treeRows=tree=>ordered([...tree.entries.values()].filter(row=>row.type==='blob').map(row=>({path:row.path,mode:row.mode,oid:row.sha})));
+
+// Source authenticity needs the complete declared input closure, not unrelated
+// repository history. Only declared directories use recursive tree requests;
+// exact leaves and workflow paths use ordinary authenticated ancestor trees.
+function packageMetadata(api,repo){
+  const commits=new Map(),trees=new Map();
+  const oid=value=>/^[a-f0-9]{40}$/.test(value??'');
+  const commit=async head=>{
+    need(oid(head),'Exact package metadata commit required');
+    if(!commits.has(head)){
+      const object=await api(`/repos/${repo}/git/commits/${head}`);
+      need(object.sha===head&&oid(object.tree?.sha),'Package metadata commit differs');commits.set(head,object);
+    }
+    return commits.get(head);
+  };
+  const listing=async(sha,recursive=false)=>{
+    need(oid(sha),'Exact package metadata tree required');
+    const key=sha+(recursive?'?recursive=1':'');
+    if(!trees.has(key)){
+      const value=await api(`/repos/${repo}/git/trees/${key}`);
+      need(value.sha===sha&&value.truncated===false&&Array.isArray(value.tree),'Incomplete or different package metadata tree');
+      const entries=new Map();
+      for(const row of value.tree){
+        need(typeof row.path==='string'&&!row.path.includes('\0')
+          &&row.path.split('/').every(part=>part&&part!=='.'&&part!=='..')&&(recursive||!row.path.includes('/'))
+          &&oid(row.sha)&&!entries.has(row.path),'Invalid or duplicate package metadata path');
+        entries.set(row.path,row);
+      }
+      trees.set(key,entries);
+    }
+    return trees.get(key);
+  };
+  const scope=async(head,paths)=>{
+    const object=await commit(head),entries=new Map();
+    for(const name of new Set(paths)){
+      need(safePackagePath(name),'Safe package metadata scope required');
+      const directory=name.endsWith('/'),parts=name.replace(/\/$/,'').split('/');
+      let sha=object.tree.sha,row;
+      for(let index=0;index<parts.length;index++){
+        row=(await listing(sha)).get(parts[index]);if(!row)break;
+        if(index<parts.length-1){need(row.type==='tree'&&row.mode==='040000','Ordinary package metadata ancestor required');sha=row.sha;}
+      }
+      if(!row)continue; // Exact absence is part of optional-input admission.
+      const prefix=parts.join('/');
+      if(directory){
+        need(row.type==='tree'&&row.mode==='040000','Declared package input directory differs');
+        for(const [relative,child]of await listing(row.sha,true))entries.set(prefix+'/'+relative,{...child,path:prefix+'/'+relative});
+      }else entries.set(prefix,{...row,path:prefix});
+    }
+    return {object,entries};
+  };
+  return {commit,scope};
+}
+const acceptedMetadataPaths=current=>current.definition.inputs.filter(name=>!name.endsWith('/')&&!inertSelectedPackageInput(name));
 
 async function blobRaw(api,repo,tree,name){
   const row=tree.entries.get(name);need(row?.type==='blob'&&row.mode==='100644','Bounded ordinary original metadata required');
@@ -68,7 +121,7 @@ function acceptedInputsFromTree(base,tree,current){
 }
 export async function acceptedSelectedPackageInputs({api,repo,base,current}){
   need(/^[a-f0-9]{40}$/.test(base??''),'Exact trusted selected base required');
-  const tree=await integrationTree(api,repo,base);
+  const tree=await packageMetadata(api,repo).scope(base,acceptedMetadataPaths(current));
   need(tree.object.sha===base,'Trusted selected base commit differs');
   return acceptedInputsFromTree(base,tree,current);
 }
@@ -77,10 +130,11 @@ export async function findOriginalPackage({api,repo,current,originalRunId,truste
   // A small recent-result search is an optimization. Exhaustion means a full
   // build, never a claim that no older result exists.
   need(originalRunId===undefined||Number.isSafeInteger(originalRunId)&&originalRunId>0,'Exact optional original run required');
+  const metadata=packageMetadata(api,repo);
   let trustedCommit,acceptedInputs=trustedBase===undefined?current.accepted_selected_inputs:undefined;
   if(trustedBase!==undefined){
     need(/^[a-f0-9]{40}$/.test(trustedBase),'Exact trusted selected base required');
-    trustedCommit=await api(`/repos/${repo}/git/commits/${trustedBase}`);
+    trustedCommit=await metadata.commit(trustedBase);
     need(trustedCommit.sha===trustedBase&&/^[a-f0-9]{40}$/.test(trustedCommit.tree?.sha??''),'Trusted selected base commit differs');
   }
   const workflows=current.producer?.workflows?.map(row=>row.path);
@@ -125,26 +179,25 @@ export async function findOriginalPackage({api,repo,current,originalRunId,truste
             artifact_id:artifact.id,artifact_name:artifact.name,artifact_digest:artifact.digest.slice(7),artifact_bytes:artifact.size_in_bytes};
           const receipt=await readOriginalPackageInventory({api,repo,origin});
           origin.head=receipt.original_head;
-          const tree=await integrationTree(api,repo,origin.head),all=treeRows(tree);
+          const definition=await readPackageInputs({route:`/repos/${repo}`,base:origin.head,api});
+          const tree=await metadata.scope(origin.head,[...definition.inputs,...PACKAGE_PRODUCER_WORKFLOWS,'data/ownership-selection.json']),all=treeRows(tree);
           const producer={kind:PACKAGE_PRODUCER_KIND,workflows:all.filter(row=>PACKAGE_PRODUCER_WORKFLOWS.includes(row.path))};
           if(!same(producer,current.producer))continue;
-          const workflowTree=origin.head===receipt.executed_workflow.sha?tree:await integrationTree(api,repo,receipt.executed_workflow.sha);
+          const workflowTree=origin.head===receipt.executed_workflow.sha?tree:await metadata.scope(receipt.executed_workflow.sha,[receipt.workflow_path]);
           const actual=workflowTree.entries.get(receipt.workflow_path),captured=producer.workflows.find(row=>row.path===receipt.workflow_path);
           if(actual?.type!=='blob'||actual.mode!=='100644'||!same(captured,{path:receipt.workflow_path,mode:actual.mode,oid:actual.sha}))continue;
-          const definition=await readPackageInputs({route:`/repos/${repo}`,base:origin.head,api});
           const source={head:origin.head,tree:tree.object.tree.sha,definition,producer,
             files:all.filter(row=>containsPackagePath(definition.inputs,row.path)),
             selection:await blobJSON(api,repo,tree,'data/ownership-selection.json')};
           if(trustedCommit&&!acceptedInputs){
             need(tree.object.sha===origin.head&&/^[a-f0-9]{40}$/.test(tree.object.tree?.sha??''),'Original source commit differs');
-            // Both commit identities came from this invocation's authenticated API.
-            // Reuse only the already-read complete tree, never a caller-supplied map.
-            acceptedInputs=tree.object.tree.sha===trustedCommit.tree.sha
-              ?acceptedInputsFromTree(trustedBase,tree,current)
-              :await acceptedSelectedPackageInputs({api,repo,base:trustedBase,current});
+            // Reuse exact ancestor listings by tree OID, including across
+            // distinct commits. New current leaves are resolved independently.
+            acceptedInputs=acceptedInputsFromTree(trustedBase,
+              await metadata.scope(trustedBase,acceptedMetadataPaths(current)),current);
           }
           const priorSidecarRaw=source.definition.inputs.some(name=>!current.definition.inputs.includes(name))
-            ?await blobRaw(api,repo,tree,source.selection.additive_release?.path):undefined;
+            ?await blobRaw(api,repo,await metadata.scope(origin.head,[source.selection.additive_release?.path]),source.selection.additive_release.path):undefined;
           if(!sourceCompatible(source,{...current,accepted_selected_inputs:acceptedInputs},priorSidecarRaw))continue;
           return {source,origin,receipt,priorSidecarRaw,...(trustedCommit?{accepted_selected_inputs:acceptedInputs}:{})};
         }catch(error){
@@ -359,12 +412,18 @@ export function packageAssemblyInvocation(event, environment = process.env) {
   return {expectedHead,...(trustedBase===undefined?{}:{trustedBase})};
 }
 
+export function packageAssemblyAPI(token,options={}){
+  // Match the queue's existing non-merge read allowance. Shared transport owns
+  // its unchanged transient status, attempt, timeout and denial policy.
+  return githubAPI(token,{...options,conditionalReads:false,readWaitMs:8*60*1000});
+}
+
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   let result;
   try{
     need(process.argv.length===2&&process.env.GH_TOKEN&&process.env.GITHUB_REPOSITORY&&process.env.GITHUB_EVENT_PATH,'Trusted selected-data CI invocation required');
     const event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8'));
-    const api=githubAPI(process.env.GH_TOKEN,{conditionalReads:false});delete process.env.GH_TOKEN;delete process.env.GITHUB_TOKEN;
+    const api=packageAssemblyAPI(process.env.GH_TOKEN);delete process.env.GH_TOKEN;delete process.env.GITHUB_TOKEN;
     const {expectedHead,trustedBase}=packageAssemblyInvocation(event);
     result=await assembleSelectedPackage({api,repo:process.env.GITHUB_REPOSITORY,expectedHead,trustedBase});
   }catch(error){result={assembled:false,reason:String(error.message).replace(/https?:\/\/\S+/g,'[delivery address]').slice(0,600)};}
