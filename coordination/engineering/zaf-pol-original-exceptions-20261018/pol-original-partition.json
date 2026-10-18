@@ -1,0 +1,3206 @@
+{
+  "package_id": "gb-POL-ADM2--repair-evaluation",
+  "original_interval_read_commit": "bfacb7ace398d4eafbca2b5db41870627e6d9454",
+  "accepted_selection_commit": "bfacb7ace398d4eafbca2b5db41870627e6d9454",
+  "original_class_counts": {
+    "land": 7309
+  },
+  "original_cells": 7309,
+  "original_intervals": 2666,
+  "original_owners": 56,
+  "accepted_original_owner_cells": 7236,
+  "proposed_documented_exceptions": 73,
+  "different_owner_intersections": [],
+  "original_key_sha256": "48d6530566e41d2636c2fc17139aa8952c58bdf6954c40746af760f90db19999",
+  "accepted_original_key_sha256": "841f87403f8059de621fb4fbb13be9808d30216f7de2a9d3f43cf811eb5b60fc",
+  "proposed_exception_key_sha256": "f0eed5f3e7946b3362b692a55a20d9383114c969fb4dea1d01ee3d1cb2df3003",
+  "original_equals_requested_patch": true,
+  "partition_exhaustive_disjoint": true,
+  "exception_records": [
+    {
+      "y": 86288,
+      "x": 141765,
+      "owner": 35808,
+      "source_feature_indices": [
+        20554,
+        20579,
+        51325,
+        51630
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20554,
+          "family_index": 84,
+          "source_id": "gb:DEU:ADM1:10402087B40185768535592",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20579,
+          "family_index": 85,
+          "source_id": "gb:DEU:ADM2:9070358B40185768535592",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51325,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B87710404837799",
+          "ordinal": 9,
+          "owners": [],
+          "name": "Lubusz Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51630,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B21410203609127",
+          "ordinal": 298,
+          "owners": [
+            35808
+          ],
+          "name": "powiat słubicki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-DEU",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 86289,
+      "x": 141767,
+      "owner": 35808,
+      "source_feature_indices": [
+        20554,
+        20579,
+        51325,
+        51630
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20554,
+          "family_index": 84,
+          "source_id": "gb:DEU:ADM1:10402087B40185768535592",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20579,
+          "family_index": 85,
+          "source_id": "gb:DEU:ADM2:9070358B40185768535592",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51325,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B87710404837799",
+          "ordinal": 9,
+          "owners": [],
+          "name": "Lubusz Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51630,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B21410203609127",
+          "ordinal": 298,
+          "owners": [
+            35808
+          ],
+          "name": "powiat słubicki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-DEU",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 86289,
+      "x": 141768,
+      "owner": 35808,
+      "source_feature_indices": [
+        20554,
+        20579,
+        51325,
+        51630
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20554,
+          "family_index": 84,
+          "source_id": "gb:DEU:ADM1:10402087B40185768535592",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20579,
+          "family_index": 85,
+          "source_id": "gb:DEU:ADM2:9070358B40185768535592",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51325,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B87710404837799",
+          "ordinal": 9,
+          "owners": [],
+          "name": "Lubusz Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51630,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B21410203609127",
+          "ordinal": 298,
+          "owners": [
+            35808
+          ],
+          "name": "powiat słubicki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-DEU",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 86290,
+      "x": 141769,
+      "owner": 35808,
+      "source_feature_indices": [
+        20554,
+        20579,
+        51325,
+        51630
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20554,
+          "family_index": 84,
+          "source_id": "gb:DEU:ADM1:10402087B40185768535592",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20579,
+          "family_index": 85,
+          "source_id": "gb:DEU:ADM2:9070358B40185768535592",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51325,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B87710404837799",
+          "ordinal": 9,
+          "owners": [],
+          "name": "Lubusz Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51630,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B21410203609127",
+          "ordinal": 298,
+          "owners": [
+            35808
+          ],
+          "name": "powiat słubicki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-DEU",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 86290,
+      "x": 141770,
+      "owner": 35808,
+      "source_feature_indices": [
+        20554,
+        20579,
+        51325,
+        51630
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20554,
+          "family_index": 84,
+          "source_id": "gb:DEU:ADM1:10402087B40185768535592",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20579,
+          "family_index": 85,
+          "source_id": "gb:DEU:ADM2:9070358B40185768535592",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51325,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B87710404837799",
+          "ordinal": 9,
+          "owners": [],
+          "name": "Lubusz Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51630,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B21410203609127",
+          "ordinal": 298,
+          "owners": [
+            35808
+          ],
+          "name": "powiat słubicki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-DEU",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 86290,
+      "x": 141771,
+      "owner": 35808,
+      "source_feature_indices": [
+        20554,
+        20579,
+        51325,
+        51630
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20554,
+          "family_index": 84,
+          "source_id": "gb:DEU:ADM1:10402087B40185768535592",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20579,
+          "family_index": 85,
+          "source_id": "gb:DEU:ADM2:9070358B40185768535592",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51325,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B87710404837799",
+          "ordinal": 9,
+          "owners": [],
+          "name": "Lubusz Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51630,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B21410203609127",
+          "ordinal": 298,
+          "owners": [
+            35808
+          ],
+          "name": "powiat słubicki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-DEU",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 86291,
+      "x": 141774,
+      "owner": 35808,
+      "source_feature_indices": [
+        20554,
+        20579,
+        51325,
+        51630
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20554,
+          "family_index": 84,
+          "source_id": "gb:DEU:ADM1:10402087B40185768535592",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20579,
+          "family_index": 85,
+          "source_id": "gb:DEU:ADM2:9070358B40185768535592",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51325,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B87710404837799",
+          "ordinal": 9,
+          "owners": [],
+          "name": "Lubusz Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51630,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B21410203609127",
+          "ordinal": 298,
+          "owners": [
+            35808
+          ],
+          "name": "powiat słubicki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-DEU",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 86300,
+      "x": 141788,
+      "owner": 35808,
+      "source_feature_indices": [
+        20554,
+        20579,
+        51325,
+        51630
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20554,
+          "family_index": 84,
+          "source_id": "gb:DEU:ADM1:10402087B40185768535592",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20579,
+          "family_index": 85,
+          "source_id": "gb:DEU:ADM2:9070358B40185768535592",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51325,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B87710404837799",
+          "ordinal": 9,
+          "owners": [],
+          "name": "Lubusz Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51630,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B21410203609127",
+          "ordinal": 298,
+          "owners": [
+            35808
+          ],
+          "name": "powiat słubicki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-DEU",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 86302,
+      "x": 141789,
+      "owner": 35808,
+      "source_feature_indices": [
+        20554,
+        20579,
+        51325,
+        51630
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20554,
+          "family_index": 84,
+          "source_id": "gb:DEU:ADM1:10402087B40185768535592",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20579,
+          "family_index": 85,
+          "source_id": "gb:DEU:ADM2:9070358B40185768535592",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51325,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B87710404837799",
+          "ordinal": 9,
+          "owners": [],
+          "name": "Lubusz Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51630,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B21410203609127",
+          "ordinal": 298,
+          "owners": [
+            35808
+          ],
+          "name": "powiat słubicki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-DEU",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 86305,
+      "x": 141790,
+      "owner": 35808,
+      "source_feature_indices": [
+        20554,
+        20579,
+        51325,
+        51630
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20554,
+          "family_index": 84,
+          "source_id": "gb:DEU:ADM1:10402087B40185768535592",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20579,
+          "family_index": 85,
+          "source_id": "gb:DEU:ADM2:9070358B40185768535592",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51325,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B87710404837799",
+          "ordinal": 9,
+          "owners": [],
+          "name": "Lubusz Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51630,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B21410203609127",
+          "ordinal": 298,
+          "owners": [
+            35808
+          ],
+          "name": "powiat słubicki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-DEU",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 86307,
+      "x": 141791,
+      "owner": 35808,
+      "source_feature_indices": [
+        20554,
+        20579,
+        51325,
+        51630
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20554,
+          "family_index": 84,
+          "source_id": "gb:DEU:ADM1:10402087B40185768535592",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20579,
+          "family_index": 85,
+          "source_id": "gb:DEU:ADM2:9070358B40185768535592",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51325,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B87710404837799",
+          "ordinal": 9,
+          "owners": [],
+          "name": "Lubusz Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51630,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B21410203609127",
+          "ordinal": 298,
+          "owners": [
+            35808
+          ],
+          "name": "powiat słubicki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-DEU",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 86750,
+      "x": 141748,
+      "owner": 35971,
+      "source_feature_indices": [
+        20554,
+        20579,
+        51325,
+        51542
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20554,
+          "family_index": 84,
+          "source_id": "gb:DEU:ADM1:10402087B40185768535592",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20579,
+          "family_index": 85,
+          "source_id": "gb:DEU:ADM2:9070358B40185768535592",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51325,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B87710404837799",
+          "ordinal": 9,
+          "owners": [],
+          "name": "Lubusz Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51542,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B57551223261746",
+          "ordinal": 210,
+          "owners": [
+            35971
+          ],
+          "name": "powiat krośnieński",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-DEU",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 86753,
+      "x": 141747,
+      "owner": 35971,
+      "source_feature_indices": [
+        20554,
+        20579,
+        51325,
+        51542
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20554,
+          "family_index": 84,
+          "source_id": "gb:DEU:ADM1:10402087B40185768535592",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20579,
+          "family_index": 85,
+          "source_id": "gb:DEU:ADM2:9070358B40185768535592",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51325,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B87710404837799",
+          "ordinal": 9,
+          "owners": [],
+          "name": "Lubusz Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51542,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B57551223261746",
+          "ordinal": 210,
+          "owners": [
+            35971
+          ],
+          "name": "powiat krośnieński",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-DEU",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 86836,
+      "x": 141742,
+      "owner": 35971,
+      "source_feature_indices": [
+        20554,
+        20579,
+        51325,
+        51542
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20554,
+          "family_index": 84,
+          "source_id": "gb:DEU:ADM1:10402087B40185768535592",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20579,
+          "family_index": 85,
+          "source_id": "gb:DEU:ADM2:9070358B40185768535592",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51325,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B87710404837799",
+          "ordinal": 9,
+          "owners": [],
+          "name": "Lubusz Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51542,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B57551223261746",
+          "ordinal": 210,
+          "owners": [
+            35971
+          ],
+          "name": "powiat krośnieński",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-DEU",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 86837,
+      "x": 141745,
+      "owner": 35971,
+      "source_feature_indices": [
+        20554,
+        20579,
+        51325,
+        51542
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20554,
+          "family_index": 84,
+          "source_id": "gb:DEU:ADM1:10402087B40185768535592",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 20579,
+          "family_index": 85,
+          "source_id": "gb:DEU:ADM2:9070358B40185768535592",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Brandenburg",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51325,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B87710404837799",
+          "ordinal": 9,
+          "owners": [],
+          "name": "Lubusz Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51542,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B57551223261746",
+          "ordinal": 210,
+          "owners": [
+            35971
+          ],
+          "name": "powiat krośnieński",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-DEU",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 87185,
+      "x": 148286,
+      "owner": 35868,
+      "source_feature_indices": [
+        51329,
+        51348,
+        60684
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 51329,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B69262761487853",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Lublin Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51348,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B33088815311851",
+          "ordinal": 16,
+          "owners": [
+            35868
+          ],
+          "name": "powiat włodawski",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 60684,
+          "family_index": 343,
+          "source_id": "gb:UKR:ADM1:14850775B13681962240800",
+          "ordinal": 1,
+          "owners": [],
+          "name": "Volyn Oblast",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-UKR",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 87341,
+      "x": 148323,
+      "owner": 35868,
+      "source_feature_indices": [
+        51348,
+        60684
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 51348,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B33088815311851",
+          "ordinal": 16,
+          "owners": [
+            35868
+          ],
+          "name": "powiat włodawski",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 60684,
+          "family_index": 343,
+          "source_id": "gb:UKR:ADM1:14850775B13681962240800",
+          "ordinal": 1,
+          "owners": [],
+          "name": "Volyn Oblast",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-UKR",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 87367,
+      "x": 148307,
+      "owner": 35868,
+      "source_feature_indices": [
+        51348,
+        60684
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 51348,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B33088815311851",
+          "ordinal": 16,
+          "owners": [
+            35868
+          ],
+          "name": "powiat włodawski",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 60684,
+          "family_index": 343,
+          "source_id": "gb:UKR:ADM1:14850775B13681962240800",
+          "ordinal": 1,
+          "owners": [],
+          "name": "Volyn Oblast",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-UKR",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 87369,
+      "x": 148308,
+      "owner": 35868,
+      "source_feature_indices": [
+        51348,
+        60684
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 51348,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B33088815311851",
+          "ordinal": 16,
+          "owners": [
+            35868
+          ],
+          "name": "powiat włodawski",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 60684,
+          "family_index": 343,
+          "source_id": "gb:UKR:ADM1:14850775B13681962240800",
+          "ordinal": 1,
+          "owners": [],
+          "name": "Volyn Oblast",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-UKR",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 87387,
+      "x": 148296,
+      "owner": 35868,
+      "source_feature_indices": [
+        51348,
+        60684
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 51348,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B33088815311851",
+          "ordinal": 16,
+          "owners": [
+            35868
+          ],
+          "name": "powiat włodawski",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 60684,
+          "family_index": 343,
+          "source_id": "gb:UKR:ADM1:14850775B13681962240800",
+          "ordinal": 1,
+          "owners": [],
+          "name": "Volyn Oblast",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-UKR",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 87387,
+      "x": 148297,
+      "owner": 35868,
+      "source_feature_indices": [
+        51348,
+        60684
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 51348,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B33088815311851",
+          "ordinal": 16,
+          "owners": [
+            35868
+          ],
+          "name": "powiat włodawski",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 60684,
+          "family_index": 343,
+          "source_id": "gb:UKR:ADM1:14850775B13681962240800",
+          "ordinal": 1,
+          "owners": [],
+          "name": "Volyn Oblast",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-UKR",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 87387,
+      "x": 148298,
+      "owner": 35868,
+      "source_feature_indices": [
+        51348,
+        60684
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 51348,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B33088815311851",
+          "ordinal": 16,
+          "owners": [
+            35868
+          ],
+          "name": "powiat włodawski",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 60684,
+          "family_index": 343,
+          "source_id": "gb:UKR:ADM1:14850775B13681962240800",
+          "ordinal": 1,
+          "owners": [],
+          "name": "Volyn Oblast",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-UKR",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 87429,
+      "x": 148338,
+      "owner": 35868,
+      "source_feature_indices": [
+        51348,
+        60684
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 51348,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B33088815311851",
+          "ordinal": 16,
+          "owners": [
+            35868
+          ],
+          "name": "powiat włodawski",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 60684,
+          "family_index": 343,
+          "source_id": "gb:UKR:ADM1:14850775B13681962240800",
+          "ordinal": 1,
+          "owners": [],
+          "name": "Volyn Oblast",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-UKR",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 87444,
+      "x": 148348,
+      "owner": 35868,
+      "source_feature_indices": [
+        51348,
+        60684
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 51348,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B33088815311851",
+          "ordinal": 16,
+          "owners": [
+            35868
+          ],
+          "name": "powiat włodawski",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 60684,
+          "family_index": 343,
+          "source_id": "gb:UKR:ADM1:14850775B13681962240800",
+          "ordinal": 1,
+          "owners": [],
+          "name": "Volyn Oblast",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-UKR",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 87742,
+      "x": 142018,
+      "owner": 36137,
+      "source_feature_indices": [
+        20466,
+        51319,
+        51705
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51319,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B9130125042960",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Lower Silesian Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51705,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B9925498505997",
+          "ordinal": 373,
+          "owners": [
+            36137
+          ],
+          "name": "powiat zgorzelecki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 87750,
+      "x": 142068,
+      "owner": 36137,
+      "source_feature_indices": [
+        20466,
+        51319,
+        51705
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51319,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B9130125042960",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Lower Silesian Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51705,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B9925498505997",
+          "ordinal": 373,
+          "owners": [
+            36137
+          ],
+          "name": "powiat zgorzelecki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 87788,
+      "x": 142141,
+      "owner": 36059,
+      "source_feature_indices": [
+        20466,
+        51319,
+        51697
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51319,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B9130125042960",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Lower Silesian Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51697,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B77431341295316",
+          "ordinal": 365,
+          "owners": [
+            36059
+          ],
+          "name": "powiat lubański",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 87834,
+      "x": 142209,
+      "owner": 36059,
+      "source_feature_indices": [
+        20466,
+        51319,
+        51697
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51319,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B9130125042960",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Lower Silesian Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51697,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B77431341295316",
+          "ordinal": 365,
+          "owners": [
+            36059
+          ],
+          "name": "powiat lubański",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 87857,
+      "x": 142201,
+      "owner": 36059,
+      "source_feature_indices": [
+        20466,
+        51319,
+        51697
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51319,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B9130125042960",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Lower Silesian Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51697,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B77431341295316",
+          "ordinal": 365,
+          "owners": [
+            36059
+          ],
+          "name": "powiat lubański",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 87901,
+      "x": 142215,
+      "owner": 35861,
+      "source_feature_indices": [
+        20466,
+        51319,
+        51388
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51319,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B9130125042960",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Lower Silesian Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51388,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B3206067529972",
+          "ordinal": 56,
+          "owners": [
+            35861
+          ],
+          "name": "powiat lwówecki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 87911,
+      "x": 142220,
+      "owner": 35861,
+      "source_feature_indices": [
+        20466,
+        51319,
+        51388
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51319,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B9130125042960",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Lower Silesian Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51388,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B3206067529972",
+          "ordinal": 56,
+          "owners": [
+            35861
+          ],
+          "name": "powiat lwówecki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 87915,
+      "x": 142223,
+      "owner": 35861,
+      "source_feature_indices": [
+        20466,
+        51388
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51388,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B3206067529972",
+          "ordinal": 56,
+          "owners": [
+            35861
+          ],
+          "name": "powiat lwówecki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 87919,
+      "x": 142226,
+      "owner": 35861,
+      "source_feature_indices": [
+        20466,
+        51388
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51388,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B3206067529972",
+          "ordinal": 56,
+          "owners": [
+            35861
+          ],
+          "name": "powiat lwówecki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 87920,
+      "x": 148666,
+      "owner": 36013,
+      "source_feature_indices": [
+        51329,
+        51433,
+        60684
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 51329,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B69262761487853",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Lublin Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51433,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B66371363243422",
+          "ordinal": 101,
+          "owners": [
+            36013
+          ],
+          "name": "powiat hrubieszowski",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 60684,
+          "family_index": 343,
+          "source_id": "gb:UKR:ADM1:14850775B13681962240800",
+          "ordinal": 1,
+          "owners": [],
+          "name": "Volyn Oblast",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-UKR",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 87921,
+      "x": 148666,
+      "owner": 36013,
+      "source_feature_indices": [
+        51433,
+        60684
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 51433,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B66371363243422",
+          "ordinal": 101,
+          "owners": [
+            36013
+          ],
+          "name": "powiat hrubieszowski",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 60684,
+          "family_index": 343,
+          "source_id": "gb:UKR:ADM1:14850775B13681962240800",
+          "ordinal": 1,
+          "owners": [],
+          "name": "Volyn Oblast",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-UKR",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 87923,
+      "x": 142229,
+      "owner": 35861,
+      "source_feature_indices": [
+        20466,
+        51388
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51388,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B3206067529972",
+          "ordinal": 56,
+          "owners": [
+            35861
+          ],
+          "name": "powiat lwówecki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 87926,
+      "x": 142231,
+      "owner": 35861,
+      "source_feature_indices": [
+        20466,
+        51388
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51388,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B3206067529972",
+          "ordinal": 56,
+          "owners": [
+            35861
+          ],
+          "name": "powiat lwówecki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 87927,
+      "x": 142232,
+      "owner": 35861,
+      "source_feature_indices": [
+        20466,
+        51388
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51388,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B3206067529972",
+          "ordinal": 56,
+          "owners": [
+            35861
+          ],
+          "name": "powiat lwówecki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 87952,
+      "x": 142271,
+      "owner": 35861,
+      "source_feature_indices": [
+        20466,
+        51388
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51388,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B3206067529972",
+          "ordinal": 56,
+          "owners": [
+            35861
+          ],
+          "name": "powiat lwówecki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 87953,
+      "x": 142272,
+      "owner": 35861,
+      "source_feature_indices": [
+        20466,
+        51388
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20466,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B98776772787889",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Liberecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51388,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B3206067529972",
+          "ordinal": 56,
+          "owners": [
+            35861
+          ],
+          "name": "powiat lwówecki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 87994,
+      "x": 148535,
+      "owner": 36013,
+      "source_feature_indices": [
+        51433,
+        60684
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 51433,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B66371363243422",
+          "ordinal": 101,
+          "owners": [
+            36013
+          ],
+          "name": "powiat hrubieszowski",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 60684,
+          "family_index": 343,
+          "source_id": "gb:UKR:ADM1:14850775B13681962240800",
+          "ordinal": 1,
+          "owners": [],
+          "name": "Volyn Oblast",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-UKR",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 87995,
+      "x": 148535,
+      "owner": 36013,
+      "source_feature_indices": [
+        51433,
+        60684
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 51433,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B66371363243422",
+          "ordinal": 101,
+          "owners": [
+            36013
+          ],
+          "name": "powiat hrubieszowski",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 60684,
+          "family_index": 343,
+          "source_id": "gb:UKR:ADM1:14850775B13681962240800",
+          "ordinal": 1,
+          "owners": [],
+          "name": "Volyn Oblast",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-UKR",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 88041,
+      "x": 148578,
+      "owner": 36013,
+      "source_feature_indices": [
+        51433,
+        60684
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 51433,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B66371363243422",
+          "ordinal": 101,
+          "owners": [
+            36013
+          ],
+          "name": "powiat hrubieszowski",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 60684,
+          "family_index": 343,
+          "source_id": "gb:UKR:ADM1:14850775B13681962240800",
+          "ordinal": 1,
+          "owners": [],
+          "name": "Volyn Oblast",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-UKR",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 88042,
+      "x": 142471,
+      "owner": 35986,
+      "source_feature_indices": [
+        20467,
+        51492
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20467,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B56271871797203",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Královéhradecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51492,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B59477648790718",
+          "ordinal": 160,
+          "owners": [
+            35986
+          ],
+          "name": "powiat jeleniogórski",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 88045,
+      "x": 142488,
+      "owner": 35986,
+      "source_feature_indices": [
+        20467,
+        51319,
+        51492
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20467,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B56271871797203",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Královéhradecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51319,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B9130125042960",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Lower Silesian Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51492,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B59477648790718",
+          "ordinal": 160,
+          "owners": [
+            35986
+          ],
+          "name": "powiat jeleniogórski",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 88062,
+      "x": 142610,
+      "owner": 35986,
+      "source_feature_indices": [
+        20467,
+        51492
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20467,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B56271871797203",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Královéhradecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51492,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B59477648790718",
+          "ordinal": 160,
+          "owners": [
+            35986
+          ],
+          "name": "powiat jeleniogórski",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 88103,
+      "x": 142625,
+      "owner": 36065,
+      "source_feature_indices": [
+        20467,
+        51319,
+        51364
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20467,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B56271871797203",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Královéhradecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51319,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B9130125042960",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Lower Silesian Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51364,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B79708855616920",
+          "ordinal": 32,
+          "owners": [
+            36065
+          ],
+          "name": "powiat kamiennogórski",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 88190,
+      "x": 142889,
+      "owner": 35802,
+      "source_feature_indices": [
+        20467,
+        51319,
+        51417
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20467,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B56271871797203",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Královéhradecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51319,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B9130125042960",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Lower Silesian Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51417,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B20102954815459",
+          "ordinal": 85,
+          "owners": [
+            35802
+          ],
+          "name": "powiat wałbrzyski",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 88196,
+      "x": 142870,
+      "owner": 35802,
+      "source_feature_indices": [
+        20467,
+        51319,
+        51417
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20467,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B56271871797203",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Královéhradecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51319,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B9130125042960",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Lower Silesian Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51417,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B20102954815459",
+          "ordinal": 85,
+          "owners": [
+            35802
+          ],
+          "name": "powiat wałbrzyski",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 88428,
+      "x": 143466,
+      "owner": 35819,
+      "source_feature_indices": [
+        20471,
+        51320,
+        51484
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20471,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B12746720248776",
+          "ordinal": 11,
+          "owners": [],
+          "name": "Olomoucký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51320,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B67719337891950",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Opole Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51484,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B24432593603211",
+          "ordinal": 152,
+          "owners": [
+            35819
+          ],
+          "name": "powiat nyski",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 88442,
+      "x": 142904,
+      "owner": 35893,
+      "source_feature_indices": [
+        20467,
+        51319,
+        51376
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20467,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B56271871797203",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Královéhradecký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51319,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B9130125042960",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Lower Silesian Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51376,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B38262227952408",
+          "ordinal": 44,
+          "owners": [
+            35893
+          ],
+          "name": "powiat kłodzki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 88550,
+      "x": 143964,
+      "owner": 35889,
+      "source_feature_indices": [
+        20472,
+        51320,
+        51511
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20472,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B23519183895960",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Moravskoslezský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51320,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B67719337891950",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Opole Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51511,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B37662113992790",
+          "ordinal": 179,
+          "owners": [
+            35889
+          ],
+          "name": "powiat prudnicki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 88572,
+      "x": 143962,
+      "owner": 35889,
+      "source_feature_indices": [
+        20472,
+        51320,
+        51511
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20472,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B23519183895960",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Moravskoslezský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51320,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B67719337891950",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Opole Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51511,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B37662113992790",
+          "ordinal": 179,
+          "owners": [
+            35889
+          ],
+          "name": "powiat prudnicki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 88574,
+      "x": 143959,
+      "owner": 35889,
+      "source_feature_indices": [
+        20472,
+        51320,
+        51511
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20472,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B23519183895960",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Moravskoslezský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51320,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B67719337891950",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Opole Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51511,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B37662113992790",
+          "ordinal": 179,
+          "owners": [
+            35889
+          ],
+          "name": "powiat prudnicki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 88598,
+      "x": 143930,
+      "owner": 35889,
+      "source_feature_indices": [
+        20472,
+        51320,
+        51511
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20472,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B23519183895960",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Moravskoslezský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51320,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B67719337891950",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Opole Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51511,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B37662113992790",
+          "ordinal": 179,
+          "owners": [
+            35889
+          ],
+          "name": "powiat prudnicki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 88608,
+      "x": 143913,
+      "owner": 35889,
+      "source_feature_indices": [
+        20472,
+        51511
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20472,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B23519183895960",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Moravskoslezský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51511,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B37662113992790",
+          "ordinal": 179,
+          "owners": [
+            35889
+          ],
+          "name": "powiat prudnicki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 88614,
+      "x": 143471,
+      "owner": 35893,
+      "source_feature_indices": [
+        20471,
+        51319,
+        51376
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20471,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B12746720248776",
+          "ordinal": 11,
+          "owners": [],
+          "name": "Olomoucký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51319,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B9130125042960",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Lower Silesian Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51376,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B38262227952408",
+          "ordinal": 44,
+          "owners": [
+            35893
+          ],
+          "name": "powiat kłodzki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 88678,
+      "x": 143378,
+      "owner": 35893,
+      "source_feature_indices": [
+        20471,
+        51319,
+        51376
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20471,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B12746720248776",
+          "ordinal": 11,
+          "owners": [],
+          "name": "Olomoucký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51319,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B9130125042960",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Lower Silesian Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51376,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B38262227952408",
+          "ordinal": 44,
+          "owners": [
+            35893
+          ],
+          "name": "powiat kłodzki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 88679,
+      "x": 143378,
+      "owner": 35893,
+      "source_feature_indices": [
+        20471,
+        51376
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20471,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B12746720248776",
+          "ordinal": 11,
+          "owners": [],
+          "name": "Olomoucký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51376,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B38262227952408",
+          "ordinal": 44,
+          "owners": [
+            35893
+          ],
+          "name": "powiat kłodzki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 88680,
+      "x": 143378,
+      "owner": 35893,
+      "source_feature_indices": [
+        20471,
+        51376
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20471,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B12746720248776",
+          "ordinal": 11,
+          "owners": [],
+          "name": "Olomoucký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51376,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B38262227952408",
+          "ordinal": 44,
+          "owners": [
+            35893
+          ],
+          "name": "powiat kłodzki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 88681,
+      "x": 143378,
+      "owner": 35893,
+      "source_feature_indices": [
+        20471,
+        51376
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20471,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B12746720248776",
+          "ordinal": 11,
+          "owners": [],
+          "name": "Olomoucký kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51376,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B38262227952408",
+          "ordinal": 44,
+          "owners": [
+            35893
+          ],
+          "name": "powiat kłodzki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 88695,
+      "x": 143326,
+      "owner": 35893,
+      "source_feature_indices": [
+        20468,
+        51319,
+        51376
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20468,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B96941531518499",
+          "ordinal": 8,
+          "owners": [],
+          "name": "Pardubický kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51319,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B9130125042960",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Lower Silesian Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51376,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B38262227952408",
+          "ordinal": 44,
+          "owners": [
+            35893
+          ],
+          "name": "powiat kłodzki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 88851,
+      "x": 144195,
+      "owner": 35979,
+      "source_feature_indices": [
+        20472,
+        51320,
+        51401
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20472,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B23519183895960",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Moravskoslezský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51320,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B67719337891950",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Opole Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51401,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B5903122455577",
+          "ordinal": 69,
+          "owners": [
+            35979
+          ],
+          "name": "powiat głubczycki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 88903,
+      "x": 144180,
+      "owner": 35979,
+      "source_feature_indices": [
+        20472,
+        51320,
+        51401
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20472,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B23519183895960",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Moravskoslezský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51320,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B67719337891950",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Opole Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51401,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B5903122455577",
+          "ordinal": 69,
+          "owners": [
+            35979
+          ],
+          "name": "powiat głubczycki",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 88981,
+      "x": 144438,
+      "owner": 35990,
+      "source_feature_indices": [
+        20472,
+        51331,
+        51479
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 20472,
+          "family_index": 82,
+          "source_id": "gb:CZE:ADM1:73172107B23519183895960",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Moravskoslezský kraj",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51331,
+          "family_index": 266,
+          "source_id": "gb:POL:ADM1:17162690B16879770934003",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Silesian Voivodeship",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 51479,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B60233039089314",
+          "ordinal": 147,
+          "owners": [
+            35990
+          ],
+          "name": "Racibórz County",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-CZE",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 89929,
+      "x": 147523,
+      "owner": 35921,
+      "source_feature_indices": [
+        51421,
+        60696
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 51421,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B44525837921198",
+          "ordinal": 89,
+          "owners": [
+            35921
+          ],
+          "name": "powiat bieszczadzki",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 60696,
+          "family_index": 343,
+          "source_id": "gb:UKR:ADM1:14850775B82824220650579",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zakarpattia Oblast",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-UKR",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 89930,
+      "x": 147522,
+      "owner": 35921,
+      "source_feature_indices": [
+        51421,
+        60696
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 51421,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B44525837921198",
+          "ordinal": 89,
+          "owners": [
+            35921
+          ],
+          "name": "powiat bieszczadzki",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 60696,
+          "family_index": 343,
+          "source_id": "gb:UKR:ADM1:14850775B82824220650579",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zakarpattia Oblast",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-UKR",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 89931,
+      "x": 147521,
+      "owner": 35921,
+      "source_feature_indices": [
+        51421,
+        60696
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 51421,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B44525837921198",
+          "ordinal": 89,
+          "owners": [
+            35921
+          ],
+          "name": "powiat bieszczadzki",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 60696,
+          "family_index": 343,
+          "source_id": "gb:UKR:ADM1:14850775B82824220650579",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zakarpattia Oblast",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-UKR",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 89932,
+      "x": 147519,
+      "owner": 35921,
+      "source_feature_indices": [
+        51421,
+        60696
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 51421,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B44525837921198",
+          "ordinal": 89,
+          "owners": [
+            35921
+          ],
+          "name": "powiat bieszczadzki",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 60696,
+          "family_index": 343,
+          "source_id": "gb:UKR:ADM1:14850775B82824220650579",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zakarpattia Oblast",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-UKR",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 89932,
+      "x": 147520,
+      "owner": 35921,
+      "source_feature_indices": [
+        51421,
+        60696
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 51421,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B44525837921198",
+          "ordinal": 89,
+          "owners": [
+            35921
+          ],
+          "name": "powiat bieszczadzki",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 60696,
+          "family_index": 343,
+          "source_id": "gb:UKR:ADM1:14850775B82824220650579",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zakarpattia Oblast",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-UKR",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 89933,
+      "x": 147518,
+      "owner": 35921,
+      "source_feature_indices": [
+        51421,
+        60696
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 51421,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B44525837921198",
+          "ordinal": 89,
+          "owners": [
+            35921
+          ],
+          "name": "powiat bieszczadzki",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 60696,
+          "family_index": 343,
+          "source_id": "gb:UKR:ADM1:14850775B82824220650579",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zakarpattia Oblast",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-UKR",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 89933,
+      "x": 147519,
+      "owner": 35921,
+      "source_feature_indices": [
+        51421,
+        60696
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 51421,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B44525837921198",
+          "ordinal": 89,
+          "owners": [
+            35921
+          ],
+          "name": "powiat bieszczadzki",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 60696,
+          "family_index": 343,
+          "source_id": "gb:UKR:ADM1:14850775B82824220650579",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zakarpattia Oblast",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-UKR",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 89934,
+      "x": 147517,
+      "owner": 35921,
+      "source_feature_indices": [
+        51421,
+        60696
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 51421,
+          "family_index": 267,
+          "source_id": "gb:POL:ADM2:97123803B44525837921198",
+          "ordinal": 89,
+          "owners": [
+            35921
+          ],
+          "name": "powiat bieszczadzki",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 60696,
+          "family_index": 343,
+          "source_id": "gb:UKR:ADM1:14850775B82824220650579",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Zakarpattia Oblast",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "question_ref": "POL-UKR",
+      "native_repair_credit": 0
+    }
+  ],
+  "new_native_repairs": 0,
+  "accepted_disposition_credit": 0,
+  "status": "proposed; independent substantive review and accepted integration required",
+  "accepted_original_class_counts": {
+    "land": 7236
+  },
+  "current_selection_identity_checked_at": "bfacb7ace398d4eafbca2b5db41870627e6d9454"
+}
