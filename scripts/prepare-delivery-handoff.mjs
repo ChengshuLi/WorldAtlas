@@ -11,7 +11,7 @@ import {locate} from './delivery-handoff-advance.mjs';
 import {repairComponentKey, compareRepairComponents} from '../src/native-grid.js';
 import {scientificNativeSelection,originalNativeReference,validateReferenceMetadataHeader} from '../src/reference-metadata.js';
 import {prepareReferenceMetadataProjection,validateReferenceMetadataProjection} from './selected-reference-metadata.mjs';
-import {validatePackageInputs, selectedCumulativePackageRoles} from './package-inputs.mjs';
+import {validatePackageInputs, selectedCumulativePackageRoles, admitSelectedPackageDeclarations} from './package-inputs.mjs';
 import {composeRetainedLedgers} from '../coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs';
 import {coordinateBounds, normaliseRetainedRepairLedger, compareVersionedRepairLedgers, verifyCompletedSourceTargetNativeAuthority, mergeCompletedNativePatches, verifyCurrentRebindExecution, CURRENT_REBIND_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
@@ -871,7 +871,8 @@ export function finalizedPackageInputs(original, prefix, paths) {
   return appendPackageReadPaths(original, paths);
 }
 
-function appendPackageReadPaths(original, paths, priorSelectedPaths = []) {
+function appendPackageReadPaths(original, paths, prior = {}) {
+  const priorSelectedPaths = prior.selection ? selectedCumulativePackageRoles(prior.selection, prior.priorSidecarRaw).map(pin=>pin.path) : [];
   validatePackageInputs(original);
   need(unique(paths) && paths.every(safe), 'Exact package read paths required');
   // Retire only exact prior cumulative roles authenticated by the selector.
@@ -881,8 +882,10 @@ function appendPackageReadPaths(original, paths, priorSelectedPaths = []) {
   const retired = new Set(priorSelectedPaths.filter(p => !paths.includes(p)));
   const retained = original.inputs.filter(p => !retired.has(p));
   const additions = paths.filter(p => !retained.some(old => old === p || old.endsWith('/') && p.startsWith(old))).sort();
-  return validatePackageInputs({...original, inputs: [...retained, ...additions],
+  const result = validatePackageInputs({...original, inputs: [...retained, ...additions],
     optional_inputs: original.optional_inputs.filter(p => !retired.has(p))});
+  admitSelectedPackageDeclarations(original, result, {...prior,currentPaths:paths});
+  return result;
 }
 
 // The modern composer emits these four flat products at one real commit.
@@ -1054,8 +1057,10 @@ export function finalizeDelivery(config, reader) {
   // The prior sidecar body was authenticated against the original selector
   // above. Its cumulative payload is superseded, not a transitive scientific
   // package input; packageProjection still retains complete custody evidence.
-  const priorSelectedPaths = prior ? selectedCumulativePackageRoles(selection, reader.read(reader.pin(config.selector.commit, selection.additive_release.path))).map(pin => pin.path) : [];
-  const packageInputs = appendPackageReadPaths(baselinePackage, paths, priorSelectedPaths);
+  const priorDeclaration = prior ? {selection,
+    priorSidecarRaw: reader.read(reader.pin(config.selector.commit, selection.additive_release.path)),
+    priorEntry: name => reader.descriptor(config.selector.commit, name)} : {};
+  const packageInputs = appendPackageReadPaths(baselinePackage, paths, priorDeclaration);
   const expectation = JSON.parse(outputs['selected-delivery-expectations.json']);
   // Preserve the established final smoke-expectation presentation as well.
   const expectations = {version: expectation.version, selected_ledger_sha256: expectation.selected_ledger_sha256,
