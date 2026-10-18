@@ -1,0 +1,448 @@
+{
+  "package_id": "gb-CIV-ADM3--repair-evaluation",
+  "original_interval_read_commit": "56945b018d69c6e07f2206494533fa200f27d2a7",
+  "accepted_selection_commit": "dfe57bc8511fea3ee6cc78384ff2e94d19c7cecd",
+  "original_class_counts": {
+    "land": 2049
+  },
+  "original_cells": 2049,
+  "original_intervals": 1028,
+  "original_owners": 66,
+  "accepted_original_owner_cells": 2041,
+  "proposed_documented_exceptions": 8,
+  "different_owner_intersections": [],
+  "original_key_sha256": "e955e61ad1f55ee6f255db09b7eb09530c28c73f06e23d0707e19bcb2180ab94",
+  "accepted_original_key_sha256": "904bea4ff6878ac103284922d0afc970472672b63aa936c4d5db3cc8afdb8899",
+  "proposed_exception_key_sha256": "bf2a272e106f0f88fff7167f4118093f9c7114f7a60764fe219319fe3cb698d1",
+  "original_equals_requested_patch": true,
+  "partition_exhaustive_disjoint": true,
+  "exception_records": [
+    {
+      "y": 124526,
+      "x": 129149,
+      "owner": 13651,
+      "source_feature_indices": [
+        17751,
+        17759,
+        18280,
+        33825
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 17751,
+          "family_index": 63,
+          "source_id": "gb:CIV:ADM1:83157122B79983119233374",
+          "ordinal": 11,
+          "owners": [],
+          "name": "Zanzan",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 17759,
+          "family_index": 64,
+          "source_id": "gb:CIV:ADM2:98640826B90856530326373",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Bounkani",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 18280,
+          "family_index": 65,
+          "source_id": "gb:CIV:ADM3:97208781B28676212355086",
+          "ordinal": 493,
+          "owners": [
+            13651
+          ],
+          "name": "Youndouo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 33825,
+          "family_index": 124,
+          "source_id": "gb:GHA:ADM1:69750345B26994269439887",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Savannah Region",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 124527,
+      "x": 129149,
+      "owner": 13651,
+      "source_feature_indices": [
+        17751,
+        17759,
+        18280,
+        33825
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 17751,
+          "family_index": 63,
+          "source_id": "gb:CIV:ADM1:83157122B79983119233374",
+          "ordinal": 11,
+          "owners": [],
+          "name": "Zanzan",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 17759,
+          "family_index": 64,
+          "source_id": "gb:CIV:ADM2:98640826B90856530326373",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Bounkani",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 18280,
+          "family_index": 65,
+          "source_id": "gb:CIV:ADM3:97208781B28676212355086",
+          "ordinal": 493,
+          "owners": [
+            13651
+          ],
+          "name": "Youndouo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 33825,
+          "family_index": 124,
+          "source_id": "gb:GHA:ADM1:69750345B26994269439887",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Savannah Region",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 124528,
+      "x": 129149,
+      "owner": 13651,
+      "source_feature_indices": [
+        17751,
+        17759,
+        18280,
+        33825
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 17751,
+          "family_index": 63,
+          "source_id": "gb:CIV:ADM1:83157122B79983119233374",
+          "ordinal": 11,
+          "owners": [],
+          "name": "Zanzan",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 17759,
+          "family_index": 64,
+          "source_id": "gb:CIV:ADM2:98640826B90856530326373",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Bounkani",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 18280,
+          "family_index": 65,
+          "source_id": "gb:CIV:ADM3:97208781B28676212355086",
+          "ordinal": 493,
+          "owners": [
+            13651
+          ],
+          "name": "Youndouo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 33825,
+          "family_index": 124,
+          "source_id": "gb:GHA:ADM1:69750345B26994269439887",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Savannah Region",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 124532,
+      "x": 129150,
+      "owner": 13651,
+      "source_feature_indices": [
+        17751,
+        17759,
+        18280,
+        33825
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 17751,
+          "family_index": 63,
+          "source_id": "gb:CIV:ADM1:83157122B79983119233374",
+          "ordinal": 11,
+          "owners": [],
+          "name": "Zanzan",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 17759,
+          "family_index": 64,
+          "source_id": "gb:CIV:ADM2:98640826B90856530326373",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Bounkani",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 18280,
+          "family_index": 65,
+          "source_id": "gb:CIV:ADM3:97208781B28676212355086",
+          "ordinal": 493,
+          "owners": [
+            13651
+          ],
+          "name": "Youndouo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 33825,
+          "family_index": 124,
+          "source_id": "gb:GHA:ADM1:69750345B26994269439887",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Savannah Region",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 124533,
+      "x": 129150,
+      "owner": 13651,
+      "source_feature_indices": [
+        17751,
+        17759,
+        18280,
+        33825
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 17751,
+          "family_index": 63,
+          "source_id": "gb:CIV:ADM1:83157122B79983119233374",
+          "ordinal": 11,
+          "owners": [],
+          "name": "Zanzan",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 17759,
+          "family_index": 64,
+          "source_id": "gb:CIV:ADM2:98640826B90856530326373",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Bounkani",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 18280,
+          "family_index": 65,
+          "source_id": "gb:CIV:ADM3:97208781B28676212355086",
+          "ordinal": 493,
+          "owners": [
+            13651
+          ],
+          "name": "Youndouo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 33825,
+          "family_index": 124,
+          "source_id": "gb:GHA:ADM1:69750345B26994269439887",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Savannah Region",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 124534,
+      "x": 129150,
+      "owner": 13651,
+      "source_feature_indices": [
+        17751,
+        17759,
+        18280,
+        33825
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 17751,
+          "family_index": 63,
+          "source_id": "gb:CIV:ADM1:83157122B79983119233374",
+          "ordinal": 11,
+          "owners": [],
+          "name": "Zanzan",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 17759,
+          "family_index": 64,
+          "source_id": "gb:CIV:ADM2:98640826B90856530326373",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Bounkani",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 18280,
+          "family_index": 65,
+          "source_id": "gb:CIV:ADM3:97208781B28676212355086",
+          "ordinal": 493,
+          "owners": [
+            13651
+          ],
+          "name": "Youndouo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 33825,
+          "family_index": 124,
+          "source_id": "gb:GHA:ADM1:69750345B26994269439887",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Savannah Region",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 124539,
+      "x": 129151,
+      "owner": 13651,
+      "source_feature_indices": [
+        17751,
+        18280,
+        33825
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 17751,
+          "family_index": 63,
+          "source_id": "gb:CIV:ADM1:83157122B79983119233374",
+          "ordinal": 11,
+          "owners": [],
+          "name": "Zanzan",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 18280,
+          "family_index": 65,
+          "source_id": "gb:CIV:ADM3:97208781B28676212355086",
+          "ordinal": 493,
+          "owners": [
+            13651
+          ],
+          "name": "Youndouo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 33825,
+          "family_index": 124,
+          "source_id": "gb:GHA:ADM1:69750345B26994269439887",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Savannah Region",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    },
+    {
+      "y": 124540,
+      "x": 129151,
+      "owner": 13651,
+      "source_feature_indices": [
+        17751,
+        18280,
+        33825
+      ],
+      "physical_class": "land",
+      "original_source_contacts": [
+        {
+          "source_index": 17751,
+          "family_index": 63,
+          "source_id": "gb:CIV:ADM1:83157122B79983119233374",
+          "ordinal": 11,
+          "owners": [],
+          "name": "Zanzan",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 18280,
+          "family_index": 65,
+          "source_id": "gb:CIV:ADM3:97208781B28676212355086",
+          "ordinal": 493,
+          "owners": [
+            13651
+          ],
+          "name": "Youndouo",
+          "geometry_status": "raw-native-supported"
+        },
+        {
+          "source_index": 33825,
+          "family_index": 124,
+          "source_id": "gb:GHA:ADM1:69750345B26994269439887",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Savannah Region",
+          "geometry_status": "raw-native-supported"
+        }
+      ],
+      "diagnostic_hold_reason": "territorial_exclusion_cells",
+      "proposed_disposition": "documented_unresolved_source_applicability_exception",
+      "native_repair_credit": 0
+    }
+  ],
+  "new_native_repairs": 0,
+  "accepted_disposition_credit": 0,
+  "status": "proposed; independent substantive review and accepted integration required",
+  "accepted_original_class_counts": {
+    "land": 2041
+  },
+  "current_selection_identity_checked_at": "095e74472938076e608bc2b10f66195ee81beda5"
+}
