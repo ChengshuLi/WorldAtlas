@@ -242,3 +242,27 @@ The output preserves the full six-family source pins and target-level operand
 ordinals. Per-cell exact contact counts are not yet available until the native
 diagnostic is run. Source-vintage applicability and accepted repair credit
 remain unresolved and zero, respectively.
+
+The stock full-scope `native-diagnostic` succeeded against the v3 source evidence
+and unchanged complete 683-cell patch. The exact output is 55,938 bytes,
+SHA-256 `466671484fab9e939b38257d2340dc88733c7a8351aa3567f68a650e3ee6b13c`;
+its preparation receipt binds config SHA-256
+`8fa991fc23aebdf0d38c05118f1ef57f3a0879830cc1c5dbb8aaaf26879e2563`.
+It reports 683 requested, 683 diagnostic-supported and 0 diagnostic-held
+cells over 331 rows. Every requested run has reason `assigned_cells`; thus the
+stock exact native source/negative scan reports zero cell-level contacts with
+the 24 complete negative operands across these 683 requested cells. This is an
+exact cell-screen result, not proof of legal/source applicability and not an
+accepted delivery. Per-owner diagnostic counts are: 16531=58, 16532=31,
+16533=205, 16536=1, 16537=77, 16538=149, 16539=73, 16540=63, 16541=26.
+The diagnostic receipt pins source evidence v3 at commit
+`7279490bb94da9ed8e518770c038811d534426d0`, path
+`source-evidence-v3/products/source-evidence.json`, SHA-256
+`2fa52699c6b1ae63c79bcb4a8026bb482dad8e85f5f2f4eab8d7322760ea3908`; and
+full request at commit `523c774ddf481497d3ea3acb12fdeb0449948b4d`, path
+`source-evidence-v2/native-requested-patch.json`, SHA-256
+`7d2d0f382455c5b5f02e1a3afdcf67eac19b397eefc9cc8c55ce6ce0f5a30833`.
+This is still only a diagnostic partition: selected-owner state, per-key source
+vintage/applicability, native authority, physical flags, independent delivery
+review and acceptance remain separate gates. The original denominator is
+preserved and accepted repair credit remains zero.
