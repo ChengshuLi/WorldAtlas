@@ -1,0 +1,2085 @@
+{
+  "version": 1,
+  "kind": "literal-selected-owner-observation-v1",
+  "scientific_qualification": false,
+  "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+  "code_commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+  "original_package": {
+    "package_id": "gb-LBY-ADM1--repair-evaluation",
+    "primary_source": "gb:LBY:ADM1",
+    "source_family_index": 191,
+    "category": "repair-evaluation",
+    "native_cells": 80,
+    "land_cells": 80,
+    "inland_water_cells": 0,
+    "source_relative_cells": 0,
+    "interval_segments": 54,
+    "owners": [
+      27081,
+      27082,
+      27083,
+      27084,
+      27085,
+      27086,
+      27087,
+      27088
+    ],
+    "source_features": [
+      41653,
+      41660,
+      41661,
+      41662,
+      41663,
+      41665,
+      41667,
+      41668
+    ],
+    "source_families": [
+      191
+    ],
+    "native_blocks": [
+      25,
+      26
+    ],
+    "provinces": [
+      "framework:province:al-marj:759d40f93b1d",
+      "framework:province:al-marqab:d15b25c0fa5d",
+      "framework:province:al-qubbah:700d89ea3343",
+      "framework:province:an-nuqat-al-khams:56fc49c97b26",
+      "framework:province:benghazi:f5da131bbf9a",
+      "framework:province:misratah:ad670ed3ffc9",
+      "framework:province:surt:20eb44c7cad3",
+      "framework:province:tajura-wa-an-nawahi-al-arba:ffbca0953d3a"
+    ],
+    "location_count": 8,
+    "source_feature_count": 8,
+    "locality_count": 8,
+    "cost": {
+      "primary_source_decoded_bytes": 77388,
+      "all_required_source_decoded_bytes": 77388,
+      "primary_full_source_raster_measured_seconds": 0.251,
+      "source_interval_segments": 54,
+      "maximum_native_rows_per_execution_frame": 4096,
+      "observed_global_census_peak_rss_bytes": 884973568
+    },
+    "evidence": {
+      "selection": "ownership-binding.json",
+      "lineage": "lineage.json",
+      "territorial_source_catalogue": "retained-source-catalogue.json",
+      "territorial_catalogue_sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "source_features": "source-feature-roster.json",
+      "territorial_native_blocks": "source-candidates-block-NNN.json.gz",
+      "physical": "physical-unassigned-summary.json",
+      "source_domain_transform": []
+    },
+    "work": {
+      "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+      "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+      "priority": 1
+    },
+    "execution": {
+      "command": "node source-batch-intervals.mjs gb-LBY-ADM1--repair-evaluation OUTPUT_DIRECTORY",
+      "output_columns": [
+        "y",
+        "start",
+        "end",
+        "candidate_owner_indices",
+        "source_feature_indices",
+        "physical_class"
+      ]
+    }
+  },
+  "original_intervals": [
+    {
+      "block": 25,
+      "rows": [
+        [
+          105497,
+          139608,
+          139610,
+          [
+            27086
+          ],
+          [
+            41653
+          ],
+          "land"
+        ],
+        [
+          105498,
+          139609,
+          139612,
+          [
+            27086
+          ],
+          [
+            41653
+          ],
+          "land"
+        ],
+        [
+          105499,
+          139612,
+          139614,
+          [
+            27086
+          ],
+          [
+            41653
+          ],
+          "land"
+        ],
+        [
+          105500,
+          139615,
+          139616,
+          [
+            27086
+          ],
+          [
+            41653
+          ],
+          "land"
+        ],
+        [
+          105502,
+          139621,
+          139622,
+          [
+            27086
+          ],
+          [
+            41653
+          ],
+          "land"
+        ],
+        [
+          105505,
+          139630,
+          139633,
+          [
+            27086
+          ],
+          [
+            41653
+          ],
+          "land"
+        ],
+        [
+          105506,
+          139633,
+          139637,
+          [
+            27086
+          ],
+          [
+            41653
+          ],
+          "land"
+        ],
+        [
+          105507,
+          139636,
+          139641,
+          [
+            27086
+          ],
+          [
+            41653
+          ],
+          "land"
+        ],
+        [
+          105508,
+          139639,
+          139643,
+          [
+            27086
+          ],
+          [
+            41653
+          ],
+          "land"
+        ],
+        [
+          105509,
+          139643,
+          139645,
+          [
+            27086
+          ],
+          [
+            41653
+          ],
+          "land"
+        ],
+        [
+          105510,
+          139646,
+          139648,
+          [
+            27086
+          ],
+          [
+            41653
+          ],
+          "land"
+        ],
+        [
+          105511,
+          139649,
+          139650,
+          [
+            27086
+          ],
+          [
+            41653
+          ],
+          "land"
+        ],
+        [
+          105512,
+          139652,
+          139653,
+          [
+            27086
+          ],
+          [
+            41653
+          ],
+          "land"
+        ],
+        [
+          105513,
+          139655,
+          139656,
+          [
+            27086
+          ],
+          [
+            41653
+          ],
+          "land"
+        ],
+        [
+          105690,
+          140817,
+          140818,
+          [
+            27083
+          ],
+          [
+            41663
+          ],
+          "land"
+        ],
+        [
+          105691,
+          140818,
+          140819,
+          [
+            27083
+          ],
+          [
+            41663
+          ],
+          "land"
+        ],
+        [
+          105697,
+          140828,
+          140829,
+          [
+            27083
+          ],
+          [
+            41663
+          ],
+          "land"
+        ],
+        [
+          105704,
+          140841,
+          140842,
+          [
+            27083
+          ],
+          [
+            41663
+          ],
+          "land"
+        ],
+        [
+          105724,
+          147395,
+          147396,
+          [
+            27082
+          ],
+          [
+            41665
+          ],
+          "land"
+        ],
+        [
+          105796,
+          146610,
+          146611,
+          [
+            27084
+          ],
+          [
+            41667
+          ],
+          "land"
+        ],
+        [
+          105797,
+          146599,
+          146600,
+          [
+            27084
+          ],
+          [
+            41667
+          ],
+          "land"
+        ],
+        [
+          105917,
+          141504,
+          141505,
+          [
+            27087
+          ],
+          [
+            41662
+          ],
+          "land"
+        ],
+        [
+          105929,
+          141519,
+          141520,
+          [
+            27087
+          ],
+          [
+            41662
+          ],
+          "land"
+        ],
+        [
+          105937,
+          147918,
+          147919,
+          [
+            27082
+          ],
+          [
+            41665
+          ],
+          "land"
+        ],
+        [
+          105939,
+          147917,
+          147918,
+          [
+            27082
+          ],
+          [
+            41665
+          ],
+          "land"
+        ],
+        [
+          105941,
+          147916,
+          147917,
+          [
+            27082
+          ],
+          [
+            41665
+          ],
+          "land"
+        ],
+        [
+          105942,
+          147915,
+          147917,
+          [
+            27082
+          ],
+          [
+            41665
+          ],
+          "land"
+        ],
+        [
+          105943,
+          147915,
+          147916,
+          [
+            27082
+          ],
+          [
+            41665
+          ],
+          "land"
+        ],
+        [
+          105944,
+          147914,
+          147915,
+          [
+            27082
+          ],
+          [
+            41665
+          ],
+          "land"
+        ],
+        [
+          105947,
+          147912,
+          147913,
+          [
+            27082
+          ],
+          [
+            41665
+          ],
+          "land"
+        ],
+        [
+          106223,
+          147982,
+          147984,
+          [
+            27082
+          ],
+          [
+            41665
+          ],
+          "land"
+        ],
+        [
+          106224,
+          147983,
+          147984,
+          [
+            27082
+          ],
+          [
+            41665
+          ],
+          "land"
+        ],
+        [
+          106225,
+          147984,
+          147985,
+          [
+            27082
+          ],
+          [
+            41665
+          ],
+          "land"
+        ],
+        [
+          106226,
+          147985,
+          147986,
+          [
+            27082
+          ],
+          [
+            41665
+          ],
+          "land"
+        ],
+        [
+          106227,
+          147985,
+          147986,
+          [
+            27082
+          ],
+          [
+            41665
+          ],
+          "land"
+        ],
+        [
+          106228,
+          147986,
+          147988,
+          [
+            27082
+          ],
+          [
+            41665
+          ],
+          "land"
+        ],
+        [
+          106229,
+          147987,
+          147989,
+          [
+            27082
+          ],
+          [
+            41665
+          ],
+          "land"
+        ],
+        [
+          106230,
+          147987,
+          147989,
+          [
+            27082
+          ],
+          [
+            41665
+          ],
+          "land"
+        ],
+        [
+          106231,
+          147988,
+          147990,
+          [
+            27082
+          ],
+          [
+            41665
+          ],
+          "land"
+        ],
+        [
+          106232,
+          147989,
+          147991,
+          [
+            27082
+          ],
+          [
+            41665
+          ],
+          "land"
+        ],
+        [
+          106233,
+          147990,
+          147991,
+          [
+            27082
+          ],
+          [
+            41665
+          ],
+          "land"
+        ],
+        [
+          106234,
+          147990,
+          147991,
+          [
+            27082
+          ],
+          [
+            41665
+          ],
+          "land"
+        ],
+        [
+          106480,
+          145615,
+          145616,
+          [
+            27088
+          ],
+          [
+            41668
+          ],
+          "land"
+        ],
+        [
+          106483,
+          145613,
+          145614,
+          [
+            27088
+          ],
+          [
+            41668
+          ],
+          "land"
+        ],
+        [
+          106485,
+          145612,
+          145613,
+          [
+            27088
+          ],
+          [
+            41668
+          ],
+          "land"
+        ],
+        [
+          106486,
+          145611,
+          145612,
+          [
+            27088
+          ],
+          [
+            41668
+          ],
+          "land"
+        ],
+        [
+          106487,
+          145610,
+          145612,
+          [
+            27088
+          ],
+          [
+            41668
+          ],
+          "land"
+        ],
+        [
+          106488,
+          145610,
+          145611,
+          [
+            27088
+          ],
+          [
+            41668
+          ],
+          "land"
+        ],
+        [
+          106489,
+          145609,
+          145610,
+          [
+            27088
+          ],
+          [
+            41668
+          ],
+          "land"
+        ],
+        [
+          106490,
+          145609,
+          145610,
+          [
+            27088
+          ],
+          [
+            41668
+          ],
+          "land"
+        ]
+      ]
+    },
+    {
+      "block": 26,
+      "rows": [
+        [
+          106985,
+          142558,
+          142559,
+          [
+            27085
+          ],
+          [
+            41661
+          ],
+          "land"
+        ],
+        [
+          107205,
+          143546,
+          143547,
+          [
+            27081
+          ],
+          [
+            41660
+          ],
+          "land"
+        ],
+        [
+          107513,
+          144342,
+          144343,
+          [
+            27081
+          ],
+          [
+            41660
+          ],
+          "land"
+        ],
+        [
+          107616,
+          144437,
+          144438,
+          [
+            27081
+          ],
+          [
+            41660
+          ],
+          "land"
+        ]
+      ]
+    }
+  ],
+  "original_intervals_sha256": "4306b2bc62c10eb301b695c43809f2c383eb559bbcd42d35b86ac7482fb9f8b3",
+  "query_count": 80,
+  "query_encoding": "JSON.stringify([{x,y},...]) in input order, followed by LF",
+  "query_sha256": "c0dfc6a4721337680341549c4035910b15847e4cca2cdaf8ae147496f2b07bca",
+  "selector_pin": {
+    "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+    "path": "data/ownership-selection.json",
+    "mode": "100644",
+    "git_blob_oid": "07c21155f2234de548c5794ae9311ca33f944935",
+    "bytes": 1842,
+    "sha256": "ac056c7db58325419fe19c45a30ca21beeb9bbcad296722775c7bd1ba3a29e44",
+    "whole_body_consumed": true
+  },
+  "native_manifest_sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+  "patch_pin": {
+    "bytes": 30387803,
+    "commit": "f90f0053c515fbbdacf9dc3292c0fe145238600c",
+    "git_blob_oid": "5e300bc6c0495a0d39182db629494723fc050c50",
+    "mode": "100644",
+    "path": "coordination/engineering/png-nine-selected-delivery-20261018/composition-001/patch.json",
+    "sha256": "3142f0be5e910ae7bd13800fc7d0e9562c16d7116736ff2a03ecd0958cb73215"
+  },
+  "row_member": {
+    "kind": "rows",
+    "offset": 0,
+    "words": 524332,
+    "path": "native-v1/ownership/rows-0.bin.gz",
+    "bytes": 306620,
+    "sha256": "89ed3564db641f992746bf4f6f01c1eed89cb470520734ac1b85ee95e9a70ba0",
+    "decoded_bytes": 2097328,
+    "decoded_sha256": "e9044c8304a47cd0d0acbb306bd31c2ba15f71e57648ab7d1581a6a77a875294",
+    "encoding": "byte-shuffle"
+  },
+  "run_members": [
+    {
+      "kind": "runs",
+      "offset": 29360128,
+      "words": 1048576,
+      "path": "native-v1/ownership/runs-29360128.bin.gz",
+      "bytes": 806418,
+      "sha256": "0a80d9d83cdb9b719a9215029eb599517e8d9c79afca1d7ed363dea21485a8b5",
+      "decoded_bytes": 4194304,
+      "decoded_sha256": "edb4c3652a3ba7f403e29724382284fcd884bffe244bbbd0c0afd2c8f39fbbb5",
+      "encoding": "byte-shuffle"
+    },
+    {
+      "kind": "runs",
+      "offset": 30408704,
+      "words": 1048576,
+      "path": "native-v1/ownership/runs-30408704.bin.gz",
+      "bytes": 808805,
+      "sha256": "16f47da696532d5f2218611d41566db0821eca7da443ed0c808bd04484dce828",
+      "decoded_bytes": 4194304,
+      "decoded_sha256": "6e35d60c630d99e4891ae1456d7f76136ee5afa583c51536b6a736d00fe96f65",
+      "encoding": "byte-shuffle"
+    },
+    {
+      "kind": "runs",
+      "offset": 31457280,
+      "words": 1048576,
+      "path": "native-v1/ownership/runs-31457280.bin.gz",
+      "bytes": 832804,
+      "sha256": "84e4c5eebe7be349fbad0fae7b448c438a3a40c6c255132f28206f5e50854ff4",
+      "decoded_bytes": 4194304,
+      "decoded_sha256": "030a6b205fedc65d0d26299f331e012243b2df801c482103109a6080f5388f72",
+      "encoding": "byte-shuffle"
+    }
+  ],
+  "native_latitudes": {
+    "root": "repository",
+    "role": "immutable-normative-rule-input",
+    "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+    "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+    "bytes": 1851757,
+    "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+    "decoded_bytes": 2097328,
+    "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+  },
+  "consumed_latitudes": {
+    "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+    "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+    "mode": "100644",
+    "git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53",
+    "bytes": 1851757,
+    "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+    "whole_body_consumed": true
+  },
+  "latitude_whole_body_alias": true,
+  "keys": [
+    {
+      "x": 139608,
+      "y": 105497,
+      "latitude": 33.11840601010266,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139609,
+      "y": 105497,
+      "latitude": 33.11840601010266,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139609,
+      "y": 105498,
+      "latitude": 33.117255908484914,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139610,
+      "y": 105498,
+      "latitude": 33.117255908484914,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139611,
+      "y": 105498,
+      "latitude": 33.117255908484914,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139612,
+      "y": 105499,
+      "latitude": 33.116105791807456,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139613,
+      "y": 105499,
+      "latitude": 33.116105791807456,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139615,
+      "y": 105500,
+      "latitude": 33.11495566007054,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139621,
+      "y": 105502,
+      "latitude": 33.11265535141942,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139630,
+      "y": 105505,
+      "latitude": 33.10920477550349,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139631,
+      "y": 105505,
+      "latitude": 33.10920477550349,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139632,
+      "y": 105505,
+      "latitude": 33.10920477550349,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139633,
+      "y": 105506,
+      "latitude": 33.108054553415464,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139634,
+      "y": 105506,
+      "latitude": 33.108054553415464,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139635,
+      "y": 105506,
+      "latitude": 33.108054553415464,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139636,
+      "y": 105506,
+      "latitude": 33.108054553415464,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139636,
+      "y": 105507,
+      "latitude": 33.10690431626983,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139637,
+      "y": 105507,
+      "latitude": 33.10690431626983,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139638,
+      "y": 105507,
+      "latitude": 33.10690431626983,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139639,
+      "y": 105507,
+      "latitude": 33.10690431626983,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139640,
+      "y": 105507,
+      "latitude": 33.10690431626983,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139639,
+      "y": 105508,
+      "latitude": 33.10575406406689,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139640,
+      "y": 105508,
+      "latitude": 33.10575406406689,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139641,
+      "y": 105508,
+      "latitude": 33.10575406406689,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139642,
+      "y": 105508,
+      "latitude": 33.10575406406689,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139643,
+      "y": 105509,
+      "latitude": 33.10460379680688,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139644,
+      "y": 105509,
+      "latitude": 33.10460379680688,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139646,
+      "y": 105510,
+      "latitude": 33.103453514490084,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139647,
+      "y": 105510,
+      "latitude": 33.103453514490084,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139649,
+      "y": 105511,
+      "latitude": 33.10230321711678,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139652,
+      "y": 105512,
+      "latitude": 33.101152904687204,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 139655,
+      "y": 105513,
+      "latitude": 33.100002577201636,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 140817,
+      "y": 105690,
+      "latitude": 32.89615768701624,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 140818,
+      "y": 105691,
+      "latitude": 32.89500468383831,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 140828,
+      "y": 105697,
+      "latitude": 32.88808634961601,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 140841,
+      "y": 105704,
+      "latitude": 32.88001427691244,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 147395,
+      "y": 105724,
+      "latitude": 32.856947161205845,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 146610,
+      "y": 105796,
+      "latitude": 32.773855884169905,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 146599,
+      "y": 105797,
+      "latitude": 32.77270129167983,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 141504,
+      "y": 105917,
+      "latitude": 32.63404152553696,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 141519,
+      "y": 105929,
+      "latitude": 32.62016370400564,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 147918,
+      "y": 105937,
+      "latitude": 32.610910627563676,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 147917,
+      "y": 105939,
+      "latitude": 32.608597209045946,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 147916,
+      "y": 105941,
+      "latitude": 32.60628373076979,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 147915,
+      "y": 105942,
+      "latitude": 32.605126969222994,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 147916,
+      "y": 105942,
+      "latitude": 32.605126969222994,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 147915,
+      "y": 105943,
+      "latitude": 32.60397019273742,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 147914,
+      "y": 105944,
+      "latitude": 32.602813401313355,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 147912,
+      "y": 105947,
+      "latitude": 32.59934293741297,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 147982,
+      "y": 106223,
+      "latitude": 32.27948612291093,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 147983,
+      "y": 106223,
+      "latitude": 32.27948612291093,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 147983,
+      "y": 106224,
+      "latitude": 32.27832515977208,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 147984,
+      "y": 106225,
+      "latitude": 32.27716418177414,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 147985,
+      "y": 106226,
+      "latitude": 32.276003188917365,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 147985,
+      "y": 106227,
+      "latitude": 32.27484218120208,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 147986,
+      "y": 106228,
+      "latitude": 32.27368115862858,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 147987,
+      "y": 106228,
+      "latitude": 32.27368115862858,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 147987,
+      "y": 106229,
+      "latitude": 32.272520121197104,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 147988,
+      "y": 106229,
+      "latitude": 32.272520121197104,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 147987,
+      "y": 106230,
+      "latitude": 32.271359068907955,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 147988,
+      "y": 106230,
+      "latitude": 32.271359068907955,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 147988,
+      "y": 106231,
+      "latitude": 32.27019800176144,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 147989,
+      "y": 106231,
+      "latitude": 32.27019800176144,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 147989,
+      "y": 106232,
+      "latitude": 32.26903691975782,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 147990,
+      "y": 106232,
+      "latitude": 32.26903691975782,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 147990,
+      "y": 106233,
+      "latitude": 32.26787582289741,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 147990,
+      "y": 106234,
+      "latitude": 32.26671471118047,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 145615,
+      "y": 106480,
+      "latitude": 31.980630597447803,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 145613,
+      "y": 106483,
+      "latitude": 31.977136235823842,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 145612,
+      "y": 106485,
+      "latitude": 31.974806587487606,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 145611,
+      "y": 106486,
+      "latitude": 31.97364174114429,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 145610,
+      "y": 106487,
+      "latitude": 31.9724768800179,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 145611,
+      "y": 106487,
+      "latitude": 31.9724768800179,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 145610,
+      "y": 106488,
+      "latitude": 31.971312004108732,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 145609,
+      "y": 106489,
+      "latitude": 31.97014711341708,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 145609,
+      "y": 106490,
+      "latitude": 31.96898220794324,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 142558,
+      "y": 106985,
+      "latitude": 31.39054538578003,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 143546,
+      "y": 107205,
+      "latitude": 31.13230928834881,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 144342,
+      "y": 107513,
+      "latitude": 30.769595248532266,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    },
+    {
+      "x": 144437,
+      "y": 107616,
+      "latitude": 30.647991355271685,
+      "base_owner": 0,
+      "accepted_additive_owner": 0,
+      "effective_selected_owner": 0,
+      "owner_id": null,
+      "existing_product_overlap": false
+    }
+  ],
+  "execution_code": [
+    {
+      "path": "scripts/run-geographic-check.py",
+      "bytes": 30910,
+      "mode": 420,
+      "sha256": "aa45ab9676bd9dca6f156f3d483f4a4cd3874e5710f2e7c6fbbf0c052fb0a2da"
+    },
+    {
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "bytes": 97109,
+      "mode": 420,
+      "sha256": "136e49006c84a35ea4e06d79bc1d2d222bd73343717694f8d5718937f76b816c"
+    },
+    {
+      "path": "src/native-grid.js",
+      "bytes": 53197,
+      "mode": 420,
+      "sha256": "3d20777f5896d28192e40428dd34cab89d47873a08bf073a17338c4ff97d43cd"
+    },
+    {
+      "path": "src/ownership-codec.js",
+      "bytes": 2948,
+      "mode": 420,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "bytes": 234923,
+      "mode": 420,
+      "sha256": "ff37dc7a69b2cd692e0adaf8627a7d9e0f2cff21f34b6e636df6d7d7623c11ba"
+    },
+    {
+      "path": "scripts/selected-reference-metadata.mjs",
+      "bytes": 10403,
+      "mode": 420,
+      "sha256": "369352d4b78a862fd79ea88bcc6420fbec9ea8d80348dd2d3b6a122dc5dd2a5d"
+    },
+    {
+      "path": "src/reference-metadata.js",
+      "bytes": 25758,
+      "mode": 420,
+      "sha256": "15130cb6bb9cd0cb32879de01ca13d8e8d96490cce6fc2640e5e406bcfc6cf02"
+    },
+    {
+      "path": "scripts/observe-selected-owners.mjs",
+      "bytes": 15574,
+      "sha256": "b19c2db01f4535d02b0cfce682f51f92e37a70ea19ba1ff3f9c5a12183abb8c1"
+    },
+    {
+      "path": "scripts/native-word-store.mjs",
+      "bytes": 3389,
+      "sha256": "199425e178b7cb2ac62538d428581f17517c201f524a0cf3307d16d9a79840bd"
+    },
+    {
+      "path": "scripts/native-patch-store.mjs",
+      "bytes": 42142,
+      "sha256": "05175fe3b3b5b747c1d825ff10e713cd555185a269cf08914acebf347534c495"
+    },
+    {
+      "path": "src/pixel-ownership.js",
+      "bytes": 6134,
+      "sha256": "da8e0b4f05e5ce390b47713030bffeefb7ea0df2700f7c358a9ebe77fe92586f"
+    },
+    {
+      "path": "src/pixel-grid.js",
+      "bytes": 3699,
+      "sha256": "ad31039b651e157480eaf0053787b119bdab4b9a2a699e5f6a05d396736c7595"
+    },
+    {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs",
+      "bytes": 7439,
+      "sha256": "bf40d1a98f466adacda04055ac3f3d9d7afe855941f9e2ca3106d99d2c1fff21"
+    }
+  ],
+  "consumed_inputs": [
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "scripts/run-geographic-check.py",
+      "mode": "100644",
+      "git_blob_oid": "aa34cb268a3b826ef74601a69852b86bb5b49782",
+      "bytes": 30910,
+      "sha256": "aa45ab9676bd9dca6f156f3d483f4a4cd3874e5710f2e7c6fbbf0c052fb0a2da",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "mode": "100644",
+      "git_blob_oid": "ede85b72423e347bf15d30567ac22c643c423c69",
+      "bytes": 97109,
+      "sha256": "136e49006c84a35ea4e06d79bc1d2d222bd73343717694f8d5718937f76b816c",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "src/native-grid.js",
+      "mode": "100644",
+      "git_blob_oid": "add4cef02bb5a790f22a9078fdf9bd51679059d3",
+      "bytes": 53197,
+      "sha256": "3d20777f5896d28192e40428dd34cab89d47873a08bf073a17338c4ff97d43cd",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "src/ownership-codec.js",
+      "mode": "100644",
+      "git_blob_oid": "03eacc9bcb1bff03723a93c248ea6de5f2fed5e4",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "mode": "100644",
+      "git_blob_oid": "ccd128029e0b9522c29acb4bbc5bd35f36f2d1dd",
+      "bytes": 234923,
+      "sha256": "ff37dc7a69b2cd692e0adaf8627a7d9e0f2cff21f34b6e636df6d7d7623c11ba",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "scripts/selected-reference-metadata.mjs",
+      "mode": "100644",
+      "git_blob_oid": "38c941e96aee6a0cc62615b7d797e51439570c42",
+      "bytes": 10403,
+      "sha256": "369352d4b78a862fd79ea88bcc6420fbec9ea8d80348dd2d3b6a122dc5dd2a5d",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "src/reference-metadata.js",
+      "mode": "100644",
+      "git_blob_oid": "7db5ba2883a6d8542f830b25e54d96c7d837a187",
+      "bytes": 25758,
+      "sha256": "15130cb6bb9cd0cb32879de01ca13d8e8d96490cce6fc2640e5e406bcfc6cf02",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "scripts/observe-selected-owners.mjs",
+      "mode": "100644",
+      "git_blob_oid": "b8538b4c5cf8dede5e7ab770ce741993a7dda448",
+      "bytes": 15574,
+      "sha256": "b19c2db01f4535d02b0cfce682f51f92e37a70ea19ba1ff3f9c5a12183abb8c1",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "scripts/native-word-store.mjs",
+      "mode": "100644",
+      "git_blob_oid": "07a7d06cd7a0c030fcf4327faaf2b69fe5a37dbb",
+      "bytes": 3389,
+      "sha256": "199425e178b7cb2ac62538d428581f17517c201f524a0cf3307d16d9a79840bd",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "scripts/native-patch-store.mjs",
+      "mode": "100644",
+      "git_blob_oid": "c4afd08b55e176b90ade259d80059f2393bb54b5",
+      "bytes": 42142,
+      "sha256": "05175fe3b3b5b747c1d825ff10e713cd555185a269cf08914acebf347534c495",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "src/pixel-ownership.js",
+      "mode": "100644",
+      "git_blob_oid": "de88d87bea5ddca72c5816b1356ab18b9795f985",
+      "bytes": 6134,
+      "sha256": "da8e0b4f05e5ce390b47713030bffeefb7ea0df2700f7c358a9ebe77fe92586f",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "src/pixel-grid.js",
+      "mode": "100644",
+      "git_blob_oid": "008aaf69e65105029e64e09317b8f9aa4df1f352",
+      "bytes": 3699,
+      "sha256": "ad31039b651e157480eaf0053787b119bdab4b9a2a699e5f6a05d396736c7595",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs",
+      "mode": "100644",
+      "git_blob_oid": "e9b1c4d84a7117db58fb4f29c9fb193c5d6b7cdc",
+      "bytes": 7439,
+      "sha256": "bf40d1a98f466adacda04055ac3f3d9d7afe855941f9e2ca3106d99d2c1fff21",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "data/ownership-selection.json",
+      "mode": "100644",
+      "git_blob_oid": "07c21155f2234de548c5794ae9311ca33f944935",
+      "bytes": 1842,
+      "sha256": "ac056c7db58325419fe19c45a30ca21beeb9bbcad296722775c7bd1ba3a29e44",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+      "mode": "100644",
+      "git_blob_oid": "31d970d0fe2bf8c899f020aad09a3826ea451790",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+      "mode": "100644",
+      "git_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+      "bytes": 1754890,
+      "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+      "bytes": 1844315,
+      "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-raster-summary.json",
+      "mode": "100644",
+      "git_blob_oid": "e17b10b5643c1f6b0c492d02edc70a0d7afc5ee3",
+      "bytes": 110705,
+      "sha256": "2eec390eb9f9b6595bd0f3c7059b75f271dba013fbad0b3ac0c404114d48eea9",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-census-summary.json",
+      "mode": "100644",
+      "git_blob_oid": "fa1e4d101edb54b02bd1ff42a240f2f80ac65832",
+      "bytes": 120963,
+      "sha256": "8a4a6792237259328e56e38d91d0cb22f977de4a35caf4781f0d605e3db1653d",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-unassigned-summary.json",
+      "mode": "100644",
+      "git_blob_oid": "0c934cdaf4b007a741e66d4a080890154bdae53c",
+      "bytes": 154672,
+      "sha256": "a82c56c1d92ff52c0b0e52c9bf329905a05bace4b6a27c12771509d419888501",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "4ef0728e74e11e069bd7bb11e287c6fbb59946fa",
+      "bytes": 4404456,
+      "sha256": "bacfc99714f832aa4b5719b9fb4ae9837080b948f10df9e9be2b150b281e20d4",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/ownership-binding.json",
+      "mode": "100644",
+      "git_blob_oid": "b9d81d18aab6d03dc701ff1337b35e53be81d0af",
+      "bytes": 3048,
+      "sha256": "b952192475435c8fbc74a84627994aff4f4e073c36c479d369554fc75251bc89",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/retained-source-catalogue.json",
+      "mode": "100644",
+      "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/normalized-source-seams.json",
+      "mode": "100644",
+      "git_blob_oid": "e22b6270aaf9c27dd3d21381d757b6c34ab81d7b",
+      "bytes": 156199,
+      "sha256": "0e74bb81ae45ae9913ee5d43afd303fa33a4b7da8b06e4e6f1cd4419ecd264b4",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-025.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "778c6a09c3eb47686c21ed993d3b10d8f875bec9",
+      "bytes": 463017,
+      "sha256": "3949a150d960a3bb0591f2d76d1752532f0dd5e5001909748ad2a58322efa76e",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-025.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "7549ff877ffa8b9fad68d2e72beded008b5ad0fa",
+      "bytes": 401770,
+      "sha256": "28caabab2857b01a6191637b690e2b0d128bac8b3e2ba45aaae0e5ee44072b44",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-025.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "1bd541342b150ae6a945557e37fbc2ec9ad35276",
+      "bytes": 258,
+      "sha256": "6c0ec3db20bf6278b142e7df333e1f864b7d4850810cf6cad8eaef832ec38aec",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-026.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "9c1dc50879a40f6e24a996e761b913fca8dbda61",
+      "bytes": 440574,
+      "sha256": "fc85e70b9caef53bb4a34d0df4c617bd0046aed029eca3b14eb8cea52e9e9707",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-026.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "355559350599390e256bd1180bcfaf6723504068",
+      "bytes": 390394,
+      "sha256": "8c263a02fe617bcd4844473c9237a8868c134860649022b7ad2e2b7371584fa2",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-026.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "cf49a65b32bbd2ab296e873a72da981ae6cc44a6",
+      "bytes": 4376,
+      "sha256": "703c18aee9e56cd3635eff1d4c8a4998bdf61497965883c27e41717b426edf16",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/png-nine-selected-delivery-20261018/ownership-selection-png-nine.json",
+      "mode": "100644",
+      "git_blob_oid": "866e608a4799d29ae8277258a09eec9b0b45cd77",
+      "bytes": 3456,
+      "sha256": "bb55c11e282b27eea3b569b2bb4847039077a5a4a5ccebb649f60182adb49cc3",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/base-native-manifest.json",
+      "mode": "100644",
+      "git_blob_oid": "31d970d0fe2bf8c899f020aad09a3826ea451790",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "mode": "100644",
+      "git_blob_oid": "9c44513df64995d417dd3832ae604c703e84a506",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/png-nine-selected-delivery-20261018/composition-001/runtime-envelope.json",
+      "mode": "100644",
+      "git_blob_oid": "d71d79694f2ebae9a58a3f3b5fd5acea311903c5",
+      "bytes": 1385,
+      "sha256": "9ec6e4a8d76bd4623a1e1c07d3d719445ab081f13dad828c06906bd550b2722f",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/png-nine-selected-delivery-20261018/composition-001/authority-registry.json",
+      "mode": "100644",
+      "git_blob_oid": "2e80ed3916422c7d693d23dd3e586e96a3267db3",
+      "bytes": 248663,
+      "sha256": "6e85750b1cf05e47085a54f3d670e8279ef110d83dc1e91402a1f8251e409e72",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "mode": "100644",
+      "git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53",
+      "bytes": 1851757,
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/index.json",
+      "mode": "100644",
+      "git_blob_oid": "f9e9bb67281cec0ceeb3b8d7a5cf94616f26c32c",
+      "bytes": 21330,
+      "sha256": "91b868b66f52d3051a09b88a84411f7c70f38de9528a0166a8fb16dcdc71ba02",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-00/part-000.bin.gz",
+      "mode": "100644",
+      "git_blob_oid": "359bfc9c3b80f2d0b60fa2cc859aaaebdeb6b22f",
+      "bytes": 16773351,
+      "sha256": "74dd9af0c01fa5552b9af60d03935eb97b56bf6685c5bf964862d3b2b5d2b22d",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-00/part-001.bin.gz",
+      "mode": "100644",
+      "git_blob_oid": "cb66918463d3df91d87c3d2a73a3ca9fe06b86b8",
+      "bytes": 6533385,
+      "sha256": "c06a881c56cd5b2a4a26b82a326ffba37a5b27169f93a296b4c987bea1e4e211",
+      "whole_body_consumed": true
+    },
+    {
+      "commit": "4ee730a4754e7dde5ef299265126a7dd28cc10a6",
+      "path": "coordination/engineering/png-nine-selected-delivery-20261018/composition-001/patch.json",
+      "mode": "100644",
+      "git_blob_oid": "5e300bc6c0495a0d39182db629494723fc050c50",
+      "bytes": 30387803,
+      "sha256": "3142f0be5e910ae7bd13800fc7d0e9562c16d7116736ff2a03ecd0958cb73215",
+      "whole_body_consumed": true
+    }
+  ],
+  "limits": [
+    "Literal selected-product observation of this original queue package; not source applicability, a package qualification certificate or complete repair acceptance.",
+    "Original interval classes retain the queue mask observations, not current physical qualification.",
+    "No current physical water/land classification, source applicability, geometric overlay, repair acceptance or publication approval is asserted.",
+    "Base and patch remain separate; an existing overlap reports null, never invented precedence. Intervals are [start,end-exclusive,owner-index].",
+    "Ledger body and source authorities are not reread; only the selected ledger digest is joined to authenticated patch metadata."
+  ]
+}
