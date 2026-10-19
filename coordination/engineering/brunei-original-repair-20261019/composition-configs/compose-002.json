@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "selector": {
+    "commit": "44b50b4e4a84ce1c8bbb089fe9dda17b71a5b530",
+    "path": "data/ownership-selection.json",
+    "bytes": 1842,
+    "git_blob_oid": "7e5d68bc825d6bdbdb1bd2034cb475a77eecb96e",
+    "sha256": "b1d9f2ec86fe499023549ae54d9dd43bfd11b0d0410a01a3af1291c5a2ccc32a",
+    "mode": "100644"
+  },
+  "effective_release_id": "geography:review:brn828-delivery-candidate-20261019",
+  "authorities": [
+    {
+      "rule_preimage": {
+        "commit": "a8a3b4a916d0e6c04a27b804a99a498e972ef3d0",
+        "path": "coordination/engineering/brunei-original-repair-20261019/native-authority-001/output/original-rule-preimage.json",
+        "bytes": 748,
+        "git_blob_oid": "ba4ef186eb9750bfbd64fdf10d24c5764f1e904e",
+        "sha256": "1ddd33dc2541fe72ed04b487e3677d2bf8501d7d575f386815cfce09fac1d0b1",
+        "mode": "100644"
+      },
+      "source_authority": {
+        "commit": "a8a3b4a916d0e6c04a27b804a99a498e972ef3d0",
+        "path": "coordination/engineering/brunei-original-repair-20261019/native-authority-001/output/authority-binding.json",
+        "bytes": 751,
+        "git_blob_oid": "c70ab60eb3be6671ba567fc9d33c07f6c5c47092",
+        "sha256": "119c73ab5b559bb6a359e01f40142459e91b1b0fae9f141f927569660f7399b8",
+        "mode": "100644"
+      },
+      "ledger": {
+        "commit": "a8a3b4a916d0e6c04a27b804a99a498e972ef3d0",
+        "path": "coordination/engineering/brunei-original-repair-20261019/native-authority-001/output/constructor-result.json",
+        "bytes": 26225,
+        "git_blob_oid": "36d5704f72ab1c12d465396f3fc463895549652a",
+        "sha256": "a4749ee928c7f98b53e9a18dd66575f81fb7cf51f62db5a74b0c5c8dee1d4bc9",
+        "mode": "100644"
+      },
+      "native_patch": {
+        "commit": "38a068dcb56ba8709ce5c791ea32944f5e26dd2f",
+        "path": "coordination/engineering/brunei-original-repair-20261019/supported-inputs-001/output/native-patch.json",
+        "bytes": 10923,
+        "git_blob_oid": "86452ed6e659e46f004bd10abbb3dc62e833d2dd",
+        "sha256": "caaee544c031a432a40b1ae1653eec9a8f6c0815205fb4b52f836467692f5c73",
+        "mode": "100644"
+      }
+    }
+  ]
+}
