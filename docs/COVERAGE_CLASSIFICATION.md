@@ -47,8 +47,20 @@ its columns are the original package's `execution.output_columns` (end is exclus
 Use its recorded owner/source-feature indices and original mask class directly, rather
 than reconstructing them or replacing them with null. These are original queue observations,
 not current physical or source qualification.
-Use a Git implementation accepting `git --no-lazy-fetch --version`; a missing
-required blob stops rather than fetching geometry or changing the reader's rules.
+Use a Git implementation accepting `git --no-lazy-fetch --version`. The same command
+now acquires missing immutable inputs explicitly, instead of requiring a separate
+fetch/resume loop. It derives every package block and native input from authenticated
+metadata, batches only exact tree-bound missing OIDs through the existing transport,
+and checks declared object growth against actual free disk. Executable code and
+commit/tree metadata must already be local. Size lookup uses only exact containing
+directory trees, never a recursive repository inventory. All selected native
+fragments must be available for the existing descriptor checks; only required
+logical row/run members are decoded. `GIT_NO_LAZY_FETCH=1`
+remains mandatory: no implicit graph fetch, world-source prefetch, or alternate reader
+is enabled. Existing objects are reused without a fetch; corruption, denied/unavailable
+transport or insufficient space stops without a final observation. Imported objects
+remain available for an ordinary retry. Acquisition byte totals describe declared Git
+blob bodies, not network transfer, peak memory or a complete disk-growth guarantee.
 
 This replaces the separately transferred owner-example, latitude-companion and
 package-specific finalizer recipes. It reads the selected retained additive product,
