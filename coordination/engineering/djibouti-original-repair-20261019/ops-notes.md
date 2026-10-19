@@ -182,3 +182,38 @@ is 37,696 bytes, SHA-256
 `7225eef7058b2ed5136cc31f5488d3b9daf00088859eb095ffde09ef084611d2`. The
 v2 full patch still contains 683 cells and 394 intervals. This format repair
 changes no source pins or scientific interpretation.
+
+## Native-diagnostic blocker and independent review
+
+The exact-head review of v2 at `523c774ddf481497d3ea3acb12fdeb0449948b4d`
+confirmed the source-evidence output hash and structure: all nine requested
+owners, 331 distinct y rows, 394 intervals and 683 cells; the owner set matches
+the nine-target roster. The positive family is the complete 11-feature
+`gb:DJI:ADM2`; all six DJI ADM1 features and both non-target ADM2 Features are
+retained as context. The complete ERI, ETH and SOM ADM1/ADM2 families remain
+context only, with 24 conservative bounds candidates across eight DJI targets.
+Physical support is bound to the exact reviewed report; its 11 flags across six
+targets remain unchanged. The reviewer found no applicability or authority
+overclaim and confirmed zero accepted or qualified credit.
+
+The attempted full-scope stock command was:
+
+```
+node scripts/prepare-delivery-handoff.mjs native-diagnostic \
+  coordination/engineering/djibouti-original-repair-20261019/native-diagnostic-v2/config.json \
+  coordination/engineering/djibouti-original-repair-20261019/native-diagnostic-v2/products/native-diagnostic.json
+```
+
+It did not produce a diagnostic. The helper reported
+`General physical conflict qualification requires explicit territorial exclusions`.
+Its pinned check in
+`coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs`
+requires each selected target with a general physical conflict to carry an
+explicit `territorial_exclusions` array. The candidate screen is only a
+bounding-box prefilter and supplies no reviewed source-applicability evidence;
+therefore no exclusion array is supportable from current evidence. No empty
+array or guessed foreign-family veto was added. `native-diagnostic-v2/` contains
+only its input config; no diagnostic product exists. The independent reviewer
+agreed that stopping here is correct. Since no full-scope diagnostic exists,
+`supported-inputs` and `native-authority` were not run; all 683 cells / 394
+intervals remain held and accepted repair credit remains zero.
