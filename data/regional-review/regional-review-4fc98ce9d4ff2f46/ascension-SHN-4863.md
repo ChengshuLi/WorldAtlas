@@ -6,11 +6,11 @@ This is one row of review packet `regional-review:4fc98ce9d4ff2f46`, issue [#323
 
 ## Inspected source and fact
 
-**Source:** Ascension Island Government, “Commonwealth Walkway Unveiled on Ascension Island,” September 2016 archive: <https://www.ascension.gov.ac/2016/09> (article title is on the archive page; publication day is not printed).
+**Source:** Ascension Island Government, press release “Commonwealth Walkway Unveiled on Ascension Island,” dated 18 September 2016: <https://www.ascension.gov.ac/commonwealth-walkway-unveiled-on-ascension-island>.
 
 **Role:** first-party local-government announcement about a town heritage walkway and its opening. It is suitable to establish a contemporaneous civic/settlement fact, not a territorial boundary or administrative partition.
 
-**Vintage:** September 2016 archive. The page states that the walkway opened “around Georgetown” and connects 10 of the town's historical highlights over a 7 km route; it also says the route begins outside Ascension Island Government offices. The cited page was retrieved 2026-10-19 01:28:31 UTC; the observed HTML response was 68,441 bytes, SHA-256 `9a3e7e5537a94de2f99bcb04a83bf744ab8b122279fdaa33cfae1c3644347c84`.
+**Vintage:** 18 September 2016 (date printed on the article). The page states that the walkway opened “around Georgetown” and connects 10 of the town's historical highlights over a 7 km route; it also says the route begins outside Ascension Island Government offices. The cited page was retrieved 2026-10-19 01:43:40 UTC; the observed HTML response was 70,653 bytes, SHA-256 `540a7f4c10435718412b372b1348968fa4c47ffbcf0ba1651a394e3987f38608`.
 
 **Retained short extract:** “a 7 km pathway connecting 10 of Georgetown’s historical highlights.”
 
