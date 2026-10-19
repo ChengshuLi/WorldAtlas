@@ -1,0 +1,37 @@
+{
+  "blocker": {
+    "available_checkout": "e760d68ff48a679b08f6fbf0581d1035de35105, stale; not used for accepted-main conclusions",
+    "diagnostic": "selected-owner-example.mjs",
+    "required_checkout": "managed worktree at exact required_main",
+    "required_main": "1a137b1b2e8d5d655412c242a5950f3d39e95bbb",
+    "result": "No readback run; no fetch, clone, checkout switch, or other worker checkout access.",
+    "sha256_available_from_parent": "7b354a... (prefix only; do not treat as full hash pin)"
+  },
+  "candidate_path": "mco-original-37-review-candidate-v1.json",
+  "candidate_sha256": "2c33f35094fa8e0cc62e9bd6d0c1bedab98a5f7ecdab34fd4b503622db5c0f11",
+  "exact_key_status": {
+    "accepted_main_current_owner": "unknown for all 37; no exact accepted-main checkout at 1a137b1b2e8d5d655412c242a5950f3d39e95bbb in task workspace",
+    "disposition": "held_unresolved for all 37",
+    "key_count": 37,
+    "keys_sha256": "f59fbd9273d8d0b8a8c831b0576f95ecb5a9934672d3626a13dd2e43923d8a9d",
+    "per_key_contact_or_question": "not present in inspected exact source-candidate or physical-support artifacts",
+    "source_candidate_class": "not present in source-candidates block 023 row schema; owner code 27303 and feature code 41951 are present"
+  },
+  "no_credit_or_clearance": true,
+  "review": {
+    "result": "exact 37 coordinate set independently reproduced; four input hashes rechecked; literal overlap 0/37; candidate caveats/holds safe",
+    "review_limit": "Reviewer did not modify candidate and did not have accepted-main current owner tuples.",
+    "reviewer": "independent worker mco_review"
+  },
+  "schema": "worldatlas.mco-original-37-evidence-supplement.v1",
+  "source_registry": {
+    "license": "ODbL 1.0",
+    "metadata_raw_bytes": 1094,
+    "metadata_raw_sha256": "51a7b2da1c91213c6dc3b17675ddf0531cde50546fdc583b5aa568755e7e43d2",
+    "payload_gzip_sha256": "1135297a3146d4e445dd6090f5a4812df9ea36249e21bf997b8fa53b6c4d3a23",
+    "product": "2017 OSM/Wambacher",
+    "role_limit": "Source registry identity/provenance does not establish a current legal boundary or sovereignty.",
+    "shape_id": "64170238B96397749018979",
+    "source_identity": "gb:MCO:ADM1"
+  }
+}
