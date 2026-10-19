@@ -193,7 +193,8 @@ test('deleted workflow routing retains full fallback for actual runtime inputs',
 
 
 test('static fixture discovery follows eager imports without evaluating or broadening dynamic stubs',t=>{
-  const root=fs.mkdtempSync(path.join(repo,'.cache/static-fixture-'));
+  const cache=path.join(repo,'.cache');fs.mkdirSync(cache,{recursive:true});
+  const root=fs.mkdtempSync(path.join(cache,'static-fixture-'));
   t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
   const write=(name,body)=>fs.writeFileSync(path.join(root,name),body);
   const marker=path.join(root,'must-not-execute');
@@ -219,7 +220,8 @@ throw Error('Fixture discovery must not evaluate source');
 });
 
 test('static fixture discovery refuses unsafe or nonordinary imports and invalid source',t=>{
-  const root=fs.mkdtempSync(path.join(repo,'.cache/static-fixture-'));
+  const cache=path.join(repo,'.cache');fs.mkdirSync(cache,{recursive:true});
+  const root=fs.mkdtempSync(path.join(cache,'static-fixture-'));
   t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
   fs.writeFileSync(path.join(root,'leaf.mjs'),'export const value=1;\n');
   fs.symlinkSync('leaf.mjs',path.join(root,'linked.mjs'));

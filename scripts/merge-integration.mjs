@@ -253,7 +253,8 @@ export function reviewedTestPlan(request, {base, head, entries, files, definitio
   const fixtures=[...entries].filter(([name,row])=>name.startsWith('test/fixtures/')&&row.type!=='tree');
   need(fixtures.length>0&&fixtures.every(([name,row])=>ordinary(name,row)), 'Self-contained fixture boundary is missing or nonordinary');
   return {files:tests, inputs, build,
-    checkout_patterns:focusedCheckoutPatterns(definition, [...inputs, ...(build ? definition.inputs : [])])};
+    // Full-profile consumers can read historical fixtures outside package roles.
+    checkout_patterns:build ? fullCheckoutPatterns(definition) : focusedCheckoutPatterns(definition, inputs)};
 }
 
 export async function prepareIntegration(options) {
