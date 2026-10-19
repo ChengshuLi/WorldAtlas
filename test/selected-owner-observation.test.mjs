@@ -17,7 +17,7 @@ const queueRoot = 'coordination/engineering/global-current-cell-work-queue-20261
 const packageId = 'gb-TST-ADM2--repair-evaluation';
 const sources = staticModuleClosure(process.cwd(), [command]);
 const keys = [{x: 0, y: 0}, {x: 2, y: 0}, {x: 3, y: 0}, {x: 1, y: 1}, {x: 1, y: 2}];
-function fixture({missingOrigins = false, changeManifest, changePatch, changeSide, changeOwners, changeArrays, changeQueue, splitCandidates = false} = {}) {
+function fixture({missingOrigins = false, changeManifest, changePatch, changeSide, changeOwners, changeArrays, changeQueue, changeOriginalGrid, splitCandidates = false} = {}) {
   const repo = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'owner-observation-')));
   const git = (...args) => execFileSync('git', ['-C', repo, ...args], {stdio: ['ignore', 'pipe', 'pipe']}).toString().trim();
   const write = (name, body) => {
@@ -64,8 +64,12 @@ function fixture({missingOrigins = false, changeManifest, changePatch, changeSid
   const water = block('inland-water-support', []);
   const census = write(queueRoot + '/source-census-summary.json', {blocks: [candidates]});
   const physical = write(queueRoot + '/physical-unassigned-summary.json', {phases: [{files: [land, water]}]});
+  const originalGrid = {size: 4, selection: {method: 'native-linear-evenodd-first-owner-v1', sha256: 'e'.repeat(64),
+    additive_release: {path: 'historical-patch-not-read.json'}}, native_latitudes: {decoded_bytes: latitudeRaw.length, decoded_sha256: sha(latitudeRaw)}};
+  changeOriginalGrid?.(originalGrid);
+  const gridBinding = write(queueRoot + '/ownership-binding.json', originalGrid);
   const queue = {input_sha256: {'source-feature-roster.json': sha(featureRaw), 'source-raster-summary.json': sha(raster),
-    'source-census-summary.json': sha(census), 'physical-unassigned-summary.json': sha(physical)},
+    'source-census-summary.json': sha(census), 'physical-unassigned-summary.json': sha(physical), 'ownership-binding.json': sha(gridBinding)},
     packages: [{package_id: packageId, native_blocks: [0], native_cells: 5, intervals: 5},
       {package_id: 'gb-TST-ADM2--source-conflict', native_blocks: [0], native_cells: 1, intervals: 1}]};
   changeQueue?.(queue); write(queueRoot + '/source-package-queue.json', queue);
@@ -202,7 +206,8 @@ test('coherently repinned inputs cannot hide invalid joins, decoded words, norma
     {changeQueue: q => q.packages[0].native_blocks = []},
     {changeQueue: q => q.input_sha256['source-feature-roster.json'] = '0'.repeat(64)},
     {changeManifest: m => m.parts[1].decoded_sha256 = '0'.repeat(64)},
-    {changeManifest: m => m.native_latitudes.decoded_sha256 = '0'.repeat(64)},
+    {changeManifest: m => m.native_latitudes.decoded_sha256 = '0'.repeat(64),
+      changeOriginalGrid: g => g.native_latitudes.decoded_sha256 = '0'.repeat(64)},
     {changeManifest: m => m.native_latitudes.decoded_bytes++},
     {changeManifest: m => m.parts[2].offset = 2},
     {changeArrays: arrays => arrays[0][2] = 0},
@@ -252,4 +257,22 @@ test('the original extraction CLI preserves independently specified package and 
       assert.deepEqual(fs.readFileSync(path.join(destination, 'block-000.json.gz')), gzipSync(JSON.stringify(expectedRows) + '\n'));
     } finally { f.cleanup(); }
   }
+});
+
+
+test('original queue grid identity is joined before native body reads, not the changing historical selector', () => {
+  for (const changeOriginalGrid of [g => g.size = 8, g => g.selection.method = 'foreign-grid-rule',
+    g => g.native_latitudes.decoded_sha256 = '0'.repeat(64), g => g.native_latitudes.decoded_bytes = 64]) {
+    const f = fixture({changeOriginalGrid}); try {
+      // If the early identity join is absent, this missing body gives a different
+      // failure. A coherent original metadata hash must not reinterpret grid keys.
+      f.git('rm', 'inputs/bank/part-0.gz'); f.commit();
+      const r = f.run(); assert.notEqual(r.status, 0); assert.match(r.stderr, /Original package grid\/method\/normative latitude identity differs/);
+      assert.equal(fs.existsSync(r.output), false);
+    } finally { f.cleanup(); }
+  }
+  const f = fixture(); try {
+    // The fixture's historical selector SHA and patch differ intentionally.
+    const r = f.run(); assert.equal(r.status, 0, r.stderr); assert.equal(r.report.query_count, 5);
+  } finally { f.cleanup(); }
 });

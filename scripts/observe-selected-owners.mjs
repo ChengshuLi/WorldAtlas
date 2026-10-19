@@ -61,6 +61,11 @@ export async function observeSelectedPackage({repo, commit, packageId}) {
     }
     return bodies.get(name);
   });
+  const originalGrid = JSON.parse(bodies.get('ownership-binding.json') ?? 'null');
+  assert.ok(originalGrid && originalGrid.size === manifest.size && originalGrid.selection?.method === manifest.method &&
+    originalGrid.native_latitudes?.decoded_bytes === manifest.native_latitudes?.decoded_bytes &&
+    originalGrid.native_latitudes?.decoded_sha256 === manifest.native_latitudes?.decoded_sha256,
+  'Original package grid/method/normative latitude identity differs from the selected product');
   const requested = [];
   for (const {rows: intervals} of original.blocks) for (const [y, start, end] of intervals) {
     assert.ok([y, start, end].every(Number.isSafeInteger) && y >= 0 && y < manifest.size &&
