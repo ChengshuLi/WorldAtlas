@@ -42,6 +42,11 @@ is never replaced. Use the committed reader in an owned checkout. The explicit
 reset or ad hoc script copy is required. Executed source must match the checkout's
 own committed code. The artifact records both revisions, the exact ordered key
 digest, selected product pins, normative latitude bytes and actual consumed inputs.
+`original_intervals` retains the exact block/row table bound by `original_intervals_sha256`;
+its columns are the original package's `execution.output_columns` (end is exclusive).
+Use its recorded owner/source-feature indices and original mask class directly, rather
+than reconstructing them or replacing them with null. These are original queue observations,
+not current physical or source qualification.
 Use a Git implementation accepting `git --no-lazy-fetch --version`; a missing
 required blob stops rather than fetching geometry or changing the reader's rules.
 
