@@ -42,9 +42,9 @@ function fixtureRepository(root){
 const trustedSeeds=new Map();
 after(()=>{for(const seed of trustedSeeds.values())fs.rmSync(seed.root,{recursive:true,force:true});});
 
-function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,sourceOverride,physicalLogicalSource,originalPatchRows,overrideLogicalPath,nativeLayout,sourceFeatures}){
+function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,nativeConsumer,sourceOverride,physicalLogicalSource,originalPatchRows,overrideLogicalPath,nativeLayout,sourceFeatures}){
  const {git,save,commit,pin}=fixtureRepository(root);
- git('init','-q');if(codeRoutes)save('data/scientific.js',{fixture:'scientific input, not executed code'});save(PROGRAMME,fs.readFileSync(PROGRAMME));for(const name of CODE)save(name,fs.readFileSync(name));save('package.json',{type:'module'});
+ git('init','-q');if(codeRoutes)save('data/scientific.js',{fixture:'scientific input, not executed code'});save(PROGRAMME,fs.readFileSync(PROGRAMME));for(const name of [...CODE,...(nativeConsumer?['scripts/selected-checkpoint-native.mjs']:[])])save(name,fs.readFileSync(name));save('package.json',{type:'module'});
  const {features,certificate}=fixtures(sourceFeatures), source={type:'FeatureCollection',features};save('data/source.json',source);
  if(sourceOverride)save('data/selected-source.json.gz',gzipSync(valueBytes(source)));
  const reference={id:'geography:fixture',hierarchy_sha256:'a'.repeat(64),footprints_sha256:'b'.repeat(64)};
@@ -63,13 +63,20 @@ function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,sourceO
  let assetOffset=0;
  const index={version:1,kind:'ordered-exact-original-byte-fragments',whole_bytes:whole.length,whole_sha256:sha(whole),files:parts.map(p=>{const offset=assetOffset;assetOffset+=p.bytes;return {path:p.path,mode:'100644',offset,bytes:p.bytes,sha256:p.sha256};}),parts:[{path:'fragment.gz',offset:0,bytes:fragment.length,sha256:sha(fragment),decoded_bytes:whole.length,decoded_sha256:sha(whole)}]};save('data/transport/index.json',index);
  const manifest={version:1,size,coordinateBits,method:'native-linear-evenodd-first-owner-v1',native_latitudes:[],hierarchy_sha256:reference.hierarchy_sha256,original_assets:{},parts,runWords:runs.length,native_asset_transport:{version:1,kind:index.kind,index:{path:'data/transport/index.json',bytes:valueBytes(index).length,sha256:valueSha(index)},logical_assets:parts.length,original_compressed_bytes:whole.length}};
- save('data/owners.json',features.map((feature,index)=>({id:feature.id,index:index+1})));
+ const owners=features.map((feature,index)=>({id:feature.id,index:index+1}));
+ if(!nativeConsumer)save('data/owners.json',owners);
  if(nativeAppend){
   const latitudes=nativeRowLatitudes(size),bytes=Buffer.alloc(size*8);
   latitudes.forEach((v,i)=>bytes.writeDoubleLE(v,i*8));save('original/latitudes.f64le.gz',gzipSync(bytes));
   const initial=commit(),body=git('show',initial+':original/latitudes.f64le.gz'),tree=git('ls-tree',initial,'--','original/latitudes.f64le.gz').toString().split(/\s+/);
   manifest.native_latitudes={root:'repository',commit:initial,path:'original/latitudes.f64le.gz',mode:tree[0],git_blob_oid:tree[2],bytes:body.length,sha256:sha(body),decoded_bytes:bytes.length,decoded_sha256:sha(bytes)};
   manifest.original_assets={bounds:{sha256:sha(fs.readFileSync(path.join(root,'data/owners.json')))}};
+ }
+ if(nativeConsumer){
+  const bytes=Buffer.alloc(size*8);nativeRowLatitudes(size).forEach((v,i)=>bytes.writeDoubleLE(v,i*8));
+  const encoded=gzipSync(bytes);save('data/latitudes.f64le.gz',encoded);const at=commit();
+  manifest.native_latitudes={root:'repository',commit:at,path:'data/latitudes.f64le.gz',bytes:encoded.length,sha256:sha(encoded),decoded_bytes:bytes.length,decoded_sha256:sha(bytes)};
+  save('data/owners.json',owners);
  }
  save('data/manifest.json',manifest);
  const primitive=addition('old','A',1,certificate.entries[0][7],.3);
@@ -105,7 +112,7 @@ function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,sourceO
  const facts={version:1,kind:'trusted-selected-coordinate-stage-v1',candidate_code_executed:false,selected_commit:selected,executing_commit:one,execution_code,runtime,binding:full.binding,complete_owners:features.length,complete_sources:1};
  const compressed=gzipSync(valueBytes(full));save('accepted/certificate.json.gz',compressed);save('accepted/facts.json',facts);
  const publication={version:1,kind:facts.kind,complete:true,facts:{path:'facts.json',bytes:valueBytes(facts).length,sha256:valueSha(facts)},certificate:{path:'certificate.json.gz',bytes:compressed.length,sha256:sha(compressed),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)}};save('accepted/publication.json',publication);
- const inventory=[...(codeRoutes?['src/native-grid.js','data/scientific.js']:[]),PROGRAMME,...(sourceOverride?['data/selected-source.json.gz',...(physicalLogicalSource?['data/source.json']:[])]:['data/source.json']),'data/manifest.json','data/owners.json','data/registry.json','data/ledger.json','data/patch.json','data/sidecar.json','data/envelope.json',...parts.map(p=>'data/'+p.path)].map(name=>pin(name,selected));
+ const inventory=[...(codeRoutes?['src/native-grid.js','data/scientific.js']:[]),PROGRAMME,...(nativeConsumer?['data/latitudes.f64le.gz']:[]),...(sourceOverride?['data/selected-source.json.gz',...(physicalLogicalSource?['data/source.json']:[])]:['data/source.json']),'data/manifest.json','data/owners.json','data/registry.json','data/ledger.json','data/patch.json','data/sidecar.json','data/envelope.json',...parts.map(p=>'data/'+p.path)].map(name=>pin(name,selected));
  save('accepted/custody.json',{complete_cold_custody:[{facts,publication,effective_additions:additions,inventory}]});
  save('accepted/routes.json',[...new Set([...inventory.map(p=>p.path),'data/source.json'])].sort().map(name=>({path:name,tree:git('ls-tree','-z',selected,'--',name).toString()})));const accepted=commit();
  const rootRow={id:'fixture',accepted_head:accepted,selected_commit:selected,selection_sha256:valueSha(selection),execution_commit:one,execution_code_sha256:valueSha(execution_code),runtime_sha256:valueSha(runtime),facts:pin('accepted/facts.json'),certificate:{...pin('accepted/certificate.json.gz'),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)},publication:pin('accepted/publication.json'),custody:pin('accepted/custody.json'),routes:pin('accepted/routes.json')};
@@ -115,9 +122,9 @@ function buildTrustedSeed(root,{incompleteNative,codeRoutes,nativeAppend,sourceO
 
 // The real entry reads each independent copy's ordinary committed catalogue and
 // products. Qualification, readers and private module state are always fresh.
-async function trustedFixture(t,{incompleteNative=false,codeRoutes=false,nativeAppend=false,sourceOverride=false,physicalLogicalSource=false,originalPatchRows,overrideLogicalPath='data/source.json',nativeLayout,sourceFeatures}={}){
+async function trustedFixture(t,{incompleteNative=false,codeRoutes=false,nativeAppend=false,nativeConsumer=false,sourceOverride=false,physicalLogicalSource=false,originalPatchRows,overrideLogicalPath='data/source.json',nativeLayout,sourceFeatures}={}){
  // Snapshot caller-owned rows before both keying and building the private seed.
- const options={incompleteNative,codeRoutes,nativeAppend,sourceOverride,physicalLogicalSource,
+ const options={incompleteNative,codeRoutes,nativeAppend,nativeConsumer,sourceOverride,physicalLogicalSource,
   originalPatchRows:structuredClone(originalPatchRows??[{y:1,runs:[[2,3,1]]}]),overrideLogicalPath,nativeLayout:structuredClone(nativeLayout??null),sourceFeatures:structuredClone(sourceFeatures??null)};
  const key=JSON.stringify(options);
  let seed=trustedSeeds.get(key);
@@ -130,7 +137,8 @@ async function trustedFixture(t,{incompleteNative=false,codeRoutes=false,nativeA
  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
  fs.cpSync(seed.root,root,{recursive:true});
  const data=structuredClone(seed.data);
- const api=checkpointTestAPI(t,await import(pathToFileURL(path.join(root,MODULE)))),native=await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs')));
+ const api=checkpointTestAPI(t,await import(pathToFileURL(path.join(root,MODULE)))),native={...await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs'))),
+  ...(nativeConsumer?await import(pathToFileURL(path.join(root,'scripts/selected-checkpoint-native.mjs'))):{})};
  const reader=new native.ImmutableReader(root,data.selected);
  return {...data,...fixtureRepository(root),api,native,reader};
 }
