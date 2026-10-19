@@ -12,7 +12,7 @@ The final-cover notice was added to the original proposal; a historical-only not
 
 ## Proposed public support packet paths
 
-Proposed under one packet directory: `coordination/engineering/rwa-original-repair-20261019/rwa307-final-cover-001/`. It would contain this closure proposal and README, with support files under `support/`: `original-interval-review.json`, `current-native-bridge.json`, `interval-keys.json`, and `selected-owner-replay-historical.json`. These are proposed paths only; nothing has been published.
+Proposed under one packet directory: `coordination/engineering/rwa-original-repair-20261019/rwa307-final-cover-001/`. It would contain this closure proposal and README, with support files under `support/`: `original-interval-review.json`, `current-native-bridge.json`, `interval-keys.json`, and `selected-owner-replay-historical.json`. These paths are present on the draft PR branch. The PR is not merged; public-head review and root acceptance remain pending, and no new credit is recorded.
 
 ## Evidence reference versions
 
