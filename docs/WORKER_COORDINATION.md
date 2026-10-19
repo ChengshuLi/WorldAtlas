@@ -121,6 +121,22 @@ work. Historical comments and receipts remain immutable records.
 Each coherent PR targets main. Issue links and GitHub closure keywords are optional,
 with no custom syntax or one-issue limit. Close only completed acceptance. The
 submitting operator verifies substantive distinct-worker review of the exact head.
+Workers sharing one GitHub account still obtain review from a genuinely distinct
+worker. Submit that worker's substantive exact-head review as `COMMENT`, not a
+self-`APPROVE` attempt. The existing operator-reviewed comment route is sufficient;
+no extra account, approval layer or machine review receipt is needed. For example:
+
+```sh
+gh api --method POST repos/ChengshuLi/WorldAtlas/pulls/PR-NUMBER/reviews \
+  -f commit_id=EXACT_REVIEWED_HEAD -f event=COMMENT \
+  -f body='Distinct worker ID; exact head; inspected scope; actual checks and limits; findings.'
+```
+
+Read back the returned review's commit and the current PR head. A different head or
+unresolved substantive objection requires renewed relevant review, not another
+identity or a blind retry. A comment does not create scientific approval or make an
+author their own independent reviewer.
+
 All workers submit merges through:
 
 ```sh
