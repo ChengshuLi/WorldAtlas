@@ -1,0 +1,917 @@
+{
+  "schema": "brn-source-feature-target-parent-competitor-observation-v1",
+  "created_from_head": "261e709ac9e1837b3399537f9f53cfa6550e3a01",
+  "scope": {
+    "issue": 2543,
+    "package_id": "gb-BRN-ADM1--repair-evaluation",
+    "native_cells": 828,
+    "queue_land_cells": 828,
+    "source_relative_cells": 0,
+    "interval_segments": 323,
+    "positive_source_family": "gb:BRN:ADM1",
+    "full_competitor_context_family": "gb:MYS:ADM1",
+    "target_owner_indices": [
+      10448,
+      10449,
+      10450,
+      10451
+    ]
+  },
+  "input_pins": {
+    "source_products": [
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BRN-ADM1-000.bin.gz",
+        "git_blob_oid": "52b83027ad0341cda3352c12ea3da248c35437c5",
+        "bytes": 10409,
+        "sha256": "30a83ca34e6843ffd42642aea4368fe3cd0536a3c1dc58e8a2cca632b0543563"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MYS-ADM1-000.bin.gz",
+        "git_blob_oid": "e6dd06af2433fe980c1a4e769c95ac0648d91580",
+        "bytes": 180810,
+        "sha256": "1382eb5fc945eeaa1a5c6e3aded15b940b40c59a7dfdbb4f5f739c597684bbff"
+      }
+    ],
+    "queue": [
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+        "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+        "bytes": 1844315,
+        "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-031.json.gz",
+        "git_blob_oid": "8c513fafe3d2754547cba8c3e8a4c812e8cc520d",
+        "bytes": 589757,
+        "sha256": "9aa6e8ab65027095c27f43c2d15af0a3bb94c6af8fe19f342e3af37f5c3356e0"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+        "git_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+        "bytes": 1754890,
+        "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/ownership-binding.json",
+        "git_blob_oid": "b9d81d18aab6d03dc701ff1337b35e53be81d0af",
+        "bytes": 3048,
+        "sha256": "b952192475435c8fbc74a84627994aff4f4e073c36c479d369554fc75251bc89"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/retained-source-catalogue.json",
+        "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+        "bytes": 403376,
+        "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+      }
+    ],
+    "hierarchy": {
+      "path": "data/hierarchy.json",
+      "git_blob_oid": "0ec8bae8e04140326d8b48f09a35ac66ae54deb0",
+      "bytes": 10164089,
+      "sha256": "e5ddbf3f2577f4dbb9e0ce16bdf758675ba665cba04cceff363b3b097943a144"
+    },
+    "administrative_source_metadata": {
+      "path": "data/administrative-sources.json",
+      "git_blob_oid": "2747b845f0c5654765da3b951c9074e52f220077",
+      "bytes": 661416,
+      "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+    },
+    "individual_source_attribution": {
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/individual-source-attribution.json",
+      "git_blob_oid": "d84c203f19506d0552ca3cad1efcf9a8b8a5cfde",
+      "bytes": 806110,
+      "sha256": "7d8a3baf61f32e6e4398f24bec0d15bce32eafcd4309655edc2b12a2c33256bd"
+    },
+    "handoff": {
+      "path": "/Users/chengshuli/Documents/Codex/2026-10-18/task-4/dji-brn-handoff-20261019/worldatlas-DJI683-BRN828-positive-execution-handoff-20261019.json",
+      "as_of_utc": "2026-10-19T14:30:39.547370+00:00",
+      "input_pin_commit": "24a9129af2ae06fe1e6f2dd2294d30d14b0bb11b",
+      "package_id": "gb-BRN-ADM1--repair-evaluation"
+    },
+    "existing_outputs": [
+      {
+        "path": "coordination/engineering/brunei-original-repair-20261019/extraction-001/package.json",
+        "bytes": 2349,
+        "sha256": "47b5950f82003100e10abfa49414eaeac6f5d525a97ea458848ee89c29c30843"
+      },
+      {
+        "path": "coordination/engineering/brunei-original-repair-20261019/extraction-001/block-031.json.gz",
+        "bytes": 1995,
+        "sha256": "aee963524ff64466ae6cc7195c80259b5d784e3e7f081338956d14a95ef6a0a6"
+      },
+      {
+        "path": "coordination/engineering/brunei-original-repair-20261019/selected-owner-observation.json",
+        "bytes": 287313,
+        "sha256": "f42060ef2d9511729b5aeae1caf45c5303ba338a668e7acbcfed18147564624a"
+      }
+    ]
+  },
+  "extraction_summary": {
+    "package_id": "gb-BRN-ADM1--repair-evaluation",
+    "primary_source": "gb:BRN:ADM1",
+    "source_family_index": 46,
+    "category": "repair-evaluation",
+    "native_cells": 828,
+    "land_cells": 828,
+    "inland_water_cells": 0,
+    "source_relative_cells": 0,
+    "interval_segments": 323,
+    "owners": [
+      10448,
+      10449,
+      10450,
+      10451
+    ],
+    "source_features": [
+      9129,
+      9130,
+      9131,
+      9132,
+      45977
+    ],
+    "source_families": [
+      46,
+      230
+    ],
+    "native_blocks": [
+      31
+    ],
+    "provinces": [
+      "framework:province:belait:02089012c32c",
+      "framework:province:brunei-muara:b7213cc1c869",
+      "framework:province:temburong:69b48b6329c0",
+      "framework:province:tutong:22f040bbf2ea"
+    ],
+    "location_count": 4,
+    "source_feature_count": 5,
+    "locality_count": 4,
+    "cost": {
+      "primary_source_decoded_bytes": 34750,
+      "all_required_source_decoded_bytes": 617944,
+      "primary_full_source_raster_measured_seconds": 0.039,
+      "source_interval_segments": 323,
+      "maximum_native_rows_per_execution_frame": 4096,
+      "observed_global_census_peak_rss_bytes": 884973568
+    },
+    "evidence": {
+      "selection": "ownership-binding.json",
+      "lineage": "lineage.json",
+      "territorial_source_catalogue": "retained-source-catalogue.json",
+      "territorial_catalogue_sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "source_features": "source-feature-roster.json",
+      "territorial_native_blocks": "source-candidates-block-NNN.json.gz",
+      "physical": "physical-unassigned-summary.json",
+      "source_domain_transform": []
+    },
+    "work": {
+      "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+      "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+      "priority": 1
+    },
+    "execution": {
+      "command": "node source-batch-intervals.mjs gb-BRN-ADM1--repair-evaluation OUTPUT_DIRECTORY",
+      "output_columns": [
+        "y",
+        "start",
+        "end",
+        "candidate_owner_indices",
+        "source_feature_indices",
+        "physical_class"
+      ]
+    }
+  },
+  "selected_owner_observation": {
+    "kind": "literal-selected-owner-observation-v1",
+    "query_count": 828,
+    "original_intervals_sha256": "979766c0a0cc2aa02de1212625a829fafd8b0201e44076e37fe85cfe8ccab8c2",
+    "query_sha256": "d74c5857db4c9a461154daeb06cb6cff9becdd404dc81db4a41fde4efcf5d6e0",
+    "owner_counts": {
+      "base_owner_0": 828,
+      "accepted_additive_owner_0": 828,
+      "effective_owner_0": 828,
+      "nonzero_effective_owner": 0,
+      "existing_product_overlap": 0
+    },
+    "interpretation": "Literal current owner observation only; not source applicability, repair qualification, or acceptance."
+  },
+  "feature_join_method": {
+    "raw_source": "gunzip exact current-main corpus payload; parse FeatureCollection; use each Feature properties.shapeID to form canonical source_id; require exact equality with current-main source-feature-roster source_id and same ordinal; retain parsed geometry digest plus full compressed and decoded source product pins.",
+    "geometry_digest": "SHA-256 of UTF-8 JSON.stringify(parsed Feature.geometry); raw exact source bytes remain bound by the complete gzip and decoded payload hashes.",
+    "limitations": [
+      "No source applicability finding is made.",
+      "No legal or political interpretation or sovereignty claim is made.",
+      "Source feature identity, native source-roster membership, hierarchy ancestry, source applicability, and authority are separate evidence dimensions.",
+      "Zero native owners does not qualify a positive source repair."
+    ]
+  },
+  "brunei_features": [
+    {
+      "source_index": 9129,
+      "family_index": 46,
+      "feature_ordinal": 0,
+      "source_id": "gb:BRN:ADM1:89281809B69825435871977",
+      "source_properties": {
+        "shapeID": "89281809B69825435871977",
+        "shapeName": "Belait",
+        "shapeISO": "BN-BE",
+        "shapeGroup": "BRN",
+        "shapeType": "ADM1"
+      },
+      "geometry_type": "Polygon",
+      "parsed_geometry_sha256": "2d40edc7ad76d477d9f330a750de0bde7d329b8562c73fe0ff4ea586100414b9",
+      "queue_roster": {
+        "source_index": 9129,
+        "family_index": 46,
+        "source_id": "gb:BRN:ADM1:89281809B69825435871977",
+        "ordinal": 0,
+        "owners": [
+          10450
+        ],
+        "name": "Belait",
+        "geometry_status": "raw-native-supported"
+      },
+      "queue_contact": true,
+      "target_join": {
+        "owner_index": 10450,
+        "target_id": "gb:BRN:ADM1:89281809B69825435871977",
+        "target_source_atoms": [
+          "gb:BRN:ADM1:89281809B69825435871977"
+        ],
+        "province_index": 869,
+        "province_id": "framework:province:belait:02089012c32c",
+        "province_name": "Belait",
+        "parent_id": "framework:area:borneo:f3cde4b889a9",
+        "parent_name": "Borneo",
+        "parent_level": "area",
+        "parent_semantic_review": "open",
+        "reference_owner": "Brunei Darussalam",
+        "join_basis": "exact source_id equals queue source-roster ID and target ID/source atom; queue owner index equals handoff target index; province ID is explicit in handoff and exact hierarchy parent_id is read from pinned data/hierarchy.json"
+      }
+    },
+    {
+      "source_index": 9130,
+      "family_index": 46,
+      "feature_ordinal": 1,
+      "source_id": "gb:BRN:ADM1:89281809B59327831149370",
+      "source_properties": {
+        "shapeID": "89281809B59327831149370",
+        "shapeName": "Tutong",
+        "shapeISO": "BN-TU",
+        "shapeGroup": "BRN",
+        "shapeType": "ADM1"
+      },
+      "geometry_type": "Polygon",
+      "parsed_geometry_sha256": "1f44bf4cc7bf41fd1d89196948948e6f1857499eb8fe07fef0bf94cff02fc9ca",
+      "queue_roster": {
+        "source_index": 9130,
+        "family_index": 46,
+        "source_id": "gb:BRN:ADM1:89281809B59327831149370",
+        "ordinal": 1,
+        "owners": [
+          10449
+        ],
+        "name": "Tutong",
+        "geometry_status": "raw-native-supported"
+      },
+      "queue_contact": true,
+      "target_join": {
+        "owner_index": 10449,
+        "target_id": "gb:BRN:ADM1:89281809B59327831149370",
+        "target_source_atoms": [
+          "gb:BRN:ADM1:89281809B59327831149370"
+        ],
+        "province_index": 4687,
+        "province_id": "framework:province:tutong:22f040bbf2ea",
+        "province_name": "Tutong",
+        "parent_id": "framework:area:borneo:f3cde4b889a9",
+        "parent_name": "Borneo",
+        "parent_level": "area",
+        "parent_semantic_review": "open",
+        "reference_owner": "Brunei Darussalam",
+        "join_basis": "exact source_id equals queue source-roster ID and target ID/source atom; queue owner index equals handoff target index; province ID is explicit in handoff and exact hierarchy parent_id is read from pinned data/hierarchy.json"
+      }
+    },
+    {
+      "source_index": 9131,
+      "family_index": 46,
+      "feature_ordinal": 2,
+      "source_id": "gb:BRN:ADM1:89281809B42057356743122",
+      "source_properties": {
+        "shapeID": "89281809B42057356743122",
+        "shapeName": "Brunei-Muara",
+        "shapeISO": "BN-BM",
+        "shapeGroup": "BRN",
+        "shapeType": "ADM1"
+      },
+      "geometry_type": "MultiPolygon",
+      "parsed_geometry_sha256": "048f423234fb2541c2aa4f96d5246b281a25d29098a4c52dbd27e9604a13243b",
+      "queue_roster": {
+        "source_index": 9131,
+        "family_index": 46,
+        "source_id": "gb:BRN:ADM1:89281809B42057356743122",
+        "ordinal": 2,
+        "owners": [
+          10448
+        ],
+        "name": "Brunei-Muara",
+        "geometry_status": "raw-native-supported"
+      },
+      "queue_contact": true,
+      "target_join": {
+        "owner_index": 10448,
+        "target_id": "gb:BRN:ADM1:89281809B42057356743122",
+        "target_source_atoms": [
+          "gb:BRN:ADM1:89281809B42057356743122"
+        ],
+        "province_index": 1045,
+        "province_id": "framework:province:brunei-muara:b7213cc1c869",
+        "province_name": "Brunei-Muara",
+        "parent_id": "framework:area:borneo:f3cde4b889a9",
+        "parent_name": "Borneo",
+        "parent_level": "area",
+        "parent_semantic_review": "open",
+        "reference_owner": "Brunei Darussalam",
+        "join_basis": "exact source_id equals queue source-roster ID and target ID/source atom; queue owner index equals handoff target index; province ID is explicit in handoff and exact hierarchy parent_id is read from pinned data/hierarchy.json"
+      }
+    },
+    {
+      "source_index": 9132,
+      "family_index": 46,
+      "feature_ordinal": 3,
+      "source_id": "gb:BRN:ADM1:89281809B70839875343945",
+      "source_properties": {
+        "shapeID": "89281809B70839875343945",
+        "shapeName": "Temburong",
+        "shapeISO": "BN-TE",
+        "shapeGroup": "BRN",
+        "shapeType": "ADM1"
+      },
+      "geometry_type": "Polygon",
+      "parsed_geometry_sha256": "5124f48408292ffd9ad08f9db7d10d6b0847d9e9135ea2476ab9ef196f278832",
+      "queue_roster": {
+        "source_index": 9132,
+        "family_index": 46,
+        "source_id": "gb:BRN:ADM1:89281809B70839875343945",
+        "ordinal": 3,
+        "owners": [
+          10451
+        ],
+        "name": "Temburong",
+        "geometry_status": "raw-native-supported"
+      },
+      "queue_contact": true,
+      "target_join": {
+        "owner_index": 10451,
+        "target_id": "gb:BRN:ADM1:89281809B70839875343945",
+        "target_source_atoms": [
+          "gb:BRN:ADM1:89281809B70839875343945"
+        ],
+        "province_index": 4552,
+        "province_id": "framework:province:temburong:69b48b6329c0",
+        "province_name": "Temburong",
+        "parent_id": "framework:area:borneo:f3cde4b889a9",
+        "parent_name": "Borneo",
+        "parent_level": "area",
+        "parent_semantic_review": "open",
+        "reference_owner": "Brunei Darussalam",
+        "join_basis": "exact source_id equals queue source-roster ID and target ID/source atom; queue owner index equals handoff target index; province ID is explicit in handoff and exact hierarchy parent_id is read from pinned data/hierarchy.json"
+      }
+    }
+  ],
+  "malaysia_complete_competitor_context": {
+    "family": "gb:MYS:ADM1",
+    "feature_count": 16,
+    "features": [
+      {
+        "source_index": 45971,
+        "family_index": 230,
+        "feature_ordinal": 0,
+        "source_id": "gb:MYS:ADM1:15666254B89722251658211",
+        "source_properties": {
+          "shapeID": "15666254B89722251658211",
+          "shapeName": "Selangor",
+          "shapeISO": "MY-10",
+          "shapeGroup": "MYS",
+          "shapeType": "ADM1"
+        },
+        "geometry_type": "MultiPolygon",
+        "parsed_geometry_sha256": "dd27c5339af325c1e133e24e119da191fb9fe50ed1e8f10084159e22c465df64",
+        "queue_roster": {
+          "source_index": 45971,
+          "family_index": 230,
+          "source_id": "gb:MYS:ADM1:15666254B89722251658211",
+          "ordinal": 0,
+          "owners": [],
+          "name": "Selangor",
+          "geometry_status": "raw-native-supported"
+        },
+        "queue_contact": false,
+        "competitor_context": {
+          "role": "complete gb:MYS:ADM1 family retained for competitor/source-context consideration",
+          "positive_target": false,
+          "queue_owners": [],
+          "queue_contact": false,
+          "parent_join": "not asserted at individual-feature level in this evidence"
+        }
+      },
+      {
+        "source_index": 45972,
+        "family_index": 230,
+        "feature_ordinal": 1,
+        "source_id": "gb:MYS:ADM1:15666254B42356713390762",
+        "source_properties": {
+          "shapeID": "15666254B42356713390762",
+          "shapeName": "Johor",
+          "shapeISO": "MY-01",
+          "shapeGroup": "MYS",
+          "shapeType": "ADM1"
+        },
+        "geometry_type": "MultiPolygon",
+        "parsed_geometry_sha256": "bbc504c91b6943f77522c0a7d9e64fc236d6ebaf58b6f2224f60566a1443b59d",
+        "queue_roster": {
+          "source_index": 45972,
+          "family_index": 230,
+          "source_id": "gb:MYS:ADM1:15666254B42356713390762",
+          "ordinal": 1,
+          "owners": [],
+          "name": "Johor",
+          "geometry_status": "raw-native-supported"
+        },
+        "queue_contact": false,
+        "competitor_context": {
+          "role": "complete gb:MYS:ADM1 family retained for competitor/source-context consideration",
+          "positive_target": false,
+          "queue_owners": [],
+          "queue_contact": false,
+          "parent_join": "not asserted at individual-feature level in this evidence"
+        }
+      },
+      {
+        "source_index": 45973,
+        "family_index": 230,
+        "feature_ordinal": 2,
+        "source_id": "gb:MYS:ADM1:15666254B97003483933575",
+        "source_properties": {
+          "shapeID": "15666254B97003483933575",
+          "shapeName": "Kuala Lumpur",
+          "shapeISO": "MY-14",
+          "shapeGroup": "MYS",
+          "shapeType": "ADM1"
+        },
+        "geometry_type": "Polygon",
+        "parsed_geometry_sha256": "d24f44bb5c9f3f1338d96b1caae7521a2663b7ef0b99f20a60195c02cd6c07ee",
+        "queue_roster": {
+          "source_index": 45973,
+          "family_index": 230,
+          "source_id": "gb:MYS:ADM1:15666254B97003483933575",
+          "ordinal": 2,
+          "owners": [],
+          "name": "Kuala Lumpur",
+          "geometry_status": "raw-native-supported"
+        },
+        "queue_contact": false,
+        "competitor_context": {
+          "role": "complete gb:MYS:ADM1 family retained for competitor/source-context consideration",
+          "positive_target": false,
+          "queue_owners": [],
+          "queue_contact": false,
+          "parent_join": "not asserted at individual-feature level in this evidence"
+        }
+      },
+      {
+        "source_index": 45974,
+        "family_index": 230,
+        "feature_ordinal": 3,
+        "source_id": "gb:MYS:ADM1:15666254B45695250728659",
+        "source_properties": {
+          "shapeID": "15666254B45695250728659",
+          "shapeName": "Malacca",
+          "shapeISO": "MY-04",
+          "shapeGroup": "MYS",
+          "shapeType": "ADM1"
+        },
+        "geometry_type": "MultiPolygon",
+        "parsed_geometry_sha256": "376a43e8126352bf2342959e1769277d522dc299e72e0fe386f969e8f6e9e5ef",
+        "queue_roster": {
+          "source_index": 45974,
+          "family_index": 230,
+          "source_id": "gb:MYS:ADM1:15666254B45695250728659",
+          "ordinal": 3,
+          "owners": [],
+          "name": "Malacca",
+          "geometry_status": "raw-native-supported"
+        },
+        "queue_contact": false,
+        "competitor_context": {
+          "role": "complete gb:MYS:ADM1 family retained for competitor/source-context consideration",
+          "positive_target": false,
+          "queue_owners": [],
+          "queue_contact": false,
+          "parent_join": "not asserted at individual-feature level in this evidence"
+        }
+      },
+      {
+        "source_index": 45975,
+        "family_index": 230,
+        "feature_ordinal": 4,
+        "source_id": "gb:MYS:ADM1:15666254B60207109163985",
+        "source_properties": {
+          "shapeID": "15666254B60207109163985",
+          "shapeName": "Negeri Sembilan",
+          "shapeISO": "MY-05",
+          "shapeGroup": "MYS",
+          "shapeType": "ADM1"
+        },
+        "geometry_type": "Polygon",
+        "parsed_geometry_sha256": "ab20cfd59c2ad8a2717dafb0c23455782ae7cf3bb21ef3db9e76bc1fc4992910",
+        "queue_roster": {
+          "source_index": 45975,
+          "family_index": 230,
+          "source_id": "gb:MYS:ADM1:15666254B60207109163985",
+          "ordinal": 4,
+          "owners": [],
+          "name": "Negeri Sembilan",
+          "geometry_status": "raw-native-supported"
+        },
+        "queue_contact": false,
+        "competitor_context": {
+          "role": "complete gb:MYS:ADM1 family retained for competitor/source-context consideration",
+          "positive_target": false,
+          "queue_owners": [],
+          "queue_contact": false,
+          "parent_join": "not asserted at individual-feature level in this evidence"
+        }
+      },
+      {
+        "source_index": 45976,
+        "family_index": 230,
+        "feature_ordinal": 5,
+        "source_id": "gb:MYS:ADM1:15666254B50935235229272",
+        "source_properties": {
+          "shapeID": "15666254B50935235229272",
+          "shapeName": "Sabah",
+          "shapeISO": "MY-12",
+          "shapeGroup": "MYS",
+          "shapeType": "ADM1"
+        },
+        "geometry_type": "MultiPolygon",
+        "parsed_geometry_sha256": "6224ed7493309ad3fe007c985f81e6c6e975a56dd41849f0de5c9daa8a2dee4d",
+        "queue_roster": {
+          "source_index": 45976,
+          "family_index": 230,
+          "source_id": "gb:MYS:ADM1:15666254B50935235229272",
+          "ordinal": 5,
+          "owners": [],
+          "name": "Sabah",
+          "geometry_status": "raw-native-supported"
+        },
+        "queue_contact": false,
+        "competitor_context": {
+          "role": "complete gb:MYS:ADM1 family retained for competitor/source-context consideration",
+          "positive_target": false,
+          "queue_owners": [],
+          "queue_contact": false,
+          "parent_join": "not asserted at individual-feature level in this evidence"
+        }
+      },
+      {
+        "source_index": 45977,
+        "family_index": 230,
+        "feature_ordinal": 6,
+        "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+        "source_properties": {
+          "shapeID": "15666254B8535925993004",
+          "shapeName": "Sarawak",
+          "shapeISO": "MY-13",
+          "shapeGroup": "MYS",
+          "shapeType": "ADM1"
+        },
+        "geometry_type": "MultiPolygon",
+        "parsed_geometry_sha256": "981e1d9f39942a7c0aa9a6379669a2991e257afed0e17cb3134c24d72282faab",
+        "queue_roster": {
+          "source_index": 45977,
+          "family_index": 230,
+          "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+          "ordinal": 6,
+          "owners": [],
+          "name": "Sarawak",
+          "geometry_status": "raw-native-supported"
+        },
+        "queue_contact": true,
+        "competitor_context": {
+          "role": "complete gb:MYS:ADM1 family retained for competitor/source-context consideration",
+          "positive_target": false,
+          "queue_owners": [],
+          "queue_contact": true,
+          "parent_join": "not asserted at individual-feature level in this evidence"
+        }
+      },
+      {
+        "source_index": 45978,
+        "family_index": 230,
+        "feature_ordinal": 7,
+        "source_id": "gb:MYS:ADM1:15666254B53975248776023",
+        "source_properties": {
+          "shapeID": "15666254B53975248776023",
+          "shapeName": "Kelantan",
+          "shapeISO": "MY-03",
+          "shapeGroup": "MYS",
+          "shapeType": "ADM1"
+        },
+        "geometry_type": "Polygon",
+        "parsed_geometry_sha256": "7f93fbee5edfc018437874d469f3b5bea179c2de020d8642a98aa61f8124525b",
+        "queue_roster": {
+          "source_index": 45978,
+          "family_index": 230,
+          "source_id": "gb:MYS:ADM1:15666254B53975248776023",
+          "ordinal": 7,
+          "owners": [],
+          "name": "Kelantan",
+          "geometry_status": "raw-native-supported"
+        },
+        "queue_contact": false,
+        "competitor_context": {
+          "role": "complete gb:MYS:ADM1 family retained for competitor/source-context consideration",
+          "positive_target": false,
+          "queue_owners": [],
+          "queue_contact": false,
+          "parent_join": "not asserted at individual-feature level in this evidence"
+        }
+      },
+      {
+        "source_index": 45979,
+        "family_index": 230,
+        "feature_ordinal": 8,
+        "source_id": "gb:MYS:ADM1:15666254B54729125478011",
+        "source_properties": {
+          "shapeID": "15666254B54729125478011",
+          "shapeName": "Putrajaya",
+          "shapeISO": "MY-16",
+          "shapeGroup": "MYS",
+          "shapeType": "ADM1"
+        },
+        "geometry_type": "Polygon",
+        "parsed_geometry_sha256": "60ebdc43e9bf494653081a6589680bf4db0cb8fcfafdaeb1a2fdee1ad1d23d57",
+        "queue_roster": {
+          "source_index": 45979,
+          "family_index": 230,
+          "source_id": "gb:MYS:ADM1:15666254B54729125478011",
+          "ordinal": 8,
+          "owners": [],
+          "name": "Putrajaya",
+          "geometry_status": "raw-native-supported"
+        },
+        "queue_contact": false,
+        "competitor_context": {
+          "role": "complete gb:MYS:ADM1 family retained for competitor/source-context consideration",
+          "positive_target": false,
+          "queue_owners": [],
+          "queue_contact": false,
+          "parent_join": "not asserted at individual-feature level in this evidence"
+        }
+      },
+      {
+        "source_index": 45980,
+        "family_index": 230,
+        "feature_ordinal": 9,
+        "source_id": "gb:MYS:ADM1:15666254B71460903090065",
+        "source_properties": {
+          "shapeID": "15666254B71460903090065",
+          "shapeName": "Terengganu",
+          "shapeISO": "MY-11",
+          "shapeGroup": "MYS",
+          "shapeType": "ADM1"
+        },
+        "geometry_type": "MultiPolygon",
+        "parsed_geometry_sha256": "ce56ba858dd07aa267c8144215f0acb08e481e951b19db798dccbe5deaf9ef99",
+        "queue_roster": {
+          "source_index": 45980,
+          "family_index": 230,
+          "source_id": "gb:MYS:ADM1:15666254B71460903090065",
+          "ordinal": 9,
+          "owners": [],
+          "name": "Terengganu",
+          "geometry_status": "raw-native-supported"
+        },
+        "queue_contact": false,
+        "competitor_context": {
+          "role": "complete gb:MYS:ADM1 family retained for competitor/source-context consideration",
+          "positive_target": false,
+          "queue_owners": [],
+          "queue_contact": false,
+          "parent_join": "not asserted at individual-feature level in this evidence"
+        }
+      },
+      {
+        "source_index": 45981,
+        "family_index": 230,
+        "feature_ordinal": 10,
+        "source_id": "gb:MYS:ADM1:15666254B34720353032971",
+        "source_properties": {
+          "shapeID": "15666254B34720353032971",
+          "shapeName": "Pahang",
+          "shapeISO": "MY-06",
+          "shapeGroup": "MYS",
+          "shapeType": "ADM1"
+        },
+        "geometry_type": "Polygon",
+        "parsed_geometry_sha256": "630dc5861ab182542cc035fe07f245ec70dda7d45091ee338c0b76317840ba6e",
+        "queue_roster": {
+          "source_index": 45981,
+          "family_index": 230,
+          "source_id": "gb:MYS:ADM1:15666254B34720353032971",
+          "ordinal": 10,
+          "owners": [],
+          "name": "Pahang",
+          "geometry_status": "raw-native-supported"
+        },
+        "queue_contact": false,
+        "competitor_context": {
+          "role": "complete gb:MYS:ADM1 family retained for competitor/source-context consideration",
+          "positive_target": false,
+          "queue_owners": [],
+          "queue_contact": false,
+          "parent_join": "not asserted at individual-feature level in this evidence"
+        }
+      },
+      {
+        "source_index": 45982,
+        "family_index": 230,
+        "feature_ordinal": 11,
+        "source_id": "gb:MYS:ADM1:15666254B71428205180864",
+        "source_properties": {
+          "shapeID": "15666254B71428205180864",
+          "shapeName": "Kedah",
+          "shapeISO": "MY-02",
+          "shapeGroup": "MYS",
+          "shapeType": "ADM1"
+        },
+        "geometry_type": "MultiPolygon",
+        "parsed_geometry_sha256": "2c8517029932e8f8346c19cf2a797cf80ea2d2894b4744188bafed38d5550aca",
+        "queue_roster": {
+          "source_index": 45982,
+          "family_index": 230,
+          "source_id": "gb:MYS:ADM1:15666254B71428205180864",
+          "ordinal": 11,
+          "owners": [],
+          "name": "Kedah",
+          "geometry_status": "raw-native-supported"
+        },
+        "queue_contact": false,
+        "competitor_context": {
+          "role": "complete gb:MYS:ADM1 family retained for competitor/source-context consideration",
+          "positive_target": false,
+          "queue_owners": [],
+          "queue_contact": false,
+          "parent_join": "not asserted at individual-feature level in this evidence"
+        }
+      },
+      {
+        "source_index": 45983,
+        "family_index": 230,
+        "feature_ordinal": 12,
+        "source_id": "gb:MYS:ADM1:15666254B44964481844598",
+        "source_properties": {
+          "shapeID": "15666254B44964481844598",
+          "shapeName": "Perlis",
+          "shapeISO": "MY-09",
+          "shapeGroup": "MYS",
+          "shapeType": "ADM1"
+        },
+        "geometry_type": "Polygon",
+        "parsed_geometry_sha256": "c0636aceaaea83b3693b1f6858e9cdcb0cc52112406fda4dc345e7bc6b13a503",
+        "queue_roster": {
+          "source_index": 45983,
+          "family_index": 230,
+          "source_id": "gb:MYS:ADM1:15666254B44964481844598",
+          "ordinal": 12,
+          "owners": [],
+          "name": "Perlis",
+          "geometry_status": "raw-native-supported"
+        },
+        "queue_contact": false,
+        "competitor_context": {
+          "role": "complete gb:MYS:ADM1 family retained for competitor/source-context consideration",
+          "positive_target": false,
+          "queue_owners": [],
+          "queue_contact": false,
+          "parent_join": "not asserted at individual-feature level in this evidence"
+        }
+      },
+      {
+        "source_index": 45984,
+        "family_index": 230,
+        "feature_ordinal": 13,
+        "source_id": "gb:MYS:ADM1:15666254B15173108486297",
+        "source_properties": {
+          "shapeID": "15666254B15173108486297",
+          "shapeName": "Perak",
+          "shapeISO": "MY-08",
+          "shapeGroup": "MYS",
+          "shapeType": "ADM1"
+        },
+        "geometry_type": "MultiPolygon",
+        "parsed_geometry_sha256": "a8d8d97fcde987608e285cb1c8fff11a073b070d93ae963577ece08971623f94",
+        "queue_roster": {
+          "source_index": 45984,
+          "family_index": 230,
+          "source_id": "gb:MYS:ADM1:15666254B15173108486297",
+          "ordinal": 13,
+          "owners": [],
+          "name": "Perak",
+          "geometry_status": "raw-native-supported"
+        },
+        "queue_contact": false,
+        "competitor_context": {
+          "role": "complete gb:MYS:ADM1 family retained for competitor/source-context consideration",
+          "positive_target": false,
+          "queue_owners": [],
+          "queue_contact": false,
+          "parent_join": "not asserted at individual-feature level in this evidence"
+        }
+      },
+      {
+        "source_index": 45985,
+        "family_index": 230,
+        "feature_ordinal": 14,
+        "source_id": "gb:MYS:ADM1:15666254B92074897121205",
+        "source_properties": {
+          "shapeID": "15666254B92074897121205",
+          "shapeName": "Penang",
+          "shapeISO": "MY-07",
+          "shapeGroup": "MYS",
+          "shapeType": "ADM1"
+        },
+        "geometry_type": "MultiPolygon",
+        "parsed_geometry_sha256": "577f2ae7808e63df4b5db024811c7fa2a0571d99664cad606900a8bde16f7739",
+        "queue_roster": {
+          "source_index": 45985,
+          "family_index": 230,
+          "source_id": "gb:MYS:ADM1:15666254B92074897121205",
+          "ordinal": 14,
+          "owners": [],
+          "name": "Penang",
+          "geometry_status": "raw-native-supported"
+        },
+        "queue_contact": false,
+        "competitor_context": {
+          "role": "complete gb:MYS:ADM1 family retained for competitor/source-context consideration",
+          "positive_target": false,
+          "queue_owners": [],
+          "queue_contact": false,
+          "parent_join": "not asserted at individual-feature level in this evidence"
+        }
+      },
+      {
+        "source_index": 45986,
+        "family_index": 230,
+        "feature_ordinal": 15,
+        "source_id": "gb:MYS:ADM1:15666254B4265207353082",
+        "source_properties": {
+          "shapeID": "15666254B4265207353082",
+          "shapeName": "Labuan",
+          "shapeISO": "MY-15",
+          "shapeGroup": "MYS",
+          "shapeType": "ADM1"
+        },
+        "geometry_type": "MultiPolygon",
+        "parsed_geometry_sha256": "5e3de496d5e4f6976f14dccd376bcf089fb96ba75f44a27b5d9ac303609976f0",
+        "queue_roster": {
+          "source_index": 45986,
+          "family_index": 230,
+          "source_id": "gb:MYS:ADM1:15666254B4265207353082",
+          "ordinal": 15,
+          "owners": [],
+          "name": "Labuan",
+          "geometry_status": "raw-native-supported"
+        },
+        "queue_contact": false,
+        "competitor_context": {
+          "role": "complete gb:MYS:ADM1 family retained for competitor/source-context consideration",
+          "positive_target": false,
+          "queue_owners": [],
+          "queue_contact": false,
+          "parent_join": "not asserted at individual-feature level in this evidence"
+        }
+      }
+    ],
+    "explicit_contacts_in_package": [
+      {
+        "source_index": 45977,
+        "source_id": "gb:MYS:ADM1:15666254B8535925993004",
+        "name": "Sarawak",
+        "ordinal": 6
+      }
+    ],
+    "note": "All 16 MYS features are retained as complete family context. Only Sarawak source index 45977/feature ordinal 6 appears in the package source_features contact list; the other 15 are not listed as package contacts. The roster owners array is empty for all MYS features; this is not an applicability, authority, or geometric noncontact determination."
+  },
+  "status": {
+    "source_applicability": "unresolved",
+    "native_authority": "unresolved",
+    "positive_qualification": "not asserted",
+    "accepted_credit": 0,
+    "remaining_package_cells": 828,
+    "remaining_intervals": 323,
+    "scientific_scope": "bounded observational identity and recorded hierarchy joins only; no geometric qualification or repair output"
+  }
+}
