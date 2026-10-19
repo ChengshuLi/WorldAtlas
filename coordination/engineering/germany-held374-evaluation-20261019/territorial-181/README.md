@@ -14,6 +14,8 @@ This standalone packet preserves the exact territorial-exclusion held runs and a
 
 The contact records are whole-target geometry evidence retained in the pinned artifacts. They are not per-cell intersections and cannot show that each of the 181 held cells individually intersects a listed feature. They do not establish current source applicability, source vintage adequacy, legal or current boundary status, sovereignty, source authority, or repair eligibility. This evidence packet assigns no repair credit and does not change the issue or PR state.
 
+Each exact key now carries a proposed documented-unresolved question and links to its original land/source-feature fragment, complete owner membership, source-evidence rows, and whole-target contact context. The raw 163 contact rows, including both atoms for owner 5755, remain intact. The contacts are not per-key intersections; they do not resolve source applicability or release native holds. Repair and exception credit remain zero pending exact-head review, durable delivery, and root acceptance.
+
 ## Pinned inputs
 
-See `territorial-181.json` for exact refs, paths, Git blob IDs, and content SHA256 hashes.
+See `territorial-181.json` for exact refs, paths, Git blob IDs, and content SHA256 hashes. The linked [shared original/contact witness](../shared/original-contact-witness.json) preserves the exact fragment and owner-contact joins.

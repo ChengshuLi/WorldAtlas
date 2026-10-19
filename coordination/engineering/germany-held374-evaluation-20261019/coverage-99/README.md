@@ -10,7 +10,7 @@ This packet expands the exact 99 tuples retained in `held-original.json` under `
 - The whole-target physical file has a result for each of the 18 source atoms. Its relations and physical issue flags are target-level only.
 - No evidence here establishes complete-cell coverage for any held key. All 99 remain held; accepted count is zero.
 
-The smallest missing witness for any disposition change is a reproducible, pinned, per-cell full-coverage result keyed by exact row, column, and owner, with the applicable physical/source rule and input hashes. Target-level `mapped_land_support` alone does not satisfy that witness.
+A reproducible, pinned, per-cell full-coverage result keyed by exact row, column, and owner is required for positive repair or clearing the native hold; target-level `mapped_land_support` alone does not satisfy it. For a documented-unresolved proposal, each key instead retains its original fragment, both original multipart atoms, source-evidence rows, physical context, and a concrete unresolved coverage/source-applicability question. These proposals are not accepted: native holds remain and credit is zero. The shared witness is linked at [shared/original-contact-witness.json](../shared/original-contact-witness.json); its contacts are context, not per-cell intersections.
 
 ## Scope and caution
 
