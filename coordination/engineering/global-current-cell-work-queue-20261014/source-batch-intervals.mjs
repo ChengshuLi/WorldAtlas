@@ -8,12 +8,20 @@ const sha = (b) => createHash("sha256").update(b).digest("hex");
 function intervalReader(load) {
   const sourcePins = JSON.parse(load("source-census-summary.json")).blocks;
   const physicalPins = JSON.parse(load("physical-unassigned-summary.json")).phases;
-  return (prefix, b) => {
+  const pinFor = (prefix, b) => {
     const pin =
       prefix === "source-candidates"
         ? sourcePins[b]
         : physicalPins[b].files.find((f) => f.kind === prefix);
     if (!pin) throw Error("Missing interval pin");
+    return pin;
+  };
+  const members = (prefix, b) => {
+    const pin = pinFor(prefix, b);
+    return pin.parts ?? [{...pin, path: prefix + "-block-" + String(b).padStart(3, "0") + ".json.gz"}];
+  };
+  const read = (prefix, b) => {
+    const pin = pinFor(prefix, b);
     if (pin.parts) {
       const rows = [];
       for (const part of pin.parts) {
@@ -29,13 +37,15 @@ function intervalReader(load) {
         throw Error("Complete split interval hash mismatch");
       return rows;
     }
-    const raw = load(prefix + "-block-" + String(b).padStart(3, "0") + ".json.gz");
+    const raw = load(members(prefix, b)[0].path);
     if (sha(raw) !== pin.sha256) throw Error("Encoded interval hash mismatch");
     const decoded = gunzipSync(raw);
     if (sha(decoded) !== pin.decoded_sha256)
       throw Error("Decoded interval hash mismatch");
     return JSON.parse(decoded);
   };
+  return {read, inputs: blocks => blocks.flatMap(b =>
+    ["source-candidates", "physical-support", "inland-water-support"].flatMap(prefix => members(prefix, b)))};
 }
 export function context(load) {
   return {
@@ -151,14 +161,19 @@ export function* segments(b, ctx, readIntervals) {
 }
 // Derive the complete original package, never a caller-selected witness subset.
 // load returns logical metadata bodies and encoded .gz interval members.
-export function packageIntervals(packageId, load) {
+export function packageInputs(packageId, load) {
   const manifest = JSON.parse(load("source-package-queue.json"));
   const matches = manifest.packages.filter(p => p.package_id === packageId);
   if (matches.length !== 1) throw Error("Unknown or duplicate package");
   const pkg = matches[0];
   for (const [name, digest] of Object.entries(manifest.input_sha256 ?? {}))
     if (sha(load(name)) !== digest) throw Error("Shared input hash mismatch: " + name);
-  const ctx = context(load), readIntervals = intervalReader(load), blocks = [];
+  const intervals = intervalReader(load);
+  return {package: pkg, inputs: intervals.inputs(pkg.native_blocks), readIntervals: intervals.read};
+}
+export function packageIntervals(packageId, load) {
+  const {package: pkg, readIntervals} = packageInputs(packageId, load);
+  const ctx = context(load), blocks = [];
   let cells = 0;
   for (const b of pkg.native_blocks) {
     const rows = [];
