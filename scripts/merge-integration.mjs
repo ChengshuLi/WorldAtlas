@@ -1,5 +1,5 @@
 import {collectGeographicApproval, bindingHash} from './geographic-adjudication-api.mjs';
-import {COORDINATION_PATHS, integrationProfile, selectedDataCandidate, selectedDataSelection, candidateGeographyCode} from './integration-profile.mjs';
+import {COORDINATION_PATHS, integrationProfile, inertEvidenceAdditions, selectedDataCandidate, selectedDataSelection, candidateGeographyCode} from './integration-profile.mjs';
 import {focusedIntegrationTest, PACKAGED_ASSET_TESTS} from './run-integration-tests.mjs';
 import {EXECUTION_CODE, REBIND_CODE} from './check-unchanged-selected-geography.mjs';
 import {loadPackageInputs, packagePathRequired, readPackageInputs, safePackagePath, containsPackagePath, selectedDataCheckoutPatterns, fullCheckoutPatterns, focusedCheckoutPatterns} from './package-inputs.mjs';
@@ -280,7 +280,15 @@ export async function prepareIntegration(options) {
     const geographyRequiredForCandidate = geographyRequired(state.pr.head.ref, files, {}, integrated.entries);
     const software = geographyRequiredForCandidate && candidateGeographyCode(applicability, files, selection?.test_selection);
     const packageInputs = await readPackageInputs({api: options.api, route: root(options.repo), base: candidate, maximumBytes: 8 * 1024 * 1024});
-    const reviewed = reviewedTestPlan(options.reviewedTests, {base:state.base, head:state.pr.head.sha,
+    // Pure new evidence packets need the same reviewed consumer contract by
+    // default, not an operator-selected mode or all coordination-code regressions.
+    const request = [undefined, null, ''].includes(options.reviewedTests) &&
+      inertEvidenceAdditions(files, integrated.entries, packageInputs)
+      ? {base:state.base, head:state.pr.head.sha, files:[
+        'test/evidence-quality.test.mjs', 'test/premerge-evidence.test.mjs',
+        'test/engineering-owned-scope-routing.test.mjs']}
+      : options.reviewedTests;
+    const reviewed = reviewedTestPlan(request, {base:state.base, head:state.pr.head.sha,
       entries:integrated.entries, files, definition:packageInputs});
     need(!reviewed || !selection, 'Selected-data delivery retains its mandatory native and emitted execution path');
     const profile = reviewed ? (reviewed.build ? 'full' : 'evidence') : applicability;

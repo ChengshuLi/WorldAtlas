@@ -34,6 +34,10 @@ export const COORDINATION_PATHS = new Set([
   '.github/workflows/worker-merge.yml',
   '.github/evidence-policy.json'
 ]);
+const packet = name => /\.(?:md|txt|json|jsonl|jsonl\.gz|log|stdout|stderr|csv|tsv)$/.test(name) &&
+  !/^(?:package(?:-lock)?\.json|npm-shrinkwrap\.json|(?:requirements|constraints)(?:[.-].*)?\.txt|pyproject\.toml|setup\.(?:py|cfg)|__init__\.py|(?:site|user)customize\.py|(?:js|ts)config(?:\.[^.]+)?\.json|import[-_.]?map\.json)$/i.test(name.split('/').at(-1));
+const sourcePacketPath = name => safePackagePath(name) && /^(?:research\/(?:campaigns|geography)|data\/regional-review)\/[^/]+\//.test(name);
+
 // Existing tests are checked as ordinary current files. Added controls run by
 // the same discovery rule; removed controls need no replacement full suite.
 // Routing follows actual changed files and consumed package roles, never a
@@ -58,16 +62,12 @@ export function integrationProfile(branch, files, reservation = {}, authoredEntr
   try { definition = loadPackageInputs(); } catch { return 'full'; }
   // Source packets are inert unless declared as actual package inputs. Their
   // real scientific checks remain selected independently by geographyRequired.
-  if (names.every(name => safePackagePath(name) &&
-      /^(?:research\/(?:campaigns|geography)|data\/regional-review)\/[^/]+\//.test(name) &&
-      !packagePathRequired(name, definition))) return 'evidence';
+  if (names.every(name => sourcePacketPath(name) && !packagePathRequired(name, definition))) return 'evidence';
   const removed = new Set(files.filter(file => file.status === 'removed' && !file.previous_filename &&
     /^(?:scripts\/|test\/|\.github\/workflows\/)/.test(file.filename) &&
     !packagePathRequired(file.filename, definition)).map(file => file.filename));
   const control = name => removed.has(name) || COORDINATION_PATHS.has(name) || focusedIntegrationTest(name) ||
     name.startsWith('docs/') && /\.(md|txt)$/.test(name);
-  const packet = name => /\.(?:md|txt|json|jsonl|jsonl\.gz|log|stdout|stderr|csv|tsv)$/.test(name) &&
-    !/^(?:package(?:-lock)?\.json|npm-shrinkwrap\.json|(?:requirements|constraints)(?:[.-].*)?\.txt|pyproject\.toml|setup\.(?:py|cfg)|__init__\.py|(?:site|user)customize\.py|(?:js|ts)config(?:\.[^.]+)?\.json|import[-_.]?map\.json)$/i.test(name.split('/').at(-1));
   if (files.every(file => {
     if ([file.filename, ...(file.previous_filename ? [file.previous_filename] : [])].every(control)) return true;
     if (file.previous_filename || !packetPath(file.filename) ||
@@ -77,6 +77,19 @@ export function integrationProfile(branch, files, reservation = {}, authoredEntr
       file.status === 'modified' && file.filename.endsWith('/evidence-quality.json');
   })) return 'evidence';
   return 'full';
+}
+
+// The existing inert packet contract can derive the default consumer roster.
+// Mixed/changed code, selected roles and nonordinary trees retain normal routing.
+export function inertEvidenceAdditions(files, entries, definition) {
+  return entries instanceof Map && files.length > 0 && files.every(file =>
+    file.status === 'added' && !file.previous_filename &&
+    (packetPath(file.filename) || sourcePacketPath(file.filename)) && packet(file.filename) &&
+    !packagePathRequired(file.filename, definition) && ordinary(entries.get(file.filename)) &&
+    file.filename.split('/').slice(0,-1).every((_, index, parts) => {
+      const parent = entries.get(parts.slice(0,index+1).join('/'));
+      return parent?.type === 'tree' && parent.mode === '040000';
+    }));
 }
 
 // Route executable checker/producer changes through actual candidate science.
