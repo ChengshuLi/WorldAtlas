@@ -47,9 +47,9 @@ export function packagePathRequired(file, definition) {
   return containsPackagePath(definition.inputs, file) || containsPackagePath(definition.verification_paths, file);
 }
 
-// These whole historical archives have no complete-regression consumers. Keep
-// their originals in Git, and retain an entire root if package/verification roles
-// ever explicitly need a member or ancestor. Unlisted siblings remain included.
+// Prune opaque historical products, not engineering code used by cold-entry
+// regression. Retain an entire root if package/verification roles explicitly
+// need a member or ancestor. Unlisted siblings remain included.
 export function fullCheckoutPatterns(definition) {
   validatePackageInputs(definition);
   const archives = [
@@ -64,7 +64,10 @@ export function fullCheckoutPatterns(definition) {
   return ['/*','!/data/regional-review/','!/research/campaigns/', ...archives
     .filter(prefix => !declared.some(name => name.startsWith(prefix) ||
       name.endsWith('/') && prefix.startsWith(name)))
-    .map(prefix => '!/' + prefix), ...scopedCheckoutPatterns('research/geography/', declared)];
+    .map(prefix => '!/' + prefix), ...scopedCheckoutPatterns('research/geography/', declared),
+    // Match the allocator's code-only engineering scope, including nested helpers.
+    ...['mjs','js','cjs','py','sh'].map(extension => 'coordination/engineering/**/*.' + extension),
+    'coordination/engineering/**/package.json'];
 }
 
 // One fixture roster serves full and focused regression. Keep
