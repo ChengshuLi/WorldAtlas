@@ -242,25 +242,40 @@ test('explicit data head is independent of executable checkout and cannot qualif
 });
 
 
-test('the original extraction CLI preserves independently specified package and interval bytes', () => {
+test('package observation supplies original extraction bytes without materialized data', () => {
   const expectedPackage = {package_id: packageId, native_blocks: [0], native_cells: 5, intervals: 5};
   const expectedRows = [[0, 0, 1, [1], [1], 'land'], [0, 2, 3, [2], [2], 'land'],
     [0, 3, 4, [1], [1], 'land'], [1, 1, 2, [2], [2], 'land'], [2, 1, 2, [1], [1], 'land']];
   for (const splitCandidates of [false, true]) {
     const f = fixture({splitCandidates}); try {
-      const observed = f.run(); assert.equal(observed.status, 0, observed.stderr); assert.equal(observed.report.query_count, 5);
-      assert.deepEqual(observed.report.original_intervals, [{block: 0, rows: expectedRows}]);
-      assert.equal(observed.report.original_intervals_sha256,
-        sha(Buffer.from(JSON.stringify(observed.report.original_intervals) + '\n')));
-      const expanded = observed.report.original_intervals.flatMap(({rows}) => rows.flatMap(([y, start, end]) =>
-        Array.from({length: end - start}, (_, i) => ({x: start + i, y}))));
-      assert.deepEqual(expanded, observed.report.keys.map(({x, y}) => ({x, y})));
+      // Include the actual omitted-input role: its plain body is authenticated
+      // from Git even when no .json or .json.gz sibling exists in the checkout.
+      const seamName = queueRoot + '/normalized-source-seams.json';
+      const seam = f.write(seamName, {version: 1, original: 'retained seam metadata'});
+      const queue = JSON.parse(fs.readFileSync(path.join(f.repo, queueRoot, 'source-package-queue.json')));
+      queue.input_sha256['normalized-source-seams.json'] = sha(seam);
+      f.write(queueRoot + '/source-package-queue.json', queue); f.commit();
       const destination = path.join(f.repo, 'original-extraction');
       const result = spawnSync(process.execPath, [path.join(f.repo, queueRoot, 'source-batch-intervals.mjs'), packageId, destination], {encoding: 'utf8'});
       assert.equal(result.status, 0, result.stderr);
       assert.deepEqual(fs.readdirSync(destination).sort(), ['block-000.json.gz', 'package.json']);
       assert.deepEqual(fs.readFileSync(path.join(destination, 'package.json')), Buffer.from(JSON.stringify(expectedPackage, null, 2) + '\n'));
       assert.deepEqual(fs.readFileSync(path.join(destination, 'block-000.json.gz')), gzipSync(JSON.stringify(expectedRows) + '\n'));
+      // Use real Git sparse selection, not a mock reader or copied extraction.
+      f.git('sparse-checkout', 'set', '--no-cone', ...sources.map(name => '/' + name),
+        '/scripts/run-geographic-check.py', '/package.json');
+      for (const name of [seamName, seamName + '.gz', queueRoot + '/source-package-queue.json',
+        queueRoot + '/source-feature-roster.json.gz', 'inputs/bank/part-0.gz'])
+        assert.equal(fs.existsSync(path.join(f.repo, name)), false, name);
+      const observed = f.run(); assert.equal(observed.status, 0, observed.stderr); assert.equal(observed.report.query_count, 5);
+      assert.deepEqual(observed.report.original_package, expectedPackage);
+      assert.deepEqual(observed.report.original_intervals, [{block: 0, rows: expectedRows}]);
+      assert.equal(observed.report.original_intervals_sha256,
+        sha(Buffer.from(JSON.stringify(observed.report.original_intervals) + '\n')));
+      const expanded = observed.report.original_intervals.flatMap(({rows}) => rows.flatMap(([y, start, end]) =>
+        Array.from({length: end - start}, (_, i) => ({x: start + i, y}))));
+      assert.deepEqual(expanded, observed.report.keys.map(({x, y}) => ({x, y})));
+      assert.ok(observed.report.consumed_inputs.some(pin => pin.path === seamName && pin.sha256 === sha(seam)));
     } finally { f.cleanup(); }
   }
 });
