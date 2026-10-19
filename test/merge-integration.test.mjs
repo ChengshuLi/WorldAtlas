@@ -180,53 +180,65 @@ test('reviewed tests derive the complete fixture and executing-policy boundary w
 });
 
 
-test('reviewed rebind custody retains its declared live policy and refuses missing or redirected operands', () => {
-  const policy='coordination/engineering/additive-native-composition-20261009/execution-code-paths.json';
-  const consumer='test/current-rebind-product-custody.test.mjs';
+for (const [label, consumer, operand] of [
+  ['rebind custody', 'test/current-rebind-product-custody.test.mjs', 'coordination/engineering/additive-native-composition-20261009/execution-code-paths.json'],
+  ['workspace bootstrap', 'test/local-workspace.test.mjs', 'docs/LOCAL_WORKSPACES.md'],
+  ['regional research gate', 'test/regional-research-gate.test.mjs', 'data/research-geography-gate.json']
+]) test(`reviewed ${label} retains current declared policy and refuses missing or redirected operands`, () => {
   const row=(mode='100644',type='blob')=>({sha:sha('e'),mode,type});
-  const entries=new Map([...EXECUTION_CODE.map(name=>[name,row()]),[policy,row()],
+  const entries=new Map([...EXECUTION_CODE.map(name=>[name,row()]),[operand,row()],
     [consumer,row()],['test/example.test.mjs',row()],['test/fixtures/contract/input.json',row()]]);
   const request={base:sha('a'),head:sha('b'),files:[consumer]};
   const context={base:request.base,head:request.head,entries,files:[],definition:loadPackageInputs()};
   const plan=reviewedTestPlan(request,context);
-  assert.deepEqual(plan.inputs,[...EXECUTION_CODE,policy]);
-  assert(plan.checkout_patterns.includes('/'+policy));assert.equal(plan.build,false);
-  assert(!reviewedTestPlan({...request,files:['test/example.test.mjs']},context).inputs.includes(policy));
-  const absent=new Map(entries);absent.delete(policy);
+  assert.deepEqual(plan.inputs,[...EXECUTION_CODE,operand]);
+  assert(plan.checkout_patterns.includes('/'+operand));assert.equal(plan.build,false);
+  assert(!reviewedTestPlan({...request,files:['test/example.test.mjs']},context).inputs.includes(operand));
+  const absent=new Map(entries);absent.delete(operand);
   assert.throws(()=>reviewedTestPlan(request,{...context,entries:absent}),/unavailable/);
-  for(const name of [policy,policy.slice(0,policy.lastIndexOf('/'))]) {
+  for(const name of [operand,operand.slice(0,operand.lastIndexOf('/'))]) {
     const redirected=new Map(entries);redirected.set(name,row('120000'));
     assert.throws(()=>reviewedTestPlan(request,{...context,entries:redirected}),/unavailable/);
   }
-  const definition={...context.definition,verification_paths:context.definition.verification_paths.filter(name=>name!==policy)};
+  const definition={...context.definition,verification_paths:context.definition.verification_paths.filter(name=>name!==operand)};
   assert.throws(()=>reviewedTestPlan(request,{...context,definition}),/verification declaration/);
   assert.throws(()=>reviewedTestPlan({...request,inputs:[...plan.inputs,'data/arbitrary.json']},context),/manual inputs/);
-  const changed=new Map(entries);changed.set(policy,{...row(),sha:sha('f')});
-  assert.deepEqual(reviewedTestPlan(request,{...context,entries:changed}),plan,'The current body is selected rather than a frozen historical policy copy');
+  const changed=new Map(entries);changed.set(operand,{...row(),sha:sha('f')});
+  assert.deepEqual(reviewedTestPlan(request,{...context,entries:changed}),plan,'Select the current body, not a historical fixture copy');
 });
 
-test('reviewed workspace controls retain current documented bootstrap and refuse missing or redirected operands', () => {
-  const documentation='docs/LOCAL_WORKSPACES.md',consumer='test/local-workspace.test.mjs';
-  const row=(mode='100644',type='blob')=>({sha:sha('e'),mode,type});
-  const entries=new Map([...EXECUTION_CODE.map(name=>[name,row()]),[documentation,row()],
-    [consumer,row()],['test/example.test.mjs',row()],['test/fixtures/contract/input.json',row()]]);
+test('reviewed regional gate materializes only its live policy for the actual sparse consumer', () => {
+  const consumer='test/regional-research-gate.test.mjs',operand='data/research-geography-gate.json';
+  const row={sha:sha('e'),mode:'100644',type:'blob'};
+  const entries=new Map([...EXECUTION_CODE.map(name=>[name,row]),[operand,row],
+    [consumer,row],['test/fixtures/contract/input.json',row]]);
   const request={base:sha('a'),head:sha('b'),files:[consumer]};
   const context={base:request.base,head:request.head,entries,files:[],definition:loadPackageInputs()};
   const plan=reviewedTestPlan(request,context);
-  assert.deepEqual(plan.inputs,[...EXECUTION_CODE,documentation]);
-  assert(plan.checkout_patterns.includes('/'+documentation));assert.equal(plan.build,false);
-  assert(!reviewedTestPlan({...request,files:['test/example.test.mjs']},context).inputs.includes(documentation));
-  const absent=new Map(entries);absent.delete(documentation);
-  assert.throws(()=>reviewedTestPlan(request,{...context,entries:absent}),/unavailable/);
-  for(const name of [documentation,'docs']) {
-    const redirected=new Map(entries);redirected.set(name,row('120000'));
-    assert.throws(()=>reviewedTestPlan(request,{...context,entries:redirected}),/unavailable/);
-  }
-  const definition={...context.definition,verification_paths:context.definition.verification_paths.filter(name=>name!==documentation)};
-  assert.throws(()=>reviewedTestPlan(request,{...context,definition}),/verification declaration/);
-  assert.throws(()=>reviewedTestPlan({...request,inputs:[...plan.inputs,'data/arbitrary.json']},context),/manual inputs/);
-  const changed=new Map(entries);changed.set(documentation,{...row(),sha:sha('f')});
-  assert.deepEqual(reviewedTestPlan(request,{...context,entries:changed}),plan,'Select the current document, not a historical fixture copy');
+  assert.equal(plan.build,false);assert.deepEqual(plan.files,[consumer]);
+  const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'reviewed-live-policy-'));
+  try {
+    const git=(args,options={})=>execFileSync('git',args,{cwd:temporary,encoding:'utf8',...options});
+    git(['init','-q']);
+    for(const name of ['scripts/research-import-gate.mjs','src/regional-import-gate.js']) {
+      fs.mkdirSync(path.dirname(path.join(temporary,name)),{recursive:true});
+      fs.copyFileSync(name,path.join(temporary,name));
+    }
+    fs.writeFileSync(path.join(temporary,'package.json'),JSON.stringify({type:'module'}));
+    fs.mkdirSync(path.join(temporary,'data'));
+    const body=JSON.stringify({version:2,ready_for_location_attributes:false,marker:'current-fixture-policy'})+'\n';
+    fs.writeFileSync(path.join(temporary,operand),body);
+    const excluded='data/unrelated-retained-input.json';
+    fs.writeFileSync(path.join(temporary,excluded),'not a required policy operand');
+    git(['add','.']);git(['-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','live policy fixture']);
+    git(['sparse-checkout','set','--no-cone','--stdin'],{input:plan.checkout_patterns.join('\n')+'\n'});
+    assert.equal(fs.readFileSync(path.join(temporary,operand),'utf8'),body);
+    assert.equal(fs.existsSync(path.join(temporary,excluded)),false);
+    const result=spawnSync(process.execPath,['--input-type=module','-e',
+      "import assert from 'node:assert/strict'; import {readResearchImportGate,assertResearchImportsReady} from './scripts/research-import-gate.mjs'; const gate=readResearchImportGate(); assert.equal(gate.version,2); assert.equal(gate.marker,'current-fixture-policy'); assert.throws(()=>assertResearchImportsReady(gate,{regionIds:['region:a']}),/paused/); console.log('actual-sparse-policy-read');"],
+      {cwd:temporary,encoding:'utf8'});
+    assert.equal(result.status,0,result.stderr);assert.equal(result.stdout.trim(),'actual-sparse-policy-read');
+  } finally { fs.rmSync(temporary,{recursive:true,force:true}); }
 });
 
 test('reviewed lists cannot omit actual packaged consumers when package source changes or moves', async () => {
@@ -241,6 +253,24 @@ test('reviewed lists cannot omit actual packaged consumers when package source c
     assert.deepEqual(plan.checkout_patterns,fullCheckoutPatterns(f.packageInputs));
     entries.delete(required[0]);assert.throws(()=>reviewedTestPlan(request,context),/packaged consumer/);
   }
+  // Use the actual declaration, not a synthetic allowlist. Author tooling is
+  // not an atlas build input, while runtime and package-policy edits still are.
+  const consumer='test/local-workspace.test.mjs',required=['test/compact-ownership.test.mjs','test/prepared-parity.test.mjs'];
+  const row={sha:sha('e'),type:'blob',mode:'100644'};
+  const entries=new Map([...EXECUTION_CODE.map(name=>[name,row]),...required.map(name=>[name,row]),
+    [consumer,row],['docs/LOCAL_WORKSPACES.md',row],['test/fixtures/contract/input.json',row]]);
+  const request={base:sha('a'),head:sha('b'),files:[consumer]};
+  const changed={filename:'scripts/local-workspace.mjs',status:'modified'};
+  const context={base:request.base,head:request.head,entries,files:[changed],definition:loadPackageInputs()};
+  const tooling=reviewedTestPlan(request,context);
+  assert.deepEqual(tooling.files,[consumer]);assert.equal(tooling.build,false);
+  assert.equal(geographyRequired('engineering/tooling',[changed]),true);
+  assert.equal(candidateGeographyCode('evidence',[changed],'reviewed'),true);
+  for(const filename of ['src/effective-footprint.js','.github/package-inputs.json']) {
+    const actual=reviewedTestPlan(request,{...context,files:[{filename,status:'modified'}]});
+    assert.deepEqual(actual.files,[consumer,...required]);assert.equal(actual.build,true);
+  }
+
 });
 
 test('minimal reviewed package consumer derives real inputs without a changed package file',()=>{
