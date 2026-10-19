@@ -1,5 +1,5 @@
 import {execFileSync, spawnSync} from 'node:child_process';
-import {candidateGeographyCode} from '../scripts/integration-profile.mjs';
+import {candidateGeographyCode, inertEvidenceAdditions} from '../scripts/integration-profile.mjs';
 import {memoizeImmutableGitBlobs} from '../scripts/immutable-git-blobs.mjs';
 import {fullCheckoutPatterns,focusedCheckoutPatterns,loadPackageInputs,packagePathRequired} from '../scripts/package-inputs.mjs';
 import {sha256, subjectsHash} from '../scripts/evidence-quality.mjs';
@@ -130,6 +130,77 @@ test('actual full preparation emits archive patterns from the authenticated cand
   assert(prepared.checkout_patterns.includes('/research/geography/shared-seam-prt-esp-20261006/required.json'));
   assert(prepared.checkout_patterns.includes('!/coordination/engineering/reference-source-custody-20261007/'));
   assert.equal(f.calls.filter(row=>row.route.includes('/contents/.github/package-inputs.json')).length,1);
+});
+
+
+const PACKET_TESTS = ['test/evidence-quality.test.mjs','test/premerge-evidence.test.mjs','test/engineering-owned-scope-routing.test.mjs'];
+function packetFixture() {
+  const f=fixture(),old=f.api,prefix='coordination/engineering/colombia-held-residual-830-20261019/';
+  const names=['README.md','current-owner-observation-79c7802.json','full-package-crosswalk-current-owner-79c7802.json','partition-a.json','partition-b.json','per-key-unresolved-request.json'].map(n=>prefix+n);
+  const blob=path=>({path,sha:sha('e'),mode:'100644',type:'blob',size:1});
+  const parents=rows=>{
+    const all=new Map(rows.map(row=>[row.path,row]));
+    for(const row of rows)for(let at=row.path.indexOf('/');at>=0;at=row.path.indexOf('/',at+1)){
+      const parent=row.path.slice(0,at);if(!all.has(parent))all.set(parent,{path:parent,sha:sha('d'),mode:'040000',type:'tree'});
+    }
+    return [...all.values()];
+  };
+  f.baseline=parents([...new Set([...EXECUTION_CODE,...PACKET_TESTS,'test/fixtures/contract/input.json'])].map(blob));
+  f.integrated=parents([...structuredClone(f.baseline),...names.map(blob)]);f.authored=structuredClone(f.integrated);
+  f.files=names.map(filename=>({filename,status:'added'}));f.pr.changed_files=f.files.length;f.packageInputs=loadPackageInputs();
+  f.api=(route,...args)=>route.split('?')[0].endsWith('/pulls/2/files')?structuredClone(f.files):old(route,...args);
+  f.packetNames=names;return f;
+}
+
+test('default actual preparation derives the inert packet consumers without an operator roster',async()=>{
+  for(const reviewedTests of [undefined,null,'']){
+    const f=packetFixture(),prepared=await prepareIntegration({...f.options(),reviewedTests});
+    assert.equal(prepared.profile,'evidence');assert.equal(prepared.test_selection,'reviewed');
+    assert.deepEqual(prepared.test_files,PACKET_TESTS);assert.deepEqual(prepared.shards,[0]);
+    assert.deepEqual(prepared.checkout_patterns,focusedCheckoutPatterns(f.packageInputs,EXECUTION_CODE));
+    assert.equal(prepared.geography_required,true);assert.equal(prepared.geography_software,false);
+    assert.equal(prepared.base,f.base);assert.equal(prepared.pr.head.sha,f.head);assert.equal(prepared.candidate,f.candidate);
+    assert.equal(f.calls.filter(row=>row.route.includes('/contents/.github/package-inputs.json')).length,1);
+    await assert.rejects(f.complete({geographyResult:'skipped'}),/Trusted combined geography/);
+  }
+  const f=packetFixture();
+  await assert.rejects(prepareIntegration({...f.options(),reviewedTests:{base:sha('0'),head:f.head,files:PACKET_TESTS}}),/stale/);
+});
+
+test('automatic packet boundary reuses inert names and refuses executable, redirected or declared roles',()=>{
+  const f=packetFixture(),entries=new Map(f.integrated.map(row=>[row.path,row]));
+  assert(inertEvidenceAdditions(f.files,entries,f.packageInputs));
+  const file=f.files[0];
+  for(const delta of [{status:'modified'},{status:'removed'},{status:'renamed',previous_filename:'src/old.js'},{previous_filename:'old.json'}])
+    assert.equal(inertEvidenceAdditions([{...file,...delta}],entries,f.packageInputs),false);
+  for(const delta of [{mode:'100755'},{mode:'120000'},{type:'commit',mode:'160000'},{sha:'not-an-oid'},{size:undefined}]){
+    const changed=new Map(entries);changed.set(file.filename,{...changed.get(file.filename),...delta});
+    assert.equal(inertEvidenceAdditions([file],changed,f.packageInputs),false);
+  }
+  const redirected=new Map(entries);redirected.set('coordination/engineering',{type:'blob',mode:'120000',sha:sha('f'),size:1});
+  assert.equal(inertEvidenceAdditions(f.files,redirected,f.packageInputs),false);
+  for(const category of ['inputs','verification_paths'])for(const role of [file.filename,'coordination/engineering/colombia-held-residual-830-20261019/'])
+    assert.equal(inertEvidenceAdditions(f.files,entries,{...f.packageInputs,[category]:[...f.packageInputs[category],role]}),false);
+  for(const filename of ['package.json','package-lock.json','npm-shrinkwrap.json','import-map.json','requirements.txt','replay.mjs','replay.py']){
+    for(const root of ['coordination/engineering/packet/','research/geography/packet/']){
+      const name=root+filename,changed=new Map(entries);changed.set(name,{path:name,type:'blob',mode:'100644',sha:sha('f'),size:1});
+      for(let at=name.indexOf('/');at>=0;at=name.indexOf('/',at+1))changed.set(name.slice(0,at),{type:'tree',mode:'040000',sha:sha('d')});
+      assert.equal(inertEvidenceAdditions([{filename:name,status:'added'}],changed,f.packageInputs),false,name);
+    }
+  }
+  assert.equal(inertEvidenceAdditions([],entries,f.packageInputs),false);
+});
+
+test('default mixed changes retain broad routing and missing packet consumers cannot be silently omitted',async()=>{
+  for(const filename of ['scripts/merge-integration.mjs','test/evidence-quality.test.mjs','.github/package-inputs.json','src/effective-footprint.js','data/ownership-selection.json']){
+    const f=packetFixture(),row=f.integrated.find(row=>row.path===filename);
+    if(row)row.sha=sha('f');else f.integrated.push({path:filename,sha:sha('f'),type:'blob',mode:'100644',size:1});
+    const prepared=await prepareIntegration(f.options());assert.notEqual(prepared.test_selection,'reviewed',filename);
+  }
+  for(const filename of [...PACKET_TESTS,EXECUTION_CODE[0],'test/fixtures/contract/input.json']){
+    const f=packetFixture();for(const key of ['baseline','authored','integrated'])f[key]=f[key].filter(row=>row.path!==filename);
+    await assert.rejects(prepareIntegration(f.options()),/ordinary|unavailable|fixture boundary/,filename);
+  }
 });
 
 test('reviewed tests bind both trusted phases without changing actual geography obligations', async () => {
