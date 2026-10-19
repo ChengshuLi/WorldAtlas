@@ -68,6 +68,25 @@
       "current_applicability": "unresolved"
     }
   ],
+  "pinned_candidate_intersection": {
+    "source_candidate_block_path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-033.json.gz",
+    "source_candidate_block_sha256": "dfd5c9e9e7aa5768b13d80799d8ec899fbaa64baf2a8fdf35d3bb7d8c9db3933",
+    "method": "For each original interval, select candidate block runs with equal y and half-open x overlap; union each selected run's candidate owner and source-feature index lists.",
+    "original_interval_count": 16,
+    "intersecting_candidate_run_count": 16,
+    "intersecting_candidate_cell_count": 45,
+    "complete_contact_set_within_pinned_block": true,
+    "candidate_source_feature_indexes": [59796,59797,59798],
+    "candidate_owner_ids": [43461,43466,43467],
+    "additional_candidate_features": [],
+    "additional_foreign_owner_contacts": [],
+    "feature_contact_tally": [
+      {"source_feature_index":59796,"owner_id":43467,"name":"Nui","intersecting_intervals":2,"intersecting_cells":4},
+      {"source_feature_index":59797,"owner_id":43466,"name":"Vaitupu","intersecting_intervals":8,"intersecting_cells":33},
+      {"source_feature_index":59798,"owner_id":43461,"name":"Nukufetau","intersecting_intervals":6,"intersecting_cells":8}
+    ],
+    "scope_limit": "Completeness is limited to candidate runs in the exact pinned source-candidate block and these 45 original cells; it does not establish current source applicability, legal status, or that no evidence exists outside the block."
+  },
   "source_files": [
     {"path":"coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json","git_blob_oid":"9c9a9bc83627afd3e8435ff4009e39530543bf54","role":"original package key and interval contract; snapshot current_commit a61b6f9e7f88b1da380e3a834f89d7509132ed71"},
     {"path":"data/regional-review/regional-review-a5b86fc6ff2463cd/sources/TUV/geoBoundaries-TUV-ADM1.geojson","sha256":"3c06779be3173360c9a2927729798eacb5533c745e31313f11940041585030aa","role":"retained source feature records and exact shape IDs/names"},
