@@ -281,3 +281,32 @@ native-supported + 0 native-held + 0 prior holds. `native-patch.json` contains
 `c08f70dc4b25420529fe6924291e8aa8cc960029a9b90776b3c1fa0a36afb42b`.
 These are preparation inputs only; the full native authority constructor is
 still required, and no repair acceptance/credit is implied.
+
+The `supported-inputs` output was then consumed by the stock `native-authority`
+constructor. Its first attempt used Node's default macOS temporary path under
+`/var/folders`; the stock scratch-path validator rejected `/var` because that
+ancestor is a symlink (`Nonordinary native scratch directory`). No constructor
+output was published on that attempt. Retrying the same exact config and
+inputs with `TMPDIR` set to this worker's existing managed worktree root
+succeeded; no script or input was changed.
+
+The authority phase emitted nine `assigned` native-cell ledger components
+covering 683 cells, distributed by owner as 16531=58, 16532=31, 16533=205,
+16536=1, 16537=77, 16538=149, 16539=73, 16540=63, 16541=26. Its immutable
+inputs are the supported-inputs source evidence and native patch at commit
+`ee7b909c5f80169167e082e04e29e44d153f15be`. The output files are:
+
+- `authority-binding.json`: 757 bytes, SHA-256
+  `f7a5a2453b5221fba683e92822be6715784a0fcc4b70d7b2b76748b2ec82da0c`.
+- `original-rule-preimage.json`: 754 bytes, SHA-256
+  `84e8e10511a49b3af947834072d6b89898d87a3c248690c3909b612b2182d073`.
+- `constructor-result.json`: 29,855 bytes, SHA-256
+  `387ff4fdf89d39b3260e9d8f7b5dd8522c97cd69be080b3906a30b4a4c80027f`.
+
+The constructor explicitly limits itself: current-owner-zero must be checked by
+native consumers, and whole-parent certification or acceptance is not inferred.
+The earlier source-vintage/applicability limits and physical flags remain
+retained. This is a diagnostic/constructor result only. No CI was dispatched,
+no issue claim/comment was added, no source applicability exception was
+adopted, and accepted repair credit remains zero pending exact-head scientific
+review and the existing downstream delivery/owner/acceptance checks.
