@@ -1,0 +1,15 @@
+{
+  "attempt": 2,
+  "config_file_sha256": "dadb962ef74aaa561f56e25b5bb6e3de1146387e33d20bc9b17bb298d93d95f5",
+  "config_path": "research/geography/libya-80-owner-observation-20261019/physical-config-002.json",
+  "exact_error": "Loaded runtime file omitted from admission inventory: /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/bz2.py, /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/lzma.py, /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/shutil.py",
+  "failure_site": "scripts/qualify-source-cohort.py:189 in verify_runtime",
+  "final_destination_absent_before_next_run": true,
+  "kind": "lby80-physical-attempt-record-v1",
+  "outputs_published": false,
+  "phase": "physical",
+  "qualification_or_credit": false,
+  "result": "failed-before-physical-processing",
+  "temporary_staging_cleaned": true,
+  "version": 1
+}
