@@ -88,15 +88,9 @@ existing API quota/deadline guards and native provider queueing still apply.
 
 After actual merge verification, preserve all required evidence and unique scratch,
 stop processes using the checkout, and explicitly release its managed slot with
-the existing ownership token:
-
-```sh
-node scripts/local-workspace.mjs release --worker YOUR-WORKER-ID --slot work \
-  --token EXACT_RETURNED_TOKEN
-```
-
-Follow [LOCAL_WORKSPACES.md](LOCAL_WORKSPACES.md) for clean-workspace guards and
-owned release. GitHub CLI observation performs no automatic local cleanup. Reconcile
+the existing ownership token through the task-bound helper described in
+[LOCAL_WORKSPACES.md](LOCAL_WORKSPACES.md#finish-and-release). Do not select a
+helper from an ambient primary checkout. GitHub CLI observation performs no automatic local cleanup. Reconcile
 the original issue and preserve historical claims, then allocate the next job from
 fresh main. Settle any retained live-operation reservation through its workflow. A cleanup failure does not invalidate an already verified
 merge. Observing or retrying grants no new review, science, publication or provider

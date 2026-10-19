@@ -1,17 +1,10 @@
-import fs from "node:fs";
-import { gunzipSync, gzipSync } from "node:zlib";
+import { gunzipSync } from "node:zlib";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { createHash } from "node:crypto";
 export const ROOT = path.dirname(fileURLToPath(import.meta.url));
-export function readBody(name) {
-  const file = path.join(ROOT, name);
-  return fs.existsSync(file)
-    ? fs.readFileSync(file)
-    : gunzipSync(fs.readFileSync(file + ".gz"));
-}
 const sha = (b) => createHash("sha256").update(b).digest("hex");
-// One pin/inverse implementation for the original CLI and immutable Git readers.
+// Pure extraction consumes the authenticated immutable reader supplied by its caller.
 function intervalReader(load) {
   const sourcePins = JSON.parse(load("source-census-summary.json")).blocks;
   const physicalPins = JSON.parse(load("physical-unassigned-summary.json")).phases;
@@ -44,12 +37,7 @@ function intervalReader(load) {
     return JSON.parse(decoded);
   };
 }
-let defaultReader;
-export function read(prefix, b) {
-  defaultReader ??= intervalReader(readBody);
-  return defaultReader(prefix, b);
-}
-export function context(load = readBody) {
+export function context(load) {
   return {
     features: JSON.parse(load("source-feature-roster.json")),
     raster: JSON.parse(load("source-raster-summary.json")),
@@ -71,7 +59,7 @@ function hits(a, z, rs) {
   }
   return out;
 }
-export function* segments(b, ctx, readIntervals = read) {
+export function* segments(b, ctx, readIntervals) {
   const rows = readIntervals("source-candidates", b),
     land = new Map(readIntervals("physical-support", b).map((r) => [r.y, r.runs])),
     water = new Map(readIntervals("inland-water-support", b).map((r) => [r.y, r.runs]));
@@ -162,8 +150,8 @@ export function* segments(b, ctx, readIntervals = read) {
     }
 }
 // Derive the complete original package, never a caller-selected witness subset.
-// load returns the same logical bodies as readBody, including encoded .gz members.
-export function packageIntervals(packageId, load = readBody) {
+// load returns logical metadata bodies and encoded .gz interval members.
+export function packageIntervals(packageId, load) {
   const manifest = JSON.parse(load("source-package-queue.json"));
   const matches = manifest.packages.filter(p => p.package_id === packageId);
   if (matches.length !== 1) throw Error("Unknown or duplicate package");
@@ -184,15 +172,5 @@ export function packageIntervals(packageId, load = readBody) {
   return {package: pkg, blocks, cells};
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const [packageId, destination] = process.argv.slice(2);
-  if (!packageId || !destination)
-    throw Error("Usage: node source-batch-intervals.mjs PACKAGE_ID OUTPUT_DIRECTORY");
-  const result = packageIntervals(packageId);
-  fs.mkdirSync(destination, { recursive: false });
-  for (const {block, rows} of result.blocks)
-    fs.writeFileSync(destination + "/block-" + String(block).padStart(3, "0") + ".json.gz",
-      gzipSync(JSON.stringify(rows) + "\n"), { flag: "wx" });
-  fs.writeFileSync(destination + "/package.json", JSON.stringify(result.package, null, 2) + "\n", { flag: "wx" });
-  console.log(JSON.stringify({package_id: packageId, cells: result.cells, blocks: result.blocks.length, destination}));
-}
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url))
+  throw Error("Standalone extraction was removed; use scripts/observe-selected-owners.mjs with an exact data commit and package. Its original_intervals contains the complete original table.");
