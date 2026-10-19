@@ -29,10 +29,10 @@ const same = (a, b) => jsonBytes(a).equals(jsonBytes(b));
 const safe = name => typeof name === 'string' && /^[a-zA-Z0-9_./-]+$/.test(name) && !path.isAbsolute(name)
   && name.split('/').every(part => part && part !== '.' && part !== '..');
 const unique = values => Array.isArray(values) && values.length > 0 && values.every(v => typeof v === 'string' && v) && new Set(values).size === values.length;
-const environment = () => ({...process.env, GIT_NO_LAZY_FETCH: '1', GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: '/dev/null', GIT_TERMINAL_PROMPT: '0'});
+const environment = () => ({...process.env, GIT_NO_LAZY_FETCH: '1', GIT_NO_REPLACE_OBJECTS: '1', GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: '/dev/null', GIT_TERMINAL_PROMPT: '0'});
 
 export function pinReader(root) {
-  const cache = new Map();
+  const cache = new Map(), descriptors = new Map();
   const git = (...args) => {
     const options={cwd:root,env:environment(),maxBuffer:Infinity};
     if(args[0]==='cat-file'&&args[1]==='blob') options.maxBuffer=Number(git('cat-file','-s',args[2]))+1;
@@ -40,12 +40,17 @@ export function pinReader(root) {
   };
   function descriptor(commit, name) {
     need(hex(commit, 40) && safe(name), 'Exact commit and safe whole-file path required');
+    const key = commit + ':' + name;
+    // Exact commit/path metadata is immutable; never expose the saved descriptor.
+    if (descriptors.has(key)) return {...descriptors.get(key)};
     const line = git('ls-tree', '-z', commit, '--', name).toString();
     const match = /^100644 blob ([a-f0-9]{40})\t([^\0]+)\0$/.exec(line);
     need(match && match[2] === name, 'Missing ordinary exact Git body: ' + name);
     const size = Number(git('cat-file', '-s', match[1]).toString());
     need(Number.isSafeInteger(size) && size >= 0, 'Invalid whole body size: ' + name);
-    return {path: name, commit, mode: '100644', git_blob_oid: match[1], bytes: size};
+    const pin = {path: name, commit, mode: '100644', git_blob_oid: match[1], bytes: size};
+    descriptors.set(key, pin);
+    return {...pin};
   }
   function read(pin) {
     const actual = descriptor(pin.commit, pin.path);

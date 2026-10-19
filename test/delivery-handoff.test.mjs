@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {execFileSync, spawnSync} from 'node:child_process';
+import childProcess, {execFileSync, spawnSync} from 'node:child_process';
 import zlib, {gzipSync} from 'node:zlib';
 import crypto from 'node:crypto';
 import {syncBuiltinESMExports} from 'node:module';
@@ -211,6 +211,94 @@ test('immutable Git input reader rejects whole-body drift, missing objects and n
   git('add', 'input.json'); git('commit', '-m', 'Fixture'); const r = pinReader(root), pin = r.pin(git('rev-parse', 'HEAD'), 'input.json');
   assert.equal(r.json(pin).value, 1); assert.throws(() => r.read({...pin, path: 'missing.json'}), /Missing ordinary/); assert.throws(() => r.read({...pin, sha256: '0'.repeat(64)}), /hash differs/);
   assert.throws(() => r.read({...pin, mode: '120000'}), /identity/); assert.throws(() => r.read({...pin, path: '../input.json'}), /safe/);
+});
+
+
+function immutableReaderFixture(t) {
+  const root = directory(t);
+  const git = (...args) => execFileSync('git', args, {cwd: root, stdio: ['pipe', 'pipe', 'pipe']}).toString().trim();
+  git('init'); git('config', 'user.name', 'Fixture'); git('config', 'user.email', 'fixture@example.invalid');
+  write(root, 'input.json', jsonBytes({value: 1}));
+  write(root, 'alias.json', jsonBytes({value: 1}));
+  git('add', '.'); git('commit', '-m', 'Fixture');
+  return {root, git, head: git('rev-parse', 'HEAD')};
+}
+
+test('immutable Git input reader reuses exact descriptor queries without trusting returned copies or requested hashes', t => {
+  const {root, head} = immutableReaderFixture(t), r = pinReader(root);
+  const execute = childProcess.execFileSync, calls = [];
+  childProcess.execFileSync = (command, args, options) => {
+    if (command === 'git' && options?.cwd === root) calls.push(args);
+    return execute(command, args, options);
+  }; syncBuiltinESMExports();
+  try {
+    const pin = r.pin(head, 'input.json'), descriptor = r.descriptor(head, 'input.json');
+    descriptor.bytes++; descriptor.git_blob_oid = '0'.repeat(40);
+    assert.equal(r.descriptor(head, 'input.json').bytes, pin.bytes);
+    assert.equal(r.descriptor(head, 'input.json').git_blob_oid, pin.git_blob_oid);
+    assert.equal(r.json(pin).value, 1);
+    assert.deepEqual(r.pin(head, 'input.json'), pin);
+    for (const changed of [{...pin, bytes: pin.bytes + 1}, {...pin, mode: '100755'},
+      {...pin, git_blob_oid: '0'.repeat(40)}]) assert.throws(() => r.read(changed), /identity differs/);
+    assert.throws(() => r.read({...pin, sha256: '0'.repeat(64)}), /hash differs/);
+    const exposed = r.read(pin); exposed[0] ^= 1;
+    assert.throws(() => r.read(pin), /hash differs/);
+    assert.equal(calls.filter(args => args[0] === 'ls-tree').length, 1);
+    // One descriptor size query and the existing bounded body-read size query.
+    assert.equal(calls.filter(args => args[0] === 'cat-file' && args[1] === '-s').length, 2);
+    assert.equal(calls.filter(args => args[0] === 'cat-file' && args[1] === 'blob').length, 1);
+  } finally { childProcess.execFileSync = execute; syncBuiltinESMExports(); }
+});
+
+test('immutable Git input reader separates exact paths, vintages and fresh readers', t => {
+  const {root, git, head} = immutableReaderFixture(t), r = pinReader(root);
+  const first = r.pin(head, 'input.json'), alias = r.pin(head, 'alias.json');
+  assert.equal(first.git_blob_oid, alias.git_blob_oid); assert.notEqual(first.path, alias.path);
+  write(root, 'input.json', jsonBytes({value: 2})); git('add', '.'); git('commit', '-m', 'Changed');
+  const next = r.pin(git('rev-parse', 'HEAD'), 'input.json');
+  assert.equal(r.json(next).value, 2); assert.equal(r.json(first).value, 1);
+  assert.throws(() => r.read({...first, path: 'alias.json', bytes: first.bytes + 1}), /identity differs/);
+  const exposed = r.read(first); exposed[0] ^= 1;
+  assert.throws(() => r.read(first), /hash differs/);
+  assert.equal(pinReader(root).json(first).value, 1);
+});
+
+test('immutable Git input reader validates before lookup and never caches missing or invalid metadata', t => {
+  const {root, git, head} = immutableReaderFixture(t), r = pinReader(root);
+  r.descriptor(head, 'input.json');
+  const execute = childProcess.execFileSync, calls = [];
+  let failSize = true;
+  childProcess.execFileSync = (command, args, options) => {
+    if (command === 'git' && options?.cwd === root) {
+      calls.push(args);
+      if (failSize && args[0] === 'cat-file' && args[1] === '-s') { failSize = false; return Buffer.from('NaN'); }
+    }
+    return execute(command, args, options);
+  }; syncBuiltinESMExports();
+  try {
+    for (const [version, name] of [['main', 'input.json'], [head, '../input.json']])
+      assert.throws(() => r.descriptor(version, name), /Exact commit and safe/);
+    assert.equal(calls.length, 0);
+    for (let i = 0; i < 2; i++) assert.throws(() => r.descriptor(head, 'missing.json'), /Missing ordinary/);
+    assert.throws(() => r.descriptor(head, 'alias.json'), /Invalid whole body size/);
+    assert.equal(r.descriptor(head, 'alias.json').path, 'alias.json');
+    assert.equal(calls.filter(args => args[0] === 'ls-tree').length, 4);
+  } finally { childProcess.execFileSync = execute; syncBuiltinESMExports(); }
+  fs.symlinkSync('input.json', path.join(root, 'link.json'));
+  git('add', '.'); git('update-index', '--chmod=+x', 'input.json'); git('commit', '-m', 'Nonordinary');
+  const changed = git('rev-parse', 'HEAD');
+  for (const name of ['input.json', 'link.json']) assert.throws(() => r.descriptor(changed, name), /Missing ordinary/);
+});
+
+test('immutable Git input reader ignores mutable replacement objects for exact commit and blob identities', t => {
+  const {root, git, head} = immutableReaderFixture(t), r = pinReader(root), first = r.pin(head, 'input.json');
+  write(root, 'input.json', jsonBytes({value: 2})); git('add', '.'); git('commit', '-m', 'Replacement');
+  const replacement = git('rev-parse', 'HEAD'), changed = r.pin(replacement, 'input.json');
+  git('replace', head, replacement);
+  git('replace', first.git_blob_oid, changed.git_blob_oid);
+  assert.equal(pinReader(root).json(first).value, 1);
+  assert.equal(pinReader(root).pin(head, 'input.json').sha256, first.sha256);
+  assert.equal(r.json(first).value, 1);
 });
 
 test('rebind commit phases require complete custody and publication-matching result pins', () => {
