@@ -24,35 +24,46 @@ physical queues sit underneath it.
 
 1. Read the combined queue and select a source-family session. Keep its related
    cause packages on one worker so the original source is decoded/indexed once.
-2. Use the package's extraction command with a fresh output directory. The source
-   selector needs only Node 24; the physical selector uses Python's standard
-   library. Both work after moving this directory. They check pinned input hashes.
+2. For a source/cause package, run the committed package-bound ownership command
+   below once. It derives the complete original interval table and checks current
+   selected owners from immutable Git inputs; no separate extraction or adjacent
+   data-file checkout is needed. The separate physical-only queue retains its
+   existing Python selector; see `PHYSICAL-PACKAGES-README.md`.
 3. Read the exact intended owner IDs, source feature IDs, locality scopes,
    competitor source families, native blocks, measured cost, question and
    completion condition. Reuse the original repository source products named by
    their catalogue; this directory does not copy the original source corpus.
-4. Before an actual additive repair, load current ownership only for this package
-   and subtract already-owned intervals from the frozen candidate intervals.
-   Record those as already completed. A prior repair never requires rebuilding
-   this global queue or repeating source research. Recheck target identity and
-   source-lineage compatibility only where the intervening selection/source change
-   actually affects this package. Preserve the original frozen provenance.
+4. Use that same report's `original_intervals` and per-key owners to account for
+   already-owned intervals before an additive repair. Preserve the full original
+   table and denominator; do not rerun extraction to reconstruct its source/class
+   columns. Recheck current ownership when the accepted data revision changes,
+   without rebuilding this queue or repeating unaffected source research.
 5. For the remaining cells, check the current selected owner-zero state,
    source-to-location authority, explicit territorial exclusions and all relevant
    competitors. Then use the existing source-target native operator, verify
    conservation and coordinate normal reviewed integration.
 
-Example:
+From an owned checkout, with an exact accepted data commit and fresh output file:
 
 ```sh
-node source-batch-intervals.mjs gb-GRL-ADM1--repair-evaluation /tmp/grl-candidate-work
+GIT_NO_LAZY_FETCH=1 GIT_NO_REPLACE_OBJECTS=1 \
+  node scripts/observe-selected-owners.mjs --repo . --commit EXACT_DATA_COMMIT \
+  --package gb-GRL-ADM1--repair-evaluation --out /path/to/new-observation.json
 ```
 
-Rows are `[y,start,end,candidate_owner_indices,source_feature_indices,physical_class]`.
-Columns use half-open intervals. Owner indices refer to `lineage.json.gz`; source
-indices are one-based entries in `source-feature-roster.json.gz`. An extracted
-`package.json` is written last, after its expected cell count agrees. Existing
-output directories are rejected. Extraction does not create an approved patch.
+Use `original_package` and `original_intervals` from this one report. Interval rows
+are `[y,start,end,candidate_owner_indices,source_feature_indices,physical_class]`;
+ends are exclusive. Owner/source indices and mask classes retain their original
+queue meaning, not current scientific qualification. The report also binds both
+code/data revisions, original interval/key hashes and actual consumed input pins.
+See [the bounded ownership contract](../../../docs/COVERAGE_CLASSIFICATION.md#observe-selected-ownership-without-source-geometry)
+for runtime, input acquisition and output requirements. Missing pinned Git bodies
+still refuse; they are not silently fetched or replaced with checkout files.
+
+The frozen package `execution.command` and standalone `source-batch-intervals.mjs`
+remain original-reproduction interfaces, not an additional step in current
+source-package work. Do not copy the helper or fabricate gzip siblings. Physical
+source qualification and native repair acceptance remain separate operations.
 
 ## Use source/cause packages, not connected components
 
