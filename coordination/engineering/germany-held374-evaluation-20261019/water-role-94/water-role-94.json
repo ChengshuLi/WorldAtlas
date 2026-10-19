@@ -1,0 +1,1190 @@
+{
+  "schema": "worldatlas.deu.gf2-water-role-94-readonly.v1",
+  "status": "read_only_reconciliation; no_claim_no_credit_no_source_or_native_change",
+  "current_main_commit": "253e60eee66059e60c9aa35340b7145c3a76ea6e",
+  "source_review_head": "9ebe37b375b46b06f2eed17302c746582e80a2aa",
+  "accepted_original_outcome_baseline": {
+    "pull_request": 2414,
+    "merged_commit": "21984e9ec4ec7370bc807e2da23cea2228747698",
+    "current_main_blob_confirmed": true,
+    "native_patch_path": "coordination/engineering/germany-original-repair-20261017/supported-inputs-001/native-patch.json",
+    "git_blob_oid": "93833bc02e981f52cab7ec8bbdc57cff949ddc15",
+    "bytes": 214142,
+    "sha256": "c43a9ed85ee34b330c1b0d60928e1c0fc195349a031c9eb19581b0664c89849e",
+    "exact_original_outcome_cells": 27181,
+    "accepted_held_partition_cells": 374,
+    "exact_key_count": 27181,
+    "canonical_y_x_owner_sha256": "8c595b3a51616fe5c47c4934472e86c01fef6fdb05ffa24b437949987911d5fb",
+    "no_overlap": {
+      "candidate_scope": "the exact 94 tuples below",
+      "overlapping_coordinates": 0,
+      "overlapping_y_x_owner_tuples": 0,
+      "held_exact_owner_matches": 94,
+      "held_same_reason_matches": 94
+    },
+    "accounting_note": "Treat 27,181 as the accepted original-outcome/keyset baseline for this comparison. The merged PR body separately states final publication/selected-delivery gates remain pending and makes no accepted map-credit claim; this packet adds no such credit."
+  },
+  "original_package": {
+    "issue": 2410,
+    "key": "gb-DEU-ADM3--repair-evaluation",
+    "original_cells": 27555,
+    "land_cells": 27043,
+    "inland_water_cells": 512,
+    "intervals": 7499,
+    "existing_owners": 82,
+    "original_source_atoms": 100,
+    "proposed_supported_outcomes": 27181,
+    "held_cells": 374
+  },
+  "candidate_scope": {
+    "cells": 94,
+    "intervals": 62,
+    "physical_class": "land",
+    "owners": [
+      {
+        "owner_index": 16266,
+        "cells": 35
+      },
+      {
+        "owner_index": 16269,
+        "cells": 28
+      },
+      {
+        "owner_index": 16286,
+        "cells": 6
+      },
+      {
+        "owner_index": 16307,
+        "cells": 16
+      },
+      {
+        "owner_index": 16503,
+        "cells": 9
+      }
+    ],
+    "source_role": "official GF=2 water-extension records; water-role classification is not land-authority evidence",
+    "held_classification": "unsupported_GF2_water_extension_land_role",
+    "accepted_repair_credit": 0,
+    "accepted_exception_credit": 0
+  },
+  "owners": [
+    {
+      "owner_index": 16266,
+      "original_owner_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "name": "Vorpommern-Rügen",
+      "province_id": "framework:province:mecklenburg-vorpommern:bbcc5421019e",
+      "original_cell_count": 35,
+      "source_atom": {
+        "source_id": "gb:DEU:ADM3:24449704B43487256426068",
+        "source_index": 21012,
+        "source_name": "Vorpommern-Rügen",
+        "source_atoms_for_owner": [
+          "gb:DEU:ADM3:24449704B43487256426068"
+        ],
+        "whole_geometry_sha256": "1efd7ea5162246760e3d248307ecb3c66b66d4f2b91129616302cf1c0571097b",
+        "membership_target_id": "gb:DEU:ADM3:24449704B43487256426068",
+        "membership_pixel_index": 16266,
+        "source_role": "Independent City or District",
+        "source_reference_year": "2021",
+        "parent_match": "Named source administrative unit grouped within this geographic area"
+      },
+      "official_GF2_role": {
+        "official_gf": 2,
+        "official_nuts_code": "DE80L",
+        "land_support_area_degrees2": 0.0006941154193321197,
+        "water_support_area_degrees2": 0,
+        "issues": []
+      }
+    },
+    {
+      "owner_index": 16269,
+      "original_owner_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "name": "Vorpommern-Greifswald",
+      "province_id": "framework:province:mecklenburg-vorpommern:bbcc5421019e",
+      "original_cell_count": 28,
+      "source_atom": {
+        "source_id": "gb:DEU:ADM3:24449704B43651425568402",
+        "source_index": 21014,
+        "source_name": "Vorpommern-Greifswald",
+        "source_atoms_for_owner": [
+          "gb:DEU:ADM3:24449704B43651425568402"
+        ],
+        "whole_geometry_sha256": "05f78d0a9d81036adaefe8dd95cce8b816b749c736edaf925e8304a0f79f61a6",
+        "membership_target_id": "gb:DEU:ADM3:24449704B43651425568402",
+        "membership_pixel_index": 16269,
+        "source_role": "Independent City or District",
+        "source_reference_year": "2021",
+        "parent_match": "Named source administrative unit grouped within this geographic area"
+      },
+      "official_GF2_role": {
+        "official_gf": 2,
+        "official_nuts_code": "DE80N",
+        "land_support_area_degrees2": 0.0007632656558620552,
+        "water_support_area_degrees2": 0,
+        "issues": []
+      }
+    },
+    {
+      "owner_index": 16286,
+      "original_owner_id": "gb:DEU:ADM3:24449704B47136606337007",
+      "name": "Stade",
+      "province_id": "framework:province:luneburg:cc57a2c72a42",
+      "original_cell_count": 6,
+      "source_atom": {
+        "source_id": "gb:DEU:ADM3:24449704B47136606337007",
+        "source_index": 21016,
+        "source_name": "Stade",
+        "source_atoms_for_owner": [
+          "gb:DEU:ADM3:24449704B47136606337007"
+        ],
+        "whole_geometry_sha256": "26291e6819a5d4a804e2a4e7ce7e783e43ce05e17b5c886f7115f3da07e1ee4a",
+        "membership_target_id": "gb:DEU:ADM3:24449704B47136606337007",
+        "membership_pixel_index": 16286,
+        "source_role": "Independent City or District",
+        "source_reference_year": "2021",
+        "parent_match": "Named source administrative unit grouped within this geographic area"
+      },
+      "official_GF2_role": {
+        "official_gf": 2,
+        "official_nuts_code": "DE939",
+        "land_support_area_degrees2": 0.0014648562572758873,
+        "water_support_area_degrees2": 0,
+        "issues": []
+      }
+    },
+    {
+      "owner_index": 16307,
+      "original_owner_id": "gb:DEU:ADM3:24449704B5166885060165",
+      "name": "Schleswig-Flensburg",
+      "province_id": "framework:province:schleswig-holstein:1917f50dfdc7",
+      "original_cell_count": 16,
+      "source_atom": {
+        "source_id": "gb:DEU:ADM3:24449704B5166885060165",
+        "source_index": 21031,
+        "source_name": "Schleswig-Flensburg",
+        "source_atoms_for_owner": [
+          "gb:DEU:ADM3:24449704B5166885060165"
+        ],
+        "whole_geometry_sha256": "7aeffc10ced41665117af8c9c43577ecb083ee6a9e9b3e3c6b51a2b0bc7316e8",
+        "membership_target_id": "gb:DEU:ADM3:24449704B5166885060165",
+        "membership_pixel_index": 16307,
+        "source_role": "Independent City or District",
+        "source_reference_year": "2021",
+        "parent_match": "Geographic portion of a source administrative unit; not a new government division"
+      },
+      "official_GF2_role": {
+        "official_gf": 2,
+        "official_nuts_code": "DEF0C",
+        "land_support_area_degrees2": 0.003050543770749564,
+        "water_support_area_degrees2": 0.00282250353947668,
+        "issues": [
+          "contradictory_land_water_support",
+          "L2-outside-L1"
+        ]
+      }
+    },
+    {
+      "owner_index": 16503,
+      "original_owner_id": "gb:DEU:ADM3:24449704B93840311392638",
+      "name": "Pinneberg",
+      "province_id": "framework:province:schleswig-holstein:1917f50dfdc7",
+      "original_cell_count": 9,
+      "source_atom": {
+        "source_id": "gb:DEU:ADM3:24449704B93840311392638",
+        "source_index": 21028,
+        "source_name": "Pinneberg",
+        "source_atoms_for_owner": [
+          "gb:DEU:ADM3:24449704B93840311392638"
+        ],
+        "whole_geometry_sha256": "c88419842ca6aaafd4d1d74868e2fc7c0a452df84520a5d422a388827e0a65fe",
+        "membership_target_id": "gb:DEU:ADM3:24449704B93840311392638",
+        "membership_pixel_index": 16503,
+        "source_role": "Independent City or District",
+        "source_reference_year": "2021",
+        "parent_match": "Geographic portion of a source administrative unit; not a new government division"
+      },
+      "official_GF2_role": {
+        "official_gf": 2,
+        "official_nuts_code": "DEF09",
+        "land_support_area_degrees2": 0.00040393046711028913,
+        "water_support_area_degrees2": 0,
+        "issues": []
+      }
+    }
+  ],
+  "exact_held_tuples": [
+    {
+      "y": 83233,
+      "x": 138263,
+      "owner_index": 16307,
+      "owner_name": "Schleswig-Flensburg",
+      "source_atom_id": "gb:DEU:ADM3:24449704B5166885060165",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83233,
+      "x": 138264,
+      "owner_index": 16307,
+      "owner_name": "Schleswig-Flensburg",
+      "source_atom_id": "gb:DEU:ADM3:24449704B5166885060165",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83233,
+      "x": 138265,
+      "owner_index": 16307,
+      "owner_name": "Schleswig-Flensburg",
+      "source_atom_id": "gb:DEU:ADM3:24449704B5166885060165",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83349,
+      "x": 138390,
+      "owner_index": 16307,
+      "owner_name": "Schleswig-Flensburg",
+      "source_atom_id": "gb:DEU:ADM3:24449704B5166885060165",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83350,
+      "x": 138390,
+      "owner_index": 16307,
+      "owner_name": "Schleswig-Flensburg",
+      "source_atom_id": "gb:DEU:ADM3:24449704B5166885060165",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83352,
+      "x": 138390,
+      "owner_index": 16307,
+      "owner_name": "Schleswig-Flensburg",
+      "source_atom_id": "gb:DEU:ADM3:24449704B5166885060165",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83352,
+      "x": 138391,
+      "owner_index": 16307,
+      "owner_name": "Schleswig-Flensburg",
+      "source_atom_id": "gb:DEU:ADM3:24449704B5166885060165",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83352,
+      "x": 138392,
+      "owner_index": 16307,
+      "owner_name": "Schleswig-Flensburg",
+      "source_atom_id": "gb:DEU:ADM3:24449704B5166885060165",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83352,
+      "x": 138393,
+      "owner_index": 16307,
+      "owner_name": "Schleswig-Flensburg",
+      "source_atom_id": "gb:DEU:ADM3:24449704B5166885060165",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83352,
+      "x": 138394,
+      "owner_index": 16307,
+      "owner_name": "Schleswig-Flensburg",
+      "source_atom_id": "gb:DEU:ADM3:24449704B5166885060165",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83352,
+      "x": 138395,
+      "owner_index": 16307,
+      "owner_name": "Schleswig-Flensburg",
+      "source_atom_id": "gb:DEU:ADM3:24449704B5166885060165",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83353,
+      "x": 138390,
+      "owner_index": 16307,
+      "owner_name": "Schleswig-Flensburg",
+      "source_atom_id": "gb:DEU:ADM3:24449704B5166885060165",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83353,
+      "x": 138391,
+      "owner_index": 16307,
+      "owner_name": "Schleswig-Flensburg",
+      "source_atom_id": "gb:DEU:ADM3:24449704B5166885060165",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83353,
+      "x": 138392,
+      "owner_index": 16307,
+      "owner_name": "Schleswig-Flensburg",
+      "source_atom_id": "gb:DEU:ADM3:24449704B5166885060165",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83353,
+      "x": 138393,
+      "owner_index": 16307,
+      "owner_name": "Schleswig-Flensburg",
+      "source_atom_id": "gb:DEU:ADM3:24449704B5166885060165",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83353,
+      "x": 138394,
+      "owner_index": 16307,
+      "owner_name": "Schleswig-Flensburg",
+      "source_atom_id": "gb:DEU:ADM3:24449704B5166885060165",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83399,
+      "x": 140757,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83400,
+      "x": 140756,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83401,
+      "x": 140756,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83412,
+      "x": 140809,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83412,
+      "x": 140810,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83412,
+      "x": 140811,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83413,
+      "x": 140808,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83413,
+      "x": 140809,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83413,
+      "x": 140810,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83435,
+      "x": 140722,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83436,
+      "x": 140717,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83436,
+      "x": 140721,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83537,
+      "x": 141021,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83538,
+      "x": 141020,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83540,
+      "x": 141016,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83541,
+      "x": 141015,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83542,
+      "x": 141013,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83542,
+      "x": 141014,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83543,
+      "x": 141011,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83543,
+      "x": 141012,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83543,
+      "x": 141013,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83544,
+      "x": 141010,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83544,
+      "x": 141011,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83544,
+      "x": 141012,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83545,
+      "x": 141008,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83545,
+      "x": 141009,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83545,
+      "x": 141010,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83545,
+      "x": 141011,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83696,
+      "x": 141060,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83697,
+      "x": 141060,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83697,
+      "x": 141061,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83698,
+      "x": 141059,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83698,
+      "x": 141060,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83750,
+      "x": 140918,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83751,
+      "x": 140918,
+      "owner_index": 16266,
+      "owner_name": "Vorpommern-Rügen",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43487256426068",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83941,
+      "x": 136824,
+      "owner_index": 16503,
+      "owner_name": "Pinneberg",
+      "source_atom_id": "gb:DEU:ADM3:24449704B93840311392638",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83941,
+      "x": 136825,
+      "owner_index": 16503,
+      "owner_name": "Pinneberg",
+      "source_atom_id": "gb:DEU:ADM3:24449704B93840311392638",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83941,
+      "x": 136826,
+      "owner_index": 16503,
+      "owner_name": "Pinneberg",
+      "source_atom_id": "gb:DEU:ADM3:24449704B93840311392638",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83942,
+      "x": 136827,
+      "owner_index": 16503,
+      "owner_name": "Pinneberg",
+      "source_atom_id": "gb:DEU:ADM3:24449704B93840311392638",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83959,
+      "x": 136832,
+      "owner_index": 16503,
+      "owner_name": "Pinneberg",
+      "source_atom_id": "gb:DEU:ADM3:24449704B93840311392638",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83960,
+      "x": 136831,
+      "owner_index": 16503,
+      "owner_name": "Pinneberg",
+      "source_atom_id": "gb:DEU:ADM3:24449704B93840311392638",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83960,
+      "x": 136832,
+      "owner_index": 16503,
+      "owner_name": "Pinneberg",
+      "source_atom_id": "gb:DEU:ADM3:24449704B93840311392638",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83961,
+      "x": 136830,
+      "owner_index": 16503,
+      "owner_name": "Pinneberg",
+      "source_atom_id": "gb:DEU:ADM3:24449704B93840311392638",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83962,
+      "x": 136829,
+      "owner_index": 16503,
+      "owner_name": "Pinneberg",
+      "source_atom_id": "gb:DEU:ADM3:24449704B93840311392638",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83964,
+      "x": 140842,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83964,
+      "x": 140843,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83965,
+      "x": 140844,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83966,
+      "x": 140845,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83966,
+      "x": 140846,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83967,
+      "x": 140847,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83970,
+      "x": 140847,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 83971,
+      "x": 140847,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 84007,
+      "x": 141105,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 84048,
+      "x": 140876,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 84049,
+      "x": 140876,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 84049,
+      "x": 141133,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 84050,
+      "x": 141134,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 84329,
+      "x": 141152,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 84330,
+      "x": 141152,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 84331,
+      "x": 141152,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 84334,
+      "x": 141152,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 84335,
+      "x": 141152,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 84336,
+      "x": 141152,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 84337,
+      "x": 141152,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 84338,
+      "x": 141152,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 84339,
+      "x": 141152,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 84340,
+      "x": 141152,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 84341,
+      "x": 141431,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 84372,
+      "x": 137651,
+      "owner_index": 16286,
+      "owner_name": "Stade",
+      "source_atom_id": "gb:DEU:ADM3:24449704B47136606337007",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 84373,
+      "x": 137651,
+      "owner_index": 16286,
+      "owner_name": "Stade",
+      "source_atom_id": "gb:DEU:ADM3:24449704B47136606337007",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 84378,
+      "x": 137649,
+      "owner_index": 16286,
+      "owner_name": "Stade",
+      "source_atom_id": "gb:DEU:ADM3:24449704B47136606337007",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 84378,
+      "x": 137650,
+      "owner_index": 16286,
+      "owner_name": "Stade",
+      "source_atom_id": "gb:DEU:ADM3:24449704B47136606337007",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 84379,
+      "x": 137650,
+      "owner_index": 16286,
+      "owner_name": "Stade",
+      "source_atom_id": "gb:DEU:ADM3:24449704B47136606337007",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 84380,
+      "x": 137650,
+      "owner_index": 16286,
+      "owner_name": "Stade",
+      "source_atom_id": "gb:DEU:ADM3:24449704B47136606337007",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 84538,
+      "x": 141474,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 84539,
+      "x": 141474,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 84539,
+      "x": 141475,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    },
+    {
+      "y": 84540,
+      "x": 141474,
+      "owner_index": 16269,
+      "owner_name": "Vorpommern-Greifswald",
+      "source_atom_id": "gb:DEU:ADM3:24449704B43651425568402",
+      "original_physical_class": "land",
+      "held_classification": "unsupported_GF2_water_extension_land_role"
+    }
+  ],
+  "partition": {
+    "held_total": 374,
+    "classes": {
+      "territorial_exclusion_cells": 181,
+      "unsupported_GF2_water_extension_land_role": 94,
+      "unsupported_coverage_cells": 99
+    },
+    "tuple_encoding": "Each tuple is {y,x,owner_index,owner_name,source_atom_id,original_physical_class,held_classification}; source scope runs expand as [x_start,x_end) at row y.",
+    "candidate_tuple_count": 94,
+    "candidate_canonical_y_x_owner_sha256": "8cb59cce9d04d3baad374f6747c27056bdc23b6eb402fee994c8eb2a3f570061",
+    "all_candidate_tuples_match_held_owner_and_reason": true,
+    "no_candidate_key_in_27181_baseline": true
+  },
+  "role_and_authority_limits": {
+    "official_gf2_observation": "The retained independent provenance identifies all five atoms as official GF=2, NUTS 2021 water-extension records. This is a source-record role classification, not an administrative land entitlement.",
+    "original_cell_class": "All 94 package keys are classified as original land keys. That does not show that the GF=2 extension geometry authorizes land ownership.",
+    "per_atom_support": "The GF2 physical-observation artifact reports nonzero land-support area for each of these five atoms. Owner 16307 additionally has nonzero water-support area and flags contradictory_land_water_support and L2-outside-L1. These are atom-level support-area observations, not a validated cell-by-cell land-authority witness for the 94 keys.",
+    "no_action": "Do not convert any of the 94 keys into land ownership or clear any hold without independent source/physical evidence and required review.",
+    "broader_scope": "This packet preserves the original 82-owner/100-atom/27,555-key contract; it does not reinterpret or replace any broader scope."
+  },
+  "evidence_inputs": [
+    {
+      "path": "coordination/engineering/germany-original-repair-20261017/source-review/independent-provenance-001/water-only-original-scope.json",
+      "commit": "9ebe37b375b46b06f2eed17302c746582e80a2aa",
+      "git_blob_oid": "e847bdebedfc73965384c3e0c54753a02b99520d",
+      "bytes": 4475,
+      "sha256": "da76f97afcf7f25f9eaf15b63573241719629ace736f5c5a72f62c94ce35ba2d"
+    },
+    {
+      "path": "coordination/engineering/germany-original-repair-20261017/supported-inputs-001/held-original.json",
+      "commit": "9ebe37b375b46b06f2eed17302c746582e80a2aa",
+      "git_blob_oid": "f9b57ada58be4f57290699ba1552b476f1e5febe",
+      "bytes": 19979,
+      "sha256": "002e75d15e75f15b5ad2a0a423c08226877a25aa877a690ad456b0a7f494cc37"
+    },
+    {
+      "path": "coordination/engineering/germany-original-repair-20261017/source-stage-001/source-target-membership.json",
+      "commit": "9ebe37b375b46b06f2eed17302c746582e80a2aa",
+      "git_blob_oid": "73729d04333689742c572b5c525c54e756fd27ec",
+      "bytes": 12033,
+      "sha256": "2cba6ca42660f6ba7d29cf350602b461d9c722a504cfc9744dc990face7a97cf"
+    },
+    {
+      "path": "coordination/engineering/germany-original-repair-20261017/source-stage-001/source-scope-assessment.json",
+      "commit": "9ebe37b375b46b06f2eed17302c746582e80a2aa",
+      "git_blob_oid": "6d188c4e39468dcd2101c4a53dee8255d4ff95df",
+      "bytes": 390032,
+      "sha256": "fffd604ed8c40d4153372755d7894a751f7cb7027059d8484cd9afce4bcef2a3"
+    },
+    {
+      "path": "coordination/engineering/germany-original-repair-20261017/supported-inputs-001/native-patch.json",
+      "commit": "21984e9ec4ec7370bc807e2da23cea2228747698",
+      "git_blob_oid": "93833bc02e981f52cab7ec8bbdc57cff949ddc15",
+      "bytes": 214142,
+      "sha256": "c43a9ed85ee34b330c1b0d60928e1c0fc195349a031c9eb19581b0664c89849e"
+    },
+    {
+      "path": "coordination/engineering/germany-original-repair-20261017/source-review/gf2-physical-observations.json",
+      "commit": "9ebe37b375b46b06f2eed17302c746582e80a2aa",
+      "git_blob_oid": "31a6e14c0e1398443f2a46f629be6f9ef1c4a1dd",
+      "bytes": 7385,
+      "sha256": "728370d331db9c95efbfda12ebb5093c47bf88c7ee2e8709553ca907bd5acbb3"
+    },
+    {
+      "path": "coordination/engineering/germany-original-repair-20261017/source-review/independent-provenance-001/assessment.json",
+      "commit": "9ebe37b375b46b06f2eed17302c746582e80a2aa",
+      "git_blob_oid": "06206c0017b6240fd509e8263ce2bedd663081b8",
+      "bytes": 1654,
+      "sha256": "e42c0f270fb32d00d56dacd0f9db43007145d5e0d1a98d95629ea6f03cacb5a9"
+    },
+    {
+      "path": "coordination/engineering/germany-original-repair-20261017/source-review/independent-provenance-001/authenticated-provenance.json",
+      "commit": "9ebe37b375b46b06f2eed17302c746582e80a2aa",
+      "git_blob_oid": "c28aff8f6931cfa62bfa6981056346874cba08fc",
+      "bytes": 1827,
+      "sha256": "d07c8e1b73dcea176f6f7fd61f8f410bc95b80f728f5869450a905ade42c0bf4"
+    },
+    {
+      "path": "coordination/engineering/germany-original-repair-20261017/source-evidence-001/source-evidence.json",
+      "commit": "9ebe37b375b46b06f2eed17302c746582e80a2aa",
+      "git_blob_oid": "e9ccf628cc11433880a9bfbf9f1ba845be8f7612",
+      "bytes": 692083,
+      "sha256": "e9c43349eebbee826a4f7d64a02eab663720d93be72241f91699aa9aa7f3c0e1"
+    },
+    {
+      "path": "coordination/engineering/germany-original-repair-20261017/source-evidence-002/source-evidence.json",
+      "commit": "9ebe37b375b46b06f2eed17302c746582e80a2aa",
+      "git_blob_oid": "4899650f458bb6df455360077c80ca6e51a9f06f",
+      "bytes": 695720,
+      "sha256": "b8170a6206e5540543faa99a917f226314410d3adf710ae4f3fabea804aef357"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "commit": "7e423077552651d6ec1d6bf6b879c34e956f985a",
+      "git_blob_oid": "9c44513df64995d417dd3832ae604c703e84a506",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f"
+    }
+  ],
+  "role_provenance": {
+    "total_original_source_records": 428,
+    "observed_roles": {
+      "GF4": 77,
+      "GF2": 23
+    },
+    "official_upstream": "BKG NUTS250 2021, EPSG:25832",
+    "upstream_geometry_archive_sha256": "9b9e5b357a8dbd39fb6d020b70bebbbe1de76d9e0f5abfe2423fda9043dd90ad",
+    "upstream_DEU_ADM3_archive_sha256": "20b6aad172dbbf1cfa45805ebffad5cb16062b414393d7f08a3845c9d167dea8",
+    "retained_conversion": "Source review authenticates shape identity/role and transformed geometry correspondence; retained geoBoundaries derivative is simplified and not claimed byte/geometry-identical.",
+    "pending": [
+      "Independent selected ancestry and full original overlap checks",
+      "Complete physical/source diagnostics and foreign negatives",
+      "Genuine native authority and supported/held partition",
+      "Final immutable exact-head review"
+    ]
+  },
+  "method": {
+    "runtime": "Node.js v24.21.0",
+    "steps": [
+      "Expand the pinned water-only scope rows [y,x0,x1,owner] to 94 (y,x,owner) keys using x0 inclusive and x1 exclusive.",
+      "Join each owner index to the pinned owner roster, source-scope decision and original source-target membership; verify the full source ID and one-to-one atom identity.",
+      "Expand the held-original runs and verify each candidate key has the same owner and unsupported_GF2_water_extension_land_role reason.",
+      "Expand the 27,181-key supported native patch and verify the candidate tuple set has zero coordinate/owner overlap."
+    ],
+    "runtime_code_retained": false,
+    "independent_full_world_replay_performed": false
+  }
+}
