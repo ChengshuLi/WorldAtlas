@@ -69,9 +69,9 @@
     "held_cells": 930,
     "held_land": 865,
     "held_inland_water": 65,
-    "partition_b_land_count": null,
-    "partition_b_inland_water_count": null,
-    "class_limit": "Global class totals are preserved; the held tuple and retained source-target roster do not bind land/water class to each held key, so this half's class split is not asserted."
+    "partition_b_land_count": 435,
+    "partition_b_inland_water_count": 30,
+    "class_limit": "Partition B per-key original_mask_class values are joined to the original extraction blocks by exact owner_id,y,x; source_class_join reports 435 land and 30 inland-water keys with zero unmatched or conflicting rows."
   },
   "pins": {
     "current_main": {
@@ -13646,7 +13646,7 @@
     "Local proposal only; no owner, acceptance or credit change.",
     "Source target candidate operands are retained as target-level context only; per-key foreign contact is not established by the original accounting.",
     "Owners 14568 (112 keys) and 14593 (4 keys) have no target/pixelIndex match in the retained 48-target source-evidence roster, so target-level source-evidence context is unavailable; their original extraction class and source-index joins remain verified from blocks 031–034.",
-    "Per-key land/water class is absent from the held ledger tuples and target roster; original full-package totals and held aggregate totals are preserved, with no partition-level class split claimed.",
+    "Partition B per-key land/water class is joined from original extraction blocks by exact owner_id,y,x; this partition has 435 land and 30 inland-water keys. The original full-package and held aggregate totals remain preserved.",
     "Whole-target support is pinned, but per-key physical flags are not represented in this partition packet; no physical clearance is inferred.",
     "Source vintage/licensing/territorial applicability and legal authority remain unresolved; no sovereignty conclusion.",
     "Current selected-owner conservation and downstream emitted/integration gates remain unverified."
