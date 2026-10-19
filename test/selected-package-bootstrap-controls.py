@@ -29,9 +29,10 @@ OFFLINE_GIT_READ = subprocess.check_output
 def actual_static_graph(source_root, entry_point):
     # Node parses these bodies without linking or evaluating them. This test
     # observes the true graph instead of maintaining a parallel regex allowlist.
-    walker="import fs from 'node:fs';import path from 'node:path';import vm from 'node:vm';const root=process.argv[1],q=[process.argv[2]],seen=new Set();while(q.length){const n=q.pop();if(seen.has(n))continue;seen.add(n);for(const s of new vm.SourceTextModule(fs.readFileSync(path.join(root,n),'utf8')).dependencySpecifiers)if(s.startsWith('.'))q.push(path.posix.normalize(path.posix.join(path.posix.dirname(n),s)));}process.stdout.write(JSON.stringify([...seen]));"
-    result=subprocess.run([SYSTEM_NODE,'--experimental-vm-modules','--input-type=module','-e',walker,str(source_root),entry_point],
-                          stdout=subprocess.PIPE,stderr=subprocess.PIPE,check=False)
+    helper=Path(__file__).resolve().parent / 'helpers/static-module-closure.mjs'
+    env={key:value for key,value in os.environ.items() if key not in ('NODE_OPTIONS','NODE_PATH')}
+    result=subprocess.run([SYSTEM_NODE,'--experimental-vm-modules',str(helper),str(source_root),json.dumps([entry_point])],
+                          stdout=subprocess.PIPE,stderr=subprocess.PIPE,check=False,timeout=20,env=env)
     if result.returncode:
         raise AssertionError('Actual static graph could not be read: '+result.stderr.decode())
     return json.loads(result.stdout)
