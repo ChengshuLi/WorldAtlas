@@ -4402,5 +4402,32 @@
       "source_comparison_record_component_id": "physical-component:4565bb3ec51d02e20377dd44a221be8c487e8b3f81f879a67488fde8d8e119d1",
       "witness_scope": "Original candidate-component source comparison witness; does not assert per-cell causal applicability or new assignment."
     }
-  ]
+  ],
+  "independent_geometry_review": {
+    "reviewer": "conservation_check",
+    "verified_packet_head": "1bff559fd0bbe53a0540b41a7e434894b509f47",
+    "verification_scope": "Independent replay of the frozen 18 territorial-contact rows against the exact three geometry inputs pinned in this packet; the reviewer also confirmed the 49 source-fitness rows are disjoint from the territorial rows.",
+    "results": {
+      "territorial_keys": 18,
+      "territorial_contact_rows_internally_consistent": 18,
+      "operand_classifications": 54,
+      "foreign_country_admin0_inside": 15,
+      "foreign_admin1_inside": 15,
+      "foreign_original_source_adm1_inside": 9,
+      "foreign_country_admin0_and_foreign_admin1_identical_key_sets": true,
+      "country_admin1_overlap_with_original_source": 6,
+      "union_of_source_contact_key_sets": 18,
+      "polygon_boundary_classifications": 0,
+      "missing_or_mismatched_key_classifications": 0,
+      "source_fitness_and_territorial_keys_disjoint": true
+    },
+    "not_verified": [
+      "IDN ADM1 provider fetch; the reviewer performed no such fetch",
+      "upstream source delivery or source-vintage authenticity",
+      "current source applicability or legal/current boundary status",
+      "provider authority, licensing, sovereignty, or cell-assignment authority",
+      "contract_precedents exact-object/provider recheck"
+    ],
+    "provider_limit": "An earlier provider attempt could not fetch the IDN ADM1 source. The retained historical comparison bytes support geometry reproduction only and do not clear that provider limitation."
+  }
 }
