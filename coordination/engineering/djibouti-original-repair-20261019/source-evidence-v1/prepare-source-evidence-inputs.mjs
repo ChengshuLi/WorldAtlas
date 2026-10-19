@@ -13,14 +13,15 @@ const stageCommit = 'f086c1b4dfbaf6e3095785dcae03368090e5415b';
 const intervalCommit = 'dd155faf933cc44511d7023930a8aab369897a60';
 const physicalCommit = '908b1a5e70f69151173ea823c760009277a25297';
 const prefix = 'coordination/engineering/djibouti-original-repair-20261019/';
-const evidenceDir = prefix + 'source-evidence-v1';
-const contextDir = prefix + 'source-context-v1';
+const evidenceVersion = process.argv[2] ?? 'v1';
 const need = (value, message) => { if (!value) throw new Error(message); };
+need(['v1', 'v2'].includes(evidenceVersion), 'Use an explicit supported evidence vintage');
+const evidenceDir = prefix + `source-evidence-${evidenceVersion}`;
+const contextDir = prefix + 'source-context-v1';
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 need(!fs.existsSync(path.join(root, evidenceDir, 'source-evidence-config.json'))
-  && !fs.existsSync(path.join(root, evidenceDir, 'native-requested-patch.json'))
-  && !fs.existsSync(path.join(root, contextDir, 'whole-source-neighbor-context-screen.json')),
-  'Fresh DJI source evidence and context products required');
+  && !fs.existsSync(path.join(root, evidenceDir, 'native-requested-patch.json')),
+  'Fresh DJI source evidence products required');
 
 const {pinReader} = await import(pathToFileURL(path.join(root, 'scripts/prepare-delivery-handoff.mjs')));
 const {coordinateBounds} = await import(pathToFileURL(path.join(root,
@@ -136,6 +137,18 @@ const targets = stageRows.map(stage => {
     && sourceSupport, `Whole original/source/canonical/physical join failed for ${stage.target}`);
   const coverage = coverageByOwner.get(owner) ?? [];
   need(coverage.length > 0, `Missing exact requested keys for ${stage.target}`);
+  const coverageByY = new Map();
+  for (const row of coverage) {
+    const runs = coverageByY.get(row.y) ?? [];
+    runs.push([row.start, row.end, 'mapped_land_support']);
+    coverageByY.set(row.y, runs);
+  }
+  const coverageRows = [...coverageByY].sort(([a], [b]) => a - b).map(([y, runs]) => {
+    runs.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+    for (let i = 1; i < runs.length; i++) need(runs[i - 1][1] <= runs[i][0],
+      `Overlapping owner coverage intervals for ${stage.target} at row ${y}`);
+    return {y, runs};
+  });
   return {
     id: stage.target,
     target_id: selected.id,
@@ -144,8 +157,7 @@ const targets = stageRows.map(stage => {
     source_family: 'gb:DJI:ADM2',
     source_receipt_sha256: supportPin.sha256,
     coverage_classes: ['mapped_land_support'],
-    coverage_rows: coverage.sort((a, b) => a.y - b.y || a.start - b.start)
-      .map(({y, start, end}) => ({y, runs: [[start, end, 'mapped_land_support']]})),
+    coverage_rows: coverageRows,
   };
 });
 
@@ -212,7 +224,11 @@ fs.mkdirSync(path.join(root, evidenceDir), {recursive: true});
 fs.mkdirSync(path.join(root, contextDir), {recursive: true});
 fs.writeFileSync(path.join(root, evidenceDir, 'source-evidence-config.json'), JSON.stringify(evidenceConfig) + '\n', {flag: 'wx'});
 fs.writeFileSync(path.join(root, evidenceDir, 'native-requested-patch.json'), JSON.stringify({rows: patchRows}) + '\n', {flag: 'wx'});
-fs.writeFileSync(path.join(root, contextDir, 'whole-source-neighbor-context-screen.json'), JSON.stringify(contextReport) + '\n', {flag: 'wx'});
+const contextPath = path.join(root, contextDir, 'whole-source-neighbor-context-screen.json');
+const contextBytes = Buffer.from(JSON.stringify(contextReport) + '\n');
+if (fs.existsSync(contextPath)) need(fs.readFileSync(contextPath).equals(contextBytes),
+  'Existing immutable context screen differs');
+else fs.writeFileSync(contextPath, contextBytes, {flag: 'wx'});
 console.log(JSON.stringify({
   targets: targets.length, requested_cells: cells, original_intervals: intervals.length,
   positive_family: {source_id: 'gb:DJI:ADM2', features: dji2.collection.features.length},
