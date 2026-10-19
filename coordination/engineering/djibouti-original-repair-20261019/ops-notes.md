@@ -310,3 +310,8 @@ retained. This is a diagnostic/constructor result only. No CI was dispatched,
 no issue claim/comment was added, no source applicability exception was
 adopted, and accepted repair credit remains zero pending exact-head scientific
 review and the existing downstream delivery/owner/acceptance checks.
+
+Scope disclosure: this exact negative scan covers the complete retained ERI, ETH
+and SOM ADM1/ADM2 families specified above. Ethiopia ADM3 and other source
+families were not screened; the result does not establish a comprehensive
+foreign-family inventory.
