@@ -218,9 +218,9 @@ async function downloadRedirect(response, fetchImpl, maximum) {
   } catch { throw Error('Geographic report delivery failed or exceeded bounded archive budget'); }
 }
 
-// Only the originating attempt named by an already authenticated job receipt is
-// inspected. A failed/cancelled code attempt can contain successful geography; its
-// actual unique geography job and all required steps must still be successful.
+// Authenticate the exact originating attempt and its unique successful job.
+// Queue aggregate/step projections do not establish producer readiness; the job
+// must be completed/successful even when the enclosing attempt failed/cancelled.
 async function readGeographyOriginJob({api, repo, number, source}) {
   const route = `/repos/${repo}/actions/runs/${source.run_id}/attempts/${source.run_attempt}`;
   const run = await api(route);
@@ -229,7 +229,7 @@ async function readGeographyOriginJob({api, repo, number, source}) {
   need(run.id === source.run_id && run.run_attempt === source.run_attempt && run.head_sha === workflowHead &&
     run.event === (queue ? 'workflow_dispatch' : 'pull_request') && run.path === (queue ? QUEUE_WORKFLOW_PATH : WORKFLOW_PATH) &&
     run.repository?.full_name === repo && run.head_repository?.full_name === repo &&
-    (queue ? ['in_progress', 'completed'].includes(run.status) : run.status === 'completed') &&
+    (queue || run.status === 'completed') &&
     (queue || Array.isArray(run.pull_requests) && (!run.pull_requests.length ||
       run.pull_requests.some(pr => pr.number === number && pr.head?.sha === source.head))),
     'Original geographic run identity or state changed');

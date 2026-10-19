@@ -330,6 +330,24 @@ for (const [label, steps] of [['missing', undefined], ['empty', []], ['stale', [
   });
 }
 
+test('queued aggregate cannot veto exact successful geography or relabel the original attempt', async () => {
+  for (const currentAttempt of [1, 2]) {
+    const f = freshQueueTransport();
+    f.run.status = 'queued'; f.run.conclusion = null;
+    f.loadOptions.fresh.run_attempt = currentAttempt;
+    const result = await loadGeographicReport(f.loadOptions);
+    checkGeographicReport(result, f.options.baseline, f.commit.sha);
+    const source = geographicReportProducts(result).source;
+    assert.equal(source.run_attempt, 1); assert.equal(source.job_id, 55);
+    assert.equal(source.artifact_digest, reportHash(f.zip));
+    assert.equal(source.tree, f.commit.tree.sha);
+    assert.equal(f.metadata.filter(route => route.endsWith('/attempts/1')).length, 1);
+    assert.equal(f.metadata.filter(route => route.includes('/attempts/1/jobs')).length, 1);
+    assert(!f.metadata.some(route => route.includes('/attempts/2')), 'No latest-attempt substitution or polling');
+    await validateGeographyOrigin({...f.loadOptions, source});
+  }
+});
+
 test('failed-job queue retry authenticates carried geography from its successful original attempt',async()=>{
   const f=freshQueueTransport();
   f.loadOptions.fresh.run_attempt=2;
@@ -344,7 +362,7 @@ test('failed-job queue retry authenticates carried geography from its successful
 });
 
 test('fresh queue loader rejects foreign or unsuccessful producers and altered receipt custody with empty steps', async () => {
-  for (const mutate of [
+  for (const aggregateStatus of ['in_progress', 'queued']) for (const mutate of [
     f => {f.run.id++;}, f => {f.run.run_attempt++;}, f => {f.run.head_sha = 'f'.repeat(40);},
     f => {f.run.path = '.github/workflows/other.yml';}, f => {f.run.event = 'push';},
     f => {f.run.head_branch = 'engineering/foreign';}, f => {delete f.run.head_branch;},
@@ -360,7 +378,7 @@ test('fresh queue loader rejects foreign or unsuccessful producers and altered r
     f => {f.zip = archive(Buffer.from('{}'));}, f => {f.commit.sha = 'f'.repeat(40);},
     f => {f.commit.tree.sha = 'invalid';}
   ]) {
-    const f = freshQueueTransport(); mutate(f);
+    const f = freshQueueTransport(); f.run.status = aggregateStatus; mutate(f);
     await assert.rejects(loadGeographicReport(f.loadOptions));
   }
 });

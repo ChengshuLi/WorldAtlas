@@ -234,17 +234,14 @@ export function reviewedTestPlan(request, {base, head, entries, files, definitio
   // comes from the existing executing-authority roster, and real package inputs
   // come from the package definition consumed by the builder itself.
   const inputs = [...EXECUTION_CODE];
-  if (tests.includes('test/current-rebind-product-custody.test.mjs')) {
-    // This consumer compares the live producer policy, not a historical fixture.
-    const policy = 'coordination/engineering/additive-native-composition-20261009/execution-code-paths.json';
-    need(definition.verification_paths.includes(policy), 'Current rebind policy lacks its verification declaration');
-    if (!inputs.includes(policy)) inputs.push(policy);
-  }
-  if (tests.includes('test/local-workspace.test.mjs')) {
-    // The bootstrap controls execute the current documented shell/Python body.
-    const documentation = 'docs/LOCAL_WORKSPACES.md';
-    need(definition.verification_paths.includes(documentation), 'Current workspace documentation lacks its verification declaration');
-    if (!inputs.includes(documentation)) inputs.push(documentation);
+  // These consumers read current declared policy, not historical fixture copies.
+  for (const [consumer, operand] of [
+    ['test/current-rebind-product-custody.test.mjs', 'coordination/engineering/additive-native-composition-20261009/execution-code-paths.json'],
+    ['test/local-workspace.test.mjs', 'docs/LOCAL_WORKSPACES.md'],
+    ['test/regional-research-gate.test.mjs', 'data/research-geography-gate.json']
+  ]) if (tests.includes(consumer)) {
+    need(definition.verification_paths.includes(operand), 'Current reviewed operand lacks its verification declaration: ' + operand);
+    if (!inputs.includes(operand)) inputs.push(operand);
   }
   need(plan.inputs === undefined || Array.isArray(plan.inputs) &&
     (plan.inputs.length===0 || JSON.stringify(plan.inputs)===JSON.stringify(inputs)),
