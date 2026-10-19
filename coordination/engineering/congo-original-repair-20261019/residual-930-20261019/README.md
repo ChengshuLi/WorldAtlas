@@ -32,5 +32,5 @@ This COD-only packet does not decide or expand the separate #870/#878 water scop
 ## Local artifact identities
 
 - `partition-a.json`: 907,137 bytes; SHA-256 `cbab29ff875d9d5fdb79cefe1e8c84910f4a4f98c9b4f251d3c8ba6769ce7d4b`.
-- `partition-b.json`: 441,598 bytes; SHA-256 `2b73cc17f047cab7c34401199d27db7dbf586908212889cd6bab2e4afa65df25`.
+- `partition-b.json`: 441,665 bytes; SHA-256 `728335168e0003aacb1538b8c3d10799d984a2319d3ffe2a09c9cd274643f735`.
 
