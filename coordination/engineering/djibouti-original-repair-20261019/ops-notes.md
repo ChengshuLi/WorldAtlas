@@ -217,3 +217,28 @@ only its input config; no diagnostic product exists. The independent reviewer
 agreed that stopping here is correct. Since no full-scope diagnostic exists,
 `supported-inputs` and `native-authority` were not run; all 683 cells / 394
 intervals remain held and accepted repair credit remains zero.
+
+## Exact negative/contact scan inputs (v3)
+
+After reviewer approval of v2, the existing stock `source-evidence` route was
+used with `territorial_exclusion_families` set to the six complete original
+ERI/ETH/SOM ADM1/ADM2 catalogue products. This uses the documented whole-family
+loader and its conservative complete-bounds prefilter; it does not treat the
+v2 bounding-box screen as exact contact or adopt source-vintage applicability.
+All 683 requested keys and 394 intervals are preserved. The operator emitted
+24 exact original geometry operand references over eight targets (per-target
+counts: 0, 4, 2, 4, 2, 2, 6, 2, 2); no operand is assigned to the first target.
+Each reference is ordinal- and geometry-hash-bound to a complete immutable
+family pin. These are exact inputs for the stock native per-cell contact
+operator, not legal/source-applicability determinations or accepted vetoes.
+
+The v3 stock `source-evidence` phase succeeded with config SHA-256
+`7dd2a8486bb692ff14f6bb67ed6569398570a2eb12d774ad1ed13bff5364d2c6`.
+`products/source-evidence.json` is 45,088 bytes, SHA-256
+`2fa52699c6b1ae63c79bcb4a8026bb482dad8e85f5f2f4eab8d7322760ea3908`;
+`products/territorial-exclusion-provenance.json` is 108,258 bytes, SHA-256
+`115d46319d7cf4843913bdd40a60de24962f2fc58de5b9e7e1d2ac1661a1dbf2`.
+The output preserves the full six-family source pins and target-level operand
+ordinals. Per-cell exact contact counts are not yet available until the native
+diagnostic is run. Source-vintage applicability and accepted repair credit
+remain unresolved and zero, respectively.
