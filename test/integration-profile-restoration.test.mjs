@@ -6,9 +6,13 @@ import {spawnSync, execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {integrationProfile} from '../scripts/integration-profile.mjs';
+import {staticModuleClosure} from './helpers/static-module-closure.mjs';
 import {checkoutExecutionClosure} from '../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/artifact-checkout-execution.mjs';
 
 const repo=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+// The workflow shell has two intentional eager entries. Discover their children
+// once; the selected smoke below stays an explicit dynamic fixture override.
+const fixtureSources=staticModuleClosure(repo,['scripts/run-integration-tests.mjs','scripts/integration-profile.mjs']);
 
 test('actual checkout authority covers current code independently of historical provenance',()=>{
   const closure=checkoutExecutionClosure(repo);
@@ -43,7 +47,7 @@ function workflowCommand() {
 function fixture(t,{selected=false,smokeBody,fail=false}={}) {
   // One marker exercises runner dispatch. Real inventory, skip and process-lifecycle
   // behavior are covered by full-regression-shards and integration-streaming.
-  const sources=['src/native-grid.js','src/reference-metadata.js','scripts/run-integration-tests.mjs','scripts/integration-profile.mjs','scripts/check-handoff-scope.mjs','scripts/package-inputs.mjs','scripts/package-producer-contract.mjs','scripts/compile-hosted-migrations.mjs','scripts/ci-setup-observations.mjs'];
+  const sources=fixtureSources;
   const bodies=sources.map(name=>{
     const p=path.join(repo,name),s=fs.lstatSync(p);
     assert.ok(s.isFile()&&!s.isSymbolicLink());
@@ -185,4 +189,51 @@ test('deleted workflow routing retains full fallback for actual runtime inputs',
   assert.equal(integrationProfile('engineering/retired-stage',[{filename,status:'removed'}],{},new Map()),'evidence');
   for(const filename of ['scripts/build-static-inner.mjs','src/native-grid.js','hosted/geographic-releases.js'])
     assert.equal(integrationProfile('engineering/retired-stage',[{filename,status:'removed'}],{},new Map()),'full');
+});
+
+
+test('static fixture discovery follows eager imports without evaluating or broadening dynamic stubs',t=>{
+  const cache=path.join(repo,'.cache');fs.mkdirSync(cache,{recursive:true});
+  const root=fs.mkdtempSync(path.join(cache,'static-fixture-'));
+  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+  const write=(name,body)=>fs.writeFileSync(path.join(root,name),body);
+  const marker=path.join(root,'must-not-execute');
+  write('entry.mjs',`import {writeFileSync} from 'node:fs';
+import './child.mjs';
+export {value} from './leaf.mjs';
+// import './comment-not-a-module.mjs';
+const text="import './string-not-a-module.mjs'";
+writeFileSync(${JSON.stringify(marker)},'executed');
+await import('./deliberate-dynamic-stub.mjs');
+throw Error('Fixture discovery must not evaluate source');
+`);
+  write('child.mjs',"import './entry.mjs';\n");
+  write('leaf.mjs',"export const value=1;\n");
+  assert.deepEqual(staticModuleClosure(root,['entry.mjs','entry.mjs']),['child.mjs','entry.mjs','leaf.mjs']);
+  assert(!fs.existsSync(marker));
+  write('leaf.mjs',"export {value} from './new-transitive.mjs';\n");
+  write('new-transitive.mjs',"export const value=2;throw Error('Never evaluate even a new transitive dependency');\n");
+  assert.deepEqual(staticModuleClosure(root,['entry.mjs']),['child.mjs','entry.mjs','leaf.mjs','new-transitive.mjs']);
+  assert(!fs.existsSync(marker));
+  fs.unlinkSync(path.join(root,'new-transitive.mjs'));
+  assert.throws(()=>staticModuleClosure(root,['entry.mjs']),/ENOENT/);
+});
+
+test('static fixture discovery refuses unsafe or nonordinary imports and invalid source',t=>{
+  const cache=path.join(repo,'.cache');fs.mkdirSync(cache,{recursive:true});
+  const root=fs.mkdtempSync(path.join(cache,'static-fixture-'));
+  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+  fs.writeFileSync(path.join(root,'leaf.mjs'),'export const value=1;\n');
+  fs.symlinkSync('leaf.mjs',path.join(root,'linked.mjs'));
+  fs.mkdirSync(path.join(root,'directory.mjs'));
+  fs.symlinkSync('.',path.join(root,'linked-directory'));
+  for(const name of ['linked.mjs','directory.mjs','linked-directory/leaf.mjs'])assert.throws(()=>staticModuleClosure(root,[name]),/must be ordinary/);
+  for(const name of ['../outside.mjs','/absolute.mjs','bad\\name.mjs'])
+    assert.throws(()=>staticModuleClosure(root,[name]),/must stay inside/);
+  for(const [body,error] of [["import '../outside.mjs';",/must stay inside/],
+    ["import 'external-package';",/Unsupported external/],["export const = ;",/SyntaxError/]]){
+    fs.writeFileSync(path.join(root,'entry.mjs'),body);
+    assert.throws(()=>staticModuleClosure(root,['entry.mjs']),error);
+  }
+  assert.throws(()=>staticModuleClosure(root,[]),/Nonempty static module entries/);
 });
