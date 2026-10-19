@@ -194,7 +194,9 @@ export function workspaceManager(repo, {freeBytes} = {}) {
       }
       // Network interruption must not strand the registry lock. Freeze the
       // fetched commit before reserving; later ref movement cannot change it.
-      git('fetch', 'origin', 'main');
+      // Request metadata only even from conventional clones; selected missing
+      // blobs still need explicit acquisition before the inventory can pass.
+      git('fetch', '--no-tags', '--no-recurse-submodules', '--no-auto-maintenance', '--filter=blob:none', 'origin', 'main');
     }
     const head = slot === 'work' ? git('rev-parse', '--verify', 'origin/main').trim() : commit;
     return locked(() => {

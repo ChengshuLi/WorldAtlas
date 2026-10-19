@@ -177,31 +177,37 @@ export function applyAdditiveNativePatch(base,patch,{baseReference,effectiveRefe
 
   const replacements=new Map();let previousY=-1,addedCells=0;
   const bits=19,mask=2**bits-1,ownerBase=2**(32-bits);
-  const decode=k=>{const a=base.runs[k*2],b=base.runs[k*2+1];return[a&mask,(b&mask)+1,(a>>>bits)+(b>>>bits)*ownerBase];};
   for(const row of patch.rows) {
     exactKeys(row,['y','runs'],'Native patch row');
     require(Number.isInteger(row.y)&&row.y>previousY&&row.y<base.size&&Array.isArray(row.runs)&&row.runs.length>0,'Duplicate/unordered/outside native patch row');previousY=row.y;
     const start=base.rows[row.y*2],count=base.rows[row.y*2+1];
     require(start+count<=base.runs.length/2,'Incomplete base native row');
-    const old=Array.from({length:count},(_,i)=>decode(start+i));let previousEnd=0;
-    for(const run of old){require(run[0]>=previousEnd&&run[1]>run[0]&&run[1]<=base.size&&owners.has(run[2]),'Invalid/foreign base ownership run');previousEnd=run[1];}
-    previousEnd=0;
+    let previousEnd=0;
+    for(let i=0;i<count;i++){
+      const a=base.runs[(start+i)*2],b=base.runs[(start+i)*2+1],end=(b&mask)+1,owner=(a>>>bits)+(b>>>bits)*ownerBase;
+      require((a&mask)>=previousEnd&&end>(a&mask)&&end<=base.size&&owners.has(owner),'Invalid/foreign base ownership run');previousEnd=end;
+    }
+    previousEnd=0;let occupied=0;
     for(const run of row.runs) {
       require(Array.isArray(run)&&run.length===3&&run.every(Number.isInteger)&&run[0]>=previousEnd&&run[1]>run[0]&&run[1]<=base.size&&allowed.has(run[2]),'Conflicting/unordered/foreign native addition');previousEnd=run[1];
-      require(!old.some(before=>before[0]<run[1]&&run[0]<before[1]),'Native additive patch would replace an assigned cell');
+      while(occupied<count&&(base.runs[(start+occupied)*2+1]&mask)+1<=run[0])occupied++;
+      require(occupied===count||(base.runs[(start+occupied)*2]&mask)>=run[1],'Native additive patch would replace an assigned cell');
       addedCells+=run[1]-run[0];
     }
-    const combined=[...old,...row.runs].sort((a,b)=>a[0]-b[0]),merged=[];
-    for(const run of combined){const last=merged.at(-1);if(last&&last[1]===run[0]&&last[2]===run[2])last[1]=run[1];else merged.push([...run]);}
-    // Keep only native words between rows. Retaining one JS triple-array per
-    // old run across a large patch needlessly expands the complete base bank.
-    const packed=new Uint32Array(merged.length*2);
-    for(let i=0;i<merged.length;i++){
-      const [start,end,owner]=merged[i];
-      packed[i*2]=owner%ownerBase*2**bits+start;
-      packed[i*2+1]=Math.floor(owner/ownerBase)*2**bits+end-1;
+    // Both streams are ordered and disjoint. Merge directly into packed words,
+    // without old/combined/sorted/merged JS triples for every affected base run.
+    const packed=new Uint32Array((count+row.runs.length)*2);let old=0,added=0,words=0,lastEnd=0,lastOwner=0;
+    while(old<count||added<row.runs.length){
+      let begin,end,owner;
+      if(added===row.runs.length||old<count&&(base.runs[(start+old)*2]&mask)<=row.runs[added][0]){
+        const a=base.runs[(start+old)*2],b=base.runs[(start+old)*2+1];old++;
+        begin=a&mask;end=(b&mask)+1;owner=(a>>>bits)+(b>>>bits)*ownerBase;
+      }else [begin,end,owner]=row.runs[added++];
+      if(words&&begin===lastEnd&&owner===lastOwner)packed[words-1]=Math.floor(owner/ownerBase)*2**bits+end-1;
+      else{packed[words++]=owner%ownerBase*2**bits+begin;packed[words++]=Math.floor(owner/ownerBase)*2**bits+end-1;}
+      lastEnd=end;lastOwner=owner;
     }
-    replacements.set(row.y,packed);
+    replacements.set(row.y,packed.subarray(0,words));
   }
   const count=base.runs.length/2+[...replacements].reduce((n,[y,runs])=>n+runs.length/2-base.rows[y*2+1],0);
   require(Number.isSafeInteger(count)&&count>=0,'Invalid native additive output count');
