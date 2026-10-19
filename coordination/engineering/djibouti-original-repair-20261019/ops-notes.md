@@ -123,6 +123,6 @@ machine paths; neither is committed or public.
 These are whole-target, source-relative diagnostics against the retained
 physical corpus. A zero-flag row is not source applicability, authority,
 sovereignty, native-cell support or package acceptance. Eleven physical flags
-occur across five of nine targets. The selected-owner observer remains zero for
+occur across six of nine targets. The selected-owner observer remains zero for
 all 683 land cells; 394 extracted intervals remain held, with accepted repair
 credit 0. No source or native-authority phase ran.
