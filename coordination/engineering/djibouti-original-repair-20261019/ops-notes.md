@@ -71,3 +71,58 @@ decoded JSON is 834,337 bytes, SHA-256
 retained DJI ADM2 IDs occur uniquely at zero-based rows 733–743. For each of the
 9 targets, metadata `source_id`, name and parent ID match the exact canonical
 Feature; row ordinals and the metadata pin are in `source-stage-v1/canonical-stage-joins.json`.
+
+## Generic physical-support observation
+
+Ran the existing current-main generic command with the committed DJI stage and
+verified exact shared physical descriptors/runtime:
+
+```sh
+/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node \
+  scripts/prepare-delivery-handoff.mjs physical \
+  coordination/engineering/djibouti-original-repair-20261019/physical-config-v1/config.local.json \
+  coordination/engineering/djibouti-original-repair-20261019/physical-v1
+```
+
+The private local config is SHA-256
+`939ce8ae22846ccce82a2da0775d6adee384f131223bafe4bc81cc51eca58743`; its
+phase-specific physical config hash in the execution receipt is
+`932284f18f383a400c65e4ee48656d096346282af69fc91920cf25c54694fd9c`. It binds
+25 consumed input pins: 24 exact records from the accepted shared physical
+config (18 encoded source-metadata shards, 3 encoded native shards, the native
+member index, comparison method and transport map) plus this committed DJI
+stage. The producer refuses unused input pins, so the separately hydrated
+seven-blob global physical-source archive is not misrepresented as consumed by
+this run. Python 3.12.14, NumPy 2.3.5, Shapely 2.1.2 and GEOS 3.13.1 passed the
+actual-file admission check; the inventory was completed with the exact loaded
+stdlib files the helper reported as missing before execution.
+
+The existing producer completed in 7.28 seconds, with 18 complete source
+metadata receipts and a complete 188,612-record native member. The reviewable
+`physical-v1/whole-target-support.json` is 216,083 bytes, SHA-256
+`e8cda75ba202bc025b2a609a6b81618e263ac1bb1698114257b2673bbe854dc9`. Its
+private `execution-receipt.json` is 586,516 bytes, SHA-256
+`a19f4c2bd15e75298eded76eb4b207b4869c1a3819b052526e9867ad7d6e7b92`; the
+local `preparation.json` is 545 bytes, SHA-256
+`0d9737ec939070654a10bf8764f9b6eda6cd123b186a2891a8fe091e8346a171`. The
+receipt and runtime-bearing config remain local because they contain absolute
+machine paths; neither is committed or public.
+
+| Owner | Target | Physical flags |
+| ---: | --- | --- |
+| 16531 | `gb:DJI:ADM2:41766387B13463549189785` | 2: missing and extra reconstruction |
+| 16532 | `gb:DJI:ADM2:41766387B22586556456338` | 0 |
+| 16533 | `gb:DJI:ADM2:41766387B51204577272085` | 0 |
+| 16536 | `gb:DJI:ADM2:41766387B73347270872705` | 3: extra reconstruction, contradictory land/water support, L2 outside L1 |
+| 16537 | `gb:DJI:ADM2:41766387B74076707162819` | 1: contradictory land/water support |
+| 16538 | `gb:DJI:ADM2:41766387B83981523687012` | 2: missing and extra reconstruction |
+| 16539 | `gb:DJI:ADM2:41766387B9467441741428` | 0 |
+| 16540 | `gb:DJI:ADM2:41766387B97155389424645` | 1: contradictory land/water support |
+| 16541 | `gb:DJI:ADM2:41766387B98599288227121` | 2: missing and extra reconstruction |
+
+These are whole-target, source-relative diagnostics against the retained
+physical corpus. A zero-flag row is not source applicability, authority,
+sovereignty, native-cell support or package acceptance. Eleven physical flags
+occur across five of nine targets. The selected-owner observer remains zero for
+all 683 land cells; 394 extracted intervals remain held, with accepted repair
+credit 0. No source or native-authority phase ran.
