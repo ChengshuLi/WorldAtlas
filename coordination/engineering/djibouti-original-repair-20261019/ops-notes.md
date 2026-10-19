@@ -26,9 +26,10 @@ node coordination/engineering/global-current-cell-work-queue-20261014/source-bat
 
 Result: 683 land cells, 394 intervals, nine targets, across blocks 029 and 030.
 
-The independent selected-owner observer was run at the same commit. Its result
-is `selected-owner-observation-v1.json`; it is observational only and reports
-zero base, additive, and effective owners for all 683 queried cells.
+The historical selected-owner observer snapshot is
+`selected-owner-observation-v1.json`; it is pinned to an earlier selector and
+is not the current-main owner observation. The current-main observation is
+recorded in the final section below.
 
 ## Identity evidence boundary
 
@@ -315,3 +316,39 @@ Scope disclosure: this exact negative scan covers the complete retained ERI, ETH
 and SOM ADM1/ADM2 families specified above. Ethiopia ADM3 and other source
 families were not screened; the result does not establish a comprehensive
 foreign-family inventory.
+
+## Current-main selected-owner observation
+
+After the Libya additive release changed the current selector, the earlier
+selected-owner receipt was not reused. The stock observer was run once against
+live main `3eae98eca8f9840401f23dbe7a34efd4ac763668`, using Git 2.53 with
+`GIT_NO_LAZY_FETCH=1` and `GIT_NO_REPLACE_OBJECTS=1`. It consumed the complete
+current selector closure, including the exact Libya additive sidecar, runtime
+envelope, authority registry and patch. Those inputs were checked against
+their immutable commit/path/blob/size/SHA pins. The observer output is
+`selected-owner-observation-live-main.json` (270,811 bytes, SHA-256
+`124c1b7bb2c9398ab69742c72e9e7685a88cbba51c65352053c4fa510305b714`). It binds
+the original 683-cell / 394-interval package and query SHA-256
+`5892483772d3a105abad66d5ca6fbfd6b5bc8e54536e0d67e31995ed73fb5fce`, with
+original-interval SHA-256
+`36bdf1dda09a7a27fb1f2da6f8db07bbdd3228f4141d2b973fa8746ce542b078`.
+
+| Owner | Target | Base-owner cells | Additive-owner cells | Effective-owner cells |
+| ---: | --- | ---: | ---: | ---: |
+| 16531 | `gb:DJI:ADM2:41766387B13463549189785` | 0 | 0 | 0 |
+| 16532 | `gb:DJI:ADM2:41766387B22586556456338` | 0 | 0 | 0 |
+| 16533 | `gb:DJI:ADM2:41766387B51204577272085` | 0 | 0 | 0 |
+| 16536 | `gb:DJI:ADM2:41766387B73347270872705` | 0 | 0 | 0 |
+| 16537 | `gb:DJI:ADM2:41766387B74076707162819` | 0 | 0 | 0 |
+| 16538 | `gb:DJI:ADM2:41766387B83981523687012` | 0 | 0 | 0 |
+| 16539 | `gb:DJI:ADM2:41766387B9467441741428` | 0 | 0 | 0 |
+| 16540 | `gb:DJI:ADM2:41766387B97155389424645` | 0 | 0 | 0 |
+| 16541 | `gb:DJI:ADM2:41766387B98599288227121` | 0 | 0 | 0 |
+
+Across all 683 keys, base owner, accepted-additive owner and effective selected
+owner are each zero; there are no existing-product overlaps. This is a literal
+selected-product observation, not a source-applicability determination,
+qualification certificate, repair acceptance, or accepted-credit result. The
+11 physical flags, territorial/source applicability limits, and ETH ADM3 / other
+family screening limitation above remain unchanged. No CI was dispatched and
+no accepted repair credit is claimed.
