@@ -352,3 +352,49 @@ qualification certificate, repair acceptance, or accepted-credit result. The
 11 physical flags, territorial/source applicability limits, and ETH ADM3 / other
 family screening limitation above remain unchanged. No CI was dispatched and
 no accepted repair credit is claimed.
+
+## Cumulative delivery candidate (compose/finalize)
+
+The stock modern `compose` phase ran with the reviewed nine-row DJI constructor
+and the exact inherited current selector at main `3eae98eca8f9840401f23dbe7a34efd4ac763668`.
+Its first attempt correctly rejected a native-patch locator whose blob matched
+but whose commit locator differed from the constructor's recorded binding. The
+config was corrected to the exact recorded source commit `ee7b909c5f80169167e082e04e29e44d153f15be`; no input body or scientific result
+changed. Compose completed from config SHA-256
+`0c200339487ae83a41c93a560aa5501444dff3d52316d78a3bcde41b1f461aae` and was
+committed at `b18c1e23ad61c065537b709bc71743abb660e64d`.
+
+| Product | Bytes | SHA-256 |
+| --- | ---: | --- |
+| `compose-v1/authority-registry.json` | 251,249 | `dd1e5b77fe6130624dc4883d4f5266ae8632bef1c274ac4d23bad10a53afeb4c` |
+| `compose-v1/selected-ledger.json` | 62,116,383 | `296f1029963a2ffe0851fc0684f9bdf3dbfeffff92c6ad227bc74d8db8700ff0` |
+| `compose-v1/patch.json` | 30,397,453 | `4ad90044faaa662929d2d269c0ba1067c6b19ca141130e9340c72d770fd5b955` |
+| `compose-v1/runtime-envelope.json` | 1,421 | `09a3e8306347deca828be4021f67258275f1251e759630a2ba5c9747b14da53b` |
+
+The stock `finalize` phase completed with config SHA-256
+`487ca6cbbbb0918d8440848fd052cead9bc3e57a51b064dea6f4785a8c430968`.
+It authenticated the inherited rebind evidence and used the exact committed
+compose head as the restored-read-role snapshot for the new immutable input
+paths. The adopted candidate replaces the selector's cumulative sidecar with
+one that retains prior entries and includes the reviewed DJI constructor. The
+new candidate adds exactly the original 683 DJI cells across 394 intervals and
+nine targets; it does not add an acceptance decision or an applicability
+exception.
+
+| Adopted product | Bytes | SHA-256 |
+| --- | ---: | --- |
+| `data/ownership-selection.json` | 1,842 | `b1d9f2ec86fe499023549ae54d9dd43bfd11b0d0410a01a3af1291c5a2ccc32a` |
+| `.github/package-inputs.json` | 41,545 | `43226e22dcd73b80c773b6df676487c1f41988405d8d50eaa99d1c58032d15db` |
+| `delivery-v1/additive-selection.json` | 3,428 | `0d7a828b61fe96d86217e8b47d28ff20ef10d59f7f158c902f26e40f9dbec8f0` |
+| `delivery-v1/selected-delivery-expectations.json` | 2,895,001 | `39aeb30244fd4eafbb2a6562d40cf93b286e1c29576bc551228470b0d2537305` |
+
+The finalized expectations bind selected-ledger SHA-256
+`296f1029963a2ffe0851fc0684f9bdf3dbfeffff92c6ad227bc74d8db8700ff0`, 219
+cohorts and 6,309,401 cumulative native cells. These package totals are
+consumer expectations, not a claim that the DJI rows are accepted. This
+candidate remains pending independent final-head review; current selected-owner
+observation remains bound to prior live main `3eae98eca8f9840401f23dbe7a34efd4ac763668`.
+Source-vintage applicability, administrative authority, physical flags,
+Ethiopia ADM3 and other unscreened source families remain unresolved. Accepted
+repair credit is still zero. No tests or CI were run or dispatched for this
+downstream packaging step.
