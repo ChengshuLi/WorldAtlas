@@ -2,7 +2,7 @@
 
 This draft preserves `gb-PER-ADM2--repair-evaluation` (#2440) at main `e69a8ff2f5380c336bae300f898f70175e2ea049`. It retains the complete original denominator of 10,371 cells / 4,695 intervals / 55 owners. Prior supported outcomes remain 8,922; this proposal covers only the 1,449 residual held keys (13 owners, 666 original intervals, all land in the held slice).
 
-For each exact held key, `exception-proposal.json` records the original interval tuple, source target and source-feature members, exact mapped-land-support run, recorded owner and held class, and a proposed `documented_unresolved_exception` disposition. Target-level candidate rosters and physical findings are deduplicated by target and referenced by key. The full 11-family candidate roster and exact original source-candidate / physical-support block pins are included.
+For each exact held key, `exception-proposal.json.gz` (gzip-compressed JSON) records the original interval tuple, source target and source-feature members, exact mapped-land-support run, recorded owner and held class, and a proposed `documented_unresolved_exception` disposition. Target-level candidate rosters and physical findings are deduplicated by target and referenced by key. The full 11-family candidate roster and exact original source-candidate / physical-support block pins are included.
 
 ## Status and limits
 
