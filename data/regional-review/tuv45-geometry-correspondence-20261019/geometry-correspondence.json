@@ -2767,13 +2767,90 @@
       "effective_owner_cells": 0,
       "unassigned_cells": 45,
       "accepted_repair_credit_cells": 0,
-      "result_source": "Inherited independent exact-interval replay reported by conservation_check at main 2b569815a7e37c5797586092688122d9b5d749b0; selector/sidecar/patch/ledger OIDs are identical at current main 77609a1f159bfee954e52d48a883c5fe3e4b59f5, whose diff from 2b adds only TUV evidence.",
-      "persisted_receipt_path": null,
-      "author_replay_performed": false
+      "accepted_exception_credit_cells": 0,
+      "result_source": "Durable literal selected-owner observation bound in selection_conservation.durable_receipt.",
+      "persisted_receipt_path": "https://github.com/ChengshuLi/WorldAtlas/pull/2536#issuecomment-6261850166",
+      "author_replay_performed": false,
+      "author_replay_limitation": "The author did not rerun the selection query; the cited exact observation was produced and reviewed by the independent conservation reviewer."
+    },
+    "durable_receipt": {
+      "uri": "https://github.com/ChengshuLi/WorldAtlas/pull/2536#issuecomment-6261850166",
+      "receipt_kind": "literal-selected-owner-observation-v1",
+      "receipt_sha256": "b3611a1d61727baddb1b8a716bd2b50bb0a3ab1ea7cd6b9bd448a2d8f8feec97",
+      "receipt_bytes": 34567,
+      "receipt_content_includes_final_newline": true,
+      "exact_data_head": "2819b7231c24217511155c43c32f704597c07422",
+      "reader_code_commit": "21a38f0b531c8c647467f3ddc75043b138e7608d",
+      "original_package_id": "gb-TUV-ADM1--repair-evaluation",
+      "exact_query_count": 45,
+      "original_intervals_sha256": "de205f561476ed5eef8a3dd7629f14301e4028c39d3a633a24afebd5fde8e305",
+      "query_sha256": "52a8b53b8ecd69ff8ba60b20d7c69cf737a622a45248732057efc7a4c7e2aff8",
+      "result_counts": {
+        "base_owner_cells": 0,
+        "accepted_additive_owner_cells": 0,
+        "effective_selected_owner_cells": 0,
+        "unassigned_cells": 45,
+        "overlap_cells": 0
+      },
+      "selection_identity_at_receipt_head": {
+        "selector_blob_oid": "07c21155f2234de548c5794ae9311ca33f944935",
+        "selector_file_sha256": "ac056c7db58325419fe19c45a30ca21beeb9bbcad296722775c7bd1ba3a29e44",
+        "base_manifest_sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+        "sidecar_blob_oid": "866e608a4799d29ae8277258a09eec9b0b45cd77",
+        "sidecar_file_sha256": "bb55c11e282b27eea3b569b2bb4847039077a5a4a5ccebb649f60182adb49cc3",
+        "patch_blob_oid": "5e300bc6c0495a0d39182db629494723fc050c50",
+        "patch_file_sha256": "3142f0be5e910ae7bd13800fc7d0e9562c16d7116736ff2a03ecd0958cb73215",
+        "ledger_blob_oid": "7791e82a57b983da72dc66d655352b20d2b456be",
+        "ledger_file_sha256": "77be7802ec36eaafbe5997166f3bc74ce01e6b0eac064900b7ae76be2ef16fea"
+      },
+      "selected_state_comparison": {
+        "comparison_base_commit": "77609a1f159bfee954e52d48a883c5fe3e4b59f5",
+        "result": "selector, sidecar, patch, and ledger Git blob OIDs equal those at exact receipt data head 2819b7231c24217511155c43c32f704597c07422",
+        "selected_owner_receipt_is_current_for_these_pins": true,
+        "no_scientific_rerun_performed": true
+      },
+      "native_latitude_binding": {
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+        "compressed_sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+        "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23",
+        "role": "immutable normative latitude input consumed by the receipt",
+        "limitation": "Binds per-cell native center latitudes; it does not validate either retained polygon geometry, whole-cell coverage, or current source applicability."
+      },
+      "limitations": [
+        "observation only; not source qualification, repair acceptance, exception acceptance, or closure",
+        "the receipt target/data identity remains exact head 2819b7231c24217511155c43c32f704597c07422",
+        "the persisted receipt is hosted on PR2536 and is referenced read-only; this PR does not modify PR2536"
+      ],
+      "native_grid_binding": {
+        "selected_manifest": {
+          "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+          "commit": "2819b7231c24217511155c43c32f704597c07422",
+          "git_blob_oid": "31d970d0fe2bf8c899f020aad09a3826ea451790",
+          "bytes": 252447,
+          "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba"
+        },
+        "original_package": {
+          "snapshot_commit": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+          "queue_path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+          "queue_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+          "queue_sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8",
+          "native_grid_width": 262166,
+          "crs": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        },
+        "selected_owner_row": {
+          "path": "native-v1/ownership/rows-0.bin.gz",
+          "bytes": 306620,
+          "sha256": "89ed3564db641f992746bf4f6f01c1eed89cb470520734ac1b85ee95e9a70ba0",
+          "decoded_bytes": 2097328,
+          "decoded_sha256": "e9044c8304a47cd0d0acbb306bd31c2ba15f71e57648ab7d1581a6a77a875294"
+        },
+        "distinction": "Original interval keys and their recorded owner/source/land tuple are bound to the source-package snapshot. Selected-native observation is bound separately to the exact data-head manifest, owner row, and normative latitude bytes; latitude is not treated as a substitute for source geometry or applicability."
+      }
     }
   },
   "disposition": {
-    "source_relative_geometry_result": "The source-census archive geometry classifies every one of the 45 original cell centers as inside its named feature and no other TUV feature. The distinct regional-review GeoJSON, despite matching CRS/source metadata/vintage labels, classifies 42 inside the named feature and 3 outside; neither comparison yields a boundary-center tie. This retained geometry-version mismatch remains unresolved.",
+    "source_relative_geometry_result": "For all 45 original keys, the retained 2017 source-census archive geometry classifies the cell center inside its named feature. The distinct regional-review geometry agrees for 42 and classifies three centers outside all eight features: (136550,261216,43466,59797), (136973,260982,43461,59798), and (136978,260982,43461,59798). No center-boundary ties were found. Both views are center observations, not full-cell coverage or current applicability; the geometry-version discrepancy remains unresolved.",
     "accepted_exception_cells": 0,
     "proposed_unresolved_exception_cells": 45,
     "remaining_held_cells": 45,
@@ -2783,11 +2860,23 @@
     "legal_or_sovereignty_claim": false,
     "next_evidence": "Resolve the retained geometry-version divergence with dated, documented, CRS-compatible source/crosswalk evidence for the exact intervals and an applicable witness; otherwise preserve an explicit unresolved source-relative exception. Do not transfer #615 Niulakita/Niutao evidence.",
     "acceptance_conditions": [
-      "An independent exact-head reviewer validates original key/scope and all 16 half-open intervals summing to 45, checks all eight source features in both geometry objects, and confirms the 45/42+3 center classifications and no center-boundary ties.",
-      "The reviewer validates complete candidate contacts within the pinned block 033 and land/water support (45 land, 0 inland water), while retaining the scope limits of those sources.",
-      "The reviewer checks current selection input identities and inherited 2b zero-owner result; this artifact is not a persisted selected-native receipt and the author did not rerun that expensive whole-world selection comparison.",
-      "The contract reviewer confirms the project’s documented unresolved-exception path permits recording this bounded source/version gap without a positive owner assignment or legal/sovereignty claim.",
-      "Any positive source-supported assignment, package closure, or credit requires the original issue contract, a separately verified current-applicability outcome, and required independent acceptance; this proposal grants none."
+      "An independent exact FINAL remote-head reviewer verifies the original 45 tuples and 16 intervals, the per-key documented-unresolved proposal, retained source identity/version discrepancy, bounded block-033 contacts and 45-land/0-water support, and the durable selected-owner receipt binding.",
+      "For each tuple, the record states the same unresolved applicability question: whether the retained 2017 view or a documented dated successor/crosswalk applies to that recorded owner at that exact native location. The question need not be resolved to accept the documented-unresolved disposition.",
+      "The reviewer explicitly accepts all 45 original documented-unresolved dispositions under the original contract. Acceptance does not confer repair credit, positive owner assignment, source adoption, current applicability, package closure, or a legal/sovereignty conclusion."
+    ],
+    "exception_credit_cells": 0,
+    "accepted": false,
+    "disposition_basis": "Every exact original tuple (y,x,recorded owner,source feature,land) is proposed as a documented-unresolved exception. This records a bounded applicability question; it is not a repair, positive owner assignment, or current-applicability conclusion.",
+    "unresolved_question": "For each of all 45 original tuples, is the retained 2017 source view applicable to the recorded owner at this exact native location, or is there a documented dated successor/crosswalk?",
+    "repair_prerequisites": [
+      "Before any positive source-supported repair, establish a dated applicable source version or successor/crosswalk for each exact native key and demonstrate the required original-contract source, physical, complete-contact, and selected-native conditions.",
+      "For the three divergent tuples (136550,261216,43466,59797), (136973,260982,43461,59798), and (136978,260982,43461,59798), explain the contrary outcomes of the two retained geometry views as part of any positive qualification.",
+      "Any repair, package closure, or credit remains subject to the original issue contract and its required independent acceptance; this proposal grants none."
+    ],
+    "documented_unresolved_acceptance_conditions": [
+      "An independent exact FINAL remote-head reviewer verifies the original 45 tuples and 16 intervals, the per-key documented-unresolved proposal, retained source identity/version discrepancy, bounded block-033 contacts and 45-land/0-water support, and the durable selected-owner receipt binding.",
+      "For each tuple, the record states the same unresolved applicability question: whether the retained 2017 view or a documented dated successor/crosswalk applies to that recorded owner at that exact native location. The question need not be resolved to accept the documented-unresolved disposition.",
+      "The reviewer explicitly accepts all 45 original documented-unresolved dispositions under the original contract. Acceptance does not confer repair credit, positive owner assignment, source adoption, current applicability, package closure, or a legal/sovereignty conclusion."
     ]
   },
   "historical_source_context": {
@@ -2832,5 +2921,991 @@
     ],
     "runner": "Inline read-only Node runner; runner source was not retained as a separate file. Input geometry, project scanner source, method, and computed per-cell results are pinned in this packet.",
     "selected_native_replay": "Inherited reviewer evidence only; no persisted receipt and no author rerun."
-  }
+  },
+  "per_key_disposition": [
+    {
+      "y": 136377,
+      "x": 260097,
+      "recorded_owner": 43467,
+      "source_feature_index": 59796,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59796
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136377,
+      "x": 260098,
+      "recorded_owner": 43467,
+      "source_feature_index": 59796,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59796
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136377,
+      "x": 260099,
+      "recorded_owner": 43467,
+      "source_feature_index": 59796,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59796
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136378,
+      "x": 260097,
+      "recorded_owner": 43467,
+      "source_feature_index": 59796,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59796
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136544,
+      "x": 261210,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136545,
+      "x": 261208,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136545,
+      "x": 261209,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136545,
+      "x": 261210,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136545,
+      "x": 261211,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136546,
+      "x": 261209,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136546,
+      "x": 261210,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136546,
+      "x": 261211,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136546,
+      "x": 261212,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136546,
+      "x": 261213,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136547,
+      "x": 261210,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136547,
+      "x": 261211,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136547,
+      "x": 261212,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136547,
+      "x": 261213,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136547,
+      "x": 261214,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136548,
+      "x": 261210,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136548,
+      "x": 261211,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136548,
+      "x": 261212,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136548,
+      "x": 261213,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136548,
+      "x": 261214,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136548,
+      "x": 261215,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136549,
+      "x": 261210,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136549,
+      "x": 261211,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136549,
+      "x": 261212,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136549,
+      "x": 261213,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136549,
+      "x": 261214,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136549,
+      "x": 261215,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136550,
+      "x": 261213,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136550,
+      "x": 261214,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136550,
+      "x": 261215,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136550,
+      "x": 261216,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "outside_all_8_source_features",
+      "regional_review_inside_feature_indexes": [],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136551,
+      "x": 261215,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136551,
+      "x": 261216,
+      "recorded_owner": 43466,
+      "source_feature_index": 59797,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59797
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136973,
+      "x": 260982,
+      "recorded_owner": 43461,
+      "source_feature_index": 59798,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "outside_all_8_source_features",
+      "regional_review_inside_feature_indexes": [],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136977,
+      "x": 260982,
+      "recorded_owner": 43461,
+      "source_feature_index": 59798,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59798
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136978,
+      "x": 260982,
+      "recorded_owner": 43461,
+      "source_feature_index": 59798,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "outside_all_8_source_features",
+      "regional_review_inside_feature_indexes": [],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136979,
+      "x": 260982,
+      "recorded_owner": 43461,
+      "source_feature_index": 59798,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59798
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136979,
+      "x": 260983,
+      "recorded_owner": 43461,
+      "source_feature_index": 59798,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59798
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136980,
+      "x": 260982,
+      "recorded_owner": 43461,
+      "source_feature_index": 59798,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59798
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136980,
+      "x": 260983,
+      "recorded_owner": 43461,
+      "source_feature_index": 59798,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59798
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    },
+    {
+      "y": 136981,
+      "x": 260983,
+      "recorded_owner": 43461,
+      "source_feature_index": 59798,
+      "physical_class": "land",
+      "archive_2017_center_result": "named_feature_center_inside",
+      "regional_review_center_result": "named_feature_center_inside",
+      "regional_review_inside_feature_indexes": [
+        59798
+      ],
+      "boundary_ties": {
+        "archive": [],
+        "regional_review": []
+      },
+      "requested_disposition": "documented_unresolved_exception",
+      "unresolved_question": "Whether the retained 2017 source view, or a documented successor/crosswalk, is applicable to this recorded owner at this exact native location.",
+      "owner_or_geometry_change": false,
+      "accepted": false,
+      "accepted_repair_credit": 0,
+      "accepted_exception_credit": 0
+    }
+  ]
 }
