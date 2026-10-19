@@ -31,3 +31,11 @@ distinct-result case adds a synthetic limitation and recomputes its semantic
 digest, so the comparator reports disagreement. An occupied destination test
 confirms existing bytes remain unchanged. No fixture modifies retained source
 files or implies a new geographic, legal, or sovereignty conclusion.
+
+`evidence-quality.json` binds the retained source runs, predecessor code and
+locator/map context, exact subject IDs, current code proposal, and a compact
+`execution-record.json`. The execution record hashes the interpreter binary,
+successor code, six consumed historical fixture files, captured test output, and
+the positive receipt. It records seven passing CLI controls while keeping the
+historical producer execution and all geographic/legal judgments explicitly out
+of scope. Unknown upstream reuse terms remain restoration-only.

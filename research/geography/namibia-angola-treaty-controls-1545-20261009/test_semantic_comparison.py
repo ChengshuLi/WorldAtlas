@@ -84,7 +84,12 @@ class SemanticComparisonControls(unittest.TestCase):
             output = root / "passed.json"
             result = self.invoke(root, left, right, output)
             self.assertEqual(result.returncode, 0, result.stderr)
-            self.assertEqual(json.loads(output.read_text())["outcome"], "passed")
+            receipt = json.loads(output.read_text())
+            expected = derive(self.run5)
+            self.assertEqual(receipt["outcome"], "passed")
+            self.assertEqual(receipt["run_one_sha256"], expected)
+            self.assertEqual(receipt["run_two_sha256"], expected)
+            print("passed_receipt_sha256=" + hashlib.sha256(output.read_bytes()).hexdigest())
 
     def test_changed_body_with_refreshed_publication_and_stale_result_hash_rejected(self):
         with tempfile.TemporaryDirectory() as temp:

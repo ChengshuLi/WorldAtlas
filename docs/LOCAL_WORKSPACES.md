@@ -16,6 +16,31 @@ Active legacy work keeps its recorded worker ID only for finishing, renewing and
 
 New author allocation requires the current chat’s worker ID; the release command instead uses the recorded worker, slot and saved token to select its target, without changing the operator’s identity.
 
+## Task environment
+
+Check `node --version` in the same execution context that will run the allocator.
+If Node 24 is not selected, locate an already installed Node 24 runtime through
+the task's supported environment configuration and select it in that task's
+`PATH`; do not assume another shell's runtime is available. If none is available,
+report that runtime requirement instead of running the helper with an incompatible
+Node. The allocator uses built-in modules and does not require `npm ci`.
+
+Before fetching or running the bootstrap below, check the task's actual filesystem
+permissions and the repository's real Git common directory
+(`git rev-parse --path-format=absolute --git-common-dir`). The shared Git directory
+holds objects, refs, the registry and temporary bootstrap helpers; managed checkout
+paths are derived from it under the sibling `.worldatlas-workspaces` directory.
+Allocation needs write access to both locations. Changing the working directory
+or copying the helper into a writable task directory neither expands permissions
+nor relocates the shared store or managed slots.
+
+If that access is unavailable, retain the existing checkout and report the exact
+missing scope for the task's supported access setup. Do not reset a stale or dirty
+primary checkout, create an unmanaged clone, or change worker identity to work
+around it. Authorized read-only API/blob inspection can continue while execution
+is blocked. Use the current-main instructions rather than a stale checkout's
+saved claim or runtime assumptions.
+
 ## Allocate and inspect
 
 ```sh
