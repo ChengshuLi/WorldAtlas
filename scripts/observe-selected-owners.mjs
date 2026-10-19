@@ -193,6 +193,7 @@ export async function observeSelectedPackage({repo, commit, packageId}) {
     requireHead();
     return {version: 1, kind: 'literal-selected-owner-observation-v1', scientific_qualification: false,
       commit, code_commit: codeCommit, original_package: original.package,
+      original_intervals: original.blocks,
       original_intervals_sha256: sha(Buffer.from(JSON.stringify(original.blocks) + '\n')), query_count: requested.length,
       query_encoding: 'JSON.stringify([{x,y},...]) in input order, followed by LF',
       query_sha256: sha(Buffer.from(JSON.stringify(requested) + '\n')),
@@ -202,7 +203,8 @@ export async function observeSelectedPackage({repo, commit, packageId}) {
       latitude_whole_body_alias: latitudeVersion !== latitudePin.commit, keys: observations,
       execution_code: code, consumed_inputs: [...reader.inventory.values()].filter(p => p.whole_body_consumed),
       limits: ['Literal selected-product observation of this original queue package; not source applicability, a package qualification certificate or complete repair acceptance.',
-        'No source applicability, geometric overlay, physical water/land classification, repair acceptance or publication approval is asserted.',
+        'Original interval classes retain the queue mask observations, not current physical qualification.',
+        'No current physical water/land classification, source applicability, geometric overlay, repair acceptance or publication approval is asserted.',
         'Base and patch remain separate; an existing overlap reports null, never invented precedence. Intervals are [start,end-exclusive,owner-index].',
         'Ledger body and source authorities are not reread; only the selected ledger digest is joined to authenticated patch metadata.']};
   } finally { patchStore?.close(); for (const store of stores) store.close(); }

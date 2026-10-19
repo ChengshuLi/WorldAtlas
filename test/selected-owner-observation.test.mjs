@@ -249,6 +249,12 @@ test('the original extraction CLI preserves independently specified package and 
   for (const splitCandidates of [false, true]) {
     const f = fixture({splitCandidates}); try {
       const observed = f.run(); assert.equal(observed.status, 0, observed.stderr); assert.equal(observed.report.query_count, 5);
+      assert.deepEqual(observed.report.original_intervals, [{block: 0, rows: expectedRows}]);
+      assert.equal(observed.report.original_intervals_sha256,
+        sha(Buffer.from(JSON.stringify(observed.report.original_intervals) + '\n')));
+      const expanded = observed.report.original_intervals.flatMap(({rows}) => rows.flatMap(([y, start, end]) =>
+        Array.from({length: end - start}, (_, i) => ({x: start + i, y}))));
+      assert.deepEqual(expanded, observed.report.keys.map(({x, y}) => ({x, y})));
       const destination = path.join(f.repo, 'original-extraction');
       const result = spawnSync(process.execPath, [path.join(f.repo, queueRoot, 'source-batch-intervals.mjs'), packageId, destination], {encoding: 'utf8'});
       assert.equal(result.status, 0, result.stderr);
