@@ -61,3 +61,13 @@ The canonical part pin is current-main `261e709ac9e1837b3399537f9f53cfa6550e3a01
 `dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a`. Stage
 rows are factual identity inputs only; source applicability, physical support,
 sovereignty and current authority remain unresolved.
+
+The nine positive stage IDs were also checked against the complete pinned
+`data/macro-foundation/world-review-locations-6.json.gz` metadata payload. Its
+encoded blob is `306a759a4cf3818f7c086401ac07c1ffdf7ae7e4` (36,853 bytes,
+SHA-256 `b7d34bfb646186ecaf767b2627c3ce9fbb9408024a2b1204e448ae0f23d7328`);
+decoded JSON is 834,337 bytes, SHA-256
+`f82d55547c3524b0343da1d9e0b404c74020d568161379dd8da90801826c734c`. All 11
+retained DJI ADM2 IDs occur uniquely at zero-based rows 733–743. For each of the
+9 targets, metadata `source_id`, name and parent ID match the exact canonical
+Feature; row ordinals and the metadata pin are in `source-stage-v1/canonical-stage-joins.json`.
