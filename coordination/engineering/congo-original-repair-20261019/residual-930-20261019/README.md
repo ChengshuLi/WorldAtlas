@@ -11,7 +11,7 @@ Scope is issue #2453, package `gb-COD-ADM2--repair-evaluation`. The frozen origi
 The full 930-key held ledger was expanded from its exact runs and sorted by `(owner_id, y, x)`. The split is indices [0,465) for A and [465,930) for B.
 
 - A: 465 keys, from `(14440,128782,153513)` through `(14485,136937,144413)`; original class join gives 430 land and 35 inland-water cells.
-- B: 465 keys, from `(14485,136938,144414)` through `(14616,127849,146318)`; the complement class counts are 435 land and 30 inland-water, preserving 865/65 for the whole held set. Partition B's JSON intentionally does not assert a per-key class split.
+- B: 465 keys, from `(14485,136938,144414)` through `(14616,127849,146318)`; the complement class counts are 435 land and 30 inland-water, preserving 865/65 for the whole held set. Partition B's JSON joins original_mask_class for all 465 keys; its exact source_class_join reports 435 land and 30 inland-water cells.
 
 The shared-owner boundary at owner 14485 is separated by `(y,x)`; the partitions are disjoint and exhaustive.
 
