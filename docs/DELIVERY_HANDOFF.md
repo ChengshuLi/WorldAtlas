@@ -288,13 +288,13 @@ command/test bodies and their immutable example inputs are unchanged.
 
 - Request, retention and composition preparation: automated from explicit accepted
   whole pins and genuine terminal products. The caller supplies admitted method
-  groups and finite resource profiles; no source acceptance is inferred.
+  groups; no source acceptance is inferred.
 - Package and selector finalization: automated, including literal accepted-prefix
   preservation, selector insertion order, collisions and exact resume.
 - Review and integration use the actual PR/head, ordinary review comments and
   standard workflow dispatch. Delivery preparation creates no review packet or
   submission state and never approves itself.
-- Grouping and parallel work: configs accept actual independent method/resource
+- Grouping and parallel work: configs accept actual independent method
   groups. Scheduling, source readiness and selecting which groups can run in
   parallel remain outside this command; it introduces no old-batch barrier.
 - End-to-end speed: retained command timings show metadata preparation cost, and
@@ -311,15 +311,10 @@ source acceptance, review, integration or publication.
 
 Initial method admission is explicit. A `greedy-model` recipe supplies the
 accepted registry locator, handoff IDs, admitted v2 SOURCE/NATIVE exemplar
-locators, exact target-bank/native-operand mapping, physical locator metadata,
-finite SOURCE/NATIVE resources, predecessor output allowances and the native
-request byte allowance. It derives each ordered component scope from the whole
-accepted handoff. It ignores old operational-batch labels. Whole encoded/decoded
-inputs, code/modules, runtime/supervisor/support, both request copies and reserved
-outputs/monitoring are modeled before splitting; singleton overflow refuses.
-Native requests are modeled again after genuine SOURCE outputs replace reserved
-predecessor slots. This prospective model does not replace current live memory,
-installed runtime, acquisition or scientific operator admission.
+locators, exact target-bank/native-operand mapping and physical locator metadata.
+It derives each ordered component scope from the whole accepted handoff and
+ignores old operational-batch labels. Installed runtime identities, whole input
+acquisition and scientific method checks remain required.
 
 `retained-groups` with `compatibility: literal-historical-v1` is explicitly a
 historical replay. Its groups give immutable issued SOURCE/NATIVE exemplar
@@ -344,11 +339,9 @@ node scripts/prepare-delivery-handoff.mjs materialize CONFIG DESTINATION --resum
 ```
 
 Its config contains `version: 1`, `recipe_index: {commit, path}` for the saved
-`recipe-index.json`, and explicit finite `preparation_allowance: {phaseBytes,
-rssBytes}`. It authenticates that whole index, reserves its deterministic completion
-report/receipt, then shares the same budget across encoded/decoded inputs and
-unique physical placements. Use the normal shared Git import/storage window for
-actual acquisition. The existing exact-object prefetch importer retrieves missing
+`recipe-index.json`. It authenticates that whole index and the encoded/decoded
+inputs and unique physical placements. Use the normal shared Git import/storage
+window for actual acquisition. The existing exact-object prefetch importer retrieves missing
 Git bodies once, consulting the existing `gh auth token` login ephemerally only
 when a cold fetch occurs. Tokens are not persisted or printed; warm verification
 needs no login lookup. Tracked source paths are never written. Only declared aliases
@@ -389,12 +382,12 @@ already be genuine `source-native-v2` requests with precisely that subset. The
 whole accepted handoff remains pinned, while groups must be disjoint and their
 target IDs must equal the accepted rows' stable target IDs. Unlike historical
 `retained-groups`, a subset does not need to cover the entire accepted cohort.
-There is no `compatibility` override. The existing resource model and issuance
-checks still apply, including the actual HEAD code/support checks for new requests.
+There is no `compatibility` override. Existing issuance checks still apply,
+including the actual HEAD code/support checks for new requests.
 
 This mode preserves each template's source/native destination. For new science,
-prepare templates with fresh candidate destinations and the admitted resource
-configuration; the driver does not silently rename historical requests or rerun
+prepare templates with fresh candidate destinations and exact scientific/runtime
+inputs; the driver does not silently rename historical requests or rerun
 operators. `destination_prefix` is used only by the existing greedy constructor.
 
 ### Inherited package read roles and committed restoration
@@ -455,22 +448,14 @@ universal country classifier. Its complete IDN/MYS/PNG/TLS competitor-family
 roster and native grid remain fixed. A different scientific method requires
 separate review, rather than an arbitrary smaller family list in configuration.
 
-The version-1 config contains `source`, `runtime_inventory` and the child
-`processing_allowance` with positive `phaseBytes`/`rssBytes`. Omit the optional
-parent `preparation_allowance` to use the existing finite fresh Node admission;
-there is no second manually chosen cap to synchronize with the child. Explicit
-parent limits remain supported and enforced. The declared complete output reserve
-is admitted before the child starts. Actual parent RSS and aggregate metadata
-checks remain active through publication; child resource limits remain separate.
-This is a declared-output preflight, not a guarantee against later memory or I/O
-changes. Actual products and the final preparation receipt are charged once at
-publication; the preflight does not retain a duplicate aggregate charge.
+The version-1 config contains `source` and `runtime_inventory`; memory follows
+[Execution and memory](#execution-and-memory).
 `source` supplies exact scientific/current Git commits, complete whole-file
 input pins and fixed-role paths; all target owner/ID/name/source-index/parent
 and original metadata expectations; exact candidate-selector counts and its
-whole pin; a retained physical-reproducer pin; resource limits and expected
-runtime versions. The helper validates the complete source reconstruction,
-lineage, native-centre membership and competing source/country witnesses.
+whole pin; a retained physical-reproducer pin; and expected runtime versions.
+The helper validates the complete source reconstruction, lineage, native-centre
+membership and competing source/country witnesses.
 Original topology/identity/geometry refusals and physical holds remain.
 
 `runtime_inventory` names `python` and `files`, using absolute installed paths,
@@ -508,8 +493,7 @@ not replace the historical ones.
 `node scripts/prepare-delivery-handoff.mjs source-evidence CONFIG DESTINATION [--resume]`
 replaces manual assembly of the accepted baseline block. The local configuration
 contains `version: 1`, `selector: {commit, path}`, an explicit `source_evidence`
-scientific payload, and optional ordinary `preparation_allowance`. The payload
-uses the existing `source-target-native-evidence-v1` format; source/physical pins,
+scientific payload. The payload uses the existing `source-target-native-evidence-v1` format; source/physical pins,
 targets, geometry, exclusions and other scientific claims remain the operator's
 explicit reviewed inputs.
 
@@ -573,8 +557,8 @@ existing configuration/output binding and safe writer.
 ### Modern native authority
 
 `node scripts/prepare-delivery-handoff.mjs native-authority CONFIG DESTINATION [--resume]`
-accepts exactly `version: 1`, `preparation_allowance`, `source_evidence` and
-`native_patch`. The last two are exact `{commit, path}` locators, without
+requires `version: 1`, `source_evidence` and `native_patch`. The last two are exact
+`{commit, path}` locators, without
 handwritten derived descriptors. It reuses `deliveryAuthorityReader` and
 `constructOriginalAuthority`, including their existing admission, source/physical
 joins and native coverage rules. It does not run the source or GSHHG producers.
@@ -583,8 +567,8 @@ Outputs are the original rule preimage, authority binding and
 `constructor-result.json` containing every component and literal ledger row.
 The result can be the modern composition input; it does not require an inline
 constructor wrapper, separately assembled registry or copied physical/comparison
-program. Current elapsed time, charged phase, process lifetime peak and native
-cell count are emitted as observations, separately from deterministic products.
+program. Current elapsed time and native cell count are emitted as observations,
+separately from deterministic products.
 Native `--resume` repeats the existing qualification and refuses any changed
 products/binding; it does not manufacture identical timing observations.
 
@@ -712,17 +696,14 @@ coordinates or sampled-byte substitute is introduced. Original comparison,
 validity cache, query order and all unknown/support witnesses remain unchanged.
 The old archived producers/helpers and previously qualified outputs stay intact.
 
-The declared input-byte inventory still counts all authenticated inputs. Lower
-live residency does not reduce logical bytes: the representative source/native
-inventory exceeds 305 MB before target/code pins, even though measured optimized
-peak is lower than the original implementation. Fresh same-process or separate
-child admission must use the correct RSS credit; the shared Python launcher does
-not credit resident Node bytes to its new child. Checks remain cooperative
-boundaries, not an invented hard process-tree supervisor.
+The input inventory still binds all authenticated inputs. Lower live residency
+does not reduce logical bytes: the historical representative source/native
+inventory exceeded 305 MB before target/code pins. These byte counts and measured
+peaks are historical observations, not current memory prerequisites.
 
 Outputs are `whole-target-support.json` with the original scientific schema and
-`execution-receipt.json` binding actual inputs, program, runtime admission and
-measured peak. The existing constructor can consume the committed support file
+`execution-receipt.json` binding actual inputs, program, runtime identities and
+elapsed time. The existing constructor can consume the committed support file
 as `physical_evidence`, the unchanged target stages as `physical_input`, and the
 actual executed shared helper as `physical_reproduction`. Its independent source,
 native-cell and witness checks still apply. Exact whole-target support is not
