@@ -238,7 +238,7 @@ test('reviewed lists cannot omit actual packaged consumers when package source c
     const context={base:f.base,head:f.head,entries,files:[changed],definition:f.packageInputs};
     const plan=reviewedTestPlan(request,context);
     assert.equal(plan.build,true);assert.deepEqual(plan.files,[...request.files,...required]);
-    assert(plan.checkout_patterns.includes('/src/'));
+    assert.deepEqual(plan.checkout_patterns,fullCheckoutPatterns(f.packageInputs));
     entries.delete(required[0]);assert.throws(()=>reviewedTestPlan(request,context),/packaged consumer/);
   }
 });
@@ -250,9 +250,54 @@ test('minimal reviewed package consumer derives real inputs without a changed pa
  const context={base:f.base,head:f.head,entries,files:[],definition:f.packageInputs};
  const packagePlan=reviewedTestPlan({base:f.base,head:f.head,files:[required]},context);
  assert.equal(packagePlan.build,true);assert.deepEqual(packagePlan.files,[required]);
- for(const name of f.packageInputs.inputs)assert(packagePlan.checkout_patterns.includes('/'+name));
+ assert.deepEqual(packagePlan.checkout_patterns,fullCheckoutPatterns(f.packageInputs));
  const unitPlan=reviewedTestPlan({base:f.base,head:f.head,files:['test/merge-integration.test.mjs']},context);
  assert.equal(unitPlan.build,false);assert.deepEqual(unitPlan.inputs,[...EXECUTION_CODE]);
+});
+
+test('reviewed full builds materialize real historical fixture paths without widening tests or accepting manual inputs',async()=>{
+  const f=controlFixture({withContractBoundary:true}), kernel='src/effective-footprint.js';
+  f.packageInputs.inputs.push('src/','data/package-input.json');
+  const files=['test/additive-release.test.mjs','test/selected-delivery-smoke.test.mjs',
+    'test/effective-footprint.test.mjs','test/source-target-native-delivery.test.mjs'];
+  const expected=[...files,'test/compact-ownership.test.mjs','test/prepared-parity.test.mjs'];
+  for(const rows of [f.baseline,f.authored,f.integrated]) {
+    for(const name of expected)rows.push({path:name,sha:sha('c'),mode:'100644',type:'blob'});
+    const existing=rows.find(row=>row.path===kernel);
+    if(existing)existing.sha=rows===f.baseline?sha('d'):sha('e');
+    else rows.push({path:kernel,sha:rows===f.baseline?sha('d'):sha('e'),mode:'100644',type:'blob'});
+  }
+  const request={base:f.base,head:f.head,files};
+  const prepared=await prepareIntegration({...f.options(),reviewedTests:request});
+  assert.equal(prepared.profile,'full');assert.equal(prepared.test_selection,'reviewed');
+  assert.deepEqual(prepared.test_files,expected);assert.deepEqual(prepared.shards,[0]);
+  assert.equal(prepared.geography_required,true);assert.equal(prepared.geography_software,true);
+  await assert.rejects(f.complete({reviewedTests:request,geographyResult:'skipped'}),/Trusted combined geography/);
+  for(const inputs of [['data/arbitrary.json'],[...EXECUTION_CODE,'data/package-input.json']])
+    await assert.rejects(prepareIntegration({...f.options(),reviewedTests:{...request,inputs}}),/manual inputs/);
+  // These unchanged additive-release consumers concatenate archive prefixes with
+  // filenames. Their historical operands are not current package inputs.
+  const add031='coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v2/';
+  const batch='coordination/engineering/additive-native-gap-batch-20261008/';
+  const historical=[...['publication.json','patch-add031.json','feature.json','owner-window.json','owners-add031.json.gz'].map(name=>add031+name),
+    ...['publication.json','patch-batch.json','features.json','ledger-batch.json','owners-batch.json.gz'].map(name=>batch+'batch-proposal-v1-run1/'+name),
+    batch+'current-v8/complete-owner-rows.json'];
+  const required=[...historical,kernel,'data/package-input.json'];
+  const excluded=['data/regional-review/unrelated/input.json','research/campaigns/unrelated/source.json',
+    'coordination/engineering/reference-source-custody-20261007/unrelated.json'];
+  const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'reviewed-full-fixtures-'));
+  try {
+    const git=(args,options={})=>execFileSync('git',args,{cwd:temporary,encoding:'utf8',...options});
+    git(['init','-q']);
+    for(const name of [...required,...excluded]) {
+      const file=path.join(temporary,name);fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,'fixture '+name+'\n');
+    }
+    git(['add','.']);git(['-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','fixture']);
+    git(['sparse-checkout','set','--no-cone','--stdin'],{input:prepared.checkout_patterns.join('\n')+'\n'});
+    for(const name of required)assert.equal(fs.readFileSync(path.join(temporary,name),'utf8'),'fixture '+name+'\n');
+    for(const name of excluded)assert.equal(fs.existsSync(path.join(temporary,name)),false,name);
+  }finally{fs.rmSync(temporary,{recursive:true,force:true});}
+  assert.deepEqual(prepared.checkout_patterns,fullCheckoutPatterns(f.packageInputs));
 });
 
 test('full preparation rejects unavailable or malformed package roles and cleans its candidate',async()=>{

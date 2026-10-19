@@ -43,7 +43,7 @@ function workflowCommand() {
 function fixture(t,{selected=false,smokeBody,fail=false}={}) {
   // One marker exercises runner dispatch. Real inventory, skip and process-lifecycle
   // behavior are covered by full-regression-shards and integration-streaming.
-  const sources=['src/native-grid.js','src/reference-metadata.js','scripts/run-integration-tests.mjs','scripts/integration-profile.mjs','scripts/check-handoff-scope.mjs','scripts/package-inputs.mjs','scripts/compile-hosted-migrations.mjs','scripts/ci-setup-observations.mjs'];
+  const sources=['src/native-grid.js','src/reference-metadata.js','scripts/run-integration-tests.mjs','scripts/integration-profile.mjs','scripts/check-handoff-scope.mjs','scripts/package-inputs.mjs','scripts/package-producer-contract.mjs','scripts/compile-hosted-migrations.mjs','scripts/ci-setup-observations.mjs'];
   const bodies=sources.map(name=>{
     const p=path.join(repo,name),s=fs.lstatSync(p);
     assert.ok(s.isFile()&&!s.isSymbolicLink());
