@@ -1,0 +1,98 @@
+{
+  "schema": "worldatlas.tuv45.retained-source-contact-crosswalk.v1",
+  "main_commit": "2b569815a7e37c5797586092688122d9b5d749b0",
+  "original_key": "gb-TUV-ADM1--repair-evaluation",
+  "retained_source": {
+    "provider_dataset": "geoBoundaries TUV ADM1",
+    "source_attribution": "OpenStreetMap, Wambacher",
+    "boundary_vintage": "2017",
+    "source_data_update_date": "2023-01-19",
+    "build_date": "2023-12-12",
+    "adm_unit_count": 8,
+    "license": "Open Data Commons Open Database License 1.0 (ODbL 1.0)",
+    "source_url_as_retained": "https://wambachers-osm.website/boundaries/",
+    "license_source_as_retained": "https://www.openstreetmap.org/copyright",
+    "project_contact": {
+      "name": "Dan Runfola",
+      "email": "danr@wm.edu",
+      "role": "geoBoundaries citation/project contact stated in retained citation",
+      "not_claimed_as": "Wambacher contact, an OSM contributor identity, or a per-feature editor/contact"
+    },
+    "feature_editor_contact": null,
+    "contact_limit": "The retained files identify provider/source attribution and a geoBoundaries project contact, but do not identify a contact for the underlying Wambacher/OSM feature editors."
+  },
+  "source_records": [
+    {
+      "source_feature_index": 59796,
+      "source_family_index": 335,
+      "source_record_id": "gb:TUV:ADM1:17741764B90379454256238",
+      "ordinal": 3,
+      "native_owner_id": 43467,
+      "name": "Nui",
+      "source_shape_id": "17741764B90379454256238",
+      "source_shape_iso": "TV-NUI",
+      "source_country_iso": "TUV",
+      "source_admin_level": "ADM1",
+      "geometry_status": "raw-native-supported",
+      "identity_match": "source index, source ID, owner and retained GeoJSON shapeID/name agree",
+      "current_applicability": "unresolved"
+    },
+    {
+      "source_feature_index": 59797,
+      "source_family_index": 335,
+      "source_record_id": "gb:TUV:ADM1:17741764B83632895409465",
+      "ordinal": 4,
+      "native_owner_id": 43466,
+      "name": "Vaitupu",
+      "source_shape_id": "17741764B83632895409465",
+      "source_shape_iso": "TV-VAI",
+      "source_country_iso": "TUV",
+      "source_admin_level": "ADM1",
+      "geometry_status": "raw-native-supported",
+      "identity_match": "source index, source ID, owner and retained GeoJSON shapeID/name agree",
+      "current_applicability": "unresolved"
+    },
+    {
+      "source_feature_index": 59798,
+      "source_family_index": 335,
+      "source_record_id": "gb:TUV:ADM1:17741764B30576374901893",
+      "ordinal": 5,
+      "native_owner_id": 43461,
+      "name": "Nukufetau",
+      "source_shape_id": "17741764B30576374901893",
+      "source_shape_iso": "TV-NKF",
+      "source_country_iso": "TUV",
+      "source_admin_level": "ADM1",
+      "geometry_status": "raw-native-supported",
+      "identity_match": "source index, source ID, owner and retained GeoJSON shapeID/name agree",
+      "current_applicability": "unresolved"
+    }
+  ],
+  "source_files": [
+    {"path":"coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json","git_blob_oid":"9c9a9bc83627afd3e8435ff4009e39530543bf54","role":"original package key and interval contract; snapshot current_commit a61b6f9e7f88b1da380e3a834f89d7509132ed71"},
+    {"path":"data/regional-review/regional-review-a5b86fc6ff2463cd/sources/TUV/geoBoundaries-TUV-ADM1.geojson","sha256":"3c06779be3173360c9a2927729798eacb5533c745e31313f11940041585030aa","role":"retained source feature records and exact shape IDs/names"},
+    {"path":"data/regional-review/regional-review-a5b86fc6ff2463cd/sources/TUV/geoBoundaries-TUV-ADM1-metaData.json","sha256":"ef3474d8b744a6cf19b969f1dc9200ac2c30dd5fedbed6d3d6bd1b21766b9d18","role":"provider/source, vintage, update date, build, unit count and license"},
+    {"path":"data/regional-review/regional-review-a5b86fc6ff2463cd/sources/TUV/geoBoundaries-TUV-ADM1-metaData.txt","sha256":"362d40a5b4c099caf9bdd43c0ef0a0674f52f0b95847f6bf508826c5f15c37ce","role":"retained source metadata text"},
+    {"path":"data/regional-review/regional-review-a5b86fc6ff2463cd/sources/TUV/CITATION-AND-USE-geoBoundaries.txt","sha256":"f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5","role":"citation and project contact; not an individual source-editor contact"},
+    {"path":"coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-033.json.gz","sha256":"dfd5c9e9e7aa5768b13d80799d8ec899fbaa64baf2a8fdf35d3bb7d8c9db3933","role":"pinned source candidate block 033"},
+    {"path":"coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-033.json.gz","sha256":"440955ea8d0654a1bc5367c4da0b9eb73df1e79c152ebc7c8576d9a2af9bb7a1","role":"land/water support for interval physical class"},
+    {"path":"coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-033.json.gz","sha256":"bca97a3b465b9559f556a2c9d0948803092f275c7d2d1a0a65d4b9bc1fd72059","role":"inland-water support; no TUV45 interval overlaps"},
+    {"path":"coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz","sha256":"87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa","role":"native owner/source feature index, family, source ID, ordinal, name and geometry status"},
+    {"path":"coordination/engineering/global-current-cell-work-queue-20261014/ownership-binding.json","sha256":"b952192475435c8fbc74a84627994aff4f4e073c36c479d369554fc75251bc89","role":"ownership release binding"},
+    {"path":"coordination/engineering/global-current-cell-work-queue-20261014/source-census-summary.json","sha256":"8a4a6792237259328e56e38d91d0cb22f977de4a35caf4781f0d605e3db1653d","role":"source block decoded/payload summary pin"}
+  ],
+  "selection_pins": {
+    "selector_path": "data/ownership-selection.json",
+    "selector_git_blob_oid": "07c21155f2234de548c5794ae9311ca33f944935",
+    "selector_file_sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+    "base_release_id": "geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb",
+    "additive_sidecar_path": "data/ownership-selection.additive.json",
+    "additive_sidecar_git_blob_oid": "866e608a4799d29ae8277258a09eec9b0b45cd77",
+    "additive_sidecar_file_sha256": "bb55c11e282b27eea3b569b2bb4847039077a5a4a5ccebb649f60182adb49cc3",
+    "selected_patch_git_blob_oid": "5e300bc6c0495a0d39182db629494723fc050c50",
+    "selected_patch_file_sha256": "3142f0be5e910ae7bd13800fc7d0e9562c16d7116736ff2a03ecd0958cb73215",
+    "selected_ledger_git_blob_oid": "7791e82a57b983da72dc66d655352b20d2b456be",
+    "selected_ledger_file_sha256": "77be7802ec36eaafbe5997166f3bc74ce01e6b0eac064900b7ae76be2ef16fea"
+  },
+  "current_applicability_gap": "Source identity is supported by exact retained identifiers and labels; current applicability and exact 16-interval spatial correspondence are not established by the supplied evidence. Administrative feature labels do not establish legal sovereignty."
+}
