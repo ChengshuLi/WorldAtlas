@@ -3,7 +3,7 @@
 Whenever an author, premerge reviewer, Auditor or publisher needs a new local checkout, use `scripts/local-workspace.mjs`
 for new local checkouts. Fresh branches do not require accumulating fresh directories. Lane prefixes are optional;
 Git ref validity, unique fresh branches and exact worker/slot ownership remain enforced.
-Use Node 24 from any checkout of the same primary repository. Keep one stable worker ID for each chat across successive issues; a new job is not a new worker. Distinct reviewer agents keep their own worker IDs. One shared Git object
+Use Node 24 and the helper bound to the task's repository, not an ambient checkout. Keep one stable worker ID for each chat across successive issues; a new job is not a new worker. Distinct reviewer agents keep their own worker IDs. One shared Git object
 store and registry serve all its worktrees. Each unique worker ID has at most one
 `work` slot and one `review` slot. Release a finished slot before allocating its
 replacement. A reviewer remains isolated from the author's files and reasoning. Review slots are optional: inspect exact diffs and immutable evidence through GitHub APIs or Git blobs without allocating a checkout when no filesystem reproduction/test is needed.
@@ -25,9 +25,11 @@ the task's supported environment configuration and select it in that task's
 report that runtime requirement instead of running the helper with an incompatible
 Node. The allocator uses built-in modules and does not require `npm ci`.
 
-Before fetching or running the bootstrap below, check the task's actual filesystem
-permissions and the repository's real Git common directory
-(`git rev-parse --path-format=absolute --git-common-dir`). The shared Git directory
+Before fetching or running the bootstrap below, bind `TASK_REPO` to the absolute
+repository path supplied by this task's environment/handoff, not `pwd` or a saved
+primary checkout. There is no repository path encoded in `CODEX_THREAD_ID`.
+Check the task's actual filesystem permissions and that repository's Git common
+directory (`git -C "$TASK_REPO" rev-parse --path-format=absolute --git-common-dir`). The shared Git directory
 holds objects, refs, the registry and temporary bootstrap helpers; managed checkout
 paths are derived from it under the sibling `.worldatlas-workspaces` directory.
 Allocation needs write access to both locations. Changing the working directory
@@ -43,13 +45,19 @@ saved claim or runtime assumptions.
 
 ## Allocate and inspect
 
+Use the current pinned bootstrap below when the task checkout is stale. For an
+already-current helper, use its absolute task path. The CLI derives the registry
+from the helper's own Git store; changing cwd cannot select another allocator.
+An incorrectly selected old executable is not upgraded by this binding.
+
 ```sh
-node scripts/local-workspace.mjs report
-node scripts/local-workspace.mjs check
-node scripts/local-workspace.mjs allocate --worker YOUR-WORKER-ID --slot work \
+: "${TASK_REPO:?Use the repository path supplied by this task}"
+node "$TASK_REPO/scripts/local-workspace.mjs" report
+node "$TASK_REPO/scripts/local-workspace.mjs" check
+node "$TASK_REPO/scripts/local-workspace.mjs" allocate --worker YOUR-WORKER-ID --slot work \
   --branch geography/YOUR-FRESH-JOB --include data/regional-review/YOUR-PACKET \
   --include data/hierarchy.json
-node scripts/local-workspace.mjs allocate --worker YOUR-REVIEWER-ID --slot review \
+node "$TASK_REPO/scripts/local-workspace.mjs" allocate --worker YOUR-REVIEWER-ID --slot review \
   --commit EXACT_40_CHARACTER_REVIEW_HEAD --include data/regional-review/YOUR-PACKET
 ```
 
@@ -96,27 +104,32 @@ or overwrite a checkout holding active work.
 
 The following code-only bootstrap loads both allocator modules from one exact
 locally available main commit. It uses an exclusive temporary directory inside
-the shared Git store, retains the original repository as the current directory,
-and removes only its generated helper copies afterward. A failed main refresh or
+the task repository's shared Git store and removes only its generated helper copies
+afterward. Git reads and helper execution do not depend on the shell's cwd. A failed main refresh or
 commit lookup stops without using a cached older pin. Missing helper blobs
 stop before execution; acquire those exact pinned objects through the coordinated
 route below rather than falling back to an old executable. Use Node 24.
 
 ```sh
 (
-git -c fetch.negotiationAlgorithm=noop fetch --no-tags --no-recurse-submodules \
+: "${TASK_REPO:?Use the repository path supplied by this task}"
+case "$TASK_REPO" in /*) ;; *) echo 'Absolute task repository required' >&2; exit 1;; esac
+git -C "$TASK_REPO" -c fetch.negotiationAlgorithm=noop fetch --no-tags --no-recurse-submodules \
   --no-auto-maintenance --filter=blob:none origin main || exit
-base=$(GIT_NO_LAZY_FETCH=1 git rev-parse --verify 'origin/main^{commit}') || exit
-GIT_NO_LAZY_FETCH=1 python3 - "$base" inspect --commit "$base" \
+base=$(GIT_NO_LAZY_FETCH=1 git -C "$TASK_REPO" rev-parse --verify 'origin/main^{commit}') || exit
+GIT_NO_LAZY_FETCH=1 python3 - "$TASK_REPO" "$base" inspect --commit "$base" \
   --include data/YOUR-REQUIRED-PATH <<'PYTHON'
 import os, re, subprocess, sys, tempfile
 from pathlib import Path
-base, *args = sys.argv[1:]
+repo, base, *args = sys.argv[1:]
+if not Path(repo).is_absolute():
+    raise SystemExit('Absolute task repository required')
+repo = str(Path(repo).resolve(strict=True))
 if not re.fullmatch('[a-f0-9]{40}', base):
     raise SystemExit('Exact accepted commit required')
 env = dict(os.environ, GIT_NO_LAZY_FETCH='1', GIT_NO_REPLACE_OBJECTS='1')
 def git(*args, **kwargs):
-    return subprocess.check_output(['git', '--no-replace-objects', *args], env=env, **kwargs)
+    return subprocess.check_output(['git', '-C', repo, '--no-replace-objects', *args], env=env, **kwargs)
 common = Path(git('rev-parse', '--path-format=absolute', '--git-common-dir').decode().strip()).resolve(strict=True)
 sources = {}
 for name in ('local-workspace.mjs', 'worker-identity.mjs'):
@@ -254,7 +267,7 @@ their checkpoint and unique work. For a manual finish/release, stop processes us
 the slot and run:
 
 ```sh
-node scripts/local-workspace.mjs release --worker RECORDED-WORKER-ID --slot work \
+node "$TASK_REPO/scripts/local-workspace.mjs" release --worker RECORDED-WORKER-ID --slot work \
   --token EXACT_RETURNED_TOKEN
 ```
 

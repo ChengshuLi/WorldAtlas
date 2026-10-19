@@ -115,7 +115,7 @@ export function workspaceManager(repo, {freeBytes} = {}) {
     if (missingTrees.length) throw Error(`Missing tree metadata: ${missingTrees.join(', ')}; selected inventory cannot be enumerated`);
     // Tree metadata needs no blob contents. Global -l sizing can fetch excluded
     // promisor blobs, or abort on them before sparse filtering on some Git versions.
-    const tree = git('ls-tree', '-rz', head).split('\0').filter(Boolean).map(line => {
+    const tree = git('ls-tree', '--full-tree', '-rz', head).split('\0').filter(Boolean).map(line => {
       const separator = line.indexOf('\t');
       const [mode, type, oid] = line.slice(0, separator).split(' ');
       if (separator < 0 || !/^[0-7]{6}$/.test(mode) || !/^[a-f0-9]{40,64}$/.test(oid)) throw Error('Unknown tree entry');
@@ -281,7 +281,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
       else options[key] = args[index + 1];
     }
     if (action === 'allocate' && (options.slot ?? 'work') === 'work') assertAuthorWorkerIdentity(options.worker);
-    const manager = workspaceManager(process.cwd());
+    const manager = workspaceManager(path.dirname(fileURLToPath(import.meta.url)));
     if (!['report', 'check', 'inspect', 'allocate', 'release'].includes(action)) throw Error('Choose report, check, inspect, allocate or release');
     console.log(JSON.stringify(manager[action](options), null, 2));
   } catch (error) { console.error(error.message); process.exitCode = 1; }

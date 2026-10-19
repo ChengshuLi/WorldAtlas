@@ -60,10 +60,11 @@ See [the bounded ownership contract](../../../docs/COVERAGE_CLASSIFICATION.md#ob
 for runtime, input acquisition and output requirements. Missing pinned Git bodies
 still refuse; they are not silently fetched or replaced with checkout files.
 
-The frozen package `execution.command` and standalone `source-batch-intervals.mjs`
-remain original-reproduction interfaces, not an additional step in current
-source-package work. Do not copy the helper or fabricate gzip siblings. Physical
-source qualification and native repair acceptance remain separate operations.
+The current standalone `source-batch-intervals.mjs` command is removed. Its pure
+extractor is shared by the ownership command, with no checkout-file fallback.
+Frozen package `execution.command` fields record historical execution; exact old
+code/input pins remain available for historical audit, not current package work.
+Physical source qualification and native repair acceptance remain separate operations.
 
 ## Use source/cause packages, not connected components
 

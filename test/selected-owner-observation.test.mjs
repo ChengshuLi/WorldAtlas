@@ -242,7 +242,7 @@ test('explicit data head is independent of executable checkout and cannot qualif
 });
 
 
-test('package observation supplies original extraction bytes without materialized data', () => {
+test('retired extraction refuses while package observation supplies complete original intervals without materialized data', () => {
   const expectedPackage = {package_id: packageId, native_blocks: [0], native_cells: 5, intervals: 5};
   const expectedRows = [[0, 0, 1, [1], [1], 'land'], [0, 2, 3, [2], [2], 'land'],
     [0, 3, 4, [1], [1], 'land'], [1, 1, 2, [2], [2], 'land'], [2, 1, 2, [1], [1], 'land']];
@@ -257,10 +257,10 @@ test('package observation supplies original extraction bytes without materialize
       f.write(queueRoot + '/source-package-queue.json', queue); f.commit();
       const destination = path.join(f.repo, 'original-extraction');
       const result = spawnSync(process.execPath, [path.join(f.repo, queueRoot, 'source-batch-intervals.mjs'), packageId, destination], {encoding: 'utf8'});
-      assert.equal(result.status, 0, result.stderr);
-      assert.deepEqual(fs.readdirSync(destination).sort(), ['block-000.json.gz', 'package.json']);
-      assert.deepEqual(fs.readFileSync(path.join(destination, 'package.json')), Buffer.from(JSON.stringify(expectedPackage, null, 2) + '\n'));
-      assert.deepEqual(fs.readFileSync(path.join(destination, 'block-000.json.gz')), gzipSync(JSON.stringify(expectedRows) + '\n'));
+      assert.notEqual(result.status, 0);
+      assert.match(result.stderr, /Standalone extraction was removed; use scripts\/observe-selected-owners\.mjs/);
+      assert.equal(result.stdout, '');
+      assert.equal(fs.existsSync(destination), false);
       // Use real Git sparse selection, not a mock reader or copied extraction.
       f.git('sparse-checkout', 'set', '--no-cone', ...sources.map(name => '/' + name),
         '/scripts/run-geographic-check.py', '/package.json');
