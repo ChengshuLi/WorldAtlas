@@ -211,7 +211,7 @@
     {
       "evaluation_commit": "8877709f440cac68c95c44238cf828dc4420f190",
       "id": "focused-controls-passed",
-      "input_sha256": "0241180615bfe337aa1eedeebc0d65e3aca1070434ae651fb72351547a7ae19c",
+      "input_sha256": "d0385e8e81f700e0cb141d3083fc7fb9a8982211438d343862764e031e537c12",
       "unit": "tests",
       "value": 7,
       "vintage": "current"
@@ -219,10 +219,10 @@
   ],
   "outputs": [
     {
-      "bytes": 5393,
+      "bytes": 4491,
       "hash_kind": "file-bytes",
       "path": "research/geography/namibia-angola-treaty-controls-1545-20261009/execution-record.json",
-      "sha256": "0241180615bfe337aa1eedeebc0d65e3aca1070434ae651fb72351547a7ae19c"
+      "sha256": "d0385e8e81f700e0cb141d3083fc7fb9a8982211438d343862764e031e537c12"
     }
   ],
   "sources": [
@@ -263,8 +263,9 @@
   "subject_ids_sha256": "0273221d08cdaa665a81e7f6d510091dd77798f54385948b3b1b92c944d79676",
   "summaries": [
     {
-      "id": "focused-cli-control-run",
-      "text": "Seven focused CLI controls passed. Retained final runs 5 and 6 independently recompute to stable digest a72bf39565ffdc2cf32fc4801dad770807a14b4670f330d81a3484933d8f1c71."
+      "metric_id": "focused-controls-passed",
+      "unit": "tests",
+      "value": 7
     }
   ],
   "version": 1,
