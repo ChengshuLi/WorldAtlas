@@ -1,0 +1,89 @@
+{
+  "package_id": "gb-DJI-ADM2--repair-evaluation",
+  "primary_source": "gb:DJI:ADM2",
+  "source_family_index": 88,
+  "category": "repair-evaluation",
+  "native_cells": 683,
+  "land_cells": 683,
+  "inland_water_cells": 0,
+  "source_relative_cells": 0,
+  "interval_segments": 394,
+  "owners": [
+    16531,
+    16532,
+    16533,
+    16536,
+    16537,
+    16538,
+    16539,
+    16540,
+    16541
+  ],
+  "source_features": [
+    21034,
+    21035,
+    21036,
+    21037,
+    21038,
+    21039,
+    21040,
+    21041,
+    21043,
+    21044,
+    21045,
+    21046,
+    21047,
+    21049
+  ],
+  "source_families": [
+    87,
+    88
+  ],
+  "native_blocks": [
+    29,
+    30
+  ],
+  "provinces": [
+    "framework:province:arta:7af99b906662",
+    "framework:province:dikhil:243fa3eab41a",
+    "framework:province:obock:0bfea9b54a2f",
+    "framework:province:tadjourah:1f45cfb67fdb"
+  ],
+  "location_count": 9,
+  "source_feature_count": 14,
+  "locality_count": 4,
+  "cost": {
+    "primary_source_decoded_bytes": 30357,
+    "all_required_source_decoded_bytes": 44394,
+    "primary_full_source_raster_measured_seconds": 0.072,
+    "source_interval_segments": 394,
+    "maximum_native_rows_per_execution_frame": 4096,
+    "observed_global_census_peak_rss_bytes": 884973568
+  },
+  "evidence": {
+    "selection": "ownership-binding.json",
+    "lineage": "lineage.json",
+    "territorial_source_catalogue": "retained-source-catalogue.json",
+    "territorial_catalogue_sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+    "source_features": "source-feature-roster.json",
+    "territorial_native_blocks": "source-candidates-block-NNN.json.gz",
+    "physical": "physical-unassigned-summary.json",
+    "source_domain_transform": []
+  },
+  "work": {
+    "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+    "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+    "priority": 1
+  },
+  "execution": {
+    "command": "node source-batch-intervals.mjs gb-DJI-ADM2--repair-evaluation OUTPUT_DIRECTORY",
+    "output_columns": [
+      "y",
+      "start",
+      "end",
+      "candidate_owner_indices",
+      "source_feature_indices",
+      "physical_class"
+    ]
+  }
+}
