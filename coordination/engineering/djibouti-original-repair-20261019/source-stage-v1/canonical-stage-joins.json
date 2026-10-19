@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "kind": "dji-accepted-canonical-stage-input-identity-v1",
+  "source_identity_report": {
+    "path": "coordination/engineering/djibouti-original-repair-20261019/source-identity-v1/source-identity-joins.json",
+    "sha256": "b943ed13743cf6e695522d4941ba94ff68fe388be068064025b7aa79387e0b9f"
+  },
+  "target_count": 9,
+  "retained_source_adm2_feature_count": 11,
+  "canonical_part_feature_count": 1500,
+  "canonical_input": {
+    "commit": "261e709ac9e1837b3399537f9f53cfa6550e3a01",
+    "path": "data/geography/part-6.json",
+    "mode": "100644",
+    "git_blob_oid": "4be02d1d055a66c4e1606bab4f23ecda90350f34",
+    "bytes": 4607953,
+    "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a"
+  },
+  "canonical_matching": {
+    "exact_unique_DJI_ADM2_ids": 11,
+    "all_retained_ADM2_features_found": true,
+    "target_stage_rows": 9,
+    "unselected_context_ADM2_features": 2,
+    "join_basis": "whole source Feature properties.shapeID prefixed by gb:DJI:ADM2 equals canonical Feature id and properties.id"
+  },
+  "rows": [
+    {
+      "owner_index": 16531,
+      "target": "gb:DJI:ADM2:41766387B13463549189785",
+      "source_feature_id": null,
+      "source_shapeID": "41766387B13463549189785",
+      "source_name": "Tadjourah",
+      "selected_id": "gb:DJI:ADM2:41766387B13463549189785",
+      "selected_properties_id": "gb:DJI:ADM2:41766387B13463549189785",
+      "selected_name": "Tadjourah",
+      "selected_parent_id": "framework:province:tadjourah:1f45cfb67fdb",
+      "join": "exact source atom/target/full canonical feature ID; owner from pinned package lineage report",
+      "status": "identity only; physical, authority, applicability unresolved"
+    },
+    {
+      "owner_index": 16532,
+      "target": "gb:DJI:ADM2:41766387B22586556456338",
+      "source_feature_id": null,
+      "source_shapeID": "41766387B22586556456338",
+      "source_name": "Dorra",
+      "selected_id": "gb:DJI:ADM2:41766387B22586556456338",
+      "selected_properties_id": "gb:DJI:ADM2:41766387B22586556456338",
+      "selected_name": "Dorra",
+      "selected_parent_id": "framework:province:tadjourah:1f45cfb67fdb",
+      "join": "exact source atom/target/full canonical feature ID; owner from pinned package lineage report",
+      "status": "identity only; physical, authority, applicability unresolved"
+    },
+    {
+      "owner_index": 16533,
+      "target": "gb:DJI:ADM2:41766387B51204577272085",
+      "source_feature_id": null,
+      "source_shapeID": "41766387B51204577272085",
+      "source_name": "Obock",
+      "selected_id": "gb:DJI:ADM2:41766387B51204577272085",
+      "selected_properties_id": "gb:DJI:ADM2:41766387B51204577272085",
+      "selected_name": "Obock",
+      "selected_parent_id": "framework:province:obock:0bfea9b54a2f",
+      "join": "exact source atom/target/full canonical feature ID; owner from pinned package lineage report",
+      "status": "identity only; physical, authority, applicability unresolved"
+    },
+    {
+      "owner_index": 16536,
+      "target": "gb:DJI:ADM2:41766387B73347270872705",
+      "source_feature_id": null,
+      "source_shapeID": "41766387B73347270872705",
+      "source_name": "As Eyla",
+      "selected_id": "gb:DJI:ADM2:41766387B73347270872705",
+      "selected_properties_id": "gb:DJI:ADM2:41766387B73347270872705",
+      "selected_name": "As Eyla",
+      "selected_parent_id": "framework:province:dikhil:243fa3eab41a",
+      "join": "exact source atom/target/full canonical feature ID; owner from pinned package lineage report",
+      "status": "identity only; physical, authority, applicability unresolved"
+    },
+    {
+      "owner_index": 16537,
+      "target": "gb:DJI:ADM2:41766387B74076707162819",
+      "source_feature_id": null,
+      "source_shapeID": "41766387B74076707162819",
+      "source_name": "YobokiI",
+      "selected_id": "gb:DJI:ADM2:41766387B74076707162819",
+      "selected_properties_id": "gb:DJI:ADM2:41766387B74076707162819",
+      "selected_name": "YobokiI",
+      "selected_parent_id": "framework:province:dikhil:243fa3eab41a",
+      "join": "exact source atom/target/full canonical feature ID; owner from pinned package lineage report",
+      "status": "identity only; physical, authority, applicability unresolved"
+    },
+    {
+      "owner_index": 16538,
+      "target": "gb:DJI:ADM2:41766387B83981523687012",
+      "source_feature_id": null,
+      "source_shapeID": "41766387B83981523687012",
+      "source_name": "Djibouti",
+      "selected_id": "gb:DJI:ADM2:41766387B83981523687012",
+      "selected_properties_id": "gb:DJI:ADM2:41766387B83981523687012",
+      "selected_name": "Djibouti",
+      "selected_parent_id": "framework:province:arta:7af99b906662",
+      "join": "exact source atom/target/full canonical feature ID; owner from pinned package lineage report",
+      "status": "identity only; physical, authority, applicability unresolved"
+    },
+    {
+      "owner_index": 16539,
+      "target": "gb:DJI:ADM2:41766387B9467441741428",
+      "source_feature_id": null,
+      "source_shapeID": "41766387B9467441741428",
+      "source_name": "Dilkhil",
+      "selected_id": "gb:DJI:ADM2:41766387B9467441741428",
+      "selected_properties_id": "gb:DJI:ADM2:41766387B9467441741428",
+      "selected_name": "Dilkhil",
+      "selected_parent_id": "framework:province:dikhil:243fa3eab41a",
+      "join": "exact source atom/target/full canonical feature ID; owner from pinned package lineage report",
+      "status": "identity only; physical, authority, applicability unresolved"
+    },
+    {
+      "owner_index": 16540,
+      "target": "gb:DJI:ADM2:41766387B97155389424645",
+      "source_feature_id": null,
+      "source_shapeID": "41766387B97155389424645",
+      "source_name": "Balha",
+      "selected_id": "gb:DJI:ADM2:41766387B97155389424645",
+      "selected_properties_id": "gb:DJI:ADM2:41766387B97155389424645",
+      "selected_name": "Balha",
+      "selected_parent_id": "framework:province:tadjourah:1f45cfb67fdb",
+      "join": "exact source atom/target/full canonical feature ID; owner from pinned package lineage report",
+      "status": "identity only; physical, authority, applicability unresolved"
+    },
+    {
+      "owner_index": 16541,
+      "target": "gb:DJI:ADM2:41766387B98599288227121",
+      "source_feature_id": null,
+      "source_shapeID": "41766387B98599288227121",
+      "source_name": "Alaili Dadda",
+      "selected_id": "gb:DJI:ADM2:41766387B98599288227121",
+      "selected_properties_id": "gb:DJI:ADM2:41766387B98599288227121",
+      "selected_name": "Alaili Dadda",
+      "selected_parent_id": "framework:province:obock:0bfea9b54a2f",
+      "join": "exact source atom/target/full canonical feature ID; owner from pinned package lineage report",
+      "status": "identity only; physical, authority, applicability unresolved"
+    }
+  ],
+  "limits": [
+    "Whole source Features and accepted canonical Features were copied without coordinate operations.",
+    "This identity join does not establish source applicability, physical support, sovereignty or current authority.",
+    "The two non-target DJI ADM2 Features and all six ADM1 Features remain in complete source context products; neither is silently a negative witness."
+  ]
+}

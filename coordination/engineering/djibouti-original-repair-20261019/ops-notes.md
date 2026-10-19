@@ -43,3 +43,21 @@ This evidence establishes identity and queue relationships only. It does not
 establish current source applicability, administrative authority, or physical
 support. Do not use ADM1 as a negative witness without an exact applicability
 finding. The positive source-family roster is the complete ADM2 family.
+
+## Accepted canonical identity stage
+
+`source-stage-v1/original-stage-inputs.json` is a nine-row ordinary JSON array
+for the package's exact direct-owner targets. It uses the whole unmodified source
+Features from `dji-adm2-source-features.geojson` as `consumed`, and the whole
+accepted canonical Features from pinned `data/geography/part-6.json` as
+`selected`. `source-stage-v1/canonical-stage-joins.json` records the exact part
+pin, all 11 unique full-ID matches against the complete retained ADM2 family,
+the 9 target/owner joins and the two complete non-target ADM2 features retained
+as context. No owner arithmetic, polygon operation, or Feature subset was used.
+
+The canonical part pin is current-main `261e709ac9e1837b3399537f9f53cfa6550e3a01`,
+`data/geography/part-6.json`, blob `4be02d1d055a66c4e1606bab4f23ecda90350f34`,
+4,607,953 bytes, SHA-256
+`dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a`. Stage
+rows are factual identity inputs only; source applicability, physical support,
+sovereignty and current authority remain unresolved.
