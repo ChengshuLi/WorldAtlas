@@ -211,6 +211,18 @@ Settle any retained live-operation reservation through its existing workflow.
 A release failure does not invalidate an already verified merge. Legacy/unmanaged
 checkouts are retained for explicit inspection.
 
+Include the actual local cleanup outcome in the existing final author or reviewer
+handoff: the owned managed slot was released, no local slot was used, or a checkout
+remains retained or blocked. For retained or blocked cleanup, give the reason,
+responsible worker and next action. Preserve the durable checkpoint before removal,
+then report release only after the existing release command succeeds. A retained
+primary, legacy or unmanaged checkout is not a completed release or permission to
+delete it. A verified merge or deleted remote refs never establishes local cleanup.
+Keep ownership tokens and private filesystem details local. Use plain language in
+the existing conversation, not a new receipt, ledger or admission gate. Existing
+chats apply this rule at their next actual handoff; editing instructions alone does
+not establish adoption or cleanup.
+
 Reviewers must release their local review slot immediately after durably posting
 the review; no waiting for the author to merge. Failed/blocked tasks first preserve
 their checkpoint and unique work. For a manual finish/release, stop processes using
