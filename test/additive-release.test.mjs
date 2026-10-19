@@ -58,6 +58,50 @@ test('packed replacements preserve every native word against an independent cell
  assert.equal(applyAdditiveNativePatch(actual,patch,options),actual);
 });
 
+test('packed merge preserves seam endpoints, maximum owner bits and two-sided equal-owner coalescing',()=>{
+ const {base,patch,options}=fixture(),size=base.size,high=2**26-1;
+ options.features[1].pixelIndex=high;
+ options.features[1].additiveFootprint={...structuredClone(options.features[0].additiveFootprint),
+  base_geometry_sha256:hash(options.features[1].geometry)};
+ const rows=Array(size).fill(new Uint32Array());
+ rows[0]=Uint32Array.from([0,1,high,5,7,1,size-2,size-1,high]);
+ rows[size-1]=Uint32Array.from([1,3,high,4,6,1,7,9,high]);
+ Object.assign(base,packOwnership({size,rows}));
+ base.reference_owner_sha256=createHash('sha256').update(JSON.stringify(options.features.map(f=>[f.pixelIndex,f.id]))).digest('hex');
+ patch.rows=[{y:0,runs:[[1,5,high],[7,8,1],[size-1,size,high]]},
+  {y:1,runs:[[0,size,1]]},{y:size-1,runs:[[0,1,high],[3,4,1],[6,7,1],[9,10,high]]}];
+ const expectedRows=Array(size).fill(new Uint32Array());
+ expectedRows[0]=Uint32Array.from([0,5,high,5,8,1,size-2,size,high]);
+ expectedRows[1]=Uint32Array.from([0,size,1]);
+ expectedRows[size-1]=Uint32Array.from([0,3,high,3,7,1,7,10,high]);
+ const expected=packOwnership({size,rows:expectedRows}),beforeRows=base.rows.slice(),beforeRuns=base.runs.slice(),beforePatch=JSON.stringify(patch);
+ const actual=applyAdditiveNativePatch(base,patch,options);
+ assert.deepEqual(actual.rows,expected.rows);assert.deepEqual(actual.runs,expected.runs);
+ assert.equal(actual.additive_added_cells,size+10);assert.deepEqual(base.rows,beforeRows);assert.deepEqual(base.runs,beforeRuns);assert.equal(JSON.stringify(patch),beforePatch);
+});
+
+test('packed merge refuses malformed base rows and later overlap without mutating either input',()=>{
+ const cases=[
+  [f=>f.base.rows[7]=f.base.runs.length,/Incomplete base native row/],
+  [f=>f.base.runs[0]=3,/Invalid\/foreign base ownership run/],
+  [f=>f.base.runs[1]=2**19,/Invalid\/foreign base ownership run/],
+  [f=>f.base.runs[2]=2**19+2,/Invalid\/foreign base ownership run/],
+  [f=>f.base.runs[3]=f.base.size,/Invalid\/foreign base ownership run/],
+  [f=>f.patch.rows[0].runs=[[3,5,1],[7,9,1]],/replace an assigned cell/],
+  [f=>f.patch.rows[0].runs=[[7,8,1],[3,5,1]],/Conflicting or foreign current additive run/],
+  [f=>f.patch.rows[0].runs=[[3,3,1]],/Conflicting or foreign current additive run/],
+  [f=>f.patch.rows[0].runs=[[3,f.base.size+1,1]],/Conflicting or foreign current additive run/],
+  [f=>f.patch.rows[0].runs=[[3,5,2**26]],/Conflicting or foreign current additive run/],
+  [f=>f.patch.rows[0].runs=[[3,5.5,1]],/Conflicting or foreign current additive run/],
+  [f=>f.patch.rows.push({...f.patch.rows[0]}),/Duplicate\/unordered\/outside native patch row/]
+ ];
+ for(const [edit,error] of cases){
+  const f=fixture();edit(f);const rows=f.base.rows.slice(),runs=f.base.runs.slice(),patch=JSON.stringify(f.patch);
+  assert.throws(()=>applyAdditiveNativePatch(f.base,f.patch,f.options),error);
+  assert.deepEqual(f.base.rows,rows);assert.deepEqual(f.base.runs,runs);assert.equal(JSON.stringify(f.patch),patch);
+ }
+});
+
 test('assigned cells, conflicts, foreign owner, stale baseline and rule rebind reject without changing base',()=>{
  for(const alter of [p=>p.rows[0].runs=[[2,4,1]],p=>p.rows[0].runs=[[8,9,1]],p=>p.rows[0].runs=[[3,6,1],[5,7,2]],p=>p.rows[0].runs=[[3,5,3]],p=>p.base_reference.footprints_sha256='0'.repeat(64),p=>p.rule_sha256='0'.repeat(64),p=>p.rows.push(p.rows[0])]){
   const {base,patch,options}=fixture(),before=base.runs.slice();alter(patch);assert.throws(()=>applyAdditiveNativePatch(base,patch,options));assert.deepEqual(base.runs,before);
