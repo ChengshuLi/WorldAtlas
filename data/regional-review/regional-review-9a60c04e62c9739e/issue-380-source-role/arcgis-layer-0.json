@@ -1,0 +1,1004 @@
+{
+  "currentVersion" : 12, 
+  "id" : 0, 
+  "name" : "Biomes and Ecoregions 2017", 
+  "inDedicatedHosting" : true, 
+  "preferredHost" : "p3eplmys2rvchkjx.svcs.arcgis.com", 
+  "type" : "Feature Layer", 
+  "serviceItemId" : "37ea320eebb647c6838c23f72abae5ef", 
+  "cacheMaxAge" : 3600, 
+  "displayField" : "ECO_NAME", 
+  "description" : "", 
+  "copyrightText" : "", 
+  "defaultVisibility" : true, 
+  "editingInfo" : {
+    "lastEditDate" : 1772572619230, 
+    "schemaLastEditDate" : 1768941274659, 
+    "dataLastEditDate" : 1643270024237
+  }, 
+  "multiScaleGeometryInfo" : {
+    "levels" : [
+      1, 
+      3, 
+      5, 
+      7
+    ], 
+    "generalizationType" : "Default"
+  }, 
+  "relationships" : [], 
+  "isDataVersioned" : false, 
+  "hasContingentValuesDefinition" : false, 
+  "supportsAppend" : true, 
+  "supportsCalculate" : true, 
+  "supportsASyncCalculate" : true, 
+  "supportsTruncate" : true, 
+  "supportsAttachmentsByUploadId" : true, 
+  "supportsAttachmentsResizing" : true, 
+  "supportsRollbackOnFailureParameter" : true, 
+  "supportsStatistics" : true, 
+  "supportsExceedsLimitStatistics" : true, 
+  "supportsAdvancedQueries" : true, 
+  "supportsValidateSql" : true, 
+  "supportsCoordinatesQuantization" : true, 
+  "supportsLayerOverrides" : true, 
+  "supportsTilesAndBasicQueriesMode" : true, 
+  "supportsFieldDescriptionProperty" : true, 
+  "supportsQuantizationEditMode" : true, 
+  "supportsColumnStoreIndex" : true, 
+  "supportsApplyEditsWithGlobalIds" : false, 
+  "supportsMultiScaleGeometry" : true, 
+  "supportsReturningQueryGeometry" : true, 
+  "enableNullGeometry" : false, 
+  "hasGeometryProperties" : true, 
+  "geometryProperties" : 
+  {
+    "shapeAreaFieldName" : "Shape__Area", 
+    "shapeLengthFieldName" : "Shape__Length", 
+    "units" : "esriDecimalDegrees"
+  }, 
+  "advancedQueryCapabilities" : {
+    "supportsPagination" : true, 
+    "supportsPaginationOnAggregatedQueries" : true, 
+    "supportsQueryRelatedPagination" : true, 
+    "supportsQueryWithDistance" : true, 
+    "supportsOutDistance" : true, 
+    "supportsReturningQueryExtent" : true, 
+    "supportsStatistics" : true, 
+    "supportsOrderBy" : true, 
+    "supportsDistinct" : true, 
+    "supportsQueryWithResultType" : true, 
+    "supportsSqlExpression" : true, 
+    "supportsTimeRelation" : true, 
+    "supportsAdvancedQueryRelated" : true, 
+    "supportsCountDistinct" : true, 
+    "supportsPercentileStatistics" : true, 
+    "supportsApproxPercentileStatistics" : true, 
+    "supportsSpatialAggregationStatistics" : true, 
+    "supportsTrueCurve" : true, 
+    "supportedSpatialAggregationStatistics" : [
+      "EnvelopeAggregate", 
+      "CentroidAggregate", 
+      "ConvexHullAggregate"
+    ], 
+    "supportsLod" : true, 
+    "supportsQueryWithLodSR" : false, 
+    "supportedLodTypes" : [
+      "geohash"
+    ], 
+    "supportsReturningGeometryCentroid" : true, 
+    "supportsReturningGeometryEnvelope" : true, 
+    "supportsReturningGeometryProperties" : true, 
+    "supportsQueryWithDatumTransformation" : true, 
+    "supportsCurrentUserQueries" : true, 
+    "supportsHavingClause" : true, 
+    "supportsOutFieldSQLExpression" : true, 
+    "supportsMaxRecordCountFactor" : true, 
+    "supportsTopFeaturesQuery" : true, 
+    "supportsDisjointSpatialRel" : true, 
+    "supportsQueryWithCacheHint" : true, 
+    "supportedOperationsWithCacheHint" : [
+      "query", 
+      "queryTopFilter", 
+      "queryAnalytics", 
+      "queryAttachments", 
+      "queryRelated", 
+      "queryBins", 
+      "queryPivot"
+    ], 
+    "supportsQueryAnalytic" : true, 
+    "supportsQueryPivot" : true, 
+    "supportsQueryBins" : true, 
+    "supportsDefaultSR" : true, 
+    "supportsTranslations" : false, 
+    "supportsAggIds" : true, 
+    "supportsQueryWithCollation" : true, 
+    "supportsISODOW" : true, 
+    "supportsISOWeek" : true, 
+    "supportsFullTextSearch" : true, 
+    "fullTextSearchCapabilities" : {
+      "supportsAccentSensitivity" : true, 
+      "supportsStopWords" : true, 
+      "supportsSearchOperator" : true, 
+      "supportsOperator" : true
+    }
+  }, 
+  "advancedQueryAnalyticCapabilities" : {
+    "supportsLinearRegression" : true, 
+    "supportsTrendlineRegression" : true, 
+    "supportsAsync" : true, 
+    "supportsPercentileAnalytic" : true
+  }, 
+  "queryBinsCapabilities" : {
+    "supportsAsync" : true, 
+    "supportsAutoIntervalBin" : true, 
+    "supportsFixedIntervalBin" : true, 
+    "supportsFixedBoundariesBin" : true, 
+    "supportsDateBin" : true, 
+    "supportsClassificationBin" : true, 
+    "supportsStackBy" : true, 
+    "supportsSplitBy" : true, 
+    "supportsFirstDayOfWeek" : true, 
+    "supportsSnapToData" : true, 
+    "supportsReturnFullIntervalBin" : true, 
+    "supportsReturnStackValueRange" : true, 
+    "supportsNormalization" : true, 
+    "supportedStatisticTypes" : [
+      "COUNT", 
+      "SUM", 
+      "AVG", 
+      "VAR", 
+      "STDDEV", 
+      "MIN", 
+      "MAX", 
+      "PERCENTILE_CONT", 
+      "PERCENTILE_DISC", 
+      "APPROX_PERCENTILE_CONT", 
+      "APPROX_PERCENTILE_DISC", 
+      "CentroidAggregate", 
+      "EnvelopeAggregate", 
+      "ConvexHullAggregate"
+    ], 
+    "supportedNormalizationTypes" : [
+      "boxCox", 
+      "field", 
+      "inverse", 
+      "log", 
+      "naturalLog", 
+      "percentOfTotal", 
+      "squareRoot"
+    ]
+  }, 
+  "supportedOperationsWithCollation" : "query,addField,updateField", 
+  "advancedEditingCapabilities" : {
+    "supportedSqlFormatsInCalculate" : [
+      "standard"
+    ], 
+    "supportsAsyncApplyEdits" : true, 
+    "supportsReturnEditResults" : true, 
+    "supportsApplyEditsbyUploadID" : true, 
+    "supportedApplyEditsUploadIDFormats" : "JSON,PBF", 
+    "supportsTranslation" : false, 
+    "supportsMaxTranslations" : 10
+  }, 
+  "infoInEstimates" : [
+    "extent", 
+    "count"
+  ], 
+  "useStandardizedQueries" : true, 
+  "geometryType" : "esriGeometryPolygon", 
+  "minScale" : 75000000, 
+  "maxScale" : 0, 
+  "extent" : {
+    "xmin" : -179.99998860099311, 
+    "ymin" : -89.891973277444791, 
+    "xmax" : 180.00000000010002, 
+    "ymax" : 83.623125171889214, 
+    "spatialReference" : {
+      "wkid" : 4326, 
+      "latestWkid" : 4326
+    }
+  }, 
+  "spatialReference" : {
+    "wkid" : 4326, 
+    "latestWkid" : 4326
+  }, 
+  "drawingInfo":{"renderer":{"type":"uniqueValue","field1":"BIOME_NAME","defaultSymbol":{"type":"esriSFS","style":"esriSFSSolid","color":[130,130,130,255],"outline":{"type":"esriSLS","style":"esriSLSSolid","color":[110,110,110,255],"width":0.7}},"defaultLabel":"<all other values>","uniqueValueInfos":[{"symbol":{"type":"esriSFS","style":"esriSFSSolid","color":[115,178,255,255],"outline":{"type":"esriSLS","style":"esriSLSSolid","color":[110,110,110,0],"width":0.7}},"value":"Boreal Forests/Taiga","label":"Boreal Forests/Taiga"},{"symbol":{"type":"esriSFS","style":"esriSFSSolid","color":[255,127,127,255],"outline":{"type":"esriSLS","style":"esriSLSSolid","color":[110,110,110,0],"width":0.7}},"value":"Deserts & Xeric Shrublands","label":"Deserts & Xeric Shrublands"},{"symbol":{"type":"esriSFS","style":"esriSFSSolid","color":[189,243,252,255],"outline":{"type":"esriSLS","style":"esriSLSSolid","color":[110,110,110,0],"width":0.7}},"value":"Flooded Grasslands & Savannas","label":"Flooded Grasslands & Savannas"},{"symbol":{"type":"esriSFS","style":"esriSFSSolid","color":[255,0,197,255],"outline":{"type":"esriSLS","style":"esriSLSSolid","color":[110,110,110,0],"width":0.7}},"value":"Mangroves","label":"Mangroves"},{"symbol":{"type":"esriSFS","style":"esriSFSSolid","color":[255,0,0,255],"outline":{"type":"esriSLS","style":"esriSLSSolid","color":[110,110,110,0],"width":0.7}},"value":"Mediterranean Forests, Woodlands & Scrub","label":"Mediterranean Forests, Woodlands & Scrub"},{"symbol":{"type":"esriSFS","style":"esriSFSSolid","color":[215,194,158,255],"outline":{"type":"esriSLS","style":"esriSLSSolid","color":[110,110,110,0],"width":0.7}},"value":"Montane Grasslands & Shrublands","label":"Montane Grasslands & Shrublands"},{"symbol":{"type":"esriSFS","style":"esriSFSSolid","color":[255,235,190,255],"outline":{"type":"esriSLS","style":"esriSLSSolid","color":[110,110,110,0],"width":0.7}},"value":"N/A","label":"Rock and Ice"},{"symbol":{"type":"esriSFS","style":"esriSFSSolid","color":[0,115,76,255],"outline":{"type":"esriSLS","style":"esriSLSSolid","color":[110,110,110,0],"width":0.7}},"value":"Temperate Broadleaf & Mixed Forests","label":"Temperate Broadleaf & Mixed Forests"},{"symbol":{"type":"esriSFS","style":"esriSFSSolid","color":[92,137,68,255],"outline":{"type":"esriSLS","style":"esriSLSSolid","color":[110,110,110,0],"width":0.7}},"value":"Temperate Conifer Forests","label":"Temperate Conifer Forests"},{"symbol":{"type":"esriSFS","style":"esriSFSSolid","color":[255,255,115,255],"outline":{"type":"esriSLS","style":"esriSLSSolid","color":[110,110,110,0],"width":0.7}},"value":"Temperate Grasslands, Savannas & Shrublands","label":"Temperate Grasslands, Savannas & Shrublands"},{"symbol":{"type":"esriSFS","style":"esriSFSSolid","color":[165,245,122,255],"outline":{"type":"esriSLS","style":"esriSLSSolid","color":[110,110,110,0],"width":0.7}},"value":"Tropical & Subtropical Coniferous Forests","label":"Tropical & Subtropical Coniferous Forests"},{"symbol":{"type":"esriSFS","style":"esriSFSSolid","color":[205,205,102,255],"outline":{"type":"esriSLS","style":"esriSLSSolid","color":[110,110,110,0],"width":0.7}},"value":"Tropical & Subtropical Dry Broadleaf Forests","label":"Tropical & Subtropical Dry Broadleaf Forests"},{"symbol":{"type":"esriSFS","style":"esriSFSSolid","color":[255,170,0,255],"outline":{"type":"esriSLS","style":"esriSLSSolid","color":[110,110,110,0],"width":0.7}},"value":"Tropical & Subtropical Grasslands, Savannas & Shrublands","label":"Tropical & Subtropical Grasslands, Savannas & Shrublands"},{"symbol":{"type":"esriSFS","style":"esriSFSSolid","color":[61,184,0,255],"outline":{"type":"esriSLS","style":"esriSLSSolid","color":[110,110,110,0],"width":0.7}},"value":"Tropical & Subtropical Moist Broadleaf Forests","label":"Tropical & Subtropical Moist Broadleaf Forests"},{"symbol":{"type":"esriSFS","style":"esriSFSSolid","color":[155,207,188,255],"outline":{"type":"esriSLS","style":"esriSLSSolid","color":[110,110,110,0],"width":0.7}},"value":"Tundra","label":"Tundra"}],"fieldDelimiter":";","authoringInfo":{"colorRamp":{"type":"multipart","colorRamps":[{"type":"algorithmic","algorithm":"esriCIELabAlgorithm","fromColor":[242,202,252,255],"toColor":[242,202,252,255]},{"type":"algorithmic","algorithm":"esriCIELabAlgorithm","fromColor":[188,252,182,255],"toColor":[188,252,182,255]},{"type":"algorithmic","algorithm":"esriCIELabAlgorithm","fromColor":[179,239,252,255],"toColor":[179,239,252,255]},{"type":"algorithmic","algorithm":"esriCIELabAlgorithm","fromColor":[252,217,189,255],"toColor":[252,217,189,255]},{"type":"algorithmic","algorithm":"esriCIELabAlgorithm","fromColor":[251,252,194,255],"toColor":[251,252,194,255]},{"type":"algorithmic","algorithm":"esriCIELabAlgorithm","fromColor":[179,194,252,255],"toColor":[179,194,252,255]},{"type":"algorithmic","algorithm":"esriCIELabAlgorithm","fromColor":[252,189,205,255],"toColor":[252,189,205,255]},{"type":"algorithmic","algorithm":"esriCIELabAlgorithm","fromColor":[207,252,225,255],"toColor":[207,252,225,255]},{"type":"algorithmic","algorithm":"esriCIELabAlgorithm","fromColor":[212,222,252,255],"toColor":[212,222,252,255]},{"type":"algorithmic","algorithm":"esriCIELabAlgorithm","fromColor":[211,179,252,255],"toColor":[211,179,252,255]},{"type":"algorithmic","algorithm":"esriCIELabAlgorithm","fromColor":[182,252,208,255],"toColor":[182,252,208,255]},{"type":"algorithmic","algorithm":"esriCIELabAlgorithm","fromColor":[222,252,179,255],"toColor":[222,252,179,255]},{"type":"algorithmic","algorithm":"esriCIELabAlgorithm","fromColor":[252,182,242,255],"toColor":[252,182,242,255]},{"type":"algorithmic","algorithm":"esriCIELabAlgorithm","fromColor":[252,233,192,255],"toColor":[252,233,192,255]},{"type":"algorithmic","algorithm":"esriCIELabAlgorithm","fromColor":[237,252,215,255],"toColor":[237,252,215,255]}]}}},"scaleSymbols":true,"transparency":0,"labelingInfo":null}, 
+  "allowGeometryUpdates" : true, 
+  "trueCurveSupportMode" : "OGC", 
+  "supportedCurveTypes" : [
+    "esriGeometryCircularArc"
+  ], 
+  "supportedTrueCurvePbfFeatureEncodings" : [
+    "esriCompressedShapeBuffer", 
+    "esriDefault"
+  ], 
+  "allowTrueCurvesUpdates" : true, 
+  "onlyAllowTrueCurveUpdatesByTrueCurveClients" : false, 
+  "hasAttachments" : false, 
+  "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText", 
+  "hasMetadata" : true, 
+  "hasM" : false, 
+  "hasZ" : false, 
+  "objectIdField" : "FID", 
+  "uniqueIdField" : 
+  {
+    "name" : "FID", 
+    "isSystemMaintained" : true
+  }, 
+  "globalIdField" : "", 
+  "typeIdField" : "BIOME_NAME", 
+  "collation" : {
+    "locale" : "neutral", 
+    "caseSensitive" : false, 
+    "accentSensitive" : true
+  }, 
+  "fields" : [
+    {
+      "name" : "FID", 
+      "type" : "esriFieldTypeOID", 
+      "alias" : "Feature ID", 
+      "sqlType" : "sqlTypeOther", 
+      "nullable" : false, 
+      "editable" : false, 
+      "domain" : null, 
+      "defaultValue" : null, 
+      "description" : "{\"value\":\"The identifier number of the feature\",\"fieldValueType\":\"uniqueIdentifier\"}"
+    }, 
+    {
+      "name" : "OBJECTID", 
+      "type" : "esriFieldTypeDouble", 
+      "alias" : "Object ID", 
+      "sqlType" : "sqlTypeOther", 
+      "nullable" : true, 
+      "editable" : true, 
+      "domain" : null, 
+      "defaultValue" : null, 
+      "description" : "{\"value\":\"The identifier number of the object\",\"fieldValueType\":\"uniqueIdentifier\"}"
+    }, 
+    {
+      "name" : "ECO_NAME", 
+      "type" : "esriFieldTypeString", 
+      "alias" : "Ecoregion name", 
+      "sqlType" : "sqlTypeOther", 
+      "length" : 150, 
+      "nullable" : true, 
+      "editable" : true, 
+      "domain" : null, 
+      "defaultValue" : null, 
+      "description" : "{\"value\":\"The name of the ecoregion\",\"fieldValueType\":\"nameOrTitle\"}"
+    }, 
+    {
+      "name" : "BIOME_NUM", 
+      "type" : "esriFieldTypeDouble", 
+      "alias" : "Biome number", 
+      "sqlType" : "sqlTypeOther", 
+      "nullable" : true, 
+      "editable" : true, 
+      "domain" : null, 
+      "defaultValue" : null, 
+      "description" : "{\"value\":\"The number of the biome\",\"fieldValueType\":\"uniqueIdentifier\"}"
+    }, 
+    {
+      "name" : "BIOME_NAME", 
+      "type" : "esriFieldTypeString", 
+      "alias" : "Biome name", 
+      "sqlType" : "sqlTypeOther", 
+      "length" : 254, 
+      "nullable" : true, 
+      "editable" : true, 
+      "domain" : null, 
+      "defaultValue" : null, 
+      "description" : "{\"value\":\"The name of the biome\",\"fieldValueType\":\"nameOrTitle\"}"
+    }, 
+    {
+      "name" : "REALM", 
+      "type" : "esriFieldTypeString", 
+      "alias" : "Realm name", 
+      "sqlType" : "sqlTypeOther", 
+      "length" : 254, 
+      "nullable" : true, 
+      "editable" : true, 
+      "domain" : null, 
+      "defaultValue" : null, 
+      "description" : "{\"value\":\"The name of the realm\",\"fieldValueType\":\"nameOrTitle\"}"
+    }, 
+    {
+      "name" : "ECO_BIOME_", 
+      "type" : "esriFieldTypeString", 
+      "alias" : "Ecoregion Biome", 
+      "sqlType" : "sqlTypeOther", 
+      "length" : 254, 
+      "nullable" : true, 
+      "editable" : true, 
+      "domain" : null, 
+      "defaultValue" : null, 
+      "description" : "{\"value\":\"The unique identifier for the ecoregion and biome\",\"fieldValueType\":\"uniqueIdentifier\"}"
+    }, 
+    {
+      "name" : "NNH", 
+      "type" : "esriFieldTypeDouble", 
+      "alias" : "Nature Needs Half number", 
+      "sqlType" : "sqlTypeOther", 
+      "nullable" : true, 
+      "editable" : true, 
+      "domain" : null, 
+      "defaultValue" : null, 
+      "description" : "{\"value\":\"Nature Needs Half category (1-4) based on percent of habitat in protected areas and percent of remaining habitat outside protected areas\",\"fieldValueType\":\"uniqueIdentifier\"}"
+    }, 
+    {
+      "name" : "ECO_ID", 
+      "type" : "esriFieldTypeDouble", 
+      "alias" : "Ecoregion unique ID", 
+      "sqlType" : "sqlTypeOther", 
+      "nullable" : true, 
+      "editable" : true, 
+      "domain" : null, 
+      "defaultValue" : null, 
+      "description" : "{\"value\":\"The unique identifier number for the ecoregion\",\"fieldValueType\":\"uniqueIdentifier\"}"
+    }, 
+    {
+      "name" : "SHAPE_LENG", 
+      "type" : "esriFieldTypeDouble", 
+      "alias" : "Shape Length", 
+      "sqlType" : "sqlTypeOther", 
+      "nullable" : true, 
+      "editable" : true, 
+      "domain" : null, 
+      "defaultValue" : null, 
+      "description" : "{\"value\":\"Length of the shape\",\"fieldValueType\":\"countOrAmount\"}"
+    }, 
+    {
+      "name" : "NNH_NAME", 
+      "type" : "esriFieldTypeString", 
+      "alias" : "Nature Needs Half description", 
+      "sqlType" : "sqlTypeOther", 
+      "length" : 64, 
+      "nullable" : true, 
+      "editable" : true, 
+      "domain" : null, 
+      "defaultValue" : null, 
+      "description" : "{\"value\":\"Half Protected, Nature Could Reach Half, Nature Could Recover or Nature Imperiled\",\"fieldValueType\":\"description\"}"
+    }, 
+    {
+      "name" : "COLOR", 
+      "type" : "esriFieldTypeString", 
+      "alias" : "Ecoregion color", 
+      "sqlType" : "sqlTypeOther", 
+      "length" : 7, 
+      "nullable" : true, 
+      "editable" : true, 
+      "domain" : null, 
+      "defaultValue" : null, 
+      "description" : "{\"value\":\"The hex color code\",\"fieldValueType\":\"uniqueIdentifier\"}"
+    }, 
+    {
+      "name" : "COLOR_BIO", 
+      "type" : "esriFieldTypeString", 
+      "alias" : "Biome color", 
+      "sqlType" : "sqlTypeOther", 
+      "length" : 7, 
+      "nullable" : true, 
+      "editable" : true, 
+      "domain" : null, 
+      "defaultValue" : null, 
+      "description" : "{\"value\":\"The hex color code for the biome\",\"fieldValueType\":\"uniqueIdentifier\"}"
+    }, 
+    {
+      "name" : "COLOR_NNH", 
+      "type" : "esriFieldTypeString", 
+      "alias" : "Nature Needs Half color", 
+      "sqlType" : "sqlTypeOther", 
+      "length" : 7, 
+      "nullable" : true, 
+      "editable" : true, 
+      "domain" : null, 
+      "defaultValue" : null, 
+      "description" : "{\"value\":\"The Nature Needs Half hex color code\",\"fieldValueType\":\"uniqueIdentifier\"}"
+    }, 
+    {
+      "name" : "LICENSE", 
+      "type" : "esriFieldTypeString", 
+      "alias" : "License of the data", 
+      "sqlType" : "sqlTypeOther", 
+      "length" : 64, 
+      "nullable" : true, 
+      "editable" : true, 
+      "domain" : null, 
+      "defaultValue" : null, 
+      "description" : "{\"value\":\"License of the data.\",\"fieldValueType\":\"description\"}"
+    }, 
+    {
+      "name" : "Shape__Area", 
+      "type" : "esriFieldTypeDouble", 
+      "alias" : "Shape Area", 
+      "sqlType" : "sqlTypeDouble", 
+      "nullable" : true, 
+      "editable" : false, 
+      "domain" : null, 
+      "defaultValue" : null, 
+      "description" : "{\"value\":\"Area of the shape\",\"fieldValueType\":\"countOrAmount\"}"
+    }, 
+    {
+      "name" : "Shape__Length", 
+      "type" : "esriFieldTypeDouble", 
+      "alias" : "Shape Length", 
+      "sqlType" : "sqlTypeDouble", 
+      "nullable" : true, 
+      "editable" : false, 
+      "domain" : null, 
+      "defaultValue" : null, 
+      "description" : "{\"value\":\"Length of the shape\",\"fieldValueType\":\"countOrAmount\"}"
+    }
+  ], 
+  "indexes" : [
+    {
+      "name" : "PK__RESOLVE___C1BEA5A20FF3C78A", 
+      "fields" : "FID", 
+      "isAscending" : true, 
+      "isUnique" : true, 
+      "description" : "", 
+      "indexType" : "Attribute"
+    }, 
+    {
+      "name" : "user_256.RESOLVE_ECOREGIONS_BIOES_AND_ECOREGIONS_2017_Shape_sidx", 
+      "fields" : "Shape", 
+      "isAscending" : true, 
+      "isUnique" : false, 
+      "description" : "", 
+      "indexType" : "Spatial"
+    }, 
+    {
+      "name" : "Shape__Area_Index", 
+      "fields" : "Shape__Area", 
+      "isAscending" : true, 
+      "isUnique" : false, 
+      "description" : "", 
+      "indexType" : "Attribute"
+    }, 
+    {
+      "name" : "Shape__Length_Index", 
+      "fields" : "Shape__Length", 
+      "isAscending" : true, 
+      "isUnique" : false, 
+      "description" : "", 
+      "indexType" : "Attribute"
+    }, 
+    {
+      "name" : "insights_idx_8acca0176a67c14bbdd8af7118192aff", 
+      "fields" : "BIOME_NAME", 
+      "isAscending" : false, 
+      "isUnique" : false, 
+      "description" : "Auto created by ArcGIS Insights", 
+      "indexType" : "Attribute"
+    }, 
+    {
+      "name" : "insights_idx_8acca0176a67c14bbdd8af7118192aff", 
+      "fields" : "BIOME_NAME", 
+      "isAscending" : false, 
+      "isUnique" : false, 
+      "description" : "Auto created by ArcGIS Insights", 
+      "indexType" : "Attribute"
+    }
+  ], 
+  "dateFieldsTimeReference" : {
+    "timeZone" : "UTC", 
+    "timeZoneIANA" : "Etc/UTC", 
+    "respectsDaylightSaving" : false
+  }, 
+  "preferredTimeReference" : null, 
+  "types" : [
+    {
+      "id" : "Boreal Forests/Taiga", 
+      "name" : "Boreal Forests/Taiga", 
+      "domains" : 
+      {
+      }, 
+      "templates" : [
+        {
+          "name" : "Boreal Forests/Taiga", 
+          "description" : "", 
+          "drawingTool" : "esriFeatureEditToolPolygon", 
+          "prototype" : {
+            "attributes" : {
+              "COLOR_NNH" : null, 
+              "LICENSE" : null, 
+              "OBJECTID" : null, 
+              "ECO_NAME" : null, 
+              "BIOME_NUM" : null, 
+              "BIOME_NAME" : "Boreal Forests/Taiga", 
+              "REALM" : null, 
+              "ECO_BIOME_" : null, 
+              "NNH" : null, 
+              "ECO_ID" : null, 
+              "SHAPE_LENG" : null, 
+              "NNH_NAME" : null, 
+              "COLOR" : null, 
+              "COLOR_BIO" : null
+            }
+          }
+        }
+      ]
+    }, 
+    {
+      "id" : "Deserts & Xeric Shrublands", 
+      "name" : "Deserts & Xeric Shrublands", 
+      "domains" : 
+      {
+      }, 
+      "templates" : [
+        {
+          "name" : "Deserts & Xeric Shrublands", 
+          "description" : "", 
+          "drawingTool" : "esriFeatureEditToolPolygon", 
+          "prototype" : {
+            "attributes" : {
+              "COLOR_NNH" : null, 
+              "LICENSE" : null, 
+              "OBJECTID" : null, 
+              "ECO_NAME" : null, 
+              "BIOME_NUM" : null, 
+              "BIOME_NAME" : "Deserts & Xeric Shrublands", 
+              "REALM" : null, 
+              "ECO_BIOME_" : null, 
+              "NNH" : null, 
+              "ECO_ID" : null, 
+              "SHAPE_LENG" : null, 
+              "NNH_NAME" : null, 
+              "COLOR" : null, 
+              "COLOR_BIO" : null
+            }
+          }
+        }
+      ]
+    }, 
+    {
+      "id" : "Flooded Grasslands & Savannas", 
+      "name" : "Flooded Grasslands & Savannas", 
+      "domains" : 
+      {
+      }, 
+      "templates" : [
+        {
+          "name" : "Flooded Grasslands & Savannas", 
+          "description" : "", 
+          "drawingTool" : "esriFeatureEditToolPolygon", 
+          "prototype" : {
+            "attributes" : {
+              "COLOR_NNH" : null, 
+              "LICENSE" : null, 
+              "OBJECTID" : null, 
+              "ECO_NAME" : null, 
+              "BIOME_NUM" : null, 
+              "BIOME_NAME" : "Flooded Grasslands & Savannas", 
+              "REALM" : null, 
+              "ECO_BIOME_" : null, 
+              "NNH" : null, 
+              "ECO_ID" : null, 
+              "SHAPE_LENG" : null, 
+              "NNH_NAME" : null, 
+              "COLOR" : null, 
+              "COLOR_BIO" : null
+            }
+          }
+        }
+      ]
+    }, 
+    {
+      "id" : "Mangroves", 
+      "name" : "Mangroves", 
+      "domains" : 
+      {
+      }, 
+      "templates" : [
+        {
+          "name" : "Mangroves", 
+          "description" : "", 
+          "drawingTool" : "esriFeatureEditToolPolygon", 
+          "prototype" : {
+            "attributes" : {
+              "COLOR_NNH" : null, 
+              "LICENSE" : null, 
+              "OBJECTID" : null, 
+              "ECO_NAME" : null, 
+              "BIOME_NUM" : null, 
+              "BIOME_NAME" : "Mangroves", 
+              "REALM" : null, 
+              "ECO_BIOME_" : null, 
+              "NNH" : null, 
+              "ECO_ID" : null, 
+              "SHAPE_LENG" : null, 
+              "NNH_NAME" : null, 
+              "COLOR" : null, 
+              "COLOR_BIO" : null
+            }
+          }
+        }
+      ]
+    }, 
+    {
+      "id" : "Mediterranean Forests, Woodlands & Scrub", 
+      "name" : "Mediterranean Forests, Woodlands & Scrub", 
+      "domains" : 
+      {
+      }, 
+      "templates" : [
+        {
+          "name" : "Mediterranean Forests, Woodlands & Scrub", 
+          "description" : "", 
+          "drawingTool" : "esriFeatureEditToolPolygon", 
+          "prototype" : {
+            "attributes" : {
+              "COLOR_NNH" : null, 
+              "LICENSE" : null, 
+              "OBJECTID" : null, 
+              "ECO_NAME" : null, 
+              "BIOME_NUM" : null, 
+              "BIOME_NAME" : "Mediterranean Forests, Woodlands & Scrub", 
+              "REALM" : null, 
+              "ECO_BIOME_" : null, 
+              "NNH" : null, 
+              "ECO_ID" : null, 
+              "SHAPE_LENG" : null, 
+              "NNH_NAME" : null, 
+              "COLOR" : null, 
+              "COLOR_BIO" : null
+            }
+          }
+        }
+      ]
+    }, 
+    {
+      "id" : "Montane Grasslands & Shrublands", 
+      "name" : "Montane Grasslands & Shrublands", 
+      "domains" : 
+      {
+      }, 
+      "templates" : [
+        {
+          "name" : "Montane Grasslands & Shrublands", 
+          "description" : "", 
+          "drawingTool" : "esriFeatureEditToolPolygon", 
+          "prototype" : {
+            "attributes" : {
+              "COLOR_NNH" : null, 
+              "LICENSE" : null, 
+              "OBJECTID" : null, 
+              "ECO_NAME" : null, 
+              "BIOME_NUM" : null, 
+              "BIOME_NAME" : "Montane Grasslands & Shrublands", 
+              "REALM" : null, 
+              "ECO_BIOME_" : null, 
+              "NNH" : null, 
+              "ECO_ID" : null, 
+              "SHAPE_LENG" : null, 
+              "NNH_NAME" : null, 
+              "COLOR" : null, 
+              "COLOR_BIO" : null
+            }
+          }
+        }
+      ]
+    }, 
+    {
+      "id" : "N/A", 
+      "name" : "Rock and Ice", 
+      "domains" : 
+      {
+      }, 
+      "templates" : [
+        {
+          "name" : "N/A", 
+          "description" : "", 
+          "drawingTool" : "esriFeatureEditToolPolygon", 
+          "prototype" : {
+            "attributes" : {
+              "COLOR_NNH" : null, 
+              "LICENSE" : null, 
+              "OBJECTID" : null, 
+              "ECO_NAME" : null, 
+              "BIOME_NUM" : null, 
+              "BIOME_NAME" : "N/A", 
+              "REALM" : null, 
+              "ECO_BIOME_" : null, 
+              "NNH" : null, 
+              "ECO_ID" : null, 
+              "SHAPE_LENG" : null, 
+              "NNH_NAME" : null, 
+              "COLOR" : null, 
+              "COLOR_BIO" : null
+            }
+          }
+        }
+      ]
+    }, 
+    {
+      "id" : "Temperate Broadleaf & Mixed Forests", 
+      "name" : "Temperate Broadleaf & Mixed Forests", 
+      "domains" : 
+      {
+      }, 
+      "templates" : [
+        {
+          "name" : "Temperate Broadleaf & Mixed Forests", 
+          "description" : "", 
+          "drawingTool" : "esriFeatureEditToolPolygon", 
+          "prototype" : {
+            "attributes" : {
+              "COLOR_NNH" : null, 
+              "LICENSE" : null, 
+              "OBJECTID" : null, 
+              "ECO_NAME" : null, 
+              "BIOME_NUM" : null, 
+              "BIOME_NAME" : "Temperate Broadleaf & Mixed Forests", 
+              "REALM" : null, 
+              "ECO_BIOME_" : null, 
+              "NNH" : null, 
+              "ECO_ID" : null, 
+              "SHAPE_LENG" : null, 
+              "NNH_NAME" : null, 
+              "COLOR" : null, 
+              "COLOR_BIO" : null
+            }
+          }
+        }
+      ]
+    }, 
+    {
+      "id" : "Temperate Conifer Forests", 
+      "name" : "Temperate Conifer Forests", 
+      "domains" : 
+      {
+      }, 
+      "templates" : [
+        {
+          "name" : "Temperate Conifer Forests", 
+          "description" : "", 
+          "drawingTool" : "esriFeatureEditToolPolygon", 
+          "prototype" : {
+            "attributes" : {
+              "COLOR_NNH" : null, 
+              "LICENSE" : null, 
+              "OBJECTID" : null, 
+              "ECO_NAME" : null, 
+              "BIOME_NUM" : null, 
+              "BIOME_NAME" : "Temperate Conifer Forests", 
+              "REALM" : null, 
+              "ECO_BIOME_" : null, 
+              "NNH" : null, 
+              "ECO_ID" : null, 
+              "SHAPE_LENG" : null, 
+              "NNH_NAME" : null, 
+              "COLOR" : null, 
+              "COLOR_BIO" : null
+            }
+          }
+        }
+      ]
+    }, 
+    {
+      "id" : "Temperate Grasslands, Savannas & Shrublands", 
+      "name" : "Temperate Grasslands, Savannas & Shrublands", 
+      "domains" : 
+      {
+      }, 
+      "templates" : [
+        {
+          "name" : "Temperate Grasslands, Savannas & Shrublands", 
+          "description" : "", 
+          "drawingTool" : "esriFeatureEditToolPolygon", 
+          "prototype" : {
+            "attributes" : {
+              "COLOR_NNH" : null, 
+              "LICENSE" : null, 
+              "OBJECTID" : null, 
+              "ECO_NAME" : null, 
+              "BIOME_NUM" : null, 
+              "BIOME_NAME" : "Temperate Grasslands, Savannas & Shrublands", 
+              "REALM" : null, 
+              "ECO_BIOME_" : null, 
+              "NNH" : null, 
+              "ECO_ID" : null, 
+              "SHAPE_LENG" : null, 
+              "NNH_NAME" : null, 
+              "COLOR" : null, 
+              "COLOR_BIO" : null
+            }
+          }
+        }
+      ]
+    }, 
+    {
+      "id" : "Tropical & Subtropical Coniferous Forests", 
+      "name" : "Tropical & Subtropical Coniferous Forests", 
+      "domains" : 
+      {
+      }, 
+      "templates" : [
+        {
+          "name" : "Tropical & Subtropical Coniferous Forests", 
+          "description" : "", 
+          "drawingTool" : "esriFeatureEditToolPolygon", 
+          "prototype" : {
+            "attributes" : {
+              "COLOR_NNH" : null, 
+              "LICENSE" : null, 
+              "OBJECTID" : null, 
+              "ECO_NAME" : null, 
+              "BIOME_NUM" : null, 
+              "BIOME_NAME" : "Tropical & Subtropical Coniferous Forests", 
+              "REALM" : null, 
+              "ECO_BIOME_" : null, 
+              "NNH" : null, 
+              "ECO_ID" : null, 
+              "SHAPE_LENG" : null, 
+              "NNH_NAME" : null, 
+              "COLOR" : null, 
+              "COLOR_BIO" : null
+            }
+          }
+        }
+      ]
+    }, 
+    {
+      "id" : "Tropical & Subtropical Dry Broadleaf Forests", 
+      "name" : "Tropical & Subtropical Dry Broadleaf Forests", 
+      "domains" : 
+      {
+      }, 
+      "templates" : [
+        {
+          "name" : "Tropical & Subtropical Dry Broadleaf Forests", 
+          "description" : "", 
+          "drawingTool" : "esriFeatureEditToolPolygon", 
+          "prototype" : {
+            "attributes" : {
+              "COLOR_NNH" : null, 
+              "LICENSE" : null, 
+              "OBJECTID" : null, 
+              "ECO_NAME" : null, 
+              "BIOME_NUM" : null, 
+              "BIOME_NAME" : "Tropical & Subtropical Dry Broadleaf Forests", 
+              "REALM" : null, 
+              "ECO_BIOME_" : null, 
+              "NNH" : null, 
+              "ECO_ID" : null, 
+              "SHAPE_LENG" : null, 
+              "NNH_NAME" : null, 
+              "COLOR" : null, 
+              "COLOR_BIO" : null
+            }
+          }
+        }
+      ]
+    }, 
+    {
+      "id" : "Tropical & Subtropical Grasslands, Savannas & Shrublands", 
+      "name" : "Tropical & Subtropical Grasslands, Savannas & Shrublands", 
+      "domains" : 
+      {
+      }, 
+      "templates" : [
+        {
+          "name" : "Tropical & Subtropical Grasslands, Savannas & Shrublands", 
+          "description" : "", 
+          "drawingTool" : "esriFeatureEditToolPolygon", 
+          "prototype" : {
+            "attributes" : {
+              "COLOR_NNH" : null, 
+              "LICENSE" : null, 
+              "OBJECTID" : null, 
+              "ECO_NAME" : null, 
+              "BIOME_NUM" : null, 
+              "BIOME_NAME" : "Tropical & Subtropical Grasslands, Savannas & Shrublands", 
+              "REALM" : null, 
+              "ECO_BIOME_" : null, 
+              "NNH" : null, 
+              "ECO_ID" : null, 
+              "SHAPE_LENG" : null, 
+              "NNH_NAME" : null, 
+              "COLOR" : null, 
+              "COLOR_BIO" : null
+            }
+          }
+        }
+      ]
+    }, 
+    {
+      "id" : "Tropical & Subtropical Moist Broadleaf Forests", 
+      "name" : "Tropical & Subtropical Moist Broadleaf Forests", 
+      "domains" : 
+      {
+      }, 
+      "templates" : [
+        {
+          "name" : "Tropical & Subtropical Moist Broadleaf Forests", 
+          "description" : "", 
+          "drawingTool" : "esriFeatureEditToolPolygon", 
+          "prototype" : {
+            "attributes" : {
+              "COLOR_NNH" : null, 
+              "LICENSE" : null, 
+              "OBJECTID" : null, 
+              "ECO_NAME" : null, 
+              "BIOME_NUM" : null, 
+              "BIOME_NAME" : "Tropical & Subtropical Moist Broadleaf Forests", 
+              "REALM" : null, 
+              "ECO_BIOME_" : null, 
+              "NNH" : null, 
+              "ECO_ID" : null, 
+              "SHAPE_LENG" : null, 
+              "NNH_NAME" : null, 
+              "COLOR" : null, 
+              "COLOR_BIO" : null
+            }
+          }
+        }
+      ]
+    }, 
+    {
+      "id" : "Tundra", 
+      "name" : "Tundra", 
+      "domains" : 
+      {
+      }, 
+      "templates" : [
+        {
+          "name" : "Tundra", 
+          "description" : "", 
+          "drawingTool" : "esriFeatureEditToolPolygon", 
+          "prototype" : {
+            "attributes" : {
+              "COLOR_NNH" : null, 
+              "LICENSE" : null, 
+              "OBJECTID" : null, 
+              "ECO_NAME" : null, 
+              "BIOME_NUM" : null, 
+              "BIOME_NAME" : "Tundra", 
+              "REALM" : null, 
+              "ECO_BIOME_" : null, 
+              "NNH" : null, 
+              "ECO_ID" : null, 
+              "SHAPE_LENG" : null, 
+              "NNH_NAME" : null, 
+              "COLOR" : null, 
+              "COLOR_BIO" : null
+            }
+          }
+        }
+      ]
+    }
+  ], 
+  "templates" : [], 
+  "supportedQueryFormats" : "JSON, geoJSON, PBF", 
+  "supportedAppendFormats" : "sqlite,geoPackage,shapefile,filegdb,featureCollection,geojson,csv,excel,jsonl,featureService,pbf", 
+  "supportedAppendSourceFilterFormats" : "sqlite,geoPackage,shapefile,filegdb,featureService", 
+  "supportedExportFormats" : "csv,shapefile,sqlite,geoPackage,filegdb,featureCollection,geojson,kml,excel,parquet", 
+  "supportedConvertFileFormats" : "JSON,PBF,Parquet", 
+  "supportedConvertContentFormats" : "LayerEditCollection,FeatureCollection", 
+  "supportedSpatialRelationships" : [
+    "esriSpatialRelIntersects", 
+    "esriSpatialRelContains", 
+    "esriSpatialRelCrosses", 
+    "esriSpatialRelEnvelopeIntersects", 
+    "esriSpatialRelIndexIntersects", 
+    "esriSpatialRelOverlaps", 
+    "esriSpatialRelTouches", 
+    "esriSpatialRelWithin", 
+    "esriSpatialRelDisjoint", 
+    "esriSpatialRelRelation"
+  ], 
+  "guidFormat" : "", 
+  "supportsContingentValues" : true, 
+  "supportsEditingContingentValues" : true, 
+  "supportedContingentValuesFormats" : "JSON, PBF", 
+  "supportsFieldGroups" : true, 
+  "supportedSyncDataOptions" : 260, 
+  "hasStaticData" : true, 
+  "maxRecordCount" : 2000, 
+  "standardMaxRecordCount" : 2000, 
+  "maxIdsCount" : 1000000, 
+  "standardMaxRecordCountNoGeometry" : 32000, 
+  "tileMaxRecordCount" : 4000, 
+  "maxRecordCountFactor" : 1, 
+  "capabilities" : "Query,Extract"
+}
