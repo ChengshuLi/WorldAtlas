@@ -137,7 +137,9 @@ class Writer {
   this.buffer[this.used]=0;this.buffer.writeDoubleLE(pair[0],this.used+1);this.buffer.writeDoubleLE(pair[1],this.used+9);this.used+=17;
  }
  get position(){return this.bytes+this.used;}
- reset(position=0){this.flush();fs.ftruncateSync(this.fd,position);this.bytes=position;}
+ // A first field starts at the current logical end, including buffered bytes.
+ // Only a real rewind needs flushing/truncation for duplicate-key semantics.
+ reset(position=0){if(position===this.position)return;this.flush();fs.ftruncateSync(this.fd,position);this.bytes=position;}
 }
 function ordinaryDirectory(directory){
  demand(typeof directory==='string'&&path.isAbsolute(directory),'Absolute native scratch directory required');

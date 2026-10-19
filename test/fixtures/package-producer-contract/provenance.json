@@ -1,0 +1,41 @@
+{
+  "description": "Exact retained old/new workflow bodies and observed successful GitHub producer jobs; fixtures are evidence, never live authority. Original receipt head a6130bbe has the same tree as accepted d44a. Current actual candidate3282b14a has the same tree as accepted b7dd; the workflow is unchanged through c3b.",
+  "original_log_receipt": {
+    "package_output_manifest_sha256": "9d6d549b94125b61e72f4e9919b30d0c96dd886325f395a68aa18d6174021e81",
+    "package_output_manifest_bytes": 717886,
+    "package_output_files": 485,
+    "package_output_bytes": 349857875,
+    "original_head": "a6130bbe509da73e934e2344db897c1d5b074b1c",
+    "executed_workflow": {
+      "sha": "07c74ff101d4ab5e679255ed85c402356aa54a42",
+      "path": ".github/workflows/worker-merge.yml",
+      "ref": "refs/heads/main"
+    }
+  },
+  "original_job_url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/actions/jobs/117617788157",
+  "current_job_url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/actions/jobs/117641280183",
+  "files": {
+    "original-workflow.yml": {
+      "commit": "d44a8c13ac17bc661cbee6d138d251f25093973e",
+      "path": ".github/workflows/worker-merge.yml",
+      "bytes": 23403,
+      "sha256": "f8186b5c5e782a259f3cc7f32f0bd02e34d9c9b1434c33ad1246e653e8e28c6d",
+      "git_blob_oid": "600ed315701f16a74192a6ee02df0f6ae13e0235"
+    },
+    "current-workflow.yml": {
+      "commit": "c3b4924f4b303d7ef403878e6d45a041bce0c2e3",
+      "path": ".github/workflows/worker-merge.yml",
+      "bytes": 23619,
+      "sha256": "3ec002b2e704e72392c62c3d1be2809076cf62e45921aeba3d34bc0f6ff6d9cd",
+      "git_blob_oid": "fd3882b22ae83560937f238e135ae4f280fb4ecb"
+    },
+    "original-job.json": {
+      "bytes": 5245,
+      "sha256": "91e4ba9df76f96b9479b6c2061026411d298e15ea8ab7ec150f5b3ff2d12c41b"
+    },
+    "current-job.json": {
+      "bytes": 4946,
+      "sha256": "59d8d6c24c9d031288bf9f22fd3ae33bfb6b657260e44861f5709f7edea15b28"
+    }
+  }
+}

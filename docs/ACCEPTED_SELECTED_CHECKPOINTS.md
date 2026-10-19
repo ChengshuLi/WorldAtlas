@@ -388,3 +388,29 @@ combines parsing, spooling and local Git transport. Instrumentation adds overhea
 and that residual is neither pure parser time nor a promised speedup. Both stores
 retain disk-backed records and metadata; native Float64 geometry, edges/crossings,
 current output and other eager inputs remain separate size-dependent terms.
+
+### Private admitted component equality
+
+The cumulative ledger parser already authenticates the complete input and records
+an exact canonical SHA-256 for each component. Checkpoint admission now binds that
+identity to each exact immutable component view in its private invocation session.
+The old-row equality pass in transition normalization compares only these admitted
+identities. A public digest field, another session, or an expired store cannot
+supply this proof. A missing or changed row retains the existing full residual
+normalization and append-only refusal; candidate body admission, authority and
+route checks, and native comparison remain required.
+
+A bounded observation on the authentic retained 2445 ledger (5,281 components)
+measured the exact `valueSha` equality pass at 13.993 seconds and 1,271,006 reads,
+versus 14.86 milliseconds and 5,292 component-descriptor reads for the already
+admitted identities. Both passes agreed on every complete component. This is an
+isolated equality-pass observation, not a whole qualification speedup claim.
+
+### Preserve buffered writes at an unchanged logical end
+
+The private native-store writer skips `reset(position)` only when `position`
+already equals its complete logical end, including pending buffered bytes. This
+is the first `runs` field of an ordinary row. Pending bytes still flush at the
+existing capacity, canonical-readback and final-admission boundaries. A genuine
+duplicate-key rewind still flushes and truncates, with the original write-error
+and cleanup behavior. This changes neither stored formats nor admitted identities.

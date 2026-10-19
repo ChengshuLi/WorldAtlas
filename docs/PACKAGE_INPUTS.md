@@ -18,17 +18,27 @@ When adding a genuine package dependency outside declared directories, add its p
 ## Retained original Cloudflare output
 
 The original output inventory is captured immediately after the genuine Cloudflare
-build, before package controls, browser-selection/install code and regression consumers. Upload still waits for required
-checks to succeed. Authentication compares every retained output byte with that
-inventory, so a later consumer cannot silently change the reusable package.
+build, before package controls, browser-selection/install code and regression consumers.
+The archive is uploaded immediately, but reuse still requires the complete producer
+job and required checks to succeed. Authentication compares every retained output
+byte with that inventory, so a later consumer cannot silently change the reusable package.
 
 New manifests identify this boundary as `immediate-cloudflare-build-v1` and retain
 the genuine queue build workflow's Git identity (`worker-merge.yml`). Historical
 captures retain their exact original two-workflow roster, including the removed
 `merge-integration-checks.yml`. Both rosters are checked against the actual immutable
-source and executed workflow. Their producer identities must still match exactly
-before output reuse; deleting the author workflow requires a fresh queue-only
-full-build capture before a subsequent selected delivery can reuse it. The complete declared source image,
+source and executed workflow. Historical two-workflow captures still require exact
+producer identity. Queue-only captures may also reuse an authenticated equivalent
+full-build producer contract when incidental orchestration differs. Both complete
+workflow bodies must match their immutable Git identities; the restricted recognizer
+binds the effective runner, environment, defaults, action pins, dependency setup,
+checkout, snapshot, build, immediate inventory and upload. Unknown syntax or an
+extra effectful prefix refuses. Only the unchanged scientific installation
+condition/position around the isolated optional assembly attempt is normalized;
+the successful original job must prove installation before snapshot. No caller
+boolean or claimed fingerprint grants compatibility. Discovery, transition admission
+and private assembly issuance share this contract. Removing the historical author
+workflow still requires a fresh queue-only capture. The complete declared source image,
 output bytes and build configuration remain authoritative. The capture writer and
 isolated Python execution helper are explicit package inputs; the ordinary pre-build
 snapshot checks their actual bytes against Git as well as binding their committed identities.
@@ -115,8 +125,11 @@ bytes; only the sidecar, runtime envelope, cumulative ledger and cumulative patc
 may be retired. Admission also matches each retired role to the original immutable
 source inventory. Shared current inputs and unrelated declarations remain required.
 Repeated finalization can therefore reuse the same genuine original build instead
-of failing an obsolete append-only declaration check. Producer workflow identity
-is still exact; changing that producer requires an applicable genuine capture.
+of failing an obsolete append-only declaration check. Exact historical workflow
+provenance remains required; changed effective build commands or invariant source
+inputs require an applicable genuine capture. The producer-contract implementation
+itself is a declared package input, so installing it legitimately requires a fresh
+seed build before later orchestration-only changes can benefit.
 
 ### Retain successful production before tests
 

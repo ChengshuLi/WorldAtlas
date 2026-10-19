@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
+import {compatiblePackageProducers} from './package-producer-contract.mjs';
 
 export const PACKAGE_INPUT_FILE = '.github/package-inputs.json';
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
@@ -182,13 +183,12 @@ export function admitSelectedPackageDeclarations(before, current, {selection, pr
     'Package definition is not an append-only selected change or authenticated cumulative replacement');
   return {removed,retired,retainedInputs,additions:newInputs.slice(retainedInputs.length)};
 }
-export function admitPackageInputTransition(before, current, {acceptedInputs, typedInputs, priorSidecarRaw, preliminary = false} = {}) {
+export function admitPackageInputTransition(before, current, {acceptedInputs, typedInputs, priorSidecarRaw, producerWorkflows, preliminary = false} = {}) {
   const need=(ok,message)=>{if(!ok)throw Error(message);};
   const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
   const commit=value=>/^[a-f0-9]{40}$/.test(value??'');
   validatePackageInputs(before.definition); validatePackageInputs(current.definition);
-  need(before.producer?.kind===PACKAGE_PRODUCER_KIND&&same(before.producer,current.producer),
-    'Immediate original build capture and unchanged producer workflow required');
+  compatiblePackageProducers(before.producer,current.producer,producerWorkflows);
   const oldInventory=new Map(before.files.map(row=>[row.path,row]));
   const {removed,retired,retainedInputs,additions:newDeclarations}=admitSelectedPackageDeclarations(
     before.definition,current.definition,{selection:before.selection,priorSidecarRaw,priorEntry:name=>oldInventory.get(name),currentPaths:current.files.map(row=>row.path)});

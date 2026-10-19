@@ -6,6 +6,7 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {isDeepStrictEqual} from 'node:util';
 import {loadPackageInputs,containsPackagePath,admitPackageInputTransition} from '../../../scripts/package-inputs.mjs';
+import {compatiblePackageProducers,requireProducerInstallation} from '../../../scripts/package-producer-contract.mjs';
 
 const demand=(v,m)=>{if(!v)throw Error(m);};
 const ordinary=name=>{
@@ -37,6 +38,9 @@ export function bindPackageImmutableCommits(reader,declared){
 // A distinct package assembly capability. Serialized build/context receipts
 // never enter the existing consumedContext or current-execution WeakMaps.
 const packageAssemblies = new WeakMap();
+// Authenticated job observations are held privately, never accepted from a
+// caller's serialized workflow compatibility input.
+const originalProducerJobs = new WeakMap();
 const assemblyHash = bytes => createHash('sha256').update(bytes).digest('hex');
 const assemblySame = isDeepStrictEqual;
 const assemblyFingerprint = value => assemblyHash(JSON.stringify(value));
@@ -137,7 +141,7 @@ export async function readOriginalPackageInventory({api,repo,origin}) {
   // Other receipts may have their own archive digests. The exact output digest
   // must occur once, and the artifact API independently binds it to this name.
   demand(lines.filter(line=>line===`SHA256 digest of uploaded artifact zip is ${origin.artifact_digest}`).length===1,'Original package upload digest differs');
-  return {...receipts[0],workflow_head:workflowHead,workflow_path:run.path};
+  return {...receipts[0],workflow_head:workflowHead,workflow_path:run.path,producer_job:structuredClone(job)};
 }
 
 // Called only by the trusted assembly driver, using its authenticated GitHub
@@ -185,6 +189,7 @@ export async function authenticateOriginalPackageOutput({api,repo,origin,root,ma
   visit('dist');demand(assemblySame(found.sort(),[...expected].sort()),'Original output complete inventory differs');
   const token=Object.freeze({kind:'authenticated-original-cloudflare-output',source_head:origin.head});
   packageAssemblies.set(token,{root,manifest,origin:structuredClone(origin),manifest_sha256:assemblyHash(manifestRaw),fingerprint:assemblyFingerprint(manifest)});
+  originalProducerJobs.set(token,structuredClone(receipt.producer_job));
   return token;
 }
 
@@ -216,7 +221,7 @@ function assemblyCode(source,executingRoot) {
   visit('scripts/assemble-selected-package.mjs');return files.sort((a,b)=>a.path.localeCompare(b.path,'en'));
 }
 
-function assemblySourceAdmission(original,source,acceptedInputs,priorSidecarRaw) {
+function assemblySourceAdmission(original,source,acceptedInputs,priorSidecarRaw,producerWorkflows) {
   const before=requireOriginalPackageOutput(original).manifest.source,definition=loadPackageInputs(source);
   const read=name=>{
     const file=path.join(source,name),stat=ordinary(file);
@@ -238,20 +243,20 @@ function assemblySourceAdmission(original,source,acceptedInputs,priorSidecarRaw)
     workflows.every(row=>row.type==='blob'&&row.mode==='100644'),
     'Ordinary original producer workflows required');
   const workflowPins=workflows.map(({type,...row})=>row);
-  demand(before.producer?.kind==='immediate-cloudflare-build-v1'&&assemblySame(before.producer,{kind:'immediate-cloudflare-build-v1',workflows:workflowPins}),
-    'Immediate original build capture and unchanged producer workflow required');
   const current={head:assemblyGit(source,['rev-parse','HEAD']).trim(),definition,selection,files:plain,
     producer:{kind:'immediate-cloudflare-build-v1',workflows:workflowPins}};
-  admitPackageInputTransition(before,current,{acceptedInputs,priorSidecarRaw,preliminary:true});
+  if(compatiblePackageProducers(before.producer,current.producer,producerWorkflows))
+    requireProducerInstallation(originalProducerJobs.get(original));
+  admitPackageInputTransition(before,current,{acceptedInputs,priorSidecarRaw,producerWorkflows,preliminary:true});
 }
 
 // Separate from package-issued full-build execution: this authenticates only the
 // actual small assembly programme and its immutable current source identities.
-export function issuePackageAssemblyExecution({original,source,stage,executingRoot,acceptedInputs,priorSidecarRaw}) {
+export function issuePackageAssemblyExecution({original,source,stage,executingRoot,acceptedInputs,priorSidecarRaw,producerWorkflows}) {
   requireOriginalPackageOutput(original);
   demand(process.execArgv.length===0&&!process.env.NODE_OPTIONS?.trim()&&!process.env.NODE_PATH?.trim(),'Plain assembly Node execution required');
   source=fs.realpathSync(source);stage=fs.realpathSync(stage);executingRoot=fs.realpathSync(executingRoot);
-  assemblySourceAdmission(original,source,acceptedInputs,priorSidecarRaw);
+  assemblySourceAdmission(original,source,acceptedInputs,priorSidecarRaw,producerWorkflows);
   demand(path.resolve(process.argv[1])===path.join(executingRoot,'scripts/assemble-selected-package.mjs'),'Actual assembly driver required');
   const files=assemblyCode(source,executingRoot), executable=fs.realpathSync(process.execPath);
   const runtime={...assemblyFile(path.dirname(executable),path.basename(executable)),

@@ -13,6 +13,7 @@ import {footprintHash} from './check-prepared.mjs';
 import {originalNativeReference,validateReferenceMetadataHeader} from '../src/reference-metadata.js';
 import {githubAPI, githubPages} from './issue-claim-contract.mjs';
 import {loadPackageInputs, readPackageInputs, containsPackagePath, safePackagePath} from './package-inputs.mjs';
+import {compatiblePackageProducers,requireProducerInstallation} from './package-producer-contract.mjs';
 import {assertCloudflareStaticAssets, inspectPackageNodeRuntime, verifyPackageDependencies} from './package-build.mjs';
 import {committedPackageInputs, committedPackageProducer, PACKAGE_PRODUCER_WORKFLOWS, PACKAGE_PRODUCER_KIND, packageBuildConfiguration,
   validatePackageOutputManifest, admitPackageInputTransition, admitPackageOutputTransition, inertSelectedPackageInput, streamedPackageFile, resolvePackagePythonExecutable} from './package-output-artifact.mjs';
@@ -100,8 +101,8 @@ async function blobRaw(api,repo,tree,name){
   return raw;
 }
 async function blobJSON(api,repo,tree,name){ return JSON.parse(await blobRaw(api,repo,tree,name)); }
-function sourceCompatible(before,current,priorSidecarRaw){
-  try{admitPackageInputTransition(before,current,{acceptedInputs:current.accepted_selected_inputs,priorSidecarRaw,preliminary:true});return true;}
+function sourceCompatible(before,current,priorSidecarRaw,producerWorkflows){
+  try{admitPackageInputTransition(before,current,{acceptedInputs:current.accepted_selected_inputs,priorSidecarRaw,producerWorkflows,preliminary:true});return true;}
   catch{return false;}
 }
 
@@ -179,13 +180,22 @@ export async function findOriginalPackage({api,repo,current,originalRunId,truste
             artifact_id:artifact.id,artifact_name:artifact.name,artifact_digest:artifact.digest.slice(7),artifact_bytes:artifact.size_in_bytes};
           const receipt=await readOriginalPackageInventory({api,repo,origin});
           origin.head=receipt.original_head;
-          const definition=await readPackageInputs({route:`/repos/${repo}`,base:origin.head,api});
-          const tree=await metadata.scope(origin.head,[...definition.inputs,...PACKAGE_PRODUCER_WORKFLOWS,'data/ownership-selection.json']),all=treeRows(tree);
-          const producer={kind:PACKAGE_PRODUCER_KIND,workflows:all.filter(row=>PACKAGE_PRODUCER_WORKFLOWS.includes(row.path))};
-          if(!same(producer,current.producer))continue;
-          const workflowTree=origin.head===receipt.executed_workflow.sha?tree:await metadata.scope(receipt.executed_workflow.sha,[receipt.workflow_path]);
+          // Check the small producer contract before requesting a whole declared
+          // source closure for an incompatible original.
+          const producerTree=await metadata.scope(origin.head,PACKAGE_PRODUCER_WORKFLOWS);
+          const producer={kind:PACKAGE_PRODUCER_KIND,workflows:treeRows(producerTree)};
+          const workflowTree=origin.head===receipt.executed_workflow.sha?producerTree:await metadata.scope(receipt.executed_workflow.sha,[receipt.workflow_path]);
           const actual=workflowTree.entries.get(receipt.workflow_path),captured=producer.workflows.find(row=>row.path===receipt.workflow_path);
           if(actual?.type!=='blob'||actual.mode!=='100644'||!same(captured,{path:receipt.workflow_path,mode:actual.mode,oid:actual.sha}))continue;
+          let producerWorkflows;
+          if(!same(producer,current.producer)){
+            producerWorkflows={original:(await blobRaw(api,repo,producerTree,receipt.workflow_path)).toString('utf8'),
+              current:(await blobRaw(api,repo,await metadata.scope(current.head,[receipt.workflow_path]),receipt.workflow_path)).toString('utf8')};
+            compatiblePackageProducers(producer,current.producer,producerWorkflows);
+            requireProducerInstallation(receipt.producer_job);
+          }
+          const definition=await readPackageInputs({route:`/repos/${repo}`,base:origin.head,api});
+          const tree=await metadata.scope(origin.head,[...definition.inputs,...PACKAGE_PRODUCER_WORKFLOWS,'data/ownership-selection.json']),all=treeRows(tree);
           const source={head:origin.head,tree:tree.object.tree.sha,definition,producer,
             files:all.filter(row=>containsPackagePath(definition.inputs,row.path)),
             selection:await blobJSON(api,repo,tree,'data/ownership-selection.json')};
@@ -198,8 +208,9 @@ export async function findOriginalPackage({api,repo,current,originalRunId,truste
           }
           const priorSidecarRaw=source.definition.inputs.some(name=>!current.definition.inputs.includes(name))
             ?await blobRaw(api,repo,await metadata.scope(origin.head,[source.selection.additive_release?.path]),source.selection.additive_release.path):undefined;
-          if(!sourceCompatible(source,{...current,accepted_selected_inputs:acceptedInputs},priorSidecarRaw))continue;
-          return {source,origin,receipt,priorSidecarRaw,...(trustedCommit?{accepted_selected_inputs:acceptedInputs}:{})};
+          if(!sourceCompatible(source,{...current,accepted_selected_inputs:acceptedInputs},priorSidecarRaw,producerWorkflows))continue;
+          return {source,origin,receipt,priorSidecarRaw,...(producerWorkflows?{producerWorkflows}:{}),
+            ...(trustedCommit?{accepted_selected_inputs:acceptedInputs}:{})};
         }catch(error){
           console.warn(`Skipped original package producer ${run.id}/${attempt}: ${String(error.message).replace(/https?:\/\/\S+/g,'[delivery address]').slice(0,300)}`);
         }
@@ -321,7 +332,7 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
     need(same(manifest.configuration,packageBuildConfiguration()),'Original build configuration differs');
     const stage=path.join(scratch,'assembly');fs.mkdirSync(stage);
     const execution=issuePackageAssemblyExecution({original,source:root,stage,executingRoot:root,
-      acceptedInputs:current.accepted_selected_inputs,priorSidecarRaw:found.priorSidecarRaw});
+      acceptedInputs:current.accepted_selected_inputs,priorSidecarRaw:found.priorSidecarRaw,producerWorkflows:found.producerWorkflows});
     const {atlas,selectedGrid,geographicRelease,features,referenceRevision}=readOriginalPackageGeography(original);
     // The authenticated execution closure includes this literal deferred import.
     // Current locked dependencies are admitted above; no dependency sees API credentials.
@@ -335,7 +346,7 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
       need(row&&row.mode===pin.mode&&row.oid===pin.git_blob_oid&&pin.whole_body_consumed===true,'Current additive input differs from actual source');
       return {...pin,commit:current.head};
     });
-    const transition=admitPackageOutputTransition(manifest,current,{acceptedInputs:current.accepted_selected_inputs,typedInputs:consumed,priorSidecarRaw:found.priorSidecarRaw});
+    const transition=admitPackageOutputTransition(manifest,current,{acceptedInputs:current.accepted_selected_inputs,typedInputs:consumed,priorSidecarRaw:found.priorSidecarRaw,producerWorkflows:found.producerWorkflows});
     const oldAssets=['base_manifest','ledger','owner_roster','patch'].map(role=>atlas.additiveRelease[role]);
     need(oldAssets.every(pin=>/^additive-repairs\/[A-Za-z0-9_.-]+$/.test(pin?.path??''))&&new Set(oldAssets.map(pin=>pin.path)).size===4,'Original four public additive assets required');
     for(const pin of oldAssets)need(same(streamedPackageFile(originalRoot,'dist/client/'+pin.path),{path:'dist/client/'+pin.path,bytes:pin.bytes,sha256:pin.sha256}),'Original additive output differs');

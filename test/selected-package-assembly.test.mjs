@@ -1159,4 +1159,49 @@ with zipfile.ZipFile(sys.argv[2],'w',zipfile.ZIP_DEFLATED) as z:
   assert.equal((await assemble()).assembled,false);assert.equal(downloads,3,'Changed projection body remains an invariant source refusal');
 });
 
+
+
+test('authenticated changed producer contract reaches discovery, transition and private issuance without a waiver',async t=>{
+  if(process.execArgv.length||process.env.NODE_OPTIONS?.trim()||process.env.NODE_PATH?.trim()){
+    execFileSync(process.execPath,[new URL(import.meta.url).pathname,t.name],{env:{...process.env,NODE_OPTIONS:'',NODE_PATH:'',NODE_TEST_CONTEXT:undefined},encoding:'utf8'});return;
+  }
+  const fixture=new URL('./fixtures/package-producer-contract/',import.meta.url);
+  const originalWorkflow=fs.readFileSync(new URL('original-workflow.yml',fixture),'utf8');
+  const currentWorkflow=fs.readFileSync(new URL('current-workflow.yml',fixture),'utf8');
+  const f=originalDiscovery(t,{worker:true,queueOnly:true,configure:s=>{s.write('.github/workflows/worker-merge.yml',originalWorkflow);s.commit();}});
+  f.origin.workflow_head=f.run.head_sha=f.job.head_sha=f.artifact.workflow_run.head_sha=f.receipt.executed_workflow.sha=f.sourceHead;
+  f.job.steps.unshift({name:'Run python -m pip install -r requirements.txt',status:'completed',conclusion:'success'});
+  f.job.steps.forEach((step,i)=>step.number=i+1);
+  const manifest=JSON.parse(f.manifestRaw);manifest.source=f.before;
+  f.manifestRaw=Buffer.from(JSON.stringify(manifest)+'\n');
+  f.receipt.package_output_manifest_sha256=sha(f.manifestRaw);f.receipt.package_output_manifest_bytes=f.manifestRaw.length;
+  const oldFetch=globalThis.fetch,oldEntry=process.argv[1],oldWarn=console.warn;
+  t.after(()=>{globalThis.fetch=oldFetch;process.argv[1]=oldEntry;console.warn=oldWarn;});
+  globalThis.fetch=async()=>new Response(f.log());console.warn=()=>{};
+  const baseAPI=f.api,api=async route=>{
+    const commit=/\/git\/commits\/([a-f0-9]{40})$/.exec(route);
+    if(commit&&commit[1]!==f.origin.workflow_head)return {sha:commit[1],tree:{sha:f.s.git('rev-parse',commit[1]+'^{tree}')}};
+    const blob=/\/git\/blobs\/([a-f0-9]{40})$/.exec(route);
+    if(blob)return {encoding:'base64',content:execFileSync('git',['-C',f.root,'cat-file','blob',blob[1]]).toString('base64')};
+    return baseAPI(route);
+  };api.jobLogRedirect=baseAPI.jobLogRedirect;
+  const token=await authenticateOriginalPackageOutput({...f,api});
+  f.s.write('.github/workflows/worker-merge.yml',currentWorkflow);f.s.commit();
+  const current=f.s.snapshot(),discover=()=>findOriginalPackage({api,repo:f.repo,current,originalRunId:17});
+  const found=await discover();assert.equal(found?.origin.head,f.sourceHead);
+  assert.deepEqual(found.producerWorkflows,{original:originalWorkflow,current:currentWorkflow});
+  for(const preliminary of [true,false])assert.doesNotThrow(()=>admitPackageInputTransition(f.before,current,{producerWorkflows:found.producerWorkflows,preliminary}));
+  const stage=fs.mkdtempSync(path.join(f.root,'stage-'));process.argv[1]=path.join(f.root,'scripts/assemble-selected-package.mjs');
+  const issue=(original,producerWorkflows)=>issuePackageAssemblyExecution({original,source:f.root,stage,executingRoot:f.root,producerWorkflows});
+  assert.doesNotThrow(()=>requirePackageAssemblyExecution(issue(token,found.producerWorkflows)));
+  for(const claimed of [undefined,{sha256:'claimed-compatible'},{original:currentWorkflow,current:currentWorkflow}])
+    assert.throws(()=>issue(token,claimed),/workflow bodies|immutable identity/);
+  f.job.steps[0].conclusion='skipped';
+  assert.equal(await discover(),null,'Successful capture cannot hide a skipped dependency prerequisite');
+  const skipped=await authenticateOriginalPackageOutput({...f,api});
+  assert.throws(()=>issue(skipped,found.producerWorkflows),/prerequisite/);
+  assert.doesNotThrow(()=>requirePackageAssemblyExecution(issue(token,found.producerWorkflows)),'Private authenticated job snapshot is not mutable through the API fixture');
+  assert.equal(fs.existsSync(path.join(stage,'dist')),false,'Admission alone does not publish output');
+});
+
 if(probeName&&!probeRegistered)throw Error('Unknown private assembly probe: '+probeName);
