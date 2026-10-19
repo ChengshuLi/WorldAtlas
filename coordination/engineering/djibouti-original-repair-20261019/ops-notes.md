@@ -266,3 +266,18 @@ This is still only a diagnostic partition: selected-owner state, per-key source
 vintage/applicability, native authority, physical flags, independent delivery
 review and acceptance remain separate gates. The original denominator is
 preserved and accepted repair credit remains zero.
+
+This v3 run resolves the earlier v2 checkpoint refusal to start the native
+operator: the complete reviewed finite negative-family scope is now an explicit
+stock input. The successful diagnostic's exact row partition was then passed to
+the stock `supported-inputs` phase with the full original patch pinned and no
+prior hold assessment supplied. It verified 683 original cells = 683
+native-supported + 0 native-held + 0 prior holds. `native-patch.json` contains
+331 rows / 683 cells (15,609 bytes, SHA-256
+`702e80b9b4a4771aa0449e8632ccedfe00036e1073a2ca4fc5f8c8653052c9a1`);
+`held-original.json` has zero rows (12 bytes, SHA-256
+`6c45288a5e9d1444ab024fac905b02495e73426d74e22544bbf867e5f4811680`);
+`original-scope-partition.json` is 2,520 bytes, SHA-256
+`c08f70dc4b25420529fe6924291e8aa8cc960029a9b90776b3c1fa0a36afb42b`.
+These are preparation inputs only; the full native authority constructor is
+still required, and no repair acceptance/credit is implied.
