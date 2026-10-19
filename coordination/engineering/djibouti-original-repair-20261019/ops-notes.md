@@ -125,4 +125,45 @@ physical corpus. A zero-flag row is not source applicability, authority,
 sovereignty, native-cell support or package acceptance. Eleven physical flags
 occur across six of nine targets. The selected-owner observer remains zero for
 all 683 land cells; 394 extracted intervals remain held, with accepted repair
-credit 0. No source or native-authority phase ran.
+credit 0.
+
+## Source-evidence inputs and foreign context
+
+The factual input assembler is
+`source-evidence-v1/prepare-source-evidence-inputs.mjs`. It binds the exact
+original denominator (683 land cells and 394 intervals), the nine owner-to-target
+rows, the full original `gb:DJI:ADM2` family (11 features), the accepted
+canonical part-6 (all 11 direct DJI ADM2 features), the physical report, and the
+source-evidence helper. Source membership pins the accepted world index,
+semantic report and complete canonical part-6. The complete original DJI ADM1
+family (6 features) and two non-target ADM2 Features remain in the earlier
+identity/context records. No `territorial_exclusions` field or empty negative
+array is supplied.
+
+The stock `source-evidence` phase completed with config SHA-256
+`43de8af9628b97d85289f8b2c55369804b2f066d54b954628df15a2cbe1793fa`.
+Its `products/source-evidence.json` is 38,598 bytes, SHA-256
+`11cd97550794d501998e06e9634ce2f6b43407920ba60e037d5846278d69ac88`; the
+preparation receipt is 262 bytes, SHA-256
+`ffb3be5808a4ffb370e9216d7f559e43b0939507e65b71c7f50cc8606786fcf1`. The full
+original patch is `native-requested-patch.json` (15,961 bytes, SHA-256
+`7d2d0f382455c5b5f02e1a3afdcf67eac19b397eefc9cc8c55ce6ce0f5a30833`): 683
+exact cells across all 394 intervals. The positive-family roster contains only
+the complete `gb:DJI:ADM2` family; ADM1 is not treated as a blanket veto.
+
+The separate `source-context-v1/whole-source-neighbor-context-screen.json`
+(9,204 bytes, SHA-256
+`0321bd49453837b74f4b9aba03f915e2f51ad7895188763557ae57b7eedc90e7`)
+screened complete original ERI, ETH and SOM ADM1/ADM2 families against all nine
+DJI target Features using the pinned `coordinateBounds` helper. It found 24
+conservative bounding-box candidates across 8 of 9 targets. This does not prove
+polygon intersection or political/source applicability. These complete
+families remain contextual candidates; specific applicability evidence is not
+present, so none is assigned a negative-veto role. The exact contact IDs and
+whole-family input pins are in that screen.
+
+The `source-evidence` output is an immutable factual input stage, not a
+qualification or accepted delivery. The 24 contextual candidates and existing
+physical flags remain unresolved. Native diagnostic, source applicability and
+native-authority qualification have not yet run; accepted repair credit remains
+0.
