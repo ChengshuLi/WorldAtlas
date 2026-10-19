@@ -1,0 +1,5632 @@
+{
+  "receipt_id": "rwa-307-selected-owner-replay-20261019",
+  "kind": "RWA-specific interval-key selected-owner observation",
+  "status": "observed_unassigned_not_acceptance",
+  "scope": {
+    "package_id": "gb-RWA-ADM2--repair-evaluation",
+    "interval_count": 216,
+    "cell_count": 307,
+    "land_cells": 298,
+    "inland_water_cells": 9,
+    "source_conflict_key_excluded": "gb-RWA-ADM2--source-conflict"
+  },
+  "execution": {
+    "command": "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node /Users/chengshuli/Documents/Codex/2026-10-18/task-4/rwa-307-evidence-proposal-20261019/selected-owner-replay.mjs /Users/chengshuli/world-atlas-workspace/.worldatlas-checkout",
+    "node_version": "v24.21.0",
+    "node_executable": "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node",
+    "source_commit": "77609a1f159bfee954e52d48a883c5fe3e4b59f5",
+    "source_interval_keys_sha256": "ed87327b8ee6c64faffe133bc9488b2893aa573bf955d8aef828f670c465de58",
+    "script_sha256": "f264c26d2a52bad94c6e72a48d76693f1632567f6774aa97b2d9daf6497465df"
+  },
+  "input_pins": {
+    "queue": {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+      "oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+      "bytes": 1754890,
+      "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8"
+    },
+    "candidates": {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-032.json.gz",
+      "oid": "5c56cb06a4879060a4ad933395cd643cdaaa5565",
+      "bytes": 800317,
+      "sha256": "00a677c75540d3be3a750e7f41d2d296f05dc24b84cec9d3776713986a7f6064"
+    },
+    "land_support": {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-032.json.gz",
+      "oid": "5f8f1e8aa032abc85e931930eb4eb9b0dbc0ebdb",
+      "bytes": 516947,
+      "sha256": "2b3d882155a28df8782b346bd7382b2faa1ccfa0ebf1c2f0f2c6d779c055905a"
+    },
+    "inland_water_support": {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-032.json.gz",
+      "oid": "9bee5462a2f4a8bf1e54816c4a3bd61d9227e221",
+      "bytes": 32628,
+      "sha256": "5a8910efab0c7f8667167655e138c1ae0efb7d5ec52ff143c7ef377f925c98a6"
+    },
+    "source_extractor": {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs",
+      "oid": "c5ba9331deb93eed40662d1dc579cdaedea55c46"
+    },
+    "ownership_binding": {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/ownership-binding.json",
+      "oid": "b9d81d18aab6d03dc701ff1337b35e53be81d0af",
+      "bytes": 3048,
+      "sha256": "b952192475435c8fbc74a84627994aff4f4e073c36c479d369554fc75251bc89"
+    },
+    "native_manifest": {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+      "oid": "31d970d0fe2bf8c899f020aad09a3826ea451790",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba"
+    },
+    "native_asset_bank_index": {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/index.json",
+      "oid": "f9e9bb67281cec0ceeb3b8d7a5cf94616f26c32c",
+      "bytes": 21330,
+      "sha256": "91b868b66f52d3051a09b88a84411f7c70f38de9528a0166a8fb16dcdc71ba02"
+    },
+    "native_bank_chunk_00": {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-00/part-000.bin.gz",
+      "oid": "359bfc9c3b80f2d0b60fa2cc859aaaebdeb6b22f",
+      "bytes": 16773351,
+      "sha256": "74dd9af0c01fa5552b9af60d03935eb97b56bf6685c5bf964862d3b2b5d2b22d",
+      "decodedBytes": 16777216,
+      "decodedSha256": "5498b99fff54c063e49236eaaa07f4b868bcfdcb129f5aeee74b0876aec49001"
+    },
+    "native_bank_chunk_01": {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-01/part-000.bin.gz",
+      "oid": "4ad9de48ccd8db37d753b5c024ca6cdc0e5836a5",
+      "bytes": 16775548,
+      "sha256": "e0506f0969dc1d1d58c4cd28dbd441a986e9a07ef3ebc6c447fed35d3c6bd798",
+      "decodedBytes": 16777216,
+      "decodedSha256": "b4734a3a4775c68aa91582bda523c03f3e98f2036c3007ef127986fc4876dc9c"
+    },
+    "additive_selection_sidecar": {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/release-001/selection-sidecar.json",
+      "oid": "767de67a9ffbd4c075c6192eeec8550b59139165",
+      "bytes": 3521,
+      "sha256": "9d7c827eef311f6c5a2bfc23fdfbe29aaf9219832443cf7277ed6e9f23697d9f"
+    },
+    "selected_additive_patch": {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/slb-source000-trial-20261013/assembly-001/patch.json",
+      "oid": "5d9cbebb7de2a856bae2aa5aff2bda17e0325315",
+      "bytes": 16380,
+      "sha256": "b44fc535b704fd88ccad45b85fbad73849b9f54c12bd3a83a158915b072414ac"
+    },
+    "native_row_asset": {
+      "path": "native-v1/ownership/rows-0.bin.gz",
+      "offset": 0,
+      "bytes": 306620,
+      "sha256": "89ed3564db641f992746bf4f6f01c1eed89cb470520734ac1b85ee95e9a70ba0",
+      "decoded_bytes": 2097328,
+      "decoded_sha256": "e9044c8304a47cd0d0acbb306bd31c2ba15f71e57648ab7d1581a6a77a875294",
+      "canonical_word_sha256": "e9044c8304a47cd0d0acbb306bd31c2ba15f71e57648ab7d1581a6a77a875294"
+    },
+    "native_run_assets": [
+      {
+        "offset": 47185920,
+        "path": "native-v1/ownership/runs-47185920.bin.gz",
+        "bank_offset": 34779814,
+        "bytes": 899855,
+        "sha256": "3ca6cdcd9c95e7387e18ab9bd35a9b2df7bd8e45ee30275874550cd2592da622",
+        "decoded_bytes": 4194304,
+        "decoded_sha256": "3134676c3876f1ac39944c0209e4f70549c62e8164530182c1c861dcb8ccca18"
+      },
+      {
+        "offset": 48234496,
+        "path": "native-v1/ownership/runs-48234496.bin.gz",
+        "bank_offset": 35679669,
+        "bytes": 878785,
+        "sha256": "486dcf08e55e3cab928b90a48fa7dc128fd2407cd428345b13bd133068da9f59",
+        "decoded_bytes": 4194304,
+        "decoded_sha256": "4f3271ca075f968660cc6c9d2ae80a1cbb93f9d1db47e1f4270e586c1afd8db7"
+      },
+      {
+        "offset": 49283072,
+        "path": "native-v1/ownership/runs-49283072.bin.gz",
+        "bank_offset": 36558454,
+        "bytes": 903382,
+        "sha256": "0bbec87a2b610f5dd3a81cb21b243ba87462e66e15dec26fdd6cfcc67c128c01",
+        "decoded_bytes": 4194304,
+        "decoded_sha256": "b572825fbca3fceb6b214c16f08ea2bec30cb64302088006975ce36870d8edc3"
+      },
+      {
+        "offset": 50331648,
+        "path": "native-v1/ownership/runs-50331648.bin.gz",
+        "bank_offset": 37461836,
+        "bytes": 877430,
+        "sha256": "7df616b4446cb3e213838c7e12b5a02e0880bc78a9170218cd29e745128d7e4d",
+        "decoded_bytes": 4194304,
+        "decoded_sha256": "ab5a9ccd48789d4c872fa255559c555ea289d684868878eb807e650f007bc90c"
+      }
+    ]
+  },
+  "selection": {
+    "base_reference": {
+      "footprints_sha256": "2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9",
+      "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "id": "geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb"
+    },
+    "effective_reference": {
+      "footprints_sha256": "6f749b08dd7fd1875d3c4cb5de750eec4b92a5ef2e214c3437aa94d5a86f7c50",
+      "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "id": "geography:additive:6f749b08dd7fd1875d3c4cb5de750eec4b92a5ef2e214c3437aa94d5a86f7c50"
+    },
+    "patch_kind": "unassigned-native-cells-v1",
+    "method": "native-linear-evenodd-first-owner-v1"
+  },
+  "cell_keys_sha256": "109bbb652d48ad4a16a18d11d3e7272c9bd2bfc498df8589c1e0d185190c4f0f",
+  "summary": {
+    "cells": 307,
+    "baseAssigned": 0,
+    "patchAssigned": 0,
+    "effectiveAssigned": 0,
+    "basePatchOverlap": 0,
+    "baseMatchesCandidate": 0,
+    "patchMatchesCandidate": 0,
+    "effectiveMatchesCandidate": 0,
+    "base_unassigned": 307,
+    "additive_patch_unassigned": 307,
+    "effective_unassigned": 307
+  },
+  "interval_results": [
+    {
+      "interval_index": 1,
+      "key": {
+        "y": 131846,
+        "start": 153250,
+        "end": 153254,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082,
+          60394,
+          60523
+        ],
+        "physical_class": "land"
+      },
+      "cells": 4,
+      "base_owner_counts": {
+        "0": 4
+      },
+      "additive_patch_owner_counts": {
+        "0": 4
+      },
+      "effective_owner_counts": {
+        "0": 4
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 2,
+      "key": {
+        "y": 131846,
+        "start": 153256,
+        "end": 153257,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082,
+          60523
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 3,
+      "key": {
+        "y": 131847,
+        "start": 153258,
+        "end": 153262,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 4,
+      "base_owner_counts": {
+        "0": 4
+      },
+      "additive_patch_owner_counts": {
+        "0": 4
+      },
+      "effective_owner_counts": {
+        "0": 4
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 4,
+      "key": {
+        "y": 131850,
+        "start": 153246,
+        "end": 153247,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082,
+          60523
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 5,
+      "key": {
+        "y": 131850,
+        "start": 153272,
+        "end": 153273,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 6,
+      "key": {
+        "y": 131851,
+        "start": 153246,
+        "end": 153247,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082,
+          60523
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 7,
+      "key": {
+        "y": 131851,
+        "start": 153272,
+        "end": 153273,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 8,
+      "key": {
+        "y": 131852,
+        "start": 153271,
+        "end": 153274,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 3,
+      "base_owner_counts": {
+        "0": 3
+      },
+      "additive_patch_owner_counts": {
+        "0": 3
+      },
+      "effective_owner_counts": {
+        "0": 3
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 9,
+      "key": {
+        "y": 131853,
+        "start": 153270,
+        "end": 153274,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 4,
+      "base_owner_counts": {
+        "0": 4
+      },
+      "additive_patch_owner_counts": {
+        "0": 4
+      },
+      "effective_owner_counts": {
+        "0": 4
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 10,
+      "key": {
+        "y": 131854,
+        "start": 153243,
+        "end": 153244,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082,
+          60394,
+          60523
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 11,
+      "key": {
+        "y": 131854,
+        "start": 153244,
+        "end": 153245,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082,
+          60523
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 12,
+      "key": {
+        "y": 131854,
+        "start": 153270,
+        "end": 153272,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 13,
+      "key": {
+        "y": 131855,
+        "start": 153269,
+        "end": 153271,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 14,
+      "key": {
+        "y": 131856,
+        "start": 153220,
+        "end": 153221,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082,
+          60394,
+          60523
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 15,
+      "key": {
+        "y": 131856,
+        "start": 153223,
+        "end": 153224,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082,
+          60523
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 16,
+      "key": {
+        "y": 131856,
+        "start": 153268,
+        "end": 153271,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 3,
+      "base_owner_counts": {
+        "0": 3
+      },
+      "additive_patch_owner_counts": {
+        "0": 3
+      },
+      "effective_owner_counts": {
+        "0": 3
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 17,
+      "key": {
+        "y": 131857,
+        "start": 153219,
+        "end": 153220,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082,
+          60523
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 18,
+      "key": {
+        "y": 131857,
+        "start": 153220,
+        "end": 153221,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082,
+          60394,
+          60523
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 19,
+      "key": {
+        "y": 131857,
+        "start": 153222,
+        "end": 153223,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082,
+          60394,
+          60523
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 20,
+      "key": {
+        "y": 131857,
+        "start": 153268,
+        "end": 153270,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 21,
+      "key": {
+        "y": 131857,
+        "start": 153270,
+        "end": 153271,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082,
+          60195
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 22,
+      "key": {
+        "y": 131858,
+        "start": 153197,
+        "end": 153199,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082,
+          60394
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 23,
+      "key": {
+        "y": 131858,
+        "start": 153218,
+        "end": 153221,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 3,
+      "base_owner_counts": {
+        "0": 3
+      },
+      "additive_patch_owner_counts": {
+        "0": 3
+      },
+      "effective_owner_counts": {
+        "0": 3
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 24,
+      "key": {
+        "y": 131858,
+        "start": 153267,
+        "end": 153270,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 3,
+      "base_owner_counts": {
+        "0": 3
+      },
+      "additive_patch_owner_counts": {
+        "0": 3
+      },
+      "effective_owner_counts": {
+        "0": 3
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 25,
+      "key": {
+        "y": 131859,
+        "start": 153212,
+        "end": 153213,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082,
+          60394
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 26,
+      "key": {
+        "y": 131859,
+        "start": 153217,
+        "end": 153219,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 27,
+      "key": {
+        "y": 131859,
+        "start": 153267,
+        "end": 153270,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 3,
+      "base_owner_counts": {
+        "0": 3
+      },
+      "additive_patch_owner_counts": {
+        "0": 3
+      },
+      "effective_owner_counts": {
+        "0": 3
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 28,
+      "key": {
+        "y": 131860,
+        "start": 153214,
+        "end": 153215,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 29,
+      "key": {
+        "y": 131860,
+        "start": 153216,
+        "end": 153217,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 30,
+      "key": {
+        "y": 131860,
+        "start": 153266,
+        "end": 153268,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 31,
+      "key": {
+        "y": 131861,
+        "start": 153265,
+        "end": 153267,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 32,
+      "key": {
+        "y": 131862,
+        "start": 153265,
+        "end": 153267,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 33,
+      "key": {
+        "y": 131863,
+        "start": 153264,
+        "end": 153266,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 34,
+      "key": {
+        "y": 131864,
+        "start": 153264,
+        "end": 153266,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 35,
+      "key": {
+        "y": 131865,
+        "start": 153263,
+        "end": 153265,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 36,
+      "key": {
+        "y": 131866,
+        "start": 153262,
+        "end": 153265,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 3,
+      "base_owner_counts": {
+        "0": 3
+      },
+      "additive_patch_owner_counts": {
+        "0": 3
+      },
+      "effective_owner_counts": {
+        "0": 3
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 37,
+      "key": {
+        "y": 131867,
+        "start": 153262,
+        "end": 153264,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 38,
+      "key": {
+        "y": 131868,
+        "start": 153261,
+        "end": 153262,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 39,
+      "key": {
+        "y": 131868,
+        "start": 153262,
+        "end": 153263,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082,
+          60195
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 40,
+      "key": {
+        "y": 131870,
+        "start": 153184,
+        "end": 153185,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082,
+          60521
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 41,
+      "key": {
+        "y": 131871,
+        "start": 153184,
+        "end": 153185,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082,
+          60521
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 42,
+      "key": {
+        "y": 131872,
+        "start": 153184,
+        "end": 153185,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082,
+          60521
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 43,
+      "key": {
+        "y": 131898,
+        "start": 153274,
+        "end": 153275,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 44,
+      "key": {
+        "y": 131899,
+        "start": 153274,
+        "end": 153276,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 45,
+      "key": {
+        "y": 131900,
+        "start": 153274,
+        "end": 153277,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 3,
+      "base_owner_counts": {
+        "0": 3
+      },
+      "additive_patch_owner_counts": {
+        "0": 3
+      },
+      "effective_owner_counts": {
+        "0": 3
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 46,
+      "key": {
+        "y": 131901,
+        "start": 153274,
+        "end": 153277,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 3,
+      "base_owner_counts": {
+        "0": 3
+      },
+      "additive_patch_owner_counts": {
+        "0": 3
+      },
+      "effective_owner_counts": {
+        "0": 3
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 47,
+      "key": {
+        "y": 131902,
+        "start": 153273,
+        "end": 153276,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 3,
+      "base_owner_counts": {
+        "0": 3
+      },
+      "additive_patch_owner_counts": {
+        "0": 3
+      },
+      "effective_owner_counts": {
+        "0": 3
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 48,
+      "key": {
+        "y": 131903,
+        "start": 153273,
+        "end": 153274,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 49,
+      "key": {
+        "y": 131903,
+        "start": 153274,
+        "end": 153275,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 50,
+      "key": {
+        "y": 131904,
+        "start": 153273,
+        "end": 153274,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082,
+          60195
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 51,
+      "key": {
+        "y": 131910,
+        "start": 153271,
+        "end": 153272,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 52,
+      "key": {
+        "y": 131911,
+        "start": 153165,
+        "end": 153166,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082,
+          60521
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 53,
+      "key": {
+        "y": 131911,
+        "start": 153271,
+        "end": 153272,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 54,
+      "key": {
+        "y": 131914,
+        "start": 153159,
+        "end": 153160,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082,
+          60394,
+          60521
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 55,
+      "key": {
+        "y": 131915,
+        "start": 153271,
+        "end": 153272,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 56,
+      "key": {
+        "y": 131916,
+        "start": 153271,
+        "end": 153272,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 57,
+      "key": {
+        "y": 131918,
+        "start": 153272,
+        "end": 153273,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 58,
+      "key": {
+        "y": 131919,
+        "start": 153272,
+        "end": 153273,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 59,
+      "key": {
+        "y": 131920,
+        "start": 153272,
+        "end": 153273,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 60,
+      "key": {
+        "y": 131930,
+        "start": 153292,
+        "end": 153294,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 61,
+      "key": {
+        "y": 131931,
+        "start": 153294,
+        "end": 153296,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 62,
+      "key": {
+        "y": 131932,
+        "start": 153295,
+        "end": 153297,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 63,
+      "key": {
+        "y": 131940,
+        "start": 153143,
+        "end": 153144,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082,
+          60394,
+          60519
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 64,
+      "key": {
+        "y": 131945,
+        "start": 153142,
+        "end": 153143,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082,
+          60394,
+          60519
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 65,
+      "key": {
+        "y": 131946,
+        "start": 153142,
+        "end": 153143,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082,
+          60394,
+          60519
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 66,
+      "key": {
+        "y": 131956,
+        "start": 153308,
+        "end": 153309,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 67,
+      "key": {
+        "y": 131959,
+        "start": 153309,
+        "end": 153310,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 68,
+      "key": {
+        "y": 131965,
+        "start": 153125,
+        "end": 153126,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082,
+          60394,
+          60519
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 69,
+      "key": {
+        "y": 131965,
+        "start": 153126,
+        "end": 153127,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082,
+          60394,
+          60519
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 70,
+      "key": {
+        "y": 131965,
+        "start": 153127,
+        "end": 153128,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082,
+          60519
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 71,
+      "key": {
+        "y": 131966,
+        "start": 153123,
+        "end": 153126,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082,
+          60519
+        ],
+        "physical_class": "land"
+      },
+      "cells": 3,
+      "base_owner_counts": {
+        "0": 3
+      },
+      "additive_patch_owner_counts": {
+        "0": 3
+      },
+      "effective_owner_counts": {
+        "0": 3
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 72,
+      "key": {
+        "y": 131967,
+        "start": 153121,
+        "end": 153122,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082,
+          60519
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 73,
+      "key": {
+        "y": 131967,
+        "start": 153122,
+        "end": 153124,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082,
+          60519
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 74,
+      "key": {
+        "y": 131968,
+        "start": 153120,
+        "end": 153122,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082,
+          60519
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 75,
+      "key": {
+        "y": 131969,
+        "start": 153118,
+        "end": 153119,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082,
+          60394,
+          60519
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 76,
+      "key": {
+        "y": 131969,
+        "start": 153314,
+        "end": 153315,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 77,
+      "key": {
+        "y": 131970,
+        "start": 153315,
+        "end": 153316,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 78,
+      "key": {
+        "y": 131971,
+        "start": 153316,
+        "end": 153317,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 79,
+      "key": {
+        "y": 131973,
+        "start": 153317,
+        "end": 153318,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 80,
+      "key": {
+        "y": 131979,
+        "start": 153110,
+        "end": 153111,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082,
+          60394,
+          60519
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 81,
+      "key": {
+        "y": 131980,
+        "start": 153109,
+        "end": 153110,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082,
+          60394,
+          60519
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 82,
+      "key": {
+        "y": 131981,
+        "start": 153109,
+        "end": 153110,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082,
+          60519
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 83,
+      "key": {
+        "y": 131983,
+        "start": 153108,
+        "end": 153109,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082,
+          60394,
+          60519
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 84,
+      "key": {
+        "y": 131987,
+        "start": 153106,
+        "end": 153107,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 85,
+      "key": {
+        "y": 131988,
+        "start": 153105,
+        "end": 153106,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 86,
+      "key": {
+        "y": 131989,
+        "start": 153104,
+        "end": 153105,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 87,
+      "key": {
+        "y": 131990,
+        "start": 153102,
+        "end": 153104,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 88,
+      "key": {
+        "y": 131991,
+        "start": 153101,
+        "end": 153103,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 89,
+      "key": {
+        "y": 131992,
+        "start": 153100,
+        "end": 153101,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082,
+          60394
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 90,
+      "key": {
+        "y": 131992,
+        "start": 153101,
+        "end": 153102,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 91,
+      "key": {
+        "y": 131993,
+        "start": 153099,
+        "end": 153100,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082,
+          60394
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 92,
+      "key": {
+        "y": 131993,
+        "start": 153100,
+        "end": 153101,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 93,
+      "key": {
+        "y": 131994,
+        "start": 153099,
+        "end": 153100,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 94,
+      "key": {
+        "y": 131997,
+        "start": 153096,
+        "end": 153097,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 95,
+      "key": {
+        "y": 131998,
+        "start": 153094,
+        "end": 153095,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082,
+          60394
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 96,
+      "key": {
+        "y": 131998,
+        "start": 153095,
+        "end": 153096,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 97,
+      "key": {
+        "y": 131999,
+        "start": 153093,
+        "end": 153094,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 98,
+      "key": {
+        "y": 131999,
+        "start": 153094,
+        "end": 153095,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 99,
+      "key": {
+        "y": 132000,
+        "start": 153092,
+        "end": 153094,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 100,
+      "key": {
+        "y": 132001,
+        "start": 153091,
+        "end": 153093,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 101,
+      "key": {
+        "y": 132002,
+        "start": 153091,
+        "end": 153092,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 102,
+      "key": {
+        "y": 132003,
+        "start": 153091,
+        "end": 153092,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 103,
+      "key": {
+        "y": 132004,
+        "start": 153090,
+        "end": 153091,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 104,
+      "key": {
+        "y": 132014,
+        "start": 153068,
+        "end": 153069,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 105,
+      "key": {
+        "y": 132016,
+        "start": 153069,
+        "end": 153070,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 106,
+      "key": {
+        "y": 132050,
+        "start": 152814,
+        "end": 152815,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079,
+          60518
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 107,
+      "key": {
+        "y": 132059,
+        "start": 152737,
+        "end": 152738,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55079,
+          60394
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 108,
+      "key": {
+        "y": 132060,
+        "start": 152741,
+        "end": 152745,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 4,
+      "base_owner_counts": {
+        "0": 4
+      },
+      "additive_patch_owner_counts": {
+        "0": 4
+      },
+      "effective_owner_counts": {
+        "0": 4
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 109,
+      "key": {
+        "y": 132060,
+        "start": 152745,
+        "end": 152746,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 110,
+      "key": {
+        "y": 132061,
+        "start": 152724,
+        "end": 152725,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55079,
+          60394,
+          60517
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 111,
+      "key": {
+        "y": 132061,
+        "start": 152745,
+        "end": 152747,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 112,
+      "key": {
+        "y": 132061,
+        "start": 152747,
+        "end": 152748,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55079,
+          60517
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 113,
+      "key": {
+        "y": 132062,
+        "start": 152749,
+        "end": 152751,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55079,
+          60517
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 114,
+      "key": {
+        "y": 132063,
+        "start": 152721,
+        "end": 152722,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079,
+          60517
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 115,
+      "key": {
+        "y": 132063,
+        "start": 152752,
+        "end": 152753,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55079,
+          60517
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 116,
+      "key": {
+        "y": 132063,
+        "start": 152822,
+        "end": 152823,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 117,
+      "key": {
+        "y": 132064,
+        "start": 152720,
+        "end": 152721,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079,
+          60517
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 118,
+      "key": {
+        "y": 132064,
+        "start": 152824,
+        "end": 152825,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 119,
+      "key": {
+        "y": 132065,
+        "start": 152719,
+        "end": 152720,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079,
+          60517
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 120,
+      "key": {
+        "y": 132065,
+        "start": 152825,
+        "end": 152826,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 121,
+      "key": {
+        "y": 132066,
+        "start": 152718,
+        "end": 152719,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079,
+          60394,
+          60517
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 122,
+      "key": {
+        "y": 132071,
+        "start": 152781,
+        "end": 152782,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55079,
+          60394
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 123,
+      "key": {
+        "y": 132075,
+        "start": 152781,
+        "end": 152782,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 124,
+      "key": {
+        "y": 132076,
+        "start": 152781,
+        "end": 152782,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 125,
+      "key": {
+        "y": 132077,
+        "start": 152781,
+        "end": 152782,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 126,
+      "key": {
+        "y": 132078,
+        "start": 152770,
+        "end": 152771,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55079,
+          60394
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 127,
+      "key": {
+        "y": 132079,
+        "start": 152773,
+        "end": 152774,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 128,
+      "key": {
+        "y": 132080,
+        "start": 152775,
+        "end": 152776,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 129,
+      "key": {
+        "y": 132080,
+        "start": 152776,
+        "end": 152777,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079,
+          60394
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 130,
+      "key": {
+        "y": 132081,
+        "start": 152778,
+        "end": 152779,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 131,
+      "key": {
+        "y": 132084,
+        "start": 153021,
+        "end": 153022,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082,
+          60520
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 132,
+      "key": {
+        "y": 132085,
+        "start": 153021,
+        "end": 153022,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082,
+          60520
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 133,
+      "key": {
+        "y": 132087,
+        "start": 153020,
+        "end": 153021,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082,
+          60394,
+          60520
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 134,
+      "key": {
+        "y": 132088,
+        "start": 153020,
+        "end": 153021,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082,
+          60394,
+          60520
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 135,
+      "key": {
+        "y": 132089,
+        "start": 153020,
+        "end": 153021,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55082,
+          60394,
+          60520
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 136,
+      "key": {
+        "y": 132120,
+        "start": 152847,
+        "end": 152848,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 137,
+      "key": {
+        "y": 132121,
+        "start": 152847,
+        "end": 152848,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 138,
+      "key": {
+        "y": 132122,
+        "start": 152848,
+        "end": 152849,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 139,
+      "key": {
+        "y": 132123,
+        "start": 152848,
+        "end": 152850,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 140,
+      "key": {
+        "y": 132124,
+        "start": 152848,
+        "end": 152850,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 141,
+      "key": {
+        "y": 132124,
+        "start": 152850,
+        "end": 152851,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55079,
+          60394
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 142,
+      "key": {
+        "y": 132125,
+        "start": 152849,
+        "end": 152850,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 143,
+      "key": {
+        "y": 132126,
+        "start": 152849,
+        "end": 152850,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 144,
+      "key": {
+        "y": 132127,
+        "start": 152849,
+        "end": 152850,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 145,
+      "key": {
+        "y": 132128,
+        "start": 152849,
+        "end": 152851,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 146,
+      "key": {
+        "y": 132129,
+        "start": 152850,
+        "end": 152851,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 147,
+      "key": {
+        "y": 132130,
+        "start": 152850,
+        "end": 152851,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 148,
+      "key": {
+        "y": 132131,
+        "start": 152850,
+        "end": 152852,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 149,
+      "key": {
+        "y": 132132,
+        "start": 152851,
+        "end": 152852,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 150,
+      "key": {
+        "y": 132133,
+        "start": 152851,
+        "end": 152852,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 151,
+      "key": {
+        "y": 132133,
+        "start": 152852,
+        "end": 152853,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55079,
+          60394
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 152,
+      "key": {
+        "y": 132134,
+        "start": 152851,
+        "end": 152853,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 153,
+      "key": {
+        "y": 132135,
+        "start": 152851,
+        "end": 152853,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 154,
+      "key": {
+        "y": 132136,
+        "start": 152852,
+        "end": 152853,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 155,
+      "key": {
+        "y": 132136,
+        "start": 153467,
+        "end": 153468,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 156,
+      "key": {
+        "y": 132137,
+        "start": 152852,
+        "end": 152853,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 157,
+      "key": {
+        "y": 132137,
+        "start": 153467,
+        "end": 153468,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 158,
+      "key": {
+        "y": 132138,
+        "start": 152852,
+        "end": 152853,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 159,
+      "key": {
+        "y": 132138,
+        "start": 153466,
+        "end": 153467,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082,
+          60195
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 160,
+      "key": {
+        "y": 132138,
+        "start": 153467,
+        "end": 153469,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 161,
+      "key": {
+        "y": 132139,
+        "start": 152921,
+        "end": 152922,
+        "candidate_owner_id": 39327,
+        "source_feature_indices": [
+          55056,
+          55080,
+          60520
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 162,
+      "key": {
+        "y": 132139,
+        "start": 153466,
+        "end": 153469,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 3,
+      "base_owner_counts": {
+        "0": 3
+      },
+      "additive_patch_owner_counts": {
+        "0": 3
+      },
+      "effective_owner_counts": {
+        "0": 3
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 163,
+      "key": {
+        "y": 132140,
+        "start": 153467,
+        "end": 153470,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 3,
+      "base_owner_counts": {
+        "0": 3
+      },
+      "additive_patch_owner_counts": {
+        "0": 3
+      },
+      "effective_owner_counts": {
+        "0": 3
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 164,
+      "key": {
+        "y": 132141,
+        "start": 152918,
+        "end": 152919,
+        "candidate_owner_id": 39327,
+        "source_feature_indices": [
+          55056,
+          55080,
+          60520
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 165,
+      "key": {
+        "y": 132141,
+        "start": 153467,
+        "end": 153469,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 166,
+      "key": {
+        "y": 132142,
+        "start": 153467,
+        "end": 153468,
+        "candidate_owner_id": 39309,
+        "source_feature_indices": [
+          55057,
+          55082
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 167,
+      "key": {
+        "y": 132149,
+        "start": 152897,
+        "end": 152898,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55079,
+          60520
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 168,
+      "key": {
+        "y": 132150,
+        "start": 152894,
+        "end": 152895,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55056,
+          55079,
+          60520
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 169,
+      "key": {
+        "y": 132153,
+        "start": 152886,
+        "end": 152887,
+        "candidate_owner_id": 39312,
+        "source_feature_indices": [
+          55079,
+          60394
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 170,
+      "key": {
+        "y": 132190,
+        "start": 153473,
+        "end": 153474,
+        "candidate_owner_id": 39318,
+        "source_feature_indices": [
+          55057,
+          55083
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 171,
+      "key": {
+        "y": 132411,
+        "start": 153533,
+        "end": 153534,
+        "candidate_owner_id": 39319,
+        "source_feature_indices": [
+          55084
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 172,
+      "key": {
+        "y": 132646,
+        "start": 153560,
+        "end": 153561,
+        "candidate_owner_id": 39302,
+        "source_feature_indices": [
+          55057,
+          55085,
+          60195
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 173,
+      "key": {
+        "y": 132647,
+        "start": 153560,
+        "end": 153561,
+        "candidate_owner_id": 39302,
+        "source_feature_indices": [
+          55057,
+          55085
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 174,
+      "key": {
+        "y": 132649,
+        "start": 153559,
+        "end": 153560,
+        "candidate_owner_id": 39302,
+        "source_feature_indices": [
+          55085,
+          60195
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 175,
+      "key": {
+        "y": 132651,
+        "start": 153558,
+        "end": 153559,
+        "candidate_owner_id": 39302,
+        "source_feature_indices": [
+          55085,
+          60195
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 176,
+      "key": {
+        "y": 132653,
+        "start": 153557,
+        "end": 153558,
+        "candidate_owner_id": 39302,
+        "source_feature_indices": [
+          55085,
+          60195
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 177,
+      "key": {
+        "y": 132654,
+        "start": 153557,
+        "end": 153558,
+        "candidate_owner_id": 39302,
+        "source_feature_indices": [
+          55085,
+          60195
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 178,
+      "key": {
+        "y": 132655,
+        "start": 153557,
+        "end": 153558,
+        "candidate_owner_id": 39302,
+        "source_feature_indices": [
+          55057,
+          55085
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 179,
+      "key": {
+        "y": 132656,
+        "start": 153557,
+        "end": 153558,
+        "candidate_owner_id": 39302,
+        "source_feature_indices": [
+          55057,
+          55085
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 180,
+      "key": {
+        "y": 132657,
+        "start": 153557,
+        "end": 153558,
+        "candidate_owner_id": 39302,
+        "source_feature_indices": [
+          55057,
+          55085
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 181,
+      "key": {
+        "y": 132658,
+        "start": 153557,
+        "end": 153558,
+        "candidate_owner_id": 39302,
+        "source_feature_indices": [
+          55057,
+          55085
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 182,
+      "key": {
+        "y": 132659,
+        "start": 153556,
+        "end": 153557,
+        "candidate_owner_id": 39302,
+        "source_feature_indices": [
+          55057,
+          55085
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 183,
+      "key": {
+        "y": 132659,
+        "start": 153557,
+        "end": 153558,
+        "candidate_owner_id": 39302,
+        "source_feature_indices": [
+          55085,
+          60195
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 184,
+      "key": {
+        "y": 132660,
+        "start": 153556,
+        "end": 153557,
+        "candidate_owner_id": 39302,
+        "source_feature_indices": [
+          55057,
+          55085
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 185,
+      "key": {
+        "y": 132661,
+        "start": 153556,
+        "end": 153557,
+        "candidate_owner_id": 39302,
+        "source_feature_indices": [
+          55085,
+          60195
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 186,
+      "key": {
+        "y": 132810,
+        "start": 152138,
+        "end": 152139,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          55075
+        ],
+        "physical_class": "inland-water"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 187,
+      "key": {
+        "y": 132811,
+        "start": 152136,
+        "end": 152137,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          55058,
+          55075
+        ],
+        "physical_class": "inland-water"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 188,
+      "key": {
+        "y": 132812,
+        "start": 152134,
+        "end": 152135,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          55058,
+          55075
+        ],
+        "physical_class": "inland-water"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 189,
+      "key": {
+        "y": 132813,
+        "start": 152132,
+        "end": 152133,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          18746,
+          55058,
+          55075
+        ],
+        "physical_class": "inland-water"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 190,
+      "key": {
+        "y": 132813,
+        "start": 152133,
+        "end": 152134,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          55058,
+          55075
+        ],
+        "physical_class": "inland-water"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 191,
+      "key": {
+        "y": 132814,
+        "start": 152130,
+        "end": 152131,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          18746,
+          55058,
+          55075
+        ],
+        "physical_class": "inland-water"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 192,
+      "key": {
+        "y": 132814,
+        "start": 152131,
+        "end": 152132,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          55058,
+          55075
+        ],
+        "physical_class": "inland-water"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 193,
+      "key": {
+        "y": 132815,
+        "start": 152129,
+        "end": 152130,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          55058,
+          55075
+        ],
+        "physical_class": "inland-water"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 194,
+      "key": {
+        "y": 132817,
+        "start": 152126,
+        "end": 152127,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          55058,
+          55075
+        ],
+        "physical_class": "inland-water"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 195,
+      "key": {
+        "y": 132852,
+        "start": 153047,
+        "end": 153048,
+        "candidate_owner_id": 39308,
+        "source_feature_indices": [
+          2022,
+          55087
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 196,
+      "key": {
+        "y": 132852,
+        "start": 153058,
+        "end": 153059,
+        "candidate_owner_id": 39308,
+        "source_feature_indices": [
+          2022,
+          55087
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 197,
+      "key": {
+        "y": 132941,
+        "start": 152113,
+        "end": 152114,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          55075
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 198,
+      "key": {
+        "y": 132984,
+        "start": 152130,
+        "end": 152131,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          18746,
+          55075
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 199,
+      "key": {
+        "y": 132988,
+        "start": 152129,
+        "end": 152130,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          18746,
+          55075
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 200,
+      "key": {
+        "y": 133036,
+        "start": 152150,
+        "end": 152151,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          18746,
+          55058,
+          55075
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 201,
+      "key": {
+        "y": 133036,
+        "start": 152152,
+        "end": 152154,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          55058,
+          55075
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 202,
+      "key": {
+        "y": 133038,
+        "start": 152158,
+        "end": 152159,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          55058,
+          55075
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 203,
+      "key": {
+        "y": 133039,
+        "start": 152158,
+        "end": 152159,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          18746,
+          55075
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 204,
+      "key": {
+        "y": 133039,
+        "start": 152159,
+        "end": 152161,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          55058,
+          55075
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 205,
+      "key": {
+        "y": 133040,
+        "start": 152158,
+        "end": 152159,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          55075
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 206,
+      "key": {
+        "y": 133040,
+        "start": 152159,
+        "end": 152163,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          55058,
+          55075
+        ],
+        "physical_class": "land"
+      },
+      "cells": 4,
+      "base_owner_counts": {
+        "0": 4
+      },
+      "additive_patch_owner_counts": {
+        "0": 4
+      },
+      "effective_owner_counts": {
+        "0": 4
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 207,
+      "key": {
+        "y": 133041,
+        "start": 152158,
+        "end": 152159,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          55075
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 208,
+      "key": {
+        "y": 133041,
+        "start": 152159,
+        "end": 152165,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          55058,
+          55075
+        ],
+        "physical_class": "land"
+      },
+      "cells": 6,
+      "base_owner_counts": {
+        "0": 6
+      },
+      "additive_patch_owner_counts": {
+        "0": 6
+      },
+      "effective_owner_counts": {
+        "0": 6
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 209,
+      "key": {
+        "y": 133042,
+        "start": 152159,
+        "end": 152167,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          55058,
+          55075
+        ],
+        "physical_class": "land"
+      },
+      "cells": 8,
+      "base_owner_counts": {
+        "0": 8
+      },
+      "additive_patch_owner_counts": {
+        "0": 8
+      },
+      "effective_owner_counts": {
+        "0": 8
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 210,
+      "key": {
+        "y": 133043,
+        "start": 152165,
+        "end": 152169,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          55058,
+          55075
+        ],
+        "physical_class": "land"
+      },
+      "cells": 4,
+      "base_owner_counts": {
+        "0": 4
+      },
+      "additive_patch_owner_counts": {
+        "0": 4
+      },
+      "effective_owner_counts": {
+        "0": 4
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 211,
+      "key": {
+        "y": 133044,
+        "start": 152169,
+        "end": 152171,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          55058,
+          55075
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 212,
+      "key": {
+        "y": 133052,
+        "start": 152203,
+        "end": 152204,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          55058,
+          55075
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 213,
+      "key": {
+        "y": 133078,
+        "start": 152228,
+        "end": 152229,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          18746,
+          55058,
+          55075
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 214,
+      "key": {
+        "y": 133078,
+        "start": 152229,
+        "end": 152231,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          55058,
+          55075
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 215,
+      "key": {
+        "y": 133079,
+        "start": 152229,
+        "end": 152231,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          55058,
+          55075
+        ],
+        "physical_class": "land"
+      },
+      "cells": 2,
+      "base_owner_counts": {
+        "0": 2
+      },
+      "additive_patch_owner_counts": {
+        "0": 2
+      },
+      "effective_owner_counts": {
+        "0": 2
+      },
+      "base_patch_overlap_cells": 0
+    },
+    {
+      "interval_index": 216,
+      "key": {
+        "y": 133080,
+        "start": 152230,
+        "end": 152231,
+        "candidate_owner_id": 39326,
+        "source_feature_indices": [
+          55058,
+          55075
+        ],
+        "physical_class": "land"
+      },
+      "cells": 1,
+      "base_owner_counts": {
+        "0": 1
+      },
+      "additive_patch_owner_counts": {
+        "0": 1
+      },
+      "effective_owner_counts": {
+        "0": 1
+      },
+      "base_patch_overlap_cells": 0
+    }
+  ],
+  "output_payload_sha256": "7e7497cfebf1254f3b630f0747350517fe968872c2d65040dc024f01788ba4aa",
+  "final_cover_provenance_notice": {
+    "role": "historical_only",
+    "historical_execution_source_commit": "77609a1f159bfee954e52d48a883c5fe3e4b59f5",
+    "notice": "This immutable replay remains an accurate historical observation of the inputs named in its original pins. It is not the operative current-owner observation for the final cover because its selected additive patch/sidecar were original-queue-era SLB inputs.",
+    "superseded_for_current_owner_claims_by": {
+      "path": "contract-amendment-materialized-20261019/current-native-bridge.json",
+      "bytes": 47624,
+      "sha256": "401189eea736614ecbdbe9c33e8001fb8f74d6202567d77776b96addf429fd84",
+      "accepted_main_commit": "962811940c1aa62ed432ccf8c81c062d3a136a7c",
+      "bridge_data_commit": "962811940c1aa62ed432ccf8c81c062d3a136a7c",
+      "purpose": "operative current native owner observation for all 307 RWA original keys; qualification=false"
+    },
+    "current_bridge_qualification": false
+  }
+}
