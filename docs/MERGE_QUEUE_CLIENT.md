@@ -102,6 +102,11 @@ fresh main. Settle any retained live-operation reservation through its workflow.
 merge. Observing or retrying grants no new review, science, publication or provider
 permission.
 
+In the final delivery handoff, state the actual local cleanup outcome described in
+[Finish and release](LOCAL_WORKSPACES.md#finish-and-release), including any retained
+or blocked cleanup and its responsible next action. The queue's remote head and
+candidate cleanup results do not establish local workspace cleanup.
+
 ## Transition from the retired scheduler
 
 Before native direct submissions, the coordinating integrator must enumerate and
