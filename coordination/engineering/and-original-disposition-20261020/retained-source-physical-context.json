@@ -1,0 +1,1248 @@
+{
+  "original_scope": {
+    "original_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "package": {
+      "package_id": "gb-AND-ADM1--repair-evaluation",
+      "primary_source": "gb:AND:ADM1",
+      "source_family_index": 6,
+      "category": "repair-evaluation",
+      "native_cells": 72,
+      "land_cells": 72,
+      "inland_water_cells": 0,
+      "source_relative_cells": 0,
+      "interval_segments": 15,
+      "owners": [
+        7109
+      ],
+      "source_features": [
+        661,
+        662,
+        663,
+        665,
+        666,
+        23686
+      ],
+      "source_families": [
+        6,
+        103
+      ],
+      "native_blocks": [
+        23
+      ],
+      "provinces": [
+        "framework:province:andorra:786178656c22"
+      ],
+      "location_count": 1,
+      "source_feature_count": 6,
+      "locality_count": 1,
+      "cost": {
+        "primary_source_decoded_bytes": 13699,
+        "all_required_source_decoded_bytes": 3774795,
+        "primary_full_source_raster_measured_seconds": 0.055,
+        "source_interval_segments": 15,
+        "maximum_native_rows_per_execution_frame": 4096,
+        "observed_global_census_peak_rss_bytes": 884973568
+      },
+      "evidence": {
+        "selection": "ownership-binding.json",
+        "lineage": "lineage.json",
+        "territorial_source_catalogue": "retained-source-catalogue.json",
+        "territorial_catalogue_sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+        "source_features": "source-feature-roster.json",
+        "territorial_native_blocks": "source-candidates-block-NNN.json.gz",
+        "physical": "physical-unassigned-summary.json",
+        "source_domain_transform": []
+      },
+      "work": {
+        "question": "Qualify the unique current-location source membership, retained territorial exclusions and complete source competitors; then derive and verify a zero-reassignment additive native patch.",
+        "completion": "Every exact interval is either a qualified additive repair to its recorded location or a documented exception; run actual selected-native conservation and source/physical witness checks. Existing river water remains location-owned.",
+        "priority": 1
+      },
+      "execution": {
+        "command": "node source-batch-intervals.mjs gb-AND-ADM1--repair-evaluation OUTPUT_DIRECTORY",
+        "output_columns": [
+          "y",
+          "start",
+          "end",
+          "candidate_owner_indices",
+          "source_feature_indices",
+          "physical_class"
+        ]
+      }
+    },
+    "contact_roster": [
+      {
+        "source_index": 661,
+        "family_index": 6,
+        "source_id": "gb:AND:ADM1:23515209B82836637605816",
+        "ordinal": 0,
+        "owners": [
+          7109
+        ],
+        "name": "Sant Julia de Loria",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 662,
+        "family_index": 6,
+        "source_id": "gb:AND:ADM1:23515209B25074230340039",
+        "ordinal": 1,
+        "owners": [
+          7109
+        ],
+        "name": "Canillo",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 663,
+        "family_index": 6,
+        "source_id": "gb:AND:ADM1:23515209B96881004874456",
+        "ordinal": 2,
+        "owners": [
+          7109
+        ],
+        "name": "Ordino",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 665,
+        "family_index": 6,
+        "source_id": "gb:AND:ADM1:23515209B87138494217820",
+        "ordinal": 4,
+        "owners": [
+          7109
+        ],
+        "name": "Encamp",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 666,
+        "family_index": 6,
+        "source_id": "gb:AND:ADM1:23515209B43580600008856",
+        "ordinal": 5,
+        "owners": [
+          7109
+        ],
+        "name": "Escaldes-Engordany",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 23686,
+        "family_index": 103,
+        "source_id": "gb:ESP:ADM2:93216281B77878961012946",
+        "ordinal": 24,
+        "owners": [],
+        "name": "Lleida",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "recorded_owner_lineage": [
+      {
+        "id": "atlas:territory:AND",
+        "index": 7109,
+        "bounds": [
+          132111.49178277777,
+          96675.08481113415,
+          132384.14442277778,
+          96897.97212199564
+        ],
+        "province_id": "framework:province:andorra:786178656c22",
+        "province_index": 587,
+        "name": "Andorra",
+        "reference_owner": "Andorra",
+        "source_id": "atlas:territory:AND",
+        "location_basis": "Compact source country/territory",
+        "source_atoms": [
+          "gb:AND:ADM1:23515209B12259378502884",
+          "gb:AND:ADM1:23515209B24107209170284",
+          "gb:AND:ADM1:23515209B25074230340039",
+          "gb:AND:ADM1:23515209B43580600008856",
+          "gb:AND:ADM1:23515209B82836637605816",
+          "gb:AND:ADM1:23515209B87138494217820",
+          "gb:AND:ADM1:23515209B96881004874456"
+        ]
+      }
+    ]
+  },
+  "original_key_join": {
+    "version": 1,
+    "kind": "and-original-source-candidate-interval-keys",
+    "scope_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "queue_path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+    "package_id": "gb-AND-ADM1--repair-evaluation",
+    "package_row": {
+      "native_cells": 72,
+      "land_cells": 72,
+      "inland_water_cells": 0,
+      "interval_segments": 15,
+      "owners": [
+        7109
+      ],
+      "source_features": [
+        661,
+        662,
+        663,
+        665,
+        666,
+        23686
+      ],
+      "source_families": [
+        6,
+        103
+      ],
+      "native_blocks": [
+        23
+      ]
+    },
+    "key_derivation": "Exact row intervals from original source-candidates-block-023 where candidates owner list is singleton [7109], matching original package native_cells=72 and interval_segments=15. This is retained census join, not an owner observer or geometry computation.",
+    "inputs": {
+      "source_candidates": {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-023.json.gz",
+        "blob": "d02153e8510a9d29bcb7629cc69a6354518f5124",
+        "compressed_bytes": 681528,
+        "sha256": "228d2bb7727267ddeba240017f9eb1c737e91da7fa8982018b230602b1d81d2b"
+      },
+      "physical_support": {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-023.json.gz",
+        "blob": "b0ff34869d57ca095bce9014383cc5648f6d2e24",
+        "compressed_bytes": 513203,
+        "sha256": "a1c483ffe23e3d215885edc9f16a12ce40c7f092149479c418493165e8c70868"
+      },
+      "inland_water_support": {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-023.json.gz",
+        "blob": "9aed7fccdc14286c57dda521b97152e782ea4da3",
+        "compressed_bytes": 88155,
+        "sha256": "3ed440299bd5498ec6ad6c1bc03bb5332503d4e84a81a5f9005d603bf1eb0a7d"
+      }
+    },
+    "retained_interval_rows": [
+      {
+        "y": 96679,
+        "start": 132197,
+        "end": 132198,
+        "owners": [
+          7109
+        ],
+        "source_features": [
+          663
+        ]
+      },
+      {
+        "y": 96680,
+        "start": 132195,
+        "end": 132197,
+        "owners": [
+          7109
+        ],
+        "source_features": [
+          663
+        ]
+      },
+      {
+        "y": 96681,
+        "start": 132194,
+        "end": 132195,
+        "owners": [
+          7109
+        ],
+        "source_features": [
+          663
+        ]
+      },
+      {
+        "y": 96682,
+        "start": 132192,
+        "end": 132193,
+        "owners": [
+          7109
+        ],
+        "source_features": [
+          663
+        ]
+      },
+      {
+        "y": 96703,
+        "start": 132285,
+        "end": 132286,
+        "owners": [
+          7109
+        ],
+        "source_features": [
+          662
+        ]
+      },
+      {
+        "y": 96825,
+        "start": 132338,
+        "end": 132339,
+        "owners": [
+          7109
+        ],
+        "source_features": [
+          665
+        ]
+      },
+      {
+        "y": 96873,
+        "start": 132229,
+        "end": 132230,
+        "owners": [
+          7109
+        ],
+        "source_features": [
+          666
+        ]
+      },
+      {
+        "y": 96885,
+        "start": 132136,
+        "end": 132137,
+        "owners": [
+          7109
+        ],
+        "source_features": [
+          661
+        ]
+      },
+      {
+        "y": 96886,
+        "start": 132137,
+        "end": 132140,
+        "owners": [
+          7109
+        ],
+        "source_features": [
+          661
+        ]
+      },
+      {
+        "y": 96887,
+        "start": 132138,
+        "end": 132144,
+        "owners": [
+          7109
+        ],
+        "source_features": [
+          661
+        ]
+      },
+      {
+        "y": 96888,
+        "start": 132139,
+        "end": 132148,
+        "owners": [
+          7109
+        ],
+        "source_features": [
+          661
+        ]
+      },
+      {
+        "y": 96889,
+        "start": 132140,
+        "end": 132152,
+        "owners": [
+          7109
+        ],
+        "source_features": [
+          661
+        ]
+      },
+      {
+        "y": 96890,
+        "start": 132141,
+        "end": 132156,
+        "owners": [
+          7109
+        ],
+        "source_features": [
+          661
+        ]
+      },
+      {
+        "y": 96891,
+        "start": 132142,
+        "end": 132143,
+        "owners": [
+          7109
+        ],
+        "source_features": [
+          661,
+          23686
+        ]
+      },
+      {
+        "y": 96891,
+        "start": 132143,
+        "end": 132160,
+        "owners": [
+          7109
+        ],
+        "source_features": [
+          661
+        ]
+      }
+    ],
+    "exact_keys": [
+      {
+        "y": 96679,
+        "x": 132197
+      },
+      {
+        "y": 96680,
+        "x": 132195
+      },
+      {
+        "y": 96680,
+        "x": 132196
+      },
+      {
+        "y": 96681,
+        "x": 132194
+      },
+      {
+        "y": 96682,
+        "x": 132192
+      },
+      {
+        "y": 96703,
+        "x": 132285
+      },
+      {
+        "y": 96825,
+        "x": 132338
+      },
+      {
+        "y": 96873,
+        "x": 132229
+      },
+      {
+        "y": 96885,
+        "x": 132136
+      },
+      {
+        "y": 96886,
+        "x": 132137
+      },
+      {
+        "y": 96886,
+        "x": 132138
+      },
+      {
+        "y": 96886,
+        "x": 132139
+      },
+      {
+        "y": 96887,
+        "x": 132138
+      },
+      {
+        "y": 96887,
+        "x": 132139
+      },
+      {
+        "y": 96887,
+        "x": 132140
+      },
+      {
+        "y": 96887,
+        "x": 132141
+      },
+      {
+        "y": 96887,
+        "x": 132142
+      },
+      {
+        "y": 96887,
+        "x": 132143
+      },
+      {
+        "y": 96888,
+        "x": 132139
+      },
+      {
+        "y": 96888,
+        "x": 132140
+      },
+      {
+        "y": 96888,
+        "x": 132141
+      },
+      {
+        "y": 96888,
+        "x": 132142
+      },
+      {
+        "y": 96888,
+        "x": 132143
+      },
+      {
+        "y": 96888,
+        "x": 132144
+      },
+      {
+        "y": 96888,
+        "x": 132145
+      },
+      {
+        "y": 96888,
+        "x": 132146
+      },
+      {
+        "y": 96888,
+        "x": 132147
+      },
+      {
+        "y": 96889,
+        "x": 132140
+      },
+      {
+        "y": 96889,
+        "x": 132141
+      },
+      {
+        "y": 96889,
+        "x": 132142
+      },
+      {
+        "y": 96889,
+        "x": 132143
+      },
+      {
+        "y": 96889,
+        "x": 132144
+      },
+      {
+        "y": 96889,
+        "x": 132145
+      },
+      {
+        "y": 96889,
+        "x": 132146
+      },
+      {
+        "y": 96889,
+        "x": 132147
+      },
+      {
+        "y": 96889,
+        "x": 132148
+      },
+      {
+        "y": 96889,
+        "x": 132149
+      },
+      {
+        "y": 96889,
+        "x": 132150
+      },
+      {
+        "y": 96889,
+        "x": 132151
+      },
+      {
+        "y": 96890,
+        "x": 132141
+      },
+      {
+        "y": 96890,
+        "x": 132142
+      },
+      {
+        "y": 96890,
+        "x": 132143
+      },
+      {
+        "y": 96890,
+        "x": 132144
+      },
+      {
+        "y": 96890,
+        "x": 132145
+      },
+      {
+        "y": 96890,
+        "x": 132146
+      },
+      {
+        "y": 96890,
+        "x": 132147
+      },
+      {
+        "y": 96890,
+        "x": 132148
+      },
+      {
+        "y": 96890,
+        "x": 132149
+      },
+      {
+        "y": 96890,
+        "x": 132150
+      },
+      {
+        "y": 96890,
+        "x": 132151
+      },
+      {
+        "y": 96890,
+        "x": 132152
+      },
+      {
+        "y": 96890,
+        "x": 132153
+      },
+      {
+        "y": 96890,
+        "x": 132154
+      },
+      {
+        "y": 96890,
+        "x": 132155
+      },
+      {
+        "y": 96891,
+        "x": 132142
+      },
+      {
+        "y": 96891,
+        "x": 132143
+      },
+      {
+        "y": 96891,
+        "x": 132144
+      },
+      {
+        "y": 96891,
+        "x": 132145
+      },
+      {
+        "y": 96891,
+        "x": 132146
+      },
+      {
+        "y": 96891,
+        "x": 132147
+      },
+      {
+        "y": 96891,
+        "x": 132148
+      },
+      {
+        "y": 96891,
+        "x": 132149
+      },
+      {
+        "y": 96891,
+        "x": 132150
+      },
+      {
+        "y": 96891,
+        "x": 132151
+      },
+      {
+        "y": 96891,
+        "x": 132152
+      },
+      {
+        "y": 96891,
+        "x": 132153
+      },
+      {
+        "y": 96891,
+        "x": 132154
+      },
+      {
+        "y": 96891,
+        "x": 132155
+      },
+      {
+        "y": 96891,
+        "x": 132156
+      },
+      {
+        "y": 96891,
+        "x": 132157
+      },
+      {
+        "y": 96891,
+        "x": 132158
+      },
+      {
+        "y": 96891,
+        "x": 132159
+      }
+    ],
+    "retained_mask_summary": {
+      "source_candidate_runs": 15,
+      "native_cells": 72,
+      "physical_support_cells": 72,
+      "inland_water_cells": 0,
+      "neither_physical_nor_water": 0,
+      "mask_overlap": 0,
+      "feature_incidence_counts": {
+        "661": 8,
+        "662": 1,
+        "663": 4,
+        "665": 1,
+        "666": 1,
+        "23686": 1
+      },
+      "source_run_feature_sets": [
+        [
+          661
+        ],
+        [
+          661,
+          23686
+        ],
+        [
+          662
+        ],
+        [
+          663
+        ],
+        [
+          665
+        ],
+        [
+          666
+        ]
+      ]
+    },
+    "limits": [
+      "The singleton-owner source candidate interval definition reproduces the original 72-cell / 15-interval package denominator, but is not a current owner observation or repair qualification.",
+      "Source candidate feature intersections identify contacts only; they do not by themselves establish exclusive territorial applicability, ancestry, or absence of alternative source interpretations.",
+      "Physical and inland-water masks are retained census support masks; no geometry was recomputed."
+    ]
+  },
+  "source_payloads": [
+    {
+      "key": "gb:AND:ADM1",
+      "descriptor": {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-AND-ADM1-000.bin.gz",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "c3a38ae37cdeb0bd12d7ec4630d5b79e94d25653",
+        "size": 4274,
+        "url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/c3a38ae37cdeb0bd12d7ec4630d5b79e94d25653",
+        "sha256": "a424badfa741c6a2cfea7933392475333a8960bdad2cbe6667d3976d0c9471a9",
+        "decoded_bytes": 13699,
+        "decoded_sha256": "159b76ce81686d6c57ede4fc978e2806384306c80d4d1f4ea9de18db67f26ea2",
+        "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7"
+      },
+      "catalogue": {
+        "advertised_feature_count": 7,
+        "cohort": "administrative-registry",
+        "feature_count": 7,
+        "key": "gb:AND:ADM1",
+        "metadata_sha256": "bfe2d202db82e65a1e50ec6e20813ab974219a6e8fd300536c31df276f21a944",
+        "original_bytes": 13699,
+        "original_metadata_file": "data/administrative-sources.json",
+        "original_sha256": "159b76ce81686d6c57ede4fc978e2806384306c80d4d1f4ea9de18db67f26ea2",
+        "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+        "parts": [
+          {
+            "bytes": 4274,
+            "hash_kind": "file-bytes",
+            "offset": 0,
+            "ordinal": 0,
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-AND-ADM1-000.bin.gz",
+            "sha256": "a424badfa741c6a2cfea7933392475333a8960bdad2cbe6667d3976d0c9471a9",
+            "uncompressed_bytes": 13699,
+            "uncompressed_sha256": "159b76ce81686d6c57ede4fc978e2806384306c80d4d1f4ea9de18db67f26ea2"
+          }
+        ],
+        "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AND/ADM1/geoBoundaries-AND-ADM1_simplified.geojson",
+        "recorded_license": "Public Domain",
+        "source_represented_year_claim": "2007"
+      },
+      "feature_count": 7,
+      "contact_properties": [
+        {
+          "source_index": 661,
+          "ordinal": 0,
+          "properties": {
+            "shapeName": "Sant Julia de Loria",
+            "shapeISO": "AD-06",
+            "shapeID": "23515209B82836637605816",
+            "shapeGroup": "AND",
+            "shapeType": "ADM1"
+          }
+        },
+        {
+          "source_index": 662,
+          "ordinal": 1,
+          "properties": {
+            "shapeName": "Canillo",
+            "shapeISO": "AD-02",
+            "shapeID": "23515209B25074230340039",
+            "shapeGroup": "AND",
+            "shapeType": "ADM1"
+          }
+        },
+        {
+          "source_index": 663,
+          "ordinal": 2,
+          "properties": {
+            "shapeName": "Ordino",
+            "shapeISO": "AD-05",
+            "shapeID": "23515209B96881004874456",
+            "shapeGroup": "AND",
+            "shapeType": "ADM1"
+          }
+        },
+        {
+          "source_index": 665,
+          "ordinal": 4,
+          "properties": {
+            "shapeName": "Encamp",
+            "shapeISO": "AD-03",
+            "shapeID": "23515209B87138494217820",
+            "shapeGroup": "AND",
+            "shapeType": "ADM1"
+          }
+        },
+        {
+          "source_index": 666,
+          "ordinal": 5,
+          "properties": {
+            "shapeName": "Escaldes-Engordany",
+            "shapeISO": "AD-08",
+            "shapeID": "23515209B43580600008856",
+            "shapeGroup": "AND",
+            "shapeType": "ADM1"
+          }
+        }
+      ]
+    },
+    {
+      "key": "gb:ESP:ADM2",
+      "descriptor": {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-ESP-ADM2-000.bin.gz",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "fc7d66f299fe21f9e14de664e74e0dea56a8f603",
+        "size": 1420803,
+        "url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/fc7d66f299fe21f9e14de664e74e0dea56a8f603",
+        "sha256": "c1125e81825aba34971b1ffeae00a9bcf65aa4964a8865aedb8819ea64e6c8b4",
+        "decoded_bytes": 3761096,
+        "decoded_sha256": "40a12d32651a352b59bc88447432421ab80e2d950deb6f552efbae907f7232c2",
+        "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7"
+      },
+      "catalogue": {
+        "advertised_feature_count": 52,
+        "cohort": "administrative-registry",
+        "feature_count": 52,
+        "key": "gb:ESP:ADM2",
+        "metadata_sha256": "e357fe828d1e4317910eca40d1f486d5404fba7a50f674543577c8b5a1a8427c",
+        "original_bytes": 3761096,
+        "original_metadata_file": "data/administrative-sources.json",
+        "original_sha256": "40a12d32651a352b59bc88447432421ab80e2d950deb6f552efbae907f7232c2",
+        "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+        "parts": [
+          {
+            "bytes": 1420803,
+            "hash_kind": "file-bytes",
+            "offset": 0,
+            "ordinal": 0,
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-ESP-ADM2-000.bin.gz",
+            "sha256": "c1125e81825aba34971b1ffeae00a9bcf65aa4964a8865aedb8819ea64e6c8b4",
+            "uncompressed_bytes": 3761096,
+            "uncompressed_sha256": "40a12d32651a352b59bc88447432421ab80e2d950deb6f552efbae907f7232c2"
+          }
+        ],
+        "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ESP/ADM2/geoBoundaries-ESP-ADM2_simplified.geojson",
+        "recorded_license": "National Institute of Statistics (INE) Data License",
+        "source_represented_year_claim": "2018"
+      },
+      "feature_count": 52,
+      "contact_properties": [
+        {
+          "source_index": 23686,
+          "ordinal": 24,
+          "properties": {
+            "shapeName": "Lleida",
+            "shapeISO": "",
+            "shapeID": "93216281B77878961012946",
+            "shapeGroup": "ESP",
+            "shapeType": "ADM2"
+          }
+        }
+      ]
+    }
+  ],
+  "block_inputs": [
+    {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-023.json.gz",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9aed7fccdc14286c57dda521b97152e782ea4da3",
+      "size": 88155,
+      "url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/9aed7fccdc14286c57dda521b97152e782ea4da3",
+      "sha256": "3ed440299bd5498ec6ad6c1bc03bb5332503d4e84a81a5f9005d603bf1eb0a7d",
+      "decoded_bytes": 455342,
+      "decoded_sha256": "550bb559cc0a196dd3de37f667f5cee8479d4f9323e1db9885c8fb78a3355af3",
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7"
+    },
+    {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-023.json.gz",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b0ff34869d57ca095bce9014383cc5648f6d2e24",
+      "size": 513203,
+      "url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/b0ff34869d57ca095bce9014383cc5648f6d2e24",
+      "sha256": "a1c483ffe23e3d215885edc9f16a12ce40c7f092149479c418493165e8c70868",
+      "decoded_bytes": 2304742,
+      "decoded_sha256": "e801becf35fdc81b6b3350efaee670a75e3c8115a7a83f8ade2ab7a42f6421de",
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7"
+    },
+    {
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-023.json.gz",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d02153e8510a9d29bcb7629cc69a6354518f5124",
+      "size": 681528,
+      "url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/git/blobs/d02153e8510a9d29bcb7629cc69a6354518f5124",
+      "sha256": "228d2bb7727267ddeba240017f9eb1c737e91da7fa8982018b230602b1d81d2b",
+      "decoded_bytes": 4741752,
+      "decoded_sha256": "b52449c923776ec65ba282e5eeecd93b5570ba1aa161836abda21d9775137982",
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7"
+    }
+  ],
+  "contact_groups": {
+    "package_id": "gb-AND-ADM1--repair-evaluation",
+    "original_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "groups": [
+      {
+        "cells": 5,
+        "intervals": 4,
+        "rows": [
+          {
+            "y": 96679,
+            "start": 132197,
+            "end": 132198,
+            "owners": [
+              7109
+            ],
+            "source_features": [
+              663
+            ]
+          },
+          {
+            "y": 96680,
+            "start": 132195,
+            "end": 132197,
+            "owners": [
+              7109
+            ],
+            "source_features": [
+              663
+            ]
+          },
+          {
+            "y": 96681,
+            "start": 132194,
+            "end": 132195,
+            "owners": [
+              7109
+            ],
+            "source_features": [
+              663
+            ]
+          },
+          {
+            "y": 96682,
+            "start": 132192,
+            "end": 132193,
+            "owners": [
+              7109
+            ],
+            "source_features": [
+              663
+            ]
+          }
+        ],
+        "source_features": [
+          663
+        ],
+        "contact_roster": [
+          {
+            "source_index": 663,
+            "family_index": 6,
+            "source_id": "gb:AND:ADM1:23515209B96881004874456",
+            "ordinal": 2,
+            "owners": [
+              7109
+            ],
+            "name": "Ordino",
+            "geometry_status": "raw-native-supported"
+          }
+        ]
+      },
+      {
+        "cells": 1,
+        "intervals": 1,
+        "rows": [
+          {
+            "y": 96703,
+            "start": 132285,
+            "end": 132286,
+            "owners": [
+              7109
+            ],
+            "source_features": [
+              662
+            ]
+          }
+        ],
+        "source_features": [
+          662
+        ],
+        "contact_roster": [
+          {
+            "source_index": 662,
+            "family_index": 6,
+            "source_id": "gb:AND:ADM1:23515209B25074230340039",
+            "ordinal": 1,
+            "owners": [
+              7109
+            ],
+            "name": "Canillo",
+            "geometry_status": "raw-native-supported"
+          }
+        ]
+      },
+      {
+        "cells": 1,
+        "intervals": 1,
+        "rows": [
+          {
+            "y": 96825,
+            "start": 132338,
+            "end": 132339,
+            "owners": [
+              7109
+            ],
+            "source_features": [
+              665
+            ]
+          }
+        ],
+        "source_features": [
+          665
+        ],
+        "contact_roster": [
+          {
+            "source_index": 665,
+            "family_index": 6,
+            "source_id": "gb:AND:ADM1:23515209B87138494217820",
+            "ordinal": 4,
+            "owners": [
+              7109
+            ],
+            "name": "Encamp",
+            "geometry_status": "raw-native-supported"
+          }
+        ]
+      },
+      {
+        "cells": 1,
+        "intervals": 1,
+        "rows": [
+          {
+            "y": 96873,
+            "start": 132229,
+            "end": 132230,
+            "owners": [
+              7109
+            ],
+            "source_features": [
+              666
+            ]
+          }
+        ],
+        "source_features": [
+          666
+        ],
+        "contact_roster": [
+          {
+            "source_index": 666,
+            "family_index": 6,
+            "source_id": "gb:AND:ADM1:23515209B43580600008856",
+            "ordinal": 5,
+            "owners": [
+              7109
+            ],
+            "name": "Escaldes-Engordany",
+            "geometry_status": "raw-native-supported"
+          }
+        ]
+      },
+      {
+        "cells": 63,
+        "intervals": 7,
+        "rows": [
+          {
+            "y": 96885,
+            "start": 132136,
+            "end": 132137,
+            "owners": [
+              7109
+            ],
+            "source_features": [
+              661
+            ]
+          },
+          {
+            "y": 96886,
+            "start": 132137,
+            "end": 132140,
+            "owners": [
+              7109
+            ],
+            "source_features": [
+              661
+            ]
+          },
+          {
+            "y": 96887,
+            "start": 132138,
+            "end": 132144,
+            "owners": [
+              7109
+            ],
+            "source_features": [
+              661
+            ]
+          },
+          {
+            "y": 96888,
+            "start": 132139,
+            "end": 132148,
+            "owners": [
+              7109
+            ],
+            "source_features": [
+              661
+            ]
+          },
+          {
+            "y": 96889,
+            "start": 132140,
+            "end": 132152,
+            "owners": [
+              7109
+            ],
+            "source_features": [
+              661
+            ]
+          },
+          {
+            "y": 96890,
+            "start": 132141,
+            "end": 132156,
+            "owners": [
+              7109
+            ],
+            "source_features": [
+              661
+            ]
+          },
+          {
+            "y": 96891,
+            "start": 132143,
+            "end": 132160,
+            "owners": [
+              7109
+            ],
+            "source_features": [
+              661
+            ]
+          }
+        ],
+        "source_features": [
+          661
+        ],
+        "contact_roster": [
+          {
+            "source_index": 661,
+            "family_index": 6,
+            "source_id": "gb:AND:ADM1:23515209B82836637605816",
+            "ordinal": 0,
+            "owners": [
+              7109
+            ],
+            "name": "Sant Julia de Loria",
+            "geometry_status": "raw-native-supported"
+          }
+        ]
+      },
+      {
+        "cells": 1,
+        "intervals": 1,
+        "rows": [
+          {
+            "y": 96891,
+            "start": 132142,
+            "end": 132143,
+            "owners": [
+              7109
+            ],
+            "source_features": [
+              661,
+              23686
+            ]
+          }
+        ],
+        "source_features": [
+          661,
+          23686
+        ],
+        "contact_roster": [
+          {
+            "source_index": 661,
+            "family_index": 6,
+            "source_id": "gb:AND:ADM1:23515209B82836637605816",
+            "ordinal": 0,
+            "owners": [
+              7109
+            ],
+            "name": "Sant Julia de Loria",
+            "geometry_status": "raw-native-supported"
+          },
+          {
+            "source_index": 23686,
+            "family_index": 103,
+            "source_id": "gb:ESP:ADM2:93216281B77878961012946",
+            "ordinal": 24,
+            "owners": [],
+            "name": "Lleida",
+            "geometry_status": "raw-native-supported"
+          }
+        ]
+      }
+    ],
+    "source_payload_context": "and-source-payload-context.json",
+    "separate_regional_scope": {
+      "issue": 241,
+      "location_id": "atlas:territory:AND",
+      "member_count": 223,
+      "role": "source/semantic review, not original repair disposition",
+      "comments_seen": 0,
+      "retained_owned_directory_present_at_main_75ae9d7": false
+    },
+    "limits": [
+      "No current owner observation or prior-credit determination is made by these retained source/physical joins.",
+      "Original AND 2007 Public Domain and ESP 2018 INE declarations are retained metadata, not a new source/right qualification.",
+      "Lleida contact has no direct owner; its foreign-country label does not establish a territorial exclusion.",
+      "Single-source-contact rows likewise do not prove complete present competitor clearance or positive repair qualification.",
+      "No geometry, claim, allocation or publication has occurred."
+    ]
+  },
+  "interpretation_limits": [
+    "These are authenticated retained census/source/physical facts; no geometry was recomputed.",
+    "AND 2007 Public Domain and ESP 2018 INE Data License are original recorded declarations, not fresh rights or source applicability approval.",
+    "All five AND contact atoms belong to the compact territory owner whose lineage retains all seven parish atoms; administrative/country labels do not establish territorial exclusions."
+  ]
+}
