@@ -1,6 +1,6 @@
 {
   "observation_commit": "775f0a1eddf8964b81d217d01a801c2b338db9c6",
-  "current_main": "775f0a1eddf8964b81d217d01a801c2b338db9c6",
+  "current_main": "5d717903d392f6f5f910aed44440603e664b824f",
   "unchanged_inputs": [
     {
       "path": "scripts/run-geographic-check.py",
@@ -171,5 +171,8 @@
   "completed_observations": 1,
   "attempts": 1,
   "scratch": "Fresh ordinary task-owned TMPDIR; native scratch guards unchanged.",
-  "unchanged_count": 41
+  "unchanged_count": 41,
+  "main_at_execution": "775f0a1eddf8964b81d217d01a801c2b338db9c6",
+  "verified_pr_base": "5d717903d392f6f5f910aed44440603e664b824f",
+  "reuse_reason": "Two intervening inert SGP/DMA packet commits; all 41 consumed input/code blobs checked identical at the verified PR base. Original observation was not repeated."
 }
