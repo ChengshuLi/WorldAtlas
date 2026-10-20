@@ -97,11 +97,12 @@ function queueWorkflow() {
 }
 function workflowCondition(expression, context, {success=true,cancelled=false}={}) {
   if(expression&&!/\b(?:always|success|failure|cancelled)\(/.test(expression)&&!success)return false;
-  return expression?Boolean(new Function('needs','github','matrix','steps','always','cancelled','success','failure',
-    `return (${expression});`)(context.needs,context.github,context.matrix,context.steps??{},()=>true,()=>cancelled,()=>success,()=>!success)):success;
+  return expression?Boolean(new Function('needs','github','matrix','steps','inputs','always','cancelled','success','failure',
+    `return (${expression});`)(context.needs,context.github,context.matrix,context.steps??{},context.inputs??{},()=>true,()=>cancelled,()=>success,()=>!success)):success;
 }
-function queueContext({profile='full',selection='complete'}={}){
+function queueContext({profile='full',selection='complete',reviewedTests=''}={}){
  return {needs:{prepare:{outputs:{profile,test_selection:selection}}},matrix:{shard:0},
+   inputs:{reviewed_tests:reviewedTests},
    steps:{assembly:{outputs:{assembled:'false'}}}};
 }
 function packageStep(job,name){const found=job.steps.filter(step=>step.name===name);assert.equal(found.length,1,name);return found[0];}
@@ -198,10 +199,23 @@ for (const workflow of ['worker-merge.yml']) {
 
 test('focused delivery tests receive their real Node/Python runtime without an atlas build', () => {
   const {source,integration}=queueWorkflow();
+  const manual=JSON.stringify({base:'a'.repeat(40),head:'b'.repeat(40),files:[
+    'test/evidence-quality.test.mjs','test/premerge-evidence.test.mjs','test/engineering-owned-scope-routing.test.mjs']});
   for(const command of ['npm ci --no-audit --no-fund','python -m pip install -r requirements.txt']) {
     const steps=integration.steps.filter(step=>step.text.includes('run: '+command));
     assert.equal(steps.length,1,command);
     for(const profile of ['full','evidence'])assert.equal(workflowCondition(steps[0].condition,queueContext({profile})),true);
+    // Actions represents an omitted optional string input as empty. Only the
+    // automatic inert prepare branch can emit evidence/reviewed in that case.
+    for(const reviewedTests of [undefined,''])assert.equal(workflowCondition(steps[0].condition,
+      queueContext({profile:'evidence',selection:'reviewed',reviewedTests})),false);
+    for(const [profile,selection,reviewedTests] of [
+      ['evidence','reviewed',manual],
+      ['evidence','complete',''],['evidence','unknown',''],['evidence',null,''],
+      ['full','reviewed',''],['full','complete',''],['full','selected-data','']
+    ])assert.equal(workflowCondition(steps[0].condition,queueContext({profile,selection,reviewedTests})),true);
+    const old=queueContext({profile:'evidence'});delete old.needs.prepare.outputs.test_selection;
+    assert.equal(workflowCondition(steps[0].condition,old),true,'Older or missing selection output cannot opt out');
     assert.equal(workflowCondition(steps[0].condition,queueContext({profile:'unknown'})),false);
     assert.equal(workflowCondition(steps[0].condition,queueContext({profile:'evidence'}),{success:false}),false);
   }
@@ -362,7 +376,7 @@ test('scientific Python install follows assembly and runs only for fallback or o
   ['full','complete',1,'',true],['full','complete',2,'',true],
   ['full','reviewed',0,'',true],['evidence','reviewed',0,'',true],
   ['evidence','complete',0,'',true],['unknown','complete',0,'',false]]){
-  const context=queueContext({profile,selection});context.matrix.shard=shard;
+  const context=queueContext({profile,selection,reviewedTests:selection==='reviewed'?'{"files":["test/premerge-evidence.test.mjs"]}':''});context.matrix.shard=shard;
   context.steps.assembly.outputs.assembled=assembled;
   assert.equal(workflowCondition(install.condition,context),expected,JSON.stringify({profile,selection,shard,assembled}));
   assert.equal(workflowCondition(install.condition,context,{success:false}),false,'No install after failed assembly or earlier setup');

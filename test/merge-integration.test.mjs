@@ -14,6 +14,7 @@ import {renderClaim, githubAPI} from '../scripts/issue-claim-contract.mjs';
 import {reviewedTestPlan, prepareIntegration, completeIntegration, checkCurrentChecks, integrationProfile, integrationChanges, geographyRequired, createCandidate, cleanupCandidate, cleanupMergedHead} from '../scripts/merge-integration.mjs';
 
 import {EXECUTION_CODE} from '../scripts/check-unchanged-selected-geography.mjs';
+import {staticModuleClosure} from './helpers/static-module-closure.mjs';
 const sha = letter => letter.repeat(40);
 const FOCUSED_INTEGRATION_TESTS = integrationTestFiles('evidence', 0);
 
@@ -164,7 +165,33 @@ test('default actual preparation derives the inert packet consumers without an o
     await assert.rejects(f.complete({geographyResult:'skipped'}),/Trusted combined geography/);
   }
   const f=packetFixture();
+  const reviewedTests=JSON.stringify({base:f.base,head:f.head,files:PACKET_TESTS});
+  const explicit=await prepareIntegration({...f.options(),reviewedTests});
+  assert.equal(explicit.profile,'evidence');assert.equal(explicit.test_selection,'reviewed');
+  assert.deepEqual(explicit.test_files,PACKET_TESTS);
+  // The existing dispatch input distinguishes this identical manual roster.
   await assert.rejects(prepareIntegration({...f.options(),reviewedTests:{base:sha('0'),head:f.head,files:PACKET_TESTS}}),/stale/);
+});
+
+test('actual automatic packet roster runs without installed dependencies or external executables',async()=>{
+  const f=packetFixture('json.gz'),prepared=await prepareIntegration(f.options());
+  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-packet-runtime-'));
+  try {
+    const sources=staticModuleClosure(process.cwd(),['scripts/run-integration-tests.mjs',...prepared.test_files]);
+    for(const name of [...sources,'.github/evidence-policy.json','scripts/native-ownership/validate-context-input-stage.mjs']){
+      const target=path.join(directory,name);fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(name,target);
+    }
+    const empty=path.join(directory,'empty-path');fs.mkdirSync(empty);
+    const env={...process.env,PATH:empty,NODE_PATH:'',NODE_OPTIONS:'',INTEGRATION_PROFILE:prepared.profile,INTEGRATION_SHARD:String(prepared.shards[0]),
+      INTEGRATION_TEST_SELECTION:prepared.test_selection,INTEGRATION_TEST_FILES_BASE64:Buffer.from(JSON.stringify(prepared.test_files)).toString('base64')};
+    delete env.NODE_TEST_CONTEXT; // Exercise the real nested Node test runner.
+    const result=spawnSync(process.execPath,['scripts/run-integration-tests.mjs'],{cwd:directory,encoding:'utf8',timeout:20000,
+      env});
+    assert.equal(result.status,0,result.stdout+result.stderr);assert.match(result.stdout,/# skipped 0/);
+    assert.match(result.stdout,/# fail 0/);assert.match(result.stdout,/"git_command_attempts":0/);
+    assert.match(result.stdout,/"native_inputs":\{"applicable":true,"fetched":\[\]\}/);
+    assert.equal(fs.existsSync(path.join(directory,'node_modules')),false);
+  } finally {fs.rmSync(directory,{recursive:true,force:true});}
 });
 
 test('automatic packet boundary reuses inert names and refuses executable, redirected or declared roles',()=>{
