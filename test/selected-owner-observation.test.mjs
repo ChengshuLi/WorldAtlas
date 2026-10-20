@@ -343,8 +343,25 @@ function coldFixture({splitCandidates = false} = {}) {
   const log = path.join(f.repo, 'fetches.jsonl'), preload = path.join(f.repo, 'metadata.mjs');
   const implementation = path.join(bin, 'implementation'), launchLog = path.join(f.repo, 'git-launches.jsonl');
   fs.mkdirSync(path.join(implementation, 'bin'), {recursive: true});
+  const helperExecPath = path.join(implementation, 'libexec', 'git-core');
+  fs.mkdirSync(helperExecPath, {recursive: true});
+  for (const command of ['pack-objects', 'rev-list', 'index-pack']) {
+    fs.writeFileSync(path.join(helperExecPath, 'git-' + command), `#!${process.execPath}
+import fs from 'node:fs';
+import {spawnSync} from 'node:child_process';
+const command = ${JSON.stringify(command)}, args = process.argv.slice(2), invocation = [command, ...args];
+const gitHelperArgv = ${JSON.stringify(gitHelperArgv)};
+const exactGitHelper = ${exactGitHelper.toString()};
+fs.appendFileSync(${JSON.stringify(launchLog)}, JSON.stringify(invocation) + '\\n');
+if (!exactGitHelper(invocation)) throw Error('Unexpected Git helper invocation: ' + JSON.stringify(invocation));
+const target = ${JSON.stringify(realGitExecPath)} + '/git-' + command;
+const r = spawnSync(target, args, {stdio: 'inherit', env: process.env});
+process.exit(r.status ?? 1);
+`, {mode: 0o755});
+  }
   // The PATH launcher resolves an implementation but cannot serve as that implementation.
-  // Allow only the exact internal Git helpers used by the cold-fetch fixture.
+  // Resolve the implementation once; internal helpers are observed through GIT_EXEC_PATH
+  // because newer Git versions bypass PATH when launching them.
   fs.writeFileSync(path.join(bin, 'git'), `#!${process.execPath}
 import fs from 'node:fs';
 import {spawnSync} from 'node:child_process';
@@ -358,7 +375,7 @@ if (args.length === 1 && args[0] === '--exec-path') {
 }
 const helper = exactGitHelper(args) ? args : null;
 if (helper) {
-  const env = {...process.env, GIT_EXEC_PATH: ${JSON.stringify(realGitExecPath)}};
+  const env = {...process.env, GIT_EXEC_PATH: ${JSON.stringify(helperExecPath)}};
   const r = spawnSync(${JSON.stringify(realGit)}, args, {stdio: 'inherit', env});
   process.exit(r.status ?? 1);
 }
@@ -371,7 +388,7 @@ throw Error('Unexpected Git launcher invocation: ' + JSON.stringify(args));
 for arg do
   if [ "$arg" = fetch ]; then exec ${JSON.stringify(process.execPath)} ${JSON.stringify(transport)} "$@"; fi
 done
-exec ${JSON.stringify(realGit)} "$@"
+GIT_EXEC_PATH=${JSON.stringify(helperExecPath)} exec ${JSON.stringify(realGit)} "$@"
 `, {mode: 0o755});
   fs.writeFileSync(transport, `#!${process.execPath}
 import fs from 'node:fs';
