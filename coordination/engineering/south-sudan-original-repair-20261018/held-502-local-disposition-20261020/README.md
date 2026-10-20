@@ -16,4 +16,4 @@ The JSON includes exact pins for the original contract quartet, held rows, full 
 
 ## Remaining gates
 
-The 502 remain unresolved pending explicit contract review and acceptance. Per-key current administrative applicability, whole-negative foreign-family limits, target-level physical support, family-level rights, and unpinned historical sidecars remain distinct gates. This local proposal does not alter the accepted 1,621 outcomes, selection state, or receipt.
+The same reviewer found that this packet meets the documentation criterion for a documented-unresolved proposal. Explicit issue acceptance and integration remain pending; the 502 receive no accepted, repair, owner-change, or exception credit. Per-key current administrative applicability, whole-target physical interpretation, family-level rights, and unpinned historical sidecars remain unresolved limits and must not be overclaimed. This local proposal does not alter the accepted 1,621 outcomes, selection state, or receipt.
