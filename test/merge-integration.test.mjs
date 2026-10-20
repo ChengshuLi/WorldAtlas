@@ -357,22 +357,28 @@ test('reviewed lists cannot omit actual packaged consumers when package source c
     assert.deepEqual(plan.checkout_patterns,fullCheckoutPatterns(f.packageInputs));
     entries.delete(required[0]);assert.throws(()=>reviewedTestPlan(request,context),/packaged consumer/);
   }
-  // Use the actual declaration, not a synthetic allowlist. Author tooling is
-  // not an atlas build input, while runtime and package-policy edits still are.
-  const consumer='test/local-workspace.test.mjs',required=['test/compact-ownership.test.mjs','test/prepared-parity.test.mjs'];
-  const row={sha:sha('e'),type:'blob',mode:'100644'};
-  const entries=new Map([...EXECUTION_CODE.map(name=>[name,row]),...required.map(name=>[name,row]),
-    [consumer,row],['docs/LOCAL_WORKSPACES.md',row],['test/fixtures/contract/input.json',row]]);
-  const request={base:sha('a'),head:sha('b'),files:[consumer]};
-  const changed={filename:'scripts/local-workspace.mjs',status:'modified'};
-  const context={base:request.base,head:request.head,entries,files:[changed],definition:loadPackageInputs()};
-  const tooling=reviewedTestPlan(request,context);
-  assert.deepEqual(tooling.files,[consumer]);assert.equal(tooling.build,false);
-  assert.equal(geographyRequired('engineering/tooling',[changed]),true);
-  assert.equal(candidateGeographyCode('evidence',[changed],'reviewed'),true);
-  for(const filename of ['src/effective-footprint.js','.github/package-inputs.json']) {
-    const actual=reviewedTestPlan(request,{...context,files:[{filename,status:'modified'}]});
-    assert.deepEqual(actual.files,[consumer,...required]);assert.equal(actual.build,true);
+  // Use the actual declaration, not a synthetic allowlist. Author and scientific
+  // comparison controls are not builder inputs; runtime and package policy are.
+  for (const [source,consumer] of [
+    ['scripts/local-workspace.mjs','test/local-workspace.test.mjs'],
+    ['scripts/check-effective-geographic-regression.mjs','test/effective-geographic-regression.test.mjs']
+  ]) {
+    const required=['test/compact-ownership.test.mjs','test/prepared-parity.test.mjs'];
+    const row={sha:sha('e'),type:'blob',mode:'100644'};
+    const entries=new Map([...EXECUTION_CODE.map(name=>[name,row]),...required.map(name=>[name,row]),
+      [consumer,row],['docs/LOCAL_WORKSPACES.md',row],['test/fixtures/contract/input.json',row]]);
+    const request={base:sha('a'),head:sha('b'),files:[consumer]};
+    const changed={filename:source,status:'modified'};
+    const context={base:request.base,head:request.head,entries,files:[changed],definition:loadPackageInputs()};
+    const comparison=reviewedTestPlan(request,context);
+    assert.deepEqual(comparison.files,[consumer]);assert.equal(comparison.build,false);
+    assert(comparison.inputs.includes('scripts/check-effective-geographic-regression.mjs'),'Scientific checker custody remains mandatory');
+    assert.equal(geographyRequired('engineering/tooling',[changed]),true);
+    assert.equal(candidateGeographyCode('evidence',[changed],'reviewed'),true);
+    for(const filename of ['src/effective-footprint.js','.github/package-inputs.json']) {
+      const actual=reviewedTestPlan(request,{...context,files:[{filename,status:'modified'}]});
+      assert.deepEqual(actual.files,[consumer,...required]);assert.equal(actual.build,true);
+    }
   }
 
 });
