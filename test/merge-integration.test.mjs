@@ -134,9 +134,9 @@ test('actual full preparation emits archive patterns from the authenticated cand
 
 
 const PACKET_TESTS = ['test/evidence-quality.test.mjs','test/premerge-evidence.test.mjs','test/engineering-owned-scope-routing.test.mjs'];
-function packetFixture() {
+function packetFixture(format = 'json') {
   const f=fixture(),old=f.api,prefix='coordination/engineering/colombia-held-residual-830-20261019/';
-  const names=['README.md','current-owner-observation-79c7802.json','full-package-crosswalk-current-owner-79c7802.json','partition-a.json','partition-b.json','per-key-unresolved-request.json'].map(n=>prefix+n);
+  const names=['README.md','current-owner-observation-79c7802.json','full-package-crosswalk-current-owner-79c7802.json','partition-a.json','partition-b.json','per-key-unresolved-request.json'].map(n=>prefix+n.replace(/\.json$/, '.'+format));
   const blob=path=>({path,sha:sha('e'),mode:'100644',type:'blob',size:1});
   const parents=rows=>{
     const all=new Map(rows.map(row=>[row.path,row]));
@@ -153,8 +153,8 @@ function packetFixture() {
 }
 
 test('default actual preparation derives the inert packet consumers without an operator roster',async()=>{
-  for(const reviewedTests of [undefined,null,'']){
-    const f=packetFixture(),prepared=await prepareIntegration({...f.options(),reviewedTests});
+  for(const format of ['json','jsonl','json.gz','jsonl.gz'])for(const reviewedTests of [undefined,null,'']){
+    const f=packetFixture(format),prepared=await prepareIntegration({...f.options(),reviewedTests});
     assert.equal(prepared.profile,'evidence');assert.equal(prepared.test_selection,'reviewed');
     assert.deepEqual(prepared.test_files,PACKET_TESTS);assert.deepEqual(prepared.shards,[0]);
     assert.deepEqual(prepared.checkout_patterns,focusedCheckoutPatterns(f.packageInputs,EXECUTION_CODE));
@@ -168,9 +168,10 @@ test('default actual preparation derives the inert packet consumers without an o
 });
 
 test('automatic packet boundary reuses inert names and refuses executable, redirected or declared roles',()=>{
-  const f=packetFixture(),entries=new Map(f.integrated.map(row=>[row.path,row]));
+ for(const format of ['json','jsonl','json.gz','jsonl.gz']){
+  const f=packetFixture(format),entries=new Map(f.integrated.map(row=>[row.path,row]));
   assert(inertEvidenceAdditions(f.files,entries,f.packageInputs));
-  const file=f.files[0];
+  for(const file of [f.files[0],f.files[1]]){
   for(const delta of [{status:'modified'},{status:'removed'},{status:'renamed',previous_filename:'src/old.js'},{previous_filename:'old.json'}])
     assert.equal(inertEvidenceAdditions([{...file,...delta}],entries,f.packageInputs),false);
   for(const delta of [{mode:'100755'},{mode:'120000'},{type:'commit',mode:'160000'},{sha:'not-an-oid'},{size:undefined}]){
@@ -181,7 +182,9 @@ test('automatic packet boundary reuses inert names and refuses executable, redir
   assert.equal(inertEvidenceAdditions(f.files,redirected,f.packageInputs),false);
   for(const category of ['inputs','verification_paths'])for(const role of [file.filename,'coordination/engineering/colombia-held-residual-830-20261019/'])
     assert.equal(inertEvidenceAdditions(f.files,entries,{...f.packageInputs,[category]:[...f.packageInputs[category],role]}),false);
-  for(const filename of ['package.json','package-lock.json','npm-shrinkwrap.json','import-map.json','requirements.txt','replay.mjs','replay.py']){
+  }
+  for(const filename of ['package.json','package-lock.json','npm-shrinkwrap.json','import-map.json','requirements.txt','replay.mjs','replay.py',
+    'replay.mjs.gz','replay.py.gz','payload.gz','report.json.gz.mjs','report.json.gz.gz']){
     for(const root of ['coordination/engineering/packet/','research/geography/packet/']){
       const name=root+filename,changed=new Map(entries);changed.set(name,{path:name,type:'blob',mode:'100644',sha:sha('f'),size:1});
       for(let at=name.indexOf('/');at>=0;at=name.indexOf('/',at+1))changed.set(name.slice(0,at),{type:'tree',mode:'040000',sha:sha('d')});
@@ -189,18 +192,21 @@ test('automatic packet boundary reuses inert names and refuses executable, redir
     }
   }
   assert.equal(inertEvidenceAdditions([],entries,f.packageInputs),false);
+ }
 });
 
 test('default mixed changes retain broad routing and missing packet consumers cannot be silently omitted',async()=>{
+ for(const format of ['json','json.gz']){
   for(const filename of ['scripts/merge-integration.mjs','test/evidence-quality.test.mjs','.github/package-inputs.json','src/effective-footprint.js','data/ownership-selection.json']){
-    const f=packetFixture(),row=f.integrated.find(row=>row.path===filename);
+    const f=packetFixture(format),row=f.integrated.find(row=>row.path===filename);
     if(row)row.sha=sha('f');else f.integrated.push({path:filename,sha:sha('f'),type:'blob',mode:'100644',size:1});
     const prepared=await prepareIntegration(f.options());assert.notEqual(prepared.test_selection,'reviewed',filename);
   }
   for(const filename of [...PACKET_TESTS,EXECUTION_CODE[0],'test/fixtures/contract/input.json']){
-    const f=packetFixture();for(const key of ['baseline','authored','integrated'])f[key]=f[key].filter(row=>row.path!==filename);
+    const f=packetFixture(format);for(const key of ['baseline','authored','integrated'])f[key]=f[key].filter(row=>row.path!==filename);
     await assert.rejects(prepareIntegration(f.options()),/ordinary|unavailable|fixture boundary/,filename);
   }
+ }
 });
 
 test('reviewed tests bind both trusted phases without changing actual geography obligations', async () => {
