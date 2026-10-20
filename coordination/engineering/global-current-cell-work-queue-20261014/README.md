@@ -24,41 +24,36 @@ physical queues sit underneath it.
 
 1. Read the combined queue and select a source-family session. Keep its related
    cause packages on one worker so the original source is decoded/indexed once.
-2. For a source/cause package, run the committed package-bound ownership command
-   below once. It derives the complete original interval table and checks current
-   selected owners from immutable Git inputs; no separate extraction or adjacent
-   data-file checkout is needed. The separate physical-only queue retains its
-   existing Python selector; see `PHYSICAL-PACKAGES-README.md`.
+2. For a source/cause package, reuse a complete authenticated ownership report for
+   that exact original package. If none remains applicable, use the committed
+   [bounded ownership command](../../../docs/COVERAGE_CLASSIFICATION.md#observe-selected-ownership-without-source-geometry),
+   including its task-supplied runtime and input-acquisition contract. It derives
+   the original intervals and selected owners; no separate extractor or adjacent
+   data-file checkout is needed. Physical-only packages retain their
+   [existing Python selector](PHYSICAL-PACKAGES-README.md).
 3. Read the exact intended owner IDs, source feature IDs, locality scopes,
    competitor source families, native blocks, measured cost, question and
    completion condition. Reuse the original repository source products named by
    their catalogue; this directory does not copy the original source corpus.
-4. Use that same report's `original_intervals` and per-key owners to account for
-   already-owned intervals before an additive repair. Preserve the full original
-   table and denominator; do not rerun extraction to reconstruct its source/class
-   columns. Recheck current ownership when the accepted data revision changes,
-   without rebuilding this queue or repeating unaffected source research.
-5. For the remaining cells, check the current selected owner-zero state,
-   source-to-location authority, explicit territorial exclusions and all relevant
-   competitors. Then use the existing source-target native operator, verify
-   conservation and coordinate normal reviewed integration.
-
-From an owned checkout, with an exact accepted data commit and fresh output file:
-
-```sh
-GIT_NO_LAZY_FETCH=1 GIT_NO_REPLACE_OBJECTS=1 \
-  node scripts/observe-selected-owners.mjs --repo . --commit EXACT_DATA_COMMIT \
-  --package gb-GRL-ADM1--repair-evaluation --out /path/to/new-observation.json
-```
-
-Use `original_package` and `original_intervals` from this one report. Interval rows
-are `[y,start,end,candidate_owner_indices,source_feature_indices,physical_class]`;
-ends are exclusive. Owner/source indices and mask classes retain their original
-queue meaning, not current scientific qualification. The report also binds both
-code/data revisions, original interval/key hashes and actual consumed input pins.
-See [the bounded ownership contract](../../../docs/COVERAGE_CLASSIFICATION.md#observe-selected-ownership-without-source-geometry)
-for runtime, input acquisition and output requirements. Missing pinned Git bodies
-still refuse; they are not silently fetched or replaced with checkout files.
+4. Use the report's `original_package`, `original_intervals` and per-key owners to
+   preserve the complete original denominator and account for already-owned cells.
+   Rows are `[y,start,end,candidate_owner_indices,source_feature_indices,physical_class]`,
+   with exclusive ends and original source-relative classes, not current qualification.
+   Reuse the report when its exact query, selected-product and normative-grid
+   bindings and reader semantics remain valid for the intended revision. Preserve
+   its actual code/data pins; do not relabel an old receipt as a new execution.
+   An unrelated accepted commit or serializer-only change does not itself require
+   another observation. Changed relevant inputs require a bounded comparison or
+   fresh observation, not repeated unaffected source research.
+5. Follow the package's original completion condition. A proposed additive repair
+   still needs current owner-zero evidence, source-to-location authority, explicit
+   territorial exclusions, all relevant competitors and actual native conservation.
+   Where that condition expressly permits a documented exception, retain the exact
+   original keys, source/contact/physical facts, required witness checks and native
+   holds; explain the unresolved outcome for independent acceptance. Do not impose
+   positive repair qualification on a non-repair outcome, or treat documentation
+   alone as proof. An exception grants no repair credit, geographic approval or
+   import permission. Coordinate normal exact-head review and integration.
 
 The current standalone `source-batch-intervals.mjs` command is removed. Its pure
 extractor is shared by the ownership command, with no checkout-file fallback.
@@ -109,8 +104,8 @@ boundaries. Do not create one task per component or set arbitrary cell quotas.
 Read-only research is parallel. Repair authoring claims must have disjoint owner
 IDs and interval selectors; shared crosswalk changes coordinate all dependent
 packages. Final selected-bank changes still use the normal serialized merge path.
-Revalidate against current ownership when work is resumed; newer repairs can make
-parts of this frozen inventory stale without invalidating the retained evidence.
+On resumption, reconcile the ownership bindings as above; newer repairs can make
+parts of this frozen inventory stale without invalidating retained evidence.
 
 The largest shared-lineage concentration is Canada ADM3: a few original
 unorganized administrative regions were divided among named physical atlas
