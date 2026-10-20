@@ -21,7 +21,7 @@ The generator joins every frozen queue interval to the retained held spans and t
 - The 29,263 held cells are the conservative union of whole foreign ADM1 source contacts (NAM 15,255; COD 13,269; COG 722; ZMB 17). The source products have different represented years and licenses; the original 2018 Angola ADM2 source is CC BY 3.0 IGO. No legal, sovereignty, current-boundary, whole-feature, or source-applicability determination is made.
 - The source-relative accepted delivery remains 141,263 cells. The 29,263 held cells remain unaccepted until separately reviewed and accepted. This packet does not close issue #2313, change selection, resolve the separate source-conflict or physical-interpretation packages, authorize an import, or assert a regional certificate.
 
-Rebuild the interval accounting from a fresh checkout at the pinned current-main commit with Python 3:
+Rebuild the interval accounting from a checkout of this PR head with its complete history (including the pinned current-main commit) and Python 3. The observer report is intentionally pinned to the measured main commit, not to this packet's later commit:
 
 ```sh
 python3 coordination/engineering/angola-repair-delivery-20261017/method/build-unresolved-interval-disposition.py \

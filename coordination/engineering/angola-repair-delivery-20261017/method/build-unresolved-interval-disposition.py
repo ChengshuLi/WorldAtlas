@@ -48,8 +48,8 @@ def main():
 
     if package["package_id"] != PACKAGE:
         raise SystemExit("Original package ID changed")
-    if observation["commit"] != head or observation["original_package"]["package_id"] != PACKAGE:
-        raise SystemExit("Selected-owner report is not for this exact package/current head")
+    if observation["commit"] != REVIEWED_MAIN or observation["original_package"]["package_id"] != PACKAGE:
+        raise SystemExit("Selected-owner report is not pinned to the exact reviewed main/package")
     if observation["kind"] != "literal-selected-owner-observation-v1":
         raise SystemExit("Unexpected selected-owner report kind")
     if observation["query_count"] != package["native_cells"]:
