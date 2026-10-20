@@ -105,20 +105,20 @@
     ]
   },
   "selected_owner": {
-    "status": "pending_root_owned_current_main_observation",
-    "base_commit": "4b2ce982b7ed7591ac45996080d06474fab3db99",
-    "result_asserted": false,
+    "status": "current-main observation included; public-head and remaining acceptance checks pending",
+    "base_commit": "a4390854c013c8891b187556ac4498888ee33633",
+    "result_asserted": true,
     "stale_observation_excluded": true,
-    "gate": "Fresh selected-owner-zero/conservation and emitted-consumer checks remain root-owned; no observer was run for this packet."
+    "gate": "The included observation reports zero selected owner for all 1,204 held keys and no overlaps; selected-bank conservation and emitted-consumer acceptance remain pending independent public-head review."
   },
   "limits": [
-    "This packet preserves an unresolved evidence disposition and does not prove current legal applicability, sovereignty, source-history fitness, physical correctness, native repairability, selected-owner state, or production delivery.",
     "The 536 USA31 contacts are not findings that those cells belong elsewhere.",
     "The 63 foreign-original contacts retain ownerless foreign source evidence; contact alone is not a legal boundary adjudication.",
     "The Fairfax key remains held under distinct city/county identity issue #976; no same-name merge is inferred.",
     "The 604 physical holds are conservative whole-owner holds because invalid GSHHG source record 2380 has no measured relation for Sagadahoc and Lincoln; they do not establish that all 604 keys are physically wrong.",
-    "Existing PR #2371 and its 105,927 qualified outcomes are referenced unchanged. Root acceptance, current selected-owner observation, bank conservation, emitted-consumer acceptance and issue closure remain pending.",
-    "The parent assigned this USA #2358 residual as a separate package scope from CAF and SSD; this packet does not include or verify a CAF/SSD cross-key comparator, so exact key-set disjointness is not asserted. It does not modify or re-open those scopes."
+    "The parent assigned this USA #2358 residual as a separate package scope from CAF and SSD; this packet does not include or verify a CAF/SSD cross-key comparator, so exact key-set disjointness is not asserted. It does not modify or re-open those scopes.",
+    "The current-main selected-owner observation confirms zero owner on all 1,204 held keys and 105,927 nonzero-owner outcomes; it does not alter any hold or prior credit and does not establish selected-bank conservation or emitted-consumer acceptance.",
+    "Independent prepublication review found the residual eligible for the original contract’s documented unresolved-hold path; final review of this public head and the remaining acceptance gates are pending."
   ],
   "disposition": {
     "every_held_key_status": "held_unresolved",
@@ -127,5 +127,115 @@
     "every_key_accepted_disposition": false,
     "every_key_new_credit": 0
   },
-  "created_by_worker": "01a155d7-7881-716f-82c8-fb84fe3f5014"
+  "created_by_worker": "01a155d7-7881-716f-82c8-fb84fe3f5014",
+  "source_evidence_copies": {
+    "status": "all eight cited #2371 factual input bodies are included byte-for-byte and verified against the immutable source commit pins",
+    "source_commit": "62dcd0b393930e6c5bbef6904ce004d9c7ed4b9f",
+    "files": [
+      {
+        "source_ref": "62dcd0b393930e6c5bbef6904ce004d9c7ed4b9f",
+        "source_repo_path": "coordination/engineering/usa-repair-delivery-20261017/native-config-003/complete-original-accounting.json",
+        "git_blob_sha1": "4b2b33818b3fd7285460e7b0d036d203d08045c4",
+        "bytes": 255078,
+        "sha256": "8a7e768e305bf13eb58986d46cac7415eef72ddecb495637b2d4dae1451b124a",
+        "packet_copy_path": "coordination/engineering/usa1204-held-residual-20261020/source-evidence/usa-repair-delivery-20261017/native-config-003/complete-original-accounting.json"
+      },
+      {
+        "source_ref": "62dcd0b393930e6c5bbef6904ce004d9c7ed4b9f",
+        "source_repo_path": "coordination/engineering/usa-repair-delivery-20261017/independent-source-review/hold-key-union.json",
+        "git_blob_sha1": "ad68fd8123c56c01da97341a02fc8e4fbfa99f68",
+        "bytes": 213122,
+        "sha256": "064de4e2d549bc2f6961d6054920c8f4f7d8f2cefa3166a26c5b87c8f9b82141",
+        "packet_copy_path": "coordination/engineering/usa1204-held-residual-20261020/source-evidence/usa-repair-delivery-20261017/independent-source-review/hold-key-union.json"
+      },
+      {
+        "source_ref": "62dcd0b393930e6c5bbef6904ce004d9c7ed4b9f",
+        "source_repo_path": "coordination/engineering/usa-repair-delivery-20261017/native-config-002/physical-admission-holds.json",
+        "git_blob_sha1": "8e60ef727b923b1330f7531452d9a87bb537f398",
+        "bytes": 85860,
+        "sha256": "22da621dc2737d7551440e2d05ad72a5f12c837750b6befab921dadfc6f318b4",
+        "packet_copy_path": "coordination/engineering/usa1204-held-residual-20261020/source-evidence/usa-repair-delivery-20261017/native-config-002/physical-admission-holds.json"
+      },
+      {
+        "source_ref": "62dcd0b393930e6c5bbef6904ce004d9c7ed4b9f",
+        "source_repo_path": "coordination/engineering/usa-repair-delivery-20261017/source-review/physical-source-hold-union.json",
+        "git_blob_sha1": "df5454f41836da6d5cfbdc3aa086e8a3201ede40",
+        "bytes": 361,
+        "sha256": "8f5fef99816b7cfd54febb9b0f5a2ef3c530b4f9f3ec52327e21e988248fb4c9",
+        "packet_copy_path": "coordination/engineering/usa1204-held-residual-20261020/source-evidence/usa-repair-delivery-20261017/source-review/physical-source-hold-union.json"
+      },
+      {
+        "source_ref": "62dcd0b393930e6c5bbef6904ce004d9c7ed4b9f",
+        "source_repo_path": "coordination/engineering/usa-repair-delivery-20261017/independent-source-review/exact-USA31-component-keys.json",
+        "git_blob_sha1": "f6abe7e6357d36927039adc1ec980207e160f950",
+        "bytes": 197745,
+        "sha256": "8dd932327e9d919b7dc3b0c2945c69b1b92300a413970f8c7753ffd6f3152784",
+        "packet_copy_path": "coordination/engineering/usa1204-held-residual-20261020/source-evidence/usa-repair-delivery-20261017/independent-source-review/exact-USA31-component-keys.json"
+      },
+      {
+        "source_ref": "62dcd0b393930e6c5bbef6904ce004d9c7ed4b9f",
+        "source_repo_path": "coordination/engineering/usa-repair-delivery-20261017/independent-source-review/original-foreign-contact-keys.json",
+        "git_blob_sha1": "06ac068cc36a4f1a8117923e44621c733645655b",
+        "bytes": 15496,
+        "sha256": "95ccd26762ad791a0bc915e7693c4588b4b21dc668a4505726684af130f15fc8",
+        "packet_copy_path": "coordination/engineering/usa1204-held-residual-20261020/source-evidence/usa-repair-delivery-20261017/independent-source-review/original-foreign-contact-keys.json"
+      },
+      {
+        "source_ref": "62dcd0b393930e6c5bbef6904ce004d9c7ed4b9f",
+        "source_repo_path": "coordination/engineering/usa-repair-delivery-20261017/original-scope/original-intervals.json.gz",
+        "git_blob_sha1": "8d4a7b4fc6a5b1d12fca99d26388c8ef6b5dee7c",
+        "bytes": 273284,
+        "sha256": "eadfb7b90484dfa284ccf1db594a4015e8826eda2c138ae72c04965225e56793",
+        "packet_copy_path": "coordination/engineering/usa1204-held-residual-20261020/source-evidence/usa-repair-delivery-20261017/original-scope/original-intervals.json.gz"
+      },
+      {
+        "source_ref": "62dcd0b393930e6c5bbef6904ce004d9c7ed4b9f",
+        "source_repo_path": "coordination/engineering/usa-repair-delivery-20261017/source-stage-001/identity-holds.json",
+        "git_blob_sha1": "12fcb263f090d85f71b22e673e232b473335aefa",
+        "bytes": 287,
+        "sha256": "c75965e4144dff7935d8ada3093dc7f64ce6b9d19150ba8cbbd1cd1a75a6410a",
+        "packet_copy_path": "coordination/engineering/usa1204-held-residual-20261020/source-evidence/usa-repair-delivery-20261017/source-stage-001/identity-holds.json"
+      }
+    ]
+  },
+  "selected_owner_observation": {
+    "status": "current-main observation completed; final public-head review pending; residual remains held",
+    "receipt_path": "coordination/engineering/usa1204-held-residual-20261020/selected-owner-observation-a4390854-20261020.json.gz",
+    "receipt_encoding": "gzip; decompression yields the exact observer JSON bytes",
+    "decoded_bytes": 39655434,
+    "decoded_sha256": "c604bb102b54df876c35dca5ff031f4488c6a56f9412c089f9b121ae6e2e586e",
+    "compressed_bytes": 1061645,
+    "compressed_sha256": "2c9dc3c8c871a4cdcaed60fb3e539b34d48fe5ead1637cd73845c78dd7dc515b",
+    "data_commit": "a4390854c013c8891b187556ac4498888ee33633",
+    "observer_code_commit": "3105bb77a2e3356235217f4eefb7cc73c4a6d428",
+    "selector_git_blob_oid": "2e1ec2875d2932eafb33f4c1062412282df234cb",
+    "query_count": 107131,
+    "query_sha256": "05bb7823c69c3827e9f26be905cbf7461ebb6a8b78814bc2015938647b1be36e",
+    "original_scope": {
+      "cells": 107131,
+      "intervals": 46575,
+      "subjects": 351,
+      "land": 95729,
+      "inland_water": 11402
+    },
+    "selected_owner_counts": {
+      "nonzero": 105927,
+      "zero": 1204,
+      "overlaps": 0
+    },
+    "residual_join": {
+      "held_roster_rows": 1204,
+      "exact_interval_row_matches": 1204,
+      "additive_owner_nonzero": 0,
+      "effective_owner_nonzero": 0
+    },
+    "contract_finding": {
+      "eligible_as_documented_unresolved_holds": true,
+      "accepted_disposition": false,
+      "new_repair_credit": 0,
+      "new_documented_exception_credit": 0,
+      "package_closure": false
+    },
+    "final_public_head_review": "pending"
+  }
 }

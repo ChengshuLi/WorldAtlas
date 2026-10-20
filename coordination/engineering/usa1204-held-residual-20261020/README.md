@@ -10,9 +10,15 @@ The 1,204 held keys are partitioned exactly: **536 USA31 source-history**, **63 
 
 The roster contains one record per held key. Each key joins to exactly one row of the original 46,575-row interval table and retains that full original tuple and zero-based row index. The held keys touch **444 distinct original interval rows** (219 USA31, 56 foreign, 1 Fairfax, 168 physical); this is a count of original rows touched, not a replacement denominator.
 
-## Evidence and limits
+## Current-main selected-owner observation
 
-The roster and manifest pin the original interval table and the exact PR #2371 evidence blobs by immutable commit, Git blob ID, size and SHA-256. Original source and physical evidence are cited by their retained pins. No new national source data, geometry, boundary interpretation, or owner observation was produced.
+The exact current-main observation is included at `selected-owner-observation-a4390854-20261020.json.gz`. It decompresses losslessly to a **39,655,434-byte** JSON report (SHA-256 `c604bb102b54df876c35dca5ff031f4488c6a56f9412c089f9b121ae6e2e586e`); the committed gzip is **1,061,645 bytes** (SHA-256 `2c9dc3c8c871a4cdcaed60fb3e539b34d48fe5ead1637cd73845c78dd7dc515b`). It binds data commit `a4390854c013c8891b187556ac4498888ee33633`, observer code commit `3105bb77a2e3356235217f4eefb7cc73c4a6d428`, and selector blob `2e1ec2875d2932eafb33f4c1062412282df234cb`. It covers all 107,131 original keys / 46,575 intervals and finds 105,927 nonzero-owner outcomes, 1,204 zero-owner held keys, and zero overlaps. The observation was run once; the published report is that same exact output.
+
+The same independent reviewer’s prepublication review found the 1,204 outcomes eligible as documented unresolved holds under the original #2358/#2371 contract. This establishes eligibility only. The 1,204 remain held and no accepted disposition, exception acceptance, repair, credit, or package closure is claimed. Selected-bank conservation and emitted-consumer acceptance remain pending review of the public evidence.
+
+## Referenced factual bodies
+
+All eight factual input bodies cited by this packet are copied byte-for-byte under `source-evidence/usa-repair-delivery-20261017/`. Their original repo paths, immutable #2371 commit, Git blob IDs, sizes, and SHA-256 values are recorded in `evidence-manifest.json`. Each copy was verified against its pinned Git blob ID and SHA-256. The copied source interval file remains gzip-compressed in its original form.
 
 - **USA31 (536):** retain the unresolved source-history defer and exact component IDs. These contacts are not findings that the cells belong elsewhere.
 - **Foreign originals (63):** preserve the complete ownerless foreign-source contacts. Contact evidence is not a legal boundary adjudication.
@@ -21,9 +27,11 @@ The roster and manifest pin the original interval table and the exact PR #2371 e
 
 The source handoff preserves the consumed geoBoundaries USA ADM2 product’s 2018 represented-year claim and separate 2023 source-update/build dates, per-file Public Domain metadata, attribution, and derivative-language applicability caveat. Other source-vintage, boundary, Minnesota and reproduction obligations remain open. No present-day legal applicability or sovereignty conclusion is made.
 
-A fresh USA-specific current-main selected-owner observation has not been asserted in this packet. The prior saved observation at 77609a1 is stale and excluded. Root owns the fresh selected-owner-zero/conservation and emitted-consumer checks. The 105,927 earlier qualified outcomes remain as previously reported; this packet adds zero accepted credit. The parent assigned this USA #2358 residual as a separate package scope from CAF and SSD; this packet does not include or verify a CAF/SSD cross-key comparator, so exact key-set disjointness is not asserted.
+The parent assigned this USA residual as a separate package scope from CAF and SSD. This packet does not include or verify a CAF/SSD cross-key comparator and does not assert exact key-set disjointness. PR #2371 is not reopened or recounted.
 
 ## Files
 
-- `evidence-manifest.json`: denominator, disposition, evidence pins, checks and explicit limits.
+- `evidence-manifest.json`: denominator, dispositions, exact source-body copies, receipt pins and limits.
 - `held-key-roster.json`: all 1,204 held keys with exact original interval-row joins and per-category evidence pointers.
+- `selected-owner-observation-a4390854-20261020.json.gz`: lossless compressed exact current-main observer output.
+- `source-evidence/usa-repair-delivery-20261017/`: eight byte-exact factual inputs cited by the packet.
