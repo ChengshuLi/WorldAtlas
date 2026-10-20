@@ -333,8 +333,27 @@ function coldFixture({splitCandidates = false} = {}) {
   }
   git(['update-ref', 'refs/heads/fixture', head]); git(['symbolic-ref', 'HEAD', 'refs/heads/fixture']);
   const log = path.join(f.repo, 'fetches.jsonl'), preload = path.join(f.repo, 'metadata.mjs');
-  const setup = {origin: f.repo, realGit, log, metadataLog: path.join(f.repo, 'metadata-requests.jsonl')};
+  const implementation = path.join(bin, 'implementation'), launchLog = path.join(f.repo, 'git-launches.jsonl');
+  fs.mkdirSync(path.join(implementation, 'bin'), {recursive: true});
+  // The PATH launcher resolves an implementation but cannot serve as that implementation.
+  // A second PATH lookup during acquisition must fail rather than silently use the shim.
   fs.writeFileSync(path.join(bin, 'git'), `#!${process.execPath}
+import fs from 'node:fs';
+const args = process.argv.slice(2);
+fs.appendFileSync(${JSON.stringify(launchLog)}, JSON.stringify(args) + '\\n');
+if (args.length !== 1 || args[0] !== '--exec-path') throw Error('Git launch shim selected again');
+process.stdout.write(${JSON.stringify(path.join(implementation, 'libexec', 'git-core'))} + '\\n');
+`, {mode: 0o755});
+  const setup = {origin: f.repo, realGit, log, metadataLog: path.join(f.repo, 'metadata-requests.jsonl')};
+  const transport = path.join(implementation, 'transport.mjs');
+  // Only the local fetch interception needs Node; ordinary Git reads stay direct.
+  fs.writeFileSync(path.join(implementation, 'bin', 'git'), `#!/bin/sh
+for arg do
+  if [ "$arg" = fetch ]; then exec ${JSON.stringify(process.execPath)} ${JSON.stringify(transport)} "$@"; fi
+done
+exec ${JSON.stringify(realGit)} "$@"
+`, {mode: 0o755});
+  fs.writeFileSync(transport, `#!${process.execPath}
 import fs from 'node:fs';
 import {spawnSync} from 'node:child_process';
 const s = ${JSON.stringify(setup)}, args = process.argv.slice(2), input = fs.readFileSync(0);
@@ -368,13 +387,16 @@ globalThis.fetch = async url => {
   const run = options => f.run({repo: root, commit: head, nodeArgs: ['--import', preload], ...options,
     env: {PATH: bin + path.delimiter + process.env.PATH, ...options?.env}});
   return {...f, root, head, codeOids, forbidden, gitCold: git, inventory, batches, run,
+    launches: () => fs.existsSync(launchLog) ? fs.readFileSync(launchLog, 'utf8').trim().split('\n').map(JSON.parse) : [],
     metadataRequests: () => fs.existsSync(setup.metadataLog) ? fs.readFileSync(setup.metadataLog, 'utf8') : ''};
 }
 
 for (const splitCandidates of [false, true]) test('one cold ' + (splitCandidates ? 'split-member' : 'multiblock') + ' command acquires exactly its original and native inputs; warm reuse fetches nothing', t => {
   const f = coldFixture({splitCandidates}); try {
     assert.deepEqual(new Set(f.inventory().filter(([, kind]) => kind === 'blob').map(([oid]) => oid)), f.codeOids);
-    const r = f.run(); assert.equal(r.status, 0, r.stderr);
+    const r = f.run();
+    assert.deepEqual(f.launches(), [['--exec-path']], 'only bootstrap resolves the Git implementation');
+    assert.equal(r.status, 0, r.stderr);
     assert.equal(r.report.query_count, 5); assert.deepEqual(r.report.keys.map(({x,y}) => ({x,y})), keys);
     assert.deepEqual(r.report.original_intervals.map(b => b.block), splitCandidates ? [0] : [0, 1]);
     assert.equal(r.report.code_commit, f.head); assert.equal(r.report.commit, f.head);
@@ -401,6 +423,7 @@ for (const splitCandidates of [false, true]) test('one cold ' + (splitCandidates
     assert.equal(r.report.acquisition.complete_scientific_closure, false);
     t.diagnostic(JSON.stringify({variant: splitCandidates ? 'split' : 'multiblock', acquired_objects: expected.size, declared_blob_bytes: declaredBytes, fetch_batches: f.batches().length}));
     const prior = f.batches().length, metadata = f.metadataRequests(), warm = f.run(); assert.equal(warm.status, 0, warm.stderr);
+    assert.deepEqual(f.launches(), [['--exec-path'], ['--exec-path']], 'warm acquisition also reuses resolved Git');
     assert.equal(warm.report.acquisition.fetched_objects, 0); assert.equal(warm.report.acquisition.fetched_bytes, 0);
     assert.equal(f.batches().length, prior); assert.equal(f.metadataRequests(), metadata); assert.deepEqual(warm.report.keys, r.report.keys);
     assert.deepEqual(warm.report.original_intervals, r.report.original_intervals);
