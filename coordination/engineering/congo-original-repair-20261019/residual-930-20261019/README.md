@@ -17,7 +17,7 @@ The shared-owner boundary at owner 14485 is separated by `(y,x)`; the partitions
 
 ## Evidence and source constraints
 
-The held ledger is pinned at commit `81b808d4d73a225b6eacdae8b0554f9326b16270`, path `coordination/engineering/congo-original-repair-20261018/supported-inputs-001/held-original.json`, blob `d5d4d6850ffaade0a2ae8974b4307c7535e40c08`. That file is absent at current main `0d2b956d5cf2c9369ed787f2020f806171570e2d`; current main's retained supported-patch and source-evidence paths still match blobs `1f3255e8bcde0727854430ae89431accd7b45340` and `b70c4f7900ca0fa64476e162abe6dd4ad2bd37fa`.
+The held ledger is pinned at commit `81b808d4d73a225b6eacdae8b0554f9326b16270`, path `coordination/engineering/congo-original-repair-20261018/supported-inputs-001/held-original.json`, blob `d5d4d6850ffaade0a2ae8974b4307c7535e40c08`. That file is absent at the PR base `0d2b956d5cf2c9369ed787f2020f806171570e2d`; the retained supported-patch and source-evidence paths match blobs `1f3255e8bcde0727854430ae89431accd7b45340` and `b70c4f7900ca0fa64476e162abe6dd4ad2bd37fa`.
 
 Original tuple class/source candidates are joined through retained extraction blocks 031–034 (blob OIDs are recorded in both JSON files). `source-target-membership.json` is blob `8cd083399b9b4a8b343a272c5359541835902140`. The original accounting is blob `7303af8df856ae91d57a6caf86e96f7ad81ae62e`. Primary COD ADM2 source archive is pinned as `coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-COD-ADM2-000.bin.gz`, blob `dc4f2926dc0945eef1f35fa34c506a270b6239b2`; its retained metadata records 2019 representation and CC BY 3.0 IGO. This provenance does not itself establish current applicability or legal authority.
 
@@ -25,7 +25,7 @@ The source-evidence and whole-target physical artifacts are contextual evidence 
 
 ## Remaining gates and scope boundaries
 
-A current-owner receipt is blocked/unavailable in this packet; no current-owner-zero claim is made. No conservation, emitted-consumer, or integration gate is claimed complete. All 930 remain held pending further exact evidence and explicit issue acceptance.
+A literal selected-owner observation is now recorded at `coordination/engineering/congo-original-repair-20261018/supported-inputs-001/current-selected-owner-observation-20261020.json` (1,588,770 bytes; SHA-256 `46ac4b3072db67d9221bd64bfaf860d6adb8e9c81372432393da8a3e7fe088bb`). It pins both the data commit and executable code commit to current main `721ad08048faad09ebe7a218ef94b709af7d2861`, and covers all 3,905 original package keys: base owner is zero on all 3,905, selected additive/effective owner is nonzero on 2,975 and zero on 930, with no base/patch overlaps. Its kind is `literal-selected-owner-observation-v1` and `scientific_qualification` is false. It is not source applicability, current physical classification, qualification, repair acceptance, or publication approval; it adds zero credit and makes no owner changes. The 930 residual keys remain held. Conservation, emitted-consumer, and integration gates remain unverified; explicit issue acceptance is still required.
 
 This COD-only packet does not decide or expand the separate #870/#878 water scopes or #1694 scope. It preserves the full original water denominator and recorded limits.
 
