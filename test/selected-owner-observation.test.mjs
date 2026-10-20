@@ -17,7 +17,7 @@ const queueRoot = 'coordination/engineering/global-current-cell-work-queue-20261
 const packageId = 'gb-TST-ADM2--repair-evaluation';
 const sources = staticModuleClosure(process.cwd(), [command]);
 const keys = [{x: 0, y: 0}, {x: 2, y: 0}, {x: 3, y: 0}, {x: 1, y: 1}, {x: 1, y: 2}];
-function fixture({missingOrigins = false, changeManifest, changePatch, changeSide, changeOwners, changeArrays, changeQueue, changeOriginalGrid, splitCandidates = false} = {}) {
+function fixture({missingOrigins = false, changeManifest, changePatch, changeSide, changeOwners, changeArrays, changeQueue, changeOriginalGrid, splitCandidates = false, multiBlock = false} = {}) {
   const repo = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'owner-observation-')));
   const git = (...args) => execFileSync('git', ['-C', repo, ...args], {stdio: ['ignore', 'pipe', 'pipe']}).toString().trim();
   const write = (name, body) => {
@@ -43,9 +43,9 @@ function fixture({missingOrigins = false, changeManifest, changePatch, changeSid
   const featureRaw = Buffer.from(JSON.stringify([{family_index: 0, owners: [1]}, {family_index: 0, owners: [2]}]) + '\n');
   write(queueRoot + '/source-feature-roster.json.gz', gzipSync(featureRaw));
   const raster = write(queueRoot + '/source-raster-summary.json', {products: [{product: 'gb:TST:ADM2'}]});
-  const block = (prefix, rows) => {
+  const block = (prefix, rows, b = 0) => {
     const decoded = Buffer.from(JSON.stringify(rows) + '\n'), raw = gzipSync(decoded);
-    write(queueRoot + '/' + prefix + '-block-000.json.gz', raw);
+    write(queueRoot + '/' + prefix + '-block-' + String(b).padStart(3, '0') + '.json.gz', raw);
     return {kind: prefix, sha256: sha(raw), decoded_sha256: sha(decoded)};
   };
   const candidates = block('source-candidates', [
@@ -62,15 +62,24 @@ function fixture({missingOrigins = false, changeManifest, changePatch, changeSid
   }
   const land = block('physical-support', [0, 1, 2, 3].map(y => ({y, runs: [[0, 4]]})));
   const water = block('inland-water-support', []);
-  const census = write(queueRoot + '/source-census-summary.json', {blocks: [candidates]});
-  const physical = write(queueRoot + '/physical-unassigned-summary.json', {phases: [{files: [land, water]}]});
+  const blocks = [candidates], phases = [{files: [land, water]}];
+  if (multiBlock) {
+    assert.equal(splitCandidates, false);
+    const rows = JSON.parse(gunzipSync(fs.readFileSync(path.join(repo, queueRoot, 'source-candidates-block-000.json.gz'))));
+    blocks[0] = block('source-candidates', rows.filter(r => r.y < 2));
+    blocks.push(block('source-candidates', rows.filter(r => r.y >= 2), 1));
+    phases[0].files = [block('physical-support', [0, 1].map(y => ({y, runs: [[0, 4]]}))), water];
+    phases.push({files: [block('physical-support', [2, 3].map(y => ({y, runs: [[0, 4]]})), 1), block('inland-water-support', [], 1)]});
+  }
+  const census = write(queueRoot + '/source-census-summary.json', {blocks});
+  const physical = write(queueRoot + '/physical-unassigned-summary.json', {phases});
   const originalGrid = {size: 4, selection: {method: 'native-linear-evenodd-first-owner-v1', sha256: 'e'.repeat(64),
     additive_release: {path: 'historical-patch-not-read.json'}}, native_latitudes: {decoded_bytes: latitudeRaw.length, decoded_sha256: sha(latitudeRaw)}};
   changeOriginalGrid?.(originalGrid);
   const gridBinding = write(queueRoot + '/ownership-binding.json', originalGrid);
   const queue = {input_sha256: {'source-feature-roster.json': sha(featureRaw), 'source-raster-summary.json': sha(raster),
     'source-census-summary.json': sha(census), 'physical-unassigned-summary.json': sha(physical), 'ownership-binding.json': sha(gridBinding)},
-    packages: [{package_id: packageId, native_blocks: [0], native_cells: 5, intervals: 5},
+    packages: [{package_id: packageId, native_blocks: multiBlock ? [0, 1] : [0], native_cells: 5, intervals: 5},
       {package_id: 'gb-TST-ADM2--source-conflict', native_blocks: [0], native_cells: 1, intervals: 1}]};
   changeQueue?.(queue); write(queueRoot + '/source-package-queue.json', queue);
   const origin = commit();
@@ -126,8 +135,9 @@ function fixture({missingOrigins = false, changeManifest, changePatch, changeSid
   let n = 0;
   const run = (options = {}) => {
     const output = options.out ?? path.join(repo, 'observation-' + n++ + '.json');
-    const result = spawnSync(process.execPath, [path.join(repo, command), '--repo', repo, '--commit', options.commit ?? git('rev-parse', 'HEAD'),
-      '--package', options.packageId ?? packageId, '--out', output, ...(options.extra ?? [])], {encoding: 'utf8', env: {...process.env, GIT_NO_LAZY_FETCH: '1', GIT_NO_REPLACE_OBJECTS: '1'}});
+    const target = options.repo ?? repo;
+    const result = spawnSync(process.execPath, [...(options.nodeArgs ?? []), path.join(target, command), '--repo', target, '--commit', options.commit ?? git('rev-parse', 'HEAD'),
+      '--package', options.packageId ?? packageId, '--out', output, ...(options.extra ?? [])], {encoding: 'utf8', env: {...process.env, GIT_NO_LAZY_FETCH: '1', GIT_NO_REPLACE_OBJECTS: '1', ...options.env}});
     return {...result, output, report: result.status === 0 ? JSON.parse(fs.readFileSync(output)) : null};
   };
   return {repo, git, write, commit, pin, head, manifest, selection, side, run, cleanup: () => fs.rmSync(repo, {recursive: true})};
@@ -170,10 +180,12 @@ test('immutable body and executed source drift fail before an observation is pub
       const r = f.run(); assert.notEqual(r.status, 0, name); assert.equal(fs.existsSync(r.output), false);
     } finally { f.cleanup(); }
   }
-  const f = fixture(); try {
-    fs.appendFileSync(path.join(f.repo, 'src/pixel-ownership.js'), '\n// uncommitted source drift\n');
-    const r = f.run(); assert.notEqual(r.status, 0); assert.match(r.stderr, /Executed source differs/); assert.equal(fs.existsSync(r.output), false);
-  } finally { f.cleanup(); }
+  for (const name of ['src/pixel-ownership.js', 'scripts/geography-prefetch.mjs']) {
+    const f = fixture(); try {
+      fs.appendFileSync(path.join(f.repo, name), '\n// uncommitted source drift\n');
+      const r = f.run(); assert.notEqual(r.status, 0); assert.match(r.stderr, /Executed source differs/); assert.equal(fs.existsSync(r.output), false);
+    } finally { f.cleanup(); }
+  }
 });
 
 test('existing files, symlinks and nonordinary output parents are not overwritten', () => {
@@ -295,5 +307,132 @@ test('original queue grid identity is joined before native body reads, not the c
   const f = fixture(); try {
     // The fixture's historical selector SHA and patch differ intentionally.
     const r = f.run(); assert.equal(r.status, 0, r.stderr); assert.equal(r.report.query_count, 5);
+  } finally { f.cleanup(); }
+});
+
+
+// Genuine cold Git objects, not missing working-tree copies. Only committed code,
+// commit/tree metadata and the test transport are installed before the CLI runs.
+function coldFixture({splitCandidates = false} = {}) {
+  const f = fixture({multiBlock: !splitCandidates, splitCandidates}), root = path.join(f.repo, 'cold'), bin = path.join(f.repo, 'bin');
+  const forbidden = ['data/world-index.json', 'inputs/source-geometries.json', 'inputs/certificate.json', 'inputs/ledger.json'];
+  for (const name of forbidden) f.write(name, {forbidden: name});
+  const head = f.commit(), objects = f.git('cat-file', '--batch-all-objects', '--batch-check=%(objectname) %(objecttype)').split('\n').map(s => s.split(' '));
+  const realGit = execFileSync('which', ['git'], {encoding: 'utf8'}).trim();
+  const git = (args, input) => execFileSync(realGit, ['-C', root, ...args], {input, stdio: ['pipe', 'pipe', 'pipe']});
+  fs.mkdirSync(root); fs.mkdirSync(bin); git(['init']);
+  for (const [oid, kind] of objects.filter(([, kind]) => kind !== 'blob')) {
+    const raw = execFileSync(realGit, ['-C', f.repo, 'cat-file', kind, oid]);
+    assert.equal(git(['hash-object', '-w', '-t', kind, '--stdin'], raw).toString().trim(), oid);
+  }
+  const codeOids = new Set();
+  for (const name of [...sources, 'scripts/run-geographic-check.py', 'package.json']) {
+    const raw = execFileSync(realGit, ['-C', f.repo, 'show', head + ':' + name]);
+    const oid = git(['hash-object', '-w', '--stdin'], raw).toString().trim(); codeOids.add(oid);
+    fs.mkdirSync(path.dirname(path.join(root, name)), {recursive: true}); fs.writeFileSync(path.join(root, name), raw);
+  }
+  git(['update-ref', 'refs/heads/fixture', head]); git(['symbolic-ref', 'HEAD', 'refs/heads/fixture']);
+  const log = path.join(f.repo, 'fetches.jsonl'), preload = path.join(f.repo, 'metadata.mjs');
+  const setup = {origin: f.repo, realGit, log, metadataLog: path.join(f.repo, 'metadata-requests.jsonl')};
+  fs.writeFileSync(path.join(bin, 'git'), `#!${process.execPath}
+import fs from 'node:fs';
+import {spawnSync} from 'node:child_process';
+const s = ${JSON.stringify(setup)}, args = process.argv.slice(2), input = fs.readFileSync(0);
+if (args.includes('fetch')) {
+  if (!['https://github.com/ChengshuLi/WorldAtlas.git','--stdin','--filter=blob:none','--no-auto-maintenance','--no-tags','--no-write-fetch-head','--no-recurse-submodules','fetch.negotiationAlgorithm=noop'].every(flag => args.includes(flag)) || process.env.GIT_NO_LAZY_FETCH !== '1' || process.env.GIT_NO_REPLACE_OBJECTS !== '1') throw Error('Unbounded transport');
+  fs.appendFileSync(s.log, JSON.stringify(input.toString().trim().split('\\n')) + '\\n');
+  if (Number(process.env.OBSERVATION_TEST_FAIL_FETCH) === fs.readFileSync(s.log, 'utf8').trim().split('\\n').length) process.exit(1);
+  args[args.indexOf('https://github.com/ChengshuLi/WorldAtlas.git')] = s.origin;
+}
+const r = spawnSync(s.realGit, args, {input, stdio: ['pipe','inherit','inherit']}); process.exit(r.status ?? 1);
+`, {mode: 0o755});
+  fs.writeFileSync(preload, `import fs from 'node:fs';
+import {execFileSync} from 'node:child_process';
+const s = ${JSON.stringify(setup)};
+if (process.env.OBSERVATION_TEST_NO_SPACE) fs.statfsSync = () => ({bavail: 0, bsize: 4096});
+globalThis.fetch = async url => {
+  const u = new URL(url), match = new RegExp('^/repos/ChengshuLi/WorldAtlas/git/trees/([a-f0-9]{40})$').exec(u.pathname);
+  if (u.origin !== 'https://api.github.com' || u.search !== '' || !match) throw Error('Forbidden network endpoint: ' + url);
+  fs.appendFileSync(s.metadataLog, url + '\\n');
+  const raw = execFileSync(s.realGit, ['-C',s.origin,'ls-tree','-tlz',match[1]]).toString();
+  const tree = raw.split('\\0').filter(Boolean).map(line => {
+    const [meta,path] = line.split('\\t'), [mode,type,sha,size] = meta.trim().split(/\\s+/);
+    return {path,mode,type,sha,...(type === 'blob' ? {size:Number(size)} : {})};
+  });
+  if (process.env.OBSERVATION_TEST_BAD_DESCRIPTOR) tree.find(r => r.path === 'ownership-selection.json').sha = '0'.repeat(40);
+  return {ok:true,json:async()=>({sha:match[1],truncated:false,tree})};
+};
+`);
+  const inventory = () => git(['cat-file', '--batch-all-objects', '--batch-check=%(objectname) %(objecttype)']).toString().trim().split('\n').filter(Boolean).map(s => s.split(' '));
+  const batches = () => fs.existsSync(log) ? fs.readFileSync(log, 'utf8').trim().split('\n').filter(Boolean).map(JSON.parse) : [];
+  const run = options => f.run({repo: root, commit: head, nodeArgs: ['--import', preload], ...options,
+    env: {PATH: bin + path.delimiter + process.env.PATH, ...options?.env}});
+  return {...f, root, head, codeOids, forbidden, gitCold: git, inventory, batches, run,
+    metadataRequests: () => fs.existsSync(setup.metadataLog) ? fs.readFileSync(setup.metadataLog, 'utf8') : ''};
+}
+
+for (const splitCandidates of [false, true]) test('one cold ' + (splitCandidates ? 'split-member' : 'multiblock') + ' command acquires exactly its original and native inputs; warm reuse fetches nothing', t => {
+  const f = coldFixture({splitCandidates}); try {
+    assert.deepEqual(new Set(f.inventory().filter(([, kind]) => kind === 'blob').map(([oid]) => oid)), f.codeOids);
+    const r = f.run(); assert.equal(r.status, 0, r.stderr);
+    assert.equal(r.report.query_count, 5); assert.deepEqual(r.report.keys.map(({x,y}) => ({x,y})), keys);
+    assert.deepEqual(r.report.original_intervals.map(b => b.block), splitCandidates ? [0] : [0, 1]);
+    assert.equal(r.report.code_commit, f.head); assert.equal(r.report.commit, f.head);
+    const expectedPaths = ['data/ownership-selection.json', 'inputs/native/manifest.json', 'inputs/owners.json', 'inputs/latitudes.gz',
+      'inputs/registry.json','inputs/sidecar.json','inputs/envelope.json','inputs/patch.json','inputs/bank/index.json',
+      ...[0,1,2].map(i => 'inputs/bank/part-' + i + '.gz'),
+      ...['source-package-queue.json','source-feature-roster.json.gz','source-raster-summary.json','source-census-summary.json','physical-unassigned-summary.json','ownership-binding.json'].map(n => queueRoot + '/' + n),
+      ...(splitCandidates ? ['source-split-0.json.gz','source-split-1.json.gz','physical-support-block-000.json.gz','inland-water-support-block-000.json.gz']
+        : [0,1].flatMap(b => ['source-candidates','physical-support','inland-water-support'].map(p => p + '-block-' + String(b).padStart(3,'0') + '.json.gz'))).map(n => queueRoot + '/' + n)];
+    const expected = new Set(expectedPaths.map(p => f.git('rev-parse', f.head + ':' + p)));
+    assert.deepEqual(new Set(f.batches().flat()), expected);
+    assert.equal(f.batches().flat().length, expected.size, 'unchanged OIDs deduplicate across discovery phases');
+    assert(f.batches().some(batch => batch.length >= (splitCandidates ? 4 : 5)), 'whole original member layer shares a batch');
+    const imported = new Set(f.inventory().filter(([oid,kind]) => kind === 'blob' && !f.codeOids.has(oid)).map(([oid]) => oid));
+    assert.deepEqual(imported, expected);
+    const metadataUrls = f.metadataRequests().trim().split('\n');
+    assert.equal(new Set(metadataUrls).size, metadataUrls.length, 'each containing tree is requested only once');
+    const rootTree = f.git('rev-parse', f.head + '^{tree}');
+    assert(!f.metadataRequests().includes(rootTree), 'never request unrelated repository-root metadata');
+    for (const p of f.forbidden) assert(!imported.has(f.git('rev-parse', f.head + ':' + p)));
+    assert.equal(r.report.acquisition.fetched_objects, expected.size);
+    const declaredBytes = [...expected].reduce((n, oid) => n + Number(f.git('cat-file','-s',oid)), 0);
+    assert.equal(r.report.acquisition.fetched_bytes, declaredBytes);
+    assert.equal(r.report.acquisition.complete_scientific_closure, false);
+    t.diagnostic(JSON.stringify({variant: splitCandidates ? 'split' : 'multiblock', acquired_objects: expected.size, declared_blob_bytes: declaredBytes, fetch_batches: f.batches().length}));
+    const prior = f.batches().length, metadata = f.metadataRequests(), warm = f.run(); assert.equal(warm.status, 0, warm.stderr);
+    assert.equal(warm.report.acquisition.fetched_objects, 0); assert.equal(warm.report.acquisition.fetched_bytes, 0);
+    assert.equal(f.batches().length, prior); assert.equal(f.metadataRequests(), metadata); assert.deepEqual(warm.report.keys, r.report.keys);
+    assert.deepEqual(warm.report.original_intervals, r.report.original_intervals);
+    assert.equal(warm.report.original_intervals_sha256, r.report.original_intervals_sha256);
+  } finally { f.cleanup(); }
+});
+
+for (const [name, env, expected] of [
+  ['wrong immutable descriptor', {OBSERVATION_TEST_BAD_DESCRIPTOR:'1'}, /Remote descriptor differs/],
+  ['failed exact transport', {OBSERVATION_TEST_FAIL_FETCH:'1'}, /Geography object acquisition failed/],
+  ['insufficient disk', {OBSERVATION_TEST_NO_SPACE:'1'}, /Insufficient free disk/],
+]) test('cold observation refuses ' + name + ' without a final receipt', () => {
+  const f = coldFixture(); try {
+    const before = f.inventory(), r = f.run({env});
+    assert.notEqual(r.status, 0); assert.match(r.stderr, expected); assert.equal(fs.existsSync(r.output), false);
+    assert.deepEqual(f.inventory(), before);
+    if (!env.OBSERVATION_TEST_FAIL_FETCH) assert.equal(f.batches().length, 0);
+  } finally { f.cleanup(); }
+});
+
+
+test('a partial acquisition failure leaves no receipt and an ordinary retry reuses imported bodies', () => {
+  const f = coldFixture(); try {
+    const failed = f.run({env: {OBSERVATION_TEST_FAIL_FETCH:'2'}});
+    assert.notEqual(failed.status, 0); assert.match(failed.stderr, /Geography object acquisition failed/);
+    assert.equal(fs.existsSync(failed.output), false);
+    const retained = f.inventory().filter(([oid,kind]) => kind === 'blob' && !f.codeOids.has(oid)).map(([oid]) => oid);
+    assert.deepEqual(retained, [f.git('rev-parse', f.head + ':data/ownership-selection.json')]);
+    const prior = f.batches().length, resumed = f.run(); assert.equal(resumed.status, 0, resumed.stderr);
+    assert.equal(resumed.report.query_count, 5);
+    assert(!f.batches().slice(prior).flat().some(oid => retained.includes(oid)));
+    assert.equal(resumed.report.acquisition.fetched_objects,
+      f.inventory().filter(([oid,kind]) => kind === 'blob' && !f.codeOids.has(oid)).length - retained.length);
   } finally { f.cleanup(); }
 });

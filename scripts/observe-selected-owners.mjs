@@ -10,23 +10,26 @@ import {gunzipSync} from 'node:zlib';
 import {selectedBootstrap, NativeAssetImage, decodeVisibilityLatitudes} from './check-effective-geographic-regression.mjs';
 import {openNativeWordStore} from './native-word-store.mjs';
 import {admitNativePatchStore} from './native-patch-store.mjs';
-import {packageIntervals, ROOT as queueDirectory} from '../coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs';
+import {createAcquisition, githubTree} from './geography-prefetch.mjs';
+import {packageInputs, packageIntervals, ROOT as queueDirectory} from '../coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs';
 import {ownershipRun} from '../src/pixel-ownership.js';
 import {nativeBaseSelection, valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
+const relative = name => typeof name === 'string' && !path.posix.isAbsolute(name) &&
+  name.split('/').every(p => p && p !== '.' && p !== '..') && !name.includes('\\');
 const codeRoot = fileURLToPath(new URL('../', import.meta.url));
-const ownCode = ['scripts/observe-selected-owners.mjs', 'scripts/native-word-store.mjs',
+const ownCode = ['scripts/observe-selected-owners.mjs', 'scripts/geography-prefetch.mjs', 'scripts/native-word-store.mjs',
   'scripts/native-patch-store.mjs', 'src/pixel-ownership.js', 'src/pixel-grid.js',
   'coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs'];
 
 export async function observeSelectedPackage({repo, commit, packageId}) {
   assert.match(commit ?? '', /^[a-f0-9]{40}$/, 'An exact committed revision is required');
-  assert.equal(process.env.GIT_NO_LAZY_FETCH, '1', 'Set GIT_NO_LAZY_FETCH=1; acquire only required pinned inputs separately');
+  assert.equal(process.env.GIT_NO_LAZY_FETCH, '1', 'Set GIT_NO_LAZY_FETCH=1; only explicit pinned acquisition is allowed');
   assert.equal(process.env.GIT_NO_REPLACE_OBJECTS, '1', 'Set GIT_NO_REPLACE_OBJECTS=1');
   const {beforeReader: reader, executionCode} = selectedBootstrap(repo, commit, commit);
   try { reader.git('--no-lazy-fetch', '--version'); }
-  catch { throw Error('Use a Git implementation supporting --no-lazy-fetch; no compatibility fallback or network fetch is allowed'); }
+  catch { throw Error('Use a Git implementation supporting --no-lazy-fetch; no compatibility fallback is allowed'); }
   const codeCommit = reader.git('rev-parse', 'HEAD').toString().trim();
   const requireHead = () => assert.equal(reader.git('rev-parse', 'HEAD').toString().trim(), codeCommit,
     'Executable checkout changed during observation');
@@ -39,7 +42,37 @@ export async function observeSelectedPackage({repo, commit, packageId}) {
   })];
   for (const p of code) assert.equal(sha(reader.read(p.path, {version: codeCommit})), p.sha256, 'Executed source differs: ' + p.path);
 
+  // Reuse exact-OID transport, never Git lazy fetching or the full geography driver.
+  // Warm bodies need no remote metadata. A cold size is bound to this same tree.
+  const missing = new Set();
+  const acquisition = createAcquisition({repo, loadTree: tree => githubTree(tree, false), loadDescriptor: async (version, name) => {
+    const line = reader.treeRoute(name, version), match = /^(100644|100755) blob ([a-f0-9]{40})\t/.exec(line);
+    assert.ok(match && line.slice(line.indexOf('\t') + 1) === name + '\0', 'Require ordinary observation input: ' + name);
+    const oid = match[2], status = reader.gitBatch(['--no-lazy-fetch', 'cat-file', '--batch-check=%(objectname) %(objecttype) %(objectsize)'], oid + '\n', 128).toString();
+    if (status === oid + ' missing\n') {
+      missing.add(oid);
+      const parent = path.posix.dirname(name);
+      const tree = reader.git('rev-parse', parent === '.' ? version + '^{tree}' : version + ':' + parent).toString().trim();
+      return (await acquisition.tree(tree)).get(path.posix.basename(name));
+    }
+    const size = new RegExp('^' + oid + ' blob (0|[1-9][0-9]*)\\n$').exec(status);
+    assert.ok(size && Number.isSafeInteger(Number(size[1])), 'Invalid local immutable input: ' + name);
+    return {type: 'blob', mode: match[1], sha: oid, size: Number(size[1])};
+  }});
+  const acquire = async pins => {
+    const rows = [];
+    for (const p of pins) rows.push(await acquisition.pin(commit, p));
+    const growth = [...new Map(rows.filter(p => missing.has(p.oid)).map(p => [p.oid, p.bytes])).values()].reduce((a, b) => a + b, 0);
+    if (growth) {
+      const disk = fs.statfsSync(repo);
+      assert.ok(Number.isSafeInteger(growth) && growth < disk.bavail * disk.bsize, 'Insufficient free disk for declared missing observation inputs');
+    }
+    acquisition.acquire(rows);
+    for (const row of rows) missing.delete(row.oid);
+  };
+  await acquire([{path: 'data/ownership-selection.json'}]);
   const selection = reader.json('data/ownership-selection.json');
+  await acquire([{path: selection.manifest_path, sha256: selection.sha256}]);
   const manifest = reader.json(selection.manifest_path, {expected: selection.sha256});
   assert.equal(selection.method, 'native-linear-evenodd-first-owner-v1');
   assert.equal(manifest.method, selection.method);
@@ -51,16 +84,25 @@ export async function observeSelectedPackage({repo, commit, packageId}) {
   // supported-subset, certificate, latitude-file or geometry-mode CLI option.
   assert.ok(typeof packageId === 'string' && packageId.length, 'Supply the exact original package ID');
   const queueRoot = path.relative(codeRoot, queueDirectory).split(path.sep).join('/'), bodies = new Map();
-  const original = packageIntervals(packageId, name => {
-    assert.ok(typeof name === 'string' && !path.posix.isAbsolute(name) &&
-      name.split('/').every(p => p && p !== '.' && p !== '..') && !name.includes('\\'), 'Unsafe original queue input');
+  const queuePath = name => {
+    assert.ok(relative(name), 'Unsafe original queue input');
+    const file = queueRoot + '/' + name;
+    return reader.treeRoute(file) ? file : file + '.gz';
+  };
+  const loadQueue = name => {
     if (!bodies.has(name)) {
-      const file = queueRoot + '/' + name;
-      const present = reader.git('--literal-pathspecs', 'ls-tree', '-z', commit, '--', file).length;
-      bodies.set(name, present ? reader.read(file) : gunzipSync(reader.read(file + '.gz')));
+      const file = queuePath(name), raw = reader.read(file);
+      bodies.set(name, file === queueRoot + '/' + name ? raw : gunzipSync(raw));
     }
     return bodies.get(name);
-  });
+  };
+  await acquire([{path: queuePath('source-package-queue.json')}]);
+  const queue = JSON.parse(loadQueue('source-package-queue.json'));
+  assert.equal(queue.packages.filter(p => p.package_id === packageId).length, 1, 'Unknown or duplicate package');
+  await acquire(Object.keys(queue.input_sha256 ?? {}).map(name => ({path: queuePath(name)})));
+  const originalInputs = packageInputs(packageId, loadQueue);
+  await acquire(originalInputs.inputs.map(p => ({...p, path: queuePath(p.path)})));
+  const original = packageIntervals(packageId, loadQueue);
   const originalGrid = JSON.parse(bodies.get('ownership-binding.json') ?? 'null');
   assert.ok(originalGrid && originalGrid.size === manifest.size && originalGrid.selection?.method === manifest.method &&
     originalGrid.native_latitudes?.decoded_bytes === manifest.native_latitudes?.decoded_bytes &&
@@ -86,6 +128,7 @@ export async function observeSelectedPackage({repo, commit, packageId}) {
   }
   const hook = selection.additive_release;
   assert.ok(hook, 'This observation entrypoint requires the selected retained additive product');
+  await acquire([hook]);
   const sideRaw = reader.read(hook.path, {expected: hook.sha256});
   assert.equal(sideRaw.length, hook.bytes);
   const side = JSON.parse(sideRaw);
@@ -93,6 +136,7 @@ export async function observeSelectedPackage({repo, commit, packageId}) {
   assert.equal(side.version, 2);
   assert.deepEqual(side.base_selection, nativeBaseSelection(selection));
   const assets = side.logical_asset_map;
+  await acquire([assets.base_manifest, assets.owner_roster, side.runtime_envelope, side.authority_registry]);
   assert.equal(assets.base_manifest.sha256, selection.sha256);
   assert.deepEqual(JSON.parse(readPin(assets.base_manifest)), manifest);
   assert.equal(assets.owner_roster.sha256, manifest.original_assets.bounds.sha256);
@@ -116,10 +160,20 @@ export async function observeSelectedPackage({repo, commit, packageId}) {
   let latitudeVersion = latitudePin.commit;
   try { reader.git('--no-lazy-fetch', 'cat-file', '-e', latitudeVersion + '^{commit}'); }
   catch { latitudeVersion = commit; }
+  await acquire([latitudePin]);
   const latitudes = decodeVisibilityLatitudes(reader.read(latitudePin.path,
     {version: latitudeVersion, expected: latitudePin.sha256}), latitudePin, manifest.size);
   assert.ok(latitudes.every(Number.isFinite), 'Nonfinite normative latitude');
 
+  const transport = manifest.native_asset_transport;
+  assert.ok(transport?.index, 'Missing selected native transport index');
+  await acquire([transport.index]);
+  const index = reader.json(transport.index.path, {expected: transport.index.sha256});
+  assert.ok(Array.isArray(index.parts), 'Missing native transport fragments');
+  await acquire([assets.patch, ...index.parts.map(p => {
+    assert.ok(relative(p.path), 'Unsafe native transport fragment');
+    return {...p, path: path.posix.join(path.posix.dirname(transport.index.path), p.path)};
+  })]);
   const image = new NativeAssetImage(reader, manifest, selection.manifest_path);
   const logicalRoot = path.posix.dirname(selection.manifest_path), stores = [];
   let patchStore;
@@ -193,6 +247,7 @@ export async function observeSelectedPackage({repo, commit, packageId}) {
     requireHead();
     return {version: 1, kind: 'literal-selected-owner-observation-v1', scientific_qualification: false,
       commit, code_commit: codeCommit, original_package: original.package,
+      acquisition: {...acquisition.stats, scope: 'original-package-and-selected-native-observation'},
       original_intervals: original.blocks,
       original_intervals_sha256: sha(Buffer.from(JSON.stringify(original.blocks) + '\n')), query_count: requested.length,
       query_encoding: 'JSON.stringify([{x,y},...]) in input order, followed by LF',
