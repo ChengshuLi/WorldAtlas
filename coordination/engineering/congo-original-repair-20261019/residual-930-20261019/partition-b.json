@@ -777,7 +777,7 @@
       "pixelIndex": null,
       "source_family": null,
       "candidate_operands_target_level_only": [],
-      "mapping_status": "missing_from_retained_48_target_source-evidence_roster",
+      "mapping_status": "canonical target identity in 50-row source-target-membership; target absent from retained 48-row source-evidence roster; no target-specific source or foreign-exclusion operands",
       "per_key_contact_claimed": false
     },
     "14575": {
@@ -1076,7 +1076,7 @@
       "pixelIndex": null,
       "source_family": null,
       "candidate_operands_target_level_only": [],
-      "mapping_status": "missing_from_retained_48_target_source-evidence_roster",
+      "mapping_status": "canonical target identity in 50-row source-target-membership; target absent from retained 48-row source-evidence roster; no target-specific source or foreign-exclusion operands",
       "per_key_contact_claimed": false
     },
     "14599": {
@@ -13645,11 +13645,13 @@
   "limits": [
     "Local proposal only; no owner, acceptance or credit change.",
     "Source target candidate operands are retained as target-level context only; per-key foreign contact is not established by the original accounting.",
-    "Owners 14568 (112 keys) and 14593 (4 keys) have no target/pixelIndex match in the retained 48-target source-evidence roster, so target-level source-evidence context is unavailable; their original extraction class and source-index joins remain verified from blocks 031–034.",
     "Partition B per-key land/water class is joined from original extraction blocks by exact owner_id,y,x; this partition has 435 land and 30 inland-water keys. The original full-package and held aggregate totals remain preserved.",
     "Whole-target support is pinned, but per-key physical flags are not represented in this partition packet; no physical clearance is inferred.",
     "Source vintage/licensing/territorial applicability and legal authority remain unresolved; no sovereignty conclusion.",
-    "Current selected-owner conservation and downstream emitted/integration gates remain unverified."
+    "Current selected-owner conservation and downstream emitted/integration gates remain unverified.",
+    "Owners 14568 (112 held land keys) and 14593 (4 held land keys) have exact canonical target/source IDs, pixelIndex, source_index, and source_ordinal in the pinned 50-row source-target-membership artifact. Those targets are absent from the separate 48-row source-evidence roster, so no target-specific source-evidence or foreign-exclusion operand list is retained; per-key foreign contact and applicability remain unknown.",
+    "Whole-target physical context for 14568 is contradictory land/water support across 4 relations; 14593 has no whole-target issue across 1 relation. These summaries are target-level only and do not assign physical flags or clearance to any held key.",
+    "The pinned original stock native diagnostic requested all 3,905 package cells, assigned 2,975 and held 930; its first refusal is unique-source-target-coverage at run [145235,145238,14509], y=127342. It does not confer acceptance or qualification."
   ],
   "membership_sha256_newline_utf8_owner_y_x": "26a05bb236160a0bf2c692d1d6944c5c958589cfcb504fdc1031e9068f66cb0b",
   "full_residual_membership_sha256_newline_utf8_owner_y_x": "62a1539fb334a65f28cadd11ec09dbe056326dc3fa95e705ff7da2a3876658a2",
@@ -13661,5 +13663,110 @@
     "inland_water": 30,
     "all_3905_original_keys_joined": 3905,
     "duplicate_or_conflicting_rows": 0
+  },
+  "supplementary_target_membership_and_gap_review": {
+    "source_target_membership": {
+      "commit": "81b808d4d73a225b6eacdae8b0554f9326b16270",
+      "path": "coordination/engineering/congo-original-repair-20261018/source-stage-001/source-target-membership.json",
+      "git_blob_oid": "8cd083399b9b4a8b343a272c5359541835902140",
+      "bytes": 8112,
+      "rows": 50,
+      "join": "Exact pixelIndex == held owner_id; source_id and target_id identify the canonical COD ADM2 target."
+    },
+    "source_evidence_roster": {
+      "commit": "52af6815b1446303ac991d00794ece6a7b2d2f8b",
+      "path": "coordination/engineering/congo-original-repair-20261018/supported-inputs-001/source-evidence.json",
+      "git_blob_oid": "b70c4f7900ca0fa64476e162abe6dd4ad2bd37fa",
+      "bytes": 448956,
+      "target_rows": 48,
+      "finding": "The two canonical target IDs below are absent from this 48-row roster. No target-specific source-evidence row or foreign-exclusion operand list is retained for either target. This differs from the 50-row source-target-membership map, which does identify both.",
+      "missing_fact": "Target-specific source-evidence/foreign-exclusion operands; no per-key causal foreign contact or applicability determination."
+    },
+    "owners": [
+      {
+        "owner_id": 14568,
+        "held_keys": 112,
+        "held_original_class_counts": {
+          "land": 112,
+          "inland_water": 0
+        },
+        "membership": {
+          "source_id": "gb:COD:ADM2:63176286B75372177576839",
+          "target_id": "gb:COD:ADM2:63176286B75372177576839",
+          "pixelIndex": 14568,
+          "source_index": 18814,
+          "source_ordinal": 61
+        },
+        "source_evidence_row_present": false,
+        "whole_target_physical": {
+          "issue_reasons": [
+            "contradictory_land_water_support"
+          ],
+          "relations": 4,
+          "support_classes": [
+            "mapped_land_support",
+            "mapped_inland_water_support"
+          ],
+          "interpretation": "Whole-target summary only; it does not classify any of the 112 held keys or resolve their disposition."
+        }
+      },
+      {
+        "owner_id": 14593,
+        "held_keys": 4,
+        "held_original_class_counts": {
+          "land": 4,
+          "inland_water": 0
+        },
+        "membership": {
+          "source_id": "gb:COD:ADM2:63176286B83971453832478",
+          "target_id": "gb:COD:ADM2:63176286B83971453832478",
+          "pixelIndex": 14593,
+          "source_index": 18848,
+          "source_ordinal": 95
+        },
+        "source_evidence_row_present": false,
+        "whole_target_physical": {
+          "issue_reasons": [],
+          "relations": 1,
+          "support_classes": [
+            "mapped_land_support"
+          ],
+          "interpretation": "Whole-target summary only; it does not establish per-key physical classification or positive qualification for these 4 held keys."
+        }
+      }
+    ],
+    "whole_target_physical_pin": {
+      "commit": "7839ae9de7d57c732050df05e7f6d5c9b42afd88",
+      "path": "coordination/engineering/congo-original-repair-20261018/physical-001/whole-target-support.json",
+      "git_blob_oid": "272f696249d4b495eee03cb164fd1da9331ccb41",
+      "bytes": 2264808,
+      "sha256": "8a926e4fa97f70f814c9cfd5d2c92792798669254de0d072761518bf91105a75",
+      "limits": "Whole-target summary only; it supplies no per-key physical flags, contact, or clearance."
+    },
+    "stock_native_diagnostic": {
+      "commit": "347f0692367a0c51a49683ff33e4a5ed9b9c7c5b",
+      "path": "coordination/engineering/congo-original-repair-20261018/diagnostic-original-001/native-diagnostic.json",
+      "git_blob_oid": "24b226726a62dd9cfbcbd3598ca34720b6ecd793",
+      "bytes": 326162,
+      "sha256": "0deb2340d65b786e61debb9df7e1b2bd1fb6cd6c8ab26311b43afdd6017965dc",
+      "kind": "source-target-native-diagnostic-v1",
+      "requested_cells": 3905,
+      "assigned_cells": 2975,
+      "held_cells": 930,
+      "decision_rows": 1922,
+      "supported_rows": 1526,
+      "held_rows": 518,
+      "held_reason": "territorial_exclusion_cells",
+      "first_failure": {
+        "predicate": "unique-source-target-coverage",
+        "run": [
+          145235,
+          145238,
+          14509
+        ],
+        "y": 127342
+      },
+      "interpretation": "Pinned prior stock diagnostic refusal for the original 3,905-cell request; not acceptance, qualification, source applicability, or per-key physical clearance."
+    }
   }
 }
