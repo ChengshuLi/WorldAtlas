@@ -1,0 +1,371 @@
+{
+  "version": 1,
+  "selected_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+  "original_queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+  "issue_url": "https://github.com/ChengshuLi/WorldAtlas/issues/2582",
+  "separate_scope": "Issue 225 remains regional review and is not expanded or completed by this package.",
+  "observation": {
+    "successful_full_package_observations": 1,
+    "queried_cells": 1986,
+    "base_assigned_cells": 0,
+    "selected_additive_assigned_cells": 0,
+    "effective_assigned_cells": 0,
+    "overlap_cells": 0,
+    "original_intervals_sha256": "b07b8d0285d29219de713ea7e6f72f9c10164ae312aba4050858094dbc85cafc",
+    "query_sha256": "4b1ce66500215334b172a5e39c8e52a7a4df5a8925a76806d06b0cd087f7de86",
+    "first_attempt": "Stopped at the nonordinary scratch-directory guard without an output; the same stock operation completed using the task ordinary scratch directory. No completed observation was repeated."
+  },
+  "source_contact_cells": {
+    "MDA_only": 1918,
+    "MDA_and_Odessa": 62,
+    "MDA_and_Vinnytsia": 6
+  },
+  "owner_original_cells": [
+    {
+      "owner_index": 27304,
+      "cells": 915
+    },
+    {
+      "owner_index": 27306,
+      "cells": 136
+    },
+    {
+      "owner_index": 27307,
+      "cells": 27
+    },
+    {
+      "owner_index": 27309,
+      "cells": 5
+    },
+    {
+      "owner_index": 27311,
+      "cells": 209
+    },
+    {
+      "owner_index": 27320,
+      "cells": 113
+    },
+    {
+      "owner_index": 27323,
+      "cells": 66
+    },
+    {
+      "owner_index": 27324,
+      "cells": 67
+    },
+    {
+      "owner_index": 27327,
+      "cells": 5
+    },
+    {
+      "owner_index": 27328,
+      "cells": 1
+    },
+    {
+      "owner_index": 27330,
+      "cells": 215
+    },
+    {
+      "owner_index": 27331,
+      "cells": 10
+    },
+    {
+      "owner_index": 27333,
+      "cells": 42
+    },
+    {
+      "owner_index": 27334,
+      "cells": 3
+    },
+    {
+      "owner_index": 27337,
+      "cells": 169
+    },
+    {
+      "owner_index": 27338,
+      "cells": 3
+    }
+  ],
+  "source_metadata": {
+    "MDA": {
+      "product_key": "gb:MDA:ADM1",
+      "family_index": 204,
+      "boundary_id": "MDA-ADM1-25212430",
+      "boundary_name": "Republic of Moldova",
+      "boundary_type": "ADM1",
+      "represented_year": "2020",
+      "administrative_unit_count": "37",
+      "recorded_source": "UNHCR, OCHA FISS",
+      "source_url": "data.humdata.org/dataset/moldova-administrative-level-0-1-boundaries",
+      "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "license_source": "data.humdata.org/dataset/moldova-administrative-level-0-1-boundaries",
+      "source_data_update_date": "Thu Jan 19 07:31:04 2023",
+      "raw_payload_bytes": 317753,
+      "raw_payload_sha256": "b9f85b5b94d053cd3fc7f60d9823ec2ba9cd37b780f4935a778203d67cb5f523",
+      "metadata_blob_oid": "2747b845f0c5654765da3b951c9074e52f220077",
+      "metadata_blob_sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "metadata_recorded_payload_sha256": "b9f85b5b94d053cd3fc7f60d9823ec2ba9cd37b780f4935a778203d67cb5f523",
+      "consumed_raw_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MDA/ADM1/geoBoundaries-MDA-ADM1_simplified.geojson",
+      "catalogue_record_sha256": "b9645a2cd277daae6e99b7e83e22ab21cde0cfc9ef7876268d57e51833d5551f",
+      "canonical_admin_record_sha256": "b9645a2cd277daae6e99b7e83e22ab21cde0cfc9ef7876268d57e51833d5551f",
+      "canonical_admin_record_matches_catalogue": true
+    },
+    "UKR": {
+      "product_key": "gb:UKR:ADM1",
+      "family_index": 343,
+      "boundary_id": "UKR-ADM1-14850775",
+      "boundary_name": "Ukraine",
+      "boundary_type": "ADM1",
+      "represented_year": "2017",
+      "administrative_unit_count": "27",
+      "recorded_source": "OpenStreetMap, Wambacher",
+      "source_url": "wambachers-osm.website/boundaries/",
+      "recorded_license": "Open Data Commons Open Database License 1.0",
+      "license_source": "www.openstreetmap.org/copyright",
+      "source_data_update_date": "Thu Jan 19 07:31:04 2023",
+      "raw_payload_bytes": 761290,
+      "raw_payload_sha256": "4a5947e7497574d51f93255dfa7e03dce0c7acf6ecee52d25773a5205854a399",
+      "metadata_blob_oid": "2747b845f0c5654765da3b951c9074e52f220077",
+      "metadata_blob_sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "metadata_recorded_payload_sha256": "4a5947e7497574d51f93255dfa7e03dce0c7acf6ecee52d25773a5205854a399",
+      "consumed_raw_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/UKR/ADM1/geoBoundaries-UKR-ADM1_simplified.geojson",
+      "catalogue_record_sha256": "0a39db97bfe07b306ffd910bc83de11a1e3bceffa4c4703d562ed300b8d73a5d",
+      "canonical_admin_record_sha256": "0a39db97bfe07b306ffd910bc83de11a1e3bceffa4c4703d562ed300b8d73a5d",
+      "canonical_admin_record_matches_catalogue": true
+    }
+  },
+  "limits": [
+    "Original feature/lineage labels are preserved. For example Transnistria is labeled with reference_owner Republic of Moldova; this is source metadata only and not a present-day territorial determination.",
+    "Odessa Oblast and Vinnytsia Oblast are ownerless source contacts in the retained source roster, with 62 and 6 contact cells. That contact evidence does not itself establish a territorial exclusion, competing jurisdiction, or invalidation of the MDA source.",
+    "MDA source is reported as represented year 2020 and CC BY 3.0 IGO; the Ukraine source is reported as represented year 2017 and ODbL 1.0. These are catalogue/source-metadata declarations and not legal advice or a conclusion about whether reuse is permitted.",
+    "Physical support covers all 1,986 original cells across 539 intervals; inland-water support intersects none. These support masks do not prove political territory, source validity, or a qualified repair.",
+    "The selected-owner observation is from current public main and reports zero effective owner for all keys; it is not an accepted repair result or scientific qualification. Issue #225 is a separate review-only scope and does not replace this repair package."
+  ],
+  "physical_witness": "Authenticated retained original block-022 source candidates and physical/water masks; no new geometry calculation, rasterization or current source/physical qualification.",
+  "preservation": {
+    "original_cells": 1986,
+    "repairs": 0,
+    "owner_changes": 0,
+    "rights_clearances": 0,
+    "native_holds_removed": 0
+  },
+  "accounting": {
+    "owner": "Root unified acceptance",
+    "prior_named_accepted_cells": 0,
+    "current_selected_assigned_cells": 0,
+    "residual_cells": 1986,
+    "basis": "Positive named completed/unfinished ledger ancestry, current selected-product observation, exact retained exception-key intersections and root latest 87-package boundary. See acceptance-reconciliation.json. This is not a new per-key census of all 660 queue packages.",
+    "accepted_credit_claimed": 0
+  },
+  "observation_reuse": {
+    "observation_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+    "comparison_commit": "b7fccff8c22b0e2fecaa7219b5a0df4e1dd03876",
+    "all_consumed_input_blobs_unchanged": true,
+    "inputs": [
+      {
+        "path": "scripts/run-geographic-check.py",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "aa34cb268a3b826ef74601a69852b86bb5b49782"
+      },
+      {
+        "path": "scripts/check-effective-geographic-regression.mjs",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "ede85b72423e347bf15d30567ac22c643c423c69"
+      },
+      {
+        "path": "src/native-grid.js",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "add4cef02bb5a790f22a9078fdf9bd51679059d3"
+      },
+      {
+        "path": "src/ownership-codec.js",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "03eacc9bcb1bff03723a93c248ea6de5f2fed5e4"
+      },
+      {
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "ccd128029e0b9522c29acb4bbc5bd35f36f2d1dd"
+      },
+      {
+        "path": "scripts/selected-reference-metadata.mjs",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "38c941e96aee6a0cc62615b7d797e51439570c42"
+      },
+      {
+        "path": "src/reference-metadata.js",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "7db5ba2883a6d8542f830b25e54d96c7d837a187"
+      },
+      {
+        "path": "scripts/observe-selected-owners.mjs",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "c8a10d5a6c5457b8ba90c43a4788b62cc07e0dad"
+      },
+      {
+        "path": "scripts/geography-prefetch.mjs",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "245acaf961811fcc5a1023f53ac42f80e0c7b2c4"
+      },
+      {
+        "path": "scripts/native-word-store.mjs",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "07a7d06cd7a0c030fcf4327faaf2b69fe5a37dbb"
+      },
+      {
+        "path": "scripts/native-patch-store.mjs",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "c4afd08b55e176b90ade259d80059f2393bb54b5"
+      },
+      {
+        "path": "src/pixel-ownership.js",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "de88d87bea5ddca72c5816b1356ab18b9795f985"
+      },
+      {
+        "path": "src/pixel-grid.js",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "008aaf69e65105029e64e09317b8f9aa4df1f352"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "b42e2fed2890296d6d410047d942e4a407563638"
+      },
+      {
+        "path": "data/ownership-selection.json",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "2e1ec2875d2932eafb33f4c1062412282df234cb"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "31d970d0fe2bf8c899f020aad09a3826ea451790"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-raster-summary.json",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "e17b10b5643c1f6b0c492d02edc70a0d7afc5ee3"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-census-summary.json",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "fa1e4d101edb54b02bd1ff42a240f2f80ac65832"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-unassigned-summary.json",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "0c934cdaf4b007a741e66d4a080890154bdae53c"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "4ef0728e74e11e069bd7bb11e287c6fbb59946fa"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/ownership-binding.json",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "b9d81d18aab6d03dc701ff1337b35e53be81d0af"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/retained-source-catalogue.json",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/normalized-source-seams.json",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "e22b6270aaf9c27dd3d21381d757b6c34ab81d7b"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-022.json.gz",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "a19137a19e92e16b9d331913a963e5367788cb0c"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-022.json.gz",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "6473fa0629f974d76909d8d5db126ab6fea02cfd"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-022.json.gz",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "81411b27437b95b18314fbeb8c7e6a40f0e51c94"
+      },
+      {
+        "path": "coordination/engineering/brunei-original-repair-20261019/finalized-002/ownership-selection-brn-828.json",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "ea5fb193ca975d499ebae354d257d4ce9332ba95"
+      },
+      {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/base-native-manifest.json",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "31d970d0fe2bf8c899f020aad09a3826ea451790"
+      },
+      {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "9c44513df64995d417dd3832ae604c703e84a506"
+      },
+      {
+        "path": "coordination/engineering/brunei-original-repair-20261019/composition-002/runtime-envelope.json",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "756fc10940ac428fabebdc4d5362ad671d56d911"
+      },
+      {
+        "path": "coordination/engineering/brunei-original-repair-20261019/composition-002/authority-registry.json",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "6e827006b2542340fc3b87f822769cbc9eafa428"
+      },
+      {
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "de6905e162dc031b1b93248fae91190c39c4ad53"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/index.json",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "f9e9bb67281cec0ceeb3b8d7a5cf94616f26c32c"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-00/part-000.bin.gz",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "359bfc9c3b80f2d0b60fa2cc859aaaebdeb6b22f"
+      },
+      {
+        "path": "coordination/engineering/brunei-original-repair-20261019/composition-002/patch.json",
+        "observed_commit": "bb9bcf8e75258bb223faeb0229b000180812a0f6",
+        "git_blob_oid": "441d191f751eff76845cecd7666bdd0c76f14d19"
+      }
+    ],
+    "successful_observation_repeated": false
+  },
+  "original_method_context": {
+    "pin": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "directory": "coordination/engineering/global-current-cell-work-queue-20261014/",
+    "references": [
+      "README.md",
+      "source-census-summary.json",
+      "physical-unassigned-summary.json",
+      "source-raster-summary.json",
+      "physical-source-summary.json",
+      "source-physical-join-summary.json"
+    ],
+    "findings": [
+      "MDA family204 source census records2004 candidate owner-zero cells:1986 unique and18 ambiguous. The18 ambiguous cells are outside this original repair package and are not added here.",
+      "The retained raster summary records37 mapped MDA features and zero unmapped/unsupported; raw-native-supported means numerical compatibility, not topology, source fitness or territorial approval.",
+      "Retained GSHHG L1-L4 masks provide source-relative land/water context. No MDA-specific coast exclusion or named territorial-hole record was found in these examined summaries; that is not a claim about all possible source-stage evidence.",
+      "Original river water remains location-owned. Neither mask absence nor the original zero water intersection establishes a present coast, ocean or territorial exclusion."
+    ]
+  }
+}
