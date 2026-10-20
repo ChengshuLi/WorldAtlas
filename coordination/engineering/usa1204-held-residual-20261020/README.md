@@ -21,7 +21,7 @@ The roster and manifest pin the original interval table and the exact PR #2371 e
 
 The source handoff preserves the consumed geoBoundaries USA ADM2 product’s 2018 represented-year claim and separate 2023 source-update/build dates, per-file Public Domain metadata, attribution, and derivative-language applicability caveat. Other source-vintage, boundary, Minnesota and reproduction obligations remain open. No present-day legal applicability or sovereignty conclusion is made.
 
-A fresh USA-specific current-main selected-owner observation has not been asserted in this packet. The prior saved observation at 77609a1 is stale and excluded. Root owns the fresh selected-owner-zero/conservation and emitted-consumer checks. The 105,927 earlier qualified outcomes remain as previously reported; this packet adds zero accepted credit. CAF and SSD are outside this assigned residual scope.
+A fresh USA-specific current-main selected-owner observation has not been asserted in this packet. The prior saved observation at 77609a1 is stale and excluded. Root owns the fresh selected-owner-zero/conservation and emitted-consumer checks. The 105,927 earlier qualified outcomes remain as previously reported; this packet adds zero accepted credit. The parent assigned this USA #2358 residual as a separate package scope from CAF and SSD; this packet does not include or verify a CAF/SSD cross-key comparator, so exact key-set disjointness is not asserted.
 
 ## Files
 
