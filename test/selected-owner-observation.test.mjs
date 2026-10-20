@@ -9,6 +9,7 @@ import {createHash} from 'node:crypto';
 import {staticModuleClosure} from './helpers/static-module-closure.mjs';
 import {shuffledChunks} from './fixtures/native-word-store.mjs';
 import {nativeAuthority, pinReader} from '../scripts/prepare-delivery-handoff.mjs';
+import {canonicalNativeJsonChunks, writeNativeByteChunks} from '../scripts/native-patch-store.mjs';
 import {valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const sha = raw => createHash('sha256').update(raw).digest('hex');
@@ -165,6 +166,76 @@ test('literal ownership entrypoint needs no geometry or qualification inputs and
     assert.equal(r.report.original_package.package_id, packageId);
     assert.equal(r.report.original_package.native_cells, 5);
     assert.match(r.report.limits.join(' '), /not source applicability, a package qualification certificate or complete repair acceptance/);
+    assert.equal(fs.readFileSync(r.output, 'utf8'), [...canonicalNativeJsonChunks(r.report)].join(''),
+      'Published bytes use the shared canonical native JSON representation');
+  } finally { f.cleanup(); }
+});
+
+test('canonical native JSON writer streams a large selected-owner key array with valid exact bytes', () => {
+  const directory = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'owner-observation-large-json-')));
+  const output = path.join(directory, 'large.json'), report = {keys: Array.from({length: 50000}, (_, x) => ({x, y: 17, owner: 0}))};
+  let fd;
+  try {
+    fd = fs.openSync(output, 'wx');
+    const written = writeNativeByteChunks(fd, canonicalNativeJsonChunks(report));
+    fs.fsyncSync(fd); fs.closeSync(fd); fd = undefined;
+    const bytes = fs.readFileSync(output);
+    assert.ok(written.bytes > 1024 * 1024, 'Fixture crosses the writer buffer boundary');
+    assert.equal(bytes.length, written.bytes);
+    assert.equal(sha(bytes), written.sha256);
+    const parsed = JSON.parse(bytes);
+    assert.equal(parsed.keys.length, report.keys.length);
+    assert.deepEqual(parsed.keys[0], report.keys[0]);
+    assert.deepEqual(parsed.keys.at(-1), report.keys.at(-1));
+  } finally {
+    if (fd !== undefined) fs.closeSync(fd);
+    fs.rmSync(directory, {recursive: true});
+  }
+});
+
+test('CLI traverses the observation instead of stringifying it as one report object', () => {
+  const f = fixture(); try {
+    const preload = path.join(f.repo, 'reject-whole-report-json.mjs');
+    fs.writeFileSync(preload, `
+const stringify = JSON.stringify;
+JSON.stringify = function(value, ...args) {
+  if (value?.kind === 'literal-selected-owner-observation-v1' && Array.isArray(value.keys))
+    throw Error('whole observation JSON.stringify forbidden');
+  return stringify.call(this, value, ...args);
+};
+`);
+    const r = f.run({nodeArgs: ['--import', preload]});
+    assert.equal(r.status, 0, r.stderr);
+    assert.equal(r.report.query_count, keys.length);
+    assert.equal(r.report.keys.length, keys.length);
+  } finally { f.cleanup(); }
+});
+
+test('failed staged observation write leaves no final receipt or temporary directory', () => {
+  const f = fixture(); try {
+    const preload = path.join(f.repo, 'fail-observation-write.mjs');
+    fs.writeFileSync(preload, `
+import fs from 'node:fs';
+import path from 'node:path';
+const open = fs.openSync.bind(fs), write = fs.writeSync.bind(fs);
+let target, writes = 0;
+fs.openSync = (file, ...args) => {
+  const fd = open(file, ...args);
+  if (typeof file === 'string' && path.basename(file) === 'observation.json' &&
+      path.basename(path.dirname(file)).startsWith('.owner-observation-')) target = fd;
+  return fd;
+};
+fs.writeSync = (fd, buffer, offset, length, position) => {
+  if (fd !== target) return write(fd, buffer, offset, length, position);
+  if (++writes > 1) throw Error('forced staged write failure');
+  return write(fd, buffer, offset, Math.max(1, Math.floor(length / 2)), position);
+};
+`);
+    const r = f.run({nodeArgs: ['--import', preload]});
+    assert.notEqual(r.status, 0);
+    assert.match(r.stderr, /forced staged write failure/);
+    assert.equal(fs.existsSync(r.output), false);
+    assert.equal(fs.readdirSync(f.repo).some(name => name.startsWith('.owner-observation-')), false);
   } finally { f.cleanup(); }
 });
 

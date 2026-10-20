@@ -10,7 +10,7 @@ import {execFileSync} from 'node:child_process';
 import {gunzipSync} from 'node:zlib';
 import {selectedBootstrap, NativeAssetImage, decodeVisibilityLatitudes} from './check-effective-geographic-regression.mjs';
 import {openNativeWordStore} from './native-word-store.mjs';
-import {admitNativePatchStore} from './native-patch-store.mjs';
+import {admitNativePatchStore, canonicalNativeJsonChunks, writeNativeByteChunks} from './native-patch-store.mjs';
 import {createAcquisition, githubTree} from './geography-prefetch.mjs';
 import {packageInputs, packageIntervals, ROOT as queueDirectory} from '../coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs';
 import {ownershipRun} from '../src/pixel-ownership.js';
@@ -290,7 +290,9 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const temporary = fs.mkdtempSync(path.join(path.dirname(output), '.owner-observation-'));
   try {
     const staged = path.join(temporary, 'observation.json');
-    fs.writeFileSync(staged, JSON.stringify(report, null, 2) + '\n', {flag: 'wx'});
+    const fd = fs.openSync(staged, 'wx');
+    try { writeNativeByteChunks(fd, canonicalNativeJsonChunks(report)); fs.fsyncSync(fd); }
+    finally { fs.closeSync(fd); }
     fs.linkSync(staged, output); // Atomic no-replace publication of the complete observation.
   } finally { fs.rmSync(temporary, {recursive: true}); }
   process.stdout.write(JSON.stringify({kind: report.kind, commit: report.commit, query_count: report.query_count, output}) + '\n');
