@@ -1,0 +1,48 @@
+{
+  "kind": "packet-file-bindings",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 3714,
+      "sha256": "8a6d1cf73d2ae71ed163c42f775580c1b37c58a0e75a0ce8da896a1a261bb4fc",
+      "decoded_bytes": 3714,
+      "decoded_sha256": "8a6d1cf73d2ae71ed163c42f775580c1b37c58a0e75a0ce8da896a1a261bb4fc"
+    },
+    {
+      "path": "acceptance-reconciliation.json.gz",
+      "bytes": 358029,
+      "sha256": "8b2f21475c5146af6097ef1ae2a22e4cb48c1a67b8ba9a6e4bae884ab6f165f8",
+      "decoded_bytes": 5824775,
+      "decoded_sha256": "927b82b18ce12872adce326994eae3d5527105cb55dd18b9aac87e2565d69c26"
+    },
+    {
+      "path": "observation-input-binding.json",
+      "bytes": 7097,
+      "sha256": "6f389eb46c507323f4d8c4494ce5f022333e0e40c3ce1eb8c665b7255da49a69",
+      "decoded_bytes": 7097,
+      "decoded_sha256": "6f389eb46c507323f4d8c4494ce5f022333e0e40c3ce1eb8c665b7255da49a69"
+    },
+    {
+      "path": "pse-disposition.json",
+      "bytes": 102352,
+      "sha256": "0b8b48671315dd4d20f23c28a034859964689c7747375e41e840d07f73bb7cb9",
+      "decoded_bytes": 102352,
+      "decoded_sha256": "0b8b48671315dd4d20f23c28a034859964689c7747375e41e840d07f73bb7cb9"
+    },
+    {
+      "path": "pse-selected-owner-observation.json.gz",
+      "bytes": 13524,
+      "sha256": "15f97c1858e92e0f7a8a2590a9cef8a98155ffd1b5a275d24691e158b2ed41f3",
+      "decoded_bytes": 112014,
+      "decoded_sha256": "5be0e9c1d03a0a1a9cff0f3387bae15601d563796ebfd78fc8b634f8d27cfce6"
+    },
+    {
+      "path": "retained-source-physical-context.json",
+      "bytes": 49492,
+      "sha256": "a8f79fc1d0654748c539ba9ec59f4b803cdddcebcf2ed75f3e13d96dec84213e",
+      "decoded_bytes": 49492,
+      "decoded_sha256": "a8f79fc1d0654748c539ba9ec59f4b803cdddcebcf2ed75f3e13d96dec84213e"
+    }
+  ],
+  "scope": "Six packet members; Git binds this descriptor itself. Byte identity is not scientific qualification."
+}
