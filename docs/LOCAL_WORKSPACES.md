@@ -43,6 +43,27 @@ around it. Authorized read-only API/blob inspection can continue while execution
 is blocked. Use the current-main instructions rather than a stale checkout's
 saved claim or runtime assumptions.
 
+## Initial task store or released checkout
+
+`TASK_REPO` identifies the task's shared Git repository, not its managed author
+checkout. A released or absent author checkout is normal: use the existing task
+store and allocate a fresh slot below. `isGitRepository=false` at the shell's cwd
+alone does not establish that the supplied task repository is absent.
+
+If the task genuinely has no existing repository, establish one Git store at a
+fresh path inside its authorized writable task root with ordinary metadata-only
+setup, then use the pinned bootstrap and exact missing-object acquisition below:
+
+```sh
+git clone --filter=blob:none --no-checkout --no-tags --single-branch --branch main \
+  https://github.com/ChengshuLi/WorldAtlas.git "$TASK_REPO"
+```
+
+This initial store is not an author allocation or a producer-ready checkout.
+Reuse it across jobs; do not clone per package. An inaccessible existing store,
+a denied operation, or an occupied destination is not permission to replace it,
+choose another identity or bypass the access/ownership guards.
+
 ## Allocate and inspect
 
 Use the current pinned bootstrap below when the task checkout is stale. For an
@@ -244,7 +265,8 @@ the owned managed author slot. `gh run watch` and the native merge workflow do n
 perform local cleanup. Preserve the run URL, request ID, head and merge commit on
 the original issue before release. Stop local servers/reproduction processes,
 push required evidence, preserve unique scratch and leave the slot clean. Continue
-from the primary checkout to reconcile the original issue and allocate the next job.
+using the task-bound `TASK_REPO` and pinned helper to reconcile the original issue
+and allocate the next job; the shell's cwd does not select that repository.
 Settle any retained live-operation reservation through its existing workflow.
 A release failure does not invalidate an already verified merge. Legacy/unmanaged
 checkouts are retained for explicit inspection.
