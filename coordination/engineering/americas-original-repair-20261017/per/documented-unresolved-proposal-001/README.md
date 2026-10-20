@@ -6,7 +6,7 @@ For each exact held key, `exception-proposal.json` records its original interval
 
 ## Current selected-owner observation
 
-A selected-owner observation was run at current main/code commit `52af6815b1446303ac991d00794ece6a7b2d2f8b`. It covers the full 10,371-key original selection; query SHA-256 `b3f3382000785d47e265b2bbcc338ace79441342ec0a602b91f1e4f7fbdc660c`, original interval SHA-256 `6475b7624ed1afa81cb6e47e23fe65bfb8e12faddfc32b9537de730932f0a810`. The result reconciles 8,922 existing nonzero effective owners and all 1,449 residual keys at base/additive/effective owner zero, with no product overlap. Receipt SHA-256 is `9d0021290b35b0dc3de1decf2e4b3a8c974c28f3a439f7a1c54d7c2e754ba878`; the receipt is included in this PR at `current-owner-observation-52af6815.json`.
+A selected-owner observation was run at current main/code commit `52af6815b1446303ac991d00794ece6a7b2d2f8b`. It covers the full 10,371-key original selection; query SHA-256 `b3f3382000785d47e265b2bbcc338ace79441342ec0a602b91f1e4f7fbcd660c`, original interval SHA-256 `6475b7624ed1afa81cb6e47e23fe65bfb8e12faddfc32b9537de730932f0a810`. The result reconciles 8,922 existing nonzero effective owners and all 1,449 residual keys at base/additive/effective owner zero, with no product overlap. Receipt SHA-256 is `9d0021290b35b0dc3de1decf2e4b3a8c974c28f3a439f7a1c54d7c2e754ba878`; the receipt is included in this PR at `current-owner-observation-52af6815.json`.
 
 The observation confirms current selected-owner conservation; it does not establish source applicability, authority, per-key physical qualification, acceptance, or credit. All 1,449 keys remain held; owner changes, accepted repairs, accepted exceptions, and new credit remain zero.
 
