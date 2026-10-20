@@ -17,6 +17,13 @@ const queueRoot = 'coordination/engineering/global-current-cell-work-queue-20261
 const packageId = 'gb-TST-ADM2--repair-evaluation';
 const sources = staticModuleClosure(process.cwd(), [command]);
 const keys = [{x: 0, y: 0}, {x: 2, y: 0}, {x: 3, y: 0}, {x: 1, y: 1}, {x: 1, y: 2}];
+const gitHelperArgv = [
+  ['pack-objects', '--revs', '--thin', '--stdout', '--delta-base-offset'],
+  ['rev-list', '--objects', '--stdin', '--not', '--exclude-hidden=fetch', '--all', '--quiet', '--alternate-refs'],
+];
+const exactGitHelper = args =>
+  gitHelperArgv.some(expected => JSON.stringify(args) === JSON.stringify(expected)) ||
+  (args.length === 5 && args[0] === 'index-pack' && args[1] === '--stdin' && args[2] === '--fix-thin' && args[3] === '--promisor' && /^--pack_header=2,[1-9][0-9]*$/.test(args[4]));
 function fixture({missingOrigins = false, changeManifest, changePatch, changeSide, changeOwners, changeArrays, changeQueue, changeOriginalGrid, splitCandidates = false, multiBlock = false} = {}) {
   const repo = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'owner-observation-')));
   const git = (...args) => execFileSync('git', ['-C', repo, ...args], {stdio: ['ignore', 'pipe', 'pipe']}).toString().trim();
@@ -319,6 +326,7 @@ function coldFixture({splitCandidates = false} = {}) {
   for (const name of forbidden) f.write(name, {forbidden: name});
   const head = f.commit(), objects = f.git('cat-file', '--batch-all-objects', '--batch-check=%(objectname) %(objecttype)').split('\n').map(s => s.split(' '));
   const realGit = execFileSync('which', ['git'], {encoding: 'utf8'}).trim();
+  const realGitExecPath = execFileSync(realGit, ['--exec-path'], {encoding: 'utf8'}).trim();
   const git = (args, input) => execFileSync(realGit, ['-C', root, ...args], {input, stdio: ['pipe', 'pipe', 'pipe']});
   fs.mkdirSync(root); fs.mkdirSync(bin); git(['init']);
   for (const [oid, kind] of objects.filter(([, kind]) => kind !== 'blob')) {
@@ -335,23 +343,52 @@ function coldFixture({splitCandidates = false} = {}) {
   const log = path.join(f.repo, 'fetches.jsonl'), preload = path.join(f.repo, 'metadata.mjs');
   const implementation = path.join(bin, 'implementation'), launchLog = path.join(f.repo, 'git-launches.jsonl');
   fs.mkdirSync(path.join(implementation, 'bin'), {recursive: true});
+  const helperExecPath = path.join(implementation, 'libexec', 'git-core');
+  fs.mkdirSync(helperExecPath, {recursive: true});
+  for (const command of ['pack-objects', 'rev-list', 'index-pack']) {
+    fs.writeFileSync(path.join(helperExecPath, 'git-' + command), `#!${process.execPath}
+import fs from 'node:fs';
+import {spawnSync} from 'node:child_process';
+const command = ${JSON.stringify(command)}, args = process.argv.slice(2), invocation = [command, ...args];
+const gitHelperArgv = ${JSON.stringify(gitHelperArgv)};
+const exactGitHelper = ${exactGitHelper.toString()};
+fs.appendFileSync(${JSON.stringify(launchLog)}, JSON.stringify(invocation) + '\\n');
+if (!exactGitHelper(invocation)) throw Error('Unexpected Git helper invocation: ' + JSON.stringify(invocation));
+const target = ${JSON.stringify(realGitExecPath)} + '/git-' + command;
+const r = spawnSync(target, args, {stdio: 'inherit', env: process.env});
+process.exit(r.status ?? 1);
+`, {mode: 0o755});
+  }
   // The PATH launcher resolves an implementation but cannot serve as that implementation.
-  // A second PATH lookup during acquisition must fail rather than silently use the shim.
+  // Resolve the implementation once; internal helpers are observed through GIT_EXEC_PATH
+  // because newer Git versions bypass PATH when launching them.
   fs.writeFileSync(path.join(bin, 'git'), `#!${process.execPath}
 import fs from 'node:fs';
+import {spawnSync} from 'node:child_process';
 const args = process.argv.slice(2);
+const gitHelperArgv = ${JSON.stringify(gitHelperArgv)};
+const exactGitHelper = ${exactGitHelper.toString()};
 fs.appendFileSync(${JSON.stringify(launchLog)}, JSON.stringify(args) + '\\n');
-if (args.length !== 1 || args[0] !== '--exec-path') throw Error('Git launch shim selected again');
-process.stdout.write(${JSON.stringify(path.join(implementation, 'libexec', 'git-core'))} + '\\n');
+if (args.length === 1 && args[0] === '--exec-path') {
+  process.stdout.write(${JSON.stringify(path.join(implementation, 'libexec', 'git-core'))} + '\\n');
+  process.exit(0);
+}
+const helper = exactGitHelper(args) ? args : null;
+if (helper) {
+  const env = {...process.env, GIT_EXEC_PATH: ${JSON.stringify(helperExecPath)}};
+  const r = spawnSync(${JSON.stringify(realGit)}, args, {stdio: 'inherit', env});
+  process.exit(r.status ?? 1);
+}
+throw Error('Unexpected Git launcher invocation: ' + JSON.stringify(args));
 `, {mode: 0o755});
   const setup = {origin: f.repo, realGit, log, metadataLog: path.join(f.repo, 'metadata-requests.jsonl')};
   const transport = path.join(implementation, 'transport.mjs');
   // Only the local fetch interception needs Node; ordinary Git reads stay direct.
   fs.writeFileSync(path.join(implementation, 'bin', 'git'), `#!/bin/sh
 for arg do
-  if [ "$arg" = fetch ]; then exec ${JSON.stringify(process.execPath)} ${JSON.stringify(transport)} "$@"; fi
+  if [ "$arg" = fetch ]; then GIT_EXEC_PATH=${JSON.stringify(helperExecPath)} exec ${JSON.stringify(process.execPath)} ${JSON.stringify(transport)} "$@"; fi
 done
-exec ${JSON.stringify(realGit)} "$@"
+GIT_EXEC_PATH=${JSON.stringify(helperExecPath)} exec ${JSON.stringify(realGit)} "$@"
 `, {mode: 0o755});
   fs.writeFileSync(transport, `#!${process.execPath}
 import fs from 'node:fs';
@@ -388,14 +425,29 @@ globalThis.fetch = async url => {
     env: {PATH: bin + path.delimiter + process.env.PATH, ...options?.env}});
   return {...f, root, head, codeOids, forbidden, gitCold: git, inventory, batches, run,
     launches: () => fs.existsSync(launchLog) ? fs.readFileSync(launchLog, 'utf8').trim().split('\n').map(JSON.parse) : [],
+    launcher: path.join(bin, 'git'),
     metadataRequests: () => fs.existsSync(setup.metadataLog) ? fs.readFileSync(setup.metadataLog, 'utf8') : ''};
 }
+
+
+test('cold Git launcher rejects an unrecognized invocation', () => {
+  const f = coldFixture(); try {
+    const r = spawnSync(f.launcher, ['unexpected-command'], {encoding: 'utf8', env: process.env});
+    assert.notEqual(r.status, 0);
+    assert.match(r.stderr, /Unexpected Git launcher invocation/);
+    assert.deepEqual(f.launches(), [['unexpected-command']]);
+  } finally { f.cleanup(); }
+});
 
 for (const splitCandidates of [false, true]) test('one cold ' + (splitCandidates ? 'split-member' : 'multiblock') + ' command acquires exactly its original and native inputs; warm reuse fetches nothing', t => {
   const f = coldFixture({splitCandidates}); try {
     assert.deepEqual(new Set(f.inventory().filter(([, kind]) => kind === 'blob').map(([oid]) => oid)), f.codeOids);
     const r = f.run();
-    assert.deepEqual(f.launches(), [['--exec-path']], 'only bootstrap resolves the Git implementation');
+    assert.deepEqual(f.launches().filter(args => args.length === 1 && args[0] === '--exec-path'), [['--exec-path']], 'cold bootstrap resolves the implementation once');
+    const helpers = f.launches().filter(args => !(args.length === 1 && args[0] === '--exec-path'));
+    assert(helpers.length > 0, 'cold fetch exercises internal Git helpers');
+    assert(helpers.every(exactGitHelper), 'only exact supported Git helper argv is passed through');
+    const coldHelperCalls = [...helpers];
     assert.equal(r.status, 0, r.stderr);
     assert.equal(r.report.query_count, 5); assert.deepEqual(r.report.keys.map(({x,y}) => ({x,y})), keys);
     assert.deepEqual(r.report.original_intervals.map(b => b.block), splitCandidates ? [0] : [0, 1]);
@@ -423,7 +475,8 @@ for (const splitCandidates of [false, true]) test('one cold ' + (splitCandidates
     assert.equal(r.report.acquisition.complete_scientific_closure, false);
     t.diagnostic(JSON.stringify({variant: splitCandidates ? 'split' : 'multiblock', acquired_objects: expected.size, declared_blob_bytes: declaredBytes, fetch_batches: f.batches().length}));
     const prior = f.batches().length, metadata = f.metadataRequests(), warm = f.run(); assert.equal(warm.status, 0, warm.stderr);
-    assert.deepEqual(f.launches(), [['--exec-path'], ['--exec-path']], 'warm acquisition also reuses resolved Git');
+    assert.deepEqual(f.launches().filter(args => args.length === 1 && args[0] === '--exec-path'), [['--exec-path'], ['--exec-path']], 'warm acquisition also reuses resolved Git');
+    assert.deepEqual(f.launches().filter(args => !(args.length === 1 && args[0] === '--exec-path')), coldHelperCalls, 'warm reuse invokes no additional Git helpers');
     assert.equal(warm.report.acquisition.fetched_objects, 0); assert.equal(warm.report.acquisition.fetched_bytes, 0);
     assert.equal(f.batches().length, prior); assert.equal(f.metadataRequests(), metadata); assert.deepEqual(warm.report.keys, r.report.keys);
     assert.deepEqual(warm.report.original_intervals, r.report.original_intervals);
@@ -449,10 +502,15 @@ test('a partial acquisition failure leaves no receipt and an ordinary retry reus
   const f = coldFixture(); try {
     const failed = f.run({env: {OBSERVATION_TEST_FAIL_FETCH:'2'}});
     assert.notEqual(failed.status, 0); assert.match(failed.stderr, /Geography object acquisition failed/);
+    assert.deepEqual(f.launches().filter(args => args.length === 1 && args[0] === '--exec-path'), [['--exec-path']], 'partial run resolves the implementation once');
+    assert(f.launches().filter(args => !(args.length === 1 && args[0] === '--exec-path')).every(exactGitHelper), 'partial run rejects launcher drift');
+    assert.equal(f.batches().length, 2, 'the second transport attempt is the injected failure');
     assert.equal(fs.existsSync(failed.output), false);
     const retained = f.inventory().filter(([oid,kind]) => kind === 'blob' && !f.codeOids.has(oid)).map(([oid]) => oid);
     assert.deepEqual(retained, [f.git('rev-parse', f.head + ':data/ownership-selection.json')]);
     const prior = f.batches().length, resumed = f.run(); assert.equal(resumed.status, 0, resumed.stderr);
+    assert.deepEqual(f.launches().filter(args => args.length === 1 && args[0] === '--exec-path'), [['--exec-path'], ['--exec-path']], 'retry reuses the resolved implementation');
+    assert(f.launches().filter(args => !(args.length === 1 && args[0] === '--exec-path')).every(exactGitHelper), 'retry keeps rejecting launcher drift');
     assert.equal(resumed.report.query_count, 5);
     assert(!f.batches().slice(prior).flat().some(oid => retained.includes(oid)));
     assert.equal(resumed.report.acquisition.fetched_objects,
