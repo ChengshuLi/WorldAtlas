@@ -275,6 +275,60 @@ function newOutput(filename) {
   return destination;
 }
 
+function writeJsonPretty(fd, value) {
+  const chunks = [];
+  let buffered = 0;
+  const flush = () => {
+    if (!buffered) return;
+    fs.writeFileSync(fd, chunks.join(''));
+    chunks.length = 0;
+    buffered = 0;
+  };
+  const append = text => {
+    chunks.push(text);
+    buffered += text.length;
+    if (buffered >= 1024 * 1024) flush();
+  };
+  const indent = depth => append(' '.repeat(depth * 2));
+  const emit = (item, depth) => {
+    if (item === null || typeof item !== 'object') {
+      const encoded = JSON.stringify(item);
+      append(encoded === undefined ? 'null' : encoded);
+      return;
+    }
+    if (Array.isArray(item)) {
+      if (item.length === 0) { append('[]'); return; }
+      append('[\n');
+      for (let i = 0; i < item.length; i++) {
+        indent(depth + 1);
+        emit(item[i], depth + 1);
+        if (i + 1 < item.length) append(',');
+        append('\n');
+      }
+      indent(depth);
+      append(']');
+      return;
+    }
+    const keys = Object.keys(item).filter(key => item[key] !== undefined && typeof item[key] !== 'function' && typeof item[key] !== 'symbol');
+    if (keys.length === 0) { append('{}'); return; }
+    append('{\n');
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+      indent(depth + 1);
+      append(JSON.stringify(key));
+      append(': ');
+      emit(item[key], depth + 1);
+      if (i + 1 < keys.length) append(',');
+      append('\n');
+    }
+    indent(depth);
+    append('}');
+  };
+  emit(value, 0);
+  append('\n');
+  flush();
+}
+
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const options = {};
   for (let i = 2; i < process.argv.length; i += 2) {
@@ -290,7 +344,9 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const temporary = fs.mkdtempSync(path.join(path.dirname(output), '.owner-observation-'));
   try {
     const staged = path.join(temporary, 'observation.json');
-    fs.writeFileSync(staged, JSON.stringify(report, null, 2) + '\n', {flag: 'wx'});
+    const fd = fs.openSync(staged, 'wx');
+    try { writeJsonPretty(fd, report); fs.fsyncSync(fd); }
+    finally { fs.closeSync(fd); }
     fs.linkSync(staged, output); // Atomic no-replace publication of the complete observation.
   } finally { fs.rmSync(temporary, {recursive: true}); }
   process.stdout.write(JSON.stringify({kind: report.kind, commit: report.commit, query_count: report.query_count, output}) + '\n');
