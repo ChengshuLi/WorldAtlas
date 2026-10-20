@@ -27,9 +27,11 @@ A partial implementation may merge without completing the whole issue.
 
 Issue links are optional and may name multiple related issues. Use GitHub closure keywords only when every original criterion is proven, including required
 production acceptance. Otherwise use `Refs #N`. Initial research may finish with
-explicit unknowns where its original promise permits that; correction or approval
-work cannot close merely because the uncertainty was documented. No closure grants
-geography approval, publication or import permission.
+explicit unknowns where its original promise permits that. A correction's expressly
+permitted documented-exception alternative requires its stated facts, checks and
+review. Otherwise correction or approval work cannot close merely because uncertainty
+was documented. No closure grants repair credit, geography approval, publication or
+import permission.
 
 Continue unfinished in-scope work on the original issue, regardless of merged PR
 count. Ordinary work needs no `max_prs` field; historical contracts remain preserved.
