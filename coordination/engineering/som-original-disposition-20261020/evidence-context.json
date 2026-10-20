@@ -1,0 +1,2537 @@
+{
+  "version": 1,
+  "selected_commit": "8bb376b6b0125bfecfce5ac05e63b17c19d87ae9",
+  "original_queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+  "source_scope": {
+    "primary_source": {
+      "advertised_feature_count": 118,
+      "cohort": "administrative-registry",
+      "feature_count": 118,
+      "key": "gb:SOM:ADM2",
+      "metadata_sha256": "c90b56569afe78ef191c8f25faaf1a0953b7b673b6907a459cbac6431c12ff13",
+      "original_bytes": 183671,
+      "original_metadata_file": "data/administrative-sources.json",
+      "original_sha256": "fda57ec0acae5d43ab60523ba65283ce0923dfc52dbe2aebb2e600afe8015009",
+      "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+      "parts": [
+        {
+          "bytes": 53470,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-SOM-ADM2-000.bin.gz",
+          "sha256": "ea4a2af6d241350c0b4329eca66259e423f287a222bd0dfc72f8bf0311015278",
+          "uncompressed_bytes": 183671,
+          "uncompressed_sha256": "fda57ec0acae5d43ab60523ba65283ce0923dfc52dbe2aebb2e600afe8015009"
+        }
+      ],
+      "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SOM/ADM2/geoBoundaries-SOM-ADM2_simplified.geojson",
+      "recorded_license": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+      "source_represented_year_claim": "2022"
+    },
+    "whole_primary_roster": [
+      {
+        "source_index": 55862,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B5876262576033",
+        "ordinal": 0,
+        "owners": [
+          40050
+        ],
+        "name": "BADHAN",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55863,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B1722628585645",
+        "ordinal": 1,
+        "owners": [
+          40003
+        ],
+        "name": "BERBERA",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55864,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B41100750476456",
+        "ordinal": 2,
+        "owners": [
+          40028
+        ],
+        "name": "BORAMA",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55865,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B35872588308283",
+        "ordinal": 3,
+        "owners": [
+          40022
+        ],
+        "name": "BURTINLE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55866,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B49212368266991",
+        "ordinal": 4,
+        "owners": [
+          1091
+        ],
+        "name": "EL AFWEYN",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55867,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B34990175799989",
+        "ordinal": 5,
+        "owners": [
+          40020
+        ],
+        "name": "ERIGAVO",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55868,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B71976909807732",
+        "ordinal": 6,
+        "owners": [
+          40068
+        ],
+        "name": "EYL",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55869,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B16729211759375",
+        "ordinal": 7,
+        "owners": [
+          1086
+        ],
+        "name": "GABILEY",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55870,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B67414916563902",
+        "ordinal": 8,
+        "owners": [
+          40062
+        ],
+        "name": "GOLDOGOB",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55871,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B71114106442910",
+        "ordinal": 9,
+        "owners": [
+          1092
+        ],
+        "name": "HARGEISA",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55872,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B25921172233623",
+        "ordinal": 10,
+        "owners": [
+          40011
+        ],
+        "name": "HOBYO",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55873,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B18508481977999",
+        "ordinal": 11,
+        "owners": [
+          1088
+        ],
+        "name": "HUDUN",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55874,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B85139403123259",
+        "ordinal": 12,
+        "owners": [
+          40086
+        ],
+        "name": "JARIBAN",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55875,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B17415415044999",
+        "ordinal": 13,
+        "owners": [
+          40004
+        ],
+        "name": "LAS ANOD",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55876,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B17570807087791",
+        "ordinal": 14,
+        "owners": [
+          1087
+        ],
+        "name": "LUGHAYA",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55877,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B65673290719307",
+        "ordinal": 15,
+        "owners": [
+          40060
+        ],
+        "name": "TALEH",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55878,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B58560427797094",
+        "ordinal": 16,
+        "owners": [
+          40049
+        ],
+        "name": "ZEILA",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55879,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B50873713439527",
+        "ordinal": 17,
+        "owners": [
+          40040
+        ],
+        "name": "DANGOROYO",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55880,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B27146927901695",
+        "ordinal": 18,
+        "owners": [
+          40012
+        ],
+        "name": "GAROWE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55881,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B45563576505649",
+        "ordinal": 19,
+        "owners": [
+          40029
+        ],
+        "name": "HARADHERE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55882,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B46577214305446",
+        "ordinal": 20,
+        "owners": [
+          40032
+        ],
+        "name": "GALKAYU SOUTH",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55883,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B82555432245075",
+        "ordinal": 21,
+        "owners": [
+          40082
+        ],
+        "name": "BUHODLE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55884,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B13490583966346",
+        "ordinal": 22,
+        "owners": [
+          1085
+        ],
+        "name": "AYNABO",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55885,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B95631339376417",
+        "ordinal": 23,
+        "owners": [
+          1093
+        ],
+        "name": "SHEIKH",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55886,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B26651098111953",
+        "ordinal": 24,
+        "owners": [
+          1089
+        ],
+        "name": "ODWAYNE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55887,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B29822236591351",
+        "ordinal": 25,
+        "owners": [
+          40016
+        ],
+        "name": "BURHAKABA",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55888,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B63249337899107",
+        "ordinal": 26,
+        "owners": [
+          40057
+        ],
+        "name": "QORYOLEY",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55889,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B63464570550011",
+        "ordinal": 27,
+        "owners": [
+          40058
+        ],
+        "name": "SABLALE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55890,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B66598677663458",
+        "ordinal": 28,
+        "owners": [
+          40061
+        ],
+        "name": "BUAALE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55891,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B78224110566882",
+        "ordinal": 29,
+        "owners": [
+          40074
+        ],
+        "name": "AFMADOW",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55892,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B38417795171709",
+        "ordinal": 30,
+        "owners": [
+          40027
+        ],
+        "name": "JALALAQSI",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55893,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B13317235490488",
+        "ordinal": 31,
+        "owners": [
+          39999
+        ],
+        "name": "ADALE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55894,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B34996333298223",
+        "ordinal": 32,
+        "owners": [
+          40021
+        ],
+        "name": "WANLEWEYNE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55895,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B70562611750423",
+        "ordinal": 33,
+        "owners": [
+          40065
+        ],
+        "name": "KURTUNWAAREY",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55896,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B78386307677583",
+        "ordinal": 34,
+        "owners": [
+          40076
+        ],
+        "name": "DINSOOR",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55897,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B45668055584867",
+        "ordinal": 35,
+        "owners": [
+          40030
+        ],
+        "name": "QANSAH DHEERE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55898,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B27844034266629",
+        "ordinal": 36,
+        "owners": [
+          40014
+        ],
+        "name": "BELET HAWA",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55899,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B54494760569140",
+        "ordinal": 37,
+        "owners": [
+          40043
+        ],
+        "name": "EL WAK",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55900,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B9725019653775",
+        "ordinal": 38,
+        "owners": [
+          40098
+        ],
+        "name": "BARDERA",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55901,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B71342338947416",
+        "ordinal": 39,
+        "owners": [
+          40067
+        ],
+        "name": "BADHADHE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55902,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B7496341124688",
+        "ordinal": 40,
+        "owners": [
+          40071
+        ],
+        "name": "ADADO",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55903,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B88570008116698",
+        "ordinal": 41,
+        "owners": [
+          40089
+        ],
+        "name": "KISMAYO",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55904,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B78307821916269",
+        "ordinal": 42,
+        "owners": [
+          40075
+        ],
+        "name": "MARKA",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55905,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B57970277493095",
+        "ordinal": 43,
+        "owners": [
+          40048
+        ],
+        "name": "BRAVA",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55906,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B45912091310280",
+        "ordinal": 44,
+        "owners": [
+          40031
+        ],
+        "name": "JILIB EAST",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55907,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B48654206819595",
+        "ordinal": 45,
+        "owners": [
+          40037
+        ],
+        "name": "JAMAAME WEST",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55908,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B22359262366449",
+        "ordinal": 46,
+        "owners": [
+          40009
+        ],
+        "name": "JAMAAME EAST",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55909,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B35988907575651",
+        "ordinal": 47,
+        "owners": [
+          40023
+        ],
+        "name": "SAKOW",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55910,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B80153065701817",
+        "ordinal": 48,
+        "owners": [
+          40079
+        ],
+        "name": "SALAGLE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55911,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B17211550711552",
+        "ordinal": 49,
+        "owners": [
+          40002
+        ],
+        "name": "BURDUBO",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55912,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B87507195948570",
+        "ordinal": 50,
+        "owners": [
+          40088
+        ],
+        "name": "BERDALE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55913,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B64239121237609",
+        "ordinal": 51,
+        "owners": [
+          40059
+        ],
+        "name": "BAIDOA",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55914,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B82872988311402",
+        "ordinal": 52,
+        "owners": [
+          40083
+        ],
+        "name": "AFGOI",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55915,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B67470388371162",
+        "ordinal": 53,
+        "owners": [
+          40063
+        ],
+        "name": "BALAD",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55916,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B19685876664607",
+        "ordinal": 54,
+        "owners": [
+          40007
+        ],
+        "name": "WARSHEIKH",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55917,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B18067111366045",
+        "ordinal": 55,
+        "owners": [
+          40005
+        ],
+        "name": "JOWHAR",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55918,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B91218746940752",
+        "ordinal": 56,
+        "owners": [
+          40092
+        ],
+        "name": "MAHADAY",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55919,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B1037428019952",
+        "ordinal": 57,
+        "owners": [
+          39993
+        ],
+        "name": "RUNINGOD",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55920,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B59280367905571",
+        "ordinal": 58,
+        "owners": [
+          40052
+        ],
+        "name": "ADEN YABAL",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55921,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B92422883718197",
+        "ordinal": 59,
+        "owners": [
+          40094
+        ],
+        "name": "ELGARAS",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55922,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B29587148635328",
+        "ordinal": 60,
+        "owners": [
+          40015
+        ],
+        "name": "BULO BURTI",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55923,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B60472042011184",
+        "ordinal": 61,
+        "owners": [
+          40053
+        ],
+        "name": "MAHAS",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55924,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B70929656098246",
+        "ordinal": 62,
+        "owners": [
+          40066
+        ],
+        "name": "BELET WEYNE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55925,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B33633029479979",
+        "ordinal": 63,
+        "owners": [
+          40018
+        ],
+        "name": "MATABAN",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55926,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B13646970267315",
+        "ordinal": 64,
+        "owners": [
+          40001
+        ],
+        "name": "GURIEL",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55927,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B3694885810880",
+        "ordinal": 65,
+        "owners": [
+          40024
+        ],
+        "name": "DUSAMREB",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55928,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B95768297693304",
+        "ordinal": 66,
+        "owners": [
+          40097
+        ],
+        "name": "EL BUR",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55929,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B5464028424043",
+        "ordinal": 67,
+        "owners": [
+          40044
+        ],
+        "name": "GALAD",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55930,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B93282751172745",
+        "ordinal": 68,
+        "owners": [
+          40095
+        ],
+        "name": "GALHAREERI",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55931,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B79967246373787",
+        "ordinal": 69,
+        "owners": [
+          40077
+        ],
+        "name": "ABUDWAQ",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55932,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B33412695928736",
+        "ordinal": 70,
+        "owners": [
+          40017
+        ],
+        "name": "BALANBALE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55933,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B74213899159169",
+        "ordinal": 71,
+        "owners": [
+          40069
+        ],
+        "name": "LUUQ",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55934,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B46962226770682",
+        "ordinal": 72,
+        "owners": [
+          40034
+        ],
+        "name": "SHANGANI",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55935,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B5791986723142",
+        "ordinal": 73,
+        "owners": [
+          40047
+        ],
+        "name": "HAMAR JABJAB",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55936,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B59079142474967",
+        "ordinal": 74,
+        "owners": [
+          40051
+        ],
+        "name": "WARDEGLY",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55937,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B1106849910840",
+        "ordinal": 75,
+        "owners": [
+          39994
+        ],
+        "name": "YAQSHID",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55938,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B37468249397520",
+        "ordinal": 76,
+        "owners": [
+          40026
+        ],
+        "name": "HELIWA",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55939,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B48165620113230",
+        "ordinal": 77,
+        "owners": [
+          40036
+        ],
+        "name": "KARAN",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55940,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B11993841529980",
+        "ordinal": 78,
+        "owners": [
+          39995
+        ],
+        "name": "KAHDA",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55941,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B12433941147201",
+        "ordinal": 79,
+        "owners": [
+          39996
+        ],
+        "name": "DANYILE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55942,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B97352920944621",
+        "ordinal": 80,
+        "owners": [
+          40099
+        ],
+        "name": "SHIBIS",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55943,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B82497117108995",
+        "ordinal": 81,
+        "owners": [
+          40081
+        ],
+        "name": "HODAN",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55944,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B24635972964099",
+        "ordinal": 82,
+        "owners": [
+          40010
+        ],
+        "name": "ABDUL AZIZ",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55945,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B6174118439216",
+        "ordinal": 83,
+        "owners": [
+          40056
+        ],
+        "name": "HAWAL WADAG",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55946,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B6942068492284",
+        "ordinal": 84,
+        "owners": [
+          40064
+        ],
+        "name": "MADINA",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55947,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B74421792926461",
+        "ordinal": 85,
+        "owners": [
+          40070
+        ],
+        "name": "HAMAR WEYN",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55948,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B75268205448594",
+        "ordinal": 86,
+        "owners": [
+          40073
+        ],
+        "name": "BONDERE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55949,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B61400607894578",
+        "ordinal": 87,
+        "owners": [
+          40055
+        ],
+        "name": "WABERI",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55950,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B80096765032061",
+        "ordinal": 88,
+        "owners": [
+          40078
+        ],
+        "name": "HAGAR",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55951,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B19557603644840",
+        "ordinal": 89,
+        "owners": [
+          40006
+        ],
+        "name": "GALINSOOR",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55952,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B48124794142204",
+        "ordinal": 90,
+        "owners": [
+          40035
+        ],
+        "name": "EL DHERE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55953,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B4618356108906",
+        "ordinal": 91,
+        "owners": [
+          5789
+        ],
+        "name": "BALIGUBADLE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55954,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B85704075811392",
+        "ordinal": 92,
+        "owners": [
+          40087
+        ],
+        "name": "ALULA",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55955,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B61236699531309",
+        "ordinal": 93,
+        "owners": [
+          40054
+        ],
+        "name": "BARGAAL",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55956,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B12579203226949",
+        "ordinal": 94,
+        "owners": [
+          39998
+        ],
+        "name": "BOSSASO",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55957,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B5210760916560",
+        "ordinal": 95,
+        "owners": [
+          40042
+        ],
+        "name": "ISKUSHUBAN",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55958,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B84835917944928",
+        "ordinal": 96,
+        "owners": [
+          40085
+        ],
+        "name": "QANDALA",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55959,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B19942136594516",
+        "ordinal": 97,
+        "owners": [
+          40008
+        ],
+        "name": "UFEYN",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55960,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B49823666549340",
+        "ordinal": 98,
+        "owners": [
+          40039
+        ],
+        "name": "WAJID",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55961,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B98266132903416",
+        "ordinal": 99,
+        "owners": [
+          40100
+        ],
+        "name": "TIYEGLO",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55962,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B34429379977125",
+        "ordinal": 100,
+        "owners": [
+          40019
+        ],
+        "name": "HUDUR",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55963,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B46619978923687",
+        "ordinal": 101,
+        "owners": [
+          40033
+        ],
+        "name": "RABDURE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55964,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B56593416726997",
+        "ordinal": 102,
+        "owners": [
+          40046
+        ],
+        "name": "EL BARDE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55965,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B40091123389404",
+        "ordinal": 103,
+        "owners": [
+          1090
+        ],
+        "name": "BAKI",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55966,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B49158080079573",
+        "ordinal": 104,
+        "owners": [
+          40038
+        ],
+        "name": "BURAO",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55967,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B55713262930427",
+        "ordinal": 105,
+        "owners": [
+          40045
+        ],
+        "name": "GALKAYU NORTH",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55968,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B89470325757348",
+        "ordinal": 106,
+        "owners": [
+          40090
+        ],
+        "name": "AWDHEEGLE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55969,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B89976507617843",
+        "ordinal": 107,
+        "owners": [
+          40091
+        ],
+        "name": "DHARKENLY",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55970,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B83703395559495",
+        "ordinal": 108,
+        "owners": [
+          40084
+        ],
+        "name": "RAGA ELLE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55971,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B75221313586625",
+        "ordinal": 109,
+        "owners": [
+          40072
+        ],
+        "name": "GARBAHAREY",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55972,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B92097276098978",
+        "ordinal": 110,
+        "owners": [
+          40093
+        ],
+        "name": "DOLO",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55973,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B8041620717241",
+        "ordinal": 111,
+        "owners": [
+          40080
+        ],
+        "name": "BENDER BAYLA",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55974,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B51750240314233",
+        "ordinal": 112,
+        "owners": [
+          40041
+        ],
+        "name": "GARDO",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55975,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B125480767078",
+        "ordinal": 113,
+        "owners": [
+          39997
+        ],
+        "name": "HAFUN",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55976,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B37301181329980",
+        "ordinal": 114,
+        "owners": [
+          40025
+        ],
+        "name": "RAKO",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55977,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B27341707037239",
+        "ordinal": 115,
+        "owners": [
+          40013
+        ],
+        "name": "WACIYA",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55978,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B13359922202498",
+        "ordinal": 116,
+        "owners": [
+          40000
+        ],
+        "name": "GEDWEIN",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55979,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B94178460228312",
+        "ordinal": 117,
+        "owners": [
+          40096
+        ],
+        "name": "JILIB WEST",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "contacted_families": [
+      {
+        "advertised_feature_count": 18,
+        "cohort": "administrative-registry",
+        "feature_count": 18,
+        "key": "gb:SOM:ADM1",
+        "metadata_sha256": "8a00575a861382a13ac26b8217fc208954d315a3954f2a5fa8b5ab6a4eba68de",
+        "original_bytes": 87302,
+        "original_metadata_file": "data/administrative-sources.json",
+        "original_sha256": "a3d87cc4bc6f6d32b40862c34efd325ae61fc22c092c81597e8c49c20c681910",
+        "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+        "parts": [
+          {
+            "bytes": 29023,
+            "hash_kind": "file-bytes",
+            "offset": 0,
+            "ordinal": 0,
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-SOM-ADM1-000.bin.gz",
+            "sha256": "3caef30006cc767fcf4f199cfd605c74f2ab180ed9c37c9945d634b08922a732",
+            "uncompressed_bytes": 87302,
+            "uncompressed_sha256": "a3d87cc4bc6f6d32b40862c34efd325ae61fc22c092c81597e8c49c20c681910"
+          }
+        ],
+        "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SOM/ADM1/geoBoundaries-SOM-ADM1_simplified.geojson",
+        "recorded_license": "Open Data Commons Open Database License 1.0",
+        "source_represented_year_claim": "2015"
+      },
+      {
+        "advertised_feature_count": 118,
+        "cohort": "administrative-registry",
+        "feature_count": 118,
+        "key": "gb:SOM:ADM2",
+        "metadata_sha256": "c90b56569afe78ef191c8f25faaf1a0953b7b673b6907a459cbac6431c12ff13",
+        "original_bytes": 183671,
+        "original_metadata_file": "data/administrative-sources.json",
+        "original_sha256": "fda57ec0acae5d43ab60523ba65283ce0923dfc52dbe2aebb2e600afe8015009",
+        "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+        "parts": [
+          {
+            "bytes": 53470,
+            "hash_kind": "file-bytes",
+            "offset": 0,
+            "ordinal": 0,
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-SOM-ADM2-000.bin.gz",
+            "sha256": "ea4a2af6d241350c0b4329eca66259e423f287a222bd0dfc72f8bf0311015278",
+            "uncompressed_bytes": 183671,
+            "uncompressed_sha256": "fda57ec0acae5d43ab60523ba65283ce0923dfc52dbe2aebb2e600afe8015009"
+          }
+        ],
+        "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SOM/ADM2/geoBoundaries-SOM-ADM2_simplified.geojson",
+        "recorded_license": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+        "source_represented_year_claim": "2022"
+      }
+    ],
+    "original_contact_roster": [
+      {
+        "source_index": 55845,
+        "family_index": 296,
+        "source_id": "gb:SOM:ADM1:83879307B13610404434600",
+        "ordinal": 1,
+        "owners": [],
+        "name": "Sanaag",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55846,
+        "family_index": 296,
+        "source_id": "gb:SOM:ADM1:83879307B32896531038690",
+        "ordinal": 2,
+        "owners": [],
+        "name": "Banadir",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55848,
+        "family_index": 296,
+        "source_id": "gb:SOM:ADM1:83879307B58207540839705",
+        "ordinal": 4,
+        "owners": [],
+        "name": "Bakool",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55850,
+        "family_index": 296,
+        "source_id": "gb:SOM:ADM1:83879307B5242146898757",
+        "ordinal": 6,
+        "owners": [],
+        "name": "Middle Shebelle",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55853,
+        "family_index": 296,
+        "source_id": "gb:SOM:ADM1:83879307B66585548815331",
+        "ordinal": 9,
+        "owners": [],
+        "name": "Nugaal",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55854,
+        "family_index": 296,
+        "source_id": "gb:SOM:ADM1:83879307B26517451678825",
+        "ordinal": 10,
+        "owners": [],
+        "name": "Mudug",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55856,
+        "family_index": 296,
+        "source_id": "gb:SOM:ADM1:83879307B35519599536274",
+        "ordinal": 12,
+        "owners": [],
+        "name": "Lower Shebelle",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55857,
+        "family_index": 296,
+        "source_id": "gb:SOM:ADM1:83879307B35818532110087",
+        "ordinal": 13,
+        "owners": [],
+        "name": "Lower Juba",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55858,
+        "family_index": 296,
+        "source_id": "gb:SOM:ADM1:83879307B20044253365087",
+        "ordinal": 14,
+        "owners": [],
+        "name": "Galgaduud",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55860,
+        "family_index": 296,
+        "source_id": "gb:SOM:ADM1:83879307B19000204873860",
+        "ordinal": 16,
+        "owners": [],
+        "name": "Bari",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55861,
+        "family_index": 296,
+        "source_id": "gb:SOM:ADM1:83879307B11376444747055",
+        "ordinal": 17,
+        "owners": [],
+        "name": "Awdal",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55862,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B5876262576033",
+        "ordinal": 0,
+        "owners": [
+          40050
+        ],
+        "name": "BADHAN",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55867,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B34990175799989",
+        "ordinal": 5,
+        "owners": [
+          40020
+        ],
+        "name": "ERIGAVO",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55868,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B71976909807732",
+        "ordinal": 6,
+        "owners": [
+          40068
+        ],
+        "name": "EYL",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55872,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B25921172233623",
+        "ordinal": 10,
+        "owners": [
+          40011
+        ],
+        "name": "HOBYO",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55874,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B85139403123259",
+        "ordinal": 12,
+        "owners": [
+          40086
+        ],
+        "name": "JARIBAN",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55878,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B58560427797094",
+        "ordinal": 16,
+        "owners": [
+          40049
+        ],
+        "name": "ZEILA",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55879,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B50873713439527",
+        "ordinal": 17,
+        "owners": [
+          40040
+        ],
+        "name": "DANGOROYO",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55881,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B45563576505649",
+        "ordinal": 19,
+        "owners": [
+          40029
+        ],
+        "name": "HARADHERE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55883,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B82555432245075",
+        "ordinal": 21,
+        "owners": [
+          40082
+        ],
+        "name": "BUHODLE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55893,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B13317235490488",
+        "ordinal": 31,
+        "owners": [
+          39999
+        ],
+        "name": "ADALE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55895,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B70562611750423",
+        "ordinal": 33,
+        "owners": [
+          40065
+        ],
+        "name": "KURTUNWAAREY",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55901,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B71342338947416",
+        "ordinal": 39,
+        "owners": [
+          40067
+        ],
+        "name": "BADHADHE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55903,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B88570008116698",
+        "ordinal": 41,
+        "owners": [
+          40089
+        ],
+        "name": "KISMAYO",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55904,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B78307821916269",
+        "ordinal": 42,
+        "owners": [
+          40075
+        ],
+        "name": "MARKA",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55905,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B57970277493095",
+        "ordinal": 43,
+        "owners": [
+          40048
+        ],
+        "name": "BRAVA",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55906,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B45912091310280",
+        "ordinal": 44,
+        "owners": [
+          40031
+        ],
+        "name": "JILIB EAST",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55908,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B22359262366449",
+        "ordinal": 46,
+        "owners": [
+          40009
+        ],
+        "name": "JAMAAME EAST",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55914,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B82872988311402",
+        "ordinal": 52,
+        "owners": [
+          40083
+        ],
+        "name": "AFGOI",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55915,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B67470388371162",
+        "ordinal": 53,
+        "owners": [
+          40063
+        ],
+        "name": "BALAD",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55916,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B19685876664607",
+        "ordinal": 54,
+        "owners": [
+          40007
+        ],
+        "name": "WARSHEIKH",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55919,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B1037428019952",
+        "ordinal": 57,
+        "owners": [
+          39993
+        ],
+        "name": "RUNINGOD",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55935,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B5791986723142",
+        "ordinal": 73,
+        "owners": [
+          40047
+        ],
+        "name": "HAMAR JABJAB",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55938,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B37468249397520",
+        "ordinal": 76,
+        "owners": [
+          40026
+        ],
+        "name": "HELIWA",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55939,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B48165620113230",
+        "ordinal": 77,
+        "owners": [
+          40036
+        ],
+        "name": "KARAN",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55944,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B24635972964099",
+        "ordinal": 82,
+        "owners": [
+          40010
+        ],
+        "name": "ABDUL AZIZ",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55946,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B6942068492284",
+        "ordinal": 84,
+        "owners": [
+          40064
+        ],
+        "name": "MADINA",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55949,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B61400607894578",
+        "ordinal": 87,
+        "owners": [
+          40055
+        ],
+        "name": "WABERI",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55952,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B48124794142204",
+        "ordinal": 90,
+        "owners": [
+          40035
+        ],
+        "name": "EL DHERE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55954,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B85704075811392",
+        "ordinal": 92,
+        "owners": [
+          40087
+        ],
+        "name": "ALULA",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55955,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B61236699531309",
+        "ordinal": 93,
+        "owners": [
+          40054
+        ],
+        "name": "BARGAAL",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55956,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B12579203226949",
+        "ordinal": 94,
+        "owners": [
+          39998
+        ],
+        "name": "BOSSASO",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55958,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B84835917944928",
+        "ordinal": 96,
+        "owners": [
+          40085
+        ],
+        "name": "QANDALA",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55963,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B46619978923687",
+        "ordinal": 101,
+        "owners": [
+          40033
+        ],
+        "name": "RABDURE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55970,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B83703395559495",
+        "ordinal": 108,
+        "owners": [
+          40084
+        ],
+        "name": "RAGA ELLE",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55973,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B8041620717241",
+        "ordinal": 111,
+        "owners": [
+          40080
+        ],
+        "name": "BENDER BAYLA",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55975,
+        "family_index": 297,
+        "source_id": "gb:SOM:ADM2:84685775B125480767078",
+        "ordinal": 113,
+        "owners": [
+          39997
+        ],
+        "name": "HAFUN",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "contacts_with_empty_direct_owner_arrays": [
+      {
+        "source_index": 55845,
+        "family_index": 296,
+        "source_id": "gb:SOM:ADM1:83879307B13610404434600",
+        "ordinal": 1,
+        "owners": [],
+        "name": "Sanaag",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55846,
+        "family_index": 296,
+        "source_id": "gb:SOM:ADM1:83879307B32896531038690",
+        "ordinal": 2,
+        "owners": [],
+        "name": "Banadir",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55848,
+        "family_index": 296,
+        "source_id": "gb:SOM:ADM1:83879307B58207540839705",
+        "ordinal": 4,
+        "owners": [],
+        "name": "Bakool",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55850,
+        "family_index": 296,
+        "source_id": "gb:SOM:ADM1:83879307B5242146898757",
+        "ordinal": 6,
+        "owners": [],
+        "name": "Middle Shebelle",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55853,
+        "family_index": 296,
+        "source_id": "gb:SOM:ADM1:83879307B66585548815331",
+        "ordinal": 9,
+        "owners": [],
+        "name": "Nugaal",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55854,
+        "family_index": 296,
+        "source_id": "gb:SOM:ADM1:83879307B26517451678825",
+        "ordinal": 10,
+        "owners": [],
+        "name": "Mudug",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55856,
+        "family_index": 296,
+        "source_id": "gb:SOM:ADM1:83879307B35519599536274",
+        "ordinal": 12,
+        "owners": [],
+        "name": "Lower Shebelle",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55857,
+        "family_index": 296,
+        "source_id": "gb:SOM:ADM1:83879307B35818532110087",
+        "ordinal": 13,
+        "owners": [],
+        "name": "Lower Juba",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55858,
+        "family_index": 296,
+        "source_id": "gb:SOM:ADM1:83879307B20044253365087",
+        "ordinal": 14,
+        "owners": [],
+        "name": "Galgaduud",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55860,
+        "family_index": 296,
+        "source_id": "gb:SOM:ADM1:83879307B19000204873860",
+        "ordinal": 16,
+        "owners": [],
+        "name": "Bari",
+        "geometry_status": "raw-native-supported"
+      },
+      {
+        "source_index": 55861,
+        "family_index": 296,
+        "source_id": "gb:SOM:ADM1:83879307B11376444747055",
+        "ordinal": 17,
+        "owners": [],
+        "name": "Awdal",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "empty_owner_contacts_have_no_exact_lineage_source_atom": true,
+    "limit": "Empty direct-owner arrays and absence of exact lineage source atoms do not establish complete ancestor exclusions or identify the historical nine refused records.",
+    "original_owner_cells": [
+      {
+        "owner_index": 39993,
+        "original_cells": 18,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 39997,
+        "original_cells": 289,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 39998,
+        "original_cells": 109,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 39999,
+        "original_cells": 42,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40007,
+        "original_cells": 24,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40009,
+        "original_cells": 2,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40010,
+        "original_cells": 11,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40011,
+        "original_cells": 100,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40020,
+        "original_cells": 11,
+        "reference_owner": "Somaliland"
+      },
+      {
+        "owner_index": 40026,
+        "original_cells": 5,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40029,
+        "original_cells": 54,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40031,
+        "original_cells": 1,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40033,
+        "original_cells": 2,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40035,
+        "original_cells": 75,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40036,
+        "original_cells": 9,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40040,
+        "original_cells": 45,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40047,
+        "original_cells": 8,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40048,
+        "original_cells": 108,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40049,
+        "original_cells": 19,
+        "reference_owner": "Somaliland"
+      },
+      {
+        "owner_index": 40050,
+        "original_cells": 1,
+        "reference_owner": "Somaliland"
+      },
+      {
+        "owner_index": 40054,
+        "original_cells": 75,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40055,
+        "original_cells": 8,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40063,
+        "original_cells": 2,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40064,
+        "original_cells": 29,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40065,
+        "original_cells": 37,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40067,
+        "original_cells": 119,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40068,
+        "original_cells": 133,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40075,
+        "original_cells": 126,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40080,
+        "original_cells": 186,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40082,
+        "original_cells": 1,
+        "reference_owner": "Somaliland"
+      },
+      {
+        "owner_index": 40083,
+        "original_cells": 13,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40084,
+        "original_cells": 72,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40085,
+        "original_cells": 9,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40086,
+        "original_cells": 129,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40087,
+        "original_cells": 123,
+        "reference_owner": "Somalia"
+      },
+      {
+        "owner_index": 40089,
+        "original_cells": 252,
+        "reference_owner": "Somalia"
+      }
+    ],
+    "reference_owner_label_counts": {
+      "Somalia": 32,
+      "Somaliland": 4
+    },
+    "label_limit": "These are preserved original source/lineage labels, not new political or territorial determinations.",
+    "province_locality_groups": 13,
+    "separate_natural_earth_ancestry": {
+      "source_atom": "natural-earth:adm1:SOL+00?",
+      "reverse_owner_indices": [
+        5789
+      ],
+      "lineage_row": {
+        "id": "atlas:multipart:d9b625e623d9b4226e75",
+        "index": 5789,
+        "bounds": [
+          162977.19836846684,
+          124128.11680722475,
+          163508.79208425115,
+          124627.07389563516
+        ],
+        "province_id": "framework:province:woqooyi-galbeed:633db0645f4d",
+        "province_index": 4957,
+        "name": "BALIGUBADLE",
+        "reference_owner": "Somaliland",
+        "source_id": "gb:SOM:ADM2",
+        "location_basis": "Source district plus numerical remainder of the same partitioned source ID",
+        "source_atoms": [
+          "gb:SOM:ADM2:84685775B4618356108906",
+          "natural-earth:adm1:SOL+00?"
+        ]
+      },
+      "limit": "This one retained lineage row has the separate Natural Earth source atom. It is not an original SOM package owner and does not identify the nine historical refusals, establish an exclusion map or substitute for their missing explicit ancestry."
+    }
+  },
+  "retained_history": {
+    "evidence_basis": "Root-provided direct former-task readback, plus independently accessible completed reviewer summary; the cited local result bodies were not imported.",
+    "former_author": "01a14c38-ce61-7706-817e-88446b266019",
+    "former_reviewer": "01a14c3a-abbc-76f5-b9e1-1e3f2cb1c024",
+    "original_scope_commit": "e21f7e4af69684efae22debce6d1ce3a6395aa26",
+    "physical_result_commit": "b478be96586f78b14e9344f83446b6f05bea127a",
+    "independent_review_commit": "8baee4cefba01128c87e523254d037bb24f2a614",
+    "reported_physical_execution": {
+      "name": "physical-001",
+      "exit_code": 0,
+      "elapsed_seconds": 18.5465
+    },
+    "reported_authority_refusal_count": 9,
+    "exact_refusal_ids_available": false,
+    "historical_held_partition": "unknown",
+    "qualification": 0,
+    "quartet_available": false,
+    "public_availability": "Public GitHub commit lookup did not expose these local retained bodies. Historical execution/review statements are attributed context, not a newly authenticated receipt or per-key physical result.",
+    "no_rerun": true
+  },
+  "source_interpretation": [
+    {
+      "scope": "SOM ADM1",
+      "finding": "The retained catalogue represents 18 features in 2015 and records Open Data Commons Open Database License 1.0. Eleven features contact this package. That label and source-contact evidence do not establish present territorial authority, complete competitor ancestry, current exclusions or a source-specific redistribution clearance. Preserve the recorded license and attribution obligations."
+    },
+    {
+      "scope": "SOM ADM2",
+      "finding": "The retained catalogue represents 118 features in 2022 and records Creative Commons Attribution 4.0. Thirty-six exact owner atoms contact this original scope. The catalogue pins source identity and historical metadata; it does not independently establish current role, territorial exclusions, competitor completeness or repair qualification."
+    },
+    {
+      "scope": "Reported authority refusals versus public contacts",
+      "finding": "The completed historical independent review reports nine raw competitor IDs lacking direct owners or explicit ancestry. Public records independently show eleven ADM1 contacts with empty owners and no exact lineage atoms. Those counts describe different evidence; no exact nine-ID list, ancestor map or per-key refusal/held partition is reconstructed."
+    }
+  ],
+  "original_witness_limit": "The companion join authenticates original census source-candidate and land/water-mask output records for every interval. It is not a new rasterization, current physical classification, private physical-001 receipt, source membership test or scientific qualification.",
+  "observation_execution": {
+    "successful_full_package_observations": 1,
+    "query_count": 2247,
+    "current_base_owned_cells": 0,
+    "current_additive_owned_cells": 0,
+    "current_selected_owned_cells": 0,
+    "current_overlap_cells": 0,
+    "acquisition": {
+      "scope": "original-package-and-selected-native-observation",
+      "complete_scientific_closure": false,
+      "unique_objects": 34,
+      "declared_bytes": 96621253,
+      "fetched_objects": 3,
+      "fetched_bytes": 1142454,
+      "fetch_batches": 1,
+      "tree_metadata_ms": 311,
+      "fetch_ms": 491,
+      "declarations": 35,
+      "origin_metadata_objects": 0,
+      "origin_metadata_bytes": 0,
+      "origin_metadata_fetches": 0,
+      "origin_metadata_imports": 0
+    }
+  },
+  "preservation": {
+    "original_keys": 2247,
+    "repairs": 0,
+    "owner_changes": 0,
+    "rights_clearances": 0,
+    "native_holds_removed": 0
+  },
+  "immutable_inputs": [
+    {
+      "commit": "8bb376b6b0125bfecfce5ac05e63b17c19d87ae9",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+      "git_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+      "bytes": 1754890,
+      "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+      "git_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+      "bytes": 1754890,
+      "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8"
+    },
+    {
+      "commit": "8bb376b6b0125bfecfce5ac05e63b17c19d87ae9",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz",
+      "git_blob_oid": "4ef0728e74e11e069bd7bb11e287c6fbb59946fa",
+      "bytes": 4404456,
+      "sha256": "bacfc99714f832aa4b5719b9fb4ae9837080b948f10df9e9be2b150b281e20d4"
+    },
+    {
+      "commit": "8bb376b6b0125bfecfce5ac05e63b17c19d87ae9",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+      "bytes": 1844315,
+      "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa"
+    },
+    {
+      "commit": "8bb376b6b0125bfecfce5ac05e63b17c19d87ae9",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/retained-source-catalogue.json",
+      "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+    },
+    {
+      "commit": "8bb376b6b0125bfecfce5ac05e63b17c19d87ae9",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-census-summary.json",
+      "git_blob_oid": "fa1e4d101edb54b02bd1ff42a240f2f80ac65832",
+      "bytes": 120963,
+      "sha256": "8a4a6792237259328e56e38d91d0cb22f977de4a35caf4781f0d605e3db1653d"
+    },
+    {
+      "commit": "8bb376b6b0125bfecfce5ac05e63b17c19d87ae9",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-unassigned-summary.json",
+      "git_blob_oid": "0c934cdaf4b007a741e66d4a080890154bdae53c",
+      "bytes": 154672,
+      "sha256": "a82c56c1d92ff52c0b0e52c9bf329905a05bace4b6a27c12771509d419888501"
+    },
+    {
+      "commit": "8bb376b6b0125bfecfce5ac05e63b17c19d87ae9",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/ownership-binding.json",
+      "git_blob_oid": "b9d81d18aab6d03dc701ff1337b35e53be81d0af",
+      "bytes": 3048,
+      "sha256": "b952192475435c8fbc74a84627994aff4f4e073c36c479d369554fc75251bc89"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-census-summary.json",
+      "git_blob_oid": "fa1e4d101edb54b02bd1ff42a240f2f80ac65832",
+      "bytes": 120963,
+      "sha256": "8a4a6792237259328e56e38d91d0cb22f977de4a35caf4781f0d605e3db1653d"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-unassigned-summary.json",
+      "git_blob_oid": "0c934cdaf4b007a741e66d4a080890154bdae53c",
+      "bytes": 154672,
+      "sha256": "a82c56c1d92ff52c0b0e52c9bf329905a05bace4b6a27c12771509d419888501"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/ownership-binding.json",
+      "git_blob_oid": "b9d81d18aab6d03dc701ff1337b35e53be81d0af",
+      "bytes": 3048,
+      "sha256": "b952192475435c8fbc74a84627994aff4f4e073c36c479d369554fc75251bc89"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/lineage.json.gz",
+      "git_blob_oid": "4ef0728e74e11e069bd7bb11e287c6fbb59946fa",
+      "bytes": 4404456,
+      "sha256": "bacfc99714f832aa4b5719b9fb4ae9837080b948f10df9e9be2b150b281e20d4"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-feature-roster.json.gz",
+      "git_blob_oid": "e6e380ec13cd4bcc1d24399a76bfa85ca5805b26",
+      "bytes": 1844315,
+      "sha256": "87f2d47e104b3af640351e747d8300d0068a1be23caab9e80558c3f8914eb4aa"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/retained-source-catalogue.json",
+      "git_blob_oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+    },
+    {
+      "commit": "8bb376b6b0125bfecfce5ac05e63b17c19d87ae9",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-029.json.gz",
+      "git_blob_oid": "3fc846f1a3a57841d82c695b97ad31b93af681e6",
+      "bytes": 613896,
+      "sha256": "7775f315311056808bfead2394034459a83a3590a201fe0deedb66fea1866528"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-029.json.gz",
+      "git_blob_oid": "3fc846f1a3a57841d82c695b97ad31b93af681e6",
+      "bytes": 613896,
+      "sha256": "7775f315311056808bfead2394034459a83a3590a201fe0deedb66fea1866528"
+    },
+    {
+      "commit": "8bb376b6b0125bfecfce5ac05e63b17c19d87ae9",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-029.json.gz",
+      "git_blob_oid": "2e1d884705c104bd3dbc61ac5444761875210ba5",
+      "bytes": 508848,
+      "sha256": "7af023db048ed84fe910c0ce966508b5b4127c95c6215f0d36213ed20d94b5d2"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-029.json.gz",
+      "git_blob_oid": "2e1d884705c104bd3dbc61ac5444761875210ba5",
+      "bytes": 508848,
+      "sha256": "7af023db048ed84fe910c0ce966508b5b4127c95c6215f0d36213ed20d94b5d2"
+    },
+    {
+      "commit": "8bb376b6b0125bfecfce5ac05e63b17c19d87ae9",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-029.json.gz",
+      "git_blob_oid": "01851c2ff5b06938769c6662bea70c19c69148ba",
+      "bytes": 19710,
+      "sha256": "c3a2e3b0c84e34e19aa39c7afbb02f62a434f29fad6e64aa7429522b9ebfe30f"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-029.json.gz",
+      "git_blob_oid": "01851c2ff5b06938769c6662bea70c19c69148ba",
+      "bytes": 19710,
+      "sha256": "c3a2e3b0c84e34e19aa39c7afbb02f62a434f29fad6e64aa7429522b9ebfe30f"
+    },
+    {
+      "commit": "8bb376b6b0125bfecfce5ac05e63b17c19d87ae9",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-030.json.gz",
+      "git_blob_oid": "bcb16439246dfebc52708996ca21897070c8bc46",
+      "bytes": 636933,
+      "sha256": "c28ed9ba4a3b04ec9cee0884a025c4e5c207c5b8fee543883f43e94164b013c7"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-030.json.gz",
+      "git_blob_oid": "bcb16439246dfebc52708996ca21897070c8bc46",
+      "bytes": 636933,
+      "sha256": "c28ed9ba4a3b04ec9cee0884a025c4e5c207c5b8fee543883f43e94164b013c7"
+    },
+    {
+      "commit": "8bb376b6b0125bfecfce5ac05e63b17c19d87ae9",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-030.json.gz",
+      "git_blob_oid": "e87d23b077e9a0b47bcdc38cdf6126f9ca8e3b48",
+      "bytes": 490718,
+      "sha256": "2731421e881dd1c8121364409088523a67b12c52ed054642a5994edc96037c0b"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-030.json.gz",
+      "git_blob_oid": "e87d23b077e9a0b47bcdc38cdf6126f9ca8e3b48",
+      "bytes": 490718,
+      "sha256": "2731421e881dd1c8121364409088523a67b12c52ed054642a5994edc96037c0b"
+    },
+    {
+      "commit": "8bb376b6b0125bfecfce5ac05e63b17c19d87ae9",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-030.json.gz",
+      "git_blob_oid": "126ed25c39ecf26af8188d20f6f3a0e90bdcbf09",
+      "bytes": 2805,
+      "sha256": "0d1d7952380dc823b6eafcf1803b6124a80c06d6e1f16500cc36d9dd82142a4d"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-030.json.gz",
+      "git_blob_oid": "126ed25c39ecf26af8188d20f6f3a0e90bdcbf09",
+      "bytes": 2805,
+      "sha256": "0d1d7952380dc823b6eafcf1803b6124a80c06d6e1f16500cc36d9dd82142a4d"
+    },
+    {
+      "commit": "8bb376b6b0125bfecfce5ac05e63b17c19d87ae9",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-031.json.gz",
+      "git_blob_oid": "8c513fafe3d2754547cba8c3e8a4c812e8cc520d",
+      "bytes": 589757,
+      "sha256": "9aa6e8ab65027095c27f43c2d15af0a3bb94c6af8fe19f342e3af37f5c3356e0"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-031.json.gz",
+      "git_blob_oid": "8c513fafe3d2754547cba8c3e8a4c812e8cc520d",
+      "bytes": 589757,
+      "sha256": "9aa6e8ab65027095c27f43c2d15af0a3bb94c6af8fe19f342e3af37f5c3356e0"
+    },
+    {
+      "commit": "8bb376b6b0125bfecfce5ac05e63b17c19d87ae9",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-031.json.gz",
+      "git_blob_oid": "ea10ba7f8cacba0d3ac4c4967d6f0f501afa1dbb",
+      "bytes": 403892,
+      "sha256": "045752377715c5b2ea0924f9c92e9b65f202b396fc0c585fb3c05831fb7e99ef"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-031.json.gz",
+      "git_blob_oid": "ea10ba7f8cacba0d3ac4c4967d6f0f501afa1dbb",
+      "bytes": 403892,
+      "sha256": "045752377715c5b2ea0924f9c92e9b65f202b396fc0c585fb3c05831fb7e99ef"
+    },
+    {
+      "commit": "8bb376b6b0125bfecfce5ac05e63b17c19d87ae9",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-031.json.gz",
+      "git_blob_oid": "15ddbafb578c0b664651bce93956080257e482ef",
+      "bytes": 5242,
+      "sha256": "9697f1635da0fedd24b4289c42bfd09a9468074f0414b8075dd50f925a990bc3"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-031.json.gz",
+      "git_blob_oid": "15ddbafb578c0b664651bce93956080257e482ef",
+      "bytes": 5242,
+      "sha256": "9697f1635da0fedd24b4289c42bfd09a9468074f0414b8075dd50f925a990bc3"
+    },
+    {
+      "commit": "8bb376b6b0125bfecfce5ac05e63b17c19d87ae9",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-032.json.gz",
+      "git_blob_oid": "5c56cb06a4879060a4ad933395cd643cdaaa5565",
+      "bytes": 800317,
+      "sha256": "00a677c75540d3be3a750e7f41d2d296f05dc24b84cec9d3776713986a7f6064"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-032.json.gz",
+      "git_blob_oid": "5c56cb06a4879060a4ad933395cd643cdaaa5565",
+      "bytes": 800317,
+      "sha256": "00a677c75540d3be3a750e7f41d2d296f05dc24b84cec9d3776713986a7f6064"
+    },
+    {
+      "commit": "8bb376b6b0125bfecfce5ac05e63b17c19d87ae9",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-032.json.gz",
+      "git_blob_oid": "5f8f1e8aa032abc85e931930eb4eb9b0dbc0ebdb",
+      "bytes": 516947,
+      "sha256": "2b3d882155a28df8782b346bd7382b2faa1ccfa0ebf1c2f0f2c6d779c055905a"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-032.json.gz",
+      "git_blob_oid": "5f8f1e8aa032abc85e931930eb4eb9b0dbc0ebdb",
+      "bytes": 516947,
+      "sha256": "2b3d882155a28df8782b346bd7382b2faa1ccfa0ebf1c2f0f2c6d779c055905a"
+    },
+    {
+      "commit": "8bb376b6b0125bfecfce5ac05e63b17c19d87ae9",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-032.json.gz",
+      "git_blob_oid": "9bee5462a2f4a8bf1e54816c4a3bd61d9227e221",
+      "bytes": 32628,
+      "sha256": "5a8910efab0c7f8667167655e138c1ae0efb7d5ec52ff143c7ef377f925c98a6"
+    },
+    {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-032.json.gz",
+      "git_blob_oid": "9bee5462a2f4a8bf1e54816c4a3bd61d9227e221",
+      "bytes": 32628,
+      "sha256": "5a8910efab0c7f8667167655e138c1ae0efb7d5ec52ff143c7ef377f925c98a6"
+    }
+  ],
+  "issue_url": "https://github.com/ChengshuLi/WorldAtlas/issues/2577"
+}
