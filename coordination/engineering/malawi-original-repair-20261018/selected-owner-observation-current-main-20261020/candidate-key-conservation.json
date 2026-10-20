@@ -1,0 +1,72 @@
+{
+  "accepted_credit": 0,
+  "candidate_applied": false,
+  "checks": {
+    "candidate_and_held_disjoint": true,
+    "candidate_union_held_equals_original": true,
+    "current_additive_owner_zero_all_original_keys": true,
+    "current_base_owner_zero_all_original_keys": true,
+    "current_effective_owner_zero_all_original_keys": true,
+    "current_existing_product_overlap_zero": true,
+    "owner_ids_match_original_intervals": true
+  },
+  "counts": {
+    "candidate_keys": 3939,
+    "candidate_owners": 19,
+    "candidate_physical_classes": {
+      "inland-water": 958,
+      "land": 2981
+    },
+    "held_keys": 89,
+    "held_owners": 10,
+    "held_physical_classes": {
+      "inland-water": 1,
+      "land": 88
+    },
+    "original_cells": 4028,
+    "original_owners": 19
+  },
+  "created_utc": "2026-10-20T12:07:29Z",
+  "current_selection": {
+    "bytes": 1481672,
+    "commit": "3f7efc473056622463d09f12d913b0ffd3cd7d18",
+    "path": "coordination/engineering/malawi-original-repair-20261018/selected-owner-observation-current-main-20261020/report.json",
+    "query_count": 4028,
+    "sha256": "182712e280abcfb2743ba9b80cbae05a30f0ebb8bfb93e57773fc60b2a4de01e"
+  },
+  "kind": "mwi-candidate-current-selection-key-reconciliation-v1",
+  "limits": [
+    "This is a keywise reconciliation of retained prepared candidate/hold rows against the exact current-main selected-owner observation.",
+    "It does not apply the proposed patch to the selected product, execute a hypothetical candidate native-consumer transition, or verify emitted application assets.",
+    "The retained author qualification and constructor outputs are referenced by immutable local branch/path/hash, not rerun here.",
+    "No source qualification, accepted repair credit, activation, publication, or package completion is asserted."
+  ],
+  "retained_author_source": {
+    "branch": "engineering/malawi-original-repair-20261018",
+    "commit": "80e341e728abef9a55bcaf9cb27ae3a8262bb1ca",
+    "held_roster": {
+      "bytes": 6079,
+      "path": "coordination/engineering/malawi-original-repair-20261018/supported-inputs-001/held-original.json",
+      "rows": 82,
+      "sha256": "0921c3ad8f058df9925c509ad005643ccacc4532a785a0e4c73f3029b1f49191"
+    },
+    "local_repository": "/Users/chengshuli/world-atlas-workspace/WorldAtlas",
+    "original_partition": {
+      "bytes": 3242,
+      "path": "coordination/engineering/malawi-original-repair-20261018/supported-inputs-001/original-scope-partition.json",
+      "sha256": "437f63aa020cc6f73cccf4580eb37acfd8b3a9d68572c305522e736697babbf9"
+    },
+    "qualified_quartet": {
+      "bytes": 4744,
+      "path": "coordination/engineering/malawi-original-repair-20261018/qualified3939-original-quartet.json",
+      "sha256": "d9c0a24a30f2d492ef492ab012175c4892e9836b50c72ef77f339f606651daea"
+    },
+    "supported_candidate_patch": {
+      "bytes": 82687,
+      "path": "coordination/engineering/malawi-original-repair-20261018/supported-inputs-001/native-patch.json",
+      "rows": 1664,
+      "sha256": "9677428e965ac1088b536458f9f214d8fca6bc94ac469d3044b8432c1c0debc2"
+    }
+  },
+  "version": 1
+}
