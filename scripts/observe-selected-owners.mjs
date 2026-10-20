@@ -10,7 +10,7 @@ import {execFileSync} from 'node:child_process';
 import {gunzipSync} from 'node:zlib';
 import {selectedBootstrap, NativeAssetImage, decodeVisibilityLatitudes} from './check-effective-geographic-regression.mjs';
 import {openNativeWordStore} from './native-word-store.mjs';
-import {admitNativePatchStore} from './native-patch-store.mjs';
+import {admitNativePatchStore, canonicalNativeJsonChunks, writeNativeByteChunks} from './native-patch-store.mjs';
 import {createAcquisition, githubTree} from './geography-prefetch.mjs';
 import {packageInputs, packageIntervals, ROOT as queueDirectory} from '../coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs';
 import {ownershipRun} from '../src/pixel-ownership.js';
@@ -275,60 +275,6 @@ function newOutput(filename) {
   return destination;
 }
 
-function writeJsonPretty(fd, value) {
-  const chunks = [];
-  let buffered = 0;
-  const flush = () => {
-    if (!buffered) return;
-    fs.writeFileSync(fd, chunks.join(''));
-    chunks.length = 0;
-    buffered = 0;
-  };
-  const append = text => {
-    chunks.push(text);
-    buffered += text.length;
-    if (buffered >= 1024 * 1024) flush();
-  };
-  const indent = depth => append(' '.repeat(depth * 2));
-  const emit = (item, depth) => {
-    if (item === null || typeof item !== 'object') {
-      const encoded = JSON.stringify(item);
-      append(encoded === undefined ? 'null' : encoded);
-      return;
-    }
-    if (Array.isArray(item)) {
-      if (item.length === 0) { append('[]'); return; }
-      append('[\n');
-      for (let i = 0; i < item.length; i++) {
-        indent(depth + 1);
-        emit(item[i], depth + 1);
-        if (i + 1 < item.length) append(',');
-        append('\n');
-      }
-      indent(depth);
-      append(']');
-      return;
-    }
-    const keys = Object.keys(item).filter(key => item[key] !== undefined && typeof item[key] !== 'function' && typeof item[key] !== 'symbol');
-    if (keys.length === 0) { append('{}'); return; }
-    append('{\n');
-    for (let i = 0; i < keys.length; i++) {
-      const key = keys[i];
-      indent(depth + 1);
-      append(JSON.stringify(key));
-      append(': ');
-      emit(item[key], depth + 1);
-      if (i + 1 < keys.length) append(',');
-      append('\n');
-    }
-    indent(depth);
-    append('}');
-  };
-  emit(value, 0);
-  append('\n');
-  flush();
-}
-
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const options = {};
   for (let i = 2; i < process.argv.length; i += 2) {
@@ -345,7 +291,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   try {
     const staged = path.join(temporary, 'observation.json');
     const fd = fs.openSync(staged, 'wx');
-    try { writeJsonPretty(fd, report); fs.fsyncSync(fd); }
+    try { writeNativeByteChunks(fd, canonicalNativeJsonChunks(report)); fs.fsyncSync(fd); }
     finally { fs.closeSync(fd); }
     fs.linkSync(staged, output); // Atomic no-replace publication of the complete observation.
   } finally { fs.rmSync(temporary, {recursive: true}); }
