@@ -64,7 +64,6 @@ try {
   if (error.candidateCleanup) result.candidate_cleanup = error.candidateCleanup;
   if (error.candidateDiagnostics) result.candidate_diagnostics = error.candidateDiagnostics;
   result.status = /conflict|changes reviewed bytes|substantive review/.test(error.message) ? 'intervention-required' : 'not-merged';
-  result.retryable = /resubmit unchanged head/.test(error.message) || (quotaDelay(error)??quotaDelay(error.quotaCause))!==null;
   if((quotaDelay(error)??quotaDelay(error.quotaCause))!==null)result.quota_retry_at=new Date(Date.now()+(quotaDelay(error)??quotaDelay(error.quotaCause))).toISOString();
   // A lost merge response or canceled predecessor can still have committed.
   // Reconcile the actual PR once; never repeat the merge write here.

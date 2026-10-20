@@ -44,6 +44,7 @@ test('actual trusted entry point preserves the original rejection before a denie
   assert.notEqual(result.status,0);
   assert.equal(receipt.accepted,false);assert.equal(receipt.status,'not-merged');
   assert.match(receipt.reason,/GET.*HTTP 418/);assert.match(summary,/GET.*HTTP 418/);
+  assert.equal(Object.hasOwn(receipt,'retryable'),false);
   assert.equal(receipt.api_error.http_status,418);assert.equal(receipt.notification_api_error.http_status,403);
 });
 test('actual trusted entry point retains its preparation receipt before successful notification',()=>{
@@ -121,7 +122,7 @@ test('actual entry point saves owned-parent/conflict diagnostics when notificati
         GITHUB_EVENT_PATH:path.join(directory,'event.json'),GITHUB_OUTPUT:path.join(directory,'outputs'),GITHUB_STEP_SUMMARY:path.join(directory,'summary'),MERGE_PHASE:'prepare'}});
     const receipt=JSON.parse(fs.readFileSync(path.join(directory,'merge-result.json')));
     assert.notEqual(result.status,0);assert.match(receipt.notification_error,/HTTP 403/);
-    assert.equal(receipt.retryable,kind==='parents');
+    assert.equal(Object.hasOwn(receipt,'retryable'),false);
     assert.equal(receipt.candidate_diagnostics.expected_base,base);
     assert.equal(receipt.candidate_diagnostics.expected_head,head);
     assert.equal(receipt.candidate_diagnostics.candidate,kind==='conflict'?null:candidate);
@@ -250,6 +251,7 @@ for (const phase of ['prepare', 'merge']) test(`actual ${phase} replay accepts m
 for (const integration of ['failure', 'cancelled', 'skipped']) test(`actual final ${integration} run fails when PR is still open`, () => {
   const {result, receipt} = run({phase: 'merge', merged: false, integration});
   assert.notEqual(result.status, 0); assert.equal(receipt.accepted, false);
+  assert.equal(Object.hasOwn(receipt,'retryable'),false);
 });
 test('actual final replay refuses a different merged head', () => {
   const {result, receipt} = run({phase: 'merge', head: 'c'.repeat(40)});
