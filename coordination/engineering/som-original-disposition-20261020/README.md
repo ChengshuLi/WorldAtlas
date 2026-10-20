@@ -87,5 +87,5 @@ and primary-family identity rosters, historical attribution and limits.
 it is not a test-pass or acceptance receipt. The author checked whole output
 hashes, structured syntax, complete and unique original keys, exact interval and
 owner/source joins, lossless observer retention and the six-file inert scope.
-The current independent exact-head review and single stock delivery are recorded
-on the PR and issue, with their actual outcomes.
+The independent exact-head review and single stock delivery are pending.
+Their actual outcomes will be recorded on the PR and issue when completed.
