@@ -21,7 +21,7 @@ The held ledger is pinned at commit `81b808d4d73a225b6eacdae8b0554f9326b16270`, 
 
 Original tuple class/source candidates are joined through retained extraction blocks 031–034 (blob OIDs are recorded in both JSON files). `source-target-membership.json` is blob `8cd083399b9b4a8b343a272c5359541835902140`. The original accounting is blob `7303af8df856ae91d57a6caf86e96f7ad81ae62e`. Primary COD ADM2 source archive is pinned as `coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-COD-ADM2-000.bin.gz`, blob `dc4f2926dc0945eef1f35fa34c506a270b6239b2`; its retained metadata records 2019 representation and CC BY 3.0 IGO. This provenance does not itself establish current applicability or legal authority.
 
-The source-evidence and whole-target physical artifacts are contextual evidence at target level. They do not establish per-key foreign contact, causal exclusion, physical classification, or adjudicated applicability. In A, 644 source-feature-index occurrences do not map through the retained primary-target membership file and remain numeric references. In B, source-target context is absent for wholly held owners 14568 and 14593. Physical flags/issues remain target-level. No geometry or contact reconstruction is claimed.
+The source-evidence and whole-target physical artifacts are contextual evidence at target level. They do not establish per-key foreign contact, causal exclusion, physical classification, or adjudicated applicability. In A, all 34 source-feature indices (1,109 occurrences) resolve to canonical source IDs through the full source-feature roster at current main. A narrower primary-target membership join still lacks 22 indices / 644 occurrences; those canonical roster IDs do not establish per-key territorial contact or applicability. In B, source-target context is absent for wholly held owners 14568 and 14593. Physical flags/issues remain target-level. No geometry or contact reconstruction is claimed.
 
 ## Remaining gates and scope boundaries
 
@@ -31,6 +31,6 @@ This COD-only packet does not decide or expand the separate #870/#878 water scop
 
 ## Local artifact identities
 
-- `partition-a.json`: 907,137 bytes; SHA-256 `cbab29ff875d9d5fdb79cefe1e8c84910f4a4f98c9b4f251d3c8ba6769ce7d4b`.
+- `partition-a.json`: 926,400 bytes; SHA-256 `769a1f230ce59525ee7f0469be199b613557999a43445531e76e600b5c0dc7f9`.
 - `partition-b.json`: 441,665 bytes; SHA-256 `728335168e0003aacb1538b8c3d10799d984a2319d3ffe2a09c9cd274643f735`.
 
