@@ -1,0 +1,1681 @@
+{
+  "version": 1,
+  "kind": "pse-original-retained-source-physical-context",
+  "as_of": "2026-10-20",
+  "method": "Read exact original source classifier, source/physical/water masks and retained source payloads at immutable Git objects. Decompressed and JSON-parsed each complete pinned GeoJSON FeatureCollection; the parser incidentally materialized geometry fields, but the join accessed only feature properties. Reproduced only classifier interval/contact/physical-mask joins. Geometry coordinates were not accessed, traversed, computed, transformed, rendered, or redistributed. No stock observer or geometry operation was run.",
+  "scope": {
+    "package_id": "gb-PSE-ADM2--repair-evaluation",
+    "queue_commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+    "queue_path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+    "queue_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+    "category": "repair-evaluation",
+    "native_blocks": [
+      25,
+      26
+    ],
+    "native_cells": 427,
+    "land_cells": 275,
+    "inland_water_cells": 152,
+    "intervals": 277,
+    "owners": [
+      36948,
+      36950,
+      36951,
+      36952,
+      36953,
+      36954,
+      36955,
+      36956,
+      36957,
+      36960,
+      36961
+    ],
+    "source_features": [
+      38216,
+      38217,
+      38219,
+      38220,
+      38385,
+      38388,
+      52576,
+      52577,
+      52578,
+      52581,
+      52584,
+      52585,
+      52586,
+      52587,
+      52588,
+      52589,
+      52590,
+      52591,
+      52593
+    ],
+    "source_families": [
+      162,
+      168,
+      275,
+      276
+    ]
+  },
+  "immutable_inputs": {
+    "classifier": {
+      "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-batch-intervals.mjs",
+      "oid": "c5ba9331deb93eed40662d1dc579cdaedea55c46",
+      "bytes": 6840,
+      "sha256": "2589022806876f7faa645293fd9a0ea4b22d0c35a5a6a29fbdc30f5b730f5689"
+    },
+    "masks": [
+      {
+        "role": "source_candidates",
+        "block": 25,
+        "oid": "778c6a09c3eb47686c21ed993d3b10d8f875bec9",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-025.json.gz",
+        "compressed_bytes": 463017,
+        "compressed_sha256": "3949a150d960a3bb0591f2d76d1752532f0dd5e5001909748ad2a58322efa76e",
+        "decoded_bytes": 3239363,
+        "decoded_sha256": "b548fbad4cfca8501ea11bab96897a0941411fc04e60575bab38e25ba13f2b48",
+        "rows": 4096
+      },
+      {
+        "role": "physical_support",
+        "block": 25,
+        "oid": "7549ff877ffa8b9fad68d2e72beded008b5ad0fa",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-025.json.gz",
+        "compressed_bytes": 401770,
+        "compressed_sha256": "28caabab2857b01a6191637b690e2b0d128bac8b3e2ba45aaae0e5ee44072b44",
+        "decoded_bytes": 1909434,
+        "decoded_sha256": "505a4feee9ae726db0334f6cb6e6b26cf749668de30ecc31f9dfca99a501148f",
+        "rows": 4096
+      },
+      {
+        "role": "inland_water_support",
+        "block": 25,
+        "oid": "1bd541342b150ae6a945557e37fbc2ec9ad35276",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-025.json.gz",
+        "compressed_bytes": 258,
+        "compressed_sha256": "6c0ec3db20bf6278b142e7df333e1f864b7d4850810cf6cad8eaef832ec38aec",
+        "decoded_bytes": 1006,
+        "decoded_sha256": "81e61e62d48e929dca3506db5222bfd085bdc459183b09ab5a1a5e86662fadfb",
+        "rows": 26
+      },
+      {
+        "role": "source_candidates",
+        "block": 26,
+        "oid": "9c1dc50879a40f6e24a996e761b913fca8dbda61",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-candidates-block-026.json.gz",
+        "compressed_bytes": 440574,
+        "compressed_sha256": "fc85e70b9caef53bb4a34d0df4c617bd0046aed029eca3b14eb8cea52e9e9707",
+        "decoded_bytes": 3101061,
+        "decoded_sha256": "a2236fe7b0201747775622957f215398076fa2698ac3e8cc725b638ea94edce3",
+        "rows": 4096
+      },
+      {
+        "role": "physical_support",
+        "block": 26,
+        "oid": "355559350599390e256bd1180bcfaf6723504068",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-support-block-026.json.gz",
+        "compressed_bytes": 390394,
+        "compressed_sha256": "8c263a02fe617bcd4844473c9237a8868c134860649022b7ad2e2b7371584fa2",
+        "decoded_bytes": 1862642,
+        "decoded_sha256": "d4ea09c93e2790a9304a6f1864225ce3d0199d952e6211be4bba2dd4a458430b",
+        "rows": 4096
+      },
+      {
+        "role": "inland_water_support",
+        "block": 26,
+        "oid": "cf49a65b32bbd2ab296e873a72da981ae6cc44a6",
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/inland-water-support-block-026.json.gz",
+        "compressed_bytes": 4376,
+        "compressed_sha256": "703c18aee9e56cd3635eff1d4c8a4998bdf61497965883c27e41717b426edf16",
+        "decoded_bytes": 31228,
+        "decoded_sha256": "468ba76e47d059c05112e8652b8f26cd577b4aabe7a68656d695a4474046f2ab",
+        "rows": 762
+      }
+    ],
+    "payloads": [
+      {
+        "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-ISR-ADM1-000.bin.gz",
+        "oid": "369e02e594b9345da7cfe00fcabb6859988d3c03",
+        "decoded_property_feature_count": 6
+      },
+      {
+        "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-JOR-ADM1-000.bin.gz",
+        "oid": "8e3d3e1a852b6d07478e66606522af6514bb455b",
+        "decoded_property_feature_count": 12
+      },
+      {
+        "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PSE-ADM1-000.bin.gz",
+        "oid": "00227553ebf7d334f4b3e51548f53daf7741eee9",
+        "decoded_property_feature_count": 2
+      },
+      {
+        "commit": "2d1fc6f430e756498908bf2c4e267356a13f5cc7",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PSE-ADM2-000.bin.gz",
+        "oid": "a5ecca9ebe9f17862040f2d80753017a91d9f1b1",
+        "decoded_property_feature_count": 16
+      }
+    ],
+    "source_payloads": [
+      {
+        "family_index": 162,
+        "key": "gb:ISR:ADM1",
+        "advertised_feature_count": 6,
+        "feature_count": 6,
+        "original_bytes": 44192,
+        "original_sha256": "28fe2d4b800046000a33ea66b473f5502a6b7a4ad9d587cd059d63d5a4ccc5dc",
+        "metadata_sha256": "5697188cfb4665df41150da33e5d9d4a2f5eef011f5184e0fe43196f910d58a4",
+        "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ISR/ADM1/geoBoundaries-ISR-ADM1_simplified.geojson",
+        "recorded_license": "Public Domain",
+        "source_represented_year_claim": "2006",
+        "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+        "parts": [
+          {
+            "bytes": 12533,
+            "hash_kind": "file-bytes",
+            "offset": 0,
+            "ordinal": 0,
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-ISR-ADM1-000.bin.gz",
+            "sha256": "4ef84358ff0c8885bf857611a3cf2d537f33d7e2ecf9d34155778ff4b4e44989",
+            "uncompressed_bytes": 44192,
+            "uncompressed_sha256": "28fe2d4b800046000a33ea66b473f5502a6b7a4ad9d587cd059d63d5a4ccc5dc",
+            "blob_oid": "369e02e594b9345da7cfe00fcabb6859988d3c03"
+          }
+        ]
+      },
+      {
+        "family_index": 168,
+        "key": "gb:JOR:ADM1",
+        "advertised_feature_count": 12,
+        "feature_count": 12,
+        "original_bytes": 54979,
+        "original_sha256": "f364401f87d800ca90bcb3a0cf7a0bff05fb9cf9e9843a7344aaa5376665f34b",
+        "metadata_sha256": "72b92649b4fe8240504c7209320a13a0427fd59b5851bb987d8a5e9acde9975d",
+        "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/JOR/ADM1/geoBoundaries-JOR-ADM1_simplified.geojson",
+        "recorded_license": "Creative Commons Attribution 2.5 Generic",
+        "source_represented_year_claim": "2006",
+        "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+        "parts": [
+          {
+            "bytes": 17364,
+            "hash_kind": "file-bytes",
+            "offset": 0,
+            "ordinal": 0,
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-JOR-ADM1-000.bin.gz",
+            "sha256": "afb40bc9120d2a3720e9934ec0ae4ff3f665802cc13e129e63befe6454924add",
+            "uncompressed_bytes": 54979,
+            "uncompressed_sha256": "f364401f87d800ca90bcb3a0cf7a0bff05fb9cf9e9843a7344aaa5376665f34b",
+            "blob_oid": "8e3d3e1a852b6d07478e66606522af6514bb455b"
+          }
+        ]
+      },
+      {
+        "family_index": 275,
+        "key": "gb:PSE:ADM1",
+        "advertised_feature_count": 2,
+        "feature_count": 2,
+        "original_bytes": 34407,
+        "original_sha256": "2f065583a8be795533893fd4c62fed765959b47db2cf01e696cc795cc6c56b0a",
+        "metadata_sha256": "e12e7ebf7d3bdbf345e8e0e7e884443e0e1122546aefa61552892d7cb4dc80e1",
+        "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PSE/ADM1/geoBoundaries-PSE-ADM1_simplified.geojson",
+        "recorded_license": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+        "source_represented_year_claim": "2021",
+        "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+        "parts": [
+          {
+            "bytes": 12318,
+            "hash_kind": "file-bytes",
+            "offset": 0,
+            "ordinal": 0,
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PSE-ADM1-000.bin.gz",
+            "sha256": "74c1b0fe78a4dc5b1322ae909cc00d6d7e26e77ada47f80f6a531b434866dee7",
+            "uncompressed_bytes": 34407,
+            "uncompressed_sha256": "2f065583a8be795533893fd4c62fed765959b47db2cf01e696cc795cc6c56b0a",
+            "blob_oid": "00227553ebf7d334f4b3e51548f53daf7741eee9"
+          }
+        ]
+      },
+      {
+        "family_index": 276,
+        "key": "gb:PSE:ADM2",
+        "advertised_feature_count": 16,
+        "feature_count": 16,
+        "original_bytes": 150914,
+        "original_sha256": "a16d5381822e198b8f5aa8aaa9f4a4bf8fb1d8e090a8a3dc007c1798328a5433",
+        "metadata_sha256": "260b7355491626105a500a87c12767ca2ac67355e1f0604dc842849dbe6f2e2f",
+        "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PSE/ADM2/geoBoundaries-PSE-ADM2_simplified.geojson",
+        "recorded_license": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+        "source_represented_year_claim": "2017",
+        "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+        "parts": [
+          {
+            "bytes": 45733,
+            "hash_kind": "file-bytes",
+            "offset": 0,
+            "ordinal": 0,
+            "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PSE-ADM2-000.bin.gz",
+            "sha256": "c9e90c5e980b65d9e21720b67bf3e13e45b959b9b22e92cc19591c5be176779c",
+            "uncompressed_bytes": 150914,
+            "uncompressed_sha256": "a16d5381822e198b8f5aa8aaa9f4a4bf8fb1d8e090a8a3dc007c1798328a5433",
+            "blob_oid": "a5ecca9ebe9f17862040f2d80753017a91d9f1b1"
+          }
+        ]
+      }
+    ]
+  },
+  "reconstruction": {
+    "intervals": 277,
+    "cells": 427,
+    "land_cells": 275,
+    "inland_water_cells": 152,
+    "source_relative_cells": 0,
+    "blocks": {
+      "25": {
+        "intervals": 108,
+        "cells": 147,
+        "land_cells": 147,
+        "inland_water_cells": 0
+      },
+      "26": {
+        "intervals": 169,
+        "cells": 280,
+        "land_cells": 128,
+        "inland_water_cells": 152
+      }
+    },
+    "contact_groups": [
+      {
+        "owners": [
+          36953
+        ],
+        "sids": [
+          52576,
+          52593
+        ],
+        "physical": "inland-water",
+        "cells": 117,
+        "intervals": 68,
+        "blocks": {
+          "26": 68
+        },
+        "source_features": [
+          {
+            "source_index": 52576,
+            "name": "West Bank",
+            "family_index": 275,
+            "owners": []
+          },
+          {
+            "source_index": 52593,
+            "name": "Bethlehem",
+            "family_index": 276,
+            "owners": [
+              36953
+            ]
+          }
+        ]
+      },
+      {
+        "owners": [
+          36950
+        ],
+        "sids": [
+          38385,
+          52576,
+          52578
+        ],
+        "physical": "land",
+        "cells": 97,
+        "intervals": 65,
+        "blocks": {
+          "25": 34,
+          "26": 31
+        },
+        "source_features": [
+          {
+            "source_index": 38385,
+            "name": "Balqa",
+            "family_index": 168,
+            "owners": []
+          },
+          {
+            "source_index": 52576,
+            "name": "West Bank",
+            "family_index": 275,
+            "owners": []
+          },
+          {
+            "source_index": 52578,
+            "name": "Jericho & Al Aghwar",
+            "family_index": 276,
+            "owners": [
+              36950
+            ]
+          }
+        ]
+      },
+      {
+        "owners": [
+          36955
+        ],
+        "sids": [
+          52576,
+          52590
+        ],
+        "physical": "land",
+        "cells": 34,
+        "intervals": 4,
+        "blocks": {
+          "26": 4
+        },
+        "source_features": [
+          {
+            "source_index": 52576,
+            "name": "West Bank",
+            "family_index": 275,
+            "owners": []
+          },
+          {
+            "source_index": 52590,
+            "name": "Ramallah & Al Bireh",
+            "family_index": 276,
+            "owners": [
+              36955
+            ]
+          }
+        ]
+      },
+      {
+        "owners": [
+          36960
+        ],
+        "sids": [
+          38388,
+          52576,
+          52591
+        ],
+        "physical": "land",
+        "cells": 33,
+        "intervals": 29,
+        "blocks": {
+          "25": 29
+        },
+        "source_features": [
+          {
+            "source_index": 38388,
+            "name": "Irbid",
+            "family_index": 168,
+            "owners": []
+          },
+          {
+            "source_index": 52576,
+            "name": "West Bank",
+            "family_index": 275,
+            "owners": []
+          },
+          {
+            "source_index": 52591,
+            "name": "Tubas",
+            "family_index": 276,
+            "owners": [
+              36960
+            ]
+          }
+        ]
+      },
+      {
+        "owners": [
+          36953
+        ],
+        "sids": [
+          52576,
+          52593
+        ],
+        "physical": "land",
+        "cells": 27,
+        "intervals": 26,
+        "blocks": {
+          "26": 26
+        },
+        "source_features": [
+          {
+            "source_index": 52576,
+            "name": "West Bank",
+            "family_index": 275,
+            "owners": []
+          },
+          {
+            "source_index": 52593,
+            "name": "Bethlehem",
+            "family_index": 276,
+            "owners": [
+              36953
+            ]
+          }
+        ]
+      },
+      {
+        "owners": [
+          36950
+        ],
+        "sids": [
+          52576,
+          52578
+        ],
+        "physical": "inland-water",
+        "cells": 23,
+        "intervals": 14,
+        "blocks": {
+          "26": 14
+        },
+        "source_features": [
+          {
+            "source_index": 52576,
+            "name": "West Bank",
+            "family_index": 275,
+            "owners": []
+          },
+          {
+            "source_index": 52578,
+            "name": "Jericho & Al Aghwar",
+            "family_index": 276,
+            "owners": [
+              36950
+            ]
+          }
+        ]
+      },
+      {
+        "owners": [
+          36954
+        ],
+        "sids": [
+          38216,
+          52576,
+          52588
+        ],
+        "physical": "land",
+        "cells": 22,
+        "intervals": 13,
+        "blocks": {
+          "25": 13
+        },
+        "source_features": [
+          {
+            "source_index": 38216,
+            "name": "Central District",
+            "family_index": 162,
+            "owners": []
+          },
+          {
+            "source_index": 52576,
+            "name": "West Bank",
+            "family_index": 275,
+            "owners": []
+          },
+          {
+            "source_index": 52588,
+            "name": "Salfit",
+            "family_index": 276,
+            "owners": [
+              36954
+            ]
+          }
+        ]
+      },
+      {
+        "owners": [
+          36948
+        ],
+        "sids": [
+          38219,
+          52576,
+          52581
+        ],
+        "physical": "land",
+        "cells": 15,
+        "intervals": 9,
+        "blocks": {
+          "25": 9
+        },
+        "source_features": [
+          {
+            "source_index": 38219,
+            "name": "Haifa",
+            "family_index": 162,
+            "owners": []
+          },
+          {
+            "source_index": 52576,
+            "name": "West Bank",
+            "family_index": 275,
+            "owners": []
+          },
+          {
+            "source_index": 52581,
+            "name": "Tulkarm",
+            "family_index": 276,
+            "owners": [
+              36948
+            ]
+          }
+        ]
+      },
+      {
+        "owners": [
+          36951
+        ],
+        "sids": [
+          52577,
+          52584
+        ],
+        "physical": "land",
+        "cells": 11,
+        "intervals": 11,
+        "blocks": {
+          "26": 11
+        },
+        "source_features": [
+          {
+            "source_index": 52577,
+            "name": "Gaza",
+            "family_index": 275,
+            "owners": []
+          },
+          {
+            "source_index": 52584,
+            "name": "Khan Yunis",
+            "family_index": 276,
+            "owners": [
+              36951
+            ]
+          }
+        ]
+      },
+      {
+        "owners": [
+          36956
+        ],
+        "sids": [
+          52576,
+          52586
+        ],
+        "physical": "land",
+        "cells": 10,
+        "intervals": 9,
+        "blocks": {
+          "25": 9
+        },
+        "source_features": [
+          {
+            "source_index": 52576,
+            "name": "West Bank",
+            "family_index": 275,
+            "owners": []
+          },
+          {
+            "source_index": 52586,
+            "name": "Jenin",
+            "family_index": 276,
+            "owners": [
+              36956
+            ]
+          }
+        ]
+      },
+      {
+        "owners": [
+          36950
+        ],
+        "sids": [
+          38385,
+          52576,
+          52578
+        ],
+        "physical": "inland-water",
+        "cells": 9,
+        "intervals": 2,
+        "blocks": {
+          "26": 2
+        },
+        "source_features": [
+          {
+            "source_index": 38385,
+            "name": "Balqa",
+            "family_index": 168,
+            "owners": []
+          },
+          {
+            "source_index": 52576,
+            "name": "West Bank",
+            "family_index": 275,
+            "owners": []
+          },
+          {
+            "source_index": 52578,
+            "name": "Jericho & Al Aghwar",
+            "family_index": 276,
+            "owners": [
+              36950
+            ]
+          }
+        ]
+      },
+      {
+        "owners": [
+          36961
+        ],
+        "sids": [
+          52576,
+          52589
+        ],
+        "physical": "land",
+        "cells": 6,
+        "intervals": 5,
+        "blocks": {
+          "26": 5
+        },
+        "source_features": [
+          {
+            "source_index": 52576,
+            "name": "West Bank",
+            "family_index": 275,
+            "owners": []
+          },
+          {
+            "source_index": 52589,
+            "name": "Hebron",
+            "family_index": 276,
+            "owners": [
+              36961
+            ]
+          }
+        ]
+      },
+      {
+        "owners": [
+          36957
+        ],
+        "sids": [
+          38216,
+          52576,
+          52585
+        ],
+        "physical": "land",
+        "cells": 5,
+        "intervals": 5,
+        "blocks": {
+          "25": 5
+        },
+        "source_features": [
+          {
+            "source_index": 38216,
+            "name": "Central District",
+            "family_index": 162,
+            "owners": []
+          },
+          {
+            "source_index": 52576,
+            "name": "West Bank",
+            "family_index": 275,
+            "owners": []
+          },
+          {
+            "source_index": 52585,
+            "name": "Qalqiliya",
+            "family_index": 276,
+            "owners": [
+              36957
+            ]
+          }
+        ]
+      },
+      {
+        "owners": [
+          36956
+        ],
+        "sids": [
+          38219,
+          52576,
+          52586
+        ],
+        "physical": "land",
+        "cells": 4,
+        "intervals": 4,
+        "blocks": {
+          "25": 4
+        },
+        "source_features": [
+          {
+            "source_index": 38219,
+            "name": "Haifa",
+            "family_index": 162,
+            "owners": []
+          },
+          {
+            "source_index": 52576,
+            "name": "West Bank",
+            "family_index": 275,
+            "owners": []
+          },
+          {
+            "source_index": 52586,
+            "name": "Jenin",
+            "family_index": 276,
+            "owners": [
+              36956
+            ]
+          }
+        ]
+      },
+      {
+        "owners": [
+          36955
+        ],
+        "sids": [
+          38217,
+          52576,
+          52590
+        ],
+        "physical": "land",
+        "cells": 3,
+        "intervals": 2,
+        "blocks": {
+          "26": 2
+        },
+        "source_features": [
+          {
+            "source_index": 38217,
+            "name": "Jerusalem District",
+            "family_index": 162,
+            "owners": []
+          },
+          {
+            "source_index": 52576,
+            "name": "West Bank",
+            "family_index": 275,
+            "owners": []
+          },
+          {
+            "source_index": 52590,
+            "name": "Ramallah & Al Bireh",
+            "family_index": 276,
+            "owners": [
+              36955
+            ]
+          }
+        ]
+      },
+      {
+        "owners": [
+          36950
+        ],
+        "sids": [
+          52578
+        ],
+        "physical": "inland-water",
+        "cells": 3,
+        "intervals": 3,
+        "blocks": {
+          "26": 3
+        },
+        "source_features": [
+          {
+            "source_index": 52578,
+            "name": "Jericho & Al Aghwar",
+            "family_index": 276,
+            "owners": [
+              36950
+            ]
+          }
+        ]
+      },
+      {
+        "owners": [
+          36952
+        ],
+        "sids": [
+          52587
+        ],
+        "physical": "land",
+        "cells": 3,
+        "intervals": 3,
+        "blocks": {
+          "26": 3
+        },
+        "source_features": [
+          {
+            "source_index": 52587,
+            "name": "Deir Al Balah",
+            "family_index": 276,
+            "owners": [
+              36952
+            ]
+          }
+        ]
+      },
+      {
+        "owners": [
+          36956
+        ],
+        "sids": [
+          38220,
+          52576,
+          52586
+        ],
+        "physical": "land",
+        "cells": 2,
+        "intervals": 2,
+        "blocks": {
+          "25": 2
+        },
+        "source_features": [
+          {
+            "source_index": 38220,
+            "name": "Northern District",
+            "family_index": 162,
+            "owners": []
+          },
+          {
+            "source_index": 52576,
+            "name": "West Bank",
+            "family_index": 275,
+            "owners": []
+          },
+          {
+            "source_index": 52586,
+            "name": "Jenin",
+            "family_index": 276,
+            "owners": [
+              36956
+            ]
+          }
+        ]
+      },
+      {
+        "owners": [
+          36957
+        ],
+        "sids": [
+          38216,
+          52585
+        ],
+        "physical": "land",
+        "cells": 1,
+        "intervals": 1,
+        "blocks": {
+          "25": 1
+        },
+        "source_features": [
+          {
+            "source_index": 38216,
+            "name": "Central District",
+            "family_index": 162,
+            "owners": []
+          },
+          {
+            "source_index": 52585,
+            "name": "Qalqiliya",
+            "family_index": 276,
+            "owners": [
+              36957
+            ]
+          }
+        ]
+      },
+      {
+        "owners": [
+          36954
+        ],
+        "sids": [
+          38216,
+          52588
+        ],
+        "physical": "land",
+        "cells": 1,
+        "intervals": 1,
+        "blocks": {
+          "25": 1
+        },
+        "source_features": [
+          {
+            "source_index": 38216,
+            "name": "Central District",
+            "family_index": 162,
+            "owners": []
+          },
+          {
+            "source_index": 52588,
+            "name": "Salfit",
+            "family_index": 276,
+            "owners": [
+              36954
+            ]
+          }
+        ]
+      },
+      {
+        "owners": [
+          36948
+        ],
+        "sids": [
+          38219,
+          52581
+        ],
+        "physical": "land",
+        "cells": 1,
+        "intervals": 1,
+        "blocks": {
+          "25": 1
+        },
+        "source_features": [
+          {
+            "source_index": 38219,
+            "name": "Haifa",
+            "family_index": 162,
+            "owners": []
+          },
+          {
+            "source_index": 52581,
+            "name": "Tulkarm",
+            "family_index": 276,
+            "owners": [
+              36948
+            ]
+          }
+        ]
+      }
+    ],
+    "classification_note": "The 277 package intervals are exact half-open runs reconstructed from source-candidate runs and split only at retained land/inland-water support mask boundaries using the original classifier rules. Grouping key is exact owner-vector + source-feature-vector + physical class; per-group interval and cell counts partition the package totals."
+  },
+  "property_joins": {
+    "feature_count": 19,
+    "matched": 19,
+    "features": [
+      {
+        "source_index": 38216,
+        "family_index": 162,
+        "source_id": "gb:ISR:ADM1:19161824B470428506180",
+        "ordinal": 1,
+        "name": "Central District",
+        "owners": [],
+        "geometry_status": "raw-native-supported",
+        "property_match": true,
+        "properties": {
+          "shapeName": "Central District",
+          "shapeISO": "IL-M",
+          "shapeID": "19161824B470428506180",
+          "shapeGroup": "ISR",
+          "shapeType": "ADM1"
+        }
+      },
+      {
+        "source_index": 38217,
+        "family_index": 162,
+        "source_id": "gb:ISR:ADM1:19161824B79530266069959",
+        "ordinal": 2,
+        "name": "Jerusalem District",
+        "owners": [],
+        "geometry_status": "raw-native-supported",
+        "property_match": true,
+        "properties": {
+          "shapeName": "Jerusalem District",
+          "shapeISO": "IL-JM",
+          "shapeID": "19161824B79530266069959",
+          "shapeGroup": "ISR",
+          "shapeType": "ADM1"
+        }
+      },
+      {
+        "source_index": 38219,
+        "family_index": 162,
+        "source_id": "gb:ISR:ADM1:19161824B12012272353046",
+        "ordinal": 4,
+        "name": "Haifa",
+        "owners": [],
+        "geometry_status": "raw-native-supported",
+        "property_match": true,
+        "properties": {
+          "shapeName": "Haifa",
+          "shapeISO": "IL-HA",
+          "shapeID": "19161824B12012272353046",
+          "shapeGroup": "ISR",
+          "shapeType": "ADM1"
+        }
+      },
+      {
+        "source_index": 38220,
+        "family_index": 162,
+        "source_id": "gb:ISR:ADM1:19161824B91089536365577",
+        "ordinal": 5,
+        "name": "Northern District",
+        "owners": [],
+        "geometry_status": "raw-native-supported",
+        "property_match": true,
+        "properties": {
+          "shapeName": "Northern District",
+          "shapeISO": "IL-Z",
+          "shapeID": "19161824B91089536365577",
+          "shapeGroup": "ISR",
+          "shapeType": "ADM1"
+        }
+      },
+      {
+        "source_index": 38385,
+        "family_index": 168,
+        "source_id": "gb:JOR:ADM1:50493656B62478729305943",
+        "ordinal": 3,
+        "name": "Balqa",
+        "owners": [],
+        "geometry_status": "raw-native-supported",
+        "property_match": true,
+        "properties": {
+          "shapeName": "Balqa",
+          "shapeISO": "JO-BA",
+          "shapeID": "50493656B62478729305943",
+          "shapeGroup": "JOR",
+          "shapeType": "ADM1"
+        }
+      },
+      {
+        "source_index": 38388,
+        "family_index": 168,
+        "source_id": "gb:JOR:ADM1:50493656B72492647240238",
+        "ordinal": 6,
+        "name": "Irbid",
+        "owners": [],
+        "geometry_status": "raw-native-supported",
+        "property_match": true,
+        "properties": {
+          "shapeName": "Irbid",
+          "shapeISO": "JO-IR",
+          "shapeID": "50493656B72492647240238",
+          "shapeGroup": "JOR",
+          "shapeType": "ADM1"
+        }
+      },
+      {
+        "source_index": 52576,
+        "family_index": 275,
+        "source_id": "gb:PSE:ADM1:83478781B28849486138516",
+        "ordinal": 0,
+        "name": "West Bank",
+        "owners": [],
+        "geometry_status": "raw-native-supported",
+        "property_match": true,
+        "properties": {
+          "shapeISO": "PS-WBK",
+          "shapeName": "West Bank",
+          "shapeID": "83478781B28849486138516",
+          "shapeGroup": "PSE",
+          "shapeType": "ADM1"
+        }
+      },
+      {
+        "source_index": 52577,
+        "family_index": 275,
+        "source_id": "gb:PSE:ADM1:83478781B7121896376882",
+        "ordinal": 1,
+        "name": "Gaza",
+        "owners": [],
+        "geometry_status": "raw-native-supported",
+        "property_match": true,
+        "properties": {
+          "shapeISO": "PS-GZZ",
+          "shapeName": "Gaza",
+          "shapeID": "83478781B7121896376882",
+          "shapeGroup": "PSE",
+          "shapeType": "ADM1"
+        }
+      },
+      {
+        "source_index": 52578,
+        "family_index": 276,
+        "source_id": "gb:PSE:ADM2:87354302B18647900198549",
+        "ordinal": 0,
+        "name": "Jericho & Al Aghwar",
+        "owners": [
+          36950
+        ],
+        "geometry_status": "raw-native-supported",
+        "property_match": true,
+        "properties": {
+          "shapeISO": "PS-JRH",
+          "shapeName": "Jericho & Al Aghwar",
+          "shapeID": "87354302B18647900198549",
+          "shapeGroup": "PSE",
+          "shapeType": "ADM2"
+        }
+      },
+      {
+        "source_index": 52581,
+        "family_index": 276,
+        "source_id": "gb:PSE:ADM2:87354302B17069565895340",
+        "ordinal": 3,
+        "name": "Tulkarm",
+        "owners": [
+          36948
+        ],
+        "geometry_status": "raw-native-supported",
+        "property_match": true,
+        "properties": {
+          "shapeISO": "PS-TKM",
+          "shapeName": "Tulkarm",
+          "shapeID": "87354302B17069565895340",
+          "shapeGroup": "PSE",
+          "shapeType": "ADM2"
+        }
+      },
+      {
+        "source_index": 52584,
+        "family_index": 276,
+        "source_id": "gb:PSE:ADM2:87354302B21422506618890",
+        "ordinal": 6,
+        "name": "Khan Yunis",
+        "owners": [
+          36951
+        ],
+        "geometry_status": "raw-native-supported",
+        "property_match": true,
+        "properties": {
+          "shapeISO": "PS-KYS",
+          "shapeName": "Khan Yunis",
+          "shapeID": "87354302B21422506618890",
+          "shapeGroup": "PSE",
+          "shapeType": "ADM2"
+        }
+      },
+      {
+        "source_index": 52585,
+        "family_index": 276,
+        "source_id": "gb:PSE:ADM2:87354302B40414204592822",
+        "ordinal": 7,
+        "name": "Qalqiliya",
+        "owners": [
+          36957
+        ],
+        "geometry_status": "raw-native-supported",
+        "property_match": true,
+        "properties": {
+          "shapeISO": "PS-QQA",
+          "shapeName": "Qalqiliya",
+          "shapeID": "87354302B40414204592822",
+          "shapeGroup": "PSE",
+          "shapeType": "ADM2"
+        }
+      },
+      {
+        "source_index": 52586,
+        "family_index": 276,
+        "source_id": "gb:PSE:ADM2:87354302B37411468451868",
+        "ordinal": 8,
+        "name": "Jenin",
+        "owners": [
+          36956
+        ],
+        "geometry_status": "raw-native-supported",
+        "property_match": true,
+        "properties": {
+          "shapeISO": "PS_JEN",
+          "shapeName": "Jenin",
+          "shapeID": "87354302B37411468451868",
+          "shapeGroup": "PSE",
+          "shapeType": "ADM2"
+        }
+      },
+      {
+        "source_index": 52587,
+        "family_index": 276,
+        "source_id": "gb:PSE:ADM2:87354302B22339434669936",
+        "ordinal": 9,
+        "name": "Deir Al Balah",
+        "owners": [
+          36952
+        ],
+        "geometry_status": "raw-native-supported",
+        "property_match": true,
+        "properties": {
+          "shapeISO": "PS-DEB",
+          "shapeName": "Deir Al Balah",
+          "shapeID": "87354302B22339434669936",
+          "shapeGroup": "PSE",
+          "shapeType": "ADM2"
+        }
+      },
+      {
+        "source_index": 52588,
+        "family_index": 276,
+        "source_id": "gb:PSE:ADM2:87354302B3498749981476",
+        "ordinal": 10,
+        "name": "Salfit",
+        "owners": [
+          36954
+        ],
+        "geometry_status": "raw-native-supported",
+        "property_match": true,
+        "properties": {
+          "shapeISO": "PS-SLT",
+          "shapeName": "Salfit",
+          "shapeID": "87354302B3498749981476",
+          "shapeGroup": "PSE",
+          "shapeType": "ADM2"
+        }
+      },
+      {
+        "source_index": 52589,
+        "family_index": 276,
+        "source_id": "gb:PSE:ADM2:87354302B80979559279056",
+        "ordinal": 11,
+        "name": "Hebron",
+        "owners": [
+          36961
+        ],
+        "geometry_status": "raw-native-supported",
+        "property_match": true,
+        "properties": {
+          "shapeISO": "PS-HBN",
+          "shapeName": "Hebron",
+          "shapeID": "87354302B80979559279056",
+          "shapeGroup": "PSE",
+          "shapeType": "ADM2"
+        }
+      },
+      {
+        "source_index": 52590,
+        "family_index": 276,
+        "source_id": "gb:PSE:ADM2:87354302B37341560226836",
+        "ordinal": 12,
+        "name": "Ramallah & Al Bireh",
+        "owners": [
+          36955
+        ],
+        "geometry_status": "raw-native-supported",
+        "property_match": true,
+        "properties": {
+          "shapeISO": "PS-RBH*",
+          "shapeName": "Ramallah & Al Bireh",
+          "shapeID": "87354302B37341560226836",
+          "shapeGroup": "PSE",
+          "shapeType": "ADM2"
+        }
+      },
+      {
+        "source_index": 52591,
+        "family_index": 276,
+        "source_id": "gb:PSE:ADM2:87354302B78640432651808",
+        "ordinal": 13,
+        "name": "Tubas",
+        "owners": [
+          36960
+        ],
+        "geometry_status": "raw-native-supported",
+        "property_match": true,
+        "properties": {
+          "shapeISO": "PS-TBS",
+          "shapeName": "Tubas",
+          "shapeID": "87354302B78640432651808",
+          "shapeGroup": "PSE",
+          "shapeType": "ADM2"
+        }
+      },
+      {
+        "source_index": 52593,
+        "family_index": 276,
+        "source_id": "gb:PSE:ADM2:87354302B24436251599031",
+        "ordinal": 15,
+        "name": "Bethlehem",
+        "owners": [
+          36953
+        ],
+        "geometry_status": "raw-native-supported",
+        "property_match": true,
+        "properties": {
+          "shapeISO": "PS-BTH",
+          "shapeName": "Bethlehem",
+          "shapeID": "87354302B24436251599031",
+          "shapeGroup": "PSE",
+          "shapeType": "ADM2"
+        }
+      }
+    ],
+    "scope_note": "For each of the 19 selected source-feature roster indexes, matched roster source_id/name/family/ordinal to the corresponding feature properties shapeID/shapeName in the exact pinned full source-family payload. Complete payloads were JSON-parsed; geometry fields were incidentally materialized by parsing but were never accessed or used."
+  },
+  "owner_lineage": [
+    {
+      "owner_index": 36948,
+      "location_id": "gb:PSE:ADM2:87354302B17069565895340",
+      "name": "Tulkarm",
+      "province_id": "framework:province:west-bank:56363df48e75",
+      "reference_owner": "State of Palestine",
+      "source_id": "gb:PSE:ADM2",
+      "source_atoms": [
+        "gb:PSE:ADM2:87354302B17069565895340"
+      ],
+      "direct_roster_features": [
+        {
+          "source_index": 52581,
+          "source_id": "gb:PSE:ADM2:87354302B17069565895340",
+          "name": "Tulkarm",
+          "family_index": 276
+        }
+      ]
+    },
+    {
+      "owner_index": 36950,
+      "location_id": "gb:PSE:ADM2:87354302B18647900198549",
+      "name": "Jericho & Al Aghwar",
+      "province_id": "framework:province:west-bank:56363df48e75",
+      "reference_owner": "State of Palestine",
+      "source_id": "gb:PSE:ADM2",
+      "source_atoms": [
+        "gb:PSE:ADM2:87354302B18647900198549"
+      ],
+      "direct_roster_features": [
+        {
+          "source_index": 52578,
+          "source_id": "gb:PSE:ADM2:87354302B18647900198549",
+          "name": "Jericho & Al Aghwar",
+          "family_index": 276
+        }
+      ]
+    },
+    {
+      "owner_index": 36951,
+      "location_id": "gb:PSE:ADM2:87354302B21422506618890",
+      "name": "Khan Yunis",
+      "province_id": "framework:province:gaza:c02d50532a36",
+      "reference_owner": "State of Palestine",
+      "source_id": "gb:PSE:ADM2",
+      "source_atoms": [
+        "gb:PSE:ADM2:87354302B21422506618890"
+      ],
+      "direct_roster_features": [
+        {
+          "source_index": 52584,
+          "source_id": "gb:PSE:ADM2:87354302B21422506618890",
+          "name": "Khan Yunis",
+          "family_index": 276
+        }
+      ]
+    },
+    {
+      "owner_index": 36952,
+      "location_id": "gb:PSE:ADM2:87354302B22339434669936",
+      "name": "Deir Al Balah",
+      "province_id": "framework:province:gaza:c02d50532a36",
+      "reference_owner": "State of Palestine",
+      "source_id": "gb:PSE:ADM2",
+      "source_atoms": [
+        "gb:PSE:ADM2:87354302B22339434669936"
+      ],
+      "direct_roster_features": [
+        {
+          "source_index": 52587,
+          "source_id": "gb:PSE:ADM2:87354302B22339434669936",
+          "name": "Deir Al Balah",
+          "family_index": 276
+        }
+      ]
+    },
+    {
+      "owner_index": 36953,
+      "location_id": "gb:PSE:ADM2:87354302B24436251599031",
+      "name": "Bethlehem",
+      "province_id": "framework:province:west-bank:56363df48e75",
+      "reference_owner": "State of Palestine",
+      "source_id": "gb:PSE:ADM2",
+      "source_atoms": [
+        "gb:PSE:ADM2:87354302B24436251599031"
+      ],
+      "direct_roster_features": [
+        {
+          "source_index": 52593,
+          "source_id": "gb:PSE:ADM2:87354302B24436251599031",
+          "name": "Bethlehem",
+          "family_index": 276
+        }
+      ]
+    },
+    {
+      "owner_index": 36954,
+      "location_id": "gb:PSE:ADM2:87354302B3498749981476",
+      "name": "Salfit",
+      "province_id": "framework:province:west-bank:56363df48e75",
+      "reference_owner": "State of Palestine",
+      "source_id": "gb:PSE:ADM2",
+      "source_atoms": [
+        "gb:PSE:ADM2:87354302B3498749981476"
+      ],
+      "direct_roster_features": [
+        {
+          "source_index": 52588,
+          "source_id": "gb:PSE:ADM2:87354302B3498749981476",
+          "name": "Salfit",
+          "family_index": 276
+        }
+      ]
+    },
+    {
+      "owner_index": 36955,
+      "location_id": "gb:PSE:ADM2:87354302B37341560226836",
+      "name": "Ramallah & Al Bireh",
+      "province_id": "framework:province:west-bank:56363df48e75",
+      "reference_owner": "State of Palestine",
+      "source_id": "gb:PSE:ADM2",
+      "source_atoms": [
+        "gb:PSE:ADM2:87354302B37341560226836"
+      ],
+      "direct_roster_features": [
+        {
+          "source_index": 52590,
+          "source_id": "gb:PSE:ADM2:87354302B37341560226836",
+          "name": "Ramallah & Al Bireh",
+          "family_index": 276
+        }
+      ]
+    },
+    {
+      "owner_index": 36956,
+      "location_id": "gb:PSE:ADM2:87354302B37411468451868",
+      "name": "Jenin",
+      "province_id": "framework:province:west-bank:56363df48e75",
+      "reference_owner": "State of Palestine",
+      "source_id": "gb:PSE:ADM2",
+      "source_atoms": [
+        "gb:PSE:ADM2:87354302B37411468451868"
+      ],
+      "direct_roster_features": [
+        {
+          "source_index": 52586,
+          "source_id": "gb:PSE:ADM2:87354302B37411468451868",
+          "name": "Jenin",
+          "family_index": 276
+        }
+      ]
+    },
+    {
+      "owner_index": 36957,
+      "location_id": "gb:PSE:ADM2:87354302B40414204592822",
+      "name": "Qalqiliya",
+      "province_id": "framework:province:west-bank:56363df48e75",
+      "reference_owner": "State of Palestine",
+      "source_id": "gb:PSE:ADM2",
+      "source_atoms": [
+        "gb:PSE:ADM2:87354302B40414204592822"
+      ],
+      "direct_roster_features": [
+        {
+          "source_index": 52585,
+          "source_id": "gb:PSE:ADM2:87354302B40414204592822",
+          "name": "Qalqiliya",
+          "family_index": 276
+        }
+      ]
+    },
+    {
+      "owner_index": 36960,
+      "location_id": "gb:PSE:ADM2:87354302B78640432651808",
+      "name": "Tubas",
+      "province_id": "framework:province:west-bank:56363df48e75",
+      "reference_owner": "State of Palestine",
+      "source_id": "gb:PSE:ADM2",
+      "source_atoms": [
+        "gb:PSE:ADM2:87354302B78640432651808"
+      ],
+      "direct_roster_features": [
+        {
+          "source_index": 52591,
+          "source_id": "gb:PSE:ADM2:87354302B78640432651808",
+          "name": "Tubas",
+          "family_index": 276
+        }
+      ]
+    },
+    {
+      "owner_index": 36961,
+      "location_id": "gb:PSE:ADM2:87354302B80979559279056",
+      "name": "Hebron",
+      "province_id": "framework:province:west-bank:56363df48e75",
+      "reference_owner": "State of Palestine",
+      "source_id": "gb:PSE:ADM2",
+      "source_atoms": [
+        "gb:PSE:ADM2:87354302B80979559279056"
+      ],
+      "direct_roster_features": [
+        {
+          "source_index": 52589,
+          "source_id": "gb:PSE:ADM2:87354302B80979559279056",
+          "name": "Hebron",
+          "family_index": 276
+        }
+      ]
+    }
+  ],
+  "observation_key_comparison": {
+    "available": true,
+    "expected_keys": 427,
+    "observed_keys": 427,
+    "missing": 0,
+    "extra": 0,
+    "observer_commit": "d884410c7558eda9abfd9e8e9a8e2d2808b4a348"
+  },
+  "exact_interval_comparison": {
+    "expected": 277,
+    "observed": 277,
+    "missing": 0,
+    "extra": 0,
+    "expected_sha256": "a2ae7bb865d68d648acdcdd8d3a6836cb19a2efc7841f505627d15a4afbfbd3e",
+    "observed_sha256": "a2ae7bb865d68d648acdcdd8d3a6836cb19a2efc7841f505627d15a4afbfbd3e"
+  },
+  "limits": [
+    "Roster owners, names, province IDs, source atoms, and source metadata are retained records; they do not determine legal sovereignty, jurisdiction, current territorial status, source suitability, or qualification.",
+    "Source contacts without direct owner links are coarse/source-level contacts; their presence does not prove foreignness or ancestry. Contact vectors are not a complete worldwide competitor/exclusion census.",
+    "Physical land/inland-water masks classify support only; neither physical class nor ownership alone proves that a candidate is a qualified repair.",
+    "Source payload properties were checked by feature identity/name only. Complete GeoJSON was JSON-parsed and geometry fields were incidentally materialized, but no geometry fields were accessed, traversed, or used. Rights/vintage entries remain historical metadata, not current legal clearance.",
+    "Separate PSE ADM1 location-mapping (58 cells) and PSE ADM2 physical-interpretation (1 cell) rows remain outside this package.",
+    "Historical catalogue license, represented-year, and URL fields are the repository record of past inputs. They do not resolve any source-license conflict, source applicability, or legal status today.",
+    "The source-feature roster and lineage records include a retained reference_owner value; it is reported only as an input metadata field, not as a sovereignty conclusion."
+  ],
+  "actions_not_taken": [
+    "No observer rerun.",
+    "No geometry operation.",
+    "No claim, allocation, or publication."
+  ],
+  "source_family_metadata": [
+    {
+      "family_index": 162,
+      "source_id": "gb:ISR:ADM1",
+      "year_represented": "2006",
+      "type": "ADM1",
+      "canonical": "Districts",
+      "boundary_source": "geoBoundaries, Wikimedia",
+      "recorded_license": "Public Domain",
+      "recorded_source_data_update": "Thu Jan 19 07:31:04 2023",
+      "recorded_build_date": "Dec 12, 2023",
+      "recorded_feature_count": "6",
+      "recorded_source_sha256": "28fe2d4b800046000a33ea66b473f5502a6b7a4ad9d587cd059d63d5a4ccc5dc",
+      "recorded_metadata_sha256": "5697188cfb4665df41150da33e5d9d4a2f5eef011f5184e0fe43196f910d58a4"
+    },
+    {
+      "family_index": 168,
+      "source_id": "gb:JOR:ADM1",
+      "year_represented": "2006",
+      "type": "ADM1",
+      "canonical": "Governorate",
+      "boundary_source": "geoBoundaries, Wikimedia",
+      "recorded_license": "Creative Commons Attribution 2.5 Generic",
+      "recorded_source_data_update": "Thu Jan 19 07:31:04 2023",
+      "recorded_build_date": "Dec 12, 2023",
+      "recorded_feature_count": "12",
+      "recorded_source_sha256": "f364401f87d800ca90bcb3a0cf7a0bff05fb9cf9e9843a7344aaa5376665f34b",
+      "recorded_metadata_sha256": "72b92649b4fe8240504c7209320a13a0427fd59b5851bb987d8a5e9acde9975d"
+    },
+    {
+      "family_index": 275,
+      "source_id": "gb:PSE:ADM1",
+      "year_represented": "2021",
+      "type": "ADM1",
+      "canonical": "territory",
+      "boundary_source": "geoBoundaries, Open Data Watch",
+      "recorded_license": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+      "recorded_source_data_update": "Thu Jan 19 07:31:04 2023",
+      "recorded_build_date": "Dec 12, 2023",
+      "recorded_feature_count": "2",
+      "recorded_source_sha256": "2f065583a8be795533893fd4c62fed765959b47db2cf01e696cc795cc6c56b0a",
+      "recorded_metadata_sha256": "e12e7ebf7d3bdbf345e8e0e7e884443e0e1122546aefa61552892d7cb4dc80e1"
+    },
+    {
+      "family_index": 276,
+      "source_id": "gb:PSE:ADM2",
+      "year_represented": "2017",
+      "type": "ADM2",
+      "canonical": "governorate",
+      "boundary_source": "Open Data Watch",
+      "recorded_license": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+      "recorded_source_data_update": "Thu Jan 19 07:31:04 2023",
+      "recorded_build_date": "Dec 12, 2023",
+      "recorded_feature_count": "16",
+      "recorded_source_sha256": "a16d5381822e198b8f5aa8aaa9f4a4bf8fb1d8e090a8a3dc007c1798328a5433",
+      "recorded_metadata_sha256": "260b7355491626105a500a87c12767ca2ac67355e1f0604dc842849dbe6f2e2f"
+    }
+  ],
+  "ownership_lineage_note": "The owner indices map to 11 retained location lineage rows and to one direct source-feature roster entry each. Province IDs, reference_owner labels, source_id, and source_atoms are retained metadata fields only; they are not legal or sovereignty conclusions.",
+  "prior_context_and_separate_rows": {
+    "adjacent_read_only_source_review": "https://github.com/ChengshuLi/WorldAtlas/issues/125",
+    "relationship": "Separate 72-location read-only review includes PSE ADM2 source/semantic context; not repair disposition, source clearance, or proof of active repair execution.",
+    "excluded_original_rows": [
+      {
+        "package_id": "gb-PSE-ADM1--location-mapping",
+        "cells": 58,
+        "intervals": 58,
+        "features": [
+          52576,
+          52577
+        ],
+        "blocks": [
+          25,
+          26
+        ]
+      },
+      {
+        "package_id": "gb-PSE-ADM2--physical-interpretation",
+        "cells": 1,
+        "intervals": 1,
+        "owners": [
+          36962
+        ],
+        "features": [
+          52577,
+          52583
+        ],
+        "blocks": [
+          26
+        ]
+      }
+    ]
+  }
+}
