@@ -6,6 +6,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
 import {gunzipSync} from 'node:zlib';
 import {selectedBootstrap, NativeAssetImage, decodeVisibilityLatitudes} from './check-effective-geographic-regression.mjs';
 import {openNativeWordStore} from './native-word-store.mjs';
@@ -45,7 +46,8 @@ export async function observeSelectedPackage({repo, commit, packageId}) {
   // Reuse exact-OID transport, never Git lazy fetching or the full geography driver.
   // Warm bodies need no remote metadata. A cold size is bound to this same tree.
   const missing = new Set();
-  const acquisition = createAcquisition({repo, loadTree: tree => githubTree(tree, false), loadDescriptor: async (version, name) => {
+  const acquisition = createAcquisition({repo, execute: (_command, args, options) => execFileSync(reader.gitExecutable, args, options),
+    loadTree: tree => githubTree(tree, false), loadDescriptor: async (version, name) => {
     const line = reader.treeRoute(name, version), match = /^(100644|100755) blob ([a-f0-9]{40})\t/.exec(line);
     assert.ok(match && line.slice(line.indexOf('\t') + 1) === name + '\0', 'Require ordinary observation input: ' + name);
     const oid = match[2], status = reader.gitBatch(['--no-lazy-fetch', 'cat-file', '--batch-check=%(objectname) %(objecttype) %(objectsize)'], oid + '\n', 128).toString();

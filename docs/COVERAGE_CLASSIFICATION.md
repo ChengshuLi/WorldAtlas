@@ -27,10 +27,16 @@ These checks prove the implementation contract, not complete hydrological accura
 For “which selected product owns this original queue package?”, use only the bounded reader:
 
 ```sh
-GIT_NO_LAZY_FETCH=1 GIT_NO_REPLACE_OBJECTS=1 \
-  node scripts/observe-selected-owners.mjs --repo . --commit EXACT_DATA_COMMIT \
+PATH="/absolute/task-supplied/git/bin:$PATH" GIT_NO_LAZY_FETCH=1 GIT_NO_REPLACE_OBJECTS=1 \
+  "/absolute/task-supplied/node" scripts/observe-selected-owners.mjs --repo . --commit EXACT_DATA_COMMIT \
   --package gb-TUV-ADM1--repair-evaluation --out /path/to/new-observation.json
 ```
+
+Replace the executable placeholders with the task's installed Node 24+ and compatible
+Git paths, not an assumed system executable or another shell's PATH. No particular
+provider variable or installation directory is required. The reader resolves Git once;
+explicit acquisition reuses that same implementation rather than selecting Git again.
+This does not make an incompatible explicitly invoked Node able to parse the reader.
 
 Use the exact package ID from the original `global-current-cell-work-queue-20261014`
 queue. The existing extractor derives every original key from its pinned metadata
