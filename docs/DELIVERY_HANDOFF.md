@@ -90,6 +90,17 @@ No proposed input is called accepted merely because a hash matches.
    Checks reject duplicate authorities/components and overlap between new originals
    as well as the accepted patch. All original/source-evidence bodies retain their complete immutable identities. Registry and ledger conservation, one final
    interval union and one effective reference cover the complete combined result.
+   The same command derives and acquires missing exact public Git operands from
+   those committed pins, including their historical commit/path metadata, prior
+   cumulative roles, incoming source evidence and any retained reference projection.
+   It reuses the existing exact-OID importer, batching independent bodies per
+   dependency layer with implicit lazy fetching disabled. No full checkout profile,
+   manual prior-role list or separate materialization command is required for compose.
+   Whole byte/hash and native Git identities remain mandatory; a denied, unavailable
+   or mismatched input stops before any composition receipt. Verified imported bodies
+   can be reused after interruption. Missing historical metadata is authenticated
+   privately, not installed as partial repository history. Other scientific phases
+   and finalization retain their own input and acceptance contracts.
    Array order does not change the emitted bytes. No intermediate selector, new
    scientific qualification or source/physical rerun is introduced; final actual
    selected-reader and current-owner-zero acceptance remain separately required.

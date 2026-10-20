@@ -9,7 +9,8 @@ import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {gunzipSync} from 'node:zlib';
-import {locate} from './delivery-handoff-advance.mjs';
+import {locate, deliveryAcquisitionExecute} from './delivery-handoff-advance.mjs';
+import {createAcquisition, githubTree, githubCommit} from './geography-prefetch.mjs';
 import {acquireFinalizationCheckpoint, finalizationCheckpointBytes, admitCanonicalCheckpoint} from './delivery-checkpoint-finalization.mjs';
 import {releaseAcceptedCheckpoint} from './accepted-selected-checkpoint.mjs';
 import {repairComponentKey, compareRepairComponents} from '../src/native-grid.js';
@@ -31,8 +32,47 @@ const safe = name => typeof name === 'string' && /^[a-zA-Z0-9_./-]+$/.test(name)
 const unique = values => Array.isArray(values) && values.length > 0 && values.every(v => typeof v === 'string' && v) && new Set(values).size === values.length;
 const environment = () => ({...process.env, GIT_NO_LAZY_FETCH: '1', GIT_NO_REPLACE_OBJECTS: '1', GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: '/dev/null', GIT_TERMINAL_PROMPT: '0'});
 
-export function pinReader(root) {
-  const cache = new Map(), descriptors = new Map();
+export function pinReader(root, {loadTree = githubTree, loadCommit = githubCommit,
+  execute = deliveryAcquisitionExecute()} = {}) {
+  const cache = new Map(), descriptors = new Map(), declared = new Map();
+  let acquisition;
+  async function acquire(pins) {
+    need(Array.isArray(pins), 'Explicit composition input pins required');
+    for (const pin of pins) {
+      need(pin && hex(pin.commit, 40) && safe(pin.path) && (pin.mode ?? '100644') === '100644'
+        && Number.isSafeInteger(pin.bytes) && pin.bytes >= 0 && hex(pin.sha256, 64),
+      'Complete ordinary composition input pin required');
+      const key = pin.commit + ':' + pin.path, old = declared.get(key);
+      need(!old || old.bytes === pin.bytes && old.sha256 === pin.sha256,
+        'Conflicting composition input identities');
+      declared.set(key, pin);
+    }
+    acquisition ??= createAcquisition({repo: root, execute, token: '', loadTree, loadCommit,
+      loadDescriptor: async (commit, name) => {
+        const pin = declared.get(commit + ':' + name);
+        need(pin, 'Undeclared composition input');
+        const actual = await acquisition.resolvePath(commit, name);
+        need(actual.mode === '100644', 'Nonordinary composition input');
+        return {type: 'blob', mode: actual.mode, sha: actual.git_blob_oid, size: pin.bytes};
+      }});
+    const rows = [];
+    for (const pin of pins) rows.push(await acquisition.descriptor(pin.commit, pin.path,
+      {...pin, git_blob_oid: pin.git_blob_oid ?? pin.blob}));
+    acquisition.acquire(rows);
+    for (let index = 0; index < pins.length; index++) {
+      const pin = pins[index], row = rows[index];
+      const raw = cache.get(row.oid) ?? git('cat-file', 'blob', row.oid);
+      need(raw.length === row.bytes && digest(raw) === pin.sha256
+        && createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex') === row.oid,
+      'Whole composition body hash differs');
+      cache.set(row.oid, raw);
+      // The existing origin resolver authenticated the exact native commit and
+      // path trees. Keep that proof private; do not import a partial history.
+      descriptors.set(pin.commit + ':' + pin.path, {path: pin.path, commit: pin.commit,
+        mode: '100644', git_blob_oid: row.oid, bytes: row.bytes});
+    }
+    return {...acquisition.stats};
+  }
   const git = (...args) => {
     const options={cwd:root,env:environment(),maxBuffer:Infinity};
     if(args[0]==='cat-file'&&args[1]==='blob') options.maxBuffer=Number(git('cat-file','-s',args[2]))+1;
@@ -65,7 +105,7 @@ export function pinReader(root) {
     need(digest(raw) === pin.sha256, 'Whole body hash differs: ' + pin.path);
     return raw;
   }
-  return {git, read, descriptor, json: pin => JSON.parse(read(pin)),
+  return {git, read, descriptor, acquire, json: pin => JSON.parse(read(pin)),
     hasPath(commit, name) {
       need(hex(commit, 40) && safe(name), 'Exact commit and safe whole-file path required');
       return git('ls-tree', '-z', commit, '--', name).length > 0;
@@ -481,7 +521,7 @@ export function rebindCustody(config, reader, certificate = false) {
     request: config.request, facts: config.facts, publication: config.publication, result: config.result, operating: config.operating})};
 }
 
-export function composeAuthorities(config, reader) {
+export async function composeAuthorities(config, reader) {
   if (config.selector) {
     const authorityFields = ['rule_preimage', 'source_authority', 'ledger', 'native_patch'];
     const multiple = Object.hasOwn(config, 'authorities');
@@ -493,8 +533,10 @@ export function composeAuthorities(config, reader) {
     'Complete nonempty modern authority pin groups required');
     need(config.selector.path === 'data/ownership-selection.json' && typeof config.effective_release_id === 'string'
       && config.effective_release_id.startsWith('geography:'), 'Original selected baseline and explicit effective release required');
+    await reader.acquire?.([config.selector, ...authorities.flatMap(original => authorityFields.map(role => original[role]))]);
     const selection = reader.json(config.selector), hook = selection.additive_release;
     need(hook && safe(hook.path), 'Existing cumulative selection required');
+    await reader.acquire?.([{...hook, commit: config.selector.commit}]);
     const sidecarPin = reader.pin(config.selector.commit, hook.path);
     need(sidecarPin.bytes === hook.bytes && sidecarPin.sha256 === hook.sha256, 'Original selected sidecar differs');
     const sidecar = reader.json(sidecarPin), base = scientificNativeSelection(selection);
@@ -502,6 +544,7 @@ export function composeAuthorities(config, reader) {
       && same(sidecar.base_selection, base), 'Original selected base differs');
     const assets = sidecar.logical_asset_map;
     need(assets && same(Object.keys(assets).sort(), ['base_manifest', 'ledger', 'owner_roster', 'patch']), 'Complete prior logical assets required');
+    await reader.acquire?.([sidecar.authority_registry, assets.ledger, assets.patch, sidecar.runtime_envelope, assets.base_manifest]);
     const priorRegistry = reader.json(sidecar.authority_registry), priorLedger = reader.json(assets.ledger);
     const priorPatch = reader.json(assets.patch), wrapped = reader.json(sidecar.runtime_envelope);
     const envelope = wrapped.additiveRelease ?? wrapped;
@@ -515,6 +558,13 @@ export function composeAuthorities(config, reader) {
     need(priorRegistry.version === 1 && priorRegistry.kind === 'retained-rule-authority-registry-v1' && priorLedger.version === 2,
       'Existing v2 cumulative registry/ledger required');
     const manifest = reader.json(assets.base_manifest);
+    if (selection.reference_projection) {
+      const pointer = {...selection.reference_projection, commit: config.selector.commit};
+      await reader.acquire?.([pointer, assets.owner_roster]);
+      const projection = reader.json(reader.pin(pointer.commit, pointer.path));
+      await reader.acquire?.([projection.hierarchy.before, projection.hierarchy.after, ...projection.receipts,
+        ...projection.source_updates.flatMap(update => [update.before, update.after])]);
+    }
     const references = qualifiedDeliveryReference(selection, manifest, reader, config.selector.commit, assets.owner_roster);
     need((same(envelope.base_reference, references.native) || same(envelope.base_reference, references.reference))
       && (!references.projectionPin || envelope.effective_reference?.hierarchy_sha256 === envelope.base_reference.hierarchy_sha256),
@@ -526,9 +576,11 @@ export function composeAuthorities(config, reader) {
       && same(priorPatch.effective_reference, envelope.effective_reference), 'Prior cumulative patch bindings differ');
     const entries = [...priorRegistry.entries], addedRows = [], candidates = [];
     const authorityIds = new Set(entries.map(entry => entry.authority_sha256));
-    for (const original of authorities) {
+    const bindings = authorities.map(original => reader.json(original.source_authority));
+    await reader.acquire?.(bindings.map(binding => binding.source_evidence));
+    for (const [index, original] of authorities.entries()) {
       const constructed = reader.json(original.ledger), candidate = reader.json(original.native_patch);
-      const binding = reader.json(original.source_authority), preimage = reader.json(original.rule_preimage);
+      const binding = bindings[index], preimage = reader.json(original.rule_preimage);
       // Literal metadata contract of constructAuthorityRegistry. Retained constructor
       // results supply qualification; the final selected reader remains authoritative.
       const rule = reader.pin(original.rule_preimage.commit, original.rule_preimage.path);
@@ -573,6 +625,7 @@ export function composeAuthorities(config, reader) {
       'runtime-envelope.json': jsonBytes(wrapped.additiveRelease ? {...wrapped, reference_release: effective, additiveRelease: nextEnvelope} : nextEnvelope)};
     return products;
   }
+  await reader.acquire?.([...config.registries, ...config.ledgers]);
   const registries = config.registries.map(p => reader.json(p));
   need(registries.length && registries.every(r => r.version === 1 && r.kind === 'retained-rule-authority-registry-v1'), 'Existing retained registries required');
   const entries = new Map();
@@ -1729,7 +1782,7 @@ async function main(args) {
   if (phase === 'native-requests') outputs = nativeRequests(config, reader);
   if (phase.startsWith('rebind-')) outputs = rebindCustody(config, reader, phase === 'rebind-certificate');
   if (phase === 'retain') outputs = retainProducts(config, root, reader);
-  if (phase === 'compose') outputs = composeAuthorities(config, reader);
+  if (phase === 'compose') outputs = await composeAuthorities(config, reader);
   if (phase === 'package') outputs = packageProjection(config, reader);
   if (phase === 'finalize') {
     const token = config.accepted_checkpoint ? process.env.GH_TOKEN ?? execFileSync('gh', ['auth', 'token'],

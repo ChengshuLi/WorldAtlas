@@ -156,7 +156,7 @@ async function compositionFixture(t,{prior='native'}={}){
 }
 
 for(const prior of ['native','current'])test('composition bridges prior '+prior+' to M while retaining every inherited row and incoming scientific N',async t=>{
- const f=await compositionFixture(t,{prior}),products=composeAuthorities(f.config,f.reader),ledger=JSON.parse(products['selected-ledger.json']),patch=JSON.parse(products['patch.json']),wrapped=JSON.parse(products['runtime-envelope.json']),envelope=wrapped.additiveRelease;
+ const f=await compositionFixture(t,{prior}),products=await composeAuthorities(f.config,f.reader),ledger=JSON.parse(products['selected-ledger.json']),patch=JSON.parse(products['patch.json']),wrapped=JSON.parse(products['runtime-envelope.json']),envelope=wrapped.additiveRelease;
  assert.deepEqual(envelope.base_reference,f.current);assert.deepEqual(patch.base_reference,f.current);assert.equal(envelope.effective_reference.hierarchy_sha256,f.current.hierarchy_sha256);assert.deepEqual(patch.effective_reference,envelope.effective_reference);
  assert.deepEqual(ledger.rows.find(row=>row.component_id===f.priorLedger.rows[0].component_id),f.priorLedger.rows[0]);
  for(const key of ['parent_inventory','current_rebind','current_targets'])assert.deepEqual(ledger[key],f.priorLedger[key]);
@@ -164,18 +164,18 @@ for(const prior of ['native','current'])test('composition bridges prior '+prior+
  assert.equal(envelope.effective_reference.footprints_sha256,additiveReleaseFootprintDigest(f.current,bindAdditiveLedgerFeatures(f.currentFeatures,ledger,envelope,f.current)));
  const output=JSON.parse((await sourceEvidence({version:1,selector:{commit,path:'data/ownership-selection.json'},source_evidence:{version:1,kind:'source-target-native-evidence-v1'}},f.reader))['source-evidence.json']);
  assert.deepEqual(output.base_reference,f.native);assert.equal(output.native_contract.hierarchy_sha256,f.native.hierarchy_sha256);
- const mistaken=await f.incoming({scientificBase:f.current});assert.throws(()=>composeAuthorities(mistaken,f.reader),/baseline\/contract/);
+ const mistaken=await f.incoming({scientificBase:f.current});await assert.rejects(()=>composeAuthorities(mistaken,f.reader),/baseline\/contract/);
 });
 
 test('composition refuses unknown prior bases, mixed prior hierarchy, changed geometry and transferred history under coherent new pins',async t=>{
  const f=await compositionFixture(t),old=structuredClone(f.envelope);
- f.envelope.base_reference={...f.native,id:'geography:foreign'};await f.savePrior();assert.throws(()=>composeAuthorities(f.config,f.reader),/Prior cumulative reference/);
- Object.assign(f.envelope,structuredClone(old));f.envelope.effective_reference.hierarchy_sha256=f.current.hierarchy_sha256;await f.savePrior();assert.throws(()=>composeAuthorities(f.config,f.reader),/Prior cumulative reference/);
+ f.envelope.base_reference={...f.native,id:'geography:foreign'};await f.savePrior();await assert.rejects(()=>composeAuthorities(f.config,f.reader),/Prior cumulative reference/);
+ Object.assign(f.envelope,structuredClone(old));f.envelope.effective_reference.hierarchy_sha256=f.current.hierarchy_sha256;await f.savePrior();await assert.rejects(()=>composeAuthorities(f.config,f.reader),/Prior cumulative reference/);
  Object.assign(f.envelope,structuredClone(old));await f.savePrior();
  const source=JSON.parse(f.reader.read(f.projection.source_updates[0].after));source.features[0].geometry=rectangle(10);const sourcePin=await f.put('inputs/changed-after-source.json',source),projection=structuredClone(f.projection);projection.source_updates[0].after=sourcePin;await f.saveProjection(projection);
- assert.throws(()=>composeAuthorities(f.config,f.reader),/geometry/);
+ await assert.rejects(()=>composeAuthorities(f.config,f.reader),/geometry/);
  const receipt=JSON.parse(f.reader.read(f.projection.receipts[0]));receipt.historical_claims_transferred=true;const receiptPin=await f.put('inputs/transferred-receipt.json',receipt),history=structuredClone(f.projection);history.receipts[0]=receiptPin;await f.saveProjection(history);
- assert.throws(()=>composeAuthorities(f.config,f.reader),/non-metadata reference receipt/);
+ await assert.rejects(()=>composeAuthorities(f.config,f.reader),/non-metadata reference receipt/);
 });
 
 test('composition qualification passes original encoded whole source bytes to the existing projection validator',async t=>{
@@ -184,7 +184,14 @@ test('composition qualification passes original encoded whole source bytes to th
   const raw=f.reader.read(projection.source_updates[0][role]),pin=await f.put('inputs/encoded-source-'+role+'.json.gz',gzipSync(raw));
   projection.source_updates[0][role]={...pin,encoding:'gzip',decoded_bytes:raw.length,decoded_sha256:sha(raw)};
  }
- await f.saveProjection(projection);const result=composeAuthorities(f.config,f.reader);
+ await f.saveProjection(projection);
+ const acquired=new Map(),consumed=new Set(),key=pin=>pin.commit+':'+pin.path+':'+pin.sha256;
+ const read=pin=>{assert.ok(acquired.has(key(pin)),'Acquire the exact projection operand before reading: '+pin.path);consumed.add(key(pin));return f.reader.read(pin);};
+ const reader={...f.reader,read,json:pin=>JSON.parse(read(pin)),async acquire(pins){for(const pin of pins)acquired.set(key(pin),pin);}};
+ const result=await composeAuthorities(f.config,reader);
+ assert.deepEqual(result,await composeAuthorities(f.config,f.reader),'Acquisition preserves all four literal products');
+ assert.deepEqual([...acquired.keys()].sort(),[...consumed].sort(),'No extra projection or source bodies are declared');
+ for(const pin of [f.sidecar.logical_asset_map.owner_roster,projection.hierarchy.before,projection.hierarchy.after,...projection.receipts,...projection.source_updates.flatMap(update=>[update.before,update.after])])assert.ok(consumed.has(key(pin)));
  assert.deepEqual(JSON.parse(result['runtime-envelope.json']).additiveRelease.base_reference,f.current);
  assert.deepEqual(f.reader.read(f.sidecar.logical_asset_map.owner_roster),f.reader.read(f.preparationConfig.owner_roster));
 });
