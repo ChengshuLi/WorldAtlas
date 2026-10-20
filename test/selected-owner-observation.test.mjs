@@ -391,7 +391,7 @@ test('original queue grid identity is joined before native body reads, not the c
 
 // Genuine cold Git objects, not missing working-tree copies. Only committed code,
 // commit/tree metadata and the test transport are installed before the CLI runs.
-function coldFixture({splitCandidates = false} = {}) {
+function coldFixture({splitCandidates = false, gitFilenameAlias = false, helperEscape} = {}) {
   const f = fixture({multiBlock: !splitCandidates, splitCandidates}), root = path.join(f.repo, 'cold'), bin = path.join(f.repo, 'bin');
   const forbidden = ['data/world-index.json', 'inputs/source-geometries.json', 'inputs/certificate.json', 'inputs/ledger.json'];
   for (const name of forbidden) f.write(name, {forbidden: name});
@@ -430,6 +430,19 @@ const r = spawnSync(target, args, {stdio: 'inherit', env: process.env});
 process.exit(r.status ?? 1);
 `, {mode: 0o755});
   }
+  let reportedHelperPath = helperExecPath;
+  if (helperEscape) {
+    const unrelated = path.join(bin, 'unrelated');
+    reportedHelperPath = path.join(unrelated, 'libexec', 'git-core');
+    fs.mkdirSync(reportedHelperPath, {recursive: true});
+    if (helperEscape === 'file') {
+      fs.mkdirSync(path.join(unrelated, 'bin'));
+      fs.symlinkSync(path.join(implementation, 'bin', 'git'), path.join(unrelated, 'bin', 'git'));
+    } else {
+      assert.equal(helperEscape, 'directory');
+      fs.symlinkSync(path.join(implementation, 'bin'), path.join(unrelated, 'bin'));
+    }
+  }
   // The PATH launcher resolves an implementation but cannot serve as that implementation.
   // Resolve the implementation once; internal helpers are observed through GIT_EXEC_PATH
   // because newer Git versions bypass PATH when launching them.
@@ -441,7 +454,7 @@ const gitHelperArgv = ${JSON.stringify(gitHelperArgv)};
 const exactGitHelper = ${exactGitHelper.toString()};
 fs.appendFileSync(${JSON.stringify(launchLog)}, JSON.stringify(args) + '\\n');
 if (args.length === 1 && args[0] === '--exec-path') {
-  process.stdout.write(${JSON.stringify(path.join(implementation, 'libexec', 'git-core'))} + '\\n');
+  process.stdout.write(${JSON.stringify(reportedHelperPath)} + '\\n');
   process.exit(0);
 }
 const helper = exactGitHelper(args) ? args : null;
@@ -457,14 +470,23 @@ throw Error('Unexpected Git launcher invocation: ' + JSON.stringify(args));
   // Only the local fetch interception needs Node; ordinary Git reads stay direct.
   fs.writeFileSync(path.join(implementation, 'bin', 'git'), `#!/bin/sh
 for arg do
-  if [ "$arg" = fetch ]; then GIT_EXEC_PATH=${JSON.stringify(helperExecPath)} exec ${JSON.stringify(process.execPath)} ${JSON.stringify(transport)} "$@"; fi
+  if [ "$arg" = fetch ]; then exec ${JSON.stringify(process.execPath)} ${JSON.stringify(transport)} "$@"; fi
 done
-GIT_EXEC_PATH=${JSON.stringify(helperExecPath)} exec ${JSON.stringify(realGit)} "$@"
+exec ${JSON.stringify(realGit)} "$@"
 `, {mode: 0o755});
+  if (gitFilenameAlias) {
+    fs.renameSync(path.join(implementation, 'bin', 'git'), path.join(implementation, 'bin', 'git-fixture'));
+    fs.symlinkSync('git-fixture', path.join(implementation, 'bin', 'git'));
+  }
   fs.writeFileSync(transport, `#!${process.execPath}
 import fs from 'node:fs';
 import {spawnSync} from 'node:child_process';
 const s = ${JSON.stringify(setup)}, args = process.argv.slice(2), input = fs.readFileSync(0);
+if (process.env.GIT_EXEC_PATH !== ${JSON.stringify(helperExecPath)}) throw Error('Selected helper directory was not forwarded');
+if (process.env.GIT_DIR !== undefined || process.env.GIT_WORK_TREE !== undefined
+  || process.env.GIT_CONFIG_NOSYSTEM !== '1' || process.env.GIT_CONFIG_GLOBAL !== '/dev/null'
+  || process.env.GIT_CONFIG_KEY_0 !== 'core.hooksPath' || process.env.GIT_CONFIG_VALUE_0 !== '/dev/null'
+  || process.env.GIT_CONFIG_KEY_1 !== 'credential.helper' || process.env.GIT_CONFIG_VALUE_1 !== '') throw Error('Acquisition isolation changed');
 if (args.includes('fetch')) {
   if (!['https://github.com/ChengshuLi/WorldAtlas.git','--stdin','--filter=blob:none','--no-auto-maintenance','--no-tags','--no-write-fetch-head','--no-recurse-submodules','fetch.negotiationAlgorithm=noop'].every(flag => args.includes(flag)) || process.env.GIT_NO_LAZY_FETCH !== '1' || process.env.GIT_NO_REPLACE_OBJECTS !== '1') throw Error('Unbounded transport');
   fs.appendFileSync(s.log, JSON.stringify(input.toString().trim().split('\\n')) + '\\n');
@@ -507,6 +529,23 @@ test('cold Git launcher rejects an unrecognized invocation', () => {
     assert.notEqual(r.status, 0);
     assert.match(r.stderr, /Unexpected Git launcher invocation/);
     assert.deepEqual(f.launches(), [['unexpected-command']]);
+  } finally { f.cleanup(); }
+});
+
+for (const helperEscape of ['file', 'directory']) test('unrelated Git helper prefix cannot borrow the selected implementation through a ' + helperEscape + ' symlink', () => {
+  const f = coldFixture({helperEscape}); try {
+    const before = f.inventory(), r = f.run();
+    assert.notEqual(r.status, 0); assert.match(r.stderr, /Selected Git helpers do not share the implementation installation/);
+    assert.equal(fs.existsSync(r.output), false); assert.deepEqual(f.inventory(), before);
+    assert.deepEqual(f.batches(), []); assert.equal(f.metadataRequests(), '');
+  } finally { f.cleanup(); }
+});
+
+test('a selected Git filename alias within the same installation keeps cold acquisition working', () => {
+  const f = coldFixture({gitFilenameAlias: true}); try {
+    const r = f.run(); assert.equal(r.status, 0, r.stderr);
+    assert.equal(r.report.query_count, 5); assert.deepEqual(r.report.keys.map(({x,y}) => ({x,y})), keys);
+    assert(f.batches().length > 0);
   } finally { f.cleanup(); }
 });
 

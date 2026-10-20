@@ -1065,14 +1065,17 @@ export function selectedBootstrap(repo,baseline,candidate,{parentRuntimePath}={}
   const launchGit=(process.env.PATH??'').split(path.delimiter).map(p=>path.join(p,'git')).find(p=>{try{return fs.statSync(p).isFile();}catch{return false;}});
   demand(launchGit,'Missing installed Git');runtimePaths.push(fs.realpathSync(launchGit));
   // Resolve the full Git implementation, including a macOS command-line shim.
-  const execPath=execFileSync(runtimePaths.at(-1),['--exec-path']).toString().trim();
+  const execPath=fs.realpathSync(execFileSync(runtimePaths.at(-1),['--exec-path']).toString().trim());
   const gitExecutable=fs.realpathSync(path.resolve(execPath,'../../bin/git'));runtimePaths.push(gitExecutable);
+  // Bind helpers to this installed implementation, not an unrelated prefix alias.
+  // This is an installation relationship, not independent helper-byte authentication.
+  demand(path.resolve(execPath,'../../bin')===path.dirname(gitExecutable),'Selected Git helpers do not share the implementation installation');
   const invocation=Object.freeze({});
   const beforeReader=new ImmutableReader(repo,baseline,{gitExecutable,invocation}),afterReader=new ImmutableReader(repo,candidate,{gitExecutable,invocation});
   const identities=[...new Set(runtimePaths)].map(p=>runtimeIdentity(p));
   const runtime=identities.find(p=>p.path===fs.realpathSync(process.execPath)),callerRuntime=parentRuntimePath?identities.find(p=>p.path===fs.realpathSync(parentRuntimePath)):null;
   const executionCode=codeStats.map(({name,file,stat})=>{const body=fs.readFileSync(file);demand(body.length===stat.size,'Trusted execution code changed during whole read');return {path:name,bytes:body.length,mode:stat.mode&0o777,sha256:sha(body)};});
-  return {beforeReader,afterReader,runtime,callerRuntime,identities,executionCode};
+  return {beforeReader,afterReader,runtime,callerRuntime,identities,executionCode,gitExecPath:execPath};
 }
 
 export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) {
