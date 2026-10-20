@@ -1,0 +1,131 @@
+{
+  "schema": "usa-held-residual-disposition-v1",
+  "issue": 2358,
+  "packet_status": "evidence_only; all residual keys remain held; proposal only",
+  "scope": {
+    "package_id": "gb-USA-ADM2--repair-evaluation",
+    "original_cells": 107131,
+    "original_intervals": 46575,
+    "original_subjects": 351,
+    "prior_source_native_qualified_cells": 105927,
+    "held_cells": 1204,
+    "touched_original_interval_rows": 444,
+    "category_counts": {
+      "usa31_source_history": 536,
+      "ownerless_foreign_original_contacts": 63,
+      "fairfax_identity": 1,
+      "conservative_unmeasured_physical_source": 604
+    },
+    "held_physical_classes": {
+      "land": 1179,
+      "inland-water": 25
+    },
+    "source_hold_cells": 600,
+    "physical_hold_cells": 604,
+    "source_physical_intersection": 0
+  },
+  "credit": {
+    "new_repair_credit": 0,
+    "new_documented_exception_credit": 0,
+    "new_selected_owner_credit": 0,
+    "new_accepted_disposition_credit": 0,
+    "new_closure_credit": 0,
+    "repair_qualified": false,
+    "documented_exception_candidate": false,
+    "accepted_disposition": false
+  },
+  "prior_handoff": {
+    "pull_request": 2371,
+    "exact_head": "62dcd0b393930e6c5bbef6904ce004d9c7ed4b9f",
+    "state_at_review": "open; partial source/native handoff with limits",
+    "independent_partial_source_native_review": "https://github.com/ChengshuLi/WorldAtlas/pull/2371#issuecomment-6229540770",
+    "issue_handoff": "https://github.com/ChengshuLi/WorldAtlas/issues/2358#issuecomment-6281206484"
+  },
+  "reproducibility": {
+    "original_intervals_gzip_sha256": "eadfb7b90484dfa284ccf1db594a4015e8826eda2c138ae72c04965225e56793",
+    "original_intervals_count": 46575,
+    "join_rule": "Each held (y,x,owner_index) must match exactly one original interval row with row.y=y, x_start<=x<x_end, and owner_index in owner_indices; output retains the full original row tuple and zero-based row index.",
+    "inputs": [
+      {
+        "repo_path": "coordination/engineering/usa-repair-delivery-20261017/native-config-003/complete-original-accounting.json",
+        "ref": "62dcd0b393930e6c5bbef6904ce004d9c7ed4b9f",
+        "git_blob_sha1": "4b2b33818b3fd7285460e7b0d036d203d08045c",
+        "bytes": 255078,
+        "sha256": "8a7e768e305bf13eb58986d46cac7415eef72ddecb495637b2d4dae1451b124a"
+      },
+      {
+        "repo_path": "coordination/engineering/usa-repair-delivery-20261017/independent-source-review/hold-key-union.json",
+        "ref": "62dcd0b393930e6c5bbef6904ce004d9c7ed4b9f",
+        "git_blob_sha1": "ad68fd8123c56c01da97341a02fc8e4fbfa99f68",
+        "bytes": 213122,
+        "sha256": "064de4e2d549bc2f6961d6054920c8f4f7d8f2cefa3166a26c5b87c8f9b82141"
+      },
+      {
+        "repo_path": "coordination/engineering/usa-repair-delivery-20261017/native-config-002/physical-admission-holds.json",
+        "ref": "62dcd0b393930e6c5bbef6904ce004d9c7ed4b9f",
+        "git_blob_sha1": "8e60ef727b923b1330f7531452d9a87bb537f398",
+        "bytes": 85860,
+        "sha256": "22da621dc2737d7551440e2d05ad72a5f12c837750b6befab921dadfc6f318b4"
+      },
+      {
+        "repo_path": "coordination/engineering/usa-repair-delivery-20261017/source-review/physical-source-hold-union.json",
+        "ref": "62dcd0b393930e6c5bbef6904ce004d9c7ed4b9f",
+        "git_blob_sha1": "df5454f41836da6d5cfbdc3aa086e8a3201ede40",
+        "bytes": 361,
+        "sha256": "8f5fef99816b7cfd54febb9b0f5a2ef3c530b4f9f3ec52327e21e988248fb4c9"
+      },
+      {
+        "repo_path": "coordination/engineering/usa-repair-delivery-20261017/independent-source-review/exact-USA31-component-keys.json",
+        "ref": "62dcd0b393930e6c5bbef6904ce004d9c7ed4b9f",
+        "git_blob_sha1": "f6abe7e6357d36927039adc1ec980207e160f950",
+        "bytes": 197745,
+        "sha256": "8dd932327e9d919b7dc3b0c2945c69b1b92300a413970f8c7753ffd6f3152784"
+      },
+      {
+        "repo_path": "coordination/engineering/usa-repair-delivery-20261017/independent-source-review/original-foreign-contact-keys.json",
+        "ref": "62dcd0b393930e6c5bbef6904ce004d9c7ed4b9f",
+        "git_blob_sha1": "06ac068cc36a4f1a8117923e44621c733645655b",
+        "bytes": 15496,
+        "sha256": "95ccd26762ad791a0bc915e7693c4588b4b21dc668a4505726684af130f15fc8"
+      },
+      {
+        "repo_path": "coordination/engineering/usa-repair-delivery-20261017/original-scope/original-intervals.json.gz",
+        "ref": "62dcd0b393930e6c5bbef6904ce004d9c7ed4b9f",
+        "git_blob_sha1": "8d4a7b4fc6a5b1d12fca99d26388c8ef6b5dee7c",
+        "bytes": 273284,
+        "sha256": "eadfb7b90484dfa284ccf1db594a4015e8826eda2c138ae72c04965225e56793"
+      },
+      {
+        "repo_path": "coordination/engineering/usa-repair-delivery-20261017/source-stage-001/identity-holds.json",
+        "ref": "62dcd0b393930e6c5bbef6904ce004d9c7ed4b9f",
+        "git_blob_sha1": "12fcb263f090d85f71b22e673e232b473335aefa",
+        "bytes": 287,
+        "sha256": "c75965e4144dff7935d8ada3093dc7f64ce6b9d19150ba8cbbd1cd1a75a6410a"
+      }
+    ]
+  },
+  "selected_owner": {
+    "status": "pending_root_owned_current_main_observation",
+    "base_commit": "4b2ce982b7ed7591ac45996080d06474fab3db99",
+    "result_asserted": false,
+    "stale_observation_excluded": true,
+    "gate": "Fresh selected-owner-zero/conservation and emitted-consumer checks remain root-owned; no observer was run for this packet."
+  },
+  "limits": [
+    "This packet preserves an unresolved evidence disposition and does not prove current legal applicability, sovereignty, source-history fitness, physical correctness, native repairability, selected-owner state, or production delivery.",
+    "The 536 USA31 contacts are not findings that those cells belong elsewhere.",
+    "The 63 foreign-original contacts retain ownerless foreign source evidence; contact alone is not a legal boundary adjudication.",
+    "The Fairfax key remains held under distinct city/county identity issue #976; no same-name merge is inferred.",
+    "The 604 physical holds are conservative whole-owner holds because invalid GSHHG source record 2380 has no measured relation for Sagadahoc and Lincoln; they do not establish that all 604 keys are physically wrong.",
+    "Existing PR #2371 and its 105,927 qualified outcomes are referenced unchanged. Root acceptance, current selected-owner observation, bank conservation, emitted-consumer acceptance and issue closure remain pending.",
+    "This assigned residual packet is limited to USA #2358 and is disjoint from CAF/SSD; it does not modify or re-open those scopes."
+  ],
+  "disposition": {
+    "every_held_key_status": "held_unresolved",
+    "every_key_repair_qualified": false,
+    "every_key_documented_exception_candidate": false,
+    "every_key_accepted_disposition": false,
+    "every_key_new_credit": 0
+  },
+  "created_by_worker": "01a155d7-7881-716f-82c8-fb84fe3f5014"
+}
