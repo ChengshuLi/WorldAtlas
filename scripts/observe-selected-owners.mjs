@@ -28,7 +28,7 @@ export async function observeSelectedPackage({repo, commit, packageId}) {
   assert.match(commit ?? '', /^[a-f0-9]{40}$/, 'An exact committed revision is required');
   assert.equal(process.env.GIT_NO_LAZY_FETCH, '1', 'Set GIT_NO_LAZY_FETCH=1; only explicit pinned acquisition is allowed');
   assert.equal(process.env.GIT_NO_REPLACE_OBJECTS, '1', 'Set GIT_NO_REPLACE_OBJECTS=1');
-  const {beforeReader: reader, executionCode} = selectedBootstrap(repo, commit, commit);
+  const {beforeReader: reader, executionCode, gitExecPath} = selectedBootstrap(repo, commit, commit);
   try { reader.git('--no-lazy-fetch', '--version'); }
   catch { throw Error('Use a Git implementation supporting --no-lazy-fetch; no compatibility fallback is allowed'); }
   const codeCommit = reader.git('rev-parse', 'HEAD').toString().trim();
@@ -46,7 +46,8 @@ export async function observeSelectedPackage({repo, commit, packageId}) {
   // Reuse exact-OID transport, never Git lazy fetching or the full geography driver.
   // Warm bodies need no remote metadata. A cold size is bound to this same tree.
   const missing = new Set();
-  const acquisition = createAcquisition({repo, execute: (_command, args, options) => execFileSync(reader.gitExecutable, args, options),
+  const acquisition = createAcquisition({repo, execute: (_command, args, options) => execFileSync(reader.gitExecutable, args,
+    {...options, env: {...options.env, GIT_EXEC_PATH: gitExecPath}}),
     loadTree: tree => githubTree(tree, false), loadDescriptor: async (version, name) => {
     const line = reader.treeRoute(name, version), match = /^(100644|100755) blob ([a-f0-9]{40})\t/.exec(line);
     assert.ok(match && line.slice(line.indexOf('\t') + 1) === name + '\0', 'Require ordinary observation input: ' + name);
