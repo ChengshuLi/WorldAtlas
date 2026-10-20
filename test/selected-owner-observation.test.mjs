@@ -386,7 +386,7 @@ throw Error('Unexpected Git launcher invocation: ' + JSON.stringify(args));
   // Only the local fetch interception needs Node; ordinary Git reads stay direct.
   fs.writeFileSync(path.join(implementation, 'bin', 'git'), `#!/bin/sh
 for arg do
-  if [ "$arg" = fetch ]; then exec ${JSON.stringify(process.execPath)} ${JSON.stringify(transport)} "$@"; fi
+  if [ "$arg" = fetch ]; then GIT_EXEC_PATH=${JSON.stringify(helperExecPath)} exec ${JSON.stringify(process.execPath)} ${JSON.stringify(transport)} "$@"; fi
 done
 GIT_EXEC_PATH=${JSON.stringify(helperExecPath)} exec ${JSON.stringify(realGit)} "$@"
 `, {mode: 0o755});
