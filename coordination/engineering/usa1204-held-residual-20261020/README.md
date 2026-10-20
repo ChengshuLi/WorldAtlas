@@ -2,6 +2,8 @@
 
 This packet accounts for exactly the 1,204 held keys in the frozen `gb-USA-ADM2--repair-evaluation` package. It adds no repair, documented-exception, selected-owner, accepted-disposition or closure credit.
 
+This packet requests explicit acceptance of the exact 1,204 residual outcomes as documented-unresolved exceptions under the original contract. All native/scientific holds remain; no repair, positive applicability, legal/physical clearance or accepted credit is asserted before required durable delivery and explicit root acceptance.
+
 ## Preserved denominator
 
 The original denominator remains **107,131 cells / 46,575 intervals / 351 subjects**. PR #2371’s partial source/native handoff at [exact head `62dcd0b`](https://github.com/ChengshuLi/WorldAtlas/pull/2371/commits/62dcd0b393930e6c5bbef6904ce004d9c7ed4b9f) records **105,927 previously qualified cells** and 1,204 unresolved held keys. This packet leaves that PR and its existing outcome unchanged. Its independent partial review accepted the bounded source/native handoff with explicit limits ([review record](https://github.com/ChengshuLi/WorldAtlas/pull/2371#issuecomment-6229540770)); it did not approve selected delivery or close #2358.
@@ -14,7 +16,7 @@ The roster contains one record per held key. Each key joins to exactly one row o
 
 The exact current-main observation is included at `selected-owner-observation-a4390854-20261020.json.gz`. It decompresses losslessly to a **39,655,434-byte** JSON report (SHA-256 `c604bb102b54df876c35dca5ff031f4488c6a56f9412c089f9b121ae6e2e586e`); the committed gzip is **1,061,645 bytes** (SHA-256 `2c9dc3c8c871a4cdcaed60fb3e539b34d48fe5ead1637cd73845c78dd7dc515b`). It binds data commit `a4390854c013c8891b187556ac4498888ee33633`, observer code commit `3105bb77a2e3356235217f4eefb7cc73c4a6d428`, and selector blob `2e1ec2875d2932eafb33f4c1062412282df234cb`. It covers all 107,131 original keys / 46,575 intervals and finds 105,927 nonzero-owner outcomes, 1,204 zero-owner held keys, and zero overlaps. The observation was run once; the published report is that same exact output.
 
-The same independent reviewer’s prepublication review found the 1,204 outcomes eligible as documented unresolved holds under the original #2358/#2371 contract. This establishes eligibility only. The 1,204 remain held and no accepted disposition, exception acceptance, repair, credit, or package closure is claimed. Selected-bank conservation and emitted-consumer acceptance remain pending review of the public evidence.
+The independent prepublication review found the 1,204 outcomes eligible under the original #2358/#2371 documented-unresolved path. This packet requests explicit root acceptance as documented-unresolved exceptions; that request is not acceptance. Until durable public delivery and explicit root acceptance, all 1,204 remain held, with zero repair credit, zero accepted documented-exception credit, and no package closure. Selected-bank conservation and emitted-consumer acceptance remain separate required gates; one independent exact-head review of the amended public head is pending.
 
 ## Referenced factual bodies
 

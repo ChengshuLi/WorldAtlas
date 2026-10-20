@@ -1,7 +1,7 @@
 {
   "schema": "usa-held-residual-disposition-v1",
   "issue": 2358,
-  "packet_status": "evidence_only; all residual keys remain held; proposal only",
+  "packet_status": "evidence_only; requests explicit root acceptance of all 1,204 exact residual outcomes as documented-unresolved exceptions under the original contract; all 1,204 native holds remain held; acceptance and credit remain pending durable delivery and explicit root acceptance",
   "scope": {
     "package_id": "gb-USA-ADM2--repair-evaluation",
     "original_cells": 107131,
@@ -31,7 +31,7 @@
     "new_accepted_disposition_credit": 0,
     "new_closure_credit": 0,
     "repair_qualified": false,
-    "documented_exception_candidate": false,
+    "documented_exception_candidate": true,
     "accepted_disposition": false
   },
   "prior_handoff": {
@@ -123,7 +123,7 @@
   "disposition": {
     "every_held_key_status": "held_unresolved",
     "every_key_repair_qualified": false,
-    "every_key_documented_exception_candidate": false,
+    "every_key_documented_exception_candidate": true,
     "every_key_accepted_disposition": false,
     "every_key_new_credit": 0
   },
