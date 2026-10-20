@@ -24,8 +24,11 @@ The generator joins every frozen queue interval to the retained held spans and t
 Rebuild the interval accounting from a checkout of this PR head with its complete history (including the pinned current-main commit) and Python 3. The observer report is intentionally pinned to the measured main commit, not to this packet's later commit:
 
 ```sh
+out="/tmp/angola-interval-dispositions-$(date +%s).json"
 python3 coordination/engineering/angola-repair-delivery-20261017/method/build-unresolved-interval-disposition.py \
-  --out coordination/engineering/angola-repair-delivery-20261017/unresolved-disposition-001/interval-dispositions.json
+  --out "$out"
+cmp "$out" \
+  coordination/engineering/angola-repair-delivery-20261017/unresolved-disposition-001/interval-dispositions.json
 ```
 
 The command uses no external packages and refuses to overwrite an existing output.
